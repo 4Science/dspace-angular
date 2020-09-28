@@ -17,6 +17,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { NotificationsService } from 'src/app/shared/notifications/notifications.service';
 import { RequestService } from 'src/app/core/data/request.service';
 import { RestResponse } from 'src/app/core/cache/response.models';
+import { OrcidHistoryService } from 'src/app/core/orcid/orcid-history.service';
+import { OrcidHistory } from 'src/app/core/orcid/model/orcid-history.model';
 
 @Component({
   selector: 'ds-orcid-sync-queue.component',
@@ -44,7 +46,7 @@ export class OrcidSyncQueueComponent extends CrisLayoutBoxObj implements OnInit 
   constructor(private orcidQueueService: OrcidQueueService,
               private translateService: TranslateService,
               private notificationsService: NotificationsService,
-              private requestService: RequestService) {
+              private orcidHistoryService: OrcidHistoryService) {
     super();
   }
 
@@ -108,11 +110,27 @@ export class OrcidSyncQueueComponent extends CrisLayoutBoxObj implements OnInit 
   }
 
   send( orcidQueue: OrcidQueue ) {
-    this.subs.push(this.orcidQueueService.send(orcidQueue.id)
+    this.subs.push(this.orcidHistoryService.sendToORCID(orcidQueue)
       .subscribe((restResponse) => {
         if (restResponse.hasSucceeded) {
-          this.notificationsService.success(this.translateService.get('person.page.orcid.sync-queue.send.success'));
-          this.updateList();
+
+          const orcidHistory: OrcidHistory = restResponse.payload;
+          switch (orcidHistory.status) {
+            case 200:
+            case 201:
+              this.notificationsService.success(this.translateService.get('person.page.orcid.sync-queue.send.success'));
+              this.updateList();
+              break;
+            case 404:
+              this.notificationsService.error(this.translateService.get('person.page.orcid.sync-queue.send.not-found-error'));
+              break;
+            case 409:
+              this.notificationsService.error(this.translateService.get('person.page.orcid.sync-queue.send.conflict-error'));
+              break;
+            default:
+              this.notificationsService.error(this.translateService.get('person.page.orcid.sync-queue.send.error'));
+          }
+
         } else {
           this.notificationsService.error(this.translateService.get('person.page.orcid.sync-queue.send.error'));
         }

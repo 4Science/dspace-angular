@@ -6,6 +6,7 @@ import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.reso
 import { AdminWorkflowPageComponent } from './admin-workflow-page/admin-workflow-page.component';
 import { I18nBreadcrumbsService } from '../core/breadcrumbs/i18n-breadcrumbs.service';
 import { AdminCurationTasksComponent } from './admin-curation-tasks/admin-curation-tasks.component';
+import { AdminEditUserAgreementComponent } from './admin-edit-user-agreement/admin-edit-user-agreement.component';
 import { ACCESS_CONTROL_MODULE_PATH, REGISTRIES_MODULE_PATH } from './admin-routing-paths';
 
 @NgModule({
@@ -42,6 +43,12 @@ import { ACCESS_CONTROL_MODULE_PATH, REGISTRIES_MODULE_PATH } from './admin-rout
         resolve: { breadcrumb: I18nBreadcrumbResolver },
         component: MetadataImportPageComponent,
         data: { title: 'admin.metadata-import.title', breadcrumbKey: 'admin.metadata-import' }
+      },
+      {
+        path: 'edit-user-agreement',
+        resolve: { breadcrumb: I18nBreadcrumbResolver },
+        component: AdminEditUserAgreementComponent,
+        data: { title: 'admin.edit-user-agreement.title', breadcrumbKey: 'admin.edit-user-agreement' }
       },
     ])
   ],
