@@ -431,6 +431,19 @@
 
 
 
+  "admin.notifications.openairebroker.breadcrumbs": "OpenAIRE Broker",
+
+  "admin.notifications.openairebroker.page.title": "OpenAIRE Broker",
+
+  "admin.notifications.openaireevent.breadcrumbs": "OpenAIRE Broker Suggestions",
+
+  "admin.notifications.openaireevent.page.title": "OpenAIRE Broker Suggestions",
+
+  "admin.notifications.recitersuggestion.breadcrumbs": "Reciter Suggestions",
+
+  "admin.notifications.recitersuggestion.page.title": "Reciter Suggestions",
+
+
   "admin.search.breadcrumbs": "Administrative Search",
 
   "admin.search.collection.edit": "Edit",
@@ -640,6 +653,33 @@
   "browse.title": "Browsing {{ collection }} by {{ field }} {{ value }}",
 
 
+
+  "bulk-import.abort-on-error" : "Abort on first error",
+
+  "bulk-import.back": "Back",
+
+  "bulk-import.breadcrumbs" : "Bulk import",
+
+  "bulk-import.collection-name" : "Collection",
+
+  "bulk-import.error": "An error occurred while creating the import process",
+
+  "bulk-import.file" : "Source file",
+
+  "bulk-import.header" : "Bulk import",
+
+  "bulk-import.processing": "Processing...",
+
+  "bulk-import.success": "The import process was successfully created",
+
+  "bulk-import.submit": "Start import",
+
+  "bulk-import.title" : "Bulk import",
+
+  "bulk-import.workflow" : "Use collection workflow",
+
+
+
   "chips.remove": "Remove chip",
 
 
@@ -831,6 +871,8 @@
   "collection.page.browse.recent.head": "Recent Submissions",
 
   "collection.page.browse.recent.empty": "No items to show",
+
+  "collection.page.bulk-import": "Import items into this collection",
 
   "collection.page.handle": "Permanent URI for this collection",
 
@@ -2072,6 +2114,14 @@
 
 
 
+  "menu.section.notifications": "Notifications",
+
+  "menu.section.notifications_openaire_broker": "OpenAIRE Broker",
+
+  "menu.section.notifications_reciter": "ReCiter",
+
+
+
   "menu.section.access_control": "Access Control",
 
   "menu.section.access_control_authorizations": "Authorizations",
@@ -2145,6 +2195,8 @@
   "menu.section.icon.edit": "Edit menu section",
 
   "menu.section.icon.export": "Export menu section",
+
+  "menu.section.icon.notifications": "Notifictions menu section",
 
   "menu.section.icon.find": "Find menu section",
 
@@ -2317,6 +2369,8 @@
 
   "mydspace.view-btn": "View",
 
+  "mydspace.notification.suggestion": "Reciter suggest to add to your profile <b>{{count}} publications</b><br> found in the {{source}}.<br> Please <a href='/suggestions/{{suggestionId}}'>review the suggestions</a>",
+
 
 
   "nav.browse.header": "All of DSpace",
@@ -2338,6 +2392,165 @@
   "nav.statistics.header": "Statistics",
 
   "nav.stop-impersonating": "Stop impersonating EPerson",
+
+
+
+  "openaire.broker.title": "OpenAIRE Broker",
+
+  "openaire.broker.topics.description": "Below you can see all the topics received from the subscriptions to OpenAIRE.",
+
+  "openaire.broker.topics": "Current Topics",
+
+  "openaire.broker.table.topic": "Topic",
+
+  "openaire.broker.table.last-event": "Last Event",
+
+  "openaire.broker.table.actions": "Actions",
+
+  "openaire.broker.button.detail": "Show details",
+
+  "openaire.broker.noTopics": "No topics found.",
+
+  "openaire.broker.topic.error.service.retrieve": "An error occurred while loading the OpenAIRE Broker topics",
+
+  "openaire.broker.loading": "Loading ...",
+
+  "openaire.events.title": "OpenAIRE Broker Suggestions",
+
+  "openaire.broker.events.description": "Below the list of all the suggestions, received from OpenAIRE, for the selected topic.",
+
+  "openaire.broker.events.topic": "Topic:",
+
+  "openaire.broker.noEvents": "No suggestions found.",
+
+  "openaire.broker.event.table.publication": "Publication",
+
+  "openaire.broker.event.table.details": "Details",
+
+  "openaire.broker.event.table.project-details": "Project details",
+
+  "openaire.broker.event.table.actions": "Actions",
+
+  "openaire.broker.event.action.accept": "Accept suggestion",
+
+  "openaire.broker.event.action.ignore": "Ignore suggestion",
+
+  "openaire.broker.event.action.reject": "Reject suggestion",
+
+  "openaire.broker.event.action.import": "Import project and accept suggestion",
+
+  "openaire.broker.event.table.pidtype": "PID Type:",
+
+  "openaire.broker.event.table.pidvalue": "PID Value:",
+
+  "openaire.broker.event.table.subjectValue": "Subject Value:",
+
+  "openaire.broker.event.table.abstract": "Abstract:",
+
+  "openaire.broker.event.table.suggestedProject": "OpenAIRE Suggested Project data",
+
+  "openaire.broker.event.table.project": "Project title:",
+
+  "openaire.broker.event.table.acronym": "Acronym:",
+
+  "openaire.broker.event.table.code": "Code:",
+
+  "openaire.broker.event.table.funder": "Funder:",
+
+  "openaire.broker.event.table.fundingProgram": "Funding program:",
+
+  "openaire.broker.event.table.jurisdiction": "Jurisdiction:",
+
+  "openaire.broker.events.back": "Back to topics",
+
+  "openaire.broker.event.table.less": "Show less",
+
+  "openaire.broker.event.table.more": "Show more",
+
+  "openaire.broker.event.project.found": "Bound to the local record:",
+
+  "openaire.broker.event.project.notFound": "No local record found",
+
+  "openaire.broker.event.sure": "Are you sure?",
+
+  "openaire.broker.event.ignore.description": "This operation can't be undone. Ignore this suggestion?",
+
+  "openaire.broker.event.reject.description": "This operation can't be undone. Reject this suggestion?",
+
+  "openaire.broker.event.accept.description": "No DSpace project selected. A new project will be created based on the suggestion data.",
+
+  "openaire.broker.event.action.cancel": "Cancel",
+
+  "openaire.broker.event.action.saved": "Your decision has been saved successfully.",
+
+  "openaire.broker.event.action.error": "An error has occurred. Your decision has not been saved.",
+
+  "openaire.broker.event.modal.project.title": "Choose a project to bound",
+
+  "openaire.broker.event.modal.project.publication": "Publication:",
+
+  "openaire.broker.event.modal.project.bountToLocal": "Bound to the local record:",
+
+  "openaire.broker.event.modal.project.select": "Project search",
+
+  "openaire.broker.event.modal.project.search": "Search",
+
+  "openaire.broker.event.modal.project.clear": "Clear",
+
+  "openaire.broker.event.modal.project.cancel": "Cancel",
+
+  "openaire.broker.event.modal.project.bound": "Bound project",
+
+  "openaire.broker.event.modal.project.placeholder": "Enter a project name",
+
+  "openaire.broker.event.modal.project.notFound": "No project found.",
+
+  "openaire.broker.event.project.bounded": "The project has been linked successfully.",
+
+  "openaire.broker.event.project.removed": "The project has been successfully unlinked.",
+
+  "openaire.broker.event.project.error": "An error has occurred. No operation performed.",
+
+  "openaire.broker.event.reason": "Reason",
+
+  "reciter.suggestion.loading": "Loading ...",
+
+  "reciter.suggestion.title": "Reciter Suggestions",
+
+  "reciter.suggestion.targets.description": "Below you can see all the suggestions ",
+
+  "reciter.suggestion.targets": "Current Suggestions",
+
+  "reciter.suggestion.table.name": "Researcher Name",
+
+  "reciter.suggestion.table.actions": "Actions",
+
+  "reciter.suggestion.button.review": "Review Suggestions",
+
+  "reciter.suggestion.noTargets": "No target found.",
+
+  "reciter.suggestion.target.error.service.retrieve": "An error occurred while loading the Reciter Suggestion Target",
+
+  "reciter.suggestion.evidence.type": "Type",
+
+  "reciter.suggestion.evidence.score": "Score",
+
+  "reciter.suggestion.evidence.notes": "Notes",
+
+  "reciter.suggestion.approveAndImport": "Approve & import",
+
+  "reciter.suggestion.notMine": "Not mine",
+
+  "reciter.suggestion.seeEvidence": "See evidence",
+
+  "reciter.suggestion.suggestionFor": "Suggestion for",
+
+  "reciter.suggestion.source.oaire": "OpenAIRE Graph",
+
+  "reciter.suggestion.from.source": "from the ",
+
+
+
 
 
 
@@ -3190,6 +3403,8 @@
 
   "submission.import-external.search.source.hint": "Pick an external source",
 
+  "submission.import-external.source.arxiv": "arXiv",
+
   "submission.import-external.source.loading": "Loading ...",
 
   "submission.import-external.source.sherpaJournal": "SHERPA Journals",
@@ -3201,6 +3416,14 @@
   "submission.import-external.source.pubmed": "Pubmed",
 
   "submission.import-external.source.lcname": "Library of Congress Names",
+
+  "submission.import-external.source.epo": "Epo",
+
+  "submission.import-external.source.orcid": "Orcid",
+
+  "submission.import-external.source.openaire": "Openaire",
+
+  "submission.import-external.source.scopus": "Scopus",
 
   "submission.import-external.preview.title": "Item Preview",
 

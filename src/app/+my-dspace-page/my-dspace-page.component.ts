@@ -1,14 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Inject,
-  InjectionToken,
-  Input,
-  OnInit
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, InjectionToken, Input, OnInit } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { map, switchMap, tap, } from 'rxjs/operators';
+import { filter, flatMap, map, switchMap, take, tap, } from 'rxjs/operators';
 
 import { PaginatedList } from '../core/data/paginated-list';
 import { RemoteData } from '../core/data/remote-data';
@@ -18,7 +11,7 @@ import { HostWindowService } from '../shared/host-window.service';
 import { PaginatedSearchOptions } from '../shared/search/paginated-search-options.model';
 import { SearchService } from '../core/shared/search/search.service';
 import { SidebarService } from '../shared/sidebar/sidebar.service';
-import { hasValue } from '../shared/empty.util';
+import { hasValue, isNotEmpty } from '../shared/empty.util';
 import { getSucceededRemoteData } from '../core/shared/operators';
 import { MyDSpaceResponseParsingService } from '../core/data/mydspace-response-parsing.service';
 import { SearchConfigurationOption } from '../shared/search/search-switch-configuration/search-configuration-option.model';
@@ -29,6 +22,10 @@ import { ViewMode } from '../core/shared/view-mode.model';
 import { MyDSpaceRequest } from '../core/data/request.models';
 import { SearchResult } from '../shared/search/search-result.model';
 import { Context } from '../core/shared/context.model';
+import { NotificationsService } from '../shared/notifications/notifications.service';
+import { TranslateService } from '@ngx-translate/core';
+import { SuggestionTargetsStateService } from '../openaire/reciter-suggestions/suggestion-targets/suggestion-targets.state.service';
+import { OpenaireSuggestionTarget } from '../core/openaire/reciter-suggestions/models/openaire-suggestion-target.model';
 
 export const MYDSPACE_ROUTE = '/mydspace';
 export const SEARCH_CONFIG_SERVICE: InjectionToken<SearchConfigurationService> = new InjectionToken<SearchConfigurationService>('searchConfigurationService');
@@ -50,6 +47,8 @@ export const SEARCH_CONFIG_SERVICE: InjectionToken<SearchConfigurationService> =
   ]
 })
 export class MyDSpacePageComponent implements OnInit {
+
+  labelPrefix = 'mydspace.';
 
   /**
    * True when the search component should show results on the current page
@@ -104,6 +103,9 @@ export class MyDSpacePageComponent implements OnInit {
   constructor(private service: SearchService,
               private sidebarService: SidebarService,
               private windowService: HostWindowService,
+              private translateService: TranslateService,
+              private reciterSuggestionStateService: SuggestionTargetsStateService,
+              private notificationsService: NotificationsService,
               @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: MyDSpaceConfigurationService) {
     this.isXsOrSm$ = this.windowService.isXsOrSm();
     this.service.setServiceOptions(MyDSpaceResponseParsingService, MyDSpaceRequest);
@@ -146,6 +148,19 @@ export class MyDSpacePageComponent implements OnInit {
         })
       );
 
+    // send notifications
+    this.reciterSuggestionStateService.hasUserVisitedSuggestions().pipe(
+      filter((visited: boolean) => !visited),
+      flatMap(() => this.reciterSuggestionStateService.getCurrentUserSuggestionTargets()),
+      take(1)
+    ).subscribe((suggestions: OpenaireSuggestionTarget[]) => {
+      if (isNotEmpty(suggestions)) {
+        suggestions
+          .forEach((suggestionTarget: OpenaireSuggestionTarget) => this.showNotificationForNewSuggestions(suggestionTarget))
+        this.reciterSuggestionStateService.dispatchMarkUserSuggestionsAsVisitedAction();
+      }
+    })
+
   }
 
   /**
@@ -175,6 +190,22 @@ export class MyDSpacePageComponent implements OnInit {
    */
   public getSearchLink(): string {
     return this.service.getSearchLink();
+  }
+
+  /**
+   * Show a notification to user for a new suggstions detected
+   * @param suggestionTarget
+   * @private
+   */
+  private showNotificationForNewSuggestions(suggestionTarget: OpenaireSuggestionTarget): void {
+    const sourceLabel = this.translateService.instant('reciter.suggestion.source.oaire');
+    const content = this.translateService.instant(this.labelPrefix + 'notification.suggestion', {
+      count: suggestionTarget.total,
+      source: sourceLabel,
+      suggestionId: suggestionTarget.id,
+      displayName: suggestionTarget.display
+    });
+    this.notificationsService.success('', content, {timeOut:0}, true);
   }
 
   /**

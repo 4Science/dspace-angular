@@ -44,6 +44,12 @@ export function getWorkflowItemModuleRoute() {
   return `/${WORKFLOW_ITEM_MODULE_PATH}`;
 }
 
+export const BULK_IMPORT_PATH = 'bulk-import';
+
+export function getBulkImportRoute(collection: Collection): string {
+  return `/${BULK_IMPORT_PATH}/${collection.id}`;
+}
+
 export function getDSORoute(dso: DSpaceObject): string {
   switch ((dso as any).type) {
     case Community.type.value:
@@ -65,3 +71,5 @@ export const INFO_MODULE_PATH = 'info';
 export function getInfoModulePath() {
   return `/${INFO_MODULE_PATH}`;
 }
+
+export const EDIT_ITEM_PATH = 'edit-items';

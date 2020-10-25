@@ -189,6 +189,15 @@ import { OrcidQueueService } from './orcid/orcid-queue.service';
 import { OrcidQueue } from './orcid/model/orcid-queue.model';
 import { OrcidHistoryService } from './orcid/orcid-history.service';
 import { OrcidHistory } from './orcid/model/orcid-history.model';
+import { EditItem } from './submission/models/edititem.model';
+import { EditItemDataService } from './submission/edititem-data.service';
+import { EditItemMode } from './submission/models/edititem-mode.model';
+import { EditItemModeDataService } from './submission/edititemmode-data.service';
+import { OpenaireBrokerTopicObject } from './openaire/broker/models/openaire-broker-topic.model';
+import { OpenaireBrokerEventObject } from './openaire/broker/models/openaire-broker-event.model';
+import { OpenaireSuggestionTarget } from './openaire/reciter-suggestions/models/openaire-suggestion-target.model';
+import { OpenaireSuggestion } from './openaire/reciter-suggestions/models/openaire-suggestion.model';
+import { OpenaireSuggestionSource } from './openaire/reciter-suggestions/models/openaire-suggestion-source.model';
 
 /**
  * When not in production, endpoint responses can be mocked for testing purposes
@@ -346,7 +355,9 @@ const PROVIDERS = [
   ResearcherProfileService,
   SectionDataService,
   OrcidQueueService,
-  OrcidHistoryService
+  OrcidHistoryService,
+  EditItemDataService,
+  EditItemModeDataService
 ];
 
 /**
@@ -407,7 +418,14 @@ export const models =
     ResearcherProfile,
     OrcidQueue,
     OrcidHistory,
-    Section
+    Section,
+    EditItem,
+    EditItemMode,
+    OpenaireBrokerTopicObject,
+    OpenaireBrokerEventObject,
+    OpenaireSuggestion,
+    OpenaireSuggestionTarget,
+    OpenaireSuggestionSource
   ];
 
 @NgModule({

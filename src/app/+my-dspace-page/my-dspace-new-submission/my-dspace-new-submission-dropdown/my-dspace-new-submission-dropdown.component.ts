@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
 import { Subscription } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { PaginatedList } from '../../../core/data/paginated-list';
 import { EntityTypeService } from '../../../core/data/entity-type.service';
@@ -9,8 +10,8 @@ import { PageInfo } from '../../../core/shared/page-info.model';
 import { FindListOptions } from '../../../core/data/request.models';
 import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
 import { hasValue } from '../../../shared/empty.util';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateItemParentSelectorComponent } from 'src/app/shared/dso-selector/modal-wrappers/create-item-parent-selector/create-item-parent-selector.component';
+import { Collection } from '../../../core/shared/collection.model';
 
 /**
  * This component represents the new submission dropdown
@@ -21,6 +22,31 @@ import { CreateItemParentSelectorComponent } from 'src/app/shared/dso-selector/m
   templateUrl: './my-dspace-new-submission-dropdown.component.html'
 })
 export class MyDSpaceNewSubmissionDropdownComponent implements OnDestroy, OnInit {
+
+  /**
+   * The default button icon to show
+   */
+  @Input() buttonIcon = 'fa fa-plus-circle';
+
+  /**
+   * The default button name to show
+   */
+  @Input() buttonName = 'mydspace.new-submission';
+
+  /**
+   * The default button classes to use
+   */
+  @Input() buttonClass = 'btn btn-lg btn-primary mt-1 ml-2';
+
+  /**
+   * Representing if component should emit value of selected entries or navigate to submit
+   */
+  @Input() emitOnly = false;
+
+  /**
+   * Emit the selected collection
+   */
+  @Output() select: EventEmitter<Collection> = new EventEmitter<Collection>();
 
   /**
    * Representing if dropdown list is initialized
@@ -127,8 +153,12 @@ export class MyDSpaceNewSubmissionDropdownComponent implements OnDestroy, OnInit
   openDialog(idx: number) {
     const modalRef = this.modalService.open(CreateItemParentSelectorComponent);
     modalRef.componentInstance.metadata = 'relationship.type';
+    modalRef.componentInstance.emitOnly = this.emitOnly;
     if (hasValue(this.availableEntityTypeList) && this.availableEntityTypeList.length > 0) {
       modalRef.componentInstance.metadatavalue = this.availableEntityTypeList[idx];
     }
+    modalRef.componentInstance.select.subscribe((collection: Collection) => {
+      this.select.emit(collection);
+    });
   }
 }
