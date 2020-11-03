@@ -1,11 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { take } from 'rxjs/operators';
+
 import { fadeIn } from '../../../shared/animations/fade';
-import { SelectableListService } from '../../../shared/object-list/selectable-list/selectable-list.service';
 import { OpenaireSuggestion } from '../../../core/openaire/reciter-suggestions/models/openaire-suggestion.model';
 import { Item } from '../../../core/shared/item.model';
 import { isNotEmpty } from '../../../shared/empty.util';
 import { Collection } from '../../../core/shared/collection.model';
+import { ItemType } from '../../../core/shared/item-relationships/item-type.model';
+import { CreateItemParentSelectorComponent } from '../../../shared/dso-selector/modal-wrappers/create-item-parent-selector/create-item-parent-selector.component';
 
 @Component({
   selector: 'ds-suggestion-list-item',
@@ -34,8 +38,12 @@ export class SuggestionListElementComponent implements OnInit {
    */
   @Output() approveAndImport = new EventEmitter();
 
-  constructor(protected selectionService: SelectableListService) {
-  }
+  /**
+   * Initialize instance variables
+   *
+   * @param {NgbModal} modalService
+   */
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
     this.listableObject = {
@@ -52,6 +60,22 @@ export class SuggestionListElementComponent implements OnInit {
   }
 
   /**
+   * Method called on clicking the button "approve & import", It opens a dialog for
+   * select a collection and it emits an approveAndImport event.
+   */
+  openDialog(entity: ItemType) {
+    const modalRef = this.modalService.open(CreateItemParentSelectorComponent);
+    modalRef.componentInstance.emitOnly = true;
+    modalRef.componentInstance.metadata = 'relationship.type';
+    modalRef.componentInstance.metadatavalue = entity.label;
+
+    modalRef.componentInstance.select.pipe(take(1))
+      .subscribe((collection: Collection) => {
+        this.approveAndImport.emit({ suggestion: this.object, collectionId: collection.id });
+      })
+  }
+
+  /**
    * See the Evidence
    */
   hasEvidences() {
@@ -65,10 +89,4 @@ export class SuggestionListElementComponent implements OnInit {
     this.seeEvidenceClicked.emit(this.object.evidences);
   }
 
-  /**
-   * Used to approve & import
-   */
-  selectedCollection(collection: Collection) {
-    this.approveAndImport.emit({ suggestion: this.object, collectionId: collection.id });
-  }
 }

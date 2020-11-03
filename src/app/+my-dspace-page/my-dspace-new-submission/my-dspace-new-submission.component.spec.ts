@@ -24,8 +24,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HostWindowService } from '../../shared/host-window.service';
 import { HostWindowServiceStub } from '../../shared/testing/host-window-service.stub';
 import { UploaderComponent } from 'src/app/shared/uploader/uploader.component';
+import { getMockEntityTypeService } from './my-dspace-new-submission-dropdown/my-dspace-new-submission-dropdown.component.spec';
 import { EntityTypeService } from '../../core/data/entity-type.service';
-import { getMockEmptyEntityTypeService } from './my-dspace-new-submission-dropdown/my-dspace-new-submission-dropdown.component.spec';
 
 describe('MyDSpaceNewSubmissionComponent test', () => {
 
@@ -74,11 +74,11 @@ describe('MyDSpaceNewSubmissionComponent test', () => {
         { provide: Store, useValue: store },
         { provide: TranslateService, useValue: translateService },
         { provide: NgbModal, useValue: modalService },
-        { provide: EntityTypeService, useValue: getMockEmptyEntityTypeService() },
         ChangeDetectorRef,
         MyDSpaceNewSubmissionComponent,
         UploaderService,
         { provide: HostWindowService, useValue: new HostWindowServiceStub(800) },
+        { provide: EntityTypeService, useValue: getMockEntityTypeService() },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

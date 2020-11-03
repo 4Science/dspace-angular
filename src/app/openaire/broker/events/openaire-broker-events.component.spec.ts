@@ -31,7 +31,7 @@ import { PaginatedList } from '../../../core/data/paginated-list';
 import { createSuccessfulRemoteDataObject } from '../../../shared/remote-data.utils';
 import { FindListOptions } from '../../../core/data/request.models';
 
-describe('OpenaireBrokerEventComponent test suite', () => {
+describe('OpenaireBrokerEventsComponent test suite', () => {
   let fixture: ComponentFixture<OpenaireBrokerEventsComponent>;
   let comp: OpenaireBrokerEventsComponent;
   let compAsAny: any;
@@ -44,7 +44,7 @@ describe('OpenaireBrokerEventComponent test suite', () => {
   };
   const openaireBrokerEventRestServiceStub: any = getMockOpenaireBrokerEventRestService();
   const activatedRouteParams = {
-    openaireBrokerTopicsParams: {
+    openaireBrokerEventsParams: {
       currentPage: 0,
       pageSize: 10
     }
@@ -203,15 +203,14 @@ describe('OpenaireBrokerEventComponent test suite', () => {
 
     describe('openModalLookup', () => {
       it('should call modalService.open', () => {
+        spyOn(comp, 'boundProject');
         spyOn(compAsAny.modalService, 'open').and.returnValue(
           {
             componentInstance: {
               externalSourceEntry: null,
               label: null,
-              importedObject: observableOf(() => {
-                return {
-                  indexableObject: OpenaireMockDspaceObject
-                };
+              importedObject: observableOf({
+                indexableObject: OpenaireMockDspaceObject
               })
             }
           }
@@ -222,6 +221,7 @@ describe('OpenaireBrokerEventComponent test suite', () => {
         scheduler.flush();
 
         expect(compAsAny.modalService.open).toHaveBeenCalled();
+        expect(compAsAny.boundProject).toHaveBeenCalled();
       });
     });
 

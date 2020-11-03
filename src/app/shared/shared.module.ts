@@ -208,10 +208,10 @@ import { EpersonSearchBoxComponent } from './resource-policies/form/eperson-grou
 import { GroupSearchBoxComponent } from './resource-policies/form/eperson-group-list/group-search-box/group-search-box.component';
 import { FileDownloadLinkComponent } from './file-download-link/file-download-link.component';
 import { CollectionDropdownComponent } from './collection-dropdown/collection-dropdown.component';
+import { EntityDropdownComponent } from './entity-dropdown/entity-dropdown.component';
 import { DsSelectComponent } from './ds-select/ds-select.component';
 import { VocabularyTreeviewComponent } from './vocabulary-treeview/vocabulary-treeview.component';
 import { CurationFormComponent } from '../curation-form/curation-form.component';
-import { MyDSpaceNewSubmissionDropdownComponent } from '../+my-dspace-page/my-dspace-new-submission/my-dspace-new-submission-dropdown/my-dspace-new-submission-dropdown.component';
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -404,10 +404,10 @@ const COMPONENTS = [
   GroupSearchBoxComponent,
   FileDownloadLinkComponent,
   CollectionDropdownComponent,
+  EntityDropdownComponent,
   ExportMetadataSelectorComponent,
   ConfirmationModalComponent,
-  VocabularyTreeviewComponent,
-  MyDSpaceNewSubmissionDropdownComponent
+  VocabularyTreeviewComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -484,6 +484,7 @@ const ENTRY_COMPONENTS = [
   ClaimedTaskActionsReturnToPoolComponent,
   ClaimedTaskActionsEditMetadataComponent,
   CollectionDropdownComponent,
+  EntityDropdownComponent,
   FileDownloadLinkComponent,
   CurationFormComponent,
   ExportMetadataSelectorComponent,
