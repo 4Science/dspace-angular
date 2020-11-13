@@ -193,6 +193,10 @@ import { EditItem } from './submission/models/edititem.model';
 import { EditItemDataService } from './submission/edititem-data.service';
 import { EditItemMode } from './submission/models/edititem-mode.model';
 import { EditItemModeDataService } from './submission/edititemmode-data.service';
+import { AuditDataService } from './audit/audit-data.service';
+import { Audit } from './audit/model/audit.model';
+import { ItemExportFormatService } from './itemexportformat/item-export.service';
+import { ItemExportFormat } from './itemexportformat/model/item-export-format.model';
 import { OpenaireBrokerTopicObject } from './openaire/broker/models/openaire-broker-topic.model';
 import { OpenaireBrokerEventObject } from './openaire/broker/models/openaire-broker-event.model';
 import { OpenaireSuggestionTarget } from './openaire/reciter-suggestions/models/openaire-suggestion-target.model';
@@ -317,6 +321,7 @@ const PROVIDERS = [
   ItemTypeDataService,
   WorkflowActionDataService,
   ProcessDataService,
+  AuditDataService,
   ScriptDataService,
   ProcessFilesResponseParsingService,
   FeatureDataService,
@@ -353,6 +358,7 @@ const PROVIDERS = [
   VocabularyTreeviewService,
   SearchcomponentService,
   ResearcherProfileService,
+  ItemExportFormatService,
   SectionDataService,
   OrcidQueueService,
   OrcidHistoryService,
@@ -400,6 +406,7 @@ export const models =
     ExternalSourceEntry,
     Script,
     Process,
+    Audit,
     Version,
     VersionHistory,
     WorkflowAction,
@@ -416,6 +423,7 @@ export const models =
     ConfigurationProperty,
     SearchComponent,
     ResearcherProfile,
+    ItemExportFormat,
     OrcidQueue,
     OrcidHistory,
     Section,

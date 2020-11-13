@@ -76,6 +76,7 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             },
             { path: SUGGESTION_MODULE_PATH, loadChildren: './suggestions-page/suggestions-page.module#SuggestionsPageModule', canActivate: [EndUserAgreementCurrentUserGuard] },
             { path: 'processes', loadChildren: './process-page/process-page.module#ProcessPageModule', canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard] },
+            { path: 'auditlogs', loadChildren: './audit-page/audit-page.module#AuditPageModule', canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard] },
             { path: BULK_IMPORT_PATH, loadChildren: './bulk-import/bulk-import-page.module#BulkImportPageModule', canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard] },
             { path: INFO_MODULE_PATH, loadChildren: './info/info.module#InfoModule' },
             { path: UNAUTHORIZED_PATH, component: UnauthorizedComponent },
