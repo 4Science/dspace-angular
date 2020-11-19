@@ -11,7 +11,7 @@ import { FormComponent } from '../../../shared/form/form.component';
 import { FormService } from '../../../shared/form/form.service';
 import { SectionModelComponent } from '../models/section.model';
 import { SubmissionFormsConfigService } from '../../../core/config/submission-forms-config.service';
-import { hasNoValue, hasValue, isNotEmpty, isUndefined } from '../../../shared/empty.util';
+import { hasNoValue, hasValue, isEmpty, isNotEmpty, isUndefined } from '../../../shared/empty.util';
 import { ConfigData } from '../../../core/config/config-data';
 import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder/json-patch-operation-path-combiner';
 import { SubmissionFormsModel } from '../../../core/config/models/config-submission-forms.model';
@@ -89,6 +89,18 @@ export class SubmissionSectionformComponent extends SectionModelComponent {
   protected formData: any = Object.create({});
 
   /**
+   * Store the current form additional data
+   * @protected
+   */
+  protected formAdditionalData: any = Object.create({});
+
+  /**
+   * Store the
+   * @protected
+   */
+  protected sectionMetadata: string[];
+
+  /**
    * The [JsonPatchOperationPathCombiner] object
    * @type {JsonPatchOperationPathCombiner}
    */
@@ -111,6 +123,12 @@ export class SubmissionSectionformComponent extends SectionModelComponent {
    * The FormComponent reference
    */
   @ViewChild('formRef', {static: false}) private formRef: FormComponent;
+
+  /**
+   * Keep track whether the section is focused or not.
+   * @protected
+   */
+  protected isFocused = false;
 
   /**
    * Initialize instance variables
@@ -217,16 +235,24 @@ export class SubmissionSectionformComponent extends SectionModelComponent {
    *    the section data retrieved from the server
    */
   hasMetadataEnrichment(sectionData: WorkspaceitemSectionFormObject): boolean {
+
+    const sectionDataToCheck = {};
+    Object.keys(sectionData).forEach((key) => {
+      if (this.sectionMetadata.includes(key)) {
+        sectionDataToCheck[key] = sectionData[key];
+      }
+    })
+
     const diffResult = [];
 
     // compare current form data state with section data retrieved from store
-    const diffObj = difference(sectionData, this.formData);
+    const diffObj = difference(sectionDataToCheck, this.formData);
 
     // iterate over differences to check whether they are actually different
     Object.keys(diffObj)
       .forEach((key) => {
         diffObj[key].forEach((value) => {
-          if (value.hasOwnProperty('value')) {
+          if (value.hasOwnProperty('value') && !isEmpty(value.value)) {
             diffResult.push(value);
           }
         });
@@ -249,6 +275,9 @@ export class SubmissionSectionformComponent extends SectionModelComponent {
         sectionData,
         this.submissionService.getSubmissionScope()
       );
+      this.formBuilderService.enrichWithAdditionalData(this.formModel, this.formAdditionalData);
+      this.sectionMetadata = this.sectionService.computeSectionConfiguredMetadata(this.formConfig);
+
     } catch (e) {
       const msg: string = this.translate.instant('error.submission.sections.init-form-error') + e.toString();
       const sectionError: SubmissionSectionError = {
@@ -270,15 +299,19 @@ export class SubmissionSectionformComponent extends SectionModelComponent {
    */
   updateForm(sectionData: WorkspaceitemSectionFormObject, errors: SubmissionSectionError[]): void {
 
-    if (hasValue(sectionData) && !isEqual(sectionData, this.sectionData.data)) {
+    if (isNotEmpty(sectionData) && !isEqual(sectionData, this.sectionData.data)) {
       this.sectionData.data = sectionData;
-      this.isUpdating = true;
-      this.formModel = null;
-      this.cdr.detectChanges();
-      this.initForm(sectionData);
-      this.checksForErrors(errors);
-      this.isUpdating = false;
-      this.cdr.detectChanges();
+      if (this.hasMetadataEnrichment(sectionData)) {
+        this.isUpdating = true;
+        this.formModel = null;
+        this.cdr.detectChanges();
+        this.initForm(sectionData);
+        this.checksForErrors(errors);
+        this.isUpdating = false;
+        this.cdr.detectChanges();
+      } else if (isNotEmpty(errors) || isNotEmpty(this.sectionData.errors)) {
+        this.checksForErrors(errors);
+      }
     } else if (isNotEmpty(errors) || isNotEmpty(this.sectionData.errors)) {
       this.checksForErrors(errors);
     }
@@ -295,6 +328,9 @@ export class SubmissionSectionformComponent extends SectionModelComponent {
     this.formService.isFormInitialized(this.formId).pipe(
       find((status: boolean) => status === true && !this.isUpdating))
       .subscribe(() => {
+
+        // TODO: filter these errors to only those that had been touched
+
         this.sectionService.checkSectionErrors(this.submissionId, this.sectionData.id, this.formId, errors, this.sectionData.errors);
         this.sectionData.errors = errors;
         this.cdr.detectChanges();
@@ -313,6 +349,12 @@ export class SubmissionSectionformComponent extends SectionModelComponent {
         distinctUntilChanged())
         .subscribe((formData) => {
           this.formData = formData;
+        }),
+
+      this.formService.getFormAdditionalData(this.formId).pipe(
+        distinctUntilChanged())
+        .subscribe((formAdditional) => {
+          this.formAdditionalData = formAdditional;
         }),
 
       /**
@@ -362,6 +404,7 @@ export class SubmissionSectionformComponent extends SectionModelComponent {
    *    the [[DynamicFormControlEvent]] emitted
    */
   onFocus(event: DynamicFormControlEvent): void {
+    this.isFocused = true;
     const value = this.formOperationsService.getFieldValueFromChangeEvent(event);
     const path = this.formBuilderService.getPath(event.model);
     if (this.formBuilderService.hasMappedGroupValue(event.model)) {
@@ -371,6 +414,17 @@ export class SubmissionSectionformComponent extends SectionModelComponent {
       this.previousValue.path = path;
       this.previousValue.value = value;
     }
+  }
+
+  /**
+   * Method called when a form dfBlur event is fired.
+   *
+   * @param event
+   *    the [[DynamicFormControlEvent]] emitted
+   */
+
+  onBlur(event: DynamicFormControlEvent): void {
+    this.isFocused = false;
   }
 
   /**
