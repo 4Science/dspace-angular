@@ -289,6 +289,7 @@ describe('SubmissionSectionformComponent test suite', () => {
         'dc.title': [new FormFieldMetadataValueObject('test')]
       };
       compAsAny.formData = {};
+      compAsAny.sectionMetadata = ['dc.title'];
 
       expect(comp.hasMetadataEnrichment(newSectionData)).toBeTruthy();
     });
@@ -298,7 +299,7 @@ describe('SubmissionSectionformComponent test suite', () => {
         'dc.title': [new FormFieldMetadataValueObject('test')]
       };
       compAsAny.formData = newSectionData;
-
+      compAsAny.sectionMetadata = ['dc.title'];
       expect(comp.hasMetadataEnrichment(newSectionData)).toBeFalsy();
     });
 
@@ -312,6 +313,7 @@ describe('SubmissionSectionformComponent test suite', () => {
       comp.sectionData.data = {};
       comp.sectionData.errors = [];
       compAsAny.formData = {};
+      compAsAny.sectionMetadata = ['dc.title'];
 
       comp.updateForm(sectionData, sectionError);
 
@@ -331,10 +333,11 @@ describe('SubmissionSectionformComponent test suite', () => {
       comp.sectionData.data = {};
       comp.sectionData.errors = [];
       compAsAny.formData = sectionData;
+      compAsAny.sectionMetadata = ['dc.title'];
 
       comp.updateForm(sectionData, parsedSectionErrors);
 
-      expect(comp.initForm).toHaveBeenCalled();
+      expect(comp.initForm).not.toHaveBeenCalled();
       expect(comp.checksForErrors).toHaveBeenCalled();
       expect(comp.sectionData.data).toEqual(sectionData);
     });
