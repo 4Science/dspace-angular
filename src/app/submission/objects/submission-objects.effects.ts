@@ -425,7 +425,6 @@ function getForm(forms, currentState, sectionId) {
   return forms[formId];
 }
 
-
 /**
  * Filter sectionErrors accordingly to this rules:
  * 1. if notifications are enabled return all errors
