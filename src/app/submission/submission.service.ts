@@ -46,6 +46,7 @@ import { RequestService } from '../core/data/request.service';
 import { SearchService } from '../core/shared/search/search.service';
 import { Item } from '../core/shared/item.model';
 import { environment } from '../../environments/environment';
+import { SubmissionJsonPatchOperationsService } from '../core/submission/submission-json-patch-operations.service';
 
 /**
  * A service that provides methods used in submission process.
@@ -83,7 +84,8 @@ export class SubmissionService {
               protected store: Store<SubmissionState>,
               protected translate: TranslateService,
               protected searchService: SearchService,
-              protected requestService: RequestService) {
+              protected requestService: RequestService,
+              protected jsonPatchOperationService: SubmissionJsonPatchOperationsService) {
   }
 
   /**
@@ -428,6 +430,16 @@ export class SubmissionService {
       map((state: SubmissionObjectEntry) => state.depositPending),
       distinctUntilChanged(),
       startWith(false));
+  }
+
+  /**
+   * Return whether submission unsaved modification are present
+   *
+   * @return Observable<boolean>
+   *    observable with submission unsaved modification presence
+   */
+  hasNotSavedModification(): Observable<boolean> {
+    return this.jsonPatchOperationService.hasPendingOperations('sections');
   }
 
   /**

@@ -48,6 +48,8 @@ import { SearchService } from '../core/shared/search/search.service';
 import { Item } from '../core/shared/item.model';
 import { storeModuleConfig } from '../app.reducer';
 import { environment } from '../../environments/environment';
+import { SubmissionJsonPatchOperationsService } from '../core/submission/submission-json-patch-operations.service';
+import { SubmissionJsonPatchOperationsServiceStub } from '../shared/testing/submission-json-patch-operations-service.stub';
 
 describe('SubmissionService test suite', () => {
   const collectionId = '43fe1f8c-09a6-4fcf-9c78-5d4fed8f2c8f';
@@ -347,6 +349,7 @@ describe('SubmissionService test suite', () => {
   const router = new RouterMock();
   const selfUrl = 'https://rest.api/dspace-spring-rest/api/submission/workspaceitems/826';
   const submissionDefinition: any = mockSubmissionDefinition;
+  const submissionJsonPatchOperationsService = new SubmissionJsonPatchOperationsServiceStub();
 
   let scheduler: TestScheduler;
   let service: SubmissionService;
@@ -373,6 +376,7 @@ describe('SubmissionService test suite', () => {
         { provide: ActivatedRoute, useValue: new MockActivatedRoute() },
         { provide: SearchService, useValue: searchService },
         { provide: RequestService, useValue: requestServce },
+        { provide: SubmissionJsonPatchOperationsService, useValue: submissionJsonPatchOperationsService },
         NotificationsService,
         RouteService,
         SubmissionService,
@@ -752,6 +756,20 @@ describe('SubmissionService test suite', () => {
       });
 
       expect(result).toBeObservable(expected);
+    });
+  });
+
+  describe('hasNotSavedModification', () => {
+    it('should call jsonPatchOperationService hasPendingOperation observable', () => {
+      (service as any).jsonPatchOperationService.hasPendingOperations = jasmine.createSpy('hasPendingOperations')
+        .and.returnValue(observableOf(true));
+
+      scheduler = getTestScheduler();
+      scheduler.schedule(() => service.hasNotSavedModification());
+      scheduler.flush();
+
+      expect((service as any).jsonPatchOperationService.hasPendingOperations).toHaveBeenCalledWith('sections');
+
     });
   });
 
