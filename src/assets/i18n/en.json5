@@ -2718,6 +2718,8 @@
 
   "openaire.broker.noEvents": "No suggestions found.",
 
+  "openaire.broker.event.table.trust": "Trust",
+
   "openaire.broker.event.table.publication": "Publication",
 
   "openaire.broker.event.table.details": "Details",
@@ -2834,15 +2836,35 @@
 
   "reciter.suggestion.approveAndImport": "Approve & import",
 
+  "reciter.suggestion.approveAndImport.success": "The suggestion has been imported successfully",
+
+  "reciter.suggestion.approveAndImport.bulk": "Approve & import Selected",
+
+  "reciter.suggestion.approveAndImport.bulk.success": "{{ count }} suggestions have been imported successfully ",
+
+  "reciter.suggestion.approveAndImport.bulk.error": "{{ count }} suggestions haven't been imported due to unexpected server errors",
+
   "reciter.suggestion.notMine": "Not mine",
 
+  "reciter.suggestion.notMine.success": "The suggestion has been discarded",
+
+  "reciter.suggestion.notMine.bulk": "Not mine Selected",
+
+  "reciter.suggestion.notMine.bulk.success": "{{ count }} suggestions have been discarded ",
+
+  "reciter.suggestion.notMine.bulk.error": "{{ count }} suggestions haven't been discarded due to unexpected server errors",
+
   "reciter.suggestion.seeEvidence": "See evidence",
+
+  "reciter.suggestion.hideEvidence": "Hide evidence",
 
   "reciter.suggestion.suggestionFor": "Suggestion for",
 
   "reciter.suggestion.source.oaire": "OpenAIRE Graph",
 
   "reciter.suggestion.from.source": "from the ",
+
+  "reciter.suggestion.totalScore": "Total Score",
 
 
 
@@ -3782,6 +3804,9 @@
 
   "sorting.score.DESC": "Relevance",
 
+  "sorting.ASC": "Ascending",
+
+  "sorting.DESC": "Descending",
 
 
   "statistics.title": "Statistics",
@@ -3893,7 +3918,9 @@
 
   "submission.import-external.source.scopus": "Scopus",
 
-  "submission.import-external.source.openaire": "OpenAIRE",
+  "submission.import-external.source.openaire": "OpenAIRE by Author",
+
+  "submission.import-external.source.openaireTitle": "OpenAIRE by Title",
 
   "submission.import-external.source.epo": "European Patent Office (EPO)",
 

@@ -8,12 +8,15 @@ import { SortDirection, SortOptions, } from '../core/cache/models/sort-options.m
 import { PaginatedList } from '../core/data/paginated-list';
 import { RemoteData } from '../core/data/remote-data';
 import { getFirstSucceededRemoteDataPayload, redirectOn4xx } from '../core/shared/operators';
-import { SuggestionsService } from '../openaire/reciter-suggestions/suggestions.service';
+import {SuggestionBulkResult, SuggestionsService} from '../openaire/reciter-suggestions/suggestions.service';
 import { PaginationComponentOptions } from '../shared/pagination/pagination-component-options.model';
 import { ItemDataService } from '../core/data/item-data.service';
 import { OpenaireSuggestion } from '../core/openaire/reciter-suggestions/models/openaire-suggestion.model';
 import { OpenaireSuggestionTarget } from '../core/openaire/reciter-suggestions/models/openaire-suggestion-target.model';
 import { AuthService } from '../core/auth/auth.service';
+import { SuggestionApproveAndImport } from '../openaire/reciter-suggestions/suggestion-list-element/suggestion-list-element.component';
+import { NotificationsService } from '../shared/notifications/notifications.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ds-suggestion-page',
@@ -46,18 +49,20 @@ export class SuggestionsPageComponent implements OnInit {
   targetRD$: Observable<RemoteData<OpenaireSuggestionTarget>>;
   targetId$: Observable<string>;
 
-  evidences: any;
-  isShowEvidence = false;
-
   suggestionId: any;
   researcherName: any;
+
+  selectedSuggestions: { [id: string]: OpenaireSuggestion } = {};
+  isBulkOperationPending = false;
 
   constructor(
     private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
     private suggestionService: SuggestionsService,
-    private itemService: ItemDataService
+    private itemService: ItemDataService,
+    private notificationService: NotificationsService,
+    private translateService: TranslateService
   ) {
   }
 
@@ -113,41 +118,108 @@ export class SuggestionsPageComponent implements OnInit {
   }
 
   /**
-   * Used to delete suggestion
+   * Used to delete a suggestion.
    * @suggestionId
    */
   notMine(suggestionId) {
-    this.suggestionService.deleteReviewedSuggestion(suggestionId)
-      .subscribe((res) => {
+    this.suggestionService.notMine(suggestionId).subscribe((res) => {
+      this.updatePage();
+    });
+  }
+
+  /**
+   * Used to delete all selected suggestions.
+   */
+  notMineAllSelected() {
+    this.isBulkOperationPending = true;
+    this.suggestionService
+      .notMineMultiple(Object.values(this.selectedSuggestions))
+      .subscribe((results: SuggestionBulkResult) => {
+        this.updatePage();
+        this.isBulkOperationPending = false;
+        this.selectedSuggestions = {};
+        if (results.success > 0) {
+          this.notificationService.success(
+            this.translateService.get('reciter.suggestion.notMine.bulk.success',
+              {count: results.success}));
+        }
+        if (results.fails > 0) {
+          this.notificationService.error(
+            this.translateService.get('reciter.suggestion.notMine.bulk.error',
+              {count: results.fails}));
+        }
+      })
+  }
+
+  /**
+   * Used to approve & import.
+   * @param event contains the suggestion and the target collection
+   */
+  approveAndImport(event: SuggestionApproveAndImport) {
+    this.suggestionService.approveAndImport(this.itemService, event.suggestion, event.collectionId)
+      .subscribe((response: any) => {
+        this.notificationService.success('reciter.suggestion.approveAndImport.success');
         this.updatePage();
       });
   }
 
   /**
-   * Used to to see evidence
-   * @evidences
+   * Used to approve & import all selected suggestions.
+   * @param event contains the target collection
    */
-  seeEvidence(evidences) {
-    this.evidences = evidences;
-    this.isShowEvidence = true;
+  approveAndImportAllSelected(event: SuggestionApproveAndImport) {
+    this.isBulkOperationPending = true;
+    this.suggestionService
+      .approveAndImportMultiple(this.itemService, Object.values(this.selectedSuggestions), event.collectionId)
+      .subscribe((results: SuggestionBulkResult) => {
+        this.updatePage();
+        this.isBulkOperationPending = false;
+        this.selectedSuggestions = {};
+        if (results.success > 0) {
+          this.notificationService.success(
+            this.translateService.get('reciter.suggestion.approveAndImport.bulk.success',
+              {count: results.success}));
+        }
+        if (results.fails > 0) {
+          this.notificationService.error(
+            this.translateService.get('reciter.suggestion.approveAndImport.bulk.error',
+              {count: results.fails}));
+        }
+    })
   }
 
   /**
-   * Used to show suggestion list
-   * @param event
+   * When a specific suggestion is selected.
+   * @param object the suggestions
+   * @param selected the new selected value for the suggestion
    */
-  back(event) {
-    this.evidences = {};
-    this.isShowEvidence = false;
+  onSelected(object: OpenaireSuggestion, selected: boolean) {
+    if (selected) {
+      this.selectedSuggestions[object.id] = object;
+    } else {
+      delete this.selectedSuggestions[object.id];
+    }
   }
 
   /**
-   * Used to approve & import
-   * @param event
+   * When Toggle Select All occurs.
+   * @param suggestions all the visible suggestions inside the page
    */
-  approveAndImport(event) {
-    this.itemService.importExternalSourceEntry(event.suggestion.externalSourceUri, event.collectionId).pipe().subscribe((response: any) => {
-      this.updatePage();
-    });
+  onToggleSelectAll(suggestions: OpenaireSuggestion[]) {
+    if ( this.getSelectedSuggestionsCount() > 0) {
+      this.selectedSuggestions = {};
+    } else {
+      suggestions.forEach((suggestion) => {
+        this.selectedSuggestions[suggestion.id] = suggestion;
+      })
+    }
   }
+
+  /**
+   * The current number of selected suggestions.
+   */
+  getSelectedSuggestionsCount(): number {
+    return Object.keys(this.selectedSuggestions).length
+  }
+
 }

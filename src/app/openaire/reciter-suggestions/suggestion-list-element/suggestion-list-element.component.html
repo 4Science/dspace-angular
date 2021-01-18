@@ -1,25 +1,41 @@
-<div>
-  <ds-item-search-result-list-element
-    [showLabel]="false"
-    [object]="listableObject"
-    [linkType]="0"></ds-item-search-result-list-element>
-  <div class="parent mt-2">
-    <div ngbDropdown>
-      <button class="btn btn-success mt-1 ml-2" id="dropdownSubmission" ngbDropdownToggle
-              type="button">
-        <i class="fa fa-check" aria-hidden="true"></i> {{'reciter.suggestion.approveAndImport' | translate}}
-        <span class="caret"></span>
-      </button>
-      <div ngbDropdownMenu
-           class="dropdown-menu"
-           id="entityControlsDropdownMenu"
-           aria-labelledby="dropdownSubmission">
-        <ds-entity-dropdown (selectionChange)="openDialog($event)"></ds-entity-dropdown>
+<div class="container">
+  <div class="row">
+    <!-- Bulk Selection Panel -->
+    <div class="col-1 text-center align-self-center">
+      <div class="">
+        <input type="checkbox" class="form-check-input"
+               [checked]="isSelected" (change)="changeSelected($event)"/>
       </div>
     </div>
-    <button (click)="notMine()" class="btn btn-danger mt-1 ml-2"><i class="fa fa-ban"></i>
-      {{'reciter.suggestion.notMine' | translate}}</button>
-    <button (click)="seeEvidences()" [disabled]="!hasEvidences()" class="btn btn-info mt-1 ml-2"><i class="fa fa-eye"></i>
-      {{'reciter.suggestion.seeEvidence' | translate}}</button>
+    <!-- Total Score Panel -->
+    <div class="col-2 text-center align-self-center">
+      <div class="">
+        <div><strong> {{'reciter.suggestion.totalScore' | translate}}</strong> </div>
+        <span class="suggestion-score">{{ object.score }}</span>
+      </div>
+    </div>
+    <!-- Suggestion Panel -->
+    <div class="col">
+        <!-- Object Preview -->
+        <ds-item-search-result-list-element
+          [showLabel]="false"
+          [object]="listableObject"
+          [linkType]="0"></ds-item-search-result-list-element>
+        <!-- Actions -->
+      <ds-suggestion-actions class="parent mt-2" [hasEvidence]="hasEvidences()"
+                             [seeEvidence]="seeEvidence"
+                             [object]="object"
+                             (approveAndImport)="onApproveAndImport($event)"
+                             (seeEvidences)="onSeeEvidences($event)"
+                             (notMineClicked)="onNotMine($event)"
+      ></ds-suggestion-actions>
+    </div>
+  </div>
+  <!-- Evidences Panel -->
+  <div *ngIf="seeEvidence" class="mt-2 row">
+    <div class="col offset-3">
+      <ds-suggestion-evidences [evidences]="object.evidences"></ds-suggestion-evidences>
+    </div>
   </div>
 </div>
+<hr>
