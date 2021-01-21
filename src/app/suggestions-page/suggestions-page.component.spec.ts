@@ -9,7 +9,7 @@ import { of as observableOf } from 'rxjs';
 import { SuggestionsPageComponent } from './suggestions-page.component';
 import { SuggestionListElementComponent } from '../openaire/reciter-suggestions/suggestion-list-element/suggestion-list-element.component';
 import { SuggestionsService } from '../openaire/reciter-suggestions/suggestions.service';
-import { getMockSuggestionsService } from '../shared/mocks/openaire.mock';
+import { getMockOpenaireStateService, getMockSuggestionsService } from '../shared/mocks/openaire.mock';
 import { PaginatedList } from '../core/data/paginated-list';
 import { OpenaireSuggestion } from '../core/openaire/reciter-suggestions/models/openaire-suggestion.model';
 import { createPaginatedList } from '../shared/testing/utils.test';
@@ -21,16 +21,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RouterStub } from '../shared/testing/router.stub';
 import { RemoteData } from '../core/data/remote-data';
 import { mockSuggestionTargetsObjectOne } from '../shared/mocks/reciter-suggestion-targets.mock';
-import { ItemDataService } from '../core/data/item-data.service';
 import { AuthService } from '../core/auth/auth.service';
 import { NotificationsService } from '../shared/notifications/notifications.service';
 import { NotificationsServiceStub } from '../shared/testing/notifications-service.stub';
 import { getMockTranslateService } from '../shared/mocks/translate.service.mock';
+import { SuggestionTargetsStateService } from '../openaire/reciter-suggestions/suggestion-targets/suggestion-targets.state.service';
+import { WorkspaceitemDataService } from '../core/submission/workspaceitem-data.service';
 
 describe('SuggestionPageComponent', () => {
   let component: SuggestionsPageComponent;
   let fixture: ComponentFixture<SuggestionsPageComponent>;
   const mockSuggestionsService = getMockSuggestionsService();
+  const mockSuggestionsTargetStateService = getMockOpenaireStateService();
   const suggestionTargetsList: PaginatedList<OpenaireSuggestion> = createPaginatedList([mockSuggestionPublicationOne, mockSuggestionPublicationTwo])
   const router = new RouterStub();
   const routeStub = {
@@ -38,7 +40,7 @@ describe('SuggestionPageComponent', () => {
       suggestionTargets: new RemoteData(false, false, true, null, mockSuggestionTargetsObjectOne)
     })
   };
-  const itemServiceMock = jasmine.createSpyObj('ItemDataService', {
+  const workspaceitemServiceMock = jasmine.createSpyObj('WorkspaceitemDataService', {
     importExternalSourceEntry: jasmine.createSpy('importExternalSourceEntry')
   });
 
@@ -64,9 +66,10 @@ describe('SuggestionPageComponent', () => {
       providers: [
         { provide: AuthService, useValue: authService },
         { provide: ActivatedRoute, useValue: routeStub },
-        { provide: ItemDataService, useValue: itemServiceMock },
+        { provide: WorkspaceitemDataService, useValue: workspaceitemServiceMock },
         { provide: Router, useValue: router },
         { provide: SuggestionsService, useValue: mockSuggestionsService },
+        { provide: SuggestionTargetsStateService, useValue: mockSuggestionsTargetStateService },
         { provide: NotificationsService, useValue: new NotificationsServiceStub() },
         { provide: TranslateService, useValue: getMockTranslateService() },
         SuggestionsPageComponent

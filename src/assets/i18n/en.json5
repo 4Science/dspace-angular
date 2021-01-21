@@ -2664,9 +2664,9 @@
 
   "mydspace.view-btn": "View",
 
-  "mydspace.notification.suggestion": "Reciter suggest to add to your profile <b>{{count}} publications</b><br> found in the {{source}}.<br> Please <a href='/suggestions/{{suggestionId}}'>review the suggestions</a>",
+  "mydspace.notification.suggestion": "We found <b>{{count}} publications</b><br> in the {{source}} that seems to be related to your profile.<br> Please <a href='/suggestions/{{suggestionId}}'>review the suggestions</a>",
 
-
+  "mydspace.notification.suggestion.page": "We found <b>{{count}} publications</b> in the {{source}} that seems to be related to your profile. Please <a href='/suggestions/{{suggestionId}}'>review the suggestions.</a>",
 
   "nav.browse.header": "All of DSpace",
 
@@ -3894,11 +3894,11 @@
 
   "submission.import-external.search.source.hint": "Pick an external source",
 
-  "submission.import-external.source.ads": "Ads",
+  "submission.import-external.source.ads": "NASA/ADS",
 
   "submission.import-external.source.arxiv": "arXiv",
 
-  "submission.import-external.source.cinii": "Cinii",
+  "submission.import-external.source.cinii": "CiNii",
 
   "submission.import-external.source.crossref": "CrossRef",
 
@@ -3912,7 +3912,7 @@
 
   "submission.import-external.source.pubmed": "Pubmed",
 
-  "submission.import-external.source.pubmedeu": "Pubmed EU",
+  "submission.import-external.source.pubmedeu": "Pubmed Europe",
 
   "submission.import-external.source.lcname": "Library of Congress Names",
 
