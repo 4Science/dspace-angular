@@ -1,4 +1,4 @@
-import { SuggestionTargetsActions, SuggestionTargetActionTypes } from './suggestion-targets.actions';
+import { SuggestionTargetActionTypes, SuggestionTargetsActions } from './suggestion-targets.actions';
 import { OpenaireSuggestionTarget } from '../../../core/openaire/reciter-suggestions/models/openaire-suggestion-target.model';
 
 /**
@@ -11,8 +11,8 @@ export interface SuggestionTargetState {
   totalPages: number;
   currentPage: number;
   totalElements: number;
-  currentUserTargets: OpenaireSuggestionTarget[]
-  currentUserTargetsVisited: boolean
+  currentUserTargets: OpenaireSuggestionTarget[];
+  currentUserTargetsVisited: boolean;
 }
 
 /**
