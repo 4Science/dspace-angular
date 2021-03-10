@@ -111,7 +111,7 @@ export class DsDynamicListComponent extends DynamicFormControlComponent implemen
     if (this.model.vocabularyOptions.name && this.model.vocabularyOptions.name.length > 0) {
       const listGroup = this.group.controls[this.model.id] as FormGroup;
       const pageInfo: PageInfo = new PageInfo({
-        elementsPerPage: Number.MAX_VALUE, currentPage: 1
+        elementsPerPage: 9999, currentPage: 1
       } as PageInfo);
       this.vocabularyService.getVocabularyEntries(this.model.vocabularyOptions, pageInfo).pipe(
         getFirstSucceededRemoteDataPayload()
@@ -123,9 +123,14 @@ export class DsDynamicListComponent extends DynamicFormControlComponent implemen
         // Make a list of available options (checkbox/radio) and split in groups of 'model.groupLength'
         entries.page.forEach((option, key) => {
           const value = option.authority || option.value;
-          const checked: boolean = isNotEmpty(findKey(
-            this.model.value,
-            (v) => v.value === option.value));
+          let checked: boolean;
+          if (this.model.repeatable) {
+            checked = isNotEmpty(findKey(
+              this.model.value,
+              (v) => v.value === option.value));
+          } else {
+            checked = this.model.value && option.value === this.model.value.value;
+          }
 
           const item: ListItem = {
             id: value,
