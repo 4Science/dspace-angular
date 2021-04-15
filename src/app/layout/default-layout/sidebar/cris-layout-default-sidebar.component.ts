@@ -3,6 +3,8 @@ import { Location } from '@angular/common';
 
 import { Tab } from '../../../core/layout/models/tab.model';
 import { hasValue } from '../../../shared/empty.util';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Item } from '../../../core/shared/item.model';
 
 /**
  * This component render the sidebar of the default layout
@@ -14,6 +16,10 @@ import { hasValue } from '../../../shared/empty.util';
 })
 export class CrisLayoutDefaultSidebarComponent implements OnChanges {
 
+  /**
+   * The item object related to the page
+   */
+  @Input() item: Item;
   /**
    * Representing if sidebar should be displayed or not
    */
@@ -31,27 +37,22 @@ export class CrisLayoutDefaultSidebarComponent implements OnChanges {
    */
   @Output() selectedTab = new EventEmitter<Tab>();
 
-  constructor(private location: Location) { }
+  constructor(private location: Location, private router: Router, private route: ActivatedRoute) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.tabs && changes.tabs.currentValue) {
       // Check if the location contains a specific tab to show
-      const tks = this.location.path().split('/');
-      if (hasValue(tks)) {
-        const tabName = tks[tks.length - 1];
-        if (hasValue(tabName)) {
-          let idx = 0;
-          for (const tab of this.tabs) {
-            if (tab.shortname === tabName) {
-              this.selectTab(idx);
-              return;
-            }
-            idx++;
+      const tabName = this.getCurrentTabFromUrl();
+      if (hasValue(tabName)) {
+        let idx = 0;
+        for (const tab of this.tabs) {
+          if (tab.shortname === tabName) {
+            this.selectTab(idx);
+            return;
           }
-          if (idx === this.tabs.length) {
-            this.selectTab(0);
-          }
-        } else {
+          idx++;
+        }
+        if (idx === this.tabs.length) {
           this.selectTab(0);
         }
       } else {
@@ -61,7 +62,7 @@ export class CrisLayoutDefaultSidebarComponent implements OnChanges {
   }
 
   /**
-   * This metod selects new tab, change the location with its shortname and
+   * This method selects new tab, change the location with its shortname and
    * notify the change at parent component
    * @param idx id of tab
    */
@@ -70,17 +71,29 @@ export class CrisLayoutDefaultSidebarComponent implements OnChanges {
       tab.isActive = false;
     });
     this.tabs[idx].isActive = true;
-    const tks = this.location.path().split('/');
-    let newLocation = '';
-    if (tks) {
-      for (let i = 1; i < 3; i++) {
-        newLocation += '/' + tks[i];
+    const tabName = this.getCurrentTabFromUrl();
+    if (tabName) {
+      if (tabName === this.item.uuid) {
+        this.router.navigate([this.tabs[idx].shortname], {replaceUrl: true, relativeTo: this.route});
+      } else if (tabName !== this.tabs[idx].shortname) {
+        this.router.navigate(['../', this.tabs[idx].shortname], {replaceUrl: true, relativeTo: this.route});
       }
-      newLocation += '/' + this.tabs[idx].shortname;
-      this.location.replaceState(newLocation);
     }
     // Notify selected tab at parent
     this.selectedTab.emit(this.tabs[idx]);
   }
 
+  private getCurrentTabFromUrl() {
+    let currentTab = null;
+    const locationParts = this.location.path().split('/');
+    if (locationParts) {
+      const lastPart = locationParts.pop();
+      currentTab = lastPart;
+      if (lastPart.includes('?')) {
+        const paramsParts = lastPart.split('?');
+        currentTab = paramsParts[0];
+      }
+    }
+    return currentTab;
+  }
 }

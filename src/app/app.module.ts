@@ -1,5 +1,7 @@
 import { APP_BASE_HREF, CommonModule } from '@angular/common';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClientJsonpModule } from '@angular/common/http';
+
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -15,14 +17,11 @@ import { AdminSidebarSectionComponent } from './+admin/admin-sidebar/admin-sideb
 import { AdminSidebarComponent } from './+admin/admin-sidebar/admin-sidebar.component';
 import { ExpandableAdminSidebarSectionComponent } from './+admin/admin-sidebar/expandable-admin-sidebar-section/expandable-admin-sidebar-section.component';
 import { AppRoutingModule } from './app-routing.module';
-
 import { AppComponent } from './app.component';
-
 import { appEffects } from './app.effects';
 import { appMetaReducers, debugMetaReducers } from './app.metareducers';
 import { appReducers, AppState, storeModuleConfig } from './app.reducer';
 import { CheckAuthenticationTokenAction } from './core/auth/auth.actions';
-
 import { CoreModule } from './core/core.module';
 import { ClientCookieService } from './core/services/client-cookie.service';
 import { FooterComponent } from './footer/footer.component';
@@ -30,8 +29,6 @@ import { HeaderNavbarWrapperComponent } from './header-nav-wrapper/header-navbar
 import { HeaderComponent } from './header/header.component';
 import { NavbarModule } from './navbar/navbar.module';
 import { PageNotFoundComponent } from './pagenotfound/pagenotfound.component';
-import { SearchNavbarComponent } from './search-navbar/search-navbar.component';
-
 import { DSpaceRouterStateSerializer } from './shared/ngrx/dspace-router-state-serializer';
 import { NotificationComponent } from './shared/notifications/notification/notification.component';
 import { NotificationsBoardComponent } from './shared/notifications/notifications-board/notifications-board.component';
@@ -46,6 +43,11 @@ import { XsrfInterceptor } from './core/xsrf/xsrf.interceptor';
 import { RootComponent } from './root/root.component';
 import { ThemedRootComponent } from './root/themed-root.component';
 import { ThemedEntryComponentModule } from '../themes/themed-entry-component.module';
+import { ThemedPageNotFoundComponent } from './pagenotfound/themed-pagenotfound.component';
+import { ThemedForbiddenComponent } from './forbidden/themed-forbidden.component';
+import { ThemedHeaderComponent } from './header/themed-header.component';
+import { ThemedFooterComponent } from './footer/themed-footer.component';
+import { ThemedBreadcrumbsComponent } from './breadcrumbs/themed-breadcrumbs.component';
 
 export function getBase() {
   return environment.ui.nameSpace;
@@ -68,6 +70,7 @@ const IMPORTS = [
   EffectsModule.forRoot(appEffects),
   StoreModule.forRoot(appReducers, storeModuleConfig),
   StoreRouterConnectingModule.forRoot(),
+  HttpClientJsonpModule,
   ThemedEntryComponentModule.withEntryComponents(),
 ];
 
@@ -127,17 +130,21 @@ const DECLARATIONS = [
   RootComponent,
   ThemedRootComponent,
   HeaderComponent,
+  ThemedHeaderComponent,
   HeaderNavbarWrapperComponent,
   AdminSidebarComponent,
   AdminSidebarSectionComponent,
   ExpandableAdminSidebarSectionComponent,
   FooterComponent,
+  ThemedFooterComponent,
   PageNotFoundComponent,
+  ThemedPageNotFoundComponent,
   NotificationComponent,
   NotificationsBoardComponent,
-  SearchNavbarComponent,
   BreadcrumbsComponent,
+  ThemedBreadcrumbsComponent,
   ForbiddenComponent,
+  ThemedForbiddenComponent,
 ];
 
 const EXPORTS = [

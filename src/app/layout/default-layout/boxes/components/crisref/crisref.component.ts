@@ -7,9 +7,11 @@ import { RenderingTypeModelComponent } from '../rendering-type.model';
 import { FieldRendetingType, MetadataBoxFieldRendering } from '../metadata-box.decorator';
 import { hasValue } from '../../../../../shared/empty.util';
 import { ItemDataService } from '../../../../../core/data/item-data.service';
-import { getFirstSucceededRemoteDataPayload } from '../../../../../core/shared/operators';
+import { getFirstCompletedRemoteData } from '../../../../../core/shared/operators';
 import { environment } from '../../../../../../environments/environment';
 import { MetadataValue } from '../../../../../core/shared/metadata.models';
+import { RemoteData } from '../../../../../core/data/remote-data';
+import { Item } from '../../../../../core/shared/item.model';
 
 interface CrisRef {
   id: string;
@@ -55,18 +57,32 @@ export class CrisrefComponent extends RenderingTypeModelComponent implements OnI
 
   ngOnInit() {
     const itemMetadata: MetadataValue[] = this.item.allMetadata( this.field.metadata );
-    if (hasValue(itemMetadata)) {
-      this.references = observableFrom(itemMetadata).pipe(
+    let itemsToBeRendered = [];
+    if (this.indexToBeRendered >= 0) {
+      itemsToBeRendered.push(itemMetadata[this.indexToBeRendered]);
+    } else {
+      itemsToBeRendered = [...itemMetadata];
+    }
+    if (hasValue(itemsToBeRendered)) {
+      this.references = observableFrom(itemsToBeRendered).pipe(
         concatMap((metadataValue: MetadataValue) => {
           if (hasValue(metadataValue.authority)) {
             return this.itemService.findById(metadataValue.authority).pipe(
-              getFirstSucceededRemoteDataPayload(),
-              map((item) => {
-                return {
-                  id: metadataValue.authority,
-                  icon: this.getIcon( item.firstMetadataValue('relationship.type')),
-                  value: metadataValue.value
-                };
+              getFirstCompletedRemoteData(),
+              map((itemRD: RemoteData<Item>) => {
+                if (itemRD.hasSucceeded) {
+                  return {
+                    id: metadataValue.authority,
+                    icon: this.getIcon( itemRD.payload.firstMetadataValue('dspace.entity.type')),
+                    value: metadataValue.value
+                  };
+                } else {
+                  return {
+                    id: null,
+                    icon: null,
+                    value: metadataValue.value
+                  };
+                }
               })
             );
           } else {

@@ -1,4 +1,10 @@
-import { DynamicFormArrayModel, DynamicFormArrayModelConfig, DynamicFormControlLayout, serializable } from '@ng-dynamic-forms/core';
+import {
+  DynamicFormArrayModel,
+  DynamicFormArrayModelConfig,
+  DynamicFormControlLayout,
+  DynamicFormControlRelation,
+  serializable
+} from '@ng-dynamic-forms/core';
 import { RelationshipOptions } from '../../models/relationship-options.model';
 import { isNotUndefined } from '../../../../empty.util';
 
@@ -10,7 +16,9 @@ export interface DynamicRowArrayModelConfig extends DynamicFormArrayModelConfig 
   metadataKey: string;
   metadataFields: string[];
   hasSelectableMetadata: boolean;
+  isDraggable: boolean;
   showButtons: boolean;
+  typeBindRelations?: DynamicFormControlRelation[];
 }
 
 export class DynamicRowArrayModel extends DynamicFormArrayModel {
@@ -21,7 +29,9 @@ export class DynamicRowArrayModel extends DynamicFormArrayModel {
   @serializable() metadataKey: string;
   @serializable() metadataFields: string[];
   @serializable() hasSelectableMetadata: boolean;
+  @serializable() isDraggable: boolean;
   @serializable() showButtons = true;
+  @serializable() typeBindRelations: DynamicFormControlRelation[];
   isRowArray = true;
 
   constructor(config: DynamicRowArrayModelConfig, layout?: DynamicFormControlLayout) {
@@ -40,6 +50,8 @@ export class DynamicRowArrayModel extends DynamicFormArrayModel {
     this.metadataKey = config.metadataKey;
     this.metadataFields = config.metadataFields;
     this.hasSelectableMetadata = config.hasSelectableMetadata;
+    this.isDraggable = config.isDraggable;
+    this.typeBindRelations = config.typeBindRelations ? config.typeBindRelations : [];
   }
 
 }

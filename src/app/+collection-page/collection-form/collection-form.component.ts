@@ -9,7 +9,6 @@ import {
 } from '@ng-dynamic-forms/core';
 import { Collection } from '../../core/shared/collection.model';
 import { ComColFormComponent } from '../../shared/comcol-forms/comcol-form/comcol-form.component';
-import { Location } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { CommunityDataService } from '../../core/data/community-data.service';
@@ -72,8 +71,7 @@ export class CollectionFormComponent extends ComColFormComponent<Collection> imp
    */
   formModel: DynamicFormControlModel[];
 
-  public constructor(protected location: Location,
-                     protected formService: DynamicFormService,
+  public constructor(protected formService: DynamicFormService,
                      protected translate: TranslateService,
                      protected notificationsService: NotificationsService,
                      protected authService: AuthService,
@@ -82,7 +80,7 @@ export class CollectionFormComponent extends ComColFormComponent<Collection> imp
                      protected objectCache: ObjectCacheService,
                      protected entityTypeService: EntityTypeService,
                      protected submissionDefinitionService: SubmissionDefinitionsConfigService) {
-    super(location, formService, translate, notificationsService, authService, requestService, objectCache);
+    super(formService, translate, notificationsService, authService, requestService, objectCache);
   }
 
   ngOnInit() {
@@ -91,7 +89,7 @@ export class CollectionFormComponent extends ComColFormComponent<Collection> imp
     let currentDefinitionValue: MetadataValue[];
     let currentSharedWorkspaceValue: MetadataValue[];
     if (this.dso && this.dso.metadata) {
-      currentRelationshipValue = this.dso.metadata['relationship.type'];
+      currentRelationshipValue = this.dso.metadata['dspace.entity.type'];
       currentDefinitionValue = this.dso.metadata['cris.submission.definition'];
       currentSharedWorkspaceValue = this.dso.metadata['cris.workspace.shared'];
     }

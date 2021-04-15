@@ -10,25 +10,37 @@ import { StatisticsTableComponent } from './statistics-table/statistics-table.co
 import { ItemStatisticsPageComponent } from './item-statistics-page/item-statistics-page.component';
 import { CollectionStatisticsPageComponent } from './collection-statistics-page/collection-statistics-page.component';
 import { CommunityStatisticsPageComponent } from './community-statistics-page/community-statistics-page.component';
+import { ThemedCollectionStatisticsPageComponent } from './collection-statistics-page/themed-collection-statistics-page.component';
+import { ThemedCommunityStatisticsPageComponent } from './community-statistics-page/themed-community-statistics-page.component';
+import { ThemedItemStatisticsPageComponent } from './item-statistics-page/themed-item-statistics-page.component';
+import { ThemedSiteStatisticsPageComponent } from './site-statistics-page/themed-site-statistics-page.component';
+import { CrisStatisticsPageModule } from './cris-statistics-page/cris-statistics-page.module';
+import { StatisticsCategoriesService } from '../core/statistics/statistics-categories.service';
 
 const components = [
   StatisticsTableComponent,
   SiteStatisticsPageComponent,
   ItemStatisticsPageComponent,
   CollectionStatisticsPageComponent,
-  CommunityStatisticsPageComponent
+  CommunityStatisticsPageComponent,
+  ThemedCollectionStatisticsPageComponent,
+  ThemedCommunityStatisticsPageComponent,
+  ThemedItemStatisticsPageComponent,
+  ThemedSiteStatisticsPageComponent
 ];
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
+    CrisStatisticsPageModule,
     CoreModule.forRoot(),
     StatisticsModule.forRoot()
   ],
   declarations: components,
   providers: [
     UsageReportService,
+    StatisticsCategoriesService,
   ],
   exports: components
 })

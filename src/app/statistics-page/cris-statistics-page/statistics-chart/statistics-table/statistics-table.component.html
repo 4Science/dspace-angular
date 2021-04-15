@@ -1,0 +1,48 @@
+<div class="m-1">
+
+ <!--  <h3 class="m-1">
+    {{ 'statistics.table.title.' + report.reportType | translate }}
+  </h3> -->
+
+  <div class="export-buttons-container mb-2" *ngIf="hasData">
+    <button class="btn btn-secondary mr-2" [disabled]="isLoading || isSecondLoading" (click)="exportExcel()">
+      <span *ngIf="isLoading"><i class='fas fa-circle-notch fa-spin'></i> {{'loading.default' | translate}}</span>
+      <span *ngIf="!isLoading"><i class="fas fa-file-export fa-fw"></i> {{'statistics.export.excel' | translate}}</span>
+    </button>
+    <button class="btn btn-secondary mr-2" [disabled]="isLoading || isSecondLoading" (click)="exportCsv()">
+      <span *ngIf="isSecondLoading"><i class='fas fa-circle-notch fa-spin'></i> {{'loading.default' | translate}}</span>
+      <span *ngIf="!isSecondLoading"><i class="fas fa-file-export fa-fw"></i> {{'statistics.export.csv' | translate}}</span>
+    </button>
+  </div>
+
+  <table *ngIf="hasData else noData" #dataTable id="dataTable" class="table table-striped">
+
+    <tbody>
+
+    <tr>
+      <th scope="col"
+          *ngFor="let header of headers"
+          class="{{header}}-header">
+        {{ header }}
+      </th>
+    </tr>
+
+    <tr *ngFor="let point of report.points"
+        class="{{point.id}}-data">
+      <th scope="row">
+        {{ point.label }}
+      </th>
+      <td class="{{point.id}}-{{headers[1]}}-data">
+        {{ point.values[headers[1]] }}
+      </td>
+    </tr>
+
+    </tbody>
+
+  </table>
+
+  <ng-template #noData>
+    <ds-alert [type]="'alert-info'" [content]="'statistics.table.no-data'"></ds-alert>
+  </ng-template>
+
+</div>

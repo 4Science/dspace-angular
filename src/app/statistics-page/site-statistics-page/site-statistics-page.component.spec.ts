@@ -1,4 +1,4 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { SiteStatisticsPageComponent } from './site-statistics-page.component';
 import { StatisticsTableComponent } from '../statistics-table/statistics-table.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -7,7 +7,6 @@ import { UsageReportService } from '../../core/statistics/usage-report-data.serv
 import { of as observableOf } from 'rxjs';
 import { Site } from '../../core/shared/site.model';
 import { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
 import { UsageReport } from '../../core/statistics/models/usage-report.model';
 import { SharedModule } from '../../shared/shared.module';
 import { CommonModule } from '@angular/common';
@@ -95,13 +94,4 @@ describe('SiteStatisticsPageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should resolve to the correct site', () => {
-    expect(de.query(By.css('.header')).nativeElement.id)
-      .toEqual('site_id');
-  });
-
-  it('should show a statistics table for each usage report', () => {
-    expect(de.query(By.css('ds-statistics-table.site_id-TotalVisits-report')).nativeElement)
-      .toBeTruthy();
-  });
 });

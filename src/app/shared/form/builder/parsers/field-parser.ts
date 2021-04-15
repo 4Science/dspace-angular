@@ -13,9 +13,9 @@ import {
 import { DsDynamicInputModel, DsDynamicInputModelConfig } from '../ds-dynamic-form-ui/models/ds-dynamic-input.model';
 import { setLayout } from './parser.utils';
 import { ParserOptions } from './parser-options';
-import { ParserType } from './parser-type';
 import { RelationshipOptions } from '../models/relationship-options.model';
 import { VocabularyOptions } from '../../../../core/submission/vocabularies/models/vocabulary-options.model';
+import { ParserType } from './parser-type';
 import { isNgbDateStruct } from '../../../date.util';
 
 export const SUBMISSION_ID: InjectionToken<string> = new InjectionToken<string>('submissionId');
@@ -52,6 +52,11 @@ export abstract class FieldParser {
       if (Array.isArray(this.configData.selectableMetadata) && this.configData.selectableMetadata.length === 1) {
         metadataKey = this.configData.selectableMetadata[0].metadata;
       }
+
+      let isDraggable = true;
+      if (this.configData.input.type === ParserType.Onebox && this.configData?.selectableMetadata?.length > 1) {
+        isDraggable = false;
+      }
       const config = {
         id: uniqueId() + '_array',
         label: this.configData.label,
@@ -63,6 +68,8 @@ export abstract class FieldParser {
         metadataKey,
         metadataFields: this.getAllFieldIds(),
         hasSelectableMetadata: isNotEmpty(this.configData.selectableMetadata),
+        isDraggable,
+        typeBindRelations: isNotEmpty(this.configData.typeBind) ? this.getTypeBindRelations(this.configData.typeBind) : null,
         groupFactory: () => {
           let model;
           if ((arrayCounter === 0)) {
@@ -72,19 +79,13 @@ export abstract class FieldParser {
             const fieldArrayOfValueLength = this.getInitValueCount(arrayCounter - 1);
             let fieldValue = null;
             if (fieldArrayOfValueLength > 0) {
-              if (fieldArrayCounter === 0) {
-                fieldValue = '';
-              } else {
-                fieldValue = this.getInitFieldValue(arrayCounter - 1, fieldArrayCounter - 1);
-              }
-              fieldArrayCounter++;
-              if (fieldArrayCounter === fieldArrayOfValueLength + 1) {
+              fieldValue = this.getInitFieldValue(arrayCounter - 1, fieldArrayCounter++);
+              if (fieldArrayCounter === fieldArrayOfValueLength) {
                 fieldArrayCounter = 0;
                 arrayCounter++;
               }
             }
             model = this.modelFactory(fieldValue, false);
-            model.id = `${model.id}_${fieldArrayCounter}`;
           }
           setLayout(model, 'element', 'host', 'col');
           if (model.hasLanguages || isNotEmpty(model.relationship)) {
@@ -217,10 +218,9 @@ export abstract class FieldParser {
   }
 
   protected getInitArrayIndex() {
-    let fieldCount = 0;
     const fieldIds: any = this.getAllFieldIds();
     if (isNotEmpty(this.initFormValues) && isNotNull(fieldIds) && fieldIds.length === 1 && this.initFormValues.hasOwnProperty(fieldIds)) {
-      fieldCount = this.initFormValues[fieldIds].filter((value) => hasValue(value) && hasValue(value.value)).length;
+      return this.initFormValues[fieldIds].length;
     } else if (isNotEmpty(this.initFormValues) && isNotNull(fieldIds) && fieldIds.length > 1) {
       let counter = 0;
       fieldIds.forEach((id) => {
@@ -228,9 +228,10 @@ export abstract class FieldParser {
           counter = counter + this.initFormValues[id].length;
         }
       });
-      fieldCount = counter;
+      return (counter === 0) ? 1 : counter;
+    } else {
+      return 1;
     }
-    return (fieldCount === 0) ? 1 : fieldCount + 1;
   }
 
   protected getFieldId(): string {
@@ -298,21 +299,25 @@ export abstract class FieldParser {
     }
 
     if (isNotEmpty(this.configData.typeBind)) {
-      const bindValues = [];
-      this.configData.typeBind.forEach((value) => {
-        bindValues.push({
-          id: 'dc_type',
-          value: value
-        });
-      });
-      (controlModel as DsDynamicInputModel).typeBindRelations = [{
-        match: MATCH_VISIBLE,
-        operator: OR_OPERATOR,
-        when: bindValues
-      }];
+      (controlModel as DsDynamicInputModel).typeBindRelations = this.getTypeBindRelations(this.configData.typeBind);
     }
 
     return controlModel;
+  }
+
+  private getTypeBindRelations(configuredTypeBindValues: string[]): any[] {
+    const bindValues = [];
+    configuredTypeBindValues.forEach((value) => {
+      bindValues.push({
+        id: 'dc_type',
+        value: value
+      });
+    });
+    return [{
+      match: MATCH_VISIBLE,
+      operator: OR_OPERATOR,
+      when: bindValues
+    }];
   }
 
   protected hasRegex() {

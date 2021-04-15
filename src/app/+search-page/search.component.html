@@ -34,11 +34,14 @@
 <ng-template #sidebarContent>
     <ds-search-sidebar id="search-sidebar" *ngIf="!(isXsOrSm$ | async)"
                        [resultCount]="(resultsRD$ | async)?.payload?.totalElements"
+                       [searchOptions]="(searchOptions$ | async)"
+                       [sortOptions]="(sortOptions$ | async)"
                        [inPlaceSearch]="inPlaceSearch"></ds-search-sidebar>
     <ds-search-sidebar id="search-sidebar-sm" *ngIf="(isXsOrSm$ | async)"
                        [resultCount]="(resultsRD$ | async)?.payload.totalElements"
-                       (toggleSidebar)="closeSidebar()"
-    >
+                       [searchOptions]="(searchOptions$ | async)"
+                       [sortOptions]="(sortOptions$ | async)"
+                       (toggleSidebar)="closeSidebar()">
     </ds-search-sidebar>
 </ng-template>
 
@@ -48,7 +51,8 @@
                     [scope]="(searchOptions$ | async)?.scope"
                     [currentUrl]="searchLink"
                     [scopes]="(scopeListRD$ | async)"
-                    [inPlaceSearch]="inPlaceSearch">
+                    [inPlaceSearch]="inPlaceSearch"
+                    [searchPlaceholder]="'search.search-form.placeholder' | translate">
     </ds-search-form>
     <div class="row mb-3 mb-md-1">
         <div class="labels col-sm-9 offset-sm-3">
