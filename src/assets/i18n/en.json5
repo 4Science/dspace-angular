@@ -1715,6 +1715,10 @@
 
   "form.other-information.data-oairecerif_editor_affiliation": "Affiliation",
 
+  "form.other-information.data-person_identifier_orcid": "ORCID iD",
+
+  "form.other-information.institution-affiliation-name": "Affiliation(s)",
+
   "form.other-information.not-available": "Not available",
 
   "form.remove": "Remove",
@@ -4285,7 +4289,11 @@
 
   "submission.import-external.source.lcname": "Library of Congress Names",
 
+  "submission.import-external.source.scielo": "Scopus",
+
   "submission.import-external.source.scopus": "Scopus",
+
+  "submission.import-external.source.wos": "Web Of Science",
 
   "submission.import-external.source.openaire": "OpenAIRE by Author",
 
@@ -4596,6 +4604,10 @@
   "submission.sections.describe.relationship-lookup.selection-tab.title.epo": "Search Results",
 
   "submission.sections.describe.relationship-lookup.selection-tab.title.scopus": "Search Results",
+
+  "submission.sections.describe.relationship-lookup.selection-tab.title.scielo": "Search Results",
+
+  "submission.sections.describe.relationship-lookup.selection-tab.title.wos": "Search Results",
 
   "submission.sections.describe.relationship-lookup.selection-tab.title": "Search Results",
 
