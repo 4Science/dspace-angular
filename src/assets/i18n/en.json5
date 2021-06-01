@@ -1216,6 +1216,10 @@
 
   "context-menu.actions.edit-item.btn.OWNER": "Edit",
 
+  "context-menu.actions.edit-item.btn.DIRECTOR": "Edit",
+
+  "context-menu.actions.edit-item.btn.INVESTIGATOR": "Edit",
+
   "context-menu.actions.request-correction.btn": "Request a correction",
 
   "context-menu.actions.request-correction.confirm.cancel": "Cancel",
@@ -1239,8 +1243,6 @@
   "context-menu.actions.edit-item-relationships.btn.fundings": "Manage Fundints",
 
   "context-menu.actions.edit-item-relationships.btn.researchoutputs": "Manage Research Outputs",
-
-  "context-menu.actions.edit-item-relationships.btn.projects": "Manage Projects",
 
   "context-menu.actions.edit-item-relationships.btn.organizations": "Manage SubOrganizations",
 
@@ -1368,7 +1370,6 @@
 
   "curation.form.handle.hint": "Hint: Enter [your-handle-prefix]/0 to run a task across entire site (not all tasks may support this capability)",
 
-  "dataset.listelement.badge": "Dataset",
 
 
   "dso.name.untitled": "Untitled",
@@ -1403,6 +1404,8 @@
   "dso-selector.edit.community.head": "Edit community",
 
   "dso-selector.edit.item.head": "Edit item",
+
+  "dso-selector.error.title": "An error occurred searching for a {{ type }}",
 
   "dso-selector.export-metadata.dspaceobject.head": "Export metadata from",
 
@@ -1476,6 +1479,8 @@
 
 
   "explore.browse-section.title" : "Browse",
+
+  "explore.counters-section.rprofiles" : "People",
 
   "explore.facet-section.title" : "Discover",
 
@@ -1627,7 +1632,7 @@
 
 
   "footer.built-with":"Built with",
-  
+
   "footer.copyright": "copyright © 2002-{{ year }}",
 
   "footer.extension-by": "- Extension maintained and optimized by",
@@ -1638,7 +1643,7 @@
 
   "footer.link.dspace-cris": "DSpace-CRIS software",
 
-  "footer.link.duraspace": "DuraSpace",
+  "footer.link.lyrasis": "LYRASIS",
 
   "footer.link.cookies": "Cookie settings",
 
@@ -1646,7 +1651,7 @@
 
   "footer.link.end-user-agreement":"End User Agreement",
 
-  
+
 
   "forgot-email.form.header": "Forgot Password",
 
@@ -1938,7 +1943,7 @@
 
   "item.edit.breadcrumbs": "Edit Item",
 
-  "item.edit.tabs.disabled.tooltip": "You don't have permission to access this tab",
+  "item.edit.tabs.disabled.tooltip": "You're not authorized to access this tab",
 
 
   "item.edit.tabs.mapper.head": "Collection Mapper",
@@ -2183,6 +2188,8 @@
 
   "item.edit.tabs.status.buttons.reinstate.label": "Reinstate item into the repository",
 
+  "item.edit.tabs.status.buttons.unauthorized": "You're not authorized to perform this action",
+
   "item.edit.tabs.status.buttons.withdraw.button": "Withdraw...",
 
   "item.edit.tabs.status.buttons.withdraw.label": "Withdraw item from the repository",
@@ -2251,8 +2258,6 @@
   "item.listelement.badge": "Item",
 
   "item.page.description": "Description",
-
-  "item.page.edit": "Edit this item",
 
   "item.page.journal-issn": "Journal ISSN",
 
@@ -2358,6 +2363,14 @@
   "item.page.filesection.license.bundle" : "License bundle",
 
   "item.preview.dc.description.tableOfContents" : "Table of Contents",
+
+  "item.preview.dc.identifier.arxiv": "arXiv ID",
+
+  "item.preview.dc.identifier.patentno": "Patent Number",
+
+  "item.preview.dc.subject.ipc": "Subject IPC",
+
+  "item.preview.dcterms.dateSubmitted": "Registration Date",
 
   "item.preview.dc.identifier.doi" : "DOI",
 
@@ -2824,6 +2837,11 @@
   "menu.section.edit_user_agreement":"Edit User Agreement",
 
   "menu.section.workflow": "Administer Workflow",
+
+
+  "metric-badges.scopusCitation": "Scopus© Citations",
+
+  "metric-badges.wosCitation": "WOS© Citations",
 
 
   "mydspace.breadcrumbs": "MyDSpace",
@@ -3508,6 +3526,10 @@
 
   "patent.listelement.badge": "Patent",
 
+  "product.listelement.badge": "Product",
+
+
+
   "profile.breadcrumbs": "Update Profile",
 
   "profile.card.identify": "Identify",
@@ -3564,65 +3586,7 @@
 
   "profile.title": "Update Profile",
 
-
-
-  "profile.breadcrumbs": "Update Profile",
-
-  "profile.card.identify": "Identify",
-
-  "profile.card.security": "Security",
-
   "profile.card.researcher": "Researcher Profile",
-
-  "profile.form.submit": "Save",
-
-  "profile.groups.head": "Authorization groups you belong to",
-
-  "profile.head": "Update Profile",
-
-  "profile.metadata.form.error.firstname.required": "First Name is required",
-
-  "profile.metadata.form.error.lastname.required": "Last Name is required",
-
-  "profile.metadata.form.label.email": "Email Address",
-
-  "profile.metadata.form.label.firstname": "First Name",
-
-  "profile.metadata.form.label.language": "Language",
-
-  "profile.metadata.form.label.lastname": "Last Name",
-
-  "profile.metadata.form.label.phone": "Contact Telephone",
-
-  "profile.metadata.form.notifications.success.content": "Your changes to the profile were saved.",
-
-  "profile.metadata.form.notifications.success.title": "Profile saved",
-
-  "profile.notifications.warning.no-changes.content": "No changes were made to the Profile.",
-
-  "profile.notifications.warning.no-changes.title": "No changes",
-
-  "profile.security.form.error.matching-passwords": "The passwords do not match.",
-
-  "profile.security.form.error.password-length": "The password should be at least 6 characters long.",
-
-  "profile.security.form.info": "Optionally, you can enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
-
-  "profile.security.form.label.password": "Password",
-
-  "profile.security.form.label.passwordrepeat": "Retype to confirm",
-
-  "profile.security.form.notifications.success.content": "Your changes to the password were saved.",
-
-  "profile.security.form.notifications.success.title": "Password saved",
-
-  "profile.security.form.notifications.error.title": "Error changing passwords",
-
-  "profile.security.form.notifications.error.not-long-enough": "The password has to be at least 6 characters long.",
-
-  "profile.security.form.notifications.error.not-same": "The provided passwords are not the same.",
-
-  "profile.title": "Update Profile",
 
 
 
@@ -3955,7 +3919,7 @@
   "search.filters.applied.f.has_content_in_original_bundle": "Has files",
 
   "search.filters.applied.f.investigators": "Investigator",
-  
+
   "search.filters.applied.f.itemtype": "Type",
 
   "search.filters.applied.f.namedresourcetype": "Status",
@@ -4195,7 +4159,6 @@
   "search.results.empty": "Your search returned no results.",
 
 
-
   "search.sidebar.close": "Back to results",
 
   "search.sidebar.filters.title": "Filters",
@@ -4228,9 +4191,9 @@
 
   "sorting.dc.title.DESC": "Title Descending",
 
-  "sorting.score.ASC": "Relevance Ascending",
+  "sorting.score.ASC": "Least Relevant",
 
-  "sorting.score.DESC": "Relevance Descending",
+  "sorting.score.DESC": "Most Relevant",
 
   "sorting.dc.date.issued.ASC": "Date Issued Ascending",
 
@@ -4327,9 +4290,7 @@
 
   "submission.import-external.title": "Import metadata from an external source",
 
-  "submission.import-external.title.Dataset": "Import dataset from an external source",
-
-  "submission.import-external.title.Equipment": "Import equipment from an external source",
+    "submission.import-external.title.Equipment": "Import equipment from an external source",
 
   "submission.import-external.title.Event": "Import event from an external source",
 
@@ -4342,6 +4303,8 @@
   "submission.import-external.title.Patent": "Import patent from an external source",
 
   "submission.import-external.title.Person": "Import person from an external source",
+
+  "submission.import-external.title.Product": "Import product from an external source",
 
   "submission.import-external.title.Project": "Import project from an external source",
 
@@ -4399,8 +4362,6 @@
 
   "submission.import-external.source.epo": "European Patent Office (EPO)",
 
-  "submission.import-external.preview.title.Dataset": "Dataset Preview",
-
   "submission.import-external.preview.title.Equipment": "Equipment Preview",
 
   "submission.import-external.preview.title.Event": "Event Preview",
@@ -4414,6 +4375,8 @@
   "submission.import-external.preview.title.Patent": "Patent Preview",
 
   "submission.import-external.preview.title.Person": "Person Preview",
+
+  "submission.import-external.preview.title.Product": "Product Preview",
 
   "submission.import-external.preview.title.Project": "Project Preview",
 
@@ -4482,7 +4445,7 @@
 
   "submission.sections.describe.relationship-lookup.external-source.import-button-title.Person": "Import remote person",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-button-title.Dataset": "Import remote dataset",
+  "submission.sections.describe.relationship-lookup.external-source.import-button-title.Product": "Import remote product",
 
   "submission.sections.describe.relationship-lookup.external-source.import-button-title.Equipment": "Import remote equipment",
 
@@ -4955,7 +4918,7 @@
 
 
 
-  "vocabulary.import-external.preview.title.Dataset": "Dataset Preview",
+  "vocabulary.import-external.preview.title.Product": "Product Preview",
 
   "vocabulary.import-external.preview.title.Equipment": "Equipment Preview",
 
