@@ -10,9 +10,9 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { hasValue, isNotEmpty } from '../empty.util';
-import { ControlValueAccessor } from '@angular/forms';
+import {BehaviorSubject} from 'rxjs';
+import {hasValue, isNotEmpty} from '../empty.util';
+import {ControlValueAccessor} from '@angular/forms';
 
 @Component({
   selector: 'ds-input-suggestions',
@@ -54,6 +54,11 @@ export class InputSuggestionsComponent implements ControlValueAccessor, OnChange
   @Input() valid = true;
 
   /**
+   * Label for the input field. Used for screen readers.
+   */
+  @Input() label? = '';
+
+  /**
    * Output for when the form is submitted
    */
   @Output() submitSuggestion = new EventEmitter();
@@ -62,6 +67,10 @@ export class InputSuggestionsComponent implements ControlValueAccessor, OnChange
    * Output for when a suggestion is clicked
    */
   @Output() clickSuggestion = new EventEmitter();
+  /**
+   * Output for when a suggestion is selected
+   */
+  @Output() selectSuggestionMetadata = new EventEmitter();
 
   /**
    * Output for when something is typed in the input field
@@ -240,5 +249,6 @@ export class InputSuggestionsComponent implements ControlValueAccessor, OnChange
     this._value = val;
     this.propagateChange(this._value);
   }
+
   /* END - Method's needed to add ngModel to a component */
 }

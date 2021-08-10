@@ -35,6 +35,7 @@ import { environment } from '../../../../environments/environment';
 import { ConfigObject } from '../../../core/config/models/config.model';
 import { RemoteData } from '../../../core/data/remote-data';
 import { SubmissionVisibility } from '../../utils/visibility.util';
+import { MetadataSecurityConfiguration } from '../../../core/submission/models/metadata-security-configuration';
 
 /**
  * This component represents a section that contains a Form.
@@ -105,15 +106,15 @@ export class SubmissionSectionformComponent extends SectionModelComponent implem
    * The [FormFieldPreviousValueObject] object
    * @type {FormFieldPreviousValueObject}
    */
-  protected previousValue: FormFieldPreviousValueObject = new FormFieldPreviousValueObject();
+  previousValue: FormFieldPreviousValueObject = new FormFieldPreviousValueObject();
 
   /**
    * The list of Subscription
    * @type {Array}
    */
   protected subs: Subscription[] = [];
-
   protected workspaceItem: WorkspaceItem;
+  protected metadataSecurityConfiguration: MetadataSecurityConfiguration;
   /**
    * The FormComponent reference
    */
@@ -135,6 +136,7 @@ export class SubmissionSectionformComponent extends SectionModelComponent implem
    * @param {ObjectCacheService} objectCache
    * @param {RequestService} requestService
    * @param {string} injectedCollectionId
+   * @param {string} entityType
    * @param {SectionDataObject} injectedSectionData
    * @param {string} injectedSubmissionId
    */
@@ -151,6 +153,7 @@ export class SubmissionSectionformComponent extends SectionModelComponent implem
               protected objectCache: ObjectCacheService,
               protected requestService: RequestService,
               @Inject('collectionIdProvider') public injectedCollectionId: string,
+              @Inject('entityType') public entityType: string,
               @Inject('sectionDataProvider') public injectedSectionData: SectionDataObject,
               @Inject('submissionIdProvider') public injectedSubmissionId: string) {
     super(injectedCollectionId, injectedSectionData, injectedSubmissionId);
@@ -171,21 +174,23 @@ export class SubmissionSectionformComponent extends SectionModelComponent implem
           this.sectionService.getSectionData(this.submissionId, this.sectionData.id, this.sectionData.sectionType),
           this.submissionObjectService.findById(this.submissionId, true, false, followLink('item')).pipe(
             getFirstSucceededRemoteData(),
-            getRemoteDataPayload())
+            getRemoteDataPayload()),
+          this.submissionService.getSubmissionSecurityConfiguration(this.submissionId).pipe(take(1))
         ])),
       take(1))
-      .subscribe(([sectionData, workspaceItem]: [WorkspaceitemSectionFormObject, WorkspaceItem]) => {
-        if (isUndefined(this.formModel)) {
-          // this.sectionData.errorsToShow = [];
-          this.workspaceItem = workspaceItem;
-          // Is the first loading so init form
-          this.initForm(sectionData);
-          this.sectionData.data = sectionData;
-          this.subscriptions();
-          this.isLoading = false;
-          this.cdr.detectChanges();
-        }
-      });
+      .subscribe(([sectionData, workspaceItem, metadataSecurity]: [WorkspaceitemSectionFormObject, WorkspaceItem, MetadataSecurityConfiguration]) => {
+          if (isUndefined(this.formModel)) {
+            this.metadataSecurityConfiguration = metadataSecurity;
+            // this.sectionData.errorsToShow = [];
+            this.workspaceItem = workspaceItem;
+            // Is the first loading so init form
+            this.initForm(sectionData);
+            this.sectionData.data = sectionData;
+            this.subscriptions();
+            this.isLoading = false;
+            this.cdr.detectChanges();
+          }
+        });
   }
 
   /**
@@ -239,7 +244,7 @@ export class SubmissionSectionformComponent extends SectionModelComponent implem
       .forEach((key) => {
         diffObj[key].forEach((value) => {
           // the findIndex extra check excludes values already present in the form but in different positions
-          if (value.hasOwnProperty('value') && findIndex(this.formData[key], { value: value.value }) < 0) {
+          if (value.hasOwnProperty('value') && findIndex(this.formData[key], {value: value.value}) < 0) {
             diffResult.push(value);
           }
         });
@@ -261,11 +266,13 @@ export class SubmissionSectionformComponent extends SectionModelComponent implem
         this.collectionId,
         sectionData,
         this.submissionService.getSubmissionScope(),
-        SubmissionVisibility.isReadOnly(this.sectionData.sectionVisibility, this.submissionService.getSubmissionScope())
+        SubmissionVisibility.isReadOnly(this.sectionData.sectionVisibility, this.submissionService.getSubmissionScope()),
+        null,
+        false,
+        this.metadataSecurityConfiguration
       );
       const sectionMetadata = this.sectionService.computeSectionConfiguredMetadata(this.formConfig);
       this.sectionService.updateSectionData(this.submissionId, this.sectionData.id, sectionData, this.sectionData.errorsToShow, this.sectionData.serverValidationErrors, sectionMetadata);
-
       // Add created model to formBulderService
       this.formBuilderService.addFormModel(this.sectionData.id, this.formModel);
     } catch (e) {
@@ -288,8 +295,7 @@ export class SubmissionSectionformComponent extends SectionModelComponent implem
    *    the section errors retrieved from the server
    */
   updateForm(sectionData: WorkspaceitemSectionFormObject, errors: SubmissionSectionError[]): void {
-
-    if (isNotEmpty(sectionData) && !isEqual(sectionData, this.sectionData.data)) {
+     if (isNotEmpty(sectionData) && !isEqual(sectionData, this.sectionData.data)) {
       this.sectionData.data = sectionData;
       if (this.hasMetadataEnrichment(sectionData)) {
         this.isUpdating = true;
@@ -328,6 +334,7 @@ export class SubmissionSectionformComponent extends SectionModelComponent implem
    * Initialize all subscriptions
    */
   subscriptions(): void {
+
     this.subs.push(
       /**
        * Subscribe to form's data
@@ -362,7 +369,7 @@ export class SubmissionSectionformComponent extends SectionModelComponent implem
    *    the [[DynamicFormControlEvent]] emitted
    */
   onChange(event: DynamicFormControlEvent): void {
-    this.formOperationsService.dispatchOperationsFromEvent(
+      this.formOperationsService.dispatchOperationsFromEvent(
       this.pathCombiner,
       event,
       this.previousValue,
@@ -377,7 +384,7 @@ export class SubmissionSectionformComponent extends SectionModelComponent implem
 
   private hasRelatedCustomError(medatata): boolean {
     const index = findIndex(this.sectionData.errorsToShow, {path: this.pathCombiner.getPath(medatata).path});
-    if (index  !== -1) {
+    if (index !== -1) {
       const error = this.sectionData.errorsToShow[index];
       const validator = error.message.replace('error.validation.', '');
       return !environment.form.validatorMap.hasOwnProperty(validator);
@@ -466,7 +473,7 @@ export class SubmissionSectionformComponent extends SectionModelComponent implem
   /**
    * Handle the customEvent (ex. drag-drop move event).
    * The customEvent is stored inside event.$event
-   * @param $event
+   * @param event
    */
   onCustomEvent(event: DynamicFormControlEvent) {
     this.formOperationsService.dispatchOperationsFromEvent(
@@ -481,4 +488,5 @@ export class SubmissionSectionformComponent extends SectionModelComponent implem
     // Remove this model from formBulderService
     this.formBuilderService.removeFormModel(this.sectionData.id);
   }
+
 }

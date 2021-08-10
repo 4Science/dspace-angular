@@ -1,5 +1,5 @@
 import * as uuidv4 from 'uuid/v4';
-import { autoserialize, Serialize, Deserialize } from 'cerialize';
+import { autoserialize, Deserialize, Serialize } from 'cerialize';
 import { hasValue } from '../../shared/empty.util';
 /* tslint:disable:max-classes-per-file */
 
@@ -13,6 +13,7 @@ export interface MetadataValueInterface {
 
   /** The string value. */
   value: string;
+
 }
 
 /** A map of metadata keys to an ordered list of MetadataValue objects. */
@@ -52,6 +53,12 @@ export class MetadataValue implements MetadataValueInterface {
   /** The authority confidence value */
   @autoserialize
   confidence: number;
+
+
+  /** The security level value */
+  @autoserialize
+  securityLevel: number;
+
 
   /**
    * Returns true if this Metadatum's authority key starts with 'virtual::'
@@ -115,6 +122,13 @@ export class MetadatumViewModel {
 
   /** The authority confidence value */
   confidence: number;
+
+
+  /** The security level value */
+  securityLevel: number;
+
+  /** The security level value of configuration */
+  securityConfigurationLevelLimit?: number[];
 }
 
 /** Serializer used for MetadataMaps.

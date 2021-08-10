@@ -12,6 +12,7 @@ export class Chips {
   displayField: string;
   displayObj: string;
   iconsConfig: MetadataIconConfig[];
+  triggerUpdate = false;
 
   private _items: ChipsItem[];
 
@@ -89,7 +90,6 @@ export class Chips {
   public update(id: string, item: any): void {
     const chipsItemTarget = this.getChipById(id);
     const icons = this.getChipsIcons(item);
-
     chipsItemTarget.updateItem(item);
     chipsItemTarget.updateIcons(icons);
     chipsItemTarget.unsetEditMode();

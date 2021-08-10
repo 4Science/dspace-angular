@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 
 import { of as observableOf } from 'rxjs';
@@ -24,6 +24,9 @@ import { DynamicRowArrayModel, DynamicRowArrayModelConfig } from '../ds-dynamic-
 import { setLayout } from '../../../parsers/parser.utils';
 import { FormFieldMetadataValueObject } from '../../../models/form-field-metadata-value.model';
 import { PLACEHOLDER_PARENT_METADATA } from '../../ds-dynamic-form-constants';
+import { MetadataSecurityConfiguration } from '../../../../../../core/submission/models/metadata-security-configuration';
+import { take } from 'rxjs/operators';
+import { SubmissionService } from '../../../../../../submission/submission.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -47,17 +50,23 @@ export class DsDynamicRelationInlineGroupComponent extends DynamicFormControlCom
   public formModel: DynamicFormControlModel[];
 
   @ViewChild('formRef', {static: false}) private formRef: FormComponent;
+  protected metadataSecurityConfiguration: MetadataSecurityConfiguration;
 
   constructor(private formBuilderService: FormBuilderService,
               private formService: FormService,
               protected layoutService: DynamicFormLayoutService,
+              protected submissionService: SubmissionService,
               protected validationService: DynamicFormValidationService
   ) {
     super(layoutService, validationService);
   }
 
   ngOnInit() {
-    const config = { rows: this.model.formConfiguration } as SubmissionFormsModel;
+    this.submissionService.getSubmissionSecurityConfiguration(this.model.submissionId).pipe(
+      take(1)).subscribe(security => {
+      this.metadataSecurityConfiguration = security;
+    });
+    const config = {rows: this.model.formConfiguration} as SubmissionFormsModel;
 
     this.formId = this.formService.getUniqueId(this.model.id);
     this.formModel = this.initArrayModel(config);
@@ -71,6 +80,8 @@ export class DsDynamicRelationInlineGroupComponent extends DynamicFormControlCom
     const config = {
       id: this.model.id + '_array',
       initialCount: isNotEmpty(this.model.value) ? (this.model.value as any[]).length : 1,
+      isDraggable: true,
+      isInlineGroupArray: true,
       groupFactory: () => {
         let model;
         const fieldValue = isEmpty(this.model.value) || (arrayCounter === 0) ? {} : this.model.value[arrayCounter - 1];
@@ -102,8 +113,8 @@ export class DsDynamicRelationInlineGroupComponent extends DynamicFormControlCom
       this.model.submissionScope,
       this.model.readOnly,
       this.formBuilderService.getTypeBindModel(),
-      true);
-
+      true,
+      this.metadataSecurityConfiguration);
     return formModel[0];
   }
 
@@ -147,7 +158,23 @@ export class DsDynamicRelationInlineGroupComponent extends DynamicFormControlCom
   private getRowValue(formGroup: DynamicFormGroupModel) {
     const groupValue = Object.create({});
     formGroup.group.forEach((model: any) => {
-      groupValue[model.name] = (model.name !== this.model.mandatoryField && isEmpty(model.value)) ? PLACEHOLDER_PARENT_METADATA : model.value;
+      if (model.name !== this.model.mandatoryField) {
+        if (isEmpty(model.value)) {
+          groupValue[model.name] = PLACEHOLDER_PARENT_METADATA;
+        } else {
+          if (typeof model.value === 'string') {
+            groupValue[model.name] = new FormFieldMetadataValueObject(model.value, null, model.securityLevel);
+          } else {
+            groupValue[model.name] = model.value;
+          }
+        }
+      } else {
+        if (typeof model.value === 'string') {
+          groupValue[model.name] = new FormFieldMetadataValueObject(model.value, null, model.securityLevel);
+        } else {
+          groupValue[model.name] = model.value;
+        }
+      }
     });
     return groupValue;
   }
@@ -156,13 +183,17 @@ export class DsDynamicRelationInlineGroupComponent extends DynamicFormControlCom
     const normValue = Object.create({});
     if (isNotEmpty(valueObj)) {
       Object.keys(valueObj).forEach((metadata) => {
-        if (!(valueObj[metadata] as FormFieldMetadataValueObject).hasPlaceholder()) {
+        if (!this.hasPlaceholder(valueObj[metadata])) {
           normValue[metadata] = [valueObj[metadata]];
         }
       });
     }
 
     return normValue;
+  }
+
+  private hasPlaceholder(value: string|FormFieldMetadataValueObject): boolean {
+    return (value instanceof FormFieldMetadataValueObject) ? value.hasPlaceholder() : (isNotEmpty(value) && value === PLACEHOLDER_PARENT_METADATA);
   }
 
   private removeItemFromModelValue(removeIndex) {
@@ -196,7 +227,42 @@ export class DsDynamicRelationInlineGroupComponent extends DynamicFormControlCom
     this.change.emit();
   }
 
+  onCustomEvent(event) {
+    if (event.type === 'move') {
+      this.moveArrayItem(event);
+    } else if (event.type === 'copy') {
+      this.copyArrayItem(event);
+    }
+  }
+
   ngOnDestroy(): void {
     this.formBuilderService.removeFormModel(this.formId);
+  }
+
+  private moveArrayItem(event) {
+    const index = event.$event.index;
+    const previousIndex = event.$event.previousIndex;
+    let arrayOfValue: any = this.model.value;
+
+    if (arrayOfValue[index] === undefined || arrayOfValue[previousIndex] === undefined) {
+      return;
+    } else if ( arrayOfValue.length > 0 ) {
+      arrayOfValue = arrayOfValue.filter((el) => el !== undefined);
+    } else {
+      return;
+    }
+
+    const temp = this.model.value[index];
+    this.model.value[index] = this.model.value[previousIndex];
+    this.model.value[previousIndex] = temp;
+
+    this.change.emit();
+  }
+
+  private copyArrayItem(event) {
+    const index = event.model.parent.index;
+    const groupValue = this.getRowValue(event.model as DynamicFormGroupModel);
+    this.updateArrayModelValue(groupValue, index);
+    this.change.emit();
   }
 }

@@ -32,13 +32,29 @@ import { FormRowModel } from '../../../../../../core/config/models/config-submis
 import { DynamicRowArrayModel } from '../ds-dynamic-row-array-model';
 import { DynamicRowGroupModel } from '../ds-dynamic-row-group-model';
 import { PLACEHOLDER_PARENT_METADATA } from '../../ds-dynamic-form-constants';
+import {SubmissionService} from '../../../../../../submission/submission.service';
+import {SubmissionServiceStub} from '../../../../../testing/submission-service.stub';
+import {of as observableOf} from 'rxjs';
 
 export let FORM_GROUP_TEST_MODEL_CONFIG;
 
 export let FORM_GROUP_TEST_GROUP;
 
 const submissionId = '1234';
-
+const metadataSecurity = {
+  'uuid': null,
+  'metadataSecurityDefault': [
+    0,
+    1
+  ],
+  'metadataCustomSecurity': {},
+  'type': 'securitysetting',
+  '_links': {
+    'self': {
+      'href': 'http://localhost:8080/server/api/core/securitysettings'
+    }
+  }
+};
 function init() {
   FORM_GROUP_TEST_MODEL_CONFIG = {
     disabled: false,
@@ -108,11 +124,11 @@ describe('DsDynamicRelationInlineGroupComponent test suite', () => {
   let control2: FormControl;
   let model2: DsDynamicInputModel;
   let event: DynamicFormControlEvent;
+  let submissionServiceStub: SubmissionServiceStub;
 
   // async beforeEach
   beforeEach(waitForAsync(() => {
     init();
-
     /* TODO make sure these files use mocks instead of real services/components https://github.com/DSpace/dspace-angular/issues/281 */
     TestBed.configureTestingModule({
       imports: [
@@ -136,7 +152,8 @@ describe('DsDynamicRelationInlineGroupComponent test suite', () => {
         FormBuilderService,
         FormComponent,
         FormService,
-        { provide: Store, useClass: StoreMock }
+        { provide: Store, useClass: StoreMock },
+        { provide: SubmissionService, useClass: SubmissionServiceStub}
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     });
@@ -155,6 +172,8 @@ describe('DsDynamicRelationInlineGroupComponent test suite', () => {
 
       testFixture = createTestComponent(html, TestComponent) as ComponentFixture<TestComponent>;
       testComp = testFixture.componentInstance;
+      submissionServiceStub = TestBed.inject(SubmissionService as any);
+      submissionServiceStub.getSubmissionSecurityConfiguration.and.returnValue(observableOf(metadataSecurity));
     });
 
     afterEach(() => {
@@ -172,6 +191,8 @@ describe('DsDynamicRelationInlineGroupComponent test suite', () => {
     beforeEach(inject([FormBuilderService], (service: FormBuilderService) => {
 
       groupFixture = TestBed.createComponent(DsDynamicRelationInlineGroupComponent);
+      submissionServiceStub = TestBed.inject(SubmissionService as any);
+      submissionServiceStub.getSubmissionSecurityConfiguration.and.returnValue(observableOf(metadataSecurity));
       groupComp = groupFixture.componentInstance; // FormComponent test instance
       groupCompAsAny = groupComp;
       groupComp.formId = 'testForm';
@@ -241,6 +262,7 @@ describe('DsDynamicRelationInlineGroupComponent test suite', () => {
 
     describe('onChange', () => {
       beforeEach(() => {
+        submissionServiceStub.getSubmissionSecurityConfiguration.and.returnValue(observableOf(metadataSecurity));
         const formConfig = { rows: groupComp.model.formConfiguration } as SubmissionFormsModel;
         const formArrayModel: DynamicRowArrayModel[] = groupComp.initArrayModel(formConfig) as DynamicRowArrayModel[];
         const group = formArrayModel[0].groups[0];
@@ -588,6 +610,8 @@ describe('DsDynamicRelationInlineGroupComponent test suite', () => {
     beforeEach(() => {
 
       groupFixture = TestBed.createComponent(DsDynamicRelationInlineGroupComponent);
+      submissionServiceStub = TestBed.inject(SubmissionService as any);
+      submissionServiceStub.getSubmissionSecurityConfiguration.and.returnValue(observableOf(metadataSecurity));
       groupComp = groupFixture.componentInstance; // FormComponent test instance
       groupComp.formId = 'testForm';
       groupComp.group = FORM_GROUP_TEST_GROUP;

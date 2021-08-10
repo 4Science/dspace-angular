@@ -69,6 +69,9 @@ export class SectionFormOperationsService {
       case 'move':
         this.dispatchOperationsFromMoveEvent(pathCombiner, event, previousValue);
         break;
+      case 'changeSecurityLevel':
+        this.changeSecurityLevel(pathCombiner, event, previousValue);
+        break;
       default:
         break;
     }
@@ -134,7 +137,6 @@ export class SectionFormOperationsService {
    */
   public getQualdropValueMap(event: DynamicFormControlEvent): Map<string, any> {
     const metadataValueMap = new Map();
-
     const context = this.formBuilder.isQualdropGroup(event.model)
       ? (event.model.parent as DynamicFormArrayGroupModel).context
       : (event.model.parent.parent as DynamicFormArrayGroupModel).context;
@@ -196,7 +198,6 @@ export class SectionFormOperationsService {
 
     return path;
   }
-
   /**
    * Return the segmented path for the field interesting in the specified change operation
    *
@@ -228,7 +229,6 @@ export class SectionFormOperationsService {
   public getFieldValueFromChangeEvent(event: DynamicFormControlEvent): any {
     let fieldValue;
     const value = (event.model as any).value;
-
     if (this.formBuilder.isModelInCustomGroup(event.model)) {
       fieldValue = (event.model.parent as any).value;
     } else if (this.formBuilder.isRelationGroup(event.model)) {
@@ -238,24 +238,40 @@ export class SectionFormOperationsService {
       if ((event.model as DsDynamicInputModel).hasAuthority) {
         if (Array.isArray(value)) {
           value.forEach((authority, index) => {
-            authority = Object.assign(new VocabularyEntry(), authority, { language });
+            authority = Object.assign(new VocabularyEntry(), authority, {language});
             value[index] = authority;
           });
           fieldValue = value;
         } else {
-          fieldValue = Object.assign(new VocabularyEntry(), value, { language });
+          fieldValue = Object.assign(new VocabularyEntry(), value, {language});
         }
       } else {
         // Language without Authority (input, textArea)
-        fieldValue = new FormFieldMetadataValueObject(value, language);
+        if ((event.model as any).hasSecurityLevel) {
+          const securityLevel = (event.model as any).securityLevel;
+          fieldValue = new FormFieldMetadataValueObject(value, language, securityLevel);
+        } else {
+          fieldValue = new FormFieldMetadataValueObject(value, language);
+        }
+
       }
     } else if (isNgbDateStruct(value)) {
-      fieldValue = new FormFieldMetadataValueObject(dateToString(value));
+      if ((event.model as any).hasSecurityLevel) {
+        const securityLevel = (event.model as any).metadataValue.securityLevel;
+        fieldValue = new FormFieldMetadataValueObject(value, undefined, securityLevel);
+      } else {
+        fieldValue = new FormFieldMetadataValueObject(dateToString(value));
+      }
     } else if (value instanceof FormFieldLanguageValueObject || value instanceof VocabularyEntry
       || value instanceof VocabularyEntryDetail || isObject(value)) {
       fieldValue = value;
     } else {
-      fieldValue = new FormFieldMetadataValueObject(value);
+      if ((event.model as any).hasSecurityLevel) {
+        const securityLevel = (event.model as any).securityLevel;
+        fieldValue = new FormFieldMetadataValueObject(value, undefined, securityLevel);
+      } else {
+        fieldValue = new FormFieldMetadataValueObject(value);
+      }
     }
 
     return fieldValue;
@@ -362,16 +378,19 @@ export class SectionFormOperationsService {
                                               event: DynamicFormControlEvent,
                                               previousValue: FormFieldPreviousValueObject,
                                               hasStoredValue: boolean): void {
-
-   if (event.context && event.context instanceof DynamicFormArrayGroupModel) {
+    if (event.context && event.context instanceof DynamicFormArrayGroupModel) {
       // Model is a DynamicRowArrayModel
       this.handleArrayGroupPatch(pathCombiner, event, (event as any).context.context, previousValue);
       return;
     }
-
     const path = this.getFieldPathFromEvent(event);
     const segmentedPath = this.getFieldPathSegmentedFromChangeEvent(event);
     const value = this.getFieldValueFromChangeEvent(event);
+    if ((event.model as any).securityLevel !== null && (event.model as any).securityLevel !== undefined) {
+      if (typeof value !== 'string') {
+        value.securityLevel = (event.model as any).securityLevel;
+      }
+    }
     // Detect which operation must be dispatched
     if (this.formBuilder.isQualdropGroup(event.model.parent as DynamicFormControlModel)
       || this.formBuilder.isQualdropGroup(event.model as DynamicFormControlModel)) {
@@ -385,7 +404,7 @@ export class SectionFormOperationsService {
       this.operationsBuilder.add(
         pathCombiner.getPath(segmentedPath),
         value, true);
-    } else if (previousValue.isPathEqual(this.formBuilder.getPath(event.model)) || (hasStoredValue && isNotEmpty(previousValue.value)) ) {
+    } else if (previousValue.isPathEqual(this.formBuilder.getPath(event.model)) || (hasStoredValue && isNotEmpty(previousValue.value))) {
       // Here model has a previous value changed or stored in the server
       if (hasValue(event.$event) && hasValue(event.$event.previousIndex)) {
         if (event.$event.previousIndex < 0) {
@@ -477,7 +496,6 @@ export class SectionFormOperationsService {
         }
       });
     }
-
     previousValue.delete();
   }
 
@@ -514,7 +532,6 @@ export class SectionFormOperationsService {
                                 event,
                                 model: DynamicRowArrayModel,
                                 previousValue: FormFieldPreviousValueObject) {
-
     const arrayValue = this.formBuilder.getValueFromModel([model]);
     const segmentedPath = this.getFieldPathSegmentedFromChangeEvent(event);
     if (isNotEmpty(arrayValue)) {
@@ -526,6 +543,36 @@ export class SectionFormOperationsService {
     } else if (previousValue.isPathEqual(this.formBuilder.getPath(event.model))) {
       this.operationsBuilder.remove(pathCombiner.getPath(segmentedPath));
     }
+  }
 
+  protected changeSecurityLevel(pathCombiner: JsonPatchOperationPathCombiner,
+                                event: DynamicFormControlEvent,
+                                previousValue: FormFieldPreviousValueObject): void {
+    if (event.context && event.context instanceof DynamicFormArrayGroupModel) {
+      // Model is a DynamicRowArrayModel
+      this.handleArrayGroupPatch(pathCombiner, event, (event as any).context.context, previousValue);
+      return;
+    }
+    // Detect which operation must be dispatched
+    if (this.formBuilder.isQualdropGroup(event.model.parent as DynamicFormControlModel)
+      || this.formBuilder.isQualdropGroup(event.model as DynamicFormControlModel)) {
+      // It's a qualdrup model
+      this.dispatchOperationsFromMap(this.getQualdropValueMap(event), pathCombiner, event, previousValue);
+    } else {
+      const path = this.getFieldPathFromEvent(event);
+      const value = this.getFieldValueFromChangeEvent(event);
+      if ((event.model as any).securityLevel != null && (event.model as any).securityLevel !== undefined) {
+        if (value && typeof value === 'string') {
+          this.operationsBuilder.replace(
+            pathCombiner.getPath(path),
+            value, false, (event.model as any).securityLevel);
+        } else {
+          this.operationsBuilder.replace(
+            pathCombiner.getPath(path),
+            value, false, (event.model as any).securityLevel);
+        }
+        previousValue.delete();
+      }
+    }
   }
 }

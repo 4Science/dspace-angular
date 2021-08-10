@@ -24,8 +24,7 @@ import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class FormService {
-
-  constructor(
+   constructor(
     private formBuilderService: FormBuilderService,
     private store: Store<AppState>) {
   }
@@ -108,11 +107,14 @@ export class FormService {
     });
   }
 
+  /**
+   * Check if form group has an invalid form control
+   * @param formGroup The form group to check
+   */
   public hasValidationErrors(formGroup: FormGroup | FormArray): boolean {
     let hasErrors = false;
     const fields: string[] = Object.keys(formGroup.controls);
     for (const field of fields) {
-    // Object.keys(formGroup.controls).forEach((field) => {
       const control = formGroup.get(field);
       if (control instanceof FormControl) {
         hasErrors = !control.valid && control.touched;
@@ -122,7 +124,6 @@ export class FormService {
       if (hasErrors) {
         break;
       }
-    // });
     }
     return hasErrors;
   }
@@ -222,6 +223,7 @@ export class FormService {
     const normalizedFieldId = fieldId.replace(/\./g, '_');
     this.store.dispatch(new FormAddError(formId, normalizedFieldId, fieldIndex, message));
   }
+
   public removeError(formId: string, fieldId: string, fieldIndex: number) {
     const normalizedFieldId = fieldId.replace(/\./g, '_');
     this.store.dispatch(new FormRemoveErrorAction(formId, normalizedFieldId, fieldIndex));

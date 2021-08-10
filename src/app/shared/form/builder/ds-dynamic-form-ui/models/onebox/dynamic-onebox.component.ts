@@ -22,10 +22,7 @@ import { hasValue, isEmpty, isNotEmpty, isNotNull } from '../../../../../empty.u
 import { FormFieldMetadataValueObject } from '../../../models/form-field-metadata-value.model';
 import { ConfidenceType } from '../../../../../../core/shared/confidence-type';
 import { getFirstSucceededRemoteDataPayload } from '../../../../../../core/shared/operators';
-import {
-  PaginatedList,
-  buildPaginatedList
-} from '../../../../../../core/data/paginated-list.model';
+import { buildPaginatedList, PaginatedList } from '../../../../../../core/data/paginated-list.model';
 import { VocabularyEntry } from '../../../../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { PageInfo } from '../../../../../../core/shared/page-info.model';
 import { DsDynamicVocabularyComponent } from '../dynamic-vocabulary.component';
@@ -60,6 +57,7 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
   hideSearchingWhenUnsubscribed$ = new Observable(() => () => this.changeSearchingStatus(false));
   click$ = new Subject<string>();
   currentValue: any;
+  previousValue: any;
   inputValue: any;
   preloadLevel: number;
 
@@ -96,7 +94,7 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
       tap(() => this.changeSearchingStatus(true)),
       switchMap((term) => {
         if (term === '' || term.length < this.model.minChars) {
-          return observableOf({ list: [] });
+          return observableOf({list: []});
         } else {
           return this.vocabularyService.getVocabularyEntriesByValue(
             term,
@@ -124,17 +122,14 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
    * Initialize the component, setting up the init form value
    */
   ngOnInit() {
-    if (this.model.value) {
+     if (this.model.value) {
       this.setCurrentValue(this.model.value, true);
     }
-
     this.initVocabulary();
-
     this.isHierarchicalVocabulary$ = this.vocabulary$.pipe(
       filter((vocabulary: Vocabulary) => isNotEmpty(vocabulary)),
       map((result: Vocabulary) => result.hierarchical)
     );
-
     this.subs.push(this.group.get(this.model.id).valueChanges.pipe(
       filter((value) => this.currentValue !== value))
       .subscribe((value) => {
@@ -163,8 +158,13 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
    * @param event
    */
   onInput(event) {
-    if (!this.model.vocabularyOptions.closed && isNotEmpty(event.target.value)) {
+        if (!this.model.vocabularyOptions.closed && isNotEmpty(event.target.value)) {
       this.inputValue = new FormFieldMetadataValueObject(event.target.value);
+      if (this.model.value) {
+        if ((this.model.value as any).securityLevel != null) {
+          this.inputValue.securityLevel = (this.model.value as any).securityLevel;
+        }
+      }
     }
   }
 
@@ -178,7 +178,7 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
         if (isNotNull(this.inputValue) && this.model.value !== this.inputValue) {
           this.dispatchUpdate(this.inputValue);
         }
-        this.inputValue = null;
+         this.inputValue = null;
       }
       this.blur.emit(event);
     } else {
@@ -195,6 +195,11 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
    * @param event The change event.
    */
   onChange(event: Event) {
+    if (!this.previousValue && !isEmpty(this.currentValue)) {
+      if (this.model.securityConfigLevel &&  this.model.securityConfigLevel.length > 0) {
+        this.model.securityLevel = this.model.securityConfigLevel[this.model.securityConfigLevel.length - 1];
+      }
+    }
     event.stopPropagation();
     if (isEmpty(this.currentValue)) {
       this.dispatchUpdate(null);
@@ -222,13 +227,17 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
       map((vocabulary: Vocabulary) => vocabulary.preloadLevel),
       take(1)
     ).subscribe((preloadLevel) => {
-      const modalRef: NgbModalRef = this.modalService.open(VocabularyTreeviewComponent, { size: 'lg', windowClass: 'treeview' });
+      const modalRef: NgbModalRef = this.modalService.open(VocabularyTreeviewComponent, {
+        size: 'lg',
+        windowClass: 'treeview'
+      });
       modalRef.componentInstance.vocabularyOptions = this.model.vocabularyOptions;
       modalRef.componentInstance.preloadLevel = preloadLevel;
       modalRef.componentInstance.selectedItem = this.currentValue ? this.currentValue : '';
       modalRef.result.then((result: FormFieldMetadataValueObject) => {
         if (result) {
           this.currentValue = result;
+          this.previousValue = result;
           this.dispatchUpdate(result);
         }
       }, () => {
@@ -257,6 +266,7 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
       this.getInitValueFromModel()
         .subscribe((formValue: FormFieldMetadataValueObject) => {
           this.currentValue = formValue;
+          this.previousValue = formValue;
           this.cdr.detectChanges();
         });
     } else {
@@ -267,6 +277,7 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
       }
 
       this.currentValue = result;
+      this.previousValue = result;
       this.cdr.detectChanges();
     }
 
@@ -276,7 +287,7 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
    * Get the other information value removing the authority section (after the last ::)
    * @param itemValue the initial item value
    */
-  getOtherInfoValue( itemValue: string): string {
+  getOtherInfoValue(itemValue: string): string {
     if (!itemValue || !itemValue.includes('::')) {
       return itemValue;
     }
@@ -288,5 +299,4 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
       .filter((sub) => hasValue(sub))
       .forEach((sub) => sub.unsubscribe());
   }
-
 }

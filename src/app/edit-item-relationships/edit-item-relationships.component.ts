@@ -22,7 +22,7 @@ import { Context } from '../core/shared/context.model';
 import { HostWindowService } from '../shared/host-window.service';
 
 import { BehaviorSubject, Observable, } from 'rxjs';
-import { getItemPageRoute } from '../+item-page/item-page-routing-paths';
+import { getItemPageRoute } from '../item-page/item-page-routing-paths';
 import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
@@ -163,7 +163,6 @@ export class EditItemRelationshipsComponent implements OnInit, OnDestroy {
         const itemType = item.firstMetadataValue('dspace.entity.type');
         this.relationshipConfig = 'RELATION.' + itemType + '.' + this.relationshipType;
         this.searchFilter = `scope=${item.id}`;
-        console.log(this.relationshipConfig);
         this.isActive = true;
       })
     );

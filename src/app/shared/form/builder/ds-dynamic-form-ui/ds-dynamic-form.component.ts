@@ -11,11 +11,11 @@ import {
 import { FormGroup } from '@angular/forms';
 import {
   DynamicFormComponent,
+  DynamicFormComponentService,
   DynamicFormControlContainerComponent,
   DynamicFormControlEvent,
   DynamicFormControlModel,
   DynamicFormLayout,
-  DynamicFormComponentService,
   DynamicTemplateDirective,
 } from '@ng-dynamic-forms/core';
 import { DsDynamicFormControlContainerComponent } from './ds-dynamic-form-control-container.component';
@@ -30,11 +30,12 @@ export class DsDynamicFormComponent extends DynamicFormComponent {
   @Input() formGroup: FormGroup;
   @Input() formModel: DynamicFormControlModel[];
   @Input() formLayout: DynamicFormLayout;
-
+  @Input() entityType: string;
   /* tslint:disable:no-output-rename */
   @Output('dfBlur') blur: EventEmitter<DynamicFormControlEvent> = new EventEmitter<DynamicFormControlEvent>();
   @Output('dfChange') change: EventEmitter<DynamicFormControlEvent> = new EventEmitter<DynamicFormControlEvent>();
   @Output('dfFocus') focus: EventEmitter<DynamicFormControlEvent> = new EventEmitter<DynamicFormControlEvent>();
+
   /* tslint:enable:no-output-rename */
 
   @Output() ngbEvent: EventEmitter<DynamicFormControlEvent> = new EventEmitter<DynamicFormControlEvent>();

@@ -10,8 +10,8 @@ import { NavigationExtras, Router } from '@angular/router';
 import { SearchConfigurationServiceStub } from '../../testing/search-configuration-service.stub';
 import { RouterStub } from '../../testing/router.stub';
 import { SearchService } from '../../../core/shared/search/search.service';
-import { MYDSPACE_ROUTE, SEARCH_CONFIG_SERVICE } from '../../../+my-dspace-page/my-dspace-page.component';
-import { MyDSpaceConfigurationValueType } from '../../../+my-dspace-page/my-dspace-configuration-value-type';
+import { MYDSPACE_ROUTE, SEARCH_CONFIG_SERVICE } from '../../../my-dspace-page/my-dspace-page.component';
+import { MyDSpaceConfigurationValueType } from '../../../my-dspace-page/my-dspace-configuration-value-type';
 import { TranslateLoaderMock } from '../../mocks/translate-loader.mock';
 
 describe('SearchSwitchConfigurationComponent', () => {
@@ -97,7 +97,10 @@ describe('SearchSwitchConfigurationComponent', () => {
     spyOn((comp as any), 'getSearchLinkParts').and.returnValue([MYDSPACE_ROUTE]);
     comp.selectedOption = MyDSpaceConfigurationValueType.Workflow;
     const navigationExtras: NavigationExtras = {
-      queryParams: { configuration: MyDSpaceConfigurationValueType.Workflow },
+      queryParams: {
+        configuration: MyDSpaceConfigurationValueType.Workflow,
+        scope: 'test-id'
+      },
     };
 
     fixture.detectChanges();

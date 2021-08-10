@@ -4,9 +4,9 @@ import { NavigationExtras, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { hasValue } from '../../empty.util';
-import { SEARCH_CONFIG_SERVICE } from '../../../+my-dspace-page/my-dspace-page.component';
+import { SEARCH_CONFIG_SERVICE } from '../../../my-dspace-page/my-dspace-page.component';
 import { SearchConfigurationService } from '../../../core/shared/search/search-configuration.service';
-import { MyDSpaceConfigurationValueType } from '../../../+my-dspace-page/my-dspace-configuration-value-type';
+import { MyDSpaceConfigurationValueType } from '../../../my-dspace-page/my-dspace-configuration-value-type';
 import { SearchConfigurationOption } from './search-configuration-option.model';
 import { SearchService } from '../../../core/shared/search/search.service';
 import { currentPath } from '../../utils/route.utils';
@@ -31,6 +31,11 @@ export class SearchSwitchConfigurationComponent implements OnDestroy, OnInit {
   @Input() configurationList: SearchConfigurationOption[] = [];
 
   /**
+   * The current scope
+   */
+  public currentScope: string;
+
+  /**
    * The selected option
    */
   public selectedOption: string;
@@ -49,6 +54,8 @@ export class SearchSwitchConfigurationComponent implements OnDestroy, OnInit {
    * Init current configuration
    */
   ngOnInit() {
+    this.searchConfigService.getCurrentScope('default')
+      .subscribe((currentScope) => this.currentScope = currentScope);
     this.searchConfigService.getCurrentConfiguration('default')
       .subscribe((currentConfiguration) => this.selectedOption = currentConfiguration);
   }
@@ -58,7 +65,10 @@ export class SearchSwitchConfigurationComponent implements OnDestroy, OnInit {
    */
   onSelect() {
     const navigationExtras: NavigationExtras = {
-      queryParams: {configuration: this.selectedOption},
+      queryParams: {
+        configuration: this.selectedOption,
+        scope: this.currentScope
+      },
     };
 
     this.router.navigate(this.getSearchLinkParts(), navigationExtras);

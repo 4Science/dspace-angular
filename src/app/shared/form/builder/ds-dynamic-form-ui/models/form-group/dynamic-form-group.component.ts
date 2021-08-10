@@ -33,6 +33,7 @@ export class DsDynamicFormGroupComponent extends DynamicFormControlComponent {
   @Output('dfChange') change: EventEmitter<DynamicFormControlEvent> = new EventEmitter<DynamicFormControlEvent>();
   @Output('dfFocus') focus: EventEmitter<DynamicFormControlEvent> = new EventEmitter<DynamicFormControlEvent>();
   @Output('ngbEvent') customEvent: EventEmitter<DynamicFormControlCustomEvent> = new EventEmitter();
+
   /* tslint:enable:no-output-rename */
 
   constructor(protected layoutService: DynamicFormLayoutService,
@@ -40,5 +41,4 @@ export class DsDynamicFormGroupComponent extends DynamicFormControlComponent {
 
     super(layoutService, validationService);
   }
-
 }
