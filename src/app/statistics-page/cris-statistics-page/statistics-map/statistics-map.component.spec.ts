@@ -43,8 +43,8 @@ describe('StatisticsMapComponent', () => {
     chartType: 'GeoChart',
     dataTable: [
       ['country','views'],
-      ['United States',2],
-      ['China',1]
+      [{ v:'US', f: 'United States' }, 2],
+      [{ v:'CN', f: 'China' }, 1]
     ],
     options: { 'title': 'TopCountries' },
   };

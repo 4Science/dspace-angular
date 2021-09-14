@@ -276,6 +276,10 @@ import { TextSectionComponent } from './explore/section-component/text-section/t
 import { CountersSectionComponent } from './explore/section-component/counters-section/counters-section.component';
 import { MultiColumnTopSectionComponent } from './explore/section-component/multi-column-top-section/multi-column-top-section.component';
 import { EditMetadataSecurityComponent } from '../item-page/edit-item-page/edit-metadata-security/edit-metadata-security.component';
+import { SubscriptionViewComponent } from './subscriptions/components/subscription-view/subscription-view.component';
+import { SubscriptionModalComponent } from './subscriptions/components/subscription-modal/subscription-modal.component';
+import { SubscriptionEditModalComponent } from './subscriptions/components/subscription-edit-modal/subscription-edit-modal.component';
+import { MetadataLinkViewComponent } from './metadata-link-view/metadata-link-view.component';
 
 /**
  * Declaration needed to make sure all decorator functions are called in time
@@ -544,7 +548,11 @@ const COMPONENTS = [
   TextSectionComponent,
   CountersSectionComponent,
   MultiColumnTopSectionComponent,
-  EditMetadataSecurityComponent
+  EditMetadataSecurityComponent,
+  SubscriptionViewComponent,
+  SubscriptionModalComponent,
+  SubscriptionEditModalComponent,
+  MetadataLinkViewComponent
 ];
 
 const ENTRY_COMPONENTS = [
