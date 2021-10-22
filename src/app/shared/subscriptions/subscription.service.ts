@@ -1,13 +1,12 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { createSelector, select, Store } from '@ngrx/store';
-import { Observable, of as observableOf } from 'rxjs';
-import { distinctUntilChanged, catchError, filter, map, mergeMap, startWith, switchMap, take, tap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { distinctUntilChanged, filter, map, switchMap, take } from 'rxjs/operators';
 
 
-import { NotificationsService } from '../../shared/notifications/notifications.service';
-import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
+import { NotificationsService } from '../notifications/notifications.service';
 import { RemoteDataBuildService } from '../../core/cache/builders/remote-data-build.service';
 import { RequestParam } from '../../core/cache/models/request-param.model';
 import { ObjectCacheService } from '../../core/cache/object-cache.service';
@@ -15,29 +14,18 @@ import { DataService } from '../../core/data/data.service';
 import { DSOChangeAnalyzer } from '../../core/data/dso-change-analyzer.service';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { RemoteData } from '../../core/data/remote-data';
-import { GetRequest, CreateRequest, PutRequest, DeleteRequest, FindListOptions, PostRequest, RestRequest } from '../../core/data/request.models';
+import { CreateRequest, FindListOptions, PutRequest, RestRequest } from '../../core/data/request.models';
 
 import { RequestService } from '../../core/data/request.service';
-import { HttpOptions } from '../../core/dspace-rest/dspace-rest.service';
 import { HALEndpointService } from '../../core/shared/hal-endpoint.service';
 import { Subscription } from './models/subscription.model';
 import { dataService } from '../../core/cache/builders/build-decorators';
 import { SUBSCRIPTION } from './models/subscription.resource-type';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
-import { Community } from '../../core/shared/community.model';
-import { Collection } from '../../core/shared/collection.model';
 import { NoContent } from '../../core/shared/NoContent.model';
-import { hasValue, hasValueOperator, isNotEmpty, isNotEmptyOperator } from '../../shared/empty.util';
-import { URLCombiner } from '../../core/url-combiner/url-combiner';
+import { isNotEmpty, isNotEmptyOperator } from '../empty.util';
 
-import {
-  getAllSucceededRemoteData,
-  getFirstCompletedRemoteData,
-  getFirstSucceededRemoteData,
-  getFirstSucceededRemoteDataPayload,
-  getRemoteDataPayload,
-  sendRequest
-} from '../../core/shared/operators';
+import { getFirstCompletedRemoteData, getRemoteDataPayload, sendRequest } from '../../core/shared/operators';
 
 /**
  * Provides methods to retrieve subscription resources from the REST API related CRUD actions.
@@ -146,7 +134,7 @@ export class SubscriptionService extends DataService<Subscription> {
    * @param options                     options for the find all request
    */
   findAllSubscriptions(options?): Observable<PaginatedList<Subscription>> {
-     const optionsWithObject = Object.assign(new FindListOptions(), options, {
+    const optionsWithObject = Object.assign(new FindListOptions(), options, {
       searchParams: [new RequestParam('embed', 'dSpaceObject'),new RequestParam('embed', 'ePerson')]
     });
 
@@ -160,5 +148,30 @@ export class SubscriptionService extends DataService<Subscription> {
 
   }
 
+
+  /**
+   * Retrieves the list of subscription with {@link dSpaceObject} and {@link ePerson}
+   *
+   * @param options                     options for the find all request
+   */
+  findByEPerson(eperson,options?): Observable<PaginatedList<Subscription>> {
+     const optionsWithObject = Object.assign(new FindListOptions(), options, {
+      searchParams: [
+      new RequestParam('id', eperson),
+      new RequestParam('embed', 'dSpaceObject'),
+      new RequestParam('embed', 'ePerson')
+      ]
+    });
+
+    const endpoint = this.getSearchEndpoint('findByEPerson');
+
+    return this.halService.getEndpoint(this.linkPath).pipe(
+      filter((href: string) => isNotEmpty(href)),
+      distinctUntilChanged(),
+      switchMap((endpointUrl) => this.findAllByHref(endpoint, optionsWithObject, false, true)),
+      getFirstCompletedRemoteData(),
+      getRemoteDataPayload()
+    );
+  }
 
 }
