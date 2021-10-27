@@ -54,7 +54,23 @@
 
   "admin.edit-user-agreement.title": "Edit User Agreement",
 
+  "admin.edit-cms-metadata.title": "Edit CMS Metadata",
 
+  "admin.edit-cms-metadata.breadcrumbs": "Edit CMS Metadata",
+
+  "admin.edit-cms-metadata.edit-button": "Edit",
+
+  "admin.edit-cms-metadata.select-metadata": "Select metadata to edit",
+
+  "admin.edit-cms-metadata.save-button": "Save",
+
+  "admin.edit-cms-metadata.success": "Metadata successfully updated",
+
+  "admin.edit-cms-metadata.error": "An error occurred while updating the metadata",
+
+  "menu.section.cms_metadata_edit": "Edit CMS Metadata",
+
+  "menu.section.cms.edit.metadata.head": "Edit Metadata",
 
   "admin.registries.bitstream-formats.breadcrumbs": "Format registry",
 
@@ -1254,7 +1270,7 @@
 
   "context-menu.actions.dso-page-edit.ITEM.btn": "Administer",
 
-  "context-menu.actions.edit-item-relationships.btn.fundings": "Manage Fundints",
+  "context-menu.actions.edit-item-relationships.btn.fundings": "Manage Fundings",
 
   "context-menu.actions.edit-item-relationships.btn.researchoutputs": "Manage Research Outputs",
 
@@ -2915,6 +2931,7 @@
 
   "statistics": "Statistics",
 
+  "manage.relations": "Manage Relations",
 
   "menu.section.toggle.access_control": "Toggle Access Control section",
 
@@ -2936,7 +2953,7 @@
 
   "menu.section.toggle.statistics_task": "Toggle Statistics Task section",
 
-  "menu.section.edit_user_agreement":"Edit User Agreement",
+  "menu.section.edit_user_agreement": "Edit User Agreement",
 
   "menu.section.workflow": "Administer Workflow",
 
@@ -3047,6 +3064,8 @@
   "mydspace.upload.upload-successful": "New workspace item created. Click {{here}} for edit it.",
 
   "mydspace.view-btn": "View",
+
+  "mydspace.import": "Import",
 
   "mydspace.notification.suggestion": "We found <b>{{count}} publications</b><br> in the {{source}} that seems to be related to your profile.<br> Please <a href='/suggestions/{{suggestionId}}'>review the suggestions</a>",
 
