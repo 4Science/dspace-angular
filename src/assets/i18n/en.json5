@@ -1549,6 +1549,13 @@
 
   "cookies.consent.purpose.statistical": "Statistical",
 
+  "cris-layout.toggle.open": "Open section",
+
+  "cris-layout.toggle.close": "Close section",
+
+  "cris-layout.toggle.aria.open": "Expand {{sectionHeader}} section",
+
+  "cris-layout.toggle.aria.close": "Collapse {{sectionHeader}} section",
 
   "curation-task.task.checklinks.label":  "Check Links in Metadata",
 
@@ -1667,7 +1674,6 @@
 
   "confirmation-modal.delete-eperson.confirm": "Delete",
 
-
   "confirmation-modal.delete-subscription.header": "Delete Subscription for \"{{ dsoName }}\"",
 
   "confirmation-modal.delete-subscription.info": "Are you sure you want to delete subscription for \"{{ dsoName }}\"",
@@ -1675,6 +1681,15 @@
   "confirmation-modal.delete-subscription.cancel": "Cancel",
 
   "confirmation-modal.delete-subscription.confirm": "Delete",
+
+  "confirmation-modal.pending-changes.header": "Unsaved changes",
+
+  "confirmation-modal.pending-changes.info": "There are unsaved changes. Do you want to leave the page?",
+
+  "confirmation-modal.pending-changes.cancel": "Cancel",
+
+  "confirmation-modal.pending-changes.confirm": "Leave",
+
 
   "dataset.listelement.badge" : "Dataset",
 
@@ -2631,6 +2646,7 @@
 
   "item.page.link.simple": "Simple item page",
 
+  "item.page.metric.acquisition-date": "Acquisition Date",
   "item.page.metric.deltaPeriod1": "Last Week",
 
   "item.page.metric.deltaPeriod2": "Last Month",
@@ -4172,6 +4188,9 @@
 
   "register-page.create-profile.submit.success.head": "Registration completed",
 
+  "register-page.registration.existing.user.login-msg": "If you already have an account you can yo can ",
+
+  "register-page.registration.existing.user.login-link": "Log in here",
 
   "register-page.registration.header": "New user registration",
 
@@ -4418,6 +4437,8 @@
 
   "search.filters.applied.f.itemtype": "Type",
 
+  "search.filters.applied.f.language": "Language",
+
   "search.filters.applied.f.namedresourcetype": "Status",
 
   "search.filters.applied.f.personorgunits": "Organisation",
@@ -4579,6 +4600,11 @@
 
   "search.filters.filter.knowsLanguage.label": "Search known language",
 
+  "search.filters.filter.language.head": "Language",
+
+  "search.filters.filter.language.label": "Language",
+
+  "search.filters.filter.language.placeholder": "Language",
 
   "search.filters.filter.projectOrgUnits.head" : "Organizations",
 
@@ -4946,6 +4972,7 @@
   "submission.import-external.preview.error.import.title": "Submission error",
 
   "submission.import-external.preview.error.import.body": "An error occurs during the external source entry import process.",
+
   "submission.sections.detect-duplicate.clear-decision": "Undo",
 
   "submission.sections.detect-duplicate.clear-decision-help": "Click for clear the decision about this pontential duplicate",
@@ -5279,6 +5306,8 @@
   "submission.sections.general.collection": "Collection",
 
   "submission.sections.general.deposit_error_notice": "There was an issue when submitting the item, please try again later.",
+
+  "submission.sections.general.invalid_state_error": "Cannot save current changes, mandatory fields are missing. Please resolve problems and save again later.",
 
   "submission.sections.general.deposit_success_notice": "Submission deposited successfully.",
 
@@ -5707,5 +5736,11 @@
 
   "lucky.search.retry.search": "You can try to search for it in the system with a more general query.",
 
-  "lucky.search.multiple.records": "may refer to multiple records"
+  "lucky.search.multiple.records": "may refer to multiple records",
+
+  "invitation.group.msg": "You have been invited to join the following groups",
+
+  "invitation.accept-btn": "Accept",
+
+  "invitation.ignore-btn": "Ignore",
 }
