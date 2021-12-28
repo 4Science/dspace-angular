@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-
 import { NouisliderModule } from 'ng2-nouislider';
 import { NgbDatepickerModule, NgbModule, NgbTimepickerModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { MissingTranslationHandler, TranslateModule } from '@ngx-translate/core';
@@ -285,6 +284,7 @@ import { EditMetadataSecurityComponent } from '../item-page/edit-item-page/edit-
 import { MetadataLinkViewComponent } from './metadata-link-view/metadata-link-view.component';
 import { LogInOidcComponent } from './log-in/methods/oidc/log-in-oidc.component';
 import { MetricPlumxComponent } from './metric/metric-plumx/metric-plumx.component';
+import { GooglemapComponent } from './googlemap/googlemap.component';
 
 /**
  * Declaration needed to make sure all decorator functions are called in time
@@ -295,7 +295,6 @@ export const MODELS = [
   FacetValues,
   SearchResult
 ];
-
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -559,7 +558,8 @@ const COMPONENTS = [
   CountersSectionComponent,
   MultiColumnTopSectionComponent,
   EditMetadataSecurityComponent,
-  MetadataLinkViewComponent
+  MetadataLinkViewComponent,
+  GooglemapComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -642,6 +642,7 @@ const ENTRY_COMPONENTS = [
   SearchChartBarToRightComponent,
   SearchChartPieComponent,
   SearchChartLineComponent,
+  GooglemapComponent
 ];
 
 const SHARED_SEARCH_PAGE_COMPONENTS = [
@@ -709,6 +710,7 @@ const DIRECTIVES = [
     ItemVersionsDeleteModalComponent,
     ItemExportAlertComponent,
     MetricPlumxComponent,
+    GooglemapComponent
   ],
   providers: [
     ...PROVIDERS
