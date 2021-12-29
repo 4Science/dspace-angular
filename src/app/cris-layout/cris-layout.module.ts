@@ -43,6 +43,7 @@ import { ValuepairComponent } from './cris-layout-matrix/cris-layout-box-contain
 import { TagComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/tag/tag.component';
 import { MetadataContainerComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/row/metadata-container/metadata-container.component';
 import { MetadataRenderComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/row/metadata-container/metadata-render/metadata-render.component';
+import { CrisrefMoreComponent } from './cris-layout-matrix/cris-layout-box-container/crisref-more/crisref-more.component';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -113,7 +114,8 @@ const ENTRY_COMPONENTS = [
     RowComponent,
     CrisLayoutTabsComponent,
     MetadataContainerComponent,
-    MetadataRenderComponent
+    MetadataRenderComponent,
+    CrisrefMoreComponent
   ],
   imports: [
     CommonModule,
