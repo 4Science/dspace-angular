@@ -1,28 +1,50 @@
 <div>
     <div>
-        <div *ngFor="let index of firstLimitedDataToBeRenderedMap.keys();" class="d-flex metadata-group-entry">
-            <span *ngFor="let mdg of firstLimitedDataToBeRenderedMap.get(index); let first = first"
-                class="metadata-group-entry-value" [class.ml-3]="!first">
-                <ds-metadata-render class="w-100" [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
-                </ds-metadata-render>
-            </span>
+        <div *ngIf=" renderingType === 'inline' ">
+            <div *ngFor="let index of firstLimitedDataToBeRenderedMap.keys();" class="d-flex metadata-group-entry">
+                <span *ngFor="let mdg of firstLimitedDataToBeRenderedMap.get(index); let first = first"
+                    class="metadata-group-entry-value" [class.ml-3]="!first">
+                    <ds-metadata-render class="w-100" [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
+                    </ds-metadata-render>
+                </span>
+            </div>
+        </div>
+        <div *ngIf=" renderingType === 'table' ">
+            <tr *ngFor="let index of firstLimitedDataToBeRenderedMap.keys();" class="d-flex metadata-group-entry">
+                <td *ngFor="let mdg of firstLimitedDataToBeRenderedMap.get(index); let first = first"
+                    class="metadata-group-entry-value" [class.ml-3]="!first">
+                    <ds-metadata-render class="w-100" [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
+                    </ds-metadata-render>
+                </td>
+            </tr>
         </div>
         <a (click)="fillFirstLimitedData()" href="javascript:void(0);"
-            *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size">
-            View fist {{limit}}
+            *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && firstLimit!== 0">
+            View fist {{firstLimit}}
         </a>
     </div>
     <div>
         <a (click)="fillLastLimitedData()" href="javascript:void(0);"
-            *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size">
-            View last {{limit}}
+            *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && lastLimit!== 0">
+            View last {{lastLimit}}
         </a>
-        <div *ngFor="let index of lastLimitedDataToBeRenderedMap.keys();" class="d-flex metadata-group-entry">
-            <span *ngFor="let mdg of lastLimitedDataToBeRenderedMap.get(index); let first = first"
-                class="metadata-group-entry-value" [class.ml-3]="!first">
-                <ds-metadata-render class="w-100" [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
-                </ds-metadata-render>
-            </span>
+        <div *ngIf=" renderingType === 'inline' ">
+            <div *ngFor="let index of lastLimitedDataToBeRenderedMap.keys();" class="d-flex metadata-group-entry">
+                <span *ngFor="let mdg of lastLimitedDataToBeRenderedMap.get(index); let first = first"
+                    class="metadata-group-entry-value" [class.ml-3]="!first">
+                    <ds-metadata-render class="w-100" [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
+                    </ds-metadata-render>
+                </span>
+            </div>
+        </div>
+        <div *ngIf=" renderingType === 'table' ">
+            <tr *ngFor="let index of lastLimitedDataToBeRenderedMap.keys();" class="d-flex metadata-group-entry">
+                <td *ngFor="let mdg of lastLimitedDataToBeRenderedMap.get(index); let first = first"
+                    class="metadata-group-entry-value" [class.ml-3]="!first">
+                    <ds-metadata-render class="w-100" [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
+                    </ds-metadata-render>
+                </td>
+            </tr>
         </div>
     </div>
 </div>

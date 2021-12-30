@@ -8,14 +8,7 @@
           </span>
         </td>
       </tr>
-      <tr *ngFor="let index of componentsToBeRenderedMap.keys();">
-        <td *ngFor="let mdg of componentsToBeRenderedMap.get(index)">
-          <ds-metadata-render class="w-100"
-                              [item]="item"
-                              [field]="mdg.field"
-                              [metadataValue]="mdg.value"></ds-metadata-render>
-        </td>
-      </tr>
+      <ds-crisref-more [componentsToBeRenderedMap]="componentsToBeRenderedMap" [rendering]="fieldProvider.rendering" [renderingType]="'table'"></ds-crisref-more>
     </table>
   </div>
 </div>
