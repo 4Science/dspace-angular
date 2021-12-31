@@ -8,8 +8,31 @@
           </span>
         </td>
       </tr>
-      <ds-crisref-more [componentsToBeRenderedMap]="componentsToBeRenderedMap" [rendering]="fieldProvider.rendering" [renderingType]="'table'"></ds-crisref-more>
+      <tr *ngFor="let index of firstLimitedDataToBeRenderedMap.keys();">
+        <td *ngFor="let mdg of firstLimitedDataToBeRenderedMap.get(index)">
+          <ds-metadata-render class="w-100" [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
+          </ds-metadata-render>
+        </td>
+      </tr>
+
+      <div class="view-text text-center">
+        <a class="d-block" (click)="fillFirstLimitedData()" href="javascript:void(0);"
+          *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && firstLimit!== 0">
+          {{"crisref.metadata.view.first" | translate}} {{firstLimit}}
+        </a>
+
+        <a class="d-block" (click)="fillLastLimitedData()" href="javascript:void(0);"
+          *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && lastLimit!== 0">
+          {{"crisref.metadata.view.last" | translate}} {{lastLimit}}
+        </a>
+      </div>
+
+      <tr *ngFor="let index of lastLimitedDataToBeRenderedMap.keys();">
+        <td *ngFor="let mdg of lastLimitedDataToBeRenderedMap.get(index)">
+          <ds-metadata-render class="w-100" [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
+          </ds-metadata-render>
+        </td>
+      </tr>
     </table>
   </div>
 </div>
-

@@ -5753,4 +5753,9 @@
   "invitation.accept-btn": "Accept",
 
   "invitation.ignore-btn": "Ignore",
+
+  "crisref.metadata.view.first" : "View first",
+
+  "crisref.metadata.view.last" : "View last"
+
 }
