@@ -59,6 +59,7 @@ import { UUIDService } from './core/shared/uuid.service';
 import { CookieService } from './core/services/cookie.service';
 import { AbstractControl } from '@angular/forms';
 import { GoogleMapModule } from './shared/googlemap-module/googlemap.module';
+import { SocialComponent } from './social/social.component';
 
 export function getBase() {
   return environment.ui.nameSpace;
@@ -193,6 +194,7 @@ const DECLARATIONS = [
   ThemedForbiddenComponent,
   IdleModalComponent,
   ProcessNotificationComponent,
+  SocialComponent
 ];
 
 const EXPORTS = [
