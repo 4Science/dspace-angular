@@ -44,6 +44,7 @@ import { TagComponent } from './cris-layout-matrix/cris-layout-box-container/box
 import { MetadataContainerComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/row/metadata-container/metadata-container.component';
 import { MetadataRenderComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/row/metadata-container/metadata-render/metadata-render.component';
 import { MapComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/map/map.component';
+import { GoogleMapModule } from '../shared/googlemap-module/googlemap.module';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -93,6 +94,7 @@ const ENTRY_COMPONENTS = [
   imports: [
     CommonModule,
     SharedModule,
+    GoogleMapModule,
     SearchPageModule,
     MyDSpacePageModule,
     ContextMenuModule.withEntryComponents(),

@@ -293,7 +293,6 @@ import { ThemedFacetSectionComponent } from './explore/section-component/facet-s
 import { ThemedMultiColumnTopSectionComponent } from './explore/section-component/multi-column-top-section/themed-multi-column-top-section.component';
 import { ThemedSearchSectionComponent } from './explore/section-component/search-section/themed-search-section.component';
 import { ThemedTextSectionComponent } from './explore/section-component/text-section/themed-text-section.component';
-import { GooglemapComponent } from './googlemap/googlemap.component';
 
 /**
  * Declaration needed to make sure all decorator functions are called in time
@@ -577,7 +576,6 @@ const COMPONENTS = [
   ThemedMultiColumnTopSectionComponent,
   ThemedSearchSectionComponent,
   ThemedTextSectionComponent,
-  GooglemapComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -667,7 +665,6 @@ const ENTRY_COMPONENTS = [
   ThemedMultiColumnTopSectionComponent,
   ThemedSearchSectionComponent,
   ThemedTextSectionComponent,
-  GooglemapComponent
 ];
 
 const SHARED_SEARCH_PAGE_COMPONENTS = [
@@ -734,8 +731,7 @@ const DIRECTIVES = [
     ItemVersionsSummaryModalComponent,
     ItemVersionsDeleteModalComponent,
     ItemExportAlertComponent,
-    MetricPlumxComponent,
-    GooglemapComponent
+    MetricPlumxComponent
   ],
   providers: [
     ...PROVIDERS
