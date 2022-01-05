@@ -1,7 +1,6 @@
 import {
   Component,
   Input,
-  OnInit,
   ViewChild,
   AfterViewInit,
 } from '@angular/core';
@@ -32,6 +31,9 @@ export class GooglemapComponent implements AfterViewInit {
    }
   }
 
+/**
+ * Set latitude and longitude when matadata has a address
+ */
   setLatAndLongFromAddress() {
    return new Promise((reslove,reject) => {
     new google.maps.Geocoder().geocode({ 'address': this.coordinates },  (results, status) => {
@@ -46,6 +48,9 @@ export class GooglemapComponent implements AfterViewInit {
     });
   }
 
+/**
+ * It initialize a google map to html page
+ */
   mapInitializer() {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       center: new google.maps.LatLng(

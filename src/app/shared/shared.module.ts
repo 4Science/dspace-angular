@@ -284,7 +284,7 @@ import { EditMetadataSecurityComponent } from '../item-page/edit-item-page/edit-
 import { MetadataLinkViewComponent } from './metadata-link-view/metadata-link-view.component';
 import { LogInOidcComponent } from './log-in/methods/oidc/log-in-oidc.component';
 import { MetricPlumxComponent } from './metric/metric-plumx/metric-plumx.component';
-import { GooglemapComponent } from './googlemap/googlemap.component';
+
 
 /**
  * Declaration needed to make sure all decorator functions are called in time
@@ -558,8 +558,7 @@ const COMPONENTS = [
   CountersSectionComponent,
   MultiColumnTopSectionComponent,
   EditMetadataSecurityComponent,
-  MetadataLinkViewComponent,
-  GooglemapComponent
+  MetadataLinkViewComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -641,8 +640,7 @@ const ENTRY_COMPONENTS = [
   SearchChartBarToLeftComponent,
   SearchChartBarToRightComponent,
   SearchChartPieComponent,
-  SearchChartLineComponent,
-  GooglemapComponent
+  SearchChartLineComponent
 ];
 
 const SHARED_SEARCH_PAGE_COMPONENTS = [
@@ -709,8 +707,7 @@ const DIRECTIVES = [
     ItemVersionsSummaryModalComponent,
     ItemVersionsDeleteModalComponent,
     ItemExportAlertComponent,
-    MetricPlumxComponent,
-    GooglemapComponent
+    MetricPlumxComponent
   ],
   providers: [
     ...PROVIDERS

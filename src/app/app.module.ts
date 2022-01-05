@@ -58,6 +58,7 @@ import { IdleModalComponent } from './shared/idle-modal/idle-modal.component';
 import { UUIDService } from './core/shared/uuid.service';
 import { CookieService } from './core/services/cookie.service';
 import { AbstractControl } from '@angular/forms';
+import { GoogleMapModule } from './shared/googlemap-module/googlemap.module';
 
 export function getBase() {
   return environment.ui.nameSpace;
@@ -81,6 +82,7 @@ const IMPORTS = [
   NavbarModule,
   HttpClientModule,
   AppRoutingModule,
+  GoogleMapModule,
   CoreModule.forRoot(),
   ScrollToModule.forRoot(),
   NgbModule,
