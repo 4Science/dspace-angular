@@ -117,9 +117,6 @@ export class MetadataRenderComponent implements OnInit {
       const values = rendering.split('.');
       rendering = values[0];
     }
-    if (this.field.metadata === 'organization.address.addressLocality') {
-      rendering = FieldRenderingType.MAP;
-    }
     return rendering;
   }
 
