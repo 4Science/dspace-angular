@@ -1,8 +1,10 @@
+import { DOCUMENT } from '@angular/common';
 import {
   Component,
   Input,
   ViewChild,
   AfterViewInit,
+  Inject,
 } from '@angular/core';
 
 import {} from 'googlemaps';
@@ -17,6 +19,10 @@ export class GooglemapComponent implements AfterViewInit {
   map: google.maps.Map;
   latitude: string;
   longitude: string;
+
+  constructor(@Inject(DOCUMENT) private _document: Document) {
+    this.initializeScript();
+  }
 
 
  async ngAfterViewInit(): Promise<void> {
@@ -69,5 +75,15 @@ export class GooglemapComponent implements AfterViewInit {
       ),
       map: this.map,
     });
+  }
+
+  /**
+   * it's inject a google map script dynamically into page
+   */
+  initializeScript(): any {
+    const script = this._document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDnzexA2pwD-7UFicRIctj4-vhkj48G_8A';
+    this._document.body.appendChild(script);
   }
 }
