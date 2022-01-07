@@ -58,7 +58,7 @@ import { IdleModalComponent } from './shared/idle-modal/idle-modal.component';
 import { UUIDService } from './core/shared/uuid.service';
 import { CookieService } from './core/services/cookie.service';
 import { AbstractControl } from '@angular/forms';
-import { GoogleMapModule } from './shared/googlemap-module/googlemap.module';
+import { GooglemapsModule } from './shared/googlemaps/googlemaps.module';
 import { SocialComponent } from './social/social.component';
 
 export function getBase() {
@@ -83,7 +83,7 @@ const IMPORTS = [
   NavbarModule,
   HttpClientModule,
   AppRoutingModule,
-  GoogleMapModule,
+  GooglemapsModule,
   CoreModule.forRoot(),
   ScrollToModule.forRoot(),
   NgbModule,
