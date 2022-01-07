@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { GooglemapComponent } from './googlemap/googlemap.component';
+import { GooglemapsComponent } from './googlemaps.component';
 
 const COMPONENTS = [
-  GooglemapComponent
+  GooglemapsComponent
 ];
 
 @NgModule({
@@ -13,4 +13,4 @@ const COMPONENTS = [
 /**
  * This module handles google map when it has a address or coordinates
  */
-export class GoogleMapModule {}
+export class GooglemapsModule {}
