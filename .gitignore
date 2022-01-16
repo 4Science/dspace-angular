@@ -9,6 +9,7 @@ npm-debug.log
 
 /src/environments/environment.ts
 /src/environments/environment.dev.ts
+/src/environments/environment.dev.ts_*
 /src/environments/environment.prod.ts
 
 /coverage
