@@ -410,7 +410,11 @@ export const environment: GlobalConfig = {
     metadataBox: {
       defaultMetadataLabelColStyle: 'col-3',
       defaultMetadataValueColStyle: 'col-9'
-    }
+    },
+    loadMore:{
+      first:5,
+      last:1
+  }
   },
   layout: {
     navbar: {

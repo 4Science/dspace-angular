@@ -8,27 +8,27 @@
           </span>
         </td>
       </tr>
-      <tr *ngFor="let index of firstLimitedDataToBeRenderedMap.keys();">
-        <td *ngFor="let mdg of firstLimitedDataToBeRenderedMap.get(index)">
+      <tr *ngFor="let index of loadMoreService.firstLimitedDataToBeRenderedMap.keys();">
+        <td *ngFor="let mdg of loadMoreService.firstLimitedDataToBeRenderedMap.get(index)">
           <ds-metadata-render class="w-100" [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
           </ds-metadata-render>
         </td>
       </tr>
 
       <div class="view-text text-center">
-        <a class="d-block" (click)="fillFirstLimitedData()" href="javascript:void(0);"
-          *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && firstLimit!== 0">
-          {{"crisref.metadata.view.first" | translate}} {{firstLimit}}
+        <a class="d-block" (click)="loadMoreService.fillAllData()" href="javascript:void(0);"
+          *ngIf="loadMoreService.componentsToBeRenderedMap.size != loadMoreService.lastLimitedDataToBeRenderedMap.size + loadMoreService.firstLimitedDataToBeRenderedMap.size && loadMoreService.firstLimit!== 0 && loadMoreService.isConfigured">
+          {{"more" | translate}}
         </a>
 
-        <a class="d-block" (click)="fillLastLimitedData()" href="javascript:void(0);"
-          *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && lastLimit!== 0">
-          {{"crisref.metadata.view.last" | translate}} {{lastLimit}}
+        <a class="d-block" (click)="loadMoreService.setLimits()" href="javascript:void(0);"
+          *ngIf="loadMoreService.componentsToBeRenderedMap.size == loadMoreService.lastLimitedDataToBeRenderedMap.size + loadMoreService.firstLimitedDataToBeRenderedMap.size && loadMoreService.lastLimit!== 0 && loadMoreService.isConfigured">
+          {{"collapse" | translate}}
         </a>
       </div>
 
-      <tr *ngFor="let index of lastLimitedDataToBeRenderedMap.keys();">
-        <td *ngFor="let mdg of lastLimitedDataToBeRenderedMap.get(index)">
+      <tr *ngFor="let index of loadMoreService.lastLimitedDataToBeRenderedMap.keys();">
+        <td *ngFor="let mdg of loadMoreService.lastLimitedDataToBeRenderedMap.get(index)">
           <ds-metadata-render class="w-100" [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
           </ds-metadata-render>
         </td>

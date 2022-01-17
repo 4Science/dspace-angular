@@ -28,12 +28,16 @@ export interface CrisItemPageConfig extends Config {
   default: CrisLayoutTypeConfig;
 }
 
-
+export interface CrisLoadMoreConfig extends Config {
+  first: number;
+  last: number;
+}
 export interface CrisLayoutConfig extends Config {
   urn: UrnConfig[];
   crisRef: CrisRefConfig[];
   itemPage: CrisItemPageConfig;
   metadataBox: CrisLayoutMetadataBoxConfig;
+  loadMore: CrisLoadMoreConfig;
 }
 
 export interface LayoutConfig extends Config {

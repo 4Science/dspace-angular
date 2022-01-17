@@ -5772,8 +5772,8 @@
 
   "invitation.ignore-btn": "Ignore",
 
-  "crisref.metadata.view.first" : "View first",
+  "more" : "...more",
 
-  "crisref.metadata.view.last" : "View last"
+  "collapse" : "collapse"
 
 }

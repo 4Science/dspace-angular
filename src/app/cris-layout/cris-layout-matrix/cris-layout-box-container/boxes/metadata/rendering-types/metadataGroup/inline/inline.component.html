@@ -1,31 +1,36 @@
-<div *ngIf="(initialized | async)" [ngClass]="field.valuesInline ? 'px-0 col d-flex flex-row flex-wrap' : 'px-0 col d-flex flex-column'">
+<div *ngIf="(initialized | async)"
+  [ngClass]="field.valuesInline ? 'px-0 col d-flex flex-row flex-wrap' : 'px-0 col d-flex flex-column'">
   <div>
     <div>
-      <div *ngFor="let index of firstLimitedDataToBeRenderedMap.keys();" class="d-flex metadata-group-entry">
-        <span *ngFor="let mdg of firstLimitedDataToBeRenderedMap.get(index); let first = first"
+      <div *ngFor="let index of loadMoreService.firstLimitedDataToBeRenderedMap.keys();"
+        class="d-flex metadata-group-entry">
+        <span *ngFor="let mdg of loadMoreService.firstLimitedDataToBeRenderedMap.get(index); let first = first"
           class="metadata-group-entry-value" [class.ml-3]="!first">
           <ds-metadata-render class="w-100" [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
           </ds-metadata-render>
         </span>
-        <span *ngIf='field.valuesInline && index!=firstLimitedDataToBeRenderedMap.size-1' class="px-3">&bull;</span >
+        <span *ngIf='field.valuesInline && index!=loadMoreService.firstLimitedDataToBeRenderedMap.size-1'
+          class="px-3">&bull;</span>
       </div>
-      <a (click)="fillFirstLimitedData()" href="javascript:void(0);"
-        *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && firstLimit!== 0">
-        {{"crisref.metadata.view.first"}} {{firstLimit}}
+      <a (click)="loadMoreService.fillAllData()" href="javascript:void(0);"
+        *ngIf="loadMoreService.componentsToBeRenderedMap.size != loadMoreService.lastLimitedDataToBeRenderedMap.size + loadMoreService.firstLimitedDataToBeRenderedMap.size && loadMoreService.firstLimit!== 0 && loadMoreService.isConfigured">
+        {{"more" | translate}}
       </a>
     </div>
     <div>
-      <a (click)="fillLastLimitedData()" href="javascript:void(0);"
-        *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && lastLimit!== 0">
-        {{"crisref.metadata.view.last"}} {{lastLimit}}
+      <a (click)="loadMoreService.setLimits()" href="javascript:void(0);"
+        *ngIf="loadMoreService.componentsToBeRenderedMap.size == loadMoreService.lastLimitedDataToBeRenderedMap.size + loadMoreService.firstLimitedDataToBeRenderedMap.size && loadMoreService.lastLimit!== 0 && loadMoreService.isConfigured">
+        {{"collapse" | translate}}
       </a>
-      <div *ngFor="let index of lastLimitedDataToBeRenderedMap.keys();" class="d-flex metadata-group-entry">
-        <span *ngFor="let mdg of lastLimitedDataToBeRenderedMap.get(index); let first = first"
+      <div *ngFor="let index of loadMoreService.lastLimitedDataToBeRenderedMap.keys();"
+        class="d-flex metadata-group-entry">
+        <span *ngFor="let mdg of loadMoreService.lastLimitedDataToBeRenderedMap.get(index); let first = first"
           class="metadata-group-entry-value" [class.ml-3]="!first">
           <ds-metadata-render class="w-100" [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
           </ds-metadata-render>
         </span>
-        <span *ngIf='field.valuesInline && index!=lastLimitedDataToBeRenderedMap.size-1' class="px-3">&bull;</span >
+        <span *ngIf='field.valuesInline && index!=loadMoreService.lastLimitedDataToBeRenderedMap.size-1'
+          class="px-3">&bull;</span>
       </div>
     </div>
   </div>

@@ -6,7 +6,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { isNotEmpty } from '../../../../../../../shared/empty.util';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
 import { BehaviorSubject } from 'rxjs';
-import { environment } from '../../../../../../../../environments/environment';
+import { LoadMoreService } from 'src/app/cris-layout/services/load-more.service';
+
 
 
 export interface NestedMetadataGroupEntry {
@@ -40,31 +41,12 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
    */
   initialized: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  /**
-   * This property is used to hold first limited list of metadata objects
-   */
-  firstLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]> = new Map<number, NestedMetadataGroupEntry[]>();
-
-  /**
-   * This property is used to hold last limited list of metadata objects
-   */
-  lastLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]> = new Map<number, NestedMetadataGroupEntry[]>();
-
-  /**
-   * This property is used to hold a number how many metadata objects should be loded form last
-   */
-  lastLimit: number;
-
-  /**
-   * This property is used to hold a number how many metadata object should be loded from first
-   */
-  firstLimit: number;
-
   constructor(
     @Inject('fieldProvider') public fieldProvider: LayoutField,
     @Inject('itemProvider') public itemProvider: Item,
     @Inject('renderingSubTypeProvider') public renderingSubTypeProvider: string,
-    protected translateService: TranslateService
+    protected translateService: TranslateService,
+    protected loadMoreService: LoadMoreService
   ) {
     super(fieldProvider, itemProvider, renderingSubTypeProvider, translateService);
   }
@@ -91,7 +73,8 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
     });
 
     this.initialized.next(true);
-    this.setLimits();
+    this.loadMoreService.setData(this.componentsToBeRenderedMap,this.fieldProvider.rendering);
+    this.loadMoreService.setLimits();
   }
 
   getMetadataValue(field: LayoutField, index: number): MetadataValue {
@@ -112,78 +95,6 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
       return header;
     }
   }
-
-  /**
-   * Set the limits of how many data loded from first and last
-   */
-
-  setLimits() {
-    if (this.fieldProvider.rendering.includes('more') || this.fieldProvider.rendering.includes('last')) {
-        if (this.fieldProvider.rendering.includes('more')) {
-          this.firstLimit = this.getLimit('more');
-          this.fillFirstLimitedData();
-        } else {
-          this.firstLimit = 0;
-        }
-
-        if (this.fieldProvider.rendering.includes('last')) {
-          this.lastLimit = this.getLimit('last');
-          this.fillLastLimitedData();
-        } else {
-          this.lastLimit = 0;
-        }
-      } else {
-        this.firstLimitedDataToBeRenderedMap = this.componentsToBeRenderedMap;
-      }
-   }
-
-   /**
-    * Get the limit of first and last loaded data from configuration or env
-    */
-   getLimit(type) {
-    const rendering: string[]=this.fieldProvider.rendering.split('.');
-    const index=rendering.findIndex((data) => data === type);
-    if (rendering.length > index + 1) {
-       return isNaN(Number(rendering[index + 1])) ?  this.getLimitFromEnv(type) : Number(rendering[index + 1]);
-    } else {
-      return  this.getLimitFromEnv(type);
-    }
-   }
-
-   getLimitFromEnv(type) {
-    if (type === 'more') {
-      return environment?.crisLayout?.loadMore?.first ? environment?.crisLayout?.loadMore?.first : 5;
-    } else {
-      return environment?.crisLayout?.loadMore?.last ? environment?.crisLayout?.loadMore?.last : 1;
-    }
-   }
-
-  /**
-   * Fill the first limited list of the metadata
-   */
-    fillFirstLimitedData() {
-      const lastFill = this.firstLimitedDataToBeRenderedMap.size;
-      this.firstLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
-      for (let i = 0; i < this.firstLimit + lastFill; i++) {
-        if (this.firstLimitedDataToBeRenderedMap.size < this.componentsToBeRenderedMap.size - this.lastLimitedDataToBeRenderedMap.size ) {
-             this.firstLimitedDataToBeRenderedMap.set(i,this.componentsToBeRenderedMap.get(i));
-        }
-     }
-    }
-
-/**
- * Fill the last limited list of thw metadeta
- */
-    fillLastLimitedData() {
-      const lastFill = this.lastLimitedDataToBeRenderedMap.size;
-      this.lastLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
-      for (let i = this.componentsToBeRenderedMap.size - lastFill - this.lastLimit; i < this.componentsToBeRenderedMap.size; i++) {
-            if (i < this.firstLimitedDataToBeRenderedMap.size) {
-              i = this.firstLimitedDataToBeRenderedMap.size ;
-            }
-            this.lastLimitedDataToBeRenderedMap.set(i,this.componentsToBeRenderedMap.get(i));
-     }
-    }
 
   ngOnDestroy(): void {
     this.componentsToBeRenderedMap = null;
