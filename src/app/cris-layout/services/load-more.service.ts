@@ -124,5 +124,6 @@ export class LoadMoreService {
     setData(componentsToBeRenderedMap, rendering) {
         this.componentsToBeRenderedMap = componentsToBeRenderedMap;
         this.rendering = rendering;
+        this.setLimits();
     }
 }

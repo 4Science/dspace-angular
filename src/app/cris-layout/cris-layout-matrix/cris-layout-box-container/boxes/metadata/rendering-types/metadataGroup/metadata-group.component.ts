@@ -74,7 +74,6 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
 
     this.initialized.next(true);
     this.loadMoreService.setData(this.componentsToBeRenderedMap,this.fieldProvider.rendering);
-    this.loadMoreService.setLimits();
   }
 
   getMetadataValue(field: LayoutField, index: number): MetadataValue {
