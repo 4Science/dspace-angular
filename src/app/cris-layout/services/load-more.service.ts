@@ -45,28 +45,24 @@ export class LoadMoreService {
     this.lastLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
     this.firstLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
     this.isConfigured = true;
-    this.firstLimit = this.getLimit('more');
-    this.fillFirstLimitedData();
-    this.lastLimit = this.getLimit('last');
-    this.fillLastLimitedData();
-    // if (this.rendering.includes('more') || this.rendering.includes('last')) {
-    //     if (this.rendering.includes('more')) {
-    //       this.firstLimit = this.getLimit('more');
-    //       this.fillFirstLimitedData();
-    //     } else {
-    //       this.firstLimit = 0;
-    //     }
+    if (this.rendering.includes('more') || this.rendering.includes('last')) {
+        if (this.rendering.includes('more')) {
+          this.firstLimit = this.getLimit('more');
+          this.fillFirstLimitedData();
+        } else {
+          this.firstLimit = 0;
+        }
 
-    //     if (this.rendering.includes('last')) {
-    //       this.lastLimit = this.getLimit('last');
-    //       this.fillLastLimitedData();
-    //     } else {
-    //       this.lastLimit = 0;
-    //     }
-    //   } else {
-    //     this.isConfigured = false;
-    //     this.firstLimitedDataToBeRenderedMap = this.componentsToBeRenderedMap;
-    //   }
+        if (this.rendering.includes('last')) {
+          this.lastLimit = this.getLimit('last');
+          this.fillLastLimitedData();
+        } else {
+          this.lastLimit = 0;
+        }
+      } else {
+        this.isConfigured = false;
+        this.firstLimitedDataToBeRenderedMap = this.componentsToBeRenderedMap;
+      }
    }
 
    /**
