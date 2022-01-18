@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject, Input, OnInit, Renderer2, ViewChild, } from '@angular/core';
 import { ConfigurationDataService } from 'src/app/core/data/configuration-data.service';
 import { getFirstCompletedRemoteData } from 'src/app/core/shared/operators';
-
+import { googlemap } from 'googlemaps';
 @Component({
   selector: 'ds-googlemaps',
   templateUrl: './googlemaps.component.html',
@@ -23,13 +23,15 @@ export class GooglemapsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.configService.findByPropertyName('google.maps.key').pipe(
-      getFirstCompletedRemoteData(),
-    ).subscribe((data) => {
-      this.loadScript(this.buildMapUrl(data?.payload?.values[0])).then(() => {
-        this.loadMap();
+    if (this.coordinates) {
+      this.configService.findByPropertyName('google.maps.key').pipe(
+        getFirstCompletedRemoteData(),
+      ).subscribe((data) => {
+        this.loadScript(this.buildMapUrl(data?.payload?.values[0])).then(() => {
+          this.loadMap();
+        });
       });
-    });
+    }
   }
 
 /**
@@ -57,7 +59,7 @@ export class GooglemapsComponent implements OnInit {
   }
 
 /**
- * 
+ *
  * @param url contains a script url which will be loaded into page
  * @returns
  */

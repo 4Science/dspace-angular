@@ -1,1 +1,2 @@
-<div #map class="map-container"></div>
+<ds-alert *ngIf='!coordinates' [content]="'Coordinates are not valid'"></ds-alert>
+<div *ngIf='coordinates' #map class="map-container"></div>
