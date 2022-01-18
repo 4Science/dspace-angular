@@ -80,9 +80,9 @@ export class LoadMoreService {
 
    getLimitFromEnv(type) {
     if (type === 'more') {
-      return environment?.crisLayout?.loadMore?.first ? environment?.crisLayout?.loadMore?.first : 5;
+      return environment?.crisLayout?.metadataBox?.loadMore?.first ? environment?.crisLayout?.metadataBox?.loadMore?.first : 5;
     } else {
-      return environment?.crisLayout?.loadMore?.last ? environment?.crisLayout?.loadMore?.last : 1;
+      return environment?.crisLayout?.metadataBox?.loadMore?.last ? environment?.crisLayout?.metadataBox?.loadMore?.last : 1;
     }
    }
 
