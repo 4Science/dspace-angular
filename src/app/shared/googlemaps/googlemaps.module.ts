@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { SharedModule } from '../shared.module';
 import { GooglemapsComponent } from './googlemaps.component';
 
 const COMPONENTS = [
@@ -6,6 +7,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
+  imports: [ SharedModule ],
   declarations: [...COMPONENTS],
   exports: [...COMPONENTS]
 })

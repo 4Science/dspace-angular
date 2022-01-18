@@ -4,7 +4,7 @@ import { ConfigurationDataService } from '../../../app/core/data/configuration-d
 import { createSuccessfulRemoteDataObject$ } from '../remote-data.utils';
 import { GooglemapsComponent } from './googlemaps.component';
 
-fdescribe('GooglemapsComponent', () => {
+describe('GooglemapsComponent', () => {
 
   let component: GooglemapsComponent;
 
