@@ -8,7 +8,7 @@ import { MetadataValue } from 'src/app/core/shared/metadata.models';
 import { TranslateLoaderMock } from 'src/app/shared/mocks/translate-loader.mock';
 import { MapComponent } from './map.component';
 
-fdescribe('MapComponent', () => {
+describe('MapComponent', () => {
   let component: MapComponent;
   let fixture: ComponentFixture<MapComponent>;
 
