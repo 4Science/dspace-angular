@@ -6,13 +6,42 @@
   </span>
 
     <div *ngIf="!isStructured" class="d-flex col flex-wrap" [class.flex-column]="!field.valuesInline">
-      <ng-container *ngFor="let metadataValue of metadataValues ; trackBy: trackUpdate; let last = last">
-        <ds-metadata-render [field]="field"
-                            [item]="item"
-                            [box]="box"
-                            [metadataValue]="metadataValue"
-                            [renderingSubType]="renderingSubType"></ds-metadata-render>
-        <p *ngIf="field.valuesInline && !last">;&nbsp;</p>
+      <!-- Display starting element with limits Start -->
+      <ng-container *ngFor="let index of loadMoreService.firstLimitedDataToBeRenderedMap.keys();">
+        <div  *ngFor="let mdg of loadMoreService.firstLimitedDataToBeRenderedMap.get(index)">
+          <ds-metadata-render class="w-100" [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
+          </ds-metadata-render>
+        </div>
+      </ng-container>
+      <!-- Display starting element with limits END -->          
+      <!-- Show More/collapse link button start -->          
+      <div class="view-text">
+      <a class="d-block" (click)="loadMoreService.fillAllData()" href="javascript:void(0);"
+        *ngIf="loadMoreService.componentsToBeRenderedMap.size != loadMoreService.lastLimitedDataToBeRenderedMap.size + loadMoreService.firstLimitedDataToBeRenderedMap.size && loadMoreService.firstLimit!== 0 && loadMoreService.isConfigured">
+        {{"more" | translate}}
+      </a>
+      <a class="d-block" (click)="loadMoreService.setLimits()" href="javascript:void(0);"
+        *ngIf="loadMoreService.componentsToBeRenderedMap.size == loadMoreService.lastLimitedDataToBeRenderedMap.size + loadMoreService.firstLimitedDataToBeRenderedMap.size && loadMoreService.lastLimit!== 0 && loadMoreService.isConfigured">
+        {{"collapse" | translate}}
+      </a>
+      </div>
+      <!-- Show More/collapse link button END -->
+      <ng-container *ngFor="let index of loadMoreService.lastLimitedDataToBeRenderedMap.keys();">
+      <div *ngFor="let mdg of loadMoreService.lastLimitedDataToBeRenderedMap.get(index)">
+        <ds-metadata-render class="w-100" [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
+        </ds-metadata-render>
+      </div>
+      </ng-container>
+      <!-- Display isLoadMore is false start-->
+      <ng-container *ngIf="!isLoadMore">
+        <ng-container *ngFor="let metadataValue of metadataValues ; trackBy: trackUpdate; let last = last">
+            <ds-metadata-render [field]="field"
+                          [item]="item"
+                          [box]="box"
+                          [metadataValue]="metadataValue"
+                          [renderingSubType]="renderingSubType"></ds-metadata-render>
+            <p *ngIf="field.valuesInline && !last">;&nbsp;</p>
+          </ng-container>
       </ng-container>
     </div>
     <div *ngIf="isStructured" class="col w-100" [class.flex-column]="!field.valuesInline">
