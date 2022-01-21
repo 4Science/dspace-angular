@@ -72,8 +72,17 @@ describe('MapComponent', () => {
   });
 
   it('should rendered google map.',() => {
+    component.coordinates = '@42.1334,56.7654';
+    fixture.detectChanges();
     const container = fixture.debugElement.query(By.css('#googlemap'));
     expect(container).toBeTruthy();
+  });
+
+  it('should not rendered google map.',() => {
+    component.coordinates = undefined;
+    fixture.detectChanges();
+    const container = fixture.debugElement.query(By.css('#googlemap'));
+    expect(container).toBeFalsy();
   });
 
 });
