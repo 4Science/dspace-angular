@@ -44,7 +44,7 @@ export class LoadMoreService {
   setLimits() {
     this.lastLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
     this.firstLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
-    this.isConfigured = true;
+    this.isConfigured = this.componentsToBeRenderedMap.size === 1 ? false : true ;
     if (this.rendering.includes('more') || this.rendering.includes('last')) {
         if (this.rendering.includes('more')) {
           this.firstLimit = this.getLimit('more');
