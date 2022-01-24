@@ -1,8 +1,9 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, Input, OnInit, Renderer2, ViewChild, } from '@angular/core';
-import { ConfigurationDataService } from 'src/app/core/data/configuration-data.service';
-import { getFirstCompletedRemoteData } from 'src/app/core/shared/operators';
-import { googlemap } from 'googlemaps';
+
+import { ConfigurationDataService } from '../../core/data/configuration-data.service';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+
 @Component({
   selector: 'ds-googlemaps',
   templateUrl: './googlemaps.component.html',
@@ -34,45 +35,13 @@ export class GooglemapsComponent implements OnInit {
     }
   }
 
-/**
- *
- * @param key contains a secret key of a google map
- * @returns string which has google map url with google map key
- */
+  /**
+   *
+   * @param key contains a secret key of a google map
+   * @returns string which has google map url with google map key
+   */
   buildMapUrl(key: string) {
     return `https://maps.googleapis.com/maps/api/js?key=${key}`;
-  }
-
-  /**
-   * load map map in both the case when matadata has coordinates or address
-   */
-  private async loadMap() {
-    if (this.coordinates.includes('@')) {
-      [this.latitude, this.longitude] = this.coordinates
-        .replace('@', '')
-        .split(',');
-      this.mapInitializer();
-    } else {
-      await this.setLatAndLongFromAddress();
-      this.mapInitializer();
-    }
-  }
-
-/**
- *
- * @param url contains a script url which will be loaded into page
- * @returns
- */
-  private loadScript(url) {
-    return new Promise((resolve, reject) => {
-      const script = this.renderer.createElement('script');
-      script.type = 'text/javascript';
-      script.src = url;
-      script.text = ``;
-      script.onload = resolve;
-      script.onerror = reject;
-      this.renderer.appendChild(this._document.head, script);
-    });
   }
 
   /**
@@ -112,6 +81,38 @@ export class GooglemapsComponent implements OnInit {
         Number(this.longitude)
       ),
       map: this.map,
+    });
+  }
+
+  /**
+   * load map map in both the case when matadata has coordinates or address
+   */
+  private async loadMap() {
+    if (this.coordinates.includes('@')) {
+      [this.latitude, this.longitude] = this.coordinates
+        .replace('@', '')
+        .split(',');
+      this.mapInitializer();
+    } else {
+      await this.setLatAndLongFromAddress();
+      this.mapInitializer();
+    }
+  }
+
+  /**
+   *
+   * @param url contains a script url which will be loaded into page
+   * @returns
+   */
+  private loadScript(url) {
+    return new Promise((resolve, reject) => {
+      const script = this.renderer.createElement('script');
+      script.type = 'text/javascript';
+      script.src = url;
+      script.text = ``;
+      script.onload = resolve;
+      script.onerror = reject;
+      this.renderer.appendChild(this._document.head, script);
     });
   }
 }

@@ -1,11 +1,11 @@
-import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { LayoutField } from 'src/app/core/layout/models/box.model';
-import { Item } from 'src/app/core/shared/item.model';
-import { MetadataValue } from 'src/app/core/shared/metadata.models';
-import { TranslateLoaderMock } from 'src/app/shared/mocks/translate-loader.mock';
+import { LayoutField } from '../../../../../../../core/layout/models/box.model';
+import { Item } from '../../../../../../../core/shared/item.model';
+import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
+import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate-loader.mock';
 import { MapComponent } from './map.component';
 
 describe('MapComponent', () => {
