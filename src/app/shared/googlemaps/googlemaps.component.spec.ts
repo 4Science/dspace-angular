@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ConfigurationDataService } from '../../../app/core/data/configuration-data.service';
+
+import { ConfigurationDataService } from '../../core/data/configuration-data.service';
 import { createSuccessfulRemoteDataObject$ } from '../remote-data.utils';
 import { GooglemapsComponent } from './googlemaps.component';
 
@@ -16,7 +17,7 @@ describe('GooglemapsComponent', () => {
     findByPropertyName: jasmine.createSpy('findByPropertyName')
   });
 
-  const confResponse$ = createSuccessfulRemoteDataObject$({ values: ['AIzaSyBShqMPtKVvYgOOM78kMsZvzsxYBQMD3TI'] });
+  const confResponse$ = createSuccessfulRemoteDataObject$({ values: ['valid-googlemap-key'] });
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
