@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-
 import { NouisliderModule } from 'ng2-nouislider';
 import { NgbDatepickerModule, NgbModule, NgbTimepickerModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { MissingTranslationHandler, TranslateModule } from '@ngx-translate/core';
@@ -294,6 +293,7 @@ import { ThemedMultiColumnTopSectionComponent } from './explore/section-componen
 import { ThemedSearchSectionComponent } from './explore/section-component/search-section/themed-search-section.component';
 import { ThemedTextSectionComponent } from './explore/section-component/text-section/themed-text-section.component';
 
+
 /**
  * Declaration needed to make sure all decorator functions are called in time
  */
@@ -303,7 +303,6 @@ export const MODELS = [
   FacetValues,
   SearchResult
 ];
-
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
