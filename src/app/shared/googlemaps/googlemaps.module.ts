@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { SharedModule } from '../shared.module';
 import { GooglemapsComponent } from './googlemaps.component';
 
@@ -13,6 +14,6 @@ const COMPONENTS = [
 })
 
 /**
- * This module handles google map when it has a address or coordinates
+ * This module handles google maps functionalities
  */
 export class GooglemapsModule {}

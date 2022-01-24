@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FieldRenderingType,
-  MetadataBoxFieldRendering,
-} from '../metadata-box.decorator';
+
+import { FieldRenderingType, MetadataBoxFieldRendering, } from '../metadata-box.decorator';
 import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
 
 @Component({
@@ -11,8 +9,7 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   styleUrls: ['./map.component.scss'],
 })
 @MetadataBoxFieldRendering(FieldRenderingType.MAP)
-export class MapComponent
-  extends RenderingTypeValueModelComponent implements OnInit {
+export class MapComponent extends RenderingTypeValueModelComponent implements OnInit {
   coordinates: string;
   ngOnInit(): void {
     this.coordinates = this.item?.metadata['organization.address.addressLocality'][0]?.value;

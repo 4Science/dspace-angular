@@ -3,6 +3,9 @@ import { Component, Inject, Input, OnInit, Renderer2, ViewChild, } from '@angula
 
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { isNotEmpty } from '../empty.util';
+import { RemoteData } from '../../core/data/remote-data';
+import { ConfigurationProperty } from '../../core/shared/configuration-property.model';
 
 @Component({
   selector: 'ds-googlemaps',
@@ -10,10 +13,29 @@ import { getFirstCompletedRemoteData } from '../../core/shared/operators';
   styleUrls: ['./googlemaps.component.scss'],
 })
 export class GooglemapsComponent implements OnInit {
+  /**
+   * The coordinates used as input by google maps
+   */
   @Input() coordinates: string;
+
+  /**
+   * The reference to map div container
+   */
   @ViewChild('map') mapElement: any;
+
+  /**
+   * The google map object
+   */
   map: google.maps.Map;
+
+  /**
+   * The latitude value
+   */
   latitude: string;
+
+  /**
+   * the longitude value
+   */
   longitude: string;
 
   constructor(
@@ -23,29 +45,35 @@ export class GooglemapsComponent implements OnInit {
   ) {
   }
 
+  /**
+   * Retrieve the google maps api key and initialize the maps
+   */
   ngOnInit() {
     if (this.coordinates) {
       this.configService.findByPropertyName('google.maps.key').pipe(
         getFirstCompletedRemoteData(),
-      ).subscribe((data) => {
-        this.loadScript(this.buildMapUrl(data?.payload?.values[0])).then(() => {
-          this.loadMap();
-        });
+      ).subscribe((res: RemoteData<ConfigurationProperty>) => {
+        if (res.hasSucceeded && isNotEmpty(res?.payload?.values[0])) {
+          this.loadScript(this.buildMapUrl(res?.payload?.values[0])).then(() => {
+            this.loadMap();
+          });
+        }
       });
     }
   }
 
   /**
+   * Return the google map ur with google maps api key
    *
-   * @param key contains a secret key of a google map
-   * @returns string which has google map url with google map key
+   * @param key contains a secret key of a google maps
+   * @returns string which has google map url with google maps key
    */
   buildMapUrl(key: string) {
     return `https://maps.googleapis.com/maps/api/js?key=${key}`;
   }
 
   /**
-   * Set latitude and longitude when matadata has a address
+   * Set latitude and longitude when metadata has an address
    */
   setLatAndLongFromAddress() {
     return new Promise((reslove, reject) => {
@@ -62,7 +90,7 @@ export class GooglemapsComponent implements OnInit {
   }
 
   /**
-   * It initialize a google map to html page
+   * It initialize a google maps to html page
    */
   mapInitializer() {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
@@ -85,7 +113,7 @@ export class GooglemapsComponent implements OnInit {
   }
 
   /**
-   * load map map in both the case when matadata has coordinates or address
+   * Load map in both the case when metadata has coordinates or address
    */
   private async loadMap() {
     if (this.coordinates.includes('@')) {
@@ -100,9 +128,10 @@ export class GooglemapsComponent implements OnInit {
   }
 
   /**
+   * Append the google maps script to the document
    *
    * @param url contains a script url which will be loaded into page
-   * @returns
+   * @returns A promise
    */
   private loadScript(url) {
     return new Promise((resolve, reject) => {

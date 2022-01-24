@@ -70,6 +70,7 @@ const ENTRY_COMPONENTS = [
   OrcidComponent,
   ValuepairComponent,
   TagComponent,
+  MapComponent
 ];
 @NgModule({
   declarations: [
