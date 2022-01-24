@@ -43,11 +43,11 @@ import { ValuepairComponent } from './cris-layout-matrix/cris-layout-box-contain
 import { TagComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/tag/tag.component';
 import { MetadataContainerComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/row/metadata-container/metadata-container.component';
 import { MetadataRenderComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/row/metadata-container/metadata-render/metadata-render.component';
+import { MapComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/map/map.component';
+import { GooglemapsModule } from '../shared/googlemaps/googlemaps.module';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
-  CrisLayoutLoaderComponent,
-  CrisLayoutMatrixComponent,
   CrisLayoutVerticalComponent,
   CrisLayoutHorizontalComponent,
   CrisLayoutMetadataBoxComponent,
@@ -65,59 +65,36 @@ const ENTRY_COMPONENTS = [
   OrcidAuthorizationsComponent,
   OrcidSyncSettingsComponent,
   CrisLayoutMetricsBoxComponent,
-  MetricRowComponent,
   TableComponent,
   InlineComponent,
   OrcidComponent,
   ValuepairComponent,
   TagComponent,
-  RowComponent,
-  MetadataContainerComponent,
-  MetadataRenderComponent
 ];
 @NgModule({
   declarations: [
+    ...ENTRY_COMPONENTS,
     CrisLayoutLoaderDirective,
     CrisLayoutComponent,
     CrisLayoutLeadingComponent,
     CrisLayoutLoaderComponent,
     CrisLayoutMatrixComponent,
-    CrisLayoutVerticalComponent,
     CrisLayoutSidebarComponent,
-    CrisLayoutHorizontalComponent,
     CrisLayoutNavbarComponent,
     CrisLayoutSidebarItemComponent,
     CrisLayoutBoxContainerComponent,
-    CrisLayoutMetadataBoxComponent,
-    TextComponent,
-    HeadingComponent,
-    CrisLayoutRelationBoxComponent,
-    LongtextComponent,
-    DateComponent,
-    LinkComponent,
-    IdentifierComponent,
-    CrisrefComponent,
-    ThumbnailComponent,
-    AttachmentComponent,
-    OrcidSyncQueueComponent,
-    OrcidAuthorizationsComponent,
-    OrcidSyncSettingsComponent,
-    CrisLayoutMetricsBoxComponent,
     MetricRowComponent,
-    TableComponent,
-    InlineComponent,
-    OrcidComponent,
-    ValuepairComponent,
-    TagComponent,
     DsDatePipe,
     RowComponent,
     CrisLayoutTabsComponent,
     MetadataContainerComponent,
-    MetadataRenderComponent
+    MetadataRenderComponent,
+    MapComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
+    GooglemapsModule,
     SearchPageModule,
     MyDSpacePageModule,
     ContextMenuModule.withEntryComponents(),
