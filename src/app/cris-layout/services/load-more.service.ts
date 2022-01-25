@@ -1,75 +1,75 @@
 import { environment } from 'src/environments/environment';
 import { NestedMetadataGroupEntry } from '../cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/metadataGroup/metadata-group.component';
-
-export class LoadMoreService {
-  /**
-   * This property is used to hold a list of objects with nested Layout Field
-   * and an index that shows the position of nested field inside metadata group field
-   */
-  componentsToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]> = new Map<number, NestedMetadataGroupEntry[]>();
-
-/**
- * This property is used to hold first limited list of metadata objects
- */
-  firstLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]> = new Map<number, NestedMetadataGroupEntry[]>();
-
-  /**
-   * This property is used to hold last limited list of metadata objects
-   */
-  lastLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]> = new Map<number, NestedMetadataGroupEntry[]>();
-
-  /**
-   * This property is used to hold a number how many metadata objects should be loded form last
-   */
-  lastLimit: number;
-
-  /**
-   * This property is used to hold a number how many metadata object should be loded from first
-   */
+interface ComputedData {
+  firstLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]>;
+  lastLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]>;
+  isConfigured: boolean;
   firstLimit: number;
-
+  lastLimit: number;
+}
+interface ExtractLimits {
+firstLimit: number;
+lastLimit: number;
+}
+export class LoadMoreService  {
   /**
-   * This property is used to hold a string how many metadata object should be loded from first and last
+   * returns the limits of how many data loded from first and last
    */
-   rendering: string;
+  getComputedData = (componentsToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]>, rendering: string): ComputedData => {
+    let lastLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
+    let firstLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
+    let isConfigured = componentsToBeRenderedMap.size === 1  ? false : true ;
+    const {firstLimit , lastLimit} =  this.extractLimits(rendering);
+    if (!firstLimit && !lastLimit) {
+       isConfigured = false;
+       firstLimitedDataToBeRenderedMap = componentsToBeRenderedMap;
+    } else {
+       firstLimitedDataToBeRenderedMap = this.fillFirstLimitedData(componentsToBeRenderedMap,firstLimit);
+       lastLimitedDataToBeRenderedMap = this.fillLastLimitedData(componentsToBeRenderedMap,lastLimit);
+    }
+    isConfigured = componentsToBeRenderedMap.size  <= firstLimit + lastLimit  ? false : true ;
 
-   /**
-    * This property is used to hold a boolean which is used to identify .more or .last is configured or not
-    */
-   isConfigured: boolean;
+    return {
+        firstLimitedDataToBeRenderedMap,
+        lastLimitedDataToBeRenderedMap,
+        isConfigured,
+        firstLimit,
+        lastLimit
+    };
+   }
 
-  /**
-   * Set the limits of how many data loded from first and last
-   */
-  setLimits() {
-    this.lastLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
-    this.firstLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
-    this.isConfigured = this.componentsToBeRenderedMap.size === 1 ? false : true ;
-    if (this.rendering.includes('more') || this.rendering.includes('last')) {
-        if (this.rendering.includes('more')) {
-          this.firstLimit = this.getLimit('more');
-          this.fillFirstLimitedData();
+   extractLimits = (rendering: string): ExtractLimits => {
+    let firstLimit = 0;
+    let lastLimit = 0;
+    if (!rendering) {
+      return {
+        firstLimit,
+        lastLimit
+      };
+    } else if (rendering.includes('more') || rendering.includes('last')) {
+        if (rendering.includes('more')) {
+          firstLimit = this.getLimit('more',rendering);
         } else {
-          this.firstLimit = 0;
+          firstLimit = 0;
         }
 
-        if (this.rendering.includes('last')) {
-          this.lastLimit = this.getLimit('last');
-          this.fillLastLimitedData();
+        if (rendering.includes('last')) {
+          lastLimit = this.getLimit('last',rendering);
         } else {
-          this.lastLimit = 0;
+          lastLimit = 0;
         }
-      } else {
-        this.isConfigured = false;
-        this.firstLimitedDataToBeRenderedMap = this.componentsToBeRenderedMap;
-      }
+    }
+    return {
+      firstLimit,
+      lastLimit
+    };
    }
 
    /**
     * Get the limit of first and last loaded data from configuration or env
     */
-   getLimit(type) {
-    const rendering: string[]=this.rendering.split('.');
+   getLimit = (type: string, renderingData: string): number => {
+    const rendering: string[]=renderingData.split('.');
     const index=rendering.findIndex((data) => data === type);
     if (rendering.length > index + 1) {
        return isNaN(Number(rendering[index + 1])) ?  this.getLimitFromEnv(type) : Number(rendering[index + 1]);
@@ -78,7 +78,7 @@ export class LoadMoreService {
     }
    }
 
-   getLimitFromEnv(type) {
+   getLimitFromEnv = (type: string): number => {
     if (type === 'more') {
       return environment?.crisLayout?.metadataBox?.loadMore?.first ? environment?.crisLayout?.metadataBox?.loadMore?.first : 5;
     } else {
@@ -89,41 +89,41 @@ export class LoadMoreService {
 /**
  * fill all the data when user click on more
  */
-   fillAllData() {
-    this.firstLimitedDataToBeRenderedMap = this.componentsToBeRenderedMap;
-    this.lastLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
+   fillAllData = (componentsToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]>, rendering: string): ComputedData => {
+      const firstLimitedDataToBeRenderedMap = componentsToBeRenderedMap;
+      const lastLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
+      const isConfigured = true;
+      const {firstLimit , lastLimit} = this.extractLimits(rendering);
+      return {
+        firstLimitedDataToBeRenderedMap,
+        lastLimitedDataToBeRenderedMap,
+        isConfigured,
+        firstLimit,
+        lastLimit
+      };
    }
 
   /**
    * Fill the first limited list of the metadata
    */
-    fillFirstLimitedData() {
-      const lastFill = this.firstLimitedDataToBeRenderedMap.size;
-      this.firstLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
-      for (let i = 0; i < this.firstLimit + lastFill; i++) {
-        if (this.firstLimitedDataToBeRenderedMap.size < this.componentsToBeRenderedMap.size - this.lastLimitedDataToBeRenderedMap.size ) {
-             this.firstLimitedDataToBeRenderedMap.set(i,this.componentsToBeRenderedMap.get(i));
+    fillFirstLimitedData = (componentsToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]>,firstLimit: number): Map<number, NestedMetadataGroupEntry[]> => {
+     const firstLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
+      for (let i = 0; i < firstLimit ; i++) {
+        if (firstLimitedDataToBeRenderedMap.size < componentsToBeRenderedMap.size) {
+             firstLimitedDataToBeRenderedMap.set(i,componentsToBeRenderedMap.get(i));
         }
      }
+     return firstLimitedDataToBeRenderedMap;
     }
 
-/**
- * Fill the last limited list of thw metadeta
- */
-    fillLastLimitedData() {
-      const lastFill = this.lastLimitedDataToBeRenderedMap.size;
-      this.lastLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
-      for (let i = this.componentsToBeRenderedMap.size - lastFill - this.lastLimit; i < this.componentsToBeRenderedMap.size; i++) {
-            if (i < this.firstLimitedDataToBeRenderedMap.size) {
-              i = this.firstLimitedDataToBeRenderedMap.size ;
-            }
-            this.lastLimitedDataToBeRenderedMap.set(i,this.componentsToBeRenderedMap.get(i));
-     }
-    }
-
-    setData(componentsToBeRenderedMap, rendering) {
-        this.componentsToBeRenderedMap = componentsToBeRenderedMap;
-        this.rendering = rendering;
-        this.setLimits();
+  /**
+   * Fill the last limited list of thw metadeta
+   */
+    fillLastLimitedData = (componentsToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]>, lastLimit: number): Map<number, NestedMetadataGroupEntry[]> => {
+      const lastLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
+      for (let i = componentsToBeRenderedMap.size  - lastLimit; i < componentsToBeRenderedMap.size; i++) {
+              lastLimitedDataToBeRenderedMap.set(i,componentsToBeRenderedMap.get(i));
+        }
+      return lastLimitedDataToBeRenderedMap;
     }
 }

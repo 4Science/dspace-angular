@@ -12,8 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'ds-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
-  providers: [ LoadMoreService ]
+  styleUrls: ['./table.component.scss']
 })
 @MetadataBoxFieldRendering(FieldRenderingType.TABLE, true)
 export class TableComponent extends MetadataGroupComponent {

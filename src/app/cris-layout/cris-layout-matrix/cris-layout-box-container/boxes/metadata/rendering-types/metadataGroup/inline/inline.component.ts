@@ -14,8 +14,7 @@ import { LoadMoreService } from 'src/app/cris-layout/services/load-more.service'
 @Component({
   selector: 'ds-inline',
   templateUrl: './inline.component.html',
-  styleUrls: ['./inline.component.scss'],
-  providers: [ LoadMoreService ]
+  styleUrls: ['./inline.component.scss']
 })
 @MetadataBoxFieldRendering(FieldRenderingType.INLINE, true)
 export class InlineComponent extends MetadataGroupComponent implements OnInit {
