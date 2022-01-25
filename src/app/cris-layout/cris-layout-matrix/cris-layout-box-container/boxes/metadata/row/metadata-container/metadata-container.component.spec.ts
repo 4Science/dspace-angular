@@ -14,8 +14,10 @@ import { BitstreamDataService } from '../../../../../../../core/data/bitstream-d
 import { createSuccessfulRemoteDataObject$ } from '../../../../../../../shared/remote-data.utils';
 import { createPaginatedList } from '../../../../../../../shared/testing/utils.test';
 import { Bitstream } from '../../../../../../../core/shared/bitstream.model';
+import { LoadMoreService } from 'src/app/cris-layout/services/load-more.service';
+import { NestedMetadataGroupEntry } from '../../rendering-types/metadataGroup/metadata-group.component';
 
-describe('MetadataContainerComponent', () => {
+fdescribe('MetadataContainerComponent', () => {
   let component: MetadataContainerComponent;
   let fixture: ComponentFixture<MetadataContainerComponent>;
 
@@ -148,6 +150,10 @@ describe('MetadataContainerComponent', () => {
     findAllByItemAndBundleName: jasmine.createSpy('findAllByItemAndBundleName')
   });
 
+  const mockLoadMoreService = jasmine.createSpyObj('LoadMoreService',{
+    getComputedData: jasmine.createSpy('getComputedData')
+  });
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
@@ -160,6 +166,7 @@ describe('MetadataContainerComponent', () => {
       ],
       providers: [
         { provide: BitstreamDataService, useValue: mockBitstreamDataService },
+        { provide: LoadMoreService, useValue: mockLoadMoreService },
       ],
       declarations: [MetadataContainerComponent],
       schemas: [NO_ERRORS_SCHEMA]
@@ -300,7 +307,191 @@ describe('MetadataContainerComponent', () => {
         done();
       });
     });
+  });
 
+  describe('Check LoadMoreService',() => {
+      let loadMoreService: LoadMoreService;
+      const entry =[
+        {
+          'field':{
+              'metadata':'dc.identifier.doi',
+              'label':'DOI',
+              'rendering':null,
+              'fieldType':'METADATA',
+              'styleLabel':'font-weight-bold col-3',
+              'styleValue':null,
+              'labelAsHeading':false,
+              'valuesInline':false
+          },
+          'value':{
+              'uuid':'e0f17692-576f-4b2f-a5d5-17c461704b29',
+              'language':null,
+              'value':'10.1016/j.procs.2017.03.038',
+              'place':0,
+              'authority':null,
+              'confidence':-1
+          }
+        },
+        {
+          'field':{
+              'metadata':'dc.identifier.doi',
+              'label':'DOI',
+              'rendering':null,
+              'fieldType':'METADATA',
+              'styleLabel':'font-weight-bold col-3',
+              'styleValue':null,
+              'labelAsHeading':false,
+              'valuesInline':false
+          },
+          'value':{
+              'uuid':'36169931-7195-41c6-89b4-d6dc7b75ef69',
+              'language':null,
+              'value':'sas',
+              'place':1,
+              'authority':null,
+              'confidence':-1
+          }
+        },
+        {
+          'field':{
+              'metadata':'dc.identifier.doi',
+              'label':'DOI',
+              'rendering':null,
+              'fieldType':'METADATA',
+              'styleLabel':'font-weight-bold col-3',
+              'styleValue':null,
+              'labelAsHeading':false,
+              'valuesInline':false
+          },
+          'value':{
+              'uuid':'2a7a6a10-0600-4340-b128-eda4e08f852c',
+              'language':null,
+              'value':'sa67',
+              'place':2,
+              'authority':null,
+              'confidence':-1
+          }
+        },
+        {
+          'field':{
+              'metadata':'dc.identifier.doi',
+              'label':'DOI',
+              'rendering':null,
+              'fieldType':'METADATA',
+              'styleLabel':'font-weight-bold col-3',
+              'styleValue':null,
+              'labelAsHeading':false,
+              'valuesInline':false
+          },
+          'value':{
+              'uuid':'7a75bb92-9af6-4e90-85a4-1d69b2941b1d',
+              'language':null,
+              'value':'76',
+              'place':3,
+              'authority':null,
+              'confidence':-1
+          }
+        },
+        {
+          'field':{
+              'metadata':'dc.identifier.doi',
+              'label':'DOI',
+              'rendering':null,
+              'fieldType':'METADATA',
+              'styleLabel':'font-weight-bold col-3',
+              'styleValue':null,
+              'labelAsHeading':false,
+              'valuesInline':false
+          },
+          'value':{
+              'uuid':'74ca8dcb-594b-4f57-b54f-942ffeb18466',
+              'language':null,
+              'value':'899',
+              'place':4,
+              'authority':null,
+              'confidence':-1
+          }
+        },
+        {
+          'field':{
+              'metadata':'dc.identifier.doi',
+              'label':'DOI',
+              'rendering':null,
+              'fieldType':'METADATA',
+              'styleLabel':'font-weight-bold col-3',
+              'styleValue':null,
+              'labelAsHeading':false,
+              'valuesInline':false
+          },
+          'value':{
+              'uuid':'1d032b00-5e59-4352-9471-60ccc077142b',
+              'language':null,
+              'value':'Testing',
+              'place':5,
+              'authority':null,
+              'confidence':-1
+          }
+        }
+    ] as NestedMetadataGroupEntry[];
+      const firstLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
+      const lastLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
+      firstLimitedDataToBeRenderedMap.set(1,[entry[0]]);
+      lastLimitedDataToBeRenderedMap.set(5,[entry[4]]);
+      lastLimitedDataToBeRenderedMap.set(6,[entry[5]]);
+
+      beforeEach(() => {
+        loadMoreService =  new LoadMoreService();
+        spyOn(loadMoreService, 'getComputedData');
+        spyOn(loadMoreService, 'fillAllData');
+        component.field.rendering = 'text.more.1.last.2';
+        mockLoadMoreService.getComputedData.and.returnValue({
+          firstLimitedDataToBeRenderedMap: firstLimitedDataToBeRenderedMap,
+          lastLimitedDataToBeRenderedMap: lastLimitedDataToBeRenderedMap,
+          isConfigured: true,
+          firstLimit: 1,
+          lastLimit: 2
+        });
+        fixture.detectChanges();
+      });
+
+      it('should display data based on configuration', () => {
+         expect(loadMoreService.getComputedData).toHaveBeenCalled();
+         fixture.detectChanges();
+        // expect(component.firstLimitedDataToBeRenderedMap.size).toBe(1);
+        // expect(component.lastLimitedDataToBeRenderedMap.size).toBe(2);
+        // expect(component.isConfigured).toBe(true);
+        // expect(component.firstLimit).toBe(1);
+        // expect(component.lastLimit).toBe(2);
+        // const moreTag = fixture.debugElement.query(By.css('#a-more'));
+        // expect(moreTag).toBeTruthy();
+        // moreTag.triggerEventHandler('click',null);
+        // expect(loadMoreService.fillAllData).toHaveBeenCalled();
+        // const collapseTag = fixture.debugElement.query(By.css('#a-collapse'));
+        // expect(moreTag).toBeFalsy();
+        // expect(collapseTag).toBeTruthy();
+        // expect(component.firstLimitedDataToBeRenderedMap.size).toBe(componentsToBeRenderedMap.size);
+        // expect(component.lastLimitedDataToBeRenderedMap.size).toBe(0);
+        // collapseTag.triggerEventHandler('click',null);
+        // expect(moreTag).toBeTruthy();
+        // expect(collapseTag).toBeFalsy();
+        // expect(component.firstLimitedDataToBeRenderedMap.size).toBe(1);
+        // expect(component.lastLimitedDataToBeRenderedMap.size).toBe(2);
+        // expect(component.isConfigured).toBe(true);
+        // expect(component.firstLimit).toBe(1);
+        // expect(component.lastLimit).toBe(2);
+      });
+
+      // it('should display data based on when no configuration is added', () => {
+      //   expect(loadMoreService.getComputedData).toHaveBeenCalled();
+      //   fixture.detectChanges();
+      //   expect(component.firstLimitedDataToBeRenderedMap.size).toBe(componentsToBeRenderedMap.size);
+      //   expect(component.lastLimitedDataToBeRenderedMap.size).toBe(1);
+      //   expect(component.isConfigured).toBe(false);
+      //   expect(component.firstLimit).toBe(0);
+      //   expect(component.lastLimit).toBe(0);
+      //   const moreTag = fixture.debugElement.query(By.css('#a-more'));
+      //   expect(moreTag).toBeFalsy();
+      // });
   });
 })
 ;
