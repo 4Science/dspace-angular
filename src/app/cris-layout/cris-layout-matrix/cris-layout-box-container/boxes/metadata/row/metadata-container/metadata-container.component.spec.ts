@@ -17,6 +17,14 @@ import { Bitstream } from '../../../../../../../core/shared/bitstream.model';
 import { LoadMoreService } from 'src/app/cris-layout/services/load-more.service';
 import { NestedMetadataGroupEntry } from '../../rendering-types/metadataGroup/metadata-group.component';
 
+interface ComputedData {
+  firstLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]>;
+  lastLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]>;
+  isConfigured: boolean;
+  firstLimit: number;
+  lastLimit: number;
+}
+
 fdescribe('MetadataContainerComponent', () => {
   let component: MetadataContainerComponent;
   let fixture: ComponentFixture<MetadataContainerComponent>;
@@ -59,6 +67,18 @@ fdescribe('MetadataContainerComponent', () => {
     metadata: 'dc.title',
     label: 'Preferred name',
     rendering: null,
+    fieldType: 'METADATA',
+    style: null,
+    styleLabel: 'test-style-label',
+    styleValue: 'test-style-value',
+    labelAsHeading: false,
+    valuesInline: true
+  };
+
+  const fieldMock1 = {
+    metadata: 'dc.title',
+    label: 'Preferred name',
+    rendering: 'inline.more.1.last.2',
     fieldType: 'METADATA',
     style: null,
     styleLabel: 'test-style-label',
@@ -435,15 +455,21 @@ fdescribe('MetadataContainerComponent', () => {
     ] as NestedMetadataGroupEntry[];
       const firstLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
       const lastLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
-      firstLimitedDataToBeRenderedMap.set(1,[entry[0]]);
-      lastLimitedDataToBeRenderedMap.set(5,[entry[4]]);
-      lastLimitedDataToBeRenderedMap.set(6,[entry[5]]);
+      firstLimitedDataToBeRenderedMap.set(0,[entry[0]]);
+      lastLimitedDataToBeRenderedMap.set(4,[entry[4]]);
+      lastLimitedDataToBeRenderedMap.set(5,[entry[5]]);
+
+      // const componentsToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>()
+
+      // for (let index = 0; index < entry.length; index++) {
+      //     componentsToBeRenderedMap.set(index,[entry[index]]);  
+      // }
 
       beforeEach(() => {
         loadMoreService =  new LoadMoreService();
         spyOn(loadMoreService, 'getComputedData');
         spyOn(loadMoreService, 'fillAllData');
-        component.field.rendering = 'text.more.1.last.2';
+        component.field = fieldMock1;     
         mockLoadMoreService.getComputedData.and.returnValue({
           firstLimitedDataToBeRenderedMap: firstLimitedDataToBeRenderedMap,
           lastLimitedDataToBeRenderedMap: lastLimitedDataToBeRenderedMap,
@@ -454,9 +480,17 @@ fdescribe('MetadataContainerComponent', () => {
         fixture.detectChanges();
       });
 
-      it('should display data based on configuration', () => {
-         expect(loadMoreService.getComputedData).toHaveBeenCalled();
-         fixture.detectChanges();
+      fit('should display data based on configuration', () => {
+        // let data: ComputedData = loadMoreService.getComputedData(componentsToBeRenderedMap,'text.more.1.last.2');
+        // component.firstLimitedDataToBeRenderedMap = data.firstLimitedDataToBeRenderedMap;
+        // component.lastLimitedDataToBeRenderedMap = data.lastLimitedDataToBeRenderedMap;
+        // component.isConfigured = data.isConfigured;
+        // component.firstLimit = data.firstLimit;
+        // component.lastLimit = data.lastLimit;
+        expect(loadMoreService.getComputedData).toHaveBeenCalled();
+        fixture.detectChanges();
+        console.log(component.firstLimitedDataToBeRenderedMap.size);
+          
         // expect(component.firstLimitedDataToBeRenderedMap.size).toBe(1);
         // expect(component.lastLimitedDataToBeRenderedMap.size).toBe(2);
         // expect(component.isConfigured).toBe(true);

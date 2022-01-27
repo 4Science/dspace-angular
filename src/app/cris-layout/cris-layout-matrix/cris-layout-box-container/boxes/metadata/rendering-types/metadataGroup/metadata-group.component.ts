@@ -100,20 +100,20 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
     });
 
     this.initialized.next(true);
-    this.setData(this.loadMoreService.getComputedData);
+    this.setData('getComputedData');
   }
 
   /**
    * Set the limits of how many data loded from first and last
    */
-  setData(instance) {
-    const {firstLimitedDataToBeRenderedMap, lastLimitedDataToBeRenderedMap, isConfigured, firstLimit, lastLimit} = instance(this.componentsToBeRenderedMap,this.fieldProvider.rendering);
+   setData(functionName : string) {
+    const {firstLimitedDataToBeRenderedMap, lastLimitedDataToBeRenderedMap, isConfigured, firstLimit, lastLimit} =  functionName === 'getComputedData'  ? this.loadMoreService.getComputedData(this.componentsToBeRenderedMap,this.field.rendering) : this.loadMoreService.fillAllData(this.componentsToBeRenderedMap,this.field.rendering);
     this.firstLimitedDataToBeRenderedMap = firstLimitedDataToBeRenderedMap;
     this.lastLimitedDataToBeRenderedMap = lastLimitedDataToBeRenderedMap;
     this.isConfigured = isConfigured;
     this.firstLimit = firstLimit;
     this.lastLimit = lastLimit;
-  }
+}
 
   getMetadataValue(field: LayoutField, index: number): MetadataValue {
     const metadataList = this.item.findMetadataSortedByPlace(field.metadata);

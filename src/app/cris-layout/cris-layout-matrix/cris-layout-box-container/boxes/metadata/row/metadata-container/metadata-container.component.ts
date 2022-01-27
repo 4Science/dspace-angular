@@ -254,19 +254,20 @@ export class MetadataContainerComponent implements OnInit {
         this.componentsToBeRenderedMap.set(index, [entry]);
       }
     });
-    this.setData(this.loadMoreService.getComputedData);
+    this.setData('getComputedData');
   }
+  
 
   /**
    * Set the limits of how many data loded from first and last
    */
-  setData(instance) {
-      const {firstLimitedDataToBeRenderedMap, lastLimitedDataToBeRenderedMap, isConfigured, firstLimit, lastLimit} = instance(this.componentsToBeRenderedMap,this.field.rendering);
+  setData(functionName : string) {
+      const {firstLimitedDataToBeRenderedMap, lastLimitedDataToBeRenderedMap, isConfigured, firstLimit, lastLimit} =  functionName === 'getComputedData'  ? this.loadMoreService.getComputedData(this.componentsToBeRenderedMap,this.field.rendering) : this.loadMoreService.fillAllData(this.componentsToBeRenderedMap,this.field.rendering);
       this.firstLimitedDataToBeRenderedMap = firstLimitedDataToBeRenderedMap;
       this.lastLimitedDataToBeRenderedMap = lastLimitedDataToBeRenderedMap;
       this.isConfigured = isConfigured;
       this.firstLimit = firstLimit;
-      this.lastLimit = lastLimit;
+      this.lastLimit = lastLimit;      
   }
 
 }
