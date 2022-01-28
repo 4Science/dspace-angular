@@ -14,7 +14,7 @@ import { DsDatePipe } from '../../../../../../../pipes/ds-date.pipe';
 import { TextComponent } from '../../text/text.component';
 import { LoadMoreService } from 'src/app/cris-layout/services/load-more.service';
 
-fdescribe('TableComponent component when .more and .last is not in rendering configuration', () => {
+describe('TableComponent component when .more and .last is not in rendering configuration', () => {
   let component: TableComponent;
   let fixture: ComponentFixture<TableComponent>;
   const testItem = Object.assign(new Item(), {
@@ -150,7 +150,7 @@ fdescribe('TableComponent component when .more and .last is not in rendering con
   });
 });
 
-fdescribe('TableComponent component when .more and .last is present in rendering configuration', () => {
+describe('TableComponent component when .more and .last is present in rendering configuration', () => {
   let component: TableComponent;
   let fixture: ComponentFixture<TableComponent>;
 
