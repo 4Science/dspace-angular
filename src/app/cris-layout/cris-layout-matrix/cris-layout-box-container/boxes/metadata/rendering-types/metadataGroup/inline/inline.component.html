@@ -12,13 +12,13 @@
         <span *ngIf='field.valuesInline && index!=firstLimitedDataToBeRenderedMap.size-1'
           class="px-3">&bull;</span>
       </div>
-      <a (click)="setData('fillAllData')" href="javascript:void(0);"
+      <a (click)="setData('fillAllData')" id="a-more"  href="javascript:void(0);"
         *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && firstLimit!== 0 && isConfigured">
         {{"more" | translate}}
       </a>
     </div>
     <div>
-      <a (click)="setData('getComputedData')" href="javascript:void(0);"
+      <a (click)="setData('getComputedData')" id="a-collapse"  href="javascript:void(0);"
         *ngIf="componentsToBeRenderedMap.size == lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && lastLimit!== 0 && isConfigured">
         {{"collapse" | translate}}
       </a>
