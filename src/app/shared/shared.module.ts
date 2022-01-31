@@ -292,6 +292,7 @@ import { ThemedFacetSectionComponent } from './explore/section-component/facet-s
 import { ThemedMultiColumnTopSectionComponent } from './explore/section-component/multi-column-top-section/themed-multi-column-top-section.component';
 import { ThemedSearchSectionComponent } from './explore/section-component/search-section/themed-search-section.component';
 import { ThemedTextSectionComponent } from './explore/section-component/text-section/themed-text-section.component';
+import { ThemedBrowseMostElementsComponent } from './browse-most-elements/themed-browse-most-elements.component';
 
 
 /**
@@ -575,6 +576,7 @@ const COMPONENTS = [
   ThemedMultiColumnTopSectionComponent,
   ThemedSearchSectionComponent,
   ThemedTextSectionComponent,
+  ThemedBrowseMostElementsComponent,
 ];
 
 const ENTRY_COMPONENTS = [
@@ -664,6 +666,7 @@ const ENTRY_COMPONENTS = [
   ThemedMultiColumnTopSectionComponent,
   ThemedSearchSectionComponent,
   ThemedTextSectionComponent,
+  ThemedBrowseMostElementsComponent,
 ];
 
 const SHARED_SEARCH_PAGE_COMPONENTS = [
