@@ -5772,8 +5772,8 @@
 
   "invitation.ignore-btn": "Ignore",
 
-  "more" : "...more",
+  "cris-layout.rendering.more" : "...more",
 
-  "collapse" : "collapse"
+  "cris-layout.rendering.collapse" : "collapse"
 
 }

@@ -106,7 +106,7 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
   /**
    * Set the limits of how many data loded from first and last
    */
-   setData(functionName : string) {
+   setData(functionName: string) {
     const {firstLimitedDataToBeRenderedMap, lastLimitedDataToBeRenderedMap, isConfigured, firstLimit, lastLimit} =  functionName === 'getComputedData'  ? this.loadMoreService.getComputedData(this.componentsToBeRenderedMap,this.field.rendering) : this.loadMoreService.fillAllData(this.componentsToBeRenderedMap,this.field.rendering);
     this.firstLimitedDataToBeRenderedMap = firstLimitedDataToBeRenderedMap;
     this.lastLimitedDataToBeRenderedMap = lastLimitedDataToBeRenderedMap;

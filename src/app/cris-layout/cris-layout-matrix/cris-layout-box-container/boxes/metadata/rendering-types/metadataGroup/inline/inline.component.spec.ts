@@ -105,7 +105,7 @@ describe('Inline component when .more and .last is not in rendering configuratio
     fixture.detectChanges();
   });
 
-  it('should create', () => {    
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
@@ -127,8 +127,8 @@ describe('Inline component when .more and .last is not in rendering configuratio
     expect(span.nativeElement.textContent).toContain(testItem.metadata[mockField.metadataGroup.elements[1].metadata][1].value);
     done();
   });
-  
-  it('should render first data size to be 6 and last data size to be 0', () => {       
+
+  it('should render first data size to be 6 and last data size to be 0', () => {
     expect(component.firstLimitedDataToBeRenderedMap.size).toBe(2);
     expect(component.lastLimitedDataToBeRenderedMap.size).toBe(0);
   });
@@ -147,44 +147,44 @@ describe('Inline component when .more and .last is present in rendering configur
   const testItem = Object.assign(new Item(), {
     bundles: of({}),
     metadata: {
-      "dc.contributor.author":[
+      'dc.contributor.author':[
          {
-            "value":"Donohue, Tim"
+            'value':'Donohue, Tim'
          },
          {
-            "value":"Surname, Name"
+            'value':'Surname, Name'
          },
          {
-            "value":"Donohue, Tim"
+            'value':'Donohue, Tim'
          },
          {
-            "value":"Surname, Name"
+            'value':'Surname, Name'
          },
          {
-            "value":"Donohue, Tim"
+            'value':'Donohue, Tim'
          },
          {
-            "value":"Surname, Name"
+            'value':'Surname, Name'
          }
       ],
-      "oairecerif.author.affiliation":[
+      'oairecerif.author.affiliation':[
          {
-            "value":"Duraspace"
+            'value':'Duraspace'
          },
          {
-            "value":"4Science"
+            'value':'4Science'
          },
          {
-            "value":"Duraspace"
+            'value':'Duraspace'
          },
          {
-            "value":"4Science"
+            'value':'4Science'
          },
          {
-            "value":"Duraspace"
+            'value':'Duraspace'
          },
          {
-            "value":"4Science"
+            'value':'4Science'
          }
       ]
    }
@@ -255,11 +255,11 @@ describe('Inline component when .more and .last is present in rendering configur
     fixture.detectChanges();
   });
 
-  it('should create', () => {    
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
-  it('should render first data size to be 1 and last data size to be 2', () => {       
+
+  it('should render first data size to be 1 and last data size to be 2', () => {
     expect(component.firstLimitedDataToBeRenderedMap.size).toBe(1);
     expect(component.lastLimitedDataToBeRenderedMap.size).toBe(2);
   });
@@ -268,5 +268,5 @@ describe('Inline component when .more and .last is present in rendering configur
     const moreTag = fixture.debugElement.query(By.css('#a-more'));
     expect(moreTag).toBeTruthy();
   });
-  
-})
+
+});

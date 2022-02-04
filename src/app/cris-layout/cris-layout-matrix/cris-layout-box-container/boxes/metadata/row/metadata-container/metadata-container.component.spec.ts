@@ -492,7 +492,7 @@ describe('MetadataContainerComponent', () => {
 
       beforeEach(() => {
         loadMoreService =  new LoadMoreService();
-        component.field = fieldMock1; 
+        component.field = fieldMock1;
         component.item = testItem2;
         mockLoadMoreService.getComputedData.and.returnValue({
           firstLimitedDataToBeRenderedMap: firstLimitedDataToBeRenderedMap,
@@ -504,7 +504,7 @@ describe('MetadataContainerComponent', () => {
         fixture.detectChanges();
       });
 
-      it('should render first data size to be 1 and last data size to be 2', () => {       
+      it('should render first data size to be 1 and last data size to be 2', () => {
         expect(component.firstLimitedDataToBeRenderedMap.size).toBe(1);
         expect(component.lastLimitedDataToBeRenderedMap.size).toBe(2);
       });
@@ -526,7 +526,7 @@ describe('MetadataContainerComponent', () => {
 
     beforeEach(() => {
       loadMoreService =  new LoadMoreService();
-      component.field = fieldMock2; 
+      component.field = fieldMock2;
       component.item = testItem2;
       mockLoadMoreService.getComputedData.and.returnValue({
         firstLimitedDataToBeRenderedMap: firstLimitedDataToBeRenderedMap,
@@ -538,7 +538,7 @@ describe('MetadataContainerComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should render first data size to be 6 and last data size to be 0', () => {       
+    it('should render first data size to be 6 and last data size to be 0', () => {
       expect(component.firstLimitedDataToBeRenderedMap.size).toBe(6);
       expect(component.lastLimitedDataToBeRenderedMap.size).toBe(0);
     });

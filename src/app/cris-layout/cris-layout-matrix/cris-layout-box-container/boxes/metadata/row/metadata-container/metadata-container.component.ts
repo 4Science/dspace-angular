@@ -244,7 +244,7 @@ export class MetadataContainerComponent implements OnInit {
   setLoadMore(): void {
     this.metadataValues.forEach((metadataValue, index) => {
       const entry = {
-        field:this.field ,
+        field: this.field ,
         value: this.getMetadataValue(this.field, index)
       } as NestedMetadataGroupEntry;
       if (this.componentsToBeRenderedMap.has(index)) {
@@ -256,18 +256,17 @@ export class MetadataContainerComponent implements OnInit {
     });
     this.setData('getComputedData');
   }
-  
 
   /**
    * Set the limits of how many data loded from first and last
    */
-  setData(functionName : string) {
+  setData(functionName: string) {
       const {firstLimitedDataToBeRenderedMap, lastLimitedDataToBeRenderedMap, isConfigured, firstLimit, lastLimit} =  functionName === 'getComputedData'  ? this.loadMoreService.getComputedData(this.componentsToBeRenderedMap,this.field.rendering) : this.loadMoreService.fillAllData(this.componentsToBeRenderedMap,this.field.rendering);
       this.firstLimitedDataToBeRenderedMap = firstLimitedDataToBeRenderedMap;
       this.lastLimitedDataToBeRenderedMap = lastLimitedDataToBeRenderedMap;
       this.isConfigured = isConfigured;
       this.firstLimit = firstLimit;
-      this.lastLimit = lastLimit;      
+      this.lastLimit = lastLimit;
   }
 
 }

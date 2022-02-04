@@ -20,15 +20,13 @@ export class LoadMoreService  {
     let firstLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
     let isConfigured = componentsToBeRenderedMap.size === 1  ? false : true ;
     const {firstLimit , lastLimit} =  this.extractLimits(rendering);
-    if (!firstLimit && !lastLimit) {
+    if ((componentsToBeRenderedMap.size  <= firstLimit + lastLimit) || (!firstLimit && !lastLimit)) {
        isConfigured = false;
        firstLimitedDataToBeRenderedMap = componentsToBeRenderedMap;
     } else {
        firstLimitedDataToBeRenderedMap = this.fillFirstLimitedData(componentsToBeRenderedMap,firstLimit);
        lastLimitedDataToBeRenderedMap = this.fillLastLimitedData(componentsToBeRenderedMap,lastLimit);
     }
-    isConfigured = componentsToBeRenderedMap.size  <= firstLimit + lastLimit  ? false : true ;
-
     return {
         firstLimitedDataToBeRenderedMap,
         lastLimitedDataToBeRenderedMap,

@@ -17,12 +17,12 @@
       <!-- Show More/collapse link button start -->          
       <div class="view-text">
       <a class="d-block" id="a-more" (click)="setData('fillAllData')" href="javascript:void(0);"
-        *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && firstLimit!== 0 && isConfigured">
-        {{"more" | translate}}
+        *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured">
+        {{"cris-layout.rendering.more" | translate}}
       </a>
       <a class="d-block" id="a-collapse" (click)="setData('getComputedData')" href="javascript:void(0);"
-        *ngIf="componentsToBeRenderedMap.size == lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && lastLimit!== 0 && isConfigured">
-        {{"collapse" | translate}}
+        *ngIf="componentsToBeRenderedMap.size == lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured">
+        {{"cris-layout.rendering.collapse" | translate}}
       </a>
       </div>
       <!-- Show More/collapse link button END -->
