@@ -14,13 +14,13 @@
       </div>
       <a (click)="setData('fillAllData')" id="a-more"  href="javascript:void(0);"
         *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured">
-        {{"cris-layout.rendering.more" | translate}}
+        <i class="fas fa-chevron-down"></i> {{"cris-layout.rendering.more" | translate}}
       </a>
     </div>
     <div>
       <a (click)="setData('getComputedData')" id="a-collapse"  href="javascript:void(0);"
         *ngIf="componentsToBeRenderedMap.size == lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured">
-        {{"cris-layout.rendering.collapse" | translate}}
+        <i class="fas fa-chevron-up"></i> {{"cris-layout.rendering.collapse" | translate}}
       </a>
       <div *ngFor="let index of lastLimitedDataToBeRenderedMap.keys();"
         class="d-flex metadata-group-entry">
