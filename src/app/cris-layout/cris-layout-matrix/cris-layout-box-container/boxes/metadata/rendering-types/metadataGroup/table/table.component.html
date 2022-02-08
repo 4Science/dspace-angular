@@ -18,12 +18,12 @@
       <td class="view-text text-center" *ngIf="isConfigured" [attr.colspan]="metadataGroup.length">
         <a class="d-block" id="a-more" (click)="setData('fillAllData')" href="javascript:void(0);"
           *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size">
-          <i class="fas fa-chevron-down"></i> {{"cris-layout.rendering.more" | translate}}
+          <i class="fas fa-chevron-down"></i>{{"cris-layout.rendering.more" | translate}}
         </a>
 
         <a class="d-block" id="a-collaose" (click)="setData('getComputedData')" href="javascript:void(0);"
           *ngIf="componentsToBeRenderedMap.size == lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size">
-          <i class="fas fa-chevron-up"></i> {{"cris-layout.rendering.collapse" | translate}}
+          <i class="fas fa-chevron-up"></i>{{"cris-layout.rendering.collapse" | translate}}
         </a>
       </td>
 

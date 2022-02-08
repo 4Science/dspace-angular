@@ -244,7 +244,7 @@ export class MetadataContainerComponent implements OnInit {
   setLoadMore(): void {
     this.metadataValues.forEach((metadataValue, index) => {
       const entry = {
-        field: this.field ,
+        field: this.field,
         value: this.getMetadataValue(this.field, index)
       } as NestedMetadataGroupEntry;
       if (this.componentsToBeRenderedMap.has(index)) {

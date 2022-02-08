@@ -61,9 +61,9 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
    */
     lastLimit: number;
 
-    /**
-     * This property is used to hold a number how many metadata object should be loded from first
-     */
+  /**
+   * This property is used to hold a number how many metadata object should be loded from first
+   */
     firstLimit: number;
 
 
