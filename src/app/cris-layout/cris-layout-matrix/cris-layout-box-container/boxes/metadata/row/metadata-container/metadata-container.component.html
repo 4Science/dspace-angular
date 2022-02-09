@@ -16,24 +16,19 @@
       <!-- Display starting element with limits END -->          
       <!-- Show More/collapse link button start -->          
       <div class="view-text">
-      <a class="d-block" id="a-more" (click)="setData('fillAllData')" href="javascript:void(0);"
-        *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured">
-        <a>
+        <a (click)="setData('fillAllData')" id="a-more"  href="javascript:void(0);" *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured">
           <i class="fas fa-chevron-down"></i>
         </a> 
-        <a [ngbTooltip]=" 'cris-layout.rendering.more' | translate ">
+        <a (click)="setData('fillAllData')" id="a-more"  href="javascript:void(0);" *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured" [ngbTooltip]=" 'cris-layout.rendering.more' | translate ">
           {{"cris-layout.rendering.more" | translate}}
         </a>
-      </a>
-      <a class="d-block" id="a-collapse" (click)="setData('getComputedData')" href="javascript:void(0);"
-        *ngIf="componentsToBeRenderedMap.size == lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured">
-        <a>
+
+        <a (click)="setData('getComputedData')" id="a-collapse"  href="javascript:void(0);" *ngIf="componentsToBeRenderedMap.size == lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured">
           <i class="fas fa-chevron-up"></i>
         </a>
-        <a [ngbTooltip]=" 'cris-layout.rendering.collapse' | translate ">
+        <a (click)="setData('getComputedData')" id="a-collapse"  href="javascript:void(0);" *ngIf="componentsToBeRenderedMap.size == lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured" [ngbTooltip]=" 'cris-layout.rendering.collapse' | translate ">
           {{"cris-layout.rendering.collapse" | translate}}
         </a>
-      </a>
       </div>
       <!-- Show More/collapse link button END -->
       <ng-container *ngFor="let index of lastLimitedDataToBeRenderedMap.keys();">

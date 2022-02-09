@@ -80,27 +80,27 @@ export class MetadataContainerComponent implements OnInit {
   /**
    * This property is used to hold first limited list of metadata objects
    */
-   firstLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]> = new Map<number, NestedMetadataGroupEntry[]>();
+  firstLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]> = new Map<number, NestedMetadataGroupEntry[]>();
 
-   /**
-    * This property is used to hold last limited list of metadata objects
-    */
-   lastLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]> = new Map<number, NestedMetadataGroupEntry[]>();
+  /**
+   * This property is used to hold last limited list of metadata objects
+   */
+  lastLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]> = new Map<number, NestedMetadataGroupEntry[]>();
 
-   /**
-    * This property is used to hold a boolean which is used to identify .more or .last is configured or not
-    */
-    isConfigured: boolean;
+  /**
+   * This property is used to hold a boolean which is used to identify .more or .last is configured or not
+   */
+  isConfigured: boolean;
 
-   /**
-    * This property is used to hold a number how many metadata objects should be loded form last
-    */
-    lastLimit: number;
+  /**
+   * This property is used to hold a number how many metadata objects should be loded form last
+   */
+  lastLimit: number;
 
-    /**
-     * This property is used to hold a number how many metadata object should be loded from first
-     */
-    firstLimit: number;
+  /**
+   * This property is used to hold a number how many metadata object should be loded from first
+   */
+  firstLimit: number;
 
   constructor(
     protected bitstreamDataService: BitstreamDataService,

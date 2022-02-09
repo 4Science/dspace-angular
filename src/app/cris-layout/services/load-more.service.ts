@@ -37,8 +37,8 @@ export class LoadMoreService  {
    }
 
    extractLimits = (rendering: string): ExtractLimits => {
-    let firstLimit = 0;
-    let lastLimit = 0;
+    let firstLimit = 1;
+    let lastLimit = 1;
     if (!rendering) {
       return {
         firstLimit,

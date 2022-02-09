@@ -483,36 +483,36 @@ describe('MetadataContainerComponent', () => {
   });
 
   describe('Check LoadMoreService with more tag',() => {
-      let loadMoreService: LoadMoreService;
-      const firstLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
-      const lastLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
-      firstLimitedDataToBeRenderedMap.set(0,[mockEntry[0]]);
-      lastLimitedDataToBeRenderedMap.set(4,[mockEntry[4]]);
-      lastLimitedDataToBeRenderedMap.set(5,[mockEntry[5]]);
+    let loadMoreService: LoadMoreService;
+    const firstLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
+    const lastLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
+    firstLimitedDataToBeRenderedMap.set(0,[mockEntry[0]]);
+    lastLimitedDataToBeRenderedMap.set(4,[mockEntry[4]]);
+    lastLimitedDataToBeRenderedMap.set(5,[mockEntry[5]]);
 
-      beforeEach(() => {
-        loadMoreService =  new LoadMoreService();
-        component.field = fieldMock1;
-        component.item = testItem2;
-        mockLoadMoreService.getComputedData.and.returnValue({
-          firstLimitedDataToBeRenderedMap: firstLimitedDataToBeRenderedMap,
-          lastLimitedDataToBeRenderedMap: lastLimitedDataToBeRenderedMap,
-          isConfigured: true,
-          firstLimit: 1,
-          lastLimit: 2
-        });
-        fixture.detectChanges();
+    beforeEach(() => {
+      loadMoreService =  new LoadMoreService();
+      component.field = fieldMock1;
+      component.item = testItem2;
+      mockLoadMoreService.getComputedData.and.returnValue({
+        firstLimitedDataToBeRenderedMap: firstLimitedDataToBeRenderedMap,
+        lastLimitedDataToBeRenderedMap: lastLimitedDataToBeRenderedMap,
+        isConfigured: true,
+        firstLimit: 1,
+        lastLimit: 2
       });
+      fixture.detectChanges();
+    });
 
-      it('should render first data size to be 1 and last data size to be 2', () => {
-        expect(component.firstLimitedDataToBeRenderedMap.size).toBe(1);
-        expect(component.lastLimitedDataToBeRenderedMap.size).toBe(2);
-      });
+    it('should render first data size to be 1 and last data size to be 2', () => {
+      expect(component.firstLimitedDataToBeRenderedMap.size).toBe(1);
+      expect(component.lastLimitedDataToBeRenderedMap.size).toBe(2);
+    });
 
-      it('should display more tag', () => {
-         const moreTag = fixture.debugElement.query(By.css('#a-more'));
-         expect(moreTag).toBeTruthy();
-      });
+    it('should display more tag', () => {
+        const moreTag = fixture.debugElement.query(By.css('#a-more'));
+        expect(moreTag).toBeTruthy();
+    });
   });
 
   describe('Check LoadMoreService with no configuration is provided', () => {
