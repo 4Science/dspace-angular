@@ -1,4 +1,4 @@
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import { NestedMetadataGroupEntry } from '../cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/metadataGroup/metadata-group.component';
 interface ComputedData {
   firstLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]>;
