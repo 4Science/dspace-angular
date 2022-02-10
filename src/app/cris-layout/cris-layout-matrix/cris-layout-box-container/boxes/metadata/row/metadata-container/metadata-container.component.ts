@@ -18,7 +18,8 @@ import { RemoteData } from '../../../../../../../core/data/remote-data';
 import { PaginatedList } from '../../../../../../../core/data/paginated-list.model';
 import { Observable } from 'rxjs';
 import { NestedMetadataGroupEntry } from '../../rendering-types/metadataGroup/metadata-group.component';
-import { LoadMoreService } from 'src/app/cris-layout/services/load-more.service';
+import { LoadMoreService } from '../../../../../../services/load-more.service';
+
 
 @Component({
   selector: 'ds-metadata-container',

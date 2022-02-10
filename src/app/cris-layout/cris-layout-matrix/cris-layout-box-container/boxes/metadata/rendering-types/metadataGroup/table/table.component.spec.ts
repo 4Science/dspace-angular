@@ -12,7 +12,8 @@ import { FieldRenderingType } from '../../metadata-box.decorator';
 import { MetadataRenderComponent } from '../../../row/metadata-container/metadata-render/metadata-render.component';
 import { DsDatePipe } from '../../../../../../../pipes/ds-date.pipe';
 import { TextComponent } from '../../text/text.component';
-import { LoadMoreService } from 'src/app/cris-layout/services/load-more.service';
+import { LoadMoreService } from '../../../../../../../services/load-more.service';
+
 
 describe('TableComponent component when .more and .last is not in rendering configuration', () => {
   let component: TableComponent;

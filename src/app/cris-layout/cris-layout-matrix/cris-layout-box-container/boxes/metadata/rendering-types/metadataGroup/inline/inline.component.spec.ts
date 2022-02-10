@@ -13,7 +13,8 @@ import { LayoutField } from '../../../../../../../../core/layout/models/box.mode
 import { TextComponent } from '../../text/text.component';
 import { DsDatePipe } from '../../../../../../../pipes/ds-date.pipe';
 import { MetadataRenderComponent } from '../../../row/metadata-container/metadata-render/metadata-render.component';
-import { LoadMoreService } from 'src/app/cris-layout/services/load-more.service';
+import { LoadMoreService } from '../../../../../../../services/load-more.service';
+
 
 describe('Inline component when .more and .last is not in rendering configuration', () => {
   let component: InlineComponent;

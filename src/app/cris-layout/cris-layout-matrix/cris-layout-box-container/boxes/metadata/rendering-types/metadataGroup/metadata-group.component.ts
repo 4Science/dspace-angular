@@ -6,7 +6,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { isNotEmpty } from '../../../../../../../shared/empty.util';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
 import { BehaviorSubject } from 'rxjs';
-import { LoadMoreService } from 'src/app/cris-layout/services/load-more.service';
+import { LoadMoreService } from '../../../../../../services/load-more.service';
+
 
 
 

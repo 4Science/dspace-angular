@@ -14,8 +14,8 @@ import { BitstreamDataService } from '../../../../../../../core/data/bitstream-d
 import { createSuccessfulRemoteDataObject$ } from '../../../../../../../shared/remote-data.utils';
 import { createPaginatedList } from '../../../../../../../shared/testing/utils.test';
 import { Bitstream } from '../../../../../../../core/shared/bitstream.model';
-import { LoadMoreService } from 'src/app/cris-layout/services/load-more.service';
 import { NestedMetadataGroupEntry } from '../../rendering-types/metadataGroup/metadata-group.component';
+import { LoadMoreService } from '../../../../../../services/load-more.service';
 
 describe('MetadataContainerComponent', () => {
   let component: MetadataContainerComponent;

@@ -6,7 +6,8 @@ import { FieldRenderingType, MetadataBoxFieldRendering } from '../../metadata-bo
 import { Item } from '../../../../../../../../core/shared/item.model';
 import { LayoutField } from '../../../../../../../../core/layout/models/box.model';
 import { MetadataGroupComponent } from '../metadata-group.component';
-import { LoadMoreService } from 'src/app/cris-layout/services/load-more.service';
+import { LoadMoreService } from '../../../../../../../services/load-more.service';
+
 
 /**
  * This component renders the inline  metadata group fields
