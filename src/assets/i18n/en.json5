@@ -5906,7 +5906,7 @@
 
   "cris-layout.rendering.withlast" : "more",
 
-  "cris-layout.rendering.collapse" : "collapse"
+  "cris-layout.rendering.collapse" : "collapse",
 
   "authority-confidence.search-label":"Search"
 }
