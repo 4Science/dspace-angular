@@ -134,7 +134,7 @@ describe('Inline component when .more and .last is not in rendering configuratio
   });
 
   it('should not display more tag', () => {
-    const moreTag = fixture.debugElement.query(By.css('#a-more'));
+    const moreTag = fixture.debugElement.query(By.css('#a-more-label'));
     expect(moreTag).not.toBeTruthy();
   });
 
@@ -265,7 +265,7 @@ describe('Inline component when .more and .last is present in rendering configur
   });
 
   it('should display more tag', () => {
-    const moreTag = fixture.debugElement.query(By.css('#a-more'));
+    const moreTag = fixture.debugElement.query(By.css('#a-more-label'));
     expect(moreTag).toBeTruthy();
   });
 

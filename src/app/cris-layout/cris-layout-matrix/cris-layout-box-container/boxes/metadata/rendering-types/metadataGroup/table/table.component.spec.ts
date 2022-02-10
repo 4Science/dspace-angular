@@ -145,7 +145,7 @@ describe('TableComponent component when .more and .last is not in rendering conf
   });
 
   it('should not display more tag', () => {
-    const moreTag = fixture.debugElement.query(By.css('#a-more'));
+    const moreTag = fixture.debugElement.query(By.css('#a-more-label'));
     expect(moreTag).not.toBeTruthy();
   });
 });
@@ -276,7 +276,7 @@ describe('TableComponent component when .more and .last is present in rendering 
   });
 
   it('should display more tag', () => {
-    const moreTag = fixture.debugElement.query(By.css('#a-more'));
+    const moreTag = fixture.debugElement.query(By.css('#a-more-label'));
     expect(moreTag).toBeTruthy();
   });
 
