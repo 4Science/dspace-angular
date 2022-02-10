@@ -117,7 +117,7 @@ describe('TableComponent component when .more and .last is not in rendering conf
 
   it('check metadata rendering', (done) => {
     const rowsFound = fixture.debugElement.queryAll(By.css('tr'));
-    expect(rowsFound.length).toBe(3);
+    expect(rowsFound.length).toBe(4);
 
     let rowFound = fixture.debugElement.query(By.css('tr:nth-child(1)'));
     let td = rowFound.query(By.css('td:nth-child(1)'));
