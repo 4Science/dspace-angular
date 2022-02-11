@@ -20,7 +20,6 @@ import { Observable } from 'rxjs';
 import { NestedMetadataGroupEntry } from '../../rendering-types/metadataGroup/metadata-group.component';
 import { LoadMoreService } from '../../../../../../services/load-more.service';
 
-
 @Component({
   selector: 'ds-metadata-container',
   templateUrl: './metadata-container.component.html',

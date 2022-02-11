@@ -8,9 +8,6 @@ import { MetadataValue } from '../../../../../../../core/shared/metadata.models'
 import { BehaviorSubject } from 'rxjs';
 import { LoadMoreService } from '../../../../../../services/load-more.service';
 
-
-
-
 export interface NestedMetadataGroupEntry {
   field: LayoutField;
   value: MetadataValue;
@@ -67,8 +64,6 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
    */
   firstLimit: number;
 
-
-
   constructor(
     @Inject('fieldProvider') public fieldProvider: LayoutField,
     @Inject('itemProvider') public itemProvider: Item,
@@ -83,7 +78,7 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
     this.field.metadataGroup.elements.forEach((entry: LayoutField) => {
       if (this.item.metadata[entry.metadata]) {
         const styleValue = !entry.styleValue ? this.field.styleValue :(entry.styleValue + this.field.styleValue);
-        this.metadataGroup.push(Object.assign({​​}​​, entry, {​​styleValue: styleValue}​​) );
+        this.metadataGroup.push(Object.assign({}, entry, { styleValue: styleValue }));
       }
     });
     this.metadataValues.forEach((mdv, index) => {

@@ -424,7 +424,7 @@ export const environment: GlobalConfig = {
       loadMore: {
         first:5,
         last:1
-       }
+      }
     },
   },
   layout: {
