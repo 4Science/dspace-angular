@@ -13,8 +13,8 @@
           class="px-3">&bull;</span>
       </div>
       <a (click)="setData('fillAllData')" id="a-more-icon"  href="javascript:void(0);" *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured"><i class="fas fa-chevron-down"></i></a> 
-      <a (click)="setData('fillAllData')" id="a-more-label"  href="javascript:void(0);" *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured" [ngbTooltip]=" 'cris-layout.rendering.more' | translate ">
-        {{ (lastLimit === 0 ? "cris-layout.rendering.more" : "cris-layout.rendering.withlast") | translate}}
+      <a (click)="setData('fillAllData')" id="a-more-label"  href="javascript:void(0);" *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured" [ngbTooltip]=" 'cris-layout.rendering.more.tooltip' | translate ">
+        {{ (lastLimit === 0 ? "cris-layout.rendering.more" : "cris-layout.rendering.more.withlast") | translate}}
       </a>
     </div>
     <div>

@@ -133,13 +133,13 @@ describe('LoadMoreService', () => {
           'confidence':-1
       }
     }
-] as NestedMetadataGroupEntry[];
+  ] as NestedMetadataGroupEntry[];
 
-const componentsToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
+  const componentsToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
 
-for (let index = 0; index < entry.length; index++) {
-    componentsToBeRenderedMap.set(index,[entry[index]]);
-}
+  for (let index = 0; index < entry.length; index++) {
+      componentsToBeRenderedMap.set(index,[entry[index]]);
+  }
 
   beforeEach(() => {
     TestBed.configureTestingModule({

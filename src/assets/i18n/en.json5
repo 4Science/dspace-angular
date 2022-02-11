@@ -5904,7 +5904,9 @@
 
   "cris-layout.rendering.more" : "more",
 
-  "cris-layout.rendering.withlast" : "more",
+  "cris-layout.rendering.more.withlast" : "more",
+
+  "cris-layout.rendering.more.tooltip" : "click to see all",
 
   "cris-layout.rendering.collapse" : "collapse",
 
