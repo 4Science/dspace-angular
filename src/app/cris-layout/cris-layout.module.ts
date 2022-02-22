@@ -45,10 +45,10 @@ import { MetadataContainerComponent } from './cris-layout-matrix/cris-layout-box
 import { MetadataRenderComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/row/metadata-container/metadata-render/metadata-render.component';
 import { MiradorViewerModule } from '../item-page/mirador-viewer/mirador-viewer.module';
 import { ComcolModule } from '../shared/comcol/comcol.module';
+import { LoadMoreService } from './services/load-more.service';
 import { SearchModule } from '../shared/search/search.module';
 
 const ENTRY_COMPONENTS = [
-  // put only entry components that use custom decorator
   CrisLayoutVerticalComponent,
   CrisLayoutHorizontalComponent,
   CrisLayoutMetadataBoxComponent,
@@ -96,6 +96,7 @@ const ENTRY_COMPONENTS = [
     MetadataContainerComponent,
     MetadataRenderComponent
   ],
+  providers:[ LoadMoreService ],
   imports: [
     CommonModule,
     SharedModule,
