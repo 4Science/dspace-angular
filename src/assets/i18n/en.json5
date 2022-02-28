@@ -6038,6 +6038,14 @@
 
   "invitation.ignore-btn": "Ignore",
 
+  "cris-layout.rendering.more" : "more",
+
+  "cris-layout.rendering.more.withlast" : "more",
+
+  "cris-layout.rendering.more.tooltip" : "click to see all",
+
+  "cris-layout.rendering.collapse" : "collapse",
+
   "authority-confidence.search-label":"Search",
 
   "map.coordinates-invalid": "Coordinates are not valid"

@@ -13,6 +13,7 @@ export interface CrisRefConfig extends Config {
 export interface CrisLayoutMetadataBoxConfig extends Config {
   defaultMetadataLabelColStyle: string;
   defaultMetadataValueColStyle: string;
+  loadMore: CrisLoadMoreConfig;
 }
 
 export interface CrisLayoutTypeConfig {
@@ -28,7 +29,10 @@ export interface CrisItemPageConfig extends Config {
   default: CrisLayoutTypeConfig;
 }
 
-
+export interface CrisLoadMoreConfig extends Config {
+  first: number;
+  last: number;
+}
 export interface CrisLayoutConfig extends Config {
   urn: UrnConfig[];
   crisRef: CrisRefConfig[];
