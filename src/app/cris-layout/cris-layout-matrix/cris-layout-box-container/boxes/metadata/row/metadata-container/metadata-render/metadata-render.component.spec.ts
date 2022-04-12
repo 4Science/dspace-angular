@@ -12,6 +12,7 @@ import { DsDatePipe } from '../../../../../../../pipes/ds-date.pipe';
 import { FieldRenderingType } from '../../../rendering-types/metadata-box.decorator';
 import { LayoutField } from '../../../../../../../../core/layout/models/box.model';
 import { TableComponent } from '../../../rendering-types/metadataGroup/table/table.component';
+import { LoadMoreService } from '../../../../../../../services/load-more.service';
 import { PLACEHOLDER_PARENT_METADATA } from '../../../../../../../../shared/form/builder/ds-dynamic-form-ui/ds-dynamic-form-constants';
 
 describe('MetadataRenderComponent', () => {
@@ -121,7 +122,8 @@ describe('MetadataRenderComponent', () => {
         })
       ],
       providers: [
-        Injector
+        Injector,
+        LoadMoreService
       ],
       declarations: [
         DsDatePipe,

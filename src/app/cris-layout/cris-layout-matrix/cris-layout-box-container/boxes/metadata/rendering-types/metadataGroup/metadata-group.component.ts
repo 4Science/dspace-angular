@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { isNotEmpty } from '../../../../../../../shared/empty.util';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
 import { BehaviorSubject } from 'rxjs';
-
+import { LoadMoreService } from '../../../../../../services/load-more.service';
 
 export interface NestedMetadataGroupEntry {
   field: LayoutField;
@@ -39,11 +39,37 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
    */
   initialized: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  /**
+   * This property is used to hold first limited list of metadata objects
+   */
+  firstLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]> = new Map<number, NestedMetadataGroupEntry[]>();
+
+  /**
+   * This property is used to hold last limited list of metadata objects
+   */
+  lastLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]> = new Map<number, NestedMetadataGroupEntry[]>();
+
+  /**
+   * This property is used to hold a boolean which is used to identify .more or .last is configured or not
+   */
+  isConfigured: boolean;
+
+  /**
+   * This property is used to hold a number how many metadata objects should be loded form last
+   */
+  lastLimit: number;
+
+  /**
+   * This property is used to hold a number how many metadata object should be loded from first
+   */
+  firstLimit: number;
+
   constructor(
     @Inject('fieldProvider') public fieldProvider: LayoutField,
     @Inject('itemProvider') public itemProvider: Item,
     @Inject('renderingSubTypeProvider') public renderingSubTypeProvider: string,
-    protected translateService: TranslateService
+    protected translateService: TranslateService,
+    protected loadMoreService: LoadMoreService
   ) {
     super(fieldProvider, itemProvider, renderingSubTypeProvider, translateService);
   }
@@ -71,7 +97,20 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
     });
 
     this.initialized.next(true);
+    this.setData('getComputedData');
   }
+
+  /**
+   * Set the limits of how many data loded from first and last
+   */
+   setData(functionName: string) {
+    const {firstLimitedDataToBeRenderedMap, lastLimitedDataToBeRenderedMap, isConfigured, firstLimit, lastLimit} =  functionName === 'getComputedData'  ? this.loadMoreService.getComputedData(this.componentsToBeRenderedMap,this.field.rendering) : this.loadMoreService.fillAllData(this.componentsToBeRenderedMap,this.field.rendering);
+    this.firstLimitedDataToBeRenderedMap = firstLimitedDataToBeRenderedMap;
+    this.lastLimitedDataToBeRenderedMap = lastLimitedDataToBeRenderedMap;
+    this.isConfigured = isConfigured;
+    this.firstLimit = firstLimit;
+    this.lastLimit = lastLimit;
+}
 
   getMetadataValue(field: LayoutField, index: number): MetadataValue {
     const metadataList = this.item.findMetadataSortedByPlace(field.metadata);
@@ -95,4 +134,5 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
   ngOnDestroy(): void {
     this.componentsToBeRenderedMap = null;
   }
+
 }

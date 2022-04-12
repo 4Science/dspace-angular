@@ -17,12 +17,14 @@ import { BitstreamDataService } from '../../../../../../../core/data/bitstream-d
 import { RemoteData } from '../../../../../../../core/data/remote-data';
 import { PaginatedList } from '../../../../../../../core/data/paginated-list.model';
 import { Observable } from 'rxjs';
+import { NestedMetadataGroupEntry } from '../../rendering-types/metadataGroup/metadata-group.component';
+import { LoadMoreService } from '../../../../../../services/load-more.service';
 
 @Component({
   selector: 'ds-metadata-container',
   templateUrl: './metadata-container.component.html',
   styleUrls: ['./metadata-container.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MetadataContainerComponent implements OnInit {
   /**
@@ -60,9 +62,50 @@ export class MetadataContainerComponent implements OnInit {
    */
   renderingSubType: string;
 
+  /**
+   * This property is used to hold nested Layout Field inside a metadata group field
+   */
+  metadataGroup: LayoutField[] = [];
+
+  /**
+   * This property is used to hold a list of objects with nested Layout Field and an index that shows the position of nested field inside metadata group field
+   */
+  componentsToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]> = new Map<number, NestedMetadataGroupEntry[]>();
+
+  /**
+   * This boolean is used to check a expand and collapse functionality is needed or not.
+   */
+  isLoadMore = false;
+
+  /**
+   * This property is used to hold first limited list of metadata objects
+   */
+  firstLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]> = new Map<number, NestedMetadataGroupEntry[]>();
+
+  /**
+   * This property is used to hold last limited list of metadata objects
+   */
+  lastLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]> = new Map<number, NestedMetadataGroupEntry[]>();
+
+  /**
+   * This property is used to hold a boolean which is used to identify .more or .last is configured or not
+   */
+  isConfigured: boolean;
+
+  /**
+   * This property is used to hold a number how many metadata objects should be loded form last
+   */
+  lastLimit: number;
+
+  /**
+   * This property is used to hold a number how many metadata object should be loded from first
+   */
+  firstLimit: number;
+
   constructor(
     protected bitstreamDataService: BitstreamDataService,
     protected translateService: TranslateService,
+    public loadMoreService: LoadMoreService,
     protected cd: ChangeDetectorRef
   ) {
   }
@@ -128,6 +171,10 @@ export class MetadataContainerComponent implements OnInit {
     this.renderingSubType = this.computeSubType(this.field);
     this.metadataFieldRenderOptions = this.getMetadataBoxFieldRenderOptions(renderingType);
     this.isStructured = this.metadataFieldRenderOptions.structured;
+    if (!this.isStructured && this.metadataValues.length > 1) {
+      this.isLoadMore = true;
+      this.setLoadMore();
+    }
     this.cd.detectChanges();
   }
 
@@ -189,4 +236,39 @@ export class MetadataContainerComponent implements OnInit {
   trackUpdate(index, value: string) {
     return value;
   }
+
+
+  getMetadataValue(field: LayoutField, index: number): MetadataValue {
+    const metadataList = this.item.findMetadataSortedByPlace(field.metadata);
+    return isNotEmpty(metadataList[index]) ? metadataList[index] : null;
+  }
+
+  setLoadMore(): void {
+    this.metadataValues.forEach((metadataValue, index) => {
+      const entry = {
+        field: this.field,
+        value: this.getMetadataValue(this.field, index)
+      } as NestedMetadataGroupEntry;
+      if (this.componentsToBeRenderedMap.has(index)) {
+        const newEntries = [...this.componentsToBeRenderedMap.get(index), entry];
+        this.componentsToBeRenderedMap.set(index, newEntries);
+      } else {
+        this.componentsToBeRenderedMap.set(index, [entry]);
+      }
+    });
+    this.setData('getComputedData');
+  }
+
+  /**
+   * Set the limits of how many data loded from first and last
+   */
+  setData(functionName: string) {
+      const {firstLimitedDataToBeRenderedMap, lastLimitedDataToBeRenderedMap, isConfigured, firstLimit, lastLimit} =  functionName === 'getComputedData'  ? this.loadMoreService.getComputedData(this.componentsToBeRenderedMap,this.field.rendering) : this.loadMoreService.fillAllData(this.componentsToBeRenderedMap,this.field.rendering);
+      this.firstLimitedDataToBeRenderedMap = firstLimitedDataToBeRenderedMap;
+      this.lastLimitedDataToBeRenderedMap = lastLimitedDataToBeRenderedMap;
+      this.isConfigured = isConfigured;
+      this.firstLimit = firstLimit;
+      this.lastLimit = lastLimit;
+  }
+
 }

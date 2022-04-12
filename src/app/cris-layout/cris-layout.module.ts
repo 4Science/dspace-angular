@@ -45,10 +45,12 @@ import { MetadataContainerComponent } from './cris-layout-matrix/cris-layout-box
 import { MetadataRenderComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/row/metadata-container/metadata-render/metadata-render.component';
 import { MiradorViewerModule } from '../item-page/mirador-viewer/mirador-viewer.module';
 import { ComcolModule } from '../shared/comcol/comcol.module';
+import { LoadMoreService } from './services/load-more.service';
 import { SearchModule } from '../shared/search/search.module';
+import { MapComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/map/map.component';
+import { GooglemapsModule } from '../shared/googlemaps/googlemaps.module';
 
 const ENTRY_COMPONENTS = [
-  // put only entry components that use custom decorator
   CrisLayoutVerticalComponent,
   CrisLayoutHorizontalComponent,
   CrisLayoutMetadataBoxComponent,
@@ -72,6 +74,7 @@ const ENTRY_COMPONENTS = [
   OrcidComponent,
   ValuepairComponent,
   TagComponent,
+  MapComponent
 ];
 @NgModule({
   declarations: [
@@ -94,12 +97,15 @@ const ENTRY_COMPONENTS = [
     DsDatePipe,
     RowComponent,
     MetadataContainerComponent,
-    MetadataRenderComponent
+    MetadataRenderComponent,
+    MapComponent
   ],
+  providers:[ LoadMoreService ],
   imports: [
     CommonModule,
     SharedModule,
     SearchModule.withEntryComponents(),
+    GooglemapsModule,
     MyDSpacePageModule,
     ContextMenuModule.withEntryComponents(),
     NgbAccordionModule,

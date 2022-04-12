@@ -4325,6 +4325,7 @@
 
   "publication.search.title": "Publication Search",
 
+  "product.page.titleprefix": "Product: ",
 
   "media-viewer.next": "Next",
 
@@ -4682,9 +4683,13 @@
 
   "search.filters.applied.charts.default.title": "Search Output",
 
+  "search.filters.applied.charts.RELATION.Funding.researchoutputs.title": "Research Output",
+
   "search.filters.applied.charts.RELATION.Person.researchoutputs.title": "Research Output",
 
   "search.filters.applied.charts.RELATION.Project.fundings.title": "Fundings",
+
+  "search.filters.applied.charts.RELATION.Project.researchoutputs.title" : "Research Output",
 
   "search.filters.applied.charts.no.data.found": "No data found",
 
@@ -6106,5 +6111,15 @@
 
   "invitation.ignore-btn": "Ignore",
 
-  "authority-confidence.search-label":"Search"
+  "cris-layout.rendering.more" : "more",
+
+  "cris-layout.rendering.more.withlast" : "more",
+
+  "cris-layout.rendering.more.tooltip" : "click to see all",
+
+  "cris-layout.rendering.collapse" : "collapse",
+
+  "authority-confidence.search-label":"Search",
+
+  "map.coordinates-invalid": "Coordinates are not valid"
 }

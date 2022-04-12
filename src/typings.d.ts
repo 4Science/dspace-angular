@@ -30,7 +30,7 @@ declare module 'modern-lru' {
   const x: any;
   export = x;
 }
-
+declare module 'googlemaps';
 declare var System: SystemJS;
 
 interface SystemJS {

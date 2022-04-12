@@ -60,6 +60,7 @@ import { PageInternalServerErrorComponent } from './page-internal-server-error/p
 import { ThemedAdminSidebarComponent } from './admin/admin-sidebar/themed-admin-sidebar.component';
 import { APP_CONFIG, AppConfig } from '../config/app-config.interface';
 import { SocialComponent } from './social/social.component';
+import { GooglemapsModule } from './shared/googlemaps/googlemaps.module';
 
 export function getConfig() {
   return environment;
@@ -87,6 +88,7 @@ const IMPORTS = [
   NavbarModule,
   HttpClientModule,
   AppRoutingModule,
+  GooglemapsModule,
   CoreModule.forRoot(),
   ScrollToModule.forRoot(),
   NgbModule,

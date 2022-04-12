@@ -6,15 +6,31 @@
           <span [innerHTML]="getLabel(field)"></span>
         </td>
       </tr>
-      <tr *ngFor="let index of componentsToBeRenderedMap.keys();">
-        <td *ngFor="let mdg of componentsToBeRenderedMap.get(index)">
-          <ds-metadata-render class="w-100"
-                              [item]="item"
-                              [field]="mdg.field"
-                              [metadataValue]="mdg.value"></ds-metadata-render>
+      <tr *ngFor="let index of firstLimitedDataToBeRenderedMap.keys();">
+        <td *ngFor="let mdg of firstLimitedDataToBeRenderedMap.get(index)">
+          <ds-metadata-render class="w-100" [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
+          </ds-metadata-render>
+        </td>
+      </tr>
+      <tr>
+        <td class="view-text text-center more-collapse" *ngIf="isConfigured" [attr.colspan]="metadataGroup.length">
+          <a (click)="setData('fillAllData')" id="a-more-icon" href="javascript:void(0);" *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured"><i class="fas fa-chevron-down"></i></a> 
+          <a (click)="setData('fillAllData')" id="a-more-label" href="javascript:void(0);" *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured" [ngbTooltip]=" 'cris-layout.rendering.more.tooltip' | translate ">
+            {{ (lastLimit === 0 ? "cris-layout.rendering.more" : "cris-layout.rendering.more.withlast") | translate}}
+          </a>
+
+          <a (click)="setData('getComputedData')" id="a-collapse-icon" href="javascript:void(0);" *ngIf="componentsToBeRenderedMap.size == lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured"><i class="fas fa-chevron-up"></i></a>
+          <a (click)="setData('getComputedData')" id="a-collapse-label" href="javascript:void(0);" *ngIf="componentsToBeRenderedMap.size == lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured" [ngbTooltip]=" 'cris-layout.rendering.collapse' | translate ">
+            {{"cris-layout.rendering.collapse" | translate}}
+          </a>
+        </td>
+      </tr>
+      <tr *ngFor="let index of lastLimitedDataToBeRenderedMap.keys();">
+        <td *ngFor="let mdg of lastLimitedDataToBeRenderedMap.get(index)">
+          <ds-metadata-render class="w-100" [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
+          </ds-metadata-render>
         </td>
       </tr>
     </table>
   </div>
 </div>
-

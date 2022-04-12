@@ -13,8 +13,10 @@ import { LayoutField } from '../../../../../../../../core/layout/models/box.mode
 import { TextComponent } from '../../text/text.component';
 import { DsDatePipe } from '../../../../../../../pipes/ds-date.pipe';
 import { MetadataRenderComponent } from '../../../row/metadata-container/metadata-render/metadata-render.component';
+import { LoadMoreService } from '../../../../../../../services/load-more.service';
 
-describe('InlineComponent', () => {
+
+describe('Inline component when .more and .last is not in rendering configuration', () => {
   let component: InlineComponent;
   let fixture: ComponentFixture<InlineComponent>;
   const testItem = Object.assign(new Item(), {
@@ -84,6 +86,7 @@ describe('InlineComponent', () => {
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
         { provide: 'renderingSubTypeProvider', useValue: '' },
+        LoadMoreService
       ],
       declarations: [
         DsDatePipe,
@@ -124,6 +127,147 @@ describe('InlineComponent', () => {
     span = divFound.query(By.css('span.metadata-group-entry-value:nth-child(2)'));
     expect(span.nativeElement.textContent).toContain(testItem.metadata[mockField.metadataGroup.elements[1].metadata][1].value);
     done();
-
   });
+
+  it('should render first data size to be 6 and last data size to be 0', () => {
+    expect(component.firstLimitedDataToBeRenderedMap.size).toBe(2);
+    expect(component.lastLimitedDataToBeRenderedMap.size).toBe(0);
+  });
+
+  it('should not display more tag', () => {
+    const moreTag = fixture.debugElement.query(By.css('#a-more-label'));
+    expect(moreTag).not.toBeTruthy();
+  });
+
+});
+
+describe('Inline component when .more and .last is present in rendering configuration', () => {
+  let component: InlineComponent;
+  let fixture: ComponentFixture<InlineComponent>;
+
+  const testItem = Object.assign(new Item(), {
+    bundles: of({}),
+    metadata: {
+      'dc.contributor.author':[
+         {
+            'value':'Donohue, Tim'
+         },
+         {
+            'value':'Surname, Name'
+         },
+         {
+            'value':'Donohue, Tim'
+         },
+         {
+            'value':'Surname, Name'
+         },
+         {
+            'value':'Donohue, Tim'
+         },
+         {
+            'value':'Surname, Name'
+         }
+      ],
+      'oairecerif.author.affiliation':[
+         {
+            'value':'Duraspace'
+         },
+         {
+            'value':'4Science'
+         },
+         {
+            'value':'Duraspace'
+         },
+         {
+            'value':'4Science'
+         },
+         {
+            'value':'Duraspace'
+         },
+         {
+            'value':'4Science'
+         }
+      ]
+   }
+  });
+  const mockField = Object.assign({
+    id: 1,
+    fieldType: 'METADATAGROUP',
+    metadata: 'dc.contributor.author',
+    label: 'Author(s)',
+    rendering: 'inline.more.1.last.2',
+    style: 'container row',
+    styleLabel: 'font-weight-bold col-4',
+    styleValue: 'col',
+    metadataGroup: {
+      leading: 'dc.contributor.author',
+      elements: [
+        {
+          metadata: 'dc.contributor.author',
+          label: 'Author(s)',
+          rendering: 'TEXT',
+          fieldType: 'METADATA',
+          style: null,
+          styleLabel: 'font-weight-bold col-0',
+          styleValue: 'col'
+        },
+        {
+          metadata: 'oairecerif.author.affiliation',
+          label: 'Affiliation(s)',
+          rendering: 'TEXT',
+          fieldType: 'METADATA',
+          style: null,
+          styleLabel: 'font-weight-bold col-0',
+          styleValue: 'col'
+        }
+      ]
+    }
+  }) as LayoutField;
+
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useClass: TranslateLoaderMock
+        }
+      }), BrowserAnimationsModule],
+      providers: [
+        { provide: 'fieldProvider', useValue: mockField },
+        { provide: 'itemProvider', useValue: testItem },
+        { provide: 'renderingSubTypeProvider', useValue: '' },
+        LoadMoreService
+      ],
+      declarations: [
+        DsDatePipe,
+        MetadataRenderComponent,
+        InlineComponent,
+        TextComponent
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).overrideComponent(InlineComponent, {
+      set: { changeDetection: ChangeDetectionStrategy.OnPush }
+    }).compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(InlineComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should render first data size to be 1 and last data size to be 2', () => {
+    expect(component.firstLimitedDataToBeRenderedMap.size).toBe(1);
+    expect(component.lastLimitedDataToBeRenderedMap.size).toBe(2);
+  });
+
+  it('should display more tag', () => {
+    const moreTag = fixture.debugElement.query(By.css('#a-more-label'));
+    expect(moreTag).toBeTruthy();
+  });
+
 });
