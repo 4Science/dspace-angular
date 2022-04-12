@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Item } from '../../../../../../../core/shared/item.model';
 import { CrisLayoutBox, LayoutField, LayoutFieldType } from '../../../../../../../core/layout/models/box.model';
 import {
@@ -25,7 +25,6 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MetadataContainerComponent implements OnInit {
-
   /**
    * Current DSpace Item
    */
@@ -63,7 +62,8 @@ export class MetadataContainerComponent implements OnInit {
 
   constructor(
     protected bitstreamDataService: BitstreamDataService,
-    protected translateService: TranslateService
+    protected translateService: TranslateService,
+    protected cd: ChangeDetectorRef
   ) {
   }
 
@@ -85,7 +85,7 @@ export class MetadataContainerComponent implements OnInit {
    * Returns a string representing the label of field if exists
    */
   get label(): string {
-    const fieldLabelI18nKey = this.fieldI18nPrefix + this.field.label;
+    const fieldLabelI18nKey = this.fieldI18nPrefix + this.item.entityType + '.' + this.field.metadata;
     const header: string = this.translateService.instant(fieldLabelI18nKey);
     if (header === fieldLabelI18nKey) {
       // if translation does not exist return the value present in the header property
@@ -113,7 +113,7 @@ export class MetadataContainerComponent implements OnInit {
 
   ngOnInit() {
     const rendering = this.computeRendering(this.field);
-    if (this.field.fieldType === LayoutFieldType.BITSTREAM && rendering === FieldRenderingType.ATTACHMENT) {
+    if (this.field.fieldType === LayoutFieldType.BITSTREAM && rendering.toLocaleLowerCase() === FieldRenderingType.ATTACHMENT.toLocaleLowerCase()) {
       this.hasBitstream().pipe(take(1)).subscribe((hasBitstream: boolean) => {
         if (hasBitstream) {
           this.initRenderOptions(rendering);
@@ -128,6 +128,7 @@ export class MetadataContainerComponent implements OnInit {
     this.renderingSubType = this.computeSubType(this.field);
     this.metadataFieldRenderOptions = this.getMetadataBoxFieldRenderOptions(renderingType);
     this.isStructured = this.metadataFieldRenderOptions.structured;
+    this.cd.detectChanges();
   }
 
   hasBitstream(): Observable<boolean> {
@@ -188,5 +189,4 @@ export class MetadataContainerComponent implements OnInit {
   trackUpdate(index, value: string) {
     return value;
   }
-
 }

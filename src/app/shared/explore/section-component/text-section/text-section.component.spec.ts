@@ -1,22 +1,27 @@
 import { SearchService } from '../../../../core/shared/search/search.service';
-import { waitForAsync } from '@angular/core/testing';
-/* tslint:disable:no-unused-variable */
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TextSectionComponent } from './text-section.component';
-import {Site} from '../../../../core/shared/site.model';
-import {By} from '@angular/platform-browser';
-import {SimpleChange, SimpleChanges} from '@angular/core';
+import { Site } from '../../../../core/shared/site.model';
+import { By } from '@angular/platform-browser';
+import { LocaleService } from '../../../../core/locale/locale.service';
 
 describe('TextSectionComponent', () => {
   let component: TextSectionComponent;
   let fixture: ComponentFixture<TextSectionComponent>;
 
+  const localeServiceStub = {
+    getCurrentLanguageCode(): string {
+      return 'en';
+    }
+  };
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ TextSectionComponent ],
       providers: [
-        { provide: SearchService, useValue: {} }]
+        { provide: SearchService, useValue: {} },
+        { provide: LocaleService, useValue: localeServiceStub }
+      ]
     })
       .compileComponents();
   }));
@@ -58,12 +63,7 @@ describe('TextSectionComponent', () => {
   });
   // FIXME: complete scenarios
   it('should render text-metadata with innerHtml', () => {
-    const currentValue = component.site ;
-    const changesObj: SimpleChanges = {
-      site: new SimpleChange(null, currentValue, true),
-    };
     component.sectionId = 'site';
-    component.ngOnChanges(changesObj);
     fixture.detectChanges();
     const name = fixture.debugElement.queryAll(By.css('div'))[2].nativeElement;
     expect(name.innerHTML).toContain(component.site.metadata['cms.homepage.footer'][0].value);

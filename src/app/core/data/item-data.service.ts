@@ -25,7 +25,7 @@ import { PaginatedList } from './paginated-list.model';
 import { RemoteData } from './remote-data';
 import { DeleteRequest, FindListOptions, GetRequest, PostRequest, PutRequest, RestRequest } from './request.models';
 import { RequestService } from './request.service';
-import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
+import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { Bundle } from '../shared/bundle.model';
 import { MetadataMap } from '../shared/metadata.models';
 import { BundleDataService } from './bundle-data.service';
@@ -35,11 +35,17 @@ import { Metric } from '../shared/metric.model';
 import { GenericConstructor } from '../shared/generic-constructor';
 import { ResponseParsingService } from './parsing.service';
 import { StatusCodeOnlyResponseParsingService } from './status-code-only-response-parsing.service';
+import { of } from 'rxjs/internal/observable/of';
+import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
+import { RequestParam } from '../cache/models/request-param.model';
+import { ItemSearchParams } from './item-search-params';
+import { validate as uuidValidate } from 'uuid';
 
 @Injectable()
 @dataService(ITEM)
 export class ItemDataService extends DataService<Item> {
   protected linkPath = 'items';
+  protected searchFindAllByIdPath = 'findAllById';
 
   constructor(
     protected requestService: RequestService,
@@ -71,7 +77,7 @@ export class ItemDataService extends DataService<Item> {
     return this.bs.getBrowseURLFor(field, linkPath).pipe(
       filter((href: string) => isNotEmpty(href)),
       map((href: string) => new URLCombiner(href, `?scope=${options.scopeID}`).toString()),
-      distinctUntilChanged(),);
+      distinctUntilChanged());
   }
 
   /**
@@ -325,6 +331,80 @@ export class ItemDataService extends DataService<Item> {
    */
   invalidateItemCache(itemUUID: string) {
     this.requestService.setStaleByHrefSubstring('item/' + itemUUID);
+  }
+
+  /**
+   * Search for a list of {@link Item}s using the "findAllById" search endpoint.
+   * @param uuidList                    UUID to the objects to search {@link Item}s for. Required.
+   * @param options                     {@link FindListOptions} to provide pagination and/or additional arguments
+   * @param useCachedVersionIfAvailable If this is true, the request will only be sent if there's
+   *                                    no valid cached version. Defaults to true
+   * @param reRequestOnStale            Whether or not the request should automatically be re-
+   *                                    requested after the response becomes stale
+   * @param linksToFollow               List of {@link FollowLinkConfig} that indicate which
+   *                                    {@link HALLink}s should be automatically resolved
+   */
+  findAllById(uuidList: string[], options: FindListOptions = {}, useCachedVersionIfAvailable = true, reRequestOnStale = true, ...linksToFollow: FollowLinkConfig<Item>[]): Observable<RemoteData<PaginatedList<Item>>> {
+    return of(new ItemSearchParams(uuidList)).pipe(
+      switchMap((params: ItemSearchParams) => {
+        return this.searchBy(this.searchFindAllByIdPath,
+          this.createSearchOptionsObjectsFindAllByID(params.uuidList, options), useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
+      })
+    );
+  }
+
+  /**
+   * Create {@link FindListOptions} with {@link RequestParam}s containing a "uuid" list
+   * @param uuidList  Required parameter values to add to {@link RequestParam} "id"
+   * @param options     Optional initial {@link FindListOptions} to add parameters to
+   */
+  private createSearchOptionsObjectsFindAllByID(uuidList: string[], options: FindListOptions = {}): FindListOptions {
+    let params = [];
+    if (isNotEmpty(options.searchParams)) {
+      params = [...options.searchParams];
+    }
+    uuidList.forEach((uuid) => {
+      params.push(new RequestParam('id', uuid));
+    });
+    return Object.assign(new FindListOptions(), options, {
+      searchParams: [...params]
+    });
+  }
+
+
+  findById(id: string, useCachedVersionIfAvailable = true, reRequestOnStale = true, ...linksToFollow: FollowLinkConfig<Item>[]): Observable<RemoteData<Item>> {
+
+    if (uuidValidate(id)) {
+      const href$ = this.getIDHrefObs(encodeURIComponent(id), ...linksToFollow);
+      return this.findByHref(href$, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
+    } else {
+      return this.findByCustomUrl(id, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
+    }
+  }
+
+  /**
+   * Returns an observable of {@link RemoteData} of an object, based on its CustomURL or ID, with a list of
+   * {@link FollowLinkConfig}, to automatically resolve {@link HALLink}s of the object
+   * @param id                          CustomUrl or UUID of object we want to retrieve
+   * @param useCachedVersionIfAvailable If this is true, the request will only be sent if there's
+   *                                    no valid cached version. Defaults to true
+   * @param reRequestOnStale            Whether or not the request should automatically be re-
+   *                                    requested after the response becomes stale
+   * @param linksToFollow               List of {@link FollowLinkConfig} that indicate which
+   *                                    {@link HALLink}s should be automatically resolved
+   */
+  private findByCustomUrl(id: string, useCachedVersionIfAvailable = true, reRequestOnStale = true, ...linksToFollow: FollowLinkConfig<Item>[]): Observable<RemoteData<Item>> {
+    const searchHref = 'findByCustomURL';
+
+    const options = Object.assign({}, {
+      searchParams: [
+        new RequestParam('q', id),
+      ]
+    });
+
+    const hrefObs = this.getSearchByHref(searchHref, options, ...linksToFollow);
+
+    return this.findByHref(hrefObs, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
   }
 
 }

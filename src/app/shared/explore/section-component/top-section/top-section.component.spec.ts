@@ -11,7 +11,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { SearchService } from '../../../../core/shared/search/search.service';
 import { TranslateLoaderMock } from '../../../mocks/translate-loader.mock';
 import { TopSectionComponent } from './top-section.component';
-import { SearchResult } from '../../../search/search-result.model';
+import { SearchResult } from '../../../search/models/search-result.model';
 import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
 import { createSuccessfulRemoteDataObject$ } from '../../../remote-data.utils';
 
@@ -81,6 +81,7 @@ describe('TopSectionComponent', () => {
       style: 'col-md-6',
       order: 'desc',
       sortField: 'dc.date.accessioned',
+      numberOfItems: 5,
       titleKey: undefined
     };
 
@@ -119,6 +120,7 @@ describe('TopSectionComponent', () => {
         style: 'col-md-6',
         order: 'desc',
         sortField: 'dc.date.foo',
+        numberOfItems: 5,
         titleKey: 'lastPublications'
       };
 

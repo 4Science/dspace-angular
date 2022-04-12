@@ -18,11 +18,9 @@ import { BrowseService } from '../../core/browse/browse.service';
 import { RouterMock } from '../../shared/mocks/router.mock';
 import { VarDirective } from '../../shared/utils/var.directive';
 import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
-import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
-import { SortDirection, SortOptions } from '../../core/cache/models/sort-options.model';
-import { FindListOptions } from '../../core/data/request.models';
 import { PaginationService } from '../../core/pagination/pagination.service';
 import { PaginationServiceStub } from '../../shared/testing/pagination-service.stub';
+import { SearchManager } from '../../core/browse/search-manager';
 
 describe('BrowseByTitlePageComponent', () => {
   let comp: BrowseByTitlePageComponent;
@@ -53,6 +51,10 @@ describe('BrowseByTitlePageComponent', () => {
   ];
 
   const mockBrowseService = {
+    getBrowseEntriesFor: () => toRemoteData([])
+  };
+
+  const mockBrowseManager = {
     getBrowseItemsFor: () => toRemoteData(mockItems),
     getBrowseEntriesFor: () => toRemoteData([])
   };
@@ -75,6 +77,7 @@ describe('BrowseByTitlePageComponent', () => {
       providers: [
         { provide: ActivatedRoute, useValue: activatedRouteStub },
         { provide: BrowseService, useValue: mockBrowseService },
+        { provide: SearchManager, useValue: mockBrowseManager },
         { provide: DSpaceObjectDataService, useValue: mockDsoService },
         { provide: PaginationService, useValue: paginationService },
         { provide: Router, useValue: new RouterMock() }

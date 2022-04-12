@@ -7,9 +7,12 @@ import { MenuComponent } from './menu.component';
 import { MenuServiceStub } from '../testing/menu-service.stub';
 import { of as observableOf } from 'rxjs';
 import { MenuSection } from './menu.reducer';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MenuID } from './initial-menus-state';
+import { Item } from '../../core/shared/item.model';
+import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
+import { createSuccessfulRemoteDataObject } from '../remote-data.utils';
 
 describe('MenuComponent', () => {
   let comp: MenuComponent;
@@ -19,13 +22,41 @@ describe('MenuComponent', () => {
 
   const mockMenuID = 'mock-menuID' as MenuID;
 
+  let authorizationService: AuthorizationDataService;
+
+  const mockItem = Object.assign(new Item(), {
+    id: 'fake-id',
+    uuid: 'fake-id',
+    handle: 'fake/handle',
+    lastModified: '2018',
+    _links: {
+      self: {
+        href: 'https://localhost:8000/items/fake-id'
+      }
+    }
+  });
+
+  const routeStub = {
+    data: observableOf({
+      dso: createSuccessfulRemoteDataObject(mockItem)
+    }),
+    children: []
+  };
+
   beforeEach(waitForAsync(() => {
+
+    authorizationService = jasmine.createSpyObj('authorizationService', {
+      isAuthorized: observableOf(false)
+    });
+
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot(), NoopAnimationsModule, RouterTestingModule],
       declarations: [MenuComponent],
       providers: [
         Injector,
-        { provide: MenuService, useClass: MenuServiceStub }
+        { provide: MenuService, useClass: MenuServiceStub },
+        { provide: AuthorizationDataService, useValue: authorizationService },
+        { provide: ActivatedRoute, useValue: routeStub },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(MenuComponent, {

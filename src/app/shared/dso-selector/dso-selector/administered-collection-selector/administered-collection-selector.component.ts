@@ -11,12 +11,13 @@ import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
 import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
 import { SearchService } from '../../../../core/shared/search/search.service';
 import { CollectionSearchResult } from '../../../object-collection/shared/collection-search-result.model';
-import { SearchResult } from '../../../search/search-result.model';
+import { SearchResult } from '../../../search/models/search-result.model';
 import { DSOSelectorComponent } from '../dso-selector.component';
 import { RemoteData } from '../../../../core/data/remote-data';
 import { NotificationsService } from '../../../notifications/notifications.service';
 
 import { hasValue } from '../../../empty.util';
+import { DSONameService } from '../../../../core/breadcrumbs/dso-name.service';
 
 @Component({
   selector: 'ds-administered-collection-selector',
@@ -28,11 +29,12 @@ import { hasValue } from '../../../empty.util';
  */
 export class AdministeredCollectionSelectorComponent extends DSOSelectorComponent {
 
-  constructor(protected searchService: SearchService,
-              protected collectionDataService: CollectionDataService,
+  constructor(protected collectionDataService: CollectionDataService,
+              protected searchService: SearchService,
               protected notifcationsService: NotificationsService,
-              protected translate: TranslateService) {
-    super(searchService, notifcationsService, translate);
+              protected translate: TranslateService,
+              protected dsoNameService: DSONameService,) {
+    super(searchService, notifcationsService, translate, dsoNameService);
   }
 
   /**
@@ -58,11 +60,16 @@ export class AdministeredCollectionSelectorComponent extends DSOSelectorComponen
       elementsPerPage: this.defaultPagination.pageSize
     };
 
-    return this.collectionDataService.getAdministeredCollectionByEntityType(query,this.entityType, findOptions).pipe(
+    const search$ = this.entityType
+      ? this.collectionDataService.getAdministeredCollectionByEntityType(query,this.entityType, findOptions)
+      :  this.collectionDataService.getAdministeredCollection(query, findOptions);
+
+    return search$.pipe(
       getFirstCompletedRemoteData(),
       map((rd) => Object.assign(new RemoteData(null, null, null, null), rd, {
         payload: hasValue(rd.payload) ? buildPaginatedList(rd.payload.pageInfo, rd.payload.page.map((col) => Object.assign(new CollectionSearchResult(), { indexableObject: col }))) : null,
       }))
     );
   }
+
 }

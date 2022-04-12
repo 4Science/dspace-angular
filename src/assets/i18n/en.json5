@@ -16,6 +16,11 @@
 
   "403.forbidden": "forbidden",
 
+  "500.page-internal-server-error": "Service Unavailable",
+
+  "500.help": "The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.",
+
+  "500.link.home-page": "Take me to the home page",
 
 
   "404.help": "We can't find the page you're looking for. The page may have been moved or deleted. You can use the button below to get back to the home page. ",
@@ -65,6 +70,8 @@
   "admin.edit-cms-metadata.select-metadata": "Select metadata to edit",
 
   "admin.edit-cms-metadata.save-button": "Save",
+
+  "admin.edit-cms-metadata.back-button": "Back",
 
   "admin.edit-cms-metadata.success": "Metadata successfully updated",
 
@@ -688,6 +695,7 @@
 
   "bitstream.download.page": "Now downloading {{bitstream}}..." ,
 
+  "bitstream.download.page.back": "Back" ,
 
 
   "bitstream.edit.authorizations.link": "Edit bitstream's Policies",
@@ -716,6 +724,10 @@
 
   "bitstream.edit.form.primaryBitstream.label": "Primary bitstream",
 
+  "bitstream.edit.form.fileType.label": "File type",
+
+  "bitstream.edit.form.fileType.hint": "Personal picture, logo, main article, etc.",
+
   "bitstream.edit.form.selectedFormat.hint": "If the format is not in the above list, <b>select \"format not in list\" above</b> and describe it under \"Describe new format\".",
 
   "bitstream.edit.form.selectedFormat.label": "Selected Format",
@@ -723,6 +735,23 @@
   "bitstream.edit.form.selectedFormat.unknown": "Format not in list",
 
   "bitstream.edit.notifications.error.format.title": "An error occurred saving the bitstream's format",
+
+  "bitstream.edit.form.iiifLabel.label": "IIIF Label",
+
+  "bitstream.edit.form.iiifLabel.hint": "Canvas label for this image. If not provided default label will be used.",
+
+  "bitstream.edit.form.iiifToc.label": "IIIF Table of Contents",
+
+  "bitstream.edit.form.iiifToc.hint": "Adding text here makes this the start of a new table of contents range.",
+
+  "bitstream.edit.form.iiifWidth.label": "IIIF Canvas Width",
+
+  "bitstream.edit.form.iiifWidth.hint": "The canvas width should usually match the image width.",
+
+  "bitstream.edit.form.iiifHeight.label": "IIIF Canvas Height",
+
+  "bitstream.edit.form.iiifHeight.hint": "The canvas height should usually match the image height.",
+
 
   "bitstream.edit.notifications.saved.content": "Your changes to this bitstream were saved.",
 
@@ -1502,6 +1531,10 @@
 
   "cookies.consent.app.required.title": "(always required)",
 
+  "cookies.consent.app.title.add-this": "AddThis",
+
+  "cookies.consent.app.description.add-this" : "Allows us to enable sharing via AddThis",
+
   "cookies.consent.update": "There were changes since your last visit, please update your consent.",
 
   "cookies.consent.close": "Close",
@@ -1548,6 +1581,8 @@
   "cookies.consent.purpose.functional": "Functional",
 
   "cookies.consent.purpose.statistical": "Statistical",
+
+  "cookies.consent.purpose.sharing": "Sharing",
 
   "cris-layout.toggle.open": "Open section",
 
@@ -1648,6 +1683,8 @@
 
   "dso-selector.placeholder": "Search for a {{ type }}",
 
+  "dso-selector.export-item.item.head": "Export",
+
   "dso-selector.select.collection.head": "Select a collection",
 
   "dso-selector.set-scope.community.head": "Select a search scope",
@@ -1657,6 +1694,7 @@
   "dso-selector.set-scope.community.input-header": "Search for a community or collection",
 
 
+  "dso-selector.export-item.sub-level": "Export to excel items in",
 
   "confirmation-modal.export-metadata.header": "Export metadata for {{ dsoName }}",
 
@@ -1719,6 +1757,8 @@
 
   "error.search-results": "Error fetching search results",
 
+  "error.invalid-search-query": "Search query is not valid. Please check <a href=\"https://solr.apache.org/guide/query-syntax-and-parsing.html\" target=\"_blank\">Solr query syntax</a> best practices for further information about this error.",
+
   "error.sub-collections": "Error fetching sub-collections",
 
   "error.sub-communities": "Error fetching sub-communities",
@@ -1726,6 +1766,12 @@
   "error.submission.sections.init-form-error": "An error occurred during section initialize, please check your input-form configuration. Details are below : <br> <br>",
 
   "error.top-level-communities": "Error fetching top-level communities",
+
+  "error.validation.custom-url.conflict": "The custom url has been already used, please try with a new one.",
+
+  "error.validation.custom-url.empty": "The custom url is required and cannot be empty.",
+
+  "error.validation.custom-url.invalid-characters": "The custom url contains invalid characters.",
 
   "error.validation.license.notgranted": "You must grant this license to complete your submission. If you are unable to grant this license at this time you may save your work and return later or remove the submission.",
 
@@ -1931,6 +1977,8 @@
   "footer.link.privacy-policy": "Privacy policy",
 
   "footer.link.end-user-agreement":"End User Agreement",
+
+  "footer.link.feedback":"Send Feedback",
 
 
 
@@ -2153,6 +2201,32 @@
   "info.privacy.head": "Privacy Statement",
 
   "info.privacy.title": "Privacy Statement",
+
+  "info.feedback.breadcrumbs": "Feedback",
+
+  "info.feedback.head": "Feedback",
+
+  "info.feedback.title": "Feedback",
+
+  "info.feedback.info": "Thanks for sharing your feedback about the DSpace system. Your comments are appreciated!",
+
+  "info.feedback.email_help": "This address will be used to follow up on your feedback.",
+
+  "info.feedback.send": "Send Feedback",
+
+  "info.feedback.comments": "Comments",
+
+  "info.feedback.email-label": "Your Email",
+
+  "info.feedback.create.success" : "Feedback Sent Successfully!",
+
+  "info.feedback.error.email.required" : "A valid email address is required",
+
+  "info.feedback.error.message.required" : "A comment is required",
+
+  "info.feedback.page-label" : "Page",
+
+  "info.feedback.page_help" : "Tha page related to your feedback",
 
 
 
@@ -2664,6 +2738,8 @@
 
   "item.page.metric.label.view": "Views",
 
+  "item.page.metric.label.view-detail-btn": "View Details",
+
   "item.page.metric.label.google-scholar": "Google Scholar",
 
   "item.page.metric.label.scopusCitation": "Scopus© citations",
@@ -3088,9 +3164,9 @@
 
   "login.form.or-divider": "or",
 
-  "login.form.orcid": "Log in with ORCID",
-
   "login.form.oidc": "Log in with OIDC",
+
+  "login.form.orcid": "Log in with ORCID",
 
   "login.form.password": "Password",
 
@@ -3208,7 +3284,9 @@
 
   "menu.section.export_metadata": "Metadata",
 
+  "menu.section.import_from_excel": "Import from excel",
 
+  "menu.section.export_to_excel": "Export to excel",
 
   "menu.section.icon.access_control": "Access Control menu section",
 
@@ -3228,6 +3306,8 @@
 
   "menu.section.icon.import": "Import menu section",
 
+  "menu.section.icon.metadata_cms_edit": "Edit CMS metadata",
+
   "menu.section.icon.new": "New menu section",
 
   "menu.section.icon.pin": "Pin sidebar",
@@ -3237,6 +3317,8 @@
   "menu.section.icon.registries": "Registries menu section",
 
   "menu.section.icon.statistics_task": "Statistics Task menu section",
+
+  "menu.section.icon.user_agreement_edit": "Edit User Agreement",
 
   "menu.section.icon.workflow": "Administer workflow menu section",
 
@@ -3286,9 +3368,118 @@
 
   "menu.section.statistics": "Statistics",
 
+  "menu.section.statistics.workflow": "Workflow",
+
+  "menu.section.statistics.login": "Login",
+
+  "menu.section.statistics.site": "Site",
+
   "menu.section.statistics_task": "Statistics Task",
 
+  "modal.item-detail-page.title" : "Item Page Detail",
+
+  "modal.item-detail-page.confirm.cancel" : "Close",
+
+
   "statistics": "Statistics",
+
+  "statistics.workflow.breadcrumbs": "Workflow Statistics",
+
+  "statistics.workflow.page.header": "Workflow Statistics",
+
+  "statistics.workflow.page.current-table.header": "Current workflows",
+
+  "statistics.workflow.page.owner-table.header": "Actions performed by actor",
+
+  "statistics.workflow.page.owner-table.count": "Performed",
+
+  "statistics.workflow.page.owner-table.email": "Email",
+
+  "statistics.workflow.page.step-table.header": "Workflow steps performed",
+
+  "statistics.workflow.page.step-table.step": "Step",
+
+  "statistics.workflow.page.step-table.count": "Performed",
+
+  "statistics.workflow.page.step-table.submit" : "Submit",
+
+  "statistics.workflow.page.step-table.reviewstep" : "Review",
+
+  "statistics.workflow.page.step-table.editstep" : "Edit",
+
+  "statistics.workflow.page.step-table.finaleditstep" : "Final edit",
+
+  "statistics.workflow.page.step-table.item" : "Archive",
+
+  "statistics.workflow.page.step-table.workspace" : "Reject",
+
+  "statistics.workflow.page.current-table.reviewstep" : "Review",
+
+  "statistics.workflow.page.current-table.editstep" : "Edit",
+
+  "statistics.workflow.page.current-table.finaleditstep" : "Final edit",
+
+  "statistics.workflow.page.current-table.step": "Step",
+
+  "statistics.workflow.page.current-table.count": "Count",
+
+  "statistics.workflow.page.max": "Max",
+
+  "statistics.workflow.page.collection": "Collection",
+
+  "statistics.workflow.page.endDate": "End date",
+
+  "statistics.workflow.page.startDate": "Start date",
+
+  "statistics.workflow.page.reset": "Reset filters",
+
+  "statistics.workflow.page.actions.title": "Actions",
+
+  "statistics.workflow.page.action-table.action": "Action",
+
+  "statistics.workflow.page.action-table.count": "Count",
+
+  "statistics.workflow.page.action-table.editstep.editaction": "Edit",
+
+  "statistics.workflow.page.action-table.finaleditstep.finaleditaction": "Final Edit",
+
+  "statistics.workflow.page.action-table.reviewstep.reviewaction": "Review",
+
+  "statistics.workflow.page.action-table.submit": "Submit",
+
+  "statistics.workflow.page.action-table.approve": "Approve",
+
+  "statistics.workflow.page.action-table.reject": "Reject",
+
+  "statistics.workflow.page.action-table.editaction": "Edit",
+
+  "statistics.workflow.page.action-table.finaleditaction": "Final Edit",
+
+  "statistics.workflow.page.action-table.reviewaction": "Review",
+
+  "statistics.workflow.page.action-table.claimaction" : "Claim",
+
+  "statistics.workflow.page.no-data-found": "No data found",
+
+  "statistics.login.breadcrumbs": "Login Statistics",
+
+  "statistics.login.page.header": "Login Statistics",
+
+  "statistics.login.page.reset": "Reset filters",
+
+  "statistics.login.page.table.user": "User",
+
+  "statistics.login.page.table.email": "Email",
+
+  "statistics.login.page.table.count": "Login",
+
+  "statistics.login.page.max": "Max",
+
+  "statistics.login.page.endDate": "End date",
+
+  "statistics.login.page.startDate": "Start date",
+
+  "statistics.login.page.no-data-found": "No data found",
 
   "manage.relations": "Manage Relations",
 
@@ -3396,7 +3587,7 @@
 
   "mydspace.search-form.placeholder": "Search in mydspace...",
 
-  "mydspace.show.workflow": "All tasks",
+  "mydspace.show.workflow": "Workflow tasks",
 
   "mydspace.show.workspace": "Your Submissions",
 
@@ -4274,7 +4465,7 @@
 
   "researcher.profile.create.new": "Create new",
 
-  "researcher.profile.create.success": "Researcher profile created succcessfully",
+  "researcher.profile.create.success": "Researcher profile created successfully",
 
   "researcher.profile.create.fail": "An error occurs during the researcher profile creation",
 
@@ -4447,6 +4638,8 @@
 
   "search.filters.applied.f.personorgunits": "Organisation",
 
+  "search.filters.applied.f.personOrgUnits": "Organisation",
+
   "search.filters.applied.f.projectorgunits": "Organisation",
 
   "search.filters.applied.f.subject": "Subject",
@@ -4471,7 +4664,7 @@
 
   "search.filters.applied.f.organization": "Organisation",
 
-
+  "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
 
   "search.filters.applied.charts.chart.bar.dateIssued.year.tab" : "Date Issued",
 
@@ -4616,6 +4809,8 @@
 
   "search.filters.filter.personOrgUnits.head" : "Organizations",
 
+  "search.filters.filter.personOrgUnits.label" : "Search organizations",
+
   "search.filters.filter.personOrgUnits.placeholder" : "Organizations",
 
   "search.filters.filter.namedresourcetype.head": "Status",
@@ -4674,7 +4869,11 @@
 
   "search.filters.filter.submitter.label": "Search submitter",
 
+  "search.filters.filter.types.head": "Type",
 
+  "search.filters.filter.types.label": "Search Type",
+
+  "search.filters.filter.types.placeholder": "Type",
 
 
   "search.filters.entityType.JournalIssue": "Journal Issue",
@@ -4715,6 +4914,8 @@
   "search.results.head": "Search Results",
 
   "default.search.results.head": "Search Results",
+
+  "defaultConfiguration.search.results.head": "Search Results",
 
   "infrastructure.search.results.head": "Infrastructures Search Results",
 
@@ -4763,6 +4964,18 @@
 
   "sorting.dc.title.DESC": "Title Descending",
 
+  "sorting.metric.view.ASC" : "Views Ascending",
+
+  "sorting.metric.view.DESC" : "Views Descending",
+
+  "sorting.metric.download.ASC" : "Downloads Ascending",
+
+  "sorting.metric.download.DESC" : "Downloads Descending",
+
+  "sorting.metric.scopus.citation.ASC" : "Citations Ascending",
+
+  "sorting.metric.scopus.citation.DESC" : "Citations Descending",
+
   "sorting.score.ASC": "Least Relevant",
 
   "sorting.score.DESC": "Most Relevant",
@@ -4783,6 +4996,22 @@
 
   "sorting.ownerselection.DESC": "Owner Relevance Descending",
 
+  "sorting.organization.legalName.ASC" : "Legal Name Ascending",
+
+  "sorting.organization.legalName.DESC" : "Legal Name Descending",
+
+  "sorting.organisation.address.addressCountry.ASC" : "Country Ascending",
+
+  "sorting.organisation.address.addressCountry.DESC" : "Country Descending",
+
+  "sorting.organisation.address.addressLocality.ASC" : "Locality Ascending",
+
+  "sorting.organisation.address.addressLocality.DESC" : "Locality Descending",
+
+  "sorting.organisation.address.foundingDate.ASC" : "Founding Date Ascending",
+
+  "sorting.organisation.address.foundingDate.DESC" : "Founding Date Descending",
+
 
   "statistics.export.csv": "Export CSV",
 
@@ -4802,23 +5031,103 @@
 
   "statistics.table.no-data": "No data available",
 
-  "statistics.table.title.TotalVisits": "Total visits",
+  "statistics.table.mainReports.title.TotalVisits": "Total Visits",
 
-  "statistics.table.title.TotalVisitsPerMonth": "Total visits per month",
+  "statistics.table.mainReports.title.TopItems": "Most Viewed",
 
-  "statistics.table.title.TotalDownloads": "File Visits",
+  "statistics.table.mainReports.title.TotalVisitsPerMonth": "Total Visits Per Month",
 
-  "statistics.table.title.TotalVisitsAndDownloads": "Items and file Visits",
+  "statistics.table.mainReports.title.TotalDownloads": "File Visits",
 
-  "statistics.table.title.TopCountries": "Top country views",
+  "statistics.table.mainReports.title.TotalVisitsAndDownloads": "Items and file Visits",
 
-  "statistics.table.title.TopCities": "Top city views",
+  "statistics.table.mainReports.title.TopCountries": "Top Country Views",
+
+  "statistics.table.mainReports.title.TopContinents": "Top Region Views",
+
+  "statistics.table.mainReports.title.TopCategories": "Categories",
+
+  "statistics.table.mainReports.title.TopCities": "Top City Views",
+
+  "statistics.table.downloadReports.title.TotalVisits": "Most downloaded",
+
+  "statistics.table.downloadReports.title.TopItems": "Most downloaded",
+
+  "statistics.table.downloadReports.title.TotalVisitsPerMonth": "Total Downloads Per Month",
+
+  "statistics.table.downloadReports.title.TotalDownloads": "Most Downloaded",
+
+  "statistics.table.downloadReports.title.TotalDownloadsPerMonth": "Total Downloads Per Month",
+
+  "statistics.table.downloadReports.title.TopCountries": "Top country downloads",
+
+  "statistics.table.downloadReports.title.TopContinents": "Top region downloads",
+
+  "statistics.table.downloadReports.title.TopCategories": "Categories",
+
+  "statistics.table.downloadReports.title.TopCities": "Top city downloads",
 
   "statistics.table.header.views": "Views",
 
+  "statistics.table.publicationsReports.title.TotalVisits": "Total Visits",
+
+  "statistics.table.publicationsReports.title.TopItems": "Most Viewed",
+
+  "statistics.table.publicationsReports.title.TopCities": "Top Cities",
+
+  "statistics.table.publicationsReports.title.TopCountries": "Top Countries",
+
+  "statistics.table.publicationsReports.title.TotalVisitsPerMonth": "Total Visits Per Month",
+
+  "statistics.table.publicationsReports.title.TotalDownloads": "Downloads",
+
+  "statistics.table.publicationsReports.title.TotalVisitsAndDownloads": "Items and file Visits",
+
+  "statistics.table.projectsReports.title.TotalVisits": "Total Visits",
+
+  "statistics.table.projectsReports.title.TopItems": "Most Viewed",
+
+  "statistics.table.projectsReports.title.TotalVisitsPerMonth": "Total Visits Per Month",
+
+  "statistics.table.projectsReports.title.TopCities": "Top Cities",
+
+  "statistics.table.projectsReports.title.TopCountries": "Top Countries",
+
+  "statistics.table.projectsReports.title.TotalDownloads": "Downloads",
+
+  "statistics.table.projectsReports.title.TotalVisitsAndDownloads": "Items and file Visits",
+
+  "statistics.table.rppublicationsReports.title.TotalVisits": "Total Visits",
+
+  "statistics.table.rppublicationsReports.title.TopItems": "Most Viewed",
+
+  "statistics.table.rppublicationsReports.title.TopCities": "Top Cities",
+
+  "statistics.table.rppublicationsReports.title.TopCountries": "Top Countries",
+
+  "statistics.table.rppublicationsReports.title.TotalVisitsPerMonth": "Total Visits Per Month",
+
+  "statistics.table.rppublicationsReports.title.TotalDownloads": "Downloads",
+
+  "statistics.table.rppublicationsReports.title.TotalVisitsAndDownloads": "Items and file Visits",
+
+  "statistics.table.rpprojectsReports.title.TotalVisits": "Total Visits",
+
+  "statistics.table.rpprojectsReports.title.TopItems": "Most Viewed",
+
+  "statistics.table.rpprojectsReports.title.TopCities": "Top Cities",
+
+  "statistics.table.rpprojectsReports.title.TopCountries": "Top Countries",
+
+  "statistics.table.rpprojectsReports.title.TotalVisitsPerMonth": "Total Visits Per Month",
+
+  "statistics.table.rpprojectsReports.title.TotalDownloads": "Downloads",
+
+  "statistics.table.rpprojectsReports.title.TotalVisitsAndDownloads": "Items and file Visits",
+
   "statistics.categories.title": "Statistics by Category",
 
-  "statistics.categories.mainReports.tab": "Main Reports",
+  "statistics.categories.mainReports.tab": "Views Reports",
 
   "statistics.categories.projectsReports.tab": "Project Reports",
 
@@ -4827,6 +5136,8 @@
   "statistics.categories.publicationsReports.tab": "Publications Reports",
 
   "statistics.categories.rppublicationsReports.tab": "Researchers Publication Reports",
+
+  "statistics.categories.downloadReports.tab": "Downloads Reports",
 
   "statistics.reports.title": "Reports",
 
@@ -5339,7 +5650,11 @@
 
 
 
+  "submission.sections.submit.progressbar.accessCondition": "Item access conditions",
+
   "submission.sections.submit.progressbar.CClicense": "Creative commons license",
+
+  "submission.sections.submit.progressbar.CustomUrlStep": "Custom url",
 
   "submission.sections.submit.progressbar.describe.equipment": "Equipment basic information",
 
@@ -5433,6 +5748,8 @@
 
   "submission.sections.upload.form.access-condition-label": "Access condition type",
 
+  "submission.sections.upload.form.access-condition-hint": "Select an access condition to apply on the bitstream once the item is deposited",
+
   "submission.sections.upload.form.date-required": "Date is required.",
 
   "submission.sections.upload.form.date-required-from": "Grant access from date is required.",
@@ -5441,6 +5758,8 @@
 
   "submission.sections.upload.form.from-label": "Grant access from",
 
+  "submission.sections.upload.form.from-hint": "Select the date from which the related access condition is applied",
+
   "submission.sections.upload.form.from-placeholder": "From",
 
   "submission.sections.upload.form.group-label": "Group",
@@ -5448,6 +5767,8 @@
   "submission.sections.upload.form.group-required": "Group is required.",
 
   "submission.sections.upload.form.until-label": "Grant access until",
+
+  "submission.sections.upload.form.until-hint": "Select the date until which the related access condition is applied",
 
   "submission.sections.upload.form.until-placeholder": "Until",
 
@@ -5469,6 +5790,39 @@
 
   "submission.sections.upload.upload-successful": "Upload successful",
 
+  "submission.sections.custom-url.label.previous-urls": "Previous Urls",
+
+  "submission.sections.custom-url.alert.info": "Define here a custom URL which will be used to reach the item instead of using an internal randomly generated UUID identifier. ",
+
+  "submission.sections.accesses.form.discoverable-description": "When checked, this item will be discoverable in search/browse. When unchecked, the item will only be available via a direct link and will never appear in search/browse.",
+
+  "submission.sections.accesses.form.discoverable-label": "Discoverable",
+
+  "submission.sections.accesses.form.access-condition-label": "Access condition type",
+
+  "submission.sections.accesses.form.access-condition-hint": "Select an access condition to apply on the item once it is deposited",
+
+  "submission.sections.accesses.form.date-required": "Date is required.",
+
+  "submission.sections.accesses.form.date-required-from": "Grant access from date is required.",
+
+  "submission.sections.accesses.form.date-required-until": "Grant access until date is required.",
+
+  "submission.sections.accesses.form.from-label": "Grant access from",
+
+  "submission.sections.accesses.form.from-hint": "Select the date from which the related access condition is applied",
+
+  "submission.sections.accesses.form.from-placeholder": "From",
+
+  "submission.sections.accesses.form.group-label": "Group",
+
+  "submission.sections.accesses.form.group-required": "Group is required.",
+
+  "submission.sections.accesses.form.until-label": "Grant access until",
+
+  "submission.sections.accesses.form.until-hint": "Select the date until which the related access condition is applied",
+
+  "submission.sections.accesses.form.until-placeholder": "Until",
 
 
   "submission.submit.breadcrumbs": "New submission",
@@ -5676,7 +6030,11 @@
 
 
 
+  "workspace.search.results.head": "Your submissions",
+
   "workflowAdmin.search.results.head": "Administer Workflow",
+
+  "workflow.search.results.head": "Workflow tasks",
 
 
 
@@ -5747,4 +6105,6 @@
   "invitation.accept-btn": "Accept",
 
   "invitation.ignore-btn": "Ignore",
+
+  "authority-confidence.search-label":"Search"
 }

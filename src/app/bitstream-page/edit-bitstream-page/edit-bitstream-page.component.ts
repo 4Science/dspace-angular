@@ -1,16 +1,27 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit
+} from '@angular/core';
 import { Bitstream } from '../../core/shared/bitstream.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, mergeMap, switchMap } from 'rxjs/operators';
-import { combineLatest as observableCombineLatest, Observable, of as observableOf, Subscription } from 'rxjs';
+import {
+  combineLatest,
+  combineLatest as observableCombineLatest,
+  Observable,
+  of as observableOf,
+  Subscription
+} from 'rxjs';
 import {
   DynamicFormControlModel,
   DynamicFormGroupModel,
   DynamicFormLayout,
   DynamicFormService,
   DynamicInputModel,
-  DynamicSelectModel,
-  DynamicTextAreaModel
+  DynamicSelectModel
 } from '@ng-dynamic-forms/core';
 import { FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -28,13 +39,20 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
 import { BitstreamFormatDataService } from '../../core/data/bitstream-format-data.service';
 import { BitstreamFormat } from '../../core/shared/bitstream-format.model';
 import { BitstreamFormatSupportLevel } from '../../core/shared/bitstream-format-support-level';
-import { hasValue, isNotEmpty } from '../../shared/empty.util';
+import { hasValue, isNotEmpty, isEmpty } from '../../shared/empty.util';
 import { Metadata } from '../../core/shared/metadata.utils';
 import { Location } from '@angular/common';
 import { RemoteData } from '../../core/data/remote-data';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { getEntityEditRoute, getItemEditRoute } from '../../item-page/item-page-routing-paths';
 import { Bundle } from '../../core/shared/bundle.model';
+import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
+import { Item } from '../../core/shared/item.model';
+import {
+  DsDynamicInputModel
+} from '../../shared/form/builder/ds-dynamic-form-ui/models/ds-dynamic-input.model';
+import { DsDynamicTextAreaModel } from '../../shared/form/builder/ds-dynamic-form-ui/models/ds-dynamic-textarea.model';
+import { DynamicScrollableDropdownModel } from '../../shared/form/builder/ds-dynamic-form-ui/models/scrollable-dropdown/dynamic-scrollable-dropdown.model';
 
 @Component({
   selector: 'ds-edit-bitstream-page',
@@ -95,6 +113,26 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
   NOTIFICATIONS_PREFIX = 'bitstream.edit.notifications.';
 
   /**
+   * IIIF image width metadata key
+   */
+  IMAGE_WIDTH_METADATA = 'iiif.image.width';
+
+  /**
+   * IIIF image height metadata key
+   */
+  IMAGE_HEIGHT_METADATA = 'iiif.image.height';
+
+  /**
+   * IIIF table of contents metadata key
+   */
+  IIIF_TOC_METADATA = 'iiif.toc';
+
+  /**
+   * IIIF label metadata key
+   */
+  IIIF_LABEL_METADATA = 'iiif.label';
+
+  /**
    * Options for fetching all bitstream formats
    */
   findAllOptions = { elementsPerPage: 9999 };
@@ -102,7 +140,8 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
   /**
    * The Dynamic Input Model for the file's name
    */
-  fileNameModel = new DynamicInputModel({
+  fileNameModel = new DsDynamicInputModel({
+    hasSelectableMetadata: false, metadataFields: [], repeatable: false, submissionId: '',
     id: 'fileName',
     name: 'fileName',
     required: true,
@@ -118,14 +157,16 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
    * The Dynamic Switch Model for the file's name
    */
   primaryBitstreamModel = new DynamicCustomSwitchModel({
-    id: 'primaryBitstream',
-    name: 'primaryBitstream'
-  });
+      id: 'primaryBitstream',
+      name: 'primaryBitstream'
+    }
+  );
 
   /**
    * The Dynamic TextArea Model for the file's description
    */
-  descriptionModel = new DynamicTextAreaModel({
+  descriptionModel = new DsDynamicTextAreaModel({
+    hasSelectableMetadata: false, metadataFields: [], repeatable: false, submissionId: '',
     id: 'description',
     name: 'description',
     rows: 10
@@ -148,9 +189,104 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
   });
 
   /**
+   * The Dynamic Input Model for select a file type
+   */
+  fileTypeModel = new DynamicScrollableDropdownModel({
+    vocabularyOptions: {
+      name: 'bitstream_types',
+      metadata: 'dc.type',
+      scope: '',
+      closed: false,
+    },
+    repeatable: false,
+    metadataFields: [],
+    submissionId: '',
+    hasSelectableMetadata: false,
+    id: 'fileType',
+    name: 'fileType',
+  });
+
+  /**
+   * The Dynamic Input Model for the iiif label
+   */
+  iiifLabelModel = new DsDynamicInputModel({
+    hasSelectableMetadata: false, metadataFields: [], repeatable: false, submissionId: '',
+    id: 'iiifLabel',
+    name: 'iiifLabel'
+  },
+    {
+        grid: {
+          host: 'col col-lg-6 d-inline-block'
+        }
+    });
+  iiifLabelContainer = new DynamicFormGroupModel({
+    id: 'iiifLabelContainer',
+    group: [this.iiifLabelModel]
+  },{
+    grid: {
+      host: 'form-row'
+    }
+  });
+
+  iiifTocModel = new DsDynamicInputModel({
+    hasSelectableMetadata: false, metadataFields: [], repeatable: false, submissionId: '',
+    id: 'iiifToc',
+    name: 'iiifToc',
+  },{
+    grid: {
+      host: 'col col-lg-6 d-inline-block'
+    }
+  });
+  iiifTocContainer = new DynamicFormGroupModel({
+    id: 'iiifTocContainer',
+    group: [this.iiifTocModel]
+  },{
+    grid: {
+      host: 'form-row'
+    }
+  });
+
+  iiifWidthModel = new DsDynamicInputModel({
+    hasSelectableMetadata: false, metadataFields: [], repeatable: false, submissionId: '',
+    id: 'iiifWidth',
+    name: 'iiifWidth',
+  },{
+    grid: {
+      host: 'col col-lg-6 d-inline-block'
+    }
+  });
+  iiifWidthContainer = new DynamicFormGroupModel({
+    id: 'iiifWidthContainer',
+    group: [this.iiifWidthModel]
+  },{
+    grid: {
+      host: 'form-row'
+    }
+  });
+
+  iiifHeightModel = new DsDynamicInputModel({
+    hasSelectableMetadata: false, metadataFields: [], repeatable: false, submissionId: '',
+    id: 'iiifHeight',
+    name: 'iiifHeight'
+  },{
+    grid: {
+      host: 'col col-lg-6 d-inline-block'
+    }
+  });
+  iiifHeightContainer = new DynamicFormGroupModel({
+    id: 'iiifHeightContainer',
+    group: [this.iiifHeightModel]
+  },{
+    grid: {
+      host: 'form-row'
+    }
+  });
+
+  /**
    * All input models in a simple array for easier iterations
    */
-  inputModels = [this.fileNameModel, this.primaryBitstreamModel, this.descriptionModel, this.selectedFormatModel, this.newFormatModel];
+  inputModels = [this.fileNameModel, this.primaryBitstreamModel, this.descriptionModel, this.fileTypeModel, this.selectedFormatModel,
+    this.newFormatModel];
 
   /**
    * The dynamic form fields used for editing the information of a bitstream
@@ -163,11 +299,21 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
         this.fileNameModel,
         this.primaryBitstreamModel
       ]
-    }),
+    },{
+        grid: {
+          host: 'form-row'
+        }
+      }),
     new DynamicFormGroupModel({
       id: 'descriptionContainer',
       group: [
         this.descriptionModel
+      ]
+    }),
+    new DynamicFormGroupModel({
+      id: 'fileTypeContainer',
+      group: [
+        this.fileTypeModel
       ]
     }),
     new DynamicFormGroupModel({
@@ -199,6 +345,11 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
       }
     },
     description: {
+      grid: {
+        host: 'col-12 d-inline-block'
+      }
+    },
+    fileType: {
       grid: {
         host: 'col-12 d-inline-block'
       }
@@ -255,17 +406,26 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
   entityType: string;
 
   /**
+   * Set to true when the parent item supports IIIF.
+   */
+  isIIIF = false;
+
+
+  /**
    * Array to track all subscriptions and unsubscribe them onDestroy
    * @type {Array}
    */
   protected subs: Subscription[] = [];
 
+
   constructor(private route: ActivatedRoute,
               private router: Router,
+              private changeDetectorRef: ChangeDetectorRef,
               private location: Location,
               private formService: DynamicFormService,
               private translate: TranslateService,
               private bitstreamService: BitstreamDataService,
+              private dsoNameService: DSONameService,
               private notificationsService: NotificationsService,
               private bitstreamFormatService: BitstreamFormatDataService) {
   }
@@ -277,7 +437,6 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
    * - Translate the form labels and hints
    */
   ngOnInit(): void {
-    this.formGroup = this.formService.createFormGroup(this.formModel);
 
     this.itemId = this.route.snapshot.queryParams.itemId;
     this.entityType = this.route.snapshot.queryParams.entityType;
@@ -301,12 +460,9 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
       ).subscribe(([bitstream, allFormats]) => {
         this.bitstream = bitstream as Bitstream;
         this.formats = allFormats.page;
-        this.updateFormatModel();
-        this.updateForm(this.bitstream);
+        this.setIiifStatus(this.bitstream);
       })
     );
-
-    this.updateFieldTranslations();
 
     this.subs.push(
       this.translate.onLangChange
@@ -314,6 +470,16 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
         this.updateFieldTranslations();
       })
     );
+  }
+
+  /**
+   * Initializes the form.
+   */
+  setForm() {
+    this.formGroup = this.formService.createFormGroup(this.formModel);
+    this.updateFormatModel();
+    this.updateForm(this.bitstream);
+    this.updateFieldTranslations();
   }
 
   /**
@@ -329,10 +495,29 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
       descriptionContainer: {
         description: bitstream.firstMetadataValue('dc.description')
       },
+      fileTypeContainer: {
+        fileType: bitstream.firstMetadataValue('dc.type')
+      },
       formatContainer: {
         newFormat: hasValue(bitstream.firstMetadata('dc.format')) ? bitstream.firstMetadata('dc.format').value : undefined
       }
     });
+    if (this.isIIIF) {
+      this.formGroup.patchValue({
+        iiifLabelContainer: {
+          iiifLabel: bitstream.firstMetadataValue(this.IIIF_LABEL_METADATA)
+        },
+        iiifTocContainer: {
+          iiifToc: bitstream.firstMetadataValue(this.IIIF_TOC_METADATA)
+        },
+        iiifWidthContainer: {
+          iiifWidth: bitstream.firstMetadataValue(this.IMAGE_WIDTH_METADATA)
+        },
+        iiifHeightContainer: {
+          iiifHeight: bitstream.firstMetadataValue(this.IMAGE_HEIGHT_METADATA)
+        }
+      });
+    }
     this.bitstream.format.pipe(
       getAllSucceededRemoteDataPayload()
     ).subscribe((format: BitstreamFormat) => {
@@ -467,6 +652,33 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
     const primary = rawForm.fileNamePrimaryContainer.primaryBitstream;
     Metadata.setFirstValue(newMetadata, 'dc.title', rawForm.fileNamePrimaryContainer.fileName);
     Metadata.setFirstValue(newMetadata, 'dc.description', rawForm.descriptionContainer.description);
+    Metadata.setFirstValue(newMetadata, 'dc.type', rawForm.fileTypeContainer.fileType.display);
+    if (this.isIIIF) {
+      // It's helpful to remove these metadata elements entirely when the form value is empty.
+      // This avoids potential issues on the REST side and makes it possible to do things like
+      // remove an existing "table of contents" entry.
+      if (isEmpty(rawForm.iiifLabelContainer.iiifLabel)) {
+
+        delete newMetadata[this.IIIF_LABEL_METADATA];
+      } else {
+        Metadata.setFirstValue(newMetadata, this.IIIF_LABEL_METADATA, rawForm.iiifLabelContainer.iiifLabel);
+      }
+     if (isEmpty(rawForm.iiifTocContainer.iiifToc)) {
+       delete newMetadata[this.IIIF_TOC_METADATA];
+     } else {
+        Metadata.setFirstValue(newMetadata, this.IIIF_TOC_METADATA, rawForm.iiifTocContainer.iiifToc);
+     }
+      if (isEmpty(rawForm.iiifWidthContainer.iiifWidth)) {
+        delete newMetadata[this.IMAGE_WIDTH_METADATA];
+      } else {
+        Metadata.setFirstValue(newMetadata, this.IMAGE_WIDTH_METADATA, rawForm.iiifWidthContainer.iiifWidth);
+      }
+      if (isEmpty(rawForm.iiifHeightContainer.iiifHeight)) {
+        delete newMetadata[this.IMAGE_HEIGHT_METADATA];
+      } else {
+        Metadata.setFirstValue(newMetadata, this.IMAGE_HEIGHT_METADATA, rawForm.iiifHeightContainer.iiifHeight);
+      }
+    }
     if (isNotEmpty(rawForm.formatContainer.newFormat)) {
       Metadata.setFirstValue(newMetadata, 'dc.format', rawForm.formatContainer.newFormat);
     }
@@ -495,6 +707,58 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
             this.router.navigate(([getItemEditRoute(item), 'bitstreams']));
           });
     }
+  }
+
+  /**
+   * Verifies that the parent item is iiif-enabled. Checks bitstream mimetype to be
+   * sure it's an image, excluding bitstreams in the THUMBNAIL or OTHERCONTENT bundles.
+   * @param bitstream
+   */
+  setIiifStatus(bitstream: Bitstream) {
+
+    const regexExcludeBundles = /OTHERCONTENT|THUMBNAIL|LICENSE/;
+    const regexIIIFItem = /true|yes/i;
+
+    const isImage$ = this.bitstream.format.pipe(
+      getFirstSucceededRemoteData(),
+      map((format: RemoteData<BitstreamFormat>) => format.payload.mimetype.includes('image/')));
+
+    const isIIIFBundle$ = this.bitstream.bundle.pipe(
+      getFirstSucceededRemoteData(),
+      map((bundle: RemoteData<Bundle>) =>
+        this.dsoNameService.getName(bundle.payload).match(regexExcludeBundles) == null));
+
+    const isEnabled$ = this.bitstream.bundle.pipe(
+      getFirstSucceededRemoteData(),
+      map((bundle: RemoteData<Bundle>) => bundle.payload.item.pipe(
+          getFirstSucceededRemoteData(),
+          map((item: RemoteData<Item>) =>
+            (item.payload.firstMetadataValue('dspace.iiif.enabled') &&
+              item.payload.firstMetadataValue('dspace.iiif.enabled').match(regexIIIFItem) !== null)
+      ))));
+
+    const iiifSub = combineLatest(
+      isImage$,
+      isIIIFBundle$,
+      isEnabled$
+    ).subscribe(([isImage, isIIIFBundle, isEnabled]) => {
+      if (isImage && isIIIFBundle && isEnabled) {
+        this.isIIIF = true;
+        this.inputModels.push(this.iiifLabelModel);
+        this.formModel.push(this.iiifLabelContainer);
+        this.inputModels.push(this.iiifTocModel);
+        this.formModel.push(this.iiifTocContainer);
+        this.inputModels.push(this.iiifWidthModel);
+        this.formModel.push(this.iiifWidthContainer);
+        this.inputModels.push(this.iiifHeightModel);
+        this.formModel.push(this.iiifHeightContainer);
+      }
+      this.setForm();
+      this.changeDetectorRef.detectChanges();
+    });
+
+    this.subs.push(iiifSub);
+
   }
 
   /**

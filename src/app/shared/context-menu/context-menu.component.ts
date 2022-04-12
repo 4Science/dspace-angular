@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
+import { Component, Inject, Injector, Input, OnInit } from '@angular/core';
 
 import { select, Store } from '@ngrx/store';
 import { from, Observable } from 'rxjs';
@@ -7,7 +7,7 @@ import { CoreState } from '../../core/core.reducers';
 import { isAuthenticated } from '../../core/auth/selectors';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
 import { DSpaceObjectType } from '../../core/shared/dspace-object-type.model';
-import { getContextMenuEntriesForDSOType } from './context-menu.decorator';
+import { ContextMenuEntryRenderOptions, getContextMenuEntriesForDSOType } from './context-menu.decorator';
 import { concatMap, filter, map, mapTo, reduce, take } from 'rxjs/operators';
 import { ContextMenuEntryComponent } from './context-menu-entry.component';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
@@ -17,6 +17,7 @@ import { ContextMenuEntryType } from './context-menu-entry-type';
 import { isNotEmpty } from '../empty.util';
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
 import { GenericConstructor } from '../../core/shared/generic-constructor';
+import { DOCUMENT } from '@angular/common';
 
 /**
  * This component renders a context menu for a given DSO.
@@ -51,13 +52,21 @@ export class ContextMenuComponent implements OnInit {
   public objectInjector: Injector;
 
   /**
+   * context menu options count.
+   * @type {number}
+   */
+  public optionCount = 0;
+
+  /**
    * Initialize instance variables
    *
+   * @param {Document} _document
    * @param {ConfigurationDataService} configurationService
    * @param {Injector} injector
    * @param {Store<CoreState>} store
    */
   constructor(
+    @Inject(DOCUMENT) private _document: Document,
     private configurationService: ConfigurationDataService,
     private injector: Injector,
     private store: Store<CoreState>
@@ -67,8 +76,8 @@ export class ContextMenuComponent implements OnInit {
   ngOnInit(): void {
     this.objectInjector = Injector.create({
       providers: [
-        {provide: 'contextMenuObjectProvider', useFactory: () => (this.contextMenuObject), deps: []},
-        {provide: 'contextMenuObjectTypeProvider', useFactory: () => (this.contextMenuObjectType), deps: []},
+        { provide: 'contextMenuObjectProvider', useFactory: () => (this.contextMenuObject), deps: [] },
+        { provide: 'contextMenuObjectTypeProvider', useFactory: () => (this.contextMenuObjectType), deps: [] },
       ],
       parent: this.injector
     });
@@ -80,9 +89,21 @@ export class ContextMenuComponent implements OnInit {
    * Get the menu entries based on the DSO's type
    */
   getContextMenuEntries(): Observable<any[]> {
+    return this.retrieveSelectedContextMenuEntries(false);
+  }
+
+  /**
+   * Get the stand alone menu entries based on the DSO's type
+   */
+  getStandAloneMenuEntries(): Observable<any[]> {
+    return this.retrieveSelectedContextMenuEntries(true);
+  }
+
+  private retrieveSelectedContextMenuEntries(isStandAlone: boolean): Observable<any[]> {
     const list = this.contextMenuObjectType ? getContextMenuEntriesForDSOType(this.contextMenuObjectType) : [];
     return from(list).pipe(
-      filter((constructor: GenericConstructor<ContextMenuEntryComponent>) => isNotEmpty(constructor)),
+      filter((renderOptions: ContextMenuEntryRenderOptions) => isNotEmpty(renderOptions ?.componentRef) && renderOptions ?.isStandAlone === isStandAlone),
+      map((renderOptions: ContextMenuEntryRenderOptions) => renderOptions.componentRef),
       concatMap((constructor: GenericConstructor<ContextMenuEntryComponent>) => {
         const entryComp: ContextMenuEntryComponent = new constructor();
         return this.isDisabled(entryComp.menuEntryType).pipe(
@@ -111,5 +132,18 @@ export class ContextMenuComponent implements OnInit {
 
   isItem(): boolean {
     return this.contextMenuObjectType === DSpaceObjectType.ITEM;
+  }
+
+  ngAfterViewChecked() {
+    // To check that Context-menu contains options or not
+    if (this._document.getElementById('itemOptionsDropdownMenu')) {
+      const el = Array.from(this._document.getElementById('itemOptionsDropdownMenu')?.getElementsByClassName('ng-star-inserted'));
+      this.optionCount = 0;
+      if (el) {
+        el.forEach(element => {
+          this.optionCount += element.childElementCount;
+        });
+      }
+    }
   }
 }

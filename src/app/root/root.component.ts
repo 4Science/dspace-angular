@@ -1,6 +1,7 @@
 import { map } from 'rxjs/operators';
-import { Component, Inject, OnInit, Input } from '@angular/core';
+import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 import { combineLatest as combineLatestObservable, Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -19,6 +20,7 @@ import { ThemeConfig } from '../../config/theme.model';
 import { Angulartics2DSpace } from '../statistics/angulartics/dspace-provider';
 import { environment } from '../../environments/environment';
 import { slideSidebarPadding } from '../shared/animations/slide';
+import { getPageInternalServerErrorRoute } from '../app-routing-paths';
 
 @Component({
   selector: 'ds-root',
@@ -32,9 +34,8 @@ export class RootComponent implements OnInit {
   collapsedSidebarWidth: Observable<string>;
   totalSidebarWidth: Observable<string>;
   theme: Observable<ThemeConfig> = of({} as any);
-  notificationOptions = environment.notifications;
+  notificationOptions;
   models;
-
   /**
    * Whether or not to show a full screen loader
    */
@@ -44,6 +45,11 @@ export class RootComponent implements OnInit {
    * Whether or not to show a loader across the router outlet
    */
   @Input() shouldShowRouteLoader: boolean;
+
+  /**
+   * In order to show sharing component only in csr
+   */
+  browserPlatform = false;
 
   constructor(
     @Inject(NativeWindowService) private _window: NativeWindowRef,
@@ -56,20 +62,25 @@ export class RootComponent implements OnInit {
     private router: Router,
     private cssService: CSSVariableService,
     private menuService: MenuService,
-    private windowService: HostWindowService
+    private windowService: HostWindowService,
+    @Inject(PLATFORM_ID) platformId: any
   ) {
+    this.notificationOptions = environment.notifications;
+    this.browserPlatform = isPlatformBrowser(platformId);
   }
 
   ngOnInit() {
     this.sidebarVisible = this.menuService.isMenuVisible(MenuID.ADMIN);
-
     this.collapsedSidebarWidth = this.cssService.getVariable('collapsedSidebarWidth');
     this.totalSidebarWidth = this.cssService.getVariable('totalSidebarWidth');
-
     const sidebarCollapsed = this.menuService.isMenuCollapsed(MenuID.ADMIN);
-    this.slideSidebarOver = combineLatestObservable(sidebarCollapsed, this.windowService.isXsOrSm())
+    this.slideSidebarOver = combineLatestObservable([sidebarCollapsed, this.windowService.isXsOrSm()])
       .pipe(
         map(([collapsed, mobile]) => collapsed || mobile)
       );
+
+    if (this.router.url === getPageInternalServerErrorRoute()) {
+      this.shouldShowRouteLoader = false;
+    }
   }
 }

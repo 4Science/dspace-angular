@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { SortDirection, SortOptions } from '../../../../core/cache/models/sort-options.model';
 import { TopSection } from '../../../../core/layout/models/section.model';
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
-import { PaginatedSearchOptions } from '../../../search/paginated-search-options.model';
+import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
 import { Context } from '../../../../core/shared/context.model';
 
 /**
@@ -26,12 +26,12 @@ export class TopSectionComponent implements OnInit {
   paginatedSearchOptions: PaginatedSearchOptions;
 
   ngOnInit() {
-
     const order = this.topSection.order;
+    const numberOfItems = this.topSection.numberOfItems;
     const sortDirection = order && order.toUpperCase() === 'ASC' ? SortDirection.ASC : SortDirection.DESC;
     const pagination: PaginationComponentOptions = Object.assign(new PaginationComponentOptions(), {
       id: 'search-object-pagination',
-      pageSize: 5,
+      pageSize: numberOfItems,
       currentPage: 1
     });
 

@@ -14,9 +14,11 @@ import { getFirstSucceededRemoteData } from '../../core/shared/operators';
 import { DSpaceObjectDataService } from '../../core/data/dspace-object-data.service';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
 import { StartsWithType } from '../../shared/starts-with/starts-with-decorator';
-import { BrowseByType, rendersBrowseBy } from '../browse-by-switcher/browse-by-decorator';
+import { BrowseByDataType, rendersBrowseBy } from '../browse-by-switcher/browse-by-decorator';
 import { PaginationService } from '../../core/pagination/pagination.service';
 import { map } from 'rxjs/operators';
+import { followLink } from '../../shared/utils/follow-link-config.model';
+import { SearchManager } from '../../core/browse/search-manager';
 
 @Component({
   selector: 'ds-browse-by-metadata-page',
@@ -28,7 +30,7 @@ import { map } from 'rxjs/operators';
  * A metadata definition (a.k.a. browse id) is a short term used to describe one or multiple metadata fields.
  * An example would be 'author' for 'dc.contributor.*'
  */
-@rendersBrowseBy(BrowseByType.Metadata)
+@rendersBrowseBy(BrowseByDataType.Metadata)
 export class BrowseByMetadataPageComponent implements OnInit {
 
   /**
@@ -100,17 +102,18 @@ export class BrowseByMetadataPageComponent implements OnInit {
   value = '';
 
   /**
+   * The authority key (may be undefined) associated with {@link #value}.
+   */
+   authority: string;
+
+  /**
    * The current startsWith option (fetched and updated from query-params)
    */
   startsWith: string;
 
-  /**
-   * authority of the item we are browsing for
-   */
-  authority = '';
-
   public constructor(protected route: ActivatedRoute,
                      protected browseService: BrowseService,
+                     protected searchManager: SearchManager,
                      protected dsoService: DSpaceObjectDataService,
                      protected paginationService: PaginationService,
                      protected router: Router) {
@@ -132,10 +135,8 @@ export class BrowseByMetadataPageComponent implements OnInit {
           this.authority = +params.authority || params.authority || '';
           this.startsWith = +params.startsWith || params.startsWith;
           const searchOptions = browseParamsToOptions(params, currentPage, currentSort, this.browseId);
-          if (isNotEmpty(this.authority)) {
-            this.updatePageWithAuthority(searchOptions, this.authority);
-          } else if (isNotEmpty(this.value)) {
-            this.updatePageWithItems(searchOptions, this.value);
+          if (isNotEmpty(this.value) || isNotEmpty(this.authority)) {
+            this.updatePageWithItems(searchOptions, this.value, this.authority);
           } else {
             this.updatePage(searchOptions);
           }
@@ -173,22 +174,11 @@ export class BrowseByMetadataPageComponent implements OnInit {
    *                          sort: SortOptions,
    *                          scope: string }
    * @param value          The value of the browse-entry to display items for
+   * @param authority      The metadata authority of the browse-entry to display items for
    */
-  updatePageWithItems(searchOptions: BrowseEntrySearchOptions, value: string) {
-    this.items$ = this.browseService.getBrowseItemsFor(value, searchOptions);
-  }
-
-  /**
-   * Updates the current page with searchOptions and display items linked to the given authority
-   * @param searchOptions   Options to narrow down your search:
-   *                        { metadata: string
-   *                          pagination: PaginationComponentOptions,
-   *                          sort: SortOptions,
-   *                          scope: string }
-   * @param authority         The authority of the browse-entry to display items for
-   */
-  updatePageWithAuthority(searchOptions: BrowseEntrySearchOptions, authority: string) {
-    this.items$ = this.browseService.getBrowseItemsForAuthority(authority, searchOptions);
+  updatePageWithItems(searchOptions: BrowseEntrySearchOptions, value: string, authority: string) {
+    const embedMetrics = followLink('metrics');
+    this.items$ = this.searchManager.getBrowseItemsFor(value, authority, searchOptions, embedMetrics);
   }
 
   /**

@@ -11,7 +11,7 @@ import { WorkspaceitemSectionUploadObject } from '../../core/submission/models/w
 import { WorkspaceitemSectionsObject } from '../../core/submission/models/workspaceitem-sections.model';
 import { WorkspaceItem } from '../../core/submission/models/workspaceitem.model';
 import { SubmissionJsonPatchOperationsService } from '../../core/submission/submission-json-patch-operations.service';
-import { isEmpty, isNotEmpty, isNotUndefined } from '../../shared/empty.util';
+import { isEmpty, isNotEmpty, isNotUndefined, isUndefined } from '../../shared/empty.util';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { SectionsType } from '../sections/sections-type';
 import { SectionsService } from '../sections/sections.service';
@@ -19,6 +19,7 @@ import { SubmissionState } from '../submission.reducers';
 import { SubmissionService } from '../submission.service';
 import parseSectionErrors from '../utils/parseSectionErrors';
 import {
+  CleanDetectDuplicateAction,
   CompleteInitSubmissionFormAction,
   DepositSubmissionAction,
   DepositSubmissionErrorAction,
@@ -59,6 +60,9 @@ import parseSectionErrorPaths, { SectionErrorPath } from '../utils/parseSectionE
 import { FormState } from '../../shared/form/form.reducer';
 import { SubmissionScopeType } from '../../core/submission/submission-scope-type';
 import { NotificationOptions } from '../../shared/notifications/models/notification-options.model';
+import {
+  WorkspaceitemSectionDetectDuplicateObject
+} from '../../core/submission/models/workspaceitem-section-deduplication.model';
 
 @Injectable()
 export class SubmissionObjectEffects {
@@ -222,20 +226,26 @@ export class SubmissionObjectEffects {
    */
   @Effect() saveAndDeposit$ = this.actions$.pipe(
     ofType(SubmissionObjectActionTypes.SAVE_AND_DEPOSIT_SUBMISSION),
-    withLatestFrom(this.store$),
-    concatMap(([action, currentState]: [SaveAndDepositSubmissionAction, any]) => {
-      return this.operationsService.jsonPatchByResourceType(
-        this.submissionService.getSubmissionObjectLinkName(),
-        action.payload.submissionId,
-        'sections'
-      ).pipe(
+    withLatestFrom(this.submissionService.hasUnsavedModification()),
+    concatMap(([action, hasUnsavedModification]: [SaveAndDepositSubmissionAction, boolean]) => {
+      let response$: Observable<SubmissionObject[]>;
+      if (hasUnsavedModification) {
+        response$ = this.operationsService.jsonPatchByResourceType(
+          this.submissionService.getSubmissionObjectLinkName(),
+          action.payload.submissionId,
+          'sections') as Observable<SubmissionObject[]>;
+      } else {
+        response$ = this.submissionObjectService.findById(action.payload.submissionId, false, true).pipe(
+          getFirstSucceededRemoteDataPayload(),
+          map((submissionObject: SubmissionObject) => [submissionObject])
+        );
+      }
+      return response$.pipe(
         map((response: SubmissionObject[]) => {
           if (this.canDeposit(response)) {
             return new DepositSubmissionAction(action.payload.submissionId);
           } else {
-            this.notificationsService.warning(null, this.translate.get('submission.sections.general.sections_not_valid'));
-            return this.parseSaveResponse((currentState.submission as SubmissionState).objects[action.payload.submissionId],
-              response, action.payload.submissionId, currentState.forms);
+            return new SaveSubmissionFormSuccessAction(action.payload.submissionId, response);
           }
         }),
         catchError((rd: RemoteData<any>) => observableFrom(
@@ -423,6 +433,8 @@ export class SubmissionObjectEffects {
    *    The submission object retrieved from REST
    * @param submissionId
    *    The submission id
+   * @param forms
+   *    The forms state
    * @param notify
    *    A boolean that indicate if show notification or not
    * @return SubmissionObjectAction[]
@@ -432,7 +444,7 @@ export class SubmissionObjectEffects {
     currentState: SubmissionObjectEntry,
     response: SubmissionObject[],
     submissionId: string,
-    forms,
+    forms: FormState,
     notify: boolean = true): SubmissionObjectAction[] {
 
     const mappedActions = [];
@@ -477,6 +489,10 @@ export class SubmissionObjectEffects {
           const filteredErrors = filterErrors(sectionForm, sectionErrors, currentState.sections[sectionId].sectionType, notify);
           mappedActions.push(new UpdateSectionDataAction(submissionId, sectionId, sectionData, filteredErrors, sectionErrors));
         }
+        if (isNotEmpty((currentState.sections['detect-duplicate']?.data as WorkspaceitemSectionDetectDuplicateObject)?.matches)
+          && isUndefined(sections['detect-duplicate'])) {
+          mappedActions.push(new CleanDetectDuplicateAction(submissionId));
+        }
       });
     }
     return mappedActions;
@@ -509,7 +525,7 @@ export class SubmissionObjectEffects {
     const mappedActions = [];
     let errorsList = Object.create({});
 
-    if (errors && !isEmpty(errors)) {
+    if (errors && isNotEmpty(errors)) {
       // to avoid dispatching an action for every error, create an array of errors per section
       errorsList = parseSectionErrors(errors);
     }

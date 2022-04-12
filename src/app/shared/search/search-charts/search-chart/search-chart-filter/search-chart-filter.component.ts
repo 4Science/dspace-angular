@@ -7,10 +7,10 @@ import { ChartType } from '../../../../../charts/models/chart-type';
 import { SearchFacetFilterComponent } from '../../../search-filters/search-filter/search-facet-filter/search-facet-filter.component';
 import { ChartData } from '../../../../../charts/models/chart-data';
 import { ChartSeries } from '../../../../../charts/models/chart-series';
-import { FacetValue } from '../../../facet-value.model';
+import { FacetValue } from '../../../models/facet-value.model';
 import { RemoteData } from '../../../../../core/data/remote-data';
 import { PaginatedList } from '../../../../../core/data/paginated-list.model';
-import { FacetValues } from '../../../facet-values.model';
+import { FacetValues } from '../../../models/facet-values.model';
 import { getAllCompletedRemoteData } from '../../../../../core/shared/operators';
 
 @Component({
@@ -36,6 +36,36 @@ export class SearchChartFilterComponent extends SearchFacetFilterComponent imple
    * Emits an array of ChartSeries with values found for this chart
    */
   results: Observable<ChartSeries[] | ChartData[]>;
+
+  /**
+   * Set default horizontal chart label i18n key pattern.
+   *
+   * @type {string}
+   * @memberof SearchChartFilterComponent
+   */
+  xAxisLabel = 'search.filters.applied.charts.<facet name>.x_label';
+
+  /**
+   * Set default vertical chart label i18n key pattern.
+   *
+   * @type {string}
+   * @memberof SearchChartFilterComponent
+   */
+  yAxisLabel = 'search.filters.applied.charts.<facet name>.y_label';
+
+  /**
+   * Part of i18n key pattern that will be replaced
+   * @private
+   * @memberof SearchChartFilterComponent
+   */
+  private keyPlaceholder = '<facet name>';
+
+  /**
+   * Used to check if a chart is reversed or not
+   *
+   * @memberof SearchChartFilterComponent
+   */
+  isReverseChart = false;
 
   ngOnInit() {
     super.ngOnInit();
@@ -68,12 +98,33 @@ export class SearchChartFilterComponent extends SearchFacetFilterComponent imple
       map((facetValues: RemoteData<PaginatedList<FacetValue>[]>) => {
         const values = [];
         facetValues.payload.forEach((facetValue: FacetValues) => {
-          values.push(...facetValue.page.map((item: FacetValue) => ({
-            name: item.value,
-            value: item.count,
-            extra: item,
-          } as ChartSeries)));
+          this.xAxisLabel = this.xAxisLabel.replace(this.keyPlaceholder, facetValue.name);
+          this.yAxisLabel = this.yAxisLabel.replace(this.keyPlaceholder, facetValue.name);
+          if (this.isReverseChart) {
+            values.push(
+              ...facetValue.page.map(
+                (item: FacetValue) =>
+                ({
+                  name: item.count.toString(),
+                  value: Number(item.value),
+                  extra: item,
+                } as ChartSeries)
+              )
+            );
+          } else {
+            values.push(
+              ...facetValue.page.map(
+                (item: FacetValue) =>
+                  ({
+                    name: item.value,
+                    value: item.count,
+                    extra: item,
+                  } as ChartSeries)
+              )
+            );
+          }
         });
+
         return values;
       }),
     );

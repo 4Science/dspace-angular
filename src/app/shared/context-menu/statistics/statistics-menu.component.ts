@@ -16,9 +16,9 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   templateUrl: './statistics-menu.component.html',
   styleUrls: ['./statistics-menu.component.scss']
 })
-@rendersContextMenuEntriesForType(DSpaceObjectType.COMMUNITY)
-@rendersContextMenuEntriesForType(DSpaceObjectType.COLLECTION)
-@rendersContextMenuEntriesForType(DSpaceObjectType.ITEM)
+@rendersContextMenuEntriesForType(DSpaceObjectType.COMMUNITY, true)
+@rendersContextMenuEntriesForType(DSpaceObjectType.COLLECTION, true)
+@rendersContextMenuEntriesForType(DSpaceObjectType.ITEM, true)
 /**
  * Display a button linking to the edit page of a DSpaceObject
  */
@@ -48,7 +48,7 @@ export class StatisticsMenuComponent extends ContextMenuEntryComponent implement
 
   ngOnInit() {
     this.notificationService.claimedProfile.subscribe(() => {
-      this.isAuthorized$ = this.authorizationService.isAuthorized(FeatureID.CanEditMetadata, this.contextMenuObject.self, undefined, false);
+      this.isAuthorized$ = this.authorizationService.isAuthorized(FeatureID.CanViewUsageStatistics, this.contextMenuObject.self, undefined, false);
     });
   }
 

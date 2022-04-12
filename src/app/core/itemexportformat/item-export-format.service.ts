@@ -27,8 +27,8 @@ import {
   ScriptDataService
 } from '../data/processes/script-data.service';
 import { TranslateService } from '@ngx-translate/core';
-import { SearchOptions } from '../../shared/search/search-options.model';
-import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
+import { SearchOptions } from '../../shared/search/models/search-options.model';
+import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { Process } from '../../process-page/processes/process.model';
 import { getFirstCompletedRemoteData } from '../shared/operators';
 
@@ -209,9 +209,9 @@ export class ItemExportFormatService {
         return [...parameterValues, Object.assign(new ProcessParameter(), { name: '-s', value: fixedFilter[1] })];
       }
     }
-    // if (searchOptions.scope) {
-    //   return [...parameterValues, Object.assign(new ProcessParameter(), { name: '-s', value: searchOptions.scope })];
-    // }
+    if (searchOptions.scope) {
+      return [...parameterValues, Object.assign(new ProcessParameter(), { name: '-s', value: searchOptions.scope })];
+    }
     return parameterValues;
   }
 

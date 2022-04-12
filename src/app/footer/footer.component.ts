@@ -32,15 +32,16 @@ export class FooterComponent implements OnInit {
    */
   section: TextRowSection;
 
-  constructor(@Optional() private cookies: KlaroService,
-              private locale: LocaleService,
-              private siteService: SiteDataService
+  constructor(
+    @Optional() private cookies: KlaroService,
+    private locale: LocaleService,
+    private siteService: SiteDataService
   ) {
   }
 
   ngOnInit() {
     this.section = {
-      content: 'cms.homepage.footer',
+      content: 'cris.cms.footer',
       contentType: 'text-metadata',
       componentType: 'text-row',
       style: ''
@@ -48,7 +49,7 @@ export class FooterComponent implements OnInit {
     this.site = this.siteService.find().pipe(take(1));
     this.siteService.find().pipe(take(1)).subscribe(
       (site: Site) => {
-        this.hasSiteFooterSections = !isEmpty(site.firstMetadataValue('cms.homepage.footer',
+        this.hasSiteFooterSections = !isEmpty(site.firstMetadataValue('cris.cms.footer',
           { language: this.locale.getCurrentLanguageCode() }));
       }
     );
