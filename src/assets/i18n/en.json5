@@ -6121,5 +6121,17 @@
 
   "authority-confidence.search-label":"Search",
 
-  "map.coordinates-invalid": "Coordinates are not valid"
+  "map.coordinates-invalid": "Coordinates are not valid",
+  
+  "family.listelement.badge": "Family",
+  
+  "place.listelement.badge": "Place",
+  
+  "archivalmaterials.listelement.badge": "Archival Materials",
+  
+  "fond.listelement.badge": "Fond",
+  
+  "journalfond.listelement.badge": "Journal Fond",
+  
+  "aggregation.listelement.badge": "Aggregation"
 }
