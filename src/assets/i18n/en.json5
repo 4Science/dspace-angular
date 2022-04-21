@@ -6133,5 +6133,21 @@
   
   "journalfond.listelement.badge": "Journal Fond",
   
-  "aggregation.listelement.badge": "Aggregation"
+  "aggregation.listelement.badge": "Aggregation",
+  
+  "submission.sections.submit.progressbar.describe.archival_materials": "Archival Materials Basic Information",
+  
+  "submission.sections.submit.progressbar.describe.archival_materials_indexing": "Archival Materials Indexing Information",
+
+  "submission.sections.submit.progressbar.describe.archival_materials_references": "Archival Materials Contextual References",
+  
+  "submission.sections.submit.progressbar.describe.fond": "Fond Details",
+  
+  "submission.sections.submit.progressbar.describe.place": "Place Details",
+  
+  "submission.sections.submit.progressbar.describe.family": "Family Details",
+  
+  "submission.sections.submit.progressbar.describe.aggregation": "Aggregation Details",
+  
+  "submission.sections.submit.progressbar.describe.journalfond": "Journal Fond Details"
 }
