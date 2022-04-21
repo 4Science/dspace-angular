@@ -1,0 +1,24 @@
+<div>
+
+  <button class="btn btn-outline-primary mr-3" (click)="openMiradorViewer()">
+    <i class="custom-icon" id="mirador-icon"></i> {{ 'iiiftoolbar.mirador' | translate }}
+  </button>
+
+  <div class="btn-group mr-3">
+    <button type="button" class="btn btn-outline-primary" (click)="iiif()">
+      <i class="custom-icon" id="iiif-icon"></i> {{ 'iiiftoolbar.iiif.dropdown' | translate }}
+    </button>
+    <div class="btn-group" ngbDropdown>
+      <button class="btn btn-outline-primary dropdown-toggle-split" ngbDropdownToggle></button>
+      <div class="dropdown-menu" ngbDropdownMenu>
+        <button ngbDropdownItem (click)="openManifest()">
+          <i class="fa fa-external-link-alt" aria-hidden="true"></i> {{ 'iiiftoolbar.iiif.open-manifest' | translate }}
+        </button>
+        <button ngbDropdownItem (click)="copyManifestUrlToClipboard()">
+          <i class="fa fa-clipboard" aria-hidden="true"></i> {{ 'iiiftoolbar.iiif.copy-clipboard' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

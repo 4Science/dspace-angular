@@ -1,0 +1,14 @@
+<div class="container">
+  <div>
+    <button class="btn btn-outline-secondary" (click)="back()">
+      <i class="fas fa-arrow-left"></i>&nbsp;{{ 'iiifviewer.page.back' | translate }}
+    </button>
+  </div>
+
+  <ds-mirador-viewer
+    id="iiif-viewer"
+    [object]="item$ | async"
+    [searchable]="isSearchable"
+    [query]="query$ | async"
+  ></ds-mirador-viewer>
+</div>

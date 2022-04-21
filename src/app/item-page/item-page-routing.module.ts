@@ -7,7 +7,7 @@ import { VersionResolver } from './version-page/version.resolver';
 import { DSOBreadcrumbsService } from '../core/breadcrumbs/dso-breadcrumbs.service';
 import { LinkService } from '../core/cache/builders/link.service';
 import { UploadBitstreamComponent } from './bitstreams/upload/upload-bitstream.component';
-import { ITEM_EDIT_PATH, UPLOAD_BITSTREAM_PATH } from './item-page-routing-paths';
+import { ITEM_EDIT_PATH, IIIF_VIEWER_PATH, UPLOAD_BITSTREAM_PATH } from './item-page-routing-paths';
 import { ItemPageAdministratorGuard } from './item-page-administrator.guard';
 import { MenuItemType } from '../shared/menu/initial-menus-state';
 import { LinkMenuItemModel } from '../shared/menu/menu-item/models/link.model';
@@ -17,6 +17,7 @@ import { VersionPageComponent } from './version-page/version-page/version-page.c
 import { BitstreamRequestACopyPageComponent } from '../shared/bitstream-request-a-copy-page/bitstream-request-a-copy-page.component';
 import { CrisItemPageTabResolver } from '../item-page/cris-item-page-tab.resolver';
 import { REQUEST_COPY_MODULE_PATH } from '../app-routing-paths';
+import { IIIFViewerComponent } from './iiif-viewer/iiif-viewer.component';
 
 @NgModule({
   imports: [
@@ -54,7 +55,11 @@ import { REQUEST_COPY_MODULE_PATH } from '../app-routing-paths';
           {
             path: REQUEST_COPY_MODULE_PATH,
             component: BitstreamRequestACopyPageComponent,
-          }
+          },
+          {
+            path: IIIF_VIEWER_PATH,
+            component: IIIFViewerComponent,
+          },
         ],
         data: {
           menu: {
