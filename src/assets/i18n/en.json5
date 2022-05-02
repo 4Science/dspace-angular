@@ -6144,7 +6144,23 @@
   "journalfond.listelement.badge": "Journal Fond",
   
   "aggregation.listelement.badge": "Aggregation",
+
+  "journalissue.listelement.badge": "Journal Issue",
+
+  "news.listelement.badge": "News",
+
+  "staticpage.listelement.badge": "Page",
+
+  "path.listelement.badge": "Path",
+
+  "opera.listelement.badge": "Opera",
+
+  "coin.listelement.badge": "Coin",
+
+  "scientificmaterial.listelement.badge": "Scientific Material",
   
+  "picture.listelement.badge": "Picture",
+
   "submission.sections.submit.progressbar.describe.archival_materials": "Archival Materials Basic Information",
   
   "submission.sections.submit.progressbar.describe.archival_materials_indexing": "Archival Materials Indexing Information",
@@ -6156,8 +6172,33 @@
   "submission.sections.submit.progressbar.describe.place": "Place Details",
   
   "submission.sections.submit.progressbar.describe.family": "Family Details",
-  
+
   "submission.sections.submit.progressbar.describe.aggregation": "Aggregation Details",
-  
-  "submission.sections.submit.progressbar.describe.journalfond": "Journal Fond Details"
+
+  "submission.sections.submit.progressbar.describe.journalfond": "Journal Fond Details",
+
+  "submission.sections.submit.progressbar.describe.path": "Path Details",
+
+  "submission.sections.submit.progressbar.describe.opera": "Opera Details",
+
+  "submission.sections.submit.progressbar.describe.coin": "Coin Details",
+
+  "submission.sections.submit.progressbar.describe.picture": "Picture Details",
+
+  "submission.sections.submit.progressbar.describe.news": "News Details",
+
+  "submission.sections.submit.progressbar.describe.staticpage": "Page Details",
+
+  "submission.sections.submit.progressbar.describe.journal_materials": "Journal Issue Basic Information",
+
+  "submission.sections.submit.progressbar.describe.journal_materials_indexing": "Journal Issue Indexing Information",
+
+  "submission.sections.submit.progressbar.describe.journal_materials_references": "Journal Issue Contextual References",
+
+  "submission.sections.submit.progressbar.describe.scientificmaterial": "Scientific Material Basic Information",
+
+  "submission.sections.submit.progressbar.describe.scientificmaterial_indexing": "Scientific Material Indexing Information",
+
+  "submission.sections.submit.progressbar.describe.scientificmaterial_references": "Scientific Material Contextual References"
+
 }
