@@ -3,6 +3,9 @@ import miradorShareDialogPlugin from 'mirador-share-plugin/es/MiradorShareDialog
 import miradorSharePlugin from 'mirador-share-plugin/es/miradorSharePlugin';
 import miradorDownloadPlugin from 'mirador-dl-plugin/es/miradorDownloadPlugin';
 import miradorDownloadDialog from 'mirador-dl-plugin/es/MiradorDownloadDialog';
+//import annotationPlugins from 'mirador-annotations/es/index';
+//import LocalStorageAdapter from 'mirador-annotations/es/LocalStorageAdapter';
+import miradorImageToolsPlugin from 'mirador-image-tools/es/plugins/miradorImageToolsPlugin';
 
 const params = new URLSearchParams(location.search);
 const manifest = params.get('manifest');
@@ -145,7 +148,13 @@ windowSettings.manifestId = manifest;
           search: searchOption,
           layers: false,
         },
-        sideBarPanel: sidbarPanel
+        sideBarPanel: sidbarPanel,
+        imageToolsEnabled: true
+        //,
+        //annotation: {
+        //    adapter: (canvasId) => new LocalStorageAdapter(`localStorage://?canvasId=${canvasId}`),
+        //    exportLocalStorageAnnotations: true, // display annotation JSON export button
+        //}
       },
       workspace: {
         allowNewWindows: false,
@@ -160,7 +169,10 @@ windowSettings.manifestId = manifest;
       miradorShareDialogPlugin,
       miradorSharePlugin,
       miradorDownloadDialog,
-      miradorDownloadPlugin
+      miradorDownloadPlugin,
+      miradorImageToolsPlugin
+      //,
+      //annotationPlugins
     ]
   )
 )(manifest);
