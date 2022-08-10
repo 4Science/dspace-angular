@@ -126,7 +126,7 @@ windowSettings.manifestId = manifest;
         restrictDownloadOnSizeDefinition: false
       },
       window: {
-        allowClose: false,
+        allowClose: !0,
         // sideBarOpenByDefault: false,
         allowFullscreen: true,
         allowMaximize: false,
@@ -157,12 +157,12 @@ windowSettings.manifestId = manifest;
         //}
       },
       workspace: {
-        allowNewWindows: false,
+        allowNewWindows: !0,
         showZoomControls: true,
         type: 'mosaic'
       },
       workspaceControlPanel: {
-        enabled: false
+        enabled: !0
       }
     },
     [
