@@ -154,40 +154,56 @@ describe('LoadMoreService', () => {
 
   it('should return data first data with size 2 last data with size 1', () => {
     let data: ComputedData;
-    const renderConfig1 = 'inline.more.2.last.1';
-    data = service.getComputedData(componentsToBeRenderedMap,renderConfig1);
+    const renderConfig = 'inline.first2.last1';
+    data = service.getComputedData(componentsToBeRenderedMap,renderConfig);
     expect(data.firstLimitedDataToBeRenderedMap.size).toBe(2);
     expect(data.lastLimitedDataToBeRenderedMap.size).toBe(1);
   });
 
   it('should return data first data with size 3 last data with size 2', () => {
     let data: ComputedData;
-    const renderConfig2 = 'inline.more.3.last.2';
-    data = service.getComputedData(componentsToBeRenderedMap,renderConfig2);
+    const renderConfig = 'inline.first3.last2';
+    data = service.getComputedData(componentsToBeRenderedMap,renderConfig);
     expect(data.firstLimitedDataToBeRenderedMap.size).toBe(3);
     expect(data.lastLimitedDataToBeRenderedMap.size).toBe(2);
   });
 
   it('should return data first data with size 3 last data with size 0', () => {
     let data: ComputedData;
-    const renderConfig3 = 'inline.more.3';
-    data = service.getComputedData(componentsToBeRenderedMap,renderConfig3);
+    const renderConfig = 'inline.first3';
+    data = service.getComputedData(componentsToBeRenderedMap,renderConfig);
     expect(data.firstLimitedDataToBeRenderedMap.size).toBe(3);
     expect(data.lastLimitedDataToBeRenderedMap.size).toBe(0);
   });
 
-  it('should return data first data with size 0 last data with size 3', () => {
+  it('should ignore "last" if "first" is missing', () => {
     let data: ComputedData;
-    const renderConfig4 = 'inline.last.3';
-    data = service.getComputedData(componentsToBeRenderedMap,renderConfig4);
-    expect(data.firstLimitedDataToBeRenderedMap.size).toBe(0);
-    expect(data.lastLimitedDataToBeRenderedMap.size).toBe(3);
+    const renderConfig = 'inline.last3';
+    data = service.getComputedData(componentsToBeRenderedMap,renderConfig);
+    expect(data.firstLimitedDataToBeRenderedMap.size).toBe(6);
+    expect(data.lastLimitedDataToBeRenderedMap.size).toBe(0);
+  });
+
+  it('should use default values', () => {
+    let data: ComputedData;
+    const renderConfig = 'inline.first.last';
+    data = service.getComputedData(componentsToBeRenderedMap,renderConfig);
+    expect(data.firstLimitedDataToBeRenderedMap.size).toBe(3);
+    expect(data.lastLimitedDataToBeRenderedMap.size).toBe(1);
+  });
+
+  it('should use default values', () => {
+    let data: ComputedData;
+    const renderConfig = 'inline.last';
+    data = service.getComputedData(componentsToBeRenderedMap,renderConfig);
+    expect(data.firstLimitedDataToBeRenderedMap.size).toBe(6);
+    expect(data.lastLimitedDataToBeRenderedMap.size).toBe(0);
   });
 
   it('should return data first data with size 6 last data with size 0', () => {
     let data: ComputedData;
-    const renderConfig5 = 'inline';
-    data = service.getComputedData(componentsToBeRenderedMap,renderConfig5);
+    const renderConfig = 'inline';
+    data = service.getComputedData(componentsToBeRenderedMap,renderConfig);
     expect(data.firstLimitedDataToBeRenderedMap.size).toBe(6);
     expect(data.lastLimitedDataToBeRenderedMap.size).toBe(0);
   });

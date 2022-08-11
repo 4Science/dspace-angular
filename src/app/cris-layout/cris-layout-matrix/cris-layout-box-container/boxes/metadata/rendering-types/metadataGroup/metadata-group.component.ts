@@ -77,8 +77,8 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
   ngOnInit() {
     this.field.metadataGroup.elements.forEach((entry: LayoutField) => {
       if (this.item.metadata[entry.metadata]) {
-        const styleValue = !entry.styleValue ? this.field.styleValue :(entry.styleValue + this.field.styleValue);
-        this.metadataGroup.push(Object.assign({}, entry, {styleValue: styleValue}) );
+        const styleValue = !entry.styleValue ? this.field.styleValue : (entry.styleValue + this.field.styleValue);
+        this.metadataGroup.push(Object.assign({}, entry, { styleValue: styleValue }));
       }
     });
     this.metadataValues.forEach((mdv, index) => {
@@ -104,7 +104,10 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
    * Set the limits of how many data loded from first and last
    */
    setData(functionName: string) {
-    const {firstLimitedDataToBeRenderedMap, lastLimitedDataToBeRenderedMap, isConfigured, firstLimit, lastLimit} =  functionName === 'getComputedData'  ? this.loadMoreService.getComputedData(this.componentsToBeRenderedMap,this.field.rendering) : this.loadMoreService.fillAllData(this.componentsToBeRenderedMap,this.field.rendering);
+    const {firstLimitedDataToBeRenderedMap, lastLimitedDataToBeRenderedMap, isConfigured, firstLimit, lastLimit} =
+      functionName === 'getComputedData' ?
+        this.loadMoreService.getComputedData(this.componentsToBeRenderedMap,this.field.rendering) :
+        this.loadMoreService.fillAllData(this.componentsToBeRenderedMap,this.field.rendering);
     this.firstLimitedDataToBeRenderedMap = firstLimitedDataToBeRenderedMap;
     this.lastLimitedDataToBeRenderedMap = lastLimitedDataToBeRenderedMap;
     this.isConfigured = isConfigured;

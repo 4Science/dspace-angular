@@ -1,14 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CrisLayoutIIIFToolbarBoxComponent } from './cris-layout-iiif-toolbar-box.component';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-import { getMockTranslateService } from '../../../../../shared/mocks/translate.service.mock';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateLoaderMock } from '../../../../../shared/mocks/translate-loader.mock';
+import { NotificationsService } from '../../../../../shared/notifications/notifications.service';
+import { NotificationsServiceStub } from '../../../../../shared/testing/notifications-service.stub';
 
-fdescribe('CrisLayoutIiifToolbarBoxComponent', () => {
+describe('CrisLayoutIiifToolbarBoxComponent', () => {
   let component: CrisLayoutIIIFToolbarBoxComponent;
   let fixture: ComponentFixture<CrisLayoutIIIFToolbarBoxComponent>;
+
+  let notificationService: NotificationsServiceStub;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -24,7 +27,7 @@ fdescribe('CrisLayoutIiifToolbarBoxComponent', () => {
       providers: [
         { provide: 'boxProvider', useValue: {} },
         { provide: 'itemProvider', useValue: {} },
-        { provide: TranslateService, useValue: getMockTranslateService() },
+        { provide: NotificationsService, useValue: notificationService },
         { provide: Router, useValue: {} },
         { provide: ActivatedRoute, useValue: {} },
       ]

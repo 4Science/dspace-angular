@@ -16,7 +16,7 @@ import { MetadataRenderComponent } from '../../../row/metadata-container/metadat
 import { LoadMoreService } from '../../../../../../../services/load-more.service';
 
 
-describe('Inline component when .more and .last is not in rendering configuration', () => {
+describe('Inline component when .first and .last is not in rendering configuration', () => {
   let component: InlineComponent;
   let fixture: ComponentFixture<InlineComponent>;
   const testItem = Object.assign(new Item(), {
@@ -141,7 +141,7 @@ describe('Inline component when .more and .last is not in rendering configuratio
 
 });
 
-describe('Inline component when .more and .last is present in rendering configuration', () => {
+describe('Inline component when .first and .last is present in rendering configuration', () => {
   let component: InlineComponent;
   let fixture: ComponentFixture<InlineComponent>;
 
@@ -195,7 +195,7 @@ describe('Inline component when .more and .last is present in rendering configur
     fieldType: 'METADATAGROUP',
     metadata: 'dc.contributor.author',
     label: 'Author(s)',
-    rendering: 'inline.more.1.last.2',
+    rendering: 'inline.first1.last2',
     style: 'container row',
     styleLabel: 'font-weight-bold col-4',
     styleValue: 'col',

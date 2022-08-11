@@ -1,54 +1,62 @@
 <div *ngIf="metadataFieldRenderOptions" class="{{containerStyle}}">
   <div class="d-flex" [class.flex-column]="field.labelAsHeading">
-  <span *ngIf="hasLabel"
-        class="{{labelStyle}}" [innerHTML]="label">
-  </span>
+    <span *ngIf="hasLabel"
+          class="{{labelStyle}}" [innerHTML]="label">
+    </span>
 
     <div *ngIf="!isStructured" class="d-flex col flex-wrap" [class.flex-column]="!field.valuesInline">
-      <!-- Display starting element with limits Start -->
-      <ng-container *ngFor="let index of firstLimitedDataToBeRenderedMap.keys();">
-        <div  *ngFor="let mdg of firstLimitedDataToBeRenderedMap.get(index)">
-          <ds-metadata-render class="w-100" [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
+      <!-- First metadata -->
+      <ng-container *ngFor="let index of firstLimitedDataToBeRenderedMap.keys(); let last = last;">
+        <ng-container *ngFor="let mdg of firstLimitedDataToBeRenderedMap.get(index)">
+          <ds-metadata-render [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
           </ds-metadata-render>
-        </div>
+          <div *ngIf="field.valuesInline && !last" class="mx-2">&bull;</div>
+        </ng-container>
       </ng-container>
-      <!-- Display starting element with limits END -->          
-      <!-- Show More/collapse link button start -->          
-      <div class="view-text">
-        <a (click)="setData('fillAllData')" id="a-more-icon"  href="javascript:void(0);" *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured"><i class="fas fa-chevron-down"></i></a> 
-        <a (click)="setData('fillAllData')" id="a-more-label"  href="javascript:void(0);" *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured" [ngbTooltip]=" 'cris-layout.rendering.more.tooltip' | translate ">
-          {{ (lastLimit === 0 ? "cris-layout.rendering.more" : "cris-layout.rendering.more.withlast") | translate}}
-        </a>
-
-        <a (click)="setData('getComputedData')" id="a-collapse-icon"  href="javascript:void(0);" *ngIf="componentsToBeRenderedMap.size == lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured"><i class="fas fa-chevron-up"></i></a>
-        <a (click)="setData('getComputedData')" id="a-collapse-label"  href="javascript:void(0);" *ngIf="componentsToBeRenderedMap.size == lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured" [ngbTooltip]=" 'cris-layout.rendering.collapse' | translate ">
-          {{"cris-layout.rendering.collapse" | translate}}
-        </a>
+      <!-- Show More/collapse button -->
+      <div *ngIf="isConfigured" [class.mx-3]="field.valuesInline">
+        <ng-container *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size">
+          <a (click)="setData('fillAllData')" id="a-more-icon" href="javascript:void(0);">
+            <i class="fas" [ngClass]="field.valuesInline ? 'fa-chevron-right' : 'fa-chevron-down'"></i>
+          </a>
+          <a (click)="setData('fillAllData')" id="a-more-label" href="javascript:void(0);"
+             [ngbTooltip]=" 'cris-layout.rendering.more.tooltip' | translate ">
+            {{ (lastLimit === 0 ? "cris-layout.rendering.more" : "cris-layout.rendering.more.withlast") | translate}}
+          </a>
+        </ng-container>
+        <ng-container *ngIf="componentsToBeRenderedMap.size == lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size">
+          <a (click)="setData('getComputedData')" id="a-collapse-icon" href="javascript:void(0);">
+            <i class="fas" [ngClass]="field.valuesInline ? 'fa-chevron-left' : 'fa-chevron-up'"></i>
+          </a>
+          <a (click)="setData('getComputedData')" id="a-collapse-label" href="javascript:void(0);"
+             [ngbTooltip]=" 'cris-layout.rendering.collapse' | translate ">
+            {{"cris-layout.rendering.collapse" | translate}}
+          </a>
+        </ng-container>
       </div>
       <!-- Show More/collapse link button END -->
-      <ng-container *ngFor="let index of lastLimitedDataToBeRenderedMap.keys();">
-      <div *ngFor="let mdg of lastLimitedDataToBeRenderedMap.get(index)">
-        <ds-metadata-render class="w-100" [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
-        </ds-metadata-render>
-      </div>
+      <ng-container *ngFor="let index of lastLimitedDataToBeRenderedMap.keys(); let last = last;">
+        <ng-container *ngFor="let mdg of lastLimitedDataToBeRenderedMap.get(index)">
+          <ds-metadata-render [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
+          </ds-metadata-render>
+          <div *ngIf="field.valuesInline && !last" class="mx-2">&bull;</div>
+        </ng-container>
       </ng-container>
       <!-- Display isLoadMore is false start-->
       <ng-container *ngIf="!isLoadMore">
         <ng-container *ngFor="let metadataValue of metadataValues ; trackBy: trackUpdate; let last = last">
-            <ds-metadata-render [field]="field"
-                          [item]="item"
-                          [box]="box"
-                          [metadataValue]="metadataValue"
-                          [renderingSubType]="renderingSubType"></ds-metadata-render>
-            <p *ngIf="field.valuesInline && !last">;&nbsp;</p>
-          </ng-container>
+          <ds-metadata-render [field]="field"
+                              [item]="item"
+                              [box]="box"
+                              [metadataValue]="metadataValue"></ds-metadata-render>
+          <div *ngIf="field.valuesInline && !last">;&nbsp;</div>
+        </ng-container>
       </ng-container>
     </div>
     <div *ngIf="isStructured" class="col w-100" [class.flex-column]="!field.valuesInline">
       <ds-metadata-render [field]="field"
                           [item]="item"
-                          [box]="box"
-                          [renderingSubType]="renderingSubType"></ds-metadata-render>
+                          [box]="box"></ds-metadata-render>
     </div>
   </div>
 </div>

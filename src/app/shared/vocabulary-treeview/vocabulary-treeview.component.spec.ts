@@ -20,6 +20,8 @@ import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocab
 import { AuthTokenInfo } from '../../core/auth/models/auth-token-info.model';
 import { authReducer } from '../../core/auth/auth.reducer';
 import { storeModuleConfig } from '../../app.reducer';
+import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('VocabularyTreeviewComponent test suite', () => {
 
@@ -65,6 +67,7 @@ describe('VocabularyTreeviewComponent test suite', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
+        RouterTestingModule,
         CdkTreeModule,
         StoreModule.forRoot({ auth: authReducer }, storeModuleConfig),
         TranslateModule.forRoot()
@@ -222,6 +225,30 @@ describe('VocabularyTreeviewComponent test suite', () => {
       expect(comp.storedNodeMap).toEqual(emptyNodeMap);
       expect(comp.nodeMap).toEqual(nodeMap);
       expect(comp.searchText).toEqual('');
+    });
+
+    it('should not show active button', () => {
+      comp.isViewMode = true;
+      fixture.detectChanges();
+      expect(fixture.debugElement.query(By.css('[data-test="active-button"]'))).toBeFalsy();
+    });
+
+    it('should show active button', () => {
+      comp.isViewMode = false;
+      fixture.detectChanges();
+      expect(fixture.debugElement.query(By.css('[data-test="active-button"]'))).toBeTruthy();
+    });
+
+    it('should not show search field', () => {
+      comp.enabledSearch = false;
+      fixture.detectChanges();
+      expect(fixture.debugElement.query(By.css('[data-test="search-field"]'))).toBeFalsy();
+    });
+
+    it('should show search field', () => {
+      comp.enabledSearch = true;
+      fixture.detectChanges();
+      expect(fixture.debugElement.query(By.css('[data-test="search-field"]'))).toBeTruthy();
     });
 
     it('should call cleanTree method on destroy', () => {

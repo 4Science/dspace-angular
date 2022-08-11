@@ -1,37 +1,53 @@
-<div *ngIf="(initialized | async)"
-  [ngClass]="field.valuesInline ? 'px-0 col d-flex flex-row flex-wrap' : 'px-0 col d-flex flex-column'">
+<div *ngIf="(initialized | async)" [ngClass]="field.valuesInline ? 'px-0 col d-flex flex-row flex-wrap' : 'px-0 col d-flex flex-column'">
+  <div *ngFor="let index of firstLimitedDataToBeRenderedMap.keys();" class="d-flex metadata-group-entry">
+    <span *ngFor="let mdg of firstLimitedDataToBeRenderedMap.get(index); let first = first" class="metadata-group-entry-value" [class.ml-3]="!first">
+      <ds-metadata-render class="w-100"
+                            [item]="item"
+                            [field]="mdg.field"
+                            [metadataValue]="mdg.value"></ds-metadata-render>
+    </span>
+    <span *ngIf='field.valuesInline && index!=firstLimitedDataToBeRenderedMap.size-1' class="px-3 bull">&bull;</span> 
+  </div>
   <div>
-    <div>
-      <div *ngFor="let index of firstLimitedDataToBeRenderedMap.keys();"
-        class="d-flex metadata-group-entry">
-        <span *ngFor="let mdg of firstLimitedDataToBeRenderedMap.get(index); let first = first"
-          class="metadata-group-entry-value" [class.ml-3]="!first">
-          <ds-metadata-render class="w-100" [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
-          </ds-metadata-render>
-        </span>
-        <span *ngIf='field.valuesInline && index!=firstLimitedDataToBeRenderedMap.size-1'
-          class="px-3">&bull;</span>
-      </div>
-      <a (click)="setData('fillAllData')" id="a-more-icon"  href="javascript:void(0);" *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured"><i class="fas fa-chevron-down"></i></a> 
-      <a (click)="setData('fillAllData')" id="a-more-label"  href="javascript:void(0);" *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured" [ngbTooltip]=" 'cris-layout.rendering.more.tooltip' | translate ">
-        {{ (lastLimit === 0 ? "cris-layout.rendering.more" : "cris-layout.rendering.more.withlast") | translate}}
-      </a>
-    </div>
-    <div>
-      <a (click)="setData('getComputedData')" id="a-collapse-icon"  href="javascript:void(0);" *ngIf="componentsToBeRenderedMap.size == lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured"><i class="fas fa-chevron-up"></i></a>
-      <a (click)="setData('getComputedData')" id="a-collapse-label"  href="javascript:void(0);" *ngIf="componentsToBeRenderedMap.size == lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured" [ngbTooltip]=" 'cris-layout.rendering.collapse' | translate ">
-        {{"cris-layout.rendering.collapse" | translate}}
-      </a>
-      <div *ngFor="let index of lastLimitedDataToBeRenderedMap.keys();"
-        class="d-flex metadata-group-entry">
-        <span *ngFor="let mdg of lastLimitedDataToBeRenderedMap.get(index); let first = first"
-          class="metadata-group-entry-value" [class.ml-3]="!first">
-          <ds-metadata-render class="w-100" [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
-          </ds-metadata-render>
-        </span>
-        <span *ngIf='field.valuesInline && index!=lastLimitedDataToBeRenderedMap.size-1'
-          class="px-3">&bull;</span>
-      </div>
-    </div>
+    <a class="a-icon" 
+       (click)="setData('fillAllData')" 
+       id="a-more-icon"  
+       href="javascript:void(0);" 
+       *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured">
+      <i class="fas fa-chevron-down"></i>
+    </a> 
+    <a class="a-label" 
+       (click)="setData('fillAllData')" 
+       id="a-more-label"  
+       href="javascript:void(0);" 
+       *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured" 
+       [ngbTooltip]=" 'cris-layout.rendering.more.tooltip' | translate ">
+      {{ (lastLimit === 0 ? "cris-layout.rendering.more" : "cris-layout.rendering.more.withlast") | translate}}
+    </a>
+
+    <a class="a-icon" 
+       (click)="setData('getComputedData')" 
+       id="a-collapse-icon"  
+       href="javascript:void(0);" 
+       *ngIf="componentsToBeRenderedMap.size == lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured">
+      <i class="fas fa-chevron-up"></i>
+    </a>
+    <a class="a-label" 
+       (click)="setData('getComputedData')" 
+       id="a-collapse-label"  
+       href="javascript:void(0);" 
+       *ngIf="componentsToBeRenderedMap.size == lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size && isConfigured" 
+       [ngbTooltip]=" 'cris-layout.rendering.collapse' | translate ">
+      {{"cris-layout.rendering.collapse" | translate}}
+    </a>
+  </div>
+  <div *ngFor="let index of lastLimitedDataToBeRenderedMap.keys();" class="d-flex metadata-group-entry">
+    <span *ngFor="let mdg of lastLimitedDataToBeRenderedMap.get(index); let first = first" class="metadata-group-entry-value" [class.ml-3]="!first">
+      <ds-metadata-render class="w-100"
+                          [item]="item"
+                          [field]="mdg.field"
+                          [metadataValue]="mdg.value"></ds-metadata-render>
+    </span>
+    <span *ngIf='field.valuesInline && lastLimitedDataToBeRenderedMap.has(index+1)' class="px-3 bull">&bull;</span>
   </div>
 </div>

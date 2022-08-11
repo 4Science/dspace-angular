@@ -103,13 +103,13 @@ export class VocabularyTreeviewService {
    * @param pageInfo The {@link PageInfo} object
    * @param initValueId The entry id of the node to mark as selected, if any
    */
-  initialize(options: VocabularyOptions, pageInfo: PageInfo, initValueId?: string): void {
+  initialize(options: VocabularyOptions, pageInfo: PageInfo, initValueId?: string, isPublic = false): void {
     this.loading.next(true);
     this.vocabularyOptions = options;
     this.vocabularyName = options.name;
     this.pageInfo = pageInfo;
     if (isNotEmpty(initValueId)) {
-      this.getNodeHierarchyById(initValueId)
+      this.getNodeHierarchyById(initValueId, isPublic)
         .subscribe((hierarchy: string[]) => {
           this.initValueHierarchy = hierarchy;
           this.retrieveTopNodes(pageInfo, []);
@@ -262,8 +262,8 @@ export class VocabularyTreeviewService {
    * @param id The node id
    * @return Observable<string[]>
    */
-  private getNodeHierarchyById(id: string): Observable<string[]> {
-    return this.getById(id).pipe(
+  private getNodeHierarchyById(id: string, isPublic): Observable<string[]> {
+    return this.getById(id, isPublic).pipe(
       mergeMap((entry: VocabularyEntryDetail) => this.getNodeHierarchy(entry, [], false)),
       map((node: TreeviewNode) => this.getNodeHierarchyIds(node))
     );
@@ -296,10 +296,19 @@ export class VocabularyTreeviewService {
    * @param entryId The entry id
    * @return Observable<VocabularyEntryDetail>
    */
-  private getById(entryId: string): Observable<VocabularyEntryDetail> {
-    return this.vocabularyService.findEntryDetailById(entryId, this.vocabularyName).pipe(
-      getFirstSucceededRemoteDataPayload()
-    );
+  private getById(entryId: string, isPublic): Observable<VocabularyEntryDetail> {
+    if (isPublic) {
+      return this.vocabularyService.getPublicVocabularyEntryByValue(this.vocabularyName, entryId).pipe(
+        getFirstSucceededRemoteListPayload(),
+        map((vocabularyArray: VocabularyEntryDetail[]) => {
+          return vocabularyArray[0];
+        })
+      );
+    } else {
+      return this.vocabularyService.findEntryDetailById(entryId, this.vocabularyName).pipe(
+        getFirstSucceededRemoteDataPayload()
+      );
+    }
   }
 
   /**

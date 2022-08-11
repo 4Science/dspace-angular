@@ -12,6 +12,6 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
 export class MapComponent extends RenderingTypeValueModelComponent implements OnInit {
   coordinates: string;
   ngOnInit(): void {
-    this.coordinates = this.item?.metadata['organization.address.addressLocality'][0]?.value;
+    this.coordinates = this.metadataValue.value;
   }
 }

@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
-import { hasValue } from '../../../../../../shared/empty.util';
-import { Item } from '../../../../../../core/shared/item.model';
-import { TranslateService } from '@ngx-translate/core';
-import { LayoutField } from '../../../../../../core/layout/models/box.model';
-import { MetadataValue } from '../../../../../../core/shared/metadata.models';
+import {hasValue} from '../../../../../../shared/empty.util';
+import {Item} from '../../../../../../core/shared/item.model';
+import {TranslateService} from '@ngx-translate/core';
+import {LayoutField} from '../../../../../../core/layout/models/box.model';
+import {MetadataValue} from '../../../../../../core/shared/metadata.models';
+import {Chips} from '../../../../../../shared/chips/models/chips.model';
 
 /**
  * This class defines the basic model to extends for create a new
@@ -96,5 +97,54 @@ export abstract class RenderingTypeModelComponent {
    */
   get valueStyle(): string {
     return this.field.styleValue || '';
+  }
+
+  /**
+   * returns the search link
+   */
+  getSearchHrefLink(rendering, renderingSubType, metadata, metadataValue): string {
+    let searchLinkHref = '/search?';
+    let renderingArray = rendering.split('.');
+    const indexSuffix = renderingArray[renderingArray.length - 1];
+    // add search configuration to querystring
+    if (renderingSubType !== 'default') {
+      searchLinkHref += `configuration=${renderingSubType}&`;
+    }
+    // add search query to querystring
+    switch (indexSuffix) {
+      case 'default':
+        searchLinkHref += `query="${metadataValue}"`;
+        break;
+      case 'auto':
+        searchLinkHref += `query=${metadata}:"${metadataValue}"`;
+        break;
+      default:
+        searchLinkHref += `query=${indexSuffix}:"${metadataValue}"`;
+        break;
+    }
+    return searchLinkHref;
+  }
+
+  /**
+   * Creates the chips component with the required values
+   * @params initChipsValues values to be rendered in chip items
+   */
+  initRenderingChips(initChipsValues: any[], type = 'tag', metadataType = '') {
+    if (type === 'search') {
+      initChipsValues.forEach((element, ind) => {
+        initChipsValues[ind] = {
+          value: element,
+          href: this.getSearchHrefLink(this.field.rendering, this.renderingSubType, this.field.metadata, element)
+        };
+      });
+    } else if (type === 'browse') {
+      initChipsValues.forEach((element, ind) => {
+        initChipsValues[ind] = {
+          value: element,
+          href: `/browse/${metadataType}?value=${element}`
+        };
+      });
+    }
+    return new Chips(initChipsValues,'value');
   }
 }

@@ -86,6 +86,8 @@
 
   --ds-search-form-scope-max-width: 150px;
 
+  --ds-gap: 0.25rem;
+
   --ds-date-picker-input-max-width: 300px;
 
   --ds-cris-layout-sidebar-width: 350px;
@@ -115,5 +117,9 @@
   --ds-cris-layout-navbar-sub-level-backround-color: #{$gray-200};
   --ds-cris-layout-navbar-tab-color-active: #006666;
   --ds-cris-layout-navbar-tab-color-hover : #{theme-color('light')};
+
+  --ds-carousel-controls-color: #{$gray-600};
+  --ds-carousel-caption-color: #{$gray-800};
+  --ds-carousel-caption-background: rgba(255, 255, 255, .6);
 
 }

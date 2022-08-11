@@ -24,7 +24,8 @@ import { RouterLinkDirectiveStub } from './router-link-directive.stub';
     NgComponentOutletDirectiveStub
   ],
   exports: [
-    QueryParamsDirectiveStub
+    QueryParamsDirectiveStub,
+    RouterLinkDirectiveStub
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

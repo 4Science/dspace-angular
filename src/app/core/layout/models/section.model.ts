@@ -92,3 +92,23 @@ export interface TopSectionColumn {
   metadataField: string;
   titleKey: string;
 }
+
+export interface CarouselSection extends SectionComponent {
+  discoveryConfigurationName: string;
+  order: string;
+  sortField: string;
+  numberOfItems: number;
+  style: string;
+  title: string;
+  link: string;
+  description: string;
+  componentType: 'carousel';
+  targetBlank: boolean ;
+  fitWidth: boolean;
+  fitHeight: boolean;
+  keepAspectRatio: boolean;
+  aspectRatio: number;
+  carouselHeightPx: number;
+  captionStyle: string;
+  titleStyle: string;
+}

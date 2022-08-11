@@ -15,7 +15,7 @@ import { TextComponent } from '../../text/text.component';
 import { LoadMoreService } from '../../../../../../../services/load-more.service';
 
 
-describe('TableComponent component when .more and .last is not in rendering configuration', () => {
+describe('TableComponent component when .first and .last is not in rendering configuration', () => {
   let component: TableComponent;
   let fixture: ComponentFixture<TableComponent>;
   const testItem = Object.assign(new Item(), {
@@ -151,7 +151,7 @@ describe('TableComponent component when .more and .last is not in rendering conf
   });
 });
 
-describe('TableComponent component when .more and .last is present in rendering configuration', () => {
+describe('TableComponent component when .first and .last is present in rendering configuration', () => {
   let component: TableComponent;
   let fixture: ComponentFixture<TableComponent>;
 
@@ -207,7 +207,7 @@ describe('TableComponent component when .more and .last is present in rendering 
     fieldType: 'METADATAGROUP',
     metadata: 'dc.contributor.author',
     label: 'Author(s)',
-    rendering: 'table.more.1.last.2',
+    rendering: 'table.first1.last2',
     style: 'container row',
     styleLabel: 'font-weight-bold col-4',
     styleValue: 'col',

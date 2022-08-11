@@ -1,0 +1,6 @@
+<div *ngIf="(searchResults$ | async) && (searchResults$ | async)?.payload?.page.length > 0">
+  <ds-carousel [items]="(searchResults$ | async)?.payload?.page" [carouselOptions]="carouselOptions"></ds-carousel>
+</div>
+<div class="text-center" *ngIf="isLoading$ | async">
+  <ds-loading message="{{'loading.default' | translate}}"></ds-loading>
+</div>
