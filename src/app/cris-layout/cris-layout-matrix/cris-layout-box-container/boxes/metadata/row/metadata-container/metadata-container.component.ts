@@ -95,46 +95,6 @@ export class MetadataContainerComponent implements OnInit {
    */
   firstLimit: number;
 
-  /**
-   * This property is used to hold nested Layout Field inside a metadata group field
-   */
-  metadataGroup: LayoutField[] = [];
-
-  /**
-   * This property is used to hold a list of objects with nested Layout Field and an index that shows the position of nested field inside metadata group field
-   */
-  componentsToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]> = new Map<number, NestedMetadataGroupEntry[]>();
-
-  /**
-   * This boolean is used to check a expand and collapse functionality is needed or not.
-   */
-  isLoadMore = false;
-
-  /**
-   * This property is used to hold first limited list of metadata objects
-   */
-  firstLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]> = new Map<number, NestedMetadataGroupEntry[]>();
-
-  /**
-   * This property is used to hold last limited list of metadata objects
-   */
-  lastLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]> = new Map<number, NestedMetadataGroupEntry[]>();
-
-  /**
-   * This property is used to hold a boolean which is used to identify .more or .last is configured or not
-   */
-  isConfigured: boolean;
-
-  /**
-   * This property is used to hold a number how many metadata objects should be loded form last
-   */
-  lastLimit: number;
-
-  /**
-   * This property is used to hold a number how many metadata object should be loded from first
-   */
-  firstLimit: number;
-
   constructor(
     protected bitstreamDataService: BitstreamDataService,
     protected translateService: TranslateService,

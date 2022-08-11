@@ -16,7 +16,7 @@ export enum FieldRenderingType {
   ORCID = 'ORCID',
   TAG = 'TAG',
   VALUEPAIR = 'VALUEPAIR',
-  MAP = 'MAP'
+  MAP = 'MAP',
   HTML = 'HTML',
   BROWSE = 'BROWSE',
   TAGBROWSE = 'TAG-BROWSE',
