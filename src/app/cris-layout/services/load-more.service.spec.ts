@@ -12,7 +12,7 @@ interface ComputedData {
 
 describe('LoadMoreService', () => {
   let service: LoadMoreService;
-  const entry =[
+  const entry = [
     {
       'field':{
           'metadata':'dc.identifier.doi',

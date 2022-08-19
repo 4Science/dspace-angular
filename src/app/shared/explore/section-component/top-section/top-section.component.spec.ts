@@ -1,3 +1,4 @@
+import { LayoutModeEnum } from './../../../../core/layout/models/section.model';
 import { CommonModule } from '@angular/common';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
@@ -82,7 +83,11 @@ describe('TopSectionComponent', () => {
       order: 'desc',
       sortField: 'dc.date.accessioned',
       numberOfItems: 5,
-      titleKey: undefined
+      titleKey: undefined,
+      showAsCard: true,
+      showLayoutSwitch: true,
+      defaultLayoutMode: LayoutModeEnum.LIST,
+      showAllResults: true,
     };
 
     fixture.detectChanges();
@@ -107,7 +112,7 @@ describe('TopSectionComponent', () => {
   //
   // });
 
-  describe('Top section with title key defined', () => {
+  describe('Top section with title key defined and with a card layout', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(TopSectionComponent);
       component = fixture.componentInstance;
@@ -121,20 +126,30 @@ describe('TopSectionComponent', () => {
         order: 'desc',
         sortField: 'dc.date.foo',
         numberOfItems: 5,
-        titleKey: 'lastPublications'
+        titleKey: 'lastPublications',
+        showAsCard: true,
+        showLayoutSwitch: true,
+        defaultLayoutMode: LayoutModeEnum.LIST,
+        showAllResults: true,
       };
 
       fixture.detectChanges();
     });
 
+    it('should create a top section as card', () => {
+      if (component.topSection.showAsCard) {
+        const cardElement = fixture.debugElement.query(By.css('.card'));
+        expect(cardElement).not.toBeNull();
+        const cardHeaderElement = cardElement.childNodes[0].nativeNode;
+        expect(cardHeaderElement).not.toBeNull();
+        expect(cardHeaderElement).toHaveClass('card-header');
+      }
+    });
+
     it('should create a top section with title', () => {
-
-      const cardElement = fixture.debugElement.query(By.css('.card.mb-4'));
-      expect(cardElement).not.toBeNull();
-      expect(cardElement.query(By.css('.card-header')).nativeElement.textContent).toEqual('explore.index.lastPublications');
-
-
+        const div = fixture.debugElement.queryAll(By.css('.card-header'))[0];
+        expect(div).not.toBeNull();
+        expect(div.children[0].nativeElement.innerText).toEqual('explore.index.lastPublications');
     });
   });
-
-  });
+});

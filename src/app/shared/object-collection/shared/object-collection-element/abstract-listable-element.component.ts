@@ -52,6 +52,11 @@ export class AbstractListableElementComponent<T extends ListableObject> {
   @Input() viewMode: ViewMode;
 
   /**
+   * Custom style
+   */
+  @Input() configStyle: '';
+
+  /**
    * Emit when the object has been reloaded.
    */
   @Output() reloadedObject = new EventEmitter<DSpaceObject>();

@@ -1,6 +1,6 @@
 import { combineLatest as observableCombineLatest, BehaviorSubject, Observable } from 'rxjs';
 
-import { startWith, distinctUntilChanged, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,8 +15,7 @@ import { PaginatedList } from '../../core/data/paginated-list.model';
 
 import { RemoteData } from '../../core/data/remote-data';
 import { fadeIn } from '../animations/fade';
-import { hasNoValue, hasValue } from '../empty.util';
-import { HostWindowService, WidthCategory } from '../host-window.service';
+import { hasValue } from '../empty.util';
 import { ListableObject } from '../object-collection/shared/listable-object.model';
 
 import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
@@ -78,6 +77,21 @@ export class ObjectGridComponent implements OnInit {
    * Option for hiding the pagination detail
    */
   @Input() hidePaginationDetail = false;
+
+  /**
+   * Pass custom style to the component
+   */
+  @Input() configStyle = '';
+
+  /**
+   * Default column style
+   */
+  @Input() columnStyle: string;
+
+  /**
+   * When no paginator is needed to be displayed it can be set to true
+   */
+  @Input() noPagination = false;
 
   /**
    * Behavior subject to output the current listable objects
@@ -151,9 +165,9 @@ export class ObjectGridComponent implements OnInit {
   @Output() next = new EventEmitter<boolean>();
 
   data: any = {};
-  columns$: Observable<ListableObject[]>;
+  results$: Observable<ListableObject[]>;
 
-  constructor(private hostWindow: HostWindowService) {
+  constructor() {
     this._objects$ = new BehaviorSubject(undefined);
   }
 
@@ -161,46 +175,16 @@ export class ObjectGridComponent implements OnInit {
    * Initialize the instance variables
    */
   ngOnInit(): void {
-    const nbColumns$ = this.hostWindow.widthCategory.pipe(
-      map((widthCat: WidthCategory) => {
-        switch (widthCat) {
-          case WidthCategory.XL:
-          case WidthCategory.LG: {
-            return 3;
-          }
-          case WidthCategory.MD:
-          case WidthCategory.SM: {
-            return 2;
-          }
-          default: {
-            return 1;
-          }
+    this.columnStyle ??= 'col-sm-6 col-lg-4';
+    this.results$ = observableCombineLatest([this._objects$]).pipe(
+      map(([objects]) => {
+        if (hasValue(objects) && hasValue(objects.payload) && hasValue(objects.payload.page)) {
+          return objects.payload.page;
+        } else {
+          return [];
         }
-      }),
-      distinctUntilChanged()
-    ).pipe(startWith(3));
-
-    this.columns$ = observableCombineLatest(
-      nbColumns$,
-      this._objects$).pipe(map(([nbColumns, objects]) => {
-      if (hasValue(objects) && hasValue(objects.payload) && hasValue(objects.payload.page)) {
-        const page = objects.payload.page;
-
-        const result = [];
-
-        page.forEach((obj: ListableObject, i: number) => {
-          const colNb = i % nbColumns;
-          let col = result[colNb];
-          if (hasNoValue(col)) {
-            col = [];
-          }
-          result[colNb] = [...col, obj];
-        });
-        return result;
-      } else {
-        return [];
-      }
-    }));
+      })
+    );
   }
 
   /**

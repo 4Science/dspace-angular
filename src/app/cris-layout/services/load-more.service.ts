@@ -35,7 +35,7 @@ export class LoadMoreService  {
         firstLimit,
         lastLimit
     };
-   }
+   };
 
   /**
    * Get the information about 'more' or 'last' limits from the rendering type.
@@ -75,7 +75,7 @@ export class LoadMoreService  {
       firstLimit,
       lastLimit
     };
-  }
+  };
 
   /**
    * Fill the first limited list of the metadata
@@ -88,7 +88,7 @@ export class LoadMoreService  {
       }
     }
     return firstLimitedDataToBeRenderedMap;
-  }
+  };
 
   /**
    * Fill the last limited list of the metadata
@@ -99,5 +99,5 @@ export class LoadMoreService  {
             lastLimitedDataToBeRenderedMap.set(i,componentsToBeRenderedMap.get(i));
       }
     return lastLimitedDataToBeRenderedMap;
-  }
+  };
 }

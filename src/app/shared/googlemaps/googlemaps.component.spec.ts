@@ -11,7 +11,7 @@ describe('GooglemapsComponent', () => {
 
   let fixture: ComponentFixture<GooglemapsComponent>;
 
-  const coordinates ='@41.3455,456.67';
+  const coordinates = '@41.3455,456.67';
 
   const configurationDataService = jasmine.createSpyObj('configurationDataService', {
     findByPropertyName: jasmine.createSpy('findByPropertyName')

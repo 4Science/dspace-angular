@@ -10,7 +10,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { TranslateLoaderMock } from '../shared/mocks/translate-loader.mock';
 import { RemoteData } from '../core/data/remote-data';
-import { BrowseSection, FacetSection, SearchSection, Section, TopSection } from '../core/layout/models/section.model';
+import { BrowseSection, FacetSection, LayoutModeEnum, SearchSection, Section, TopSection } from '../core/layout/models/section.model';
 import { SectionDataService } from '../core/layout/section-data.service';
 import { createSuccessfulRemoteDataObject$ } from '../shared/remote-data.utils';
 import { ExplorePageComponent } from './explore-page.component';
@@ -35,7 +35,11 @@ describe('ExploreComponent', () => {
     order: 'desc',
     sortField: 'dc.date.accessioned',
     numberOfItems: 5,
-    titleKey: 'lastPublications'
+    titleKey: 'lastPublications',
+    showAsCard: true,
+    showLayoutSwitch: true,
+    defaultLayoutMode: LayoutModeEnum.LIST,
+    showAllResults: true,
   };
 
   const searchComponent: SearchSection = {

@@ -2184,6 +2184,8 @@
 
   "home.top-level-communities.help": "Search for a collection",
 
+  "home.top-section.view-results": "View all results",
+
 
 
   "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
@@ -2693,8 +2695,6 @@
   "item.search.results.head": "Item Search Results",
 
   "item.search.title": "Item Search",
-
-
 
   "item.page.abstract": "Abstract",
 
@@ -4963,6 +4963,8 @@
   "researchoutputs.search.results.head": "Publications Search Results",
 
   "orgunit.search.results.head": "Organizations Search Results",
+
+  "homePageTopItems.search.results.head": "Home Page Items Results",
 
   "search.results.no-results": "Your search returned no results. Having trouble finding what you're looking for? Try putting",
 

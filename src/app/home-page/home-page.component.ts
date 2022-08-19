@@ -61,6 +61,13 @@ export class HomePageComponent implements OnInit {
           { language: this.locale.getCurrentLanguageCode() }));
       }
     );
+
+    this.siteService.find().pipe(take(1)).subscribe(
+      (site: Site) => {
+        this.hasHomeHeaderMetadata = !isEmpty(site.firstMetadataValue('cris.cms.home-header',
+          { language: this.locale.getCurrentLanguageCode() }));
+      }
+    );
   }
 
 }

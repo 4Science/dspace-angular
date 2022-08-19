@@ -1,4 +1,4 @@
-  <div class="card" [@focusShadow]="(isCollapsed$ | async)?'blur':'focus'">
+  <div class="card" [@focusShadow]="(isCollapsed$ | async)?'blur':'focus'" [ngClass]="configStyle" >
     <ds-truncatable [id]="dso.id">
       <div class="position-absolute ml-1">
         <ng-content></ng-content>

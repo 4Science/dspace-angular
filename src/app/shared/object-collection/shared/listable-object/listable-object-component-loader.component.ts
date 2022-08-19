@@ -85,6 +85,11 @@ export class ListableObjectComponentLoaderComponent implements OnInit, OnChanges
   @Input() customData: any;
 
   /**
+   * Pass custom style to the component
+   */
+  @Input() configStyle = '';
+
+  /**
    * Directive hook used to place the dynamic child component
    */
   @ViewChild(ListableObjectDirective, {static: true}) listableObjectDirective: ListableObjectDirective;
@@ -140,6 +145,7 @@ export class ListableObjectComponentLoaderComponent implements OnInit, OnChanges
       'context',
       'viewMode',
       'value',
+      'configStyle'
     ];
 
   constructor(

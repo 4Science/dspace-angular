@@ -191,7 +191,7 @@ describe('MetadataContainerComponent', () => {
     }
   });
 
-  const mockEntry =[
+  const mockEntry = [
     {
       'field':{
           'metadata':'dc.identifier.doi',
