@@ -58,6 +58,8 @@ import { MarkdownComponent } from './cris-layout-matrix/cris-layout-box-containe
 import { SearchComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/search/search.component';
 import { TagSearchComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/tag-search/tag-search.component';
 import { MarkdownViewerModule } from '../shared/markdown-viewer/markdown-viewer.module';
+import { AdvancedAttachmentComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/advanced-attachment/advanced-attachment.component';
+import { FileDownloadButtonComponent } from '../shared/file-download-button/file-download-button.component';
 
 const ENTRY_COMPONENTS = [
   CrisLayoutVerticalComponent,
@@ -92,6 +94,7 @@ const ENTRY_COMPONENTS = [
   MarkdownComponent,
   SearchComponent,
   TagSearchComponent,
+  AdvancedAttachmentComponent,
 ];
 @NgModule({
   declarations: [
@@ -116,7 +119,8 @@ const ENTRY_COMPONENTS = [
     MetadataContainerComponent,
     MetadataRenderComponent,
     MapComponent,
-    MarkdownComponent
+    MarkdownComponent,
+    FileDownloadButtonComponent,
   ],
   providers:[ LoadMoreService, NgbActiveModal ],
   imports: [

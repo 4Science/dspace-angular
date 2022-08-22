@@ -1,3 +1,5 @@
+import { AdvancedAttachmentElementType } from '../../../../../../../../config/advanced-attachment-rendering.config';
+import { environment } from '../../../../../../../../environments/environment';
 import { Component, Inject, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
@@ -9,19 +11,18 @@ import { BitstreamDataService } from '../../../../../../../core/data/bitstream-d
 import { Bitstream } from '../../../../../../../core/shared/bitstream.model';
 import { Item } from '../../../../../../../core/shared/item.model';
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
-import { environment } from '../../../../../../../../environments/environment';
 import { FindListOptions } from '../../../../../../../core/data/request.models';
 
 @Component({
-  selector: 'ds-attachment',
-  templateUrl: './attachment.component.html',
-  styleUrls: ['./attachment.component.scss']
+  selector: 'ds-advanced-attachment',
+  templateUrl: './advanced-attachment.component.html',
+  styleUrls: ['./advanced-attachment.component.scss']
 })
-@MetadataBoxFieldRendering(FieldRenderingType.ATTACHMENT, true)
 /**
- * The component for displaying a thumbnail rendered metadata box
+ * This component renders the attachment with an advanced layout.
  */
-export class AttachmentComponent extends BitstreamRenderingModelComponent implements OnInit {
+@MetadataBoxFieldRendering(FieldRenderingType.ADVANCEDATTACHMENT, true)
+export class AdvancedAttachmentComponent extends BitstreamRenderingModelComponent implements OnInit {
 
   /**
    * List of bitstreams to show in the list
@@ -29,9 +30,20 @@ export class AttachmentComponent extends BitstreamRenderingModelComponent implem
   bitstreams$: Observable<Bitstream[]>;
 
   /**
-   * Envoirment variables configuring pagination
+   * Environment variables configuring the fields to be viewed
    */
-  envPagination = environment.attachmentRendering.pagination;
+  envMetadata = environment.advancedAttachmentRendering.metadata;
+
+  /**
+   * Environment variables configuring pagination
+   */
+  envPagination = environment.advancedAttachmentRendering.pagination;
+
+  /**
+   * Configuration type enum
+   */
+  AdvancedAttachmentElementType = AdvancedAttachmentElementType;
+
   constructor(
     @Inject('fieldProvider') public fieldProvider: LayoutField,
     @Inject('itemProvider') public itemProvider: Item,
@@ -57,6 +69,7 @@ export class AttachmentComponent extends BitstreamRenderingModelComponent implem
       this.startWithAll();
     }
   }
+
   /**
    * Start the list with all the attachments
    */
@@ -70,4 +83,5 @@ export class AttachmentComponent extends BitstreamRenderingModelComponent implem
   getVisibleBitstreams() {
     this.bitstreams$ = this.getPaginatedBitstreams();
   }
+
 }
