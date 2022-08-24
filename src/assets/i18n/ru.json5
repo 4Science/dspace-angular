@@ -3605,7 +3605,7 @@
   "footer.link.privacy-policy": "Политика конфиденциальности",
   
   // "footer.link.end-user-agreement":"End User Agreement",
-  "footer.link.end-user-agreement":"Соглашение об использовании",
+  "footer.link.end-user-agreement":"Пользовательское соглашение",
   
   // "footer.link.feedback":"Send Feedback",
   "footer.link.feedback":"Обратная связь",
@@ -3994,23 +3994,23 @@
   
   // "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
   // TODO New key - Add a translation
-  "info.end-user-agreement.accept": "Я прочитал и согласен с Соглашением с конечным пользователем",
+  "info.end-user-agreement.accept": "Я прочитал пользовательское соглашение и согласен с ним",
   
   // "info.end-user-agreement.accept.error": "An error occurred accepting the End User Agreement",
   // TODO New key - Add a translation
-  "info.end-user-agreement.accept.error": "Произошла ошибка при принятии Соглашения с конечным пользователем",
+  "info.end-user-agreement.accept.error": "При принятии пользовательского соглашения произошла ошибка",
   
   // "info.end-user-agreement.accept.success": "Successfully updated the End User Agreement",
   // TODO New key - Add a translation
-  "info.end-user-agreement.accept.success": "Успешно обновлено Соглашение с конечным пользователем",
+  "info.end-user-agreement.accept.success": "Пользовательское соглашение успешно обновлено",
   
   // "info.end-user-agreement.accept.warning": "Before you can proceed, you must agree to the End User Agreement",
   // TODO New key - Add a translation
-  "info.end-user-agreement.accept.warning": "Прежде чем продолжить, вы должны принять Соглашение с конечным пользователем",
+  "info.end-user-agreement.accept.warning": "Прежде чем продолжить, вы должны принять пользовательское соглашение",
   
   // "info.end-user-agreement.breadcrumbs": "End User Agreement",
   // TODO New key - Add a translation
-  "info.end-user-agreement.breadcrumbs": "Соглашение с конечным пользователем",
+  "info.end-user-agreement.breadcrumbs": "Пользовательское соглашение",
   
   // "info.end-user-agreement.buttons.cancel": "Cancel",
   // TODO New key - Add a translation
@@ -4018,27 +4018,27 @@
   
   // "info.end-user-agreement.buttons.save": "Save",
   // TODO New key - Add a translation
-  "info.end-user-agreement.buttons.save": "Сохранять",
+  "info.end-user-agreement.buttons.save": "Сохранить",
   
   // "info.end-user-agreement.head": "End User Agreement",
   // TODO New key - Add a translation
-  "info.end-user-agreement.head": "Соглашение с конечным пользователем",
+  "info.end-user-agreement.head": "Пользовательское соглашение",
   
   // "info.end-user-agreement.title": "End User Agreement",
   // TODO New key - Add a translation
-  "info.end-user-agreement.title": "Соглашение с конечным пользователем",
+  "info.end-user-agreement.title": "Пользовательское соглашение",
   
   // "info.privacy.breadcrumbs": "Privacy Statement",
   // TODO New key - Add a translation
-  "info.privacy.breadcrumbs": "Заявление о конфиденциальности",
+  "info.privacy.breadcrumbs": "Политика конфиденциальности",
   
   // "info.privacy.head": "Privacy Statement",
   // TODO New key - Add a translation
-  "info.privacy.head": "Заявление о конфиденциальности",
+  "info.privacy.head": "Политика конфиденциальности",
   
   // "info.privacy.title": "Privacy Statement",
   // TODO New key - Add a translation
-  "info.privacy.title": "Заявление о конфиденциальности",
+  "info.privacy.title": "Политика конфиденциальности",
   
   // "info.feedback.breadcrumbs": "Feedback",
   // TODO New key - Add a translation
