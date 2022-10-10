@@ -10,7 +10,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { VocabularyEntryDetail } from '../../core/submission/vocabularies/models/vocabulary-entry-detail.model';
 import { hasValue, isEmpty, isNotEmpty } from '../empty.util';
 import { isAuthenticated } from '../../core/auth/selectors';
-import { CoreState } from '../../core/core.reducers';
 import { VocabularyTreeviewService } from './vocabulary-treeview.service';
 import { LOAD_MORE, LOAD_MORE_ROOT, TreeviewFlatNode, TreeviewNode } from './vocabulary-treeview-node.model';
 import { VocabularyOptions } from '../../core/submission/vocabularies/models/vocabulary-options.model';
@@ -18,6 +17,7 @@ import { PageInfo } from '../../core/shared/page-info.model';
 import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { VocabularyTreeFlattener } from './vocabulary-tree-flattener';
 import { VocabularyTreeFlatDataSource } from './vocabulary-tree-flat-data-source';
+import { CoreState } from '../../core/core-state.model';
 import { FormFieldMetadataValueObject } from '../form/builder/models/form-field-metadata-value.model';
 import { Router } from '@angular/router';
 
@@ -276,7 +276,7 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit {
    */
   onSelect(entry: VocabularyEntryDetail) {
     if (!this.isViewMode) {
-      const value = new FormFieldMetadataValueObject(entry.value, null, entry.securityLevel, entry.id);
+      const value = new FormFieldMetadataValueObject(entry.value, null, entry.securityLevel, entry.id, entry.display);
       this.select.emit(value);
       this.activeModal.close(value);
     } else {

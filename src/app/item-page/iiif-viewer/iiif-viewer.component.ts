@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
 import { RemoteData } from '../../core/data/remote-data';
 import { Item } from '../../core/shared/item.model';
-import { getFirstSucceededRemoteDataPayload, redirectOn4xx } from '../../core/shared/operators';
+import { getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ItemDataService } from '../../core/data/item-data.service';
@@ -10,6 +10,7 @@ import { AuthService } from '../../core/auth/auth.service';
 import { getDSpaceQuery } from '../simple/item-types/shared/item-iiif-utils';
 import { RouteService } from '../../core/services/route.service';
 import { Location } from '@angular/common';
+import {redirectOn4xx} from "../../core/shared/authorized.operators";
 
 @Component({
   selector: 'ds-iiif-viewer',

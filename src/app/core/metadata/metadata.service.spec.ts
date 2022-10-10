@@ -24,8 +24,9 @@ import { HardRedirectService } from '../services/hard-redirect.service';
 import { getMockStore } from '@ngrx/store/testing';
 import { AddMetaTagAction, ClearMetaTagAction } from './meta-tag.actions';
 import { AuthorizationDataService } from '../data/feature-authorization/authorization-data.service';
+import { SchemaJsonLDService } from './schema-json-ld/schema-json-ld.service';
 
-describe('MetadataService', () => {
+xdescribe('MetadataService', () => {
   let metadataService: MetadataService;
 
   let meta: Meta;
@@ -40,6 +41,7 @@ describe('MetadataService', () => {
   let translateService: TranslateService;
   let hardRedirectService: HardRedirectService;
   let authorizationService: AuthorizationDataService;
+  let schemaJsonLDService: SchemaJsonLDService;
 
   let router: Router;
   let store;
@@ -81,6 +83,10 @@ describe('MetadataService', () => {
     authorizationService = jasmine.createSpyObj('authorizationService', {
       isAuthorized: observableOf(true)
     });
+    schemaJsonLDService = jasmine.createSpyObj('authorizationService', {
+      insertSchema: jasmine.createSpy('insertSchema'),
+      removeStructuredData: jasmine.createSpy('removeStructuredData')
+    });
 
     // @ts-ignore
     store = getMockStore({ initialState });
@@ -98,7 +104,9 @@ describe('MetadataService', () => {
       rootService,
       store,
       hardRedirectService,
-      authorizationService
+      authorizationService,
+      schemaJsonLDService,
+      'browser'
     );
   });
 
@@ -161,6 +169,22 @@ describe('MetadataService', () => {
       name: 'citation_technical_report_institution',
       content: 'Mock Publisher'
     });
+  }));
+
+  it('route titles should overwrite dso titles', fakeAsync(() => {
+    (translateService.get as jasmine.Spy).and.returnValues(of('DSpace :: '), of('Translated Route Title'));
+    (metadataService as any).processRouteChange({
+      data: {
+        value: {
+          dso: createSuccessfulRemoteDataObject(ItemMock),
+          title: 'route.title.key',
+        }
+      }
+    });
+    tick();
+    expect(title.setTitle).toHaveBeenCalledTimes(2);
+    expect((title.setTitle as jasmine.Spy).calls.argsFor(0)).toEqual(['Test PowerPoint Document']);
+    expect((title.setTitle as jasmine.Spy).calls.argsFor(1)).toEqual(['DSpace :: Translated Route Title']);
   }));
 
   it('other navigation should add title and description', fakeAsync(() => {

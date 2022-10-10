@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { EPerson } from '../core/eperson/models/eperson.model';
 import { ProfilePageMetadataFormComponent } from './profile-page-metadata-form/profile-page-metadata-form.component';
 import { NotificationsService } from '../shared/notifications/notifications.service';
@@ -9,17 +9,15 @@ import { RemoteData } from '../core/data/remote-data';
 import { PaginatedList } from '../core/data/paginated-list.model';
 import { filter, switchMap, tap } from 'rxjs/operators';
 import { EPersonDataService } from '../core/eperson/eperson-data.service';
-import {
-  getAllSucceededRemoteData,
-  getRemoteDataPayload,
-  getFirstCompletedRemoteData
-} from '../core/shared/operators';
+import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../core/shared/operators';
 import { hasValue, isNotEmpty } from '../shared/empty.util';
 import { followLink } from '../shared/utils/follow-link-config.model';
 import { AuthService } from '../core/auth/auth.service';
 import { Operation } from 'fast-json-patch';
 import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../core/data/feature-authorization/feature-id';
+import { ConfigurationDataService } from '../core/data/configuration-data.service';
+import { ConfigurationProperty } from '../core/shared/configuration-property.model';
 import { AuthStatus } from '../core/auth/models/auth-status.model';
 
 @Component({
@@ -30,7 +28,7 @@ import { AuthStatus } from '../core/auth/models/auth-status.model';
 /**
  * Component for a user to edit their profile information
  */
-export class ProfilePageComponent implements OnInit {
+export class ProfilePageComponent implements OnInit, OnDestroy {
   /**
    * A reference to the metadata form component
    */
@@ -45,6 +43,11 @@ export class ProfilePageComponent implements OnInit {
    * The groups the user belongs to
    */
   groupsRD$: Observable<RemoteData<PaginatedList<Group>>>;
+
+  /**
+   * The special groups the user belongs to
+   */
+  specialGroupsRD$: Observable<RemoteData<PaginatedList<Group>>>;
 
   /**
    * Prefix for the notification messages of this component
@@ -72,23 +75,33 @@ export class ProfilePageComponent implements OnInit {
   private currentUser: EPerson;
   canChangePassword$: Observable<boolean>;
 
+  isResearcherProfileEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor(private authService: AuthService,
               private notificationsService: NotificationsService,
               private translate: TranslateService,
               private epersonService: EPersonDataService,
-              private authorizationService: AuthorizationDataService) {
+              private authorizationService: AuthorizationDataService,
+              private configurationService: ConfigurationDataService) {
   }
 
   ngOnInit(): void {
     this.user$ = this.authService.getAuthenticatedUserFromStore().pipe(
       filter((user: EPerson) => hasValue(user.id)),
       switchMap((user: EPerson) => this.epersonService.findById(user.id, true, true, followLink('groups'))),
-      getAllSucceededRemoteData(),
+      getFirstCompletedRemoteData(),
       getRemoteDataPayload(),
       tap((user: EPerson) => this.currentUser = user)
     );
     this.groupsRD$ = this.user$.pipe(switchMap((user: EPerson) => user.groups));
     this.canChangePassword$ = this.user$.pipe(switchMap((user: EPerson) => this.authorizationService.isAuthorized(FeatureID.CanChangePassword, user._links.self.href)));
+    this.specialGroupsRD$ = this.authService.getSpecialGroupsFromAuthStatus();
+
+    this.configurationService.findByPropertyName('researcher-profile.entity-type').pipe(
+      getFirstCompletedRemoteData()
+    ).subscribe((configRD: RemoteData<ConfigurationProperty>) => {
+      this.isResearcherProfileEnabled$.next(configRD.hasSucceeded && configRD.payload.values.length > 0);
+    });
   }
 
   /**
@@ -163,5 +176,16 @@ export class ProfilePageComponent implements OnInit {
    */
   submit() {
     this.updateProfile();
+  }
+
+  /**
+   * Returns true if the researcher profile feature is enabled, false otherwise.
+   */
+  isResearcherProfileEnabled(): Observable<boolean> {
+    return this.isResearcherProfileEnabled$.asObservable();
+  }
+
+  ngOnDestroy(): void {
+    this.epersonService.clearLinkRequests(this.currentUser._links.self.href);
   }
 }
