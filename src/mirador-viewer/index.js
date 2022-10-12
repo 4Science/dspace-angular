@@ -7,6 +7,7 @@ import miradorDownloadDialog from 'mirador-dl-plugin/es/MiradorDownloadDialog';
 //import LocalStorageAdapter from 'mirador-annotations/es/LocalStorageAdapter';
 import miradorImageToolsPlugin from 'mirador-image-tools/es/plugins/miradorImageToolsPlugin';
 
+const embedURL = location.href;
 const params = new URLSearchParams(location.search);
 const manifest = params.get('manifest');
 const searchOption = params.get('searchable');
@@ -107,8 +108,8 @@ windowSettings.manifestId = manifest;
         embedOption: {
           enabled: true,
           embedUrlReplacePattern: [
-            /.*\.edu\/(\w+)\/iiif\/manifest/,
-            manifest
+            /.*/,
+            embedURL
           ],
           syncIframeDimensions: {
             height: {param: 'maxheight'},
