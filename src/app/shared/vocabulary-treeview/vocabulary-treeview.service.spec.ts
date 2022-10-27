@@ -16,6 +16,7 @@ import { createSuccessfulRemoteDataObject } from '../remote-data.utils';
 import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { expand, map, switchMap } from 'rxjs/operators';
 import { from as observableFrom } from 'rxjs';
+import { createPaginatedList } from '../testing/utils.test';
 
 describe('VocabularyTreeviewService test suite', () => {
 
@@ -27,6 +28,7 @@ describe('VocabularyTreeviewService test suite', () => {
   let loadMoreRootFlatNode: TreeviewFlatNode;
   let item: VocabularyEntryDetail;
   let itemNode: TreeviewNode;
+  let itemInitNode: TreeviewNode;
   let item2: VocabularyEntryDetail;
   let itemNode2: TreeviewNode;
   let item3: VocabularyEntryDetail;
@@ -62,7 +64,8 @@ describe('VocabularyTreeviewService test suite', () => {
     findEntryDetailById: jasmine.createSpy('findEntryDetailById'),
     searchTopEntries: jasmine.createSpy('searchTopEntries'),
     getEntryDetailChildren: jasmine.createSpy('getEntryDetailChildren'),
-    clearSearchTopRequests: jasmine.createSpy('clearSearchTopRequests')
+    clearSearchTopRequests: jasmine.createSpy('clearSearchTopRequests'),
+    getPublicVocabularyEntryByValue: jasmine.createSpy('getPublicVocabularyEntryByValue')
   });
 
   function init() {
@@ -81,6 +84,7 @@ describe('VocabularyTreeviewService test suite', () => {
     item.value = item.display = 'root1';
     item.otherInformation = { hasChildren: 'true', id: 'root1' };
     itemNode = new TreeviewNode(item, true, pageInfo);
+    itemInitNode = new TreeviewNode(item, true, pageInfo, null, false, true);
     searchItemNode = new TreeviewNode(item, true, new PageInfo(), null, true);
 
     item2 = new VocabularyEntryDetail();
@@ -201,7 +205,7 @@ describe('VocabularyTreeviewService test suite', () => {
     });
 
     it('should set initValueHierarchy', () => {
-      serviceAsAny.vocabularyService.searchTopEntries.and.returnValue(hot('-c', {
+      serviceAsAny.vocabularyService.searchTopEntries.and.returnValue(hot('--a', {
         a: createSuccessfulRemoteDataObject(buildPaginatedList(pageInfo, [item, item2, item3]))
       }));
       serviceAsAny.vocabularyService.findEntryDetailById.and.returnValue(
@@ -219,6 +223,29 @@ describe('VocabularyTreeviewService test suite', () => {
 
       expect(serviceAsAny.vocabularyName).toEqual(vocabularyOptions.name);
       expect(serviceAsAny.initValueHierarchy).toEqual(['root1', 'root1-child2']);
+      expect(serviceAsAny.dataChange.value).toEqual([itemInitNode, itemNode2, itemNode3]);
+    });
+
+    it('should show only nodes restricted to init Value Hierarchy', () => {
+      serviceAsAny.vocabularyService.searchTopEntries.and.returnValue(hot('--a', {
+        a: createSuccessfulRemoteDataObject(buildPaginatedList(pageInfo, [item, item2, item3]))
+      }));
+      serviceAsAny.vocabularyService.getPublicVocabularyEntryByValue.and.returnValue(
+        hot('-a', {
+          a: createSuccessfulRemoteDataObject(createPaginatedList([child2]))
+        })
+      );
+      serviceAsAny.vocabularyService.getEntryDetailParent.and.returnValue(
+        hot('-b', {
+          b: createSuccessfulRemoteDataObject(item)
+        })
+      );
+      scheduler.schedule(() => service.initialize(vocabularyOptions, pageInfo, 'root2', true));
+      scheduler.flush();
+
+      expect(serviceAsAny.vocabularyName).toEqual(vocabularyOptions.name);
+      expect(serviceAsAny.initValueHierarchy).toEqual(['root1', 'root1-child2']);
+      expect(serviceAsAny.dataChange.value).toEqual([itemInitNode]);
     });
   });
 
