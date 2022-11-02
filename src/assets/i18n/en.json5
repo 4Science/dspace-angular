@@ -6778,7 +6778,13 @@
 
   "submission.sections.submit.progressbar.describe.aggregation": "Aggregation Details",
 
-  "submission.sections.submit.progressbar.describe.journalfond": "Journal Fond Details",
+  "submission.sections.submit.progressbar.describe.journal_fond": "Journal Fond Details",
+
+  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-history": "Journal Fond History",
+
+  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-relation-person": "Journal Fond Person",
+
+  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-relation-journalfond": "Journal Fond Relation",
 
   "submission.sections.submit.progressbar.describe.path": "Path Details",
 
@@ -6791,6 +6797,8 @@
   "submission.sections.submit.progressbar.describe.news": "News Details",
 
   "submission.sections.submit.progressbar.describe.staticpage": "Page Details",
+
+  "submission.sections.submit.progressbar.describe.staticpage-url": "Page URL",
 
   "submission.sections.submit.progressbar.describe.journal_materials": "Journal Issue Basic Information",
 
