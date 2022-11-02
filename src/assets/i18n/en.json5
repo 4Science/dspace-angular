@@ -6820,5 +6820,11 @@
 
   "curation-task.task.pushocr.label": "Send OCR to the Annotation Server",
 
-  "curation-task.task.ocrclean.label": "Remove all metadata bundles and uploaded ocr created by a previous upload to the ocr server"
+  "curation-task.task.ocrclean.label": "Remove all metadata bundles and uploaded ocr created by a previous upload to the ocr server",
+
+  "vocabulary-treeview.header.fondboxtree": "Fond Tree",
+
+  "vocabulary-treeview.header.journalfondboxtree": "Journal Fond Tree",
+
+  "vocabulary-treeview.header.aggregationboxtree": "Collection Tree"
 }
