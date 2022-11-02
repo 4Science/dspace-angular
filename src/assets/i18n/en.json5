@@ -867,6 +867,30 @@
 
   "browse.comcol.by.type": "By Type",
 
+  "browse.comcol.by.titleF" : "Title",
+
+  "browse.comcol.by.typeF" : "Type",
+
+  "browse.comcol.by.dateissuedF" : "Date",
+
+  "browse.comcol.by.subjectF" : "Subject",
+
+  "browse.comcol.by.titleJF" : "Title",
+
+  "browse.comcol.by.typeJF" : "Type",
+
+  "browse.comcol.by.dateissuedJF" : "Date",
+
+  "browse.comcol.by.subjectJF" : "Subject",
+
+  "browse.comcol.by.titleA" : "Title",
+
+  "browse.comcol.by.typeA" : "Type",
+
+  "browse.comcol.by.dateissuedA" : "Date",
+
+  "browse.comcol.by.subjectA" : "Subject",
+
 
   "browse.comcol.head": "Browse",
 
@@ -923,6 +947,30 @@
   "browse.metadata.type.breadcrumbs": "Browse by Type",
 
   "browse.metadata.title.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titleF.breadcrumbs" : "Browse by Title",
+
+  "browse.metadata.typeF.breadcrumbs" : "Browse by Type",
+
+  "browse.metadata.dateissuedF.breadcrumbs" : "Browse by Date",
+
+  "browse.metadata.subjectF.breadcrumbs" : "Browse by Subject",
+
+  "browse.metadata.titleJF.breadcrumbs" : "Browse by Title",
+
+  "browse.metadata.typeJF.breadcrumbs" : "Browse by Type",
+
+  "browse.metadata.dateissuedJF.breadcrumbs" : "Browse by Date",
+
+  "browse.metadata.subjectJF.breadcrumbs" : "Browse by Subject",
+
+  "browse.metadata.titleA.breadcrumbs" : "Browse by Title",
+
+  "browse.metadata.typeA.breadcrumbs" : "Browse by Type",
+
+  "browse.metadata.dateissuedA.breadcrumbs" : "Browse by Date",
+
+  "browse.metadata.subjectA.breadcrumbs" : "Browse by Subject",
 
   "pagination.next.button": "Next",
 
