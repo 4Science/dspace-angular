@@ -6699,22 +6699,70 @@
   "explore.index.dateissuedA" : "Date",
 
   "explore.index.subjectA" : "Subject",
+
+  "explore.index.path" : "Path",
+
+  "explore.index.fond" : "Fond",
+
+  "explore.index.journalfond" : "Journal Fond",
+
+  "explore.index.aggregation" : "Collection",
   
-  "explore.search-section.sectiondocuments.title" : "Search",
+  "explore.search-section.sectiondocuments.title" : "Search Documents & Other materials",
   
-  "explore.search-section.sectionfonds.title" : "Search",
+  "explore.search-section.sectionfonds.title" : "Search Fonds",
   
-  "explore.search-section.sectionjournalfonds.title" : "Search",
+  "explore.search-section.sectionjournalfonds.title" : "Search Journal fonds",
   
-  "explore.search-section.sectionaggregations.title" : "Search",
+  "explore.search-section.sectionaggregations.title" : "Search Collections",
   
-  "explore.sectiondocuments.breadcrumbs": "Documents & other materials",
+  "explore.sectiondocuments.breadcrumbs": "Documents & Other materials",
   
   "explore.sectionfonds.breadcrumbs": "Fonds",
 
   "explore.sectionjournalfonds.breadcrumbs": "Journal Fonds",
 
   "explore.sectionaggregations.breadcrumbs": "Collections",
+
+  "documents.search.results.head": "Documents & Other materials Search Results",
+
+  "fonds.search.results.head": "Fonds Search Results",
+
+  "journalfonds.search.results.head": "Journal Fonds Search Results",
+
+  "aggregations.search.results.head": "Collections Search Results",
+
+  "search.filters.filter.path.head": "Path",
+
+  "search.filters.filter.path.placeholder": "Path name",
+
+  "search.filters.filter.path.label": "Search Path name",
+
+  "search.filters.applied.f.path": "Path",
+
+  "search.filters.filter.fond.head": "Fond",
+
+  "search.filters.filter.fond.placeholder": "Fond name",
+
+  "search.filters.filter.fond.label": "Search Fond name",
+
+  "search.filters.applied.f.fond": "Fond",
+
+  "search.filters.filter.journalfond.head": "Journal Fond",
+
+  "search.filters.filter.journalfond.placeholder": "Journal Fond name",
+
+  "search.filters.filter.journalfond.label": "Search Journal Fond name",
+
+  "search.filters.applied.f.journalfond": "Journal Fond",
+
+  "search.filters.filter.aggregation.head": "Collection",
+
+  "search.filters.filter.aggregation.placeholder": "Collection name",
+
+  "search.filters.filter.aggregation.label": "Search Collection name",
+
+  "search.filters.applied.f.aggregation": "Collection",
 
   "submission.sections.submit.progressbar.describe.archival_materials": "Archival Materials Basic Information",
   
