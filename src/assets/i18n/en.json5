@@ -972,6 +972,30 @@
 
   "browse.metadata.subjectA.breadcrumbs" : "Browse by Subject",
 
+  "browse.metadata.titleF" : "Title",
+
+  "browse.metadata.typeF" : "Type",
+
+  "browse.metadata.dateissuedF" : "Date",
+
+  "browse.metadata.subjectF" : "Subject",
+
+  "browse.metadata.titleJF" : "Title",
+
+  "browse.metadata.typeJF" : "Type",
+
+  "browse.metadata.dateissuedJF" : "Date",
+
+  "browse.metadata.subjectJF" : "Subject",
+
+  "browse.metadata.titleA" : "Title",
+
+  "browse.metadata.typeA" : "Type",
+
+  "browse.metadata.dateissuedA" : "Date",
+
+  "browse.metadata.subjectA" : "Subject",
+
   "pagination.next.button": "Next",
 
   "pagination.previous.button": "Previous",
