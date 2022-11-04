@@ -6836,6 +6836,8 @@
 
   "submission.sections.submit.progressbar.describe.scientificmaterial_references": "Scientific Material Contextual References",
 
+  "submission.sections.submit.progressbar.describe.journal_issue": "Journal Issue Details",
+
   "map.coordinates-invalid": "Coordinates are not valid",
 
   "curation-task.task.hocr.label": "Extract text (HOCR) from images",
