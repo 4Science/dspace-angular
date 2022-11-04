@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { environment } from '../../../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationsService } from '../../../../../shared/notifications/notifications.service';
+import { getEntityMiradorRoute } from '../../../../../item-page/item-page-routing-paths';
 
 @Component({
   selector: 'ds-cris-layout-iiif-toolbar-box',
@@ -38,7 +39,7 @@ export class CrisLayoutIIIFToolbarBoxComponent extends CrisLayoutBoxModelCompone
   }
 
   openMiradorViewer() {
-    this.router.navigate(['../iiif-viewer'], { relativeTo: this.route });
+    this.router.navigate([getEntityMiradorRoute(this.item)]);
   }
 
   iiif() {

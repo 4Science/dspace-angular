@@ -1,14 +1,13 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
-import { Subscription } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Item } from '../../../../core/shared/item.model';
 import { Relationship } from '../../../../core/shared/item-relationships/relationship.model';
-import { RemoteData } from '../../../../core/data/remote-data';
-import {
-  getFirstSucceededRemoteDataPayload,
-} from '../../../../core/shared/operators';
+import { getFirstSucceededRemoteDataPayload, } from '../../../../core/shared/operators';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../app.reducer';
 
 @Component({
   selector: 'ds-relationships-items-actions',
@@ -52,19 +51,42 @@ export class RelationshipsItemsActionsComponent implements OnInit,OnDestroy {
   isProcessingUnhide = false;
   isProcessingUnselect = false;
 
+  isProcessing: Observable<boolean>;
+
+  constructor(
+    protected store: Store<AppState>,
+  ) {
+  }
+
   /**
    * Subscribe to the relationships list
    */
   ngOnInit(): void {
-    if (!!this.customData && !!this.customData.relationships$) {
-      this.sub = this.customData.relationships$.subscribe( (relationships) => {
-        this.getSelected(relationships);
-        this.getHidden(relationships);
-        this.isProcessingHide = false;
-        this.isProcessingSelect = false;
-        this.isProcessingUnhide = false;
-        this.isProcessingUnselect = false;
-      });
+
+    this.isProcessing = this.store.pipe(
+      map(state => !!state.editItemRelationships.pendingChanges),
+      map(pendingChanges => pendingChanges || this.isProcessingHide || this.isProcessingSelect || this.isProcessingUnhide || this.isProcessingUnselect)
+    );
+
+    if (!!this.customData) {
+      if (!!this.customData.relationships$) {
+        this.sub = this.customData.relationships$.subscribe( (relationships) => {
+          this.getSelected(relationships);
+          this.getHidden(relationships);
+        });
+      }
+      if (!!this.customData.updateStatusByItemId$) {
+        this.sub.add(
+          this.customData.updateStatusByItemId$.subscribe((itemId?: string) => {
+            if (!itemId || this.object.id === itemId) {
+              this.isProcessingHide = false;
+              this.isProcessingSelect = false;
+              this.isProcessingUnhide = false;
+              this.isProcessingUnselect = false;
+            }
+          })
+        );
+      }
     }
   }
 
@@ -138,10 +160,6 @@ export class RelationshipsItemsActionsComponent implements OnInit,OnDestroy {
 
     });
 
-  }
-
-  isProcessing(): boolean {
-    return this.isProcessingHide || this.isProcessingSelect || this.isProcessingUnhide || this.isProcessingUnselect;
   }
 
   /**

@@ -1,7 +1,7 @@
 <div class="modal-header">
   <h4 class="modal-title" *ngIf="!vocabularyHeader">{{'vocabulary-treeview.header' | translate}}</h4>
   <h4 class="modal-title" *ngIf="vocabularyHeader">{{'vocabulary-treeview.header.' + vocabularyHeader | translate}}</h4>
-  <button type="button" class="close" aria-label="Close" *ngIf="!isViewMode" data-test="active-button"
+  <button type="button" class="close" aria-label="Close" *ngIf="isModalView" data-test="active-button"
           (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>

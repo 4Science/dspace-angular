@@ -2,8 +2,8 @@ import { Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { RequestService } from '../data/request.service';
-import { isNotEmpty } from '../../shared/empty.util';
-import { GetRequest, PostRequest, RestRequest, } from '../data/request.models';
+import { isNotEmpty, isNotEmptyOperator } from '../../shared/empty.util';
+import { DeleteRequest, GetRequest, PostRequest } from '../data/request.models';
 import { HttpOptions } from '../dspace-rest/dspace-rest.service';
 import { getFirstCompletedRemoteData } from '../shared/operators';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
@@ -11,14 +11,19 @@ import { RemoteData } from '../data/remote-data';
 import { AuthStatus } from './models/auth-status.model';
 import { ShortLivedToken } from './models/short-lived-token.model';
 import { URLCombiner } from '../url-combiner/url-combiner';
+import { RestRequest } from '../data/rest-request.model';
+import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
+import { MachineToken } from './models/machine-token.model';
+import { NoContent } from '../shared/NoContent.model';
+import { sendRequest } from '../shared/request.operators';
 
 /**
  * Abstract service to send authentication requests
  */
 export abstract class AuthRequestService {
   protected linkName = 'authn';
-  protected browseEndpoint = '';
   protected shortlivedtokensEndpoint = 'shortlivedtokens';
+  protected machinetokenEndpoint = 'machinetokens';
 
   constructor(protected halService: HALEndpointService,
               protected requestService: RequestService,
@@ -26,14 +31,21 @@ export abstract class AuthRequestService {
               ) {
   }
 
-  protected fetchRequest(request: RestRequest): Observable<RemoteData<AuthStatus>> {
-    return this.rdbService.buildFromRequestUUID<AuthStatus>(request.uuid).pipe(
+  protected fetchRequest(request: RestRequest, ...linksToFollow: FollowLinkConfig<AuthStatus>[]): Observable<RemoteData<AuthStatus>> {
+    return this.rdbService.buildFromRequestUUID<AuthStatus>(request.uuid, ...linksToFollow).pipe(
       getFirstCompletedRemoteData(),
     );
   }
 
-  protected getEndpointByMethod(endpoint: string, method: string): string {
-    return isNotEmpty(method) ? `${endpoint}/${method}` : `${endpoint}`;
+  protected getEndpointByMethod(endpoint: string, method: string, ...linksToFollow: FollowLinkConfig<AuthStatus>[]): string {
+    let url = isNotEmpty(method) ? `${endpoint}/${method}` : `${endpoint}`;
+    if (linksToFollow?.length > 0) {
+      linksToFollow.forEach((link: FollowLinkConfig<AuthStatus>, index: number) => {
+        url += ((index === 0) ? '?' : '&') + `embed=${link.name}`;
+      });
+    }
+
+    return url;
   }
 
   public postToEndpoint(method: string, body?: any, options?: HttpOptions): Observable<RemoteData<AuthStatus>> {
@@ -47,14 +59,14 @@ export abstract class AuthRequestService {
       distinctUntilChanged());
   }
 
-  public getRequest(method: string, options?: HttpOptions): Observable<RemoteData<AuthStatus>> {
+  public getRequest(method: string, options?: HttpOptions, ...linksToFollow: FollowLinkConfig<any>[]): Observable<RemoteData<AuthStatus>> {
     return this.halService.getEndpoint(this.linkName).pipe(
       filter((href: string) => isNotEmpty(href)),
-      map((endpointURL) => this.getEndpointByMethod(endpointURL, method)),
+      map((endpointURL) => this.getEndpointByMethod(endpointURL, method, ...linksToFollow)),
       distinctUntilChanged(),
       map((endpointURL: string) => new GetRequest(this.requestService.generateRequestId(), endpointURL, undefined, options)),
       tap((request: GetRequest) => this.requestService.send(request)),
-      mergeMap((request: GetRequest) => this.fetchRequest(request)),
+      mergeMap((request: GetRequest) => this.fetchRequest(request, ...linksToFollow)),
       distinctUntilChanged());
   }
 
@@ -87,6 +99,34 @@ export abstract class AuthRequestService {
           return null;
         }
       })
+    );
+  }
+
+  /**
+   * Send a post request to create a machine token
+   */
+  public postToMachineTokenEndpoint(): Observable<RemoteData<MachineToken>> {
+    return this.halService.getEndpoint(this.linkName).pipe(
+      isNotEmptyOperator(),
+      distinctUntilChanged(),
+      map((href: string) => new URLCombiner(href, this.machinetokenEndpoint).toString()),
+      map((endpointURL: string) => new PostRequest(this.requestService.generateRequestId(), endpointURL)),
+      tap((request: RestRequest) => this.requestService.send(request)),
+      switchMap((request: RestRequest) => this.rdbService.buildFromRequestUUID<MachineToken>(request.uuid))
+    );
+  }
+
+  /**
+   * Send a delete request to destroy a machine token
+   */
+  public deleteToMachineTokenEndpoint(): Observable<RemoteData<NoContent>> {
+    return this.halService.getEndpoint(this.linkName).pipe(
+      isNotEmptyOperator(),
+      distinctUntilChanged(),
+      map((href: string) => new URLCombiner(href, this.machinetokenEndpoint).toString()),
+      map((endpointURL: string) => new DeleteRequest(this.requestService.generateRequestId(), endpointURL)),
+      sendRequest(this.requestService),
+      switchMap((request: RestRequest) => this.rdbService.buildFromRequestUUID<MachineToken>(request.uuid)),
     );
   }
 }

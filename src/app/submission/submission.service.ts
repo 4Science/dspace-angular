@@ -22,10 +22,8 @@ import {
   SetActiveSectionAction
 } from './objects/submission-objects.actions';
 import {
-  SubmissionError,
   SubmissionObjectEntry,
-  SubmissionSectionEntry,
-  SubmissionSectionObject
+  SubmissionSectionEntry
 } from './objects/submission-objects.reducer';
 import { securityConfigurationObjectFromIdSelector, submissionObjectFromIdSelector } from './selectors';
 import { HttpOptions } from '../core/dspace-rest/dspace-rest.service';
@@ -46,6 +44,8 @@ import { SearchService } from '../core/shared/search/search.service';
 import { Item } from '../core/shared/item.model';
 import { environment } from '../../environments/environment';
 import { SubmissionJsonPatchOperationsService } from '../core/submission/submission-json-patch-operations.service';
+import { SubmissionSectionObject } from './objects/submission-section-object.model';
+import { SubmissionError } from './objects/submission-error.model';
 import { NotificationOptions } from '../shared/notifications/models/notification-options.model';
 import { ScrollToConfigOptions, ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
 import { SubmissionVisibility } from './utils/visibility.util';
@@ -85,15 +85,15 @@ export class SubmissionService {
    * @param {SubmissionJsonPatchOperationsService} jsonPatchOperationService
    */
   constructor(protected notificationsService: NotificationsService,
-    protected restService: SubmissionRestService,
-    protected router: Router,
-    protected routeService: RouteService,
-    protected store: Store<SubmissionState>,
-    protected scrollToService: ScrollToService,
-    protected translate: TranslateService,
-    protected searchService: SearchService,
-    protected requestService: RequestService,
-    protected jsonPatchOperationService: SubmissionJsonPatchOperationsService) {
+              protected restService: SubmissionRestService,
+              protected router: Router,
+              protected routeService: RouteService,
+              protected scrollToService: ScrollToService,
+              protected store: Store<SubmissionState>,
+              protected translate: TranslateService,
+              protected searchService: SearchService,
+              protected requestService: RequestService,
+              protected jsonPatchOperationService: SubmissionJsonPatchOperationsService) {
   }
 
   /**
@@ -640,18 +640,16 @@ export class SubmissionService {
     ).subscribe();
   }
 
+  /**
+   * Redirect to Item page
+   */
   redirectToItemPage(submissionId: string) {
-    // This assures that the cache is empty before redirecting to mydspace.
-    // See https://github.com/DSpace/dspace-angular/pull/468
-    this.searchService.getEndpoint().pipe(
-      take(1),
-      tap((url) => this.requestService.removeByHrefSubstring(url)),
-      // Now, do redirect.
-      tap(() => {
-        const itemUuid = submissionId.indexOf(':') > -1 ? submissionId.split(':')[0] : submissionId;
-        this.router.navigateByUrl('/items/' + itemUuid, { replaceUrl: true });
-      })
-    ).subscribe();
+    const itemUuid = submissionId.indexOf(':') > -1 ? submissionId.split(':')[0] : submissionId;
+    // TODO temporary disable because it causes an issue on item saving, check if it can be enable again after merge with 7.3
+    // This assures that the cache is empty before redirecting to item page.
+    // this.requestService.setStaleByHrefSubstring(`items/${itemUuid}`);
+
+    this.router.navigateByUrl('/items/' + itemUuid, { replaceUrl: true });
   }
 
   /**

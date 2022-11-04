@@ -4,21 +4,13 @@ import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
 import { map, merge, mergeMap, scan } from 'rxjs/operators';
 import { findIndex } from 'lodash';
 
-import {
-  LOAD_MORE_NODE,
-  LOAD_MORE_ROOT_NODE,
-  TreeviewFlatNode,
-  TreeviewNode
-} from './vocabulary-treeview-node.model';
+import { LOAD_MORE_NODE, LOAD_MORE_ROOT_NODE, TreeviewFlatNode, TreeviewNode } from './vocabulary-treeview-node.model';
 import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { VocabularyService } from '../../core/submission/vocabularies/vocabulary.service';
 import { PageInfo } from '../../core/shared/page-info.model';
 import { isEmpty, isNotEmpty } from '../empty.util';
 import { VocabularyOptions } from '../../core/submission/vocabularies/models/vocabulary-options.model';
-import {
-  getFirstSucceededRemoteDataPayload,
-  getFirstSucceededRemoteListPayload
-} from '../../core/shared/operators';
+import { getFirstSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../../core/shared/operators';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { VocabularyEntryDetail } from '../../core/submission/vocabularies/models/vocabulary-entry-detail.model';
 
@@ -99,21 +91,22 @@ export class VocabularyTreeviewService {
   /**
    * Initialize the tree's nodes
    *
-   * @param options The {@link VocabularyOptions} object
-   * @param pageInfo The {@link PageInfo} object
-   * @param initValueId The entry id of the node to mark as selected, if any
+   * @param options         The {@link VocabularyOptions} object
+   * @param pageInfo        The {@link PageInfo} object
+   * @param initValueId     The entry id of the node to mark as selected, if any
+   * @param publicModeOnly  Whether the tree is used in a public view
    */
-  initialize(options: VocabularyOptions, pageInfo: PageInfo, initValueId?: string, isPublic = false): void {
+  initialize(options: VocabularyOptions, pageInfo: PageInfo, initValueId?: string, publicModeOnly = false): void {
     this.loading.next(true);
     this.vocabularyOptions = options;
     this.vocabularyName = options.name;
     this.pageInfo = pageInfo;
     if (isNotEmpty(initValueId)) {
-      this.getNodeHierarchyById(initValueId, isPublic)
+      this.getNodeHierarchyById(initValueId, publicModeOnly)
         .subscribe((hierarchy: string[]) => {
           this.initValueHierarchy = hierarchy;
-          this.retrieveTopNodes(pageInfo, []);
-      });
+          this.retrieveTopNodes(pageInfo, [], publicModeOnly ? hierarchy : null);
+        });
     } else {
       this.retrieveTopNodes(pageInfo, []);
     }
@@ -264,7 +257,7 @@ export class VocabularyTreeviewService {
    * @param id The node id
    * @return Observable<string[]>
    */
-  private getNodeHierarchyById(id: string, isPublic): Observable<string[]> {
+  private getNodeHierarchyById(id: string, isPublic = false): Observable<string[]> {
     return this.getById(id, isPublic).pipe(
       mergeMap((entry: VocabularyEntryDetail) => this.getNodeHierarchy(entry, [], false)),
       map((node: TreeviewNode) => this.getNodeHierarchyIds(node))
@@ -317,14 +310,20 @@ export class VocabularyTreeviewService {
    * Retrieve the top level vocabulary entries
    * @param pageInfo The {@link PageInfo} object
    * @param nodes The top level nodes already loaded, if any
+   * @param hierarchyToLimit If given the top nodes included will be only the one related to the hierarchy
    */
-  private retrieveTopNodes(pageInfo: PageInfo, nodes: TreeviewNode[]): void {
+  private retrieveTopNodes(pageInfo: PageInfo, nodes: TreeviewNode[], hierarchyToLimit?: string[]): void {
     this.vocabularyService.searchTopEntries(this.vocabularyName, pageInfo).pipe(
       getFirstSucceededRemoteDataPayload()
     ).subscribe((list: PaginatedList<VocabularyEntryDetail>) => {
       this.vocabularyService.clearSearchTopRequests();
       const newNodes: TreeviewNode[] = list.page.map((entry: VocabularyEntryDetail) => this._generateNode(entry));
-      nodes.push(...newNodes);
+      if (hierarchyToLimit && hierarchyToLimit.length > 0) {
+        nodes.push(...newNodes.filter((entry: TreeviewNode) => entry?.item?.otherInformation?.id === hierarchyToLimit[0]));
+      } else {
+        nodes.push(...newNodes);
+      }
+
 
       if ((list.pageInfo.currentPage + 1) <= list.pageInfo.totalPages) {
         // Need a new load more node

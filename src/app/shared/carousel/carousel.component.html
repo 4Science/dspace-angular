@@ -23,7 +23,7 @@
             <h3 data-test="carouselObjTitle" [class]="carouselOptions.titleStyle"
                 *ngIf="item.indexableObject.metadata[title]">
               {{item.indexableObject.metadata[title][0].value}}</h3>
-            <div data-test="carouselObjDesc" class="carousel-caption-text pr-2" [class]="carouselOptions.captionStyle"
+            <div data-test="carouselObjDesc" class="carousel-caption-text pr-3 pl-2" [class]="carouselOptions.captionStyle"
                  *ngIf="item.indexableObject.metadata[description]; let descriptionObj">
               {{descriptionObj[0].value}}
             </div>
