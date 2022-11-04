@@ -3,10 +3,9 @@ import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/t
 import { CdkTreeModule } from '@angular/cdk/tree';
 
 import { of as observableOf } from 'rxjs';
-import { StoreModule } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { provideMockStore } from '@ngrx/store/testing';
+import { v4 as uuidv4 } from 'uuid';
 
 import { createTestComponent } from '../testing/utils.test';
 import { VocabularyTreeviewComponent } from './vocabulary-treeview.component';
@@ -17,23 +16,29 @@ import { FormFieldMetadataValueObject } from '../form/builder/models/form-field-
 import { VocabularyOptions } from '../../core/submission/vocabularies/models/vocabulary-options.model';
 import { PageInfo } from '../../core/shared/page-info.model';
 import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocabulary-entry.model';
-import { AuthTokenInfo } from '../../core/auth/models/auth-token-info.model';
-import { authReducer } from '../../core/auth/auth.reducer';
-import { storeModuleConfig } from '../../app.reducer';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 
 describe('VocabularyTreeviewComponent test suite', () => {
 
   let comp: VocabularyTreeviewComponent;
   let compAsAny: any;
   let fixture: ComponentFixture<VocabularyTreeviewComponent>;
-  let initialState;
+  let router: Router;
 
   const item = new VocabularyEntryDetail();
   item.id = 'node1';
   const item2 = new VocabularyEntryDetail();
   item2.id = 'node2';
+  const entryWithItemId = new VocabularyEntryDetail();
+  entryWithItemId.otherInformation = {
+    id: uuidv4()
+  };
+  const entryWithInvalidItemId = new VocabularyEntryDetail();
+  entryWithInvalidItemId.otherInformation = {
+    id: 'testid'
+  };
   const emptyNodeMap = new Map<string, TreeviewFlatNode>();
   const storedNodeMap = new Map<string, TreeviewFlatNode>().set('test', new TreeviewFlatNode(item2));
   const nodeMap = new Map<string, TreeviewFlatNode>().set('test', new TreeviewFlatNode(item));
@@ -50,26 +55,11 @@ describe('VocabularyTreeviewComponent test suite', () => {
     cleanTree: jasmine.createSpy('cleanTree'),
   });
 
-  initialState = {
-    core: {
-      auth: {
-        authenticated: true,
-        loaded: true,
-        blocking: false,
-        loading: false,
-        authToken: new AuthTokenInfo('test_token'),
-        userId: 'testid',
-        authMethods: []
-      }
-    }
-  };
-
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
         CdkTreeModule,
-        StoreModule.forRoot({ auth: authReducer }, storeModuleConfig),
         TranslateModule.forRoot()
       ],
       declarations: [
@@ -79,7 +69,6 @@ describe('VocabularyTreeviewComponent test suite', () => {
       providers: [
         { provide: VocabularyTreeviewService, useValue: vocabularyTreeviewServiceStub },
         { provide: NgbActiveModal, useValue: modalStub },
-        provideMockStore({ initialState }),
         ChangeDetectorRef,
         VocabularyTreeviewComponent
       ],
@@ -121,6 +110,7 @@ describe('VocabularyTreeviewComponent test suite', () => {
       compAsAny = comp;
       comp.vocabularyOptions = vocabularyOptions;
       comp.selectedItem = null;
+      router = TestBed.inject(Router);
     });
 
     afterEach(() => {
@@ -144,7 +134,7 @@ describe('VocabularyTreeviewComponent test suite', () => {
       comp.selectedItem = currentValue;
       fixture.detectChanges();
       expect(comp.dataSource.data).toEqual([]);
-      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, new PageInfo(), 'entryID');
+      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, new PageInfo(), 'entryID', false);
     });
 
     it('should should init component properly with init value as VocabularyEntry', () => {
@@ -156,7 +146,20 @@ describe('VocabularyTreeviewComponent test suite', () => {
       comp.selectedItem = currentValue;
       fixture.detectChanges();
       expect(comp.dataSource.data).toEqual([]);
-      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, new PageInfo(), 'entryID');
+      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, new PageInfo(), 'entryID', false);
+    });
+
+    it('should should init component properly with init value as VocabularyEntry and publicModeOnly enabled', () => {
+      const currentValue = new VocabularyEntry();
+      currentValue.value = 'testValue';
+      comp.publicModeOnly = true;
+      currentValue.otherInformation = {
+        id: 'entryID'
+      };
+      comp.selectedItem = currentValue;
+      fixture.detectChanges();
+      expect(comp.dataSource.data).toEqual([]);
+      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, new PageInfo(), 'testValue', true);
     });
 
     it('should call loadMore function', () => {
@@ -180,10 +183,32 @@ describe('VocabularyTreeviewComponent test suite', () => {
     });
 
     it('should emit select event', () => {
-      spyOn(comp, 'onSelect');
+      spyOn(comp.select, 'emit');
       comp.onSelect(item);
 
-      expect(comp.onSelect).toHaveBeenCalledWith(item);
+      expect(comp.select.emit).toHaveBeenCalled();
+    });
+
+    it('should not navigate to item page with invalid uuid', () => {
+      comp.publicModeOnly = true;
+      fixture.detectChanges();
+      spyOn(router, 'navigate');
+      spyOn(comp.select, 'emit');
+      comp.onSelect(entryWithInvalidItemId);
+
+      expect(router.navigate).not.toHaveBeenCalled();
+      expect(comp.select.emit).not.toHaveBeenCalled();
+    });
+
+    it('should navigate to item page with valid uuid', () => {
+      comp.publicModeOnly = true;
+      fixture.detectChanges();
+      spyOn(router, 'navigate');
+      spyOn(comp.select, 'emit');
+      comp.onSelect(entryWithItemId);
+
+      expect(router.navigate).toHaveBeenCalled();
+      expect(comp.select.emit).not.toHaveBeenCalled();
     });
 
     it('should call searchByQuery function and set storedNodeMap properly', () => {
@@ -228,13 +253,13 @@ describe('VocabularyTreeviewComponent test suite', () => {
     });
 
     it('should not show active button', () => {
-      comp.isViewMode = true;
+      comp.isModalView = false;
       fixture.detectChanges();
       expect(fixture.debugElement.query(By.css('[data-test="active-button"]'))).toBeFalsy();
     });
 
     it('should show active button', () => {
-      comp.isViewMode = false;
+      comp.isModalView = true;
       fixture.detectChanges();
       expect(fixture.debugElement.query(By.css('[data-test="active-button"]'))).toBeTruthy();
     });
