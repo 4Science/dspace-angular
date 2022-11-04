@@ -32,6 +32,10 @@ export function getItemFullPageRoute(item: Item) {
   return new URLCombiner(getItemPageRoute(item), ITEM_FULL_PATH).toString();
 }
 
+export function getEntityMiradorRoute(item: Item) {
+  return new URLCombiner(getItemPageRoute(item), IIIF_VIEWER_PATH).toString();
+}
+
 export function getItemEditVersionhistoryRoute(item: Item) {
   return new URLCombiner(getItemPageRoute(item), ITEM_EDIT_PATH, ITEM_EDIT_VERSIONHISTORY_PATH).toString();
 }
