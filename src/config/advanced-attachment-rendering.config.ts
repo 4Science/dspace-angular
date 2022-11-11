@@ -1,9 +1,31 @@
+import { MetadataValueFilter } from '../app/core/shared/metadata.models';
+
 /**
  * Interface configuration to define the advanced attachment rendering settings
  */
 export interface AdvancedAttachmentRenderingConfig {
   metadata: AttachmentMetadataConfig[];
   pagination: AdvancedAttachmentRenderingPaginationConfig;
+  buttons: AdvancedAttachmentPreviewButtonConfig[];
+}
+
+/**
+ * Interface configuration to define the advanced attachment buttons
+ */
+export interface AdvancedAttachmentPreviewButtonConfig {
+  type: AdvancedAttachmentPreviewButtonTypes;
+  metadata: string;
+  metadataValueFilter: MetadataValueFilter;
+  negation?: boolean;
+}
+
+/**
+ * Allowed button types for advanced attachment rendering
+ */
+export enum AdvancedAttachmentPreviewButtonTypes {
+  Download = 'Download',
+  IIF = 'IIF',
+  PDF = 'PDF'
 }
 
 /**
