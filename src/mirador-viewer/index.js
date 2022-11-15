@@ -3,8 +3,8 @@ import miradorShareDialogPlugin from 'mirador-share-plugin/es/MiradorShareDialog
 import miradorSharePlugin from 'mirador-share-plugin/es/miradorSharePlugin';
 import miradorDownloadPlugin from 'mirador-dl-plugin/es/miradorDownloadPlugin';
 import miradorDownloadDialog from 'mirador-dl-plugin/es/MiradorDownloadDialog';
-//import annotationPlugins from 'mirador-annotations/es/index';
-//import LocalStorageAdapter from 'mirador-annotations/es/LocalStorageAdapter';
+import miradorAnnotationPlugins from 'mirador-annotations/es/index';
+import LocalStorageAdapter from 'mirador-annotations/es/LocalStorageAdapter';
 import miradorImageToolsPlugin from 'mirador-image-tools/es/plugins/miradorImageToolsPlugin';
 
 const embedURL = location.href;
@@ -151,11 +151,6 @@ windowSettings.manifestId = manifest;
         },
         sideBarPanel: sidbarPanel,
         imageToolsEnabled: true
-        //,
-        //annotation: {
-        //    adapter: (canvasId) => new LocalStorageAdapter(`localStorage://?canvasId=${canvasId}`),
-        //    exportLocalStorageAnnotations: true, // display annotation JSON export button
-        //}
       },
       workspace: {
         allowNewWindows: !0,
@@ -164,6 +159,10 @@ windowSettings.manifestId = manifest;
       },
       workspaceControlPanel: {
         enabled: !0
+      },
+      annotation: {
+         adapter: (canvasId) => new LocalStorageAdapter(`localStorage://?canvasId=${canvasId}`),
+         exportLocalStorageAnnotations: true, // display annotation JSON export button
       }
     },
     [
@@ -171,9 +170,8 @@ windowSettings.manifestId = manifest;
       miradorSharePlugin,
       miradorDownloadDialog,
       miradorDownloadPlugin,
-      miradorImageToolsPlugin
-      //,
-      //annotationPlugins
+      miradorImageToolsPlugin,
+      ...miradorAnnotationPlugins,
     ]
   )
 )(manifest);
