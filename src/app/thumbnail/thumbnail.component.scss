@@ -1,5 +1,7 @@
 .limit-width {
   max-width: var(--ds-thumbnail-max-width);
+  margin: 0 auto !important;
+  float: none !important;
 }
 
 .keep-aspect-ratio {

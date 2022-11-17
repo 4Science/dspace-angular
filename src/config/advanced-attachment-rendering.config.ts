@@ -24,7 +24,7 @@ export interface AdvancedAttachmentPreviewButtonConfig {
  */
 export enum AdvancedAttachmentPreviewButtonTypes {
   Download = 'Download',
-  IIF = 'IIF',
+  IIIF = 'IIIF',
   PDF = 'PDF'
 }
 

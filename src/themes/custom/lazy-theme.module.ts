@@ -76,18 +76,18 @@ import { ForgotEmailComponent } from './app/forgot-password/forgot-password-emai
 import { ForgotPasswordFormComponent } from './app/forgot-password/forgot-password-form/forgot-password-form.component';
 import { ProfilePageComponent } from './app/profile-page/profile-page.component';
 import { RegisterEmailComponent } from './app/register-page/register-email/register-email.component';
-import { MyDSpacePageComponent } from './app/my-dspace-page/my-dspace-page.component';
 import { SubmissionEditComponent } from './app/submission/edit/submission-edit.component';
 import {
   SubmissionImportExternalComponent
 } from './app/submission/import-external/submission-import-external.component';
 import { SubmissionSubmitComponent } from './app/submission/submit/submission-submit.component';
-import {
-  WorkflowItemDeleteComponent
-} from './app/workflowitems-edit-page/workflow-item-delete/workflow-item-delete.component';
+import { MyDSpacePageComponent } from './app/my-dspace-page/my-dspace-page.component';
 import {
   WorkflowItemSendBackComponent
 } from './app/workflowitems-edit-page/workflow-item-send-back/workflow-item-send-back.component';
+import {
+  WorkflowItemDeleteComponent
+} from './app/workflowitems-edit-page/workflow-item-delete/workflow-item-delete.component';
 import { BreadcrumbsComponent } from './app/breadcrumbs/breadcrumbs.component';
 import { FeedbackComponent } from './app/info/feedback/feedback.component';
 import { CommunityListComponent } from './app/community-list-page/community-list/community-list.component';

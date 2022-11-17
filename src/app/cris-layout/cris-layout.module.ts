@@ -10,54 +10,128 @@ import { CrisLayoutLeadingComponent } from './cris-layout-leading/cris-layout-le
 import { CrisLayoutLoaderComponent } from './cris-layout-loader/cris-layout-loader.component';
 import { CrisLayoutMatrixComponent } from './cris-layout-matrix/cris-layout-matrix.component';
 import { CrisLayoutVerticalComponent } from './cris-layout-loader/cris-layout-vertical/cris-layout-vertical.component';
-import { CrisLayoutSidebarComponent } from './cris-layout-loader/cris-layout-vertical/cris-layout-sidebar/cris-layout-sidebar.component';
-import { CrisLayoutHorizontalComponent } from './cris-layout-loader/cris-layout-horizontal/cris-layout-horizontal.component';
-import { CrisLayoutNavbarComponent } from './cris-layout-loader/cris-layout-horizontal/cris-layout-navbar/cris-layout-navbar.component';
-import { CrisLayoutSidebarItemComponent } from './cris-layout-loader/shared/sidebar-item/cris-layout-sidebar-item.component';
-import { CrisLayoutBoxContainerComponent } from './cris-layout-matrix/cris-layout-box-container/cris-layout-box-container.component';
+import {
+  CrisLayoutSidebarComponent
+} from './cris-layout-loader/cris-layout-vertical/cris-layout-sidebar/cris-layout-sidebar.component';
+import {
+  CrisLayoutHorizontalComponent
+} from './cris-layout-loader/cris-layout-horizontal/cris-layout-horizontal.component';
+import {
+  CrisLayoutNavbarComponent
+} from './cris-layout-loader/cris-layout-horizontal/cris-layout-navbar/cris-layout-navbar.component';
+import {
+  CrisLayoutSidebarItemComponent
+} from './cris-layout-loader/shared/sidebar-item/cris-layout-sidebar-item.component';
+import {
+  CrisLayoutBoxContainerComponent
+} from './cris-layout-matrix/cris-layout-box-container/cris-layout-box-container.component';
 import { RowComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/row/row.component';
-import { CrisLayoutMetadataBoxComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/cris-layout-metadata-box.component';
-import { TextComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/text/text.component';
-import { HeadingComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/heading/heading.component';
-import { CrisLayoutRelationBoxComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/relation/cris-layout-relation-box.component';
+import {
+  CrisLayoutMetadataBoxComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/cris-layout-metadata-box.component';
+import {
+  TextComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/text/text.component';
+import {
+  HeadingComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/heading/heading.component';
+import {
+  CrisLayoutRelationBoxComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/relation/cris-layout-relation-box.component';
 import { MyDSpacePageModule } from '../my-dspace-page/my-dspace-page.module';
-import { LongtextComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/longtext/longtext.component';
-import { DateComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/date/date.component';
+import {
+  LongtextComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/longtext/longtext.component';
+import {
+  DateComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/date/date.component';
 import { DsDatePipe } from './pipes/ds-date.pipe';
-import { LinkComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/link/link.component';
-import { IdentifierComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/identifier/identifier.component';
-import { CrisrefComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/crisref/crisref.component';
-import { ThumbnailComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/thumbnail/thumbnail.component';
-import { AttachmentComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/attachment/attachment.component';
-import { CrisLayoutMetricsBoxComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metrics/cris-layout-metrics-box.component';
-import { CrisLayoutIIIFViewerBoxComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/iiif-viewer/cris-layout-iiif-viewer-box.component';
-import { CrisLayoutIIIFToolbarBoxComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/iiif-toolbar/cris-layout-iiif-toolbar-box.component';
-import { MetricRowComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metrics/metric-row/metric-row.component';
+import {
+  LinkComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/link/link.component';
+import {
+  IdentifierComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/identifier/identifier.component';
+import {
+  CrisrefComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/crisref/crisref.component';
+import {
+  ThumbnailComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/thumbnail/thumbnail.component';
+import {
+  AttachmentComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/attachment/attachment.component';
+import {
+  CrisLayoutMetricsBoxComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metrics/cris-layout-metrics-box.component';
+import {
+  CrisLayoutIIIFViewerBoxComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/iiif-viewer/cris-layout-iiif-viewer-box.component';
+import {
+  CrisLayoutIIIFToolbarBoxComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/iiif-toolbar/cris-layout-iiif-toolbar-box.component';
+import {
+  MetricRowComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metrics/metric-row/metric-row.component';
 import { ContextMenuModule } from '../shared/context-menu/context-menu.module';
-import { TableComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/metadataGroup/table/table.component';
-import { InlineComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/metadataGroup/inline/inline.component';
-import { OrcidComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/orcid/orcid.component';
-import { ValuepairComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/valuepair/valuepair.component';
-import { TagComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/tag/tag.component';
-import { MetadataContainerComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/row/metadata-container/metadata-container.component';
-import { MetadataRenderComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/row/metadata-container/metadata-render/metadata-render.component';
-import { MapComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/map/map.component';
+import {
+  TableComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/metadataGroup/table/table.component';
+import {
+  InlineComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/metadataGroup/inline/inline.component';
+import {
+  OrcidComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/orcid/orcid.component';
+import {
+  ValuepairComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/valuepair/valuepair.component';
+import {
+  TagComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/tag/tag.component';
+import {
+  MetadataContainerComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/row/metadata-container/metadata-container.component';
+import {
+  MetadataRenderComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/row/metadata-container/metadata-render/metadata-render.component';
+import {
+  MapComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/map/map.component';
 import { GooglemapsModule } from '../shared/googlemaps/googlemaps.module';
 import { MiradorViewerModule } from '../item-page/mirador-viewer/mirador-viewer.module';
 import { ComcolModule } from '../shared/comcol/comcol.module';
 import { LoadMoreService } from './services/load-more.service';
 import { SearchModule } from '../shared/search/search.module';
 import { HierarchyComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/hierarchy/hierarchy.component';
-import { HtmlComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/html/html.component';
-import { BrowseComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/browse/browse.component';
-import { TagBrowseComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/tag-browse/tag-browse.component';
-import { MarkdownComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/markdown/markdown.component';
-import { SearchComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/search/search.component';
-import { TagSearchComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/tag-search/tag-search.component';
+import {
+  HtmlComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/html/html.component';
+import {
+  BrowseComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/browse/browse.component';
+import {
+  TagBrowseComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/tag-browse/tag-browse.component';
+import {
+  MarkdownComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/markdown/markdown.component';
+import {
+  SearchComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/search/search.component';
+import {
+  TagSearchComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/tag-search/tag-search.component';
 import { MarkdownViewerModule } from '../shared/markdown-viewer/markdown-viewer.module';
-import { AdvancedAttachmentComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/advanced-attachment/advanced-attachment.component';
+import {
+  AdvancedAttachmentComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/advanced-attachment/advanced-attachment.component';
 import { FileDownloadButtonComponent } from '../shared/file-download-button/file-download-button.component';
-import { BitstreamAttachmentComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/advanced-attachment/bitstream-attachment/bitstream-attachment.component';
+import {
+  BitstreamAttachmentComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/advanced-attachment/bitstream-attachment/bitstream-attachment.component';
+import { ItemSharedModule } from '../item-page/item-shared.module';
+import { ViewersSharedModule } from '../item-page/viewer-provider/viewers/viewers-shared.module';
 
 const ENTRY_COMPONENTS = [
   CrisLayoutVerticalComponent,
@@ -89,9 +163,9 @@ const ENTRY_COMPONENTS = [
   MarkdownComponent,
   SearchComponent,
   TagSearchComponent,
-  AdvancedAttachmentComponent,
-  BitstreamAttachmentComponent
+  AdvancedAttachmentComponent
 ];
+
 @NgModule({
   declarations: [
     ...ENTRY_COMPONENTS,
@@ -129,7 +203,9 @@ const ENTRY_COMPONENTS = [
     NgbAccordionModule,
     ComcolModule,
     MiradorViewerModule,
-    MarkdownViewerModule
+    MarkdownViewerModule,
+    ItemSharedModule,
+    ViewersSharedModule
   ],
   exports: [
     CrisLayoutComponent,

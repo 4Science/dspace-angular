@@ -46,7 +46,6 @@ import { MiradorViewerModule } from './mirador-viewer/mirador-viewer.module';
 import { VersionPageComponent } from './version-page/version-page/version-page.component';
 import { VersionedItemComponent } from './simple/item-types/versioned-item/versioned-item.component';
 import { ThemedFileSectionComponent } from './simple/field-components/file-section/themed-file-section.component';
-import { IIIFViewerComponent } from './iiif-viewer/iiif-viewer.component';
 import { OrcidAuthComponent } from './orcid-page/orcid-auth/orcid-auth.component';
 import { OrcidPageComponent } from './orcid-page/orcid-page.component';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
@@ -103,12 +102,11 @@ const DECLARATIONS = [
     NgbAccordionModule,
     CrisItemPageModule,
     ContextMenuModule.withEntryComponents(),
-    MiradorViewerModule,
+    MiradorViewerModule
   ],
   declarations: [
     ...DECLARATIONS,
-    VersionedItemComponent,
-    IIIFViewerComponent
+    VersionedItemComponent
   ],
   exports: [
     ...DECLARATIONS

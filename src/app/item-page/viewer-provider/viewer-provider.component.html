@@ -5,10 +5,5 @@
     </button>
   </div>
 
-  <ds-mirador-viewer
-    id="iiif-viewer"
-    [object]="item$ | async"
-    [searchable]="isSearchable"
-    [query]="query$ | async"
-  ></ds-mirador-viewer>
+  <ng-template dsViewerProvider></ng-template>
 </div>

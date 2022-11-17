@@ -1,9 +1,9 @@
 <ng-container>
-  <div class="row mt-1 mb-2" data-test="attachment-info">
-    <div class="col-3">
+  <div class="row my-3 mx-0 py-0 card-container" data-test="attachment-info">
+    <div class="col-3 py-3">
       <ds-thumbnail [thumbnail]="attachment.thumbnail | async"></ds-thumbnail>
     </div>
-    <div class="col-5">
+    <div class="col-5 py-3">
 
       <ng-container *ngFor="let attachmentConf of envMetadata">
 
@@ -39,14 +39,32 @@
       </ng-container>
 
     </div>
-    <div class="col-4 text-right">
+    <div class="divider col-4 text-right">
       <ng-container *ngFor="let button of envButtons">
 
+        <ng-container *ngIf="button.type === AdvancedAttachmentButtonTypes.IIIF">
+          <div class="my-3"
+               *ngIf="true || isVisible(attachment, button)">
+            <ds-iiif-toolbar [item]="item"></ds-iiif-toolbar>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="button.type === AdvancedAttachmentButtonTypes.PDF">
+          <div class="my-3"
+               *ngIf="true || isVisible(attachment, button)">
+            <button class="btn btn-outline-primary w-50" (click)="openPdfViewer()">
+              <i class="custom-icon" id="pdf-icon"></i> {{ 'cris-layout.advanced-attachment.view-pdf' | translate }}
+            </button>
+          </div>
+        </ng-container>
+
         <ng-container *ngIf="button.type === AdvancedAttachmentButtonTypes.Download">
-          <ds-file-download-button
-            *ngIf="isVisible(attachment, button)"
-            [bitstream]="attachment" [enableRequestACopy]="true" [item]="item">
-          </ds-file-download-button>
+          <div class="my-3"
+               *ngIf="isVisible(attachment, button)">
+            <ds-file-download-button
+              [bitstream]="attachment" [enableRequestACopy]="true" [item]="item">
+            </ds-file-download-button>
+          </div>
         </ng-container>
 
       </ng-container>

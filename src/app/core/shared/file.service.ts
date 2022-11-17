@@ -1,11 +1,14 @@
 import { Inject, Injectable } from '@angular/core';
 import { RawRestResponse } from '../dspace-rest/raw-rest-response.model';
 import { AuthService } from '../auth/auth.service';
-import { map, take } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
 import { NativeWindowRef, NativeWindowService } from '../services/window.service';
 import { URLCombiner } from '../url-combiner/url-combiner';
 import { hasValue } from '../../shared/empty.util';
 import { Observable } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
+import { DspaceRestService, HttpOptions } from '../dspace-rest/dspace-rest.service';
+import { RestRequestMethod } from '../data/rest-request-method';
 
 /**
  * Provides utility methods to save files on the client-side.
@@ -14,7 +17,8 @@ import { Observable } from 'rxjs';
 export class FileService {
   constructor(
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
-    private authService: AuthService
+    private authService: AuthService,
+    private restService: DspaceRestService
   ) { }
 
   /**
@@ -41,4 +45,20 @@ export class FileService {
     const matches = /filename="([^;]+)"/ig.exec(contentDisposition) || [];
     return (matches[1] || 'untitled').trim().replace(/\.[^/.]+$/, '');
   }
+
+  /**
+   * Makes a HTTP Get request to download a file
+   *
+   * @param url
+   *    file url
+   */
+  downloadFile(url: string): Observable<Blob> {
+    const headers = new HttpHeaders();
+    const options: HttpOptions = Object.create({ headers, responseType: 'blob' });
+    return this.retrieveFileDownloadLink(url).pipe(
+      switchMap((href) => this.restService.request(RestRequestMethod.GET, href, null, options)),
+      map((data) => data.payload as Blob)
+    );
+  }
+
 }

@@ -32,10 +32,6 @@ export function getItemFullPageRoute(item: Item) {
   return new URLCombiner(getItemPageRoute(item), ITEM_FULL_PATH).toString();
 }
 
-export function getEntityMiradorRoute(item: Item) {
-  return new URLCombiner(getItemPageRoute(item), IIIF_VIEWER_PATH).toString();
-}
-
 export function getItemEditVersionhistoryRoute(item: Item) {
   return new URLCombiner(getItemPageRoute(item), ITEM_EDIT_PATH, ITEM_EDIT_VERSIONHISTORY_PATH).toString();
 }
@@ -60,11 +56,10 @@ export function getItemVersionRoute(versionId: string) {
   return new URLCombiner(getItemModuleRoute(), ITEM_VERSION_PATH, versionId).toString();
 }
 
-
 export const ITEM_EDIT_PATH = 'edit';
 export const ITEM_EDIT_VERSIONHISTORY_PATH = 'versionhistory';
 export const ITEM_VERSION_PATH = 'version';
 export const UPLOAD_BITSTREAM_PATH = 'bitstreams/new';
-export const IIIF_VIEWER_PATH = 'iiif-viewer';
 export const ORCID_PATH = 'orcid';
 export const ITEM_FULL_PATH = 'full';
+export const VIEWERS_PATH = 'viewer';

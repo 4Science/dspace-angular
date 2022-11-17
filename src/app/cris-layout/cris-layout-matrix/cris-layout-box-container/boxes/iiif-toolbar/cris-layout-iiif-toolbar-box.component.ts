@@ -5,10 +5,6 @@ import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-
 import { CrisLayoutBox } from '../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../core/shared/item.model';
 import { TranslateService } from '@ngx-translate/core';
-import { environment } from '../../../../../../environments/environment';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NotificationsService } from '../../../../../shared/notifications/notifications.service';
-import { getEntityMiradorRoute } from '../../../../../item-page/item-page-routing-paths';
 
 @Component({
   selector: 'ds-cris-layout-iiif-toolbar-box',
@@ -18,15 +14,8 @@ import { getEntityMiradorRoute } from '../../../../../item-page/item-page-routin
 @RenderCrisLayoutBoxFor(LayoutBox.IIIFTOOLBAR)
 export class CrisLayoutIIIFToolbarBoxComponent extends CrisLayoutBoxModelComponent implements OnInit {
 
-  // The path to the REST manifest endpoint.
-  manifestUrl: string;
-
   constructor(
     protected translateService: TranslateService,
-    protected router: Router,
-    protected route: ActivatedRoute,
-    protected notificationsService: NotificationsService,
-    protected translate: TranslateService,
     @Inject('boxProvider') public boxProvider: CrisLayoutBox,
     @Inject('itemProvider') public itemProvider: Item
   ) {
@@ -35,26 +24,6 @@ export class CrisLayoutIIIFToolbarBoxComponent extends CrisLayoutBoxModelCompone
 
   ngOnInit() {
     super.ngOnInit();
-    this.manifestUrl = environment.rest.baseUrl + '/iiif/' + this.item.id + '/manifest';
-  }
-
-  openMiradorViewer() {
-    this.router.navigate([getEntityMiradorRoute(this.item)]);
-  }
-
-  iiif() {
-    this.copyManifestUrlToClipboard();
-    this.openManifest();
-  }
-
-  openManifest() {
-    window.open(this.manifestUrl, '_blank');
-  }
-
-  copyManifestUrlToClipboard() {
-    navigator.clipboard.writeText(this.manifestUrl).then(() => {
-      this.notificationsService.success(null, this.translate.get('iiiftoolbar.iiif.copy-clipboard-notification'));
-    });
   }
 
 }
