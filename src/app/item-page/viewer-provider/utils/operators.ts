@@ -3,7 +3,8 @@ import { AuthService } from '../../../core/auth/auth.service';
 import { Observable, of } from 'rxjs';
 import { RemoteData } from '../../../core/data/remote-data';
 import { filter, switchMap, take } from 'rxjs/operators';
-import { getFirstSucceededRemoteDataPayload, redirectOn4xx } from '../../../core/shared/operators';
+import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
+import { redirectOn4xx } from '../../../core/shared/authorized.operators';
 
 export const fetchNonNull = <T>(router: Router, authService: AuthService) =>
   (source: Observable<RemoteData<T>>): Observable<T> =>
