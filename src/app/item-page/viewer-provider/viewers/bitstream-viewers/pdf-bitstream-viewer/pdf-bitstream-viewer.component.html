@@ -1,5 +1,5 @@
-<div class="pdf-viewer-container">
-  <ng-container *ngIf="(pdfSrc$ | async) == null;">
+<div class="pdf-viewer-container" *ngVar="(pdfSrc$ | async) as pdfSrc">
+  <ng-container *ngIf="pdfSrc == null;">
     <div class="container d-flex h-100">
       <div class="mx-auto my-auto">
         <div class="spinner-border" role="status">
@@ -8,5 +8,5 @@
       </div>
     </div>
   </ng-container>
-  <ng2-pdfjs-viewer [pdfSrc]="pdfSrc$| async" #pdfViewer></ng2-pdfjs-viewer>
+  <ng2-pdfjs-viewer [pdfSrc]="pdfSrc" [ngClass]="{'d-none': pdfSrc == null}" #pdfViewer></ng2-pdfjs-viewer>
 </div>

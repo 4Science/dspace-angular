@@ -4,6 +4,7 @@ import { IIIFItemViewerComponent } from './item-viewers/iiif-item-viewer/iiif-it
 import { PdfBitstreamViewerComponent } from './bitstream-viewers/pdf-bitstream-viewer/pdf-bitstream-viewer.component';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import { MiradorViewerModule } from '../../mirador-viewer/mirador-viewer.module';
+import { SharedModule } from '../../../shared/shared.module';
 
 const COMPONENTS = [
   IIIFItemViewerComponent,
@@ -17,7 +18,8 @@ const COMPONENTS = [
   imports: [
     CommonModule,
     PdfJsViewerModule,
-    MiradorViewerModule
+    MiradorViewerModule,
+    SharedModule
   ],
   exports: [
     ...COMPONENTS
