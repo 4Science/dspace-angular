@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { BaseBitstreamViewerComponent } from '../base-bitstream-viewer.component';
-import { map, switchMap } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
 import { FileService } from '../../../../../core/shared/file.service';
 
 @Component({
@@ -19,12 +19,16 @@ export class PdfBitstreamViewerComponent extends BaseBitstreamViewerComponent im
     super();
   }
 
+  pdfSrc$: Observable<Blob>;
+
   ngOnInit(): void {
+    this.pdfSrc$ = this.bitstream$.pipe(
+      map(bitstream => bitstream?._links?.content?.href),
+      filter(Object),
+      switchMap(href => this.fileService.downloadFile(href))
+    );
     this.subscription =
-      this.bitstream$.pipe(
-        map(bitstream => bitstream?._links?.content?.href),
-        switchMap(href => this.fileService.downloadFile(href))
-      )
+      this.pdfSrc$
         .subscribe(blob => this.refreshViewer(blob));
   }
 

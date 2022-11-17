@@ -1,3 +1,12 @@
-<div class="pdf-viewer-container w-100">
-  <ng2-pdfjs-viewer #pdfViewer></ng2-pdfjs-viewer>
+<div class="pdf-viewer-container">
+  <ng-container *ngIf="(pdfSrc$ | async) == null;">
+    <div class="container d-flex h-100">
+      <div class="mx-auto my-auto">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng2-pdfjs-viewer [pdfSrc]="pdfSrc$| async" #pdfViewer></ng2-pdfjs-viewer>
 </div>
