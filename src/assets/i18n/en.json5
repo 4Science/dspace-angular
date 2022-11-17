@@ -4501,6 +4501,7 @@
 
   "publication.search.title": "Publication Search",
 
+  "product.page.titleprefix": "Product: ",
 
   "media-viewer.next": "Next",
 
@@ -6679,6 +6680,134 @@
 
   "cris-layout.rendering.collapse" : "collapse",
 
+  "family.listelement.badge": "Family",
+
+  "place.listelement.badge": "Place",
+
+  "archivalmaterials.listelement.badge": "Archival Materials",
+
+  "fond.listelement.badge": "Fond",
+
+  "journalfond.listelement.badge": "Journal Fond",
+
+  "aggregation.listelement.badge": "Aggregation",
+  "news.listelement.badge": "News",
+  "staticpage.listelement.badge": "Page",
+  "path.listelement.badge": "Path",
+  "opera.listelement.badge": "Opera",
+  "coin.listelement.badge": "Coin",
+  "scientificmaterial.listelement.badge": "Scientific Material",
+
+  "picture.listelement.badge": "Picture",
+  "menu.section.explore_sectionfonds" : "Fonds",
+  "menu.section.explore_sectionjournalfonds" : "Journal Fonds",
+
+  "menu.section.explore_sectionaggregations" : "Collections",
+  "menu.section.explore_sectiondocuments" : "Documents & Other materials",
+  "explore.counters-section.fonds" : "Fonds",
+  "explore.counters-section.journalfonds" : "Journal Fonds",
+  "explore.counters-section.aggregations" : "Collections",
+  "explore.counters-section.documents" : "Documents & Other materials",
+
+  "explore.index.titleF" : "Title",
+  "explore.index.typeF" : "Type",
+  "explore.index.dateissuedF" : "Date",
+  "explore.index.subjectF" : "Subject",
+  "explore.index.titleJF" : "Title",
+  "explore.index.typeJF" : "Type",
+  "explore.index.dateissuedJF" : "Date",
+  "explore.index.subjectJF" : "Subject",
+  "explore.index.titleA" : "Title",
+  "explore.index.typeA" : "Type",
+  "explore.index.dateissuedA" : "Date",
+  "explore.index.subjectA" : "Subject",
+  "explore.index.path" : "Path",
+  "explore.index.fond" : "Fond",
+  "explore.index.journalfond" : "Journal Fond",
+  "explore.index.aggregation" : "Collection",
+
+  "explore.search-section.sectiondocuments.title" : "Search Documents & Other materials",
+
+  "explore.search-section.sectionfonds.title" : "Search Fonds",
+
+  "explore.search-section.sectionjournalfonds.title" : "Search Journal fonds",
+
+  "explore.search-section.sectionaggregations.title" : "Search Collections",
+
+  "explore.sectiondocuments.breadcrumbs": "Documents & Other materials",
+
+  "explore.sectionfonds.breadcrumbs": "Fonds",
+  "explore.sectionjournalfonds.breadcrumbs": "Journal Fonds",
+  "explore.sectionaggregations.breadcrumbs": "Collections",
+  "documents.search.results.head": "Documents & Other materials Search Results",
+  "fonds.search.results.head": "Fonds Search Results",
+  "journalfonds.search.results.head": "Journal Fonds Search Results",
+  "aggregations.search.results.head": "Collections Search Results",
+  "search.filters.filter.path.head": "Path",
+  "search.filters.filter.path.placeholder": "Path name",
+  "search.filters.filter.path.label": "Search Path name",
+  "search.filters.applied.f.path": "Path",
+  "search.filters.filter.fond.head": "Fond",
+  "search.filters.filter.fond.placeholder": "Fond name",
+  "search.filters.filter.fond.label": "Search Fond name",
+  "search.filters.applied.f.fond": "Fond",
+  "search.filters.filter.journalfond.head": "Journal Fond",
+  "search.filters.filter.journalfond.placeholder": "Journal Fond name",
+  "search.filters.filter.journalfond.label": "Search Journal Fond name",
+  "search.filters.applied.f.journalfond": "Journal Fond",
+  "search.filters.filter.aggregation.head": "Collection",
+  "search.filters.filter.aggregation.placeholder": "Collection name",
+  "search.filters.filter.aggregation.label": "Search Collection name",
+  "search.filters.applied.f.aggregation": "Collection",
+  "submission.sections.submit.progressbar.describe.archival_materials": "Archival Materials Basic Information",
+
+  "submission.sections.submit.progressbar.describe.archival_materials_indexing": "Archival Materials Indexing Information",
+  "submission.sections.submit.progressbar.describe.archival_materials_references": "Archival Materials Contextual References",
+
+  "submission.sections.submit.progressbar.describe.fond": "Fond Details",
+
+  "submission.sections.submit.progressbar.describe.place": "Place Details",
+
+  "submission.sections.submit.progressbar.describe.family": "Family Details",
+
+  "submission.sections.submit.progressbar.describe.aggregation": "Aggregation Details",
+
+  "submission.sections.submit.progressbar.describe.journal_fond": "Journal Fond Details",
+
+  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-history": "Journal Fond History",
+
+  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-relation-person": "Journal Fond Person",
+
+  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-relation-journalfond": "Journal Fond Relation",
+
+  "submission.sections.submit.progressbar.describe.path": "Path Details",
+
+  "submission.sections.submit.progressbar.describe.opera": "Opera Details",
+
+  "submission.sections.submit.progressbar.describe.coin": "Coin Details",
+
+  "submission.sections.submit.progressbar.describe.picture": "Picture Details",
+
+  "submission.sections.submit.progressbar.describe.news": "News Details",
+
+  "submission.sections.submit.progressbar.describe.staticpage": "Page Details",
+
+  "submission.sections.submit.progressbar.describe.staticpage-url": "Page URL",
+
+  "submission.sections.submit.progressbar.describe.journal_materials": "Journal Issue Basic Information",
+
+  "submission.sections.submit.progressbar.describe.journal_materials_indexing": "Journal Issue Indexing Information",
+
+  "submission.sections.submit.progressbar.describe.journal_materials_references": "Journal Issue Contextual References",
+
+  "submission.sections.submit.progressbar.describe.scientificmaterial": "Scientific Material Basic Information",
+
+  "submission.sections.submit.progressbar.describe.scientificmaterial_indexing": "Scientific Material Indexing Information",
+
+  "submission.sections.submit.progressbar.describe.scientificmaterial_references": "Scientific Material Contextual References",
+
+  "submission.sections.submit.progressbar.describe.journal_issue": "Journal Issue Details",
+
   "map.coordinates-invalid": "Coordinates are not valid",
 
   "curation-task.task.hocr.label": "Extract text (HOCR) from images",
@@ -6687,5 +6816,11 @@
 
   "curation-task.task.pushocr.label": "Send OCR to the Annotation Server",
 
-  "curation-task.task.ocrclean.label": "Remove all metadata bundles and uploaded ocr created by a previous upload to the ocr server"
+  "curation-task.task.ocrclean.label": "Remove all metadata bundles and uploaded ocr created by a previous upload to the ocr server",
+
+  "vocabulary-treeview.header.fondboxtree": "Fond Tree",
+
+  "vocabulary-treeview.header.journalfondboxtree": "Journal Fond Tree",
+
+  "vocabulary-treeview.header.aggregationboxtree": "Collection Tree"
 }
