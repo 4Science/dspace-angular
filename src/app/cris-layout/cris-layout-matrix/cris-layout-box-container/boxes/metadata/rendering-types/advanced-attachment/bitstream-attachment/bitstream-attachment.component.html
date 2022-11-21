@@ -44,14 +44,14 @@
 
         <ng-container *ngIf="button.type === AdvancedAttachmentButtonTypes.IIIF">
           <div class="my-3"
-               *ngIf="true || isVisible(attachment, button)">
+               *ngIf="isVisible(attachment, button)">
             <ds-iiif-toolbar [item]="item"></ds-iiif-toolbar>
           </div>
         </ng-container>
 
         <ng-container *ngIf="button.type === AdvancedAttachmentButtonTypes.PDF">
           <div class="my-3"
-               *ngIf="true || isVisible(attachment, button)">
+               *ngIf="isVisible(attachment, button)">
             <button class="btn btn-outline-primary w-50" (click)="openPdfViewer()">
               <i class="custom-icon" id="pdf-icon"></i> {{ 'cris-layout.advanced-attachment.view-pdf' | translate }}
             </button>
