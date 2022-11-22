@@ -1,6 +1,7 @@
 import { URLCombiner } from '../core/url-combiner/url-combiner';
 import { Item } from '../core/shared/item.model';
 import { isNotEmpty } from '../shared/empty.util';
+import { Bitstream } from '../core/shared/bitstream.model';
 
 export const ITEM_MODULE_PATH = 'items';
 
@@ -31,6 +32,15 @@ export function getItemEditRoute(item: Item) {
 export function getItemFullPageRoute(item: Item) {
   return new URLCombiner(getItemPageRoute(item), ITEM_FULL_PATH).toString();
 }
+
+export function getItemViewerPath(item: Item, viewer: string) {
+  return new URLCombiner(getItemPageRoute(item), VIEWERS_PATH, viewer).toString();
+}
+
+export function getBitstreamItemViewerPath(item: Item, bitstream: Bitstream, viewer: string) {
+  return new URLCombiner(getItemPageRoute(item), VIEWERS_PATH, bitstream.uuid, viewer).toString();
+}
+
 
 export function getItemEditVersionhistoryRoute(item: Item) {
   return new URLCombiner(getItemPageRoute(item), ITEM_EDIT_PATH, ITEM_EDIT_VERSIONHISTORY_PATH).toString();

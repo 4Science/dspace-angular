@@ -12,6 +12,7 @@ import { Item } from '../../../../../../../../core/shared/item.model';
 import { BitstreamDataService } from '../../../../../../../../core/data/bitstream-data.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { getBitstreamItemViewerPath } from '../../../../../../../../item-page/item-page-routing-paths';
 
 @Component({
   selector: 'ds-bitstream-attachment',
@@ -61,6 +62,6 @@ export class BitstreamAttachmentComponent extends BitstreamRenderingModelCompone
   }
 
   public openPdfViewer() {
-    this.router.navigate([`../viewer/${this.attachment.id}/pdf`], { relativeTo: this.route });
+    this.router.navigate([getBitstreamItemViewerPath(this.item, this.attachment, 'pdf')]);
   }
 }

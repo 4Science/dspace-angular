@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment';
 import { Item } from '../../core/shared/item.model';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { TranslateService } from '@ngx-translate/core';
+import { getItemViewerPath } from '../item-page-routing-paths';
 
 @Component({
   selector: 'ds-iiif-toolbar',
@@ -31,7 +32,7 @@ export class IIIFToolbarComponent implements OnInit {
   }
 
   openMiradorViewer() {
-    this.router.navigate(['../viewer/iiif'], { relativeTo: this.route });
+    this.router.navigate([getItemViewerPath(this.item, 'iiif')]);
   }
 
   iiif() {
