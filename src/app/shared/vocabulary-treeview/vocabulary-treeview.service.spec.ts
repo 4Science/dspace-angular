@@ -16,7 +16,6 @@ import { createSuccessfulRemoteDataObject } from '../remote-data.utils';
 import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { expand, map, switchMap } from 'rxjs/operators';
 import { from as observableFrom } from 'rxjs';
-import { createPaginatedList } from '../testing/utils.test';
 
 describe('VocabularyTreeviewService test suite', () => {
 
@@ -230,9 +229,9 @@ describe('VocabularyTreeviewService test suite', () => {
       serviceAsAny.vocabularyService.searchTopEntries.and.returnValue(hot('--a', {
         a: createSuccessfulRemoteDataObject(buildPaginatedList(pageInfo, [item, item2, item3]))
       }));
-      serviceAsAny.vocabularyService.getPublicVocabularyEntryByValue.and.returnValue(
+      serviceAsAny.vocabularyService.findEntryDetailById.and.returnValue(
         hot('-a', {
-          a: createSuccessfulRemoteDataObject(createPaginatedList([child2]))
+          a: createSuccessfulRemoteDataObject(child2)
         })
       );
       serviceAsAny.vocabularyService.getEntryDetailParent.and.returnValue(

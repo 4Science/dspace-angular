@@ -159,7 +159,7 @@ describe('VocabularyTreeviewComponent test suite', () => {
       comp.selectedItem = currentValue;
       fixture.detectChanges();
       expect(comp.dataSource.data).toEqual([]);
-      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, new PageInfo(), 'testValue', true);
+      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, new PageInfo(), 'entryID', true);
     });
 
     it('should call loadMore function', () => {

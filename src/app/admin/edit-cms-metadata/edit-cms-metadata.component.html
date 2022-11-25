@@ -25,7 +25,7 @@
       <div class="col-md">
         <div *ngFor="let lang of languageList" class="form-group">
           <label>{{languageLabel(lang)}}</label>
-          <textarea class="col-md-12 m-2" [ngModel]="selectedMetadataValues.get(lang)" (ngModelChange)="selectedMetadataValues.set(lang, $event)" rows="10"></textarea>
+          <ds-markdown-editor data-test="ds-markdown-viewer" [editValue]="selectedMetadataValues.get(lang)" (editValueChange)="selectedMetadataValues.set(lang, $event)"></ds-markdown-editor>
         </div>
       </div>
     </div>
