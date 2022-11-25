@@ -2918,6 +2918,8 @@
 
   "item.search.title": "Item Search",
 
+  "item.search.results.open-mirador": "Open results in Mirador",
+
   "item.truncatable-part.show-more": "Show more",
 
   "item.truncatable-part.show-less": "Collapse",
@@ -6655,17 +6657,17 @@
   "authority-confidence.search-label":"Search",
 
   "map.coordinates-invalid": "Coordinates are not valid",
-  
+
   "family.listelement.badge": "Family",
-  
+
   "place.listelement.badge": "Place",
-  
+
   "archivalmaterials.listelement.badge": "Archival Materials",
-  
+
   "fond.listelement.badge": "Fond",
-  
+
   "journalfond.listelement.badge": "Journal Fond",
-  
+
   "aggregation.listelement.badge": "Aggregation",
 
   "journalissue.listelement.badge": "Journal Issue",
@@ -6681,13 +6683,13 @@
   "coin.listelement.badge": "Coin",
 
   "scientificmaterial.listelement.badge": "Scientific Material",
-  
+
   "picture.listelement.badge": "Picture",
 
   "menu.section.explore_sectionfonds" : "Fonds",
 
   "menu.section.explore_sectionjournalfonds" : "Journal Fonds",
-  
+
   "menu.section.explore_sectionaggregations" : "Collections",
 
   "menu.section.explore_sectiondocuments" : "Documents & Other materials",
@@ -6699,7 +6701,7 @@
   "explore.counters-section.aggregations" : "Collections",
 
   "explore.counters-section.documents" : "Documents & Other materials",
-  
+
   "explore.index.titleF" : "Title",
 
   "explore.index.typeF" : "Type",
@@ -6731,17 +6733,17 @@
   "explore.index.journalfond" : "Journal Fond",
 
   "explore.index.aggregation" : "Collection",
-  
+
   "explore.search-section.sectiondocuments.title" : "Search Documents & Other materials",
-  
+
   "explore.search-section.sectionfonds.title" : "Search Fonds",
-  
+
   "explore.search-section.sectionjournalfonds.title" : "Search Journal fonds",
-  
+
   "explore.search-section.sectionaggregations.title" : "Search Collections",
-  
+
   "explore.sectiondocuments.breadcrumbs": "Documents & Other materials",
-  
+
   "explore.sectionfonds.breadcrumbs": "Fonds",
 
   "explore.sectionjournalfonds.breadcrumbs": "Journal Fonds",
@@ -6789,15 +6791,15 @@
   "search.filters.applied.f.aggregation": "Collection",
 
   "submission.sections.submit.progressbar.describe.archival_materials": "Archival Materials Basic Information",
-  
+
   "submission.sections.submit.progressbar.describe.archival_materials_indexing": "Archival Materials Indexing Information",
 
   "submission.sections.submit.progressbar.describe.archival_materials_references": "Archival Materials Contextual References",
-  
+
   "submission.sections.submit.progressbar.describe.fond": "Fond Details",
-  
+
   "submission.sections.submit.progressbar.describe.place": "Place Details",
-  
+
   "submission.sections.submit.progressbar.describe.family": "Family Details",
 
   "submission.sections.submit.progressbar.describe.aggregation": "Aggregation Details",
