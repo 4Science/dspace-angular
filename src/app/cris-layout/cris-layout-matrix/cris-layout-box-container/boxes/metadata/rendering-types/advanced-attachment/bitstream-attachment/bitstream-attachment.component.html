@@ -45,7 +45,7 @@
         <ng-container *ngIf="button.type === AdvancedAttachmentButtonTypes.IIIF">
           <div class="my-3"
                *ngIf="isVisible(attachment, button)">
-            <ds-iiif-toolbar [item]="item"></ds-iiif-toolbar>
+            <ds-iiif-toolbar [item]="item" [bitstream]="attachment"></ds-iiif-toolbar>
           </div>
         </ng-container>
 
