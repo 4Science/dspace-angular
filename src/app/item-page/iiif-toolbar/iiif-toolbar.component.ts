@@ -45,8 +45,8 @@ export class IIIFToolbarComponent implements OnInit {
 
   private getQueryParams() {
     return this.MD_BITSTREAMS_MAP
-      .filter(param => this.bitstream?.metadata[`${param}`].length > 0)
-      .map(param => ({ [`${param.param}`]: this.bitstream?.metadata[`${param.metadata}`][0]?.value }))
+      .filter(({metadata}) => this.bitstream?.metadata[`${metadata}`]?.length > 0)
+      .map(({param,  metadata}) => ({ [`${param}`]: this.bitstream?.metadata[`${metadata}`][0]?.value }))
       .reduce((acc, curr) => ({ ...acc, ...curr }), {});
   }
 
