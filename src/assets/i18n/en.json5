@@ -1754,6 +1754,8 @@
 
   "cris-layout.advanced-attachment.viewMore": "View More",
 
+  "cris-layout.advanced-attachment.view-pdf": "Open PDF",
+
   "cris-layout.attachment.viewMore": "View More",
 
   "curation-task.task.checklinks.label":  "Check Links in Metadata",
@@ -3515,6 +3517,16 @@
 
   "menu.section.browse_community_by_title": "By Title",
 
+  "menu.section.research": "Research",
+
+  "menu.section.archive": "Archive",
+
+  "menu.section.archive.sectionfonds": "Fonds",
+
+  "menu.section.archive.sectionaggregations": "Collections",
+
+  "menu.section.archive.sectiondocuments": "Archive Materials & Inscriptions",
+
   "menu.section.explore_infrastructure": "Infrastructure",
 
   "menu.section.explore_publications": "Research Outputs",
@@ -4825,8 +4837,6 @@
   "search.filters.applied.charts.graphpubldatetrl.tab" : "Visualization Demo RTL",
 
   "search.filters.applied.charts.default.title": "Search Output",
-
-  "search.filters.applied.charts.RELATION.Funding.researchoutputs.title": "Research Output",
 
   "search.filters.applied.charts.RELATION.Person.researchoutputs.title": "Research Output",
 
@@ -6257,6 +6267,12 @@
 
 
 
+  "viewer.provider.iiif.breadcrumbs": "Mirador Viewer",
+
+  "viewer.provider.pdf.breadcrumbs": "PDF Viewer",
+
+  "viewer.provider.title": "Viewer",
+
   "vocabulary.import-external.preview.title.Product": "Product Preview",
 
   "vocabulary.import-external.preview.title.Equipment": "Equipment Preview",
@@ -6666,152 +6682,94 @@
 
   "cris-layout.rendering.collapse" : "collapse",
 
-  "authority-confidence.search-label":"Search",
-
-  "map.coordinates-invalid": "Coordinates are not valid",
-  
   "family.listelement.badge": "Family",
-  
+
   "place.listelement.badge": "Place",
-  
+
   "archivalmaterials.listelement.badge": "Archival Materials",
-  
+
   "fond.listelement.badge": "Fond",
-  
+
   "journalfond.listelement.badge": "Journal Fond",
-  
+
   "aggregation.listelement.badge": "Aggregation",
-
-  "journalissue.listelement.badge": "Journal Issue",
-
   "news.listelement.badge": "News",
-
   "staticpage.listelement.badge": "Page",
-
   "path.listelement.badge": "Path",
-
   "opera.listelement.badge": "Opera",
-
   "coin.listelement.badge": "Coin",
-
   "scientificmaterial.listelement.badge": "Scientific Material",
-  
+
   "picture.listelement.badge": "Picture",
-
   "menu.section.explore_sectionfonds" : "Fonds",
-
   "menu.section.explore_sectionjournalfonds" : "Journal Fonds",
-  
+
   "menu.section.explore_sectionaggregations" : "Collections",
-
   "menu.section.explore_sectiondocuments" : "Documents & Other materials",
-
   "explore.counters-section.fonds" : "Fonds",
-
   "explore.counters-section.journalfonds" : "Journal Fonds",
-
   "explore.counters-section.aggregations" : "Collections",
-
   "explore.counters-section.documents" : "Documents & Other materials",
-  
+
   "explore.index.titleF" : "Title",
-
   "explore.index.typeF" : "Type",
-
   "explore.index.dateissuedF" : "Date",
-
   "explore.index.subjectF" : "Subject",
-
   "explore.index.titleJF" : "Title",
-
   "explore.index.typeJF" : "Type",
-
   "explore.index.dateissuedJF" : "Date",
-
   "explore.index.subjectJF" : "Subject",
-
   "explore.index.titleA" : "Title",
-
   "explore.index.typeA" : "Type",
-
   "explore.index.dateissuedA" : "Date",
-
   "explore.index.subjectA" : "Subject",
-
   "explore.index.path" : "Path",
-
   "explore.index.fond" : "Fond",
-
   "explore.index.journalfond" : "Journal Fond",
-
   "explore.index.aggregation" : "Collection",
-  
+
   "explore.search-section.sectiondocuments.title" : "Search Documents & Other materials",
-  
+
   "explore.search-section.sectionfonds.title" : "Search Fonds",
-  
+
   "explore.search-section.sectionjournalfonds.title" : "Search Journal fonds",
-  
+
   "explore.search-section.sectionaggregations.title" : "Search Collections",
-  
+
   "explore.sectiondocuments.breadcrumbs": "Documents & Other materials",
-  
+
   "explore.sectionfonds.breadcrumbs": "Fonds",
-
   "explore.sectionjournalfonds.breadcrumbs": "Journal Fonds",
-
   "explore.sectionaggregations.breadcrumbs": "Collections",
-
   "documents.search.results.head": "Documents & Other materials Search Results",
-
   "fonds.search.results.head": "Fonds Search Results",
-
   "journalfonds.search.results.head": "Journal Fonds Search Results",
-
   "aggregations.search.results.head": "Collections Search Results",
-
   "search.filters.filter.path.head": "Path",
-
   "search.filters.filter.path.placeholder": "Path name",
-
   "search.filters.filter.path.label": "Search Path name",
-
   "search.filters.applied.f.path": "Path",
-
   "search.filters.filter.fond.head": "Fond",
-
   "search.filters.filter.fond.placeholder": "Fond name",
-
   "search.filters.filter.fond.label": "Search Fond name",
-
   "search.filters.applied.f.fond": "Fond",
-
   "search.filters.filter.journalfond.head": "Journal Fond",
-
   "search.filters.filter.journalfond.placeholder": "Journal Fond name",
-
   "search.filters.filter.journalfond.label": "Search Journal Fond name",
-
   "search.filters.applied.f.journalfond": "Journal Fond",
-
   "search.filters.filter.aggregation.head": "Collection",
-
   "search.filters.filter.aggregation.placeholder": "Collection name",
-
   "search.filters.filter.aggregation.label": "Search Collection name",
-
   "search.filters.applied.f.aggregation": "Collection",
-
   "submission.sections.submit.progressbar.describe.archival_materials": "Archival Materials Basic Information",
-  
-  "submission.sections.submit.progressbar.describe.archival_materials_indexing": "Archival Materials Indexing Information",
 
+  "submission.sections.submit.progressbar.describe.archival_materials_indexing": "Archival Materials Indexing Information",
   "submission.sections.submit.progressbar.describe.archival_materials_references": "Archival Materials Contextual References",
-  
+
   "submission.sections.submit.progressbar.describe.fond": "Fond Details",
-  
+
   "submission.sections.submit.progressbar.describe.place": "Place Details",
-  
+
   "submission.sections.submit.progressbar.describe.family": "Family Details",
 
   "submission.sections.submit.progressbar.describe.aggregation": "Aggregation Details",
