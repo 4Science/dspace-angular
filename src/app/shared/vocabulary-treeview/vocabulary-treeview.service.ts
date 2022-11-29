@@ -102,7 +102,7 @@ export class VocabularyTreeviewService {
     this.vocabularyName = options.name;
     this.pageInfo = pageInfo;
     if (isNotEmpty(initValueId)) {
-      this.getNodeHierarchyById(initValueId, publicModeOnly)
+      this.getNodeHierarchyById(initValueId)
         .subscribe((hierarchy: string[]) => {
           this.initValueHierarchy = hierarchy;
           this.retrieveTopNodes(pageInfo, [], publicModeOnly ? hierarchy : null);
@@ -257,8 +257,8 @@ export class VocabularyTreeviewService {
    * @param id The node id
    * @return Observable<string[]>
    */
-  private getNodeHierarchyById(id: string, isPublic = false): Observable<string[]> {
-    return this.getById(id, isPublic).pipe(
+  private getNodeHierarchyById(id: string): Observable<string[]> {
+    return this.getById(id).pipe(
       mergeMap((entry: VocabularyEntryDetail) => this.getNodeHierarchy(entry, [], false)),
       map((node: TreeviewNode) => this.getNodeHierarchyIds(node))
     );
@@ -291,19 +291,10 @@ export class VocabularyTreeviewService {
    * @param entryId The entry id
    * @return Observable<VocabularyEntryDetail>
    */
-  private getById(entryId: string, isPublic): Observable<VocabularyEntryDetail> {
-    if (isPublic) {
-      return this.vocabularyService.getPublicVocabularyEntryByValue(this.vocabularyName, entryId).pipe(
-        getFirstSucceededRemoteListPayload(),
-        map((vocabularyArray: VocabularyEntryDetail[]) => {
-          return vocabularyArray[0];
-        })
-      );
-    } else {
-      return this.vocabularyService.findEntryDetailById(entryId, this.vocabularyName).pipe(
-        getFirstSucceededRemoteDataPayload()
-      );
-    }
+  private getById(entryId: string): Observable<VocabularyEntryDetail> {
+    return this.vocabularyService.findEntryDetailById(entryId, this.vocabularyName).pipe(
+      getFirstSucceededRemoteDataPayload()
+    );
   }
 
   /**

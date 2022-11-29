@@ -23,6 +23,7 @@ import { SharedModule } from '../shared.module';
 import { CarouselSectionComponent } from './section-component/carousel-section/carousel-section.component';
 import { ThemedCarouselSectionComponent } from './section-component/carousel-section/themed-carousel-section.component';
 import { CarouselModule } from '../carousel/carousel.module';
+import { MarkdownViewerModule } from '../markdown-viewer/markdown-viewer.module';
 
 const COMPONENTS = [
   BrowseSectionComponent,
@@ -50,7 +51,8 @@ const COMPONENTS = [
   imports: [
     CommonModule,
     SharedModule,
-    CarouselModule
+    CarouselModule,
+    MarkdownViewerModule
   ],
   exports: [
     ...COMPONENTS
