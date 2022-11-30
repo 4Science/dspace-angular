@@ -7,6 +7,8 @@ import miradorDownloadDialog from 'mirador-dl-plugin/es/MiradorDownloadDialog';
 //import LocalStorageAdapter from 'mirador-annotations/es/LocalStorageAdapter';
 import miradorImageToolsPlugin from 'mirador-image-tools/es/plugins/miradorImageToolsPlugin';
 
+const MANIFEST_URL_PART = /\/manifest$/;
+
 const embedURL = location.href;
 const params = new URLSearchParams(location.search);
 const manifest = params.get('manifest');
@@ -14,6 +16,7 @@ const searchOption = params.get('searchable');
 const query = params.get('query');
 const multi = params.get('multi');
 const notMobile = params.get('notMobile');
+const canvasId = params.get('canvasId');
 
 let windowSettings = {};
 let sidbarPanel = 'info';
@@ -41,6 +44,10 @@ windowSettings.manifestId = manifest;
         thumbNavigation = 'far-right';
       }
     }
+  }
+  if (canvasId != null && canvasId !== 'null' && +canvasId >= 0) {
+    windowSettings.canvasId =
+      `${(manifest.replace(MANIFEST_URL_PART, ''))}/canvas/c${canvasId}`;
   }
 })();
 

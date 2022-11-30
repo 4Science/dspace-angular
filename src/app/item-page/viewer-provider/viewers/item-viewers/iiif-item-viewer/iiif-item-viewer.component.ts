@@ -4,6 +4,7 @@ import { RouteService } from '../../../../../core/services/route.service';
 import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { getDSpaceQuery, isIiifSearchEnabled } from '../../../shared/viewer-provider.utils';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ds-iiif-item-viewer',
@@ -12,16 +13,24 @@ import { getDSpaceQuery, isIiifSearchEnabled } from '../../../shared/viewer-prov
 })
 export class IIIFItemViewerComponent extends BaseItemViewerComponent implements OnInit {
 
+  private readonly CANVAS_PARAM: string = 'canvasId';
+
   isSearchable$: Observable<boolean>;
   query$: Observable<string>;
+  canvasId$: Observable<number>;
 
   constructor(
-    private readonly routeService: RouteService
+    private readonly routeService: RouteService,
+    private route: ActivatedRoute
   ) {
     super();
   }
 
   ngOnInit(): void {
+    this.canvasId$ = this.route.queryParamMap.pipe(
+      filter(queryMap => queryMap != null),
+      map(queryMap => +queryMap.get(this.CANVAS_PARAM)),
+    );
     this.isSearchable$ = this.item$.pipe(
       map((item) => isIiifSearchEnabled(item))
     );
