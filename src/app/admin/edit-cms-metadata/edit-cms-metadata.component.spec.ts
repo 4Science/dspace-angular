@@ -101,10 +101,10 @@ describe('EditCmsMetadataComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should render textareas of the languages', () => {
+    it('should render ds-markdown-editor of the language', () => {
       const languagesLength = environment.languages.length;
-      const textareas = fixture.debugElement.queryAll(By.css('textarea'));
-      expect(textareas).toHaveSize(languagesLength);
+      const dsMarkdownViewer = fixture.debugElement.queryAll(By.css('[data-test="ds-markdown-viewer"]'));
+      expect(dsMarkdownViewer).toHaveSize(languagesLength);
     });
 
     describe('after the button save is clicked', () => {

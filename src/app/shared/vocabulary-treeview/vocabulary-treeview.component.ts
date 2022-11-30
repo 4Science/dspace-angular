@@ -230,7 +230,7 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit {
 
     this.loading = this.vocabularyTreeviewService.isLoading();
 
-    const entryId: string = (this.selectedItem) ? ((this.publicModeOnly) ? this.selectedItem.value : this.getEntryId(this.selectedItem)) : null;
+    const entryId: string = (this.selectedItem) ? this.getEntryId(this.selectedItem) : null;
     this.vocabularyTreeviewService.initialize(this.vocabularyOptions, new PageInfo(), entryId, this.publicModeOnly);
   }
 

@@ -40,9 +40,6 @@ export class MarkdownEditorComponent implements OnInit {
     ],
   };
 
-  // tslint:disable-next-line:no-empty
-  constructor() {}
-
   ngOnInit(): void {
     this.controlId = `MarkdownEditor-${Math.floor(100000 * Math.random())}`;
   }
