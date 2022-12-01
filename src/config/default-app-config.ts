@@ -412,15 +412,39 @@ export class DefaultAppConfig implements AppConfig {
     crisRef: [
       {
         entityType: 'DEFAULT',
-        icon: 'fa fa-info'
+        entityStyle: {
+          default: {
+            icon: 'fa fa-info',
+            style: 'text-info'
+          }
+        }
       },
       {
         entityType: 'PERSON',
-        icon: 'fa fa-user'
+        entityStyle: {
+          default: {
+            icon: 'fa fa-user',
+            style: 'text-info'
+          }
+        }
       },
       {
         entityType: 'ORGUNIT',
-        icon: 'fa fa-university'
+        entityStyle: {
+          default: {
+            icon: 'fa fa-university',
+            style: 'text-info'
+          }
+        }
+      },
+      {
+        entityType: 'PROJECT',
+        entityStyle: {
+          default: {
+            icon: 'fas fa-project-diagram',
+            style: 'text-info'
+          }
+        }
       }
     ],
     itemPage: {

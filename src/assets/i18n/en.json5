@@ -6824,5 +6824,15 @@
 
   "vocabulary-treeview.header.journalfondboxtree": "Journal Fond Tree",
 
-  "vocabulary-treeview.header.aggregationboxtree": "Collection Tree"
+  "vocabulary-treeview.header.aggregationboxtree": "Collection Tree",
+
+  "curation-task.task.iiifuploader.label": "Upload images to the IIIF Image Server (photo gallery)",
+
+  "curation-task.task.iiifuploader.primary.label": "Upload images to the IIIF Image Server (digitized book)",
+
+  "curation-task.task.iiifforbidfiledownload.label": "Forbid file download for files uploaded on image server",
+
+  "curation-task.task.iiifallowfiledownload.label": "Allow file download for files uploaded on image server",
+
+  "curation-task.task.iiifpdfmultipages.label": "Create multipages PDF from IIIF images"
 }
