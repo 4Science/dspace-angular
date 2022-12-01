@@ -1754,6 +1754,8 @@
 
   "cris-layout.advanced-attachment.viewMore": "View More",
 
+  "cris-layout.advanced-attachment.view-pdf": "Open PDF",
+
   "cris-layout.attachment.viewMore": "View More",
 
   "curation-task.task.checklinks.label":  "Check Links in Metadata",
@@ -2368,13 +2370,13 @@
 
   "health-page.section.geoIp.title": "GeoIp",
 
-  "health-page.section.solrAuthorityCore.title": "Sor: authority core",
+  "health-page.section.solrAuthorityCore.title": "Solr: authority core",
 
-  "health-page.section.solrOaiCore.title": "Sor: oai core",
+  "health-page.section.solrOaiCore.title": "Solr: oai core",
 
-  "health-page.section.solrSearchCore.title": "Sor: search core",
+  "health-page.section.solrSearchCore.title": "Solr: search core",
 
-  "health-page.section.solrStatisticsCore.title": "Sor: statistics core",
+  "health-page.section.solrStatisticsCore.title": "Solr: statistics core",
 
   "health-page.section-info.app.title": "Application Backend",
 
@@ -3466,6 +3468,18 @@
 
   "manage.relationships.no.data.found" : "No data found",
 
+  "manage.relationships.error.select" : "An unexpected error occurs while selecting the entity.",
+
+  "manage.relationships.error.unselect" : "An unexpected error occurs while unselecting the entity.",
+
+  "manage.relationships.error.hide" : "An unexpected error occurs while hiding the entity.",
+
+  "manage.relationships.error.unhide" : "An unexpected error occurs while exposing the entity.",
+
+  "manage.relationships.error.sort" : "An unexpected error occurs while sorting entities.",
+
+  "manage.relationships.hidden-related-items-alert" : "Please note that hidden related items will always be visible among Item’s relations to administrators and owner of the Item",
+
 
   "menu.header.admin": "Management",
 
@@ -3504,6 +3518,16 @@
   "menu.section.browse_community_by_issue_date": "By Issue Date",
 
   "menu.section.browse_community_by_title": "By Title",
+
+  "menu.section.research": "Research",
+
+  "menu.section.archive": "Archive",
+
+  "menu.section.archive.sectionfonds": "Fonds",
+
+  "menu.section.archive.sectionaggregations": "Collections",
+
+  "menu.section.archive.sectiondocuments": "Archive Materials & Inscriptions",
 
   "menu.section.explore_infrastructure": "Infrastructure",
 
@@ -3911,7 +3935,9 @@
 
   "nav.login": "Log In",
 
-  "nav.logout": "User profile menu and Log Out",
+  "nav.user-profile-menu-and-logout": "User profile menu and Log Out",
+
+  "nav.logout": "Log Out",
 
   "nav.main.description": "Main navigation bar",
 
@@ -4813,8 +4839,6 @@
   "search.filters.applied.charts.graphpubldatetrl.tab" : "Visualization Demo RTL",
 
   "search.filters.applied.charts.default.title": "Search Output",
-
-  "search.filters.applied.charts.RELATION.Funding.researchoutputs.title": "Research Output",
 
   "search.filters.applied.charts.RELATION.Person.researchoutputs.title": "Research Output",
 
@@ -6245,6 +6269,12 @@
 
 
 
+  "viewer.provider.iiif.breadcrumbs": "Mirador Viewer",
+
+  "viewer.provider.pdf.breadcrumbs": "PDF Viewer",
+
+  "viewer.provider.title": "Viewer",
+
   "vocabulary.import-external.preview.title.Product": "Product Preview",
 
   "vocabulary.import-external.preview.title.Equipment": "Equipment Preview",
@@ -6654,10 +6684,6 @@
 
   "cris-layout.rendering.collapse" : "collapse",
 
-  "authority-confidence.search-label":"Search",
-
-  "map.coordinates-invalid": "Coordinates are not valid",
-
   "family.listelement.badge": "Family",
 
   "place.listelement.badge": "Place",
@@ -6669,69 +6695,39 @@
   "journalfond.listelement.badge": "Journal Fond",
 
   "aggregation.listelement.badge": "Aggregation",
-
-  "journalissue.listelement.badge": "Journal Issue",
-
   "news.listelement.badge": "News",
-
   "staticpage.listelement.badge": "Page",
-
   "path.listelement.badge": "Path",
-
   "opera.listelement.badge": "Opera",
-
   "coin.listelement.badge": "Coin",
-
   "scientificmaterial.listelement.badge": "Scientific Material",
 
   "picture.listelement.badge": "Picture",
-
   "menu.section.explore_sectionfonds" : "Fonds",
-
   "menu.section.explore_sectionjournalfonds" : "Journal Fonds",
 
   "menu.section.explore_sectionaggregations" : "Collections",
-
   "menu.section.explore_sectiondocuments" : "Documents & Other materials",
-
   "explore.counters-section.fonds" : "Fonds",
-
   "explore.counters-section.journalfonds" : "Journal Fonds",
-
   "explore.counters-section.aggregations" : "Collections",
-
   "explore.counters-section.documents" : "Documents & Other materials",
 
   "explore.index.titleF" : "Title",
-
   "explore.index.typeF" : "Type",
-
   "explore.index.dateissuedF" : "Date",
-
   "explore.index.subjectF" : "Subject",
-
   "explore.index.titleJF" : "Title",
-
   "explore.index.typeJF" : "Type",
-
   "explore.index.dateissuedJF" : "Date",
-
   "explore.index.subjectJF" : "Subject",
-
   "explore.index.titleA" : "Title",
-
   "explore.index.typeA" : "Type",
-
   "explore.index.dateissuedA" : "Date",
-
   "explore.index.subjectA" : "Subject",
-
   "explore.index.path" : "Path",
-
   "explore.index.fond" : "Fond",
-
   "explore.index.journalfond" : "Journal Fond",
-
   "explore.index.aggregation" : "Collection",
 
   "explore.search-section.sectiondocuments.title" : "Search Documents & Other materials",
@@ -6745,55 +6741,31 @@
   "explore.sectiondocuments.breadcrumbs": "Documents & Other materials",
 
   "explore.sectionfonds.breadcrumbs": "Fonds",
-
   "explore.sectionjournalfonds.breadcrumbs": "Journal Fonds",
-
   "explore.sectionaggregations.breadcrumbs": "Collections",
-
   "documents.search.results.head": "Documents & Other materials Search Results",
-
   "fonds.search.results.head": "Fonds Search Results",
-
   "journalfonds.search.results.head": "Journal Fonds Search Results",
-
   "aggregations.search.results.head": "Collections Search Results",
-
   "search.filters.filter.path.head": "Path",
-
   "search.filters.filter.path.placeholder": "Path name",
-
   "search.filters.filter.path.label": "Search Path name",
-
   "search.filters.applied.f.path": "Path",
-
   "search.filters.filter.fond.head": "Fond",
-
   "search.filters.filter.fond.placeholder": "Fond name",
-
   "search.filters.filter.fond.label": "Search Fond name",
-
   "search.filters.applied.f.fond": "Fond",
-
   "search.filters.filter.journalfond.head": "Journal Fond",
-
   "search.filters.filter.journalfond.placeholder": "Journal Fond name",
-
   "search.filters.filter.journalfond.label": "Search Journal Fond name",
-
   "search.filters.applied.f.journalfond": "Journal Fond",
-
   "search.filters.filter.aggregation.head": "Collection",
-
   "search.filters.filter.aggregation.placeholder": "Collection name",
-
   "search.filters.filter.aggregation.label": "Search Collection name",
-
   "search.filters.applied.f.aggregation": "Collection",
-
   "submission.sections.submit.progressbar.describe.archival_materials": "Archival Materials Basic Information",
 
   "submission.sections.submit.progressbar.describe.archival_materials_indexing": "Archival Materials Indexing Information",
-
   "submission.sections.submit.progressbar.describe.archival_materials_references": "Archival Materials Contextual References",
 
   "submission.sections.submit.progressbar.describe.fond": "Fond Details",
@@ -6854,5 +6826,15 @@
 
   "vocabulary-treeview.header.journalfondboxtree": "Journal Fond Tree",
 
-  "vocabulary-treeview.header.aggregationboxtree": "Collection Tree"
+  "vocabulary-treeview.header.aggregationboxtree": "Collection Tree",
+
+  "curation-task.task.iiifuploader.label": "Upload images to the IIIF Image Server (photo gallery)",
+
+  "curation-task.task.iiifuploader.primary.label": "Upload images to the IIIF Image Server (digitized book)",
+
+  "curation-task.task.iiifforbidfiledownload.label": "Forbid file download for files uploaded on image server",
+
+  "curation-task.task.iiifallowfiledownload.label": "Allow file download for files uploaded on image server",
+
+  "curation-task.task.iiifpdfmultipages.label": "Create multipages PDF from IIIF images"
 }

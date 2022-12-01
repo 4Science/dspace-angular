@@ -1,0 +1,9 @@
+<div class="container">
+  <ds-mirador-viewer
+    id="iiif-viewer"
+    [object]="item$ | async"
+    [searchable]="isSearchable$ | async"
+    [query]="query$ | async"
+    [canvasIndex]="canvasId$ | async"
+  ></ds-mirador-viewer>
+</div>

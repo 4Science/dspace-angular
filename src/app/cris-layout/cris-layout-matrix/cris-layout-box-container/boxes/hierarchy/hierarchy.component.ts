@@ -3,9 +3,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { RenderCrisLayoutBoxFor } from '../../../../decorators/cris-layout-box.decorator';
 import { LayoutBox } from '../../../../enums/layout-box.enum';
 import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-component.model';
-import { CrisLayoutBox } from '../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../core/shared/item.model';
 import { VocabularyOptions } from '../../../../../core/submission/vocabularies/models/vocabulary-options.model';
+import { MetadataValue } from '../../../../../core/shared/metadata.models';
 
 @Component({
   selector: 'ds-hierarchy.component',
@@ -46,6 +46,9 @@ export class HierarchyComponent extends CrisLayoutBoxModelComponent implements O
     this.vocabularyHeader = this.boxProvider.shortname;
     this.vocabularyOptions = new VocabularyOptions(this.boxProvider.configuration.vocabulary, this.boxProvider.configuration.metadata);
     super.ngOnInit();
-    this.selectedItem = this.item.firstMetadata(this.boxProvider.configuration.metadata);
+
+    this.selectedItem = Object.assign(new MetadataValue(), this.item.firstMetadata(this.boxProvider.configuration.metadata), {
+      authority: this.item.uuid
+    } );
   }
 }

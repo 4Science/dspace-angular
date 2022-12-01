@@ -2,7 +2,10 @@
 import { BuildConfig } from 'src/config/build-config.interface';
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
-import { AdvancedAttachmentElementType } from '../config/advanced-attachment-rendering.config';
+import {
+  AdvancedAttachmentElementType,
+  AdvancedAttachmentPreviewButtonTypes
+} from '../config/advanced-attachment-rendering.config';
 
 export const environment: BuildConfig = {
   production: false,
@@ -275,15 +278,38 @@ export const environment: BuildConfig = {
     crisRef: [
       {
         entityType: 'DEFAULT',
-        icon: 'fa fa-info'
+        entityStyle: {
+          default: {
+            icon: 'fa fa-user',
+            style: 'text-success'
+          }
+        }
       },
       {
         entityType: 'PERSON',
-        icon: 'fa fa-user'
+        entityStyle: {
+          person: {
+            icon: 'fa fa-user',
+            style: 'text-success'
+          },
+          personStaff: {
+            icon: 'fa fa-user',
+            style: 'text-primary'
+          },
+          default: {
+            icon: 'fa fa-user',
+            style: 'text-success'
+          }
+        }
       },
       {
         entityType: 'ORGUNIT',
-        icon: 'fa fa-university'
+        entityStyle: {
+          default: {
+            icon: 'fa fa-university',
+            style: 'text-success'
+          }
+        }
       }
     ],
     itemPage: {
@@ -422,6 +448,33 @@ export const environment: BuildConfig = {
       {
         name: 'format',
         type: AdvancedAttachmentElementType.Attribute,
+      }
+    ],
+    buttons: [
+      {
+        type: AdvancedAttachmentPreviewButtonTypes.IIIF,
+        metadata: 'bitstream.viewer.provider',
+        metadataValueFilter : {
+          value: 'iiif',
+          substring: true
+        }
+      },
+      {
+        type: AdvancedAttachmentPreviewButtonTypes.PDF,
+        metadata: 'bitstream.viewer.provider',
+        metadataValueFilter : {
+          value: 'pdf',
+          substring: true
+        }
+      },
+      {
+        type: AdvancedAttachmentPreviewButtonTypes.Download,
+        metadata: 'bitstream.viewer.provider',
+        metadataValueFilter : {
+          value: 'nodownload',
+          substring: true
+        },
+        negation: true
       }
     ]
   }

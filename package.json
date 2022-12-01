@@ -129,11 +129,11 @@
     "ng2-file-upload": "1.4.0",
     "ng2-google-charts": "^6.1.0",
     "ng2-nouislider": "^1.8.3",
+    "ng2-pdfjs-viewer": "^14.0.0",
     "ngx-infinite-scroll": "^10.0.1",
     "ngx-moment": "^5.0.0",
     "ngx-pagination": "5.0.0",
     "ngx-sortablejs": "^11.1.0",
-    "ngx-ui-switch": "^11.0.1",
     "nouislider": "^14.6.3",
     "pem": "1.14.4",
     "postcss-cli": "^9.1.0",
@@ -146,8 +146,7 @@
     "url-parse": "^1.5.6",
     "uuid": "^8.3.2",
     "webfontloader": "1.6.28",
-    "zone.js": "~0.11.5",
-    "ngx-ui-switch": "^11.0.1"
+    "zone.js": "~0.11.5"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "~13.1.0",
@@ -216,8 +215,8 @@
     "protractor": "^7.0.0",
     "protractor-istanbul-plugin": "2.0.0",
     "raw-loader": "0.5.1",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "rimraf": "^3.0.2",
     "rxjs-spy": "^8.0.2",
     "sass": "~1.32.6",

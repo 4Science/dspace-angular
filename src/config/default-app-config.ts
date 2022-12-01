@@ -22,7 +22,11 @@ import { CrisLayoutConfig, LayoutConfig, SuggestionConfig } from './layout-confi
 import { MetadataSecurityConfig } from './metadata-security-config';
 import { FollowAuthorityMetadata } from './search-follow-metadata.interface';
 import { MetricVisualizationConfig } from './metric-visualization-config.interfaces';
-import { AdvancedAttachmentRenderingConfig, AdvancedAttachmentElementType } from './advanced-attachment-rendering.config';
+import {
+  AdvancedAttachmentElementType,
+  AdvancedAttachmentPreviewButtonTypes,
+  AdvancedAttachmentRenderingConfig
+} from './advanced-attachment-rendering.config';
 import { AttachmentRenderingConfig } from './attachment-rendering.config';
 
 export class DefaultAppConfig implements AppConfig {
@@ -408,15 +412,39 @@ export class DefaultAppConfig implements AppConfig {
     crisRef: [
       {
         entityType: 'DEFAULT',
-        icon: 'fa fa-info'
+        entityStyle: {
+          default: {
+            icon: 'fa fa-info',
+            style: 'text-info'
+          }
+        }
       },
       {
         entityType: 'PERSON',
-        icon: 'fa fa-user'
+        entityStyle: {
+          default: {
+            icon: 'fa fa-user',
+            style: 'text-info'
+          }
+        }
       },
       {
         entityType: 'ORGUNIT',
-        icon: 'fa fa-university'
+        entityStyle: {
+          default: {
+            icon: 'fa fa-university',
+            style: 'text-info'
+          }
+        }
+      },
+      {
+        entityType: 'PROJECT',
+        entityStyle: {
+          default: {
+            icon: 'fas fa-project-diagram',
+            style: 'text-info'
+          }
+        }
       }
     ],
     itemPage: {
@@ -567,6 +595,33 @@ export class DefaultAppConfig implements AppConfig {
       {
         name: 'format',
         type: AdvancedAttachmentElementType.Attribute,
+      }
+    ],
+    buttons: [
+      {
+        type: AdvancedAttachmentPreviewButtonTypes.IIIF,
+        metadata: 'bitstream.viewer.provider',
+        metadataValueFilter : {
+          value: 'iiif',
+          substring: true
+        }
+      },
+      {
+        type: AdvancedAttachmentPreviewButtonTypes.PDF,
+        metadata: 'bitstream.viewer.provider',
+        metadataValueFilter : {
+          value: 'pdf',
+          substring: true
+        }
+      },
+      {
+        type: AdvancedAttachmentPreviewButtonTypes.Download,
+        metadata: 'bitstream.viewer.provider',
+        metadataValueFilter : {
+          value: 'nodownload',
+          substring: true
+        },
+        negation: true
       }
     ]
   };

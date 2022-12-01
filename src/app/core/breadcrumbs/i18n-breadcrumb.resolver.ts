@@ -22,11 +22,22 @@ export class I18nBreadcrumbResolver implements Resolve<BreadcrumbConfig<string>>
    * @returns BreadcrumbConfig object
    */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): BreadcrumbConfig<string> {
+    return this.getConfig(this.breadcrumbService, this.getKey(route), this.getFullPath(route));
+  }
+
+  protected getKey(route: ActivatedRouteSnapshot): string {
     const key = route.data.breadcrumbKey;
     if (hasNoValue(key)) {
       throw new Error('You provided an i18nBreadcrumbResolver for url \"' + route.url + '\" but no breadcrumbKey in the route\'s data');
     }
-    const fullPath = currentPathFromSnapshot(route);
-    return { provider: this.breadcrumbService, key: key, url: fullPath };
+    return key;
+  }
+
+  protected getFullPath(route: ActivatedRouteSnapshot) {
+    return currentPathFromSnapshot(route);
+  }
+
+  protected getConfig(provider: I18nBreadcrumbsService, key: string, url: string): BreadcrumbConfig<string> {
+    return { provider, key, url };
   }
 }

@@ -1,0 +1,36 @@
+:host {
+  i.custom-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-size: contain;
+    text-align: center;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+
+  i.fa {
+    width: 16px;
+    text-align: center;
+    margin-right: 5px;
+  }
+
+  i#mirador-icon {
+    background-image: url('/assets/images/mirador-logo-dark.svg');
+  }
+
+  i#iiif-icon {
+    background-image: url('/assets/images/iiif-logo.svg');
+  }
+
+  button:hover {
+    i#mirador-icon {
+      background-image: url('/assets/images/mirador-logo.svg');
+    }
+    i#iiif-icon {
+      background-image: url('/assets/images/iiif-logo-white.svg');
+    }
+
+  }
+
+}
