@@ -41,7 +41,7 @@
           </ng-container>
         </div>
         <div class="mirador-btn-wrapper ml-2 pl-2 border-left">
-          <button class="text-center btn btn-outline-primary" (click)="openMiradorViewer(dso)" [ngbTooltip]="'item.search.results.open-mirador' | translate">
+          <button class="text-center btn btn-outline-primary" [routerLink]="itemViewerRoute" [ngbTooltip]="'item.search.results.open-mirador' | translate">
             <i class="fas fa-eye"></i><br><i class="mirador-icon"></i>
           </button>
         </div>
