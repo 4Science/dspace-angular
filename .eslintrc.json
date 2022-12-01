@@ -217,6 +217,15 @@
         "@angular-eslint/template/no-negated-async": "off",
         "@angular-eslint/template/eqeqeq": "off"
       }
+    },
+    {
+      "files": [
+        "*.js"
+      ],
+      "parserOptions": {
+        "sourceType": "module",
+        "ecmaVersion": 2020
+      }
     }
   ]
 }
