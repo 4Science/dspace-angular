@@ -10,8 +10,6 @@ import { ItemSearchResult } from '../../../../../object-collection/shared/item-s
 import { DSONameService } from '../../../../../../core/breadcrumbs/dso-name.service';
 import { DSONameServiceMock, UNDEFINED_NAME } from '../../../../../mocks/dso-name.service.mock';
 import { VarDirective } from '../../../../../utils/var.directive';
-import { RouterStub } from '../../../../../testing/router.stub';
-import { Router } from '@angular/router';
 
 let publicationListElementComponent: ItemSearchResultListElementComponent;
 let fixture: ComponentFixture<ItemSearchResultListElementComponent>;
@@ -70,7 +68,6 @@ describe('ItemListElementComponent', () => {
       providers: [
         { provide: TruncatableService, useValue: {} },
         { provide: DSONameService, useClass: DSONameServiceMock },
-        { provide: Router, useClass: RouterStub },
       ],
 
       schemas: [NO_ERRORS_SCHEMA]

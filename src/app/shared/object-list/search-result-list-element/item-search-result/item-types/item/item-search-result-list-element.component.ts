@@ -11,7 +11,6 @@ import {
 import { Context } from '../../../../../../core/shared/context.model';
 import { TruncatableService } from '../../../../../truncatable/truncatable.service';
 import { DSONameService } from '../../../../../../core/breadcrumbs/dso-name.service';
-import { Router } from '@angular/router';
 
 @listableObjectComponent('PublicationSearchResult', ViewMode.ListElement)
 @listableObjectComponent(ItemSearchResult, ViewMode.ListElement)
@@ -30,11 +29,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
 
   fullTextHighlights: string[];
 
-  public constructor(
-    protected truncatableService: TruncatableService,
-    protected dsoNameService: DSONameService,
-    protected router: Router,
-  ) {
+  public constructor(protected truncatableService: TruncatableService, protected dsoNameService: DSONameService) {
     super(truncatableService, dsoNameService);
   }
 
