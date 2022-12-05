@@ -6688,7 +6688,7 @@
 
   "archivalmaterial.listelement.badge": "Archival Material",
 
-  "fond.listelement.badge": "Fond",
+  "fonds.listelement.badge": "Fonds",
 
   "journalfond.listelement.badge": "Journal Fond",
 
@@ -6724,7 +6724,7 @@
   "explore.index.dateissuedA" : "Date",
   "explore.index.subjectA" : "Subject",
   "explore.index.path" : "Path",
-  "explore.index.fond" : "Fond",
+  "explore.index.fonds" : "Fonds",
   "explore.index.journalfond" : "Journal Fond",
   "explore.index.aggregation" : "Collection",
 
@@ -6749,10 +6749,10 @@
   "search.filters.filter.path.placeholder": "Path name",
   "search.filters.filter.path.label": "Search Path name",
   "search.filters.applied.f.path": "Path",
-  "search.filters.filter.fond.head": "Fond",
-  "search.filters.filter.fond.placeholder": "Fond name",
-  "search.filters.filter.fond.label": "Search Fond name",
-  "search.filters.applied.f.fond": "Fond",
+  "search.filters.filter.fonds.head": "Fonds",
+  "search.filters.filter.fonds.placeholder": "Fonds name",
+  "search.filters.filter.fonds.label": "Search Fonds name",
+  "search.filters.applied.f.fonds": "Fonds",
   "search.filters.filter.journalfond.head": "Journal Fond",
   "search.filters.filter.journalfond.placeholder": "Journal Fond name",
   "search.filters.filter.journalfond.label": "Search Journal Fond name",
@@ -6766,7 +6766,7 @@
   "submission.sections.submit.progressbar.describe.archival_material_indexing": "Archival Material Indexing Information",
   "submission.sections.submit.progressbar.describe.archival_material_references": "Archival Material Contextual References",
 
-  "submission.sections.submit.progressbar.describe.fond": "Fond Details",
+  "submission.sections.submit.progressbar.describe.fonds": "Fonds Details",
 
   "submission.sections.submit.progressbar.describe.place": "Place Details",
 
@@ -6820,7 +6820,7 @@
 
   "curation-task.task.ocrclean.label": "Remove all metadata bundles and uploaded ocr created by a previous upload to the ocr server",
 
-  "vocabulary-treeview.header.fondboxtree": "Fond Tree",
+  "vocabulary-treeview.header.fondsboxtree": "Fonds Tree",
 
   "vocabulary-treeview.header.journalfondboxtree": "Journal Fond Tree",
 
