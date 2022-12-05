@@ -25,3 +25,9 @@ i.mirador-icon {
   vertical-align: middle;
   background-image: url('/assets/images/mirador-logo-dark.svg');
 }
+
+button:hover {
+  i.mirador-icon {
+    background-image: url('/assets/images/mirador-logo.svg');
+  }
+}
