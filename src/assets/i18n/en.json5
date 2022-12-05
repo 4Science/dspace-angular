@@ -6745,6 +6745,7 @@
   "fonds.search.results.head": "Fonds Search Results",
   "journalfonds.search.results.head": "Journal Fonds Search Results",
   "aggregations.search.results.head": "Collections Search Results",
+  "path.search.results.head": "Paths Search Results",
   "search.filters.filter.path.head": "Path",
   "search.filters.filter.path.placeholder": "Path name",
   "search.filters.filter.path.label": "Search Path name",
