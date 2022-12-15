@@ -8,6 +8,7 @@ import { AbstractListableElementComponent } from '../../object-collection/shared
 import { TruncatableService } from '../../truncatable/truncatable.service';
 import { Metadata } from '../../../core/shared/metadata.utils';
 import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
+import { MetadataMap } from '../../../core/shared/metadata.models';
 
 @Component({
   selector: 'ds-search-result-list-element',
@@ -19,6 +20,7 @@ export class SearchResultListElementComponent<T extends SearchResult<K>, K exten
    */
   dso: K;
   dsoTitle: string;
+  hitHighlights: MetadataMap;
 
   public constructor(protected truncatableService: TruncatableService, protected dsoNameService: DSONameService) {
     super();
@@ -31,6 +33,7 @@ export class SearchResultListElementComponent<T extends SearchResult<K>, K exten
     if (hasValue(this.object)) {
       this.dso = this.object.indexableObject;
       this.dsoTitle = this.dsoNameService.getName(this.dso);
+      this.hitHighlights = this.object.hitHighlights;
     }
   }
 

@@ -2920,6 +2920,8 @@
 
   "item.search.title": "Item Search",
 
+  "item.search.results.open-mirador": "Open results in Mirador",
+
   "item.truncatable-part.show-more": "Show more",
 
   "item.truncatable-part.show-less": "Collapse",

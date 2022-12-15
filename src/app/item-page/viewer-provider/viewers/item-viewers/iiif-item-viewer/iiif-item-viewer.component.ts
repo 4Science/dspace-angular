@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseItemViewerComponent } from '../base-item-viewer.component';
 import { RouteService } from '../../../../../core/services/route.service';
-import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { getDSpaceQuery, isIiifSearchEnabled } from '../../../shared/viewer-provider.utils';
-import { ActivatedRoute } from '@angular/router';
+import { filter, map, switchMap } from 'rxjs/operators';
+import { Observable, OperatorFunction } from 'rxjs';
+import { isIiifSearchEnabled } from '../../../shared/viewer-provider.utils';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'ds-iiif-item-viewer',
@@ -14,6 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 export class IIIFItemViewerComponent extends BaseItemViewerComponent implements OnInit {
 
   private readonly CANVAS_PARAM: string = 'canvasId';
+  private readonly QUERY_PARAM: string = 'query';
 
   isSearchable$: Observable<boolean>;
   query$: Observable<string>;
@@ -27,18 +28,22 @@ export class IIIFItemViewerComponent extends BaseItemViewerComponent implements 
   }
 
   ngOnInit(): void {
-    this.canvasId$ = this.route.queryParamMap.pipe(
+    const queryParams$ = this.route.queryParamMap.pipe(
       filter(queryMap => queryMap != null),
-      map(queryMap => +queryMap.get(this.CANVAS_PARAM)),
+    );
+    this.canvasId$ = queryParams$.pipe(
+      this.extractParam(queryMap => +queryMap.get(this.CANVAS_PARAM))
     );
     this.isSearchable$ = this.item$.pipe(
       map((item) => isIiifSearchEnabled(item))
     );
-    this.query$ = this.item$.pipe(
-      withLatestFrom(this.isSearchable$),
-      filter(([, isSearchable]) => !!isSearchable),
-      switchMap(([item]) => getDSpaceQuery(item, this.routeService))
+    this.query$ = this.isSearchable$.pipe(
+      filter((isSearchable) => !!isSearchable),
+      switchMap(() => queryParams$.pipe(this.extractParam(queryMap => queryMap.get(this.QUERY_PARAM))))
     );
   }
 
+  private extractParam<T>(mapper: (queryMap: ParamMap) => T): OperatorFunction<ParamMap, T> {
+    return map(mapper);
+  }
 }

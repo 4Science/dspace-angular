@@ -67,7 +67,7 @@ describe('ItemListElementComponent', () => {
       declarations: [ItemSearchResultListElementComponent, TruncatePipe, VarDirective],
       providers: [
         { provide: TruncatableService, useValue: {} },
-        { provide: DSONameService, useClass: DSONameServiceMock }
+        { provide: DSONameService, useClass: DSONameServiceMock },
       ],
 
       schemas: [NO_ERRORS_SCHEMA]

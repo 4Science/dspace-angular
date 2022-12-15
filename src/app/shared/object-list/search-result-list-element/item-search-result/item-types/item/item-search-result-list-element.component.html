@@ -2,7 +2,7 @@
   <div class="truncatable-content">
     <div>
       <ds-type-badge class="d-inline-block" *ngIf="showLabel" [object]="dso"></ds-type-badge>
-      <ds-access-status-badge class="d-inline-block" [item]="dso" class="pl-1"></ds-access-status-badge>
+      <ds-access-status-badge class="d-inline-block pl-1" [item]="dso"></ds-access-status-badge>
       <ds-truncatable [id]="dso.id" *ngIf="object !== undefined && object !== null">
         <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'"
           rel="noopener noreferrer" [routerLink]="[itemPageRoute]" class="lead item-list-title dont-break-out"
@@ -34,6 +34,21 @@
           </ds-truncatable-part>
         </div>
       </ds-truncatable>
+      <div *ngIf="fullTextHighlights.length" class="d-flex flex-row item-list-highlights">
+        <div>
+          <ng-container *ngFor="let highlight of fullTextHighlights">
+            <span [innerHTML]="highlight" class="d-block text-monospace small"></span>
+          </ng-container>
+        </div>
+        <div class="mirador-btn-wrapper ml-2 pl-2 border-left">
+          <button class="text-center btn btn-outline-primary"
+            [routerLink]="itemViewerRoute" queryParamsHandling="preserve"
+            [ngbTooltip]="'item.search.results.open-mirador' | translate"
+          >
+            <i class="fas fa-eye"></i><br><i class="mirador-icon"></i>
+          </button>
+        </div>
+      </div>
       <ds-metric-badges *ngIf="!hideMetrics" class="d-block clearfix" [item]="dso"></ds-metric-badges>
     </div>
   </div>

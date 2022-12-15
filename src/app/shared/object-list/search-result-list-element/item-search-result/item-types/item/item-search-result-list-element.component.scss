@@ -5,3 +5,29 @@
   display: flex;
   justify-content: left;
 }
+
+.item-list-highlights {
+  ::ng-deep em {
+    font-weight: normal;
+    background-color: #f1e740;
+  }
+  .mirador-btn-wrapper {
+    //border-left: solid 10px var(--bs-light) !important;
+  }
+}
+
+i.mirador-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-size: contain;
+  text-align: center;
+  vertical-align: middle;
+  background-image: url('/assets/images/mirador-logo-dark.svg');
+}
+
+button:hover {
+  i.mirador-icon {
+    background-image: url('/assets/images/mirador-logo.svg');
+  }
+}
