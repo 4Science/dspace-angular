@@ -308,11 +308,10 @@ export class DefaultAppConfig implements AppConfig {
     //   // Any of the matching properties above can be used
     //   handle: '10673/34'
     // },
-    // {
-    //   name: 'custom-B',
-    //   extends: 'custom',
-    //   handle: '10673/12'
-    // },
+    {
+      name: 'glam',
+      extends: 'dspace'
+    },
     // {
     //   // A theme with only a name will match every route
     //   name: 'custom'

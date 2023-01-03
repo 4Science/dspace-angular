@@ -1,0 +1,15 @@
+@include media-breakpoint-down(md) {
+  .container {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+::ng-deep .search-controls {
+    margin-bottom: var(--bs-spacer);
+}
+
+.mb-40 {
+  margin-bottom: 40px;
+}
+
