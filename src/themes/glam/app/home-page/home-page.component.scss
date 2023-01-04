@@ -1,2 +1,27 @@
 :host {
+    .titolo {
+        position: absolute;
+        left: 7px;
+        background-color: white;
+        bottom: 28px;
+        right: 7px;
+        margin-left: 15px;
+        margin-right: 15px;
+        border-radius: 4px;
+    }
+
+    .arrow-class {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-left: "auto";
+        width: 100%;
+        padding-left: 34px;
+        padding-right: 34px;
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
 }

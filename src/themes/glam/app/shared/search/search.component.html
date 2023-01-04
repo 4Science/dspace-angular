@@ -1,4 +1,4 @@
-<div class="container" *ngIf="(isXsOrSm$ | async)">
+<!-- <div class="container" *ngIf="(isXsOrSm$ | async)">
     <div class="row">
         <div class="col-12">
             <ng-template *ngTemplateOutlet="searchForm"></ng-template>
@@ -118,4 +118,231 @@
             <ds-search-labels *ngIf="searchEnabled" [inPlaceSearch]="inPlaceSearch"></ds-search-labels>
         </div>
     </div>
-</ng-template>
+</ng-template> -->
+<div class="section my-4 bg-dark pt-4 pb-4">
+    <div class="container">
+        <div class="justify-content-center align-items-center d-flex flex-column ">
+            <h1 class="text-white mb-4">Cerca in Glam</h1>
+            <div _ngcontent-dspace-angular-c647="" class="form-group">
+                <div _ngcontent-dspace-angular-c647="" class="input-group"><input _ngcontent-dspace-angular-c647=""
+                        placeholder="Cerca in Glam" name="dp" ngbdatepicker=""
+                        class="form-control date-input ng-pristine ng-valid ng-touched" ng-reflect-name="dp">
+                    <div _ngcontent-dspace-angular-c647="" class="input-group-append"><button
+                            _ngcontent-dspace-angular-c647="" type="button"
+                            class="btn btn-secondary">CERSA</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <h1 class="texy-dark h2" style="font-weight: 600;">Filtri</h1>
+                <div class="mt-4 ">
+                    <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+                        <ngb-panel title="Autore" class="accordion-button">
+                            <ng-template ngbPanelContent>
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                                squid. 3 wolf moon
+                                officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+                            </ng-template>
+                        </ngb-panel>
+                        <ngb-panel>
+                            <ng-template ngbPanelTitle>
+                                <!-- <span>&#9733; <b>Fancy</b> title &#9733;</span> -->
+                                Data di publicaztion
+                            </ng-template>
+                            <ng-template ngbPanelContent>
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                                squid. 3 wolf moon
+                                officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+                                eiusmod. </ng-template>
+                        </ngb-panel>
+                        <ngb-panel title="Tipologia">
+                            <ng-template ngbPanelContent>
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                                squid. 3 wolf moon
+                                officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+                            </ng-template>
+                        </ngb-panel>
+                        <ngb-panel title="Fondo">
+                            <ng-template ngbPanelContent>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Fondo 1
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
+                                    <label class="form-check-label" for="flexCheckDefault1">
+                                        Fondo 2
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
+                                    <label class="form-check-label" for="flexCheckDefault2">
+                                        Fondo 3
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3">
+                                    <label class="form-check-label" for="flexCheckDefault3">
+                                        Fondo 4
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4">
+                                    <label class="form-check-label" for="flexCheckDefault4">
+                                        Fondo 5
+                                    </label>
+                                </div>
+                            </ng-template>
+                        </ngb-panel>
+
+                    </ngb-accordion>
+                </div>
+                <button type="button" class="btn btn-dark mt-4">ANNULA FILTRI</button>
+                <div class="mt-4">
+                    <h1 class="text-dark mb-4 h2">Impostazioni</h1>
+                    <div class="bg-light p-4">
+                        <h5 class="text-muted mb-4">Ordinari Per</h5>
+                        <select _ngcontent-dspace-angular-c274="" class="form-control" id="search-sidebar-sort">
+                            <option _ngcontent-dspace-angular-c458="" value="ownerselection,DESC"
+                                ng-reflect-value="ownerselection,DESC" class="ng-star-inserted"> Titolo cresscente
+                            </option>
+                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
+                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted"> Titolo descrente </option><!--bindings={
+                            "ng-reflect-ng-for-of": "[object Object],[object Object"
+                          }-->
+                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
+                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted"> Data inseriminato
+                            </option>
+                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
+                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted">Data inseriminato
+                            </option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="bg-light p-4">
+                        <h5 class="text-muted mb-4">Resultari per pagina</h5>
+                        <select _ngcontent-dspace-angular-c274="" class="form-control" id="search-sidebar-sort">
+                            <option _ngcontent-dspace-angular-c458="" value="ownerselection,DESC"
+                                ng-reflect-value="ownerselection,DESC" class="ng-star-inserted"> 1
+                            </option>
+                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
+                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted"> 2 </option><!--bindings={
+                            "ng-reflect-ng-for-of": "[object Object],[object Object"
+                          }-->
+                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
+                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted">3
+                            </option>
+                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
+                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted">4
+                            </option>
+                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
+                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted">5
+                            </option>
+                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
+                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted">6
+                            </option>
+                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
+                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted">7
+                            </option>
+                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
+                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted">8
+                            </option>
+                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
+                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted">9
+                            </option>
+                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
+                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted">10
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h1 class="texy-dark h2 mb-2" style="font-weight: 600;">Risultati</h1>
+                <p class="text-muted">In mostra 1-10 di 10701 risultati</p>
+                <div class="border-bottom border-dark mt-4">
+                    <div class="mb-4">
+                        <span class="badge badge-dark"> Publicazation</span>
+                    </div>
+                    <h4 class="text-dark mb-3" style="font-weight: 600;">Titlo titolo titolo</h4>
+                    <p>
+                        (2014) <span>Verdi-rassinni , Anna <i class="fa fa-user text-info"></i> Rossi maria <i
+                                class="fa fa-user text-info"></i> Verdi paolo </span>
+                    </p>
+                    <p>Loram Ipsum dolor These classes control the overall appearance, as well as the showing and hiding
+                        via CSS transitions. You can modify any of this with custom CSS or overriding our default
+                        variables. It's also worth noting </p>
+
+                </div>
+                <div class="border-bottom border-dark mt-4">
+                    <div class="mb-4">
+                        <span class="badge badge-dark">Fondo</span>
+                    </div>
+                    <h4 class="text-dark mb-3" style="font-weight: 600;">Titlo titolo titolo</h4>
+                    <p>
+                        (2014) <span>Verdi-rassinni , Anna </span>
+                    </p>
+                    <p>Loram Ipsum dolor These classes control the overall appearance, as well as the showing and hiding
+                        via CSS transitions. You can modify any of this with custom CSS or overriding our default
+                        variables. It's also worth noting </p>
+
+                </div>
+                <div class="border-bottom border-dark mt-4">
+                    <div class="mb-4">
+                        <span class="badge badge-dark">Evento</span>
+                    </div>
+                    <h4 class="text-dark mb-3" style="font-weight: 600;">Titlo titolo titolo</h4>
+                    <p>
+                        (2014) <span>Verdi-rassinni , Anna </span>
+                    </p>
+                </div>
+                <div class="border-bottom border-dark mt-4">
+                    <div class="mb-4">
+                        <span class="badge badge-dark">Luogo</span>
+                    </div>
+                    <h4 class="text-dark mb-3" style="font-weight: 600;">Titlo titolo titolo</h4>
+                </div>
+                <div class="border-bottom border-dark mt-4">
+                    <div class="mb-4">
+                        <span class="badge badge-dark">Persona</span>
+                    </div>
+                    <h4 class="text-dark mb-3" style="font-weight: 600;">Titlo titolo titolo</h4>
+                    <p>
+                        (2014) <span>Verdi-rassinni , Anna </span>
+                    </p>
+                    <p>Loram Ipsum dolor These classes control the overall appearance, as well as the showing and hiding
+                        via CSS transitions. You can modify any of this with custom CSS or overriding our default
+                        variables. It's also worth noting </p>
+
+                </div>
+                <div class="border-bottom border-dark mt-4">
+                    <div class="mb-4">
+                        <span class="badge badge-dark"> Testata</span>
+                    </div>
+                    <h4 class="text-dark mb-3" style="font-weight: 600;">Titlo titolo titolo</h4>
+                    <p>
+                        (2014) <span>Verdi-rassinni , Anna </span>
+                    </p>
+                    <p>Loram Ipsum dolor These classes control the overall appearance, as well as the showing and hiding
+                        via CSS transitions. You can modify any of this with custom CSS or overriding our default
+                        variables. It's also worth noting </p>
+
+                </div>
+                <!-- <p>Default pagination:</p>
+                <ngb-pagination [collectionSize]="70" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+                <pre>Current page: {{page}}</pre> -->
+            </div>
+        </div>
+    </div>
+</div>
