@@ -1,136 +1,69 @@
-<!-- <div class="container">
-  <div *ngFor="let sectionComponents of ( sectionComponentRows | async )" class="row mb-3">
-    <div *ngFor="let sectionComponent of sectionComponents" [ngSwitch]="sectionComponent.componentType"
-      [ngClass]="sectionComponent.style">
-      <ds-themed-top-section *ngSwitchCase="'top'" [sectionId]="sectionId"
-        [topSection]="sectionComponent"></ds-themed-top-section>
-      <ds-themed-browse-section *ngSwitchCase="'browse'" [sectionId]="sectionId"
-        [browseSection]="sectionComponent"></ds-themed-browse-section>
-      <ds-themed-search-section *ngSwitchCase="'search'" [sectionId]="sectionId"
-        [searchSection]="sectionComponent"></ds-themed-search-section>
-      <ds-themed-facet-section *ngSwitchCase="'facet'" [sectionId]="sectionId"
-        [facetSection]="sectionComponent"></ds-themed-facet-section>
-      <ds-themed-text-section *ngSwitchCase="'text-row'" [sectionId]="sectionId"
-        [textRowSection]="sectionComponent"></ds-themed-text-section>
-      <ds-themed-carousel-section *ngSwitchCase="'carousel'" [sectionId]="sectionId"
-        [carouselSection]="sectionComponent"></ds-themed-carousel-section>
-      <ds-themed-counters-section *ngSwitchCase="'counters'" [sectionId]="sectionId"
-        [countersSection]="sectionComponent"></ds-themed-counters-section>
-    </div>
-  </div>
-</div> -->
 <div class="section bg-dark">
   <div class="container p-5">
     <div class="justify-content-center align-items-center d-flex">
       <form>
         <div class="row mb-2">
           <div class="col-md-3">
-            <select _ngcontent-dspace-angular-c509="" name="filter" id="filter" formcontrolname="filter"
-              class="form-control  mr-2 mb-2 ng-pristine ng-valid ng-touched" ng-reflect-name="filter">
-              <option _ngcontent-dspace-angular-c509="" value="all" ng-reflect-value="all" class="ng-star-inserted">
-                All
-              </option>
-              <option _ngcontent-dspace-angular-c509="" value="title" ng-reflect-value="title" class="ng-star-inserted">
-                Title</option>
-              <option _ngcontent-dspace-angular-c509="" value="author" ng-reflect-value="author"
-                class="ng-star-inserted">Author</option>
-              <option _ngcontent-dspace-angular-c509="" value="editor" ng-reflect-value="editor"
-                class="ng-star-inserted">Editor</option>
-              <option _ngcontent-dspace-angular-c509="" value="organization" ng-reflect-value="organization"
-                class="ng-star-inserted">Organization</option>
-              <option _ngcontent-dspace-angular-c509="" value="subject" ng-reflect-value="subject"
-                class="ng-star-inserted">Subject</option>
-              <option _ngcontent-dspace-angular-c509="" value="has_content_in_original_bundle"
-                ng-reflect-value="has_content_in_original_bundle" class="ng-star-inserted">Has content in original
-                bundle</option>
-              <option _ngcontent-dspace-angular-c509="" value="original_bundle_filenames"
-                ng-reflect-value="original_bundle_filenames" class="ng-star-inserted">Original bundle filenames
-              </option>
-              <option _ngcontent-dspace-angular-c509="" value="original_bundle_descriptions"
-                ng-reflect-value="original_bundle_descriptions" class="ng-star-inserted">Original bundle descriptions
-              </option>
-              <option _ngcontent-dspace-angular-c509="" value="entityType" ng-reflect-value="entityType"
-                class="ng-star-inserted">Entity type</option>
+            <select name="filter"
+              class="form-control mr-2 mb-2">
+              <option value="all">All</option>
+              <option value="title">Title</option>
+              <option value="author">Author</option>
+              <option value="editor">Editor</option>
+              <option value="organization">Organization</option>
+              <option value="subject">Subject</option>
+              <option value="has_content_in_original_bundle">Has content in original bundle</option>
+              <option value="original_bundle_filenames">Original bundle filenames</option>
+              <option value="original_bundle_descriptions">Original bundle descriptions</option>
+              <option value="entityType">Entity type</option>
             </select>
           </div>
           <div class="col-md-4">
-            <input _ngcontent-dspace-angular-c509="" type="text" name="query" id="query" formcontrolname="query"
-              class="form-control  mr-2 mb-2 ng-untouched ng-pristine ng-valid" ng-reflect-name="query">
+            <input type="text" name="query" class="form-control  mr-2 mb-2 ng-untouched ng-pristine ng-valid">
           </div>
           <div class="col-md-2">
-            <select _ngcontent-dspace-angular-c509="" name="operation" id="operation" formcontrolname="operation"
-              class="form-control  mb-2 ng-untouched ng-pristine ng-valid ng-star-inserted" ng-reflect-name="operation">
-              <option _ngcontent-dspace-angular-c509="" value="AND" ng-reflect-value="AND" class="ng-star-inserted">
+            <select name="operation" id="operation" class="form-control  mb-2 ng-untouched ng-pristine ng-valid ng-star-inserted">
+              <option value="AND">
                 AND
               </option>
-              <option _ngcontent-dspace-angular-c509="" value="OR" ng-reflect-value="OR" class="ng-star-inserted">OR
+              <option value="OR">
+                OR
               </option>
-              <option _ngcontent-dspace-angular-c509="" value="NOT" ng-reflect-value="NOT" class="ng-star-inserted">
+              <option value="NOT">
                 NOT
               </option>
             </select>
           </div>
         </div>
-
-
         <div class="row mb-2">
           <div class="col-md-3">
-            <select _ngcontent-dspace-angular-c509="" name="filter" id="filter" formcontrolname="filter"
-              class="form-control mr-2 mb-2 ng-untouched ng-pristine ng-valid" ng-reflect-name="filter">
-              <option _ngcontent-dspace-angular-c509="" value="all" ng-reflect-value="all" class="ng-star-inserted">All
-              </option>
-              <option _ngcontent-dspace-angular-c509="" value="title" ng-reflect-value="title" class="ng-star-inserted">
-                Title</option>
-              <option _ngcontent-dspace-angular-c509="" value="author" ng-reflect-value="author"
-                class="ng-star-inserted">Author</option>
-              <option _ngcontent-dspace-angular-c509="" value="editor" ng-reflect-value="editor"
-                class="ng-star-inserted">Editor</option>
-              <option _ngcontent-dspace-angular-c509="" value="organization" ng-reflect-value="organization"
-                class="ng-star-inserted">Organization</option>
-              <option _ngcontent-dspace-angular-c509="" value="subject" ng-reflect-value="subject"
-                class="ng-star-inserted">Subject</option>
-              <option _ngcontent-dspace-angular-c509="" value="has_content_in_original_bundle"
-                ng-reflect-value="has_content_in_original_bundle" class="ng-star-inserted">Has content in original
-                bundle</option>
-              <option _ngcontent-dspace-angular-c509="" value="original_bundle_filenames"
-                ng-reflect-value="original_bundle_filenames" class="ng-star-inserted">Original bundle filenames</option>
-              <option _ngcontent-dspace-angular-c509="" value="original_bundle_descriptions"
-                ng-reflect-value="original_bundle_descriptions" class="ng-star-inserted">Original bundle descriptions
-              </option>
-              <option _ngcontent-dspace-angular-c509="" value="entityType" ng-reflect-value="entityType"
-                class="ng-star-inserted">Entity type</option>
+            <select name="filter" id="filter"
+              class="form-control mr-2 mb-2">
+              <option value="all">All</option>
+              <option value="title">Title</option>
+              <option value="author">Author</option>
+              <option value="editor">Editor</option>
+              <option value="organization">Organization</option>
+              <option value="subject">Subject</option>
+              <option value="has_content_in_original_bundle">Has content in original bundle</option>
+              <option value="original_bundle_filenames">Original bundle filenames</option>
+              <option value="original_bundle_descriptions">Original bundle descriptions</option>
+              <option value="entityType">Entity type</option>
             </select>
           </div>
           <div class="col-md-4">
-            <input _ngcontent-dspace-angular-c509="" type="text" name="query" id="query" formcontrolname="query"
-              class="form-control mr-2 mb-2 ng-untouched ng-pristine ng-valid" ng-reflect-name="query">
+            <input type="text" name="query" id="query"
+              class="form-control mr-2 mb-2 ng-untouched ng-pristine ng-valid">
           </div>
           <div class="col-md-2">
-            <button _ngcontent-dspace-angular-c509="" id="addButton" type="button"
+            <button id="addButton" type="button"
               class="btn btn-light mr-2 mb-2 w-100 ng-star-inserted ">+</button>
           </div>
           <div class="col-md-3">
-            <button _ngcontent-dspace-angular-c508="" _ngcontent-dspace-angular-c509="" type="submit" id="searchButton" class="btn btn-secondary mr-1">CERCA</button>
-            <button _ngcontent-dspace-angular-c509="" type="button" id="resetButton"
-              class="btn btn-secondary" style="padding: 5px">ANNULLA</button>
+            <button type="submit" id="searchButton" class="btn btn-secondary mr-1">CERCA</button>
+            <button type="button" id="resetButton" class="btn btn-secondary" style="padding: 5px">ANNULLA</button>
           </div>
-
-
-
-          <!-- <div class="col-md-4">
-            <button _ngcontent-dspace-angular-c509="" type="submit" id="searchButton"
-              class="btn btn-secondary  mr-3">CERCA</button>
-            <button _ngcontent-dspace-angular-c509="" type="button" id="resetButton"
-              class="btn btn-secondary">ANNULLA</button>
-          </div> -->
         </div>
-
-        <!-- <div _ngcontent-dspace-angular-c509="" class="float-right mr-5">
-          <button _ngcontent-dspace-angular-c509="" type="submit" id="searchButton"
-            class="btn btn-secondary  mr-3">CERCA</button>
-          <button _ngcontent-dspace-angular-c509="" type="button" id="resetButton"
-            class="btn btn-secondary">ANNULLA</button>
-        </div> -->
       </form>
     </div>
   </div>
@@ -321,7 +254,5 @@
         </div>
       </div>
     </div>
-
   </div>
-
 </div>

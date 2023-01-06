@@ -1,135 +1,13 @@
-<!-- <div class="container" *ngIf="(isXsOrSm$ | async)">
-    <div class="row">
-        <div class="col-12">
-            <ng-template *ngTemplateOutlet="searchForm"></ng-template>
-        </div>
-    </div>
-</div>
-
-<ds-search-charts *ngIf="showCharts"
-                  [configuration]="currentConfiguration$"
-                  [collapseChart]="collapseCharts"
-                  [filters]="chartFiltersRD$.asObservable()"
-                  [inPlaceSearch]="inPlaceSearch"
-                  [refreshFilters]="refreshFilters"
-                  [showChartsToggle]="showChartsToggle"></ds-search-charts>
-
-<div *ngIf="!showSidebar && (initialized$ | async)">
-    <ng-template *ngTemplateOutlet="searchContent"></ng-template>
-</div>
-
-<ds-page-with-sidebar *ngIf="showSidebar && (initialized$ | async)"
-                      [collapseSidebar]="collapseFilters"
-                      [id]="'search-page'"
-                      [sidebarContent]="sidebarContent">
-    <ng-template *ngTemplateOutlet="searchContent"></ng-template>
-</ds-page-with-sidebar>
-
-<ng-template #searchContent>
-    <div class="row">
-        <div class="col-12" *ngIf="!(isXsOrSm$ | async)">
-            <ng-template *ngTemplateOutlet="searchForm"></ng-template>
-            <ng-content select="[additionalSearchOptions]"></ng-content>
-        </div>
-        <div id="search-content" class="col-12">
-            <div class="d-block d-md-none search-controls clearfix">
-                <ds-view-mode-switch [viewModeList]="viewModeList" [inPlaceSearch]="inPlaceSearch"></ds-view-mode-switch>
-                <button (click)="openSidebar()" aria-controls="#search-body"
-                        class="btn btn-outline-primary float-right open-sidebar">
-                  <i class="fas fa-sliders"></i> {{"search.sidebar.open" | translate}}
-                </button>
-            </div>
-            <ds-search-results [searchResults]="resultsRD$ | async"
-                               [searchConfig]="searchOptions$ | async"
-                               [configuration]="(currentConfiguration$ | async)"
-                               [disableHeader]="!searchEnabled"
-                               [linkType]="linkType"
-                               [context]="(currentContext$ | async)"
-                               [selectable]="selectable"
-                               [selectionConfig]="selectionConfig"
-                               [showHiddenRelatedItemsAlert]="true"
-                               [customData]="customData"
-                               (contentChange)="onContentChange($event)"
-                               (customEvent)="customEvent.emit($event)"
-                               (deselectObject)="deselectObject.emit($event)"
-                               (selectObject)="selectObject.emit($event)"></ds-search-results>
-        </div>
-    </div>
-</ng-template>
-
-<ng-template #sidebarContent>
-    <ds-search-sidebar id="search-sidebar" *ngIf="!(isXsOrSm$ | async)"
-                       [configurationList]="configurationList"
-                       [configuration]="(currentConfiguration$ | async)"
-                       [currentScope]="(currentScope$ | async)"
-                       [filters]="filtersRD$.asObservable()"
-                       [refreshFilters]="refreshFilters"
-                       [resultCount]="(resultsRD$ | async)?.payload?.totalElements"
-                       [searchOptions]="(searchOptions$ | async)"
-                       [sortOptionsList]="(sortOptionsList$ | async)"
-                       [currentSortOption]="(currentSortOptions$ | async)"
-                       [inPlaceSearch]="inPlaceSearch"
-                       [viewModeList]="viewModeList"
-                       [showViewModes]="showViewModes"
-                       (changeConfiguration)="changeContext($event.context)"
-                       (changeViewMode)="changeViewMode()"></ds-search-sidebar>
-    <ds-search-sidebar id="search-sidebar-sm" *ngIf="(isXsOrSm$ | async)"
-                       [configurationList]="configurationList"
-                       [configuration]="(currentConfiguration$ | async)"
-                       [currentScope]="(currentScope$ | async)"
-                       [filters]="filtersRD$.asObservable()"
-                       [refreshFilters]="refreshFilters"
-                       [resultCount]="(resultsRD$ | async)?.payload.totalElements"
-                       [searchOptions]="(searchOptions$ | async)"
-                       [sortOptionsList]="(sortOptionsList$ | async)"
-                       [currentSortOption]="(currentSortOptions$ | async)"
-                       [viewModeList]="viewModeList"
-                       [showViewModes]="showViewModes"
-                       (toggleSidebar)="closeSidebar()"
-                       (changeConfiguration)="changeContext($event.context)"
-                       (changeViewMode)="changeViewMode()">
-    </ds-search-sidebar>
-</ng-template>
-
-<ng-template #searchForm>
-    <div class="d-flex justify-content-between">
-        <div *ngIf="!(isXsOrSm$ | async) && showFilterToggle && showSidebar">
-            <button class="btn btn-outline-secondary mr-3"
-                    ngbTooltip="{{'search.sidebar.show.hide.filters.tooltip' | translate}}"
-                    (click)="toggleSidebar()">
-                <span class="d-flex align-items-center">
-                    <i class="fa fa-filter mr-2"></i>
-                    {{"search.sidebar.show.hide" | translate}}</span>
-            </button>
-        </div>
-        <ds-search-form *ngIf="searchEnabled" id="search-form" class="flex-grow-1"
-                        [query]="(searchOptions$ | async)?.query"
-                        [scope]="(searchOptions$ | async)?.scope"
-                        [currentUrl]="searchLink"
-                        [showScopeSelector]="showScopeSelector"
-                        [inPlaceSearch]="inPlaceSearch"
-                        [searchPlaceholder]="searchFormPlaceholder | translate">
-        </ds-search-form>
-        <ng-content select="[additionalSearchFormOptions]"></ng-content>
-        <ds-item-export-modal-launcher [searchOptions$]="searchOptions$" *ngIf="showExport"></ds-item-export-modal-launcher>
-    </div>
-    <div class="row mb-3 mb-md-1">
-        <div class="labels col-sm-9">
-            <ds-search-labels *ngIf="searchEnabled" [inPlaceSearch]="inPlaceSearch"></ds-search-labels>
-        </div>
-    </div>
-</ng-template> -->
 <div class="section my-4 bg-dark pt-4 pb-4">
     <div class="container">
         <div class="justify-content-center align-items-center d-flex flex-column ">
             <h1 class="text-white mb-4">Cerca in Glam</h1>
-            <div _ngcontent-dspace-angular-c647="" class="form-group">
-                <div _ngcontent-dspace-angular-c647="" class="input-group"><input _ngcontent-dspace-angular-c647=""
-                        placeholder="Cerca in Glam" name="dp" ngbdatepicker=""
-                        class="form-control date-input ng-pristine ng-valid ng-touched" ng-reflect-name="dp">
-                    <div _ngcontent-dspace-angular-c647="" class="input-group-append"><button
-                            _ngcontent-dspace-angular-c647="" type="button"
-                            class="btn btn-secondary">CERSA</button>
+            <div class="form-group">
+                <div class="input-group">
+                    <input placeholder="Cerca in Glam" name="dp"
+                        class="form-control date-input ng-pristine ng-valid ng-touched">
+                    <div class="input-group-append">
+                      <button type="button" class="btn btn-secondary">CERSA</button>
                     </div>
                 </div>
             </div>
@@ -152,7 +30,6 @@
                         </ngb-panel>
                         <ngb-panel>
                             <ng-template ngbPanelTitle>
-                                <!-- <span>&#9733; <b>Fancy</b> title &#9733;</span> -->
                                 Data di publicaztion
                             </ng-template>
                             <ng-template ngbPanelContent>
@@ -203,7 +80,6 @@
                                 </div>
                             </ng-template>
                         </ngb-panel>
-
                     </ngb-accordion>
                 </div>
                 <button type="button" class="btn btn-dark mt-4">ANNULA FILTRI</button>
@@ -211,59 +87,36 @@
                     <h1 class="text-dark mb-4 h2">Impostazioni</h1>
                     <div class="bg-light p-4">
                         <h5 class="text-muted mb-4">Ordinari Per</h5>
-                        <select _ngcontent-dspace-angular-c274="" class="form-control" id="search-sidebar-sort">
-                            <option _ngcontent-dspace-angular-c458="" value="ownerselection,DESC"
-                                ng-reflect-value="ownerselection,DESC" class="ng-star-inserted"> Titolo cresscente
+                        <select class="form-control">
+                            <option value="ownerselection,DESC">
+                              Titolo cresscente
                             </option>
-                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
-                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted"> Titolo descrente </option><!--bindings={
-                            "ng-reflect-ng-for-of": "[object Object],[object Object"
-                          }-->
-                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
-                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted"> Data inseriminato
+                            <option value="dc.title,ASC">
+                              Titolo descrente
                             </option>
-                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
-                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted">Data inseriminato
+                            <option value="dc.title,ASC">
+                              Data inseriminato
+                            </option>
+                            <option value="dc.title,ASC">
+                              Data inseriminato
                             </option>
                         </select>
-
                     </div>
                 </div>
                 <div class="mt-4">
                     <div class="bg-light p-4">
                         <h5 class="text-muted mb-4">Resultari per pagina</h5>
-                        <select _ngcontent-dspace-angular-c274="" class="form-control" id="search-sidebar-sort">
-                            <option _ngcontent-dspace-angular-c458="" value="ownerselection,DESC"
-                                ng-reflect-value="ownerselection,DESC" class="ng-star-inserted"> 1
-                            </option>
-                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
-                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted"> 2 </option><!--bindings={
-                            "ng-reflect-ng-for-of": "[object Object],[object Object"
-                          }-->
-                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
-                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted">3
-                            </option>
-                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
-                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted">4
-                            </option>
-                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
-                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted">5
-                            </option>
-                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
-                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted">6
-                            </option>
-                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
-                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted">7
-                            </option>
-                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
-                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted">8
-                            </option>
-                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
-                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted">9
-                            </option>
-                            <option _ngcontent-dspace-angular-c458="" value="dc.title,ASC"
-                                ng-reflect-value="dc.title,ASC" class="ng-star-inserted">10
-                            </option>
+                        <select class="form-control" id="search-sidebar-sort">
+                            <option value="ownerselection,DESC"> 1</option>
+                            <option value="dc.title,ASC">2</option>
+                            <option value="dc.title,ASC">3</option>
+                            <option value="dc.title,ASC">4</option>
+                            <option value="dc.title,ASC">5</option>
+                            <option value="dc.title,ASC">6</option>
+                            <option value="dc.title,ASC">7</option>
+                            <option value="dc.title,ASC">8</option>
+                            <option value="dc.title,ASC">9</option>
+                            <option value="dc.title,ASC">10</option>
                         </select>
                     </div>
                 </div>
@@ -339,9 +192,6 @@
                         variables. It's also worth noting </p>
 
                 </div>
-                <!-- <p>Default pagination:</p>
-                <ngb-pagination [collectionSize]="70" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
-                <pre>Current page: {{page}}</pre> -->
             </div>
         </div>
     </div>

@@ -1,50 +1,3 @@
-<!--<ds-themed-text-section *ngIf="(site$.value && hasHomeHeaderMetadata); else dsHomeNews"-->
-<!--                        [sectionId]="'site'"-->
-<!--                        [textRowSection]="homeHeaderSection"-->
-<!--                        [site]="site$.value"></ds-themed-text-section>-->
-<!--<ng-template #dsHomeNews>-->
-<!--  <ds-themed-home-news></ds-themed-home-news>-->
-<!--</ng-template>-->
-<!--<div class="container" *ngIf="site$.value">-->
-<!--  <ng-container>-->
-<!--    <ds-view-tracker [object]="site$.value"></ds-view-tracker>-->
-<!--  </ng-container>-->
-<!--  <div *ngFor="let sectionComponents of ( sectionComponentRows | async )" class="row mb-3">-->
-<!--    <div *ngFor="let sectionComponent of sectionComponents" [ngSwitch]="sectionComponent.componentType"-->
-<!--         [ngClass]="sectionComponent.style">-->
-<!--      <ds-themed-top-section *ngSwitchCase="'top'"-->
-<!--                             [sectionId]="sectionId"-->
-<!--                             [topSection]="sectionComponent"></ds-themed-top-section>-->
-<!--      <ds-themed-browse-section *ngSwitchCase="'browse'"-->
-<!--                                [sectionId]="sectionId"-->
-<!--                                [browseSection]="sectionComponent"></ds-themed-browse-section>-->
-<!--      <ds-themed-search-section *ngSwitchCase="'search'"-->
-<!--                                [sectionId]="sectionId"-->
-<!--                                [searchSection]="sectionComponent"></ds-themed-search-section>-->
-<!--      <ds-themed-facet-section *ngSwitchCase="'facet'"-->
-<!--                               [sectionId]="sectionId"-->
-<!--                               [facetSection]="sectionComponent"></ds-themed-facet-section>-->
-<!--      <ds-themed-text-section *ngSwitchCase="'text-row'"-->
-<!--                              [sectionId]="sectionId"-->
-<!--                              [textRowSection]="sectionComponent"></ds-themed-text-section>-->
-<!--      <ds-themed-carousel-section *ngSwitchCase="'carousel'"-->
-<!--                              [sectionId]="sectionId"-->
-<!--                              [carouselSection]="sectionComponent"></ds-themed-carousel-section>-->
-<!--      <ds-themed-counters-section *ngSwitchCase="'counters'"-->
-<!--                                  [sectionId]="sectionId"-->
-<!--                                  [countersSection]="sectionComponent"></ds-themed-counters-section>-->
-<!--      <ds-themed-text-section *ngSwitchCase="'text-row'"-->
-<!--                              [sectionId]="sectionId"-->
-<!--                              [textRowSection]="sectionComponent"-->
-<!--                              [site]="$any(sectionComponent).contentType === 'text-metadata' ? site$.value : null"></ds-themed-text-section>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-<!--<ds-suggestions-popup></ds-suggestions-popup>-->
-
-
-
-<!--- home page mock up --->
 <div class="section">
     <div class="row">
         <div class="col-md-7 pr-0">
@@ -119,9 +72,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="row"> -->
-
-                <!-- </div> -->
             </div>
         </div>
     </div>
