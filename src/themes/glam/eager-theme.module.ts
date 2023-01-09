@@ -11,7 +11,6 @@ import { RootModule } from '../../app/root.module';
 import { NavbarModule } from '../../app/navbar/navbar.module';
 import { ExploreModule } from '../../app/shared/explore/explore.module';
 import { ExplorePageComponent } from "./app/explore-page/explore-page.component";
-import { SearchSectionComponent } from "./app/shared/explore/section-component/search-section/search-section.component";
 import { HomePageComponent } from "./app/home-page/home-page.component";
 import { HomePageModule } from "../../app/home-page/home-page.module";
 import { StatisticsModule } from "../../app/statistics/statistics.module";
@@ -30,7 +29,6 @@ const DECLARATIONS = [
   HeaderNavbarWrapperComponent,
   NavbarComponent,
   ExplorePageComponent,
-  SearchSectionComponent,
   HomePageComponent,
   SearchComponent
 ];

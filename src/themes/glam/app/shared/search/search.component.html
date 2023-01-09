@@ -1,198 +1,185 @@
 <div class="section my-4 bg-dark pt-4 pb-4">
-    <div class="container">
-        <div class="justify-content-center align-items-center d-flex flex-column ">
-            <h1 class="text-white mb-4">Cerca in Glam</h1>
-            <div class="form-group">
-                <div class="input-group">
-                    <input placeholder="Cerca in Glam" name="dp"
-                        class="form-control date-input ng-pristine ng-valid ng-touched">
-                    <div class="input-group-append">
-                      <button type="button" class="btn btn-secondary">CERSA</button>
-                    </div>
-                </div>
-            </div>
+  <div class="container">
+    <div class="justify-content-center align-items-center d-flex flex-column ">
+      <h1 class="text-white mb-4">Cerca in Glam</h1>
+      <div class="form-group">
+        <div class="input-group">
+          <input class="form-control main-input">
+          <div class="input-group-append">
+            <button type="button" class="btn btn-light">CERSA</button>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 <div class="section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <h1 class="texy-dark h2" style="font-weight: 600;">Filtri</h1>
-                <div class="mt-4 ">
-                    <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-                        <ngb-panel title="Autore" class="accordion-button">
-                            <ng-template ngbPanelContent>
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                                squid. 3 wolf moon
-                                officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                            </ng-template>
-                        </ngb-panel>
-                        <ngb-panel>
-                            <ng-template ngbPanelTitle>
-                                Data di publicaztion
-                            </ng-template>
-                            <ng-template ngbPanelContent>
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                                squid. 3 wolf moon
-                                officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                eiusmod. </ng-template>
-                        </ngb-panel>
-                        <ngb-panel title="Tipologia">
-                            <ng-template ngbPanelContent>
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                                squid. 3 wolf moon
-                                officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                            </ng-template>
-                        </ngb-panel>
-                        <ngb-panel title="Fondo">
-                            <ng-template ngbPanelContent>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        Fondo 1
-                                    </label>
-                                </div>
-
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                                    <label class="form-check-label" for="flexCheckDefault1">
-                                        Fondo 2
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
-                                    <label class="form-check-label" for="flexCheckDefault2">
-                                        Fondo 3
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3">
-                                    <label class="form-check-label" for="flexCheckDefault3">
-                                        Fondo 4
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4">
-                                    <label class="form-check-label" for="flexCheckDefault4">
-                                        Fondo 5
-                                    </label>
-                                </div>
-                            </ng-template>
-                        </ngb-panel>
-                    </ngb-accordion>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <h1 class="text-dark h2">Filtri</h1>
+        <div class="mt-4">
+          <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+            <ngb-panel title="Autore" class="accordion-button">
+              <ng-template ngbPanelContent>
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                squid. 3 wolf moon
+                officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel>
+              <ng-template ngbPanelTitle>
+                Data di publicaztion
+              </ng-template>
+              <ng-template ngbPanelContent>
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                squid. 3 wolf moon
+                officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+                eiusmod. </ng-template>
+            </ngb-panel>
+            <ngb-panel title="Tipologia">
+              <ng-template ngbPanelContent>
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                squid. 3 wolf moon
+                officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel title="Fondo">
+              <ng-template ngbPanelContent>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Fondo 1
+                  </label>
                 </div>
-                <button type="button" class="btn btn-dark mt-4">ANNULA FILTRI</button>
-                <div class="mt-4">
-                    <h1 class="text-dark mb-4 h2">Impostazioni</h1>
-                    <div class="bg-light p-4">
-                        <h5 class="text-muted mb-4">Ordinari Per</h5>
-                        <select class="form-control">
-                            <option value="ownerselection,DESC">
-                              Titolo cresscente
-                            </option>
-                            <option value="dc.title,ASC">
-                              Titolo descrente
-                            </option>
-                            <option value="dc.title,ASC">
-                              Data inseriminato
-                            </option>
-                            <option value="dc.title,ASC">
-                              Data inseriminato
-                            </option>
-                        </select>
-                    </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
+                  <label class="form-check-label" for="flexCheckDefault1">
+                    Fondo 2
+                  </label>
                 </div>
-                <div class="mt-4">
-                    <div class="bg-light p-4">
-                        <h5 class="text-muted mb-4">Resultari per pagina</h5>
-                        <select class="form-control" id="search-sidebar-sort">
-                            <option value="ownerselection,DESC"> 1</option>
-                            <option value="dc.title,ASC">2</option>
-                            <option value="dc.title,ASC">3</option>
-                            <option value="dc.title,ASC">4</option>
-                            <option value="dc.title,ASC">5</option>
-                            <option value="dc.title,ASC">6</option>
-                            <option value="dc.title,ASC">7</option>
-                            <option value="dc.title,ASC">8</option>
-                            <option value="dc.title,ASC">9</option>
-                            <option value="dc.title,ASC">10</option>
-                        </select>
-                    </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
+                  <label class="form-check-label" for="flexCheckDefault2">
+                    Fondo 3
+                  </label>
                 </div>
-            </div>
-            <div class="col-md-9">
-                <h1 class="texy-dark h2 mb-2" style="font-weight: 600;">Risultati</h1>
-                <p class="text-muted">In mostra 1-10 di 10701 risultati</p>
-                <div class="border-bottom border-dark mt-4">
-                    <div class="mb-4">
-                        <span class="badge badge-dark"> Publicazation</span>
-                    </div>
-                    <h4 class="text-dark mb-3" style="font-weight: 600;">Titlo titolo titolo</h4>
-                    <p>
-                        (2014) <span>Verdi-rassinni , Anna <i class="fa fa-user text-info"></i> Rossi maria <i
-                                class="fa fa-user text-info"></i> Verdi paolo </span>
-                    </p>
-                    <p>Loram Ipsum dolor These classes control the overall appearance, as well as the showing and hiding
-                        via CSS transitions. You can modify any of this with custom CSS or overriding our default
-                        variables. It's also worth noting </p>
-
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3">
+                  <label class="form-check-label" for="flexCheckDefault3">
+                    Fondo 4
+                  </label>
                 </div>
-                <div class="border-bottom border-dark mt-4">
-                    <div class="mb-4">
-                        <span class="badge badge-dark">Fondo</span>
-                    </div>
-                    <h4 class="text-dark mb-3" style="font-weight: 600;">Titlo titolo titolo</h4>
-                    <p>
-                        (2014) <span>Verdi-rassinni , Anna </span>
-                    </p>
-                    <p>Loram Ipsum dolor These classes control the overall appearance, as well as the showing and hiding
-                        via CSS transitions. You can modify any of this with custom CSS or overriding our default
-                        variables. It's also worth noting </p>
-
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4">
+                  <label class="form-check-label" for="flexCheckDefault4">
+                    Fondo 5
+                  </label>
                 </div>
-                <div class="border-bottom border-dark mt-4">
-                    <div class="mb-4">
-                        <span class="badge badge-dark">Evento</span>
-                    </div>
-                    <h4 class="text-dark mb-3" style="font-weight: 600;">Titlo titolo titolo</h4>
-                    <p>
-                        (2014) <span>Verdi-rassinni , Anna </span>
-                    </p>
-                </div>
-                <div class="border-bottom border-dark mt-4">
-                    <div class="mb-4">
-                        <span class="badge badge-dark">Luogo</span>
-                    </div>
-                    <h4 class="text-dark mb-3" style="font-weight: 600;">Titlo titolo titolo</h4>
-                </div>
-                <div class="border-bottom border-dark mt-4">
-                    <div class="mb-4">
-                        <span class="badge badge-dark">Persona</span>
-                    </div>
-                    <h4 class="text-dark mb-3" style="font-weight: 600;">Titlo titolo titolo</h4>
-                    <p>
-                        (2014) <span>Verdi-rassinni , Anna </span>
-                    </p>
-                    <p>Loram Ipsum dolor These classes control the overall appearance, as well as the showing and hiding
-                        via CSS transitions. You can modify any of this with custom CSS or overriding our default
-                        variables. It's also worth noting </p>
-
-                </div>
-                <div class="border-bottom border-dark mt-4">
-                    <div class="mb-4">
-                        <span class="badge badge-dark"> Testata</span>
-                    </div>
-                    <h4 class="text-dark mb-3" style="font-weight: 600;">Titlo titolo titolo</h4>
-                    <p>
-                        (2014) <span>Verdi-rassinni , Anna </span>
-                    </p>
-                    <p>Loram Ipsum dolor These classes control the overall appearance, as well as the showing and hiding
-                        via CSS transitions. You can modify any of this with custom CSS or overriding our default
-                        variables. It's also worth noting </p>
-
-                </div>
-            </div>
+              </ng-template>
+            </ngb-panel>
+          </ngb-accordion>
         </div>
+        <div class="text-center">
+          <button type="button" class="btn btn-dark mt-4">ANNULA FILTRI</button>
+        </div>
+        <div class="mt-4">
+          <h1 class="text-dark mb-4 h2">Impostazioni</h1>
+          <div class="p-4">
+            <h5 class="text-muted mb-4">Ordinari Per</h5>
+            <select class="form-control">
+              <option> Titolo cresscente </option>
+              <option> Titolo descrente </option>
+              <option> Data inseriminato </option>
+              <option> Data inseriminato </option>
+            </select>
+          </div>
+        </div>
+        <div class="mt-4">
+          <div class="p-4">
+            <h5 class="text-muted mb-4">Resultari per pagina</h5>
+            <select class="form-control">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <h1 class="texy-dark h2 mb-2">Risultati</h1>
+        <p class="text-muted">In mostra 1-10 di 10701 risultati</p>
+        <div class="border-bottom border-dark mt-4">
+          <div class="mb-4">
+            <span class="new-bg"> Publicazation</span>
+          </div>
+          <h4 class="text-dark mb-3">Titlo titolo titolo</h4>
+          <p>
+            (2014) <span>Verdi-rassinni , Anna <i class="fa fa-user text-info"></i> Rossi maria <i
+            class="fa fa-user text-info"></i> Verdi paolo </span>
+          </p>
+          <p>Loram Ipsum dolor These classes control the overall appearance, as well as the showing and hiding
+            via CSS transitions. You can modify any of this with custom CSS or overriding our default
+            variables. It's also worth noting </p>
+
+        </div>
+        <div class="border-bottom border-dark mt-4">
+          <div class="mb-4">
+            <span class="new-bg">Fondo</span>
+          </div>
+          <h4 class="text-dark mb-3">Titlo titolo titolo</h4>
+          <p>
+            (2014) <span>Verdi-rassinni , Anna </span>
+          </p>
+          <p>Loram Ipsum dolor These classes control the overall appearance, as well as the showing and hiding
+            via CSS transitions. You can modify any of this with custom CSS or overriding our default
+            variables. It's also worth noting </p>
+
+        </div>
+        <div class="border-bottom border-dark mt-4">
+          <div class="mb-4">
+            <span class="new-bg">Evento</span>
+          </div>
+          <h4 class="text-dark mb-3">Titlo titolo titolo</h4>
+          <p>
+            (2014) <span>Verdi-rassinni , Anna </span>
+          </p>
+        </div>
+        <div class="border-bottom border-dark mt-4">
+          <div class="mb-4">
+            <span class="new-bg">Luogo</span>
+          </div>
+          <h4 class="text-dark mb-3">Titlo titolo titolo</h4>
+        </div>
+        <div class="border-bottom border-dark mt-4">
+          <div class="mb-4">
+            <span class="new-bg">Persona</span>
+          </div>
+          <h4 class="text-dark mb-3">Titlo titolo titolo</h4>
+          <p>
+            (2014) <span>Verdi-rassinni , Anna </span>
+          </p>
+          <p>Loram Ipsum dolor These classes control the overall appearance, as well as the showing and hiding
+            via CSS transitions. You can modify any of this with custom CSS or overriding our default
+            variables. It's also worth noting </p>
+
+        </div>
+        <div class="border-bottom border-dark mt-4">
+          <div class="mb-4">
+            <span class="new-bg"> Testata</span>
+          </div>
+          <h4 class="text-dark mb-3">Titlo titolo titolo</h4>
+          <p>
+            (2014) <span>Verdi-rassinni , Anna </span>
+          </p>
+          <p>
+            Loram Ipsum dolor These classes control the overall appearance, as well as the showing and hiding
+            via CSS transitions. You can modify any of this with custom CSS or overriding our default
+            variables. It's also worth noting
+          </p>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

@@ -1,37 +1,38 @@
-// @include media-breakpoint-down(md) {
-//   .container {
-//     width: 100%;
-//     max-width: none;
-//   }
-// }
-
-// ::ng-deep .search-controls {
-//     margin-bottom: var(--bs-spacer);
-// }
-
-// .mb-40 {
-//   margin-bottom: 40px;
-// }
-
-:host {
-
-  .accordion-button:after {
-    flex-shrink: 0;
-    width: var(--bs-accordion-btn-icon-width);
-    height: var(--bs-accordion-btn-icon-width);
-    margin-left: auto;
-    content: "";
-    background-image: var(--bs-accordion-btn-icon);
-    background-repeat: no-repeat;
-    background-size: var(--bs-accordion-btn-icon-width);
-    transition: var(--bs-accordion-btn-icon-transition);
-  }
-
-
+.accordion-button:after {
+  flex-shrink: 0;
+  width: var(--bs-accordion-btn-icon-width);
+  height: var(--bs-accordion-btn-icon-width);
+  margin-left: auto;
+  content: "";
+  background-image: var(--bs-accordion-btn-icon);
+  background-repeat: no-repeat;
+  background-size: var(--bs-accordion-btn-icon-width);
+  transition: var(--bs-accordion-btn-icon-transition);
 }
+
 .card .card-header {
-  padding: 0.25rem 0rem !important;
+  padding: 0.25rem 0 !important;
   margin-bottom: 0;
   background-color: rgba(0, 0, 0, 0.03);
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.new-bg {
+  background-color: #a4b2bb;
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  color: #626a70;
+}
+
+.form-control.main-input {
+  min-width: 330px;
+}
+h1, h4 {
+  font-weight: 600;
 }
