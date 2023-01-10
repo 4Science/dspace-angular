@@ -1,0 +1,50 @@
+<ngb-carousel #carousel [interval]="2000" (slide)="onSlide($event)" class="ds-carousel"
+              [showNavigationArrows]="false"
+              [showNavigationIndicators]="false">
+  <ng-template ngbSlide *ngFor="let item of items; let i = index; let last = last">
+    <ng-container *ngIf="getItemLink(item.indexableObject); let currentLink; else carouselContent">
+        <ng-container *ngTemplateOutlet="carouselContent"></ng-container>
+    </ng-container>
+    <ng-template #carouselContent>
+      <div class="section">
+        <div class="row">
+            <div class="col-md-7 pr-0 carousel-content-wrapper"
+                 [ngStyle]="{
+                    'height': carouselOptions.keepAspectRatio ? null : carouselOptions.carouselHeightPx + 'px',
+                    'aspect-ratio': carouselOptions.keepAspectRatio ? carouselOptions.aspectRatio : null
+                 }">
+              <div class="picsum-img-wrapper" *ngIf="(itemToImageHrefMap$ | async).get(item.indexableObject.uuid); let href">
+                <img [src]="href" [alt]="item.indexableObject.metadata[title][0].value" class="img-fluid"
+                     [ngClass]="{'w-100': carouselOptions.fitWidth, 'h-100': carouselOptions.fitHeight}">
+              </div>
+            </div>
+            <div class="col-md-5 pl-0">
+                <div class="bg-dark justify-content-center align-items-center d-flex flex-column "
+                     [ngStyle]="{
+                      'height': carouselOptions.keepAspectRatio ? null : carouselOptions.carouselHeightPx + 'px',
+                      'aspect-ratio': carouselOptions.keepAspectRatio ? carouselOptions.aspectRatio : null
+                     }">
+                    <h1 class="text-white" [class]="carouselOptions.titleStyle" *ngIf="item.indexableObject.metadata[title]">
+                      {{item.indexableObject.metadata[title][0].value}}
+                    </h1>
+                    <p class="opacity-50 text-white text-center mt-4 " style="max-width: 500px;" [class]="carouselOptions.captionStyle"
+                       *ngIf="item.indexableObject.metadata[description]; let descriptionObj">
+                       {{descriptionObj[0].value}}
+                    </p>
+                    <div class="arrow-class">
+                      <i class="fa fa-arrow-left text-white" (click)="carousel.prev()"></i>
+                      <i class="fa fa-arrow-right text-white" (click)="carousel.next()"></i>
+                    </div>
+                    <a *ngIf="isLinkInternal(getItemLink(item.indexableObject))" [routerLink]="getItemLink(item.indexableObject)">
+                      <button type="button" class="btn btn-light mt-4">{{ 'explore.carousel.view-more' | translate }}</button>
+                    </a>
+                    <a *ngIf="!isLinkInternal(getItemLink(item.indexableObject))" [href]="getItemLink(item.indexableObject)" [target]="carouselOptions.targetBlank ? '_blank' : null">
+                      <button type="button" class="btn btn-light mt-4">{{ 'explore.carousel.view-more' | translate }}</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </ng-template>
+  </ng-template>
+</ngb-carousel>
