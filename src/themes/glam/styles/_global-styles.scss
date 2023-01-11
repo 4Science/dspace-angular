@@ -31,3 +31,46 @@ ds-metric-donuts a {
   background-size: contain;
 }
 
+
+.new-accordian .btn-link.ng-star-inserted::before {
+  content: "\f068";
+  font-family: "Font Awesome 5 Free", serif;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-block;
+  padding-right: 15px;
+  color: #c4d3da;
+}
+
+.new-accordian .btn-link.btn.collapsed::before  {
+  content: "\f067";
+  font-family: "Font Awesome 5 Free", serif;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-block;
+  padding-right: 15px;
+  color: #c4d3da;
+}
+
+.new-accordian .btn-link {
+  font-weight: 400;
+  color: #626a70 !important;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):not(.disabled):active:focus,
+.btn:not(:disabled):not(.disabled).active:focus {
+  box-shadow: none !important;
+}
+
+.new-accordian .accordion > .card .card-header {
+  margin-bottom: 0 !important;
+  background-color: #fff !important;
+}
+
+.new-accordian .card {
+  border: 0;
+}
+.new-text{
+  color: #626a70 ;
+}
