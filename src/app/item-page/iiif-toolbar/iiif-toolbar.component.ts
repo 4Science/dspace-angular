@@ -14,10 +14,10 @@ import { Bitstream } from '../../core/shared/bitstream.model';
 })
 export class IIIFToolbarComponent implements OnInit {
 
-  private readonly MD_CANVASINDEX = 'bitstream.iiif.canvasindex';
+  private readonly MD_CANVASID = 'bitstream.iiif.canvasid';
   private readonly MD_BITSTREAMS_MAP = [{
     param: 'canvasId',
-    metadata: this.MD_CANVASINDEX
+    metadata: this.MD_CANVASID
   }];
 
   @Input()
