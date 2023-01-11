@@ -16,6 +16,9 @@ import { HomePageModule } from "../../app/home-page/home-page.module";
 import { StatisticsModule } from "../../app/statistics/statistics.module";
 import { OpenaireModule } from "../../app/openaire/openaire.module";
 import { SearchComponent } from './app/shared/search/search.component';
+import { CountersSectionComponent } from './app/shared/explore/section-component/counters-section/counters-section.component';
+import { TextSectionComponent } from './app/shared/explore/section-component/text-section/text-section.component';
+import { MarkdownViewerModule } from 'src/app/shared/markdown-viewer/markdown-viewer.module';
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
  * This will ensure that decorator gets picked up when the app loads
@@ -30,7 +33,9 @@ const DECLARATIONS = [
   NavbarComponent,
   ExplorePageComponent,
   HomePageComponent,
-  SearchComponent
+  SearchComponent,
+  CountersSectionComponent,
+  TextSectionComponent
 ];
 
 @NgModule({
@@ -44,7 +49,8 @@ const DECLARATIONS = [
     ExploreModule,
     HomePageModule,
     StatisticsModule,
-    OpenaireModule
+    OpenaireModule,
+    MarkdownViewerModule
   ],
   declarations: DECLARATIONS,
   providers: [
