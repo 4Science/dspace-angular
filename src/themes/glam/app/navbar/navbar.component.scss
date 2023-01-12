@@ -1,57 +1,54 @@
-nav.navbar {
-  border-top: 1px var(--ds-header-navbar-border-top-color) solid;
-  border-bottom: 5px var(--bs-green) solid;
-  align-items: baseline;
-  color: var(--ds-header-icon-color);
-}
-
-/** Mobile menu styling **/
-@media screen and (max-width: map-get($grid-breakpoints, md)) {
-  .navbar {
-    width: 100%;
-    background-color: var(--bs-white);
-    position: absolute;
-    overflow: hidden;
-    height: 0;
-    &.open {
-      height: 100vh; //doesn't matter because wrapper is sticky
-    }
-  }
-}
-
-@media screen and (min-width: map-get($grid-breakpoints, md)) {
-  .reset-padding-md {
-    margin-left: calc(var(--bs-spacer) / -2);
-    margin-right: calc(var(--bs-spacer) / -2);
-  }
-}
-
-/* TODO remove when https://github.com/twbs/bootstrap/issues/24726 is fixed */
-.navbar-expand-md.navbar-container {
-  @media screen and (max-width: map-get($grid-breakpoints, md)-0.02) {
-    > .navbar-inner-container {
-      padding: 0 var(--bs-spacer);
-      a.navbar-brand {
-        display: none;
-      }
-      .navbar-collapsed {
-        display: none;
-      }
-    }
-    padding: 0;
-  }
+.logo-circle {
+  width: 80px;
   height: 80px;
+  background-color: #ddd;
+  border-radius: 100%;
+  background-image: url("../../assets/images/navbar-logo.png");
 }
 
-a.navbar-brand img {
-  max-height: var(--ds-header-logo-height);
+.new-navbar {
+  .container {
+    display: block;
+
+    .top-bar {
+      display: flex;
+      width: 100%;
+    }
+
+    .top-search {
+      .form-control {
+        box-shadow: none;
+        border: solid 3px #5a5a5a;
+        border-right: 0 !important;
+        border-radius: 0;
+      }
+
+      .btn-outline-secondary {
+        border: solid 3px #5a5a5a;
+        border-left: 0;
+        box-shadow: none;
+        border-radius: 0;
+        font-size: 13px;
+      }
+    }
+  }
+
+  .nav-item {
+    a {
+      text-transform: uppercase;
+      padding-left: 10px;
+      padding-right: 10px;
+      font-size: 14px;
+      color: #676c71;
+
+      &:hover {
+        color: #000;
+      }
+    }
+  }
 }
 
-.navbar-nav {
-  ::ng-deep a.nav-link {
-    color: var(--ds-navbar-link-color);
-  }
-  ::ng-deep a.nav-link:hover {
-    color: var(--ds-navbar-link-color-hover);
-  }
+.right-container {
+  display: flex;
+  flex-direction: column;
 }

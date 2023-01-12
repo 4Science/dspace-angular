@@ -624,4 +624,7 @@ export class DefaultAppConfig implements AppConfig {
       }
     ]
   };
+
+  //main site url for glam theme
+  mainSiteUrl = 'https://www.sito.principale';
 }
