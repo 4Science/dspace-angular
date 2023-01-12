@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-md-3" *ngFor="let object of searchResults?.payload?.page; let i = index; let last = last">
+      <div class="text-center">
+          <ds-thumbnail [thumbnail]="object.indexableObject?.thumbnail | async" [limitWidth]="false" [alt]="'menu.header.image.logo' | translate">
+          </ds-thumbnail>
+          <a [routerLink]="[getItemPageRoute(object.indexableObject)]">
+            <h3 class="h4 text-center text-secondary mt-4 text-truncate">{{object.indexableObject.firstMetadataValue('dc.title')}}</h3>
+          </a>
+      </div>
+  </div>
+</div>

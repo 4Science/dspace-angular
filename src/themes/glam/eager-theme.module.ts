@@ -16,6 +16,8 @@ import { HomePageModule } from "../../app/home-page/home-page.module";
 import { StatisticsModule } from "../../app/statistics/statistics.module";
 import { OpenaireModule } from "../../app/openaire/openaire.module";
 import { SearchComponent } from './app/shared/search/search.component';
+import { TopSectionComponent } from './app/shared/explore/section-component/top-section/top-section.component';
+import { BrowseMostElementsComponent } from './app/browse-most-elements/browse-most-elements.component';
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
  * This will ensure that decorator gets picked up when the app loads
@@ -30,7 +32,9 @@ const DECLARATIONS = [
   NavbarComponent,
   ExplorePageComponent,
   HomePageComponent,
-  SearchComponent
+  SearchComponent,
+  TopSectionComponent,
+  BrowseMostElementsComponent
 ];
 
 @NgModule({

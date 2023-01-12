@@ -2859,7 +2859,7 @@
 
   // "explore.index.dc.date.accessioned" : "Recent Additions",
   // TODO New key - Add a translation
-  "explore.index.dc.date.accessioned" : "Recent Additions",
+  "explore.index.dc.date.accessioned" : "Nuove accessioni",
 
   // "explore.index.dc.title" : "Title",
   "explore.index.dc.title" : "Titolo",
