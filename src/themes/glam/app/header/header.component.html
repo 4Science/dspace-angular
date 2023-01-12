@@ -1,24 +1,57 @@
 <header class="header">
-  <nav role="navigation" [attr.aria-label]="'nav.user.description' | translate" class="container navbar navbar-expand-md px-0">
-    <div class="d-flex flex-grow-1">
-      <a class="navbar-brand m-2" routerLink="/home">
-        <img src="assets/images/dspace-glam-logo.png" [attr.alt]="'menu.header.image.logo' | translate"/>
-      </a>
-    </div>
-    <div class="d-flex flex-grow-1 ml-auto justify-content-end align-items-center">
-      <ds-search-navbar class="navbar-search"></ds-search-navbar>
-      <ds-lang-switch></ds-lang-switch>
-      <ds-auth-nav-menu></ds-auth-nav-menu>
-      <ds-impersonate-navbar></ds-impersonate-navbar>
-      <div class="pl-2">
-        <button class="navbar-toggler" type="button" (click)="toggleNavbar()"
-                aria-controls="collapsingNav"
-                aria-expanded="false" [attr.aria-label]="'nav.toggle' | translate">
-          <span class="navbar-toggler-icon fas fa-bars fa-fw" aria-hidden="true"></span>
+  <nav class="navbar new-navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <div class="top-bar mb-3">
+        <a class="navbar-brand text-center" href="#">
+          <div class="logo-circle mb-2"></div>
+          DSpace<br/>GLAM
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
         </button>
+
+        <div class="ml-auto right-container">
+
+          <ul class="navbar-nav ml-auto mb-auto mt-3">
+            <li class="nav-item">
+              <a class="nav-link" href="#">www.sito.principale</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fas fa-home fa-lg fa-fw"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fas fa-globe-asia fa-lg fa-fw"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fas fa-user fa-lg fa-fw"></i></a>
+            </li>
+          </ul>
+          <ul class="navbar-nav mb-3">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Fondi</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Testate</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Collezioni</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Documenti e altri materiali</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Statistiche</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="input-group top-search">
+        <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button"><i class="fa fa-search fa-lg fa-fw"></i></button>
+        </div>
       </div>
     </div>
   </nav>
-  <ds-themed-navbar></ds-themed-navbar>
-
 </header>
