@@ -624,4 +624,9 @@ export class DefaultAppConfig implements AppConfig {
       }
     ]
   };
+
+  footerInvolvedInstitution: {
+    left: '',
+    right: ''
+  };
 }

@@ -477,5 +477,9 @@ export const environment: BuildConfig = {
         negation: true
       }
     ]
+  },
+  footerInvolvedInstitution: {
+    left: '',
+    right: ''
   }
 };

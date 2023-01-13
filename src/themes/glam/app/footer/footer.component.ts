@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FooterComponent as BaseComponent } from "../../../../app/footer/footer.component";
+import { FooterComponent as BaseComponent } from '../../../../app/footer/footer.component';
 
 @Component({
   selector: 'ds-footer',

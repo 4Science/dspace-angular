@@ -7,6 +7,7 @@ import { SiteDataService } from '../core/data/site-data.service';
 import { TextRowSection } from '../core/layout/models/section.model';
 import { Observable } from 'rxjs';
 import { LocaleService } from '../core/locale/locale.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'ds-footer',
@@ -31,7 +32,7 @@ export class FooterComponent implements OnInit {
    * The section data to be rendered as footer
    */
   section: TextRowSection;
-
+  footerInvolvedInstitution = environment.footerInvolvedInstitution;
   constructor(
     @Optional() private cookies: KlaroService,
     private locale: LocaleService,
