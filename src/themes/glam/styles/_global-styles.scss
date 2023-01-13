@@ -22,15 +22,9 @@
   }
 }
 
-// ds-metric-donuts a, ds-metric-donuts a img {
-//   height: 3.5rem !important;
-//   width: 3.5rem !important;
-// }
-
 ds-metric-donuts a {
   background-size: contain;
 }
-
 
 .new-accordian .btn-link.ng-star-inserted::before {
   content: "\f068";
@@ -66,11 +60,19 @@ ds-metric-donuts a {
 .new-accordian .accordion > .card .card-header {
   margin-bottom: 0 !important;
   background-color: #fff !important;
+  border-bottom-width: 0;
+  padding: 0.75rem 1rem !important;
+}
+
+.new-accordian .accordion > .card .card-body {
+  padding: 0.75rem 1.5rem !important;
 }
 
 .new-accordian .card {
   border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125) !important;
 }
+
 .new-text{
   color: #626a70 ;
 }
