@@ -1605,6 +1605,16 @@
 
   "context-menu.actions.edit-item-relationships.btn.projects": "Manage Projects",
 
+  "context-menu.actions.edit-item-relationships.btn.pathpublications": "Manage Paths Publications",
+
+  "context-menu.actions.edit-item-relationships.btn.contributedpublications": "Manage Researchers Contributed Publications",
+
+  "context-menu.actions.edit-item-relationships.btn.fonds": "Manage Researchers Fonds",
+
+  "context-menu.actions.edit-item-relationships.btn.children": "Manage Children",
+
+  "context-menu.actions.edit-item-relationships.btn.events": "Manage Events",
+
   "context-menu.actions.orcid-view": "Open ORCID setting page",
 
   "context-menu.actions.statistics.btn": "Statistics",
@@ -1641,6 +1651,8 @@
 
   "RELATION.Person.researchoutputs.search.results.head" : "Research Outputs",
 
+  "RELATION.Person.publications.search.results.head" : "Publications",
+
   "RELATION.Person.projects.search.results.head" : "Projects",
 
   "RELATION.OrgUnit.organizations.search.results.head" : "Organizations",
@@ -1655,7 +1667,33 @@
 
   "RELATION.Project.researchoutputs.search.results.head" : "Publications",
 
+  "RELATION.Project.projects.search.results.head" : "Projects",
+
+  "RELATION.Project.fundings.search.results.head" : "Fundings",
+
+  "RELATION.Project.publications.search.results.head" : "Publications",
+
   "RELATION.OrgUnit.people.search.results.head" : "People",
+
+  "RELATION.Path.pathpublications.search.results.head" : "Paths Publications",
+
+  "RELATION.Person.contributedpublications.search.results.head" : "Contributed Publications",
+
+  "RELATION.Person.fonds.search.results.head" : "Fonds",
+
+  "RELATION.Fonds.publications.search.results.head" : "Publications",
+
+  "RELATION.Fonds.children.search.results.head" : "Fonds Children",
+
+  "RELATION.JournalFond.children.search.results.head" : "Journal Fonds Children",
+
+  "RELATION.Place.publications.search.results.head" : "Publications",
+
+  "RELATION.Place.events.search.results.head" : "Events",
+
+  "RELATION.Event.publications.search.results.head" : "Publications",
+
+  "RELATION.Event.people.search.results.head" : "People",
 
   "datafile.listelement.badge": "Data File",
 
