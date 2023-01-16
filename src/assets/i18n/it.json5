@@ -6766,8 +6766,8 @@
   // "repository.image.logo": "Repository logo",
   "repository.image.logo": "Logo del repository",
 
-  // "repository.title.prefix": "DSpace Cris Angular :: ",
-  "repository.title.prefix": "DSpace Cris Angular :: ",
+  // "repository.title.prefix": "DSpace GLAM Angular :: ",
+  "repository.title.prefix": "DSpace GLAM Angular :: ",
 
 
   // "repository.title.prefixDSpace": "DSpace Angular ::",
