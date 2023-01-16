@@ -592,6 +592,19 @@ export class MenuResolver implements Resolve<boolean> {
   createSiteAdministratorMenuSections() {
     this.authorizationService.isAuthorized(FeatureID.AdministratorOf).subscribe((authorized) => {
       const menuList = [
+        /* Community List */
+        {
+          id: 'communities_and_collections',
+          active: false,
+          visible: authorized,
+          model: {
+            type: MenuItemType.LINK,
+            text: 'menu.section.communities_and_collections',
+            link: '/community-list'
+          } as LinkMenuItemModel,
+          icon: 'folder-open',
+          index: 0
+        },
         /* Notifications */
         {
           id: 'notifications',
