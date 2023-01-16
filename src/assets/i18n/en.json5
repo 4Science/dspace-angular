@@ -3525,7 +3525,7 @@
 
   "menu.section.archive.sectionfonds": "Fonds",
 
-  "menu.section.archive.sectionaggregations": "Collections",
+  "menu.section.archive.sectionaggregations": "Aggregations",
 
   "menu.section.archive.sectiondocuments": "Archive Materials & Inscriptions",
 
@@ -6706,11 +6706,11 @@
   "menu.section.explore_sectionfonds" : "Fonds",
   "menu.section.explore_sectionjournalfonds" : "Journal Fonds",
 
-  "menu.section.explore_sectionaggregations" : "Collections",
+  "menu.section.explore_sectionaggregations" : "Aggregations",
   "menu.section.explore_sectiondocuments" : "Documents & Other materials",
   "explore.counters-section.fonds" : "Fonds",
   "explore.counters-section.journalfonds" : "Journal Fonds",
-  "explore.counters-section.aggregations" : "Collections",
+  "explore.counters-section.aggregations" : "Aggregations",
   "explore.counters-section.documents" : "Documents & Other materials",
 
   "explore.index.titleF" : "Title",
@@ -6728,7 +6728,7 @@
   "explore.index.path" : "Path",
   "explore.index.fonds" : "Fonds",
   "explore.index.journalfond" : "Journal Fond",
-  "explore.index.aggregation" : "Collection",
+  "explore.index.aggregation" : "Aggregation",
 
   "explore.search-section.sectiondocuments.title" : "Search Documents & Other materials",
 
@@ -6736,17 +6736,17 @@
 
   "explore.search-section.sectionjournalfonds.title" : "Search Journal fonds",
 
-  "explore.search-section.sectionaggregations.title" : "Search Collections",
+  "explore.search-section.sectionaggregations.title" : "Search Aggregations",
 
   "explore.sectiondocuments.breadcrumbs": "Documents & Other materials",
 
   "explore.sectionfonds.breadcrumbs": "Fonds",
   "explore.sectionjournalfonds.breadcrumbs": "Journal Fonds",
-  "explore.sectionaggregations.breadcrumbs": "Collections",
+  "explore.sectionaggregations.breadcrumbs": "Aggregations",
   "documents.search.results.head": "Documents & Other materials Search Results",
   "fonds.search.results.head": "Fonds Search Results",
   "journalfonds.search.results.head": "Journal Fonds Search Results",
-  "aggregations.search.results.head": "Collections Search Results",
+  "aggregations.search.results.head": "Aggregations Search Results",
   "path.search.results.head": "Paths Search Results",
   "search.filters.filter.path.head": "Path",
   "search.filters.filter.path.placeholder": "Path name",
@@ -6760,10 +6760,10 @@
   "search.filters.filter.journalfond.placeholder": "Journal Fond name",
   "search.filters.filter.journalfond.label": "Search Journal Fond name",
   "search.filters.applied.f.journalfond": "Journal Fond",
-  "search.filters.filter.aggregation.head": "Collection",
-  "search.filters.filter.aggregation.placeholder": "Collection name",
-  "search.filters.filter.aggregation.label": "Search Collection name",
-  "search.filters.applied.f.aggregation": "Collection",
+  "search.filters.filter.aggregation.head": "Aggregation",
+  "search.filters.filter.aggregation.placeholder": "Aggregation name",
+  "search.filters.filter.aggregation.label": "Search Aggregation name",
+  "search.filters.applied.f.aggregation": "Aggregation",
   "submission.sections.submit.progressbar.describe.archival_material": "Archival Material Basic Information",
 
   "submission.sections.submit.progressbar.describe.archival_material_indexing": "Archival Material Indexing Information",
@@ -6827,7 +6827,7 @@
 
   "vocabulary-treeview.header.journalfondboxtree": "Journal Fond Tree",
 
-  "vocabulary-treeview.header.aggregationboxtree": "Collection Tree",
+  "vocabulary-treeview.header.aggregationboxtree": "Aggregation Tree",
 
   "curation-task.task.iiifuploader.label": "Upload images to the IIIF Image Server (photo gallery)",
 
