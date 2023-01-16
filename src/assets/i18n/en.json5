@@ -2197,7 +2197,9 @@
 
   "footer.link.dspace": "DSpace software",
 
-  "footer.link.dspace-cris": "DSpace-CRIS software",
+  "footer.link.dspace-cris": "DSpace-GLAM software",
+
+  "footer.link.dspace-cris.href": "https://www.4science.com/dspace-glam/",
 
   "footer.link.lyrasis": "LYRASIS",
 
