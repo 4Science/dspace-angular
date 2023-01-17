@@ -2054,6 +2054,8 @@
 
   "explore.index.dc.date.accessioned" : "Recent Additions",
 
+  "explore.index.paths" : "Paths",
+
   "explore.index.dc.title" : "Title",
 
   "explore.index.editor" : "Editor",
@@ -6790,6 +6792,7 @@
   "journalfonds.search.results.head": "Journal Fonds Search Results",
   "aggregations.search.results.head": "Aggregations Search Results",
   "path.search.results.head": "Paths Search Results",
+  "additions.search.results.head": "Recent Additions Search Results",
   "search.filters.filter.path.head": "Path",
   "search.filters.filter.path.placeholder": "Path name",
   "search.filters.filter.path.label": "Search Path name",
