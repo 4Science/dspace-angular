@@ -3,7 +3,7 @@
     <div class="top-bar mb-3">
       <a class="navbar-brand text-center" href="#">
         <div class="logo-circle mb-2"></div>
-        DSpace<br/>GLAM
+        <span>{{ "title" | translate}}</span>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,14 +13,17 @@
       <div class="ml-auto right-container">
 
         <ul class="navbar-nav ml-auto mb-auto mt-3">
+          <li>
+            <a class="nav-link">{{mainSiteUrl}}</a>
+          </li>
           <li class="nav-item" *ngIf="mainSiteUrl">
-            <a class="nav-link" href="#"><i class="fas fa-home fa-lg fa-fw"></i></a>
+            <a class="nav-link" target="_blank" [href]="'https://' + mainSiteUrl"><i class="fas fa-home fa-lg fa-fw"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-globe-asia fa-lg fa-fw"></i></a>
+            <ds-lang-switch></ds-lang-switch>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-user fa-lg fa-fw"></i></a>
+            <ds-auth-nav-menu></ds-auth-nav-menu>
           </li>
         </ul>
 
@@ -34,11 +37,8 @@
         </ul>
       </div>
     </div>
-    <div class="input-group top-search">
-      <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
-      <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button"><i class="fa fa-search fa-lg fa-fw"></i></button>
-      </div>
+    <div class="input-group top-search flex-row-reverse">
+      <ds-search-navbar class="navbar-search"></ds-search-navbar>
     </div>
   </div>
 </nav>
