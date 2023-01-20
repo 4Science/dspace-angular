@@ -471,6 +471,18 @@ export class DefaultAppConfig implements AppConfig {
     navbar: {
       // If true, show the "Community and Collections" link in the navbar; otherwise, show it in the admin sidebar
       showCommunityCollection: true,
+    },
+    footer: {
+      footerInvolvedInstitution: [
+        {
+          src: '',
+          href: ''
+        },
+        {
+          src: '',
+          href: ''
+        }
+      ]
     }
   };
 
@@ -623,10 +635,5 @@ export class DefaultAppConfig implements AppConfig {
         negation: true
       }
     ]
-  };
-
-  footerInvolvedInstitution: {
-    left: '',
-    right: ''
   };
 }

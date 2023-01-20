@@ -54,10 +54,6 @@ interface AppConfig extends Config {
   metricVisualizationConfig: MetricVisualizationConfig[];
   attachmentRendering: AttachmentRenderingConfig;
   advancedAttachmentRendering: AdvancedAttachmentRenderingConfig;
-  footerInvolvedInstitution: {
-    left: string;
-    right: string;
-  }
 }
 
 const APP_CONFIG = new InjectionToken<AppConfig>('APP_CONFIG');

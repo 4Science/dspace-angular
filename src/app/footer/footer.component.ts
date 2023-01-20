@@ -32,7 +32,7 @@ export class FooterComponent implements OnInit {
    * The section data to be rendered as footer
    */
   section: TextRowSection;
-  footerInvolvedInstitution = environment.footerInvolvedInstitution;
+  footerInvolvedInstitution = environment.layout.footer.footerInvolvedInstitution;
   constructor(
     @Optional() private cookies: KlaroService,
     private locale: LocaleService,
