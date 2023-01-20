@@ -57,7 +57,7 @@ describe('ItemCurateComponent', () => {
       expect(debugEl.nativeElement.innerHTML).toContain('ds-curation-form');
     });
     it('should contain the item information provided', () => {
-      comp.dsoRD$.subscribe((value) => {
+      comp.itemRD$.subscribe((value) => {
         expect(value.payload).toBeTruthy();
       });
       comp.itemName$.subscribe((value) => {
