@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { SearchResult } from '../../search/models/search-result.model';
@@ -9,6 +9,7 @@ import { TruncatableService } from '../../truncatable/truncatable.service';
 import { Metadata } from '../../../core/shared/metadata.utils';
 import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
 import { MetadataMap } from '../../../core/shared/metadata.models';
+import { APP_CONFIG, AppConfig } from '../../../../config/app-config.interface';
 
 @Component({
   selector: 'ds-search-result-list-element',
@@ -22,7 +23,9 @@ export class SearchResultListElementComponent<T extends SearchResult<K>, K exten
   dsoTitle: string;
   hitHighlights: MetadataMap;
 
-  public constructor(protected truncatableService: TruncatableService, protected dsoNameService: DSONameService) {
+  public constructor(protected truncatableService: TruncatableService,
+                     protected dsoNameService: DSONameService,
+                     @Inject(APP_CONFIG) protected appConfig?: AppConfig) {
     super();
   }
 

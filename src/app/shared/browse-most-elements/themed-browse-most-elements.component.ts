@@ -19,11 +19,15 @@ export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMos
 
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
+  @Input() showMetrics;
+
+  @Input() showThumbnails;
+
   @Input() topSection: TopSection;
 
   @Input() mode: LayoutModeEnum;
 
-  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'topSection', 'mode'];
+  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'showMetrics', 'showThumbnails', 'topSection', 'mode'];
 
   protected getComponentName(): string {
     return 'BrowseMostElementsComponent';

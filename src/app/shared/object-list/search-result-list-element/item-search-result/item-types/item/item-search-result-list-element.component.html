@@ -19,17 +19,17 @@
             </ng-container>
             <ng-container *ngVar="['dc.contributor.author', 'dc.creator', 'dc.contributor.*'] as mdList">
               <span *ngIf="dso.allMetadataValues(mdList).length > 0"
-                class="item-list-authors">
+                    class="item-list-authors">
                 <span *ngFor="let author of dso.allMetadata(mdList); let i=index; let last=last;">
                   <ds-metadata-link-view [item]="dso" [metadata]="author" [metadataName]="mdList"></ds-metadata-link-view>
-                  <span *ngIf="!last">; </span>
+                    <span *ngIf="!last">; </span>
                 </span>
               </span>
             </ng-container>
-          </ds-truncatable-part>
-        </span>
-        <div *ngIf="dso.firstMetadataValue('dc.description.abstract')" class="item-list-abstract">
-          <ds-truncatable-part [id]="dso.id" [minLines]="3"><span
+            </ds-truncatable-part>
+          </span>
+          <div *ngIf="dso.firstMetadataValue('dc.description.abstract')" class="item-list-abstract">
+            <ds-truncatable-part [id]="dso.id" [minLines]="3"><span
               [innerHTML]="firstMetadataValue('dc.description.abstract')"></span>
           </ds-truncatable-part>
         </div>
@@ -49,10 +49,7 @@
           </button>
         </div>
       </div>
-      <ds-metric-badges *ngIf="!hideMetrics" class="d-block clearfix" [item]="dso"></ds-metric-badges>
+      <ds-metric-badges *ngIf="showMetrics" class="d-block clearfix" [item]="dso"></ds-metric-badges>
     </div>
-  </div>
-  <div class="align-self-center">
-      <ds-metric-donuts *ngIf="!hideMetrics" [item]="dso"></ds-metric-donuts>
   </div>
 </div>
