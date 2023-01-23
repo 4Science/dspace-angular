@@ -1678,7 +1678,7 @@
 
   "RELATION.Path.pathpublications.search.results.head" : "Paths Publications",
 
-  "RELATION.Person.contributedpublications.search.results.head" : "Contributed Publications",
+  "RELATION.Person.copublications.search.results.head" : "Contributed Publications",
 
   "RELATION.Person.fonds.search.results.head" : "Fonds",
 
@@ -4946,7 +4946,7 @@
 
   "search.filters.applied.charts.RELATION.Person.publications.title": "Publications",
 
-  "search.filters.applied.charts.RELATION.Person.contributedpublications.title": "Contributed Publications",
+  "search.filters.applied.charts.RELATION.Person.copublications.title": "Contributed Publications",
 
   "search.filters.applied.charts.RELATION.Project.fundings.title": "Fundings",
 
