@@ -8,9 +8,9 @@
         <div class="col-5">
           <h6 class="title text-center mb-4">{{'footer.involved-institution' | translate}}</h6>
           <div class="institution-img text-center">
-            <ng-container *ngFor="let institute of footerInvolvedInstitution">
-              <a class="mr-lg-3" [href]="institute?.href">
-                <img class="mb-3 mb-lg-0" [src]="institute?.src || '../assets/images/replacement_image.svg'" alt=""/>
+            <ng-container *ngFor="let involvedInstitution of involvedInstitutions">
+              <a class="mr-lg-3 mr-md-3" [href]="involvedInstitution?.href">
+                <img class="mb-3 mb-lg-3 " [src]="involvedInstitution?.src || '../assets/images/replacement_image.svg'" alt=""/>
               </a>
             </ng-container>
           </div>

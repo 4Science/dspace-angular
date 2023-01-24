@@ -473,7 +473,19 @@ export class DefaultAppConfig implements AppConfig {
       showCommunityCollection: true,
     },
     footer: {
-      footerInvolvedInstitution: [
+      involvedInstitutions: [
+        {
+          src: '',
+          href: ''
+        },
+        {
+          src: '',
+          href: ''
+        },
+        {
+          src: '',
+          href: ''
+        },
         {
           src: '',
           href: ''

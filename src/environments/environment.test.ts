@@ -338,7 +338,7 @@ export const environment: BuildConfig = {
       showCommunityCollection: true,
     },
     footer: {
-      footerInvolvedInstitution: [
+      involvedInstitutions: [
         {
           href: '',
           src: ''
