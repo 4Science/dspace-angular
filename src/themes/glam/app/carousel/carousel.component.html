@@ -35,12 +35,14 @@
                       <i class="fa fa-arrow-left text-white" (click)="carousel.prev()"></i>
                       <i class="fa fa-arrow-right text-white" (click)="carousel.next()"></i>
                     </div>
-                    <a *ngIf="isLinkInternal(getItemLink(item.indexableObject))" [routerLink]="getItemLink(item.indexableObject)">
-                      <button type="button" class="btn btn-light mt-4">{{ 'explore.carousel.view-more' | translate }}</button>
-                    </a>
-                    <a *ngIf="!isLinkInternal(getItemLink(item.indexableObject))" [href]="getItemLink(item.indexableObject)" [target]="carouselOptions.targetBlank ? '_blank' : null">
-                      <button type="button" class="btn btn-light mt-4">{{ 'explore.carousel.view-more' | translate }}</button>
-                    </a>
+                    <ng-container *ngIf="getItemLink(item.indexableObject); let currentLink; else carouselContent">
+                      <a *ngIf="isLinkInternal(currentLink)" [routerLink]="currentLink">
+                        <button type="button" class="btn btn-light mt-4">{{ 'explore.carousel.view-more' | translate }}</button>
+                      </a>
+                      <a *ngIf="!isLinkInternal(currentLink)" [href]="currentLink" [target]="carouselOptions.targetBlank ? '_blank' : null">
+                        <button type="button" class="btn btn-light mt-4">{{ 'explore.carousel.view-more' | translate }}</button>
+                      </a>
+                    </ng-container>
                 </div>
             </div>
         </div>
