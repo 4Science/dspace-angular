@@ -14,5 +14,8 @@
     <ds-themed-carousel-section *ngSwitchCase="'carousel'"
                                 [sectionId]="sectionId"
                                 [carouselSection]="sectionComponent"></ds-themed-carousel-section>
+    <ds-themed-grid-section *ngSwitchCase="'grid'"
+                            [sectionId]="sectionId" [site]="site$.value"
+                            [gridSection]="sectionComponent"></ds-themed-grid-section>
   </div>
 </div>

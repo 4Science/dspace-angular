@@ -46,11 +46,15 @@
 
   .pad-left {
     padding-left: 7%;
-    &.pad-title {
-      padding-left: calc(7% + 3rem);
-    }
   }
   .pad-right {
     padding-right: 7%;
+  }
+
+  .pad-left-title {
+    padding-left: calc(7% + 3rem);
+  }
+  .pad-right-title {
+    padding-right: calc(7% + 3rem);
   }
 }

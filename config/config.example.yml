@@ -343,7 +343,7 @@ layout:
           href: ''
 
 cms:
-  metadataList: ['cris.cms.home-header', 'cris.cms.home-news', 'cris.cms.footer']
+  metadataList: ['cris.cms.home-header', 'cris.cms.home-news', 'cris.cms.footer', 'cris.cms.grid-component-badge', 'cris.cms.grid-component-title', 'cris.cms.grid-component-abstract']
 
 addThisPlugin:
   siteId: ''

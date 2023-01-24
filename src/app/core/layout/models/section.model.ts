@@ -66,6 +66,11 @@ export interface TopSection extends SectionComponent {
   showAllResults: boolean;
 }
 
+export interface GridSection extends SectionComponent {
+  discoveryConfigurationName: string;
+  'main-content-link': string;
+}
+
 export interface SearchSection extends SectionComponent {
   discoveryConfigurationName: string;
   componentType: 'search';

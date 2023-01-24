@@ -531,6 +531,11 @@ export class DefaultAppConfig implements AppConfig {
       'cris.cms.home-header',
       'cris.cms.home-news',
       'cris.cms.footer',
+      'cris.cms.grid-component-badge',
+      'cris.cms.grid-component-title',
+      'cris.cms.grid-component-subtitle',
+      'cris.cms.grid-component-abstract',
+      'cris.cms.grid-component-link'
     ]
   };
 

@@ -2813,6 +2813,9 @@
   // TODO New key - Add a translation
   "explore.facet-section.title" : "Discover",
 
+  // "explore.grid-section.seeAll": "See all"
+  "explore.grid-section.seeAll": "Vedi tutti",
+
   // "explore.index.all" : "All",
   // TODO New key - Add a translation
   "explore.index.all" : "All",
@@ -3397,6 +3400,18 @@
 
   // "grant-request-copy.success": "Successfully granted item request",
   "grant-request-copy.success": "Richiesta dell'item concessa con successo",
+
+
+  // "grid.component.badge": "Percorsi",
+  "grid.component.badge": "Percorsi",
+  // "grid.component.title": "Alla scoperta...",
+  "grid.component.title": "Alla scoperta...",
+  // "grid.component.subtitle": "...nuovi modi per esplorare le nostre risorse digitali.",
+  "grid.component.subtitle": "...nuovi modi per esplorare le nostre risorse digitali.",
+  // "grid.component.abstract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "grid.component.abstract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  // "grid.component.link": "/explore/paths",
+  "grid.component.link": "/explore/paths",
 
 
   // "health.breadcrumbs": "Health",
@@ -9978,4 +9993,3 @@
 
 
 }
-

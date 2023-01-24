@@ -37,6 +37,9 @@
                               [sectionId]="sectionId"
                               [textRowSection]="sectionComponent"
                               [site]="$any(sectionComponent).contentType === 'text-metadata' ? site$.value : null"></ds-themed-text-section>
+      <ds-themed-grid-section *ngSwitchCase="'grid'"
+                              [sectionId]="sectionId" [site]="site$.value"
+                              [gridSection]="sectionComponent"></ds-themed-grid-section>
     </div>
   </div>
 </div>
