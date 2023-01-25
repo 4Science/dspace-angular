@@ -5,6 +5,7 @@ import { SharedModule } from '../../app/shared/shared.module';
 import { HomeNewsComponent } from './app/home-page/home-news/home-news.component';
 import { NavbarComponent } from './app/navbar/navbar.component';
 import { HeaderComponent } from './app/header/header.component';
+import { FooterComponent } from './app/footer/footer.component';
 import { HeaderNavbarWrapperComponent } from './app/header-nav-wrapper/header-navbar-wrapper.component';
 import { SearchModule } from '../../app/shared/search/search.module';
 import { RootModule } from '../../app/root.module';
@@ -25,6 +26,7 @@ const ENTRY_COMPONENTS = [];
 const DECLARATIONS = [
   ...ENTRY_COMPONENTS,
   HomeNewsComponent,
+  FooterComponent,
   HeaderComponent,
   HeaderNavbarWrapperComponent,
   NavbarComponent,
