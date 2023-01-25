@@ -2805,6 +2805,8 @@
   // TODO New key - Add a translation
   "explore.counters-section.project_funding" : "Projects",
 
+  "explore.text-section.counter.header" : "I nostri numeri",
+
   // "explore.facet-section.title" : "Discover",
   // TODO New key - Add a translation
   "explore.facet-section.title" : "Discover",
@@ -3095,6 +3097,36 @@
 
   // "footer.link.feedback":"Send Feedback",
   "footer.link.feedback": "Invia Feedback",
+
+  // "footer.involved-institution":"Institutions involved",
+  "footer.involved-institution":"Istituzioni Coinvolte",
+
+  // "footer.information":"Information",
+  "footer.information":"Informazioni",
+
+  // "footer.general-information":"General information",
+  "footer.general-information":"Informazioni generali",
+
+  // "footer.offer-service":"offered services",
+  "footer.offer-service":"servizi offerti",
+
+  // "footer.history-digital":"History of the digital LID",
+  "footer.history-digital":"Cronistoria della digital LID",
+
+  // "footer.org-structure":"organizational structure",
+  "footer.org-structure":"struttura organizzativa",
+
+  // "footer.contact":"Contacts",
+  "footer.contact":"Contatti",
+
+  // "footer.terms":"Terms of Use",
+  "footer.terms":"Condizioni d'uso",
+
+  // "footer.made-info": "Made with DSpace-GLAM - Extension maintained and optimized by 4Science",
+  "footer.made-info": "Realizzato con DSpace-GLAM - Estensione manutenuta e ottimizzata da 4Science",
+
+
+
 
 
 
