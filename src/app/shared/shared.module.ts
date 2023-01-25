@@ -67,6 +67,7 @@ import {
 import { ViewModeSwitchComponent } from './view-mode-switch/view-mode-switch.component';
 import { VarDirective } from './utils/var.directive';
 import { AuthNavMenuComponent } from './auth-nav-menu/auth-nav-menu.component';
+import { ThemedAuthNavMenuComponent } from './auth-nav-menu/themed-auth-nav-menu.component';
 import { LogOutComponent } from './log-out/log-out.component';
 import { DragClickDirective } from './utils/drag-click.directive';
 import { TruncatePipe } from './utils/truncate.pipe';
@@ -113,6 +114,7 @@ import { CapitalizePipe } from './utils/capitalize.pipe';
 import { ObjectKeysPipe } from './utils/object-keys-pipe';
 import { AuthorityConfidenceStateDirective } from './authority-confidence/authority-confidence-state.directive';
 import { LangSwitchComponent } from './lang-switch/lang-switch.component';
+import { ThemedLangSwitchComponent } from './lang-switch/themed-lang-switch.component';
 import {
   PlainTextMetadataListElementComponent
 } from './object-list/metadata-representation-list-element/plain-text/plain-text-metadata-list-element.component';
@@ -298,6 +300,7 @@ import { RelationshipsListComponent } from './object-list/relationships-list/rel
 import { RelationshipsItemsActionsComponent } from './object-list/relationships-list/relationships-items-actions/relationships-items-actions.component';
 import { RelationshipsItemsListPreviewComponent } from './object-list/relationships-list/relationships-items-list-preview/relationships-items-list-preview.component';
 import { SearchNavbarComponent } from '../search-navbar/search-navbar.component';
+import { ThemedSearchNavbarComponent } from '../search-navbar/themed-search-navbar.component';
 import {
   ItemVersionsSummaryModalComponent
 } from './item/item-versions/item-versions-summary-modal/item-versions-summary-modal.component';
@@ -384,12 +387,14 @@ const COMPONENTS = [
   // put shared components here
   AlertComponent,
   AuthNavMenuComponent,
+  ThemedAuthNavMenuComponent,
   UserMenuComponent,
   ChipsComponent,
   DsSelectComponent,
   ErrorComponent,
   FileSectionComponent,
   LangSwitchComponent,
+  ThemedLangSwitchComponent,
   LoadingComponent,
   LogInComponent,
   LogOutComponent,
@@ -509,6 +514,7 @@ const COMPONENTS = [
   CollectionSidebarSearchListElementComponent,
   CommunitySidebarSearchListElementComponent,
   SearchNavbarComponent,
+  ThemedSearchNavbarComponent,
   ScopeSelectorModalComponent,
   ItemExportComponent,
   ItemExportAlertComponent,
@@ -523,7 +529,6 @@ const COMPONENTS = [
   SearchChartComponent,
   SearchChartFilterComponent,
   VocabularyExternalSourceComponent,
-  SearchNavbarComponent,
   RelationshipsListComponent,
   RelationshipsItemsActionsComponent,
   RelationshipsItemsListPreviewComponent,

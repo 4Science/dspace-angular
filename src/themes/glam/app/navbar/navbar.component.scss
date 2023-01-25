@@ -3,7 +3,10 @@
   height: 80px;
   background-color: #ddd;
   border-radius: 100%;
-  background-image: url("../../assets/images/navbar-logo.png");
+  background-image: url("/assets/images/dspace-glam-logo.png");
+  background-repeat: no-repeat;
+  background-size: 71px 58px;
+  background-position: 5px 8px;
 }
 
 .new-navbar {
@@ -14,30 +17,11 @@
       display: flex;
       width: 100%;
     }
-
-    .top-search {
-      .form-control {
-        box-shadow: none;
-        border: solid 3px #5a5a5a;
-        border-right: 0 !important;
-        border-radius: 0;
-      }
-
-      .btn-outline-secondary {
-        border: solid 3px #5a5a5a;
-        border-left: 0;
-        box-shadow: none;
-        border-radius: 0;
-        font-size: 13px;
-      }
-    }
   }
 
   .nav-item {
     a {
       text-transform: uppercase;
-      padding-left: 10px;
-      padding-right: 10px;
       font-size: 14px;
       color: #676c71;
 
