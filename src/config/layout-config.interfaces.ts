@@ -44,6 +44,7 @@ export interface CrisLoadMoreConfig extends Config {
 export interface CrisLayoutConfig extends Config {
   urn: UrnConfig[];
   crisRef: CrisRefConfig[];
+  crisRefStyleMetadata: string;
   itemPage: CrisItemPageConfig;
   metadataBox: CrisLayoutMetadataBoxConfig;
 }
