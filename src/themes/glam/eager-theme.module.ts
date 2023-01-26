@@ -5,19 +5,26 @@ import { SharedModule } from '../../app/shared/shared.module';
 import { HomeNewsComponent } from './app/home-page/home-news/home-news.component';
 import { NavbarComponent } from './app/navbar/navbar.component';
 import { HeaderComponent } from './app/header/header.component';
+import { FooterComponent } from './app/footer/footer.component';
 import { HeaderNavbarWrapperComponent } from './app/header-nav-wrapper/header-navbar-wrapper.component';
 import { SearchModule } from '../../app/shared/search/search.module';
 import { RootModule } from '../../app/root.module';
 import { NavbarModule } from '../../app/navbar/navbar.module';
 import { ExploreModule } from '../../app/shared/explore/explore.module';
-import { ExplorePageComponent } from "./app/explore-page/explore-page.component";
-import { HomePageComponent } from "./app/home-page/home-page.component";
-import { HomePageModule } from "../../app/home-page/home-page.module";
-import { StatisticsModule } from "../../app/statistics/statistics.module";
-import { OpenaireModule } from "../../app/openaire/openaire.module";
+import { ExplorePageComponent } from './app/explore-page/explore-page.component';
+import { HomePageComponent } from './app/home-page/home-page.component';
+import { HomePageModule } from '../../app/home-page/home-page.module';
+import { StatisticsModule } from '../../app/statistics/statistics.module';
+import { OpenaireModule } from '../../app/openaire/openaire.module';
 import { SearchComponent } from './app/shared/search/search.component';
 import { TopSectionComponent } from './app/shared/explore/section-component/top-section/top-section.component';
 import { BrowseMostElementsComponent } from './app/browse-most-elements/browse-most-elements.component';
+import { CountersSectionComponent } from './app/shared/explore/section-component/counters-section/counters-section.component';
+import { TextSectionComponent } from './app/shared/explore/section-component/text-section/text-section.component';
+import { MarkdownViewerModule } from 'src/app/shared/markdown-viewer/markdown-viewer.module';
+import { LangSwitchComponent } from './app/shared/lang-switch/lang-switch.component';
+import { AuthNavMenuComponent } from './app/shared/auth-nav-menu/auth-nav-menu.component';
+import { SearchNavbarComponent } from './app/search-navbar/search-navbar.component';
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
  * This will ensure that decorator gets picked up when the app loads
@@ -27,6 +34,7 @@ const ENTRY_COMPONENTS = [];
 const DECLARATIONS = [
   ...ENTRY_COMPONENTS,
   HomeNewsComponent,
+  FooterComponent,
   HeaderComponent,
   HeaderNavbarWrapperComponent,
   NavbarComponent,
@@ -34,7 +42,12 @@ const DECLARATIONS = [
   HomePageComponent,
   SearchComponent,
   TopSectionComponent,
-  BrowseMostElementsComponent
+  BrowseMostElementsComponent,
+  CountersSectionComponent,
+  TextSectionComponent,
+  LangSwitchComponent,
+  AuthNavMenuComponent,
+  SearchNavbarComponent
 ];
 
 @NgModule({
@@ -48,7 +61,8 @@ const DECLARATIONS = [
     ExploreModule,
     HomePageModule,
     StatisticsModule,
-    OpenaireModule
+    OpenaireModule,
+    MarkdownViewerModule
   ],
   declarations: DECLARATIONS,
   providers: [

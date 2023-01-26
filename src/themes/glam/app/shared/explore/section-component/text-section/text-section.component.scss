@@ -1,0 +1,18 @@
+:host ::ng-deep {
+  display: block;
+  margin-top: calc(var(--ds-content-spacing) * -1);
+
+  .jumbotron {
+    background-color: transparent;
+  }
+
+  a {
+    color: var(--ds-home-news-link-color);
+
+    @include hover {
+      color: var(--ds-home-news-link-hover-color);
+    }
+  }
+}
+
+

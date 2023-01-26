@@ -1,0 +1,15 @@
+<div *ngIf="textRowSection">
+  <div [ngClass]="{'container' : textRowSection.contentType != 'text-metadata'}">
+    <div *ngIf="textRowSection.contentType == 'image'"><img [src]="textRowSection.content" style="width: 100%"></div>
+    <div *ngIf="textRowSection.contentType == 'text-key'">{{ 'explore.text-section.' + textRowSection.content | translate }}</div>
+    <div *ngIf="textRowSection.contentType == 'text-raw'">{{ 'explore.text-section.' + textRowSection.content }}</div>
+    <ds-markdown-viewer *ngIf="textRowSection.contentType == 'text-metadata' && content && textRowSection.content !== 'counter.header'"
+                        data-test="ds-markdown-viewer"
+                        [value]="content"></ds-markdown-viewer>
+    <div *ngIf="textRowSection.contentType == 'text-metadata' && textRowSection.content === 'counter.header'">
+        <h1 class="text-dark" style="font-weight: 600;">
+          {{ 'explore.text-section.counter.header' | translate }}
+        </h1>
+    </div>
+  </div>
+</div>

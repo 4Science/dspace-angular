@@ -1987,6 +1987,8 @@
 
   "explore.counters-section.project_funding" : "Projects",
 
+  "explore.text-section.counter.header" : "Our Numbers",
+
   "explore.facet-section.title" : "Discover",
 
   "explore.index.all" : "All",
@@ -2171,6 +2173,23 @@
 
   "footer.link.feedback":"Send Feedback",
 
+  "footer.involved-institution":"Institutions involved",
+
+  "footer.information":"Information",
+
+  "footer.general-information":"General information",
+
+  "footer.offer-service":"Offered services",
+
+  "footer.history-digital":"History of the digital LID",
+
+  "footer.org-structure":"organizational structure",
+
+  "footer.contact":"Contacts",
+
+  "footer.terms":"Terms of Use",
+
+  "footer.made-info": "Made with DSpace-GLAM - Extension maintained and optimized by 4Science",
 
 
   "forgot-email.form.header": "Forgot Password",
@@ -6245,7 +6264,7 @@
 
 
 
-  "title": "DSpace Cris",
+  "title": "DSpace GLAM",
 
 
 
