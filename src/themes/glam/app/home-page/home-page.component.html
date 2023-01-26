@@ -1,6 +1,10 @@
-<div class="container"><div *ngFor="let sectionComponents of ( sectionComponentRows | async )" class="row mb-3">
+<div class="container">
+  <div *ngFor="let sectionComponents of ( sectionComponentRows | async )" class="row mb-3">
     <div *ngFor="let sectionComponent of sectionComponents" [ngSwitch]="sectionComponent.componentType"
          [ngClass]="sectionComponent.style">
+      <ds-themed-top-section *ngSwitchCase="'top'"
+                             [sectionId]="sectionId"
+                             [topSection]="sectionComponent"></ds-themed-top-section>
       <ds-themed-counters-section *ngSwitchCase="'counters'"
                                   [sectionId]="sectionId"
                                   [countersSection]="sectionComponent"></ds-themed-counters-section>

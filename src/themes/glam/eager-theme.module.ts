@@ -17,6 +17,8 @@ import { HomePageModule } from '../../app/home-page/home-page.module';
 import { StatisticsModule } from '../../app/statistics/statistics.module';
 import { OpenaireModule } from '../../app/openaire/openaire.module';
 import { SearchComponent } from './app/shared/search/search.component';
+import { TopSectionComponent } from './app/shared/explore/section-component/top-section/top-section.component';
+import { BrowseMostElementsComponent } from './app/browse-most-elements/browse-most-elements.component';
 import { CountersSectionComponent } from './app/shared/explore/section-component/counters-section/counters-section.component';
 import { TextSectionComponent } from './app/shared/explore/section-component/text-section/text-section.component';
 import { MarkdownViewerModule } from 'src/app/shared/markdown-viewer/markdown-viewer.module';
@@ -39,6 +41,8 @@ const DECLARATIONS = [
   ExplorePageComponent,
   HomePageComponent,
   SearchComponent,
+  TopSectionComponent,
+  BrowseMostElementsComponent,
   CountersSectionComponent,
   TextSectionComponent,
   LangSwitchComponent,
