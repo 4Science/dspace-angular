@@ -20,6 +20,9 @@ import { SearchComponent } from './app/shared/search/search.component';
 import { CountersSectionComponent } from './app/shared/explore/section-component/counters-section/counters-section.component';
 import { TextSectionComponent } from './app/shared/explore/section-component/text-section/text-section.component';
 import { MarkdownViewerModule } from 'src/app/shared/markdown-viewer/markdown-viewer.module';
+import { LangSwitchComponent } from './app/shared/lang-switch/lang-switch.component';
+import { AuthNavMenuComponent } from './app/shared/auth-nav-menu/auth-nav-menu.component';
+import { SearchNavbarComponent } from './app/search-navbar/search-navbar.component';
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
  * This will ensure that decorator gets picked up when the app loads
@@ -37,7 +40,10 @@ const DECLARATIONS = [
   HomePageComponent,
   SearchComponent,
   CountersSectionComponent,
-  TextSectionComponent
+  TextSectionComponent,
+  LangSwitchComponent,
+  AuthNavMenuComponent,
+  SearchNavbarComponent
 ];
 
 @NgModule({

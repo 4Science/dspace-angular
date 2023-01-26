@@ -1,0 +1,20 @@
+<form class="input-group" [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)" autocomplete="on">
+  <input #searchInput
+         name="query"
+         formControlName="query"
+         type="text"
+         [attr.aria-label]="('nav.search' | translate)"
+         placeholder="{{'nav.search' | translate}}"
+         class="form-control"
+         [attr.data-test]="'header-search-box' | dsBrowserOnly">
+  <div class="input-group-append">
+    <button
+      class="btn btn-outline-secondary"
+      type="button"
+      (click)="onSubmit(searchForm.value)"
+      [attr.data-test]="'header-search-icon' | dsBrowserOnly">
+      <i class="fa fa-search fa-lg fa-fw"></i>
+    </button>
+  </div>
+</form>
+

@@ -5130,7 +5130,11 @@
   // "menu.section.communities_and_collections": "Communities & Collections",
   "menu.section.communities_and_collections": "Community & Collezioni",
 
+  "menu.section.explore_sectionfonds" : "Fondi",
+  "menu.section.explore_sectionjournalfonds" : "Fondi rivista",
 
+  "menu.section.explore_sectionaggregations" : "Collezioni",
+  "menu.section.explore_sectiondocuments" : "Documenti e altri materiali",
 
   // "menu.section.control_panel": "Control Panel",
   "menu.section.control_panel": "Pannello di controllo",
