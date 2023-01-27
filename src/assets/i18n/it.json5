@@ -2805,6 +2805,8 @@
   // TODO New key - Add a translation
   "explore.counters-section.project_funding" : "Projects",
 
+  "explore.carousel.view-more": "Approfondisci",
+
   "explore.text-section.counter.header" : "I nostri numeri",
 
   // "explore.facet-section.title" : "Discover",
@@ -9976,3 +9978,4 @@
 
 
 }
+

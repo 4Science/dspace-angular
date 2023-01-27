@@ -19,12 +19,20 @@ import { OpenaireModule } from '../../app/openaire/openaire.module';
 import { SearchComponent } from './app/shared/search/search.component';
 import { TopSectionComponent } from './app/shared/explore/section-component/top-section/top-section.component';
 import { BrowseMostElementsComponent } from './app/browse-most-elements/browse-most-elements.component';
-import { CountersSectionComponent } from './app/shared/explore/section-component/counters-section/counters-section.component';
+import {
+  CountersSectionComponent
+} from './app/shared/explore/section-component/counters-section/counters-section.component';
 import { TextSectionComponent } from './app/shared/explore/section-component/text-section/text-section.component';
 import { MarkdownViewerModule } from 'src/app/shared/markdown-viewer/markdown-viewer.module';
 import { LangSwitchComponent } from './app/shared/lang-switch/lang-switch.component';
 import { AuthNavMenuComponent } from './app/shared/auth-nav-menu/auth-nav-menu.component';
 import { SearchNavbarComponent } from './app/search-navbar/search-navbar.component';
+import { CarouselComponent } from './app/carousel/carousel.component';
+import { CarouselModule } from '../../app/shared/carousel/carousel.module';
+import {
+  CarouselSectionComponent
+} from './app/shared/explore/section-component/carousel-section/carousel-section.component';
+
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
  * This will ensure that decorator gets picked up when the app loads
@@ -47,7 +55,9 @@ const DECLARATIONS = [
   TextSectionComponent,
   LangSwitchComponent,
   AuthNavMenuComponent,
-  SearchNavbarComponent
+  SearchNavbarComponent,
+  CarouselComponent,
+  CarouselSectionComponent
 ];
 
 @NgModule({
@@ -62,6 +72,7 @@ const DECLARATIONS = [
     HomePageModule,
     StatisticsModule,
     OpenaireModule,
+    CarouselModule,
     MarkdownViewerModule
   ],
   declarations: DECLARATIONS,
