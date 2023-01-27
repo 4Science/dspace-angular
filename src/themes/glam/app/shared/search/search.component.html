@@ -18,8 +18,8 @@
     <div class="row">
       <div class="col-md-3">
         <h1 class="text-dark h2">Filtri</h1>
-        <div class="mt-4">
-          <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+        <div class="mt-4 new-accordian">
+          <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-3">
             <ngb-panel title="Autore" class="accordion-button">
               <ng-template ngbPanelContent>
                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
@@ -27,10 +27,7 @@
                 officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
               </ng-template>
             </ngb-panel>
-            <ngb-panel>
-              <ng-template ngbPanelTitle>
-                Data di publicaztion
-              </ng-template>
+            <ngb-panel title="Data Di" class="accordion-button">
               <ng-template ngbPanelContent>
                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
                 squid. 3 wolf moon
@@ -47,36 +44,37 @@
             <ngb-panel title="Fondo">
               <ng-template ngbPanelContent>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                  <label class="form-check-label" for="flexCheckDefault">
+                  <input class="form-check-input new-text" type="checkbox" value="" id="flexCheckDefault">
+                  <label class="form-check-label new-text" for="flexCheckDefault">
                     Fondo 1
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                  <label class="form-check-label" for="flexCheckDefault1">
+                  <input class="form-check-input new-text" type="checkbox" value="" id="flexCheckDefault1">
+                  <label class="form-check-label new-text" for="flexCheckDefault1">
                     Fondo 2
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
-                  <label class="form-check-label" for="flexCheckDefault2">
+                  <input class="form-check-input new-text" type="checkbox" value="" id="flexCheckDefault2">
+                  <label class="form-check-label new-text" for="flexCheckDefault2">
                     Fondo 3
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3">
-                  <label class="form-check-label" for="flexCheckDefault3">
+                  <input class="form-check-input new-text" type="checkbox" value="" id="flexCheckDefault3">
+                  <label class="form-check-label new-text" for="flexCheckDefault3">
                     Fondo 4
                   </label>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4">
-                  <label class="form-check-label" for="flexCheckDefault4">
-                    Fondo 5
-                  </label>
-                </div>
               </ng-template>
+            </ngb-panel>
+            <ngb-panel title="..." class="accordion-button">
+              <ng-template ngbPanelContent>
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                squid. 3 wolf moon
+                officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+                eiusmod. </ng-template>
             </ngb-panel>
           </ngb-accordion>
         </div>
@@ -85,7 +83,7 @@
         </div>
         <div class="mt-4">
           <h1 class="text-dark mb-4 h2">Impostazioni</h1>
-          <div class="p-4">
+          <div class="p-4 sider-div">
             <h5 class="text-muted mb-4">Ordinari Per</h5>
             <select class="form-control">
               <option> Titolo cresscente </option>
@@ -96,7 +94,7 @@
           </div>
         </div>
         <div class="mt-4">
-          <div class="p-4">
+          <div class="p-4 sider-div">
             <h5 class="text-muted mb-4">Resultari per pagina</h5>
             <select class="form-control">
               <option>1</option>

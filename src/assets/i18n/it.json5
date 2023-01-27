@@ -2807,6 +2807,8 @@
 
   "explore.carousel.view-more": "Approfondisci",
 
+  "explore.text-section.counter.header" : "I nostri numeri",
+
   // "explore.facet-section.title" : "Discover",
   // TODO New key - Add a translation
   "explore.facet-section.title" : "Discover",
@@ -2861,7 +2863,7 @@
 
   // "explore.index.dc.date.accessioned" : "Recent Additions",
   // TODO New key - Add a translation
-  "explore.index.dc.date.accessioned" : "Recent Additions",
+  "explore.index.dc.date.accessioned" : "Nuove accessioni",
 
   // "explore.index.dc.title" : "Title",
   "explore.index.dc.title" : "Titolo",
@@ -3097,6 +3099,36 @@
 
   // "footer.link.feedback":"Send Feedback",
   "footer.link.feedback": "Invia Feedback",
+
+  // "footer.involved-institution":"Institutions involved",
+  "footer.involved-institution":"Istituzioni Coinvolte",
+
+  // "footer.information":"Information",
+  "footer.information":"Informazioni",
+
+  // "footer.general-information":"General information",
+  "footer.general-information":"Informazioni generali",
+
+  // "footer.offer-service":"offered services",
+  "footer.offer-service":"servizi offerti",
+
+  // "footer.history-digital":"History of the digital LID",
+  "footer.history-digital":"Cronistoria della digital LID",
+
+  // "footer.org-structure":"organizational structure",
+  "footer.org-structure":"struttura organizzativa",
+
+  // "footer.contact":"Contacts",
+  "footer.contact":"Contatti",
+
+  // "footer.terms":"Terms of Use",
+  "footer.terms":"Condizioni d'uso",
+
+  // "footer.made-info": "Made with DSpace-GLAM - Extension maintained and optimized by 4Science",
+  "footer.made-info": "Realizzato con DSpace-GLAM - Estensione manutenuta e ottimizzata da 4Science",
+
+
+
 
 
 
@@ -5100,7 +5132,11 @@
   // "menu.section.communities_and_collections": "Communities & Collections",
   "menu.section.communities_and_collections": "Community & Collezioni",
 
+  "menu.section.explore_sectionfonds" : "Fondi",
+  "menu.section.explore_sectionjournalfonds" : "Fondi rivista",
 
+  "menu.section.explore_sectionaggregations" : "Collezioni",
+  "menu.section.explore_sectiondocuments" : "Documenti e altri materiali",
 
   // "menu.section.control_panel": "Control Panel",
   "menu.section.control_panel": "Pannello di controllo",
@@ -9942,3 +9978,4 @@
 
 
 }
+

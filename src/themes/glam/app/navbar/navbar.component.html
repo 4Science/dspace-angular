@@ -1,23 +1,45 @@
-<nav [ngClass]="{'open': !(menuCollapsed | async)}" [@slideMobileNav]="!(windowService.isXsOrSm() | async) ? 'default' : ((menuCollapsed | async) ? 'collapsed' : 'expanded')"
-  class="navbar navbar-expand-md navbar-light p-0 navbar-container" role="navigation" [attr.aria-label]="'nav.main.description' | translate">
-  <div class="navbar-inner-container w-100 h-100" [class.container]="!(isXsOrSm$ | async)">
-    <a class="navbar-brand my-2" routerLink="/home">
-      <img src="assets/images/dspace-glam-logo.png" [attr.alt]="'menu.header.image.logo' | translate" />
-    </a>
+<nav class="navbar new-navbar navbar-expand-lg navbar-light">
+  <div class="container">
+    <div class="top-bar mb-3">
+      <a class="navbar-brand text-center" href="/home">
+        <div class="logo-circle mb-2"></div>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div id="collapsingNav" class="w-100 h-100">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 h-100">
-        <li *ngIf="(isXsOrSm$ | async) && (isAuthenticated$ | async)">
+      <div class="ml-auto right-container">
+
+        <ul class="navbar-nav ml-auto mb-auto mt-3">
+          <li>
+            <a class="nav-link" target="_blank" [href]="'https://' + mainSiteUrl">{{mainSiteUrl}}</a>
+          </li>
+          <li class="nav-item" *ngIf="mainSiteUrl">
+            <a class="nav-link" target="_blank" [href]="'https://' + mainSiteUrl">
+              <i class="fas fa-home fa-lg fa-fw"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <ds-themed-lang-switch></ds-themed-lang-switch>
+          </li>
+          <li class="nav-item">
+            <ds-themed-auth-nav-menu></ds-themed-auth-nav-menu>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav mb-3">
+          <li *ngIf="(isXsOrSm$ | async) && (isAuthenticated$ | async)" class="nav-item">
             <ds-user-menu [inExpandableNavbar]="true"></ds-user-menu>
-        </li>
-        <ng-container *ngFor="let section of (sections | async)">
-          <ng-container *ngComponentOutlet="(sectionMap$ | async).get(section.id)?.component; injector: (sectionMap$ | async).get(section.id)?.injector;"></ng-container>
-        </ng-container>
-      </ul>
+          </li>
+          <ng-container *ngFor="let section of (sections | async)">
+            <ng-container *ngComponentOutlet="(sectionMap$ | async).get(section.id)?.component; injector: (sectionMap$ | async).get(section.id)?.injector;"></ng-container>
+          </ng-container>
+        </ul>
+      </div>
     </div>
-    <ds-search-navbar class="navbar-collapsed"></ds-search-navbar>
-    <ds-lang-switch class="navbar-collapsed"></ds-lang-switch>
-    <ds-auth-nav-menu class="navbar-collapsed"></ds-auth-nav-menu>
-    <ds-impersonate-navbar class="navbar-collapsed"></ds-impersonate-navbar>
+    <div>
+      <ds-themed-search-navbar></ds-themed-search-navbar>
+    </div>
   </div>
 </nav>

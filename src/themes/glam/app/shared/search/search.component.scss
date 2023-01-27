@@ -1,15 +1,3 @@
-.accordion-button:after {
-  flex-shrink: 0;
-  width: var(--bs-accordion-btn-icon-width);
-  height: var(--bs-accordion-btn-icon-width);
-  margin-left: auto;
-  content: "";
-  background-image: var(--bs-accordion-btn-icon);
-  background-repeat: no-repeat;
-  background-size: var(--bs-accordion-btn-icon-width);
-  transition: var(--bs-accordion-btn-icon-transition);
-}
-
 .card .card-header {
   padding: 0.25rem 0 !important;
   margin-bottom: 0;
@@ -18,7 +6,7 @@
 }
 
 .new-bg {
-  background-color: #a4b2bb;
+  background-color: #c2d1d9;
   padding: 0.25em 0.4em;
   font-size: 75%;
   font-weight: 700;
@@ -33,6 +21,11 @@
 .form-control.main-input {
   min-width: 330px;
 }
+
 h1, h4 {
   font-weight: 600;
+}
+
+.sider-div {
+  background-color: #f2f5f7;
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SearchComponent as BaseComponent } from "../../../../../app/shared/search/search.component";
+import { SearchComponent as BaseComponent } from '../../../../../app/shared/search/search.component';
 
 @Component({
   selector: 'ds-search',

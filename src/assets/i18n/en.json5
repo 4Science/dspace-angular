@@ -1989,6 +1989,8 @@
 
   "explore.carousel.view-more": "View More",
 
+  "explore.text-section.counter.header" : "Our Numbers",
+
   "explore.facet-section.title" : "Discover",
 
   "explore.index.all" : "All",
@@ -2016,7 +2018,7 @@
 
   "explore.index.dateissued" : "Date issued",
 
-  "explore.index.dc.date.accessioned" : "Recent Additions",
+  "explore.index.dc.date.accessioned" : "New accessions",
 
   "explore.index.dc.title" : "Title",
 
@@ -2173,6 +2175,23 @@
 
   "footer.link.feedback":"Send Feedback",
 
+  "footer.involved-institution":"Institutions involved",
+
+  "footer.information":"Information",
+
+  "footer.general-information":"General information",
+
+  "footer.offer-service":"Offered services",
+
+  "footer.history-digital":"History of the digital LID",
+
+  "footer.org-structure":"organizational structure",
+
+  "footer.contact":"Contacts",
+
+  "footer.terms":"Terms of Use",
+
+  "footer.made-info": "Made with DSpace-GLAM - Extension maintained and optimized by 4Science",
 
 
   "forgot-email.form.header": "Forgot Password",
@@ -6247,7 +6266,7 @@
 
 
 
-  "title": "DSpace Cris",
+  "title": "DSpace GLAM",
 
 
 
