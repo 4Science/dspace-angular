@@ -53,16 +53,16 @@
       border-radius: 4px;
     }
 
-    .arrow-class {
-        display: flex;
-        justify-content: space-between;
-        flex-direction: row;
-        justify-content: space-between;
-        margin-left: "auto";
-        width: 100%;
-        padding-left: 34px;
-        padding-right: 34px;
-        cursor: pointer;
+    .arrow-class-right {
+      padding-left: 34px;
+      padding-right: 51px;
+      cursor: pointer;
+    }
+
+    .arrow-class-left {
+      padding-left: 51px;
+      padding-right: 34px;
+      cursor: pointer;
     }
   }
 
@@ -76,6 +76,9 @@
     align-items: center;
     justify-content: center;
     display: flex;
+    img {
+      object-fit: cover;
+    }
   }
 
   .play-pause-button {
