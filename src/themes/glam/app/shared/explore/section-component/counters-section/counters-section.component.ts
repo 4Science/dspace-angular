@@ -3,7 +3,8 @@ import { CountersSectionComponent as BaseComponent} from '../../../../../../../a
 
 @Component({
   selector: 'ds-counters-section',
-  templateUrl: './counters-section.component.html'
+  templateUrl: './counters-section.component.html',
+  styleUrls: ['./counters-section.component.scss']
 })
 export class CountersSectionComponent extends BaseComponent {
 }
