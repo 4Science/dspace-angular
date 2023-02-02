@@ -1,9 +1,9 @@
 <div class="container">
   <div>
-    <h1 class="text-dark mb-5" *ngIf="topSection.titleKey">
+    <h1 class="text-dark mb-5 font-weight-bold" *ngIf="topSection.titleKey">
       {{ "explore.index." + topSection.titleKey | translate }}
     </h1>
-    <h1 class="text-dark mb-5" *ngIf="!topSection.titleKey">
+    <h1 class="text-dark mb-5 font-weight-bold" *ngIf="!topSection.titleKey">
       {{ "explore.index." + topSection.sortField | translate }}
     </h1>
   </div>
