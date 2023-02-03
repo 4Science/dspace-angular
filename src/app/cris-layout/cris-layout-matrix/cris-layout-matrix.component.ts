@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input, Renderer2, ViewChild } from '@angular/core';
 
 import { CrisLayoutTab } from '../../core/layout/models/tab.model';
 import { Item } from '../../core/shared/item.model';
@@ -8,7 +8,7 @@ import { Item } from '../../core/shared/item.model';
   templateUrl: './cris-layout-matrix.component.html',
   styleUrls: ['./cris-layout-matrix.component.scss']
 })
-export class CrisLayoutMatrixComponent {
+export class CrisLayoutMatrixComponent implements AfterViewInit {
 
   /**
    * Tabs to render
@@ -29,6 +29,15 @@ export class CrisLayoutMatrixComponent {
    * A boolean representing if to use an internal padding for the cells
    */
   @Input() showCellPadding = true;
+
+  @ViewChild('imageCard', {static: true}) imageCard;
+
+  constructor(private renderer: Renderer2) {
+  }
+
+  ngAfterViewInit(): void {
+    this.renderer.setStyle(this.imageCard.nativeElement, 'background-image', `url('/assets/images/replacement_image.svg')`);
+  }
 
   /**
    * Check if style contains 'col' or 'col-x'
