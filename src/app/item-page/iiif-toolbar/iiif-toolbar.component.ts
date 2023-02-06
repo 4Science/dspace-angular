@@ -41,11 +41,13 @@ export class IIIFToolbarComponent implements OnInit {
   }
 
   private getQueryParams() {
-    var canvasId = this.bitstream?.metadata[`${this.MD_CANVASID}`][0]?.value;
-    if (canvasId == null || canvasId == 'null') {
-      canvasId = this.bitstream?.uuid;
+    var canvasIdMetadata = this.bitstream?.metadata[`${this.MD_CANVASID}`];
+    if (canvasIdMetadata != null && canvasIdMetadata.length > 0) {
+      return { [`${this.MD_CANVASID_NAME}`]: canvasIdMetadata[0].value };
     }
-    return { [`${this.MD_CANVASID_NAME}`]: canvasId };
+
+    // default case: return bitstream identifier
+    return { [`${this.MD_CANVASID_NAME}`]: this.bitstream?.uuid };
   }
 
   openMiradorViewer() {
