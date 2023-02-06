@@ -1,10 +1,10 @@
 <div class="bg-light py-5">
-  <div class="container">
+  <div class="top-section-container">
     <div>
-      <h1 class="text-dark mb-5 font-weight-bold" *ngIf="topSection.titleKey">
+      <h1 class="text-dark mb-5 pl-5 display-4 font-weight-bold" *ngIf="topSection.titleKey">
         {{ "explore.index." + topSection.titleKey | translate }}
       </h1>
-      <h1 class="text-dark mb-5 font-weight-bold" *ngIf="!topSection.titleKey">
+      <h1 class="text-dark mb-5 pl-5 display-4 font-weight-bold" *ngIf="!topSection.titleKey">
         {{ "explore.index." + topSection.sortField | translate }}
       </h1>
     </div>

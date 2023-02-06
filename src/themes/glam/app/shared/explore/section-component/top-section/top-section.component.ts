@@ -6,7 +6,8 @@ import { TopSectionComponent as BaseComponent} from '../../../../../../../app/sh
  */
 @Component({
   selector: 'ds-top-section',
-  templateUrl: './top-section.component.html'
+  templateUrl: './top-section.component.html',
+  styleUrls: ['./top-section.component.scss']
 })
 export class TopSectionComponent extends BaseComponent {
 }
