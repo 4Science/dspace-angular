@@ -10,7 +10,6 @@
     <ds-themed-text-section *ngSwitchCase="'text-row'"
                             [sectionId]="sectionId"
                             [textRowSection]="sectionComponent"
-                            [ngClass]="{'justify-content-center align-items-center d-flex flex-column h-100' : sectionComponent.content === 'counter.header'}"
                             [site]="$any(sectionComponent).contentType === 'text-metadata' ? site$.value : null"></ds-themed-text-section>
     <ds-themed-carousel-section *ngSwitchCase="'carousel'"
                                 [sectionId]="sectionId"
