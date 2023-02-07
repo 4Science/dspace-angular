@@ -14,11 +14,8 @@ import { Bitstream } from '../../core/shared/bitstream.model';
 })
 export class IIIFToolbarComponent implements OnInit {
 
-  private readonly MD_CANVASINDEX = 'bitstream.iiif.canvasindex';
-  private readonly MD_BITSTREAMS_MAP = [{
-    param: 'canvasId',
-    metadata: this.MD_CANVASINDEX
-  }];
+  private readonly MD_CANVASID = 'bitstream.iiif.canvasid';
+  private readonly MD_CANVASID_NAME = 'canvasId';
 
   @Input()
   item: Item;
@@ -44,10 +41,13 @@ export class IIIFToolbarComponent implements OnInit {
   }
 
   private getQueryParams() {
-    return this.MD_BITSTREAMS_MAP
-      .filter(({metadata}) => this.bitstream?.metadata[`${metadata}`]?.length > 0)
-      .map(({param,  metadata}) => ({ [`${param}`]: this.bitstream?.metadata[`${metadata}`][0]?.value }))
-      .reduce((acc, curr) => ({ ...acc, ...curr }), {});
+    var canvasIdMetadata = this.bitstream?.metadata[`${this.MD_CANVASID}`];
+    if (canvasIdMetadata != null && canvasIdMetadata.length > 0) {
+      return { [`${this.MD_CANVASID_NAME}`]: canvasIdMetadata[0].value };
+    }
+
+    // default case: return bitstream identifier
+    return { [`${this.MD_CANVASID_NAME}`]: this.bitstream?.uuid };
   }
 
   openMiradorViewer() {
