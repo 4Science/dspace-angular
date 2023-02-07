@@ -1,0 +1,19 @@
+.dropdown-toggle::after {
+  display:none;
+}
+
+@media screen and (min-width: map-get($grid-breakpoints, md)) {
+  .dropdown-toggle {
+    &:hover, &focus {
+      color: var(--ds-header-icon-color-hover);
+    }
+  }
+}
+
+a {
+  font-size: 14px;
+
+  &:hover {
+    color: #000;
+  }
+}

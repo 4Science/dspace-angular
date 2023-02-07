@@ -1,0 +1,33 @@
+<div class="background-image-container">
+  <div class="container">
+    <div class="jumbotron jumbotron-fluid">
+      <ds-themed-text-section *ngIf="hasHomeNewsMetadata; else dsDefaultHomeNews" [sectionId]="'site'" [textRowSection]="homeNewsSection"
+                              [site]="(site$ | async)"></ds-themed-text-section>
+    </div>
+  </div>
+  <picture class="background-image">
+    <source type="image/webp" srcset="assets/dspace/images/banner.webp 2000w, assets/dspace/images/banner-half.webp 1200w, assets/dspace/images/banner-tall.webp 768w">
+    <source type="image/jpg" srcset="assets/dspace/images/banner.jpg 2000w, assets/dspace/images/banner-half.jpg 1200w, assets/dspace/images/banner-tall.jpg 768w">
+    <img alt="" [src]="'assets/dspace/images/banner.jpg'"/><!-- without the []="''" Firefox downloads both the fallback and the resolved image -->
+  </picture>
+  <small class="credits">Photo by <a href="https://www.pexels.com/@inspiredimages">@inspiredimages</a></small>
+</div>
+
+<ng-template #dsDefaultHomeNews>
+  <div class="d-flex flex-wrap">
+    <div>
+      <h1 class="display-3">DSpace-GLAM 7</h1>
+      <p class="lead">DSpace-GLAM is the first
+        <b>free and open-source extension</b> of DSpace for Cultural Heritage ever developed.</p>
+    </div>
+  </div>
+  <p>DSpace-GLAM has the institutional repository as its core component, providing high visibility online of the collected information
+    and objects. DSpace-GLAM broadens DSpace functionality and expands its data model while remaining aligned with its code
+    base.
+  </p>
+  <p>
+    DSpace-GLAM adopts and ensures compliance with international standards and practices to facilitate interoperability, data
+    transfer and sharing.
+  </p>
+
+</ng-template>

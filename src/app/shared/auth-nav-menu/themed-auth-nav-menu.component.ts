@@ -3,7 +3,7 @@ import { ThemedComponent } from '../theme-support/themed.component';
 import { AuthNavMenuComponent } from './auth-nav-menu.component';
 
 /**
- * Themed wrapper for {@link AuthNavMenuComponent}
+ Themed wrapper for {@link AuthNavMenuComponent}
  */
 @Component({
   selector: 'ds-themed-auth-nav-menu',

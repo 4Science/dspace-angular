@@ -2805,9 +2805,16 @@
   // TODO New key - Add a translation
   "explore.counters-section.project_funding" : "Projects",
 
+  "explore.carousel.view-more": "Approfondisci",
+
+  "explore.text-section.counter.header" : "I nostri numeri",
+
   // "explore.facet-section.title" : "Discover",
   // TODO New key - Add a translation
   "explore.facet-section.title" : "Discover",
+
+  // "explore.grid-section.seeAll": "See all"
+  "explore.grid-section.seeAll": "Vedi tutti",
 
   // "explore.index.all" : "All",
   // TODO New key - Add a translation
@@ -3099,6 +3106,36 @@
   // "footer.link.feedback":"Send Feedback",
   "footer.link.feedback": "Invia Feedback",
 
+  // "footer.involved-institution":"Institutions involved",
+  "footer.involved-institution":"Istituzioni Coinvolte",
+
+  // "footer.information":"Information",
+  "footer.information":"Informazioni",
+
+  // "footer.general-information":"General information",
+  "footer.general-information":"Informazioni generali",
+
+  // "footer.offer-service":"offered services",
+  "footer.offer-service":"servizi offerti",
+
+  // "footer.history-digital":"History of the digital LID",
+  "footer.history-digital":"Cronistoria della digital LID",
+
+  // "footer.org-structure":"organizational structure",
+  "footer.org-structure":"struttura organizzativa",
+
+  // "footer.contact":"Contacts",
+  "footer.contact":"Contatti",
+
+  // "footer.terms":"Terms of Use",
+  "footer.terms":"Condizioni d'uso",
+
+  // "footer.made-info": "Made with DSpace-GLAM - Extension maintained and optimized by 4Science",
+  "footer.made-info": "Realizzato con DSpace-GLAM - Estensione manutenuta e ottimizzata da 4Science",
+
+
+
+
 
 
   // "forgot-email.form.header": "Forgot Password",
@@ -3366,6 +3403,18 @@
 
   // "grant-request-copy.success": "Successfully granted item request",
   "grant-request-copy.success": "Richiesta dell'item concessa con successo",
+
+
+  // "grid.component.badge": "Percorsi",
+  "grid.component.badge": "Percorsi",
+  // "grid.component.title": "Alla scoperta...",
+  "grid.component.title": "Alla scoperta...",
+  // "grid.component.subtitle": "...nuovi modi per esplorare le nostre risorse digitali.",
+  "grid.component.subtitle": "...nuovi modi per esplorare le nostre risorse digitali.",
+  // "grid.component.abstract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "grid.component.abstract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  // "grid.component.link": "/explore/paths",
+  "grid.component.link": "/explore/paths",
 
 
   // "health.breadcrumbs": "Health",
@@ -5104,7 +5153,11 @@
   // "menu.section.communities_and_collections": "Communities & Collections",
   "menu.section.communities_and_collections": "Community & Collezioni",
 
+  "menu.section.explore_sectionfonds" : "Fondi",
+  "menu.section.explore_sectionjournalfonds" : "Fondi rivista",
 
+  "menu.section.explore_sectionaggregations" : "Collezioni",
+  "menu.section.explore_sectiondocuments" : "Documenti e altri materiali",
 
   // "menu.section.control_panel": "Control Panel",
   "menu.section.control_panel": "Pannello di controllo",

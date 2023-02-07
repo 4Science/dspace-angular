@@ -115,6 +115,7 @@ import { CapitalizePipe } from './utils/capitalize.pipe';
 import { ObjectKeysPipe } from './utils/object-keys-pipe';
 import { AuthorityConfidenceStateDirective } from './authority-confidence/authority-confidence-state.directive';
 import { LangSwitchComponent } from './lang-switch/lang-switch.component';
+import { ThemedLangSwitchComponent } from './lang-switch/themed-lang-switch.component';
 import {
   PlainTextMetadataListElementComponent
 } from './object-list/metadata-representation-list-element/plain-text/plain-text-metadata-list-element.component';
@@ -430,6 +431,7 @@ const COMPONENTS = [
   ErrorComponent,
   FileSectionComponent,
   LangSwitchComponent,
+  ThemedLangSwitchComponent,
   LoadingComponent,
   ThemedLoadingComponent,
   LogInComponent,
@@ -557,6 +559,7 @@ const COMPONENTS = [
   CollectionSidebarSearchListElementComponent,
   CommunitySidebarSearchListElementComponent,
   SearchNavbarComponent,
+  ThemedSearchNavbarComponent,
   ScopeSelectorModalComponent,
   ItemPageTitleFieldComponent,
   ThemedSearchNavbarComponent,
@@ -570,7 +573,6 @@ const COMPONENTS = [
   SearchChartComponent,
   SearchChartFilterComponent,
   VocabularyExternalSourceComponent,
-  SearchNavbarComponent,
   RelationshipsListComponent,
   RelationshipsItemsActionsComponent,
   RelationshipsItemsListPreviewComponent,

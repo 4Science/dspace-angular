@@ -1,0 +1,37 @@
+.logo-circle {
+  width: 160px;
+  height: 160px;
+  background-position: center;
+  background-color: #ddd;
+  border-radius: 100%;
+  background-image: url("/assets/images/dspace-glam-logo.svg");
+  background-repeat: no-repeat;
+}
+
+.new-navbar {
+  .container {
+    display: block;
+
+    .top-bar {
+      display: flex;
+      width: 100%;
+    }
+  }
+
+  .nav-item {
+    a {
+      text-transform: uppercase;
+      font-size: 14px;
+      color: #676c71;
+
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+}
+
+.right-container {
+  display: flex;
+  flex-direction: column;
+}

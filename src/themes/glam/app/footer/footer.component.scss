@@ -1,0 +1,52 @@
+.footer-section {
+    .footer-top {
+        padding: 25px 0;
+        border-top: solid 2px #cddce2;
+        border-bottom: solid 2px #cddce2;
+
+        .nav-item {
+            a {
+                padding-left: 0;
+                padding-right: 0;
+                font-size: 14px;
+                color: #676c71;
+
+                &:hover {
+                    color: #000;
+                }
+            }
+        }
+
+        .title {
+            text-transform: uppercase;
+        }
+        .border-lr{
+            border-left: solid 2px #cddce2;
+            border-right: solid 2px #cddce2;
+        }
+
+
+
+        .institution-img {
+            img {
+                width: 120px;
+            }
+        }
+    }
+
+    .footer-copyrights {
+        padding: 15px 0;
+        border-bottom: solid 2px #cddce2;
+        color: #676c71;
+
+        a {
+            color: #676c71;
+            text-decoration: none;
+            padding: 0 7px;
+
+            &:hover {
+                color: #000;
+            }
+        }
+    }
+}

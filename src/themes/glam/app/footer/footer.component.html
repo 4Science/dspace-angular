@@ -1,0 +1,71 @@
+<div class="footer-section">
+  <div *ngIf="showTopFooter" class="footer-top">
+    <ds-themed-text-section *ngIf="hasSiteFooterSections" [sectionId]="'site'" [site]="(site | async)"
+                            [textRowSection]=section></ds-themed-text-section>
+
+    <div *ngIf="!hasSiteFooterSections" class="container">
+      <div class="row">
+        <div class="col-5">
+          <h6 class="title text-center mb-4">{{'footer.involved-institution' | translate}}</h6>
+          <div class="institution-img text-center">
+            <ng-container *ngFor="let involvedInstitution of involvedInstitutions">
+              <a class="mr-lg-3 mr-md-3" [href]="involvedInstitution?.href" target="_blank">
+                <img class="mb-3 mb-lg-3 " [src]="involvedInstitution?.src || '../assets/images/replacement_image.svg'" alt=""/>
+              </a>
+            </ng-container>
+          </div>
+        </div>
+        <div class="col-7">
+          <div class="row h-100">
+            <div class="col-6 border-lr">
+              <div class="ml-md-5">
+                <h6 class="title mb-3">{{'footer.information' | translate}}</h6>
+                <ul class="navbar-nav mb-3">
+                  <li class="nav-item">
+                    <a class="nav-link" href="https://www.example.com/">{{'footer.general-information' | translate}}</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="https://www.example.com/">{{'footer.offer-service' | translate}}</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="https://www.example.com/">{{'footer.history-digital' | translate}}</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="https://www.example.com/">{{'footer.org-structure' | translate}}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-6 border-0">
+              <div class="ml-5">
+                <h6 class="title mb-3">{{'layout.i18n.link.default' | translate}}</h6>
+                <ul class="navbar-nav mb-3">
+                  <li class="nav-item">
+                    <a class="nav-link" href="https://www.4science.it/en/contact-us/" target="_blank">{{'footer.contact' | translate}}</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" routerLink="info/end-user-agreement">{{'footer.terms' | translate}}</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="https://dspaceglam7.4science.cloud/info/privacy" target="_blank">
+                      {{'footer.link.privacy-policy' | translate}}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyrights">
+    <div class="container">
+      <div class="d-flex">
+        <a routerLink="info/feedback">{{'footer.link.feedback' | translate}}</a>
+        <a href="javascript:void(0);" (click)="showCookieSettings()">{{'footer.link.cookies' | translate}}</a>
+        <p class="mb-0 ml-auto">{{'footer.made-info' | translate}}</p>
+      </div>
+    </div>
+  </div>
+</div>
