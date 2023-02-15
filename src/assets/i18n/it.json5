@@ -10604,6 +10604,102 @@
   //"browse.comcol.by.typeJF" : "Type",
   "browse.comcol.by.typeJF" : "Tipologia",
 
+  "browse.comcol.by.titleEvent": "Titolo",
+
+  "browse.comcol.by.titleAM": "Titolo",
+
+  "browse.comcol.by.titleFamily": "Titolo",
+
+  "browse.comcol.by.titlePlace": "Titolo",
+
+  "browse.comcol.by.titleN": "Titolo",
+
+  "browse.comcol.by.titleSP": "Titolo",
+
+  "browse.comcol.by.titleJI": "Titolo",
+
+  "browse.comcol.by.titlePath": "Titolo",
+
+  "browse.comcol.by.titleO": "Titolo",
+
+  "browse.comcol.by.titleC": "Titolo",
+
+  "browse.comcol.by.titleSM": "Titolo",
+
+  "browse.comcol.by.titlePicture": "Titolo",
+
+  "browse.comcol.by.dateissuedEvent": "Data",
+
+  "browse.comcol.by.subjectEvent": "Soggetto",
+
+  "browse.comcol.by.typeEvent": "Tipologia",
+
+  "browse.comcol.by.dateissuedAM": "Data",
+
+  "browse.comcol.by.subjectAM": "Soggetto",
+
+  "browse.comcol.by.typeAM": "Tipologia",
+
+  "browse.comcol.by.dateissuedFamily": "Data",
+
+  "browse.comcol.by.subjectFamily": "Soggetto",
+
+  "browse.comcol.by.typeFamily": "Tipologia",
+
+  "browse.comcol.by.dateissuedPlace": "Data",
+
+  "browse.comcol.by.subjectPlace": "Soggetto",
+
+  "browse.comcol.by.typePlace": "Tipologia",
+
+  "browse.comcol.by.dateissuedN": "Data",
+
+  "browse.comcol.by.subjectN": "Soggetto",
+
+  "browse.comcol.by.typeN": "Tipologia",
+
+  "browse.comcol.by.dateissuedSP": "Data",
+
+  "browse.comcol.by.subjectSP": "Soggetto",
+
+  "browse.comcol.by.typeSP": "Tipologia",
+
+  "browse.comcol.by.dateissuedJI": "Data",
+
+  "browse.comcol.by.subjectJI": "Soggetto",
+
+  "browse.comcol.by.typeJI": "Tipologia",
+
+  "browse.comcol.by.dateissuedPath": "Data",
+
+  "browse.comcol.by.subjectPath": "Soggetto",
+
+  "browse.comcol.by.typePath": "Tipologia",
+
+  "browse.comcol.by.dateissuedO": "Data",
+
+  "browse.comcol.by.subjectO": "Soggetto",
+
+  "browse.comcol.by.typeO": "Tipologia",
+
+  "browse.comcol.by.dateissuedC": "Data",
+
+  "browse.comcol.by.subjectC": "Soggetto",
+
+  "browse.comcol.by.typeC": "Tipologia",
+
+  "browse.comcol.by.dateissuedSM": "Data",
+
+  "browse.comcol.by.subjectSM": "Soggetto",
+
+  "browse.comcol.by.typeSM": "Tipologia",
+
+  "browse.comcol.by.dateissuedPicture": "Data",
+
+  "browse.comcol.by.subjectPicture": "Soggetto",
+
+  "browse.comcol.by.typePicture": "Tipologia",
+
   //"browse.metadata.dateissuedA" : "Date",
   "browse.metadata.dateissuedA" : "Data",
 
@@ -10675,6 +10771,102 @@
 
   //"browse.metadata.typeJF.breadcrumbs" : "Browse by Type",
   "browse.metadata.typeJF.breadcrumbs" : "Ricerca per Tipologia",
+
+  "browse.metadata.titleEvent.breadcrumbs": "Ricerca per Titolo",
+
+  "browse.metadata.titleAM.breadcrumbs": "Ricerca per Titolo",
+
+  "browse.metadata.titleFamily.breadcrumbs": "Ricerca per Titolo",
+
+  "browse.metadata.titlePlace.breadcrumbs": "Ricerca per Titolo",
+
+  "browse.metadata.titleN.breadcrumbs": "Ricerca per Titolo",
+
+  "browse.metadata.titleSP.breadcrumbs": "Ricerca per Titolo",
+
+  "browse.metadata.titleJI.breadcrumbs": "Ricerca per Titolo",
+
+  "browse.metadata.titlePath.breadcrumbs": "Ricerca per Titolo",
+
+  "browse.metadata.titleO.breadcrumbs": "Ricerca per Titolo",
+
+  "browse.metadata.titleC.breadcrumbs": "Ricerca per Titolo",
+
+  "browse.metadata.titleSM.breadcrumbs": "Ricerca per Titolo",
+
+  "browse.metadata.titlePicture.breadcrumbs": "Ricerca per Titolo",
+
+  "browse.metadata.dateissuedEvent.breadcrumbs": "Ricerca per data",
+
+  "browse.metadata.subjectEvent.breadcrumbs": "Ricerca per Soggetto",
+
+  "browse.metadata.typeEvent.breadcrumbs": "Ricerca per Tipologia",
+
+  "browse.metadata.dateissuedAM.breadcrumbs": "Ricerca per data",
+
+  "browse.metadata.subjectAM.breadcrumbs": "Ricerca per Soggetto",
+
+  "browse.metadata.typeAM.breadcrumbs": "Ricerca per Tipologia",
+
+  "browse.metadata.dateissuedFamily.breadcrumbs": "Ricerca per data",
+
+  "browse.metadata.subjectFamily.breadcrumbs": "Ricerca per Soggetto",
+
+  "browse.metadata.typeFamily.breadcrumbs": "Ricerca per Tipologia",
+
+  "browse.metadata.dateissuedPlace.breadcrumbs": "Ricerca per data",
+
+  "browse.metadata.subjectPlace.breadcrumbs": "Ricerca per Soggetto",
+
+  "browse.metadata.typePlace.breadcrumbs": "Ricerca per Tipologia",
+
+  "browse.metadata.dateissuedN.breadcrumbs": "Ricerca per data",
+
+  "browse.metadata.subjectN.breadcrumbs": "Ricerca per Soggetto",
+
+  "browse.metadata.typeN.breadcrumbs": "Ricerca per Tipologia",
+
+  "browse.metadata.dateissuedSP.breadcrumbs": "Ricerca per data",
+
+  "browse.metadata.subjectSP.breadcrumbs": "Ricerca per Soggetto",
+
+  "browse.metadata.typeSP.breadcrumbs": "Ricerca per Tipologia",
+
+  "browse.metadata.dateissuedJI.breadcrumbs": "Ricerca per data",
+
+  "browse.metadata.subjectJI.breadcrumbs": "Ricerca per Soggetto",
+
+  "browse.metadata.typeJI.breadcrumbs": "Ricerca per Tipologia",
+
+  "browse.metadata.dateissuedPath.breadcrumbs": "Ricerca per data",
+
+  "browse.metadata.subjectPath.breadcrumbs": "Ricerca per Soggetto",
+
+  "browse.metadata.typePath.breadcrumbs": "Ricerca per Tipologia",
+
+  "browse.metadata.dateissuedO.breadcrumbs": "Ricerca per data",
+
+  "browse.metadata.subjectO.breadcrumbs": "Ricerca per Soggetto",
+
+  "browse.metadata.typeO.breadcrumbs": "Ricerca per Tipologia",
+
+  "browse.metadata.dateissuedC.breadcrumbs": "Ricerca per data",
+
+  "browse.metadata.subjectC.breadcrumbs": "Ricerca per Soggetto",
+
+  "browse.metadata.typeC.breadcrumbs": "Ricerca per Tipologia",
+
+  "browse.metadata.dateissuedSM.breadcrumbs": "Ricerca per data",
+
+  "browse.metadata.subjectSM.breadcrumbs": "Ricerca per Soggetto",
+
+  "browse.metadata.typeSM.breadcrumbs": "Ricerca per Tipologia",
+
+  "browse.metadata.dateissuedPicture.breadcrumbs": "Ricerca per data",
+
+  "browse.metadata.subjectPicture.breadcrumbs": "Ricerca per Soggetto",
+
+  "browse.metadata.typePicture.breadcrumbs": "Ricerca per Tipologia",
 
   //"coin.listelement.badge": "Coin",
   "coin.listelement.badge": "Moneta",
