@@ -7,16 +7,22 @@
         <div class="row" [ngStyle]="{
                     'height': carouselOptions.keepAspectRatio ? 'calc(100vw / ' + carouselOptions.aspectRatio + ')' : carouselOptions.carouselHeightPx + 'px'
                  }">
-            <div class="col-md-8 pr-0 carousel-content-wrapper h-100">
-              <div class="picsum-img-wrapper" *ngIf="(itemToImageHrefMap$ | async).get(item.indexableObject.uuid); let href">
-                <img *ngIf="(itemToImageHrefMap$ | async).get(item.indexableObject.uuid); let href; else defaultPreviewImage"
+            <div class="col-md-8 pr-0 carousel-content-wrapper h-100"
+                 *ngIf="(itemToImageHrefMap$ | async).get(item.indexableObject.uuid); let href; else defaultPreviewImage"
+                 [ngStyle]="{'background-image': 'url(' + href || '' + ')'}">
+              <div class="picsum-img-wrapper">
+                <img
                      [src]="href" [alt]="item.indexableObject.metadata[title][0].value"
                      [ngClass]="{'w-100': carouselOptions.fitWidth, 'h-100': carouselOptions.fitHeight}">
-                <ng-template #defaultPreviewImage>
-                  <img src="assets/images/replacement_image.svg" [alt]="item.indexableObject.metadata[title][0].value" class="img-fluid h-100">
-                </ng-template>
               </div>
             </div>
+          <ng-template #defaultPreviewImage>
+            <div class="col-md-8 pr-0 carousel-content-wrapper h-100">
+              <div class="picsum-img-wrapper">
+                <img src="assets/images/replacement_image.svg" [alt]="item.indexableObject.metadata[title][0].value" class="img-fluid h-100">
+              </div>
+            </div>
+          </ng-template>
             <div class="col-md-4 pl-0">
                 <div class="bg-dark justify-content-center align-items-center d-flex flex-row h-100">
                   <div class="arrow-class-left">
