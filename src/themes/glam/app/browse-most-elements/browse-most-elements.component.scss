@@ -1,16 +1,44 @@
 div.thumbnail-container {
-  width: fit-content;
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   ds-type-badge {
     position: absolute;
-    bottom: .5em;
+    top: .5em;
     right: .5em;
+  }
+
+  // TODO: set landscape or portrait by background image ratio
+  &.landscape {
+    // TODO: set backgorund-image in ngStyle
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Deserto_libico_-_Driving_-_panoramio.jpg/800px-Deserto_libico_-_Driving_-_panoramio.jpg");
+    grid-row-end: span 1;
+    grid-column-end: span 2;
+    aspect-ratio: 2 / 1;
+  }
+
+  &.portrait {
+    // TODO: set backgorund-image in ngStyle
+    background-image: url("https://thumbs.dreamstime.com/b/spring-fields-portrait-1885585.jpg");
+    grid-row-end: span 2;
+    grid-column-end: span 1;
   }
 }
 
-.card-columns {
-  column-count: 3;
-  @include media-breakpoint-up(lg) {
-    column-count: 4;
-  }
+.grid-wrapper {
+  display: grid;
+  grid-auto-flow: dense;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  grid-gap: .5em;
+}
+
+h3 {
+  background-color: rgba(255, 255, 255, .7);
+  padding: .6em;
+  border-radius: 1em;
 }
