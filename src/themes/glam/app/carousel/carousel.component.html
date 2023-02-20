@@ -9,11 +9,11 @@
                  }">
             <div class="col-md-8 pr-0 carousel-content-wrapper h-100"
                  *ngIf="(itemToImageHrefMap$ | async).get(item.indexableObject.uuid); let href; else defaultPreviewImage"
-                 [ngStyle]="{'background-image': 'url(' + href || '' + ')'}">
+                 [ngStyle]="{'background-image': carouselOptions.showBlurryBackdrop ? 'url(' + href || '' + ')' : 'unset'}">
               <div class="picsum-img-wrapper">
                 <img
                      [src]="href" [alt]="item.indexableObject.metadata[title][0].value"
-                     [ngClass]="{'w-100': carouselOptions.fitWidth, 'h-100': carouselOptions.fitHeight}">
+                     [ngClass]="{'w-100': carouselOptions.fitWidth, 'h-100': carouselOptions.fitHeight, 'mw-100': carouselOptions.showBlurryBackdrop, 'mh-100': carouselOptions.showBlurryBackdrop}">
               </div>
             </div>
           <ng-template #defaultPreviewImage>
