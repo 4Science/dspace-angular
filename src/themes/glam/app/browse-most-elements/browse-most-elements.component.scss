@@ -3,8 +3,18 @@ div.thumbnail-container {
   background-position: center;
 
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+
+  div.spacer {
+    flex: 1;
+  }
+
+  a {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   ds-type-badge {
     position: absolute;
@@ -37,7 +47,7 @@ div.thumbnail-container {
   grid-gap: .5em;
 }
 
-h3 {
+p {
   background-color: rgba(255, 255, 255, .7);
   padding: .6em;
   border-radius: 1em;
