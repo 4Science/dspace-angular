@@ -5,7 +5,6 @@
        *ngFor="let object of searchResults?.payload?.page; let i = index; let last = last">
 <!-- TODO: use an observable to set background image. Thumbnail is too small to be used! -->
     <ds-type-badge [object]="object.indexableObject"></ds-type-badge>
-    <div class="spacer"></div>
     <a [routerLink]="[getItemPageRoute(object.indexableObject)]" class="mw-100 p-3">
       <p class="h4 text-center m-0">{{object.indexableObject.firstMetadataValue('dc.title')}}</p>
     </a>
