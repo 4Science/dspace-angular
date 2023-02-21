@@ -102,7 +102,8 @@ export class GridSectionComponent implements OnInit {
     this.maincontentTitle = this.maincontentTitle ?? this.translateService.instant('grid.component.title');
     this.maincontentSubtitle = this.maincontentSubtitle ?? this.translateService.instant('grid.component.subtitle');
     this.maincontentAbstract = this.maincontentAbstract ?? this.translateService.instant('grid.component.abstract');
-    this.maincontentLink = this.maincontentLink ?? this.translateService.instant('grid.component.link');
+
+    this.maincontentLink = this.gridSection.mainContentLink ?? this.translateService.instant('grid.component.link');
   }
 
   private getSearchResults() {

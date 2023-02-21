@@ -68,7 +68,7 @@ export interface TopSection extends SectionComponent {
 
 export interface GridSection extends SectionComponent {
   discoveryConfigurationName: string;
-  'main-content-link': string;
+  mainContentLink: string;
 }
 
 export interface SearchSection extends SectionComponent {

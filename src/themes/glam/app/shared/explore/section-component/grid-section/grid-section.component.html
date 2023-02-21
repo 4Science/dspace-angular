@@ -10,7 +10,7 @@
     <p class="mt-3 pl-0 text-muted col-8">
       {{maincontentAbstract | translate}}
     </p>
-    <button type="button" class="btn btn-dark position-absolute m-5" [routerLink]="maincontentLink | translate">
+    <button type="button" class="btn btn-dark position-absolute m-5" (click)="goToMainContentLink()">
       {{'explore.grid-section.seeAll' | translate}}
     </button>
   </div>
