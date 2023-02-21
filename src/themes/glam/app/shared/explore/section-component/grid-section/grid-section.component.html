@@ -23,7 +23,8 @@
                   [defaultImage]="'assets/images/replacement_image.svg'"
                   [alt]="'menu.header.image.logo' | translate" [keepAspectRatio]="true">
     </ds-thumbnail>
-    <h5
-      class="text-dark text-truncate position-absolute py-3 px-1">{{item.indexableObject?.firstMetadataValue('dc.title')}}</h5>
+    <a [routerLink]="[getItemPageRoute(item.indexableObject)]" class="mw-100 p-3">
+      <p class="h5 text-center m-0 text-truncate">{{item.indexableObject?.firstMetadataValue('dc.title')}}</p>
+    </a>
   </div>
 </div>

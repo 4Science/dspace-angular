@@ -23,10 +23,14 @@
   }
 }
 
-h5 {
+a {
+  position: absolute;
   bottom: 0.5em;
-  background-color: white;
   width: 90%;
+  background-color: rgba(255, 255, 255, .7);
+  padding: .6em;
+  border-radius: 1em;
+  z-index: 2;
 }
 
 .main-content-badge, .main-content-title, .main-content-subtitle {
@@ -50,8 +54,4 @@ ds-thumbnail {
     z-index: -1;
   }
   z-index: 1;
-}
-
-h5 {
-  z-index: 2;
 }
