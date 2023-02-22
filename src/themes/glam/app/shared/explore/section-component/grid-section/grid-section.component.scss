@@ -50,7 +50,7 @@ ds-thumbnail {
     bottom: 0;
     left: 0;
     right: 0;
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px) brightness(.7);
     z-index: -1;
   }
   z-index: 1;

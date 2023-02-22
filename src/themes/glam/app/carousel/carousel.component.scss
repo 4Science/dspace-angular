@@ -76,7 +76,7 @@
     align-items: center;
     justify-content: center;
     display: flex;
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px) brightness(.7);
     img.blurry-backdrop {
       max-width: 95%;
       max-height: 95%;
