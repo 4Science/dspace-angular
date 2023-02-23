@@ -1,183 +1,123 @@
-<div class="section my-4 bg-dark pt-4 pb-4">
-  <div class="container">
-    <div class="justify-content-center align-items-center d-flex flex-column ">
-      <h1 class="text-white mb-4">Cerca in Glam</h1>
-      <div class="form-group">
-        <div class="input-group">
-          <input class="form-control main-input">
-          <div class="input-group-append">
-            <button type="button" class="btn btn-light">CERSA</button>
-          </div>
-        </div>
-      </div>
+<div class="container" *ngIf="(isXsOrSm$ | async)">
+  <div class="row">
+    <div class="col-12">
+      <ng-template *ngTemplateOutlet="searchForm"></ng-template>
     </div>
   </div>
 </div>
-<div class="section">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-        <h1 class="text-dark h2">Filtri</h1>
-        <div class="mt-4 new-accordian">
-          <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-3">
-            <ngb-panel title="Autore" class="accordion-button">
-              <ng-template ngbPanelContent>
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                squid. 3 wolf moon
-                officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-              </ng-template>
-            </ngb-panel>
-            <ngb-panel title="Data Di" class="accordion-button">
-              <ng-template ngbPanelContent>
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                squid. 3 wolf moon
-                officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                eiusmod. </ng-template>
-            </ngb-panel>
-            <ngb-panel title="Tipologia">
-              <ng-template ngbPanelContent>
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                squid. 3 wolf moon
-                officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-              </ng-template>
-            </ngb-panel>
-            <ngb-panel title="Fondo">
-              <ng-template ngbPanelContent>
-                <div class="form-check">
-                  <input class="form-check-input new-text" type="checkbox" value="" id="flexCheckDefault">
-                  <label class="form-check-label new-text" for="flexCheckDefault">
-                    Fondo 1
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input new-text" type="checkbox" value="" id="flexCheckDefault1">
-                  <label class="form-check-label new-text" for="flexCheckDefault1">
-                    Fondo 2
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input new-text" type="checkbox" value="" id="flexCheckDefault2">
-                  <label class="form-check-label new-text" for="flexCheckDefault2">
-                    Fondo 3
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input new-text" type="checkbox" value="" id="flexCheckDefault3">
-                  <label class="form-check-label new-text" for="flexCheckDefault3">
-                    Fondo 4
-                  </label>
-                </div>
-              </ng-template>
-            </ngb-panel>
-            <ngb-panel title="..." class="accordion-button">
-              <ng-template ngbPanelContent>
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                squid. 3 wolf moon
-                officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                eiusmod. </ng-template>
-            </ngb-panel>
-          </ngb-accordion>
-        </div>
-        <div class="text-center">
-          <button type="button" class="btn btn-dark mt-4">ANNULA FILTRI</button>
-        </div>
-        <div class="mt-4">
-          <h1 class="text-dark mb-4 h2">Impostazioni</h1>
-          <div class="p-4 sider-div">
-            <h5 class="text-muted mb-4">Ordinari Per</h5>
-            <select class="form-control">
-              <option> Titolo cresscente </option>
-              <option> Titolo descrente </option>
-              <option> Data inseriminato </option>
-              <option> Data inseriminato </option>
-            </select>
-          </div>
-        </div>
-        <div class="mt-4">
-          <div class="p-4 sider-div">
-            <h5 class="text-muted mb-4">Resultari per pagina</h5>
-            <select class="form-control">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-            </select>
-          </div>
-        </div>
+
+<ds-search-charts *ngIf="showCharts"
+                  [configuration]="currentConfiguration$"
+                  [collapseChart]="collapseCharts"
+                  [filters]="chartFiltersRD$.asObservable()"
+                  [inPlaceSearch]="inPlaceSearch"
+                  [refreshFilters]="refreshFilters"
+                  [showChartsToggle]="showChartsToggle"></ds-search-charts>
+
+<div *ngIf="!showSidebar && (initialized$ | async)">
+  <ng-template *ngTemplateOutlet="searchContent"></ng-template>
+</div>
+
+<ds-page-with-sidebar *ngIf="showSidebar && (initialized$ | async)"
+                      [collapseSidebar]="collapseFilters"
+                      [id]="'search-page'"
+                      [sidebarContent]="sidebarContent">
+  <ng-template *ngTemplateOutlet="searchContent"></ng-template>
+</ds-page-with-sidebar>
+
+<ng-template #searchContent>
+  <div class="row">
+    <div class="col-12" *ngIf="!(isXsOrSm$ | async)">
+      <ng-template *ngTemplateOutlet="searchForm"></ng-template>
+      <ng-content select="[additionalSearchOptions]"></ng-content>
+    </div>
+    <div id="search-content" class="col-12">
+      <div class="d-block d-md-none search-controls clearfix">
+        <ds-view-mode-switch [viewModeList]="viewModeList" [inPlaceSearch]="inPlaceSearch"></ds-view-mode-switch>
+        <button (click)="openSidebar()" aria-controls="#search-body"
+                class="btn btn-outline-primary float-right open-sidebar">
+          <i class="fas fa-sliders"></i> {{"search.sidebar.open" | translate}}
+        </button>
       </div>
-      <div class="col-md-9">
-        <h1 class="texy-dark h2 mb-2">Risultati</h1>
-        <p class="text-muted">In mostra 1-10 di 10701 risultati</p>
-        <div class="border-bottom border-dark mt-4">
-          <div class="mb-4">
-            <span class="new-bg"> Publicazation</span>
-          </div>
-          <h4 class="text-dark mb-3">Titlo titolo titolo</h4>
-          <p>
-            (2014) <span>Verdi-rassinni , Anna <i class="fa fa-user text-info"></i> Rossi maria <i
-            class="fa fa-user text-info"></i> Verdi paolo </span>
-          </p>
-          <p>Loram Ipsum dolor These classes control the overall appearance, as well as the showing and hiding
-            via CSS transitions. You can modify any of this with custom CSS or overriding our default
-            variables. It's also worth noting </p>
-
-        </div>
-        <div class="border-bottom border-dark mt-4">
-          <div class="mb-4">
-            <span class="new-bg">Fondo</span>
-          </div>
-          <h4 class="text-dark mb-3">Titlo titolo titolo</h4>
-          <p>
-            (2014) <span>Verdi-rassinni , Anna </span>
-          </p>
-          <p>Loram Ipsum dolor These classes control the overall appearance, as well as the showing and hiding
-            via CSS transitions. You can modify any of this with custom CSS or overriding our default
-            variables. It's also worth noting </p>
-
-        </div>
-        <div class="border-bottom border-dark mt-4">
-          <div class="mb-4">
-            <span class="new-bg">Evento</span>
-          </div>
-          <h4 class="text-dark mb-3">Titlo titolo titolo</h4>
-          <p>
-            (2014) <span>Verdi-rassinni , Anna </span>
-          </p>
-        </div>
-        <div class="border-bottom border-dark mt-4">
-          <div class="mb-4">
-            <span class="new-bg">Luogo</span>
-          </div>
-          <h4 class="text-dark mb-3">Titlo titolo titolo</h4>
-        </div>
-        <div class="border-bottom border-dark mt-4">
-          <div class="mb-4">
-            <span class="new-bg">Persona</span>
-          </div>
-          <h4 class="text-dark mb-3">Titlo titolo titolo</h4>
-          <p>
-            (2014) <span>Verdi-rassinni , Anna </span>
-          </p>
-          <p>Loram Ipsum dolor These classes control the overall appearance, as well as the showing and hiding
-            via CSS transitions. You can modify any of this with custom CSS or overriding our default
-            variables. It's also worth noting </p>
-
-        </div>
-        <div class="border-bottom border-dark mt-4">
-          <div class="mb-4">
-            <span class="new-bg"> Testata</span>
-          </div>
-          <h4 class="text-dark mb-3">Titlo titolo titolo</h4>
-          <p>
-            (2014) <span>Verdi-rassinni , Anna </span>
-          </p>
-          <p>
-            Loram Ipsum dolor These classes control the overall appearance, as well as the showing and hiding
-            via CSS transitions. You can modify any of this with custom CSS or overriding our default
-            variables. It's also worth noting
-          </p>
-        </div>
-      </div>
+      <ds-themed-search-results [searchResults]="resultsRD$ | async"
+                                [searchConfig]="searchOptions$ | async"
+                                [configuration]="(currentConfiguration$ | async)"
+                                [disableHeader]="!searchEnabled"
+                                [linkType]="linkType"
+                                [context]="(currentContext$ | async)"
+                                [searchResultNotice]="searchResultNotice"
+                                [searchResultNoticeType]="searchResultNoticeType"
+                                [selectable]="selectable"
+                                [selectionConfig]="selectionConfig"
+                                [showSearchResultNotice]="showSearchResultNotice"
+                                [customData]="customData"
+                                (contentChange)="onContentChange($event)"
+                                (customEvent)="customEvent.emit($event)"
+                                (deselectObject)="deselectObject.emit($event)"
+                                (selectObject)="selectObject.emit($event)"></ds-themed-search-results>
     </div>
   </div>
-</div>
+</ng-template>
+
+<ng-template #sidebarContent>
+  <ds-search-sidebar id="search-sidebar" *ngIf="!(isXsOrSm$ | async)"
+                     [configurationList]="configurationList"
+                     [configuration]="(currentConfiguration$ | async)"
+                     [currentScope]="(currentScope$ | async)"
+                     [filters]="filtersRD$.asObservable()"
+                     [refreshFilters]="refreshFilters"
+                     [resultCount]="(resultsRD$ | async)?.payload?.totalElements"
+                     [searchOptions]="(searchOptions$ | async)"
+                     [sortOptionsList]="(sortOptionsList$ | async)"
+                     [currentSortOption]="(currentSortOptions$ | async)"
+                     [inPlaceSearch]="inPlaceSearch"
+                     [viewModeList]="viewModeList"
+                     [showViewModes]="showViewModes"
+                     (changeConfiguration)="changeContext($event.context)"
+                     (changeViewMode)="changeViewMode()"></ds-search-sidebar>
+  <ds-search-sidebar id="search-sidebar-sm" *ngIf="(isXsOrSm$ | async)"
+                     [configurationList]="configurationList"
+                     [configuration]="(currentConfiguration$ | async)"
+                     [currentScope]="(currentScope$ | async)"
+                     [filters]="filtersRD$.asObservable()"
+                     [refreshFilters]="refreshFilters"
+                     [resultCount]="(resultsRD$ | async)?.payload.totalElements"
+                     [searchOptions]="(searchOptions$ | async)"
+                     [sortOptionsList]="(sortOptionsList$ | async)"
+                     [currentSortOption]="(currentSortOptions$ | async)"
+                     [viewModeList]="viewModeList"
+                     [showViewModes]="showViewModes"
+                     (toggleSidebar)="closeSidebar()"
+                     (changeConfiguration)="changeContext($event.context)"
+                     (changeViewMode)="changeViewMode()">
+  </ds-search-sidebar>
+</ng-template>
+
+<ng-template #searchForm>
+  <div class="d-flex justify-content-between">
+    <div *ngIf="!(isXsOrSm$ | async) && showFilterToggle && showSidebar">
+      <button class="btn btn-outline-secondary mr-3"
+              ngbTooltip="{{'search.sidebar.show.hide.filters.tooltip' | translate}}"
+              (click)="toggleSidebar()">
+                <span class="d-flex align-items-center">
+                    <i class="fa fa-filter mr-2"></i>
+                  {{"search.sidebar.show.hide" | translate}}</span>
+      </button>
+    </div>
+    <ds-search-form *ngIf="searchEnabled" id="search-form" class="flex-grow-1"
+                    [query]="(searchOptions$ | async)?.query"
+                    [scope]="(searchOptions$ | async)?.scope"
+                    [currentUrl]="searchLink"
+                    [showScopeSelector]="showScopeSelector"
+                    [inPlaceSearch]="inPlaceSearch"
+                    [searchPlaceholder]="searchFormPlaceholder | translate">
+    </ds-search-form>
+    <ng-content select="[additionalSearchFormOptions]"></ng-content>
+    <ds-item-export-modal-launcher [searchOptions$]="searchOptions$" *ngIf="showExport"></ds-item-export-modal-launcher>
+  </div>
+  <div class="row mb-3 mb-md-1">
+    <div class="labels col-sm-9">
+      <ds-search-labels *ngIf="searchEnabled" [inPlaceSearch]="inPlaceSearch"></ds-search-labels>
+    </div>
+  </div>
+</ng-template>
