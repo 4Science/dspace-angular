@@ -1,12 +1,13 @@
 <div class="grid-wrapper">
-<!-- TODO: set landscape/portrait based on background aspect ratio -->
-  <div class="thumbnail-container position-relative"
-       [ngClass]="{'landscape' : i % 2, 'portrait': !(i % 2)}"
-       *ngFor="let object of searchResults?.payload?.page; let i = index; let last = last">
-<!-- TODO: use an observable to set background image. Thumbnail is too small to be used! -->
-    <ds-type-badge [object]="object.indexableObject"></ds-type-badge>
-    <a [routerLink]="[getItemPageRoute(object.indexableObject)]" class="mw-100 p-3">
-      <p class="h4 text-center m-0">{{object.indexableObject.firstMetadataValue('dc.title')}}</p>
-    </a>
-  </div>
+  <ng-container *ngFor="let object of searchResults?.payload?.page; let i = index; let last = last">
+    <img [src]="(itemToImageHrefMap$ | async).get(object.indexableObject?.uuid)" alt="hidden-image" style="display: none" #image>
+    <div class="thumbnail-container position-relative"
+         [ngStyle]="{'background-image': 'url(' + (itemToImageHrefMap$ | async).get(object.indexableObject?.uuid) + ')'}"
+         [ngClass]="{'landscape' : image.naturalWidth >= image.naturalHeight, 'portrait': image.naturalWidth < image.naturalHeight}">
+      <ds-type-badge [object]="object.indexableObject"></ds-type-badge>
+      <a [routerLink]="[getItemPageRoute(object.indexableObject)]" class="mw-100 p-3">
+        <p class="h4 text-center m-0">{{object.indexableObject.firstMetadataValue('dc.title')}}</p>
+      </a>
+    </div>
+  </ng-container>
 </div>
