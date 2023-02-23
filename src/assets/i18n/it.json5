@@ -2990,8 +2990,8 @@
   // "footer.link.dspace": "DSpace software",
   "footer.link.dspace": "Software DSpace",
 
-  // "footer.link.dspace-cris": "DSpace-CRIS software",
-  "footer.link.dspace-cris": "Software DSpace-CRIS",
+  // "footer.link.dspace-cris": "DSpace-GLAM software",
+  "footer.link.dspace-cris": "Software DSpace-GLAM",
 
   // "footer.link.lyrasis": "LYRASIS",
   "footer.link.lyrasis": "LYRASIS",
@@ -6185,8 +6185,8 @@
   // "profile.card.access-token.copy-info": "Make sure to copy your personal access token now. You won’t be able to see it again!",
   "profile.card.access-token.copy-info": "Copia il tuo personal access token ora. Non sarà più possibile vederlo successivamente!",
 
-  // "profile.card.access-token.info": "Tokens you have generated that can be used to access the DSpace-CRIS API.",n
-  "profile.card.access-token.info": "I Tokens generati possono essere usati per accedere alle DSpace-CRIS API.",
+  // "profile.card.access-token.info": "Tokens you have generated that can be used to access the DSpace-GLAM API.",n
+  "profile.card.access-token.info": "I Tokens generati possono essere usati per accedere alle DSpace-GLAM API.",
 
   // "profile.card.access-token.create.error": "An error occurred while generating the token, please try again later.",
   "profile.card.access-token.create.error": "Errore durante la generazione del token, si prega di riprovare nuovamente.",
@@ -6215,8 +6215,8 @@
   // "profile.card.access-token.delete": "Revoke token",
   "profile.card.access-token.delete": "Revoca il token",
 
-  // "profile.card.access-token.no-token-generated": "You don't have personal access token. Generate a personal access token for quick access to the DSpace-CRIS API.",
-  "profile.card.access-token.no-token-generated": "Non si dispone di un token di accesso personale. Generare un token di accesso personale per accedere rapidamente all'API DSpace-CRIS.",
+  // "profile.card.access-token.no-token-generated": "You don't have personal access token. Generate a personal access token for quick access to the DSpace-GLAM API.",
+  "profile.card.access-token.no-token-generated": "Non si dispone di un token di accesso personale. Generare un token di accesso personale per accedere rapidamente all'API DSpace-GLAM.",
 
   // "profile.card.access-token.token-generated": "You have already generated a personal access token.",
   "profile.card.access-token.token-generated": "Avete già generato un token di accesso personale.",
@@ -6574,8 +6574,8 @@
   // "repository.image.logo": "Repository logo",
   "repository.image.logo": "Logo del repository",
 
-  // "repository.title.prefix": "DSpace Cris Angular :: ",
-  "repository.title.prefix": "DSpace Cris Angular :: ",
+  // "repository.title.prefix": "DSpace GLAM Angular :: ",
+  "repository.title.prefix": "DSpace GLAM Angular :: ",
 
 
   // "repository.title.prefixDSpace": "DSpace Angular ::",

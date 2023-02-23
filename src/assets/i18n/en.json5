@@ -4668,7 +4668,7 @@
 
   "profile.card.access-token.copy-info": "Make sure to copy your personal access token now. You won’t be able to see it again!",
 
-  "profile.card.access-token.info": "Tokens you have generated that can be used to access the DSpace-CRIS API.",
+  "profile.card.access-token.info": "Tokens you have generated that can be used to access the DSpace-GLAM API.",
 
   "profile.card.access-token.create.error": "An error occurred while generating the token, please try again later.",
 
@@ -4688,7 +4688,7 @@
 
   "profile.card.access-token.delete": "Revoke token",
 
-  "profile.card.access-token.no-token-generated": "You don't have personal access token. Generate a personal access token for quick access to the DSpace-CRIS API.",
+  "profile.card.access-token.no-token-generated": "You don't have personal access token. Generate a personal access token for quick access to the DSpace-GLAM API.",
 
   "profile.card.access-token.token-generated": "You have already generated a personal access token.",
 
