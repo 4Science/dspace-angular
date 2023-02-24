@@ -34,13 +34,19 @@ div.thumbnail-container {
 .grid-wrapper {
   display: grid;
   grid-auto-flow: dense;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   grid-auto-rows: 1fr;
   grid-gap: .5em;
+  @include media-breakpoint-only(md) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  @include media-breakpoint-down(sm) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 p {
   background-color: rgba(255, 255, 255, .7);
   padding: .6em;
-  border-radius: 1em;
+  border-radius: $border-radius;
 }
