@@ -14,17 +14,12 @@
       {{'explore.grid-section.seeAll' | translate}}
     </button>
   </div>
-  <div class="text-center position-relative d-flex flex-column
-              justify-content-between align-items-center content"
-       [dsBackgroundImage]="item.indexableObject?.thumbnail | async"
+  <div class="bg-light text-center position-relative border border-dark d-flex flex-column
+              justify-content-between align-items-center"
+       [dsBackgroundImage]="(itemToImageHrefMap$ | async).get(item.indexableObject?.uuid)"
        *ngFor="let item of searchResults | slice:0:8; index as i">
-    <ds-thumbnail class="w-100"
-                  [thumbnail]="item.indexableObject?.thumbnail | async" [limitWidth]="false"
-                  [defaultImage]="'assets/images/replacement_image.svg'"
-                  [alt]="'menu.header.image.logo' | translate" [keepAspectRatio]="true">
-    </ds-thumbnail>
-    <a [routerLink]="[getItemPageRoute(item.indexableObject)]" class="mw-100 p-3">
-      <p class="h5 text-center m-0 text-truncate">{{item.indexableObject?.firstMetadataValue('dc.title')}}</p>
-    </a>
+        <a [routerLink]="[getItemPageRoute(item.indexableObject)]" class="mw-100 p-3">
+          <p class="h5 text-center m-0 text-truncate">{{item.indexableObject?.firstMetadataValue('dc.title')}}</p>
+        </a>
   </div>
 </div>
