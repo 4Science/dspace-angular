@@ -1,8 +1,8 @@
-import { BackgroundBitstreamDirective } from './background-bitstream.directive';
+import { BackgroundImageDirective } from './background-image.directive';
 
 describe('BackgroundBitstreamDirective', () => {
   it('should create an instance', () => {
-    const directive = new BackgroundBitstreamDirective(undefined);
+    const directive = new BackgroundImageDirective(undefined);
     expect(directive).toBeTruthy();
   });
 });

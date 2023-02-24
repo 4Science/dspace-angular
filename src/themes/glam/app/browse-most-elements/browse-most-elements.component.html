@@ -2,7 +2,7 @@
   <ng-container *ngFor="let object of searchResults?.payload?.page; let i = index; let last = last">
     <img [src]="(itemToImageHrefMap$ | async).get(object.indexableObject?.uuid)" alt="hidden-image" style="display: none" #image>
     <div class="thumbnail-container position-relative"
-         [ngStyle]="{'background-image': 'url(' + (itemToImageHrefMap$ | async).get(object.indexableObject?.uuid) + ')'}"
+         [dsBackgroundImage]="(itemToImageHrefMap$ | async).get(object.indexableObject?.uuid)"
          [ngClass]="{'landscape' : image.naturalWidth > image.naturalHeight, 'portrait': image.naturalWidth < image.naturalHeight}">
       <ds-type-badge [object]="object.indexableObject"></ds-type-badge>
       <a [routerLink]="[getItemPageRoute(object.indexableObject)]" class="mw-100 p-3">

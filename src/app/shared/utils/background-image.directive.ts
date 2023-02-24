@@ -3,11 +3,11 @@ import { Bitstream } from '../../core/shared/bitstream.model';
 import { RemoteData } from '../../core/data/remote-data';
 
 @Directive({
-  selector: '[dsBackgroundBitstream]'
+  selector: '[dsBackgroundImage]'
 })
-export class BackgroundBitstreamDirective implements OnChanges{
+export class BackgroundImageDirective implements OnChanges {
 
-  @Input() dsBackgroundBitstream: Bitstream | RemoteData<Bitstream>;
+  @Input() dsBackgroundImage: Bitstream | RemoteData<Bitstream> | string;
 
   constructor(private el: ElementRef) {
   }
@@ -17,9 +17,14 @@ export class BackgroundBitstreamDirective implements OnChanges{
   }
 
   private setBackground() {
-    const thumbnail = (this.dsBackgroundBitstream instanceof Bitstream) ?
-      this.dsBackgroundBitstream : this.dsBackgroundBitstream?.payload;
-    const thumbnailSrc = thumbnail?._links?.content?.href;
+    let thumbnailSrc: string;
+    if (this.dsBackgroundImage instanceof Bitstream) {
+      thumbnailSrc = this.dsBackgroundImage?._links?.content?.href;
+    } else if (this.dsBackgroundImage instanceof RemoteData) {
+      thumbnailSrc = this.dsBackgroundImage?.payload?._links?.content?.href;
+    } else {
+      thumbnailSrc = this.dsBackgroundImage;
+    }
     if (thumbnailSrc) {
       this.el.nativeElement.style.backgroundImage = `url("${thumbnailSrc}")`;
       this.el.nativeElement.style.backgroundPosition = `center`;
