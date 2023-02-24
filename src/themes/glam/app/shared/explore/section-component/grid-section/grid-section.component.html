@@ -14,7 +14,7 @@
       {{'explore.grid-section.seeAll' | translate}}
     </button>
   </div>
-  <div class="bg-light text-center position-relative border border-dark d-flex flex-column
+  <div class="bg-light text-center position-relative d-flex flex-column
               justify-content-between align-items-center"
        [dsBackgroundImage]="(itemToImageHrefMap$ | async).get(item.indexableObject?.uuid)"
        *ngFor="let item of searchResults | slice:0:8; index as i">

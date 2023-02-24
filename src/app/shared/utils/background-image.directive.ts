@@ -23,7 +23,7 @@ export class BackgroundImageDirective implements OnChanges {
     } else if (this.dsBackgroundImage instanceof RemoteData) {
       thumbnailSrc = this.dsBackgroundImage?.payload?._links?.content?.href;
     } else {
-      thumbnailSrc = this.dsBackgroundImage;
+      thumbnailSrc = this.dsBackgroundImage ?? 'assets/images/replacement_image.svg';
     }
     if (thumbnailSrc) {
       this.el.nativeElement.style.backgroundImage = `url("${thumbnailSrc}")`;
