@@ -127,6 +127,7 @@ import {
   AdvancedAttachmentComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/advanced-attachment/advanced-attachment.component';
 import { FileDownloadButtonComponent } from '../shared/file-download-button/file-download-button.component';
+import { CarouselModule } from '../shared/carousel/carousel.module';
 import {
   BitstreamAttachmentComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/advanced-attachment/bitstream-attachment/bitstream-attachment.component';
@@ -209,7 +210,9 @@ const ENTRY_COMPONENTS = [
     MiradorViewerModule,
     MarkdownViewerModule,
     ItemSharedModule,
-    ViewersSharedModule
+    ViewersSharedModule,
+    MarkdownViewerModule,
+    CarouselModule
   ],
   exports: [
     CrisLayoutComponent,

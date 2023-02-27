@@ -1,0 +1,5 @@
+<p>carousel-relations works!</p>
+<div *ngIf="(resultsRD$ | async)?.payload?.page?.length > 0">
+  <ds-carousel-with-thumbnails
+    [carouselOptions]="carouselOptions" [items]="(resultsRD$ | async)?.payload.page"></ds-carousel-with-thumbnails>
+</div>

@@ -4,10 +4,12 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared.module';
 import { ThemedCarouselComponent } from './themed-carousel.component';
+import { CarouselWithThumbnailsComponent } from './carousel-with-thumbnails/carousel-with-thumbnails.component';
 
 const COMPONENTS = [
     ThemedCarouselComponent,
-    CarouselComponent
+    CarouselComponent,
+    CarouselWithThumbnailsComponent
 ];
 
 const MODULES = [

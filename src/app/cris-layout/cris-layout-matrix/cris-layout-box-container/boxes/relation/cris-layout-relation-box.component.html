@@ -1,7 +1,19 @@
-<ds-configuration-search-page *ngIf="configuration" class="w-100"
-                              [fixedFilterQuery]="searchFilter"
-                              [configuration]="configuration"
-                              [searchEnabled]="searchEnabled"
-                              [showCharts]="true"
-                              [showScopeSelector]="false">
-</ds-configuration-search-page>
+<!--<div *ngIf="box.style === 'carousel'; else searchPage">-->
+<!--TODO: switch to correct logic-->
+<ds-carousel-relations
+  [fixedFilterQuery]="searchFilter"
+  [configuration]="configuration"
+  [searchEnabled]="searchEnabled"
+  [showCharts]="true"
+  [showScopeSelector]="false"
+  *ngIf="true; else searchPage">
+</ds-carousel-relations>
+<ng-template #searchPage>
+  <ds-configuration-search-page *ngIf="configuration" class="w-100"
+                                [fixedFilterQuery]="searchFilter"
+                                [configuration]="configuration"
+                                [searchEnabled]="searchEnabled"
+                                [showCharts]="true"
+                                [showScopeSelector]="false">
+  </ds-configuration-search-page>
+</ng-template>

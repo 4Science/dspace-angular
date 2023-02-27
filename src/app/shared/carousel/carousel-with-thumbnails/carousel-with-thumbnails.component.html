@@ -1,0 +1,41 @@
+<ngb-carousel #carousel [interval]="2000" (slide)="onSlide($event)" class="ds-carousel">
+  <ng-template ngbSlide *ngFor="let item of items; let i = index; let last = last">
+    <ng-container *ngIf="getItemLink(item.indexableObject); let currentLink; else carouselContent">
+      <a *ngIf="isLinkInternal(currentLink)" [routerLink]="currentLink">
+        <ng-container *ngTemplateOutlet="carouselContent"></ng-container>
+      </a>
+      <a *ngIf="!isLinkInternal(currentLink)" [href]="currentLink" [target]="carouselOptions.targetBlank ? '_blank' : null">
+        <ng-container *ngTemplateOutlet="carouselContent"></ng-container>
+      </a>
+    </ng-container>
+    <ng-template #carouselContent>
+      <div class="carousel-content-wrapper"
+           [ngStyle]="{
+                'height': carouselOptions.keepAspectRatio ? null : carouselOptions.carouselHeightPx + 'px',
+                'aspect-ratio': carouselOptions.keepAspectRatio ? carouselOptions.aspectRatio : null
+           }">
+        <div class="picsum-img-wrapper" *ngIf="(itemToImageHrefMap$ | async).get(item.indexableObject.uuid); let href">
+          <img [src]="href" [alt]="item.indexableObject.metadata[title][0].value" class="img-fluid"
+               [ngClass]="{'w-100': carouselOptions.fitWidth, 'h-100': carouselOptions.fitHeight}">
+        </div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-inner">
+            <h3 data-test="carouselObjTitle" [class]="carouselOptions.titleStyle"
+                *ngIf="item.indexableObject.metadata[title]">
+              {{item.indexableObject.metadata[title][0].value}}</h3>
+            <div data-test="carouselObjDesc" class="carousel-caption-text pr-3 pl-2" [class]="carouselOptions.captionStyle"
+                 *ngIf="item.indexableObject.metadata[description]; let descriptionObj">
+              {{descriptionObj[0].value}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ng-template>
+</ngb-carousel>
+<div class="text-center play-pause-button">
+  <button type="button" class="btn btn-sm toggle-paused" (click)="togglePaused()">
+    <i class="fas fa-play" *ngIf="paused"></i>
+    <i class="fas fa-pause" *ngIf="!paused"></i>
+  </button>
+</div>
