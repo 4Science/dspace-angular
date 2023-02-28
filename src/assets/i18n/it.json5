@@ -11450,6 +11450,12 @@
   "layout.field.label.Picture.dc.description.preservationspecifications": "Specifiche sullo stato di conservazione",
   "layout.field.label.Picture.dc.description.note": "Note",
   "layout.field.label.Picture.dc.contributor.author": "Creatore",
-  "layout.field.label.Picture.dc.contributor.authorrole": "Ruolo"
+  "layout.field.label.Picture.dc.contributor.authorrole": "Ruolo",
+
+  "layout.field.label.Path.dc.description": "Descrizione",
+  "layout.field.label.Path.dc.subject": "Keyword(s)",
+  "layout.field.label.Path.cris.priority": "Posizione",
+  "layout.field.label.Path.glam.index": "Numero di corda",
+  "layout.field.label.Path.dc.relation.aggregation": "Aggregazione"
 
 }
