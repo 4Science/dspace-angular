@@ -23,13 +23,11 @@ export class BackgroundImageDirective implements OnChanges {
     } else if (this.dsBackgroundImage instanceof RemoteData) {
       thumbnailSrc = this.dsBackgroundImage?.payload?._links?.content?.href;
     } else {
-      thumbnailSrc = this.dsBackgroundImage ?? 'assets/images/replacement_image.svg';
+      thumbnailSrc = this.dsBackgroundImage;
     }
-    if (thumbnailSrc) {
-      this.el.nativeElement.style.backgroundImage = `url("${thumbnailSrc}")`;
-      this.el.nativeElement.style.backgroundPosition = `center`;
-      this.el.nativeElement.style.backgroundSize = `cover`;
-      this.el.nativeElement.style.backgroundRepeat = `no-repeat`;
-    }
+    this.el.nativeElement.style.backgroundImage = `url("${thumbnailSrc ?? 'assets/images/replacement_image.svg'}")`;
+    this.el.nativeElement.style.backgroundPosition = `center`;
+    this.el.nativeElement.style.backgroundSize = `cover`;
+    this.el.nativeElement.style.backgroundRepeat = `no-repeat`;
   }
 }

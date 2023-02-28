@@ -31,7 +31,7 @@ export class CarouselRelationsComponent extends SearchComponent {
     fitHeight: true,
     fitWidth: true,
     keepAspectRatio: false,
-    link: 'dc.link',
+    link: 'dc.identifier.uri',
     targetBlank: false,
     title: 'dc.title',
     titleStyle: ''

@@ -1,36 +1,22 @@
-<ngb-carousel #carousel [interval]="2000" (slide)="onSlide($event)" class="ds-carousel">
+<ngb-carousel #carousel [interval]="2000" (slide)="onSlide($event)" class="ds-carousel position-relative">
   <ng-template ngbSlide *ngFor="let item of items; let i = index; let last = last">
-    <ng-container *ngIf="getItemLink(item.indexableObject); let currentLink; else carouselContent">
-      <a *ngIf="isLinkInternal(currentLink)" [routerLink]="currentLink">
-        <ng-container *ngTemplateOutlet="carouselContent"></ng-container>
-      </a>
-      <a *ngIf="!isLinkInternal(currentLink)" [href]="currentLink" [target]="carouselOptions.targetBlank ? '_blank' : null">
-        <ng-container *ngTemplateOutlet="carouselContent"></ng-container>
-      </a>
-    </ng-container>
-    <ng-template #carouselContent>
-      <div class="carousel-content-wrapper"
-           [ngStyle]="{
+    <div class="carousel-content-wrapper"
+         [ngStyle]="{
                 'height': carouselOptions.keepAspectRatio ? null : carouselOptions.carouselHeightPx + 'px',
                 'aspect-ratio': carouselOptions.keepAspectRatio ? carouselOptions.aspectRatio : null
            }">
-        <div class="picsum-img-wrapper" *ngIf="(itemToImageHrefMap$ | async).get(item.indexableObject.uuid); let href">
-          <img [src]="href" [alt]="item.indexableObject.metadata[title][0].value" class="img-fluid"
+      <div class="picsum-img-wrapper"
+           *ngIf="(itemToImageHrefMap$ | async).get(item.indexableObject.uuid); let href; else placeholderImage">
+        <img [src]="href" [alt]="item.indexableObject.metadata[title][0].value" class="img-fluid"
+             [ngClass]="{'w-100': carouselOptions.fitWidth, 'h-100': carouselOptions.fitHeight}">
+      </div>
+      <ng-template #placeholderImage>
+        <div class="picsum-img-wrapper">
+          <img [src]="placeholderSrc" [alt]="item.indexableObject.metadata[title][0].value" class="img-fluid"
                [ngClass]="{'w-100': carouselOptions.fitWidth, 'h-100': carouselOptions.fitHeight}">
         </div>
-        <div class="carousel-caption">
-          <div class="carousel-caption-inner">
-            <h3 data-test="carouselObjTitle" [class]="carouselOptions.titleStyle"
-                *ngIf="item.indexableObject.metadata[title]">
-              {{item.indexableObject.metadata[title][0].value}}</h3>
-            <div data-test="carouselObjDesc" class="carousel-caption-text pr-3 pl-2" [class]="carouselOptions.captionStyle"
-                 *ngIf="item.indexableObject.metadata[description]; let descriptionObj">
-              {{descriptionObj[0].value}}
-            </div>
-          </div>
-        </div>
-      </div>
-    </ng-template>
+      </ng-template>
+    </div>
   </ng-template>
 </ngb-carousel>
 <div class="text-center play-pause-button">
@@ -38,4 +24,32 @@
     <i class="fas fa-play" *ngIf="paused"></i>
     <i class="fas fa-pause" *ngIf="!paused"></i>
   </button>
+</div>
+<div class="thumbnail-grid">
+  <div class="thumbnail-container" [ngClass]="{'selected': activeItemIndex === i}"
+       *ngFor="let item of items; index as i" (click)="setActiveItem(i)"
+       [dsBackgroundImage]="item.indexableObject?.thumbnail | async"></div>
+</div>
+<div class="container">
+  <div class="text-center my-5">
+    <h2 class="font-weight-bold" [class]="carouselOptions.titleStyle"
+        *ngIf="activeItem?.indexableObject?.metadata[title]">
+      {{activeItem?.indexableObject?.metadata[title][0].value}}</h2>
+    <p [class]="carouselOptions.captionStyle"
+       *ngIf="activeItem?.indexableObject?.metadata[description]; let descriptionObj">
+      {{descriptionObj[0].value}}
+    </p>
+    <ng-container *ngIf="getItemLink(activeItem?.indexableObject); let currentLink">
+      <a *ngIf="isLinkInternal(currentLink)" [routerLink]="currentLink">
+        <ng-container *ngTemplateOutlet="seeMoreButton"></ng-container>
+      </a>
+      <a *ngIf="!isLinkInternal(currentLink)" [href]="currentLink"
+         [target]="carouselOptions.targetBlank ? '_blank' : null">
+        <ng-container *ngTemplateOutlet="seeMoreButton"></ng-container>
+      </a>
+    </ng-container>
+    <ng-template #seeMoreButton>
+      <button type="button" class="btn btn-secondary mt-3">{{'carousel.button.see-more' | translate}}</button>
+    </ng-template>
+  </div>
 </div>

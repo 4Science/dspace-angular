@@ -10,10 +10,16 @@
 
     .carousel-control-prev-icon {
       padding: 6px 7px 6px 5px;
+      position: absolute;
+      left: 0;
+      transform: translateX(-200%);
     }
 
     .carousel-control-next-icon {
       padding: 6px 5px 6px 7px;
+      position: absolute;
+      right: 0;
+      transform: translateX(200%);
     }
 
     .carousel-control-prev, .carousel-control-next {
@@ -26,20 +32,11 @@
     }
 
     .carousel-indicators li {
-      background-color: var(--ds-carousel-controls-color);
+      display: none;
     }
 
     .carousel-caption {
       color: var(--ds-carousel-caption-color);
-      background: var(--ds-carousel-caption-background);
-      position: absolute;
-      right: 0;
-      left: 0;
-      bottom: 0;
-      padding-top: 10px;
-      padding-bottom: 45px;
-      width: 76%;
-      margin: 0 auto;
     }
   }
 
@@ -90,5 +87,15 @@
     outline: none;
     box-shadow: none !important
   }
+
+  div.thumbnail-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    div.thumbnail-container {
+      overflow: hidden;
+      height: 120px;
+      &.selected {
+        box-shadow:0px 0px 0px 3px $primary inset;      }
+    }}
 
 }

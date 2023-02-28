@@ -1469,6 +1469,10 @@
 
 
 
+  // "carousel.button.see-more": "See more",
+  "carousel.button.see-more": "Approfondisci",
+
+
   // "chips.remove": "Remove chip",
   "chips.remove": "Rimuovere il chip",
 
