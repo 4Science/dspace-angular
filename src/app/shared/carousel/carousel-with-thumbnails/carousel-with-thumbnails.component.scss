@@ -50,17 +50,29 @@
     align-items: center;
     justify-content: center;
     display: flex;
+    backdrop-filter: blur(12px) brightness(.7);
+    img.blurry-backdrop {
+      max-width: 95%;
+      max-height: 95%;
+    }
   }
 
   .play-pause-button {
     z-index: 15;
-    margin-top: -30px;
-    position: relative
+    margin-top: -31px;
+    position: relative;
+    bottom: 1.5em;
+    button {
+      background-color: $white;
+    }
   }
 
   .carousel-content-wrapper {
     z-index: -1;
     min-height: 180px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 
   .carousel-caption-text {
