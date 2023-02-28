@@ -4,6 +4,7 @@
   [searchEnabled]="searchEnabled"
   [showCharts]="true"
   [showScopeSelector]="false"
+  [header]="box.header"
   *ngIf="box.style === 'carousel'; else searchPage">
 </ds-carousel-relations>
 <ng-template #searchPage>

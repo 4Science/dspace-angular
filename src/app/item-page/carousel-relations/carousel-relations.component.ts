@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { SearchComponent } from '../../shared/search/search.component';
 import { SearchService } from '../../core/shared/search/search.service';
 import { SearchManager } from '../../core/browse/search-manager';
@@ -22,6 +22,8 @@ import { CarouselOptions } from '../../shared/carousel/carousel-options.model';
   ]
 })
 export class CarouselRelationsComponent extends SearchComponent {
+
+  @Input() header: string;
 
   carouselOptions: CarouselOptions = {
     aspectRatio: undefined,

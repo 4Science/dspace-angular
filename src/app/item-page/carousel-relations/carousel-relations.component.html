@@ -1,3 +1,4 @@
+<h1 class="text-center font-weight-bold">{{header}}</h1>
 <div *ngIf="(resultsRD$ | async)?.payload?.page?.length > 0">
   <ds-carousel-with-thumbnails
     [carouselOptions]="carouselOptions" [items]="(resultsRD$ | async)?.payload.page"></ds-carousel-with-thumbnails>
