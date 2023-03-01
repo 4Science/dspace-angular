@@ -10484,7 +10484,7 @@
   "context-menu.actions.edit-item-relationships.btn.children": "Gestisci i livelli di descrizione inferioire",
 
   //"context-menu.actions.edit-item-relationships.btn.events": "Manage Events",
-  "context-menu.actions.edit-item-relationships.btn.events": "gestisci gli Eventi",
+  "context-menu.actions.edit-item-relationships.btn.events": "Gestisci gli eventi",
 
   //"RELATION.Person.publications.search.results.head" : "Publications",
   "RELATION.Person.publications.search.results.head" : "Pubblicazioni",
@@ -11456,6 +11456,15 @@
   "layout.field.label.Path.dc.subject": "Keyword(s)",
   "layout.field.label.Path.cris.priority": "Posizione",
   "layout.field.label.Path.glam.index": "Numero di corda",
-  "layout.field.label.Path.dc.relation.aggregation": "Aggregazione"
+  "layout.field.label.Path.dc.relation.aggregation": "Aggregazione",
+
+  "layout.tab.header.Place.placepeople": "Persone Collegate",
+  "RELATION.Place.people.search.results.head" : "Persone",
+  "search.filters.applied.charts.RELATION.Place.people.title": "Persone",
+
+  "layout.tab.header.Place.placeplaces": "Luoghi Collegati",
+  "RELATION.Place.places.search.results.head" : "Luoghi",
+  "search.filters.applied.charts.RELATION.Place.places.title": "Luoghi",
+  "context-menu.actions.edit-item-relationships.btn.places": "Gestisci i luoghi"
 
 }
