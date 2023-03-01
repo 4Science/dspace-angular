@@ -83,7 +83,7 @@ export class GridSectionComponent implements OnInit {
     this.paginatedSearchOptions = new PaginatedSearchOptions({
       configuration: this.gridSection.discoveryConfigurationName,
       pagination: pagination,
-      sort: new SortOptions('dc.title', SortDirection.ASC)
+      sort: new SortOptions(this.gridSection.sortField ?? 'dc.title', this.gridSection.order ?? SortDirection.ASC)
     });
 
     this.getMainBoxResults();

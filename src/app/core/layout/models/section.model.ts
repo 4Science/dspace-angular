@@ -5,6 +5,7 @@ import { autoserialize, deserialize } from 'cerialize';
 import { HALLink } from '../../shared/hal-link.model';
 import { excludeFromEquals } from '../../utilities/equals.decorators';
 import { ResourceType } from '../../shared/resource-type';
+import { SortDirection } from '../../cache/models/sort-options.model';
 
 /**
  * Describes a type of Section.
@@ -67,6 +68,8 @@ export interface TopSection extends SectionComponent {
 }
 
 export interface GridSection extends SectionComponent {
+  order: SortDirection;
+  sortField: string;
   discoveryConfigurationName: string;
   mainContentLink: string;
 }
