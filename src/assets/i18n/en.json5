@@ -7208,5 +7208,13 @@
 
   "curation-task.task.undopdfiiif.label": "Undo PDF 2 IIIF Images",
 
-  "curation-task.task.rebuildpdftoc.label": "Rebuild the PDF ToC"
+  "curation-task.task.rebuildpdftoc.label": "Rebuild the PDF ToC",
+
+  "RELATION.Place.people.search.results.head" : "People",
+  "search.filters.applied.charts.RELATION.Place.people.title": "People",
+
+  "RELATION.Place.places.search.results.head" : "Places",
+  "search.filters.applied.charts.RELATION.Place.places.title": "Places",
+  "context-menu.actions.edit-item-relationships.btn.places": "Manage Places"
+
 }
