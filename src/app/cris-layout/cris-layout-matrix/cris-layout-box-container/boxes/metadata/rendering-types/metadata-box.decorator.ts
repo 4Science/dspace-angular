@@ -24,6 +24,7 @@ export enum FieldRenderingType {
   SEARCH = 'SEARCH',
   TAGSEARCH = 'TAG-SEARCH',
   ADVANCEDATTACHMENT = 'ADVANCEDATTACHMENT',
+  BACKGROUND = 'BACKGROUND',
 }
 
 const fieldType = new Map();
