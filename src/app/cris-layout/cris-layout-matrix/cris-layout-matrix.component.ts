@@ -8,7 +8,7 @@ import { Item } from '../../core/shared/item.model';
   templateUrl: './cris-layout-matrix.component.html',
   styleUrls: ['./cris-layout-matrix.component.scss']
 })
-export class CrisLayoutMatrixComponent implements AfterViewInit {
+export class CrisLayoutMatrixComponent {
 
   /**
    * Tabs to render
@@ -30,13 +30,7 @@ export class CrisLayoutMatrixComponent implements AfterViewInit {
    */
   @Input() showCellPadding = true;
 
-  @ViewChild('imageCard', {static: true}) imageCard;
-
   constructor(private renderer: Renderer2) {
-  }
-
-  ngAfterViewInit(): void {
-    this.renderer.setStyle(this.imageCard.nativeElement, 'background-image', `url('/assets/images/replacement_image.svg')`);
   }
 
   /**
