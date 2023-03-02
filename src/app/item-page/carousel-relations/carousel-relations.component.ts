@@ -36,7 +36,8 @@ export class CarouselRelationsComponent extends SearchComponent {
     link: 'dc.identifier.uri',
     targetBlank: false,
     title: 'dc.title',
-    titleStyle: ''
+    titleStyle: '',
+    showBlurryBackdrop: false
 
   };
 
