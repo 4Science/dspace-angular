@@ -36,6 +36,17 @@ export class AttachmentComponent extends BitstreamAttachmentRenderingModelCompon
   canViewMore = false;
 
   /**
+   * The number of total bitstreams
+   */
+  bitstreamsNumber = 0;
+
+  /**
+   * The number of showable bitstreams
+   */
+  showableBitstreamsNumber = 0;
+
+
+  /**
    * Environment variables configuring pagination
    */
   envPagination = environment.attachmentRendering.pagination;
@@ -67,9 +78,20 @@ export class AttachmentComponent extends BitstreamAttachmentRenderingModelCompon
    * Retrieve the list of bitstream to show
    */
   retrieveBitstreams(): void {
+
+    this.getTotalBitstreamsByItem(this.pageOptions).pipe(
+      map((bitstreamList: PaginatedList<Bitstream>) => {
+        this.bitstreamsNumber = bitstreamList.totalElements;
+        return bitstreamList.page;
+      }),
+      take(1)
+    ).subscribe((bitstreams: Bitstream[]) => {
+    });
+
     this.getBitstreamsByItem(this.pageOptions).pipe(
       map((bitstreamList: PaginatedList<Bitstream>) => {
         this.canViewMore = this.envPagination.enabled && this.pageOptions?.currentPage !== bitstreamList?.pageInfo?.totalPages;
+        this.showableBitstreamsNumber = bitstreamList.totalElements;
         return bitstreamList.page;
       }),
       take(1)

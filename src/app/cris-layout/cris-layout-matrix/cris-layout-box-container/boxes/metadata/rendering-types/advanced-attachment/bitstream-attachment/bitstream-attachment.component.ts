@@ -44,6 +44,12 @@ export class BitstreamAttachmentComponent extends BitstreamRenderingModelCompone
   @Input()
   attachment: Bitstream;
 
+  @Input()
+  bitstreamsNumber: number;
+
+  @Input()
+  showableBitstreamsNumber: number;
+
   constructor(
     @Inject('fieldProvider') public fieldProvider: LayoutField,
     @Inject('itemProvider') public itemProvider: Item,

@@ -1,5 +1,18 @@
-<div class="d-flex">
-  <div class="truncatable-content">
+<div class="row">
+  <div *ngIf="showThumbnails" class="col-3 col-xl-2 pr-sm-0">
+    <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'"
+       rel="noopener noreferrer"
+       [routerLink]="[itemPageRoute]" class="dont-break-out">
+      <ds-thumbnail [thumbnail]="dso?.thumbnail | async" [limitWidth]="true">
+      </ds-thumbnail>
+    </a>
+    <span *ngIf="linkType == linkTypes.None" class="dont-break-out">
+    <ds-thumbnail [thumbnail]="dso?.thumbnail | async" [limitWidth]="true">
+    </ds-thumbnail>
+    </span>
+  </div>
+  <div class="d-flex" [ngClass]="showThumbnails ? 'col-9 col-xl-10' : 'col-12'">
+    <div class="truncatable-content">
     <div>
       <ds-type-badge class="d-inline-block" *ngIf="showLabel" [object]="dso"></ds-type-badge>
       <ds-access-status-badge class="d-inline-block pl-1" [item]="dso"></ds-access-status-badge>

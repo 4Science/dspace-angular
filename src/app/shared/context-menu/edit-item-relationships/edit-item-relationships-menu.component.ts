@@ -91,7 +91,10 @@ export class EditItemRelationshipsMenuComponent extends ContextMenuEntryComponen
     this.tabs.forEach((tab: CrisLayoutTab) => {
       tab.rows.forEach((row: CrisLayoutRow) => {
         row.cells.forEach((cell: CrisLayoutCell) => {
-          const relationshipsBoxes = cell.boxes.filter((box) => box.boxType === 'RELATION');
+          const relationshipsBoxes = cell.boxes.filter((box) => {
+            // WORKAROUND: exclude "fondschildren" and "journalfondchildren" relation boxes
+            return box.boxType === 'RELATION' && box.shortname !== 'children';
+          });
           this.relationships.push(...relationshipsBoxes);
         });
       });

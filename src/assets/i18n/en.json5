@@ -697,6 +697,8 @@
 
   "admin.batch-import.page.help": "Select the Collection to import into. Then, drop or browse to a Simple Archive Format (SAF) zip file that includes the Items to import",
 
+  "admin.batch-import.page.toggle.help": "It is possible to perform import either with file upload or via URL, use above toggle to set the input source",
+
   "admin.metadata-import.page.dropMsg": "Drop a metadata CSV to import",
 
   "admin.batch-import.page.dropMsg": "Drop a batch ZIP to import",
@@ -713,7 +715,15 @@
 
   "admin.metadata-import.page.error.addFile": "Select file first!",
 
+  "admin.metadata-import.page.error.addFileUrl": "Insert file url first!",
+
   "admin.batch-import.page.error.addFile": "Select Zip file first!",
+
+  "admin.metadata-import.page.toggle.upload": "Upload",
+
+  "admin.metadata-import.page.toggle.url": "URL",
+
+  "admin.metadata-import.page.urlMsg": "Insert the batch ZIP url to import",
 
   "admin.metadata-import.page.validateOnly": "Validate Only",
 
@@ -892,6 +902,102 @@
 
   "browse.comcol.by.subjectA" : "Subject",
 
+  "browse.comcol.by.titleEvent": "Title",
+
+  "browse.comcol.by.titleAM": "Title",
+
+  "browse.comcol.by.titleFamily": "Title",
+
+  "browse.comcol.by.titlePlace": "Title",
+
+  "browse.comcol.by.titleN": "Title",
+
+  "browse.comcol.by.titleSP": "Title",
+
+  "browse.comcol.by.titleJI": "Title",
+
+  "browse.comcol.by.titlePath": "Title",
+
+  "browse.comcol.by.titleO": "Title",
+
+  "browse.comcol.by.titleC": "Title",
+
+  "browse.comcol.by.titleSM": "Title",
+
+  "browse.comcol.by.titlePicture": "Title",
+
+  "browse.comcol.by.dateissuedEvent": "Date",
+
+  "browse.comcol.by.subjectEvent": "Subject",
+
+  "browse.comcol.by.typeEvent": "Type",
+
+  "browse.comcol.by.dateissuedAM": "Date",
+
+  "browse.comcol.by.subjectAM": "Subject",
+
+  "browse.comcol.by.typeAM": "Type",
+
+  "browse.comcol.by.dateissuedFamily": "Date",
+
+  "browse.comcol.by.subjectFamily": "Subject",
+
+  "browse.comcol.by.typeFamily": "Type",
+
+  "browse.comcol.by.dateissuedPlace": "Date",
+
+  "browse.comcol.by.subjectPlace": "Subject",
+
+  "browse.comcol.by.typePlace": "Type",
+
+  "browse.comcol.by.dateissuedN": "Date",
+
+  "browse.comcol.by.subjectN": "Subject",
+
+  "browse.comcol.by.typeN": "Type",
+
+  "browse.comcol.by.dateissuedSP": "Date",
+
+  "browse.comcol.by.subjectSP": "Subject",
+
+  "browse.comcol.by.typeSP": "Type",
+
+  "browse.comcol.by.dateissuedJI": "Date",
+
+  "browse.comcol.by.subjectJI": "Subject",
+
+  "browse.comcol.by.typeJI": "Type",
+
+  "browse.comcol.by.dateissuedPath": "Date",
+
+  "browse.comcol.by.subjectPath": "Subject",
+
+  "browse.comcol.by.typePath": "Type",
+
+  "browse.comcol.by.dateissuedO": "Date",
+
+  "browse.comcol.by.subjectO": "Subject",
+
+  "browse.comcol.by.typeO": "Type",
+
+  "browse.comcol.by.dateissuedC": "Date",
+
+  "browse.comcol.by.subjectC": "Subject",
+
+  "browse.comcol.by.typeC": "Type",
+
+  "browse.comcol.by.dateissuedSM": "Date",
+
+  "browse.comcol.by.subjectSM": "Subject",
+
+  "browse.comcol.by.typeSM": "Type",
+
+  "browse.comcol.by.dateissuedPicture": "Date",
+
+  "browse.comcol.by.subjectPicture": "Subject",
+
+  "browse.comcol.by.typePicture": "Type",
+
 
   "browse.comcol.head": "Browse",
 
@@ -972,6 +1078,102 @@
   "browse.metadata.dateissuedA.breadcrumbs" : "Browse by Date",
 
   "browse.metadata.subjectA.breadcrumbs" : "Browse by Subject",
+
+  "browse.metadata.titleEvent.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titleAM.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titleFamily.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titlePlace.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titleN.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titleSP.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titleJI.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titlePath.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titleO.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titleC.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titleSM.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titlePicture.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.dateissuedEvent.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectEvent.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typeEvent.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedAM.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectAM.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typeAM.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedFamily.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectFamily.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typeFamily.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedPlace.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectPlace.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typePlace.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedN.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectN.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typeN.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedSP.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectSP.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typeSP.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedJI.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectJI.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typeJI.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedPath.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectPath.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typePath.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedO.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectO.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typeO.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedC.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectC.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typeC.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedSM.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectSM.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typeSM.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedPicture.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectPicture.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typePicture.breadcrumbs": "Browse by Type",
 
   "browse.metadata.titleF" : "Title",
 
@@ -4499,7 +4701,7 @@
 
   "profile.card.access-token.copy-info": "Make sure to copy your personal access token now. You won’t be able to see it again!",
 
-  "profile.card.access-token.info": "Tokens you have generated that can be used to access the DSpace-CRIS API.",
+  "profile.card.access-token.info": "Tokens you have generated that can be used to access the DSpace-GLAM API.",
 
   "profile.card.access-token.create.error": "An error occurred while generating the token, please try again later.",
 
@@ -4519,7 +4721,7 @@
 
   "profile.card.access-token.delete": "Revoke token",
 
-  "profile.card.access-token.no-token-generated": "You don't have personal access token. Generate a personal access token for quick access to the DSpace-CRIS API.",
+  "profile.card.access-token.no-token-generated": "You don't have personal access token. Generate a personal access token for quick access to the DSpace-GLAM API.",
 
   "profile.card.access-token.token-generated": "You have already generated a personal access token.",
 
@@ -6429,7 +6631,7 @@
 
 
 
-  "title": "DSpace GLAM",
+  "title": "DSpace-GLAM",
 
 
 
@@ -7039,5 +7241,13 @@
 
   "curation-task.task.undopdfiiif.label": "Undo PDF 2 IIIF Images",
 
-  "curation-task.task.rebuildpdftoc.label": "Rebuild the PDF ToC"
+  "curation-task.task.rebuildpdftoc.label": "Rebuild the PDF ToC",
+
+  "RELATION.Place.people.search.results.head" : "People",
+  "search.filters.applied.charts.RELATION.Place.people.title": "People",
+
+  "RELATION.Place.places.search.results.head" : "Places",
+  "search.filters.applied.charts.RELATION.Place.places.title": "Places",
+  "context-menu.actions.edit-item-relationships.btn.places": "Manage Places"
+
 }

@@ -105,6 +105,7 @@ export class CollectionPageComponent implements OnInit {
           return this.searchService.search<Item>(
             new PaginatedSearchOptions({
               scope: id,
+              configuration: 'collection',
               pagination: currentPagination,
               sort: currentSort,
               dsoTypes: [DSpaceObjectType.ITEM],
