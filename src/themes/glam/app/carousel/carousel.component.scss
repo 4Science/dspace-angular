@@ -76,8 +76,10 @@
     align-items: center;
     justify-content: center;
     display: flex;
-    img {
-      object-fit: cover;
+    backdrop-filter: blur(12px) brightness(.7);
+    img.blurry-backdrop {
+      max-width: 95%;
+      max-height: 95%;
     }
   }
 
@@ -90,6 +92,9 @@
   .carousel-content-wrapper {
     z-index: -1;
     min-height: 180px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   .carousel-caption-text {

@@ -367,6 +367,7 @@ import {
 } from './resource-policies/form/eperson-group-list/group-search-box/group-search-box.component';
 import { EntityIconDirective } from './entity-icon/entity-icon.directive';
 import { ItemExportListComponent } from './search/item-export/item-export/item-export-list/item-export-list.component';
+import { BackgroundImageDirective } from './utils/background-image.directive';
 
 const MODULES = [
   CommonModule,
@@ -701,7 +702,8 @@ const DIRECTIVES = [
   NgForTrackByIdDirective,
   MetadataFieldValidator,
   HoverClassDirective,
-  EntityIconDirective
+  EntityIconDirective,
+  BackgroundImageDirective
 ];
 
 @NgModule({
