@@ -132,6 +132,9 @@ import {
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/advanced-attachment/bitstream-attachment/bitstream-attachment.component';
 import { ItemSharedModule } from '../item-page/item-shared.module';
 import { ViewersSharedModule } from '../item-page/viewer-provider/viewers/viewers-shared.module';
+import {
+  BackgroundComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/background/background.component';
 
 const ENTRY_COMPONENTS = [
   CrisLayoutVerticalComponent,
@@ -163,7 +166,8 @@ const ENTRY_COMPONENTS = [
   MarkdownComponent,
   SearchComponent,
   TagSearchComponent,
-  AdvancedAttachmentComponent
+  AdvancedAttachmentComponent,
+  BackgroundComponent
 ];
 
 @NgModule({

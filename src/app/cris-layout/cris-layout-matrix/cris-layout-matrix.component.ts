@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input, Renderer2, ViewChild } from '@angular/core';
 
 import { CrisLayoutTab } from '../../core/layout/models/tab.model';
 import { Item } from '../../core/shared/item.model';
@@ -29,6 +29,9 @@ export class CrisLayoutMatrixComponent {
    * A boolean representing if to use an internal padding for the cells
    */
   @Input() showCellPadding = true;
+
+  constructor(private renderer: Renderer2) {
+  }
 
   /**
    * Check if style contains 'col' or 'col-x'
