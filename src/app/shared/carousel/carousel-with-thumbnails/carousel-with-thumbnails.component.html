@@ -1,4 +1,4 @@
-<ngb-carousel #carousel [interval]="2000" (slide)="onSlide($event)" class="ds-carousel position-relative">
+<ngb-carousel #carousel [interval]="99999999" (slide)="onSlide($event)" class="ds-carousel position-relative">
   <ng-template ngbSlide *ngFor="let item of items; let i = index; let last = last">
     <div class="carousel-content-wrapper"
          *ngIf="(itemToImageHrefMap$ | async).get(item.indexableObject.uuid); let href; else placeholderImage"
@@ -25,12 +25,6 @@
     </ng-template>
   </ng-template>
 </ngb-carousel>
-<div class="text-center play-pause-button">
-  <button type="button" class="btn btn-sm toggle-paused" (click)="togglePaused()">
-    <i class="fas fa-play" *ngIf="paused"></i>
-    <i class="fas fa-pause" *ngIf="!paused"></i>
-  </button>
-</div>
 <div class="thumbnail-grid">
   <div class="thumbnail-container" [ngClass]="{'selected': activeItemIndex === i}"
        *ngFor="let item of items; index as i" (click)="setActiveItem(i)"

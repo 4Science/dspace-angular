@@ -24,18 +24,10 @@ export class CarouselWithThumbnailsComponent extends CarouselComponent implement
   onSlide(slideEvent: NgbSlideEvent) {
     this.activeItemIndex = +slideEvent.current.split('ngb-slide-')[1];
     this.activeItem = this.items[this.activeItemIndex];
-    if (this.unpauseOnArrow && slideEvent.paused &&
-      (slideEvent.source === NgbSlideEventSource.ARROW_LEFT || slideEvent.source === NgbSlideEventSource.ARROW_RIGHT)) {
-      this.togglePaused();
-    }
-    if (this.pauseOnIndicator && !slideEvent.paused && slideEvent.source === NgbSlideEventSource.INDICATOR) {
-      this.togglePaused();
-    }
   }
 
   setActiveItem(i: number) {
     this.carousel.select('ngb-slide-' + i);
     this.carousel.pause();
-    this.paused = true;
   }
 }
