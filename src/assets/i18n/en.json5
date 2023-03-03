@@ -7168,7 +7168,7 @@
 
   "submission.sections.submit.progressbar.describe.scientificmaterial_references": "Scientific Material Contextual References",
 
-  "submission.sections.submit.progressbar.describe.journal_issue": "Journal Issue Details",
+  "submission.sections.submit.progressbar.describe.journal_file": "Journal File Details",
 
   "map.coordinates-invalid": "Coordinates are not valid",
 
@@ -7215,6 +7215,8 @@
 
   "RELATION.Place.places.search.results.head" : "Places",
   "search.filters.applied.charts.RELATION.Place.places.title": "Places",
-  "context-menu.actions.edit-item-relationships.btn.places": "Manage Places"
+  "context-menu.actions.edit-item-relationships.btn.places": "Manage Places",
 
+  "journalfile.listelement.badge": "Journal File",
+  "search.filters.entityType.JournalFile": "Journal File"
 }

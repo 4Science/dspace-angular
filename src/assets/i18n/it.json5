@@ -9759,8 +9759,8 @@
   //"layout.tab.header.StaticPage.details": "Details",
   "layout.tab.header.StaticPage.details": "Informazioni di Dettaglio",
 
-  //"layout.tab.header.JournalIssue.details": "Details",
-  "layout.tab.header.JournalIssue.details": "Informazioni di Dettaglio",
+  //"layout.tab.header.JournalFile.details": "Details",
+  "layout.tab.header.JournalFile.details": "Informazioni di Dettaglio",
 
 
   //"layout.box.header.Person.profile": "Profile",
@@ -9904,8 +9904,8 @@
   "layout.box.header.StaticPage.details": "Descrizione",
 
 
-  //"layout.box.header.JournalIssue.details": "Description",
-  "layout.box.header.JournalIssue.details": "Descrizione",
+  //"layout.box.header.JournalFile.details": "Description",
+  "layout.box.header.JournalFile.details": "Descrizione",
 
 
 
@@ -11266,8 +11266,8 @@
   // TODO Source message changed - Revise the translation
   "submission.sections.submit.progressbar.describe.journal_materials_references": "Contesto",
 
-  //"submission.sections.submit.progressbar.describe.journal_issue": "Journal Issue Details",
-  "submission.sections.submit.progressbar.describe.journal_issue": "Informazioni di dettaglio",
+  //"submission.sections.submit.progressbar.describe.journal_file": "Journal File Details",
+  "submission.sections.submit.progressbar.describe.journal_file": "Informazioni di dettaglio",
 
   //"submission.sections.submit.progressbar.describe.path": "Path Details",
   "submission.sections.submit.progressbar.describe.path": "Informazioni di dettaglio",
@@ -11465,6 +11465,10 @@
   "layout.tab.header.Place.placeplaces": "Luoghi Collegati",
   "RELATION.Place.places.search.results.head" : "Luoghi",
   "search.filters.applied.charts.RELATION.Place.places.title": "Luoghi",
-  "context-menu.actions.edit-item-relationships.btn.places": "Gestisci i luoghi"
+  "context-menu.actions.edit-item-relationships.btn.places": "Gestisci i luoghi",
 
+  "journalfile.listelement.badge": "Fascicolo Periodico",
+
+  // "search.filters.entityType.JournalFile": "Journal File",
+  "search.filters.entityType.JournalFile": "Fascicolo Periodico"
 }
