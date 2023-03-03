@@ -388,11 +388,18 @@ layout:
   navbar:
     # If true, show the "Community and Collections" link in the navbar; otherwise, show it in the admin sidebar
     showCommunityCollection: true
+    footer:
+      involvedInstitutions:
+        - src: ''
+          href: ''
 
 cms:
-  metadataList: ['cris.cms.home-header', 'cris.cms.home-news', 'cris.cms.footer']
+  metadataList: ['cris.cms.home-header', 'cris.cms.home-news', 'cris.cms.footer', 'cris.cms.grid-component-badge', 'cris.cms.grid-component-title', 'cris.cms.grid-component-abstract']
 
 addThisPlugin:
   siteId: ''
   scriptUrl: "http://s7.addthis.com/js/300/addthis_widget.js#pubid="
   socialNetworksEnabled: false
+
+#  Main site url for glam theme
+mainSiteUrl: "www.sito.principale"

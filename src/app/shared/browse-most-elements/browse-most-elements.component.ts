@@ -48,9 +48,9 @@ export class BrowseMostElementsComponent implements OnInit {
   public collectionElementLinkTypeEnum = CollectionElementLinkType;
 
   constructor(
-    private searchService: SearchService,
-    private cdr: ChangeDetectorRef,
-    private router: Router,
+    protected searchService: SearchService,
+    protected cdr: ChangeDetectorRef,
+    protected router: Router,
   ) {
     /* */
   }
@@ -59,7 +59,7 @@ export class BrowseMostElementsComponent implements OnInit {
     this.getSearchResults();
   }
 
-  private getSearchResults() {
+  protected getSearchResults() {
     this.searchService
       .search(this.paginatedSearchOptions, null, true, true, followLink('thumbnail'))
       .pipe(getFirstCompletedRemoteData())

@@ -37,6 +37,8 @@ import {
   ItemExportModalLauncherComponent
 } from './item-export/item-export-modal-launcher/item-export-modal-launcher.component';
 import { ItemExportListComponent } from './item-export/item-export/item-export-list/item-export-list.component';
+import { CarouselRelationsComponent } from '../../item-page/carousel-relations/carousel-relations.component';
+import { CarouselModule } from '../carousel/carousel.module';
 
 const COMPONENTS = [
   SearchComponent,
@@ -60,6 +62,7 @@ const COMPONENTS = [
   SearchAuthorityFilterComponent,
   SearchSwitchConfigurationComponent,
   ConfigurationSearchPageComponent,
+  CarouselRelationsComponent,
   ThemedConfigurationSearchPageComponent,
   ThemedSearchResultsComponent,
   ThemedSearchSettingsComponent,
@@ -97,6 +100,7 @@ export const MODELS = [
   ],
   imports: [
     CommonModule,
+    CarouselModule,
     TranslateModule.forChild({
       missingTranslationHandler: { provide: MissingTranslationHandler, useClass: MissingTranslationHelper },
       useDefaultLang: true

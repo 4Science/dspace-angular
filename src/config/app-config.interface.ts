@@ -62,6 +62,7 @@ interface AppConfig extends Config {
   metricVisualizationConfig: MetricVisualizationConfig[];
   attachmentRendering: AttachmentRenderingConfig;
   advancedAttachmentRendering: AdvancedAttachmentRenderingConfig;
+  mainSiteUrl: string;
 }
 
 /**

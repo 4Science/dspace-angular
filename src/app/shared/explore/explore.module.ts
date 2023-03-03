@@ -24,6 +24,8 @@ import { CarouselSectionComponent } from './section-component/carousel-section/c
 import { ThemedCarouselSectionComponent } from './section-component/carousel-section/themed-carousel-section.component';
 import { CarouselModule } from '../carousel/carousel.module';
 import { MarkdownViewerModule } from '../markdown-viewer/markdown-viewer.module';
+import { GridSectionComponent } from './section-component/grid-section/grid-section.component';
+import { ThemedGridSectionComponent } from './section-component/grid-section/themed-grid-section.component';
 
 const COMPONENTS = [
   BrowseSectionComponent,
@@ -41,7 +43,9 @@ const COMPONENTS = [
   TopSectionComponent,
   ThemedTopSectionComponent,
   CarouselSectionComponent,
-  ThemedCarouselSectionComponent
+  ThemedCarouselSectionComponent,
+  GridSectionComponent,
+  ThemedGridSectionComponent
 ];
 
 @NgModule({

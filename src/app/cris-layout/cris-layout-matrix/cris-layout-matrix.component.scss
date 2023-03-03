@@ -1,0 +1,24 @@
+.image-card {
+    background-repeat: no-repeat;
+    height: 500px;
+    background-position: center;
+    background-color: #f0efef;
+}
+
+.card {
+    margin-left: auto;
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+}
+
+.card .card-title {
+    color: #56656f;
+    font-weight: bold;
+}
+
+.card .card-text {
+    color: #c2cdd3;
+}

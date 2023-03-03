@@ -1,13 +1,13 @@
 import { Component, OnInit, Optional } from '@angular/core';
 import { hasValue, isEmpty } from '../shared/empty.util';
 import { KlaroService } from '../shared/cookies/klaro.service';
-import { environment } from '../../environments/environment';
 import { take } from 'rxjs/operators';
 import { Site } from '../core/shared/site.model';
 import { SiteDataService } from '../core/data/site-data.service';
 import { TextRowSection } from '../core/layout/models/section.model';
 import { Observable } from 'rxjs';
 import { LocaleService } from '../core/locale/locale.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'ds-footer',
@@ -35,6 +35,7 @@ export class FooterComponent implements OnInit {
 
   showPrivacyPolicy = environment.info.enablePrivacyStatement;
   showEndUserAgreement = environment.info.enableEndUserAgreement;
+  involvedInstitutions = environment.layout.footer.involvedInstitutions;
 
   constructor(
     @Optional() private cookies: KlaroService,
