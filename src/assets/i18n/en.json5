@@ -1888,7 +1888,7 @@
 
   "RELATION.Fonds.children.search.results.head" : "Fonds Children",
 
-  "RELATION.JournalFond.children.search.results.head" : "Journal Fonds Children",
+  "RELATION.JournalFonds.children.search.results.head" : "Journal Fonds Children",
 
   "RELATION.Place.publications.search.results.head" : "Publications",
 
@@ -5184,7 +5184,7 @@
 
   "search.filters.applied.charts.RELATION.Fonds.children.title": "Fonds Children",
 
-  "search.filters.applied.charts.RELATION.JournalFond.children.title": "Journal Fonds Children",
+  "search.filters.applied.charts.RELATION.JournalFonds.children.title": "Journal Fonds Children",
 
   "search.filters.applied.charts.RELATION.Place.publications.title": "Publications",
 
@@ -7048,7 +7048,7 @@
 
   "fonds.listelement.badge": "Fonds",
 
-  "journalfond.listelement.badge": "Journal Fond",
+  "journalfonds.listelement.badge": "Journal Fonds",
 
   "aggregation.listelement.badge": "Aggregation",
   "news.listelement.badge": "News",
@@ -7083,7 +7083,7 @@
   "explore.index.subjectA" : "Subject",
   "explore.index.path" : "Path",
   "explore.index.fonds" : "Fonds",
-  "explore.index.journalfond" : "Journal Fond",
+  "explore.index.journalfonds" : "Journal Fonds",
   "explore.index.aggregation" : "Aggregation",
 
   "explore.search-section.sectiondocuments.title" : "Search Documents & Other materials",
@@ -7113,10 +7113,10 @@
   "search.filters.filter.fonds.placeholder": "Fonds name",
   "search.filters.filter.fonds.label": "Search Fonds name",
   "search.filters.applied.f.fonds": "Fonds",
-  "search.filters.filter.journalfond.head": "Journal Fond",
-  "search.filters.filter.journalfond.placeholder": "Journal Fond name",
-  "search.filters.filter.journalfond.label": "Search Journal Fond name",
-  "search.filters.applied.f.journalfond": "Journal Fond",
+  "search.filters.filter.journalfonds.head": "Journal Fonds",
+  "search.filters.filter.journalfonds.placeholder": "Journal Fonds name",
+  "search.filters.filter.journalfonds.label": "Search Journal Fonds name",
+  "search.filters.applied.f.journalfonds": "Journal Fonds",
   "search.filters.filter.aggregation.head": "Aggregation",
   "search.filters.filter.aggregation.placeholder": "Aggregation name",
   "search.filters.filter.aggregation.label": "Search Aggregation name",
@@ -7134,13 +7134,13 @@
 
   "submission.sections.submit.progressbar.describe.aggregation": "Aggregation Details",
 
-  "submission.sections.submit.progressbar.describe.journal_fond": "Journal Fond Details",
+  "submission.sections.submit.progressbar.describe.journal_fonds": "Journal Fonds Details",
 
-  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-history": "Journal Fond History",
+  "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-history": "Journal Fonds History",
 
-  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-relation-person": "Journal Fond Person",
+  "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-relation-person": "Journal Fonds Person",
 
-  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-relation-journalfond": "Journal Fond Relation",
+  "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-relation-journalfonds": "Journal Fonds Relation",
 
   "submission.sections.submit.progressbar.describe.path": "Path Details",
 
@@ -7168,7 +7168,7 @@
 
   "submission.sections.submit.progressbar.describe.scientificmaterial_references": "Scientific Material Contextual References",
 
-  "submission.sections.submit.progressbar.describe.journal_issue": "Journal Issue Details",
+  "submission.sections.submit.progressbar.describe.journal_file": "Journal File Details",
 
   "map.coordinates-invalid": "Coordinates are not valid",
 
@@ -7184,7 +7184,7 @@
 
   "vocabulary-treeview.header.fondsboxtree": "Fonds Tree",
 
-  "vocabulary-treeview.header.journalfondboxtree": "Journal Fond Tree",
+  "vocabulary-treeview.header.journalfondsboxtree": "Journal Fonds Tree",
 
   "vocabulary-treeview.header.aggregationboxtree": "Aggregation Tree",
 
@@ -7215,6 +7215,8 @@
 
   "RELATION.Place.places.search.results.head" : "Places",
   "search.filters.applied.charts.RELATION.Place.places.title": "Places",
-  "context-menu.actions.edit-item-relationships.btn.places": "Manage Places"
+  "context-menu.actions.edit-item-relationships.btn.places": "Manage Places",
 
+  "journalfile.listelement.badge": "Journal File",
+  "search.filters.entityType.JournalFile": "Journal File"
 }
