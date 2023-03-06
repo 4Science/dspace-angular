@@ -42,4 +42,15 @@ export abstract class BitstreamAttachmentRenderingModelComponent extends Bitstre
         })
       );
   }
+
+  getTotalBitstreamsByItem(options?: FindListOptions): Observable<PaginatedList<Bitstream>> {
+    return this.bitstreamDataService
+      .findByItem(this.item.uuid, this.field.bitstream.bundle, this.getMetadataFilters(), options, false, false, followLink('thumbnail'))
+      .pipe(
+        getFirstCompletedRemoteData(),
+        map((response: RemoteData<PaginatedList<Bitstream>>) => {
+          return response.hasSucceeded ? response.payload : buildPaginatedList(null, []);
+        })
+      );
+  }
 }

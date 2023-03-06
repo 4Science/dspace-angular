@@ -5,37 +5,43 @@
     </div>
     <div class="col-5 py-3">
 
-      <ng-container *ngFor="let attachmentConf of envMetadata">
+      <ng-container *ngIf="bitstreamsNumber == showableBitstreamsNumber">
+        <ng-container *ngFor="let attachmentConf of envMetadata">
 
-        <div class="content" [attr.data-test]="attachmentConf.name"
-             *ngIf="attachment.firstMetadataValue(attachmentConf.name) || attachmentConf.type == AdvancedAttachmentElementType.Attribute">
-          <strong>{{ 'cris-layout.advanced-attachment.'+attachmentConf.name | translate }}</strong>
+          <div class="content" [attr.data-test]="attachmentConf.name"
+              *ngIf="attachment.firstMetadataValue(attachmentConf.name) || attachmentConf.type == AdvancedAttachmentElementType.Attribute">
+              <strong>{{ 'cris-layout.advanced-attachment.'+attachmentConf.name | translate }}</strong>
 
-          <ng-container *ngIf="attachmentConf.type == AdvancedAttachmentElementType.Metadata">
+            <ng-container *ngIf="attachmentConf.type == AdvancedAttachmentElementType.Metadata">
 
-            <p class="word-break m-0" *ngIf="!attachmentConf.truncatable">
-              {{attachment.firstMetadataValue(attachmentConf.name)}}
-            </p>
-
-            <ds-truncatable *ngIf="attachmentConf.truncatable" [id]=" attachment.id">
-              <ds-truncatable-part [id]="attachment.id" [minLines]="1">
+              <p class="word-break m-0" *ngIf="!attachmentConf.truncatable">
                 {{attachment.firstMetadataValue(attachmentConf.name)}}
-              </ds-truncatable-part>
-            </ds-truncatable>
+              </p>
 
-          </ng-container>
+              <ds-truncatable *ngIf="attachmentConf.truncatable" [id]=" attachment.id">
+                <ds-truncatable-part [id]="attachment.id" [minLines]="1">
+                  {{attachment.firstMetadataValue(attachmentConf.name)}}
+                </ds-truncatable-part>
+              </ds-truncatable>
+
+            </ng-container>
 
           <ng-container *ngIf="attachmentConf.type == AdvancedAttachmentElementType.Attribute">
-            <ng-container *ngIf="attachmentConf.name == 'format'">
-              <p class="word-break m-0">{{getFormat(attachment) | async}}</p>
+              <ng-container *ngIf="attachmentConf.name == 'format'">
+                <p class="word-break m-0">{{getFormat(attachment) | async}}</p>
+              </ng-container>
+
+              <ng-container *ngIf="attachmentConf.name == 'size'">
+                <p class="word-break m-0">{{getSize(attachment) | dsFileSize}}</p>
+              </ng-container>
+
+              <ng-container *ngIf="attachmentConf.name == 'checksum'">
+                <p class="word-break m-0">{{getChecksum(attachment)}}</p>
+              </ng-container>
             </ng-container>
 
-            <ng-container *ngIf="attachmentConf.name == 'size'">
-              <p class="word-break m-0">{{getSize(attachment) | dsFileSize}}</p>
-            </ng-container>
-          </ng-container>
-
-        </div>
+          </div>
+        </ng-container>
       </ng-container>
 
     </div>

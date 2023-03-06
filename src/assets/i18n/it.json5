@@ -9726,14 +9726,14 @@
   //"layout.tab.header.Family.familyeditors": "Family Editors",
   "layout.tab.header.Family.familyeditors": "Compilatore",
 
-  //"layout.tab.header.JournalFond.details": "Journal Fond Details",
-  "layout.tab.header.JournalFond.details": "Consultazione Analitica",
+  //"layout.tab.header.JournalFonds.details": "Journal Fonds Details",
+  "layout.tab.header.JournalFonds.details": "Consultazione Analitica",
 
-  //"layout.tab.header.JournalFond.journalfondcontext": "Journal Fond Context",
-  "layout.tab.header.JournalFond.journalfondcontext": "Consulta la Testata",
+  //"layout.tab.header.JournalFonds.journalfondscontext": "Journal Fonds Context",
+  "layout.tab.header.JournalFonds.journalfondscontext": "Consulta la Testata",
 
-  //"layout.tab.header.JournalFond.children": "Journal Fond’s Children",
-  "layout.tab.header.JournalFond.children": "Livello di descrizione inferiore",
+  //"layout.tab.header.JournalFonds.children": "Journal Fonds Children",
+  "layout.tab.header.JournalFonds.children": "Livello di descrizione inferiore",
 
   //"layout.tab.header.News.details": "Details",
   "layout.tab.header.News.details": "Informazioni di Dettaglio",
@@ -9759,8 +9759,8 @@
   //"layout.tab.header.StaticPage.details": "Details",
   "layout.tab.header.StaticPage.details": "Informazioni di Dettaglio",
 
-  //"layout.tab.header.JournalIssue.details": "Details",
-  "layout.tab.header.JournalIssue.details": "Informazioni di Dettaglio",
+  //"layout.tab.header.JournalFile.details": "Details",
+  "layout.tab.header.JournalFile.details": "Informazioni di Dettaglio",
 
 
   //"layout.box.header.Person.profile": "Profile",
@@ -9870,14 +9870,14 @@
   // TODO Source message changed - Revise the translation
   "layout.box.header.Family.familyeditors": "Personalità",
 
-  //"layout.box.header.JournalFond.journalfonddescription": "Description",
-  "layout.box.header.JournalFond.journalfonddescription": "Descrizione",
+  //"layout.box.header.JournalFonds.journalfondsdescription": "Description",
+  "layout.box.header.JournalFonds.journalfondsdescription": "Descrizione",
 
-  //"layout.box.header.JournalFond.journalfondindex": "Journal Fond Index",
-  "layout.box.header.JournalFond.journalfondindex": "Indice della Testata",
+  //"layout.box.header.JournalFonds.journalfondsindex": "Journal Fond Index",
+  "layout.box.header.JournalFonds.journalfondsindex": "Indice della Testata",
 
-  //"layout.box.header.JournalFond.children": "Journal Fond’s Children",
-  "layout.box.header.JournalFond.children": "Livello di Descrizione Inferiore",
+  //"layout.box.header.JournalFonds.children": "Journal Fonds Children",
+  "layout.box.header.JournalFonds.children": "Livello di Descrizione Inferiore",
 
   //"layout.box.header.News.newsdescription": "Description",
   "layout.box.header.News.newsdescription": "Descrizione",
@@ -9904,8 +9904,8 @@
   "layout.box.header.StaticPage.details": "Descrizione",
 
 
-  //"layout.box.header.JournalIssue.details": "Description",
-  "layout.box.header.JournalIssue.details": "Descrizione",
+  //"layout.box.header.JournalFile.details": "Description",
+  "layout.box.header.JournalFile.details": "Descrizione",
 
 
 
@@ -10321,58 +10321,58 @@
   "layout.field.label.Family.glamfamily.editor": "Curatore",
 
 
-  //"layout.field.label.JournalFond.dc.title.alternative": "Alternative Title",
-  "layout.field.label.JournalFond.dc.title.alternative": "Titolo Alternativo",
+  //"layout.field.label.JournalFonds.dc.title.alternative": "Alternative Title",
+  "layout.field.label.JournalFonds.dc.title.alternative": "Titolo Alternativo",
 
-  //"layout.field.label.JournalFond.dc.type": "Type",
-  "layout.field.label.JournalFond.dc.type": "Tipologia",
+  //"layout.field.label.JournalFonds.dc.type": "Type",
+  "layout.field.label.JournalFonds.dc.type": "Tipologia",
 
-  //"layout.field.label.JournalFond.glamfonds.history": "History",
-  "layout.field.label.JournalFond.glamfonds.history": "Storia",
+  //"layout.field.label.JournalFonds.glamfonds.history": "History",
+  "layout.field.label.JournalFonds.glamfonds.history": "Storia",
 
-  //"layout.field.label.JournalFond.dc.coverage.temporal": "Coverage Temporal",
-  "layout.field.label.JournalFond.dc.coverage.temporal": "Data Secolare",
+  //"layout.field.label.JournalFonds.dc.coverage.temporal": "Coverage Temporal",
+  "layout.field.label.JournalFonds.dc.coverage.temporal": "Data Secolare",
 
-  //"layout.field.label.JournalFond.dc.language.iso": "Language",
-  "layout.field.label.JournalFond.dc.language.iso": "Lingua",
+  //"layout.field.label.JournalFonds.dc.language.iso": "Language",
+  "layout.field.label.JournalFonds.dc.language.iso": "Lingua",
 
-  //"layout.field.label.JournalFond.dc.description.abstract": "Abstract",
-  "layout.field.label.JournalFond.dc.description.abstract": "Abstract",
+  //"layout.field.label.JournalFonds.dc.description.abstract": "Abstract",
+  "layout.field.label.JournalFonds.dc.description.abstract": "Abstract",
 
-  //"layout.field.label.JournalFond.glamfonds.shelfmark": "Shelfmark",
-  "layout.field.label.JournalFond.glamfonds.shelfmark": "Segnatura",
+  //"layout.field.label.JournalFonds.glamfonds.shelfmark": "Shelfmark",
+  "layout.field.label.JournalFonds.glamfonds.shelfmark": "Segnatura",
 
-  //"layout.field.label.JournalFond.dc.relation.journalfond": "Related Journal Fond(s)",
-  "layout.field.label.JournalFond.dc.relation.journalfond": "Testate Correlate",
+  //"layout.field.label.JournalFonds.dc.relation.journalfonds": "Related Journal Fonds",
+  "layout.field.label.JournalFonds.dc.relation.journalfonds": "Testate Correlate",
 
-  //"layout.field.label.JournalFond.glamjournalfond.ownedyears": "Owned Years",
+  //"layout.field.label.JournalFonds.glamjournalfonds.ownedyears": "Owned Years",
   // TODO Source message changed - Revise the translation
-  "layout.field.label.JournalFond.glamjournalfond.ownedyears": "Periodo di Attività",
+  "layout.field.label.JournalFonds.glamjournalfonds.ownedyears": "Periodo di Attività",
 
-  //"layout.field.label.JournalFond.dc.relation.person": "Related People",
-  "layout.field.label.JournalFond.dc.relation.person": "Autori",
+  //"layout.field.label.JournalFonds.dc.relation.person": "Related People",
+  "layout.field.label.JournalFonds.dc.relation.person": "Autori",
 
-  //"layout.field.label.JournalFond.dc.identifier.other": "Other Identifier(s)",
-  "layout.field.label.JournalFond.dc.identifier.other": "Identificativi",
+  //"layout.field.label.JournalFonds.dc.identifier.other": "Other Identifier(s)",
+  "layout.field.label.JournalFonds.dc.identifier.other": "Identificativi",
 
-  //"layout.field.label.JournalFond.dc.relation.opac": "OPAC Link",
-  "layout.field.label.JournalFond.dc.relation.opac": "Link all'OPAC",
+  //"layout.field.label.JournalFonds.dc.relation.opac": "OPAC Link",
+  "layout.field.label.JournalFonds.dc.relation.opac": "Link all'OPAC",
 
-  //"layout.field.label.JournalFond.dc.relation.otherlinks": "Other Links",
-  "layout.field.label.JournalFond.dc.relation.otherlinks": "Collegamenti Esterni",
+  //"layout.field.label.JournalFonds.dc.relation.otherlinks": "Other Links",
+  "layout.field.label.JournalFonds.dc.relation.otherlinks": "Collegamenti Esterni",
 
-  //"layout.field.label.JournalFond.glamjournalfond.parent": "Journal Fond Parent",
-  "layout.field.label.JournalFond.glamjournalfond.parent": "Testata Radice",
+  //"layout.field.label.JournalFonds.glamjournalfonds.parent": "Journal Fonds Parent",
+  "layout.field.label.JournalFonds.glamjournalfonds.parent": "Testata Radice",
 
-  //"layout.field.label.JournalFond.glam.leaf": "Leaf",
+  //"layout.field.label.JournalFonds.glam.leaf": "Leaf",
   // TODO Source message changed - Revise the translation
-  "layout.field.label.JournalFond.glam.leaf": "Sottoserie",
+  "layout.field.label.JournalFonds.glam.leaf": "Sottoserie",
 
-  //"layout.field.label.JournalFond.glamjournalfond.history": "Journal Fond History",
-  "layout.field.label.JournalFond.glamjournalfond.history": "Storia della Testata",
+  //"layout.field.label.JournalFonds.glamjournalfonds.history": "Journal Fonds History",
+  "layout.field.label.JournalFonds.glamjournalfonds.history": "Storia della Testata",
 
-  //"layout.field.label.JournalFond.glam.index": "Journal Fond Index",
-  "layout.field.label.JournalFond.glam.index": "Indice",
+  //"layout.field.label.JournalFonds.glam.index": "Journal Fonds Index",
+  "layout.field.label.JournalFonds.glam.index": "Indice",
 
 
 
@@ -10426,36 +10426,36 @@
   // TODO Source message changed - Revise the translation
   "layout.field.label.Family.glamfamily.editing.date": "Edito da",
 
-  //"layout.field.label.JournalFond.dc.date.start": "From",
-  "layout.field.label.JournalFond.dc.date.start": "Da",
+  //"layout.field.label.JournalFonds.dc.date.start": "From",
+  "layout.field.label.JournalFonds.dc.date.start": "Da",
 
-  //"layout.field.label.JournalFond.dc.date.end": "To",
-  "layout.field.label.JournalFond.dc.date.end": "A",
+  //"layout.field.label.JournalFonds.dc.date.end": "To",
+  "layout.field.label.JournalFonds.dc.date.end": "A",
 
-  //"layout.field.label.JournalFond.dc.publisher": "Publisher",
-  "layout.field.label.JournalFond.dc.publisher": "Editore",
+  //"layout.field.label.JournalFonds.dc.publisher": "Publisher",
+  "layout.field.label.JournalFonds.dc.publisher": "Editore",
 
-  //"layout.field.label.JournalFond.dc.format": "Format",
-  "layout.field.label.JournalFond.dc.format": "Formato",
+  //"layout.field.label.JournalFonds.dc.format": "Format",
+  "layout.field.label.JournalFonds.dc.format": "Formato",
 
-  //"layout.field.label.JournalFond.dc.identifier.inventorynumber": "Inventory Number",
-  "layout.field.label.JournalFond.dc.identifier.inventorynumber": "Numero di Inventario",
+  //"layout.field.label.JournalFonds.dc.identifier.inventorynumber": "Inventory Number",
+  "layout.field.label.JournalFonds.dc.identifier.inventorynumber": "Numero di Inventario",
 
-  //"layout.field.label.JournalFond.dc.description.note": "Notes",
-  "layout.field.label.JournalFond.dc.description.note": "Note",
+  //"layout.field.label.JournalFonds.dc.description.note": "Notes",
+  "layout.field.label.JournalFonds.dc.description.note": "Note",
 
-  //"layout.field.label.JournalFond.dc.type.relation": "Relation Type",
-  "layout.field.label.JournalFond.dc.type.relation": "tipologia di Relazione",
+  //"layout.field.label.JournalFonds.dc.type.relation": "Relation Type",
+  "layout.field.label.JournalFonds.dc.type.relation": "tipologia di Relazione",
 
-  //"layout.field.label.JournalFond.dc.relation.journalfond": "Related Journal Fond",
-  "layout.field.label.JournalFond.dc.relation.journalfond": "Testata Correlata",
+  //"layout.field.label.JournalFonds.dc.relation.journalfonds": "Related Journal Fonds",
+  "layout.field.label.JournalFonds.dc.relation.journalfonds": "Testata Correlata",
 
-  //"layout.field.label.JournalFond.dc.relation.person": "Person Name",
+  //"layout.field.label.JournalFonds.dc.relation.person": "Person Name",
   // TODO Source message changed - Revise the translation
-  "layout.field.label.JournalFond.dc.relation.person": "Nome",
+  "layout.field.label.JournalFonds.dc.relation.person": "Nome",
 
-  //"layout.field.label.JournalFond.glamperson.role": "Person Role",
-  "layout.field.label.JournalFond.glamperson.role": "Ruolo",
+  //"layout.field.label.JournalFonds.glamperson.role": "Person Role",
+  "layout.field.label.JournalFonds.glamperson.role": "Ruolo",
 
   //"layout.field.label.Publication.dc.contributor.author": "Author",
   "layout.field.label.Publication.dc.contributor.author": "Autore",
@@ -10484,7 +10484,7 @@
   "context-menu.actions.edit-item-relationships.btn.children": "Gestisci i livelli di descrizione inferioire",
 
   //"context-menu.actions.edit-item-relationships.btn.events": "Manage Events",
-  "context-menu.actions.edit-item-relationships.btn.events": "gestisci gli Eventi",
+  "context-menu.actions.edit-item-relationships.btn.events": "Gestisci gli eventi",
 
   //"RELATION.Person.publications.search.results.head" : "Publications",
   "RELATION.Person.publications.search.results.head" : "Pubblicazioni",
@@ -10513,8 +10513,8 @@
   //"RELATION.Fonds.children.search.results.head" : "Fonds Children",
   "RELATION.Fonds.children.search.results.head" : "Livello di Descrizione Inferiore",
 
-  //"RELATION.JournalFond.children.search.results.head" : "Journal Fonds Children",
-  "RELATION.JournalFond.children.search.results.head" : "Livello di descrizione Inferiore",
+  //"RELATION.JournalFonds.children.search.results.head" : "Journal Fonds Children",
+  "RELATION.JournalFonds.children.search.results.head" : "Livello di descrizione Inferiore",
 
   //"RELATION.Place.publications.search.results.head" : "Publications",
   "RELATION.Place.publications.search.results.head" : "Pubblicazioni",
@@ -10958,8 +10958,8 @@
   //"explore.index.fonds" : "Fonds",
   "explore.index.fonds" : "Fondi",
 
-  //"explore.index.journalfond" : "Journal Fond",
-  "explore.index.journalfond" : "Testata",
+  //"explore.index.journalfonds" : "Journal Fonds",
+  "explore.index.journalfonds" : "Testata",
 
   //"explore.index.path" : "Path",
   "explore.index.path" : "Percorso",
@@ -11053,8 +11053,8 @@
   //"item.search.results.open-mirador": "Open results in Mirador",
   "item.search.results.open-mirador": "Apri i risultati in Mirador",
 
-  //"journalfond.listelement.badge": "Journal Fond",
-  "journalfond.listelement.badge": "Testata",
+  //"journalfonds.listelement.badge": "Journal Fonds",
+  "journalfonds.listelement.badge": "Testata",
 
   //"journalfonds.search.results.head": "Journal Fonds Search Results",
   "journalfonds.search.results.head": "Risultati",
@@ -11175,8 +11175,8 @@
   //"search.filters.applied.f.fonds": "Fonds",
   "search.filters.applied.f.fonds": "Fondi",
 
-  //"search.filters.applied.f.journalfond": "Journal Fond",
-  "search.filters.applied.f.journalfond": "Testata",
+  //"search.filters.applied.f.journalfonds": "Journal Fonds",
+  "search.filters.applied.f.journalfonds": "Testata",
 
   //"search.filters.applied.f.path": "Path",
   "search.filters.applied.f.path": "Percorso",
@@ -11199,14 +11199,14 @@
   //"search.filters.filter.fonds.placeholder": "Fonds name",
   "search.filters.filter.fonds.placeholder": "Nome",
 
-  //"search.filters.filter.journalfond.head": "Journal Fond",
-  "search.filters.filter.journalfond.head": "Testata",
+  //"search.filters.filter.journalfonds.head": "Journal Fonds",
+  "search.filters.filter.journalfonds.head": "Testata",
 
-  //"search.filters.filter.journalfond.label": "Search Journal Fond name",
-  "search.filters.filter.journalfond.label": "Ricerca per nome",
+  //"search.filters.filter.journalfonds.label": "Search Journal Fonds name",
+  "search.filters.filter.journalfonds.label": "Ricerca per nome",
 
-  //"search.filters.filter.journalfond.placeholder": "Journal Fond name",
-  "search.filters.filter.journalfond.placeholder": "Nome",
+  //"search.filters.filter.journalfonds.placeholder": "Journal Fonds name",
+  "search.filters.filter.journalfonds.placeholder": "Nome",
 
   //"search.filters.filter.path.head": "Path",
   "search.filters.filter.path.head": "Percorso",
@@ -11243,19 +11243,19 @@
   // TODO Source message changed - Revise the translation
   "submission.sections.submit.progressbar.describe.fonds": "Infomazioni di dettaglio",
 
-  //"submission.sections.submit.progressbar.describe.journal_fond": "Journal Fond Details",
+  //"submission.sections.submit.progressbar.describe.journal_fonds": "Journal Fonds Details",
   // TODO Source message changed - Revise the translation
-  "submission.sections.submit.progressbar.describe.journal_fond": "Infomazioni di dettaglio",
+  "submission.sections.submit.progressbar.describe.journal_fonds": "Infomazioni di dettaglio",
 
-  //"submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-history": "Journal Fond History",
+  //"submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-history": "Journal Fonds History",
   // TODO Source message changed - Revise the translation
-  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-history": "Storia",
+  "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-history": "Storia",
 
-  //"submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-relation-person": "Journal Fond Person",
-  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-relation-person": "Autore",
+  //"submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-relation-person": "Journal Fonds Person",
+  "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-relation-person": "Autore",
 
-  //"submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-relation-journalfond": "Journal Fond Relation",
-  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-relation-journalfond": "Relazioni",
+  //"submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-relation-journalfonds": "Journal Fonds Relation",
+  "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-relation-journalfonds": "Relazioni",
 
   //"submission.sections.submit.progressbar.describe.journal_materials": "Journal Issue Basic Information",
   // TODO Source message changed - Revise the translation
@@ -11269,8 +11269,8 @@
   // TODO Source message changed - Revise the translation
   "submission.sections.submit.progressbar.describe.journal_materials_references": "Contesto",
 
-  //"submission.sections.submit.progressbar.describe.journal_issue": "Journal Issue Details",
-  "submission.sections.submit.progressbar.describe.journal_issue": "Informazioni di dettaglio",
+  //"submission.sections.submit.progressbar.describe.journal_file": "Journal File Details",
+  "submission.sections.submit.progressbar.describe.journal_file": "Informazioni di dettaglio",
 
   //"submission.sections.submit.progressbar.describe.path": "Path Details",
   "submission.sections.submit.progressbar.describe.path": "Informazioni di dettaglio",
@@ -11327,9 +11327,9 @@
   // TODO Source message changed - Revise the translation
   "vocabulary-treeview.header.hierarchy": "Struttura",
 
-  //"vocabulary-treeview.header.journalfondboxtree": "Journal Fond Tree",
+  //"vocabulary-treeview.header.journalfondsboxtree": "Journal Fonds Tree",
   // TODO Source message changed - Revise the translation
-  "vocabulary-treeview.header.journalfondboxtree": "Albero della Testata",
+  "vocabulary-treeview.header.journalfondsboxtree": "Albero della Testata",
 
 
   //"search.filters.applied.charts.RELATION.Person.publications.title": "Publications",
@@ -11384,8 +11384,8 @@
   //"search.filters.applied.charts.RELATION.Fonds.children.title": "Fonds Children",
   "search.filters.applied.charts.RELATION.Fonds.children.title":"Livello di Descrizione Inferiore",
 
-  //"search.filters.applied.charts.RELATION.JournalFond.children.title": "Journal Fonds Children",
-  "search.filters.applied.charts.RELATION.JournalFond.children.title": "Livello di Descrizione Inferiore",
+  //"search.filters.applied.charts.RELATION.JournalFonds.children.title": "Journal Fonds Children",
+  "search.filters.applied.charts.RELATION.JournalFonds.children.title": "Livello di Descrizione Inferiore",
 
   //"search.filters.applied.charts.RELATION.Place.publications.title": "Publications",
   "search.filters.applied.charts.RELATION.Place.publications.title": "Pubblicazioni",
@@ -11453,6 +11453,25 @@
   "layout.field.label.Picture.dc.description.preservationspecifications": "Specifiche sullo stato di conservazione",
   "layout.field.label.Picture.dc.description.note": "Note",
   "layout.field.label.Picture.dc.contributor.author": "Creatore",
-  "layout.field.label.Picture.dc.contributor.authorrole": "Ruolo"
+  "layout.field.label.Picture.dc.contributor.authorrole": "Ruolo",
 
+  "layout.field.label.Path.dc.description": "Descrizione",
+  "layout.field.label.Path.dc.subject": "Keyword(s)",
+  "layout.field.label.Path.cris.priority": "Posizione",
+  "layout.field.label.Path.glam.index": "Numero di corda",
+  "layout.field.label.Path.dc.relation.aggregation": "Aggregazione",
+
+  "layout.tab.header.Place.placepeople": "Persone Collegate",
+  "RELATION.Place.people.search.results.head" : "Persone",
+  "search.filters.applied.charts.RELATION.Place.people.title": "Persone",
+
+  "layout.tab.header.Place.placeplaces": "Luoghi Collegati",
+  "RELATION.Place.places.search.results.head" : "Luoghi",
+  "search.filters.applied.charts.RELATION.Place.places.title": "Luoghi",
+  "context-menu.actions.edit-item-relationships.btn.places": "Gestisci i luoghi",
+
+  "journalfile.listelement.badge": "Fascicolo Periodico",
+
+  // "search.filters.entityType.JournalFile": "Journal File",
+  "search.filters.entityType.JournalFile": "Fascicolo Periodico"
 }
