@@ -10907,6 +10907,9 @@
   //"curation-task.task.iiifallowfiledownload.label": "Allow file download for files uploaded on image server",
   "curation-task.task.iiifallowfiledownload.label": "Permetti il download per i file caricati da image server",
 
+  //"curation-task.task.rawtoaccess.label": "Create access image for RAW Types",
+  "curation-task.task.rawtoaccess.label": "Creare un'immagine di accesso per i tipi RAW",
+
   //"curation-task.task.iiifforbidfiledownload.label": "Forbid file download for files uploaded on image server",
   "curation-task.task.iiifforbidfiledownload.label": "Inibisci il download per i file caricati da image server",
 
