@@ -10916,6 +10916,9 @@
   //"curation-task.task.iiifpdfmultipages.label": "Create multipages PDF from IIIF images",
   "curation-task.task.iiifpdfmultipages.label": "Creare il PDF multipagina da IIIF images",
 
+  //"curation-task.task.iiifclean.label": "Remove all metadata bundles created by a previous upload to the image server",
+  "curation-task.task.iiifclean.label": "Rimuovi tutti i bitstream e bundle creati durante il processamento della risorsa IIIF",
+
   //"curation-task.task.iiifuploader.label": "Upload images to the IIIF Image Server (photo gallery)",
   "curation-task.task.iiifuploader.label": "Caricare immagini da IIIF Image Server (photo gallery)",
 
