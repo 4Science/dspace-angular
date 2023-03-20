@@ -1,0 +1,21 @@
+<div class="grid-container">
+  <div style="grid-area: title" class="bg-light p-5 border border-dark position-relative">
+    <p class="mb-3 text-muted main-content-badge">{{maincontentBadge}}</p>
+    <h1 class="text-muted main-content-title">
+      {{maincontentTitle}}
+    </h1>
+    <h1 class="text-dark main-content-subtitle">
+      {{maincontentSubtitle}}
+    </h1>
+    <p class="mt-3 pl-0 text-muted col-8">
+      {{maincontentAbstract}}
+    </p>
+    <button type="button" (click)="goToMainContentLink()" class="btn btn-dark position-absolute m-5">{{'explore.grid-section.seeAll' | translate}}</button>
+  </div>
+  <div class="bg-light text-center position-relative border border-dark d-flex flex-column
+              justify-content-between align-items-center"
+       [dsBackgroundImage]="(itemToImageHrefMap$ | async).get(item.indexableObject?.uuid)"
+       *ngFor="let item of searchResults | slice:0:8; index as i">
+    <h5 class="text-dark text-truncate position-absolute py-3 px-1">{{item.indexableObject?.firstMetadataValue('dc.title')}}</h5>
+  </div>
+</div>

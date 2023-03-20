@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
 import { isAuthenticated } from '../core/auth/selectors';
+import { environment } from '../../environments/environment';
 
 /**
  * Component representing the public navbar
@@ -37,6 +38,7 @@ export class NavbarComponent extends MenuComponent {
 
   public isXsOrSm$: Observable<boolean>;
 
+  mainSiteUrl = environment.mainSiteUrl;
   constructor(protected menuService: MenuService,
     protected injector: Injector,
               public windowService: HostWindowService,

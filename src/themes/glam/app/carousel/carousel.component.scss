@@ -1,0 +1,125 @@
+:host {
+  ::ng-deep {
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+      width: 32px;
+      height: 32px;
+      background-color: var(--ds-carousel-controls-color);
+      background-origin: content-box;
+      border-radius: 16px;
+    }
+
+    .carousel-control-prev-icon {
+      padding: 6px 7px 6px 5px;
+    }
+
+    .carousel-control-next-icon {
+      padding: 6px 5px 6px 7px;
+    }
+
+    .carousel-control-prev, .carousel-control-next {
+      cursor: pointer;
+      width: 12%;
+    }
+
+    .carousel-indicators {
+      padding-bottom: 6px;
+    }
+
+    .carousel-indicators li {
+      background-color: var(--ds-carousel-controls-color);
+    }
+
+    .carousel-caption {
+      color: var(--ds-carousel-caption-color);
+      background: var(--ds-carousel-caption-background);
+      position: absolute;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      padding-top: 10px;
+      padding-bottom: 45px;
+      width: 76%;
+      margin: 0 auto;
+    }
+
+    .titolo {
+      position: absolute;
+      left: 7px;
+      background-color: white;
+      bottom: 28px;
+      right: 7px;
+      margin-left: 15px;
+      margin-right: 15px;
+      border-radius: 4px;
+    }
+
+    .arrow-class-right {
+      padding-left: 34px;
+      padding-right: 51px;
+      cursor: pointer;
+    }
+
+    .arrow-class-left {
+      padding-left: 51px;
+      padding-right: 34px;
+      cursor: pointer;
+    }
+  }
+
+  .carousel-caption-inner {
+    //width: 80%;
+    margin: 0 auto;
+  }
+
+  .picsum-img-wrapper {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    backdrop-filter: blur(12px) brightness(.7);
+    img.blurry-backdrop {
+      max-width: 95%;
+      max-height: 95%;
+    }
+  }
+
+  .play-pause-button {
+    z-index: 15;
+    margin-top: -30px;
+    position: relative
+  }
+
+  .carousel-content-wrapper {
+    z-index: -1;
+    min-height: 180px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .carousel-caption-text {
+    overflow-y: scroll;
+    max-height: 4.5rem;
+  }
+
+  .carousel-caption-text::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .carousel-caption-text::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  .carousel-caption-text::-webkit-scrollbar-thumb {
+    background-color: var(--ds-carousel-controls-color);
+    border-radius: 10px;
+    border: none;
+  }
+
+  button.toggle-paused {
+    color: var(--ds-carousel-controls-color);
+    outline: none;
+    box-shadow: none !important
+  }
+
+}

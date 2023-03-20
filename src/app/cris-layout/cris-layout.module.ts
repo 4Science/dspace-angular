@@ -127,11 +127,15 @@ import {
   AdvancedAttachmentComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/advanced-attachment/advanced-attachment.component';
 import { FileDownloadButtonComponent } from '../shared/file-download-button/file-download-button.component';
+import { CarouselModule } from '../shared/carousel/carousel.module';
 import {
   BitstreamAttachmentComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/advanced-attachment/bitstream-attachment/bitstream-attachment.component';
 import { ItemSharedModule } from '../item-page/item-shared.module';
 import { ViewersSharedModule } from '../item-page/viewer-provider/viewers/viewers-shared.module';
+import {
+  BackgroundComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/background/background.component';
 
 const ENTRY_COMPONENTS = [
   CrisLayoutVerticalComponent,
@@ -163,7 +167,8 @@ const ENTRY_COMPONENTS = [
   MarkdownComponent,
   SearchComponent,
   TagSearchComponent,
-  AdvancedAttachmentComponent
+  AdvancedAttachmentComponent,
+  BackgroundComponent
 ];
 
 @NgModule({
@@ -205,7 +210,9 @@ const ENTRY_COMPONENTS = [
     MiradorViewerModule,
     MarkdownViewerModule,
     ItemSharedModule,
-    ViewersSharedModule
+    ViewersSharedModule,
+    MarkdownViewerModule,
+    CarouselModule
   ],
   exports: [
     CrisLayoutComponent,

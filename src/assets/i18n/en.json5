@@ -1280,6 +1280,9 @@
   "bulk-import.title" : "Bulk import",
 
 
+  "carousel.button.see-more": "See more",
+
+
 
   "chips.remove": "Remove chip",
 
@@ -2249,6 +2252,12 @@
 
   "explore.counters-section.project_funding" : "Projects",
 
+  "explore.carousel.view-more": "View More",
+
+  "explore.text-section.counter.header" : "Our Numbers",
+
+  "explore.grid-section.seeAll" : "See all",
+
   "explore.facet-section.title" : "Discover",
 
   "explore.index.all" : "All",
@@ -2276,7 +2285,7 @@
 
   "explore.index.dateissued" : "Date issued",
 
-  "explore.index.dc.date.accessioned" : "Recent Additions",
+  "explore.index.dc.date.accessioned" : "New accessions",
 
   "explore.index.paths" : "Paths",
 
@@ -2437,6 +2446,23 @@
 
   "footer.link.feedback":"Send Feedback",
 
+  "footer.involved-institution":"Institutions involved",
+
+  "footer.information":"Information",
+
+  "footer.general-information":"General information",
+
+  "footer.offer-service":"Offered services",
+
+  "footer.history-digital":"History of the digital LID",
+
+  "footer.org-structure":"Organizational structure",
+
+  "footer.contact":"Contacts",
+
+  "footer.terms":"Terms of Use",
+
+  "footer.made-info": "Made with DSpace-GLAM - Extension maintained and optimized by 4Science",
 
 
   "forgot-email.form.header": "Forgot Password",
@@ -2615,6 +2641,13 @@
   "grant-request-copy.intro": "This message will be sent to the applicant of the request. The requested document(s) will be attached.",
 
   "grant-request-copy.success": "Successfully granted item request",
+
+
+  "grid.component.badge": "Paths",
+  "grid.component.title": "Discovering...",
+  "grid.component.subtitle": "...new ways to explore our digital libraries.",
+  "grid.component.abstract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "grid.component.link": "/explore/paths",
 
 
   "health.breadcrumbs": "Health",

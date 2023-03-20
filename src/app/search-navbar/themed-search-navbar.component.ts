@@ -1,14 +1,16 @@
+import { Component } from '@angular/core';
 import { ThemedComponent } from '../shared/theme-support/themed.component';
 import { SearchNavbarComponent } from './search-navbar.component';
-import { Component } from '@angular/core';
 
+/**
+ * Themed wrapper for SearchNavbarComponent
+ */
 @Component({
   selector: 'ds-themed-search-navbar',
-  styleUrls: [],
+  styleUrls: ['./search-navbar.component.scss'],
   templateUrl: '../shared/theme-support/themed.component.html',
 })
 export class ThemedSearchNavbarComponent extends ThemedComponent<SearchNavbarComponent> {
-
   protected getComponentName(): string {
     return 'SearchNavbarComponent';
   }
@@ -20,5 +22,4 @@ export class ThemedSearchNavbarComponent extends ThemedComponent<SearchNavbarCom
   protected importUnthemedComponent(): Promise<any> {
     return import(`./search-navbar.component`);
   }
-
 }

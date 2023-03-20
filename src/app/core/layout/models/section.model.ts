@@ -5,6 +5,7 @@ import { autoserialize, deserialize } from 'cerialize';
 import { HALLink } from '../../shared/hal-link.model';
 import { excludeFromEquals } from '../../utilities/equals.decorators';
 import { ResourceType } from '../../shared/resource-type';
+import { SortDirection } from '../../cache/models/sort-options.model';
 
 /**
  * Describes a type of Section.
@@ -66,6 +67,13 @@ export interface TopSection extends SectionComponent {
   showAllResults: boolean;
 }
 
+export interface GridSection extends SectionComponent {
+  order: SortDirection;
+  sortField: string;
+  discoveryConfigurationName: string;
+  mainContentLink: string;
+}
+
 export interface SearchSection extends SectionComponent {
   discoveryConfigurationName: string;
   componentType: 'search';
@@ -124,4 +132,5 @@ export interface CarouselSection extends SectionComponent {
   carouselHeightPx: number;
   captionStyle: string;
   titleStyle: string;
+  showBlurryBackdrop: boolean;
 }

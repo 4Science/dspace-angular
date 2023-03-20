@@ -341,11 +341,10 @@ export class DefaultAppConfig implements AppConfig {
     //   // Any of the matching properties above can be used
     //   handle: '10673/34'
     // },
-    // {
-    //   name: 'custom-B',
-    //   extends: 'custom',
-    //   handle: '10673/12'
-    // },
+    {
+      name: 'glam',
+      extends: 'dspace'
+    },
     // {
     //   // A theme with only a name will match every route
     //   name: 'custom'
@@ -525,6 +524,30 @@ export class DefaultAppConfig implements AppConfig {
     navbar: {
       // If true, show the "Community and Collections" link in the navbar; otherwise, show it in the admin sidebar
       showCommunityCollection: true,
+    },
+    footer: {
+      involvedInstitutions: [
+        {
+          src: '',
+          href: ''
+        },
+        {
+          src: '',
+          href: ''
+        },
+        {
+          src: '',
+          href: ''
+        },
+        {
+          src: '',
+          href: ''
+        },
+        {
+          src: '',
+          href: ''
+        }
+      ]
     }
   };
 
@@ -561,6 +584,11 @@ export class DefaultAppConfig implements AppConfig {
       'cris.cms.home-header',
       'cris.cms.home-news',
       'cris.cms.footer',
+      'cris.cms.grid-component-badge',
+      'cris.cms.grid-component-title',
+      'cris.cms.grid-component-subtitle',
+      'cris.cms.grid-component-abstract',
+      'cris.cms.grid-component-link'
     ]
   };
 
@@ -682,4 +710,7 @@ export class DefaultAppConfig implements AppConfig {
       }
     ]
   };
+
+  //main site url for glam theme
+  mainSiteUrl = 'www.sito.principale';
 }

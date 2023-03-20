@@ -1,0 +1,47 @@
+.grid-container {
+  width: 100%;
+  display: grid;
+  grid-gap: .5em;
+
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-areas:
+    "title title"
+    "title title"
+    "item-0 item-1"
+    "item-2 item-3"
+    "item-4 item-5"
+    "item-6 item-7";
+
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+    "title title item-0 item-1"
+    "title title item-2 item-3"
+    "item-4 item-5 item-6 item-7";
+  }
+}
+
+a {
+  position: absolute;
+  bottom: 0.5em;
+  width: 90%;
+  background-color: rgba(255, 255, 255, .7);
+  padding: .6em;
+  border-radius: $border-radius;
+  z-index: 2;
+}
+
+.main-content-badge, .main-content-title, .main-content-subtitle {
+  font-weight: 900;
+}
+
+button {
+  bottom: 0;
+  right: 0;
+}
+
+div.content {
+  aspect-ratio: 16 / 9;
+}
