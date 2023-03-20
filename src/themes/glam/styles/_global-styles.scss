@@ -1,0 +1,78 @@
+// Add any global css for the theme here
+
+// imports the base global style
+@import '../../../styles/_global-styles.scss';
+
+.facet-filter, .setting-option {
+  background-color: var(--bs-light);
+  border-radius: var(--bs-border-radius);
+
+  &.p-3 {
+    // Needs !important because the original bootstrap class uses it
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+
+  .badge-secondary {
+    background-color: var(--bs-primary);
+  }
+
+  h5 {
+    font-size: 1.1rem
+  }
+}
+
+ds-metric-donuts a {
+  background-size: contain;
+}
+
+.new-accordian .btn-link.ng-star-inserted::before {
+  content: "\f068";
+  font-family: "Font Awesome 5 Free", serif;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-block;
+  padding-right: 15px;
+  color: #c4d3da;
+}
+
+.new-accordian .btn-link.btn.collapsed::before  {
+  content: "\f067";
+  font-family: "Font Awesome 5 Free", serif;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-block;
+  padding-right: 15px;
+  color: #c4d3da;
+}
+
+.new-accordian .btn-link {
+  font-weight: 400;
+  color: #626a70 !important;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):not(.disabled):active:focus,
+.btn:not(:disabled):not(.disabled).active:focus {
+  box-shadow: none !important;
+}
+
+.new-accordian .accordion > .card .card-header {
+  margin-bottom: 0 !important;
+  background-color: #fff !important;
+  border-bottom-width: 0;
+  padding: 0.75rem 1rem !important;
+}
+
+.new-accordian .accordion > .card .card-body {
+  padding: 0.75rem 1.5rem !important;
+}
+
+.new-accordian .card {
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125) !important;
+}
+
+.new-text{
+  color: #626a70 ;
+}

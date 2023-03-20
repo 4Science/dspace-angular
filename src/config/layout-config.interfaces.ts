@@ -32,6 +32,15 @@ export interface NavbarConfig extends Config {
   showCommunityCollection: boolean;
 }
 
+export interface involvedInstitution {
+  src: string;
+  href: string;
+}
+
+export interface FooterConfig extends Config {
+  involvedInstitutions: involvedInstitution[];
+}
+
 export interface CrisItemPageConfig extends Config {
   [entity: string]: CrisLayoutTypeConfig;
   default: CrisLayoutTypeConfig;
@@ -44,12 +53,14 @@ export interface CrisLoadMoreConfig extends Config {
 export interface CrisLayoutConfig extends Config {
   urn: UrnConfig[];
   crisRef: CrisRefConfig[];
+  crisRefStyleMetadata: string;
   itemPage: CrisItemPageConfig;
   metadataBox: CrisLayoutMetadataBoxConfig;
 }
 
 export interface LayoutConfig extends Config {
   navbar: NavbarConfig;
+  footer: FooterConfig;
 }
 
 export interface SuggestionConfig extends Config {

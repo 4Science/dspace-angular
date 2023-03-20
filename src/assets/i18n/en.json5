@@ -697,6 +697,8 @@
 
   "admin.batch-import.page.help": "Select the Collection to import into. Then, drop or browse to a Simple Archive Format (SAF) zip file that includes the Items to import",
 
+  "admin.batch-import.page.toggle.help": "It is possible to perform import either with file upload or via URL, use above toggle to set the input source",
+
   "admin.metadata-import.page.dropMsg": "Drop a metadata CSV to import",
 
   "admin.batch-import.page.dropMsg": "Drop a batch ZIP to import",
@@ -713,7 +715,15 @@
 
   "admin.metadata-import.page.error.addFile": "Select file first!",
 
+  "admin.metadata-import.page.error.addFileUrl": "Insert file url first!",
+
   "admin.batch-import.page.error.addFile": "Select Zip file first!",
+
+  "admin.metadata-import.page.toggle.upload": "Upload",
+
+  "admin.metadata-import.page.toggle.url": "URL",
+
+  "admin.metadata-import.page.urlMsg": "Insert the batch ZIP url to import",
 
   "admin.metadata-import.page.validateOnly": "Validate Only",
 
@@ -722,6 +732,7 @@
   "admin.batch-import.page.validateOnly.hint": "When selected, the uploaded ZIP will be validated. You will receive a report of detected changes, but no changes will be saved.",
 
   "admin.batch-import.page.remove": "remove",
+
 
   "alert.close.aria": "Close",
 
@@ -891,6 +902,102 @@
 
   "browse.comcol.by.subjectA" : "Subject",
 
+  "browse.comcol.by.titleEvent": "Title",
+
+  "browse.comcol.by.titleAM": "Title",
+
+  "browse.comcol.by.titleFamily": "Title",
+
+  "browse.comcol.by.titlePlace": "Title",
+
+  "browse.comcol.by.titleN": "Title",
+
+  "browse.comcol.by.titleSP": "Title",
+
+  "browse.comcol.by.titleJI": "Title",
+
+  "browse.comcol.by.titlePath": "Title",
+
+  "browse.comcol.by.titleO": "Title",
+
+  "browse.comcol.by.titleC": "Title",
+
+  "browse.comcol.by.titleSM": "Title",
+
+  "browse.comcol.by.titlePicture": "Title",
+
+  "browse.comcol.by.dateissuedEvent": "Date",
+
+  "browse.comcol.by.subjectEvent": "Subject",
+
+  "browse.comcol.by.typeEvent": "Type",
+
+  "browse.comcol.by.dateissuedAM": "Date",
+
+  "browse.comcol.by.subjectAM": "Subject",
+
+  "browse.comcol.by.typeAM": "Type",
+
+  "browse.comcol.by.dateissuedFamily": "Date",
+
+  "browse.comcol.by.subjectFamily": "Subject",
+
+  "browse.comcol.by.typeFamily": "Type",
+
+  "browse.comcol.by.dateissuedPlace": "Date",
+
+  "browse.comcol.by.subjectPlace": "Subject",
+
+  "browse.comcol.by.typePlace": "Type",
+
+  "browse.comcol.by.dateissuedN": "Date",
+
+  "browse.comcol.by.subjectN": "Subject",
+
+  "browse.comcol.by.typeN": "Type",
+
+  "browse.comcol.by.dateissuedSP": "Date",
+
+  "browse.comcol.by.subjectSP": "Subject",
+
+  "browse.comcol.by.typeSP": "Type",
+
+  "browse.comcol.by.dateissuedJI": "Date",
+
+  "browse.comcol.by.subjectJI": "Subject",
+
+  "browse.comcol.by.typeJI": "Type",
+
+  "browse.comcol.by.dateissuedPath": "Date",
+
+  "browse.comcol.by.subjectPath": "Subject",
+
+  "browse.comcol.by.typePath": "Type",
+
+  "browse.comcol.by.dateissuedO": "Date",
+
+  "browse.comcol.by.subjectO": "Subject",
+
+  "browse.comcol.by.typeO": "Type",
+
+  "browse.comcol.by.dateissuedC": "Date",
+
+  "browse.comcol.by.subjectC": "Subject",
+
+  "browse.comcol.by.typeC": "Type",
+
+  "browse.comcol.by.dateissuedSM": "Date",
+
+  "browse.comcol.by.subjectSM": "Subject",
+
+  "browse.comcol.by.typeSM": "Type",
+
+  "browse.comcol.by.dateissuedPicture": "Date",
+
+  "browse.comcol.by.subjectPicture": "Subject",
+
+  "browse.comcol.by.typePicture": "Type",
+
 
   "browse.comcol.head": "Browse",
 
@@ -971,6 +1078,102 @@
   "browse.metadata.dateissuedA.breadcrumbs" : "Browse by Date",
 
   "browse.metadata.subjectA.breadcrumbs" : "Browse by Subject",
+
+  "browse.metadata.titleEvent.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titleAM.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titleFamily.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titlePlace.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titleN.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titleSP.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titleJI.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titlePath.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titleO.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titleC.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titleSM.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.titlePicture.breadcrumbs": "Browse by Title",
+
+  "browse.metadata.dateissuedEvent.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectEvent.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typeEvent.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedAM.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectAM.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typeAM.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedFamily.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectFamily.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typeFamily.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedPlace.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectPlace.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typePlace.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedN.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectN.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typeN.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedSP.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectSP.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typeSP.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedJI.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectJI.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typeJI.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedPath.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectPath.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typePath.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedO.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectO.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typeO.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedC.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectC.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typeC.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedSM.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectSM.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typeSM.breadcrumbs": "Browse by Type",
+
+  "browse.metadata.dateissuedPicture.breadcrumbs": "Browse by Date",
+
+  "browse.metadata.subjectPicture.breadcrumbs": "Browse by Subject",
+
+  "browse.metadata.typePicture.breadcrumbs": "Browse by Type",
 
   "browse.metadata.titleF" : "Title",
 
@@ -1075,6 +1278,9 @@
   "bulk-import.submit": "Start import",
 
   "bulk-import.title" : "Bulk import",
+
+
+  "carousel.button.see-more": "See more",
 
 
 
@@ -1240,7 +1446,7 @@
 
   "collection.edit.tabs.source.notifications.discarded.content": "Your changes were discarded. To reinstate your changes click the 'Undo' button",
 
-  "collection.edit.tabs.source.notifications.discarded.title": "Changed discarded",
+  "collection.edit.tabs.source.notifications.discarded.title": "Changes discarded",
 
   "collection.edit.tabs.source.notifications.invalid.content": "Your changes were not saved. Please make sure all fields are valid before you save.",
 
@@ -1677,7 +1883,7 @@
 
   "RELATION.Path.pathpublications.search.results.head" : "Paths Publications",
 
-  "RELATION.Person.contributedpublications.search.results.head" : "Contributed Publications",
+  "RELATION.Person.copublications.search.results.head" : "Contributed Publications",
 
   "RELATION.Person.fonds.search.results.head" : "Fonds",
 
@@ -1698,6 +1904,9 @@
   "datafile.listelement.badge": "Data File",
 
   "datapackage.listelement.badge": "Data Package",
+
+
+  "checksum-tooltip.info.MD5": "The <b>MD5 message-digest algorithm</b> can be used to verify the integrity of the file that you have uploaded. You can calculate its value locally via tools that are generally available in each operative system like <b>md5sum</b>",
 
   "cookies.consent.accept-all": "Accept all",
 
@@ -1724,6 +1933,8 @@
   "cookies.consent.decline": "Decline",
 
   "cookies.consent.content-notice.description": "We collect and process your personal information for the following purposes: <strong>Authentication, Preferences, Acknowledgement and Statistics</strong>. <br/> To learn more, please read our {privacyPolicy}.",
+
+  "cookies.consent.content-notice.description.no-privacy": "We collect and process your personal information for the following purposes: <strong>Authentication, Preferences, Acknowledgement and Statistics</strong>.",
 
   "cookies.consent.content-notice.learnMore": "Customize",
 
@@ -1760,11 +1971,23 @@
 
 
 
+  "cookies.consent.app.title.google-recaptcha": "Google reCaptcha",
+
+  "cookies.consent.app.description.google-recaptcha": "We use google reCAPTCHA service during registration and password recovery",
+
+
+
   "cookies.consent.purpose.functional": "Functional",
 
   "cookies.consent.purpose.statistical": "Statistical",
 
+  "cookies.consent.purpose.registration-password-recovery": "Registration and Password recovery",
+
   "cookies.consent.purpose.sharing": "Sharing",
+
+
+  "curation-task.task.citationpage.label":  "Generate Citation Page",
+
 
   "cris-layout.toggle.open": "Open section",
 
@@ -1777,6 +2000,10 @@
   "cris-layout.advanced-attachment.dc.title": "Name",
 
   "cris-layout.advanced-attachment.size": "Size",
+
+  "cris-layout.advanced-attachment.checksum": "Checksum",
+
+  "cris-layout.advanced-attachment.checksum.info.MD5": "The <b>MD5 message-digest algorithm</b> can be used to verify the integrity of the file that you have uploaded. You can calculate its value locally via tools that are generally available in each operative system like <b>md5sum</b>",
 
   "cris-layout.advanced-attachment.format": "Format",
 
@@ -1874,13 +2101,13 @@
 
   "dso-selector.export-metadata.dspaceobject.head": "Export metadata from",
 
-  "dso-selector.import-item.item.head": "Import items",
-
-  "dso-selector.import-item.sub-level": "Bulk import items in",
-
   "dso-selector.export-batch.dspaceobject.head": "Export Batch (ZIP) from",
 
   "dso-selector.import-batch.dspaceobject.head": "Import batch from",
+
+  "dso-selector.import-item.item.head": "Import items",
+
+  "dso-selector.import-item.sub-level": "Bulk import items in",
 
   "dso-selector.no-results": "No {{ type }} found",
 
@@ -2025,6 +2252,12 @@
 
   "explore.counters-section.project_funding" : "Projects",
 
+  "explore.carousel.view-more": "View More",
+
+  "explore.text-section.counter.header" : "Our Numbers",
+
+  "explore.grid-section.seeAll" : "See all",
+
   "explore.facet-section.title" : "Discover",
 
   "explore.index.all" : "All",
@@ -2052,7 +2285,7 @@
 
   "explore.index.dateissued" : "Date issued",
 
-  "explore.index.dc.date.accessioned" : "Recent Additions",
+  "explore.index.dc.date.accessioned" : "New accessions",
 
   "explore.index.paths" : "Paths",
 
@@ -2213,11 +2446,28 @@
 
   "footer.link.feedback":"Send Feedback",
 
+  "footer.involved-institution":"Institutions involved",
+
+  "footer.information":"Information",
+
+  "footer.general-information":"General information",
+
+  "footer.offer-service":"Offered services",
+
+  "footer.history-digital":"History of the digital LID",
+
+  "footer.org-structure":"Organizational structure",
+
+  "footer.contact":"Contacts",
+
+  "footer.terms":"Terms of Use",
+
+  "footer.made-info": "Made with DSpace-GLAM - Extension maintained and optimized by 4Science",
 
 
   "forgot-email.form.header": "Forgot Password",
 
-  "forgot-email.form.info": "Enter Register an account to subscribe to collections for email updates, and submit new items to DSpace.",
+  "forgot-email.form.info": "Enter the email address associated with the account.",
 
   "forgot-email.form.email": "Email Address *",
 
@@ -2225,17 +2475,17 @@
 
   "forgot-email.form.email.error.pattern": "Please fill in a valid email address",
 
-  "forgot-email.form.email.hint": "This address will be verified and used as your login name.",
+  "forgot-email.form.email.hint": "An email will be sent to this address with a further instructions.",
 
-  "forgot-email.form.submit": "Save",
+  "forgot-email.form.submit": "Reset password",
 
-  "forgot-email.form.success.head": "Verification email sent",
+  "forgot-email.form.success.head": "Password reset email sent",
 
   "forgot-email.form.success.content": "An email has been sent to {{ email }} containing a special URL and further instructions.",
 
-  "forgot-email.form.error.head": "Error when trying to register email",
+  "forgot-email.form.error.head": "Error when trying to reset password",
 
-  "forgot-email.form.error.content": "An error occured when registering the following email address: {{ email }}",
+  "forgot-email.form.error.content": "An error occured when attempting to reset the password for the account associated with the following email address: {{ email }}",
 
 
 
@@ -2243,7 +2493,7 @@
 
   "forgot-password.form.head": "Forgot Password",
 
-  "forgot-password.form.info": "Enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
+  "forgot-password.form.info": "Enter a new password in the box below, and confirm it by typing it again into the second box.",
 
   "forgot-password.form.card.security": "Security",
 
@@ -2259,8 +2509,6 @@
 
   "forgot-password.form.error.matching-passwords": "The passwords do not match.",
 
-  "forgot-password.form.error.password-length": "The password should be at least 6 characters long.",
-
   "forgot-password.form.notification.error.title": "Error when trying to submit new password",
 
   "forgot-password.form.notification.success.content": "The password reset was successful. You have been logged in as the created user.",
@@ -2268,7 +2516,6 @@
   "forgot-password.form.notification.success.title": "Password reset completed",
 
   "forgot-password.form.submit": "Submit password",
-
 
 
   "form.add": "Add more",
@@ -2394,6 +2641,13 @@
   "grant-request-copy.intro": "This message will be sent to the applicant of the request. The requested document(s) will be attached.",
 
   "grant-request-copy.success": "Successfully granted item request",
+
+
+  "grid.component.badge": "Paths",
+  "grid.component.title": "Discovering...",
+  "grid.component.subtitle": "...new ways to explore our digital libraries.",
+  "grid.component.abstract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "grid.component.link": "/explore/paths",
 
 
   "health.breadcrumbs": "Health",
@@ -2702,7 +2956,7 @@
 
   "item.edit.metadata.notifications.discarded.content": "Your changes were discarded. To reinstate your changes click the 'Undo' button",
 
-  "item.edit.metadata.notifications.discarded.title": "Changed discarded",
+  "item.edit.metadata.notifications.discarded.title": "Changes discarded",
 
   "item.edit.metadata.notifications.error.title": "An error occurred",
 
@@ -2712,7 +2966,7 @@
 
   "item.edit.metadata.notifications.outdated.content": "The item you're currently working on has been changed by another user. Your current changes are discarded to prevent conflicts",
 
-  "item.edit.metadata.notifications.outdated.title": "Changed outdated",
+  "item.edit.metadata.notifications.outdated.title": "Changes outdated",
 
   "item.edit.metadata.notifications.saved.content": "Your changes to this item's metadata were saved.",
 
@@ -3329,6 +3583,8 @@
 
   "item-export.alert.multiple": "Export all items of a particular entity type belonging to the current search.",
 
+  "item-export.alert.export.limit": "This export will be limited to a maximum of {{limit}} items.",
+
   "item-export.form.entityType": "Entity Type",
 
   "item-export.form.entityType.tip": "Choose the entity type to export",
@@ -3512,7 +3768,9 @@
 
   "manage.relationships.unhide": "Unhide",
 
-  "manage.relationships.title" : "Selected items",
+  "manage.relationships.search-list.title" : "All your items",
+
+  "manage.relationships.selected-list.title" : "Selected items",
 
   "manage.relationships.no.relationships.found" : "Empty selection",
 
@@ -3624,6 +3882,8 @@
   "menu.section.export_item": "Item",
 
   "menu.section.export_metadata": "Metadata",
+
+  "menu.section.export_batch": "Batch Export (ZIP)",
 
   "menu.section.import_from_excel": "Import from excel",
 
@@ -3887,8 +4147,6 @@
 
   "mydspace.description": "",
 
-  "mydspace.general.text-here": "here",
-
   "mydspace.messages.controller-help": "Select this option to send a message to item's submitter.",
 
   "mydspace.messages.description-placeholder": "Insert your message here...",
@@ -3949,6 +4207,8 @@
 
   "mydspace.show.workspace": "Your Submissions",
 
+  "mydspace.show.otherworkspace": "Other Workspace Submissions",
+
   "mydspace.status.archived": "Archived",
 
   "mydspace.status.validation": "Validation",
@@ -3968,8 +4228,6 @@
   "mydspace.upload.upload-failed-moreonefile": "Unprocessable request. Only one file is allowed.",
 
   "mydspace.upload.upload-multiple-successful": "{{qty}} new workspace items created.",
-
-  "mydspace.upload.upload-successful": "New workspace item created. Click {{here}} for edit it.",
 
   "mydspace.view-btn": "View",
 
@@ -4181,6 +4439,8 @@
 
   "reciter.suggestion.hideEvidence": "Hide evidence",
 
+  "reciter.suggestion.not-found": "No suggestion found with the given identifier.",
+
   "reciter.suggestion.suggestionFor": "Suggestion for",
 
   "reciter.suggestion.source.oaire": "OpenAIRE Graph",
@@ -4193,8 +4453,12 @@
 
   "reciter.suggestion.type.oaire": "Publications",
 
+  "reciter.suggestion.type.orcidWorks": "Publications",
+
 
   "orgunit.listelement.badge": "Organizational Unit",
+
+  "orgunit.listelement.no-title": "Untitled",
 
   "orgunit.page.city": "City",
 
@@ -4332,8 +4596,6 @@
 
   "process.detail.create" : "Create similar process",
 
-  "process.overview.delete.failed" : "An error occurs deleting the process.",
-
   "process.detail.actions": "Actions",
 
   "process.detail.delete.button": "Delete process",
@@ -4349,6 +4611,8 @@
   "process.detail.delete.success": "The process was successfully deleted.",
 
   "process.detail.delete.error": "Something went wrong when deleting the process",
+
+  "process.overview.delete.failed" : "An error occurs deleting the process.",
 
   "process.overview.delete.success" : "Process deleted with success",
 
@@ -4369,6 +4633,25 @@
   "process.overview.breadcrumbs": "Processes Overview",
 
   "process.overview.new": "New",
+
+  "process.overview.table.actions": "Actions",
+
+  "process.overview.delete": "Delete {{count}} processes",
+
+  "process.overview.delete.clear": "Clear delete selection",
+
+  "process.overview.delete.processing": "{{count}} process(es) are being deleted. Please wait for the deletion to fully complete. Note that this can take a while.",
+
+  "process.overview.delete.body": "Are you sure you want to delete {{count}} process(es)?",
+
+  "process.overview.delete.header": "Delete processes",
+
+  "process.bulk.delete.error.head": "Error on deleteing process",
+
+  "process.bulk.delete.error.body": "The process with ID {{processId}} could not be deleted. The remaining processes will continue being deleted. ",
+
+  "process.bulk.delete.success": "{{count}} process(es) have been succesfully deleted",
+
 
 
   "audit.overview.title": "Audit Logs Overview",
@@ -4426,7 +4709,7 @@
 
   "profile.card.access-token.copy-info": "Make sure to copy your personal access token now. You won’t be able to see it again!",
 
-  "profile.card.access-token.info": "Tokens you have generated that can be used to access the DSpace-CRIS API.",
+  "profile.card.access-token.info": "Tokens you have generated that can be used to access the DSpace-GLAM API.",
 
   "profile.card.access-token.create.error": "An error occurred while generating the token, please try again later.",
 
@@ -4446,7 +4729,7 @@
 
   "profile.card.access-token.delete": "Revoke token",
 
-  "profile.card.access-token.no-token-generated": "You don't have personal access token. Generate a personal access token for quick access to the DSpace-CRIS API.",
+  "profile.card.access-token.no-token-generated": "You don't have personal access token. Generate a personal access token for quick access to the DSpace-GLAM API.",
 
   "profile.card.access-token.token-generated": "You have already generated a personal access token.",
 
@@ -4486,13 +4769,13 @@
 
   "profile.security.form.error.matching-passwords": "The passwords do not match.",
 
-  "profile.security.form.error.password-length": "The password should be at least 6 characters long.",
-
-  "profile.security.form.info": "Optionally, you can enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
+  "profile.security.form.info": "Optionally, you can enter a new password in the box below, and confirm it by typing it again into the second box.",
 
   "profile.security.form.label.password": "Password",
 
   "profile.security.form.label.passwordrepeat": "Retype to confirm",
+
+  "profile.security.form.label.current-password": "Current password",
 
   "profile.security.form.notifications.success.content": "Your changes to the password were saved.",
 
@@ -4500,9 +4783,11 @@
 
   "profile.security.form.notifications.error.title": "Error changing passwords",
 
-  "profile.security.form.notifications.error.not-long-enough": "The password has to be at least 6 characters long.",
+  "profile.security.form.notifications.error.change-failed": "An error occurred while trying to change the password. Please check if the current password is correct.",
 
   "profile.security.form.notifications.error.not-same": "The provided passwords are not the same.",
+
+  "profile.security.form.notifications.error.general": "Please fill required fields of security form.",
 
   "profile.title": "Update Profile",
 
@@ -4594,7 +4879,7 @@
 
   "register-page.create-profile.security.header": "Security",
 
-  "register-page.create-profile.security.info": "Please enter a password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
+  "register-page.create-profile.security.info": "Please enter a password in the box below, and confirm it by typing it again into the second box.",
 
   "register-page.create-profile.security.label.password": "Password *",
 
@@ -4603,8 +4888,6 @@
   "register-page.create-profile.security.error.empty-password": "Please enter a password in the box below.",
 
   "register-page.create-profile.security.error.matching-passwords": "The passwords do not match.",
-
-  "register-page.create-profile.security.error.password-length": "The password should be at least 6 characters long.",
 
   "register-page.create-profile.submit": "Complete Registration",
 
@@ -4642,7 +4925,17 @@
 
   "register-page.registration.error.content": "An error occured when registering the following email address: {{ email }}",
 
+  "register-page.registration.error.recaptcha": "Error when trying to authenticate with recaptcha",
 
+  "register-page.registration.google-recaptcha.must-accept-cookies": "In order to register you must accept the <b>Registration and Password recovery</b> (Google reCaptcha) cookies.",
+
+  "register-page.registration.google-recaptcha.open-cookie-settings": "Open cookie settings",
+
+  "register-page.registration.google-recaptcha.notification.title": "Google reCaptcha",
+
+  "register-page.registration.google-recaptcha.notification.message.error": "An error occurred during reCaptcha verification",
+
+  "register-page.registration.google-recaptcha.notification.message.expired": "Verification expired. Please verify again.",
 
   "relationships.add.error.relationship-type.content": "No suitable match could be found for relationship type {{ type }} between the two items",
 
@@ -4896,7 +5189,7 @@
 
   "search.filters.applied.charts.RELATION.Person.publications.title": "Publications",
 
-  "search.filters.applied.charts.RELATION.Person.contributedpublications.title": "Contributed Publications",
+  "search.filters.applied.charts.RELATION.Person.copublications.title": "Contributed Publications",
 
   "search.filters.applied.charts.RELATION.Project.fundings.title": "Fundings",
 
@@ -5201,6 +5494,7 @@
 
   "search.results.view-result": "View",
 
+  "search.results.response.500": "An error occurred during query execution, please try again later",
 
 
   "search.sidebar.close": "Back to results",
@@ -6070,6 +6364,8 @@
 
   "submission.sections.toggle.aria.close": "Collapse {{sectionHeader}} section",
 
+  "submission.sections.upload.checksum": "Checksum",
+
   "submission.sections.upload.delete.confirm.cancel": "Cancel",
 
   "submission.sections.upload.delete.confirm.info": "This operation can't be undone. Are you sure?",
@@ -6163,6 +6459,12 @@
   "submission.sections.accesses.form.until-hint": "Select the date until which the related access condition is applied",
 
   "submission.sections.accesses.form.until-placeholder": "Until",
+
+  "submission.sections.license.granted-label": "I confirm the license above",
+
+  "submission.sections.license.required": "You must accept the license",
+
+  "submission.sections.license.notgranted":  "You must accept the license",
 
 
   "submission.sections.sherpa.publication.information": "Publication information",
@@ -6337,7 +6639,7 @@
 
 
 
-  "title": "DSpace Cris",
+  "title": "DSpace-GLAM",
 
 
 
@@ -6427,7 +6729,7 @@
 
   "uploader.or": ", or ",
 
-  "uploader.processing": "Processing",
+  "uploader.processing": "Processing uploaded file(s)... (it's now safe to close this page)",
 
   "uploader.queue-length": "Queue length",
 
@@ -6438,6 +6740,8 @@
   "virtual-metadata.delete-relationship.modal-head": "Select the items for which you want to save the virtual metadata as real metadata",
 
 
+
+  "otherworkspace.search.results.head": "Workspace submissions",
 
   "workspace.search.results.head": "Your submissions",
 
@@ -6741,6 +7045,7 @@
   "person.orcid.registry.queue": "ORCID Registry Queue",
 
   "person.orcid.registry.auth": "ORCID Authorizations",
+  "home.recent-submissions.head": "Recent Submissions",
 
   "relation.rp.researchoutputs.search.results.head": "Related Publications",
 
@@ -6914,6 +7219,8 @@
 
   "curation-task.task.pushocr.label": "Send OCR to the Annotation Server",
 
+  "curation-task.task.pushocr.force.label": "Clean OCR from the Annotation Server and send again",
+
   "curation-task.task.ocrclean.label": "Remove all metadata bundles and uploaded ocr created by a previous upload to the ocr server",
 
   "vocabulary-treeview.header.fondsboxtree": "Fonds Tree",
@@ -6930,5 +7237,25 @@
 
   "curation-task.task.iiifallowfiledownload.label": "Allow file download for files uploaded on image server",
 
-  "curation-task.task.iiifpdfmultipages.label": "Create multipages PDF from IIIF images"
+  "curation-task.task.iiifpdfmultipages.label": "Create multipages PDF from IIIF images",
+
+  "curation-task.task.pdftoimagecmyk.label": "Extract images from PDF (CMYK)",
+
+  "curation-task.task.pdftoimagergb.label": "Extract images from PDF (RGB)",
+
+  "curation-task.task.scannedpdf.label": "Extract images from a Scanned PDF",
+
+  "curation-task.task.rawimagesinpdf.label": "Extract raw images inside the PDF (no OCR)",
+
+  "curation-task.task.undopdfiiif.label": "Undo PDF 2 IIIF Images",
+
+  "curation-task.task.rebuildpdftoc.label": "Rebuild the PDF ToC",
+
+  "RELATION.Place.people.search.results.head" : "People",
+  "search.filters.applied.charts.RELATION.Place.people.title": "People",
+
+  "RELATION.Place.places.search.results.head" : "Places",
+  "search.filters.applied.charts.RELATION.Place.places.title": "Places",
+  "context-menu.actions.edit-item-relationships.btn.places": "Manage Places"
+
 }

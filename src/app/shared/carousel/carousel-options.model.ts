@@ -53,4 +53,9 @@ export interface CarouselOptions {
    * Classes to be applied to the title
    */
   titleStyle: string;
+
+  /**
+   * Applies a blurred backdrop
+   */
+  showBlurryBackdrop: boolean;
 }

@@ -7,6 +7,7 @@ import { SiteDataService } from '../core/data/site-data.service';
 import { TextRowSection } from '../core/layout/models/section.model';
 import { Observable } from 'rxjs';
 import { LocaleService } from '../core/locale/locale.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'ds-footer',
@@ -32,6 +33,10 @@ export class FooterComponent implements OnInit {
    */
   section: TextRowSection;
 
+  showPrivacyPolicy = environment.info.enablePrivacyStatement;
+  showEndUserAgreement = environment.info.enableEndUserAgreement;
+  involvedInstitutions = environment.layout.footer.involvedInstitutions;
+
   constructor(
     @Optional() private cookies: KlaroService,
     private locale: LocaleService,
@@ -49,7 +54,7 @@ export class FooterComponent implements OnInit {
     this.site = this.siteService.find().pipe(take(1));
     this.siteService.find().pipe(take(1)).subscribe(
       (site: Site) => {
-        this.hasSiteFooterSections = !isEmpty(site.firstMetadataValue('cris.cms.footer',
+        this.hasSiteFooterSections = !isEmpty(site?.firstMetadataValue('cris.cms.footer',
           { language: this.locale.getCurrentLanguageCode() }));
       }
     );

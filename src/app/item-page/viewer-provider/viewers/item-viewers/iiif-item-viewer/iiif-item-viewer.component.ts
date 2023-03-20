@@ -18,7 +18,7 @@ export class IIIFItemViewerComponent extends BaseItemViewerComponent implements 
 
   isSearchable$: Observable<boolean>;
   query$: Observable<string>;
-  canvasId$: Observable<number>;
+  canvasId$: Observable<string>;
 
   constructor(
     private readonly routeService: RouteService,
@@ -32,7 +32,7 @@ export class IIIFItemViewerComponent extends BaseItemViewerComponent implements 
       filter(queryMap => queryMap != null),
     );
     this.canvasId$ = queryParams$.pipe(
-      this.extractParam(queryMap => +queryMap.get(this.CANVAS_PARAM))
+      this.extractParam(queryMap => queryMap.get(this.CANVAS_PARAM))
     );
     this.isSearchable$ = this.item$.pipe(
       map((item) => isIiifSearchEnabled(item))

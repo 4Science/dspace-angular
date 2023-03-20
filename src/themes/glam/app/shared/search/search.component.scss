@@ -1,0 +1,31 @@
+.card .card-header {
+  padding: 0.25rem 0 !important;
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.new-bg {
+  background-color: #c2d1d9;
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  color: #626a70;
+}
+
+.form-control.main-input {
+  min-width: 330px;
+}
+
+h1, h4 {
+  font-weight: 600;
+}
+
+.sider-div {
+  background-color: #f2f5f7;
+}

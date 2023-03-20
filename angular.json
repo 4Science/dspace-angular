@@ -70,6 +70,11 @@
                 "input": "src/themes/dspace/styles/theme.scss",
                 "inject": false,
                 "bundleName": "dspace-theme"
+              },
+              {
+                "input": "src/themes/glam/styles/theme.scss",
+                "inject": false,
+                "bundleName": "glam-theme"
               }
             ],
             "scripts": [],
@@ -106,7 +111,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "3mb",
-                  "maximumError": "6mb"
+                  "maximumError": "7mb"
                 },
                 {
                   "type": "anyComponentStyle",

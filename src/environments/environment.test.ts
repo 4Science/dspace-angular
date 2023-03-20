@@ -29,7 +29,8 @@ export const environment: BuildConfig = {
     rateLimiter: {
       windowMs: 1 * 60 * 1000, // 1 minute
       max: 500 // limit each IP to 500 requests per windowMs
-    }
+    },
+    useProxies: true,
   },
 
   // The REST API server settings.
@@ -199,6 +200,10 @@ export const environment: BuildConfig = {
     code: 'bn',
     label: 'বাংলা',
     active: true,
+  }, {
+    code: 'el',
+    label: 'Ελληνικά',
+    active: true,
   }],
 
   // Browse-By Pages
@@ -209,6 +214,25 @@ export const environment: BuildConfig = {
     fiveYearLimit: 30,
     // The absolute lowest year to display in the dropdown (only used when no lowest date can be found for all items)
     defaultLowerLimit: 1900,
+    // Whether to add item thumbnail images to BOTH browse and search result lists.
+    showThumbnails: true,
+    // The number of entries in a paginated browse results list.
+    // Rounded to the nearest size in the list of selectable sizes on the
+    // settings menu.  See pageSizeOptions in 'pagination-component-options.model.ts'.
+    pageSize: 20,
+  },
+  communityList: {
+    pageSize: 20
+  },
+  homePage: {
+    recentSubmissions: {
+      pageSize: 5,
+      //sort record of recent submission
+      sortField: 'dc.date.accessioned',
+    },
+    topLevelCommunityList: {
+      pageSize: 5
+    }
   },
   followAuthorityMetadata: [
     {
@@ -259,6 +283,14 @@ export const environment: BuildConfig = {
   mediaViewer: {
     image: true,
     video: true
+  },
+  info: {
+    enableEndUserAgreement: true,
+    enablePrivacyStatement: true,
+  },
+  markdown: {
+    enabled: false,
+    mathjax: false,
   },
   crisLayout: {
     urn: [
@@ -312,6 +344,7 @@ export const environment: BuildConfig = {
         }
       }
     ],
+    crisRefStyleMetadata: 'cris.entity.style',
     itemPage: {
       Person: {
         orientation: 'horizontal'
@@ -336,6 +369,14 @@ export const environment: BuildConfig = {
     navbar: {
       // If true, show the "Community and Collections" link in the navbar; otherwise, show it in the admin sidebar
       showCommunityCollection: true,
+    },
+    footer: {
+      involvedInstitutions: [
+        {
+          href: '',
+          src: ''
+        }
+      ]
     }
   },
   security: {
@@ -448,6 +489,10 @@ export const environment: BuildConfig = {
       {
         name: 'format',
         type: AdvancedAttachmentElementType.Attribute,
+      },
+      {
+        name: 'checksum',
+        type: AdvancedAttachmentElementType.Attribute,
       }
     ],
     buttons: [
@@ -477,5 +522,5 @@ export const environment: BuildConfig = {
         negation: true
       }
     ]
-  }
+  },
 };
