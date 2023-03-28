@@ -93,6 +93,7 @@ export class ItemStatusComponent implements OnInit {
         } else {
           operations.push(new ItemOperation('public', this.getCurrentUrl(item) + '/public', FeatureID.CanMakePrivate, true));
         }
+        operations.push(new ItemOperation('curate', this.getCurrentUrl(item) + '/curate', FeatureID.CanCurate, true));
         operations.push(new ItemOperation('delete', this.getCurrentUrl(item) + '/delete', FeatureID.CanDelete, true));
         operations.push(new ItemOperation('move', this.getCurrentUrl(item) + '/move', FeatureID.CanMove, true));
 

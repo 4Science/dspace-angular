@@ -3548,6 +3548,11 @@
 
 
 
+  // "item.curate.header": "Curate Item: {{item}}",
+  "item.curate.header": "Curate Item: {{item}}",
+
+
+
   // "item.edit.bitstreams.bundle.edit.buttons.upload": "Upload",
   "item.edit.bitstreams.bundle.edit.buttons.upload": "Carica",
 
@@ -4002,6 +4007,12 @@
 
   // "item.edit.tabs.status.buttons.authorizations.label": "Edit item's authorization policies",
   "item.edit.tabs.status.buttons.authorizations.label": "Modificare i criteri di autorizzazione degli item",
+
+  // "item.edit.tabs.status.buttons.curate.button": "Curate item...",
+  "item.edit.tabs.status.buttons.curate.button": "Curate l'item...",
+
+  // "item.edit.tabs.status.buttons.curate.label": "Launch curation tasks",
+  "item.edit.tabs.status.buttons.curate.label": "Lancia curation tasks",
 
   // "item.edit.tabs.status.buttons.delete.button": "Permanently delete",
   "item.edit.tabs.status.buttons.delete.button": "Elimina definitivamente",

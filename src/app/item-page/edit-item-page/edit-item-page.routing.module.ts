@@ -22,6 +22,7 @@ import { ResourcePolicyEditComponent } from '../../shared/resource-policies/edit
 import { I18nBreadcrumbsService } from '../../core/breadcrumbs/i18n-breadcrumbs.service';
 import {
   ITEM_EDIT_AUTHORIZATIONS_PATH,
+  ITEM_EDIT_CURATE_PATH,
   ITEM_EDIT_DELETE_PATH,
   ITEM_EDIT_MOVE_PATH,
   ITEM_EDIT_PRIVATE_PATH,
@@ -42,6 +43,7 @@ import { ItemPageCollectionMapperGuard } from './item-page-collection-mapper.gua
 import { ItemUnlinkOrcidComponent } from './item-unlink-orcid/item-unlink-orcid.component';
 import { ItemPageUnlinkOrcidGuard } from './item-page-unlink-orcid.guard';
 import { EditItemResolver } from './../../core/shared/resolvers/edit-item.resolver';
+import { ItemCurateComponent } from './item-curate/item-curate.component';
 
 /**
  * Routing module that handles the routing for the Edit Item page administrator functionality
@@ -137,6 +139,10 @@ import { EditItemResolver } from './../../core/shared/resolvers/edit-item.resolv
           {
             path: ITEM_EDIT_PUBLIC_PATH,
             component: ItemPublicComponent,
+          },
+          {
+            path: ITEM_EDIT_CURATE_PATH,
+            component: ItemCurateComponent,
           },
           {
             path: ITEM_EDIT_DELETE_PATH,
