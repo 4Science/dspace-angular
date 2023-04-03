@@ -41,7 +41,14 @@
                     [ngbTooltip]="node.item?.otherInformation?.note"
                     [openDelay]="500"
                     container="body"
-                    (click)="onSelect(node.item)">{{node.item.display}}</button>
+                    (click)="onSelect(node.item)"
+                    dsEntityIcon
+                    [iconPosition]="iconPosition"
+                    [entityType]="node.item?.otherInformation?.nodeType ?? 'default'"
+                    [fallbackOnDefault]="true">{{node.item.display}}</button>
+            <a *ngIf="metadataValidItemAuthorityCheck(node.item.otherInformation.id)" [routerLink]="['/items/' + node.item.otherInformation.id]">
+              <i class="fa fa-search"></i>
+            </a>
         </cdk-tree-node>
 
         <!-- expandable node -->
@@ -54,12 +61,21 @@
             </button>
 
             <button class="btn btn-outline-link btn-sm text-left"
+                    cdkTreeNodeToggle
+                    [attr.aria-label]="'toggle ' + node.name"
                     [class.text-success]="node.item?.value === selectedItem?.value"
                     [disabled]="!node.item?.selectable"
                     [ngbTooltip]="node.item?.otherInformation?.note"
                     [openDelay]="500"
                     container="body"
-                    (click)="onSelect(node.item)">{{node.item.display}}</button>
+                    (click)="publicModeOnly ? loadChildren(node) : onSelect(node.item)"
+                    dsEntityIcon
+                    [iconPosition]="iconPosition"
+                    [entityType]="node.item?.otherInformation?.nodeType ?? 'default'"
+                    [fallbackOnDefault]="true">{{node.item.display}}</button>
+            <a *ngIf="metadataValidItemAuthorityCheck(node.item.otherInformation.id)" [routerLink]="['/items/' + node.item.otherInformation.id]">
+              <i class="fa fa-search"></i>
+            </a>
         </cdk-tree-node>
 
         <cdk-tree-node *cdkTreeNodeDef="let node; when: isLoadMore" cdkTreeNodePadding>

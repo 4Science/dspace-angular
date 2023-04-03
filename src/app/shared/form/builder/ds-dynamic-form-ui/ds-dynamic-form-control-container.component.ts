@@ -120,6 +120,8 @@ import { FormBuilderService } from '../form-builder.service';
 import { DYNAMIC_FORM_CONTROL_TYPE_RELATION_GROUP } from './ds-dynamic-form-constants';
 import { FormFieldMetadataValueObject } from '../models/form-field-metadata-value.model';
 import { DynamicConcatModel } from './models/ds-dynamic-concat.model';
+import { DsDynamicMarkdownComponent } from './models/markdown/dynamic-markdown.component';
+import { DYNAMIC_FORM_CONTROL_TYPE_MARKDOWN } from './models/markdown/dynamic-markdown.model';
 
 export function dsDynamicFormControlMapFn(model: DynamicFormControlModel): Type<DynamicFormControl> | null {
   switch (model.type) {
@@ -181,6 +183,9 @@ export function dsDynamicFormControlMapFn(model: DynamicFormControlModel): Type<
 
     case DYNAMIC_FORM_CONTROL_TYPE_CUSTOM_SWITCH:
       return CustomSwitchComponent;
+
+    case DYNAMIC_FORM_CONTROL_TYPE_MARKDOWN:
+      return DsDynamicMarkdownComponent;
 
     default:
       return null;

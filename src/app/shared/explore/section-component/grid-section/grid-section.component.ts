@@ -1,4 +1,4 @@
-import { LayoutModeEnum, GridSection } from '../../../../core/layout/models/section.model';
+import { GridSection, LayoutModeEnum } from '../../../../core/layout/models/section.model';
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 
 import { SortDirection, SortOptions } from '../../../../core/cache/models/sort-options.model';

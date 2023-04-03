@@ -9,7 +9,7 @@ import { SearchFilterService } from '../../../../../../core/shared/search/search
 import {
   RANGE_FILTER_MAX_SUFFIX,
   RANGE_FILTER_MIN_SUFFIX
-} from '../../search-range-filter/search-range-filter.component';
+} from '../../search-range-filter-wrapper/search-range-filter/search-range-filter.component';
 import { SearchConfigurationService } from '../../../../../../core/shared/search/search-configuration.service';
 import { hasValue } from '../../../../../empty.util';
 import { currentPath } from '../../../../../utils/route.utils';
