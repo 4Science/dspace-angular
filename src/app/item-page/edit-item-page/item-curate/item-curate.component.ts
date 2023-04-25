@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { filter, map, shareReplay, take } from 'rxjs/operators';
+import { Component } from '@angular/core';
+import { filter, map, shareReplay } from 'rxjs/operators';
 import { RemoteData } from '../../../core/data/remote-data';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
