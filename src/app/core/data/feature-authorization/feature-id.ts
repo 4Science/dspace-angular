@@ -34,5 +34,6 @@ export enum FeatureID {
   CanSynchronizeWithORCID = 'canSynchronizeWithORCID',
   ShowClaimItem = 'showClaimItem',
   CanCorrectItem = 'canCorrectItem',
-  CanSubscribe = 'canSubscribeDso'
+  CanSubscribe = 'canSubscribeDso',
+  CanCurate = 'canCurateItem'
 }
