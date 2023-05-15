@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule, By } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -17,6 +17,7 @@ import { createSuccessfulRemoteDataObject$ } from '../../../remote-data.utils';
 import { LocaleService } from '../../../../core/locale/locale.service';
 import { Site } from '../../../../core/shared/site.model';
 import { of } from 'rxjs';
+import { SortDirection } from '../../../../core/cache/models/sort-options.model';
 
 describe('GridSectionComponent', () => {
   let component: GridSectionComponent;
@@ -97,7 +98,9 @@ describe('GridSectionComponent', () => {
       discoveryConfigurationName: 'publication',
       componentType: 'grid',
       style: 'col-md-6',
-      'main-content-link': ''
+      mainContentLink: '',
+      order: SortDirection.ASC,
+      sortField: ''
     };
     component.site  = Object.assign(new Site(), {
       id: 'test-site',
