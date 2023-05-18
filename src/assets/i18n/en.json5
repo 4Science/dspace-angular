@@ -1891,7 +1891,7 @@
 
   "RELATION.Fonds.children.search.results.head" : "Fonds Children",
 
-  "RELATION.JournalFond.children.search.results.head" : "Journal Fonds Children",
+  "RELATION.JournalFonds.children.search.results.head" : "Journal Fonds Children",
 
   "RELATION.Place.publications.search.results.head" : "Publications",
 
@@ -3579,11 +3579,15 @@
 
   "item-export.modal-launcher.multiple.btn": "Export",
 
-  "item-export.alert.single": "Export item ",
+  "item-export.alert.single": "Export item <b>{{title}}</b>",
 
   "item-export.alert.multiple": "Export all items of a particular entity type belonging to the current search.",
 
+  "item-export.alert.multiple-with-type": "Export all items with type <b>{{type}}</b> belonging to the current search.",
+
   "item-export.alert.export.limit": "This export will be limited to a maximum of {{limit}} items.",
+
+  "item-export.cannot-msg": "There are no items to export with the selected configuration",
 
   "item-export.form.entityType": "Entity Type",
 
@@ -3596,6 +3600,14 @@
   "item-export.form.btn.submit": "Export",
 
   "item-export.form.btn.cancel": "Cancel",
+
+  "item-export.form.selection": "Export mode",
+
+  "item-export.form.selection.all": "Export all",
+
+  "item-export.form.selection.only-selected": "Export only selected",
+
+  "item-export.modal.title": "Item Export Process Launcher",
 
   "item-export.process.title": "Bulk export item",
 
@@ -5225,7 +5237,7 @@
 
   "search.filters.applied.charts.RELATION.Fonds.children.title": "Fonds Children",
 
-  "search.filters.applied.charts.RELATION.JournalFond.children.title": "Journal Fonds Children",
+  "search.filters.applied.charts.RELATION.JournalFonds.children.title": "Journal Fonds Children",
 
   "search.filters.applied.charts.RELATION.Place.publications.title": "Publications",
 
@@ -7089,7 +7101,7 @@
 
   "fonds.listelement.badge": "Fonds",
 
-  "journalfond.listelement.badge": "Journal Fond",
+  "journalfonds.listelement.badge": "Journal Fonds",
 
   "aggregation.listelement.badge": "Aggregation",
   "news.listelement.badge": "News",
@@ -7124,7 +7136,7 @@
   "explore.index.subjectA" : "Subject",
   "explore.index.path" : "Path",
   "explore.index.fonds" : "Fonds",
-  "explore.index.journalfond" : "Journal Fond",
+  "explore.index.journalfonds" : "Journal Fonds",
   "explore.index.aggregation" : "Aggregation",
 
   "explore.search-section.sectiondocuments.title" : "Search Documents & Other materials",
@@ -7154,10 +7166,10 @@
   "search.filters.filter.fonds.placeholder": "Fonds name",
   "search.filters.filter.fonds.label": "Search Fonds name",
   "search.filters.applied.f.fonds": "Fonds",
-  "search.filters.filter.journalfond.head": "Journal Fond",
-  "search.filters.filter.journalfond.placeholder": "Journal Fond name",
-  "search.filters.filter.journalfond.label": "Search Journal Fond name",
-  "search.filters.applied.f.journalfond": "Journal Fond",
+  "search.filters.filter.journalfonds.head": "Journal Fonds",
+  "search.filters.filter.journalfonds.placeholder": "Journal Fonds name",
+  "search.filters.filter.journalfonds.label": "Search Journal Fonds name",
+  "search.filters.applied.f.journalfonds": "Journal Fonds",
   "search.filters.filter.aggregation.head": "Aggregation",
   "search.filters.filter.aggregation.placeholder": "Aggregation name",
   "search.filters.filter.aggregation.label": "Search Aggregation name",
@@ -7175,13 +7187,13 @@
 
   "submission.sections.submit.progressbar.describe.aggregation": "Aggregation Details",
 
-  "submission.sections.submit.progressbar.describe.journal_fond": "Journal Fond Details",
+  "submission.sections.submit.progressbar.describe.journal_fonds": "Journal Fonds Details",
 
-  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-history": "Journal Fond History",
+  "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-history": "Journal Fonds History",
 
-  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-relation-person": "Journal Fond Person",
+  "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-relation-person": "Journal Fonds Person",
 
-  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-relation-journalfond": "Journal Fond Relation",
+  "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-relation-journalfonds": "Journal Fonds Relation",
 
   "submission.sections.submit.progressbar.describe.path": "Path Details",
 
@@ -7209,7 +7221,7 @@
 
   "submission.sections.submit.progressbar.describe.scientificmaterial_references": "Scientific Material Contextual References",
 
-  "submission.sections.submit.progressbar.describe.journal_issue": "Journal Issue Details",
+  "submission.sections.submit.progressbar.describe.journal_file": "Journal File Details",
 
   "map.coordinates-invalid": "Coordinates are not valid",
 
@@ -7225,7 +7237,7 @@
 
   "vocabulary-treeview.header.fondsboxtree": "Fonds Tree",
 
-  "vocabulary-treeview.header.journalfondboxtree": "Journal Fond Tree",
+  "vocabulary-treeview.header.journalfondsboxtree": "Journal Fonds Tree",
 
   "vocabulary-treeview.header.aggregationboxtree": "Aggregation Tree",
 
@@ -7237,7 +7249,11 @@
 
   "curation-task.task.iiifallowfiledownload.label": "Allow file download for files uploaded on image server",
 
+  "curation-task.task.rawtoaccess.label": "Create access image for RAW Types",
+
   "curation-task.task.iiifpdfmultipages.label": "Create multipages PDF from IIIF images",
+
+  "curation-task.task.iiifclean.label": "Remove all metadata bundles created by a previous upload to the image server",
 
   "curation-task.task.pdftoimagecmyk.label": "Extract images from PDF (CMYK)",
 
@@ -7256,6 +7272,8 @@
 
   "RELATION.Place.places.search.results.head" : "Places",
   "search.filters.applied.charts.RELATION.Place.places.title": "Places",
-  "context-menu.actions.edit-item-relationships.btn.places": "Manage Places"
+  "context-menu.actions.edit-item-relationships.btn.places": "Manage Places",
 
+  "journalfile.listelement.badge": "Journal File",
+  "search.filters.entityType.JournalFile": "Journal File",
 }

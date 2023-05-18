@@ -1,8 +1,12 @@
-<div *ngIf="textRowSection">
-  <div [ngClass]="{'container' : textRowSection.contentType != 'text-metadata'}">
-    <div *ngIf="textRowSection.contentType == 'image'"><img [src]="textRowSection.content" style="width: 100%"></div>
-    <div *ngIf="textRowSection.contentType == 'text-key'">{{ 'explore.text-section.' + textRowSection.content | translate }}</div>
-    <div *ngIf="textRowSection.contentType == 'text-raw'">{{ 'explore.text-section.' + textRowSection.content }}</div>
-    <ds-markdown-viewer data-test="ds-markdown-viewer" *ngIf="textRowSection.contentType == 'text-metadata' && content" [value]="content"></ds-markdown-viewer>
+<ng-container [ngSwitch]="textRowSection?.contentType">
+  <div *ngSwitchCase="'image'"><img [src]="textRowSection.content" style="width: 100%"></div>
+  <div *ngSwitchCase="'text-key'">{{ ('explore.text-section.' + textRowSection.content) | translate }}</div>
+  <div *ngSwitchCase="'text-raw'">{{ textRowSection.content }}</div>
+  <ds-markdown-viewer *ngSwitchCase="'text-metadata'" data-test="ds-markdown-viewer"  [value]="content"></ds-markdown-viewer>
+  <div *ngSwitchCase="'custom'">
+    <ng-container *ngTemplateOutlet="custom"></ng-container>
   </div>
-</div>
+</ng-container>
+
+<!-- Custom content type -->
+<ng-template #custom></ng-template>

@@ -1,13 +1,9 @@
-<div class="container">
+<div>
   <ng-container *ngIf="topSection.showAsCard">
     <!-- CARD VIEW -->
     <div class="card">
-      <div class="card-header">
-        <span *ngIf="topSection.titleKey">{{ "explore.index." + topSection.titleKey | translate }}
-        </span>
-        <span *ngIf="!topSection.titleKey">{{ "explore.index." + topSection.sortField | translate }}
-        </span>
-      </div>
+      <div *ngIf="topSection.titleKey" class="card-header">{{ 'explore.index.' + topSection.titleKey | translate }}</div>
+      <div *ngIf="!topSection.titleKey" class="card-header">{{ 'explore.index.' + topSection.sortField | translate }}</div>
       <div class="card-body">
         <div class="row pl-2" *ngIf="topSection.showLayoutSwitch">
           <div class="col">
@@ -24,7 +20,7 @@
           </div>
         </div>
         <ds-themed-browse-most-elements [context]="context" [paginatedSearchOptions]="paginatedSearchOptions"
-          [topSection]="topSection" [mode]="layoutMode">
+                                        [topSection]="topSection" [mode]="layoutMode">
         </ds-themed-browse-most-elements>
       </div>
     </div>
@@ -48,7 +44,7 @@
     <div class="row">
       <div class="col px-2">
         <ds-themed-browse-most-elements [context]="context" [paginatedSearchOptions]="paginatedSearchOptions"
-          [topSection]="topSection" [mode]="layoutMode">
+                                        [topSection]="topSection" [mode]="layoutMode">
         </ds-themed-browse-most-elements>
       </div>
     </div>

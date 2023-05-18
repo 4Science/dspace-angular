@@ -32,6 +32,7 @@ import { CustomSwitchComponent } from './builder/ds-dynamic-form-ui/models/custo
 import { DynamicFormsNGBootstrapUIModule } from '@ng-dynamic-forms/ui-ng-bootstrap';
 import { DsDynamicRelationGroupModalComponent } from './builder/ds-dynamic-form-ui/models/relation-group/modal/dynamic-relation-group-modal.components';
 import { DsDynamicRelationInlineGroupComponent } from './builder/ds-dynamic-form-ui/models/relation-inline-group/dynamic-relation-inline-group.components';
+import { MarkdownModule } from './builder/ds-dynamic-form-ui/models/markdown/dynamic-markdown.module';
 
 const COMPONENTS = [
   CustomSwitchComponent,
@@ -70,7 +71,8 @@ const COMPONENTS = [
     DynamicFormsNGBootstrapUIModule,
     SearchModule,
     SharedModule,
-    TranslateModule
+    TranslateModule,
+    MarkdownModule
   ],
   exports: [
     ...COMPONENTS

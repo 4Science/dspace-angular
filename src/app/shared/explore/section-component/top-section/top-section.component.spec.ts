@@ -1,4 +1,4 @@
-import { LayoutModeEnum } from './../../../../core/layout/models/section.model';
+import { LayoutModeEnum } from '../../../../core/layout/models/section.model';
 import { CommonModule } from '@angular/common';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
@@ -149,7 +149,7 @@ describe('TopSectionComponent', () => {
     it('should create a top section with title', () => {
         const div = fixture.debugElement.queryAll(By.css('.card-header'))[0];
         expect(div).not.toBeNull();
-        expect(div.children[0].nativeElement.innerText).toEqual('explore.index.lastPublications');
+        expect(div.nativeElement.innerText).toEqual('explore.index.lastPublications');
     });
   });
 });

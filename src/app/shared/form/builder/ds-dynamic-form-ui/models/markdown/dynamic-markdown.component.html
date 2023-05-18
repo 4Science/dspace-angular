@@ -1,0 +1,7 @@
+<div *ngIf="model">
+  <ds-markdown-editor [(editValue)]="model.value"
+    [required]="model.required"
+    (blur)="onBlur($event)"
+    (change)="onChange($event)"
+    (focus)="onFocus($event)"></ds-markdown-editor>
+</div>

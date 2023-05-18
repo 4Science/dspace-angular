@@ -17,15 +17,12 @@ import { VocabularyOptions } from '../../core/submission/vocabularies/models/voc
 import { PageInfo } from '../../core/shared/page-info.model';
 import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { By } from '@angular/platform-browser';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Router } from '@angular/router';
 
 describe('VocabularyTreeviewComponent test suite', () => {
 
   let comp: VocabularyTreeviewComponent;
   let compAsAny: any;
   let fixture: ComponentFixture<VocabularyTreeviewComponent>;
-  let router: Router;
 
   const item = new VocabularyEntryDetail();
   item.id = 'node1';
@@ -58,7 +55,6 @@ describe('VocabularyTreeviewComponent test suite', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule,
         CdkTreeModule,
         TranslateModule.forRoot()
       ],
@@ -110,7 +106,6 @@ describe('VocabularyTreeviewComponent test suite', () => {
       compAsAny = comp;
       comp.vocabularyOptions = vocabularyOptions;
       comp.selectedItem = null;
-      router = TestBed.inject(Router);
     });
 
     afterEach(() => {
@@ -187,28 +182,6 @@ describe('VocabularyTreeviewComponent test suite', () => {
       comp.onSelect(item);
 
       expect(comp.select.emit).toHaveBeenCalled();
-    });
-
-    it('should not navigate to item page with invalid uuid', () => {
-      comp.publicModeOnly = true;
-      fixture.detectChanges();
-      spyOn(router, 'navigate');
-      spyOn(comp.select, 'emit');
-      comp.onSelect(entryWithInvalidItemId);
-
-      expect(router.navigate).not.toHaveBeenCalled();
-      expect(comp.select.emit).not.toHaveBeenCalled();
-    });
-
-    it('should navigate to item page with valid uuid', () => {
-      comp.publicModeOnly = true;
-      fixture.detectChanges();
-      spyOn(router, 'navigate');
-      spyOn(comp.select, 'emit');
-      comp.onSelect(entryWithItemId);
-
-      expect(router.navigate).toHaveBeenCalled();
-      expect(comp.select.emit).not.toHaveBeenCalled();
     });
 
     it('should call searchByQuery function and set storedNodeMap properly', () => {

@@ -16,7 +16,6 @@ import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocab
 import { VocabularyTreeFlattener } from './vocabulary-tree-flattener';
 import { VocabularyTreeFlatDataSource } from './vocabulary-tree-flat-data-source';
 import { FormFieldMetadataValueObject } from '../form/builder/models/form-field-metadata-value.model';
-import { Router } from '@angular/router';
 import { Metadata } from '../../core/shared/metadata.utils';
 
 /**
@@ -105,6 +104,11 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit {
   loading: Observable<boolean>;
 
   /**
+   * Position of the Icon before/after the element
+   */
+  iconPosition = 'before';
+
+  /**
    * An event fired when a vocabulary entry is selected.
    * Event's payload equals to {@link VocabularyEntryDetail} selected.
    */
@@ -130,7 +134,6 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit {
    */
   constructor(
     public activeModal: NgbActiveModal,
-    private router: Router,
     private vocabularyTreeviewService: VocabularyTreeviewService,
     private translate: TranslateService
   ) {
@@ -267,9 +270,14 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit {
       const value = new FormFieldMetadataValueObject(entry.value, null, entry.securityLevel, entry.id, entry.display);
       this.select.emit(value);
       this.activeModal.close(value);
-    } else if (Metadata.hasValidItemAuthority(entry?.otherInformation?.id)) {
-      this.router.navigate(['/items/' + entry.otherInformation.id]);
     }
+  }
+
+  /**
+   * Method called to check the Item Authority Validation
+   */
+  metadataValidItemAuthorityCheck(id: string) {
+    return Metadata.hasValidItemAuthority(id);
   }
 
   /**
