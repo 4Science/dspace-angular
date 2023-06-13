@@ -10381,7 +10381,7 @@
   "layout.field.label.Family.dc.relation.event": "Eventi",
 
   //"layout.field.label.Family.dc.relation.aggregation": "Aggregation",
-  "layout.field.label.Family.dc.relation.aggregation": "Aggragazione",
+  "layout.field.label.Family.dc.relation.aggregation": "Aggregazione",
 
   //"layout.field.label.Family.dc.relation.path": "Path",
   "layout.field.label.Family.dc.relation.path": "Percorso",
@@ -10485,15 +10485,14 @@
   //"layout.field.label.Family.glamfamily.editor.name": "Editor",
   "layout.field.label.Family.glamfamily.editor.name": "Curatore",
 
-  //"layout.field.label.Family.glamfamily.editor.qualifier": "Qualifier",
-  "layout.field.label.Family.glamfamily.editor.qualifier": "Qualificazione",
+  //"layout.field.label.Qualifier": "Qualifier",
+  "layout.field.label.Qualifier": "Qualificazione",
 
-  //"layout.field.label.Family.glamfamily.editing.type": "Editing Type",
-  "layout.field.label.Family.glamfamily.editing.type": "Tipologia di Edizione",
+  //"layout.field.label.Editing Type": "Editing Type",
+  "layout.field.label.Editing Type": "Tipo di modifica",
 
-  //"layout.field.label.Family.glamfamily.editing.date": "Edited At",
-  // TODO Source message changed - Revise the translation
-  "layout.field.label.Family.glamfamily.editing.date": "Edito da",
+  //"layout.field.label.Edited At": "Edited At",
+  "layout.field.label.Edited At": "Data della modifica",
 
   //"layout.field.label.JournalFonds.dc.date.start": "From",
   "layout.field.label.JournalFonds.dc.date.start": "Da",
