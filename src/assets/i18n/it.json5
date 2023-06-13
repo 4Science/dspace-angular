@@ -10035,17 +10035,17 @@
 
   //"layout.field.label.Project.crispj.partnerou": "Partner Organisations",
   // TODO Source message changed - Revise the translation
-  "layout.field.label.Project.crispj.partnerou": "Co-partenariato",
+  "layout.field.label.Project.crispj.partnerou": "Organizzazione Partner",
 
   //"layout.field.label.Project.crispj.investigator": "Principal Investigator",
   // TODO Source message changed - Revise the translation
-  "layout.field.label.Project.crispj.investigator": "Responsabile Scientifico",
+  "layout.field.label.Project.crispj.investigator": "Ricercatore",
 
   //"layout.field.label.Project.crispj.openaireid": "OpenAIRE ID",
   "layout.field.label.Project.crispj.openaireid": "OpenAIRE ID",
 
   //"layout.field.label.Project.crispj.organization": "Organisations",
-  "layout.field.label.Project.crispj.organization": "Organizzazioni",
+  "layout.field.label.Project.crispj.organization": "Organizzazione Partecipante",
 
   //"layout.field.label.Project.oairecerif.identifier.url": "Project Web Site",
   "layout.field.label.Project.oairecerif.identifier.url": "Sito Internet",
@@ -10064,7 +10064,7 @@
   "layout.field.label.Project.oairecerif.project.endDate": "Data di fine",
 
   //"layout.field.label.Project.oairecerif.project.status": "Status",
-  "layout.field.label.Project.oairecerif.project.status": "Status del Progetto",
+  "layout.field.label.Project.oairecerif.project.status": "Status",
 
   //"layout.field.label.Project.crispj.coinvestigators": "Investigators",
   // TODO Source message changed - Revise the translation
