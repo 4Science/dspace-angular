@@ -10443,42 +10443,38 @@
 
 
 
-  //"layout.field.label.Fonds.glamfonds.bibliography.abbreviation": "Abbreviation",
-  "layout.field.label.Fonds.glamfonds.bibliography.abbreviation": "Abbreviazione",
+  //"layout.field.label.Abbreviation": "Abbreviation",
+  "layout.field.label.Abbreviation": "Abbreviazione",
 
-  //"layout.field.label.Fonds.glamfonds.bibliography.title": "Title",
-  "layout.field.label.Fonds.glamfonds.bibliography.title": "Titolo",
+  //"layout.field.label.Title": "Title",
+  "layout.field.label.Title": "Titolo",
 
-  //"layout.field.label.Fonds.glamfonds.bibliography.editor": "Editor",
-  "layout.field.label.Fonds.glamfonds.bibliography.editor": "Editore",
+  //"layout.field.label.Editor": "Editor",
+  "layout.field.label.Editor": "Editore",
 
-  //"layout.field.label.Fonds.glamfonds.bibliography.publisher": "Publisher",
-  // TODO Source message changed - Revise the translation
-  "layout.field.label.Fonds.glamfonds.bibliography.publisher": "Publisher",
+  //"layout.field.label.Publisher": "Publisher",
+  "layout.field.label.Publisher": "Publisher",
 
-  //"layout.field.label.Fonds.glamfonds.bibliography.place": "Place",
-  "layout.field.label.Fonds.glamfonds.bibliography.place": "Luogo",
+  //"layout.field.label.Place": "Place",
+  "layout.field.label.Place": "Luogo",
 
-  //"layout.field.label.Fonds.glamfonds.bibliography.year": "Year",
-  "layout.field.label.Fonds.glamfonds.bibliography.year": "Anno",
+  //"layout.field.label.Year": "Year",
+  "layout.field.label.Year": "Anno",
 
-  //"layout.field.label.Fonds.glamfonds.bibliography.author": "Author",
-  "layout.field.label.Fonds.glamfonds.bibliography.author": "Autore",
+  //"layout.field.label.Author": "Author",
+  "layout.field.label.Author": "Autore",
 
-  //"layout.field.label.Fonds.glamfonds.editor.name": "Editor",
-  "layout.field.label.Fonds.glamfonds.editor.name": "Editore",
+  //"layout.field.label.Editor": "Editor",
+  "layout.field.label.Editor": "Editore",
 
-  //"layout.field.label.Fonds.glamfonds.editor.qualifier": "Qualifier",
-  // TODO Source message changed - Revise the translation
-  "layout.field.label.Fonds.glamfonds.editor.qualifier": "Qualifica",
+  //"layout.field.label.Qualifier": "Qualifier",
+  "layout.field.label.Qualifier": "Qualifica",
 
+  //"layout.field.label.Editing Type": "Editing Type",
+  "layout.field.label.Editing Type": "Tipo di modifica",
 
-  //"layout.field.label.Fonds.glamfonds.editing.type": "Editing Type",
-  "layout.field.label.Fonds.glamfonds.editing.type": "Tipo di modifica",
-
-  //"layout.field.label.Fonds.glamfonds.editing.date": "Edited At",
-  // TODO Source message changed - Revise the translation
-  "layout.field.label.Fonds.glamfonds.editing.date": "Data della modifica",
+  //"layout.field.label.Edited At": "Edited At",
+  "layout.field.label.Edited At": "Data della modifica",
 
   //"layout.field.label.Family.glamfamily.editor.name": "Editor",
   "layout.field.label.Family.glamfamily.editor.name": "Curatore",
@@ -10492,36 +10488,35 @@
   //"layout.field.label.Edited At": "Edited At",
   "layout.field.label.Edited At": "Data della modifica",
 
-  //"layout.field.label.JournalFonds.dc.date.start": "From",
-  "layout.field.label.JournalFonds.dc.date.start": "Da",
+  //"layout.field.label.From": "From",
+  "layout.field.label.From": "Da",
 
-  //"layout.field.label.JournalFonds.dc.date.end": "To",
-  "layout.field.label.JournalFonds.dc.date.end": "A",
+  //"layout.field.label.To": "To",
+  "layout.field.label.To": "A",
 
-  //"layout.field.label.JournalFonds.dc.publisher": "Publisher",
-  "layout.field.label.JournalFonds.dc.publisher": "Editore",
+  //"layout.field.label.Publisher": "Publisher",
+  "layout.field.label.Publisher": "Editore",
 
-  //"layout.field.label.JournalFonds.dc.format": "Format",
-  "layout.field.label.JournalFonds.dc.format": "Formato",
+  //"layout.field.label.Format": "Format",
+  "layout.field.label.Format": "Formato",
 
-  //"layout.field.label.JournalFonds.dc.identifier.inventorynumber": "Inventory Number",
-  "layout.field.label.JournalFonds.dc.identifier.inventorynumber": "Numero di Inventario",
+  //"layout.field.label.Inventory Number": "Inventory Number",
+  "layout.field.label.Inventory Number": "Numero di Inventario",
 
-  //"layout.field.label.JournalFonds.dc.description.note": "Notes",
-  "layout.field.label.JournalFonds.dc.description.note": "Note",
+  //"layout.field.label.Notes": "Notes",
+  "layout.field.label.Notes": "Note",
 
-  //"layout.field.label.JournalFonds.dc.type.relation": "Relation Type",
-  "layout.field.label.JournalFonds.dc.type.relation": "tipologia di Relazione",
+  //"layout.field.label.Relation Type": "Relation Type",
+  "layout.field.label.Relation Type": "tipologia di Relazione",
 
-  //"layout.field.label.JournalFonds.dc.relation.journalfonds": "Related Journal Fonds",
-  "layout.field.label.JournalFonds.dc.relation.journalfonds": "Testata Correlata",
+  //"layout.field.label.Related Journal Fonds": "Related Journal Fonds",
+  "layout.field.label.Related Journal Fonds": "Testata Correlata",
 
-  //"layout.field.label.JournalFonds.dc.relation.person": "Person Name",
-  // TODO Source message changed - Revise the translation
-  "layout.field.label.JournalFonds.dc.relation.person": "Nome",
+  //"layout.field.label.Person Name": "Person Name",
+  "layout.field.label.Person Name": "Nome",
 
-  //"layout.field.label.JournalFonds.glamperson.role": "Person Role",
-  "layout.field.label.JournalFonds.glamperson.role": "Ruolo",
+  //"layout.field.label.Person Role": "Person Role",
+  "layout.field.label.Person Role": "Ruolo",
 
   //"layout.field.label.Publication.dc.contributor.author": "Author",
   "layout.field.label.Publication.dc.contributor.author": "Autore",
@@ -11659,4 +11654,5 @@
   "layout.field.label.JournalFile.dc.relation.path": "Percorso",
   "layout.field.label.JournalFile.dc.relation.isreferencedby": "Documento collegato",
   "layout.field.label.JournalFile.dc.relation.aggregation": "Aggregazione",
+
 }
