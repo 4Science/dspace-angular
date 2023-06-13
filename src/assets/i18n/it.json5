@@ -9980,7 +9980,7 @@
 
   //"layout.field.label.OrgUnit.organization.parentOrganization": "Parent Organisation",
   // TODO Source message changed - Revise the translation
-  "layout.field.label.OrgUnit.organization.parentOrganization": "Organizzazione Radice",
+  "layout.field.label.OrgUnit.organization.parentOrganization": "Ente superiore",
 
   //"layout.field.label.OrgUnit.crisou.director": "Director",
   // TODO Source message changed - Revise the translation
@@ -9988,7 +9988,7 @@
 
   //"layout.field.label.OrgUnit.organization.foundingDate": "Founding Date",
   // TODO Source message changed - Revise the translation
-  "layout.field.label.OrgUnit.organization.foundingDate": "Data",
+  "layout.field.label.OrgUnit.organization.foundingDate": "Data di fondazione",
 
   //"layout.field.label.OrgUnit.dc.description.abstract": "Description",
   "layout.field.label.OrgUnit.dc.description.abstract": "Descrizione",
@@ -10016,7 +10016,7 @@
   "layout.field.label.OrgUnit.glamou.services": "Servizi",
 
   //"layout.field.label.OrgUnit.glamou.collectingPolicies": "Collecting Policies",
-  "layout.field.label.OrgUnit.glamou.collectingPolicies": "Policy",
+  "layout.field.label.OrgUnit.glamou.collectingPolicies": "Politiche di gestione delle collezioni",
 
   //"layout.field.label.OrgUnit.dc.relation.aggregation": "Aggregation",
   "layout.field.label.OrgUnit.dc.relation.aggregation": "Aggregazione",
