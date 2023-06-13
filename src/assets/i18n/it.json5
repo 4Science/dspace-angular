@@ -11545,5 +11545,17 @@
   "journalfile.listelement.badge": "Fascicolo Periodico",
 
   // "search.filters.entityType.JournalFile": "Journal File",
-  "search.filters.entityType.JournalFile": "Fascicolo Periodico"
+  "search.filters.entityType.JournalFile": "Fascicolo Periodico",
+
+  "layout.field.label.Publication.dc.identifier.isbn": "ISBN",
+  "layout.field.label.Publication.dc.identifier.issn": "ISSN",
+  "layout.field.label.Publication.dc.identifier.bid": "BID",
+  "layout.field.label.Publication.dc.identifier.doi": "DOI",
+  "layout.field.label.Publication.dc.identifier.uri": "URI",
+  "layout.field.label.Publication.dc.identifier.nbn": "NBN:IT",
+  "layout.field.label.Publication.dc.identifier.inventorynumber": "Serie e Numero di inventario",
+  "layout.field.label.Publication.dc.identifier.shelfmark": "Segnatura",
+  "layout.field.label.Publication.dc.identifier.other": "Altro",
+  "layout.field.label.Publication.dc.identifier.codex": "Codex",
+  "layout.field.label.Publication.dc.relation.isreferencedby": "Documento collegato",
 }
