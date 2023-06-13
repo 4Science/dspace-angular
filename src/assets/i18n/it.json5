@@ -10090,7 +10090,7 @@
 
   //"layout.field.label.Event.glamevent.variants": "Variants",
   // TODO Source message changed - Revise the translation
-  "layout.field.label.Event.glamevent.variants": "Edizioni",
+  "layout.field.label.Event.glamevent.variants": "Varianti",
 
   //"layout.field.label.Event.dc.type": "Type",
   "layout.field.label.Event.dc.type": "Tipologia",
@@ -10120,10 +10120,10 @@
   "layout.field.label.Event.dc.relation.path": "Percorso",
 
   //"layout.field.label.Event.glam.link.wikipedia": "Wikipedia Link",
-  "layout.field.label.Event.glam.link.wikipedia": "Wikipedia Link",
+  "layout.field.label.Event.glam.link.wikipedia": "Link a Wikipedia",
 
   //"layout.field.label.Event.glam.link.dbpedia": "Dbpedia Link",
-  "layout.field.label.Event.glam.link.dbpedia": "Dbpedia Link",
+  "layout.field.label.Event.glam.link.dbpedia": "Link a DBpedia",
 
   //"layout.field.label.Publication.dc.title.alternative": "Alternative Title",
   // TODO Source message changed - Revise the translation
@@ -10356,16 +10356,16 @@
   "layout.field.label.Place.dc.relation.path": "Percorso",
 
   //"layout.field.label.Place.glam.link.dbpedia": "Dbpedia Link",
-  "layout.field.label.Place.glam.link.dbpedia": "Dbpedia Link",
+  "layout.field.label.Place.glam.link.dbpedia": "Link a DBpedia",
 
   //"layout.field.label.Place.glamplace.link.geonames": "Geonames Link",
-  "layout.field.label.Place.glamplace.link.geonames": "Geonames Link",
+  "layout.field.label.Place.glamplace.link.geonames": "Link a Geonames",
 
   //"layout.field.label.Place.glamplace.link.tgn": "TGN Link",
-  "layout.field.label.Place.glamplace.link.tgn": "TGN Link",
+  "layout.field.label.Place.glamplace.link.tgn": "Link a TGN",
 
   //"layout.field.label.Place.glam.link.wikipedia": "Wikipedia Link",
-  "layout.field.label.Place.glam.link.wikipedia": "Wikipedia Link",
+  "layout.field.label.Place.glam.link.wikipedia": "Link a Wikipedia",
 
 
   //"layout.field.label.Family.dc.title.alternative": "Alternative Title",
