@@ -10281,8 +10281,7 @@
   "layout.field.label.Fonds.glamfonds.bibliography": "Bibliografia",
 
   //"layout.field.label.Fonds.glam.leaf": "Leaf",
-  // TODO Source message changed - Revise the translation
-  "layout.field.label.Fonds.glam.leaf": "Sottoserie",
+  "layout.field.label.Fonds.glam.leaf": "Foglia",
 
   //"layout.field.label.Fonds.dc.relation.project": "Project",
   "layout.field.label.Fonds.dc.relation.project": "Progetto",
@@ -10434,8 +10433,7 @@
   "layout.field.label.JournalFonds.glamjournalfonds.parent": "Testata Radice",
 
   //"layout.field.label.JournalFonds.glam.leaf": "Leaf",
-  // TODO Source message changed - Revise the translation
-  "layout.field.label.JournalFonds.glam.leaf": "Sottoserie",
+  "layout.field.label.JournalFonds.glam.leaf": "Foglia",
 
   //"layout.field.label.JournalFonds.glamjournalfonds.history": "Journal Fonds History",
   "layout.field.label.JournalFonds.glamjournalfonds.history": "Storia della Testata",
@@ -10472,15 +10470,15 @@
 
   //"layout.field.label.Fonds.glamfonds.editor.qualifier": "Qualifier",
   // TODO Source message changed - Revise the translation
-  "layout.field.label.Fonds.glamfonds.editor.qualifier": "Dettaglio",
+  "layout.field.label.Fonds.glamfonds.editor.qualifier": "Qualifica",
 
 
   //"layout.field.label.Fonds.glamfonds.editing.type": "Editing Type",
-  "layout.field.label.Fonds.glamfonds.editing.type": "Tipologia di Edizione",
+  "layout.field.label.Fonds.glamfonds.editing.type": "Tipo di modifica",
 
   //"layout.field.label.Fonds.glamfonds.editing.date": "Edited At",
   // TODO Source message changed - Revise the translation
-  "layout.field.label.Fonds.glamfonds.editing.date": "Edito da",
+  "layout.field.label.Fonds.glamfonds.editing.date": "Data della modifica",
 
   //"layout.field.label.Family.glamfamily.editor.name": "Editor",
   "layout.field.label.Family.glamfamily.editor.name": "Curatore",
@@ -11015,7 +11013,7 @@
   "explore.counters-section.journalfonds" : "Testate",
 
   //"explore.index.aggregation" : "Aggregation",
-  "explore.index.aggregation" : "Aggragazione",
+  "explore.index.aggregation" : "Aggregazione",
 
   //"explore.index.dateissuedA" : "Date",
   "explore.index.dateissuedA" : "Data",
@@ -11628,5 +11626,18 @@
   "layout.field.label.Person.glam.link.eb": "Link a Encyclopedia Britannica",
   "layout.field.label.Person.glamperson.link.ulan": "Link a Getty ULAN",
   "layout.field.label.Person.dc.relation.otherlinks": "Altri link",
+
+  "layout.field.label.Aggregation.dc.description": "Descrizione",
+  "layout.field.label.Aggregation.glamaggregation.parent": "Livello gerarchico superiore",
+  "layout.field.label.Aggregation.glam.leaf": "Foglia",
+  "layout.field.label.Aggregation.glam.index": "Numero di corda",
+
+  "layout.field.label.StaticPage.dc.description": "Testo",
+  "layout.field.label.StaticPage.dc.subject": "Parole chiave",
+
+  "layout.field.label.News.cris.news.enabled": "Mostra",
+  "layout.field.label.News.cris.news.url": "URL",
+  "layout.field.label.News.dc.description.abstract": "Testo",
+  "layout.field.label.News.cris.priority": "Posizione",
 
 }
