@@ -9980,7 +9980,7 @@
 
   //"layout.field.label.OrgUnit.organization.parentOrganization": "Parent Organisation",
   // TODO Source message changed - Revise the translation
-  "layout.field.label.OrgUnit.organization.parentOrganization": "Organizzazione Radice",
+  "layout.field.label.OrgUnit.organization.parentOrganization": "Ente superiore",
 
   //"layout.field.label.OrgUnit.crisou.director": "Director",
   // TODO Source message changed - Revise the translation
@@ -9988,7 +9988,7 @@
 
   //"layout.field.label.OrgUnit.organization.foundingDate": "Founding Date",
   // TODO Source message changed - Revise the translation
-  "layout.field.label.OrgUnit.organization.foundingDate": "Data",
+  "layout.field.label.OrgUnit.organization.foundingDate": "Data di fondazione",
 
   //"layout.field.label.OrgUnit.dc.description.abstract": "Description",
   "layout.field.label.OrgUnit.dc.description.abstract": "Descrizione",
@@ -10016,7 +10016,7 @@
   "layout.field.label.OrgUnit.glamou.services": "Servizi",
 
   //"layout.field.label.OrgUnit.glamou.collectingPolicies": "Collecting Policies",
-  "layout.field.label.OrgUnit.glamou.collectingPolicies": "Policy",
+  "layout.field.label.OrgUnit.glamou.collectingPolicies": "Politiche di gestione delle collezioni",
 
   //"layout.field.label.OrgUnit.dc.relation.aggregation": "Aggregation",
   "layout.field.label.OrgUnit.dc.relation.aggregation": "Aggregazione",
@@ -10035,17 +10035,17 @@
 
   //"layout.field.label.Project.crispj.partnerou": "Partner Organisations",
   // TODO Source message changed - Revise the translation
-  "layout.field.label.Project.crispj.partnerou": "Co-partenariato",
+  "layout.field.label.Project.crispj.partnerou": "Organizzazione Partner",
 
   //"layout.field.label.Project.crispj.investigator": "Principal Investigator",
   // TODO Source message changed - Revise the translation
-  "layout.field.label.Project.crispj.investigator": "Responsabile Scientifico",
+  "layout.field.label.Project.crispj.investigator": "Ricercatore",
 
   //"layout.field.label.Project.crispj.openaireid": "OpenAIRE ID",
   "layout.field.label.Project.crispj.openaireid": "OpenAIRE ID",
 
   //"layout.field.label.Project.crispj.organization": "Organisations",
-  "layout.field.label.Project.crispj.organization": "Organizzazioni",
+  "layout.field.label.Project.crispj.organization": "Organizzazione Partecipante",
 
   //"layout.field.label.Project.oairecerif.identifier.url": "Project Web Site",
   "layout.field.label.Project.oairecerif.identifier.url": "Sito Internet",
@@ -10064,7 +10064,7 @@
   "layout.field.label.Project.oairecerif.project.endDate": "Data di fine",
 
   //"layout.field.label.Project.oairecerif.project.status": "Status",
-  "layout.field.label.Project.oairecerif.project.status": "Status del Progetto",
+  "layout.field.label.Project.oairecerif.project.status": "Status",
 
   //"layout.field.label.Project.crispj.coinvestigators": "Investigators",
   // TODO Source message changed - Revise the translation
@@ -10090,7 +10090,7 @@
 
   //"layout.field.label.Event.glamevent.variants": "Variants",
   // TODO Source message changed - Revise the translation
-  "layout.field.label.Event.glamevent.variants": "Edizioni",
+  "layout.field.label.Event.glamevent.variants": "Varianti",
 
   //"layout.field.label.Event.dc.type": "Type",
   "layout.field.label.Event.dc.type": "Tipologia",
@@ -10120,10 +10120,10 @@
   "layout.field.label.Event.dc.relation.path": "Percorso",
 
   //"layout.field.label.Event.glam.link.wikipedia": "Wikipedia Link",
-  "layout.field.label.Event.glam.link.wikipedia": "Wikipedia Link",
+  "layout.field.label.Event.glam.link.wikipedia": "Link a Wikipedia",
 
   //"layout.field.label.Event.glam.link.dbpedia": "Dbpedia Link",
-  "layout.field.label.Event.glam.link.dbpedia": "Dbpedia Link",
+  "layout.field.label.Event.glam.link.dbpedia": "Link a DBpedia",
 
   //"layout.field.label.Publication.dc.title.alternative": "Alternative Title",
   // TODO Source message changed - Revise the translation
@@ -10281,8 +10281,7 @@
   "layout.field.label.Fonds.glamfonds.bibliography": "Bibliografia",
 
   //"layout.field.label.Fonds.glam.leaf": "Leaf",
-  // TODO Source message changed - Revise the translation
-  "layout.field.label.Fonds.glam.leaf": "Sottoserie",
+  "layout.field.label.Fonds.glam.leaf": "Foglia",
 
   //"layout.field.label.Fonds.dc.relation.project": "Project",
   "layout.field.label.Fonds.dc.relation.project": "Progetto",
@@ -10356,16 +10355,16 @@
   "layout.field.label.Place.dc.relation.path": "Percorso",
 
   //"layout.field.label.Place.glam.link.dbpedia": "Dbpedia Link",
-  "layout.field.label.Place.glam.link.dbpedia": "Dbpedia Link",
+  "layout.field.label.Place.glam.link.dbpedia": "Link a DBpedia",
 
   //"layout.field.label.Place.glamplace.link.geonames": "Geonames Link",
-  "layout.field.label.Place.glamplace.link.geonames": "Geonames Link",
+  "layout.field.label.Place.glamplace.link.geonames": "Link a Geonames",
 
   //"layout.field.label.Place.glamplace.link.tgn": "TGN Link",
-  "layout.field.label.Place.glamplace.link.tgn": "TGN Link",
+  "layout.field.label.Place.glamplace.link.tgn": "Link a TGN",
 
   //"layout.field.label.Place.glam.link.wikipedia": "Wikipedia Link",
-  "layout.field.label.Place.glam.link.wikipedia": "Wikipedia Link",
+  "layout.field.label.Place.glam.link.wikipedia": "Link a Wikipedia",
 
 
   //"layout.field.label.Family.dc.title.alternative": "Alternative Title",
@@ -10381,7 +10380,7 @@
   "layout.field.label.Family.dc.relation.event": "Eventi",
 
   //"layout.field.label.Family.dc.relation.aggregation": "Aggregation",
-  "layout.field.label.Family.dc.relation.aggregation": "Aggragazione",
+  "layout.field.label.Family.dc.relation.aggregation": "Aggregazione",
 
   //"layout.field.label.Family.dc.relation.path": "Path",
   "layout.field.label.Family.dc.relation.path": "Percorso",
@@ -10412,7 +10411,7 @@
   "layout.field.label.JournalFonds.glamfonds.shelfmark": "Segnatura",
 
   //"layout.field.label.JournalFonds.dc.relation.journalfonds": "Related Journal Fonds",
-  "layout.field.label.JournalFonds.dc.relation.journalfonds": "Testate Correlate",
+  "layout.field.label.JournalFonds.glamjouurnalfonds.relation.journalfonds": "Testate Correlate",
 
   //"layout.field.label.JournalFonds.glamjournalfonds.ownedyears": "Owned Years",
   // TODO Source message changed - Revise the translation
@@ -10434,8 +10433,7 @@
   "layout.field.label.JournalFonds.glamjournalfonds.parent": "Testata Radice",
 
   //"layout.field.label.JournalFonds.glam.leaf": "Leaf",
-  // TODO Source message changed - Revise the translation
-  "layout.field.label.JournalFonds.glam.leaf": "Sottoserie",
+  "layout.field.label.JournalFonds.glam.leaf": "Foglia",
 
   //"layout.field.label.JournalFonds.glamjournalfonds.history": "Journal Fonds History",
   "layout.field.label.JournalFonds.glamjournalfonds.history": "Storia della Testata",
@@ -10445,86 +10443,80 @@
 
 
 
-  //"layout.field.label.Fonds.glamfonds.bibliography.abbreviation": "Abbreviation",
-  "layout.field.label.Fonds.glamfonds.bibliography.abbreviation": "Abbreviazione",
+  //"layout.field.label.Abbreviation": "Abbreviation",
+  "layout.field.label.Abbreviation": "Abbreviazione",
 
-  //"layout.field.label.Fonds.glamfonds.bibliography.title": "Title",
-  "layout.field.label.Fonds.glamfonds.bibliography.title": "Titolo",
+  //"layout.field.label.Title": "Title",
+  "layout.field.label.Title": "Titolo",
 
-  //"layout.field.label.Fonds.glamfonds.bibliography.editor": "Editor",
-  "layout.field.label.Fonds.glamfonds.bibliography.editor": "Editore",
+  //"layout.field.label.Editor": "Editor",
+  "layout.field.label.Editor": "Editore",
 
-  //"layout.field.label.Fonds.glamfonds.bibliography.publisher": "Publisher",
-  // TODO Source message changed - Revise the translation
-  "layout.field.label.Fonds.glamfonds.bibliography.publisher": "Publisher",
+  //"layout.field.label.Publisher": "Publisher",
+  "layout.field.label.Publisher": "Publisher",
 
-  //"layout.field.label.Fonds.glamfonds.bibliography.place": "Place",
-  "layout.field.label.Fonds.glamfonds.bibliography.place": "Luogo",
+  //"layout.field.label.Place": "Place",
+  "layout.field.label.Place": "Luogo",
 
-  //"layout.field.label.Fonds.glamfonds.bibliography.year": "Year",
-  "layout.field.label.Fonds.glamfonds.bibliography.year": "Anno",
+  //"layout.field.label.Year": "Year",
+  "layout.field.label.Year": "Anno",
 
-  //"layout.field.label.Fonds.glamfonds.bibliography.author": "Author",
-  "layout.field.label.Fonds.glamfonds.bibliography.author": "Autore",
+  //"layout.field.label.Author": "Author",
+  "layout.field.label.Author": "Autore",
 
-  //"layout.field.label.Fonds.glamfonds.editor.name": "Editor",
-  "layout.field.label.Fonds.glamfonds.editor.name": "Editore",
+  //"layout.field.label.Editor": "Editor",
+  "layout.field.label.Editor": "Editore",
 
-  //"layout.field.label.Fonds.glamfonds.editor.qualifier": "Qualifier",
-  // TODO Source message changed - Revise the translation
-  "layout.field.label.Fonds.glamfonds.editor.qualifier": "Dettaglio",
+  //"layout.field.label.Qualifier": "Qualifier",
+  "layout.field.label.Qualifier": "Qualifica",
 
+  //"layout.field.label.Editing Type": "Editing Type",
+  "layout.field.label.Editing Type": "Tipo di modifica",
 
-  //"layout.field.label.Fonds.glamfonds.editing.type": "Editing Type",
-  "layout.field.label.Fonds.glamfonds.editing.type": "Tipologia di Edizione",
-
-  //"layout.field.label.Fonds.glamfonds.editing.date": "Edited At",
-  // TODO Source message changed - Revise the translation
-  "layout.field.label.Fonds.glamfonds.editing.date": "Edito da",
+  //"layout.field.label.Edited At": "Edited At",
+  "layout.field.label.Edited At": "Data della modifica",
 
   //"layout.field.label.Family.glamfamily.editor.name": "Editor",
   "layout.field.label.Family.glamfamily.editor.name": "Curatore",
 
-  //"layout.field.label.Family.glamfamily.editor.qualifier": "Qualifier",
-  "layout.field.label.Family.glamfamily.editor.qualifier": "Qualificazione",
+  //"layout.field.label.Qualifier": "Qualifier",
+  "layout.field.label.Qualifier": "Qualificazione",
 
-  //"layout.field.label.Family.glamfamily.editing.type": "Editing Type",
-  "layout.field.label.Family.glamfamily.editing.type": "Tipologia di Edizione",
+  //"layout.field.label.Editing Type": "Editing Type",
+  "layout.field.label.Editing Type": "Tipo di modifica",
 
-  //"layout.field.label.Family.glamfamily.editing.date": "Edited At",
-  // TODO Source message changed - Revise the translation
-  "layout.field.label.Family.glamfamily.editing.date": "Edito da",
+  //"layout.field.label.Edited At": "Edited At",
+  "layout.field.label.Edited At": "Data della modifica",
 
-  //"layout.field.label.JournalFonds.dc.date.start": "From",
-  "layout.field.label.JournalFonds.dc.date.start": "Da",
+  //"layout.field.label.From": "From",
+  "layout.field.label.From": "Da",
 
-  //"layout.field.label.JournalFonds.dc.date.end": "To",
-  "layout.field.label.JournalFonds.dc.date.end": "A",
+  //"layout.field.label.To": "To",
+  "layout.field.label.To": "A",
 
-  //"layout.field.label.JournalFonds.dc.publisher": "Publisher",
-  "layout.field.label.JournalFonds.dc.publisher": "Editore",
+  //"layout.field.label.Publisher": "Publisher",
+  "layout.field.label.Publisher": "Editore",
 
-  //"layout.field.label.JournalFonds.dc.format": "Format",
-  "layout.field.label.JournalFonds.dc.format": "Formato",
+  //"layout.field.label.Format": "Format",
+  "layout.field.label.Format": "Formato",
 
-  //"layout.field.label.JournalFonds.dc.identifier.inventorynumber": "Inventory Number",
-  "layout.field.label.JournalFonds.dc.identifier.inventorynumber": "Numero di Inventario",
+  //"layout.field.label.Inventory Number": "Inventory Number",
+  "layout.field.label.Inventory Number": "Numero di Inventario",
 
-  //"layout.field.label.JournalFonds.dc.description.note": "Notes",
-  "layout.field.label.JournalFonds.dc.description.note": "Note",
+  //"layout.field.label.Notes": "Notes",
+  "layout.field.label.Notes": "Note",
 
-  //"layout.field.label.JournalFonds.dc.type.relation": "Relation Type",
-  "layout.field.label.JournalFonds.dc.type.relation": "tipologia di Relazione",
+  //"layout.field.label.Relation Type": "Relation Type",
+  "layout.field.label.Relation Type": "Tipologia di Relazione",
 
-  //"layout.field.label.JournalFonds.dc.relation.journalfonds": "Related Journal Fonds",
-  "layout.field.label.JournalFonds.dc.relation.journalfonds": "Testata Correlata",
+  //"layout.field.label.Related Journal Fonds": "Related Journal Fonds",
+  "layout.field.label.Related Journal Fonds": "Testata Correlata",
 
-  //"layout.field.label.JournalFonds.dc.relation.person": "Person Name",
-  // TODO Source message changed - Revise the translation
-  "layout.field.label.JournalFonds.dc.relation.person": "Nome",
+  //"layout.field.label.Person Name": "Person Name",
+  "layout.field.label.Person Name": "Nome",
 
-  //"layout.field.label.JournalFonds.glamperson.role": "Person Role",
-  "layout.field.label.JournalFonds.glamperson.role": "Ruolo",
+  //"layout.field.label.Person Role": "Person Role",
+  "layout.field.label.Person Role": "Ruolo",
 
   //"layout.field.label.Publication.dc.contributor.author": "Author",
   "layout.field.label.Publication.dc.contributor.author": "Autore",
@@ -11016,7 +11008,7 @@
   "explore.counters-section.journalfonds" : "Testate",
 
   //"explore.index.aggregation" : "Aggregation",
-  "explore.index.aggregation" : "Aggragazione",
+  "explore.index.aggregation" : "Aggregazione",
 
   //"explore.index.dateissuedA" : "Date",
   "explore.index.dateissuedA" : "Data",
@@ -11545,5 +11537,122 @@
   "journalfile.listelement.badge": "Fascicolo Periodico",
 
   // "search.filters.entityType.JournalFile": "Journal File",
-  "search.filters.entityType.JournalFile": "Fascicolo Periodico"
+  "search.filters.entityType.JournalFile": "Fascicolo Periodico",
+
+  "layout.field.label.Publication.dc.identifier.isbn": "ISBN",
+  "layout.field.label.Publication.dc.identifier.issn": "ISSN",
+  "layout.field.label.Publication.dc.identifier.bid": "BID",
+  "layout.field.label.Publication.dc.identifier.doi": "DOI",
+  "layout.field.label.Publication.dc.identifier.uri": "URI",
+  "layout.field.label.Publication.dc.identifier.nbn": "NBN:IT",
+  "layout.field.label.Publication.dc.identifier.inventorynumber": "Serie e Numero di inventario",
+  "layout.field.label.Publication.dc.identifier.shelfmark": "Segnatura",
+  "layout.field.label.Publication.dc.identifier.other": "Altro identificativo",
+  "layout.field.label.Publication.dc.identifier.codex": "Codex",
+  "layout.field.label.Publication.dc.relation.isreferencedby": "Documento collegato",
+
+  "layout.field.label.ArchivalMaterial.dc.title.alternative": "Titolo Alternativo",
+  "layout.field.label.ArchivalMaterial.dc.type": "Tipologia",
+  "layout.field.label.ArchivalMaterial.dc.contributor.author": "Autore",
+  "layout.field.label.ArchivalMaterial.dc.contributor.corporatebody": "Soggetto produttore/Organizzazione",
+  "layout.field.label.ArchivalMaterial.dc.contributor.family": "Soggettto produttore/Famiglia",
+  "layout.field.label.ArchivalMaterial.dc.date.issued": "Data puntuale",
+  "layout.field.label.ArchivalMaterial.dc.date.start": "Estremo cronologico iniziale",
+  "layout.field.label.ArchivalMaterial.dc.date.end": "Estremo cronologico finale",
+  "layout.field.label.ArchivalMaterial.dc.coverage.temporal": "Data secolare",
+  "layout.field.label.ArchivalMaterial.dc.date.note": "Note alla data",
+  "layout.field.label.ArchivalMaterial.dc.identifier.doi": "DOI",
+  "layout.field.label.ArchivalMaterial.dc.identifier.uri": "URI",
+  "layout.field.label.ArchivalMaterial.dc.identifier.nbn": "NBN:IT ID",
+  "layout.field.label.ArchivalMaterial.dc.identifier.inventorynumber": "Numero d'inventario",
+  "layout.field.label.ArchivalMaterial.dc.identifier.shelfmark": "Segnatura",
+  "layout.field.label.ArchivalMaterial.dc.identifier.other": "Altro identificativo",
+  "layout.field.label.ArchivalMaterial.dc.identifier.archivalunit": "Numero di corda",
+  "layout.field.label.ArchivalMaterial.dc.type.physical": "Tipologia fisica",
+  "layout.field.label.ArchivalMaterial.dc.format.medium": "Supporto fisico",
+  "layout.field.label.ArchivalMaterial.dcterms.accessRights": "Condizione di accesso",
+  "layout.field.label.ArchivalMaterial.dc.rights": "Condizioni di riproduzione",
+  "layout.field.label.ArchivalMaterial.dc.rights.license": "Licenza",
+  "layout.field.label.ArchivalMaterial.dc.rights.note": "Note alla condizione di riproduzione",
+  "layout.field.label.ArchivalMaterial.dcterms.bibliographicCitation": "Citazioni bibliografiche",
+  "layout.field.label.ArchivalMaterial.dc.relation.aggregation": "Aggregazione",
+  "layout.field.label.ArchivalMaterial.dc.relation.path": "Percorso",
+  "layout.field.label.ArchivalMaterial.dc.language.iso": "Lingua",
+  "layout.field.label.ArchivalMaterial.dc.subject": "Parole chiave",
+  "layout.field.label.ArchivalMaterial.dc.relation.project": "Progetto",
+  "layout.field.label.ArchivalMaterial.dc.relation.conference": "Evento",
+  "layout.field.label.ArchivalMaterial.dc.relation.fonds": "Fondo",
+  "layout.field.label.ArchivalMaterial.dc.description": "Descrizione estrinseca",
+  "layout.field.label.ArchivalMaterial.dc.description.archivist": "Note dell'archivista",
+  "layout.field.label.ArchivalMaterial.dc.description.preservation": "Stato di conservazione",
+  "layout.field.label.ArchivalMaterial.dc.description.preservationnote": "Note allo stato di conservazione",
+  "layout.field.label.ArchivalMaterial.dc.description.note": "Altre note",
+  "layout.field.label.ArchivalMaterial.dc.relation.uri": "URL",
+  "layout.field.label.ArchivalMaterial.dc.relation.place": "Luogo",
+  "layout.field.label.ArchivalMaterial.dc.relation.isreferencedby": "Documento collegato",
+  "layout.field.label.ArchivalMaterial.dc.relation.person": "Persona",
+  "layout.field.label.ArchivalMaterial.dc.relation.opac": "Link all'OPAC",
+  "layout.field.label.ArchivalMaterial.dc.relation.otherlinks": "Altri Collegamenti",
+
+  "layout.field.label.Person.dc.type": "Tipologia",
+  "layout.field.label.Person.crisrp.name.translated": "Nome tradotto",
+  "layout.field.label.Person.crisrp.name.variant": "Varianti del nome",
+  "layout.field.label.Person.glamperson.gender": "Genere",
+  "layout.field.label.Person.glamperson.role": "Ruolo",
+  "layout.field.label.Person.glamperson.nationality": "Nazionalità",
+  "layout.field.label.Person.person.birthDate": "Data di nascita",
+  "layout.field.label.Person.glamperson.deathDate": "Data di morte",
+  "layout.field.label.Person.glamperson.birthYear": "Anno di nascita",
+  "layout.field.label.Person.glamperson.deathYear": "Anno di morte",
+  "layout.field.label.Person.glamperson.birthPlace": "Luogo di nascita",
+  "layout.field.label.Person.glamperson.deathPlace": "Luogo di morte",
+  "layout.field.label.Person.dc.relation.event": "Ha partecipato a",
+  "layout.field.label.Person.glamperson.activityPeriod": "Periodo di attività",
+  "layout.field.label.Person.glamperson.biography": "Biografia",
+  "layout.field.label.Person.dc.relation.aggregation": "Aggregazione",
+  "layout.field.label.Person.dc.relation.path": "Percorso",
+  "layout.field.label.Person.dc.relation.opac": "Link all'OPAC",
+  "layout.field.label.Person.glamperson.link.otherbibliographic": "Altra fonte bibliografica",
+  "layout.field.label.Person.glamperson.link.dbi": "Dizionario Biografico degli Italiani link",
+  "layout.field.label.Person.glamperson.link.ei": "Enciclopedia Italiana link",
+  "layout.field.label.Person.glam.link.wikipedia": "Link a Wikipedia",
+  "layout.field.label.Person.glam.link.dbpedia": "Link a DBpedia",
+  "layout.field.label.Person.glam.link.viaf": "Link a VIAF",
+  "layout.field.label.Person.glam.link.eb": "Link a Encyclopedia Britannica",
+  "layout.field.label.Person.glamperson.link.ulan": "Link a Getty ULAN",
+  "layout.field.label.Person.dc.relation.otherlinks": "Altri link",
+
+  "layout.field.label.Aggregation.dc.description": "Descrizione",
+  "layout.field.label.Aggregation.glamaggregation.parent": "Livello gerarchico superiore",
+  "layout.field.label.Aggregation.glam.leaf": "Foglia",
+  "layout.field.label.Aggregation.glam.index": "Numero di corda",
+
+  "layout.field.label.StaticPage.dc.description": "Testo",
+  "layout.field.label.StaticPage.dc.subject": "Parole chiave",
+
+  "layout.field.label.News.cris.news.enabled": "Mostra",
+  "layout.field.label.News.cris.news.url": "URL",
+  "layout.field.label.News.dc.description.abstract": "Testo",
+  "layout.field.label.News.cris.priority": "Posizione",
+
+  "layout.field.label.JournalFile.dc.relation.issue": "Dettagli del fascicolo",
+  "layout.field.label.JournalFile.dc.relation.issueother": "Numero del fascicolo, supplemento e/o altro",
+  "layout.field.label.JournalFile.dc.relation.stpieceper": "Riferimento all'annata",
+  "layout.field.label.JournalFile.dc.relation.stpieceperstart": "Inizio dell'annata",
+  "layout.field.label.JournalFile.dc.relation.stpieceperend": "Fine dell'annata",
+  "layout.field.label.JournalFile.dc.relation.stpieceperother": "Riferimento al volume",
+  "layout.field.label.JournalFile.dc.relation.stpieceperotherstart": "Inizio del volume",
+  "layout.field.label.JournalFile.dc.relation.stpieceperotherend": "Fine del volume",
+  "layout.field.label.JournalFile.dc.date.issued": "Data",
+  "layout.field.label.JournalFile.dc.date.start": "Data iniziale",
+  "layout.field.label.JournalFile.dc.date.end": "Data finale",
+  "layout.field.label.JournalFile.dc.relation.edition": "Edizione",
+  "layout.field.label.JournalFile.dc.description": "Descrizione",
+  "layout.field.label.JournalFile.dc.relation.journalfonds": "Testata",
+  "layout.field.label.JournalFile.dc.identifier.archivalunit": "Numero di corda",
+  "layout.field.label.JournalFile.dc.rights.license": "Licenza",
+  "layout.field.label.JournalFile.dc.relation.path": "Percorso",
+  "layout.field.label.JournalFile.dc.relation.isreferencedby": "Documento collegato",
+  "layout.field.label.JournalFile.dc.relation.aggregation": "Aggregazione",
+
 }
