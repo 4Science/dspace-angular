@@ -10411,7 +10411,7 @@
   "layout.field.label.JournalFonds.glamfonds.shelfmark": "Segnatura",
 
   //"layout.field.label.JournalFonds.dc.relation.journalfonds": "Related Journal Fonds",
-  "layout.field.label.JournalFonds.dc.relation.journalfonds": "Testate Correlate",
+  "layout.field.label.JournalFonds.glamjouurnalfonds.relation.journalfonds": "Testate Correlate",
 
   //"layout.field.label.JournalFonds.glamjournalfonds.ownedyears": "Owned Years",
   // TODO Source message changed - Revise the translation
@@ -10507,7 +10507,7 @@
   "layout.field.label.Notes": "Note",
 
   //"layout.field.label.Relation Type": "Relation Type",
-  "layout.field.label.Relation Type": "tipologia di Relazione",
+  "layout.field.label.Relation Type": "Tipologia di Relazione",
 
   //"layout.field.label.Related Journal Fonds": "Related Journal Fonds",
   "layout.field.label.Related Journal Fonds": "Testata Correlata",
