@@ -1998,10 +1998,6 @@
   "confirmation-modal.pending-changes.confirm": "Leave",
 
 
-  "dataset.listelement.badge" : "Dataset",
-
-  "equipment.listelement.badge": "Equipment",
-
   "error.bitstream": "Error fetching bitstream",
 
   "error.browse-by": "Error fetching items",
@@ -2059,8 +2055,6 @@
   "error.validation.fundingInvestigatorOrLeadOrganizationRequired" : "At least one investigator or one lead organization is required",
 
   "error.validation.notRepeatable": "This field is not repeatable, please choose only one value and discard the others.",
-
-  "event.listelement.badge" : "Event",
 
   "explore.browse-section.title" : "Browse",
 
@@ -2384,10 +2378,6 @@
   "form.submit": "Save",
 
   "form.repeatable.sort.tip": "Drop the item in the new position",
-
-  "funding.listelement.badge" : "Funding",
-
-  "funding.page.titleprefix" : "Funding:",
 
 
 
@@ -4589,10 +4579,6 @@
 
   "audit.detail.back.subject": "Subject Audit Logs",
 
-  "patent.listelement.badge": "Patent",
-
-  "product.listelement.badge": "Product",
-
 
 
   "profile.breadcrumbs": "Update Profile",
@@ -4735,6 +4721,33 @@
   "publication-relationships.search.results.head": "Publication Search Results",
 
   "publication.search.title": "Publication Search",
+
+
+
+  "funding.listelement.badge" : "Funding",
+
+  "funding.page.titleprefix" : "Funding:",
+
+  "event.listelement.badge" : "Event",
+
+  "event.page.titleprefix" : "Event:",
+
+  "dataset.listelement.badge" : "Dataset",
+
+  "dataset.page.titleprefix" : "Dataset:",
+
+  "equipment.listelement.badge": "Equipment",
+
+  "equipment.page.titleprefix": "Equipment:",
+
+  "patent.listelement.badge": "Patent",
+
+  "patent.page.titleprefix": "Patent:",
+
+  "product.listelement.badge": "Product",
+
+  "product.page.titleprefix": "Product:",
+  
 
 
   "media-viewer.next": "Next",

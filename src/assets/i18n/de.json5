@@ -1,9 +1,5 @@
 {
 
-  // "Biography": "English Biography",
-  // TODO New key - Add a translation
-  "Biography": "English Biography",
-
   // "401.help": "You're not authorized to access this page. You can use the button below to get back to the home page.",
   "401.help": "Sie sind nicht berechtigt, auf diese Seite zuzugreifen. Mit dem Link unten kommen Sie zurück zur Startseite.",
 
@@ -3356,13 +3352,7 @@
   "confirmation-modal.pending-changes.confirm": "Leave",
 
 
-  // "dataset.listelement.badge" : "Dataset",
-  // TODO New key - Add a translation
-  "dataset.listelement.badge" : "Dataset",
 
-  // "equipment.listelement.badge": "Equipment",
-  // TODO New key - Add a translation
-  "equipment.listelement.badge": "Equipment",
 
   // "error.bitstream": "Error fetching bitstream",
   "error.bitstream": "Die Datei konnte nicht geladen werden.",
@@ -3455,10 +3445,6 @@
   // "error.validation.notRepeatable": "This field is not repeatable, please choose only one value and discard the others.",
   // TODO New key - Add a translation
   "error.validation.notRepeatable": "This field is not repeatable, please choose only one value and discard the others.",
-
-  // "event.listelement.badge" : "Event",
-  // TODO New key - Add a translation
-  "event.listelement.badge" : "Event",
 
   // "explore.browse-section.title" : "Browse",
   // TODO New key - Add a translation
@@ -4052,14 +4038,6 @@
   // "form.repeatable.sort.tip": "Drop the item in the new position",
   // TODO New key - Add a translation
   "form.repeatable.sort.tip": "Drop the item in the new position",
-
-  // "funding.listelement.badge" : "Funding",
-  // TODO New key - Add a translation
-  "funding.listelement.badge" : "Funding",
-
-  // "funding.page.titleprefix" : "Funding:",
-  // TODO New key - Add a translation
-  "funding.page.titleprefix" : "Funding:",
 
 
 
@@ -7869,14 +7847,6 @@
   // TODO New key - Add a translation
   "audit.detail.back.subject": "Subject Audit Logs",
 
-  // "patent.listelement.badge": "Patent",
-  // TODO New key - Add a translation
-  "patent.listelement.badge": "Patent",
-
-  // "product.listelement.badge": "Product",
-  // TODO New key - Add a translation
-  "product.listelement.badge": "Product",
-
 
 
   // "profile.breadcrumbs": "Update Profile",
@@ -8107,6 +8077,45 @@
 
   // "publication.search.title": "Publication Search",
   "publication.search.title": "Publikationssuche",
+
+
+  
+  // "funding.listelement.badge" : "Funding",
+  "funding.listelement.badge" : "Förderung",
+
+  // "funding.page.titleprefix" : "Funding:",
+  "funding.page.titleprefix" : "Förderung:",
+
+  // "event.listelement.badge" : "Event",
+  "event.listelement.badge" : "Veranstaltung",
+
+  // "event.page.titleprefix" : "Event:",
+  "event.page.titleprefix" : "Veranstaltung:",
+
+  // "dataset.listelement.badge" : "Dataset",
+  "dataset.listelement.badge" : "Datensatz",
+
+  // "dataset.page.titleprefix" : "Dataset:",
+  "dataset.page.titleprefix" : "Datensatz:",
+
+  // "equipment.listelement.badge": "Equipment",
+  "equipment.listelement.badge": "Ausstattung",
+
+  // "equipment.page.titleprefix": "Equipment:",
+  "equipment.page.titleprefix": "Ausstattung:",
+
+  // "patent.listelement.badge": "Patent",
+  "patent.listelement.badge": "Patent",
+
+  // "patent.page.titleprefix": "Patent:",
+  "patent.page.titleprefix": "Patent:",
+
+  // "product.listelement.badge": "Product",
+  "product.listelement.badge": "Produkt",
+
+  // "product.page.titleprefix": "Product:",
+  "product.page.titleprefix": "Produkt:",
+
 
 
   // "media-viewer.next": "Next",
