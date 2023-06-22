@@ -6423,10 +6423,6 @@
   // TODO New key - Add a translation
   "menu.section.import_from_excel": "Import from excel",
 
-  // "menu.section.export_batch": "Batch Export (ZIP)",
-  // TODO New key - Add a translation
-  "menu.section.export_batch": "Batch Export (ZIP)",
-
   // "menu.section.export_to_excel": "Export to excel",
   // TODO New key - Add a translation
   "menu.section.export_to_excel": "Export to excel",
@@ -7086,10 +7082,6 @@
   // "nav.user.description" : "User profile bar",
   // TODO New key - Add a translation
   "nav.user.description" : "User profile bar",
-
-  // "nav.subscriptions" : "Subscriptions",
-  // TODO New key - Add a translation
-  "nav.subscriptions" : "Subscriptions",
 
   // "none.listelement.badge": "Item",
   // TODO New key - Add a translation
