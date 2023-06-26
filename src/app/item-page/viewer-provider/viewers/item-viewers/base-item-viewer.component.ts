@@ -19,7 +19,7 @@ export abstract class BaseItemViewerComponent implements ViewerComponent {
   }
 
   public initialize(state: ViewerInitialState) {
-    this.item = state.item;
+    this.item$.next(state.item);
   }
 
 }

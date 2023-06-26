@@ -6,22 +6,20 @@
        [formGroupName]="model.id"
        [ngClass]="model.layout.element?.control">
 
-    <div *ngFor="let columnItems of items" class="col-sm ml-3">
-
-      <div  *ngFor="let item of columnItems" class="custom-control custom-checkbox">
-
-          <input type="checkbox" class="custom-control-input"
-                 [attr.aria-labelledby]="'label_' + model.id"
-                 [attr.tabindex]="item.index"
-                 [checked]="item.value"
-                 [id]="model.id + item.id"
-                 [formControlName]="item.id"
-                 [name]="model.name"
-                 [required]="model.required"
-                 [value]="item.value"
-                 (blur)="onBlur($event)"
-                 (change)="onChange($event)"
-                 (focus)="onFocus($event)"/>
+    <div *ngFor="let columnItems of items, let ind = index" class="col-sm ml-3">
+      <div class="custom-control custom-checkbox" *ngFor="let item of columnItems">
+        <input type="checkbox" class="custom-control-input"
+              [attr.aria-labelledby]="'label_' + model.id"
+              [attr.tabindex]="item.index"
+              [checked]="item.value"
+              [id]="model.id + item.id"
+              [formControlName]="item.id"
+              [name]="model.name"
+              [required]="model.required"
+              [value]="item.value"
+              (blur)="onBlur($event)"
+              (change)="onChange($event)"
+              (focus)="onFocus($event)"/>
         <label class="custom-control-label"
                [class.disabled]="model.disabled"
                [ngClass]="model.layout.element?.control"
@@ -29,6 +27,18 @@
           <span [ngClass]="model.layout.element?.label" [innerHTML]="item.label"></span>
         </label>
       </div>
+      <ng-container *ngIf="model.openType && ind === (items.length - 1)">
+        <div data-test="otherListOptionRepeatable" class="d-flex align-items-center pr-3">
+          <label class="m-0">{{'form.other-option' | translate}}</label>
+          <input type="text" class="form-control form-control-sm mx-2"
+                 [ngModelOptions]="{standalone: true}" [(ngModel)]="otherListEntry" (keyup.enter)="addListItem()" />
+          <button type="button" class="btn btn-primary btn-sm" (click)="addListItem()"
+                  id="otherOptionBtn" [disabled]="addButtonDisabled">
+            {{'form.other-option.add-button' | translate}}
+          </button>
+        </div>
+        <ng-container *ngTemplateOutlet="invalidEntryError"></ng-container>
+      </ng-container>
       <br>
     </div>
 
@@ -42,26 +52,41 @@
        [ngClass]="model.layout.element?.control"
        (change)="onChange($event)">
 
-    <div *ngFor="let columnItems of items" class="col-sm ml-3">
-      <div  *ngFor="let item of columnItems" class="custom-control custom-radio">
-
+    <div *ngFor="let columnItems of items, let ind = index" class="col-sm ml-3">
+      <div class="custom-control custom-radio" *ngFor="let item of columnItems">
         <input type="radio" class="custom-control-input"
-               [checked]="item.value"
-               [id]="model.id + item.id"
-               [name]="model.id"
-               [required]="model.required"
-               [value]="item.index"
-               (blur)="onBlur($event)"
-               (focus)="onFocus($event)"/>
+              [checked]="item.value"
+              [id]="model.id + item.id"
+              [name]="model.id"
+              [required]="model.required"
+              [value]="item.index"
+              (blur)="onBlur($event)"
+              (focus)="onFocus($event)"/>
         <label class="custom-control-label"
-               [for]="model.id + item.id"
-               [class.disabled]="model.disabled"
-               [ngClass]="model.layout.element?.control">
+              [for]="model.id + item.id"
+              [class.disabled]="model.disabled"
+              [ngClass]="model.layout.element?.control">
           <span [ngClass]="model.layout.element?.label" [innerHTML]="item.label"></span>
         </label>
       </div>
+      <ng-container *ngIf="model.openType && ind === (items.length - 1)">
+        <div data-test="otherListOptionNonRepeatable" class="d-flex align-items-center pr-3">
+          <label class="m-0">{{'form.other-option' | translate}}</label>
+          <input type="text" class="form-control form-control-sm mx-2"
+                 [ngModelOptions]="{standalone: true}" [(ngModel)]="otherListEntry" (keyup.enter)="addListItem()" />
+          <button class="btn btn-primary btn-sm" type="button" id="otherOptionBtn"
+                  (click)="addListItem()" [disabled]="addButtonDisabled">
+            {{'form.other-option.add-button' | translate}}
+          </button>
+        </div>
+        <ng-container *ngTemplateOutlet="invalidEntryError"></ng-container>
+      </ng-container>
       <br>
     </div>
 
   </div>
 </div>
+
+<ng-template #invalidEntryError>
+  <p class="small text-danger" *ngIf="isNewEntryDuplicate">{{'form.other-option.invalid' | translate: {entry: existingEntry} }}</p>
+</ng-template>

@@ -58,6 +58,13 @@ export class ParserFactory {
           deps: [...fieldParserDeps]
         };
       }
+      case ParserType.OpenDropdown: {
+        return {
+          provide: FieldParser,
+          useClass: DropdownFieldParser,
+          deps: [...fieldParserDeps]
+        };
+      }
       case ParserType.RelationGroup:
       case ParserType.InlineGroup: {
         return {
@@ -67,6 +74,13 @@ export class ParserFactory {
         };
       }
       case ParserType.List: {
+        return {
+          provide: FieldParser,
+          useClass: ListFieldParser,
+          deps: [...fieldParserDeps]
+        };
+      }
+      case ParserType.OpenList: {
         return {
           provide: FieldParser,
           useClass: ListFieldParser,

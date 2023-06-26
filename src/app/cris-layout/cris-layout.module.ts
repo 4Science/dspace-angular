@@ -128,7 +128,6 @@ import { MarkdownViewerModule } from '../shared/markdown-viewer/markdown-viewer.
 import {
   AdvancedAttachmentComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/advanced-attachment/advanced-attachment.component';
-import { FileDownloadButtonComponent } from '../shared/file-download-button/file-download-button.component';
 import { CarouselModule } from '../shared/carousel/carousel.module';
 import {
   BitstreamAttachmentComponent
@@ -136,8 +135,12 @@ import {
 import { ItemSharedModule } from '../item-page/item-shared.module';
 import { ViewersSharedModule } from '../item-page/viewer-provider/viewers/viewers-shared.module';
 import {
-  BackgroundComponent
-} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/background/background.component';
+AttachmentRenderComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/advanced-attachment/bitstream-attachment/attachment-render/attachment-render.component';
+import {
+  AttachmentRenderingModule
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/advanced-attachment/bitstream-attachment/attachment-render/attachment-rendering.module';
+import { FormModule } from '../shared/form/form.module';
 
 const ENTRY_COMPONENTS = [
   CrisLayoutVerticalComponent,
@@ -170,7 +173,6 @@ const ENTRY_COMPONENTS = [
   SearchComponent,
   TagSearchComponent,
   AdvancedAttachmentComponent,
-  BackgroundComponent
 ];
 
 @NgModule({
@@ -196,8 +198,8 @@ const ENTRY_COMPONENTS = [
     MetadataContainerComponent,
     MetadataRenderComponent,
     MarkdownComponent,
-    FileDownloadButtonComponent,
     BitstreamAttachmentComponent,
+    AttachmentRenderComponent,
   ],
   providers:[ LoadMoreService, NgbActiveModal ],
   imports: [
@@ -214,10 +216,15 @@ const ENTRY_COMPONENTS = [
     ViewersSharedModule,
     CarouselModule,
     MarkdownViewerModule,
+    ItemSharedModule,
+    ViewersSharedModule,
     MetricsModule,
+    AttachmentRenderingModule,
+    FormModule
   ],
   exports: [
     CrisLayoutComponent,
+    CrisrefComponent,
   ]
 })
 export class CrisLayoutModule {

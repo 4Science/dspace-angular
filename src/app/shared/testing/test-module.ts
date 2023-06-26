@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import {
-  MySimpleItemActionComponent
-} from '../../item-page/edit-item-page/simple-item-action/abstract-simple-item-action.component.spec';
+import { MySimpleItemActionComponent } from '../../item-page/edit-item-page/simple-item-action/abstract-simple-item-action.component.spec';
 import { SharedModule } from '../shared.module';
 import { NgComponentOutletDirectiveStub } from './ng-component-outlet-directive.stub';
 import { QueryParamsDirectiveStub } from './query-params-directive.stub';
@@ -30,7 +28,7 @@ import { BrowserOnlyMockPipe } from './browser-only-mock.pipe';
   exports: [
     QueryParamsDirectiveStub,
     RouterLinkDirectiveStub,
-    NgComponentOutletDirectiveStub
+    NgComponentOutletDirectiveStub,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

@@ -16,6 +16,7 @@ import {
 import { isNotEmpty } from '../../../empty.util';
 import { FormFieldMetadataValueObject } from '../models/form-field-metadata-value.model';
 import { ParserOptions } from './parser-options';
+import { ParserType } from './parser-type';
 
 export class DropdownFieldParser extends FieldParser {
 
@@ -36,6 +37,11 @@ export class DropdownFieldParser extends FieldParser {
     if (isNotEmpty(this.configData.selectableMetadata[0].controlledVocabulary)) {
       this.setVocabularyOptions(dropdownModelConfig, this.parserOptions.collectionUUID);
       this.setValues(dropdownModelConfig, fieldValue, true);
+      if (this.configData.input.type === ParserType.OpenDropdown) {
+        dropdownModelConfig.openType = true;
+      } else {
+        dropdownModelConfig.openType = false;
+      }
       layout = {
         element: {
           control: 'col'

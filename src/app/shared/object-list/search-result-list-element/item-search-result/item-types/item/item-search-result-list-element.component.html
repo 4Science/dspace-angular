@@ -42,25 +42,16 @@
             </ds-truncatable-part>
           </span>
           <div *ngIf="dso.firstMetadataValue('dc.description.abstract')" class="item-list-abstract">
-            <ds-truncatable-part [id]="dso.id" [minLines]="3"><span
-              [innerHTML]="firstMetadataValue('dc.description.abstract')"></span>
-          </ds-truncatable-part>
-        </div>
-      </ds-truncatable>
-      <div *ngIf="fullTextHighlights.length" class="d-flex flex-row item-list-highlights">
-        <div>
-          <ng-container *ngFor="let highlight of fullTextHighlights">
-            <span [innerHTML]="highlight" class="d-block text-monospace small"></span>
-          </ng-container>
-        </div>
-        <div class="mirador-btn-wrapper ml-2 pl-2 border-left">
-          <button class="text-center btn btn-outline-primary"
-            [routerLink]="itemViewerRoute" queryParamsHandling="preserve"
-            [ngbTooltip]="'item.search.results.open-mirador' | translate"
-          >
-            <i class="fas fa-eye"></i><br><i class="mirador-icon"></i>
-          </button>
-        </div>
+          <ds-truncatable-part [id]="dso.id" [minLines]="3">
+            <div [innerHTML]="firstMetadataValue('dc.description.abstract')"></div>
+            </ds-truncatable-part>
+          </div>
+        <ds-additional-metadata [object]="dso"></ds-additional-metadata>
+        </ds-truncatable>
+        <ds-metric-badges *ngIf="showMetrics" class="d-block clearfix" [item]="dso"></ds-metric-badges>
+      </div>
+      <div class="align-self-center" *ngIf="showMetrics">
+        <ds-metric-donuts [item]="dso"></ds-metric-donuts>
       </div>
       <ds-metric-badges *ngIf="showMetrics" class="d-block clearfix" [item]="dso"></ds-metric-badges>
     </div>

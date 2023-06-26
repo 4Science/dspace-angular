@@ -202,9 +202,15 @@ export class SearchConfigurationService implements OnDestroy {
           if (key.endsWith('.min') || key.endsWith('.max')) {
             const realKey = key.slice(0, -4);
             if (hasNoValue(filters.find((f) => f.key === realKey))) {
-              const min = filterParams[realKey + '.min'] ? filterParams[realKey + '.min'][0] : '*';
-              const max = filterParams[realKey + '.max'] ? filterParams[realKey + '.max'][0] : '*';
-              filters.push(new SearchFilter(realKey, ['[' + min + ' TO ' + max + ']'], 'equals'));
+              const [min] = filterParams[realKey + '.min'] || [],
+                [max] = filterParams[realKey + '.max'] || [];
+              filters.push(
+                new SearchFilter(
+                  realKey,
+                  ['[' + this.getSolrRangeParam(min) + ' TO ' + this.getSolrRangeParam(max) + ']'],
+                  'equals'
+                )
+              );
             }
           } else {
             filters.push(new SearchFilter(key, filterParams[key]));
@@ -214,6 +220,16 @@ export class SearchConfigurationService implements OnDestroy {
       }
       return [];
     }));
+  }
+
+  /**
+   * Maps a target url facet range filter parameter to solr query.
+   *
+   * @param param
+   * @private
+   */
+  private getSolrRangeParam(param: string | null): string {
+    return hasNoValue(param) || param.length === 0 ? '*' : param;
   }
 
   /**

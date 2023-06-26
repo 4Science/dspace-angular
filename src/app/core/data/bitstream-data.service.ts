@@ -352,7 +352,7 @@ export class BitstreamDataService extends IdentifiableDataService<Bitstream> imp
     uuid: string,
     bundlename: string,
     metadataFilters: MetadataFilter[],
-    options: FindListOptions,
+    options: FindListOptions = {},
     useCachedVersionIfAvailable = true,
     reRequestOnStale = true,
     ...linksToFollow: FollowLinkConfig<Bitstream>[]
@@ -429,4 +429,5 @@ export class BitstreamDataService extends IdentifiableDataService<Bitstream> imp
       ...linksToFollow
     );
   }
+
 }

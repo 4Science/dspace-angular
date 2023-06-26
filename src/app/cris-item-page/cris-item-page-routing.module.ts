@@ -6,6 +6,7 @@ import { CrisItemPageComponent } from './cris-item-page.component';
 import { ItemBreadcrumbResolver } from '../core/breadcrumbs/item-breadcrumb.resolver';
 import { MenuItemType } from '../shared/menu/menu-item-type.model';
 import { LinkMenuItemModel } from '../shared/menu/menu-item/models/link.model';
+import { VIEWERS_PATH } from '../item-page/item-page-routing-paths';
 
 const routes: Routes = [
   {
@@ -21,7 +22,7 @@ const routes: Routes = [
         public: [{
           id: 'statistics_item_:id',
           active: true,
-          visible: true,
+          visible: false,
           model: {
             type: MenuItemType.LINK,
             text: 'menu.section.statistics',
@@ -45,7 +46,7 @@ const routes: Routes = [
         public: [{
           id: 'statistics_item_:id',
           active: true,
-          visible: true,
+          visible: false,
           model: {
             type: MenuItemType.LINK,
             text: 'menu.section.statistics',
@@ -53,7 +54,13 @@ const routes: Routes = [
           } as LinkMenuItemModel,
         }],
       }, showSocialButtons: true
-    }
+    },
+    children: [
+      {
+        path: VIEWERS_PATH,
+        loadChildren: () => import('../item-page/viewer-provider/viewer-provider.module').then(m => m.ViewerProviderModule)
+      }
+    ]
   }
 ];
 

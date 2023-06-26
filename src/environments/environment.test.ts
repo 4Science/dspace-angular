@@ -3,8 +3,7 @@ import { BuildConfig } from 'src/config/build-config.interface';
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
 import {
-  AdvancedAttachmentElementType,
-  AdvancedAttachmentPreviewButtonTypes
+  AdvancedAttachmentElementType
 } from '../config/advanced-attachment-rendering.config';
 
 export const environment: BuildConfig = {
@@ -59,6 +58,20 @@ export const environment: BuildConfig = {
       defaultTime: 0,
       maxBufferSize: 100,
       timePerMethod: { [RestRequestMethod.PATCH]: 3 } as any // time in seconds
+    },
+    // In-memory cache of server-side rendered pages. Disabled in test environment (max=0)
+    serverSide: {
+      debug: false,
+      botCache: {
+        max: 0,
+        timeToLive: 24 * 60 * 60 * 1000, // 1 day
+        allowStale: true,
+      },
+      anonymousCache: {
+        max: 0,
+        timeToLive: 10 * 1000, // 10 seconds
+        allowStale: true,
+      }
     }
   },
 
@@ -82,6 +95,7 @@ export const environment: BuildConfig = {
 
   // Form settings
   form: {
+    spellCheck: true,
     // NOTE: Map server-side validators to comparative Angular form validators
     validatorMap: {
       required: 'required',
@@ -258,7 +272,13 @@ export const environment: BuildConfig = {
       undoTimeout: 10000 // 10 seconds
     },
     // Show the item access status label in items lists
-    showAccessStatuses: false
+    showAccessStatuses: false,
+    bitstream: {
+      // Number of entries in the bitstream list in the item view page.
+      // Rounded to the nearest size in the list of selectable sizes on the
+      // settings menu.  See pageSizeOptions in 'pagination-component-options.model.ts'.
+      pageSize: 5
+    }
   },
   collection: {
     edit: {
@@ -305,6 +325,15 @@ export const environment: BuildConfig = {
     enabled: false,
     mathjax: false,
   },
+
+  vocabularies: [
+    {
+      filter: 'subject',
+      vocabulary: 'srsc',
+      enabled: true
+    }
+  ],
+
   crisLayout: {
     urn: [
       {
@@ -424,10 +453,13 @@ export const environment: BuildConfig = {
       'cris.cms.footer',
     ]
   },
-  addThisPlugin: {
-    siteId: '',
-    scriptUrl: 'http://s7.addthis.com/js/300/addthis_widget.js#pubid=',
-    socialNetworksEnabled: false
+  addToAnyPlugin: {
+    scriptUrl: 'https://static.addtoany.com/menu/page.js',
+    socialNetworksEnabled: false,
+    buttons: ['btn1', 'btn2'],
+    showPlusButton: true,
+    showCounters: true,
+    title: 'DSpace CRIS 7 demo',
   },
   metricVisualizationConfig: [
     {
@@ -513,31 +545,12 @@ export const environment: BuildConfig = {
         type: AdvancedAttachmentElementType.Attribute,
       }
     ],
-    buttons: [
+  },
+  searchResult: {
+    additionalMetadataFields: [
       {
-        type: AdvancedAttachmentPreviewButtonTypes.IIIF,
-        metadata: 'bitstream.viewer.provider',
-        metadataValueFilter : {
-          value: 'iiif',
-          substring: true
-        }
-      },
-      {
-        type: AdvancedAttachmentPreviewButtonTypes.PDF,
-        metadata: 'bitstream.viewer.provider',
-        metadataValueFilter : {
-          value: 'pdf',
-          substring: true
-        }
-      },
-      {
-        type: AdvancedAttachmentPreviewButtonTypes.Download,
-        metadata: 'bitstream.viewer.provider',
-        metadataValueFilter : {
-          value: 'nodownload',
-          substring: true
-        },
-        negation: true
+        entityType: 'default',
+        metadataConfiguration: []
       }
     ]
   },

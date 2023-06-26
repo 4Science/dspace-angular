@@ -1,25 +1,21 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Bitstream } from '../../../../../../../../core/shared/bitstream.model';
 import { environment } from '../../../../../../../../../environments/environment';
-import {
-  AdvancedAttachmentElementType,
-  AdvancedAttachmentPreviewButtonConfig,
-  AdvancedAttachmentPreviewButtonTypes
-} from '../../../../../../../../../config/advanced-attachment-rendering.config';
+import { AdvancedAttachmentElementType } from '../../../../../../../../../config/advanced-attachment-rendering.config';
 import { BitstreamRenderingModelComponent } from '../../bitstream-rendering-model';
 import { LayoutField } from '../../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../../core/shared/item.model';
 import { BitstreamDataService } from '../../../../../../../../core/data/bitstream-data.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { getBitstreamItemViewerPath } from '../../../../../../../../item-page/item-page-routing-paths';
 
 @Component({
   selector: 'ds-bitstream-attachment',
   templateUrl: './bitstream-attachment.component.html',
   styleUrls: ['./bitstream-attachment.component.scss']
 })
-export class BitstreamAttachmentComponent extends BitstreamRenderingModelComponent {
+
+export class BitstreamAttachmentComponent extends BitstreamRenderingModelComponent implements OnInit {
 
   /**
    * Environment variables configuring the fields to be viewed
@@ -27,28 +23,17 @@ export class BitstreamAttachmentComponent extends BitstreamRenderingModelCompone
   envMetadata = environment.advancedAttachmentRendering.metadata;
 
   /**
-   * Environment variables configuring the buttons and when to show them
-   */
-  envButtons = environment.advancedAttachmentRendering.buttons;
-
-  /**
    * Configuration type enum
    */
   AdvancedAttachmentElementType = AdvancedAttachmentElementType;
 
   /**
-   * Configuration type enum
+   * All item providers to show buttons of
    */
-  AdvancedAttachmentButtonTypes = AdvancedAttachmentPreviewButtonTypes;
+  allAttachmentProviders: string[] = [];
 
   @Input()
   attachment: Bitstream;
-
-  @Input()
-  bitstreamsNumber: number;
-
-  @Input()
-  showableBitstreamsNumber: number;
 
   constructor(
     @Inject('fieldProvider') public fieldProvider: LayoutField,
@@ -62,12 +47,7 @@ export class BitstreamAttachmentComponent extends BitstreamRenderingModelCompone
     super(fieldProvider, itemProvider, renderingSubTypeProvider, bitstreamDataService, translateService);
   }
 
-  public isVisible(attachment: Bitstream, buttonConfig: AdvancedAttachmentPreviewButtonConfig): boolean {
-    const found = attachment.hasMetadata(buttonConfig.metadata, buttonConfig.metadataValueFilter);
-    return buttonConfig.negation ? !found : found;
-  }
-
-  public openPdfViewer() {
-    this.router.navigate([getBitstreamItemViewerPath(this.item, this.attachment, 'pdf')]);
+  ngOnInit() {
+    this.allAttachmentProviders = this.attachment?.allMetadataValues('bitstream.viewer.provider');
   }
 }

@@ -1,9 +1,11 @@
 export enum ParserType {
   Date = 'date',
   Dropdown = 'dropdown',
+  OpenDropdown = 'opendropdown',
   RelationGroup = 'group',
   InlineGroup = 'inline-group',
   List = 'list',
+  OpenList = 'openlist',
   Lookup = 'lookup',
   LookupName = 'lookup-name',
   LookupRelation = 'lookup-relation',

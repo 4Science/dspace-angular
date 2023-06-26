@@ -8,11 +8,13 @@ export interface DynamicScrollableDropdownModelConfig extends DsDynamicInputMode
   vocabularyOptions: VocabularyOptions;
   maxOptions?: number;
   value?: any;
+  openType?: boolean;
 }
 
 export class DynamicScrollableDropdownModel extends DsDynamicInputModel {
 
   @serializable() maxOptions: number;
+  @serializable() openType: boolean;
   @serializable() readonly type: string = DYNAMIC_FORM_CONTROL_TYPE_SCROLLABLE_DROPDOWN;
 
   constructor(config: DynamicScrollableDropdownModelConfig, layout?: DynamicFormControlLayout) {
@@ -22,6 +24,7 @@ export class DynamicScrollableDropdownModel extends DsDynamicInputModel {
     this.autoComplete = AUTOCOMPLETE_OFF;
     this.vocabularyOptions = config.vocabularyOptions;
     this.maxOptions = config.maxOptions || 10;
+    this.openType = config.openType;
   }
 
 }
