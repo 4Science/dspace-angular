@@ -755,4 +755,7 @@ export class DefaultAppConfig implements AppConfig {
   searchResult: SearchResultConfig = {
     additionalMetadataFields: []
   };
+
+  //main site url for glam theme
+  mainSiteUrl = 'www.sito.principale';
 }
