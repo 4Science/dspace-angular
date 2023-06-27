@@ -1,11 +1,11 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import {hasValue} from '../../../../../../shared/empty.util';
-import {Item} from '../../../../../../core/shared/item.model';
-import {TranslateService} from '@ngx-translate/core';
-import {LayoutField} from '../../../../../../core/layout/models/box.model';
-import {MetadataValue} from '../../../../../../core/shared/metadata.models';
-import {Chips} from '../../../../../../shared/chips/models/chips.model';
+import { hasValue } from '../../../../../../shared/empty.util';
+import { Item } from '../../../../../../core/shared/item.model';
+import { TranslateService } from '@ngx-translate/core';
+import { LayoutField } from '../../../../../../core/layout/models/box.model';
+import { MetadataValue } from '../../../../../../core/shared/metadata.models';
+import { Chips } from '../../../../../../shared/form/chips/models/chips.model';
 
 /**
  * This class defines the basic model to extends for create a new

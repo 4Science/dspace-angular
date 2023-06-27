@@ -3,12 +3,18 @@ import { isNotEmpty } from '../../../empty.util';
 import { FormFieldMetadataValueObject } from '../models/form-field-metadata-value.model';
 import { DynamicListCheckboxGroupModel } from '../ds-dynamic-form-ui/models/list/dynamic-list-checkbox-group.model';
 import { DynamicListRadioGroupModel } from '../ds-dynamic-form-ui/models/list/dynamic-list-radio-group.model';
+import { ParserType } from './parser-type';
 
 export class ListFieldParser extends FieldParser {
 
   public modelFactory(fieldValue?: FormFieldMetadataValueObject | any, label?: boolean): any {
     const listModelConfig = this.initModel(null, label);
     listModelConfig.repeatable = this.configData.repeatable;
+    if (this.configData.input.type === ParserType.OpenList) {
+      listModelConfig.openType = true;
+    } else {
+      listModelConfig.openType = false;
+    }
 
     if (this.configData.selectableMetadata[0].controlledVocabulary
       && this.configData.selectableMetadata[0].controlledVocabulary.length > 0) {

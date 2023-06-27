@@ -11,7 +11,8 @@ export interface ViewerProvider {
 export type Viewer = ViewerProvider & (BaseItemViewerComponent | BaseBitstreamViewerComponent);
 
 export interface ViewerProviderDsoInterface {
-  item?: RemoteData<Item>
+  item?: RemoteData<Item>;
+  dso?: RemoteData<Item>;
   bitstream?: RemoteData<Bitstream>;
   viewer?: ViewerProvider;
 }

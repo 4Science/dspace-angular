@@ -26,6 +26,7 @@ import { SubmissionServiceStub } from '../../../../../testing/submission-service
 import { createSuccessfulRemoteDataObject$ } from '../../../../../remote-data.utils';
 import { buildPaginatedList } from '../../../../../../core/data/paginated-list.model';
 import { PageInfo } from '../../../../../../core/shared/page-info.model';
+import { Observable, of as observableOf, Subject, Subscription } from 'rxjs';
 
 export const SD_TEST_GROUP = new FormGroup({
   dropdown: new FormControl(),
@@ -150,6 +151,36 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
         expect(hasClass(menuEl, 'show')).toBeTruthy();
       });
 
+      it('should display other dropdown menu option', () => {
+        scrollableDropdownComp.model.openType = true;
+        scrollableDropdownComp.pageInfo.currentPage = 2;
+        scrollableDropdownComp.pageInfo.totalPages = 1;
+        const de = scrollableDropdownFixture.debugElement.query(By.css('input.form-control'));
+        const btnEl = de.nativeElement;
+
+        btnEl.click();
+
+        scrollableDropdownFixture.detectChanges();
+        const deMenu = scrollableDropdownFixture.debugElement.query(By.css('#otherOption'));
+
+        expect(deMenu).toBeTruthy();
+      });
+
+      it('should not display other dropdown menu option', () => {
+        scrollableDropdownComp.model.openType = true;
+        scrollableDropdownComp.pageInfo.currentPage = 2;
+        scrollableDropdownComp.pageInfo.totalPages = 3;
+        const de = scrollableDropdownFixture.debugElement.query(By.css('input.form-control'));
+        const btnEl = de.nativeElement;
+
+        btnEl.click();
+
+        scrollableDropdownFixture.detectChanges();
+        const deMenu = scrollableDropdownFixture.debugElement.query(By.css('#otherOption'));
+
+        expect(deMenu).toBeFalsy();
+      });
+
       it('should fetch the next set of results when the user scroll to the end of the list', fakeAsync(() => {
         scrollableDropdownComp.pageInfo.currentPage = 1;
         scrollableDropdownComp.pageInfo.totalPages = 2;
@@ -180,6 +211,26 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
 
         expect((scrollableDropdownComp.model as any).value).toEqual(selectedValue);
       }));
+
+      it('should add other dropdown option value', () => {
+        const selectedValue = Object.assign(new VocabularyEntry(), { authority: 3, display: 'three', value: 'three' });
+        spyOn((scrollableDropdownComp as any), 'addListItem');
+        scrollableDropdownComp.model.openType = true;
+        scrollableDropdownComp.pageInfo.currentPage = 2;
+        scrollableDropdownComp.pageInfo.totalPages = 1;
+        const de = scrollableDropdownFixture.debugElement.query(By.css('input.form-control'));
+        let btnEl = de.nativeElement;
+
+        btnEl.click();
+
+        scrollableDropdownFixture.detectChanges();
+        scrollableDropdownComp.otherListEntry = selectedValue.value;
+        btnEl = scrollableDropdownFixture.debugElement.nativeElement.querySelector('#otherOptionBtn');
+
+        btnEl.click();
+        scrollableDropdownFixture.detectChanges();
+        expect((scrollableDropdownComp as any).addListItem).toHaveBeenCalled();
+      });
 
       it('should emit blur Event onBlur', () => {
         spyOn(scrollableDropdownComp.blur, 'emit');

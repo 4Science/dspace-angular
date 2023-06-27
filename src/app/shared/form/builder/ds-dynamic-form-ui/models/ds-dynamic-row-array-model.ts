@@ -17,6 +17,7 @@ export interface DynamicRowArrayModelConfig extends DynamicFormArrayModelConfig 
   metadataFields: string[];
   hasSelectableMetadata: boolean;
   isDraggable: boolean;
+  openType: boolean;
   showButtons: boolean;
   typeBindRelations?: DynamicFormControlRelation[];
   isInlineGroupArray?: boolean;
@@ -31,6 +32,7 @@ export class DynamicRowArrayModel extends DynamicFormArrayModel {
   @serializable() metadataFields: string[];
   @serializable() hasSelectableMetadata: boolean;
   @serializable() isDraggable: boolean;
+  @serializable() openType: boolean;
   @serializable() showButtons = true;
   @serializable() typeBindRelations: DynamicFormControlRelation[];
   @serializable() toggleSecurityVisibility?: boolean;
@@ -54,6 +56,7 @@ export class DynamicRowArrayModel extends DynamicFormArrayModel {
     this.metadataFields = config.metadataFields;
     this.hasSelectableMetadata = config.hasSelectableMetadata;
     this.isDraggable = config.isDraggable;
+    this.openType = config.openType;
     this.typeBindRelations = config.typeBindRelations ? config.typeBindRelations : [];
     this.isInlineGroupArray = config.isInlineGroupArray ? config.isInlineGroupArray : false;
     this.toggleSecurityVisibility = false;

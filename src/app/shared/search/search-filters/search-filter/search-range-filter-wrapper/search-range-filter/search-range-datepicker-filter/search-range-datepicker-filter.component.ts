@@ -1,8 +1,14 @@
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { SearchRangeFilterComponent } from '../search-range-filter.component';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
-import { hasValue } from '../../../../../../empty.util';
+import {
+  NgbCalendar,
+  NgbDate,
+  NgbDateParserFormatter,
+  NgbDateStruct,
+  NgbInputDatepicker,
+} from '@ng-bootstrap/ng-bootstrap';
+import { hasValue, isNotEmpty } from '../../../../../../empty.util';
 import { SearchService } from '../../../../../../../core/shared/search/search.service';
 import {
   FILTER_CONFIG,
@@ -17,10 +23,9 @@ import { SearchConfigurationService } from '../../../../../../../core/shared/sea
 import { SearchFilterConfig } from '../../../../../models/search-filter-config.model';
 import { renderFacetForEnvironment } from '../../../search-filter-type-decorator';
 import { FilterType } from '../../../../../models/filter-type.model';
-import * as moment from 'moment/moment';
-import { unitOfTime } from 'moment/moment';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
-import { isEqual } from 'lodash';
+import isEqual from 'lodash/isEqual';
+import { dateToNgbDateStruct } from '../../../../../../date.util';
 
 
 @Component({
@@ -32,44 +37,39 @@ import { isEqual } from 'lodash';
 export class SearchRangeDatepickerFilterComponent extends SearchRangeFilterComponent implements OnInit, OnDestroy {
 
   /**
-   * Defines the last popolated field of the {@link dateFormats}.
-   */
-  readonly lastElementFormats: unitOfTime.StartOf[] = ['year', 'month'];
-
-  /**
    * range of two dates, first element is starting date and last element is ending date
    */
-  range: [NgbDate | null, NgbDate | null] = [null, null];
+  range: [NgbDateStruct | null, NgbDateStruct | null] = [null, null];
 
   /**
    * The hovered date
-   * @type {(NgbDate | null)}
+   * @type {(NgbDateStruct | null)}
    */
-  hoveredDate: NgbDate | null = null;
+  hoveredDate: NgbDateStruct | null = null;
 
   /**
    * The date to begin the range
-   * @type {(NgbDate | null)}
+   * @type {(NgbDateStruct | null)}
    */
-  set fromDate(fromDate: NgbDate | null) {
+  set fromDate(fromDate: NgbDateStruct | null) {
     this.range[0] = fromDate;
     this.scheduleSearch$.next(Object.assign([], this.range));
   }
 
-  get fromDate(): NgbDate | null {
+  get fromDate(): NgbDateStruct | null {
     return this.range[0];
   }
 
   /**
    * The date to end the range
-   * @type {(NgbDate | null)}
+   * @type {(NgbDateStruct | null)}
    */
-  set toDate(toDate: NgbDate | null) {
+  set toDate(toDate: NgbDateStruct | null) {
     this.range[1] = toDate;
     this.scheduleSearch$.next(Object.assign([], this.range));
   }
 
-  get toDate(): NgbDate | null {
+  get toDate(): NgbDateStruct | null {
     return this.range[1];
   }
 
@@ -83,7 +83,7 @@ export class SearchRangeDatepickerFilterComponent extends SearchRangeFilterCompo
    * {@link Subject} used to schedule search when editing date directly on input
    * @private
    */
-  private readonly scheduleSearch$ = new Subject<[NgbDate, NgbDate]>();
+  private readonly scheduleSearch$ = new Subject<[NgbDateStruct, NgbDateStruct]>();
 
   constructor(
     protected readonly calendar: NgbCalendar,
@@ -102,7 +102,7 @@ export class SearchRangeDatepickerFilterComponent extends SearchRangeFilterCompo
     super(searchService, filterService, router, rdbs, route, searchConfigService, inPlaceSearch, filterConfig, platformId, refreshFilters);
   }
 
-  public ngOnInit() {
+  public override ngOnInit() {
     super.ngOnInit();
     this.sub.add(
       this.scheduleSearch$
@@ -116,75 +116,53 @@ export class SearchRangeDatepickerFilterComponent extends SearchRangeFilterCompo
     );
   }
 
-  public ngOnDestroy() {
+  public override ngOnDestroy() {
     super.ngOnDestroy();
     this.scheduleSearch$.complete();
   }
 
-  protected initMin() {
+  protected override initMin() {
     this.min = null;
   }
 
-  protected initMax() {
+  protected override initMax() {
     this.max = null;
   }
 
-  protected initRange(minmax: [string, string]) {
-    this.range[0] = this.mapFromDate(minmax[0]);
-    this.range[1] = this.mapToDate(minmax[1]);
+  /**
+   * Check if the string representing the date is in the 'yyyy' format
+   * @param date the string representing the date
+   * @returns true if the date is a year
+   */
+  private isStringDateYear(date: string): boolean {
+    return /^\d{4}$/.test(date);
   }
 
-  /**
-   * maps the {@param date} as starting date
-   * @param date string that represents a date, its format can be one of these {@link dateFormats}
-   * @private
-   */
-  private mapToDate(date: string): NgbDate | null {
-    return this.formatMoment(this.toMoment(date, (m, unit) => m.endOf(unit)));
+  private parseFromDate(date: string) {
+    return this.isStringDateYear(date) ? `${date}-01-01` : date;
   }
 
-  /**
-   * maps the {@param date} as ending date
-   * @param date string that represents a date, its format can be one of these {@link dateFormats}
-   * @private
-   */
-  private mapFromDate(date: string): NgbDate | null {
-    return this.formatMoment(this.toMoment(date, (m, unit) => m.startOf(unit)));
+  private parseToDate(date: string) {
+    return this.isStringDateYear(date) ? `${date}-12-31` : date;
   }
 
-  /**
-   * formats the {@param m} {@link moment.Moment} to {@link NgbDate} used by the range input
-   * @param m
-   * @private
-   */
-  private formatMoment(m: moment.Moment): NgbDate | null {
-    return NgbDate.from(
-      this.formatter.parse(
-        m.format('yyyy-MM-DD')
-      )
-    );
-  }
+  protected override initRange(minmax: [string | null, string | null]) {
+    const fromDate = this.parseFromDate(minmax[0]);
+    const toDate = this.parseToDate(minmax[1]);
 
-  /**
-   * Maps a target {@param date} to a {@link moment.Moment} by using the mapping {@param func} if the date is not
-   * fully populated (doesn't respect the format `YYYY-MM-DD`)
-   * @param date string representing a date
-   * @param func mapping function to adequate a non-complete date
-   * @private
-   */
-  private toMoment(date: string, func: (m: moment.Moment, unitOfTime: unitOfTime.StartOf) => moment.Moment): moment.Moment {
-    let momentDate: moment.Moment | null = null;
-    const index = this.lastElementFormats
-      .findIndex((lastElem, i) => {
-        momentDate = moment(date, this.dateFormats[i], true);
-        return momentDate.isValid();
-      });
-    if (index !== -1) {
-      momentDate = func(momentDate, this.lastElementFormats[index]);
-    } else {
-      momentDate = moment(date, this.dateFormats);
+    if (isNotEmpty(fromDate) && fromDate !== 'null') {
+      this.range[0] = this.stringToNgbDateStruct(fromDate);
     }
-    return momentDate;
+    if (isNotEmpty(toDate) && toDate !== 'null') {
+      this.range[1] = this.stringToNgbDateStruct(toDate);
+    }
+  }
+
+  private stringToNgbDateStruct(stringDate: string): NgbDateStruct {
+    const date = new Date(stringDate);
+    const ngbDateStruct = dateToNgbDateStruct(date);
+    console.log('stringToNgbDateStruct', date, ngbDateStruct);
+    return ngbDateStruct;
   }
 
   /**
@@ -227,9 +205,19 @@ export class SearchRangeDatepickerFilterComponent extends SearchRangeFilterCompo
    * @param input date farmated in string
    * @returns the valid date or null otherwise
    */
-  validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
+  validateInput(currentValue: NgbDateStruct | null, input: string): NgbDateStruct | null { // TODO NgbDateStruct?
     const parsed = this.formatter.parse(input);
-    return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
+    if (
+      parsed == null &&
+      (
+        currentValue === this.fromDate && this.toDate != null ||
+        currentValue === this.toDate && this.fromDate != null
+      )
+    ) {
+      return null;
+    }
+    const ngbDate = NgbDate.from(parsed);
+    return this.calendar.isValid(ngbDate) ? ngbDate : currentValue;
   }
 
   /**
@@ -252,7 +240,7 @@ export class SearchRangeDatepickerFilterComponent extends SearchRangeFilterCompo
     }
   }
 
-  protected search(fromDate: NgbDate, toDate: NgbDate) {
+  protected override search(fromDate: NgbDateStruct, toDate: NgbDateStruct) {
     super.search(this.formatter.format(fromDate), this.formatter.format(toDate));
   }
 

@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Location } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { DOCUMENT, Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   Viewer,
@@ -7,15 +7,15 @@ import {
   ViewerProvider,
   ViewerProviderDsoInterface
 } from './viewer-provider-dso.interface';
-import { forkJoin, Observable, Subscription } from 'rxjs';
-import { filter, map, withLatestFrom } from 'rxjs/operators';
+import { combineLatest, Observable, of, Subscription } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { ViewerProviderDirective } from './directives/viewer-provider.directive';
-import { RouteService } from '../../core/services/route.service';
-import { ItemDataService } from '../../core/data/item-data.service';
 import { AuthService } from '../../core/auth/auth.service';
-import { Item } from '../../core/shared/item.model';
 import { Bitstream } from '../../core/shared/bitstream.model';
 import { fetchNonNull } from './utils/operators';
+import { BitstreamDataService } from '../../core/data/bitstream-data.service';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { BITSTREAM_VIEWER_LINKS_TO_FOLLOW } from './resolvers/bitstream-viewer.resolver';
 
 @Component({
   selector: 'ds-viewer-provider',
@@ -24,36 +24,36 @@ import { fetchNonNull } from './utils/operators';
 })
 export class ViewerProviderComponent implements OnInit, OnDestroy {
 
-  @ViewChild(ViewerProviderDirective, { static: true }) viewer!: ViewerProviderDirective;
+  @ViewChild(ViewerProviderDirective, {static: true}) viewer!: ViewerProviderDirective;
 
-  private readonly routeDSO$: Observable<ViewerProviderDsoInterface> = this.route.data;
-  private state$: Observable<ViewerInitialState>;
-  private bitstream$: Observable<Bitstream>;
-  private item$: Observable<Item>;
-  private viewer$: Observable<ViewerProvider>;
+  private routeDSO$: Observable<ViewerProviderDsoInterface> = this.route.data;
+  private bitstream$: Observable<Bitstream> = this.initBitstream$();
+  private item$ = this.initItem$();
+
+  private viewer$: Observable<ViewerProvider> = this.routeDSO$.pipe(
+    map(data => data.viewer),
+    filter(Object),
+  );
 
   private subscription: Subscription;
+  private isInitalLoad = true;
+
+  showBackButton = !this.location.path().includes('details');
 
   constructor(
+    @Inject(DOCUMENT) private document: Document,
     private readonly location: Location,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly routeService: RouteService,
-    private readonly items: ItemDataService,
     private readonly authService: AuthService,
-  ) {
-  }
+    private readonly bitstreamDataService: BitstreamDataService,
+  ) {}
 
   ngOnInit(): void {
-    this.item$ = this.initItem$();
-    this.bitstream$ = this.initBitstream$();
-    this.viewer$ = this.initViewer$();
-    this.state$ = this.initState$();
-    this.subscription =
-      this.viewer$.pipe(
-        withLatestFrom(this.state$)
-      )
-        .subscribe(([viewer, state]) => this.initViewerComponent(viewer, state));
+    this.subscription = combineLatest([this.viewer$, this.item$, this.bitstream$])
+      .subscribe(([viewer, item, bitstream]) =>
+        this.initViewerComponent(viewer, {item, bitstream})
+      );
   }
 
   public back(): void {
@@ -65,39 +65,66 @@ export class ViewerProviderComponent implements OnInit, OnDestroy {
   }
 
   private initViewerComponent(viewer: ViewerProvider, state: ViewerInitialState) {
-    const viewContainerRef = this.viewer.viewContainerRef;
-    viewContainerRef.clear();
-    let viewerComponentRef = viewContainerRef.createComponent<Viewer>(viewer);
-    viewerComponentRef.instance.initialize(state);
-    viewerComponentRef.changeDetectorRef.detectChanges();
+    const vcRef = this.viewer.viewContainerRef;
+    vcRef.clear();
+
+    const cmpRef = vcRef.createComponent<Viewer>(viewer);
+    cmpRef.instance.initialize(state);
+    cmpRef.changeDetectorRef.detectChanges();
+
+    this.scrollToViewer();
   }
 
-  private initState$() {
-    return forkJoin([this.item$, this.bitstream$])
-      .pipe(
-        map(([item, bitstream]) => ({ item, bitstream } as ViewerInitialState))
-      );
-  }
+  private initItem$() {
+    return this.route.data.pipe(
+      switchMap((data: ViewerProviderDsoInterface) => {
+        if (data.dso) {
+          return of(data.dso);
+        }
 
-  private initViewer$() {
-    return this.routeDSO$.pipe(
-      map(data => data.viewer),
-      filter(Object)
+        return this.route.parent.parent.data.pipe(
+          map((x: ViewerProviderDsoInterface) => x.dso)
+        );
+      }),
+      fetchNonNull(this.router, this.authService)
     );
   }
 
   private initBitstream$() {
-    return this.routeDSO$.pipe(
+    const bitstreamId$ = this.route.params.pipe(
+      map(params => params.bitstream_id as string),
+    );
+
+    const bitstreamFromResolver$ = this.routeDSO$.pipe(
       map(data => data.bitstream),
       fetchNonNull(this.router, this.authService)
     );
-  }
 
-  private initItem$() {
-    return this.routeDSO$.pipe(
-      map((data: ViewerProviderDsoInterface) => data.item),
-      fetchNonNull(this.router, this.authService)
+    // every time the bitstream id changes, we need to fetch the bitstream
+    // on the initial load, we use the bitstream from the resolver
+    return bitstreamId$.pipe(
+      switchMap((bitstreamId: string) => {
+        if (this.isInitalLoad) {
+          this.isInitalLoad = false;
+          return bitstreamFromResolver$;
+        }
+
+        return this.bitstreamDataService.findById(bitstreamId,
+          true,
+          false,
+          ...BITSTREAM_VIEWER_LINKS_TO_FOLLOW
+        ).pipe(
+          getFirstCompletedRemoteData(),
+          fetchNonNull(this.router, this.authService)
+        );
+      })
     );
   }
 
+  private scrollToViewer() {
+    if (!this.showBackButton && this.location.path().includes('viewer')) {
+      const element = this.document.getElementById('viewer');
+      element?.scrollIntoView({ block: 'end' });
+    }
+  }
 }

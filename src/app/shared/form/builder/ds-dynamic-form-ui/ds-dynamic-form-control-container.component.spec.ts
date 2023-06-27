@@ -80,6 +80,8 @@ import { FormService } from '../../form.service';
 import { SubmissionService } from '../../../../submission/submission.service';
 import { FormBuilderService } from '../form-builder.service';
 import { NgxMaskModule } from 'ngx-mask';
+import { APP_CONFIG } from '../../../../../config/app-config.interface';
+import { environment } from '../../../../../environments/environment';
 import { DynamicMarkdownModel } from './models/markdown/dynamic-markdown.model';
 import { DsDynamicMarkdownComponent } from './models/markdown/dynamic-markdown.component';
 
@@ -151,7 +153,9 @@ describe('DsDynamicFormControlContainerComponent test suite', () => {
     new DynamicListCheckboxGroupModel({
       id: 'checkboxList',
       vocabularyOptions: vocabularyOptions,
-      repeatable: true
+      repeatable: true,
+      hint: 'test hint',
+      required: false
     }),
     new DynamicListRadioGroupModel({
       id: 'radioList',
@@ -258,7 +262,8 @@ describe('DsDynamicFormControlContainerComponent test suite', () => {
             findById: () => observableOf(createSuccessfulRemoteDataObject(testWSI))
           }
         },
-        { provide: NgZone, useValue: new NgZone({}) }
+        { provide: NgZone, useValue: new NgZone({}) },
+        { provide: APP_CONFIG, useValue: environment }
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents().then(() => {

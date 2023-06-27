@@ -32,8 +32,11 @@ export enum FeatureID {
   CanSendFeedback = 'canSendFeedback',
   CanClaimItem = 'canClaimItem',
   CanSynchronizeWithORCID = 'canSynchronizeWithORCID',
+  CanSubmit = 'canSubmit',
+  CanEditItem = 'canEditItem',
+  CanRegisterDOI = 'canRegisterDOI',
+  CanSubscribe = 'canSubscribeDso',
   ShowClaimItem = 'showClaimItem',
   CanCorrectItem = 'canCorrectItem',
-  CanSubscribe = 'canSubscribeDso',
   CanCurate = 'canCurateItem'
 }

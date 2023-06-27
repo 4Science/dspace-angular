@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   listableObjectComponent
 } from '../../../../../object-collection/shared/listable-object/listable-object.decorator';
@@ -23,7 +23,7 @@ import { Context } from '../../../../../../core/shared/context.model';
 /**
  * The component for displaying a list element for an item search result of the type Publication
  */
-export class ItemSearchResultListElementComponent extends SearchResultListElementComponent<ItemSearchResult, Item> {
+export class ItemSearchResultListElementComponent extends SearchResultListElementComponent<ItemSearchResult, Item> implements OnInit {
 
   fullTextHighlights: string[];
 

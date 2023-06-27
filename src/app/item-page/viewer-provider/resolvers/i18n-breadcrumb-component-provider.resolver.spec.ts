@@ -7,7 +7,7 @@ describe('I18nBreadcrumbComponentProviderResolver', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    resolver = TestBed.inject(I18nBreadcrumbComponentProviderResolver);
+    resolver = new I18nBreadcrumbComponentProviderResolver(undefined);
   });
 
   it('should be created', () => {

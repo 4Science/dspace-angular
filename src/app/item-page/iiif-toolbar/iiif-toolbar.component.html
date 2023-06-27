@@ -1,9 +1,9 @@
-<ng-container>
-  <button class="btn btn-outline-primary" (click)="openMiradorViewer()">
+<ng-container *ngIf="iiifEnabled">
+  <button class="btn btn-outline-primary mb-1" (click)="openMiradorViewer()">
     <i class="custom-icon" id="mirador-icon"></i> {{ 'iiiftoolbar.mirador' | translate }}
   </button>
 
-  <div class="btn-group pl-3">
+  <div class="btn-group pl-3 mb-1">
     <button type="button" class="btn btn-outline-primary" (click)="iiif()">
       <i class="custom-icon" id="iiif-icon"></i> {{ 'iiiftoolbar.iiif.dropdown' | translate }}
     </button>
@@ -20,5 +20,4 @@
       </div>
     </div>
   </div>
-
 </ng-container>

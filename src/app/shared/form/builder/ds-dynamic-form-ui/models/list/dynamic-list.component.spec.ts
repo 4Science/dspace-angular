@@ -26,6 +26,7 @@ import {
   mockDynamicFormLayoutService,
   mockDynamicFormValidationService
 } from '../../../../../testing/dynamic-form-mock-services';
+import { TranslateModule } from '@ngx-translate/core';
 
 export const LAYOUT_TEST = {
   element: {
@@ -45,7 +46,8 @@ export const LIST_CHECKBOX_TEST_MODEL_CONFIG = {
   placeholder: 'Programme',
   readOnly: false,
   required: false,
-  repeatable: true
+  repeatable: true,
+  hint: 'hint',
 };
 
 export const LIST_RADIO_TEST_MODEL_CONFIG = {
@@ -83,7 +85,8 @@ describe('DsDynamicListComponent test suite', () => {
         DynamicFormsNGBootstrapUIModule,
         FormsModule,
         ReactiveFormsModule,
-        NgbModule
+        NgbModule,
+        TranslateModule.forRoot()
       ],
       declarations: [
         DsDynamicListComponent,
@@ -153,6 +156,34 @@ describe('DsDynamicListComponent test suite', () => {
         expect((listComp as any).optionsList).toEqual(vocabularyServiceStub.getList());
         expect(listComp.items.length).toBe(1);
         expect(listComp.items[0].length).toBe(2);
+      });
+
+      it('should display other checkbox list menu option', () => {
+        listComp.model.openType = true;
+        listFixture.detectChanges();
+        const deMenu = listFixture.debugElement.query(By.css('[data-test="otherListOptionRepeatable"]'));
+        expect(deMenu).toBeTruthy();
+      });
+
+      it('should not display other checkbox list menu option', () => {
+        listComp.model.openType = false;
+        listFixture.detectChanges();
+        const deMenu = listFixture.debugElement.query(By.css('[data-test="otherListOptionRepeatable"]'));
+        expect(deMenu).toBeFalsy();
+      });
+
+      it('should add other checkbox list option value', () => {
+        const selectedValue = Object.assign(new VocabularyEntry(), { authority: 3, display: 'three', value: 'three' });
+        spyOn((listComp as any), 'addListItem');
+        listComp.model.openType = true;
+
+        listFixture.detectChanges();
+        listComp.otherListEntry = selectedValue.value;
+        const btnEl = listFixture.debugElement.nativeElement.querySelector('#otherOptionBtn');
+
+        btnEl.click();
+        listFixture.detectChanges();
+        expect((listComp as any).addListItem).toHaveBeenCalled();
       });
 
       it('should set model value properly when a checkbox option is selected', () => {
@@ -241,6 +272,36 @@ describe('DsDynamicListComponent test suite', () => {
         expect((listComp as any).optionsList).toEqual(vocabularyServiceStub.getList());
         expect(listComp.items.length).toBe(1);
         expect(listComp.items[0].length).toBe(2);
+      });
+
+      it('should display other radio list menu option', () => {
+        listComp.model.openType = true;
+        listFixture.detectChanges();
+        const deMenu = listFixture.debugElement.query(By.css('[data-test="otherListOptionNonRepeatable"]'));
+        expect(deMenu).toBeTruthy();
+      });
+
+      it('should not display other radio list menu option', () => {
+        listComp.model.openType = false;
+        listFixture.detectChanges();
+        const deMenu = listFixture.debugElement.query(By.css('[data-test="otherListOptionNonRepeatable"]'));
+        expect(deMenu).toBeFalsy();
+      });
+
+      it('should add other radio list option value', () => {
+        const selectedValue = Object.assign(new VocabularyEntry(), { authority: 3, display: 'three', value: 'three' });
+        spyOn((listComp as any), 'addListItem');
+        listComp.model.openType = true;
+
+        listFixture.detectChanges();
+        listComp.otherListEntry = selectedValue.value;
+        const btnEl = listFixture.debugElement.nativeElement.querySelector('#otherOptionBtn');
+
+        btnEl.click();
+        listFixture.detectChanges();
+        expect((listComp as any).addListItem).toHaveBeenCalled();
+        listFixture.detectChanges();
+        console.log(listComp);
       });
 
       it('should set model value when a radio option is selected', () => {

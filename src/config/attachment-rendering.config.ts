@@ -2,7 +2,7 @@
  * Interface configuration to show/hide advnaced attachment informations
  */
 export interface AttachmentRenderingConfig {
-  pagination: AttachmentRenderingPaginationConfig
+  pagination: AttachmentRenderingPaginationConfig;
 }
 
 export interface AttachmentRenderingPaginationConfig {

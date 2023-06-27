@@ -12,6 +12,7 @@ export interface DynamicListModelConfig extends DynamicRadioGroupModelConfig<any
   groupLength?: number;
   repeatable: boolean;
   value?: any;
+  openType?: boolean;
 }
 
 export class DynamicListRadioGroupModel extends DynamicRadioGroupModel<any> {
@@ -19,6 +20,7 @@ export class DynamicListRadioGroupModel extends DynamicRadioGroupModel<any> {
   @serializable() vocabularyOptions: VocabularyOptions;
   @serializable() repeatable: boolean;
   @serializable() groupLength: number;
+  @serializable() openType: boolean;
   isListGroup = true;
 
   constructor(config: DynamicListModelConfig, layout?: DynamicFormControlLayout) {
@@ -28,6 +30,7 @@ export class DynamicListRadioGroupModel extends DynamicRadioGroupModel<any> {
     this.groupLength = config.groupLength || 5;
     this.repeatable = config.repeatable;
     this.value = config.value;
+    this.openType = config.openType;
   }
 
   get hasAuthority(): boolean {

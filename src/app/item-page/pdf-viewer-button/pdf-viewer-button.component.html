@@ -1,0 +1,3 @@
+<button *ngIf="canOpenPdf$ | async" class="btn btn-outline-primary w-50" (click)="openPdfViewer()">
+  <i class="custom-icon" id="pdf-icon"></i> {{ 'cris-layout.advanced-attachment.view-pdf' | translate }}
+</button>

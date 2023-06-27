@@ -14,6 +14,7 @@ import { EditCmsMetadataComponent } from './edit-cms-metadata/edit-cms-metadata.
 import { MarkdownEditorModule } from '../shared/markdown-editor/markdown-editor.module';
 import { BatchImportPageComponent } from './admin-import-batch-page/batch-import-page.component';
 import { UiSwitchModule } from 'ngx-ui-switch';
+import { UploadModule } from '../shared/upload/upload.module';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -30,8 +31,9 @@ const ENTRY_COMPONENTS = [
     AdminSearchModule.withEntryComponents(),
     AdminWorkflowModuleModule.withEntryComponents(),
     MarkdownEditorModule,
-    SharedModule,
-    UiSwitchModule
+    UiSwitchModule,
+    UploadModule,
+    MarkdownEditorModule
   ],
   declarations: [
     AdminCurationTasksComponent,

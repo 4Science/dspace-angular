@@ -45,6 +45,8 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
   public loading = false;
   public pageInfo: PageInfo;
   public optionsList: VocabularyEntry[] = [];
+  public otherListEntry = '';
+  public addButoonDisabled = false;
 
 
   /**
@@ -148,6 +150,7 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
     this.group.markAsDirty();
     this.dispatchUpdate(event);
     this.setCurrentValue(event);
+    this.otherListEntry = '';
   }
 
   /**
@@ -215,8 +218,59 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
           list.pageInfo.totalElements,
           list.pageInfo.totalPages
         );
+        const currentValue: any = this.model.value;
+        if (currentValue?.display?.length > 0 && this.pageInfo.currentPage === this.pageInfo.totalPages) {
+          const presentObject = this.optionsList.filter(element => element.display === currentValue.display);
+          if (presentObject.length === 0) {
+            const object = this.createVocabularyObject(currentValue.display, currentValue.value, undefined);
+            this.optionsList.push(object);
+          }
+        }
         this.cdr.detectChanges();
       });
+  }
+
+  /**
+   * Add the Value to List Dropdown.
+   */
+  addListItem(sdRef: NgbDropdown) {
+    let entryCount = 0;
+    this.addButoonDisabled = true;
+    if (this.otherListEntry.toString() !== '') {
+      if (this.optionsList.length > 0) {
+        this.optionsList.forEach(element => {
+          if ((element.display.toLowerCase() === this.otherListEntry.toLowerCase()) ||
+              (element.value?.toLowerCase() === this.otherListEntry.toLowerCase()) ||
+              (this.otherListEntry.toLowerCase() === 'other')) {
+            entryCount++;
+          }
+        });
+      }
+      if (entryCount === 0) {
+        const object = this.createVocabularyObject(this.otherListEntry, this.otherListEntry, undefined);
+        this.optionsList.push(object);
+        this.onSelect(object);
+        sdRef.close();
+        this.addButoonDisabled = false;
+      } else {
+        this.addButoonDisabled = false;
+      }
+    } else {
+      this.addButoonDisabled = false;
+    }
+  }
+
+  /**
+   * Create a vocabulary object.
+   */
+  createVocabularyObject(display, value, otherInformation) {
+    const object = Object.assign(new VocabularyEntry(),this.model.value, {
+      value: value,
+      display: display,
+      otherInformation: otherInformation,
+      type: 'vocabularyEntry'
+    });
+    return object;
   }
 
   ngOnDestroy() {

@@ -47,13 +47,24 @@
          (scrolled)="onScroll()"
          [scrollWindow]="false">
 
-      <button class="dropdown-item disabled" *ngIf="optionsList && optionsList.length == 0">{{'form.no-results' | translate}}</button>
+      <button class="dropdown-item disabled" *ngIf="optionsList && optionsList.length == 0">
+        {{'form.no-results' | translate}}
+      </button>
       <button class="dropdown-item collection-item text-truncate" *ngFor="let listEntry of optionsList"
               (click)="onSelect(listEntry); sdRef.close()" (mousedown)="onSelect(listEntry); sdRef.close()"
               title="{{ listEntry.display }}" role="option"
               [attr.id]="listEntry.display == (currentValue|async) ? ('combobox_' + id + '_selected') : null">
         {{inputFormatter(listEntry)}}
       </button>
+      <div class="d-flex align-items-center pl-4 pr-3 py-2" id="otherOption"
+           *ngIf="model.openType && (pageInfo.currentPage >= pageInfo.totalPages)">
+        <label class="m-0">{{'form.other-option' | translate}}</label>
+        <input id="otherOptionInput" type="text" class="form-control form-control-sm mx-2" [(ngModel)]="otherListEntry" (keyup.enter)="addListItem(sdRef)" />
+        <button id="otherOptionBtn" class="btn btn-primary btn-sm" type="button"
+                (click)="addListItem(sdRef)" [disabled]="addButoonDisabled">
+          {{'form.other-option.add-button' | translate}}
+        </button>
+      </div>
       <div class="scrollable-dropdown-loading text-center" *ngIf="loading"><p>{{'form.loading' | translate}}</p></div>
     </div>
 
