@@ -141,6 +141,7 @@ import {
   AttachmentRenderingModule
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/advanced-attachment/bitstream-attachment/attachment-render/attachment-rendering.module';
 import { FormModule } from '../shared/form/form.module';
+import { BackgroundComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/background/background.component';
 
 const ENTRY_COMPONENTS = [
   CrisLayoutVerticalComponent,
@@ -199,6 +200,7 @@ const ENTRY_COMPONENTS = [
     MetadataRenderComponent,
     MarkdownComponent,
     BitstreamAttachmentComponent,
+    BackgroundComponent,
     AttachmentRenderComponent,
   ],
   providers:[ LoadMoreService, NgbActiveModal ],
