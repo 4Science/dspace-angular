@@ -174,6 +174,7 @@ const ENTRY_COMPONENTS = [
   SearchComponent,
   TagSearchComponent,
   AdvancedAttachmentComponent,
+  BackgroundComponent
 ];
 
 @NgModule({
@@ -200,7 +201,6 @@ const ENTRY_COMPONENTS = [
     MetadataRenderComponent,
     MarkdownComponent,
     BitstreamAttachmentComponent,
-    BackgroundComponent,
     AttachmentRenderComponent,
   ],
   providers:[ LoadMoreService, NgbActiveModal ],
