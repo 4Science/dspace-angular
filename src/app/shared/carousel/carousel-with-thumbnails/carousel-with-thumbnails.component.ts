@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CarouselComponent } from '../carousel.component';
-import { NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
+import { NgbSlideEvent } from '@ng-bootstrap/ng-bootstrap';
 import { ItemSearchResult } from '../../object-collection/shared/item-search-result.model';
 
 @Component({
