@@ -1,9 +1,5 @@
 {
 
-  // "Biography": "English Biography",
-  // TODO New key - Add a translation
-  "Biography": "English Biography",
-
   // "401.help": "You're not authorized to access this page. You can use the button below to get back to the home page.",
   "401.help": "आप इस पृष्ठ का प्रयोग करने की अनुमति नहीं हैं। होम पेज पर वापस जाने के लिए आप नीचे दिए गए बटन का उपयोग कर सकते हैं।",
 
