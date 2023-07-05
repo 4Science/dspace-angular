@@ -1003,15 +1003,24 @@
   //  FATTO!"admin.workflow.item.workflow": "Workflow",
   "admin.workflow.item.workflow": "Workflow",
 
+  //  FATTO!"admin.workflow.item.delete": "Delete",
+  "admin.workflow.item.delete": "Cancella ",
+
   //  FATTO!"admin.workflow.item.send-back": "Send back",
   "admin.workflow.item.send-back": "Rinvia ",
+
+  //  FATTO!"admin.metadata-import.breadcrumbs": "Import Metadata",
+  "admin.metadata-import.breadcrumbs": "Importa metadati",
+
+  //  FATTO!"admin.metadata-import.title": "Import Metadata",
+  "admin.metadata-import.title": "Importa metadati",
+
+  //  FATTO!"admin.metadata-import.page.header": "Import Metadata",
+  "admin.metadata-import.page.header": "Importa metadati",
 
   // "admin.workflow.item.workspace": "Workspace",
   // TODO New key - Add a translation
   "admin.workflow.item.workspace": "Workspace",
-
-  // "admin.workflow.item.delete": "Delete",
-  "admin.workflow.item.delete": "Cancellare",
 
   // FATTO!"admin.metadata-import.page.button.return": "Back",
   // "admin.workflow.item.policies": "Policies",
@@ -1021,17 +1030,6 @@
   // "admin.workflow.item.supervision": "Supervision",
   // TODO New key - Add a translation
   "admin.workflow.item.supervision": "Supervision",
-
-
-
-  // "admin.metadata-import.breadcrumbs": "Import Metadata",
-  "admin.metadata-import.breadcrumbs": "Importare metadati",
-
-  // "admin.metadata-import.title": "Import Metadata",
-  "admin.metadata-import.title": "Importare metadati",
-
-  // "admin.metadata-import.page.header": "Import Metadata",
-  "admin.metadata-import.page.header": "Importare metadati",
 
   // "admin.metadata-import.page.help": "You can drop or browse CSV files that contain batch metadata operations on files here",
   "admin.metadata-import.page.help": "È possibile eliminare o sfogliare i file CSV che contengono operazioni di metadati batch sui file qui",
@@ -1562,8 +1560,6 @@
   // TODO New key - Add a translation
   "search.browse.item-back": "Back to Results",
 
-
-
   // "bulk-import.abort-on-error" : "Abort on first error",
   "bulk-import.abort-on-error" : "Interrompere al primo errore",
 
@@ -1619,7 +1615,6 @@
   // "claimed-declined-task-search-result-list-element.title": "Declined, sent back to Review Manager's workflow",
   // TODO New key - Add a translation
   "claimed-declined-task-search-result-list-element.title": "Declined, sent back to Review Manager's workflow",
-
 
   // FATTO!"collection.create.notifications.success": "Successfully created the Collection",
   "collection.create.notifications.success": "Creata con successo la collection",
@@ -2253,8 +2248,6 @@
   // TODO New key - Add a translation
   "comcol-role.edit.scorereviewers.description": "Reviewers are able to give a score to incoming submissions, this will define whether the submission will be rejected or not.",
 
-
-
   // "community.form.abstract": "Short Description",
   "community.form.abstract": "Breve descrizione",
 
@@ -2465,7 +2458,6 @@
   // "datapackage.listelement.badge": "Data Package",
   "datapackage.listelement.badge": "Data Package",
 
-
   // "checksum-tooltip.info.MD5": "The <b>MD5 message-digest algorithm</b> can be used to verify the integrity of the file that you have uploaded. You can calculate its value locally via tools that are generally available in each operative system like <b>md5sum</b>",
   // TODO New key - Add a translation
   "checksum-tooltip.info.MD5": "The <b>MD5 message-digest algorithm</b> can be used to verify the integrity of the file that you have uploaded. You can calculate its value locally via tools that are generally available in each operative system like <b>md5sum</b>",
@@ -2579,8 +2571,6 @@
   // "cookies.consent.app.description.google-analytics": "Allows us to track statistical data",
   "cookies.consent.app.description.google-analytics": "Ci permette di tracciare i dati statistici",
 
-
-
   // "cookies.consent.app.title.google-recaptcha": "Google reCaptcha",
   // TODO New key - Add a translation
   "cookies.consent.app.title.google-recaptcha": "Google reCaptcha",
@@ -2588,7 +2578,6 @@
   // "cookies.consent.app.description.google-recaptcha": "We use google reCAPTCHA service during registration and password recovery",
   // TODO New key - Add a translation
   "cookies.consent.app.description.google-recaptcha": "We use google reCAPTCHA service during registration and password recovery",
-
 
   // "cookies.consent.purpose.functional": "Functional",
   "cookies.consent.purpose.functional": "Funzionale",
@@ -2603,11 +2592,9 @@
   // "cookies.consent.purpose.sharing": "Sharing",
   "cookies.consent.purpose.sharing": "Condivisione",
 
-
   // "curation-task.task.citationpage.label":  "Generate Citation Page",
   // TODO New key - Add a translation
   "curation-task.task.citationpage.label":  "Generate Citation Page",
-
 
   // "cris-layout.toggle.open": "Open section",
   "cris-layout.toggle.open": "Apri sezione",
@@ -2683,8 +2670,6 @@
   // "curation-task.task.register-doi.label": "Register DOI",
   // TODO New key - Add a translation
   "curation-task.task.register-doi.label": "Register DOI",
-
-
 
   // "curation.form.task-select.label": "Task:",
   "curation.form.task-select.label": "Task:",
@@ -3460,6 +3445,7 @@
   "forgot-password.form.submit": "Invia password",
 
 
+
   // "form.add": "Add more",
   "form.add": "Aggiungi altro",
 
@@ -3878,8 +3864,6 @@
 
   // "item.curate.header": "Curate Item: {{item}}",
   "item.curate.header": "Curate Item: {{item}}",
-
-
 
   // "item.edit.bitstreams.bundle.edit.buttons.upload": "Upload",
   "item.edit.bitstreams.bundle.edit.buttons.upload": "Carica",
@@ -4613,6 +4597,9 @@
 
   // "item.search.results.head": "Item Search Results",
   "item.search.results.head": "Risultati della ricerca degli item",
+
+  // "additions.search.results.head": "Recent Additions Search Results",
+  "additions.search.results.head": "Risultati della ricerca delle nuove accessioni",
 
   // "item.search.title": "Item Search",
   "item.search.title": "Ricerca articoli",
@@ -5584,6 +5571,7 @@
   // "manage.relationships.no.data.found" : "No data found",
   "manage.relationships.no.data.found" : "Nessun dato trovato",
 
+
   // "menu.header.admin": "Management",
   "menu.header.admin": "Gestione",
 
@@ -5667,9 +5655,6 @@
 
   // "menu.section.communities_and_collections": "Communities & Collections",
   "menu.section.communities_and_collections": "Community & Collezioni",
-
-  "menu.section.explore_sectionaggregations" : "Collezioni",
-  "menu.section.explore_sectiondocuments" : "Documenti e altri materiali",
 
   // "menu.section.control_panel": "Control Panel",
   "menu.section.control_panel": "Pannello di controllo",
@@ -9815,6 +9800,7 @@
   "submission.workspace.generic.view-help": "Seleziona questa opzione per vedere i metadata dell'item.",
 
 
+
   // "subscriptions.title": "Subscriptions",
   "subscriptions.title": "Sottoscrizioni",
 
@@ -9949,6 +9935,7 @@
   // "subscriptions.table.empty.message": "You do not have any subscriptions at this time. To subscribe to email updates for a Community or Collection, use the subscription button on the object's page.",
   // TODO Source message changed - Revise the translation
   "subscriptions.table.empty.message": "Non hai ancora sottoscritto alcuna notifica. Per sottoscrivere la notifica relativa a un oggetto, usa il menu contestuale nella pagina di dettaglio dell'oggetto",
+
 
 
   // "thumbnail.default.alt": "Thumbnail Image",
@@ -11396,7 +11383,7 @@
   "layout.field.label.JournalFonds.glamfonds.shelfmark": "Segnatura",
 
   //"layout.field.label.JournalFonds.dc.relation.journalfonds": "Related Journal Fonds",
-  "layout.field.label.JournalFonds.glamjouurnalfonds.relation.journalfonds": "Testate Correlate",
+  "layout.field.label.JournalFonds.glamjournalfonds.relation.journalfonds": "Testate Correlate",
 
   //"layout.field.label.JournalFonds.glamjournalfonds.ownedyears": "Owned Years",
   // TODO Source message changed - Revise the translation
@@ -11979,7 +11966,7 @@
   "explore.counters-section.journalfonds" : "Testate",
 
   //"explore.index.aggregation" : "Aggregation",
-  "explore.index.aggregation" : "Aggregazione",
+  "explore.index.aggregation" : "Aggragazione",
 
   //"explore.index.dateissuedA" : "Date",
   "explore.index.dateissuedA" : "Data",
@@ -12130,6 +12117,12 @@
 
   //"menu.section.archive.sectionfonds": "Fonds",
   "menu.section.archive.sectionfonds": "Fondi",
+
+  //"menu.section.explore_sectionaggregations" : "Aggregations",
+  "menu.section.explore_sectionaggregations" : "Aggregazioni",
+
+  //"menu.section.explore_sectiondocuments" : "Documents & Other materials",
+  "menu.section.explore_sectiondocuments" : "Risorse",
 
   //"menu.section.explore_sectionfonds" : "Fonds",
   "menu.section.explore_sectionfonds" : "Fondi",

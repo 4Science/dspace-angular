@@ -4112,7 +4112,7 @@
 
   "menu.section.archive.sectionfonds": "Fonds",
 
-  "menu.section.archive.sectionaggregations": "Collections",
+  "menu.section.archive.sectionaggregations": "Aggregations",
 
   "menu.section.archive.sectiondocuments": "Archive Materials & Inscriptions",
 
@@ -7527,11 +7527,11 @@
   "menu.section.explore_sectionfonds" : "Fonds",
   "menu.section.explore_sectionjournalfonds" : "Journal Fonds",
 
-  "menu.section.explore_sectionaggregations" : "Collections",
+  "menu.section.explore_sectionaggregations" : "Aggregations",
   "menu.section.explore_sectiondocuments" : "Documents & Other materials",
   "explore.counters-section.fonds" : "Fonds",
   "explore.counters-section.journalfonds" : "Journal Fonds",
-  "explore.counters-section.aggregations" : "Collections",
+  "explore.counters-section.aggregations" : "Aggregations",
   "explore.counters-section.documents" : "Documents & Other materials",
 
   "explore.index.titleF" : "Title",
@@ -7547,10 +7547,9 @@
   "explore.index.dateissuedA" : "Date",
   "explore.index.subjectA" : "Subject",
   "explore.index.path" : "Path",
-
-  "explore.index.fond" : "Fond",
-  "explore.index.journalfond" : "Journal Fond",
-  "explore.index.aggregation" : "Collection",
+  "explore.index.fonds" : "Fonds",
+  "explore.index.journalfonds" : "Journal Fonds",
+  "explore.index.aggregation" : "Aggregation",
 
   "explore.search-section.sectiondocuments.title" : "Search Documents & Other materials",
 
@@ -7558,19 +7557,19 @@
 
   "explore.search-section.sectionjournalfonds.title" : "Search Journal fonds",
 
-  "explore.search-section.sectionaggregations.title" : "Search Collections",
+  "explore.search-section.sectionaggregations.title" : "Search Aggregations",
 
   "explore.sectiondocuments.breadcrumbs": "Documents & Other materials",
 
   "explore.sectionfonds.breadcrumbs": "Fonds",
   "explore.sectionjournalfonds.breadcrumbs": "Journal Fonds",
-  "path.search.results.head": "Paths Search Results",
-  "additions.search.results.head": "Recent Additions Search Results",
-  "explore.sectionaggregations.breadcrumbs": "Collections",
+  "explore.sectionaggregations.breadcrumbs": "Aggregations",
   "documents.search.results.head": "Documents & Other materials Search Results",
   "fonds.search.results.head": "Fonds Search Results",
   "journalfonds.search.results.head": "Journal Fonds Search Results",
-  "aggregations.search.results.head": "Collections Search Results",
+  "aggregations.search.results.head": "Aggregations Search Results",
+  "path.search.results.head": "Paths Search Results",
+  "additions.search.results.head": "Recent Additions Search Results",
   "search.filters.filter.path.head": "Path",
   "search.filters.filter.path.placeholder": "Path name",
   "search.filters.filter.path.label": "Search Path name",
@@ -7583,30 +7582,16 @@
   "search.filters.filter.journalfonds.placeholder": "Journal Fonds name",
   "search.filters.filter.journalfonds.label": "Search Journal Fonds name",
   "search.filters.applied.f.journalfonds": "Journal Fonds",
+  "search.filters.filter.aggregation.head": "Aggregation",
+  "search.filters.filter.aggregation.placeholder": "Aggregation name",
+  "search.filters.filter.aggregation.label": "Search Aggregation name",
+  "search.filters.applied.f.aggregation": "Aggregation",
   "submission.sections.submit.progressbar.describe.archival_material": "Archival Material Basic Information",
 
   "submission.sections.submit.progressbar.describe.archival_material_indexing": "Archival Material Indexing Information",
   "submission.sections.submit.progressbar.describe.archival_material_references": "Archival Material Contextual References",
 
   "submission.sections.submit.progressbar.describe.fonds": "Fonds Details",
-  "search.filters.filter.fond.head": "Fond",
-  "search.filters.filter.fond.placeholder": "Fond name",
-  "search.filters.filter.fond.label": "Search Fond name",
-  "search.filters.applied.f.fond": "Fond",
-  "search.filters.filter.journalfond.head": "Journal Fond",
-  "search.filters.filter.journalfond.placeholder": "Journal Fond name",
-  "search.filters.filter.journalfond.label": "Search Journal Fond name",
-  "search.filters.applied.f.journalfond": "Journal Fond",
-  "search.filters.filter.aggregation.head": "Collection",
-  "search.filters.filter.aggregation.placeholder": "Collection name",
-  "search.filters.filter.aggregation.label": "Search Collection name",
-  "search.filters.applied.f.aggregation": "Collection",
-  "submission.sections.submit.progressbar.describe.archival_materials": "Archival Materials Basic Information",
-
-  "submission.sections.submit.progressbar.describe.archival_materials_indexing": "Archival Materials Indexing Information",
-  "submission.sections.submit.progressbar.describe.archival_materials_references": "Archival Materials Contextual References",
-
-  "submission.sections.submit.progressbar.describe.fond": "Fond Details",
 
   "submission.sections.submit.progressbar.describe.place": "Place Details",
 
@@ -7621,14 +7606,6 @@
   "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-relation-person": "Journal Fonds Person",
 
   "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-relation-journalfonds": "Journal Fonds Relation",
-
-  "submission.sections.submit.progressbar.describe.journal_fond": "Journal Fond Details",
-
-  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-history": "Journal Fond History",
-
-  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-relation-person": "Journal Fond Person",
-
-  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-relation-journalfond": "Journal Fond Relation",
 
   "submission.sections.submit.progressbar.describe.path": "Path Details",
 
@@ -7657,7 +7634,6 @@
   "submission.sections.submit.progressbar.describe.scientificmaterial_references": "Scientific Material Contextual References",
 
   "submission.sections.submit.progressbar.describe.journal_file": "Journal File Details",
-  "submission.sections.submit.progressbar.describe.journal_issue": "Journal Issue Details",
 
   "map.coordinates-invalid": "Coordinates are not valid",
 
@@ -7667,13 +7643,15 @@
 
   "curation-task.task.pushocr.label": "Send OCR to the Annotation Server",
 
+  "curation-task.task.pushocr.force.label": "Clean OCR from the Annotation Server and send again",
+
   "curation-task.task.ocrclean.label": "Remove all metadata bundles and uploaded ocr created by a previous upload to the ocr server",
 
   "vocabulary-treeview.header.fondsboxtree": "Fonds Tree",
 
   "vocabulary-treeview.header.journalfondsboxtree": "Journal Fonds Tree",
 
-  "curation-task.task.pushocr.force.label": "Clean OCR from the Annotation Server and send again",
+  "vocabulary-treeview.header.aggregationboxtree": "Aggregation Tree",
 
   "curation-task.task.iiifuploader.label": "Upload images to the IIIF Image Server (photo gallery)",
 
@@ -7759,11 +7737,4 @@
   "admin.system-wide-alert.breadcrumbs": "System-wide Alerts",
 
   "admin.system-wide-alert.title": "System-wide Alerts",
-
-
-  "vocabulary-treeview.header.fondboxtree": "Fond Tree",
-
-  "vocabulary-treeview.header.journalfondboxtree": "Journal Fond Tree",
-
-  "vocabulary-treeview.header.aggregationboxtree": "Collection Tree"
 }
