@@ -37,6 +37,9 @@ export interface MetadataBoxConfiguration extends BoxConfiguration {
 export interface BoxConfiguration {
   type: string;
 }
+export interface MediaBoxConfiguration extends BoxConfiguration {
+  'media-configuration': string;
+}
 
 export interface RelationBoxConfiguration extends BoxConfiguration {
   'discovery-configuration': string;
@@ -91,6 +94,6 @@ export class CrisLayoutBox {
 
   boxType: string;
 
-  configuration?: RelationBoxConfiguration | MetadataBoxConfiguration | MetricsBoxConfiguration;
+  configuration?: RelationBoxConfiguration | MetadataBoxConfiguration | MetricsBoxConfiguration | MediaBoxConfiguration;
 
 }

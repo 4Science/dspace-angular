@@ -3,7 +3,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PdfViewerButtonComponent } from './pdf-viewer-button.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
+import {
+  AuthorizationDataService
+} from '../../../../../../../../../../../core/data/feature-authorization/authorization-data.service';
 import { of } from 'rxjs';
 import { CommonModule } from '@angular/common';
 

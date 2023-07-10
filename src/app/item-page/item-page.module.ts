@@ -111,7 +111,7 @@ const DECLARATIONS = [
     DsoPageModule,
     CrisItemPageModule,
     ContextMenuModule.withEntryComponents(),
-    MiradorViewerModule
+    MiradorViewerModule,
   ],
   declarations: [
     ...DECLARATIONS,

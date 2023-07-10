@@ -48,6 +48,7 @@ const routes: Routes = [
       { path: 'pdf', component: ViewerProviderComponent },
       { path: 'audio', component: ViewerProviderComponent },
       { path: 'video', component: ViewerProviderComponent },
+      { path: 'media', component: ViewerProviderComponent },
     ]
   }
 ];

@@ -50,10 +50,12 @@ export interface CrisLoadMoreConfig extends Config {
   first: number;
   last: number;
 }
+
 export interface CrisRefStyleMetadata extends Config {
   [metadata: string]: string;
   default: string;
 }
+
 
 export interface CrisLayoutConfig extends Config {
   urn: UrnConfig[];

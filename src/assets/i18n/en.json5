@@ -5137,6 +5137,7 @@
 
   "media-viewer.playlist": "Playlist",
 
+  "media-viewer.play": "Play",
 
   "register-email.title": "New user registration",
 
@@ -7041,6 +7042,8 @@
 
 
   "viewer.provider.iiif.breadcrumbs": "Mirador Viewer",
+
+  "viewer.provider.media.breadcrumbs": "Player",
 
   "viewer.provider.pdf.breadcrumbs": "PDF Viewer",
 

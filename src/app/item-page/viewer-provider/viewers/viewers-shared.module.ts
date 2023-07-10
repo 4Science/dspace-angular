@@ -5,10 +5,13 @@ import { PdfBitstreamViewerComponent } from './bitstream-viewers/pdf-bitstream-v
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import { MiradorViewerModule } from '../../mirador-viewer/mirador-viewer.module';
 import { SharedModule } from '../../../shared/shared.module';
+import { MediaItemViewerComponent } from './item-viewers/media-item-viewer/media-item-viewer.component';
+import { MediaPlayerModule } from '../../../shared/media-player/media-player.module';
 
 const COMPONENTS = [
   IIIFItemViewerComponent,
-  PdfBitstreamViewerComponent
+  PdfBitstreamViewerComponent,
+  MediaItemViewerComponent
 ];
 
 @NgModule({
@@ -19,7 +22,8 @@ const COMPONENTS = [
     CommonModule,
     PdfJsViewerModule,
     MiradorViewerModule,
-    SharedModule
+    SharedModule,
+    MediaPlayerModule
   ],
   exports: [
     ...COMPONENTS

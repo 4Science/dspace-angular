@@ -16,19 +16,19 @@
   }
 
   i#mirador-icon {
-    background-image: url('/assets/images/mirador-logo-dark.svg');
+    background-image: url('/src/assets/images/mirador-logo-dark.svg');
   }
 
   i#iiif-icon {
-    background-image: url('/assets/images/iiif-logo.svg');
+    background-image: url('/src/assets/images/iiif-logo.svg');
   }
 
   button:hover {
     i#mirador-icon {
-      background-image: url('/assets/images/mirador-logo.svg');
+      background-image: url('/src/assets/images/mirador-logo.svg');
     }
     i#iiif-icon {
-      background-image: url('/assets/images/iiif-logo-white.svg');
+      background-image: url('/src/assets/images/iiif-logo-white.svg');
     }
 
   }

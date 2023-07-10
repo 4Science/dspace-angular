@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { NgbAccordionModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { SharedModule } from '../shared/shared.module';
-import { MetricsModule } from './../shared/metric/metrics.module';
+import { MetricsModule } from '../shared/metric/metrics.module';
 
 import { CrisLayoutLoaderDirective } from './directives/cris-layout-loader.directive';
 import { CrisLayoutComponent } from './cris-layout.component';
@@ -142,6 +142,10 @@ import {
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/advanced-attachment/bitstream-attachment/attachment-render/attachment-rendering.module';
 import { FormModule } from '../shared/form/form.module';
 import { BackgroundComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/background/background.component';
+import {
+  CrisLayoutMediaBoxComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/media-box/cris-layout-media-box.component';
+import { MediaPlayerModule } from '../shared/media-player/media-player.module';
 
 const ENTRY_COMPONENTS = [
   CrisLayoutVerticalComponent,
@@ -174,7 +178,8 @@ const ENTRY_COMPONENTS = [
   SearchComponent,
   TagSearchComponent,
   AdvancedAttachmentComponent,
-  BackgroundComponent
+  BackgroundComponent,
+  CrisLayoutMediaBoxComponent,
 ];
 
 @NgModule({
@@ -222,7 +227,8 @@ const ENTRY_COMPONENTS = [
     ViewersSharedModule,
     MetricsModule,
     AttachmentRenderingModule,
-    FormModule
+    FormModule,
+    MediaPlayerModule
   ],
   exports: [
     CrisLayoutComponent,

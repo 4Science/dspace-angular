@@ -2,19 +2,18 @@ import { Component, Input, OnInit } from '@angular/core';
 import {
   getBitstreamItemViewerDetailsPath,
   getBitstreamItemViewerPath
-} from '../item-page-routing-paths';
+} from '../../../../../../../../../../../item-page/item-page-routing-paths';
 import { Router } from '@angular/router';
-import { Item } from '../../core/shared/item.model';
-import { Bitstream } from '../../core/shared/bitstream.model';
-import {
-  AttachmentRenderingType,
-  AttachmentTypeRendering
-} from '../../cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/advanced-attachment/bitstream-attachment/attachment-type.decorator';
-import { FeatureID } from '../../core/data/feature-authorization/feature-id';
-import { isNotEmpty } from '../../shared/empty.util';
+import { Item } from '../../../../../../../../../../../core/shared/item.model';
+import { Bitstream } from '../../../../../../../../../../../core/shared/bitstream.model';
+import { AttachmentRenderingType, AttachmentTypeRendering } from '../../../attachment-type.decorator';
+import { FeatureID } from '../../../../../../../../../../../core/data/feature-authorization/feature-id';
+import { isNotEmpty } from '../../../../../../../../../../../shared/empty.util';
 import { Observable } from 'rxjs';
-import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
-import { environment } from '../../../environments/environment';
+import {
+  AuthorizationDataService
+} from '../../../../../../../../../../../core/data/feature-authorization/authorization-data.service';
+import { environment } from '../../../../../../../../../../../../environments/environment';
 
 @Component({
   selector: 'ds-pdf-viewer-button',
