@@ -13,6 +13,7 @@ import { FeatureID } from '../../../../../../../../../../../core/data/feature-au
 import { isNotEmpty } from '../../../../../../../../../../../shared/empty.util';
 import { AuthorizationDataService } from '../../../../../../../../../../../core/data/feature-authorization/authorization-data.service';
 import { of } from 'rxjs';
+import { Bitstream } from '../../../../../../../../../../../core/shared/bitstream.model';
 
 
 @Component({
@@ -27,6 +28,9 @@ export class IIIFToolbarComponent implements OnInit {
   @Input()
   item: Item;
 
+  @Input()
+  bitstream: Bitstream;
+
   // The path to the REST manifest endpoint.
   manifestUrl: string;
 
@@ -35,7 +39,7 @@ export class IIIFToolbarComponent implements OnInit {
   isAuthorized$ = of(false);
 
   getObjectUrl() {
-    return isNotEmpty(this.item) ? this.item.self : undefined;
+    return isNotEmpty(this.bitstream) ? this.bitstream.self : undefined;
   }
 
   constructor(

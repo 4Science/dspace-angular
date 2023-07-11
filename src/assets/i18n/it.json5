@@ -2609,6 +2609,29 @@
   "curation-task.task.citationpage.label":  "Generate Citation Page",
 
 
+  "curation-task.task.migratedocviewer.label":  "Migra le risorse del doc. viewer generate su una versione precedente",
+
+  "curation-task.task.iiifmigrate.label":  "Migra le risorse IIIF generate su una versione precedente",
+
+  "curation-task.task.avuploader.label":  "Processa le risorse video",
+
+  "curation-task.task.avuploader.primary.label":  "Processa le risorse video e nascondi i bitstream non primary",
+
+  "curation-task.task.audiouploader.label":  "Processa le risorse audio",
+
+  "curation-task.task.audiouploader.primary.label":  "Processa le risorse audio e nascondi i bitstream non primary",
+
+  "curation-task.task.avclean.label":  "Ripulisci le risorse audio/video",
+
+  "curation-task.task.generatesubtitles.label":  "Genera i sottotitoli per le risorse audio/video",
+
+  "curation-task.task.hidecovers.label":  "Nascondi le thumbnail custom dei file audio/video",
+
+  "curation-task.task.avforbiddownload.label":  "Disabilita il download dei file audio/video",
+
+  "curation-task.task.avallowdownload.label":  "Consenti il download dei file audio/video",
+
+
   // "cris-layout.toggle.open": "Open section",
   "cris-layout.toggle.open": "Apri sezione",
 
