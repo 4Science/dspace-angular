@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FieldRenderingType, MetadataBoxFieldRendering } from '../metadata-box.decorator';
 
 import { BitstreamRenderingModelComponent } from '../bitstream-rendering-model';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Bitstream } from '../../../../../../../core/shared/bitstream.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { getPaginatedListPayload } from '../../../../../../../core/shared/operators';
-import { HALLink } from '../../../../../../../core/shared/hal-link.model';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
