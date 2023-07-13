@@ -12,8 +12,13 @@
        (click)="emitSelectItem(selectionItem)">
     <img class="img-fluid" alt="no image"
          [src]="selectionItem.thumbnail"/>
-    <div class="thumbs-item-caption">
+    <div *ngIf="selectionItem.sceneTimestamp >= 3600; else only_min_sec" class="thumbs-item-caption">
       {{ selectionItem.sceneTimestamp * 1000 | date:'H:mm:ss':'UTC'}}
     </div>
+    <ng-template #only_min_sec>
+      <div class="thumbs-item-caption">
+        {{ selectionItem.sceneTimestamp * 1000 | date:'mm:ss':'UTC'}}
+      </div>
+    </ng-template>
   </div>
 </div>
