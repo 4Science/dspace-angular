@@ -147,6 +147,7 @@ import {
 } from './cris-layout-matrix/cris-layout-box-container/boxes/media-box/cris-layout-media-box.component';
 import { MediaPlayerModule } from '../shared/media-player/media-player.module';
 
+
 const ENTRY_COMPONENTS = [
   CrisLayoutVerticalComponent,
   CrisLayoutHorizontalComponent,

@@ -10,6 +10,13 @@
         <audio class="video-js vjs-fluid" id="audio_player" controls playsinline preload="none"></audio>
       </div>
     </div>
+
+    <ds-media-selection-bar *ngIf="isVideoPlayerInitialized$ | async"
+                              [startUUID]="startUUID"
+                              [itemUUID]="itemUUID"
+                              [currentItem]="currentItem$ | async"
+                              (selectItem)="setNewTimestamp($event)"></ds-media-selection-bar>
+
   </div>
   <div class="playlist-wrapper w-100">
     <ds-media-player-playlist [itemUUID]="itemUUID"

@@ -1,0 +1,61 @@
+.thumbs {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: calc(100% + 0.25rem);
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 0;
+  height: calc(107px + 0.25rem);
+
+  &-item {
+    display: inline-block;
+    width: 240px;
+    height: 100px;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-right: 4px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    img {
+      position: absolute;
+      inset: 0;
+      transition: .3s ease;
+
+      &:hover {
+        transition: .3s ease;
+        transform: scale(1.2);
+      }
+    }
+
+    &-caption {
+      position: absolute;
+      right: 4px;
+      bottom: 4px;
+      background: #fff;
+      padding: 4px;
+      font-size: 10px;
+      line-height: 12px;
+    }
+  }
+}
+
+.thumbs::-webkit-scrollbar {
+  height: 7px;
+}
+
+.thumbs::-webkit-scrollbar-track {
+  background: #ccc;
+  border-radius: 50px;
+}
+
+.thumbs::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 50px;
+}

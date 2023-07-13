@@ -8,6 +8,7 @@ import { ChipsItem } from './models/chips-item.model';
 import { DragService } from '../../../core/drag.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Options } from 'sortablejs';
+
 import { Router, UrlTree } from '@angular/router';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { map, take } from 'rxjs/operators';

@@ -56,7 +56,6 @@ export interface CrisRefStyleMetadata extends Config {
   default: string;
 }
 
-
 export interface CrisLayoutConfig extends Config {
   urn: UrnConfig[];
   crisRef: CrisRefConfig[];
