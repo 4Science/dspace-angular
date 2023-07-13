@@ -8,13 +8,13 @@ import { ChipsItem } from './models/chips-item.model';
 import { DragService } from '../../../core/drag.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Options } from 'sortablejs';
+
 import { Router, UrlTree } from '@angular/router';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { isNotEmpty } from '../../empty.util';
 
 const TOOLTIP_TEXT_LIMIT = 21;
-
 @Component({
   selector: 'ds-chips',
   styleUrls: ['./chips.component.scss'],
@@ -40,7 +40,8 @@ export class ChipsComponent implements OnChanges {
     private cdr: ChangeDetectorRef,
     private dragService: DragService,
     private translate: TranslateService,
-    private router: Router) {
+    private router: Router
+  ) {
 
     this.options = {
       animation: 300,

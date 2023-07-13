@@ -1,0 +1,29 @@
+<div class="playlist-container h-100"
+     infiniteScroll
+     [fromRoot]="false"
+     [infiniteScrollDistance]="2.5"
+     [infiniteScrollThrottle]="0"
+     [infiniteScrollContainer]="'.playlist'"
+     [scrollWindow]="false"
+     (scrolled)="onScrollDown()">
+  <ul class="playlist px-1 h-100">
+    <li *ngFor="let mediaItem of (mediaViewerItemList$ | async); let $index = index"
+        class="playlist-media-item d-flex mb-1"
+        title="{{mediaItem.name}}"
+        [class.selected]="mediaItem.bitstream.uuid === selectedMediaItem.bitstream.uuid"
+        (click)="emitSelectItem(mediaItem)">
+      <div class="playlist-img">
+        <img class="img-fluid" alt="no image"
+             [src]="mediaItem.thumbnail ? mediaItem.thumbnail : ALT_IMAGE"/>
+      </div>
+      <div class="playlist-description pl-1">
+        <div class="media-title">
+          <p class="content-name"><b>{{mediaItem.name}}</b></p>
+        </div>
+        <p class="content-size">{{mediaItem.bitstream.sizeBytes | dsFileSize}}</p>
+        <p class="content-format"> {{mediaItem.formatDescription}}</p>
+      </div>
+    </li>
+    <li></li>
+  </ul>
+</div>

@@ -1,0 +1,26 @@
+<div class="media-container d-flex" *ngIf="(isPlatformBrowser | async)">
+  <div class="media-wrapper">
+    <div class="h-100 w-100">
+      <ds-themed-loading *ngIf="!(isVideoPlayerInitialized$ | async) && !(isAudioPlayerInitialized$ | async)" [showMessage]="false"></ds-themed-loading>
+      <div id="video-content-wrapper h-100 w-100" *ngIf="(isVideoPlayerInitialized$ | async) && (isVideo$ | async)">
+        <video class="video-js vjs-big-play-centered vjs-fluid" id="video_player" controls playsinline
+               preload="none"></video>
+      </div>
+      <div id="audio-content-wrapper h-100 w-100" *ngIf="(isAudioPlayerInitialized$ | async) && !(isVideo$ | async)">
+        <audio class="video-js vjs-fluid" id="audio_player" controls playsinline preload="none"></audio>
+      </div>
+    </div>
+
+    <ds-media-selection-bar *ngIf="isVideoPlayerInitialized$ | async"
+                              [startUUID]="startUUID"
+                              [itemUUID]="itemUUID"
+                              [currentItem]="currentItem$ | async"
+                              (selectItem)="setNewTimestamp($event)"></ds-media-selection-bar>
+
+  </div>
+  <div class="playlist-wrapper w-100">
+    <ds-media-player-playlist [itemUUID]="itemUUID"
+                              [startUUID]="startUUID"
+                              (selectItem)="setNewMediaItem($event)"></ds-media-player-playlist>
+  </div>
+</div>

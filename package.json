@@ -64,6 +64,7 @@
   "resolutions": {
     "html-to-docx": "~1.4.0",
     "minimist": "^1.2.5",
+    "video.js": "^7.21.4",
     "webdriver-manager": "^12.1.8",
     "webpack": "^5.69.1",
     "ts-node": "10.2.1"
@@ -154,6 +155,8 @@
     "sanitize-html": "^2.7.2",
     "sortablejs": "1.13.0",
     "uuid": "^8.3.2",
+    "video.js": "^7.21.4",
+    "videojs-wavesurfer": "^3.9.0",
     "webfontloader": "1.6.28",
     "zone.js": "~0.11.5"
   },
@@ -182,6 +185,8 @@
     "@types/lodash": "^4.14.165",
     "@types/node": "^14.14.9",
     "@types/sanitize-html": "^2.6.2",
+    "@types/video.js": "^7.3.52",
+    "@types/wavesurfer.js": "^6.0.6",
     "@typescript-eslint/eslint-plugin": "5.11.0",
     "@typescript-eslint/parser": "5.11.0",
     "axe-core": "^4.4.3",

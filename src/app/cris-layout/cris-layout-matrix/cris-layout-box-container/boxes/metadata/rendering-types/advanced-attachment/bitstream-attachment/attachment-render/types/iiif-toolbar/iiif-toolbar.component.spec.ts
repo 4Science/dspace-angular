@@ -3,15 +3,19 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IIIFToolbarComponent } from './iiif-toolbar.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { NotificationsService } from '../../shared/notifications/notifications.service';
-import { NotificationsServiceStub } from '../../shared/testing/notifications-service.stub';
+import { NotificationsService } from '../../../../../../../../../../../shared/notifications/notifications.service';
+import { NotificationsServiceStub } from '../../../../../../../../../../../shared/testing/notifications-service.stub';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { of as observableOf } from 'rxjs';
-import { Item } from '../../core/shared/item.model';
-import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
-import { buildPaginatedList } from '../../core/data/paginated-list.model';
-import { PageInfo } from '../../core/shared/page-info.model';
-import { createRelationshipsObservable } from '../simple/item-types/shared/item.component.spec';
+import { Item } from '../../../../../../../../../../../core/shared/item.model';
+import { createSuccessfulRemoteDataObject$ } from '../../../../../../../../../../../shared/remote-data.utils';
+import { buildPaginatedList } from '../../../../../../../../../../../core/data/paginated-list.model';
+import { PageInfo } from '../../../../../../../../../../../core/shared/page-info.model';
+import {
+  createRelationshipsObservable
+} from '../../../../../../../../../../../item-page/simple/item-types/shared/item.component.spec';
+import { AuthorizationDataService } from '../../../../../../../../../../../core/data/feature-authorization/authorization-data.service';
+import { AuthorizationDataServiceStub } from '../../../../../../../../../../../shared/testing/authorization-service.stub';
 
 describe('IiifToolbarComponent', () => {
   let component: IIIFToolbarComponent;
@@ -47,7 +51,7 @@ describe('IiifToolbarComponent', () => {
         }
       ]
     },
-    relationships: createRelationshipsObservable()
+    relationships: createRelationshipsObservable(),
   });
 
   beforeEach(async () => {
@@ -55,7 +59,8 @@ describe('IiifToolbarComponent', () => {
       declarations: [ IIIFToolbarComponent ],
       imports: [ RouterTestingModule.withRoutes([]), TranslateModule.forRoot() ],
       providers: [
-        {provide: NotificationsService, useValue: NotificationsServiceStub}
+        {provide: NotificationsService, useValue: NotificationsServiceStub},
+        {provide: AuthorizationDataService, useClass: AuthorizationDataServiceStub }
       ],
       schemas: [ NO_ERRORS_SCHEMA ]
     })
@@ -66,6 +71,7 @@ describe('IiifToolbarComponent', () => {
     fixture = TestBed.createComponent(IIIFToolbarComponent);
     component = fixture.componentInstance;
     component.item = mockItem;
+    component.getObjectUrl = () => 'https://test-url.com';
     fixture.detectChanges();
 
     translateService = (component as any).translate;

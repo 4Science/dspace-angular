@@ -5,22 +5,37 @@ import { Bitstream } from './bitstream.model';
  */
 export class MediaViewerItem {
   /**
-   * Incoming Bitsream
+   * Incoming Bitstream
    */
   bitstream: Bitstream;
 
   /**
-   * Incoming Bitsream format type
+   * Incoming Bitstream format type
    */
   format: string;
 
   /**
-   * Incoming Bitsream format mime type
+   * Incoming Bitstream format mime type
    */
   mimetype: string;
 
   /**
-   * Incoming Bitsream thumbnail
+   * Incoming Bitstream thumbnail
    */
   thumbnail: string;
+
+  /**
+   * Incoming manifest url
+   */
+  manifestUrl?: string;
+
+  /**
+   * Incoming Bitstream format description
+   */
+  formatDescription?: string;
+
+  /**
+   * Incoming Bitstream name
+   */
+  name?: string;
 }

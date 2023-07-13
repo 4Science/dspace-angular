@@ -1,0 +1,12 @@
+@import 'video.js/dist/video-js.css';
+@import 'videojs-wavesurfer/dist/css/videojs.wavesurfer.css';
+
+.media-container {
+  max-height: 480px;
+  margin-bottom: 140px;
+}
+
+.media-wrapper {
+  background-color: black;
+  position: relative;
+}

@@ -11,6 +11,7 @@ import {
   ADMIN_MODULE_PATH,
   BITSTREAM_MODULE_PATH,
   BULK_IMPORT_PATH,
+  BUNDLE_PATH,
   EDIT_ITEM_PATH,
   ERROR_PAGE,
   FORBIDDEN_PATH,
@@ -135,6 +136,12 @@ import { RedirectService } from './redirect/redirect.service';
             path: BITSTREAM_MODULE_PATH,
             loadChildren: () => import('./bitstream-page/bitstream-page.module')
               .then((m) => m.BitstreamPageModule),
+            canActivate: [EndUserAgreementCurrentUserGuard]
+          },
+          {
+            path: BUNDLE_PATH,
+            loadChildren: () => import('./bitstream-page/bundle-bitstream-page/bundle-page.module')
+              .then((m) => m.BundlePageModule),
             canActivate: [EndUserAgreementCurrentUserGuard]
           },
           {

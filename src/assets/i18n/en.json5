@@ -2086,6 +2086,29 @@
   "curation-task.task.citationpage.label":  "Generate Citation Page",
 
 
+  "curation-task.task.migratedocviewer.label":  "Migrate the previously generated doc. viewer resources",
+
+  "curation-task.task.iiifmigrate.label":  "Migrate the previously generated IIIF resources",
+
+  "curation-task.task.avuploader.label":  "Process video resources",
+
+  "curation-task.task.avuploader.primary.label":  "Process video resources and hide non primary items",
+
+  "curation-task.task.audiouploader.label":  "Process audio resources",
+
+  "curation-task.task.audiouploader.primary.label":  "Process audio resources and hide non primary items",
+
+  "curation-task.task.avclean.label":  "Clean audio/video resources",
+
+  "curation-task.task.generatesubtitles.label":  "Generate subtitles for audio/video resources",
+
+  "curation-task.task.hidecovers.label":  "Hide custom audio/video thumbnails from item page",
+
+  "curation-task.task.avforbiddownload.label":  "Forbid Download on audio/video resources",
+
+  "curation-task.task.avallowdownload.label":  "Allow Download on audio/video resources",
+
+
   "cris-layout.toggle.open": "Open section",
 
   "cris-layout.toggle.close": "Close section",
@@ -5137,6 +5160,7 @@
 
   "media-viewer.playlist": "Playlist",
 
+  "media-viewer.play": "Play",
 
   "register-email.title": "New user registration",
 
@@ -7041,6 +7065,8 @@
 
 
   "viewer.provider.iiif.breadcrumbs": "Mirador Viewer",
+
+  "viewer.provider.media.breadcrumbs": "Player",
 
   "viewer.provider.pdf.breadcrumbs": "PDF Viewer",
 
