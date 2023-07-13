@@ -1,4 +1,6 @@
 import videojs from 'video.js';
+import 'videojs-hls-quality-selector';
+import 'videojs-contrib-quality-levels';
 import Wavesurfer from 'videojs-wavesurfer/dist/videojs.wavesurfer.js';
 
 import { VideojsService } from './videojs.service';
@@ -68,6 +70,7 @@ export class BrowserVideojsService implements VideojsService {
   initVideoPlayer(element: HTMLElement, mediaItem: MediaViewerItem): any {
     const videoPlayer = videojs(element, this.configVideo, () => {
       videoPlayer.src({ src: mediaItem?.manifestUrl, type: 'application/dash+xml' });
+      (videoPlayer as any).hlsQualitySelector();
     });
 
     return videoPlayer;

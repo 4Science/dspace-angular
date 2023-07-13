@@ -156,6 +156,8 @@
     "sortablejs": "1.13.0",
     "uuid": "^8.3.2",
     "video.js": "^7.21.4",
+    "videojs-contrib-quality-levels": "^2.0.9",
+    "videojs-hls-quality-selector": "^1.1.1",
     "videojs-wavesurfer": "^3.9.0",
     "webfontloader": "1.6.28",
     "zone.js": "~0.11.5"
