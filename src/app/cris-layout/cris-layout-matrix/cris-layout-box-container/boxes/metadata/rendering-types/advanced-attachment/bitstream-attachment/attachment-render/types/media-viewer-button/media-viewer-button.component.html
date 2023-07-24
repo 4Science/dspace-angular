@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="showButton$ | async">
   <a (click)="openViewer()"
      class="btn btn-outline-primary">
     <i class="fa fa-play"></i>

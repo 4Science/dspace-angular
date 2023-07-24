@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AttachmentRenderingType, AttachmentTypeRendering } from '../../../attachment-type.decorator';
@@ -9,6 +9,11 @@ import {
   getBitstreamItemViewerDetailsPath,
   getBitstreamItemViewerPath
 } from '../../../../../../../../../../../item-page/item-page-routing-paths';
+import { FeatureID } from '../../../../../../../../../../../core/data/feature-authorization/feature-id';
+import {
+  AuthorizationDataService
+} from '../../../../../../../../../../../core/data/feature-authorization/authorization-data.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ds-media-viewer-button',
@@ -17,7 +22,7 @@ import {
 })
 @AttachmentTypeRendering(AttachmentRenderingType.VIDEO, true)
 @AttachmentTypeRendering(AttachmentRenderingType.AUDIO, true)
-export class MediaViewerButtonComponent {
+export class MediaViewerButtonComponent implements OnInit {
 
   /**
    * Current DSpace Item
@@ -27,9 +32,18 @@ export class MediaViewerButtonComponent {
    * The bitstream
    */
   @Input() bitstream: Bitstream;
-    constructor(
-    private router: Router
+
+  showButton$!: Observable<boolean>;
+
+  constructor(
+    private router: Router,
+    private authorizationService: AuthorizationDataService,
   ) {}
+
+  ngOnInit() {
+    this.showButton$ = this.authorizationService.isAuthorized(FeatureID.CanDownload, this.bitstream?.self ?? undefined);
+  }
+
   async openViewer() {
     if (environment.advancedAttachmentRendering.showViewerOnSameItemPage) {
       await this.router.navigate([getBitstreamItemViewerDetailsPath(this.item, this.bitstream, 'media')], {fragment: 'viewer'});

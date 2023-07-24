@@ -128,6 +128,7 @@ export class MediaPlayerPlaylistComponent implements OnInit {
       this.itemUUID,
       'ORIGINAL',
       filters,
+      true,
       this.pageOptions,
       true,
       true,

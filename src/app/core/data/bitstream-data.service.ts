@@ -340,6 +340,8 @@ export class BitstreamDataService extends IdentifiableDataService<Bitstream> imp
    * @param uuid                        The item UUID to retrieve bitstreams from
    * @param bundlename                  Bundle type of the bitstreams
    * @param metadataFilters             Array of object we want to filter by
+   * @param filterNonRestricted         If true we skip the restricted access bitstream from being returned by the rest endpoint
+   *                                    If false or non set the behavior is the default one (all bitstreams regardless of the policies are returned)
    * @param options                     The {@link FindListOptions} for the request
    * @param useCachedVersionIfAvailable If this is true, the request will only be sent if there's
    *                                    no valid cached version. Defaults to true
@@ -352,6 +354,7 @@ export class BitstreamDataService extends IdentifiableDataService<Bitstream> imp
     uuid: string,
     bundlename: string,
     metadataFilters: MetadataFilter[],
+    filterNonRestricted = false,
     options: FindListOptions = {},
     useCachedVersionIfAvailable = true,
     reRequestOnStale = true,
@@ -360,6 +363,7 @@ export class BitstreamDataService extends IdentifiableDataService<Bitstream> imp
     const searchParams = [];
     searchParams.push(new RequestParam('uuid', uuid));
     searchParams.push(new RequestParam('name', bundlename));
+    searchParams.push(new RequestParam('filterNonRestricted', filterNonRestricted.toString()));
 
     metadataFilters.forEach((entry: MetadataFilter) => {
       searchParams.push(new RequestParam('filterMetadata', entry.metadataName));

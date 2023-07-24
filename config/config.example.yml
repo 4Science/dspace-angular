@@ -472,6 +472,22 @@ layout:
       involvedInstitutions:
         - src: ''
           href: ''
+  search:
+    filters:
+      datepicker:
+        - dateIssued
+      discoveryConfig:
+        default:
+          dateIssued:
+            filterType: range
+            minValue:
+              operator: '-'
+              value:
+                day: 10
+            maxValue:
+              operator: +
+              value:
+                day: 10
 
 cms:
   metadataList: ['cris.cms.home-header', 'cris.cms.home-news', 'cris.cms.footer', 'cris.cms.grid-component-badge', 'cris.cms.grid-component-title', 'cris.cms.grid-component-abstract']
