@@ -95,7 +95,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
    */
   setNewMediaItem(item: MediaViewerItem) {
     this.currentItem$.next(item);
-    this.isVideo$.next(this.checkContentType(item));
+    this.isVideo$.next(this.mediaIsVideo(item));
     if (this.isVideo$.value) {
       if (this.isVideoPlayerInitialized$.value) {
         this.changePlayingItem(item);
@@ -152,9 +152,9 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
     }
   }
 
-  private checkContentType(currentMedia: MediaViewerItem) {
-    //TODO: update check format existence
-    return currentMedia?.format === 'video';
+  private mediaIsVideo(currentMedia: MediaViewerItem) {
+    const bitstreamVideoFormat = currentMedia?.bitstream?.firstMetadataValue('bitstream.viewer.provider');
+    return bitstreamVideoFormat === 'video-streaming';
   }
 
   /**

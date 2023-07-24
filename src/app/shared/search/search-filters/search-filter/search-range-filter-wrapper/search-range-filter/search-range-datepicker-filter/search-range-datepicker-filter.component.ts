@@ -25,7 +25,7 @@ import { renderFacetForEnvironment } from '../../../search-filter-type-decorator
 import { FilterType } from '../../../../../models/filter-type.model';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import isEqual from 'lodash/isEqual';
-import { dateToNgbDateStruct } from '../../../../../../date.util';
+import { stringToNgbDateStruct } from '../../../../../../date.util';
 
 
 @Component({
@@ -149,20 +149,16 @@ export class SearchRangeDatepickerFilterComponent extends SearchRangeFilterCompo
   protected override initRange(minmax: [string | null, string | null]) {
     const fromDate = this.parseFromDate(minmax[0]);
     const toDate = this.parseToDate(minmax[1]);
-
     if (isNotEmpty(fromDate) && fromDate !== 'null') {
-      this.range[0] = this.stringToNgbDateStruct(fromDate);
+      this.range[0] = stringToNgbDateStruct(fromDate);
+    } else {
+      this.range[0] = null;
     }
     if (isNotEmpty(toDate) && toDate !== 'null') {
-      this.range[1] = this.stringToNgbDateStruct(toDate);
+      this.range[1] = stringToNgbDateStruct(toDate);
+    } else {
+      this.range[1] = null;
     }
-  }
-
-  private stringToNgbDateStruct(stringDate: string): NgbDateStruct {
-    const date = new Date(stringDate);
-    const ngbDateStruct = dateToNgbDateStruct(date);
-    console.log('stringToNgbDateStruct', date, ngbDateStruct);
-    return ngbDateStruct;
   }
 
   /**

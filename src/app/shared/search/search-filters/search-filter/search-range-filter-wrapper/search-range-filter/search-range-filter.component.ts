@@ -1,5 +1,5 @@
 import { BehaviorSubject, from, Observable, of, Subscription, switchMap } from 'rxjs';
-import { map, take, tap, withLatestFrom } from 'rxjs/operators';
+import { map, take, withLatestFrom } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { RemoteDataBuildService } from '../../../../../../core/cache/builders/remote-data-build.service';
@@ -73,11 +73,6 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
    */
   sub: Subscription;
 
-  /**
-   * Whether the sider is being controlled by the keyboard.
-   * Supresses any changes until the key is released.
-   */
-  keyboardControl: boolean;
 
   constructor(
     protected searchService: SearchService,
@@ -111,7 +106,6 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
    * @protected
    */
   protected initRange(minmax: [string | null, string | null]) {
-    console.log('init range', minmax);
     this.range = minmax;
   }
 
@@ -129,7 +123,6 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
    */
   protected initMin() {
     this.min = yearFromString(this.filterConfig.minValue) || this.min;
-    console.log('initMin', this.min);
   }
 
   /**
@@ -137,15 +130,12 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
    * @protected
    */
   protected getMinMaxParams(): Observable<[string, string]> {
-    console.log('getMinMaxParams');
     return this.route.queryParamMap
       .pipe(
-        tap(console.log),
         map(paramMaps => [
           paramMaps.get(this.filterConfig.paramName + RANGE_FILTER_MIN_SUFFIX) ?? `${this.min}`,
           paramMaps.get(this.filterConfig.paramName + RANGE_FILTER_MAX_SUFFIX) ?? `${this.max}`
         ]),
-        tap(console.log)
       );
   }
 
@@ -153,21 +143,9 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
    * Submits new custom range values to the range filter from the widget
    */
   onSubmit() {
-    if (this.keyboardControl) {
-      return;  // don't submit if a key is being held down
-    }
-
     const newMin = this.range[0] !== this.min ? [this.range[0]] : null;
     const newMax = this.range[1] !== this.max ? [this.range[1]] : null;
     this.search(newMin, newMax);
-  }
-
-  startKeyboardControl(): void {
-    this.keyboardControl = true;
-  }
-
-  stopKeyboardControl(): void {
-    this.keyboardControl = false;
   }
 
   /**

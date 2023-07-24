@@ -116,6 +116,7 @@ export class MediaSelectionBarComponent implements OnChanges {
       this.itemUUID,
       this.bundleName,
       filters,
+      false,
       this.pageOptions,
       true,
       true,

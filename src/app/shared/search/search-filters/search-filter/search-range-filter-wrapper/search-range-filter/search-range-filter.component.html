@@ -62,9 +62,7 @@
         [max]="max"
         [step]="1"
         [dsDebounce]="250"
-        (onDebounce)="onSubmit()"
-        (keydown)="startKeyboardControl()"
-        (keyup)="stopKeyboardControl()"
+        (change)="onSubmit()"
         [(ngModel)]="range"
         ngDefaultControl
       >

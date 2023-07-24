@@ -495,7 +495,8 @@ describe('MetadataContainerComponent', () => {
         expect(mockBitstreamDataService.findShowableBitstreamsByItem).toHaveBeenCalledWith(
           testItem.uuid,
           bitstreamField.bitstream.bundle,
-          [ { metadataName: 'metadataFieldTest', metadataValue: 'metadataValueTest' } ]
+          [ { metadataName: 'metadataFieldTest', metadataValue: 'metadataValueTest' } ],
+          false
         );
       });
     });
@@ -510,7 +511,8 @@ describe('MetadataContainerComponent', () => {
         expect(mockBitstreamDataService.findShowableBitstreamsByItem).toHaveBeenCalledWith(
           testItem.uuid,
           bitstreamField.bitstream.bundle,
-          [] // <--- empty array of filters
+          [], // <--- empty array of filters,
+          false // <--- filterNonRestricted
         );
       });
     });
