@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Directive, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import uniq from 'lodash/uniq';
 
 import { SectionsService } from './sections.service';
@@ -73,6 +73,12 @@ export class SectionsDirective implements OnDestroy, OnInit {
    * @type {boolean}
    */
   private enabled: Observable<boolean>;
+
+  /**
+   * A boolean representing if section is hidden
+   * @type {boolean}
+   */
+  private hidden: Observable<boolean>;
 
   /**
    * A boolean representing if section has read-only visibility
@@ -156,11 +162,13 @@ export class SectionsDirective implements OnDestroy, OnInit {
         })
     );
 
+    const scope = this.submissionService.getSubmissionScope();
     this.enabled = this.sectionService.isSectionEnabled(this.submissionId, this.sectionId);
+    this.hidden = this.sectionService.isSectionHidden(this.submissionId, this.sectionId, scope).pipe(startWith(false));
     this.readOnly = this.sectionService.isSectionReadOnly(
       this.submissionId,
       this.sectionId,
-      this.submissionService.getSubmissionScope()
+      scope
     );
   }
 
@@ -231,6 +239,16 @@ export class SectionsDirective implements OnDestroy, OnInit {
    */
   public isEnabled(): Observable<boolean> {
     return this.enabled;
+  }
+
+  /**
+   * Check if section is hidden
+   *
+   * @returns {Observable<boolean>}
+   *    Emits true whenever section is hidden
+   */
+  public isHidden(): Observable<boolean> {
+    return this.hidden;
   }
 
   /**

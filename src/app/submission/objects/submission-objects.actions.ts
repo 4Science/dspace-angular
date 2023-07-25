@@ -2,7 +2,9 @@
 import { Action } from '@ngrx/store';
 
 import { type } from '../../shared/ngrx/type';
-import { WorkspaceitemSectionUploadFileObject } from '../../core/submission/models/workspaceitem-section-upload-file.model';
+import {
+  WorkspaceitemSectionUploadFileObject
+} from '../../core/submission/models/workspaceitem-section-upload-file.model';
 import {
   WorkspaceitemSectionDataType,
   WorkspaceitemSectionsObject
@@ -44,6 +46,7 @@ export const SubmissionObjectActionTypes = {
   INIT_SECTION: type('dspace/submission/INIT_SECTION'),
   ENABLE_SECTION: type('dspace/submission/ENABLE_SECTION'),
   DISABLE_SECTION: type('dspace/submission/DISABLE_SECTION'),
+  UPDATE_SECTION_VISIBILITY: type('dspace/submission/UPDATE_SECTION_VISIBILITY'),
   SET_SECTION_FORM_ID: type('dspace/submission/SET_SECTION_FORM_ID'),
   DISABLE_SECTION_SUCCESS: type('dspace/submission/DISABLE_SECTION_SUCCESS'),
   DISABLE_SECTION_ERROR: type('dspace/submission/DISABLE_SECTION_ERROR'),
@@ -178,6 +181,31 @@ export class InitSectionAction implements Action {
   }
 }
 
+export class UpdateSectionVisibilityAction implements Action {
+  type = SubmissionObjectActionTypes.UPDATE_SECTION_VISIBILITY;
+  payload: {
+    submissionId: string;
+    sectionId: string;
+    visibility: SubmissionVisibilityType;
+  };
+
+  /**
+   * Create a new ShowSectionAction
+   *
+   * @param submissionId
+   *    the submission's ID
+   * @param sectionId
+   *    the section's ID
+   * @param visibility
+   *    the section's visibility
+   */
+  constructor(submissionId: string,
+              sectionId: string,
+              visibility: SubmissionVisibilityType) {
+    this.payload = { submissionId, sectionId, visibility };
+  }
+}
+
 export class EnableSectionAction implements Action {
   type = SubmissionObjectActionTypes.ENABLE_SECTION;
   payload: {
@@ -273,7 +301,7 @@ export class CleanDetectDuplicateAction implements Action {
    *
    * @param submissionId Id of the submission on which perform the action
    */
-  constructor(submissionId: string ) {
+  constructor(submissionId: string) {
     this.payload = { submissionId };
   }
 }
@@ -873,6 +901,7 @@ export class SetActiveSectionAction implements Action {
     this.payload = { submissionId, sectionId };
   }
 }
+
 // Upload file actions
 
 export class NewUploadedFileAction implements Action {
@@ -988,7 +1017,7 @@ export class SetDuplicateDecisionSuccessAction implements Action {
    * @param submissionObject
    *    the submission's Object
    */
-  constructor(submissionId: string, sectionId: string,  submissionObject: SubmissionObject[]) {
+  constructor(submissionId: string, sectionId: string, submissionObject: SubmissionObject[]) {
     this.payload = { submissionId, sectionId, submissionObject };
   }
 }
@@ -1021,6 +1050,7 @@ export type SubmissionObjectAction = DisableSectionAction
   | InitSectionAction
   | SetSectionFormId
   | EnableSectionAction
+  | UpdateSectionVisibilityAction
   | InitSubmissionFormAction
   | ResetSubmissionFormAction
   | CancelSubmissionFormAction

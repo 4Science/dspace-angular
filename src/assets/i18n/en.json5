@@ -6865,6 +6865,20 @@
 
 
 
+  "submission.sections.unpaywall.refresh": "Refresh",
+
+  "submission.sections.unpaywall.import": "Import from unpaywall",
+
+  "submission.sections.unpaywall.status.successful": "You can import from unpaywall",
+
+  "submission.sections.unpaywall.status.not-found": "Can't find record using Unpaywall api",
+
+  "submission.sections.unpaywall.status.pending": "Unpaywall api request is initialized",
+
+  "submission.sections.submit.progressbar.unpaywall": "Unpaywall",
+
+
+
   "submission.submit.breadcrumbs": "New submission",
 
   "submission.submit.title": "New submission",
