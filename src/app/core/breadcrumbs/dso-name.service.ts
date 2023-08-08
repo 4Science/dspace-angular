@@ -91,7 +91,11 @@ export class DSONameService {
       }
       return `${familyName}, ${givenName}`;
     } else if (entityType === 'OrgUnit') {
-      return this.firstMetadataValue(object, dso, 'organization.legalName');
+      const orgUnitName = this.firstMetadataValue(object, dso, 'organization.legalName');
+      if (isEmpty(orgUnitName)) {
+        return this.firstMetadataValue(object, dso, 'dc.title') || dso.name;
+      }
+      return orgUnitName;
     }
     return this.firstMetadataValue(object, dso, 'dc.title') || dso.name || this.translateService.instant('dso.name.untitled');
   }
