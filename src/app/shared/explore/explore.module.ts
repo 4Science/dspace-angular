@@ -28,6 +28,9 @@ import { GridSectionComponent } from './section-component/grid-section/grid-sect
 import { ThemedGridSectionComponent } from './section-component/grid-section/themed-grid-section.component';
 import { TwitterSectionComponent } from './section-component/twitter-section/twitter-section.component';
 import { ThemedTwitterSectionComponent } from './section-component/twitter-section/themed-twitter-section.component';
+import { SliderSectionComponent } from './section-component/slider-section/slider-section.component';
+import { ThemedSliderSectionComponent } from './section-component/slider-section/themed-slider-section.component';
+import { SliderModule } from '../slider/slider.module';
 
 const COMPONENTS = [
   BrowseSectionComponent,
@@ -46,6 +49,8 @@ const COMPONENTS = [
   ThemedTopSectionComponent,
   CarouselSectionComponent,
   ThemedCarouselSectionComponent,
+  SliderSectionComponent,
+  ThemedSliderSectionComponent,
   GridSectionComponent,
   ThemedGridSectionComponent,
   TwitterSectionComponent,
@@ -60,7 +65,8 @@ const COMPONENTS = [
     CommonModule,
     SharedModule,
     CarouselModule,
-    MarkdownViewerModule
+    MarkdownViewerModule,
+    SliderModule
   ],
   exports: [
     ...COMPONENTS
