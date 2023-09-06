@@ -5,7 +5,8 @@
      [opened]="sectionData.opened"
      [submissionId]="submissionId"
      [sectionType]="sectionData.sectionType"
-     [sectionId]="sectionData.id">
+     [sectionId]="sectionData.id"
+     [hidden]="(sectionRef.isHidden() | async)">
   <ngb-accordion #acc="ngbAccordion"
                  *ngIf="(sectionRef.isEnabled() | async)"
                  (panelChange)="sectionRef.sectionChange($event)"

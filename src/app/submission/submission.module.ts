@@ -72,6 +72,9 @@ import { SectionFormOperationsService } from './sections/form/section-form-opera
 import { SubmissionSectionIdentifiersComponent } from './sections/identifiers/section-identifiers.component';
 import { SubmissionSectionCorrectionComponent } from './sections/correction/section-correction.component';
 import { MyDspaceSearchModule } from '../my-dspace-page/my-dspace-search.module';
+import {
+  SubmissionSectionUnpaywallComponent
+} from "./sections/unpaywall/submission-section-unpaywall.component";
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -83,7 +86,8 @@ const ENTRY_COMPONENTS = [
   SubmissionSectionSherpaPoliciesComponent,
   SubmissionSectionDetectDuplicateComponent,
   SubmissionSectionCustomUrlComponent,
-  SubmissionSectionCorrectionComponent
+  SubmissionSectionCorrectionComponent,
+  SubmissionSectionUnpaywallComponent
 ];
 
 const DECLARATIONS = [

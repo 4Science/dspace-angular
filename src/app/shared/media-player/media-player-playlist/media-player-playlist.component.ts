@@ -193,7 +193,7 @@ export class MediaPlayerPlaylistComponent implements OnInit {
         mediaItem.name = bitstream.firstMetadataValue('dc.title');
         mediaItem.format = format.mimetype.split('/')[0];
         mediaItem.formatDescription = format.description;
-        mediaItem.thumbnail = thumbnail ? thumbnail._links.content.href : null;
+        mediaItem.thumbnail = thumbnail;
         mediaItem.manifestUrl = bitstream.allMetadataValues('dash.manifest')[0];
         return mediaItem;
       }));

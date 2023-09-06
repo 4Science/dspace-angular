@@ -22,7 +22,7 @@ export class MediaViewerItem {
   /**
    * Incoming Bitstream thumbnail
    */
-  thumbnail: string;
+  thumbnail: string | Bitstream;
 
   /**
    * Incoming manifest url

@@ -43,7 +43,8 @@ import {
   SubmissionObjectAction,
   SubmissionObjectActionTypes,
   UpdateSectionDataAction,
-  UpdateSectionErrorsAction
+  UpdateSectionErrorsAction,
+  UpdateSectionVisibilityAction
 } from './submission-objects.actions';
 import { WorkspaceitemSectionUploadObject } from '../../core/submission/models/workspaceitem-section-upload.model';
 import { WorkspaceitemSectionDetectDuplicateObject } from '../../core/submission/models/workspaceitem-section-deduplication.model';
@@ -203,6 +204,10 @@ export function submissionObjectReducer(state = initialState, action: Submission
 
     case SubmissionObjectActionTypes.SET_SECTION_FORM_ID: {
       return setSectionFormId(state, action as SetSectionFormId);
+    }
+
+    case SubmissionObjectActionTypes.UPDATE_SECTION_VISIBILITY: {
+      return setVisibility(state, action as UpdateSectionVisibilityAction);
     }
 
     case SubmissionObjectActionTypes.ENABLE_SECTION: {
@@ -599,6 +604,31 @@ function setActiveSection(state: SubmissionObjectState, action: SetActiveSection
         sections: state[ action.payload.submissionId ].sections,
         isLoading: state[ action.payload.submissionId ].isLoading,
         savePending: state[ action.payload.submissionId ].savePending,
+      })
+    });
+  } else {
+    return state;
+  }
+}
+
+/**
+ * Updates section visibility.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    a UpdateSectionVisibilityAction
+ * @return SubmissionObjectState
+ *    the new state, with updated visibility.
+ */
+function setVisibility(state: SubmissionObjectState, action: UpdateSectionVisibilityAction): SubmissionObjectState {
+  if (hasValue(state[ action.payload.submissionId ])) {
+    return Object.assign({}, state, {
+      [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
+        sections: Object.assign({}, state[ action.payload.submissionId ].sections, {
+          [ action.payload.sectionId ]: Object.assign({}, state[ action.payload.submissionId ]
+            .sections[ action.payload.sectionId ], { visibility: action.payload.visibility })
+        })
       })
     });
   } else {

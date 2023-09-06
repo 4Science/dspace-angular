@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-center">
+  <button (click)="refreshApiCheck()" [disabled]="(loading$ | async)" type="button" class="btn btn-secondary mr-2"
+          aria-label="refresh">
+    <span aria-hidden="true">{{'submission.sections.unpaywall.refresh' | translate}}</span>
+  </button>
+  <button [disabled]="(status$ | async) !== UnpaywallSectionStatus.SUCCESSFUL || (loading$ | async)" type="button"
+          (click)="uploadFileIfNeeded()" class="btn btn-success" aria-label="import from unpaywall">
+    <span aria-hidden="true">{{'submission.sections.unpaywall.import' | translate}}</span>
+  </button>
+</div>
+<br>
+<div class="d-flex justify-content-center">
+  <ds-themed-loading *ngIf="(loading$ | async)" class="ds-themed-loading"></ds-themed-loading>
+</div>
+<div class="d-flex justify-content-center">
+  <div [ngSwitch]="(status$ | async)" *ngIf="!(loading$ | async)">
+    <div *ngSwitchCase="UnpaywallSectionStatus.SUCCESSFUL">
+      {{'submission.sections.unpaywall.status.successful' | translate}}
+    </div>
+    <div *ngSwitchCase="UnpaywallSectionStatus.NOT_FOUND">
+      {{'submission.sections.unpaywall.status.not-found' | translate}}
+    </div>
+    <div *ngSwitchCase="UnpaywallSectionStatus.PENDING">
+      {{'submission.sections.unpaywall.status.pending' | translate}}
+    </div>
+  </div>
+
+</div>
+
+

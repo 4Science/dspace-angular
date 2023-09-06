@@ -75,3 +75,10 @@ ul.playlist li {
 .content-size, .content-format{
   font-size: 60%;
 }
+
+::ng-deep {
+  .playlist-img .thumbnail-content.outer {
+    max-width: 135px;
+    max-height: 75px;
+  }
+}

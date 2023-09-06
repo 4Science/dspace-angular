@@ -159,12 +159,12 @@ export class EntityDropdownComponent implements OnInit, OnDestroy {
   public populateEntityList(page: number) {
     this.isLoadingList.next(true);
     let searchListEntity$;
+    const findOptions: FindListOptions = {
+      elementsPerPage: 10,
+      currentPage: page
+    };
     if (this.isSubmission) {
       // Set the pagination info
-      const findOptions: FindListOptions = {
-        elementsPerPage: 10,
-        currentPage: page
-      };
       searchListEntity$ =
         this.entityTypeService.getAllAuthorizedRelationshipType(findOptions)
           .pipe(
@@ -177,19 +177,14 @@ export class EntityDropdownComponent implements OnInit, OnDestroy {
           );
     } else {
       searchListEntity$ =
-        this.itemExportFormatService.byEntityTypeAndMolteplicity(null, ItemExportFormatMolteplicity.MULTIPLE)
+        this.entityTypeService.getAllAuthorizedRelationshipTypeImport(findOptions)
           .pipe(
-            take(1),
-            map((formatTypes: any) => {
-              const entityList: ItemType[] = Object.keys(formatTypes)
-                .filter((entityType: string) => isNotNull(entityType) && entityType !== 'null')
-                .map((entityType: string) => ({
-                  id: entityType,
-                  label: entityType
-                } as any));
-              return createSuccessfulRemoteDataObject(buildPaginatedList(null, entityList));
-            }),
-            tap(() => this.hasNextPage = false)
+            getFirstSucceededRemoteWithNotEmptyData(),
+            tap(entityType => {
+              if ((this.searchListEntity.length + findOptions.elementsPerPage) >= entityType.payload.totalElements) {
+                this.hasNextPage = false;
+              }
+            })
           );
     }
     this.searchListEntity$ = searchListEntity$.pipe(
