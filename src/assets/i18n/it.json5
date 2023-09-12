@@ -2446,6 +2446,12 @@
   // "RELATION.OrgUnit.projects.search.results.head" : "Projects",
   "RELATION.OrgUnit.projects.search.results.head" : "Progetti",
 
+//  "RELATION.OrgUnit.orgunitfonds.search.results.head" : "Fonds",
+  "RELATION.OrgUnit.orgunitfonds.search.results.head" : "Fondi",
+
+//  "RELATION.OrgUnit.archivalmaterial.search.results.head" : "Archival Material",
+  "RELATION.OrgUnit.archivalmaterial.search.results.head" : "Materiale Archivistico",
+
   // "RELATION.Project.researchoutputs.search.results.head" : "Publications",
   "RELATION.Project.researchoutputs.search.results.head" : "Pubblicazioni",
 
@@ -11957,6 +11963,12 @@
 
   //"context-menu.actions.edit-item-relationships.btn.events": "Manage Events",
   "context-menu.actions.edit-item-relationships.btn.events": "Gestisci gli eventi",
+
+//  "context-menu.actions.edit-item-relationships.btn.orgunitfonds": "Manage Fonds",
+  "context-menu.actions.edit-item-relationships.btn.orgunitfonds": "Gestisci i Fondi",
+
+//  "context-menu.actions.edit-item-relationships.btn.archivalmaterial": "Manage Archival Material",
+    "context-menu.actions.edit-item-relationships.btn.archivalmaterial": "Gestire il Materiale Archivistico",
 
   //"RELATION.Person.publications.search.results.head" : "Publications",
   "RELATION.Person.publications.search.results.head" : "Pubblicazioni",
