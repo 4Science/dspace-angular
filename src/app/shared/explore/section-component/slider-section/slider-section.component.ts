@@ -67,7 +67,7 @@ export class SliderSectionComponent implements OnInit {
     const sortDirection = order && order.toUpperCase() === 'ASC' ? SortDirection.ASC : SortDirection.DESC;
 
     const pagination: PaginationComponentOptions = Object.assign(new PaginationComponentOptions(), {
-      id: 'carousel-object-pagination',
+      id: 'slider-object-pagination',
       pageSize: numberOfItems,
       currentPage: 1
     });

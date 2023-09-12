@@ -1,25 +1,12 @@
 import { Component, Inject, Input, OnDestroy, OnInit, Optional } from '@angular/core';
-import { BehaviorSubject, from, Observable, Subject } from 'rxjs';
-import { filter, map, mergeMap, scan, switchMap, take, takeUntil } from 'rxjs/operators';
-import { PaginatedList } from '../../core/data/paginated-list.model';
-import { BitstreamFormat } from '../../core/shared/bitstream-format.model';
-import { Bitstream } from '../../core/shared/bitstream.model';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { NativeWindowRef, NativeWindowService } from '../../core/services/window.service';
-import { getFirstCompletedRemoteData } from '../../core/shared/operators';
-import { hasValue } from '../empty.util';
 import { ItemSearchResult } from '../object-collection/shared/item-search-result.model';
-import { followLink } from '../utils/follow-link-config.model';
-import { RemoteData } from '../../core/data/remote-data';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-
-export interface SliderOptions {
-  header?: string;
-}
-
-export const defaultSliderOptions = {
-  header: ''
-};
+import { BitstreamImagesService } from '../../core/data/bitstream-images.service';
+import { SliderSection } from '../../core/layout/models/section.model';
 
 /**
  * Component representing the Slider component section.
@@ -35,7 +22,7 @@ export class SliderComponent implements OnInit, OnDestroy {
    */
   @Input() items: ItemSearchResult[];
 
-  @Input() sliderOptions: SliderOptions = defaultSliderOptions;
+  @Input() sliderSection: SliderSection;
 
   /**
    * Slider section title field.
@@ -71,16 +58,16 @@ export class SliderComponent implements OnInit, OnDestroy {
 
   constructor(
     protected bitstreamDataService: BitstreamDataService,
+    private bitstreamImagesService: BitstreamImagesService,
     @Inject(NativeWindowService) private _window: NativeWindowRef,
     @Optional() protected breakpointObserver?: BreakpointObserver,
   ) {
   }
 
   ngOnInit() {
-    this.findAllBitstreamImages().subscribe((res) => {
-      console.log('itemToImageHrefMap$', res);
-      this.itemToImageHrefMap$.next(res);
-    });
+    this.bitstreamImagesService.findAllBitstreamImages(this.items)
+      .pipe(take(1))
+      .subscribe(this.itemToImageHrefMap$);
 
     this.breakpointObserver
       .observe([
@@ -98,36 +85,6 @@ export class SliderComponent implements OnInit, OnDestroy {
           }
         }
       });
-  }
-
-  /**
-   * Find the first image of each item
-   */
-  findAllBitstreamImages(): Observable<Map<string, string>> {
-    return from(this.items).pipe(
-      map((itemSR) => itemSR.indexableObject),
-      mergeMap((item) => this.bitstreamDataService.findAllByItemAndBundleName(
-          item, 'ORIGINAL', {}, true, true, followLink('format'),
-        ).pipe(
-          getFirstCompletedRemoteData(),
-          switchMap((rd: RemoteData<PaginatedList<Bitstream>>) => rd.hasSucceeded ? rd.payload.page : []),
-          mergeMap((bitstream: Bitstream) => bitstream.format.pipe(
-            getFirstCompletedRemoteData(),
-            filter((bitstreamFormatRD: RemoteData<BitstreamFormat>) =>
-              bitstreamFormatRD.hasSucceeded && hasValue(bitstreamFormatRD.payload) && hasValue(bitstream) &&
-              bitstreamFormatRD.payload.mimetype.includes('image/')
-            ),
-            map(() => bitstream)
-          )),
-          take(1),
-          map((bitstream: Bitstream) => [item.uuid, bitstream._links.content.href]),
-        ),
-      ),
-      scan((acc: Map<string, string>, value: [string, string]) => {
-        acc.set(value[0], value[1]);
-        return acc;
-      }, new Map<string, string>()),
-    );
   }
 
   get cardsPerPage() { // based on screen size
