@@ -10,6 +10,7 @@ import { AdminEditUserAgreementComponent } from './admin-edit-user-agreement/adm
 import { NOTIFICATIONS_MODULE_PATH, REGISTRIES_MODULE_PATH } from './admin-routing-paths';
 import { EditCmsMetadataComponent } from './edit-cms-metadata/edit-cms-metadata.component';
 import { BatchImportPageComponent } from './admin-import-batch-page/batch-import-page.component';
+import { MagImportPageComponent } from './admin-mag-import/mag-import-page.component';
 
 @NgModule({
   imports: [
@@ -65,6 +66,12 @@ import { BatchImportPageComponent } from './admin-import-batch-page/batch-import
         resolve: { breadcrumb: I18nBreadcrumbResolver },
         component: BatchImportPageComponent,
         data: { title: 'admin.batch-import.title', breadcrumbKey: 'admin.batch-import' }
+      },
+      {
+        path: 'mag-import',
+        resolve: { breadcrumb: I18nBreadcrumbResolver },
+        component: MagImportPageComponent,
+        data: { title: 'admin.mag-import.title', breadcrumbKey: 'admin.mag-import' }
       },
       {
         path: 'system-wide-alert',
