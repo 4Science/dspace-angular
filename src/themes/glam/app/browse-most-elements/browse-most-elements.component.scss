@@ -40,6 +40,20 @@ div.thumbnail-container {
   @include media-breakpoint-down(sm) {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+
+  &.max-items-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    @include media-breakpoint-only(md) {
+      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    }
+    @include media-breakpoint-down(sm) {
+      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    }
+
+    div.thumbnail-container {
+      aspect-ratio: 1;
+    }
+  }
 }
 
 p {
