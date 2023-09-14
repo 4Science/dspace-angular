@@ -1,4 +1,4 @@
-<div class="grid-wrapper">
+<div class="grid-wrapper max-items-{{searchResults?.payload?.pageInfo?.elementsPerPage}}">
   <ng-container *ngFor="let object of searchResults?.payload?.page; let i = index; let last = last">
     <img [src]="(itemToImageHrefMap$ | async).get(object.indexableObject?.uuid)" alt="hidden-image" style="display: none" #image>
     <div class="thumbnail-container position-relative"
