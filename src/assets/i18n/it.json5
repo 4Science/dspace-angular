@@ -1049,6 +1049,34 @@
   // TODO New key - Add a translation
   "admin.mag-import.breadcrumbs": "Import MAG",
 
+  // "admin.mag-import.page.form.type.label": "Type",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.type.label": "Type",
+
+  // "admin.mag-import.page.form.type.hint": "Select a type from the list",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.type.hint": "Select a type from the list",
+
+  // "admin.mag-import.page.form.object.label": "Parent object",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.object.label": "Parent object",
+
+  // "admin.mag-import.page.form.object.hint": "Provide the handle of the parent object",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.object.hint": "Provide the handle of the parent object",
+
+  // "admin.mag-import.page.form.file.label": "File",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.file.label": "File",
+
+  // "admin.mag-import.page.form.file.hint": "Upload a ZIP file containing the XML file and the images",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.file.hint": "Upload a ZIP file containing the XML file and the images",
+
+  // "admin.mag-import.page.form.submit": "Create process",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.submit": "Create process",
+
   // "admin.metadata-import.title": "Import Metadata",
   "admin.metadata-import.title": "Importa metadati",
 
@@ -6515,6 +6543,9 @@
   // "menu.section.import_batch": "Batch Import (ZIP)",
   "menu.section.import_batch": "Importazione batch (ZIP)",
 
+  // "menu.section.import_mag": "MAG Import",
+  "menu.section.import_mag": "Importazione MAG",
+
   // "menu.section.import_metadata": "Metadata",
   "menu.section.import_metadata": "Metadata",
 
@@ -6977,7 +7008,6 @@
   "nav.context-help-toggle": "Toggle context help",
 
   // "nav.mainSiteName": "Main site",
-  // TODO New key - Add a translation
   "nav.mainSiteName": "Sito principale",
 
   // "nav.language": "Language switch",
@@ -12058,6 +12088,9 @@
   // TODO New key - Add a translation
   "admin.system-wide-alert.title": "System-wide Alerts",
 
+  // "explore.index.lastModified" : "New accessions",
   "explore.index.lastModified" : "Nuove Risorse",
+
+
 
 }

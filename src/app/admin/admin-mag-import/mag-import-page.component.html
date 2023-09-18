@@ -1,3 +1,38 @@
 <div class="container">
   <h2>{{'admin.mag-import.page.header' | translate}}</h2>
+
+  <form #processForm="ngForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="type">{{ 'admin.mag-import.page.form.type.label' | translate }}</label>
+        <select class="form-control" id="type"  name="type" #type="ngModel" [(ngModel)]="typeParam" required>
+          <option *ngFor="let option of optionList" [value]="option">{{option}}</option>
+        </select>
+        <div class="form-text text-muted small">{{ 'admin.mag-import.page.form.type.hint' | translate }}</div>
+      </div>
+      <div class="form-group col-md-8">
+        <label for="type">{{ 'admin.mag-import.page.form.object.label' | translate }}</label>
+        <input type="text" id="object" name="object" #object="ngModel" [(ngModel)]="objectParam" class="form-control" required>
+        <div class="form-text text-muted small">{{ 'admin.mag-import.page.form.object.hint' | translate }}</div>
+      </div>
+    </div>
+
+    <p>{{ 'admin.mag-import.page.form.file.label' | translate }}</p>
+    <ds-file-dropzone-no-uploader
+      (onFileAdded)="setFile($event)"
+      [dropMessageLabel]="'admin.batch-import.page.dropMsg'"
+      [dropMessageLabelReplacement]="'admin.batch-import.page.dropMsgReplace'"
+    ></ds-file-dropzone-no-uploader>
+    <p class="text-muted small">{{ 'admin.mag-import.page.form.file.hint' | translate }}</p>
+
+    <!-- hidden input field is used for validation purposes only -->
+    <input type="hidden" id="dummy-file" name="dummy-file" #dummyFile="ngModel" [(ngModel)]="fileObject" required>
+    <div [hidden]="!(processForm.submitted && dummyFile.invalid)" class="form-text text-muted text-danger">{{ 'admin.mag-import.page.form.file.error' | translate }}</div>
+
+    <button type="submit" [disabled]="processForm.invalid" class="btn btn-primary" >{{ 'admin.mag-import.page.form.submit' | translate }}</button>
+
+  </form>
+
+
 </div>

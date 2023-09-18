@@ -699,6 +699,20 @@
 
   "admin.mag-import.breadcrumbs": "Import MAG",
 
+  "admin.mag-import.page.form.type.label": "Type",
+
+  "admin.mag-import.page.form.type.hint": "Select a type from the list",
+
+  "admin.mag-import.page.form.object.label": "Parent object",
+
+  "admin.mag-import.page.form.object.hint": "Provide the handle of the parent object",
+
+  "admin.mag-import.page.form.file.label": "File",
+
+  "admin.mag-import.page.form.file.hint": "Upload a ZIP file containing the XML file and the images",
+
+  "admin.mag-import.page.form.submit": "Create process",
+
   "admin.metadata-import.title": "Import Metadata",
 
   "admin.batch-import.title": "Import Batch",
@@ -4256,7 +4270,7 @@
 
   "menu.section.import_batch": "Batch Import (ZIP)",
 
-  "menu.section.import_batch": "MAG Import",
+  "menu.section.import_mag": "MAG Import",
 
   "menu.section.import_metadata": "Metadata",
 
