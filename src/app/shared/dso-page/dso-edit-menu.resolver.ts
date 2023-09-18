@@ -1,5 +1,5 @@
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { combineLatest, Observable, of as observableOf } from 'rxjs';
+import {combineLatest, Observable, of as observableOf} from 'rxjs';
 import { FeatureID } from '../../core/data/feature-authorization/feature-id';
 import { MenuService } from '../menu/menu.service';
 import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
@@ -49,6 +49,8 @@ export class DSOEditMenuResolver implements Resolve<{ [key: string]: MenuSection
     let id = route.params.id;
     if (hasNoValue(id) && hasValue(route.queryParams.scope)) {
       id = route.queryParams.scope;
+    } else if (hasNoValue(id) && hasNoValue(route.queryParams.scope)) {
+      return observableOf({});
     }
     return this.dSpaceObjectDataService.findById(id, true, false).pipe(
       getFirstCompletedRemoteData(),
