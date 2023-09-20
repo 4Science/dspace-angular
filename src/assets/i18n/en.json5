@@ -1917,6 +1917,10 @@
 
   "context-menu.actions.edit-item-relationships.btn.events": "Manage Events",
 
+  "context-menu.actions.edit-item-relationships.btn.orgunitfonds": "Manage Fonds",
+
+  "context-menu.actions.edit-item-relationships.btn.archivalmaterial": "Manage Archival Material",
+
   "context-menu.actions.orcid-view": "Open ORCID setting page",
 
   "context-menu.actions.statistics.btn": "Statistics",
@@ -1966,6 +1970,10 @@
   "RELATION.OrgUnit.rpprojects.search.results.head" : "Researchers Projects",
 
   "RELATION.OrgUnit.projects.search.results.head" : "Projects",
+
+  "RELATION.OrgUnit.orgunitfonds.search.results.head" : "Fonds",
+
+  "RELATION.OrgUnit.archivalmaterial.search.results.head" : "Archival Material",
 
   "RELATION.Project.researchoutputs.search.results.head" : "Publications",
 
