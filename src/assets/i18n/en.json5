@@ -2636,8 +2636,7 @@
 
   "footer.terms":"Terms of Use",
 
-  "footer.made-info": "Made with DSpace-GLAM - Extension maintained and optimized by 4Science",
-
+  "footer.made-info": "Made with <a href=\"https://www.4science.it/dspace-glam/\" target=\"_blank\">DSpace-GLAM</a> - Extension maintained and optimized by <a href=\"https://www.4science.it/servizi/\" target=\"_blank\">4Science</a>",
 
   "forgot-email.form.header": "Forgot Password",
 

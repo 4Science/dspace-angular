@@ -61,10 +61,10 @@
   </div>
   <div class="footer-copyrights">
     <div class="container">
-      <div class="d-flex">
-        <a routerLink="info/feedback">{{'footer.link.feedback' | translate}}</a>
-        <a href="javascript:void(0);" (click)="showCookieSettings()">{{'footer.link.cookies' | translate}}</a>
-        <p class="mb-0 ml-auto">{{'footer.made-info' | translate}}</p>
+      <div class="d-flex flex-wrap gapx-3 my-3">
+        <a class="d-block" routerLink="info/feedback">{{'footer.link.feedback' | translate}}</a>
+        <a class="d-block mr-auto" href="javascript:void(0);" (click)="showCookieSettings()">{{'footer.link.cookies' | translate}}</a>
+        <div [innerHTML]="'footer.made-info' | translate"></div>
       </div>
     </div>
   </div>
