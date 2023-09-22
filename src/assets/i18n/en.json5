@@ -2600,15 +2600,17 @@
 
   "footer.copyright": "copyright © 2002-{{ year }}",
 
-  "footer.extension-by": "- Extension maintained and optimized by",
+  "footer.extension-by": "Extension maintained and optimized by",
 
   "footer.link.4science": "4Science",
 
   "footer.link.dspace": "DSpace software",
 
-  "footer.link.dspace-cris": "DSpace-GLAM software",
+  "footer.link.dspace-glam": "DSpace-GLAM",
 
-  "footer.link.dspace-cris.href": "https://www.4science.com/dspace-glam/",
+  "footer.link.dspace-glam.href": "https://www.4science.com/dspace-glam/",
+
+  "footer.link.4science.href": "https://www.4science.com/services/",
 
   "footer.link.lyrasis": "LYRASIS",
 
