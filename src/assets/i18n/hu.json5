@@ -1158,12 +1158,20 @@
   // TODO New key - Add a translation
   "admin.batch-import.breadcrumbs": "Import Batch",
 
+  // "admin.mag-import.breadcrumbs": "Import MAG",
+  // TODO New key - Add a translation
+  "admin.mag-import.breadcrumbs": "Import MAG",
+
   // "admin.metadata-import.title": "Import Metadata",
   "admin.metadata-import.title": "Metaadat importálása",
 
   // "admin.batch-import.title": "Import Batch",
   // TODO New key - Add a translation
   "admin.batch-import.title": "Import Batch",
+
+  // "admin.mag-import.title": "Import MAG",
+  // TODO New key - Add a translation
+  "admin.mag-import.title": "Import MAG",
 
   // "admin.metadata-import.page.header": "Import Metadata",
   "admin.metadata-import.page.header": "Metaadat importálása",
@@ -1172,12 +1180,20 @@
   // TODO New key - Add a translation
   "admin.batch-import.page.header": "Import Batch",
 
+  // "admin.mag-import.page.header": "Import MAG",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.header": "Import MAG",
+
   // "admin.metadata-import.page.help": "You can drop or browse CSV files that contain batch metadata operations on files here",
   "admin.metadata-import.page.help": "Becsatolhat vagy kikereshet CSV fájlokat, amelyek az itt tárolt fájlokra vonatkozó műveleteket tárolnak",
 
   // "admin.batch-import.page.help": "Select the Collection to import into. Then, drop or browse to a Simple Archive Format (SAF) zip file that includes the Items to import",
   // TODO New key - Add a translation
   "admin.batch-import.page.help": "Select the Collection to import into. Then, drop or browse to a Simple Archive Format (SAF) zip file that includes the Items to import",
+
+  // "admin.batch-import.page.toggle.help": "It is possible to perform import either with file upload or via URL, use above toggle to set the input source",
+  // TODO New key - Add a translation
+  "admin.batch-import.page.toggle.help": "It is possible to perform import either with file upload or via URL, use above toggle to set the input source",
 
   // "admin.metadata-import.page.dropMsg": "Drop a metadata CSV to import",
   "admin.metadata-import.page.dropMsg": "Húzzon ide egy metaadat CSV-t az importáláshoz",
@@ -1207,9 +1223,25 @@
   // "admin.metadata-import.page.error.addFile": "Select file first!",
   "admin.metadata-import.page.error.addFile": "Előbb válassza ki a fájlt!",
 
+  // "admin.metadata-import.page.error.addFileUrl": "Insert file url first!",
+  // TODO New key - Add a translation
+  "admin.metadata-import.page.error.addFileUrl": "Insert file url first!",
+
   // "admin.batch-import.page.error.addFile": "Select Zip file first!",
   // TODO New key - Add a translation
   "admin.batch-import.page.error.addFile": "Select Zip file first!",
+
+  // "admin.metadata-import.page.toggle.upload": "Upload",
+  // TODO New key - Add a translation
+  "admin.metadata-import.page.toggle.upload": "Upload",
+
+  // "admin.metadata-import.page.toggle.url": "URL",
+  // TODO New key - Add a translation
+  "admin.metadata-import.page.toggle.url": "URL",
+
+  // "admin.metadata-import.page.urlMsg": "Insert the batch ZIP url to import",
+  // TODO New key - Add a translation
+  "admin.metadata-import.page.urlMsg": "Insert the batch ZIP url to import",
 
   // "admin.metadata-import.page.validateOnly": "Validate Only",
   // TODO New key - Add a translation
@@ -1613,6 +1645,246 @@
   // TODO New key - Add a translation
   "browse.comcol.by.type": "By Type",
 
+  // "browse.comcol.by.titleF" : "Title",
+  // TODO New key - Add a translation
+  "browse.comcol.by.titleF" : "Title",
+
+  // "browse.comcol.by.typeF" : "Type",
+  // TODO New key - Add a translation
+  "browse.comcol.by.typeF" : "Type",
+
+  // "browse.comcol.by.dateissuedF" : "Date",
+  // TODO New key - Add a translation
+  "browse.comcol.by.dateissuedF" : "Date",
+
+  // "browse.comcol.by.subjectF" : "Subject",
+  // TODO New key - Add a translation
+  "browse.comcol.by.subjectF" : "Subject",
+
+  // "browse.comcol.by.titleJF" : "Title",
+  // TODO New key - Add a translation
+  "browse.comcol.by.titleJF" : "Title",
+
+  // "browse.comcol.by.typeJF" : "Type",
+  // TODO New key - Add a translation
+  "browse.comcol.by.typeJF" : "Type",
+
+  // "browse.comcol.by.dateissuedJF" : "Date",
+  // TODO New key - Add a translation
+  "browse.comcol.by.dateissuedJF" : "Date",
+
+  // "browse.comcol.by.subjectJF" : "Subject",
+  // TODO New key - Add a translation
+  "browse.comcol.by.subjectJF" : "Subject",
+
+  // "browse.comcol.by.titleA" : "Title",
+  // TODO New key - Add a translation
+  "browse.comcol.by.titleA" : "Title",
+
+  // "browse.comcol.by.typeA" : "Type",
+  // TODO New key - Add a translation
+  "browse.comcol.by.typeA" : "Type",
+
+  // "browse.comcol.by.dateissuedA" : "Date",
+  // TODO New key - Add a translation
+  "browse.comcol.by.dateissuedA" : "Date",
+
+  // "browse.comcol.by.subjectA" : "Subject",
+  // TODO New key - Add a translation
+  "browse.comcol.by.subjectA" : "Subject",
+
+  // "browse.comcol.by.titleEvent": "Title",
+  // TODO New key - Add a translation
+  "browse.comcol.by.titleEvent": "Title",
+
+  // "browse.comcol.by.titleAM": "Title",
+  // TODO New key - Add a translation
+  "browse.comcol.by.titleAM": "Title",
+
+  // "browse.comcol.by.titleFamily": "Title",
+  // TODO New key - Add a translation
+  "browse.comcol.by.titleFamily": "Title",
+
+  // "browse.comcol.by.titlePlace": "Title",
+  // TODO New key - Add a translation
+  "browse.comcol.by.titlePlace": "Title",
+
+  // "browse.comcol.by.titleN": "Title",
+  // TODO New key - Add a translation
+  "browse.comcol.by.titleN": "Title",
+
+  // "browse.comcol.by.titleSP": "Title",
+  // TODO New key - Add a translation
+  "browse.comcol.by.titleSP": "Title",
+
+  // "browse.comcol.by.titleJI": "Title",
+  // TODO New key - Add a translation
+  "browse.comcol.by.titleJI": "Title",
+
+  // "browse.comcol.by.titlePath": "Title",
+  // TODO New key - Add a translation
+  "browse.comcol.by.titlePath": "Title",
+
+  // "browse.comcol.by.titleO": "Title",
+  // TODO New key - Add a translation
+  "browse.comcol.by.titleO": "Title",
+
+  // "browse.comcol.by.titleC": "Title",
+  // TODO New key - Add a translation
+  "browse.comcol.by.titleC": "Title",
+
+  // "browse.comcol.by.titleSM": "Title",
+  // TODO New key - Add a translation
+  "browse.comcol.by.titleSM": "Title",
+
+  // "browse.comcol.by.titlePicture": "Title",
+  // TODO New key - Add a translation
+  "browse.comcol.by.titlePicture": "Title",
+
+  // "browse.comcol.by.dateissuedEvent": "Date",
+  // TODO New key - Add a translation
+  "browse.comcol.by.dateissuedEvent": "Date",
+
+  // "browse.comcol.by.subjectEvent": "Subject",
+  // TODO New key - Add a translation
+  "browse.comcol.by.subjectEvent": "Subject",
+
+  // "browse.comcol.by.typeEvent": "Type",
+  // TODO New key - Add a translation
+  "browse.comcol.by.typeEvent": "Type",
+
+  // "browse.comcol.by.dateissuedAM": "Date",
+  // TODO New key - Add a translation
+  "browse.comcol.by.dateissuedAM": "Date",
+
+  // "browse.comcol.by.subjectAM": "Subject",
+  // TODO New key - Add a translation
+  "browse.comcol.by.subjectAM": "Subject",
+
+  // "browse.comcol.by.typeAM": "Type",
+  // TODO New key - Add a translation
+  "browse.comcol.by.typeAM": "Type",
+
+  // "browse.comcol.by.dateissuedFamily": "Date",
+  // TODO New key - Add a translation
+  "browse.comcol.by.dateissuedFamily": "Date",
+
+  // "browse.comcol.by.subjectFamily": "Subject",
+  // TODO New key - Add a translation
+  "browse.comcol.by.subjectFamily": "Subject",
+
+  // "browse.comcol.by.typeFamily": "Type",
+  // TODO New key - Add a translation
+  "browse.comcol.by.typeFamily": "Type",
+
+  // "browse.comcol.by.dateissuedPlace": "Date",
+  // TODO New key - Add a translation
+  "browse.comcol.by.dateissuedPlace": "Date",
+
+  // "browse.comcol.by.subjectPlace": "Subject",
+  // TODO New key - Add a translation
+  "browse.comcol.by.subjectPlace": "Subject",
+
+  // "browse.comcol.by.typePlace": "Type",
+  // TODO New key - Add a translation
+  "browse.comcol.by.typePlace": "Type",
+
+  // "browse.comcol.by.dateissuedN": "Date",
+  // TODO New key - Add a translation
+  "browse.comcol.by.dateissuedN": "Date",
+
+  // "browse.comcol.by.subjectN": "Subject",
+  // TODO New key - Add a translation
+  "browse.comcol.by.subjectN": "Subject",
+
+  // "browse.comcol.by.typeN": "Type",
+  // TODO New key - Add a translation
+  "browse.comcol.by.typeN": "Type",
+
+  // "browse.comcol.by.dateissuedSP": "Date",
+  // TODO New key - Add a translation
+  "browse.comcol.by.dateissuedSP": "Date",
+
+  // "browse.comcol.by.subjectSP": "Subject",
+  // TODO New key - Add a translation
+  "browse.comcol.by.subjectSP": "Subject",
+
+  // "browse.comcol.by.typeSP": "Type",
+  // TODO New key - Add a translation
+  "browse.comcol.by.typeSP": "Type",
+
+  // "browse.comcol.by.dateissuedJI": "Date",
+  // TODO New key - Add a translation
+  "browse.comcol.by.dateissuedJI": "Date",
+
+  // "browse.comcol.by.subjectJI": "Subject",
+  // TODO New key - Add a translation
+  "browse.comcol.by.subjectJI": "Subject",
+
+  // "browse.comcol.by.typeJI": "Type",
+  // TODO New key - Add a translation
+  "browse.comcol.by.typeJI": "Type",
+
+  // "browse.comcol.by.dateissuedPath": "Date",
+  // TODO New key - Add a translation
+  "browse.comcol.by.dateissuedPath": "Date",
+
+  // "browse.comcol.by.subjectPath": "Subject",
+  // TODO New key - Add a translation
+  "browse.comcol.by.subjectPath": "Subject",
+
+  // "browse.comcol.by.typePath": "Type",
+  // TODO New key - Add a translation
+  "browse.comcol.by.typePath": "Type",
+
+  // "browse.comcol.by.dateissuedO": "Date",
+  // TODO New key - Add a translation
+  "browse.comcol.by.dateissuedO": "Date",
+
+  // "browse.comcol.by.subjectO": "Subject",
+  // TODO New key - Add a translation
+  "browse.comcol.by.subjectO": "Subject",
+
+  // "browse.comcol.by.typeO": "Type",
+  // TODO New key - Add a translation
+  "browse.comcol.by.typeO": "Type",
+
+  // "browse.comcol.by.dateissuedC": "Date",
+  // TODO New key - Add a translation
+  "browse.comcol.by.dateissuedC": "Date",
+
+  // "browse.comcol.by.subjectC": "Subject",
+  // TODO New key - Add a translation
+  "browse.comcol.by.subjectC": "Subject",
+
+  // "browse.comcol.by.typeC": "Type",
+  // TODO New key - Add a translation
+  "browse.comcol.by.typeC": "Type",
+
+  // "browse.comcol.by.dateissuedSM": "Date",
+  // TODO New key - Add a translation
+  "browse.comcol.by.dateissuedSM": "Date",
+
+  // "browse.comcol.by.subjectSM": "Subject",
+  // TODO New key - Add a translation
+  "browse.comcol.by.subjectSM": "Subject",
+
+  // "browse.comcol.by.typeSM": "Type",
+  // TODO New key - Add a translation
+  "browse.comcol.by.typeSM": "Type",
+
+  // "browse.comcol.by.dateissuedPicture": "Date",
+  // TODO New key - Add a translation
+  "browse.comcol.by.dateissuedPicture": "Date",
+
+  // "browse.comcol.by.subjectPicture": "Subject",
+  // TODO New key - Add a translation
+  "browse.comcol.by.subjectPicture": "Subject",
+
+  // "browse.comcol.by.typePicture": "Type",
+  // TODO New key - Add a translation
+  "browse.comcol.by.typePicture": "Type",
+
 
   // "browse.comcol.head": "Browse",
   "browse.comcol.head": "Böngészés",
@@ -1715,6 +1987,294 @@
 
   // "browse.metadata.title.breadcrumbs": "Browse by Title",
   "browse.metadata.title.breadcrumbs": "Böngészés cím szerint",
+
+  // "browse.metadata.titleF.breadcrumbs" : "Browse by Title",
+  // TODO New key - Add a translation
+  "browse.metadata.titleF.breadcrumbs" : "Browse by Title",
+
+  // "browse.metadata.typeF.breadcrumbs" : "Browse by Type",
+  // TODO New key - Add a translation
+  "browse.metadata.typeF.breadcrumbs" : "Browse by Type",
+
+  // "browse.metadata.dateissuedF.breadcrumbs" : "Browse by Date",
+  // TODO New key - Add a translation
+  "browse.metadata.dateissuedF.breadcrumbs" : "Browse by Date",
+
+  // "browse.metadata.subjectF.breadcrumbs" : "Browse by Subject",
+  // TODO New key - Add a translation
+  "browse.metadata.subjectF.breadcrumbs" : "Browse by Subject",
+
+  // "browse.metadata.titleJF.breadcrumbs" : "Browse by Title",
+  // TODO New key - Add a translation
+  "browse.metadata.titleJF.breadcrumbs" : "Browse by Title",
+
+  // "browse.metadata.typeJF.breadcrumbs" : "Browse by Type",
+  // TODO New key - Add a translation
+  "browse.metadata.typeJF.breadcrumbs" : "Browse by Type",
+
+  // "browse.metadata.dateissuedJF.breadcrumbs" : "Browse by Date",
+  // TODO New key - Add a translation
+  "browse.metadata.dateissuedJF.breadcrumbs" : "Browse by Date",
+
+  // "browse.metadata.subjectJF.breadcrumbs" : "Browse by Subject",
+  // TODO New key - Add a translation
+  "browse.metadata.subjectJF.breadcrumbs" : "Browse by Subject",
+
+  // "browse.metadata.titleA.breadcrumbs" : "Browse by Title",
+  // TODO New key - Add a translation
+  "browse.metadata.titleA.breadcrumbs" : "Browse by Title",
+
+  // "browse.metadata.typeA.breadcrumbs" : "Browse by Type",
+  // TODO New key - Add a translation
+  "browse.metadata.typeA.breadcrumbs" : "Browse by Type",
+
+  // "browse.metadata.dateissuedA.breadcrumbs" : "Browse by Date",
+  // TODO New key - Add a translation
+  "browse.metadata.dateissuedA.breadcrumbs" : "Browse by Date",
+
+  // "browse.metadata.subjectA.breadcrumbs" : "Browse by Subject",
+  // TODO New key - Add a translation
+  "browse.metadata.subjectA.breadcrumbs" : "Browse by Subject",
+
+  // "browse.metadata.titleEvent.breadcrumbs": "Browse by Title",
+  // TODO New key - Add a translation
+  "browse.metadata.titleEvent.breadcrumbs": "Browse by Title",
+
+  // "browse.metadata.titleAM.breadcrumbs": "Browse by Title",
+  // TODO New key - Add a translation
+  "browse.metadata.titleAM.breadcrumbs": "Browse by Title",
+
+  // "browse.metadata.titleFamily.breadcrumbs": "Browse by Title",
+  // TODO New key - Add a translation
+  "browse.metadata.titleFamily.breadcrumbs": "Browse by Title",
+
+  // "browse.metadata.titlePlace.breadcrumbs": "Browse by Title",
+  // TODO New key - Add a translation
+  "browse.metadata.titlePlace.breadcrumbs": "Browse by Title",
+
+  // "browse.metadata.titleN.breadcrumbs": "Browse by Title",
+  // TODO New key - Add a translation
+  "browse.metadata.titleN.breadcrumbs": "Browse by Title",
+
+  // "browse.metadata.titleSP.breadcrumbs": "Browse by Title",
+  // TODO New key - Add a translation
+  "browse.metadata.titleSP.breadcrumbs": "Browse by Title",
+
+  // "browse.metadata.titleJI.breadcrumbs": "Browse by Title",
+  // TODO New key - Add a translation
+  "browse.metadata.titleJI.breadcrumbs": "Browse by Title",
+
+  // "browse.metadata.titlePath.breadcrumbs": "Browse by Title",
+  // TODO New key - Add a translation
+  "browse.metadata.titlePath.breadcrumbs": "Browse by Title",
+
+  // "browse.metadata.titleO.breadcrumbs": "Browse by Title",
+  // TODO New key - Add a translation
+  "browse.metadata.titleO.breadcrumbs": "Browse by Title",
+
+  // "browse.metadata.titleC.breadcrumbs": "Browse by Title",
+  // TODO New key - Add a translation
+  "browse.metadata.titleC.breadcrumbs": "Browse by Title",
+
+  // "browse.metadata.titleSM.breadcrumbs": "Browse by Title",
+  // TODO New key - Add a translation
+  "browse.metadata.titleSM.breadcrumbs": "Browse by Title",
+
+  // "browse.metadata.titlePicture.breadcrumbs": "Browse by Title",
+  // TODO New key - Add a translation
+  "browse.metadata.titlePicture.breadcrumbs": "Browse by Title",
+
+  // "browse.metadata.dateissuedEvent.breadcrumbs": "Browse by Date",
+  // TODO New key - Add a translation
+  "browse.metadata.dateissuedEvent.breadcrumbs": "Browse by Date",
+
+  // "browse.metadata.subjectEvent.breadcrumbs": "Browse by Subject",
+  // TODO New key - Add a translation
+  "browse.metadata.subjectEvent.breadcrumbs": "Browse by Subject",
+
+  // "browse.metadata.typeEvent.breadcrumbs": "Browse by Type",
+  // TODO New key - Add a translation
+  "browse.metadata.typeEvent.breadcrumbs": "Browse by Type",
+
+  // "browse.metadata.dateissuedAM.breadcrumbs": "Browse by Date",
+  // TODO New key - Add a translation
+  "browse.metadata.dateissuedAM.breadcrumbs": "Browse by Date",
+
+  // "browse.metadata.subjectAM.breadcrumbs": "Browse by Subject",
+  // TODO New key - Add a translation
+  "browse.metadata.subjectAM.breadcrumbs": "Browse by Subject",
+
+  // "browse.metadata.typeAM.breadcrumbs": "Browse by Type",
+  // TODO New key - Add a translation
+  "browse.metadata.typeAM.breadcrumbs": "Browse by Type",
+
+  // "browse.metadata.dateissuedFamily.breadcrumbs": "Browse by Date",
+  // TODO New key - Add a translation
+  "browse.metadata.dateissuedFamily.breadcrumbs": "Browse by Date",
+
+  // "browse.metadata.subjectFamily.breadcrumbs": "Browse by Subject",
+  // TODO New key - Add a translation
+  "browse.metadata.subjectFamily.breadcrumbs": "Browse by Subject",
+
+  // "browse.metadata.typeFamily.breadcrumbs": "Browse by Type",
+  // TODO New key - Add a translation
+  "browse.metadata.typeFamily.breadcrumbs": "Browse by Type",
+
+  // "browse.metadata.dateissuedPlace.breadcrumbs": "Browse by Date",
+  // TODO New key - Add a translation
+  "browse.metadata.dateissuedPlace.breadcrumbs": "Browse by Date",
+
+  // "browse.metadata.subjectPlace.breadcrumbs": "Browse by Subject",
+  // TODO New key - Add a translation
+  "browse.metadata.subjectPlace.breadcrumbs": "Browse by Subject",
+
+  // "browse.metadata.typePlace.breadcrumbs": "Browse by Type",
+  // TODO New key - Add a translation
+  "browse.metadata.typePlace.breadcrumbs": "Browse by Type",
+
+  // "browse.metadata.dateissuedN.breadcrumbs": "Browse by Date",
+  // TODO New key - Add a translation
+  "browse.metadata.dateissuedN.breadcrumbs": "Browse by Date",
+
+  // "browse.metadata.subjectN.breadcrumbs": "Browse by Subject",
+  // TODO New key - Add a translation
+  "browse.metadata.subjectN.breadcrumbs": "Browse by Subject",
+
+  // "browse.metadata.typeN.breadcrumbs": "Browse by Type",
+  // TODO New key - Add a translation
+  "browse.metadata.typeN.breadcrumbs": "Browse by Type",
+
+  // "browse.metadata.dateissuedSP.breadcrumbs": "Browse by Date",
+  // TODO New key - Add a translation
+  "browse.metadata.dateissuedSP.breadcrumbs": "Browse by Date",
+
+  // "browse.metadata.subjectSP.breadcrumbs": "Browse by Subject",
+  // TODO New key - Add a translation
+  "browse.metadata.subjectSP.breadcrumbs": "Browse by Subject",
+
+  // "browse.metadata.typeSP.breadcrumbs": "Browse by Type",
+  // TODO New key - Add a translation
+  "browse.metadata.typeSP.breadcrumbs": "Browse by Type",
+
+  // "browse.metadata.dateissuedJI.breadcrumbs": "Browse by Date",
+  // TODO New key - Add a translation
+  "browse.metadata.dateissuedJI.breadcrumbs": "Browse by Date",
+
+  // "browse.metadata.subjectJI.breadcrumbs": "Browse by Subject",
+  // TODO New key - Add a translation
+  "browse.metadata.subjectJI.breadcrumbs": "Browse by Subject",
+
+  // "browse.metadata.typeJI.breadcrumbs": "Browse by Type",
+  // TODO New key - Add a translation
+  "browse.metadata.typeJI.breadcrumbs": "Browse by Type",
+
+  // "browse.metadata.dateissuedPath.breadcrumbs": "Browse by Date",
+  // TODO New key - Add a translation
+  "browse.metadata.dateissuedPath.breadcrumbs": "Browse by Date",
+
+  // "browse.metadata.subjectPath.breadcrumbs": "Browse by Subject",
+  // TODO New key - Add a translation
+  "browse.metadata.subjectPath.breadcrumbs": "Browse by Subject",
+
+  // "browse.metadata.typePath.breadcrumbs": "Browse by Type",
+  // TODO New key - Add a translation
+  "browse.metadata.typePath.breadcrumbs": "Browse by Type",
+
+  // "browse.metadata.dateissuedO.breadcrumbs": "Browse by Date",
+  // TODO New key - Add a translation
+  "browse.metadata.dateissuedO.breadcrumbs": "Browse by Date",
+
+  // "browse.metadata.subjectO.breadcrumbs": "Browse by Subject",
+  // TODO New key - Add a translation
+  "browse.metadata.subjectO.breadcrumbs": "Browse by Subject",
+
+  // "browse.metadata.typeO.breadcrumbs": "Browse by Type",
+  // TODO New key - Add a translation
+  "browse.metadata.typeO.breadcrumbs": "Browse by Type",
+
+  // "browse.metadata.dateissuedC.breadcrumbs": "Browse by Date",
+  // TODO New key - Add a translation
+  "browse.metadata.dateissuedC.breadcrumbs": "Browse by Date",
+
+  // "browse.metadata.subjectC.breadcrumbs": "Browse by Subject",
+  // TODO New key - Add a translation
+  "browse.metadata.subjectC.breadcrumbs": "Browse by Subject",
+
+  // "browse.metadata.typeC.breadcrumbs": "Browse by Type",
+  // TODO New key - Add a translation
+  "browse.metadata.typeC.breadcrumbs": "Browse by Type",
+
+  // "browse.metadata.dateissuedSM.breadcrumbs": "Browse by Date",
+  // TODO New key - Add a translation
+  "browse.metadata.dateissuedSM.breadcrumbs": "Browse by Date",
+
+  // "browse.metadata.subjectSM.breadcrumbs": "Browse by Subject",
+  // TODO New key - Add a translation
+  "browse.metadata.subjectSM.breadcrumbs": "Browse by Subject",
+
+  // "browse.metadata.typeSM.breadcrumbs": "Browse by Type",
+  // TODO New key - Add a translation
+  "browse.metadata.typeSM.breadcrumbs": "Browse by Type",
+
+  // "browse.metadata.dateissuedPicture.breadcrumbs": "Browse by Date",
+  // TODO New key - Add a translation
+  "browse.metadata.dateissuedPicture.breadcrumbs": "Browse by Date",
+
+  // "browse.metadata.subjectPicture.breadcrumbs": "Browse by Subject",
+  // TODO New key - Add a translation
+  "browse.metadata.subjectPicture.breadcrumbs": "Browse by Subject",
+
+  // "browse.metadata.typePicture.breadcrumbs": "Browse by Type",
+  // TODO New key - Add a translation
+  "browse.metadata.typePicture.breadcrumbs": "Browse by Type",
+
+  // "browse.metadata.titleF" : "Title",
+  // TODO New key - Add a translation
+  "browse.metadata.titleF" : "Title",
+
+  // "browse.metadata.typeF" : "Type",
+  // TODO New key - Add a translation
+  "browse.metadata.typeF" : "Type",
+
+  // "browse.metadata.dateissuedF" : "Date",
+  // TODO New key - Add a translation
+  "browse.metadata.dateissuedF" : "Date",
+
+  // "browse.metadata.subjectF" : "Subject",
+  // TODO New key - Add a translation
+  "browse.metadata.subjectF" : "Subject",
+
+  // "browse.metadata.titleJF" : "Title",
+  // TODO New key - Add a translation
+  "browse.metadata.titleJF" : "Title",
+
+  // "browse.metadata.typeJF" : "Type",
+  // TODO New key - Add a translation
+  "browse.metadata.typeJF" : "Type",
+
+  // "browse.metadata.dateissuedJF" : "Date",
+  // TODO New key - Add a translation
+  "browse.metadata.dateissuedJF" : "Date",
+
+  // "browse.metadata.subjectJF" : "Subject",
+  // TODO New key - Add a translation
+  "browse.metadata.subjectJF" : "Subject",
+
+  // "browse.metadata.titleA" : "Title",
+  // TODO New key - Add a translation
+  "browse.metadata.titleA" : "Title",
+
+  // "browse.metadata.typeA" : "Type",
+  // TODO New key - Add a translation
+  "browse.metadata.typeA" : "Type",
+
+  // "browse.metadata.dateissuedA" : "Date",
+  // TODO New key - Add a translation
+  "browse.metadata.dateissuedA" : "Date",
+
+  // "browse.metadata.subjectA" : "Subject",
+  // TODO New key - Add a translation
+  "browse.metadata.subjectA" : "Subject",
 
   // "pagination.next.button": "Next",
   // TODO New key - Add a translation
@@ -1863,6 +2423,11 @@
   // "bulk-import.title" : "Bulk import",
   // TODO New key - Add a translation
   "bulk-import.title" : "Bulk import",
+
+
+  // "carousel.button.see-more": "See more",
+  // TODO New key - Add a translation
+  "carousel.button.see-more": "See more",
 
 
 
@@ -2759,6 +3324,34 @@
   // TODO New key - Add a translation
   "context-menu.actions.edit-item-relationships.btn.projects": "Manage Projects",
 
+  // "context-menu.actions.edit-item-relationships.btn.pathpublications": "Manage Paths Publications",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item-relationships.btn.pathpublications": "Manage Paths Publications",
+
+  // "context-menu.actions.edit-item-relationships.btn.contributedpublications": "Manage Researchers Contributed Publications",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item-relationships.btn.contributedpublications": "Manage Researchers Contributed Publications",
+
+  // "context-menu.actions.edit-item-relationships.btn.fonds": "Manage Researchers Fonds",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item-relationships.btn.fonds": "Manage Researchers Fonds",
+
+  // "context-menu.actions.edit-item-relationships.btn.children": "Manage Children",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item-relationships.btn.children": "Manage Children",
+
+  // "context-menu.actions.edit-item-relationships.btn.events": "Manage Events",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item-relationships.btn.events": "Manage Events",
+
+  // "context-menu.actions.edit-item-relationships.btn.orgunitfonds": "Manage Fonds",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item-relationships.btn.orgunitfonds": "Manage Fonds",
+
+  // "context-menu.actions.edit-item-relationships.btn.archivalmaterial": "Manage Archival Material",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item-relationships.btn.archivalmaterial": "Manage Archival Material",
+
   // "context-menu.actions.orcid-view": "Open ORCID setting page",
   // TODO New key - Add a translation
   "context-menu.actions.orcid-view": "Open ORCID setting page",
@@ -2831,6 +3424,10 @@
   // TODO New key - Add a translation
   "RELATION.Person.researchoutputs.search.results.head" : "Research Outputs",
 
+  // "RELATION.Person.publications.search.results.head" : "Publications",
+  // TODO New key - Add a translation
+  "RELATION.Person.publications.search.results.head" : "Publications",
+
   // "RELATION.Person.projects.search.results.head" : "Projects",
   // TODO New key - Add a translation
   "RELATION.Person.projects.search.results.head" : "Projects",
@@ -2855,13 +3452,73 @@
   // TODO New key - Add a translation
   "RELATION.OrgUnit.projects.search.results.head" : "Projects",
 
+  // "RELATION.OrgUnit.orgunitfonds.search.results.head" : "Fonds",
+  // TODO New key - Add a translation
+  "RELATION.OrgUnit.orgunitfonds.search.results.head" : "Fonds",
+
+  // "RELATION.OrgUnit.archivalmaterial.search.results.head" : "Archival Material",
+  // TODO New key - Add a translation
+  "RELATION.OrgUnit.archivalmaterial.search.results.head" : "Archival Material",
+
   // "RELATION.Project.researchoutputs.search.results.head" : "Publications",
   // TODO New key - Add a translation
   "RELATION.Project.researchoutputs.search.results.head" : "Publications",
 
+  // "RELATION.Project.projects.search.results.head" : "Projects",
+  // TODO New key - Add a translation
+  "RELATION.Project.projects.search.results.head" : "Projects",
+
+  // "RELATION.Project.fundings.search.results.head" : "Fundings",
+  // TODO New key - Add a translation
+  "RELATION.Project.fundings.search.results.head" : "Fundings",
+
+  // "RELATION.Project.publications.search.results.head" : "Publications",
+  // TODO New key - Add a translation
+  "RELATION.Project.publications.search.results.head" : "Publications",
+
   // "RELATION.OrgUnit.people.search.results.head" : "People",
   // TODO New key - Add a translation
   "RELATION.OrgUnit.people.search.results.head" : "People",
+
+  // "RELATION.Path.pathpublications.search.results.head" : "Paths Publications",
+  // TODO New key - Add a translation
+  "RELATION.Path.pathpublications.search.results.head" : "Paths Publications",
+
+  // "RELATION.Person.copublications.search.results.head" : "Contributed Publications",
+  // TODO New key - Add a translation
+  "RELATION.Person.copublications.search.results.head" : "Contributed Publications",
+
+  // "RELATION.Person.fonds.search.results.head" : "Fonds",
+  // TODO New key - Add a translation
+  "RELATION.Person.fonds.search.results.head" : "Fonds",
+
+  // "RELATION.Fonds.publications.search.results.head" : "Publications",
+  // TODO New key - Add a translation
+  "RELATION.Fonds.publications.search.results.head" : "Publications",
+
+  // "RELATION.Fonds.children.search.results.head" : "Fonds Children",
+  // TODO New key - Add a translation
+  "RELATION.Fonds.children.search.results.head" : "Fonds Children",
+
+  // "RELATION.JournalFonds.children.search.results.head" : "Journal Fonds Children",
+  // TODO New key - Add a translation
+  "RELATION.JournalFonds.children.search.results.head" : "Journal Fonds Children",
+
+  // "RELATION.Place.publications.search.results.head" : "Publications",
+  // TODO New key - Add a translation
+  "RELATION.Place.publications.search.results.head" : "Publications",
+
+  // "RELATION.Place.events.search.results.head" : "Events",
+  // TODO New key - Add a translation
+  "RELATION.Place.events.search.results.head" : "Events",
+
+  // "RELATION.Event.publications.search.results.head" : "Publications",
+  // TODO New key - Add a translation
+  "RELATION.Event.publications.search.results.head" : "Publications",
+
+  // "RELATION.Event.people.search.results.head" : "People",
+  // TODO New key - Add a translation
+  "RELATION.Event.people.search.results.head" : "People",
 
   // "datafile.listelement.badge": "Data File",
   // TODO New key - Add a translation
@@ -3014,6 +3671,51 @@
   // "curation-task.task.citationpage.label":  "Generate Citation Page",
   // TODO New key - Add a translation
   "curation-task.task.citationpage.label":  "Generate Citation Page",
+
+
+  // "curation-task.task.migratedocviewer.label":  "Migrate the previously generated doc. viewer resources",
+  // TODO New key - Add a translation
+  "curation-task.task.migratedocviewer.label":  "Migrate the previously generated doc. viewer resources",
+
+  // "curation-task.task.iiifmigrate.label":  "Migrate the previously generated IIIF resources",
+  // TODO New key - Add a translation
+  "curation-task.task.iiifmigrate.label":  "Migrate the previously generated IIIF resources",
+
+  // "curation-task.task.avuploader.label":  "Process video resources",
+  // TODO New key - Add a translation
+  "curation-task.task.avuploader.label":  "Process video resources",
+
+  // "curation-task.task.avuploader.primary.label":  "Process video resources and hide non primary items",
+  // TODO New key - Add a translation
+  "curation-task.task.avuploader.primary.label":  "Process video resources and hide non primary items",
+
+  // "curation-task.task.audiouploader.label":  "Process audio resources",
+  // TODO New key - Add a translation
+  "curation-task.task.audiouploader.label":  "Process audio resources",
+
+  // "curation-task.task.audiouploader.primary.label":  "Process audio resources and hide non primary items",
+  // TODO New key - Add a translation
+  "curation-task.task.audiouploader.primary.label":  "Process audio resources and hide non primary items",
+
+  // "curation-task.task.avclean.label":  "Clean audio/video resources",
+  // TODO New key - Add a translation
+  "curation-task.task.avclean.label":  "Clean audio/video resources",
+
+  // "curation-task.task.generatesubtitles.label":  "Generate subtitles for audio/video resources",
+  // TODO New key - Add a translation
+  "curation-task.task.generatesubtitles.label":  "Generate subtitles for audio/video resources",
+
+  // "curation-task.task.hidecovers.label":  "Hide custom audio/video thumbnails from item page",
+  // TODO New key - Add a translation
+  "curation-task.task.hidecovers.label":  "Hide custom audio/video thumbnails from item page",
+
+  // "curation-task.task.avforbiddownload.label":  "Forbid Download on audio/video resources",
+  // TODO New key - Add a translation
+  "curation-task.task.avforbiddownload.label":  "Forbid Download on audio/video resources",
+
+  // "curation-task.task.avallowdownload.label":  "Allow Download on audio/video resources",
+  // TODO New key - Add a translation
+  "curation-task.task.avallowdownload.label":  "Allow Download on audio/video resources",
 
 
   // "cris-layout.toggle.open": "Open section",
@@ -3554,6 +4256,14 @@
   // TODO New key - Add a translation
   "explore.counters-section.project_funding" : "Projects",
 
+  // "explore.carousel.view-more": "View More",
+  // TODO New key - Add a translation
+  "explore.carousel.view-more": "View More",
+
+  // "explore.text-section.counter.header" : "Our Numbers",
+  // TODO New key - Add a translation
+  "explore.text-section.counter.header" : "Our Numbers",
+
   // "explore.grid-section.seeAll" : "See all",
   // TODO New key - Add a translation
   "explore.grid-section.seeAll" : "See all",
@@ -3611,9 +4321,13 @@
   // TODO New key - Add a translation
   "explore.index.dateissued" : "Date issued",
 
-  // "explore.index.dc.date.accessioned" : "Recent Additions",
+  // "explore.index.dc.date.accessioned" : "New accessions",
   // TODO New key - Add a translation
-  "explore.index.dc.date.accessioned" : "Recent Additions",
+  "explore.index.dc.date.accessioned" : "New accessions",
+
+  // "explore.index.paths" : "Paths",
+  // TODO New key - Add a translation
+  "explore.index.paths" : "Paths",
 
   // "explore.index.dc.title" : "Title",
   // TODO New key - Add a translation
@@ -3899,9 +4613,13 @@
   // "footer.link.dspace": "DSpace software",
   "footer.link.dspace": "DSpace szoftver",
 
-  // "footer.link.dspace-cris": "DSpace-CRIS software",
+  // "footer.link.dspace-cris": "DSpace-GLAM software",
   // TODO New key - Add a translation
-  "footer.link.dspace-cris": "DSpace-CRIS software",
+  "footer.link.dspace-cris": "DSpace-GLAM software",
+
+  // "footer.link.dspace-cris.href": "https://www.4science.com/dspace-glam/",
+  // TODO New key - Add a translation
+  "footer.link.dspace-cris.href": "https://www.4science.com/dspace-glam/",
 
   // "footer.link.lyrasis": "LYRASIS",
   "footer.link.lyrasis": "LYRASIS",
@@ -3919,6 +4637,41 @@
   // TODO New key - Add a translation
   "footer.link.feedback":"Send Feedback",
 
+  // "footer.involved-institution":"Institutions involved",
+  // TODO New key - Add a translation
+  "footer.involved-institution":"Institutions involved",
+
+  // "footer.information":"Information",
+  // TODO New key - Add a translation
+  "footer.information":"Information",
+
+  // "footer.general-information":"General information",
+  // TODO New key - Add a translation
+  "footer.general-information":"General information",
+
+  // "footer.offer-service":"Offered services",
+  // TODO New key - Add a translation
+  "footer.offer-service":"Offered services",
+
+  // "footer.history-digital":"History of the digital LID",
+  // TODO New key - Add a translation
+  "footer.history-digital":"History of the digital LID",
+
+  // "footer.org-structure":"Organizational structure",
+  // TODO New key - Add a translation
+  "footer.org-structure":"Organizational structure",
+
+  // "footer.contact":"Contacts",
+  // TODO New key - Add a translation
+  "footer.contact":"Contacts",
+
+  // "footer.terms":"Terms of Use",
+  // TODO New key - Add a translation
+  "footer.terms":"Terms of Use",
+
+  // "footer.made-info": "Made with DSpace-GLAM - Extension maintained and optimized by 4Science",
+  // TODO New key - Add a translation
+  "footer.made-info": "Made with DSpace-GLAM - Extension maintained and optimized by 4Science",
 
 
   // "forgot-email.form.header": "Forgot Password",
@@ -4525,6 +5278,12 @@
 
 
 
+  // "item.curate.header": "Curate Item: {{item}}",
+  // TODO New key - Add a translation
+  "item.curate.header": "Curate Item: {{item}}",
+
+
+
   // "item.edit.bitstreams.bundle.edit.buttons.upload": "Upload",
   "item.edit.bitstreams.bundle.edit.buttons.upload": "Feltöltés",
 
@@ -5099,6 +5858,14 @@
   // "item.edit.tabs.status.buttons.authorizations.label": "Edit item's authorization policies",
   "item.edit.tabs.status.buttons.authorizations.label": "Szerkessze a tárgy engedélyezési szabályait",
 
+  // "item.edit.tabs.status.buttons.curate.button": "Curate item...",
+  // TODO New key - Add a translation
+  "item.edit.tabs.status.buttons.curate.button": "Curate item...",
+
+  // "item.edit.tabs.status.buttons.curate.label": "Launch curation tasks",
+  // TODO New key - Add a translation
+  "item.edit.tabs.status.buttons.curate.label": "Launch curation tasks",
+
   // "item.edit.tabs.status.buttons.delete.button": "Permanently delete",
   "item.edit.tabs.status.buttons.delete.button": "Véglegesen töröl",
 
@@ -5278,6 +6045,10 @@
   // "item.search.title": "Item Search",
   // TODO Source message changed - Revise the translation
   "item.search.title": "DSpace Angular :: Elem Keresése",
+
+  // "item.search.results.open-mirador": "Open results in Mirador",
+  // TODO New key - Add a translation
+  "item.search.results.open-mirador": "Open results in Mirador",
 
   // "item.truncatable-part.show-more": "Show more",
   // TODO New key - Add a translation
@@ -6513,9 +7284,9 @@
   // TODO New key - Add a translation
   "menu.section.archive.sectionfonds": "Fonds",
 
-  // "menu.section.archive.sectionaggregations": "Collections",
+  // "menu.section.archive.sectionaggregations": "Aggregations",
   // TODO New key - Add a translation
-  "menu.section.archive.sectionaggregations": "Collections",
+  "menu.section.archive.sectionaggregations": "Aggregations",
 
   // "menu.section.archive.sectiondocuments": "Archive Materials & Inscriptions",
   // TODO New key - Add a translation
@@ -6556,6 +7327,10 @@
   // "menu.section.communities_and_collections": "Communities & Collections",
   // TODO New key - Add a translation
   "menu.section.communities_and_collections": "Communities & Collections",
+
+  // "menu.section.icon.communities_and_collections": "Communities & Collections",
+  // TODO New key - Add a translation
+  "menu.section.icon.communities_and_collections": "Communities & Collections",
 
 
 
@@ -8076,9 +8851,9 @@
   // TODO New key - Add a translation
   "profile.card.access-token.copy-info": "Make sure to copy your personal access token now. You won’t be able to see it again!",
 
-  // "profile.card.access-token.info": "Tokens you have generated that can be used to access the DSpace-CRIS API.",
+  // "profile.card.access-token.info": "Tokens you have generated that can be used to access the DSpace-GLAM API.",
   // TODO New key - Add a translation
-  "profile.card.access-token.info": "Tokens you have generated that can be used to access the DSpace-CRIS API.",
+  "profile.card.access-token.info": "Tokens you have generated that can be used to access the DSpace-GLAM API.",
 
   // "profile.card.access-token.create.error": "An error occurred while generating the token, please try again later.",
   // TODO New key - Add a translation
@@ -8116,9 +8891,9 @@
   // TODO New key - Add a translation
   "profile.card.access-token.delete": "Revoke token",
 
-  // "profile.card.access-token.no-token-generated": "You don't have personal access token. Generate a personal access token for quick access to the DSpace-CRIS API.",
+  // "profile.card.access-token.no-token-generated": "You don't have personal access token. Generate a personal access token for quick access to the DSpace-GLAM API.",
   // TODO New key - Add a translation
-  "profile.card.access-token.no-token-generated": "You don't have personal access token. Generate a personal access token for quick access to the DSpace-CRIS API.",
+  "profile.card.access-token.no-token-generated": "You don't have personal access token. Generate a personal access token for quick access to the DSpace-GLAM API.",
 
   // "profile.card.access-token.token-generated": "You have already generated a personal access token.",
   // TODO New key - Add a translation
@@ -8311,6 +9086,9 @@
   // TODO New key - Add a translation
   "media-viewer.playlist": "Playlist",
 
+  // "media-viewer.play": "Play",
+  // TODO New key - Add a translation
+  "media-viewer.play": "Play",
 
   // "register-email.title": "New user registration",
   "register-email.title": "Új felhasználó regisztrálása",
@@ -8539,9 +9317,9 @@
   // TODO New key - Add a translation
   "repository.image.logo": "Repository logo",
 
-  // "repository.title.prefix": "DSpace Cris Angular :: ",
+  // "repository.title.prefix": "DSpace GLAM Angular :: ",
   // TODO New key - Add a translation
-  "repository.title.prefix": "DSpace Cris Angular :: ",
+  "repository.title.prefix": "DSpace GLAM Angular :: ",
 
 
   // "repository.title.prefixDSpace": "DSpace Angular ::",
@@ -8882,6 +9660,14 @@
   // TODO New key - Add a translation
   "search.filters.applied.charts.RELATION.Person.researchoutputs.title": "Research Output",
 
+  // "search.filters.applied.charts.RELATION.Person.publications.title": "Publications",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.Person.publications.title": "Publications",
+
+  // "search.filters.applied.charts.RELATION.Person.copublications.title": "Contributed Publications",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.Person.copublications.title": "Contributed Publications",
+
   // "search.filters.applied.charts.RELATION.Project.fundings.title": "Fundings",
   // TODO New key - Add a translation
   "search.filters.applied.charts.RELATION.Project.fundings.title": "Fundings",
@@ -8889,6 +9675,78 @@
   // "search.filters.applied.charts.RELATION.Project.researchoutputs.title": "Research Output",
   // TODO New key - Add a translation
   "search.filters.applied.charts.RELATION.Project.researchoutputs.title": "Research Output",
+
+  // "search.filters.applied.charts.RELATION.Path.pathpublications.title": "Publications",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.Path.pathpublications.title": "Publications",
+
+  // "search.filters.applied.charts.RELATION.Person.projects.title": "Projects",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.Person.projects.title": "Projects",
+
+  // "search.filters.applied.charts.RELATION.Person.fonds.title": "Fonds",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.Person.fonds.title": "Fonds",
+
+  // "search.filters.applied.charts.RELATION.OrgUnit.rpprojects.title": "Researchers Projects",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.OrgUnit.rpprojects.title": "Researchers Projects",
+
+  // "search.filters.applied.charts.RELATION.OrgUnit.publications.title": "Publications",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.OrgUnit.publications.title": "Publications",
+
+  // "search.filters.applied.charts.RELATION.OrgUnit.rppublications.title": "Researchers Publications",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.OrgUnit.rppublications.title": "Researchers Publications",
+
+  // "search.filters.applied.charts.RELATION.OrgUnit.people.title": "People",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.OrgUnit.people.title": "People",
+
+  // "search.filters.applied.charts.RELATION.OrgUnit.projects.title": "Projects",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.OrgUnit.projects.title": "Projects",
+
+  // "search.filters.applied.charts.RELATION.OrgUnit.organizations.title": "Parent Organizations",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.OrgUnit.organizations.title": "Parent Organizations",
+
+  // "search.filters.applied.charts.RELATION.Project.projects.title": "Projects",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.Project.projects.title": "Projects",
+
+  // "search.filters.applied.charts.RELATION.Project.publications.title": "Publications",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.Project.publications.title": "Publications",
+
+  // "search.filters.applied.charts.RELATION.Event.publications.title": "Publications",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.Event.publications.title": "Publications",
+
+  // "search.filters.applied.charts.RELATION.Event.people.title": "People",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.Event.people.title": "People",
+
+  // "search.filters.applied.charts.RELATION.Fonds.publications.title": "Publications",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.Fonds.publications.title": "Publications",
+
+  // "search.filters.applied.charts.RELATION.Fonds.children.title": "Fonds Children",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.Fonds.children.title": "Fonds Children",
+
+  // "search.filters.applied.charts.RELATION.JournalFonds.children.title": "Journal Fonds Children",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.JournalFonds.children.title": "Journal Fonds Children",
+
+  // "search.filters.applied.charts.RELATION.Place.publications.title": "Publications",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.Place.publications.title": "Publications",
+
+  // "search.filters.applied.charts.RELATION.Place.events.title": "Events",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.Place.events.title": "Events",
 
   // "search.filters.applied.charts.no.data.found": "No data found",
   // TODO New key - Add a translation
@@ -11130,9 +11988,9 @@
   // TODO New key - Add a translation
   "submission.sections.license.required": "You must accept the license",
 
-  // "submission.sections.license.notgranted":  "You must accept the license",
+  // "submission.sections.license.notgranted":  "",
   // TODO New key - Add a translation
-  "submission.sections.license.notgranted":  "You must accept the license",
+  "submission.sections.license.notgranted":  "",
 
 
   // "submission.sections.sherpa.publication.information": "Publication information",
@@ -11238,6 +12096,32 @@
   // "submission.sections.sherpa.error.message": "There was an error retrieving sherpa informations",
   // TODO New key - Add a translation
   "submission.sections.sherpa.error.message": "There was an error retrieving sherpa informations",
+
+
+
+  // "submission.sections.unpaywall.refresh": "Refresh",
+  // TODO New key - Add a translation
+  "submission.sections.unpaywall.refresh": "Refresh",
+
+  // "submission.sections.unpaywall.import": "Import from unpaywall",
+  // TODO New key - Add a translation
+  "submission.sections.unpaywall.import": "Import from unpaywall",
+
+  // "submission.sections.unpaywall.status.successful": "You can import from unpaywall",
+  // TODO New key - Add a translation
+  "submission.sections.unpaywall.status.successful": "You can import from unpaywall",
+
+  // "submission.sections.unpaywall.status.not-found": "Can't find record using Unpaywall api",
+  // TODO New key - Add a translation
+  "submission.sections.unpaywall.status.not-found": "Can't find record using Unpaywall api",
+
+  // "submission.sections.unpaywall.status.pending": "Unpaywall api request is initialized",
+  // TODO New key - Add a translation
+  "submission.sections.unpaywall.status.pending": "Unpaywall api request is initialized",
+
+  // "submission.sections.submit.progressbar.unpaywall": "Unpaywall",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.unpaywall": "Unpaywall",
 
 
 
@@ -11552,7 +12436,7 @@
 
 
 
-  // "title": "DSpace Cris",
+  // "title": "DSpace-GLAM",
   // TODO Source message changed - Revise the translation
   "title": "DSpace",
 
@@ -11593,6 +12477,10 @@
   // "viewer.provider.iiif.breadcrumbs": "Mirador Viewer",
   // TODO New key - Add a translation
   "viewer.provider.iiif.breadcrumbs": "Mirador Viewer",
+
+  // "viewer.provider.media.breadcrumbs": "Player",
+  // TODO New key - Add a translation
+  "viewer.provider.media.breadcrumbs": "Player",
 
   // "viewer.provider.pdf.breadcrumbs": "PDF Viewer",
   // TODO New key - Add a translation
@@ -11826,11 +12714,41 @@
   // TODO New key - Add a translation
   "workspace-item.view.title": "Workspace View",
 
+  // "workspace-item.delete.breadcrumbs": "Workspace Delete",
+  // TODO New key - Add a translation
+  "workspace-item.delete.breadcrumbs": "Workspace Delete",
+
+  // "workspace-item.delete.header": "Delete workspace item",
+  // TODO New key - Add a translation
+  "workspace-item.delete.header": "Delete workspace item",
+
+  // "workspace-item.delete.button.confirm": "Delete",
+  // TODO New key - Add a translation
+  "workspace-item.delete.button.confirm": "Delete",
+
+  // "workspace-item.delete.button.cancel": "Cancel",
+  // TODO New key - Add a translation
+  "workspace-item.delete.button.cancel": "Cancel",
+
+  // "workspace-item.delete.notification.success.title": "Deleted",
+  // TODO New key - Add a translation
+  "workspace-item.delete.notification.success.title": "Deleted",
+
+  // "workspace-item.delete.title": "This workspace item was successfully deleted",
+  // TODO New key - Add a translation
+  "workspace-item.delete.title": "This workspace item was successfully deleted",
+
+  // "workspace-item.delete.notification.error.title": "Something went wrong",
+  // TODO New key - Add a translation
+  "workspace-item.delete.notification.error.title": "Something went wrong",
+
+  // "workspace-item.delete.notification.error.content": "The workspace item could not be deleted",
+  // TODO New key - Add a translation
+  "workspace-item.delete.notification.error.content": "The workspace item could not be deleted",
 
   // "workflow-item.advanced.title": "Advanced workflow",
   // TODO New key - Add a translation
   "workflow-item.advanced.title": "Advanced workflow",
-
 
   // "workflow-item.selectrevieweraction.notification.success.title": "Selected reviewer",
   // TODO New key - Add a translation
@@ -12480,6 +13398,18 @@
   // TODO New key - Add a translation
   "place.listelement.badge": "Place",
 
+  // "archivalmaterial.listelement.badge": "Archival Material",
+  // TODO New key - Add a translation
+  "archivalmaterial.listelement.badge": "Archival Material",
+
+  // "fonds.listelement.badge": "Fonds",
+  // TODO New key - Add a translation
+  "fonds.listelement.badge": "Fonds",
+
+  // "journalfonds.listelement.badge": "Journal Fonds",
+  // TODO New key - Add a translation
+  "journalfonds.listelement.badge": "Journal Fonds",
+
   // "archivalmaterials.listelement.badge": "Archival Materials",
   // TODO New key - Add a translation
   "archivalmaterials.listelement.badge": "Archival Materials",
@@ -12524,9 +13454,9 @@
   // TODO New key - Add a translation
   "menu.section.explore_sectionjournalfonds" : "Journal Fonds",
 
-  // "menu.section.explore_sectionaggregations" : "Collections",
+  // "menu.section.explore_sectionaggregations" : "Aggregations",
   // TODO New key - Add a translation
-  "menu.section.explore_sectionaggregations" : "Collections",
+  "menu.section.explore_sectionaggregations" : "Aggregations",
   // "menu.section.explore_sectiondocuments" : "Documents & Other materials",
   // TODO New key - Add a translation
   "menu.section.explore_sectiondocuments" : "Documents & Other materials",
@@ -12536,9 +13466,9 @@
   // "explore.counters-section.journalfonds" : "Journal Fonds",
   // TODO New key - Add a translation
   "explore.counters-section.journalfonds" : "Journal Fonds",
-  // "explore.counters-section.aggregations" : "Collections",
+  // "explore.counters-section.aggregations" : "Aggregations",
   // TODO New key - Add a translation
-  "explore.counters-section.aggregations" : "Collections",
+  "explore.counters-section.aggregations" : "Aggregations",
   // "explore.counters-section.documents" : "Documents & Other materials",
   // TODO New key - Add a translation
   "explore.counters-section.documents" : "Documents & Other materials",
@@ -12582,15 +13512,15 @@
   // "explore.index.path" : "Path",
   // TODO New key - Add a translation
   "explore.index.path" : "Path",
-  // "explore.index.fond" : "Fond",
+  // "explore.index.fonds" : "Fonds",
   // TODO New key - Add a translation
-  "explore.index.fond" : "Fond",
-  // "explore.index.journalfond" : "Journal Fond",
+  "explore.index.fonds" : "Fonds",
+  // "explore.index.journalfonds" : "Journal Fonds",
   // TODO New key - Add a translation
-  "explore.index.journalfond" : "Journal Fond",
-  // "explore.index.aggregation" : "Collection",
+  "explore.index.journalfonds" : "Journal Fonds",
+  // "explore.index.aggregation" : "Aggregation",
   // TODO New key - Add a translation
-  "explore.index.aggregation" : "Collection",
+  "explore.index.aggregation" : "Aggregation",
 
   // "explore.search-section.sectiondocuments.title" : "Search Documents & Other materials",
   // TODO New key - Add a translation
@@ -12604,9 +13534,9 @@
   // TODO New key - Add a translation
   "explore.search-section.sectionjournalfonds.title" : "Search Journal fonds",
 
-  // "explore.search-section.sectionaggregations.title" : "Search Collections",
+  // "explore.search-section.sectionaggregations.title" : "Search Aggregations",
   // TODO New key - Add a translation
-  "explore.search-section.sectionaggregations.title" : "Search Collections",
+  "explore.search-section.sectionaggregations.title" : "Search Aggregations",
 
   // "explore.sectiondocuments.breadcrumbs": "Documents & Other materials",
   // TODO New key - Add a translation
@@ -12618,9 +13548,9 @@
   // "explore.sectionjournalfonds.breadcrumbs": "Journal Fonds",
   // TODO New key - Add a translation
   "explore.sectionjournalfonds.breadcrumbs": "Journal Fonds",
-  // "explore.sectionaggregations.breadcrumbs": "Collections",
+  // "explore.sectionaggregations.breadcrumbs": "Aggregations",
   // TODO New key - Add a translation
-  "explore.sectionaggregations.breadcrumbs": "Collections",
+  "explore.sectionaggregations.breadcrumbs": "Aggregations",
   // "documents.search.results.head": "Documents & Other materials Search Results",
   // TODO New key - Add a translation
   "documents.search.results.head": "Documents & Other materials Search Results",
@@ -12630,9 +13560,15 @@
   // "journalfonds.search.results.head": "Journal Fonds Search Results",
   // TODO New key - Add a translation
   "journalfonds.search.results.head": "Journal Fonds Search Results",
-  // "aggregations.search.results.head": "Collections Search Results",
+  // "aggregations.search.results.head": "Aggregations Search Results",
   // TODO New key - Add a translation
-  "aggregations.search.results.head": "Collections Search Results",
+  "aggregations.search.results.head": "Aggregations Search Results",
+  // "path.search.results.head": "Paths Search Results",
+  // TODO New key - Add a translation
+  "path.search.results.head": "Paths Search Results",
+  // "additions.search.results.head": "Recent Additions Search Results",
+  // TODO New key - Add a translation
+  "additions.search.results.head": "Recent Additions Search Results",
   // "search.filters.filter.path.head": "Path",
   // TODO New key - Add a translation
   "search.filters.filter.path.head": "Path",
@@ -12645,56 +13581,56 @@
   // "search.filters.applied.f.path": "Path",
   // TODO New key - Add a translation
   "search.filters.applied.f.path": "Path",
-  // "search.filters.filter.fond.head": "Fond",
+  // "search.filters.filter.fonds.head": "Fonds",
   // TODO New key - Add a translation
-  "search.filters.filter.fond.head": "Fond",
-  // "search.filters.filter.fond.placeholder": "Fond name",
+  "search.filters.filter.fonds.head": "Fonds",
+  // "search.filters.filter.fonds.placeholder": "Fonds name",
   // TODO New key - Add a translation
-  "search.filters.filter.fond.placeholder": "Fond name",
-  // "search.filters.filter.fond.label": "Search Fond name",
+  "search.filters.filter.fonds.placeholder": "Fonds name",
+  // "search.filters.filter.fonds.label": "Search Fonds name",
   // TODO New key - Add a translation
-  "search.filters.filter.fond.label": "Search Fond name",
-  // "search.filters.applied.f.fond": "Fond",
+  "search.filters.filter.fonds.label": "Search Fonds name",
+  // "search.filters.applied.f.fonds": "Fonds",
   // TODO New key - Add a translation
-  "search.filters.applied.f.fond": "Fond",
-  // "search.filters.filter.journalfond.head": "Journal Fond",
+  "search.filters.applied.f.fonds": "Fonds",
+  // "search.filters.filter.journalfonds.head": "Journal Fonds",
   // TODO New key - Add a translation
-  "search.filters.filter.journalfond.head": "Journal Fond",
-  // "search.filters.filter.journalfond.placeholder": "Journal Fond name",
+  "search.filters.filter.journalfonds.head": "Journal Fonds",
+  // "search.filters.filter.journalfonds.placeholder": "Journal Fonds name",
   // TODO New key - Add a translation
-  "search.filters.filter.journalfond.placeholder": "Journal Fond name",
-  // "search.filters.filter.journalfond.label": "Search Journal Fond name",
+  "search.filters.filter.journalfonds.placeholder": "Journal Fonds name",
+  // "search.filters.filter.journalfonds.label": "Search Journal Fonds name",
   // TODO New key - Add a translation
-  "search.filters.filter.journalfond.label": "Search Journal Fond name",
-  // "search.filters.applied.f.journalfond": "Journal Fond",
+  "search.filters.filter.journalfonds.label": "Search Journal Fonds name",
+  // "search.filters.applied.f.journalfonds": "Journal Fonds",
   // TODO New key - Add a translation
-  "search.filters.applied.f.journalfond": "Journal Fond",
-  // "search.filters.filter.aggregation.head": "Collection",
+  "search.filters.applied.f.journalfonds": "Journal Fonds",
+  // "search.filters.filter.aggregation.head": "Aggregation",
   // TODO New key - Add a translation
-  "search.filters.filter.aggregation.head": "Collection",
-  // "search.filters.filter.aggregation.placeholder": "Collection name",
+  "search.filters.filter.aggregation.head": "Aggregation",
+  // "search.filters.filter.aggregation.placeholder": "Aggregation name",
   // TODO New key - Add a translation
-  "search.filters.filter.aggregation.placeholder": "Collection name",
-  // "search.filters.filter.aggregation.label": "Search Collection name",
+  "search.filters.filter.aggregation.placeholder": "Aggregation name",
+  // "search.filters.filter.aggregation.label": "Search Aggregation name",
   // TODO New key - Add a translation
-  "search.filters.filter.aggregation.label": "Search Collection name",
-  // "search.filters.applied.f.aggregation": "Collection",
+  "search.filters.filter.aggregation.label": "Search Aggregation name",
+  // "search.filters.applied.f.aggregation": "Aggregation",
   // TODO New key - Add a translation
-  "search.filters.applied.f.aggregation": "Collection",
-  // "submission.sections.submit.progressbar.describe.archival_materials": "Archival Materials Basic Information",
+  "search.filters.applied.f.aggregation": "Aggregation",
+  // "submission.sections.submit.progressbar.describe.archival_material": "Archival Material Basic Information",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.archival_materials": "Archival Materials Basic Information",
+  "submission.sections.submit.progressbar.describe.archival_material": "Archival Material Basic Information",
 
-  // "submission.sections.submit.progressbar.describe.archival_materials_indexing": "Archival Materials Indexing Information",
+  // "submission.sections.submit.progressbar.describe.archival_material_indexing": "Archival Material Indexing Information",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.archival_materials_indexing": "Archival Materials Indexing Information",
-  // "submission.sections.submit.progressbar.describe.archival_materials_references": "Archival Materials Contextual References",
+  "submission.sections.submit.progressbar.describe.archival_material_indexing": "Archival Material Indexing Information",
+  // "submission.sections.submit.progressbar.describe.archival_material_references": "Archival Material Contextual References",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.archival_materials_references": "Archival Materials Contextual References",
+  "submission.sections.submit.progressbar.describe.archival_material_references": "Archival Material Contextual References",
 
-  // "submission.sections.submit.progressbar.describe.fond": "Fond Details",
+  // "submission.sections.submit.progressbar.describe.fonds": "Fonds Details",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.fond": "Fond Details",
+  "submission.sections.submit.progressbar.describe.fonds": "Fonds Details",
 
   // "submission.sections.submit.progressbar.describe.place": "Place Details",
   // TODO New key - Add a translation
@@ -12708,21 +13644,21 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.aggregation": "Aggregation Details",
 
-  // "submission.sections.submit.progressbar.describe.journal_fond": "Journal Fond Details",
+  // "submission.sections.submit.progressbar.describe.journal_fonds": "Journal Fonds Details",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.journal_fond": "Journal Fond Details",
+  "submission.sections.submit.progressbar.describe.journal_fonds": "Journal Fonds Details",
 
-  // "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-history": "Journal Fond History",
+  // "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-history": "Journal Fonds History",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-history": "Journal Fond History",
+  "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-history": "Journal Fonds History",
 
-  // "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-relation-person": "Journal Fond Person",
+  // "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-relation-person": "Journal Fonds Person",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-relation-person": "Journal Fond Person",
+  "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-relation-person": "Journal Fonds Person",
 
-  // "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-relation-journalfond": "Journal Fond Relation",
+  // "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-relation-journalfonds": "Journal Fonds Relation",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-relation-journalfond": "Journal Fond Relation",
+  "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-relation-journalfonds": "Journal Fonds Relation",
 
   // "submission.sections.submit.progressbar.describe.path": "Path Details",
   // TODO New key - Add a translation
@@ -12776,9 +13712,9 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.scientificmaterial_references": "Scientific Material Contextual References",
 
-  // "submission.sections.submit.progressbar.describe.journal_issue": "Journal Issue Details",
+  // "submission.sections.submit.progressbar.describe.journal_file": "Journal File Details",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.journal_issue": "Journal Issue Details",
+  "submission.sections.submit.progressbar.describe.journal_file": "Journal File Details",
 
   // "map.coordinates-invalid": "Coordinates are not valid",
   // TODO New key - Add a translation
@@ -12796,13 +13732,25 @@
   // TODO New key - Add a translation
   "curation-task.task.pushocr.label": "Send OCR to the Annotation Server",
 
+  // "curation-task.task.pushocr.force.label": "Clean OCR from the Annotation Server and send again",
+  // TODO New key - Add a translation
+  "curation-task.task.pushocr.force.label": "Clean OCR from the Annotation Server and send again",
+
   // "curation-task.task.ocrclean.label": "Remove all metadata bundles and uploaded ocr created by a previous upload to the ocr server",
   // TODO New key - Add a translation
   "curation-task.task.ocrclean.label": "Remove all metadata bundles and uploaded ocr created by a previous upload to the ocr server",
 
-  // "curation-task.task.pushocr.force.label": "Clean OCR from the Annotation Server and send again",
+  // "vocabulary-treeview.header.fondsboxtree": "Fonds Tree",
   // TODO New key - Add a translation
-  "curation-task.task.pushocr.force.label": "Clean OCR from the Annotation Server and send again",
+  "vocabulary-treeview.header.fondsboxtree": "Fonds Tree",
+
+  // "vocabulary-treeview.header.journalfondsboxtree": "Journal Fonds Tree",
+  // TODO New key - Add a translation
+  "vocabulary-treeview.header.journalfondsboxtree": "Journal Fonds Tree",
+
+  // "vocabulary-treeview.header.aggregationboxtree": "Aggregation Tree",
+  // TODO New key - Add a translation
+  "vocabulary-treeview.header.aggregationboxtree": "Aggregation Tree",
 
   // "curation-task.task.iiifuploader.label": "Upload images to the IIIF Image Server (photo gallery)",
   // TODO New key - Add a translation
@@ -12856,6 +13804,29 @@
   // TODO New key - Add a translation
   "curation-task.task.rebuildpdftoc.label": "Rebuild the PDF ToC",
 
+  // "RELATION.Place.people.search.results.head" : "People",
+  // TODO New key - Add a translation
+  "RELATION.Place.people.search.results.head" : "People",
+  // "search.filters.applied.charts.RELATION.Place.people.title": "People",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.Place.people.title": "People",
+
+  // "RELATION.Place.places.search.results.head" : "Places",
+  // TODO New key - Add a translation
+  "RELATION.Place.places.search.results.head" : "Places",
+  // "search.filters.applied.charts.RELATION.Place.places.title": "Places",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.Place.places.title": "Places",
+  // "context-menu.actions.edit-item-relationships.btn.places": "Manage Places",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item-relationships.btn.places": "Manage Places",
+
+  // "journalfile.listelement.badge": "Journal File",
+  // TODO New key - Add a translation
+  "journalfile.listelement.badge": "Journal File",
+  // "search.filters.entityType.JournalFile": "Journal File",
+  // TODO New key - Add a translation
+  "search.filters.entityType.JournalFile": "Journal File",
 
   // "listable-notification-object.default-message": "This object couldn't be retrieved",
   // TODO New key - Add a translation
@@ -12953,19 +13924,6 @@
   // "admin.system-wide-alert.title": "System-wide Alerts",
   // TODO New key - Add a translation
   "admin.system-wide-alert.title": "System-wide Alerts",
-
-
-  // "vocabulary-treeview.header.fondboxtree": "Fond Tree",
-  // TODO New key - Add a translation
-  "vocabulary-treeview.header.fondboxtree": "Fond Tree",
-
-  // "vocabulary-treeview.header.journalfondboxtree": "Journal Fond Tree",
-  // TODO New key - Add a translation
-  "vocabulary-treeview.header.journalfondboxtree": "Journal Fond Tree",
-
-  // "vocabulary-treeview.header.aggregationboxtree": "Collection Tree"
-  // TODO New key - Add a translation
-  "vocabulary-treeview.header.aggregationboxtree": "Collection Tree"
 
 
 }
