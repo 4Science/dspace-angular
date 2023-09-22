@@ -64,7 +64,12 @@
       <div class="d-flex flex-wrap gapx-3 my-3">
         <a class="d-block" routerLink="info/feedback">{{'footer.link.feedback' | translate}}</a>
         <a class="d-block mr-auto" href="javascript:void(0);" (click)="showCookieSettings()">{{'footer.link.cookies' | translate}}</a>
-        <div [innerHTML]="'footer.made-info' | translate"></div>
+        <div>
+          {{ 'footer.built-with' | translate }}
+          <a [href]="'footer.link.dspace-glam.href' | translate" target="_blank">{{ 'footer.link.dspace-glam' | translate}}</a> -
+          {{ 'footer.extension-by' | translate }}
+          <a [href]="'footer.link.4science.href' | translate" target="_blank"><img src="assets/images/logo-4science-footer.png" class="logo-4science" alt="{{ 'footer.link.4science' | translate}}" /></a>
+        </div>
       </div>
     </div>
   </div>

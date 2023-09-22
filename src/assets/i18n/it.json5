@@ -3959,8 +3959,8 @@
   // "footer.copyright": "copyright © 2002-{{ year }}",
   "footer.copyright": "copyright © 2002-{{ year }}",
 
-  // "footer.extension-by": "- Extension maintained and optimized by",
-  "footer.extension-by": "- Estensione mantenuta e ottimizzata da",
+  // "footer.extension-by": "Extension maintained and optimized by",
+  "footer.extension-by": "Estensione mantenuta e ottimizzata da",
 
   // "footer.link.4science": "4Science",
   "footer.link.4science": "4Science",
@@ -3968,12 +3968,14 @@
   // "footer.link.dspace": "DSpace software",
   "footer.link.dspace": "Software DSpace",
 
-  // "footer.link.dspace-cris": "DSpace-GLAM software",
-  "footer.link.dspace-cris": "Software DSpace-GLAM",
+  // "footer.link.dspace-glam": "DSpace-GLAM",
+  "footer.link.dspace-glam": "DSpace-GLAM",
 
-  // "footer.link.dspace-cris.href": "https://www.4science.com/dspace-glam/",
-  // TODO New key - Add a translation
-  "footer.link.dspace-cris.href": "https://www.4science.com/dspace-glam/",
+  // "footer.link.dspace-glam.href": "https://www.4science.com/dspace-glam/",
+  "footer.link.dspace-glam.href": "https://www.4science.it/dspace-glam/",
+
+  // "footer.link.4science.href": "https://www.4science.com/services/",
+  "footer.link.4science.href": "https://www.4science.it/servizi/",
 
   // "footer.link.lyrasis": "LYRASIS",
   "footer.link.lyrasis": "LYRASIS",
@@ -4015,9 +4017,9 @@
   // "footer.terms":"Terms of Use",
   "footer.terms":"Condizioni d'uso",
 
-  // "footer.made-info": "Made with <a href="https://www.4science.it/dspace-glam/" target="_blank">DSpace-GLAM</a> - Extension maintained and optimized by <a href="https://www.4science.it/servizi/" target="_blank">4Science</a>",
-  "footer.made-info": "Realizzato con <a href=\"https://www.4science.it/dspace-glam/\" target=\"_blank\">DSpace-GLAM</a> - Estensione manutenuta e ottimizzata da <a href=\"https://www.4science.it/servizi/\" target=\"_blank\">4Science</a>",
-
+  // "footer.made-info": "Made with <a href=\"https://www.4science.it/dspace-glam/\" target=\"_blank\">DSpace-GLAM</a> - Extension maintained and optimized by <a href=\"https://www.4science.it/servizi/\" target=\"_blank\">4Science</a>",
+  // TODO New key - Add a translation
+  "footer.made-info": "Made with <a href=\"https://www.4science.it/dspace-glam/\" target=\"_blank\">DSpace-GLAM</a> - Extension maintained and optimized by <a href=\"https://www.4science.it/servizi/\" target=\"_blank\">4Science</a>",
 
   // "forgot-email.form.header": "Forgot Password",
   "forgot-email.form.header": "Password dimenticata",
