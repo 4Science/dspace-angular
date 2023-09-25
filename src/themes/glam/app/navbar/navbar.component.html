@@ -12,9 +12,6 @@
       <div class="ml-auto right-container">
 
         <ul class="navbar-nav ml-auto mb-auto mt-3">
-          <li class="nav-item" *ngIf="mainSiteUrl">
-            <a class="nav-link" target="_blank" [href]="'https://' + mainSiteUrl">{{mainSiteUrl}}</a>
-          </li>
           <li class="nav-item" id="home-icon" *ngIf="mainSiteUrl">
             <a class="nav-link" target="_blank" [href]="'https://' + mainSiteUrl" [ngbTooltip]="mainSiteUrl">
               <i class="fas fa-home fa-lg fa-fw"></i>
