@@ -2636,6 +2636,8 @@
 
   "footer.contact":"Contacts",
 
+  "footer.contact.href": "https://www.4science.com/contact-us/",
+
   "footer.terms":"Terms of Use",
 
   "footer.made-info": "Made with <a href=\"https://www.4science.it/dspace-glam/\" target=\"_blank\">DSpace-GLAM</a> - Extension maintained and optimized by <a href=\"https://www.4science.it/servizi/\" target=\"_blank\">4Science</a>",

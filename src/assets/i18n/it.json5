@@ -4014,6 +4014,9 @@
   // "footer.contact":"Contacts",
   "footer.contact":"Contatti",
 
+  // "footer.contact.href": "https://www.4science.com/contact-us/",
+  "footer.contact.href": "https://www.4science.it/contatti/",
+
   // "footer.terms":"Terms of Use",
   "footer.terms":"Condizioni d'uso",
 
