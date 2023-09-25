@@ -41,15 +41,13 @@
                 <h6 class="title mb-3">{{'layout.i18n.link.default' | translate}}</h6>
                 <ul class="navbar-nav mb-3">
                   <li class="nav-item">
-                    <a class="nav-link" href="https://www.4science.it/en/contact-us/" target="_blank">{{'footer.contact' | translate}}</a>
+                    <a class="nav-link" [href]="'footer.contact.href' | translate" target="_blank">{{'footer.contact' | translate}}</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" routerLink="info/end-user-agreement">{{'footer.terms' | translate}}</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="https://dspaceglam7.4science.cloud/info/privacy" target="_blank">
-                      {{'footer.link.privacy-policy' | translate}}
-                    </a>
+                    <a class="nav-link" routerLink="info/privacy">{{'footer.link.privacy-policy' | translate}}</a>
                   </li>
                 </ul>
               </div>
