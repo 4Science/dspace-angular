@@ -697,13 +697,19 @@
 
   "admin.batch-import.breadcrumbs": "Import Batch",
 
+  "admin.mag-import.breadcrumbs": "Import MAG",
+
   "admin.metadata-import.title": "Import Metadata",
 
   "admin.batch-import.title": "Import Batch",
 
+  "admin.mag-import.title": "Import MAG",
+
   "admin.metadata-import.page.header": "Import Metadata",
 
   "admin.batch-import.page.header": "Import Batch",
+
+  "admin.mag-import.page.header": "Import MAG",
 
   "admin.metadata-import.page.help": "You can drop or browse CSV files that contain batch metadata operations on files here",
 
@@ -1911,6 +1917,10 @@
 
   "context-menu.actions.edit-item-relationships.btn.events": "Manage Events",
 
+  "context-menu.actions.edit-item-relationships.btn.orgunitfonds": "Manage Fonds",
+
+  "context-menu.actions.edit-item-relationships.btn.archivalmaterial": "Manage Archival Material",
+
   "context-menu.actions.orcid-view": "Open ORCID setting page",
 
   "context-menu.actions.statistics.btn": "Statistics",
@@ -1960,6 +1970,10 @@
   "RELATION.OrgUnit.rpprojects.search.results.head" : "Researchers Projects",
 
   "RELATION.OrgUnit.projects.search.results.head" : "Projects",
+
+  "RELATION.OrgUnit.orgunitfonds.search.results.head" : "Fonds",
+
+  "RELATION.OrgUnit.archivalmaterial.search.results.head" : "Archival Material",
 
   "RELATION.Project.researchoutputs.search.results.head" : "Publications",
 
@@ -2586,15 +2600,17 @@
 
   "footer.copyright": "copyright © 2002-{{ year }}",
 
-  "footer.extension-by": "- Extension maintained and optimized by",
+  "footer.extension-by": "Extension maintained and optimized by",
 
   "footer.link.4science": "4Science",
 
   "footer.link.dspace": "DSpace software",
 
-  "footer.link.dspace-cris": "DSpace-GLAM software",
+  "footer.link.dspace-glam": "DSpace-GLAM",
 
-  "footer.link.dspace-cris.href": "https://www.4science.com/dspace-glam/",
+  "footer.link.dspace-glam.href": "https://www.4science.com/dspace-glam/",
+
+  "footer.link.4science.href": "https://www.4science.com/services/",
 
   "footer.link.lyrasis": "LYRASIS",
 
@@ -2622,8 +2638,7 @@
 
   "footer.terms":"Terms of Use",
 
-  "footer.made-info": "Made with DSpace-GLAM - Extension maintained and optimized by 4Science",
-
+  "footer.made-info": "Made with <a href=\"https://www.4science.it/dspace-glam/\" target=\"_blank\">DSpace-GLAM</a> - Extension maintained and optimized by <a href=\"https://www.4science.it/servizi/\" target=\"_blank\">4Science</a>",
 
   "forgot-email.form.header": "Forgot Password",
 
@@ -6808,7 +6823,7 @@
 
   "submission.sections.license.required": "You must accept the license",
 
-  "submission.sections.license.notgranted":  "You must accept the license",
+  "submission.sections.license.notgranted":  "",
 
 
   "submission.sections.sherpa.publication.information": "Publication information",
