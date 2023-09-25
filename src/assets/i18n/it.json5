@@ -6976,6 +6976,10 @@
   // TODO New key - Add a translation
   "nav.context-help-toggle": "Toggle context help",
 
+  // "nav.mainSiteName": "Main site",
+  // TODO New key - Add a translation
+  "nav.mainSiteName": "Sito principale",
+
   // "nav.language": "Language switch",
   "nav.language": "Cambio di lingua",
 
