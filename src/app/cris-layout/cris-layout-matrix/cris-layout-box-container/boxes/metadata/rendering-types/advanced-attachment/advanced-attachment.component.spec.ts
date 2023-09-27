@@ -206,6 +206,8 @@ describe('AdvancedAttachmentComponent', () => {
         component = fixture.componentInstance;
         de = fixture.debugElement;
         mockAuthorizedService.isAuthorized.and.returnValues(of(true), of(true));
+        mockBitstreamDataService.findByItem.and.returnValues(createSuccessfulRemoteDataObject$(createPaginatedList([bitstream1, bitstream2])),
+          createSuccessfulRemoteDataObject$(createPaginatedList([bitstream1, bitstream2])));
         component.envPagination.enabled = true;
         let spy = spyOn(component, 'getBitstreamsByItem');
         spy.and.returnValue(of(createPaginatedList([bitstream1, bitstream1])));
@@ -245,6 +247,8 @@ describe('AdvancedAttachmentComponent', () => {
         component.envPagination.enabled = false;
         component.envMetadata = [];
         mockBitstreamDataService.findAllByItemAndBundleName.and.returnValues(createSuccessfulRemoteDataObject$(createPaginatedList([bitstream1])));
+        mockBitstreamDataService.findByItem.and.returnValues(createSuccessfulRemoteDataObject$(createPaginatedList([bitstream1])),
+          createSuccessfulRemoteDataObject$(createPaginatedList([bitstream1, bitstream2])));
         let spy = spyOn(component, 'getBitstreamsByItem');
         spy.and.returnValue(of(createPaginatedList(attachmentsMock)));
         component.item = testItem;
@@ -284,6 +288,8 @@ describe('AdvancedAttachmentComponent', () => {
         component.envPagination.enabled = true;
         let spy = spyOn(component, 'getBitstreamsByItem');
         spy.and.returnValue(of(createPaginatedList([bitstream1, bitstream1])));
+        mockBitstreamDataService.findByItem.and.returnValues(createSuccessfulRemoteDataObject$(createPaginatedList([bitstream1, bitstream2])),
+          createSuccessfulRemoteDataObject$(createPaginatedList([bitstream1, bitstream2])));
         component.item = testItem;
         fixture.detectChanges();
       });
