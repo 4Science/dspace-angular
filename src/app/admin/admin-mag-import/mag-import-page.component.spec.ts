@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MagImportPageComponent } from './mag-import-page.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('AdminMagImportComponent', () => {
   let component: MagImportPageComponent;
@@ -8,7 +9,8 @@ describe('AdminMagImportComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MagImportPageComponent ]
+      declarations: [ MagImportPageComponent ],
+      imports: [ TranslateModule.forRoot() ]
     })
     .compileComponents();
   });

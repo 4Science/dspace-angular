@@ -68,6 +68,7 @@ describe('SubmissionSectionContainerComponent test suite', () => {
     sectionsServiceStub.getSectionState.and.returnValue(observableOf(sectionState));
     sectionsServiceStub.getShownSectionErrors.and.returnValue(observableOf([]));
     submissionServiceStub.getActiveSectionId.and.returnValue(observableOf('traditionalpageone'));
+    sectionsServiceStub.isSectionHidden.and.returnValue(observableOf(false));
   }
 
   // waitForAsync beforeEach

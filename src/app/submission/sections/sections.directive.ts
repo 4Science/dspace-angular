@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Directive, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { Observable, Subscription } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import uniq from 'lodash/uniq';
 
 import { SectionsService } from './sections.service';
@@ -169,6 +169,10 @@ export class SectionsDirective implements OnDestroy, OnInit {
       this.submissionId,
       this.sectionId,
       scope
+    );
+
+    this.subs.push(
+      this.hidden.pipe(distinctUntilChanged()).subscribe(() => this.changeDetectorRef.detectChanges())
     );
   }
 
