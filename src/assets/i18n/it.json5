@@ -4014,6 +4014,9 @@
   // "footer.contact":"Contacts",
   "footer.contact":"Contatti",
 
+  // "footer.contact.href": "https://www.4science.com/contact-us/",
+  "footer.contact.href": "https://www.4science.it/contatti/",
+
   // "footer.terms":"Terms of Use",
   "footer.terms":"Condizioni d'uso",
 
@@ -6972,6 +6975,10 @@
   // "nav.context-help-toggle": "Toggle context help",
   // TODO New key - Add a translation
   "nav.context-help-toggle": "Toggle context help",
+
+  // "nav.mainSiteName": "Main site",
+  // TODO New key - Add a translation
+  "nav.mainSiteName": "Sito principale",
 
   // "nav.language": "Language switch",
   "nav.language": "Cambio di lingua",
@@ -12051,5 +12058,6 @@
   // TODO New key - Add a translation
   "admin.system-wide-alert.title": "System-wide Alerts",
 
+  "explore.index.lastModified" : "Nuove Risorse",
 
 }
