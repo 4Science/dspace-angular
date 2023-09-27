@@ -30,5 +30,7 @@
 </ng-template>
 
 <ng-template #textWithoutIcon let-metadataView="metadataView">
+  <span>(</span>
   <span data-test="textWithoutIcon">{{normalizeValue(metadataView.value)}}</span>
+  <span>);</span>
 </ng-template>
