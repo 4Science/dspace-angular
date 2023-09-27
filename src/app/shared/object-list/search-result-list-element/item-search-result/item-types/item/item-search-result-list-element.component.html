@@ -35,7 +35,6 @@
                     class="item-list-authors">
                 <span *ngFor="let author of dso.getAndSortAllMetadata(mdList); let i=index; let last=last;">
                   <ds-metadata-link-view [item]="dso" [metadata]="author" [metadataName]="mdList"></ds-metadata-link-view>
-                    <span *ngIf="!last">; </span>
                 </span>
               </span>
             </ng-container>
