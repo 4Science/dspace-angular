@@ -450,9 +450,6 @@
 
   // "admin.registries.metadata.schemas.table.namespace": "Namespace",
   "admin.registries.metadata.schemas.table.namespace": "Nosaukumvieta",
-  // "admin.registries.metadata.schemas.table.download": "Download",
-  // TODO New key - Add a translation
-  "admin.registries.metadata.schemas.table.download": "Download",
 
   // "admin.registries.metadata.title": "Metadata Registry",
   // TODO Source message changed - Revise the translation
@@ -1197,6 +1194,34 @@
   // "admin.mag-import.breadcrumbs": "Import MAG",
   // TODO New key - Add a translation
   "admin.mag-import.breadcrumbs": "Import MAG",
+
+  // "admin.mag-import.page.form.type.label": "Type",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.type.label": "Type",
+
+  // "admin.mag-import.page.form.type.hint": "Select a type from the list",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.type.hint": "Select a type from the list",
+
+  // "admin.mag-import.page.form.object.label": "Parent object",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.object.label": "Parent object",
+
+  // "admin.mag-import.page.form.object.hint": "Provide the handle of the parent object",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.object.hint": "Provide the handle of the parent object",
+
+  // "admin.mag-import.page.form.file.label": "File",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.file.label": "File",
+
+  // "admin.mag-import.page.form.file.hint": "Upload a ZIP file containing the XML file and the images",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.file.hint": "Upload a ZIP file containing the XML file and the images",
+
+  // "admin.mag-import.page.form.submit": "Create process",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.submit": "Create process",
 
   // "admin.metadata-import.title": "Import Metadata",
   // TODO New key - Add a translation
@@ -3897,22 +3922,6 @@
   // TODO New key - Add a translation
   "cris-layout.attachment.viewMore": "View More",
 
-  // "cris-layout.rendering.collections.owning-collection.label": "Owning collection",
-  // TODO New key - Add a translation
-  "cris-layout.rendering.collections.owning-collection.label": "Owning collection",
-
-  // "cris-layout.rendering.collections.mapped-collection.label": "Mapped collections",
-  // TODO New key - Add a translation
-  "cris-layout.rendering.collections.mapped-collection.label": "Mapped collections",
-
-  // "cris-layout.rendering.collections.loading": "Loading...",
-  // TODO New key - Add a translation
-  "cris-layout.rendering.collections.loading": "Loading...",
-
-  // "cris-layout.rendering.collections.load-more": "Load more",
-  // TODO New key - Add a translation
-  "cris-layout.rendering.collections.load-more": "Load more",
-
   // "curation-task.task.checklinks.label":  "Check Links in Metadata",
   // TODO New key - Add a translation
   "curation-task.task.checklinks.label":  "Check Links in Metadata",
@@ -4737,9 +4746,7 @@
   // "explore.title": "Explore section",
   // TODO New key - Add a translation
   "explore.title": "Explore section",
-  // "export-schema.process.title": "Metadata Schema Export",
-  // TODO New key - Add a translation
-  "export-schema.process.title": "Metadata Schema Export",
+
 
   // "feed.description": "Syndication feed",
   // TODO New key - Add a translation
@@ -4758,9 +4765,9 @@
   // "footer.copyright": "copyright © 2002-{{ year }}",
   "footer.copyright": "copyright © 2002-{{ year }}",
 
-  // "footer.extension-by": "- Extension maintained and optimized by",
+  // "footer.extension-by": "Extension maintained and optimized by",
   // TODO New key - Add a translation
-  "footer.extension-by": "- Extension maintained and optimized by",
+  "footer.extension-by": "Extension maintained and optimized by",
 
   // "footer.link.4science": "4Science",
   // TODO New key - Add a translation
@@ -4769,13 +4776,17 @@
   // "footer.link.dspace": "DSpace software",
   "footer.link.dspace": "DSpace software",
 
-  // "footer.link.dspace-cris": "DSpace-GLAM software",
+  // "footer.link.dspace-glam": "DSpace-GLAM",
   // TODO New key - Add a translation
-  "footer.link.dspace-cris": "DSpace-GLAM software",
+  "footer.link.dspace-glam": "DSpace-GLAM",
 
-  // "footer.link.dspace-cris.href": "https://www.4science.com/dspace-glam/",
+  // "footer.link.dspace-glam.href": "https://www.4science.com/dspace-glam/",
   // TODO New key - Add a translation
-  "footer.link.dspace-cris.href": "https://www.4science.com/dspace-glam/",
+  "footer.link.dspace-glam.href": "https://www.4science.com/dspace-glam/",
+
+  // "footer.link.4science.href": "https://www.4science.com/services/",
+  // TODO New key - Add a translation
+  "footer.link.4science.href": "https://www.4science.com/services/",
 
   // "footer.link.lyrasis": "LYRASIS",
   "footer.link.lyrasis": "LYRASIS",
@@ -4824,14 +4835,17 @@
   // TODO New key - Add a translation
   "footer.contact":"Contacts",
 
+  // "footer.contact.href": "https://www.4science.com/contact-us/",
+  // TODO New key - Add a translation
+  "footer.contact.href": "https://www.4science.com/contact-us/",
+
   // "footer.terms":"Terms of Use",
   // TODO New key - Add a translation
   "footer.terms":"Terms of Use",
 
-  // "footer.made-info": "Made with DSpace-GLAM - Extension maintained and optimized by 4Science",
+  // "footer.made-info": "Made with <a href=\"https://www.4science.it/dspace-glam/\" target=\"_blank\">DSpace-GLAM</a> - Extension maintained and optimized by <a href=\"https://www.4science.it/servizi/\" target=\"_blank\">4Science</a>",
   // TODO New key - Add a translation
-  "footer.made-info": "Made with DSpace-GLAM - Extension maintained and optimized by 4Science",
-
+  "footer.made-info": "Made with <a href=\"https://www.4science.it/dspace-glam/\" target=\"_blank\">DSpace-GLAM</a> - Extension maintained and optimized by <a href=\"https://www.4science.it/servizi/\" target=\"_blank\">4Science</a>",
 
   // "forgot-email.form.header": "Forgot Password",
   // TODO New key - Add a translation
@@ -7680,6 +7694,10 @@
   // "menu.section.import_batch": "Batch Import (ZIP)",
   "menu.section.import_batch": "Importēt (ZIP)",
 
+  // "menu.section.import_mag": "MAG Import",
+  // TODO New key - Add a translation
+  "menu.section.import_mag": "MAG Import",
+
   // "menu.section.import_metadata": "Metadata",
   "menu.section.import_metadata": "Metadati",
 
@@ -8225,6 +8243,10 @@
   // "nav.context-help-toggle": "Toggle context help",
   // TODO New key - Add a translation
   "nav.context-help-toggle": "Toggle context help",
+
+  // "nav.mainSiteName": "Main site",
+  // TODO New key - Add a translation
+  "nav.mainSiteName": "Main site",
 
   // "nav.language": "Language switch",
   "nav.language": "Valodas maiņa",
@@ -10288,10 +10310,6 @@
   // TODO New key - Add a translation
   "search.filters.filter.investigators.head": "Researcher",
 
-  // "search.filters.filter.investigators.label": "Researcher",
-  // TODO New key - Add a translation
-  "search.filters.filter.investigators.label": "Researcher",
-
   // "search.filters.filter.investigators.placeholder": "Researcher",
   // TODO New key - Add a translation
   "search.filters.filter.investigators.placeholder": "Researcher",
@@ -10331,10 +10349,6 @@
   // "search.filters.filter.projectOrgUnits.head" : "Organizations",
   // TODO New key - Add a translation
   "search.filters.filter.projectOrgUnits.head" : "Organizations",
-
-  // "search.filters.filter.projectOrgUnits.label" : "Organizations",
-  // TODO New key - Add a translation
-  "search.filters.filter.projectOrgUnits.label" : "Organizations",
 
   // "search.filters.filter.projectOrgUnits.placeholder" : "Organizations",
   // TODO New key - Add a translation
@@ -11033,54 +11047,6 @@
   // "statistics.categories.downloadReports.tab": "Downloads reports",
   // TODO New key - Add a translation
   "statistics.categories.downloadReports.tab": "Downloads reports",
-
-  // "statistics.categories.itemReports.tab": "Item views reports",
-  // TODO New key - Add a translation
-  "statistics.categories.itemReports.tab": "Item views reports",
-
-  // "statistics.table.itemReports.header.continent" : "Continent",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.header.continent" : "Continent",
-
-  // "statistics.table.itemReports.header.views" : "Views",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.header.views" : "Views",
-
-  // "statistics.table.itemReports.header.city" : "City",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.header.city" : "City",
-
-  // "statistics.table.itemReports.header.item" : "Item",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.header.item" : "Item",
-
-  // "statistics.table.mainReports.header.community" : "Community",
-  // TODO New key - Add a translation
-  "statistics.table.mainReports.header.community" : "Community",
-
-  // "statistics.table.mainReports.header.collection" : "Collection",
-  // TODO New key - Add a translation
-  "statistics.table.mainReports.header.collection" : "Collection",
-
-  // "statistics.table.itemReports.title.TopContinents" : "Top region views",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.title.TopContinents" : "Top region views",
-
-  // "statistics.table.itemReports.title.TopCities" : "Top cities views",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.title.TopCities" : "Top cities views",
-
-  // "statistics.table.itemReports.title.TopItems" : "Most viewed",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.title.TopItems" : "Most viewed",
-
-  // "statistics.table.itemReports.title.TopCategories" : "Top categories",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.title.TopCategories" : "Top categories",
-
-  // "statistics.table.itemReports.title.TotalVisitsPerMonth" : "Top views per month",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.title.TotalVisitsPerMonth" : "Top views per month",
 
   // "statistics.reports.title": "Reports",
   // TODO New key - Add a translation
@@ -14436,9 +14402,14 @@
   // TODO New key - Add a translation
   "admin.system-wide-alert.breadcrumbs": "System-wide Alerts",
 
-  // "admin.system-wide-alert.title": "System-wide Alerts"
+  // "admin.system-wide-alert.title": "System-wide Alerts",
   // TODO New key - Add a translation
-  "admin.system-wide-alert.title": "System-wide Alerts"
+  "admin.system-wide-alert.title": "System-wide Alerts",
+
+  // "explore.index.lastModified" : "New accessions",
+  // TODO New key - Add a translation
+  "explore.index.lastModified" : "New accessions",
+
 
 
 }

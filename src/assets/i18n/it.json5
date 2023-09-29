@@ -381,9 +381,6 @@
 
   // "admin.registries.metadata.schemas.table.namespace": "Namespace",
   "admin.registries.metadata.schemas.table.namespace": "Namespace",
-  // "admin.registries.metadata.schemas.table.download": "Download",
-  // TODO New key - Add a translation
-  "admin.registries.metadata.schemas.table.download": "Download",
 
   // "admin.registries.metadata.title": "Metadata Registry",
   "admin.registries.metadata.title": "Registro dei metadati",
@@ -3308,22 +3305,6 @@
   // "cris-layout.attachment.viewMore": "View More",
   "cris-layout.attachment.viewMore": "Vedi altro",
 
-  // "cris-layout.rendering.collections.owning-collection.label": "Owning collection",
-  // TODO New key - Add a translation
-  "cris-layout.rendering.collections.owning-collection.label": "Owning collection",
-
-  // "cris-layout.rendering.collections.mapped-collection.label": "Mapped collections",
-  // TODO New key - Add a translation
-  "cris-layout.rendering.collections.mapped-collection.label": "Mapped collections",
-
-  // "cris-layout.rendering.collections.loading": "Loading...",
-  // TODO New key - Add a translation
-  "cris-layout.rendering.collections.loading": "Loading...",
-
-  // "cris-layout.rendering.collections.load-more": "Load more",
-  // TODO New key - Add a translation
-  "cris-layout.rendering.collections.load-more": "Load more",
-
   // "curation-task.task.checklinks.label":  "Check Links in Metadata",
   "curation-task.task.checklinks.label": "Controllare i collegamenti nei metadati",
 
@@ -3990,9 +3971,7 @@
 
   // "explore.title": "Explore section",
   "explore.title": "Sezione esplora",
-  // "export-schema.process.title": "Metadata Schema Export",
-  // TODO New key - Add a translation
-  "export-schema.process.title": "Metadata Schema Export",
+
 
   // "feed.description": "Syndication feed",
   "feed.description": "Syndication feed",
@@ -8709,9 +8688,6 @@
   // "search.filters.filter.investigators.head": "Researcher",
   "search.filters.filter.investigators.head": "Ricercatore",
 
-  // "search.filters.filter.investigators.label": "Researcher",
-  "search.filters.filter.investigators.label": "Ricercatore",
-
   // "search.filters.filter.investigators.placeholder": "Researcher",
   "search.filters.filter.investigators.placeholder": "Ricercatore",
 
@@ -8744,9 +8720,6 @@
 
   // "search.filters.filter.projectOrgUnits.head" : "Organizations",
   "search.filters.filter.projectOrgUnits.head" : "Organizzazioni",
-
-  // "search.filters.filter.projectOrgUnits.label" : "Organizations",
-  "search.filters.filter.projectOrgUnits.label" : "Organizzazioni",
 
   // "search.filters.filter.projectOrgUnits.placeholder" : "Organizations",
   "search.filters.filter.projectOrgUnits.placeholder" : "Organizzazioni",
@@ -9354,54 +9327,6 @@
   // "statistics.categories.downloadReports.tab": "Downloads reports",
   // TODO Source message changed - Revise the translation
   "statistics.categories.downloadReports.tab": "Rapporti sui download",
-
-  // "statistics.categories.itemReports.tab": "Item views reports",
-  // TODO New key - Add a translation
-  "statistics.categories.itemReports.tab": "Item views reports",
-
-  // "statistics.table.itemReports.header.continent" : "Continent",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.header.continent" : "Continent",
-
-  // "statistics.table.itemReports.header.views" : "Views",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.header.views" : "Views",
-
-  // "statistics.table.itemReports.header.city" : "City",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.header.city" : "City",
-
-  // "statistics.table.itemReports.header.item" : "Item",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.header.item" : "Item",
-
-  // "statistics.table.mainReports.header.community" : "Community",
-  // TODO New key - Add a translation
-  "statistics.table.mainReports.header.community" : "Community",
-
-  // "statistics.table.mainReports.header.collection" : "Collection",
-  // TODO New key - Add a translation
-  "statistics.table.mainReports.header.collection" : "Collection",
-
-  // "statistics.table.itemReports.title.TopContinents" : "Top region views",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.title.TopContinents" : "Top region views",
-
-  // "statistics.table.itemReports.title.TopCities" : "Top cities views",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.title.TopCities" : "Top cities views",
-
-  // "statistics.table.itemReports.title.TopItems" : "Most viewed",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.title.TopItems" : "Most viewed",
-
-  // "statistics.table.itemReports.title.TopCategories" : "Top categories",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.title.TopCategories" : "Top categories",
-
-  // "statistics.table.itemReports.title.TotalVisitsPerMonth" : "Top views per month",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.title.TotalVisitsPerMonth" : "Top views per month",
 
   // "statistics.reports.title": "Reports",
   "statistics.reports.title": "Rapporti",
@@ -12152,11 +12077,13 @@
   // TODO New key - Add a translation
   "admin.system-wide-alert.breadcrumbs": "System-wide Alerts",
 
-  // "admin.system-wide-alert.title": "System-wide Alerts"
+  // "admin.system-wide-alert.title": "System-wide Alerts",
+  // TODO Source message changed - Revise the translation
   "admin.system-wide-alert.title": "Allarmi di sistema",
 
   // "explore.index.lastModified" : "New accessions",
   "explore.index.lastModified" : "Nuove Risorse",
+
 
 
 }
