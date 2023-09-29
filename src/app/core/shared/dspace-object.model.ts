@@ -205,4 +205,25 @@ export class DSpaceObject extends ListableObject implements CacheableObject {
     delete this.metadata[key];
   }
 
+  /**
+   * Method that returns as which type of object this object should be rendered
+   */
+  getAndSortAllMetadata(keyOrKeys: string | string[]): MetadataValue[]{
+    let allMD: MetadataValue[] = this.allMetadata(keyOrKeys);
+    let sortedAllMD: MetadataValue[] = [];
+    allMD.forEach((md,index)=>{
+      if(md.authority != null){
+        sortedAllMD.push(md);
+        for (let i = ++index ; i <= allMD.length; i++){
+          if (i < allMD.length){
+            if(allMD[i].authority == null && allMD[i].place==md.place){
+              sortedAllMD.push(allMD[i]);
+              break
+            }
+          }
+        }
+      }
+    })
+    return sortedAllMD;
+  }
 }
