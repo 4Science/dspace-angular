@@ -24,6 +24,7 @@ export class MagImportPageComponent {
   objectParam: string;
   fileObject: File;
 
+  // Import type is currently hardcoded
   optionList = [ 'MAG', 'METS' ];
 
   constructor(
@@ -40,7 +41,8 @@ export class MagImportPageComponent {
   onSubmit() {
     const parameterValues = new Array<ProcessParameter>();
 
-    parameterValues.push(Object.assign(new ProcessParameter(), { name: '--type', value: this.typeParam }));
+    parameterValues.push(Object.assign(new ProcessParameter(), { name: '--type', value: 'MAG' })); // hard coded
+    // parameterValues.push(Object.assign(new ProcessParameter(), { name: '--type', value: this.typeParam }));
     parameterValues.push(Object.assign(new ProcessParameter(), { name: '--parent', value: this.objectParam }));
     parameterValues.push(Object.assign(new ProcessParameter(), { name: '--file-path', value: this.fileObject.name }));
 
