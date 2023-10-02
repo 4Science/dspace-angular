@@ -699,6 +699,20 @@
 
   "admin.mag-import.breadcrumbs": "Import MAG",
 
+  "admin.mag-import.page.form.type.label": "Type",
+
+  "admin.mag-import.page.form.type.hint": "Select a type from the list",
+
+  "admin.mag-import.page.form.object.label": "Parent object",
+
+  "admin.mag-import.page.form.object.hint": "Provide the handle of the parent object",
+
+  "admin.mag-import.page.form.file.label": "File",
+
+  "admin.mag-import.page.form.file.hint": "Upload a ZIP file containing the XML file and the images",
+
+  "admin.mag-import.page.form.submit": "Create process",
+
   "admin.metadata-import.title": "Import Metadata",
 
   "admin.batch-import.title": "Import Batch",
@@ -4208,8 +4222,6 @@
 
   "menu.section.import_from_excel": "Import from excel",
 
-  "menu.section.export_batch": "Batch Export (ZIP)",
-
   "menu.section.export_to_excel": "Export to excel",
 
   "menu.section.icon.access_control": "Access Control menu section",
@@ -4255,6 +4267,8 @@
   "menu.section.import": "Import",
 
   "menu.section.import_batch": "Batch Import (ZIP)",
+
+  "menu.section.import_mag": "MAG Import",
 
   "menu.section.import_metadata": "Metadata",
 
@@ -4593,8 +4607,6 @@
   "nav.toggle" : "Toggle navigation",
 
   "nav.user.description" : "User profile bar",
-
-  "nav.subscriptions" : "Subscriptions",
 
   "none.listelement.badge": "Item",
 
@@ -5123,7 +5135,7 @@
   "profile.card.researcher": "Researcher Profile",
 
 
-  "project.listelement.badge": "Research Project",
+  "project.listelement.badge": "Project",
 
   "project.page.contributor": "Contributors",
 
@@ -7583,6 +7595,7 @@
   "journalfonds.listelement.badge": "Journal Fonds",
 
   "archivalmaterials.listelement.badge": "Archival Materials",
+  "archival.listelement.badge": "Archival Materials",
 
   "fond.listelement.badge": "Fond",
 
