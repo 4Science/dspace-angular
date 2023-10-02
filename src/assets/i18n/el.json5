@@ -1134,6 +1134,34 @@
   // TODO New key - Add a translation
   "admin.mag-import.breadcrumbs": "Import MAG",
 
+  // "admin.mag-import.page.form.type.label": "Type",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.type.label": "Type",
+
+  // "admin.mag-import.page.form.type.hint": "Select a type from the list",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.type.hint": "Select a type from the list",
+
+  // "admin.mag-import.page.form.object.label": "Parent object",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.object.label": "Parent object",
+
+  // "admin.mag-import.page.form.object.hint": "Provide the handle of the parent object",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.object.hint": "Provide the handle of the parent object",
+
+  // "admin.mag-import.page.form.file.label": "File",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.file.label": "File",
+
+  // "admin.mag-import.page.form.file.hint": "Upload a ZIP file containing the XML file and the images",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.file.hint": "Upload a ZIP file containing the XML file and the images",
+
+  // "admin.mag-import.page.form.submit": "Create process",
+  // TODO New key - Add a translation
+  "admin.mag-import.page.form.submit": "Create process",
+
   // "admin.metadata-import.title": "Import Metadata",
   "admin.metadata-import.title": "Εισαγωγή μεταδεδομένων",
 
@@ -4468,9 +4496,9 @@
   // "footer.copyright": "copyright © 2002-{{ year }}",
   "footer.copyright": "πνευματικά δικαιώματα © 2002-{{ year }}",
 
-  // "footer.extension-by": "- Extension maintained and optimized by",
+  // "footer.extension-by": "Extension maintained and optimized by",
   // TODO New key - Add a translation
-  "footer.extension-by": "- Extension maintained and optimized by",
+  "footer.extension-by": "Extension maintained and optimized by",
 
   // "footer.link.4science": "4Science",
   // TODO New key - Add a translation
@@ -4479,13 +4507,17 @@
   // "footer.link.dspace": "DSpace software",
   "footer.link.dspace": "Λογισμικό DSpace",
 
-  // "footer.link.dspace-cris": "DSpace-GLAM software",
+  // "footer.link.dspace-glam": "DSpace-GLAM",
   // TODO New key - Add a translation
-  "footer.link.dspace-cris": "DSpace-GLAM software",
+  "footer.link.dspace-glam": "DSpace-GLAM",
 
-  // "footer.link.dspace-cris.href": "https://www.4science.com/dspace-glam/",
+  // "footer.link.dspace-glam.href": "https://www.4science.com/dspace-glam/",
   // TODO New key - Add a translation
-  "footer.link.dspace-cris.href": "https://www.4science.com/dspace-glam/",
+  "footer.link.dspace-glam.href": "https://www.4science.com/dspace-glam/",
+
+  // "footer.link.4science.href": "https://www.4science.com/services/",
+  // TODO New key - Add a translation
+  "footer.link.4science.href": "https://www.4science.com/services/",
 
   // "footer.link.lyrasis": "LYRASIS",
   "footer.link.lyrasis": "LYRASIS",
@@ -4530,14 +4562,17 @@
   // TODO New key - Add a translation
   "footer.contact":"Contacts",
 
+  // "footer.contact.href": "https://www.4science.com/contact-us/",
+  // TODO New key - Add a translation
+  "footer.contact.href": "https://www.4science.com/contact-us/",
+
   // "footer.terms":"Terms of Use",
   // TODO New key - Add a translation
   "footer.terms":"Terms of Use",
 
-  // "footer.made-info": "Made with DSpace-GLAM - Extension maintained and optimized by 4Science",
+  // "footer.made-info": "Made with <a href=\"https://www.4science.it/dspace-glam/\" target=\"_blank\">DSpace-GLAM</a> - Extension maintained and optimized by <a href=\"https://www.4science.it/servizi/\" target=\"_blank\">4Science</a>",
   // TODO New key - Add a translation
-  "footer.made-info": "Made with DSpace-GLAM - Extension maintained and optimized by 4Science",
-
+  "footer.made-info": "Made with <a href=\"https://www.4science.it/dspace-glam/\" target=\"_blank\">DSpace-GLAM</a> - Extension maintained and optimized by <a href=\"https://www.4science.it/servizi/\" target=\"_blank\">4Science</a>",
 
   // "forgot-email.form.header": "Forgot Password",
   "forgot-email.form.header": "Ξεχάσατε τον κωδικό",
@@ -7136,10 +7171,6 @@
   // TODO New key - Add a translation
   "menu.section.import_from_excel": "Import from excel",
 
-  // "menu.section.export_batch": "Batch Export (ZIP)",
-  // TODO New key - Add a translation
-  "menu.section.export_batch": "Batch Export (ZIP)",
-
   // "menu.section.export_to_excel": "Export to excel",
   // TODO New key - Add a translation
   "menu.section.export_to_excel": "Export to excel",
@@ -7211,6 +7242,10 @@
 
   // "menu.section.import_batch": "Batch Import (ZIP)",
   "menu.section.import_batch": "Μαζική εισαγωγή (ZIP)",
+
+  // "menu.section.import_mag": "MAG Import",
+  // TODO New key - Add a translation
+  "menu.section.import_mag": "MAG Import",
 
   // "menu.section.import_metadata": "Metadata",
   "menu.section.import_metadata": "Μεταδεδομένα",
@@ -7745,6 +7780,10 @@
   // TODO New key - Add a translation
   "nav.context-help-toggle": "Toggle context help",
 
+  // "nav.mainSiteName": "Main site",
+  // TODO New key - Add a translation
+  "nav.mainSiteName": "Main site",
+
   // "nav.language": "Language switch",
   "nav.language": "Εναλλαγή γλώσσας",
 
@@ -7787,10 +7826,6 @@
   // "nav.user.description" : "User profile bar",
   // TODO New key - Add a translation
   "nav.user.description" : "User profile bar",
-
-  // "nav.subscriptions" : "Subscriptions",
-  // TODO New key - Add a translation
-  "nav.subscriptions" : "Subscriptions",
 
   // "none.listelement.badge": "Item",
   "none.listelement.badge": "Τεκμήριο",
@@ -13369,6 +13404,11 @@
   // "admin.system-wide-alert.title": "System-wide Alerts",
   // TODO New key - Add a translation
   "admin.system-wide-alert.title": "System-wide Alerts",
+
+  // "explore.index.lastModified" : "New accessions",
+  // TODO New key - Add a translation
+  "explore.index.lastModified" : "New accessions",
+
 
 
 }
