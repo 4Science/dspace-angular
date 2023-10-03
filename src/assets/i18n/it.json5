@@ -381,9 +381,6 @@
   // "admin.registries.metadata.schemas.table.namespace": "Namespace",
   "admin.registries.metadata.schemas.table.namespace": "Namespace",
 
-  // "admin.registries.metadata.schemas.table.downloads": "Download",
-  "admin.registries.metadata.schemas.table.downloads": "Download",
-
   // "admin.registries.metadata.title": "Metadata Registry",
   "admin.registries.metadata.title": "Registro dei metadati",
 
@@ -1107,7 +1104,7 @@
 
   // "admin.batch-import.page.dropMsg": "Drop a batch ZIP to import",
   // TODO New key - Add a translation
-  "admin.batch-import.page.dropMsg": "Rilascia il file ZIP da importare",
+  "admin.batch-import.page.dropMsg": "Drop a batch ZIP to import",
 
   // "admin.metadata-import.page.dropMsgReplace": "Drop to replace the metadata CSV to import",
   "admin.metadata-import.page.dropMsgReplace": "Rilascia un nuovo file CSV per sostituire il file corrente da importare",
@@ -7644,7 +7641,8 @@
   "profile.card.researcher": "Profilo del ricercatore",
 
 
-  // "project.listelement.badge": "Research Project",
+  // "project.listelement.badge": "Project",
+  // TODO Source message changed - Revise the translation
   "project.listelement.badge": "Progetti",
 
   // "project.page.contributor": "Contributors",
@@ -9065,49 +9063,6 @@
   // "statistics.categories.downloadReports.tab": "Downloads reports",
   "statistics.categories.downloadReports.tab": "Report sui download",
 
-  // "statistics.categories.itemReports.tab": "Item views reports",
-  // TODO New key - Add a translation
-  "statistics.categories.itemReports.tab": "Item views reports",
-
-  // "statistics.table.itemReports.header.continent" : "Continent",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.header.continent" : "Continent",
-
-  // "statistics.table.itemReports.header.views" : "Views",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.header.views" : "Views",
-
-  // "statistics.table.itemReports.header.city" : "City",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.header.city" : "City",
-
-  // "statistics.table.itemReports.header.item" : "Item",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.header.item" : "Item",
-
-  // "statistics.table.mainReports.header.community" : "Community",
-  "statistics.table.mainReports.header.community" : "Community",
-
-  // "statistics.table.mainReports.header.collection" : "Collection",
-  "statistics.table.mainReports.header.collection" : "Collezione",
-
-  // "statistics.table.itemReports.title.TopContinents" : "Top region views",
-  "statistics.table.itemReports.title.TopContinents" : "Più visualizzati per regione",
-
-  // "statistics.table.itemReports.title.TopCities" : "Top cities views",
-  "statistics.table.itemReports.title.TopCities" : "Più visualizzati per città",
-
-  // "statistics.table.itemReports.title.TopItems" : "Most viewed",
-  "statistics.table.itemReports.title.TopItems" : "Più visualizzati",
-
-  // "statistics.table.itemReports.title.TopCategories" : "Top categories",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.title.TopCategories" : "Top categories",
-
-  // "statistics.table.itemReports.title.TotalVisitsPerMonth" : "Top views per month",
-  // TODO New key - Add a translation
-  "statistics.table.itemReports.title.TotalVisitsPerMonth" : "Top views per month",
-
   // "statistics.reports.title": "Reports",
   "statistics.reports.title": "Report",
 
@@ -10235,7 +10190,7 @@
   // "submission.sections.license.required": "You must accept the license",
   "submission.sections.license.required": "È necessario accettare la licenza",
 
-  // "submission.sections.license.notgranted":  "You must accept the license",
+  // "submission.sections.license.notgranted":  "",
   "submission.sections.license.notgranted":  "È necessario accettare la licenza",
 
 
@@ -10858,9 +10813,6 @@
   // TODO New key - Add a translation
   "workspace-item.delete.notification.success.title": "Deleted",
 
-  // "workflow-item.advanced.title": "Advanced workflow",
-  "workflow-item.advanced.title": "Workflow avanzato",
-
   // "workspace-item.delete.title": "This workspace item was successfully deleted",
   // TODO New key - Add a translation
   "workspace-item.delete.title": "This workspace item was successfully deleted",
@@ -10872,6 +10824,9 @@
   // "workspace-item.delete.notification.error.content": "The workspace item could not be deleted",
   // TODO New key - Add a translation
   "workspace-item.delete.notification.error.content": "The workspace item could not be deleted",
+
+  // "workflow-item.advanced.title": "Advanced workflow",
+  "workflow-item.advanced.title": "Workflow avanzato",
 
   // "workflow-item.selectrevieweraction.notification.success.title": "Selected reviewer",
   "workflow-item.selectrevieweraction.notification.success.title": "Revisore selezionato",
@@ -11369,9 +11324,9 @@
   "journalfonds.listelement.badge": "Testata",
 
   // "archivalmaterials.listelement.badge": "Archival Materials",
-  // TODO New key - Add a translation
-  "archivalmaterials.listelement.badge": "Archival Materials",
-  "archivals.listelement.badge": "Archival Materials",
+  "archivalmaterials.listelement.badge": "Materiale Archivistico",
+  // "archival.listelement.badge": "Archival Materials",
+  "archival.listelement.badge": "Materiale Archivistico",
 
   // "fond.listelement.badge": "Fond",
   // TODO New key - Add a translation
