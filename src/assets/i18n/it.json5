@@ -1102,8 +1102,7 @@
   "admin.metadata-import.page.dropMsg": "Rilascia un CSV di metadati da importare",
 
   // "admin.batch-import.page.dropMsg": "Drop a batch ZIP to import",
-  // TODO New key - Add a translation
-  "admin.batch-import.page.dropMsg": "Drop a batch ZIP to import",
+  "admin.batch-import.page.dropMsg": "Rilasciare un batch ZIP da importare",
 
   // "admin.metadata-import.page.dropMsgReplace": "Drop to replace the metadata CSV to import",
   "admin.metadata-import.page.dropMsgReplace": "Rilascia un nuovo file CSV per sostituire il file corrente da importare",
