@@ -70,8 +70,8 @@ export abstract class BitstreamRenderingModelComponent extends RenderingTypeStru
    * Returns the size of given bitstreams in bytes
    * @param bitstream
    */
-  getChecksum(bitstream: Bitstream): string {
-    return bitstream.checkSum?.value;
+  getChecksum(bitstream: Bitstream): ChecksumInfo {
+    return bitstream.checkSum;
   }
 
   /**
