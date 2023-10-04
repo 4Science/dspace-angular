@@ -123,7 +123,7 @@
   "admin.edit-user-agreement.title": "Modifica User Agreement",
 
   // "admin.edit-user-agreement.markdown": "<i>End User Agreement</i> text supports <a href=\"https://www.markdownguide.org/basic-syntax/\" target=\"_blank\">Markdown</a> language.",
-  "admin.edit-user-agreement.markdown": "<i>Lo User Agreement</i> supporta il formato <a href=\"https://www.markdownguide.org/basic-syntax/\" target=\"_blank\">Markdown</a>.",
+  "admin.edit-user-agreement.markdown": "Lo <i>Lo User Agreement</i> supporta il formato <a href=\"https://www.markdownguide.org/basic-syntax/\" target=\"_blank\">Markdown</a>.",
 
   // "admin.edit-cms-metadata.title": "Edit CMS Metadata",
   "admin.edit-cms-metadata.title": "Modifica metadati CMS",
@@ -168,7 +168,7 @@
   "admin.institution.new.name": "Nome",
 
   // "admin.institution.new.processing": "Loading",
-  "admin.institution.new.processing": "Loading",
+  "admin.institution.new.processing": "Caricamento",
 
   // "admin.institution.new.submit": "Submit",
   "admin.institution.new.submit": "Invia",
@@ -297,7 +297,7 @@
   "admin.registries.bitstream-formats.edit.success.head": "Operazione riuscita",
 
   // "admin.registries.bitstream-formats.edit.supportLevel.hint": "The level of support your institution pledges for this format.",
-  "admin.registries.bitstream-formats.edit.supportLevel.hint": "Il livello di supporto che la vostra istituzione si impegna a supportare questo formato.",
+  "admin.registries.bitstream-formats.edit.supportLevel.hint": "Il livello di supporto che la vostra istituzione si impegna a dare a questo formato.",
 
   // "admin.registries.bitstream-formats.edit.supportLevel.label": "Support level",
   "admin.registries.bitstream-formats.edit.supportLevel.label": "Livello di supporto",
@@ -443,16 +443,16 @@
   "admin.registries.schema.notification.failure": "Errore",
 
   // "admin.registries.schema.notification.field.created": "Successfully created metadata field \"{{field}}\"",
-  "admin.registries.schema.notification.field.created": "Campo creato correttamente \"{{field}}\"",
+  "admin.registries.schema.notification.field.created": "Campo \"{{field}}\" creato correttamente",
 
   // "admin.registries.schema.notification.field.deleted.failure": "Failed to delete {{amount}} metadata fields",
-  "admin.registries.schema.notification.field.deleted.failure": "Impossibile eliminare i campi {{amount}}",
+  "admin.registries.schema.notification.field.deleted.failure": "Impossibile eliminare {{amount}} campo/i",
 
   // "admin.registries.schema.notification.field.deleted.success": "Successfully deleted {{amount}} metadata fields",
   "admin.registries.schema.notification.field.deleted.success": "Campi di metadati {{amount}} eliminati correttamente",
 
   // "admin.registries.schema.notification.field.edited": "Successfully edited metadata field \"{{field}}\"",
-  "admin.registries.schema.notification.field.edited": "Campo   modificato correttamente \"{{field}}\"",
+  "admin.registries.schema.notification.field.edited": "Campo \"{{field}}\" modificato correttamente",
 
   // "admin.registries.schema.notification.success": "Success",
   "admin.registries.schema.notification.success": "Operazione riuscita",
