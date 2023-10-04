@@ -4260,10 +4260,10 @@
 
 
   // "health.breadcrumbs": "Health",
-  "health.breadcrumbs": "Status del sistema",
+  "health.breadcrumbs": "Stato del sistema",
 
   // "health-page.heading" : "Health",
-  "health-page.heading" : "Status del sistema",
+  "health-page.heading" : "Stato del sistema",
 
   // "health-page.info-tab" : "Info",
   "health-page.info-tab" : "Informazioni",
@@ -4302,7 +4302,7 @@
   "health-page.section-info.java.title": "Java",
 
   // "health-page.status": "Status",
-  "health-page.status": "Status",
+  "health-page.status": "Stato",
 
   // "health-page.status.ok.info": "Operational",
   "health-page.status.ok.info": "Operativo",
@@ -4314,7 +4314,7 @@
   "health-page.status.warning.info": "Sono stati rilevati dei potenziali problemi",
 
   // "health-page.title": "Health",
-  "health-page.title": "Status del sistema",
+  "health-page.title": "Stato del sistema",
 
   // "health-page.section.no-issues": "No issues detected",
   "health-page.section.no-issues": "Nessun problema rilevato",
