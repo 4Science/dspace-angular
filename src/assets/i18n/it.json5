@@ -3646,7 +3646,6 @@
   "explore.text-section.counter.header" : "I nostri numeri",
 
   // "explore.grid-section.seeAll" : "See all",
-  // TODO New key - Add a translation
   "explore.grid-section.seeAll" : "Visualizza tutti",
 
   // "explore.facet-section.title" : "Discover",
