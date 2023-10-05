@@ -2467,7 +2467,7 @@
   // "collection.source.controls.head": "Harvest Controls",
   "collection.source.controls.head": "Controlli del Harvester",
   // "collection.source.controls.test.submit.error": "Something went wrong with initiating the testing of the settings",
-  "collection.source.controls.test.submit.error": "Qualcosa è andato storto nel test delle impostazioni",
+  "collection.source.controls.test.submit.error": "Qualcosa è andato storto durante l'avvio del test delle impostazioni",
   // "collection.source.controls.test.failed": "The script to test the settings has failed",
   "collection.source.controls.test.failed": "Lo script per testare le impostazioni non è riuscito",
   // "collection.source.controls.test.completed": "The script to test the settings has successfully finished",
@@ -2487,11 +2487,11 @@
   // "collection.source.controls.import.failed": "An error occurred during the import",
   "collection.source.controls.import.failed": "Si è verificato un errore durante l'import ",
   // "collection.source.controls.import.completed": "The import completed",
-  "collection.source.controls.import.completed": "L'import  completato",
+  "collection.source.controls.import.completed": "L'import è completato",
   // "collection.source.controls.reset.submit.success": "The reset and reimport has been successfully initiated",
   "collection.source.controls.reset.submit.success": "Il reset e il reimport sono stati avviati correttamente",
   // "collection.source.controls.reset.submit.error": "Something went wrong with initiating the reset and reimport",
-  "collection.source.controls.reset.submit.error": "Qualcosa è andato storto nel reimport",
+  "collection.source.controls.reset.submit.error": "Qualcosa è andato storto durante l'avvio del reset e reimport",
   // "collection.source.controls.reset.failed": "An error occurred during the reset and reimport",
   "collection.source.controls.reset.failed": "Si è verificato un errore durante il reimport",
   // "collection.source.controls.reset.completed": "The reset and reimport completed",
@@ -2521,7 +2521,7 @@
 
 
   // "communityList.breadcrumbs": "Community List",
-  "communityList.breadcrumbs": "Elenco  Community",
+  "communityList.breadcrumbs": "Elenco Community",
 
   // "communityList.tabTitle": "Community List",
   "communityList.tabTitle": "Elenco Community",
@@ -2581,7 +2581,7 @@
   "community.edit.logo.delete.title": "Elimina logo",
 
   // "community.edit.logo.delete-undo.title": "Undo delete",
-  "community.edit.logo.delete-undo.title": "Annulla la cancellazione",
+  "community.edit.logo.delete-undo.title": "Annulla l'eliminazione",
 
   // "community.edit.logo.label": "Community logo",
   "community.edit.logo.label": "Logo della community",
@@ -2602,7 +2602,7 @@
   "community.edit.logo.notifications.delete.error.title": "Errore durante l'eliminazione del logo",
 
   // "community.edit.logo.upload": "Drop a Community Logo to upload",
-  "community.edit.logo.upload": "Trascina un logo da caricare",
+  "community.edit.logo.upload": "Trascina qui il logo da caricare per la community",
 
 
 
@@ -2678,7 +2678,7 @@
 
 
   // "comcol-role.edit.community-admin.description": "Community administrators can create sub-communities or collections, and manage or assign management for those sub-communities or collections. In addition, they decide who can submit items to any sub-collections, edit item metadata (after submission), and add (map) existing items from other collections (subject to authorization).",
-  "comcol-role.edit.community-admin.description": "Gli amministratori della community possono creare sotto-community o collections e gestirne o assegnare l'amministrazione ad altri gruppi. Inoltre, decidono chi può inserire gli item in qualsiasi sotto-collections, modificare i metadati degli item e aggiungere (mappare) item esistenti da altre collectioni (previa autorizzazione).",
+  "comcol-role.edit.community-admin.description": "Gli amministratori della community possono creare sotto-community o collections e gestirne o assegnarne l'amministrazione ad altri gruppi. Inoltre, decidono chi può inserire gli item in qualsiasi sotto-collezione, modificare i metadati degli item e aggiungere (mappare) item esistenti da altre collezioni (previa autorizzazione).",
 
   // "comcol-role.edit.collection-admin.description": "Collection administrators decide who can submit items to the collection, edit item metadata (after submission), and add (map) existing items from other collections to this collection (subject to authorization for that collection).",
   "comcol-role.edit.collection-admin.description": "Gli amministratori della collezione decidono chi può inserire item nella collection, modificare i metadati dell'item   e aggiungere (mappare) item da altre collezioni.",
@@ -2688,7 +2688,7 @@
   "comcol-role.edit.submitters.name": "Catalogatori",
 
   // "comcol-role.edit.submitters.description": "The E-People and Groups that have permission to submit new items to this collection.",
-  "comcol-role.edit.submitters.description": "Operatori e Gruppi che dispongono dell'autorizzazione per inseriree nuovi item in questa collezione.",
+  "comcol-role.edit.submitters.description": "Operatori e Gruppi che dispongono dell'autorizzazione per inserire nuovi item in questa collezione.",
 
 
   // "comcol-role.edit.item_read.name": "Default item read access",
@@ -2705,7 +2705,7 @@
   "comcol-role.edit.bitstream_read.name": "Accesso di sola lettura per il bitstream",
 
   // "comcol-role.edit.bitstream_read.description": "Community administrators can create sub-communities or collections, and manage or assign management for those sub-communities or collections. In addition, they decide who can submit items to any sub-collections, edit item metadata (after submission), and add (map) existing items from other collections (subject to authorization).",
-  "comcol-role.edit.bitstream_read.description": "Gli amministratori della community possono creare sotto-community o collezioni e gestirne o assegnare l'amministrazione. Inoltre, decidono chi può depositare item in qualsiasi sotto-collections, modificare i metadati degli item e aggiungere (mappare) item esistenti da altre collezioni(previa autorizzazione).",
+  "comcol-role.edit.bitstream_read.description": "Gli amministratori della community possono creare sotto-community o collezioni e gestirne o assegnarne l'amministrazione. Inoltre, decidono chi può depositare item in qualsiasi sotto-collezione, modificare i metadati degli item e aggiungere (mappare) item esistenti da altre collezioni(previa autorizzazione).",
 
   // "comcol-role.edit.bitstream_read.anonymous-group": "Default read for incoming bitstreams is currently set to Anonymous.",
   "comcol-role.edit.bitstream_read.anonymous-group": "L'accesso di sola lettura per i bitstreams inseriti è attualmente impostata su Anonymous.",
@@ -3466,7 +3466,7 @@
   "confirmation-modal.export-metadata.confirm": "Export",
 
   // "confirmation-modal.export-batch.header": "Export batch (ZIP) for {{ dsoName }}",
-  "confirmation-modal.export-batch.header": "Export Batch da {{ dsoName }}",
+  "confirmation-modal.export-batch.header": "Export Batch (ZIP) da {{ dsoName }}",
 
   // "confirmation-modal.export-batch.info": "Are you sure you want to export batch (ZIP) for {{ dsoName }}",
   "confirmation-modal.export-batch.info": "Sei sicuro di voler esportare batch (ZIP) per {{ dsoName }}?",
