@@ -541,7 +541,6 @@
   "admin.access-control.epeople.form.firstName": "Nome",
 
   // "admin.access-control.epeople.form.lastName": "Last name",
-  // TODO Source message changed - Revise the translation
   "admin.access-control.epeople.form.lastName": "Cognome",
 
   // "admin.access-control.epeople.form.email": "E-mail",
@@ -699,7 +698,7 @@
   "admin.access-control.groups.table.status": "Stato",
 
   // "admin.access-control.groups.no-items": "No groups found with this in their name or this as UUID",
-  "admin.access-control.groups.no-items": "No groups found with this in their name or this as UUID ",
+  "admin.access-control.groups.no-items": "Nessun gruppo trovato con questo nel loro nome o questo come UUID",
 
   // "admin.access-control.groups.notification.deleted.success": "Successfully deleted group \"{{name}}\"",
   "admin.access-control.groups.notification.deleted.success": "Gruppo eliminato con successo \"{{name}}\"",
@@ -711,8 +710,7 @@
   "admin.access-control.groups.notification.deleted.failure.content": "Causa: \"{{cause}}\"",
 
   // "admin.access-control.groups.notification.edit.success": "Successfully edited group \"{{name}}\"",
-  // TODO Source message changed - Revise the translation
-  "admin.access-control.groups.notification.edit.success": "Gruppo modificato correttamente \"{{name}}\"",
+  "admin.access-control.groups.notification.edit.success": "Gruppo \"{{name}}\" modificato correttamente",
 
   // "admin.access-control.groups.notification.edit.failure": "Failed to edit group \"{{name}}\"",
   "admin.access-control.groups.notification.edit.failure": "Impossibile modificare il gruppo \"{{name}}\"",
