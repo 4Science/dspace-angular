@@ -7988,7 +7988,7 @@
   "resource-policies.edit.page.target-failure.content": "Si è verificato un errore durante la modifica del target (EPerson o gruppo) del criterio della risorsa.",
 
   // "resource-policies.edit.page.other-failure.content": "An error occurred while editing the resource policy. The target (ePerson or group) has been successfully updated.",
-  "resource-policies.edit.page.other-failure.content": "Si è verificato un errore durante la modifica del criterio della risorsa. IL target (EPerson o gruppo) è stato aggiornato con successo.",
+  "resource-policies.edit.page.other-failure.content": "Si è verificato un errore durante la modifica del criterio della risorsa. Il target (EPerson o gruppo) è stato aggiornato con successo.",
 
   // "resource-policies.edit.page.success.content": "Operation successful",
   "resource-policies.edit.page.success.content": "Operazione riuscita",
@@ -11704,7 +11704,6 @@
   "admin.system-wide-alert.breadcrumbs": "Allarmi di sistema",
 
   // "admin.system-wide-alert.title": "System-wide Alerts",
-  // TODO Source message changed - Revise the translation
   "admin.system-wide-alert.title": "Allarmi di sistema",
 
   // "explore.index.lastModified" : "New accessions",
