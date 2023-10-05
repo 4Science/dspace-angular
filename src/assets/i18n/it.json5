@@ -1004,10 +1004,10 @@
 
 
   // "admin.workflow.breadcrumbs": "Administer Workflow",
-  "admin.workflow.breadcrumbs": "Amministratore del  Workflow",
+  "admin.workflow.breadcrumbs": "Amministrazione Workflow",
 
   // "admin.workflow.title": "Administer Workflow",
-  "admin.workflow.title": "Amministratore Workflow",
+  "admin.workflow.title": "Amministrazione Workflow",
 
   // "admin.workflow.item.workflow": "Workflow",
   "admin.workflow.item.workflow": "Workflow",
@@ -1016,10 +1016,10 @@
   "admin.workflow.item.workspace": "Workspace",
 
   // "admin.workflow.item.delete": "Delete",
-  "admin.workflow.item.delete": "Cancella ",
+  "admin.workflow.item.delete": "Cancella",
 
   // "admin.workflow.item.send-back": "Send back",
-  "admin.workflow.item.send-back": "Rinvia ",
+  "admin.workflow.item.send-back": "Rinvia",
 
   // "admin.workflow.item.policies": "Policies",
   "admin.workflow.item.policies": "Policy",
@@ -1297,7 +1297,6 @@
   "bitstream.edit.form.description.label": "Descrizione",
 
   // "bitstream.edit.form.embargo.hint": "The first day from which access is allowed. <b>This date cannot be modified on this form.</b> To set an embargo date for a bitstream, go to the <i>Item Status</i> tab, click <i>Authorizations...</i>, create or edit the bitstream's <i>READ</i> policy, and set the <i>Start Date</i> as desired.",
-  // TODO Source message changed - Revise the translation
   "bitstream.edit.form.embargo.hint": "Si tratta del primo giorno da cui è consentito l'accesso. <b>Questa data non può essere modificata in questo form.</b> Per impostare una data di embargo per un bitstream, vai alla scheda <i>Item Status</i> fare clic su <i>Autorizzazioni... </i>creare o modifica la policy del <i>READ</i> e imposta la <i>Start Date</i> come desiderato.",
 
   // "bitstream.edit.form.embargo.label": "Embargo until specific date",
@@ -1322,7 +1321,7 @@
   "bitstream.edit.form.fileType.label": "Tipologia del File",
 
   // "bitstream.edit.form.fileType.hint": "Personal picture, logo, main article, etc.",
-  "bitstream.edit.form.fileType.hint": "Immagine  e, logo, pubblicazione, ecc.",
+  "bitstream.edit.form.fileType.hint": "ersonal picture, logo, main article, ecc.",
 
   // "bitstream.edit.form.selectedFormat.hint": "If the format is not in the above list, <b>select \"format not in list\" above</b> and describe it under \"Describe new format\".",
   "bitstream.edit.form.selectedFormat.hint": "Se il formato non è presente nell'elenco precedente, <b>selezionare \"formato  non presente in elenco\"  sopra</b> e descriverlo in \"Descrivi nuovo formato.",
@@ -1343,20 +1342,19 @@
   "bitstream.edit.form.iiifLabel.hint": "Etichetta di cornice per questa immagine. Se non viene fornita, verrà utilizzata l'etichetta predefinita.",
 
   // "bitstream.edit.form.iiifToc.label": "IIIF Table of Contents",
-  "bitstream.edit.form.iiifToc.label": "Indice",
+  "bitstream.edit.form.iiifToc.label": "Indice IIIF",
 
   // "bitstream.edit.form.iiifToc.hint": "Adding text here makes this the start of a new table of contents range.",
   "bitstream.edit.form.iiifToc.hint": "L'aggiunta di testo qui rende questo l'inizio di un nuovo intervallo dell'indice.",
 
   // "bitstream.edit.form.iiifWidth.label": "IIIF Canvas Width",
-  "bitstream.edit.form.iiifWidth.label": "Larghezza area di lavoro",
+  "bitstream.edit.form.iiifWidth.label": "Larghezza area di lavoro IIIF",
 
   // "bitstream.edit.form.iiifWidth.hint": "The canvas width should usually match the image width.",
   "bitstream.edit.form.iiifWidth.hint": "La larghezza dell'area di lavoro deve in genere corrispondere alla larghezza dell'immagine.",
 
   // "bitstream.edit.form.iiifHeight.label": "IIIF Canvas Height",
-  // TODO Source message changed - Revise the translation
-  "bitstream.edit.form.iiifHeight.label": "Altezza area di lavoro  ",
+  "bitstream.edit.form.iiifHeight.label": "Altezza area di lavoro IIIF",
 
   // "bitstream.edit.form.iiifHeight.hint": "The canvas height should usually match the image height.",
   "bitstream.edit.form.iiifHeight.hint": "L'altezza dell'area di lavoro deve in genere corrispondere all'altezza dell'immagine.",
@@ -1422,7 +1420,6 @@
   "bitstream-request-a-copy.submit": "Richiedi copia",
 
   // "bitstream-request-a-copy.submit.success": "The item request was submitted successfully.",
-  // TODO Source message changed - Revise the translation
   "bitstream-request-a-copy.submit.success": "La richiesta di invio è stata inviata correttamente.",
 
   // "bitstream-request-a-copy.submit.error": "Something went wrong with submitting the item request.",
@@ -1455,7 +1452,7 @@
   "browse.comcol.by.rpname": "Per nome",
 
   // "browse.comcol.by.subject": "By Subject",
-  "browse.comcol.by.subject": "Per soggettoo",
+  "browse.comcol.by.subject": "Per soggetto",
 
   // "browse.comcol.by.title": "By Title",
   "browse.comcol.by.title": "Per titolo",
