@@ -1951,7 +1951,7 @@
   "pagination.next.button.disabled.tooltip": "Non ci sono ulteriori pagine",
 
   // "browse.startsWith": ", starting with {{ startsWith }}",
-  "browse.startsWith": ", Avvia con {{ startsWith }}",
+  "browse.startsWith": ", a partire da {{ startsWith }}",
 
   // "browse.startsWith.choose_start": "(Choose start)",
   "browse.startsWith.choose_start": "(Scegli start)",
@@ -2014,7 +2014,7 @@
   "browse.startsWith.type_date": "Filtra per data",
 
   // "browse.startsWith.type_date.label": "Or type in a date (year-month) and click on the Browse button",
-  "browse.startsWith.type_date.label": "Oppure digita una data e clicca sul pulsante Sfoglia",
+  "browse.startsWith.type_date.label": "Oppure digita una data (anno-mese) e clicca sul pulsante Sfoglia",
 
   // "browse.startsWith.type_text": "Filter results by typing the first few letters",
   "browse.startsWith.type_text": "Per filtrare i risultati inizia a digitare le prime lettere",
@@ -2047,7 +2047,7 @@
   "bulk-import.error": "Si è verificato un errore durante la creazione del processo di import",
 
   // "bulk-import.file" : "Source file",
-  "bulk-import.file" : "Ricerca file",
+  "bulk-import.file" : "File sorgente",
 
   // "bulk-import.header" : "Bulk import",
   "bulk-import.header" : "Import massivo",
@@ -2212,16 +2212,16 @@
   "collection.edit.logo.notifications.delete.success.title": "Logo cancellato",
 
   // "collection.edit.logo.notifications.delete.success.content": "Successfully deleted the collection's logo",
-  "collection.edit.logo.notifications.delete.success.content": "Eliminato con successo il logo della collection",
+  "collection.edit.logo.notifications.delete.success.content": "Il logo della collezione è stato eliminato",
 
   // "collection.edit.logo.notifications.delete.error.title": "Error deleting logo",
   "collection.edit.logo.notifications.delete.error.title": "Errore durante l'eliminazione del logo",
 
   // "collection.edit.logo.upload": "Drop a Collection Logo to upload",
-  "collection.edit.logo.upload": "Trascina il logo della collection ",
+  "collection.edit.logo.upload": "Trascina qui il logo da caricare per la collezione",
 
   // "collection.edit.notifications.success": "Successfully edited the Collection",
-  "collection.edit.notifications.success": "Modificata correttamente la collection",
+  "collection.edit.notifications.success": "Modificata correttamente la collezione",
 
   // "collection.edit.return": "Back",
   "collection.edit.return": "Indietro",
@@ -2268,13 +2268,13 @@
   "collection.edit.tabs.source.form.adminEmail": "Indirizzo dell'amministratore",
 
   // "collection.edit.tabs.source.form.errors.oaiSource.required": "You must provide a set id of the target collection.",
-  "collection.edit.tabs.source.form.errors.oaiSource.required": "È necessario fornire un ID della collection di destinazione.",
+  "collection.edit.tabs.source.form.errors.oaiSource.required": "È necessario fornire un ID della collezione di destinazione.",
 
   // "collection.edit.tabs.source.form.harvestType": "Content being harvested",
   "collection.edit.tabs.source.form.harvestType": "Dati esterni harvestati",
 
   // "collection.edit.tabs.source.form.head": "Configure an external source",
-  "collection.edit.tabs.source.form.head": "Configura un external source",
+  "collection.edit.tabs.source.form.head": "Configura un'origine esterna",
 
   // "collection.edit.tabs.source.form.metadataConfigId": "Metadata Format",
   "collection.edit.tabs.source.form.metadataConfigId": "Formato dei metadati",
@@ -2354,32 +2354,32 @@
   "collection.edit.template.edit-button": "Modifica",
 
   // "collection.edit.template.error": "An error occurred retrieving the template item",
-  "collection.edit.template.error": "Si è verificato un errore durante il recupero del template dell' Item",
+  "collection.edit.template.error": "Si è verificato un errore durante il recupero del template dell'Item",
 
   // "collection.edit.template.head": "Edit Template Item for Collection \"{{ collection }}\"",
-  "collection.edit.template.head": "Modifica il template dell'item  per la collection \"{{ collection }}\"",
+  "collection.edit.template.head": "Modifica il template dell'item  per la collezione \"{{ collection }}\"",
 
   // "collection.edit.template.label": "Template item",
-  "collection.edit.template.label": "Template dell' Item",
+  "collection.edit.template.label": "Template dell'Item",
 
   // "collection.edit.template.loading": "Loading template item...",
   "collection.edit.template.loading": "Caricamento del Template per Item in corso...",
 
   // "collection.edit.template.notifications.delete.error": "Failed to delete the item template",
-  "collection.edit.template.notifications.delete.error": "Impossibile eliminare il template dell' Item",
+  "collection.edit.template.notifications.delete.error": "Impossibile eliminare il template dell'Item",
 
   // "collection.edit.template.notifications.delete.success": "Successfully deleted the item template",
-  "collection.edit.template.notifications.delete.success": "Eliminato correttamente il template dell' Item",
+  "collection.edit.template.notifications.delete.success": "Eliminato correttamente il template dell'Item",
 
   // "collection.edit.template.title": "Edit Template Item",
-  "collection.edit.template.title": "Modifica iltemplate dell' Item",
+  "collection.edit.template.title": "Modifica il template dell'Item",
 
 
   // "collection-export.success": "Export of the collection's items started successfully",
   "collection-export.success": "L'esportazione degli item della collection è iniziata correttamente",
 
   // "collection-export.error": "An error occurs starting the collection's items export",
-  "collection-export.error": "Si verifica un errore nell'export degli item della collection",
+  "collection-export.error": "Si verifica un errore nell'export degli item della collezione",
 
 
   // "collection.form.abstract": "Short Description",
@@ -2441,7 +2441,7 @@
   "collection.page.edit": "Modifica questa collection",
 
   // "collection.page.export": "Export items from this collection",
-  "collection.page.export": "Esporta gli item da questa collection",
+  "collection.page.export": "Esporta gli item da questa collezione",
 
   // "collection.page.handle": "Permanent URI for this collection",
   "collection.page.handle": "URI permanente per questa collection",
