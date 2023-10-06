@@ -43,6 +43,11 @@ export class CarouselComponent implements OnInit {
   title: string;
 
   /**
+   * Carousel section bundle field.
+   */
+  bundle: string;
+
+  /**
    * Carousel section link field.
    */
   link: string;
@@ -86,6 +91,7 @@ export class CarouselComponent implements OnInit {
     this.title = this.carouselOptions.title;
     this.link = this.carouselOptions.link;
     this.description = this.carouselOptions.description;
+    this.bundle = this.carouselOptions.bundle;
 
     this.findAllBitstreamImages().subscribe((res) => {
       this.itemToImageHrefMap$.next(res);
@@ -124,7 +130,7 @@ export class CarouselComponent implements OnInit {
     return from(this.items).pipe(
       map((itemSR) => itemSR.indexableObject),
       mergeMap((item) => this.bitstreamDataService.findAllByItemAndBundleName(
-          item, 'ORIGINAL', {}, true, true, followLink('format'),
+          item, this.bundle, {}, true, true, followLink('format'),
         ).pipe(
           getFirstCompletedRemoteData(),
           switchMap((rd: RemoteData<PaginatedList<Bitstream>>) => rd.hasSucceeded ? rd.payload.page : []),
