@@ -1,27 +1,45 @@
-<div class="container mt-5">
+<div class="text-center" *ngIf="initLoading$ | async">
+  <ds-loading message="{{'loading.default' | translate}}"></ds-loading>
+</div>
+<div *ngIf="!(initLoading$ | async)" class="container mt-5">
   <div class="text-center mb-4">
-    {{ ('label.title.slider.' + sliderSection.discoveryConfigurationName) | translate }}
+    {{ ('label.title.slider.' + discoveryConfiguration) | translate }}
   </div>
 
-  <div
+  <div *ngIf="!(itemsImagesLoading$ | async)"
     style="display: grid; justify-content: space-between; place-items: center;"
     [style.grid-template-columns]="'repeat(' + cardsPerPage + ', 1fr)'"
   >
     <a *ngFor="let item of currentPageItems()"
-       [href]="item.indexableObject.metadata[link]?.[0].value"
+       [href]="getItemLink(item)"
        target="_blank"
        style="height: 280px; width: 200px"
        class="img-container-el">
       <ng-container
-        *ngIf="(itemToImageHrefMap$ | async).get(item.indexableObject.uuid); let href; else defaultPreviewImage">
-        <img [src]="href" [alt]="item.indexableObject.metadata[title]?.[0].value"
-             style="width: 100%; height: 100%; object-fit: cover">
+        *ngIf="(itemToImageHrefMap$ | async)?.get(item.uuid); let href; else defaultPreviewImage">
+        <img [src]="href" [alt]="item.metadata[title]?.[0].value">
       </ng-container>
       <ng-template #defaultPreviewImage>
         <img src="assets/images/replacement_image.svg" style="width: 100%; height: 100%; object-fit: cover">
       </ng-template>
       <div class="description">
-        {{ item.indexableObject.metadata[title]?.[0].value }}
+        {{ item.metadata[title]?.[0].value }}
+      </div>
+    </a>
+  </div>
+
+  <div *ngIf="(itemsImagesLoading$ | async)"
+       style="display: grid; justify-content: space-between; place-items: center;"
+       [style.grid-template-columns]="'repeat(' + cardsPerPage + ', 1fr)'"
+  >
+    <a *ngFor="let item of currentLoadingPageItems()"
+       href="#"
+       target="_blank"
+       class="img-container-el">
+      <img src="assets/images/replacement_image.svg">
+
+      <div class="description">
+        {{'loading.default' | translate}}
       </div>
     </a>
   </div>
@@ -33,7 +51,7 @@
     <button
       *ngFor="let page of pages()"
       class="number"
-      (click)="currentPage = page"
+      (click)="changePage(page)"
       style="border: none; background: none; margin: 0 5px"
       [style.color]="page === currentPage ? '#000000' : '#7c7c7c'">
       {{ page < 10 ? '0' + page : page }}

@@ -1,12 +1,24 @@
-import { Component, Inject, Input, OnDestroy, OnInit, Optional } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { ChangeDetectorRef, Component, Inject, Input, OnDestroy, OnInit, Optional } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { concatMap, map, mergeMap, reduce, take, takeUntil } from 'rxjs/operators';
+
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { NativeWindowRef, NativeWindowService } from '../../core/services/window.service';
-import { ItemSearchResult } from '../object-collection/shared/item-search-result.model';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { BitstreamImagesService } from '../../core/data/bitstream-images.service';
-import { SliderSection } from '../../core/layout/models/section.model';
+import { Item } from '../../core/shared/item.model';
+import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { SearchManager } from '../../core/browse/search-manager';
+import { SortDirection, SortOptions } from '../../core/cache/models/sort-options.model';
+import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
+import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
+import { DSpaceObjectType } from '../../core/shared/dspace-object-type.model';
+import { RemoteData } from '../../core/data/remote-data';
+import { SearchObjects } from '../search/models/search-objects.model';
+import { isNotEmpty } from '../empty.util';
+import { from } from 'rxjs/internal/observable/from';
 
 /**
  * Component representing the Slider component section.
@@ -17,12 +29,51 @@ import { SliderSection } from '../../core/layout/models/section.model';
   styleUrls: ['./slider.component.scss'],
 })
 export class SliderComponent implements OnInit, OnDestroy {
-  /**
-   * Items to be used in slider.
-   */
-  @Input() items: ItemSearchResult[];
 
-  @Input() sliderSection: SliderSection;
+  /**
+   * The discovery configuration to retrieve the items
+   */
+  @Input() discoveryConfiguration!: string;
+
+  /**
+   * The number of item to show for each page
+   */
+  @Input() numberOfItems = 4;
+
+  /**
+   * The sort direction used for the search
+   */
+  @Input() sortOrder = 'desc';
+
+  /**
+   * The sort field used for the search
+   */
+  @Input() sortField = 'lastModified';
+
+  /**
+   * A boolean representing if there are more items to be loaded
+   */
+  hasMoreToLoad: boolean;
+
+  /**
+   * The list of the item to show
+   */
+  itemList: Item[] = [];
+
+  /**
+   * The list of number which length is the total number of items available
+   */
+  itemPlaceholderList: number[] = [];
+
+  /**
+   * The total search item pages
+   */
+  totalPages = 0;
+
+  /**
+   * the total number of item available
+   */
+  totalItems = 0;
 
   /**
    * Slider section title field.
@@ -39,9 +90,20 @@ export class SliderComponent implements OnInit, OnDestroy {
    */
   description: string;
 
+  /**
+   * The map between items and images
+   */
   itemToImageHrefMap$ = new BehaviorSubject<Map<string, string>>(new Map<string, string>());
 
-  isLoading$ = new BehaviorSubject(true);
+  /**
+   * A boolean representing is first request to retrieve items is pending
+   */
+  initLoading$ = new BehaviorSubject(true);
+
+  /**
+   * A boolean representing is a request to retrieve items bitstream is pending
+   */
+  itemsImagesLoading$ = new BehaviorSubject(true);
 
   private destroyed = new Subject<void>();
 
@@ -59,15 +121,39 @@ export class SliderComponent implements OnInit, OnDestroy {
   constructor(
     protected bitstreamDataService: BitstreamDataService,
     private bitstreamImagesService: BitstreamImagesService,
+    private cdr: ChangeDetectorRef,
+    private searchManager: SearchManager,
     @Inject(NativeWindowService) private _window: NativeWindowRef,
     @Optional() protected breakpointObserver?: BreakpointObserver,
   ) {
   }
 
   ngOnInit() {
-    this.bitstreamImagesService.findAllBitstreamImages(this.items)
-      .pipe(take(1))
-      .subscribe(this.itemToImageHrefMap$);
+    this.initLoading$.next(true);
+    this.retrieveItems().pipe(
+      mergeMap((searchResult: SearchObjects<Item>) => {
+        if (isNotEmpty(searchResult)) {
+          this.totalPages = searchResult.totalPages;
+          this.totalItems = searchResult.totalElements;
+          const items: Item[] = searchResult.page.map((searchItem) => searchItem.indexableObject);
+          this.itemPlaceholderList = Array(searchResult.totalElements).fill(1).map((x, i) => i + 1);
+          this.itemList = [...this.itemList, ...items];
+          this.hasMoreToLoad = this.itemList.length < searchResult.totalElements;
+          this.initLoading$.next(false);
+          this.itemsImagesLoading$.next(true);
+          return this.bitstreamImagesService.findAllBitstreamImages(items);
+        } else {
+          return null;
+        }
+      }),
+      take(1)
+    ).subscribe((itemToImageHrefMap: Map<string,string>) => {
+      if (isNotEmpty(itemToImageHrefMap)) {
+        this.itemToImageHrefMap$.next(new Map([...Array.from(this.itemToImageHrefMap$.value.entries()), ...Array.from(itemToImageHrefMap.entries())]));
+        this.cdr.detectChanges();
+      }
+      this.itemsImagesLoading$.next(false);
+    });
 
     this.breakpointObserver
       .observe([
@@ -95,16 +181,20 @@ export class SliderComponent implements OnInit, OnDestroy {
       Large: 5,
       XLarge: 6,
     };
-
-    return mapping[this.currentScreenSize ?? 'XSmall'];
+    const mappedSize = mapping[this.currentScreenSize ?? 'XSmall'];
+    return (mappedSize <= this.numberOfItems) ? mappedSize : this.numberOfItems;
   }
 
-  currentPageItems() {
-    return this.items.slice((this.currentPage - 1) * this.cardsPerPage, this.currentPage * this.cardsPerPage);
+  currentPageItems(): Item[] {
+    return this.itemList.slice((this.currentPage - 1) * this.cardsPerPage, this.currentPage * this.cardsPerPage);
+  }
+
+  currentLoadingPageItems(): number[] {
+    return this.itemPlaceholderList.slice((this.currentPage - 1) * this.cardsPerPage, this.currentPage * this.cardsPerPage);
   }
 
   pages = () => {
-    return Array.from({length: Math.ceil(this.items.length / this.cardsPerPage)}, (_, i) => i + 1);
+    return Array.from({length: Math.ceil(this.itemPlaceholderList.length / this.cardsPerPage)}, (_, i) => i + 1);
   };
 
   previousPage = () => {
@@ -113,11 +203,92 @@ export class SliderComponent implements OnInit, OnDestroy {
     }
   };
 
-  nextPage = () => {
-    if (this.currentPage < this.pages().length) {
-      this.currentPage++;
+  changePage = (page) => {
+    if (page > this.currentPage && this.hasMoreToLoad) {
+      this.itemsImagesLoading$.next(true);
+      const startIndex = this.pages().indexOf(this.currentPage) + 1;
+      const endIndex = this.pages().indexOf(page) + 1;
+      const pagesToFetch: number[] = this.pages().slice(startIndex, endIndex);
+      this.currentPage = page;
+      this.retrieveMoreItems(...pagesToFetch);
+    } else {
+      this.currentPage = page;
     }
   };
+
+  nextPage = () => {
+    if (this.currentPage < this.pages().length) {
+      if (this.hasMoreToLoad) {
+        this.itemsImagesLoading$.next(true);
+        this.currentPage++;
+        this.retrieveMoreItems(this.currentPage);
+
+      } else {
+        this.currentPage++;
+      }
+    }
+  };
+
+  retrieveMoreItems(...page: number[]) {
+    from(page).pipe(
+      concatMap((currentPage: number) => this.retrieveItems(currentPage).pipe(
+        mergeMap((searchResult: SearchObjects<Item>) => {
+          if (isNotEmpty(searchResult)) {
+            const items: Item[] = searchResult.page.map((searchItem) => searchItem.indexableObject);
+            this.itemList = [...this.itemList, ...items];
+            this.hasMoreToLoad = this.itemList.length < searchResult.totalElements;
+            return this.bitstreamImagesService.findAllBitstreamImages(items);
+          } else {
+            return null;
+          }
+        }),
+        take(1),
+        // tap((itemToImageHrefMap) => this.itemToImageHrefMap$.next(new Map([...Array.from(this.itemToImageHrefMap$.value.entries()), ...Array.from(itemToImageHrefMap.entries())]))),
+      )),
+      reduce((itemToImageHrefMap, value) => {
+        return new Map([...Array.from(itemToImageHrefMap.entries()), ...Array.from(value.entries())]);
+      }, new Map()),
+    ).subscribe((itemToImageHrefMap: Map<string,string>) => {
+      if (isNotEmpty(itemToImageHrefMap)) {
+        this.itemToImageHrefMap$.next(new Map([...Array.from(this.itemToImageHrefMap$.value.entries()), ...Array.from(itemToImageHrefMap.entries())]));
+        this.cdr.detectChanges();
+      }
+      this.itemsImagesLoading$.next(false);
+    });
+  }
+
+  /**
+   * Retrieve items by the given page number
+   *
+   * @param currentPage
+   */
+  retrieveItems(currentPage: number = 1): Observable<SearchObjects<Item>> {
+    const pagination: PaginationComponentOptions = Object.assign(new PaginationComponentOptions(), {
+      id: 'sop',
+      pageSize: this.numberOfItems,
+      currentPage: currentPage
+    });
+    const sortDirection = this.sortOrder?.toUpperCase() === 'ASC' ? SortDirection.ASC : SortDirection.DESC;
+    const paginatedSearchOptions = new PaginatedSearchOptions({
+      configuration: this.discoveryConfiguration,
+      pagination: pagination,
+      sort: new SortOptions(this.sortField, sortDirection),
+      dsoTypes: [DSpaceObjectType.ITEM],
+      forcedEmbeddedKeys: ['bundles']
+    });
+
+
+    return this.searchManager.search(paginatedSearchOptions).pipe(
+      getFirstCompletedRemoteData(),
+      map((searchResultsRD: RemoteData<SearchObjects<Item>>) => {
+        if (searchResultsRD.hasSucceeded) {
+          return searchResultsRD.payload;
+        } else {
+          return null;
+        }
+      })
+    );
+  }
 
   ngOnDestroy() {
     this.destroyed.next();
