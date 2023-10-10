@@ -95,6 +95,7 @@ export class CarouselSectionComponent implements OnInit {
       targetBlank: this.carouselSection.targetBlank ?? true,
       captionStyle: this.carouselSection.captionStyle,
       titleStyle: this.carouselSection.titleStyle,
+      bundle: this.carouselSection.bundle,
       showBlurryBackdrop: this.carouselSection.showBlurryBackdrop,
     };
 
