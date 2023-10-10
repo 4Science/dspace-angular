@@ -63,6 +63,7 @@ describe('CarouselComponent', () => {
       aspectRatio: 1,
       captionStyle: '',
       titleStyle: '',
+      bundle: 'ORIGINAL',
       showBlurryBackdrop: false
     };
 
