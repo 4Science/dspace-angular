@@ -184,7 +184,7 @@ describe('EntityDropdownComponent', () => {
     expect(component.searchListEntity).toEqual([]);
   });
 
-  it('should invoke the method byEntityTypeAndMolteplicity of EntityTypeService when isSubmission is false', () => {
+  it('should invoke the method byEntityTypeAndMolteplicity of itemExportFormatService when isSubmission is false', () => {
     component.isSubmission = false;
 
     scheduler.schedule(() => fixture.detectChanges());

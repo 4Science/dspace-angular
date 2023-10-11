@@ -1,5 +1,5 @@
 import { autoserialize, autoserializeAs, deserialize, deserializeAs } from 'cerialize';
-import { hasNoValue, hasValue, isUndefined } from '../../shared/empty.util';
+import { hasNoValue, hasValue, isNotNull, isUndefined } from '../../shared/empty.util';
 import { ListableObject } from '../../shared/object-collection/shared/listable-object.model';
 import { typedObject } from '../cache/builders/build-decorators';
 import { excludeFromEquals } from '../utilities/equals.decorators';
@@ -205,4 +205,23 @@ export class DSpaceObject extends ListableObject implements CacheableObject {
     delete this.metadata[key];
   }
 
+  /**
+   * Method that returns as which type of object this object should be rendered
+   */
+  getAndSortAllMetadata(keyOrKeys: string | string[]): MetadataValue[]{
+    const allMD: MetadataValue[] = this.allMetadata(keyOrKeys);
+    let sortedAllMD: MetadataValue[] = [];
+    allMD.filter(md => isNotNull((md.authority))).forEach((md,index)=>{
+      sortedAllMD.push(md);
+      for (let i = ++index ; i <= allMD.length; i++){
+        if (i < allMD.length){
+          if (allMD[i].authority == null && allMD[i].place === md.place){
+            sortedAllMD.push(allMD[i]);
+            break;
+          }
+        }
+      }
+    });
+    return sortedAllMD;
+  }
 }

@@ -19,14 +19,8 @@
   }
 
   .nav-item {
-    a {
-      text-transform: uppercase;
+    &#home-icon {
       font-size: 14px;
-      color: #676c71;
-
-      &:hover {
-        color: #000;
-      }
     }
   }
 }

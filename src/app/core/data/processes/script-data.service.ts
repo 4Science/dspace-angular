@@ -28,6 +28,7 @@ export const BATCH_IMPORT_SCRIPT_NAME = 'import';
 export const BATCH_EXPORT_SCRIPT_NAME = 'export';
 export const ITEM_EXPORT_SCRIPT_NAME = 'item-export';
 export const BULK_ITEM_EXPORT_SCRIPT_NAME = 'bulk-item-export';
+export const PACKAGER_SCRIPT_NAME = 'packager';
 
 @Injectable()
 @dataService(SCRIPT)

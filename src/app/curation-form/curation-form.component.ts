@@ -12,7 +12,7 @@ import { ProcessDataService } from '../core/data/processes/process-data.service'
 import { Process } from '../process-page/processes/process.model';
 import { ConfigurationDataService } from '../core/data/configuration-data.service';
 import { ConfigurationProperty } from '../core/shared/configuration-property.model';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { getProcessDetailRoute } from '../process-page/process-page-routing.paths';
 import { HandleService } from '../shared/handle.service';
 
@@ -27,7 +27,7 @@ export const CURATION_CFG = 'plugin.named.org.dspace.curate.CurationTask';
 export class CurationFormComponent implements OnInit {
 
   config: Observable<RemoteData<ConfigurationProperty>>;
-  tasks: string[];
+  tasks = new BehaviorSubject<string[]>([]);
   form: FormGroup;
 
   @Input()
@@ -55,10 +55,11 @@ export class CurationFormComponent implements OnInit {
       find((rd: RemoteData<ConfigurationProperty>) => rd.hasSucceeded),
       map((rd: RemoteData<ConfigurationProperty>) => rd.payload)
     ).subscribe((configProperties) => {
-      this.tasks = configProperties.values
+      const tasks = configProperties.values
         .filter((value) => isNotEmpty(value) && value.includes('='))
         .map((value) => value.split('=')[1].trim());
-      this.form.get('task').patchValue(this.tasks[0]);
+      this.tasks.next(tasks);
+      this.form.get('task').patchValue(tasks[0]);
     });
   }
 

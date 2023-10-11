@@ -15,6 +15,7 @@ import { MarkdownEditorModule } from '../shared/markdown-editor/markdown-editor.
 import { BatchImportPageComponent } from './admin-import-batch-page/batch-import-page.component';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import { UploadModule } from '../shared/upload/upload.module';
+import { MagImportPageComponent } from './admin-mag-import/mag-import-page.component';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -40,7 +41,8 @@ const ENTRY_COMPONENTS = [
     MetadataImportPageComponent,
     AdminEditUserAgreementComponent,
     EditCmsMetadataComponent,
-    BatchImportPageComponent
+    BatchImportPageComponent,
+    MagImportPageComponent,
   ]
 })
 export class AdminModule {
