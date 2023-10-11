@@ -1,6 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 
-import { BehaviorSubject, combineLatest, distinctUntilChanged } from 'rxjs';
+import { BehaviorSubject, combineLatest, distinctUntilChanged, shareReplay, Subscription } from 'rxjs';
 
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
@@ -10,6 +10,8 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { DsoVersioningModalService } from '../../dso-page/dso-versioning-modal-service/dso-versioning-modal.service';
+import { map } from 'rxjs/operators';
+import { hasValue } from '../../empty.util';
 
 @Component({
   selector: 'ds-item-version-menu',
@@ -20,7 +22,7 @@ import { DsoVersioningModalService } from '../../dso-page/dso-versioning-modal-s
 /**
  * Display a button linking to the item versioning of a DSpaceObject
  */
-export class ItemVersionMenuComponent extends ContextMenuEntryComponent implements OnInit {
+export class ItemVersionMenuComponent extends ContextMenuEntryComponent implements OnInit, OnDestroy {
 
   /**
    * Whether or not the current user is authorized to subscribe the DSpaceObject
@@ -36,6 +38,11 @@ export class ItemVersionMenuComponent extends ContextMenuEntryComponent implemen
    * DSpaceObject that is being viewed
    */
   dso: DSpaceObject;
+
+  /**
+   * Keep track of subscription to unsubscribe on component destroy
+   */
+  sub: Subscription;
 
   /**
    * Initialize instance variables
@@ -58,11 +65,12 @@ export class ItemVersionMenuComponent extends ContextMenuEntryComponent implemen
     const isAuthorized$ = this.authorizationService.isAuthorized(FeatureID.CanCreateVersion, this.contextMenuObject.self);
     const isDisabled$ = this.versioningModalService.isNewVersionButtonDisabled(this.contextMenuObject);
 
-    combineLatest([isAuthorized$, isDisabled$])
-    .pipe(
+    this.sub = combineLatest([isAuthorized$, isDisabled$]).pipe(
+      map(([isAuthorized, isDisabled]) => isAuthorized && !isDisabled),
       distinctUntilChanged(),
-    ).subscribe(([isAuthorized, isDisabled]) => {
-      this.canShow$.next(isAuthorized && !isDisabled);
+      shareReplay(1)
+    ).subscribe((canShow) => {
+      this.canShow$.next(canShow);
     });
   }
 
@@ -71,5 +79,11 @@ export class ItemVersionMenuComponent extends ContextMenuEntryComponent implemen
    */
   createNewVersion(): void {
     this.versioningModalService.openCreateVersionModal(this.contextMenuObject);
+  }
+
+  ngOnDestroy(): void {
+    if (hasValue(this.sub)) {
+      this.sub.unsubscribe();
+    }
   }
 }
