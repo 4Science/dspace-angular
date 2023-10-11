@@ -633,6 +633,18 @@ export class MenuResolver implements Resolve<boolean> {
         } as LinkMenuItemModel,
         shouldPersistOnRouteChange: true
       });
+      this.menuService.addSection(MenuID.ADMIN, {
+        id: 'import_mag',
+        parentID: 'import',
+        active: false,
+        visible: true,
+        model: {
+          type: MenuItemType.LINK,
+          text: 'menu.section.import_mag',
+          link: '/admin/mag-import'
+        } as LinkMenuItemModel,
+        shouldPersistOnRouteChange: true
+      });
     });
   }
 

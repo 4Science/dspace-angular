@@ -54,7 +54,8 @@ export abstract class CrisLayoutBoxModelComponent extends CrisLayoutPageModelCom
    * Check if the current box is collapsed or not
    */
   ngOnInit(): void {
-    this.boxHeaderI18nKey = this.boxI18nPrefix + this.box.shortname;
+    this.boxHeaderI18nKey = isEmpty(this.box.entityType) || isEmpty(this.box.shortname) ? null :
+      this.boxI18nPrefix + this.box.entityType + '.' + this.box.shortname;
 
     if (!hasValue(this.box.collapsed) || !this.box.collapsed) {
       this.activeIds.push(this.box.shortname);
