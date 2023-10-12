@@ -91,7 +91,7 @@ export class CarouselComponent implements OnInit {
     this.title = this.carouselOptions.title;
     this.link = this.carouselOptions.link;
     this.description = this.carouselOptions.description;
-    this.bundle = this.carouselOptions.bundle;
+    this.bundle = this.carouselOptions.bundle ?? 'ORIGINAL';
 
     this.findAllBitstreamImages().subscribe((res) => {
       this.itemToImageHrefMap$.next(res);
