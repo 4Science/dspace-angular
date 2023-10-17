@@ -65,6 +65,7 @@ describe('SubmissionSectionContainerComponent test suite', () => {
 
   function init() {
     sectionsServiceStub.isSectionValid.and.returnValue(observableOf(true));
+    sectionsServiceStub.isSectionHidden.and.returnValue(observableOf(false));
     sectionsServiceStub.getSectionState.and.returnValue(observableOf(sectionState));
     sectionsServiceStub.getShownSectionErrors.and.returnValue(observableOf([]));
     submissionServiceStub.getActiveSectionId.and.returnValue(observableOf('traditionalpageone'));

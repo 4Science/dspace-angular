@@ -17,9 +17,6 @@ import { FormFieldMetadataValueObject } from '../builder/models/form-field-metad
 import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
 import { PageInfo } from '../../../core/shared/page-info.model';
 import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
-import { AuthTokenInfo } from '../../../core/auth/models/auth-token-info.model';
-import { authReducer } from '../../../core/auth/auth.reducer';
-import { storeModuleConfig } from '../../../app.reducer';
 
 describe('VocabularyTreeviewComponent test suite', () => {
 

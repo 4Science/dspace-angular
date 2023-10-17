@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 
-import { BehaviorSubject, combineLatest, distinctUntilChanged, shareReplay, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, distinctUntilChanged, map, shareReplay, Subscription } from 'rxjs';
 
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
@@ -10,7 +10,6 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { DsoVersioningModalService } from '../../dso-page/dso-versioning-modal-service/dso-versioning-modal.service';
-import { map } from 'rxjs/operators';
 import { hasValue } from '../../empty.util';
 
 @Component({
@@ -28,11 +27,6 @@ export class ItemVersionMenuComponent extends ContextMenuEntryComponent implemen
    * Whether or not the current user is authorized to subscribe the DSpaceObject
    */
   canShow$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
-  /**
-   * EPerson id of the logged user
-   */
-  epersonId: string;
 
   /**
    * DSpaceObject that is being viewed

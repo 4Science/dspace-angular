@@ -74,7 +74,7 @@ import { SubmissionSectionCorrectionComponent } from './sections/correction/sect
 import { MyDspaceSearchModule } from '../my-dspace-page/my-dspace-search.module';
 import {
   SubmissionSectionUnpaywallComponent
-} from "./sections/unpaywall/submission-section-unpaywall.component";
+} from './sections/unpaywall/submission-section-unpaywall.component';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator

@@ -1,12 +1,12 @@
-import { followLink } from './../utils/follow-link-config.model';
-import { CollectionElementLinkType } from './../object-collection/collection-element-link.type';
-import { isEqual } from 'lodash';
-import { ViewMode } from './../../core/shared/view-mode.model';
+import { followLink } from '../utils/follow-link-config.model';
+import { CollectionElementLinkType } from '../object-collection/collection-element-link.type';
+import isEqual from 'lodash/isEqual';
+import { ViewMode } from '../../core/shared/view-mode.model';
 import {  Router } from '@angular/router';
 import {
   LayoutModeEnum,
   TopSection,
-} from './../../core/layout/models/section.model';
+} from '../../core/layout/models/section.model';
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { SearchService } from '../../core/shared/search/search.service';
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';

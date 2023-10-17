@@ -7,7 +7,7 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
  * This component renders the text metadata fields
  */
 @Component({
-  // tslint:disable-next-line: component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'span[ds-html]',
   templateUrl: './html.component.html',
   styleUrls: ['./html.component.scss']
