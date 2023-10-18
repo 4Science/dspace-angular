@@ -20,7 +20,7 @@ definitions:
 
 pipelines:
   branches:
-    'dspace-cris-7':
+    'glam7':
       - step: *unittest-code-checks
   pull-requests:
     '**':
