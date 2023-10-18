@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, Renderer2, ViewChild } from '@angular/core';
+import { Component, Input, Renderer2 } from '@angular/core';
 
 import { CrisLayoutTab } from '../../core/layout/models/tab.model';
 import { Item } from '../../core/shared/item.model';
