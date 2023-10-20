@@ -11,6 +11,7 @@ import {
   getItemViewerPath
 } from '../../../../../../item-page/item-page-routing-paths';
 import { Context } from '../../../../../../core/shared/context.model';
+import { environment } from '../../../../../../../environments/environment';
 
 @listableObjectComponent('PublicationSearchResult', ViewMode.ListElement)
 @listableObjectComponent(ItemSearchResult, ViewMode.ListElement)
@@ -36,6 +37,8 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
    * Route to the item's page
    */
   itemPageRoute: string;
+
+  authorMetadata = environment.searchResult.authorMetadata;
 
   itemViewerRoute: string;
 
