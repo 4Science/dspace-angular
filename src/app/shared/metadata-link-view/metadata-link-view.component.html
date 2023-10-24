@@ -1,5 +1,5 @@
 <div class="d-inline-block" *ngVar="(metadataView$ | async) as metadataView">
-	<ng-container *ngIf="metadataView" [ngTemplateOutlet]="metadataView?.authority ? linkToAuthority : text"
+	<ng-container *ngIf="metadataView" [ngTemplateOutlet]="metadataView?.authority ? linkToAuthority : (metadataView?.entityType ? textWithIcon : textWithoutIcon)"
                   [ngTemplateOutletContext]="{metadataView: metadataView}"></ng-container>
   <span *ngIf="role"> ({{ role }})</span>
 </div>
@@ -21,17 +21,15 @@
        data-test="orcidIcon"/>
 </ng-template>
 
-<ng-template #text let-metadataView="metadataView">
-  <span class="mr-1">
-    <span class="ml-1" *ngIf="normalizeValue(metadataView.value).length > 0">
-      <ng-container *ngIf="metadataView?.entityType">
-        <span dsEntityIcon
-              data-test="textWithIcon"
-              [iconPosition]="iconPosition"
-              [entityType]="metadataView.entityType"
-              [entityStyle]="metadataView.entityStyle"
-              [fallbackOnDefault]="false">{{normalizeValue(metadataView.value)}}</span>
-      </ng-container>
-      <ng-container *ngIf="!metadataView?.entityType">(<span data-test="textWithoutIcon">{{normalizeValue(metadataView.value)}}</span>)</ng-container>
-    </span>;</span>
+<ng-template #textWithIcon let-metadataView="metadataView">
+  <span dsEntityIcon
+        data-test="textWithIcon"
+        [iconPosition]="iconPosition"
+        [entityType]="metadataView.entityType"
+        [entityStyle]="metadataView.entityStyle"
+        [fallbackOnDefault]="false">{{normalizeValue(metadataView.value)}}</span>
+</ng-template>
+
+<ng-template #textWithoutIcon let-metadataView="metadataView">
+  <span data-test="textWithoutIcon">{{normalizeValue(metadataView.value)}}</span>
 </ng-template>
