@@ -35,7 +35,7 @@
               </ng-container>
               <span *ngIf="dso.allMetadataValues(authorMetadata).length > 0" class="item-list-authors">
                 <span *ngFor="let author of dso.allMetadata(authorMetadata); let i=index; let last=last;">
-                  <ds-metadata-link-view [item]="dso" [metadata]="author" [metadataName]="authorMetadata"></ds-metadata-link-view><span *ngIf="!last">; </span>
+                  <ds-metadata-link-view [item]="dso" [metadata]="author" [metadataName]="authorMetadata" [showRole]="true"></ds-metadata-link-view><span *ngIf="!last">; </span>
                 </span>
               </span>
             </ds-truncatable-part>

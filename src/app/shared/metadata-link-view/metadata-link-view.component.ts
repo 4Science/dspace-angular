@@ -43,6 +43,12 @@ export class MetadataLinkViewComponent implements OnInit {
    * Item of the metadata value
    */
   @Input() item: DSpaceObject;
+
+  /**
+   * Show the role of the author
+   */
+  @Input() showRole = false;
+
   /**
    * The metadata name from where to take the value of the cris style
    */
@@ -73,13 +79,14 @@ export class MetadataLinkViewComponent implements OnInit {
    */
   ngOnInit(): void {
 
-    const currentMetadataName = this.findMetadataName(this.metadata.uuid, this.metadataName);
-    const roleMetadataName = environment.searchResult?.authorRoleMetadataMap[currentMetadataName];
-    const roleMetadataValues = this.item.allMetadata(roleMetadataName ?? []).filter(
-      mdRole => mdRole.place === this.metadata.place && !mdRole.value.includes(PLACEHOLDER_PARENT_METADATA)
-    );
-
-    this.role = roleMetadataValues.length > 0 ? roleMetadataValues[0].value : undefined;
+    if (this.showRole) {
+      const currentMetadataName = this.findMetadataName(this.metadata.uuid, this.metadataName);
+      const roleMetadataName = environment.searchResult?.authorRoleMetadataMap[currentMetadataName];
+      const roleMetadataValues = this.item.allMetadata(roleMetadataName ?? []).filter(
+        mdRole => mdRole.place === this.metadata.place && !mdRole.value.includes(PLACEHOLDER_PARENT_METADATA)
+      );
+      this.role = roleMetadataValues.length > 0 ? roleMetadataValues[0].value : undefined;
+    }
 
     this.metadataView$ = observableOf(this.metadata).pipe(
       switchMap((metadataValue: MetadataValue) => {
