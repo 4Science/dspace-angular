@@ -1,6 +1,7 @@
 <div class="d-inline-block" *ngVar="(metadataView$ | async) as metadataView">
 	<ng-container *ngIf="metadataView" [ngTemplateOutlet]="metadataView?.authority ? linkToAuthority : text"
                   [ngTemplateOutletContext]="{metadataView: metadataView}"></ng-container>
+  <span *ngIf="role"> ({{ role }})</span>
 </div>
 
 <ng-template class="d-flex" #linkToAuthority let-metadataView="metadataView">

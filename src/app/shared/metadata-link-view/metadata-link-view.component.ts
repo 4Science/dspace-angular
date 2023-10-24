@@ -59,6 +59,11 @@ export class MetadataLinkViewComponent implements OnInit {
   iconPosition = 'after';
 
   /**
+   * The role of the author
+   */
+  role: string;
+
+  /**
    * Map all entities with the icons specified in the environment configuration file
    */
   constructor(private itemService: ItemDataService) { }
@@ -67,6 +72,15 @@ export class MetadataLinkViewComponent implements OnInit {
    * On init process metadata to get the information and form MetadataOrcid model
    */
   ngOnInit(): void {
+
+    const currentMetadataName = this.findMetadataName(this.metadata.uuid, this.metadataName);
+    const roleMetadataName = environment.searchResult?.authorRoleMetadataMap[currentMetadataName];
+    const roleMetadataValues = this.item.allMetadata(roleMetadataName ?? []).filter(
+      mdRole => mdRole.place === this.metadata.place && !mdRole.value.includes(PLACEHOLDER_PARENT_METADATA)
+    );
+
+    this.role = roleMetadataValues.length > 0 ? roleMetadataValues[0].value : undefined;
+
     this.metadataView$ = observableOf(this.metadata).pipe(
       switchMap((metadataValue: MetadataValue) => {
         if (Metadata.hasValidAuthority(metadataValue.authority)) {
@@ -105,6 +119,22 @@ export class MetadataLinkViewComponent implements OnInit {
       }),
       take(1)
     );
+  }
+
+  /**
+   * Identify the metadata name for the provided metadata
+   *
+   * @param uuid the identifier of the metadata value
+   * @param metadataNames the possible metadata names
+   */
+  findMetadataName(uuid: string, metadataNames: string|string[]): string {
+    const metadataNameArray = metadataNames instanceof Array ? metadataNames : [metadataNames];
+    for (const name of metadataNameArray) {
+      if (this.item.allMetadata(name).filter(metadataValue => metadataValue.uuid === uuid).length) {
+        return name;
+      }
+    }
+    return undefined;
   }
 
   /**
