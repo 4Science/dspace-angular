@@ -380,6 +380,9 @@
 
   // "admin.registries.metadata.schemas.table.namespace": "Namespace",
   "admin.registries.metadata.schemas.table.namespace": "Namespace",
+  // "admin.registries.metadata.schemas.table.download": "Download",
+  // TODO New key - Add a translation
+  "admin.registries.metadata.schemas.table.download": "Download",
 
   // "admin.registries.metadata.title": "Metadata Registry",
   "admin.registries.metadata.title": "Registro dei metadati",
@@ -1035,6 +1038,33 @@
   // "admin.batch-import.breadcrumbs": "Import Batch",
   "admin.batch-import.breadcrumbs": "Batch Import",
 
+  // "admin.metadata-import.title": "Import Metadata",
+  "admin.metadata-import.title": "Importa metadati",
+
+  // "admin.batch-import.title": "Import Batch",
+  "admin.batch-import.title": "Batch Import",
+
+  // "admin.metadata-import.page.header": "Import Metadata",
+  "admin.metadata-import.page.header": "Importa metadati",
+
+  // "admin.batch-import.page.header": "Import Batch",
+  "admin.batch-import.page.header": "Batch Import",
+
+  // "admin.metadata-import.page.help": "You can drop or browse CSV files that contain batch metadata operations on files here",
+  "admin.metadata-import.page.help": "È possibile trascinare o ricercare qui i file CSV che contengono le informazioni di import metadata",
+
+  // "admin.batch-import.page.help": "Select the Collection to import into. Then, drop or browse to a Simple Archive Format (SAF) zip file that includes the Items to import",
+  "admin.batch-import.page.help": "Seleziona la Collezione in cui importare la risorsa. Trascina o seleziona il file zip Simple Archive Format (SAF) che include gli elementi da importare",
+
+  // "admin.batch-import.page.toggle.help": "It is possible to perform import either with file upload or via URL, use above toggle to set the input source",
+  "admin.batch-import.page.toggle.help": "È possibile importare risorse caricando un file oppure tramite URL; selezionare qui sopra il tipo di Import desiderato",
+
+  // "admin.metadata-import.page.dropMsg": "Drop a metadata CSV to import",
+  "admin.metadata-import.page.dropMsg": "Rilascia un CSV di metadati da importare",
+
+  // "admin.batch-import.page.dropMsg": "Drop a batch ZIP to import",
+  "admin.batch-import.page.dropMsg": "Rilasciare un batch ZIP da importare",
+
   // "admin.mag-import.breadcrumbs": "Import MAG",
   // TODO New key - Add a translation
   "admin.mag-import.breadcrumbs": "Import MAG",
@@ -1067,40 +1097,11 @@
   // TODO New key - Add a translation
   "admin.mag-import.page.form.submit": "Create process",
 
-  // "admin.metadata-import.title": "Import Metadata",
-  "admin.metadata-import.title": "Importa metadati",
-
-  // "admin.batch-import.title": "Import Batch",
-  "admin.batch-import.title": "Batch Import",
-
   // "admin.mag-import.title": "Import MAG",
-  // TODO New key - Add a translation
   "admin.mag-import.title": "Import MAG",
 
-  // "admin.metadata-import.page.header": "Import Metadata",
-  "admin.metadata-import.page.header": "Importa metadati",
-
-  // "admin.batch-import.page.header": "Import Batch",
-  "admin.batch-import.page.header": "Batch Import",
-
   // "admin.mag-import.page.header": "Import MAG",
-  // TODO New key - Add a translation
   "admin.mag-import.page.header": "Import MAG",
-
-  // "admin.metadata-import.page.help": "You can drop or browse CSV files that contain batch metadata operations on files here",
-  "admin.metadata-import.page.help": "È possibile trascinare o ricercare qui i file CSV che contengono le informazioni di import metadata",
-
-  // "admin.batch-import.page.help": "Select the Collection to import into. Then, drop or browse to a Simple Archive Format (SAF) zip file that includes the Items to import",
-  "admin.batch-import.page.help": "Seleziona la Collezione in cui importare la risorsa. Trascina o seleziona il file zip Simple Archive Format (SAF) che include gli elementi da importare",
-
-  // "admin.batch-import.page.toggle.help": "It is possible to perform import either with file upload or via URL, use above toggle to set the input source",
-  "admin.batch-import.page.toggle.help": "È possibile importare risorse caricando un file oppure tramite URL; selezionare qui sopra il tipo di Import desiderato",
-
-  // "admin.metadata-import.page.dropMsg": "Drop a metadata CSV to import",
-  "admin.metadata-import.page.dropMsg": "Rilascia un CSV di metadati da importare",
-
-  // "admin.batch-import.page.dropMsg": "Drop a batch ZIP to import",
-  "admin.batch-import.page.dropMsg": "Rilasciare un batch ZIP da importare",
 
   // "admin.metadata-import.page.dropMsgReplace": "Drop to replace the metadata CSV to import",
   "admin.metadata-import.page.dropMsgReplace": "Rilascia un nuovo file CSV per sostituire il file corrente da importare",
@@ -3186,6 +3187,12 @@
   // "curation-task.task.avallowdownload.label":  "Allow Download on audio/video resources",
   "curation-task.task.avallowdownload.label":  "Consenti il download dei file audio/video",
 
+  // "curation-task.task.avupdatemanifest.label":  "Regenerate AV manifest for URL update",
+  "curation-task.task.avupdatemanifest.label":  "Rigenera il manifest AV per aggiornare le URL",
+
+  // "curation-task.task.avmigrate.label":  "Migrate the AV resources generated for a previous version",
+  "curation-task.task.avmigrate.label":  "Migra le risorse AV generate su una versione precedente",
+
 
   // "cris-layout.toggle.open": "Open section",
   "cris-layout.toggle.open": "Apri sezione",
@@ -3237,6 +3244,22 @@
 
   // "cris-layout.attachment.viewMore": "View More",
   "cris-layout.attachment.viewMore": "Vedi altro",
+
+  // "cris-layout.rendering.collections.owning-collection.label": "Owning collection",
+  // TODO New key - Add a translation
+  "cris-layout.rendering.collections.owning-collection.label": "Owning collection",
+
+  // "cris-layout.rendering.collections.mapped-collection.label": "Mapped collections",
+  // TODO New key - Add a translation
+  "cris-layout.rendering.collections.mapped-collection.label": "Mapped collections",
+
+  // "cris-layout.rendering.collections.loading": "Loading...",
+  // TODO New key - Add a translation
+  "cris-layout.rendering.collections.loading": "Loading...",
+
+  // "cris-layout.rendering.collections.load-more": "Load more",
+  // TODO New key - Add a translation
+  "cris-layout.rendering.collections.load-more": "Load more",
 
   // "curation-task.task.checklinks.label":  "Check Links in Metadata",
   "curation-task.task.checklinks.label": "Controllare i collegamenti nei metadati",
@@ -3684,7 +3707,6 @@
   "explore.index.dateissued" : "Data puntuale",
 
   // "explore.index.dc.date.accessioned" : "New accessions",
-  // TODO Source message changed - Revise the translation
   "explore.index.dc.date.accessioned" : "Nuove Risorse",
 
   // "explore.index.paths" : "Paths",
@@ -3882,7 +3904,9 @@
 
   // "explore.title": "Explore section",
   "explore.title": "Sezione esplora",
-
+  // "export-schema.process.title": "Metadata Schema Export",
+  // TODO New key - Add a translation
+  "export-schema.process.title": "Metadata Schema Export",
 
   // "feed.description": "Syndication feed",
   "feed.description": "Syndication feed",
@@ -4269,7 +4293,7 @@
   "health-page.error.msg": "Il servizio di health check è temporaneamente non disponibile.",
 
   // "health-page.property.status": "Status code",
-  "health-page.property.status": "Status code",
+  "health-page.property.status": "Codice di stato",
 
   // "health-page.section.db.title": "Database",
   "health-page.section.db.title": "Database",
@@ -5283,6 +5307,9 @@
   // "item.page.metric.label.check": "Check",
   "item.page.metric.label.check": "Verifica",
 
+  // "item.page.metric.label.unpaywall-api": "Unpaywall",
+  // TODO New key - Add a translation
+  "item.page.metric.label.unpaywall-api": "Unpaywall",
 
   // "item.page.metric.label.download": "Downloads",
   "item.page.metric.label.download": "Download",
@@ -5426,7 +5453,7 @@
   "item.preview.dc.contributor.applicant": "Richiedente",
 
   // "item.preview.dc.contributor.editor": "Editors:",
-  "item.preview.dc.contributor.editor": "Editore:",
+  "item.preview.dc.contributor.editor": "Editori:",
 
   // "item.preview.dc.date.embargoEnd" : "Embargo End",
   "item.preview.dc.date.embargoEnd" : "Fine embargo",
@@ -6345,7 +6372,7 @@
   "menu.section.import": "Importa",
 
   // "menu.section.import_batch": "Batch Import (ZIP)",
-  "menu.section.import_batch": "Import batch (ZIP)",
+  "menu.section.import_batch": "Importazione batch (ZIP)",
 
   // "menu.section.import_mag": "MAG Import",
   "menu.section.import_mag": "Importazione MAG",
@@ -8460,6 +8487,9 @@
   // "search.filters.filter.investigators.head": "Researcher",
   "search.filters.filter.investigators.head": "Ricercatore",
 
+  // "search.filters.filter.investigators.label": "Researcher",
+  "search.filters.filter.investigators.label": "Ricercatore",
+
   // "search.filters.filter.investigators.placeholder": "Researcher",
   "search.filters.filter.investigators.placeholder": "Ricercatore",
 
@@ -8492,6 +8522,9 @@
 
   // "search.filters.filter.projectOrgUnits.head" : "Organizations",
   "search.filters.filter.projectOrgUnits.head" : "Organizzazioni",
+
+  // "search.filters.filter.projectOrgUnits.label" : "Organizations",
+  "search.filters.filter.projectOrgUnits.label" : "Organizzazioni",
 
   // "search.filters.filter.projectOrgUnits.placeholder" : "Organizations",
   "search.filters.filter.projectOrgUnits.placeholder" : "Organizzazioni",
@@ -9055,6 +9088,49 @@
   // "statistics.categories.downloadReports.tab": "Downloads reports",
   "statistics.categories.downloadReports.tab": "Report sui download",
 
+  // "statistics.categories.itemReports.tab": "Item views reports",
+  // TODO New key - Add a translation
+  "statistics.categories.itemReports.tab": "Item views reports",
+
+  // "statistics.table.itemReports.header.continent" : "Continent",
+  // TODO New key - Add a translation
+  "statistics.table.itemReports.header.continent" : "Continent",
+
+  // "statistics.table.itemReports.header.views" : "Views",
+  // TODO New key - Add a translation
+  "statistics.table.itemReports.header.views" : "Views",
+
+  // "statistics.table.itemReports.header.city" : "City",
+  // TODO New key - Add a translation
+  "statistics.table.itemReports.header.city" : "City",
+
+  // "statistics.table.itemReports.header.item" : "Item",
+  // TODO New key - Add a translation
+  "statistics.table.itemReports.header.item" : "Item",
+
+  // "statistics.table.mainReports.header.community" : "Community",
+  "statistics.table.mainReports.header.community" : "Community",
+
+  // "statistics.table.mainReports.header.collection" : "Collection",
+  "statistics.table.mainReports.header.collection" : "Collezione",
+
+  // "statistics.table.itemReports.title.TopContinents" : "Top region views",
+  "statistics.table.itemReports.title.TopContinents" : "Più visualizzati per regione",
+
+  // "statistics.table.itemReports.title.TopCities" : "Top cities views",
+  "statistics.table.itemReports.title.TopCities" : "Più visualizzati per città",
+
+  // "statistics.table.itemReports.title.TopItems" : "Most viewed",
+  "statistics.table.itemReports.title.TopItems" : "Più visualizzati",
+
+  // "statistics.table.itemReports.title.TopCategories" : "Top categories",
+  // TODO New key - Add a translation
+  "statistics.table.itemReports.title.TopCategories" : "Top categories",
+
+  // "statistics.table.itemReports.title.TotalVisitsPerMonth" : "Top views per month",
+  // TODO New key - Add a translation
+  "statistics.table.itemReports.title.TotalVisitsPerMonth" : "Top views per month",
+
   // "statistics.reports.title": "Reports",
   "statistics.reports.title": "Report",
 
@@ -9063,6 +9139,30 @@
 
   // "submission.edit.title": "Edit Submission",
   "submission.edit.title": "Modifica immissione",
+
+  // "submission.unpaywall.versions.title": "Open Access version of {item.title} reported by <a href=\"https://unpaywall.org/\">Unpaywall</a>",
+  // TODO New key - Add a translation
+  "submission.unpaywall.versions.title": "Open Access version of {item.title} reported by <a href=\"https://unpaywall.org/\">Unpaywall</a>",
+
+  // "submission.unpaywall.versions.back": "Back to item's page",
+  // TODO New key - Add a translation
+  "submission.unpaywall.versions.back": "Back to item's page",
+
+  // "submission.unpaywall.versions.breadcrumbs": "Unpaywall versions",
+  // TODO New key - Add a translation
+  "submission.unpaywall.versions.breadcrumbs": "Unpaywall versions",
+
+  // "submission.unpaywall.versions.submittedVersion": "Submitted",
+  // TODO New key - Add a translation
+  "submission.unpaywall.versions.submittedVersion": "Submitted",
+
+  // "submission.unpaywall.versions.acceptedVersion": "Accepted",
+  // TODO New key - Add a translation
+  "submission.unpaywall.versions.acceptedVersion": "Accepted",
+
+  // "submission.unpaywall.versions.publishedVersion": "Published",
+  // TODO New key - Add a translation
+  "submission.unpaywall.versions.publishedVersion": "Published",
 
   // "submission.general.cancel": "Cancel",
   "submission.general.cancel": "Annulla",
@@ -10182,7 +10282,7 @@
   // "submission.sections.license.required": "You must accept the license",
   "submission.sections.license.required": "È necessario accettare la licenza",
 
-  // "submission.sections.license.notgranted":  "",
+  // "submission.sections.license.notgranted":  "You must accept the license",
   "submission.sections.license.notgranted":  "È necessario accettare la licenza",
 
 
@@ -10266,7 +10366,7 @@
 
 
 
-  // "submission.sections.unpaywall.refresh": "Refresh",
+  // "submission.sections.unpaywall.import": "Import from unpaywall",
   // TODO New key - Add a translation
   "submission.sections.unpaywall.refresh": "Refresh",
 
@@ -10581,6 +10681,10 @@
 
   // "viewer.provider.iiif.breadcrumbs": "Mirador Viewer",
   "viewer.provider.iiif.breadcrumbs": "Visualizzatore Mirador",
+
+  // "viewer.provider.media.breadcrumbs": "Player",
+  // TODO New key - Add a translation
+  "viewer.provider.media.breadcrumbs": "Player",
 
   // "viewer.provider.media.breadcrumbs": "Player",
   // TODO New key - Add a translation
@@ -11560,11 +11664,11 @@
   // "curation-task.task.pushocr.label": "Send OCR to the Annotation Server",
   "curation-task.task.pushocr.label": "Inviare OCR all'Annotation Server",
 
-  // "curation-task.task.pushocr.force.label": "Clean OCR from the Annotation Server and send again",
-  "curation-task.task.pushocr.force.label": "Ripulisci l'OCR dall'Annotation Server e invia di nuovo",
-
   // "curation-task.task.ocrclean.label": "Remove all metadata bundles and uploaded ocr created by a previous upload to the ocr server",
   "curation-task.task.ocrclean.label": "Rimuovi tutti i metadata bundles and tutti gli OCR caricati in precedenza sul server OCR",
+
+  // "curation-task.task.pushocr.force.label": "Clean OCR from the Annotation Server and send again",
+  "curation-task.task.pushocr.force.label": "Ripulisci l'OCR dall'Annotation Server e invia di nuovo",
 
   // "vocabulary-treeview.header.fondsboxtree": "Fonds Tree",
   "vocabulary-treeview.header.fondsboxtree": "Albero Archivistico",

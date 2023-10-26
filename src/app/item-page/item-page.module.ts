@@ -54,6 +54,7 @@ import { BitstreamRequestACopyPageComponent } from './bitstreams/request-a-copy/
 import { FileSectionComponent } from './simple/field-components/file-section/file-section.component';
 import { ItemSharedModule } from './item-shared.module';
 import { DsoPageModule } from '../shared/dso-page/dso-page.module';
+import { UnpaywallVersionsComponent } from './unpaywall-versions/unpaywall-versions.component';
 
 
 const ENTRY_COMPONENTS = [
@@ -91,6 +92,7 @@ const DECLARATIONS = [
   OrcidSyncSettingsComponent,
   OrcidQueueComponent,
   BitstreamRequestACopyPageComponent,
+  UnpaywallVersionsComponent
 ];
 
 @NgModule({

@@ -203,7 +203,7 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
       spyOn(halService, 'getEndpoint').withArgs(submissionObjectName).and.returnValue(of(testEndpoint));
       spyOn(tokenExtractor, 'getToken').and.returnValue(xsrfToken);
       spyOn(component.uploader, 'uploadAll').and.callFake(() =>
-        component.uploader['_onSuccessItem'](new FileItem(component.uploader, new File([resource], 'test.txt'), {}), JSON.stringify(submissionObject), null, null));
+        (component.uploader as  any)._onSuccessItem(new FileItem(component.uploader, new File([resource], 'test.txt'), {}), JSON.stringify(submissionObject), null, null));
       spyOn(sectionService, 'isSectionType')
         .withArgs(mockSubmissionId, SectionsType.Unpaywall, SectionsType.Upload).and.returnValue(of(false))
         .withArgs(mockSubmissionId, SectionsType.Upload, SectionsType.Upload).and.returnValue(of(true));

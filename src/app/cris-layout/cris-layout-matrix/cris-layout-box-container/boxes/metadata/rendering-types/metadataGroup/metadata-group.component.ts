@@ -6,12 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { isNotEmpty } from '../../../../../../../shared/empty.util';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
 import { BehaviorSubject } from 'rxjs';
-import { LoadMoreService } from '../../../../../../services/load-more.service';
-
-export interface NestedMetadataGroupEntry {
-  field: LayoutField;
-  value: MetadataValue;
-}
+import { LoadMoreService, NestedMetadataGroupEntry } from '../../../../../../services/load-more.service';
 
 @Component({
   template: ''

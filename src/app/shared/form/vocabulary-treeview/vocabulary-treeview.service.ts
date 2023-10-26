@@ -1,3 +1,4 @@
+import { RemoteData } from 'src/app/core/data/remote-data';
 import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
@@ -13,9 +14,10 @@ import {
 import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { VocabularyService } from '../../../core/submission/vocabularies/vocabulary.service';
 import { PageInfo } from '../../../core/shared/page-info.model';
-import { isEmpty, isNotEmpty } from '../../empty.util';
+import { hasValue, isEmpty, isNotEmpty } from '../../empty.util';
 import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
 import {
+  getFirstCompletedRemoteData,
   getFirstSucceededRemoteDataPayload,
   getFirstSucceededRemoteListPayload
 } from '../../../core/shared/operators';
@@ -112,8 +114,12 @@ export class VocabularyTreeviewService {
     if (isNotEmpty(initValueId)) {
       this.getNodeHierarchyById(initValueId)
         .subscribe((hierarchy: string[]) => {
-          this.initValueHierarchy = hierarchy;
-          this.retrieveTopNodes(pageInfo, [], publicModeOnly ? hierarchy : null);
+          if (hasValue(hierarchy) && hierarchy.length > 0) {
+            this.initValueHierarchy = hierarchy;
+            this.retrieveTopNodes(pageInfo, [], publicModeOnly ? hierarchy : null);
+          } else {
+            this.loading.next(false);
+          }
         });
     } else {
       this.retrieveTopNodes(pageInfo, []);
@@ -267,7 +273,7 @@ export class VocabularyTreeviewService {
    */
   private getNodeHierarchyById(id: string): Observable<string[]> {
     return this.getById(id).pipe(
-      mergeMap((entry: VocabularyEntryDetail) => this.getNodeHierarchy(entry, [], false)),
+      mergeMap((entry: VocabularyEntryDetail) => hasValue(entry) ? this.getNodeHierarchy(entry, [], false) : observableOf(null)),
       map((node: TreeviewNode) => this.getNodeHierarchyIds(node))
     );
   }
@@ -301,7 +307,14 @@ export class VocabularyTreeviewService {
    */
   private getById(entryId: string): Observable<VocabularyEntryDetail> {
     return this.vocabularyService.findEntryDetailById(entryId, this.vocabularyName).pipe(
-      getFirstSucceededRemoteDataPayload()
+      getFirstCompletedRemoteData(),
+      map((res: RemoteData<VocabularyEntryDetail>) => {
+        if (res.hasFailed) {
+          return null;
+        } else {
+          return res.payload;
+        }
+      })
     );
   }
 
@@ -381,10 +394,10 @@ export class VocabularyTreeviewService {
    * @return string[]
    */
   private getNodeHierarchyIds(node: TreeviewNode, hierarchyIds: string[] = []): string[] {
-    if (!hierarchyIds.includes(node.item.otherInformation.id)) {
+    if (hasValue(node) && !hierarchyIds.includes(node.item.otherInformation.id)) {
       hierarchyIds.push(node.item.otherInformation.id);
     }
-    if (isNotEmpty(node.children)) {
+    if (hasValue(node) && isNotEmpty(node.children)) {
       return this.getNodeHierarchyIds(node.children[0], hierarchyIds);
     } else {
       return hierarchyIds;
