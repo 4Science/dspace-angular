@@ -45,6 +45,7 @@
               <div [innerHTML]="firstMetadataValue('dc.description.abstract')"></div>
             </ds-truncatable-part>
           </div>
+          <ds-additional-metadata [object]="dso"></ds-additional-metadata>
         </ds-truncatable>
         <div *ngIf="fullTextHighlights.length" class="d-flex flex-row item-list-highlights">
           <div>

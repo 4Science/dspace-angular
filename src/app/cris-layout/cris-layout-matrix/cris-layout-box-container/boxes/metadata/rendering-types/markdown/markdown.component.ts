@@ -7,7 +7,7 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
  * This component renders the markdown metadata fields
  */
 @Component({
-  // tslint:disable-next-line: component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'div[ds-markdown]',
   templateUrl: './markdown.component.html',
   styleUrls: ['./markdown.component.scss']

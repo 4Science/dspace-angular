@@ -26,6 +26,8 @@ import { CarouselModule } from '../carousel/carousel.module';
 import { MarkdownViewerModule } from '../markdown-viewer/markdown-viewer.module';
 import { GridSectionComponent } from './section-component/grid-section/grid-section.component';
 import { ThemedGridSectionComponent } from './section-component/grid-section/themed-grid-section.component';
+import { TwitterSectionComponent } from './section-component/twitter-section/twitter-section.component';
+import { ThemedTwitterSectionComponent } from './section-component/twitter-section/themed-twitter-section.component';
 
 const COMPONENTS = [
   BrowseSectionComponent,
@@ -45,7 +47,9 @@ const COMPONENTS = [
   CarouselSectionComponent,
   ThemedCarouselSectionComponent,
   GridSectionComponent,
-  ThemedGridSectionComponent
+  ThemedGridSectionComponent,
+  TwitterSectionComponent,
+  ThemedTwitterSectionComponent
 ];
 
 @NgModule({
