@@ -13,7 +13,7 @@ import {
 import { VocabularyEntry } from '../../../../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { DynamicScrollableDropdownModel } from './dynamic-scrollable-dropdown.model';
 import { PageInfo } from '../../../../../../core/shared/page-info.model';
-import { isEmpty } from '../../../../../empty.util';
+import { isEmpty, isNotEmpty } from '../../../../../empty.util';
 import { VocabularyService } from '../../../../../../core/submission/vocabularies/vocabulary.service';
 import { getFirstSucceededRemoteDataPayload } from '../../../../../../core/shared/operators';
 import { buildPaginatedList, PaginatedList } from '../../../../../../core/data/paginated-list.model';
@@ -218,11 +218,14 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
           list.pageInfo.totalElements,
           list.pageInfo.totalPages
         );
-        const currentValue: any = this.model.value;
-        if (currentValue?.display?.length > 0 && this.pageInfo.currentPage === this.pageInfo.totalPages) {
-          const presentObject = this.optionsList.filter(element => element.display === currentValue.display);
-          if (presentObject.length === 0) {
-            const object = this.createVocabularyObject(currentValue.display, currentValue.value, undefined);
+        // After all entries have been retrieved, if the component is an opendropdown then
+        // check if the current value is a custom value and add it to the list
+        const isLastPage = this.pageInfo.currentPage === this.pageInfo.totalPages;
+        const modelValue: any = this.model.value;
+        if (isLastPage && isNotEmpty(modelValue?.value)) {
+          const isCustomValue = isEmpty(this.optionsList.filter(element => element.value === modelValue.value));
+          if (isCustomValue) {
+            const object = this.createVocabularyObject(modelValue.display, modelValue.value, undefined);
             this.optionsList.push(object);
           }
         }
