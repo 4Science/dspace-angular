@@ -9,6 +9,18 @@
                                  [sectionId]="sectionId"
                                  [topSection]="$any(sectionComponent)"></ds-themed-top-section>
 
+          <ds-themed-browse-section *ngSwitchCase="'browse'"
+                                    [sectionId]="sectionId"
+                                    [browseSection]="$any(sectionComponent)"></ds-themed-browse-section>
+
+          <ds-themed-search-section *ngSwitchCase="'search'"
+                                    [sectionId]="sectionId"
+                                    [searchSection]="$any(sectionComponent)"></ds-themed-search-section>
+
+          <ds-themed-facet-section *ngSwitchCase="'facet'"
+                                   [sectionId]="sectionId"
+                                   [facetSection]="$any(sectionComponent)"></ds-themed-facet-section>
+
           <ds-themed-carousel-section *ngSwitchCase="'carousel'"
                                       [sectionId]="sectionId"
                                       [carouselSection]="$any(sectionComponent)"></ds-themed-carousel-section>
@@ -25,6 +37,11 @@
           <ds-themed-grid-section *ngSwitchCase="'grid'"
                                   [sectionId]="sectionId" [site]="site$.value"
                                   [gridSection]="$any(sectionComponent)"></ds-themed-grid-section>
+
+          <ds-themed-twitter-section *ngSwitchCase="'twitter'"
+                                     [sectionId]="sectionId"
+                                     [twitterSection]="$any(sectionComponent)"></ds-themed-twitter-section>
+
         </div>
       </div>
     </div>
