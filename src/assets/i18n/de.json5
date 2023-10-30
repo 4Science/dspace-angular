@@ -10250,6 +10250,14 @@
   // TODO New key - Add a translation
   "sorting.metric.view.DESC" : "Views Descending",
 
+  //"sorting.dc.type.ASC": "Type Ascending",
+  // TODO New key - Add a translation
+  "sorting.dc.type.ASC": "Type Ascending",
+
+  //"sorting.dc.type.DESC": "Type Descending",
+  // TODO New key - Add a translation
+  "sorting.dc.type.DESC": "Type Descending",
+
   // "sorting.metric.download.ASC" : "Downloads Ascending",
   // TODO New key - Add a translation
   "sorting.metric.download.ASC" : "Downloads Ascending",
