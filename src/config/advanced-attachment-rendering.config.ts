@@ -1,4 +1,3 @@
-import { MetadataValueFilter } from '../app/core/shared/metadata.models';
 
 /**
  * Interface configuration to define the advanced attachment rendering settings

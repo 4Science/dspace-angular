@@ -51,6 +51,10 @@
                                   [sectionId]="sectionId" [site]="site$.value"
                                   [gridSection]="sectionComponent"></ds-themed-grid-section>
 
+          <ds-themed-twitter-section *ngSwitchCase="'twitter'"
+                                     [sectionId]="sectionId"
+                                     [twitterSection]="sectionComponent"></ds-themed-twitter-section>
+
         </div>
       </div>
     </div>
