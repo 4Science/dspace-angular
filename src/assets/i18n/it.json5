@@ -10283,7 +10283,7 @@
   "submission.sections.license.required": "È necessario accettare la licenza",
 
   // "submission.sections.license.notgranted":  "You must accept the license",
-  "submission.sections.license.notgranted":  "È necessario accettare la licenza",
+  "submission.sections.license.notgranted":  "",
 
 
   // "submission.sections.sherpa.publication.information": "Publication information",
