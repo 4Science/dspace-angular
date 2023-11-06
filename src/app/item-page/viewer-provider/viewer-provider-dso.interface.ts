@@ -1,14 +1,12 @@
 import { RemoteData } from '../../core/data/remote-data';
 import { Item } from '../../core/shared/item.model';
 import { Bitstream } from '../../core/shared/bitstream.model';
-import { BaseItemViewerComponent } from './viewers/item-viewers/base-item-viewer.component';
-import { BaseBitstreamViewerComponent } from './viewers/bitstream-viewers/base-bitstream-viewer.component';
 
 export interface ViewerProvider {
-  new <T extends BaseItemViewerComponent | BaseBitstreamViewerComponent>(...args: any[]);
+  new <T extends ViewerComponent>(...args: any[]);
 }
 
-export type Viewer = ViewerProvider & (BaseItemViewerComponent | BaseBitstreamViewerComponent);
+export type Viewer = ViewerProvider & ViewerComponent;
 
 export interface ViewerProviderDsoInterface {
   item?: RemoteData<Item>;

@@ -16,9 +16,9 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   templateUrl: './statistics-menu.component.html',
   styleUrls: ['./statistics-menu.component.scss']
 })
-@rendersContextMenuEntriesForType(DSpaceObjectType.COMMUNITY, true)
-@rendersContextMenuEntriesForType(DSpaceObjectType.COLLECTION, true)
-@rendersContextMenuEntriesForType(DSpaceObjectType.ITEM, true)
+@rendersContextMenuEntriesForType(DSpaceObjectType.COMMUNITY, true, false)
+@rendersContextMenuEntriesForType(DSpaceObjectType.COLLECTION, true, false)
+@rendersContextMenuEntriesForType(DSpaceObjectType.ITEM, true, false)
 /**
  * Display a button linking to the edit page of a DSpaceObject
  */
