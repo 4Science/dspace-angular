@@ -1,4 +1,5 @@
 <ngb-carousel #carousel [interval]="6000" (slide)="onSlide($event)" class="ds-carousel"
+              [pauseOnHover]="true" [pauseOnFocus]="false"
               [showNavigationArrows]="false"
               [showNavigationIndicators]="false">
   <ng-template ngbSlide *ngFor="let item of items; let i = index; let last = last">
