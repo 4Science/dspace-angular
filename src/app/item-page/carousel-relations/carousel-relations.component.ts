@@ -37,8 +37,8 @@ export class CarouselRelationsComponent extends SearchComponent {
     targetBlank: false,
     title: 'dc.title',
     titleStyle: '',
-    showBlurryBackdrop: false
-
+    showBlurryBackdrop: false,
+    bundle: 'ORIGINAL',
   };
 
   constructor(protected service: SearchService,
