@@ -8707,6 +8707,54 @@
   // "search.filters.entityType.OrgUnit": "Organizational Unit",
   "search.filters.entityType.OrgUnit": "Struttura",
 
+  // "search.filters.entityType.Publication": "Publication",
+  "search.filters.entityType.Publication": "Publicazione",
+
+  // "search.filters.entityType.ArchivalMaterial ": "Archival Material",
+  "search.filters.entityType.ArchivalMaterial ": "Materiale archivistico",
+
+  // "search.filters.entityType.Person": "Person",
+  "search.filters.entityType.Person": "Persona",
+
+  // "search.filters.entityType.Project": "Project",
+  "search.filters.entityType.Project": "Progetto",
+
+  // "search.filters.entityType.Event": "Event",
+  "search.filters.entityType.Event": "Evento",
+
+  // "search.filters.entityType.Fonds": "Fonds",
+  "search.filters.entityType.Fonds": "Fondo",
+
+  // "search.filters.entityType.Place": "Place",
+  "search.filters.entityType.Place": "Luogo",
+
+  // "search.filters.entityType.AudioVideo": "Audio-Video",
+  "search.filters.entityType.AudioVideo": "Audio-Video",
+
+  // "search.filters.entityType.Family": "Family",
+  "search.filters.entityType.Family": "Famiglia",
+
+  // "search.filters.entityType.Aggregation": "Aggregation",
+  "search.filters.entityType.Aggregation": "Aggregazione",
+
+  // "search.filters.entityType.News": "News",
+  "search.filters.entityType.News": "News",
+
+  // "search.filters.entityType.StaticPage": "Static Page",
+  "search.filters.entityType.StaticPage": "Static Page",
+
+  // "search.filters.entityType.Path": "Path",
+  "search.filters.entityType.Path": "Percorso",
+
+  // "search.filters.entityType.JournalFile": "Journal Fonds",
+  "search.filters.entityType.JournalFile": "Fascicolo Periodico",
+
+  // "search.filters.entityType.JournalFonds": "Journal Fonds",
+  "search.filters.entityType.JournalFonds": "Testata Periodico",
+
+  // "search.filters.entityType.Picture": "Picture",
+  "search.filters.entityType.Picture": "Fotografia",
+
   // "search.filters.has_content_in_original_bundle.true": "Yes",
   "search.filters.has_content_in_original_bundle.true": "Si",
 

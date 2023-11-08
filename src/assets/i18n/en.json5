@@ -5841,12 +5841,45 @@
 
   "search.filters.filter.types.placeholder": "Type",
 
-
   "search.filters.entityType.JournalIssue": "Journal Issue",
 
   "search.filters.entityType.JournalVolume": "Journal Volume",
 
   "search.filters.entityType.OrgUnit": "Organizational Unit",
+
+  "search.filters.entityType.Publication": "Publication",
+
+  "search.filters.entityType.ArchivalMaterial": "Archival Material",
+
+  "search.filters.entityType.Person": "Person",
+
+  "search.filters.entityType.OrgUnit": "Organizational Unit",
+
+  "search.filters.entityType.Project": "Project",
+
+  "search.filters.entityType.Event": "Event",
+
+  "search.filters.entityType.Fonds": "Fonds",
+
+  "search.filters.entityType.Place": "Place",
+
+  "search.filters.entityType.Audiovideo": "Audio Video",
+
+  "search.filters.entityType.Family": "Family",
+
+  "search.filters.entityType.Aggregation": "Aggregation",
+
+  "search.filters.entityType.News": "News",
+
+  "search.filters.entityType.StaticPage": "Static Page",
+
+  "search.filters.entityType.Path": "Path",
+
+  "search.filters.entityType.JournalFile": "Journal File",
+
+  "search.filters.entityType.JournalFonds": "Journal Fonds",
+
+  "search.filters.entityType.Picture": "Picture",
 
   "search.filters.has_content_in_original_bundle.true": "Yes",
 
