@@ -18,7 +18,8 @@
             (contentChange)="contentChange.emit($event)"
             (customEvent)="emitCustomEvent($event)"
             (deselectObject)="deselectObject.emit($event)"
-            (selectObject)="selectObject.emit($event)">
+            (selectObject)="selectObject.emit($event)"
+            [hasBorder]="true">
     </ds-viewable-collection>
 </div>
 <ds-themed-loading *ngIf="isLoading()" message="{{'loading.search-results' | translate}}"></ds-themed-loading>
