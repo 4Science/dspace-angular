@@ -33,22 +33,19 @@
                 <span *ngIf="dso.firstMetadataValue('dc.date.issued')" class="item-list-date"
                       [innerHTML]="firstMetadataValue('dc.date.issued')"></span>)
               </ng-container>
-            <ng-container *ngVar="['dc.creator', 'dc.contributor.*'] as mdList">
-              <span *ngIf="dso.allMetadataValues(mdList).length > 0"
-                    class="item-list-authors">
-                <span *ngFor="let author of dso.getAndSortAllMetadata(mdList); let i=index; let last=last;">
-                  <ds-metadata-link-view [item]="dso" [metadata]="author" [metadataName]="mdList"></ds-metadata-link-view>
+              <span *ngIf="dso.allMetadataValues(authorMetadata).length > 0" class="item-list-authors">
+                <span *ngFor="let author of dso.allMetadata(authorMetadata); let i=index; let last=last;">
+                  <ds-metadata-link-view [item]="dso" [metadata]="author" [metadataName]="authorMetadata" [showRole]="true"></ds-metadata-link-view><span *ngIf="!last">; </span>
                 </span>
               </span>
-            </ng-container>
             </ds-truncatable-part>
           </span>
           <div *ngIf="dso.firstMetadataValue('dc.description.abstract')" class="item-list-abstract">
-          <ds-truncatable-part [id]="dso.id" [minLines]="3">
-            <div [innerHTML]="firstMetadataValue('dc.description.abstract')"></div>
+            <ds-truncatable-part [id]="dso.id" [minLines]="3">
+              <div [innerHTML]="firstMetadataValue('dc.description.abstract')"></div>
             </ds-truncatable-part>
           </div>
-        <ds-additional-metadata [object]="dso"></ds-additional-metadata>
+          <ds-additional-metadata [object]="dso"></ds-additional-metadata>
         </ds-truncatable>
         <div *ngIf="fullTextHighlights.length" class="d-flex flex-row item-list-highlights">
           <div>
@@ -65,8 +62,8 @@
             </button>
           </div>
         </div>
-        <ds-metric-badges *ngIf="showMetrics" class="d-block clearfix" [item]="dso"></ds-metric-badges>
       </div>
+      <ds-metric-badges *ngIf="showMetrics" class="d-block clearfix" [item]="dso"></ds-metric-badges>
     </div>
   </div>
 </div>
