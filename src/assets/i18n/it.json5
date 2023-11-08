@@ -3669,6 +3669,57 @@
   // "explore.facet-section.title" : "Discover",
   "explore.facet-section.title" : "Scopri",
 
+  // "explore.facet-section.entityType.Publication": "Publication",
+  "explore.facet-section.entityType.Publication": "Publicazione",
+
+  // "sexplore.facet-section.entityType.ArchivalMaterial ": "Archival Material",
+  "explore.facet-section.entityType.ArchivalMaterial ": "Materiale archivistico",
+
+  // "explore.facet-section.entityType.Person": "Person",
+  "explore.facet-section.entityType.Person": "Persona",
+
+  // "explore.facet-section.entityType.OrgUnit": "Organizational Unit",
+  "explore.facet-section.entityType.OrgUnit": "Unità organizzativa ",
+
+  // "explore.facet-section.entityType.Project": "Project",
+  "explore.facet-section.entityType.Project": "Progetto",
+
+  // "explore.facet-section.entityType.Event": "Event",
+  "explore.facet-section.entityType.Event": "Evento",
+
+  // "explore.facet-section.entityType.Fonds": "Fonds",
+  "explore.facet-section.entityType.Fonds": "Fondo",
+
+  // "explore.facet-section.entityType.Place": "Place",
+  "explore.facet-section.entityType.Place": "Luogo",
+
+  // "explore.facet-section.entityType.AudioVideo": "Audio-Video",
+  "explore.facet-section.entityType.AudioVideo": "Audio-Video",
+
+  // "explore.facet-section.entityType.Family": "Family",
+  "explore.facet-section.entityType.Family": "Famiglia",
+
+  // "explore.facet-section.entityType.Aggregation": "Aggregation",
+  "explore.facet-section.entityType.Aggregation": "Aggregazione",
+
+  // "explore.facet-section.entityType.News": "News",
+  "explore.facet-section.entityType.News": "News",
+
+  // "explore.facet-section.entityType.StaticPage": "Static Page",
+  "explore.facet-section.entityType.StaticPage": "Static Page",
+
+  // "explore.facet-section.entityType.Path": "Path",
+  "explore.facet-section.entityType.Path": "Percorso",
+
+  // "explore.facet-section.entityType.JournalFile": "Journal Fonds",
+  "explore.facet-section.entityType.JournalFile": "Fascicolo Periodico",
+
+  // "explore.facet-section.entityType.JournalFonds": "Journal Fonds",
+  "explore.facet-section.entityType.JournalFonds": "Testata Periodico",
+
+  // "explore.facet-section.entityType.Picture": "Picture",
+  "explore.facet-section.entityType.Picture": "Fotografia",
+
   // "explore.index.all" : "All",
   "explore.index.all" : "Tutto",
 
