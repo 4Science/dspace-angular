@@ -168,7 +168,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
    * @param item
    * @private
    */
-  private async changePlayingItem(item: MediaViewerItem) {
+  private changePlayingItem(item: MediaViewerItem) {
     if (this.isVideo$.value) {
       // stop audio player when switching from audio to video
       this.disposeAudioPlayer();
