@@ -13,13 +13,13 @@ import { getProcessDetailRoute } from '../../process-page/process-page-routing.p
 import { TranslateService } from '@ngx-translate/core';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { Router } from '@angular/router';
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { DSONameService } from "../../core/breadcrumbs/dso-name.service";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
 import {
   ImportBatchSelectorComponent
-} from "../../shared/dso-selector/modal-wrappers/import-batch-selector/import-batch-selector.component";
-import { take } from "rxjs/operators";
-import { DSpaceObject } from "../../core/shared/dspace-object.model";
+} from '../../shared/dso-selector/modal-wrappers/import-batch-selector/import-batch-selector.component';
+import { take } from 'rxjs/operators';
+import { DSpaceObject } from '../../core/shared/dspace-object.model';
 
 @Component({
   selector: 'ds-admin-mag-import',
