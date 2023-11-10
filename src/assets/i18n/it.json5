@@ -2929,6 +2929,14 @@
   // "context-menu.actions.edit-item-relationships.btn.archivalmaterial": "Manage Archival Material",
   "context-menu.actions.edit-item-relationships.btn.archivalmaterial": "Gestisci il Materiale Archivistico",
 
+  // "context-menu.actions.edit-item-relationships.btn.aggregationchildren": "Manage Children",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item-relationships.btn.aggregationchildren": "Manage Children",
+
+  // "context-menu.actions.edit-item-relationships.btn.aggregationitems": "Manage Related Items",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item-relationships.btn.aggregationitems": "Manage Related Items",
+
   // "context-menu.actions.orcid-view": "Open ORCID setting page",
   "context-menu.actions.orcid-view": "Apri la pagina delle impostazioni ORCID",
 
@@ -3055,6 +3063,14 @@
 
   // "RELATION.Event.people.search.results.head" : "People",
   "RELATION.Event.people.search.results.head" : "Persone",
+
+  // "RELATION.Aggregation.aggregationchildren.search.results.head" : "Aggregation Children",
+  // TODO New key - Add a translation
+  "RELATION.Aggregation.aggregationchildren.search.results.head" : "Aggregation Children",
+
+  // "RELATION.Aggregation.aggregationitems.search.results.head" : "Items related to Aggregation",
+  // TODO New key - Add a translation
+  "RELATION.Aggregation.aggregationitems.search.results.head" : "Items related to Aggregation",
 
   // "datafile.listelement.badge": "Data File",
   "datafile.listelement.badge": "Data File",
