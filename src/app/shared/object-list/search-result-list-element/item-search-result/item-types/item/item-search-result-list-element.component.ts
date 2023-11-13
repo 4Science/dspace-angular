@@ -39,9 +39,9 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
 
   itemViewerRoute: string;
 
-  fullTextMirador: string[];
+  fullTextMirador:string[];
 
-  fullTextVideo: string[];
+  fullTextVideo:string[];
 
   ngOnInit(): void {
     super.ngOnInit();
@@ -51,6 +51,8 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
     this.fullTextHighlights = this.allMetadataValues('fulltext');
     this.fullTextMirador = this.allMetadataValues('fulltext.mirador');
     this.fullTextVideo = this.allMetadataValues('fulltext.video');
+    console.log('mirador= ',this.fullTextMirador);
+    console.log('video = ', this.fullTextVideo);
   }
 
 }
