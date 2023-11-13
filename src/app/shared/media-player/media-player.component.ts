@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnDestroy, OnInit, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { MediaViewerItem } from '../../core/shared/media-viewer-item.model';
 import { VideojsService } from './services/videojs.service';
@@ -63,6 +63,11 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
    * The instance for the VideojsService
    */
   public videojsService: VideojsService;
+
+  /**
+   * BehaviorSubject that emits a boolean indicating whether the media player is currently loading.
+   */
+  isLoadingOnChange: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(@Inject(DOCUMENT) private _document: Document,
               @Inject(PLATFORM_ID) protected platformId: string) {
@@ -173,14 +178,28 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
     } else {
       // stop audio player when switching from video to audio
       this.disposeVideoPlayer();
-      this.audioPlayer.pause();
       this.audioPlayer.reset();
       this.audioPlayer.src({
         src: this.currentItem$?.value?.manifestUrl,
         type: 'application/dash+xml',
         peaks: this.currentItem$?.value?.bitstream.allMetadata('bitstream.audio.peaks')[0].value
       });
+
+      this.isLoadingOnChange.next(true);
+      this.audioPlayer.play();
+      // pause audio player when it's ready
+      this.audioPlayer.on('canplay', () => {
+        this.audioPlayer.pause();
+        this.isLoadingOnChange.next(false);
+      });
     }
+  }
+
+  /**
+   * Returns an observable that emits a boolean value indicating whether the media player is currently loading.
+   */
+  get isLoadingOnChange$(): Observable<boolean> {
+    return this.isLoadingOnChange.asObservable();
   }
 
 
