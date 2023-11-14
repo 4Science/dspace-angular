@@ -10076,14 +10076,6 @@
   // TODO New key - Add a translation
   "sorting.metric.download.DESC" : "Downloads Descending",
 
-  //"sorting.dc.type.ASC": "Type Ascending",
-  // TODO New key - Add a translation
-  "sorting.dc.type.ASC": "Type Ascending",
-
-  //"sorting.dc.type.DESC": "Type Descending",
-  // TODO New key - Add a translation
-  "sorting.dc.type.DESC": "Type Descending",
-
   // "sorting.metric.scopus.citation.ASC" : "Citations Ascending",
   // TODO New key - Add a translation
   "sorting.metric.scopus.citation.ASC" : "Citations Ascending",
