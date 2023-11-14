@@ -5,5 +5,5 @@
             <ds-search-filter [filter]="filter" [inPlaceSearch]="inPlaceSearch" [refreshFilters]="refreshFilters"></ds-search-filter>
         </div>
     </div>
-    <a class="btn btn-primary" [routerLink]="[searchLink]" [queryParams]="clearParams | async" queryParamsHandling="merge" role="button"><i class="fas fa-undo"></i> {{"search.filters.reset" | translate}}</a>
+    <a class="btn btn-primary mt-3" [routerLink]="[searchLink]" [queryParams]="clearParams | async" queryParamsHandling="merge" role="button"><i class="fas fa-undo"></i> {{"search.filters.reset" | translate}}</a>
 </div>
