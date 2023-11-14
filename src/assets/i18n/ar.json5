@@ -11608,14 +11608,6 @@
   // TODO New key - Add a translation
   "sorting.dc.date.issued.DESC": "Date Issued Descending",
 
-  //"sorting.dc.type.ASC": "Type Ascending",
-  // TODO New key - Add a translation
-  "sorting.dc.type.ASC": "Type Ascending",
-
-  //"sorting.dc.type.DESC": "Type Descending",
-  // TODO New key - Add a translation
-  "sorting.dc.type.DESC": "Type Descending",
-
   // "sorting.dc.date.accessioned.ASC": "Accessioned Date Ascending",
   // TODO New key - Add a translation
   "sorting.dc.date.accessioned.ASC": "Accessioned Date Ascending",
