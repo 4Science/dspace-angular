@@ -560,6 +560,11 @@ export const environment: BuildConfig = {
         entityType: 'default',
         metadataConfiguration: []
       }
-    ]
+    ],
+    authorMetadata: ['dc.contributor.author', 'dc.contributor.editor', 'dc.contributor.contributor', 'dc.creator'],
+    authorRoleMetadataMap: {
+      'dc.contributor.author': 'dc.contributor.authorrole',
+      'dc.contributor.contributor': 'dc.contributor.contributorrole',
+    },
   },
 };

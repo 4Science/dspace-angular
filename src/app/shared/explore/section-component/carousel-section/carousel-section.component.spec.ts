@@ -113,7 +113,8 @@ describe('CarouselSectionComponent', () => {
             carouselHeightPx: undefined,
             captionStyle: undefined,
             titleStyle: undefined,
-            showBlurryBackdrop: false
+            bundle: 'ORIGINAL',
+            showBlurryBackdrop: false,
           };
 
         fixture.detectChanges();
