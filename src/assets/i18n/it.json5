@@ -8802,6 +8802,14 @@
   // "sorting.metric.view.DESC" : "Views Descending",
   "sorting.metric.view.DESC" : "Visualizzazioni in ordine decrescente",
 
+  //"sorting.dc.type.ASC": "Type Ascending",
+  // TODO New key - Add a translation
+  "sorting.dc.type.ASC": "Type Ascending",
+
+  //"sorting.dc.type.DESC": "Type Descending",
+  // TODO New key - Add a translation
+  "sorting.dc.type.DESC": "Type Descending",
+
   // "sorting.metric.download.ASC" : "Downloads Ascending",
   "sorting.metric.download.ASC" : "Download in ordine crescente",
 
