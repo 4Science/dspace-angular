@@ -13,10 +13,11 @@ const contextMenuEntriesMap: Map<DSpaceObjectType, ContextMenuEntryRenderOptions
  * Decorator function to link a DSpaceObjectType to a list of context menu entries components
  * @param {DSpaceObjectType} type The DSpaceObjectType
  * @param {boolean} isStandAlone  Represent if menu is a stand alone button
+ * @param {boolean} isEnabled Represent if menu is enabled
  */
-export function rendersContextMenuEntriesForType(type: DSpaceObjectType, isStandAlone: boolean = false) {
+export function rendersContextMenuEntriesForType(type: DSpaceObjectType, isStandAlone: boolean = false, isEnabled: boolean = true) {
   return function decorator(entryComponent: any) {
-    if (!entryComponent) {
+    if (!entryComponent || !isEnabled) {
       return;
     }
     let entryList: any[];

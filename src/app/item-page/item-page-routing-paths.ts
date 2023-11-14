@@ -80,4 +80,5 @@ export const ITEM_VERSION_PATH = 'version';
 export const UPLOAD_BITSTREAM_PATH = 'bitstreams/new';
 export const ORCID_PATH = 'orcid';
 export const ITEM_FULL_PATH = 'full';
+export const UNPAYWALL_VERSIONS_PATH = 'unpaywall/versions';
 export const VIEWERS_PATH = 'viewer';

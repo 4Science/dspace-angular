@@ -48,7 +48,7 @@
     </small>
   </div>
 </div>
-<div class="row">
+<div *ngIf="metric.acquisitionDate" class="row">
   <div class="col-12 text-center">
     <small>{{ "item.page.metric.acquisition-date" | translate }}</small
     ><br/>

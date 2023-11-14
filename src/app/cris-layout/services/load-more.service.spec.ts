@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { NestedMetadataGroupEntry } from '../cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/metadataGroup/metadata-group.component';
-import { LoadMoreService } from './load-more.service';
+import { LoadMoreService, NestedMetadataGroupEntry } from './load-more.service';
 
 interface ComputedData {
     firstLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]>;

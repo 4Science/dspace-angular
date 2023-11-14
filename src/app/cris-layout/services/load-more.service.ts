@@ -1,6 +1,12 @@
 import { environment } from '../../../environments/environment';
-import { NestedMetadataGroupEntry } from '../cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/metadataGroup/metadata-group.component';
 import { isEmpty } from '../../shared/empty.util';
+import { LayoutField } from '../../core/layout/models/box.model';
+import { MetadataValue } from '../../core/shared/metadata.models';
+
+export interface NestedMetadataGroupEntry {
+  field: LayoutField;
+  value: MetadataValue;
+}
 
 interface ComputedData {
   firstLimitedDataToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]>;

@@ -101,9 +101,9 @@ import {
   MapComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/map/map.component';
 import { GooglemapsModule } from '../shared/googlemaps/googlemaps.module';
+import { LoadMoreService } from './services/load-more.service';
 import { MiradorViewerModule } from '../item-page/mirador-viewer/mirador-viewer.module';
 import { ComcolModule } from '../shared/comcol/comcol.module';
-import { LoadMoreService } from './services/load-more.service';
 import { SearchModule } from '../shared/search/search.module';
 import { HierarchyComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/hierarchy/hierarchy.component';
 import {
@@ -128,30 +128,32 @@ import { MarkdownViewerModule } from '../shared/markdown-viewer/markdown-viewer.
 import {
   AdvancedAttachmentComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/advanced-attachment/advanced-attachment.component';
-import { CarouselModule } from '../shared/carousel/carousel.module';
 import {
   BitstreamAttachmentComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/advanced-attachment/bitstream-attachment/bitstream-attachment.component';
 import { ItemSharedModule } from '../item-page/item-shared.module';
 import { ViewersSharedModule } from '../item-page/viewer-provider/viewers/viewers-shared.module';
 import {
-AttachmentRenderComponent
+  AttachmentRenderComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/advanced-attachment/bitstream-attachment/attachment-render/attachment-render.component';
 import {
   AttachmentRenderingModule
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/advanced-attachment/bitstream-attachment/attachment-render/attachment-rendering.module';
 import { FormModule } from '../shared/form/form.module';
-import { BackgroundComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/background/background.component';
+import { CrisLayoutCollectionBoxComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/cris-layout-collection-box/cris-layout-collection-box.component';
 import {
   CrisLayoutMediaBoxComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/media-box/cris-layout-media-box.component';
 import { MediaPlayerModule } from '../shared/media-player/media-player.module';
-
+import { CarouselModule } from '../shared/carousel/carousel.module';
+import { BackgroundComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/background/background.component';
 
 const ENTRY_COMPONENTS = [
+  // put only entry components that use custom decorator
   CrisLayoutVerticalComponent,
   CrisLayoutHorizontalComponent,
   CrisLayoutMetadataBoxComponent,
+  CrisLayoutCollectionBoxComponent,
   TextComponent,
   HtmlComponent,
   HeadingComponent,
@@ -229,7 +231,7 @@ const ENTRY_COMPONENTS = [
     MetricsModule,
     AttachmentRenderingModule,
     FormModule,
-    MediaPlayerModule
+    MediaPlayerModule,
   ],
   exports: [
     CrisLayoutComponent,
