@@ -89,6 +89,8 @@ describe('MetadataLinkViewComponent', () => {
     value: 'Università degli Studi di Milano Bicocca',
   });
 
+  const testMetadataName = ['dc.contributor.author'];
+
   itemService = jasmine.createSpyObj('ItemDataService', {
     findById: jasmine.createSpy('findById')
   });
@@ -114,6 +116,7 @@ describe('MetadataLinkViewComponent', () => {
       component = fixture.componentInstance;
       component.item = testPerson;
       component.metadata = testMetadataValueWithoutAuthority;
+      component.metadataName = testMetadataName;
       fixture.detectChanges();
     });
 
@@ -139,6 +142,7 @@ describe('MetadataLinkViewComponent', () => {
         component = fixture.componentInstance;
         component.item = testPerson;
         component.metadata = testMetadataValueWithAuthority;
+        component.metadataName = testMetadataName;
         fixture.detectChanges();
       });
 
@@ -166,6 +170,7 @@ describe('MetadataLinkViewComponent', () => {
         component = fixture.componentInstance;
         component.item = testPerson;
         component.metadata = testMetadataValueWithAuthority;
+        component.metadataName = testMetadataName;
         fixture.detectChanges();
       });
 
@@ -193,6 +198,7 @@ describe('MetadataLinkViewComponent', () => {
         component = fixture.componentInstance;
         component.item = testPerson;
         component.metadata = testMetadataValueWithAuthority;
+        component.metadataName = testMetadataName;
         fixture.detectChanges();
       });
 
