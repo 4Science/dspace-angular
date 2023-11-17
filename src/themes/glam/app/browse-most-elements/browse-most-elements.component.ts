@@ -27,6 +27,11 @@ export class BrowseMostElementsComponent extends BaseComponent {
 
   itemToImageHrefMap$ = new BehaviorSubject<Map<string, string>>(new Map<string, string>());
 
+  /**
+   * Images with height/width ratio below this value are considered to be square
+   */
+  maxSquareRatio = 1.3;
+
   constructor(
     protected searchService: SearchService,
     protected cdr: ChangeDetectorRef,
@@ -89,5 +94,9 @@ export class BrowseMostElementsComponent extends BaseComponent {
  */
   getItemPageRoute(item) {
     return getItemPageRoute(item);
+  }
+
+  get elementsPerPage() {
+    return this.searchResults?.payload?.pageInfo?.elementsPerPage ?? 8;
   }
 }
