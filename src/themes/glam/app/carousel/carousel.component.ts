@@ -12,6 +12,11 @@ import { CarouselComponent as BaseComponent} from '../../../../app/shared/carous
 })
 export class CarouselComponent extends BaseComponent implements OnInit {
 
+  /**
+   * Time interval between transitions, in ms
+   */
+  carouselInterval: 6000;
+
   carouselHeight: string;
 
   ngOnInit() {

@@ -1,11 +1,10 @@
-<ngb-carousel #carousel [interval]="6000" (slide)="onSlide($event)" class="ds-carousel"
+<ngb-carousel #carousel [interval]="carouselInterval" (slide)="onSlide($event)"
               [pauseOnHover]="true" [pauseOnFocus]="false"
               [showNavigationArrows]="false"
               [showNavigationIndicators]="false">
   <ng-template ngbSlide *ngFor="let item of items; let i = index; let last = last">
-    <ng-container #carouselContent>
       <div class="section">
-        <div class="row" [ngStyle]="{ 'height': carouselHeight }">
+        <div class="row" [style.height]="carouselHeight">
             <div class="col-md-8 pr-0 carousel-content-wrapper h-100"
                  *ngIf="(itemToImageHrefMap$ | async).get(item.indexableObject.uuid); let href; else defaultPreviewImage"
                  [ngStyle]="{'background-image': carouselOptions.showBlurryBackdrop ? 'url(' + href || '' + ')' : 'unset'}">
@@ -57,6 +56,5 @@
             </div>
         </div>
       </div>
-    </ng-container>
   </ng-template>
 </ngb-carousel>
