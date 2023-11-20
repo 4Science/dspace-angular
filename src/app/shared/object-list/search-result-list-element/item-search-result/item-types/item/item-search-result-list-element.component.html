@@ -50,10 +50,17 @@
           </div>
         <ds-additional-metadata [object]="dso"></ds-additional-metadata>
         </ds-truncatable>
-        <div *ngIf="fullTextHighlights.length" class="d-flex flex-row item-list-highlights">
+        <div *ngIf="fullTextHighlights.length" class="d-flex flex-row item-list-highlights p-3 border-bottom">
           <div>
             <ng-container *ngFor="let highlight of fullTextHighlights">
               <span [innerHTML]="highlight" class="d-block text-monospace small"></span>
+            </ng-container>
+          </div>
+        </div>
+        <div *ngIf="fullTextMirador.length" class="d-flex flex-row item-list-highlights p-3 border-bottom">
+          <div>
+            <ng-container *ngFor="let mirador of fullTextMirador">
+              <span [innerHTML]="mirador" class="d-block text-monospace small"></span>
             </ng-container>
           </div>
           <div class="mirador-btn-wrapper ml-2 pl-2 border-left">
@@ -63,6 +70,14 @@
             >
               <i class="fas fa-eye"></i><br><i class="mirador-icon"></i>
             </button>
+          </div>
+        </div>
+        <div *ngIf="fullTextVideo.length" class="d-flex flex-row item-list-highlights p-3 border-bottom">
+          <hr/>
+          <div>
+            <ng-container *ngFor="let video of fullTextVideo">
+              <span [innerHTML]="video" class="d-block text-monospace small"></span>
+            </ng-container>
           </div>
         </div>
         <ds-metric-badges *ngIf="showMetrics" class="d-block clearfix" [item]="dso"></ds-metric-badges>
