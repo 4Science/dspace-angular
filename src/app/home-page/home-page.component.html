@@ -36,7 +36,7 @@
 
           <ds-themed-carousel-section *ngSwitchCase="'carousel'"
                                       [sectionId]="sectionId"
-                                      [carouselSection]="sectionComponent"></ds-themed-carousel-section>
+                                      [carouselSection]="$any(sectionComponent)"></ds-themed-carousel-section>
 
           <ds-themed-counters-section *ngSwitchCase="'counters'"
                                       [sectionId]="sectionId"
@@ -49,11 +49,11 @@
 
           <ds-themed-grid-section *ngSwitchCase="'grid'"
                                   [sectionId]="sectionId" [site]="site$.value"
-                                  [gridSection]="sectionComponent"></ds-themed-grid-section>
+                                  [gridSection]="$any(sectionComponent)"></ds-themed-grid-section>
 
           <ds-themed-twitter-section *ngSwitchCase="'twitter'"
                                      [sectionId]="sectionId"
-                                     [twitterSection]="sectionComponent"></ds-themed-twitter-section>
+                                     [twitterSection]="$any(sectionComponent)"></ds-themed-twitter-section>
 
         </div>
       </div>
