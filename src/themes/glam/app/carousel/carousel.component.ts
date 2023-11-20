@@ -25,4 +25,8 @@ export class CarouselComponent extends BaseComponent implements OnInit {
       `calc(100vw / ${ this.carouselOptions.aspectRatio})` : `${this.carouselOptions.carouselHeightPx}px`;
   }
 
+  getBackgroundImage(href: string) {
+    return this.carouselOptions.showBlurryBackdrop && href ? `url(${href})` : 'assets/images/replacement_image.svg';
+  }
+
 }
