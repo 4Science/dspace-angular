@@ -12,12 +12,21 @@ import { CarouselComponent as BaseComponent} from '../../../../app/shared/carous
 })
 export class CarouselComponent extends BaseComponent implements OnInit {
 
+  /**
+   * Time interval between transitions, in ms
+   */
+  carouselInterval: 6000;
+
   carouselHeight: string;
 
   ngOnInit() {
     super.ngOnInit();
     this.carouselHeight = this.carouselOptions.keepAspectRatio ?
       `calc(100vw / ${ this.carouselOptions.aspectRatio})` : `${this.carouselOptions.carouselHeightPx}px`;
+  }
+
+  getBackgroundImage(href: string) {
+    return this.carouselOptions.showBlurryBackdrop && href ? `url(${href})` : 'assets/images/replacement_image.svg';
   }
 
 }
