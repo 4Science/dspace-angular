@@ -2909,9 +2909,9 @@
   // "context-menu.actions.edit-item-relationships.btn.pathpublications": "Manage Paths Publications",
   "context-menu.actions.edit-item-relationships.btn.pathpublications": "Gestisci il percorso",
 
-  // "context-menu.actions.edit-item-relationships.btn.contributedpublications": "Manage Researchers Contributed Publications",
+  // "context-menu.actions.edit-item-relationships.btn.copublications": "Manage Researchers Contributed Publications",
   // TODO Source message changed - Revise the translation
-  "context-menu.actions.edit-item-relationships.btn.contributedpublications": "Gestisci le pubblicazioni degli autori secondari",
+  "context-menu.actions.edit-item-relationships.btn.copublications": "Gestisci le pubblicazioni degli autori secondari",
 
   // "context-menu.actions.edit-item-relationships.btn.fonds": "Manage Researchers Fonds",
   "context-menu.actions.edit-item-relationships.btn.fonds": "Gestisci i Fondi",
@@ -11980,8 +11980,8 @@
   //"layout.box.header.Person.publications": "Publications",
   "layout.box.header.Person.publications": "Pubblicazioni",
 
-  //"layout.box.header.Person.contributedpublications": "Publications Contributors",
-  "layout.box.header.Person.contributedpublications": "Autori Secondari",
+  //"layout.box.header.Person.copublications": "Publications Contributors",
+  "layout.box.header.Person.copublications": "Autori Secondari",
 
   //"layout.box.header.Person.projects": "Projects",
   "layout.box.header.Person.projects": "Progetti",
@@ -12655,9 +12655,9 @@
   //"context-menu.actions.edit-item-relationships.btn.pathpublications": "Manage Paths Publications",
   "context-menu.actions.edit-item-relationships.btn.pathpublications": "Gestisci il percorso",
 
-  //"context-menu.actions.edit-item-relationships.btn.contributedpublications": "Manage Researchers Contributed Publications",
+  //"context-menu.actions.edit-item-relationships.btn.copublications": "Manage Researchers Contributed Publications",
   // TODO Source message changed - Revise the translation
-  "context-menu.actions.edit-item-relationships.btn.contributedpublications": "Gestisci le pubblicazioni degli autori secondari",
+  "context-menu.actions.edit-item-relationships.btn.copublications": "Gestisci le pubblicazioni degli autori secondari",
 
   //"context-menu.actions.edit-item-relationships.btn.fonds": "Manage Researchers Fonds",
   "context-menu.actions.edit-item-relationships.btn.fonds": "Gestisci i Fondi",
@@ -12690,8 +12690,8 @@
   //"RELATION.Path.pathpublications.search.results.head" : "Paths Publications",
   "RELATION.Path.pathpublications.search.results.head" : "Pubblicazioni",
 
-  //"RELATION.Person.contributedpublications.search.results.head" : "Contributed Publications",
-  "RELATION.Person.contributedpublications.search.results.head" : "Contributi",
+  //"RELATION.Person.copublications.search.results.head" : "Contributed Publications",
+  "RELATION.Person.copublications.search.results.head" : "Contributi",
 
   //"RELATION.Person.fonds.search.results.head" : "Fonds",
   "RELATION.Person.fonds.search.results.head" : "Fondi",
@@ -13527,9 +13527,9 @@
   //"search.filters.applied.charts.RELATION.Person.publications.title": "Publications",
   "search.filters.applied.charts.RELATION.Person.publications.title": "Pubblicazioni",
 
-  //"search.filters.applied.charts.RELATION.Person.contributedpublications.title": "Contributed Publications",
+  //"search.filters.applied.charts.RELATION.Person.copublications.title": "Contributed Publications",
   // TODO Source message changed - Revise the translation
-  "search.filters.applied.charts.RELATION.Person.contributedpublications.title": "Pubblicazioni Accessorie",
+  "search.filters.applied.charts.RELATION.Person.copublications.title": "Pubblicazioni Accessorie",
 
   //"search.filters.applied.charts.RELATION.Path.pathpublications.title": "Publications",
   "search.filters.applied.charts.RELATION.Path.pathpublications.title": "Pubblicazioni",
