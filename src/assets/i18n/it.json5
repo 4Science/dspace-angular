@@ -1939,6 +1939,9 @@
   // "browse.metadata.typePicture.breadcrumbs": "Browse by Type",
   "browse.metadata.typePicture.breadcrumbs": "Ricerca per Tipologia",
 
+  //"browse.metadata.parentA.breadcrumbs": "Browse by Parent",
+  "browse.metadata.parentA.breadcrumbs": "Ricerca per Livello superiore",
+
   // "browse.metadata.titleF" : "Title",
   "browse.metadata.titleF" : "Titolo",
 
@@ -1968,6 +1971,9 @@
 
   // "browse.metadata.typeA" : "Type",
   "browse.metadata.typeA" : "Tipologia",
+
+  // "browse.metadata.parentA" : "Parent",
+  "browse.metadata.parentA" : "Livello superiore",
 
   // "browse.metadata.dateissuedA" : "Date",
   "browse.metadata.dateissuedA" : "Data",
@@ -3934,6 +3940,37 @@
 
   // "explore.index.type" : "Type",
   "explore.index.type" : "Tipologia",
+
+//  "explore.index.parent" : "Parent",
+  "explore.index.parent" : "Livello superiore",
+
+//  "explore.index.itemtype" : "Type",
+  "explore.index.itemtype" : "Tipologia",
+
+//  "explore.index.license" : "License",
+  "explore.index.license" : "Licenza",
+
+//  "explore.index.place" : "Place",
+  "explore.index.place" : "Luogo",
+
+//  "explore.index.event" : "Event",
+  "explore.index.event" : "Evento",
+
+//  "explore.index.project" : "Project",
+  "explore.index.project" : "Progetto",
+
+//  "explore.index.family" : "Family",
+  "explore.index.family" : "Famiglia",
+
+//  "explore.index.jornalfoundperson" : "Person",
+  "explore.index.jornalfoundperson" : "Persona",
+
+//  "explore.index.jornalfounddate" : "Date",
+  "explore.index.jornalfounddate" : "Periodo di attività",
+
+//  "explore.index.corporate" : "Organizational Unit",
+  "explore.index.corporate" : "Organizzazione",
+
 
   // "explore.search-section.infrastructure.title": "Infrastructure",
   "explore.search-section.infrastructure.title": "Infrastruttura",
@@ -11639,6 +11676,8 @@
   "explore.index.journalfonds" : "Testata",
   // "explore.index.aggregation" : "Aggregation",
   "explore.index.aggregation" : "Aggragazione",
+//  "explore.index.parentA" : "Parent",
+  "explore.index.parentA" : "Livello superiore",
 
   // "explore.search-section.sectiondocuments.title" : "Search Documents & Other materials",
   "explore.search-section.sectiondocuments.title" : "Documenti e altri materiali",

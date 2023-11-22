@@ -1295,6 +1295,8 @@
 
   "browse.metadata.typePicture.breadcrumbs": "Browse by Type",
 
+  "browse.metadata.parentA.breadcrumbs": "Browse by Parent",
+
   "browse.metadata.titleF" : "Title",
 
   "browse.metadata.typeF" : "Type",
@@ -1318,6 +1320,8 @@
   "browse.metadata.dateissuedA" : "Date",
 
   "browse.metadata.subjectA" : "Subject",
+
+  "browse.metadata.parentA" : "Parent",
 
   "pagination.next.button": "Next",
 
@@ -2636,6 +2640,26 @@
   "explore.index.title" : "Title",
 
   "explore.index.type" : "Type",
+
+  "explore.index.parent" : "Parent",
+
+  "explore.index.itemtype" : "Type",
+
+  "explore.index.license" : "License",
+
+  "explore.index.place" : "Place",
+
+  "explore.index.event" : "Event",
+
+  "explore.index.project" : "Project",
+
+  "explore.index.family" : "Family",
+
+  "explore.index.jornalfoundperson" : "Person",
+
+  "explore.index.jornalfounddate" : "Date",
+
+  "explore.index.corporate" : "Organizational Unit",
 
   "explore.search-section.infrastructure.title": "Infrastructure",
 
@@ -7784,6 +7808,7 @@
   "explore.index.fonds" : "Fonds",
   "explore.index.journalfonds" : "Journal Fonds",
   "explore.index.aggregation" : "Aggregation",
+  "explore.index.parentA" : "Parent",
 
   "explore.search-section.sectiondocuments.title" : "Search Documents & Other materials",
 

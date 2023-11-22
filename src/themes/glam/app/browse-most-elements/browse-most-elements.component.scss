@@ -1,6 +1,7 @@
 div.thumbnail-container {
   display: flex;
   flex-direction: column;
+  order: 3; // square elements should be used as hole fillers
 
   a {
     flex: 1;
@@ -17,12 +18,15 @@ div.thumbnail-container {
   }
 
   &.landscape {
+    order: 2;
     grid-row-end: span 1;
     grid-column-end: span 2;
     aspect-ratio: 2 / 1;
   }
 
   &.portrait {
+    order: 1; // portrait elements should be placed first in order to prevent holes on the bottom
+    grid-row-start: -1;
     grid-row-end: span 2;
     grid-column-end: span 1;
   }
@@ -31,7 +35,7 @@ div.thumbnail-container {
 .grid-wrapper {
   display: grid;
   grid-auto-flow: dense;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr) );
   grid-auto-rows: 1fr;
   grid-gap: .5em;
   @include media-breakpoint-only(md) {
