@@ -1103,6 +1103,39 @@
   // "admin.mag-import.page.header": "Import MAG",
   "admin.mag-import.page.header": "Import MAG",
 
+  // "admin.mag-import.page.help": "Select the Collection to import into. Then, drop or browse to a MAG zip file to import",
+  "admin.mag-import.page.help": "Seleziona la Collezione in cui importare la risorsa. Trascina o ricerca il MAG zip file da importare",
+
+  // "admin.mag-import.page.selected": "Selected Collection: ",
+  "admin.mag-import.page.selected": "Collezione selezionata: ",
+
+  // "admin.mag-import.page.remove": "Remove",
+  "admin.mag-import.page.remove": "Elimina",
+
+  // "admin.mag-import.page.toggle.upload": "Upload",
+  "admin.mag-import.page.toggle.upload": "Upload",
+
+  // "admin.mag-import.page.toggle.url": "URL",
+  "admin.mag-import.page.toggle.url": "URL",
+
+  // "admin.mag-import.page.toggle.help": "It is possible to perform import either with file upload or via URL, use above toggle to set the input source",
+  "admin.mag-import.page.toggle.help": "È possibile importare risorse caricando un file oppure tramite URL; selezionare qui sopra il tipo di Import desiderato",
+
+  // "admin.mag-import.page.dropMsg": "Drop a batch ZIP to import",
+  "admin.mag-import.page.dropMsg": "Allega il file ZIP per l'Import",
+
+  // "admin.mag-import.page.dropMsgReplace": "Drop to replace the batch ZIP to import",
+  "admin.mag-import.page.dropMsgReplace": "Rilascia un nuovo file ZIP per sostituire il file corrente da importare",
+
+  // "admin.mag-import.page.urlMsg": "Insert the batch ZIP url to import",
+  "admin.mag-import.page.urlMsg": "Inserire il file ZIP per l'Import",
+
+  // "admin.mag-import.page.button.return": "Back",
+  "admin.mag-import.page.button.return": "Indietro",
+
+  // "admin.mag-import.page.button.proceed": "Proceed",
+  "admin.mag-import.page.button.proceed": "Procedi",
+
   // "admin.metadata-import.page.dropMsgReplace": "Drop to replace the metadata CSV to import",
   "admin.metadata-import.page.dropMsgReplace": "Rilascia un nuovo file CSV per sostituire il file corrente da importare",
 
@@ -1906,6 +1939,9 @@
   // "browse.metadata.typePicture.breadcrumbs": "Browse by Type",
   "browse.metadata.typePicture.breadcrumbs": "Ricerca per Tipologia",
 
+  //"browse.metadata.parentA.breadcrumbs": "Browse by Parent",
+  "browse.metadata.parentA.breadcrumbs": "Ricerca per Livello superiore",
+
   // "browse.metadata.titleF" : "Title",
   "browse.metadata.titleF" : "Titolo",
 
@@ -1935,6 +1971,9 @@
 
   // "browse.metadata.typeA" : "Type",
   "browse.metadata.typeA" : "Tipologia",
+
+  // "browse.metadata.parentA" : "Parent",
+  "browse.metadata.parentA" : "Livello superiore",
 
   // "browse.metadata.dateissuedA" : "Date",
   "browse.metadata.dateissuedA" : "Data",
@@ -3850,6 +3889,37 @@
 
   // "explore.index.type" : "Type",
   "explore.index.type" : "Tipologia",
+
+//  "explore.index.parent" : "Parent",
+  "explore.index.parent" : "Livello superiore",
+
+//  "explore.index.itemtype" : "Type",
+  "explore.index.itemtype" : "Tipologia",
+
+//  "explore.index.license" : "License",
+  "explore.index.license" : "Licenza",
+
+//  "explore.index.place" : "Place",
+  "explore.index.place" : "Luogo",
+
+//  "explore.index.event" : "Event",
+  "explore.index.event" : "Evento",
+
+//  "explore.index.project" : "Project",
+  "explore.index.project" : "Progetto",
+
+//  "explore.index.family" : "Family",
+  "explore.index.family" : "Famiglia",
+
+//  "explore.index.jornalfoundperson" : "Person",
+  "explore.index.jornalfoundperson" : "Persona",
+
+//  "explore.index.jornalfounddate" : "Date",
+  "explore.index.jornalfounddate" : "Periodo di attività",
+
+//  "explore.index.corporate" : "Organizational Unit",
+  "explore.index.corporate" : "Organizzazione",
+
 
   // "explore.search-section.infrastructure.title": "Infrastructure",
   "explore.search-section.infrastructure.title": "Infrastruttura",
@@ -11507,6 +11577,8 @@
   "explore.index.journalfonds" : "Testata",
   // "explore.index.aggregation" : "Aggregation",
   "explore.index.aggregation" : "Aggragazione",
+//  "explore.index.parentA" : "Parent",
+  "explore.index.parentA" : "Livello superiore",
 
   // "explore.search-section.sectiondocuments.title" : "Search Documents & Other materials",
   "explore.search-section.sectiondocuments.title" : "Documenti e altri materiali",
