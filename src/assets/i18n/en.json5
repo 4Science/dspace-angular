@@ -5888,6 +5888,54 @@
 
   "search.filters.filter.types.placeholder": "Type",
 
+  "search.filters.filter.corporate.head": "Organizational Unit",
+
+  "search.filters.filter.corporate.label": "Search organizational unit",
+
+  "search.filters.filter.corporate.placeholder": "Organizational Unit",
+
+  "search.filters.filter.jornalfoundperson.head": "Person",
+
+  "search.filters.filter.jornalfoundperson.label": "Search person",
+
+  "search.filters.filter.jornalfoundperson.placeholder": "Person",
+
+  "search.filters.filter.jornalfounddate.head": "Date",
+
+  "search.filters.filter.jornalfounddate.label": "Search by date",
+
+  "search.filters.filter.jornalfounddate.placeholder": "Date",
+
+  "search.filters.filter.parent.head": "Parent",
+
+  "search.filters.filter.parent.label": "Search parent",
+
+  "search.filters.filter.parent.placeholder": "Parent",
+
+  "search.filters.filter.place.head": "Place",
+
+  "search.filters.filter.place.label": "Search place",
+
+  "search.filters.filter.place.placeholder": "Place",
+
+  "search.filters.filter.event.head": "Event",
+
+  "search.filters.filter.event.label": "Search event",
+
+  "search.filters.filter.event.placeholder": "Event",
+
+  "search.filters.filter.project.head": "Project",
+
+  "search.filters.filter.project.label": "Search project",
+
+  "search.filters.filter.project.placeholder": "Project",
+
+  "search.filters.filter.family.head": "Family",
+
+  "search.filters.filter.family.label": "Search family",
+
+  "search.filters.filter.family.placeholder": "Family",
+
   "search.filters.entityType.JournalIssue": "Journal Issue",
 
   "search.filters.entityType.JournalVolume": "Journal Volume",
