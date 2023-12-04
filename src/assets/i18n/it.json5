@@ -11850,6 +11850,9 @@
   //"curation-task.task.rawtoaccess.label": "Create access image for RAW Types",
   "curation-task.task.rawtoaccess.label": "Creare un'immagine di accesso per i tipi RAW",
 
+  "curation-task.task.cleangeneratedsub.label": "Rimuovi i sottotitoli generati dalle risorse A/V",
+
+
   //"layout.tab.header.Person.details": "Profile",
   "layout.tab.header.Person.details": "Profilo",
 
