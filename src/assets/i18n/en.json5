@@ -6550,6 +6550,7 @@
   "submission.sections.unpaywall.status.pending": "Unpaywall api request is initialized",
 
   "submission.sections.unpaywall.status.no-file": "There are no files to be imported",
+  "submission.sections.unpaywall.status.imported": "The Unpaywall resource has been imported!",
 
   "submission.sections.submit.progressbar.unpaywall": "Unpaywall",
 
@@ -7552,6 +7553,5 @@
   "vocabulary-treeview.header.fondboxtree": "Fond Tree",
 
   "vocabulary-treeview.header.journalfondboxtree": "Journal Fond Tree",
-
-  "vocabulary-treeview.header.aggregationboxtree": "Collection Tree",
+  "vocabulary-treeview.header.aggregationboxtree": "Collection Tree"
 }
