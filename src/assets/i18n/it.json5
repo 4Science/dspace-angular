@@ -11157,6 +11157,8 @@
   // "curation-task.task.rebuildpdftoc.label": "Rebuild the PDF ToC",
   "curation-task.task.rebuildpdftoc.label": "Ricostruire il PDF ToC",
 
+  "curation-task.task.cleangeneratedsub.label": "Rimuovi i sottotitoli generati dalle risorse A/V",
+
 
   // "listable-notification-object.default-message": "This object couldn't be retrieved",
   "listable-notification-object.default-message": "Questo oggetto non può essere recuperato",
