@@ -1888,8 +1888,6 @@
 
   "curation-task.task.profileformats.label": "Profile Bitstream Formats",
 
-  "curation-task.task.registerdoi.label": "Mint DOI",
-
   "curation-task.task.requiredmetadata.label": "Check for Required Metadata",
 
   "curation-task.task.translate.label": "Microsoft Translator",
@@ -7553,5 +7551,5 @@
   "vocabulary-treeview.header.fondboxtree": "Fond Tree",
 
   "vocabulary-treeview.header.journalfondboxtree": "Journal Fond Tree",
-  "vocabulary-treeview.header.aggregationboxtree": "Collection Tree"
+  "vocabulary-treeview.header.aggregationboxtree": "Collection Tree",
 }
