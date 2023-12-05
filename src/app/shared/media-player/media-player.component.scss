@@ -2,13 +2,18 @@
 @import 'videojs-wavesurfer/dist/css/videojs.wavesurfer.css';
 
 .media-container {
-  max-height: 480px;
   margin-bottom: 140px;
 }
+
 
 .media-wrapper {
   background-color: black;
   position: relative;
+  flex-basis: 80%;
+}
+
+.playlist-wrapper {
+  flex-basis: 20%;
 }
 
 .overlay-onchange {
@@ -23,6 +28,12 @@
   justify-content: center;
 }
 
-.video-js {
-  width: 85em !important;
+@include media-breakpoint-down(md) {
+  .media-container {
+    flex-direction: column;
+  }
+
+  .playlist-wrapper {
+    padding-top: 1rem;
+  }
 }

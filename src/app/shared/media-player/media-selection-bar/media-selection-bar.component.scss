@@ -59,3 +59,11 @@
   background: #666;
   border-radius: 50px;
 }
+
+@include media-breakpoint-down(md) {
+  .thumbs {
+    position: relative;
+    background: #fff;
+    padding: 4px;
+  }
+}

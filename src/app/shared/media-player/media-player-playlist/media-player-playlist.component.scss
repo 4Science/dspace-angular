@@ -82,3 +82,18 @@ ul.playlist li {
     max-height: 75px;
   }
 }
+
+@include media-breakpoint-down(md) {
+  .playlist-container {
+    overflow-x: hidden;
+    overflow-y: unset;
+  }
+
+  .playlist {
+    display: flex;
+  }
+
+  .playlist-media-item {
+    flex-direction: column;
+  }
+}
