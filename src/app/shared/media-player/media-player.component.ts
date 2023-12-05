@@ -169,7 +169,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
           this._document.getElementById('video_player'),
           this.currentItem$?.value
         );
-        this.resizeMediaPlaylist()
+        this.resizeMediaPlaylist();
       }, 100);
 
     } else {
@@ -181,7 +181,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
           this._document.getElementById('audio_player'),
           this.currentItem$?.value
         );
-        this.resizeMediaPlaylist()
+        this.resizeMediaPlaylist();
       }, 100);
 
     }
@@ -267,6 +267,6 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
    * Resize playlist container
    */
   private resizeMediaPlaylist() {
-    this.playlistContainerRef.nativeElement.style.height = `${this.videoContainerRef.nativeElement.getBoundingClientRect().height}px`
+    this.playlistContainerRef.nativeElement.style.height = `${this.videoContainerRef.nativeElement.getBoundingClientRect().height}px`;
   }
 }
