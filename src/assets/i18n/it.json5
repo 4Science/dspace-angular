@@ -8767,6 +8767,77 @@
   // "search.filters.filter.types.placeholder": "Type",
   "search.filters.filter.types.placeholder": "Tipo",
 
+  //  "search.filters.filter.corporate.head": "Organizational Unit",
+  "search.filters.filter.corporate.head": "Organizzazione",
+
+  //  "search.filters.filter.corporate.label": "Search organizational unit",
+  "search.filters.filter.corporate.label": "Organizzazione di ricerca",
+
+  //  "search.filters.filter.corporate.placeholder": "Organizational Unit",
+  "search.filters.filter.corporate.placeholder": "Organizzazione",
+
+  //  "search.filters.filter.jornalfoundperson.head": "Person",
+  "search.filters.filter.jornalfoundperson.head": "Persona",
+
+  //  "search.filters.filter.jornalfoundperson.label": "Search person",
+  "search.filters.filter.jornalfoundperson.label": "Persona di ricerca",
+
+  //  "search.filters.filter.jornalfoundperson.placeholder": "Person",
+  "search.filters.filter.jornalfoundperson.placeholder": "Persona",
+
+  //  "search.filters.filter.jornalfounddate.head": "Date",
+  "search.filters.filter.jornalfounddate.head": "Periodo di attività",
+
+  //  "search.filters.filter.jornalfounddate.label": "Search by date",
+  "search.filters.filter.jornalfounddate.label": "Cerca per data",
+
+  //  "search.filters.filter.jornalfounddate.placeholder": "Date",
+  "search.filters.filter.jornalfounddate.placeholder": "Periodo di attività",
+
+  //  "search.filters.filter.parent.head": "Parent",
+  "search.filters.filter.parent.head": "Livello superiore",
+
+  //  "search.filters.filter.parent.label": "Search parent",
+  "search.filters.filter.parent.label": "Tipo di livello superiore",
+
+  //  "search.filters.filter.parent.placeholder": "Parent",
+  "search.filters.filter.parent.placeholder": "Livello superiore",
+
+  //  "search.filters.filter.place.head": "Place",
+  "search.filters.filter.place.head": "Luogo",
+
+  //  "search.filters.filter.place.label": "Search place",
+  "search.filters.filter.place.label": "Cerca luogo",
+
+  //  "search.filters.filter.place.placeholder": "Place",
+  "search.filters.filter.place.placeholder": "Luogo",
+
+  //  "search.filters.filter.event.head": "Event",
+  "search.filters.filter.event.head": "Evento",
+
+  //  "search.filters.filter.event.label": "Search event",
+  "search.filters.filter.event.label": "Cerca evento",
+
+  //  "search.filters.filter.event.placeholder": "Event",
+  "search.filters.filter.event.placeholder": "Evento",
+
+  //  "search.filters.filter.project.head": "Project",
+  "search.filters.filter.project.head": "Progetto",
+
+  //  "search.filters.filter.project.label": "Search project",
+  "search.filters.filter.project.label": "Cerca progetto",
+
+  //  "search.filters.filter.project.placeholder": "Project",
+  "search.filters.filter.project.placeholder": "Progetto",
+
+  //  "search.filters.filter.family.head": "Family",
+  "search.filters.filter.family.head": "Famiglia",
+
+  //  "search.filters.filter.family.label": "Search family",
+  "search.filters.filter.family.label": "Cerca famiglia",
+
+  //  "search.filters.filter.family.placeholder": "Family",
+  "search.filters.filter.family.placeholder": "Famiglia",
 
   // "search.filters.entityType.JournalIssue": "Journal Issue",
   "search.filters.entityType.JournalIssue": "Fascicolo Periodico",
