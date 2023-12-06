@@ -49,9 +49,8 @@
         </ds-truncatable>
         <div *ngIf="fullTextHighlights.length" class="d-flex flex-row item-list-highlights p-3 border-bottom">
           <div>
-            <ng-container *ngFor="let highlight of fullTextHighlights">
-              <span [innerHTML]="highlight" class="d-block text-monospace small"></span>
-            </ng-container>
+            <div *ngFor="let highlight of fullTextHighlights" [innerHTML]="highlight"
+                 class="text-monospace small text-highlights"></div>
           </div>
         </div>
         <div *ngIf="fullTextMirador.length" class="d-flex flex-row item-list-highlights p-3 border-bottom">

@@ -3241,9 +3241,9 @@
   // TODO New key - Add a translation
   "context-menu.actions.edit-item-relationships.btn.pathpublications": "Manage Paths Publications",
 
-  // "context-menu.actions.edit-item-relationships.btn.contributedpublications": "Manage Researchers Contributed Publications",
+  // "context-menu.actions.edit-item-relationships.btn.copublications": "Manage Researchers Contributed Publications",
   // TODO New key - Add a translation
-  "context-menu.actions.edit-item-relationships.btn.contributedpublications": "Manage Researchers Contributed Publications",
+  "context-menu.actions.edit-item-relationships.btn.copublications": "Manage Researchers Contributed Publications",
 
   // "context-menu.actions.edit-item-relationships.btn.fonds": "Manage Researchers Fonds",
   // TODO New key - Add a translation

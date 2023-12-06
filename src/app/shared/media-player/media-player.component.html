@@ -2,6 +2,9 @@
   <div class="media-wrapper">
     <div class="h-100 w-100">
       <ds-themed-loading *ngIf="!(isVideoPlayerInitialized$ | async) && !(isAudioPlayerInitialized$ | async)" [showMessage]="false"></ds-themed-loading>
+      <div class="overlay-onchange" *ngIf="isLoadingOnChange$ | async">
+        <ds-themed-loading [spinner]="true" [showMessage]="false"></ds-themed-loading>
+      </div>
       <div id="video-content-wrapper h-100 w-100" *ngIf="(isVideoPlayerInitialized$ | async) && (isVideo$ | async)">
         <video class="video-js vjs-big-play-centered vjs-fluid" id="video_player" controls playsinline
                preload="none"></video>

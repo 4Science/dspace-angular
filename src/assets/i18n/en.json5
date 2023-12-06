@@ -1295,6 +1295,8 @@
 
   "browse.metadata.typePicture.breadcrumbs": "Browse by Type",
 
+  "browse.metadata.parentA.breadcrumbs": "Browse by Parent",
+
   "browse.metadata.titleF" : "Title",
 
   "browse.metadata.typeF" : "Type",
@@ -1318,6 +1320,8 @@
   "browse.metadata.dateissuedA" : "Date",
 
   "browse.metadata.subjectA" : "Subject",
+
+  "browse.metadata.parentA" : "Parent",
 
   "pagination.next.button": "Next",
 
@@ -1947,7 +1951,7 @@
 
   "context-menu.actions.edit-item-relationships.btn.pathpublications": "Manage Paths Publications",
 
-  "context-menu.actions.edit-item-relationships.btn.contributedpublications": "Manage Researchers Contributed Publications",
+  "context-menu.actions.edit-item-relationships.btn.copublications": "Manage Researchers Contributed Publications",
 
   "context-menu.actions.edit-item-relationships.btn.fonds": "Manage Researchers Fonds",
 
@@ -2164,6 +2168,7 @@
 
   "curation-task.task.avmigrate.label":  "Migrate the AV resources generated for a previous version",
 
+  "curation-task.task.cleangeneratedsub.label": "Clean generated subtitles for A/V resources",
 
   "cris-layout.toggle.open": "Open section",
 
@@ -2636,6 +2641,26 @@
   "explore.index.title" : "Title",
 
   "explore.index.type" : "Type",
+
+  "explore.index.parent" : "Parent",
+
+  "explore.index.itemtype" : "Type",
+
+  "explore.index.license" : "License",
+
+  "explore.index.place" : "Place",
+
+  "explore.index.event" : "Event",
+
+  "explore.index.project" : "Project",
+
+  "explore.index.family" : "Family",
+
+  "explore.index.jornalfoundperson" : "Person",
+
+  "explore.index.jornalfounddate" : "Date",
+
+  "explore.index.corporate" : "Organizational Unit",
 
   "explore.search-section.infrastructure.title": "Infrastructure",
 
@@ -6020,6 +6045,10 @@
 
   "sorting.dc.date.issued.DESC": "Date Issued Descending",
 
+  "sorting.dc.type.ASC": "Type Ascending",
+
+  "sorting.dc.type.DESC": "Type Descending",
+
   "sorting.dc.date.accessioned.ASC": "Accessioned Date Ascending",
 
   "sorting.dc.date.accessioned.DESC": "Accessioned Date Descending",
@@ -7780,6 +7809,7 @@
   "explore.index.fonds" : "Fonds",
   "explore.index.journalfonds" : "Journal Fonds",
   "explore.index.aggregation" : "Aggregation",
+  "explore.index.parentA" : "Parent",
 
   "explore.search-section.sectiondocuments.title" : "Search Documents & Other materials",
 
