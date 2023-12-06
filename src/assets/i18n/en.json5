@@ -2168,6 +2168,7 @@
 
   "curation-task.task.avmigrate.label":  "Migrate the AV resources generated for a previous version",
 
+  "curation-task.task.cleangeneratedsub.label": "Clean generated subtitles for A/V resources",
 
   "cris-layout.toggle.open": "Open section",
 

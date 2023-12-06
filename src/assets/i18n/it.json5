@@ -11921,6 +11921,9 @@
   //"curation-task.task.rawtoaccess.label": "Create access image for RAW Types",
   "curation-task.task.rawtoaccess.label": "Creare un'immagine di accesso per i tipi RAW",
 
+  "curation-task.task.cleangeneratedsub.label": "Rimuovi i sottotitoli generati dalle risorse A/V",
+
+
   //"layout.tab.header.Person.details": "Profile",
   "layout.tab.header.Person.details": "Profilo",
 
@@ -12053,6 +12056,9 @@
 
   //"layout.box.header.Person.copublications": "Publications Contributors",
   "layout.box.header.Person.copublications": "Autori Secondari",
+
+  //"layout.box.header.Person.contributedpublications": "Publications Contributors",
+  "layout.box.header.Person.contributedpublications": "Autori Secondari",
 
   //"layout.box.header.Person.projects": "Projects",
   "layout.box.header.Person.projects": "Progetti",
@@ -12730,6 +12736,10 @@
   // TODO Source message changed - Revise the translation
   "context-menu.actions.edit-item-relationships.btn.copublications": "Gestisci le pubblicazioni degli autori secondari",
 
+  //"context-menu.actions.edit-item-relationships.btn.contributedpublications": "Manage Researchers Contributed Publications",
+  // TODO Source message changed - Revise the translation
+  "context-menu.actions.edit-item-relationships.btn.contributedpublications": "Gestisci le pubblicazioni degli autori secondari",
+
   //"context-menu.actions.edit-item-relationships.btn.fonds": "Manage Researchers Fonds",
   "context-menu.actions.edit-item-relationships.btn.fonds": "Gestisci i Fondi",
 
@@ -12763,6 +12773,9 @@
 
   //"RELATION.Person.copublications.search.results.head" : "Contributed Publications",
   "RELATION.Person.copublications.search.results.head" : "Contributi",
+
+  //"RELATION.Person.contributedpublications.search.results.head" : "Contributed Publications",
+  "RELATION.Person.contributedpublications.search.results.head" : "Contributi",
 
   //"RELATION.Person.fonds.search.results.head" : "Fonds",
   "RELATION.Person.fonds.search.results.head" : "Fondi",
@@ -13601,6 +13614,10 @@
   //"search.filters.applied.charts.RELATION.Person.copublications.title": "Contributed Publications",
   // TODO Source message changed - Revise the translation
   "search.filters.applied.charts.RELATION.Person.copublications.title": "Pubblicazioni Accessorie",
+
+  //"search.filters.applied.charts.RELATION.Person.contributedpublications.title": "Contributed Publications",
+  // TODO Source message changed - Revise the translation
+  "search.filters.applied.charts.RELATION.Person.contributedpublications.title": "Pubblicazioni Accessorie",
 
   //"search.filters.applied.charts.RELATION.Path.pathpublications.title": "Publications",
   "search.filters.applied.charts.RELATION.Path.pathpublications.title": "Pubblicazioni",
