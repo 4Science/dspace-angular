@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { SubmissionState } from '../../submission.reducers';
 import {
   catchError,
+  delay,
   distinctUntilChanged,
   filter,
   last,
@@ -166,24 +167,30 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
           .pipe(
             switchMap(sections => {
               let unpaywall = this.extractUnpaywallSection(sections);
-              if (unpaywall.status !== UnpaywallSectionStatus.PENDING) {
+              if (unpaywall != null && unpaywall.status !== UnpaywallSectionStatus.PENDING) {
                 return of(unpaywall);
               } else {
-                return this.patchForRefresh(false).pipe(
-                  pollWhile(
-                    API_CHECK_INTERVAL,
-                    res => this.isStillPending(res),
-                    MAX_TRIES
-                  ),
-                  takeUntil(this.stopFetch$),
-                  this.getUnpaywallSection(),
-                  catchError(err => {
-                    this.notificationsService.error(err?.message);
-                    return of(Object.assign({}, {
-                      ...this.unpaywallSection$.getValue(),
-                      status: UnpaywallSectionStatus.NO_FILE
-                    }));
-                  })
+                return of(false).pipe(
+                  delay(API_CHECK_INTERVAL),
+                  switchMap(refresh => this.patchForRefresh(refresh)
+                    .pipe(
+                      pollWhile(
+                        API_CHECK_INTERVAL,
+                        res => this.isStillPending(res),
+                        MAX_TRIES
+                      ),
+                      takeUntil(this.stopFetch$),
+                      this.getUnpaywallSection(),
+                      catchError(err => {
+                        this.stopFetch$.next();
+                        this.notificationsService.error(err?.message);
+                        return of(Object.assign({}, {
+                          ...this.unpaywallSection$.getValue(),
+                          status: UnpaywallSectionStatus.NOT_FOUND
+                        }));
+                      })
+                    )
+                  )
                 );
               }
             })
