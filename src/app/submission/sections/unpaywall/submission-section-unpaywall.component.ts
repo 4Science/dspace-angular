@@ -56,29 +56,29 @@ const API_CHECK_INTERVAL = 3000;
 const MAX_TRIES = 5;
 
 function attemptsGuardFactory(maxAttempts: number) {
-    return (attemptsCount: number) => {
-        if (attemptsCount > maxAttempts) {
-          throw new Error('Exceeded pool requests, try again!');
-        }
-    };
+  return (attemptsCount: number) => {
+    if (attemptsCount > maxAttempts) {
+      throw new Error('Exceeded pool requests, try again!');
+    }
+  };
 }
 
 export function pollWhile<T>(
-    pollInterval: number,
-    isPollingActive: (res: T) => boolean,
-    maxAttempts = Infinity,
-    emitOnlyLast = true,
+  pollInterval: number,
+  isPollingActive: (res: T) => boolean,
+  maxAttempts = Infinity,
+  emitOnlyLast = true,
 ): MonoTypeOperatorFunction<T> {
-    return source$ => {
-        const poll$ = timer(0, pollInterval).pipe(
-            scan(attempts => ++attempts, 0),
-            tap(attemptsGuardFactory(maxAttempts)),
-            switchMap(() => source$),
-            takeWhile(isPollingActive, true)
-        );
+  return source$ => {
+    const poll$ = timer(0, pollInterval).pipe(
+      scan(attempts => ++attempts, 0),
+      tap(attemptsGuardFactory(maxAttempts)),
+      switchMap(() => source$),
+      takeWhile(isPollingActive, true)
+    );
 
-        return emitOnlyLast ? poll$.pipe(last()) : poll$;
-    };
+    return emitOnlyLast ? poll$.pipe(last()) : poll$;
+  };
 }
 
 
@@ -100,15 +100,15 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
   public readonly UnpaywallSectionStatus = UnpaywallSectionStatus;
   public readonly status$ = new BehaviorSubject<UnpaywallSectionStatus>(null);
   public readonly loading$ = new BehaviorSubject<boolean>(true);
-    public readonly unpaywallSection$ = new BehaviorSubject<WorkspaceitemSectionUnpaywallObject>(null);
+  public readonly unpaywallSection$ = new BehaviorSubject<WorkspaceitemSectionUnpaywallObject>(null);
   public readonly uploadSection$ = new BehaviorSubject<UploadSection>(null);
 
-    protected readonly AlertType = AlertType;
-    protected readonly section$ = new BehaviorSubject<WorkspaceitemSectionsObject>(null);
+  protected readonly AlertType = AlertType;
+  protected readonly section$ = new BehaviorSubject<WorkspaceitemSectionsObject>(null);
 
   private readonly unsubscribe$ = new Subject<void>();
-    private readonly fetch$ = new Subject<boolean>();
-    private readonly stopFetch$ = new Subject<void>();
+  private readonly fetch$ = new Subject<boolean>();
+  private readonly stopFetch$ = new Subject<void>();
 
   constructor(
     protected sectionService: SectionsService,
@@ -148,71 +148,84 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
     this.initUploadSectionResponseListener();
   }
 
-    protected initDoiChangesListener() {
-      this.store.select(submissionObjectFromIdSelector(this.submissionId))
-        .pipe(
-          filter(submissionEntry => hasValue(submissionEntry?.definition) && hasValue(submissionEntry?.sections)),
-          map(value => this.getDoiMetadataValue(value)),
-          distinctUntilChanged(),
-          takeUntil(this.unsubscribe$),
-        )
-        .subscribe(doiValue => !!doiValue ? this.showCurrentSection() : this.hideCurrentSection());
-    }
+  protected initDoiChangesListener() {
+    this.store.select(submissionObjectFromIdSelector(this.submissionId))
+      .pipe(
+        filter(submissionEntry => hasValue(submissionEntry?.definition) && hasValue(submissionEntry?.sections)),
+        map(value => this.getDoiMetadataValue(value)),
+        distinctUntilChanged(),
+        takeUntil(this.unsubscribe$),
+      )
+      .subscribe(doiValue => !!doiValue ? this.showCurrentSection() : this.hideCurrentSection());
+  }
 
-    protected initUnpaywallFetching() {
-        this.fetch$.pipe(
-            switchMap((refreshRequired) =>
-                this.patchForRefresh(refreshRequired).pipe(
-                    pollWhile(
-                        API_CHECK_INTERVAL,
-                        res => this.isStillPending(res),
-                        MAX_TRIES
-                    ),
-                    this.getUnpaywallSection(),
-                    takeUntil(this.stopFetch$),
-                    catchError(err => {
-                        this.notificationsService.error(err?.message);
-                        return of(Object.assign({}, { ...this.unpaywallSection$.getValue(), status: UnpaywallSectionStatus.NO_FILE }));
-                    }),
-                )
-            ),
-            takeUntil(this.unsubscribe$),
-        ).subscribe(unpaywall => {
-            this.updateUnpaywall(unpaywall);
+  protected initUnpaywallFetching() {
+    this.fetch$.pipe(
+      switchMap((refreshRequired) =>
+        this.patchForRefresh(refreshRequired)
+          .pipe(
+            switchMap(sections => {
+              let unpaywall = this.extractUnpaywallSection(sections);
+              if (unpaywall.status !== UnpaywallSectionStatus.PENDING) {
+                return of(unpaywall);
+              } else {
+                return this.patchForRefresh(false).pipe(
+                  pollWhile(
+                    API_CHECK_INTERVAL,
+                    res => this.isStillPending(res),
+                    MAX_TRIES
+                  ),
+                  takeUntil(this.stopFetch$),
+                  this.getUnpaywallSection(),
+                  catchError(err => {
+                    this.notificationsService.error(err?.message);
+                    return of(Object.assign({}, {
+                      ...this.unpaywallSection$.getValue(),
+                      status: UnpaywallSectionStatus.NO_FILE
+                    }));
+                  })
+                );
+              }
+            })
+          )
+      ),
+      takeUntil(this.unsubscribe$),
+    ).subscribe(unpaywall => {
+      this.updateUnpaywall(unpaywall);
 
-            const isLoading = !unpaywall?.status || unpaywall?.status === UnpaywallSectionStatus.PENDING;
-            this.loading$.next(isLoading);
-            if (!isLoading) {
-                this.stopFetch$.next();
-            }
-        });
-    }
+      const isLoading = !unpaywall?.status || unpaywall?.status === UnpaywallSectionStatus.PENDING;
+      this.loading$.next(isLoading);
+      if (!isLoading) {
+        this.stopFetch$.next();
+      }
+    });
+  }
 
-    protected initStatusNotification() {
-        this.status$.pipe(
-            filter(hasValue),
-            takeUntil(this.unsubscribe$),
-        ).subscribe(status => this.handleStatusNotification(status));
-    }
+  protected initStatusNotification() {
+    this.status$.pipe(
+      filter(hasValue),
+      takeUntil(this.unsubscribe$),
+    ).subscribe(status => this.handleStatusNotification(status));
+  }
 
-    protected handleStatusNotification(status: UnpaywallSectionStatus) {
-        switch (status) {
-            case UnpaywallSectionStatus.NOT_FOUND:
-                this.notificationsService.error(this.translate.instant('submission.sections.unpaywall.status.not-found'));
-                break;
-            case UnpaywallSectionStatus.NO_FILE:
-                this.notificationsService.warning(this.translate.instant('submission.sections.unpaywall.status.no-file'));
-                break;
-            case UnpaywallSectionStatus.SUCCESSFUL:
-                this.notificationsService.success(this.translate.instant('submission.sections.unpaywall.status.successful'));
-                break;
-            case UnpaywallSectionStatus.IMPORTED:
-                this.notificationsService.success(this.translate.instant('submission.sections.unpaywall.status.imported'));
-                break;
-            default:
-                break;
-        }
+  protected handleStatusNotification(status: UnpaywallSectionStatus) {
+    switch (status) {
+      case UnpaywallSectionStatus.NOT_FOUND:
+        this.notificationsService.error(this.translate.instant('submission.sections.unpaywall.status.not-found'));
+        break;
+      case UnpaywallSectionStatus.NO_FILE:
+        this.notificationsService.warning(this.translate.instant('submission.sections.unpaywall.status.no-file'));
+        break;
+      case UnpaywallSectionStatus.SUCCESSFUL:
+        this.notificationsService.success(this.translate.instant('submission.sections.unpaywall.status.successful'));
+        break;
+      case UnpaywallSectionStatus.IMPORTED:
+        this.notificationsService.success(this.translate.instant('submission.sections.unpaywall.status.imported'));
+        break;
+      default:
+        break;
     }
+  }
 
   protected onSectionDestroy(): void {
     this.unsubscribe$.next();
@@ -255,62 +268,69 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
   private updateUnpaywall(unpaywall: WorkspaceitemSectionUnpaywallObject) {
     this.unpaywallSection$.next(unpaywall);
     this.status$.next(unpaywall?.status);
-    }
+  }
 
   private isStillPending(response: WorkspaceitemSectionsObject) {
     return hasNoValue(response?.unpaywall) || (response?.unpaywall as WorkspaceitemSectionUnpaywallObject)?.status === UnpaywallSectionStatus.PENDING;
   }
 
-    private handleFileUpload() {
-        this.patchForAccept()
-          .pipe(
-            filter(hasValue),
-            take(1),
-          ).subscribe(
-          () => {
-            this.loading$.next(true);
-            this.fetch$.next(false);
-            this.listenToUploadSectionChanges();
-          },
-            () => this.stopFetch$.next()
-        );
-    }
+  private handleFileUpload() {
+    this.loading$.next(true);
+    this.listenToUploadSectionChanges();
+    this.patchForAccept()
+      .pipe(
+        filter(hasValue),
+        take(1),
+        this.getUnpaywallSection(),
+        catchError(err => {
+          this.notificationsService.error(err?.message);
+          return of(Object.assign({}, {
+            ...this.unpaywallSection$.getValue(),
+            status: UnpaywallSectionStatus.NO_FILE
+          }));
+        }),
+      ).subscribe((unpaywall) => {
+      this.updateUnpaywall(unpaywall);
+      this.loading$.next(false);
+      this.stopFetch$.next();
+    });
+  }
 
-    private listenToUploadSectionChanges() {
-        this.uploadSection$.pipe(
-            pairwise(),
-            filter(([prev, curr]) => this.isAnyFieldChangedInLength(curr, prev)),
-            map(([prev, curr]) => this.mapNewFilesByKey(curr, prev)),
-            take(1),
-            takeUntil(this.stopFetch$),
-        )
-            .subscribe(uploadedFiles => Object.keys(uploadedFiles).forEach(key => this.uploadFiles(uploadedFiles, key)));
-    }
+  private listenToUploadSectionChanges() {
+    this.uploadSection$.pipe(
+      pairwise(),
+      takeUntil(this.stopFetch$),
+      filter(([prev, curr]) => this.isAnyFieldChangedInLength(curr, prev)),
+      map(([prev, curr]) => this.mapNewFilesByKey(curr, prev)),
+      take(1),
+    )
+      .subscribe(uploadedFiles => Object.keys(uploadedFiles).forEach(key => this.uploadFiles(uploadedFiles, key)));
+  }
 
   private stopApiCheck(): void {
     this.loading$.next(false);
     this.stopFetch$.next();
   }
 
-    private patchForRefresh(refreshRequired = false): Observable<WorkspaceitemSectionsObject> {
-        const { operation, linkPath } = this.createOperation('refresh', refreshRequired);
-        return this.sendPatchRequest(linkPath, operation);
-    }
+  private patchForRefresh(refreshRequired = false): Observable<WorkspaceitemSectionsObject> {
+    const { operation, linkPath } = this.createOperation('refresh', refreshRequired);
+    return this.sendPatchRequest(linkPath, operation);
+  }
 
-    private patchForAccept(accepted: boolean = true): Observable<WorkspaceitemSectionsObject> {
-        const { operation, linkPath } = this.createOperation('accept', accepted);
-        return this.sendPatchRequest(linkPath, operation);
-    }
+  private patchForAccept(accepted: boolean = true): Observable<WorkspaceitemSectionsObject> {
+    const { operation, linkPath } = this.createOperation('accept', accepted);
+    return this.sendPatchRequest(linkPath, operation);
+  }
 
-    private createOperation(operationPath: string, value: boolean) {
-      const pathCombiner = new JsonPatchOperationPathCombiner('sections', this.sectionData.id);
-        const path = pathCombiner.getPath(operationPath);
-        const operation = { op: 'add', path: path.path, value } as Operation;
-      const linkPath = this.submissionService.getSubmissionObjectLinkName();
-        return { operation, linkPath };
-    }
+  private createOperation(operationPath: string, value: boolean) {
+    const pathCombiner = new JsonPatchOperationPathCombiner('sections', this.sectionData.id);
+    const path = pathCombiner.getPath(operationPath);
+    const operation = { op: 'add', path: path.path, value } as Operation;
+    const linkPath = this.submissionService.getSubmissionObjectLinkName();
+    return { operation, linkPath };
+  }
 
-  private sendPatchRequest(linkPath: string, operation: Operation) {
+  private sendPatchRequest(linkPath: string, operation: Operation): Observable<WorkspaceitemSectionsObject> {
     return this.halService.getEndpoint(linkPath)
       .pipe(
         map((endpoint: string) => endpoint.concat(`/${this.submissionId}`)),
@@ -321,10 +341,13 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
       );
   }
 
-    private getUnpaywallSection() {
-        return (source$: Observable<WorkspaceitemSectionsObject>) =>
-            source$.pipe(map(sections => sections?.unpaywall as WorkspaceitemSectionUnpaywallObject));
-    }
+  private getUnpaywallSection() {
+    return (source$: Observable<WorkspaceitemSectionsObject>) => source$.pipe(map(this.extractUnpaywallSection));
+  }
+
+  private extractUnpaywallSection(sections: WorkspaceitemSectionsObject) {
+    return sections?.unpaywall as WorkspaceitemSectionUnpaywallObject;
+  }
 
   private getDoiMetadataValue(value: SubmissionObjectEntry): string {
     return value.sections[value.definition]?.data?.[DOI_METADATA]?.[0]?.value;
@@ -345,30 +368,30 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
   }
 
   private mapNewFilesByKey(curr: UploadSection, prev: UploadSection) {
-        return Object.assign({},
-            ...Object.keys(curr)
-              .map(key => ({ [key]: this.getNewFiles(curr, prev, key) }))
-        );
-    }
+    return Object.assign({},
+      ...Object.keys(curr)
+        .map(key => ({ [key]: this.getNewFiles(curr, prev, key) }))
+    );
+  }
 
-    private uploadFiles(uploadedFiles: { [p: string]: any }, key: string) {
-        return uploadedFiles[key].forEach(file => this.sectionUploadService.addUploadedFile(this.submissionId, key, file.uuid, file));
-    }
+  private uploadFiles(uploadedFiles: { [p: string]: any }, key: string) {
+    return uploadedFiles[key].forEach(file => this.sectionUploadService.addUploadedFile(this.submissionId, key, file.uuid, file));
+  }
 
   private getNewFiles(curr: UploadSection, prev: UploadSection, key: string) {
-        return curr[key]?.files?.filter(file => this.notContainsFile(prev[key], file));
-    }
+    return curr[key]?.files?.filter(file => this.notContainsFile(prev[key], file));
+  }
 
   private notContainsFile(uploadSection: WorkspaceitemSectionUploadObject, file: WorkspaceitemSectionUploadFileObject) {
-        return hasNoValue(uploadSection?.files) || !uploadSection?.files.some(f => f.uuid === file.uuid);
-    }
+    return hasNoValue(uploadSection?.files) || !uploadSection?.files.some(f => f.uuid === file.uuid);
+  }
 
   private isAnyFieldChangedInLength(curr: UploadSection, prev: UploadSection) {
     return Object.keys(curr).some(key => this.isLengthDifferent(curr, prev, key));
-    }
+  }
 
   private isLengthDifferent(curr: UploadSection, prev: UploadSection, key: string) {
-        return curr[key]?.files.length !== prev[key]?.files.length;
+    return curr[key]?.files.length !== prev[key]?.files.length;
   }
 
 }
