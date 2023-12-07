@@ -26,7 +26,7 @@ import { DSpaceObjectDataService } from '../../../core/data/dspace-object-data.s
 import { SearchConfigurationService } from '../../../core/shared/search/search-configuration.service';
 import { Angulartics2, RouterlessTracking } from 'angulartics2';
 import {
-    SubmissionJsonPatchOperationsService
+  SubmissionJsonPatchOperationsService
 } from '../../../core/submission/submission-json-patch-operations.service';
 import { AuthService } from '../../../core/auth/auth.service';
 import { RequestService } from '../../../core/data/request.service';
@@ -45,7 +45,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { DspaceRestService } from '../../../core/dspace-rest/dspace-rest.service';
 import { mockSubmissionCollectionId, mockSubmissionId } from '../../../shared/mocks/submission.mock';
 import {
-    WorkspaceitemSectionUnpaywallObject
+  WorkspaceitemSectionUnpaywallObject
 } from '../../../core/submission/models/workspaceitem-section-unpaywall-object';
 import { UnpaywallSectionStatus } from './models/unpaywall-section-status';
 import { of } from 'rxjs';
@@ -55,7 +55,7 @@ import { SubmissionObject } from '../../../core/submission/models/submission-obj
 import { SectionsType } from '../sections-type';
 import { WorkspaceitemSectionUploadObject } from '../../../core/submission/models/workspaceitem-section-upload.model';
 import {
-    WorkspaceitemSectionUploadFileObject
+  WorkspaceitemSectionUploadFileObject
 } from '../../../core/submission/models/workspaceitem-section-upload-file.model';
 import { RawRestResponse } from '../../../core/dspace-rest/raw-rest-response.model';
 import { SubmissionState } from '../../submission.reducers';
@@ -171,78 +171,62 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
     expect(component).toBeTruthy();
   });
 
-    describe('import file', () => {
-        it('should import the linked resource if needed', () => {
+  describe('import file', () => {
+    it('should import the linked resource if needed', () => {
       const submissionObjectName = 'workspaceitems';
       const testEndpoint = 'http://test-endpoint';
       const successLabel = of('success-label');
-            const uploadSection: WorkspaceitemSectionUploadObject = { files: [] };
-            const successfulSection: WorkspaceitemSectionUnpaywallObject = {
-                id: 1,
-                status: UnpaywallSectionStatus.SUCCESSFUL,
-                doi: 'test-doi',
-                itemId: 'test-item-id',
-                timestampCreated: new Date(),
-                timestampLastModified: new Date()
-            };
-      const submissionObject = {
+      const uploadSection: WorkspaceitemSectionUploadObject = { files: [] };
+      const successfulSection: WorkspaceitemSectionUnpaywallObject = {
+        id: 1,
+        status: UnpaywallSectionStatus.SUCCESSFUL,
+        doi: 'test-doi',
+        itemId: 'test-item-id',
+        timestampCreated: new Date(),
+        timestampLastModified: new Date()
+      };
+      const importedResource = {
         sections: {
           [SectionsType.Unpaywall]: {
-              id: 2,
-              status: UnpaywallSectionStatus.PENDING,
+            status: UnpaywallSectionStatus.IMPORTED,
             doi: 'test-doi',
             itemId: 'test-item-id',
             timestampCreated: new Date(),
             timestampLastModified: new Date()
           } as WorkspaceitemSectionUnpaywallObject,
-            [SectionsType.Upload]: { files: [] } as WorkspaceitemSectionUploadObject
+          [SectionsType.Upload]: {
+            files: [{
+              uuid: 'uploaded-file-bitstream-uuid'
+            } as WorkspaceitemSectionUploadFileObject]
+          } as WorkspaceitemSectionUploadObject
         }
       } as unknown as SubmissionObject;
-            component.unpaywallSection$.next(successfulSection);
-            component.uploadSection$.next({ [SectionsType.Upload]: uploadSection });
-            const requestResponse = { payload: submissionObject } as unknown as RawRestResponse;
-            jasmine.clock().install();
+      component.unpaywallSection$.next(successfulSection);
+      component.uploadSection$.next({ [SectionsType.Upload]: uploadSection });
+      const requestResponse = { payload: importedResource } as unknown as RawRestResponse;
+      jasmine.clock().install();
 
       spyOn(submissionService, 'getSubmissionObjectLinkName').and.returnValue(submissionObjectName);
       spyOn(halService, 'getEndpoint').withArgs(submissionObjectName).and.returnValue(of(testEndpoint));
       spyOn(tokenExtractor, 'getToken').and.returnValue(xsrfToken);
-            const responseSpy = spyOn(restApi, 'request').and.returnValue(of(requestResponse));
+      spyOn(restApi, 'request').and.returnValue(of(requestResponse));
       spyOn(sectionService, 'isSectionType')
         .withArgs(mockSubmissionId, SectionsType.Unpaywall, SectionsType.Upload).and.returnValue(of(false))
         .withArgs(mockSubmissionId, SectionsType.Upload, SectionsType.Upload).and.returnValue(of(true));
-            spyOn(translate, 'get').withArgs('submission.sections.unpaywall.status.imported').and.returnValue(successLabel);
-            spyOn(component.loading$, 'next');
-            spyOn(component.status$, 'next');
-            spyOn(component.unpaywallSection$, 'next');
+      spyOn(translate, 'get').withArgs('submission.sections.unpaywall.status.imported').and.returnValue(successLabel);
+      spyOn(component.loading$, 'next');
+      spyOn(component.status$, 'next');
+      spyOn(component.unpaywallSection$, 'next');
       spyOn(notificationsService, 'success').withArgs(null, successLabel);
       spyOn(notificationsService, 'error');
 
-            component.confirmImport();
-            const importedResource = {
-                sections: {
-                    [SectionsType.Unpaywall]: {
-                        status: UnpaywallSectionStatus.IMPORTED,
-                        doi: 'test-doi',
-                        itemId: 'test-item-id',
-                        timestampCreated: new Date(),
-                        timestampLastModified: new Date()
-                    } as WorkspaceitemSectionUnpaywallObject,
-                    [SectionsType.Upload]: {
-                        files: [{
-                            uuid: 'uploaded-file-bitstream-uuid'
-                        } as WorkspaceitemSectionUploadFileObject]
-                    } as WorkspaceitemSectionUploadObject
-                }
-            } as unknown as SubmissionObject;
-            const importedResponse = { payload: importedResource } as unknown as RawRestResponse;
-            responseSpy.and.returnValue(of(importedResponse));
-            jasmine.clock().tick(3010);
+      component.confirmImport();
 
-            expect(component.loading$.next).toHaveBeenCalledWith(false);
-            expect(component.status$.next).toHaveBeenCalledOnceWith((importedResource.sections[SectionsType.Unpaywall] as WorkspaceitemSectionUnpaywallObject).status);
-            expect(component.unpaywallSection$.next).toHaveBeenCalledWith(importedResource.sections[SectionsType.Unpaywall] as WorkspaceitemSectionUnpaywallObject);
-            expect(sectionUploadService.addUploadedFile).toHaveBeenCalledTimes(1);
-            jasmine.clock().uninstall();
+      expect(component.loading$.next).toHaveBeenCalledWith(false);
+      expect(component.status$.next).toHaveBeenCalledOnceWith((importedResource.sections[SectionsType.Unpaywall] as WorkspaceitemSectionUnpaywallObject).status);
+      expect(component.unpaywallSection$.next).toHaveBeenCalledWith(importedResource.sections[SectionsType.Unpaywall] as WorkspaceitemSectionUnpaywallObject);
+      expect(sectionUploadService.addUploadedFile).toHaveBeenCalledTimes(1);
+      jasmine.clock().uninstall();
     });
   });
 
