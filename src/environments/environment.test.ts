@@ -407,8 +407,13 @@ export const environment: BuildConfig = {
       loadMore :{
         first: 3,
         last: 1
-      }
-    }
+      },
+    },
+    collectionsBox: {
+      defaultCollectionsLabelColStyle: 'col-3 font-weight-bold',
+      defaultCollectionsValueColStyle: 'col-9',
+      isInline: true
+    },
   },
   layout: {
     navbar: {
@@ -555,6 +560,11 @@ export const environment: BuildConfig = {
         entityType: 'default',
         metadataConfiguration: []
       }
-    ]
+    ],
+    authorMetadata: ['dc.contributor.author', 'dc.contributor.editor', 'dc.contributor.contributor', 'dc.creator'],
+    authorRoleMetadataMap: {
+      'dc.contributor.author': 'dc.contributor.authorrole',
+      'dc.contributor.contributor': 'dc.contributor.contributorrole',
+    },
   },
 };

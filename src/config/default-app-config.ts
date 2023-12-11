@@ -577,6 +577,11 @@ export class DefaultAppConfig implements AppConfig {
         last: 1,
       }
     },
+    collectionsBox: {
+      defaultCollectionsLabelColStyle: 'col-3 font-weight-bold',
+      defaultCollectionsValueColStyle: 'col-9',
+      isInline: true
+    }
   };
 
   layout: LayoutConfig = {
@@ -755,7 +760,12 @@ export class DefaultAppConfig implements AppConfig {
   };
 
   searchResult: SearchResultConfig = {
-    additionalMetadataFields: []
+    additionalMetadataFields: [],
+    authorMetadata: ['dc.contributor.author', 'dc.contributor.editor', 'dc.contributor.contributor', 'dc.creator'],
+    authorRoleMetadataMap: {
+      'dc.contributor.author': 'dc.contributor.authorrole',
+      'dc.contributor.contributor': 'dc.contributor.contributorrole',
+    },
   };
 
   //main site url for glam theme

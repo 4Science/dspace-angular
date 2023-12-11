@@ -85,8 +85,7 @@ export class AttachmentComponent extends BitstreamAttachmentRenderingModelCompon
         return bitstreamList.page;
       }),
       take(1)
-    ).subscribe((bitstreams: Bitstream[]) => {
-    });
+    ).subscribe();
 
     this.getBitstreamsByItem(this.pageOptions).pipe(
       map((bitstreamList: PaginatedList<Bitstream>) => {

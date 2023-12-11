@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 mb-4">
+      <button class="btn btn-outline-secondary mb-2" (click)="back()">
+        <i class="fas fa-arrow-left"></i>&nbsp;{{ 'submission.unpaywall.versions.back' | translate }}
+      </button>
+      <h2 [innerHTML]="(titleText | async)"></h2>
+    </div>
+    <div class="col-12">
+
+      <div *ngFor="let versionRecord of (itemVersions$ | async)"
+           class="version d-inline-block col-12 mb-4">
+        <div class="d-flex align-items-center">
+          <div class="mr-4">
+            <div *ngIf="isHostedInRepository(versionRecord); then repositoryIcon; else publisherIcon"></div>
+          </div>
+          <div class="flex-grow-1">
+            <div *ngIf="versionRecord.license" class="field">
+              <p><b>License:</b></p>
+              <p>{{versionRecord.license}}</p>
+            </div>
+            <div class="field">
+              <p><b>Version:</b></p>
+              <p>
+                <span>{{'submission.unpaywall.versions.' + versionRecord.version | translate}}</span>
+                <span *ngIf="isHostedInRepository(versionRecord)" class="badge badge-primary ml-2">Hosted here</span>
+              </p>
+            </div>
+            <div class="field">
+              <p><b>Landing page:</b></p>
+              <p>
+                <a *ngIf="versionRecord.landingPageUrl; else noUrl"
+                   href="{{versionRecord.landingPageUrl}}"
+                   target=”_blank”>
+                  {{versionRecord.landingPageUrl}}
+                </a>
+              </p>
+            </div>
+            <div class="field">
+              <p><b>PDF:</b></p>
+              <p>
+                <a *ngIf="versionRecord.pdfUrl; else noUrl"
+                   href="{{versionRecord.pdfUrl}}"
+                   target=”_blank”>
+                  {{versionRecord.pdfUrl}}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<ng-template #noUrl>
+  <p>No link</p>
+</ng-template>
+
+<ng-template #publisherIcon>
+  <i class="fa fa-6x fa-newspaper" aria-hidden="true"></i>
+</ng-template>
+
+<ng-template #repositoryIcon>
+  <i class="fa fa-6x fa-university" aria-hidden="true"></i>
+</ng-template>

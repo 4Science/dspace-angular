@@ -1,0 +1,11 @@
+<div class="d-flex justify-content-around">
+  <div *ngFor="let setting of twitterSection?.twitterSettings">
+    <a class="twitter-timeline"
+       [attr.data-theme]="setting.theme"
+       [attr.data-dnt]="setting.optOut"
+       [href]="setting.url">
+      Tweets
+    </a>
+  </div>
+</div>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

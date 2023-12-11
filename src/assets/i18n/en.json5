@@ -256,6 +256,7 @@
   "admin.registries.metadata.schemas.table.name": "Name",
 
   "admin.registries.metadata.schemas.table.namespace": "Namespace",
+  "admin.registries.metadata.schemas.table.download": "Download",
 
   "admin.registries.metadata.title": "Metadata Registry",
 
@@ -724,6 +725,29 @@
   "admin.batch-import.page.header": "Import Batch",
 
   "admin.mag-import.page.header": "Import MAG",
+
+  "admin.mag-import.page.help": "Select the Collection to import into. Then, drop or browse to a MAG zip file to import",
+
+  "admin.mag-import.page.selected": "Selected Collection: ",
+
+  "admin.mag-import.page.remove": "Remove",
+
+  "admin.mag-import.page.toggle.upload": "Upload",
+
+  "admin.mag-import.page.toggle.url": "URL",
+
+  "admin.mag-import.page.toggle.help": "It is possible to perform import either with file upload or via URL, use above toggle to set the input source",
+
+  "admin.mag-import.page.dropMsg": "Drop a batch ZIP to import",
+
+  "admin.mag-import.page.dropMsgReplace": "Drop to replace the batch ZIP to import",
+
+  "admin.mag-import.page.urlMsg": "Insert the batch ZIP url to import",
+
+  "admin.mag-import.page.button.return": "Back",
+
+  "admin.mag-import.page.button.proceed": "Proceed",
+
 
   "admin.metadata-import.page.help": "You can drop or browse CSV files that contain batch metadata operations on files here",
 
@@ -1271,6 +1295,8 @@
 
   "browse.metadata.typePicture.breadcrumbs": "Browse by Type",
 
+  "browse.metadata.parentA.breadcrumbs": "Browse by Parent",
+
   "browse.metadata.titleF" : "Title",
 
   "browse.metadata.typeF" : "Type",
@@ -1294,6 +1320,8 @@
   "browse.metadata.dateissuedA" : "Date",
 
   "browse.metadata.subjectA" : "Subject",
+
+  "browse.metadata.parentA" : "Parent",
 
   "pagination.next.button": "Next",
 
@@ -1923,7 +1951,7 @@
 
   "context-menu.actions.edit-item-relationships.btn.pathpublications": "Manage Paths Publications",
 
-  "context-menu.actions.edit-item-relationships.btn.contributedpublications": "Manage Researchers Contributed Publications",
+  "context-menu.actions.edit-item-relationships.btn.copublications": "Manage Researchers Contributed Publications",
 
   "context-menu.actions.edit-item-relationships.btn.fonds": "Manage Researchers Fonds",
 
@@ -2136,6 +2164,11 @@
 
   "curation-task.task.avallowdownload.label":  "Allow Download on audio/video resources",
 
+  "curation-task.task.avupdatemanifest.label":  "Regenerate AV manifest for URL update",
+
+  "curation-task.task.avmigrate.label":  "Migrate the AV resources generated for a previous version",
+
+  "curation-task.task.cleangeneratedsub.label": "Clean generated subtitles for A/V resources",
 
   "cris-layout.toggle.open": "Open section",
 
@@ -2170,6 +2203,14 @@
   "cris-layout.advanced-attachment.view-pdf": "Open PDF",
 
   "cris-layout.attachment.viewMore": "View More",
+
+  "cris-layout.rendering.collections.owning-collection.label": "Owning collection",
+
+  "cris-layout.rendering.collections.mapped-collection.label": "Mapped collections",
+
+  "cris-layout.rendering.collections.loading": "Loading...",
+
+  "cris-layout.rendering.collections.load-more": "Load more",
 
   "curation-task.task.checklinks.label":  "Check Links in Metadata",
 
@@ -2446,6 +2487,40 @@
 
   "explore.facet-section.title" : "Discover",
 
+  "explore.facet-section.entityType.Publication": "Publication",
+
+  "explore.facet-section.entityType.ArchivalMaterial": "Archival Material",
+
+  "explore.facet-section.entityType.Person": "Person",
+
+  "explore.facet-section.entityType.OrgUnit": "Organizational Unit",
+
+  "explore.facet-section.entityType.Project": "Project",
+
+  "explore.facet-section.entityType.Event": "Event",
+
+  "explore.facet-section.entityType.Fonds": "Fonds",
+
+  "explore.facet-section.entityType.Place": "Place",
+
+  "explore.facet-section.entityType.Audiovideo": "Audio Video",
+
+  "explore.facet-section.entityType.Family": "Family",
+
+  "explore.facet-section.entityType.Aggregation": "Aggregation",
+
+  "explore.facet-section.entityType.News": "News",
+
+  "explore.facet-section.entityType.StaticPage": "Static Page",
+
+  "explore.facet-section.entityType.Path": "Path",
+
+  "explore.facet-section.entityType.JournalFile": "Journal File",
+
+  "explore.facet-section.entityType.JournalFonds": "Journal Fonds",
+
+  "explore.facet-section.entityType.Picture": "Picture",
+
   "explore.index.all" : "All",
 
   "explore.index.author" : "Author",
@@ -2567,6 +2642,26 @@
 
   "explore.index.type" : "Type",
 
+  "explore.index.parent" : "Parent",
+
+  "explore.index.itemtype" : "Type",
+
+  "explore.index.license" : "License",
+
+  "explore.index.place" : "Place",
+
+  "explore.index.event" : "Event",
+
+  "explore.index.project" : "Project",
+
+  "explore.index.family" : "Family",
+
+  "explore.index.jornalfoundperson" : "Person",
+
+  "explore.index.jornalfounddate" : "Date",
+
+  "explore.index.corporate" : "Organizational Unit",
+
   "explore.search-section.infrastructure.title": "Infrastructure",
 
   "explore.search-section.fundings.title": "Search Projects",
@@ -2602,7 +2697,7 @@
   "explore.researcherprofiles.breadcrumbs": "People",
 
   "explore.title": "Explore section",
-
+  "export-schema.process.title": "Metadata Schema Export",
 
   "feed.description": "Syndication feed",
 
@@ -3547,6 +3642,7 @@
 
   "item.page.metric.label.check": "Check",
 
+  "item.page.metric.label.unpaywall-api": "Unpaywall",
 
   "item.page.metric.label.download": "Downloads",
 
@@ -5687,6 +5783,8 @@
 
   "search.filters.filter.investigators.head": "Researcher",
 
+  "search.filters.filter.investigators.label": "Researcher",
+
   "search.filters.filter.investigators.placeholder": "Researcher",
 
   "search.filters.filter.jobTitle.head": "Job Title",
@@ -5708,6 +5806,8 @@
   "search.filters.filter.language.placeholder": "Language",
 
   "search.filters.filter.projectOrgUnits.head" : "Organizations",
+
+  "search.filters.filter.projectOrgUnits.label" : "Organizations",
 
   "search.filters.filter.projectOrgUnits.placeholder" : "Organizations",
 
@@ -5789,12 +5889,93 @@
 
   "search.filters.filter.types.placeholder": "Type",
 
+  "search.filters.filter.corporate.head": "Organizational Unit",
+
+  "search.filters.filter.corporate.label": "Search organizational unit",
+
+  "search.filters.filter.corporate.placeholder": "Organizational Unit",
+
+  "search.filters.filter.jornalfoundperson.head": "Person",
+
+  "search.filters.filter.jornalfoundperson.label": "Search person",
+
+  "search.filters.filter.jornalfoundperson.placeholder": "Person",
+
+  "search.filters.filter.jornalfounddate.head": "Date",
+
+  "search.filters.filter.jornalfounddate.label": "Search by date",
+
+  "search.filters.filter.jornalfounddate.placeholder": "Date",
+
+  "search.filters.filter.parent.head": "Parent",
+
+  "search.filters.filter.parent.label": "Search parent",
+
+  "search.filters.filter.parent.placeholder": "Parent",
+
+  "search.filters.filter.place.head": "Place",
+
+  "search.filters.filter.place.label": "Search place",
+
+  "search.filters.filter.place.placeholder": "Place",
+
+  "search.filters.filter.event.head": "Event",
+
+  "search.filters.filter.event.label": "Search event",
+
+  "search.filters.filter.event.placeholder": "Event",
+
+  "search.filters.filter.project.head": "Project",
+
+  "search.filters.filter.project.label": "Search project",
+
+  "search.filters.filter.project.placeholder": "Project",
+
+  "search.filters.filter.family.head": "Family",
+
+  "search.filters.filter.family.label": "Search family",
+
+  "search.filters.filter.family.placeholder": "Family",
 
   "search.filters.entityType.JournalIssue": "Journal Issue",
 
   "search.filters.entityType.JournalVolume": "Journal Volume",
 
   "search.filters.entityType.OrgUnit": "Organizational Unit",
+
+  "search.filters.entityType.Publication": "Publication",
+
+  "search.filters.entityType.ArchivalMaterial": "Archival Material",
+
+  "search.filters.entityType.Person": "Person",
+
+  "search.filters.entityType.OrgUnit": "Organizational Unit",
+
+  "search.filters.entityType.Project": "Project",
+
+  "search.filters.entityType.Event": "Event",
+
+  "search.filters.entityType.Fonds": "Fonds",
+
+  "search.filters.entityType.Place": "Place",
+
+  "search.filters.entityType.Audiovideo": "Audio Video",
+
+  "search.filters.entityType.Family": "Family",
+
+  "search.filters.entityType.Aggregation": "Aggregation",
+
+  "search.filters.entityType.News": "News",
+
+  "search.filters.entityType.StaticPage": "Static Page",
+
+  "search.filters.entityType.Path": "Path",
+
+  "search.filters.entityType.JournalFile": "Journal File",
+
+  "search.filters.entityType.JournalFonds": "Journal Fonds",
+
+  "search.filters.entityType.Picture": "Picture",
 
   "search.filters.has_content_in_original_bundle.true": "Yes",
 
@@ -5911,6 +6092,10 @@
   "sorting.dc.date.issued.ASC": "Date Issued Ascending",
 
   "sorting.dc.date.issued.DESC": "Date Issued Descending",
+
+  "sorting.dc.type.ASC": "Type Ascending",
+
+  "sorting.dc.type.DESC": "Type Descending",
 
   "sorting.dc.date.accessioned.ASC": "Accessioned Date Ascending",
 
@@ -6087,11 +6272,47 @@
 
   "statistics.categories.downloadReports.tab": "Downloads reports",
 
+  "statistics.categories.itemReports.tab": "Item views reports",
+
+  "statistics.table.itemReports.header.continent" : "Continent",
+
+  "statistics.table.itemReports.header.views" : "Views",
+
+  "statistics.table.itemReports.header.city" : "City",
+
+  "statistics.table.itemReports.header.item" : "Item",
+
+  "statistics.table.mainReports.header.community" : "Community",
+
+  "statistics.table.mainReports.header.collection" : "Collection",
+
+  "statistics.table.itemReports.title.TopContinents" : "Top region views",
+
+  "statistics.table.itemReports.title.TopCities" : "Top cities views",
+
+  "statistics.table.itemReports.title.TopItems" : "Most viewed",
+
+  "statistics.table.itemReports.title.TopCategories" : "Top categories",
+
+  "statistics.table.itemReports.title.TotalVisitsPerMonth" : "Top views per month",
+
   "statistics.reports.title": "Reports",
 
   "submission.edit.breadcrumbs": "Edit Submission",
 
   "submission.edit.title": "Edit Submission",
+
+  "submission.unpaywall.versions.title": "Open Access version of {item.title} reported by <a href=\"https://unpaywall.org/\">Unpaywall</a>",
+
+  "submission.unpaywall.versions.back": "Back to item's page",
+
+  "submission.unpaywall.versions.breadcrumbs": "Unpaywall versions",
+
+  "submission.unpaywall.versions.submittedVersion": "Submitted",
+
+  "submission.unpaywall.versions.acceptedVersion": "Accepted",
+
+  "submission.unpaywall.versions.publishedVersion": "Published",
 
   "submission.general.cancel": "Cancel",
 
@@ -7636,6 +7857,7 @@
   "explore.index.fonds" : "Fonds",
   "explore.index.journalfonds" : "Journal Fonds",
   "explore.index.aggregation" : "Aggregation",
+  "explore.index.parentA" : "Parent",
 
   "explore.search-section.sectiondocuments.title" : "Search Documents & Other materials",
 

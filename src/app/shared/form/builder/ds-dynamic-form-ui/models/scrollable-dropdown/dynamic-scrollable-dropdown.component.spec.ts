@@ -26,7 +26,6 @@ import { SubmissionServiceStub } from '../../../../../testing/submission-service
 import { createSuccessfulRemoteDataObject$ } from '../../../../../remote-data.utils';
 import { buildPaginatedList } from '../../../../../../core/data/paginated-list.model';
 import { PageInfo } from '../../../../../../core/shared/page-info.model';
-import { Observable, of as observableOf, Subject, Subscription } from 'rxjs';
 
 export const SD_TEST_GROUP = new FormGroup({
   dropdown: new FormControl(),

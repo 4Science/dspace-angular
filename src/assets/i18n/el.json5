@@ -424,6 +424,9 @@
 
   // "admin.registries.metadata.schemas.table.namespace": "Namespace",
   "admin.registries.metadata.schemas.table.namespace": "namespace",
+  // "admin.registries.metadata.schemas.table.download": "Download",
+  // TODO New key - Add a translation
+  "admin.registries.metadata.schemas.table.download": "Download",
 
   // "admin.registries.metadata.title": "Metadata Registry",
   "admin.registries.metadata.title": "Μητρώο μεταδεδομένων",
@@ -3242,9 +3245,9 @@
   // TODO New key - Add a translation
   "context-menu.actions.edit-item-relationships.btn.pathpublications": "Manage Paths Publications",
 
-  // "context-menu.actions.edit-item-relationships.btn.contributedpublications": "Manage Researchers Contributed Publications",
+  // "context-menu.actions.edit-item-relationships.btn.copublications": "Manage Researchers Contributed Publications",
   // TODO New key - Add a translation
-  "context-menu.actions.edit-item-relationships.btn.contributedpublications": "Manage Researchers Contributed Publications",
+  "context-menu.actions.edit-item-relationships.btn.copublications": "Manage Researchers Contributed Publications",
 
   // "context-menu.actions.edit-item-relationships.btn.fonds": "Manage Researchers Fonds",
   // TODO New key - Add a translation
@@ -3632,6 +3635,14 @@
   // TODO New key - Add a translation
   "curation-task.task.avallowdownload.label":  "Allow Download on audio/video resources",
 
+  // "curation-task.task.avupdatemanifest.label":  "Regenerate AV manifest for URL update",
+  // TODO New key - Add a translation
+  "curation-task.task.avupdatemanifest.label":  "Regenerate AV manifest for URL update",
+
+  // "curation-task.task.avmigrate.label":  "Migrate the AV resources generated for a previous version",
+  // TODO New key - Add a translation
+  "curation-task.task.avmigrate.label":  "Migrate the AV resources generated for a previous version",
+
 
   // "cris-layout.toggle.open": "Open section",
   // TODO New key - Add a translation
@@ -3700,6 +3711,22 @@
   // "cris-layout.attachment.viewMore": "View More",
   // TODO New key - Add a translation
   "cris-layout.attachment.viewMore": "View More",
+
+  // "cris-layout.rendering.collections.owning-collection.label": "Owning collection",
+  // TODO New key - Add a translation
+  "cris-layout.rendering.collections.owning-collection.label": "Owning collection",
+
+  // "cris-layout.rendering.collections.mapped-collection.label": "Mapped collections",
+  // TODO New key - Add a translation
+  "cris-layout.rendering.collections.mapped-collection.label": "Mapped collections",
+
+  // "cris-layout.rendering.collections.loading": "Loading...",
+  // TODO New key - Add a translation
+  "cris-layout.rendering.collections.loading": "Loading...",
+
+  // "cris-layout.rendering.collections.load-more": "Load more",
+  // TODO New key - Add a translation
+  "cris-layout.rendering.collections.load-more": "Load more",
 
   // "curation-task.task.checklinks.label":  "Check Links in Metadata",
   "curation-task.task.checklinks.label": "Ελέγξτε τους συνδέσμους στα μεταδεδομένα",
@@ -4479,7 +4506,9 @@
   // "explore.title": "Explore section",
   // TODO New key - Add a translation
   "explore.title": "Explore section",
-
+  // "export-schema.process.title": "Metadata Schema Export",
+  // TODO New key - Add a translation
+  "export-schema.process.title": "Metadata Schema Export",
 
   // "feed.description": "Syndication feed",
   "feed.description": "Συνδικάτο τροφοδοσία",
@@ -5997,6 +6026,9 @@
   // TODO New key - Add a translation
   "item.page.metric.label.check": "Check",
 
+  // "item.page.metric.label.unpaywall-api": "Unpaywall",
+  // TODO New key - Add a translation
+  "item.page.metric.label.unpaywall-api": "Unpaywall",
 
   // "item.page.metric.label.download": "Downloads",
   // TODO New key - Add a translation
@@ -9689,6 +9721,10 @@
   // TODO New key - Add a translation
   "search.filters.filter.investigators.head": "Researcher",
 
+  // "search.filters.filter.investigators.label": "Researcher",
+  // TODO New key - Add a translation
+  "search.filters.filter.investigators.label": "Researcher",
+
   // "search.filters.filter.investigators.placeholder": "Researcher",
   // TODO New key - Add a translation
   "search.filters.filter.investigators.placeholder": "Researcher",
@@ -9726,6 +9762,10 @@
   // "search.filters.filter.projectOrgUnits.head" : "Organizations",
   // TODO New key - Add a translation
   "search.filters.filter.projectOrgUnits.head" : "Organizations",
+
+  // "search.filters.filter.projectOrgUnits.label" : "Organizations",
+  // TODO New key - Add a translation
+  "search.filters.filter.projectOrgUnits.label" : "Organizations",
 
   // "search.filters.filter.projectOrgUnits.placeholder" : "Organizations",
   // TODO New key - Add a translation
@@ -10396,6 +10436,54 @@
   // TODO New key - Add a translation
   "statistics.categories.downloadReports.tab": "Downloads reports",
 
+  // "statistics.categories.itemReports.tab": "Item views reports",
+  // TODO New key - Add a translation
+  "statistics.categories.itemReports.tab": "Item views reports",
+
+  // "statistics.table.itemReports.header.continent" : "Continent",
+  // TODO New key - Add a translation
+  "statistics.table.itemReports.header.continent" : "Continent",
+
+  // "statistics.table.itemReports.header.views" : "Views",
+  // TODO New key - Add a translation
+  "statistics.table.itemReports.header.views" : "Views",
+
+  // "statistics.table.itemReports.header.city" : "City",
+  // TODO New key - Add a translation
+  "statistics.table.itemReports.header.city" : "City",
+
+  // "statistics.table.itemReports.header.item" : "Item",
+  // TODO New key - Add a translation
+  "statistics.table.itemReports.header.item" : "Item",
+
+  // "statistics.table.mainReports.header.community" : "Community",
+  // TODO New key - Add a translation
+  "statistics.table.mainReports.header.community" : "Community",
+
+  // "statistics.table.mainReports.header.collection" : "Collection",
+  // TODO New key - Add a translation
+  "statistics.table.mainReports.header.collection" : "Collection",
+
+  // "statistics.table.itemReports.title.TopContinents" : "Top region views",
+  // TODO New key - Add a translation
+  "statistics.table.itemReports.title.TopContinents" : "Top region views",
+
+  // "statistics.table.itemReports.title.TopCities" : "Top cities views",
+  // TODO New key - Add a translation
+  "statistics.table.itemReports.title.TopCities" : "Top cities views",
+
+  // "statistics.table.itemReports.title.TopItems" : "Most viewed",
+  // TODO New key - Add a translation
+  "statistics.table.itemReports.title.TopItems" : "Most viewed",
+
+  // "statistics.table.itemReports.title.TopCategories" : "Top categories",
+  // TODO New key - Add a translation
+  "statistics.table.itemReports.title.TopCategories" : "Top categories",
+
+  // "statistics.table.itemReports.title.TotalVisitsPerMonth" : "Top views per month",
+  // TODO New key - Add a translation
+  "statistics.table.itemReports.title.TotalVisitsPerMonth" : "Top views per month",
+
   // "statistics.reports.title": "Reports",
   // TODO New key - Add a translation
   "statistics.reports.title": "Reports",
@@ -10405,6 +10493,30 @@
 
   // "submission.edit.title": "Edit Submission",
   "submission.edit.title": "Επεξεργασία υποβολής",
+
+  // "submission.unpaywall.versions.title": "Open Access version of {item.title} reported by <a href=\"https://unpaywall.org/\">Unpaywall</a>",
+  // TODO New key - Add a translation
+  "submission.unpaywall.versions.title": "Open Access version of {item.title} reported by <a href=\"https://unpaywall.org/\">Unpaywall</a>",
+
+  // "submission.unpaywall.versions.back": "Back to item's page",
+  // TODO New key - Add a translation
+  "submission.unpaywall.versions.back": "Back to item's page",
+
+  // "submission.unpaywall.versions.breadcrumbs": "Unpaywall versions",
+  // TODO New key - Add a translation
+  "submission.unpaywall.versions.breadcrumbs": "Unpaywall versions",
+
+  // "submission.unpaywall.versions.submittedVersion": "Submitted",
+  // TODO New key - Add a translation
+  "submission.unpaywall.versions.submittedVersion": "Submitted",
+
+  // "submission.unpaywall.versions.acceptedVersion": "Accepted",
+  // TODO New key - Add a translation
+  "submission.unpaywall.versions.acceptedVersion": "Accepted",
+
+  // "submission.unpaywall.versions.publishedVersion": "Published",
+  // TODO New key - Add a translation
+  "submission.unpaywall.versions.publishedVersion": "Published",
 
   // "submission.general.cancel": "Cancel",
   "submission.general.cancel": "Ακύρωση",

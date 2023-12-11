@@ -1,61 +1,59 @@
-<ngb-carousel #carousel [interval]="6000" (slide)="onSlide($event)" class="ds-carousel"
+<ngb-carousel #carousel [interval]="carouselInterval" (slide)="onSlide($event)"
+              [pauseOnHover]="true" [pauseOnFocus]="false"
               [showNavigationArrows]="false"
               [showNavigationIndicators]="false">
   <ng-template ngbSlide *ngFor="let item of items; let i = index; let last = last">
-    <ng-container #carouselContent>
-      <div class="section">
-        <div class="row" [ngStyle]="{
-                    'height': carouselOptions.keepAspectRatio ? 'calc(100vw / ' + carouselOptions.aspectRatio + ')' : carouselOptions.carouselHeightPx + 'px'
-                 }">
-            <div class="col-md-8 pr-0 carousel-content-wrapper h-100"
-                 *ngIf="(itemToImageHrefMap$ | async).get(item.indexableObject.uuid); let href; else defaultPreviewImage"
-                 [ngStyle]="{'background-image': carouselOptions.showBlurryBackdrop ? 'url(' + href || '' + ')' : 'unset'}">
-              <div class="picsum-img-wrapper">
-                <img
-                     [src]="href" [alt]="item.indexableObject.metadata[title][0].value"
-                     [ngClass]="{'w-100': carouselOptions.fitWidth, 'h-100': carouselOptions.fitHeight, 'blurry-backdrop': carouselOptions.showBlurryBackdrop}">
+    <ng-container *ngIf="(itemToImageHrefMap$ | async) as itemToImageHrefMap">
+      <div class="row no-gutters">
+        <!-- Flexbox requires height to be applied to both columns separately, and to the central nested column of the right column -->
+        <ng-container *ngIf="itemToImageHrefMap.get(item.indexableObject.uuid) as href; else placeholderImage">
+          <div class="col-lg-8 image-column" [style.height]="carouselHeight"
+               [ngStyle]="carouselOptions.showBlurryBackdrop ? {'background-image': getBackgroundImage(href)} : {}">
+            <div class="image-wrapper d-flex align-items-center justify-content-center"
+                 [class.blurry-backdrop]="carouselOptions.showBlurryBackdrop">
+              <img [src]="href" [alt]="item.indexableObject.metadata[title][0].value"
+                   [class.w-100]="carouselOptions.fitWidth"
+                   [class.h-100]="carouselOptions.fitHeight">
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #placeholderImage>
+          <div class="col-lg-8 image-column placeholder-image" [style.height]="carouselHeight"></div>
+        </ng-template>
+        <div class="col-lg-4 caption-column bg-primary" [style.height]="carouselHeight">
+          <div class="d-flex flex-row align-items-stretch">
+            <!-- left column -->
+            <div class="arrow-wrapper" (click)="carousel.prev()">
+              <i class="fa fa-arrow-left text-white"></i>
+            </div>
+            <!-- central column -->
+            <div class="caption-wrapper flex-fill d-flex flex-column justify-content-center gapy-3 py-2" [style.height]="carouselHeight">
+              <h1 class="text-white" [class]="carouselOptions.titleStyle" *ngIf="item.indexableObject.metadata[title]">
+                {{item.indexableObject.metadata[title][0].value}}
+              </h1>
+              <div class="caption flex-fill text-white text-center" [class]="carouselOptions.captionStyle"
+                   *ngIf="item.indexableObject.metadata[description]; let descriptionObj">
+                <div class="caption-text">{{descriptionObj[0].value}}</div>
+                <div class="caption-fade"></div>
               </div>
-            </div>
-          <ng-template #defaultPreviewImage>
-            <div class="col-md-8 pr-0 carousel-content-wrapper h-100">
-              <div class="picsum-img-wrapper">
-                <img src="assets/images/replacement_image.svg" [alt]="item.indexableObject.metadata[title][0].value" class="img-fluid h-100">
+              <div class="text-center" *ngIf="getItemLink(item.indexableObject); let currentLink;">
+                <a *ngIf="isLinkInternal(currentLink)" [routerLink]="currentLink" class="btn btn-light">
+                  {{ 'explore.carousel.view-more' | translate }}
+                </a>
+                <a *ngIf="!isLinkInternal(currentLink)" [href]="currentLink" [target]="carouselOptions.targetBlank ? '_blank' : null" class="btn btn-light">
+                  {{ 'explore.carousel.view-more' | translate }}
+                </a>
               </div>
+              <button type="button" class="btn btn-sm toggle-paused text-white" (click)="togglePaused()">
+                <i class="fas fa-play" *ngIf="paused"></i>
+                <i class="fas fa-pause" *ngIf="!paused"></i>
+              </button>
             </div>
-          </ng-template>
-            <div class="col-md-4 pl-0 h-100">
-                <div class="bg-dark justify-content-center align-items-center d-flex flex-row h-100">
-                  <div class="arrow-class-left">
-                    <i class="fa fa-arrow-left text-white" (click)="carousel.prev()"></i>
-                  </div>
-                  <div class="bg-dark justify-content-center d-flex flex-column h-100 flex-grow-1">
-                    <div class="d-flex flex-column flex-grow-1 align-items-center justify-content-center">
-                      <h1 class="text-white" [class]="carouselOptions.titleStyle" *ngIf="item.indexableObject.metadata[title]">
-                        {{item.indexableObject.metadata[title][0].value}}
-                      </h1>
-                      <p class="opacity-50 text-white text-center mt-4" style="max-width: 500px;" [class]="carouselOptions.captionStyle"
-                         *ngIf="item.indexableObject.metadata[description]; let descriptionObj">
-                        {{descriptionObj[0].value}}
-                      </p>
-                      <ng-container *ngIf="getItemLink(item.indexableObject); let currentLink;">
-                        <a *ngIf="isLinkInternal(currentLink)" [routerLink]="currentLink">
-                          <button type="button" class="btn btn-light mt-4">{{ 'explore.carousel.view-more' | translate }}</button>
-                        </a>
-                        <a *ngIf="!isLinkInternal(currentLink)" [href]="currentLink" [target]="carouselOptions.targetBlank ? '_blank' : null">
-                          <button type="button" class="btn btn-light mt-4">{{ 'explore.carousel.view-more' | translate }}</button>
-                        </a>
-                      </ng-container>
-                    </div>
-                    <button type="button" class="btn btn-sm toggle-paused mb-3 text-white" (click)="togglePaused()">
-                      <i class="fas fa-play" *ngIf="paused"></i>
-                      <i class="fas fa-pause" *ngIf="!paused"></i>
-                    </button>
-                  </div>
-                  <div class="arrow-class-right">
-                    <i class="fa fa-arrow-right text-white" (click)="carousel.next()"></i>
-                  </div>
-                </div>
+            <!-- right column -->
+            <div class="arrow-wrapper" (click)="carousel.next()">
+              <i class="fa fa-arrow-right text-white"></i>
             </div>
+          </div>
         </div>
       </div>
     </ng-container>
