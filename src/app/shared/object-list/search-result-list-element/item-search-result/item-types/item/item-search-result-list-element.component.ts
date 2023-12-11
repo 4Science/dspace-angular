@@ -42,12 +42,18 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
 
   itemViewerRoute: string;
 
+  fullTextMirador: string[];
+
+  fullTextVideo: string[];
+
   ngOnInit(): void {
     super.ngOnInit();
     this.showThumbnails = this.showThumbnails ?? this.appConfig.browseBy.showThumbnails;
     this.itemPageRoute = getItemPageRoute(this.dso);
     this.itemViewerRoute = getItemViewerPath(this.dso, 'iiif');
     this.fullTextHighlights = this.allMetadataValues('fulltext');
+    this.fullTextMirador = this.allMetadataValues('fulltext.mirador');
+    this.fullTextVideo = this.allMetadataValues('fulltext.video');
   }
 
 }
