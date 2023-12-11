@@ -511,23 +511,23 @@ export class DefaultAppConfig implements AppConfig {
     urn: [
       {
         name: 'doi',
-        baseUrl: 'https://doi.org/'
+        baseUrl: 'https://doi.org/',
       },
       {
         name: 'hdl',
-        baseUrl: 'https://hdl.handle.net/'
+        baseUrl: 'https://hdl.handle.net/',
       },
       {
         name: 'scopus',
-        baseUrl: 'https://www.scopus.com/authid/detail.uri?authorId='
+        baseUrl: 'https://www.scopus.com/authid/detail.uri?authorId=',
       },
       {
         name: 'researcherid',
-        baseUrl: 'http://www.researcherid.com/rid/'
+        baseUrl: 'http://www.researcherid.com/rid/',
       },
       {
         name: 'mailto',
-        baseUrl: 'mailto:'
+        baseUrl: 'mailto:',
       }
     ],
     crisRef: [
@@ -536,7 +536,7 @@ export class DefaultAppConfig implements AppConfig {
         entityStyle: {
           default: {
             icon: 'fa fa-info',
-            style: 'text-info'
+            style: 'text-info',
           }
         }
       },
@@ -545,7 +545,7 @@ export class DefaultAppConfig implements AppConfig {
         entityStyle: {
           default: {
             icon: 'fa fa-user',
-            style: 'text-info'
+            style: 'text-info',
           }
         }
       },
@@ -554,7 +554,7 @@ export class DefaultAppConfig implements AppConfig {
         entityStyle: {
           default: {
             icon: 'fa fa-university',
-            style: 'text-info'
+            style: 'text-info',
           }
         }
       },
@@ -563,7 +563,7 @@ export class DefaultAppConfig implements AppConfig {
         entityStyle: {
           default: {
             icon: 'fas fa-project-diagram',
-            style: 'text-info'
+            style: 'text-info',
           }
         }
       }
@@ -573,13 +573,13 @@ export class DefaultAppConfig implements AppConfig {
     },
     itemPage: {
       OrgUnit: {
-        orientation: 'vertical'
+        orientation: 'vertical',
       },
       Project: {
-        orientation: 'vertical'
+        orientation: 'vertical',
       },
       default: {
-        orientation: 'horizontal'
+        orientation: 'horizontal',
       },
     },
     metadataBox: {
@@ -614,17 +614,17 @@ export class DefaultAppConfig implements AppConfig {
       {
         value: 0,
         icon: 'fa fa-globe',
-        color: 'green'
+        color: 'green',
       },
       {
         value: 1,
         icon: 'fa fa-key',
-        color: 'orange'
+        color: 'orange',
       },
       {
         value: 2,
         icon: 'fa fa-lock',
-        color: 'red'
+        color: 'red',
       }
     ]
   };
@@ -752,4 +752,5 @@ export class DefaultAppConfig implements AppConfig {
     additionalMetadataFields: [],
     authorMetadata: ['dc.contributor.author', 'dc.creator', 'dc.contributor.*'],
   };
+
 }
