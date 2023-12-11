@@ -3,7 +3,7 @@
     <div class="col-12">
       <div [ngSwitch]="(status$ | async)" *ngIf="!(loading$ | async)">
         <ng-container *ngSwitchCase="UnpaywallSectionStatus.SUCCESSFUL">
-          <ds-alert [type]="AlertType.Success"
+          <ds-alert [type]="AlertType.Info"
                     [content]="'submission.sections.unpaywall.status.successful' | translate"></ds-alert>
         </ng-container>
         <ng-container *ngSwitchCase="UnpaywallSectionStatus.IMPORTED">
