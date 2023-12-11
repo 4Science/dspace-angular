@@ -14027,6 +14027,10 @@
   // "explore.index.lastModified" : "New accessions",
   "explore.index.lastModified" : "Nuove accessioni",
 
-
+  "layout.field.label.Fonds.glamfonds.index": "Indice",
+  "layout.field.label.JournalFonds.glamjournalfonds.index": "Indice",
+  "layout.field.label.Picture.glamfonds.index": "Numero di corda",
+  "layout.field.label.JournalFile.glamjournalfonds.index": "Numero di corda",
+  "layout.field.label.Publication.glamfonds.index": "Numero di corda",
 
 }

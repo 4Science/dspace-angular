@@ -8048,4 +8048,9 @@
 
   "explore.index.lastModified" : "New accessions",
 
+  "layout.field.label.Fonds.glamfonds.index": "Index",
+  "layout.field.label.JournalFonds.glamjournalfonds.index": "Index",
+  "layout.field.label.Picture.glamfonds.index": "Node number",
+  "layout.field.label.JournalFile.glamjournalfonds.index": "Node number",
+  "layout.field.label.Publication.glamfonds.index": "Node number"
 }
