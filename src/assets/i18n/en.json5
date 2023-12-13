@@ -1963,9 +1963,7 @@
 
   "context-menu.actions.edit-item-relationships.btn.archivalmaterial": "Manage Archival Material",
 
-  "context-menu.actions.edit-item-relationships.btn.aggregationchildren": "Manage Children",
-
-  "context-menu.actions.edit-item-relationships.btn.aggregationitems": "Manage Related Items",
+  "context-menu.actions.edit-item-relationships.btn.items": "Manage Items",
 
   "context-menu.actions.orcid-view": "Open ORCID setting page",
 
@@ -2051,9 +2049,7 @@
 
   "RELATION.Event.people.search.results.head" : "People",
 
-  "RELATION.Aggregation.aggregationchildren.search.results.head" : "Aggregation Children",
-
-  "RELATION.Aggregation.aggregationitems.search.results.head" : "Items related to Aggregation",
+  "RELATION.Aggregation.items.search.results.head" : "Items",
 
   "datafile.listelement.badge": "Data File",
 
