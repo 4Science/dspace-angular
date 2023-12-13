@@ -53,6 +53,11 @@ export class ProcessFormComponent implements OnInit {
    */
   public missingParameters = [];
 
+  /**
+   * Boolean value to use to cancel the process
+   */
+  private isFormCanceled = false;
+
   constructor(
     private scriptService: ScriptDataService,
     private notificationsService: NotificationsService,
@@ -73,7 +78,7 @@ export class ProcessFormComponent implements OnInit {
     if (isEmpty(this.parameters)) {
       this.parameters = [];
     }
-    if (!this.validateForm(form) || this.isRequiredMissing()) {
+    if (!this.validateForm(form) || this.isRequiredMissing() || this.isFormCanceled) {
       return;
     }
 
@@ -148,6 +153,10 @@ export class ProcessFormComponent implements OnInit {
     /* should subscribe on the previous method to know the action is finished and then navigate,
     will fix this when the removeByHrefSubstring changes are merged */
     this.router.navigateByUrl(getProcessListRoute());
+  }
+
+  public cancelAction() {
+    this.isFormCanceled = true;
   }
 }
 
