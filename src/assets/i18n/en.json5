@@ -1963,6 +1963,8 @@
 
   "context-menu.actions.edit-item-relationships.btn.archivalmaterial": "Manage Archival Material",
 
+  "context-menu.actions.edit-item-relationships.btn.items": "Manage Items",
+
   "context-menu.actions.orcid-view": "Open ORCID setting page",
 
   "context-menu.actions.statistics.btn": "Statistics",
@@ -2046,6 +2048,8 @@
   "RELATION.Event.publications.search.results.head" : "Publications",
 
   "RELATION.Event.people.search.results.head" : "People",
+
+  "RELATION.Aggregation.items.search.results.head" : "Items",
 
   "datafile.listelement.badge": "Data File",
 

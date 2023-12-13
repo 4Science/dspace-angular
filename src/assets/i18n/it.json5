@@ -2929,6 +2929,9 @@
   // "context-menu.actions.edit-item-relationships.btn.archivalmaterial": "Manage Archival Material",
   "context-menu.actions.edit-item-relationships.btn.archivalmaterial": "Gestisci il Materiale Archivistico",
 
+  // "context-menu.actions.edit-item-relationships.btn.items": "Manage Items",
+  "context-menu.actions.edit-item-relationships.btn.items": "Gestisci gli oggetti collegati",
+
   // "context-menu.actions.orcid-view": "Open ORCID setting page",
   "context-menu.actions.orcid-view": "Apri la pagina delle impostazioni ORCID",
 
@@ -3055,6 +3058,12 @@
 
   // "RELATION.Event.people.search.results.head" : "People",
   "RELATION.Event.people.search.results.head" : "Persone",
+
+  // "RELATION.Aggregation.children.search.results.head" : "Children",
+  "RELATION.Aggregation.children.search.results.head" : "Livello di Descrizione Inferiore",
+
+  // "RELATION.Aggregation.items.search.results.head" : "Items",
+  "RELATION.Aggregation.items.search.results.head" : "Oggetti collegati",
 
   // "datafile.listelement.badge": "Data File",
   "datafile.listelement.badge": "Data File",
@@ -12038,6 +12047,9 @@
   //"layout.tab.header.Aggregation.aggregationcontext": "Aggregation Context",
   "layout.tab.header.Aggregation.aggregationcontext": "Consulta l'Aggregazione",
 
+  //"layout.tab.header.Aggregation.items": "Aggregation’s Items",
+  "layout.tab.header.Aggregation.items": "Oggetti collegati",
+
   //"layout.tab.header.Aggregation.children": "Aggregation Children",
   "layout.tab.header.Aggregation.children": "Livello di descrizione inferiore",
 
@@ -12185,8 +12197,11 @@
   //"layout.box.header.Aggregation.aggregationindex": "Aggregation Index",
   "layout.box.header.Aggregation.aggregationindex": "Indice dell'Aggregazione",
 
-  //"layout.box.header.Aggregation.aggregationchildren": "Aggregation’s Children",
-  "layout.box.header.Aggregation.aggregationchildren": "Livello di Descrizione Inferiore",
+  //"layout.box.header.Aggregation.items": "Aggregation’s Items",
+  "layout.box.header.Aggregation.items": "Oggetti collegati",
+
+  //"layout.box.header.Aggregation.children": "Aggregation’s Children",
+  "layout.box.header.Aggregation.children": "Livello di Descrizione Inferiore",
 
   //"layout.box.header.StaticPage.details": "Description",
   "layout.box.header.StaticPage.details": "Descrizione",
