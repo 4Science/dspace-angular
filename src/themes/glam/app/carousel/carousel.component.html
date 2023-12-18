@@ -28,7 +28,7 @@
             </div>
             <!-- central column -->
             <div class="caption-wrapper flex-fill d-flex flex-column justify-content-center gapy-3 py-2" [style.height]="carouselHeight">
-              <h1 class="text-white" [class]="carouselOptions.titleStyle" *ngIf="item.indexableObject.metadata[title]">
+              <h1 class="carousel-header text-white" [class]="carouselOptions.titleStyle" *ngIf="item.indexableObject.metadata[title]">
                 {{item.indexableObject.metadata[title][0].value}}
               </h1>
               <div class="caption flex-fill text-white text-center" [class]="carouselOptions.captionStyle"
