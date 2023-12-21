@@ -650,8 +650,8 @@ export class DefaultAppConfig implements AppConfig {
 
   cms: CmsMetadata = {
     metadataList: [
-      'cris.cms.home-header',
-      'cris.cms.home-news',
+      // 'cris.cms.home-header',
+      // 'cris.cms.home-news',
       'cris.cms.footer',
       'cris.cms.grid-component-badge',
       'cris.cms.grid-component-title',
