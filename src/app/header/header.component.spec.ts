@@ -10,6 +10,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MenuService } from '../shared/menu/menu.service';
 import { MenuServiceStub } from '../shared/testing/menu-service.stub';
+import { HostWindowService } from '../shared/host-window.service';
+import { HostWindowServiceStub } from '../shared/testing/host-window-service.stub';
 
 let comp: HeaderComponent;
 let fixture: ComponentFixture<HeaderComponent>;
@@ -26,7 +28,8 @@ describe('HeaderComponent', () => {
         ReactiveFormsModule],
       declarations: [HeaderComponent],
       providers: [
-        { provide: MenuService, useValue: menuService }
+        { provide: MenuService, useValue: menuService },
+        { provide: HostWindowService, useValue: new HostWindowServiceStub(0) },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
