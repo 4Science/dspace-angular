@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CarouselComponent as BaseComponent} from '../../../../app/shared/carousel/carousel.component';
+import { CarouselComponent as BaseComponent} from '../../../../../app/shared/carousel/carousel.component';
 
 /**
  * Component representing the Carousel component section.
