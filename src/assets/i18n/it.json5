@@ -12208,6 +12208,9 @@
   //"layout.box.header.ArchivalMaterial.details": "Description",
   "layout.box.header.ArchivalMaterial.details": "Descrizione",
 
+  // "layout.box.header.ArchivalMaterial.relationperson": "Person",
+  "layout.box.header.ArchivalMaterial.relationperson": "Persona",
+
   //"layout.box.header.Aggregation.aggregationdescription": "Description",
   "layout.box.header.Aggregation.aggregationdescription": "Descrizione",
 
