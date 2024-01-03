@@ -12771,6 +12771,9 @@
   //"layout.field.label.JournalFonds.dc.relation.otherlinks": "Other Links",
   "layout.field.label.JournalFonds.dc.relation.otherlinks": "Collegamenti Esterni",
 
+  //"layout.field.label.JournalFonds.dc.relation.path": "Path",
+  "layout.field.label.JournalFonds.dc.relation.path": "Percorso",
+
   //"layout.field.label.JournalFonds.glamjournalfonds.parent": "Journal Fonds Parent",
   "layout.field.label.JournalFonds.glamjournalfonds.parent": "Testata Radice",
 
