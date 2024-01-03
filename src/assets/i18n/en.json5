@@ -860,6 +860,9 @@
 
   "alert.toggle.show": "Show more",
 
+  "audiovideo.page.titleprefix" : "Audio/Video",
+
+  "audiovideo.listelement.badge" : "Audio/Video",
 
   "auth.errors.invalid-user": "Invalid email address or password.",
 
@@ -6875,6 +6878,10 @@
   "submission.sections.submit.progressbar.CClicense": "Creative commons license",
 
   "submission.sections.submit.progressbar.CustomUrlStep": "Custom url",
+
+  "submission.sections.submit.progressbar.describe.audiovideo" : "Item Description",
+
+  "submission.sections.submit.progressbar.describe.audiovideo-file" : "File Description",
 
   "submission.sections.submit.progressbar.describe.equipment": "Equipment basic information",
 
