@@ -21,9 +21,8 @@ import { filter, map, mergeMap, scan, switchMap, take } from 'rxjs/operators';
 import { Item } from '../../../../core/shared/item.model';
 import { Bitstream } from '../../../../core/shared/bitstream.model';
 import { BitstreamFormat } from '../../../../core/shared/bitstream-format.model';
-import { hasValue } from '../../../empty.util';
+import { hasValue, isEmpty } from '../../../empty.util';
 import { BitstreamDataService } from '../../../../core/data/bitstream-data.service';
-
 /**
  * Component representing the Grid component section.
  */
@@ -114,7 +113,9 @@ export class GridSectionComponent implements OnInit {
     this.maincontentSubtitle = this.maincontentSubtitle ?? this.translateService.instant('grid.component.subtitle');
     this.maincontentAbstract = this.maincontentAbstract ?? this.translateService.instant('grid.component.abstract');
 
-    this.maincontentLink = this.gridSection.mainContentLink ?? this.translateService.instant('grid.component.link');
+    if (isEmpty(this.maincontentLink)) {
+      this.maincontentLink = this.gridSection.mainContentLink ?? this.translateService.instant('grid.component.link');
+    }
   }
 
   private getSearchResults() {
