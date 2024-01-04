@@ -5,6 +5,10 @@
     $title-horizontal-margin: -35px; // allow to overlap arrow wrapper
     $title-line-clamp: 2;
 
+    h1.carousel-header {
+      font-size: 2rem;
+    }
+
     .image-column {
 
       // blurried backdrop
