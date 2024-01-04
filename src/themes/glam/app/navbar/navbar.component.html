@@ -1,31 +1,21 @@
-<nav class="navbar new-navbar navbar-expand-lg navbar-light">
-  <div class="container">
+<nav [ngClass]="{'open': !(menuCollapsed | async)}" [@slideMobileNav]="!(windowService.isXsOrSm() | async) ? 'default' : ((menuCollapsed | async) ? 'collapsed' : 'expanded')"
+  class="navbar navbar-expand-md navbar-light p-0 navbar-container" role="navigation" [attr.aria-label]="'nav.main.description' | translate">
+  <div class="navbar-inner-container" [class.container]="!(isXsOrSm$ | async)">
     <div class="top-bar mb-3">
       <a class="navbar-brand text-center" href="/home">
         <div class="logo-circle mb-2"></div>
       </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
       <div class="ml-auto right-container">
-
-        <ul class="navbar-nav ml-auto mb-auto mt-3">
-          <li class="nav-item" id="home-icon" *ngIf="mainSiteUrl">
-            <a class="nav-link" target="_blank" [href]="'https://' + mainSiteUrl" [ngbTooltip]="'nav.mainSiteName' | translate">
+        <ul class="navbar-nav ml-auto ml-auto mb-auto mt-3">
+          <div class="nav-item" id="home-icon" *ngIf="mainSiteUrl">
+            <a class="nav-link navbar-collapsed" target="_blank" [href]="'https://' + mainSiteUrl" [ngbTooltip]="'nav.mainSiteName' | translate">
               <i class="fas fa-home fa-lg fa-fw"></i>
             </a>
-          </li>
-          <li class="nav-item">
-            <ds-themed-lang-switch></ds-themed-lang-switch>
-          </li>
-          <li class="nav-item">
-            <ds-themed-auth-nav-menu></ds-themed-auth-nav-menu>
-          </li>
+          </div>
+          <ds-themed-lang-switch class="navbar-collapsed"></ds-themed-lang-switch>
+          <ds-themed-auth-nav-menu class="navbar-collapsed"></ds-themed-auth-nav-menu>
         </ul>
-
-        <ul class="navbar-nav mb-3">
+        <ul id="collapsingNav" class="navbar-nav mb-3">
           <li *ngIf="(isXsOrSm$ | async) && (isAuthenticated$ | async)" class="nav-item">
             <ds-user-menu [inExpandableNavbar]="true"></ds-user-menu>
           </li>
@@ -35,7 +25,7 @@
         </ul>
       </div>
     </div>
-    <div>
+    <div class="navbar-collapsed">
       <ds-themed-search-navbar></ds-themed-search-navbar>
     </div>
   </div>

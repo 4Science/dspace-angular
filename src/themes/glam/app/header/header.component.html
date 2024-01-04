@@ -1,3 +1,26 @@
 <header class="header">
+  <nav role="navigation" [attr.aria-label]="'nav.user.description' | translate" class="container navbar navbar-expand-md px-0">
+    <div class="d-flex flex-grow-1">
+      <a class="navbar-brand text-center" href="/home">
+        <div class="logo-circle mb-2"></div>
+      </a>
+    </div>
+    <div class="navbar-buttons d-flex flex-grow-1 ml-auto justify-content-end align-items-center gapx-1">
+      <div class="nav-item" id="home-icon" *ngIf="mainSiteUrl">
+        <a target="_blank" [href]="'https://' + mainSiteUrl" [ngbTooltip]="'nav.mainSiteName' | translate">
+          <i class="fas fa-home fa-lg fa-fw"></i>
+        </a>
+      </div>
+      <ds-themed-lang-switch></ds-themed-lang-switch>
+      <ds-themed-auth-nav-menu></ds-themed-auth-nav-menu>
+      <div class="pl-2">
+        <button class="navbar-toggler" type="button" (click)="toggleNavbar()"
+                aria-controls="collapsingNav"
+                aria-expanded="false" [attr.aria-label]="'nav.toggle' | translate">
+          <span class="navbar-toggler-icon fas fa-bars fa-fw" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
   <ds-themed-navbar></ds-themed-navbar>
 </header>
