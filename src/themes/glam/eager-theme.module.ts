@@ -27,12 +27,12 @@ import { MarkdownViewerModule } from 'src/app/shared/markdown-viewer/markdown-vi
 import { LangSwitchComponent } from './app/shared/lang-switch/lang-switch.component';
 import { AuthNavMenuComponent } from './app/shared/auth-nav-menu/auth-nav-menu.component';
 import { SearchNavbarComponent } from './app/search-navbar/search-navbar.component';
-import { CarouselComponent } from './app/carousel/carousel.component';
 import { CarouselModule } from '../../app/shared/carousel/carousel.module';
 import {
   CarouselSectionComponent
 } from './app/shared/explore/section-component/carousel-section/carousel-section.component';
 import { GridSectionComponent } from './app/shared/explore/section-component/grid-section/grid-section.component';
+import { CarouselComponent } from './app/shared/carousel/carousel.component';
 
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
