@@ -1290,6 +1290,12 @@
   // "alert.toggle.show": "Show more",
   "alert.toggle.show": "Mostra di più",
 
+  // "audiovideo.page.titleprefix" : "Audio/Video",
+  "audiovideo.page.titleprefix" : "Audio/Video",
+
+  // "audiovideo.listelement.badge" : "Audio/Video",
+  "audiovideo.listelement.badge" : "Audio/Video",
+
 
   // "auth.errors.invalid-user": "Invalid email address or password.",
   "auth.errors.invalid-user": "Indirizzo e-mail o password non validi.",
@@ -10258,6 +10264,12 @@
   // "submission.sections.submit.progressbar.CustomUrlStep": "Custom url",
   "submission.sections.submit.progressbar.CustomUrlStep": "URL personalizzato",
 
+  // "submission.sections.submit.progressbar.describe.audiovideo" : "Item Description",
+  "submission.sections.submit.progressbar.describe.audiovideo" : "Informazioni sull'audiovideo",
+
+  // "submission.sections.submit.progressbar.describe.audiovideo-file" : "File Description",
+  "submission.sections.submit.progressbar.describe.audiovideo-file" : "Informazioni sul file dell'audiovideo",
+
   // "submission.sections.submit.progressbar.describe.equipment": "Equipment basic information",
   "submission.sections.submit.progressbar.describe.equipment": "Informazioni di base sull'attrezzatura",
 
@@ -12053,12 +12065,17 @@
   //"layout.tab.header.Aggregation.children": "Aggregation Children",
   "layout.tab.header.Aggregation.children": "Livello di descrizione inferiore",
 
+  //"layout.tab.header.AudioVideo.details": "Details",
+  "layout.tab.header.AudioVideo.details": "Informazioni di Dettaglio",
+
   //"layout.tab.header.StaticPage.details": "Details",
   "layout.tab.header.StaticPage.details": "Informazioni di Dettaglio",
 
   //"layout.tab.header.JournalFile.details": "Details",
   "layout.tab.header.JournalFile.details": "Informazioni di Dettaglio",
 
+  //"layout.box.header.AudioVideo.details": "Details",
+  "layout.box.header.AudioVideo.details": "Informazioni di Dettaglio",
 
   //"layout.box.header.Person.profile": "Profile",
   "layout.box.header.Person.profile": "Profilo",
@@ -12191,6 +12208,9 @@
   //"layout.box.header.ArchivalMaterial.details": "Description",
   "layout.box.header.ArchivalMaterial.details": "Descrizione",
 
+  // "layout.box.header.ArchivalMaterial.relationperson": "Person",
+  "layout.box.header.ArchivalMaterial.relationperson": "Persona",
+
   //"layout.box.header.Aggregation.aggregationdescription": "Description",
   "layout.box.header.Aggregation.aggregationdescription": "Descrizione",
 
@@ -12210,7 +12230,104 @@
   //"layout.box.header.JournalFile.details": "Description",
   "layout.box.header.JournalFile.details": "Descrizione",
 
+  //"layout.field.label.AudioVideo.dc.contributor.author": "Author(s)",
+  "layout.field.label.AudioVideo.dc.contributor.author": "Autore",
 
+  //"layout.field.label.AudioVideo.dc.contributor.contributor": "Agent(s)",
+  "layout.field.label.AudioVideo.dc.contributor.contributor": "Agente",
+
+  //"layout.field.label.AudioVideo.dc.relation.fonds": "Fund",
+  "layout.field.label.AudioVideo.dc.relation.fonds": "Fondo",
+
+  //"layout.field.label.AudioVideo.dc.relation.event": "Related Event",
+  "layout.field.label.AudioVideo.dc.relation.event": "Evento",
+
+  //"layout.field.label.AudioVideo.dc.coverage.culture": "Cultural Area",
+  "layout.field.label.AudioVideo.dc.coverage.culture": "Area Culturale",
+
+  //"layout.field.label.AudioVideo.dc.relation.place": "Place Of Detection",
+  "layout.field.label.AudioVideo.dc.relation.place": "Luogo di rilevamento",
+
+  //"layout.field.label.AudioVideo.dc.coverage.spatialpvcs": "Country",
+  "layout.field.label.AudioVideo.dc.coverage.spatialpvcs": "Nazione",
+
+  //"layout.field.label.AudioVideo.dc.coverage.spatialpvcc": "City",
+  "layout.field.label.AudioVideo.dc.coverage.spatialpvcc": "Regione",
+
+  //"layout.field.label.AudioVideo.dc.coverage.spatialpvcn": "Province",
+  "layout.field.label.AudioVideo.dc.coverage.spatialpvcn": "Provincia",
+
+  //"layout.field.label.AudioVideo.dc.date.issued": "Date Issued",
+  "layout.field.label.AudioVideo.dc.date.issued": "Data",
+
+  //"layout.field.label.AudioVideo.dc.language.iso": "Language",
+  "layout.field.label.AudioVideo.dc.language.iso": "Lingua",
+
+  //"layout.field.label.AudioVideo.dc.subject.keywords": "Keywords",
+  "layout.field.label.AudioVideo.dc.subject.keywords": "Parole chiave",
+
+  //"layout.field.label.AudioVideo.dc.relation.path": "Path",
+  "layout.field.label.AudioVideo.dc.relation.path": "Percorso",
+
+  //"layout.field.label.AudioVideo.dc.relation.project": "Project",
+  "layout.field.label.AudioVideo.dc.relation.project": "Progetto",
+
+  //"layout.field.label.AudioVideo.dc.relation.url": "URL",
+  "layout.field.label.AudioVideo.dc.relation.url": "URL",
+
+  //"layout.field.label.AudioVideo.dc.relation.audiovideo": "Related Documents",
+  "layout.field.label.AudioVideo.dc.relation.audiovideo": "Documento",
+
+  //"layout.field.label.AudioVideo.dc.relation.aggregation": "Aggregation",
+  "layout.field.label.AudioVideo.dc.relation.aggregation": "Aggregazione",
+
+  //"layout.field.label.AudioVideo.dc.rights.license": "License",
+  "layout.field.label.AudioVideo.dc.rights.license": "Licenza",
+
+  //"layout.field.label.AudioVideo.dc.type": "File Type",
+  "layout.field.label.AudioVideo.dc.type": "Tipologia",
+
+  //"layout.field.label.AudioVideo.dc.type.physical": "Physical Type",
+  "layout.field.label.AudioVideo.dc.type.physical": "Tipologia fisica",
+
+  //"layout.field.label.AudioVideo.dc.format.extent": "Event Time",
+  "layout.field.label.AudioVideo.dc.format.extent": "Durata",
+
+  //"layout.field.label.AudioVideo.dc.format.mimetype": "Audio/Video File Encoding",
+  "layout.field.label.AudioVideo.dc.format.mimetype": "Audio/Video File Encoding",
+
+  //"layout.field.label.AudioVideo.dc.description.channel": "Number Of Channels",
+  "layout.field.label.AudioVideo.dc.description.channel": "Numero di canali",
+
+  //"layout.field.label.AudioVideo.dc.format.samplerate": "Sample Rate",
+  "layout.field.label.AudioVideo.dc.format.samplerate": "Sample Rate",
+
+  //"layout.field.label.AudioVideo.dc.format.bitsample": "Bits Per Sample",
+  "layout.field.label.AudioVideo.dc.format.bitsample": "Bits Per Sample",
+
+  //"layout.field.label.AudioVideo.dc.description.tools": "Equipment",
+  "layout.field.label.AudioVideo.dc.description.tools": "Attrezzatura",
+
+  //"layout.field.label.AudioVideo.dc.format.medium": "Physical Description Of The Medium",
+  "layout.field.label.AudioVideo.dc.format.medium": "Descrizione fisica",
+
+  //"layout.field.label.AudioVideo.dc.description.preservationstate": "Preservation State",
+  "layout.field.label.AudioVideo.dc.description.preservationstate": "Stato di conservazione",
+
+  //"layout.field.label.AudioVideo.BITSTREAM": "File(s)",
+  "layout.field.label.AudioVideo.BITSTREAM": "File",
+
+  //"layout.field.label.AudioVideo.dc.contributor.author": "Author",
+  "layout.field.label.AudioVideo.dc.contributor.author": "Autore",
+
+  //"layout.field.label.AudioVideo.dc.contributor.authorrole": "Role",
+  "layout.field.label.AudioVideo.dc.contributor.authorrole": "Ruolo",
+
+  //"layout.field.label.AudioVideo.dc.contributor.contributor": "Agent",
+  "layout.field.label.AudioVideo.dc.contributor.contributor": "Agente",
+
+  //"layout.field.label.AudioVideo.dc.contributor.contributorrole": "Role",
+  "layout.field.label.AudioVideo.dc.contributor.contributorrole": "Ruolo",
 
   //"layout.field.label.OrgUnit.organization.parentOrganization": "Parent Organisation",
   // TODO Source message changed - Revise the translation
@@ -12656,6 +12773,9 @@
 
   //"layout.field.label.JournalFonds.dc.relation.otherlinks": "Other Links",
   "layout.field.label.JournalFonds.dc.relation.otherlinks": "Collegamenti Esterni",
+
+  //"layout.field.label.JournalFonds.dc.relation.path": "Path",
+  "layout.field.label.JournalFonds.dc.relation.path": "Percorso",
 
   //"layout.field.label.JournalFonds.glamjournalfonds.parent": "Journal Fonds Parent",
   "layout.field.label.JournalFonds.glamjournalfonds.parent": "Testata Radice",

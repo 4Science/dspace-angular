@@ -23,7 +23,7 @@
         <div class="col-lg-4 caption-column bg-primary" [style.height]="carouselHeight">
           <div class="d-flex flex-row align-items-stretch">
             <!-- left column -->
-            <div class="arrow-wrapper" (click)="carousel.prev()">
+            <div *ngIf="items.length > 1" class="arrow-wrapper" (click)="carousel.prev()">
               <i class="fa fa-arrow-left text-white"></i>
             </div>
             <!-- central column -->
@@ -44,13 +44,13 @@
                   {{ 'explore.carousel.view-more' | translate }}
                 </a>
               </div>
-              <button type="button" class="btn btn-sm toggle-paused text-white" (click)="togglePaused()">
+              <button *ngIf="items.length > 1" type="button" class="btn btn-sm toggle-paused text-white" (click)="togglePaused()">
                 <i class="fas fa-play" *ngIf="paused"></i>
                 <i class="fas fa-pause" *ngIf="!paused"></i>
               </button>
             </div>
             <!-- right column -->
-            <div class="arrow-wrapper" (click)="carousel.next()">
+            <div *ngIf="items.length > 1" class="arrow-wrapper" (click)="carousel.next()">
               <i class="fa fa-arrow-right text-white"></i>
             </div>
           </div>

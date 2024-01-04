@@ -8,13 +8,19 @@
   background-repeat: no-repeat;
 }
 
-.new-navbar {
-  .container {
-    display: block;
+.navbar-inner-container {
+  display: block;
 
-    .top-bar {
-      display: flex;
-      width: 100%;
+  .top-bar {
+    display: flex;
+    width: 100%;
+
+    ul.navbar-nav {
+      flex-wrap: wrap
+    }
+    
+    .nav-item {
+      text-wrap: nowrap;
     }
   }
 
@@ -28,4 +34,59 @@
 .right-container {
   display: flex;
   flex-direction: column;
+}
+
+nav.navbar {
+  align-items: baseline;
+
+  .navbar-inner-container {
+    border-top: 1px var(--ds-header-navbar-border-top-color) solid;
+  }
+}
+
+.navbar-nav {
+  background-color: var(--ds-navbar-bg);
+}
+
+/** Mobile menu styling **/
+@media screen and (max-width: map-get($grid-breakpoints, md)-0.02) {
+  .navbar {
+    width: 100vw;
+    background-color: var(--bs-white);
+    position: absolute;
+    overflow: hidden;
+    height: 0;
+    z-index: var(--ds-nav-z-index);
+    &.open {
+      height: 100vh; //doesn't matter because wrapper is sticky
+      border-bottom: 5px var(--ds-header-navbar-border-bottom-color) solid; // open navbar covers header-navbar-wrapper border
+    }
+  }
+}
+
+@media screen and (min-width: map-get($grid-breakpoints, md)) {
+  .reset-padding-md {
+    margin-left: calc(var(--bs-spacer) / -2);
+    margin-right: calc(var(--bs-spacer) / -2);
+  }
+}
+
+/* TODO remove when https://github.com/twbs/bootstrap/issues/24726 is fixed */
+.navbar-expand-md.navbar-container {
+  @media screen and (max-width: map-get($grid-breakpoints, md)-0.02) {
+    > .navbar-inner-container {
+      padding: 0 var(--bs-spacer);
+      a.navbar-brand {
+        display: none;
+      }
+      .navbar-collapsed {
+        display: none;
+      }
+    }
+    padding: 0;
+  }
+}
+
+a.navbar-brand img {
+  max-height: var(--ds-header-logo-height);
 }
