@@ -5,7 +5,7 @@
 
     <div *ngIf="!hasSiteFooterSections" class="container">
       <div class="row">
-        <div class="col-12 col-lg-6 col-md-6 mb-4 mb-md-0">
+        <div class="col-12 col-md-6 mb-4 mb-md-0">
           <h6 class="title text-center mb-4">{{'footer.involved-institution' | translate}}</h6>
           <div class="institution-img text-center">
             <ng-container *ngFor="let involvedInstitution of involvedInstitutions">
@@ -15,37 +15,37 @@
             </ng-container>
           </div>
         </div>
-        <div class="col-12 col-lg-3 col-md-3 mb-4 mb-md-0 d-flex justify-content-center">
-          <div class="container d-flex flex-column text-center text-md-left">
+        <div class="col-12 col-md-3 mb-4 mb-md-0 d-flex justify-content-center">
+          <div class="d-flex flex-column align-items-center align-items-md-start">
             <h6 class="title mb-3">{{'footer.information' | translate}}</h6>
-            <ul class="navbar-nav mb-3">
-              <li class="nav-item">
-                <a class="nav-link" href="">{{'footer.general-information' | translate}}</a>
+            <ul class="list-unstyled mb-3">
+              <li>
+                <a class="footer-link" href="">{{'footer.general-information' | translate}}</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="">{{'footer.offer-service' | translate}}</a>
+              <li>
+                <a class="footer-link" href="">{{'footer.offer-service' | translate}}</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="">{{'footer.history-digital' | translate}}</a>
+              <li>
+                <a class="footer-link" href="">{{'footer.history-digital' | translate}}</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="">{{'footer.org-structure' | translate}}</a>
+              <li>
+                <a class="footer-link" href="">{{'footer.org-structure' | translate}}</a>
               </li>
             </ul>
           </div>
         </div>
-        <div class="col-12 col-lg-3 col-md-3 mb-4 mb-md-0 d-flex justify-content-center">
-          <div class="container d-flex flex-column text-center text-md-left">
+        <div class="col-12 col-md-3 mb-4 mb-md-0 d-flex justify-content-center">
+          <div class="d-flex flex-column align-items-center align-items-md-start">
             <h6 class="title mb-3">{{'layout.i18n.link.default' | translate}}</h6>
-            <ul class="navbar-nav mb-3">
-              <li class="nav-item">
-                <a class="nav-link" [href]="'footer.contact.href' | translate" target="_blank">{{'footer.contact' | translate}}</a>
+            <ul class="list-unstyled mb-3">
+              <li>
+                <a class="footer-link" [href]="'footer.contact.href' | translate" target="_blank">{{'footer.contact' | translate}}</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="info/end-user-agreement">{{'footer.terms' | translate}}</a>
+              <li>
+                <a class="footer-link" routerLink="info/end-user-agreement">{{'footer.terms' | translate}}</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="info/privacy">{{'footer.link.privacy-policy' | translate}}</a>
+              <li>
+                <a class="footer-link" routerLink="info/privacy">{{'footer.link.privacy-policy' | translate}}</a>
               </li>
             </ul>
           </div>
