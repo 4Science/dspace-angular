@@ -4,16 +4,17 @@
         border-top: solid 2px #cddce2;
         border-bottom: solid 2px #cddce2;
 
-        .nav-item {
-            a {
-                padding-left: 0;
-                padding-right: 0;
-                font-size: 14px;
-                color: #676c71;
+        .footer-link {
+            display: block;
+            padding: 0.25rem 0.5rem;
+            padding-left: 0;
+            padding-right: 0;
+            font-size: 14px;
+            color: #676c71;
 
-                &:hover {
-                    color: #000;
-                }
+            &:hover {
+                color: #000;
+                text-decoration: none;
             }
         }
 
