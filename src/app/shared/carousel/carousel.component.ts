@@ -158,7 +158,29 @@ export class CarouselComponent implements OnInit {
   }
 
   isLinkInternal(link: string) {
-    return link.startsWith('/');
+    const currentURL = window.location.origin;
+
+    if (link.startsWith('/')) {
+      return true;
+    }
+
+    if (link.startsWith(currentURL)) {
+      link = link.substring(currentURL.length);
+      return link.startsWith('/');
+    }
+
+    return false;
+  }
+
+  transformInternalLink(link: string): string {
+    const currentURL = window.location.origin;
+
+    if (link.startsWith(currentURL)) {
+      link = link.substring(currentURL.length);
+      return link.startsWith('/') ? link : `/${link}`;
+    }
+
+    return link;
   }
 
   /**
