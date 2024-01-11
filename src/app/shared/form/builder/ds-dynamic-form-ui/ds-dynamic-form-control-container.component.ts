@@ -16,7 +16,7 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormGroup } from '@angular/forms';
 
 import {
   DYNAMIC_FORM_CONTROL_TYPE_ARRAY,
@@ -122,6 +122,7 @@ import { FormFieldMetadataValueObject } from '../models/form-field-metadata-valu
 import { APP_CONFIG, AppConfig } from '../../../../../config/app-config.interface';
 import { itemLinksToFollow } from '../../../utils/relation-query.utils';
 import { DynamicConcatModel } from './models/ds-dynamic-concat.model';
+import { Metadata } from '../../../../core/shared/metadata.utils';
 import { DsDynamicMarkdownComponent } from './models/markdown/dynamic-markdown.component';
 import { DYNAMIC_FORM_CONTROL_TYPE_MARKDOWN } from './models/markdown/dynamic-markdown.model';
 
@@ -205,12 +206,12 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
   @Input('templates') inputTemplateList: QueryList<DynamicTemplateDirective>;
   @Input() hasMetadataModel: any;
   @Input() formId: string;
-  @Input() formGroup: FormGroup;
+  @Input() formGroup: UntypedFormGroup;
   @Input() formModel: DynamicFormControlModel[];
   @Input() asBootstrapFormGroup = false;
   @Input() bindId = true;
   @Input() context: any | null = null;
-  @Input() group: FormGroup;
+  @Input() group: UntypedFormGroup;
   @Input() hostClass: string[];
   @Input() hasErrorMessaging = false;
   @Input() layout = null as DynamicFormLayout;
@@ -268,7 +269,7 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
     private submissionObjectService: SubmissionObjectDataService,
     private ref: ChangeDetectorRef,
     private formService: FormService,
-    private formBuilderService: FormBuilderService,
+    public formBuilderService: FormBuilderService,
     private submissionService: SubmissionService,
     @Inject(APP_CONFIG) protected appConfig: AppConfig,
   ) {
@@ -352,9 +353,15 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
         );
       }
     }
-    if (this.model && this.model.value && this.model.value.securityLevel !== undefined) {
+
+    if (isNotEmpty(this.model?.value?.securityLevel)) {
       this.securityLevel = this.model.value.securityLevel;
+    } else if (isNotEmpty(this.model?.metadataValue?.securityLevel)) {
+      this.securityLevel = this.model.metadataValue.securityLevel;
+    } else {
+      this.securityLevel = this.model.securityLevel;
     }
+
  }
 
   get isCheckbox(): boolean {
@@ -484,7 +491,7 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
   onRemove(): void {
     const arrayContext: DynamicFormArrayModel = (this.context as DynamicFormArrayGroupModel).context;
     const path = this.formBuilderService.getPath(arrayContext);
-    const formArrayControl = this.group.root.get(path) as FormArray;
+    const formArrayControl = this.group.root.get(path) as UntypedFormArray;
     this.formBuilderService.removeFormArrayGroup(this.context.index, formArrayControl, arrayContext);
     if (this.model.parent.context.groups.length === 0) {
       this.formBuilderService.addFormArrayGroup(formArrayControl, arrayContext);
@@ -502,6 +509,14 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
 
   get hasHint(): boolean {
     return isNotEmpty(this.model.hint) && this.model.hint !== '&nbsp;';
+  }
+
+  get hasValue(): boolean {
+    if (hasValue(this.model.metadataValue)) {
+      return Metadata.hasValue(this.model?.metadataValue);
+    } else {
+      return Metadata.hasValue(this.model?.value);
+    }
   }
 
   /**

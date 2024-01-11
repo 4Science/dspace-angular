@@ -1,5 +1,5 @@
-import { FormGroup } from '@angular/forms';
 import { Component, EventEmitter, HostListener, Inject, Input, OnInit, Output, Renderer2 } from '@angular/core';
+import { UntypedFormGroup } from '@angular/forms';
 import { DynamicDsDatePickerModel } from './date-picker.model';
 import { hasValue } from '../../../../../empty.util';
 import {
@@ -13,7 +13,6 @@ import isEqual from 'lodash/isEqual';
 
 export type DatePickerFieldType = '_year' | '_month' | '_day';
 
-
 export const DS_DATE_PICKER_SEPARATOR = '-';
 
 @Component({
@@ -24,7 +23,7 @@ export const DS_DATE_PICKER_SEPARATOR = '-';
 
 export class DsDatePickerComponent extends DynamicFormControlComponent implements OnInit {
   @Input() bindId = true;
-  @Input() group: FormGroup;
+  @Input() group: UntypedFormGroup;
   @Input() model: DynamicDsDatePickerModel;
   @Input() legend: string;
 
@@ -89,8 +88,9 @@ export class DsDatePickerComponent extends DynamicFormControlComponent implement
         this.day = this.initialDay;
       }
     }
+
     this.maxYear = now.getUTCFullYear() + 100;
-  }
+    }
 
   onBlur(event) {
     this.blur.emit();

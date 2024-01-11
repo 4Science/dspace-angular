@@ -33,8 +33,11 @@ import {
   ThemedEditItemSelectorComponent
 } from './shared/dso-selector/modal-wrappers/edit-item-selector/themed-edit-item-selector.component';
 import {
-  ExportMetadataSelectorComponent
-} from './shared/dso-selector/modal-wrappers/export-metadata-selector/export-metadata-selector.component';
+  ExportMetadataCsvSelectorComponent
+} from './shared/dso-selector/modal-wrappers/export-metadata-csv-selector/export-metadata-csv-selector.component';
+import {
+  ExportMetadataXlsSelectorComponent
+} from './shared/dso-selector/modal-wrappers/export-metadata-xls-selector/export-metadata-xls-selector.component';
 import { AuthorizationDataService } from './core/data/feature-authorization/authorization-data.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
@@ -535,15 +538,29 @@ export class MenuResolver implements Resolve<boolean> {
         shouldPersistOnRouteChange: true
       });
       this.menuService.addSection(MenuID.ADMIN, {
-        id: 'export_metadata',
+        id: 'export_metadata_csv',
         parentID: 'export',
         active: true,
         visible: true,
         model: {
           type: MenuItemType.ONCLICK,
-          text: 'menu.section.export_metadata',
+          text: 'menu.section.export_metadata_csv',
           function: () => {
-            this.modalService.open(ExportMetadataSelectorComponent);
+            this.modalService.open(ExportMetadataCsvSelectorComponent);
+          }
+        } as OnClickMenuItemModel,
+        shouldPersistOnRouteChange: true
+      });
+      this.menuService.addSection(MenuID.ADMIN, {
+        id: 'export_metadata_xls',
+        parentID: 'export',
+        active: true,
+        visible: true,
+        model: {
+          type: MenuItemType.ONCLICK,
+          text: 'menu.section.export_metadata_xls',
+          function: () => {
+            this.modalService.open(ExportMetadataXlsSelectorComponent);
           }
         } as OnClickMenuItemModel,
         shouldPersistOnRouteChange: true
@@ -852,6 +869,17 @@ export class MenuResolver implements Resolve<boolean> {
             type: MenuItemType.LINK,
             text: 'menu.section.access_control_groups',
             link: '/access-control/groups'
+          } as LinkMenuItemModel,
+        },
+        {
+          id: 'access_control_bulk',
+          parentID: 'access_control',
+          active: false,
+          visible: isSiteAdmin,
+          model: {
+            type: MenuItemType.LINK,
+            text: 'menu.section.access_control_bulk',
+            link: '/access-control/bulk-access'
           } as LinkMenuItemModel,
         },
         // TODO: enable this menu item once the feature has been implemented

@@ -31,8 +31,7 @@ import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.reso
         resolve: {
           dso: ItemPageResolver,
           breadcrumb: ItemBreadcrumbResolver,
-          menu: DSOEditMenuResolver,
-          tabs: CrisItemPageTabResolver
+          menu: DSOEditMenuResolver
         },
         runGuardsAndResolvers: 'always',
         children: [
@@ -40,6 +39,9 @@ import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.reso
             path: '',
             component: ThemedItemPageComponent,
             pathMatch: 'full',
+            resolve: {
+              tabs: CrisItemPageTabResolver
+            }
           },
           {
             path: 'full',
@@ -81,6 +83,13 @@ import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.reso
               breadcrumbKey: 'submission.unpaywall.versions',
               showBreadcrumbs: true,
             }
+          },
+          {
+            path: ':tab',
+            component: ThemedItemPageComponent,
+            resolve: {
+              tabs: CrisItemPageTabResolver
+            },
           }
         ],
         data: {

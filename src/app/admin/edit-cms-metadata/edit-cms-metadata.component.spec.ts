@@ -32,7 +32,9 @@ describe('EditCmsMetadataComponent', () => {
     ['nl', ''],
     ['pt', ''],
     ['fr', ''],
-    ['lv', '']
+    ['lv', ''],
+    ['bn', ''],
+    ['el', ''],
   ]);
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -102,7 +104,7 @@ describe('EditCmsMetadataComponent', () => {
     });
 
     it('should render ds-markdown-editor of the language', () => {
-      const languagesLength = environment.languages.length;
+      const languagesLength = environment.languages.filter((l) => l.active).length;
       const dsMarkdownViewer = fixture.debugElement.queryAll(By.css('[data-test="ds-markdown-viewer"]'));
       expect(dsMarkdownViewer).toHaveSize(languagesLength);
     });

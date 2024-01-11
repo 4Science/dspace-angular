@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
   mainSiteUrl = environment.mainSiteUrl;
 
   constructor(
-    private menuService: MenuService,
+    protected menuService: MenuService,
     protected windowService: HostWindowService,
   ) {
   }

@@ -1,4 +1,3 @@
-import { LayoutModeEnum } from '../../../../core/layout/models/section.model';
 import { CommonModule } from '@angular/common';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
@@ -15,6 +14,7 @@ import { TopSectionComponent } from './top-section.component';
 import { SearchResult } from '../../../search/models/search-result.model';
 import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
 import { createSuccessfulRemoteDataObject$ } from '../../../remote-data.utils';
+import { LayoutModeEnum } from '../../../../core/layout/models/section.model';
 
 describe('TopSectionComponent', () => {
   let component: TopSectionComponent;
@@ -84,6 +84,7 @@ describe('TopSectionComponent', () => {
       sortField: 'dc.date.accessioned',
       numberOfItems: 5,
       titleKey: undefined,
+      showThumbnails: false,
       showAsCard: true,
       showLayoutSwitch: true,
       defaultLayoutMode: LayoutModeEnum.LIST,
@@ -127,6 +128,7 @@ describe('TopSectionComponent', () => {
         sortField: 'dc.date.foo',
         numberOfItems: 5,
         titleKey: 'lastPublications',
+        showThumbnails: false,
         showAsCard: true,
         showLayoutSwitch: true,
         defaultLayoutMode: LayoutModeEnum.LIST,

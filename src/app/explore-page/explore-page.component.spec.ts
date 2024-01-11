@@ -36,6 +36,7 @@ describe('ExploreComponent', () => {
     sortField: 'dc.date.accessioned',
     numberOfItems: 5,
     titleKey: 'lastPublications',
+    showThumbnails: false,
     showAsCard: true,
     showLayoutSwitch: true,
     defaultLayoutMode: LayoutModeEnum.LIST,

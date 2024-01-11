@@ -63,6 +63,7 @@ export const environment: BuildConfig = {
     // In-memory cache of server-side rendered pages. Disabled in test environment (max=0)
     serverSide: {
       debug: false,
+      headers: ['Link'],
       botCache: {
         max: 0,
         timeToLive: 24 * 60 * 60 * 1000, // 1 day
@@ -232,6 +233,10 @@ export const environment: BuildConfig = {
     code: 'el',
     label: 'Ελληνικά',
     active: true,
+  }, {
+    code: 'disabled',
+    label: 'Disabled',
+    active: false,
   }],
 
   // Browse-By Pages
@@ -325,6 +330,10 @@ export const environment: BuildConfig = {
   markdown: {
     enabled: false,
     mathjax: false,
+  },
+  comcolSelectionSort: {
+    sortField:'dc.title',
+    sortDirection:'ASC',
   },
 
   vocabularies: [

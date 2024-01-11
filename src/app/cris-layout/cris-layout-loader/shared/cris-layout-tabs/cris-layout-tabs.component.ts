@@ -108,11 +108,14 @@ export abstract class CrisLayoutTabsComponent {
   abstract emitSelected(selectedTab): void;
 
   setActiveTab(tab) {
+    const itemPageRoute = getItemPageRoute(this.item);
     this.activeTab$.next(tab);
     this.emitSelected(tab);
-    if (isNotNull(this.route.snapshot.paramMap.get('tab'))) {
+    if (this.tabs[0].shortname === tab.shortname) {
+      this.location.replaceState(itemPageRoute);
+    } else {
       const viewerPath = this.location.path().split(this.route.snapshot.paramMap.get('tab'))[1];
-      this.location.replaceState(getItemPageRoute(this.item) + '/' + tab.shortname + (viewerPath  || ''));
+      this.location.replaceState(itemPageRoute + '/' + tab.shortname + (viewerPath  || ''));
     }
   }
 
