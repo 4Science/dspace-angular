@@ -14,6 +14,7 @@
           </div>
           <ds-themed-lang-switch class="navbar-collapsed"></ds-themed-lang-switch>
           <ds-themed-auth-nav-menu class="navbar-collapsed"></ds-themed-auth-nav-menu>
+          <ds-impersonate-navbar class="navbar-collapsed"></ds-impersonate-navbar>
         </ul>
         <ul id="collapsingNav" class="navbar-nav mb-3">
           <li *ngIf="(isXsOrSm$ | async) && (isAuthenticated$ | async)" class="nav-item">
