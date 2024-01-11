@@ -11,9 +11,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { SearchService } from '../../../../core/shared/search/search.service';
 import { TranslateLoaderMock } from '../../../mocks/translate-loader.mock';
 import { CarouselSectionComponent } from './carousel-section.component';
-import { SearchResult } from '../../../search/models/search-result.model';
-import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
-import { createSuccessfulRemoteDataObject, createSuccessfulRemoteDataObject$ } from '../../../remote-data.utils';
+import { createSuccessfulRemoteDataObject$ } from '../../../remote-data.utils';
 import { ObjectCacheService } from '../../../../core/cache/object-cache.service';
 import { UUIDService } from '../../../../core/shared/uuid.service';
 import { RemoteDataBuildService } from '../../../../core/cache/builders/remote-data-build.service';
@@ -25,6 +23,7 @@ import { HttpClient } from '@angular/common/http';
 import { DSOChangeAnalyzer } from '../../../../core/data/dso-change-analyzer.service';
 import { DefaultChangeAnalyzer } from '../../../../core/data/default-change-analyzer.service';
 import { cold } from 'jasmine-marbles';
+import { ItemSearchResult } from '../../../object-collection/shared/item-search-result.model';
 
 describe('CarouselSectionComponent', () => {
     let component: CarouselSectionComponent;
@@ -33,26 +32,22 @@ describe('CarouselSectionComponent', () => {
     let searchServiceStub: any;
     let notificationService: NotificationsServiceStub;
 
-    const searchResult = Object.assign(new SearchResult(), {
-        indexableObject: Object.assign(new DSpaceObject(), {
-            id: 'd317835d-7b06-4219-91e2-1191900cb897',
-            uuid: 'd317835d-7b06-4219-91e2-1191900cb897',
-            name: 'My first person',
-            metadata: {
-                'dc.title': [
-                    { value: 'Test' }
-                ],
-                'dc.description.abstract': [
-                    { value: 'Lorem Ipsum' }
-                ]
-            },
-            _links: {
-              content: { href: 'file-selflink' }
-            }
-        })
+    const searchResult = Object.assign(new ItemSearchResult(), {
+        id: 'd317835d-7b06-4219-91e2-1191900cb897',
+        uuid: 'd317835d-7b06-4219-91e2-1191900cb897',
+        name: 'My first person',
+        metadata: {
+            'dc.title': [
+                { value: 'Test' }
+            ],
+            'dc.description.abstract': [
+                { value: 'Lorem Ipsum' }
+            ]
+        },
+        _links: {
+            content: { href: 'file-selflink' }
+        }
     });
-
-    const searchResultRD = createSuccessfulRemoteDataObject({ page: [searchResult] });
 
     beforeEach(waitForAsync(() => {
         searchServiceStub = jasmine.createSpyObj('SearchService', {
@@ -124,7 +119,7 @@ describe('CarouselSectionComponent', () => {
     }));
 
     it('should init search results data properly', (done) => {
-        const expected = cold('(a|)', { a: searchResultRD });
+        const expected = cold('(a|)', { a: [searchResult] });
         expect(component.searchResults$).toBeObservable(expected);
         done();
     });

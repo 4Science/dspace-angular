@@ -2492,6 +2492,12 @@
 
   "form.other-information.not-available": "Not available",
 
+  "form.other-information.ror_orgunit_id": "ROR ID",
+
+  "form.other-information.ror_orgunit_type": "ROR type",
+
+  "form.other-information.ror_orgunit_acronym": "ROR acronym",
+
   "form.remove": "Remove",
 
   "form.save": "Save",
@@ -5835,6 +5841,8 @@
 
   "submission.import-external.source.rorOrgUnits": "ROR",
 
+  "submission.import-external.source.ror": "ROR",
+
   "submission.import-external.preview.title.Equipment": "Equipment Preview",
 
   "submission.import-external.preview.title.Event": "Event Preview",
@@ -6283,11 +6291,11 @@
 
   "submission.sections.identifiers.otherIdentifiers_label": "Other identifiers: ",
 
-  "submission.sections.submit.progressbar.accessCondition": "Item access conditions",
+  "submission.sections.submit.progressbar.itemAccessConditions": "Item access conditions",
 
   "submission.sections.submit.progressbar.CClicense": "Creative commons license",
 
-  "submission.sections.submit.progressbar.CustomUrlStep": "Custom url",
+  "submission.sections.submit.progressbar.custom-url": "Custom url",
 
   "submission.sections.submit.progressbar.describe.equipment": "Equipment basic information",
 
@@ -6347,7 +6355,7 @@
 
   "submission.sections.submit.progressbar.sherpaPolicies": "Publisher open access policy information",
 
-  "submission.sections.submit.progressbar.correction-step": "Corrections",
+  "submission.sections.submit.progressbar.correction": "Corrections",
 
 
 
