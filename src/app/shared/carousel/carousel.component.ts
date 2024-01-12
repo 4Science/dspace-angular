@@ -58,6 +58,11 @@ export class CarouselComponent implements OnInit {
   description: string;
 
   /**
+   * Current url
+   */
+  currentURL: string;
+
+  /**
    * Auto slider paused
    */
   paused = false;
@@ -92,6 +97,7 @@ export class CarouselComponent implements OnInit {
     this.link = this.carouselOptions.link;
     this.description = this.carouselOptions.description;
     this.bundle = this.carouselOptions.bundle ?? 'ORIGINAL';
+    this.currentURL = this._window.nativeWindow.location.origin;
 
     this.findAllBitstreamImages().subscribe((res) => {
       this.itemToImageHrefMap$.next(res);
@@ -158,29 +164,16 @@ export class CarouselComponent implements OnInit {
   }
 
   isLinkInternal(link: string) {
-    const currentURL = window.location.origin;
-
-    if (link.startsWith('/')) {
-      return true;
-    }
-
-    if (link.startsWith(currentURL)) {
-      link = link.substring(currentURL.length);
-      return link.startsWith('/');
-    }
-
-    return false;
+    return link.startsWith('/') || link.startsWith(this.currentURL);
   }
 
-  transformInternalLink(link: string): string {
-    const currentURL = window.location.origin;
-
-    if (link.startsWith(currentURL)) {
-      link = link.substring(currentURL.length);
-      return link.startsWith('/') ? link : `/${link}`;
+  transformInternalLink(link: string) {
+    if (link.startsWith(this.currentURL)) {
+      const currentSegments = link.substring(this.currentURL.length);
+      return currentSegments.startsWith('/') ? currentSegments : `/${currentSegments}`;
+    } else {
+      return link;
     }
-
-    return link;
   }
 
   /**
