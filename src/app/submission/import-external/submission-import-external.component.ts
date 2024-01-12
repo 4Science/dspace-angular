@@ -117,6 +117,7 @@ export class SubmissionImportExternalComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.listId = 'list-submission-external-sources';
     this.context = Context.EntitySearchModalWithNameVariants;
+    this.searchConfigService.setPaginationId(this.initialPagination.id);
     this.repeatable = false;
     this.routeData = {entity: '', sourceId: '', query: ''};
     this.importConfig = {
