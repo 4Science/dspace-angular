@@ -45,6 +45,8 @@
     </div>
     <div class="row">
       <div class="col px-2">
+        <h3 *ngIf="topSection.titleKey" class="mx-2">{{ 'explore.index.' + topSection.titleKey | translate }}</h3>
+        <h3 *ngIf="!topSection.titleKey" class="mx-2">{{ 'explore.index.' + topSection.sortField | translate }}</h3>
         <ds-themed-browse-most-elements [context]="context"
                                         [paginatedSearchOptions]="paginatedSearchOptions"
                                         [showThumbnails]="showThumbnails"
