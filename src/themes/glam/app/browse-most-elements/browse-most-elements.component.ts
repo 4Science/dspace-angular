@@ -16,7 +16,7 @@ import { Item } from '../../../../app/core/shared/item.model';
 import { Bitstream } from '../../../../app/core/shared/bitstream.model';
 import { BitstreamFormat } from '../../../../app/core/shared/bitstream-format.model';
 import { hasValue } from '../../../../app/shared/empty.util';
-import { APP_CONFIG, AppConfig } from "../../../../config/app-config.interface";
+import { APP_CONFIG, AppConfig } from '../../../../config/app-config.interface';
 
 
 @Component({
