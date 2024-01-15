@@ -13456,6 +13456,8 @@
   "layout.field.label.Other Author": "Autore Secondario",
   // "layout.field.label.Agent": "Agent",
   "layout.field.label.Agent": "Agente",
+  // "layout.field.label.History": "History",
+  "layout.field.label.History": "Denominazione del Periodo",
 
 
 
