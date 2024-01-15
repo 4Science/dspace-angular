@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, PLATFORM_ID } from '@angular/core';
 import { getItemPageRoute } from '../../../../app/item-page/item-page-routing-paths';
 import { BrowseMostElementsComponent as BaseComponent } from '../../../../app/shared/browse-most-elements/browse-most-elements.component';
 import { BehaviorSubject, from } from 'rxjs';
@@ -16,6 +16,7 @@ import { Item } from '../../../../app/core/shared/item.model';
 import { Bitstream } from '../../../../app/core/shared/bitstream.model';
 import { BitstreamFormat } from '../../../../app/core/shared/bitstream-format.model';
 import { hasValue } from '../../../../app/shared/empty.util';
+import { APP_CONFIG, AppConfig } from '../../../../config/app-config.interface';
 
 
 @Component({
@@ -33,12 +34,14 @@ export class BrowseMostElementsComponent extends BaseComponent {
   maxSquareRatio = 1.3;
 
   constructor(
+    @Inject(APP_CONFIG) protected appConfig: AppConfig,
+    @Inject(PLATFORM_ID) protected platformId: Object,
     protected searchService: SearchService,
     protected cdr: ChangeDetectorRef,
     protected router: Router,
     private bitstreamDataService: BitstreamDataService
   ) {
-    super(searchService, cdr, router);
+    super(appConfig, platformId, searchService, router, cdr);
   }
 
   protected getSearchResults() {

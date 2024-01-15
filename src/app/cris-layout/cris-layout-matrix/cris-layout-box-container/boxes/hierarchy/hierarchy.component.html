@@ -1,10 +1,10 @@
 <div class="container">
+  <h4 class="modal-title border-bottom mb-3" *ngIf="vocabularyHeader">{{'vocabulary-treeview.header.' + vocabularyHeader | translate}}</h4>
   <ds-vocabulary-treeview
     [vocabularyOptions]="vocabularyOptions"
     [preloadLevel]="preloadLevel"
-    [selectedItem]="selectedItem"
+    [selectedItems]="[selectedItem]"
     [enabledSearch]="false"
     [publicModeOnly]="true"
-    [vocabularyHeader]="vocabularyHeader"
   ></ds-vocabulary-treeview>
 </div>

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -38,7 +38,7 @@ export interface ListItem {
 })
 export class DsDynamicListComponent extends DynamicFormControlComponent implements OnInit, OnDestroy {
 
-  @Input() group: FormGroup;
+  @Input() group: UntypedFormGroup;
   @Input() model: any;
 
   @Output() blur: EventEmitter<any> = new EventEmitter<any>();
@@ -140,7 +140,10 @@ export class DsDynamicListComponent extends DynamicFormControlComponent implemen
    */
   protected setOptionsFromVocabulary() {
     if (this.model.vocabularyOptions.name && this.model.vocabularyOptions.name.length > 0) {
-      const listGroup = this.group.controls[this.model.id] as FormGroup;
+      const listGroup = this.group.controls[this.model.id] as UntypedFormGroup;
+      if (this.model.repeatable && this.model.required) {
+        listGroup.addValidators(this.hasAtLeastOneVocabularyEntry());
+      }
       const pageInfo: PageInfo = new PageInfo({
         elementsPerPage: 9999, currentPage: 1
       } as PageInfo);
@@ -179,7 +182,7 @@ export class DsDynamicListComponent extends DynamicFormControlComponent implemen
         }
       }
     }
-    entries.forEach((option, key) => {
+    entries.forEach((option: VocabularyEntry, key: number) => {
       const value = option.authority ?? option.value;
       let checked: boolean;
       if (this.model.repeatable) {
@@ -191,7 +194,7 @@ export class DsDynamicListComponent extends DynamicFormControlComponent implemen
       }
 
       const item: ListItem = {
-        id: value,
+        id: `${this.model.id}_${value}`,
         label: option.display,
         value: checked,
         index: key
@@ -237,7 +240,7 @@ export class DsDynamicListComponent extends DynamicFormControlComponent implemen
       } else {
         const otherOption = this.createVocabularyObject(this.otherListEntry, this.otherListEntry, undefined);
         this.optionsList.push(otherOption);
-        const listGroup = this.group.controls[this.model.id] as FormGroup;
+        const listGroup = this.group.controls[this.model.id] as UntypedFormGroup;
         // Make a list of available options (checkbox/radio) and split in groups of 'model.groupLength'
         this.listingAvailableOptions(listGroup, this.optionsList);
       }
@@ -254,6 +257,15 @@ export class DsDynamicListComponent extends DynamicFormControlComponent implemen
       otherInformation: otherInformation,
       type: 'vocabularyEntry'
     });
+  }
+
+  /**
+   * Checks if at least one {@link VocabularyEntry} has been selected.
+   */
+  hasAtLeastOneVocabularyEntry(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      return control && control.value && Object.values(control.value).find((checked: boolean) => checked === true) ? null : this.model.errorMessages;
+    };
   }
 
   ngOnDestroy(): void {

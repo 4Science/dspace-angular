@@ -42,6 +42,7 @@ import {
 import { FooterModule } from './footer/footer.module';
 import { SocialModule } from './social/social.module';
 import { ExploreModule } from './shared/explore/explore.module';
+import { OpenaireModule } from './openaire/openaire.module';
 
 const IMPORTS = [
   CommonModule,
@@ -51,7 +52,8 @@ const IMPORTS = [
   NgbModule,
   ExploreModule,
   FooterModule,
-  SocialModule
+  SocialModule,
+  OpenaireModule
 ];
 
 const PROVIDERS = [

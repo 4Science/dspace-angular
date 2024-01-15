@@ -20,6 +20,9 @@ import {
   CheckAuthenticationTokenCookieAction,
   LogOutErrorAction,
   LogOutSuccessAction,
+  RefreshEpersonAndTokenRedirectErrorAction,
+  RefreshEpersonAndTokenRedirectSuccessAction,
+  RefreshTokenAndRedirectAction,
   RefreshTokenAndRedirectErrorAction,
   RefreshTokenAndRedirectSuccessAction,
   RefreshTokenErrorAction,
@@ -236,12 +239,15 @@ describe('AuthEffects', () => {
               authenticated: true
             })
         );
+        spyOn((authEffects as any).authService, 'setExternalAuthStatus');
         actions = hot('--a-', { a: { type: AuthActionTypes.CHECK_AUTHENTICATION_TOKEN_COOKIE } });
 
         const expected = cold('--b-', { b: new RetrieveTokenAction() });
 
         expect(authEffects.checkTokenCookie$).toBeObservable(expected);
         authEffects.checkTokenCookie$.subscribe(() => {
+          expect(authServiceStub.setExternalAuthStatus).toHaveBeenCalled();
+          expect(authServiceStub.isExternalAuthentication).toBeTrue();
           expect((authEffects as any).authorizationsService.invalidateAuthorizationsRequestCache).toHaveBeenCalled();
         });
         done();
@@ -454,6 +460,68 @@ describe('AuthEffects', () => {
           done();
         });
       });
+    });
+  });
+
+  describe('refreshStateTokenRedirect$', () => {
+
+    describe('when refresh state, token and redirect action', () => {
+      it('should return a REFRESH_STATE_TOKEN_AND_REDIRECT_SUCCESS action in response to a REFRESH_STATE_TOKEN_AND_REDIRECT action', (done) => {
+        spyOn((authEffects as any).authService, 'retrieveAuthenticatedUserById').and.returnValue(observableOf(EPersonMock));
+
+        actions = hot('--a-', {
+          a: {
+            type: AuthActionTypes.REFRESH_EPERSON_AND_TOKEN_REDIRECT,
+            payload: { token, redirectUrl }
+          }
+        });
+
+        const expected = cold('--b-', { b: new RefreshEpersonAndTokenRedirectSuccessAction(EPersonMock, token, redirectUrl) });
+
+        expect(authEffects.refreshStateTokenRedirect$).toBeObservable(expected);
+        done();
+      });
+    });
+
+    describe('when refresh state token failed', () => {
+      it('should return a REFRESH_STATE_TOKEN_AND_REDIRECT_SUCCESS action in response to a REFRESH_STATE_TOKEN_AND_REDIRECT action', (done) => {
+        spyOn((authEffects as any).authService, 'retrieveAuthenticatedUserById').and.returnValue(observableThrow(''));
+
+        actions = hot('--a-', {
+          a: {
+            type: AuthActionTypes.REFRESH_EPERSON_AND_TOKEN_REDIRECT,
+            payload: { token, redirectUrl }
+          }
+        });
+
+        const expected = cold('--b-', { b: new RefreshEpersonAndTokenRedirectErrorAction() });
+
+        expect(authEffects.refreshStateTokenRedirect$).toBeObservable(expected);
+        done();
+      });
+    });
+
+  });
+
+  describe('refreshStateTokenRedirectSuccess$', () => {
+
+    beforeEach(() => {
+      scheduler = getTestScheduler();
+    });
+
+    it('should return a REFRESH_TOKEN_AND_REDIRECT action', (done) => {
+
+      actions = hot('--a-', {
+        a: {
+          type: AuthActionTypes.REFRESH_EPERSON_AND_TOKEN_REDIRECT_SUCCESS,
+          payload: { ePerson: EPersonMock, token, redirectUrl }
+        }
+      });
+
+      const expected = cold('--b-', { b: new RefreshTokenAndRedirectAction(token, redirectUrl) });
+
+      expect(authEffects.refreshStateTokenRedirectSuccess$).toBeObservable(expected);
+      done();
     });
   });
 

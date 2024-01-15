@@ -6,6 +6,10 @@ cdk-tree .btn:focus {
   box-shadow: none !important;
 }
 
+label {
+  cursor: pointer;
+}
+
 :host ::ng-deep cdk-tree i,a {
   margin: auto 0;
 }

@@ -1,14 +1,10 @@
 {
 
-  "Biography": "English Biography",
-
   "401.help": "You're not authorized to access this page. You can use the button below to get back to the home page.",
 
   "401.link.home-page": "Take me to the home page",
 
   "401.unauthorized": "unauthorized",
-
-
 
   "403.help": "You don't have permission to access this page. You can use the button below to get back to the home page.",
 
@@ -21,7 +17,6 @@
   "500.help": "The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.",
 
   "500.link.home-page": "Take me to the home page",
-
 
   "404.help": "We can't find the page you're looking for. The page may have been moved or deleted. You can use the button below to get back to the home page. ",
 
@@ -65,13 +60,13 @@
 
   "admin.edit-user-agreement.confirm.title": "Force acceptance",
 
-  "admin.edit-user-agreement.confirm.info":"Do you want to force all users to accept the new user agreement?",
+  "admin.edit-user-agreement.confirm.info": "Do you want to force all users to accept the new user agreement?",
 
-  "admin.edit-user-agreement.confirm.cancel":"Cancel",
+  "admin.edit-user-agreement.confirm.cancel": "Cancel",
 
-  "admin.edit-user-agreement.confirm.no":"No, update only",
+  "admin.edit-user-agreement.confirm.no": "No, update only",
 
-  "admin.edit-user-agreement.confirm.yes":"Yes, update and force",
+  "admin.edit-user-agreement.confirm.yes": "Yes, update and force",
 
   "admin.edit-user-agreement.save-button": "Save",
 
@@ -217,7 +212,8 @@
   "admin.registries.bitstream-formats.table.mimetype": "MIME Type",
 
   "admin.registries.bitstream-formats.table.name": "Name",
-  "admin.registries.bitstream-formats.table.id" : "ID",
+
+  "admin.registries.bitstream-formats.table.id": "ID",
 
   "admin.registries.bitstream-formats.table.return": "Back",
 
@@ -230,8 +226,6 @@
   "admin.registries.bitstream-formats.table.supportLevel.head": "Support Level",
 
   "admin.registries.bitstream-formats.title": "Bitstream Format Registry",
-
-
 
   "admin.registries.metadata.breadcrumbs": "Metadata registry",
 
@@ -260,8 +254,6 @@
 
   "admin.registries.metadata.title": "Metadata Registry",
 
-
-
   "admin.registries.schema.breadcrumbs": "Metadata schema",
 
   "admin.registries.schema.description": "This is the metadata schema for \"{{namespace}}\".",
@@ -273,7 +265,8 @@
   "admin.registries.schema.fields.table.delete": "Delete selected",
 
   "admin.registries.schema.fields.table.field": "Field",
-  "admin.registries.schema.fields.table.id" : "ID",
+
+  "admin.registries.schema.fields.table.id": "ID",
 
   "admin.registries.schema.fields.table.scopenote": "Scope Note",
 
@@ -313,7 +306,21 @@
 
   "admin.registries.schema.title": "Metadata Schema Registry",
 
+  "admin.access-control.bulk-access.breadcrumbs": "Bulk Access Management",
 
+  "administrativeBulkAccess.search.results.head": "Search Results",
+
+  "admin.access-control.bulk-access": "Bulk Access Management",
+
+  "admin.access-control.bulk-access.title": "Bulk Access Management",
+
+  "admin.access-control.bulk-access-browse.header": "Step 1: Select Objects",
+
+  "admin.access-control.bulk-access-browse.search.header": "Search",
+
+  "admin.access-control.bulk-access-browse.selected.header": "Current selection({{number}})",
+
+  "admin.access-control.bulk-access-settings.header": "Step 2: Operation to Perform",
 
   "admin.access-control.epeople.actions.delete": "Delete EPerson",
 
@@ -326,6 +333,14 @@
   "admin.access-control.epeople.breadcrumbs": "EPeople",
 
   "admin.access-control.epeople.title": "EPeople",
+
+  "admin.access-control.epeople.edit.breadcrumbs": "New EPerson",
+
+  "admin.access-control.epeople.edit.title": "New EPerson",
+
+  "admin.access-control.epeople.add.breadcrumbs": "Add EPerson",
+
+  "admin.access-control.epeople.add.title": "Add EPerson",
 
   "admin.access-control.epeople.head": "EPeople",
 
@@ -409,7 +424,7 @@
 
   "admin.access-control.epeople.form.goToGroups": "Add to groups",
 
-  "admin.access-control.epeople.notification.deleted.failure": "Failed to delete EPerson: \"{{name}}\"",
+  "admin.access-control.epeople.notification.deleted.failure": "Error occurred when trying to delete EPerson with id \"{{id}}\" with code: \"{{statusCode}}\" and message: \"{{restResponse.errorMessage}}\"",
 
   "admin.access-control.epeople.notification.deleted.success": "Successfully deleted EPerson: \"{{name}}\"",
 
@@ -478,12 +493,6 @@
 
   "admin.access-control.groups.notification.deleted.failure.content": "Cause: \"{{cause}}\"",
 
-  "admin.access-control.groups.notification.edit.success": "Successfully edited group \"{{name}}\"",
-
-  "admin.access-control.groups.notification.edit.failure": "Failed to edit group \"{{name}}\"",
-
-
-
   "admin.access-control.groups.form.alert.permanent": "This group is permanent, so it can't be edited or deleted. You can still add and remove group members using this page.",
 
   "admin.access-control.groups.form.alert.workflowGroup": "This group can’t be modified or deleted because it corresponds to a role in the submission and workflow process in the \"{{name}}\" {{comcol}}. You can delete it from the <a href='{{comcolEditRolesRoute}}'>\"assign roles\"</a> tab on the edit {{comcol}} page. You can still add and remove group members using this page.",
@@ -550,10 +559,6 @@
 
   "admin.access-control.groups.form.members-list.headMembers": "Current Members",
 
-  "admin.access-control.groups.form.members-list.search.scope.metadata": "Metadata",
-
-  "admin.access-control.groups.form.members-list.search.scope.email": "E-mail (exact)",
-
   "admin.access-control.groups.form.members-list.search.button": "Search",
 
   "admin.access-control.groups.form.members-list.table.id": "ID",
@@ -610,8 +615,6 @@
 
   "admin.access-control.groups.form.subgroups-list.table.edit.buttons.add": "Add subgroup with name \"{{name}}\"",
 
-  "admin.access-control.groups.form.subgroups-list.table.edit.currentGroup": "Current group",
-
   "admin.access-control.groups.form.subgroups-list.notification.success.addSubgroup": "Successfully added subgroup: \"{{name}}\"",
 
   "admin.access-control.groups.form.subgroups-list.notification.failure.addSubgroup": "Failed to add subgroup: \"{{name}}\"",
@@ -632,9 +635,9 @@
 
   "admin.access-control.groups.form.tooltip.editGroupPage": "On this page, you can modify the properties and members of a group. In the top section, you can edit the group name and description, unless this is an admin group for a collection or community, in which case the group name and description are auto-generated and cannot be edited. In the following sections, you can edit group membership. See [the wiki](https://wiki.lyrasis.org/display/DSDOC7x/Create+or+manage+a+user+group) for more details.",
 
-  "admin.access-control.groups.form.tooltip.editGroup.addEpeople": "To add or remove an EPerson to/from this group, either click the 'Browse All' button or use the search bar below to search for users (use the dropdown to the left of the search bar to choose whether to search by metadata or by email). Then click the plus icon for each user you wish to add in the list below, or the trash can icon for each user you wish to remove. The list below may have several pages: use the page controls below the list to navigate to the next pages. Once you are ready, save your changes by clicking the 'Save' button in the top section.",
+  "admin.access-control.groups.form.tooltip.editGroup.addEpeople": "To add or remove an EPerson to/from this group, either click the 'Browse All' button or use the search bar below to search for users (use the dropdown to the left of the search bar to choose whether to search by metadata or by email). Then click the plus icon for each user you wish to add in the list below, or the trash can icon for each user you wish to remove. The list below may have several pages: use the page controls below the list to navigate to the next pages.",
 
-  "admin.access-control.groups.form.tooltip.editGroup.addSubgroups": "To add or remove a Subgroup to/from this group, either click the 'Browse All' button or use the search bar below to search for users. Then click the plus icon for each user you wish to add in the list below, or the trash can icon for each user you wish to remove. The list below may have several pages: use the page controls below the list to navigate to the next pages. Once you are ready, save your changes by clicking the 'Save' button in the top section.",
+  "admin.access-control.groups.form.tooltip.editGroup.addSubgroups": "To add or remove a Subgroup to/from this group, either click the 'Browse All' button or use the search bar below to search for groups. Then click the plus icon for each group you wish to add in the list below, or the trash can icon for each group you wish to remove. The list below may have several pages: use the page controls below the list to navigate to the next pages.",
 
   "admin.notifications.openairebroker.breadcrumbs": "OpenAIRE Broker",
 
@@ -673,9 +676,6 @@
 
   "administrativeView.search.results.head": "Administrative Search",
 
-
-
-
   "admin.workflow.breadcrumbs": "Administer Workflow",
 
   "admin.workflow.title": "Administer Workflow",
@@ -692,27 +692,11 @@
 
   "admin.workflow.item.supervision": "Supervision",
 
-
-
   "admin.metadata-import.breadcrumbs": "Import Metadata",
 
   "admin.batch-import.breadcrumbs": "Import Batch",
 
   "admin.mag-import.breadcrumbs": "Import MAG",
-
-  "admin.mag-import.page.form.type.label": "Type",
-
-  "admin.mag-import.page.form.type.hint": "Select a type from the list",
-
-  "admin.mag-import.page.form.object.label": "Parent object",
-
-  "admin.mag-import.page.form.object.hint": "Provide the handle of the parent object",
-
-  "admin.mag-import.page.form.file.label": "File",
-
-  "admin.mag-import.page.form.file.hint": "Upload a ZIP file containing the XML file and the images",
-
-  "admin.mag-import.page.form.submit": "Create process",
 
   "admin.metadata-import.title": "Import Metadata",
 
@@ -797,11 +781,9 @@
 
   "advanced-workflow-action.rating.description-requiredDescription": "Please select a rating below and also add a review",
 
-
   "advanced-workflow-action.select-reviewer.description-single": "Please select a single reviewer below before submitting",
 
   "advanced-workflow-action.select-reviewer.description-multiple": "Please select one or more reviewers below before submitting",
-
 
   "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.head": "EPeople",
 
@@ -810,10 +792,6 @@
   "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.button.see-all": "Browse All",
 
   "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.headMembers": "Current Members",
-
-  "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.search.scope.metadata": "Metadata",
-
-  "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.search.scope.email": "E-mail (exact)",
 
   "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.search.button": "Search",
 
@@ -860,9 +838,52 @@
 
   "alert.toggle.show": "Show more",
 
-  "audiovideo.page.titleprefix" : "Audio/Video",
+  "audiovideo.page.titleprefix": "Audio/Video",
 
-  "audiovideo.listelement.badge" : "Audio/Video",
+  "audiovideo.listelement.badge": "Audio/Video",
+
+  "audit.overview.title": "Audit Logs Overview",
+
+  "audit.overview.table.id": "Audit ID",
+
+  "audit.overview.table.objectUUID": "Object ID",
+
+  "audit.overview.table.objectType": "Object Type",
+
+  "audit.overview.table.subjectUUID": "Subject ID",
+
+  "audit.overview.table.subjectType": "Subject Type",
+
+  "audit.overview.table.entityType": "Audit Type",
+
+  "audit.overview.table.eperson": "EPerson",
+
+  "audit.overview.table.timestamp": "Time",
+
+  "audit.overview.breadcrumbs": "Audit Logs Overview",
+
+  "audit.object.overview.title": "Subject Audit Logs Overview",
+
+  "audit.object.overview.disabled.message": "Audit feature is currently disabled",
+
+  "audit.detail.title": "Audit Detail",
+
+  "audit.detail.id": "Audit Id",
+
+  "audit.detail.subjectUUID": "Subject ID",
+
+  "audit.detail.subjectType": "Subject Type",
+
+  "audit.detail.eventType": "Audit Type",
+
+  "audit.detail.eperson": "EPerson",
+
+  "audit.detail.timeStamp": "Time",
+
+  "audit.detail.back": "All Audit Logs",
+
+  "audit.detail.back.subject": "Subject Audit Logs",
+
 
   "auth.errors.invalid-user": "Invalid email address or password.",
 
@@ -870,9 +891,7 @@
 
   "auth.messages.token-refresh-failed": "Refreshing your session token failed. Please log in again.",
 
-
-
-  "bitstream.download.page": "Now downloading {{bitstream}}..." ,
+  "bitstream.download.page": "Now downloading {{bitstream}}...",
 
   "bitstream.download.page.back": "Back",
 
@@ -917,6 +936,8 @@
 
   "bitstream.edit.notifications.error.format.title": "An error occurred saving the bitstream's format",
 
+  "bitstream.edit.notifications.error.primaryBitstream.title": "An error occurred saving the primary bitstream",
+
   "bitstream.edit.form.iiifLabel.label": "IIIF Label",
 
   "bitstream.edit.form.iiifLabel.hint": "Canvas label for this image. If not provided default label will be used.",
@@ -933,7 +954,6 @@
 
   "bitstream.edit.form.iiifHeight.hint": "The canvas height should usually match the image height.",
 
-
   "bitstream.edit.notifications.saved.content": "Your changes to this bitstream were saved.",
 
   "bitstream.edit.notifications.saved.title": "Bitstream saved",
@@ -949,6 +969,7 @@
   "bitstream-request-a-copy.intro": "Enter the following information to request a copy for the following item: ",
 
   "bitstream-request-a-copy.intro.bitstream.one": "Requesting the following file: ",
+
   "bitstream-request-a-copy.intro.bitstream.all": "Requesting all files. ",
 
   "bitstream-request-a-copy.name.label": "Name *",
@@ -977,8 +998,6 @@
 
   "bitstream-request-a-copy.submit.error": "Something went wrong with submitting the item request.",
 
-
-
   "browse.back.all-results": "All browse results",
 
   "browse.comcol.by.author": "By Author",
@@ -997,33 +1016,37 @@
 
   "browse.comcol.by.subject": "By Subject",
 
+  "browse.comcol.by.srsc": "By Subject Category",
+
+  "browse.comcol.by.nsi": "By Norwegian Science Index",
+
   "browse.comcol.by.title": "By Title",
 
   "browse.comcol.by.type": "By Type",
 
-  "browse.comcol.by.titleF" : "Title",
+  "browse.comcol.by.titleF": "Title",
 
-  "browse.comcol.by.typeF" : "Type",
+  "browse.comcol.by.typeF": "Type",
 
-  "browse.comcol.by.dateissuedF" : "Date",
+  "browse.comcol.by.dateissuedF": "Date",
 
-  "browse.comcol.by.subjectF" : "Subject",
+  "browse.comcol.by.subjectF": "Subject",
 
-  "browse.comcol.by.titleJF" : "Title",
+  "browse.comcol.by.titleJF": "Title",
 
-  "browse.comcol.by.typeJF" : "Type",
+  "browse.comcol.by.typeJF": "Type",
 
-  "browse.comcol.by.dateissuedJF" : "Date",
+  "browse.comcol.by.dateissuedJF": "Date",
 
-  "browse.comcol.by.subjectJF" : "Subject",
+  "browse.comcol.by.subjectJF": "Subject",
 
-  "browse.comcol.by.titleA" : "Title",
+  "browse.comcol.by.titleA": "Title",
 
-  "browse.comcol.by.typeA" : "Type",
+  "browse.comcol.by.typeA": "Type",
 
-  "browse.comcol.by.dateissuedA" : "Date",
+  "browse.comcol.by.dateissuedA": "Date",
 
-  "browse.comcol.by.subjectA" : "Subject",
+  "browse.comcol.by.subjectA": "Subject",
 
   "browse.comcol.by.titleEvent": "Title",
 
@@ -1136,9 +1159,9 @@
 
   "browse.metadata.eqtitle": "Title",
 
-  "browse.metadata.ouname" : "Name",
+  "browse.metadata.ouname": "Name",
 
-  "browse.metadata.pjtitle" : "Title",
+  "browse.metadata.pjtitle": "Title",
 
   "browse.metadata.rodept": "Department",
 
@@ -1162,45 +1185,53 @@
 
   "browse.metadata.eqtitle.breadcrumbs": "Browse by Title",
 
-  "browse.metadata.ouname.breadcrumbs" : "Browse by Name",
+  "browse.metadata.ouname.breadcrumbs": "Browse by Name",
 
-  "browse.metadata.pjtitle.breadcrumbs" : "Browse by Title",
+  "browse.metadata.pjtitle.breadcrumbs": "Browse by Title",
 
   "browse.metadata.rodept.breadcrumbs": "Browse by Department",
 
-  "browse.metadata.rpdept.breadcrumbs" : "Browse by Department",
+  "browse.metadata.rpdept.breadcrumbs": "Browse by Department",
 
   "browse.metadata.rpname.breadcrumbs": "Browse by Name",
 
   "browse.metadata.subject.breadcrumbs": "Browse by Subject",
 
+  "browse.metadata.srsc.breadcrumbs": "Browse by Subject Category",
+
+  "browse.metadata.srsc.tree.descrption": "Select a subject to add as search filter",
+
+  "browse.metadata.nsi.breadcrumbs": "Browse by Norwegian Science Index",
+
+  "browse.metadata.nsi.tree.descrption": "Select an index to add as search filter",
+
   "browse.metadata.type.breadcrumbs": "Browse by Type",
 
   "browse.metadata.title.breadcrumbs": "Browse by Title",
 
-  "browse.metadata.titleF.breadcrumbs" : "Browse by Title",
+  "browse.metadata.titleF.breadcrumbs": "Browse by Title",
 
-  "browse.metadata.typeF.breadcrumbs" : "Browse by Type",
+  "browse.metadata.typeF.breadcrumbs": "Browse by Type",
 
-  "browse.metadata.dateissuedF.breadcrumbs" : "Browse by Date",
+  "browse.metadata.dateissuedF.breadcrumbs": "Browse by Date",
 
-  "browse.metadata.subjectF.breadcrumbs" : "Browse by Subject",
+  "browse.metadata.subjectF.breadcrumbs": "Browse by Subject",
 
-  "browse.metadata.titleJF.breadcrumbs" : "Browse by Title",
+  "browse.metadata.titleJF.breadcrumbs": "Browse by Title",
 
-  "browse.metadata.typeJF.breadcrumbs" : "Browse by Type",
+  "browse.metadata.typeJF.breadcrumbs": "Browse by Type",
 
-  "browse.metadata.dateissuedJF.breadcrumbs" : "Browse by Date",
+  "browse.metadata.dateissuedJF.breadcrumbs": "Browse by Date",
 
-  "browse.metadata.subjectJF.breadcrumbs" : "Browse by Subject",
+  "browse.metadata.subjectJF.breadcrumbs": "Browse by Subject",
 
-  "browse.metadata.titleA.breadcrumbs" : "Browse by Title",
+  "browse.metadata.titleA.breadcrumbs": "Browse by Title",
 
-  "browse.metadata.typeA.breadcrumbs" : "Browse by Type",
+  "browse.metadata.typeA.breadcrumbs": "Browse by Type",
 
-  "browse.metadata.dateissuedA.breadcrumbs" : "Browse by Date",
+  "browse.metadata.dateissuedA.breadcrumbs": "Browse by Date",
 
-  "browse.metadata.subjectA.breadcrumbs" : "Browse by Subject",
+  "browse.metadata.subjectA.breadcrumbs": "Browse by Subject",
 
   "browse.metadata.titleEvent.breadcrumbs": "Browse by Title",
 
@@ -1300,31 +1331,31 @@
 
   "browse.metadata.parentA.breadcrumbs": "Browse by Parent",
 
-  "browse.metadata.titleF" : "Title",
+  "browse.metadata.titleF": "Title",
 
-  "browse.metadata.typeF" : "Type",
+  "browse.metadata.typeF": "Type",
 
-  "browse.metadata.dateissuedF" : "Date",
+  "browse.metadata.dateissuedF": "Date",
 
-  "browse.metadata.subjectF" : "Subject",
+  "browse.metadata.subjectF": "Subject",
 
-  "browse.metadata.titleJF" : "Title",
+  "browse.metadata.titleJF": "Title",
 
-  "browse.metadata.typeJF" : "Type",
+  "browse.metadata.typeJF": "Type",
 
-  "browse.metadata.dateissuedJF" : "Date",
+  "browse.metadata.dateissuedJF": "Date",
 
-  "browse.metadata.subjectJF" : "Subject",
+  "browse.metadata.subjectJF": "Subject",
 
-  "browse.metadata.titleA" : "Title",
+  "browse.metadata.titleA": "Title",
 
-  "browse.metadata.typeA" : "Type",
+  "browse.metadata.typeA": "Type",
 
-  "browse.metadata.dateissuedA" : "Date",
+  "browse.metadata.dateissuedA": "Date",
 
-  "browse.metadata.subjectA" : "Subject",
+  "browse.metadata.subjectA": "Subject",
 
-  "browse.metadata.parentA" : "Parent",
+  "browse.metadata.parentA": "Parent",
 
   "pagination.next.button": "Next",
 
@@ -1378,28 +1409,28 @@
 
   "browse.startsWith.type_text": "Filter results by typing the first few letters",
 
+  "browse.startsWith.input": "Filter",
+
+  "browse.taxonomy.button": "Browse",
+
   "browse.title": "Browsing {{ collection }} by {{ field }}{{ startsWith }} {{ value }}",
 
   "browse.title.page": "Browsing {{ collection }} by {{ field }} {{ value }}",
 
 
-  "search.browse.item-back": "Back to Results",
-
-
-
-  "bulk-import.abort-on-error" : "Abort on first error",
+  "bulk-import.abort-on-error": "Abort on first error",
 
   "bulk-import.back": "Back",
 
-  "bulk-import.breadcrumbs" : "Bulk import",
+  "bulk-import.breadcrumbs": "Bulk import",
 
-  "bulk-import.collection-name" : "Collection",
+  "bulk-import.collection-name": "Collection",
 
   "bulk-import.error": "An error occurred while creating the import process",
 
-  "bulk-import.file" : "Source file",
+  "bulk-import.file": "Source file",
 
-  "bulk-import.header" : "Bulk import",
+  "bulk-import.header": "Bulk import",
 
   "bulk-import.processing": "Processing...",
 
@@ -1407,12 +1438,13 @@
 
   "bulk-import.submit": "Start import",
 
-  "bulk-import.title" : "Bulk import",
+  "bulk-import.title": "Bulk import",
 
 
   "carousel.button.see-more": "See more",
 
 
+  "search.browse.item-back": "Back to Results",
 
   "chips.remove": "Remove chip",
 
@@ -1423,7 +1455,6 @@
   "claimed-declined-search-result-list-element.title": "Rejected, sent back to submitter",
 
   "claimed-declined-task-search-result-list-element.title": "Declined, sent back to Review Manager's workflow",
-
 
   "collection.create.head": "Create a Collection",
 
@@ -1447,15 +1478,11 @@
 
   "collection.delete.text": "Are you sure you want to delete collection \"{{ dso }}\"",
 
-
-
   "collection.edit.delete": "Delete this collection",
 
   "collection.edit.head": "Edit Collection",
 
   "collection.edit.breadcrumbs": "Edit Collection",
-
-
 
   "collection.edit.tabs.mapper.head": "Item Mapper",
 
@@ -1497,7 +1524,6 @@
 
   "collection.edit.item-mapper.tabs.map": "Map new items",
 
-
   "collection.edit.logo.delete.title": "Delete logo",
 
   "collection.edit.logo.delete-undo.title": "Undo delete",
@@ -1520,7 +1546,9 @@
 
   "collection.edit.return": "Back",
 
+  "collection.edit.tabs.access-control.head": "Access Control",
 
+  "collection.edit.tabs.access-control.title": "Collection Edit - Access Control",
 
   "collection.edit.tabs.curate.head": "Curate",
 
@@ -1594,8 +1622,6 @@
 
   "collection.edit.tabs.source.title": "Collection Edit - Content Source",
 
-
-
   "collection.edit.template.add-button": "Add",
 
   "collection.edit.template.breadcrumbs": "Item template",
@@ -1658,8 +1684,6 @@
 
   "collection.listelement.badge": "Collection",
 
-
-
   "collection.page.browse.recent.head": "Recent Submissions",
 
   "collection.page.browse.recent.empty": "No items to show",
@@ -1674,45 +1698,61 @@
 
   "collection.page.news": "News",
 
-
-
   "collection.select.confirm": "Confirm selected",
 
   "collection.select.empty": "No collections to show",
 
   "collection.select.table.title": "Title",
 
-
   "collection.source.controls.head": "Harvest Controls",
-  "collection.source.controls.test.submit.error": "Something went wrong with initiating the testing of the settings",
-  "collection.source.controls.test.failed": "The script to test the settings has failed",
-  "collection.source.controls.test.completed": "The script to test the settings has successfully finished",
-  "collection.source.controls.test.submit": "Test configuration",
-  "collection.source.controls.test.running": "Testing configuration...",
-  "collection.source.controls.import.submit.success": "The import has been successfully initiated",
-  "collection.source.controls.import.submit.error": "Something went wrong with initiating the import",
-  "collection.source.controls.import.submit": "Import now",
-  "collection.source.controls.import.running": "Importing...",
-  "collection.source.controls.import.failed": "An error occurred during the import",
-  "collection.source.controls.import.completed": "The import completed",
-  "collection.source.controls.reset.submit.success": "The reset and reimport has been successfully initiated",
-  "collection.source.controls.reset.submit.error": "Something went wrong with initiating the reset and reimport",
-  "collection.source.controls.reset.failed": "An error occurred during the reset and reimport",
-  "collection.source.controls.reset.completed": "The reset and reimport completed",
-  "collection.source.controls.reset.submit": "Reset and reimport",
-  "collection.source.controls.reset.running": "Resetting and reimporting...",
-  "collection.source.controls.harvest.status": "Harvest status:",
-  "collection.source.controls.harvest.start": "Harvest start time:",
-  "collection.source.controls.harvest.last": "Last time harvested:",
-  "collection.source.controls.harvest.message": "Harvest info:",
-  "collection.source.controls.harvest.no-information": "N/A",
 
+  "collection.source.controls.test.submit.error": "Something went wrong with initiating the testing of the settings",
+
+  "collection.source.controls.test.failed": "The script to test the settings has failed",
+
+  "collection.source.controls.test.completed": "The script to test the settings has successfully finished",
+
+  "collection.source.controls.test.submit": "Test configuration",
+
+  "collection.source.controls.test.running": "Testing configuration...",
+
+  "collection.source.controls.import.submit.success": "The import has been successfully initiated",
+
+  "collection.source.controls.import.submit.error": "Something went wrong with initiating the import",
+
+  "collection.source.controls.import.submit": "Import now",
+
+  "collection.source.controls.import.running": "Importing...",
+
+  "collection.source.controls.import.failed": "An error occurred during the import",
+
+  "collection.source.controls.import.completed": "The import completed",
+
+  "collection.source.controls.reset.submit.success": "The reset and reimport has been successfully initiated",
+
+  "collection.source.controls.reset.submit.error": "Something went wrong with initiating the reset and reimport",
+
+  "collection.source.controls.reset.failed": "An error occurred during the reset and reimport",
+
+  "collection.source.controls.reset.completed": "The reset and reimport completed",
+
+  "collection.source.controls.reset.submit": "Reset and reimport",
+
+  "collection.source.controls.reset.running": "Resetting and reimporting...",
+
+  "collection.source.controls.harvest.status": "Harvest status:",
+
+  "collection.source.controls.harvest.start": "Harvest start time:",
+
+  "collection.source.controls.harvest.last": "Last time harvested:",
+
+  "collection.source.controls.harvest.message": "Harvest info:",
+
+  "collection.source.controls.harvest.no-information": "N/A",
 
   "collection.source.update.notifications.error.content": "The provided settings have been tested and didn't work.",
 
   "collection.source.update.notifications.error.title": "Server Error",
-
-
 
   "communityList.breadcrumbs": "Community List",
 
@@ -1721,8 +1761,6 @@
   "communityList.title": "List of Communities",
 
   "communityList.showMore": "Show More",
-
-
 
   "community.create.head": "Create a Community",
 
@@ -1752,7 +1790,6 @@
 
   "community.edit.breadcrumbs": "Edit Community",
 
-
   "community.edit.logo.delete.title": "Delete logo",
 
   "community.edit.logo.delete-undo.title": "Undo delete",
@@ -1771,8 +1808,6 @@
 
   "community.edit.logo.upload": "Drop a Community Logo to upload",
 
-
-
   "community.edit.notifications.success": "Successfully edited the Community",
 
   "community.edit.notifications.unauthorized": "You do not have privileges to make this change",
@@ -1781,11 +1816,13 @@
 
   "community.edit.return": "Back",
 
-
-
   "community.edit.tabs.curate.head": "Curate",
 
   "community.edit.tabs.curate.title": "Community Edit - Curate",
+
+  "community.edit.tabs.access-control.head": "Access Control",
+
+  "community.edit.tabs.access-control.title": "Community Edit - Access Control",
 
   "community.edit.tabs.metadata.head": "Edit Metadata",
 
@@ -1799,11 +1836,7 @@
 
   "community.edit.tabs.authorizations.title": "Community Edit - Authorizations",
 
-
-
   "community.listelement.badge": "Community",
-
-
 
   "comcol-role.edit.no-group": "None",
 
@@ -1817,21 +1850,17 @@
 
   "comcol-role.edit.delete.error.title": "Failed to delete the '{{ role }}' role's group",
 
-
   "comcol-role.edit.community-admin.name": "Administrators",
 
   "comcol-role.edit.collection-admin.name": "Administrators",
-
 
   "comcol-role.edit.community-admin.description": "Community administrators can create sub-communities or collections, and manage or assign management for those sub-communities or collections. In addition, they decide who can submit items to any sub-collections, edit item metadata (after submission), and add (map) existing items from other collections (subject to authorization).",
 
   "comcol-role.edit.collection-admin.description": "Collection administrators decide who can submit items to the collection, edit item metadata (after submission), and add (map) existing items from other collections to this collection (subject to authorization for that collection).",
 
-
   "comcol-role.edit.submitters.name": "Submitters",
 
   "comcol-role.edit.submitters.description": "The E-People and Groups that have permission to submit new items to this collection.",
-
 
   "comcol-role.edit.item_read.name": "Default item read access",
 
@@ -1839,34 +1868,27 @@
 
   "comcol-role.edit.item_read.anonymous-group": "Default read for incoming items is currently set to Anonymous.",
 
-
   "comcol-role.edit.bitstream_read.name": "Default bitstream read access",
 
   "comcol-role.edit.bitstream_read.description": "Community administrators can create sub-communities or collections, and manage or assign management for those sub-communities or collections. In addition, they decide who can submit items to any sub-collections, edit item metadata (after submission), and add (map) existing items from other collections (subject to authorization).",
 
   "comcol-role.edit.bitstream_read.anonymous-group": "Default read for incoming bitstreams is currently set to Anonymous.",
 
-
   "comcol-role.edit.editor.name": "Editors",
 
   "comcol-role.edit.editor.description": "Editors are able to edit the metadata of incoming submissions, and then accept or reject them.",
-
 
   "comcol-role.edit.finaleditor.name": "Final editors",
 
   "comcol-role.edit.finaleditor.description": "Final editors are able to edit the metadata of incoming submissions, but will not be able to reject them.",
 
-
   "comcol-role.edit.reviewer.name": "Reviewers",
 
   "comcol-role.edit.reviewer.description": "Reviewers are able to accept or reject incoming submissions. However, they are not able to edit the submission's metadata.",
 
-
   "comcol-role.edit.scorereviewers.name": "Score Reviewers",
 
   "comcol-role.edit.scorereviewers.description": "Reviewers are able to give a score to incoming submissions, this will define whether the submission will be rejected or not.",
-
-
 
   "community.form.abstract": "Short Description",
 
@@ -1890,9 +1912,10 @@
 
   "community.all-lists.head": "Subcommunities and Collections",
 
-  "community.sub-collection-list.head": "Collections of this Community",
+  "community.sub-collection-list.head": "Collections in this Community",
 
-  "community.sub-community-list.head": "Communities of this Community",
+  "community.sub-community-list.head": "Communities in this Community",
+
 
   "context-menu.actions": "Actions",
 
@@ -2002,57 +2025,57 @@
 
   "context-menu.actions.subscription.notification.content": "Subscription Updated Successfully, click {{here}} to see subscrition summary.",
 
-  "RELATION.Person.researchoutputs.search.results.head" : "Research Outputs",
+  "RELATION.Person.researchoutputs.search.results.head": "Research Outputs",
 
-  "RELATION.Person.publications.search.results.head" : "Publications",
+  "RELATION.Person.publications.search.results.head": "Publications",
 
-  "RELATION.Person.projects.search.results.head" : "Projects",
+  "RELATION.Person.projects.search.results.head": "Projects",
 
-  "RELATION.OrgUnit.organizations.search.results.head" : "Organizations",
+  "RELATION.OrgUnit.organizations.search.results.head": "Organizations",
 
-  "RELATION.OrgUnit.rppublications.search.results.head" : "Researchers Publications",
+  "RELATION.OrgUnit.rppublications.search.results.head": "Researchers Publications",
 
-  "RELATION.OrgUnit.publications.search.results.head" : "Publications",
+  "RELATION.OrgUnit.publications.search.results.head": "Publications",
 
-  "RELATION.OrgUnit.rpprojects.search.results.head" : "Researchers Projects",
+  "RELATION.OrgUnit.rpprojects.search.results.head": "Researchers Projects",
 
-  "RELATION.OrgUnit.projects.search.results.head" : "Projects",
+  "RELATION.OrgUnit.projects.search.results.head": "Projects",
 
-  "RELATION.OrgUnit.orgunitfonds.search.results.head" : "Fonds",
+  "RELATION.OrgUnit.orgunitfonds.search.results.head": "Fonds",
 
-  "RELATION.OrgUnit.archivalmaterial.search.results.head" : "Archival Material",
+  "RELATION.OrgUnit.archivalmaterial.search.results.head": "Archival Material",
 
-  "RELATION.Project.researchoutputs.search.results.head" : "Publications",
+  "RELATION.Project.researchoutputs.search.results.head": "Publications",
 
-  "RELATION.Project.projects.search.results.head" : "Projects",
+  "RELATION.Project.projects.search.results.head": "Projects",
 
-  "RELATION.Project.fundings.search.results.head" : "Fundings",
+  "RELATION.Project.fundings.search.results.head": "Fundings",
 
-  "RELATION.Project.publications.search.results.head" : "Publications",
+  "RELATION.Project.publications.search.results.head": "Publications",
 
-  "RELATION.OrgUnit.people.search.results.head" : "People",
+  "RELATION.OrgUnit.people.search.results.head": "People",
 
-  "RELATION.Path.pathpublications.search.results.head" : "Paths Publications",
+  "RELATION.Path.pathpublications.search.results.head": "Paths Publications",
 
-  "RELATION.Person.copublications.search.results.head" : "Contributed Publications",
+  "RELATION.Person.copublications.search.results.head": "Contributed Publications",
 
-  "RELATION.Person.fonds.search.results.head" : "Fonds",
+  "RELATION.Person.fonds.search.results.head": "Fonds",
 
-  "RELATION.Fonds.publications.search.results.head" : "Publications",
+  "RELATION.Fonds.publications.search.results.head": "Publications",
 
-  "RELATION.Fonds.children.search.results.head" : "Fonds Children",
+  "RELATION.Fonds.children.search.results.head": "Fonds Children",
 
-  "RELATION.JournalFonds.children.search.results.head" : "Journal Fonds Children",
+  "RELATION.JournalFonds.children.search.results.head": "Journal Fonds Children",
 
-  "RELATION.Place.publications.search.results.head" : "Publications",
+  "RELATION.Place.publications.search.results.head": "Publications",
 
-  "RELATION.Place.events.search.results.head" : "Events",
+  "RELATION.Place.events.search.results.head": "Events",
 
-  "RELATION.Event.publications.search.results.head" : "Publications",
+  "RELATION.Event.publications.search.results.head": "Publications",
 
-  "RELATION.Event.people.search.results.head" : "People",
+  "RELATION.Event.people.search.results.head": "People",
 
-  "RELATION.Aggregation.items.search.results.head" : "Items",
+  "RELATION.Aggregation.items.search.results.head": "Items",
 
   "datafile.listelement.badge": "Data File",
 
@@ -2113,29 +2136,21 @@
 
   "cookies.consent.app.description.authentication": "Required for signing you in",
 
-
   "cookies.consent.app.title.preferences": "Preferences",
 
   "cookies.consent.app.description.preferences": "Required for saving your preferences",
-
-
 
   "cookies.consent.app.title.acknowledgement": "Acknowledgement",
 
   "cookies.consent.app.description.acknowledgement": "Required for saving your acknowledgements and consents",
 
-
-
   "cookies.consent.app.title.google-analytics": "Google Analytics",
 
   "cookies.consent.app.description.google-analytics": "Allows us to track statistical data",
 
-
-
   "cookies.consent.app.title.google-recaptcha": "Google reCaptcha",
 
   "cookies.consent.app.description.google-recaptcha": "We use google reCAPTCHA service during registration and password recovery",
-
 
   "cookies.consent.purpose.functional": "Functional",
 
@@ -2146,34 +2161,34 @@
   "cookies.consent.purpose.sharing": "Sharing",
 
 
-  "curation-task.task.citationpage.label":  "Generate Citation Page",
+  "curation-task.task.citationpage.label": "Generate Citation Page",
 
 
-  "curation-task.task.migratedocviewer.label":  "Migrate the previously generated doc. viewer resources",
+  "curation-task.task.migratedocviewer.label": "Migrate the previously generated doc. viewer resources",
 
-  "curation-task.task.iiifmigrate.label":  "Migrate the previously generated IIIF resources",
+  "curation-task.task.iiifmigrate.label": "Migrate the previously generated IIIF resources",
 
-  "curation-task.task.avuploader.label":  "Process video resources",
+  "curation-task.task.avuploader.label": "Process video resources",
 
-  "curation-task.task.avuploader.primary.label":  "Process video resources and hide non primary items",
+  "curation-task.task.avuploader.primary.label": "Process video resources and hide non primary items",
 
-  "curation-task.task.audiouploader.label":  "Process audio resources",
+  "curation-task.task.audiouploader.label": "Process audio resources",
 
-  "curation-task.task.audiouploader.primary.label":  "Process audio resources and hide non primary items",
+  "curation-task.task.audiouploader.primary.label": "Process audio resources and hide non primary items",
 
-  "curation-task.task.avclean.label":  "Clean audio/video resources",
+  "curation-task.task.avclean.label": "Clean audio/video resources",
 
-  "curation-task.task.generatesubtitles.label":  "Generate subtitles for audio/video resources",
+  "curation-task.task.generatesubtitles.label": "Generate subtitles for audio/video resources",
 
-  "curation-task.task.hidecovers.label":  "Hide custom audio/video thumbnails from item page",
+  "curation-task.task.hidecovers.label": "Hide custom audio/video thumbnails from item page",
 
-  "curation-task.task.avforbiddownload.label":  "Forbid Download on audio/video resources",
+  "curation-task.task.avforbiddownload.label": "Forbid Download on audio/video resources",
 
-  "curation-task.task.avallowdownload.label":  "Allow Download on audio/video resources",
+  "curation-task.task.avallowdownload.label": "Allow Download on audio/video resources",
 
-  "curation-task.task.avupdatemanifest.label":  "Regenerate AV manifest for URL update",
+  "curation-task.task.avupdatemanifest.label": "Regenerate AV manifest for URL update",
 
-  "curation-task.task.avmigrate.label":  "Migrate the AV resources generated for a previous version",
+  "curation-task.task.avmigrate.label": "Migrate the AV resources generated for a previous version",
 
   "curation-task.task.cleangeneratedsub.label": "Clean generated subtitles for A/V resources",
 
@@ -2207,6 +2222,8 @@
 
   "cris-layout.advanced-attachment.viewMore": "View More",
 
+  "cris-layout.advanced-attachment.label.not-present": "(not present)",
+
   "cris-layout.advanced-attachment.view-pdf": "Open PDF",
 
   "cris-layout.attachment.viewMore": "View More",
@@ -2219,13 +2236,11 @@
 
   "cris-layout.rendering.collections.load-more": "Load more",
 
-  "curation-task.task.checklinks.label":  "Check Links in Metadata",
+  "curation-task.task.checklinks.label": "Check Links in Metadata",
 
   "curation-task.task.noop.label": "NOOP",
 
   "curation-task.task.profileformats.label": "Profile Bitstream Formats",
-
-   "curation-task.task.registerdoi.label": "Mint DOI",
 
   "curation-task.task.requiredmetadata.label": "Check for Required Metadata",
 
@@ -2233,9 +2248,7 @@
 
   "curation-task.task.vscan.label": "Virus Scan",
 
-  "curation-task.task.register-doi.label": "Register DOI",
-
-
+  "curation-task.task.registerdoi.label": "Register DOI",
 
   "curation.form.task-select.label": "Task:",
 
@@ -2255,8 +2268,6 @@
 
   "curation.form.handle.hint": "Hint: Enter [your-handle-prefix]/0 to run a task across entire site (not all tasks may support this capability)",
 
-
-
   "deny-request-copy.email.message": "Dear {{ recipientName }},\nIn response to your request I regret to inform you that it's not possible to send you a copy of the file(s) you have requested, concerning the document: \"{{ itemUrl }}\" ({{ itemName }}), of which I am an author.\n\nBest regards,\n{{ authorName }} <{{ authorEmail }}>",
 
   "deny-request-copy.email.subject": "Request copy of document",
@@ -2269,11 +2280,9 @@
 
   "deny-request-copy.success": "Successfully denied item request",
 
-
-
   "dso.name.untitled": "Untitled",
 
-
+  "dso.name.unnamed": "Unnamed",
 
   "dso-selector.create.collection.head": "New collection",
 
@@ -2301,7 +2310,9 @@
 
   "dso-selector.error.title": "An error occurred searching for a {{ type }}",
 
-  "dso-selector.export-metadata.dspaceobject.head": "Export metadata from",
+  "dso-selector.export-metadata-csv.dspaceobject.head": "Export metadata from",
+
+  "dso-selector.export-metadata-xls.dspaceobject.head": "Export metadata from",
 
   "dso-selector.export-batch.dspaceobject.head": "Export Batch (ZIP) from",
 
@@ -2363,15 +2374,25 @@
 
   "supervision-group-selector.notification.create.failure.title": "Error",
 
-  "supervision-group-selector.notification.create.already-existing" : "A supervision order already exists on this item for selected group",
+  "supervision-group-selector.notification.create.already-existing": "A supervision order already exists on this item for selected group",
 
   "confirmation-modal.export-metadata.header": "Export metadata for {{ dsoName }}",
 
-  "confirmation-modal.export-metadata.info": "Are you sure you want to export metadata for {{ dsoName }}",
+  "confirmation-modal.export-metadata-csv.header": "Export metadata for {{ dsoName }}",
 
-  "confirmation-modal.export-metadata.cancel": "Cancel",
+  "confirmation-modal.export-metadata-csv.info": "Are you sure you want to export metadata for {{ dsoName }}",
 
-  "confirmation-modal.export-metadata.confirm": "Export",
+  "confirmation-modal.export-metadata-csv.cancel": "Cancel",
+
+  "confirmation-modal.export-metadata-csv.confirm": "Export",
+
+  "confirmation-modal.export-metadata-xls.header": "Export metadata for {{ dsoName }}",
+
+  "confirmation-modal.export-metadata-xls.info": "Are you sure you want to export metadata for {{ dsoName }}",
+
+  "confirmation-modal.export-metadata-xls.cancel": "Cancel",
+
+  "confirmation-modal.export-metadata-xls.confirm": "Export",
 
   "confirmation-modal.export-batch.header": "Export batch (ZIP) for {{ dsoName }}",
 
@@ -2413,8 +2434,15 @@
 
   "confirmation-modal.pending-changes.confirm": "Leave",
 
+  "confirmation-modal.review-account-info.header": "Save the changes",
 
-  "dataset.listelement.badge" : "Dataset",
+  "confirmation-modal.review-account-info.info": "Continue to update your profile",
+
+  "confirmation-modal.review-account-info.cancel": "Cancel",
+
+  "confirmation-modal.review-account-info.confirm": "Save",
+
+  "dataset.listelement.badge": "Dataset",
 
   "equipment.listelement.badge": "Equipment",
 
@@ -2458,7 +2486,7 @@
 
   "error.validation.custom-url.invalid-characters": "The custom url contains invalid characters.",
 
-  "error.validation.license.notgranted": "You must grant this license to complete your submission. If you are unable to grant this license at this time you may save your work and return later or remove the submission.",
+  "error.validation.license.required": "You must grant this license to complete your submission. If you are unable to grant this license at this time you may save your work and return later or remove the submission.",
 
   "error.validation.pattern": "This input is restricted by the current pattern: {{ pattern }}.",
 
@@ -2472,27 +2500,40 @@
 
   "error.validation.groupExists": "This group already exists",
 
-  "error.validation.fundingInvestigatorOrLeadOrganizationRequired" : "At least one investigator or one lead organization is required",
+  "error.validation.metadata.name.invalid-pattern": "This field cannot contain dots, commas or spaces. Please use the Element & Qualifier fields instead",
+
+  "error.validation.metadata.name.max-length": "This field may not contain more than 32 characters",
+
+  "error.validation.metadata.namespace.max-length": "This field may not contain more than 256 characters",
+
+  "error.validation.metadata.element.invalid-pattern": "This field cannot contain dots, commas or spaces. Please use the Qualifier field instead",
+
+  "error.validation.metadata.element.max-length": "This field may not contain more than 64 characters",
+
+  "error.validation.metadata.qualifier.invalid-pattern": "This field cannot contain dots, commas or spaces",
+
+  "error.validation.metadata.qualifier.max-length": "This field may not contain more than 64 characters",
+
+  "error.validation.fundingInvestigatorOrLeadOrganizationRequired": "At least one investigator or one lead organization is required",
 
   "error.validation.notRepeatable": "This field is not repeatable, please choose only one value and discard the others.",
 
-  "event.listelement.badge" : "Event",
+  "error.validation.detect-duplicate": "The handling of the detected duplicates is mandatory",
 
-  "explore.browse-section.title" : "Browse",
+  "event.listelement.badge": "Event",
 
-  "explore.counters-section.rprofiles" : "People",
 
-  "explore.counters-section.publications" : "Research outputs",
+  "explore.browse-section.title": "Browse",
 
-  "explore.counters-section.project_funding" : "Projects",
+  "explore.counters-section.rprofiles": "People",
 
   "explore.carousel.view-more": "View More",
 
-  "explore.text-section.counter.header" : "Our Numbers",
+  "explore.text-section.counter.header": "Our Numbers",
 
-  "explore.grid-section.seeAll" : "See all",
+  "explore.counters-section.publications": "Research outputs",
 
-  "explore.facet-section.title" : "Discover",
+  "explore.counters-section.project_funding": "Projects",
 
   "explore.facet-section.entityType.Publication": "Publication",
 
@@ -2510,7 +2551,7 @@
 
   "explore.facet-section.entityType.Place": "Place",
 
-  "explore.facet-section.entityType.Audiovideo": "Audio Video",
+  "explore.facet-section.entityType.AudioVideo": "Audio Video",
 
   "explore.facet-section.entityType.Family": "Family",
 
@@ -2528,146 +2569,150 @@
 
   "explore.facet-section.entityType.Picture": "Picture",
 
-  "explore.index.all" : "All",
+  "explore.grid-section.seeAll": "See all",
 
-  "explore.index.author" : "Author",
+  "explore.facet-section.title": "Discover",
 
-  "explore.index.graphitemtype" : "Graph by type",
+  "explore.index.all": "All",
 
-  "explore.index.graphpubldate" : "Graph by date",
+  "explore.index.author": "Author",
 
-  "explore.index.birthDate" : "Birthday",
+  "explore.index.graphitemtype": "Graph by type",
 
-  "explore.index.metric.view" : "Most viewed",
+  "explore.index.graphpubldate": "Graph by date",
 
-  "explore.index.metric.download" : "Most downloaded",
+  "explore.index.birthDate": "Birthday",
 
-  "explore.index.metric.scopus.citation" : "Most cited",
+  "explore.index.metric.view": "Most viewed",
 
-  "explore.index.chart.pie.itemtype_filter" : "Item Type",
+  "explore.index.metric.download": "Most downloaded",
+
+  "explore.index.metric.scopus.citation": "Most cited",
+
+  "explore.index.chart.pie.itemtype_filter": "Item Type",
 
   "explore.index.chart.bar.dateIssued.year": "Year",
 
 
-  "explore.index.dateIssued" : "Date issued",
+  "explore.index.dateIssued": "Date issued",
 
-  "explore.index.dateissued" : "Date issued",
+  "explore.index.dateissued": "Date issued",
 
-  "explore.index.dc.date.accessioned" : "New accessions",
+  "explore.index.dc.date.accessioned": "New accessions",
 
-  "explore.index.paths" : "Paths",
+  "explore.index.paths": "Paths",
 
-  "explore.index.dc.title" : "Title",
+  "explore.index.dc.title": "Title",
 
-  "explore.index.editor" : "Editor",
+  "explore.index.editor": "Editor",
 
-  "explore.index.eqtitle" : "Title",
+  "explore.index.eqtitle": "Title",
 
-  "explore.index.eqowner" : "Researcher",
+  "explore.index.eqowner": "Researcher",
 
-  "explore.index.eqorgunit" : "Organization",
+  "explore.index.eqorgunit": "Organization",
 
-  "explore.index.entityType" : "Entity type",
+  "explore.index.entityType": "Entity type",
 
-  "explore.index.familyName" : "Family name",
+  "explore.index.familyName": "Family name",
 
-  "explore.index.funding" : "Funding",
+  "explore.index.funding": "Funding",
 
-  "explore.index.givenName" : "Given name",
+  "explore.index.givenName": "Given name",
 
-  "explore.index.has_content_in_original_bundle" : "Has content in original bundle",
+  "explore.index.has_content_in_original_bundle": "Has content in original bundle",
 
-  "explore.index.investigators" : "Researchers",
+  "explore.index.investigators": "Researchers",
 
-  "explore.index.isAuthorOfPublication" : "Publication's author",
+  "explore.index.isAuthorOfPublication": "Publication's author",
 
-  "explore.index.isJournalOfPublication" : "Publication's journal",
+  "explore.index.isJournalOfPublication": "Publication's journal",
 
-  "explore.index.isOrgUnitOfPerson" : "Person's organization",
+  "explore.index.isOrgUnitOfPerson": "Person's organization",
 
-  "explore.index.isOrgUnitOfProject" : "Project's organization",
+  "explore.index.isOrgUnitOfProject": "Project's organization",
 
-  "explore.index.isOrgUnitOfPublication" : "Publication's organization",
+  "explore.index.isOrgUnitOfPublication": "Publication's organization",
 
-  "explore.index.isPersonOfOrgUnit" : "Organization's person",
+  "explore.index.isPersonOfOrgUnit": "Organization's person",
 
-  "explore.index.isPersonOfProject" : "Project's person",
+  "explore.index.isPersonOfProject": "Project's person",
 
-  "explore.index.isProjectOfOrgUnit" : "Organization's project",
+  "explore.index.isProjectOfOrgUnit": "Organization's project",
 
-  "explore.index.isProjectOfPerson" : "Person's project",
+  "explore.index.isProjectOfPerson": "Person's project",
 
-  "explore.index.isProjectOfPublication" : "Publication's project",
+  "explore.index.isProjectOfPublication": "Publication's project",
 
-  "explore.index.isPublicationOfAuthor" : "Author's publication",
+  "explore.index.isPublicationOfAuthor": "Author's publication",
 
-  "explore.index.isPublicationOfJournalIssue" : "Journal issue's publication",
+  "explore.index.isPublicationOfJournalIssue": "Journal issue's publication",
 
-  "explore.index.isPublicationOfOrgUnit" : "Organization's publication",
+  "explore.index.isPublicationOfOrgUnit": "Organization's publication",
 
-  "explore.index.isPublicationOfProject" : "Project's publication",
+  "explore.index.isPublicationOfProject": "Project's publication",
 
-  "explore.index.itemidentifier" : "Item identifier",
+  "explore.index.itemidentifier": "Item identifier",
 
-  "explore.index.jobTitle" : "Job title",
+  "explore.index.jobTitle": "Job title",
 
-  "explore.index.knowsLanguage" : "Knows languages",
+  "explore.index.knowsLanguage": "Knows languages",
 
-  "explore.index.organization" : "Organization",
+  "explore.index.organization": "Organization",
 
-  "explore.index.organizationAddressCountry" : "Organization address country",
+  "explore.index.organizationAddressCountry": "Organization address country",
 
-  "explore.index.organizationAddressLocality" : "Organization address locality",
+  "explore.index.organizationAddressLocality": "Organization address locality",
 
-  "explore.index.organizationFoundingDate" : "Organization founding date",
+  "explore.index.organizationFoundingDate": "Organization founding date",
 
-  "explore.index.organizationLegalName" : "Organization legal name",
+  "explore.index.organizationLegalName": "Organization legal name",
 
-  "explore.index.original_bundle_descriptions" : "Original bundle descriptions",
+  "explore.index.original_bundle_descriptions": "Original bundle descriptions",
 
-  "explore.index.original_bundle_filenames" : "Original bundle filenames",
+  "explore.index.original_bundle_filenames": "Original bundle filenames",
 
-  "explore.index.ouname" : "Name",
+  "explore.index.ouname": "Name",
 
-  "explore.index.projectOrgUnits" : "Organizations",
+  "explore.index.projectOrgUnits": "Organizations",
 
-  "explore.index.personOrgUnits" : "Organizations",
+  "explore.index.personOrgUnits": "Organizations",
 
-  "explore.index.pjtitle" : "Title",
+  "explore.index.pjtitle": "Title",
 
-  "explore.index.projectinvestigators" : "Project investigators",
+  "explore.index.projectinvestigators": "Project investigators",
 
-  "explore.index.rodept" : "Department",
+  "explore.index.rodept": "Department",
 
-  "explore.index.rpdept" : "Department",
+  "explore.index.rpdept": "Department",
 
-  "explore.index.rpname" : "Name",
+  "explore.index.rpname": "Name",
 
-  "explore.index.subject" : "Subject",
+  "explore.index.subject": "Subject",
 
-  "explore.index.title" : "Title",
+  "explore.index.title": "Title",
 
-  "explore.index.type" : "Type",
+  "explore.index.type": "Type",
 
-  "explore.index.parent" : "Parent",
+  "explore.index.parent": "Parent",
 
-  "explore.index.itemtype" : "Type",
+  "explore.index.itemtype": "Type",
 
-  "explore.index.license" : "License",
+  "explore.index.license": "License",
 
-  "explore.index.place" : "Place",
+  "explore.index.place": "Place",
 
-  "explore.index.event" : "Event",
+  "explore.index.event": "Event",
 
-  "explore.index.project" : "Project",
+  "explore.index.project": "Project",
 
-  "explore.index.family" : "Family",
+  "explore.index.family": "Family",
 
-  "explore.index.jornalfoundperson" : "Person",
+  "explore.index.jornalfoundperson": "Person",
 
-  "explore.index.jornalfounddate" : "Date",
+  "explore.index.jornalfounddate": "Date",
 
-  "explore.index.corporate" : "Organizational Unit",
+  "explore.index.corporate": "Organizational Unit",
 
   "explore.search-section.infrastructure.title": "Infrastructure",
 
@@ -2708,11 +2753,10 @@
 
   "feed.description": "Syndication feed",
 
-
   "file-section.error.header": "Error obtaining files for this item",
 
 
-  "footer.built-with":"Built with",
+  "footer.built-with": "Built with",
 
   "footer.copyright": "copyright © 2002-{{ year }}",
 
@@ -2734,27 +2778,27 @@
 
   "footer.link.privacy-policy": "Privacy policy",
 
-  "footer.link.end-user-agreement":"End User Agreement",
+  "footer.link.end-user-agreement": "End User Agreement",
 
-  "footer.link.feedback":"Send Feedback",
+  "footer.link.feedback": "Send Feedback",
 
-  "footer.involved-institution":"Institutions involved",
+  "footer.involved-institution": "Institutions involved",
 
-  "footer.information":"Information",
+  "footer.information": "Information",
 
-  "footer.general-information":"General information",
+  "footer.general-information": "General information",
 
-  "footer.offer-service":"Offered services",
+  "footer.offer-service": "Offered services",
 
-  "footer.history-digital":"History of the digital LID",
+  "footer.history-digital": "History of the digital LID",
 
-  "footer.org-structure":"Organizational structure",
+  "footer.org-structure": "Organizational structure",
 
-  "footer.contact":"Contacts",
+  "footer.contact": "Contacts",
 
   "footer.contact.href": "https://www.4science.com/contact-us/",
 
-  "footer.terms":"Terms of Use",
+  "footer.terms": "Terms of Use",
 
   "footer.made-info": "Made with <a href=\"https://www.4science.it/dspace-glam/\" target=\"_blank\">DSpace-GLAM</a> - Extension maintained and optimized by <a href=\"https://www.4science.it/servizi/\" target=\"_blank\">4Science</a>",
 
@@ -2779,8 +2823,6 @@
   "forgot-email.form.error.head": "Error when trying to reset password",
 
   "forgot-email.form.error.content": "An error occured when attempting to reset the password for the account associated with the following email address: {{ email }}",
-
-
 
   "forgot-password.title": "Forgot Password",
 
@@ -2809,7 +2851,6 @@
   "forgot-password.form.notification.success.title": "Password reset completed",
 
   "forgot-password.form.submit": "Submit password",
-
 
   "form.add": "Add more",
 
@@ -2863,6 +2904,18 @@
 
   "form.no-value": "No value entered",
 
+  "form.other-information.email": "Email",
+
+  "form.other-information.first-name": "First Name",
+
+  "form.other-information.insolr": "In Solr Index",
+
+  "form.other-information.institution": "Institution",
+
+  "form.other-information.last-name": "Last Name",
+
+  "form.other-information.orcid": "ORCID",
+
   "form.other-information.oairecerif_author_affiliation": "Affiliation",
 
   "form.other-information.oairecerif_editor_affiliation": "Affiliation",
@@ -2889,11 +2942,13 @@
 
   "form.submit": "Save",
 
+  "form.create": "Create",
+
   "form.repeatable.sort.tip": "Drop the item in the new position",
 
-  "funding.listelement.badge" : "Funding",
+  "funding.listelement.badge": "Funding",
 
-  "funding.page.titleprefix" : "Funding:",
+  "funding.page.titleprefix": "Funding:",
 
 
 
@@ -2901,7 +2956,7 @@
 
   "grant-deny-request-copy.email.back": "Back",
 
-  "grant-deny-request-copy.email.message": "Message",
+  "grant-deny-request-copy.email.message": "Optional additional message",
 
   "grant-deny-request-copy.email.message.empty": "Please enter a message",
 
@@ -2927,35 +2982,35 @@
 
   "grant-deny-request-copy.processed": "This request has already been processed. You can use the button below to get back to the home page.",
 
-
-
-  "grant-request-copy.email.message": "Dear {{ recipientName }},\nIn response to your request I have the pleasure to send you in attachment a copy of the file(s) concerning the document: \"{{ itemUrl }}\" ({{ itemName }}), of which I am an author.\n\nBest regards,\n{{ authorName }} <{{ authorEmail }}>",
-
   "grant-request-copy.email.subject": "Request copy of document",
 
   "grant-request-copy.error": "An error occurred",
 
   "grant-request-copy.header": "Grant document copy request",
 
-  "grant-request-copy.intro": "This message will be sent to the applicant of the request. The requested document(s) will be attached.",
+  "grant-request-copy.intro": "A message will be sent to the applicant of the request. The requested document(s) will be attached.",
 
   "grant-request-copy.success": "Successfully granted item request",
 
 
   "grid.component.badge": "Paths",
+
   "grid.component.title": "Discovering...",
+
   "grid.component.subtitle": "...new ways to explore our digital libraries.",
+
   "grid.component.abstract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+
   "grid.component.link": "/explore/paths",
 
 
   "health.breadcrumbs": "Health",
 
-  "health-page.heading" : "Health",
+  "health-page.heading": "Health",
 
-  "health-page.info-tab" : "Info",
+  "health-page.info-tab": "Info",
 
-  "health-page.status-tab" : "Status",
+  "health-page.status-tab": "Status",
 
   "health-page.error.msg": "The health check service is temporarily unavailable",
 
@@ -2988,7 +3043,6 @@
   "health-page.title": "Health",
 
   "health-page.section.no-issues": "No issues detected",
-
 
   "home.description": "",
 
@@ -3024,6 +3078,8 @@
 
   "info.end-user-agreement.title": "End User Agreement",
 
+  "info.end-user-agreement.hosting-country": "the United States",
+
   "info.privacy.breadcrumbs": "Privacy Statement",
 
   "info.privacy.head": "Privacy Statement",
@@ -3046,35 +3102,27 @@
 
   "info.feedback.email-label": "Your Email",
 
-  "info.feedback.create.success" : "Feedback Sent Successfully!",
+  "info.feedback.create.success": "Feedback Sent Successfully!",
 
-  "info.feedback.error.email.required" : "A valid email address is required",
+  "info.feedback.error.email.required": "A valid email address is required",
 
-  "info.feedback.error.message.required" : "A comment is required",
+  "info.feedback.error.message.required": "A comment is required",
 
-  "info.feedback.page-label" : "Page",
+  "info.feedback.page-label": "Page",
 
-  "info.feedback.page_help" : "Tha page related to your feedback",
-
-
+  "info.feedback.page_help": "Tha page related to your feedback",
 
   "item.alerts.private": "This item is non-discoverable",
 
   "item.alerts.withdrawn": "This item has been withdrawn",
 
-
-
   "item.edit.authorizations.heading": "With this editor you can view and alter the policies of an item, plus alter policies of individual item components: bundles and bitstreams. Briefly, an item is a container of bundles, and bundles are containers of bitstreams. Containers usually have ADD/REMOVE/READ/WRITE policies, while bitstreams only have READ/WRITE policies.",
 
   "item.edit.authorizations.title": "Edit item's Policies",
 
-
-
   "item.badge.private": "Non-discoverable",
 
   "item.badge.withdrawn": "Withdrawn",
-
-
 
   "item.bitstreams.upload.bundle": "Bundle",
 
@@ -3082,7 +3130,7 @@
 
   "item.bitstreams.upload.bundle.new": "Create bundle",
 
-  "item.bitstreams.upload.bundles.empty": "This item doesn\'t contain any bundles to upload a bitstream to.",
+  "item.bitstreams.upload.bundles.empty": "This item doesn't contain any bundles to upload a bitstream to.",
 
   "item.bitstreams.upload.cancel": "Cancel",
 
@@ -3164,8 +3212,6 @@
 
   "item.edit.bitstreams.upload-button": "Upload",
 
-
-
   "item.edit.delete.cancel": "Cancel",
 
   "item.edit.delete.confirm": "Delete",
@@ -3183,7 +3229,6 @@
   "item.edit.breadcrumbs": "Edit Item",
 
   "item.edit.tabs.disabled.tooltip": "You're not authorized to access this tab",
-
 
   "item.edit.tabs.mapper.head": "Collection Mapper",
 
@@ -3267,8 +3312,6 @@
 
   "item.edit.item-mapper.tabs.map": "Map new collections",
 
-
-
   "item.edit.metadata.add-button": "Add",
 
   "item.edit.metadata.discard-button": "Discard",
@@ -3327,15 +3370,11 @@
 
   "item.edit.metadata.save-button": "Save",
 
-
-
   "item.edit.modify.overview.field": "Field",
 
   "item.edit.modify.overview.language": "Language",
 
   "item.edit.modify.overview.value": "Value",
-
-
 
   "item.edit.move.cancel": "Back",
 
@@ -3353,6 +3392,8 @@
 
   "item.edit.move.inheritpolicies.description": "Inherit the default policies of the destination collection",
 
+  "item.edit.move.inheritpolicies.tooltip": "Warning: When enabled, the read access policy for the item and any files associated with the item will be replaced by the default read access policy of the collection. This cannot be undone.",
+
   "item.edit.move.move": "Move",
 
   "item.edit.move.processing": "Moving...",
@@ -3362,8 +3403,6 @@
   "item.edit.move.success": "The item has been moved successfully",
 
   "item.edit.move.title": "Move item",
-
-
 
   "item.edit.private.cancel": "Cancel",
 
@@ -3377,8 +3416,6 @@
 
   "item.edit.private.success": "The item is now non-discoverable",
 
-
-
   "item.edit.public.cancel": "Cancel",
 
   "item.edit.public.confirm": "Make it discoverable",
@@ -3391,8 +3428,6 @@
 
   "item.edit.public.success": "The item is now discoverable",
 
-
-
   "item.edit.reinstate.cancel": "Cancel",
 
   "item.edit.reinstate.confirm": "Reinstate",
@@ -3404,8 +3439,6 @@
   "item.edit.reinstate.header": "Reinstate item: {{ id }}",
 
   "item.edit.reinstate.success": "The item was reinstated successfully",
-
-
 
   "item.edit.relationships.discard-button": "Discard",
 
@@ -3437,9 +3470,7 @@
 
   "item.edit.relationships.no-entity-type": "Add 'dspace.entity.type' metadata to enable relationships for this item",
 
-
   "item.edit.return": "Back",
-
 
   "item.edit.tabs.bitstreams.head": "Bitstreams",
 
@@ -3448,6 +3479,12 @@
   "item.edit.tabs.curate.head": "Curate",
 
   "item.edit.tabs.curate.title": "Item Edit - Curate",
+
+  "item.edit.curate.title": "Curate Item: {{item}}",
+
+  "item.edit.tabs.access-control.head": "Access Control",
+
+  "item.edit.tabs.access-control.title": "Item Edit - Access Control",
 
   "item.edit.tabs.metadata.head": "Metadata",
 
@@ -3531,13 +3568,13 @@
 
   "item.edit.unlink-orcid.head": "Disconnect from ORCID",
 
-  "item.edit.unlink-orcid.not-linked-to-orcid" : "The operation cannot be completed because the given item is not a profile linked to ORCID",
+  "item.edit.unlink-orcid.not-linked-to-orcid": "The operation cannot be completed because the given item is not a profile linked to ORCID",
 
   "item.edit.unlink-orcid.unlink": "Disconnect",
 
   "item.edit.unlink-orcid.unlink.success": "The disconnection between the profile and the ORCID registry was successful",
 
-  "item.edit.unlink-orcid.unlink.error" :"An error occurred while disconnecting between the profile and the ORCID registry. Try again",
+  "item.edit.unlink-orcid.unlink.error": "An error occurred while disconnecting between the profile and the ORCID registry. Try again",
 
   "item.edit.unlink-orcid.processing": "Processing",
 
@@ -3555,7 +3592,6 @@
   "item.edit.withdraw.success": "The item was withdrawn successfully",
 
   "item.orcid.return": "Back",
-
 
   "item.listelement.badge": "Item",
 
@@ -3596,8 +3632,6 @@
   "workflow-item.search.result.list.element.supervised-by": "Supervised by:",
 
   "workflow-item.search.result.list.element.supervised.remove-tooltip": "Remove supervision group",
-
-
 
   "item.page.abstract": "Abstract",
 
@@ -3699,9 +3733,9 @@
 
   "item.page.bitstreams.collapse": "Collapse",
 
-  "item.page.filesection.original.bundle" : "Original bundle",
+  "item.page.filesection.original.bundle": "Original bundle",
 
-  "item.page.filesection.license.bundle" : "License bundle",
+  "item.page.filesection.license.bundle": "License bundle",
 
   "item.page.return": "Back",
 
@@ -3713,9 +3747,9 @@
 
   "item.page.claim.tooltip": "Claim this item as profile",
 
-  "item.preview.dc.description" : "Summary",
+  "item.preview.dc.description": "Summary",
 
-  "item.preview.dc.description.tableOfContents" : "Table of Contents",
+  "item.preview.dc.description.tableOfContents": "Table of Contents",
 
   "item.preview.dc.identifier.arxiv": "arXiv ID",
 
@@ -3725,21 +3759,21 @@
 
   "item.preview.dcterms.dateSubmitted": "Registration Date",
 
-  "item.preview.dc.identifier.isi" : "ISI",
+  "item.preview.dc.identifier.isi": "ISI",
 
-  "item.preview.dc.identifier.issn" : "ISSN",
+  "item.preview.dc.identifier.issn": "ISSN",
 
-  "item.preview.dc.identifier.scopus" : "Scopus ID",
+  "item.preview.dc.identifier.scopus": "Scopus ID",
 
-  "item.preview.dc.publisher" : "Publisher",
+  "item.preview.dc.publisher": "Publisher",
 
-  "item.preview.dc.relation.grantno" : "Grant no.",
+  "item.preview.dc.relation.grantno": "Grant no.",
 
-  "item.preview.dc.relation.ispartofseries" : "Serie",
+  "item.preview.dc.relation.ispartofseries": "Serie",
 
   "item.preview.dc.identifier.uri": "Identifier:",
 
-  "item.preview.dc.contributor.advisor" : "Advisor",
+  "item.preview.dc.contributor.advisor": "Advisor",
 
   "item.preview.dc.contributor.author": "Authors:",
 
@@ -3747,25 +3781,25 @@
 
   "item.preview.dc.contributor.editor": "Editors:",
 
-  "item.preview.dc.date.embargoEnd" : "Embargo End",
+  "item.preview.dc.date.embargoEnd": "Embargo End",
 
   "item.preview.dc.date.issued": "Published date:",
 
   "item.preview.dc.description.abstract": "Abstract:",
 
-  "item.preview.dc.description.sponsorship" : "Sponsorship",
+  "item.preview.dc.description.sponsorship": "Sponsorship",
 
   "item.preview.dc.identifier.other": "Other identifier:",
 
-  "item.preview.dc.identifier.pmid" : "Pubmed ID",
+  "item.preview.dc.identifier.pmid": "Pubmed ID",
 
   "item.preview.dc.language.iso": "Language:",
 
-  "item.preview.dc.relation.uri" : "Relation URI",
+  "item.preview.dc.relation.uri": "Relation URI",
 
-  "item.preview.dc.rights" : "Rights",
+  "item.preview.dc.rights": "Rights",
 
-  "item.preview.dc.rights.uri" : "Rights URI",
+  "item.preview.dc.rights.uri": "Rights URI",
 
   "item.preview.dc.subject": "Subjects:",
 
@@ -3773,49 +3807,59 @@
 
   "item.preview.dc.type": "Type:",
 
-  "item.preview.oaire.citation.issue" : "Issue",
+  "item.preview.oaire.citation.issue": "Issue",
 
-  "item.preview.oaire.citation.volume" : "Volume",
+  "item.preview.oaire.citation.volume": "Volume",
 
-  "item.preview.dc.relation.issn" : "ISSN",
+  "item.preview.dc.relation.issn": "ISSN",
 
-  "item.preview.dc.identifier.isbn" : "ISBN",
+  "item.preview.dc.identifier.isbn": "ISBN",
 
   "item.preview.dc.identifier": "Identifier:",
 
-  "item.preview.dc.relation.ispartof" : "Journal or Serie",
+  "item.preview.dc.relation.ispartof": "Journal or Series",
 
-  "item.preview.dc.identifier.doi" : "DOI",
+  "item.preview.dc.identifier.doi": "DOI",
 
-  "item.preview.dc.title.alternative" : "Alternative Title",
+  "item.preview.dc.title.alternative": "Alternative Title",
 
-  "item.preview.dc.type.version" : "Version",
+  "item.preview.dc.type.version": "Version",
 
   "item.preview.dc.source": "Source:",
 
-  "item.preview.dc.relation.isbn" : "ISBN",
+  "item.preview.dc.relation.isbn": "ISBN",
 
-  "item.preview.oaire.citation.endPage" : "End Page",
+  "item.preview.oaire.citation.endPage": "End Page",
 
   "item.preview.oaire.citation.edition": "Edition",
 
-  "item.preview.oaire.citation.startPage" : "Start Page",
+  "item.preview.oaire.citation.startPage": "Start Page",
 
-  "item.preview.oairecerif.acronym" : "Acronym",
+  "item.preview.oairecerif.acronym": "Acronym",
 
-  "item.preview.oairecerif.affiliation.orgunit" : "Affiliation",
+  "item.preview.oairecerif.affiliation.orgunit": "Affiliation",
 
-  "item.preview.oairecerif.funder" : "Funder",
+  "item.preview.oairecerif.funder": "Funder",
 
-  "item.preview.oairecerif.funding.identifier" : "Grant Number / Funding identifier",
+  "item.preview.oairecerif.funding.identifier": "Grant Number / Funding identifier",
 
-  "item.preview.oairecerif.funding.endDate" : "End Date",
+  "item.preview.oairecerif.funding.endDate": "End Date",
 
-  "item.preview.oairecerif.funding.startDate" : "Start Date",
+  "item.preview.oairecerif.funding.startDate": "Start Date",
 
-  "item.preview.oairecerif.fundingParent" : "Funding Program / Call",
+  "item.preview.oairecerif.fundingParent": "Funding Program / Call",
 
-  "item.preview.oairecerif.oamandate" : "OA Mandate",
+  "item.preview.oairecerif.oamandate": "OA Mandate",
+
+  "item.preview.oairecerif.identifier.url": "Link",
+
+  "item.preview.organization.identifier.ror": "ROR ID",
+
+  "item.preview.organization.foundingDate": "Founding Date",
+
+  "item.preview.organization.address.addressCountry": "Country",
+
+  "item.preview.organization.parentOrganization": "Parent Organization",
 
   "item.preview.person.familyName": "Surname:",
 
@@ -3833,7 +3877,6 @@
 
   "item.preview.oaire.fundingStream": "Funding Stream:",
 
-
   "item.preview.person.identifier.rid": "Researcher ID:",
 
   "item.preview.person.identifier.scopus-author-id": "Scopus Author Id",
@@ -3847,7 +3890,6 @@
   "item.select.table.collection": "Collection",
 
   "item.select.table.title": "Title",
-
 
   "item.version.history.empty": "There are no other versions for this item yet.",
 
@@ -3889,9 +3931,7 @@
 
   "item.version.history.table.action.hasDraft": "A new version cannot be created because there is an inprogress submission in the version history",
 
-
   "item.version.notice": "This is not the latest version of this item. The latest version can be found <a href='{{destination}}'>here</a>.",
-
 
   "item.version.create.modal.header": "New version",
 
@@ -3915,12 +3955,11 @@
 
   "item.version.create.modal.submitted.text": "The new version is being created. This may take some time if the item has a lot of relationships.",
 
-  "item.version.create.notification.success" : "New version has been created with version number {{version}}",
+  "item.version.create.notification.success": "New version has been created with version number {{version}}",
 
-  "item.version.create.notification.failure" : "New version has not been created",
+  "item.version.create.notification.failure": "New version has not been created",
 
-  "item.version.create.notification.inProgress" : "A new version cannot be created because there is an inprogress submission in the version history",
-
+  "item.version.create.notification.inProgress": "A new version cannot be created because there is an inprogress submission in the version history",
 
   "item.version.delete.modal.header": "Delete version",
 
@@ -3934,14 +3973,13 @@
 
   "item.version.delete.modal.button.cancel.tooltip": "Do not delete this version",
 
-  "item.version.delete.notification.success" : "Version number {{version}} has been deleted",
+  "item.version.delete.notification.success": "Version number {{version}} has been deleted",
 
-  "item.version.delete.notification.failure" : "Version number {{version}} has not been deleted",
+  "item.version.delete.notification.failure": "Version number {{version}} has not been deleted",
 
+  "item.version.edit.notification.success": "The summary of version number {{version}} has been changed",
 
-  "item.version.edit.notification.success" : "The summary of version number {{version}} has been changed",
-
-  "item.version.edit.notification.failure" : "The summary of version number {{version}} has not been changed",
+  "item.version.edit.notification.failure": "The summary of version number {{version}} has not been changed",
 
   "item-export.modal-launcher.single.btn": "Export",
 
@@ -4011,7 +4049,7 @@
 
   "itemtemplate.edit.metadata.notifications.discarded.content": "Your changes were discarded. To reinstate your changes click the 'Undo' button",
 
-  "itemtemplate.edit.metadata.notifications.discarded.title": "Changed discarded",
+  "itemtemplate.edit.metadata.notifications.discarded.title": "Changes discarded",
 
   "itemtemplate.edit.metadata.notifications.error.title": "An error occurred",
 
@@ -4021,7 +4059,7 @@
 
   "itemtemplate.edit.metadata.notifications.outdated.content": "The item template you're currently working on has been changed by another user. Your current changes are discarded to prevent conflicts",
 
-  "itemtemplate.edit.metadata.notifications.outdated.title": "Changed outdated",
+  "itemtemplate.edit.metadata.notifications.outdated.title": "Changes outdated",
 
   "itemtemplate.edit.metadata.notifications.saved.content": "Your changes to this item template's metadata were saved.",
 
@@ -4032,8 +4070,6 @@
   "itemtemplate.edit.metadata.reset-order-button": "Undo reorder",
 
   "itemtemplate.edit.metadata.save-button": "Save",
-
-
 
   "journal.listelement.badge": "Journal",
 
@@ -4055,8 +4091,6 @@
 
   "journal.search.title": "Journal Search",
 
-
-
   "journalissue.listelement.badge": "Journal Issue",
 
   "journalissue.page.description": "Description",
@@ -4075,8 +4109,6 @@
 
   "journalissue.page.titleprefix": "Journal Issue: ",
 
-
-
   "journalvolume.listelement.badge": "Journal Volume",
 
   "journalvolume.page.description": "Description",
@@ -4088,7 +4120,6 @@
   "journalvolume.page.titleprefix": "Journal Volume: ",
 
   "journalvolume.page.volume": "Volume",
-
 
   "iiifsearchable.listelement.badge": "Document Media",
 
@@ -4161,8 +4192,6 @@
 
   "loading.top-level-communities": "Loading top-level communities...",
 
-
-
   "login.form.email": "Email address",
 
   "login.form.forgot-password": "Have you forgotten your password?",
@@ -4170,8 +4199,6 @@
   "login.form.header": "Please log in to DSpace",
 
   "login.form.new-user": "New user? Click here to register.",
-
-  "login.form.or-divider": "or",
 
   "login.form.oidc": "Log in with OIDC",
 
@@ -4186,8 +4213,6 @@
   "login.title": "Login",
 
   "login.breadcrumbs": "Login",
-
-
 
   "logout.form.header": "Log out from DSpace",
 
@@ -4204,25 +4229,25 @@
 
   "manage.relationships.unhide": "Unhide",
 
-  "manage.relationships.search-list.title" : "All your items",
+  "manage.relationships.search-list.title": "All your items",
 
-  "manage.relationships.selected-list.title" : "Selected items",
+  "manage.relationships.selected-list.title": "Selected items",
 
-  "manage.relationships.no.relationships.found" : "Empty selection",
+  "manage.relationships.no.relationships.found": "Empty selection",
 
-  "manage.relationships.no.data.found" : "No data found",
+  "manage.relationships.no.data.found": "No data found",
 
-  "manage.relationships.error.select" : "An unexpected error occurs while selecting the entity.",
+  "manage.relationships.error.select": "An unexpected error occurs while selecting the entity.",
 
-  "manage.relationships.error.unselect" : "An unexpected error occurs while unselecting the entity.",
+  "manage.relationships.error.unselect": "An unexpected error occurs while unselecting the entity.",
 
-  "manage.relationships.error.hide" : "An unexpected error occurs while hiding the entity.",
+  "manage.relationships.error.hide": "An unexpected error occurs while hiding the entity.",
 
-  "manage.relationships.error.unhide" : "An unexpected error occurs while exposing the entity.",
+  "manage.relationships.error.unhide": "An unexpected error occurs while exposing the entity.",
 
-  "manage.relationships.error.sort" : "An unexpected error occurs while sorting entities.",
+  "manage.relationships.error.sort": "An unexpected error occurs while sorting entities.",
 
-  "manage.relationships.hidden-related-items-alert" : "Please note that hidden related items will always be visible among Item’s relations to administrators and owner of the Item",
+  "manage.relationships.hidden-related-items-alert": "Please note that hidden related items will always be visible among Item’s relations to administrators and owner of the Item",
 
 
   "menu.header.admin": "Management",
@@ -4230,7 +4255,6 @@
   "menu.header.image.logo": "Repository logo",
 
   "menu.header.admin.description": "Management menu",
-
 
 
   "menu.section.notifications": "Notifications",
@@ -4245,15 +4269,13 @@
 
   "menu.section.access_control_authorizations": "Authorizations",
 
+  "menu.section.access_control_bulk": "Bulk Access Management",
+
   "menu.section.access_control_groups": "Groups",
 
   "menu.section.access_control_people": "People",
 
-
-
   "menu.section.admin_search": "Admin Search",
-
-
 
   "menu.section.browse_community": "This Community",
 
@@ -4283,6 +4305,10 @@
 
   "menu.section.explore_orgunits": "Organizations",
 
+  "menu.section.browse_global_by_srsc": "By Subject Category",
+
+  "menu.section.browse_global_by_nsi": "By Norwegian Science Index",
+
   "menu.section.explore_fundings": "Fundings",
 
   "menu.section.explore_projects": "Projects",
@@ -4299,8 +4325,6 @@
 
   "menu.section.curation_task": "Curation Task",
 
-
-
   "menu.section.edit": "Edit",
 
   "menu.section.edit_collection": "Collection",
@@ -4308,8 +4332,6 @@
   "menu.section.edit_community": "Community",
 
   "menu.section.edit_item": "Item",
-
-
 
   "menu.section.export": "Export",
 
@@ -4320,6 +4342,10 @@
   "menu.section.export_item": "Item",
 
   "menu.section.export_metadata": "Metadata",
+
+  "menu.section.export_metadata_csv": "Metadata CSV",
+
+  "menu.section.export_metadata_xls": "Metadata XLS",
 
   "menu.section.export_batch": "Batch Export (ZIP)",
 
@@ -4365,8 +4391,6 @@
 
   "menu.section.icon.unpin": "Unpin sidebar",
 
-
-
   "menu.section.import": "Import",
 
   "menu.section.import_batch": "Batch Import (ZIP)",
@@ -4374,8 +4398,6 @@
   "menu.section.import_mag": "MAG Import",
 
   "menu.section.import_metadata": "Metadata",
-
-
 
   "menu.section.new": "New",
 
@@ -4389,27 +4411,19 @@
 
   "menu.section.new_process": "Process",
 
-
-
   "menu.section.pin": "Pin sidebar",
 
   "menu.section.unpin": "Unpin sidebar",
 
-
-
   "menu.section.processes": "Processes",
 
   "menu.section.health": "Health",
-
-
 
   "menu.section.registries": "Registries",
 
   "menu.section.registries_format": "Format",
 
   "menu.section.registries_metadata": "Metadata",
-
-
 
   "menu.section.statistics": "Statistics",
 
@@ -4421,112 +4435,10 @@
 
   "menu.section.statistics_task": "Statistics Task",
 
-  "modal.item-detail-page.title" : "Item Page Detail",
+  "modal.item-detail-page.title": "Item Page Detail",
 
-  "modal.item-detail-page.confirm.cancel" : "Close",
+  "modal.item-detail-page.confirm.cancel": "Close",
 
-
-  "statistics": "Statistics",
-
-  "statistics.workflow.breadcrumbs": "Workflow Statistics",
-
-  "statistics.workflow.page.header": "Workflow Statistics",
-
-  "statistics.workflow.page.current-table.header": "Current workflows",
-
-  "statistics.workflow.page.owner-table.header": "Actions performed by actor",
-
-  "statistics.workflow.page.owner-table.count": "Performed",
-
-  "statistics.workflow.page.owner-table.email": "Email",
-
-  "statistics.workflow.page.step-table.header": "Workflow steps performed",
-
-  "statistics.workflow.page.step-table.step": "Step",
-
-  "statistics.workflow.page.step-table.count": "Performed",
-
-  "statistics.workflow.page.step-table.submit" : "Submit",
-
-  "statistics.workflow.page.step-table.reviewstep" : "Review",
-
-  "statistics.workflow.page.step-table.editstep" : "Edit",
-
-  "statistics.workflow.page.step-table.finaleditstep" : "Final edit",
-
-  "statistics.workflow.page.step-table.item" : "Archive",
-
-  "statistics.workflow.page.step-table.workspace" : "Reject",
-
-  "statistics.workflow.page.current-table.reviewstep" : "Review",
-
-  "statistics.workflow.page.current-table.editstep" : "Edit",
-
-  "statistics.workflow.page.current-table.finaleditstep" : "Final edit",
-
-  "statistics.workflow.page.current-table.step": "Step",
-
-  "statistics.workflow.page.current-table.count": "Count",
-
-  "statistics.workflow.page.max": "Max",
-
-  "statistics.workflow.page.collection": "Collection",
-
-  "statistics.workflow.page.endDate": "End date",
-
-  "statistics.workflow.page.startDate": "Start date",
-
-  "statistics.workflow.page.reset": "Reset filters",
-
-  "statistics.workflow.page.actions.title": "Actions",
-
-  "statistics.workflow.page.action-table.action": "Action",
-
-  "statistics.workflow.page.action-table.count": "Count",
-
-  "statistics.workflow.page.action-table.editstep.editaction": "Edit",
-
-  "statistics.workflow.page.action-table.finaleditstep.finaleditaction": "Final Edit",
-
-  "statistics.workflow.page.action-table.reviewstep.reviewaction": "Review",
-
-  "statistics.workflow.page.action-table.submit": "Submit",
-
-  "statistics.workflow.page.action-table.approve": "Approve",
-
-  "statistics.workflow.page.action-table.reject": "Reject",
-
-  "statistics.workflow.page.action-table.editaction": "Edit",
-
-  "statistics.workflow.page.action-table.finaleditaction": "Final Edit",
-
-  "statistics.workflow.page.action-table.reviewaction": "Review",
-
-  "statistics.workflow.page.action-table.claimaction" : "Claim",
-
-  "statistics.workflow.page.no-data-found": "No data found",
-
-  "statistics.login.breadcrumbs": "Login Statistics",
-
-  "statistics.login.page.header": "Login Statistics",
-
-  "statistics.login.page.reset": "Reset filters",
-
-  "statistics.login.page.table.user": "User",
-
-  "statistics.login.page.table.email": "Email",
-
-  "statistics.login.page.table.count": "Login",
-
-  "statistics.login.page.max": "Max",
-
-  "statistics.login.page.endDate": "End date",
-
-  "statistics.login.page.startDate": "Start date",
-
-  "statistics.login.page.no-data-found": "No data found",
-
-  "statistics.login.title statistics.workflow.title" : "Login Statistics",
 
   "manage.relations": "Manage Relations",
 
@@ -4553,7 +4465,6 @@
   "menu.section.edit_user_agreement": "Edit User Agreement",
 
   "menu.section.workflow": "Administer Workflow",
-
 
   "metadata-export-search.tooltip": "Export search results as CSV",
 
@@ -4649,15 +4560,15 @@
 
   "mydspace.show.otherworkspace": "Other Workspace Submissions",
 
-  "mydspace.status.archived": "Archived",
+  "mydspace.status.mydspaceArchived": "Archived",
 
-  "mydspace.status.validation": "Validation",
+  "mydspace.status.mydspaceValidation": "Validation",
 
-  "mydspace.status.waiting-for-controller": "Waiting for controller",
+  "mydspace.status.mydspaceWaitingController": "Waiting for controller",
 
-  "mydspace.status.workflow": "Workflow",
+  "mydspace.status.mydspaceWorkflow": "Workflow",
 
-  "mydspace.status.workspace": "Workspace",
+  "mydspace.status.mydspaceWorkspace": "Workspace",
 
   "mydspace.title": "MyDSpace",
 
@@ -4676,6 +4587,7 @@
   "mydspace.notification.suggestion": "We found <b>{{count}} publications</b><br> in the {{source}} that seems to be related to your profile.<br> Please <a href='/suggestions/{{suggestionId}}'>review the suggestions</a>",
 
   "mydspace.notification.suggestion.page": "We found <b>{{count}} {{type}}</b> in the {{source}} that seems to be related to your profile. Please <a href='/suggestions/{{suggestionId}}'>review the suggestions.</a>",
+
 
   "nav.browse.header": "All of DSpace",
 
@@ -4701,15 +4613,17 @@
 
   "nav.search": "Search",
 
+  "nav.search.button": "Submit search",
+
   "nav.statistics.header": "Statistics",
 
   "nav.stop-impersonating": "Stop impersonating EPerson",
 
-  "nav.subscriptions" : "Subscriptions",
+  "nav.subscriptions": "Subscriptions",
 
-  "nav.toggle" : "Toggle navigation",
+  "nav.toggle": "Toggle navigation",
 
-  "nav.user.description" : "User profile bar",
+  "nav.user.description": "User profile bar",
 
   "none.listelement.badge": "Item",
 
@@ -4918,8 +4832,6 @@
 
   "orgunit.page.titleprefix": "Organizational Unit: ",
 
-
-
   "pagination.options.description": "Pagination options",
 
   "pagination.results-per-page": "Results Per Page",
@@ -4929,8 +4841,6 @@
   "pagination.showing.label": "Now showing ",
 
   "pagination.sort-direction": "Sort Options",
-
-
 
   "person.listelement.badge": "Person",
 
@@ -4964,8 +4874,6 @@
 
   "person.search.title": "Person Search",
 
-
-
   "process.new.select-parameters": "Parameters",
 
   "process.new.cancel": "Cancel",
@@ -4998,6 +4906,8 @@
 
   "process.new.notification.error.content": "An error occurred while creating this process",
 
+  "process.new.notification.error.max-upload.content": "The file exceeds the maximum upload size",
+
   "process.new.notification.process.processing": "Processing...",
 
   "process.new.notification.process.files": "Output Files: ",
@@ -5008,15 +4918,13 @@
 
   "process.new.breadcrumbs": "Create a new process",
 
+  "process.detail.arguments": "Arguments",
 
+  "process.detail.arguments.empty": "This process doesn't contain any arguments",
 
-  "process.detail.arguments" : "Arguments",
+  "process.detail.back": "Back",
 
-  "process.detail.arguments.empty" : "This process doesn't contain any arguments",
-
-  "process.detail.back" : "Back",
-
-  "process.detail.output" : "Process Output",
+  "process.detail.output": "Process Output",
 
   "process.detail.logs.button": "Retrieve process output",
 
@@ -5024,21 +4932,21 @@
 
   "process.detail.logs.none": "This process has no output",
 
-  "process.detail.output-files" : "Output Files",
+  "process.detail.output-files": "Output Files",
 
-  "process.detail.output-files.empty" : "This process doesn't contain any output files",
+  "process.detail.output-files.empty": "This process doesn't contain any output files",
 
-  "process.detail.script" : "Script",
+  "process.detail.script": "Script",
 
-  "process.detail.title" : "Process: {{ id }} - {{ name }}",
+  "process.detail.title": "Process: {{ id }} - {{ name }}",
 
-  "process.detail.start-time" : "Start time",
+  "process.detail.start-time": "Start time",
 
-  "process.detail.end-time" : "Finish time",
+  "process.detail.end-time": "Finish time",
 
-  "process.detail.status" : "Status",
+  "process.detail.status": "Status",
 
-  "process.detail.create" : "Create similar process",
+  "process.detail.create": "Create similar process",
 
   "process.detail.actions": "Actions",
 
@@ -5056,21 +4964,21 @@
 
   "process.detail.delete.error": "Something went wrong when deleting the process",
 
-  "process.overview.delete.failed" : "An error occurs deleting the process.",
+  "process.overview.delete.failed": "An error occurs deleting the process.",
 
-  "process.overview.delete.success" : "Process deleted with success",
+  "process.overview.delete.success": "Process deleted with success",
 
-  "process.overview.table.finish" : "Finish time (UTC)",
+  "process.overview.table.finish": "Finish time (UTC)",
 
-  "process.overview.table.id" : "Process ID",
+  "process.overview.table.id": "Process ID",
 
-  "process.overview.table.name" : "Name",
+  "process.overview.table.name": "Name",
 
-  "process.overview.table.start" : "Start time (UTC)",
+  "process.overview.table.start": "Start time (UTC)",
 
-  "process.overview.table.status" : "Status",
+  "process.overview.table.status": "Status",
 
-  "process.overview.table.user" : "User",
+  "process.overview.table.user": "User",
 
   "process.overview.title": "Processes Overview",
 
@@ -5098,52 +5006,10 @@
 
 
 
-  "audit.overview.title": "Audit Logs Overview",
-
-  "audit.overview.table.id" : "Audit ID",
-
-  "audit.overview.table.objectUUID" : "Object ID",
-
-  "audit.overview.table.objectType" : "Object Type",
-
-  "audit.overview.table.subjectUUID" : "Subject ID",
-
-  "audit.overview.table.subjectType" : "Subject Type",
-
-  "audit.overview.table.entityType" : "Audit Type",
-
-  "audit.overview.table.eperson" : "EPerson",
-
-  "audit.overview.table.timestamp" : "Time",
-
-  "audit.overview.breadcrumbs": "Audit Logs Overview",
-
-  "audit.object.overview.title": "Subject Audit Logs Overview",
-
-
-  "audit.detail.title" : "Audit Detail",
-
-  "audit.detail.id" : "Audit Id",
-
-  "audit.detail.subjectUUID" : "Subject ID",
-
-  "audit.detail.subjectType" : "Subject Type",
-
-  "audit.detail.eventType" : "Audit Type",
-
-  "audit.detail.eperson" : "EPerson",
-
-  "audit.detail.timeStamp" : "Time",
-
-  "audit.detail.back" : "All Audit Logs",
-
-  "audit.detail.back.subject": "Subject Audit Logs",
 
   "patent.listelement.badge": "Patent",
 
   "product.listelement.badge": "Product",
-
-
 
   "profile.breadcrumbs": "Update Profile",
 
@@ -5262,8 +5128,6 @@
 
   "project-relationships.search.results.head": "Project Search Results",
 
-
-
   "publication.listelement.badge": "Publication",
 
   "publication.page.description": "Description",
@@ -5375,8 +5239,8 @@
   "register-page.registration.error.recaptcha": "Error when trying to authenticate with recaptcha",
 
   "register-page.registration.google-recaptcha.must-accept-cookies": "In order to register you must accept the <b>Registration and Password recovery</b> (Google reCaptcha) cookies.",
-  "register-page.registration.error.maildomain": "This email address is not on the list of domains who can register. Allowed domains are {{ domains }}",
 
+  "register-page.registration.error.maildomain": "This email address is not on the list of domains who can register. Allowed domains are {{ domains }}",
 
   "register-page.registration.google-recaptcha.open-cookie-settings": "Open cookie settings",
 
@@ -5385,6 +5249,7 @@
   "register-page.registration.google-recaptcha.notification.message.error": "An error occurred during reCaptcha verification",
 
   "register-page.registration.google-recaptcha.notification.message.expired": "Verification expired. Please verify again.",
+
   "register-page.registration.info.maildomain": "Accounts can be registered for mail addresses of the domains",
 
   "relationships.add.error.relationship-type.content": "No suitable match could be found for relationship type {{ type }} between the two items",
@@ -5429,14 +5294,13 @@
 
   "relationships.isFundingAgencyOf.OrgUnit": "Funder",
 
-
   "repository.image.logo": "Repository logo",
 
-  "repository.title.prefix": "DSpace GLAM Angular :: ",
+  // "repository.title": "{{ repositoryName }}",
+  "repository.title": "{{ repositoryName }}",
 
-
-  "repository.title.prefixDSpace": "DSpace Angular ::",
-
+  // "repository.title.prefix": "{{ repositoryName }} Angular :: ",
+  "repository.title.prefix": "{{ repositoryName }} Angular :: ",
 
   "resource-policies.add.button": "Add",
 
@@ -5552,7 +5416,7 @@
 
   "resource-policies.table.headers.title.for.collection": "Policies for Collection",
 
-
+  "root.skip-to-content": "Skip to main content",
 
   "search.description": "",
 
@@ -5563,7 +5427,6 @@
   "search.breadcrumbs": "Search",
 
   "search.search-form.placeholder": "Search the repository ...",
-
 
   "search.filters.applied.f.author": "Author",
 
@@ -5621,21 +5484,23 @@
 
   "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
 
-  "search.filters.applied.charts.chart.bar.dateIssued.year.tab" : "Date Issued",
+  "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Date Issued",
 
-  "search.filters.applied.charts.chart.pie.more-value" : "More",
+  "search.filters.applied.charts.chart.pie.more-value": "More",
 
-  "search.filters.applied.charts.chart.pie.itemtype_filter.tab" : "Item Type",
+  "search.filters.applied.charts.chart.pie.itemtype_filter.tab": "Item Type",
 
-  "search.filters.applied.charts.graphitemtype.tab" : "Visualization by Type",
+  "search.filters.applied.charts.graphitemtype.tab": "Visualization by Type",
 
-  "search.filters.applied.charts.graphpubldate.tab" : "Visualization by Date",
+  "search.filters.applied.charts.graphpubldate.tab": "Visualization by Date",
 
-  "search.filters.applied.charts.graphpubldateltr.tab" : "Visualization Demo LTR",
+  "search.filters.applied.charts.graphpubldateltr.tab": "Visualization Demo LTR",
 
-  "search.filters.applied.charts.graphpubldatetrl.tab" : "Visualization Demo RTL",
+  "search.filters.applied.charts.graphpubldatetrl.tab": "Visualization Demo RTL",
 
   "search.filters.applied.charts.default.title": "Search Output",
+
+  "search.filters.applied.charts.site.title": "Search Output",
 
   "search.filters.applied.charts.RELATION.Person.researchoutputs.title": "Research Output",
 
@@ -5812,17 +5677,17 @@
 
   "search.filters.filter.language.placeholder": "Language",
 
-  "search.filters.filter.projectOrgUnits.head" : "Organizations",
+  "search.filters.filter.projectOrgUnits.head": "Organizations",
 
-  "search.filters.filter.projectOrgUnits.label" : "Organizations",
+  "search.filters.filter.projectOrgUnits.label": "Organizations",
 
-  "search.filters.filter.projectOrgUnits.placeholder" : "Organizations",
+  "search.filters.filter.projectOrgUnits.placeholder": "Organizations",
 
-  "search.filters.filter.personOrgUnits.head" : "Organizations",
+  "search.filters.filter.personOrgUnits.head": "Organizations",
 
-  "search.filters.filter.personOrgUnits.label" : "Search organizations",
+  "search.filters.filter.personOrgUnits.label": "Search organizations",
 
-  "search.filters.filter.personOrgUnits.placeholder" : "Organizations",
+  "search.filters.filter.personOrgUnits.placeholder": "Organizations",
 
   "search.filters.filter.namedresourcetype.head": "Status",
 
@@ -5956,8 +5821,6 @@
 
   "search.filters.entityType.Person": "Person",
 
-  "search.filters.entityType.OrgUnit": "Organizational Unit",
-
   "search.filters.entityType.Project": "Project",
 
   "search.filters.entityType.Event": "Event",
@@ -5992,10 +5855,19 @@
 
   "search.filters.discoverable.false": "Yes",
 
+  "search.filters.namedresourcetype.Archived": "Archived",
+
+  "search.filters.namedresourcetype.Validation": "Validation",
+
+  "search.filters.namedresourcetype.Waiting for Controller": "Waiting for Controller",
+
+  "search.filters.namedresourcetype.Workflow": "Workflow",
+
+  "search.filters.namedresourcetype.Workspace": "Workspace",
+
   "search.filters.withdrawn.true": "Yes",
 
   "search.filters.withdrawn.false": "No",
-
 
   "search.filters.head": "Filters",
 
@@ -6003,19 +5875,17 @@
 
   "search.filters.search.submit": "Submit",
 
-
-
   "search.form.search": "Search",
 
   "search.form.search_dspace": "All repository",
 
   "search.form.scope.all": "All of DSpace",
 
-
-
   "search.results.head": "Search Results",
 
   "default.search.results.head": "Search Results",
+
+  "site.search.results.head": "Search Results",
 
   "default-relationships.search.results.head": "Search Results",
 
@@ -6040,7 +5910,6 @@
   "search.results.view-result": "View",
 
   "search.results.response.500": "An error occurred during query execution, please try again later",
-
 
   "search.sidebar.close": "Back to results",
 
@@ -6070,8 +5939,6 @@
 
   "search.view-switch.show-list": "Show as list",
 
-
-
   "sorting.ASC": "Ascending",
 
   "sorting.DESC": "Descending",
@@ -6080,17 +5947,17 @@
 
   "sorting.dc.title.DESC": "Title Descending",
 
-  "sorting.metric.view.ASC" : "Views Ascending",
+  "sorting.metric.view.ASC": "Views Ascending",
 
-  "sorting.metric.view.DESC" : "Views Descending",
+  "sorting.metric.view.DESC": "Views Descending",
 
-  "sorting.metric.download.ASC" : "Downloads Ascending",
+  "sorting.metric.download.ASC": "Downloads Ascending",
 
-  "sorting.metric.download.DESC" : "Downloads Descending",
+  "sorting.metric.download.DESC": "Downloads Descending",
 
-  "sorting.metric.scopus.citation.ASC" : "Citations Ascending",
+  "sorting.metric.scopus.citation.ASC": "Citations Ascending",
 
-  "sorting.metric.scopus.citation.DESC" : "Citations Descending",
+  "sorting.metric.scopus.citation.DESC": "Citations Descending",
 
   "sorting.score.ASC": "Least Relevant",
 
@@ -6116,22 +5983,124 @@
 
   "sorting.ownerselection.DESC": "Owner Relevance Descending",
 
-  "sorting.organization.legalName.ASC" : "Legal Name Ascending",
+  "sorting.organization.legalName.ASC": "Legal Name Ascending",
 
-  "sorting.organization.legalName.DESC" : "Legal Name Descending",
+  "sorting.organization.legalName.DESC": "Legal Name Descending",
 
-  "sorting.organisation.address.addressCountry.ASC" : "Country Ascending",
+  "sorting.organisation.address.addressCountry.ASC": "Country Ascending",
 
-  "sorting.organisation.address.addressCountry.DESC" : "Country Descending",
+  "sorting.organisation.address.addressCountry.DESC": "Country Descending",
 
-  "sorting.organisation.address.addressLocality.ASC" : "Locality Ascending",
+  "sorting.organisation.address.addressLocality.ASC": "Locality Ascending",
 
-  "sorting.organisation.address.addressLocality.DESC" : "Locality Descending",
+  "sorting.organisation.address.addressLocality.DESC": "Locality Descending",
 
-  "sorting.organisation.address.foundingDate.ASC" : "Founding Date Ascending",
+  "sorting.organisation.address.foundingDate.ASC": "Founding Date Ascending",
 
-  "sorting.organisation.address.foundingDate.DESC" : "Founding Date Descending",
+  "sorting.organisation.address.foundingDate.DESC": "Founding Date Descending",
 
+
+  "statistics": "Statistics",
+
+  "statistics.workflow.breadcrumbs": "Workflow Statistics",
+
+  "statistics.workflow.page.header": "Workflow Statistics",
+
+  "statistics.workflow.page.current-table.header": "Current workflows",
+
+  "statistics.workflow.page.owner-table.header": "Actions performed by actor",
+
+  "statistics.workflow.page.owner-table.count": "Performed",
+
+  "statistics.workflow.page.owner-table.email": "Email",
+
+  "statistics.workflow.page.step-table.header": "Workflow steps performed",
+
+  "statistics.workflow.page.step-table.step": "Step",
+
+  "statistics.workflow.page.step-table.count": "Performed",
+
+  "statistics.workflow.page.step-table.submit": "Submit",
+
+  "statistics.workflow.page.step-table.reviewstep": "Review",
+
+  "statistics.workflow.page.step-table.editstep": "Edit",
+
+  "statistics.workflow.page.step-table.finaleditstep": "Final edit",
+
+  "statistics.workflow.page.step-table.item": "Archive",
+
+  "statistics.workflow.page.step-table.workspace": "Reject",
+
+  "statistics.workflow.page.current-table.reviewstep": "Review",
+
+  "statistics.workflow.page.current-table.editstep": "Edit",
+
+  "statistics.workflow.page.current-table.finaleditstep": "Final edit",
+
+  "statistics.workflow.page.current-table.step": "Step",
+
+  "statistics.workflow.page.current-table.count": "Count",
+
+  "statistics.workflow.page.max": "Max",
+
+  "statistics.workflow.page.collection": "Collection",
+
+  "statistics.workflow.page.endDate": "End date",
+
+  "statistics.workflow.page.startDate": "Start date",
+
+  "statistics.workflow.page.reset": "Reset filters",
+
+  "statistics.workflow.page.actions.title": "Actions",
+
+  "statistics.workflow.page.action-table.action": "Action",
+
+  "statistics.workflow.page.action-table.count": "Count",
+
+  "statistics.workflow.page.action-table.editstep.editaction": "Edit",
+
+  "statistics.workflow.page.action-table.finaleditstep.finaleditaction": "Final Edit",
+
+  "statistics.workflow.page.action-table.reviewstep.reviewaction": "Review",
+
+  "statistics.workflow.page.action-table.submit": "Submit",
+
+  "statistics.workflow.page.action-table.approve": "Approve",
+
+  "statistics.workflow.page.action-table.reject": "Reject",
+
+  "statistics.workflow.page.action-table.editaction": "Edit",
+
+  "statistics.workflow.page.action-table.finaleditaction": "Final Edit",
+
+  "statistics.workflow.page.action-table.reviewaction": "Review",
+
+  "statistics.workflow.page.action-table.claimaction": "Claim",
+
+  "statistics.workflow.page.no-data-found": "No data found",
+
+  "statistics.login.breadcrumbs": "Login Statistics",
+
+  "statistics.login.page.header": "Login Statistics",
+
+  "statistics.login.page.reset": "Reset filters",
+
+  "statistics.login.page.table.user": "User",
+
+  "statistics.login.page.table.email": "Email",
+
+  "statistics.login.page.table.count": "Login",
+
+  "statistics.login.page.max": "Max",
+
+  "statistics.login.page.endDate": "End date",
+
+  "statistics.login.page.startDate": "Start date",
+
+  "statistics.login.page.no-data-found": "No data found",
+
+  "statistics.login.title statistics.workflow.title": "Login Statistics",
 
   "statistics.export.csv": "Export CSV",
 
@@ -6168,6 +6137,10 @@
   "statistics.table.mainReports.title.TopCategories": "Categories",
 
   "statistics.table.mainReports.title.TopCities": "Top city views",
+
+  "form.other-information.oairecerif-author-affiliation": "Affiliation",
+
+  "form.other-information.oairecerif-editor-affiliation": "Affiliation",
 
   "statistics.table.downloadReports.title.TotalVisits": "Most downloaded",
 
@@ -6214,6 +6187,8 @@
   "statistics.table.publicationsReports.title.TopItems": "Most viewed",
 
   "statistics.table.publicationsReports.title.TopCities": "Top cities",
+
+  "statistics.table.no-name": "(object name could not be loaded)",
 
   "statistics.table.publicationsReports.title.TopCountries": "Top countries",
 
@@ -6281,27 +6256,27 @@
 
   "statistics.categories.itemReports.tab": "Item views reports",
 
-  "statistics.table.itemReports.header.continent" : "Continent",
+  "statistics.table.itemReports.header.continent": "Continent",
 
-  "statistics.table.itemReports.header.views" : "Views",
+  "statistics.table.itemReports.header.views": "Views",
 
-  "statistics.table.itemReports.header.city" : "City",
+  "statistics.table.itemReports.header.city": "City",
 
-  "statistics.table.itemReports.header.item" : "Item",
+  "statistics.table.itemReports.header.item": "Item",
 
-  "statistics.table.mainReports.header.community" : "Community",
+  "statistics.table.mainReports.header.community": "Community",
 
-  "statistics.table.mainReports.header.collection" : "Collection",
+  "statistics.table.mainReports.header.collection": "Collection",
 
-  "statistics.table.itemReports.title.TopContinents" : "Top region views",
+  "statistics.table.itemReports.title.TopContinents": "Top region views",
 
-  "statistics.table.itemReports.title.TopCities" : "Top cities views",
+  "statistics.table.itemReports.title.TopCities": "Top cities views",
 
-  "statistics.table.itemReports.title.TopItems" : "Most viewed",
+  "statistics.table.itemReports.title.TopItems": "Most viewed",
 
-  "statistics.table.itemReports.title.TopCategories" : "Top categories",
+  "statistics.table.itemReports.title.TopCategories": "Top categories",
 
-  "statistics.table.itemReports.title.TotalVisitsPerMonth" : "Top views per month",
+  "statistics.table.itemReports.title.TotalVisitsPerMonth": "Top views per month",
 
   "statistics.reports.title": "Reports",
 
@@ -6323,7 +6298,7 @@
 
   "submission.general.cancel": "Cancel",
 
-  "submission.general.cannot_submit": "You have not the privilege to make a new submission.",
+  "submission.general.cannot_submit": "You don't have permission to make a new submission.",
 
   "submission.general.deposit": "Deposit",
 
@@ -6336,6 +6311,8 @@
   "submission.general.discard.confirm.title": "Discard submission",
 
   "submission.general.discard.submit": "Discard",
+
+  "submission.general.info.invalid": "The submission is invalid, check missing fields",
 
   "submission.general.info.saved": "Saved",
 
@@ -6436,6 +6413,8 @@
   "submission.import-external.source.openaire": "OpenAIRE by Author",
 
   "submission.import-external.source.openaireTitle": "OpenAIRE by Title",
+
+  "submission.import-external.source.rorOrgUnits": "ROR",
 
   "submission.import-external.preview.title.Equipment": "Equipment Preview",
 
@@ -6549,7 +6528,7 @@
 
   "submission.sections.describe.relationship-lookup.external-source.import-button-title.none": "Import remote item",
 
-    "submission.sections.describe.relationship-lookup.external-source.import-modal.isProjectOfPublication.added.new-entity": "New Entity Added!",
+  "submission.sections.describe.relationship-lookup.external-source.import-modal.isProjectOfPublication.added.new-entity": "New Entity Added!",
 
   "submission.sections.describe.relationship-lookup.external-source.import-modal.isProjectOfPublication.title": "Project",
 
@@ -6629,6 +6608,12 @@
 
   "submission.sections.describe.relationship-lookup.external-source.import-modal.select": "Select a local match:",
 
+  "submission.sections.external-source.duplicate-matches.header": "Potential duplicate matches",
+
+  "submission.sections.external-source.duplicate-matches.item.not-archived": "Not archived",
+
+  "submission.sections.external-source.duplicate-matches.item.isWithdrawn": "Withdrawn",
+
   "submission.sections.describe.relationship-lookup.search-tab.deselect-all": "Deselect all",
 
   "submission.sections.describe.relationship-lookup.search-tab.deselect-page": "Deselect page",
@@ -6650,6 +6635,7 @@
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.isAuthorOfPublication": "Local Authors ({{ count }})",
 
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.isJournalOfPublication": "Local Journals ({{ count }})",
+
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.Project": "Local Projects ({{ count }})",
 
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.Publication": "Local Publications ({{ count }})",
@@ -6665,9 +6651,11 @@
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.Journal": "Local Journals ({{ count }})",
 
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.isJournalIssueOfPublication": "Local Journal Issues ({{ count }})",
+
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.JournalIssue": "Local Journal Issues ({{ count }})",
 
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.isJournalVolumeOfPublication": "Local Journal Volumes ({{ count }})",
+
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.JournalVolume": "Local Journal Volumes ({{ count }})",
 
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.crossref": "Crossref ({{ count }})",
@@ -6706,17 +6694,16 @@
 
   "submission.sections.describe.relationship-lookup.title.isFundingAgencyOfProject": "Funder of the Project",
 
-
-
-
   "submission.sections.describe.relationship-lookup.selection-tab.search-form.placeholder": "Search...",
 
   "submission.sections.describe.relationship-lookup.selection-tab.tab-title": "Current Selection ({{ count }})",
 
   "submission.sections.describe.relationship-lookup.title.isJournalIssueOfPublication": "Journal Issues",
+
   "submission.sections.describe.relationship-lookup.title.JournalIssue": "Journal Issues",
 
   "submission.sections.describe.relationship-lookup.title.isJournalVolumeOfPublication": "Journal Volumes",
+
   "submission.sections.describe.relationship-lookup.title.JournalVolume": "Journal Volumes",
 
   "submission.sections.describe.relationship-lookup.title.isJournalOfPublication": "Journals",
@@ -6724,6 +6711,7 @@
   "submission.sections.describe.relationship-lookup.title.isAuthorOfPublication": "Authors",
 
   "submission.sections.describe.relationship-lookup.title.isFundingAgencyOfPublication": "Funding Agency",
+
   "submission.sections.describe.relationship-lookup.title.Project": "Projects",
 
   "submission.sections.describe.relationship-lookup.title.Publication": "Publications",
@@ -6755,6 +6743,7 @@
   "submission.sections.describe.relationship-lookup.selection-tab.title.isJournalOfPublication": "Selected Journals",
 
   "submission.sections.describe.relationship-lookup.selection-tab.title.isJournalVolumeOfPublication": "Selected Journal Volume",
+
   "submission.sections.describe.relationship-lookup.selection-tab.title.Project": "Selected Projects",
 
   "submission.sections.describe.relationship-lookup.selection-tab.title.Publication": "Selected Publications",
@@ -6770,11 +6759,13 @@
   "submission.sections.describe.relationship-lookup.selection-tab.title.Journal": "Selected Journals",
 
   "submission.sections.describe.relationship-lookup.selection-tab.title.isJournalIssueOfPublication": "Selected Issue",
+
   "submission.sections.describe.relationship-lookup.selection-tab.title.JournalVolume": "Selected Journal Volume",
 
   "submission.sections.describe.relationship-lookup.selection-tab.title.isFundingAgencyOfPublication": "Selected Funding Agency",
 
   "submission.sections.describe.relationship-lookup.selection-tab.title.isFundingOfPublication": "Selected Funding",
+
   "submission.sections.describe.relationship-lookup.selection-tab.title.JournalIssue": "Selected Issue",
 
   "submission.sections.describe.relationship-lookup.selection-tab.title.isChildOrgUnitOf": "Selected Organizational Unit",
@@ -6807,7 +6798,7 @@
 
   "submission.sections.describe.relationship-lookup.selection-tab.title": "Search Results",
 
-  "submission.sections.describe.relationship-lookup.name-variant.notification.content": "Would you like to save \"{{ value }}\" as a name variant for this person so you and others can reuse it for future submissions? If you don\'t you can still use it for this submission.",
+  "submission.sections.describe.relationship-lookup.name-variant.notification.content": "Would you like to save \"{{ value }}\" as a name variant for this person so you and others can reuse it for future submissions? If you don't you can still use it for this submission.",
 
   "submission.sections.describe.relationship-lookup.name-variant.notification.confirm": "Save a new name variant",
 
@@ -6879,9 +6870,9 @@
 
   "submission.sections.submit.progressbar.CustomUrlStep": "Custom url",
 
-  "submission.sections.submit.progressbar.describe.audiovideo" : "Item Description",
+  "submission.sections.submit.progressbar.describe.audiovideo": "Item Description",
 
-  "submission.sections.submit.progressbar.describe.audiovideo-file" : "File Description",
+  "submission.sections.submit.progressbar.describe.audiovideo-file": "File Description",
 
   "submission.sections.submit.progressbar.describe.equipment": "Equipment basic information",
 
@@ -6971,6 +6962,8 @@
 
   "submission.sections.toggle.aria.close": "Collapse {{sectionHeader}} section",
 
+  "submission.sections.upload.format": "Bitstream format",
+
   "submission.sections.upload.checksum": "Checksum",
 
   "submission.sections.upload.delete.confirm.cancel": "Cancel",
@@ -7031,6 +7024,8 @@
 
   "submission.sections.upload.upload-failed": "Upload failed",
 
+  "submission.sections.upload.file-download-failed": "The automatic download fails. This could be due to mechanisms in the external system that prevent access by our crawler, please use the link below to retrieve the file and attach it manually to the record if appropriate: ",
+
   "submission.sections.upload.upload-successful": "Upload successful",
 
   "submission.sections.custom-url.label.previous-urls": "Previous Urls",
@@ -7067,11 +7062,19 @@
 
   "submission.sections.accesses.form.until-placeholder": "Until",
 
+  "access.condition.value.openaccess": "Open Access",
+
+  "access.condition.value.embargo": "Embargo",
+
+  "access.condition.value.administrator": "Administrator Only",
+
+  "access.condition.value.lease": "Lease",
+
   "submission.sections.license.granted-label": "I confirm the license above",
 
   "submission.sections.license.required": "You must accept the license",
 
-  "submission.sections.license.notgranted":  "",
+  "submission.sections.license.notgranted": "",
 
 
   "submission.sections.sherpa.publication.information": "Publication information",
@@ -7126,8 +7129,6 @@
 
   "submission.sections.sherpa.error.message": "There was an error retrieving sherpa informations",
 
-
-
   "submission.sections.unpaywall.refresh": "Refresh",
 
   "submission.sections.unpaywall.import": "Import from unpaywall",
@@ -7138,6 +7139,8 @@
 
   "submission.sections.unpaywall.status.pending": "Unpaywall api request is initialized",
 
+  "submission.sections.unpaywall.status.no-file": "There are no files to be imported",
+
   "submission.sections.submit.progressbar.unpaywall": "Unpaywall",
 
 
@@ -7146,11 +7149,9 @@
 
   "submission.submit.title": "New submission",
 
-
-
   "submission.workflow.generic.delete": "Delete",
 
-  "submission.workflow.generic.delete-help": "If you would to discard this item, select \"Delete\".  You will then be asked to confirm it.",
+  "submission.workflow.generic.delete-help": "Select this option to discard this item. You will then be asked to confirm it.",
 
   "submission.workflow.generic.edit": "Edit",
 
@@ -7160,16 +7161,13 @@
 
   "submission.workflow.generic.view-help": "Select this option to view the item's metadata.",
 
-
   "submission.workflow.generic.submit_select_reviewer": "Select Reviewer",
 
   "submission.workflow.generic.submit_select_reviewer-help": "",
 
-
   "submission.workflow.generic.submit_score": "Rate",
 
   "submission.workflow.generic.submit_score-help": "",
-
 
   "submission.workflow.tasks.claimed.approve": "Approve",
 
@@ -7199,8 +7197,6 @@
 
   "submission.workflow.tasks.claimed.return_help": "Return the task to the pool so that another user may perform the task.",
 
-
-
   "submission.workflow.tasks.generic.error": "Error occurred during operation...",
 
   "submission.workflow.tasks.generic.processing": "Processing...",
@@ -7208,8 +7204,6 @@
   "submission.workflow.tasks.generic.submitter": "Submitter",
 
   "submission.workflow.tasks.generic.success": "Operation successful",
-
-
 
   "submission.workflow.tasks.pool.claim": "Claim",
 
@@ -7223,6 +7217,7 @@
 
   "submission.workspace.generic.view-help": "Select this option to view the item's metadata.",
 
+  "submitter.empty": "N/A",
 
   "subscriptions.title": "Subscriptions",
 
@@ -7297,7 +7292,6 @@
   "subscriptions.table.not-available-message": "The subscribed item has been deleted, or you don't currently have the permission to view it",
 
   "subscriptions.table.empty.message": "You do not have any subscriptions at this time. To subscribe to email updates for a Community or Collection, use the subscription button on the object's page.",
-
 
   "thumbnail.default.alt": "Thumbnail Image",
 
@@ -7399,6 +7393,8 @@
 
   "vocabulary-treeview.tree.description.srsc": "Research Subject Categories",
 
+  "vocabulary-treeview.tree.description.publication-coar-types": "Publication types",
+
   "vocabulary-treeview.info": "Select a subject to add as search filter",
 
   "uploader.browse": "browse",
@@ -7433,8 +7429,6 @@
 
   "supervision.search.results.head": "Workflow and Workspace tasks",
 
-
-
   "workflow-item.edit.breadcrumbs": "Edit workflowitem",
 
   "workflow-item.edit.title": "Edit workflowitem",
@@ -7454,7 +7448,6 @@
   "workflow-item.delete.button.cancel": "Cancel",
 
   "workflow-item.delete.button.confirm": "Delete",
-
 
   "workflow-item.send-back.notification.success.title": "Sent back to submitter",
 
@@ -7512,7 +7505,6 @@
 
   "workflow-item.selectrevieweraction.button.confirm": "Confirm",
 
-
   "workflow-item.scorereviewaction.notification.success.title": "Rating review",
 
   "workflow-item.scorereviewaction.notification.success.content": "The rating for this item workflow item has been successfully submitted",
@@ -7537,7 +7529,7 @@
 
   "idle-modal.extend-session": "Extend session",
 
-  "researcher.profile.action.processing" : "Processing...",
+  "researcher.profile.action.processing": "Processing...",
 
   "researcher.profile.associated": "Researcher profile associated",
 
@@ -7559,27 +7551,27 @@
 
   "researcher.profile.view": "View",
 
-  "researcher.profile.private.visibility" : "PRIVATE",
+  "researcher.profile.private.visibility": "PRIVATE",
 
-  "researcher.profile.public.visibility" : "PUBLIC",
+  "researcher.profile.public.visibility": "PUBLIC",
 
   "researcher.profile.status": "Status:",
 
   "researcherprofile.claim.not-authorized": "You are not authorized to claim this item. For more details contact the administrator(s).",
 
-  "researcherprofile.error.claim.body" : "An error occurred while claiming the profile, please try again later",
+  "researcherprofile.error.claim.body": "An error occurred while claiming the profile, please try again later",
 
-  "researcherprofile.error.claim.title" : "Error",
+  "researcherprofile.error.claim.title": "Error",
 
-  "researcherprofile.success.claim.body" : "Profile claimed with success",
+  "researcherprofile.success.claim.body": "Profile claimed with success",
 
-  "researcherprofile.success.claim.title" : "Success",
+  "researcherprofile.success.claim.title": "Success",
 
   "person.page.orcid.create": "Create an ORCID ID",
 
   "person.page.orcid.granted-authorizations": "Granted authorizations",
 
-  "person.page.orcid.grant-authorizations" : "Grant authorizations",
+  "person.page.orcid.grant-authorizations": "Grant authorizations",
 
   "person.page.orcid.link": "Connect to ORCID ID",
 
@@ -7611,31 +7603,31 @@
 
   "person.page.orcid.save.preference.changes": "Update settings",
 
-  "person.page.orcid.sync-profile.affiliation" : "Affiliation",
+  "person.page.orcid.sync-profile.affiliation": "Affiliation",
 
-  "person.page.orcid.sync-profile.biographical" : "Biographical data",
+  "person.page.orcid.sync-profile.biographical": "Biographical data",
 
-  "person.page.orcid.sync-profile.education" : "Education",
+  "person.page.orcid.sync-profile.education": "Education",
 
-  "person.page.orcid.sync-profile.identifiers" : "Identifiers",
+  "person.page.orcid.sync-profile.identifiers": "Identifiers",
 
-  "person.page.orcid.sync-fundings.all" : "All fundings",
+  "person.page.orcid.sync-fundings.all": "All fundings",
 
-  "person.page.orcid.sync-fundings.mine" : "My fundings",
+  "person.page.orcid.sync-fundings.mine": "My fundings",
 
-  "person.page.orcid.sync-fundings.my_selected" : "Selected fundings",
+  "person.page.orcid.sync-fundings.my_selected": "Selected fundings",
 
-  "person.page.orcid.sync-fundings.disabled" : "Disabled",
+  "person.page.orcid.sync-fundings.disabled": "Disabled",
 
-  "person.page.orcid.sync-publications.all" : "All publications",
+  "person.page.orcid.sync-publications.all": "All publications",
 
-  "person.page.orcid.sync-publications.mine" : "My publications",
+  "person.page.orcid.sync-publications.mine": "My publications",
 
-  "person.page.orcid.sync-publications.my_selected" : "Selected publications",
+  "person.page.orcid.sync-publications.my_selected": "Selected publications",
 
-  "person.page.orcid.sync-publications.disabled" : "Disabled",
+  "person.page.orcid.sync-publications.disabled": "Disabled",
 
-  "person.page.orcid.sync-queue.discard" : "Discard the change and do not synchronize with the ORCID registry",
+  "person.page.orcid.sync-queue.discard": "Discard the change and do not synchronize with the ORCID registry",
 
   "person.page.orcid.sync-queue.discard.error": "The discarding of the ORCID queue record failed",
 
@@ -7643,11 +7635,11 @@
 
   "person.page.orcid.sync-queue.empty-message": "The ORCID queue registry is empty",
 
-  "person.page.orcid.sync-queue.table.header.type" : "Type",
+  "person.page.orcid.sync-queue.table.header.type": "Type",
 
-  "person.page.orcid.sync-queue.table.header.description" : "Description",
+  "person.page.orcid.sync-queue.table.header.description": "Description",
 
-  "person.page.orcid.sync-queue.table.header.action" : "Action",
+  "person.page.orcid.sync-queue.table.header.action": "Action",
 
   "person.page.orcid.sync-queue.description.affiliation": "Affiliations",
 
@@ -7691,7 +7683,7 @@
 
   "person.page.orcid.sync-queue.tooltip.researcher_urls": "Researcher url",
 
-  "person.page.orcid.sync-queue.send" : "Synchronize with ORCID registry",
+  "person.page.orcid.sync-queue.send": "Synchronize with ORCID registry",
 
   "person.page.orcid.sync-queue.send.unauthorized-error.title": "The submission to ORCID failed for missing authorizations.",
 
@@ -7727,7 +7719,7 @@
 
   "person.page.orcid.sync-queue.send.validation-error.organization.name-required": "The organization's name is required",
 
-  "person.page.orcid.sync-queue.send.validation-error.publication.date-invalid" : "The publication date must be one year after 1900",
+  "person.page.orcid.sync-queue.send.validation-error.publication.date-invalid": "The publication date must be one year after 1900",
 
   "person.page.orcid.sync-queue.send.validation-error.organization.address-required": "The organization to be sent requires an address",
 
@@ -7780,6 +7772,7 @@
   "person.orcid.registry.queue": "ORCID Registry Queue",
 
   "person.orcid.registry.auth": "ORCID Authorizations",
+
   "home.recent-submissions.head": "Recent Submissions",
 
   "relation.rp.researchoutputs.search.results.head": "Related Publications",
@@ -7802,19 +7795,19 @@
 
   "invitation.ignore-btn": "Ignore",
 
-  "authority-confidence.search-label":"Search",
+  "authority-confidence.search-label": "Search",
 
-  "crisref.metadata.view.first" : "View first",
+  "crisref.metadata.view.first": "View first",
 
-  "crisref.metadata.view.last" : "View last",
+  "crisref.metadata.view.last": "View last",
 
-  "cris-layout.rendering.more" : "more",
+  "cris-layout.rendering.more": "more",
 
-  "cris-layout.rendering.more.withlast" : "more",
+  "cris-layout.rendering.more.withlast": "more",
 
-  "cris-layout.rendering.more.tooltip" : "click to see all",
+  "cris-layout.rendering.more.tooltip": "click to see all",
 
-  "cris-layout.rendering.collapse" : "collapse",
+  "cris-layout.rendering.collapse": "collapse",
 
   "family.listelement.badge": "Family",
 
@@ -7842,41 +7835,41 @@
   "scientificmaterial.listelement.badge": "Scientific Material",
 
   "picture.listelement.badge": "Picture",
-  "menu.section.explore_sectionfonds" : "Fonds",
-  "menu.section.explore_sectionjournalfonds" : "Journal Fonds",
+  "menu.section.explore_sectionfonds": "Fonds",
+  "menu.section.explore_sectionjournalfonds": "Journal Fonds",
 
-  "menu.section.explore_sectionaggregations" : "Aggregations",
-  "menu.section.explore_sectiondocuments" : "Documents & Other materials",
-  "explore.counters-section.fonds" : "Fonds",
-  "explore.counters-section.journalfonds" : "Journal Fonds",
-  "explore.counters-section.aggregations" : "Aggregations",
-  "explore.counters-section.documents" : "Documents & Other materials",
+  "menu.section.explore_sectionaggregations": "Aggregations",
+  "menu.section.explore_sectiondocuments": "Documents & Other materials",
+  "explore.counters-section.fonds": "Fonds",
+  "explore.counters-section.journalfonds": "Journal Fonds",
+  "explore.counters-section.aggregations": "Aggregations",
+  "explore.counters-section.documents": "Documents & Other materials",
 
-  "explore.index.titleF" : "Title",
-  "explore.index.typeF" : "Type",
-  "explore.index.dateissuedF" : "Date",
-  "explore.index.subjectF" : "Subject",
-  "explore.index.titleJF" : "Title",
-  "explore.index.typeJF" : "Type",
-  "explore.index.dateissuedJF" : "Date",
-  "explore.index.subjectJF" : "Subject",
-  "explore.index.titleA" : "Title",
-  "explore.index.typeA" : "Type",
-  "explore.index.dateissuedA" : "Date",
-  "explore.index.subjectA" : "Subject",
-  "explore.index.path" : "Path",
-  "explore.index.fonds" : "Fonds",
-  "explore.index.journalfonds" : "Journal Fonds",
-  "explore.index.aggregation" : "Aggregation",
-  "explore.index.parentA" : "Parent",
+  "explore.index.titleF": "Title",
+  "explore.index.typeF": "Type",
+  "explore.index.dateissuedF": "Date",
+  "explore.index.subjectF": "Subject",
+  "explore.index.titleJF": "Title",
+  "explore.index.typeJF": "Type",
+  "explore.index.dateissuedJF": "Date",
+  "explore.index.subjectJF": "Subject",
+  "explore.index.titleA": "Title",
+  "explore.index.typeA": "Type",
+  "explore.index.dateissuedA": "Date",
+  "explore.index.subjectA": "Subject",
+  "explore.index.path": "Path",
+  "explore.index.fonds": "Fonds",
+  "explore.index.journalfonds": "Journal Fonds",
+  "explore.index.aggregation": "Aggregation",
+  "explore.index.parentA": "Parent",
 
-  "explore.search-section.sectiondocuments.title" : "Search Documents & Other materials",
+  "explore.search-section.sectiondocuments.title": "Search Documents & Other materials",
 
-  "explore.search-section.sectionfonds.title" : "Search Fonds",
+  "explore.search-section.sectionfonds.title": "Search Fonds",
 
-  "explore.search-section.sectionjournalfonds.title" : "Search Journal fonds",
+  "explore.search-section.sectionjournalfonds.title": "Search Journal fonds",
 
-  "explore.search-section.sectionaggregations.title" : "Search Aggregations",
+  "explore.search-section.sectionaggregations.title": "Search Aggregations",
 
   "explore.sectiondocuments.breadcrumbs": "Documents & Other materials",
 
@@ -7956,6 +7949,8 @@
 
   "map.coordinates-invalid": "Coordinates are not valid",
 
+  "statistics-page.export-map-as-image": "Export map",
+
   "curation-task.task.hocr.label": "Extract text (HOCR) from images",
 
   "curation-task.task.ocrfilter.label": "Consolidate hOCR for fulltext indexing",
@@ -7998,18 +7993,16 @@
 
   "curation-task.task.rebuildpdftoc.label": "Rebuild the PDF ToC",
 
-  "RELATION.Place.people.search.results.head" : "People",
+  "RELATION.Place.people.search.results.head": "People",
   "search.filters.applied.charts.RELATION.Place.people.title": "People",
 
-  "RELATION.Place.places.search.results.head" : "Places",
+  "RELATION.Place.places.search.results.head": "Places",
   "search.filters.applied.charts.RELATION.Place.places.title": "Places",
   "context-menu.actions.edit-item-relationships.btn.places": "Manage Places",
 
   "journalfile.listelement.badge": "Journal File",
-  "search.filters.entityType.JournalFile": "Journal File",
 
   "listable-notification-object.default-message": "This object couldn't be retrieved",
-
 
   "system-wide-alert-banner.retrieval.error": "Something went wrong retrieving the system-wide alert banner",
 
@@ -8057,11 +8050,647 @@
 
   "admin.system-wide-alert.title": "System-wide Alerts",
 
-  "explore.index.lastModified" : "New accessions",
+  "explore.index.lastModified": "New accessions",
 
-  "layout.field.label.Fonds.glamfonds.index": "Index",
-  "layout.field.label.JournalFonds.glamjournalfonds.index": "Index",
-  "layout.field.label.Picture.glamfonds.index": "Node number",
-  "layout.field.label.JournalFile.glamjournalfonds.index": "Node number",
-  "layout.field.label.Publication.glamfonds.index": "Node number"
+  "item-access-control-title": "This form allows you to perform changes to the access conditions of the item's metadata or its bitstreams.",
+
+  "collection-access-control-title": "This form allows you to perform changes to the access conditions of all the items owned by this collection. Changes may be performed to either all Item metadata or all content (bitstreams).",
+
+  "community-access-control-title": "This form allows you to perform changes to the access conditions of all the items owned by any collection under this community. Changes may be performed to either all Item metadata or all content (bitstreams).",
+
+  "access-control-item-header-toggle": "Item's Metadata",
+
+  "access-control-bitstream-header-toggle": "Bitstreams",
+
+  "access-control-mode": "Mode",
+
+  "access-control-access-conditions": "Access conditions",
+
+  "access-control-no-access-conditions-warning-message": "Currently, no access conditions are specified below. If executed, this will replace the current access conditions with the default access conditions inherited from the owning collection.",
+
+  "access-control-replace-all": "Replace access conditions",
+
+  "access-control-add-to-existing": "Add to existing ones",
+
+  "access-control-limit-to-specific": "Limit the changes to specific bitstreams",
+
+  "access-control-process-all-bitstreams": "Update all the bitstreams in the item",
+
+  "access-control-bitstreams-selected": "bitstreams selected",
+
+  "access-control-cancel": "Cancel",
+
+  "access-control-execute": "Execute",
+
+  "access-control-add-more": "Add more",
+
+  "access-control-select-bitstreams-modal.title": "Select bitstreams",
+
+  "access-control-select-bitstreams-modal.no-items": "No items to show.",
+
+  "access-control-select-bitstreams-modal.close": "Close",
+
+  "access-control-option-label": "Access condition type",
+
+  "access-control-option-note": "Choose an access condition to apply to selected objects.",
+
+  "access-control-option-start-date": "Grant access from",
+
+  "access-control-option-start-date-note": "Select the date from which the related access condition is applied",
+
+  "access-control-option-end-date": "Grant access until",
+
+  "access-control-option-end-date-note": "Select the date until which the related access condition is applied",
+
+  "vocabulary-treeview.search.form.add": "Add",
+
+
+  "external-login.form.email": "Enter the email",
+
+  "external-login.form.or-divider": "or",
+
+  "external-login.confirmation.header": "Information needed to complete the login process",
+
+  "external-login.noEmail.informationText": "The information received from {{authMethod}} are not sufficient to complete the login process. Please provide the missing information below, or login via a different method to associate your {{authMethod}} to an existing account.",
+
+  "external-login.haveEmail.informationText": "It seems that you have not yet an account in this system. If this is the case, please confirm the data received from {{authMethod}} and a new account will be created for you. Otherwise, if you already have an account in the system, please update the email address to match the one already in use in the system or login via a different method to associate your {{authMethod}} to your existing account.",
+
+  "external-login.confirm-email.header": "Confirm or update email",
+
+  "external-login.confirmation.email-required": "Email is required.",
+
+  "external-login.confirmation.email-invalid": "Invalid email format.",
+
+  "external-login.confirm.button.label": "Confirm this email",
+
+  "external-login.confirm-email-sent.header": "Confirmation email sent",
+
+  "external-login.confirm-email-sent.info": " We have sent an email to the provided address to validate your input. <br /> Please follow the instructions in the email to complete the login process.",
+
+  "external-login.provide-email.header": "Provide email",
+
+  "external-login.provide-email.button.label": "Send Verification link",
+
+  "external-login-validation.review-account-info.header": "Review your account information",
+
+  "external-login-validation.review-account-info.info": "The information received from ORCID differs from the one recorded in your profile. <br /> Please review them and decide if you want to update any of them. After saving you will be redirected to your profile page.",
+
+  "external-login-validation.review-account-info.table.header.information": "Information",
+
+  "external-login-validation.review-account-info.table.header.received-value": "Received value",
+
+  "external-login-validation.review-account-info.table.header.current-value": "Current value",
+
+  "external-login-validation.review-account-info.table.header.action": "Override",
+
+  "on-label": "ON",
+
+  "off-label": "OFF",
+
+  "review-account-info.merge-data.notification.success": "Your account information has been updated successfully",
+
+  "review-account-info.merge-data.notification.error": "Something went wrong while updating your account information",
+
+  "review-account-info.alert.error.content": "Something went wrong. Please try again later.",
+
+  "external-login-page.provide-email.notifications.error": "Something went wrong.Email address was omitted or the operation is not valid.",
+
+  "external-login.error.notification": "There was an error while processing your request. Please try again later.",
+
+  "external-login.connect-to-existing-account.label": "Connect to an existing user",
+
+  "external-login.modal.label.close": "Close",
+
+  "external-login-page.provide-email.create-account.notifications.error.header": "Something went wrong",
+
+  "external-login-page.provide-email.create-account.notifications.error.content": "Please check again your email address and try again.",
+
+  "external-login-page.confirm-email.create-account.notifications.error.no-netId": "Something went wrong with this email account. Try again or use a different method to login.",
+
+  "layout.tab.header.Person.details": "Profile",
+  "layout.tab.header.Person.creators": "Creator of",
+  "layout.tab.header.Person.contributors": "Contributor of",
+  "layout.tab.header.Person.projects": "Projects",
+  "layout.tab.header.Person.fonds": "Fonds",
+  "layout.tab.header.Person.personexternallinks": "External Links",
+  "layout.tab.header.Person.relations": "Relations",
+  "layout.tab.header.OrgUnit.maininformation": "Information",
+  "layout.tab.header.OrgUnit.publications": "Publications",
+  "layout.tab.header.OrgUnit.projects": "Projects",
+  "layout.tab.header.OrgUnit.people": "People",
+  "layout.tab.header.OrgUnit.orgunitfonds": "Fonds",
+  "layout.tab.header.OrgUnit.archivalmaterial": "Archival Material",
+  "layout.tab.header.OrgUnit.relations": "Relations",
+  "layout.tab.header.Project.maininformation": "Information",
+  "layout.tab.header.Project.projectpublications": "Publications",
+  "layout.tab.header.Project.relations": "Relations",
+  "layout.tab.header.Event.details": "Details",
+  "layout.tab.header.Event.documents": "Documents",
+  "layout.tab.header.Event.eventpeople": "People",
+  "layout.tab.header.Event.eventexternallinks": "External Links",
+  "layout.tab.header.Event.relations": "Relations",
+  "layout.tab.header.Publication.details": "Details",
+  "layout.tab.header.Fonds.details": "Fonds Details",
+  "layout.tab.header.Fonds.fondscontext": "Fonds Context",
+  "layout.tab.header.Fonds.fondsevents": "Fonds Events",
+  "layout.tab.header.Fonds.fondseditors": "Fonds Editors",
+  "layout.tab.header.Fonds.publications": "Fonds’ Publications",
+  "layout.tab.header.Fonds.children": "Fonds’ Children",
+  "layout.tab.header.Fonds.relations": "Relations",
+  "layout.tab.header.Place.details": "Place Details",
+  "layout.tab.header.Place.placeplaces": "Place Places",
+  "layout.tab.header.Place.placepublications": "Place Publications",
+  "layout.tab.header.Place.placepeople": "Place People",
+  "layout.tab.header.Place.placeevents": "Place Events",
+  "layout.tab.header.Place.placeexternallinks": "External Links",
+  "layout.tab.header.Place.relations": "Relations",
+  "layout.tab.header.Family.details": "Family details",
+  "layout.tab.header.Family.familyeditors": "Family Editors",
+  "layout.tab.header.Family.relations": "Relations",
+  "layout.tab.header.JournalFonds.details": "Journal Fonds Details",
+  "layout.tab.header.JournalFonds.journalfondscontext": "Journal Fonds Context",
+  "layout.tab.header.JournalFonds.children": "Journal Fonds Children",
+  "layout.tab.header.JournalFonds.relations": "Relations",
+  "layout.tab.header.News.details": "Details",
+  "layout.tab.header.Path.details": "Path Details",
+  "layout.tab.header.Path.relations": "Relations",
+  "layout.tab.header.ArchivalMaterial.details": "Details",
+  "layout.tab.header.ArchivalMaterial.relations": "Relations",
+  "layout.tab.header.Aggregation.details": "Aggregation Details",
+  "layout.tab.header.Aggregation.aggregationcontext": "Aggregation Context",
+  "layout.tab.header.Aggregation.items": "Aggregation’s Items",
+  "layout.tab.header.Aggregation.children": "Aggregation’s Children",
+  "layout.tab.header.StaticPage.details": "Details",
+  "layout.tab.header.JournalFile.details": "Details",
+  "layout.tab.header.JournalFile.relations": "Relations",
+  "layout.tab.header.Picture.details": "Details",
+  "layout.tab.header.Picture.relations": "Relations",
+  "layout.tab.header.Publication.relations": "Relations",
+  "layout.tab.header.AudioVideo.details": "Details",
+
+  "layout.box.header.Person.profile": "Profile",
+  "layout.box.header.Person.publications": "Publications",
+  "layout.box.header.Person.copublications": "Publications Contributors",
+  "layout.box.header.Person.projects": "Projects",
+  "layout.box.header.Person.fonds": "Fonds Parent",
+  "layout.box.header.Person.personlinks": "Person Links",
+  "layout.box.header.Person.bibliographiclinks": "Bibliographical links",
+  "layout.box.header.Person.relationevent": "Events",
+  "layout.box.header.Person.relationaggregation": "Aggregations",
+  "layout.box.header.Person.relationpath": "Paths",
+  "layout.box.header.OrgUnit.details": "Details",
+  "layout.box.header.OrgUnit.description": "Description",
+  "layout.box.header.OrgUnit.organizations": "SubOrgUnits",
+  "layout.box.header.OrgUnit.publications": "OrgUnit's Publications",
+  "layout.box.header.OrgUnit.rppublications": "OrgUnit's Researchers publications",
+  "layout.box.header.OrgUnit.projects": "OrgUnit’s funded Projects",
+  "layout.box.header.OrgUnit.rpprojects": "OrgUnit's Researchers projects",
+  "layout.box.header.OrgUnit.people": "OrgUnit's Researchers",
+  "layout.box.header.OrgUnit.orgunitfonds": "Fonds",
+  "layout.box.header.OrgUnit.archivalmaterial": "Archival Material",
+  "layout.box.header.OrgUnit.relationaggregation": "Aggregations",
+  "layout.box.header.OrgUnit.relationpath": "Paths",
+  "layout.box.header.Project.primarydata": "Primary Data",
+  "layout.box.header.Project.description": "Description",
+  "layout.box.header.Project.publications": "Publications",
+  "layout.box.header.Project.relationaggregation": "Aggregations",
+  "layout.box.header.Project.relationpath": "Paths",
+  "layout.box.header.Event.details": "Details",
+  "layout.box.header.Event.publications": "Events’ Documents",
+  "layout.box.header.Event.people": "Events’ People",
+  "layout.box.header.Event.eventlinks": "Event Links",
+  "layout.box.header.Event.relationaggregation": "Aggregations",
+  "layout.box.header.Event.relationpath": "Paths",
+  "layout.box.header.Publication.details": "Details",
+  "layout.box.header.Fonds.fondsdescription": "Description",
+  "layout.box.header.Fonds.publications": "Fonds’ Publications",
+  "layout.box.header.Fonds.children": "Fonds’ Children",
+  "layout.box.header.Fonds.fondsindex": "Fonds Index",
+  "layout.box.header.Fonds.fondsdates": "Fonds Dates",
+  "layout.box.header.Fonds.fondseditors": "Fonds Editors",
+  "layout.box.header.Fonds.relationproject": "Projects",
+  "layout.box.header.Fonds.relationparent": "Parent",
+  "layout.box.header.Fonds.relationpath": "Paths",
+  "layout.box.header.Place.placedescription": "Description",
+  "layout.box.header.Place.places": "Place’s Places",
+  "layout.box.header.Place.publications": "Place’s Publications",
+  "layout.box.header.Place.people": "Place’s People",
+  "layout.box.header.Place.events": "Place’s Events",
+  "layout.box.header.Place.placelinks": "Place Links",
+  "layout.box.header.Place.relationplace": "Places",
+  "layout.box.header.Place.relationaggregation": "Aggregations",
+  "layout.box.header.Place.relationpath": "Paths",
+  "layout.box.header.Family.familydescription": "Description",
+  "layout.box.header.Family.familyeditors": "Family Editors",
+  "layout.box.header.Family.relationevent": "Events",
+  "layout.box.header.Family.relationaggregation": "Aggregations",
+  "layout.box.header.Family.relationpath": "Paths",
+  "layout.box.header.JournalFonds.journalfondsdescription": "Description",
+  "layout.box.header.JournalFonds.journalfondsindex": "Journal Fonds Index",
+  "layout.box.header.JournalFonds.children": "Journal Fonds Children",
+  "layout.box.header.JournalFonds.relationjournalfonds": "Related Journal Fonds",
+  "layout.box.header.JournalFonds.relationperson": "Related People",
+  "layout.box.header.JournalFonds.relationparent": "Parent",
+  "layout.box.header.News.newsdescription": "Description",
+  "layout.box.header.Path.pathpublications": "Digital Resources",
+  "layout.box.header.Path.relationaggregation": "Aggregations",
+  "layout.box.header.ArchivalMaterial.details": "Description",
+  "layout.box.header.ArchivalMaterial.relationperson": "Person",
+  "layout.box.header.ArchivalMaterial.relationaggregation": "Aggregations",
+  "layout.box.header.ArchivalMaterial.relationpath": "Paths",
+  "layout.box.header.ArchivalMaterial.relationisreferencedby": "Related Documents",
+  "layout.box.header.ArchivalMaterial.relationfonds": "Fonds",
+  "layout.box.header.ArchivalMaterial.relationconference": "Events",
+  "layout.box.header.ArchivalMaterial.relationproject": "Projects",
+  "layout.box.header.ArchivalMaterial.relationplace": "Places",
+  "layout.box.header.Aggregation.aggregationdescription": "Description",
+  "layout.box.header.Aggregation.aggregationindex": "Aggregation Index",
+  "layout.box.header.Aggregation.items": "Aggregation’s Items",
+  "layout.box.header.Aggregation.children": "Aggregation’s Children",
+  "layout.box.header.StaticPage.details": "Description",
+  "layout.box.header.JournalFile.details": "Description",
+  "layout.box.header.JournalFile.relationjournalfonds": "Journal Fonds",
+  "layout.box.header.JournalFile.relationaggregation": "Aggregations",
+  "layout.box.header.JournalFile.relationpath": "Paths",
+  "layout.box.header.JournalFile.relationisreferencedby": "Related Documents",
+  "layout.box.header.Picture.details": "Description",
+  "layout.box.header.Picture.relationfonds": "Fonds",
+  "layout.box.header.Picture.relationaggregation": "Aggregations",
+  "layout.box.header.Picture.relationpath": "Paths",
+  "layout.box.header.Picture.relationisreferencedby": "Related Documents",
+  "layout.box.header.Picture.relationhaspart": "Contains",
+  "layout.box.header.Picture.relationispartofcontainer": "Is part of",
+  "layout.box.header.Publication.relationpath": "Path",
+  "layout.box.header.Publication.relationconference": "Conference",
+  "layout.box.header.Publication.relationplace": "Place",
+  "layout.box.header.Publication.relationfonds": "Fonds",
+  "layout.box.header.Publication.relationperson": "Person",
+  "layout.box.header.Publication.relationjournalfonds": "Journal Fonds",
+  "layout.box.header.Publication.relationaggregation": "Aggregations",
+  "layout.box.header.Publication.relationisreferencedby": "Related Documents",
+  "layout.box.header.Publication.relationproject": "Projects",
+  "layout.box.header.Publication.relationevent": "Events",
+  "layout.box.header.Publication.glamjournalfondrelationjournalfond": "Related Journal Fonds",
+  "layout.box.header.Publication.glamjournalfondrelationperson": "Related People",
+  "layout.box.header.Publication.glamjournalfondparent": "Parent",
+  "layout.box.header.Publication.glamfondsparent": "Parent",
+  "layout.box.header.Publication.relationispartofcontainer": "Is part of",
+  "layout.box.header.Publication.relationhaspart": "Contains",
+  "layout.box.header.AudioVideo.details": "Details",
+
+  "layout.field.label.OrgUnit.organization.parentOrganization": "Parent Organisation",
+  "layout.field.label.OrgUnit.crisou.director": "Director",
+  "layout.field.label.OrgUnit.organization.foundingDate": "Founding Date",
+  "layout.field.label.OrgUnit.dc.description.abstract": "Description",
+  "layout.field.label.OrgUnit.organization.address.addressLocality": "City",
+  "layout.field.label.OrgUnit.organization.address.addressCountry": "Country",
+  "layout.field.label.OrgUnit.glamou.address": "Address",
+  "layout.field.label.OrgUnit.glamou.address.postcode": "Postal Code",
+  "layout.field.label.OrgUnit.dc.type": "Type",
+  "layout.field.label.OrgUnit.glamou.accessibility": "Accessibility",
+  "layout.field.label.OrgUnit.glamou.services": "Services",
+  "layout.field.label.OrgUnit.glamou.collectingPolicies": "Collecting Policies",
+  "layout.field.label.OrgUnit.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.OrgUnit.dc.relation.path": "Paths",
+  "layout.field.label.Project.oairecerif.acronym": "Acronym",
+  "layout.field.label.Project.crispj.coordinator": "Consortium Coordinator",
+  "layout.field.label.Project.oairecerif.internalid": "Internal ID",
+  "layout.field.label.Project.crispj.partnerou": "Partner Organisations",
+  "layout.field.label.Project.crispj.investigator": "Principal Investigator",
+  "layout.field.label.Project.crispj.openaireid": "OpenAIRE ID",
+  "layout.field.label.Project.crispj.organization": "Organisations",
+  "layout.field.label.Project.oairecerif.identifier.url": "Project Web Site",
+  "layout.field.label.Project.oairecerif.oamandate": "OA Mandate",
+  "layout.field.label.Project.oairecerif.oamandate.url": "OA Mandate URL",
+  "layout.field.label.Project.oairecerif.project.startDate": "Start Date",
+  "layout.field.label.Project.oairecerif.project.endDate": "End Date",
+  "layout.field.label.Project.oairecerif.project.status": "Status",
+  "layout.field.label.Project.crispj.coinvestigators": "Investigators",
+  "layout.field.label.Project.dc.type": "Type",
+  "layout.field.label.Project.dc.description.abstract": "Description",
+  "layout.field.label.Project.dc.subject": "Keywords",
+  "layout.field.label.Project.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.Project.dc.relation.path": "Paths",
+  "layout.field.label.Event.oairecerif.acronym": "Acronym",
+  "layout.field.label.Event.glamevent.variants": "Variants",
+  "layout.field.label.Event.dc.type": "Type",
+  "layout.field.label.Event.oairecerif.event.startDate": "Start Date",
+  "layout.field.label.Event.oairecerif.event.endDate": "End Date",
+  "layout.field.label.Event.oairecerif.event.place": "Location",
+  "layout.field.label.Event.oairecerif.event.country": "Country",
+  "layout.field.label.Event.dc.description.abstract": "Abstract",
+  "layout.field.label.Event.dc.subject": "Keywords",
+  "layout.field.label.Event.glam.link.wikipedia": "Wikipedia Link",
+  "layout.field.label.Event.glam.link.dbpedia": "Dbpedia Link",
+  "layout.field.label.Event.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.Event.dc.relation.path": "Paths",
+  "layout.field.label.Publication.dc.title.alternative": "Alternative Title",
+  "layout.field.label.Publication.dc.identifier.isbn": "ISBN",
+  "layout.field.label.Publication.dc.identifier.issn": "ISSN",
+  "layout.field.label.Publication.dc.identifier.bid": "BID",
+  "layout.field.label.Publication.dc.identifier.doi": "DOI",
+  "layout.field.label.Publication.dc.identifier.uri": "URI",
+  "layout.field.label.Publication.dc.identifier.nbn": "NBN:IT",
+  "layout.field.label.Publication.dc.identifier.inventorynumber": "Inventory Number",
+  "layout.field.label.Publication.dc.identifier.shelfmark": "Shelfmark",
+  "layout.field.label.Publication.dc.identifier.other": "Other Identifier",
+  "layout.field.label.Publication.dc.identifier.codex": "Codex",
+  "layout.field.label.Publication.dc.identifier.archivalunit": "Archival Unit",
+  "layout.field.label.Publication.dc.date.issued": "Date Issued",
+  "layout.field.label.Publication.dc.contributor.author": "Author(s)",
+  "layout.field.label.Publication.dc.contributor.contributor": "Secondary Author(s)",
+  "layout.field.label.Publication.dc.type": "Type",
+  "layout.field.label.Publication.dc.publisher": "Editor",
+  "layout.field.label.Publication.dc.description.abstract": "Abstract",
+  "layout.field.label.Publication.dc.description": "Physical Description",
+  "layout.field.label.Publication.dc.language.iso": "Language",
+  "layout.field.label.Publication.dc.subject": "Keywords",
+  "layout.field.label.Publication.dc.rights.license": "License",
+  "layout.field.label.Publication.dc.relation.ispartofseries": "Series",
+  "layout.field.label.Publication.dc.relation.opac": "OPAC Link",
+  "layout.field.label.Publication.dc.relation.otherlinks": "Other Links",
+  "layout.field.label.Publication.dc.description.note": "Notes",
+  "layout.field.label.Publication.BITSTREAM": "File(s)",
+  "layout.field.label.Fonds.dc.title.alternative": "Alternative Title",
+  "layout.field.label.Fonds.dc.type": "Type",
+  "layout.field.label.Fonds.dc.contributor.author": "Author(s)",
+  "layout.field.label.Fonds.dc.contributor.corporatebody": "Corporate Body",
+  "layout.field.label.Fonds.dc.contributor.family": "Family",
+  "layout.field.label.Fonds.glamfonds.custodian": "Custodian",
+  "layout.field.label.Fonds.glamfonds.length": "Length",
+  "layout.field.label.Fonds.glamfonds.photographictype": "Photographic Type",
+  "layout.field.label.Fonds.glamfonds.shelfmark": "Shelfmark",
+  "layout.field.label.Fonds.dc.description.abstract": "Abstract",
+  "layout.field.label.Fonds.dc.description": "Description",
+  "layout.field.label.Fonds.dc.format.extent": "Extent",
+  "layout.field.label.Fonds.glamfonds.history": "History",
+  "layout.field.label.Fonds.dc.language.iso": "Language",
+  "layout.field.label.Fonds.glamfonds.quantity": "Quantity",
+  "layout.field.label.Fonds.glamfonds.arrangement.note": "Arrangement Notes",
+  "layout.field.label.Fonds.glamfonds.relation.materials": "Materials",
+  "layout.field.label.Fonds.glamfonds.accesscondition": "Access Condition",
+  "layout.field.label.Fonds.glamfonds.note": "Note",
+  "layout.field.label.Fonds.glamfonds.preservation": "Preservation",
+  "layout.field.label.Fonds.glamfonds.preservation.note": "Preservation Notes",
+  "layout.field.label.Fonds.glamfonds.usecondition": "Use Condition",
+  "layout.field.label.Fonds.glamfonds.usecondition.note": "Use Condition Notes",
+  "layout.field.label.Fonds.glamfonds.bibliography": "Bibliography",
+  "layout.field.label.Fonds.dc.identifier.uri": "URL",
+  "layout.field.label.Fonds.glamfonds.editor": "Editor(s)",
+  "layout.field.label.Fonds.glamfonds.enddate.format": "End Date Format",
+  "layout.field.label.Fonds.glamfonds.enddate.from": "End Date From",
+  "layout.field.label.Fonds.glamfonds.enddate.spec": "End Date Spec",
+  "layout.field.label.Fonds.glamfonds.enddate.to": "End Date To",
+  "layout.field.label.Fonds.glamfonds.enddate.valid": "End Date Valid",
+  "layout.field.label.Fonds.glamfonds.startdate.format": "Start Date Format",
+  "layout.field.label.Fonds.glamfonds.startdate.from": "Start Date From",
+  "layout.field.label.Fonds.glamfonds.startdate.spec": "Start Date Spec",
+  "layout.field.label.Fonds.glamfonds.startdate.to": "Start Date To",
+  "layout.field.label.Fonds.glamfonds.startdate.valid": "Start Date Valid",
+  "layout.field.label.Fonds.glam.index": "Fonds Index",
+  "layout.field.label.Fonds.dc.relation.project": "Projects",
+  "layout.field.label.Fonds.glamfonds.parent": "Parent",
+  "layout.field.label.Fonds.dc.relation.path": "Paths",
+  "layout.field.label.Place.dc.title.alternative": "Alternative Title",
+  "layout.field.label.Place.glamplace.lat": "Latitude",
+  "layout.field.label.Place.glamplace.long": "Longitude",
+  "layout.field.label.Place.dc.description.abstract": "Abstract",
+  "layout.field.label.Place.glam.link.dbpedia": "Dbpedia Link",
+  "layout.field.label.Place.glamplace.link.geonames": "Geonames Link",
+  "layout.field.label.Place.glamplace.link.tgn": "TGN Link",
+  "layout.field.label.Place.glam.link.wikipedia": "Wikipedia Link",
+  "layout.field.label.Place.dc.relation.place": "Places",
+  "layout.field.label.Place.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.Place.dc.relation.path": "Paths",
+  "layout.field.label.Family.dc.title.alternative": "Alternative Title",
+  "layout.field.label.Family.dc.description": "Description",
+  "layout.field.label.Family.dc.description.abstract": "Abstract",
+  "layout.field.label.Family.glamfamily.nationality": "Nationality",
+  "layout.field.label.Family.glamfamily.editor": "Editor(s)",
+  "layout.field.label.Family.dc.relation.event": "Events",
+  "layout.field.label.Family.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.Family.dc.relation.path": "Paths",
+  "layout.field.label.JournalFonds.dc.title.alternative": "Alternative Title",
+  "layout.field.label.JournalFonds.dc.type": "Type",
+  "layout.field.label.JournalFonds.glamfonds.history": "History",
+  "layout.field.label.JournalFonds.dc.coverage.temporal": "Coverage Temporal",
+  "layout.field.label.JournalFonds.dc.language.iso": "Language",
+  "layout.field.label.JournalFonds.dc.description.abstract": "Abstract",
+  "layout.field.label.JournalFonds.glamfonds.shelfmark": "Shelfmark",
+  "layout.field.label.JournalFonds.glamjournalfonds.ownedyears": "Owned Years",
+  "layout.field.label.JournalFonds.dc.identifier.other": "Other Identifier(s)",
+  "layout.field.label.JournalFonds.dc.relation.opac": "OPAC Link",
+  "layout.field.label.JournalFonds.dc.relation.otherlinks": "Other Links",
+  "layout.field.label.JournalFonds.glamjournalfonds.history": "Journal Fonds History",
+  "layout.field.label.JournalFonds.dc.relation.path": "Path",
+  "layout.field.label.JournalFonds.glam.index": "Journal Fond Index",
+  "layout.field.label.JournalFonds.glamjournalfonds.relation.journalfonds": "Related Journal Fonds",
+  "layout.field.label.JournalFonds.glamjournalfonds.relation.person": "Related People",
+  "layout.field.label.JournalFonds.glamjournalfonds.parent": "Journal Fonds Parent",
+  "layout.field.label.News.cris.news.enabled": "News Enabled",
+  "layout.field.label.News.cris.news.url": "News URL",
+  "layout.field.label.News.dc.description.abstract": "Abstract",
+  "layout.field.label.News.cris.priority": "Position",
+  "layout.field.label.Path.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.ArchivalMaterial.dc.title.alternative": "Alternative Title",
+  "layout.field.label.ArchivalMaterial.dc.type": "Type",
+  "layout.field.label.ArchivalMaterial.dc.contributor.author": "Author(s)",
+  "layout.field.label.ArchivalMaterial.dc.contributor.corporatebody": "Corporate Body",
+  "layout.field.label.ArchivalMaterial.dc.contributor.family": "Family",
+  "layout.field.label.ArchivalMaterial.dc.date.issued": "Date Issued",
+  "layout.field.label.ArchivalMaterial.dc.date.start": "Start Date",
+  "layout.field.label.ArchivalMaterial.dc.date.end": "End Date",
+  "layout.field.label.ArchivalMaterial.dc.coverage.temporal": "Coverage Temporal",
+  "layout.field.label.ArchivalMaterial.dc.date.note": "Date Notes",
+  "layout.field.label.ArchivalMaterial.dc.identifier.doi": "DOI",
+  "layout.field.label.ArchivalMaterial.dc.identifier.uri": "URI",
+  "layout.field.label.ArchivalMaterial.dc.identifier.nbn": "NBN:IT ID",
+  "layout.field.label.ArchivalMaterial.dc.identifier.inventorynumber": "Inventory Number",
+  "layout.field.label.ArchivalMaterial.dc.identifier.shelfmark": "Shelfmark",
+  "layout.field.label.ArchivalMaterial.dc.identifier.other": "Other Identifier",
+  "layout.field.label.ArchivalMaterial.dc.identifier.archivalunit": "Archival Unit",
+  "layout.field.label.ArchivalMaterial.dc.description": "Description",
+  "layout.field.label.ArchivalMaterial.dc.type.physical": "Physical Type",
+  "layout.field.label.ArchivalMaterial.dc.format.medium": "Format",
+  "layout.field.label.ArchivalMaterial.dcterms.accessRights": "Access Rights",
+  "layout.field.label.ArchivalMaterial.dc.rights": "Rights",
+  "layout.field.label.ArchivalMaterial.dc.rights.license": "License",
+  "layout.field.label.ArchivalMaterial.dc.rights.note": "Rights Note",
+  "layout.field.label.ArchivalMaterial.dcterms.bibliographicCitation": "Bibliographic Citation",
+  "layout.field.label.ArchivalMaterial.dc.language.iso": "Language",
+  "layout.field.label.ArchivalMaterial.dc.subject": "Keywords",
+  "layout.field.label.ArchivalMaterial.dc.relation.opac": "OPAC Link",
+  "layout.field.label.ArchivalMaterial.dc.relation.otherlinks": "Other Links",
+  "layout.field.label.ArchivalMaterial.dc.description.archivist": "Archivist Description",
+  "layout.field.label.ArchivalMaterial.dc.description.preservation": "Preservation",
+  "layout.field.label.ArchivalMaterial.dc.description.preservationnote": "Preservation Notes",
+  "layout.field.label.ArchivalMaterial.dc.description.note": "Note",
+  "layout.field.label.ArchivalMaterial.dc.relation.uri": "URL",
+  "layout.field.label.ArchivalMaterial.BITSTREAM": "File(s)",
+  "layout.field.label.ArchivalMaterial.dc.relation.person": "Person",
+  "layout.field.label.ArchivalMaterial.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.ArchivalMaterial.dc.relation.path": "Paths",
+  "layout.field.label.ArchivalMaterial.dc.relation.isreferencedby": "Related Documents",
+  "layout.field.label.ArchivalMaterial.dc.relation.fonds": "Fonds",
+  "layout.field.label.ArchivalMaterial.dc.relation.conference": "Events",
+  "layout.field.label.ArchivalMaterial.dc.relation.project": "Projects",
+  "layout.field.label.ArchivalMaterial.dc.relation.place": "Places",
+  "layout.field.label.Aggregation.dc.description": "Description",
+  "layout.field.label.Aggregation.dc.description.abstract": "Abstract",
+  "layout.field.label.Aggregation.glamaggregation.parent": "Aggregation Parent",
+  "layout.field.label.Aggregation.glam.index": "Aggregation Index",
+  "layout.field.label.StaticPage.dc.description": "Description",
+  "layout.field.label.StaticPage.dc.subject": "Keywords",
+  "layout.field.label.JournalFile.dc.relation.issue": "Issue",
+  "layout.field.label.JournalFile.dc.relation.issueother": "Issue Other",
+  "layout.field.label.JournalFile.dc.relation.stpieceper": "Year Reference",
+  "layout.field.label.JournalFile.dc.relation.stpieceperstart": "Year Reference From",
+  "layout.field.label.JournalFile.dc.relation.stpieceperend": "Year Reference To",
+  "layout.field.label.JournalFile.dc.relation.stpieceperother": "Other Reference",
+  "layout.field.label.JournalFile.dc.relation.stpieceperotherstart": "Other Reference From",
+  "layout.field.label.JournalFile.dc.relation.stpieceperotherend": "Other Reference To",
+  "layout.field.label.JournalFile.dc.date.issued": "Date Issued",
+  "layout.field.label.JournalFile.dc.date.start": "Start Date",
+  "layout.field.label.JournalFile.dc.date.end": "End Date",
+  "layout.field.label.JournalFile.dc.relation.edition": "Edition",
+  "layout.field.label.JournalFile.dc.description": "Description",
+  "layout.field.label.JournalFile.dc.description.abstract": "Abstract",
+  "layout.field.label.JournalFile.dc.identifier.archivalunit": "Archival Unit",
+  "layout.field.label.JournalFile.dc.rights.license": "License",
+  "layout.field.label.JournalFile.BITSTREAM": "File(s)",
+  "layout.field.label.JournalFile.dc.relation.journalfonds": "Journal Fonds",
+  "layout.field.label.JournalFile.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.JournalFile.dc.relation.path": "Paths",
+  "layout.field.label.JournalFile.dc.relation.isreferencedby": "Related Documents",
+  "layout.field.label.Picture.dc.title.alternative": "Alternative Title",
+  "layout.field.label.Picture.dc.contributor.author": "Author(s)",
+  "layout.field.label.Picture.dc.date.issued": "Date Issued",
+  "layout.field.label.Picture.dc.date.inventory": "Date Inventory",
+  "layout.field.label.Picture.dc.date.start": "Start Date",
+  "layout.field.label.Picture.dc.date.end": "End Date",
+  "layout.field.label.Picture.dc.date.note": "Date Notes",
+  "layout.field.label.Picture.dc.identifier.form": "Form",
+  "layout.field.label.Picture.dc.identifier.inventorynumber": "Inventory Number",
+  "layout.field.label.Picture.dc.identifier.nctn": "NCTN",
+  "layout.field.label.Picture.dc.identifier.region": "Region",
+  "layout.field.label.Picture.dc.identifier.shelfmark": "Shelfmark",
+  "layout.field.label.Picture.dc.identifier.uri": "URI",
+  "layout.field.label.Picture.dc.identifier.archivalunit": "Archival Unit",
+  "layout.field.label.Picture.dc.type.form": "Form Type",
+  "layout.field.label.Picture.dc.type.color": "Color",
+  "layout.field.label.Picture.dc.type.materialandtechnique": "Material And Technique",
+  "layout.field.label.Picture.dc.type.note": "Type Notes",
+  "layout.field.label.Picture.glampicture.type.framing": "Framing Type",
+  "layout.field.label.Picture.dc.description.abstract": "Abstract",
+  "layout.field.label.Picture.dc.description": "Physical Description",
+  "layout.field.label.Picture.dc.language.iso": "Language",
+  "layout.field.label.Picture.dc.coverage.temporal": "Coverage Temporal",
+  "layout.field.label.Picture.dc.coverage.temporalfraction": "Coverage Temporal Fraction",
+  "layout.field.label.Picture.dc.coverage.spatialpvcs": "Country",
+  "layout.field.label.Picture.dc.coverage.spatialpvcr": "Region",
+  "layout.field.label.Picture.dc.coverage.spatialpvcn": "Province",
+  "layout.field.label.Picture.dc.coverage.spatialabbreviation": "Province Abbreviation",
+  "layout.field.label.Picture.dc.coverage.spatialpvcc": "District",
+  "layout.field.label.Picture.dc.coverage.shelfmark": "Coverage Shelfmark",
+  "layout.field.label.Picture.dc.subject": "Subject",
+  "layout.field.label.Picture.glampicture.subject.place": "Subject Place",
+  "layout.field.label.Picture.dc.subject.keywords": "Keywords",
+  "layout.field.label.Picture.dc.rights.license": "License",
+  "layout.field.label.Picture.dc.relation.references": "References",
+  "layout.field.label.Picture.dc.relation.project": "Project",
+  "layout.field.label.Picture.dc.relation.conference": "Event",
+  "layout.field.label.Picture.dc.relation.person": "Person",
+  "layout.field.label.Picture.dc.relation.opac": "OPAC Link",
+  "layout.field.label.Picture.dc.relation.otherlinks": "Other Links",
+  "layout.field.label.Picture.dc.format": "Format",
+  "layout.field.label.Picture.dc.format.misu": "Measure Unit",
+  "layout.field.label.Picture.dc.format.misa": "Height",
+  "layout.field.label.Picture.dc.format.misl": "Width",
+  "layout.field.label.Picture.dc.description.parts": "Parts",
+  "layout.field.label.Picture.dc.description.number": "Number",
+  "layout.field.label.Picture.dc.description.function": "Function",
+  "layout.field.label.Picture.dc.description.use": "Use Condition",
+  "layout.field.label.Picture.dc.description.collection": "Collection",
+  "layout.field.label.Picture.dc.description.collectionholder": "Collection Holder",
+  "layout.field.label.Picture.dc.description.collectionnotes": "Collection Notes",
+  "layout.field.label.Picture.dc.description.preservationstate": "Preservation State",
+  "layout.field.label.Picture.dc.description.preservationspecifications": "Preservation Specifications",
+  "layout.field.label.Picture.dc.description.note": "Notes",
+  "layout.field.label.Picture.BITSTREAM": "File(s)",
+  "layout.field.label.Picture.dc.relation.fonds": "Fonds",
+  "layout.field.label.Picture.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.Picture.dc.relation.path": "Paths",
+  "layout.field.label.Picture.dc.relation.isreferencedby": "Related Documents",
+  "layout.field.label.Picture.dc.relation.haspart": "Contains",
+  "layout.field.label.Picture.dc.relation.ispartofcontainer": "Is part of",
+  "layout.field.label.Publication.dc.relation.path": "Path",
+  "layout.field.label.Publication.dc.relation.conference": "Event",
+  "layout.field.label.Publication.dc.relation.place": "Place",
+  "layout.field.label.Publication.dc.relation.fonds": "Fonds",
+  "layout.field.label.Publication.dc.relation.person": "Person",
+  "layout.field.label.Publication.dc.relation.journalfonds": "Journal Fonds ",
+  "layout.field.label.Publication.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.Publication.dc.relation.isreferencedby": "Related Documents",
+  "layout.field.label.Publication.dc.relation.project": "Projects",
+  "layout.field.label.Publication.dc.relation.event": "Events",
+  "layout.field.label.Publication.glamjournalfonds.relation.journalfonds": "Related Journal Fonds",
+  "layout.field.label.Publication.glamjournalfonds.relation.person": "Related People",
+  "layout.field.label.Publication.glamjournalfonds.parent": "Parent",
+  "layout.field.label.Publication.glamfonds.parent": "Parent",
+  "layout.field.label.Publication.dc.relation.ispartofcontainer": "Is part of",
+  "layout.field.label.Publication.dc.relation.haspart": "Contains",
+  "layout.field.label.AudioVideo.dc.contributor.author": "Author(s)",
+  "layout.field.label.AudioVideo.dc.contributor.contributor": "Agent(s)",
+  "layout.field.label.AudioVideo.dc.relation.fonds": "Fund",
+  "layout.field.label.AudioVideo.dc.relation.event": "Related Event",
+  "layout.field.label.AudioVideo.dc.coverage.culture": "Cultural Area",
+  "layout.field.label.AudioVideo.dc.relation.place": "Place Of Detection",
+  "layout.field.label.AudioVideo.dc.coverage.spatialpvcs": "Country",
+  "layout.field.label.AudioVideo.dc.coverage.spatialpvcc": "City",
+  "layout.field.label.AudioVideo.dc.coverage.spatialpvcn": "Province",
+  "layout.field.label.AudioVideo.dc.date.issued": "Date Issued",
+  "layout.field.label.AudioVideo.dc.language.iso": "Language",
+  "layout.field.label.AudioVideo.dc.subject.keywords": "Keywords",
+  "layout.field.label.AudioVideo.dc.relation.path": "Path",
+  "layout.field.label.AudioVideo.dc.relation.project": "Project",
+  "layout.field.label.AudioVideo.dc.relation.url": "URL",
+  "layout.field.label.AudioVideo.dc.relation.audiovideo": "Related Documents",
+  "layout.field.label.AudioVideo.dc.relation.aggregation": "Aggregation",
+  "layout.field.label.AudioVideo.dc.rights.license": "License",
+  "layout.field.label.AudioVideo.dc.type": "File Type",
+  "layout.field.label.AudioVideo.dc.type.physical": "Physical Type",
+  "layout.field.label.AudioVideo.dc.format.extent": "Event Time",
+  "layout.field.label.AudioVideo.dc.format.mimetype": "Audio/Video File Encoding",
+  "layout.field.label.AudioVideo.dc.description.channel": "Number Of Channels",
+  "layout.field.label.AudioVideo.dc.format.samplerate": "Sample Rate",
+  "layout.field.label.AudioVideo.dc.format.bitsample": "Bits Per Sample",
+  "layout.field.label.AudioVideo.dc.description.tools": "Equipment",
+  "layout.field.label.AudioVideo.dc.format.medium": "Physical Description Of The Medium",
+  "layout.field.label.AudioVideo.dc.description.preservationstate": "Preservation State",
+  "layout.field.label.AudioVideo.BITSTREAM": "File(s)",
+
+  "layout.field.label.Abbreviation": "Abbreviation",
+  "layout.field.label.Title": "Title",
+  "layout.field.label.Editor": "Editor",
+  "layout.field.label.Publisher": "Publisher",
+  "layout.field.label.Place": "Place",
+  "layout.field.label.Year": "Year",
+  "layout.field.label.Author": "Author",
+  "layout.field.label.Qualifier": "Qualifier",
+  "layout.field.label.Editing Type": "Editing Type",
+  "layout.field.label.Edited At": "Edited At",
+  "layout.field.label.From": "From",
+  "layout.field.label.To": "To",
+  "layout.field.label.Format": "Format",
+  "layout.field.label.Inventory Number": "Inventory Number",
+  "layout.field.label.Notes": "Notes",
+  "layout.field.label.Relation Type": "Relation Type",
+  "layout.field.label.Related Journal Fonds": "Related Journal Fonds",
+  "layout.field.label.Person Name": "Person Name",
+  "layout.field.label.Person Role": "Person Role",
+  "layout.field.label.Role": "Role",
+  "layout.field.label.Other Author": "Other Author",
+  "layout.field.label.Agent": "Agent",
+  "layout.field.label.History": "History",
+
 }

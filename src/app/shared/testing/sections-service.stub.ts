@@ -7,6 +7,7 @@ export class SectionsServiceStub {
   getSectionErrors = jasmine.createSpy('getSectionErrors');
   getSectionState = jasmine.createSpy('getSectionState');
   isSectionValid = jasmine.createSpy('isSectionValid');
+  isSectionHidden = jasmine.createSpy('isSectionHidden');
   isSectionEnabled = jasmine.createSpy('isSectionEnabled');
   isSectionReadOnly = jasmine.createSpy('isSectionReadOnly');
   isSectionAvailable = jasmine.createSpy('isSectionAvailable');
@@ -22,5 +23,4 @@ export class SectionsServiceStub {
   getShownSectionErrors = jasmine.createSpy('getShownSectionErrors');
   getSectionServerErrors = jasmine.createSpy('getSectionServerErrors');
   getIsInformational = jasmine.createSpy('getIsInformational');
-  isSectionHidden = jasmine.createSpy('isSectionHidden');
 }

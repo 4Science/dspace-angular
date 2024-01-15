@@ -72,7 +72,8 @@ export class ItemStatusComponent implements OnInit {
               private authorizationService: AuthorizationDataService,
               private identifierDataService: IdentifierDataService,
               private configurationService: ConfigurationDataService,
-              private orcidAuthService: OrcidAuthService) {
+              private orcidAuthService: OrcidAuthService
+  ) {
   }
 
   /**
@@ -125,7 +126,6 @@ export class ItemStatusComponent implements OnInit {
         item.isDiscoverable
          ? new ItemOperation('private', `${currentUrl}/private`, FeatureID.CanMakePrivate, true)
          : new ItemOperation('public', `${currentUrl}/public`, FeatureID.CanMakePrivate, true),
-        new ItemOperation('curate', `${currentUrl}/curate`, FeatureID.CanCurate, true),
         new ItemOperation('move', `${currentUrl}/move`, FeatureID.CanMove, true),
         new ItemOperation('delete', `${currentUrl}/delete`, FeatureID.CanDelete, true)
       ];
@@ -199,14 +199,14 @@ export class ItemStatusComponent implements OnInit {
               map((canDisconnect) => {
                 if (canDisconnect) {
                   return [new ItemOperation('unlinkOrcid', `${currentUrl}/unlink-orcid`)];
-                }
+            }
                 return [];
               })
             );
         }
 
         return combineLatest([ops$, orcidOps$]);
-      }),
+          }),
       map(([ops, orcidOps]: [ItemOperation[], ItemOperation[]]) => [...ops, ...orcidOps])
     ).subscribe((ops) => this.operations$.next(ops));
 
@@ -216,6 +216,7 @@ export class ItemStatusComponent implements OnInit {
     );
 
   }
+
 
   /**
    * Get the current url without query params

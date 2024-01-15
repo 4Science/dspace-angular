@@ -28,8 +28,8 @@ describe('HeaderComponent', () => {
         ReactiveFormsModule],
       declarations: [HeaderComponent],
       providers: [
-        { provide: MenuService, useValue: menuService },
         { provide: HostWindowService, useValue: new HostWindowServiceStub(0) },
+        { provide: MenuService, useValue: menuService }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
@@ -43,7 +43,7 @@ describe('HeaderComponent', () => {
     fixture = TestBed.createComponent(HeaderComponent);
 
     comp = fixture.componentInstance;
-
+    fixture.detectChanges();
   });
 
   describe('when the toggle button is clicked', () => {

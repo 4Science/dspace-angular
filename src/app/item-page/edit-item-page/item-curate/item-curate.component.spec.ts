@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
+import { ItemCurateComponent } from './item-curate.component';
 import { of as observableOf } from 'rxjs';
 import { createSuccessfulRemoteDataObject } from '../../../shared/remote-data.utils';
 import { ActivatedRoute } from '@angular/router';
 import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
-import { ItemCurateComponent } from './item-curate.component';
 import { Item } from '../../../core/shared/item.model';
 
 describe('ItemCurateComponent', () => {
@@ -17,6 +17,7 @@ describe('ItemCurateComponent', () => {
   let dsoNameService;
 
   const item = Object.assign(new Item(), {
+    handle: '123456789/1',
     metadata: {'dc.title': ['Item Name']}
   });
 
@@ -56,12 +57,18 @@ describe('ItemCurateComponent', () => {
       expect(comp).toBeDefined();
       expect(debugEl.nativeElement.innerHTML).toContain('ds-curation-form');
     });
-    it('should contain the item information provided', () => {
-      comp.itemRD$.subscribe((value) => {
-        expect(value.payload).toBeTruthy();
+
+    it('should contain the item information provided in the route', (done) => {
+      comp.dsoRD$.subscribe((value) => {
+        expect(value.payload.handle).toEqual('123456789/1');
+        done();
       });
+    });
+
+    it('should contain the item name', (done) => {
       comp.itemName$.subscribe((value) => {
         expect(value).toEqual('Item Name');
+        done();
       });
     });
   });

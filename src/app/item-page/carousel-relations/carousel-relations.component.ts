@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, PLATFORM_ID } from '@angular/core';
 import { SearchComponent } from '../../shared/search/search.component';
 import { SearchService } from '../../core/shared/search/search.service';
 import { SearchManager } from '../../core/browse/search-manager';
@@ -45,10 +45,11 @@ export class CarouselRelationsComponent extends SearchComponent {
               protected searchManager: SearchManager,
               protected sidebarService: SidebarService,
               protected windowService: HostWindowService,
+              @Inject(PLATFORM_ID) public platformId: any,
               @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
               protected routeService: RouteService,
               protected router: Router) {
-    super(service, searchManager, sidebarService, windowService, searchConfigService, routeService, router);
+    super(service, searchManager, sidebarService, windowService, platformId, searchConfigService, routeService, router);
   }
 
 }

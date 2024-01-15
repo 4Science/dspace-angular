@@ -60,7 +60,7 @@ export interface TopSection extends SectionComponent {
   titleKey: string;
   componentType: 'top';
   numberOfItems: number;
-
+  showThumbnails: boolean;
   showAsCard: boolean;
   showLayoutSwitch: boolean;
   defaultLayoutMode: LayoutModeEnum;

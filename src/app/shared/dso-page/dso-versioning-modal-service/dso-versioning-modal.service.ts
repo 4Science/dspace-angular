@@ -16,6 +16,10 @@ import { ItemVersionsSharedService } from '../../../item-page/versions/item-vers
 import {
   ItemVersionsSummaryModalComponent
 } from '../../../item-page/versions/item-versions-summary-modal/item-versions-summary-modal.component';
+import { EditItemDataService } from '../../../core/submission/edititem-data.service';
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
+import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
+import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 
 /**
  * Service to take care of all the functionality related to the version creation modal
@@ -34,6 +38,8 @@ export class DsoVersioningModalService {
     protected router: Router,
     protected workspaceItemDataService: WorkspaceitemDataService,
     protected itemService: ItemDataService,
+    protected editItemService: EditItemDataService,
+    protected authorizationService: AuthorizationDataService,
   ) {
   }
 
@@ -71,11 +77,15 @@ export class DsoVersioningModalService {
       getFirstSucceededRemoteDataPayload<Item>(),
       switchMap((newVersionItem: Item) => this.workspaceItemDataService.findByItem(newVersionItem.uuid, true, false)),
       getFirstSucceededRemoteDataPayload<WorkspaceItem>(),
-    ).subscribe((wsItem) => {
-      const wsiId = wsItem.id;
-      const route = 'workspaceitems/' + wsiId + '/edit';
-      this.router.navigateByUrl(route);
-    });
+        map((wsItem: WorkspaceItem) => `workspaceitems/${wsItem?.id}/edit`),
+        switchMap((route: string) => fromPromise(this.router.navigateByUrl(route))),
+    ).subscribe(() => this.invalidateCacheFor(item));
+  }
+
+  private invalidateCacheFor(previousItem: Item) {
+    this.versionService.invalidateVersionHrefCache(previousItem);
+    this.authorizationService.invalidateAuthorization(FeatureID.CanCreateVersion, previousItem.self);
+    this.editItemService.invalidateItemCache(previousItem.uuid);
   }
 
   /**

@@ -16,4 +16,4 @@ export const logStartupMessage = (environment: Partial<BuildConfig>) => {
   console.info(`Environment: %c${env}`, `color: ${color}; font-weight: bold;`);
   console.info('');
 
-}
+};

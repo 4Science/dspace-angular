@@ -3,7 +3,7 @@ import { ThemedComponent } from '../theme-support/themed.component';
 import { LangSwitchComponent } from './lang-switch.component';
 
 /**
- * Themed wrapper for LangSwitchComponent
+ * Themed wrapper for {@link LangSwitchComponent}
  */
 @Component({
   selector: 'ds-themed-lang-switch',
@@ -11,6 +11,7 @@ import { LangSwitchComponent } from './lang-switch.component';
   templateUrl: '../theme-support/themed.component.html',
 })
 export class ThemedLangSwitchComponent extends ThemedComponent<LangSwitchComponent> {
+
   protected getComponentName(): string {
     return 'LangSwitchComponent';
   }
@@ -20,6 +21,7 @@ export class ThemedLangSwitchComponent extends ThemedComponent<LangSwitchCompone
   }
 
   protected importUnthemedComponent(): Promise<any> {
-    return import('./lang-switch.component');
+    return import(`./lang-switch.component`);
   }
+
 }
