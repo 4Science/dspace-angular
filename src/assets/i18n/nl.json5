@@ -17186,6 +17186,9 @@
   // "layout.field.label.Agent": "Agent",
   // TODO New key - Add a translation
   "layout.field.label.Agent": "Agent",
+  // "layout.field.label.History": "History",
+  // TODO New key - Add a translation
+  "layout.field.label.History": "History",
 
 
 
