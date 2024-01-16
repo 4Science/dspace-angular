@@ -14699,6 +14699,87 @@
   // TODO New key - Add a translation
   "layout.box.header.AudioVideo.details": "Details",
 
+  // "layout.field.label.Person.crisrp.name.translated": "Translated Name",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.crisrp.name.translated": "Translated Name",
+  // "layout.field.label.Person.crisrp.name.variant": "Alternative Names",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.crisrp.name.variant": "Alternative Names",
+  // "layout.field.label.Person.glamperson.gender": "Gender",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.glamperson.gender": "Gender",
+  // "layout.field.label.Person.glamperson.role": "Role",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.glamperson.role": "Role",
+  // "layout.field.label.Person.glamperson.nationality": "Nationality",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.glamperson.nationality": "Nationality",
+  // "layout.field.label.Person.person.birthDate": "Birth Date",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.person.birthDate": "Birth Date",
+  // "layout.field.label.Person.glamperson.deathDate": "Death Date",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.glamperson.deathDate": "Death Date",
+  // "layout.field.label.Person.glamperson.birthYear": "Birth Year",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.glamperson.birthYear": "Birth Year",
+  // "layout.field.label.Person.glamperson.deathYear": "Death Year",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.glamperson.deathYear": "Death Year",
+  // "layout.field.label.Person.glamperson.birthPlace": "Birth Place",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.glamperson.birthPlace": "Birth Place",
+  // "layout.field.label.Person.glamperson.deathPlace": "Death Place",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.glamperson.deathPlace": "Death Place",
+  // "layout.field.label.Person.dc.description.abstract": "Abstract",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.dc.description.abstract": "Abstract",
+  // "layout.field.label.Person.glamperson.activityPeriod": "Activity Period",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.glamperson.activityPeriod": "Activity Period",
+  // "layout.field.label.Person.glamperson.biography": "Biography",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.glamperson.biography": "Biography",
+  // "layout.field.label.Person.dc.relation.opac": "OPAC Link",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.dc.relation.opac": "OPAC Link",
+  // "layout.field.label.Person.glamperson.link.otherbibliographic": "Other Bibliographic Links",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.glamperson.link.otherbibliographic": "Other Bibliographic Links",
+  // "layout.field.label.Person.glamperson.link.dbi": "DBI Link",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.glamperson.link.dbi": "DBI Link",
+  // "layout.field.label.Person.glamperson.link.ei": "EI Link",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.glamperson.link.ei": "EI Link",
+  // "layout.field.label.Person.glam.link.wikipedia": "Wikipedia Link",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.glam.link.wikipedia": "Wikipedia Link",
+  // "layout.field.label.Person.glam.link.dbpedia": "Dbpedia Link",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.glam.link.dbpedia": "Dbpedia Link",
+  // "layout.field.label.Person.glam.link.viaf": "VIAF Link",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.glam.link.viaf": "VIAF Link",
+  // "layout.field.label.Person.glam.link.eb": "EB Link",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.glam.link.eb": "EB Link",
+  // "layout.field.label.Person.glamperson.link.ulan": "Getty ULAN Link",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.glamperson.link.ulan": "Getty ULAN Link",
+  // "layout.field.label.Person.dc.relation.otherlinks": "Other Links",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.dc.relation.otherlinks": "Other Links",
+  // "layout.field.label.Person.dc.relation.event": "Events",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.dc.relation.event": "Events",
+  // "layout.field.label.Person.dc.relation.aggregation": "Aggregations",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.dc.relation.aggregation": "Aggregations",
+  // "layout.field.label.Person.dc.relation.path": "Paths",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.dc.relation.path": "Paths",
   // "layout.field.label.OrgUnit.organization.parentOrganization": "Parent Organisation",
   // TODO New key - Add a translation
   "layout.field.label.OrgUnit.organization.parentOrganization": "Parent Organisation",
