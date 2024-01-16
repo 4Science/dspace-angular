@@ -33,6 +33,11 @@
           </ds-truncatable-part>
 
           <ds-additional-metadata [object]="item"></ds-additional-metadata>
+          <ng-container *ngFor="let entry of metadataList">
+            <span *ngIf="item.hasMetadata(entry.name)">
+              <span>{{entry.label | translate:{default: entry.label} }}: {{item.firstMetadataValue(entry.name)}}</span>
+            </span>
+          </ng-container>
 
         </div>
       </ds-truncatable>

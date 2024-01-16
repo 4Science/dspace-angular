@@ -5,7 +5,7 @@ import { ViewMode } from '../../../../../core/shared/view-mode.model';
 import { Context } from '../../../../../core/shared/context.model';
 import { Component, OnInit } from '@angular/core';
 import { Metadata } from '../../../../../core/shared/metadata.utils';
-import { MetadataValue } from '../../../../../core/shared/metadata.models';
+import { MetadataMap, MetadataValue } from '../../../../../core/shared/metadata.models';
 import { getItemPageRoute } from '../../../../../item-page/item-page-routing-paths';
 import { DuplicateMatchMetadataDetailConfig } from '../../../../../submission/sections/detect-duplicate/models/duplicate-detail-metadata.model';
 import { environment } from '../../../../../../environments/environment';
@@ -98,4 +98,14 @@ export class ExternalSourceEntryListSubmissionElementComponent extends AbstractL
       return getItemPageRoute(item);
     }
   }
+
+  /**
+   * filter the metadata list from the configuration to the metadatafields which are present in the
+   * external-source entry
+   * @param metadatamap
+   */
+  filterMatchingValues(metadatamap: MetadataMap): DuplicateMatchMetadataDetailConfig[] {
+    return this.metadataList.filter(value => metadatamap.hasOwnProperty(value.name));
+  }
+
 }
