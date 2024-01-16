@@ -8641,6 +8641,7 @@
   "layout.field.label.Publication.dc.relation.haspart": "Contains",
   "layout.field.label.AudioVideo.dc.contributor.author": "Author(s)",
   "layout.field.label.AudioVideo.dc.contributor.contributor": "Agent(s)",
+  "layout.field.label.AudioVideo.dc.contributor.corporatebody": "Corporate Body",
   "layout.field.label.AudioVideo.dc.relation.fonds": "Fund",
   "layout.field.label.AudioVideo.dc.relation.event": "Related Event",
   "layout.field.label.AudioVideo.dc.coverage.culture": "Cultural Area",

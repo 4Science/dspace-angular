@@ -15608,6 +15608,9 @@
   // "layout.field.label.AudioVideo.dc.contributor.contributor": "Agent(s)",
   // TODO New key - Add a translation
   "layout.field.label.AudioVideo.dc.contributor.contributor": "Agent(s)",
+  // "layout.field.label.AudioVideo.dc.contributor.corporatebody": "Corporate Body",
+  // TODO New key - Add a translation
+  "layout.field.label.AudioVideo.dc.contributor.corporatebody": "Corporate Body",
   // "layout.field.label.AudioVideo.dc.relation.fonds": "Fund",
   // TODO New key - Add a translation
   "layout.field.label.AudioVideo.dc.relation.fonds": "Fund",
