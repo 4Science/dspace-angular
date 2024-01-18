@@ -13472,7 +13472,7 @@
   // "layout.field.label.Title": "Title",
   "layout.field.label.Title": "Titolo",
   // "layout.field.label.Editor": "Editor",
-  "layout.field.label.Editor": "Editore",
+  "layout.field.label.Editor": "Compilatore",
   // "layout.field.label.Publisher": "Publisher",
   // TODO New key - Add a translation
   "layout.field.label.Publisher": "Publisher",
@@ -13483,7 +13483,7 @@
   // "layout.field.label.Author": "Author",
   "layout.field.label.Author": "Autore",
   // "layout.field.label.Qualifier": "Qualifier",
-  "layout.field.label.Qualifier": "Qualifica",
+  "layout.field.label.Qualifier": "Qualifica del compilatore",
   // "layout.field.label.Editing Type": "Editing Type",
   "layout.field.label.Editing Type": "Tipo di modifica",
   // "layout.field.label.Edited At": "Edited At",
