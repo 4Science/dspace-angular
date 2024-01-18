@@ -55,6 +55,7 @@ export class CrisItemPageTabResolver implements Resolve<RemoteData<PaginatedList
                 const itemPageRoute = getItemPageRoute(itemRD.payload);
                 const isValidTab = tabsRD.payload.page.some((tab) => !givenTab || `/${tab.shortname}` === givenTab);
 
+                // The main tab is the first non-leading tab, unless there is only one tab and it is marked as leading
                 const mainTab = tabsRD.payload.page.length === 1
                   ? tabsRD.payload.page[0]
                   : tabsRD.payload.page.find(tab => !tab.leading);
