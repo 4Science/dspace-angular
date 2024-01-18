@@ -13341,6 +13341,40 @@
   // TODO New key - Add a translation
   "journalfond.listelement.badge": "Journal Fond",
 
+  // "aggregation.page.titleprefix": "Aggregation: ",
+  // TODO New key - Add a translation
+  "aggregation.page.titleprefix": "Aggregation: ",
+  // "archivalmaterial.page.titleprefix": "Archival Material: ",
+  // TODO New key - Add a translation
+  "archivalmaterial.page.titleprefix": "Archival Material: ",
+  // "event.page.titleprefix": "Event: ",
+  // TODO New key - Add a translation
+  "event.page.titleprefix": "Event: ",
+  // "family.page.titleprefix": "Family: ",
+  // TODO New key - Add a translation
+  "family.page.titleprefix": "Family: ",
+  // "fonds.page.titleprefix": "Fonds: ",
+  // TODO New key - Add a translation
+  "fonds.page.titleprefix": "Fonds: ",
+  // "picture.page.titleprefix": "Picture: ",
+  // TODO New key - Add a translation
+  "picture.page.titleprefix": "Picture: ",
+  // "journalfonds.page.titleprefix": "Journal Fonds: ",
+  // TODO New key - Add a translation
+  "journalfonds.page.titleprefix": "Journal Fonds: ",
+  // "journalfile.page.titleprefix": "Journal File: ",
+  // TODO New key - Add a translation
+  "journalfile.page.titleprefix": "Journal File: ",
+  // "news.page.titleprefix": "News: ",
+  // TODO New key - Add a translation
+  "news.page.titleprefix": "News: ",
+  // "path.page.titleprefix": "Path: ",
+  // TODO New key - Add a translation
+  "path.page.titleprefix": "Path: ",
+  // "place.page.titleprefix": "Place: ",
+  // TODO New key - Add a translation
+  "place.page.titleprefix": "Place: ",
+
   // "aggregation.listelement.badge": "Aggregation",
   // TODO New key - Add a translation
   "aggregation.listelement.badge": "Aggregation",
