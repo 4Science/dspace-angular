@@ -6633,7 +6633,7 @@
   "menu.section.import": "Importa",
 
   // "menu.section.import_batch": "Batch Import (ZIP)",
-  "menu.section.import_batch": "Importazione batch (ZIP)",
+  "menu.section.import_batch": "Import batch (ZIP)",
 
   // "menu.section.import_mag": "MAG Import",
   "menu.section.import_mag": "Importazione MAG",
@@ -11836,7 +11836,7 @@
   // "menu.section.explore_sectionaggregations": "Aggregations",
   "menu.section.explore_sectionaggregations": "Aggregazioni",
   // "menu.section.explore_sectiondocuments": "Documents & Other materials",
-  "menu.section.explore_sectiondocuments": "Risorse",
+  "menu.section.explore_sectiondocuments": "Documenti e altri materiali",
   // "explore.counters-section.fonds": "Fonds",
   "explore.counters-section.fonds": "Fondi",
   // "explore.counters-section.journalfonds": "Journal Fonds",
@@ -11877,7 +11877,7 @@
   // "explore.index.journalfonds": "Journal Fonds",
   "explore.index.journalfonds": "Testata",
   // "explore.index.aggregation": "Aggregation",
-  "explore.index.aggregation": "Aggragazione",
+  "explore.index.aggregation": "Aggregazione",
   // "explore.index.parentA": "Parent",
   "explore.index.parentA": "Livello superiore",
 
