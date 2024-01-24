@@ -15,7 +15,7 @@ export class CarouselComponent extends BaseComponent implements OnInit {
   /**
    * Time interval between transitions, in ms
    */
-  carouselInterval: 6000;
+  carouselInterval = 6000;
 
   carouselHeight: string;
 

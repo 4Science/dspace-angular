@@ -14881,6 +14881,40 @@
   // TODO New key - Add a translation
   "journalfond.listelement.badge": "Journal Fond",
 
+  // "aggregation.page.titleprefix": "Aggregation: ",
+  // TODO New key - Add a translation
+  "aggregation.page.titleprefix": "Aggregation: ",
+  // "archivalmaterial.page.titleprefix": "Archival Material: ",
+  // TODO New key - Add a translation
+  "archivalmaterial.page.titleprefix": "Archival Material: ",
+  // "event.page.titleprefix": "Event: ",
+  // TODO New key - Add a translation
+  "event.page.titleprefix": "Event: ",
+  // "family.page.titleprefix": "Family: ",
+  // TODO New key - Add a translation
+  "family.page.titleprefix": "Family: ",
+  // "fonds.page.titleprefix": "Fonds: ",
+  // TODO New key - Add a translation
+  "fonds.page.titleprefix": "Fonds: ",
+  // "picture.page.titleprefix": "Picture: ",
+  // TODO New key - Add a translation
+  "picture.page.titleprefix": "Picture: ",
+  // "journalfonds.page.titleprefix": "Journal Fonds: ",
+  // TODO New key - Add a translation
+  "journalfonds.page.titleprefix": "Journal Fonds: ",
+  // "journalfile.page.titleprefix": "Journal File: ",
+  // TODO New key - Add a translation
+  "journalfile.page.titleprefix": "Journal File: ",
+  // "news.page.titleprefix": "News: ",
+  // TODO New key - Add a translation
+  "news.page.titleprefix": "News: ",
+  // "path.page.titleprefix": "Path: ",
+  // TODO New key - Add a translation
+  "path.page.titleprefix": "Path: ",
+  // "place.page.titleprefix": "Place: ",
+  // TODO New key - Add a translation
+  "place.page.titleprefix": "Place: ",
+
   // "aggregation.listelement.badge": "Aggregation",
   // TODO New key - Add a translation
   "aggregation.listelement.badge": "Aggregation",
@@ -15779,6 +15813,9 @@
   // "layout.tab.header.Aggregation.children": "Aggregation’s Children",
   // TODO New key - Add a translation
   "layout.tab.header.Aggregation.children": "Aggregation’s Children",
+  // "layout.tab.header.Aggregation.relations": "Relations",
+  // TODO New key - Add a translation
+  "layout.tab.header.Aggregation.relations": "Relations",
   // "layout.tab.header.StaticPage.details": "Details",
   // TODO New key - Add a translation
   "layout.tab.header.StaticPage.details": "Details",
@@ -16038,6 +16075,9 @@
   // "layout.box.header.Aggregation.children": "Aggregation’s Children",
   // TODO New key - Add a translation
   "layout.box.header.Aggregation.children": "Aggregation’s Children",
+  // "layout.box.header.Aggregation.aggregationparent": "Aggregation’s Children",
+  // TODO New key - Add a translation
+  "layout.box.header.Aggregation.aggregationparent": "Aggregation’s Children",
   // "layout.box.header.StaticPage.details": "Description",
   // TODO New key - Add a translation
   "layout.box.header.StaticPage.details": "Description",
@@ -17146,6 +17186,9 @@
   // "layout.field.label.AudioVideo.dc.date.issued": "Date Issued",
   // TODO New key - Add a translation
   "layout.field.label.AudioVideo.dc.date.issued": "Date Issued",
+  // "layout.field.label.AudioVideo.dc.description.abstract": "Abstract",
+  // TODO New key - Add a translation
+  "layout.field.label.AudioVideo.dc.description.abstract": "Abstract",
   // "layout.field.label.AudioVideo.dc.language.iso": "Language",
   // TODO New key - Add a translation
   "layout.field.label.AudioVideo.dc.language.iso": "Language",
