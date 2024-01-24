@@ -8691,6 +8691,7 @@
   "layout.field.label.AudioVideo.dc.coverage.spatialpvcc": "City",
   "layout.field.label.AudioVideo.dc.coverage.spatialpvcn": "Province",
   "layout.field.label.AudioVideo.dc.date.issued": "Date Issued",
+  "layout.field.label.AudioVideo.dc.description.abstract": "Abstract",
   "layout.field.label.AudioVideo.dc.language.iso": "Language",
   "layout.field.label.AudioVideo.dc.subject.keywords": "Keywords",
   "layout.field.label.AudioVideo.dc.relation.path": "Path",

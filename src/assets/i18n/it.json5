@@ -13455,6 +13455,8 @@
   "layout.field.label.AudioVideo.dc.coverage.spatialpvcn": "Provincia",
   // "layout.field.label.AudioVideo.dc.date.issued": "Date Issued",
   "layout.field.label.AudioVideo.dc.date.issued": "Data",
+  // "layout.field.label.AudioVideo.dc.description.abstract": "Abstract",
+  "layout.field.label.AudioVideo.dc.description.abstract": "Abstract",
   // "layout.field.label.AudioVideo.dc.language.iso": "Language",
   "layout.field.label.AudioVideo.dc.language.iso": "Lingua",
   // "layout.field.label.AudioVideo.dc.subject.keywords": "Keywords",

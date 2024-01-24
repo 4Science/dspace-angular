@@ -15395,6 +15395,9 @@
   // "layout.field.label.AudioVideo.dc.date.issued": "Date Issued",
   // TODO New key - Add a translation
   "layout.field.label.AudioVideo.dc.date.issued": "Date Issued",
+  // "layout.field.label.AudioVideo.dc.description.abstract": "Abstract",
+  // TODO New key - Add a translation
+  "layout.field.label.AudioVideo.dc.description.abstract": "Abstract",
   // "layout.field.label.AudioVideo.dc.language.iso": "Language",
   // TODO New key - Add a translation
   "layout.field.label.AudioVideo.dc.language.iso": "Language",
