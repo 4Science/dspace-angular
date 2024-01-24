@@ -14022,6 +14022,9 @@
   // "layout.tab.header.Aggregation.children": "Aggregation’s Children",
   // TODO New key - Add a translation
   "layout.tab.header.Aggregation.children": "Aggregation’s Children",
+  // "layout.tab.header.Aggregation.relations": "Relations",
+  // TODO New key - Add a translation
+  "layout.tab.header.Aggregation.relations": "Relations",
   // "layout.tab.header.StaticPage.details": "Details",
   // TODO New key - Add a translation
   "layout.tab.header.StaticPage.details": "Details",
@@ -14281,6 +14284,9 @@
   // "layout.box.header.Aggregation.children": "Aggregation’s Children",
   // TODO New key - Add a translation
   "layout.box.header.Aggregation.children": "Aggregation’s Children",
+  // "layout.box.header.Aggregation.aggregationparent": "Aggregation’s Children",
+  // TODO New key - Add a translation
+  "layout.box.header.Aggregation.aggregationparent": "Aggregation’s Children",
   // "layout.box.header.StaticPage.details": "Description",
   // TODO New key - Add a translation
   "layout.box.header.StaticPage.details": "Description",
