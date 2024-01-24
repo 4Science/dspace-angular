@@ -59,11 +59,6 @@ export class CarouselComponent implements OnInit {
   description: string;
 
   /**
-   * Current url
-   */
-  currentURL: string;
-
-  /**
    * Auto slider paused
    */
   paused = false;
@@ -99,7 +94,6 @@ export class CarouselComponent implements OnInit {
     this.link = this.carouselOptions.link;
     this.description = this.carouselOptions.description;
     this.bundle = this.carouselOptions.bundle ?? 'ORIGINAL';
-    this.currentURL = this._window.nativeWindow.location.origin;
 
     this.findAllBitstreamImages().subscribe((res) => {
       this.itemToImageHrefMap$.next(res);
