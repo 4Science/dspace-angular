@@ -6,11 +6,11 @@
   --ds-banner-background-gradient-width: 300px;
   --ds-home-news-link-color: #{$green};
   --ds-home-news-link-hover-color: #{darken($green, 15%)};
-  --ds-breadcrumb-link-color: #{$darker};
-  --ds-breadcrumb-link-active-color: #{darken($darker, 30%)};
-  --ds-navbar-link-color: #{$darker};
-  --ds-navbar-link-color-hover: #{darken($darker, 15%)};
-  --ds-cris-layout-sidebar-menu-active-color: #{$darker};
+  --ds-breadcrumb-link-color: #{$glam-gray};
+  --ds-breadcrumb-link-active-color: #{darken($glam-gray, 30%)};
+  --ds-navbar-link-color: #{$glam-gray};
+  --ds-navbar-link-color-hover: #{darken($glam-gray, 15%)};
+  --ds-cris-layout-sidebar-menu-active-color: #{$glam-gray};
 
   --ds-cris-section-vertical-padding: 4rem;
   --ds-cris-section-horizontal-padding: 7%;
@@ -28,6 +28,5 @@
   --ds-glam-carousel-height: #{$ds-glam-carousel-height};
   --ds-glam-carousel-mobile-image-height: #{$ds-glam-carousel-mobile-image-height};
   --ds-glam-carousel-mobile-caption-height: #{$ds-glam-carousel-mobile-caption-height};
-
 }
 
