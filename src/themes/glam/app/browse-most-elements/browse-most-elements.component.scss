@@ -35,14 +35,24 @@ div.thumbnail-container {
 .grid-wrapper {
   display: grid;
   grid-auto-flow: dense;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr) );
   grid-auto-rows: 1fr;
   grid-gap: .5em;
-  @include media-breakpoint-only(md) {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+  @include media-breakpoint-down(xs) {
+    grid-template-columns: 1fr;
   }
-  @include media-breakpoint-down(sm) {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  @include media-breakpoint-only(sm) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); // on larger screens keep the current behaviour
+  }
+
+  div.thumbnail-container {
+    aspect-ratio: 1;
+
+    @include media-breakpoint-down(xs) {
+      aspect-ratio: unset; // remove aspect-ratio on extra small screens
+    }
   }
 
   &.max-items-4 {
@@ -51,11 +61,7 @@ div.thumbnail-container {
       grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
     }
     @include media-breakpoint-down(sm) {
-      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-    }
-
-    div.thumbnail-container {
-      aspect-ratio: 1;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 }
