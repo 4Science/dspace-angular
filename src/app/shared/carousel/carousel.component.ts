@@ -8,6 +8,7 @@ import {Bitstream} from '../../core/shared/bitstream.model';
 import {BitstreamDataService} from '../../core/data/bitstream-data.service';
 import {NativeWindowRef, NativeWindowService} from '../../core/services/window.service';
 import {getFirstCompletedRemoteData} from '../../core/shared/operators';
+import {InternalLinkService} from '../../core/services/internal-link.service';
 import {hasValue} from '../empty.util';
 import {ItemSearchResult} from '../object-collection/shared/item-search-result.model';
 import {followLink} from '../utils/follow-link-config.model';
@@ -82,6 +83,7 @@ export class CarouselComponent implements OnInit {
   isLoading$ = new BehaviorSubject(true);
 
   constructor(
+    public internalLinkService: InternalLinkService,
     protected bitstreamDataService: BitstreamDataService,
     @Inject(NativeWindowService) private _window: NativeWindowRef,
   ) {
@@ -155,10 +157,6 @@ export class CarouselComponent implements OnInit {
 
   getItemLink(item: Item): string {
     return item.firstMetadataValue(this.link);
-  }
-
-  isLinkInternal(link: string) {
-    return link.startsWith('/');
   }
 
   /**

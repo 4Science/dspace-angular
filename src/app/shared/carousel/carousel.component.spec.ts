@@ -35,6 +35,7 @@ import { createPaginatedList } from '../testing/utils.test';
 import { ItemSearchResult } from '../object-collection/shared/item-search-result.model';
 import { BitstreamFormat } from '../../core/shared/bitstream-format.model';
 import { CarouselOptions } from './carousel-options.model';
+import { InternalLinkService } from 'src/app/core/services/internal-link.service';
 
 describe('CarouselComponent', () => {
     let component: CarouselComponent;
@@ -168,6 +169,7 @@ describe('CarouselComponent', () => {
             providers: [
                 CarouselComponent,
                 { provide: ObjectCacheService, useValue: {} },
+                { provide: InternalLinkService, useValue: {} },
                 { provide: UUIDService, useValue: {} },
                 { provide: Store, useValue: {} },
                 { provide: RemoteDataBuildService, useValue: {} },
