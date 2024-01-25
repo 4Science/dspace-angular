@@ -44,9 +44,11 @@ export class BrowseMostElementsComponent extends BaseComponent {
     super(appConfig, platformId, searchService, router, cdr);
   }
 
-  protected getSearchResults() {
+  ngOnInit() {
+    const showThumbnails = this.showThumbnails ?? this.appConfig.browseBy.showThumbnails;
+    const followLinks = showThumbnails ? [followLink('thumbnail')] : [];
     this.searchService
-      .search(this.paginatedSearchOptions, null, true, true, followLink('thumbnail'))
+      .search(this.paginatedSearchOptions, null, true, true, ...followLinks)
       .pipe(getFirstCompletedRemoteData())
       .subscribe(
         (response: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>) => {
