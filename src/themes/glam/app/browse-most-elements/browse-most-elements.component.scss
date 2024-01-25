@@ -1,7 +1,7 @@
 div.thumbnail-container {
   display: flex;
   flex-direction: column;
-  order: 3; // square elements should be used as hole fillers
+  padding: 0.25em;
 
   a {
     flex: 1;
@@ -17,48 +17,62 @@ div.thumbnail-container {
     font-size: 125%;
   }
 
-  &.landscape {
-    order: 2;
-    grid-row-end: span 1;
-    grid-column-end: span 2;
-    aspect-ratio: 2 / 1;
-  }
+  // Size and position
 
-  &.portrait {
-    order: 1; // portrait elements should be placed first in order to prevent holes on the bottom
-    grid-row-start: -1;
-    grid-row-end: span 2;
-    grid-column-end: span 1;
-  }
-}
-
-.grid-wrapper {
-  display: grid;
-  grid-auto-flow: dense;
-  grid-auto-rows: 1fr;
-  grid-gap: .5em;
   @include media-breakpoint-down(xs) {
-    grid-template-columns: 1fr;
-    grid-auto-rows: 1fr 2fr;
-  }
-  @include media-breakpoint-only(sm) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  @include media-breakpoint-up(md) {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  }
+    &:not(.landscape) {
+      aspect-ratio: 1 / 0.8;
+    }
 
-  div.thumbnail-container {
-    aspect-ratio: 1;
-
-    @include media-breakpoint-down(xs) {
-      aspect-ratio: unset;
+    &, &.landscape {
+      aspect-ratio: 1 / 0.4;
     }
   }
 
-  &.max-items-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  @include media-breakpoint-up(sm) {
+
+    &:not(.portrait):not(.landscape) {
+      aspect-ratio: 1;
+      order: 3; // square elements should be used as hole fillers
+    }
+
+    &.landscape {
+      aspect-ratio: 2 / 1;
+      order: 2; // landscape elements should be placed after portrait elements and before square elements
+      grid-row-end: span 1;
+      grid-column-end: span 2;
+    }
+
+    &.portrait {
+      aspect-ratio: 1 / 2;
+      order: 1; // portrait elements should be placed first in order to prevent holes on the bottom
+      grid-row-end: span 2;
+      grid-column-end: span 1;
+    }
   }
+
+}
+
+.grid-wrapper {
+  margin: -.25em;
+  display: grid;
+  grid-auto-flow: dense;
+
+  @include media-breakpoint-down(xs) {
+    grid-template-columns: 1fr;
+  }
+
+  @include media-breakpoint-only(sm) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    &.max-items-4 {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
+  }
+
 }
 
 p {
