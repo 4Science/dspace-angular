@@ -1,11 +1,4 @@
 <div class="pt-2">
-  <div *ngIf="chips && !chips.hasItems()">
-    <input type="text"
-           class="border-0 form-control-plaintext tag-input mt-1 mb-1 pl-2 text-muted"
-           readonly
-           tabindex="-1"
-           [value]="'form.no-value' | translate">
-  </div>
   <div class="d-lg-flex">
     <ds-themed-loading *ngIf="!chips" [showMessage]="false"></ds-themed-loading>
     <ds-chips
@@ -21,5 +14,12 @@
             (click)="openModal()">
       <span class="text-nowrap"><i class="fas fa-plus"></i> {{'form.add' | translate}}</span>
     </button>
+  </div>
+  <div *ngIf="chips && !chips.hasItems()">
+    <input type="text"
+           class="border-0 form-control-plaintext tag-input mt-1 mb-1 pl-2 text-muted"
+           readonly
+           tabindex="-1"
+           [value]="'form.no-value' | translate">
   </div>
 </div>
