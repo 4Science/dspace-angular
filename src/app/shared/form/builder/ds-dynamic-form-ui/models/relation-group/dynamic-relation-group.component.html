@@ -1,5 +1,5 @@
 <div class="pt-2">
-  <div class="d-sm-flex">
+  <div class="d-md-flex">
     <ds-themed-loading *ngIf="!chips" [showMessage]="false"></ds-themed-loading>
     <div *ngIf="chips && !chips.hasItems()">
       <input type="text"
@@ -18,7 +18,7 @@
             title="{{'form.add' | translate}}"
             [disabled]="model.readOnly"
             (click)="openModal()">
-      <span attr.aria-label="{{'form.add' | translate}}"><i class="fas fa-plus"></i> {{'form.add' | translate}}</span>
+      <span class="text-nowrap" attr.aria-label="{{'form.add' | translate}}"><i class="fas fa-plus"></i> {{'form.add' | translate}}</span>
     </button>
   </div>
 </div>
