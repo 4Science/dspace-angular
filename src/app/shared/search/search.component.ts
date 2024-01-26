@@ -30,7 +30,7 @@ import { SearchConfigurationService } from '../../core/shared/search/search-conf
 import { SearchService } from '../../core/shared/search/search.service';
 import { currentPath } from '../utils/route.utils';
 import { Context } from '../../core/shared/context.model';
-import { SortOptions } from '../../core/cache/models/sort-options.model';
+import {SortDirection, SortOptions} from '../../core/cache/models/sort-options.model';
 import { SearchConfig } from '../../core/shared/search/search-filters/search-config.model';
 import { SearchConfigurationOption } from './search-switch-configuration/search-configuration-option.model';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
@@ -380,6 +380,7 @@ export class SearchComponent implements OnInit, OnDestroy {
    * If something changes, update the list of scopes for the dropdown
    */
   ngOnInit(): void {
+    let defaultSortOrder = '';
     if (!this.renderOnServerSide && isPlatformServer(this.platformId)) {
       this.initialized$.next(true);
       return;
@@ -409,12 +410,17 @@ export class SearchComponent implements OnInit, OnDestroy {
     const searchSortOptions$: Observable<SortOptions[]> = configuration$.pipe(
       switchMap((configuration: string) => this.searchConfigService
         .getConfigurationSearchConfig(configuration)),
-      map((searchConfig: SearchConfig) => this.searchConfigService.getConfigurationSortOptions(searchConfig)),
+      map((searchConfig: SearchConfig) => {
+        defaultSortOrder = searchConfig?.defaultSortOption?.sortOrder;
+        return this.searchConfigService.getConfigurationSortOptions(searchConfig);
+      }),
       distinctUntilChanged()
     );
     const sortOption$: Observable<SortOptions> = searchSortOptions$.pipe(
       switchMap((searchSortOptions: SortOptions[]) => {
-        const defaultSort: SortOptions = searchSortOptions[0];
+        defaultSortOrder = !defaultSortOrder ? searchSortOptions[0].direction : defaultSortOrder;
+        const sortDirection = defaultSortOrder.toUpperCase() as SortDirection;
+        const defaultSort: SortOptions = new SortOptions(searchSortOptions[0].field, sortDirection);
         return this.searchConfigService.getCurrentSort(this.paginationId, defaultSort);
       }),
       distinctUntilChanged()
