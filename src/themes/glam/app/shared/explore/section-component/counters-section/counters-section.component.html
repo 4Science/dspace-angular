@@ -1,4 +1,4 @@
-<div class="d-flex flex-row justify-content-around gap-3">
+<div class="d-flex flex-row flex-wrap justify-content-around gap-3">
     <ng-container *ngFor="let counter of (counterData$ | async)">
         <div class="text-center border-bottom border-dark d-flex flex-column flex-fill pb-2 mb-2 counter-container" (click)="goToLink(counter.link)" [ngStyle]="{'cursor': counter.link? 'pointer' : 'inherit'}">
             <div class="text-dark m-0 counter-label"> {{counter.count}}</div>
