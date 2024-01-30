@@ -4109,6 +4109,9 @@
   // "explore.index.corporate": "Organizational Unit",
   "explore.index.corporate": "Organizzazione",
 
+  // "explore.index.opera": "Opera",
+  "explore.index.opera": "Lirico",
+
   // "explore.search-section.infrastructure.title": "Infrastructure",
   "explore.search-section.infrastructure.title": "Infrastruttura",
 
@@ -8753,6 +8756,15 @@
   // "search.filters.filter.family.placeholder": "Family",
   "search.filters.filter.family.placeholder": "Famiglia",
 
+  // "search.filters.filter.opera.head": "Opera",
+  "search.filters.filter.opera.head": "Lirico",
+
+  // "search.filters.filter.opera.label": "Opera",
+  "search.filters.filter.opera.label": "Lirico",
+
+  // "search.filters.filter.opera.placeholder": "Opera",
+  "search.filters.filter.opera.placeholder": "Lirico",
+
   // "search.filters.entityType.JournalIssue": "Journal Issue",
   "search.filters.entityType.JournalIssue": "Fascicolo Periodico",
 
@@ -12554,6 +12566,8 @@
   "layout.tab.header.Publication.relations": "Relazioni",
   // "layout.tab.header.AudioVideo.details": "Details",
   "layout.tab.header.AudioVideo.details": "Informazioni di Dettaglio",
+  // "layout.tab.header.Opera.details": "Details",
+  "layout.tab.header.Opera.details": "Informazioni di Dettaglio",
 
   // "layout.box.header.Person.profile": "Profile",
   "layout.box.header.Person.profile": "Profilo",
@@ -12776,6 +12790,11 @@
   "layout.box.header.Publication.relationhaspart": "Contiene",
   // "layout.box.header.AudioVideo.details": "Details",
   "layout.box.header.AudioVideo.details": "Informazioni di Dettaglio",
+  // "layout.box.header.Opera.details": "Details",
+  "layout.box.header.Opera.details": "Informazioni di Dettaglio",
+  // "layout.box.header.Opera.details": "Details",
+  // TODO New key - Add a translation
+  "layout.box.header.Opera.details": "Details",
 
   // "layout.field.label.Person.crisrp.name.translated": "Translated Name",
   "layout.field.label.Person.crisrp.name.translated": "Nome tradotto",
@@ -13495,6 +13514,26 @@
   "layout.field.label.AudioVideo.dc.description.preservationstate": "Stato di conservazione",
   // "layout.field.label.AudioVideo.BITSTREAM": "File(s)",
   "layout.field.label.AudioVideo.BITSTREAM": "File",
+  // "layout.field.label.Opera.dc.title.alternative": "Alternative Title",
+  "layout.field.label.Opera.dc.title.alternative": "Titolo alternativo",
+  // "layout.field.label.Opera.dc.date.issued": "Date Issued",
+  "layout.field.label.Opera.dc.date.issued": "Data",
+  // "layout.field.label.Opera.dc.subject": "Subject",
+  "layout.field.label.Opera.dc.subject": "Indicazioni sul soggetto",
+  // "layout.field.label.Opera.dc.relation.otherlinks": "Other Links",
+  "layout.field.label.Opera.dc.relation.otherlinks": "Altri Collegamenti",
+  // "layout.field.label.Opera.dc.relation.conference": "Event",
+  "layout.field.label.Opera.dc.relation.conference": "Evento",
+  // "layout.field.label.Opera.dc.description.note": "Notes",
+  "layout.field.label.Opera.dc.description.note": "Note",
+  // "layout.field.label.Opera.dc.relation.path": "Path",
+  "layout.field.label.Opera.dc.relation.path": "Percorso",
+  // "layout.field.label.Opera.dc.relation.aggregation": "Aggregation",
+  "layout.field.label.Opera.dc.relation.aggregation": "Aggregazione",
+  // "layout.field.label.Opera.dc.contributor.author": "Author",
+  "layout.field.label.Opera.dc.contributor.author": "Autore",
+  // "layout.field.label.Opera.dc.contributor.authorrole": "Role",
+  "layout.field.label.Opera.dc.contributor.authorrole": "Ruolo",
 
   // "layout.field.label.Abbreviation": "Abbreviation",
   "layout.field.label.Abbreviation": "Abbreviazione",

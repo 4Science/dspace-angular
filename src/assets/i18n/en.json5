@@ -2714,6 +2714,8 @@
 
   "explore.index.corporate": "Organizational Unit",
 
+  "explore.index.opera": "Opera",
+
   "explore.search-section.infrastructure.title": "Infrastructure",
 
   "explore.search-section.fundings.title": "Search Projects",
@@ -5809,6 +5811,12 @@
 
   "search.filters.filter.family.placeholder": "Family",
 
+  "search.filters.filter.opera.head": "Opera",
+
+  "search.filters.filter.opera.label": "Opera",
+
+  "search.filters.filter.opera.placeholder": "Opera",
+
   "search.filters.entityType.JournalIssue": "Journal Issue",
 
   "search.filters.entityType.JournalVolume": "Journal Volume",
@@ -8240,6 +8248,7 @@
   "layout.tab.header.Picture.relations": "Relations",
   "layout.tab.header.Publication.relations": "Relations",
   "layout.tab.header.AudioVideo.details": "Details",
+  "layout.tab.header.Opera.details": "Details",
 
   "layout.box.header.Person.profile": "Profile",
   "layout.box.header.Person.publications": "Publications",
@@ -8351,6 +8360,7 @@
   "layout.box.header.Publication.relationispartofcontainer": "Is part of",
   "layout.box.header.Publication.relationhaspart": "Contains",
   "layout.box.header.AudioVideo.details": "Details",
+  "layout.box.header.Opera.details": "Details",
 
   "layout.field.label.Person.crisrp.name.translated": "Translated Name",
   "layout.field.label.Person.crisrp.name.variant": "Alternative Names",
@@ -8711,6 +8721,16 @@
   "layout.field.label.AudioVideo.dc.format.medium": "Physical Description Of The Medium",
   "layout.field.label.AudioVideo.dc.description.preservationstate": "Preservation State",
   "layout.field.label.AudioVideo.BITSTREAM": "File(s)",
+  "layout.field.label.Opera.dc.title.alternative": "Alternative Title",
+  "layout.field.label.Opera.dc.date.issued": "Date Issued",
+  "layout.field.label.Opera.dc.subject": "Subject",
+  "layout.field.label.Opera.dc.relation.otherlinks": "Other Links",
+  "layout.field.label.Opera.dc.relation.conference": "Event",
+  "layout.field.label.Opera.dc.description.note": "Notes",
+  "layout.field.label.Opera.dc.relation.path": "Path",
+  "layout.field.label.Opera.dc.relation.aggregation": "Aggregation",
+  "layout.field.label.Opera.dc.contributor.author": "Author",
+  "layout.field.label.Opera.dc.contributor.authorrole": "Role",
 
   "layout.field.label.Abbreviation": "Abbreviation",
   "layout.field.label.Title": "Title",
