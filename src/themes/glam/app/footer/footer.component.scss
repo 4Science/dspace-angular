@@ -6,9 +6,7 @@
 
         .footer-link {
             display: block;
-            padding: 0.25rem 0.5rem;
-            padding-left: 0;
-            padding-right: 0;
+            padding: 0.25rem 0;
             font-size: 14px;
             color: #676c71;
 
@@ -21,12 +19,6 @@
         .title {
             text-transform: uppercase;
         }
-        .border-lr{
-            border-left: solid 2px #cddce2;
-            border-right: solid 2px #cddce2;
-        }
-
-
 
         .institution-img {
             img {
@@ -36,7 +28,6 @@
     }
 
     .footer-copyrights {
-        border-bottom: solid 2px #cddce2;
         color: #676c71;
 
         img.logo-4science {
