@@ -10,5 +10,6 @@ import { environment } from '../../../../environments/environment';
 export class FooterComponent extends BaseComponent {
 
   involvedInstitutions = environment.layout.footer.involvedInstitutions;
+  socialMedia = environment.layout.footer.socialMedia;
 
 }

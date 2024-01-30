@@ -613,6 +613,18 @@ export class DefaultAppConfig implements AppConfig {
           alt: '4Science'
         },
       ],
+      socialMedia: [
+        {
+          url: 'https://www.linkedin.com/company/4science-spa/',
+          faIcon: 'fa-brands fa-linkedin',
+          name: 'Linkedin'
+        },
+        {
+          url: 'https://www.facebook.com/4ScienceIT',
+          faIcon: 'fa-brands fa-facebook',
+          name: 'Facebook'
+        },
+      ],
     },
     search: {
       filters: {

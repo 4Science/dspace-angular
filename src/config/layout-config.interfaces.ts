@@ -45,8 +45,15 @@ export interface InvolvedInstitution {
   alt?: string;
 }
 
+export interface SocialMedia {
+  faIcon: string;
+  url: string;
+  name: string;
+}
+
 export interface FooterConfig extends Config {
   involvedInstitutions: InvolvedInstitution[];
+  socialMedia: SocialMedia[];
 }
 
 export interface CrisItemPageConfig extends Config {

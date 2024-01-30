@@ -437,7 +437,15 @@ export const environment: BuildConfig = {
       involvedInstitutions: [
         {
           href: '',
-          src: ''
+          src: '',
+          alt: ''
+        }
+      ],
+      socialMedia: [
+        {
+          url: '',
+          faIcon: '',
+          name: ''
         }
       ]
     },

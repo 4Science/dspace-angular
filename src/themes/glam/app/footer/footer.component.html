@@ -5,7 +5,7 @@
 
     <div *ngIf="!hasSiteFooterSections" class="container">
       <div class="row">
-        <div class="col-12 col-lg-6 col-sm-12 mb-4 mb-lg-0">
+        <div class="col-12 col-sm-12 col-lg-4 mb-4 mb-lg-0">
           <h6 class="title text-center mb-4">{{'footer.involved-institution' | translate}}</h6>
           <div class="institution-img text-center d-flex justify-content-center flex-wrap gap-3">
             <ng-container *ngFor="let institution of involvedInstitutions">
@@ -15,7 +15,17 @@
             </ng-container>
           </div>
         </div>
-        <div class="col-12 col-lg-3 col-sm-6 mb-4 mb-sm-0 d-flex justify-content-center">
+        <div class="col-12 col-sm-12 col-lg-2 mb-4 mb-lg-0">
+          <h6 class="title text-center mb-4">{{'footer.social-media' | translate}}</h6>
+          <div class="d-flex flex-row flex-wrap justify-content-center gap-3">
+            <ng-container *ngFor="let social of socialMedia">
+              <a class="" [href]="social?.url" target="_blank">
+                <i [title]="social.name" [class]="social.faIcon" class="fa-xl"></i>
+              </a>
+            </ng-container>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-sm-0 d-flex justify-content-center">
           <div class="d-flex flex-column align-items-center align-items-lg-start">
             <h6 class="title mb-3">{{'footer.information' | translate}}</h6>
             <ul class="list-unstyled mb-3 d-flex flex-column align-items-center align-items-lg-start">
