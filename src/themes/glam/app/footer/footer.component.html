@@ -8,9 +8,9 @@
         <div class="col-12 col-lg-6 col-sm-12 mb-4 mb-lg-0">
           <h6 class="title text-center mb-4">{{'footer.involved-institution' | translate}}</h6>
           <div class="institution-img text-center d-flex justify-content-center flex-wrap gap-3">
-            <ng-container *ngFor="let involvedInstitution of involvedInstitutions">
-              <a class="" [href]="involvedInstitution?.href" target="_blank">
-                <img class="" [src]="involvedInstitution?.src || '../assets/images/replacement_image.svg'" alt=""/>
+            <ng-container *ngFor="let institution of involvedInstitutions">
+              <a class="" [href]="institution?.href" target="_blank">
+                <img class="" [src]="institution?.src || '../assets/images/replacement_image.svg'" [alt]="institution.alt"/>
               </a>
             </ng-container>
           </div>
