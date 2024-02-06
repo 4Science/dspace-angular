@@ -3086,6 +3086,30 @@
 
   "info.privacy.title": "Privacy Statement",
 
+  "info.general-information.breadcrumbs": "General Information",
+
+  "info.general-information.head": "General Information",
+
+  "info.general-information.title": "General Information",
+
+  "info.offered-services.breadcrumbs": "Offered Services",
+
+  "info.offered-services.head": "Offered Services",
+
+  "info.offered-services.title": "Offered Services",
+
+  "info.history-digital-lid.breadcrumbs": "History of the digital LID",
+
+  "info.history-digital-lid.head": "History of the digital LID",
+
+  "info.history-digital-lid.title": "History of the digital LID",
+
+  "info.organizational-structure.breadcrumbs": "Organizational structure",
+
+  "info.organizational-structure.head": "Organizational structure",
+
+  "info.organizational-structure.title": "Organizational structure",
+
   "info.feedback.breadcrumbs": "Feedback",
 
   "info.feedback.head": "Feedback",
@@ -3111,6 +3135,8 @@
   "info.feedback.page-label": "Page",
 
   "info.feedback.page_help": "Tha page related to your feedback",
+
+  "info.empty-cms-metadata-error": "Page content not found",
 
   "item.alerts.private": "This item is non-discoverable",
 

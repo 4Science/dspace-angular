@@ -326,6 +326,10 @@ export const environment: BuildConfig = {
   info: {
     enableEndUserAgreement: true,
     enablePrivacyStatement: true,
+    enableGeneralInformation: true,
+    enableOfferedServices: true,
+    enableHistoryDigital: true,
+    enableOrgStructure: true
   },
   markdown: {
     enabled: false,

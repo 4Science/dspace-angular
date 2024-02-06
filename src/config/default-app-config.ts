@@ -479,7 +479,11 @@ export class DefaultAppConfig implements AppConfig {
   // - All mentions of the privacy policy being removed from the UI (e.g. in the footer)
   info: InfoConfig = {
     enableEndUserAgreement: true,
-    enablePrivacyStatement: true
+    enablePrivacyStatement: true,
+    enableGeneralInformation: true,
+    enableOfferedServices: true,
+    enableHistoryDigital: true,
+    enableOrgStructure: true
   };
 
   // Whether to enable Markdown (https://commonmark.org/) and MathJax (https://www.mathjax.org/)
@@ -669,7 +673,11 @@ export class DefaultAppConfig implements AppConfig {
       'cris.cms.grid-component-title',
       'cris.cms.grid-component-subtitle',
       'cris.cms.grid-component-abstract',
-      'cris.cms.grid-component-link'
+      'cris.cms.grid-component-link',
+      'glam.cms.general-information',
+      'glam.cms.history-digital-lid',
+      'glam.cms.offered-services',
+      'glam.cms.organizational-structure',
     ]
   };
 

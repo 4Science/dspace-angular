@@ -14,6 +14,7 @@ import { ThemedFeedbackFormComponent } from './feedback/feedback-form/themed-fee
 import { ThemedFeedbackComponent } from './feedback/themed-feedback.component';
 import { FeedbackGuard } from '../core/feedback/feedback.guard';
 import { MarkdownViewerModule } from '../shared/markdown-viewer/markdown-viewer.module';
+import { CmsInfoComponent } from './cms-info/cms-info.component';
 
 
 const DECLARATIONS = [
@@ -37,7 +38,8 @@ const DECLARATIONS = [
     MarkdownViewerModule
   ],
   declarations: [
-    ...DECLARATIONS
+    ...DECLARATIONS,
+    CmsInfoComponent
   ],
   exports: [
     ...DECLARATIONS
