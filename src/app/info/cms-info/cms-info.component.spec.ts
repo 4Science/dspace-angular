@@ -79,7 +79,7 @@ describe('CmsInfoComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('should set headLabel$ when data is successfully retrieved', () => {
+  it('should set headLabel$ when data is successfully retrieved', () => {
     const headLabelSpy = spyOn(component.headLabel$, 'next');
 
     component.ngOnInit();
@@ -87,7 +87,7 @@ describe('CmsInfoComponent', () => {
     expect(headLabelSpy).toHaveBeenCalledOnceWith('info.testQualifier.head');
   });
 
-  fit('should log a warning to console if metadata content is missing', () => {
+  it('should log a warning to console if metadata content is missing', () => {
     spyOn(console, 'warn');
     site.metadata['glam.cms.testQualifier'] = undefined;
 
