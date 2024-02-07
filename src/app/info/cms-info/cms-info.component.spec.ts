@@ -5,7 +5,6 @@ import { SiteDataService } from 'src/app/core/data/site-data.service';
 import { LocaleService } from 'src/app/core/locale/locale.service';
 import { ObjectCacheService } from 'src/app/core/cache/object-cache.service';
 import { ActivatedRoute } from '@angular/router';
-import { ActivatedRouteStub } from 'src/app/shared/testing/active-router.stub';
 import { NativeWindowRef, NativeWindowService } from 'src/app/core/services/window.service';
 import { CookieService } from 'src/app/core/services/cookie.service';
 import { CookieServiceMock } from 'src/app/shared/mocks/cookie.service.mock';
@@ -22,9 +21,8 @@ describe('CmsInfoComponent', () => {
   let authService: AuthService;
   let token: AuthTokenInfo;
   let store;
-  let route: ActivatedRoute;
   let redirectUrl: string;
-
+  let activatedRouteStub: any;
   let siteServiceStub: any;
 
   const site: Site = Object.assign(new Site(), {
@@ -48,11 +46,9 @@ describe('CmsInfoComponent', () => {
       getToken: token
     });
     store = jasmine.createSpyObj('store', ['dispatch']);
-    route = Object.assign(new ActivatedRouteStub(), {
-      queryParams: observableOf({
-        redirect: redirectUrl
-      })
-    }) as any;
+    activatedRouteStub = {
+      data: observableOf({ qualifier: 'testQualifier' })
+    };
     siteServiceStub = {
       find(): Observable<Site> {
         return of(site);
@@ -69,7 +65,7 @@ describe('CmsInfoComponent', () => {
         { provide: AuthService, useValue: authService },
         { provide: CookieService, useValue: new CookieServiceMock },
         { provide: NativeWindowService, useValue: new NativeWindowRef() },
-        { provide: ActivatedRoute, useValue: route }
+        { provide: ActivatedRoute, useValue: activatedRouteStub }
       ]
     })
     .compileComponents();
@@ -81,5 +77,22 @@ describe('CmsInfoComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  fit('should set headLabel$ when data is successfully retrieved', () => {
+    const headLabelSpy = spyOn(component.headLabel$, 'next');
+
+    component.ngOnInit();
+
+    expect(headLabelSpy).toHaveBeenCalledOnceWith('info.testQualifier.head');
+  });
+
+  fit('should log a warning to console if metadata content is missing', () => {
+    spyOn(console, 'warn');
+    site.metadata['glam.cms.testQualifier'] = undefined;
+
+    component.ngOnInit();
+
+    expect(console.warn).toHaveBeenCalledWith('Metadata glam.cms.testQualifier has no content');
   });
 });
