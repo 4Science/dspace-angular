@@ -1,3 +1,11 @@
 div.counter-container {
+  width: 150px;
+  max-width: 150px;
   height: 120px;
+}
+
+.counter-label {
+  font-weight: 600;
+  font-size: 2.5rem;
+  line-height: 1.2;
 }
