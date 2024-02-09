@@ -47,7 +47,7 @@ describe('CmsInfoComponent', () => {
     });
     store = jasmine.createSpyObj('store', ['dispatch']);
     activatedRouteStub = {
-      data: observableOf({ qualifier: 'testQualifier' })
+      data: observableOf({ schema: 'cris', qualifier: 'testQualifier' })
     };
     siteServiceStub = {
       find(): Observable<Site> {
@@ -89,10 +89,10 @@ describe('CmsInfoComponent', () => {
 
   it('should log a warning to console if metadata content is missing', () => {
     spyOn(console, 'warn');
-    site.metadata['glam.cms.testQualifier'] = undefined;
+    site.metadata['cris.cms.testQualifier'] = undefined;
 
     component.ngOnInit();
 
-    expect(console.warn).toHaveBeenCalledWith('Metadata glam.cms.testQualifier has no content');
+    expect(console.warn).toHaveBeenCalledWith('Metadata cris.cms.testQualifier has no content');
   });
 });

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { SiteDataService } from '../../core/data/site-data.service';
 import { LocaleService } from '../../core/locale/locale.service';
-import { map, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { hasValue } from '../../shared/empty.util';
 
@@ -19,7 +19,7 @@ export class CmsInfoComponent implements OnInit {
   headLabel$ = new BehaviorSubject<string>('');
 
   /**
-   * The content of the glam.cms.* metadata
+   * The content of the CMS metadata
    */
   cmsMetadataValue$ = new BehaviorSubject<string>('');
 
@@ -37,20 +37,19 @@ export class CmsInfoComponent implements OnInit {
 
   ngOnInit() {
 
-    const qualifier$ = this.route.data.pipe(
+    const data$ = this.route.data.pipe(
       take(1),
-      map((data) => data.qualifier),
     );
 
     const site$ = this.siteService.find().pipe(take(1));
 
-    combineLatest([qualifier$, site$]).subscribe(([qualifier, site]) => {
-      this.headLabel$.next(`info.${qualifier}.head`);
-      const mdValue = site?.firstMetadataValue(`glam.cms.${qualifier}`, { language: this.locale.getCurrentLanguageCode() });
+    combineLatest([data$, site$]).subscribe(([data, site]) => {
+      this.headLabel$.next(`info.${data.qualifier}.head`);
+      const mdValue = site?.firstMetadataValue(`${data.schema}.cms.${data.qualifier}`, { language: this.locale.getCurrentLanguageCode() });
       if (hasValue(mdValue)) {
         this.cmsMetadataValue$.next(mdValue);
       } else {
-        console.warn(`Metadata glam.cms.${qualifier} has no content`);
+        console.warn(`Metadata ${data.schema}.cms.${data.qualifier} has no content`);
       }
       this.metadataLoaded$.next(true);
     });
