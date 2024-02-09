@@ -3,7 +3,6 @@ import { Route, RouterModule } from '@angular/router';
 import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.resolver';
 import { PRIVACY_PATH, END_USER_AGREEMENT_PATH, FEEDBACK_PATH, GENERAL_INFORMATION_PATH, OFFERED_SERVICES_PATH, HISTORY_DIGITAL_LID_PATH, ORGANIZATIONAL_STRUCTURE_PATH } from './info-routing-paths';
 import { ThemedEndUserAgreementComponent } from './end-user-agreement/themed-end-user-agreement.component';
-import { ThemedPrivacyComponent } from './privacy/themed-privacy.component';
 import { ThemedFeedbackComponent } from './feedback/themed-feedback.component';
 import { FeedbackGuard } from '../core/feedback/feedback.guard';
 import { environment } from '../../environments/environment';
@@ -42,17 +41,6 @@ function cmsInfoRoute(qualifier: string): Route {
         }
       ]));
   }
-  if (environment.info.enablePrivacyStatement) {
-    imports.push(
-      RouterModule.forChild([
-        {
-          path: PRIVACY_PATH,
-          component: ThemedPrivacyComponent,
-          resolve: { breadcrumb: I18nBreadcrumbResolver },
-          data: { title: 'info.privacy.title', breadcrumbKey: 'info.privacy' }
-        }
-      ]));
-  }
   if (environment.info.enableGeneralInformation) {
     imports.push(
       RouterModule.forChild([
@@ -78,6 +66,13 @@ function cmsInfoRoute(qualifier: string): Route {
     imports.push(
       RouterModule.forChild([
         cmsInfoRoute(ORGANIZATIONAL_STRUCTURE_PATH),
+      ]),
+    );
+  }
+  if (environment.info.enablePrivacyStatement) {
+    imports.push(
+      RouterModule.forChild([
+        cmsInfoRoute(PRIVACY_PATH),
       ]),
     );
   }

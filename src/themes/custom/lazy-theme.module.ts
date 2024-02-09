@@ -57,7 +57,6 @@ import { EndUserAgreementComponent } from './app/info/end-user-agreement/end-use
 import { PageNotFoundComponent } from './app/pagenotfound/pagenotfound.component';
 import { ObjectNotFoundComponent } from './app/lookup-by-id/objectnotfound/objectnotfound.component';
 import { ForbiddenComponent } from './app/forbidden/forbidden.component';
-import { PrivacyComponent } from './app/info/privacy/privacy.component';
 import { CollectionStatisticsPageComponent } from './app/statistics-page/collection-statistics-page/collection-statistics-page.component';
 import { CommunityStatisticsPageComponent } from './app/statistics-page/community-statistics-page/community-statistics-page.component';
 import { ItemStatisticsPageComponent } from './app/statistics-page/item-statistics-page/item-statistics-page.component';
@@ -184,7 +183,6 @@ const DECLARATIONS = [
   PageNotFoundComponent,
   ObjectNotFoundComponent,
   ForbiddenComponent,
-  PrivacyComponent,
   CollectionStatisticsPageComponent,
   CommunityStatisticsPageComponent,
   ItemStatisticsPageComponent,
