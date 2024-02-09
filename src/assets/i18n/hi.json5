@@ -5392,14 +5392,65 @@
   // TODO New key - Add a translation
   "info.end-user-agreement.hosting-country": "the United States",
 
-  // "info.privacy.breadcrumbs": "Privacy Statement",
+  // "info.privacy.breadcrumbs": "Privacy",
+  // TODO Source message changed - Revise the translation
   "info.privacy.breadcrumbs": "गोपनीयता कथन",
 
-  // "info.privacy.head": "Privacy Statement",
+  // "info.privacy.head": "Privacy",
+  // TODO Source message changed - Revise the translation
   "info.privacy.head": "गोपनीयता वाले कथन",
 
-  // "info.privacy.title": "Privacy Statement",
+  // "info.privacy.title": "Privacy",
+  // TODO Source message changed - Revise the translation
   "info.privacy.title": "गोपनीयता कथन",
+
+  // "info.general-information.breadcrumbs": "General Information",
+  // TODO New key - Add a translation
+  "info.general-information.breadcrumbs": "General Information",
+
+  // "info.general-information.head": "General Information",
+  // TODO New key - Add a translation
+  "info.general-information.head": "General Information",
+
+  // "info.general-information.title": "General Information",
+  // TODO New key - Add a translation
+  "info.general-information.title": "General Information",
+
+  // "info.offered-services.breadcrumbs": "Offered Services",
+  // TODO New key - Add a translation
+  "info.offered-services.breadcrumbs": "Offered Services",
+
+  // "info.offered-services.head": "Offered Services",
+  // TODO New key - Add a translation
+  "info.offered-services.head": "Offered Services",
+
+  // "info.offered-services.title": "Offered Services",
+  // TODO New key - Add a translation
+  "info.offered-services.title": "Offered Services",
+
+  // "info.history-digital-lid.breadcrumbs": "History of the digital LID",
+  // TODO New key - Add a translation
+  "info.history-digital-lid.breadcrumbs": "History of the digital LID",
+
+  // "info.history-digital-lid.head": "History of the digital LID",
+  // TODO New key - Add a translation
+  "info.history-digital-lid.head": "History of the digital LID",
+
+  // "info.history-digital-lid.title": "History of the digital LID",
+  // TODO New key - Add a translation
+  "info.history-digital-lid.title": "History of the digital LID",
+
+  // "info.organizational-structure.breadcrumbs": "Organizational structure",
+  // TODO New key - Add a translation
+  "info.organizational-structure.breadcrumbs": "Organizational structure",
+
+  // "info.organizational-structure.head": "Organizational structure",
+  // TODO New key - Add a translation
+  "info.organizational-structure.head": "Organizational structure",
+
+  // "info.organizational-structure.title": "Organizational structure",
+  // TODO New key - Add a translation
+  "info.organizational-structure.title": "Organizational structure",
 
   // "info.feedback.breadcrumbs": "Feedback",
   "info.feedback.breadcrumbs": "प्रतिपुष्टि",
@@ -5444,6 +5495,10 @@
   // "info.feedback.page_help": "Tha page related to your feedback",
   // TODO New key - Add a translation
   "info.feedback.page_help": "Tha page related to your feedback",
+
+  // "info.empty-cms-metadata-error": "Page content not found",
+  // TODO New key - Add a translation
+  "info.empty-cms-metadata-error": "Page content not found",
 
   // "item.alerts.private": "This item is non-discoverable",
   "item.alerts.private": "यह आइटम खोजने योग्य नहीं है",
