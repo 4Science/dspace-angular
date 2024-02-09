@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Route, RouterModule } from '@angular/router';
 import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.resolver';
-import { PRIVACY_PATH, END_USER_AGREEMENT_PATH, FEEDBACK_PATH } from './info-routing-paths';
+import { PRIVACY_PATH, END_USER_AGREEMENT_PATH, FEEDBACK_PATH, GENERAL_INFORMATION_PATH, OFFERED_SERVICES_PATH, HISTORY_DIGITAL_LID_PATH, ORGANIZATIONAL_STRUCTURE_PATH } from './info-routing-paths';
 import { ThemedEndUserAgreementComponent } from './end-user-agreement/themed-end-user-agreement.component';
 import { ThemedPrivacyComponent } from './privacy/themed-privacy.component';
 import { ThemedFeedbackComponent } from './feedback/themed-feedback.component';
 import { FeedbackGuard } from '../core/feedback/feedback.guard';
 import { environment } from '../../environments/environment';
+import { CmsInfoComponent } from './cms-info/cms-info.component';
 
 
 const imports = [
@@ -20,6 +21,15 @@ const imports = [
     }
   ])
 ];
+
+function cmsInfoRoute(qualifier: string): Route {
+  return {
+    path: qualifier,
+    component: CmsInfoComponent,
+    resolve: { breadcrumb: I18nBreadcrumbResolver },
+    data: { title: `info.${qualifier}.title`, breadcrumbKey: `info.${qualifier}`, qualifier: qualifier }
+  };
+}
 
   if (environment.info.enableEndUserAgreement) {
     imports.push(
@@ -42,6 +52,34 @@ const imports = [
           data: { title: 'info.privacy.title', breadcrumbKey: 'info.privacy' }
         }
       ]));
+  }
+  if (environment.info.enableGeneralInformation) {
+    imports.push(
+      RouterModule.forChild([
+        cmsInfoRoute(GENERAL_INFORMATION_PATH),
+      ]),
+    );
+  }
+  if (environment.info.enableOfferedServices) {
+    imports.push(
+      RouterModule.forChild([
+        cmsInfoRoute(OFFERED_SERVICES_PATH),
+      ]),
+    );
+  }
+  if (environment.info.enableHistoryDigital) {
+    imports.push(
+      RouterModule.forChild([
+        cmsInfoRoute(HISTORY_DIGITAL_LID_PATH),
+      ]),
+    );
+  }
+  if (environment.info.enableOrgStructure) {
+    imports.push(
+      RouterModule.forChild([
+        cmsInfoRoute(ORGANIZATIONAL_STRUCTURE_PATH),
+      ]),
+    );
   }
 
 @NgModule({
