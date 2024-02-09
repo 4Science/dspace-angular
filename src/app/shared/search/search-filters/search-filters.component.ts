@@ -112,10 +112,7 @@ export class SearchFiltersComponent implements OnInit, AfterViewChecked, OnDestr
   }
 
   ngAfterViewChecked() {
-    this.availableFilters = false;
-    this.searchFilter._results.forEach(element => {
-      this.availableFilters = element.nativeElement?.children[0]?.children.length > 0;
-    });
+    this.availableFilters = this.searchFilter._results.some(element => element.nativeElement?.children[0]?.children.length > 0);
   }
 
   ngOnDestroy() {
