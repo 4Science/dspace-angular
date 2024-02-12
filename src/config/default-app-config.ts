@@ -608,26 +608,23 @@ export class DefaultAppConfig implements AppConfig {
     footer: {
       involvedInstitutions: [
         {
-          src: '',
-          href: ''
+          src: 'assets/glam/images/institutions/4science.png',
+          href: 'https://www.4science.com',
+          alt: '4Science'
+        },
+      ],
+      socialMedia: [
+        {
+          url: 'https://www.linkedin.com/company/4science-spa/',
+          faIcon: 'fa-brands fa-linkedin',
+          name: 'Linkedin'
         },
         {
-          src: '',
-          href: ''
+          url: 'https://www.facebook.com/4ScienceIT',
+          faIcon: 'fa-brands fa-facebook',
+          name: 'Facebook'
         },
-        {
-          src: '',
-          href: ''
-        },
-        {
-          src: '',
-          href: ''
-        },
-        {
-          src: '',
-          href: ''
-        }
-      ]
+      ],
     },
     search: {
       filters: {

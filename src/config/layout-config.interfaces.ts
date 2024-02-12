@@ -39,13 +39,21 @@ export interface NavbarConfig extends Config {
   showCommunityCollection: boolean;
 }
 
-export interface involvedInstitution {
+export interface InvolvedInstitution {
   src: string;
   href: string;
+  alt?: string;
+}
+
+export interface SocialMedia {
+  faIcon: string;
+  url: string;
+  name: string;
 }
 
 export interface FooterConfig extends Config {
-  involvedInstitutions: involvedInstitution[];
+  involvedInstitutions: InvolvedInstitution[];
+  socialMedia: SocialMedia[];
 }
 
 export interface CrisItemPageConfig extends Config {

@@ -5543,6 +5543,10 @@
   // TODO New key - Add a translation
   "footer.involved-institution": "Institutions involved",
 
+  // "footer.social-media": "Social media",
+  // TODO New key - Add a translation
+  "footer.social-media": "Social media",
+
   // "footer.information": "Information",
   // TODO New key - Add a translation
   "footer.information": "Information",
@@ -18050,6 +18054,61 @@
   // TODO New key - Add a translation
   "layout.field.label.History": "History",
 
+  // "submission.sections.submit.progressbar.describe.santini": "Details",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.santini": "Details",
+  // "submission.sections.submit.progressbar.describe.quaderni": "Details",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.quaderni": "Details",
+  // "submission.sections.submit.progressbar.describe.pagine": "Details",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.pagine": "Details",
+  // "browse.comcol.by.dateissuedHolyCard": "Date",
+  // TODO New key - Add a translation
+  "browse.comcol.by.dateissuedHolyCard": "Date",
+  // "browse.comcol.by.titleHolyCard": "Title",
+  // TODO New key - Add a translation
+  "browse.comcol.by.titleHolyCard": "Title",
+  // "browse.comcol.by.typeHolyCard": "Type",
+  // TODO New key - Add a translation
+  "browse.comcol.by.typeHolyCard": "Type",
+  // "browse.comcol.by.subjectHolyCard": "Subject",
+  // TODO New key - Add a translation
+  "browse.comcol.by.subjectHolyCard": "Subject",
+  // "browse.comcol.by.dateissuedNotebook": "Date",
+  // TODO New key - Add a translation
+  "browse.comcol.by.dateissuedNotebook": "Date",
+  // "browse.comcol.by.titleNotebook": "Title",
+  // TODO New key - Add a translation
+  "browse.comcol.by.titleNotebook": "Title",
+  // "browse.comcol.by.typeNotebook": "Type",
+  // TODO New key - Add a translation
+  "browse.comcol.by.typeNotebook": "Type",
+  // "browse.comcol.by.subjectNotebook": "Subject",
+  // TODO New key - Add a translation
+  "browse.comcol.by.subjectNotebook": "Subject",
+  // "browse.comcol.by.dateissuedPage": "Date",
+  // TODO New key - Add a translation
+  "browse.comcol.by.dateissuedPage": "Date",
+  // "browse.comcol.by.titlePage": "Title",
+  // TODO New key - Add a translation
+  "browse.comcol.by.titlePage": "Title",
+  // "browse.comcol.by.typePage": "Type",
+  // TODO New key - Add a translation
+  "browse.comcol.by.typePage": "Type",
+  // "browse.comcol.by.subjectPage": "Subject",
+  // TODO New key - Add a translation
+  "browse.comcol.by.subjectPage": "Subject",
+
+  // "holycard.listelement.badge": "Holy Card",
+  // TODO New key - Add a translation
+  "holycard.listelement.badge": "Holy Card",
+  // "notebook.listelement.badge": "Notebook",
+  // TODO New key - Add a translation
+  "notebook.listelement.badge": "Notebook",
+  // "page.listelement.badge": "Page",
+  // TODO New key - Add a translation
+  "page.listelement.badge": "Page",
 
 
 }

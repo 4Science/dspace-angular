@@ -4215,6 +4215,9 @@
   // "footer.involved-institution": "Institutions involved",
   "footer.involved-institution": "Istituzioni Coinvolte",
 
+  // "footer.social-media": "Social media",
+  "footer.social-media": "Canali social",
+
   // "footer.information": "Information",
   "footer.information": "Informazioni",
 
@@ -13599,6 +13602,43 @@
   // "layout.field.label.History": "History",
   "layout.field.label.History": "Denominazione del Periodo",
 
+  // "submission.sections.submit.progressbar.describe.santini": "Details",
+  "submission.sections.submit.progressbar.describe.santini": "Informazioni di dettaglio",
+  // "submission.sections.submit.progressbar.describe.quaderni": "Details",
+  "submission.sections.submit.progressbar.describe.quaderni": "Informazioni di dettaglio",
+  // "submission.sections.submit.progressbar.describe.pagine": "Details",
+  "submission.sections.submit.progressbar.describe.pagine": "Informazioni di dettaglio",
+  // "browse.comcol.by.dateissuedHolyCard": "Date",
+  "browse.comcol.by.dateissuedHolyCard": "Data",
+  // "browse.comcol.by.titleHolyCard": "Title",
+  "browse.comcol.by.titleHolyCard": "Titolo",
+  // "browse.comcol.by.typeHolyCard": "Type",
+  "browse.comcol.by.typeHolyCard": "Tipologia",
+  // "browse.comcol.by.subjectHolyCard": "Subject",
+  "browse.comcol.by.subjectHolyCard": "Soggetto",
+  // "browse.comcol.by.dateissuedNotebook": "Date",
+  "browse.comcol.by.dateissuedNotebook": "Data",
+  // "browse.comcol.by.titleNotebook": "Title",
+  "browse.comcol.by.titleNotebook": "Titolo",
+  // "browse.comcol.by.typeNotebook": "Type",
+  "browse.comcol.by.typeNotebook": "Tipologia",
+  // "browse.comcol.by.subjectNotebook": "Subject",
+  "browse.comcol.by.subjectNotebook": "Soggetto",
+  // "browse.comcol.by.dateissuedPage": "Date",
+  "browse.comcol.by.dateissuedPage": "Data",
+  // "browse.comcol.by.titlePage": "Title",
+  "browse.comcol.by.titlePage": "Titolo",
+  // "browse.comcol.by.typePage": "Type",
+  "browse.comcol.by.typePage": "Tipologia",
+  // "browse.comcol.by.subjectPage": "Subject",
+  "browse.comcol.by.subjectPage": "Soggetto",
+
+  // "holycard.listelement.badge": "Holy Card",
+  "holycard.listelement.badge": "Santino",
+  // "notebook.listelement.badge": "Notebook",
+  "notebook.listelement.badge": "Quaderno",
+  // "page.listelement.badge": "Page",
+  "page.listelement.badge": "Pagina",
 
 
 }
