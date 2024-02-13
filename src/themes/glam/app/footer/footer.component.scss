@@ -6,9 +6,10 @@
 
     // TODO: rename and move to global configuration
     --top-footer-gap: 1rem;
-    --institution-width: 120px;
+    --institution-max-width: 120px;
+    --institution-max-height: 80px;
     --institution-gap: 1rem;
-    --institutions-per-row: 2;
+    --institutions-per-row: 4;
 
     .flex-wrapper {
       display: flex;
@@ -34,10 +35,11 @@
     }
 
     .institution-img-wrapper {
-      max-width: calc((var(--institution-width) + var(--institution-gap)) * var(--institutions-per-row));
+      max-width: calc((var(--institution-max-width) + var(--institution-gap)) * var(--institutions-per-row));
       gap: var(--institution-gap);
       img {
-        width: 120px;
+        max-width: var(--institution-max-width);
+        max-height: var(--institution-max-height);
       }
     }
   }
