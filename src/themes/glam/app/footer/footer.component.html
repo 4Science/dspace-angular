@@ -3,21 +3,24 @@
     <ds-themed-text-section *ngIf="hasSiteFooterSections" [sectionId]="'site'" [site]="(site | async)"
                             [textRowSection]=section></ds-themed-text-section>
 
-    <div *ngIf="!hasSiteFooterSections" class="container-fluid">
+    <div *ngIf="!hasSiteFooterSections" class="container clip-borders">
       <div class="flex-wrapper">
-        <div class="flex-wrapper flex-fill">
+        <div class="flex-wrapper">
           <div class="footer-element" *ngIf="involvedInstitutions.length > 0">
-            <h6 class="title text-center mb-4">{{'footer.involved-institution' | translate}}</h6>
-            <div class="institution-img-wrapper text-center d-flex justify-content-center flex-wrap">
-              <ng-container *ngFor="let institution of involvedInstitutions">
-                <a class="" [href]="institution?.href" target="_blank">
-                  <img class="" [src]="institution?.src || '../assets/images/replacement_image.svg'" [alt]="institution.alt"/>
-                </a>
-              </ng-container>
+            <h6 class="title text-center mb-4">{{ 'footer.involved-institution' | translate }}</h6>
+            <div class="d-flex flex-column align-items-center">
+              <div class="institution-img-wrapper d-flex justify-content-center align-items-center flex-wrap">
+                <ng-container *ngFor="let institution of involvedInstitutions">
+                  <a class="" [href]="institution?.href" target="_blank">
+                    <img class="" [src]="institution?.src || '../assets/images/replacement_image.svg'"
+                         [alt]="institution.alt"/>
+                  </a>
+                </ng-container>
+              </div>
             </div>
           </div>
           <div class="footer-element" *ngIf="socialMedia.length > 0">
-            <h6 class="title text-center mb-4">{{'footer.social-media' | translate}}</h6>
+            <h6 class="title text-center mb-4">{{ 'footer.social-media' | translate }}</h6>
             <div class="d-flex flex-row flex-wrap justify-content-center gap-3">
               <ng-container *ngFor="let social of socialMedia">
                 <a class="" [href]="social?.url" target="_blank">
@@ -27,38 +30,42 @@
             </div>
           </div>
         </div>
-        <div class="flex-wrapper flex-fill">
+        <div class="flex-wrapper d-flex flex-row justify-content-center">
           <div class="footer-element d-flex justify-content-center">
             <div class="d-flex flex-column align-items-center align-items-md-start">
-              <h6 class="title mb-3">{{'footer.information' | translate}}</h6>
+              <h6 class="title mb-3">{{ 'footer.information' | translate }}</h6>
               <ul class="list-unstyled mb-3 d-flex flex-column align-items-center align-items-md-start">
                 <li>
-                  <a class="footer-link" routerLink="info/general-information">{{'footer.general-information' | translate}}</a>
+                  <a class="footer-link"
+                     routerLink="info/general-information">{{ 'footer.general-information' | translate }}</a>
                 </li>
                 <li>
-                  <a class="footer-link" routerLink="info/offered-services">{{'footer.offer-service' | translate}}</a>
+                  <a class="footer-link" routerLink="info/offered-services">{{ 'footer.offer-service' | translate }}</a>
                 </li>
                 <li>
-                  <a class="footer-link" routerLink="info/history-digital-lid">{{'footer.history-digital' | translate}}</a>
+                  <a class="footer-link"
+                     routerLink="info/history-digital-lid">{{ 'footer.history-digital' | translate }}</a>
                 </li>
                 <li>
-                  <a class="footer-link" routerLink="info/organizational-structure">{{'footer.org-structure' | translate}}</a>
+                  <a class="footer-link"
+                     routerLink="info/organizational-structure">{{ 'footer.org-structure' | translate }}</a>
                 </li>
               </ul>
             </div>
           </div>
           <div class="footer-element d-flex justify-content-center">
             <div class="d-flex flex-column align-items-center align-items-md-start">
-              <h6 class="title mb-3">{{'layout.i18n.link.default' | translate}}</h6>
+              <h6 class="title mb-3">{{ 'layout.i18n.link.default' | translate }}</h6>
               <ul class="list-unstyled mb-3 d-flex flex-column align-items-center align-items-md-start">
                 <li>
-                  <a class="footer-link" [href]="'footer.contact.href' | translate" target="_blank">{{'footer.contact' | translate}}</a>
+                  <a class="footer-link" [href]="'footer.contact.href' | translate"
+                     target="_blank">{{ 'footer.contact' | translate }}</a>
                 </li>
                 <li>
-                  <a class="footer-link" routerLink="info/end-user-agreement">{{'footer.terms' | translate}}</a>
+                  <a class="footer-link" routerLink="info/end-user-agreement">{{ 'footer.terms' | translate }}</a>
                 </li>
                 <li>
-                  <a class="footer-link" routerLink="info/privacy">{{'footer.link.privacy-policy' | translate}}</a>
+                  <a class="footer-link" routerLink="info/privacy">{{ 'footer.link.privacy-policy' | translate }}</a>
                 </li>
               </ul>
             </div>
@@ -70,13 +77,18 @@
   <div class="footer-copyrights">
     <div class="container">
       <div class="d-flex flex-wrap gapx-3 my-3">
-        <a *ngIf="showSendFeedback$ | async" class="d-block" routerLink="info/feedback">{{'footer.link.feedback' | translate}}</a>
-        <a class="d-block mr-auto" href="javascript:void(0);" (click)="showCookieSettings()">{{'footer.link.cookies' | translate}}</a>
+        <a *ngIf="showSendFeedback$ | async" class="d-block"
+           routerLink="info/feedback">{{ 'footer.link.feedback' | translate }}</a>
+        <a class="d-block mr-auto" href="javascript:void(0);"
+           (click)="showCookieSettings()">{{ 'footer.link.cookies' | translate }}</a>
         <div>
           {{ 'footer.built-with' | translate }}
-          <a [href]="'footer.link.dspace-glam.href' | translate" target="_blank">{{ 'footer.link.dspace-glam' | translate}}</a> -
+          <a [href]="'footer.link.dspace-glam.href' | translate"
+             target="_blank">{{ 'footer.link.dspace-glam' | translate }}</a> -
           {{ 'footer.extension-by' | translate }}
-          <a [href]="'footer.link.4science.href' | translate" target="_blank"><img src="assets/images/logo-4science-footer.png" class="logo-4science" alt="{{ 'footer.link.4science' | translate}}" /></a>
+          <a [href]="'footer.link.4science.href' | translate" target="_blank"><img
+            src="assets/images/logo-4science-footer.png" class="logo-4science"
+            alt="{{ 'footer.link.4science' | translate}}"/></a>
         </div>
       </div>
     </div>
