@@ -15264,6 +15264,24 @@
   // "layout.field.label.Publication.dc.description.note": "Notes",
   // TODO New key - Add a translation
   "layout.field.label.Publication.dc.description.note": "Notes",
+  // "layout.field.label.Publication.dc.format": "Format",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.dc.format": "Format",
+  // "layout.field.label.Publication.dc.source.content": "Content",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.dc.source.content": "Content",
+  // "layout.field.label.Publication.dc.relation.publication": "Related Publications",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.dc.relation.publication": "Related Publications",
+  // "layout.field.label.Publication.dc.relation.ispublishedin": "Published in",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.dc.relation.ispublishedin": "Published in",
+  // "layout.field.label.Publication.dc.relation.references": "References",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.dc.relation.references": "References",
+  // "layout.field.label.Publication.dc.rights.holder": "Holder",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.dc.rights.holder": "Holder",
   // "layout.field.label.Publication.BITSTREAM": "File(s)",
   // TODO New key - Add a translation
   "layout.field.label.Publication.BITSTREAM": "File(s)",
@@ -15639,6 +15657,9 @@
   // "layout.field.label.ArchivalMaterial.dc.relation.place": "Places",
   // TODO New key - Add a translation
   "layout.field.label.ArchivalMaterial.dc.relation.place": "Places",
+  // "layout.field.label.ArchivalMaterial.dc.description.abstract": "Abstract",
+  // TODO New key - Add a translation
+  "layout.field.label.ArchivalMaterial.dc.description.abstract": "Abstract",
   // "layout.field.label.Aggregation.dc.description": "Description",
   // TODO New key - Add a translation
   "layout.field.label.Aggregation.dc.description": "Description",
@@ -15903,6 +15924,60 @@
   // "layout.field.label.Picture.dc.relation.ispartofcontainer": "Is part of",
   // TODO New key - Add a translation
   "layout.field.label.Picture.dc.relation.ispartofcontainer": "Is part of",
+  // "layout.field.label.Picture.dc.relation.glam.inscription": "Inscription",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.dc.relation.glam.inscription": "Inscription",
+  // "layout.field.label.Picture.dc.relation.glam.inscription.position": "Position",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.dc.relation.glam.inscription.position": "Position",
+  // "layout.field.label.Picture.dc.relation.glam.inscription.font": "Font",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.dc.relation.glam.inscription.font": "Font",
+  // "layout.field.label.Picture.dc.relation.glam.inscription.technique": "Technique",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.dc.relation.glam.inscription.technique": "Technique",
+  // "layout.field.label.Picture.dc.relation.glam.inscription.language": "Language",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.dc.relation.glam.inscription.language": "Language",
+  // "layout.field.label.Picture.dc.relation.glam.inscription.class": "Class",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.dc.relation.glam.inscription.class": "Class",
+  // "layout.field.label.Picture.dc.relation.glam.mark": "Mark",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.dc.relation.glam.mark": "Mark",
+  // "layout.field.label.Picture.dc.relation.glam.mark.position": "Position",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.dc.relation.glam.mark.position": "Position",
+  // "layout.field.label.Picture.dc.relation.glam.mark.identification": "Identification",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.dc.relation.glam.mark.identification": "Identification",
+  // "layout.field.label.Picture.dc.relation.glam.mark.qualification": "Qualification",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.dc.relation.glam.mark.qualification": "Qualification",
+  // "layout.field.label.Picture.dc.relation.glam.mark.quantity": "Quantity",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.dc.relation.glam.mark.quantity": "Quantity",
+  // "layout.field.label.Picture.dc.relation.glam.mark.class": "Class",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.dc.relation.glam.mark.class": "Class",
+  // "layout.field.label.Picture.dc.relation.glam.bibliography": "Bibliography",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.dc.relation.glam.bibliography": "Bibliography",
+  // "layout.field.label.Picture.dc.relation.glam.bibliography.year": "Year",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.dc.relation.glam.bibliography.year": "Year",
+  // "layout.field.label.Picture.dc.relation.glam.bibliography.publisher": "Publisher",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.dc.relation.glam.bibliography.publisher": "Publisher",
+  // "layout.field.label.Picture.dc.relation.glam.bibliography.place": "Place",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.dc.relation.glam.bibliography.place": "Place",
+  // "layout.field.label.Picture.dc.relation.glam.bibliography.author": "Author",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.dc.relation.glam.bibliography.author": "Author",
+  // "layout.field.label.Picture.dc.relation.glam.bibliography.type": "Type",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.dc.relation.glam.bibliography.type": "Type",
   // "layout.field.label.Publication.dc.relation.path": "Path",
   // TODO New key - Add a translation
   "layout.field.label.Publication.dc.relation.path": "Path",
@@ -16041,6 +16116,30 @@
   // "layout.field.label.AudioVideo.dc.description.preservationstate": "Preservation State",
   // TODO New key - Add a translation
   "layout.field.label.AudioVideo.dc.description.preservationstate": "Preservation State",
+  // "layout.field.label.AudioVideo.dc.subject": "Subject",
+  // TODO New key - Add a translation
+  "layout.field.label.AudioVideo.dc.subject": "Subject",
+  // "layout.field.label.AudioVideo.dc.source.content": "Content",
+  // TODO New key - Add a translation
+  "layout.field.label.AudioVideo.dc.source.content": "Content",
+  // "layout.field.label.AudioVideo.dc.date.start": "Start Date",
+  // TODO New key - Add a translation
+  "layout.field.label.AudioVideo.dc.date.start": "Start Date",
+  // "layout.field.label.AudioVideo.dc.date.end": "End Date",
+  // TODO New key - Add a translation
+  "layout.field.label.AudioVideo.dc.date.end": "End Date",
+  // "layout.field.label.AudioVideo.dc.description.note": "Notes",
+  // TODO New key - Add a translation
+  "layout.field.label.AudioVideo.dc.description.note": "Notes",
+  // "layout.field.label.AudioVideo.dc.rights.note": "Rights Note",
+  // TODO New key - Add a translation
+  "layout.field.label.AudioVideo.dc.rights.note": "Rights Note",
+  // "layout.field.label.AudioVideo.dc.description.perservationnote": "Preservation Notes",
+  // TODO New key - Add a translation
+  "layout.field.label.AudioVideo.dc.description.perservationnote": "Preservation Notes",
+  // "layout.field.label.AudioVideo.dc.description.digitaltools": "Digital tools",
+  // TODO New key - Add a translation
+  "layout.field.label.AudioVideo.dc.description.digitaltools": "Digital tools",
   // "layout.field.label.AudioVideo.BITSTREAM": "File(s)",
   // TODO New key - Add a translation
   "layout.field.label.AudioVideo.BITSTREAM": "File(s)",
