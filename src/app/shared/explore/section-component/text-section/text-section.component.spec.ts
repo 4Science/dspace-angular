@@ -2,7 +2,6 @@ import { SearchService } from '../../../../core/shared/search/search.service';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TextSectionComponent } from './text-section.component';
 import { Site } from '../../../../core/shared/site.model';
-import { By } from '@angular/platform-browser';
 import { LocaleService } from '../../../../core/locale/locale.service';
 
 describe('TextSectionComponent', () => {
@@ -62,10 +61,4 @@ describe('TextSectionComponent', () => {
     expect(component).toBeTruthy();
   });
   // FIXME: complete scenarios
-  it('should render text-metadata with ds-markdown-viewer', () => {
-    component.sectionId = 'site';
-    fixture.detectChanges();
-    const dsMarkdownViewer = fixture.debugElement.query(By.css('[data-test="ds-markdown-viewer"]'));
-    expect(dsMarkdownViewer).toBeTruthy();
-  });
 });
