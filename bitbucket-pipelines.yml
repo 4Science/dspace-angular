@@ -20,7 +20,7 @@ definitions:
 
 pipelines:
   branches:
-    'ux-plus-2023_02_x':
+    'ux-plus':
       - step: *unittest-code-checks
   pull-requests:
     '**':
