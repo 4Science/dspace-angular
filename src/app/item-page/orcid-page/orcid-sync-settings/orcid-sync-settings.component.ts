@@ -90,7 +90,7 @@ export class OrcidSyncSettingsComponent implements OnInit {
       }
     ];
 
-    this.syncPublicationOptions = ['DISABLED', 'ALL']
+    this.syncPublicationOptions = ['DISABLED', 'ALL', 'MY_SELECTED', 'MINE']
       .map((value) => {
         return {
           label: this.messagePrefix + '.sync-publications.' + value.toLowerCase(),
@@ -98,7 +98,7 @@ export class OrcidSyncSettingsComponent implements OnInit {
         };
       });
 
-    this.syncFundingOptions = ['DISABLED', 'ALL']
+    this.syncFundingOptions = ['DISABLED', 'ALL', 'MY_SELECTED', 'MINE']
       .map((value) => {
         return {
           label: this.messagePrefix + '.sync-fundings.' + value.toLowerCase(),
@@ -118,8 +118,8 @@ export class OrcidSyncSettingsComponent implements OnInit {
       });
 
     this.currentSyncMode = this.getCurrentPreference('dspace.orcid.sync-mode', ['BATCH', 'MANUAL'], 'MANUAL');
-    this.currentSyncPublications = this.getCurrentPreference('dspace.orcid.sync-publications', ['DISABLED', 'ALL'], 'DISABLED');
-    this.currentSyncFunding = this.getCurrentPreference('dspace.orcid.sync-fundings', ['DISABLED', 'ALL'], 'DISABLED');
+    this.currentSyncPublications = this.getCurrentPreference('dspace.orcid.sync-publications', ['DISABLED', 'ALL', 'MY_SELECTED', 'MINE'], 'DISABLED');
+    this.currentSyncFunding = this.getCurrentPreference('dspace.orcid.sync-fundings', ['DISABLED', 'ALL', 'MY_SELECTED', 'MINE'], 'DISABLED');
   }
 
   /**

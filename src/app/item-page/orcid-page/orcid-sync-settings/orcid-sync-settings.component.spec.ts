@@ -258,4 +258,79 @@ describe('OrcidSyncSettingsComponent test suite', () => {
     });
   });
 
+  describe('form submit with relation', () => {
+    beforeEach(() => {
+      scheduler = getTestScheduler();
+      notificationsService = (comp as any).notificationsService;
+      formGroup = new FormGroup({
+        syncMode: new FormControl('MANUAL'),
+        syncFundings: new FormControl('MINE'),
+        syncPublications: new FormControl('MY_SELECTED'),
+        syncProfile_BIOGRAPHICAL: new FormControl(true),
+        syncProfile_IDENTIFIERS: new FormControl(true),
+      });
+      spyOn(comp.settingsUpdated, 'emit');
+    });
+
+    it('should call updateByOrcidOperations properly with selected relations', () => {
+      researcherProfileService.findByRelatedItem.and.returnValue(createSuccessfulRemoteDataObject$(mockResearcherProfile));
+      researcherProfileService.patch.and.returnValue(createSuccessfulRemoteDataObject$(mockResearcherProfile));
+      const expectedOps: Operation[] = [
+        {
+          path: '/orcid/mode',
+          op: 'replace',
+          value: 'MANUAL'
+        }, {
+          path: '/orcid/publications',
+          op: 'replace',
+          value: 'MY_SELECTED'
+        }, {
+          path: '/orcid/fundings',
+          op: 'replace',
+          value: 'MINE'
+        }, {
+          path: '/orcid/profile',
+          op: 'replace',
+          value: 'BIOGRAPHICAL,IDENTIFIERS'
+        }
+      ];
+
+      scheduler.schedule(() => comp.onSubmit(formGroup));
+      scheduler.flush();
+
+      expect(researcherProfileService.patch).toHaveBeenCalledWith(mockResearcherProfile, expectedOps);
+    });
+
+    it('should show notification on success', () => {
+      researcherProfileService.findByRelatedItem.and.returnValue(createSuccessfulRemoteDataObject$(mockResearcherProfile));
+      researcherProfileService.patch.and.returnValue(createSuccessfulRemoteDataObject$(mockResearcherProfile));
+
+      scheduler.schedule(() => comp.onSubmit(formGroup));
+      scheduler.flush();
+
+      expect(notificationsService.success).toHaveBeenCalled();
+      expect(comp.settingsUpdated.emit).toHaveBeenCalled();
+    });
+
+    it('should show notification on error', () => {
+      researcherProfileService.findByRelatedItem.and.returnValue(createFailedRemoteDataObject$());
+
+      scheduler.schedule(() => comp.onSubmit(formGroup));
+      scheduler.flush();
+
+      expect(notificationsService.error).toHaveBeenCalled();
+      expect(comp.settingsUpdated.emit).not.toHaveBeenCalled();
+    });
+
+    it('should show notification on error', () => {
+      researcherProfileService.findByRelatedItem.and.returnValue(createSuccessfulRemoteDataObject$(mockResearcherProfile));
+      researcherProfileService.patch.and.returnValue(createFailedRemoteDataObject$());
+
+      scheduler.schedule(() => comp.onSubmit(formGroup));
+      scheduler.flush();
+
+      expect(notificationsService.error).toHaveBeenCalled();
+      expect(comp.settingsUpdated.emit).not.toHaveBeenCalled();
+    });
+  });
 });
