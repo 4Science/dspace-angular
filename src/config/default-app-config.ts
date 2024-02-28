@@ -34,6 +34,7 @@ import {
 } from './advanced-attachment-rendering.config';
 import { AttachmentRenderingConfig } from './attachment-rendering.config';
 import { SearchResultConfig } from './search-result-config.interface';
+import { MiradorConfig } from './mirador-config.interfaces';
 
 export class DefaultAppConfig implements AppConfig {
   production = false;
@@ -501,8 +502,8 @@ export class DefaultAppConfig implements AppConfig {
   // Whether to enable Markdown (https://commonmark.org/) and MathJax (https://www.mathjax.org/)
   // display in supported metadata fields. By default, only dc.description.abstract is supported.
   markdown: MarkdownConfig = {
-    enabled: false,
-    mathjax: false,
+    enabled: true,
+    mathjax: true,
   };
 
   // Which vocabularies should be used for which search filters
@@ -766,4 +767,7 @@ export class DefaultAppConfig implements AppConfig {
     authorMetadata: ['dc.contributor.author', 'dc.creator', 'dc.contributor.*'],
   };
 
+  mirador: MiradorConfig = {
+    enableDownloadPlugin: true,
+  };
 }
