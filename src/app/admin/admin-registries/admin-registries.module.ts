@@ -9,6 +9,7 @@ import { MetadataSchemaFormComponent } from './metadata-registry/metadata-schema
 import { MetadataFieldFormComponent } from './metadata-schema/metadata-field-form/metadata-field-form.component';
 import { BitstreamFormatsModule } from './bitstream-formats/bitstream-formats.module';
 import { FormModule } from '../../shared/form/form.module';
+import { MetadataSchemaSeacrhFormComponent } from './metadata-registry/metadata-schema-seacrh-form/metadata-schema-seacrh-form.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { FormModule } from '../../shared/form/form.module';
     MetadataRegistryComponent,
     MetadataSchemaComponent,
     MetadataSchemaFormComponent,
-    MetadataFieldFormComponent
+    MetadataFieldFormComponent,
+    MetadataSchemaSeacrhFormComponent
   ]
 })
 export class AdminRegistriesModule {

@@ -8,6 +8,8 @@
 
             <ds-metadata-schema-form (submitForm)="forceUpdateSchemas()"></ds-metadata-schema-form>
 
+            <ds-metadata-schema-seacrh-form (submitForm)="searchSchemas($event)"></ds-metadata-schema-seacrh-form>
+
             <ds-pagination
                     *ngIf="(metadataSchemas | async)?.payload?.totalElements > 0"
                     [paginationOptions]="config"

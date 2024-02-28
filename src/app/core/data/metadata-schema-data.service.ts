@@ -20,6 +20,8 @@ import { PaginatedList } from './paginated-list.model';
 import { IdentifiableDataService } from './base/identifiable-data.service';
 import { DeleteData, DeleteDataImpl } from './base/delete-data';
 import { dataService } from './base/data-service.decorator';
+import { RequestParam } from '../cache/models/request-param.model';
+import { SearchData, SearchDataImpl } from './base/search-data';
 
 /**
  * A service responsible for fetching/sending data from/to the REST API on the metadataschemas endpoint
@@ -31,6 +33,9 @@ export class MetadataSchemaDataService extends IdentifiableDataService<MetadataS
   private findAllData: FindAllData<MetadataSchema>;
   private putData: PutData<MetadataSchema>;
   private deleteData: DeleteData<MetadataSchema>;
+  private searchData: SearchData<MetadataSchema>;
+
+  private searchByMetadataLinkPath = 'byMetadata';
 
   constructor(
     protected requestService: RequestService,
@@ -45,6 +50,7 @@ export class MetadataSchemaDataService extends IdentifiableDataService<MetadataS
     this.putData = new PutDataImpl(this.linkPath, requestService, rdbService, objectCache, halService, this.responseMsToLive);
     this.deleteData = new DeleteDataImpl(this.linkPath, requestService, rdbService, objectCache, halService, notificationsService, this.responseMsToLive, this.constructIdEndpoint);
     this.findAllData = new FindAllDataImpl(this.linkPath, requestService, rdbService, objectCache, halService, this.responseMsToLive);
+    this.searchData = new SearchDataImpl(this.linkPath, requestService, rdbService, objectCache, halService, this.responseMsToLive);
   }
 
   /**
@@ -94,6 +100,34 @@ export class MetadataSchemaDataService extends IdentifiableDataService<MetadataS
   }
 
   /**
+   * Returns {@link RemoteData} of found objects with a list of {@link FollowLinkConfig}, to indicate which embedded
+   * info should be added to the objects
+   *
+   * @param schemaNamespace             Schema namespace
+   * @param element                     Element
+   * @param qualifier                   Qualifier
+   * @param options                     Find list options object
+   * @param useCachedVersionIfAvailable If this is true, the request will only be sent if there's
+   *                                    no valid cached version. Defaults to true
+   * @param reRequestOnStale            Whether or not the request should automatically be re-
+   *                                    requested after the response becomes stale
+   * @param linksToFollow               List of {@link FollowLinkConfig} that indicate which
+   *                                    {@link HALLink}s should be automatically resolved
+   * @return {Observable<RemoteData<PaginatedList<T>>>}
+   *    Return an observable that emits object list
+   */
+  public findByMetadata(schemaNamespace: string, element: string, qualifier: string, options: FindListOptions = {}, useCachedVersionIfAvailable = true, reRequestOnStale = true, ...linksToFollow: FollowLinkConfig<MetadataSchema>[]) {
+    const optionsWithSchema = Object.assign(new FindListOptions(), options, {
+      searchParams: [
+        new RequestParam('namespace', hasValue(schemaNamespace) ? schemaNamespace : ''),
+        new RequestParam('element', hasValue(element) ? element : ''),
+        new RequestParam('qualifier', hasValue(qualifier) ? qualifier : '')
+      ],
+    });
+    return this.searchBy(this.searchByMetadataLinkPath, optionsWithSchema, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
+  }
+
+  /**
    * Delete an existing object on the server
    * @param   objectId The id of the object to be removed
    * @param   copyVirtualMetadata (optional parameter) the identifiers of the relationship types for which the virtual
@@ -116,5 +150,9 @@ export class MetadataSchemaDataService extends IdentifiableDataService<MetadataS
    */
   public deleteByHref(href: string, copyVirtualMetadata?: string[]): Observable<RemoteData<NoContent>> {
     return this.deleteData.deleteByHref(href, copyVirtualMetadata);
+  }
+
+  private searchBy(searchMethod: string, options?: FindListOptions, useCachedVersionIfAvailable?: boolean, reRequestOnStale?: boolean, ...linksToFollow: FollowLinkConfig<MetadataSchema>[]): Observable<RemoteData<PaginatedList<MetadataSchema>>> {
+    return this.searchData.searchBy(searchMethod, options, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
   }
 }

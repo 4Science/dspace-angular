@@ -356,6 +356,18 @@
   // "admin.registries.metadata.form.namespace": "Namespace",
   "admin.registries.metadata.form.namespace": "Namespace",
 
+  // "admin.registries.metadata.search.form.search": "Search metadata schema",
+  "admin.registries.metadata.search.form.search": "Schema dei metadati di ricerca",
+
+  // "admin.registries.metadata.search.form.namespace": "Namespace",
+  "admin.registries.metadata.search.form.namespace": "Namespace",
+
+  // "admin.registries.metadata.search.form.element": "Element",
+  "admin.registries.metadata.search.form.element": "Element",
+
+  // "admin.registries.metadata.search.form.qualifier": "Qualifier",
+  "admin.registries.metadata.search.form.qualifier": "Qualifier",
+
   // "admin.registries.metadata.head": "Metadata Registry",
   "admin.registries.metadata.head": "Registro dei metadati",
 
