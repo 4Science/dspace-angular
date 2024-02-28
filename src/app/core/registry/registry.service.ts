@@ -30,7 +30,7 @@ import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { RequestParam } from '../cache/models/request-param.model';
 import { NoContent } from '../shared/NoContent.model';
 import { FindListOptions } from '../data/find-list-options.model';
-import { SchemaFilter } from '../../admin/admin-registries/metadata-registry/metadata-schema-seacrh-form/schema-filter';
+import { SchemaFilter } from '../../admin/admin-registries/metadata-registry/metadata-schema-search-form/schema-filter';
 
 const metadataRegistryStateSelector = (state: AppState) => state.metadataRegistry;
 const editMetadataSchemaSelector = createSelector(metadataRegistryStateSelector, (metadataState: MetadataRegistryState) => metadataState.editSchema);

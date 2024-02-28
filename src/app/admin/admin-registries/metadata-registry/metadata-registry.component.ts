@@ -17,7 +17,7 @@ import {
   MetadataSchemaExportService
 } from '../../../shared/metadata-export/metadata-schema-export/metadata-schema-export.service';
 import { UUIDService } from '../../../core/shared/uuid.service';
-import { SchemaFilter } from './metadata-schema-seacrh-form/schema-filter';
+import { SchemaFilter } from './metadata-schema-search-form/schema-filter';
 
 @Component({
   selector: 'ds-metadata-registry',

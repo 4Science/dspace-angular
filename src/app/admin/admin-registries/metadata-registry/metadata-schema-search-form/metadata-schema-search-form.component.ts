@@ -13,10 +13,10 @@ import { SchemaFilter } from './schema-filter';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'ds-metadata-schema-seacrh-form',
-  templateUrl: './metadata-schema-seacrh-form.component.html'
+  selector: 'ds-metadata-schema-search-form',
+  templateUrl: './metadata-schema-search-form.component.html'
 })
-export class MetadataSchemaSeacrhFormComponent implements OnInit, OnDestroy {
+export class MetadataSchemaSearchFormComponent implements OnInit, OnDestroy {
 
   /**
    * A unique id used for ds-form
