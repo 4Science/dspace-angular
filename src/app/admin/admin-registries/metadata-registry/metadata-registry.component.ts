@@ -82,6 +82,7 @@ export class MetadataRegistryComponent {
    * Force-update the list of schemas to use search filter.
    */
   public searchSchemas(schemaFilter: SchemaFilter) {
+    this.paginationService.updateRoute(this.config.id, {page: 0});
     this.filter$.next(schemaFilter);
   }
 
