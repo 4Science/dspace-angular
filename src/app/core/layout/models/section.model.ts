@@ -138,3 +138,33 @@ export interface CarouselSection extends SectionComponent {
   bundle: string;
   showBlurryBackdrop: boolean;
 }
+
+/**
+ * Represents an advanced top section in the layout.
+ */
+export interface AdvancedTopSection extends SectionComponent {
+  /**
+   * The names of the discovery configurations.
+   */
+  discoveryConfigurationName: string[];
+
+  /**
+   * The field to use for sorting.
+   */
+  sortField: string;
+
+  /**
+   * The order in which to sort the items.
+   */
+  order: string;
+
+  /**
+   * Indicates whether to enable endless horizontal scrolling.
+   */
+  endlessHorizontalScroll: boolean;
+
+  /**
+   * The component type, which is always 'advanced-top-component'.
+   */
+  componentType: 'advanced-top-component';
+}

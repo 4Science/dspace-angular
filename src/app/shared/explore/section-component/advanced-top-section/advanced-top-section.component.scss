@@ -1,0 +1,37 @@
+:host {
+  .view-all-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--ds-bern-red);
+
+    &:hover {
+      color: var(--ds-dark-primary);
+      cursor: pointer;
+
+      .fa-arrow-right {
+        transform: translateX(5px);
+        transition: transform 0.3s ease;
+      }
+    }
+  }
+}
+
+:host::ng-deep .home-page-top-items-container ds-object-grid .card-columns {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+
+  scroll-snap-type: x mandatory;
+  scroll-snap-align: start;
+
+  .card-column {
+    scroll-snap-align: start;
+  }
+}
+
+:host::ng-deep .home-page-top-items-container-no-scroll ds-object-grid .card-columns {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: unset;
+}

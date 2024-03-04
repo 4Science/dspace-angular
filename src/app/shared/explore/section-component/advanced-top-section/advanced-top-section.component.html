@@ -1,0 +1,43 @@
+<div class="home-page-component-container">
+  <div class="d-flex flex-row justify-content-between">
+    <h3>
+      Explore our recently added works
+    </h3>
+    <div class="view-all-container">
+      <i class="fa-solid fa-arrow-right"></i>
+      <span class="pl-2">
+        View all
+      </span>
+    </div>
+  </div>
+  <div class="d-flex flex-row justify-content-between">
+    <div class="d-flex gap-2">
+      <ng-container *ngFor="let discovery of advancedTopSection.discoveryConfigurationName">
+        <button class="btn rounded-pill"
+          [ngClass]="selectedDiscoverConfiguration === discovery ? 'btn-primary' : 'btn-outline-primary'"
+          (click)="changeDiscovery(discovery)"
+          >
+          {{discovery}}
+        </button>
+      </ng-container>
+    </div>
+    <div *ngIf="advancedTopSection.endlessHorizontalScroll">
+      <div class="d-flex">
+        <button class="btn btn-link btn-sm" (click)="scrollLeft()">
+          <i class="fa-solid fa-arrow-left text-primary"></i>
+        </button>
+        <button class="btn btn-link btn-sm" (click)="scrollRight()">
+          <i class="fa-solid fa-arrow-right text-primary"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="home-page-top-items-container" [ngClass]="{ 'home-page-top-items-container-no-scroll': !advancedTopSection.endlessHorizontalScroll}">
+  <ds-themed-browse-most-elements [context]="context"
+                                  [paginatedSearchOptions]="paginatedSearchOptions"
+                                  [showThumbnails]="showThumbnails"
+                                  [topSection]="advancedTopSection"
+                                  [mode]="layoutMode">
+  </ds-themed-browse-most-elements>
+</div>
