@@ -6,11 +6,11 @@ import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
 import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate-loader.mock';
-import { MapComponent } from './map.component';
+import { GmapComponent } from './gmap.component';
 
-describe('MapComponent', () => {
-  let component: MapComponent;
-  let fixture: ComponentFixture<MapComponent>;
+describe('GmapComponent', () => {
+  let component: GmapComponent;
+  let fixture: ComponentFixture<GmapComponent>;
 
   const metadataValue = Object.assign(new MetadataValue(), {
     'value': '@42.1334,56.7654',
@@ -33,7 +33,7 @@ describe('MapComponent', () => {
   const mockField: LayoutField = {
     'metadata': 'organization.address.addressLocality',
     'label': 'Preferred name',
-    'rendering': 'MAP',
+    'rendering': 'GOOGLEMAPS',
     'fieldType': 'METADATA',
     'style': null,
     'styleLabel': 'test-style-label',
@@ -56,13 +56,13 @@ describe('MapComponent', () => {
         { provide: 'metadataValueProvider', useValue: metadataValue },
         { provide: 'renderingSubTypeProvider', useValue: '' },
       ],
-      declarations: [ MapComponent ]
+      declarations: [ GmapComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MapComponent);
+    fixture = TestBed.createComponent(GmapComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -852,6 +852,25 @@
 
   "audit.detail.back.subject": "Subject Audit Logs",
 
+  "errors.location.unsupportedBrowser": "Browser does not support location services",
+
+  "errors.location.permissionDenied": "You have rejected access to your location",
+
+  "errors.location.positionUnavailable": "Unable to determine your location",
+
+  "errors.location.timeout": "Service timeout has been reached",
+
+  "openstreetmap.location.zoomIn": "Zoom in",
+
+  "openstreetmap.location.zoomOut": "Zoom out",
+
+  "openstreetmap.location.center": "Center the map",
+
+  "location.error.invalid-coordinates": "Invalid coordinates",
+
+  "location.error.location-not-found": "Location not found",
+
+  "location.error.api-error": "The service that retrieves the position on the map is currently not available.",
 
   "auth.errors.invalid-user": "Invalid email address or password.",
 

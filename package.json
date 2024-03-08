@@ -143,6 +143,7 @@
     "ng2-nouislider": "^2.0.0",
     "ng2-pdfjs-viewer": "^15.0.0",
     "ngx-infinite-scroll": "^15.0.0",
+    "ngx-openlayers": "0.8.22",
     "ngx-pagination": "6.0.3",
     "ngx-sortablejs": "^11.1.0",
     "ngx-ui-switch": "^14.0.3",

@@ -583,4 +583,12 @@ export const environment: BuildConfig = {
   mirador: {
     enableDownloadPlugin: true,
   },
+
+  location: {
+    nominatimApi: {
+      searchEndpoint: 'https://nominatim.openstreetmap.org/search',
+      reverseSearchEndpoint: 'https://nominatim.openstreetmap.org/reverse',
+      statusEndpoint: 'https://nominatim.openstreetmap.org/status',
+    }
+  },
 };
