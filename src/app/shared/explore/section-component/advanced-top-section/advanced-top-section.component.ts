@@ -2,20 +2,22 @@ import { LayoutModeEnum } from './../../../../core/layout/models/section.model';
 import { SortOptions } from './../../../../core/cache/models/sort-options.model';
 import { PaginationComponentOptions } from './../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from './../../../search/models/paginated-search-options.model';
-import { Component, Inject, Input, OnInit, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { AdvancedTopSection } from '../../../../core/layout/models/section.model';
 import { Context } from '../../../../core/shared/context.model';
 import { SortDirection } from '../../../../core/cache/models/sort-options.model';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import isEqual from 'lodash/isEqual';
+import { HostWindowService } from '../../../host-window.service';
+import { combineLatest, map, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'ds-advanced-top-section',
   templateUrl: './advanced-top-section.component.html',
   styleUrls: ['./advanced-top-section.component.scss']
 })
-export class AdvancedTopSectionComponent implements OnInit, AfterViewInit {
+export class AdvancedTopSectionComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * The identifier of the section.
    */
@@ -77,9 +79,17 @@ export class AdvancedTopSectionComponent implements OnInit, AfterViewInit {
    */
   resultTotalPages: number;
 
+  /**
+   * The subscription for pagination items count
+   * @private
+   */
+
+  private paginationNumberSubscription: Subscription;
+
   constructor(
     @Inject(DOCUMENT) private _document: Document,
-    private router: Router
+    private router: Router,
+    private windowService: HostWindowService
   ) { }
 
   ngOnInit() {
@@ -88,12 +98,18 @@ export class AdvancedTopSectionComponent implements OnInit, AfterViewInit {
     this.numberOfItems = !this.advancedTopSection.endlessHorizontalScroll ? 3 : 5;
     this.sortDirection = order && order.toUpperCase() === 'ASC' ? SortDirection.ASC : SortDirection.DESC;
     this.selectedDiscoverConfiguration = this.advancedTopSection.discoveryConfigurationName[0];
-
-    this.changeDiscovery(this.selectedDiscoverConfiguration);
+    this.paginationNumberSubscription = this.getNumberOfItems().subscribe((itemsNumber) => {
+      this.numberOfItems = itemsNumber;
+      this.changeDiscovery(this.selectedDiscoverConfiguration);
+    });
   }
 
   ngAfterViewInit() {
     this.scrollContainer = this._document.getElementsByClassName('card-columns');
+  }
+
+  ngOnDestroy() {
+    this.paginationNumberSubscription.unsubscribe();
   }
 
   /**
@@ -180,5 +196,28 @@ export class AdvancedTopSectionComponent implements OnInit, AfterViewInit {
    */
   totalPagesNumber(pageNumber: number) {
     this.resultTotalPages = pageNumber || 0;
+  }
+
+  /**
+   * Get number of items for pagination based on scree size
+   * @private
+   */
+  private getNumberOfItems(): Observable<number> {
+      return combineLatest([
+        this.windowService.isMd(),
+        this.windowService.isXsOrSm(),
+      ]).pipe(
+        map(([ isMd, isSm]) => {
+          let numberOfItems = 6;
+
+          if (isMd) {
+            numberOfItems =  4;
+          } else if (isSm) {
+            numberOfItems = 2;
+          }
+
+          return numberOfItems;
+        })
+      );
   }
 }

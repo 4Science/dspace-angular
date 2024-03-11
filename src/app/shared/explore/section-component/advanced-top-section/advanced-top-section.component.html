@@ -2,7 +2,7 @@
 <div class="home-page-component-container bern-component-container gapy-4 d-flex flex-column">
   <div class="d-flex flex-row justify-content-between">
     <h3>
-      {{ 'home.advanced-top-section.title' | translate }}
+      {{ 'home.advanced-top-section.' + advancedTopSection.sortField | translate }}
     </h3>
     <div class="view-all-container">
       <i class="fa-solid fa-arrow-right"></i>
@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="d-flex flex-row justify-content-between align-items-center">
-    <div class="d-flex gap-2">
+    <div class="d-flex gap-2" *ngIf="advancedTopSection.discoveryConfigurationName?.length > 1">
       <ng-container *ngFor="let discovery of advancedTopSection.discoveryConfigurationName">
         <button class="btn rounded-pill btn-radius text-capitalize"
           [ngClass]="selectedDiscoverConfiguration === discovery ? 'btn-primary' : 'btn-outline-primary'"

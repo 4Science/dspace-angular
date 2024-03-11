@@ -9,6 +9,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { RouterMock } from 'src/app/shared/mocks/router.mock';
 import { Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
+import { HostWindowService } from '../../../host-window.service';
+import { HostWindowServiceStub } from '../../../testing/host-window-service.stub';
 
 describe('AdvancedTopSectionComponent', () => {
   let component: AdvancedTopSectionComponent;
@@ -29,6 +31,7 @@ describe('AdvancedTopSectionComponent', () => {
       declarations: [AdvancedTopSectionComponent],
       providers: [
         { provide: Router, useValue: new RouterMock() },
+        { provide: HostWindowService, useValue: new HostWindowServiceStub(800) },
       ]
     })
       .compileComponents();
