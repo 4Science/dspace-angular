@@ -1,19 +1,20 @@
-<div class="home-page-component-container">
+<div class="d-flex flex-fill flex-column gapy-3">
+<div class="home-page-component-container bern-component-container gapy-4 d-flex flex-column">
   <div class="d-flex flex-row justify-content-between">
     <h3>
-      Explore our recently added works
+      {{ 'home.advanced-top-section.title' | translate }}
     </h3>
     <div class="view-all-container">
       <i class="fa-solid fa-arrow-right"></i>
-      <span class="pl-2">
-        View all
-      </span>
+      <button class="pl-2 btn btn-link" (click)="showAllResults()">
+        {{ 'home.top-section.view-all' | translate }}
+      </button>
     </div>
   </div>
-  <div class="d-flex flex-row justify-content-between">
+  <div class="d-flex flex-row justify-content-between align-items-center">
     <div class="d-flex gap-2">
       <ng-container *ngFor="let discovery of advancedTopSection.discoveryConfigurationName">
-        <button class="btn rounded-pill"
+        <button class="btn rounded-pill btn-radius text-capitalize"
           [ngClass]="selectedDiscoverConfiguration === discovery ? 'btn-primary' : 'btn-outline-primary'"
           (click)="changeDiscovery(discovery)"
           >
@@ -21,7 +22,7 @@
         </button>
       </ng-container>
     </div>
-    <div *ngIf="advancedTopSection.endlessHorizontalScroll">
+    <div *ngIf="endlessHorizontalScroll">
       <div class="d-flex">
         <button class="btn btn-link btn-sm" (click)="scrollLeft()">
           <i class="fa-solid fa-arrow-left text-primary"></i>
@@ -33,11 +34,12 @@
     </div>
   </div>
 </div>
-<div class="home-page-top-items-container" [ngClass]="{ 'home-page-top-items-container-no-scroll': !advancedTopSection.endlessHorizontalScroll}">
+<div class="home-page-top-items-container bern-component-container pr-0" [ngClass]="{ 'home-page-top-items-container-no-scroll': !endlessHorizontalScroll }">
   <ds-themed-browse-most-elements [context]="context"
                                   [paginatedSearchOptions]="paginatedSearchOptions"
                                   [showThumbnails]="showThumbnails"
                                   [topSection]="advancedTopSection"
                                   [mode]="layoutMode">
   </ds-themed-browse-most-elements>
+</div>
 </div>

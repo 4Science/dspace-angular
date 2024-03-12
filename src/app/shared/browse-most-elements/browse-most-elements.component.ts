@@ -7,7 +7,7 @@ import {
   LayoutModeEnum,
   TopSection,
 } from '../../core/layout/models/section.model';
-import { ChangeDetectorRef, Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input, OnChanges, OnInit, PLATFORM_ID } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
 
 import { SearchService } from '../../core/shared/search/search.service';
@@ -26,7 +26,7 @@ import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
   templateUrl: './browse-most-elements.component.html'
 })
 
-export class BrowseMostElementsComponent implements OnInit {
+export class BrowseMostElementsComponent implements OnChanges {
 
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
@@ -61,11 +61,10 @@ export class BrowseMostElementsComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnChanges(): void {
     if (isPlatformServer(this.platformId)) {
       return;
     }
-
     const showThumbnails = this.showThumbnails ?? this.appConfig.browseBy.showThumbnails;
     const followLinks = showThumbnails ? [followLink('thumbnail')] : [];
     this.searchService.search(this.paginatedSearchOptions, null, true, true, ...followLinks).pipe(

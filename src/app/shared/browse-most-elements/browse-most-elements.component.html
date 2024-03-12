@@ -1,5 +1,10 @@
 <div class="m-2">
   <ng-container *ngIf="searchResults">
+    <div *ngIf="searchResults?.payload?.page.length === 0">
+      <div class="alert alert-info d-flex justify-content-center">
+        {{ "home.top-section.no-results" | translate }}
+      </div>
+    </div>
     <ng-container
       *ngIf="
         topSection && mode == cardLayoutMode;

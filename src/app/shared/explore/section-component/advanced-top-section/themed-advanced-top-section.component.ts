@@ -33,5 +33,4 @@ export class ThemedAdvancedTopSectionComponent extends ThemedComponent<AdvancedT
   protected importUnthemedComponent(): Promise<any> {
     return import(`./advanced-top-section.component`);
   }
-
 }
