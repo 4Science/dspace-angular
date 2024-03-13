@@ -11,5 +11,7 @@
   --ds-navbar-link-color: #{$darker};
   --ds-navbar-link-color-hover: #{darken($darker, 15%)};
   --ds-cris-layout-sidebar-menu-active-color: #{$darker};
+
+  --ds-primary-color: #{map-get($theme-colors, primary)};
 }
 

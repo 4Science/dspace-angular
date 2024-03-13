@@ -1,54 +1,17 @@
-:host {
-  .view-all-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--ds-bern-red);
-
-    button {
-      color: var(--ds-bern-red);
-    }
-
-    &:hover {
-      color: var(--ds-dark-primary);
-
-      button {
-        color: var(--ds-dark-primary);
-      }
-
-      cursor: pointer;
-
-      .fa-arrow-right {
-        transform: translateX(5px);
-        transition: transform 0.3s ease;
-      }
-    }
-
-  }
-
-  .btn-radius {
-    border-radius: 50rem !important
-  }
-}
-
-/**
- * Styles for the top items container on the home page.
- */
-:host::ng-deep .home-page-top-items-container ds-object-grid .card-columns {
+:host::ng-deep .home-page-top-items-container ds-browse-most-elements .grid-wrapper {
   display: flex;
   flex-wrap: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow-x: scroll;
 
-  /**
-   * Scroll snap type and align properties to ensure that the cards snap to the start of the container
-   * when scrolling.
-   */
   scroll-snap-type: x mandatory;
   scroll-snap-align: start;
 
-  .card-column {
+  .thumbnail-container {
     scroll-snap-align: start;
+
+    // card width and height
+    width: 18rem;
+    height: 20rem;
   }
 
   // scrollbar styles
@@ -57,17 +20,17 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--ds-bern-grey);
+    background: var(--ds-primary-color);
     -webkit-border-radius: 1ex;
   }
 }
 
-/**
- * hide the scrollbar when the `home-page-top-items-container-no-scroll` class is present
- * on the `ds-object-grid` component.
- */
-:host::ng-deep .home-page-top-items-container-no-scroll ds-object-grid .card-columns {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: hidden !important;
+.home-page-top-items-container {
+  .items-container {
+    width: 90%;
+  }
+
+  .arrow-btn {
+    font-size: xx-large;
+  }
 }

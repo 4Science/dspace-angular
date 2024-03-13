@@ -149,6 +149,11 @@ export interface AdvancedTopSection extends SectionComponent {
   discoveryConfigurationName: string[];
 
   /**
+   * The component type, which is always 'advanced-top-component'.
+   */
+  componentType: 'advanced-top-component';
+
+  /**
    * The field to use for sorting.
    */
   sortField: string;
@@ -159,12 +164,7 @@ export interface AdvancedTopSection extends SectionComponent {
   order: string;
 
   /**
-   * Indicates whether to enable endless horizontal scrolling.
+   * The number of items to show in the section.
    */
-  endlessHorizontalScroll: boolean;
-
-  /**
-   * The component type, which is always 'advanced-top-component'.
-   */
-  componentType: 'advanced-top-component';
+  numberOfItems: number;
 }

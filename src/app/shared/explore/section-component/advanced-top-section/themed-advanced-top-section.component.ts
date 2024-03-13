@@ -1,6 +1,6 @@
 import { ThemedComponent } from '../../../theme-support/themed.component';
 import { Component, Input } from '@angular/core';
-import { TopSection } from '../../../../core/layout/models/section.model';
+import { AdvancedTopSection } from '../../../../core/layout/models/section.model';
 import { Context } from '../../../../core/shared/context.model';
 import { AdvancedTopSectionComponent } from './advanced-top-section.component';
 
@@ -15,7 +15,7 @@ export class ThemedAdvancedTopSectionComponent extends ThemedComponent<AdvancedT
   sectionId: string;
 
   @Input()
-  advancedTopSection: TopSection;
+  advancedTopSection: AdvancedTopSection;
 
   @Input()
   context: Context = Context.BrowseMostElements;

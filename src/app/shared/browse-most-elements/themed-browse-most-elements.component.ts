@@ -1,5 +1,5 @@
 import { TopSection, LayoutModeEnum } from './../../core/layout/models/section.model';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ThemedComponent } from '../theme-support/themed.component';
 import { BrowseMostElementsComponent } from './browse-most-elements.component';
 import { Context } from 'vm';
@@ -27,7 +27,11 @@ export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMos
 
   @Input() mode: LayoutModeEnum;
 
-  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'showMetrics', 'showThumbnails', 'topSection', 'mode'];
+  @Output() totalPages: EventEmitter<number> = new EventEmitter<number>();
+
+  @Output() totalElementsNumber: EventEmitter<number> = new EventEmitter<number>();
+
+  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'showMetrics', 'showThumbnails', 'topSection', 'mode', 'totalPages', 'totalElementsNumber'];
 
   protected getComponentName(): string {
     return 'BrowseMostElementsComponent';

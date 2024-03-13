@@ -2,22 +2,20 @@ import { LayoutModeEnum } from './../../../../core/layout/models/section.model';
 import { SortOptions } from './../../../../core/cache/models/sort-options.model';
 import { PaginationComponentOptions } from './../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from './../../../search/models/paginated-search-options.model';
-import { AfterViewInit, Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, Input, OnInit } from '@angular/core';
 import { AdvancedTopSection } from '../../../../core/layout/models/section.model';
 import { Context } from '../../../../core/shared/context.model';
 import { SortDirection } from '../../../../core/cache/models/sort-options.model';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import isEqual from 'lodash/isEqual';
-import { HostWindowService } from '../../../host-window.service';
-import { combineLatest, map, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'ds-advanced-top-section',
   templateUrl: './advanced-top-section.component.html',
   styleUrls: ['./advanced-top-section.component.scss']
 })
-export class AdvancedTopSectionComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AdvancedTopSectionComponent implements OnInit, AfterViewInit {
   /**
    * The identifier of the section.
    */
@@ -46,13 +44,13 @@ export class AdvancedTopSectionComponent implements OnInit, AfterViewInit, OnDes
   /**
    * The view mode of the section. Defaults to card.
    */
-  layoutMode: LayoutModeEnum = LayoutModeEnum.CARD;
+  layoutMode: LayoutModeEnum = LayoutModeEnum.LIST;
 
   /**
    * The number of items to show in the section.
    * If endlessHorizontalScroll is true, the number of items is 5, otherwise it is 3.
    */
-  numberOfItems = 5;
+  numberOfItems;
 
   /**
    * The name of the selected discovery configuration.
@@ -70,46 +68,31 @@ export class AdvancedTopSectionComponent implements OnInit, AfterViewInit, OnDes
   scrollContainer: HTMLCollectionOf<Element>;
 
   /**
-   * Flag to determine if the section should have endless horizontal scroll.
-   */
-  endlessHorizontalScroll = false;
-
-  /**
    * The total number of pages.
    */
   resultTotalPages: number;
 
-  /**
-   * The subscription for pagination items count
-   * @private
-   */
+  scrollContainerSelector = 'grid-wrapper';
 
-  private paginationNumberSubscription: Subscription;
+  showAsCard = true;
+
+  totalElementsNumber: number;
 
   constructor(
     @Inject(DOCUMENT) private _document: Document,
     private router: Router,
-    private windowService: HostWindowService
   ) { }
 
   ngOnInit() {
     const order = this.advancedTopSection.order;
-    this.endlessHorizontalScroll = this.advancedTopSection.endlessHorizontalScroll;
-    this.numberOfItems = !this.advancedTopSection.endlessHorizontalScroll ? 3 : 5;
+    this.numberOfItems = this.advancedTopSection.numberOfItems || 8;
     this.sortDirection = order && order.toUpperCase() === 'ASC' ? SortDirection.ASC : SortDirection.DESC;
     this.selectedDiscoverConfiguration = this.advancedTopSection.discoveryConfigurationName[0];
-    this.paginationNumberSubscription = this.getNumberOfItems().subscribe((itemsNumber) => {
-      this.numberOfItems = itemsNumber;
-      this.changeDiscovery(this.selectedDiscoverConfiguration);
-    });
+    this.changeDiscovery(this.selectedDiscoverConfiguration);
   }
 
   ngAfterViewInit() {
-    this.scrollContainer = this._document.getElementsByClassName('card-columns');
-  }
-
-  ngOnDestroy() {
-    this.paginationNumberSubscription.unsubscribe();
+    this.scrollContainer = this._document.getElementsByClassName(this.scrollContainerSelector);
   }
 
   /**
@@ -158,6 +141,12 @@ export class AdvancedTopSectionComponent implements OnInit, AfterViewInit, OnDes
       // reached the start of the scroll, get the previous page
       const page = this.paginatedSearchOptions.pagination.currentPage - 1;
       this.changeDiscovery(this.selectedDiscoverConfiguration, page);
+
+      if (this.reachedStart) {
+        this.scrollContainer[0].scrollLeft = 0;
+      } else {
+        this.scrollContainer[0].scrollLeft = this.scrollContainer[0].scrollWidth;
+      }
     }
   }
 
@@ -199,25 +188,10 @@ export class AdvancedTopSectionComponent implements OnInit, AfterViewInit, OnDes
   }
 
   /**
-   * Get number of items for pagination based on scree size
-   * @private
+   * Sets the total number of elements.
+   * @param totalElements - The total number of elements.
    */
-  private getNumberOfItems(): Observable<number> {
-      return combineLatest([
-        this.windowService.isMd(),
-        this.windowService.isXsOrSm(),
-      ]).pipe(
-        map(([ isMd, isSm]) => {
-          let numberOfItems = 6;
-
-          if (isMd) {
-            numberOfItems =  4;
-          } else if (isSm) {
-            numberOfItems = 2;
-          }
-
-          return numberOfItems;
-        })
-      );
+  totalElements(totalElements: number) {
+    this.totalElementsNumber = totalElements || 0;
   }
 }

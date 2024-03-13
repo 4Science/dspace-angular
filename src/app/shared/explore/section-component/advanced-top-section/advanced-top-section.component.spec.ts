@@ -62,20 +62,6 @@ describe('AdvancedTopSectionComponent', () => {
     expect(component.paginatedSearchOptions.configuration).toEqual(configName);
   });
 
-  it('should display the scroll buttons if endlessHorizontalScroll is true', () => {
-    component.endlessHorizontalScroll = true;
-    fixture.detectChanges();
-    const scrollButtons = fixture.debugElement.queryAll(By.css('.arrow-btn'));
-    expect(scrollButtons.length).toEqual(2);
-  });
-
-  it('should not display the scroll buttons if endlessHorizontalScroll is false', () => {
-    component.endlessHorizontalScroll = false;
-    fixture.detectChanges();
-    const scrollButtons = fixture.debugElement.queryAll(By.css('.arrow-btn'));
-    expect(scrollButtons.length).toEqual(0);
-  });
-
   it('should display the discovery configuration buttons', () => {
     const discoveryButtons = fixture.debugElement.queryAll(By.css('.rounded-pill'));
     expect(discoveryButtons.length).toEqual(component.advancedTopSection.discoveryConfigurationName.length);
