@@ -35,6 +35,7 @@ import {
 import { AttachmentRenderingConfig } from './attachment-rendering.config';
 import { SearchResultConfig } from './search-result-config.interface';
 import { MiradorConfig } from './mirador-config.interfaces';
+import { LocationConfig } from './location-config.interface';
 
 export class DefaultAppConfig implements AppConfig {
   production = false;
@@ -769,5 +770,13 @@ export class DefaultAppConfig implements AppConfig {
 
   mirador: MiradorConfig = {
     enableDownloadPlugin: true,
+  };
+
+  location: LocationConfig = {
+    nominatimApi: {
+      searchEndpoint: 'https://nominatim.openstreetmap.org/search',
+      reverseSearchEndpoint: 'https://nominatim.openstreetmap.org/reverse',
+      statusEndpoint: 'https://nominatim.openstreetmap.org/status',
+    }
   };
 }
