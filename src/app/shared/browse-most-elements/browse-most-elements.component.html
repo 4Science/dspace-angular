@@ -1,60 +1,38 @@
-<div class="m-2">
-  <ng-container *ngIf="searchResults">
-    <div *ngIf="searchResults?.payload?.page.length === 0">
-      <div class="alert alert-info d-flex justify-content-center">
-        {{ "home.top-section.no-results" | translate }}
-      </div>
-    </div>
-    <ng-container
-      *ngIf="
-        topSection && mode == cardLayoutMode;
-        else listLayout
-      "
-    >
-      <ds-object-grid
-        [configStyle]="topSection?.cardStyle"
-        [columnStyle]="topSection?.cardColumnStyle"
-        [config]="paginatedSearchOptions.pagination"
-        [sortConfig]="paginatedSearchOptions.sort"
-        [objects]="searchResults"
-        [linkType]="collectionElementLinkTypeEnum.Link"
-        [context]="context"
-        [noPagination]="true"
-      >
-      </ds-object-grid>
-    </ng-container>
-    <ng-template #listLayout>
-        <ul *ngIf="searchResults?.hasSucceeded" class="list-unstyled">
-          <li
-            *ngFor="
-              let object of searchResults?.payload?.page;
-              let i = index;
-              let last = last
-            "
-            class="mt-4 mb-4 d-flex"
-            [ngClass]="topSection?.itemListStyle"
-          >
-            <ds-listable-object-component-loader [context]="context"
-                                                 [index]="i"
-                                                 [listID]="paginatedSearchOptions.configuration"
-                                                 [object]="object"
-                                                 [showMetrics]="showMetrics"
-                                                 [showThumbnails]="showThumbnails"
-                                                 [viewMode]="paginatedSearchOptions.view"></ds-listable-object-component-loader>
-          </li>
-        </ul>
-    </ng-template>
-    <div
-      class="row justify-content-center"
-      *ngIf="topSection && topSection.showAllResults"
-    >
-      <button type="button" class="btn btn-link" (click)="showAllResults()">
-        {{ "home.top-section.view-results" | translate }}
-      </button>
-    </div>
-    <div *ngIf="searchResults?.hasFailed">
-      {{ "remote.error" | translate }}
-    </div>
+<div [ngSwitch]="topSection.template">
+  <ng-container *ngSwitchCase="templateType.DEFAULT">
+    <!-- Default template content -->
+    <ds-themed-default-browse-elements
+      [topSection]="topSection"
+      [paginatedSearchOptions]="paginatedSearchOptions"
+      [context]="context"
+      [showMetrics]="showMetrics"
+      [showThumbnails]="showThumbnails"
+      [mode]="mode"
+    ></ds-themed-default-browse-elements>
   </ng-container>
-  <ds-loading *ngIf="!searchResults"></ds-loading>
+
+  <ng-container *ngSwitchCase="templateType.IMAGE">
+    <!-- Image template content -->
+    <ds-themed-image-browse-elements
+      [topSection]="topSection"
+      [paginatedSearchOptions]="paginatedSearchOptions"
+      [context]="context"
+      [showMetrics]="showMetrics"
+      [showThumbnails]="showThumbnails"
+      [mode]="mode"
+    >
+    </ds-themed-image-browse-elements>
+  </ng-container>
+
+  <ng-container *ngSwitchDefault>
+    <!-- Fallback -> Default template content -->
+    <ds-themed-default-browse-elements
+      [topSection]="topSection"
+      [paginatedSearchOptions]="paginatedSearchOptions"
+      [context]="context"
+      [showMetrics]="showMetrics"
+      [showThumbnails]="showThumbnails"
+      [mode]="mode"
+    ></ds-themed-default-browse-elements>
+  </ng-container>
 </div>

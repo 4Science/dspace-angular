@@ -353,6 +353,10 @@ import {
 import { ItemCollectionComponent } from './object-collection/shared/mydspace-item-collection/item-collection.component';
 import { ThemedItemListPreviewComponent } from './object-list/my-dspace-result-list-element/item-list-preview/themed-item-list-preview.component';
 import { ItemListPreviewComponent } from './object-list/my-dspace-result-list-element/item-list-preview/item-list-preview.component';
+import { DefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/default-browse-elements.component';
+import { ImageBrowseElementsComponent } from './browse-most-elements/image-browse-elements/image-browse-elements.component';
+import { ThemedImageBrowseElementsComponent } from './browse-most-elements/image-browse-elements/themed-image-browse-elements.component';
+import { ThemedDefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/themed-default-browse-elements.component';
 
 const MODULES = [
   CommonModule,
@@ -510,7 +514,11 @@ const COMPONENTS = [
   SearchChartBarHorizontalComponent,
   ItemListPreviewComponent,
   ThemedItemListPreviewComponent,
-  ItemCollectionComponent
+  ItemCollectionComponent,
+  DefaultBrowseElementsComponent,
+  ThemedDefaultBrowseElementsComponent,
+  ImageBrowseElementsComponent,
+  ThemedImageBrowseElementsComponent,
 ];
 
 const ENTRY_COMPONENTS = [
@@ -587,6 +595,8 @@ const ENTRY_COMPONENTS = [
   SearchChartBarHorizontalComponent,
   RelationshipsListComponent,
   AdditionalMetadataComponent,
+  ThemedDefaultBrowseElementsComponent,
+  ThemedImageBrowseElementsComponent,
 ];
 
 const PROVIDERS = [
