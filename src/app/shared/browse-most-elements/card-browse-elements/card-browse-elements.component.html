@@ -1,3 +1,48 @@
-<p>
-  card-browse-elements works!
-</p>
+<div class="d-flex flex-row gap-3 flex-nowrap card-element-wrapper justify-content-center" [class]="advancedTopSection.style">
+  <ng-container
+    *ngFor="
+      let object of searchResults?.payload?.page;
+      let i = index;
+      let last = last
+    "
+  >
+    <div class="card p-0">
+      <img
+        [src]="(itemToImageHrefMap$ | async).get(object.indexableObject?.uuid)"
+        alt="hidden-image"
+        style="display: none"
+        #image
+      />
+      <div class="thumbnail-container h-50">
+        <div
+          class="thumbnail-inner-container w-100 h-100 position-relative"
+          [dsBackgroundImage]="
+            (itemToImageHrefMap$ | async).get(object.indexableObject?.uuid)
+          "
+        >
+          <ds-type-badge class="pl-1" [object]="object.indexableObject"></ds-type-badge>
+        </div>
+      </div>
+      <div
+        class="text-container p-3 d-flex flex-column justify-content-between h-50"
+      >
+        <h4 class="mb-3 h-25">
+          <a [routerLink]="[getItemPageRoute(object.indexableObject)]"
+             [ngbTooltip]="object.indexableObject.firstMetadataValue('dc.title')"
+             class="ellipsis-y-2">
+            <span>{{object.indexableObject.firstMetadataValue('dc.title')}}</span>
+          </a>
+        </h4>
+        <div class="h-75">
+          <p class="ellipsis-y-4">
+            {{
+              object.indexableObject.firstMetadataValue(
+                "dc.description.abstract"
+              )
+            }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

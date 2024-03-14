@@ -1,5 +1,5 @@
-<div class="d-flex flex-fill flex-column gapy-3">
-  <div class="home-page-component-container adv-top-component-container gapy-4 d-flex flex-column">
+<div class="container-fluid justify-content-center d-flex flex-column gapy-4 adv-top-component-container">
+  <div class="home-page-component-container gapy-4 d-flex flex-column">
     <div class="d-flex flex-row justify-content-between">
       <h3>
         {{ 'home.advanced-top-section.' + advancedTopSection.sortField | translate }}
@@ -11,7 +11,7 @@
           <ng-container *ngFor="let discovery of advancedTopSection.discoveryConfigurationName">
             <button class="btn text-capitalize"
               [ngClass]="selectedDiscoverConfiguration === discovery ? 'btn-primary' : 'btn-outline-primary'"
-              (click)="changeDiscovery(discovery)"
+              (click)="changeDiscovery(discovery, 1)"
               >
               {{discovery}}
             </button>
@@ -20,19 +20,18 @@
       </div>
     </div>
   </div>
-  <div class="home-page-top-items-container d-flex align-items-center justify-content-between">
+  <div class="home-page-top-items-container d-flex align-items-center">
     <div>
       <button class="btn btn-link btn-sm arrow-btn" (click)="scrollLeft()" [disabled]="reachedStart">
         <i class="fa-solid fa-chevron-left"></i>
       </button>
     </div>
-    <div class="items-container" [class]="advancedTopSection.style">
+    <div class="w-100">
       <ds-themed-browse-most-elements [context]="context"
                                       [paginatedSearchOptions]="paginatedSearchOptions"
                                       [topSection]="advancedTopSection"
                                       [mode]="layoutMode"
-                                      (totalPages)="totalPagesNumber($event)"
-                                      (totalElementsNumber)="totalElements($event)">
+                                      (totalElements)="totalElements($event)">
       </ds-themed-browse-most-elements>
     </div>
     <div>

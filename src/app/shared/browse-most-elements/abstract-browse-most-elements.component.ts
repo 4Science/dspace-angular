@@ -7,7 +7,7 @@ import {
   LayoutModeEnum,
   TopSection,
 } from '../../core/layout/models/section.model';
-import { ChangeDetectorRef, Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnInit, Output, PLATFORM_ID } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
 
 import { SearchService } from '../../core/shared/search/search.service';
@@ -43,6 +43,8 @@ export abstract class AbstractBrowseMostElementsComponent implements OnInit {
 
   @Input() mode: LayoutModeEnum;
 
+  @Output() totalElements: EventEmitter<number> = new EventEmitter<number>();
+
   searchResults: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>;
 
   public cardLayoutMode = LayoutModeEnum.CARD;
@@ -67,6 +69,7 @@ export abstract class AbstractBrowseMostElementsComponent implements OnInit {
       getFirstCompletedRemoteData(),
     ).subscribe((response: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>) => {
       this.searchResults = response as any;
+      this.totalElements.emit(this.searchResults.payload.totalElements);
       this.cdr.detectChanges();
     });
   }

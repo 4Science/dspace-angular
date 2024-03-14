@@ -1,21 +1,23 @@
+import { HostWindowService } from './../../../host-window.service';
 import { LayoutModeEnum } from './../../../../core/layout/models/section.model';
 import { SortOptions } from './../../../../core/cache/models/sort-options.model';
 import { PaginationComponentOptions } from './../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from './../../../search/models/paginated-search-options.model';
-import { AfterViewInit, Component, Inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input, OnInit } from '@angular/core';
 import { AdvancedTopSection } from '../../../../core/layout/models/section.model';
 import { Context } from '../../../../core/shared/context.model';
 import { SortDirection } from '../../../../core/cache/models/sort-options.model';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import isEqual from 'lodash/isEqual';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'ds-advanced-top-section',
   templateUrl: './advanced-top-section.component.html',
   styleUrls: ['./advanced-top-section.component.scss']
 })
-export class AdvancedTopSectionComponent implements OnInit, AfterViewInit {
+export class AdvancedTopSectionComponent implements OnInit {
   /**
    * The identifier of the section.
    */
@@ -39,7 +41,7 @@ export class AdvancedTopSectionComponent implements OnInit, AfterViewInit {
   /**
    * Whether to show the thumbnail preview
    */
-  showThumbnails = false;
+  showThumbnails = true;
 
   /**
    * The view mode of the section. Defaults to card.
@@ -50,7 +52,7 @@ export class AdvancedTopSectionComponent implements OnInit, AfterViewInit {
    * The number of items to show in the section.
    * If endlessHorizontalScroll is true, the number of items is 5, otherwise it is 3.
    */
-  numberOfItems;
+  maxNumberOfItems;
 
   /**
    * The name of the selected discovery configuration.
@@ -63,11 +65,6 @@ export class AdvancedTopSectionComponent implements OnInit, AfterViewInit {
   sortDirection = SortDirection.ASC;
 
   /**
-   * The scroll container of the section.
-   */
-  scrollContainer: HTMLCollectionOf<Element>;
-
-  /**
    * The total number of pages.
    */
   resultTotalPages: number;
@@ -76,23 +73,23 @@ export class AdvancedTopSectionComponent implements OnInit, AfterViewInit {
 
   showAsCard = true;
 
-  totalElementsNumber: number;
+  initialNumberOfElementsPerPage = 4;
+
+  totalNumberOfElements = new BehaviorSubject<number>(0);
 
   constructor(
     @Inject(DOCUMENT) private _document: Document,
     private router: Router,
+    private windowService: HostWindowService,
+    private chd: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
     const order = this.advancedTopSection.order;
-    this.numberOfItems = this.advancedTopSection.numberOfItems || 8;
+    this.maxNumberOfItems = this.advancedTopSection.numberOfItems || 8;
     this.sortDirection = order && order.toUpperCase() === 'ASC' ? SortDirection.ASC : SortDirection.DESC;
     this.selectedDiscoverConfiguration = this.advancedTopSection.discoveryConfigurationName[0];
     this.changeDiscovery(this.selectedDiscoverConfiguration);
-  }
-
-  ngAfterViewInit() {
-    this.scrollContainer = this._document.getElementsByClassName(this.scrollContainerSelector);
   }
 
   /**
@@ -108,8 +105,10 @@ export class AdvancedTopSectionComponent implements OnInit, AfterViewInit {
    * @returns {boolean} True if the current page is the last page of search results, false otherwise.
    */
   get reachedEnd() {
-    return isEqual(this.resultTotalPages, this.paginatedSearchOptions.pagination.currentPage);
-  }
+ const maxNumberOfPages = this.totalNumberOfElements.getValue() >= this.maxNumberOfItems ? this.maxNumberOfItems : this.totalNumberOfElements.getValue();
+  const totalPages = Math.ceil(maxNumberOfPages / this.initialNumberOfElementsPerPage);
+  return this.paginatedSearchOptions.pagination.currentPage >= totalPages;
+}
 
   /**
    * Changes the discovery configuration and updates the paginated search options accordingly.
@@ -119,7 +118,7 @@ export class AdvancedTopSectionComponent implements OnInit, AfterViewInit {
   changeDiscovery(name: string, currentPage: number = 1) {
     const pagination = Object.assign(new PaginationComponentOptions(), {
       id: 'search-object-pagination',
-      pageSize: this.numberOfItems,
+      pageSize: this.initialNumberOfElementsPerPage,
       currentPage: currentPage
     });
     this.selectedDiscoverConfiguration = name;
@@ -134,37 +133,16 @@ export class AdvancedTopSectionComponent implements OnInit, AfterViewInit {
    * Get the items from the previous page and update the paginated search options accordingly.
    */
   scrollLeft() {
-    if (this.scrollContainer[0].scrollLeft > 0) {
-      // not reached the start of the scroll yet => scroll left
-      this.scrollContainer[0].scrollBy({ left: -100, behavior: 'smooth' });
-    } else {
-      // reached the start of the scroll, get the previous page
-      const page = this.paginatedSearchOptions.pagination.currentPage - 1;
-      this.changeDiscovery(this.selectedDiscoverConfiguration, page);
-
-      if (this.reachedStart) {
-        this.scrollContainer[0].scrollLeft = 0;
-      } else {
-        this.scrollContainer[0].scrollLeft = this.scrollContainer[0].scrollWidth;
-      }
-    }
+    const page = this.paginatedSearchOptions.pagination.currentPage - 1;
+    this.changeDiscovery(this.selectedDiscoverConfiguration, page);
   }
 
   /**
    * Get the items from the next page and update the paginated search options accordingly.
    */
   scrollRight() {
-    const container = this.scrollContainer[0];
-    const maxScrollLeft = container.scrollWidth - container.clientWidth;
-    if (container.scrollLeft >= maxScrollLeft) {
-      // reached the end of the scroll, get the next page
-      this.scrollContainer[0].scrollLeft = 0;
-      const page = this.paginatedSearchOptions.pagination.currentPage + 1;
-      this.changeDiscovery(this.selectedDiscoverConfiguration, page);
-    } else {
-      // not reached the end of the scroll yet => scroll right
-      this.scrollContainer[0].scrollBy({ left: 100, behavior: 'smooth' });
-    }
+    const page = this.paginatedSearchOptions.pagination.currentPage + 1;
+    this.changeDiscovery(this.selectedDiscoverConfiguration, page);
   }
 
   /**
@@ -180,18 +158,11 @@ export class AdvancedTopSectionComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Sets the total number of pages and checks if the current page has reached the end.
-   * @param pageNumber - The total number of pages.
-   */
-  totalPagesNumber(pageNumber: number) {
-    this.resultTotalPages = pageNumber || 0;
-  }
-
-  /**
    * Sets the total number of elements.
    * @param totalElements - The total number of elements.
    */
-  totalElements(totalElements: number) {
-    this.totalElementsNumber = totalElements || 0;
+  totalElements(totalNumber: number) {
+    this.totalNumberOfElements.next(totalNumber);
+    this.chd.detectChanges();
   }
 }

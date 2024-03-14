@@ -1,8 +1,7 @@
-import { LayoutModeEnum } from './../../../core/layout/models/section.model';
+import { AdvancedTopSection } from './../../../core/layout/models/section.model';
 import { PaginatedSearchOptions } from './../../search/models/paginated-search-options.model';
 import { Context } from './../../../core/shared/context.model';
-import { Component, Input } from '@angular/core';
-import { TopSection } from '../../../core/layout/models/section.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ThemedComponent } from '../../theme-support/themed.component';
 import { CardBrowseElementsComponent } from './card-browse-elements.component';
 
@@ -20,15 +19,13 @@ export class ThemedCardBrowseElementsComponent extends ThemedComponent<CardBrows
 
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
-  @Input() showMetrics;
-
   @Input() showThumbnails;
 
-  @Input() topSection: TopSection;
+  @Input() advancedTopSection: AdvancedTopSection;
 
-  @Input() mode: LayoutModeEnum;
+  @Output() totalElements: EventEmitter<number> = new EventEmitter<number>();
 
-  protected inAndOutputNames: (keyof CardBrowseElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'showMetrics', 'showThumbnails', 'topSection', 'mode'];
+  protected inAndOutputNames: (keyof CardBrowseElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'showThumbnails', 'advancedTopSection', 'totalElements'];
 
   protected getComponentName(): string {
     return 'CardBrowseElementsComponent';

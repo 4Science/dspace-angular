@@ -52,6 +52,7 @@ export class ImageBrowseElementsComponent extends AbstractBrowseMostElementsComp
       .subscribe(
         (response: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>) => {
           this.searchResults = response as any;
+          this.totalElements.emit(this.searchResults.payload.totalElements);
           this.getAllBitstreams();
           this.cdr.detectChanges();
         }

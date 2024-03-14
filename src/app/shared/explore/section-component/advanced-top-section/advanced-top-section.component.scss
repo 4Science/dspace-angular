@@ -1,36 +1,9 @@
-:host::ng-deep .home-page-top-items-container ds-browse-most-elements .grid-wrapper {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: scroll;
-
-  scroll-snap-type: x mandatory;
-  scroll-snap-align: start;
-
-  .thumbnail-container {
-    scroll-snap-align: start;
-
-    // card width and height
-    width: 18rem;
-    height: 20rem;
-  }
-
-  // scrollbar styles
-  &::-webkit-scrollbar {
-    height: 5px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--ds-primary-color);
-    -webkit-border-radius: 1ex;
-  }
-}
-
 .home-page-top-items-container {
-  .items-container {
-    width: 90%;
-  }
-
   .arrow-btn {
     font-size: xx-large;
   }
+}
+
+.adv-top-component-container {
+   width: 90%;
 }

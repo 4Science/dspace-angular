@@ -51,7 +51,7 @@ describe('AdvancedTopSectionComponent', () => {
     expect(component.context).toEqual(Context.BrowseMostElements);
     expect(component.showThumbnails).toEqual(false);
     expect(component.layoutMode).toEqual(LayoutModeEnum.CARD);
-    expect(component.numberOfItems).toEqual(6);
+    expect(component.maxNumberOfItems).toEqual(6);
     expect(component.sortDirection).toEqual(SortDirection.ASC);
   });
 

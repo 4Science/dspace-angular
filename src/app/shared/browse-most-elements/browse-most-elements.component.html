@@ -24,6 +24,18 @@
     </ds-themed-image-browse-elements>
   </ng-container>
 
+  <ng-container *ngSwitchCase="templateType.CARD">
+    <!-- Image template content -->
+    <ds-themed-card-browse-elements
+      [advancedTopSection]="topSection"
+      [paginatedSearchOptions]="paginatedSearchOptions"
+      [context]="context"
+      (totalElements)="totalElements.emit($event)"
+    >
+    </ds-themed-card-browse-elements>
+
+  </ng-container>
+
   <ng-container *ngSwitchDefault>
     <!-- Fallback -> Default template content -->
     <ds-themed-default-browse-elements

@@ -1,9 +1,10 @@
 import {
+  AdvancedTopSection,
   LayoutModeEnum,
   TemplateType,
   TopSection,
 } from '../../core/layout/models/section.model';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
 import { Context } from '../../core/shared/context.model';
 
@@ -29,9 +30,13 @@ export class BrowseMostElementsComponent {
    */
   @Input() showThumbnails;
 
-  @Input() topSection: TopSection;
+  @Input() topSection: TopSection | AdvancedTopSection;
 
   @Input() mode: LayoutModeEnum;
 
+  @Output() totalElements: EventEmitter<number> = new EventEmitter<number>();
+
   templateType = TemplateType;
+
+  // template = TemplateType.CARD; //TODO: remove this line when the template is implemented
 }
