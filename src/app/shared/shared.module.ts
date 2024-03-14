@@ -355,6 +355,8 @@ import { ThemedItemListPreviewComponent } from './object-list/my-dspace-result-l
 import { ItemListPreviewComponent } from './object-list/my-dspace-result-list-element/item-list-preview/item-list-preview.component';
 import { DefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/default-browse-elements.component';
 import { ImageBrowseElementsComponent } from './browse-most-elements/image-browse-elements/image-browse-elements.component';
+import { ThemedCardBrowseElementsComponent } from './browse-most-elements/card-browse-elements/themed-card-browse-elements.component';
+import { CardBrowseElementsComponent } from './browse-most-elements/card-browse-elements/card-browse-elements.component';
 import { ThemedImageBrowseElementsComponent } from './browse-most-elements/image-browse-elements/themed-image-browse-elements.component';
 import { ThemedDefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/themed-default-browse-elements.component';
 
@@ -519,6 +521,8 @@ const COMPONENTS = [
   ThemedDefaultBrowseElementsComponent,
   ImageBrowseElementsComponent,
   ThemedImageBrowseElementsComponent,
+  CardBrowseElementsComponent,
+  ThemedCardBrowseElementsComponent,
 ];
 
 const ENTRY_COMPONENTS = [
@@ -597,6 +601,7 @@ const ENTRY_COMPONENTS = [
   AdditionalMetadataComponent,
   ThemedDefaultBrowseElementsComponent,
   ThemedImageBrowseElementsComponent,
+  ThemedCardBrowseElementsComponent,
 ];
 
 const PROVIDERS = [

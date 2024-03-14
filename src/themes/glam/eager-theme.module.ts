@@ -18,7 +18,6 @@ import { StatisticsModule } from '../../app/statistics/statistics.module';
 import { OpenaireModule } from '../../app/openaire/openaire.module';
 import { SearchComponent } from './app/shared/search/search.component';
 import { TopSectionComponent } from './app/shared/explore/section-component/top-section/top-section.component';
-import { BrowseMostElementsComponent } from './app/browse-most-elements/browse-most-elements.component';
 import {
   CountersSectionComponent
 } from './app/shared/explore/section-component/counters-section/counters-section.component';
@@ -33,6 +32,7 @@ import {
 } from './app/shared/explore/section-component/carousel-section/carousel-section.component';
 import { GridSectionComponent } from './app/shared/explore/section-component/grid-section/grid-section.component';
 import { CarouselComponent } from './app/shared/carousel/carousel.component';
+import { ImageBrowseElementsComponent } from './app/browse-most-elements/image-browse-elements/image-browse-elements.component';
 
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
@@ -51,7 +51,6 @@ const DECLARATIONS = [
   HomePageComponent,
   SearchComponent,
   TopSectionComponent,
-  BrowseMostElementsComponent,
   CountersSectionComponent,
   TextSectionComponent,
   LangSwitchComponent,
@@ -59,7 +58,8 @@ const DECLARATIONS = [
   SearchNavbarComponent,
   CarouselComponent,
   CarouselSectionComponent,
-  GridSectionComponent
+  GridSectionComponent,
+  ImageBrowseElementsComponent,
 ];
 
 @NgModule({
