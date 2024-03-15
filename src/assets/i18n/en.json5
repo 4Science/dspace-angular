@@ -3064,13 +3064,13 @@
 
   "home.top-section.no-results": "No results found for this category",
 
-  "home.advanced-top-section.dc.date.accessioned": "Explore our recently added works",
+  "home.advanced-top-section.dc.date.accessioned": "New accessions",
 
-  "home.advanced-top-section.dc.date.issued": "Explore our recently issued works",
+  "home.advanced-top-section.dc.date.issued": "New accessions",
 
-  "home.advanced-top-section.metric.view": "Explore our most viewed works",
+  "home.advanced-top-section.metric.view": "New accessions",
 
-  "home.advanced-top-section.metric.download": "Explore our most downloaded works",
+  "home.advanced-top-section.metric.download": "New accessions",
 
   "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
 
@@ -8773,5 +8773,5 @@
   "layout.field.label.Other Author": "Other Author",
   "layout.field.label.Agent": "Agent",
   "layout.field.label.History": "History",
-
+  "card-browse-elements.no-results": "No results available for this configuration",
 }

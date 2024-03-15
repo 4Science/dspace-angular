@@ -19,7 +19,7 @@ export class ThemedCardBrowseElementsComponent extends ThemedComponent<CardBrows
 
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
-  @Input() showThumbnails;
+  @Input() showThumbnails: boolean;
 
   @Input() advancedTopSection: AdvancedTopSection;
 

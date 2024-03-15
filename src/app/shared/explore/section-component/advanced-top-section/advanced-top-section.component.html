@@ -26,11 +26,11 @@
         <i class="fa-solid fa-chevron-left"></i>
       </button>
     </div>
-    <div class="w-100">
+    <div class="w-100 mx-lg-5 mx-md-2">
       <ds-themed-browse-most-elements [context]="context"
                                       [paginatedSearchOptions]="paginatedSearchOptions"
                                       [topSection]="advancedTopSection"
-                                      [mode]="layoutMode"
+                                      [showThumbnails]="showThumbnails"
                                       (totalElements)="totalElements($event)">
       </ds-themed-browse-most-elements>
     </div>

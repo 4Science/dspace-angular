@@ -34,9 +34,13 @@ export class BrowseMostElementsComponent {
 
   @Input() mode: LayoutModeEnum;
 
+  /**
+   * The total number of elements
+   */
   @Output() totalElements: EventEmitter<number> = new EventEmitter<number>();
 
+  /**
+   * The type of the template to render
+   */
   templateType = TemplateType;
-
-  // template = TemplateType.CARD; //TODO: remove this line when the template is implemented
 }

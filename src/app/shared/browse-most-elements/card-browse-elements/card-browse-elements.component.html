@@ -6,7 +6,7 @@
       let last = last
     "
   >
-    <div class="card p-0">
+    <div class="card p-0 col-sm-12 col-md-6 col-lg-3">
       <img
         [src]="(itemToImageHrefMap$ | async).get(object.indexableObject?.uuid)"
         alt="hidden-image"
@@ -23,26 +23,31 @@
           <ds-type-badge class="pl-1" [object]="object.indexableObject"></ds-type-badge>
         </div>
       </div>
-      <div
-        class="text-container p-3 d-flex flex-column justify-content-between h-50"
-      >
-        <h4 class="mb-3 h-25">
-          <a [routerLink]="[getItemPageRoute(object.indexableObject)]"
-             [ngbTooltip]="object.indexableObject.firstMetadataValue('dc.title')"
-             class="ellipsis-y-2">
-            <span>{{object.indexableObject.firstMetadataValue('dc.title')}}</span>
-          </a>
-        </h4>
-        <div class="h-75">
-          <p class="ellipsis-y-4">
-            {{
-              object.indexableObject.firstMetadataValue(
-                "dc.description.abstract"
-              )
-            }}
-          </p>
-        </div>
+      <div class="text-container p-3 d-flex flex-column justify-content-between h-50">
+        <ng-container *ngVar="(object.indexableObject.firstMetadataValue('dc.description.abstract')) as description">
+          <h4 class="mb-3" [ngClass]="description ? 'h-25' : 'h-100'">
+            <a [routerLink]="[getItemPageRoute(object.indexableObject)]"
+              [ngbTooltip]="object.indexableObject.firstMetadataValue('dc.title')"
+              [ngClass]="description ? 'ellipsis-y-2' : 'ellipsis-y-4'">
+              <span>{{object.indexableObject.firstMetadataValue('dc.title')}}</span>
+            </a>
+          </h4>
+          <ng-container *ngIf="description">
+            <div class="h-75" >
+              <p class="ellipsis-y-4">
+                {{ description }}
+              </p>
+            </div>
+          </ng-container>
+        </ng-container>
       </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="searchResults?.payload?.page.length === 0">
+    <div class="d-flex align-items-center w-100">
+      <span class="alert alert-warning w-100 mt-3 d-flex justify-content-center">
+        {{ 'card-browse-elements.no-results' | translate }}
+      </span>
     </div>
   </ng-container>
 </div>

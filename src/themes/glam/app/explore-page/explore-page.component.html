@@ -26,6 +26,9 @@
       <ds-themed-grid-section *ngSwitchCase="'grid'"
                               [sectionId]="sectionId"
                               [gridSection]="sectionComponent"></ds-themed-grid-section>
+      <ds-themed-advanced-top-section *ngSwitchCase="'advanced-top-component'"
+                                      [sectionId]="sectionId"
+                                      [advancedTopSection]="$any(sectionComponent)"></ds-themed-advanced-top-section>
     </div>
   </div>
 </div>

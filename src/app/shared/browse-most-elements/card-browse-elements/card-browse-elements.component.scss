@@ -1,24 +1,26 @@
-.ellipsis-y-4 {
+@mixin ellipsis-y($lines) {
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: $lines;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.ellipsis-y-4 {
+  @include ellipsis-y(4);
 }
 
 .ellipsis-y-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  @include ellipsis-y(2);
 }
-
 
 .card-element-wrapper {
   .card {
     height: 30rem;
     max-height: 35rem;
-    flex: 0 0 20%;
+
+    @media screen and (max-width: map-get($grid-breakpoints, md)) {
+      height: 20rem;
+    }
   }
 }
