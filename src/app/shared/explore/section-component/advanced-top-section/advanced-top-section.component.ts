@@ -6,7 +6,6 @@ import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular
 import { AdvancedTopSection } from '../../../../core/layout/models/section.model';
 import { Context } from '../../../../core/shared/context.model';
 import { SortDirection } from '../../../../core/cache/models/sort-options.model';
-import { Router } from '@angular/router';
 import isEqual from 'lodash/isEqual';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { hasValue } from '../../../../shared/empty.util';
@@ -76,7 +75,7 @@ export class AdvancedTopSectionComponent implements OnInit, OnDestroy {
   /**
    * The width category to number of elements per page map.
    */
-  widthCategoryToElementsMap = {
+  readonly widthCategoryToElementsMap = {
     [WidthCategory.XS]: 1,
     [WidthCategory.SM]: 1,
     [WidthCategory.MD]: 2,
@@ -90,7 +89,6 @@ export class AdvancedTopSectionComponent implements OnInit, OnDestroy {
   subs: Subscription[] = [];
 
   constructor(
-    private router: Router,
     private windowService: HostWindowService,
     private chd: ChangeDetectorRef
   ) { }

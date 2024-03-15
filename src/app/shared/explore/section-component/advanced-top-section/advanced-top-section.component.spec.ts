@@ -3,9 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdvancedTopSectionComponent } from './advanced-top-section.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { RouterTestingModule } from '@angular/router/testing';
-import { RouterMock } from './../../../../shared/mocks/router.mock';
-import { Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
 import { HostWindowService, WidthCategory } from '../../../host-window.service';
 import { ChangeDetectorRef } from '@angular/core';
@@ -29,10 +26,9 @@ describe('AdvancedTopSectionComponent', () => {
   };
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), RouterTestingModule],
+      imports: [TranslateModule.forRoot()],
       declarations: [AdvancedTopSectionComponent],
       providers: [
-        { provide: Router, useValue: new RouterMock() },
         { provide: HostWindowService, useValue: hostWindowServiceStub },
         ChangeDetectorRef
       ]
