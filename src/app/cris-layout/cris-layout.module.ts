@@ -147,6 +147,8 @@ import {
 import { MediaPlayerModule } from '../shared/media-player/media-player.module';
 import { CarouselModule } from '../shared/carousel/carousel.module';
 import { BackgroundComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/background/background.component';
+import { ImageComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/image/image.component';
+
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -183,6 +185,7 @@ const ENTRY_COMPONENTS = [
   AdvancedAttachmentComponent,
   BackgroundComponent,
   CrisLayoutMediaBoxComponent,
+  ImageComponent,
 ];
 
 @NgModule({
@@ -210,6 +213,7 @@ const ENTRY_COMPONENTS = [
     MarkdownComponent,
     BitstreamAttachmentComponent,
     AttachmentRenderComponent,
+    ImageComponent,
   ],
   providers:[ LoadMoreService, NgbActiveModal ],
   imports: [
