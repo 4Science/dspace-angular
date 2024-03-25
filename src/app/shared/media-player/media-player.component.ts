@@ -170,6 +170,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
           this.currentItem$?.value
         );
         this.resizeMediaPlaylist();
+        this.resizeMediaPlayer();
       }, 100);
 
     } else {
@@ -266,7 +267,21 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
   /**
    * Resize playlist container
    */
-  private resizeMediaPlaylist() {
+  private resizeMediaPlaylist(): void {
     this.playlistContainerRef.nativeElement.style.height = `${this.videoContainerRef.nativeElement.getBoundingClientRect().height}px`;
+  }
+
+  /**
+   * Resize the video container
+   */
+  private resizeMediaPlayer(): void {
+    const aspectRatio = parseInt(this.currentItem$?.value.bitstream.firstMetadataValue('bitstream.video.width'), 10) /
+      parseInt(this.currentItem$?.value.bitstream.firstMetadataValue('bitstream.video.height'), 10);
+
+    if (aspectRatio < 1) {
+      const playerWidth = `${this.videoContainerRef.nativeElement.getBoundingClientRect().width * aspectRatio}px`;
+      this.videoContainerRef.nativeElement.style.setProperty('width', playerWidth, 'important');
+      this.videoContainerRef.nativeElement.parentElement.style.setProperty('width', playerWidth, 'important');
+    }
   }
 }
