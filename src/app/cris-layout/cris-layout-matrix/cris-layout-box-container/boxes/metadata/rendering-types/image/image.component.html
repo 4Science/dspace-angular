@@ -1,2 +1,4 @@
-<!--<div *ngIf="(imageUrl$ | async) as url" [style.background-image]="backgroundImageUrl(url)"></div>-->
-<img *ngIf="(imageUrl$ | async) as url" [src]="url">
+<div [class]="field.styleValue">
+  <img *ngIf="(imageUrl$ | async) as url" [src]="url">
+</div>
+
