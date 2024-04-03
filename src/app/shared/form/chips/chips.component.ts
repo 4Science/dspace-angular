@@ -15,12 +15,11 @@ import isObject from 'lodash/isObject';
 
 import { Chips } from './models/chips.model';
 import { ChipsItem } from './models/chips-item.model';
-import { DragService } from '../../../core/drag.service';
 import { TranslateService } from '@ngx-translate/core';
-import { Options } from 'sortablejs';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { isNotEmpty } from '../../empty.util';
+import { CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { Router, UrlTree } from '@angular/router';
 
 const TOOLTIP_TEXT_LIMIT = 21;
@@ -41,7 +40,6 @@ export class ChipsComponent implements OnChanges {
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
   isDragging: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  options: Options;
   dragged = -1;
   tipText$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
@@ -53,18 +51,9 @@ export class ChipsComponent implements OnChanges {
   constructor(
     @Inject(PLATFORM_ID) protected platformId: string,
     private cdr: ChangeDetectorRef,
-    private dragService: DragService,
     private translate: TranslateService,
     private router: Router
   ) {
-
-    this.options = {
-      animation: 300,
-      chosenClass: 'm-0',
-      dragClass: 'm-0',
-      filter: '.chips-sort-ignore',
-      ghostClass: 'm-0',
-    };
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -93,14 +82,13 @@ export class ChipsComponent implements OnChanges {
     }
   }
 
-  onDragStart(index) {
+  onDrag(index) {
     this.isDragging.next(true);
-    this.dragService.overrideDragOverPage();
     this.dragged = index;
   }
 
-  onDragEnd(event) {
-    this.dragService.allowDragOverPage();
+  onDrop(event: CdkDragDrop<ChipsItem[]>) {
+    moveItemInArray(this.chips.chipsItems.getValue(), event.previousIndex, event.currentIndex);
     this.dragged = -1;
     this.chips.updateOrder();
     this.isDragging.next(false);
@@ -109,6 +97,9 @@ export class ChipsComponent implements OnChanges {
   showTooltip(tooltip: NgbTooltip, index, field?) {
     tooltip.close();
     let canShowToolTip = true;
+    if (this.isDragging.value) {
+      return;
+    }
     const chipsItem = this.chips.getChipByIndex(index);
     const textToDisplay: string[] = [];
     if (!chipsItem.editMode && this.dragged === -1) {
