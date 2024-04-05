@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, Inject, Input, OnDestroy, OnInit, Optiona
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { concatMap, map, mergeMap, reduce, take, takeUntil } from 'rxjs/operators';
+import { map, mergeMap, take, takeUntil } from 'rxjs/operators';
 
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { NativeWindowRef, NativeWindowService } from '../../core/services/window.service';
@@ -18,7 +18,6 @@ import { DSpaceObjectType } from '../../core/shared/dspace-object-type.model';
 import { RemoteData } from '../../core/data/remote-data';
 import { SearchObjects } from '../search/models/search-objects.model';
 import { isNotEmpty } from '../empty.util';
-import { from } from 'rxjs/internal/observable/from';
 
 /**
  * Component representing the Slider component section.
@@ -193,6 +192,10 @@ export class SliderComponent implements OnInit, OnDestroy {
     return this.itemPlaceholderList.slice((this.currentPage - 1) * this.cardsPerPage, this.currentPage * this.cardsPerPage);
   }
 
+  getItemLink(item: Item): string {
+    return getItemPageRoute(item);
+  }
+
   pages = () => {
     return Array.from({length: Math.ceil(this.itemPlaceholderList.length / this.cardsPerPage)}, (_, i) => i + 1);
   };
@@ -206,11 +209,8 @@ export class SliderComponent implements OnInit, OnDestroy {
   changePage = (page) => {
     if (page > this.currentPage && this.hasMoreToLoad) {
       this.itemsImagesLoading$.next(true);
-      const startIndex = this.pages().indexOf(this.currentPage) + 1;
-      const endIndex = this.pages().indexOf(page) + 1;
-      const pagesToFetch: number[] = this.pages().slice(startIndex, endIndex);
       this.currentPage = page;
-      this.retrieveMoreItems(...pagesToFetch);
+      this.retrieveMoreItems(this.currentPage);
     } else {
       this.currentPage = page;
     }
@@ -229,25 +229,19 @@ export class SliderComponent implements OnInit, OnDestroy {
     }
   };
 
-  retrieveMoreItems(...page: number[]) {
-    from(page).pipe(
-      concatMap((currentPage: number) => this.retrieveItems(currentPage).pipe(
-        mergeMap((searchResult: SearchObjects<Item>) => {
-          if (isNotEmpty(searchResult)) {
-            const items: Item[] = searchResult.page.map((searchItem) => searchItem.indexableObject);
-            this.itemList = [...this.itemList, ...items];
-            this.hasMoreToLoad = this.itemList.length < searchResult.totalElements;
-            return this.bitstreamImagesService.findAllBitstreamImages(items);
-          } else {
-            return null;
-          }
-        }),
-        take(1),
-        // tap((itemToImageHrefMap) => this.itemToImageHrefMap$.next(new Map([...Array.from(this.itemToImageHrefMap$.value.entries()), ...Array.from(itemToImageHrefMap.entries())]))),
-      )),
-      reduce((itemToImageHrefMap, value) => {
-        return new Map([...Array.from(itemToImageHrefMap.entries()), ...Array.from(value.entries())]);
-      }, new Map()),
+  retrieveMoreItems(currentPage) {
+    this.retrieveItems(currentPage).pipe(
+      mergeMap((searchResult: SearchObjects<Item>) => {
+        if (isNotEmpty(searchResult)) {
+          const items: Item[] = searchResult.page.map((searchItem) => searchItem.indexableObject);
+          this.itemList = [...this.itemList, ...items];
+          this.hasMoreToLoad = this.itemList.length < searchResult.totalElements;
+          return this.bitstreamImagesService.findAllBitstreamImages(items);
+        } else {
+          return null;
+        }
+      }),
+      take(1)
     ).subscribe((itemToImageHrefMap: Map<string,string>) => {
       if (isNotEmpty(itemToImageHrefMap)) {
         this.itemToImageHrefMap$.next(new Map([...Array.from(this.itemToImageHrefMap$.value.entries()), ...Array.from(itemToImageHrefMap.entries())]));
