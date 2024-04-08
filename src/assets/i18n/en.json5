@@ -2236,6 +2236,14 @@
 
   "cris-layout.rendering.collections.load-more": "Load more",
 
+  "cris-layout-box-container.collapse.details.show": "Show description",
+
+  "cris-layout-box-container.collapse.details.hide": "Hide description",
+
+  "cris-layout-box-container.collapse.pathpublications.show": "Show path",
+
+  "cris-layout-box-container.collapse.pathpublications.hide": "Hide path",
+
   "curation-task.task.checklinks.label": "Check Links in Metadata",
 
   "curation-task.task.noop.label": "NOOP",

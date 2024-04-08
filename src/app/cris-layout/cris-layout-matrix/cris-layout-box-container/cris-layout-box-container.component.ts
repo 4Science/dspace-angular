@@ -53,6 +53,11 @@ export class CrisLayoutBoxContainerComponent implements OnInit {
    */
   public objectInjector: Injector;
 
+  /**
+   * Map to store the collapsible status of each box
+   */
+  isCollapsibleMap: Map<string, boolean> = new Map<string, boolean>();
+
   constructor(
     private injector: Injector,
     protected translateService: TranslateService,
@@ -75,6 +80,8 @@ export class CrisLayoutBoxContainerComponent implements OnInit {
 
     if (hasNoValue(this.box.collapsed) || !this.box.collapsed) {
       this.activeIds.push(this.box.shortname);
+    } else {
+      this.isCollapsibleMap.set(this.box.shortname, this.box.style?.includes('collapsed') ?? false);
     }
   }
 
@@ -96,6 +103,9 @@ export class CrisLayoutBoxContainerComponent implements OnInit {
    * @param key the i18n key
    */
   getTranslation(key: string): string {
+    if (hasNoValue(key)) {
+      return null;
+    }
     const value = this.translateService.instant(key);
     return value === key ? null : value;
   }
@@ -111,5 +121,17 @@ export class CrisLayoutBoxContainerComponent implements OnInit {
       '';
   }
 
+  /**
+   * Check if the box is collapsible
+   */
+  isBoxCollapsed(shortname: string) {
+    return this.isCollapsibleMap.get(shortname);
+  }
 
+  /**
+   * Toggle box based on its shortname
+   */
+  toggleBoxCollapse(shortname: string) {
+    this.isCollapsibleMap.set(shortname, !this.isCollapsibleMap.get(shortname));
+  }
 }
