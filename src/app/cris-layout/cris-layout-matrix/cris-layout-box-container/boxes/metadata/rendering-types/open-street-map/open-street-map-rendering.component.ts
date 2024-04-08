@@ -36,10 +36,11 @@ export class OpenStreetMapRenderingComponent extends RenderingTypeValueModelComp
     @Inject('itemProvider') public itemProvider: Item,
     @Inject('metadataValueProvider') public metadataValueProvider: MetadataValue,
     @Inject('renderingSubTypeProvider') public renderingSubTypeProvider: string,
+    @Inject('tabNameProvider') public tabNameProvider: string,
     protected translateService: TranslateService,
     private locationService: LocationService,
   ) {
-    super(fieldProvider, itemProvider, metadataValueProvider, renderingSubTypeProvider, translateService);
+    super(fieldProvider, itemProvider, metadataValueProvider, tabNameProvider, renderingSubTypeProvider, translateService);
   }
 
   ngOnInit(): void {

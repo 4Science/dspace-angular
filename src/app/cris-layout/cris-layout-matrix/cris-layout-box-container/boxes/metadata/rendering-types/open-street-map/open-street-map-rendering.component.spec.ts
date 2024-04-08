@@ -59,6 +59,7 @@ describe('OpenStreetMapRenderingComponent', () => {
         { provide: 'itemProvider', useValue: testItem },
         { provide: 'metadataValueProvider', useValue: metadataValue },
         { provide: 'renderingSubTypeProvider', useValue: '' },
+        { provide: 'tabNameProvider', useValue: '' },
         // { provide: HttpClient, useValue: {} },
       ],
       declarations: [ OpenStreetMapRenderingComponent ]

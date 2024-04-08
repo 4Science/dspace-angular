@@ -37,16 +37,16 @@ export function getItemViewerPath(item: Item, viewer: string) {
   return new URLCombiner(getItemPageRoute(item), VIEWERS_PATH, viewer).toString();
 }
 
-export function getItemViewerDetailsPath(item: Item, viewer: string) {
-  return new URLCombiner(getItemPageRoute(item), 'details', VIEWERS_PATH, viewer).toString();
+export function getItemViewerDetailsPath(item: Item, viewer: string, tabName: string) {
+  return new URLCombiner(getItemPageRoute(item), tabName, VIEWERS_PATH, viewer).toString();
 }
 
 export function getBitstreamItemViewerPath(item: Item, bitstream: Bitstream, viewer: string) {
   return new URLCombiner(getItemPageRoute(item), VIEWERS_PATH, bitstream.uuid, viewer).toString();
 }
 
-export function getBitstreamItemViewerDetailsPath(item: Item, bitstream: Bitstream, viewer: string) {
-  return new URLCombiner(getItemPageRoute(item), 'details', VIEWERS_PATH, bitstream.uuid, viewer).toString();
+export function getBitstreamItemViewerDetailsPath(item: Item, bitstream: Bitstream, viewer: string, tabName: string) {
+  return new URLCombiner(getItemPageRoute(item), tabName, VIEWERS_PATH, bitstream.uuid, viewer).toString();
 }
 
 
@@ -71,7 +71,7 @@ export function getEntityEditRoute(entityType: string, itemId: string) {
  * @param versionId the ID of the version for which the route will be retrieved
  */
 export function getItemVersionRoute(versionId: string) {
-  return new URLCombiner(getItemModuleRoute(), ITEM_VERSION_PATH, versionId).toString();
+  return new URLCombiner(getItemModuleRoute(), versionId).toString();
 }
 
 export const ITEM_EDIT_PATH = 'edit';
