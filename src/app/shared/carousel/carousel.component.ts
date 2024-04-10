@@ -1,4 +1,5 @@
-import {Component, Inject, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import { ItemSearchResult } from './../object-collection/shared/item-search-result.model';
+import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
 import {NgbCarousel, NgbSlideEvent, NgbSlideEventSource} from '@ng-bootstrap/ng-bootstrap';
 import {BehaviorSubject, from, Observable, of} from 'rxjs';
 import {catchError, filter, map, mergeMap, scan, switchMap, take, tap} from 'rxjs/operators';
@@ -24,12 +25,12 @@ import {getItemPageRoute} from '../../item-page/item-page-routing-paths';
   styleUrls: ['./carousel.component.scss'],
   providers: []
 })
-export class CarouselComponent implements OnInit, OnChanges {
+export class CarouselComponent implements OnInit {
   /**
    * Items to be used in carousel.
    */
   @Input()
-  items: Item[];
+  items: ItemSearchResult[];
 
   /**
    * Carousel section configurations.
@@ -92,17 +93,6 @@ export class CarouselComponent implements OnInit, OnChanges {
     this.link = this.carouselOptions.link;
     this.description = this.carouselOptions.description;
     this.bundle = this.carouselOptions.bundle ?? 'ORIGINAL';
-
-    this.prepareItemBitstreamMap();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.items && !changes.items.isFirstChange()) {
-      this.prepareItemBitstreamMap();
-    }
-  }
-
-  private prepareItemBitstreamMap() {
     this.findAllBitstreamImages().subscribe((res) => {
       this.itemToImageHrefMap$.next(res);
       this.isLoading$.next(false);
@@ -142,7 +132,7 @@ export class CarouselComponent implements OnInit, OnChanges {
       map((itemSR) => itemSR),
       tap(() => this.isLoading$.next(true)),
       mergeMap((item) => this.bitstreamDataService.findAllByItemAndBundleName(
-          item, this.bundle, {}, true, true, followLink('format'),
+          item.indexableObject, this.bundle, {}, true, true, followLink('format'),
         ).pipe(
           getFirstCompletedRemoteData(),
           switchMap((rd: RemoteData<PaginatedList<Bitstream>>) => rd.hasSucceeded ? rd.payload.page : []),
@@ -155,7 +145,7 @@ export class CarouselComponent implements OnInit, OnChanges {
             map(() => bitstream)
           )),
           take(1),
-          map((bitstream: Bitstream) => [item.uuid, bitstream._links.content.href]),
+          map((bitstream: Bitstream) => [item.indexableObject, bitstream._links.content.href]),
         ),
       ),
       scan((acc: Map<string, string>, value: [string, string]) => {

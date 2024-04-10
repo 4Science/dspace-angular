@@ -1,8 +1,7 @@
 <h1 class="text-center font-weight-bold">{{header}}</h1>
- <div *ngIf="itemList.length > 0">
-  <ds-carousel-with-thumbnails
-    [carouselOptions]="carouselOptions" [items]="itemList"
-    [pageInfo]="pageInfo"
-    (next)="nextPage()"
-    (prev)="previousPage()"></ds-carousel-with-thumbnails>
-</div>
+<ds-carousel-with-thumbnails
+  [carouselOptions]="carouselOptions"
+  [discoveryConfiguration]="discoveryConfiguration"
+  [scope]="scope"
+  ></ds-carousel-with-thumbnails>
+

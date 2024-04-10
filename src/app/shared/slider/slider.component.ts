@@ -208,7 +208,9 @@ export class SliderComponent implements OnInit, OnDestroy {
   }
 
   getItemLink(item: Item): string {
-    return getItemPageRoute(item);
+    if (item) {
+      return getItemPageRoute(item);
+    }
   }
 
   pages = () => {

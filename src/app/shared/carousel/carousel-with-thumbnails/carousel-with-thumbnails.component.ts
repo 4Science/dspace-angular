@@ -1,37 +1,33 @@
+import { SearchConfig } from './../../../core/shared/search/search-filters/search-config.model';
+import { SortDirection } from './../../../core/cache/models/sort-options.model';
+import { SEARCH_CONFIG_SERVICE } from './../../../my-dspace-page/my-dspace-page.component';
+import { SearchConfigurationService } from './../../../core/shared/search/search-configuration.service';
+import { SearchManager } from './../../../core/browse/search-manager';
 import { NativeWindowRef, NativeWindowService } from './../../../core/services/window.service';
 import { BitstreamDataService } from './../../../core/data/bitstream-data.service';
-import { PageInfo } from './../../../core/shared/page-info.model';
 import { Item } from './../../../core/shared/item.model';
-import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, ViewChild, ViewChildren } from '@angular/core';
-import { CarouselComponent } from '../carousel.component';
-import { NgbSlideEvent, NgbSlideEventDirection } from '@ng-bootstrap/ng-bootstrap';
+import { ChangeDetectorRef, Component, ElementRef, Inject, Input, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { NgbCarousel, NgbSlideEvent, NgbSlideEventDirection } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { SliderComponent } from '../../slider/slider.component';
+import { CarouselOptions } from '../carousel-options.model';
+import { BitstreamImagesService } from './../../../core/data/bitstream-images.service';
+import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
 
 @Component({
   selector: 'ds-carousel-with-thumbnails',
   templateUrl: './carousel-with-thumbnails.component.html',
   styleUrls: ['./carousel-with-thumbnails.component.scss']
 })
-export class CarouselWithThumbnailsComponent extends CarouselComponent implements OnInit {
+export class CarouselWithThumbnailsComponent extends SliderComponent implements OnInit {
 
   activeItem: Item;
   activeItemIndex: number;
 
-  /**
-   * The page information for the current page of items
-   */
-  @Input() pageInfo: PageInfo;
+  @Input() carouselOptions: CarouselOptions;
 
-  /**
-   * Emits when the next button is clicked (used to navigate to the next page to retrieve the thumbnails)
-   */
-  @Output() next = new EventEmitter();
-
-  /**
-   * Emits when the previous button is clicked (used to navigate to the previous page to retrieve the thumbnails)
-   */
-  @Output() prev = new EventEmitter();
+  @Input() scope: string;
 
   /**
    * The thumbnails of the items in the carousel
@@ -43,6 +39,12 @@ export class CarouselWithThumbnailsComponent extends CarouselComponent implement
    */
   @ViewChild('thumbnailContainer') thumbnailContainer: ElementRef;
 
+    /**
+   * reference to the carousel
+   */
+  @ViewChild('carousel') carousel: NgbCarousel;
+
+
   placeholderSrc = 'assets/images/replacement_image.svg';
 
   /**
@@ -50,12 +52,18 @@ export class CarouselWithThumbnailsComponent extends CarouselComponent implement
    */
   isSmallDevice$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
+  pageSize = 4;
+
   constructor(
-    protected breakpointObserver: BreakpointObserver,
     protected bitstreamDataService: BitstreamDataService,
+    protected bitstreamImagesService: BitstreamImagesService,
+    protected cdr: ChangeDetectorRef,
+    protected searchManager: SearchManager,
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
+    protected breakpointObserver: BreakpointObserver,
+    @Inject(SEARCH_CONFIG_SERVICE) private searchConfigService: SearchConfigurationService,
   ) {
-    super(bitstreamDataService, _window);
+    super(bitstreamDataService, bitstreamImagesService, cdr, searchManager, _window, breakpointObserver);
   }
 
   /**
@@ -64,10 +72,23 @@ export class CarouselWithThumbnailsComponent extends CarouselComponent implement
    * Observe the screen size to determine if the device is small
    */
   ngOnInit() {
-    super.ngOnInit();
-    this.activeItemIndex = 0;
-    this.activeItem = this.items[this.activeItemIndex];
+    this.searchConfigService.getConfigurationSearchConfig(this.discoveryConfiguration, this.scope).subscribe((searchConfig: SearchConfig) => {
+      this.sortField = searchConfig.sortOptions[0]?.name ?? 'lastModified';
+      this.sortOrder = searchConfig.sortOptions[0]?.sortOrder ?? SortDirection.DESC;
+      this.numberOfItems = this.pageSize;
+      this.paginatedSearchOptions = new PaginatedSearchOptions({
+        scope: this.scope,
+      });
+      super.ngOnInit();
+    });
 
+    this.title = this.carouselOptions.title;
+    this.link = this.carouselOptions.link;
+    this.description = this.carouselOptions.description;
+
+    this.activeItemIndex = 0;
+    this.activeItem = this.itemList[this.activeItemIndex];
+    this.numberOfItems = this.pageSize;
     this.breakpointObserver.observe([
       Breakpoints.XSmall
     ]).subscribe(result => {
@@ -99,12 +120,12 @@ export class CarouselWithThumbnailsComponent extends CarouselComponent implement
     this.activeItemIndex = +slideEvent.current.split('ngb-slide-')[1];
 
     if (slideEvent.direction === NgbSlideEventDirection.LEFT && ((this.activeItemIndex + 1) % this.pageInfo.elementsPerPage === 0)) {
-      this.next.emit();
+      this.nextPage();
     } else {
       this.setActiveItem(this.activeItemIndex);
     }
 
-    this.activeItem = this.items[this.activeItemIndex];
+    this.activeItem = this.itemList[this.activeItemIndex];
   }
 
   /**
@@ -131,7 +152,7 @@ export class CarouselWithThumbnailsComponent extends CarouselComponent implement
    */
   getPrev() {
     this.setActiveItem(this.activeItemIndex - 1);
-    this.prev.emit();
+    this.previousPage();
   }
 
   /**
@@ -157,5 +178,9 @@ export class CarouselWithThumbnailsComponent extends CarouselComponent implement
       rect.top >= containerRect.top &&
       rect.bottom <= containerRect.bottom
     );
+  }
+
+  isLinkInternal(link: string) {
+    return link.startsWith('/');
   }
 }
