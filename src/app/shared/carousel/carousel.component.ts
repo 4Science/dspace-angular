@@ -1,7 +1,7 @@
-import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {NgbCarousel, NgbSlideEvent, NgbSlideEventSource} from '@ng-bootstrap/ng-bootstrap';
-import {BehaviorSubject, from, Observable} from 'rxjs';
-import {filter, map, mergeMap, scan, switchMap, take} from 'rxjs/operators';
+import {BehaviorSubject, from, Observable, of} from 'rxjs';
+import {catchError, filter, map, mergeMap, scan, switchMap, take, tap} from 'rxjs/operators';
 import {PaginatedList} from '../../core/data/paginated-list.model';
 import {BitstreamFormat} from '../../core/shared/bitstream-format.model';
 import {Bitstream} from '../../core/shared/bitstream.model';
@@ -9,11 +9,11 @@ import {BitstreamDataService} from '../../core/data/bitstream-data.service';
 import {NativeWindowRef, NativeWindowService} from '../../core/services/window.service';
 import {getFirstCompletedRemoteData} from '../../core/shared/operators';
 import {hasValue} from '../empty.util';
-import {ItemSearchResult} from '../object-collection/shared/item-search-result.model';
 import {followLink} from '../utils/follow-link-config.model';
 import {RemoteData} from '../../core/data/remote-data';
 import {CarouselOptions} from './carousel-options.model';
 import {Item} from '../../core/shared/item.model';
+import {getItemPageRoute} from '../../item-page/item-page-routing-paths';
 
 /**
  * Component representing the Carousel component section.
@@ -24,12 +24,12 @@ import {Item} from '../../core/shared/item.model';
   styleUrls: ['./carousel.component.scss'],
   providers: []
 })
-export class CarouselComponent implements OnInit {
+export class CarouselComponent implements OnInit, OnChanges {
   /**
    * Items to be used in carousel.
    */
   @Input()
-  items: ItemSearchResult[];
+  items: Item[];
 
   /**
    * Carousel section configurations.
@@ -79,11 +79,11 @@ export class CarouselComponent implements OnInit {
    */
   @ViewChild('carousel', {static: true}) carousel: NgbCarousel;
 
-  isLoading$ = new BehaviorSubject(true);
+  isLoading$ = new BehaviorSubject(false);
 
   constructor(
     protected bitstreamDataService: BitstreamDataService,
-    @Inject(NativeWindowService) private _window: NativeWindowRef,
+    @Inject(NativeWindowService) protected _window: NativeWindowRef,
   ) {
   }
 
@@ -93,8 +93,19 @@ export class CarouselComponent implements OnInit {
     this.description = this.carouselOptions.description;
     this.bundle = this.carouselOptions.bundle ?? 'ORIGINAL';
 
+    this.prepareItemBitstreamMap();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.items && !changes.items.isFirstChange()) {
+      this.prepareItemBitstreamMap();
+    }
+  }
+
+  private prepareItemBitstreamMap() {
     this.findAllBitstreamImages().subscribe((res) => {
       this.itemToImageHrefMap$.next(res);
+      this.isLoading$.next(false);
     });
   }
 
@@ -128,7 +139,8 @@ export class CarouselComponent implements OnInit {
    */
   findAllBitstreamImages(): Observable<Map<string, string>> {
     return from(this.items).pipe(
-      map((itemSR) => itemSR.indexableObject),
+      map((itemSR) => itemSR),
+      tap(() => this.isLoading$.next(true)),
       mergeMap((item) => this.bitstreamDataService.findAllByItemAndBundleName(
           item, this.bundle, {}, true, true, followLink('format'),
         ).pipe(
@@ -150,11 +162,17 @@ export class CarouselComponent implements OnInit {
         acc.set(value[0], value[1]);
         return acc;
       }, new Map<string, string>()),
+      catchError(() => {
+        this.isLoading$.next(false);
+        return of(new Map<string, string>());
+      }),
     );
   }
 
   getItemLink(item: Item): string {
-    return item.firstMetadataValue(this.link);
+    if (item) {
+      return getItemPageRoute(item);
+    }
   }
 
   isLinkInternal(link: string) {

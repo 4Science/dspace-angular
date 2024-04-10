@@ -1,14 +1,15 @@
-import { Component, Inject, Input, PLATFORM_ID } from '@angular/core';
-import { SearchComponent } from '../../shared/search/search.component';
-import { SearchService } from '../../core/shared/search/search.service';
+import { PaginatedSearchOptions } from './../../shared/search/models/paginated-search-options.model';
+import { SortDirection } from './../../core/cache/models/sort-options.model';
+import { SearchConfig } from './../../core/shared/search/search-filters/search-config.model';
+import { NativeWindowRef, NativeWindowService } from 'src/app/core/services/window.service';
+import { BitstreamDataService } from './../../core/data/bitstream-data.service';
+import { ChangeDetectorRef, Component, Inject, Input, OnInit } from '@angular/core';
 import { SearchManager } from '../../core/browse/search-manager';
-import { SidebarService } from '../../shared/sidebar/sidebar.service';
-import { HostWindowService } from '../../shared/host-window.service';
 import { SEARCH_CONFIG_SERVICE } from '../../my-dspace-page/my-dspace-page.component';
 import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
-import { RouteService } from '../../core/services/route.service';
-import { Router } from '@angular/router';
 import { CarouselOptions } from '../../shared/carousel/carousel-options.model';
+import { SliderComponent } from 'src/app/shared/slider/slider.component';
+import { BitstreamImagesService } from 'src/app/core/data/bitstream-images.service';
 
 @Component({
   selector: 'ds-carousel-relations',
@@ -21,9 +22,15 @@ import { CarouselOptions } from '../../shared/carousel/carousel-options.model';
     }
   ]
 })
-export class CarouselRelationsComponent extends SearchComponent {
+export class CarouselRelationsComponent extends SliderComponent implements OnInit {
 
   @Input() header: string;
+
+  @Input() scope: string;
+
+  @Input() discoveryConfiguration: string;
+
+  pageSize = 4;
 
   carouselOptions: CarouselOptions = {
     aspectRatio: undefined,
@@ -41,15 +48,27 @@ export class CarouselRelationsComponent extends SearchComponent {
     bundle: 'ORIGINAL',
   };
 
-  constructor(protected service: SearchService,
-              protected searchManager: SearchManager,
-              protected sidebarService: SidebarService,
-              protected windowService: HostWindowService,
-              @Inject(PLATFORM_ID) public platformId: any,
-              @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
-              protected routeService: RouteService,
-              protected router: Router) {
-    super(service, searchManager, sidebarService, windowService, platformId, searchConfigService, routeService, router);
+  constructor(
+    @Inject(SEARCH_CONFIG_SERVICE) private searchConfigService: SearchConfigurationService,
+    protected bitstreamDataService: BitstreamDataService,
+    protected bitstreamImagesService: BitstreamImagesService,
+    protected cdr: ChangeDetectorRef,
+    protected searchManager: SearchManager,
+    @Inject(NativeWindowService) protected _window: NativeWindowRef,
+  ) {
+    super(bitstreamDataService, bitstreamImagesService, cdr, searchManager, _window);
   }
 
+
+  ngOnInit(): void {
+    this.searchConfigService.getConfigurationSearchConfig(this.discoveryConfiguration, this.scope).subscribe((searchConfig: SearchConfig) => {
+      this.sortField = searchConfig.sortOptions[0]?.name ?? 'lastModified';
+      this.sortOrder = searchConfig.sortOptions[0]?.sortOrder ?? SortDirection.DESC;
+      this.numberOfItems = this.pageSize;
+      this.paginatedSearchOptions = new PaginatedSearchOptions({
+        scope: this.scope,
+      });
+      super.ngOnInit();
+    });
+  }
 }

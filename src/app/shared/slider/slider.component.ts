@@ -1,3 +1,4 @@
+import { PageInfo } from './../../core/shared/page-info.model';
 import { ChangeDetectorRef, Component, Inject, Input, OnDestroy, OnInit, Optional } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
@@ -48,6 +49,11 @@ export class SliderComponent implements OnInit, OnDestroy {
    * The sort field used for the search
    */
   @Input() sortField = 'lastModified';
+
+  /**
+   * The paginated search options
+   */
+  @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
   /**
    * A boolean representing if there are more items to be loaded
@@ -106,6 +112,13 @@ export class SliderComponent implements OnInit, OnDestroy {
 
   private destroyed = new Subject<void>();
 
+  defaultPaginatedSearchOptions = new PaginatedSearchOptions({
+    configuration: this.discoveryConfiguration,
+    sort: new SortOptions(this.sortField, SortDirection.DESC),
+    dsoTypes: [DSpaceObjectType.ITEM],
+    forcedEmbeddedKeys: ['bundles'],
+  });
+
   displayNameMap = new Map([
     [Breakpoints.XSmall, 'XSmall'],
     [Breakpoints.Small, 'Small'],
@@ -117,12 +130,14 @@ export class SliderComponent implements OnInit, OnDestroy {
   currentScreenSize?: string;
   currentPage = 1;
 
+  pageInfo: PageInfo;
+
   constructor(
     protected bitstreamDataService: BitstreamDataService,
-    private bitstreamImagesService: BitstreamImagesService,
-    private cdr: ChangeDetectorRef,
-    private searchManager: SearchManager,
-    @Inject(NativeWindowService) private _window: NativeWindowRef,
+    protected bitstreamImagesService: BitstreamImagesService,
+    protected cdr: ChangeDetectorRef,
+    protected searchManager: SearchManager,
+    @Inject(NativeWindowService) protected _window: NativeWindowRef,
     @Optional() protected breakpointObserver?: BreakpointObserver,
   ) {
   }
@@ -155,7 +170,7 @@ export class SliderComponent implements OnInit, OnDestroy {
     });
 
     this.breakpointObserver
-      .observe([
+      ?.observe([
         Breakpoints.XSmall,
         Breakpoints.Small,
         Breakpoints.Medium,
@@ -263,19 +278,19 @@ export class SliderComponent implements OnInit, OnDestroy {
       currentPage: currentPage
     });
     const sortDirection = this.sortOrder?.toUpperCase() === 'ASC' ? SortDirection.ASC : SortDirection.DESC;
+    const searchOptions = this.paginatedSearchOptions ?? this.defaultPaginatedSearchOptions;
     const paginatedSearchOptions = new PaginatedSearchOptions({
-      configuration: this.discoveryConfiguration,
-      pagination: pagination,
+      ...searchOptions,
       sort: new SortOptions(this.sortField, sortDirection),
-      dsoTypes: [DSpaceObjectType.ITEM],
-      forcedEmbeddedKeys: ['bundles']
+      pagination: pagination,
+      configuration: this.discoveryConfiguration,
     });
-
 
     return this.searchManager.search(paginatedSearchOptions).pipe(
       getFirstCompletedRemoteData(),
       map((searchResultsRD: RemoteData<SearchObjects<Item>>) => {
         if (searchResultsRD.hasSucceeded) {
+          this.pageInfo = searchResultsRD.payload.pageInfo;
           return searchResultsRD.payload;
         } else {
           return null;
