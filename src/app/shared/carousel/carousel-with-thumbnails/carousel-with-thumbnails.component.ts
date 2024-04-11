@@ -18,7 +18,13 @@ import { PaginatedSearchOptions } from '../../search/models/paginated-search-opt
 @Component({
   selector: 'ds-carousel-with-thumbnails',
   templateUrl: './carousel-with-thumbnails.component.html',
-  styleUrls: ['./carousel-with-thumbnails.component.scss']
+  styleUrls: ['./carousel-with-thumbnails.component.scss'],
+  providers: [
+    {
+      provide: SEARCH_CONFIG_SERVICE,
+      useClass: SearchConfigurationService
+    }
+  ]
 })
 export class CarouselWithThumbnailsComponent extends SliderComponent implements OnInit {
 
@@ -82,6 +88,10 @@ export class CarouselWithThumbnailsComponent extends SliderComponent implements 
       super.ngOnInit();
     });
 
+    this.initializeEntries();
+  }
+
+  initializeEntries() {
     this.title = this.carouselOptions.title;
     this.link = this.carouselOptions.link;
     this.description = this.carouselOptions.description;
@@ -159,9 +169,9 @@ export class CarouselWithThumbnailsComponent extends SliderComponent implements 
    * If the active thumbnail is not in view, the container is scrolled to the active thumbnail
    */
   scrollIntoThumbnails() {
-    const a = this.thumbnailList.find((element, index) => index === this.activeItemIndex);
-    if (!this.isElementInView(a.nativeElement)) {
-      this.thumbnailContainer.nativeElement.scrollTop = a.nativeElement.offsetTop;
+    const thumbnail = this.thumbnailList.find((element, index) => index === this.activeItemIndex);
+    if (thumbnail && !this.isElementInView(thumbnail.nativeElement)) {
+      this.thumbnailContainer.nativeElement.scrollTop = thumbnail.nativeElement.offsetTop;
     }
   }
 

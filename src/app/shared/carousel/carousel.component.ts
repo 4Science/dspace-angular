@@ -14,7 +14,6 @@ import {followLink} from '../utils/follow-link-config.model';
 import {RemoteData} from '../../core/data/remote-data';
 import {CarouselOptions} from './carousel-options.model';
 import {Item} from '../../core/shared/item.model';
-import {getItemPageRoute} from '../../item-page/item-page-routing-paths';
 
 /**
  * Component representing the Carousel component section.
@@ -160,9 +159,7 @@ export class CarouselComponent implements OnInit {
   }
 
   getItemLink(item: Item): string {
-    if (item) {
-      return getItemPageRoute(item);
-    }
+    return item.firstMetadataValue(this.link);
   }
 
   isLinkInternal(link: string) {

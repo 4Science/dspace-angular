@@ -130,7 +130,12 @@ export class SliderComponent implements OnInit, OnDestroy {
   currentScreenSize?: string;
   currentPage = 1;
 
-  pageInfo: PageInfo;
+  pageInfo: PageInfo = new PageInfo({
+    elementsPerPage: this.numberOfItems,
+    totalElements: 0,
+    totalPages: 0,
+    currentPage: 1,
+  });
 
   constructor(
     protected bitstreamDataService: BitstreamDataService,
