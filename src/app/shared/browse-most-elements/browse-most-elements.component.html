@@ -1,4 +1,4 @@
-<div [ngSwitch]="topSection.template">
+<div [ngSwitch]="(topSection.template | lowercase)">
   <ng-container *ngSwitchCase="templateType.DEFAULT">
     <!-- Default template content -->
     <ds-themed-default-browse-elements
