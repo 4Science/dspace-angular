@@ -7,7 +7,7 @@ import { map, mergeMap, take, takeUntil } from 'rxjs/operators';
 
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { NativeWindowRef, NativeWindowService } from '../../core/services/window.service';
-import { BitstreamImagesService } from '../../core/data/bitstream-images.service';
+import { BitstreamImagesService } from '../../core/services/bitstream-images.service';
 import { Item } from '../../core/shared/item.model';
 import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
@@ -160,7 +160,7 @@ export class SliderComponent implements OnInit, OnDestroy {
           this.hasMoreToLoad = this.itemList.length < searchResult.totalElements;
           this.initLoading$.next(false);
           this.itemsImagesLoading$.next(true);
-          return this.bitstreamImagesService.findAllBitstreamImages(items);
+          return this.bitstreamImagesService.getItemToImageMap(items);
         } else {
           return null;
         }
@@ -258,7 +258,7 @@ export class SliderComponent implements OnInit, OnDestroy {
           const items: Item[] = searchResult.page.map((searchItem) => searchItem.indexableObject);
           this.itemList = [...this.itemList, ...items];
           this.hasMoreToLoad = this.itemList.length < searchResult.totalElements;
-          return this.bitstreamImagesService.findAllBitstreamImages(items);
+          return this.bitstreamImagesService.getItemToImageMap(items);
         } else {
           return null;
         }

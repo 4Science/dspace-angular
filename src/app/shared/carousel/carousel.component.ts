@@ -1,19 +1,13 @@
-import { ItemSearchResult } from './../object-collection/shared/item-search-result.model';
-import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
-import {NgbCarousel, NgbSlideEvent, NgbSlideEventSource} from '@ng-bootstrap/ng-bootstrap';
-import {BehaviorSubject, from, Observable, of} from 'rxjs';
-import {catchError, filter, map, mergeMap, scan, switchMap, take, tap} from 'rxjs/operators';
-import {PaginatedList} from '../../core/data/paginated-list.model';
-import {BitstreamFormat} from '../../core/shared/bitstream-format.model';
-import {Bitstream} from '../../core/shared/bitstream.model';
-import {BitstreamDataService} from '../../core/data/bitstream-data.service';
-import {NativeWindowRef, NativeWindowService} from '../../core/services/window.service';
-import {getFirstCompletedRemoteData} from '../../core/shared/operators';
-import {hasValue} from '../empty.util';
-import {followLink} from '../utils/follow-link-config.model';
-import {RemoteData} from '../../core/data/remote-data';
-import {CarouselOptions} from './carousel-options.model';
-import {Item} from '../../core/shared/item.model';
+import { ItemSearchResult } from '../object-collection/shared/item-search-result.model';
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
+import { BehaviorSubject, from, Observable, of } from 'rxjs';
+import { catchError, map, mergeMap, scan, tap } from 'rxjs/operators';
+import { BitstreamDataService } from '../../core/data/bitstream-data.service';
+import { NativeWindowRef, NativeWindowService } from '../../core/services/window.service';
+import { CarouselOptions } from './carousel-options.model';
+import { Item } from '../../core/shared/item.model';
+import { BitstreamImagesService } from '../../core/services/bitstream-images.service';
 
 /**
  * Component representing the Carousel component section.
@@ -83,6 +77,7 @@ export class CarouselComponent implements OnInit {
 
   constructor(
     protected bitstreamDataService: BitstreamDataService,
+    protected bitstreamImagesService: BitstreamImagesService,
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
   ) {
   }
@@ -127,28 +122,13 @@ export class CarouselComponent implements OnInit {
    * Find the first image of each item
    */
   findAllBitstreamImages(): Observable<Map<string, string>> {
+    // TODO - refactor using getItemToImageMap() from service - handle loader and errors in a different way
     return from(this.items).pipe(
-      map((itemSR) => itemSR),
       tap(() => this.isLoading$.next(true)),
-      mergeMap((item) => this.bitstreamDataService.findAllByItemAndBundleName(
-          item.indexableObject, this.bundle, {}, true, true, followLink('format'),
-        ).pipe(
-          getFirstCompletedRemoteData(),
-          switchMap((rd: RemoteData<PaginatedList<Bitstream>>) => rd.hasSucceeded ? rd.payload.page : []),
-          mergeMap((bitstream: Bitstream) => bitstream.format.pipe(
-            getFirstCompletedRemoteData(),
-            filter((bitstreamFormatRD: RemoteData<BitstreamFormat>) =>
-              bitstreamFormatRD.hasSucceeded && hasValue(bitstreamFormatRD.payload) && hasValue(bitstream) &&
-              bitstreamFormatRD.payload.mimetype.includes('image/')
-            ),
-            map(() => bitstream)
-          )),
-          take(1),
-          map((bitstream: Bitstream) => [item.indexableObject, bitstream._links.content.href]),
-        ),
-      ),
-      scan((acc: Map<string, string>, value: [string, string]) => {
-        acc.set(value[0], value[1]);
+      map((itemSR) => itemSR.indexableObject),
+      mergeMap((item) => this.bitstreamImagesService.findImageBitstreams(item, this.bundle)),
+      scan((acc: Map<string, string>, value: any) => { // todo add interface
+        acc.set(value.itemUUID, value.imageHref);
         return acc;
       }, new Map<string, string>()),
       catchError(() => {

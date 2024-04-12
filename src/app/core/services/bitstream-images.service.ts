@@ -1,0 +1,78 @@
+import { Injectable } from '@angular/core';
+
+import { from, Observable } from 'rxjs';
+import { filter, map, mergeMap, reduce, switchMap, take } from 'rxjs/operators';
+
+import { followLink } from '../../shared/utils/follow-link-config.model';
+import { getFirstCompletedRemoteData } from '../shared/operators';
+import { RemoteData } from '../data/remote-data';
+import { PaginatedList } from '../data/paginated-list.model';
+import { Bitstream } from '../shared/bitstream.model';
+import { BitstreamFormat } from '../shared/bitstream-format.model';
+import { hasValue } from '../../shared/empty.util';
+import { BitstreamDataService } from '../data/bitstream-data.service';
+import { Item } from '../shared/item.model';
+
+
+interface ItemAndImage {
+  itemUUID: string;
+  imageHref: string;
+}
+
+@Injectable({ providedIn: 'root' })
+export class BitstreamImagesService {
+
+
+  constructor(protected bitstreamDataService: BitstreamDataService) {}
+
+  // TODO fix tsdoc
+
+  /**
+   *
+   * @param items
+   * @param bundleName
+   */
+  getItemToImageMap(items: Item[], bundleName = 'ORIGINAL'): Observable<Map<string, string>> {
+    return from(items).pipe(
+      mergeMap((item) => this.findImageBitstreams(item, bundleName).pipe(
+        map((bitstream: Bitstream) => <ItemAndImage>{
+          itemUUID: item.uuid, imageHref: bitstream._links.content.href
+        }),
+      )),
+      reduce((acc: Map<string, string>, value: ItemAndImage) => {
+        acc.set(value.itemUUID, value.imageHref);
+        return acc;
+      }, new Map<string, string>()),
+    );
+  }
+
+  /**
+   * Find all image bitstreams for an item
+   * @param item
+   * @param bundleName
+   */
+  findImageBitstreams(item: Item, bundleName: string) {
+    const isImageMimetypeRegex = /^image\//;
+
+    // retrieve all bundle's bitstreams for the item
+    const bitstreamPayload$: Observable<Bitstream> = this.bitstreamDataService.findAllByItemAndBundleName(
+      item, bundleName, {}, true, true, followLink('format'),
+    ).pipe(
+      getFirstCompletedRemoteData(),
+      switchMap((rd: RemoteData<PaginatedList<Bitstream>>) => rd.hasSucceeded ? rd.payload.page : new Array<Bitstream>()),
+    );
+
+    // filter bitstreams according to mime type
+    return bitstreamPayload$.pipe(
+      switchMap((bitstream: Bitstream) => bitstream.format.pipe(
+        getFirstCompletedRemoteData(),
+        filter((bitstreamFormatRD: RemoteData<BitstreamFormat>) =>
+          bitstreamFormatRD.hasSucceeded && hasValue(bitstreamFormatRD.payload) && hasValue(bitstream) &&
+          isImageMimetypeRegex.test(bitstreamFormatRD.payload.mimetype)
+        ),
+        map(() => bitstream)
+      )),
+      take(1), // TODO this method should retrieve all images; the caller should take one image per item
+    );
+  }
+}

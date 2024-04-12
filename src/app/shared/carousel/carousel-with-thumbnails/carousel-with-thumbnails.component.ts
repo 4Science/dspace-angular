@@ -12,7 +12,7 @@ import { BehaviorSubject } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { SliderComponent } from '../../slider/slider.component';
 import { CarouselOptions } from '../carousel-options.model';
-import { BitstreamImagesService } from './../../../core/data/bitstream-images.service';
+import { BitstreamImagesService } from '../../../core/services/bitstream-images.service';
 import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
 
 @Component({

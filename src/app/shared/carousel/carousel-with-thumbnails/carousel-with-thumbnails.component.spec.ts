@@ -18,7 +18,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateLoaderMock } from '../../mocks/translate-loader.mock';
 import { SearchConfigurationService } from '../../../core/shared/search/search-configuration.service';
 import { BitstreamDataService } from '../../../core/data/bitstream-data.service';
-import { BitstreamImagesService } from '../../../core/data/bitstream-images.service';
+import { BitstreamImagesService } from '../../../core/services/bitstream-images.service';
 import { ChangeDetectorRef, NO_ERRORS_SCHEMA } from '@angular/core';
 import { SearchManager } from '../../../core/browse/search-manager';
 import { RouteService } from '../../../core/services/route.service';
