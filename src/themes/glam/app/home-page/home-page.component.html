@@ -21,10 +21,6 @@
                                    [sectionId]="sectionId"
                                    [facetSection]="$any(sectionComponent)"></ds-themed-facet-section>
 
-          <ds-themed-carousel-section *ngSwitchCase="'carousel'"
-                                      [sectionId]="sectionId"
-                                      [carouselSection]="$any(sectionComponent)"></ds-themed-carousel-section>
-
           <ds-themed-counters-section *ngSwitchCase="'counters'"
                                       [sectionId]="sectionId"
                                       [countersSection]="$any(sectionComponent)"></ds-themed-counters-section>
@@ -34,6 +30,12 @@
                                   [textRowSection]="$any(sectionComponent)"
                                   [site]="$any(sectionComponent).contentType === 'text-metadata' ? site$.value : null"></ds-themed-text-section>
 
+          <!-- UX-Plus sections-->
+
+          <ds-themed-carousel-section *ngSwitchCase="'carousel'"
+                                      [sectionId]="sectionId"
+                                      [carouselSection]="$any(sectionComponent)"></ds-themed-carousel-section>
+
           <ds-themed-grid-section *ngSwitchCase="'grid'"
                                   [sectionId]="sectionId" [site]="site$.value"
                                   [gridSection]="$any(sectionComponent)"></ds-themed-grid-section>
@@ -41,6 +43,8 @@
           <ds-themed-twitter-section *ngSwitchCase="'twitter'"
                                      [sectionId]="sectionId"
                                      [twitterSection]="$any(sectionComponent)"></ds-themed-twitter-section>
+
+          <!-- GLAM sections (on GLAM theme only) -->
 
           <ds-themed-advanced-top-section *ngSwitchCase="'advanced-top-component'"
                                      [sectionId]="sectionId"
