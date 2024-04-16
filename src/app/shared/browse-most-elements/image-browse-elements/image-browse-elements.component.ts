@@ -6,8 +6,8 @@ import { RemoteData } from './../../../core/data/remote-data';
 import { BitstreamDataService } from './../../../core/data/bitstream-data.service';
 import { Router } from '@angular/router';
 import { SearchService } from './../../../core/shared/search/search.service';
-import { Component, Inject, OnInit, PLATFORM_ID, ChangeDetectorRef } from '@angular/core';
-import { AbstractBrowseMostElementsComponent } from '../abstract-browse-most-elements.component';
+import { Component, ChangeDetectorRef, OnChanges, PLATFORM_ID, Inject } from '@angular/core';
+import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
 import { APP_CONFIG, AppConfig } from './../../../../config/app-config.interface';
 import { BehaviorSubject, filter, from, map, mergeMap, scan, switchMap, take } from 'rxjs';
 import { followLink } from '../../utils/follow-link-config.model';
@@ -22,7 +22,7 @@ import { getItemPageRoute } from './../../../item-page/item-page-routing-paths';
   templateUrl: './image-browse-elements.component.html',
   styleUrls: ['./image-browse-elements.component.scss']
 })
-export class ImageBrowseElementsComponent extends AbstractBrowseMostElementsComponent implements OnInit {
+export class ImageBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnChanges {
 
 
   itemToImageHrefMap$ = new BehaviorSubject<Map<string, string>>(new Map<string, string>());
@@ -43,9 +43,10 @@ export class ImageBrowseElementsComponent extends AbstractBrowseMostElementsComp
     super(appConfig, platformId, searchService, router, cdr);
   }
 
-  ngOnInit() {
+  ngOnChanges() {
     const showThumbnails = this.showThumbnails ?? this.appConfig.browseBy.showThumbnails;
     const followLinks = showThumbnails ? [followLink('thumbnail')] : [];
+
     this.searchService
       .search(this.paginatedSearchOptions, null, true, true, ...followLinks)
       .pipe(getFirstCompletedRemoteData())

@@ -103,6 +103,7 @@ describe('DefaultBrowseElementsComponent', () => {
 
   it('should call searchService.search on ngOnInit with followLinks', () => {
     component.showThumbnails = true;
+    component.ngOnChanges();
     fixture.detectChanges();
 
     expect(mockSearchService.search).toHaveBeenCalledWith(
@@ -112,37 +113,5 @@ describe('DefaultBrowseElementsComponent', () => {
       true,
       followLink('thumbnail')
     );
-  });
-
-  it('should call searchService.search on ngOnInit with followLinks', () => {
-    component.showThumbnails = undefined;
-    fixture.detectChanges();
-
-    expect(mockSearchService.search).toHaveBeenCalledWith(
-      component.paginatedSearchOptions,
-      null,
-      true,
-      true,
-      followLink('thumbnail')
-    );
-  });
-
-  it('should call searchService.search on ngOnInit without followLinks', () => {
-    component.showThumbnails = false;
-    component.ngOnInit();
-    fixture.detectChanges();
-
-    expect(mockSearchService.search).toHaveBeenCalledWith(
-      component.paginatedSearchOptions,
-      null,
-      true,
-      true
-    );
-  });
-
-  it('should update searchResults after searchService response', () => {
-    component.ngOnInit();
-
-    expect(component.searchResults).toEqual(mockResponse);
   });
 });

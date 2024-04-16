@@ -1,8 +1,15 @@
-import { HostWindowService, WidthCategory } from './../../../host-window.service';
 import { SortOptions } from './../../../../core/cache/models/sort-options.model';
 import { PaginationComponentOptions } from './../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from './../../../search/models/paginated-search-options.model';
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+ ChangeDetectorRef,
+ Component,
+ ElementRef,
+ Input,
+ OnDestroy,
+ OnInit,
+ ViewChild,
+} from '@angular/core';
 import { AdvancedTopSection } from '../../../../core/layout/models/section.model';
 import { Context } from '../../../../core/shared/context.model';
 import { SortDirection } from '../../../../core/cache/models/sort-options.model';
@@ -30,6 +37,8 @@ export class AdvancedTopSectionComponent implements OnInit, OnDestroy {
    * The context of the section.
    */
   @Input() context: Context = Context.BrowseMostElements;
+
+  @ViewChild('cardContainer') wrapperContainer: ElementRef;
 
   /**
    * The paginated search options for the section.
@@ -73,40 +82,43 @@ export class AdvancedTopSectionComponent implements OnInit, OnDestroy {
   totalNumberOfElements = new BehaviorSubject<number>(0);
 
   /**
-   * The width category to number of elements per page map.
+   * The minimum card width.
    */
-  readonly widthCategoryToElementsMap = {
-    [WidthCategory.XS]: 1,
-    [WidthCategory.SM]: 1,
-    [WidthCategory.MD]: 2,
-    [WidthCategory.LG]: 3,
-    [WidthCategory.XL]: 4,
-  };
+  readonly minCardWidth = 250;
+
+  /**
+   * The maximum number of cards per page.
+   */
+  readonly maxNumberOfCardsPerPage = 4;
 
   /**
    * The subscriptions for the component.
    */
   subs: Subscription[] = [];
 
+  private resizeObserver: ResizeObserver;
+
   constructor(
-    private windowService: HostWindowService,
     private chd: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
     const order = this.advancedTopSection.order;
     this.maxNumberOfItems = this.advancedTopSection.numberOfItems || 8;
-    this.sortDirection = order && order.toUpperCase() === 'ASC' ? SortDirection.ASC : SortDirection.DESC;
+    this.sortDirection = order?.toUpperCase() === 'ASC' ? SortDirection.ASC : SortDirection.DESC;
     this.selectedDiscoverConfiguration = this.advancedTopSection.discoveryConfigurationName[0];
-    // Set the initial number of elements per page based on the current width category.
-    Object.entries(this.widthCategoryToElementsMap).forEach(([category, elementsPerPage]) => {
-      this.subs.push(this.windowService.isIn([parseInt(category, 10)]).subscribe((isIn: boolean) => {
-        if (isIn) {
-          this.initialNumberOfElementsPerPage = elementsPerPage;
-        }
+  }
+
+
+  ngAfterViewInit() {
+    this.resizeObserver = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        this.initialNumberOfElementsPerPage = Math.min(Math.floor(entry.contentRect.width / this.minCardWidth), this.maxNumberOfCardsPerPage);
         this.changeDiscovery(this.selectedDiscoverConfiguration);
-      }));
+      }
     });
+
+    this.resizeObserver.observe(this.wrapperContainer.nativeElement);
   }
 
   /**
@@ -114,7 +126,7 @@ export class AdvancedTopSectionComponent implements OnInit, OnDestroy {
    * @returns {boolean} True if the current page is the first page, false otherwise.
    */
   get reachedStart() {
-    return isEqual(this.paginatedSearchOptions.pagination.currentPage, 1);
+    return isEqual(this.paginatedSearchOptions?.pagination?.currentPage, 1);
   }
 
   /**
@@ -129,7 +141,7 @@ export class AdvancedTopSectionComponent implements OnInit, OnDestroy {
                            ? this.maxNumberOfItems : this.totalNumberOfElements.getValue();
 
     const totalPages = Math.ceil(maxNumberOfPages / this.initialNumberOfElementsPerPage);
-    return this.paginatedSearchOptions.pagination.currentPage >= totalPages;
+    return this.paginatedSearchOptions?.pagination?.currentPage >= totalPages;
   }
 
   /**
@@ -188,5 +200,9 @@ export class AdvancedTopSectionComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy(): void {
     this.subs.filter(s => hasValue(s)).forEach((sub) => sub.unsubscribe());
+
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
   }
 }

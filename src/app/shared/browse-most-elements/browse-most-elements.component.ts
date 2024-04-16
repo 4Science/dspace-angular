@@ -30,7 +30,9 @@ export class BrowseMostElementsComponent {
    */
   @Input() showThumbnails;
 
-  @Input() topSection: TopSection | AdvancedTopSection;
+  @Input() topSection: TopSection;
+
+  @Input() advancedTopSection: AdvancedTopSection;
 
   @Input() mode: LayoutModeEnum;
 
@@ -43,4 +45,12 @@ export class BrowseMostElementsComponent {
    * The type of the template to render
    */
   templateType = TemplateType;
+
+  sectionTemplateType: TemplateType = TemplateType.DEFAULT;
+
+  ngOnInit(): void {
+    this.sectionTemplateType = this.advancedTopSection
+                              ? this.advancedTopSection?.template : this.topSection
+                              ? this.topSection?.template : TemplateType.DEFAULT;
+  }
 }

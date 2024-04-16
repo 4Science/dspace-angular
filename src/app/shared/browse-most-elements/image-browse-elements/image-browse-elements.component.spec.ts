@@ -104,7 +104,7 @@ describe('ImageBrowseElementsComponent', () => {
   });
 
   it('should get all bitstreams for items', () => {
-    component.ngOnInit();
+    component.ngOnChanges();
     expect(mockBitstreamDataService.findAllByItemAndBundleName).toHaveBeenCalled();
   });
 });

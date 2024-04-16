@@ -23,13 +23,15 @@ export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMos
 
   @Input() showThumbnails;
 
-  @Input() topSection: TopSection | AdvancedTopSection;
+  @Input() topSection: TopSection;
+
+  @Input() advancedTopSection: AdvancedTopSection;
 
   @Input() mode: LayoutModeEnum;
 
   @Output() totalElements: EventEmitter<number> = new EventEmitter<number>();
 
-  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'showMetrics', 'showThumbnails', 'topSection', 'mode', 'totalElements'];
+  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'showMetrics', 'showThumbnails', 'topSection', 'mode', 'totalElements', 'advancedTopSection'];
 
   protected getComponentName(): string {
     return 'BrowseMostElementsComponent';

@@ -52,9 +52,11 @@ describe('BrowseMostElementsComponent', () => {
 
   describe('when the templateType is IMAGE', () => {
     beforeEach(() => {
-      component.topSection = {
+      component.topSection = null;
+      component.advancedTopSection = {
         template: TemplateType.IMAGE
       } as any;
+      component.ngOnInit();
       fixture.detectChanges();
     });
 

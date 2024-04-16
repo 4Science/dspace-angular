@@ -18,8 +18,12 @@
   .card {
     height: 30rem;
     max-height: 35rem;
+    min-width: 250px;
+    max-width: 320px;
+  }
 
-    @media screen and (max-width: map-get($grid-breakpoints, md)) {
+  @include media-breakpoint-down(md) {
+    .card {
       height: 20rem;
     }
   }

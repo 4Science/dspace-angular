@@ -1,4 +1,4 @@
-<div class="container-fluid justify-content-center d-flex flex-column gapy-4 adv-top-component-container">
+<div class="justify-content-center d-flex flex-column gapy-4">
   <div class="home-page-component-container gapy-4 d-flex flex-column">
     <div class="d-flex flex-row justify-content-between">
       <h3>
@@ -20,23 +20,23 @@
       </div>
     </div>
   </div>
-  <div class="home-page-top-items-container d-flex align-items-center">
+  <div class="home-page-top-items-container d-flex align-items-center" #cardContainer>
     <div>
-      <button class="btn btn-link btn-sm arrow-btn" (click)="scrollLeft()" [disabled]="reachedStart">
-        <i class="fa-solid fa-chevron-left"></i>
+      <button class="btn btn-link btn-sm" (click)="scrollLeft()" [disabled]="reachedStart">
+        <i class="fa-solid fa-chevron-left fa-2xl"></i>
       </button>
     </div>
-    <div class="w-100 mx-lg-5 mx-md-2">
+    <div class="">
       <ds-themed-browse-most-elements [context]="context"
                                       [paginatedSearchOptions]="paginatedSearchOptions"
-                                      [topSection]="advancedTopSection"
+                                      [advancedTopSection]="advancedTopSection"
                                       [showThumbnails]="showThumbnails"
                                       (totalElements)="totalElements($event)">
       </ds-themed-browse-most-elements>
     </div>
     <div>
-      <button class="btn btn-link btn-sm arrow-btn" (click)="scrollRight()" [disabled]="reachedEnd">
-        <i class="fa-solid fa-chevron-right"></i>
+      <button class="btn btn-link btn-sm " (click)="scrollRight()" [disabled]="reachedEnd">
+        <i class="fa-solid fa-chevron-right fa-2xl"></i>
       </button>
     </div>
   </div>
