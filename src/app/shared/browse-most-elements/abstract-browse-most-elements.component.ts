@@ -68,8 +68,8 @@ export abstract class AbstractBrowseMostElementsComponent implements OnInit {
     this.searchService.search(this.paginatedSearchOptions, null, true, true, ...followLinks).pipe(
       getFirstCompletedRemoteData(),
     ).subscribe((response: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>) => {
+      this.totalElements.emit(response.payload?.totalElements ?? 0);
       this.searchResults = response as any;
-      this.totalElements.emit(this.searchResults.payload.totalElements);
       this.cdr.detectChanges();
     });
   }
