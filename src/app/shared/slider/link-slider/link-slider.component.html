@@ -19,7 +19,7 @@
         <img [src]="href" [alt]="item.metadata[title]?.[0].value">
       </ng-container>
       <ng-template #defaultPreviewImage>
-        <img src="assets/images/replacement_image.svg">
+        <img src="placeholderSrc">
       </ng-template>
       <div class="description">
         {{ item.metadata[title]?.[0].value }}
@@ -35,7 +35,7 @@
        href="#"
        target="_blank"
        class="img-container-el">
-      <img src="assets/images/replacement_image.svg">
+      <img src="placeholderSrc">
 
       <div class="description">
         {{'loading.default' | translate}}

@@ -1,0 +1,50 @@
+<ng-container *ngIf="itemList?.length>0">
+  <ng-container *ngIf="!isHorizontal">
+    <div class="thumbnail-grid" #thumbnailContainer [style.height.px]="height">
+      <ng-container *ngFor="let item of itemList; index as i">
+        <ng-container *ngIf="(itemToImageHrefMap$ | async)?.get(item.uuid); let href;">
+          <div class="thumbnail-container"
+            [style.height.px]="height/numberOfItems"
+            [ngClass]="{'selected': activeIndex === i}"
+            (click)="onThumbnailClick(item, i)"
+            [dsBackgroundImage]="href ?? placeholderSrc"
+            #thumbnails
+            >
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+    <div>
+      <a id="previous-arrow" role="button" class="thumbnail-up-btn" (click)="getPrev()" *ngIf="!isFirstItem">
+        <span aria-hidden="true" class="carousel-control-next-icon thumbnail-up-icon"></span>
+      </a>
+      <a id="next-arrow" role="button" class="thumbnail-down-btn" (click)="getNext()" *ngIf="!isLastItem">
+        <span aria-hidden="true" class="carousel-control-next-icon thumbnail-down-icon"></span>
+      </a>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="isHorizontal">
+    <!-- <div class="thumbnail-grid" #thumbnailContainer [style.width.px]="width">
+      <ng-container *ngFor="let item of itemList; index as i">
+        <ng-container *ngIf="(itemToImageHrefMap$ | async)?.get(item.uuid); let href;">
+          <div class="thumbnail-container"
+            [style.width.px]="width/numberOfItems"
+            [ngClass]="{'selected': activeIndex === i}"
+            (click)="onThumbnailClick(item, i)"
+            [dsBackgroundImage]="href ?? placeholderSrc"
+            #thumbnails
+            >
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+    <div>
+      <a id="previous-arrow" role="button" class="thumbnail-left-btn" (click)="getPrev()" *ngIf="!isFirstItem">
+        <span aria-hidden="true" class="carousel-control-next-icon thumbnail-left-icon"></span>
+      </a>
+      <a id="next-arrow" role="button" class="thumbnail-right-btn" (click)="getNext()" *ngIf="!isLastItem">
+        <span aria-hidden="true" class="carousel-control-next-icon thumbnail-right-icon"></span>
+      </a>
+    </div> -->
+  </ng-container>
+</ng-container>

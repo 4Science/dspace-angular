@@ -1,28 +1,28 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CarouselWithThumbnailsComponent } from './carousel-with-thumbnails.component';
-import { RemoteDataBuildService } from '../../../core/cache/builders/remote-data-build.service';
+import { RemoteDataBuildService } from '../../core/cache/builders/remote-data-build.service';
 import { ActivatedRoute } from '@angular/router';
 import { of as observableOf, of } from 'rxjs';
-import { HALEndpointService } from '../../../core/shared/hal-endpoint.service';
-import { RouterMock } from '../../mocks/router.mock';
-import { DSOChangeAnalyzer } from '../../../core/data/dso-change-analyzer.service';
-import { BitstreamFormatDataService } from '../../../core/data/bitstream-format-data.service';
-import { NativeWindowService } from '../../../core/services/window.service';
-import { CarouselOptions } from '../carousel-options.model';
-import { Item } from '../../../core/shared/item.model';
-import { MetadataMap, MetadataValue } from '../../../core/shared/metadata.models';
-import { PageInfo } from '../../../core/shared/page-info.model';
+import { HALEndpointService } from '../../core/shared/hal-endpoint.service';
+import { RouterMock } from '../mocks/router.mock';
+import { DSOChangeAnalyzer } from '../../core/data/dso-change-analyzer.service';
+import { BitstreamFormatDataService } from '../../core/data/bitstream-format-data.service';
+import { NativeWindowService } from '../../core/services/window.service';
+import { CarouselOptions } from '../carousel/carousel-options.model';
+import { Item } from '../../core/shared/item.model';
+import { MetadataMap, MetadataValue } from '../../core/shared/metadata.models';
+import { PageInfo } from '../../core/shared/page-info.model';
 import { CommonModule } from '@angular/common';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateLoaderMock } from '../../mocks/translate-loader.mock';
-import { SearchConfigurationService } from '../../../core/shared/search/search-configuration.service';
-import { BitstreamDataService } from '../../../core/data/bitstream-data.service';
-import { BitstreamImagesService } from '../../../core/services/bitstream-images.service';
+import { TranslateLoaderMock } from '../mocks/translate-loader.mock';
+import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
+import { BitstreamDataService } from '../../core/data/bitstream-data.service';
+import { BitstreamImagesService } from '../../core/services/bitstream-images.service';
 import { ChangeDetectorRef, NO_ERRORS_SCHEMA } from '@angular/core';
-import { SearchManager } from '../../../core/browse/search-manager';
-import { RouteService } from '../../../core/services/route.service';
-import { RequestService } from '../../../core/data/request.service';
+import { SearchManager } from '../../core/browse/search-manager';
+import { RouteService } from '../../core/services/route.service';
+import { RequestService } from '../../core/data/request.service';
 
 describe('CarouselWithThumbnailsComponent', () => {
   let component: CarouselWithThumbnailsComponent;

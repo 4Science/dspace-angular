@@ -97,72 +97,9 @@
     outline: none;
     box-shadow: none !important
   }
+}
 
-  div.thumbnail-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    align-content: start;
-
-    div.thumbnail-container {
-      cursor: pointer;
-      overflow: hidden;
-      height: 125px;
-
-      &.selected {
-        box-shadow: 0px 0px 0px 3px $primary inset;
-      }
-    }
-
-    overflow-y: scroll;
-
-    // Scrollbar styling
-    & {
-      scrollbar-width: thin;
-      scrollbar-color: var(--ds-carousel-scrollbar-color) transparent;
-    }
-
-    &::-webkit-scrollbar {
-      width: 2px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: var(--ds-carousel-scrollbar-color);
-      border-radius: 1ex;
-    }
-  }
-
-  .carousel-thumbnail-container {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .thumbnail-up-icon {
-    transform: rotate(-90deg) translate(-28%, 50%);
-  }
-
-  .thumbnail-down-icon {
-    transform: rotate(90deg) translate(28%, -50%);
-  }
-
-  .thumbnail-up-icon,
-  .thumbnail-down-icon {
-    background-color: var(--ds-carousel-controls-color-hover);
-    opacity: 0.8;
-
-    &:hover {
-      background-color: var(--ds-carousel-controls-color);
-      opacity: 1;
-    }
-  }
-
-  .thumbnail-up-btn,
-  .thumbnail-down-btn {
-    position: absolute;
-    right: 50%;
-    cursor: pointer;
-
-    &.thumbnail-down-btn {
-      bottom: 10%;
-    }
-  }
+.thumbnail-wrapper {
+  position: relative;
+  flex: 0 0 20%;
 }

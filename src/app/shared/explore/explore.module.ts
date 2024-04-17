@@ -66,7 +66,7 @@ const COMPONENTS = [
     SharedModule,
     CarouselModule,
     MarkdownViewerModule,
-    SliderModule
+    SliderModule,
   ],
   exports: [
     ...COMPONENTS

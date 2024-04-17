@@ -1,17 +1,21 @@
 import { NgModule } from '@angular/core';
-import { SliderComponent } from './slider.component';
+import { LinkSliderComponent } from './link-slider/link-slider.component';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared.module';
-import { ThemedSliderComponent } from './themed-slider.component';
+import { ThemedLinkSliderComponent } from './link-slider/themed-link-slider.component';
+import { ThumbnailSliderComponent } from './thumbnail-slider/thumbnail-slider.component';
 
 const COMPONENTS = [
-  ThemedSliderComponent,
-  SliderComponent,
+  ThemedLinkSliderComponent,
+  LinkSliderComponent,
+  ThumbnailSliderComponent,
 ];
 
 @NgModule({
   imports: [CommonModule, SharedModule],
-  declarations: [...COMPONENTS],
+  declarations: [
+    ...COMPONENTS,
+  ],
   exports: [...COMPONENTS]
 })
 /**
