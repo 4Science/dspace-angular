@@ -20,13 +20,13 @@
       </div>
     </div>
   </div>
-  <div class="home-page-top-items-container d-flex align-items-center" #cardContainer>
+  <div class="home-page-top-items-container d-flex align-items-center justify-content-center" #cardContainer>
     <div>
       <button class="btn btn-link btn-sm" (click)="scrollLeft()" [disabled]="reachedStart">
         <i class="fa-solid fa-chevron-left fa-2xl"></i>
       </button>
     </div>
-    <div class="">
+    <div class="w-100">
       <ds-themed-browse-most-elements [context]="context"
                                       [paginatedSearchOptions]="paginatedSearchOptions"
                                       [advancedTopSection]="advancedTopSection"
