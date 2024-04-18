@@ -6,10 +6,10 @@ import { Item } from '../../core/shared/item.model';
 import { ChangeDetectorRef, Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbCarousel, NgbSlideEvent } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject } from 'rxjs';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { CarouselOptions } from '../carousel/carousel-options.model';
 import { BitstreamImagesService } from '../../core/services/bitstream-images.service';
 import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
+import { HostWindowService } from '../host-window.service';
 
 @Component({
   selector: 'ds-carousel-with-thumbnails',
@@ -75,9 +75,14 @@ export class CarouselWithThumbnailsComponent implements OnInit {
   itemList: Item[] = [];
 
   /**
+   * The initial number of items to display per page ,
+   */
+  defaultPageSize = 4;
+
+  /**
    * The number of items to display per page
    */
-  pageSize = 4;
+  pageSize = this.defaultPageSize;
 
   /**
    * The title metadata field
@@ -94,12 +99,22 @@ export class CarouselWithThumbnailsComponent implements OnInit {
    */
   description: string;
 
+  /**
+   * The height of the vertical thumbnail
+   */
+  heightThumbnailPx = 120;
+
+  /**
+   * The width of the horizontal thumbnail
+   */
+  horizontalThumbnailWidthPx = 160;
+
   constructor(
     protected bitstreamDataService: BitstreamDataService,
     protected bitstreamImagesService: BitstreamImagesService,
     protected cdr: ChangeDetectorRef,
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
-    protected breakpointObserver: BreakpointObserver,
+    private hostWindowService: HostWindowService,
   ) {
   }
 
@@ -117,10 +132,13 @@ export class CarouselWithThumbnailsComponent implements OnInit {
     this.link = this.carouselOptions.link;
     this.description = this.carouselOptions.description;
 
-    this.breakpointObserver.observe([
-      Breakpoints.XSmall
-    ]).subscribe(result => {
-      this.isSmallDevice$.next(result.matches);
+    this.hostWindowService.isXs().subscribe((isXs) => {
+      this.isSmallDevice$.next(isXs);
+      if (isXs) {
+        this.pageSize = 2;
+      }  else {
+        this.pageSize = this.defaultPageSize;
+      }
     });
   }
 

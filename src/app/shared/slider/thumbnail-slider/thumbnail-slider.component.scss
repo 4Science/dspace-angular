@@ -1,37 +1,68 @@
 :host {
-  div.thumbnail-grid {
+  $primary-box-shadow: 0px 0px 0px 3px $primary inset;
+  $scrollbar-color: var(--ds-carousel-scrollbar-color);
+  $controls-color-hover: var(--ds-carousel-controls-color-hover);
+  $controls-color: var(--ds-carousel-controls-color);
+
+  .thumbnail-grid,
+  .h-thumbnail-grid {
     display: grid;
-    grid-template-columns: 1fr;
     align-content: start;
 
     div.thumbnail-container {
       cursor: pointer;
       overflow: hidden;
-      // height: 125px;
 
       &.selected {
-        box-shadow: 0px 0px 0px 3px $primary inset;
+        box-shadow: $primary-box-shadow;
       }
     }
 
-    overflow-y: scroll;
-
     // Scrollbar styling
     & {
-      scrollbar-width: thin;
-      scrollbar-color: var(--ds-carousel-scrollbar-color) transparent;
+      scrollbar-color: $scrollbar-color transparent;
     }
+
+
+    &::-webkit-scrollbar-thumb {
+      background: $scrollbar-color;
+      border-radius: 2ex;
+    }
+  }
+
+  .thumbnail-grid {
+    grid-template-columns: 1fr;
+    overflow-y: scroll;
 
     &::-webkit-scrollbar {
       width: 2px;
     }
 
+    & {
+      scrollbar-width: thin;
+    }
+
     &::-webkit-scrollbar-thumb {
-      background: var(--ds-carousel-scrollbar-color);
-      border-radius: 1ex;
+    background: $scrollbar-color;
+    border-radius: 2ex;
     }
   }
 
+  .h-thumbnail-grid {
+    grid-template-rows: 1fr;
+    grid-auto-flow: column;
+    overflow-x: scroll;
+
+    & {
+      scrollbar-height: thin;
+    }
+
+    &::-webkit-scrollbar {
+      height: 3px;
+    }
+  }
+
+  .y-btn-container {
   .thumbnail-up-icon {
     transform: rotate(-90deg) translate(-28%, 50%);
   }
@@ -42,11 +73,11 @@
 
   .thumbnail-up-icon,
   .thumbnail-down-icon {
-    background-color: var(--ds-carousel-controls-color-hover);
+    background-color: $controls-color-hover;
     opacity: 0.8;
 
     &:hover {
-      background-color: var(--ds-carousel-controls-color);
+      background-color: $controls-color;
       opacity: 1;
     }
   }
@@ -56,13 +87,19 @@
     position: absolute;
     right: 50%;
     cursor: pointer;
-
-    &.thumbnail-down-btn {
-      bottom: 10%;
-    }
-
-    &.thumbnail-up-btn {
-      top: 0;
-    }
   }
+
+  .thumbnail-down-btn {
+    bottom: 10%;
+  }
+
+  .thumbnail-up-btn {
+    top: 0;
+  }
+
+  .thumbnail-grid-wrapper {
+    position: relative;
+  }
+
+}
 }

@@ -33,24 +33,48 @@
 
   </div>
   <!-- thumbnail-slider component (start) -->
-  <div class="d-flex flex-md-column flex-row align-items-stretch justify-content-center thumbnail-wrapper h-100">
+  <div class="d-flex flex-md-column align-items-stretch justify-content-center thumbnail-wrapper h-100" *ngIf="!(isSmallDevice$ | async)">
+    <!-- width defined as 20% of the carousel-with-thumbanils -->
     <div class="thumbnail">
-      <!-- THUMBNAIL -->
+      <!-- VERTICAL THUMBNAIL -->
           <ds-thumbnail-slider
             [scope]="scope"
-            [height]="carouselOptions.carouselHeightPx"
+            [heightThumbnailPx]="carouselOptions.carouselHeightPx"
             [activeItemIndexInOuterIndicator]="activeItemIndex"
             [numberOfItems]="pageSize"
+            [isHorizontal]="false"
             [discoveryConfiguration]="discoveryConfiguration"
             (activeIndexChange)="activeIndexChange($event)"
             (onThumbnailSelected)="selectedThumbnail($event)"
             (itemToImageHrefMap)="getItemMapValue($event)"
             (itemsUpdated)="getUpdatedItemList($event)"
-            ></ds-thumbnail-slider>
+          ></ds-thumbnail-slider>
     </div>
   </div>
+
   <!-- thumbnail-slider component (end) -->
 </div>
+  <!-- thumbnail-slider component (start) -->
+<div class="d-flex flex-row flex-wrapper justify-content-center thumbnail-wrapper-h w-100" *ngIf="(isSmallDevice$ | async)">
+  <div class="thumbnail-h">
+    <!-- HORIZONTAL THUMBNAIL -->
+        <ds-thumbnail-slider
+          [scope]="scope"
+          [heightThumbnailPx]="heightThumbnailPx"
+          [horizontalWidthPx]="horizontalThumbnailWidthPx"
+          [activeItemIndexInOuterIndicator]="activeItemIndex"
+          [numberOfItems]="pageSize"
+          [isHorizontal]="true"
+          [discoveryConfiguration]="discoveryConfiguration"
+          (activeIndexChange)="activeIndexChange($event)"
+          (onThumbnailSelected)="selectedThumbnail($event)"
+          (itemToImageHrefMap)="getItemMapValue($event)"
+          (itemsUpdated)="getUpdatedItemList($event)"
+          ></ds-thumbnail-slider>
+  </div>
+</div>
+<!-- thumbnail-slider component (end) -->
+<!-- DESCRIPTION -->
 <div class="d-flex flex-row flex-wrapper justify-content-center">
   <div class="p-3">
     <div class="text-center my-5">

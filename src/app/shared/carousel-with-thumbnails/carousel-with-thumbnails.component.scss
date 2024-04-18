@@ -99,7 +99,11 @@
   }
 }
 
-.thumbnail-wrapper {
+.thumbnail-wrapper, .humbnail-wrapper-h {
   position: relative;
-  flex: 0 0 20%;
+
+  &.thumbnail-wrapper {
+    flex: 0 0 20%;
+  }
 }
+
