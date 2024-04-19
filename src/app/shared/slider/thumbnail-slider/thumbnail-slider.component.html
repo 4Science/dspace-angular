@@ -1,7 +1,7 @@
 <ng-container *ngIf="itemList?.length>0">
   <div class="thumbnail-grid-wrapper">
     <ng-container *ngIf="!isHorizontal; else horizontalGrid">
-      <div class="thumbnail-grid" #thumbnailContainer [style.height.px]="heightThumbnailPx">
+      <div class="thumbnail-grid" #thumbnailContainer [style.height.px]="numberOfItems*heightThumbnailPx">
         <ng-container *ngFor="let item of itemList; index as i">
           <ng-container *ngTemplateOutlet="thumbnailContainerTemplate; context: { $implicit: item, index: i }"></ng-container>
         </ng-container>
@@ -11,7 +11,7 @@
       </div>
     </ng-container>
     <ng-template #horizontalGrid>
-      <div class="h-thumbnail-grid" #thumbnailContainer [style.width.px]="horizontalContainerWidth">
+      <div class="h-thumbnail-grid" #thumbnailContainer [style.width.px]="numberOfItems*widthThumbnailPx">
         <ng-container *ngFor="let item of itemList; index as i">
           <ng-container *ngTemplateOutlet="thumbnailContainerTemplate; context: { $implicit: item, index: i }"></ng-container>
         </ng-container>
@@ -22,12 +22,11 @@
     </ng-template>
   </div>
 </ng-container>
-
 <ng-template #thumbnailContainerTemplate let-item="$implicit" let-i="index">
   <ng-container *ngIf="(itemToImageHrefMap$ | async)?.get(item.uuid); let href;">
     <div class="thumbnail-container"
-      [style.height.px]="isHorizontal ? heightThumbnailPx : heightThumbnailPx/numberOfItems"
-      [style.width.px]="isHorizontal ? horizontalWidthPx : null"
+      [style.height.px]="heightThumbnailPx"
+      [style.width.px]="widthThumbnailPx"
       [ngClass]="{'selected': activeIndex === i}"
       (click)="onThumbnailClick(item, i)"
       [dsBackgroundImage]="href ?? placeholderSrc"

@@ -1,13 +1,8 @@
-import { SEARCH_CONFIG_SERVICE } from '../../my-dspace-page/my-dspace-page.component';
-import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
-import { NativeWindowRef, NativeWindowService } from '../../core/services/window.service';
-import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { Item } from '../../core/shared/item.model';
-import { ChangeDetectorRef, Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbCarousel, NgbSlideEvent } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject } from 'rxjs';
 import { CarouselOptions } from '../carousel/carousel-options.model';
-import { BitstreamImagesService } from '../../core/services/bitstream-images.service';
 import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
 import { HostWindowService } from '../host-window.service';
 
@@ -15,12 +10,6 @@ import { HostWindowService } from '../host-window.service';
   selector: 'ds-carousel-with-thumbnails',
   templateUrl: './carousel-with-thumbnails.component.html',
   styleUrls: ['./carousel-with-thumbnails.component.scss'],
-  providers: [
-    {
-      provide: SEARCH_CONFIG_SERVICE,
-      useClass: SearchConfigurationService
-    }
-  ]
 })
 export class CarouselWithThumbnailsComponent implements OnInit {
 
@@ -102,18 +91,19 @@ export class CarouselWithThumbnailsComponent implements OnInit {
   /**
    * The height of the vertical thumbnail
    */
-  heightThumbnailPx = 120;
+  thumbnailHeightPx = 120;
 
   /**
    * The width of the horizontal thumbnail
    */
-  horizontalThumbnailWidthPx = 160;
+  thumbnailWidthPx = 160;
+
+  /**
+   * The event of the slider
+   */
+  sliderEventSource: NgbSlideEvent;
 
   constructor(
-    protected bitstreamDataService: BitstreamDataService,
-    protected bitstreamImagesService: BitstreamImagesService,
-    protected cdr: ChangeDetectorRef,
-    @Inject(NativeWindowService) protected _window: NativeWindowRef,
     private hostWindowService: HostWindowService,
   ) {
   }
@@ -148,6 +138,7 @@ export class CarouselWithThumbnailsComponent implements OnInit {
   onSlide(slideEvent: NgbSlideEvent) {
     this.activeItemIndex = +slideEvent.current.split('ngb-slide-')[1];
     this.activeItem = this.itemList[this.activeItemIndex];
+    this.sliderEventSource = slideEvent;
   }
 
   /**

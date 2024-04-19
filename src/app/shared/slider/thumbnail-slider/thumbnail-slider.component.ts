@@ -21,6 +21,7 @@ import {
 } from '@angular/core';
 import { SliderComponent } from '../slider.component';
 import { BitstreamImagesService } from '../../../core/services/bitstream-images.service';
+import { NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'ds-thumbnail-slider',
@@ -72,12 +73,17 @@ export class ThumbnailSliderComponent extends SliderComponent {
    * The width of the thumbnail, defined as number
    * (used to calculate the width of the thumbnail container in px)
    */
-  @Input() horizontalWidthPx: number;
+  @Input() widthThumbnailPx: number;
 
   /**
    * Flag to determine if the thumbnails should be displayed horizontally
    */
   @Input() isHorizontal = false;
+
+  /**
+   * The SliderEventSource that is triggered from the outer indicator (carousel-with-thumbnails)
+   */
+  @Input() sliderEventSource?: NgbSlideEvent;
 
   /**
    * The thumbnail container element (used to scroll to the active thumbnail)
@@ -90,9 +96,9 @@ export class ThumbnailSliderComponent extends SliderComponent {
   @ViewChildren('thumbnails') thumbnailList: ElementRef[];
 
   /**
-   * The width of the horizontal container of the thumbnails
+   * Flag to indicate the direction of the horizontal scroll
    */
-  horizontalContainerWidth;
+  private direction: NgbSlideEventSource.ARROW_RIGHT | NgbSlideEventSource.ARROW_LEFT;
 
   constructor(
     protected bitstreamDataService: BitstreamDataService,
@@ -118,8 +124,6 @@ export class ThumbnailSliderComponent extends SliderComponent {
       });
       super.ngOnInit();
     });
-
-    this.horizontalContainerWidth = this.numberOfItems * this.horizontalWidthPx;
   }
 
   /**
@@ -128,8 +132,20 @@ export class ThumbnailSliderComponent extends SliderComponent {
    */
   ngOnChanges(changes: SimpleChanges) {
     if (changes?.activeItemIndexInOuterIndicator) {
+      if (changes?.sliderEventSource && changes.sliderEventSource.currentValue) {
+        this.direction = changes.sliderEventSource.currentValue.source;
+      }
+
       this.setActiveIndex(changes.activeItemIndexInOuterIndicator.currentValue);
       this.checkAndGetNextPage();
+    }
+
+    if (
+      changes?.numberOfItems &&
+      changes.numberOfItems.currentValue !== changes.numberOfItems.previousValue &&
+      !changes.numberOfItems.isFirstChange
+    ) {
+      this.retrieveItems();
     }
   }
 
@@ -165,7 +181,15 @@ export class ThumbnailSliderComponent extends SliderComponent {
     const thumbnail = this.thumbnailList?.find((element, index) => index === this.activeIndex);
     if (thumbnail && !this.isElementInView(thumbnail.nativeElement)) {
       if (this.isHorizontal) {
-        this.thumbnailContainer.nativeElement.scrollLeft = thumbnail.nativeElement.offsetLeft;
+        if (this.activeIndex === 0) {
+          this.thumbnailContainer.nativeElement.scrollLeft = 0;
+        } else if (this.activeIndex === this.itemList.length - 1) {
+          this.thumbnailContainer.nativeElement.scrollLeft = this.thumbnailContainer.nativeElement.scrollWidth;
+        } else if (this.direction === NgbSlideEventSource.ARROW_RIGHT) {
+          this.thumbnailContainer.nativeElement.scrollLeft += thumbnail.nativeElement.offsetWidth;
+        } else if (this.direction === NgbSlideEventSource.ARROW_LEFT) {
+          this.thumbnailContainer.nativeElement.scrollLeft -= thumbnail.nativeElement.offsetWidth;
+        }
       } else {
         this.thumbnailContainer.nativeElement.scrollTop = thumbnail.nativeElement.offsetTop;
       }
@@ -191,6 +215,7 @@ export class ThumbnailSliderComponent extends SliderComponent {
    * Sets the active index to the next index and checks if the next page should be retrieved
    */
   getNext() {
+    this.direction = NgbSlideEventSource.ARROW_RIGHT;
     const index = this.activeIndex + 1;
     this.setActiveIndex(index);
     this.checkAndGetNextPage();
@@ -200,6 +225,7 @@ export class ThumbnailSliderComponent extends SliderComponent {
    * Sets the active index to the previous index and checks if the previous page should be retrieved
    */
   getPrev() {
+    this.direction = NgbSlideEventSource.ARROW_LEFT;
     const index = this.activeIndex - 1;
     this.setActiveIndex(index);
     this.previousPage();

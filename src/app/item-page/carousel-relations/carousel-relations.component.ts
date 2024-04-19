@@ -17,7 +17,7 @@ export class CarouselRelationsComponent {
   carouselOptions: CarouselOptions = {
     aspectRatio: undefined,
     captionStyle: '',
-    carouselHeightPx: 500,
+    carouselHeightPx: 480,
     description: 'dc.description.abstract',
     fitHeight: false,
     fitWidth: false,

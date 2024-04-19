@@ -1,52 +1,31 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CarouselWithThumbnailsComponent } from './carousel-with-thumbnails.component';
-import { RemoteDataBuildService } from '../../core/cache/builders/remote-data-build.service';
-import { ActivatedRoute } from '@angular/router';
-import { of as observableOf, of } from 'rxjs';
-import { HALEndpointService } from '../../core/shared/hal-endpoint.service';
+import { of } from 'rxjs';
 import { RouterMock } from '../mocks/router.mock';
-import { DSOChangeAnalyzer } from '../../core/data/dso-change-analyzer.service';
-import { BitstreamFormatDataService } from '../../core/data/bitstream-format-data.service';
-import { NativeWindowService } from '../../core/services/window.service';
 import { CarouselOptions } from '../carousel/carousel-options.model';
 import { Item } from '../../core/shared/item.model';
 import { MetadataMap, MetadataValue } from '../../core/shared/metadata.models';
-import { PageInfo } from '../../core/shared/page-info.model';
 import { CommonModule } from '@angular/common';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateLoaderMock } from '../mocks/translate-loader.mock';
-import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
-import { BitstreamDataService } from '../../core/data/bitstream-data.service';
-import { BitstreamImagesService } from '../../core/services/bitstream-images.service';
-import { ChangeDetectorRef, NO_ERRORS_SCHEMA } from '@angular/core';
-import { SearchManager } from '../../core/browse/search-manager';
-import { RouteService } from '../../core/services/route.service';
-import { RequestService } from '../../core/data/request.service';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { HostWindowService } from '../host-window.service';
 
 describe('CarouselWithThumbnailsComponent', () => {
   let component: CarouselWithThumbnailsComponent;
-  let componentAsAny: any;
   let fixture: ComponentFixture<CarouselWithThumbnailsComponent>;
   let routerMock: RouterMock = new RouterMock();
-  let halService = jasmine.createSpyObj('halService', {
-    getEndpoint: observableOf('fake-url')
-  });
-  let searchConfigStub = {
-    getConfigurationSearchConfig: jasmine.createSpy('getConfigurationSearchConfig').and.returnValue(of({}))
-  };
 
-  let remoteDataBuildServiceStub = jasmine.createSpyObj('RemoteDataBuildService', {
-    buildSingle: observableOf({}),
-    buildList: observableOf({}),
-    buildFromHref: observableOf({})
-  });
-
-  let item = Object.assign(new Item(), {
+  let itemMock = Object.assign(new Item(), {
     uuid: 'e1c51c69-896d-42dc-8221-1d5f2ad5516e', metadata: {
       'dc.title': [{ value: 'title', } as MetadataValue]
     } as MetadataMap
   } as Item);
+
+  let hostWindowServicve = jasmine.createSpyObj('HostWindowService', [
+    'isXs',
+  ]);
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -61,23 +40,7 @@ describe('CarouselWithThumbnailsComponent', () => {
       ],
       declarations: [CarouselWithThumbnailsComponent],
       providers: [
-        { provide: RemoteDataBuildService, useValue: remoteDataBuildServiceStub },
-        {
-          provide: ActivatedRoute, useValue: {
-            queryParamMap: observableOf({})
-          }
-        },
-        { provide: HALEndpointService, useValue: halService },
-        { provide: DSOChangeAnalyzer, useValue: {} },
-        { provide: BitstreamFormatDataService, useValue: {} },
-        { provide: NativeWindowService, useValue: {} },
-        { provide: SearchConfigurationService, useValue: searchConfigStub },
-        { provide: BitstreamDataService, useValue: {} },
-        { provide: BitstreamImagesService, useValue: {} },
-        { provide: SearchManager, useValue: {} },
-        { provide: RouteService, useValue: {} },
-        { provide: RequestService, useValue: jasmine.createSpyObj('requestService', ['generateRequestId', 'send']) },
-        ChangeDetectorRef,
+        { provide: HostWindowService, useValue: hostWindowServicve },
       ],
       schemas: [
         NO_ERRORS_SCHEMA
@@ -89,16 +52,10 @@ describe('CarouselWithThumbnailsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CarouselWithThumbnailsComponent);
     component = fixture.componentInstance;
-    componentAsAny = component;
     component.carouselOptions = { title: 'title', link: 'title' } as CarouselOptions;
-    component.itemList = [Object.assign(new Item(), item)];
+    component.itemList = [Object.assign(new Item(), itemMock)];
     routerMock.parseUrl.and.returnValue({ root: { children: { primary: { segments: ['1'] } } } });
-    component.pageInfo = new PageInfo({
-      elementsPerPage: 1,
-      totalElements: 2,
-      totalPages: 1,
-      currentPage: 1
-    });
+    hostWindowServicve.isXs.and.returnValue(of(false));
     component.scope = 's154-125df-125df';
     component.discoveryConfiguration = 'test';
     fixture.detectChanges();
@@ -114,45 +71,10 @@ describe('CarouselWithThumbnailsComponent', () => {
     expect(component.initializeEntries).toHaveBeenCalled();
   });
 
-  it('should determine if an element is in view', () => {
-    const element = document.createElement('div');
-    spyOn(element, 'getBoundingClientRect').and.returnValue({
-      top: 5,
-      bottom: 15,
-      height: 500,
-      width: 500,
-      x: 0,
-      y: 0,
-      right: 10,
-      left: 0,
-      toJSON: () => {
-        /** empty section */
-      }
-    });
-    spyOn(component.thumbnailContainer.nativeElement, 'getBoundingClientRect').and.returnValue({
-      top: 0,
-      bottom: 10
-    });
-    expect(componentAsAny.isElementInView(element)).toBe(false);
-  });
-
-  it('should check if first item', () => {
-    component.activeItemIndex = 0;
-    expect(component.isFirstItem).toBe(true);
-    component.activeItemIndex = 1;
-    expect(component.isFirstItem).toBe(false);
-  });
-
-  it('should check if last item', () => {
-    component.activeItemIndex = 0;
-    expect(component.isLastItem).toBe(false);
-    component.activeItemIndex = 1;
-    expect(component.isLastItem).toBe(true);
-  });
 
   it('should set active item', () => {
     component.carousel = jasmine.createSpyObj('NgbCarousel', ['select', 'pause']);
-    component.itemToImageHrefMap$.next(new Map([[item.uuid, 'fake-url']]));
+    component.itemToImageHrefMap$.next(new Map([[itemMock.uuid, 'fake-url']]));
 
     component.setActiveItem(0);
     expect(component.carousel.select).toHaveBeenCalledWith('ngb-slide-0');
@@ -160,22 +82,39 @@ describe('CarouselWithThumbnailsComponent', () => {
 
   });
 
-  it('should get next item', () => {
-    spyOn(component, 'setActiveItem');
-    component.activeItemIndex = 0;
-    component.getNext();
-    expect(component.setActiveItem).toHaveBeenCalledWith(1);
-  });
-
-  it('should get previous item', () => {
-    spyOn(component, 'setActiveItem');
-    component.activeItemIndex = 1;
-    component.getPrev();
-    expect(component.setActiveItem).toHaveBeenCalledWith(0);
+  it('should set active item on slide', () => {
+    component.itemList = [new Item(), new Item(), new Item()];
+    component.onSlide({current: 'ngb-slide-1'} as any);
+    expect(component.activeItem).toEqual(component.itemList[1]);
   });
 
   it('should check if link is internal', () => {
-    expect(component.isLinkInternal('/internal/link')).toBe(true);
-    expect(component.isLinkInternal('http://external.link')).toBe(false);
+    expect(component.isLinkInternal('/internal/link')).toBeTrue();
+    expect(component.isLinkInternal('http://external.link')).toBeFalse();
+  });
+
+  it('should get item link', () => {
+    const item = new Item();
+    item.uuid = 'item-uuid';
+    expect(component.getItemLink(item)).toBe('/items/item-uuid');
+  });
+
+  it('should get selected thumbnail to show on carousel', () => {
+    const item = new Item();
+    component.selectedThumbnail(item);
+    expect(component.activeItem).toBe(item);
+  });
+
+  it('should get item map value', () => {
+    const map = new Map<string, string>();
+    component.getItemMapValue(map);
+    expect(component.itemToImageHrefMap$.value).toBe(map);
+  });
+
+  it('should get updated item list', () => {
+    const items = [new Item(), new Item(), new Item()];
+    component.getUpdatedItemList(items);
+    expect(component.itemList).toBe(items);
+    expect(component.activeItem).toBe(items[0]);
   });
 });

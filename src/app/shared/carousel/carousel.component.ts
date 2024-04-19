@@ -1,8 +1,7 @@
 import { ItemSearchResult } from '../object-collection/shared/item-search-result.model';
 import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, from, Observable, of } from 'rxjs';
-import { catchError, map, mergeMap, scan, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { NativeWindowRef, NativeWindowService } from '../../core/services/window.service';
 import { CarouselOptions } from './carousel-options.model';
@@ -87,6 +86,7 @@ export class CarouselComponent implements OnInit {
     this.link = this.carouselOptions.link;
     this.description = this.carouselOptions.description;
     this.bundle = this.carouselOptions.bundle ?? 'ORIGINAL';
+    this.isLoading$.next(true);
     this.findAllBitstreamImages().subscribe((res) => {
       this.itemToImageHrefMap$.next(res);
       this.isLoading$.next(false);
@@ -122,20 +122,7 @@ export class CarouselComponent implements OnInit {
    * Find the first image of each item
    */
   findAllBitstreamImages(): Observable<Map<string, string>> {
-    // TODO - refactor using getItemToImageMap() from service - handle loader and errors in a different way
-    return from(this.items).pipe(
-      tap(() => this.isLoading$.next(true)),
-      map((itemSR) => itemSR.indexableObject),
-      mergeMap((item) => this.bitstreamImagesService.findImageBitstreams(item, this.bundle)),
-      scan((acc: Map<string, string>, value: any) => { // todo add interface
-        acc.set(value.itemUUID, value.imageHref);
-        return acc;
-      }, new Map<string, string>()),
-      catchError(() => {
-        this.isLoading$.next(false);
-        return of(new Map<string, string>());
-      }),
-    );
+    return this.bitstreamImagesService.getItemToImageMap(this.items.map((itemSR) => itemSR.indexableObject), this.bundle);
   }
 
   getItemLink(item: Item): string {

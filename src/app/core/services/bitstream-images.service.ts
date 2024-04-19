@@ -13,7 +13,6 @@ import { hasValue } from '../../shared/empty.util';
 import { BitstreamDataService } from '../data/bitstream-data.service';
 import { Item } from '../shared/item.model';
 
-
 interface ItemAndImage {
   itemUUID: string;
   imageHref: string;
@@ -25,16 +24,15 @@ export class BitstreamImagesService {
 
   constructor(protected bitstreamDataService: BitstreamDataService) {}
 
-  // TODO fix tsdoc
-
   /**
-   *
+   * Retrieve all items and their image bitstreams
    * @param items
    * @param bundleName
    */
   getItemToImageMap(items: Item[], bundleName = 'ORIGINAL'): Observable<Map<string, string>> {
     return from(items).pipe(
       mergeMap((item) => this.findImageBitstreams(item, bundleName).pipe(
+        take(1),
         map((bitstream: Bitstream) => <ItemAndImage>{
           itemUUID: item.uuid, imageHref: bitstream._links.content.href
         }),
@@ -72,7 +70,6 @@ export class BitstreamImagesService {
         ),
         map(() => bitstream)
       )),
-      take(1), // TODO this method should retrieve all images; the caller should take one image per item
     );
   }
 }
