@@ -98,7 +98,7 @@ export class ThumbnailSliderComponent extends SliderComponent {
   /**
    * Flag to indicate the direction of the horizontal scroll
    */
-  private direction: NgbSlideEventSource.ARROW_RIGHT | NgbSlideEventSource.ARROW_LEFT;
+  private direction: 'arrowRight' | 'arrowLeft';
 
   constructor(
     protected bitstreamDataService: BitstreamDataService,
@@ -132,7 +132,7 @@ export class ThumbnailSliderComponent extends SliderComponent {
    */
   ngOnChanges(changes: SimpleChanges) {
     if (changes?.activeItemIndexInOuterIndicator) {
-      if (changes?.sliderEventSource && changes.sliderEventSource.currentValue) {
+      if (changes?.sliderEventSource && changes.sliderEventSource.currentValue?.source) {
         this.direction = changes.sliderEventSource.currentValue.source;
       }
 
@@ -185,9 +185,9 @@ export class ThumbnailSliderComponent extends SliderComponent {
           this.thumbnailContainer.nativeElement.scrollLeft = 0;
         } else if (this.activeIndex === this.itemList.length - 1) {
           this.thumbnailContainer.nativeElement.scrollLeft = this.thumbnailContainer.nativeElement.scrollWidth;
-        } else if (this.direction === NgbSlideEventSource.ARROW_RIGHT) {
+        } else if (this.direction === 'arrowRight') {
           this.thumbnailContainer.nativeElement.scrollLeft += thumbnail.nativeElement.offsetWidth;
-        } else if (this.direction === NgbSlideEventSource.ARROW_LEFT) {
+        } else if (this.direction === 'arrowLeft') {
           this.thumbnailContainer.nativeElement.scrollLeft -= thumbnail.nativeElement.offsetWidth;
         }
       } else {
@@ -215,7 +215,7 @@ export class ThumbnailSliderComponent extends SliderComponent {
    * Sets the active index to the next index and checks if the next page should be retrieved
    */
   getNext() {
-    this.direction = NgbSlideEventSource.ARROW_RIGHT;
+    this.direction = 'arrowRight';
     const index = this.activeIndex + 1;
     this.setActiveIndex(index);
     this.checkAndGetNextPage();
@@ -225,7 +225,7 @@ export class ThumbnailSliderComponent extends SliderComponent {
    * Sets the active index to the previous index and checks if the previous page should be retrieved
    */
   getPrev() {
-    this.direction = NgbSlideEventSource.ARROW_LEFT;
+    this.direction = 'arrowLeft';
     const index = this.activeIndex - 1;
     this.setActiveIndex(index);
     this.previousPage();
