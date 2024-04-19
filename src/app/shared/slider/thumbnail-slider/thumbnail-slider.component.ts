@@ -21,7 +21,7 @@ import {
 } from '@angular/core';
 import { SliderComponent } from '../slider.component';
 import { BitstreamImagesService } from '../../../core/services/bitstream-images.service';
-import { NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
+import { NgbSlideEvent } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'ds-thumbnail-slider',
