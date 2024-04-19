@@ -61,8 +61,8 @@ import { ThemedItemAlertsComponent } from './alerts/themed-item-alerts.component
 import {
   ThemedFullFileSectionComponent
 } from './full/field-components/file-section/themed-full-file-section.component';
-import { UnpaywallVersionsComponent } from './unpaywall-versions/unpaywall-versions.component';
 import { MarkdownViewerModule } from '../shared/markdown-viewer/markdown-viewer.module';
+import { UnpaywallVersionsComponent } from './unpaywall-versions/unpaywall-versions.component';
 
 
 const ENTRY_COMPONENTS = [

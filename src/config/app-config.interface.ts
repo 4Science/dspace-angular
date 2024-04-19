@@ -32,6 +32,7 @@ import { AdvancedAttachmentRenderingConfig } from './advanced-attachment-renderi
 import { AttachmentRenderingConfig } from './attachment-rendering.config';
 import { SearchResultConfig } from './search-result-config.interface';
 import { MiradorConfig } from './mirador-config.interfaces';
+import { LoaderConfig } from './loader-config.interfaces';
 import { LocationConfig } from './location-config.interface';
 
 interface AppConfig extends Config {
@@ -71,6 +72,7 @@ interface AppConfig extends Config {
   advancedAttachmentRendering: AdvancedAttachmentRenderingConfig;
   searchResult: SearchResultConfig;
   mirador: MiradorConfig;
+  loader: LoaderConfig;
   location: LocationConfig;
 }
 

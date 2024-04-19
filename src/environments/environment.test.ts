@@ -589,6 +589,12 @@ export const environment: BuildConfig = {
     enableDownloadPlugin: true,
   },
 
+  loader: {
+    showFallbackMessagesByDefault: true,
+    warningMessageDelay: 1000,
+    errorMessageDelay: 2000,
+  },
+
   location: {
     nominatimApi: {
       searchEndpoint: 'https://nominatim.openstreetmap.org/search',

@@ -20,10 +20,10 @@ import { ThemedSearchSectionComponent } from './section-component/search-section
 import { TextSectionComponent } from './section-component/text-section/text-section.component';
 import { ThemedTextSectionComponent } from './section-component/text-section/themed-text-section.component';
 import { SharedModule } from '../shared.module';
+import { MarkdownViewerModule } from '../markdown-viewer/markdown-viewer.module';
 import { CarouselSectionComponent } from './section-component/carousel-section/carousel-section.component';
 import { ThemedCarouselSectionComponent } from './section-component/carousel-section/themed-carousel-section.component';
 import { CarouselModule } from '../carousel/carousel.module';
-import { MarkdownViewerModule } from '../markdown-viewer/markdown-viewer.module';
 import { GridSectionComponent } from './section-component/grid-section/grid-section.component';
 import { ThemedGridSectionComponent } from './section-component/grid-section/themed-grid-section.component';
 import { TwitterSectionComponent } from './section-component/twitter-section/twitter-section.component';
@@ -56,12 +56,12 @@ const COMPONENTS = [
   declarations: [
     ...COMPONENTS
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    CarouselModule,
-    MarkdownViewerModule
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        MarkdownViewerModule,
+        CarouselModule,
+    ],
   exports: [
     ...COMPONENTS
   ]
