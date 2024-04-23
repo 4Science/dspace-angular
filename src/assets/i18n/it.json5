@@ -120,10 +120,10 @@
   "admin.edit-user-agreement.markdown": "Lo <i>Lo User Agreement</i> supporta il formato <a href=\"https://www.markdownguide.org/basic-syntax/\" target=\"_blank\">Markdown</a>.",
 
   // "admin.edit-cms-metadata.title": "Edit CMS Metadata",
-  "admin.edit-cms-metadata.title": "Modifica metadati CMS",
+  "admin.edit-cms-metadata.title": "Modifica pagine redazionali",
 
   // "admin.edit-cms-metadata.breadcrumbs": "Edit CMS Metadata",
-  "admin.edit-cms-metadata.breadcrumbs": "Modifica metadati CMS",
+  "admin.edit-cms-metadata.breadcrumbs": "Modifica pagine redazionali",
 
   // "admin.edit-cms-metadata.edit-button": "Edit",
   "admin.edit-cms-metadata.edit-button": "Modifica",
@@ -144,7 +144,7 @@
   "admin.edit-cms-metadata.error": "Si è verificato un errore durante l'aggiornamento dei metadati",
 
   // "menu.section.cms_metadata_edit": "Edit CMS Metadata",
-  "menu.section.cms_metadata_edit": "Modifica metadati CMS",
+  "menu.section.cms_metadata_edit": "Modifica pagine redazionali",
 
   // "menu.section.cms.edit.metadata.head": "Edit Metadata",
   "menu.section.cms.edit.metadata.head": "Modifica metadati",
@@ -6661,7 +6661,7 @@
   "menu.section.icon.import": "Sezione del menu Importa",
 
   // "menu.section.icon.metadata_cms_edit": "Edit CMS metadata",
-  "menu.section.icon.metadata_cms_edit": "Modifica metadati CMS",
+  "menu.section.icon.metadata_cms_edit": "Modifica pagine redazionali",
 
   // "menu.section.icon.new": "New menu section",
   "menu.section.icon.new": "Nuova sezione menu",
