@@ -17,7 +17,6 @@ import { HomePageModule } from '../../app/home-page/home-page.module';
 import { StatisticsModule } from '../../app/statistics/statistics.module';
 import { OpenaireModule } from '../../app/openaire/openaire.module';
 import { SearchComponent } from './app/shared/search/search.component';
-import { TopSectionComponent } from './app/shared/explore/section-component/top-section/top-section.component';
 import {
   CountersSectionComponent
 } from './app/shared/explore/section-component/counters-section/counters-section.component';
@@ -50,7 +49,6 @@ const DECLARATIONS = [
   ExplorePageComponent,
   HomePageComponent,
   SearchComponent,
-  TopSectionComponent,
   CountersSectionComponent,
   TextSectionComponent,
   LangSwitchComponent,
