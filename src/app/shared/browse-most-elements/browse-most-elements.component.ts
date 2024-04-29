@@ -4,7 +4,7 @@ import {
   AdvancedTopSectionTemplateType,
   TopSection,
 } from '../../core/layout/models/section.model';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
 import { Context } from '../../core/shared/context.model';
 
@@ -14,7 +14,7 @@ import { Context } from '../../core/shared/context.model';
   templateUrl: './browse-most-elements.component.html'
 })
 
-export class BrowseMostElementsComponent {
+export class BrowseMostElementsComponent implements OnInit {
 
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
@@ -23,12 +23,12 @@ export class BrowseMostElementsComponent {
   /**
    * Whether to show the metrics badges
    */
-  @Input() showMetrics;
+  @Input() showMetrics: boolean;
 
   /**
    * Whether to show the thumbnail preview
    */
-  @Input() showThumbnails;
+  @Input() showThumbnails: boolean;
 
   @Input() topSection: TopSection;
 
@@ -49,8 +49,6 @@ export class BrowseMostElementsComponent {
   sectionTemplateType = AdvancedTopSectionTemplateType.DEFAULT;
 
   ngOnInit(): void {
-    this.sectionTemplateType = this.advancedTopSection
-                              ? this.advancedTopSection?.template : this.topSection
-                              ? this.topSection?.template : AdvancedTopSectionTemplateType.DEFAULT;
+    this.sectionTemplateType = this.advancedTopSection?.template ?? this.topSection?.template ?? AdvancedTopSectionTemplateType.DEFAULT;
   }
 }
