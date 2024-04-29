@@ -1,4 +1,4 @@
-import { AdvancedTopSection } from './../../../core/layout/models/section.model';
+import { AdvancedTopSection } from '../../../core/layout/models/section.model';
 import { Component, Input } from '@angular/core';
 import { ImageBrowseElementsComponent } from '../image-browse-elements/image-browse-elements.component';
 

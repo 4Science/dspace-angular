@@ -1,21 +1,18 @@
-import { Bitstream } from './../../../core/shared/bitstream.model';
-import { Item } from './../../../core/shared/item.model';
-import { DSpaceObject } from './../../../core/shared/dspace-object.model';
-import { PaginatedList } from './../../../core/data/paginated-list.model';
-import { RemoteData } from './../../../core/data/remote-data';
-import { BitstreamDataService } from './../../../core/data/bitstream-data.service';
-import { Router } from '@angular/router';
-import { SearchService } from './../../../core/shared/search/search.service';
-import { Component, ChangeDetectorRef, OnChanges, PLATFORM_ID, Inject } from '@angular/core';
+import { Bitstream } from '../../../core/shared/bitstream.model';
+import { Item } from '../../../core/shared/item.model';
+import { DSpaceObject } from '../../../core/shared/dspace-object.model';
+import { PaginatedList } from '../../../core/data/paginated-list.model';
+import { RemoteData } from '../../../core/data/remote-data';
+import { BitstreamDataService } from '../../../core/data/bitstream-data.service';
+import { Component, inject, OnChanges } from '@angular/core';
 import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
-import { APP_CONFIG, AppConfig } from './../../../../config/app-config.interface';
 import { BehaviorSubject, filter, from, map, mergeMap, scan, switchMap, take } from 'rxjs';
 import { followLink } from '../../utils/follow-link-config.model';
-import { getFirstCompletedRemoteData } from './../../../core/shared/operators';
+import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { SearchResult } from '../../search/models/search-result.model';
-import { BitstreamFormat } from './../../../core/shared/bitstream-format.model';
+import { BitstreamFormat } from '../../../core/shared/bitstream-format.model';
 import { hasValue } from '../../empty.util';
-import { getItemPageRoute } from './../../../item-page/item-page-routing-paths';
+import { getItemPageRoute } from '../../../item-page/item-page-routing-paths';
 
 @Component({
   selector: 'ds-image-browse-elements',
@@ -32,16 +29,7 @@ export class ImageBrowseElementsComponent extends AbstractBrowseElementsComponen
    */
   maxSquareRatio = 1.3;
 
-  constructor(
-    @Inject(APP_CONFIG) protected appConfig: AppConfig,
-    @Inject(PLATFORM_ID) protected platformId: Object,
-    protected searchService: SearchService,
-    protected cdr: ChangeDetectorRef,
-    protected router: Router,
-    private bitstreamDataService: BitstreamDataService
-  ) {
-    super(appConfig, platformId, searchService, router, cdr);
-  }
+  private readonly bitstreamDataService = inject(BitstreamDataService);
 
   ngOnChanges() {
     const showThumbnails = this.showThumbnails ?? this.appConfig.browseBy.showThumbnails;

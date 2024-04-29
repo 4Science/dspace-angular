@@ -1,8 +1,8 @@
-import { ViewMode } from './../../../core/shared/view-mode.model';
-import { LayoutModeEnum } from './../../../core/layout/models/section.model';
-import { DSpaceObject } from './../../../core/shared/dspace-object.model';
-import { PaginatedList } from './../../../core/data/paginated-list.model';
-import { RemoteData } from './../../../core/data/remote-data';
+import { ViewMode } from '../../../core/shared/view-mode.model';
+import { LayoutModeEnum } from '../../../core/layout/models/section.model';
+import { DSpaceObject } from '../../../core/shared/dspace-object.model';
+import { PaginatedList } from '../../../core/data/paginated-list.model';
+import { RemoteData } from '../../../core/data/remote-data';
 import { Component, OnChanges } from '@angular/core';
 import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
 import { isPlatformServer } from '@angular/common';
