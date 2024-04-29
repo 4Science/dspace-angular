@@ -68,7 +68,7 @@ export interface TopSection extends SectionComponent {
   itemListStyle?: string;
   cardColumnStyle?: string;
   showAllResults: boolean;
-  template: TemplateType;
+  template: AdvancedTopSectionTemplateType;
 }
 
 export interface GridSection extends SectionComponent {
@@ -172,14 +172,14 @@ export interface AdvancedTopSection extends SectionComponent {
   /**
    * The template to use for the section.
    */
-  template: TemplateType;
+  template: AdvancedTopSectionTemplateType;
 }
 
 /*
  * Represents the type of template to use for the section
  */
-export enum TemplateType {
+export enum AdvancedTopSectionTemplateType {
   DEFAULT = 'default', // cris default template
-  IMAGE = 'image', // glam images template
-  CARD = 'card', // card template with image
+  IMAGES = 'images', // glam images template
+  SLIDER = 'slider', // card template with image
 }

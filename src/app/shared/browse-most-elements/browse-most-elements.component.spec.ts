@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { TemplateType } from './../../core/layout/models/section.model';
+import { AdvancedTopSectionTemplateType } from '../../core/layout/models/section.model';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowseMostElementsComponent } from './browse-most-elements.component';
 import { By } from '@angular/platform-browser';
@@ -21,7 +21,7 @@ describe('BrowseMostElementsComponent', () => {
     fixture = TestBed.createComponent(BrowseMostElementsComponent);
     component = fixture.componentInstance;
     component.topSection = {
-      template: TemplateType.DEFAULT
+      template: AdvancedTopSectionTemplateType.DEFAULT
     } as any;
     fixture.detectChanges();
   });
@@ -34,7 +34,7 @@ describe('BrowseMostElementsComponent', () => {
   describe('when the templateType is DEFAULT', () => {
     beforeEach(() => {
       component.topSection = {
-        template: TemplateType.DEFAULT
+        template: AdvancedTopSectionTemplateType.DEFAULT
       } as any;
       fixture.detectChanges();
     });
@@ -54,7 +54,7 @@ describe('BrowseMostElementsComponent', () => {
     beforeEach(() => {
       component.topSection = null;
       component.advancedTopSection = {
-        template: TemplateType.IMAGE
+        template: AdvancedTopSectionTemplateType.IMAGES
       } as any;
       component.ngOnInit();
       fixture.detectChanges();

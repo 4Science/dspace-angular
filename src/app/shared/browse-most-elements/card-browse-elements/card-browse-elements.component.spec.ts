@@ -1,4 +1,4 @@
-import { TemplateType } from './../../../core/layout/models/section.model';
+import { AdvancedTopSectionTemplateType } from '../../../core/layout/models/section.model';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -79,7 +79,7 @@ describe('CardBrowseElementsComponent', () => {
      style: '',
     componentType: 'advanced-top-component',
     numberOfItems: 8,
-    template: TemplateType.CARD,
+    template: AdvancedTopSectionTemplateType.SLIDER,
   };
 
   beforeEach(async(() => {

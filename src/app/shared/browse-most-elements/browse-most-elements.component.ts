@@ -1,7 +1,7 @@
 import {
   AdvancedTopSection,
   LayoutModeEnum,
-  TemplateType,
+  AdvancedTopSectionTemplateType,
   TopSection,
 } from '../../core/layout/models/section.model';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
@@ -44,13 +44,13 @@ export class BrowseMostElementsComponent {
   /**
    * The type of the template to render
    */
-  templateType = TemplateType;
+  templateType = AdvancedTopSectionTemplateType;
 
-  sectionTemplateType: TemplateType = TemplateType.DEFAULT;
+  sectionTemplateType = AdvancedTopSectionTemplateType.DEFAULT;
 
   ngOnInit(): void {
     this.sectionTemplateType = this.advancedTopSection
                               ? this.advancedTopSection?.template : this.topSection
-                              ? this.topSection?.template : TemplateType.DEFAULT;
+                              ? this.topSection?.template : AdvancedTopSectionTemplateType.DEFAULT;
   }
 }
