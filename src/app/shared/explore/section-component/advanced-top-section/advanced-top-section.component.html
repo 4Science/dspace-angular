@@ -1,43 +1,25 @@
-<div class="justify-content-center d-flex flex-column gapy-4">
-  <div class="home-page-component-container gapy-4 d-flex flex-column">
-    <div class="d-flex flex-row justify-content-between">
-      <h3>
-        {{ 'home.advanced-top-section.' + advancedTopSection.sortField | translate }}
-      </h3>
-    </div>
-    <div class="d-flex flex-row justify-content-center align-items-center">
-      <div class="d-flex gap-2" *ngIf="advancedTopSection.discoveryConfigurationName?.length > 1">
-        <div class="btn-group">
-          <ng-container *ngFor="let discovery of advancedTopSection.discoveryConfigurationName">
-            <button class="btn text-capitalize"
-              [ngClass]="selectedDiscoverConfiguration === discovery ? 'btn-primary' : 'btn-outline-primary'"
-              (click)="changeDiscovery(discovery, 1)"
-              >
-              {{discovery}}
-            </button>
-          </ng-container>
-        </div>
-      </div>
+<div>
+  <h2 class="mb-3">
+    {{ 'home.advanced-top-section.' + advancedTopSection.sortField | translate }}
+  </h2>
+  <div class="d-flex justify-content-center mb-3" *ngIf="advancedTopSection.discoveryConfigurationName?.length > 1">
+    <div class="btn-group">
+      <ng-container *ngFor="let discoveryConfigurationName of advancedTopSection.discoveryConfigurationName">
+        <button class="btn text-capitalize"
+                [ngClass]="(selectedDiscoverConfiguration.asObservable() | async) === discoveryConfigurationName ? 'btn-primary' : 'btn-outline-primary'"
+                (click)="selectDiscoveryConfiguration(discoveryConfigurationName)"
+        >
+          {{ discoveryConfigurationName }}
+        </button>
+      </ng-container>
     </div>
   </div>
-  <div class="home-page-top-items-container d-flex align-items-center justify-content-center" #cardContainer>
-    <div>
-      <button class="btn btn-link btn-sm" (click)="scrollLeft()" [disabled]="reachedStart">
-        <i class="fa-solid fa-chevron-left fa-2xl"></i>
-      </button>
-    </div>
-    <div class="w-100">
-      <ds-themed-browse-most-elements [context]="context"
-                                      [paginatedSearchOptions]="paginatedSearchOptions"
-                                      [advancedTopSection]="advancedTopSection"
-                                      [showThumbnails]="showThumbnails"
-                                      (totalElements)="totalElements($event)">
-      </ds-themed-browse-most-elements>
-    </div>
-    <div>
-      <button class="btn btn-link btn-sm " (click)="scrollRight()" [disabled]="reachedEnd">
-        <i class="fa-solid fa-chevron-right fa-2xl"></i>
-      </button>
-    </div>
+  <div>
+    <ds-themed-browse-most-elements [context]="context"
+                                    [paginatedSearchOptions]="paginatedSearchOptions.asObservable() | async"
+                                    [advancedTopSection]="advancedTopSection"
+                                    [showThumbnails]="showThumbnails">
+    </ds-themed-browse-most-elements>
   </div>
 </div>
+

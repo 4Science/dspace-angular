@@ -1,147 +1,56 @@
-import { SortOptions } from './../../../../core/cache/models/sort-options.model';
-import { PaginationComponentOptions } from './../../../pagination/pagination-component-options.model';
-import { PaginatedSearchOptions } from './../../../search/models/paginated-search-options.model';
-import {
- ChangeDetectorRef,
- Component,
- ElementRef,
- Input,
- OnDestroy,
- OnInit,
- ViewChild,
-} from '@angular/core';
+import { SortDirection, SortOptions } from '../../../../core/cache/models/sort-options.model';
+import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
+import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
+import { Component, Input, OnInit } from '@angular/core';
 import { AdvancedTopSection } from '../../../../core/layout/models/section.model';
 import { Context } from '../../../../core/shared/context.model';
-import { SortDirection } from '../../../../core/cache/models/sort-options.model';
-import isEqual from 'lodash/isEqual';
-import { BehaviorSubject, Subscription } from 'rxjs';
-import { hasValue } from '../../../../shared/empty.util';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'ds-advanced-top-section',
   templateUrl: './advanced-top-section.component.html',
-  styleUrls: ['./advanced-top-section.component.scss']
+  styleUrls: ['./advanced-top-section.component.scss'],
 })
-export class AdvancedTopSectionComponent implements OnInit, OnDestroy {
+export class AdvancedTopSectionComponent implements OnInit {
   /**
    * The identifier of the section.
    */
   @Input() sectionId: string;
 
   /**
-   * Represents the advanced top section of the component.
+   * The section data
    */
   @Input() advancedTopSection: AdvancedTopSection;
 
   /**
-   * The context of the section.
+   * The context in which the section is shown
    */
   @Input() context: Context = Context.BrowseMostElements;
 
-  @ViewChild('cardContainer') wrapperContainer: ElementRef;
-
   /**
-   * The paginated search options for the section.
+   * The paginated search options for the section
    */
-  paginatedSearchOptions: PaginatedSearchOptions;
+  paginatedSearchOptions = new BehaviorSubject<PaginatedSearchOptions>(null);
 
   /**
    * Whether to show the thumbnail preview
    */
-  showThumbnails = true;
-
-  /**
-   * The number of items to show in the section.
-   * If endlessHorizontalScroll is true, the number of items is 5, otherwise it is 3.
-   */
-  maxNumberOfItems;
+  showThumbnails: boolean;
 
   /**
    * The name of the selected discovery configuration.
    */
-  selectedDiscoverConfiguration: string;
+  selectedDiscoverConfiguration = new BehaviorSubject<string>(null);
 
   /**
    * The sort direction of the section.
    */
-  sortDirection = SortDirection.ASC;
-
-  /**
-   * The total number of pages.
-   */
-  resultTotalPages: number;
-
-  /**
-   * The initial number of elements per page.
-   */
-  initialNumberOfElementsPerPage = 4;
-
-  /**
-   * The total number of elements for discovery configuration.
-   */
-  totalNumberOfElements = new BehaviorSubject<number>(0);
-
-  /**
-   * The minimum card width.
-   */
-  readonly minCardWidth = 250;
-
-  /**
-   * The maximum number of cards per page.
-   */
-  readonly maxNumberOfCardsPerPage = 4;
-
-  /**
-   * The subscriptions for the component.
-   */
-  subs: Subscription[] = [];
-
-  private resizeObserver: ResizeObserver;
-
-  constructor(
-    private chd: ChangeDetectorRef
-  ) { }
+  sortOptions: SortOptions;
 
   ngOnInit() {
-    const order = this.advancedTopSection.order;
-    this.maxNumberOfItems = this.advancedTopSection.numberOfItems || 8;
-    this.sortDirection = order?.toUpperCase() === 'ASC' ? SortDirection.ASC : SortDirection.DESC;
-    this.selectedDiscoverConfiguration = this.advancedTopSection.discoveryConfigurationName[0];
-  }
-
-
-  ngAfterViewInit() {
-    this.resizeObserver = new ResizeObserver(entries => {
-      for (let entry of entries) {
-        this.initialNumberOfElementsPerPage = Math.min(Math.floor(entry.contentRect.width / this.minCardWidth), this.maxNumberOfCardsPerPage);
-        this.changeDiscovery(this.selectedDiscoverConfiguration);
-      }
-    });
-
-    this.resizeObserver.observe(this.wrapperContainer.nativeElement);
-  }
-
-  /**
-   * Determines whether the current page of the paginated search options has reached the start.
-   * @returns {boolean} True if the current page is the first page, false otherwise.
-   */
-  get reachedStart() {
-    return isEqual(this.paginatedSearchOptions?.pagination?.currentPage, 1);
-  }
-
-  /**
-   * Determines whether the current page has reached the end of the search results.
-   * Calculates the total number of pages based on the total number of elements and the initial number of elements per page.
-   * If the total number of elements is greater than the maximum number of items,
-   * the total number of pages is the maximum number of items divided by the initial number of elements per page.
-   * @returns {boolean} True if the current page is the last page of search results, false otherwise.
-   */
-  get reachedEnd() {
-    const maxNumberOfPages = this.totalNumberOfElements.getValue() >= this.maxNumberOfItems
-                           ? this.maxNumberOfItems : this.totalNumberOfElements.getValue();
-
-    const totalPages = Math.ceil(maxNumberOfPages / this.initialNumberOfElementsPerPage);
-    return this.paginatedSearchOptions?.pagination?.currentPage >= totalPages;
+    const sortDirection = SortDirection[this.advancedTopSection.order?.toUpperCase()] ?? SortDirection.ASC;
+    this.sortOptions = new SortOptions(this.advancedTopSection.sortField, sortDirection);
+    this.selectDiscoveryConfiguration(this.advancedTopSection.discoveryConfigurationName[0]);
   }
 
   /**
@@ -149,60 +58,18 @@ export class AdvancedTopSectionComponent implements OnInit, OnDestroy {
    *
    * @param name - The name of the discovery configuration to change to.
    */
-  changeDiscovery(name: string, currentPage: number = 1, pageSize?: number) {
+  selectDiscoveryConfiguration(name: string) {
     const pagination = Object.assign(new PaginationComponentOptions(), {
-      id: 'search-object-pagination',
-      pageSize: pageSize ?? this.initialNumberOfElementsPerPage,
-      currentPage: currentPage
+      id: `advanced-top-components-${name}-discovery-configuration`,
+      pageSize: this.advancedTopSection.numberOfItems,
+      currentPage: 1,
     });
-    this.selectedDiscoverConfiguration = name;
-    this.paginatedSearchOptions = new PaginatedSearchOptions({
+    this.selectedDiscoverConfiguration.next(name);
+    this.paginatedSearchOptions.next(new PaginatedSearchOptions({
       configuration: name,
       pagination: pagination,
-      sort: new SortOptions(this.advancedTopSection.sortField, this.sortDirection)
-    });
+      sort: this.sortOptions,
+    }));
   }
 
-  /**
-   * Get the items from the previous page and update the paginated search options accordingly.
-   */
-  scrollLeft() {
-    const page = this.paginatedSearchOptions.pagination.currentPage - 1;
-    this.changeDiscovery(this.selectedDiscoverConfiguration, page);
-  }
-
-  /**
-   * Get the items from the next page and update the paginated search options accordingly.
-   * Checks not to exceed the maximum number of items set in the configuration.
-   */
-  scrollRight() {
-    const totalElementsDisplayed = this.initialNumberOfElementsPerPage * this.paginatedSearchOptions.pagination.currentPage;
-    const page = this.paginatedSearchOptions.pagination.currentPage + 1;
-    if ((totalElementsDisplayed + this.initialNumberOfElementsPerPage) > this.maxNumberOfItems) {
-      const pageSize = this.maxNumberOfItems - totalElementsDisplayed;
-      this.changeDiscovery(this.selectedDiscoverConfiguration, page, pageSize);
-    } else {
-      this.changeDiscovery(this.selectedDiscoverConfiguration, page);
-    }
-  }
-
-  /**
-   * Sets the total number of elements.
-   * @param totalElements - The total number of elements.
-   */
-  totalElements(totalNumber: number) {
-    this.totalNumberOfElements.next(totalNumber);
-    this.chd.detectChanges();
-  }
-
-  /**
-   * Unsubscribe from all subscriptions.
-   */
-  ngOnDestroy(): void {
-    this.subs.filter(s => hasValue(s)).forEach((sub) => sub.unsubscribe());
-
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
-    }
-  }
 }
