@@ -15730,15 +15730,15 @@
   // "layout.field.label.Picture.dc.coverage.shelfmark": "Coverage Shelfmark",
   // TODO New key - Add a translation
   "layout.field.label.Picture.dc.coverage.shelfmark": "Coverage Shelfmark",
-  // "layout.field.label.Picture.dc.subject": "Subject",
+  // "layout.field.label.Picture.glam.subject": "Subject",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.subject": "Subject",
+  "layout.field.label.Picture.glam.subject": "Subject",
   // "layout.field.label.Picture.glampicture.subject.place": "Subject Place",
   // TODO New key - Add a translation
   "layout.field.label.Picture.glampicture.subject.place": "Subject Place",
-  // "layout.field.label.Picture.dc.subject.keywords": "Keywords",
+  // "layout.field.label.Picture.dc.subject": "Keywords",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.subject.keywords": "Keywords",
+  "layout.field.label.Picture.dc.subject": "Keywords",
   // "layout.field.label.Picture.dc.rights.license": "License",
   // TODO New key - Add a translation
   "layout.field.label.Picture.dc.rights.license": "License",
@@ -15870,9 +15870,9 @@
   // "layout.field.label.AudioVideo.dc.contributor.contributor": "Agent(s)",
   // TODO New key - Add a translation
   "layout.field.label.AudioVideo.dc.contributor.contributor": "Agent(s)",
-  // "layout.field.label.AudioVideo.dc.subject": "Subject",
+  // "layout.field.label.AudioVideo.glam.subject": "Subject",
   // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.subject": "Subject",
+  "layout.field.label.AudioVideo.glam.subject": "Subject",
   // "layout.field.label.AudioVideo.dc.source.content": "Content",
   // TODO New key - Add a translation
   "layout.field.label.AudioVideo.dc.source.content": "Content",
@@ -15918,9 +15918,9 @@
   // "layout.field.label.AudioVideo.dc.language.iso": "Language",
   // TODO New key - Add a translation
   "layout.field.label.AudioVideo.dc.language.iso": "Language",
-  // "layout.field.label.AudioVideo.dc.subject.keywords": "Keywords",
+  // "layout.field.label.AudioVideo.dc.subject": "Keywords",
   // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.subject.keywords": "Keywords",
+  "layout.field.label.AudioVideo.dc.subject": "Keywords",
   // "layout.field.label.AudioVideo.dc.relation.path": "Path",
   // TODO New key - Add a translation
   "layout.field.label.AudioVideo.dc.relation.path": "Path",
