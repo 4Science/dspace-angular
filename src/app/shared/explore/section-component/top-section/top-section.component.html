@@ -16,19 +16,9 @@
 </div>
 
 <ng-template #content>
-  <div class="btn-group btn-group-toggle mb-3" ngbRadioGroup name="radioBasic" [(ngModel)]="layoutMode" *ngIf="topSection.showLayoutSwitch && (template === templateTypeEnum.DEFAULT)">
-    <label ngbButtonLabel class="btn-outline-primary">
-      <input ngbButton type="radio" [value]="'list'" />
-      <i class="fa fa-list-ul" title="List"></i>
-    </label>
-    <label ngbButtonLabel class="btn-outline-primary">
-      <input ngbButton type="radio" [value]="'card'" />
-      <i class="fas fa-th-large" title="Cards"></i>
-    </label>
-  </div>
   <ds-themed-browse-most-elements [context]="context"
                                   [paginatedSearchOptions]="paginatedSearchOptions"
                                   [showThumbnails]="showThumbnails"
-                                  [topSection]="topSection" [mode]="layoutMode">
+                                  [topSection]="topSection">
   </ds-themed-browse-most-elements>
 </ng-template>

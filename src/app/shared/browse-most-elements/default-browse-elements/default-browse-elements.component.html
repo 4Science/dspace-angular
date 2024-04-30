@@ -1,4 +1,14 @@
 <ng-container *ngIf="searchResults; else loading">
+  <div class="btn-group btn-group-toggle mb-3" ngbRadioGroup name="radioBasic" [(ngModel)]="mode" *ngIf="topSection.showLayoutSwitch">
+    <label ngbButtonLabel class="btn-outline-primary">
+      <input ngbButton type="radio" [value]="'list'" />
+      <i class="fa fa-list-ul" title="List"></i>
+    </label>
+    <label ngbButtonLabel class="btn-outline-primary">
+      <input ngbButton type="radio" [value]="'card'" />
+      <i class="fas fa-th-large" title="Cards"></i>
+    </label>
+  </div>
   <ng-container *ngIf="topSection && mode == cardLayoutMode; then gridLayout; else listLayout"></ng-container>
   <div *ngIf="searchResults?.hasFailed">
     {{ "remote.error" | translate }}
