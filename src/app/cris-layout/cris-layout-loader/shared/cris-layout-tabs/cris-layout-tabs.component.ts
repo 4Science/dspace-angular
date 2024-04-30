@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Location } from '@angular/common';
 
 import { CrisLayoutTab } from '../../../../core/layout/models/tab.model';
-import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from '../../../../core/shared/item.model';
 import { getItemPageRoute } from '../../../../item-page/item-page-routing-paths';
 import { BehaviorSubject } from 'rxjs';
@@ -120,14 +120,14 @@ export abstract class CrisLayoutTabsComponent {
 
     const currentTabName = this.route.snapshot.paramMap.get('tab');
     const navigationExtras = (currentTabName && currentTabName.includes(tab.shortname)) ? { queryParams: queryParams } : {};
-    
+
     let newUrl: string;
     if (this.tabs[0].shortname === tab.shortname) {
       newUrl = itemPageRoute;
     } else {
       newUrl = itemPageRoute + '/' + tab.shortname;
     }
-    
+
     this.router.navigate([newUrl], navigationExtras);
   }
 
