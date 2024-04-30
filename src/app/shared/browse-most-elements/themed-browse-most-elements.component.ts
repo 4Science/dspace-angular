@@ -19,19 +19,17 @@ export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMos
 
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
-  @Input() showMetrics;
+  @Input() showMetrics: boolean;
 
-  @Input() showThumbnails;
+  @Input() showThumbnails: boolean;
 
   @Input() topSection: TopSection;
-
-  @Input() advancedTopSection: AdvancedTopSection;
 
   @Input() mode: LayoutModeEnum;
 
   @Output() totalElements: EventEmitter<number> = new EventEmitter<number>();
 
-  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'showMetrics', 'showThumbnails', 'topSection', 'mode', 'totalElements', 'advancedTopSection'];
+  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'showMetrics', 'showThumbnails', 'topSection', 'mode'];
 
   protected getComponentName(): string {
     return 'BrowseMostElementsComponent';

@@ -15,19 +15,15 @@ import { LayoutModeEnum, TopSection } from '../../../core/layout/models/section.
 })
 export class ThemedImagesBrowseElementsComponent extends ThemedComponent<ImagesBrowseElementsComponent> {
 
-  @Input() context: Context;
+  // AbstractBrowseElementsComponent I/O variables
 
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
-  @Input() showMetrics;
-
-  @Input() showThumbnails;
+  @Input() context: Context;
 
   @Input() topSection: TopSection;
 
-  @Input() mode: LayoutModeEnum;
-
-  protected inAndOutputNames: (keyof ImagesBrowseElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'showMetrics', 'showThumbnails', 'topSection', 'mode'];
+  protected inAndOutputNames: (keyof ImagesBrowseElementsComponent & keyof this)[] = ['paginatedSearchOptions', 'context', 'topSection'];
 
   protected getComponentName(): string {
     return 'ImagesBrowseElementsComponent';

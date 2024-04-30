@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { SortDirection, SortOptions } from '../../../../core/cache/models/sort-options.model';
 import {
-  AdvancedTopSectionTemplateType,
+  TopSectionTemplateType,
   LayoutModeEnum,
   TopSection,
 } from '../../../../core/layout/models/section.model';
@@ -34,9 +34,9 @@ export class TopSectionComponent implements OnInit {
 
   layoutMode: LayoutModeEnum = LayoutModeEnum.CARD;
 
-  template: AdvancedTopSectionTemplateType;
+  template: TopSectionTemplateType;
 
-  templateTypeEnum = AdvancedTopSectionTemplateType;
+  templateTypeEnum = TopSectionTemplateType;
 
   ngOnInit() {
     const order = this.topSection.order;
@@ -54,6 +54,6 @@ export class TopSectionComponent implements OnInit {
       sort: new SortOptions(this.topSection.sortField, sortDirection)
     });
     this.showThumbnails = this.topSection.showThumbnails;
-    this.template = this.topSection.template ?? AdvancedTopSectionTemplateType.DEFAULT;
+    this.template = this.topSection.template ?? TopSectionTemplateType.DEFAULT;
   }
 }

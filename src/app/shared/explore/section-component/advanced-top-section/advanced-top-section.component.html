@@ -17,7 +17,7 @@
   <div>
     <ds-themed-browse-most-elements [context]="context"
                                     [paginatedSearchOptions]="paginatedSearchOptions.asObservable() | async"
-                                    [advancedTopSection]="advancedTopSection"
+                                    [topSection]="$any(advancedTopSection)"
                                     [showThumbnails]="showThumbnails">
     </ds-themed-browse-most-elements>
   </div>

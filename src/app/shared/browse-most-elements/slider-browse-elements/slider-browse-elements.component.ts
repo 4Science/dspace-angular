@@ -9,6 +9,5 @@ import { ImagesBrowseElementsComponent } from '../images-browse-elements/images-
 })
 export class SliderBrowseElementsComponent extends ImagesBrowseElementsComponent {
 
-  @Input() advancedTopSection: AdvancedTopSection;
 
 }

@@ -1,4 +1,4 @@
-import { AdvancedTopSection, AdvancedTopSectionTemplateType } from '../../../../core/layout/models/section.model';
+import { AdvancedTopSection, TopSectionTemplateType } from '../../../../core/layout/models/section.model';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdvancedTopSectionComponent } from './advanced-top-section.component';
@@ -22,7 +22,7 @@ describe('AdvancedTopSectionComponent', () => {
      style: '',
     componentType: 'advanced-top-component',
     numberOfItems: 8,
-    template: AdvancedTopSectionTemplateType.SLIDER,
+    template: TopSectionTemplateType.SLIDER,
   };
   beforeEach(async(() => {
     TestBed.configureTestingModule({

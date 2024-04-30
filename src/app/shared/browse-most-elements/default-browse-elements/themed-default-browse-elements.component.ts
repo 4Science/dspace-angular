@@ -15,19 +15,23 @@ import { Component, Input } from '@angular/core';
 })
 export class ThemedDefaultBrowseElementsComponent extends ThemedComponent<DefaultBrowseElementsComponent> {
 
-  @Input() context: Context;
+  // AbstractBrowseElementsComponent I/O variables
 
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
-  @Input() showMetrics;
-
-  @Input() showThumbnails;
+  @Input() context: Context;
 
   @Input() topSection: TopSection;
 
+  // DefaultBrowseElementsComponent I/O variables
+
+  @Input() showMetrics: boolean;
+
+  @Input() showThumbnails: boolean;
+
   @Input() mode: LayoutModeEnum;
 
-  protected inAndOutputNames: (keyof DefaultBrowseElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'showMetrics', 'showThumbnails', 'topSection', 'mode'];
+  protected inAndOutputNames: (keyof DefaultBrowseElementsComponent & keyof this)[] = ['paginatedSearchOptions', 'context', 'topSection', 'showMetrics', 'showThumbnails', 'mode'];
 
   protected getComponentName(): string {
     return 'DefaultBrowseElementsComponent';

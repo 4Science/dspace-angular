@@ -1,55 +1,50 @@
-<div class="m-2">
-  <ng-container *ngIf="searchResults">
-    <ng-container
-      *ngIf="
-        topSection && mode == cardLayoutMode;
-        else listLayout
-      "
-    >
-      <ds-object-grid
-        [configStyle]="topSection?.cardStyle"
-        [columnStyle]="topSection?.cardColumnStyle"
-        [config]="paginatedSearchOptions.pagination"
-        [sortConfig]="paginatedSearchOptions.sort"
-        [objects]="searchResults"
-        [linkType]="collectionElementLinkTypeEnum.Link"
-        [context]="context"
-        [noPagination]="true"
-      >
-      </ds-object-grid>
-    </ng-container>
-    <ng-template #listLayout>
-        <ul *ngIf="searchResults?.hasSucceeded" class="list-unstyled">
-          <li
-            *ngFor="
+<ng-container *ngIf="searchResults; else loading">
+  <ng-container *ngIf="topSection && mode == cardLayoutMode; then gridLayout; else listLayout"></ng-container>
+  <div *ngIf="topSection.showAllResults" class="d-flex justify-content-center">
+    <button type="button" class="btn btn-link" (click)="showAllResults()">
+      {{ "home.top-section.view-results" | translate }}
+    </button>
+  </div>
+  <div *ngIf="searchResults?.hasFailed">
+    {{ "remote.error" | translate }}
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <ds-loading></ds-loading>
+</ng-template>
+
+<ng-template #gridLayout>
+  <ds-object-grid
+    [configStyle]="topSection?.cardStyle"
+    [columnStyle]="topSection?.cardColumnStyle"
+    [config]="paginatedSearchOptions.pagination"
+    [sortConfig]="paginatedSearchOptions.sort"
+    [objects]="searchResults"
+    [linkType]="collectionElementLinkTypeEnum.Link"
+    [context]="context"
+    [noPagination]="true"
+  >
+  </ds-object-grid>
+</ng-template>
+<ng-template #listLayout>
+  <ul *ngIf="searchResults?.hasSucceeded" class="list-unstyled">
+    <li
+      *ngFor="
               let object of searchResults?.payload?.page;
               let i = index;
               let last = last
             "
-            class="mt-4 mb-4 d-flex"
-            [ngClass]="topSection?.itemListStyle"
-          >
-            <ds-listable-object-component-loader [context]="context"
-                                                 [index]="i"
-                                                 [listID]="paginatedSearchOptions.configuration"
-                                                 [object]="object"
-                                                 [showMetrics]="showMetrics"
-                                                 [showThumbnails]="showThumbnails"
-                                                 [viewMode]="paginatedSearchOptions.view"></ds-listable-object-component-loader>
-          </li>
-        </ul>
-    </ng-template>
-    <div
-      class="row justify-content-center"
-      *ngIf="topSection && topSection.showAllResults"
+      class="mt-4 mb-4 d-flex"
+      [ngClass]="topSection?.itemListStyle"
     >
-      <button type="button" class="btn btn-link" (click)="showAllResults()">
-        {{ "home.top-section.view-results" | translate }}
-      </button>
-    </div>
-    <div *ngIf="searchResults?.hasFailed">
-      {{ "remote.error" | translate }}
-    </div>
-  </ng-container>
-  <ds-loading *ngIf="!searchResults"></ds-loading>
-</div>
+      <ds-listable-object-component-loader [context]="context"
+                                           [index]="i"
+                                           [listID]="paginatedSearchOptions.configuration"
+                                           [object]="object"
+                                           [showMetrics]="showMetrics"
+                                           [showThumbnails]="showThumbnails"
+                                           [viewMode]="paginatedSearchOptions.view"></ds-listable-object-component-loader>
+    </li>
+  </ul>
+</ng-template>

@@ -32,15 +32,11 @@ export class ImagesBrowseElementsComponent extends AbstractBrowseElementsCompone
   private readonly bitstreamDataService = inject(BitstreamDataService);
 
   ngOnChanges() {
-    const showThumbnails = this.showThumbnails ?? this.appConfig.browseBy.showThumbnails;
-    const followLinks = showThumbnails ? [followLink('thumbnail')] : [];
-
     this.searchService
-      .search(this.paginatedSearchOptions, null, true, true, ...followLinks)
+      .search(this.paginatedSearchOptions, null, true, true)
       .pipe(getFirstCompletedRemoteData())
       .subscribe(
         (response: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>) => {
-          // this.totalElements.emit(response.payload?.totalElements ?? 0);
           this.searchResults = response;
           this.getAllBitstreams();
           this.cdr.detectChanges();
@@ -48,7 +44,7 @@ export class ImagesBrowseElementsComponent extends AbstractBrowseElementsCompone
       );
   }
 
-  private getAllBitstreams() {
+  protected getAllBitstreams() {
     from(this.searchResults?.payload?.page).pipe(
       map((itemSR) => itemSR.indexableObject),
       mergeMap((item) => this.bitstreamDataService.findAllByItemAndBundleName(

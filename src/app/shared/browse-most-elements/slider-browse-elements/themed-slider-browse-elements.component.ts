@@ -1,9 +1,9 @@
-import { AdvancedTopSection } from '../../../core/layout/models/section.model';
 import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
 import { Context } from '../../../core/shared/context.model';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ThemedComponent } from '../../theme-support/themed.component';
 import { SliderBrowseElementsComponent } from './slider-browse-elements.component';
+import { TopSection } from '../../../core/layout/models/section.model';
 
 /**
  * Themed component for the SliderBrowseElementsComponent
@@ -15,17 +15,15 @@ import { SliderBrowseElementsComponent } from './slider-browse-elements.componen
 })
 export class ThemedSliderBrowseElementsComponent extends ThemedComponent<SliderBrowseElementsComponent> {
 
-  @Input() context: Context;
+  // AbstractBrowseElementsComponent I/O variables
 
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
-  @Input() showThumbnails: boolean;
+  @Input() context: Context;
 
-  @Input() advancedTopSection: AdvancedTopSection;
+  @Input() topSection: TopSection;
 
-  @Output() totalElements: EventEmitter<number> = new EventEmitter<number>();
-
-  protected inAndOutputNames: (keyof SliderBrowseElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'showThumbnails', 'advancedTopSection'];
+  protected inAndOutputNames: (keyof SliderBrowseElementsComponent & keyof this)[] = ['paginatedSearchOptions', 'context', 'topSection'];
 
   protected getComponentName(): string {
     return 'SliderBrowseElementsComponent';
