@@ -32,7 +32,7 @@ export class DefaultBrowseElementsComponent extends AbstractBrowseElementsCompon
     this.searchService.search(this.paginatedSearchOptions, null, true, true, ...followLinks).pipe(
       getFirstCompletedRemoteData(),
     ).subscribe((response: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>) => {
-      this.totalElements.emit(response.payload?.totalElements ?? 0);
+      // this.totalElements.emit(response.payload?.totalElements ?? 0);
       this.searchResults = response;
       this.cdr.detectChanges();
     });

@@ -25,7 +25,7 @@ export class ThemedCardBrowseElementsComponent extends ThemedComponent<CardBrows
 
   @Output() totalElements: EventEmitter<number> = new EventEmitter<number>();
 
-  protected inAndOutputNames: (keyof CardBrowseElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'showThumbnails', 'advancedTopSection', 'totalElements'];
+  protected inAndOutputNames: (keyof SliderBrowseElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'showThumbnails', 'advancedTopSection'];
 
   protected getComponentName(): string {
     return 'CardBrowseElementsComponent';

@@ -30,18 +30,16 @@ export abstract class AbstractBrowseElementsComponent {
   /**
    * Whether to show the metrics badges
    */
-  @Input() showMetrics;
+  @Input() showMetrics: any;
 
   /**
    * Whether to show the thumbnail preview
    */
-  @Input() showThumbnails;
+  @Input() showThumbnails: boolean;
 
   @Input() topSection: TopSection;
 
   @Input() mode: LayoutModeEnum;
-
-  @Output() totalElements: EventEmitter<number> = new EventEmitter<number>();
 
   searchResults: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>;
 
