@@ -260,6 +260,7 @@ export class ItemExportComponent implements OnInit, OnDestroy {
   private canExport(): Observable<boolean> {
     return this.searchManager.search(
       Object.assign(new PaginatedSearchOptions({}), this.searchOptions, {
+        scope: this.itemExportService.getScopeUUID(this.searchOptions),        
         fixedFilter: `f.entityType=${this.itemType.label},equals`,
         pagination: Object.assign(new PaginationComponentOptions(), {
           id: this.uuidService.generate(),
