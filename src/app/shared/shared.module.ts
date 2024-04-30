@@ -354,10 +354,10 @@ import { ItemCollectionComponent } from './object-collection/shared/mydspace-ite
 import { ThemedItemListPreviewComponent } from './object-list/my-dspace-result-list-element/item-list-preview/themed-item-list-preview.component';
 import { ItemListPreviewComponent } from './object-list/my-dspace-result-list-element/item-list-preview/item-list-preview.component';
 import { DefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/default-browse-elements.component';
-import { ImageBrowseElementsComponent } from './browse-most-elements/image-browse-elements/image-browse-elements.component';
+import { ImagesBrowseElementsComponent } from './browse-most-elements/images-browse-elements/images-browse-elements.component';
 import { ThemedSliderBrowseElementsComponent } from './browse-most-elements/slider-browse-elements/themed-slider-browse-elements.component';
 import { SliderBrowseElementsComponent } from './browse-most-elements/slider-browse-elements/slider-browse-elements.component';
-import { ThemedImageBrowseElementsComponent } from './browse-most-elements/image-browse-elements/themed-image-browse-elements.component';
+import { ThemedImagesBrowseElementsComponent } from './browse-most-elements/images-browse-elements/themed-images-browse-elements.component';
 import { ThemedDefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/themed-default-browse-elements.component';
 
 const MODULES = [
@@ -519,8 +519,8 @@ const COMPONENTS = [
   ItemCollectionComponent,
   DefaultBrowseElementsComponent,
   ThemedDefaultBrowseElementsComponent,
-  ImageBrowseElementsComponent,
-  ThemedImageBrowseElementsComponent,
+  ImagesBrowseElementsComponent,
+  ThemedImagesBrowseElementsComponent,
   SliderBrowseElementsComponent,
   ThemedSliderBrowseElementsComponent,
 ];
@@ -600,7 +600,7 @@ const ENTRY_COMPONENTS = [
   RelationshipsListComponent,
   AdditionalMetadataComponent,
   ThemedDefaultBrowseElementsComponent,
-  ThemedImageBrowseElementsComponent,
+  ThemedImagesBrowseElementsComponent,
   ThemedSliderBrowseElementsComponent,
 ];
 

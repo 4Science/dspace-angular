@@ -44,8 +44,8 @@ describe('BrowseMostElementsComponent', () => {
       expect(defaultElement).toBeTruthy();
     });
 
-    it('should not display ds-themed-image-browse-elements', () => {
-      const imageElement = fixture.debugElement.query(By.css('ds-themed-image-browse-elements'));
+    it('should not display ds-themed-images-browse-elements', () => {
+      const imageElement = fixture.debugElement.query(By.css('ds-themed-images-browse-elements'));
       expect(imageElement).toBeNull();
     });
   });
@@ -60,8 +60,8 @@ describe('BrowseMostElementsComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should display ds-themed-image-browse-elements', () => {
-      const imageElement = fixture.debugElement.query(By.css('ds-themed-image-browse-elements'));
+    it('should display ds-themed-images-browse-elements', () => {
+      const imageElement = fixture.debugElement.query(By.css('ds-themed-images-browse-elements'));
       expect(imageElement).toBeTruthy();
     });
 

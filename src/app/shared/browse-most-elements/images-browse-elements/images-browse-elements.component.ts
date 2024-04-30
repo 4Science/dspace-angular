@@ -15,11 +15,11 @@ import { hasValue } from '../../empty.util';
 import { getItemPageRoute } from '../../../item-page/item-page-routing-paths';
 
 @Component({
-  selector: 'ds-image-browse-elements',
-  templateUrl: './image-browse-elements.component.html',
-  styleUrls: ['./image-browse-elements.component.scss']
+  selector: 'ds-images-browse-elements',
+  templateUrl: './images-browse-elements.component.html',
+  styleUrls: ['./images-browse-elements.component.scss']
 })
-export class ImageBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnChanges {
+export class ImagesBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnChanges {
 
 
   itemToImageHrefMap$ = new BehaviorSubject<Map<string, string>>(new Map<string, string>());

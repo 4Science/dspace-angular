@@ -1,13 +1,13 @@
-import { BitstreamFormat } from './../../../core/shared/bitstream-format.model';
+import { BitstreamFormat } from '../../../core/shared/bitstream-format.model';
 import { Bitstream } from '../../../core/shared/bitstream.model';
 import { Item } from '../../../core/shared/item.model';
-import { PageInfo } from './../../../core/shared/page-info.model';
-import { buildPaginatedList } from './../../../core/data/paginated-list.model';
+import { PageInfo } from '../../../core/shared/page-info.model';
+import { buildPaginatedList } from '../../../core/data/paginated-list.model';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeDetectorRef } from '@angular/core';
 
-import { ImageBrowseElementsComponent } from './image-browse-elements.component';
+import { ImagesBrowseElementsComponent } from './images-browse-elements.component';
 import { createSuccessfulRemoteDataObject, createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
 import { of } from 'rxjs';
 import { APP_CONFIG } from '../../../../config/app-config.interface';
@@ -17,9 +17,9 @@ import { RouterStub } from '../../testing/router.stub';
 import { BitstreamDataService } from '../../../core/data/bitstream-data.service';
 import { ItemSearchResult } from '../../object-collection/shared/item-search-result.model';
 
-describe('ImageBrowseElementsComponent', () => {
-  let component: ImageBrowseElementsComponent;
-  let fixture: ComponentFixture<ImageBrowseElementsComponent>;
+describe('ImagesBrowseElementsComponent', () => {
+  let component: ImagesBrowseElementsComponent;
+  let fixture: ComponentFixture<ImagesBrowseElementsComponent>;
   const mockResultObject: ItemSearchResult = new ItemSearchResult();
   mockResultObject.hitHighlights = {};
 
@@ -81,7 +81,7 @@ describe('ImageBrowseElementsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImageBrowseElementsComponent ],
+      declarations: [ ImagesBrowseElementsComponent ],
       providers: [
         { provide: APP_CONFIG, useValue: mockConfig },
         { provide: SearchService, useValue: mockSearchService },
@@ -94,7 +94,7 @@ describe('ImageBrowseElementsComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ImageBrowseElementsComponent);
+    fixture = TestBed.createComponent(ImagesBrowseElementsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
