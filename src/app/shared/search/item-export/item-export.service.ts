@@ -103,7 +103,7 @@ export class ItemExportService {
   }
 
   /**
-   * Get the UUID from a searchOptions   
+   * Get the UUID from a searchOptions
    * @param searchOptions
    */
   public getScopeUUID(searchOptions: SearchOptions): string {
