@@ -1,7 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { SortDirection, SortOptions } from '../../../../core/cache/models/sort-options.model';
-import { LayoutModeEnum, TopSection } from './../../../../core/layout/models/section.model';
+import {
+  AdvancedTopSectionTemplateType,
+  LayoutModeEnum,
+  TopSection,
+} from '../../../../core/layout/models/section.model';
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
 import { Context } from '../../../../core/shared/context.model';
@@ -30,6 +34,10 @@ export class TopSectionComponent implements OnInit {
 
   layoutMode: LayoutModeEnum = LayoutModeEnum.CARD;
 
+  template: AdvancedTopSectionTemplateType;
+
+  templateTypeEnum = AdvancedTopSectionTemplateType;
+
   ngOnInit() {
     const order = this.topSection.order;
     const numberOfItems = this.topSection.numberOfItems;
@@ -45,7 +53,7 @@ export class TopSectionComponent implements OnInit {
       pagination: pagination,
       sort: new SortOptions(this.topSection.sortField, sortDirection)
     });
-
     this.showThumbnails = this.topSection.showThumbnails;
+    this.template = this.topSection.template ?? AdvancedTopSectionTemplateType.DEFAULT;
   }
 }
