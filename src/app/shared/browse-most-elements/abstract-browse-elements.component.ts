@@ -1,5 +1,4 @@
 import { CollectionElementLinkType } from '../object-collection/collection-element-link.type';
-import { Router } from '@angular/router';
 import { LayoutModeEnum, TopSection } from '../../core/layout/models/section.model';
 import { ChangeDetectorRef, Component, inject, Input, PLATFORM_ID } from '@angular/core';
 import { SearchService } from '../../core/shared/search/search.service';
@@ -13,7 +12,6 @@ import { APP_CONFIG } from '../../../config/app-config.interface';
 import { isPlatformServer } from '@angular/common';
 import { followLink } from '../utils/follow-link-config.model';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
-import { ViewMode } from '../../core/shared/view-mode.model';
 
 
 @Component({ template: '' })
@@ -22,7 +20,6 @@ export abstract class AbstractBrowseElementsComponent {
   protected readonly appConfig = inject(APP_CONFIG);
   protected readonly platformId = inject(PLATFORM_ID);
   protected readonly searchService = inject(SearchService);
-  protected readonly router = inject(Router);
   protected readonly cdr = inject(ChangeDetectorRef);
 
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
@@ -48,16 +45,6 @@ export abstract class AbstractBrowseElementsComponent {
     ).subscribe((response: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>) => {
       this.searchResults = response;
       this.cdr.detectChanges();
-    });
-  }
-
-  showAllResults(viewMode = ViewMode.ListElement) {
-    void this.router.navigate(['/search'], {
-      queryParams: {
-        configuration: this.paginatedSearchOptions.configuration,
-        view: viewMode,
-      },
-      replaceUrl: true,
     });
   }
 
