@@ -1,29 +1,28 @@
-import { AdvancedTopSectionTemplateType } from '../../../core/layout/models/section.model';
+import { AdvancedTopSection, AdvancedTopSectionTemplateType } from '../../../core/layout/models/section.model';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CardBrowseElementsComponent } from './card-browse-elements.component';
+import { SliderBrowseElementsComponent } from './slider-browse-elements.component';
 import { ChangeDetectorRef, NO_ERRORS_SCHEMA } from '@angular/core';
-import { APP_CONFIG } from './../../../../config/app-config.interface';
-import { SearchService } from './../../../core/shared/search/search.service';
+import { APP_CONFIG } from '../../../../config/app-config.interface';
+import { SearchService } from '../../../core/shared/search/search.service';
 import { Router } from '@angular/router';
 import { RouterStub } from '../../testing/router.stub';
-import { BitstreamDataService } from './../../../core/data/bitstream-data.service';
+import { BitstreamDataService } from '../../../core/data/bitstream-data.service';
 import { createSuccessfulRemoteDataObject, createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
-import { Bitstream } from './../../../core/shared/bitstream.model';
+import { Bitstream } from '../../../core/shared/bitstream.model';
 import { of } from 'rxjs';
-import { BitstreamFormat } from './../../../core/shared/bitstream-format.model';
-import { buildPaginatedList } from './../../../core/data/paginated-list.model';
-import { PageInfo } from './../../../core/shared/page-info.model';
+import { BitstreamFormat } from '../../../core/shared/bitstream-format.model';
+import { buildPaginatedList } from '../../../core/data/paginated-list.model';
+import { PageInfo } from '../../../core/shared/page-info.model';
 import { ItemSearchResult } from '../../object-collection/shared/item-search-result.model';
-import { Item } from './../../../core/shared/item.model';
-import { AdvancedTopSection } from './../../../core/layout/models/section.model';
+import { Item } from '../../../core/shared/item.model';
 import { By } from '@angular/platform-browser';
 import { VarDirective } from '../../utils/var.directive';
 
-describe('CardBrowseElementsComponent', () => {
-  let component: CardBrowseElementsComponent;
-  let fixture: ComponentFixture<CardBrowseElementsComponent>;
+describe('CardsBrowseElementsComponent', () => {
+  let component: SliderBrowseElementsComponent;
+  let fixture: ComponentFixture<SliderBrowseElementsComponent>;
   const mockResultObject: ItemSearchResult = new ItemSearchResult();
   mockResultObject.hitHighlights = {};
 
@@ -84,7 +83,7 @@ describe('CardBrowseElementsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CardBrowseElementsComponent, VarDirective],
+      declarations: [ SliderBrowseElementsComponent, VarDirective],
       providers: [
         { provide: APP_CONFIG, useValue: mockConfig },
         { provide: SearchService, useValue: mockSearchService },
@@ -98,7 +97,7 @@ describe('CardBrowseElementsComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CardBrowseElementsComponent);
+    fixture = TestBed.createComponent(SliderBrowseElementsComponent);
     component = fixture.componentInstance;
     component.advancedTopSection = topAdvancedSection;
     component.searchResults = mockResponse;

@@ -12,14 +12,14 @@
   </ng-container>
 
   <ng-container *ngSwitchCase="templateType.SLIDER">
-    <ds-themed-card-browse-elements
+    <ds-themed-slider-browse-elements
       [advancedTopSection]="advancedTopSection"
       [paginatedSearchOptions]="paginatedSearchOptions"
       [context]="context"
       [showThumbnails]="showThumbnails"
       (totalElements)="totalElements.emit($event)"
     >
-    </ds-themed-card-browse-elements>
+    </ds-themed-slider-browse-elements>
 
   </ng-container>
 

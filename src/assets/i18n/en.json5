@@ -8773,5 +8773,5 @@
   "layout.field.label.Other Author": "Other Author",
   "layout.field.label.Agent": "Agent",
   "layout.field.label.History": "History",
-  "card-browse-elements.no-results": "No results available for this configuration",
+  "slider-browse-elements.no-results": "No results available for this configuration",
 }

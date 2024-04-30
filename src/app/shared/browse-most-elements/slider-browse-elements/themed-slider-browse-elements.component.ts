@@ -1,19 +1,19 @@
-import { AdvancedTopSection } from './../../../core/layout/models/section.model';
-import { PaginatedSearchOptions } from './../../search/models/paginated-search-options.model';
-import { Context } from './../../../core/shared/context.model';
+import { AdvancedTopSection } from '../../../core/layout/models/section.model';
+import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
+import { Context } from '../../../core/shared/context.model';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ThemedComponent } from '../../theme-support/themed.component';
-import { CardBrowseElementsComponent } from './card-browse-elements.component';
+import { SliderBrowseElementsComponent } from './slider-browse-elements.component';
 
 /**
- * Themed component for the CardBrowseElementsComponent
+ * Themed component for the SliderBrowseElementsComponent
  */
 @Component({
-  selector: 'ds-themed-card-browse-elements',
+  selector: 'ds-themed-slider-browse-elements',
   styleUrls: [],
   templateUrl: './../../theme-support/themed.component.html',
 })
-export class ThemedCardBrowseElementsComponent extends ThemedComponent<CardBrowseElementsComponent> {
+export class ThemedSliderBrowseElementsComponent extends ThemedComponent<SliderBrowseElementsComponent> {
 
   @Input() context: Context;
 
@@ -28,14 +28,14 @@ export class ThemedCardBrowseElementsComponent extends ThemedComponent<CardBrows
   protected inAndOutputNames: (keyof SliderBrowseElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'showThumbnails', 'advancedTopSection'];
 
   protected getComponentName(): string {
-    return 'CardBrowseElementsComponent';
+    return 'SliderBrowseElementsComponent';
   }
 
   protected importThemedComponent(themeName: string): Promise<any> {
-    return import(`./../../../../themes/${themeName}/app/browse-most-elements/card-browse-elements/card-browse-elements.component`);
+    return import(`./../../../../themes/${themeName}/app/browse-most-elements/slider-browse-elements/slider-browse-elements.component`);
   }
 
   protected importUnthemedComponent(): Promise<any> {
-    return import(`./card-browse-elements.component`);
+    return import(`./slider-browse-elements.component`);
   }
 }
