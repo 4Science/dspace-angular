@@ -1,17 +1,21 @@
+import { Component, Input, OnInit } from '@angular/core';
 import { SortDirection, SortOptions } from '../../../../core/cache/models/sort-options.model';
+import { AdvancedTopSection, TopSectionTemplateType } from '../../../../core/layout/models/section.model';
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
-import { Component, Input, OnInit } from '@angular/core';
-import { AdvancedTopSection } from '../../../../core/layout/models/section.model';
 import { Context } from '../../../../core/shared/context.model';
 import { BehaviorSubject } from 'rxjs';
 
+/**
+ * Component representing the Advanced-Top component section.
+ */
 @Component({
   selector: 'ds-advanced-top-section',
   templateUrl: './advanced-top-section.component.html',
-  styleUrls: ['./advanced-top-section.component.scss'],
 })
 export class AdvancedTopSectionComponent implements OnInit {
+
+  // TODO: Duplicate code - Extend TopSectionComponent if possible
 
   /**
    * The identifier of the section.
@@ -37,18 +41,24 @@ export class AdvancedTopSectionComponent implements OnInit {
   paginatedSearchOptions = new BehaviorSubject<PaginatedSearchOptions>(null);
 
   /**
-   * The name of the selected discovery configuration.
-   */
-  selectedDiscoverConfiguration = new BehaviorSubject<string>(null);
-
-  /**
    * The sort direction of the section.
    */
   sortOptions: SortOptions;
 
+  /**
+   * The template type for browse-most-elements
+   */
+  template: TopSectionTemplateType;
+
+  /**
+   * The name of the selected discovery configuration.
+   */
+  selectedDiscoverConfiguration = new BehaviorSubject<string>(null);
+
   ngOnInit() {
     const sortDirection = SortDirection[this.advancedTopSection.order?.toUpperCase()] ?? SortDirection.ASC;
     this.sortOptions = new SortOptions(this.advancedTopSection.sortField, sortDirection);
+    this.template = this.advancedTopSection.template ?? TopSectionTemplateType.DEFAULT;
     this.selectDiscoveryConfiguration(this.advancedTopSection.discoveryConfigurationName[0]);
   }
 

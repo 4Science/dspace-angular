@@ -17,7 +17,7 @@
 
 <ng-template #content>
   <ds-themed-browse-most-elements [context]="context"
-                                  [paginatedSearchOptions]="paginatedSearchOptions"
+                                  [paginatedSearchOptions]="paginatedSearchOptions.asObservable() | async"
                                   [topSection]="topSection">
   </ds-themed-browse-most-elements>
 </ng-template>

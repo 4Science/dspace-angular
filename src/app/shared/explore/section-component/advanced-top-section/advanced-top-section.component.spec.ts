@@ -16,13 +16,19 @@ describe('AdvancedTopSectionComponent', () => {
   };
 
   const topAdvancedSection: AdvancedTopSection = {
+    defaultLayoutMode: undefined,
+    showAllResults: false,
+    showAsCard: false,
+    showLayoutSwitch: false,
+    showThumbnails: false,
+    titleKey: '',
     discoveryConfigurationName: ['project', 'publication', 'author'],
     sortField: 'ASC',
     order: 'ASC',
      style: '',
     componentType: 'advanced-top-component',
     numberOfItems: 8,
-    template: TopSectionTemplateType.SLIDER,
+    template: TopSectionTemplateType.SLIDER
   };
   beforeEach(async(() => {
     TestBed.configureTestingModule({

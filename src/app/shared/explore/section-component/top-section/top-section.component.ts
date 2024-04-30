@@ -1,22 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
-
 import { SortDirection, SortOptions } from '../../../../core/cache/models/sort-options.model';
-import {
-  TopSectionTemplateType,
-  LayoutModeEnum,
-  TopSection,
-} from '../../../../core/layout/models/section.model';
+import { TopSection, TopSectionTemplateType } from '../../../../core/layout/models/section.model';
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
 import { Context } from '../../../../core/shared/context.model';
-import { environment } from '../../../../../environments/environment';
+import { BehaviorSubject } from 'rxjs';
 
 /**
  * Component representing the Top component section.
  */
 @Component({
   selector: 'ds-top-section',
-  templateUrl: './top-section.component.html'
+  templateUrl: './top-section.component.html',
 })
 export class TopSectionComponent implements OnInit {
 
@@ -38,24 +33,44 @@ export class TopSectionComponent implements OnInit {
   @Input()
   context: Context = Context.BrowseMostElements;
 
-  paginatedSearchOptions: PaginatedSearchOptions;
+  /**
+   * The paginated search options for the section
+   */
+  paginatedSearchOptions = new BehaviorSubject<PaginatedSearchOptions>(null);
 
+  /**
+   * The sort direction of the section.
+   */
+  sortOptions: SortOptions;
+
+  /**
+   * The template type for browse-most-elements
+   */
   template: TopSectionTemplateType;
 
   ngOnInit() {
-    const order = this.topSection.order;
-    const numberOfItems = this.topSection.numberOfItems;
-    const sortDirection = order && order.toUpperCase() === 'ASC' ? SortDirection.ASC : SortDirection.DESC;
-    const pagination = Object.assign(new PaginationComponentOptions(), {
-      id: 'search-object-pagination',
-      pageSize: numberOfItems,
-      currentPage: 1
-    });
-    this.paginatedSearchOptions = new PaginatedSearchOptions({
-      configuration: this.topSection.discoveryConfigurationName,
-      pagination: pagination,
-      sort: new SortOptions(this.topSection.sortField, sortDirection)
-    });
+    const sortDirection = SortDirection[this.topSection.order?.toUpperCase()] ?? SortDirection.ASC;
+    this.sortOptions = new SortOptions(this.topSection.sortField, sortDirection);
     this.template = this.topSection.template ?? TopSectionTemplateType.DEFAULT;
+    this.selectDiscoveryConfiguration(this.topSection.discoveryConfigurationName[0]);
   }
+
+  /**
+   * Changes the discovery configuration and updates the paginated search options accordingly.
+   *
+   * @param name - The name of the discovery configuration to change to.
+   */
+  selectDiscoveryConfiguration(name: string) {
+    const pagination = Object.assign(new PaginationComponentOptions(), {
+      id: `advanced-top-components-${name}-discovery-configuration`,
+      pageSize: this.topSection.numberOfItems,
+      currentPage: 1,
+    });
+    this.paginatedSearchOptions.next(new PaginatedSearchOptions({
+      configuration: name,
+      pagination: pagination,
+      sort: this.sortOptions,
+    }));
+  }
+
 }
