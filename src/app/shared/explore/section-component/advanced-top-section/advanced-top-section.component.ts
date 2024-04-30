@@ -12,30 +12,29 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./advanced-top-section.component.scss'],
 })
 export class AdvancedTopSectionComponent implements OnInit {
+
   /**
    * The identifier of the section.
    */
-  @Input() sectionId: string;
+  @Input()
+  sectionId: string;
 
   /**
    * The section data
    */
-  @Input() advancedTopSection: AdvancedTopSection;
+  @Input()
+  advancedTopSection: AdvancedTopSection;
 
   /**
    * The context in which the section is shown
    */
-  @Input() context: Context = Context.BrowseMostElements;
+  @Input()
+  context: Context = Context.BrowseMostElements;
 
   /**
    * The paginated search options for the section
    */
   paginatedSearchOptions = new BehaviorSubject<PaginatedSearchOptions>(null);
-
-  /**
-   * Whether to show the thumbnail preview
-   */
-  showThumbnails: boolean;
 
   /**
    * The name of the selected discovery configuration.

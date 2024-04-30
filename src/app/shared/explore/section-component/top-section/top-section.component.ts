@@ -9,6 +9,7 @@ import {
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
 import { Context } from '../../../../core/shared/context.model';
+import { environment } from '../../../../../environments/environment';
 
 /**
  * Component representing the Top component section.
@@ -19,24 +20,27 @@ import { Context } from '../../../../core/shared/context.model';
 })
 export class TopSectionComponent implements OnInit {
 
+  /**
+   * The identifier of the section.
+   */
   @Input()
   sectionId: string;
 
+  /**
+   * The section data
+   */
   @Input()
   topSection: TopSection;
 
+  /**
+   * The context in which the section is shown
+   */
   @Input()
   context: Context = Context.BrowseMostElements;
 
   paginatedSearchOptions: PaginatedSearchOptions;
 
-  showThumbnails: boolean;
-
-  layoutMode: LayoutModeEnum = LayoutModeEnum.CARD;
-
   template: TopSectionTemplateType;
-
-  templateTypeEnum = TopSectionTemplateType;
 
   ngOnInit() {
     const order = this.topSection.order;
@@ -47,13 +51,11 @@ export class TopSectionComponent implements OnInit {
       pageSize: numberOfItems,
       currentPage: 1
     });
-    this.layoutMode = this.topSection.defaultLayoutMode;
     this.paginatedSearchOptions = new PaginatedSearchOptions({
       configuration: this.topSection.discoveryConfigurationName,
       pagination: pagination,
       sort: new SortOptions(this.topSection.sortField, sortDirection)
     });
-    this.showThumbnails = this.topSection.showThumbnails;
     this.template = this.topSection.template ?? TopSectionTemplateType.DEFAULT;
   }
 }

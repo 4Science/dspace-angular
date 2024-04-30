@@ -17,19 +17,7 @@ export class BrowseMostElementsComponent implements OnInit {
 
   @Input() context: Context;
 
-  /**
-   * Whether to show the metrics badges
-   */
-  @Input() showMetrics: boolean;
-
-  /**
-   * Whether to show the thumbnail preview
-   */
-  @Input() showThumbnails: boolean;
-
   @Input() topSection: TopSection;
-
-  @Input() mode: LayoutModeEnum;
 
   protected readonly router = inject(Router);
 
@@ -46,7 +34,7 @@ export class BrowseMostElementsComponent implements OnInit {
 
   showAllResults() {
     const viewMode: ViewMode =
-      this.sectionTemplateType === TopSectionTemplateType.DEFAULT && this.mode === LayoutModeEnum.LIST ?
+      this.sectionTemplateType === TopSectionTemplateType.DEFAULT && this.topSection.defaultLayoutMode === LayoutModeEnum.LIST ?
         ViewMode.ListElement : ViewMode.GridElement;
 
     void this.router.navigate(['/search'], {

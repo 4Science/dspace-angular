@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
 import { LayoutModeEnum } from '../../../core/layout/models/section.model';
 
@@ -7,19 +7,24 @@ import { LayoutModeEnum } from '../../../core/layout/models/section.model';
   templateUrl: './default-browse-elements.component.html',
   styleUrls: ['./default-browse-elements.component.scss']
 })
-export class DefaultBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnChanges {
+export class DefaultBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnInit, OnChanges {
 
   /**
    * Whether to show the metrics badges
    */
-  @Input() showMetrics: any;
+  @Input() showMetrics = this.appConfig.browseBy.showMetrics;
 
   /**
    * Whether to show the thumbnail preview
    */
   @Input() showThumbnails = this.appConfig.browseBy.showThumbnails;
 
-  @Input() mode: LayoutModeEnum;
+  mode: LayoutModeEnum;
+
+  ngOnInit() {
+    this.mode = this.topSection.defaultLayoutMode ?? LayoutModeEnum.LIST;
+    // this.showMetrics
+  }
 
   ngOnChanges(): void {
     this.getAllBitstreams(this.showThumbnails);

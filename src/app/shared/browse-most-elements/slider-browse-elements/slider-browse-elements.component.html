@@ -1,11 +1,5 @@
-<div class="d-flex flex-row gap-3 flex-nowrap card-element-wrapper justify-content-center" [class]="topSection.style">
-  <ng-container
-    *ngFor="
-      let object of searchResults?.payload?.page;
-      let i = index;
-      let last = last
-    "
-  >
+<div class="d-flex flex-row gap-3 flex-nowrap card-element-wrapper justify-content-center" [class]="topSection.style" #cardContainer>
+  <ng-container *ngFor="let object of searchResults?.payload?.page; let i = index; let last = last">
     <div class="card flex-grow-1">
       <img
         [src]="(itemToImageHrefMap$ | async).get(object.indexableObject?.uuid)"
