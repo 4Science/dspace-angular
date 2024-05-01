@@ -53,7 +53,7 @@ describe('BrowseMostElementsComponent', () => {
   describe('when the templateType is IMAGE', () => {
     beforeEach(() => {
       component.topSection = null;
-      component.advancedTopSection = {
+      component.topSection = {
         template: TopSectionTemplateType.IMAGES
       } as any;
       component.ngOnInit();

@@ -1,29 +1,34 @@
-import { Component } from '@angular/core';
-import { ImagesBrowseElementsComponent } from '../images-browse-elements/images-browse-elements.component';
-import { BehaviorSubject } from 'rxjs';
+import { Component, inject, OnInit } from '@angular/core';
+import { Observable, switchMap } from 'rxjs';
+import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
+import { BitstreamImagesService } from '../../../core/services/bitstream-images.service';
+import { DSpaceObject } from '../../../core/shared/dspace-object.model';
+import { map } from 'rxjs/operators';
+import { Item } from 'src/app/core/shared/item.model';
 
 @Component({
   selector: 'ds-slider-browse-elements',
   templateUrl: './slider-browse-elements.component.html',
-  styleUrls: ['./slider-browse-elements.component.scss']
+  styleUrls: ['./slider-browse-elements.component.scss'],
 })
-export class SliderBrowseElementsComponent extends ImagesBrowseElementsComponent {
+export class SliderBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnInit {
 
-  readonly maxNumberOfCardsPerPage = 4;
+  private bitstreamImagesService = inject(BitstreamImagesService);
 
-  // private resizeObserver: ResizeObserver;
+  itemToImageHrefMap$: Observable<Map<string, string>>;
 
-  cardsPerPage = new BehaviorSubject<number>(4); // TODO edit
+  selectedSearchResultArray$: Observable<DSpaceObject[]>;
 
-  // ngAfterViewInit() {
-    // this.resizeObserver = new ResizeObserver(entries => {
-    //   for (let entry of entries) {
-    //     // this.initialNumberOfElementsPerPage = Math.min(Math.floor(entry.contentRect.width / this.minCardWidth), this.maxNumberOfCardsPerPage);
-    //     // this.changeDiscovery(this.selectedDiscoverConfiguration);
-    //   }
-    // });
+  ngOnInit() {
+    super.ngOnInit();
 
-    // this.resizeObserver.observe(this.wrapperContainer.nativeElement);
-  // }
+    this.itemToImageHrefMap$ = this.searchResultArray$.pipe(
+      switchMap((res) => this.bitstreamImagesService.getItemToImageMap(res)),
+    );
+
+    this.selectedSearchResultArray$ = this.searchResultArray$.pipe(
+      map((items) => items.slice(0, 2)), // TODO pagination
+    );
+  }
 
 }

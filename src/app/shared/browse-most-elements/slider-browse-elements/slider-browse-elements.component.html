@@ -1,47 +1,44 @@
-<div class="d-flex flex-row gap-3 flex-nowrap card-element-wrapper justify-content-center" [class]="topSection.style" #cardContainer>
-  <ng-container *ngFor="let object of searchResults?.payload?.page; let i = index; let last = last">
-    <div class="card flex-grow-1">
-      <img
-        [src]="(itemToImageHrefMap$ | async).get(object.indexableObject?.uuid)"
-        alt="hidden-image"
-        style="display: none"
-        #image
-      />
-      <div class="thumbnail-container h-50">
-        <div
-          class="thumbnail-inner-container w-100 h-100 position-relative"
-          [dsBackgroundImage]="
-            (itemToImageHrefMap$ | async).get(object.indexableObject?.uuid)
-          "
-        >
-          <ds-type-badge class="pl-1" [object]="object.indexableObject"></ds-type-badge>
+<div class="d-flex flex-row gap-3 flex-nowrap card-element-wrapper justify-content-center align-items-center" [class]="topSection.style">
+  <div *ngIf="(searchResultArray$ | async).length">
+    <button class="btn btn-link btn-sm arrow-btn" [disabled]="false">
+      <i class="fas fa-2xl fa-chevron-left"></i>
+    </button>
+  </div>
+  <div class="flex-fill d-flex flex-row gap-3 flex-nowrap card-element-wrapper justify-content-center" #cardContainer>
+    <ng-container *ngFor="let item of (selectedSearchResultArray$ | async); let i = index; let last = last">
+      <div class="card flex-grow-1">
+        <img [src]="(itemToImageHrefMap$ | async).get(item.uuid)" alt="hidden-image" style="display: none" #image />
+        <div class="thumbnail-container h-50">
+          <div class="thumbnail-inner-container w-100 h-100 position-relative"
+               [dsBackgroundImage]="(itemToImageHrefMap$ | async).get(item.uuid)">
+            <ds-type-badge class="pl-1" [object]="item"></ds-type-badge>
+          </div>
+        </div>
+        <div class="text-container p-3 d-flex flex-column justify-content-between h-50">
+          <ng-container *ngVar="(item.firstMetadataValue('dc.description.abstract')) as description">
+            <h4 class="mb-3" [ngClass]="description ? 'h-25' : 'h-100'">
+              <a [routerLink]="[getItemPageRoute(item)]"
+                 [ngbTooltip]="item.firstMetadataValue('dc.title')"
+                 [ngClass]="description ? 'ellipsis-y-2' : 'ellipsis-y-4'">
+                <span>{{ item.firstMetadataValue('dc.title') }}</span>
+              </a>
+            </h4>
+            <ng-container *ngIf="description">
+              <div class="h-75">
+                <p class="ellipsis-y-4">
+                  {{ description }}
+                </p>
+              </div>
+            </ng-container>
+          </ng-container>
         </div>
       </div>
-      <div class="text-container p-3 d-flex flex-column justify-content-between h-50">
-        <ng-container *ngVar="(object.indexableObject.firstMetadataValue('dc.description.abstract')) as description">
-          <h4 class="mb-3" [ngClass]="description ? 'h-25' : 'h-100'">
-            <a [routerLink]="[getItemPageRoute(object.indexableObject)]"
-              [ngbTooltip]="object.indexableObject.firstMetadataValue('dc.title')"
-              [ngClass]="description ? 'ellipsis-y-2' : 'ellipsis-y-4'">
-              <span>{{object.indexableObject.firstMetadataValue('dc.title')}}</span>
-            </a>
-          </h4>
-          <ng-container *ngIf="description">
-            <div class="h-75" >
-              <p class="ellipsis-y-4">
-                {{ description }}
-              </p>
-            </div>
-          </ng-container>
-        </ng-container>
-      </div>
-    </div>
-  </ng-container>
-  <ng-container *ngIf="searchResults?.payload?.page.length === 0">
-    <div class="d-flex align-items-center w-100">
-      <span class="alert alert-warning w-100 mt-3 d-flex justify-content-center">
-        {{ 'slider-browse-elements.no-results' | translate }}
-      </span>
-    </div>
-  </ng-container>
+    </ng-container>
+  </div>
+  <div *ngIf="(searchResultArray$ | async).length">
+    <button class="btn btn-link btn-sm arrow-btn" [disabled]="false">
+      <i class="fas fa-2xl fa-chevron-right"></i>
+    </button>
+  </div>
+  <div *ngIf="(searchResultArray$ | async).length === 0">{{ 'slider-browse-elements.no-results' | translate }}</div>
 </div>

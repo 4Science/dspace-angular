@@ -1,91 +1,43 @@
-import { Bitstream } from '../../../core/shared/bitstream.model';
-import { Item } from '../../../core/shared/item.model';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
-import { PaginatedList } from '../../../core/data/paginated-list.model';
-import { RemoteData } from '../../../core/data/remote-data';
-import { BitstreamDataService } from '../../../core/data/bitstream-data.service';
-import { Component, inject, OnChanges } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
-import { BehaviorSubject, filter, from, map, mergeMap, scan, switchMap, take } from 'rxjs';
-import { followLink } from '../../utils/follow-link-config.model';
-import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
-import { SearchResult } from '../../search/models/search-result.model';
-import { BitstreamFormat } from '../../../core/shared/bitstream-format.model';
-import { hasValue } from '../../empty.util';
-import { getItemPageRoute } from '../../../item-page/item-page-routing-paths';
+import { map, Observable, switchMap } from 'rxjs';
+import { BitstreamImagesService } from '../../../core/services/bitstream-images.service';
 
 @Component({
   selector: 'ds-images-browse-elements',
   templateUrl: './images-browse-elements.component.html',
-  styleUrls: ['./images-browse-elements.component.scss']
+  styleUrls: ['./images-browse-elements.component.scss'],
 })
-export class ImagesBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnChanges {
-
-
-  itemToImageHrefMap$ = new BehaviorSubject<Map<string, string>>(new Map<string, string>());
+export class ImagesBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnInit {
 
   /**
    * Images with height/width ratio below this value are considered to be square
    */
   maxSquareRatio = 1.3;
 
-  private readonly bitstreamDataService = inject(BitstreamDataService);
+  private bitstreamImagesService = inject(BitstreamImagesService);
 
-  ngOnChanges() {
-    this.searchService
-      .search(this.paginatedSearchOptions, null, true, true)
-      .pipe(getFirstCompletedRemoteData())
-      .subscribe(
-        (response: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>) => {
-          this.searchResults = response;
-          this.getAllBitstreams();
-          this.cdr.detectChanges();
-        }
-      );
+  itemToImageHrefMap$: Observable<Map<string, string>>;
+
+  selectedSearchResultArray$: Observable<DSpaceObject[]>;
+
+  totalElements$: Observable<number>;
+
+  ngOnInit() {
+    super.ngOnInit();
+
+    this.itemToImageHrefMap$ = this.searchResultArray$.pipe(
+      switchMap((res) => this.bitstreamImagesService.getItemToImageMap(res)),
+    );
+
+    this.selectedSearchResultArray$ = this.searchResultArray$.pipe(
+      map((items) => items.slice(0, 2)), // TODO pagination
+    );
+
+    this.totalElements$ = this.searchResults$.pipe(
+      map((searchResults) => searchResults?.payload?.pageInfo?.totalElements)
+    );
   }
 
-  protected getAllBitstreams() {
-    from(this.searchResults?.payload?.page).pipe(
-      map((itemSR) => itemSR.indexableObject),
-      mergeMap((item) => this.bitstreamDataService.findAllByItemAndBundleName(
-          item as Item, 'ORIGINAL', {}, true, true, followLink('format'),
-        ).pipe(
-          getFirstCompletedRemoteData(),
-          switchMap((rd: RemoteData<PaginatedList<Bitstream>>) => rd.hasSucceeded ? rd.payload.page : []),
-          mergeMap((bitstream: Bitstream) => bitstream.format.pipe(
-            getFirstCompletedRemoteData(),
-            filter((formatRemoteData: RemoteData<BitstreamFormat>) =>
-              formatRemoteData.hasSucceeded && hasValue(formatRemoteData.payload) && hasValue(bitstream) &&
-              formatRemoteData.payload.mimetype.includes('image/')
-            ),
-            map(() => bitstream)
-          )),
-          take(1),
-          map((bitstream: Bitstream) => {
-            return [item.uuid, bitstream._links.content.href];
-          }),
-        ),
-      ),
-      scan((acc: Map<string, string>, value: [string, string]) => {
-        acc.set(value[0], value[1]);
-        return acc;
-      }, new Map<string, string>()),
-    ).subscribe((res) => {
-      this.itemToImageHrefMap$.next(res);
-      this.cdr.detectChanges();
-    });
-  }
-
-  /**
- * to get the route of the item
- * @param item
- * @returns route to the item as a string
- */
-  getItemPageRoute(item) {
-    return getItemPageRoute(item);
-  }
-
-  get elementsPerPage() {
-    return this.searchResults?.payload?.pageInfo?.elementsPerPage ?? 8;
-  }
 }

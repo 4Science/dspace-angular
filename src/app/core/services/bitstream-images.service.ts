@@ -12,6 +12,7 @@ import { BitstreamFormat } from '../shared/bitstream-format.model';
 import { hasValue } from '../../shared/empty.util';
 import { BitstreamDataService } from '../data/bitstream-data.service';
 import { Item } from '../shared/item.model';
+import { DSpaceObject } from '../shared/dspace-object.model';
 
 interface ItemAndImage {
   itemUUID: string;
@@ -28,7 +29,7 @@ export class BitstreamImagesService {
    * @param items
    * @param bundleName
    */
-  getItemToImageMap(items: Item[], bundleName = 'ORIGINAL'): Observable<Map<string, string>> {
+  getItemToImageMap(items: Item[] | DSpaceObject[], bundleName = 'ORIGINAL'): Observable<Map<string, string>> {
     return from(items).pipe(
       mergeMap((item) => this.findImageBitstreams(item, bundleName).pipe(
         take(1),
@@ -48,12 +49,12 @@ export class BitstreamImagesService {
    * @param item the item for which the images should be retrieved
    * @param bundleName the bundle name (ORIGINAL by default)
    */
-  findImageBitstreams(item: Item, bundleName = 'ORIGINAL') {
+  findImageBitstreams(item: Item | DSpaceObject, bundleName = 'ORIGINAL') {
     const isImageMimetypeRegex = /^image\//;
 
     // retrieve all bundle's bitstreams for the item
     const bitstreamPayload$: Observable<Bitstream> = this.bitstreamDataService.findAllByItemAndBundleName(
-      item, bundleName, {}, true, true, followLink('format'),
+      item as Item, bundleName, {}, true, true, followLink('format'),
     ).pipe(
       getFirstCompletedRemoteData(),
       switchMap((rd: RemoteData<PaginatedList<Bitstream>>) => rd.hasSucceeded ? rd.payload.page : new Array<Bitstream>()),

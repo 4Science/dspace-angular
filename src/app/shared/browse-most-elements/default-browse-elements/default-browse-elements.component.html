@@ -1,4 +1,4 @@
-<ng-container *ngIf="searchResults; else loading">
+<ng-container *ngIf="(searchResults$ | async); else loading">
   <div class="btn-group btn-group-toggle mb-3" ngbRadioGroup name="radioBasic" [(ngModel)]="mode" *ngIf="topSection.showLayoutSwitch">
     <label ngbButtonLabel class="btn-outline-primary">
       <input ngbButton type="radio" [value]="'list'" />
@@ -10,7 +10,7 @@
     </label>
   </div>
   <ng-container *ngIf="topSection && mode == cardLayoutMode; then gridLayout; else listLayout"></ng-container>
-  <div *ngIf="searchResults?.hasFailed">
+  <div *ngIf="(searchResults$ | async).hasFailed">
     {{ "remote.error" | translate }}
   </div>
 </ng-container>
@@ -25,7 +25,7 @@
     [columnStyle]="topSection?.cardColumnStyle"
     [config]="paginatedSearchOptions.pagination"
     [sortConfig]="paginatedSearchOptions.sort"
-    [objects]="searchResults"
+    [objects]="(searchResults$ | async)"
     [linkType]="collectionElementLinkTypeEnum.Link"
     [context]="context"
     [noPagination]="true"
@@ -33,10 +33,10 @@
   </ds-object-grid>
 </ng-template>
 <ng-template #listLayout>
-  <ul *ngIf="searchResults?.hasSucceeded" class="list-unstyled">
+  <ul *ngIf="(searchResults$ | async).hasSucceeded" class="list-unstyled">
     <li
       *ngFor="
-              let object of searchResults?.payload?.page;
+              let object of (searchResultArray$ | async);
               let i = index;
               let last = last
             "

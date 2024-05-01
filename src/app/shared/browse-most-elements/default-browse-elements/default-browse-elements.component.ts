@@ -22,12 +22,8 @@ export class DefaultBrowseElementsComponent extends AbstractBrowseElementsCompon
   mode: LayoutModeEnum;
 
   ngOnInit() {
+    super.ngOnInit();
     this.mode = this.topSection.defaultLayoutMode ?? LayoutModeEnum.LIST;
-    // this.showMetrics
-  }
-
-  ngOnChanges(): void {
-    this.getAllBitstreams(this.showThumbnails);
   }
 
 }
