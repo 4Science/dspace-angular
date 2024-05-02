@@ -32,6 +32,10 @@ export class PdfViewerButtonComponent implements OnInit {
    * The bitstream
    */
   @Input() bitstream: Bitstream;
+  /**
+   * The tab name
+   */
+  @Input() tabName: string;
 
   constructor(
     private router: Router,
@@ -46,7 +50,7 @@ export class PdfViewerButtonComponent implements OnInit {
 
   public async openPdfViewer() {
     if (environment.advancedAttachmentRendering.showViewerOnSameItemPage) {
-      await this.router.navigate([ getBitstreamItemViewerDetailsPath(this.item, this.bitstream, 'pdf') ], { fragment: 'viewer' });
+      await this.router.navigate([ getBitstreamItemViewerDetailsPath(this.item, this.bitstream, 'pdf', this.tabName) ], { fragment: 'viewer' });
     } else {
       await this.router.navigate([ getBitstreamItemViewerPath(this.item, this.bitstream, 'pdf') ]);
     }
