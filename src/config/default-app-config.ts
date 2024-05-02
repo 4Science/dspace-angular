@@ -245,7 +245,7 @@ export class DefaultAppConfig implements AppConfig {
           // default configuration
           {
             value: 'default',
-            style: 'text-muted'
+            style: 'text-gray-500'
           }
 
         ]
