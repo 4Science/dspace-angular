@@ -15,7 +15,10 @@
     @include ellipsis-y(2);
   }
 
-  .card-element-wrapper {
+  .slider-wrapper {
+    .arrow {
+      width: 50px;
+    }
     .card {
       height: 30rem;
       max-height: 35rem;

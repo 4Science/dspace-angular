@@ -1,15 +1,11 @@
-<div style="border: solid 2px purple;">
-  TOT = {{totalItemsBS.asObservable() | async }} -
-  FIRST = {{firstItemBS.asObservable() | async }} -
-</div>
-<div class="d-flex flex-row gap-3 flex-nowrap card-element-wrapper justify-content-center align-items-center" [class]="topSection.style">
-  <div *ngIf="(searchResultArray$ | async)?.length">
+<div class="d-flex flex-row gapx-3 flex-nowrap justify-content-center align-items-center slider-wrapper" [class]="topSection.style" #sliderWrapper>
+  <div *ngIf="(searchResultArray$ | async)?.length" class="arrow">
     <button class="btn btn-link btn-sm arrow-btn" (click)="prev()"
             [disabled]="(firstItemBS.asObservable() | async) <= 0">
       <i class="fas fa-2xl fa-chevron-left"></i>
     </button>
   </div>
-  <div class="flex-fill d-flex flex-row gap-3 flex-nowrap card-element-wrapper justify-content-center" #cardContainer>
+  <div class="flex-fill d-flex flex-row gapx-3 flex-nowrap card-element-wrapper justify-content-center">
     <ng-container *ngFor="let item of (selectedSearchResultArray$ | async); let i = index; let last = last">
       <div class="card flex-grow-1">
         <img [src]="(itemToImageHrefMap$ | async)?.get(item.uuid)" alt="hidden-image" style="display: none" #image />

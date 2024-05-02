@@ -1,5 +1,5 @@
-import { Component, inject, OnChanges, OnInit } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable, Subscription, switchMap } from 'rxjs';
+import { AfterViewInit, Component, ElementRef, inject, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { BehaviorSubject, combineLatest, Observable, switchMap } from 'rxjs';
 import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
 import { BitstreamImagesService } from '../../../core/services/bitstream-images.service';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
@@ -11,9 +11,12 @@ import { Item } from 'src/app/core/shared/item.model';
   templateUrl: './slider-browse-elements.component.html',
   styleUrls: ['./slider-browse-elements.component.scss'],
 })
-export class SliderBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnInit, OnChanges {
+export class SliderBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
-  maxItemsPerPage = 4;
+  readonly maxItemsPerPage = 4;
+  readonly minCardWidth = 250;
+  readonly arrowSpace = 132; // total width of arrow columns (including gaps)
+  readonly cardGap = 16; // corresponding to gapx-3
 
   private bitstreamImagesService = inject(BitstreamImagesService);
 
@@ -27,6 +30,12 @@ export class SliderBrowseElementsComponent extends AbstractBrowseElementsCompone
 
   itemsPerPageBS = new BehaviorSubject<number>(this.maxItemsPerPage);
 
+  resizeObserver: ResizeObserver;
+
+  sliderWrapperElement: Element;
+
+  @ViewChild('sliderWrapper') sliderWrapperElementRef: ElementRef;
+
   ngOnInit() {
     super.ngOnInit();
 
@@ -38,11 +47,20 @@ export class SliderBrowseElementsComponent extends AbstractBrowseElementsCompone
       this.searchResultArray$, this.firstItemBS.asObservable(),
     ]).pipe(
       tap(([items, firstItem]) => {
-        console.log('SELECTED', items.length, firstItem);
         this.totalItemsBS.next(items.length);
       }),
-      map(([items, firstItem]) => items.slice(firstItem, firstItem + 4)),
+      map(([items, firstItem]) => items.slice(firstItem, firstItem + this.itemsPerPageBS.value)),
     );
+
+    this.resizeObserver = new ResizeObserver(entries => {
+      entries.forEach(entry => {
+        const containerWidth = entry.contentRect.width;
+        const maxFittingCards = Math.floor((containerWidth - this.arrowSpace + this.cardGap) / (this.minCardWidth + this.cardGap ) );
+        this.itemsPerPageBS?.next(Math.min(this.maxItemsPerPage, maxFittingCards));
+        this.firstItemBS?.next(0); // reset when screen width changes
+      });
+    });
+
   }
 
   next() {
@@ -57,4 +75,14 @@ export class SliderBrowseElementsComponent extends AbstractBrowseElementsCompone
     super.ngOnChanges();
     this.firstItemBS?.next(0); // reset when input data change
   }
+
+  ngAfterViewInit() {
+    this.sliderWrapperElement = this.sliderWrapperElementRef.nativeElement;
+    this.resizeObserver.observe(this.sliderWrapperElement);
+  }
+
+  ngOnDestroy() {
+    this.resizeObserver.unobserve(this.sliderWrapperElement);
+  }
+
 }
