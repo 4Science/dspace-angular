@@ -1,19 +1,21 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SortDirection, SortOptions } from '../../../../core/cache/models/sort-options.model';
-import { TopSection, TopSectionTemplateType } from '../../../../core/layout/models/section.model';
+import { AdvancedTopSection, TopSectionTemplateType } from '../../../../core/layout/models/section.model';
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
 import { Context } from '../../../../core/shared/context.model';
 import { BehaviorSubject } from 'rxjs';
 
 /**
- * Component representing the Top component section.
+ * Component representing the Advanced-Top component section.
  */
 @Component({
-  selector: 'ds-top-section',
-  templateUrl: './top-section.component.html',
+  selector: 'ds-advanced-top-section',
+  templateUrl: './advanced-top-section.component.html',
 })
-export class TopSectionComponent implements OnInit {
+export class AdvancedTopSectionComponent implements OnInit {
+
+  // TODO: Duplicate code - Extend TopSectionComponent if possible
 
   /**
    * The identifier of the section.
@@ -25,7 +27,7 @@ export class TopSectionComponent implements OnInit {
    * The section data
    */
   @Input()
-  topSection: TopSection;
+  advancedTopSection: AdvancedTopSection;
 
   /**
    * The context in which the section is shown
@@ -48,11 +50,16 @@ export class TopSectionComponent implements OnInit {
    */
   template: TopSectionTemplateType;
 
+  /**
+   * The name of the selected discovery configuration.
+   */
+  selectedDiscoverConfiguration = new BehaviorSubject<string>(null);
+
   ngOnInit() {
-    const sortDirection = SortDirection[this.topSection.order?.toUpperCase()] ?? SortDirection.ASC;
-    this.sortOptions = new SortOptions(this.topSection.sortField, sortDirection);
-    this.template = this.topSection.template ?? TopSectionTemplateType.DEFAULT;
-    this.selectDiscoveryConfiguration(this.topSection.discoveryConfigurationName[0]);
+    const sortDirection = SortDirection[this.advancedTopSection.order?.toUpperCase()] ?? SortDirection.ASC;
+    this.sortOptions = new SortOptions(this.advancedTopSection.sortField, sortDirection);
+    this.template = this.advancedTopSection.template ?? TopSectionTemplateType.DEFAULT;
+    this.selectDiscoveryConfiguration(this.advancedTopSection.discoveryConfigurationName[0]);
   }
 
   /**
@@ -63,9 +70,10 @@ export class TopSectionComponent implements OnInit {
   selectDiscoveryConfiguration(name: string) {
     const pagination = Object.assign(new PaginationComponentOptions(), {
       id: `advanced-top-components-${name}-discovery-configuration`,
-      pageSize: this.topSection.numberOfItems,
+      pageSize: this.advancedTopSection.numberOfItems,
       currentPage: 1,
     });
+    this.selectedDiscoverConfiguration.next(name);
     this.paginatedSearchOptions.next(new PaginatedSearchOptions({
       configuration: name,
       pagination: pagination,

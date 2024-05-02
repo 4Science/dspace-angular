@@ -1,0 +1,24 @@
+<div>
+  <h2 class="mb-3">
+    {{ 'home.advanced-top-section.' + advancedTopSection.sortField | translate }}
+  </h2>
+  <div class="d-flex justify-content-center mb-3" *ngIf="advancedTopSection.discoveryConfigurationName?.length > 1">
+    <div class="btn-group">
+      <ng-container *ngFor="let discoveryConfigurationName of advancedTopSection.discoveryConfigurationName">
+        <button class="btn text-capitalize"
+                [ngClass]="(selectedDiscoverConfiguration.asObservable() | async) === discoveryConfigurationName ? 'btn-primary' : 'btn-outline-primary'"
+                (click)="selectDiscoveryConfiguration(discoveryConfigurationName)"
+        >
+          {{ discoveryConfigurationName }}
+        </button>
+      </ng-container>
+    </div>
+  </div>
+  <div>
+    <ds-themed-browse-most-elements [context]="context"
+                                    [paginatedSearchOptions]="paginatedSearchOptions.asObservable() | async"
+                                    [topSection]="$any(advancedTopSection)">
+    </ds-themed-browse-most-elements>
+  </div>
+</div>
+
