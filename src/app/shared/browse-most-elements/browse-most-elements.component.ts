@@ -1,7 +1,7 @@
 import { ViewMode } from '../../core/shared/view-mode.model';
 import { Router } from '@angular/router';
 import { LayoutModeEnum, TopSection, TopSectionTemplateType, } from '../../core/layout/models/section.model';
-import { ChangeDetectorRef, Component, Inject, inject, Input, OnChanges, OnInit, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input, OnChanges, OnInit, PLATFORM_ID } from '@angular/core';
 
 import { SearchManager } from '../../core/browse/search-manager';
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
