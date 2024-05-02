@@ -1,3 +1,8 @@
+<nav class="navbar navbar-light cris-results-back mb-2" *ngIf="showBackButton | async">
+  <div class="container">
+    <ds-themed-results-back-button  [back]="back"></ds-themed-results-back-button>
+  </div>
+</nav>
 <div class="cris-layout">
 	<ng-container *ngIf="!!tabs$">
 		<ng-container *ngVar="(leadingTabs$ | async) as leadingTabs">

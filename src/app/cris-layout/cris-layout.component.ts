@@ -8,8 +8,9 @@ import { filter, map, take } from 'rxjs/operators';
 
 import { getFirstSucceededRemoteData, getPaginatedListPayload, getRemoteDataPayload } from '../core/shared/operators';
 import { isNotEmpty } from '../shared/empty.util';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { RemoteData } from '../core/data/remote-data';
+import {RouteService} from '../core/services/route.service';
 
 /**
  * Component for determining what component to use depending on the item's entity type (dspace.entity.type)
@@ -20,6 +21,12 @@ import { RemoteData } from '../core/data/remote-data';
   styleUrls: ['./cris-layout.component.scss']
 })
 export class CrisLayoutComponent implements OnInit {
+
+  /**
+   * This regex matches previous routes. The button is shown
+   * for matching paths and hidden in other cases.
+   */
+  previousRoute = /^(\/search|\/browse|\/collections|\/admin\/search|\/mydspace)/;
 
   /**
    * DSpace Item to render
@@ -56,13 +63,27 @@ export class CrisLayoutComponent implements OnInit {
    */
   hasLeadingTab$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private tabService: TabDataService, private router: ActivatedRoute) {
+  /**
+   * Used to show or hide the back to results button in the view.
+   */
+  showBackButton: Observable<boolean>;
+
+  constructor(private tabService: TabDataService,
+              private router: ActivatedRoute,
+              protected routeService: RouteService,
+              protected route: Router) {
   }
 
   /**
    * Get tabs for the specific item
    */
   ngOnInit(): void {
+
+    this.showBackButton = this.routeService.getPreviousUrl().pipe(
+      filter(url => this.previousRoute.test(url)),
+      take(1),
+      map(() => true)
+    );
 
     if (!!this.dataTabs$) {
       this.tabs$ = this.dataTabs$.pipe(
@@ -126,5 +147,18 @@ export class CrisLayoutComponent implements OnInit {
       map((tabs: CrisLayoutTab[]) => tabs && tabs.length > 0)
     );
   }
+
+  /**
+   * The function used to return to list from the item.
+   */
+  back = () => {
+    this.routeService.getPreviousUrl().pipe(
+      take(1)
+    ).subscribe(
+      (url => {
+        this.route.navigateByUrl(url);
+      })
+    );
+  };
 
 }

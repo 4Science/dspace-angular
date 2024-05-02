@@ -1772,10 +1772,7 @@
 
 
   // "search.browse.item-back": "Back to Results",
-  // TODO New key - Add a translation
-  "search.browse.item-back": "Back to Results",
-
-
+  "search.browse.item-back": "Zurück zur Trefferliste",
 
   // "bulk-import.abort-on-error" : "Abort on first error",
   // TODO New key - Add a translation

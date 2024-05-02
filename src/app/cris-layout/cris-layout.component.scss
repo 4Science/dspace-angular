@@ -1,3 +1,7 @@
 .cris-layout {
   margin-top: -1rem;
 }
+.cris-results-back {
+  background-color: var(--ds-cris-layout-navbar-background-color);
+  margin-top: calc(-1 * var(--ds-content-spacing));
+}
