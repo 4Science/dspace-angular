@@ -13,6 +13,8 @@ import { SearchManager } from '../../../../core/browse/search-manager';
 import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
 import { UUIDService } from '../../../../core/shared/uuid.service';
 import { InternalLinkService } from 'src/app/core/services/internal-link.service';
+import { hasValue } from '../../../empty.util';
+import { NativeWindowRef, NativeWindowService } from '../../../../core/services/window.service';
 
 @Component({
   selector: 'ds-counters-section',
@@ -41,6 +43,7 @@ export class CountersSectionComponent implements OnInit {
   constructor(
               public internalLinkService: InternalLinkService,
               private searchService: SearchManager,
+              @Inject(NativeWindowService) protected _window: NativeWindowRef,
               private uuidService: UUIDService,
               @Inject(PLATFORM_ID) private platformId: Object,
   ) {
@@ -70,6 +73,12 @@ export class CountersSectionComponent implements OnInit {
           })
         )));
     this.counterData$.subscribe(() => this.isLoading$.next(false));
+  }
+
+  goToLink(link: string) {
+    if (hasValue(link)) {
+      this._window.nativeWindow.location.href = link;
+    }
   }
 }
 
