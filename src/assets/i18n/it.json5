@@ -13787,6 +13787,7 @@
   // "layout.field.label.Type": "Type",
   "layout.field.label.Type": "Tipo di bibliografia",
 
-
+  // "discoverable.search.results.head": "Search Results",
+  "discoverable.search.results.head": "Risultati della ricerca",
 
 }
