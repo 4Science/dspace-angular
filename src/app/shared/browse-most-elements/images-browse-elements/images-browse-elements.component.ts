@@ -3,6 +3,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
 import { map, Observable, switchMap } from 'rxjs';
 import { BitstreamImagesService } from '../../../core/services/bitstream-images.service';
+import { Item } from '../../../core/shared/item.model';
 
 @Component({
   selector: 'ds-images-browse-elements',
@@ -28,7 +29,7 @@ export class ImagesBrowseElementsComponent extends AbstractBrowseElementsCompone
     super.ngOnInit();
 
     this.itemToImageHrefMap$ = this.searchResultArray$.pipe(
-      switchMap((res) => this.bitstreamImagesService.getItemToImageMap(res)),
+      switchMap((res) => this.bitstreamImagesService.getItemToImageMap(res as Item[])),
     );
 
     this.selectedSearchResultArray$ = this.searchResultArray$.pipe(

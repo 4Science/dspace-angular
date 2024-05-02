@@ -29,7 +29,7 @@ export class BitstreamImagesService {
    * @param items
    * @param bundleName
    */
-  getItemToImageMap(items: Item[] | DSpaceObject[], bundleName = 'ORIGINAL'): Observable<Map<string, string>> {
+  getItemToImageMap(items: Item[], bundleName = 'ORIGINAL'): Observable<Map<string, string>> {
     return from(items).pipe(
       mergeMap((item) => this.findImageBitstreams(item, bundleName).pipe(
         take(1),
