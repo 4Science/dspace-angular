@@ -19,11 +19,13 @@ export class DefaultBrowseElementsComponent extends AbstractBrowseElementsCompon
    */
   @Input() showThumbnails = this.appConfig.browseBy.showThumbnails;
 
-  mode: LayoutModeEnum;
+  protected followThumbnailLink = true;
+
+  layoutMode: LayoutModeEnum;
 
   ngOnInit() {
     super.ngOnInit();
-    this.mode = this.topSection.defaultLayoutMode ?? LayoutModeEnum.LIST;
+    this.layoutMode = this.topSection.defaultLayoutMode ?? LayoutModeEnum.LIST;
   }
 
 }

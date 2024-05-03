@@ -8967,6 +8967,8 @@
   "layout.field.label.Author": "Author",
   "layout.field.label.Type": "Type",
 
+  "discoverable.search.results.head": "Search Results",
+
   "third-party-metrics-cookies.message": "{{ metricType }} badge is blocked by your ",
 
   "third-party-metrics-cookies.consent-settings": "consent settings",

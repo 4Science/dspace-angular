@@ -59,7 +59,7 @@ export class AdvancedTopSectionComponent implements OnInit {
     const sortDirection = SortDirection[this.advancedTopSection.order?.toUpperCase()] ?? SortDirection.ASC;
     this.sortOptions = new SortOptions(this.advancedTopSection.sortField, sortDirection);
     this.template = this.advancedTopSection.template ?? TopSectionTemplateType.DEFAULT;
-    this.selectDiscoveryConfiguration(this.advancedTopSection.discoveryConfigurationName[0]);
+    this.selectDiscoveryConfiguration(this.advancedTopSection.discoveryConfigurationName[0]); // ADVANCED top sections use an ARRAY of configurations
   }
 
   /**

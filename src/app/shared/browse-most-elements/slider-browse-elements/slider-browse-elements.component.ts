@@ -18,7 +18,9 @@ export class SliderBrowseElementsComponent extends AbstractBrowseElementsCompone
   readonly arrowSpace = 132; // total width of arrow columns (including gaps)
   readonly cardGap = 16; // corresponding to gapx-3
 
-  private bitstreamImagesService = inject(BitstreamImagesService);
+  protected followThumbnailLink = false; // not required as ORIGINAL bundle is used
+
+  private readonly bitstreamImagesService = inject(BitstreamImagesService);
 
   itemToImageHrefMap$: Observable<Map<string, string>>;
 
@@ -55,7 +57,7 @@ export class SliderBrowseElementsComponent extends AbstractBrowseElementsCompone
     this.resizeObserver = new ResizeObserver(entries => {
       entries.forEach(entry => {
         const containerWidth = entry.contentRect.width;
-        const maxFittingCards = Math.floor((containerWidth - this.arrowSpace + this.cardGap) / (this.minCardWidth + this.cardGap ) );
+        const maxFittingCards = Math.max(Math.floor((containerWidth - this.arrowSpace + this.cardGap) / (this.minCardWidth + this.cardGap)), 1);
         this.itemsPerPageBS?.next(Math.min(this.maxItemsPerPage, maxFittingCards));
         this.firstItemBS?.next(0); // reset when screen width changes
       });

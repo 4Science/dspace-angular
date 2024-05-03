@@ -1,6 +1,6 @@
 import { CollectionElementLinkType } from '../object-collection/collection-element-link.type';
 import { LayoutModeEnum, TopSection } from '../../core/layout/models/section.model';
-import { ChangeDetectorRef, Component, inject, Input, OnChanges, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, inject, Input, OnChanges, OnInit, PLATFORM_ID } from '@angular/core';
 import { SearchService } from '../../core/shared/search/search.service';
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
@@ -28,7 +28,8 @@ export abstract class AbstractBrowseElementsComponent implements OnInit, OnChang
   protected readonly appConfig = inject(APP_CONFIG);
   protected readonly platformId = inject(PLATFORM_ID);
   protected readonly searchService = inject(SearchService);
-  protected readonly cdr = inject(ChangeDetectorRef);
+
+  protected followThumbnailLink: boolean; // to be overridden
 
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
@@ -56,8 +57,7 @@ export abstract class AbstractBrowseElementsComponent implements OnInit, OnChang
   }
 
   ngOnInit() {
-    let showThumbnails = true; // TODO fix
-    const followLinks = showThumbnails ? [followLink('thumbnail')] : [];
+    const followLinks = this.followThumbnailLink ? [followLink('thumbnail')] : [];
     this.paginatedSearchOptionsBS = new BehaviorSubject<PaginatedSearchOptions>(this.paginatedSearchOptions);
     this.searchResults$ = this.paginatedSearchOptionsBS.asObservable().pipe(
       mergeMap((paginatedSearchOptions) =>
