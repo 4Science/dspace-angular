@@ -1,6 +1,6 @@
 import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
 import { Context } from '../../../core/shared/context.model';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ThemedComponent } from '../../theme-support/themed.component';
 import { SliderBrowseElementsComponent } from './slider-browse-elements.component';
 import { TopSection } from '../../../core/layout/models/section.model';
