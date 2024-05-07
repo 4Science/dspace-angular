@@ -9,7 +9,7 @@
                 [ngClass]="(selectedDiscoverConfiguration.asObservable() | async) === discoveryConfigurationName ? 'btn-primary' : 'btn-outline-primary'"
                 (click)="selectDiscoveryConfiguration(discoveryConfigurationName)"
         >
-          {{ discoveryConfigurationName }}
+          {{ 'home.advanced-top-section.discovery.' + discoveryConfigurationName | translate }}
         </button>
       </ng-container>
     </div>
