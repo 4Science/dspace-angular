@@ -111,11 +111,24 @@ export abstract class CrisLayoutTabsComponent {
     const itemPageRoute = getItemPageRoute(this.item);
     this.activeTab$.next(tab);
     this.emitSelected(tab);
+
+    let queryParams = {};
+
+    this.route.queryParams.subscribe(params => {
+      queryParams = params;
+    });
+
+    const currentTabName = this.route.snapshot.paramMap.get('tab');
+    const navigationExtras = (currentTabName && currentTabName.includes(tab.shortname)) ? { queryParams: queryParams } : {};
+
+    let newUrl: string;
     if (this.tabs[0].shortname === tab.shortname) {
-      this.location.replaceState(itemPageRoute);
+      newUrl = itemPageRoute;
     } else {
-      this.location.replaceState(itemPageRoute + '/' + tab.shortname);
+      newUrl = itemPageRoute + '/' + tab.shortname;
     }
+
+    this.router.navigate([newUrl], navigationExtras);
   }
 
 }
