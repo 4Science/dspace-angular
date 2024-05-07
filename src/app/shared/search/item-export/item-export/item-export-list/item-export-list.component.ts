@@ -15,6 +15,8 @@ import { fadeIn } from '../../../../animations/fade';
 import { PaginatedSearchOptions } from '../../../models/paginated-search-options.model';
 import { UUIDService } from '../../../../../core/shared/uuid.service';
 
+import { ItemExportService } from '../../item-export.service';
+
 @Component({
   selector: 'ds-item-export-list',
   templateUrl: './item-export-list.component.html',
@@ -64,6 +66,7 @@ export class ItemExportListComponent implements OnInit {
   resultsRD$: BehaviorSubject<RemoteData<SearchObjects<DSpaceObject>>> = new BehaviorSubject(null);
 
   constructor(
+    protected itemExportService: ItemExportService,
     private paginationService: PaginationService,
     private searchManager: SearchManager,
     private uuidService: UUIDService) {
@@ -74,6 +77,7 @@ export class ItemExportListComponent implements OnInit {
     this.currentPagination$ = this.paginationService.getCurrentPagination(this.initialPagination.id, this.initialPagination);
     this.currentPagination$.subscribe((paginationOptions: PaginationComponentOptions) => {
       this.searchOptions = Object.assign(new PaginatedSearchOptions({}), this.searchOptions, {
+        scope: this.itemExportService.getScopeUUID(this.searchOptions),
         fixedFilter: `f.entityType=${this.itemEntityType},equals`,
         pagination: paginationOptions
       });
