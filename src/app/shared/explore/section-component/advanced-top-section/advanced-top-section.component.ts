@@ -12,6 +12,7 @@ import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'ds-advanced-top-section',
   templateUrl: './advanced-top-section.component.html',
+  styleUrls: ['./advanced-top-section.component.scss'],
 })
 export class AdvancedTopSectionComponent implements OnInit {
 

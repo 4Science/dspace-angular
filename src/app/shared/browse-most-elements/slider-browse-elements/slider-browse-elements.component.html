@@ -1,8 +1,8 @@
-<div class="d-flex flex-row gapx-3 flex-nowrap justify-content-center align-items-center slider-wrapper" [class]="topSection.style" #sliderWrapper>
+<div class="d-flex flex-row gapx-3 flex-nowrap justify-content-center align-items-center slider-wrapper" #sliderWrapper>
   <div *ngIf="(searchResultArray$ | async)?.length" class="arrow">
     <button class="btn btn-link btn-sm arrow-btn" (click)="prev()"
             [disabled]="(firstItemBS.asObservable() | async) <= 0">
-      <i class="fas fa-2xl fa-chevron-left"></i>
+      <i class="fas fa-3x fa-chevron-left"></i>
     </button>
   </div>
   <div class="flex-fill d-flex flex-row gapx-3 flex-nowrap card-element-wrapper justify-content-center">
@@ -39,7 +39,7 @@
   <div *ngIf="(searchResultArray$ | async)?.length">
     <button class="btn btn-link btn-sm arrow-btn" (click)="next()"
             [disabled]="(firstItemBS.asObservable() | async) + (itemsPerPageBS.asObservable() | async) >= (totalItemsBS.asObservable() | async) ">
-      <i class="fas fa-2xl fa-chevron-right"></i>
+      <i class="fas fa-3x fa-chevron-right"></i>
     </button>
   </div>
   <div *ngIf="(searchResultArray$ | async)?.length === 0">{{ 'slider-browse-elements.no-results' | translate }}</div>
