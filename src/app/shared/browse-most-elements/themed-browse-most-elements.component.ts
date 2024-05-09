@@ -1,4 +1,4 @@
-import { TopSection, LayoutModeEnum, AdvancedTopSection } from './../../core/layout/models/section.model';
+import { TopSection } from '../../core/layout/models/section.model';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ThemedComponent } from '../theme-support/themed.component';
 import { BrowseMostElementsComponent } from './browse-most-elements.component';
