@@ -149,7 +149,8 @@ import { CarouselModule } from '../shared/carousel/carousel.module';
 import { BackgroundComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/background/background.component';
 import { OpenStreetMapModule } from '../shared/open-street-map/open-street-map.module';
 import { OpenStreetMapRenderingComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/open-street-map/open-street-map-rendering.component';
-
+import { GooglemapsGroupComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/metadataGroup/googlemaps-group/googlemaps-group.component';
+import { OpenstreetmapGroupComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/metadataGroup/openstreetmap-group/openstreetmap-group.component';
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
   CrisLayoutVerticalComponent,
@@ -213,6 +214,8 @@ const ENTRY_COMPONENTS = [
     MarkdownComponent,
     BitstreamAttachmentComponent,
     AttachmentRenderComponent,
+    GooglemapsGroupComponent,
+    OpenstreetmapGroupComponent,
   ],
   providers:[ LoadMoreService, NgbActiveModal ],
   imports: [
