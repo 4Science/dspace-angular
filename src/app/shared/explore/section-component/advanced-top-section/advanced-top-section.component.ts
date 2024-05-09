@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { SortDirection, SortOptions } from '../../../../core/cache/models/sort-options.model';
 import { AdvancedTopSection, TopSectionTemplateType } from '../../../../core/layout/models/section.model';
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
 import { Context } from '../../../../core/shared/context.model';
 import { BehaviorSubject } from 'rxjs';
+import { HostWindowService } from '../../../host-window.service';
 
 /**
  * Component representing the Advanced-Top component section.
@@ -35,6 +36,8 @@ export class AdvancedTopSectionComponent implements OnInit {
    */
   @Input()
   context: Context = Context.BrowseMostElements;
+
+  private readonly windowService = inject(HostWindowService);
 
   /**
    * The paginated search options for the section
@@ -82,4 +85,7 @@ export class AdvancedTopSectionComponent implements OnInit {
     }));
   }
 
+  isXs() {
+    return this.windowService.isXs();
+  }
 }

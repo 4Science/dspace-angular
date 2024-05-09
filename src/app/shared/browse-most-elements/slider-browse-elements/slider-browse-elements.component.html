@@ -7,7 +7,7 @@
   </div>
   <div class="flex-fill d-flex flex-row gapx-3 flex-nowrap card-element-wrapper justify-content-center">
     <ng-container *ngFor="let item of (selectedSearchResultArray$ | async); let i = index; let last = last">
-      <div class="card flex-grow-1">
+      <div class="card">
         <img [src]="(itemToImageHrefMap$ | async)?.get(item.uuid)" alt="hidden-image" style="display: none" #image />
         <div class="thumbnail-container h-50">
           <div class="thumbnail-inner-container w-100 h-100 position-relative"
