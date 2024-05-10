@@ -52,7 +52,7 @@ export class TopSectionComponent implements OnInit {
     const sortDirection = SortDirection[this.topSection.order?.toUpperCase()] ?? SortDirection.ASC;
     this.sortOptions = new SortOptions(this.topSection.sortField, sortDirection);
     this.template = this.topSection.template ?? TopSectionTemplateType.DEFAULT;
-    this.selectDiscoveryConfiguration(this.topSection.discoveryConfigurationName[0]);
+    this.selectDiscoveryConfiguration(this.topSection.discoveryConfigurationName);
   }
 
   /**

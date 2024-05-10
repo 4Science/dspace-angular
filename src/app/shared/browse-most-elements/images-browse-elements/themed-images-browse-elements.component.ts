@@ -3,7 +3,7 @@ import { ThemedComponent } from '../../theme-support/themed.component';
 import { ImagesBrowseElementsComponent } from './images-browse-elements.component';
 import { Context } from '../../../core/shared/context.model';
 import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
-import { LayoutModeEnum, TopSection } from '../../../core/layout/models/section.model';
+import { TopSection } from '../../../core/layout/models/section.model';
 
 /**
  * This component is a wrapper for the ImagesBrowseElementsComponent

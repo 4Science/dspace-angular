@@ -1,0 +1,47 @@
+<div id="osm-wrapper" *ngIf="coordinates">
+  <aol-map [logo]="true" [width]="width" [height]="height">
+    <aol-interaction-default></aol-interaction-default>
+    <aol-view [zoom]="zoom">
+      <aol-coordinate [x]="coordinates.longitude" [y]="coordinates.latitude" [srid]="SRID"></aol-coordinate>
+    </aol-view>
+    <aol-layer-tile>
+      <aol-source-osm></aol-source-osm>
+    </aol-layer-tile>
+    <aol-layer-vector>
+      <aol-source-vector>
+        <aol-feature *ngFor="let pointer of pointers">
+          <aol-geometry-point>
+            <aol-coordinate [x]="pointer.coordinates.longitude" [y]="pointer.coordinates.latitude" [srid]="SRID"></aol-coordinate>
+          </aol-geometry-point>
+          <aol-style>
+            <aol-style-circle [radius]="10">
+              <aol-style-stroke color="black" [width]="1"></aol-style-stroke>
+              <aol-style-fill [color]="pointer.color"></aol-style-fill>
+            </aol-style-circle>
+          </aol-style>
+        </aol-feature>
+      </aol-source-vector>
+    </aol-layer-vector>
+    <aol-control>
+      <aol-content>
+        <div *ngIf="showControlsZoom" class="ol-overlaycontainer-stopevent">
+          <div class="ol-zoom ol-unselectable ol-control">
+            <button [title]="'openstreetmap.location.zoomIn' | translate" class="ol-zoom-in" type="button" title="Zoom in"
+                    (click)="increaseZoom()">+
+            </button>
+            <button [title]="'openstreetmap.location.zoomOut' | translate" class="ol-zoom-out" type="button"
+                    title="Zoom out"
+                    (click)="decreaseZoom()">−
+            </button>
+          </div>
+          <!-- TODO: add the possibility to center the map by clicking on this button -->
+          <!--<div class="ol-rotate ol-unselectable ol-control">
+            <button [title]="'openstreetmap.location.center' | translate" (click)="centerMap()">
+              &#8982;
+            </button>
+          </div>-->
+        </div>
+      </aol-content>
+    </aol-control>
+  </aol-map>
+</div>

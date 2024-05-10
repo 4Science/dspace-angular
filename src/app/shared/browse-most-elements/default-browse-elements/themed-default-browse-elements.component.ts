@@ -1,6 +1,6 @@
 import { Context } from './../../../core/shared/context.model';
 import { ThemedComponent } from './../../../shared/theme-support/themed.component';
-import { TopSection, LayoutModeEnum } from './../../../core/layout/models/section.model';
+import { TopSection } from './../../../core/layout/models/section.model';
 import { PaginatedSearchOptions } from './../../search/models/paginated-search-options.model';
 import { DefaultBrowseElementsComponent } from './default-browse-elements.component';
 import { Component, Input } from '@angular/core';
