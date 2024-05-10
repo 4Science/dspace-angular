@@ -187,6 +187,8 @@ const ENTRY_COMPONENTS = [
   AdvancedAttachmentComponent,
   BackgroundComponent,
   CrisLayoutMediaBoxComponent,
+  GooglemapsGroupComponent,
+  OpenstreetmapGroupComponent,
 ];
 
 @NgModule({
@@ -214,8 +216,6 @@ const ENTRY_COMPONENTS = [
     MarkdownComponent,
     BitstreamAttachmentComponent,
     AttachmentRenderComponent,
-    GooglemapsGroupComponent,
-    OpenstreetmapGroupComponent,
   ],
   providers:[ LoadMoreService, NgbActiveModal ],
   imports: [
