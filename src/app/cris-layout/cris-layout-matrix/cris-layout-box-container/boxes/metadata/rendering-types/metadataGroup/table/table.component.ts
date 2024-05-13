@@ -20,9 +20,10 @@ export class TableComponent extends MetadataGroupComponent {
     @Inject('fieldProvider') public fieldProvider: LayoutField,
     @Inject('itemProvider') public itemProvider: Item,
     @Inject('renderingSubTypeProvider') public renderingSubTypeProvider: string,
+    @Inject('tabNameProvider') public tabNameProvider: string,
     protected translateService: TranslateService,
     public loadMoreService: LoadMoreService
   ) {
-    super(fieldProvider, itemProvider, renderingSubTypeProvider, translateService, loadMoreService);
+    super(fieldProvider, itemProvider, renderingSubTypeProvider, tabNameProvider, translateService, loadMoreService);
   }
 }

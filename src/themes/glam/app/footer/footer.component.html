@@ -19,7 +19,7 @@
               </div>
             </div>
           </div>
-          <div class="footer-element" *ngIf="socialMedia.length > 0">
+          <div class="footer-element" *ngIf="socialMedia?.length > 0">
             <h6 class="title text-center mb-4">{{ 'footer.social-media' | translate }}</h6>
             <div class="d-flex flex-row flex-wrap justify-content-center gap-3">
               <ng-container *ngFor="let social of socialMedia">

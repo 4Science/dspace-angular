@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
 import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate-loader.mock';
-import { MapComponent } from './map.component';
+import { OpenStreetMapRenderingComponent } from './open-street-map-rendering.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('MapComponent', () => {
-  let component: MapComponent;
-  let fixture: ComponentFixture<MapComponent>;
+describe('OpenStreetMapRenderingComponent', () => {
+  let component: OpenStreetMapRenderingComponent;
+  let fixture: ComponentFixture<OpenStreetMapRenderingComponent>;
 
   const metadataValue = Object.assign(new MetadataValue(), {
     'value': '@42.1334,56.7654',
@@ -33,7 +33,7 @@ describe('MapComponent', () => {
   const mockField: LayoutField = {
     'metadata': 'organization.address.addressLocality',
     'label': 'Preferred name',
-    'rendering': 'MAP',
+    'rendering': 'OPENSTREETMAP',
     'fieldType': 'METADATA',
     'style': null,
     'styleLabel': 'test-style-label',
@@ -44,45 +44,37 @@ describe('MapComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useClass: TranslateLoaderMock
-        }
-      }), BrowserAnimationsModule],
+      imports: [
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock
+          }
+        }),
+        BrowserAnimationsModule,
+        HttpClientTestingModule,
+      ],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
         { provide: 'metadataValueProvider', useValue: metadataValue },
         { provide: 'renderingSubTypeProvider', useValue: '' },
+        { provide: 'tabNameProvider', useValue: '' },
+        // { provide: HttpClient, useValue: {} },
       ],
-      declarations: [ MapComponent ]
+      declarations: [ OpenStreetMapRenderingComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MapComponent);
+    fixture = TestBed.createComponent(OpenStreetMapRenderingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should rendered google map.',() => {
-    component.coordinates = '@42.1334,56.7654';
-    fixture.detectChanges();
-    const container = fixture.debugElement.query(By.css('#googlemap'));
-    expect(container).toBeTruthy();
-  });
-
-  it('should not rendered google map.',() => {
-    component.coordinates = undefined;
-    fixture.detectChanges();
-    const container = fixture.debugElement.query(By.css('#googlemap'));
-    expect(container).toBeFalsy();
   });
 
 });

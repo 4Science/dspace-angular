@@ -91,7 +91,8 @@ describe('TableComponent component when .first and .last is not in rendering con
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
         { provide: 'renderingSubTypeProvider', useValue: '' },
-        LoadMoreService
+        { provide: 'tabNameProvider', useValue: '' },
+        LoadMoreService,
       ],
       declarations: [
         DsDatePipe,
@@ -248,6 +249,7 @@ describe('TableComponent component when .first and .last is present in rendering
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
         { provide: 'renderingSubTypeProvider', useValue: '' },
+        { provide: 'tabNameProvider', useValue: '' },
         LoadMoreService
       ],
       declarations: [

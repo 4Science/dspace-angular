@@ -90,6 +90,12 @@ import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.reso
             resolve: {
               tabs: CrisItemPageTabResolver
             },
+            children: [
+              {
+                path: VIEWERS_PATH,
+                loadChildren: () => import('./viewer-provider/viewer-provider.module').then(m => m.ViewerProviderModule)
+              }
+            ],
           }
         ],
         data: {

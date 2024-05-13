@@ -37,7 +37,6 @@ export class CarouselSectionComponent implements OnInit {
    * Search results of provided carousel configurations.
    */
   searchResults$: Observable<ItemSearchResult[]>;
-  // searchResults$: Observable<PaginatedList<ItemSearchResult>>;
 
   /**
    * Paginated Search Options of current carousel configurations.

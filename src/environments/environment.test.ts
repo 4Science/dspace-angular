@@ -252,6 +252,7 @@ export const environment: BuildConfig = {
     // The number of entries in a paginated browse results list.
     // Rounded to the nearest size in the list of selectable sizes on the
     // settings menu.  See pageSizeOptions in 'pagination-component-options.model.ts'.
+    showMetrics: true,
     pageSize: 20,
   },
   communityList: {
@@ -284,7 +285,12 @@ export const environment: BuildConfig = {
       // Rounded to the nearest size in the list of selectable sizes on the
       // settings menu.  See pageSizeOptions in 'pagination-component-options.model.ts'.
       pageSize: 5
-    }
+    },
+    // The maximum number of metadata values to add to the metatag list of the item page
+    metatagLimit: 20,
+
+    // The maximum number of values for repeatable metadata to show in the full item
+    metadataLimit: 20
   },
   collection: {
     edit: {
@@ -329,7 +335,22 @@ export const environment: BuildConfig = {
     enableGeneralInformation: true,
     enableOfferedServices: true,
     enableHistoryDigital: true,
-    enableOrgStructure: true
+    enableOrgStructure: true,
+    //Configuration for third-party metrics in Klaro
+    metricsConsents: [
+      {
+        key: 'plumX',
+        enabled: true
+      },
+      {
+        key: 'altmetric',
+        enabled: true
+      },
+      {
+        key: 'dimensions',
+        enabled: true
+      },
+    ]
   },
   markdown: {
     enabled: false,
@@ -587,5 +608,17 @@ export const environment: BuildConfig = {
       'dc.contributor.author': 'dc.contributor.authorrole',
       'dc.contributor.contributor': 'dc.contributor.contributorrole',
     },
+  },
+
+  mirador: {
+    enableDownloadPlugin: true,
+  },
+
+  location: {
+    nominatimApi: {
+      searchEndpoint: 'https://nominatim.openstreetmap.org/search',
+      reverseSearchEndpoint: 'https://nominatim.openstreetmap.org/reverse',
+      statusEndpoint: 'https://nominatim.openstreetmap.org/status',
+    }
   },
 };
