@@ -50,10 +50,11 @@ export class ThumbnailComponent extends BitstreamRenderingModelComponent impleme
     @Inject('fieldProvider') public fieldProvider: LayoutField,
     @Inject('itemProvider') public itemProvider: Item,
     @Inject('renderingSubTypeProvider') public renderingSubTypeProvider: string,
+    @Inject('tabNameProvider') public tabNameProvider: string,
     protected bitstreamDataService: BitstreamDataService,
     protected translateService: TranslateService
   ) {
-    super(fieldProvider, itemProvider, renderingSubTypeProvider, bitstreamDataService, translateService);
+    super(fieldProvider, itemProvider, renderingSubTypeProvider, tabNameProvider, bitstreamDataService, translateService);
   }
 
   /**
@@ -96,11 +97,13 @@ export class ThumbnailComponent extends BitstreamRenderingModelComponent impleme
    */
   setDefaultImage(): void {
     const eType = this.item.firstMetadataValue('dspace.entity.type');
-    this.default = 'assets/images/person-placeholder.svg';
+    this.default = 'assets/images/file-placeholder.svg';
     if (hasValue(eType) && eType.toUpperCase() === 'PROJECT') {
       this.default = 'assets/images/project-placeholder.svg';
     } else if (hasValue(eType) && eType.toUpperCase() === 'ORGUNIT') {
       this.default = 'assets/images/orgunit-placeholder.svg';
+    } else if (hasValue(eType) && eType.toUpperCase() === 'PERSON') {
+      this.default = 'assets/images/person-placeholder.svg';
     }
   }
 }

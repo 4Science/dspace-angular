@@ -29,6 +29,10 @@ export class FileDownloadLinkComponent implements OnInit {
   @Input() bitstream: Bitstream;
 
   @Input() item: Item;
+  /**
+   * The tab name
+   */
+  @Input() tabName: string;
 
   /**
    * Additional css classes to apply to link

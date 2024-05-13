@@ -21,7 +21,7 @@ export class GooglemapsComponent implements OnInit {
   /**
    * The reference to map div container
    */
-  @ViewChild('map') mapElement: any;
+  @ViewChild('gmap') mapElement: any;
 
   /**
    * The google map object

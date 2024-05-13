@@ -47,7 +47,9 @@ import {
   UpdateSectionVisibilityAction
 } from './submission-objects.actions';
 import { WorkspaceitemSectionUploadObject } from '../../core/submission/models/workspaceitem-section-upload.model';
-import { WorkspaceitemSectionDetectDuplicateObject } from '../../core/submission/models/workspaceitem-section-deduplication.model';
+import {
+  WorkspaceitemSectionDetectDuplicateObject
+} from '../../core/submission/models/workspaceitem-section-deduplication.model';
 import { SubmissionSectionObject } from './submission-section-object.model';
 import { MetadataSecurityConfiguration } from '../../core/submission/models/metadata-security-configuration';
 
@@ -889,8 +891,7 @@ function newFile(state: SubmissionObjectState, action: NewUploadedFileAction): S
       files: [action.payload.data]
     };
   } else {
-    newData = filesData;
-    newData.files.push(action.payload.data);
+    newData = { ...filesData, files: [].concat(...filesData.files, action.payload.data) };
   }
 
   return Object.assign({}, state, {

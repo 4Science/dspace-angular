@@ -34,6 +34,8 @@ import {
 } from './advanced-attachment-rendering.config';
 import { AttachmentRenderingConfig } from './attachment-rendering.config';
 import { SearchResultConfig } from './search-result-config.interface';
+import { MiradorConfig } from './mirador-config.interfaces';
+import { LocationConfig } from './location-config.interface';
 
 export class DefaultAppConfig implements AppConfig {
   production = false;
@@ -156,7 +158,7 @@ export class DefaultAppConfig implements AppConfig {
   submission: SubmissionConfig = {
     autosave: {
       // NOTE: which metadata trigger an autosave
-      metadata: ['dc.title', 'dc.identifier.doi', 'dc.identifier.pmid', 'dc.identifier.arxiv', 'dc.identifier.patentno', 'dc.identifier.scopus', 'dc.identifier.isi', 'dcterms.dateSubmitted', 'dc.identifier.applicationnumber'],
+      metadata: ['dc.title', 'dc.identifier.doi', 'dc.identifier.pmid', 'dc.identifier.arxiv', 'dc.identifier.patentno', 'dc.identifier.scopus', 'dc.identifier.isi', 'dcterms.dateSubmitted', 'dc.identifier.applicationnumber', 'dc.type'],
       /**
        * NOTE: after how many time (milliseconds) submission is saved automatically
        * eg. timer: 5 * (1000 * 60); // 5 minutes
@@ -339,7 +341,12 @@ export class DefaultAppConfig implements AppConfig {
       // Rounded to the nearest size in the list of selectable sizes on the
       // settings menu.  See pageSizeOptions in 'pagination-component-options.model.ts'.
       pageSize: 5
-    }
+    },
+    // The maximum number of metadata values to add to the metatag list of the item page
+    metatagLimit: 20,
+
+    // The maximum number of values for repeatable metadata to show in the full item
+    metadataLimit: 20
   };
 
   // When the search results are retrieved, for each item type the metadata with a valid authority value are inspected.
@@ -486,14 +493,29 @@ export class DefaultAppConfig implements AppConfig {
     enableGeneralInformation: true,
     enableOfferedServices: true,
     enableHistoryDigital: true,
-    enableOrgStructure: true
+    enableOrgStructure: true,
+    //Configuration for third-party metrics in Klaro
+    metricsConsents: [
+      {
+        key: 'plumX',
+        enabled: true
+      },
+      {
+        key: 'altmetric',
+        enabled: true
+      },
+      {
+        key: 'dimensions',
+        enabled: true
+      },
+    ]
   };
 
   // Whether to enable Markdown (https://commonmark.org/) and MathJax (https://www.mathjax.org/)
   // display in supported metadata fields. By default, only dc.description.abstract is supported.
   markdown: MarkdownConfig = {
-    enabled: false,
-    mathjax: false,
+    enabled: true,
+    mathjax: true,
   };
 
   // Which vocabularies should be used for which search filters
@@ -700,7 +722,7 @@ export class DefaultAppConfig implements AppConfig {
     {
       type: 'altmetric',
       icon: null,
-      class: 'alert-light',
+      class: '',
     },
     {
       type: 'plumX',
@@ -710,32 +732,32 @@ export class DefaultAppConfig implements AppConfig {
     {
       type: 'dimensions',
       icon: 'fa fa-cubes',
-      class: 'alert-light',
+      class: '',
     },
     {
       type: 'google-scholar',
       icon: '/assets/images/google-scholar.svg',
-      class: 'alert-info',
+      class: 'alert alert-info',
     },
     {
       type: 'embedded-view',
       icon: 'fa fa-eye',
-      class: 'alert-success'
+      class: 'alert alert-success'
     },
     {
       type: 'embedded-download',
       icon: 'fa fa-cloud-download-alt',
-      class: 'alert-danger',
+      class: 'alert alert-danger',
     },
     {
       type: 'view',
       icon: 'fa fa-eye',
-      class: 'alert-success',
+      class: 'alert alert-success',
     },
     {
       type: 'download',
       icon: 'fa fa-cloud-download-alt',
-      class: 'alert-danger',
+      class: 'alert alert-danger',
     },
   ];
 
@@ -790,6 +812,18 @@ export class DefaultAppConfig implements AppConfig {
       'dc.contributor.author': 'dc.contributor.authorrole',
       'dc.contributor.contributor': 'dc.contributor.contributorrole',
     },
+  };
+
+  mirador: MiradorConfig = {
+    enableDownloadPlugin: true,
+  };
+
+  location: LocationConfig = {
+    nominatimApi: {
+      searchEndpoint: 'https://nominatim.openstreetmap.org/search',
+      reverseSearchEndpoint: 'https://nominatim.openstreetmap.org/reverse',
+      statusEndpoint: 'https://nominatim.openstreetmap.org/status',
+    }
   };
 
   //main site url for glam theme

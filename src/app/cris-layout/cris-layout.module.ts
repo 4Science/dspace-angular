@@ -98,8 +98,8 @@ import {
   MetadataRenderComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/row/metadata-container/metadata-render/metadata-render.component';
 import {
-  MapComponent
-} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/map/map.component';
+  GmapComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/gmap/gmap.component';
 import { GooglemapsModule } from '../shared/googlemaps/googlemaps.module';
 import { LoadMoreService } from './services/load-more.service';
 import { MiradorViewerModule } from '../item-page/mirador-viewer/mirador-viewer.module';
@@ -147,6 +147,8 @@ import {
 import { MediaPlayerModule } from '../shared/media-player/media-player.module';
 import { CarouselModule } from '../shared/carousel/carousel.module';
 import { BackgroundComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/background/background.component';
+import { OpenStreetMapModule } from '../shared/open-street-map/open-street-map.module';
+import { OpenStreetMapRenderingComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/open-street-map/open-street-map-rendering.component';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -174,7 +176,8 @@ const ENTRY_COMPONENTS = [
   OrcidComponent,
   ValuepairComponent,
   TagComponent,
-  MapComponent,
+  GmapComponent,
+  OpenStreetMapRenderingComponent,
   BrowseComponent,
   TagBrowseComponent,
   MarkdownComponent,
@@ -217,6 +220,7 @@ const ENTRY_COMPONENTS = [
     SharedModule,
     SearchModule.withEntryComponents(),
     GooglemapsModule,
+    OpenStreetMapModule,
     MyDSpacePageModule,
     ContextMenuModule.withEntryComponents(),
     NgbAccordionModule,
