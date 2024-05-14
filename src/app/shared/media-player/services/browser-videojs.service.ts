@@ -44,8 +44,7 @@ export class BrowserVideojsService implements VideojsService {
     autoplay: false,
     loop: false,
     responsive: true,
-    width: 600,
-    height: 480,
+    fluid: true,
   };
 
   /**
