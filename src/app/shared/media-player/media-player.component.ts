@@ -266,7 +266,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
   /**
    * Resize playlist container
    */
-  private resizeMediaPlaylist() {
+  private resizeMediaPlaylist(): void {
     this.playlistContainerRef.nativeElement.style.height = `${this.videoContainerRef.nativeElement.getBoundingClientRect().height}px`;
   }
 }
