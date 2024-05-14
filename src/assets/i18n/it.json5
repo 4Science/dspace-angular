@@ -4638,9 +4638,9 @@
   // TODO New key - Add a translation
   "home.top-section.no-results": "No results found for this category",
 
-  // "home.advanced-top-section.dc.date.accessioned": "New accessions",
+  // "home.advanced-top-section.dc.date.accessioned": "News",
   // TODO New key - Add a translation
-  "home.advanced-top-section.dc.date.accessioned": "New accessions",
+  "home.advanced-top-section.dc.date.accessioned": "Novità",
 
   // "home.advanced-top-section.dc.date.issued": "New accessions",
   // TODO New key - Add a translation
