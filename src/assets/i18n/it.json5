@@ -4719,20 +4719,25 @@
   "home.top-section.no-results": "No results found for this category",
 
   // "home.advanced-top-section.dc.date.accessioned": "News",
-  // TODO New key - Add a translation
-  "home.advanced-top-section.dc.date.accessioned": "News",
+  "home.advanced-top-section.dc.date.accessioned": "Novità",
 
   // "home.advanced-top-section.dc.date.issued": "New accessions",
-  // TODO New key - Add a translation
-  "home.advanced-top-section.dc.date.issued": "New accessions",
+  "home.advanced-top-section.dc.date.issued": "Nuove accessioni",
 
   // "home.advanced-top-section.metric.view": "New accessions",
-  // TODO New key - Add a translation
-  "home.advanced-top-section.metric.view": "New accessions",
+  "home.advanced-top-section.metric.view": "Nuove accessioni",
 
   // "home.advanced-top-section.metric.download": "New accessions",
-  // TODO New key - Add a translation
-  "home.advanced-top-section.metric.download": "New accessions",
+  "home.advanced-top-section.metric.download": "Nuove accessioni",
+
+  // "home.advanced-top-section.discovery.aggregations": "Aggregations",
+  "home.advanced-top-section.discovery.aggregations": "Aggregazioni",
+
+  // "home.advanced-top-section.discovery.fonds": "Fonds",
+  "home.advanced-top-section.discovery.fonds": "Fondi",
+
+  // "home.advanced-top-section.discovery.journalfonds": "Journal Fonds",
+  "home.advanced-top-section.discovery.journalfonds": "Periodici",
 
   // "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
   "info.end-user-agreement.accept": "Ho letto e accetto l'Accordo con l'utente finale",
@@ -13922,3 +13927,4 @@
 
 
 }
+
