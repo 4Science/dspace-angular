@@ -15,6 +15,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { MediaViewerItem } from '../../core/shared/media-viewer-item.model';
 import { VideojsService } from './services/videojs.service';
+import { hasValue } from '../empty.util';
 
 @Component({
   selector: 'ds-media-player',
@@ -267,6 +268,8 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
    * Resize playlist container
    */
   private resizeMediaPlaylist(): void {
-    this.playlistContainerRef.nativeElement.style.height = `${this.videoContainerRef.nativeElement.getBoundingClientRect().height}px`;
+    if (hasValue(this.playlistContainerRef?.nativeElement)) {
+      this.playlistContainerRef.nativeElement.style.height = `${this.videoContainerRef.nativeElement.getBoundingClientRect().height}px`;
+    }
   }
 }
