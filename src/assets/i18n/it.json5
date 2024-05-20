@@ -3764,6 +3764,9 @@
   // "dataset.listelement.badge": "Dataset",
   "dataset.listelement.badge": "Dataset",
 
+  // "discoverable.search.results.head": "Search Results",
+  "discoverable.search.results.head": "Risultati della ricerca",
+
   // "equipment.listelement.badge": "Equipment",
   "equipment.listelement.badge": "Attrezzature",
 
@@ -13927,4 +13930,3 @@
 
 
 }
-

@@ -470,6 +470,11 @@ export const environment: BuildConfig = {
         }
       ]
     },
+    sections: {
+      enableAlternateBackground: false,
+      skipAlternateBackgroundRows: 0,
+      startWithDarkRow: false,
+    },
     search: {
       filters: {
         datepicker: ['filterName1']

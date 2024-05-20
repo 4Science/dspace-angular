@@ -2477,6 +2477,8 @@
 
   "dataset.listelement.badge": "Dataset",
 
+  "discoverable.search.results.head": "Search Results",
+
   "equipment.listelement.badge": "Equipment",
 
   "error.bitstream": "Error fetching bitstream",

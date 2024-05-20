@@ -651,6 +651,11 @@ export class DefaultAppConfig implements AppConfig {
         },
       ],
     },
+    sections: {
+      enableAlternateBackground: false,
+      skipAlternateBackgroundRows: 0,
+      startWithDarkRow: false,
+    },
     search: {
       filters: {
         datepicker: []

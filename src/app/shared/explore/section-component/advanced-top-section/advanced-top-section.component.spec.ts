@@ -12,7 +12,8 @@ describe('AdvancedTopSectionComponent', () => {
   let component: AdvancedTopSectionComponent;
   let fixture: ComponentFixture<AdvancedTopSectionComponent>;
   const hostWindowServiceStub = {
-    isIn: (widthCatArray: [WidthCategory]) => of(true)
+    isIn: (widthCatArray: [WidthCategory]) => of(true),
+    isXs: () => of(false)
   };
 
   const topAdvancedSection: AdvancedTopSection = {

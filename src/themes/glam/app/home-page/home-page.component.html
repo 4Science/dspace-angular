@@ -1,7 +1,7 @@
 <ng-container *ngIf="site$.value">
-  <div *ngFor="let sectionComponentRow of ( sectionComponents | async )">
+  <div *ngFor="let sectionComponentRow of ( sectionComponents | async ); index as rowIndex">
     <div class="container-fluid">
-      <div class="row">
+      <div class="row" [class.cris-section-light-row]="isLightRow(rowIndex)" [class.cris-section-dark-row]="isDarkRow(rowIndex)">
         <div *ngFor="let sectionComponent of sectionComponentRow" [class]="componentClass(sectionComponent)"
              [ngSwitch]="sectionComponent.componentType">
 

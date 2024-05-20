@@ -1,4 +1,13 @@
 :host {
+
+  // set property "layout.sections.enableAlternateBackground" to true to enable alternate background
+  .cris-section-dark-row {
+    background-color: var(--ds-homepage-section-bg-color-dark);
+  }
+  .cris-section-light-row {
+    background-color: var(--ds-homepage-section-bg-color-light);
+  }
+
   .titolo {
       position: absolute;
       left: 7px;
