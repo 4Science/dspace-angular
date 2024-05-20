@@ -1,15 +1,15 @@
-<div id="osm-wrapper" *ngIf="coordinates">
+<div id="osm-wrapper" *ngIf="(coordinates$ | async) !== null">
   <aol-map [logo]="true" [width]="width" [height]="height">
     <aol-interaction-default></aol-interaction-default>
     <aol-view [zoom]="zoom">
-      <aol-coordinate [x]="coordinates.longitude" [y]="coordinates.latitude" [srid]="SRID"></aol-coordinate>
+      <aol-coordinate [x]="(coordinates$ | async)?.longitude" [y]="(coordinates$ | async)?.latitude" [srid]="SRID"></aol-coordinate>
     </aol-view>
     <aol-layer-tile>
       <aol-source-osm></aol-source-osm>
     </aol-layer-tile>
     <aol-layer-vector>
       <aol-source-vector>
-        <aol-feature *ngFor="let pointer of pointers">
+        <aol-feature *ngFor="let pointer of (pointers$ | async)">
           <aol-geometry-point>
             <aol-coordinate [x]="pointer.coordinates.longitude" [y]="pointer.coordinates.latitude" [srid]="SRID"></aol-coordinate>
           </aol-geometry-point>
@@ -45,3 +45,5 @@
     </aol-control>
   </aol-map>
 </div>
+<div *ngIf="showDisplayName" class="my-1 text-muted">{{ displayName$ | async }}</div>
+<div *ngIf="(invalidLocationErrorCode | async) as errorCode" class="text-danger">{{ 'location.error.' + errorCode | translate }}</div>

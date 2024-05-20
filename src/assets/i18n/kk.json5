@@ -1498,6 +1498,45 @@
   // TODO New key - Add a translation
   "audit.detail.back.subject": "Subject Audit Logs",
 
+  // "errors.location.unsupportedBrowser": "Browser does not support location services",
+  // TODO New key - Add a translation
+  "errors.location.unsupportedBrowser": "Browser does not support location services",
+
+  // "errors.location.permissionDenied": "You have rejected access to your location",
+  // TODO New key - Add a translation
+  "errors.location.permissionDenied": "You have rejected access to your location",
+
+  // "errors.location.positionUnavailable": "Unable to determine your location",
+  // TODO New key - Add a translation
+  "errors.location.positionUnavailable": "Unable to determine your location",
+
+  // "errors.location.timeout": "Service timeout has been reached",
+  // TODO New key - Add a translation
+  "errors.location.timeout": "Service timeout has been reached",
+
+  // "openstreetmap.location.zoomIn": "Zoom in",
+  // TODO New key - Add a translation
+  "openstreetmap.location.zoomIn": "Zoom in",
+
+  // "openstreetmap.location.zoomOut": "Zoom out",
+  // TODO New key - Add a translation
+  "openstreetmap.location.zoomOut": "Zoom out",
+
+  // "openstreetmap.location.center": "Center the map",
+  // TODO New key - Add a translation
+  "openstreetmap.location.center": "Center the map",
+
+  // "location.error.invalid-coordinates": "Invalid coordinates",
+  // TODO New key - Add a translation
+  "location.error.invalid-coordinates": "Invalid coordinates",
+
+  // "location.error.location-not-found": "Location not found",
+  // TODO New key - Add a translation
+  "location.error.location-not-found": "Location not found",
+
+  // "location.error.api-error": "The service that retrieves the position on the map is currently not available.",
+  // TODO New key - Add a translation
+  "location.error.api-error": "The service that retrieves the position on the map is currently not available.",
 
   // "auth.errors.invalid-user": "Invalid email address or password.",
   "auth.errors.invalid-user": "Электрондық пошта мекенжайы немесе пароль дұрыс емес.",
@@ -3632,9 +3671,9 @@
   // TODO New key - Add a translation
   "cookies.consent.ok": "That's ok",
 
-  // "cookies.consent.save": "Save",
+  // "cookies.consent.save": "Close",
   // TODO New key - Add a translation
-  "cookies.consent.save": "Save",
+  "cookies.consent.save": "Close",
 
   // "cookies.consent.content-notice.title": "Cookie Consent",
   // TODO New key - Add a translation
@@ -3715,11 +3754,37 @@
   // TODO New key - Add a translation
   "cookies.consent.purpose.sharing": "Sharing",
 
+  // "cookies.consent.app.title.plumX": "PlumX",
+  // TODO New key - Add a translation
+  "cookies.consent.app.title.plumX": "PlumX",
+
+  // "cookies.consent.app.description.plumX": "PlumX Metrics provide insights into the ways people interact with individual pieces of research output (articles, conference proceedings, book chapters, and many more) in the online environment. (https://plumanalytics.com/)",
+  // TODO New key - Add a translation
+  "cookies.consent.app.description.plumX": "PlumX Metrics provide insights into the ways people interact with individual pieces of research output (articles, conference proceedings, book chapters, and many more) in the online environment. (https://plumanalytics.com/)",
+
+  // "cookies.consent.app.title.altmetric": "Altmetric",
+  // TODO New key - Add a translation
+  "cookies.consent.app.title.altmetric": "Altmetric",
+
+  // "cookies.consent.app.description.altmetric": "Altmetric’s interface tracks online engagement to reveal how and where your research is being visualized. (https://www.altmetric.com)",
+  // TODO New key - Add a translation
+  "cookies.consent.app.description.altmetric": "Altmetric’s interface tracks online engagement to reveal how and where your research is being visualized. (https://www.altmetric.com)",
+
+  // "cookies.consent.app.title.dimensions": "Dimensions",
+  // TODO New key - Add a translation
+  "cookies.consent.app.title.dimensions": "Dimensions",
+
+  // "cookies.consent.app.description.dimensions": "Dimensions analyses references from publications and calculates a set of article-level indicators. (https://www.dimensions.ai)",
+  // TODO New key - Add a translation
+  "cookies.consent.app.description.dimensions": "Dimensions analyses references from publications and calculates a set of article-level indicators. (https://www.dimensions.ai)",
+
+  // "cookies.consent.purpose.thirdPartyJs": "Third-party JavaScript",
+  // TODO New key - Add a translation
+  "cookies.consent.purpose.thirdPartyJs": "Third-party JavaScript",
 
   // "curation-task.task.citationpage.label": "Generate Citation Page",
   // TODO New key - Add a translation
   "curation-task.task.citationpage.label": "Generate Citation Page",
-
 
   // "curation-task.task.migratedocviewer.label": "Migrate the previously generated doc. viewer resources",
   // TODO New key - Add a translation
@@ -3932,6 +3997,10 @@
 
   // "deny-request-copy.success": "Successfully denied item request",
   "deny-request-copy.success": "Бөлікке сұраныс сәтті қабылданбады",
+
+  // "discoverable.search.results.head": "Search Results",
+  // TODO New key - Add a translation
+  "discoverable.search.results.head": "Search Results",
 
   // "dso.name.untitled": "Untitled",
   "dso.name.untitled": "Атауы жоқ",
@@ -4228,10 +4297,6 @@
   // "dataset.listelement.badge": "Dataset",
   // TODO New key - Add a translation
   "dataset.listelement.badge": "Dataset",
-
-  // "discoverable.search.results.head": "Search Results",
-  // TODO New key - Add a translation
-  "discoverable.search.results.head": "Search Results",
 
   // "equipment.listelement.badge": "Equipment",
   // TODO New key - Add a translation
@@ -5134,6 +5199,18 @@
   // TODO New key - Add a translation
   "form.other-information.not-available": "Not available",
 
+  // "form.other-information.ror_orgunit_id": "ROR ID",
+  // TODO New key - Add a translation
+  "form.other-information.ror_orgunit_id": "ROR ID",
+
+  // "form.other-information.ror_orgunit_type": "ROR type",
+  // TODO New key - Add a translation
+  "form.other-information.ror_orgunit_type": "ROR type",
+
+  // "form.other-information.ror_orgunit_acronym": "ROR acronym",
+  // TODO New key - Add a translation
+  "form.other-information.ror_orgunit_acronym": "ROR acronym",
+
   // "form.remove": "Remove",
   "form.remove": "Өшіру",
 
@@ -5353,9 +5430,9 @@
   // TODO New key - Add a translation
   "home.top-section.no-results": "No results found for this category",
 
-  // "home.advanced-top-section.dc.date.accessioned": "News from the Library",
+  // "home.advanced-top-section.dc.date.accessioned": "News",
   // TODO New key - Add a translation
-  "home.advanced-top-section.dc.date.accessioned": "News from the Library",
+  "home.advanced-top-section.dc.date.accessioned": "News",
 
   // "home.advanced-top-section.dc.date.issued": "New accessions",
   // TODO New key - Add a translation
@@ -6417,9 +6494,13 @@
   // TODO New key - Add a translation
   "item.page.metric.details": "Details",
 
-  // "item.page.metric.label.altmetrics": "Altmetrics©",
+  // "item.page.metric.label.altmetric": "Altmetrics©",
   // TODO New key - Add a translation
-  "item.page.metric.label.altmetrics": "Altmetrics©",
+  "item.page.metric.label.altmetric": "Altmetrics©",
+
+  // "item.page.metric.label.dimensions": "Dimensions",
+  // TODO New key - Add a translation
+  "item.page.metric.label.dimensions": "Dimensions",
 
   // "item.page.metric.label.check": "Check",
   // TODO New key - Add a translation
@@ -11181,6 +11262,10 @@
   // TODO New key - Add a translation
   "submission.import-external.source.rorOrgUnits": "ROR",
 
+  // "submission.import-external.source.ror": "ROR",
+  // TODO New key - Add a translation
+  "submission.import-external.source.ror": "ROR",
+
   // "submission.import-external.preview.title.Equipment": "Equipment Preview",
   // TODO New key - Add a translation
   "submission.import-external.preview.title.Equipment": "Equipment Preview",
@@ -11904,15 +11989,16 @@
   // TODO New key - Add a translation
   "submission.sections.identifiers.otherIdentifiers_label": "Other identifiers: ",
 
-  // "submission.sections.submit.progressbar.accessCondition": "Item access conditions",
-  "submission.sections.submit.progressbar.accessCondition": "Элементке кіру шарттары",
+  // "submission.sections.submit.progressbar.itemAccessConditions": "Item access conditions",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.itemAccessConditions": "Item access conditions",
 
   // "submission.sections.submit.progressbar.CClicense": "Creative commons license",
   "submission.sections.submit.progressbar.CClicense": "Creative commons лицензиясы",
 
-  // "submission.sections.submit.progressbar.CustomUrlStep": "Custom url",
+  // "submission.sections.submit.progressbar.custom-url": "Custom url",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.CustomUrlStep": "Custom url",
+  "submission.sections.submit.progressbar.custom-url": "Custom url",
 
   // "submission.sections.submit.progressbar.describe.audiovideo": "Item Description",
   // TODO New key - Add a translation
@@ -12028,12 +12114,6 @@
 
   // "submission.sections.submit.progressbar.sherpaPolicies": "Publisher open access policy information",
   "submission.sections.submit.progressbar.sherpaPolicies": "Баспагердің ашық қол жеткізу саясаты туралы ақпарат",
-
-  // "submission.sections.submit.progressbar.correction-step": "Corrections",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.correction-step": "Corrections",
-
-
 
   // "submission.sections.sherpa-policy.title-empty": "No publisher policy information available. If your work has an associated ISSN, please enter it above to see any related publisher open access policies.",
   "submission.sections.sherpa-policy.title-empty": "Баспагердің саясаты туралы ақпарат жоқ. Егер сіздің жұмысыңыз ISSN-мен байланысты болса, баспагердің кез-келген тиісті ашық кіру саясатымен танысу үшін оны жоғарыда енгізіңіз.",
@@ -12356,6 +12436,9 @@
   // "submission.sections.unpaywall.status.no-file": "There are no files to be imported",
   // TODO New key - Add a translation
   "submission.sections.unpaywall.status.no-file": "There are no files to be imported",
+  // "submission.sections.unpaywall.status.imported": "The Unpaywall resource has been imported!",
+  // TODO New key - Add a translation
+  "submission.sections.unpaywall.status.imported": "The Unpaywall resource has been imported!",
 
   // "submission.sections.submit.progressbar.unpaywall": "Unpaywall",
   // TODO New key - Add a translation
@@ -12629,6 +12712,18 @@
   // "subscriptions.table.empty.message": "You do not have any subscriptions at this time. To subscribe to email updates for a Community or Collection, use the subscription button on the object's page.",
   // TODO New key - Add a translation
   "subscriptions.table.empty.message": "You do not have any subscriptions at this time. To subscribe to email updates for a Community or Collection, use the subscription button on the object's page.",
+
+  // "third-party-metrics-cookies.message": "{{ metricType }} badge is blocked by your ",
+  // TODO New key - Add a translation
+  "third-party-metrics-cookies.message": "{{ metricType }} badge is blocked by your ",
+
+  // "third-party-metrics-cookies.consent-settings": "consent settings",
+  // TODO New key - Add a translation
+  "third-party-metrics-cookies.consent-settings": "consent settings",
+
+  // "third-party-metrics-blocked": "Some of the metrics are blocked by your",
+  // TODO New key - Add a translation
+  "third-party-metrics-blocked": "Some of the metrics are blocked by your",
 
   // "thumbnail.default.alt": "Thumbnail Image",
   "thumbnail.default.alt": "Кішірейтілген сурет",
@@ -13147,6 +13242,14 @@
   // "person.page.orcid.funding-preferences": "Funding preferences",
   "person.page.orcid.funding-preferences": "Қаржыландырудағы артықшылықтар",
 
+  // "person.page.orcid.products-preferences": "Product preferences",
+  // TODO New key - Add a translation
+  "person.page.orcid.products-preferences": "Product preferences",
+
+  // "person.page.orcid.patent-preferences": "Patent preferences",
+  // TODO New key - Add a translation
+  "person.page.orcid.patent-preferences": "Patent preferences",
+
   // "person.page.orcid.publications-preferences": "Publication preferences",
   "person.page.orcid.publications-preferences": "Жарияланымдағы артықшылықтар",
 
@@ -13188,6 +13291,22 @@
   // TODO Source message changed - Revise the translation
   "person.page.orcid.sync-fundings.disabled": "Қолжетімсіз",
 
+  // "person.page.orcid.sync-patents.all": "All patents",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-patents.all": "All patents",
+
+  // "person.page.orcid.sync-patents.mine": "My patents",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-patents.mine": "My patents",
+
+  // "person.page.orcid.sync-patents.my_selected": "Selected patents",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-patents.my_selected": "Selected patents",
+
+  // "person.page.orcid.sync-patents.disabled": "Disabled",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-patents.disabled": "Disabled",
+
   // "person.page.orcid.sync-publications.all": "All publications",
   // TODO Source message changed - Revise the translation
   "person.page.orcid.sync-publications.all": "Барлық жарияланымдар",
@@ -13203,6 +13322,22 @@
   // "person.page.orcid.sync-publications.disabled": "Disabled",
   // TODO Source message changed - Revise the translation
   "person.page.orcid.sync-publications.disabled": "Қолжетімсіз",
+
+  // "person.page.orcid.sync-products.all": "All products",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-products.all": "All products",
+
+  // "person.page.orcid.sync-products.mine": "My products",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-products.mine": "My products",
+
+  // "person.page.orcid.sync-products.my_selected": "Selected products",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-products.my_selected": "Selected products",
+
+  // "person.page.orcid.sync-products.disabled": "Disabled",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-products.disabled": "Disabled",
 
   // "person.page.orcid.sync-queue.discard": "Discard the change and do not synchronize with the ORCID registry",
   // TODO Source message changed - Revise the translation
@@ -13262,8 +13397,16 @@
   // "person.page.orcid.sync-queue.tooltip.delete": "Remove this entry from the ORCID registry",
   "person.page.orcid.sync-queue.tooltip.delete": "Бұл жазбаны ORCID тізілімінен жойыңыз",
 
+  // "person.page.orcid.sync-queue.tooltip.patent": "Patent",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.tooltip.patent": "Patent",
+
   // "person.page.orcid.sync-queue.tooltip.publication": "Publication",
   "person.page.orcid.sync-queue.tooltip.publication": "Жарияланымдар",
+
+  // "person.page.orcid.sync-queue.tooltip.product": "Product",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.tooltip.product": "Product",
 
   // "person.page.orcid.sync-queue.tooltip.project": "Project",
   "person.page.orcid.sync-queue.tooltip.project": "Проект",
@@ -13388,8 +13531,16 @@
   // "person.page.orcid.synchronization-mode-funding-message": "Select whether to send your linked Project entities to your ORCID record's list of funding information.",
   "person.page.orcid.synchronization-mode-funding-message": "Сізге қатысты жоба нысандарын ORCID жазбаңызды қаржыландыру туралы ақпарат тізіміне жіберуді таңдаңыз.",
 
+  // "person.page.orcid.synchronization-mode-patent-message": "Select whether to send your linked Patent entities to your ORCID record's list of works.",
+  // TODO New key - Add a translation
+  "person.page.orcid.synchronization-mode-patent-message": "Select whether to send your linked Patent entities to your ORCID record's list of works.",
+
   // "person.page.orcid.synchronization-mode-publication-message": "Select whether to send your linked Publication entities to your ORCID record's list of works.",
   "person.page.orcid.synchronization-mode-publication-message": "Қатысты жариялау нысандарын ORCID жазбаңыздың жұмыс тізіміне жіберу керек пе, жоқ па, соны таңдаңыз.",
+
+  // "person.page.orcid.synchronization-mode-product-message": "Select whether to send your linked Product entities to your ORCID record's list of works.",
+  // TODO New key - Add a translation
+  "person.page.orcid.synchronization-mode-product-message": "Select whether to send your linked Product entities to your ORCID record's list of works.",
 
   // "person.page.orcid.synchronization-mode-profile-message": "Select whether to send your biographical data or personal identifiers to your ORCID record.",
   "person.page.orcid.synchronization-mode-profile-message": "Оқу жоспарын немесе жеке куәліктерді ORCID жазбаңызға жіберуді таңдаңыз.",
@@ -14314,6 +14465,10 @@
   "slider-browse-elements.no-results": "No results available for this configuration",
 
 
+
+
+
+  // Layout - Common i18n keys: Metadata fallback values (not generated by CRIS layout tool)
   // Layout - Autogenerated i18n keys: Tab headers
   // "layout.tab.header.Person.details": "Profile",
   // TODO New key - Add a translation
@@ -14533,6 +14688,9 @@
   // "layout.box.header.Person.fonds": "Fonds Parent",
   // TODO New key - Add a translation
   "layout.box.header.Person.fonds": "Fonds Parent",
+  // "layout.box.header.Person.networklab": "Network Lab",
+  // TODO New key - Add a translation
+  "layout.box.header.Person.networklab": "Network Lab",
   // "layout.box.header.Person.personlinks": "Person Links",
   // TODO New key - Add a translation
   "layout.box.header.Person.personlinks": "Person Links",
@@ -15078,6 +15236,12 @@
   // "layout.field.label.Event.dc.subject": "Keywords",
   // TODO New key - Add a translation
   "layout.field.label.Event.dc.subject": "Keywords",
+  // "layout.field.label.Event.dc.relation.aggregation": "Aggregation",
+  // TODO New key - Add a translation
+  "layout.field.label.Event.dc.relation.aggregation": "Aggregation",
+  // "layout.field.label.Event.dc.relation.path": "Path",
+  // TODO New key - Add a translation
+  "layout.field.label.Event.dc.relation.path": "Path",
   // "layout.field.label.Event.glam.link.wikipedia": "Wikipedia Link",
   // TODO New key - Add a translation
   "layout.field.label.Event.glam.link.wikipedia": "Wikipedia Link",
@@ -15172,6 +15336,12 @@
   // "layout.field.label.Publication.dc.rights.holder": "Holder",
   // TODO New key - Add a translation
   "layout.field.label.Publication.dc.rights.holder": "Holder",
+  // "layout.field.label.Publication.dc.relation.aggregation": "Aggregation",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.dc.relation.aggregation": "Aggregation",
+  // "layout.field.label.Publication.dc.relation.path": "Path",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.dc.relation.path": "Path",
   // "layout.field.label.Publication.dc.relation.isreferencedby": "Related Documents",
   // TODO New key - Add a translation
   "layout.field.label.Publication.dc.relation.isreferencedby": "Related Documents",
@@ -15202,6 +15372,30 @@
   // "layout.field.label.Publication.BITSTREAM": "File(s)",
   // TODO New key - Add a translation
   "layout.field.label.Publication.BITSTREAM": "File(s)",
+  // "layout.field.label.Publication.dc.relation.journalfonds": "Journal Fonds ",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.dc.relation.journalfonds": "Journal Fonds ",
+  // "layout.field.label.Publication.dc.relation.event": "Events",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.dc.relation.event": "Events",
+  // "layout.field.label.Publication.glamjournalfonds.relation.journalfonds": "Related Journal Fonds",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.glamjournalfonds.relation.journalfonds": "Related Journal Fonds",
+  // "layout.field.label.Publication.glamjournalfonds.relation.person": "Related People",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.glamjournalfonds.relation.person": "Related People",
+  // "layout.field.label.Publication.glamjournalfonds.parent": "Parent",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.glamjournalfonds.parent": "Parent",
+  // "layout.field.label.Publication.glamfonds.parent": "Parent",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.glamfonds.parent": "Parent",
+  // "layout.field.label.Publication.dc.relation.ispartofcontainer": "Is part of",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.dc.relation.ispartofcontainer": "Is part of",
+  // "layout.field.label.Publication.dc.relation.haspart": "Contains",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.dc.relation.haspart": "Contains",
 
   // "layout.field.label.Fonds.dc.title.alternative": "Alternative Title",
   // TODO New key - Add a translation
@@ -15579,9 +15773,6 @@
   // "layout.field.label.Aggregation.dc.description.abstract": "Abstract",
   // TODO New key - Add a translation
   "layout.field.label.Aggregation.dc.description.abstract": "Abstract",
-  // "layout.field.label.Aggregation.glamaggregation.parent": "Aggregation Parent",
-  // TODO New key - Add a translation
-  "layout.field.label.Aggregation.glamaggregation.parent": "Aggregation Parent",
   // "layout.field.label.Aggregation.glam.index": "Aggregation Index",
   // TODO New key - Add a translation
   "layout.field.label.Aggregation.glam.index": "Aggregation Index",
@@ -15638,9 +15829,9 @@
   // "layout.field.label.JournalFile.dc.description.abstract": "Abstract",
   // TODO New key - Add a translation
   "layout.field.label.JournalFile.dc.description.abstract": "Abstract",
-  // "layout.field.label.JournalFile.dc.relation.journalfonds": "Journal Fonds",
+  // "layout.field.label.JournalFile.dc.relation.journalfonds": "Journal Fonds ",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.relation.journalfonds": "Journal Fonds",
+  "layout.field.label.JournalFile.dc.relation.journalfonds": "Journal Fonds ",
   // "layout.field.label.JournalFile.dc.rights.license": "License",
   // TODO New key - Add a translation
   "layout.field.label.JournalFile.dc.rights.license": "License",
@@ -15844,36 +16035,6 @@
   // TODO New key - Add a translation
   "layout.field.label.Picture.dc.relation.isreferencedby": "Related Documents",
 
-  // "layout.field.label.Publication.dc.relation.path": "Path",
-  // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.path": "Path",
-  // "layout.field.label.Publication.dc.relation.journalfonds": "Journal Fonds ",
-  // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.journalfonds": "Journal Fonds ",
-  // "layout.field.label.Publication.dc.relation.aggregation": "Aggregations",
-  // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.aggregation": "Aggregations",
-  // "layout.field.label.Publication.dc.relation.event": "Events",
-  // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.event": "Events",
-  // "layout.field.label.Publication.glamjournalfonds.relation.journalfonds": "Related Journal Fonds",
-  // TODO New key - Add a translation
-  "layout.field.label.Publication.glamjournalfonds.relation.journalfonds": "Related Journal Fonds",
-  // "layout.field.label.Publication.glamjournalfonds.relation.person": "Related People",
-  // TODO New key - Add a translation
-  "layout.field.label.Publication.glamjournalfonds.relation.person": "Related People",
-  // "layout.field.label.Publication.glamjournalfonds.parent": "Parent",
-  // TODO New key - Add a translation
-  "layout.field.label.Publication.glamjournalfonds.parent": "Parent",
-  // "layout.field.label.Publication.glamfonds.parent": "Parent",
-  // TODO New key - Add a translation
-  "layout.field.label.Publication.glamfonds.parent": "Parent",
-  // "layout.field.label.Publication.dc.relation.ispartofcontainer": "Is part of",
-  // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.ispartofcontainer": "Is part of",
-  // "layout.field.label.Publication.dc.relation.haspart": "Contains",
-  // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.haspart": "Contains",
 
   // "layout.field.label.AudioVideo.dc.contributor.author": "Author(s)",
   // TODO New key - Add a translation
@@ -15993,115 +16154,8 @@
   // TODO New key - Add a translation
   "layout.field.label.AudioVideo.BITSTREAM": "File(s)",
 
-  // "layout.field.label.Abbreviation": "Abbreviation",
-  // TODO New key - Add a translation
-  "layout.field.label.Abbreviation": "Abbreviation",
-  // "layout.field.label.Title": "Title",
-  // TODO New key - Add a translation
-  "layout.field.label.Title": "Title",
-  // "layout.field.label.Editor": "Editor",
-  // TODO New key - Add a translation
-  "layout.field.label.Editor": "Editor",
-  // "layout.field.label.Qualifier": "Qualifier",
-  // TODO New key - Add a translation
-  "layout.field.label.Qualifier": "Qualifier",
-  // "layout.field.label.Editing Type": "Editing Type",
-  // TODO New key - Add a translation
-  "layout.field.label.Editing Type": "Editing Type",
-  // "layout.field.label.Edited At": "Edited At",
-  // TODO New key - Add a translation
-  "layout.field.label.Edited At": "Edited At",
-  // "layout.field.label.From": "From",
-  // TODO New key - Add a translation
-  "layout.field.label.From": "From",
-  // "layout.field.label.To": "To",
-  // TODO New key - Add a translation
-  "layout.field.label.To": "To",
-  // "layout.field.label.Format": "Format",
-  // TODO New key - Add a translation
-  "layout.field.label.Format": "Format",
-  // "layout.field.label.Inventory Number": "Inventory Number",
-  // TODO New key - Add a translation
-  "layout.field.label.Inventory Number": "Inventory Number",
-  // "layout.field.label.Notes": "Notes",
-  // TODO New key - Add a translation
-  "layout.field.label.Notes": "Notes",
-  // "layout.field.label.Relation Type": "Relation Type",
-  // TODO New key - Add a translation
-  "layout.field.label.Relation Type": "Relation Type",
-  // "layout.field.label.Related Journal Fonds": "Related Journal Fonds",
-  // TODO New key - Add a translation
-  "layout.field.label.Related Journal Fonds": "Related Journal Fonds",
-  // "layout.field.label.Person Name": "Person Name",
-  // TODO New key - Add a translation
-  "layout.field.label.Person Name": "Person Name",
-  // "layout.field.label.Person Role": "Person Role",
-  // TODO New key - Add a translation
-  "layout.field.label.Person Role": "Person Role",
-  // "layout.field.label.Role": "Role",
-  // TODO New key - Add a translation
-  "layout.field.label.Role": "Role",
-  // "layout.field.label.Other Author": "Other Author",
-  // TODO New key - Add a translation
-  "layout.field.label.Other Author": "Other Author",
-  // "layout.field.label.Agent": "Agent",
-  // TODO New key - Add a translation
-  "layout.field.label.Agent": "Agent",
-  // "layout.field.label.History": "History",
-  // TODO New key - Add a translation
-  "layout.field.label.History": "History",
 
-  // "layout.field.label.Inscription": "Inscription",
-  // TODO New key - Add a translation
-  "layout.field.label.Inscription": "Inscription",
-  // "layout.field.label.Position": "Position",
-  // TODO New key - Add a translation
-  "layout.field.label.Position": "Position",
-  // "layout.field.label.Font": "Font",
-  // TODO New key - Add a translation
-  "layout.field.label.Font": "Font",
-  // "layout.field.label.Technique": "Technique",
-  // TODO New key - Add a translation
-  "layout.field.label.Technique": "Technique",
-  // "layout.field.label.Language": "Language",
-  // TODO New key - Add a translation
-  "layout.field.label.Language": "Language",
-  // "layout.field.label.Class": "Class",
-  // TODO New key - Add a translation
-  "layout.field.label.Class": "Class",
-  // "layout.field.label.Mark": "Mark",
-  // TODO New key - Add a translation
-  "layout.field.label.Mark": "Mark",
-  // "layout.field.label.Identification": "Identification",
-  // TODO New key - Add a translation
-  "layout.field.label.Identification": "Identification",
-  // "layout.field.label.Qualification": "Qualification",
-  // TODO New key - Add a translation
-  "layout.field.label.Qualification": "Qualification",
-  // "layout.field.label.Quantity": "Quantity",
-  // TODO New key - Add a translation
-  "layout.field.label.Quantity": "Quantity",
-  // "layout.field.label.Bibliography": "Bibliography",
-  // TODO New key - Add a translation
-  "layout.field.label.Bibliography": "Bibliography",
-  // "layout.field.label.Year": "Year",
-  // TODO New key - Add a translation
-  "layout.field.label.Year": "Year",
-  // "layout.field.label.Publisher": "Publisher",
-  // TODO New key - Add a translation
-  "layout.field.label.Publisher": "Publisher",
-  // "layout.field.label.Place": "Place",
-  // TODO New key - Add a translation
-  "layout.field.label.Place": "Place",
-  // "layout.field.label.Author": "Author",
-  // TODO New key - Add a translation
-  "layout.field.label.Author": "Author",
-  // "layout.field.label.Type": "Type",
-  // TODO New key - Add a translation
-  "layout.field.label.Type": "Type",
-
-
-  // Layout - Autogenerated i18n keys: metadata groups (remove duplicates)
+  // Layout - Autogenerated i18n keys: metadata groups
   // "layout.field.label.Fonds.glamfonds.bibliography.abbreviation": "Abbreviation",
   // TODO New key - Add a translation
   "layout.field.label.Fonds.glamfonds.bibliography.abbreviation": "Abbreviation",
@@ -16135,6 +16189,7 @@
   // "layout.field.label.Fonds.glamfonds.editing.date": "Edited At",
   // TODO New key - Add a translation
   "layout.field.label.Fonds.glamfonds.editing.date": "Edited At",
+
   // "layout.field.label.Family.glamfamily.editor.qualifier": "Qualifier",
   // TODO New key - Add a translation
   "layout.field.label.Family.glamfamily.editor.qualifier": "Qualifier",
@@ -16144,6 +16199,7 @@
   // "layout.field.label.Family.glamfamily.editing.date": "Edited At",
   // TODO New key - Add a translation
   "layout.field.label.Family.glamfamily.editing.date": "Edited At",
+
   // "layout.field.label.JournalFonds.dc.date.start": "From",
   // TODO New key - Add a translation
   "layout.field.label.JournalFonds.dc.date.start": "From",
@@ -16168,12 +16224,14 @@
   // "layout.field.label.JournalFonds.glamperson.role": "Person Role",
   // TODO New key - Add a translation
   "layout.field.label.JournalFonds.glamperson.role": "Person Role",
+
   // "layout.field.label.Publication.dc.contributor.authorrole": "Role",
   // TODO New key - Add a translation
   "layout.field.label.Publication.dc.contributor.authorrole": "Role",
   // "layout.field.label.Publication.dc.contributor.contributorrole": "Role",
   // TODO New key - Add a translation
   "layout.field.label.Publication.dc.contributor.contributorrole": "Role",
+
   // "layout.field.label.Picture.dc.contributor.authorrole": "Role",
   // TODO New key - Add a translation
   "layout.field.label.Picture.dc.contributor.authorrole": "Role",
@@ -16222,6 +16280,7 @@
   // "layout.field.label.Picture.glam.bibliography.type": "Type",
   // TODO New key - Add a translation
   "layout.field.label.Picture.glam.bibliography.type": "Type",
+
   // "layout.field.label.AudioVideo.dc.contributor.authorrole": "Role",
   // TODO New key - Add a translation
   "layout.field.label.AudioVideo.dc.contributor.authorrole": "Role",

@@ -14210,7 +14210,7 @@ videojs-vtt.js@^0.15.5:
   dependencies:
     global "^4.3.1"
 
-videojs-wavesurfer@^3.9.0:
+videojs-wavesurfer@^3.10.0:
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/videojs-wavesurfer/-/videojs-wavesurfer-3.10.0.tgz#4d19ef53b13903327918f413c15e882f780b57ee"
   integrity sha512-NFLnPtlq3poxvPIAAHsIaT53SifF3Npu5q1F932/WLkTA/uuPKAohSUw2WjzDgJ/2/xtGnuCGE6CGQYYhoeatg==
