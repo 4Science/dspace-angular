@@ -4935,6 +4935,10 @@
   // TODO New key - Add a translation
   "dataset.listelement.badge": "Dataset",
 
+  // "discoverable.search.results.head": "Search Results",
+  // TODO New key - Add a translation
+  "discoverable.search.results.head": "Search Results",
+
   // "equipment.listelement.badge": "Equipment",
   // TODO New key - Add a translation
   "equipment.listelement.badge": "Equipment",
@@ -6195,6 +6199,18 @@
   // "home.advanced-top-section.metric.download": "New accessions",
   // TODO New key - Add a translation
   "home.advanced-top-section.metric.download": "New accessions",
+
+  // "home.advanced-top-section.discovery.aggregations": "Aggregations",
+  // TODO New key - Add a translation
+  "home.advanced-top-section.discovery.aggregations": "Aggregations",
+
+  // "home.advanced-top-section.discovery.fonds": "Fonds",
+  // TODO New key - Add a translation
+  "home.advanced-top-section.discovery.fonds": "Fonds",
+
+  // "home.advanced-top-section.discovery.journalfonds": "Journal Fonds",
+  // TODO New key - Add a translation
+  "home.advanced-top-section.discovery.journalfonds": "Journal Fonds",
 
   // "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
   // TODO New key - Add a translation
