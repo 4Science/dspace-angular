@@ -701,7 +701,7 @@ export class MenuResolver implements Resolve<boolean> {
         {
           id: 'notifications',
           active: false,
-          visible: authorized,
+          visible: false,
           model: {
             type: MenuItemType.TEXT,
             text: 'menu.section.notifications'
