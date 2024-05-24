@@ -59,7 +59,7 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
       this.metadataGroup.forEach(mdg => {
         const entry = {
           field: mdg,
-          value: this.getMetadataValue(mdg, index)
+          value: this.getMetadataValue(mdg, index) || ' '
         } as NestedMetadataGroupEntry;
         if (this.componentsToBeRenderedMap.has(index)) {
           const newEntries = [...this.componentsToBeRenderedMap.get(index), entry];
