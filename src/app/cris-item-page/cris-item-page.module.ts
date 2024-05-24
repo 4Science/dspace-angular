@@ -6,6 +6,7 @@ import { CrisItemPageComponent } from './cris-item-page.component';
 import { CrisLayoutModule } from '../cris-layout/cris-layout.module';
 import { StatisticsModule } from '../statistics/statistics.module';
 import { ItemSharedModule } from '../item-page/item-shared.module';
+import { ItemVersionsModule } from '../item-page/versions/item-versions.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ItemSharedModule } from '../item-page/item-shared.module';
     SharedModule,
     CrisLayoutModule,
     StatisticsModule,
-    ItemSharedModule
+    ItemSharedModule,
+    ItemVersionsModule
   ],
   exports: [
     CrisItemPageComponent

@@ -1,9 +1,15 @@
 <ds-themed-loading *ngIf="(itemRD$ | async)?.isLoading" message="{{'loading.item' | translate}}"></ds-themed-loading>
-<ng-container *ngIf="((itemRD$ | async)?.hasSucceeded && !(itemRD$ | async)?.hasNoContent)">
+ <ng-container *ngIf="((itemRD$ | async)?.hasSucceeded && !(itemRD$ | async)?.hasNoContent)">
   <div class="container">
     <ds-item-alerts [item]="(itemRD$ | async)?.payload"></ds-item-alerts>
+  </div>
+  <div class="container">
+    <ds-item-versions-notice [item]="(itemRD$ | async)?.payload"></ds-item-versions-notice>
   </div>
   <ds-view-tracker [object]="(itemRD$ | async)?.payload"></ds-view-tracker>
   <ds-cris-layout *ngIf="!((itemRD$ | async)?.payload?.isWithdrawn) || (isAdmin$|async)"
                   [item]="(itemRD$ | async)?.payload"></ds-cris-layout>
+  <div class="container">
+    <ds-item-versions class="mt-2" [item]="(itemRD$ | async)?.payload"></ds-item-versions>
+  </div>
 </ng-container>
