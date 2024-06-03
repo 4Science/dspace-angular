@@ -12,7 +12,10 @@ import { ThemedProfilePageComponent } from './themed-profile-page.component';
 import { FormModule } from '../shared/form/form.module';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import { ProfileClaimItemModalComponent } from './profile-claim-item-modal/profile-claim-item-modal.component';
-
+import { NotificationsModule } from '../notifications/notifications.module';
+import {
+  SuggestionsNotificationComponent
+} from '../notifications/suggestions-notification/suggestions-notification.component';
 
 @NgModule({
   imports: [
@@ -20,14 +23,16 @@ import { ProfileClaimItemModalComponent } from './profile-claim-item-modal/profi
     CommonModule,
     SharedModule,
     FormModule,
-    UiSwitchModule
+    UiSwitchModule,
+    NotificationsModule
   ],
   exports: [
     ProfilePageComponent,
     ThemedProfilePageComponent,
     ProfilePageMetadataFormComponent,
     ProfilePageSecurityFormComponent,
-    ProfilePageResearcherFormComponent
+    ProfilePageResearcherFormComponent,
+    SuggestionsNotificationComponent
   ],
   declarations: [
     ProfilePageComponent,

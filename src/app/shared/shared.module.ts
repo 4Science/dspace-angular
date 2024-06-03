@@ -282,8 +282,25 @@ import {
 } from '../item-page/simple/field-components/specific-field/title/themed-item-page-field.component';
 import { BitstreamListItemComponent } from './object-list/bitstream-list-item/bitstream-list-item.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { SplitPipe } from './utils/split.pipe';
+import { ThemedUserMenuComponent } from './auth-nav-menu/user-menu/themed-user-menu.component';
 import { ThemedLangSwitchComponent } from './lang-switch/themed-lang-switch.component';
-import {ThemedUserMenuComponent} from './auth-nav-menu/user-menu/themed-user-menu.component';
+import { QualityAssuranceEventDataService } from '../core/notifications/qa/events/quality-assurance-event-data.service';
+import { QualityAssuranceSourceDataService } from '../core/notifications/qa/source/quality-assurance-source-data.service';
+import { DynamicComponentLoaderDirective } from './abstract-component-loader/dynamic-component-loader.directive';
+import { StartsWithLoaderComponent } from './starts-with/starts-with-loader.component';
+import { IpV4Validator } from './utils/ipV4.validator';
+import { ObjectTableComponent } from './object-table/object-table.component';
+import {
+  TabulatableObjectsLoaderComponent
+} from './object-collection/shared/tabulatable-objects/tabulatable-objects-loader.component';
+import {
+  TabulatableResultListElementsComponent
+} from './object-list/search-result-list-element/tabulatable-search-result/tabulatable-result-list-elements.component';
+import {
+  TabulatableObjectsDirective
+} from './object-collection/shared/tabulatable-objects/tabulatable-objects.directive';
+import { NotificationBoxComponent } from './notification-box/notification-box.component';
 
 const MODULES = [
   CommonModule,
@@ -323,7 +340,8 @@ const PIPES = [
   ObjNgFor,
   BrowserOnlyPipe,
   MarkdownPipe,
-  ShortNumberPipe
+  ShortNumberPipe,
+  SplitPipe
 ];
 
 const COMPONENTS = [
@@ -346,6 +364,7 @@ const COMPONENTS = [
   ThemedObjectListComponent,
   ObjectDetailComponent,
   ObjectGridComponent,
+  ObjectTableComponent,
   AbstractListableElementComponent,
   ObjectCollectionComponent,
   PaginationComponent,
@@ -379,7 +398,7 @@ const COMPONENTS = [
   ThemedStatusBadgeComponent,
   BadgesComponent,
   ThemedBadgesComponent,
-
+  StartsWithLoaderComponent,
   ItemSelectComponent,
   CollectionSelectComponent,
   MetadataRepresentationLoaderComponent,
@@ -412,6 +431,7 @@ const ENTRY_COMPONENTS = [
   CollectionListElementComponent,
   CommunityListElementComponent,
   SearchResultListElementComponent,
+  TabulatableResultListElementsComponent,
   CommunitySearchResultListElementComponent,
   CollectionSearchResultListElementComponent,
   CollectionGridElementComponent,
@@ -467,13 +487,17 @@ const ENTRY_COMPONENTS = [
   AdvancedClaimedTaskActionRatingComponent,
   EpersonGroupListComponent,
   EpersonSearchBoxComponent,
-  GroupSearchBoxComponent
+  GroupSearchBoxComponent,
+  NotificationBoxComponent,
+  TabulatableObjectsLoaderComponent,
 ];
 
 const PROVIDERS = [
   TruncatableService,
   MockAdminGuard,
-  AbstractTrackableComponent
+  AbstractTrackableComponent,
+  QualityAssuranceEventDataService,
+  QualityAssuranceSourceDataService
 ];
 
 const DIRECTIVES = [
@@ -493,6 +517,9 @@ const DIRECTIVES = [
   MetadataFieldValidator,
   HoverClassDirective,
   ContextHelpDirective,
+  DynamicComponentLoaderDirective,
+  IpV4Validator,
+  TabulatableObjectsDirective
 ];
 
 @NgModule({

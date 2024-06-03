@@ -56,9 +56,13 @@ export const SubmissionObjectActionTypes = {
   DISCARD_SUBMISSION_SUCCESS: type('dspace/submission/DISCARD_SUBMISSION_SUCCESS'),
   DISCARD_SUBMISSION_ERROR: type('dspace/submission/DISCARD_SUBMISSION_ERROR'),
 
+  // Clearing active section types
+  CLEAN_DUPLICATE_DETECTION: type('dspace/submission/CLEAN_DUPLICATE_DETECTION'),
+
   // Upload file types
   NEW_FILE: type('dspace/submission/NEW_FILE'),
   EDIT_FILE_DATA: type('dspace/submission/EDIT_FILE_DATA'),
+  EDIT_FILE_PRIMARY_BITSTREAM_DATA: type('dspace/submission/EDIT_FILE_PRIMARY_BITSTREAM_DATA'),
   DELETE_FILE: type('dspace/submission/DELETE_FILE'),
 
   // Errors
@@ -236,6 +240,25 @@ export class UpdateSectionDataAction implements Action {
               serverValidationErrors: SubmissionSectionError[],
               metadata?: string[]) {
     this.payload = { submissionId, sectionId, data, errorsToShow, serverValidationErrors, metadata };
+  }
+}
+
+/**
+ * Removes data and makes 'detect-duplicate' section not visible.
+ */
+export class CleanDuplicateDetectionAction implements Action {
+  type = SubmissionObjectActionTypes.CLEAN_DUPLICATE_DETECTION;
+  payload: {
+    submissionId: string;
+  };
+
+  /**
+   * creates a new CleanDetectDuplicateAction
+   *
+   * @param submissionId Id of the submission on which perform the action
+   */
+  constructor(submissionId: string ) {
+    this.payload = { submissionId };
   }
 }
 
@@ -760,6 +783,29 @@ export class NewUploadedFileAction implements Action {
   }
 }
 
+export class EditFilePrimaryBitstreamAction implements Action {
+  type = SubmissionObjectActionTypes.EDIT_FILE_PRIMARY_BITSTREAM_DATA;
+  payload: {
+    submissionId: string;
+    sectionId: string;
+    fileId: string | null;
+  };
+
+  /**
+   * Edit a file data
+   *
+   * @param submissionId
+   *    the submission's ID
+   * @param sectionId
+   *    the section's ID
+   * @param fileId
+   *    the file's ID
+   */
+  constructor(submissionId: string, sectionId: string, fileId: string | null) {
+    this.payload = { submissionId, sectionId, fileId: fileId };
+  }
+}
+
 export class EditFileDataAction implements Action {
   type = SubmissionObjectActionTypes.EDIT_FILE_DATA;
   payload: {
@@ -821,6 +867,7 @@ export type SubmissionObjectAction = DisableSectionAction
   | InitSubmissionFormAction
   | ResetSubmissionFormAction
   | CancelSubmissionFormAction
+  | CleanDuplicateDetectionAction
   | CompleteInitSubmissionFormAction
   | ChangeSubmissionCollectionAction
   | SaveAndDepositSubmissionAction
@@ -833,6 +880,7 @@ export type SubmissionObjectAction = DisableSectionAction
   | SectionStatusChangeAction
   | NewUploadedFileAction
   | EditFileDataAction
+  | EditFilePrimaryBitstreamAction
   | DeleteUploadedFileAction
   | InertSectionErrorsAction
   | DeleteSectionErrorsAction

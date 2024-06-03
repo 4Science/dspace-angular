@@ -1,8 +1,8 @@
-import { TEST_SUBMIT_USER, TEST_SUBMIT_USER_PASSWORD, TEST_SUBMIT_COLLECTION_NAME, TEST_SUBMIT_COLLECTION_UUID } from 'cypress/support/e2e';
+import { TEST_SUBMIT_USER, TEST_SUBMIT_USER_PASSWORD, TEST_SUBMIT_COLLECTION_NAME, TEST_SUBMIT_COLLECTION_UUID, TEST_ADMIN_USER, TEST_ADMIN_PASSWORD } from 'cypress/support/e2e';
 
 describe('New Submission page', () => {
-    // NOTE: We already test that new submissions can be started from MyDSpace in my-dspace.spec.ts
 
+    // NOTE: We already test that new Item submissions can be started from MyDSpace in my-dspace.spec.ts
     it('should create a new submission when using /submit path & pass accessibility', () => {
         // Test that calling /submit with collection & entityType will create a new submission
         cy.visit('/submit?collection='.concat(TEST_SUBMIT_COLLECTION_UUID).concat('&entityType=none'));

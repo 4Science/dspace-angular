@@ -10,7 +10,7 @@ import { SubmissionFormFooterComponent } from './form/footer/submission-form-foo
 import { SubmissionFormComponent } from './form/submission-form.component';
 import { SubmissionFormSectionAddComponent } from './form/section-add/submission-form-section-add.component';
 import { SubmissionSectionContainerComponent } from './sections/container/section-container.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Action, StoreConfig, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { submissionReducers, SubmissionState } from './submission.reducers';
@@ -66,7 +66,13 @@ import {
   MetadataInformationComponent
 } from './sections/sherpa-policies/metadata-information/metadata-information.component';
 import { SectionFormOperationsService } from './sections/form/section-form-operations.service';
-import {SubmissionSectionIdentifiersComponent} from './sections/identifiers/section-identifiers.component';
+import { SubmissionSectionIdentifiersComponent } from './sections/identifiers/section-identifiers.component';
+import { SubmissionSectionDuplicatesComponent } from './sections/duplicates/section-duplicates.component';
+import { SubmissionSectionCoarNotifyComponent } from './sections/section-coar-notify/section-coar-notify.component';
+import {
+  CoarNotifyConfigDataService
+} from './sections/section-coar-notify/coar-notify-config-data.service';
+import { LdnServicesService } from '../admin/admin-ldn-services/ldn-services-data/ldn-services-data.service';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -76,6 +82,8 @@ const ENTRY_COMPONENTS = [
   SubmissionSectionCcLicensesComponent,
   SubmissionSectionAccessesComponent,
   SubmissionSectionSherpaPoliciesComponent,
+  SubmissionSectionCoarNotifyComponent,
+  SubmissionSectionDuplicatesComponent
 ];
 
 const DECLARATIONS = [
@@ -96,6 +104,7 @@ const DECLARATIONS = [
   SubmissionSectionUploadFileEditComponent,
   SubmissionSectionUploadFileViewComponent,
   SubmissionSectionIdentifiersComponent,
+  SubmissionSectionDuplicatesComponent,
   SubmissionImportExternalComponent,
   ThemedSubmissionImportExternalComponent,
   SubmissionImportExternalSearchbarComponent,
@@ -109,20 +118,22 @@ const DECLARATIONS = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    CoreModule.forRoot(),
-    SharedModule,
-    StoreModule.forFeature('submission', submissionReducers, storeModuleConfig as StoreConfig<SubmissionState, Action>),
-    EffectsModule.forFeature(submissionEffects),
-    JournalEntitiesModule.withEntryComponents(),
-    ResearchEntitiesModule.withEntryComponents(),
-    FormModule,
-    NgbModalModule,
-    NgbCollapseModule,
-    NgbAccordionModule,
-    UploadModule,
-  ],
+    imports: [
+        CommonModule,
+        CoreModule.forRoot(),
+        SharedModule,
+        StoreModule.forFeature('submission', submissionReducers, storeModuleConfig as StoreConfig<SubmissionState, Action>),
+        EffectsModule.forFeature(),
+        EffectsModule.forFeature(submissionEffects),
+        JournalEntitiesModule.withEntryComponents(),
+        ResearchEntitiesModule.withEntryComponents(),
+        FormModule,
+        NgbModalModule,
+        NgbCollapseModule,
+        NgbAccordionModule,
+        UploadModule,
+        NgOptimizedImage,
+    ],
   declarations: DECLARATIONS,
   exports: [
     ...DECLARATIONS,
@@ -135,6 +146,8 @@ const DECLARATIONS = [
     SubmissionAccessesConfigDataService,
     SectionAccessesService,
     SectionFormOperationsService,
+    CoarNotifyConfigDataService,
+    LdnServicesService
   ]
 })
 

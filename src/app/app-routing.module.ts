@@ -38,8 +38,10 @@ import {
   ThemedPageInternalServerErrorComponent
 } from './page-internal-server-error/themed-page-internal-server-error.component';
 import { ServerCheckGuard } from './core/server-check/server-check.guard';
+import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-routing-paths';
 import { MenuResolver } from './menu.resolver';
 import { ThemedPageErrorComponent } from './page-error/themed-page-error.component';
+import { NOTIFICATIONS_MODULE_PATH } from './admin/admin-routing-paths';
 
 @NgModule({
   imports: [
@@ -157,6 +159,18 @@ import { ThemedPageErrorComponent } from './page-error/themed-page-error.compone
             canActivate: [SiteAdministratorGuard, EndUserAgreementCurrentUserGuard]
           },
           {
+            path: NOTIFICATIONS_MODULE_PATH,
+            loadChildren: () => import('./admin/admin-notifications/admin-notifications.module')
+              .then((m) => m.AdminNotificationsModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          {
+            path: NOTIFICATIONS_MODULE_PATH,
+            loadChildren: () => import('./quality-assurance-notifications-pages/notifications-pages.module')
+              .then((m) => m.NotificationsPageModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          {
             path: 'login',
             loadChildren: () => import('./login-page/login-page.module')
               .then((m) => m.LoginPageModule)
@@ -200,6 +214,11 @@ import { ThemedPageErrorComponent } from './page-error/themed-page-error.compone
             path: PROCESS_MODULE_PATH,
             loadChildren: () => import('./process-page/process-page.module')
               .then((m) => m.ProcessPageModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          { path: SUGGESTION_MODULE_PATH,
+            loadChildren: () => import('./suggestions-page/suggestions-page.module')
+              .then((m) => m.SuggestionsPageModule),
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
           },
           {

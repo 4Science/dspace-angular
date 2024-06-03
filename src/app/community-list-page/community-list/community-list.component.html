@@ -4,7 +4,7 @@
   <cdk-tree-node *cdkTreeNodeDef="let node; when: isShowMore" cdkTreeNodePadding
                  class="example-tree-node show-more-node">
     <div class="btn-group">
-      <button type="button" class="btn btn-default" cdkTreeNodeToggle>
+      <button aria-label="tree-toggle" type="button" class="btn btn-default" cdkTreeNodeToggle>
         <span class="fa fa-chevron-right invisible" aria-hidden="true"></span>
       </button>
       <div class="align-middle pt-2">

@@ -40,5 +40,6 @@ export default defineConfig({
     // It can be overridden via the CYPRESS_BASE_URL environment variable
     // (By default we set this to a value which should work in most development environments)
     baseUrl: 'http://localhost:4000',
+    experimentalRunAllSpecs: true
   },
 });

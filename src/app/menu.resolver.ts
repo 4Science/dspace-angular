@@ -47,6 +47,8 @@ import {
 import {
   ExportBatchSelectorComponent
 } from './shared/dso-selector/modal-wrappers/export-batch-selector/export-batch-selector.component';
+import { PUBLICATION_CLAIMS_PATH } from './admin/admin-notifications/admin-notifications-routing-paths';
+import { ConfigurationDataService } from './core/data/configuration-data.service';
 
 /**
  * Creates all of the app's menus
@@ -61,6 +63,7 @@ export class MenuResolver implements Resolve<boolean> {
     protected authorizationService: AuthorizationDataService,
     protected modalService: NgbModal,
     protected scriptDataService: ScriptDataService,
+    protected configurationDataService: ConfigurationDataService
   ) {
   }
 
@@ -170,7 +173,9 @@ export class MenuResolver implements Resolve<boolean> {
       this.authorizationService.isAuthorized(FeatureID.AdministratorOf),
       this.authorizationService.isAuthorized(FeatureID.CanSubmit),
       this.authorizationService.isAuthorized(FeatureID.CanEditItem),
-    ]).subscribe(([isCollectionAdmin, isCommunityAdmin, isSiteAdmin, canSubmit, canEditItem]) => {
+      this.authorizationService.isAuthorized(FeatureID.CanSeeQA),
+      this.authorizationService.isAuthorized(FeatureID.CoarNotifyEnabled),
+    ]).subscribe(([isCollectionAdmin, isCommunityAdmin, isSiteAdmin, canSubmit, canEditItem, canSeeQa, isCoarNotifyEnabled]) => {
       const newSubMenuList = [
         {
           id: 'new_community',
@@ -221,6 +226,18 @@ export class MenuResolver implements Resolve<boolean> {
             text: 'menu.section.new_process',
             link: '/processes/new'
           } as LinkMenuItemModel,
+        },/*  ldn_services */
+        {
+          id: 'ldn_services_new',
+          parentID: 'new',
+          active: false,
+          visible: isSiteAdmin && isCoarNotifyEnabled,
+          model: {
+            type: MenuItemType.LINK,
+            text: 'menu.section.services_new',
+            link: '/admin/ldn/services/new'
+          } as LinkMenuItemModel,
+          icon: '',
         },
       ];
       const editSubMenuList = [
@@ -349,6 +366,41 @@ export class MenuResolver implements Resolve<boolean> {
           icon: 'terminal',
           index: 10
         },
+        /* COAR Notify section */
+        {
+          id: 'coar_notify',
+          active: false,
+          visible: isSiteAdmin && isCoarNotifyEnabled,
+          model: {
+            type: MenuItemType.TEXT,
+            text: 'menu.section.coar_notify'
+          } as TextMenuItemModel,
+          icon: 'inbox',
+          index: 13
+        },
+        {
+          id: 'notify_dashboard',
+          active: false,
+          parentID: 'coar_notify',
+          visible: isSiteAdmin && isCoarNotifyEnabled,
+          model: {
+            type: MenuItemType.LINK,
+            text: 'menu.section.notify_dashboard',
+            link: '/admin/notify-dashboard'
+          } as LinkMenuItemModel,
+        },
+        /* LDN Services */
+        {
+          id: 'ldn_services',
+          active: false,
+          parentID: 'coar_notify',
+          visible: isSiteAdmin && isCoarNotifyEnabled,
+          model: {
+            type: MenuItemType.LINK,
+            text: 'menu.section.services',
+            link: '/admin/ldn/services'
+          } as LinkMenuItemModel,
+        },
         {
           id: 'health',
           active: false,
@@ -361,6 +413,41 @@ export class MenuResolver implements Resolve<boolean> {
           icon: 'heartbeat',
           index: 11
         },
+        /* Notifications */
+        {
+          id: 'notifications',
+          active: false,
+          visible: canSeeQa || isSiteAdmin,
+          model: {
+            type: MenuItemType.TEXT,
+            text: 'menu.section.notifications'
+          } as TextMenuItemModel,
+          icon: 'bell',
+          index: 4
+        },
+        {
+          id: 'notifications_quality-assurance',
+          parentID: 'notifications',
+          active: false,
+          visible: canSeeQa,
+          model: {
+            type: MenuItemType.LINK,
+            text: 'menu.section.quality-assurance',
+            link: '/notifications/quality-assurance'
+          } as LinkMenuItemModel,
+        },
+        {
+          id: 'notifications_publication-claim',
+          parentID: 'notifications',
+          active: false,
+          visible: isSiteAdmin,
+          model: {
+            type: MenuItemType.LINK,
+            text: 'menu.section.notifications_publication-claim',
+            link: '/admin/notifications/' + PUBLICATION_CLAIMS_PATH
+          } as LinkMenuItemModel,
+        },
+        /*  Admin Search */
       ];
       menuList.forEach((menuSection) => this.menuService.addSection(MenuID.ADMIN, Object.assign(menuSection, {
         shouldPersistOnRouteChange: true

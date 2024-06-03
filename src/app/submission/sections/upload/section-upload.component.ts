@@ -171,19 +171,19 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
         filter((rd: RemoteData<Collection>) => isNotUndefined((rd.payload))),
         tap((collectionRemoteData: RemoteData<Collection>) => this.collectionName = this.dsoNameService.getName(collectionRemoteData.payload)),
         // TODO review this part when https://github.com/DSpace/dspace-angular/issues/575 is resolved
-/*        mergeMap((collectionRemoteData: RemoteData<Collection>) => {
-          return this.resourcePolicyService.findByHref(
-            (collectionRemoteData.payload as any)._links.defaultAccessConditions.href
-          );
-        }),
-        filter((defaultAccessConditionsRemoteData: RemoteData<ResourcePolicy>) =>
-          defaultAccessConditionsRemoteData.hasSucceeded),
-        tap((defaultAccessConditionsRemoteData: RemoteData<ResourcePolicy>) => {
-          if (isNotEmpty(defaultAccessConditionsRemoteData.payload)) {
-            this.collectionDefaultAccessConditions = Array.isArray(defaultAccessConditionsRemoteData.payload)
-              ? defaultAccessConditionsRemoteData.payload : [defaultAccessConditionsRemoteData.payload];
-          }
-        }),*/
+        /*        mergeMap((collectionRemoteData: RemoteData<Collection>) => {
+                  return this.resourcePolicyService.findByHref(
+                    (collectionRemoteData.payload as any)._links.defaultAccessConditions.href
+                  );
+                }),
+                filter((defaultAccessConditionsRemoteData: RemoteData<ResourcePolicy>) =>
+                  defaultAccessConditionsRemoteData.hasSucceeded),
+                tap((defaultAccessConditionsRemoteData: RemoteData<ResourcePolicy>) => {
+                  if (isNotEmpty(defaultAccessConditionsRemoteData.payload)) {
+                    this.collectionDefaultAccessConditions = Array.isArray(defaultAccessConditionsRemoteData.payload)
+                      ? defaultAccessConditionsRemoteData.payload : [defaultAccessConditionsRemoteData.payload];
+                  }
+                }),*/
         mergeMap(() => config$),
       ).subscribe((config: SubmissionUploadsModel) => {
         this.required$.next(config.required);

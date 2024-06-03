@@ -6,12 +6,21 @@ import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.reso
 import { AdminWorkflowPageComponent } from './admin-workflow-page/admin-workflow-page.component';
 import { I18nBreadcrumbsService } from '../core/breadcrumbs/i18n-breadcrumbs.service';
 import { AdminCurationTasksComponent } from './admin-curation-tasks/admin-curation-tasks.component';
-import { REGISTRIES_MODULE_PATH } from './admin-routing-paths';
+import {
+  LDN_PATH,
+  NOTIFICATIONS_MODULE_PATH, NOTIFY_DASHBOARD_MODULE_PATH,
+  REGISTRIES_MODULE_PATH, REPORTS_MODULE_PATH,
+} from './admin-routing-paths';
 import { BatchImportPageComponent } from './admin-import-batch-page/batch-import-page.component';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
+      {
+        path: NOTIFICATIONS_MODULE_PATH,
+        loadChildren: () => import('./admin-notifications/admin-notifications.module')
+          .then((m) => m.AdminNotificationsModule),
+      },
       {
         path: REGISTRIES_MODULE_PATH,
         loadChildren: () => import('./admin-registries/admin-registries.module')
@@ -51,7 +60,28 @@ import { BatchImportPageComponent } from './admin-import-batch-page/batch-import
         path: 'system-wide-alert',
         resolve: { breadcrumb: I18nBreadcrumbResolver },
         loadChildren: () => import('../system-wide-alert/system-wide-alert.module').then((m) => m.SystemWideAlertModule),
-        data: {title: 'admin.system-wide-alert.title', breadcrumbKey: 'admin.system-wide-alert'}
+        data: {title: 'admin.system-wide-alert.title', breadcrumbKey: 'admin.system-wide-alert'},
+      },
+      {
+        path: LDN_PATH,
+        children: [
+          { path: '', pathMatch: 'full', redirectTo: 'services' },
+          {
+            path: 'services',
+            loadChildren: () => import('./admin-ldn-services/admin-ldn-services.module')
+              .then((m) => m.AdminLdnServicesModule),
+          }
+        ],
+      },
+      {
+        path: REPORTS_MODULE_PATH,
+        loadChildren: () => import('./admin-reports/admin-reports.module')
+          .then((m) => m.AdminReportsModule),
+      },
+      {
+        path: NOTIFY_DASHBOARD_MODULE_PATH,
+        loadChildren: () => import('./admin-notify-dashboard/admin-notify-dashboard.module')
+          .then((m) => m.AdminNotifyDashboardModule),
       },
     ])
   ],
