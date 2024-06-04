@@ -33,6 +33,8 @@ import { AttachmentRenderingConfig } from './attachment-rendering.config';
 import { SearchResultConfig } from './search-result-config.interface';
 import { MiradorConfig } from './mirador-config.interfaces';
 import { LoaderConfig } from './loader-config.interfaces';
+import { MetaTagsConfig } from './meta-tags.config';
+import { DatadogRumConfig } from './datadog-rum-config.interfaces';
 import { LocationConfig } from './location-config.interface';
 
 interface AppConfig extends Config {
@@ -73,6 +75,8 @@ interface AppConfig extends Config {
   searchResult: SearchResultConfig;
   mirador: MiradorConfig;
   loader: LoaderConfig;
+  metaTags: MetaTagsConfig;
+  datadogRum?: DatadogRumConfig;
   location: LocationConfig;
 }
 

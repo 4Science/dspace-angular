@@ -1,0 +1,8 @@
+<div class="p-2 text-white">
+  <div class="tts-controls" *ngIf="showTTSControls">
+    <i *ngIf="!this.utterances.length" class="button fa fa-volume-high" (click)="textToSpeech()"></i>
+    <i *ngIf="this.utterances.length && !isPaused" class="button fa fa-pause" (click)="pauseTextToSpeech()"></i>
+    <i *ngIf="this.utterances.length && isPaused" class="button fa fa-play" (click)="resumeTextToSpeech()"></i>
+  </div>
+</div>
+<div class="tooltip-arrow">&nbsp;</div>

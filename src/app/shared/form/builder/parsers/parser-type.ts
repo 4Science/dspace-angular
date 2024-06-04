@@ -16,5 +16,6 @@ export enum ParserType {
   Textarea = 'textarea',
   Number = 'number',
   Calendar = 'calendar',
+  Link = 'link',
   Markdown = 'markdown',
 }

@@ -1533,6 +1533,26 @@
     debug "^3.1.0"
     lodash.once "^4.1.1"
 
+"@datadog/browser-core@5.7.0":
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/@datadog/browser-core/-/browser-core-5.7.0.tgz#ae8cd791626e928a82dfdfb3ccea88778323ddb8"
+  integrity sha512-rNUe3s5XD+9UUe/muYuh/UJzb0YXTRwSP1VevMRZmEpNgkBhurWjqjm3LQphYXMYsmQIgvqDPWm05Z+jOxTzRw==
+
+"@datadog/browser-rum-core@5.7.0":
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/@datadog/browser-rum-core/-/browser-rum-core-5.7.0.tgz#a13f88ab094fe95fe807292965e031857f06b3e3"
+  integrity sha512-ZWDkyMprM0QBQhKhEZnfux8EE9STPa1wl/rAjY/+dBRqrGi1bEqigSgy7GiwiCag1Wn9GEjLXS5opqmoO/fpQw==
+  dependencies:
+    "@datadog/browser-core" "5.7.0"
+
+"@datadog/browser-rum@^5.7.0":
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/@datadog/browser-rum/-/browser-rum-5.7.0.tgz#5aa157f0f175f8a35675d9c542437b6f7646a667"
+  integrity sha512-I+1QslFl4vteoJQBAtBYPgiWa1rFZ/DoNZsOqsKGJjpql0omv5fvdjwbSTBBT5wfLnzo/FnfHogynFpB+JP0rg==
+  dependencies:
+    "@datadog/browser-core" "5.7.0"
+    "@datadog/browser-rum-core" "5.7.0"
+
 "@discoveryjs/json-ext@0.5.7", "@discoveryjs/json-ext@^0.5.0":
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
@@ -13739,13 +13759,13 @@ videojs-vtt.js@^0.15.5:
   dependencies:
     global "^4.3.1"
 
-videojs-wavesurfer@^3.9.0:
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/videojs-wavesurfer/-/videojs-wavesurfer-3.9.0.tgz#685b0874540167887b3df4c86b11fd617bc20c21"
-  integrity sha512-gAQUFLlAmNXW8hCQwlJRsMl98Q4LyPzd318yDmuzzWLlupBpV3b4riAguYIHLC0d3svt1pgX8Vz8cX91OaPgWQ==
+videojs-wavesurfer@^3.10.0:
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/videojs-wavesurfer/-/videojs-wavesurfer-3.10.0.tgz#4d19ef53b13903327918f413c15e882f780b57ee"
+  integrity sha512-NFLnPtlq3poxvPIAAHsIaT53SifF3Npu5q1F932/WLkTA/uuPKAohSUw2WjzDgJ/2/xtGnuCGE6CGQYYhoeatg==
   dependencies:
     video.js ">=7.0.5"
-    wavesurfer.js ">=6.3.0"
+    wavesurfer.js ">=6.3.0 <7.0.0"
 
 virtual-dom@^2.1.1:
   version "2.1.1"
@@ -13812,10 +13832,10 @@ watchpack@^2.4.0:
     glob-to-regexp "^0.4.1"
     graceful-fs "^4.1.2"
 
-wavesurfer.js@>=6.3.0:
-  version "7.4.6"
-  resolved "https://registry.yarnpkg.com/wavesurfer.js/-/wavesurfer.js-7.4.6.tgz#5fd381c773d2e184b2def732fabe41aa3ce767e5"
-  integrity sha512-uQDw132ucreP6rqJKou9vWe59QPZQ4PGftQml58JbwMzna4pJjUxXDZv+ubV7LJBkX1kaO/9BEmBRpmR64O3rQ==
+"wavesurfer.js@>=6.3.0 <7.0.0":
+  version "6.6.4"
+  resolved "https://registry.yarnpkg.com/wavesurfer.js/-/wavesurfer.js-6.6.4.tgz#45e2d613fbfd60d906362ed6e11b649f481e4485"
+  integrity sha512-nBbc0pD/3FdClxKUKL1UW2V9AJPL+JOjC8T6/YF9/FCAn4uo+H6Y8VBkXo9UJXIHoBewoc7iXj3tPeL0UCJhjA==
 
 wbuf@^1.1.0, wbuf@^1.7.3:
   version "1.7.3"
