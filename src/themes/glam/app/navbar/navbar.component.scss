@@ -18,7 +18,7 @@
     ul.navbar-nav {
       flex-wrap: wrap
     }
-    
+
     .nav-item {
       text-wrap: nowrap;
     }
@@ -89,4 +89,8 @@ nav.navbar {
 
 a.navbar-brand img {
   max-height: var(--ds-header-logo-height);
+}
+
+.search-navbar-wrapper {
+  padding: 3rem var(--ds-cris-section-horizontal-padding);
 }

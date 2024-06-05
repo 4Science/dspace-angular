@@ -78,20 +78,37 @@ ds-metric-donuts a {
 }
 
 
+
+/*** GLAM Home Page - CRIS sections ***/
+
+.cris-section-row {
+  h2 {
+    font-size: var(--ds-cris-section-title-font-size) !important;
+    font-weight: var(--ds-cris-section-title-font-weight);
+    text-align: left;
+  }
+  &.cris-section-dark-row {
+    h2 {
+      color: var(--ds-cris-section-color-dark) !important;
+    }
+  }
+}
+
 // set property "layout.sections.enableAlternateBackground" to true to enable alternate background
 
 .cris-section-dark-row {
   .cris-section-element-background {
-    background-color: var(--ds-homepage-section-bg-color-light);
+    background-color: var(--ds-cris-section-bg-color-light);
   }
 }
 
 .cris-section-light-row {
   .cris-section-element-background {
-    background-color: var(--ds-homepage-section-bg-color-dark);
+    background-color: var(--ds-cris-section-bg-color-dark);
   }
 }
 
 .cris-section-element-background:not(.cris-section-dark-row .cris-section-element-background):not(.cris-section-light-row .cris-section-element-background) {
-  background-color: var(--ds-homepage-section-bg-color-dark);
+  background-color: var(--ds-cris-section-bg-color-dark);
 }
+

@@ -12,9 +12,15 @@
   --ds-navbar-link-color-hover: #{darken($darker, 15%)};
   --ds-cris-layout-sidebar-menu-active-color: #{$darker};
 
+  --ds-cris-section-vertical-padding: 4rem;
+  --ds-cris-section-horizontal-padding: 7%;
+  --ds-cris-section-title-font-size: 40px;
+  --ds-cris-section-title-font-weight: bold;
+
   // set property "layout.sections.enableAlternateBackground" to true to enable alternate background
-  --ds-homepage-section-bg-color-light: #{$white};
-  --ds-homepage-section-bg-color-dark: #{$light}; // not a mistake: "light" is darker than "white"
+  --ds-cris-section-bg-color-light: #{$white};
+  --ds-cris-section-bg-color-dark: #{$light}; // not a mistake: "light" is darker than "white"
+  --ds-cris-section-color-dark: #{$body-color};
 
   --ds-glam-carousel-caption-color: #{$ds-glam-carousel-caption-color};
   --ds-glam-carousel-caption-background: #{$ds-glam-carousel-caption-background};
