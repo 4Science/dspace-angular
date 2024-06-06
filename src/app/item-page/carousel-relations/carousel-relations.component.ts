@@ -29,7 +29,7 @@ export class CarouselRelationsComponent extends SearchComponent {
   carouselOptions: CarouselOptions = {
     aspectRatio: undefined,
     captionStyle: '',
-    carouselHeightPx: 500,
+    carouselHeightPx: 680,
     description: 'dc.description.abstract',
     fitHeight: false,
     fitWidth: false,
