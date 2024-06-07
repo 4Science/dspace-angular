@@ -20,8 +20,8 @@
         <ng-template #placeholderImage>
           <div class="col-lg-8 image-column placeholder-image" [style.height]="carouselHeight"></div>
         </ng-template>
-        <div class="col-lg-4 caption-column bg-primary" [style.height]="carouselHeight">
-          <div class="d-flex flex-row align-items-stretch">
+        <div class="col-lg-4 caption-column bg-carousel px-2" [style.height]="carouselHeight">
+          <div class="d-flex flex-row align-items-stretch align-items-center">
             <!-- left column -->
             <div *ngIf="items.length > 1" class="arrow-wrapper" (click)="carousel.prev()">
               <i class="fa fa-arrow-left text-white"></i>
@@ -31,9 +31,9 @@
               <h1 class="carousel-header text-white" [class]="carouselOptions.titleStyle" *ngIf="item.indexableObject.metadata[title]">
                 {{item.indexableObject.metadata[title][0].value}}
               </h1>
-              <div class="caption flex-fill text-white text-center" [class]="carouselOptions.captionStyle"
+              <div class="caption text-white text-center" [class]="carouselOptions.captionStyle"
                    *ngIf="item.indexableObject.metadata[description]; let descriptionObj">
-                <div class="caption-text">{{descriptionObj[0].value}}</div>
+                <div class="text-center ellipsis-y-3">{{descriptionObj[0].value}}</div>
                 <div class="caption-fade"></div>
               </div>
               <div class="text-center" *ngIf="getItemLink(item.indexableObject); let currentLink;">
