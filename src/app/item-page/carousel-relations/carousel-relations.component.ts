@@ -9,6 +9,7 @@ import { SearchConfigurationService } from '../../core/shared/search/search-conf
 import { RouteService } from '../../core/services/route.service';
 import { Router } from '@angular/router';
 import { CarouselOptions } from '../../shared/carousel/carousel-options.model';
+import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
 
 @Component({
   selector: 'ds-carousel-relations',
@@ -48,8 +49,9 @@ export class CarouselRelationsComponent extends SearchComponent {
               @Inject(PLATFORM_ID) public platformId: any,
               @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
               protected routeService: RouteService,
-              protected router: Router) {
-    super(service, searchManager, sidebarService, windowService, platformId, searchConfigService, routeService, router);
+              protected router: Router,
+              @Inject(APP_CONFIG) protected appConfig: AppConfig,) {
+    super(service, searchManager, sidebarService, windowService, platformId, searchConfigService, routeService, router, appConfig);
   }
 
 }
