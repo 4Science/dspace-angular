@@ -83,7 +83,7 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
    * Returns a string representing the label of field if exists
    */
   getLabel(field: LayoutField): string {
-    const fieldLabelI18nKey = this.fieldI18nPrefix + field.label;
+    const fieldLabelI18nKey = this.fieldI18nPrefix + this.item.entityType + '.' +  field.metadata;
     const header: string = this.translateService.instant(fieldLabelI18nKey);
     if (header === fieldLabelI18nKey) {
       // if translation does not exist return the value present in the header property
