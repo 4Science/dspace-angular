@@ -29,7 +29,9 @@ describe('SearchLabelComponent', () => {
   const normValue1 = 'Test, Author';
   const value2 = 'TestSubject';
   const value3 = 'Test, Authority,authority';
+  const value4 = 'book,equals';
   const normValue3 = 'Test, Authority';
+  const normValue4 = 'book';
   const filter1 = [key1, value1];
   const filter2 = [key2, value2];
   const mockFilters = [
@@ -92,6 +94,9 @@ describe('SearchLabelComponent', () => {
 
       result = comp.normalizeFilterValue(value3);
       expect(result).toBe(normValue3);
+
+      result = comp.normalizeFilterValue(value4);
+      expect(result).toBe(normValue4);
     });
   });
 });
