@@ -75,7 +75,10 @@ export class EditCmsMetadataComponent implements OnInit {
     this.siteService.patch(this.site, operations).pipe(getFirstCompletedRemoteData())
       .subscribe((restResponse) => {
         if (restResponse.hasSucceeded) {
-          this.site = restResponse.payload;
+          // this.site = restResponse.payload;
+          this.siteService.find().subscribe((site) => {
+            this.site = site;
+          });
           this.notificationsService.success(this.translateService.get('admin.edit-cms-metadata.success'));
           this.selectedMetadata = undefined;
           this.editMode.next(false);
