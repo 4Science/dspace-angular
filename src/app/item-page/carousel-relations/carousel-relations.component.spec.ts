@@ -18,6 +18,8 @@ import { HALEndpointService } from '../../core/shared/hal-endpoint.service';
 import { RemoteDataBuildService } from '../../core/cache/builders/remote-data-build.service';
 import { HostWindowServiceStub } from '../../shared/testing/host-window-service.stub';
 import { of as observableOf } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { APP_CONFIG } from '../../../config/app-config.interface';
 
 describe('CarouselRelationsComponent', () => {
   let component: CarouselRelationsComponent;
@@ -43,6 +45,7 @@ describe('CarouselRelationsComponent', () => {
         { provide: Router, useValue: routerMock },
         { provide: SidebarService, useValue: {} },
         { provide: HALEndpointService, useValue: {} },
+        { provide: APP_CONFIG, useValue: environment },
         provideMockStore({ core: { auth: { loading: false } } } as any)
       ]
     })
