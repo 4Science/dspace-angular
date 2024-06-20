@@ -345,6 +345,9 @@ import {
 } from './search/search-charts/search-chart/search-chart-bar-horizontal/search-chart-bar-horizontal.component';
 import { ThumbnailService } from './thumbnail/thumbnail.service';
 import { EntityIconDirective } from './entity-icon/entity-icon.directive';
+import { AssociateItemListComponent } from './object-list/associate-item-list/associateitems-list.component';
+import { AssociateItemsActionsComponent } from './object-list/associate-item-list/relationships-items-actions/associate-items-actions.component';
+import { AssociateItemsListPreviewComponent } from './object-list/associate-item-list/relationships-items-list-preview/associate-items-list-preview.component';
 import {
   AdditionalMetadataComponent
 } from './object-list/search-result-list-element/additional-metadata/additional-metadata.component';
@@ -511,6 +514,9 @@ const COMPONENTS = [
   ExportExcelSelectorComponent,
   ThemedBrowseMostElementsComponent,
   SearchChartBarHorizontalComponent,
+  AssociateItemListComponent,
+  AssociateItemsActionsComponent,
+  AssociateItemsListPreviewComponent,
   ItemListPreviewComponent,
   ThemedItemListPreviewComponent,
   ItemCollectionComponent
