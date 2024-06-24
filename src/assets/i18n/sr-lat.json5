@@ -4211,10 +4211,6 @@
   // TODO New key - Add a translation
   "dataset.listelement.badge": "Dataset",
 
-  // "discoverable.search.results.head": "Search Results",
-  // TODO New key - Add a translation
-  "discoverable.search.results.head": "Search Results",
-
   // "equipment.listelement.badge": "Equipment",
   // TODO New key - Add a translation
   "equipment.listelement.badge": "Equipment",
@@ -5326,9 +5322,9 @@
   // TODO New key - Add a translation
   "home.top-section.no-results": "No results found for this category",
 
-  // "home.advanced-top-section.dc.date.accessioned": "News",
+  // "home.advanced-top-section.dc.date.accessioned": "Highlights",
   // TODO New key - Add a translation
-  "home.advanced-top-section.dc.date.accessioned": "News",
+  "home.advanced-top-section.dc.date.accessioned": "Highlights",
 
   // "home.advanced-top-section.dc.date.issued": "New accessions",
   // TODO New key - Add a translation

@@ -3764,9 +3764,6 @@
   // "dataset.listelement.badge": "Dataset",
   "dataset.listelement.badge": "Dataset",
 
-  // "discoverable.search.results.head": "Search Results",
-  "discoverable.search.results.head": "Risultati della ricerca",
-
   // "equipment.listelement.badge": "Equipment",
   "equipment.listelement.badge": "Attrezzature",
 
@@ -4721,8 +4718,8 @@
   // TODO New key - Add a translation
   "home.top-section.no-results": "No results found for this category",
 
-  // "home.advanced-top-section.dc.date.accessioned": "News",
-  "home.advanced-top-section.dc.date.accessioned": "Novità",
+  // "home.advanced-top-section.dc.date.accessioned": "Highlights",
+  "home.advanced-top-section.dc.date.accessioned": "In primo piano",
 
   // "home.advanced-top-section.dc.date.issued": "New accessions",
   "home.advanced-top-section.dc.date.issued": "Nuove accessioni",

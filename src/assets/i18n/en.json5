@@ -2477,8 +2477,6 @@
 
   "dataset.listelement.badge": "Dataset",
 
-  "discoverable.search.results.head": "Search Results",
-
   "equipment.listelement.badge": "Equipment",
 
   "error.bitstream": "Error fetching bitstream",
@@ -3105,7 +3103,7 @@
 
   "home.top-section.no-results": "No results found for this category",
 
-  "home.advanced-top-section.dc.date.accessioned": "News",
+  "home.advanced-top-section.dc.date.accessioned": "Highlights",
 
   "home.advanced-top-section.dc.date.issued": "New accessions",
 
