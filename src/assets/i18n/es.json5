@@ -4614,10 +4614,6 @@
   // TODO New key - Add a translation
   "explore.index.corporate": "Organizational Unit",
 
-  // "explore.index.opera": "Opera",
-  // TODO New key - Add a translation
-  "explore.index.opera": "Opera",
-
   // "explore.search-section.infrastructure.title": "Infrastructure",
   // TODO New key - Add a translation
   "explore.search-section.infrastructure.title": "Infrastructure",
@@ -9686,18 +9682,6 @@
   // TODO New key - Add a translation
   "search.filters.filter.family.placeholder": "Family",
 
-  // "search.filters.filter.opera.head": "Opera",
-  // TODO New key - Add a translation
-  "search.filters.filter.opera.head": "Opera",
-
-  // "search.filters.filter.opera.label": "Opera",
-  // TODO New key - Add a translation
-  "search.filters.filter.opera.label": "Opera",
-
-  // "search.filters.filter.opera.placeholder": "Opera",
-  // TODO New key - Add a translation
-  "search.filters.filter.opera.placeholder": "Opera",
-
   // "search.filters.entityType.JournalIssue": "Journal Issue",
   "search.filters.entityType.JournalIssue": "Número de la revista",
 
@@ -13962,9 +13946,6 @@
   // "layout.tab.header.AudioVideo.details": "Details",
   // TODO New key - Add a translation
   "layout.tab.header.AudioVideo.details": "Details",
-  // "layout.tab.header.Opera.details": "Details",
-  // TODO New key - Add a translation
-  "layout.tab.header.Opera.details": "Details",
 
   // "layout.box.header.Person.profile": "Profile",
   // TODO New key - Add a translation
@@ -14296,9 +14277,6 @@
   // "layout.box.header.AudioVideo.details": "Details",
   // TODO New key - Add a translation
   "layout.box.header.AudioVideo.details": "Details",
-  // "layout.box.header.Opera.details": "Details",
-  // TODO New key - Add a translation
-  "layout.box.header.Opera.details": "Details",
 
   // "layout.field.label.Person.crisrp.name.translated": "Translated Name",
   // TODO New key - Add a translation
@@ -15377,36 +15355,6 @@
   // "layout.field.label.AudioVideo.BITSTREAM": "File(s)",
   // TODO New key - Add a translation
   "layout.field.label.AudioVideo.BITSTREAM": "File(s)",
-  // "layout.field.label.Opera.dc.title.alternative": "Alternative Title",
-  // TODO New key - Add a translation
-  "layout.field.label.Opera.dc.title.alternative": "Alternative Title",
-  // "layout.field.label.Opera.dc.date.issued": "Date Issued",
-  // TODO New key - Add a translation
-  "layout.field.label.Opera.dc.date.issued": "Date Issued",
-  // "layout.field.label.Opera.dc.subject": "Subject",
-  // TODO New key - Add a translation
-  "layout.field.label.Opera.dc.subject": "Subject",
-  // "layout.field.label.Opera.dc.relation.otherlinks": "Other Links",
-  // TODO New key - Add a translation
-  "layout.field.label.Opera.dc.relation.otherlinks": "Other Link",
-  // "layout.field.label.Opera.dc.relation.conference": "Event",
-  // TODO New key - Add a translation
-  "layout.field.label.Opera.dc.relation.conference": "Event",
-  // "layout.field.label.Opera.dc.description.note": "Notes",
-  // TODO New key - Add a translation
-  "layout.field.label.Opera.dc.description.note": "Notes",
-  // "layout.field.label.Opera.dc.relation.path": "Path",
-  // TODO New key - Add a translation
-  "layout.field.label.Opera.dc.relation.path": "Path",
-  // "layout.field.label.Opera.dc.relation.aggregation": "Aggregation",
-  // TODO New key - Add a translation
-  "layout.field.label.Opera.dc.relation.aggregation": "Aggregation",
-  // "layout.field.label.Opera.dc.contributor.author": "Author",
-  // TODO New key - Add a translation
-  "layout.field.label.Opera.dc.contributor.author": "Author",
-  // "layout.field.label.Opera.dc.contributor.authorrole": "Role",
-  // TODO New key - Add a translation
-  "layout.field.label.Opera.dc.contributor.authorrole": "Role",
 
   // "layout.field.label.Abbreviation": "Abbreviation",
   // TODO New key - Add a translation
