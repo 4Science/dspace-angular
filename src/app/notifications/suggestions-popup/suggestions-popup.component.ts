@@ -3,12 +3,12 @@ import { SuggestionTargetsStateService } from '../suggestion-targets/suggestion-
 import { SuggestionsService } from '../suggestions.service';
 import { take, takeUntil } from 'rxjs/operators';
 import { isNotEmpty } from '../../shared/empty.util';
-import { combineLatest, Observable, of, Subject } from 'rxjs';
+import { combineLatest, Observable, of, Subject, Subscription } from 'rxjs';
 import { trigger } from '@angular/animations';
 
 
 import { fromTopEnter } from '../../shared/animations/fromTop';
-import { SuggestionTarget } from '../../core/notifications/models/suggestion-target.model';
+import { SuggestionTarget } from '../../core/notifications/suggestions/models/suggestion-target.model';
 
 /**
  * Show suggestions on a popover window, used on the homepage
@@ -27,7 +27,7 @@ export class SuggestionsPopupComponent implements OnInit, OnDestroy {
 
   labelPrefix = 'notification.';
 
-  subscription;
+  subscription: Subscription;
 
   suggestionsRD$: Observable<SuggestionTarget[]>;
 

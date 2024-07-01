@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Observable, Subscription } from 'rxjs';
@@ -9,9 +9,9 @@ import { hasValue } from '../../../shared/empty.util';
 import { PaginationComponentOptions } from '../../../shared/pagination/pagination-component-options.model';
 import { getSuggestionPageRoute } from '../../../suggestions-page/suggestions-page-routing-paths';
 import { PaginationService } from '../../../core/pagination/pagination.service';
-import { SuggestionTarget } from '../../../core/notifications/models/suggestion-target.model';
 import { SuggestionTargetsStateService } from '../suggestion-targets.state.service';
 import { SuggestionsService } from '../../suggestions.service';
+import { SuggestionTarget } from '../../../core/notifications/suggestions/models/suggestion-target.model';
 
 /**
  * Component to display the Suggestion Target list.
@@ -20,19 +20,19 @@ import { SuggestionsService } from '../../suggestions.service';
   selector: 'ds-publication-claim',
   templateUrl: './publication-claim.component.html',
 })
-export class PublicationClaimComponent implements OnInit {
+export class PublicationClaimComponent implements OnInit, AfterViewInit {
 
   /**
    * The source for which to list targets
    */
-  @Input() source: string;
+  @Input() source = '';
 
   /**
    * The pagination system configuration for HTML listing.
    * @type {PaginationComponentOptions}
    */
   public paginationConfig: PaginationComponentOptions = Object.assign(new PaginationComponentOptions(), {
-    id: 'stp',
+    id: 'stp_' + this.source,
     pageSizeOptions: [5, 10, 20, 40, 60]
   });
 
@@ -69,15 +69,28 @@ export class PublicationClaimComponent implements OnInit {
    * Component initialization.
    */
   ngOnInit(): void {
-    this.targets$ = this.suggestionTargetsStateService.getSuggestionTargets();
-    this.totalElements$ = this.suggestionTargetsStateService.getSuggestionTargetsTotals();
+    this.targets$ = this.suggestionTargetsStateService.getSuggestionTargets(this.source);
+    this.totalElements$ = this.suggestionTargetsStateService.getSuggestionTargetsTotals(this.source);
 
     this.subs.push(
-      this.suggestionTargetsStateService.isSuggestionTargetsLoaded().pipe(
+      this.suggestionTargetsStateService.isSuggestionTargetsLoaded(this.source).pipe(
         take(1)
       ).subscribe(() => {
         this.getSuggestionTargets();
       })
+    );
+  }
+
+  /**
+   * First Suggestion Targets loading after view initialization.
+   */
+  ngAfterViewInit(): void {
+    this.subs.push(
+      this.suggestionTargetsStateService.isSuggestionTargetsLoaded(this.source).pipe(
+        take(1),
+      ).subscribe(() => {
+        this.getSuggestionTargets();
+      }),
     );
   }
 
@@ -88,7 +101,7 @@ export class PublicationClaimComponent implements OnInit {
    *    'true' if the targets are loading, 'false' otherwise.
    */
   public isTargetsLoading(): Observable<boolean> {
-    return this.suggestionTargetsStateService.isSuggestionTargetsLoading();
+    return this.suggestionTargetsStateService.isSuggestionTargetsLoading(this.source);
   }
 
   /**
@@ -98,7 +111,7 @@ export class PublicationClaimComponent implements OnInit {
    *    'true' if there are operations running on the targets (ex.: a REST call), 'false' otherwise.
    */
   public isTargetsProcessing(): Observable<boolean> {
-    return this.suggestionTargetsStateService.isSuggestionTargetsProcessing();
+    return this.suggestionTargetsStateService.isSuggestionTargetsProcessing(this.source);
   }
 
   /**
@@ -115,7 +128,7 @@ export class PublicationClaimComponent implements OnInit {
    * Unsubscribe from all subscriptions.
    */
   ngOnDestroy(): void {
-    this.suggestionTargetsStateService.dispatchClearSuggestionTargetsAction();
+    this.suggestionTargetsStateService.dispatchClearSuggestionTargetsAction(this.source);
     this.subs
       .filter((sub) => hasValue(sub))
       .forEach((sub) => sub.unsubscribe());

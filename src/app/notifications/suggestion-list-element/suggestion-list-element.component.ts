@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Suggestion } from 'src/app/core/notifications/models/suggestion.model';
 import { fadeIn } from '../../shared/animations/fade';
 import { Item } from '../../core/shared/item.model';
 import { isNotEmpty } from '../../shared/empty.util';
+import { Suggestion } from '../../core/notifications/suggestions/models/suggestion.model';
 
 
 

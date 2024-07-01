@@ -36,10 +36,10 @@ import {
 import { SuggestionsPopupComponent } from './suggestions-popup/suggestions-popup.component';
 import { SuggestionsNotificationComponent } from './suggestions-notification/suggestions-notification.component';
 import { SuggestionsService } from './suggestions.service';
-import { SuggestionSourceDataService } from '../core/notifications/source/suggestion-source-data.service';
-import { SuggestionTargetDataService } from '../core/notifications/target/suggestion-target-data.service';
 import { SuggestionTargetsStateService } from './suggestion-targets/suggestion-targets.state.service';
-import { SuggestionsDataService } from '../core/notifications/suggestions-data.service';
+import { SuggestionTargetDataService } from '../core/notifications/suggestions/target/suggestion-target-data.service';
+import { SuggestionSourceDataService } from '../core/notifications/suggestions/source/suggestion-source-data.service';
+import { SuggestionDataService } from '../core/notifications/suggestions/suggestion-data.service';
 
 
 const MODULES = [
@@ -82,7 +82,7 @@ const PROVIDERS = [
   SuggestionSourceDataService,
   SuggestionTargetDataService,
   SuggestionTargetsStateService,
-  SuggestionsDataService
+  SuggestionDataService
 ];
 
 @NgModule({

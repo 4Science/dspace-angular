@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { distinctUntilChanged, map, switchMap, take } from 'rxjs/operators';
+import { distinctUntilChanged, map, switchMap, take, tap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 
 import { SortDirection, SortOptions, } from '../core/cache/models/sort-options.model';
@@ -20,11 +20,11 @@ import {redirectOn4xx} from '../core/shared/authorized.operators';
 import {
   getWorkspaceItemEditRoute
 } from '../workflowitems-edit-page/workflowitems-edit-page-routing-paths';
-import { Suggestion } from '../core/notifications/models/suggestion.model';
-import { SuggestionTarget } from '../core/notifications/models/suggestion-target.model';
 import { SuggestionBulkResult, SuggestionsService } from '../notifications/suggestions.service';
 import { SuggestionTargetsStateService } from '../notifications/suggestion-targets/suggestion-targets.state.service';
 import { SuggestionApproveAndImport } from '../notifications/suggestion-list-element/suggestion-list-element.component';
+import { Suggestion } from '../core/notifications/suggestions/models/suggestion.model';
+import { SuggestionTarget } from '../core/notifications/suggestions/models/suggestion-target.model';
 
 @Component({
   selector: 'ds-suggestion-page',
@@ -102,15 +102,17 @@ export class SuggestionsPageComponent implements OnInit {
       map((target: SuggestionTarget) => target.id)
     );
     this.targetRD$.pipe(
-      getFirstSucceededRemoteDataPayload()
-    ).subscribe((suggestionTarget: SuggestionTarget) => {
-      this.suggestionTarget = suggestionTarget;
-      this.suggestionId = suggestionTarget.id;
-      this.researcherName = suggestionTarget.display;
-      this.suggestionSource = suggestionTarget.source;
-      this.researcherUuid = this.suggestionService.getTargetUuid(suggestionTarget);
-      this.updatePage();
-    });
+      getFirstSucceededRemoteDataPayload(),
+      tap((suggestionTarget: SuggestionTarget) => {
+        this.suggestionTarget = suggestionTarget;
+        this.suggestionId = suggestionTarget.id;
+        this.researcherName = suggestionTarget.display;
+        this.suggestionSource = suggestionTarget.source;
+        this.researcherUuid = this.suggestionService.getTargetUuid(suggestionTarget);
+        this.updatePage();
+      }),
+    ).subscribe();
+
 
     this.suggestionTargetsStateService.dispatchMarkUserSuggestionsAsVisitedAction();
   }
@@ -125,13 +127,16 @@ export class SuggestionsPageComponent implements OnInit {
   /**
    * Update the list of suggestions
    */
+  /**
+   * Update the list of suggestions
+   */
   updatePage() {
     this.processing$.next(true);
     const pageConfig$: Observable<FindListOptions> = this.paginationService.getFindListOptions(
       this.paginationOptions.id,
       this.defaultConfig,
     ).pipe(
-      distinctUntilChanged()
+      distinctUntilChanged(),
     );
     combineLatest([this.targetId$, pageConfig$]).pipe(
       switchMap(([targetId, config]: [string, FindListOptions]) => {
@@ -139,10 +144,10 @@ export class SuggestionsPageComponent implements OnInit {
           targetId,
           config.elementsPerPage,
           config.currentPage,
-          config.sort
+          config.sort,
         );
       }),
-      take(1)
+      take(1),
     ).subscribe((results: PaginatedList<Suggestion>) => {
       this.processing$.next(false);
       this.suggestionsRD$.next(results);

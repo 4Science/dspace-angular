@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SuggestionsPageResolver } from './suggestions-page.resolver';
+import { suggestionsPageResolver } from './suggestions-page.resolver';
 import { SuggestionsPageComponent } from './suggestions-page.component';
 import { AuthenticatedGuard } from '../core/auth/authenticated.guard';
 import { PublicationClaimBreadcrumbResolver } from '../core/breadcrumbs/publication-claim-breadcrumb.resolver';
@@ -12,7 +12,7 @@ import { PublicationClaimBreadcrumbResolver } from '../core/breadcrumbs/publicat
       {
         path: ':targetId',
         resolve: {
-          suggestionTargets: SuggestionsPageResolver,
+          suggestionTargets: suggestionsPageResolver,
           breadcrumb: PublicationClaimBreadcrumbResolver//I18nBreadcrumbResolver
         },
         data: {
@@ -27,7 +27,6 @@ import { PublicationClaimBreadcrumbResolver } from '../core/breadcrumbs/publicat
     ])
   ],
   providers: [
-    SuggestionsPageResolver,
     PublicationClaimBreadcrumbResolver
   ]
 })

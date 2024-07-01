@@ -5,8 +5,8 @@ import { SuggestionsPageComponent } from './suggestions-page.component';
 import { SharedModule } from '../shared/shared.module';
 import { SuggestionsPageRoutingModule } from './suggestions-page-routing.module';
 import { NotificationsModule } from '../notifications/notifications.module';
-import { SuggestionsDataService } from '../core/notifications/suggestions-data.service';
 import { SuggestionsService } from '../notifications/suggestions.service';
+import { SuggestionDataService } from '../core/notifications/suggestions/suggestion-data.service';
 
 @NgModule({
   declarations: [SuggestionsPageComponent],
@@ -17,7 +17,7 @@ import { SuggestionsService } from '../notifications/suggestions.service';
     NotificationsModule
   ],
   providers: [
-    SuggestionsDataService,
+    SuggestionDataService,
     SuggestionsService
   ]
 })

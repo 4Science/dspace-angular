@@ -192,13 +192,13 @@ import {
   CoarNotifyConfigDataService
 } from '../submission/sections/section-coar-notify/coar-notify-config-data.service';
 import { NotifyRequestsStatusDataService } from './data/notify-services-status-data.service';
-import { SuggestionTarget } from './notifications/models/suggestion-target.model';
-import { SuggestionSource } from './notifications/models/suggestion-source.model';
 import { NotifyRequestsStatus } from '../item-page/simple/notify-requests-status/notify-requests-status.model';
 import { LdnService } from '../admin/admin-ldn-services/ldn-services-model/ldn-services.model';
 import { Itemfilter } from '../admin/admin-ldn-services/ldn-services-model/ldn-service-itemfilters';
 import { SubmissionCoarNotifyConfig } from '../submission/sections/section-coar-notify/submission-coar-notify.config';
 import { AdminNotifyMessage } from '../admin/admin-notify-dashboard/models/admin-notify-message.model';
+import { SuggestionSource } from './notifications/suggestions/models/suggestion-source.model';
+import { SuggestionTarget } from './notifications/suggestions/models/suggestion-target.model';
 
 /**
  * When not in production, endpoint responses can be mocked for testing purposes

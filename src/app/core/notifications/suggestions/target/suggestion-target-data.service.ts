@@ -1,29 +1,32 @@
-import { Injectable } from '@angular/core';
-import { dataService } from '../../data/base/data-service.decorator';
-
-import { IdentifiableDataService } from '../../data/base/identifiable-data.service';
-import { SuggestionTarget } from '../models/suggestion-target.model';
-import { FindAllData, FindAllDataImpl } from '../../data/base/find-all-data';
-import { Store } from '@ngrx/store';
-import { RequestService } from '../../data/request.service';
-import { RemoteDataBuildService } from '../../cache/builders/remote-data-build.service';
-import { CoreState } from '../../core-state.model';
-import { ObjectCacheService } from '../../cache/object-cache.service';
-import { HALEndpointService } from '../../shared/hal-endpoint.service';
-import { NotificationsService } from '../../../shared/notifications/notifications.service';
 import { HttpClient } from '@angular/common/http';
-import { FindListOptions } from '../../data/find-list-options.model';
-import { FollowLinkConfig } from '../../../shared/utils/follow-link-config.model';
-import { PaginatedList } from '../../data/paginated-list.model';
-import { RemoteData } from '../../data/remote-data';
-import { Observable } from 'rxjs/internal/Observable';
-import { RequestParam } from '../../cache/models/request-param.model';
-import { SearchData, SearchDataImpl } from '../../data/base/search-data';
-import { DefaultChangeAnalyzer } from '../../data/default-change-analyzer.service';
-import { SUGGESTION_TARGET } from '../models/suggestion-target-object.resource-type';
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
-@Injectable()
-@dataService(SUGGESTION_TARGET)
+import { NotificationsService } from '../../../../shared/notifications/notifications.service';
+import { FollowLinkConfig } from '../../../../shared/utils/follow-link-config.model';
+import { RemoteDataBuildService } from '../../../cache/builders/remote-data-build.service';
+import { RequestParam } from '../../../cache/models/request-param.model';
+import { ObjectCacheService } from '../../../cache/object-cache.service';
+import { CoreState } from '../../../core-state.model';
+import {
+  FindAllData,
+  FindAllDataImpl,
+} from '../../../data/base/find-all-data';
+import { IdentifiableDataService } from '../../../data/base/identifiable-data.service';
+import {
+  SearchData,
+  SearchDataImpl,
+} from '../../../data/base/search-data';
+import { DefaultChangeAnalyzer } from '../../../data/default-change-analyzer.service';
+import { FindListOptions } from '../../../data/find-list-options.model';
+import { PaginatedList } from '../../../data/paginated-list.model';
+import { RemoteData } from '../../../data/remote-data';
+import { RequestService } from '../../../data/request.service';
+import { HALEndpointService } from '../../../shared/hal-endpoint.service';
+import { SuggestionTarget } from '../models/suggestion-target.model';
+
+@Injectable({ providedIn: 'root' })
 export class SuggestionTargetDataService extends IdentifiableDataService<SuggestionTarget> {
 
   protected linkPath = 'suggestiontargets';
@@ -52,19 +55,26 @@ export class SuggestionTargetDataService extends IdentifiableDataService<Suggest
    *    The source for which to find targets.
    * @param options
    *    Find list options object.
+   * @param useCachedVersionIfAvailable
+   *    If this is true, the request will only be sent if there's no valid cached version. Defaults to true
+   * @param reRequestOnStale
+   *    Whether or not the request should automatically be re-requested
    * @param linksToFollow
    *    List of {@link FollowLinkConfig} that indicate which {@link HALLink}s should be automatically resolved.
+   *
    * @return Observable<RemoteData<PaginatedList<SuggestionTarget>>>
    *    The list of Suggestion Target.
    */
-  public getTargets(
+  public getTargetsBySource(
     source: string,
     options: FindListOptions = {},
+    useCachedVersionIfAvailable = true,
+    reRequestOnStale = true,
     ...linksToFollow: FollowLinkConfig<SuggestionTarget>[]
   ): Observable<RemoteData<PaginatedList<SuggestionTarget>>> {
     options.searchParams = [new RequestParam('source', source)];
 
-    return this.searchBy(this.searchFindBySourceMethod, options, true, true, ...linksToFollow);
+    return this.searchBy(this.searchFindBySourceMethod, options, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
   }
 
   /**

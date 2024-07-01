@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { fadeIn } from '../../../shared/animations/fade';
-import { SuggestionEvidences } from '../../../core/notifications/models/suggestion.model';
+import { SuggestionEvidences } from '../../../core/notifications/suggestions/models/suggestion.model';
 
 
 /**

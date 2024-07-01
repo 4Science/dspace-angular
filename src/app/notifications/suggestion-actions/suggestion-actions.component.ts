@@ -5,8 +5,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Collection } from '../../core/shared/collection.model';
 import { take } from 'rxjs/operators';
 import { CreateItemParentSelectorComponent } from '../../shared/dso-selector/modal-wrappers/create-item-parent-selector/create-item-parent-selector.component';
-import { Suggestion } from '../../core/notifications/models/suggestion.model';
 import { SuggestionApproveAndImport } from '../suggestion-list-element/suggestion-list-element.component';
+import { Suggestion } from '../../core/notifications/suggestions/models/suggestion.model';
 
 /**
  * Show and trigger the actions to submit for a suggestion

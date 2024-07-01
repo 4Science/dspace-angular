@@ -1,5 +1,4 @@
 import { TestScheduler } from 'rxjs/testing';
-import { SuggestionDataServiceImpl, SuggestionsDataService } from './suggestions-data.service';
 import { RequestService } from '../data/request.service';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { ObjectCacheService } from '../cache/object-cache.service';
@@ -7,7 +6,6 @@ import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { HttpClient } from '@angular/common/http';
 import { DefaultChangeAnalyzer } from '../data/default-change-analyzer.service';
-import { Suggestion } from './models/suggestion.model';
 import { cold, getTestScheduler } from 'jasmine-marbles';
 import { RequestEntry } from '../data/request-entry.model';
 import { RestResponse } from '../cache/response.models';
@@ -15,15 +13,17 @@ import { of as observableOf } from 'rxjs';
 import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
 import { RemoteData } from '../data/remote-data';
 import { RequestEntryState } from '../data/request-entry-state.model';
-import { SuggestionSource } from './models/suggestion-source.model';
-import { SuggestionTarget } from './models/suggestion-target.model';
-import { SuggestionSourceDataService } from './source/suggestion-source-data.service';
-import { SuggestionTargetDataService } from './target/suggestion-target-data.service';
 import { RequestParam } from '../cache/models/request-param.model';
+import { SuggestionSource } from './suggestions/models/suggestion-source.model';
+import { SuggestionTarget } from './suggestions/models/suggestion-target.model';
+import { SuggestionSourceDataService } from './suggestions/source/suggestion-source-data.service';
+import { SuggestionTargetDataService } from './suggestions/target/suggestion-target-data.service';
+import { SuggestionDataService } from './suggestions/suggestion-data.service';
+import { Suggestion } from './suggestions/models/suggestion.model';
 
 describe('SuggestionDataService test', () => {
   let scheduler: TestScheduler;
-  let service: SuggestionsDataService;
+  let service: SuggestionDataService;
   let requestService: RequestService;
   let rdbService: RemoteDataBuildService;
   let objectCache: ObjectCacheService;
@@ -35,7 +35,7 @@ describe('SuggestionDataService test', () => {
   let comparatorSuggestionTarget: DefaultChangeAnalyzer<SuggestionTarget>;
   let suggestionSourcesDataService: SuggestionSourceDataService;
   let suggestionTargetsDataService: SuggestionTargetDataService;
-  let suggestionsDataService: SuggestionDataServiceImpl;
+  let suggestionsDataService: SuggestionDataService;
   let responseCacheEntry: RequestEntry;
 
 
@@ -48,16 +48,13 @@ describe('SuggestionDataService test', () => {
   };
 
   function initTestService() {
-    return new SuggestionsDataService(
+    return new SuggestionDataService(
       requestService,
       rdbService,
       objectCache,
       halService,
       notificationsService,
-      http,
-      comparatorSuggestion,
-      comparatorSuggestionSource,
-      comparatorSuggestionTarget
+      http
     );
   }
 
@@ -118,49 +115,20 @@ describe('SuggestionDataService test', () => {
     service['suggestionsDataService'] = suggestionsDataService;
   });
 
-  describe('Suggestion targets service', () => {
-    it('should call suggestionSourcesDataService.getTargets', () => {
-      const options = {
-        searchParams: [new RequestParam('source', testSource)]
-      };
-      service.getTargets(testSource);
-      expect(suggestionTargetsDataService.getTargets).toHaveBeenCalledWith('findBySource', options);
-    });
-
-    it('should call suggestionSourcesDataService.getTargetsByUser', () => {
-      const options = {
-        searchParams: [new RequestParam('target', testUserId)]
-      };
-      service.getTargetsByUser(testUserId);
-      expect(suggestionTargetsDataService.getTargetsByUser).toHaveBeenCalledWith(testUserId, options);
-    });
-
-    it('should call suggestionSourcesDataService.getTargetById', () => {
-      service.getTargetById('1');
-      expect(suggestionTargetsDataService.findById).toHaveBeenCalledWith('1');
-    });
-  });
-
-
-  describe('Suggestion sources service', () => {
-    it('should call suggestionSourcesDataService.getSources', () => {
-      service.getSources();
-      expect(suggestionSourcesDataService.getSources).toHaveBeenCalled();
-    });
-  });
-
   describe('Suggestion service', () => {
     it('should call suggestionsDataService.searchBy', () => {
+      spyOn((service as any).searchData, 'searchBy').and.returnValue(observableOf(null));
       const options = {
-        searchParams: [new RequestParam('target', testUserId), new RequestParam('source', testSource)]
+        searchParams: [new RequestParam('target', testUserId), new RequestParam('source', testSource)],
       };
       service.getSuggestionsByTargetAndSource(testUserId, testSource);
-      expect(suggestionsDataService.searchBy).toHaveBeenCalledWith('findByTargetAndSource', options, false, true);
+      expect((service as any).searchData.searchBy).toHaveBeenCalledWith('findByTargetAndSource', options, false, true);
     });
 
     it('should call suggestionsDataService.delete', () => {
+      spyOn((service as any).deleteData, 'delete').and.returnValue(observableOf(null));
       service.deleteSuggestion('1');
-      expect(suggestionsDataService.delete).toHaveBeenCalledWith('1');
+      expect((service as any).deleteData.delete).toHaveBeenCalledWith('1');
     });
   });
 

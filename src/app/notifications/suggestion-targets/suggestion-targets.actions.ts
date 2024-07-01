@@ -1,8 +1,9 @@
+
 /* eslint-disable max-classes-per-file */
 import { Action } from '@ngrx/store';
-import { type } from '../../shared/ngrx/type';
-import { SuggestionTarget } from '../../core/notifications/models/suggestion-target.model';
 
+import { SuggestionTarget } from '../../core/notifications/suggestions/models/suggestion-target.model';
+import { type } from '../../shared/ngrx/type';
 
 /**
  * For each action type in an action group, make a simple
@@ -19,13 +20,12 @@ export const SuggestionTargetActionTypes = {
   RETRIEVE_TARGETS_BY_SOURCE_ERROR: type('dspace/integration/openaire/suggestions/target/RETRIEVE_TARGETS_BY_SOURCE_ERROR'),
   ADD_USER_SUGGESTIONS: type('dspace/integration/openaire/suggestions/target/ADD_USER_SUGGESTIONS'),
   REFRESH_USER_SUGGESTIONS: type('dspace/integration/openaire/suggestions/target/REFRESH_USER_SUGGESTIONS'),
-  MARK_USER_SUGGESTIONS_AS_VISITED: type('dspace/integration/openaire/suggestions/target/MARK_USER_SUGGESTIONS_AS_VISITED')
+  REFRESH_USER_SUGGESTIONS_ERROR: type('dspace/integration/openaire/suggestions/target/REFRESH_USER_SUGGESTIONS_ERROR'),
+  MARK_USER_SUGGESTIONS_AS_VISITED: type('dspace/integration/openaire/suggestions/target/MARK_USER_SUGGESTIONS_AS_VISITED'),
 };
 
-/* tslint:disable:max-classes-per-file */
-
 /**
- * An ngrx action to retrieve all the Suggestion Targets.
+ * A ngrx action to retrieve all the Suggestion Targets.
  */
 export class RetrieveTargetsBySourceAction implements Action {
   type = SuggestionTargetActionTypes.RETRIEVE_TARGETS_BY_SOURCE;
@@ -49,24 +49,40 @@ export class RetrieveTargetsBySourceAction implements Action {
     this.payload = {
       source,
       elementsPerPage,
-      currentPage
+      currentPage,
     };
   }
 }
 
 /**
- * An ngrx action for retrieving 'all Suggestion Targets' error.
+ * A ngrx action for notifying error.
  */
-export class RetrieveAllTargetsErrorAction implements Action {
+export class RetrieveTargetsBySourceErrorAction implements Action {
   type = SuggestionTargetActionTypes.RETRIEVE_TARGETS_BY_SOURCE_ERROR;
+  payload: {
+    source: string;
+  };
+
+  /**
+   * Create a new RetrieveTargetsBySourceAction.
+   *
+   * @param source
+   *    the source for which to retrieve suggestion targets
+   */
+  constructor(source: string) {
+    this.payload = {
+      source,
+    };
+  }
 }
 
 /**
- * An ngrx action to load the Suggestion Target  objects.
+ * A ngrx action to load the Suggestion Target  objects.
  */
 export class AddTargetAction implements Action {
   type = SuggestionTargetActionTypes.ADD_TARGETS;
   payload: {
+    source: string;
     targets: SuggestionTarget[];
     totalPages: number;
     currentPage: number;
@@ -76,6 +92,8 @@ export class AddTargetAction implements Action {
   /**
    * Create a new AddTargetAction.
    *
+   * @param source
+   *    the source of suggestion targets
    * @param targets
    *    the list of targets
    * @param totalPages
@@ -85,19 +103,20 @@ export class AddTargetAction implements Action {
    * @param totalElements
    *    the total available Suggestion Targets
    */
-  constructor(targets: SuggestionTarget[], totalPages: number, currentPage: number, totalElements: number) {
+  constructor(source: string, targets: SuggestionTarget[], totalPages: number, currentPage: number, totalElements: number) {
     this.payload = {
+      source,
       targets,
       totalPages,
       currentPage,
-      totalElements
+      totalElements,
     };
   }
 
 }
 
 /**
- * An ngrx action to load the user Suggestion Target object.
+ * A ngrx action to load the user Suggestion Target object.
  * Called by the ??? effect.
  */
 export class AddUserSuggestionsAction implements Action {
@@ -119,7 +138,7 @@ export class AddUserSuggestionsAction implements Action {
 }
 
 /**
- * An ngrx action to reload the user Suggestion Target object.
+ * A ngrx action to reload the user Suggestion Target object.
  * Called by the ??? effect.
  */
 export class RefreshUserSuggestionsAction implements Action {
@@ -127,7 +146,14 @@ export class RefreshUserSuggestionsAction implements Action {
 }
 
 /**
- * An ngrx action to Mark User Suggestions As Visited.
+ * NgRx action to signify an error while handling {@link RefreshUserSuggestionsAction}
+ */
+export class RefreshUserSuggestionsErrorAction implements Action {
+  type = SuggestionTargetActionTypes.REFRESH_USER_SUGGESTIONS_ERROR;
+}
+
+/**
+ * A ngrx action to Mark User Suggestions As Visited.
  * Called by the ??? effect.
  */
 export class MarkUserSuggestionsAsVisitedAction implements Action {
@@ -135,13 +161,26 @@ export class MarkUserSuggestionsAsVisitedAction implements Action {
 }
 
 /**
- * An ngrx action to clear targets state.
+ * A ngrx action to clear targets state.
  */
 export class ClearSuggestionTargetsAction implements Action {
   type = SuggestionTargetActionTypes.CLEAR_TARGETS;
-}
+  payload: {
+    source: string;
+  };
 
-/* tslint:enable:max-classes-per-file */
+  /**
+   * Create a new ClearSuggestionTargetsAction.
+   *
+   * @param source
+   *    the source of suggestion targets
+   */
+  constructor(source: string) {
+    this.payload = {
+      source,
+    };
+  }
+}
 
 /**
  * Export a type alias of all actions in this action group
@@ -153,5 +192,5 @@ export type SuggestionTargetsActions
   | ClearSuggestionTargetsAction
   | MarkUserSuggestionsAsVisitedAction
   | RetrieveTargetsBySourceAction
-  | RetrieveAllTargetsErrorAction
+  | RetrieveTargetsBySourceErrorAction
   | RefreshUserSuggestionsAction;
