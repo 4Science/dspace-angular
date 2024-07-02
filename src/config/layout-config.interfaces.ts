@@ -56,6 +56,12 @@ export interface FooterConfig extends Config {
   socialMedia: SocialMedia[];
 }
 
+export interface SectionConfig extends Config {
+  enableAlternateBackground: boolean;
+  skipAlternateBackgroundRows: number;
+  startWithDarkRow: boolean;
+}
+
 export interface CrisItemPageConfig extends Config {
   [entity: string]: CrisLayoutTypeConfig;
   default: CrisLayoutTypeConfig;
@@ -83,6 +89,7 @@ export interface CrisLayoutConfig extends Config {
 export interface LayoutConfig extends Config {
   navbar: NavbarConfig;
   search: SearchLayoutConfig;
+  sections: SectionConfig;
   footer: FooterConfig;
 }
 

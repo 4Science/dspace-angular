@@ -51,6 +51,7 @@ import { COMMUNITY_MODULE_PATH } from '../../community-page/community-page-routi
 import { SearchManager } from '../../core/browse/search-manager';
 import { AlertType } from '../alert/alert-type';
 import { isPlatformServer } from '@angular/common';
+import { APP_CONFIG } from '../../../config/app-config.interface';
 
 @Component({
   selector: 'ds-search',
@@ -187,7 +188,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   /**
    * Whether to show the thumbnail preview
    */
-  @Input() showThumbnails;
+  @Input() showThumbnails: boolean;
 
   /**
    * Whether to show the view mode switch
@@ -368,7 +369,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     @Inject(PLATFORM_ID) public platformId: any,
     @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
     protected routeService: RouteService,
-    protected router: Router,) {
+    protected router: Router,
+    @Inject(APP_CONFIG) protected appConfig: any,){
     this.isXsOrSm$ = this.windowService.isXsOrSm();
   }
 
@@ -385,6 +387,8 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.initialized$.next(true);
       return;
     }
+
+    this.showThumbnails = this.showThumbnails ?? this.appConfig.browseBy.showThumbnails;
 
     if (this.useUniquePageId) {
       // Create an unique pagination id related to the instance of the SearchComponent
@@ -568,13 +572,22 @@ export class SearchComponent implements OnInit, OnDestroy {
   private retrieveSearchResults(searchOptions: PaginatedSearchOptions) {
     this.resultsRD$.next(null);
     this.lastSearchOptions = searchOptions;
-    let followLinks = [
-      followLink<Item>('thumbnail', { isOptional: true }),
-      followLink<SubmissionObject>('item', { isOptional: true },
+    let followLinks;
+    if (this.showThumbnails) {
+      followLinks = [
         followLink<Item>('thumbnail', { isOptional: true }),
-        followLink<Item>('accessStatus', { isOptional: true, shouldEmbed: environment.item.showAccessStatuses })
-      ) as any
-    ];
+        followLink<SubmissionObject>('item', { isOptional: true },
+          followLink<Item>('thumbnail', { isOptional: true }),
+          followLink<Item>('accessStatus', { isOptional: true, shouldEmbed: environment.item.showAccessStatuses })
+        ) as any
+      ];
+    } else {
+      followLinks = [
+        followLink<SubmissionObject>('item', { isOptional: true },
+          followLink<Item>('accessStatus', { isOptional: true, shouldEmbed: environment.item.showAccessStatuses })
+        ) as any
+      ];
+    }
 
     if (this.configuration === 'supervision') {
       followLinks.push(followLink<WorkspaceItem>('supervisionOrders', { isOptional: true }) as any);

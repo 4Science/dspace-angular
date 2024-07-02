@@ -1,0 +1,15 @@
+<div class="grid-wrapper" [class.max-items-4]="(totalElements$ | async) < 4">
+  <ng-container *ngFor="let item of (searchResultArray$ | async); let i = index; let last = last">
+    <img [src]="(itemToImageHrefMap$ | async)?.get(item.uuid)" alt="hidden-image" style="display: none" #image>
+    <div class="thumbnail-container"
+         [class.landscape]="(totalElements$ | async) > 6 && image.naturalWidth > maxSquareRatio * image.naturalHeight"
+         [class.portrait]="(totalElements$ | async) > 6 && image.naturalHeight > maxSquareRatio * image.naturalWidth">
+      <div class="thumbnail-inner-container w-100 h-100 position-relative" [dsBackgroundImage]="(itemToImageHrefMap$ | async)?.get(item.uuid)">
+        <ds-type-badge [object]="item"></ds-type-badge>
+        <a [routerLink]="[getItemPageRoute(item)]" class="h-100 mw-100 p-3">
+          <p class="h4 text-center m-0">{{item.firstMetadataValue('dc.title')}}</p>
+        </a>
+      </div>
+    </div>
+  </ng-container>
+</div>

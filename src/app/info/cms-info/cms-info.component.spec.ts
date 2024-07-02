@@ -47,7 +47,8 @@ describe('CmsInfoComponent', () => {
     });
     store = jasmine.createSpyObj('store', ['dispatch']);
     activatedRouteStub = {
-      data: observableOf({ schema: 'cris', qualifier: 'testQualifier' })
+      data: observableOf({ schema: 'cris', qualifier: 'testQualifier' }),
+      queryParamMap: observableOf({})
     };
     siteServiceStub = {
       find(): Observable<Site> {

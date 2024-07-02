@@ -1,33 +1,45 @@
-<div class="d-flex justify-content-center">
-  <button (click)="refreshApiCheck()" [disabled]="(loading$ | async)" type="button" class="btn btn-secondary mr-2"
-          aria-label="refresh">
-    <span aria-hidden="true">{{'submission.sections.unpaywall.refresh' | translate}}</span>
-  </button>
-  <button [disabled]="(status$ | async) !== UnpaywallSectionStatus.SUCCESSFUL || (loading$ | async)" type="button"
-          (click)="uploadFileIfNeeded()" class="btn btn-success" aria-label="import from unpaywall">
-    <span aria-hidden="true">{{'submission.sections.unpaywall.import' | translate}}</span>
-  </button>
-</div>
-<br>
-<div class="d-flex justify-content-center">
-  <ds-themed-loading *ngIf="(loading$ | async)" class="ds-themed-loading"></ds-themed-loading>
-</div>
-<div class="d-flex justify-content-center">
-  <div [ngSwitch]="(status$ | async)" *ngIf="!(loading$ | async)">
-    <div *ngSwitchCase="UnpaywallSectionStatus.SUCCESSFUL">
-      {{'submission.sections.unpaywall.status.successful' | translate}}
-    </div>
-    <div *ngSwitchCase="UnpaywallSectionStatus.NOT_FOUND">
-      {{'submission.sections.unpaywall.status.not-found' | translate}}
-    </div>
-    <div *ngSwitchCase="UnpaywallSectionStatus.PENDING">
-      {{'submission.sections.unpaywall.status.pending' | translate}}
-    </div>
-    <div *ngSwitchCase="UnpaywallSectionStatus.NO_FILE">
-      {{'submission.sections.unpaywall.status.no-file' | translate}}
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div [ngSwitch]="(status$ | async)" *ngIf="!(loading$ | async)">
+        <ng-container *ngSwitchCase="UnpaywallSectionStatus.SUCCESSFUL">
+          <ds-alert [type]="AlertType.Info"
+                    [content]="'submission.sections.unpaywall.status.successful' | translate"></ds-alert>
+        </ng-container>
+        <ng-container *ngSwitchCase="UnpaywallSectionStatus.IMPORTED">
+          <ds-alert [type]="AlertType.Success"
+                    [content]="'submission.sections.unpaywall.status.imported' | translate"></ds-alert>
+        </ng-container>
+        <ng-container *ngSwitchCase="UnpaywallSectionStatus.PENDING">
+          <ds-alert [type]="AlertType.Info"
+                    [content]="'submission.sections.unpaywall.status.pending' | translate"></ds-alert>
+        </ng-container>
+        <ng-container *ngSwitchCase="UnpaywallSectionStatus.NO_FILE">
+          <ds-alert [type]="AlertType.Warning"
+                    [content]="'submission.sections.unpaywall.status.no-file' | translate"></ds-alert>
+        </ng-container>
+        <ng-container *ngSwitchCase="UnpaywallSectionStatus.NOT_FOUND">
+          <ds-alert [type]="AlertType.Error"
+                    [content]="'submission.sections.unpaywall.status.not-found' | translate"></ds-alert>
+        </ng-container>
+      </div>
     </div>
   </div>
-
+  <div class="row justify-content-center">
+    <div class="col-12 d-flex justify-content-center">
+      <ng-container [ngSwitch]="(loading$ | async)">
+        <ds-themed-loading *ngSwitchCase="true" class="ds-themed-loading"></ds-themed-loading>
+        <ng-container *ngSwitchCase="false">
+          <button type="button" class="btn btn-secondary mr-2" aria-label="refresh"
+                  (click)="refreshApiCheck()">
+            <span aria-hidden="true">{{'submission.sections.unpaywall.refresh' | translate}}</span>
+          </button>
+          <button type="button" class="btn btn-success" aria-label="import from unpaywall"
+                  (click)="confirmImport()" [disabled]="(status$ | async) !== UnpaywallSectionStatus.SUCCESSFUL">
+            <span aria-hidden="true">{{'submission.sections.unpaywall.import' | translate}}</span>
+          </button>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
 </div>
-
-
