@@ -15,5 +15,10 @@
   // set property "layout.sections.enableAlternateBackground" to true to enable alternate background
   --ds-homepage-section-bg-color-light: #{$white};
   --ds-homepage-section-bg-color-dark: #{$light}; // not a mistake: "light" is darker than "white"
+
+  --ds-glam-carousel-caption-color: #{$ds-glam-carousel-caption-color};
+  --ds-glam-carousel-caption-background: #{$ds-glam-carousel-caption-background};
+  --ds-glam-carousel-controls-color: #{$ds-glam-carousel-controls-color};
+
 }
 
