@@ -838,6 +838,12 @@
 
   "alert.toggle.show": "Show more",
 
+
+  "artwork.listelement.badge": "Artworks",
+
+  "artwork.page.titleprefix": "Artworks",
+
+
   "audiovideo.page.titleprefix": "Audio/Video",
 
   "audiovideo.listelement.badge": "Audio/Video",
@@ -5855,6 +5861,16 @@
 
   "search.filters.entityType.Picture": "Picture",
 
+  "search.filters.entityType.Artwork": "Artwork",
+
+  "search.filters.entityType.BnmScheme": "Naturalistic-Mineralogical Heritage",
+
+  "search.filters.entityType.ScientificMaterial": "Scientific Material",
+
+  "search.filters.entityType.MusicalLibrettos": "Musical Librettos",
+
+  "search.filters.entityType.Coin": "Coin",
+
   "search.filters.has_content_in_original_bundle.true": "Yes",
 
   "search.filters.has_content_in_original_bundle.false": "No",
@@ -7853,6 +7869,7 @@
   "opera.listelement.badge": "Opera",
   "coin.listelement.badge": "Coin",
   "scientificmaterial.listelement.badge": "Scientific Material",
+  "musicallibrettos.listelement.badge": "Musical Librettos",
 
   "picture.listelement.badge": "Picture",
   "menu.section.explore_sectionfonds": "Fonds",
@@ -7966,6 +7983,36 @@
   "submission.sections.submit.progressbar.describe.scientificmaterial_references": "Scientific Material Contextual References",
 
   "submission.sections.submit.progressbar.describe.journal_file": "Journal File Details",
+
+  "submission.sections.submit.progressbar.describe.books": "Book basic information",
+
+  "submission.sections.submit.progressbar.describe.coins": "Coin basic information",
+
+  "submission.sections.submit.progressbar.describe.coins-glam-bibliography": "Coin bibliographic details",
+
+  "submission.sections.submit.progressbar.describe.artworks": "Artwork basic information",
+
+  "submission.sections.submit.progressbar.describe.artworks-glam-bibliography": "Artwork bibliographic details",
+
+  "submission.sections.submit.progressbar.describe.artworks-dc-contributor-author": "Authors basic information",
+
+  "submission.sections.submit.progressbar.describe.musical_librettos": "Musical Libretto basic information",
+
+  "submission.sections.submit.progressbar.describe.scientific_materials": "Scientific Material basic information",
+
+  "submission.sections.submit.progressbar.describe.scientific_materials-glam-bibliography": "Scientific Material bibliographic details",
+
+  "submission.sections.submit.progressbar.describe.scientific_materials-glam-inscription": "Inscription basic information",
+
+  "submission.sections.submit.progressbar.describe.scientific_materials-dc-contributor-author": "Authors basic information",
+
+  "submission.sections.submit.progressbar.describe.bnm_scheme": "Bnm scheme basic information",
+
+  "submission.sections.submit.progressbar.describe.bnm_scheme_physicalproperties": "Physical Properties",
+
+  "submission.sections.submit.progressbar.describe.bnm_scheme_geolocalization": "Geolocation",
+
+  "submission.sections.submit.progressbar.describe.bnm_scheme_relation": "Relationships",
 
   "map.coordinates-invalid": "Coordinates are not valid",
 
@@ -8643,9 +8690,9 @@
   "layout.field.label.Picture.dc.coverage.spatialabbreviation": "Province Abbreviation",
   "layout.field.label.Picture.dc.coverage.spatialpvcc": "District",
   "layout.field.label.Picture.dc.coverage.shelfmark": "Coverage Shelfmark",
-  "layout.field.label.Picture.dc.subject": "Subject",
+  "layout.field.label.Picture.glam.subject": "Subject",
   "layout.field.label.Picture.glampicture.subject.place": "Subject Place",
-  "layout.field.label.Picture.dc.subject.keywords": "Keywords",
+  "layout.field.label.Picture.dc.subject": "Keywords",
   "layout.field.label.Picture.dc.rights.license": "License",
   "layout.field.label.Picture.dc.relation.references": "References",
   "layout.field.label.Picture.dc.relation.project": "Project",
@@ -8692,6 +8739,8 @@
   "layout.field.label.Publication.dc.relation.haspart": "Contains",
   "layout.field.label.AudioVideo.dc.contributor.author": "Author(s)",
   "layout.field.label.AudioVideo.dc.contributor.contributor": "Agent(s)",
+  "layout.field.label.AudioVideo.glam.subject": "Subject",
+  "layout.field.label.AudioVideo.dc.source.content": "Content",
   "layout.field.label.AudioVideo.dc.contributor.corporatebody": "Corporate Body",
   "layout.field.label.AudioVideo.dc.relation.fonds": "Fund",
   "layout.field.label.AudioVideo.dc.relation.event": "Related Event",
@@ -8703,7 +8752,7 @@
   "layout.field.label.AudioVideo.dc.date.issued": "Date Issued",
   "layout.field.label.AudioVideo.dc.description.abstract": "Abstract",
   "layout.field.label.AudioVideo.dc.language.iso": "Language",
-  "layout.field.label.AudioVideo.dc.subject.keywords": "Keywords",
+  "layout.field.label.AudioVideo.dc.subject": "Keywords",
   "layout.field.label.AudioVideo.dc.relation.path": "Path",
   "layout.field.label.AudioVideo.dc.relation.project": "Project",
   "layout.field.label.AudioVideo.dc.relation.url": "URL",

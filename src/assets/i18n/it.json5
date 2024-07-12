@@ -1267,6 +1267,14 @@
   // "alert.toggle.show": "Show more",
   "alert.toggle.show": "Mostra di più",
 
+
+  // "artwork.listelement.badge": "Artworks",
+  "artwork.listelement.badge": "Materiale artistico",
+
+  // "artwork.page.titleprefix": "Artworks",
+  "artwork.page.titleprefix": "Materiale artistico",
+
+
   // "audiovideo.page.titleprefix": "Audio/Video",
   "audiovideo.page.titleprefix": "Audio/Video",
 
@@ -8822,6 +8830,21 @@
   // "search.filters.entityType.Picture": "Picture",
   "search.filters.entityType.Picture": "Fotografia",
 
+  // "search.filters.entityType.Artwork": "Artwork",
+  "search.filters.entityType.Artwork": "Materiale artistico",
+
+  // "search.filters.entityType.BnmScheme": "Naturalistic-Mineralogical Heritage",
+  "search.filters.entityType.BnmScheme": "Bene naturalistico-mineralogico",
+
+  // "search.filters.entityType.ScientificMaterial": "Scientific Material",
+  "search.filters.entityType.ScientificMaterial": "Materiale scientifico",
+
+  // "search.filters.entityType.MusicalLibrettos": "Musical Librettos",
+  "search.filters.entityType.MusicalLibrettos": "Libretto musicale",
+
+  // "search.filters.entityType.Coin": "Coin",
+  "search.filters.entityType.Coin": "Moneta",
+
   // "search.filters.has_content_in_original_bundle.true": "Yes",
   "search.filters.has_content_in_original_bundle.true": "Si",
 
@@ -11860,6 +11883,8 @@
   "coin.listelement.badge": "Moneta",
   // "scientificmaterial.listelement.badge": "Scientific Material",
   "scientificmaterial.listelement.badge": "Materiale scientifico",
+  // "musicallibrettos.listelement.badge": "Musical Librettos",
+  "musicallibrettos.listelement.badge": "Libretti musicali",
 
   // "picture.listelement.badge": "Picture",
   "picture.listelement.badge": "Immagine",
@@ -12054,6 +12079,51 @@
 
   // "submission.sections.submit.progressbar.describe.journal_file": "Journal File Details",
   "submission.sections.submit.progressbar.describe.journal_file": "Informazioni di dettaglio",
+
+  // "submission.sections.submit.progressbar.describe.books": "Book basic information",
+  "submission.sections.submit.progressbar.describe.books": "Informazioni di base",
+
+  // "submission.sections.submit.progressbar.describe.coins": "Coin basic information",
+  "submission.sections.submit.progressbar.describe.coins": "Informazioni di base",
+
+  // "submission.sections.submit.progressbar.describe.coins-glam-bibliography": "Coin bibliographic details",
+  "submission.sections.submit.progressbar.describe.coins-glam-bibliography": "Dettagli bibliografici della Moneta",
+
+  // "submission.sections.submit.progressbar.describe.artworks": "Artwork basic information",
+  "submission.sections.submit.progressbar.describe.artworks": "Informazioni di base",
+
+  // "submission.sections.submit.progressbar.describe.artworks-glam-bibliography": "Artwork bibliographic details",
+  "submission.sections.submit.progressbar.describe.artworks-glam-bibliography": "Dettagli bibliografici dell'Opera",
+
+  // "submission.sections.submit.progressbar.describe.artworks-dc-contributor-author": "Authors basic information",
+  "submission.sections.submit.progressbar.describe.artworks-dc-contributor-author": "Informazioni di base dell'Autore",
+
+  // "submission.sections.submit.progressbar.describe.musical_librettos": "Musical Libretto basic information",
+  "submission.sections.submit.progressbar.describe.musical_librettos": "Informazioni di base",
+
+  // "submission.sections.submit.progressbar.describe.scientific_materials": "Scientific Material basic information",
+  "submission.sections.submit.progressbar.describe.scientific_materials": "Informazioni di base",
+
+  // "submission.sections.submit.progressbar.describe.scientific_materials-glam-bibliography": "Scientific Material bibliographic details",
+  "submission.sections.submit.progressbar.describe.scientific_materials-glam-bibliography": "Dettagli bibliografici dell'oggetto",
+
+  // "submission.sections.submit.progressbar.describe.scientific_materials-glam-inscription": "Inscription basic information",
+  "submission.sections.submit.progressbar.describe.scientific_materials-glam-inscription": "Trascrizione dell'iscrizione",
+
+  // "submission.sections.submit.progressbar.describe.scientific_materials-dc-contributor-author": "Authors basic information",
+  "submission.sections.submit.progressbar.describe.scientific_materials-dc-contributor-author": "Informazioni di base del Creatore",
+
+  // "submission.sections.submit.progressbar.describe.bnm_scheme": "Bnm scheme basic information",
+  "submission.sections.submit.progressbar.describe.bnm_scheme": "Bnm schema informazioni di base",
+
+  // "submission.sections.submit.progressbar.describe.bnm_scheme_physicalproperties": "Physical Properties",
+  "submission.sections.submit.progressbar.describe.bnm_scheme_physicalproperties": "Proprietà Fisiche",
+
+  // "submission.sections.submit.progressbar.describe.bnm_scheme_geolocalization": "Geolocation",
+  "submission.sections.submit.progressbar.describe.bnm_scheme_geolocalization": "Geolocalizzazione",
+
+  // "submission.sections.submit.progressbar.describe.bnm_scheme_relation": "Relationships",
+  "submission.sections.submit.progressbar.describe.bnm_scheme_relation": "Relazioni",
 
   // "map.coordinates-invalid": "Coordinates are not valid",
   "map.coordinates-invalid": "Le coordinate non sono valide",
@@ -13358,12 +13428,12 @@
   "layout.field.label.Picture.dc.coverage.spatialpvcc": "Comune",
   // "layout.field.label.Picture.dc.coverage.shelfmark": "Coverage Shelfmark",
   "layout.field.label.Picture.dc.coverage.shelfmark": "Luogo di Conservazione",
-  // "layout.field.label.Picture.dc.subject": "Subject",
-  "layout.field.label.Picture.dc.subject": "Indicazioni sul soggetto",
+  // "layout.field.label.Picture.glam.subject": "Subject",
+  "layout.field.label.Picture.glam.subject": "Indicazioni sul soggetto",
   // "layout.field.label.Picture.glampicture.subject.place": "Subject Place",
   "layout.field.label.Picture.glampicture.subject.place": "Ubicazione del soggetto ritratto",
-  // "layout.field.label.Picture.dc.subject.keywords": "Keywords",
-  "layout.field.label.Picture.dc.subject.keywords": "Parole chiave",
+  // "layout.field.label.Picture.dc.subject": "Keywords",
+  "layout.field.label.Picture.dc.subject": "Parole chiave",
   // "layout.field.label.Picture.dc.rights.license": "License",
   "layout.field.label.Picture.dc.rights.license": "Licenza",
   // "layout.field.label.Picture.dc.relation.references": "References",
@@ -13455,7 +13525,11 @@
   // "layout.field.label.AudioVideo.dc.contributor.author": "Author(s)",
   "layout.field.label.AudioVideo.dc.contributor.author": "Autore",
   // "layout.field.label.AudioVideo.dc.contributor.contributor": "Agent(s)",
-  "layout.field.label.AudioVideo.dc.contributor.contributor": "Agente",
+  "layout.field.label.AudioVideo.dc.contributor.contributor": "Altro autore",
+  // "layout.field.label.AudioVideo.glam.subject": "Subject",
+  "layout.field.label.AudioVideo.glam.subject": "Soggetto / Argomento",
+  // "layout.field.label.AudioVideo.dc.source.content": "Content",
+  "layout.field.label.AudioVideo.dc.source.content": "Ambiti e contenuto",
   // "layout.field.label.AudioVideo.dc.contributor.corporatebody": "Corporate Body",
   "layout.field.label.AudioVideo.dc.contributor.corporatebody": "Soggetto produttore/Organizzazione",
   // "layout.field.label.AudioVideo.dc.relation.fonds": "Fund",
@@ -13478,8 +13552,8 @@
   "layout.field.label.AudioVideo.dc.description.abstract": "Abstract",
   // "layout.field.label.AudioVideo.dc.language.iso": "Language",
   "layout.field.label.AudioVideo.dc.language.iso": "Lingua",
-  // "layout.field.label.AudioVideo.dc.subject.keywords": "Keywords",
-  "layout.field.label.AudioVideo.dc.subject.keywords": "Parole chiave",
+  // "layout.field.label.AudioVideo.dc.subject": "Keywords",
+  "layout.field.label.AudioVideo.dc.subject": "Parole chiave / keywords",
   // "layout.field.label.AudioVideo.dc.relation.path": "Path",
   "layout.field.label.AudioVideo.dc.relation.path": "Percorso",
   // "layout.field.label.AudioVideo.dc.relation.project": "Project",
