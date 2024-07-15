@@ -5,9 +5,22 @@
     $title-horizontal-margin: -35px; // allow to overlap arrow wrapper
     $title-line-clamp: 2;
 
-    h1.carousel-header {
-      font-size: 2rem;
+
+    // Carousel height
+    @include media-breakpoint-up(lg) {
+      .image-column, .caption-column, .caption-wrapper {
+        height: var(--ds-glam-carousel-height);
+      }
     }
+    @include media-breakpoint-down(md) {
+      .image-column {
+        height: var(--ds-glam-carousel-mobile-image-height);
+      }
+      .caption-column, .caption-wrapper {
+        height: var(--ds-glam-carousel-mobile-caption-height);
+      }
+    }
+
 
     .image-column {
 
@@ -51,6 +64,7 @@
         white-space: pre-wrap;
         overflow: hidden;
         min-height: 2lh;
+        font-size: 2rem;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: $title-line-clamp;
       }

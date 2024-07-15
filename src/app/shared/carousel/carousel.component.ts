@@ -83,7 +83,7 @@ export class CarouselComponent implements OnInit {
 
   constructor(
     protected bitstreamDataService: BitstreamDataService,
-    @Inject(NativeWindowService) private _window: NativeWindowRef,
+    @Inject(NativeWindowService) protected _window: NativeWindowRef,
   ) {
   }
 

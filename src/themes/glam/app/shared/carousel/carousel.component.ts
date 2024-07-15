@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { CarouselComponent as BaseComponent} from '../../../../../app/shared/carousel/carousel.component';
+import { BitstreamDataService } from '../../../../../app/core/data/bitstream-data.service';
+import { NativeWindowRef, NativeWindowService } from '../../../../../app/core/services/window.service';
+import { DOCUMENT } from '@angular/common';
 
 /**
  * Component representing the Carousel component section.
@@ -19,8 +22,27 @@ export class CarouselComponent extends BaseComponent implements OnInit {
 
   carouselHeight: string;
 
+  constructor(
+    protected bitstreamDataService: BitstreamDataService,
+    @Inject(NativeWindowService) protected _window: NativeWindowRef,
+    @Inject(DOCUMENT) private _document: Document,
+  ) {
+    super(bitstreamDataService, _window);
+  }
+
   ngOnInit() {
     super.ngOnInit();
+
+    if (this.carouselOptions.keepAspectRatio) {
+      const defaultAspectRatio = 2 / 3;
+      const aspectRatio = isNaN(this.carouselOptions.aspectRatio) ? defaultAspectRatio : this.carouselOptions.aspectRatio;
+      this._document.documentElement.style.setProperty('--ds-carousel-height', `calc(100vw * ${aspectRatio})`);
+    } else {
+      const defaultHeightPx = 680;
+      const height = this.carouselOptions.carouselHeightPx ?? defaultHeightPx;
+      this._document.documentElement.style.setProperty('--ds-carousel-height', `${height}px`);
+    }
+
     this.carouselHeight = this.carouselOptions.keepAspectRatio ?
       `calc(100vw / ${ this.carouselOptions.aspectRatio})` : `${this.carouselOptions.carouselHeightPx}px`;
   }

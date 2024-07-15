@@ -7,7 +7,7 @@
       <div class="row no-gutters">
         <!-- Flexbox requires height to be applied to both columns separately, and to the central nested column of the right column -->
         <ng-container *ngIf="itemToImageHrefMap.get(item.indexableObject.uuid) as href; else placeholderImage">
-          <div class="col-lg-8 image-column" [style.height]="carouselHeight"
+          <div class="col-lg-8 image-column"
                [ngStyle]="carouselOptions.showBlurryBackdrop ? {'background-image': getBackgroundImage(href)} : {}">
             <div class="image-wrapper d-flex align-items-center justify-content-center"
                  [class.blurry-backdrop]="carouselOptions.showBlurryBackdrop">
@@ -18,16 +18,16 @@
           </div>
         </ng-container>
         <ng-template #placeholderImage>
-          <div class="col-lg-8 image-column placeholder-image" [style.height]="carouselHeight"></div>
+          <div class="col-lg-8 image-column placeholder-image"></div>
         </ng-template>
-        <div class="col-lg-4 caption-column px-2" [style.height]="carouselHeight">
+        <div class="col-lg-4 caption-column px-2">
           <div class="d-flex flex-row align-items-stretch align-items-center">
             <!-- left column -->
             <div *ngIf="items.length > 1" class="arrow-wrapper" (click)="carousel.prev()">
               <i class="fa fa-arrow-left"></i>
             </div>
             <!-- central column -->
-            <div class="caption-wrapper flex-fill d-flex flex-column justify-content-center gapy-3 py-2" [style.height]="carouselHeight">
+            <div class="caption-wrapper flex-fill d-flex flex-column justify-content-center gapy-3 py-2">
               <h2 class="h1 carousel-header" [class]="carouselOptions.titleStyle" *ngIf="item.indexableObject.metadata[title]">
                 {{item.indexableObject.metadata[title][0].value}}
               </h2>
