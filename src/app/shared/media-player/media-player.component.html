@@ -5,11 +5,11 @@
         <ds-themed-loading [spinner]="true" [showMessage]="false"></ds-themed-loading>
       </div>
       <div #videoContainerRef>
-        <div id="video-content-wrapper" *ngIf="(isVideoPlayerInitialized$ | async) && (isVideo$ | async)">
+        <div id="video-content-wrapper h-100 w-100" *ngIf="(isVideoPlayerInitialized$ | async) && (isVideo$ | async)">
           <video class="video-js vjs-big-play-centered" id="video_player" controls playsinline
                  preload="none"></video>
         </div>
-        <div id="audio-content-wrapper" *ngIf="(isAudioPlayerInitialized$ | async) && !(isVideo$ | async)">
+        <div id="audio-content-wrapper h-100 w-100" *ngIf="(isAudioPlayerInitialized$ | async) && !(isVideo$ | async)">
           <audio class="video-js" id="audio_player" controls preload="none"></audio>
         </div>
       </div>

@@ -1,0 +1,82 @@
+div.thumbnail-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0.25em;
+
+  a {
+    flex: 1;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+  }
+
+  ds-type-badge {
+    position: absolute;
+    top: .5em;
+    right: .5em;
+    font-size: 125%;
+  }
+
+  // Size and position
+
+  @include media-breakpoint-down(xs) {
+    &:not(.landscape) {
+      aspect-ratio: 1 / 0.8;
+    }
+
+    &, &.landscape {
+      aspect-ratio: 1 / 0.4;
+    }
+  }
+
+  @include media-breakpoint-up(sm) {
+
+    &:not(.portrait):not(.landscape) {
+      aspect-ratio: 1;
+      order: 3; // square elements should be used as hole fillers
+    }
+
+    &.landscape {
+      aspect-ratio: 2 / 1;
+      order: 2; // landscape elements should be placed after portrait elements and before square elements
+      grid-row-end: span 1;
+      grid-column-end: span 2;
+    }
+
+    &.portrait {
+      aspect-ratio: 1 / 2;
+      order: 1; // portrait elements should be placed first in order to prevent holes on the bottom
+      grid-row-end: span 2;
+      grid-column-end: span 1;
+    }
+  }
+
+}
+
+.grid-wrapper {
+  margin: -.25em;
+  display: grid;
+  grid-auto-flow: dense;
+
+  @include media-breakpoint-down(xs) {
+    grid-template-columns: 1fr;
+  }
+
+  @include media-breakpoint-only(sm) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    &.max-items-4 {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
+  }
+
+}
+
+p {
+  background-color: rgba(255, 255, 255, .7);
+  padding: .6em;
+  border-radius: $border-radius;
+}

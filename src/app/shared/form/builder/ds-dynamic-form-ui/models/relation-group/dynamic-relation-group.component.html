@@ -1,13 +1,6 @@
 <div class="pt-2">
-  <div class="d-flex">
+  <div class="d-lg-flex">
     <ds-themed-loading *ngIf="!chips" [showMessage]="false"></ds-themed-loading>
-    <div *ngIf="chips && !chips.hasItems()">
-      <input type="text"
-             class="border-0 form-control-plaintext tag-input mt-1 mb-1 pl-2 text-muted"
-             readonly
-             tabindex="-1"
-             value="{{'form.no-value' | translate}}">
-    </div>
     <ds-chips
       *ngIf="chips && chips.hasItems()"
       [chips]="chips"
@@ -15,10 +8,18 @@
       [showIcons]="true"
       (selected)="onChipSelected($event)"></ds-chips>
     <button type="button" class="ds-form-add-more btn btn-link"
-            title="{{'form.add' | translate}}"
+            [title]="'form.add' | translate"
             [disabled]="model.readOnly"
+            [attr.aria-label]="'form.add' | translate"
             (click)="openModal()">
-      <span attr.aria-label="{{'form.add' | translate}}"><i class="fas fa-plus"></i> {{'form.add' | translate}}</span>
+      <span class="text-nowrap"><i class="fas fa-plus"></i> {{'form.add' | translate}}</span>
     </button>
+  </div>
+  <div *ngIf="chips && !chips.hasItems()">
+    <input type="text"
+           class="border-0 form-control-plaintext tag-input mt-1 mb-1 pl-2 text-muted"
+           readonly
+           tabindex="-1"
+           [value]="'form.no-value' | translate">
   </div>
 </div>

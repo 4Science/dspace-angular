@@ -1,55 +1,90 @@
 .footer-section {
-    .footer-top {
-        padding: 25px 0;
-        border-top: solid 2px #cddce2;
-        border-bottom: solid 2px #cddce2;
-
-        .footer-link {
-            display: block;
-            padding: 0.25rem 0.5rem;
-            padding-left: 0;
-            padding-right: 0;
-            font-size: 14px;
-            color: #676c71;
-
-            &:hover {
-                color: #000;
-                text-decoration: none;
-            }
-        }
-
-        .title {
-            text-transform: uppercase;
-        }
-        .border-lr{
-            border-left: solid 2px #cddce2;
-            border-right: solid 2px #cddce2;
-        }
+  .footer-top {
+    padding: 25px 0;
+    border-top: solid 2px #cddce2;
+    border-bottom: solid 2px #cddce2;
 
 
+    // TODO: rename and move to global configuration
+    --top-footer-horizontal-gap: 1rem;
+    --top-footer-vertical-gap: 1.5rem;
+    --institution-max-width: 140px;
+    --institution-max-height: 80px;
+    --institution-gap: 1rem;
+    --institutions-per-row: 2;
 
-        .institution-img {
-            img {
-                width: 120px;
-            }
-        }
+
+    // Uncomment lines below to add a margin between columns
+    //@include media-breakpoint-up(lg) { // remove to add border on small screens as well
+    //  --top-footer-separator-width: 1px;
+    //  --top-footer-separator-color: var(--bs-gray-400);
+    //  .clip-borders {
+    //    overflow: clip;
+    //    & > .flex-wrapper {
+    //      margin-right: calc((var(--top-footer-horizontal-gap) + var(--top-footer-separator-width)) * -1);
+    //    }
+    //  }
+    //  .footer-element {
+    //    padding-right: var(--top-footer-horizontal-gap);
+    //    border-right: solid var(--top-footer-separator-width) var(--top-footer-separator-color);
+    //  }
+    //}
+    // Uncomment lines above to add a margin between columns
+
+
+    .flex-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      column-gap: var(--top-footer-horizontal-gap);
+      row-gap: var(--top-footer-vertical-gap);
+      flex: 1 1 auto;
     }
 
-    .footer-copyrights {
-        border-bottom: solid 2px #cddce2;
-        color: #676c71;
-
-        img.logo-4science {
-          vertical-align: -10%;
-        }
-
-        a {
-            color: #676c71;
-            text-decoration: none;
-
-            &:hover {
-                color: #000;
-            }
-        }
+    .footer-element {
+      flex: 1 1 auto;
     }
+
+    .footer-link {
+      display: block;
+      padding: 0.25rem 0;
+      font-size: 14px;
+      color: #676c71;
+
+      &:hover {
+        color: #000;
+        text-decoration: none;
+      }
+    }
+
+    .title {
+      text-transform: uppercase;
+    }
+
+    .institution-img-wrapper {
+      max-width: calc((var(--institution-max-width) + var(--institution-gap)) * var(--institutions-per-row));
+      gap: var(--institution-gap);
+      img {
+        max-width: var(--institution-max-width);
+        max-height: var(--institution-max-height);
+      }
+    }
+  }
+
+  .footer-copyrights {
+    color: #676c71;
+
+    img.logo-4science {
+      vertical-align: -10%;
+    }
+
+    a {
+      color: #676c71;
+      text-decoration: none;
+
+      &:hover {
+        color: #000;
+      }
+    }
+  }
 }

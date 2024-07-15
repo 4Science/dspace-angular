@@ -11,5 +11,9 @@
   --ds-navbar-link-color: #{$darker};
   --ds-navbar-link-color-hover: #{darken($darker, 15%)};
   --ds-cris-layout-sidebar-menu-active-color: #{$darker};
+
+  // set property "layout.sections.enableAlternateBackground" to true to enable alternate background
+  --ds-homepage-section-bg-color-light: #{$white};
+  --ds-homepage-section-bg-color-dark: #{$light}; // not a mistake: "light" is darker than "white"
 }
 

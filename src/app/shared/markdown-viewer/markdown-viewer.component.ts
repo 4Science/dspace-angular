@@ -7,4 +7,9 @@ import { Component, Input } from '@angular/core';
 })
 export class MarkdownViewerComponent {
   @Input() value: string;
+
+  format(text: string) {
+    return text.replace(/\n/, '<br/>');
+  }
+
 }

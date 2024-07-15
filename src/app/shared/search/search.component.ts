@@ -30,7 +30,7 @@ import { SearchConfigurationService } from '../../core/shared/search/search-conf
 import { SearchService } from '../../core/shared/search/search.service';
 import { currentPath } from '../utils/route.utils';
 import { Context } from '../../core/shared/context.model';
-import { SortOptions } from '../../core/cache/models/sort-options.model';
+import {SortDirection, SortOptions} from '../../core/cache/models/sort-options.model';
 import { SearchConfig } from '../../core/shared/search/search-filters/search-config.model';
 import { SearchConfigurationOption } from './search-switch-configuration/search-configuration-option.model';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
@@ -51,6 +51,7 @@ import { COMMUNITY_MODULE_PATH } from '../../community-page/community-page-routi
 import { SearchManager } from '../../core/browse/search-manager';
 import { AlertType } from '../alert/alert-type';
 import { isPlatformServer } from '@angular/common';
+import { APP_CONFIG } from '../../../config/app-config.interface';
 
 @Component({
   selector: 'ds-search',
@@ -187,7 +188,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   /**
    * Whether to show the thumbnail preview
    */
-  @Input() showThumbnails;
+  @Input() showThumbnails: boolean;
 
   /**
    * Whether to show the view mode switch
@@ -368,7 +369,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     @Inject(PLATFORM_ID) public platformId: any,
     @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
     protected routeService: RouteService,
-    protected router: Router,) {
+    protected router: Router,
+    @Inject(APP_CONFIG) protected appConfig: any,){
     this.isXsOrSm$ = this.windowService.isXsOrSm();
   }
 
@@ -380,10 +382,13 @@ export class SearchComponent implements OnInit, OnDestroy {
    * If something changes, update the list of scopes for the dropdown
    */
   ngOnInit(): void {
+    let defaultSortOrder = '';
     if (!this.renderOnServerSide && isPlatformServer(this.platformId)) {
       this.initialized$.next(true);
       return;
     }
+
+    this.showThumbnails = this.showThumbnails ?? this.appConfig.browseBy.showThumbnails;
 
     if (this.useUniquePageId) {
       // Create an unique pagination id related to the instance of the SearchComponent
@@ -409,12 +414,17 @@ export class SearchComponent implements OnInit, OnDestroy {
     const searchSortOptions$: Observable<SortOptions[]> = configuration$.pipe(
       switchMap((configuration: string) => this.searchConfigService
         .getConfigurationSearchConfig(configuration)),
-      map((searchConfig: SearchConfig) => this.searchConfigService.getConfigurationSortOptions(searchConfig)),
+      map((searchConfig: SearchConfig) => {
+        defaultSortOrder = searchConfig?.defaultSortOption?.sortOrder;
+        return this.searchConfigService.getConfigurationSortOptions(searchConfig);
+      }),
       distinctUntilChanged()
     );
     const sortOption$: Observable<SortOptions> = searchSortOptions$.pipe(
       switchMap((searchSortOptions: SortOptions[]) => {
-        const defaultSort: SortOptions = searchSortOptions[0];
+        defaultSortOrder = !defaultSortOrder ? searchSortOptions[0].direction : defaultSortOrder;
+        const sortDirection = defaultSortOrder.toUpperCase() as SortDirection;
+        const defaultSort: SortOptions = new SortOptions(searchSortOptions[0].field, sortDirection);
         return this.searchConfigService.getCurrentSort(this.paginationId, defaultSort);
       }),
       distinctUntilChanged()
@@ -562,13 +572,22 @@ export class SearchComponent implements OnInit, OnDestroy {
   private retrieveSearchResults(searchOptions: PaginatedSearchOptions) {
     this.resultsRD$.next(null);
     this.lastSearchOptions = searchOptions;
-    let followLinks = [
-      followLink<Item>('thumbnail', { isOptional: true }),
-      followLink<SubmissionObject>('item', { isOptional: true },
+    let followLinks;
+    if (this.showThumbnails) {
+      followLinks = [
         followLink<Item>('thumbnail', { isOptional: true }),
-        followLink<Item>('accessStatus', { isOptional: true, shouldEmbed: environment.item.showAccessStatuses })
-      ) as any
-    ];
+        followLink<SubmissionObject>('item', { isOptional: true },
+          followLink<Item>('thumbnail', { isOptional: true }),
+          followLink<Item>('accessStatus', { isOptional: true, shouldEmbed: environment.item.showAccessStatuses })
+        ) as any
+      ];
+    } else {
+      followLinks = [
+        followLink<SubmissionObject>('item', { isOptional: true },
+          followLink<Item>('accessStatus', { isOptional: true, shouldEmbed: environment.item.showAccessStatuses })
+        ) as any
+      ];
+    }
 
     if (this.configuration === 'supervision') {
       followLinks.push(followLink<WorkspaceItem>('supervisionOrders', { isOptional: true }) as any);
