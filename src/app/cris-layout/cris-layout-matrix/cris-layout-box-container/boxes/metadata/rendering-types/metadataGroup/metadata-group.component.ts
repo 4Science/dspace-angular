@@ -7,6 +7,7 @@ import { isNotEmpty } from '../../../../../../../shared/empty.util';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
 import { BehaviorSubject } from 'rxjs';
 import { LoadMoreService, NestedMetadataGroupEntry } from '../../../../../../services/load-more.service';
+import { TranslationUtilityService } from '../../../../../../services/translation.service';
 
 @Component({
   template: ''
@@ -66,6 +67,7 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
     @Inject('tabNameProvider') public tabNameProvider: string,
     protected translateService: TranslateService,
     protected loadMoreService: LoadMoreService,
+    protected translationUtilityService: TranslationUtilityService
   ) {
     super(fieldProvider, itemProvider, renderingSubTypeProvider, tabNameProvider, translateService);
   }
@@ -120,14 +122,13 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
    * Returns a string representing the label of field if exists
    */
   getLabel(field: LayoutField): string {
-    const fieldLabelI18nKey = this.fieldI18nPrefix + field.label;
-    const header: string = this.translateService.instant(fieldLabelI18nKey);
-    if (header === fieldLabelI18nKey) {
-      // if translation does not exist return the value present in the header property
-      return this.translateService.instant(field.label);
-    } else {
-      return header;
-    }
+    return this.translationUtilityService.getTranslation(this.fieldI18nPrefix + this.item.entityType + '.[' + field.metadata + ']') ??
+      this.translationUtilityService.getTranslation(this.fieldI18nPrefix + this.item.entityType + '.[' + field.metadata + ']') ??
+      this.translationUtilityService.getTranslation(this.fieldI18nPrefix + this.item.entityType + '.' + field.metadata) ??
+      this.translationUtilityService.getTranslation(this.fieldI18nPrefix + '[' + field.metadata + ']') ??
+      this.translationUtilityService.getTranslation(this.fieldI18nPrefix + field.label) ??
+      field.label ??
+      field.metadata;
   }
 
   ngOnDestroy(): void {
