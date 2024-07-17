@@ -61,8 +61,7 @@ export class ContextMenuComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private configurationService: ConfigurationDataService,
     private injector: Injector
-  ) {
-  }
+  ) { }
 
   ngOnInit(): void {
     this.objectInjector = Injector.create({
