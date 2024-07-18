@@ -28,5 +28,7 @@
   </div>
 </nav>
 <div class="search-navbar-wrapper" *ngIf="!(isXsOrSm$ | async)">
-  <ds-themed-search-navbar class="navbar-collapsed"></ds-themed-search-navbar>
+  <div class="container-fluid">
+    <ds-themed-search-navbar class="navbar-collapsed"></ds-themed-search-navbar>
+  </div>
 </div>
