@@ -17,7 +17,6 @@ import { MarkdownViewerModule } from '../shared/markdown-viewer/markdown-viewer.
 import { MediaPlayerModule } from '../shared/media-player/media-player.module';
 import { MetricsModule } from '../shared/metric/metrics.module';
 import { OpenStreetMapModule } from '../shared/open-street-map/open-street-map.module';
-import { SearchComponent } from '../shared/search/search.component';
 import { SearchModule } from '../shared/search/search.module';
 import { SharedModule } from '../shared/shared.module';
 import { CrisLayoutComponent } from './cris-layout.component';
@@ -54,6 +53,7 @@ import { InlineComponent } from './cris-layout-matrix/cris-layout-box-container/
 import { TableComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/metadataGroup/table/table.component';
 import { OpenStreetMapRenderingComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/open-street-map/open-street-map-rendering.component';
 import { OrcidComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/orcid/orcid.component';
+import { SearchComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/search/search.component';
 import { TagComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/tag/tag.component';
 import { TagBrowseComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/tag-browse/tag-browse.component';
 import { TagSearchComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/tag-search/tag-search.component';

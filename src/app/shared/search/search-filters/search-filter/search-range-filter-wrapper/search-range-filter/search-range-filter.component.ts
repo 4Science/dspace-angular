@@ -33,6 +33,7 @@ import {
   FILTER_CONFIG,
   IN_PLACE_SEARCH,
   REFRESH_FILTER,
+  SCOPE,
   SearchFilterService,
 } from '../../../../../../core/shared/search/search-filter.service';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../../my-dspace-page/my-dspace-page.component';
@@ -111,10 +112,11 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
     @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
     @Inject(IN_PLACE_SEARCH) public inPlaceSearch: boolean,
     @Inject(FILTER_CONFIG) public filterConfig: SearchFilterConfig,
-    @Inject(PLATFORM_ID) protected platformId: any,
     @Inject(REFRESH_FILTER) public refreshFilters: BehaviorSubject<boolean>,
+    @Inject(SCOPE) public scope: string,
+    @Inject(PLATFORM_ID) protected platformId: any,
   ) {
-    super(searchService, filterService, rdbs, router, searchConfigService, inPlaceSearch, filterConfig, refreshFilters);
+    super(searchService, filterService, rdbs, router, searchConfigService, inPlaceSearch, filterConfig, refreshFilters, scope);
   }
 
   /**

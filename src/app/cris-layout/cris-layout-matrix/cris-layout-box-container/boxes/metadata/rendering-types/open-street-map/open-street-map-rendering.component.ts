@@ -96,10 +96,10 @@ export class OpenStreetMapRenderingComponent extends RenderingTypeValueModelComp
               coordinates: coordinates,
             };
             this.place.next(place);
-            if (err.message === LocationErrorCodes.API_ERROR) {
-              console.error(err.message);
+            if ((err as Error)?.message === LocationErrorCodes.API_ERROR) {
+              console.error((err as Error).message);
             } else {
-              console.warn(err.message);
+              console.warn((err as Error).message);
             }
           },
         });
@@ -118,11 +118,11 @@ export class OpenStreetMapRenderingComponent extends RenderingTypeValueModelComp
           this.place.next(place);
         },
         error: (err: unknown) => {
-          this.invalidLocationErrorCode.next(err.message); // either LOCATION_NOT_FOUND or API_ERROR
-          if (err.message === LocationErrorCodes.API_ERROR) {
-            console.error(err.message);
+          this.invalidLocationErrorCode.next((err as Error)?.message); // either LOCATION_NOT_FOUND or API_ERROR
+          if ((err as Error)?.message === LocationErrorCodes.API_ERROR) {
+            console.error((err as Error).message);
           } else {
-            console.warn(err.message);
+            console.warn((err as Error).message);
           }
         },
       });

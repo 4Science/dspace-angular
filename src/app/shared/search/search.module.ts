@@ -29,8 +29,8 @@ import { SearchFacetSelectedOptionComponent } from './search-filters/search-filt
 import { SearchFacetFilterWrapperComponent } from './search-filters/search-filter/search-facet-filter-wrapper/search-facet-filter-wrapper.component';
 import { SearchFilterComponent } from './search-filters/search-filter/search-filter.component';
 import { SearchHierarchyFilterComponent } from './search-filters/search-filter/search-hierarchy-filter/search-hierarchy-filter.component';
-import { SearchRangeFilterComponent } from './search-filters/search-filter/search-range-filter/search-range-filter.component';
 import { SearchRangeDatepickerFilterComponent } from './search-filters/search-filter/search-range-filter-wrapper/search-range-filter/search-range-datepicker-filter/search-range-datepicker-filter.component';
+import { SearchRangeFilterComponent } from './search-filters/search-filter/search-range-filter-wrapper/search-range-filter/search-range-filter.component';
 import { SearchRangeFilterWrapperComponent } from './search-filters/search-filter/search-range-filter-wrapper/search-range-filter-wrapper.component';
 import { SearchTextFilterComponent } from './search-filters/search-filter/search-text-filter/search-text-filter.component';
 import { SearchFiltersComponent } from './search-filters/search-filters.component';

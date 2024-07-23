@@ -107,6 +107,7 @@ import { Root } from './data/root.model';
 import { RootDataService } from './data/root-data.service';
 import { SearchResponseParsingService } from './data/search-response-parsing.service';
 import { SiteDataService } from './data/site-data.service';
+import { UnpaywallItemService } from './data/unpaywall-item.service';
 import { VersionDataService } from './data/version-data.service';
 import { VersionHistoryDataService } from './data/version-history-data.service';
 import { WorkflowActionDataService } from './data/workflow-action-data.service';

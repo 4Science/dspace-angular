@@ -61,6 +61,7 @@ import { MetadataInformationComponent } from './sections/sherpa-policies/metadat
 import { PublicationInformationComponent } from './sections/sherpa-policies/publication-information/publication-information.component';
 import { PublisherPolicyComponent } from './sections/sherpa-policies/publisher-policy/publisher-policy.component';
 import { SubmissionSectionSherpaPoliciesComponent } from './sections/sherpa-policies/section-sherpa-policies.component';
+import { SubmissionSectionUnpaywallComponent } from './sections/unpaywall/submission-section-unpaywall.component';
 import { SubmissionSectionUploadAccessConditionsComponent } from './sections/upload/accessConditions/submission-section-upload-access-conditions.component';
 import { SubmissionSectionUploadFileEditComponent } from './sections/upload/file/edit/section-upload-file-edit.component';
 import { SubmissionSectionUploadFileComponent } from './sections/upload/file/section-upload-file.component';

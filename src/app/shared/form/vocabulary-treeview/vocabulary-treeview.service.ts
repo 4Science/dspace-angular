@@ -15,6 +15,7 @@ import { RemoteData } from 'src/app/core/data/remote-data';
 
 import { PaginatedList } from '../../../core/data/paginated-list.model';
 import {
+  getFirstCompletedRemoteData,
   getFirstSucceededRemoteDataPayload,
   getFirstSucceededRemoteListPayload,
 } from '../../../core/shared/operators';
@@ -24,6 +25,7 @@ import { VocabularyEntryDetail } from '../../../core/submission/vocabularies/mod
 import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
 import { VocabularyService } from '../../../core/submission/vocabularies/vocabulary.service';
 import {
+  hasValue,
   isEmpty,
   isNotEmpty,
 } from '../../empty.util';
