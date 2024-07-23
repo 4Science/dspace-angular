@@ -1,20 +1,29 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { MetadataContainerComponent } from './metadata-container.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate-loader.mock';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
+
+import { BitstreamDataService } from '../../../../../../../core/data/bitstream-data.service';
+import { LayoutField } from '../../../../../../../core/layout/models/box.model';
+import { Bitstream } from '../../../../../../../core/shared/bitstream.model';
 import { Item } from '../../../../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
-import { boxMetadata } from '../../../../../../../shared/testing/box.mock';
-import { By } from '@angular/platform-browser';
-import { FieldRenderingType } from '../../rendering-types/metadata-box.decorator';
-import { LayoutField } from '../../../../../../../core/layout/models/box.model';
-import { BitstreamDataService } from '../../../../../../../core/data/bitstream-data.service';
+import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate-loader.mock';
 import { createSuccessfulRemoteDataObject$ } from '../../../../../../../shared/remote-data.utils';
+import { boxMetadata } from '../../../../../../../shared/testing/box.mock';
 import { createPaginatedList } from '../../../../../../../shared/testing/utils.test';
-import { Bitstream } from '../../../../../../../core/shared/bitstream.model';
-import { LoadMoreService, NestedMetadataGroupEntry } from '../../../../../../services/load-more.service';
+import {
+  LoadMoreService,
+  NestedMetadataGroupEntry,
+} from '../../../../../../services/load-more.service';
+import { FieldRenderingType } from '../../rendering-types/metadata-box.decorator';
+import { MetadataContainerComponent } from './metadata-container.component';
 
 describe('MetadataContainerComponent', () => {
   let component: MetadataContainerComponent;
@@ -25,7 +34,7 @@ describe('MetadataContainerComponent', () => {
     'language': null,
     'authority': null,
     'confidence': -1,
-    'place': 0
+    'place': 0,
   });
 
   const testItem = Object.assign(new Item(),
@@ -35,50 +44,50 @@ describe('MetadataContainerComponent', () => {
         'dc.title': [metadataValue],
         'dc.contributor.author': [
           {
-            value: 'Donohue, Tim'
+            value: 'Donohue, Tim',
           },
           {
-            value: 'Surname, Name'
-          }
+            value: 'Surname, Name',
+          },
         ],
         'oairecerif.author.affiliation': [
           {
-            value: 'Duraspace'
+            value: 'Duraspace',
           },
           {
-            value: '4Science'
-          }
-        ]
+            value: '4Science',
+          },
+        ],
       },
       uuid: 'test-item-uuid',
-    }
+    },
   );
 
   const testItem2 =  Object.assign(new Item(),
-  {
-    type: 'item',
-    metadata: {
-      'dc.title': [metadataValue, metadataValue, metadataValue, metadataValue, metadataValue, metadataValue],
-      'dc.contributor.author': [
-        {
-          value: 'Donohue, Tim'
-        },
-        {
-          value: 'Surname, Name'
-        }
-      ],
-      'oairecerif.author.affiliation': [
-        {
-          value: 'Duraspace'
-        },
-        {
-          value: '4Science'
-        }
-      ]
+    {
+      type: 'item',
+      metadata: {
+        'dc.title': [metadataValue, metadataValue, metadataValue, metadataValue, metadataValue, metadataValue],
+        'dc.contributor.author': [
+          {
+            value: 'Donohue, Tim',
+          },
+          {
+            value: 'Surname, Name',
+          },
+        ],
+        'oairecerif.author.affiliation': [
+          {
+            value: 'Duraspace',
+          },
+          {
+            value: '4Science',
+          },
+        ],
+      },
+      uuid: 'test-item-uuid',
     },
-    uuid: 'test-item-uuid',
-  }
-);
+  );
 
   const fieldMock = {
     metadata: 'dc.title',
@@ -89,7 +98,7 @@ describe('MetadataContainerComponent', () => {
     styleLabel: 'test-style-label',
     styleValue: 'test-style-value',
     labelAsHeading: false,
-    valuesInline: true
+    valuesInline: true,
   };
 
   const fieldMock1 = {
@@ -101,7 +110,7 @@ describe('MetadataContainerComponent', () => {
     styleLabel: 'test-style-label',
     styleValue: 'test-style-value',
     labelAsHeading: false,
-    valuesInline: true
+    valuesInline: true,
   };
 
   const fieldMock2 = {
@@ -113,7 +122,7 @@ describe('MetadataContainerComponent', () => {
     styleLabel: 'test-style-label',
     styleValue: 'test-style-value',
     labelAsHeading: false,
-    valuesInline: true
+    valuesInline: true,
   };
 
   const fieldMockWithoutLabel = {
@@ -125,7 +134,7 @@ describe('MetadataContainerComponent', () => {
     styleLabel: 'test-style-label',
     styleValue: 'test-style-value',
     labelAsHeading: false,
-    valuesInline: true
+    valuesInline: true,
   };
 
   const fieldMockWithoutMetadata = {
@@ -137,7 +146,7 @@ describe('MetadataContainerComponent', () => {
     styleLabel: 'test-style-label',
     styleValue: 'test-style-value',
     labelAsHeading: false,
-    valuesInline: true
+    valuesInline: true,
   };
 
   const fieldStructuredMock = Object.assign({
@@ -168,10 +177,10 @@ describe('MetadataContainerComponent', () => {
           fieldType: 'METADATA',
           style: null,
           styleLabel: 'font-weight-bold col-0',
-          styleValue: 'col'
-        }
-      ]
-    }
+          styleValue: 'col',
+        },
+      ],
+    },
   }) as LayoutField;
 
   const bitstreamField = Object.assign({
@@ -186,140 +195,140 @@ describe('MetadataContainerComponent', () => {
     bitstream: {
       bundle: 'ORIGINAL',
       metadataField: 'dc.type',
-      metadataValue: 'thumbnail'
-    }
+      metadataValue: 'thumbnail',
+    },
   });
 
   const mockEntry = [
     {
       'field':{
-          'metadata':'dc.identifier.doi',
-          'label':'DOI',
-          'rendering':null,
-          'fieldType':'METADATA',
-          'styleLabel':'font-weight-bold col-3',
-          'styleValue':null,
-          'labelAsHeading':false,
-          'valuesInline':false
+        'metadata':'dc.identifier.doi',
+        'label':'DOI',
+        'rendering':null,
+        'fieldType':'METADATA',
+        'styleLabel':'font-weight-bold col-3',
+        'styleValue':null,
+        'labelAsHeading':false,
+        'valuesInline':false,
       },
       'value':{
-          'uuid':'e0f17692-576f-4b2f-a5d5-17c461704b29',
-          'language':null,
-          'value':'10.1016/j.procs.2017.03.038',
-          'place':0,
-          'authority':null,
-          'confidence':-1
-      }
+        'uuid':'e0f17692-576f-4b2f-a5d5-17c461704b29',
+        'language':null,
+        'value':'10.1016/j.procs.2017.03.038',
+        'place':0,
+        'authority':null,
+        'confidence':-1,
+      },
     },
     {
       'field':{
-          'metadata':'dc.identifier.doi',
-          'label':'DOI',
-          'rendering':null,
-          'fieldType':'METADATA',
-          'styleLabel':'font-weight-bold col-3',
-          'styleValue':null,
-          'labelAsHeading':false,
-          'valuesInline':false
+        'metadata':'dc.identifier.doi',
+        'label':'DOI',
+        'rendering':null,
+        'fieldType':'METADATA',
+        'styleLabel':'font-weight-bold col-3',
+        'styleValue':null,
+        'labelAsHeading':false,
+        'valuesInline':false,
       },
       'value':{
-          'uuid':'36169931-7195-41c6-89b4-d6dc7b75ef69',
-          'language':null,
-          'value':'sas',
-          'place':1,
-          'authority':null,
-          'confidence':-1
-      }
+        'uuid':'36169931-7195-41c6-89b4-d6dc7b75ef69',
+        'language':null,
+        'value':'sas',
+        'place':1,
+        'authority':null,
+        'confidence':-1,
+      },
     },
     {
       'field':{
-          'metadata':'dc.identifier.doi',
-          'label':'DOI',
-          'rendering':null,
-          'fieldType':'METADATA',
-          'styleLabel':'font-weight-bold col-3',
-          'styleValue':null,
-          'labelAsHeading':false,
-          'valuesInline':false
+        'metadata':'dc.identifier.doi',
+        'label':'DOI',
+        'rendering':null,
+        'fieldType':'METADATA',
+        'styleLabel':'font-weight-bold col-3',
+        'styleValue':null,
+        'labelAsHeading':false,
+        'valuesInline':false,
       },
       'value':{
-          'uuid':'2a7a6a10-0600-4340-b128-eda4e08f852c',
-          'language':null,
-          'value':'sa67',
-          'place':2,
-          'authority':null,
-          'confidence':-1
-      }
+        'uuid':'2a7a6a10-0600-4340-b128-eda4e08f852c',
+        'language':null,
+        'value':'sa67',
+        'place':2,
+        'authority':null,
+        'confidence':-1,
+      },
     },
     {
       'field':{
-          'metadata':'dc.identifier.doi',
-          'label':'DOI',
-          'rendering':null,
-          'fieldType':'METADATA',
-          'styleLabel':'font-weight-bold col-3',
-          'styleValue':null,
-          'labelAsHeading':false,
-          'valuesInline':false
+        'metadata':'dc.identifier.doi',
+        'label':'DOI',
+        'rendering':null,
+        'fieldType':'METADATA',
+        'styleLabel':'font-weight-bold col-3',
+        'styleValue':null,
+        'labelAsHeading':false,
+        'valuesInline':false,
       },
       'value':{
-          'uuid':'7a75bb92-9af6-4e90-85a4-1d69b2941b1d',
-          'language':null,
-          'value':'76',
-          'place':3,
-          'authority':null,
-          'confidence':-1
-      }
+        'uuid':'7a75bb92-9af6-4e90-85a4-1d69b2941b1d',
+        'language':null,
+        'value':'76',
+        'place':3,
+        'authority':null,
+        'confidence':-1,
+      },
     },
     {
       'field':{
-          'metadata':'dc.identifier.doi',
-          'label':'DOI',
-          'rendering':null,
-          'fieldType':'METADATA',
-          'styleLabel':'font-weight-bold col-3',
-          'styleValue':null,
-          'labelAsHeading':false,
-          'valuesInline':false
+        'metadata':'dc.identifier.doi',
+        'label':'DOI',
+        'rendering':null,
+        'fieldType':'METADATA',
+        'styleLabel':'font-weight-bold col-3',
+        'styleValue':null,
+        'labelAsHeading':false,
+        'valuesInline':false,
       },
       'value':{
-          'uuid':'74ca8dcb-594b-4f57-b54f-942ffeb18466',
-          'language':null,
-          'value':'899',
-          'place':4,
-          'authority':null,
-          'confidence':-1
-      }
+        'uuid':'74ca8dcb-594b-4f57-b54f-942ffeb18466',
+        'language':null,
+        'value':'899',
+        'place':4,
+        'authority':null,
+        'confidence':-1,
+      },
     },
     {
       'field':{
-          'metadata':'dc.identifier.doi',
-          'label':'DOI',
-          'rendering':null,
-          'fieldType':'METADATA',
-          'styleLabel':'font-weight-bold col-3',
-          'styleValue':null,
-          'labelAsHeading':false,
-          'valuesInline':false
+        'metadata':'dc.identifier.doi',
+        'label':'DOI',
+        'rendering':null,
+        'fieldType':'METADATA',
+        'styleLabel':'font-weight-bold col-3',
+        'styleValue':null,
+        'labelAsHeading':false,
+        'valuesInline':false,
       },
       'value':{
-          'uuid':'1d032b00-5e59-4352-9471-60ccc077142b',
-          'language':null,
-          'value':'Testing',
-          'place':5,
-          'authority':null,
-          'confidence':-1
-      }
-    }
-] as NestedMetadataGroupEntry[];
+        'uuid':'1d032b00-5e59-4352-9471-60ccc077142b',
+        'language':null,
+        'value':'Testing',
+        'place':5,
+        'authority':null,
+        'confidence':-1,
+      },
+    },
+  ] as NestedMetadataGroupEntry[];
 
   const bitstream1 = Object.assign(new Bitstream(), {
     id: 'bitstream1',
-    uuid: 'bitstream1'
+    uuid: 'bitstream1',
   });
 
   const mockBitstreamDataService = jasmine.createSpyObj('BitstreamDataService', {
-    findShowableBitstreamsByItem: jasmine.createSpy('findShowableBitstreamsByItem')
+    findShowableBitstreamsByItem: jasmine.createSpy('findShowableBitstreamsByItem'),
   });
 
   const mockLoadMoreService = jasmine.createSpyObj('LoadMoreService',{
@@ -332,16 +341,16 @@ describe('MetadataContainerComponent', () => {
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
-            useClass: TranslateLoaderMock
-          }
-        })
+            useClass: TranslateLoaderMock,
+          },
+        }),
       ],
       providers: [
         { provide: BitstreamDataService, useValue: mockBitstreamDataService },
         { provide: LoadMoreService, useValue: mockLoadMoreService },
       ],
       declarations: [MetadataContainerComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     })
       .compileComponents();
   });
@@ -353,7 +362,7 @@ describe('MetadataContainerComponent', () => {
     component.box = boxMetadata;
 
     mockBitstreamDataService.findShowableBitstreamsByItem.and.returnValue(
-      createSuccessfulRemoteDataObject$(createPaginatedList([]))
+      createSuccessfulRemoteDataObject$(createPaginatedList([])),
     );
   });
 
@@ -495,7 +504,7 @@ describe('MetadataContainerComponent', () => {
           testItem.uuid,
           bitstreamField.bitstream.bundle,
           [ { metadataName: 'metadataFieldTest', metadataValue: 'metadataValueTest' } ],
-          false
+          false,
         );
       });
     });
@@ -511,7 +520,7 @@ describe('MetadataContainerComponent', () => {
           testItem.uuid,
           bitstreamField.bitstream.bundle,
           [], // <--- empty array of filters,
-          false // <--- filterNonRestricted
+          false, // <--- filterNonRestricted
         );
       });
     });
@@ -535,7 +544,7 @@ describe('MetadataContainerComponent', () => {
         lastLimitedDataToBeRenderedMap: lastLimitedDataToBeRenderedMap,
         isConfigured: true,
         moreLimit: 1,
-        lastLimit: 2
+        lastLimit: 2,
       });
       fixture.detectChanges();
     });
@@ -569,7 +578,7 @@ describe('MetadataContainerComponent', () => {
         lastLimitedDataToBeRenderedMap: lastLimitedDataToBeRenderedMap,
         isConfigured: false,
         firstLimit: 6,
-        lastLimit: 0
+        lastLimit: 0,
       });
       fixture.detectChanges();
     });

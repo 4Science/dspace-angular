@@ -1,17 +1,31 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { combineLatest, Observable, Subject } from 'rxjs';
-import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
-import { UnpaywallItemService } from '../../core/data/unpaywall-item.service';
-import { UnpaywallItemVersionModel } from '../../core/submission/models/unpaywall-item-version.model';
-import { Item } from '../../core/shared/item.model';
 import { Location } from '@angular/common';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import {
+  combineLatest,
+  Observable,
+  Subject,
+} from 'rxjs';
+import {
+  map,
+  switchMap,
+  takeUntil,
+  tap,
+} from 'rxjs/operators';
+
+import { UnpaywallItemService } from '../../core/data/unpaywall-item.service';
+import { Item } from '../../core/shared/item.model';
+import { UnpaywallItemVersionModel } from '../../core/submission/models/unpaywall-item-version.model';
 
 @Component({
   selector: 'ds-unpaywall-versions',
   templateUrl: './unpaywall-versions.component.html',
-  styleUrls: ['./unpaywall-versions.component.scss']
+  styleUrls: ['./unpaywall-versions.component.scss'],
 })
 export class UnpaywallVersionsComponent implements OnInit, OnDestroy {
 
@@ -27,13 +41,13 @@ export class UnpaywallVersionsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.itemVersions$ = this.getItem().pipe(
-      takeUntil(this.onDestroy$),
       switchMap(item => combineLatest([
         this.unpaywallItemService.getItemVersions(item),
         this.isAutoForward(),
       ])),
       tap(([versions, autoForward]) => this.redirectToFirstVersionIfNeeded(autoForward, versions)),
-      map(([versions]) => versions)
+      map(([versions]) => versions),
+      takeUntil(this.onDestroy$),
     );
   }
 
@@ -52,9 +66,9 @@ export class UnpaywallVersionsComponent implements OnInit, OnDestroy {
 
   get titleText(): Observable<string> {
     return this.getItem().pipe(
-      takeUntil(this.onDestroy$),
       map(item => item.firstMetadataValue('dc.title')),
-      map(itemTitle => this.translate.instant(this.title).replace('{item.title}', itemTitle))
+      map(itemTitle => this.translate.instant(this.title).replace('{item.title}', itemTitle)),
+      takeUntil(this.onDestroy$),
     );
   }
 

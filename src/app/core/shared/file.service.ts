@@ -1,24 +1,38 @@
-import { Inject, Injectable } from '@angular/core';
-import { RawRestResponse } from '../dspace-rest/raw-rest-response.model';
-import { AuthService } from '../auth/auth.service';
-import { map, switchMap, take } from 'rxjs/operators';
-import { NativeWindowRef, NativeWindowService } from '../services/window.service';
-import { URLCombiner } from '../url-combiner/url-combiner';
-import { hasValue } from '../../shared/empty.util';
-import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
-import { DspaceRestService, HttpOptions } from '../dspace-rest/dspace-rest.service';
+import {
+  Inject,
+  Injectable,
+} from '@angular/core';
+import { Observable } from 'rxjs';
+import {
+  map,
+  switchMap,
+  take,
+} from 'rxjs/operators';
+
+import { hasValue } from '../../shared/empty.util';
+import { AuthService } from '../auth/auth.service';
 import { RestRequestMethod } from '../data/rest-request-method';
+import {
+  DspaceRestService,
+  HttpOptions,
+} from '../dspace-rest/dspace-rest.service';
+import { RawRestResponse } from '../dspace-rest/raw-rest-response.model';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../services/window.service';
+import { URLCombiner } from '../url-combiner/url-combiner';
 
 /**
  * Provides utility methods to save files on the client-side.
  */
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class FileService {
   constructor(
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
     private authService: AuthService,
-    private restService: DspaceRestService
+    private restService: DspaceRestService,
   ) { }
 
   /**
@@ -29,7 +43,7 @@ export class FileService {
    */
   retrieveFileDownloadLink(url: string): Observable<string> {
     return this.authService.getShortlivedToken().pipe(take(1), map((token) =>
-      hasValue(token) ? new URLCombiner(url, `?authentication-token=${token}`).toString() : url
+      hasValue(token) ? new URLCombiner(url, `?authentication-token=${token}`).toString() : url,
     ));
   }
   /**
@@ -57,7 +71,7 @@ export class FileService {
     const options: HttpOptions = Object.create({ headers, responseType: 'blob' });
     return this.retrieveFileDownloadLink(url).pipe(
       switchMap((href) => this.restService.request(RestRequestMethod.GET, href, null, options)),
-      map((data) => data.payload as Blob)
+      map((data) => data.payload as Blob),
     );
   }
 

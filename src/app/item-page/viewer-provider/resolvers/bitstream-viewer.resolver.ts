@@ -1,14 +1,23 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
-import { RemoteData } from '../../../core/data/remote-data';
+import {
+  ActivatedRouteSnapshot,
+  Resolve,
+  Router,
+  RouterStateSnapshot,
+} from '@angular/router';
 import { Store } from '@ngrx/store';
-import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
+import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+
+import { BitstreamDataService } from '../../../core/data/bitstream-data.service';
+import { RemoteData } from '../../../core/data/remote-data';
 import { ResolvedAction } from '../../../core/resolving/resolver.actions';
 import { Bitstream } from '../../../core/shared/bitstream.model';
-import { BitstreamDataService } from '../../../core/data/bitstream-data.service';
-import { followLink, FollowLinkConfig } from '../../../shared/utils/follow-link-config.model';
+import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
+import {
+  followLink,
+  FollowLinkConfig,
+} from '../../../shared/utils/follow-link-config.model';
 
 export const BITSTREAM_VIEWER_LINKS_TO_FOLLOW: FollowLinkConfig<Bitstream>[] = [
   followLink('bundle'),
@@ -22,7 +31,7 @@ export class BitstreamViewerResolver implements Resolve<RemoteData<Bitstream>> {
   constructor(
     protected bitstreamDataService: BitstreamDataService,
     protected store: Store<any>,
-    protected router: Router
+    protected router: Router,
   ) {
   }
 
@@ -37,10 +46,10 @@ export class BitstreamViewerResolver implements Resolve<RemoteData<Bitstream>> {
     return this.bitstreamDataService.findById(route.params.bitstream_id,
       true,
       false,
-      ...BITSTREAM_VIEWER_LINKS_TO_FOLLOW
+      ...BITSTREAM_VIEWER_LINKS_TO_FOLLOW,
     ).pipe(
       getFirstCompletedRemoteData(),
-      tap((bitstreamRD: RemoteData<Bitstream>) => this.store.dispatch(new ResolvedAction(state.url, bitstreamRD.payload)))
+      tap((bitstreamRD: RemoteData<Bitstream>) => this.store.dispatch(new ResolvedAction(state.url, bitstreamRD.payload))),
     );
   }
 }

@@ -1,6 +1,9 @@
-import { FilterType } from '../../models/filter-type.model';
-import { hasNoValue, isEmpty } from '../../../empty.util';
 import { BuildConfig } from '../../../../../config/build-config.interface';
+import {
+  hasNoValue,
+  isEmpty,
+} from '../../../empty.util';
+import { FilterType } from '../../models/filter-type.model';
 
 /**
  * Contains the mapping between a facet component and a FilterType
@@ -45,12 +48,12 @@ export function renderFacetForEnvironment(type: FilterType, environment?: string
     if (isEmpty(environment)) {
       renderTypesConfig =
         renderTypesConfig.concat(
-          Object.assign({}, { objectElement })
+          Object.assign({}, { objectElement }),
         );
     } else {
       renderTypesConfig =
         renderTypesConfig.concat(
-          Object.assign({}, { environment, objectElement })
+          Object.assign({}, { environment, objectElement }),
         );
     }
     filterTypeEnvironmentMap.set(type, renderTypesConfig);
@@ -76,7 +79,7 @@ export function renderFilterType(type: FilterType) {
  */
 export function renderFilterTypeEnvironment(type: FilterType, environment: Partial<BuildConfig>, filterConfigName: string) {
   let renderTypeFound = filterTypeEnvironmentMap.get(type).find(typeConfig => hasNoValue(typeConfig.environment));
-  let renderTypeConfigs = filterTypeEnvironmentMap.get(type) as { environment?: string, objectElement: any }[];
+  const renderTypeConfigs = filterTypeEnvironmentMap.get(type) as { environment?: string, objectElement: any }[];
   renderTypeConfigs
     .some(renderConfig => {
       if (hasNoValue(renderConfig.environment)) {

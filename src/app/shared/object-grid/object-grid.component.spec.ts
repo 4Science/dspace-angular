@@ -1,4 +1,8 @@
-import { cold, hot } from 'jasmine-marbles';
+import {
+  cold,
+  hot,
+} from 'jasmine-marbles';
+
 import { ObjectGridComponent } from './object-grid.component';
 
 describe('ObjectGridComponent', () => {
@@ -12,12 +16,12 @@ describe('ObjectGridComponent', () => {
     { seven: 7 },
     { eight: 8 },
     { nine: 9 },
-    { ten: 10 }
+    { ten: 10 },
   ];
   const mockRD = {
     payload: {
-      page: testObjects
-    }
+      page: testObjects,
+    },
   } as any;
 
   describe('the number of elements', () => {
@@ -34,7 +38,7 @@ describe('ObjectGridComponent', () => {
         c: [
           testObjects[0], testObjects[1], testObjects[2], testObjects[3], testObjects[4],
           testObjects[5], testObjects[6], testObjects[7], testObjects[8], testObjects[9],
-        ]
+        ],
       });
 
       const result = comp.results$;
@@ -49,12 +53,12 @@ describe('ObjectGridComponent', () => {
         { two: 2 },
         { three: 3 },
         { four: 4 },
-        { five: 5 }
+        { five: 5 },
       ];
       const newMockRD = {
         payload: {
-          page: newTestObjects
-        }
+          page: newTestObjects,
+        },
       } as any;
       const comp = new ObjectGridComponent();
 
@@ -64,8 +68,8 @@ describe('ObjectGridComponent', () => {
 
       const expected = cold('c', {
         c: [
-          newTestObjects[0], newTestObjects[1], newTestObjects[2], newTestObjects[3], newTestObjects[4]
-        ]
+          newTestObjects[0], newTestObjects[1], newTestObjects[2], newTestObjects[3], newTestObjects[4],
+        ],
       });
 
       const result = comp.results$;

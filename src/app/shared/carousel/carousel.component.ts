@@ -1,20 +1,45 @@
-import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
-import {NgbCarousel, NgbSlideEvent, NgbSlideEventSource} from '@ng-bootstrap/ng-bootstrap';
-import {BehaviorSubject, from, Observable} from 'rxjs';
-import {filter, map, mergeMap, scan, switchMap, take} from 'rxjs/operators';
-import {PaginatedList} from '../../core/data/paginated-list.model';
-import {BitstreamFormat} from '../../core/shared/bitstream-format.model';
-import {Bitstream} from '../../core/shared/bitstream.model';
-import {BitstreamDataService} from '../../core/data/bitstream-data.service';
-import {NativeWindowRef, NativeWindowService} from '../../core/services/window.service';
-import {getFirstCompletedRemoteData} from '../../core/shared/operators';
-import {InternalLinkService} from '../../core/services/internal-link.service';
-import {hasValue} from '../empty.util';
-import {ItemSearchResult} from '../object-collection/shared/item-search-result.model';
-import {followLink} from '../utils/follow-link-config.model';
-import {RemoteData} from '../../core/data/remote-data';
-import {CarouselOptions} from './carousel-options.model';
-import {Item} from '../../core/shared/item.model';
+import {
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import {
+  NgbCarousel,
+  NgbSlideEvent,
+  NgbSlideEventSource,
+} from '@ng-bootstrap/ng-bootstrap';
+import {
+  BehaviorSubject,
+  from,
+  Observable,
+} from 'rxjs';
+import {
+  filter,
+  map,
+  mergeMap,
+  scan,
+  switchMap,
+  take,
+} from 'rxjs/operators';
+
+import { BitstreamDataService } from '../../core/data/bitstream-data.service';
+import { PaginatedList } from '../../core/data/paginated-list.model';
+import { RemoteData } from '../../core/data/remote-data';
+import { InternalLinkService } from '../../core/services/internal-link.service';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../core/services/window.service';
+import { Bitstream } from '../../core/shared/bitstream.model';
+import { BitstreamFormat } from '../../core/shared/bitstream-format.model';
+import { Item } from '../../core/shared/item.model';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { hasValue } from '../empty.util';
+import { ItemSearchResult } from '../object-collection/shared/item-search-result.model';
+import { followLink } from '../utils/follow-link-config.model';
+import { CarouselOptions } from './carousel-options.model';
 
 /**
  * Component representing the Carousel component section.
@@ -23,20 +48,20 @@ import {Item} from '../../core/shared/item.model';
   selector: 'ds-carousel',
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
-  providers: []
+  providers: [],
 })
 export class CarouselComponent implements OnInit {
   /**
    * Items to be used in carousel.
    */
   @Input()
-  items: ItemSearchResult[];
+    items: ItemSearchResult[];
 
   /**
    * Carousel section configurations.
    */
   @Input()
-  carouselOptions: CarouselOptions;
+    carouselOptions: CarouselOptions;
 
   /**
    * Carousel section title field.
@@ -78,7 +103,7 @@ export class CarouselComponent implements OnInit {
   /**
    * reference to the carousel
    */
-  @ViewChild('carousel', {static: true}) carousel: NgbCarousel;
+  @ViewChild('carousel', { static: true }) carousel: NgbCarousel;
 
   isLoading$ = new BehaviorSubject(true);
 
@@ -132,21 +157,21 @@ export class CarouselComponent implements OnInit {
     return from(this.items).pipe(
       map((itemSR) => itemSR.indexableObject),
       mergeMap((item) => this.bitstreamDataService.findAllByItemAndBundleName(
-          item, this.bundle, {}, true, true, followLink('format'),
-        ).pipe(
+        item, this.bundle, {}, true, true, followLink('format'),
+      ).pipe(
+        getFirstCompletedRemoteData(),
+        switchMap((rd: RemoteData<PaginatedList<Bitstream>>) => rd.hasSucceeded ? rd.payload.page : []),
+        mergeMap((bitstream: Bitstream) => bitstream.format.pipe(
           getFirstCompletedRemoteData(),
-          switchMap((rd: RemoteData<PaginatedList<Bitstream>>) => rd.hasSucceeded ? rd.payload.page : []),
-          mergeMap((bitstream: Bitstream) => bitstream.format.pipe(
-            getFirstCompletedRemoteData(),
-            filter((bitstreamFormatRD: RemoteData<BitstreamFormat>) =>
-              bitstreamFormatRD.hasSucceeded && hasValue(bitstreamFormatRD.payload) && hasValue(bitstream) &&
-              bitstreamFormatRD.payload.mimetype.includes('image/')
-            ),
-            map(() => bitstream)
-          )),
-          take(1),
-          map((bitstream: Bitstream) => [item.uuid, bitstream._links.content.href]),
-        ),
+          filter((bitstreamFormatRD: RemoteData<BitstreamFormat>) =>
+            bitstreamFormatRD.hasSucceeded && hasValue(bitstreamFormatRD.payload) && hasValue(bitstream) &&
+              bitstreamFormatRD.payload.mimetype.includes('image/'),
+          ),
+          map(() => bitstream),
+        )),
+        take(1),
+        map((bitstream: Bitstream) => [item.uuid, bitstream._links.content.href]),
+      ),
       ),
       scan((acc: Map<string, string>, value: [string, string]) => {
         acc.set(value[0], value[1]);

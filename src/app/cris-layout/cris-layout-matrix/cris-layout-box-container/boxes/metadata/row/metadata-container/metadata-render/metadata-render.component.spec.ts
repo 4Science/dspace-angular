@@ -1,19 +1,29 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ChangeDetectionStrategy,
+  Injector,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
 
-import { MetadataRenderComponent } from './metadata-render.component';
-import { MetadataValue } from '../../../../../../../../core/shared/metadata.models';
-import { Item } from '../../../../../../../../core/shared/item.model';
-import { boxMetadata } from '../../../../../../../../shared/testing/box.mock';
-import { ChangeDetectionStrategy, Injector, NO_ERRORS_SCHEMA } from '@angular/core';
-import { TextComponent } from '../../../rendering-types/text/text.component';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateLoaderMock } from '../../../../../../../../shared/mocks/translate-loader.mock';
-import { DsDatePipe } from '../../../../../../../pipes/ds-date.pipe';
-import { FieldRenderingType } from '../../../rendering-types/metadata-box.decorator';
 import { LayoutField } from '../../../../../../../../core/layout/models/box.model';
-import { TableComponent } from '../../../rendering-types/metadataGroup/table/table.component';
-import { LoadMoreService } from '../../../../../../../services/load-more.service';
+import { Item } from '../../../../../../../../core/shared/item.model';
+import { MetadataValue } from '../../../../../../../../core/shared/metadata.models';
 import { PLACEHOLDER_PARENT_METADATA } from '../../../../../../../../shared/form/builder/ds-dynamic-form-ui/ds-dynamic-form-constants';
+import { TranslateLoaderMock } from '../../../../../../../../shared/mocks/translate-loader.mock';
+import { boxMetadata } from '../../../../../../../../shared/testing/box.mock';
+import { DsDatePipe } from '../../../../../../../pipes/ds-date.pipe';
+import { LoadMoreService } from '../../../../../../../services/load-more.service';
+import { FieldRenderingType } from '../../../rendering-types/metadata-box.decorator';
+import { TableComponent } from '../../../rendering-types/metadataGroup/table/table.component';
+import { TextComponent } from '../../../rendering-types/text/text.component';
+import { MetadataRenderComponent } from './metadata-render.component';
 
 describe('MetadataRenderComponent', () => {
   let component: MetadataRenderComponent;
@@ -24,7 +34,7 @@ describe('MetadataRenderComponent', () => {
     'language': null,
     'authority': null,
     'confidence': -1,
-    'place': 0
+    'place': 0,
   });
 
   const metadataValueWithPlaceholder = Object.assign(new MetadataValue(), {
@@ -32,11 +42,11 @@ describe('MetadataRenderComponent', () => {
     'language': null,
     'authority': null,
     'confidence': -1,
-    'place': 0
+    'place': 0,
   });
 
   const normalizedMetadataValue = Object.assign(new MetadataValue(), metadataValueWithPlaceholder,{
-    'value': ''
+    'value': '',
   });
 
   const testItem = Object.assign(new Item(),
@@ -46,23 +56,23 @@ describe('MetadataRenderComponent', () => {
         'dc.title': [metadataValue],
         'dc.contributor.author': [
           {
-            value: 'Donohue, Tim'
+            value: 'Donohue, Tim',
           },
           {
-            value: 'Surname, Name'
-          }
+            value: 'Surname, Name',
+          },
         ],
         'oairecerif.author.affiliation': [
           {
-            value: 'Duraspace'
+            value: 'Duraspace',
           },
           {
-            value: '4Science'
-          }
-        ]
+            value: '4Science',
+          },
+        ],
       },
       uuid: 'test-item-uuid',
-    }
+    },
   );
 
   const fieldMock = {
@@ -74,7 +84,7 @@ describe('MetadataRenderComponent', () => {
     styleLabel: 'test-style-label',
     styleValue: 'test-style-value',
     labelAsHeading: false,
-    valuesInline: true
+    valuesInline: true,
   };
 
   const fieldStructuredMock = Object.assign({
@@ -105,10 +115,10 @@ describe('MetadataRenderComponent', () => {
           fieldType: 'METADATA',
           style: null,
           styleLabel: 'font-weight-bold col-0',
-          styleValue: 'col'
-        }
-      ]
-    }
+          styleValue: 'col',
+        },
+      ],
+    },
   }) as LayoutField;
 
   beforeEach(async () => {
@@ -117,9 +127,9 @@ describe('MetadataRenderComponent', () => {
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
-            useClass: TranslateLoaderMock
-          }
-        })
+            useClass: TranslateLoaderMock,
+          },
+        }),
       ],
       providers: [
         Injector,
@@ -130,11 +140,11 @@ describe('MetadataRenderComponent', () => {
         DsDatePipe,
         MetadataRenderComponent,
         TableComponent,
-        TextComponent
+        TextComponent,
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(TableComponent, {
-      set: { changeDetection: ChangeDetectionStrategy.OnPush }
+      set: { changeDetection: ChangeDetectionStrategy.OnPush },
     }).compileComponents();
   });
 

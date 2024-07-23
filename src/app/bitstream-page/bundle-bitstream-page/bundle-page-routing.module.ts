@@ -1,7 +1,8 @@
-import {NgModule} from '@angular/core';
-import {RouterModule} from '@angular/router';
-import {BitstreamDownloadPageComponent} from '../bitstream-download-page/bitstream-download-page.component';
-import {ThumbnailsBitstreamResolver} from './thumbnails-bitstream-resolver';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
+import { BitstreamDownloadPageComponent } from '../bitstream-download-page/bitstream-download-page.component';
+import { ThumbnailsBitstreamResolver } from './thumbnails-bitstream-resolver';
 
 /**
  * Routing module to navigate for thumbnail loading
@@ -14,14 +15,14 @@ import {ThumbnailsBitstreamResolver} from './thumbnails-bitstream-resolver';
         path: ':bundle_uuid/view/:thumbnail_id',
         component: BitstreamDownloadPageComponent,
         resolve: {
-          bitstream: ThumbnailsBitstreamResolver
-        }
-      }
-    ])
+          bitstream: ThumbnailsBitstreamResolver,
+        },
+      },
+    ]),
   ],
   providers: [
-    ThumbnailsBitstreamResolver
-  ]
+    ThumbnailsBitstreamResolver,
+  ],
 })
 export class BundlePageRoutingModule {
 }

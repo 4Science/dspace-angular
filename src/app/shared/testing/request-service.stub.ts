@@ -1,6 +1,10 @@
-import { Observable, of as observableOf } from 'rxjs';
-import { RestRequest } from '../../core/data/rest-request.model';
+import {
+  Observable,
+  of as observableOf,
+} from 'rxjs';
+
 import { RequestEntry } from '../../core/data/request-entry.model';
+import { RestRequest } from '../../core/data/rest-request.model';
 
 /**
  * Stub service for {@link RequestService}.

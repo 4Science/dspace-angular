@@ -1,18 +1,25 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MarkdownEditorComponent } from './markdown-editor.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  NgModule,
+} from '@angular/core';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { NuMarkdownModule } from '@ng-util/markdown';
+
+import { MarkdownEditorComponent } from './markdown-editor.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NuMarkdownModule
+    NuMarkdownModule,
   ],
   exports: [ MarkdownEditorComponent ],
   declarations: [ MarkdownEditorComponent ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })
 export class MarkdownEditorModule {}

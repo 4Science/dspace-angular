@@ -1,19 +1,30 @@
-import { Component, Inject, OnInit } from '@angular/core';
-
-import { FieldRenderingType, MetadataBoxFieldRendering } from '../metadata-box.decorator';
-import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
 import {
-  LocationCoordinates, LocationErrorCodes,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import {
+  BehaviorSubject,
+  Observable,
+} from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { LayoutField } from '../../../../../../../core/layout/models/box.model';
+import {
+  LocationCoordinates,
+  LocationErrorCodes,
   LocationPlace,
   LocationService,
 } from '../../../../../../../core/services/location.service';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
-import { TranslateService } from '@ngx-translate/core';
-import { map } from 'rxjs/operators';
 import { OpenStreetMapPointer } from '../../../../../../../shared/open-street-map/open-street-map.component';
+import {
+  FieldRenderingType,
+  MetadataBoxFieldRendering,
+} from '../metadata-box.decorator';
+import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
 
 @Component({
   selector: 'ds-open-street-map-rendering',
@@ -79,7 +90,7 @@ export class OpenStreetMapRenderingComponent extends RenderingTypeValueModelComp
             };
             this.place.next(place);
           },
-          error: (err) => {
+          error: (err: unknown) => {
             // show the map centered on provided coordinates despite the possibility to retrieve a description for the place
             const place: LocationPlace = {
               coordinates: coordinates,
@@ -106,7 +117,7 @@ export class OpenStreetMapRenderingComponent extends RenderingTypeValueModelComp
           place.displayName = position; // Show the name stored in metadata (comment out to show name retrieved from Nominatim)
           this.place.next(place);
         },
-        error: (err) => {
+        error: (err: unknown) => {
           this.invalidLocationErrorCode.next(err.message); // either LOCATION_NOT_FOUND or API_ERROR
           if (err.message === LocationErrorCodes.API_ERROR) {
             console.error(err.message);

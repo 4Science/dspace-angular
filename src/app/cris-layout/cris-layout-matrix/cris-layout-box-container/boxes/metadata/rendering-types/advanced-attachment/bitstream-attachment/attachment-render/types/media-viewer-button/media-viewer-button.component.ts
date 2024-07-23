@@ -1,19 +1,24 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
-import { AttachmentRenderingType, AttachmentTypeRendering } from '../../../attachment-type.decorator';
-import { Item } from '../../../../../../../../../../../core/shared/item.model';
-import { Bitstream } from '../../../../../../../../../../../core/shared/bitstream.model';
 import { environment } from '../../../../../../../../../../../../environments/environment';
+import { AuthorizationDataService } from '../../../../../../../../../../../core/data/feature-authorization/authorization-data.service';
+import { FeatureID } from '../../../../../../../../../../../core/data/feature-authorization/feature-id';
+import { Bitstream } from '../../../../../../../../../../../core/shared/bitstream.model';
+import { Item } from '../../../../../../../../../../../core/shared/item.model';
 import {
   getBitstreamItemViewerDetailsPath,
-  getBitstreamItemViewerPath
+  getBitstreamItemViewerPath,
 } from '../../../../../../../../../../../item-page/item-page-routing-paths';
-import { FeatureID } from '../../../../../../../../../../../core/data/feature-authorization/feature-id';
 import {
-  AuthorizationDataService
-} from '../../../../../../../../../../../core/data/feature-authorization/authorization-data.service';
-import { Observable } from 'rxjs';
+  AttachmentRenderingType,
+  AttachmentTypeRendering,
+} from '../../../attachment-type.decorator';
 
 @Component({
   selector: 'ds-media-viewer-button',
@@ -50,7 +55,7 @@ export class MediaViewerButtonComponent implements OnInit {
 
   async openViewer() {
     if (environment.advancedAttachmentRendering.showViewerOnSameItemPage) {
-      await this.router.navigate([getBitstreamItemViewerDetailsPath(this.item, this.bitstream, 'media', this.tabName)], {fragment: 'viewer'});
+      await this.router.navigate([getBitstreamItemViewerDetailsPath(this.item, this.bitstream, 'media', this.tabName)], { fragment: 'viewer' });
     } else {
       await this.router.navigate([getBitstreamItemViewerPath(this.item, this.bitstream, 'media')]);
     }

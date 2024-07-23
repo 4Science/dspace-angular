@@ -1,7 +1,7 @@
 <div class="media-container d-flex" *ngIf="(isPlatformBrowser | async)">
   <div class="media-wrapper">
     <div class="h-100 w-100">
-      <ds-themed-loading *ngIf="!(isVideoPlayerInitialized$ | async) && !(isAudioPlayerInitialized$ | async)" [showMessage]="false"></ds-themed-loading>
+      <ds-themed-loading *ngIf="(isVideoPlayerInitialized$ | async) === false && (isAudioPlayerInitialized$ | async) === false" [showMessage]="false"></ds-themed-loading>
       <div class="overlay-onchange" *ngIf="isLoadingOnChange$ | async">
         <ds-themed-loading [spinner]="true" [showMessage]="false"></ds-themed-loading>
       </div>
@@ -9,7 +9,7 @@
         <video class="video-js vjs-big-play-centered vjs-fluid" id="video_player" controls playsinline
                preload="none"></video>
       </div>
-      <div id="audio-content-wrapper h-100 w-100" *ngIf="(isAudioPlayerInitialized$ | async) && !(isVideo$ | async)">
+      <div id="audio-content-wrapper h-100 w-100" *ngIf="(isAudioPlayerInitialized$ | async) && (isVideo$ | async) === false">
         <audio class="video-js vjs-fluid" id="audio_player" controls playsinline preload="none"></audio>
       </div>
     </div>

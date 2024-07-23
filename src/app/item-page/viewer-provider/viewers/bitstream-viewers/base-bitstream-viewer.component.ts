@@ -1,7 +1,14 @@
-import { Component, Input } from '@angular/core';
-import { Bitstream } from '../../../../core/shared/bitstream.model';
-import { ViewerComponent, ViewerInitialState } from '../../viewer-provider-dso.interface';
+import {
+  Component,
+  Input,
+} from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+
+import { Bitstream } from '../../../../core/shared/bitstream.model';
+import {
+  ViewerComponent,
+  ViewerInitialState,
+} from '../../viewer-provider-dso.interface';
 
 @Component({
   template: '',

@@ -1,11 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
 
-import { CrisLayoutIIIFToolbarBoxComponent } from './cris-layout-iiif-toolbar-box.component';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateLoaderMock } from '../../../../../shared/mocks/translate-loader.mock';
 import { NotificationsService } from '../../../../../shared/notifications/notifications.service';
 import { NotificationsServiceStub } from '../../../../../shared/testing/notifications-service.stub';
+import { CrisLayoutIIIFToolbarBoxComponent } from './cris-layout-iiif-toolbar-box.component';
 
 describe('CrisLayoutIiifToolbarBoxComponent', () => {
   let component: CrisLayoutIIIFToolbarBoxComponent;
@@ -19,9 +28,9 @@ describe('CrisLayoutIiifToolbarBoxComponent', () => {
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
-            useClass: TranslateLoaderMock
-          }
-        })
+            useClass: TranslateLoaderMock,
+          },
+        }),
       ],
       declarations: [ CrisLayoutIIIFToolbarBoxComponent ],
       providers: [
@@ -30,9 +39,9 @@ describe('CrisLayoutIiifToolbarBoxComponent', () => {
         { provide: NotificationsService, useValue: notificationService },
         { provide: Router, useValue: {} },
         { provide: ActivatedRoute, useValue: {} },
-      ]
+      ],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

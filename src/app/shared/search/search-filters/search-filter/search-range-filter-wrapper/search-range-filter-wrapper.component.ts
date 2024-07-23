@@ -1,28 +1,42 @@
-import { Component, Inject, Injector, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  Inject,
+  Injector,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+
+import { environment } from '../../../../../../environments/environment';
+import { RemoteDataBuildService } from '../../../../../core/cache/builders/remote-data-build.service';
 import { GenericConstructor } from '../../../../../core/shared/generic-constructor';
-import { facetLoad, SearchFacetFilterComponent } from '../search-facet-filter/search-facet-filter.component';
+import { SearchService } from '../../../../../core/shared/search/search.service';
+import { SearchConfigurationService } from '../../../../../core/shared/search/search-configuration.service';
 import {
   FILTER_CONFIG,
   IN_PLACE_SEARCH,
   REFRESH_FILTER,
-  SearchFilterService
+  SearchFilterService,
 } from '../../../../../core/shared/search/search-filter.service';
-import { FilterType } from '../../../models/filter-type.model';
-import { renderFacetFor, renderFilterTypeEnvironment } from '../search-filter-type-decorator';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../my-dspace-page/my-dspace-page.component';
-import { SearchConfigurationService } from '../../../../../core/shared/search/search-configuration.service';
+import { FilterType } from '../../../models/filter-type.model';
 import { SearchFilterConfig } from '../../../models/search-filter-config.model';
-import { BehaviorSubject } from 'rxjs';
-import { environment } from '../../../../../../environments/environment';
-import { SearchService } from '../../../../../core/shared/search/search.service';
-import { RemoteDataBuildService } from '../../../../../core/cache/builders/remote-data-build.service';
-import { Router } from '@angular/router';
+import {
+  facetLoad,
+  SearchFacetFilterComponent,
+} from '../search-facet-filter/search-facet-filter.component';
+import {
+  renderFacetFor,
+  renderFilterTypeEnvironment,
+} from '../search-filter-type-decorator';
 
 @Component({
   selector: 'ds-search-range-filter-wrapper',
   templateUrl: './search-range-filter-wrapper.component.html',
   styleUrls: ['./search-range-filter-wrapper.component.scss'],
-  animations: [facetLoad]
+  animations: [facetLoad],
 })
 @renderFacetFor(FilterType.range)
 export class SearchRangeFilterWrapperComponent extends SearchFacetFilterComponent implements OnInit, OnDestroy {
@@ -60,9 +74,9 @@ export class SearchRangeFilterWrapperComponent extends SearchFacetFilterComponen
         { provide: IN_PLACE_SEARCH, useFactory: () => (this.inPlaceSearch), deps: [] },
         { provide: FILTER_CONFIG, useFactory: () => (this.filterConfig), deps: [] },
         { provide: PLATFORM_ID, useFactory: () => (this.platformId), deps: [] },
-        { provide: REFRESH_FILTER, useFactory: () => (this.refreshFilters), deps: [] }
+        { provide: REFRESH_FILTER, useFactory: () => (this.refreshFilters), deps: [] },
       ],
-      parent: this.injector
+      parent: this.injector,
     });
   }
 

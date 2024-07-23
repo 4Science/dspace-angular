@@ -1,9 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'ds-markdown-editor',
   templateUrl: './markdown-editor.component.html',
-  styleUrls: ['./markdown-editor.component.scss']
+  styleUrls: ['./markdown-editor.component.scss'],
 })
 export class MarkdownEditorComponent implements OnInit {
   // to allow multiple textarea on the same screen, need to set an uniqueId for the textarea
@@ -28,15 +34,15 @@ export class MarkdownEditorComponent implements OnInit {
         codeBlockPreview: false,
       },
       actions: [
-        'desktop', 'tablet', 'mobile'
-      ]
+        'desktop', 'tablet', 'mobile',
+      ],
     },
     toolbar: [
       'emoji', 'headings', 'bold', 'italic', 'strike', 'link', '|',
       'list', 'ordered-list', 'check', 'outdent', 'indent', 'table', '|',
       'quote', 'line', 'code', 'inline-code', 'insert-before', 'insert-after', '|',
       'undo', 'redo', '|',
-      'fullscreen', 'preview'
+      'fullscreen', 'preview',
     ],
   };
 

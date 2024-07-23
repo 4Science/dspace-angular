@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-12">
-      <div [ngSwitch]="(status$ | async)" *ngIf="!(loading$ | async)">
+      <div [ngSwitch]="(status$ | async)" *ngIf="(loading$ | async) === false">
         <ng-container *ngSwitchCase="UnpaywallSectionStatus.SUCCESSFUL">
           <ds-alert [type]="AlertType.Info"
                     [content]="'submission.sections.unpaywall.status.successful' | translate"></ds-alert>

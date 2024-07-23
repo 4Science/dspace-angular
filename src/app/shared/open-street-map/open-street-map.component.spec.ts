@@ -1,8 +1,12 @@
-import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { OpenStreetMapComponent } from './open-street-map.component';
-import { TranslateModule } from '@ngx-translate/core';
-import { LocationService } from '../../core/services/location.service';
 import { HttpClient } from '@angular/common/http';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { LocationService } from '../../core/services/location.service';
+import { OpenStreetMapComponent } from './open-street-map.component';
 //
 describe('OpenStreetMapComponent', () => {
   let component: OpenStreetMapComponent;
@@ -17,9 +21,9 @@ describe('OpenStreetMapComponent', () => {
       providers: [
         LocationService,
         { provide: HttpClient, useValue: {} },
-      ]
+      ],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

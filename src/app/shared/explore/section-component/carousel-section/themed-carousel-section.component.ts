@@ -1,6 +1,10 @@
-import { ThemedComponent } from '../../../theme-support/themed.component';
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+} from '@angular/core';
+
 import { CarouselSection } from '../../../../core/layout/models/section.model';
+import { ThemedComponent } from '../../../theme-support/themed.component';
 import { CarouselSectionComponent } from './carousel-section.component';
 
 @Component({
@@ -11,10 +15,10 @@ import { CarouselSectionComponent } from './carousel-section.component';
 export class ThemedCarouselSectionComponent extends ThemedComponent<CarouselSectionComponent> {
 
   @Input()
-  sectionId: string;
+    sectionId: string;
 
   @Input()
-  carouselSection: CarouselSection;
+    carouselSection: CarouselSection;
 
   protected inAndOutputNames: (keyof CarouselSectionComponent & keyof this)[] = ['sectionId', 'carouselSection'];
 

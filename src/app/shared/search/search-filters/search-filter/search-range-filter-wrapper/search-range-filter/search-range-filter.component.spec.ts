@@ -1,29 +1,45 @@
-import { ChangeDetectionStrategy, NO_ERRORS_SCHEMA, PLATFORM_ID } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { TranslateModule } from '@ngx-translate/core';
+import {
+  ChangeDetectionStrategy,
+  NO_ERRORS_SCHEMA,
+  PLATFORM_ID,
+} from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import {
+  BehaviorSubject,
+  of as observableOf,
+} from 'rxjs';
+
+import { RemoteDataBuildService } from '../../../../../../core/cache/builders/remote-data-build.service';
+import { buildPaginatedList } from '../../../../../../core/data/paginated-list.model';
+import { PageInfo } from '../../../../../../core/shared/page-info.model';
+import { SearchService } from '../../../../../../core/shared/search/search.service';
 import {
   FILTER_CONFIG,
   IN_PLACE_SEARCH,
   REFRESH_FILTER,
-  SearchFilterService
+  SCOPE,
+  SearchFilterService,
 } from '../../../../../../core/shared/search/search-filter.service';
-import { SearchFilterConfig } from '../../../../models/search-filter-config.model';
-import { FilterType } from '../../../../models/filter-type.model';
-import { FacetValue } from '../../../../models/facet-value.model';
-import { FormsModule } from '@angular/forms';
-import { BehaviorSubject, of as observableOf } from 'rxjs';
-import { SearchService } from '../../../../../../core/shared/search/search.service';
-import { SearchServiceStub } from '../../../../../testing/search-service.stub';
-import { buildPaginatedList } from '../../../../../../core/data/paginated-list.model';
-import { RouterStub } from '../../../../../testing/router.stub';
-import { ActivatedRoute, Router } from '@angular/router';
-import { PageInfo } from '../../../../../../core/shared/page-info.model';
-import { SearchRangeFilterComponent } from './search-range-filter.component';
-import { RemoteDataBuildService } from '../../../../../../core/cache/builders/remote-data-build.service';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../../my-dspace-page/my-dspace-page.component';
-import { SearchConfigurationServiceStub } from '../../../../../testing/search-configuration-service.stub';
 import { createSuccessfulRemoteDataObject$ } from '../../../../../remote-data.utils';
+import { RouterStub } from '../../../../../testing/router.stub';
+import { SearchConfigurationServiceStub } from '../../../../../testing/search-configuration-service.stub';
+import { SearchServiceStub } from '../../../../../testing/search-service.stub';
+import { FacetValue } from '../../../../models/facet-value.model';
+import { FilterType } from '../../../../models/filter-type.model';
+import { SearchFilterConfig } from '../../../../models/search-filter-config.model';
+import { SearchRangeFilterComponent } from './search-range-filter.component';
 
 xdescribe('SearchRangeFilterComponent', () => {
   let comp: SearchRangeFilterComponent;
@@ -50,37 +66,37 @@ xdescribe('SearchRangeFilterComponent', () => {
       count: 52,
       _links: {
         self: {
-          href: ''
+          href: '',
         },
         search: {
-          href: ''
-        }
-      }
+          href: '',
+        },
+      },
     }, {
       label: value2,
       value: value2,
       count: 20,
       _links: {
         self: {
-          href: ''
+          href: '',
         },
         search: {
-          href: ''
-        }
-      }
+          href: '',
+        },
+      },
     }, {
       label: value3,
       value: value3,
       count: 5,
       _links: {
         self: {
-          href: ''
+          href: '',
         },
         search: {
-          href: ''
-        }
-      }
-    }
+          href: '',
+        },
+      },
+    },
   ];
 
   const searchLink = '/search';
@@ -106,6 +122,7 @@ xdescribe('SearchRangeFilterComponent', () => {
         { provide: IN_PLACE_SEARCH, useValue: false },
         { provide: PLATFORM_ID, useValue: platformId },
         { provide: REFRESH_FILTER, useValue: new BehaviorSubject<boolean>(false) },
+        { provide: SCOPE, useValue: undefined },
         {
           provide: SearchFilterService, useValue: {
             getSelectedValuesForFilter: () => selectedValues,
@@ -115,14 +132,14 @@ xdescribe('SearchRangeFilterComponent', () => {
             incrementPage: (filterName: string) => {
             },
             resetPage: (filterName: string) => {
-            }
+            },
             /* eslint-enable no-empty, @typescript-eslint/no-empty-function */
-          }
-        }
+          },
+        },
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(SearchRangeFilterComponent, {
-      set: { changeDetection: ChangeDetectionStrategy.Default }
+      set: { changeDetection: ChangeDetectionStrategy.Default },
     }).compileComponents();
   }));
 
@@ -149,9 +166,9 @@ xdescribe('SearchRangeFilterComponent', () => {
       expect(router.navigate).toHaveBeenCalledWith(searchUrl.split('/'), {
         queryParams: {
           [mockFilterConfig.paramName + minSuffix]: [1900],
-          [mockFilterConfig.paramName + maxSuffix]: [1950]
+          [mockFilterConfig.paramName + maxSuffix]: [1950],
         },
-        queryParamsHandling: 'merge'
+        queryParamsHandling: 'merge',
       });
     });
   });

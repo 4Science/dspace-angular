@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 
-import { FieldRenderingType, MetadataBoxFieldRendering } from '../metadata-box.decorator';
+import {
+  FieldRenderingType,
+  MetadataBoxFieldRendering,
+} from '../metadata-box.decorator';
 import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
 
 /**
@@ -10,7 +13,7 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'div[ds-markdown]',
   templateUrl: './markdown.component.html',
-  styleUrls: ['./markdown.component.scss']
+  styleUrls: ['./markdown.component.scss'],
 })
 @MetadataBoxFieldRendering(FieldRenderingType.MARKDOWN)
 export class MarkdownComponent extends RenderingTypeValueModelComponent {

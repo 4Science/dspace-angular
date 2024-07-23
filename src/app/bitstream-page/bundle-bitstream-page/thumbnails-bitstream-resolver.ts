@@ -1,19 +1,24 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {BundleDataService} from '../../core/data/bundle-data.service';
-import {Observable} from 'rxjs';
-import {PaginatedSearchOptions} from '../../shared/search/models/paginated-search-options.model';
-import {PaginationComponentOptions} from '../../shared/pagination/pagination-component-options.model';
-import {getFirstCompletedRemoteData} from '../../core/shared/operators';
-import {map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  Resolve,
+  RouterStateSnapshot,
+} from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { BundleDataService } from '../../core/data/bundle-data.service';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import {
   createNoContentRemoteDataObject,
   createSuccessfulRemoteDataObject,
 } from '../../shared/remote-data.utils';
+import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThumbnailsBitstreamResolver implements Resolve<any> {
   constructor(protected bundleDataService: BundleDataService) {
@@ -29,14 +34,14 @@ export class ThumbnailsBitstreamResolver implements Resolve<any> {
     const bundleId = route.params.bundle_uuid;
     const thumbnailIndex = route.params.thumbnail_id;
     const paginatedOptions = new PaginatedSearchOptions({
-      pagination: Object.assign(new PaginationComponentOptions(), { id: thumbnailIndex , pageSize: 1, currentPage: thumbnailIndex})});
+      pagination: Object.assign(new PaginationComponentOptions(), { id: thumbnailIndex , pageSize: 1, currentPage: thumbnailIndex }) });
     return this.bundleDataService.getBitstreams(bundleId, paginatedOptions)
       .pipe(
         getFirstCompletedRemoteData(),
         map ((data) => data.payload?.page[0]),
         map ((data) => {
           return data ? createSuccessfulRemoteDataObject(data) : createNoContentRemoteDataObject();
-        })
+        }),
       );
   }
 }

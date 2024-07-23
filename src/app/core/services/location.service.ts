@@ -1,8 +1,16 @@
+import {
+  HttpClient,
+  HttpParams,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {
+  catchError,
+  map,
+  take,
+} from 'rxjs/operators';
+
 import { environment } from '../../../environments/environment';
-import { catchError, map, take } from 'rxjs/operators';
 import { hasValue } from '../../shared/empty.util';
 
 export interface LocationCoordinates {
@@ -27,7 +35,7 @@ const IS_COORDINATE_PAIR_REGEXP = /^\d+\.?\d*,\d+\.?\d*$/;
 const NOMINATIM_RESPONSE_FORMAT = 'jsonv2';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocationService {
 
@@ -44,10 +52,10 @@ export class LocationService {
    * @returns {LocationPlace} the information related to the searched place
    */
   public searchPlace(address: string): Observable<LocationPlace> {
-    let params = new HttpParams().append('q', address).append('format', NOMINATIM_RESPONSE_FORMAT);
+    const params = new HttpParams().append('q', address).append('format', NOMINATIM_RESPONSE_FORMAT);
 
     return this.http.get<Record<string,any>[]>(this.searchEndpoint, { params: params }).pipe(
-      catchError((err) => {
+      catchError((err: unknown) => {
         console.error('Location service', err);
         throw Error(LocationErrorCodes.API_ERROR);
       }),
@@ -81,13 +89,13 @@ export class LocationService {
    * @returns {Observable<string>} the display name for the coordinates
    */
   public searchCoordinates(coordinates: LocationCoordinates): Observable<string> {
-    let params = new HttpParams()
+    const params = new HttpParams()
       .append('lat', coordinates.latitude)
       .append('lon', coordinates.longitude)
       .append('format', NOMINATIM_RESPONSE_FORMAT);
 
     return this.http.get<Record<string,any>>(this.reverseSearchEndpoint, { params: params }).pipe(
-      catchError((err) => {
+      catchError((err: unknown) => {
         throw Error(LocationErrorCodes.API_ERROR);
       }),
       take(1),

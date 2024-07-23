@@ -1,7 +1,7 @@
 <div *ngIf="metadataFieldRenderOptions" class="{{containerStyle}}">
   <div class="d-flex" [class.flex-column]="field.labelAsHeading">
     <span *ngIf="hasLabel"
-          class="{{labelStyle}}" [innerHTML]="label">
+        class="{{labelStyle}}" [innerHTML]="getLabel()">
     </span>
 
     <div *ngIf="!isStructured" class="d-flex col flex-wrap" [class.flex-column]="!field.valuesInline">
@@ -15,7 +15,7 @@
       </ng-container>
       <!-- Show More/collapse button -->
       <div *ngIf="isConfigured" [class.mx-3]="field.valuesInline">
-        <ng-container *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size">
+        <ng-container *ngIf="componentsToBeRenderedMap.size !== lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size">
           <a (click)="setData('fillAllData')" id="a-more-icon" href="javascript:void(0);">
             <i class="fas" [ngClass]="field.valuesInline ? 'fa-chevron-right' : 'fa-chevron-down'"></i>
           </a>
@@ -24,7 +24,7 @@
             {{ (lastLimit === 0 ? "cris-layout.rendering.more" : "cris-layout.rendering.more.withlast") | translate}}
           </a>
         </ng-container>
-        <ng-container *ngIf="componentsToBeRenderedMap.size == lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size">
+        <ng-container *ngIf="componentsToBeRenderedMap.size === lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size">
           <a (click)="setData('getComputedData')" id="a-collapse-icon" href="javascript:void(0);">
             <i class="fas" [ngClass]="field.valuesInline ? 'fa-chevron-left' : 'fa-chevron-up'"></i>
           </a>

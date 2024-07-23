@@ -1,22 +1,32 @@
 import { CommonModule } from '@angular/common';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  ComponentFixture,
+  inject,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-
-import { SearchService } from '../../../../core/shared/search/search.service';
-import { TranslateLoaderMock } from '../../../mocks/translate-loader.mock';
-import { GridSectionComponent } from './grid-section.component';
-import { SearchResult } from '../../../search/models/search-result.model';
-import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
-import { createSuccessfulRemoteDataObject$ } from '../../../remote-data.utils';
-import { LocaleService } from '../../../../core/locale/locale.service';
-import { Site } from '../../../../core/shared/site.model';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
 import { of } from 'rxjs';
+
+import { LocaleService } from '../../../../core/locale/locale.service';
+import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
+import { SearchService } from '../../../../core/shared/search/search.service';
+import { Site } from '../../../../core/shared/site.model';
+import { TranslateLoaderMock } from '../../../mocks/translate-loader.mock';
+import { createSuccessfulRemoteDataObject$ } from '../../../remote-data.utils';
+import { SearchResult } from '../../../search/models/search-result.model';
+import { GridSectionComponent } from './grid-section.component';
 
 describe('GridSectionComponent', () => {
   let component: GridSectionComponent;
@@ -28,7 +38,7 @@ describe('GridSectionComponent', () => {
 
   const mockLocaleService = jasmine.createSpyObj('LocaleService', {
     getCurrentLanguageCode: jasmine.createSpy('getCurrentLanguageCode'),
-    getLanguageCodeList: of(languageList)
+    getLanguageCodeList: of(languageList),
   });
 
   const firstSearchResult = Object.assign(new SearchResult(), {
@@ -39,14 +49,14 @@ describe('GridSectionComponent', () => {
         name: 'My first publication',
         metadata: {
           'dspace.entity.type': [
-            { value: 'Publication' }
-          ]
+            { value: 'Publication' },
+          ],
         },
         firstMetadataValue(keyOrKeys: string | string[]): string {
           return '';
         },
-      })
-    }
+      }),
+    },
   });
 
   const secondSearchResult = Object.assign(new SearchResult(), {
@@ -58,14 +68,14 @@ describe('GridSectionComponent', () => {
         firstMetadataValue(keyOrKeys: string | string[]): string {
           return '';
         },
-      })
-    }
+      }),
+    },
   });
 
   beforeEach(waitForAsync(() => {
     searchServiceStub = jasmine.createSpyObj('SearchService', {
       search: jasmine.createSpy('search'),
-      getSearchLink: jasmine.createSpy('getSearchLink')
+      getSearchLink: jasmine.createSpy('getSearchLink'),
     });
 
     TestBed.configureTestingModule({
@@ -73,8 +83,8 @@ describe('GridSectionComponent', () => {
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
-            useClass: TranslateLoaderMock
-          }
+            useClass: TranslateLoaderMock,
+          },
         }),
       ],
       declarations: [GridSectionComponent],
@@ -82,7 +92,7 @@ describe('GridSectionComponent', () => {
         { provide: SearchService, useValue: searchServiceStub },
         { provide: LocaleService, useValue: mockLocaleService },
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
   }));
@@ -97,27 +107,27 @@ describe('GridSectionComponent', () => {
       discoveryConfigurationName: 'publication',
       componentType: 'grid',
       style: 'col-md-6',
-      'main-content-link': ''
+      'main-content-link': '',
     };
     component.site  = Object.assign(new Site(), {
       id: 'test-site',
       _links: {
-        self: { href: 'test-site-href' }
+        self: { href: 'test-site-href' },
       },
       metadata: {
         'cms.homepage.footer': [
           {
             language: 'en',
-            value: '1234'
-          }
+            value: '1234',
+          },
         ],
         'dc.description': [
           {
             language: 'en_US',
-            value: 'desc'
-          }
-        ]
-      }
+            value: 'desc',
+          },
+        ],
+      },
     });
 
     fixture.detectChanges();

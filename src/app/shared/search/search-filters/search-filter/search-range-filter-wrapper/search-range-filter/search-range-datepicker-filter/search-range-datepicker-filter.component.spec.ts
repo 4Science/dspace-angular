@@ -1,26 +1,40 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { SearchRangeDatepickerFilterComponent } from './search-range-datepicker-filter.component';
-import { TranslateModule } from '@ngx-translate/core';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  ChangeDetectionStrategy,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { SearchRangeFilterComponent } from '../search-range-filter.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import {
+  BehaviorSubject,
+  of as observableOf,
+  of,
+} from 'rxjs';
+
+import { RemoteDataBuildService } from '../../../../../../../core/cache/builders/remote-data-build.service';
 import { SearchService } from '../../../../../../../core/shared/search/search.service';
-import { SearchServiceStub } from '../../../../../../testing/search-service.stub';
-import { ActivatedRoute, Router } from '@angular/router';
-import { RouterStub } from '../../../../../../testing/router.stub';
 import {
   FILTER_CONFIG,
   IN_PLACE_SEARCH,
   REFRESH_FILTER,
-  SearchFilterService
+  SearchFilterService,
 } from '../../../../../../../core/shared/search/search-filter.service';
-import { RemoteDataBuildService } from '../../../../../../../core/cache/builders/remote-data-build.service';
-import { BehaviorSubject, of, of as observableOf } from 'rxjs';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../../../my-dspace-page/my-dspace-page.component';
+import { RouterStub } from '../../../../../../testing/router.stub';
 import { SearchConfigurationServiceStub } from '../../../../../../testing/search-configuration-service.stub';
-import { ChangeDetectionStrategy, NO_ERRORS_SCHEMA } from '@angular/core';
+import { SearchServiceStub } from '../../../../../../testing/search-service.stub';
 import { SearchFilterConfig } from '../../../../../models/search-filter-config.model';
+import { SearchRangeFilterComponent } from '../search-range-filter.component';
+import { SearchRangeDatepickerFilterComponent } from './search-range-datepicker-filter.component';
 
 describe('SearchRangeDatepickerFilterComponent', () => {
   let component: SearchRangeDatepickerFilterComponent;
@@ -49,14 +63,14 @@ describe('SearchRangeDatepickerFilterComponent', () => {
             incrementPage: (filterName: string) => {
             },
             resetPage: (filterName: string) => {
-            }
+            },
             /* eslint-enable no-empty, @typescript-eslint/no-empty-function */
-          }
-        }
+          },
+        },
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(SearchRangeFilterComponent, {
-      set: { changeDetection: ChangeDetectionStrategy.Default }
+      set: { changeDetection: ChangeDetectionStrategy.Default },
     }).compileComponents();
   }));
 

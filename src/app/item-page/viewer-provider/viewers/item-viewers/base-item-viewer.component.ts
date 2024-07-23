@@ -1,10 +1,17 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+} from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+
 import { Item } from '../../../../core/shared/item.model';
-import { ViewerComponent, ViewerInitialState } from '../../viewer-provider-dso.interface';
+import {
+  ViewerComponent,
+  ViewerInitialState,
+} from '../../viewer-provider-dso.interface';
 
 @Component({
-  template: ''
+  template: '',
 })
 export abstract class BaseItemViewerComponent implements ViewerComponent {
 

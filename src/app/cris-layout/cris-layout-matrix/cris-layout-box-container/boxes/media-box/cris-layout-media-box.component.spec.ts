@@ -1,11 +1,17 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CrisLayoutMediaBoxComponent } from './cris-layout-media-box.component';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
+
+import { Item } from '../../../../../core/shared/item.model';
 import { TranslateLoaderMock } from '../../../../../shared/mocks/translate-loader.mock';
 import { boxMetadata } from '../../../../../shared/testing/box.mock';
-import { Item } from '../../../../../core/shared/item.model';
+import { CrisLayoutMediaBoxComponent } from './cris-layout-media-box.component';
 
 describe('CrisLayoutMediaBoxComponent', () => {
   let component: CrisLayoutMediaBoxComponent;
@@ -20,11 +26,11 @@ describe('CrisLayoutMediaBoxComponent', () => {
           'language': null,
           'authority': null,
           'confidence': -1,
-          'place': 0
-        }]
+          'place': 0,
+        }],
       },
       uuid: 'test-item-uuid',
-    }
+    },
   );
 
   beforeEach(async () => {
@@ -34,17 +40,17 @@ describe('CrisLayoutMediaBoxComponent', () => {
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
-            useClass: TranslateLoaderMock
-          }
-        })
+            useClass: TranslateLoaderMock,
+          },
+        }),
       ],
       providers: [
         { provide: 'boxProvider', useValue: boxMetadata },
         { provide: 'itemProvider', useValue: testItem },
       ],
       schemas: [
-        NO_ERRORS_SCHEMA
-      ]
+        NO_ERRORS_SCHEMA,
+      ],
     })
       .compileComponents();
   });

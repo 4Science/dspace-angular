@@ -1,15 +1,20 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+
+import { Item } from '../../../../../core/shared/item.model';
+import { MetadataValue } from '../../../../../core/shared/metadata.models';
+import { VocabularyOptions } from '../../../../../core/submission/vocabularies/models/vocabulary-options.model';
 import { RenderCrisLayoutBoxFor } from '../../../../decorators/cris-layout-box.decorator';
 import { LayoutBox } from '../../../../enums/layout-box.enum';
 import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-component.model';
-import { Item } from '../../../../../core/shared/item.model';
-import { VocabularyOptions } from '../../../../../core/submission/vocabularies/models/vocabulary-options.model';
-import { MetadataValue } from '../../../../../core/shared/metadata.models';
 
 @Component({
   selector: 'ds-hierarchy.component',
-  templateUrl: './hierarchy.component.html'
+  templateUrl: './hierarchy.component.html',
 })
 @RenderCrisLayoutBoxFor(LayoutBox.HIERARCHY,true)
 export class HierarchyComponent extends CrisLayoutBoxModelComponent implements OnInit {
@@ -48,7 +53,7 @@ export class HierarchyComponent extends CrisLayoutBoxModelComponent implements O
     super.ngOnInit();
 
     this.selectedItem = Object.assign(new MetadataValue(), this.item.firstMetadata(this.boxProvider.configuration.metadata), {
-      authority: this.item.uuid
+      authority: this.item.uuid,
     } );
   }
 }
