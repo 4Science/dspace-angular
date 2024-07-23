@@ -73,4 +73,5 @@ export class BrowserVideojsService implements VideojsService {
 
     return videoPlayer;
   }
+
 }

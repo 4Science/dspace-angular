@@ -1,0 +1,35 @@
+:host {
+  @mixin ellipsis-y($lines) {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ellipsis-y-4 {
+    @include ellipsis-y(4);
+  }
+
+  .ellipsis-y-2 {
+    @include ellipsis-y(2);
+  }
+
+  .slider-wrapper {
+    .arrow {
+      width: 50px;
+    }
+    .card {
+      height: 30rem;
+      max-width: 530px;
+      flex: 1; // give the same width to all cards
+    }
+
+    @include media-breakpoint-down(md) {
+      .card {
+        height: 20rem;
+      }
+    }
+  }
+
+}

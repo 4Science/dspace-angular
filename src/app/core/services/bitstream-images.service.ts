@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 import { from, Observable } from 'rxjs';
 import { filter, map, mergeMap, reduce, switchMap, take } from 'rxjs/operators';
@@ -12,6 +12,7 @@ import { BitstreamFormat } from '../shared/bitstream-format.model';
 import { hasValue } from '../../shared/empty.util';
 import { BitstreamDataService } from '../data/bitstream-data.service';
 import { Item } from '../shared/item.model';
+import { DSpaceObject } from '../shared/dspace-object.model';
 
 interface ItemAndImage {
   itemUUID: string;
@@ -21,8 +22,7 @@ interface ItemAndImage {
 @Injectable({ providedIn: 'root' })
 export class BitstreamImagesService {
 
-
-  constructor(protected bitstreamDataService: BitstreamDataService) {}
+  private readonly bitstreamDataService = inject(BitstreamDataService);
 
   /**
    * Retrieve all items and their image bitstreams
@@ -46,15 +46,15 @@ export class BitstreamImagesService {
 
   /**
    * Find all image bitstreams for an item
-   * @param item
-   * @param bundleName
+   * @param item the item for which the images should be retrieved
+   * @param bundleName the bundle name (ORIGINAL by default)
    */
-  findImageBitstreams(item: Item, bundleName: string) {
+  findImageBitstreams(item: Item | DSpaceObject, bundleName = 'ORIGINAL') {
     const isImageMimetypeRegex = /^image\//;
 
     // retrieve all bundle's bitstreams for the item
     const bitstreamPayload$: Observable<Bitstream> = this.bitstreamDataService.findAllByItemAndBundleName(
-      item, bundleName, {}, true, true, followLink('format'),
+      item as Item, bundleName, {}, true, true, followLink('format'),
     ).pipe(
       getFirstCompletedRemoteData(),
       switchMap((rd: RemoteData<PaginatedList<Bitstream>>) => rd.hasSucceeded ? rd.payload.page : new Array<Bitstream>()),

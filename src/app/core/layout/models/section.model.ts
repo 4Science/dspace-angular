@@ -68,6 +68,7 @@ export interface TopSection extends SectionComponent {
   itemListStyle?: string;
   cardColumnStyle?: string;
   showAllResults: boolean;
+  template: TopSectionTemplateType;
 }
 
 export interface GridSection extends SectionComponent {
@@ -160,4 +161,28 @@ export interface SliderSection extends SectionComponent {
   captionStyle: string;
   titleStyle: string;
   showBlurryBackdrop: boolean;
+}
+
+/**
+ * Represents an advanced top section in the layout.
+ */
+export interface AdvancedTopSection extends Omit<TopSection, 'discoveryConfigurationName'|'componentType'> {
+  /**
+   * The names of the discovery configurations.
+   */
+  discoveryConfigurationName: string[];
+
+  /**
+   * The component type, which is always 'advanced-top-component'.
+   */
+  componentType: 'advanced-top-component';
+}
+
+/*
+ * Represents the type of template to use for the section
+ */
+export enum TopSectionTemplateType {
+  DEFAULT = 'default',  // CRIS default template
+  IMAGES = 'images',
+  SLIDER = 'slider',
 }

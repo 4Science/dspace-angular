@@ -69,6 +69,7 @@ describe('BackgroundComponent ', () => {
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
         { provide: 'renderingSubTypeProvider', useValue: '' },
+        { provide: 'tabNameProvider', useValue: ''},
         { provide: ObjectCacheService, useValue: getMockObjectCacheService() },
         { provide: UUIDService, useValue: getMockUUIDService() },
         { provide: RemoteDataBuildService, useValue: getMockRemoteDataBuildService() },

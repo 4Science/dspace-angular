@@ -17,8 +17,6 @@ import { HomePageModule } from '../../app/home-page/home-page.module';
 import { StatisticsModule } from '../../app/statistics/statistics.module';
 import { OpenaireModule } from '../../app/openaire/openaire.module';
 import { SearchComponent } from './app/shared/search/search.component';
-import { TopSectionComponent } from './app/shared/explore/section-component/top-section/top-section.component';
-import { BrowseMostElementsComponent } from './app/browse-most-elements/browse-most-elements.component';
 import {
   CountersSectionComponent
 } from './app/shared/explore/section-component/counters-section/counters-section.component';
@@ -51,8 +49,6 @@ const DECLARATIONS = [
   ExplorePageComponent,
   HomePageComponent,
   SearchComponent,
-  TopSectionComponent,
-  BrowseMostElementsComponent,
   CountersSectionComponent,
   TextSectionComponent,
   LangSwitchComponent,
@@ -60,7 +56,7 @@ const DECLARATIONS = [
   SearchNavbarComponent,
   CarouselComponent,
   CarouselSectionComponent,
-  GridSectionComponent
+  GridSectionComponent,
 ];
 
 @NgModule({

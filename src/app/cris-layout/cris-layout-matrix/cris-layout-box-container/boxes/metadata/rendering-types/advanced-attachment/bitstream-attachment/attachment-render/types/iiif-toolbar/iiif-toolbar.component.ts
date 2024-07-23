@@ -30,6 +30,10 @@ export class IIIFToolbarComponent implements OnInit {
 
   @Input()
   bitstream: Bitstream;
+  /**
+   * The tab name
+   */
+  @Input() tabName: string;
 
   // The path to the REST manifest endpoint.
   manifestUrl: string;
@@ -59,7 +63,7 @@ export class IIIFToolbarComponent implements OnInit {
 
   async openMiradorViewer() {
     if (environment.advancedAttachmentRendering.showViewerOnSameItemPage) {
-      await this.router.navigate([ getItemViewerDetailsPath(this.item, 'iiif') ], { fragment: 'viewer' });
+      await this.router.navigate([ getItemViewerDetailsPath(this.item, 'iiif', this.tabName) ], { fragment: 'viewer' });
     } else {
       await this.router.navigate([ getItemViewerPath(this.item, 'iiif') ]);
     }
