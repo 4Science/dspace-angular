@@ -1,8 +1,8 @@
-import { Item } from './../../../core/shared/item.model';
-import { NativeWindowService, NativeWindowRef } from './../../../core/services/window.service';
-import { SearchManager } from './../../../core/browse/search-manager';
-import { BitstreamDataService } from './../../../core/data/bitstream-data.service';
-import { ChangeDetectorRef, Component, Inject } from '@angular/core';
+import { Item } from '../../../core/shared/item.model';
+import { NativeWindowRef, NativeWindowService } from '../../../core/services/window.service';
+import { SearchManager } from '../../../core/browse/search-manager';
+import { BitstreamDataService } from '../../../core/data/bitstream-data.service';
+import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { SliderComponent } from '../slider.component';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { BitstreamImagesService } from 'src/app/core/services/bitstream-images.service';
@@ -17,7 +17,7 @@ import { getItemPageRoute } from 'src/app/item-page/item-page-routing-paths';
   templateUrl: './link-slider.component.html',
   styleUrls: ['./link-slider.component.scss'],
 })
-export class LinkSliderComponent extends SliderComponent {
+export class LinkSliderComponent extends SliderComponent implements OnInit, OnDestroy {
 
   displayNameMap = new Map([
     [Breakpoints.XSmall, 'XSmall'],

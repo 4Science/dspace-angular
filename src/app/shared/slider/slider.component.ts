@@ -1,18 +1,18 @@
-import { RemoteData } from './../../core/data/remote-data';
-import { NativeWindowService, NativeWindowRef } from './../../core/services/window.service';
-import { SearchManager } from './../../core/browse/search-manager';
-import { BitstreamDataService } from './../../core/data/bitstream-data.service';
-import { DSpaceObjectType } from './../../core/shared/dspace-object-type.model';
-import { SortDirection, SortOptions } from './../../core/cache/models/sort-options.model';
-import { Item } from './../../core/shared/item.model';
-import { PaginatedSearchOptions } from './../search/models/paginated-search-options.model';
+import { RemoteData } from '../../core/data/remote-data';
+import { NativeWindowRef, NativeWindowService } from '../../core/services/window.service';
+import { SearchManager } from '../../core/browse/search-manager';
+import { BitstreamDataService } from '../../core/data/bitstream-data.service';
+import { DSpaceObjectType } from '../../core/shared/dspace-object-type.model';
+import { SortDirection, SortOptions } from '../../core/cache/models/sort-options.model';
+import { Item } from '../../core/shared/item.model';
+import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
 import { ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
-import { BehaviorSubject, Observable, map, mergeMap, take } from 'rxjs';
-import { BitstreamImagesService } from './../../core/services/bitstream-images.service';
+import { BehaviorSubject, map, mergeMap, Observable, take } from 'rxjs';
+import { BitstreamImagesService } from '../../core/services/bitstream-images.service';
 import { SearchObjects } from '../search/models/search-objects.model';
 import { isNotEmpty } from '../empty.util';
 import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
-import { getFirstCompletedRemoteData } from './../../core/shared/operators';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 
 @Component({
   template: ''
