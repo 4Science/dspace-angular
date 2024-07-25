@@ -70,9 +70,9 @@ describe('ThumbnailSliderComponent', () => {
   it('should emit onThumbnailSelected event when onThumbnailClick is called', () => {
     const item = new Item();
     const index = 1;
-    spyOn(component.onThumbnailSelected, 'emit');
+    spyOn(component.thumbnailSelected, 'emit');
     component.onThumbnailClick(item, index);
-    expect(component.onThumbnailSelected.emit).toHaveBeenCalledWith(item);
+    expect(component.thumbnailSelected.emit).toHaveBeenCalledWith(item);
   });
 
   it('should set activeIndex when onThumbnailClick is called', () => {

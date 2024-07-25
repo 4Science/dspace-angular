@@ -1,7 +1,7 @@
 import { Item } from '../../../core/shared/item.model';
 import { SearchConfigurationService } from '../../../core/shared/search/search-configuration.service';
 import { SEARCH_CONFIG_SERVICE } from '../../../my-dspace-page/my-dspace-page.component';
-import { NativeWindowService, NativeWindowRef } from '../../../core/services/window.service';
+import { NativeWindowRef, NativeWindowService } from '../../../core/services/window.service';
 import { SearchManager } from '../../../core/browse/search-manager';
 import { BitstreamDataService } from '../../../core/data/bitstream-data.service';
 import { SearchConfig } from '../../../core/shared/search/search-filters/search-config.model';
@@ -14,6 +14,8 @@ import {
   EventEmitter,
   Inject,
   Input,
+  OnChanges,
+  OnInit,
   Output,
   SimpleChanges,
   ViewChild,
@@ -34,7 +36,7 @@ import { NgbSlideEvent } from '@ng-bootstrap/ng-bootstrap';
     }
   ]
 })
-export class ThumbnailSliderComponent extends SliderComponent {
+export class ThumbnailSliderComponent extends SliderComponent implements OnInit, OnChanges {
 
   /**
    *The index of the active thumbnail
@@ -55,7 +57,7 @@ export class ThumbnailSliderComponent extends SliderComponent {
   /**
    * Event emitted when a thumbnail is selected
    */
-  @Output() onThumbnailSelected: EventEmitter<Item> = new EventEmitter<Item>();
+  @Output() thumbnailSelected: EventEmitter<Item> = new EventEmitter<Item>();
 
   /**
    * Event emitted when the active index changes
@@ -170,7 +172,7 @@ export class ThumbnailSliderComponent extends SliderComponent {
    */
   onThumbnailClick(item: Item, index: number) {
     this.setActiveIndex(index);
-    this.onThumbnailSelected.emit(item);
+    this.thumbnailSelected.emit(item);
   }
 
   /**

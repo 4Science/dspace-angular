@@ -121,7 +121,7 @@ export abstract class SliderComponent implements OnInit {
 
   currentPage = 1;
 
-  placeholderSrc = 'assets/images/replacement_image.svg';
+  readonly placeholderSrc = 'assets/images/replacement_image.svg';
 
   constructor(
     protected bitstreamDataService: BitstreamDataService,
