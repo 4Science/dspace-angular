@@ -1,4 +1,8 @@
 .img-container-el {
+  // height of the placeholder image
+  height: 200px;
+  // width of the placeholder image
+  width: 240px;
   display: block;
   overflow: hidden;
   position: relative;
@@ -25,6 +29,9 @@
   }
 
   img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
     transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
