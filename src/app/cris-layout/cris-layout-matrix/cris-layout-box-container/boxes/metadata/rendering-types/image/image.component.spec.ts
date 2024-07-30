@@ -96,6 +96,7 @@ describe('ImageComponent', () => {
         { provide: 'itemProvider', useValue: testItem },
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: BitstreamDataService, useValue: mockBitstreamDataService },
+        { provide: 'tabNameProvider', useValue: '' },
       ]
     })
     .compileComponents();
