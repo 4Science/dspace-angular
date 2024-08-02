@@ -192,7 +192,7 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
       const submissionObjectName = 'workspaceitems';
       const testEndpoint = 'http://test-endpoint';
       const successLabel = of('success-label');
-      const uploadSection: WorkspaceitemSectionUploadObject = { files: [] };
+      const uploadSection: WorkspaceitemSectionUploadObject = { files: [], primary: null };
       const successfulSection: WorkspaceitemSectionUnpaywallObject = {
         id: 1,
         status: UnpaywallSectionStatus.SUCCESSFUL,

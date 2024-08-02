@@ -30,6 +30,7 @@ import { RemoteData } from '../core/data/remote-data';
 import {
   BrowseSection,
   FacetSection,
+  LayoutModeEnum,
   SearchSection,
   Section,
   TopSection,
