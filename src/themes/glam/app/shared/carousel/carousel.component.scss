@@ -59,15 +59,9 @@
       .carousel-header {
         margin-left: $title-horizontal-margin;
         margin-right: $title-horizontal-margin;
-        // Line clamping
-        display: -webkit-box;
         white-space: pre-wrap;
-        overflow: hidden;
-        min-height: 2lh;
         font-size: 40px;
         font-weight: 700;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: $title-line-clamp;
       }
 
       .arrow-wrapper {

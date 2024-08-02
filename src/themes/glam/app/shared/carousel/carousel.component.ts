@@ -3,6 +3,8 @@ import { CarouselComponent as BaseComponent} from '../../../../../app/shared/car
 import { BitstreamDataService } from '../../../../../app/core/data/bitstream-data.service';
 import { NativeWindowRef, NativeWindowService } from '../../../../../app/core/services/window.service';
 import { DOCUMENT } from '@angular/common';
+import {HostWindowService} from '../../../../../app/shared/host-window.service';
+import {Observable} from 'rxjs';
 
 /**
  * Component representing the Carousel component section.
@@ -24,6 +26,7 @@ export class CarouselComponent extends BaseComponent implements OnInit {
 
   constructor(
     protected bitstreamDataService: BitstreamDataService,
+    private hostWindowService: HostWindowService,
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
     @Inject(DOCUMENT) private _document: Document,
   ) {
@@ -49,6 +52,10 @@ export class CarouselComponent extends BaseComponent implements OnInit {
 
   getBackgroundImage(href: string) {
     return this.carouselOptions.showBlurryBackdrop && href ? `url(${href})` : 'assets/images/replacement_image.svg';
+  }
+
+  isXsOrSm$(): Observable<boolean> {
+    return  this.hostWindowService.isXsOrSm();
   }
 
 }

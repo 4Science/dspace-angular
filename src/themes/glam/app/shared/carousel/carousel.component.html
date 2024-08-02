@@ -27,27 +27,31 @@
               <i class="fa fa-arrow-left"></i>
             </div>
             <!-- central column -->
-            <div class="caption-wrapper flex-fill d-flex flex-column justify-content-center gapy-3 py-2">
-              <h2 class="h1 carousel-header" [class]="carouselOptions.titleStyle" *ngIf="item.indexableObject.metadata[title]">
-                {{item.indexableObject.metadata[title][0].value}}
-              </h2>
-              <div class="caption text-center" [class]="carouselOptions.captionStyle"
-                   *ngIf="item.indexableObject.metadata[description]; let descriptionObj">
-                <div class="text-center ellipsis-y-3">{{descriptionObj[0].value}}</div>
-                <div class="caption-fade"></div>
+            <div class="caption-wrapper flex-fill d-flex flex-column justify-content-between gapy-3 py-2">
+              <div class="d-flex flex-column h-75 justify-content-around">
+                <h2 class="h1 carousel-header ellipsis-y-3" [class]="carouselOptions.titleStyle" *ngIf="item.indexableObject.metadata[title]">
+                  {{item.indexableObject.metadata[title][0].value}}
+                </h2>
+                <div class="caption text-center" [class]="carouselOptions.captionStyle"
+                     *ngIf="item.indexableObject.metadata[description]; let descriptionObj">
+                  <div class="text-center" [ngClass]="(isXsOrSm$() | async) ? 'ellipsis-y-3' : 'ellipsis-y-10'">{{descriptionObj[0].value}}</div>
+                  <div class="caption-fade"></div>
+                </div>
               </div>
-              <div class="text-center" *ngIf="getItemLink(item.indexableObject); let currentLink;">
-                <a *ngIf="isLinkInternal(currentLink)" [routerLink]="currentLink" class="btn btn-light">
-                  {{ 'explore.carousel.view-more' | translate }}
-                </a>
-                <a *ngIf="!isLinkInternal(currentLink)" [href]="currentLink" [target]="carouselOptions.targetBlank ? '_blank' : null" class="btn btn-light">
-                  {{ 'explore.carousel.view-more' | translate }}
-                </a>
+              <div class="d-flex flex-column h-25 justify-content-center gapy-4">
+                <div class="text-center" *ngIf="getItemLink(item.indexableObject); let currentLink;">
+                  <a *ngIf="isLinkInternal(currentLink)" [routerLink]="currentLink" class="btn btn-light">
+                    {{ 'explore.carousel.view-more' | translate }}
+                  </a>
+                  <a *ngIf="!isLinkInternal(currentLink)" [href]="currentLink" [target]="carouselOptions.targetBlank ? '_blank' : null" class="btn btn-light">
+                    {{ 'explore.carousel.view-more' | translate }}
+                  </a>
+                </div>
+                <button *ngIf="items.length > 1" type="button" class="btn btn-sm toggle-paused" (click)="togglePaused()">
+                  <i class="fas fa-play" *ngIf="paused"></i>
+                  <i class="fas fa-pause" *ngIf="!paused"></i>
+                </button>
               </div>
-              <button *ngIf="items.length > 1" type="button" class="btn btn-sm toggle-paused" (click)="togglePaused()">
-                <i class="fas fa-play" *ngIf="paused"></i>
-                <i class="fas fa-pause" *ngIf="!paused"></i>
-              </button>
             </div>
             <!-- right column -->
             <div *ngIf="items.length > 1" class="arrow-wrapper" (click)="carousel.next()">
