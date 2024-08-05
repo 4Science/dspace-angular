@@ -5,6 +5,8 @@ import { BitstreamImagesService } from '../../../core/services/bitstream-images.
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { map, tap } from 'rxjs/operators';
 import { Item } from 'src/app/core/shared/item.model';
+import { hasValue } from '../../empty.util';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'ds-slider-browse-elements',
@@ -54,15 +56,16 @@ export class SliderBrowseElementsComponent extends AbstractBrowseElementsCompone
       map(([items, firstItem]) => items.slice(firstItem, firstItem + this.itemsPerPageBS.value)),
     );
 
-    this.resizeObserver = new ResizeObserver(entries => {
-      entries.forEach(entry => {
-        const containerWidth = entry.contentRect.width;
-        const maxFittingCards = Math.max(Math.floor((containerWidth - this.arrowSpace + this.cardGap) / (this.minCardWidth + this.cardGap)), 1);
-        this.itemsPerPageBS?.next(Math.min(this.maxItemsPerPage, maxFittingCards));
-        this.firstItemBS?.next(0); // reset when screen width changes
+    if (isPlatformBrowser(this.platformId)) {
+      this.resizeObserver = new ResizeObserver(entries => {
+        entries.forEach(entry => {
+          const containerWidth = entry.contentRect.width;
+          const maxFittingCards = Math.max(Math.floor((containerWidth - this.arrowSpace + this.cardGap) / (this.minCardWidth + this.cardGap)), 1);
+          this.itemsPerPageBS?.next(Math.min(this.maxItemsPerPage, maxFittingCards));
+          this.firstItemBS?.next(0); // reset when screen width changes
+        });
       });
-    });
-
+    }
   }
 
   next() {
@@ -79,12 +82,16 @@ export class SliderBrowseElementsComponent extends AbstractBrowseElementsCompone
   }
 
   ngAfterViewInit() {
-    this.sliderWrapperElement = this.sliderWrapperElementRef.nativeElement;
-    this.resizeObserver.observe(this.sliderWrapperElement);
+    if (isPlatformBrowser(this.platformId)) {
+      this.sliderWrapperElement = this.sliderWrapperElementRef.nativeElement;
+      this.resizeObserver.observe(this.sliderWrapperElement);
+    }
   }
 
   ngOnDestroy() {
-    this.resizeObserver.unobserve(this.sliderWrapperElement);
+    if (hasValue(this.resizeObserver)) {
+      this.resizeObserver.unobserve(this.sliderWrapperElement);
+    }
   }
 
 }
