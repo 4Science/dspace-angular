@@ -20,6 +20,6 @@
          class="dropdown-menu"
          id="importControlsDropdownMenu"
          aria-labelledby="dropdownImport">
-      <ds-entity-dropdown [isSubmission]="false" (selectionChange)="openPage($event)"></ds-entity-dropdown>
+      <ds-entity-dropdown [isSubmission]="false" [isExternalImport]="true" (selectionChange)="openPage($event)"></ds-entity-dropdown>
     </div>
   </div>
