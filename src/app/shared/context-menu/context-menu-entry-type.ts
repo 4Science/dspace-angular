@@ -1,5 +1,6 @@
 export enum ContextMenuEntryType {
   Audit = 'audit',
+  AssociateItem = 'associateitem',
   BulkImport = 'bulkimport',
   Claim = 'claim',
   EditDSO = 'editdso',
