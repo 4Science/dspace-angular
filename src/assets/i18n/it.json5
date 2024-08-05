@@ -120,10 +120,10 @@
   "admin.edit-user-agreement.markdown": "Lo <i>Lo User Agreement</i> supporta il formato <a href=\"https://www.markdownguide.org/basic-syntax/\" target=\"_blank\">Markdown</a>.",
 
   // "admin.edit-cms-metadata.title": "Edit CMS Metadata",
-  "admin.edit-cms-metadata.title": "Modifica metadati CMS",
+  "admin.edit-cms-metadata.title": "Modifica pagine redazionali",
 
   // "admin.edit-cms-metadata.breadcrumbs": "Edit CMS Metadata",
-  "admin.edit-cms-metadata.breadcrumbs": "Modifica metadati CMS",
+  "admin.edit-cms-metadata.breadcrumbs": "Modifica pagine redazionali",
 
   // "admin.edit-cms-metadata.edit-button": "Edit",
   "admin.edit-cms-metadata.edit-button": "Modifica",
@@ -144,7 +144,7 @@
   "admin.edit-cms-metadata.error": "Si è verificato un errore durante l'aggiornamento dei metadati",
 
   // "menu.section.cms_metadata_edit": "Edit CMS Metadata",
-  "menu.section.cms_metadata_edit": "Modifica metadati CMS",
+  "menu.section.cms_metadata_edit": "Modifica pagine redazionali",
 
   // "menu.section.cms.edit.metadata.head": "Edit Metadata",
   "menu.section.cms.edit.metadata.head": "Modifica metadati",
@@ -1266,6 +1266,14 @@
 
   // "alert.toggle.show": "Show more",
   "alert.toggle.show": "Mostra di più",
+
+
+  // "artwork.listelement.badge": "Artworks",
+  "artwork.listelement.badge": "Materiale artistico",
+
+  // "artwork.page.titleprefix": "Artworks",
+  "artwork.page.titleprefix": "Materiale artistico",
+
 
   // "audiovideo.page.titleprefix": "Audio/Video",
   "audiovideo.page.titleprefix": "Audio/Video",
@@ -3440,6 +3448,18 @@
   // TODO New key - Add a translation
   "cris-layout.rendering.collections.load-more": "Load more",
 
+  // "cris-layout-box-container.collapse.details.show": "Show description",
+  "cris-layout-box-container.collapse.details.show": "Mostra la descrizione",
+
+  // "cris-layout-box-container.collapse.details.hide": "Hide description",
+  "cris-layout-box-container.collapse.details.hide": "Nascondi la descrizione",
+
+  // "cris-layout-box-container.collapse.pathpublications.show": "Show path",
+  "cris-layout-box-container.collapse.pathpublications.show": "Mostra il percorso",
+
+  // "cris-layout-box-container.collapse.pathpublications.hide": "Hide path",
+  "cris-layout-box-container.collapse.pathpublications.hide": "Nascondi il percorso",
+
   // "curation-task.task.checklinks.label": "Check Links in Metadata",
   "curation-task.task.checklinks.label": "Controllare i collegamenti nei metadati",
 
@@ -4175,6 +4195,9 @@
 
   // "explore.index.corporate": "Organizational Unit",
   "explore.index.corporate": "Organizzazione",
+
+  // "explore.index.opera": "Opera",
+  "explore.index.opera": "Lirico",
 
   // "explore.search-section.infrastructure.title": "Infrastructure",
   "explore.search-section.infrastructure.title": "Infrastruttura",
@@ -6772,7 +6795,7 @@
   "menu.section.icon.import": "Sezione del menu Importa",
 
   // "menu.section.icon.metadata_cms_edit": "Edit CMS metadata",
-  "menu.section.icon.metadata_cms_edit": "Modifica metadati CMS",
+  "menu.section.icon.metadata_cms_edit": "Modifica pagine redazionali",
 
   // "menu.section.icon.new": "New menu section",
   "menu.section.icon.new": "Nuova sezione menu",
@@ -8922,6 +8945,15 @@
   // "search.filters.filter.family.placeholder": "Family",
   "search.filters.filter.family.placeholder": "Famiglia",
 
+  // "search.filters.filter.opera.head": "Opera",
+  "search.filters.filter.opera.head": "Lirico",
+
+  // "search.filters.filter.opera.label": "Opera",
+  "search.filters.filter.opera.label": "Lirico",
+
+  // "search.filters.filter.opera.placeholder": "Opera",
+  "search.filters.filter.opera.placeholder": "Lirico",
+
   // "search.filters.entityType.JournalIssue": "Journal Issue",
   "search.filters.entityType.JournalIssue": "Fascicolo Periodico",
 
@@ -8978,6 +9010,21 @@
 
   // "search.filters.entityType.Picture": "Picture",
   "search.filters.entityType.Picture": "Fotografia",
+
+  // "search.filters.entityType.Artwork": "Artwork",
+  "search.filters.entityType.Artwork": "Materiale artistico",
+
+  // "search.filters.entityType.BnmScheme": "Naturalistic-Mineralogical Heritage",
+  "search.filters.entityType.BnmScheme": "Bene naturalistico-mineralogico",
+
+  // "search.filters.entityType.ScientificMaterial": "Scientific Material",
+  "search.filters.entityType.ScientificMaterial": "Materiale scientifico",
+
+  // "search.filters.entityType.MusicalLibrettos": "Musical Librettos",
+  "search.filters.entityType.MusicalLibrettos": "Libretto musicale",
+
+  // "search.filters.entityType.Coin": "Coin",
+  "search.filters.entityType.Coin": "Moneta",
 
   // "search.filters.has_content_in_original_bundle.true": "Yes",
   "search.filters.has_content_in_original_bundle.true": "Si",
@@ -12087,6 +12134,8 @@
   "coin.listelement.badge": "Moneta",
   // "scientificmaterial.listelement.badge": "Scientific Material",
   "scientificmaterial.listelement.badge": "Materiale scientifico",
+  // "musicallibrettos.listelement.badge": "Musical Librettos",
+  "musicallibrettos.listelement.badge": "Libretti musicali",
 
   // "picture.listelement.badge": "Picture",
   "picture.listelement.badge": "Immagine",
@@ -12281,6 +12330,51 @@
 
   // "submission.sections.submit.progressbar.describe.journal_file": "Journal File Details",
   "submission.sections.submit.progressbar.describe.journal_file": "Informazioni di dettaglio",
+
+  // "submission.sections.submit.progressbar.describe.books": "Book basic information",
+  "submission.sections.submit.progressbar.describe.books": "Informazioni di base",
+
+  // "submission.sections.submit.progressbar.describe.coins": "Coin basic information",
+  "submission.sections.submit.progressbar.describe.coins": "Informazioni di base",
+
+  // "submission.sections.submit.progressbar.describe.coins-glam-bibliography": "Coin bibliographic details",
+  "submission.sections.submit.progressbar.describe.coins-glam-bibliography": "Dettagli bibliografici della Moneta",
+
+  // "submission.sections.submit.progressbar.describe.artworks": "Artwork basic information",
+  "submission.sections.submit.progressbar.describe.artworks": "Informazioni di base",
+
+  // "submission.sections.submit.progressbar.describe.artworks-glam-bibliography": "Artwork bibliographic details",
+  "submission.sections.submit.progressbar.describe.artworks-glam-bibliography": "Dettagli bibliografici dell'Opera",
+
+  // "submission.sections.submit.progressbar.describe.artworks-dc-contributor-author": "Authors basic information",
+  "submission.sections.submit.progressbar.describe.artworks-dc-contributor-author": "Informazioni di base dell'Autore",
+
+  // "submission.sections.submit.progressbar.describe.musical_librettos": "Musical Libretto basic information",
+  "submission.sections.submit.progressbar.describe.musical_librettos": "Informazioni di base",
+
+  // "submission.sections.submit.progressbar.describe.scientific_materials": "Scientific Material basic information",
+  "submission.sections.submit.progressbar.describe.scientific_materials": "Informazioni di base",
+
+  // "submission.sections.submit.progressbar.describe.scientific_materials-glam-bibliography": "Scientific Material bibliographic details",
+  "submission.sections.submit.progressbar.describe.scientific_materials-glam-bibliography": "Dettagli bibliografici dell'oggetto",
+
+  // "submission.sections.submit.progressbar.describe.scientific_materials-glam-inscription": "Inscription basic information",
+  "submission.sections.submit.progressbar.describe.scientific_materials-glam-inscription": "Trascrizione dell'iscrizione",
+
+  // "submission.sections.submit.progressbar.describe.scientific_materials-dc-contributor-author": "Authors basic information",
+  "submission.sections.submit.progressbar.describe.scientific_materials-dc-contributor-author": "Informazioni di base del Creatore",
+
+  // "submission.sections.submit.progressbar.describe.bnm_scheme": "Bnm scheme basic information",
+  "submission.sections.submit.progressbar.describe.bnm_scheme": "Bnm schema informazioni di base",
+
+  // "submission.sections.submit.progressbar.describe.bnm_scheme_physicalproperties": "Physical Properties",
+  "submission.sections.submit.progressbar.describe.bnm_scheme_physicalproperties": "Proprietà Fisiche",
+
+  // "submission.sections.submit.progressbar.describe.bnm_scheme_geolocalization": "Geolocation",
+  "submission.sections.submit.progressbar.describe.bnm_scheme_geolocalization": "Geolocalizzazione",
+
+  // "submission.sections.submit.progressbar.describe.bnm_scheme_relation": "Relationships",
+  "submission.sections.submit.progressbar.describe.bnm_scheme_relation": "Relazioni",
 
   // "map.coordinates-invalid": "Coordinates are not valid",
   "map.coordinates-invalid": "Le coordinate non sono valide",
@@ -12821,6 +12915,8 @@
 
   // "layout.tab.header.AudioVideo.details": "Details",
   "layout.tab.header.AudioVideo.details": "Informazioni di Dettaglio",
+  // "layout.tab.header.Opera.details": "Details",
+  "layout.tab.header.Opera.details": "Informazioni di Dettaglio",
 
 
   // Layout - Autogenerated i18n keys: box headers
@@ -13066,6 +13162,11 @@
 
   // "layout.box.header.AudioVideo.details": "Details",
   "layout.box.header.AudioVideo.details": "Informazioni di Dettaglio",
+  // "layout.box.header.Opera.details": "Details",
+  "layout.box.header.Opera.details": "Informazioni di Dettaglio",
+  // "layout.box.header.Opera.details": "Details",
+  // TODO New key - Add a translation
+  "layout.box.header.Opera.details": "Details",
 
 
   // Layout - Autogenerated i18n keys: metadata
@@ -13755,7 +13856,7 @@
   // "layout.field.label.AudioVideo.dc.contributor.author": "Author(s)",
   "layout.field.label.AudioVideo.dc.contributor.author": "Autore",
   // "layout.field.label.AudioVideo.dc.contributor.contributor": "Agent(s)",
-  "layout.field.label.AudioVideo.dc.contributor.contributor": "Agente",
+  "layout.field.label.AudioVideo.dc.contributor.contributor": "Altro autore",
   // "layout.field.label.AudioVideo.glam.subject": "Subject",
   "layout.field.label.AudioVideo.glam.subject": "Soggetto / Argomento",
   // "layout.field.label.AudioVideo.dc.source.content": "Content",
@@ -13830,6 +13931,26 @@
   "layout.field.label.AudioVideo.dc.description.digitaltools": "Metodologia e strumentazione",
   // "layout.field.label.AudioVideo.BITSTREAM": "File(s)",
   "layout.field.label.AudioVideo.BITSTREAM": "File",
+  // "layout.field.label.Opera.dc.title.alternative": "Alternative Title",
+  "layout.field.label.Opera.dc.title.alternative": "Titolo alternativo",
+  // "layout.field.label.Opera.dc.date.issued": "Date Issued",
+  "layout.field.label.Opera.dc.date.issued": "Data",
+  // "layout.field.label.Opera.dc.subject": "Subject",
+  "layout.field.label.Opera.dc.subject": "Indicazioni sul soggetto",
+  // "layout.field.label.Opera.dc.relation.otherlinks": "Other Links",
+  "layout.field.label.Opera.dc.relation.otherlinks": "Altri Collegamenti",
+  // "layout.field.label.Opera.dc.relation.conference": "Event",
+  "layout.field.label.Opera.dc.relation.conference": "Evento",
+  // "layout.field.label.Opera.dc.description.note": "Notes",
+  "layout.field.label.Opera.dc.description.note": "Note",
+  // "layout.field.label.Opera.dc.relation.path": "Path",
+  "layout.field.label.Opera.dc.relation.path": "Percorso",
+  // "layout.field.label.Opera.dc.relation.aggregation": "Aggregation",
+  "layout.field.label.Opera.dc.relation.aggregation": "Aggregazione",
+  // "layout.field.label.Opera.dc.contributor.author": "Author",
+  "layout.field.label.Opera.dc.contributor.author": "Autore",
+  // "layout.field.label.Opera.dc.contributor.authorrole": "Role",
+  "layout.field.label.Opera.dc.contributor.authorrole": "Ruolo",
 
 
   // Layout - Autogenerated i18n keys: metadata groups

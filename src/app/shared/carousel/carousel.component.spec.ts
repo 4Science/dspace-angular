@@ -213,6 +213,9 @@ describe('CarouselComponent', () => {
     });
 
     it('should render image', (done) => {
+        component.itemToImageHrefMap$.next(new Map<string, string>().set(firstItemResult.indexableObject.uuid, 'testURL'));
+        fixture.detectChanges();
+
         const image = fixture.debugElement.queryAll(By.css('.picsum-img-wrapper'));
         expect(image.length).toBe(1);
         done();
