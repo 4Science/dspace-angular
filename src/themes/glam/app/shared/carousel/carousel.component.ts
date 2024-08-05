@@ -5,6 +5,7 @@ import { NativeWindowRef, NativeWindowService } from '../../../../../app/core/se
 import { DOCUMENT } from '@angular/common';
 import {HostWindowService} from '../../../../../app/shared/host-window.service';
 import {Observable} from 'rxjs';
+import {BitstreamImagesService} from '../../../../../app/core/services/bitstream-images.service';
 
 /**
  * Component representing the Carousel component section.
@@ -26,11 +27,12 @@ export class CarouselComponent extends BaseComponent implements OnInit {
 
   constructor(
     protected bitstreamDataService: BitstreamDataService,
+    protected bitstreamImagesService: BitstreamImagesService,
     private hostWindowService: HostWindowService,
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
     @Inject(DOCUMENT) private _document: Document,
   ) {
-    super(bitstreamDataService, _window);
+    super(bitstreamDataService, bitstreamImagesService,  _window);
   }
 
   ngOnInit() {
