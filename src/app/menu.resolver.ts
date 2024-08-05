@@ -275,7 +275,7 @@ export class MenuResolver implements Resolve<boolean> {
         {
           id: `browse_global_communities_and_collections`,
           active: false,
-          visible: !environment.layout.navbar.showCommunityCollection && isCollectionAdmin,
+          visible: false,
           model: {
             type: MenuItemType.LINK,
             text: `menu.section.communities_and_collections`,
