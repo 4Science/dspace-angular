@@ -27,8 +27,8 @@
               <i class="fa fa-arrow-left"></i>
             </div>
             <!-- central column -->
-            <div class="caption-wrapper flex-fill d-flex flex-column justify-content-between gapy-3 py-2">
-              <div class="d-flex flex-column h-75 justify-content-around">
+            <div class="caption-wrapper flex-fill d-flex flex-column justify-content-center gapy-3 py-2">
+              <div class="d-flex flex-column justify-content-around">
                 <h2 class="h1 carousel-header ellipsis-y-3" [class]="carouselOptions.titleStyle" *ngIf="item.indexableObject.metadata[title]">
                   {{item.indexableObject.metadata[title][0].value}}
                 </h2>
@@ -38,7 +38,7 @@
                   <div class="caption-fade"></div>
                 </div>
               </div>
-              <div class="d-flex flex-column h-25 justify-content-center gapy-4">
+              <div class="d-flex flex-column justify-content-center gapy-4">
                 <div class="text-center" *ngIf="getItemLink(item.indexableObject); let currentLink;">
                   <a *ngIf="isLinkInternal(currentLink)" [routerLink]="currentLink" class="btn btn-light">
                     {{ 'explore.carousel.view-more' | translate }}
