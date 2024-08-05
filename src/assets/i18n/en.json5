@@ -2273,6 +2273,14 @@
 
   "cris-layout.rendering.collections.load-more": "Load more",
 
+  "cris-layout-box-container.collapse.details.show": "Show description",
+
+  "cris-layout-box-container.collapse.details.hide": "Hide description",
+
+  "cris-layout-box-container.collapse.pathpublications.show": "Show path",
+
+  "cris-layout-box-container.collapse.pathpublications.hide": "Hide path",
+
   "curation-task.task.checklinks.label": "Check Links in Metadata",
 
   "curation-task.task.noop.label": "NOOP",
@@ -9025,4 +9033,9 @@
   // Do not add new labels below layout ones
   // All new labels should be placed together with similar ones, or in alphabetical orders
 
+  "label.link-text.description-box.section-site.pdl": "Scopri di più",
+
+  "label.title.slider.slider_collections": "Collections",
+
+  "label.title.slider.slider_topics": "Topics",
 }

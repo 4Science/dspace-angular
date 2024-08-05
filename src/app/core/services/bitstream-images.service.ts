@@ -22,7 +22,7 @@ interface ItemAndImage {
 @Injectable({ providedIn: 'root' })
 export class BitstreamImagesService {
 
-  private bitstreamDataService = inject(BitstreamDataService);
+  private readonly bitstreamDataService = inject(BitstreamDataService);
 
   /**
    * Retrieve all items and their image bitstreams

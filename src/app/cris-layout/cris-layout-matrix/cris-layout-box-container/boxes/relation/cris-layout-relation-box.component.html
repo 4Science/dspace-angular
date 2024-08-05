@@ -1,11 +1,8 @@
 <ds-carousel-relations
-  [fixedFilterQuery]="searchFilter"
-  [configuration]="configuration"
-  [searchEnabled]="searchEnabled"
-  [showCharts]="true"
-  [showScopeSelector]="false"
+  [discoveryConfiguration]="configuration"
+  [scope]="item.id"
   [header]="getBoxHeader()"
-  *ngIf="box.style === 'carousel'; else searchPage">
+  *ngIf="box.style?.includes('carousel'); else searchPage">
 </ds-carousel-relations>
 <ng-template #searchPage>
   <ds-configuration-search-page *ngIf="configuration" class="w-100"

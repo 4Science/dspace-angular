@@ -378,7 +378,7 @@ const MODULES = [
   MenuModule,
   NgxPaginationModule,
   MetricsModule,
-  NgbModule
+  NgbModule,
 ];
 
 const ROOT_MODULES = [

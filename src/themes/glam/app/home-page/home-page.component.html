@@ -36,6 +36,10 @@
                                       [sectionId]="sectionId"
                                       [carouselSection]="$any(sectionComponent)"></ds-themed-carousel-section>
 
+          <ds-themed-slider-section *ngSwitchCase="'slider'"
+                                      [sectionId]="sectionId"
+                                      [sliderSection]="$any(sectionComponent)"></ds-themed-slider-section>
+
           <ds-themed-grid-section *ngSwitchCase="'grid'"
                                   [sectionId]="sectionId" [site]="site$.value"
                                   [gridSection]="$any(sectionComponent)"></ds-themed-grid-section>

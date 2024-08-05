@@ -1,0 +1,66 @@
+.img-container-el {
+  // height of the placeholder image
+  height: 200px;
+  // width of the placeholder image
+  width: 240px;
+  display: block;
+  overflow: hidden;
+  position: relative;
+  transition: 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.5);
+
+  .description {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 0.8rem;
+    transition: 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  &:hover {
+    img {
+      transform: scale(1.05);
+    }
+
+    .description {
+      display: flex;
+    }
+  }
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .number {
+    //padding: 5px 10px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .prev, .next {
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+
+}

@@ -3448,6 +3448,18 @@
   // TODO New key - Add a translation
   "cris-layout.rendering.collections.load-more": "Load more",
 
+  // "cris-layout-box-container.collapse.details.show": "Show description",
+  "cris-layout-box-container.collapse.details.show": "Mostra la descrizione",
+
+  // "cris-layout-box-container.collapse.details.hide": "Hide description",
+  "cris-layout-box-container.collapse.details.hide": "Nascondi la descrizione",
+
+  // "cris-layout-box-container.collapse.pathpublications.show": "Show path",
+  "cris-layout-box-container.collapse.pathpublications.show": "Mostra il percorso",
+
+  // "cris-layout-box-container.collapse.pathpublications.hide": "Hide path",
+  "cris-layout-box-container.collapse.pathpublications.hide": "Nascondi il percorso",
+
   // "curation-task.task.checklinks.label": "Check Links in Metadata",
   "curation-task.task.checklinks.label": "Controllare i collegamenti nei metadati",
 

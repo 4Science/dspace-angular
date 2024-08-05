@@ -130,8 +130,10 @@
   --ds-cris-layout-navbar-tab-color-hover : #{theme-color('light')};
 
   --ds-carousel-controls-color: #{$gray-600};
+  --ds-carousel-controls-color-hover: #{lighten($gray-600, 8%)};
   --ds-carousel-caption-color: #{$gray-800};
   --ds-carousel-caption-background: rgba(255, 255, 255, .6);
+  --ds-carousel-scrollbar-color: rgba(175, 175, 175, 0.822);
 
   --ds-advanced-attachment-image-max-height: 160px;
   --ds-advanced-attachment-image-object-fit: cover;
