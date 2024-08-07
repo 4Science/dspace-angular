@@ -8,7 +8,6 @@ import { LayoutField } from '../../../../../../../../core/layout/models/box.mode
 import { MetadataGroupComponent } from '../metadata-group.component';
 import { LoadMoreService } from '../../../../../../../services/load-more.service';
 
-
 /**
  * This component renders the inline  metadata group fields
  */
@@ -26,7 +25,7 @@ export class InlineComponent extends MetadataGroupComponent implements OnInit {
     @Inject('renderingSubTypeProvider') public renderingSubTypeProvider: string,
     @Inject('tabNameProvider') public tabNameProvider: string,
     protected translateService: TranslateService,
-    public loadMoreService: LoadMoreService
+    public loadMoreService: LoadMoreService,
   ) {
     super(fieldProvider, itemProvider, renderingSubTypeProvider, tabNameProvider, translateService, loadMoreService);
   }
