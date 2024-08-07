@@ -4032,6 +4032,22 @@
   // TODO New key - Add a translation
   "cris-layout.rendering.collections.load-more": "Load more",
 
+  // "cris-layout-box-container.collapse.details.show": "Show description",
+  // TODO New key - Add a translation
+  "cris-layout-box-container.collapse.details.show": "Show description",
+
+  // "cris-layout-box-container.collapse.details.hide": "Hide description",
+  // TODO New key - Add a translation
+  "cris-layout-box-container.collapse.details.hide": "Hide description",
+
+  // "cris-layout-box-container.collapse.pathpublications.show": "Show path",
+  // TODO New key - Add a translation
+  "cris-layout-box-container.collapse.pathpublications.show": "Show path",
+
+  // "cris-layout-box-container.collapse.pathpublications.hide": "Hide path",
+  // TODO New key - Add a translation
+  "cris-layout-box-container.collapse.pathpublications.hide": "Hide path",
+
   // "curation-task.task.checklinks.label": "Check Links in Metadata",
   // TODO Source message changed - Revise the translation
   "curation-task.task.checklinks.label": "Hivatkozások ellenőrzése a metaadatokban",
@@ -5477,9 +5493,9 @@
   // TODO New key - Add a translation
   "grid.component.subtitle": "...new ways to explore our digital libraries.",
 
-  // "grid.component.abstract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  // "grid.component.abstract": "Beyond traditional boundaries, explore the complex system of unique relationships for new narratives between interdisciplinary content coexisting in different domains.",
   // TODO New key - Add a translation
-  "grid.component.abstract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "grid.component.abstract": "Beyond traditional boundaries, explore the complex system of unique relationships for new narratives between interdisciplinary content coexisting in different domains.",
 
   // "grid.component.link": "/explore/paths",
   // TODO New key - Add a translation
@@ -17028,6 +17044,19 @@
   "layout.field.label.Artwork.NESTED[dc.contributor.authorrole]": "Role",
 
 
+  // Do not add new labels below layout ones
+  // All new labels should be placed together with similar ones, or in alphabetical orders
+  // "label.link-text.description-box.section-site.pdl": "Scopri di più",
+  // TODO New key - Add a translation
+  "label.link-text.description-box.section-site.pdl": "Scopri di più",
+
+  // "label.title.slider.slider_collections": "Collections",
+  // TODO New key - Add a translation
+  "label.title.slider.slider_collections": "Collections",
+
+  // "label.title.slider.slider_topics": "Topics",
+  // TODO New key - Add a translation
+  "label.title.slider.slider_topics": "Topics",
 
 
 }

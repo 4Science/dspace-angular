@@ -4645,8 +4645,8 @@
   // "grid.component.subtitle": "...new ways to explore our digital libraries.",
   "grid.component.subtitle": "...nuovi modi per esplorare le nostre risorse digitali.",
 
-  // "grid.component.abstract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  "grid.component.abstract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  // "grid.component.abstract": "Beyond traditional boundaries, explore the complex system of unique relationships for new narratives between interdisciplinary content coexisting in different domains.",
+  "grid.component.abstract": "Oltre i confini tradizionali, esplora il sistema complesso di relazioni inedite per nuove narrazioni tra contenuti interdisciplinari che coesistono in domini diversi.",
 
   // "grid.component.link": "/explore/paths",
   "grid.component.link": "/explore/paths",
@@ -14076,7 +14076,17 @@
   // TODO New key - Add a translation
   "layout.field.label.Artwork.NESTED[dc.contributor.authorrole]": "Role",
 
+  // "label.link-text.description-box.section-site.pdl": "Scopri di più",
+  // TODO New key - Add a translation
+  "label.link-text.description-box.section-site.pdl": "Scopri di più",
+  // "label.title.slider.slider_collections": "Collections",
+  // TODO New key - Add a translation
+  "label.title.slider.slider_collections": "Collections",
+  // "label.title.slider.slider_topics": "Topics",
+  // TODO New key - Add a translation
+  "label.title.slider.slider_topics": "Topics",
 
 
-
+  // Do not add new labels below layout ones
+  // All new labels should be placed together with similar ones, or in alphabetical orders
 }
