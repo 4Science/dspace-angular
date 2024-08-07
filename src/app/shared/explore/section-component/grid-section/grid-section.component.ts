@@ -21,7 +21,7 @@ import { filter, map, mergeMap, scan, switchMap, take } from 'rxjs/operators';
 import { Item } from '../../../../core/shared/item.model';
 import { Bitstream } from '../../../../core/shared/bitstream.model';
 import { BitstreamFormat } from '../../../../core/shared/bitstream-format.model';
-import { hasValue, isEmpty } from '../../../empty.util';
+import {hasValue, isEmpty, isNotEmpty} from '../../../empty.util';
 import { BitstreamDataService } from '../../../../core/data/bitstream-data.service';
 /**
  * Component representing the Grid component section.
@@ -108,10 +108,15 @@ export class GridSectionComponent implements OnInit {
         {language: this.locale.getCurrentLanguageCode()});
 
     }
-    this.maincontentBadge = this.maincontentBadge ?? this.translateService.instant('grid.component.badge');
-    this.maincontentTitle = this.maincontentTitle ?? this.translateService.instant('grid.component.title');
-    this.maincontentSubtitle = this.maincontentSubtitle ?? this.translateService.instant('grid.component.subtitle');
-    this.maincontentAbstract = this.maincontentAbstract ?? this.translateService.instant('grid.component.abstract');
+
+    this.maincontentBadge = (hasValue(this.maincontentBadge) && isNotEmpty(this.maincontentBadge)) ?
+                            this.maincontentBadge : this.translateService.instant('grid.component.badge');
+    this.maincontentTitle = (hasValue(this.maincontentTitle) && isNotEmpty(this.maincontentTitle)) ?
+                            this.maincontentTitle : this.translateService.instant('grid.component.title');
+    this.maincontentSubtitle = (hasValue(this.maincontentSubtitle) && isNotEmpty(this.maincontentSubtitle)) ?
+                               this.maincontentSubtitle : this.translateService.instant('grid.component.subtitle');
+    this.maincontentAbstract = (hasValue(this.maincontentAbstract) && isNotEmpty(this.maincontentAbstract)) ?
+                               this.maincontentAbstract : this.translateService.instant('grid.component.abstract');
 
     if (isEmpty(this.maincontentLink)) {
       this.maincontentLink = this.gridSection.mainContentLink ?? this.translateService.instant('grid.component.link');
