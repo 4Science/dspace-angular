@@ -3056,7 +3056,7 @@
 
   "grid.component.subtitle": "...new ways to explore our digital libraries.",
 
-  "grid.component.abstract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "grid.component.abstract": "Beyond traditional boundaries, explore the complex system of unique relationships for new narratives between interdisciplinary content coexisting in different domains.",
 
   "grid.component.link": "/explore/paths",
 
@@ -9039,12 +9039,11 @@
   "layout.field.label.Artwork.NESTED[dc.contributor.author]": "Author",
   "layout.field.label.Artwork.NESTED[dc.contributor.authorrole]": "Role",
 
-  // Do not add new labels below layout ones
-  // All new labels should be placed together with similar ones, or in alphabetical orders
 
   "label.link-text.description-box.section-site.pdl": "Scopri di più",
-
   "label.title.slider.slider_collections": "Collections",
-
   "label.title.slider.slider_topics": "Topics",
+
+  // Do not add new labels below layout ones
+  // All new labels should be placed together with similar ones, or in alphabetical orders
 }
