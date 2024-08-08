@@ -4753,14 +4753,17 @@
   // "home.advanced-top-section.metric.download": "New accessions",
   "home.advanced-top-section.metric.download": "Nuove accessioni",
 
-  // "home.advanced-top-section.discovery.aggregations": "Aggregations",
-  "home.advanced-top-section.discovery.aggregations": "Aggregazioni",
+  // "home.advanced-top-section.cris.priority": "New accessions",
+  "home.advanced-top-section.cris.priority": "Nuove accessioni",
 
-  // "home.advanced-top-section.discovery.fonds": "Fonds",
-  "home.advanced-top-section.discovery.fonds": "Fondi",
+  // "home.advanced-top-section.discovery.aggregationsHomePage": "Aggregations",
+  "home.advanced-top-section.discovery.aggregationsHomePage": "Aggregazioni",
 
-  // "home.advanced-top-section.discovery.journalfonds": "Journal Fonds",
-  "home.advanced-top-section.discovery.journalfonds": "Periodici",
+  // "home.advanced-top-section.discovery.fondsHomePage": "Fonds",
+  "home.advanced-top-section.discovery.fondsHomePage": "Fondi",
+
+  // "home.advanced-top-section.discovery.journalfondsHomePage": "Journal Fonds",
+  "home.advanced-top-section.discovery.journalfondsHomePage": "Periodici",
 
   // "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
   "info.end-user-agreement.accept": "Ho letto e accetto l'Accordo con l'utente finale",
@@ -12221,6 +12224,12 @@
   "journalfonds.search.results.head": "Risultati",
   // "aggregations.search.results.head": "Aggregations Search Results",
   "aggregations.search.results.head": "Risultati di Ricerca",
+  // "fonds.searchHomePage.results.head": "Fonds Search Results",
+  "fonds.searchHomePage.results.head": "Risultati",
+  // "journalfondsHomePage.search.results.head": "Journal Fonds Search Results",
+  "journalfondsHomePage.search.results.head": "Risultati",
+  // "aggregationsHomePage.search.results.head": "Aggregations Search Results",
+  "aggregationsHomePage.search.results.head": "Risultati di Ricerca",
   // "path.search.results.head": "Paths Search Results",
   "path.search.results.head": "Risultati della ricerca per Percorso",
   // "additions.search.results.head": "Recent Additions Search Results",
@@ -14076,6 +14085,7 @@
   // TODO New key - Add a translation
   "layout.field.label.Artwork.NESTED[dc.contributor.authorrole]": "Role",
 
+
   // "label.link-text.description-box.section-site.pdl": "Scopri di più",
   // TODO New key - Add a translation
   "label.link-text.description-box.section-site.pdl": "Scopri di più",
@@ -14087,6 +14097,5 @@
   "label.title.slider.slider_topics": "Topics",
 
 
-  // Do not add new labels below layout ones
-  // All new labels should be placed together with similar ones, or in alphabetical orders
+
 }

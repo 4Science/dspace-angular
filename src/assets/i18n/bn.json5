@@ -5533,17 +5533,21 @@
   // TODO New key - Add a translation
   "home.advanced-top-section.metric.download": "New accessions",
 
-  // "home.advanced-top-section.discovery.aggregations": "Aggregations",
+  // "home.advanced-top-section.cris.priority": "New accessions",
   // TODO New key - Add a translation
-  "home.advanced-top-section.discovery.aggregations": "Aggregations",
+  "home.advanced-top-section.cris.priority": "New accessions",
 
-  // "home.advanced-top-section.discovery.fonds": "Fonds",
+  // "home.advanced-top-section.discovery.aggregationsHomePage": "Aggregations",
   // TODO New key - Add a translation
-  "home.advanced-top-section.discovery.fonds": "Fonds",
+  "home.advanced-top-section.discovery.aggregationsHomePage": "Aggregations",
 
-  // "home.advanced-top-section.discovery.journalfonds": "Journal Fonds",
+  // "home.advanced-top-section.discovery.fondsHomePage": "Fonds",
   // TODO New key - Add a translation
-  "home.advanced-top-section.discovery.journalfonds": "Journal Fonds",
+  "home.advanced-top-section.discovery.fondsHomePage": "Fonds",
+
+  // "home.advanced-top-section.discovery.journalfondsHomePage": "Journal Fonds",
+  // TODO New key - Add a translation
+  "home.advanced-top-section.discovery.journalfondsHomePage": "Journal Fonds",
 
   // "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
   "info.end-user-agreement.accept": "আমি পড়েছি এবং আমি শেষ ব্যবহারকারী চুক্তির সাথে একমত",
@@ -14231,6 +14235,15 @@
   // "aggregations.search.results.head": "Aggregations Search Results",
   // TODO New key - Add a translation
   "aggregations.search.results.head": "Aggregations Search Results",
+  // "fonds.searchHomePage.results.head": "Fonds Search Results",
+  // TODO New key - Add a translation
+  "fonds.searchHomePage.results.head": "Fonds Search Results",
+  // "journalfondsHomePage.search.results.head": "Journal Fonds Search Results",
+  // TODO New key - Add a translation
+  "journalfondsHomePage.search.results.head": "Journal Fonds Search Results",
+  // "aggregationsHomePage.search.results.head": "Aggregations Search Results",
+  // TODO New key - Add a translation
+  "aggregationsHomePage.search.results.head": "Aggregations Search Results",
   // "path.search.results.head": "Paths Search Results",
   // TODO New key - Add a translation
   "path.search.results.head": "Paths Search Results",
@@ -16776,19 +16789,16 @@
   "layout.field.label.Artwork.NESTED[dc.contributor.authorrole]": "Role",
 
 
-  // Do not add new labels below layout ones
-  // All new labels should be placed together with similar ones, or in alphabetical orders
   // "label.link-text.description-box.section-site.pdl": "Scopri di più",
   // TODO New key - Add a translation
   "label.link-text.description-box.section-site.pdl": "Scopri di più",
-
   // "label.title.slider.slider_collections": "Collections",
   // TODO New key - Add a translation
   "label.title.slider.slider_collections": "Collections",
-
   // "label.title.slider.slider_topics": "Topics",
   // TODO New key - Add a translation
   "label.title.slider.slider_topics": "Topics",
+
 
 
 }
