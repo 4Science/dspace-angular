@@ -2,10 +2,10 @@
 
   // set property "layout.sections.enableAlternateBackground" to true to enable alternate background
   .cris-section-dark-row {
-    background-color: var(--ds-homepage-section-bg-color-dark);
+    background-color: var(--ds-cris-section-bg-color-dark);
   }
   .cris-section-light-row {
-    background-color: var(--ds-homepage-section-bg-color-light);
+    background-color: var(--ds-cris-section-bg-color-light);
   }
 
   .titolo {
@@ -40,10 +40,6 @@
     min-height: 600px;
   }
 
-  h1 {
-    font-weight: 600;
-  }
-
   .carousal-div {
     height: 100%;
     min-height: 600px;
@@ -53,17 +49,14 @@
     }
   }
 
-  .pad-left {
-    padding-left: 7%;
-  }
-  .pad-right {
-    padding-right: 7%;
+  .default-vertical-padding {
+    padding-top: var(--ds-cris-section-vertical-padding);
+    padding-bottom: var(--ds-cris-section-vertical-padding);
   }
 
-  .pad-left-title {
-    padding-left: calc(7% + 3rem);
+  .default-horizontal-padding {
+    padding-left: var(--ds-cris-section-horizontal-padding);
+    padding-right: var(--ds-cris-section-horizontal-padding);
   }
-  .pad-right-title {
-    padding-right: calc(7% + 3rem);
-  }
+
 }

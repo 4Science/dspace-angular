@@ -33,9 +33,18 @@ a {
   z-index: 2;
 }
 
-.main-content-badge, .main-content-title, .main-content-subtitle {
+.main-content-badge, .grid-section-title-1, .grid-section-title-2 {
   font-weight: 900;
 }
+
+.grid-section-title-1 {
+  color: var(--bs-text-muted);
+}
+
+.grid-section-title-2 {
+
+}
+
 
 button {
   bottom: 0;

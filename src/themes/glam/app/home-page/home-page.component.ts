@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { HomePageComponent as BaseComponent } from '../../../../app/home-page/home-page.component';
 import { environment } from '../../../../environments/environment';
+import { SectionComponent } from '../../../../app/core/layout/models/section.model';
+import { isEmpty } from '../../../../app/shared/empty.util';
 
 @Component({
   selector: 'ds-home-page',
@@ -66,6 +68,34 @@ export class HomePageComponent extends BaseComponent {
   isDarkRow(rowIndex: number): boolean {
     const rowNumber = this.alternateRowNumber(rowIndex);
     return rowNumber > 0 && rowNumber % 2 === this.darkRowModulo;
+  }
+
+  componentClass(sectionComponent: SectionComponent): string {
+    const defaultCol = 'col-12';
+    const colClassRegex = /\bcol((-\w+)?-\d+)?\b/; // test for Bootstrap's "col" classes
+
+    let classArray: string[] = [sectionComponent.style];
+
+    // Add Bootstrap's "col"" class if missing
+    if (isEmpty(sectionComponent.style) || !colClassRegex.test(sectionComponent.style)) {
+      classArray.push(defaultCol);
+    }
+
+    return classArray.join(' ');
+  }
+
+  componentRowClass(input: SectionComponent[]): string {
+    const horizontalPaddingClass = 'default-horizontal-padding';
+    const verticalPaddingClass = 'default-vertical-padding';
+
+    let classArray: string[] = [];
+
+    if (!(input.length === 1 && input[0].componentType === 'carousel')) {
+      classArray.push(horizontalPaddingClass);
+      classArray.push(verticalPaddingClass);
+    }
+
+    return classArray.join(' ');
   }
 
 }

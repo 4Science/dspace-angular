@@ -26,8 +26,10 @@
         </ul>
       </div>
     </div>
-    <div class="navbar-collapsed">
-      <ds-themed-search-navbar></ds-themed-search-navbar>
-    </div>
   </div>
 </nav>
+<div class="search-navbar-wrapper" *ngIf="!(isXsOrSm$ | async)">
+  <div class="container-fluid">
+    <ds-themed-search-navbar class="navbar-collapsed"></ds-themed-search-navbar>
+  </div>
+</div>

@@ -652,8 +652,8 @@ export class DefaultAppConfig implements AppConfig {
       ],
     },
     sections: {
-      enableAlternateBackground: false,
-      skipAlternateBackgroundRows: 0,
+      enableAlternateBackground: true,
+      skipAlternateBackgroundRows: 1, // skip the carousel
       startWithDarkRow: false,
     },
     search: {
