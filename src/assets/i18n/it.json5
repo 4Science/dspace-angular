@@ -2185,7 +2185,7 @@
   "browse.taxonomy.button": "Browse",
 
   // "browse.title": "Browsing {{ collection }} by {{ field }}{{ startsWith }} {{ value }}",
-  "browse.title": "Mostra il contenuto di {{ collection }} per {{ field }}{{ startsWith }} {{ value }}",
+  "browse.title": "Mostra il contenuto {{ collection }} per {{ field }}{{ startsWith }} {{ value }}",
 
   // "browse.title.page": "Browsing {{ collection }} by {{ field }} {{ value }}",
   "browse.title.page": "Mostra il contenuto di {{ collection }} per {{ field }} {{ value }}",
