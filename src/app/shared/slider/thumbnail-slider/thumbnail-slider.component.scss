@@ -1,8 +1,8 @@
 :host {
   $primary-box-shadow: 0px 0px 0px 3px $primary inset;
   $scrollbar-color: var(--ds-carousel-scrollbar-color);
-  $controls-color-hover: var(--ds-carousel-controls-color-hover);
-  $controls-color: var(--ds-carousel-controls-color);
+  $controls-color: var(--ds-carousel-with-thumbnails-controls-color);
+  $scrollbar-width: 3px;
 
   .thumbnail-grid,
   .h-thumbnail-grid {
@@ -44,8 +44,8 @@
     }
 
     &::-webkit-scrollbar-thumb {
-    background: $scrollbar-color;
-    border-radius: 2ex;
+      background: $scrollbar-color;
+      border-radius: 2ex;
     }
   }
 
@@ -60,48 +60,47 @@
     }
 
     &::-webkit-scrollbar {
-      height: 3px;
+      height: $scrollbar-width;
     }
   }
 
   .y-btn-container {
-  .thumbnail-up-icon {
-    transform: rotate(-90deg) translate(-28%, 50%);
-  }
+    .thumbnail-up-icon,
+    .thumbnail-down-icon {
+      color: $controls-color;
+      opacity: 0.8;
 
-  .thumbnail-down-icon {
-    transform: rotate(90deg) translate(28%, -50%);
-  }
-
-  .thumbnail-up-icon,
-  .thumbnail-down-icon {
-    background-color: $controls-color-hover;
-    opacity: 0.8;
-
-    &:hover {
-      background-color: $controls-color;
-      opacity: 1;
+      &:hover {
+        opacity: 1;
+      }
     }
-  }
 
-  .thumbnail-up-btn,
-  .thumbnail-down-btn {
-    position: absolute;
-    right: 50%;
-    cursor: pointer;
-  }
+    .thumbnail-up-btn,
+    .thumbnail-down-btn {
+      position: absolute;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+      width: calc(100% - $scrollbar-width);
 
-  .thumbnail-down-btn {
-    bottom: 10%;
-  }
+      &:hover {
+        text-decoration: none;
+      }
+    }
 
-  .thumbnail-up-btn {
-    top: 0;
+    .thumbnail-down-btn {
+      bottom: 0;
+    }
+
+    .thumbnail-up-btn {
+      top: 0;
+    }
   }
 
   .thumbnail-grid-wrapper {
     position: relative;
   }
 
-}
 }
