@@ -99,11 +99,6 @@ export class CarouselWithThumbnailsComponent implements OnInit {
   thumbnailWidthPx = 160;
 
   /**
-   * The ratio of the small image height to the big image height
-   */
-  smallImageHeightRatio = 0.25;
-
-  /**
    * The event of the slider
    */
   sliderEventSource: NgbSlideEvent;
@@ -126,9 +121,6 @@ export class CarouselWithThumbnailsComponent implements OnInit {
     this.title = this.carouselOptions.title;
     this.link = this.carouselOptions.link;
     this.description = this.carouselOptions.description;
-
-    // Calculate the height of the small images
-    this.thumbnailHeightPx = this.carouselOptions.carouselHeightPx * this.smallImageHeightRatio;
 
     this.hostWindowService.isXs().subscribe((isXs) => {
       this.isSmallDevice$.next(isXs);

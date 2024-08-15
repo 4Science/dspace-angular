@@ -1,8 +1,7 @@
 <div class="d-flex flex-md-row flex-column align-items-stretch flex-wrapper flex-sm-row" [style.height]="carouselOptions.carouselHeightPx">
   <div class="flex-fill">
     <ng-container *ngIf="itemList?.length > 0">
-      <div>
-        <ngb-carousel #carousel [interval]="99999999" [showNavigationArrows]="false" (slide)="onSlide($event)" class="ds-carousel position-relative">
+        <ngb-carousel #carousel [interval]="99999999" (slide)="onSlide($event)" class="ds-carousel position-relative ">
           <ng-template ngbSlide *ngFor="let item of itemList; let i = index; let last = last" [attr.id]="'ngb-slide-' + i">
             <div class="carousel-content-wrapper"
                 *ngIf="(itemToImageHrefMap$ | async)?.get(item.uuid); let href; else placeholderImage"
@@ -29,17 +28,6 @@
             </ng-template>
           </ng-template>
         </ngb-carousel>
-        <div class="carousel-arrows position-absolute d-flex justify-content-between align-items-center px-3"
-             *ngIf="itemList?.length > 1"
-             [ngStyle]="{
-          'top': '5%',
-          'width': (isSmallDevice$ | async) ? '100%' : 'calc(100% - ' + thumbnailWidthPx + 'px)',
-          'height': carouselOptions.carouselHeightPx + 'px'
-        }">
-          <button class="btn btn-link btn-sm arrow-btn" (click)="carousel.prev()"><i class="fas fa-3x fa-chevron-left"></i></button>
-          <button class="btn btn-link btn-sm arrow-btn" (click)="carousel.next()"><i class="fas fa-3x fa-chevron-right"></i></button>
-        </div>
-      </div>
     </ng-container>
   </div>
   <div class="d-flex flex-md-column flex-row align-items-stretch justify-content-center thumbnail-wrapper h-100" *ngIf="!(isSmallDevice$ | async)">
