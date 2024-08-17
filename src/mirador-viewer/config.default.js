@@ -189,6 +189,7 @@ let miradorPlugins = [
   miradorShareDialogPlugin,
   miradorSharePlugin,
   miradorDownloadDialog,
+  miradorDownloadPlugin,
   ...miradorImageToolsPlugin,
   ...miradorAnnotationPlugins,
 ];
