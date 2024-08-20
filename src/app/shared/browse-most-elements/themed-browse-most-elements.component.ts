@@ -30,7 +30,7 @@ export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMos
   }
 
   protected importThemedComponent(themeName: string): Promise<any> {
-    return import(`../../../themes/${themeName}/app/browse-most-elements/browse-most-elements.component`);
+    return import(`../../../themes/${themeName}/app/shared/browse-most-elements/browse-most-elements.component`);
   }
 
   protected importUnthemedComponent(): Promise<any> {
