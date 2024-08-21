@@ -41,10 +41,9 @@ a {
   color: var(--bs-text-muted);
 }
 
-.grid-section-title-2 {
-
+.grid-section-title-1, .grid-section-title-2 {
+  font-size: var(--ds-cris-path-section-title-font-size);
 }
-
 
 button {
   bottom: 0;

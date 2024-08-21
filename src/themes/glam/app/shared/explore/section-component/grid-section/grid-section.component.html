@@ -17,7 +17,7 @@
        [dsBackgroundImage]="(itemToImageHrefMap$ | async).get(item.indexableObject?.uuid)"
        *ngFor="let item of searchResults | slice:0:8; index as i">
         <a [routerLink]="[getItemPageRoute(item.indexableObject)]" class="mw-100 p-3">
-          <p class="h5 text-center m-0 text-truncate">{{item.indexableObject?.firstMetadataValue('dc.title')}}</p>
+          <p class="text-center m-0 text-truncate">{{item.indexableObject?.firstMetadataValue('dc.title')}}</p>
         </a>
   </div>
 </div>
