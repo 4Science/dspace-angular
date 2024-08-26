@@ -16,6 +16,7 @@
   --ds-cris-section-horizontal-padding: 7%;
   --ds-cris-section-title-font-size: 40px;
   --ds-cris-section-title-font-weight: bold;
+  --ds-cris-path-section-title-font-size: 32px;
 
   // set property "layout.sections.enableAlternateBackground" to true to enable alternate background
   --ds-cris-section-bg-color-light: #{$white};
@@ -31,5 +32,10 @@
   --ds-glam-carousel-height: #{$ds-glam-carousel-height};
   --ds-glam-carousel-mobile-image-height: #{$ds-glam-carousel-mobile-image-height};
   --ds-glam-carousel-mobile-caption-height: #{$ds-glam-carousel-mobile-caption-height};
+
+  --ds-counters-max-columns-per-row: 4;
+  --ds-counters-column-gap: 1rem;
+  --ds-counters-min-width: 220px;
+  --ds-counters-border-bottom: solid 1px #{$body-color};
 }
 
