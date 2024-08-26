@@ -23,6 +23,9 @@
   --ds-cris-section-bg-color-dark: #{$light}; // not a mistake: "light" is darker than "white"
   --ds-cris-section-color-dark: #{$body-color};
 
+  --ds-carousel-controls-color: #{$ds-glam-carousel-controls-color};
+  --ds-carousel-with-thumbnails-controls-color: #{$gray-400};
+
   --ds-glam-carousel-caption-color: #{$ds-glam-carousel-caption-color};
   --ds-glam-carousel-caption-background: #{$ds-glam-carousel-caption-background};
   --ds-glam-carousel-controls-color: #{$ds-glam-carousel-controls-color};
