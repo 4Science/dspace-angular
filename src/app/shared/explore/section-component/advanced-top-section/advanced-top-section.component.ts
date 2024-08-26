@@ -4,7 +4,7 @@ import { AdvancedTopSection, TopSectionTemplateType } from '../../../../core/lay
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
 import { Context } from '../../../../core/shared/context.model';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, forkJoin, Observable} from 'rxjs';
 import { HostWindowService } from '../../../host-window.service';
 import {SearchService} from '../../../../core/shared/search/search.service';
 import {map, take} from 'rxjs/operators';
@@ -64,6 +64,8 @@ export class AdvancedTopSectionComponent implements OnInit {
    */
   selectedDiscoverConfiguration = new BehaviorSubject<string>(null);
 
+  discoveryConfigurationsTotalElementsMap: Map<string, number> = new Map<string, number>();
+
   constructor(private searchService: SearchService) { }
 
   ngOnInit() {
@@ -71,6 +73,7 @@ export class AdvancedTopSectionComponent implements OnInit {
     this.sortOptions = new SortOptions(this.advancedTopSection.sortField, sortDirection);
     this.template = this.advancedTopSection.template ?? TopSectionTemplateType.DEFAULT;
     this.selectDiscoveryConfiguration(this.advancedTopSection.discoveryConfigurationName[0]); // ADVANCED top sections use an ARRAY of configurations
+    this.setDiscoveryConfigurationsTotalElementsMap();
   }
 
   /**
@@ -114,7 +117,21 @@ export class AdvancedTopSectionComponent implements OnInit {
     });
     return this.searchService.search(paginatedSearchOptions).pipe(
       take(1),
-      map((searchResults: RemoteData<SearchObjects<DSpaceObject>>) => searchResults?.payload?.pageInfo?.totalElements ?? 0),
+      map((searchResults: RemoteData<SearchObjects<DSpaceObject>>) => searchResults?.payload?.pageInfo?.totalElements ?? 0)
     );
+  }
+
+  setDiscoveryConfigurationsTotalElementsMap() {
+    const observables = this.advancedTopSection.discoveryConfigurationName.map((configName: string) =>
+      this.getSearchResultTotalNumber(configName).pipe(
+        map((totalElements: number) => ({ configName, totalElements }))
+      )
+    );
+
+    forkJoin(observables).subscribe(results => {
+      results.forEach(({ configName, totalElements }) => {
+        this.discoveryConfigurationsTotalElementsMap.set(configName, totalElements);
+      });
+    });
   }
 }

@@ -72,7 +72,8 @@ describe('AdvancedTopSectionComponent', () => {
     });
     fixture.detectChanges();
     const discoveryButtons = fixture.debugElement.queryAll(By.css('.btn-group button'));
-    expect(discoveryButtons.length).toEqual(component.advancedTopSection.discoveryConfigurationName.length);
+    const buttonsToDisplay: number = [...component.discoveryConfigurationsTotalElementsMap.values()].filter((total) => total > 0).length;
+    expect(discoveryButtons.length).toEqual(buttonsToDisplay);
   });
 
   it('should not display the discovery configuration buttons when there are no results', () => {

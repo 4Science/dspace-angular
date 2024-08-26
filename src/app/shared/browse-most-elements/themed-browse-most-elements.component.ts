@@ -21,9 +21,11 @@ export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMos
 
   @Input() topSection: TopSection;
 
+  @Input() discoveryConfigurationsTotalElementsMap: Map<string, number>;
+
   @Output() totalElements: EventEmitter<number> = new EventEmitter<number>();
 
-  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'topSection'];
+  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'topSection', 'discoveryConfigurationsTotalElementsMap'];
 
   protected getComponentName(): string {
     return 'BrowseMostElementsComponent';
