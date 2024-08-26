@@ -17,13 +17,13 @@
         </div>
         <div class="text-container p-3 d-flex flex-column justify-content-between h-50">
           <ng-container *ngVar="(item.firstMetadataValue('dc.description.abstract')) as description">
-            <h4 class="mb-3" [ngClass]="description ? 'h-25' : 'h-100'">
+            <div class="mb-3 font-weight-bold" [ngClass]="description ? 'h-25' : 'h-100'">
               <a [routerLink]="[getItemPageRoute(item)]"
                  [ngbTooltip]="item.firstMetadataValue('dc.title')"
                  [ngClass]="description ? 'ellipsis-y-2' : 'ellipsis-y-4'">
                 <span>{{ item.firstMetadataValue('dc.title') }}</span>
               </a>
-            </h4>
+            </div>
             <ng-container *ngIf="description">
               <div class="h-75">
                 <p class="ellipsis-y-4">
