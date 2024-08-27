@@ -7989,6 +7989,11 @@
   "news.page.titleprefix": "News: ",
   "path.page.titleprefix": "Path: ",
   "place.page.titleprefix": "Place: ",
+  "staticpage.page.titleprefix": "Page: ",
+  "opera.page.titleprefix": "Opera: ",
+  "coin.page.titleprefix": "Coin: ",
+  "scientificmaterial.page.titleprefix": "Scientific Material: ",
+  "musicallibrettos.page.titleprefix": "Musical Librettos: ",
 
   "aggregation.listelement.badge": "Aggregation",
   "news.listelement.badge": "News",
@@ -8090,8 +8095,6 @@
   "submission.sections.submit.progressbar.describe.path": "Path Details",
 
   "submission.sections.submit.progressbar.describe.opera": "Opera Details",
-
-  "submission.sections.submit.progressbar.describe.coin": "Coin Details",
 
   "submission.sections.submit.progressbar.describe.picture": "Picture Details",
 

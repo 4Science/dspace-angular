@@ -12122,6 +12122,16 @@
   "path.page.titleprefix": "Percorso: ",
   // "place.page.titleprefix": "Place: ",
   "place.page.titleprefix": "Luogo: ",
+  // "staticpage.page.titleprefix": "Page: ",
+  "staticpage.page.titleprefix": "Pagina: ",
+  // "opera.page.titleprefix": "Opera: ",
+  "opera.page.titleprefix": "Opera: ",
+  // "coin.page.titleprefix": "Coin: ",
+  "coin.page.titleprefix": "Moneta: ",
+  // "scientificmaterial.page.titleprefix": "Scientific Material: ",
+  "scientificmaterial.page.titleprefix": "Materiale scientifico: ",
+  // "musicallibrettos.page.titleprefix": "Musical Librettos: ",
+  "musicallibrettos.page.titleprefix": "Libretti musicali: ",
 
   // "aggregation.listelement.badge": "Aggregation",
   "aggregation.listelement.badge": "Aggregazione",
@@ -12304,9 +12314,6 @@
   // "submission.sections.submit.progressbar.describe.opera": "Opera Details",
   "submission.sections.submit.progressbar.describe.opera": "Informazioni di dettaglio",
 
-  // "submission.sections.submit.progressbar.describe.coin": "Coin Details",
-  "submission.sections.submit.progressbar.describe.coin": "Infomazioni di dettaglio",
-
   // "submission.sections.submit.progressbar.describe.picture": "Picture Details",
   "submission.sections.submit.progressbar.describe.picture": "Informazioni di dettaglio",
 
@@ -12344,7 +12351,8 @@
   "submission.sections.submit.progressbar.describe.books": "Informazioni di base",
 
   // "submission.sections.submit.progressbar.describe.coin": "Coin basic information",
-  "submission.sections.submit.progressbar.describe.coin": "Informazioni di base",
+  // TODO Source message changed - Revise the translation
+  "submission.sections.submit.progressbar.describe.coin": "Infomazioni di dettaglio",
 
   // "submission.sections.submit.progressbar.describe.coin-glam-bibliography": "Coin bibliographic details",
   "submission.sections.submit.progressbar.describe.coin-glam-bibliography": "Dettagli bibliografici della Moneta",
@@ -12773,10 +12781,6 @@
   // "external-login-page.confirm-email.create-account.notifications.error.no-netId": "Something went wrong with this email account. Try again or use a different method to login.",
   // TODO New key - Add a translation
   "external-login-page.confirm-email.create-account.notifications.error.no-netId": "Something went wrong with this email account. Try again or use a different method to login.",
-
-  // "slider-browse-elements.no-results": "No results available for this configuration",
-  // TODO New key - Add a translation
-  "slider-browse-elements.no-results": "No results available for this configuration",
 
 
 
