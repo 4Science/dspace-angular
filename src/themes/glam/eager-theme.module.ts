@@ -32,6 +32,9 @@ import {
 import { GridSectionComponent } from './app/shared/explore/section-component/grid-section/grid-section.component';
 import { CarouselComponent } from './app/shared/carousel/carousel.component';
 import { CarouselWithThumbnailsModule } from 'src/app/shared/carousel-with-thumbnails/carousel-with-thumbnails.module';
+import {
+  ImagesBrowseElementsComponent
+} from './app/shared/browse-most-elements/images-browse-elements/images-browse-elements.component';
 
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
@@ -57,6 +60,7 @@ const DECLARATIONS = [
   CarouselComponent,
   CarouselSectionComponent,
   GridSectionComponent,
+  ImagesBrowseElementsComponent
 ];
 
 @NgModule({
