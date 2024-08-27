@@ -195,7 +195,7 @@ let miradorPlugins = [
 
 (() => {
   if (isDownloadPluginEnabled) {
-    miradorPlugins = [...miradorPlugins];
+    miradorPlugins = [...miradorPlugins, miradorDownloadPlugin];
     miradorConfiguration.miradorDownloadPlugin = downloadPluginSettings;
   }
 })();
