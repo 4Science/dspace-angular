@@ -189,14 +189,13 @@ let miradorPlugins = [
   miradorShareDialogPlugin,
   miradorSharePlugin,
   miradorDownloadDialog,
-  miradorDownloadPlugin,
   ...miradorImageToolsPlugin,
   ...miradorAnnotationPlugins,
 ];
 
 (() => {
   if (isDownloadPluginEnabled) {
-    miradorPlugins = [...miradorPlugins];
+    miradorPlugins = [...miradorPlugins, miradorDownloadPlugin];
     miradorConfiguration.miradorDownloadPlugin = downloadPluginSettings;
   }
 })();
