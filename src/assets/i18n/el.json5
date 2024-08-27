@@ -5488,21 +5488,21 @@
   // TODO New key - Add a translation
   "home.advanced-top-section.dc.date.accessioned": "Highlights",
 
-  // "home.advanced-top-section.dc.date.issued": "New accessions",
+  // "home.advanced-top-section.dc.date.issued": "Highlights",
   // TODO New key - Add a translation
-  "home.advanced-top-section.dc.date.issued": "New accessions",
+  "home.advanced-top-section.dc.date.issued": "Highlights",
 
-  // "home.advanced-top-section.metric.view": "New accessions",
+  // "home.advanced-top-section.metric.view": "Highlights",
   // TODO New key - Add a translation
-  "home.advanced-top-section.metric.view": "New accessions",
+  "home.advanced-top-section.metric.view": "Highlights",
 
-  // "home.advanced-top-section.metric.download": "New accessions",
+  // "home.advanced-top-section.metric.download": "Highlights",
   // TODO New key - Add a translation
-  "home.advanced-top-section.metric.download": "New accessions",
+  "home.advanced-top-section.metric.download": "Highlights",
 
-  // "home.advanced-top-section.cris.priority": "New accessions",
+  // "home.advanced-top-section.cris.priority": "Highlights",
   // TODO New key - Add a translation
-  "home.advanced-top-section.cris.priority": "New accessions",
+  "home.advanced-top-section.cris.priority": "Highlights",
 
   // "home.advanced-top-section.discovery.aggregationsHomePage": "Aggregations",
   // TODO New key - Add a translation
@@ -13891,6 +13891,21 @@
   // "place.page.titleprefix": "Place: ",
   // TODO New key - Add a translation
   "place.page.titleprefix": "Place: ",
+  // "staticpage.page.titleprefix": "Page: ",
+  // TODO New key - Add a translation
+  "staticpage.page.titleprefix": "Page: ",
+  // "opera.page.titleprefix": "Opera: ",
+  // TODO New key - Add a translation
+  "opera.page.titleprefix": "Opera: ",
+  // "coin.page.titleprefix": "Coin: ",
+  // TODO New key - Add a translation
+  "coin.page.titleprefix": "Coin: ",
+  // "scientificmaterial.page.titleprefix": "Scientific Material: ",
+  // TODO New key - Add a translation
+  "scientificmaterial.page.titleprefix": "Scientific Material: ",
+  // "musicallibrettos.page.titleprefix": "Musical Librettos: ",
+  // TODO New key - Add a translation
+  "musicallibrettos.page.titleprefix": "Musical Librettos: ",
 
   // "aggregation.listelement.badge": "Aggregation",
   // TODO New key - Add a translation
@@ -14153,10 +14168,6 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.opera": "Opera Details",
 
-  // "submission.sections.submit.progressbar.describe.coin": "Coin Details",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.coin": "Coin Details",
-
   // "submission.sections.submit.progressbar.describe.picture": "Picture Details",
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.picture": "Picture Details",
@@ -14205,13 +14216,13 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.books": "Book basic information",
 
-  // "submission.sections.submit.progressbar.describe.coins": "Coin basic information",
+  // "submission.sections.submit.progressbar.describe.coin": "Coin basic information",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.coins": "Coin basic information",
+  "submission.sections.submit.progressbar.describe.coin": "Coin basic information",
 
-  // "submission.sections.submit.progressbar.describe.coins-glam-bibliography": "Coin bibliographic details",
+  // "submission.sections.submit.progressbar.describe.coin-glam-bibliography": "Coin bibliographic details",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.coins-glam-bibliography": "Coin bibliographic details",
+  "submission.sections.submit.progressbar.describe.coin-glam-bibliography": "Coin bibliographic details",
 
   // "submission.sections.submit.progressbar.describe.artworks": "Artwork basic information",
   // TODO New key - Add a translation
@@ -14702,10 +14713,6 @@
   // "external-login-page.confirm-email.create-account.notifications.error.no-netId": "Something went wrong with this email account. Try again or use a different method to login.",
   // TODO New key - Add a translation
   "external-login-page.confirm-email.create-account.notifications.error.no-netId": "Something went wrong with this email account. Try again or use a different method to login.",
-
-  // "slider-browse-elements.no-results": "No results available for this configuration",
-  // TODO New key - Add a translation
-  "slider-browse-elements.no-results": "No results available for this configuration",
 
 
 
