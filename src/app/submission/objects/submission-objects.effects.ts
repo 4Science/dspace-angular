@@ -31,7 +31,7 @@ import {
   DisableSectionErrorAction,
   DisableSectionSuccessAction,
   DiscardSubmissionErrorAction,
-  DiscardSubmissionSuccessAction,
+  DiscardSubmissionSuccessAction, ExecuteExternalUploadErrorAction, ExecuteExternalUploadSuccessAction,
   InitSectionAction,
   InitSubmissionFormAction,
   ResetSubmissionFormAction,
@@ -308,7 +308,7 @@ export class SubmissionObjectEffects {
     switchMap(([action, state]: [DepositSubmissionAction, any]) => {
       return this.submissionService.depositSubmission(state.submission.objects[action.payload.submissionId].selfUrl).pipe(
         map(() => new DepositSubmissionSuccessAction(action.payload.submissionId)),
-        catchError((error) => observableOf(new DepositSubmissionErrorAction(action.payload.submissionId))));
+        catchError(() => observableOf(new DepositSubmissionErrorAction(action.payload.submissionId))));
     })));
 
   /**
@@ -384,6 +384,62 @@ export class SubmissionObjectEffects {
       }
     }),
   ));
+
+  /**
+   * Execute upload from external source
+   */
+
+  executeExternalUpload$ = createEffect(() => this.actions$.pipe(
+    ofType(SubmissionObjectActionTypes.EXECUTE_EXTERNAL_UPLOAD),
+    withLatestFrom(this.store$),
+    switchMap(([action, currentState]: [SetDuplicateDecisionAction, any]) => {
+      return this.operationsService.jsonPatchByResourceID(
+        this.submissionService.getSubmissionObjectLinkName(),
+        action.payload.submissionId,
+        'sections',
+        action.payload.sectionId).pipe(
+          map((response: SubmissionObject[]) => {
+            const { errors } = response[0];
+            const errorsMap = parseSectionErrors(errors);
+            const sectionErrors = errorsMap[action.payload.sectionId];
+
+            if (sectionErrors?.length > 0) {
+              return [new ExecuteExternalUploadErrorAction(action.payload.submissionId, action.payload.sectionId, sectionErrors)];
+            } else {
+              const actions = this.parseSaveResponse((currentState.submission as SubmissionState).objects[action.payload.submissionId],
+                response, action.payload.submissionId, currentState.forms, false, true);
+              actions.push(new ExecuteExternalUploadSuccessAction(
+                action.payload.submissionId,
+                action.payload.sectionId,
+              ));
+              return actions;
+            }
+          }),
+          mergeMap((actions) => observableFrom(actions)),
+          catchError((rd: RemoteData<any>) => observableFrom(
+            this.parseErrorResponse(false, rd.errors, action.payload.submissionId, rd.statusCode, rd.errorMessage)
+          ))
+      );
+    }))
+  );
+
+  /**
+   * Set external update status
+   */
+  executeExternalUploadSuccess$ = createEffect(() => this.actions$.pipe(
+      ofType(SubmissionObjectActionTypes.EXECUTE_EXTERNAL_UPLOAD_SUCCESS),
+      tap(() => this.notificationsService.success(null, this.translate.get('submission.sections.external-upload.upload-success-notice')))),
+    { dispatch: false }
+  );
+
+  /**
+   * Show external update errors
+   */
+  executeExternalUploadError$ = createEffect(() => this.actions$.pipe(
+      ofType(SubmissionObjectActionTypes.EXECUTE_EXTERNAL_UPLOAD_ERROR),
+      tap(() => this.notificationsService.error(null, this.translate.get('submission.sections.external-upload.upload-error-notice')))),
+    { dispatch: false }
+  );
 
   /**
    * Show a notification on success and redirect to MyDSpace page

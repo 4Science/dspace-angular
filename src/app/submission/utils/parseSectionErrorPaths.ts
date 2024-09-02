@@ -36,8 +36,7 @@ const regexShort = /\/sections\/(.*)/;
  * @returns {SectionErrorPath[]}
  */
 const parseSectionErrorPaths = (path: string | string[]): SectionErrorPath[] => {
-  const paths = typeof path === 'string' ? [path] : path;
-
+  const paths = typeof path === 'string' ? [path] : hasValue(path) ? path : [];
   return paths.map((item) => {
       if (item.match(regex) && item.match(regex).length > 2) {
         return {

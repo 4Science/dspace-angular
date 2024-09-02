@@ -538,6 +538,22 @@ export class SubmissionService {
       startWith(false));
   }
 
+
+  /**
+   * Return the external upload status of the submission
+   *
+   * @param submissionId
+   *    The submission id
+   * @return Observable<boolean>
+   *    observable with submission save-decision status
+   */
+  getExternalUplodaProcessingStatus(submissionId: string): Observable<boolean> {
+    return this.getSubmissionObject(submissionId).pipe(
+      map((state: SubmissionObjectEntry) => state.externalUploadPending),
+      distinctUntilChanged(),
+      startWith(false));
+  }
+
   /**
    * Return whether submission unsaved modification are present
    *

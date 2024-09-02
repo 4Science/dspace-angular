@@ -94,7 +94,6 @@ export class TextSelectDirective implements OnInit, OnDestroy {
     if (!selection.rangeCount || !stringSelection || previousSelection === stringSelection) {
       return;
     }
-    console.warn('selection', stringSelection);
     let range = selection.getRangeAt(0);
     let rangeContainer = this.getRangeContainer(range);
     // check if the range container is inside the current element

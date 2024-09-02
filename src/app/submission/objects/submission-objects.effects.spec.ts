@@ -452,9 +452,7 @@ describe('SubmissionObjectEffects test suite', () => {
         },
         forms: {
           '2_traditionalpageone': {
-            touched: {
-              'dc.title': true
-            }
+            touched: {}
           }
         }
       } as any);
@@ -481,7 +479,7 @@ describe('SubmissionObjectEffects test suite', () => {
           submissionId,
           'traditionalpageone',
           mockSectionsData.traditionalpageone as any,
-          errorsToShowList.traditionalpageone,
+          [],
           serverValidationErrorsList.traditionalpageone
         ),
         c: new UpdateSectionDataAction(

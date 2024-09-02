@@ -12,5 +12,6 @@ export enum SectionsType {
   Collection = 'collection',
   DetectDuplicate = 'detect-duplicate',
   Correction = 'correction',
-  Unpaywall = 'unpaywall'
+  Unpaywall = 'unpaywall',
+  ExternalUpload = 'external-upload',
 }

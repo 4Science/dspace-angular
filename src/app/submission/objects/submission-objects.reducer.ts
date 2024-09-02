@@ -18,6 +18,8 @@ import {
   DiscardSubmissionSuccessAction,
   EditFileDataAction,
   EnableSectionAction,
+  ExecuteExternalUploadAction,
+  ExecuteExternalUploadErrorAction,
   InertSectionErrorsAction,
   InitSectionAction,
   InitSubmissionFormAction,
@@ -52,6 +54,7 @@ import {
 } from '../../core/submission/models/workspaceitem-section-deduplication.model';
 import { SubmissionSectionObject } from './submission-section-object.model';
 import { MetadataSecurityConfiguration } from '../../core/submission/models/metadata-security-configuration';
+import { SubmissionSectionError } from './submission-section-error.model';
 
 /**
  * An interface to represent SubmissionSectionObject entry
@@ -103,6 +106,11 @@ export interface SubmissionObjectEntry {
    * A boolean representing if a duplicate decision is pending
    */
   saveDecisionPending?: boolean;
+
+  /**
+   * A boolean representing if an external upload is pending
+   */
+  externalUploadPending?: boolean;
 
   /**
    * A boolean representing if a submission deposit operation is pending
@@ -283,6 +291,19 @@ export function submissionObjectReducer(state = initialState, action: Submission
       return cleanDetectDuplicateSection(state, action as CleanDetectDuplicateAction);
     }
 
+    //external upload
+    case SubmissionObjectActionTypes.EXECUTE_EXTERNAL_UPLOAD: {
+      return startExternalUploadExecution(state, action as ExecuteExternalUploadAction);
+    }
+
+    case SubmissionObjectActionTypes.EXECUTE_EXTERNAL_UPLOAD_ERROR: {
+      return updateExternalUploadState(state, action.payload.submissionId, action.payload.sectionId, (action as ExecuteExternalUploadErrorAction).payload.errors);
+    }
+
+    case SubmissionObjectActionTypes.EXECUTE_EXTERNAL_UPLOAD_SUCCESS: {
+      return updateExternalUploadState(state, action.payload.submissionId, action.payload.sectionId, []);
+    }
+
     default: {
       return state;
     }
@@ -389,6 +410,7 @@ function initSubmission(state: SubmissionObjectState, action: InitSubmissionForm
     isLoading: true,
     savePending: false,
     saveDecisionPending: false,
+    externalUploadPending: false,
     depositPending: false,
     metadataSecurityConfiguration: action.payload.metadataSecurityConfiguration,
     isDiscarding: false
@@ -1065,6 +1087,63 @@ function cleanDetectDuplicateSection(state: SubmissionObjectState, action: Clean
             data: {}
           })
         })
+      })
+    });
+  } else {
+    return state;
+  }
+}
+
+// ------ External upload functions ------ //
+/**
+ * Set external upload flag to true
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    a SetDuplicateDecisionAction
+ * @return SubmissionObjectState
+ *    the new state, with the decision flag changed.
+ */
+function startExternalUploadExecution(state: SubmissionObjectState, action: ExecuteExternalUploadAction): SubmissionObjectState {
+  if (hasValue(state[ action.payload.submissionId ])) {
+    return Object.assign({}, state, {
+      [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
+        externalUploadPending: true,
+      })
+    });
+  } else {
+    return state;
+  }
+}
+
+/**
+ * Update external upload state
+ *
+ * @param state
+ *    the current state
+ * @param submissionId
+ *    the submission's ID
+ * @param sectionId
+ *    the section's ID
+ * @param errors
+ *    the section's ID
+ * @return SubmissionObjectState
+ *    the new state, with the decision flag changed.
+ */
+function updateExternalUploadState(state: SubmissionObjectState, submissionId: string, sectionId: string, errors: SubmissionSectionError[]): SubmissionObjectState {
+  if (isNotEmpty(state[ submissionId ])
+    && isNotEmpty(state[ submissionId ].sections[ sectionId])) {
+    return Object.assign({}, state, {
+      [ submissionId ]: Object.assign({}, state[ submissionId ], {
+        sections: Object.assign({}, state[ submissionId ].sections, {
+          [ sectionId ]: Object.assign({}, state[ submissionId ].sections [ sectionId ], {
+            enabled: true,
+            errorsToShow: errors,
+            serverValidationErrors: errors,
+          })
+        }),
+        externalUploadPending: false,
       })
     });
   } else {

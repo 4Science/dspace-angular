@@ -69,7 +69,8 @@
                 "input": "src/themes/dspace/styles/theme.scss",
                 "inject": false,
                 "bundleName": "dspace-theme"
-              }
+              },
+              "./node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": [],
             "baseHref": "/"
