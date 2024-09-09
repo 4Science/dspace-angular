@@ -359,6 +359,7 @@ import { SliderBrowseElementsComponent } from './browse-most-elements/slider-bro
 import { ThemedImagesBrowseElementsComponent } from './browse-most-elements/images-browse-elements/themed-images-browse-elements.component';
 import { ThemedDefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/themed-default-browse-elements.component';
 import { MarkdownDirective } from './utils/markdown.directive';
+import { SortPipe } from './utils/sort.pipe';
 
 const MODULES = [
   CommonModule,
@@ -405,7 +406,8 @@ const PIPES = [
   ConsolePipe,
   ObjNgFor,
   BrowserOnlyPipe,
-  ShortNumberPipe
+  ShortNumberPipe,
+  SortPipe,
 ];
 
 const COMPONENTS = [
