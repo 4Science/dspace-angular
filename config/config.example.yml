@@ -694,3 +694,14 @@ followAuthorityMaxItemLimit: 100
 # The maximum number of metadata values to process for each metadata key
 # when following authority metadata values.
 followAuthorityMetadataValuesLimit: 5
+
+# Geospatial Map display options
+geospatialMapViewer:
+  spatialMetadataFields:
+    - 'dcterms.spatial'
+  spatialFacetDiscoveryConfiguration: 'geospatial'
+  spatialPointFilterName: 'point'
+  enableBrowseMap: false
+  enableSearchViewMode: false
+  tileProviders:
+    - 'OpenStreetMap.Mapnik'

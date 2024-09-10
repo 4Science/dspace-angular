@@ -22,6 +22,7 @@ import { DatadogRumConfig } from './datadog-rum-config.interfaces';
 import { DiscoverySortConfig } from './discovery-sort.config';
 import { FilterVocabularyConfig } from './filter-vocabulary-config';
 import { FormConfig } from './form-config.interfaces';
+import { GeospatialMapConfig } from './geospatial-map-config';
 import { HomeConfig } from './homepage-config.interface';
 import {
   IdentifierSubtypesConfig,
@@ -1076,5 +1077,19 @@ export class DefaultAppConfig implements AppConfig {
       reverseSearchEndpoint: 'https://nominatim.openstreetmap.org/reverse',
       statusEndpoint: 'https://nominatim.openstreetmap.org/status',
     },
+  };
+
+  // Leaflet tile providers and other configurable attributes
+  geospatialMapViewer: GeospatialMapConfig = {
+    spatialMetadataFields: [
+      'dcterms.spatial',
+    ],
+    spatialFacetDiscoveryConfiguration: 'geospatial',
+    spatialPointFilterName: 'point',
+    enableSearchViewMode: false,
+    enableBrowseMap: false,
+    tileProviders: [
+      'OpenStreetMap.Mapnik',
+    ],
   };
 }

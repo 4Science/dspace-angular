@@ -811,4 +811,18 @@ export const environment: BuildConfig = {
       statusEndpoint: 'https://nominatim.openstreetmap.org/status',
     },
   },
+
+  // Leaflet tile providers and other configurable attributes
+  geospatialMapViewer: {
+    spatialMetadataFields: [
+      'dcterms.spatial',
+    ],
+    spatialFacetDiscoveryConfiguration: 'geospatial',
+    spatialPointFilterName: 'point',
+    enableSearchViewMode: true,
+    enableBrowseMap: true,
+    tileProviders: [
+      'OpenStreetMap.Mapnik',
+    ],
+  },
 };
