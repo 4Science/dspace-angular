@@ -13413,8 +13413,8 @@
   "layout.field.label.Publication.[dc.relation.otherlinks]": "Altri Collegamenti",
   // "layout.field.label.Publication.[dc.description.note]": "Notes",
   "layout.field.label.Publication.[dc.description.note]": "Note",
-  // "layout.field.label.Publication.BITSTREAM": "File(s)",
-  "layout.field.label.Publication.BITSTREAM": "File",
+  // "layout.field.label.Publication.BITSTREAM": "File / Documantation",
+  "layout.field.label.Publication.BITSTREAM": "File / Documentazione",
   // "layout.field.label.Publication.[dc.relation.journalfonds]": "Journal Fonds ",
   "layout.field.label.Publication.[dc.relation.journalfonds]": "Testata Correlata",
   // "layout.field.label.Publication.[dc.relation.event]": "Events",
@@ -13682,8 +13682,8 @@
   "layout.field.label.ArchivalMaterial.[dc.relation.uri]": "URL",
   // "layout.field.label.ArchivalMaterial.[dc.relation.place]": "Place",
   "layout.field.label.ArchivalMaterial.[dc.relation.place]": "Luogo",
-  // "layout.field.label.ArchivalMaterial.BITSTREAM": "File(s)",
-  "layout.field.label.ArchivalMaterial.BITSTREAM": "File",
+  // "layout.field.label.ArchivalMaterial.BITSTREAM": "File / Documentation",
+  "layout.field.label.ArchivalMaterial.BITSTREAM": "File / Documentazione",
 
   // "layout.field.label.Aggregation.[dc.description]": "Description",
   "layout.field.label.Aggregation.[dc.description]": "Descrizione",
@@ -13738,8 +13738,8 @@
   "layout.field.label.JournalFile.[dc.relation.isreferencedby]": "Documento collegato",
   // "layout.field.label.JournalFile.[dc.relation.aggregation]": "Aggregation",
   "layout.field.label.JournalFile.[dc.relation.aggregation]": "Aggregazione",
-  // "layout.field.label.JournalFile.BITSTREAM": "File(s)",
-  "layout.field.label.JournalFile.BITSTREAM": "File",
+  // "layout.field.label.JournalFile.BITSTREAM": "File / Documentation",
+  "layout.field.label.JournalFile.BITSTREAM": "File / Documentazione",
 
   // "layout.field.label.Picture.[dc.title.alternative]": "Alternative Title",
   "layout.field.label.Picture.[dc.title.alternative]": "Titolo alternativo",
@@ -13865,8 +13865,8 @@
   "layout.field.label.Picture.[glam.mar]k": "Stemma/Marchio/Timbro",
   // "layout.field.label.Picture.[glam.bibliography]": "Bibliography",
   "layout.field.label.Picture.g[lam.bibliography]": "Bibliografia",
-  // "layout.field.label.Picture.BITSTREAM": "File(s)",
-  "layout.field.label.Picture.BITSTREAM": "File",
+  // "layout.field.label.Picture.BITSTREAM": "File / Documantation",
+  "layout.field.label.Picture.BITSTREAM": "File / Documentazione",
   // "layout.field.label.Picture.[dc.relation.isreferencedby]": "Related Documents",
   "layout.field.label.Picture.[dc.relation.isreferencedby]": "Documento collegato",
 
@@ -13949,8 +13949,8 @@
   "layout.field.label.AudioVideo.[dc.description.preservationnote]": "Note sullo stato di conservazione",
   // "layout.field.label.AudioVideo.[dc.description.digitaltools]": "Digital tools",
   "layout.field.label.AudioVideo.[dc.description.digitaltools]": "Metodologia e strumentazione",
-  // "layout.field.label.AudioVideo.BITSTREAM": "File(s)",
-  "layout.field.label.AudioVideo.BITSTREAM": "File",
+  // "layout.field.label.AudioVideo.BITSTREAM": "File / Documantation",
+  "layout.field.label.AudioVideo.BITSTREAM": "File / Documentazione",
   // "layout.field.label.Opera.[dc.title.alternative]": "Alternative Title",
   "layout.field.label.Opera.[dc.title.alternative]": "Titolo alternativo",
   // "layout.field.label.Opera.[dc.date.issued]": "Date Issued",
@@ -14088,7 +14088,17 @@
   // "layout.field.label.Artwork.NESTED[dc.contributor.authorrole]": "Role",
   // TODO New key - Add a translation
   "layout.field.label.Artwork.NESTED[dc.contributor.authorrole]": "Role",
+  // "layout.field.label.Artwork.BITSTREAM": "File / Documantation",
+  "layout.field.label.Artwork.BITSTREAM": "File / Documentazione",
 
+  // "layout.field.label.Coin.BITSTREAM": "File / Documantation",
+  "layout.field.label.Coin.BITSTREAM": "File / Documentazione",
+
+  // "layout.field.label.ScientificMaterial.BITSTREAM": "File / Documantation",
+  "layout.field.label.ScientificMaterial.BITSTREAM": "File / Documentazione",
+
+  // "layout.field.label.MusicalLibrettos.BITSTREAM": "File / Documantation",
+  "layout.field.label.MusicalLibrettos.BITSTREAM": "File / Documentazione",
 
   // "label.link-text.description-box.section-site.pdl": "Scopri di più",
   // TODO New key - Add a translation
