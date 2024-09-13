@@ -177,15 +177,17 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
       });
 
       it('should display other dropdown menu option', () => {
-        scrollableDropdownComp.model.openType = true;
-        scrollableDropdownComp.pageInfo.currentPage = 2;
-        scrollableDropdownComp.pageInfo.totalPages = 1;
         const de = scrollableDropdownFixture.debugElement.query(By.css('input.form-control'));
         const btnEl = de.nativeElement;
 
         btnEl.click();
-
         scrollableDropdownFixture.detectChanges();
+
+        scrollableDropdownComp.model.openType = true;
+        scrollableDropdownComp.pageInfo.currentPage = 2;
+        scrollableDropdownComp.pageInfo.totalPages = 1;
+        scrollableDropdownFixture.detectChanges();
+
         const deMenu = scrollableDropdownFixture.debugElement.query(By.css('#otherOption'));
 
         expect(deMenu).toBeTruthy();
@@ -241,16 +243,21 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
       it('should add other dropdown option value', () => {
         const selectedValue = Object.assign(new VocabularyEntry(), { authority: 3, display: 'three', value: 'three' });
         spyOn((scrollableDropdownComp as any), 'addListItem');
-        scrollableDropdownComp.model.openType = true;
-        scrollableDropdownComp.pageInfo.currentPage = 2;
-        scrollableDropdownComp.pageInfo.totalPages = 1;
+
+
         const de = scrollableDropdownFixture.debugElement.query(By.css('input.form-control'));
         let btnEl = de.nativeElement;
 
         btnEl.click();
+        scrollableDropdownFixture.detectChanges();
+
+        scrollableDropdownComp.model.openType = true;
+        scrollableDropdownComp.pageInfo.currentPage = 2;
+        scrollableDropdownComp.pageInfo.totalPages = 1;
+        scrollableDropdownComp.otherListEntry = selectedValue.value;
 
         scrollableDropdownFixture.detectChanges();
-        scrollableDropdownComp.otherListEntry = selectedValue.value;
+
         btnEl = scrollableDropdownFixture.debugElement.nativeElement.querySelector('#otherOptionBtn');
 
         btnEl.click();

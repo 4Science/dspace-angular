@@ -80,7 +80,7 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
   public selectedIndex = 0;
   public acceptableKeys = ['Space', 'NumpadMultiply', 'NumpadAdd', 'NumpadSubtract', 'NumpadDecimal', 'Semicolon', 'Equal', 'Comma', 'Minus', 'Period', 'Quote', 'Backquote'];
   public otherListEntry = '';
-  public addButoonDisabled = false;
+  public addButtonDisabled = false;
 
 
   /**
@@ -162,7 +162,7 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
     if (!this.model.readOnly) {
       this.group.markAsUntouched();
       this.inputText = null;
-      this.updatePageInfo(this.model.maxOptions, 1);
+      this.updatePageInfo(this.model.maxOptions, 0);
       this.retrieveEntries(null, false);
       sdRef.open();
     }
@@ -355,7 +355,7 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
    */
   addListItem(sdRef: NgbDropdown) {
     let entryCount = 0;
-    this.addButoonDisabled = true;
+    this.addButtonDisabled = true;
     if (this.otherListEntry.toString() !== '') {
       if (this.optionsList.length > 0) {
         this.optionsList.forEach(element => {
@@ -371,12 +371,12 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
         this.optionsList.push(object);
         this.onSelect(object);
         sdRef.close();
-        this.addButoonDisabled = false;
+        this.addButtonDisabled = false;
       } else {
-        this.addButoonDisabled = false;
+        this.addButtonDisabled = false;
       }
     } else {
-      this.addButoonDisabled = false;
+      this.addButtonDisabled = false;
     }
   }
 
