@@ -1,7 +1,20 @@
-import { Component, Inject, Input, OnDestroy, OnInit, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-
-import { BehaviorSubject, Observable } from 'rxjs';
+import {
+  DOCUMENT,
+  isPlatformBrowser,
+} from '@angular/common';
+import {
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+  ViewEncapsulation,
+} from '@angular/core';
+import {
+  BehaviorSubject,
+  Observable,
+} from 'rxjs';
 
 import { MediaViewerItem } from '../../core/shared/media-viewer-item.model';
 import { VideojsService } from './services/videojs.service';
@@ -10,7 +23,7 @@ import { VideojsService } from './services/videojs.service';
   selector: 'ds-media-player',
   templateUrl: './media-player.component.html',
   styleUrls: ['./media-player.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class MediaPlayerComponent implements OnInit, OnDestroy {
 
@@ -122,8 +135,8 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
   setNewTimestamp(timestamp: number) {
     if (this.isVideoPlayerInitialized$.value) {
       this.videoPlayer.currentTime(timestamp);
-      }
     }
+  }
 
   /**
    * Init videojs player with the given item as source
@@ -139,7 +152,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.videoPlayer = this.videojsService.initVideoPlayer(
           this._document.getElementById('video_player'),
-          this.currentItem$?.value
+          this.currentItem$?.value,
         );
       }, 100);
 
@@ -150,7 +163,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.audioPlayer = this.videojsService.initAudioPlayer(
           this._document.getElementById('audio_player'),
-          this.currentItem$?.value
+          this.currentItem$?.value,
         );
       }, 100);
 
@@ -182,7 +195,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
       this.audioPlayer.src({
         src: this.currentItem$?.value?.manifestUrl,
         type: 'application/dash+xml',
-        peaks: this.currentItem$?.value?.bitstream.allMetadata('bitstream.audio.peaks')[0].value
+        peaks: this.currentItem$?.value?.bitstream.allMetadata('bitstream.audio.peaks')[0].value,
       });
 
       this.isLoadingOnChange.next(true);

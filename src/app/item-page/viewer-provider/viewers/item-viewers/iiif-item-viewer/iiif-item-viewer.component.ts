@@ -1,14 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { BaseItemViewerComponent } from '../base-item-viewer.component';
-import { RouteService } from '../../../../../core/services/route.service';
-import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 import { Observable } from 'rxjs';
-import { getDSpaceQuery, isIiifSearchEnabled } from '../../../shared/viewer-provider.utils';
+import {
+  filter,
+  map,
+  switchMap,
+  withLatestFrom,
+} from 'rxjs/operators';
+
+import { RouteService } from '../../../../../core/services/route.service';
+import {
+  getDSpaceQuery,
+  isIiifSearchEnabled,
+} from '../../../shared/viewer-provider.utils';
+import { BaseItemViewerComponent } from '../base-item-viewer.component';
 
 @Component({
   selector: 'ds-iiif-item-viewer',
   templateUrl: './iiif-item-viewer.component.html',
-  styleUrls: ['./iiif-item-viewer.component.scss']
+  styleUrls: ['./iiif-item-viewer.component.scss'],
 })
 export class IIIFItemViewerComponent extends BaseItemViewerComponent implements OnInit {
 
@@ -16,19 +28,19 @@ export class IIIFItemViewerComponent extends BaseItemViewerComponent implements 
   query$: Observable<string>;
 
   constructor(
-    private readonly routeService: RouteService
+    private readonly routeService: RouteService,
   ) {
     super();
   }
 
   ngOnInit(): void {
     this.isSearchable$ = this.item$.pipe(
-      map((item) => isIiifSearchEnabled(item))
+      map((item) => isIiifSearchEnabled(item)),
     );
     this.query$ = this.item$.pipe(
       withLatestFrom(this.isSearchable$),
       filter(([, isSearchable]) => !!isSearchable),
-      switchMap(([item]) => getDSpaceQuery(item, this.routeService))
+      switchMap(([item]) => getDSpaceQuery(item, this.routeService)),
     );
   }
 

@@ -1,4 +1,4 @@
-<div *ngIf="(searchResults$ | async)?.length > 0 && !(isLoading$ | async)">
+<div *ngIf="(searchResults$ | async)?.length > 0 && (isLoading$ | async) === false">
   <ds-carousel [items]="(searchResults$ | async)" [carouselOptions]="carouselOptions"></ds-carousel>
 </div>
 <div class="text-center" *ngIf="isLoading$ | async">

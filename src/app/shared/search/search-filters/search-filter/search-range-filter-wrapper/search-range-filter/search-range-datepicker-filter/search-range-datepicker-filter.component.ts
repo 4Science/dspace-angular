@@ -1,6 +1,15 @@
-import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
-import { SearchRangeFilterComponent } from '../search-range-filter.component';
-import { BehaviorSubject, Subject } from 'rxjs';
+import {
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+  ViewChild,
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 import {
   NgbCalendar,
   NgbDate,
@@ -8,30 +17,43 @@ import {
   NgbDateStruct,
   NgbInputDatepicker,
 } from '@ng-bootstrap/ng-bootstrap';
-import { hasValue, isNotEmpty } from '../../../../../../empty.util';
+import isEqual from 'lodash/isEqual';
+import {
+  BehaviorSubject,
+  Subject,
+} from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+} from 'rxjs/operators';
+
+import { RemoteDataBuildService } from '../../../../../../../core/cache/builders/remote-data-build.service';
 import { SearchService } from '../../../../../../../core/shared/search/search.service';
+import { SearchConfigurationService } from '../../../../../../../core/shared/search/search-configuration.service';
 import {
   FILTER_CONFIG,
   IN_PLACE_SEARCH,
   REFRESH_FILTER,
-  SearchFilterService
+  SCOPE,
+  SearchFilterService,
 } from '../../../../../../../core/shared/search/search-filter.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { RemoteDataBuildService } from '../../../../../../../core/cache/builders/remote-data-build.service';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../../../my-dspace-page/my-dspace-page.component';
-import { SearchConfigurationService } from '../../../../../../../core/shared/search/search-configuration.service';
+import { stringToNgbDateStruct } from '../../../../../../date.util';
+import {
+  hasValue,
+  isNotEmpty,
+} from '../../../../../../empty.util';
+import { FilterType } from '../../../../../models/filter-type.model';
 import { SearchFilterConfig } from '../../../../../models/search-filter-config.model';
 import { renderFacetForEnvironment } from '../../../search-filter-type-decorator';
-import { FilterType } from '../../../../../models/filter-type.model';
-import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
-import isEqual from 'lodash/isEqual';
-import { stringToNgbDateStruct } from '../../../../../../date.util';
+import { SearchRangeFilterComponent } from '../search-range-filter.component';
 
 
 @Component({
   selector: 'ds-search-range-datepicker-filter',
   templateUrl: './search-range-datepicker-filter.component.html',
-  styleUrls: ['./search-range-datepicker-filter.component.scss']
+  styleUrls: ['./search-range-datepicker-filter.component.scss'],
 })
 @renderFacetForEnvironment(FilterType.range, 'layout.search.filters.datepicker')
 export class SearchRangeDatepickerFilterComponent extends SearchRangeFilterComponent implements OnInit, OnDestroy {
@@ -96,10 +118,11 @@ export class SearchRangeDatepickerFilterComponent extends SearchRangeFilterCompo
     @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
     @Inject(IN_PLACE_SEARCH) public inPlaceSearch: boolean,
     @Inject(FILTER_CONFIG) public filterConfig: SearchFilterConfig,
+    @Inject(REFRESH_FILTER) public refreshFilters: BehaviorSubject<boolean>,
+    @Inject(SCOPE) public scope: string,
     @Inject(PLATFORM_ID) protected platformId: any,
-    @Inject(REFRESH_FILTER) public refreshFilters: BehaviorSubject<boolean>
   ) {
-    super(searchService, filterService, router, rdbs, route, searchConfigService, inPlaceSearch, filterConfig, platformId, refreshFilters);
+    super(searchService, filterService, router, rdbs, route, searchConfigService, inPlaceSearch, filterConfig, refreshFilters, scope, platformId);
   }
 
   public override ngOnInit() {
@@ -110,9 +133,9 @@ export class SearchRangeDatepickerFilterComponent extends SearchRangeFilterCompo
         .pipe(
           filter(() => !this.ngbDatepicker?.isOpen()),
           debounceTime(500),
-          distinctUntilChanged(isEqual)
+          distinctUntilChanged(isEqual),
         )
-        .subscribe(([fromDate, toDate]) => this.search(fromDate, toDate))
+        .subscribe(([fromDate, toDate]) => this.search(fromDate, toDate)),
     );
   }
 

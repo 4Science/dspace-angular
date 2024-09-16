@@ -1,29 +1,39 @@
-import { followLink } from '../utils/follow-link-config.model';
-import { CollectionElementLinkType } from '../object-collection/collection-element-link.type';
-import isEqual from 'lodash/isEqual';
-import { ViewMode } from '../../core/shared/view-mode.model';
+import { isPlatformServer } from '@angular/common';
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
 import {  Router } from '@angular/router';
+import isEqual from 'lodash/isEqual';
+
+import {
+  APP_CONFIG,
+  AppConfig,
+} from '../../../config/app-config.interface';
+import { SearchManager } from '../../core/browse/search-manager';
+import { PaginatedList } from '../../core/data/paginated-list.model';
+import { RemoteData } from '../../core/data/remote-data';
 import {
   LayoutModeEnum,
   TopSection,
 } from '../../core/layout/models/section.model';
-import { ChangeDetectorRef, Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
-import { isPlatformServer } from '@angular/common';
-
-import { SearchManager } from '../../core/browse/search-manager';
-import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
-import { DSpaceObject } from '../../core/shared/dspace-object.model';
-import { SearchResult } from '../search/models/search-result.model';
 import { Context } from '../../core/shared/context.model';
-import { RemoteData } from '../../core/data/remote-data';
-import { PaginatedList } from '../../core/data/paginated-list.model';
+import { DSpaceObject } from '../../core/shared/dspace-object.model';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
-import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
+import { ViewMode } from '../../core/shared/view-mode.model';
+import { CollectionElementLinkType } from '../object-collection/collection-element-link.type';
+import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
+import { SearchResult } from '../search/models/search-result.model';
+import { followLink } from '../utils/follow-link-config.model';
 
 @Component({
   selector: 'ds-browse-most-elements',
   styleUrls: ['./browse-most-elements.component.scss'],
-  templateUrl: './browse-most-elements.component.html'
+  templateUrl: './browse-most-elements.component.html',
 })
 
 export class BrowseMostElementsComponent implements OnInit {
@@ -54,7 +64,7 @@ export class BrowseMostElementsComponent implements OnInit {
 
   constructor(
     @Inject(APP_CONFIG) protected appConfig: AppConfig,
-    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(PLATFORM_ID) private platformId: any,
     private searchService: SearchManager,
     private router: Router,
     private cdr: ChangeDetectorRef) {

@@ -4,13 +4,13 @@ import { SharedModule } from '../shared.module';
 import { GooglemapsComponent } from './googlemaps.component';
 
 const COMPONENTS = [
-  GooglemapsComponent
+  GooglemapsComponent,
 ];
 
 @NgModule({
   imports: [ SharedModule ],
   declarations: [...COMPONENTS],
-  exports: [...COMPONENTS]
+  exports: [...COMPONENTS],
 })
 
 /**

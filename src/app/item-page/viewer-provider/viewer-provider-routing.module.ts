@@ -1,26 +1,30 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { ViewerProviderComponent } from './viewer-provider.component';
-import { BitstreamViewerResolver } from './resolvers/bitstream-viewer.resolver';
-import { LinkService } from '../../core/cache/builders/link.service';
-import { I18nBreadcrumbsService } from '../../core/breadcrumbs/i18n-breadcrumbs.service';
-import { ItemResolver } from '../item.resolver';
-import { ComponentProviderResolver } from './resolvers/component-provider.resolver';
-import { I18nBreadcrumbComponentProviderResolver } from './resolvers/i18n-breadcrumb-component-provider.resolver';
+import {
+  RouterModule,
+  Routes,
+} from '@angular/router';
+
 import { I18nBreadcrumbResolver } from '../../core/breadcrumbs/i18n-breadcrumb.resolver';
+import { I18nBreadcrumbsService } from '../../core/breadcrumbs/i18n-breadcrumbs.service';
+import { LinkService } from '../../core/cache/builders/link.service';
+import { EditItemResolver } from '../../core/shared/resolvers/edit-item.resolver';
 import { ResourcePolicyResolver } from '../../shared/resource-policies/resolvers/resource-policy.resolver';
 import { ResourcePolicyTargetResolver } from '../../shared/resource-policies/resolvers/resource-policy-target.resolver';
-import { ItemPageReinstateGuard } from '../edit-item-page/item-page-reinstate.guard';
-import { ItemPageWithdrawGuard } from '../edit-item-page/item-page-withdraw.guard';
-import { ItemPageAdministratorGuard } from '../item-page-administrator.guard';
-import { ItemPageMetadataGuard } from '../edit-item-page/item-page-metadata.guard';
-import { ItemPageStatusGuard } from '../edit-item-page/item-page-status.guard';
 import { ItemPageBitstreamsGuard } from '../edit-item-page/item-page-bitstreams.guard';
-import { ItemPageRelationshipsGuard } from '../edit-item-page/item-page-relationships.guard';
-import { ItemPageVersionHistoryGuard } from '../edit-item-page/item-page-version-history.guard';
 import { ItemPageCollectionMapperGuard } from '../edit-item-page/item-page-collection-mapper.guard';
+import { ItemPageMetadataGuard } from '../edit-item-page/item-page-metadata.guard';
+import { ItemPageReinstateGuard } from '../edit-item-page/item-page-reinstate.guard';
+import { ItemPageRelationshipsGuard } from '../edit-item-page/item-page-relationships.guard';
+import { ItemPageStatusGuard } from '../edit-item-page/item-page-status.guard';
 import { ItemPageUnlinkOrcidGuard } from '../edit-item-page/item-page-unlink-orcid.guard';
-import { EditItemResolver } from '../../core/shared/resolvers/edit-item.resolver';
+import { ItemPageVersionHistoryGuard } from '../edit-item-page/item-page-version-history.guard';
+import { ItemPageWithdrawGuard } from '../edit-item-page/item-page-withdraw.guard';
+import { ItemResolver } from '../item.resolver';
+import { ItemPageAdministratorGuard } from '../item-page-administrator.guard';
+import { BitstreamViewerResolver } from './resolvers/bitstream-viewer.resolver';
+import { ComponentProviderResolver } from './resolvers/component-provider.resolver';
+import { I18nBreadcrumbComponentProviderResolver } from './resolvers/i18n-breadcrumb-component-provider.resolver';
+import { ViewerProviderComponent } from './viewer-provider.component';
 
 const routes: Routes = [
   {
@@ -29,7 +33,7 @@ const routes: Routes = [
     resolve: {
       item: ItemResolver,
       breadcrumb: I18nBreadcrumbComponentProviderResolver,
-      viewer: ComponentProviderResolver
+      viewer: ComponentProviderResolver,
     },
     data: { title: 'viewer.provider.title', breadcrumbKey: 'viewer.provider', custom_params: ['viewer'] },
     // data: { title: 'viewer.provider.iiif.title', breadcrumbKey: 'viewer.provider.iiif' },
@@ -41,7 +45,7 @@ const routes: Routes = [
       breadcrumb: I18nBreadcrumbComponentProviderResolver,
       bitstream: BitstreamViewerResolver,
       item: ItemResolver,
-      viewer: ComponentProviderResolver
+      viewer: ComponentProviderResolver,
     },
     data: { title: 'viewer.provider.title', breadcrumbKey: 'viewer.provider', custom_params: ['viewer'] },
     children: [
@@ -49,8 +53,8 @@ const routes: Routes = [
       { path: 'audio', component: ViewerProviderComponent },
       { path: 'video', component: ViewerProviderComponent },
       { path: 'media', component: ViewerProviderComponent },
-    ]
-  }
+    ],
+  },
 ];
 
 @NgModule({
@@ -76,8 +80,8 @@ const routes: Routes = [
     ItemPageVersionHistoryGuard,
     ItemPageCollectionMapperGuard,
     ItemPageUnlinkOrcidGuard,
-    EditItemResolver
-  ]
+    EditItemResolver,
+  ],
 })
 export class ViewerProviderRoutingModule {
 }

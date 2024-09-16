@@ -4,9 +4,10 @@ import {
   Inject,
   InjectionToken,
   Input,
+  OnChanges,
   OnDestroy,
-  OnInit,
-  SecurityContext
+  SecurityContext,
+  SimpleChanges,
 } from '@angular/core';
 import {
   DomSanitizer,
@@ -27,13 +28,13 @@ const markdownItLoader = async () => (await import('markdown-it')).default;
 type LazyMarkdownIt = ReturnType<typeof markdownItLoader>;
 const MARKDOWN_IT = new InjectionToken<LazyMarkdownIt>(
   'Lazily loaded MarkdownIt',
-  {providedIn: 'root', factory: markdownItLoader}
+  { providedIn: 'root', factory: markdownItLoader },
 );
 
 @Directive({
-  selector: '[dsMarkdown]'
+  selector: '[dsMarkdown]',
 })
-export class MarkdownDirective implements OnInit, OnDestroy {
+export class MarkdownDirective implements OnChanges, OnDestroy {
 
   @Input() dsMarkdown: string;
   private alive$ = new Subject<boolean>();
@@ -48,8 +49,10 @@ export class MarkdownDirective implements OnInit, OnDestroy {
     this.el = elementRef.nativeElement;
   }
 
-  ngOnInit() {
-    this.render(this.dsMarkdown);
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.dsMarkdown && changes.dsMarkdown.currentValue !== changes.dsMarkdown.previousValue) {
+      this.render(changes.dsMarkdown.currentValue);
+    }
   }
 
   async render(value: string, forcePreview = false): Promise<SafeHtml> {
@@ -76,7 +79,7 @@ export class MarkdownDirective implements OnInit, OnDestroy {
     this.mathService.ready().pipe(
       filter((ready) => ready),
       take(1),
-      takeUntil(this.alive$)
+      takeUntil(this.alive$),
     ).subscribe(() => {
       this.mathService.render(this.el);
     });

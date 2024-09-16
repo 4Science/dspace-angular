@@ -1,13 +1,23 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {Router, UrlTree} from '@angular/router';
-import {TranslateService} from '@ngx-translate/core';
-import {LayoutField} from '../../../../../../../core/layout/models/box.model';
-import {Item} from '../../../../../../../core/shared/item.model';
-import {MetadataValue} from '../../../../../../../core/shared/metadata.models';
-import {ResolverStrategyService} from '../../../../../../services/resolver-strategy.service';
+import {
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
+import {
+  Router,
+  UrlTree,
+} from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
-import {FieldRenderingType, MetadataBoxFieldRendering} from '../metadata-box.decorator';
-import {RenderingTypeValueModelComponent} from '../rendering-type-value.model';
+import { LayoutField } from '../../../../../../../core/layout/models/box.model';
+import { Item } from '../../../../../../../core/shared/item.model';
+import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
+import { ResolverStrategyService } from '../../../../../../services/resolver-strategy.service';
+import {
+  FieldRenderingType,
+  MetadataBoxFieldRendering,
+} from '../metadata-box.decorator';
+import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
 
 /**
  * This component renders the search metadata fields
@@ -16,7 +26,7 @@ import {RenderingTypeValueModelComponent} from '../rendering-type-value.model';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'div[ds-search]',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
 })
 @MetadataBoxFieldRendering(FieldRenderingType.SEARCH)
 export class SearchComponent extends RenderingTypeValueModelComponent implements OnInit {
@@ -34,7 +44,7 @@ export class SearchComponent extends RenderingTypeValueModelComponent implements
     @Inject('tabNameProvider') public tabNameProvider: string,
     protected resolver: ResolverStrategyService,
     protected translateService: TranslateService,
-    private router: Router
+    private router: Router,
   ) {
     super(fieldProvider, itemProvider, metadataValueProvider, renderingSubTypeProvider, tabNameProvider, translateService);
   }

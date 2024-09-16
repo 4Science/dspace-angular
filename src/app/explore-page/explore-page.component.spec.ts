@@ -1,17 +1,42 @@
 import { CommonModule } from '@angular/common';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule, By } from '@angular/platform-browser';
+import {
+  async,
+  ComponentFixture,
+  inject,
+  TestBed,
+} from '@angular/core/testing';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import {
+  BrowserModule,
+  By,
+} from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { Observable, of } from 'rxjs';
-import { TranslateLoaderMock } from '../shared/mocks/translate-loader.mock';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
+import {
+  Observable,
+  of,
+} from 'rxjs';
+
 import { RemoteData } from '../core/data/remote-data';
-import { BrowseSection, FacetSection, LayoutModeEnum, SearchSection, Section, TopSection } from '../core/layout/models/section.model';
+import {
+  BrowseSection,
+  FacetSection,
+  LayoutModeEnum,
+  SearchSection,
+  Section,
+  TopSection,
+} from '../core/layout/models/section.model';
 import { SectionDataService } from '../core/layout/section-data.service';
+import { TranslateLoaderMock } from '../shared/mocks/translate-loader.mock';
 import { createSuccessfulRemoteDataObject$ } from '../shared/remote-data.utils';
 import { ExplorePageComponent } from './explore-page.component';
 
@@ -25,7 +50,7 @@ describe('ExploreComponent', () => {
   const browseComponent: BrowseSection = {
     browseNames: ['rodept', 'author', 'title', 'type'],
     componentType: 'browse',
-    style: 'col-md-4'
+    style: 'col-md-4',
   };
 
   const topComponent: TopSection = {
@@ -49,14 +74,14 @@ describe('ExploreComponent', () => {
     style: 'col-md-8',
     searchType: 'advanced',
     initialStatements: 3,
-    displayTitle: true
+    displayTitle: true,
   };
 
   const facetComponent: FacetSection = {
     discoveryConfigurationName: 'publication',
     componentType: 'facet',
     style: 'col-md-12',
-    facetsPerRow: 4
+    facetsPerRow: 4,
   };
 
   beforeEach(async(() => {
@@ -71,11 +96,11 @@ describe('ExploreComponent', () => {
         } else {
           return of(null);
         }
-      }
+      },
     };
 
     route = {
-      params: of({ id: 'publications' })
+      params: of({ id: 'publications' }),
     };
 
     TestBed.configureTestingModule({
@@ -83,15 +108,15 @@ describe('ExploreComponent', () => {
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
-            useClass: TranslateLoaderMock
-          }
+            useClass: TranslateLoaderMock,
+          },
         }),
       ],
       declarations: [ExplorePageComponent],
       providers: [ExplorePageComponent,
         { provide: SectionDataService, useValue: sectionDataServiceStub },
         { provide: ActivatedRoute, useValue: route }],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
   }));

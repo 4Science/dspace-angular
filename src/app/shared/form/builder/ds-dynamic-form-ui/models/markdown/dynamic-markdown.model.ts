@@ -1,8 +1,12 @@
 import {
   DynamicFormControlLayout,
-  serializable
+  serializable,
 } from '@ng-dynamic-forms/core';
-import { DsDynamicInputModel, DsDynamicInputModelConfig } from '../ds-dynamic-input.model';
+
+import {
+  DsDynamicInputModel,
+  DsDynamicInputModelConfig,
+} from '../ds-dynamic-input.model';
 
 export const DYNAMIC_FORM_CONTROL_TYPE_MARKDOWN = 'MARKDOWN';
 

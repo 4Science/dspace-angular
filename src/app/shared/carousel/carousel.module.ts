@@ -1,33 +1,34 @@
-import { NgModule } from '@angular/core';
-import { CarouselComponent } from './carousel.component';
-import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { SharedModule } from '../shared.module';
+import { CarouselComponent } from './carousel.component';
 
 const COMPONENTS = [
-    CarouselComponent
+  CarouselComponent,
 ];
 
 const MODULES = [
-    NgbCarouselModule,
-    CommonModule
+  NgbCarouselModule,
+  CommonModule,
 ];
 const PROVIDERS = [];
 
 @NgModule({
-    imports: [
-        ...MODULES,
-        SharedModule
-    ],
+  imports: [
+    ...MODULES,
+    SharedModule,
+  ],
   declarations: [
-    ...COMPONENTS
+    ...COMPONENTS,
   ],
   providers: [
-    ...PROVIDERS
+    ...PROVIDERS,
   ],
   exports: [
-    ...COMPONENTS
-  ]
+    ...COMPONENTS,
+  ],
 })
 
 /**

@@ -1,5 +1,12 @@
-import { Inject, Injectable } from '@angular/core';
-import { NativeWindowRef, NativeWindowService } from './window.service';
+import {
+  Inject,
+  Injectable,
+} from '@angular/core';
+
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from './window.service';
 
 /**
  * LinkService provides utility functions for working with links, such as checking if a link is internal
@@ -7,7 +14,7 @@ import { NativeWindowRef, NativeWindowService } from './window.service';
  */
 @Injectable()
 export class InternalLinkService {
-  currentURL = this._window.nativeWindow.location.origin;
+  currentURL = this._window.nativeWindow?.location?.origin;
 
   constructor(
     @Inject(NativeWindowService) protected _window: NativeWindowRef,

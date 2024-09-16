@@ -1,10 +1,17 @@
-import { Component, Inject } from '@angular/core';
-import { FieldRenderingType, MetadataBoxFieldRendering } from '../../metadata-box.decorator';
-import { MetadataGroupComponent } from '../metadata-group.component';
+import {
+  Component,
+  Inject,
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { LoadMoreService } from '../../../../../../../services/load-more.service';
-import { Item } from '../../../../../../../../core/shared/item.model';
+
 import { LayoutField } from '../../../../../../../../../app/core/layout/models/box.model';
+import { Item } from '../../../../../../../../core/shared/item.model';
+import { LoadMoreService } from '../../../../../../../services/load-more.service';
+import {
+  FieldRenderingType,
+  MetadataBoxFieldRendering,
+} from '../../metadata-box.decorator';
+import { MetadataGroupComponent } from '../metadata-group.component';
 
 /**
  * This component renders the table  metadata group fields
@@ -12,7 +19,7 @@ import { LayoutField } from '../../../../../../../../../app/core/layout/models/b
 @Component({
   selector: 'ds-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
 })
 @MetadataBoxFieldRendering(FieldRenderingType.TABLE, true)
 export class TableComponent extends MetadataGroupComponent {
@@ -22,7 +29,7 @@ export class TableComponent extends MetadataGroupComponent {
     @Inject('renderingSubTypeProvider') public renderingSubTypeProvider: string,
     @Inject('tabNameProvider') public tabNameProvider: string,
     protected translateService: TranslateService,
-    public loadMoreService: LoadMoreService
+    public loadMoreService: LoadMoreService,
   ) {
     super(fieldProvider, itemProvider, renderingSubTypeProvider, tabNameProvider, translateService, loadMoreService);
   }

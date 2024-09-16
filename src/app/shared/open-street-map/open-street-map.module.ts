@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
+import { AngularOpenlayersModule } from 'ngx-openlayers';
 
 import { SharedModule } from '../shared.module';
 import { OpenStreetMapComponent } from './open-street-map.component';
-import { AngularOpenlayersModule } from 'ngx-openlayers';
 
 const COMPONENTS = [
-    OpenStreetMapComponent
+  OpenStreetMapComponent,
 ];
 
 @NgModule({
@@ -14,7 +14,7 @@ const COMPONENTS = [
     AngularOpenlayersModule,
   ],
   declarations: [...COMPONENTS],
-  exports: [...COMPONENTS]
+  exports: [...COMPONENTS],
 })
 
 /**

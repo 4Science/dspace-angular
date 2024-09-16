@@ -1,15 +1,27 @@
-import { RenderingTypeStructuredModelComponent } from '../rendering-type-structured.model';
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { BehaviorSubject } from 'rxjs';
+
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../core/shared/item.model';
-import { TranslateService } from '@ngx-translate/core';
-import { isNotEmpty } from '../../../../../../../shared/empty.util';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
-import { BehaviorSubject } from 'rxjs';
-import { LoadMoreService, NestedMetadataGroupEntry } from '../../../../../../services/load-more.service';
+import { isNotEmpty } from '../../../../../../../shared/empty.util';
+import { LoadMoreService } from '../../../../../../services/load-more.service';
+import { RenderingTypeStructuredModelComponent } from '../rendering-type-structured.model';
+
+
+export interface NestedMetadataGroupEntry {
+  field: LayoutField;
+  value: MetadataValue;
+}
 
 @Component({
-  template: ''
+  template: '',
 })
 export abstract class MetadataGroupComponent extends RenderingTypeStructuredModelComponent implements OnInit, OnDestroy {
 
@@ -27,7 +39,12 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
   /**
    * The prefix used for box field label's i18n key
    */
-  fieldI18nPrefix = 'layout.field.label.';
+  readonly fieldI18nPrefix = 'layout.field.label';
+
+  /**
+   * The prefix used for box field label's
+   */
+  readonly nestedMetadataPrefix = 'NESTED';
 
   /**
    * A boolean representing if component is initialized
@@ -81,7 +98,7 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
       this.metadataGroup.forEach(mdg => {
         const entry = {
           field: mdg,
-          value: this.getMetadataValue(mdg, index)
+          value: this.getMetadataValue(mdg, index),
         } as NestedMetadataGroupEntry;
         if (this.componentsToBeRenderedMap.has(index)) {
           const newEntries = [...this.componentsToBeRenderedMap.get(index), entry];
@@ -99,8 +116,8 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
   /**
    * Set the limits of how many data loded from first and last
    */
-   setData(functionName: string) {
-    const {firstLimitedDataToBeRenderedMap, lastLimitedDataToBeRenderedMap, isConfigured, firstLimit, lastLimit} =
+  setData(functionName: string) {
+    const { firstLimitedDataToBeRenderedMap, lastLimitedDataToBeRenderedMap, isConfigured, firstLimit, lastLimit } =
       functionName === 'getComputedData' ?
         this.loadMoreService.getComputedData(this.componentsToBeRenderedMap,this.field.rendering) :
         this.loadMoreService.fillAllData(this.componentsToBeRenderedMap,this.field.rendering);
@@ -109,7 +126,7 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
     this.isConfigured = isConfigured;
     this.firstLimit = firstLimit;
     this.lastLimit = lastLimit;
-}
+  }
 
   getMetadataValue(field: LayoutField, index: number): MetadataValue {
     const metadataList = this.item.findMetadataSortedByPlace(field.metadata);
@@ -117,17 +134,23 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
   }
 
   /**
-   * Returns a string representing the label of field if exists
+   * Returns the translated label, if exists, otherwiuse returns a fallback value
    */
   getLabel(field: LayoutField): string {
-    const fieldLabelI18nKey = this.fieldI18nPrefix + field.label;
-    const header: string = this.translateService.instant(fieldLabelI18nKey);
-    if (header === fieldLabelI18nKey) {
-      // if translation does not exist return the value present in the header property
-      return this.translateService.instant(field.label);
-    } else {
-      return header;
-    }
+    return this.getTranslationIfExists(`${this.fieldI18nPrefix}.${this.item.entityType}.${this.nestedMetadataPrefix}[${field.metadata}]}`) ??
+      this.getTranslationIfExists(`${this.fieldI18nPrefix}.${this.item.entityType}.[${field.metadata}]`) ??
+      this.getTranslationIfExists(`${this.fieldI18nPrefix}.${this.item.entityType}.${field.metadata}`) ?? // old syntax - do not use
+      this.getTranslationIfExists(`${this.fieldI18nPrefix}.[${field.metadata}]`) ??
+      this.getTranslationIfExists(`${this.fieldI18nPrefix}.${field.label}`) ?? // old syntax - do not use
+      field.label; // the untranslated value from the CRIS layout
+  }
+
+  /**
+   * Return the translated label, if exists, otherwise returns null
+   */
+  getTranslationIfExists(key: string): string {
+    const translation: string = this.translateService.instant(key);
+    return translation !== key ? translation : null;
   }
 
   ngOnDestroy(): void {

@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+} from '@angular/router';
+
+import { BreadcrumbConfig } from '../../../breadcrumbs/breadcrumb/breadcrumb-config.model';
 import { I18nBreadcrumbResolver } from '../../../core/breadcrumbs/i18n-breadcrumb.resolver';
 import { I18nBreadcrumbsService } from '../../../core/breadcrumbs/i18n-breadcrumbs.service';
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { BreadcrumbConfig } from '../../../breadcrumbs/breadcrumb/breadcrumb-config.model';
 
 @Injectable()
 export class I18nBreadcrumbComponentProviderResolver extends I18nBreadcrumbResolver {

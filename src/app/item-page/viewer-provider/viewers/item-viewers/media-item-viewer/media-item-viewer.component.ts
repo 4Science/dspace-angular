@@ -1,5 +1,12 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Params,
+} from '@angular/router';
 
 import { BaseItemViewerComponent } from '../base-item-viewer.component';
 
@@ -7,7 +14,7 @@ import { BaseItemViewerComponent } from '../base-item-viewer.component';
   selector: 'ds-media-item-viewer',
   templateUrl: './media-item-viewer.component.html',
   styleUrls: ['./media-item-viewer.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MediaItemViewerComponent extends BaseItemViewerComponent implements OnInit {
 
@@ -17,7 +24,7 @@ export class MediaItemViewerComponent extends BaseItemViewerComponent implements
   bitstremUUID: string;
 
   constructor(
-    protected route: ActivatedRoute
+    protected route: ActivatedRoute,
   ) {
     super();
   }

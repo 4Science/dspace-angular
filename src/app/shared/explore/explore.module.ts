@@ -1,33 +1,29 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { TopSectionComponent } from './section-component/top-section/top-section.component';
-import { ThemedTopSectionComponent } from './section-component/top-section/themed-top-section.component';
+import { CarouselModule } from '../carousel/carousel.module';
+import { MarkdownViewerModule } from '../markdown-viewer/markdown-viewer.module';
+import { SharedModule } from '../shared.module';
 import { BrowseSectionComponent } from './section-component/browse-section/browse-section.component';
 import { ThemedBrowseSectionComponent } from './section-component/browse-section/themed-browse-section.component';
+import { CarouselSectionComponent } from './section-component/carousel-section/carousel-section.component';
+import { ThemedCarouselSectionComponent } from './section-component/carousel-section/themed-carousel-section.component';
 import { CountersSectionComponent } from './section-component/counters-section/counters-section.component';
 import { ThemedCountersSectionComponent } from './section-component/counters-section/themed-counters-section.component';
 import { FacetSectionComponent } from './section-component/facet-section/facet-section.component';
 import { ThemedFacetSectionComponent } from './section-component/facet-section/themed-facet-section.component';
-import {
-  MultiColumnTopSectionComponent
-} from './section-component/multi-column-top-section/multi-column-top-section.component';
-import {
-  ThemedMultiColumnTopSectionComponent
-} from './section-component/multi-column-top-section/themed-multi-column-top-section.component';
+import { GridSectionComponent } from './section-component/grid-section/grid-section.component';
+import { ThemedGridSectionComponent } from './section-component/grid-section/themed-grid-section.component';
+import { MultiColumnTopSectionComponent } from './section-component/multi-column-top-section/multi-column-top-section.component';
+import { ThemedMultiColumnTopSectionComponent } from './section-component/multi-column-top-section/themed-multi-column-top-section.component';
 import { SearchSectionComponent } from './section-component/search-section/search-section.component';
 import { ThemedSearchSectionComponent } from './section-component/search-section/themed-search-section.component';
 import { TextSectionComponent } from './section-component/text-section/text-section.component';
 import { ThemedTextSectionComponent } from './section-component/text-section/themed-text-section.component';
-import { SharedModule } from '../shared.module';
-import { MarkdownViewerModule } from '../markdown-viewer/markdown-viewer.module';
-import { CarouselSectionComponent } from './section-component/carousel-section/carousel-section.component';
-import { ThemedCarouselSectionComponent } from './section-component/carousel-section/themed-carousel-section.component';
-import { CarouselModule } from '../carousel/carousel.module';
-import { GridSectionComponent } from './section-component/grid-section/grid-section.component';
-import { ThemedGridSectionComponent } from './section-component/grid-section/themed-grid-section.component';
-import { TwitterSectionComponent } from './section-component/twitter-section/twitter-section.component';
+import { ThemedTopSectionComponent } from './section-component/top-section/themed-top-section.component';
+import { TopSectionComponent } from './section-component/top-section/top-section.component';
 import { ThemedTwitterSectionComponent } from './section-component/twitter-section/themed-twitter-section.component';
+import { TwitterSectionComponent } from './section-component/twitter-section/twitter-section.component';
 
 const COMPONENTS = [
   BrowseSectionComponent,
@@ -49,22 +45,22 @@ const COMPONENTS = [
   GridSectionComponent,
   ThemedGridSectionComponent,
   TwitterSectionComponent,
-  ThemedTwitterSectionComponent
+  ThemedTwitterSectionComponent,
 ];
 
 @NgModule({
   declarations: [
-    ...COMPONENTS
+    ...COMPONENTS,
   ],
-    imports: [
-        CommonModule,
-        SharedModule,
-        MarkdownViewerModule,
-        CarouselModule,
-    ],
+  imports: [
+    CommonModule,
+    SharedModule,
+    MarkdownViewerModule,
+    CarouselModule,
+  ],
   exports: [
-    ...COMPONENTS
-  ]
+    ...COMPONENTS,
+  ],
 })
 export class ExploreModule {
 }

@@ -1,7 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
+
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
@@ -17,17 +24,17 @@ describe('GmapComponent', () => {
     'language': null,
     'authority': null,
     'confidence': -1,
-    'place': 0
+    'place': 0,
   });
 
   const testItem = Object.assign(new Item(),
     {
       type: 'item',
       metadata: {
-        'organization.address.addressLocality': [metadataValue]
+        'organization.address.addressLocality': [metadataValue],
       },
       uuid: 'test-item-uuid',
-    }
+    },
   );
 
   const mockField: LayoutField = {
@@ -39,7 +46,7 @@ describe('GmapComponent', () => {
     'styleLabel': 'test-style-label',
     'styleValue': 'test-style-value',
     'labelAsHeading': false,
-    'valuesInline': true
+    'valuesInline': true,
   };
 
   beforeEach(async () => {
@@ -47,8 +54,8 @@ describe('GmapComponent', () => {
       imports: [TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
-          useClass: TranslateLoaderMock
-        }
+          useClass: TranslateLoaderMock,
+        },
       }), BrowserAnimationsModule],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
@@ -57,9 +64,9 @@ describe('GmapComponent', () => {
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
       ],
-      declarations: [ GmapComponent ]
+      declarations: [ GmapComponent ],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

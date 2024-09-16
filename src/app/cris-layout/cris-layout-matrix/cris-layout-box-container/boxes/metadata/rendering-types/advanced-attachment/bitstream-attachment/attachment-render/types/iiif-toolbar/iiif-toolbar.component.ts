@@ -1,33 +1,44 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { environment } from '../../../../../../../../../../../../environments/environment';
-import { Item } from '../../../../../../../../../../../core/shared/item.model';
-import { NotificationsService } from '../../../../../../../../../../../shared/notifications/notifications.service';
+import {
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { of } from 'rxjs';
+
+import { environment } from '../../../../../../../../../../../../environments/environment';
+import { AuthorizationDataService } from '../../../../../../../../../../../core/data/feature-authorization/authorization-data.service';
+import { FeatureID } from '../../../../../../../../../../../core/data/feature-authorization/feature-id';
+import { Bitstream } from '../../../../../../../../../../../core/shared/bitstream.model';
+import { Item } from '../../../../../../../../../../../core/shared/item.model';
 import {
   getItemViewerDetailsPath,
-  getItemViewerPath
+  getItemViewerPath,
 } from '../../../../../../../../../../../item-page/item-page-routing-paths';
-import { AttachmentRenderingType, AttachmentTypeRendering } from '../../../attachment-type.decorator';
-import { FeatureID } from '../../../../../../../../../../../core/data/feature-authorization/feature-id';
 import { isNotEmpty } from '../../../../../../../../../../../shared/empty.util';
-import { AuthorizationDataService } from '../../../../../../../../../../../core/data/feature-authorization/authorization-data.service';
-import { of } from 'rxjs';
-import { Bitstream } from '../../../../../../../../../../../core/shared/bitstream.model';
+import { NotificationsService } from '../../../../../../../../../../../shared/notifications/notifications.service';
+import {
+  AttachmentRenderingType,
+  AttachmentTypeRendering,
+} from '../../../attachment-type.decorator';
 
 @Component({
   selector: 'ds-iiif-toolbar',
   templateUrl: './iiif-toolbar.component.html',
-  styleUrls: ['./iiif-toolbar.component.scss']
+  styleUrls: ['./iiif-toolbar.component.scss'],
 })
 @AttachmentTypeRendering(AttachmentRenderingType.IIIF, true)
 export class IIIFToolbarComponent implements OnInit {
 
   @Input()
-  item: Item;
+    item: Item;
 
   @Input()
-  bitstream: Bitstream;
+    bitstream: Bitstream;
   /**
    * The tab name
    */

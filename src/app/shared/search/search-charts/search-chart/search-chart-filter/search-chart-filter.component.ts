@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ChartType } from '../../../../../charts/models/chart-type';
-import { SearchFacetFilterComponent } from '../../../search-filters/search-filter/search-facet-filter/search-facet-filter.component';
 import { ChartData } from '../../../../../charts/models/chart-data';
 import { ChartSeries } from '../../../../../charts/models/chart-series';
-import { FacetValue } from '../../../models/facet-value.model';
-import { RemoteData } from '../../../../../core/data/remote-data';
+import { ChartType } from '../../../../../charts/models/chart-type';
 import { PaginatedList } from '../../../../../core/data/paginated-list.model';
-import { FacetValues } from '../../../models/facet-values.model';
+import { RemoteData } from '../../../../../core/data/remote-data';
 import { getAllCompletedRemoteData } from '../../../../../core/shared/operators';
+import { FacetValue } from '../../../models/facet-value.model';
+import { FacetValues } from '../../../models/facet-values.model';
+import { SearchFacetFilterComponent } from '../../../search-filters/search-filter/search-facet-filter/search-facet-filter.component';
 
 @Component({
   selector: 'ds-search-chart-filter',
@@ -90,6 +92,18 @@ export class SearchChartFilterComponent extends SearchFacetFilterComponent imple
         }
         queryParam[str[0]] = queryParam[str[0]] ? [...queryParam[str[0]], str[1]] : [str[1]];
       });
+
+      if (this.currentUrl) {
+        const currentQueryParams = this.currentUrl.split('?')[1].split('&');
+        const pageParam = currentQueryParams.filter((param) => param.includes('page'));
+        if (pageParam.length > 0) {
+          const paramName = pageParam[0].split('=')[0];
+          queryParam[paramName] = [1];
+        }
+      } else {
+        queryParam['spc.page'] = [1];
+      }
+
       this.router.navigate(this.getSearchLinkParts(), {
         queryParams: queryParam,
         queryParamsHandling: 'merge',
@@ -109,12 +123,12 @@ export class SearchChartFilterComponent extends SearchFacetFilterComponent imple
             values.push(
               ...facetValue.page.map(
                 (item: FacetValue) =>
-                ({
-                  name: item.count.toString(),
-                  value: Number(item.value),
-                  extra: item,
-                } as ChartSeries)
-              )
+                  ({
+                    name: item.count.toString(),
+                    value: Number(item.value),
+                    extra: item,
+                  } as ChartSeries),
+              ),
             );
           } else {
             values.push(
@@ -124,8 +138,8 @@ export class SearchChartFilterComponent extends SearchFacetFilterComponent imple
                     name: item.value,
                     value: item.count,
                     extra: item,
-                  } as ChartSeries)
-              )
+                  } as ChartSeries),
+              ),
             );
           }
         });

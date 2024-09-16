@@ -1,33 +1,33 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { ViewerProviderRoutingModule } from './viewer-provider-routing.module';
-import { ViewerProviderComponent } from './viewer-provider.component';
 import { SharedModule } from '../../shared/shared.module';
 import { ViewerProviderDirective } from './directives/viewer-provider.directive';
+import { ViewerProviderComponent } from './viewer-provider.component';
+import { ViewerProviderRoutingModule } from './viewer-provider-routing.module';
 import { ViewersSharedModule } from './viewers/viewers-shared.module';
 
 const ENTRY_COMPONENTS = [
-  ViewerProviderComponent
+  ViewerProviderComponent,
 ];
 
 @NgModule({
   declarations: [
     ViewerProviderComponent,
-    ViewerProviderDirective
+    ViewerProviderDirective,
   ],
   imports: [
     CommonModule,
     SharedModule,
     ViewerProviderRoutingModule,
-    ViewersSharedModule
-  ]
+    ViewersSharedModule,
+  ],
 })
 export class ViewerProviderModule {
   static withEntryComponents() {
     return {
       ngModule: ViewerProviderModule,
-      providers: ENTRY_COMPONENTS.map((component) => ({ provide: component }))
+      providers: ENTRY_COMPONENTS.map((component) => ({ provide: component })),
     };
   }
 }

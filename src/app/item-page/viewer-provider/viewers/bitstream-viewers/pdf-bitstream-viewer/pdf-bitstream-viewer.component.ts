@@ -1,13 +1,26 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { BaseBitstreamViewerComponent } from '../base-bitstream-viewer.component';
-import { filter, map, switchMap, tap } from 'rxjs/operators';
-import { Observable, Subscription } from 'rxjs';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import {
+  Observable,
+  Subscription,
+} from 'rxjs';
+import {
+  filter,
+  map,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
+
 import { FileService } from '../../../../../core/shared/file.service';
+import { BaseBitstreamViewerComponent } from '../base-bitstream-viewer.component';
 
 @Component({
   selector: 'ds-pdf-bitstream-viewer',
   templateUrl: './pdf-bitstream-viewer.component.html',
-  styleUrls: ['./pdf-bitstream-viewer.component.scss']
+  styleUrls: ['./pdf-bitstream-viewer.component.scss'],
 })
 export class PdfBitstreamViewerComponent extends BaseBitstreamViewerComponent implements OnInit {
 
@@ -25,7 +38,7 @@ export class PdfBitstreamViewerComponent extends BaseBitstreamViewerComponent im
       filter(Object),
       switchMap(href => this.fileService.downloadFile(href)),
       filter(Object),
-      tap(_ => this.refreshViewer())
+      tap(_ => this.refreshViewer()),
     );
   }
 

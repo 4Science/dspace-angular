@@ -1,26 +1,37 @@
 import {
-  ChangeDetectorRef,
+  CdkDragDrop,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
+import { isPlatformBrowser } from '@angular/common';
+import {
   Component,
   EventEmitter,
   Inject,
   Input,
   OnChanges,
-  Output, PLATFORM_ID,
+  Output,
+  PLATFORM_ID,
   SimpleChanges,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-
+import {
+  Router,
+  UrlTree,
+} from '@angular/router';
 import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import isObject from 'lodash/isObject';
+import {
+  BehaviorSubject,
+  forkJoin,
+} from 'rxjs';
+import {
+  map,
+  take,
+} from 'rxjs/operators';
 
+import { isNotEmpty } from '../../empty.util';
 import { Chips } from './models/chips.model';
 import { ChipsItem } from './models/chips-item.model';
-import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject, forkJoin } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { isNotEmpty } from '../../empty.util';
-import { CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import { Router, UrlTree } from '@angular/router';
 
 const TOOLTIP_TEXT_LIMIT = 21;
 @Component({
@@ -50,9 +61,8 @@ export class ChipsComponent implements OnChanges {
 
   constructor(
     @Inject(PLATFORM_ID) protected platformId: string,
-    private cdr: ChangeDetectorRef,
     private translate: TranslateService,
-    private router: Router
+    private router: Router,
   ) {
   }
 
@@ -117,9 +127,9 @@ export class ChipsComponent implements OnChanges {
                   this.translate.get('form.other-information.' + otherField)
                     .pipe(
                       map((label) => `${label}: ${chipsItem.item[field].otherInformation[otherField].split('::')[0]}`),
-                      take(1)
-                    )
-                )
+                      take(1),
+                    ),
+                ),
             ).subscribe(entries => textToDisplay.push(...entries));
           }
           if (this.hasWillBeReferenced(chipsItem, field)) {
@@ -143,7 +153,7 @@ export class ChipsComponent implements OnChanges {
     return Object.keys(chipsItem.item[field]?.otherInformation)
       .filter((otherInformationKey: string) =>
         !otherInformationKey.startsWith('data-') &&
-        this.checkOtherInformationValue(chipsItem, field, otherInformationKey)
+        this.checkOtherInformationValue(chipsItem, field, otherInformationKey),
       );
   }
 
@@ -179,7 +189,7 @@ export class ChipsComponent implements OnChanges {
   }
 
   textTruncate(text: string): string {
-    if (text.length >= TOOLTIP_TEXT_LIMIT) {
+    if (text && text.length >= TOOLTIP_TEXT_LIMIT) {
       return `${text.substring(0, TOOLTIP_TEXT_LIMIT)}...`;
     }
     return text;
