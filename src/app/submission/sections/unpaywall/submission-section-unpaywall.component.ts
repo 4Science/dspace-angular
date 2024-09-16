@@ -302,7 +302,6 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
       .pipe(
         filter(hasValue),
         take(1),
-        tap((e) => console.log('HHHHHHHH', e)),
         this.getUnpaywallSection(),
         catchError((err: unknown) => {
           this.notificationsService.error((err as  RequestError)?.message);
