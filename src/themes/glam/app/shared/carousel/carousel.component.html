@@ -8,6 +8,9 @@
         <!-- Flexbox requires height to be applied to both columns separately, and to the central nested column of the right column -->
         <ng-container *ngIf="itemToImageHrefMap.get(item.indexableObject.uuid) as href; else placeholderImage">
           <div class="col-lg-8 image-column"
+               *ngVar="item.indexableObject.metadata[description] as description"
+               role="img"
+               [attr.aria-label]="description ? description[0].value : ('no.description.available' | translate)"
                [ngStyle]="carouselOptions.showBlurryBackdrop ? {'background-image': getBackgroundImage(href)} : {}">
             <div class="image-wrapper d-flex align-items-center justify-content-center"
                  [class.blurry-backdrop]="carouselOptions.showBlurryBackdrop">
@@ -23,7 +26,7 @@
         <div class="col-lg-4 caption-column px-2">
           <div class="d-flex flex-row align-items-stretch align-items-center">
             <!-- left column -->
-            <div *ngIf="items.length > 1" class="arrow-wrapper" (click)="carousel.prev()">
+            <div tabindex="0" [attr.aria-label]="'media-viewer.previous' | translate" role="button" *ngIf="items.length > 1" class="arrow-wrapper" (click)="carousel.prev()">
               <i class="fa fa-arrow-left"></i>
             </div>
             <!-- central column -->
@@ -47,14 +50,14 @@
                     {{ 'explore.carousel.view-more' | translate }}
                   </a>
                 </div>
-                <button *ngIf="items.length > 1" type="button" class="btn btn-sm toggle-paused" (click)="togglePaused()">
+                <button [attr.aria-label]="'carousel.play.pause' | translate" *ngIf="items.length > 1" type="button" class="btn btn-sm toggle-paused" (click)="togglePaused()">
                   <i class="fas fa-play" *ngIf="paused"></i>
                   <i class="fas fa-pause" *ngIf="!paused"></i>
                 </button>
               </div>
             </div>
             <!-- right column -->
-            <div *ngIf="items.length > 1" class="arrow-wrapper" (click)="carousel.next()">
+            <div [attr.aria-label]="'media-viewer.next' | translate"  tabindex="0" role="button" *ngIf="items.length > 1" class="arrow-wrapper" (click)="carousel.next()">
               <i class="fa fa-arrow-right"></i>
             </div>
           </div>
