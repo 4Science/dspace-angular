@@ -20,9 +20,9 @@
         </div>
         <div class="carousel-caption">
           <div class="carousel-caption-inner">
-            <h3 data-test="carouselObjTitle" [class]="carouselOptions.titleStyle"
+            <h1 data-test="carouselObjTitle" [class]="carouselOptions.titleStyle" class="h3"
                 *ngIf="item.indexableObject.metadata[title]">
-              {{item.indexableObject.metadata[title][0].value}}</h3>
+              {{item.indexableObject.metadata[title][0].value}}</h1>
             <div data-test="carouselObjDesc" class="carousel-caption-text pr-3 pl-2" [class]="carouselOptions.captionStyle"
                  *ngIf="item.indexableObject.metadata[description]; let descriptionObj">
               {{descriptionObj[0].value}}
@@ -34,7 +34,7 @@
   </ng-template>
 </ngb-carousel>
 <div class="text-center play-pause-button">
-  <button type="button" class="btn btn-sm toggle-paused" (click)="togglePaused()">
+  <button [attr.aria-label]="'carousel.play.pause' | translate" type="button" class="btn btn-sm toggle-paused" (click)="togglePaused()">
     <i class="fas fa-play" *ngIf="paused"></i>
     <i class="fas fa-pause" *ngIf="!paused"></i>
   </button>

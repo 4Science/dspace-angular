@@ -4,7 +4,7 @@
       <div class="card-header">{{ 'explore.index.' + (topSection.titleKey ? topSection.titleKey : topSection.sortField) | translate }}</div>
     </ng-container>
     <ng-template #listView>
-      <h3 class="mx-2">{{ 'explore.index.' + (topSection.titleKey ? topSection.titleKey : topSection.sortField) | translate }}</h3>
+      <h1 class="h3 mx-2">{{ 'explore.index.' + (topSection.titleKey ? topSection.titleKey : topSection.sortField) | translate }}</h1>
     </ng-template>
     <div [ngClass]="{'card-body': topSection.showAsCard}">
       <div class="row pl-2" *ngIf="topSection.showLayoutSwitch">
