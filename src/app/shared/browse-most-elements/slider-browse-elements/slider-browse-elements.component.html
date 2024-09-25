@@ -1,6 +1,6 @@
 <div class="d-flex flex-row gapx-3 flex-nowrap justify-content-center align-items-center slider-wrapper" #sliderWrapper>
   <div *ngIf="(searchResultArray$ | async)?.length" class="arrow">
-    <button class="btn btn-link btn-sm arrow-btn" (click)="prev()"
+    <button [attr.aria-label]="'media-viewer.previous' | translate" class="btn btn-link btn-sm arrow-btn" (click)="prev()"
             [disabled]="(firstItemBS.asObservable() | async) <= 0">
       <i class="fas fa-3x fa-chevron-left"></i>
     </button>
@@ -17,13 +17,13 @@
         </div>
         <div class="text-container p-3 d-flex flex-column justify-content-between h-50">
           <ng-container *ngVar="(item.firstMetadataValue('dc.description.abstract')) as description">
-            <h4 class="mb-3" [ngClass]="description ? 'h-25' : 'h-100'">
+            <div class="mb-3 font-weight-bold" [ngClass]="description ? 'h-25' : 'h-100'">
               <a [routerLink]="[getItemPageRoute(item)]"
                  [ngbTooltip]="item.firstMetadataValue('dc.title')"
                  [ngClass]="description ? 'ellipsis-y-2' : 'ellipsis-y-4'">
                 <span>{{ item.firstMetadataValue('dc.title') }}</span>
               </a>
-            </h4>
+            </div>
             <ng-container *ngIf="description">
               <div class="h-75">
                 <p class="ellipsis-y-4">
@@ -37,10 +37,9 @@
     </ng-container>
   </div>
   <div *ngIf="(searchResultArray$ | async)?.length">
-    <button class="btn btn-link btn-sm arrow-btn" (click)="next()"
+    <button [attr.aria-label]="'media-viewer.next' | translate" class="btn btn-link btn-sm arrow-btn" (click)="next()"
             [disabled]="(firstItemBS.asObservable() | async) + (itemsPerPageBS.asObservable() | async) >= (totalItemsBS.asObservable() | async) ">
       <i class="fas fa-3x fa-chevron-right"></i>
     </button>
   </div>
-  <div *ngIf="(searchResultArray$ | async)?.length === 0">{{ 'slider-browse-elements.no-results' | translate }}</div>
 </div>

@@ -1,25 +1,85 @@
+.main-content {
+  &-title, &-subtitle {
+    font-weight: var(--ds-home-page-title-size);
+  }
+
+  &-text {
+    overflow: hidden; // TODO find better solution
+    font-size: 1.15rem;
+  }
+
+  &-badge {
+    font-size: 1.2rem;
+  }
+
+  &-title-1 {
+    color: var(--bs-headings-color)
+  }
+
+  &-title-2 {
+    color: var(--bs-body-color)
+  }
+
+  &-badge, &-title-1, &-title-2 {
+    font-weight: 900;
+  }
+
+}
+
 .grid-container {
   width: 100%;
   display: grid;
-  grid-gap: .5em;
+  grid-gap: 24px;
 
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  grid-template-rows: repeat(6, 1fr);
-  grid-template-areas:
-    "title title"
-    "title title"
-    "item-0 item-1"
-    "item-2 item-3"
-    "item-4 item-5"
-    "item-6 item-7";
+  .path-title {
+    border: 1px solid var(--bs-link-hover-color) !important;
+    padding: 4rem;
+  }
 
-  @include media-breakpoint-up(lg) {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-template-rows: repeat(3, 1fr);
-    grid-template-areas:
-    "title title item-0 item-1"
-    "title title item-2 item-3"
-    "item-4 item-5 item-6 item-7";
+  @include media-breakpoint-up(xl) {
+    grid-template-columns: repeat(4, minmax(240px, 1fr));
+    .path-title, .path-item {
+      aspect-ratio: 1;
+    }
+    .path-title {
+      grid-row-end: span 2;
+      grid-column-end: span 2;
+    }
+  }
+
+  @include media-breakpoint-between(md, lg) {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    .path-title, .path-item {
+      aspect-ratio: 1;
+    }
+    .path-title {
+      grid-row-end: span 2;
+      grid-column-end: span 2;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    grid-template-columns: 1fr;
+    .path-title {
+      aspect-ratio: unset;
+    }
+    .path-item {
+      aspect-ratio: 1;
+    }
+  }
+
+  @media (min-width: 4000px) {
+    // when the screen is zoomed out to 25%
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+
+    .path-title {
+      aspect-ratio: 0;
+    }
+
+    .path-title {
+      grid-row-end: span 1;
+      grid-column-end: span 1;
+    }
   }
 }
 
@@ -33,24 +93,10 @@ a {
   z-index: 2;
 }
 
-.main-content-badge, .grid-section-title-1, .grid-section-title-2 {
+.main-content-badge, .main-content-title-1, .main-content-title-2 {
   font-weight: 900;
 }
 
-.grid-section-title-1 {
-  color: var(--bs-text-muted);
-}
-
-.grid-section-title-2 {
-
-}
-
-
-button {
-  bottom: 0;
-  right: 0;
-}
-
-div.content {
-  aspect-ratio: 16 / 9;
+.main-content-title-1, .main-content-title-2 {
+  font-size: var(--ds-cris-path-section-title-font-size);
 }

@@ -4744,17 +4744,17 @@
   // "home.advanced-top-section.dc.date.accessioned": "Highlights",
   "home.advanced-top-section.dc.date.accessioned": "In primo piano",
 
-  // "home.advanced-top-section.dc.date.issued": "New accessions",
-  "home.advanced-top-section.dc.date.issued": "Nuove accessioni",
+  // "home.advanced-top-section.dc.date.issued": "Highlights",
+  "home.advanced-top-section.dc.date.issued": "In primo piano",
 
-  // "home.advanced-top-section.metric.view": "New accessions",
-  "home.advanced-top-section.metric.view": "Nuove accessioni",
+  // "home.advanced-top-section.metric.view": "Highlights",
+  "home.advanced-top-section.metric.view": "In primo piano",
 
-  // "home.advanced-top-section.metric.download": "New accessions",
-  "home.advanced-top-section.metric.download": "Nuove accessioni",
+  // "home.advanced-top-section.metric.download": "Highlights",
+  "home.advanced-top-section.metric.download": "In primo piano",
 
-  // "home.advanced-top-section.cris.priority": "New accessions",
-  "home.advanced-top-section.cris.priority": "Nuove accessioni",
+  // "home.advanced-top-section.cris.priority": "Highlights",
+  "home.advanced-top-section.cris.priority": "In primo piano",
 
   // "home.advanced-top-section.discovery.aggregationsHomePage": "Aggregations",
   "home.advanced-top-section.discovery.aggregationsHomePage": "Aggregazioni",
@@ -12122,6 +12122,16 @@
   "path.page.titleprefix": "Percorso: ",
   // "place.page.titleprefix": "Place: ",
   "place.page.titleprefix": "Luogo: ",
+  // "staticpage.page.titleprefix": "Page: ",
+  "staticpage.page.titleprefix": "Pagina: ",
+  // "opera.page.titleprefix": "Opera: ",
+  "opera.page.titleprefix": "Opera: ",
+  // "coin.page.titleprefix": "Coin: ",
+  "coin.page.titleprefix": "Moneta: ",
+  // "scientificmaterial.page.titleprefix": "Scientific Material: ",
+  "scientificmaterial.page.titleprefix": "Materiale scientifico: ",
+  // "musicallibrettos.page.titleprefix": "Musical Librettos: ",
+  "musicallibrettos.page.titleprefix": "Libretti musicali: ",
 
   // "aggregation.listelement.badge": "Aggregation",
   "aggregation.listelement.badge": "Aggregazione",
@@ -12304,9 +12314,6 @@
   // "submission.sections.submit.progressbar.describe.opera": "Opera Details",
   "submission.sections.submit.progressbar.describe.opera": "Informazioni di dettaglio",
 
-  // "submission.sections.submit.progressbar.describe.coin": "Coin Details",
-  "submission.sections.submit.progressbar.describe.coin": "Infomazioni di dettaglio",
-
   // "submission.sections.submit.progressbar.describe.picture": "Picture Details",
   "submission.sections.submit.progressbar.describe.picture": "Informazioni di dettaglio",
 
@@ -12343,11 +12350,12 @@
   // "submission.sections.submit.progressbar.describe.books": "Book basic information",
   "submission.sections.submit.progressbar.describe.books": "Informazioni di base",
 
-  // "submission.sections.submit.progressbar.describe.coins": "Coin basic information",
-  "submission.sections.submit.progressbar.describe.coins": "Informazioni di base",
+  // "submission.sections.submit.progressbar.describe.coin": "Coin basic information",
+  // TODO Source message changed - Revise the translation
+  "submission.sections.submit.progressbar.describe.coin": "Infomazioni di dettaglio",
 
-  // "submission.sections.submit.progressbar.describe.coins-glam-bibliography": "Coin bibliographic details",
-  "submission.sections.submit.progressbar.describe.coins-glam-bibliography": "Dettagli bibliografici della Moneta",
+  // "submission.sections.submit.progressbar.describe.coin-glam-bibliography": "Coin bibliographic details",
+  "submission.sections.submit.progressbar.describe.coin-glam-bibliography": "Dettagli bibliografici della Moneta",
 
   // "submission.sections.submit.progressbar.describe.artworks": "Artwork basic information",
   "submission.sections.submit.progressbar.describe.artworks": "Informazioni di base",
@@ -12773,10 +12781,6 @@
   // "external-login-page.confirm-email.create-account.notifications.error.no-netId": "Something went wrong with this email account. Try again or use a different method to login.",
   // TODO New key - Add a translation
   "external-login-page.confirm-email.create-account.notifications.error.no-netId": "Something went wrong with this email account. Try again or use a different method to login.",
-
-  // "slider-browse-elements.no-results": "No results available for this configuration",
-  // TODO New key - Add a translation
-  "slider-browse-elements.no-results": "No results available for this configuration",
 
 
 
@@ -13409,8 +13413,8 @@
   "layout.field.label.Publication.[dc.relation.otherlinks]": "Altri Collegamenti",
   // "layout.field.label.Publication.[dc.description.note]": "Notes",
   "layout.field.label.Publication.[dc.description.note]": "Note",
-  // "layout.field.label.Publication.BITSTREAM": "File(s)",
-  "layout.field.label.Publication.BITSTREAM": "File",
+  // "layout.field.label.Publication.BITSTREAM": "File / Documantation",
+  "layout.field.label.Publication.BITSTREAM": "File / Documentazione",
   // "layout.field.label.Publication.[dc.relation.journalfonds]": "Journal Fonds ",
   "layout.field.label.Publication.[dc.relation.journalfonds]": "Testata Correlata",
   // "layout.field.label.Publication.[dc.relation.event]": "Events",
@@ -13678,8 +13682,8 @@
   "layout.field.label.ArchivalMaterial.[dc.relation.uri]": "URL",
   // "layout.field.label.ArchivalMaterial.[dc.relation.place]": "Place",
   "layout.field.label.ArchivalMaterial.[dc.relation.place]": "Luogo",
-  // "layout.field.label.ArchivalMaterial.BITSTREAM": "File(s)",
-  "layout.field.label.ArchivalMaterial.BITSTREAM": "File",
+  // "layout.field.label.ArchivalMaterial.BITSTREAM": "File / Documentation",
+  "layout.field.label.ArchivalMaterial.BITSTREAM": "File / Documentazione",
 
   // "layout.field.label.Aggregation.[dc.description]": "Description",
   "layout.field.label.Aggregation.[dc.description]": "Descrizione",
@@ -13734,8 +13738,8 @@
   "layout.field.label.JournalFile.[dc.relation.isreferencedby]": "Documento collegato",
   // "layout.field.label.JournalFile.[dc.relation.aggregation]": "Aggregation",
   "layout.field.label.JournalFile.[dc.relation.aggregation]": "Aggregazione",
-  // "layout.field.label.JournalFile.BITSTREAM": "File(s)",
-  "layout.field.label.JournalFile.BITSTREAM": "File",
+  // "layout.field.label.JournalFile.BITSTREAM": "File / Documentation",
+  "layout.field.label.JournalFile.BITSTREAM": "File / Documentazione",
 
   // "layout.field.label.Picture.[dc.title.alternative]": "Alternative Title",
   "layout.field.label.Picture.[dc.title.alternative]": "Titolo alternativo",
@@ -13861,8 +13865,8 @@
   "layout.field.label.Picture.[glam.mar]k": "Stemma/Marchio/Timbro",
   // "layout.field.label.Picture.[glam.bibliography]": "Bibliography",
   "layout.field.label.Picture.g[lam.bibliography]": "Bibliografia",
-  // "layout.field.label.Picture.BITSTREAM": "File(s)",
-  "layout.field.label.Picture.BITSTREAM": "File",
+  // "layout.field.label.Picture.BITSTREAM": "File / Documantation",
+  "layout.field.label.Picture.BITSTREAM": "File / Documentazione",
   // "layout.field.label.Picture.[dc.relation.isreferencedby]": "Related Documents",
   "layout.field.label.Picture.[dc.relation.isreferencedby]": "Documento collegato",
 
@@ -13945,8 +13949,8 @@
   "layout.field.label.AudioVideo.[dc.description.preservationnote]": "Note sullo stato di conservazione",
   // "layout.field.label.AudioVideo.[dc.description.digitaltools]": "Digital tools",
   "layout.field.label.AudioVideo.[dc.description.digitaltools]": "Metodologia e strumentazione",
-  // "layout.field.label.AudioVideo.BITSTREAM": "File(s)",
-  "layout.field.label.AudioVideo.BITSTREAM": "File",
+  // "layout.field.label.AudioVideo.BITSTREAM": "File / Documantation",
+  "layout.field.label.AudioVideo.BITSTREAM": "File / Documentazione",
   // "layout.field.label.Opera.[dc.title.alternative]": "Alternative Title",
   "layout.field.label.Opera.[dc.title.alternative]": "Titolo alternativo",
   // "layout.field.label.Opera.[dc.date.issued]": "Date Issued",
@@ -14084,7 +14088,17 @@
   // "layout.field.label.Artwork.NESTED[dc.contributor.authorrole]": "Role",
   // TODO New key - Add a translation
   "layout.field.label.Artwork.NESTED[dc.contributor.authorrole]": "Role",
+  // "layout.field.label.Artwork.BITSTREAM": "File / Documantation",
+  "layout.field.label.Artwork.BITSTREAM": "File / Documentazione",
 
+  // "layout.field.label.Coin.BITSTREAM": "File / Documantation",
+  "layout.field.label.Coin.BITSTREAM": "File / Documentazione",
+
+  // "layout.field.label.ScientificMaterial.BITSTREAM": "File / Documantation",
+  "layout.field.label.ScientificMaterial.BITSTREAM": "File / Documentazione",
+
+  // "layout.field.label.MusicalLibrettos.BITSTREAM": "File / Documantation",
+  "layout.field.label.MusicalLibrettos.BITSTREAM": "File / Documentazione",
 
   // "label.link-text.description-box.section-site.pdl": "Scopri di più",
   // TODO New key - Add a translation

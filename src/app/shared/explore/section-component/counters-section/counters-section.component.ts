@@ -41,11 +41,11 @@ export class CountersSectionComponent implements OnInit {
 
 
   constructor(
-              public internalLinkService: InternalLinkService,
-              private searchService: SearchManager,
+              protected internalLinkService: InternalLinkService,
+              protected searchService: SearchManager,
               @Inject(NativeWindowService) protected _window: NativeWindowRef,
-              private uuidService: UUIDService,
-              @Inject(PLATFORM_ID) private platformId: Object,
+              protected uuidService: UUIDService,
+              @Inject(PLATFORM_ID) protected platformId: Object,
   ) {
 
   }
