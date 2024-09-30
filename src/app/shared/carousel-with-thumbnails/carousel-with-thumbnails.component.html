@@ -52,6 +52,7 @@
           [isHorizontal]="(isSmallDevice$ | async)"
           [sliderEventSource]="sliderEventSource"
           [discoveryConfiguration]="discoveryConfiguration"
+          [bundle]="'THUMBNAIL'"
           (activeIndexChange)="activeIndexChange($event)"
           (thumbnailSelected)="selectedThumbnail($event)"
           (itemToImageHrefMap)="getItemMapValue($event)"
