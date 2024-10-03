@@ -108,6 +108,8 @@ export class CarouselWithThumbnailsComponent implements OnInit {
    */
   sliderEventSource: NgbSlideEvent;
 
+  public readonly bundle = 'BRANDED_PREVIEW';
+
   constructor(
     private hostWindowService: HostWindowService,
   ) {
