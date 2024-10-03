@@ -2737,7 +2737,9 @@
 
   "explore.index.rpname": "Name",
 
-  "explore.index.subject": "Subject",
+  "explore.index.subject": "Keyword",
+  
+  "explore.index.glamsubject": "Subject",
 
   "explore.index.title": "Title",
 
@@ -5565,7 +5567,9 @@
 
   "search.filters.applied.f.projectorgunits": "Organisation",
 
-  "search.filters.applied.f.subject": "Subject",
+  "search.filters.applied.f.subject": "Keyword",
+  
+  "search.filters.applied.f.glamsubject": "Subject",
 
   "search.filters.applied.f.submitter": "Submitter",
 
@@ -5842,11 +5846,17 @@
 
   "search.filters.filter.show-more": "Show more",
 
-  "search.filters.filter.subject.head": "Subject",
+  "search.filters.filter.subject.head": "Keyword",
 
-  "search.filters.filter.subject.placeholder": "Subject",
+  "search.filters.filter.subject.placeholder": "Keyword",
 
-  "search.filters.filter.subject.label": "Search subject",
+  "search.filters.filter.subject.label": "Search keyword",
+  
+  "search.filters.filter.glamsubject.head": "Subject",
+
+  "search.filters.filter.glamsubject.placeholder": "Subject",
+
+  "search.filters.filter.glamsubject.label": "Search subject",
 
   "search.filters.filter.submitter.head": "Submitter",
 
