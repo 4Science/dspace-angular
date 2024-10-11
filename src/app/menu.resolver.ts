@@ -200,8 +200,8 @@ export class MenuResolver implements Resolve<boolean> {
       ]
     ).pipe(take(1)).subscribe((authorizationMap) => {
       const canViewUsage = authorizationMap[FeatureID.CanViewUsageStatistics];
-      const canViewLogin = authorizationMap[FeatureID.CanViewUsageStatistics];
-      const canViewWorkflow = authorizationMap[FeatureID.CanViewUsageStatistics];
+      const canViewLogin = authorizationMap[FeatureID.CanViewLoginStatistics];
+      const canViewWorkflow = authorizationMap[FeatureID.CanViewWorkflowStatistics];
 
       const menuList = [];
       if (canViewUsage || canViewLogin || canViewWorkflow) {
@@ -295,7 +295,7 @@ export class MenuResolver implements Resolve<boolean> {
     ).pipe(take(1)).subscribe((authorizationMap) => {
       const isCollectionAdmin = authorizationMap[FeatureID.IsCollectionAdmin];
       const isCommunityAdmin = authorizationMap[FeatureID.IsCommunityAdmin];
-      const isSiteAdmin = authorizationMap[FeatureID.IsCollectionAdmin];
+      const isSiteAdmin = authorizationMap[FeatureID.AdministratorOf];
       const canEditItem = authorizationMap[FeatureID.CanEditItem];
 
       const newSubMenuList = [
