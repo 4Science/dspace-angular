@@ -180,27 +180,14 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    *                                    {@link HALLink}s should be automatically resolved
    */
   searchByObjects(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, options: FindListOptions = {}, useCachedVersionIfAvailable = true, reRequestOnStale = true, ...linksToFollow: FollowLinkConfig<Authorization>[]): Observable<RemoteData<PaginatedList<Authorization>>> {
-    const out$ = this.searchBy(
+    return this.searchBy(
       this.searchByObjectsPath,
       this.createSearchOptionsForObjects(uuidList, type, options, ePersonUuid, featuresId),
       useCachedVersionIfAvailable,
       reRequestOnStale,
       ...linksToFollow
     );
-
-    let cacheKey = uuidList.join();
-
-    if (hasValue(featuresId) && featuresId.length) {
-      cacheKey += featuresId.join();
-    }
-
-    if (hasValue(ePersonUuid)) {
-      cacheKey += ePersonUuid;
-    }
-
-    this.addDependency(out$, cacheKey);
-
-    return out$;
+    //Todo: find a convenient way to add dependency for UI cache invalidation
   }
 
   /**

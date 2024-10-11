@@ -2,7 +2,7 @@ import { AuthorizationDataService } from './authorization-data.service';
 import { SiteDataService } from '../site-data.service';
 import { Site } from '../../shared/site.model';
 import { EPerson } from '../../eperson/models/eperson.model';
-import { of as observableOf, combineLatest as observableCombineLatest, Observable } from 'rxjs';
+import { combineLatest as observableCombineLatest, Observable, of as observableOf } from 'rxjs';
 import { FeatureID } from './feature-id';
 import { hasValue } from '../../../shared/empty.util';
 import { RequestParam } from '../../cache/models/request-param.model';
@@ -150,6 +150,51 @@ describe('AuthorizationDataService', () => {
         });
       });
     });
+  });
+
+  describe('searchByObjects', () => {
+    const objectId = 'fake-object-id';
+    const objectId2 = 'fake-object-id-2';
+    const ePersonUuid = 'fake-eperson-uuid';
+
+    function createExpected(providedObjectsUuid: string[], providedType: string, providedEPersonUuid?: string, providedFeaturesId?: FeatureID[]): FindListOptions {
+      const searchParams = [];
+
+      searchParams.push(new RequestParam('type', providedType));
+
+      searchParams.push(...providedObjectsUuid.map(uuid => new RequestParam('uuid', uuid)));
+
+      if (hasValue(providedFeaturesId)) {
+        searchParams.push(...providedFeaturesId.map(id => new RequestParam('feature', id)));
+      }
+      if (hasValue(providedEPersonUuid)) {
+        searchParams.push(new RequestParam('eperson', providedEPersonUuid));
+      }
+      return Object.assign(new FindListOptions(), { searchParams });
+    }
+
+
+    describe('when one feature and one object id are provided', () => {
+      beforeEach(() => {
+        service.searchByObjects([objectId], 'core.item', [FeatureID.LoginOnBehalfOf]).subscribe();
+      });
+
+      it('should call searchBy with a list made by object\'s uuid and a list of the features IDs', () => {
+        expect(service.searchBy).toHaveBeenCalledWith('objects', createExpected([objectId], 'core.item', null, [FeatureID.LoginOnBehalfOf]), true, true);
+      });
+    });
+
+    describe('when multiple values are provided', () => {
+      beforeEach(() => {
+        service.searchByObjects([objectId, objectId2], 'core.item', [FeatureID.AdministratorOf, FeatureID.IsCollectionAdmin], ePersonUuid).subscribe();
+      });
+
+      it('should call searchBy with the object\'s url, user\'s uuid and the feature', () => {
+        expect(service.searchBy).toHaveBeenCalledWith('objects', createExpected([objectId, objectId2], 'core.item', ePersonUuid, [FeatureID.AdministratorOf, FeatureID.IsCollectionAdmin]), true, true);
+      });
+    });
+
+
   });
 
   describe('isAuthorized', () => {
