@@ -1016,48 +1016,6 @@ export class MenuResolver implements Resolve<boolean> {
   }
 
   /**
-   *  Checking authorization for Usage
-   */
-  getAuthorizedUsageStatistics() {
-    return this.activatedRouteLastChild.data.pipe(
-      switchMap((data) => {
-        return this.authorizationService.isAuthorized(FeatureID.CanViewUsageStatistics, this.getObjectUrl(data)).pipe(
-          map((canViewUsageStatistics: boolean) => {
-            return canViewUsageStatistics;
-          }));
-      })
-    );
-  }
-
-  /**
-   *  Checking authorization for Login
-   */
-  getAuthorizedLoginStatistics() {
-    return this.activatedRouteLastChild.data.pipe(
-      switchMap((data) => {
-        return this.authorizationService.isAuthorized(FeatureID.CanViewLoginStatistics, this.getObjectUrl(data)).pipe(
-          map((canViewLoginStatistics: boolean) => {
-            return canViewLoginStatistics;
-          }));
-      })
-    );
-  }
-
-  /**
-   *  Checking authorization for Workflow
-   */
-  getAuthorizedWorkflowStatistics() {
-    return this.activatedRouteLastChild.data.pipe(
-      switchMap((data) => {
-        return this.authorizationService.isAuthorized(FeatureID.CanViewWorkflowStatistics, this.getObjectUrl(data)).pipe(
-          map((canViewWorkflowStatistics: boolean) => {
-            return canViewWorkflowStatistics;
-          }));
-      })
-    );
-  }
-
-  /**
    *  Get statistics route dso data
    */
   getObjectUrl(data) {
@@ -1120,6 +1078,12 @@ export class MenuResolver implements Resolve<boolean> {
           [uuid],
           hasValue(menuAuth.itemUuid) ? 'core.item' : 'core.site',
           featuresId
+        ).pipe(
+          map((authMap) => {
+            //Prevent undefined for compatibility with previous method interface
+            featuresId.forEach(id => authMap[id] ?? (authMap[id] = false));
+            return authMap;
+          })
         );
       })
     );
