@@ -4,7 +4,7 @@ import { AuthorizationSearchParams } from './authorization-search-params';
 import { SiteDataService } from '../site-data.service';
 import { hasNoValue, hasValue, isNotEmpty } from '../../../shared/empty.util';
 import { AuthService } from '../../auth/auth.service';
-import { Authorization } from '../../shared/authorization.model';
+import { Authorization, AuthorizationFeaturesMap } from '../../shared/authorization.model';
 import { Feature } from '../../shared/feature.model';
 import { FeatureID } from './feature-id';
 import { getFirstSucceededRemoteDataPayload } from '../../shared/operators';
@@ -80,4 +80,38 @@ export const oneAuthorizationMatchesFeature = (featureID: FeatureID) =>
         }
       }),
       map((features: Feature[]) => features.filter((feature: Feature) => feature.id === featureID).length > 0)
+    );
+
+
+/**
+ * Operator mapping {@link Authorization}s features to a boolean
+ * provided {@link FeatureID}
+ * Note: This expects the {@link Authorization}s to contain a resolved link to their {@link Feature}. If they don't,
+ * this observable will always emit false.
+ * @param featureID
+ * @returns true if at least one {@link Feature} matches, false if none do
+ */
+export const mapAuthorizationsToFeatures = () =>
+  (source: Observable<Authorization[]>): Observable<AuthorizationFeaturesMap> =>
+    source.pipe(
+      switchMap((authorizations: Authorization[]) => {
+        if (isNotEmpty(authorizations)) {
+          return observableCombineLatest(
+            authorizations
+              .filter((authorization: Authorization) => hasValue(authorization.feature))
+              .map((authorization: Authorization) => authorization.feature.pipe(
+                getFirstSucceededRemoteDataPayload()
+              ))
+          );
+        } else {
+          return observableOf([]);
+        }
+      }),
+      map((features: Feature[]) => {
+        let featureMap = {};
+        features.forEach(feature => {
+          featureMap[feature.id] = true;
+        });
+        return featureMap;
+      })
     );

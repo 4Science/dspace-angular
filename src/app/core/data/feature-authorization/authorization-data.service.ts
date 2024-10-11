@@ -1,7 +1,7 @@
 import { Observable, of as observableOf } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AUTHORIZATION } from '../../shared/authorization.resource-type';
-import { Authorization } from '../../shared/authorization.model';
+import { Authorization, AuthorizationFeaturesMap } from '../../shared/authorization.model';
 import { RequestService } from '../request.service';
 import { RemoteDataBuildService } from '../../cache/builders/remote-data-build.service';
 import { ObjectCacheService } from '../../cache/object-cache.service';
@@ -14,7 +14,7 @@ import { catchError, map, switchMap, take } from 'rxjs/operators';
 import { hasNoValue, hasValue, isNotEmpty } from '../../../shared/empty.util';
 import { RequestParam } from '../../cache/models/request-param.model';
 import { AuthorizationSearchParams } from './authorization-search-params';
-import { oneAuthorizationMatchesFeature } from './authorization-utils';
+import { mapAuthorizationsToFeatures, oneAuthorizationMatchesFeature } from './authorization-utils';
 import { FeatureID } from './feature-id';
 import { getFirstCompletedRemoteData } from '../../shared/operators';
 import { FindListOptions } from '../find-list-options.model';
@@ -30,6 +30,7 @@ import { dataService } from '../base/data-service.decorator';
 export class AuthorizationDataService extends BaseDataService<Authorization> implements SearchData<Authorization> {
   protected linkPath = 'authorizations';
   protected searchByObjectPath = 'object';
+  protected searchByObjectsPath = 'objects';
 
   private searchData: SearchDataImpl<Authorization>;
 
@@ -93,6 +94,33 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
   }
 
   /**
+   * get a map of authorizations for {@link EPerson} (or anonymous)
+   * @param uuidList                    Required list of objects' uuids to search {@link Authorization}s for.
+   * @param type                        The required DSO UniqueType attribute.
+   * @param ePersonUuid                 UUID of the {@link EPerson} to search {@link Authorization}s for.
+   *                                    If not provided, the UUID of the currently authenticated {@link EPerson} will be used.
+   * @param featuresId                  A list of the IDs of the {@link Feature} to check {@link Authorization} for
+   * @param useCachedVersionIfAvailable If this is true, the request will only be sent if there's
+   *                                    no valid cached version. Defaults to true
+   * @param reRequestOnStale            Whether or not the request should automatically be re-
+   *                                    requested after the response becomes stale
+   */
+  getAuthorizationForObjects(uuidList: string[], type  = 'core.item', featuresId?: FeatureID[], ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<AuthorizationFeaturesMap> {
+    return this.searchByObjects(uuidList, type, featuresId, ePersonUuid, {}, useCachedVersionIfAvailable, reRequestOnStale, followLink('feature')).pipe(
+      getFirstCompletedRemoteData(),
+      map((authorizationRD) => {
+        if (authorizationRD.statusCode !== 401 && hasValue(authorizationRD.payload) && isNotEmpty(authorizationRD.payload.page)) {
+          return authorizationRD.payload.page;
+        } else {
+          return {};
+        }
+      }),
+      catchError(() => observableOf({})),
+      mapAuthorizationsToFeatures()
+    );
+  }
+
+  /**
    * Search for a list of {@link Authorization}s using the "object" search endpoint and providing optional object url,
    * {@link EPerson} uuid and/or {@link Feature} id
    * @param objectUrl                   URL to the object to search {@link Authorization}s for.
@@ -133,6 +161,48 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
     return out$;
   }
 
+
+
+  /**
+   * Search for a list of {@link Authorization}s using the "objects" search endpoint and providing objects uuid,
+   * {@link EPerson} uuid and/or {@link Feature} id
+   * @param uuidList                    The required list of the Uiid of the items to check for authorization
+   * @param type                        The required DSO UniqueType attribute.
+   * @param ePersonUuid                 UUID of the {@link EPerson} to search {@link Authorization}s for.
+   *                                    If not provided, the UUID of the currently authenticated {@link EPerson} will be used.
+   * @param featuresId                   ID of the {@link Feature} to search {@link Authorization}s for
+   * @param options                     {@link FindListOptions} to provide pagination and/or additional arguments
+   * @param useCachedVersionIfAvailable If this is true, the request will only be sent if there's
+   *                                    no valid cached version. Defaults to true
+   * @param reRequestOnStale            Whether or not the request should automatically be re-
+   *                                    requested after the response becomes stale
+   * @param linksToFollow               List of {@link FollowLinkConfig} that indicate which
+   *                                    {@link HALLink}s should be automatically resolved
+   */
+  searchByObjects(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, options: FindListOptions = {}, useCachedVersionIfAvailable = true, reRequestOnStale = true, ...linksToFollow: FollowLinkConfig<Authorization>[]): Observable<RemoteData<PaginatedList<Authorization>>> {
+    const out$ = this.searchBy(
+      this.searchByObjectsPath,
+      this.createSearchOptionsForObjects(uuidList, type, options, ePersonUuid, featuresId),
+      useCachedVersionIfAvailable,
+      reRequestOnStale,
+      ...linksToFollow
+    );
+
+    let cacheKey = uuidList.join();
+
+    if (hasValue(featuresId) && featuresId.length) {
+      cacheKey += featuresId.join();
+    }
+
+    if (hasValue(ePersonUuid)) {
+      cacheKey += ePersonUuid;
+    }
+
+    this.addDependency(out$, cacheKey);
+
+    return out$;
+  }
+
   /**
    * Create {@link FindListOptions} with {@link RequestParam}s containing a "uri", "feature" and/or "eperson" parameter
    * @param objectUrl   Required parameter value to add to {@link RequestParam} "uri"
@@ -148,6 +218,36 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
     params.push(new RequestParam('uri', objectUrl));
     if (hasValue(featureId)) {
       params.push(new RequestParam('feature', featureId));
+    }
+    if (hasValue(ePersonUuid)) {
+      params.push(new RequestParam('eperson', ePersonUuid));
+    }
+    return Object.assign(new FindListOptions(), options, {
+      searchParams: [...params],
+    });
+  }
+
+
+  /**
+   * Create {@link FindListOptions} with {@link RequestParam}s containing a series of "uuid", "features" and/or an "eperson" parameter
+   * @param uuidList    Required list to add to {@link RequestParam} "uuid"
+   * @param type                        The required DSO UniqueType attribute.
+   * @param options     Optional initial {@link FindListOptions} to add parameters to
+   * @param ePersonUuid Optional parameter value to add to {@link RequestParam} "eperson"
+   * @param featuresId   Optional parameter value to add to {@link RequestParam} "feature"
+   */
+  private createSearchOptionsForObjects(uuidList: string[], type: string, options: FindListOptions = {}, ePersonUuid?: string, featuresId?: FeatureID[]): FindListOptions {
+    let params = [];
+    if (isNotEmpty(options.searchParams)) {
+      params = [...options.searchParams];
+    }
+
+    params.push(new RequestParam('type', type));
+
+    uuidList.forEach(uuid => params.push(new RequestParam('uuid', uuid)));
+
+    if (hasValue(featuresId)) {
+      featuresId.forEach(feature => params.push(new RequestParam('feature', feature)));
     }
     if (hasValue(ePersonUuid)) {
       params.push(new RequestParam('eperson', ePersonUuid));

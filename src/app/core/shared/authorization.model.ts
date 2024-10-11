@@ -11,6 +11,10 @@ import { DSpaceObject } from './dspace-object.model';
 import { Feature } from './feature.model';
 import { ITEM } from './item.resource-type';
 
+export interface AuthorizationFeaturesMap {
+  [key: string]: boolean
+}
+
 /**
  * Class representing a DSpace Authorization
  */
