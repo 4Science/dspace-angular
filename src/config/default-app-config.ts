@@ -290,6 +290,10 @@ export class DefaultAppConfig implements AppConfig {
       metadataDetailsList: [
         { label: 'Document type', name: 'dc.type' }
       ]
+    },
+    dropdownHintEnabled: {
+      // NOTE: list of metadata fields for which the dropdown hint is enabled
+      // eg. 'dc.access.rights': true,
     }
   };
 
@@ -334,8 +338,12 @@ export class DefaultAppConfig implements AppConfig {
     fiveYearLimit: 30,
     // The absolute lowest year to display in the dropdown (only used when no lowest date can be found for all items)
     defaultLowerLimit: 1900,
+    // Whether to add item badges to BOTH browse and search result lists.
+    showLabels: true,
     // Whether to add item thumbnail images to BOTH browse and search result lists.
     showThumbnails: true,
+    // Whether to add item thumbnail images to BOTH browse and search result lists.
+    showMetrics: false,
     // The number of entries in a paginated browse results list.
     // Rounded to the nearest size in the list of selectable sizes on the
     // settings menu.  See pageSizeOptions in 'pagination-component-options.model.ts'.

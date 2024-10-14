@@ -1,24 +1,11 @@
-import { followLink } from '../utils/follow-link-config.model';
-import { CollectionElementLinkType } from '../object-collection/collection-element-link.type';
-import isEqual from 'lodash/isEqual';
-import { ViewMode } from '../../core/shared/view-mode.model';
-import {  Router } from '@angular/router';
-import {
-  LayoutModeEnum,
-  TopSection,
-} from '../../core/layout/models/section.model';
-import { ChangeDetectorRef, Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
-import { isPlatformServer } from '@angular/common';
-
-import { SearchManager } from '../../core/browse/search-manager';
+import {LayoutModeEnum, TopSection, TopSectionTemplateType} from '../../core/layout/models/section.model';
+import {Component, inject, Input, OnChanges, OnInit} from '@angular/core';
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
-import { DSpaceObject } from '../../core/shared/dspace-object.model';
-import { SearchResult } from '../search/models/search-result.model';
 import { Context } from '../../core/shared/context.model';
-import { RemoteData } from '../../core/data/remote-data';
-import { PaginatedList } from '../../core/data/paginated-list.model';
-import { getFirstCompletedRemoteData } from '../../core/shared/operators';
-import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
+import { BehaviorSubject } from 'rxjs';
+import isEqual from 'lodash/isEqual';
+import {ViewMode} from '../../core/shared/view-mode.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ds-browse-most-elements',
@@ -26,58 +13,41 @@ import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
   templateUrl: './browse-most-elements.component.html'
 })
 
-export class BrowseMostElementsComponent implements OnInit {
+export class BrowseMostElementsComponent implements OnInit, OnChanges {
+  private readonly router = inject(Router);
 
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
   @Input() context: Context;
 
-  /**
-   * Whether to show the metrics badges
-   */
-  @Input() showMetrics;
+  showLabel: boolean;
 
-  /**
-   * Whether to show the thumbnail preview
-   */
-  @Input() showThumbnails;
+  showMetrics = true;
 
   @Input() topSection: TopSection;
 
   @Input() mode: LayoutModeEnum;
 
-  searchResults: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>;
+  paginatedSearchOptionsBS = new BehaviorSubject<PaginatedSearchOptions>(null);
 
-  public cardLayoutMode = LayoutModeEnum.CARD;
+  sectionTemplateType: TopSectionTemplateType;
 
-  public collectionElementLinkTypeEnum = CollectionElementLinkType;
+  /**
+   * The type of the template to render
+   */
+  templateTypeEnum = TopSectionTemplateType;
 
-  constructor(
-    @Inject(APP_CONFIG) protected appConfig: AppConfig,
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private searchService: SearchManager,
-    private router: Router,
-    private cdr: ChangeDetectorRef) {
-
+  ngOnInit(): void {
+    this.sectionTemplateType = this.topSection?.template
+      ?? (this.mode === LayoutModeEnum.CARD ? TopSectionTemplateType.CARD : TopSectionTemplateType.DEFAULT);
   }
 
-  ngOnInit() {
-    if (isPlatformServer(this.platformId)) {
-      return;
-    }
-
-    const showThumbnails = this.showThumbnails ?? this.appConfig.browseBy.showThumbnails;
-    const followLinks = showThumbnails ? [followLink('thumbnail')] : [];
-    this.searchService.search(this.paginatedSearchOptions, null, true, true, ...followLinks).pipe(
-      getFirstCompletedRemoteData(),
-    ).subscribe((response: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>) => {
-      this.searchResults = response as any;
-      this.cdr.detectChanges();
-    });
+  ngOnChanges() { // trigger change detection on child components
+    this.paginatedSearchOptionsBS.next(this.paginatedSearchOptions);
   }
 
   async showAllResults() {
-    const view = isEqual(this.mode, LayoutModeEnum.LIST)
+    const view = isEqual(this.topSection.defaultLayoutMode, LayoutModeEnum.LIST)
       ? ViewMode.ListElement
       : ViewMode.GridElement;
     await this.router.navigate(['/search'], {

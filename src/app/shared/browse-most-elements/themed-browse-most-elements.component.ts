@@ -1,4 +1,4 @@
-import { TopSection, LayoutModeEnum } from './../../core/layout/models/section.model';
+import { TopSection, LayoutModeEnum } from '../../core/layout/models/section.model';
 import { Component, Input } from '@angular/core';
 import { ThemedComponent } from '../theme-support/themed.component';
 import { BrowseMostElementsComponent } from './browse-most-elements.component';
@@ -19,22 +19,18 @@ export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMos
 
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
-  @Input() showMetrics;
-
-  @Input() showThumbnails;
-
   @Input() topSection: TopSection;
 
   @Input() mode: LayoutModeEnum;
 
-  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'showMetrics', 'showThumbnails', 'topSection', 'mode'];
+  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'topSection', 'mode'];
 
   protected getComponentName(): string {
     return 'BrowseMostElementsComponent';
   }
 
   protected importThemedComponent(themeName: string): Promise<any> {
-    return import(`../../../themes/${themeName}/app/browse-most-elements/browse-most-elements.component`);
+    return import(`../../../themes/${themeName}/app/shared/browse-most-elements/browse-most-elements.component`);
   }
 
   protected importUnthemedComponent(): Promise<any> {

@@ -3391,6 +3391,10 @@
   // "error.top-level-communities": "Error fetching top-level communities",
   "error.top-level-communities": "Errore durante il recupero delle community di primo livello",
 
+  // "error.validation.cclicense.required": "You must grant this cclicense to complete your submission. If you are unable to grant the cclicense at this time, you may save your work and return later or remove the submission.",
+  // TODO New key - Add a translation
+  "error.validation.cclicense.required": "You must grant this cclicense to complete your submission. If you are unable to grant the cclicense at this time, you may save your work and return later or remove the submission.",
+
   // "error.validation.custom-url.conflict": "The custom url has been already used, please try with a new one.",
   "error.validation.custom-url.conflict": "L'URL personalizzato è già stato utilizzato, provare con uno nuovo.",
 
@@ -6509,6 +6513,14 @@
   // "menu.section.workflow": "Administer Workflow",
   "menu.section.workflow": "Amministra il workflow",
 
+  // "menu.section.loginmiur_dlexporter_url": "DLExporter",
+  // TODO New key - Add a translation
+  "menu.section.loginmiur_dlexporter_url": "DLExporter",
+
+  // "menu.section.loginmiur_dlexporter": "DLExporter",
+  // TODO New key - Add a translation
+  "menu.section.loginmiur_dlexporter": "DLExporter",
+
   // "metadata-export-search.tooltip": "Export search results as CSV",
   "metadata-export-search.tooltip": "Esporta i risultati in CSV",
 
@@ -6723,6 +6735,9 @@
 
   // "nav.mydspace": "MyDSpace",
   "nav.mydspace": "MyDSpace",
+
+  // "nav.processes": "My Processes",
+  "nav.processes": "I miei processi",
 
   // "nav.profile": "Profile",
   "nav.profile": "Profilo",
@@ -7861,6 +7876,10 @@
 
   // "resource-policies.form.eperson-group-list.select.btn": "Select",
   "resource-policies.form.eperson-group-list.select.btn": "Seleziona",
+
+  // "resource-policies.form.eperson-group-list.deselect.btn": "Deselect",
+  // TODO New key - Add a translation
+  "resource-policies.form.eperson-group-list.deselect.btn": "Deselect",
 
   // "resource-policies.form.eperson-group-list.tab.eperson": "Search for a ePerson",
   "resource-policies.form.eperson-group-list.tab.eperson": "Cerca un ePerson",
@@ -9147,6 +9166,54 @@
 
   // "statistics.reports.title": "Reports",
   "statistics.reports.title": "Report",
+
+  // "submission.dropdown.hint.open": "Open data means the data files you submit will be openly accessible and downloadable without any restrictions.",
+  // TODO New key - Add a translation
+  "submission.dropdown.hint.open": "Open data means the data files you submit will be openly accessible and downloadable without any restrictions.",
+
+  // "submission.dropdown.hint.embargoed": " Apply an Embargo if you have to hold your data back for a specific time period, e.g. due to a non-disclosure-agreement. Specify the embargo end date manually. If you want to permit individuals to request access before the embargo ends, you can include a Data Transfer Agreement (DTA).",
+  // TODO New key - Add a translation
+  "submission.dropdown.hint.embargoed": " Apply an Embargo if you have to hold your data back for a specific time period, e.g. due to a non-disclosure-agreement. Specify the embargo end date manually. If you want to permit individuals to request access before the embargo ends, you can include a Data Transfer Agreement (DTA).",
+
+  // "submission.dropdown.hint.restricted": "Restricted means that data are uploaded to the repository, but users cannot download data without your permission. They have to request access. Then please include a Data Transfer Agreement (DTA), specifying data sharing conditions, in the submission step “Upload” Select this option if you want to upload anonymized data that need special protection, e.g. in medical research. Be aware that your funder might request to publish your data openly (Data Availability type: Open) if it was fully anonymized. If you still would like to restrict your anonymised data and nonetheless permit individual users to gain access to it, you may upload a Data Transfer Agreement (DTA) under “Upload”, specifying your data sharing conditions. We also recommend to upload a supplemental material under “Supplement Upload” to document your data.",
+  // TODO New key - Add a translation
+  "submission.dropdown.hint.restricted": "Restricted means that data are uploaded to the repository, but users cannot download data without your permission. They have to request access. Then please include a Data Transfer Agreement (DTA), specifying data sharing conditions, in the submission step “Upload” Select this option if you want to upload anonymized data that need special protection, e.g. in medical research. Be aware that your funder might request to publish your data openly (Data Availability type: Open) if it was fully anonymized. If you still would like to restrict your anonymised data and nonetheless permit individual users to gain access to it, you may upload a Data Transfer Agreement (DTA) under “Upload”, specifying your data sharing conditions. We also recommend to upload a supplemental material under “Supplement Upload” to document your data.",
+
+  // "submission.dropdown.hint.closed": "Closed means that NO DATA will be uploaded. Metadata can be entered.Choose this option if your data cannot be shared via the repository.If you want to grant access to users, you can include a Data Transfer Agreement (DTA) in the submission step “Upload”.",
+  // TODO New key - Add a translation
+  "submission.dropdown.hint.closed": "Closed means that NO DATA will be uploaded. Metadata can be entered.Choose this option if your data cannot be shared via the repository.If you want to grant access to users, you can include a Data Transfer Agreement (DTA) in the submission step “Upload”.",
+
+  // "submission.dropdown.hint.metadataOnly": "Metadata Only means that no data will be uploaded, but metadata will be entered. Choose this option if your data has been shared elsewhere, and provide details about this location below (External Resource).",
+  // TODO New key - Add a translation
+  "submission.dropdown.hint.metadataOnly": "Metadata Only means that no data will be uploaded, but metadata will be entered. Choose this option if your data has been shared elsewhere, and provide details about this location below (External Resource).",
+
+  // "submission.dropdown.hint.DataCollector": "Person responsible for maintaining final dataset.",
+  // TODO New key - Add a translation
+  "submission.dropdown.hint.DataCollector": "Person responsible for maintaining final dataset.",
+
+  // "submission.dropdown.hint.DataCurator": "Person tasked with reviewing, enhancing, cleaning, or standardizing data.",
+  // TODO New key - Add a translation
+  "submission.dropdown.hint.DataCurator": "Person tasked with reviewing, enhancing, cleaning, or standardizing data.",
+
+  // "submission.dropdown.hint.DataManger": "Person responsible for maintaining final dataset.",
+  // TODO New key - Add a translation
+  "submission.dropdown.hint.DataManger": "Person responsible for maintaining final dataset.",
+
+  // "submission.dropdown.hint.ProjectLeader": "Leader of a research project, Principal Investigator (PI).",
+  // TODO New key - Add a translation
+  "submission.dropdown.hint.ProjectLeader": "Leader of a research project, Principal Investigator (PI).",
+
+  // "submission.dropdown.hint.ProjectManager": "Person who manages a research project",
+  // TODO New key - Add a translation
+  "submission.dropdown.hint.ProjectManager": "Person who manages a research project",
+
+  // "submission.dropdown.hint.ProjectMember": "Research fellow, collaborator or other person who works in a research project. ",
+  // TODO New key - Add a translation
+  "submission.dropdown.hint.ProjectMember": "Research fellow, collaborator or other person who works in a research project. ",
+
+  // "submission.dropdown.hint.Supervisor": "",
+  // TODO New key - Add a translation
+  "submission.dropdown.hint.Supervisor": "",
 
   // "submission.edit.breadcrumbs": "Edit Submission",
   "submission.edit.breadcrumbs": "Modifica immissione",
@@ -10515,14 +10582,14 @@
   // "submission.workflow.generic.edit": "Edit",
   "submission.workflow.generic.edit": "Modifica",
 
-  // "submission.workflow.generic.edit-help": "Select this option to change the item's metadata.",
-  "submission.workflow.generic.edit-help": "Selezionare questa opzione per modificare i metadati dell'item.",
+  // "submission.workflow.generic.edit-help": "Select this option to change the item's metadata",
+  "submission.workflow.generic.edit-help": "Selezionare questa opzione per modificare i metadati dell'item",
 
   // "submission.workflow.generic.view": "View",
   "submission.workflow.generic.view": "Visualizza",
 
-  // "submission.workflow.generic.view-help": "Select this option to view the item's metadata.",
-  "submission.workflow.generic.view-help": "Selezionare questa opzione per visualizzare i metadati dell'item.",
+  // "submission.workflow.generic.view-help": "Select this option to view the item's metadata",
+  "submission.workflow.generic.view-help": "Selezionare questa opzione per visualizzare i metadati dell'item",
 
   // "submission.workflow.generic.submit_select_reviewer": "Select Reviewer",
   "submission.workflow.generic.submit_select_reviewer": "Seleziona revisore",
@@ -10539,14 +10606,14 @@
   // "submission.workflow.tasks.claimed.approve": "Approve",
   "submission.workflow.tasks.claimed.approve": "Approva",
 
-  // "submission.workflow.tasks.claimed.approve_help": "If you have reviewed the item and it is suitable for inclusion in the collection, select \"Approve\".",
-  "submission.workflow.tasks.claimed.approve_help": "Se hai esaminato l'item ed è adatto per l'inclusione nella collezione, seleziona \"Approva\".",
+  // "submission.workflow.tasks.claimed.approve_help": "If you have reviewed the item and it is suitable for inclusion in the collection, select \"Approve\"",
+  "submission.workflow.tasks.claimed.approve_help": "Se hai esaminato l'item ed è adatto per l'inclusione nella collezione, seleziona \"Approva\"",
 
   // "submission.workflow.tasks.claimed.edit": "Edit",
   "submission.workflow.tasks.claimed.edit": "Modifica",
 
-  // "submission.workflow.tasks.claimed.edit_help": "Select this option to change the item's metadata.",
-  "submission.workflow.tasks.claimed.edit_help": "Selezionare questa opzione per modificare i metadati dell'item.",
+  // "submission.workflow.tasks.claimed.edit_help": "Select this option to change the item's metadata",
+  "submission.workflow.tasks.claimed.edit_help": "Selezionare questa opzione per modificare i metadati dell'item",
 
   // "submission.workflow.tasks.claimed.decline": "Decline",
   "submission.workflow.tasks.claimed.decline": "Rifiuta",
@@ -10569,14 +10636,14 @@
   // "submission.workflow.tasks.claimed.reject.submit": "Reject",
   "submission.workflow.tasks.claimed.reject.submit": "Rifiuta",
 
-  // "submission.workflow.tasks.claimed.reject_help": "If you have reviewed the item and found it is <strong>not</strong> suitable for inclusion in the collection, select \"Reject\".  You will then be asked to enter a message indicating why the item is unsuitable, and whether the submitter should change something and resubmit.",
-  "submission.workflow.tasks.claimed.reject_help": "Se l'item esaminato <strong>non</strong> è adatto per essere inserito nella collezione, seleziona \"Rifiuta\".  Ti verrà quindi chiesto di inserire un messaggio che indichi perché l'item non è adatto e se chi ha inviato l'item deve cambiare qualcosa e inviarlo di nuovo.",
+  // "submission.workflow.tasks.claimed.reject_help": "If the reviewed item is not ready to be included in the collection, select \"Reject\". You will be asked to indicate the reason for rejection and further edits the user should make before resubmission",
+  "submission.workflow.tasks.claimed.reject_help": "Se l'item esaminato <strong>non</strong> è adatto per essere inserito nella collezione, seleziona \"Rifiuta\".  Ti verrà quindi chiesto di inserire un messaggio che indichi perché l'item non è adatto e se chi ha inviato l'item deve cambiare qualcosa e inviarlo di nuovo",
 
   // "submission.workflow.tasks.claimed.return": "Return to pool",
   "submission.workflow.tasks.claimed.return": "Restituisci al pool",
 
-  // "submission.workflow.tasks.claimed.return_help": "Return the task to the pool so that another user may perform the task.",
-  "submission.workflow.tasks.claimed.return_help": "Restituire il task al pool in modo che un altro utente possa prenderlo in carico.",
+  // "submission.workflow.tasks.claimed.return_help": "Return the task to the pool so that another user may perform the task",
+  "submission.workflow.tasks.claimed.return_help": "Restituire il task al pool in modo che un altro utente possa prenderlo in carico",
 
   // "submission.workflow.tasks.generic.error": "Error occurred during operation...",
   "submission.workflow.tasks.generic.error": "Si è verificato un errore durante l'operazione...",
@@ -10593,8 +10660,8 @@
   // "submission.workflow.tasks.pool.claim": "Claim",
   "submission.workflow.tasks.pool.claim": "Associa",
 
-  // "submission.workflow.tasks.pool.claim_help": "Assign this task to yourself.",
-  "submission.workflow.tasks.pool.claim_help": "Assegnati il task.",
+  // "submission.workflow.tasks.pool.claim_help": "Assign this task to yourself",
+  "submission.workflow.tasks.pool.claim_help": "Assegnati il task",
 
   // "submission.workflow.tasks.pool.hide-detail": "Hide detail",
   "submission.workflow.tasks.pool.hide-detail": "Nascondi dettaglio",
@@ -10605,12 +10672,23 @@
   // "submission.workspace.generic.view": "View",
   "submission.workspace.generic.view": "Elenco",
 
-  // "submission.workspace.generic.view-help": "Select this option to view the item's metadata.",
-  "submission.workspace.generic.view-help": "Seleziona questa opzione per vedere i metadata dell'item.",
+  // "submission.workspace.generic.view-help": "Select this option to view the item's metadata",
+  "submission.workspace.generic.view-help": "Seleziona questa opzione per vedere i metadata dell'item",
+
+  // "submission.product.roles.info": "<div class='my-2'><b>1. Project Leader:</b><br/> Leader of a research project, Principal Investigator (PI).</div><br/><div class='my-2'><b>2. Project Member:</b><br/> Research fellow, collaborator or other person who works in a research project.</div><br/><div class='my-2'><b>3. Research Group Leader</b></div><br/><div class='my-2'><b>4. Project Manager:</b><br/> Person who manages a research project.</div><br/><div class='my-2'><b>5. Data Manager:</b><br/> Person responsible for maintaining final dataset.</div><br/><div class='my-2'><b>6. Data Collector:</b><br/> Person responsible for finding, gathering, collecting, or otherwise generating data.</div><br/><div class='my-2'><b>7. Data Curator:</b><br/> Person tasked with reviewing, enhancing, cleaning, or standardizing data.</div>",
+  // TODO New key - Add a translation
+  "submission.product.roles.info": "<div class='my-2'><b>1. Project Leader:</b><br/> Leader of a research project, Principal Investigator (PI).</div><br/><div class='my-2'><b>2. Project Member:</b><br/> Research fellow, collaborator or other person who works in a research project.</div><br/><div class='my-2'><b>3. Research Group Leader</b></div><br/><div class='my-2'><b>4. Project Manager:</b><br/> Person who manages a research project.</div><br/><div class='my-2'><b>5. Data Manager:</b><br/> Person responsible for maintaining final dataset.</div><br/><div class='my-2'><b>6. Data Collector:</b><br/> Person responsible for finding, gathering, collecting, or otherwise generating data.</div><br/><div class='my-2'><b>7. Data Curator:</b><br/> Person tasked with reviewing, enhancing, cleaning, or standardizing data.</div>",
+
+  // "submission.product.dataavailability.info": "<div class='my-2'><b>Open</b><br/> - Open data means the data files you submit will be openly accessible and downloadable without any restrictions.</div> <br/><div class='my-2'><b>Embargoed</b><br/> - Apply an Embargo if you have to hold your data back for a specific time period, e.g. due to a non-disclosure-agreement. Specify the embargo end date manually. If you want to permit individuals to request access before the embargo ends, you can include a Data Transfer Agreement (DTA).</div><br/><div class='my-2'><b>Restricted</b><br/> - Restricted means that data are uploaded to the repository, but users cannot download data without your permission. They have to request access. Then please include a Data Transfer Agreement (DTA), specifying data sharing conditions, in the submission step “Upload” Select this option if you want to upload anonymized data that need special protection, e.g. in medical research.<br/>Be aware that your funder might request to publish your data openly (Data Availability type: Open) if it was fully anonymized. If you still would like to restrict your anonymised data and nonetheless permit individual users to gain access to it, you may upload a Data Transfer Agreement (DTA) under “Upload”, specifying your data sharing conditions. We also recommend to upload a supplemental material under “Supplement Upload” to document your data.</div><br/><div class='my-2'><b>Closed</b><br/> - Closed means that NO DATA will be uploaded. Metadata can be entered.Choose this option if your data cannot be shared via the repository.If you want to grant access to users, you can include a Data Transfer Agreement (DTA) in the submission step “Upload”</div>.<br/><div class='my-2'><b>Metadata Only</b><br/> - Metadata Only means that no data will be uploaded, but metadata will be entered. Choose this option if your data has been shared elsewhere, and provide details about this location below (External Resource).</div>",
+  // TODO New key - Add a translation
+  "submission.product.dataavailability.info": "<div class='my-2'><b>Open</b><br/> - Open data means the data files you submit will be openly accessible and downloadable without any restrictions.</div> <br/><div class='my-2'><b>Embargoed</b><br/> - Apply an Embargo if you have to hold your data back for a specific time period, e.g. due to a non-disclosure-agreement. Specify the embargo end date manually. If you want to permit individuals to request access before the embargo ends, you can include a Data Transfer Agreement (DTA).</div><br/><div class='my-2'><b>Restricted</b><br/> - Restricted means that data are uploaded to the repository, but users cannot download data without your permission. They have to request access. Then please include a Data Transfer Agreement (DTA), specifying data sharing conditions, in the submission step “Upload” Select this option if you want to upload anonymized data that need special protection, e.g. in medical research.<br/>Be aware that your funder might request to publish your data openly (Data Availability type: Open) if it was fully anonymized. If you still would like to restrict your anonymised data and nonetheless permit individual users to gain access to it, you may upload a Data Transfer Agreement (DTA) under “Upload”, specifying your data sharing conditions. We also recommend to upload a supplemental material under “Supplement Upload” to document your data.</div><br/><div class='my-2'><b>Closed</b><br/> - Closed means that NO DATA will be uploaded. Metadata can be entered.Choose this option if your data cannot be shared via the repository.If you want to grant access to users, you can include a Data Transfer Agreement (DTA) in the submission step “Upload”</div>.<br/><div class='my-2'><b>Metadata Only</b><br/> - Metadata Only means that no data will be uploaded, but metadata will be entered. Choose this option if your data has been shared elsewhere, and provide details about this location below (External Resource).</div>",
+
+  // "submission.roles.modal.open": "Roles Info",
+  // TODO New key - Add a translation
+  "submission.roles.modal.open": "Roles Info",
 
   // "submitter.empty": "N/A",
-  // TODO New key - Add a translation
-  "submitter.empty": "N/A",
+  "submitter.empty": "N/D",
 
   // "subscriptions.title": "Subscriptions",
   "subscriptions.title": "Sottoscrizioni",
