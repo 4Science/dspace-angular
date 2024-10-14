@@ -65,10 +65,10 @@
       <h2 class="font-weight-bold" [class]="carouselOptions.titleStyle"
           *ngIf="activeItem?.metadata[title]">
         {{activeItem?.metadata[title][0].value}}</h2>
-      <p [class]="carouselOptions.captionStyle"
-        *ngIf="activeItem?.metadata[description]; let descriptionObj">
-        {{descriptionObj[0].value}}
-      </p>
+      <div [class]="carouselOptions.captionStyle"
+        *ngIf="activeItem?.metadata[description]; let descriptionObj"
+        [innerHTML]="descriptionObj[0].value">
+      </div>
       <ng-container *ngIf="getItemLink(activeItem); let currentLink">
         <a *ngIf="isLinkInternal(currentLink)" [routerLink]="currentLink">
           <ng-container *ngTemplateOutlet="seeMoreButton"></ng-container>
