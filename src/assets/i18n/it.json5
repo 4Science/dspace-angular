@@ -4159,7 +4159,7 @@
 
   // "explore.index.subject": "Subject",
   "explore.index.subject": "Parola chiave",
-  
+
   // "explore.index.glamsubject": "Subject",
   "explore.index.glamsubject": "Soggetto",
 
@@ -8428,7 +8428,7 @@
 
   // "search.filters.applied.f.subject": "Subject",
   "search.filters.applied.f.subject": "Parola chiave",
-  
+
   // "search.filters.applied.f.glamsubject": "Subject",
   "search.filters.applied.f.glamsubject": "Soggetto",
 
@@ -8851,7 +8851,7 @@
 
   // "search.filters.filter.subject.label": "Search subject",
   "search.filters.filter.subject.label": "Oggetto della ricerca",
-  
+
   // "search.filters.filter.glamsubject.head": "Subject",
   "search.filters.filter.glamsubject.head": "Soggetto",
 
