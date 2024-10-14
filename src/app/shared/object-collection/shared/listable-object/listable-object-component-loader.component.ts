@@ -86,6 +86,11 @@ export class ListableObjectComponentLoaderComponent implements OnInit, OnChanges
   @Input() showCorrection = false;
 
   /**
+   * A boolean representing if to show workflow statistics
+   */
+  @Input() showWorkflowStatistics: boolean;
+
+  /**
    * The value to display for this element
    */
   @Input() value: string;
@@ -144,6 +149,7 @@ export class ListableObjectComponentLoaderComponent implements OnInit, OnChanges
     'showMetrics',
     'showThumbnails',
     'showCorrection',
+    'showWorkflowStatistics',
     'context',
     'viewMode',
     'value',
