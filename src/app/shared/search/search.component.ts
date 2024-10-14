@@ -97,7 +97,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   /**
    * Embedded keys to force during the search
    */
-  @Input() forcedEmbeddedKeys: Map<string, string[]> = new Map([['default', ['metrics']]]);
+  @Input() forcedEmbeddedKeys: Map<string, string[]> = new Map([
+    ['default', ['metrics']],
+    ['workspace', ['item','metrics']],
+    ['workflow', ['workflowitem', 'item', 'metrics']]
+  ]);
 
   /**
    * If this is true, the request will only be sent if there's
@@ -133,7 +137,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   /**
    * Optional projection to use during the search
    */
-  @Input() projection;
+  @Input() projection = 'preventMetadataSecurity';
 
   /**
    * Whether or not the search bar should be visible
@@ -444,7 +448,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         {
           configuration: searchOptionsConfiguration,
           sort: sortOption || searchOptions.sort,
-          forcedEmbeddedKeys: this.forcedEmbeddedKeys.get(searchOptionsConfiguration)
+          forcedEmbeddedKeys: this.forcedEmbeddedKeys.get(searchOptionsConfiguration) || this.forcedEmbeddedKeys.get('default')
         });
       if (combinedOptions.query === '') {
         combinedOptions.query = this.query;
