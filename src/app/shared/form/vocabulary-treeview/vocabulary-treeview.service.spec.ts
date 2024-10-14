@@ -64,7 +64,8 @@ describe('VocabularyTreeviewService test suite', () => {
     searchTopEntries: jasmine.createSpy('searchTopEntries'),
     getEntryDetailChildren: jasmine.createSpy('getEntryDetailChildren'),
     clearSearchTopRequests: jasmine.createSpy('clearSearchTopRequests'),
-    getPublicVocabularyEntryByValue: jasmine.createSpy('getPublicVocabularyEntryByValue')
+    getPublicVocabularyEntryByValue: jasmine.createSpy('getPublicVocabularyEntryByValue'),
+    getPublicVocabularyEntryByID: jasmine.createSpy('getPublicVocabularyEntryByID'),
   });
 
   function init() {
@@ -204,12 +205,15 @@ describe('VocabularyTreeviewService test suite', () => {
     });
 
     it('should set initValueHierarchy', () => {
-      serviceAsAny.vocabularyService.searchTopEntries.and.returnValue(hot('--a', {
-        a: createSuccessfulRemoteDataObject(buildPaginatedList(pageInfo, [item, item2, item3]))
+      serviceAsAny.vocabularyService.getEntryDetailChildren.and.returnValue(hot('--a', {
+        a: createSuccessfulRemoteDataObject(buildPaginatedList(pageInfo, [child, child2]))
       }));
-      serviceAsAny.vocabularyService.findEntryDetailById.and.returnValue(
+      serviceAsAny.vocabularyService.findEntryDetailById.and.returnValues(
         hot('-a', {
-          a: createSuccessfulRemoteDataObject(child2)
+          a: createSuccessfulRemoteDataObject(child),
+        }),
+        hot('-b', {
+          b: createSuccessfulRemoteDataObject(item)
         })
       );
       serviceAsAny.vocabularyService.getEntryDetailParent.and.returnValue(
@@ -217,21 +221,24 @@ describe('VocabularyTreeviewService test suite', () => {
           b: createSuccessfulRemoteDataObject(item)
         })
       );
-      scheduler.schedule(() => service.initialize(vocabularyOptions, pageInfo, [], 'root2'));
+
+      scheduler.schedule(() => service.initialize(vocabularyOptions, pageInfo, [], 'root1'));
       scheduler.flush();
 
       expect(serviceAsAny.vocabularyName).toEqual(vocabularyOptions.name);
-      expect(serviceAsAny.initValueHierarchy).toEqual(['root1', 'root1-child2']);
-      expect(serviceAsAny.dataChange.value).toEqual([itemInitNode, itemNode2, itemNode3]);
+      expect(serviceAsAny.initValueHierarchy).toEqual(['root1', 'root1-child1']);
     });
-
-    it('should show only nodes restricted to init Value Hierarchy', () => {
-      serviceAsAny.vocabularyService.searchTopEntries.and.returnValue(hot('--a', {
-        a: createSuccessfulRemoteDataObject(buildPaginatedList(pageInfo, [item, item2, item3]))
+    // Disabled as we don't limt the tree anymore to the first value of the hierarchy but we start building the tree directly from that one (root node) for any case
+    xit('should show only nodes restricted to init Value Hierarchy', () => {
+      serviceAsAny.vocabularyService.getEntryDetailChildren.and.returnValue(hot('--a', {
+        a: createSuccessfulRemoteDataObject(buildPaginatedList(pageInfo, [child, child2]))
       }));
-      serviceAsAny.vocabularyService.findEntryDetailById.and.returnValue(
+      serviceAsAny.vocabularyService.findEntryDetailById.and.returnValues(
         hot('-a', {
-          a: createSuccessfulRemoteDataObject(child2)
+          a: createSuccessfulRemoteDataObject(child),
+        }),
+        hot('-b', {
+          b: createSuccessfulRemoteDataObject(item)
         })
       );
       serviceAsAny.vocabularyService.getEntryDetailParent.and.returnValue(
@@ -239,11 +246,11 @@ describe('VocabularyTreeviewService test suite', () => {
           b: createSuccessfulRemoteDataObject(item)
         })
       );
-      scheduler.schedule(() => service.initialize(vocabularyOptions, pageInfo, ['root2'], 'root2', true));
+      scheduler.schedule(() => service.initialize(vocabularyOptions, pageInfo, ['root1-child1'], 'root1-child1', true));
       scheduler.flush();
 
       expect(serviceAsAny.vocabularyName).toEqual(vocabularyOptions.name);
-      expect(serviceAsAny.initValueHierarchy).toEqual(['root1', 'root1-child2']);
+      expect(serviceAsAny.initValueHierarchy).toEqual(['root1', 'root1-child1']);
       expect(serviceAsAny.dataChange.value).toEqual([itemInitNode]);
     });
   });
