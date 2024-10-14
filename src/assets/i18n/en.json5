@@ -2738,7 +2738,7 @@
   "explore.index.rpname": "Name",
 
   "explore.index.subject": "Keyword",
-  
+
   "explore.index.glamsubject": "Subject",
 
   "explore.index.title": "Title",
@@ -5568,7 +5568,7 @@
   "search.filters.applied.f.projectorgunits": "Organisation",
 
   "search.filters.applied.f.subject": "Keyword",
-  
+
   "search.filters.applied.f.glamsubject": "Subject",
 
   "search.filters.applied.f.submitter": "Submitter",
@@ -5851,7 +5851,7 @@
   "search.filters.filter.subject.placeholder": "Keyword",
 
   "search.filters.filter.subject.label": "Search keyword",
-  
+
   "search.filters.filter.glamsubject.head": "Subject",
 
   "search.filters.filter.glamsubject.placeholder": "Subject",
