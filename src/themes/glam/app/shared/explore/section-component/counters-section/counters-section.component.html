@@ -6,11 +6,13 @@
     <div *ngIf="counter.count !== '0'" class="counter-container px-2 py-3 d-flex flex-column">
       <div (click)="goToLink(counter.link)"
            [ngStyle]="{'cursor': counter.link ? 'pointer' : 'inherit'}"
+           role="button"
            class="text-center counter-number h1">
         {{counter.count}}
       </div>
       <div (click)="goToLink(counter.link)"
            [ngStyle]="{'cursor': counter.link ? 'pointer' : 'inherit'}"
+           role="button"
            class="text-center counter-label">
         {{'explore.counters-section.' + counter.label | translate}}
       </div>

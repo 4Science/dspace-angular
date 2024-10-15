@@ -1468,6 +1468,8 @@
 
   "carousel.button.see-more": "See more",
 
+  "carousel.play.pause": "Play/Pause",
+
 
   "search.browse.item-back": "Back to Results",
 
@@ -2735,7 +2737,9 @@
 
   "explore.index.rpname": "Name",
 
-  "explore.index.subject": "Subject",
+  "explore.index.subject": "Keyword",
+
+  "explore.index.glamsubject": "Subject",
 
   "explore.index.title": "Title",
 
@@ -4730,6 +4734,8 @@
 
   "none.listelement.badge": "Item",
 
+  "no.description.available": "No description available",
+
   "openaire.broker.title": "OpenAIRE Broker",
 
   "openaire.broker.topics.description": "Below you can see all the topics received from the subscriptions to OpenAIRE.",
@@ -5561,7 +5567,9 @@
 
   "search.filters.applied.f.projectorgunits": "Organisation",
 
-  "search.filters.applied.f.subject": "Subject",
+  "search.filters.applied.f.subject": "Keyword",
+
+  "search.filters.applied.f.glamsubject": "Subject",
 
   "search.filters.applied.f.submitter": "Submitter",
 
@@ -5838,11 +5846,17 @@
 
   "search.filters.filter.show-more": "Show more",
 
-  "search.filters.filter.subject.head": "Subject",
+  "search.filters.filter.subject.head": "Keyword",
 
-  "search.filters.filter.subject.placeholder": "Subject",
+  "search.filters.filter.subject.placeholder": "Keyword",
 
-  "search.filters.filter.subject.label": "Search subject",
+  "search.filters.filter.subject.label": "Search keyword",
+
+  "search.filters.filter.glamsubject.head": "Subject",
+
+  "search.filters.filter.glamsubject.placeholder": "Subject",
+
+  "search.filters.filter.glamsubject.label": "Search subject",
 
   "search.filters.filter.submitter.head": "Submitter",
 
@@ -6057,6 +6071,8 @@
   "search.view-switch.show-grid": "Show as grid",
 
   "search.view-switch.show-list": "Show as list",
+
+  "social.component.title": "Social Share",
 
   "sorting.ASC": "Ascending",
 
@@ -8705,7 +8721,7 @@
   "layout.field.label.Publication.[dc.relation.opac]": "OPAC Link",
   "layout.field.label.Publication.[dc.relation.otherlinks]": "Other Links",
   "layout.field.label.Publication.[dc.description.note]": "Notes",
-  "layout.field.label.Publication.BITSTREAM": "File(s)",
+  "layout.field.label.Publication.BITSTREAM": "File / Documentation",
   "layout.field.label.Publication.[dc.relation.journalfonds]": "Journal Fonds ",
   "layout.field.label.Publication.[dc.relation.event]": "Events",
   "layout.field.label.Publication.[glamjournalfonds.relation.journalfonds]": "Related Journal Fonds",
@@ -8841,7 +8857,7 @@
   "layout.field.label.ArchivalMaterial.[dc.description.note]": "Note",
   "layout.field.label.ArchivalMaterial.[dc.relation.uri]": "URL",
   "layout.field.label.ArchivalMaterial.[dc.relation.place]": "Place",
-  "layout.field.label.ArchivalMaterial.BITSTREAM": "File(s)",
+  "layout.field.label.ArchivalMaterial.BITSTREAM": "File / Documentation",
 
   "layout.field.label.Aggregation.[dc.description]": "Description",
   "layout.field.label.Aggregation.[dc.description.abstract]": "Abstract",
@@ -8870,7 +8886,7 @@
   "layout.field.label.JournalFile.[dc.relation.path]": "Path",
   "layout.field.label.JournalFile.[dc.relation.isreferencedby]": "Related Documents",
   "layout.field.label.JournalFile.[dc.relation.aggregation]": "Aggregation",
-  "layout.field.label.JournalFile.BITSTREAM": "File(s)",
+  "layout.field.label.JournalFile.BITSTREAM": "File / Documentation",
 
   "layout.field.label.Picture.[dc.title.alternative]": "Alternative Title",
   "layout.field.label.Picture.[dc.contributor.author]": "Author(s)",
@@ -8932,7 +8948,7 @@
   "layout.field.label.Picture.[glam.inscription]": "Inscription",
   "layout.field.label.Picture.[glam.mark]": "Mark",
   "layout.field.label.Picture.[glam.bibliography]": "Bibliography",
-  "layout.field.label.Picture.BITSTREAM": "File(s)",
+  "layout.field.label.Picture.BITSTREAM": "File / Documantation",
   "layout.field.label.Picture.[dc.relation.isreferencedby]": "Related Documents",
 
 
@@ -8974,7 +8990,7 @@
   "layout.field.label.AudioVideo.[dc.description.preservationstate]": "Preservation State",
   "layout.field.label.AudioVideo.[dc.description.preservationnote]": "Preservation Notes",
   "layout.field.label.AudioVideo.[dc.description.digitaltools]": "Digital tools",
-  "layout.field.label.AudioVideo.BITSTREAM": "File(s)",
+  "layout.field.label.AudioVideo.BITSTREAM": "File / Documantation",
   "layout.field.label.Opera.[dc.title.alternative]": "Alternative Title",
   "layout.field.label.Opera.[dc.date.issued]": "Date Issued",
   "layout.field.label.Opera.[dc.subject]": "Subject",
@@ -9044,12 +9060,18 @@
   "layout.field.label.Opera.NESTED[dc.contributor.authorrole]": "Role",
   "layout.field.label.Artwork.NESTED[dc.contributor.author]": "Author",
   "layout.field.label.Artwork.NESTED[dc.contributor.authorrole]": "Role",
+  "layout.field.label.Artwork.BITSTREAM": "File / Documantation",
 
+  "layout.field.label.Coin.BITSTREAM": "File / Documantation",
+
+  "layout.field.label.ScientificMaterial.BITSTREAM": "File / Documantation",
+
+  "layout.field.label.MusicalLibrettos.BITSTREAM": "File / Documantation",
 
   "label.link-text.description-box.section-site.pdl": "Scopri di più",
   "label.title.slider.slider_collections": "Collections",
   "label.title.slider.slider_topics": "Topics",
 
   // Do not add new labels below layout ones
-  // All new labels should be placed together with similar ones, or in alphabetical orders
+  // All new labels should be placed together with similar ones, or in alphabetical order
 }
