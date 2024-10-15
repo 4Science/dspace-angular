@@ -53,8 +53,8 @@ import {
 } from '../../../core/submission/models/workspaceitem-section-upload-file.model';
 
 const DOI_METADATA = 'dc.identifier.doi';
-const API_CHECK_INTERVAL = 3000;
-const MAX_TRIES = 5;
+const API_CHECK_INTERVAL = 5000;
+const MAX_TRIES = 2;
 
 function attemptsGuardFactory(maxAttempts: number) {
   return (attemptsCount: number) => {
