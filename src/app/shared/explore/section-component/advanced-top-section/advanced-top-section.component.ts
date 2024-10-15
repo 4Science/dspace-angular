@@ -7,10 +7,11 @@ import { Context } from '../../../../core/shared/context.model';
 import {BehaviorSubject, forkJoin, Observable} from 'rxjs';
 import { HostWindowService } from '../../../host-window.service';
 import {SearchService} from '../../../../core/shared/search/search.service';
-import {map, take} from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import {RemoteData} from '../../../../core/data/remote-data';
 import {SearchObjects} from '../../../search/models/search-objects.model';
 import {DSpaceObject} from '../../../../core/shared/dspace-object.model';
+import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
 
 /**
  * Component representing the Advanced-Top component section.
@@ -116,6 +117,7 @@ export class AdvancedTopSectionComponent implements OnInit {
       sort: this.sortOptions,
     });
     return this.searchService.search(paginatedSearchOptions).pipe(
+      getFirstCompletedRemoteData(),
       take(1),
       map((searchResults: RemoteData<SearchObjects<DSpaceObject>>) => searchResults?.payload?.pageInfo?.totalElements ?? 0)
     );
