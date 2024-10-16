@@ -3419,7 +3419,7 @@
   // "cris-layout.advanced-attachment.requestACopy": "Request a copy",
   "cris-layout.advanced-attachment.requestACopy": "Richiedi una copia",
 
-  // "cris-layout.advanced-attachment.viewMore": "View More",
+  // "cris-layout.advanced-attachment.viewMore": "View more",
   "cris-layout.advanced-attachment.viewMore": "Vedi altro",
 
   // "cris-layout.advanced-attachment.label.not-present": "(not present)",
@@ -3429,7 +3429,7 @@
   // "cris-layout.advanced-attachment.view-pdf": "Open PDF",
   "cris-layout.advanced-attachment.view-pdf": "Open PDF",
 
-  // "cris-layout.attachment.viewMore": "View More",
+  // "cris-layout.attachment.viewMore": "View more",
   "cris-layout.attachment.viewMore": "Vedi altro",
 
   // "cris-layout.rendering.collections.owning-collection.label": "Owning collection",
@@ -3916,10 +3916,10 @@
   // "explore.counters-section.rprofiles": "People",
   "explore.counters-section.rprofiles": "Persone",
 
-  // "explore.carousel.view-more": "View More",
+  // "explore.carousel.view-more": "View more",
   "explore.carousel.view-more": "Approfondisci",
 
-  // "explore.text-section.counter.header": "Our Numbers",
+  // "explore.text-section.counter.header": "Our numbers",
   "explore.text-section.counter.header": "I nostri numeri",
 
   // "explore.counters-section.publications": "Research outputs",
@@ -4320,19 +4320,19 @@
   // "footer.offer-service": "Offered services",
   "footer.offer-service": "Servizi offerti",
 
-  // "footer.history-digital": "History of the digital LID",
-  "footer.history-digital": "Cronistoria della digital LID",
+  // "footer.history-digital": "History of the digital library",
+  "footer.history-digital": "Cronistoria della digital library",
 
   // "footer.org-structure": "Organizational structure",
-  "footer.org-structure": "struttura organizzativa",
+  "footer.org-structure": "Struttura organizzativa",
 
-  // "footer.contact": "Contacts",
+  // "footer.contact": "Contact details",
   "footer.contact": "Contatti",
 
   // "footer.contact.href": "https://www.4science.com/contact-us/",
   "footer.contact.href": "https://www.4science.it/contatti/",
 
-  // "footer.terms": "Terms of Use",
+  // "footer.terms": "Terms of use",
   "footer.terms": "Condizioni d'uso",
 
   // "footer.made-info": "Made with <a href=\"https://www.4science.it/dspace-glam/\" target=\"_blank\">DSpace-GLAM</a> - Extension maintained and optimized by <a href=\"https://www.4science.it/servizi/\" target=\"_blank\">4Science</a>",
@@ -4834,17 +4834,17 @@
   // TODO New key - Add a translation
   "info.offered-services.title": "Offered Services",
 
-  // "info.history-digital-lid.breadcrumbs": "History of the digital LID",
+  // "info.history-digital-lid.breadcrumbs": "History of the digital library",
   // TODO New key - Add a translation
-  "info.history-digital-lid.breadcrumbs": "History of the digital LID",
+  "info.history-digital-lid.breadcrumbs": "History of the digital library",
 
-  // "info.history-digital-lid.head": "History of the digital LID",
+  // "info.history-digital-lid.head": "History of the digital library",
   // TODO New key - Add a translation
-  "info.history-digital-lid.head": "History of the digital LID",
+  "info.history-digital-lid.head": "History of the digital library",
 
-  // "info.history-digital-lid.title": "History of the digital LID",
+  // "info.history-digital-lid.title": "History of the digital library",
   // TODO New key - Add a translation
-  "info.history-digital-lid.title": "History of the digital LID",
+  "info.history-digital-lid.title": "History of the digital library",
 
   // "info.organizational-structure.breadcrumbs": "Organizational structure",
   // TODO New key - Add a translation
@@ -7077,7 +7077,7 @@
   "mydspace.show.supervisedWorkspace": "Item supervisionati",
 
   // "mydspace.show.otherworkspace": "Other Workspace Submissions",
-  "mydspace.show.otherworkspace": "Altri insierimenti in workspace",
+  "mydspace.show.otherworkspace": "Altri inserimenti in workspace",
 
   // "mydspace.status.mydspaceArchived": "Archived",
   "mydspace.status.mydspaceArchived": "Archiviati",
@@ -12044,7 +12044,7 @@
   // "relation.rp.projects.search.results.head": "Related Projects",
   "relation.rp.projects.search.results.head": "Progetti correlati",
 
-  // "layout.i18n.link.default": "link",
+  // "layout.i18n.link.default": "links",
   "layout.i18n.link.default": "link",
 
   // "orcid.badge.tooltip": "Connected to ORCID",
@@ -12174,7 +12174,7 @@
 
   // "menu.section.explore_sectionaggregations": "Aggregations",
   "menu.section.explore_sectionaggregations": "Aggregazioni",
-  // "menu.section.explore_sectiondocuments": "Documents & Other materials",
+  // "menu.section.explore_sectiondocuments": "Documents & other materials",
   "menu.section.explore_sectiondocuments": "Documenti e altri materiali",
   // "explore.counters-section.fonds": "Fonds",
   "explore.counters-section.fonds": "Fondi",
@@ -12182,7 +12182,7 @@
   "explore.counters-section.journalfonds": "Testate",
   // "explore.counters-section.aggregations": "Aggregations",
   "explore.counters-section.aggregations": "Aggregazioni",
-  // "explore.counters-section.documents": "Documents & Other materials",
+  // "explore.counters-section.documents": "Documents & other materials",
   "explore.counters-section.documents": "Documenti e altri materiali",
 
   // "explore.index.titleF": "Title",
@@ -12220,7 +12220,7 @@
   // "explore.index.parentA": "Parent",
   "explore.index.parentA": "Livello superiore",
 
-  // "explore.search-section.sectiondocuments.title": "Search Documents & Other materials",
+  // "explore.search-section.sectiondocuments.title": "Search Documents & other materials",
   "explore.search-section.sectiondocuments.title": "Risorse",
 
   // "explore.search-section.sectionfonds.title": "Search Fonds",
@@ -12232,7 +12232,7 @@
   // "explore.search-section.sectionaggregations.title": "Search Aggregations",
   "explore.search-section.sectionaggregations.title": "Aggregazioni",
 
-  // "explore.sectiondocuments.breadcrumbs": "Documents & Other materials",
+  // "explore.sectiondocuments.breadcrumbs": "Documents & other materials",
   "explore.sectiondocuments.breadcrumbs": "Risorse",
 
   // "explore.sectionfonds.breadcrumbs": "Fonds",
@@ -12241,7 +12241,7 @@
   "explore.sectionjournalfonds.breadcrumbs": "Testate",
   // "explore.sectionaggregations.breadcrumbs": "Aggregations",
   "explore.sectionaggregations.breadcrumbs": "Aggregazioni",
-  // "documents.search.results.head": "Documents & Other materials Search Results",
+  // "documents.search.results.head": "Documents & other materials Search Results",
   "documents.search.results.head": "Risultati di ricerca per documenti e altri materiali",
   // "fonds.search.results.head": "Fonds Search Results",
   "fonds.search.results.head": "Risultati",
