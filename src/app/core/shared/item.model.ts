@@ -149,6 +149,11 @@ export class Item extends DSpaceObject implements ChildHALResource, HandleObject
   metrics?: Observable<RemoteData<PaginatedList<Metric>>>;
 
   /**
+   * Manually set property for thumbnail authorization
+   */
+  userCanDownloadThumbnail: boolean;
+
+  /**
    * Method that returns as which type of object this object should be rendered
    */
   getRenderTypes(): (string | GenericConstructor<ListableObject>)[] {

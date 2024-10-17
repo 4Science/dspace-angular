@@ -6,7 +6,6 @@ import { mergeMap } from 'rxjs/operators';
 import { RemoteData } from '../../core/data/remote-data';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { FindListOptions } from '../../core/data/find-list-options.model';
-import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../core/data/feature-authorization/feature-id';
 import { Audit } from '../../core/audit/model/audit.model';
 import { AuditDataService } from '../../core/audit/audit-data.service';
@@ -18,6 +17,7 @@ import { AuthService } from '../../core/auth/auth.service';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { PaginationService } from '../../core/pagination/pagination.service';
 import { redirectOn4xx } from '../../core/shared/authorized.operators';
+import { SiteAuthorizationService } from '../../core/data/feature-authorization/site-authorization.service';
 
 /**
  * Component displaying a list of all audit about a object in a paginated table
@@ -67,7 +67,7 @@ export class ObjectAuditOverviewComponent implements OnInit {
               protected router: Router,
               protected auditService: AuditDataService,
               protected itemService: ItemDataService,
-              protected authorizationService: AuthorizationDataService,
+              protected siteAuthorizationService: SiteAuthorizationService,
               protected paginationService: PaginationService) {
   }
 
@@ -98,7 +98,7 @@ export class ObjectAuditOverviewComponent implements OnInit {
   }
 
   isCurrentUserAdmin(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf, undefined, undefined);
+    return this.siteAuthorizationService.getSiteAuthorization(FeatureID.AdministratorOf);
   }
 
   /**

@@ -10,7 +10,7 @@ import { SearchService } from '../core/shared/search/search.service';
 import { Router } from '@angular/router';
 import { SearchManager } from '../core/browse/search-manager';
 import { APP_CONFIG, AppConfig } from '../../config/app-config.interface';
-import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
+import { SiteAuthorizationService } from '../core/data/feature-authorization/site-authorization.service';
 
 /**
  * This component renders a search page using a configuration as input.
@@ -30,16 +30,18 @@ import { AuthorizationDataService } from '../core/data/feature-authorization/aut
 })
 
 export class ConfigurationSearchPageComponent extends SearchComponent {
-  constructor(protected service: SearchService,
-              protected searchManager: SearchManager,
-              protected sidebarService: SidebarService,
-              protected windowService: HostWindowService,
-              @Inject(PLATFORM_ID) public platformId: any,
-              @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
-              protected routeService: RouteService,
-              protected router: Router,
-              @Inject(APP_CONFIG) protected appConfig: AppConfig,
-              protected authorizationService: AuthorizationDataService,) {
-    super(service, searchManager, sidebarService, windowService, searchConfigService, platformId, routeService, router, appConfig, authorizationService);
+  constructor(
+    protected service: SearchService,
+    protected searchManager: SearchManager,
+    protected sidebarService: SidebarService,
+    protected windowService: HostWindowService,
+    @Inject(PLATFORM_ID) public platformId: any,
+    @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
+    protected routeService: RouteService,
+    protected router: Router,
+    @Inject(APP_CONFIG) protected appConfig: AppConfig,
+    protected siteAuthorizationService: SiteAuthorizationService,
+  ) {
+    super(service, searchManager, sidebarService, windowService, searchConfigService, platformId, routeService, router, appConfig, siteAuthorizationService);
   }
 }

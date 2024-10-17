@@ -53,7 +53,7 @@ import { AlertType } from '../alert/alert-type';
 import { isPlatformServer } from '@angular/common';
 import { APP_CONFIG } from '../../../config/app-config.interface';
 import { FeatureID } from '../../core/data/feature-authorization/feature-id';
-import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
+import { SiteAuthorizationService } from '../../core/data/feature-authorization/site-authorization.service';
 
 @Component({
   selector: 'ds-search',
@@ -379,7 +379,8 @@ export class SearchComponent implements OnInit, OnDestroy {
    */
   @Output() customEvent = new EventEmitter<any>();
 
-  constructor(protected service: SearchService,
+  constructor(
+    protected service: SearchService,
     protected searchManager: SearchManager,
     protected sidebarService: SidebarService,
     protected windowService: HostWindowService,
@@ -388,7 +389,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     protected routeService: RouteService,
     protected router: Router,
     @Inject(APP_CONFIG) protected appConfig: any,
-    protected authorizationService: AuthorizationDataService,){
+    protected siteAuthorizationService: SiteAuthorizationService,
+    ){
     this.isXsOrSm$ = this.windowService.isXsOrSm();
   }
 
@@ -409,7 +411,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     if (this.showCorrection === null || this.showCorrection === undefined) {
       this.subs.push(
-        this.authorizationService.isAuthorized(FeatureID.CanCorrectItem, null, null, true)
+        this.siteAuthorizationService.getSiteAuthorization(FeatureID.CanCorrectItem)
         .subscribe((showCorrection) => {
           this.showCorrection = showCorrection;
         }));

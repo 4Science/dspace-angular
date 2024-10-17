@@ -3,11 +3,11 @@
     <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'"
        [attr.rel]="(linkType == linkTypes.ExternalLink) ? 'noopener noreferrer' : null"
        [routerLink]="[itemPageRoute]" class="lead item-list-title dont-break-out">
-      <ds-thumbnail [thumbnail]="dso?.thumbnail | async" [limitWidth]="true">
+      <ds-thumbnail [canUserDownload]="dso.userCanDownloadThumbnail"  [thumbnail]="dso?.thumbnail | async" [limitWidth]="true">
       </ds-thumbnail>
     </a>
       <span *ngIf="linkType == linkTypes.None" class="lead item-list-title dont-break-out">
-      <ds-thumbnail [thumbnail]="dso?.thumbnail | async" [limitWidth]="true">
+      <ds-thumbnail [canUserDownload]="dso.userCanDownloadThumbnail"  [thumbnail]="dso?.thumbnail | async" [limitWidth]="true">
       </ds-thumbnail>
     </span>
   </div>
