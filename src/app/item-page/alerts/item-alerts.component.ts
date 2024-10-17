@@ -3,7 +3,7 @@ import { Item } from '../../core/shared/item.model';
 import { AlertType } from '../../shared/alert/alert-type';
 import {Observable} from 'rxjs';
 import {FeatureID} from '../../core/data/feature-authorization/feature-id';
-import {AuthorizationDataService} from '../../core/data/feature-authorization/authorization-data.service';
+import { SiteAuthorizationService } from '../../core/data/feature-authorization/site-authorization.service';
 
 @Component({
   selector: 'ds-item-alerts',
@@ -27,10 +27,10 @@ export class ItemAlertsComponent implements OnInit {
 
   isAdministrator$: Observable<boolean>;
 
-  constructor(private authorizationService: AuthorizationDataService) {
+  constructor(private siteAuthorizationService: SiteAuthorizationService) {
   }
 
   ngOnInit() {
-    this.isAdministrator$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf);
+    this.isAdministrator$ = this.siteAuthorizationService.getSiteAuthorization(FeatureID.AdministratorOf);
   }
 }

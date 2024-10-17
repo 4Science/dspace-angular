@@ -7,12 +7,12 @@ import { RemoteData } from '../../core/data/remote-data';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { FindListOptions } from '../../core/data/find-list-options.model';
-import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../core/data/feature-authorization/feature-id';
 import { Audit } from '../../core/audit/model/audit.model';
 import { AuditDataService } from '../../core/audit/audit-data.service';
 import { SortDirection } from '../../core/cache/models/sort-options.model';
 import { PaginationService } from '../../core/pagination/pagination.service';
+import { SiteAuthorizationService } from '../../core/data/feature-authorization/site-authorization.service';
 
 /**
  * Component displaying a list of all audit in a paginated table
@@ -58,7 +58,7 @@ export class AuditOverviewComponent implements OnInit {
   dateFormat = 'yyyy-MM-dd HH:mm:ss';
 
   constructor(protected auditService: AuditDataService,
-              protected authorizationService: AuthorizationDataService,
+              protected siteAuthorizationService: SiteAuthorizationService,
               protected paginationService: PaginationService) {
   }
 
@@ -82,7 +82,7 @@ export class AuditOverviewComponent implements OnInit {
   }
 
   isCurrentUserAdmin(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf, undefined, undefined);
+    return this.siteAuthorizationService.getSiteAuthorization(FeatureID.AdministratorOf);
   }
 
   /**

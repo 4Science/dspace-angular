@@ -152,6 +152,7 @@ export class DefaultAppConfig implements AppConfig {
       FeatureID.CanSendFeedback,
       FeatureID.CanEditItem,
       FeatureID.EPersonForgotPassword,
+      FeatureID.CanCorrectItem,
     ]
   };
 

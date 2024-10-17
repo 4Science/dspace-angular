@@ -106,16 +106,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    *                                    requested after the response becomes stale
    */
   getAuthorizationForObjects(uuidList: string[],  featuresId?: FeatureID[], type  = 'core.site', ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<AuthorizationFeaturesMap> {
-    return this.searchByObjects(uuidList, type, featuresId, ePersonUuid, {}, useCachedVersionIfAvailable, reRequestOnStale, followLink('feature')).pipe(
-      getFirstCompletedRemoteData(),
-      map((authorizationRD) => {
-        if (authorizationRD.statusCode !== 401 && hasValue(authorizationRD.payload) && isNotEmpty(authorizationRD.payload.page)) {
-          return authorizationRD.payload.page;
-        } else {
-          return {};
-        }
-      }),
-      catchError(() => observableOf({})),
+    return this.getObjectsAuthorizations(uuidList, featuresId, type, ePersonUuid, useCachedVersionIfAvailable, reRequestOnStale).pipe(
       mapAuthorizationsToFeatures()
     );
   }
@@ -260,5 +251,29 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    */
   searchBy(searchMethod: string, options?: FindListOptions, useCachedVersionIfAvailable?: boolean, reRequestOnStale?: boolean, ...linksToFollow: FollowLinkConfig<Authorization>[]): Observable<RemoteData<PaginatedList<Authorization>>> {
     return this.searchData.searchBy(searchMethod, options, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
+  }
+
+  /**
+   * Return a list of authorizations give a list of uuid and a list of features
+   * @param uuidList
+   * @param featuresId
+   * @param type
+   * @param ePersonUuid
+   * @param useCachedVersionIfAvailable
+   * @param reRequestOnStale
+   * @private
+   */
+  getObjectsAuthorizations(uuidList: string[],  featuresId?: FeatureID[], type  = 'core.site', ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<Authorization[]> {
+    return this.searchByObjects(uuidList, type, featuresId, ePersonUuid, {}, useCachedVersionIfAvailable, reRequestOnStale, followLink('feature')).pipe(
+      getFirstCompletedRemoteData(),
+      map((authorizationRD) => {
+        if (authorizationRD.statusCode !== 401 && hasValue(authorizationRD.payload) && isNotEmpty(authorizationRD.payload.page)) {
+          return authorizationRD.payload.page;
+        } else {
+          return [];
+        }
+      }),
+      catchError(() => observableOf([]))
+    );
   }
 }

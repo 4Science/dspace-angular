@@ -112,6 +112,6 @@ export const mapAuthorizationsToFeatures = () =>
         features.forEach(feature => {
           featureMap[feature.id] = true;
         });
-        return featureMap as AuthorizationFeaturesMap;
+        return featureMap;
       })
     );
