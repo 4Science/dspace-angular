@@ -53,6 +53,8 @@ import {
   editItemRelationshipsReducer,
   EditItemRelationshipsState
 } from './edit-item-relationships/edit-item-relationships.reducer';
+import { AuthorizationsState } from './core/data/feature-authorization/authorization-config.interfaces';
+import { authorizationReducer } from './core/data/feature-authorization/authorization.reducer';
 
 export interface AppState {
   router: RouterReducerState;
@@ -76,6 +78,7 @@ export interface AppState {
   correlationId: string;
   contextHelp: ContextHelpState;
   editItemRelationships: EditItemRelationshipsState;
+  authorizationFeaturesConfig: AuthorizationsState;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -99,7 +102,8 @@ export const appReducers: ActionReducerMap<AppState> = {
   correlationId: correlationIdReducer,
   contextHelp: contextHelpReducer,
   statistics: StatisticsReducer,
-  editItemRelationships: editItemRelationshipsReducer
+  editItemRelationships: editItemRelationshipsReducer,
+  authorizationFeaturesConfig: authorizationReducer
 };
 
 export const routerStateSelector = (state: AppState) => state.router;

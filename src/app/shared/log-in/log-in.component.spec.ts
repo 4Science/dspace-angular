@@ -23,6 +23,7 @@ import { AuthorizationDataService } from '../../core/data/feature-authorization/
 import { of } from 'rxjs';
 import { ThemeService } from '../theme-support/theme.service';
 import { getMockThemeService } from '../mocks/theme-service.mock';
+import { SiteAuthorizationService } from '../../core/data/feature-authorization/site-authorization.service';
 
 describe('LogInComponent', () => {
 
@@ -42,6 +43,9 @@ describe('LogInComponent', () => {
 
   let authorizationService: AuthorizationDataService;
 
+  let siteAuthorizationService;
+
+
   beforeEach(waitForAsync(() => {
     hardRedirectService = jasmine.createSpyObj('hardRedirectService', {
       redirect: {},
@@ -49,6 +53,10 @@ describe('LogInComponent', () => {
     });
     authorizationService = jasmine.createSpyObj('authorizationService', {
       isAuthorized: of(true)
+    });
+
+    siteAuthorizationService = jasmine.createSpyObj('SiteAuthorizationService', {
+      getSiteAuthorization: of(true),
     });
 
     // refine the test module by declaring the test component
@@ -78,6 +86,7 @@ describe('LogInComponent', () => {
         { provide: AuthorizationDataService, useValue: authorizationService },
         provideMockStore({ initialState }),
         { provide: ThemeService, useValue: getMockThemeService() },
+        { provide: SiteAuthorizationService, useValue: siteAuthorizationService },
         LogInComponent
       ],
       schemas: [

@@ -94,7 +94,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
   }
 
   /**
-   * get a map of authorizations for {@link EPerson} (or anonymous)
+   * Get a map of authorizations for {@link EPerson} (or anonymous)
    * @param uuidList                    Required list of objects' uuids to search {@link Authorization}s for.
    * @param type                        The required DSO UniqueType attribute.
    * @param ePersonUuid                 UUID of the {@link EPerson} to search {@link Authorization}s for.
@@ -105,7 +105,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    * @param reRequestOnStale            Whether or not the request should automatically be re-
    *                                    requested after the response becomes stale
    */
-  getAuthorizationForObjects(uuidList: string[], type  = 'core.item', featuresId?: FeatureID[], ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<AuthorizationFeaturesMap> {
+  getAuthorizationForObjects(uuidList: string[],  featuresId?: FeatureID[], type  = 'core.site', ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<AuthorizationFeaturesMap> {
     return this.searchByObjects(uuidList, type, featuresId, ePersonUuid, {}, useCachedVersionIfAvailable, reRequestOnStale, followLink('feature')).pipe(
       getFirstCompletedRemoteData(),
       map((authorizationRD) => {

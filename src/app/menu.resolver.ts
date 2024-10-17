@@ -57,6 +57,7 @@ import { ConfigurationDataService } from './core/data/configuration-data.service
 import { ConfigurationProperty } from './core/shared/configuration-property.model';
 import { SiteDataService } from './core/data/site-data.service';
 import { AuthorizationFeaturesMap } from './core/shared/authorization.model';
+import { SiteAuthorizationService } from './core/data/feature-authorization/site-authorization.service';
 
 
 export interface MenuResolverAuthorization {
@@ -83,6 +84,7 @@ export class MenuResolver implements Resolve<boolean> {
     protected sectionDataService: SectionDataService,
     protected configService: ConfigurationDataService,
     protected siteDataService: SiteDataService,
+    protected siteAuthorizationService: SiteAuthorizationService
   ) {
   }
 
@@ -663,7 +665,8 @@ export class MenuResolver implements Resolve<boolean> {
    * Add the DL Exporter menu item to the admin menu
    */
   createDLExporterMenuItem() {
-    this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(
+    this.siteAuthorizationService.getSiteAuthorizationState().pipe(
+      map(state => state[FeatureID.AdministratorOf] ?? false),
       filter((authorized: boolean) => authorized),
       take(1),
       switchMap(() => observableCombineLatest([
@@ -768,7 +771,9 @@ export class MenuResolver implements Resolve<boolean> {
    * Create menu sections dependent on whether or not the current user is a site administrator
    */
   createSiteAdministratorMenuSections() {
-    this.authorizationService.isAuthorized(FeatureID.AdministratorOf).subscribe((authorized) => {
+    this.siteAuthorizationService.getSiteAuthorizationState().pipe(
+      map(state => state[FeatureID.AdministratorOf] ?? false)
+    ).subscribe((authorized) => {
       const menuList = [
         /* Communities & Collections */
         {
@@ -1074,15 +1079,18 @@ export class MenuResolver implements Resolve<boolean> {
     return this.getItemAndSiteUuid().pipe(
       switchMap(menuAuth => {
         const uuid = menuAuth.itemUuid || menuAuth.siteUuid;
-        return this.authorizationService.getAuthorizationForObjects(
+        const autorizations$ = menuAuth.itemUuid ? this.authorizationService.getAuthorizationForObjects(
           [uuid],
-          hasValue(menuAuth.itemUuid) ? 'core.item' : 'core.site',
-          featuresId
-        ).pipe(
+          featuresId,
+          'core.item'
+        ) : this.siteAuthorizationService.getSiteAuthorizationState();
+
+        return autorizations$.pipe(
           map((authMap) => {
+            let mapToReturn = {} as AuthorizationFeaturesMap;
             //Prevent undefined for compatibility with previous method interface
-            featuresId.forEach(id => authMap[id] ?? (authMap[id] = false));
-            return authMap;
+            featuresId.forEach(id => authMap[id] ? (mapToReturn[id] = true) :  (mapToReturn[id] = false));
+            return mapToReturn;
           })
         );
       })

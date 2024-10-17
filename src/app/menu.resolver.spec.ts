@@ -21,6 +21,7 @@ import { SectionDataService } from './core/layout/section-data.service';
 import createSpy = jasmine.createSpy;
 import { ConfigurationDataService } from './core/data/configuration-data.service';
 import { SiteDataService } from './core/data/site-data.service';
+import { SiteAuthorizationService } from './core/data/feature-authorization/site-authorization.service';
 
 const BOOLEAN = { t: true, f: false };
 const SITE_ID = 'f92d103c-e4ad-4dfb-b59f-f90c7425407e';
@@ -73,6 +74,8 @@ describe('MenuResolver', () => {
   let scriptService;
   let configService;
   let siteService;
+  let siteAuthorizationService;
+
 
   beforeEach(waitForAsync(() => {
     menuService = new MenuServiceStub();
@@ -96,6 +99,10 @@ describe('MenuResolver', () => {
       find: observableOf(SITE_ID),
     });
 
+    siteAuthorizationService = jasmine.createSpyObj('SiteAuthorizationService', {
+      getSiteAuthorizationState: observableOf({}),
+    });
+
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot(), NoopAnimationsModule, RouterTestingModule],
       declarations: [AdminSidebarComponent],
@@ -111,7 +118,8 @@ describe('MenuResolver', () => {
             open: () => {/*comment*/
             }
           }
-        }
+        },
+        { provide: SiteAuthorizationService, useValue: siteAuthorizationService },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
@@ -351,6 +359,10 @@ describe('MenuResolver', () => {
         authorizationService.getAuthorizationForObjects = createSpy('getAuthorizationForObjects').and.callFake((_) => {
           return observableOf({});
         });
+
+        siteAuthorizationService.getSiteAuthorizationState = createSpy('getSiteAuthorizationState').and.callFake((_) => {
+          return observableOf({});
+        });
       });
 
       beforeEach((done) => {
@@ -370,6 +382,9 @@ describe('MenuResolver', () => {
           return observableOf(featureID === FeatureID.CanEditItem);
         });
         authorizationService.getAuthorizationForObjects = createSpy('getAuthorizationForObjects').and.callFake((_) => {
+          return observableOf({[FeatureID.CanEditItem]: true});
+        });
+        siteAuthorizationService.getSiteAuthorizationState = createSpy('getSiteAuthorizationState').and.callFake((_) => {
           return observableOf({[FeatureID.CanEditItem]: true});
         });
       });
@@ -399,6 +414,10 @@ describe('MenuResolver', () => {
           return observableOf(featureID === FeatureID.AdministratorOf);
         });
         authorizationService.getAuthorizationForObjects = createSpy('getAuthorizationForObjects').and.callFake((_) => {
+          return observableOf({[FeatureID.AdministratorOf]: true});
+        });
+
+        siteAuthorizationService.getSiteAuthorizationState = createSpy('getSiteAuthorizationState').and.callFake((_) => {
           return observableOf({[FeatureID.AdministratorOf]: true});
         });
 
@@ -455,6 +474,9 @@ describe('MenuResolver', () => {
         authorizationService.getAuthorizationForObjects = createSpy('getAuthorizationForObjects').and.callFake((_) => {
           return observableOf({[FeatureID.IsCommunityAdmin]: true});
         });
+        siteAuthorizationService.getSiteAuthorizationState = createSpy('getSiteAuthorizationState').and.callFake((_) => {
+          return observableOf({[FeatureID.IsCommunityAdmin]: true});
+        });
       });
 
       beforeEach((done) => {
@@ -475,6 +497,9 @@ describe('MenuResolver', () => {
         authorizationService.getAuthorizationForObjects = createSpy('getAuthorizationForObjects').and.callFake((_) => {
           return observableOf({[FeatureID.IsCollectionAdmin]: true});
         });
+        siteAuthorizationService.getSiteAuthorizationState = createSpy('getSiteAuthorizationState').and.callFake((_) => {
+          return observableOf({[FeatureID.IsCollectionAdmin]: true});
+        });
       });
 
       beforeEach((done) => {
@@ -493,6 +518,9 @@ describe('MenuResolver', () => {
     describe('for group admin', () => {
       beforeEach(() => {
         authorizationService.getAuthorizationForObjects = createSpy('getAuthorizationForObjects').and.callFake((_) => {
+          return observableOf({[FeatureID.CanManageGroups]: true});
+        });
+        siteAuthorizationService.getSiteAuthorizationState = createSpy('getSiteAuthorizationState').and.callFake((_) => {
           return observableOf({[FeatureID.CanManageGroups]: true});
         });
       });
