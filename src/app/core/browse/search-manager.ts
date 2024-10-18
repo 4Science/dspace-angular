@@ -25,7 +25,7 @@ import { Bitstream } from '../shared/bitstream.model';
 import { AuthorizationDataService } from '../data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../data/feature-authorization/feature-id';
 import { Authorization } from '../shared/authorization.model';
-import { SearchOptions } from "../../shared/search/models/search-options.model";
+import { SearchOptions } from '../../shared/search/models/search-options.model';
 
 /**
  * The service aims to manage browse requests and subsequent extra fetch requests.
@@ -92,13 +92,13 @@ export class SearchManager {
     return switchMap((searchObjectsRD: RemoteData<SearchObjects<T>>) => {
       if (searchObjectsRD.isSuccess) {
         const items: Item[] = searchObjectsRD.payload.page.map((searchResult) => searchResult.indexableObject) as any;
-        //this.enrichItemsWithCurrentUserAuthorizations(searchObjectsRD, searchOptions.configuration ?? 'default')
+
         return this.fetchExtraData(items).pipe(
           map(() => {
             return searchObjectsRD;
           }),
-          switchMap(() => this.enrichWithBitstreamsDownloadAuthorizations(searchObjectsRD)),
-          tap(console.log)
+          switchMap(() => this.enrichWithThumbnailDownloadAuthorizations(searchObjectsRD)),
+          switchMap(() => this.enrichItemsWithCurrentUserAuthorizations(searchObjectsRD, searchOptions.configuration ?? 'default')),
         );
       }
       return of(searchObjectsRD);
@@ -106,90 +106,155 @@ export class SearchManager {
   }
 
   protected enrichItemsWithCurrentUserAuthorizations<T extends DSpaceObject>(searchObjects: RemoteData<SearchObjects<T>>, configuration: string): Observable<RemoteData<any>> {
+    let pageToEnrich = Object.assign([], searchObjects.payload.page);
+
     const objects = searchObjects.payload.page.map((searchResult) => searchResult.indexableObject) as any;
-    const mappedEntities = this.getEntityTypeToAuthorizationsMap(objects, configuration)
-    console.log(mappedEntities)
-    return of(null)
-  }
+    const mappedEntities = this.getEntityTypeToAuthorizationsMap(objects, configuration);
+    const uiidListsMappedToAuthorizations = this.groupItemsUuidsByAuthorizations(objects, mappedEntities);
+    const authorizationRequests = [...uiidListsMappedToAuthorizations.keys()].map((features) => {
+      const uuidList = uiidListsMappedToAuthorizations.get(features);
+      const type = objects.find(object => object.id === uuidList[0]).uniqueType;
+      return this.authorizationService.getObjectsAuthorizations(uuidList, features, type);
+    });
 
-  private getEntityTypeToAuthorizationsMap<T extends DSpaceObject>(objects: T[], configuration: string) : Map<string, FeatureID[]> {
-    console.log(objects, configuration)
-    const configuredAuthorizationsForDiscovery =
-      environment.discoveryAuthorizationFeaturesConfig[configuration] ?? environment.discoveryAuthorizationFeaturesConfig.default;
-    const mappedEntities = new Map();
-    const entityTypes =  [...new Set(objects.map(dso =>
-      dso.firstMetadataValue('dspace.entity.type') ?? (dso as any as Item)?.entityType
-    ))]
-    entityTypes.forEach((entity) => mappedEntities.set(entity, configuredAuthorizationsForDiscovery[entity]))
-    return mappedEntities
-  }
+    return combineLatest(authorizationRequests).pipe(
+      map(authorizationsLists => {
+        const flatList = [].concat.apply([], authorizationsLists);
+        flatList.forEach((authorization: Authorization) => {
+          const objectId = this.extractUuidFromAuthorizationId(authorization.id);
+          const indexToUpdate = pageToEnrich.indexOf(pageToEnrich.find(object => object.indexableObject.id === objectId));
 
-
-  protected enrichWithBitstreamsDownloadAuthorizations<T extends DSpaceObject>(searchObjects: RemoteData<SearchObjects<T>>): Observable<RemoteData<any>> {
-    const objects = searchObjects.payload.page.map((searchResult) => searchResult.indexableObject) as any;
-    let enrichedItems = Object.assign([], objects);
-    let itemToBitstreamMap = new Map();
-    let bitstreamToAuthorizationMap = new Map();
-    let allAuthorizations: Authorization[] = [];
-
-
-    const thumbnails$ = objects
-      .map(dso => (dso as any)?.thumbnail.pipe(getFirstCompletedRemoteData()) ?? of(null))
-      .map((remoteThumbnail, index) => remoteThumbnail.pipe(
-        tap(bitstream  => itemToBitstreamMap.set(objects[index].uuid, (bitstream as RemoteData<Bitstream>)?.payload?.uuid)),
-      )) as Observable<RemoteData<Bitstream>>[];
-    combineLatest(...thumbnails$).subscribe(console.log)
-    return combineLatest(...thumbnails$).pipe(
-      switchMap(bitstreams => this.authorizationService.getObjectsAuthorizations(
-        bitstreams.filter(value => hasValue(value?.payload)).map(bit => bit.payload.uuid),
-        [FeatureID.CanDownload],
-        'core.bitstream'
-      )),
-      tap(allRemoteAuthorizations => allAuthorizations = allRemoteAuthorizations),
-      switchMap(authorizations => combineLatest(authorizations
-        .map(auth => auth.feature.pipe(
-          getFirstCompletedRemoteData(),
-          map(data => data?.payload),
-          tap(feature => bitstreamToAuthorizationMap.set(this.extractBitstreamIdFromAuthorizationId(auth.id), feature))
-        ))
-      )),
-      map(() => {
-        const itemsWithNoThumbnail = [...itemToBitstreamMap.keys()].filter(key => !hasValue(itemToBitstreamMap[key]));
-
-        itemsWithNoThumbnail.forEach(uuid => {
-          const itemIndexWithNoThumbnail = enrichedItems.indexOf(enrichedItems.find(item => item.uuid === uuid));
-
-          enrichedItems[itemIndexWithNoThumbnail].canDownload = false;
-        });
-
-        allAuthorizations.forEach(auth => {
-          const bitstreamId = this.extractBitstreamIdFromAuthorizationId(auth.id);
-          const isCurrentUserAuthorizedToDownloadBitstream = hasValue(bitstreamToAuthorizationMap.get(bitstreamId));
-          const mappedItemUuid =  [...itemToBitstreamMap.keys()].find(key => itemToBitstreamMap.get(key) === bitstreamId);
-          const itemIndexToEnrich = enrichedItems.indexOf(enrichedItems.find(item => item.uuid === mappedItemUuid));
-          enrichedItems[itemIndexToEnrich].canDownload = isCurrentUserAuthorizedToDownloadBitstream;
-        });
-
-        const pageToReturn = searchObjects.payload.page.map(item => {
-          const enrichedItem = enrichedItems.find(dso => dso.uuid === item.indexableObject.uuid);
-          return Object.assign(item, {canDownload: enrichedItem.canDownload});
+          pageToEnrich[indexToUpdate].indexableObject.userAuthorizations = [
+            ...pageToEnrich[indexToUpdate].indexableObject.userAuthorizations,
+            this.extractFeatureIdFromAuthorizationId(authorization.id)
+          ];
         });
 
         return Object.assign(searchObjects, {
           payload: {
             ...searchObjects.payload,
-            page: pageToReturn
+            page: pageToEnrich
           }
         });
-      })
+      }),
     );
   }
 
-  private extractBitstreamIdFromAuthorizationId(authId: string): string {
+  private groupItemsUuidsByAuthorizations<T extends DSpaceObject>(objects: T[], mappedEntities: Map<string, FeatureID[]>): Map<FeatureID[], string[]> {
+    const mappedUuidListsToFeatures = new Map();
+    objects.forEach(object => {
+      const objectType = this.getObjectType(object);
+      const features = mappedEntities.get(objectType);
+      if (hasValue(features) && hasValue(mappedUuidListsToFeatures.get(features))) {
+          mappedUuidListsToFeatures.set(features, [...mappedUuidListsToFeatures.get(features), object.id]);
+      } else if (hasValue(features)) {
+        mappedUuidListsToFeatures.set(features, [object.id]);
+      }
+
+    });
+
+    return mappedUuidListsToFeatures;
+  }
+
+
+  private getObjectType<T extends DSpaceObject>(object: T): string {
+    return object.firstMetadataValue('dspace.entity.type') ?? (object as any as Item)?.entityType ?? object?.uniqueType;
+  }
+
+  private getEntityTypeToAuthorizationsMap<T extends DSpaceObject>(objects: T[], configuration: string): Map<string, FeatureID[]> {
+    const configuredAuthorizationsForDiscovery =
+      environment.discoveryAuthorizationFeaturesConfig[configuration] ?? environment.discoveryAuthorizationFeaturesConfig.default;
+    const mappedEntities = new Map();
+    const entityTypes =  [...new Set(objects.map(dso => this.getObjectType(dso)))];
+    entityTypes.forEach((entity) => {
+      const config = configuredAuthorizationsForDiscovery[entity];
+      if (hasValue(config)) {
+        mappedEntities.set(entity, config);
+      }
+    });
+    return mappedEntities;
+  }
+
+
+  protected enrichWithThumbnailDownloadAuthorizations<T extends DSpaceObject>(searchObjects: RemoteData<SearchObjects<T>>): Observable<RemoteData<any>> {
+    const objects = searchObjects.payload.page.map((searchResult) => searchResult.indexableObject) as any;
+    const areThumbnailPresent = objects.map(object => object.thumbnail).filter(thumbnail =>  hasValue(thumbnail)).length > 0;
+
+    if (areThumbnailPresent) {
+      let enrichedItems = Object.assign([], objects);
+      let itemToBitstreamMap = new Map();
+      let bitstreamToAuthorizationMap = new Map();
+      let allAuthorizations: Authorization[] = [];
+
+      const thumbnails$ = objects
+        .map(dso => hasValue((dso as any)?.thumbnail) ? (dso as any)?.thumbnail.pipe(getFirstCompletedRemoteData()) : of(null))
+        .map((remoteThumbnail, index) => remoteThumbnail.pipe(
+          tap(bitstream  => itemToBitstreamMap.set(objects[index].uuid, (bitstream as RemoteData<Bitstream>)?.payload?.uuid)),
+        )) as Observable<RemoteData<Bitstream>>[];
+
+      return combineLatest(...thumbnails$).pipe(
+          switchMap(bitstreams => this.authorizationService.getObjectsAuthorizations(
+            bitstreams.filter(value => hasValue(value?.payload)).map(bit => bit.payload.uuid),
+            [FeatureID.CanDownload],
+            bitstreams[0].payload.uniqueType
+          )),
+          tap(allRemoteAuthorizations => allAuthorizations = allRemoteAuthorizations),
+          switchMap(authorizations => combineLatest(authorizations
+            .map(auth => auth.feature.pipe(
+              getFirstCompletedRemoteData(),
+              map(data => data?.payload),
+              tap(feature => bitstreamToAuthorizationMap.set(this.extractUuidFromAuthorizationId(auth.id), feature))
+            ))
+          )),
+          map(() => {
+            const itemsWithNoThumbnail = [...itemToBitstreamMap.keys()].filter(key => !hasValue(itemToBitstreamMap[key]));
+
+            itemsWithNoThumbnail.forEach(uuid => {
+              const itemIndexWithNoThumbnail = enrichedItems.indexOf(enrichedItems.find(item => item.uuid === uuid));
+
+              enrichedItems[itemIndexWithNoThumbnail].canDownload = false;
+            });
+
+            allAuthorizations.forEach(auth => {
+              const bitstreamId = this.extractUuidFromAuthorizationId(auth.id);
+              const isCurrentUserAuthorizedToDownloadBitstream = hasValue(bitstreamToAuthorizationMap.get(bitstreamId));
+              const mappedItemUuid =  [...itemToBitstreamMap.keys()].find(key => itemToBitstreamMap.get(key) === bitstreamId);
+              const itemIndexToEnrich = enrichedItems.indexOf(enrichedItems.find(item => item.uuid === mappedItemUuid));
+
+              enrichedItems[itemIndexToEnrich].canDownload = isCurrentUserAuthorizedToDownloadBitstream;
+            });
+
+            const pageToReturn = searchObjects.payload.page.map(item => {
+              const enrichedItem = enrichedItems.find(dso => dso.uuid === item.indexableObject.uuid);
+
+              return Object.assign(item, {canDownload: enrichedItem.canDownload});
+            });
+
+            return Object.assign(searchObjects, {
+              payload: {
+                ...searchObjects.payload,
+                page: pageToReturn
+              }
+            });
+          })
+      );
+    } else {
+      return of(searchObjects);
+    }
+  }
+
+  private extractUuidFromAuthorizationId(authId: string): string {
     //we read the bitstream uuid from the authorization id that is composed as follows:
     // epersonUuid_featureID_itemType_itemUuid
     const authSegments = authId.split('_');
     return authSegments[authSegments.length - 1];
+  }
+
+  private extractFeatureIdFromAuthorizationId(authId: string): FeatureID {
+    //we read the feature id from the authorization id that is composed as follows:
+    // epersonUuid_featureID_itemType_itemUuid
+    const authSegments = authId.split('_');
+    return authSegments[1] as FeatureID;
   }
 
   protected fetchExtraData<T extends DSpaceObject>(objects: T[]): Observable<any> {

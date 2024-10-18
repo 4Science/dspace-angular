@@ -42,7 +42,6 @@ import { IdentifierSubtypesConfig, IdentifierSubtypesIconPositionEnum } from './
 import { DatadogRumConfig } from './datadog-rum-config.interfaces';
 import { FeatureID } from '../app/core/data/feature-authorization/feature-id';
 import {
-  AuthorizationFeaturesConfig,
   DiscoveryConfigurationFeaturesConfig
 } from '../app/core/data/feature-authorization/authorization-config.interfaces';
 
@@ -159,14 +158,14 @@ export class DefaultAppConfig implements AppConfig {
 
   discoveryAuthorizationFeaturesConfig: DiscoveryConfigurationFeaturesConfig = {
     'workspace': {
-      'Workspace': [
-        FeatureID.CanEditItem
-      ]
+      // TODO: uncomment once https://4science.atlassian.net/browse/DSC-1982 is implemented
+      //  'submission.workspaceitem': [
+      //    FeatureID.CanEditItem
+      //  ]
+      //Todo: comment out once implementation is done. Only for test purpose
+      'Publication': [FeatureID.CanEditItem]
     },
-    default: {
-
-    }
-  }
+  };
 
   // Form settings
   form: FormConfig = {

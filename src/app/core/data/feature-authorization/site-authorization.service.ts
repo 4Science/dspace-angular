@@ -4,13 +4,13 @@ import { SiteDataService } from '../site-data.service';
 import { Observable, ObservableInput, of, switchMap } from 'rxjs';
 import { createFeatureSelector, createSelector, select, Store } from '@ngrx/store';
 import { AuthorizationsState } from './authorization-config.interfaces';
-import { distinctUntilChanged, filter, map, take, tap } from 'rxjs/operators';
+import { distinctUntilChanged, map, take, tap } from 'rxjs/operators';
 import { AppState } from '../../../app.reducer';
 import { SiteAuthorizationsConfigureAction } from './authorization.actions';
 import { environment } from '../../../../environments/environment';
 import { AuthorizationFeaturesMap } from '../../shared/authorization.model';
 import { FeatureID } from './feature-id';
-import { hasValue } from "../../../shared/empty.util";
+import { hasValue } from '../../../shared/empty.util';
 
 
 const siteAuthorizationsSelector = createFeatureSelector<AuthorizationsState>('siteAuthorizationFeaturesConfig');
@@ -66,7 +66,7 @@ export class SiteAuthorizationService  {
         environment.siteAuthorizationFeaturesConfig
       )),
       take(1)
-    )
+    );
   }
 
   /**
@@ -77,12 +77,12 @@ export class SiteAuthorizationService  {
     of(value).pipe(
       switchMap(authMap => {
         if (hasValue(authMap)) {
-          return of(authMap)
+          return of(authMap);
         } else {
           return this.getSiteAuthorizationMap().pipe(
             tap(authorizations => this.store.dispatch(new SiteAuthorizationsConfigureAction(authorizations)))
-          )
+          );
         }
       })
-    )
+    );
 }

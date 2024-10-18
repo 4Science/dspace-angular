@@ -16,6 +16,7 @@ import {
 import { Metadata } from './metadata.utils';
 import { ResourceType } from './resource-type';
 import { CacheableObject } from '../cache/cacheable-object.model';
+import { FeatureID } from '../data/feature-authorization/feature-id';
 
 /**
  * An abstract model class for a DSpaceObject.
@@ -50,6 +51,20 @@ export class DSpaceObject extends ListableObject implements CacheableObject {
   @excludeFromEquals
   @autoserialize
   type: ResourceType;
+
+  /**
+   * A string representing the kind of DSpaceObject based on the Rest Item type
+   */
+  @excludeFromEquals
+  @autoserialize
+  uniqueType: string;
+
+
+  /**
+   * List of configured authorizations for the current user.
+   * The authorizations are configured based on the discovery configuration and on the item entity type
+   */
+  userAuthorizations: FeatureID[] = [];
 
   /**
    * A shorthand to get this DSpaceObject's self link
