@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
 import { ItemPageResolver } from './item-page.resolver';
 import { Item } from '../core/shared/item.model';
@@ -7,6 +7,7 @@ import { DsoPageSingleFeatureGuard } from '../core/data/feature-authorization/fe
 import { Observable, of as observableOf } from 'rxjs';
 import { FeatureID } from '../core/data/feature-authorization/feature-id';
 import { AuthService } from '../core/auth/auth.service';
+import { SiteAuthorizationService } from '../core/data/feature-authorization/site-authorization.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,13 @@ import { AuthService } from '../core/auth/auth.service';
  * Guard for preventing unauthorized access to certain {@link Item} pages requiring administrator rights
  */
 export class ItemPageAdministratorGuard extends DsoPageSingleFeatureGuard<Item> {
-  constructor(protected resolver: ItemPageResolver,
-              protected authorizationService: AuthorizationDataService,
-              protected router: Router,
-              protected authService: AuthService) {
+  constructor(
+    protected resolver: ItemPageResolver,
+    protected authorizationService: AuthorizationDataService,
+    protected siteAuthorizationService: SiteAuthorizationService,
+    protected router: Router,
+    protected authService: AuthService
+  ) {
     super(resolver, authorizationService, router, authService);
   }
 
@@ -27,5 +31,9 @@ export class ItemPageAdministratorGuard extends DsoPageSingleFeatureGuard<Item> 
    */
   getFeatureID(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FeatureID> {
     return observableOf(FeatureID.AdministratorOf);
+  }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
+    return this.siteAuthorizationService.getSiteAuthorization(FeatureID.AdministratorOf);
   }
 }

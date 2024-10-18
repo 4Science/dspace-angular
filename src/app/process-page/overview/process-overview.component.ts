@@ -15,10 +15,10 @@ import { ProcessBulkDeleteService } from './process-bulk-delete.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { hasValue } from '../../shared/empty.util';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
-import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../core/data/feature-authorization/feature-id';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { TranslateService } from '@ngx-translate/core';
+import { SiteAuthorizationService } from '../../core/data/feature-authorization/site-authorization.service';
 
 @Component({
   selector: 'ds-process-overview',
@@ -65,7 +65,7 @@ export class ProcessOverviewComponent implements OnInit, OnDestroy {
               protected modalService: NgbModal,
               public processBulkDeleteService: ProcessBulkDeleteService,
               protected dsoNameService: DSONameService,
-              protected authorizationService: AuthorizationDataService,
+              protected siteAuthorizationService: SiteAuthorizationService,
               protected notificationService: NotificationsService,
               protected translateService: TranslateService,
   ) {
@@ -106,7 +106,7 @@ export class ProcessOverviewComponent implements OnInit, OnDestroy {
   }
 
   isCurrentUserAdmin(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf, undefined, undefined);
+    return this.siteAuthorizationService.getSiteAuthorization(FeatureID.AdministratorOf);
   }
 
   isProcessCompleted(process: Process): boolean {

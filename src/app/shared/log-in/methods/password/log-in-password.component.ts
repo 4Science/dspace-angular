@@ -16,8 +16,8 @@ import { AuthService } from '../../../../core/auth/auth.service';
 import { HardRedirectService } from '../../../../core/services/hard-redirect.service';
 import { CoreState } from '../../../../core/core-state.model';
 import { getForgotPasswordRoute, getRegisterRoute } from '../../../../app-routing-paths';
-import { AuthorizationDataService } from '../../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../../core/data/feature-authorization/feature-id';
+import { SiteAuthorizationService } from '../../../../core/data/feature-authorization/site-authorization.service';
 
 /**
  * /users/sign-in
@@ -81,7 +81,7 @@ export class LogInPasswordComponent implements OnInit {
     private hardRedirectService: HardRedirectService,
     private formBuilder: UntypedFormBuilder,
     protected store: Store<CoreState>,
-    protected authorizationService: AuthorizationDataService,
+    protected siteAuthorizationService: SiteAuthorizationService,
   ) {
     this.authMethod = injectedAuthMethodModel;
   }
@@ -116,7 +116,7 @@ export class LogInPasswordComponent implements OnInit {
       })
     );
 
-    this.canRegister$ = this.authorizationService.isAuthorized(FeatureID.EPersonRegistration);
+    this.canRegister$ = this.siteAuthorizationService.getSiteAuthorization(FeatureID.EPersonRegistration);
   }
 
   getRegisterRoute() {

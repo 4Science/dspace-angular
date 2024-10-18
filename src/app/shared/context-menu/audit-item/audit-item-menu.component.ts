@@ -8,7 +8,7 @@ import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { take } from 'rxjs/operators';
-import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
+import { SiteAuthorizationService } from '../../../core/data/feature-authorization/site-authorization.service';
 
 /**
  * This component renders a context menu option that provides to export an item.
@@ -25,7 +25,7 @@ export class AuditItemMenuComponent extends ContextMenuEntryComponent implements
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: DSpaceObjectType,
-    private authorizationService: AuthorizationDataService
+    private siteAuthorizationService: SiteAuthorizationService
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.Audit);
   }
@@ -33,9 +33,9 @@ export class AuditItemMenuComponent extends ContextMenuEntryComponent implements
   ngOnInit(): void {
     combineLatest(
       [
-        this.authorizationService.isAuthorized(FeatureID.AdministratorOf),
-        this.authorizationService.isAuthorized(FeatureID.IsCollectionAdmin),
-        this.authorizationService.isAuthorized(FeatureID.IsCommunityAdmin),
+        this.siteAuthorizationService.getSiteAuthorization(FeatureID.AdministratorOf),
+        this.siteAuthorizationService.getSiteAuthorization(FeatureID.IsCollectionAdmin),
+        this.siteAuthorizationService.getSiteAuthorization(FeatureID.IsCommunityAdmin),
       ]
     ).pipe(
       take(1)

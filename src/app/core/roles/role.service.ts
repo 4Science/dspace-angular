@@ -6,7 +6,7 @@ import { switchMap } from 'rxjs/operators';
 import { RoleType } from './role-types';
 import { CollectionDataService } from '../data/collection-data.service';
 import { FeatureID } from '../data/feature-authorization/feature-id';
-import { AuthorizationDataService } from '../data/feature-authorization/authorization-data.service';
+import { SiteAuthorizationService } from '../data/feature-authorization/site-authorization.service';
 
 
 /**
@@ -19,10 +19,11 @@ export class RoleService {
    * Initialize instance variables
    *
    * @param {CollectionDataService} collectionService
+   * @param siteAuthorizationService
    */
   constructor(
     private collectionService: CollectionDataService,
-    private authorizationService: AuthorizationDataService
+    private siteAuthorizationService: SiteAuthorizationService
     ) {
   }
 
@@ -49,7 +50,7 @@ export class RoleService {
    * Check if current user is an admin
    */
   isAdmin(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf);
+    return this.siteAuthorizationService.getSiteAuthorization(FeatureID.AdministratorOf);
   }
 
   /**

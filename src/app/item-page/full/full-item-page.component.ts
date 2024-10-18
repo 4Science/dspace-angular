@@ -15,11 +15,11 @@ import { fadeInOut } from '../../shared/animations/fade';
 import { hasValue } from '../../shared/empty.util';
 import { AuthService } from '../../core/auth/auth.service';
 import { Location } from '@angular/common';
-import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 import { ServerResponseService } from '../../core/services/server-response.service';
 import { SignpostingDataService } from '../../core/data/signposting-data.service';
 import { LinkHeadService } from '../../core/services/link-head.service';
 import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
+import { SiteAuthorizationService } from '../../core/data/feature-authorization/site-authorization.service';
 
 /**
  * This component renders a full item page.
@@ -55,7 +55,7 @@ export class FullItemPageComponent extends ItemPageComponent implements OnInit, 
     protected router: Router,
     protected items: ItemDataService,
     protected authService: AuthService,
-    protected authorizationService: AuthorizationDataService,
+    protected siteAuthorizationService: SiteAuthorizationService,
     protected _location: Location,
     protected responseService: ServerResponseService,
     protected signpostingDataService: SignpostingDataService,
@@ -63,7 +63,7 @@ export class FullItemPageComponent extends ItemPageComponent implements OnInit, 
     @Inject(PLATFORM_ID) protected platformId: string,
     @Inject(APP_CONFIG) private appConfig: AppConfig,
   ) {
-    super(route, router, items, authService, authorizationService, responseService, signpostingDataService, linkHeadService, platformId);
+    super(route, router, items, authService, siteAuthorizationService, responseService, signpostingDataService, linkHeadService, platformId);
   }
 
   /*** AoT inheritance fix, will hopefully be resolved in the near future **/

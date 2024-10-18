@@ -19,8 +19,8 @@ import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
 import { Process } from '../../../../process-page/processes/process.model';
 import { RemoteData } from '../../../../core/data/remote-data';
 import { getProcessDetailRoute } from '../../../../process-page/process-page-routing.paths';
-import { AuthorizationDataService } from '../../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../../core/data/feature-authorization/feature-id';
+import { SiteAuthorizationService } from '../../../../core/data/feature-authorization/site-authorization.service';
 
 /**
  * Component to wrap a list of existing dso's inside a modal
@@ -36,11 +36,16 @@ export class ExportMetadataCsvSelectorComponent extends DSOSelectorModalWrapperC
   selectorTypes = [DSpaceObjectType.COLLECTION, DSpaceObjectType.COMMUNITY];
   action = SelectorActionType.EXPORT_METADATA_CSV;
 
-  constructor(protected activeModal: NgbActiveModal, protected route: ActivatedRoute, private router: Router,
-              protected notificationsService: NotificationsService, protected translationService: TranslateService,
-              protected scriptDataService: ScriptDataService,
-              protected authorizationDataService: AuthorizationDataService,
-              private modalService: NgbModal) {
+  constructor(
+    protected activeModal: NgbActiveModal,
+    protected route: ActivatedRoute,
+    private router: Router,
+    protected notificationsService: NotificationsService,
+    protected translationService: TranslateService,
+    protected scriptDataService: ScriptDataService,
+    protected siteAuthorizationDataService: SiteAuthorizationService,
+    private modalService: NgbModal
+  ) {
     super(activeModal, route);
   }
 
@@ -86,7 +91,7 @@ export class ExportMetadataCsvSelectorComponent extends DSOSelectorModalWrapperC
     const parameterValues: ProcessParameter[] = [
       Object.assign(new ProcessParameter(), { name: '-i', value: dso.uuid }),
     ];
-    return this.authorizationDataService.isAuthorized(FeatureID.AdministratorOf).pipe(
+    return this.siteAuthorizationDataService.getSiteAuthorization(FeatureID.AdministratorOf).pipe(
       switchMap((isAdmin) => {
         if (isAdmin) {
           parameterValues.push(Object.assign(new ProcessParameter(), {name: '-a'}));

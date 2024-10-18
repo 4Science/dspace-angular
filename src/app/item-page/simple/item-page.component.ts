@@ -14,7 +14,6 @@ import { ViewMode } from '../../core/shared/view-mode.model';
 import { AuthService } from '../../core/auth/auth.service';
 import { getItemPageRoute } from '../item-page-routing-paths';
 import { redirectOn204, redirectOn4xx } from '../../core/shared/authorized.operators';
-import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../core/data/feature-authorization/feature-id';
 import { ServerResponseService } from '../../core/services/server-response.service';
 import { SignpostingDataService } from '../../core/data/signposting-data.service';
@@ -23,6 +22,7 @@ import { isNotEmpty } from '../../shared/empty.util';
 import { LinkDefinition, LinkHeadService } from '../../core/services/link-head.service';
 import { CrisLayoutTab } from '../../core/layout/models/tab.model';
 import { PaginatedList } from '../../core/data/paginated-list.model';
+import { SiteAuthorizationService } from '../../core/data/feature-authorization/site-authorization.service';
 
 /**
  * This component renders a simple item page.
@@ -80,7 +80,7 @@ export class ItemPageComponent implements OnInit, OnDestroy {
     protected router: Router,
     protected items: ItemDataService,
     protected authService: AuthService,
-    protected authorizationService: AuthorizationDataService,
+    protected siteAuthorizationService: SiteAuthorizationService,
     protected responseService: ServerResponseService,
     protected signpostingDataService: SignpostingDataService,
     protected linkHeadService: LinkHeadService,
@@ -106,7 +106,7 @@ export class ItemPageComponent implements OnInit, OnDestroy {
       map((item) => getItemPageRoute(item))
     );
 
-    this.isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf);
+    this.isAdmin$ = this.siteAuthorizationService.getSiteAuthorization(FeatureID.AdministratorOf);
 
   }
 

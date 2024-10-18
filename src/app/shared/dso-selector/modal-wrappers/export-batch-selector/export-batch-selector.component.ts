@@ -18,8 +18,8 @@ import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
 import { Process } from '../../../../process-page/processes/process.model';
 import { RemoteData } from '../../../../core/data/remote-data';
 import { getProcessDetailRoute } from '../../../../process-page/process-page-routing.paths';
-import { AuthorizationDataService } from '../../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../../core/data/feature-authorization/feature-id';
+import { SiteAuthorizationService } from '../../../../core/data/feature-authorization/site-authorization.service';
 
 /**
  * Component to wrap a list of existing dso's inside a modal
@@ -38,7 +38,7 @@ export class ExportBatchSelectorComponent extends DSOSelectorModalWrapperCompone
   constructor(protected activeModal: NgbActiveModal, protected route: ActivatedRoute, private router: Router,
               protected notificationsService: NotificationsService, protected translationService: TranslateService,
               protected scriptDataService: ScriptDataService,
-              protected authorizationDataService: AuthorizationDataService,
+              protected siteAuthorizationDataService: SiteAuthorizationService,
               private modalService: NgbModal) {
     super(activeModal, route);
   }
@@ -86,7 +86,7 @@ export class ExportBatchSelectorComponent extends DSOSelectorModalWrapperCompone
       Object.assign(new ProcessParameter(), { name: '--id', value: dso.uuid }),
       Object.assign(new ProcessParameter(), { name: '--type', value: 'COLLECTION' })
     ];
-    return this.authorizationDataService.isAuthorized(FeatureID.AdministratorOf).pipe(
+    return this.siteAuthorizationDataService.getSiteAuthorization(FeatureID.AdministratorOf).pipe(
       switchMap(() => {
         return this.scriptDataService.invoke(BATCH_EXPORT_SCRIPT_NAME, parameterValues, []);
       }),

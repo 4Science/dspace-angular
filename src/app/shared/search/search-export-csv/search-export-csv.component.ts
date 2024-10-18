@@ -4,7 +4,6 @@ import { ScriptDataService } from '../../../core/data/processes/script-data.serv
 import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { map } from 'rxjs/operators';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
-import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { hasValue, isNotEmpty } from '../../empty.util';
 import { RemoteData } from '../../../core/data/remote-data';
 import { Process } from '../../../process-page/processes/process.model';
@@ -13,6 +12,7 @@ import { NotificationsService } from '../../notifications/notifications.service'
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { PaginatedSearchOptions } from '../models/paginated-search-options.model';
+import { SiteAuthorizationService } from '../../../core/data/feature-authorization/site-authorization.service';
 
 @Component({
   selector: 'ds-search-export-csv',
@@ -39,11 +39,12 @@ export class SearchExportCsvComponent implements OnInit {
    */
   tooltipMsg = 'metadata-export-search.tooltip';
 
-  constructor(private scriptDataService: ScriptDataService,
-              private authorizationDataService: AuthorizationDataService,
-              private notificationsService: NotificationsService,
-              private translateService: TranslateService,
-              private router: Router
+  constructor(
+    private scriptDataService: ScriptDataService,
+    private siteAuthorizationDataService: SiteAuthorizationService,
+    private notificationsService: NotificationsService,
+    private translateService: TranslateService,
+    private router: Router
   ) {
   }
 
@@ -53,7 +54,7 @@ export class SearchExportCsvComponent implements OnInit {
       map((rd) => rd.isSuccess && hasValue(rd.payload))
     );
 
-    const isAuthorized$ = this.authorizationDataService.isAuthorized(FeatureID.AdministratorOf);
+    const isAuthorized$ = this.siteAuthorizationDataService.getSiteAuthorization(FeatureID.AdministratorOf);
 
     this.shouldShowButton$ = observableCombineLatest([scriptExists$, isAuthorized$]).pipe(
       map(([scriptExists, isAuthorized]: [boolean, boolean]) => scriptExists && isAuthorized)
