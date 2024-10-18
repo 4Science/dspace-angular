@@ -41,7 +41,10 @@ import { MetadataLinkViewPopoverDataConfig } from './metadata-link-view-popoverd
 import { IdentifierSubtypesConfig, IdentifierSubtypesIconPositionEnum } from './identifier-subtypes-config.interface';
 import { DatadogRumConfig } from './datadog-rum-config.interfaces';
 import { FeatureID } from '../app/core/data/feature-authorization/feature-id';
-import { AuthorizationFeaturesConfig } from '../app/core/data/feature-authorization/authorization-config.interfaces';
+import {
+  AuthorizationFeaturesConfig,
+  DiscoveryConfigurationFeaturesConfig
+} from '../app/core/data/feature-authorization/authorization-config.interfaces';
 
 export class DefaultAppConfig implements AppConfig {
   production = false;
@@ -138,23 +141,32 @@ export class DefaultAppConfig implements AppConfig {
     }
   };
 
-  authorizationFeaturesConfig: AuthorizationFeaturesConfig = {
-    site : [
-      FeatureID.AdministratorOf,
-      FeatureID.IsCommunityAdmin,
-      FeatureID.IsCollectionAdmin,
-      FeatureID.EPersonRegistration,
-      FeatureID.CanManageGroups,
-      FeatureID.CanChangePassword,
-      FeatureID.CanViewUsageStatistics,
-      FeatureID.CanViewLoginStatistics,
-      FeatureID.CanViewWorkflowStatistics,
-      FeatureID.CanSendFeedback,
-      FeatureID.CanEditItem,
-      FeatureID.EPersonForgotPassword,
-      FeatureID.CanCorrectItem,
-    ]
-  };
+  siteAuthorizationFeaturesConfig: FeatureID[] = [
+    FeatureID.AdministratorOf,
+    FeatureID.IsCommunityAdmin,
+    FeatureID.IsCollectionAdmin,
+    FeatureID.EPersonRegistration,
+    FeatureID.CanManageGroups,
+    FeatureID.CanChangePassword,
+    FeatureID.CanViewUsageStatistics,
+    FeatureID.CanViewLoginStatistics,
+    FeatureID.CanViewWorkflowStatistics,
+    FeatureID.CanSendFeedback,
+    FeatureID.CanEditItem,
+    FeatureID.EPersonForgotPassword,
+    FeatureID.CanCorrectItem,
+  ];
+
+  discoveryAuthorizationFeaturesConfig: DiscoveryConfigurationFeaturesConfig = {
+    'workspace': {
+      'Workspace': [
+        FeatureID.CanEditItem
+      ]
+    },
+    default: {
+
+    }
+  }
 
   // Form settings
   form: FormConfig = {

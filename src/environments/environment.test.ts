@@ -5,6 +5,9 @@ import { NotificationAnimationsType } from '../app/shared/notifications/models/n
 import { AdvancedAttachmentElementType } from '../config/advanced-attachment-rendering.config';
 import { IdentifierSubtypesIconPositionEnum } from 'src/config/identifier-subtypes-config.interface';
 import { FeatureID } from '../app/core/data/feature-authorization/feature-id';
+import {
+  DiscoveryConfigurationFeaturesConfig
+} from "../app/core/data/feature-authorization/authorization-config.interfaces";
 
 export const environment: BuildConfig = {
   production: false,
@@ -94,21 +97,30 @@ export const environment: BuildConfig = {
     },
   },
 
-  authorizationFeaturesConfig: {
-    site : [
-      FeatureID.AdministratorOf,
-      FeatureID.IsCommunityAdmin,
-      FeatureID.IsCollectionAdmin,
-      FeatureID.EPersonRegistration,
-      FeatureID.CanManageGroups,
-      FeatureID.CanChangePassword,
-      FeatureID.CanViewUsageStatistics,
-      FeatureID.CanViewLoginStatistics,
-      FeatureID.CanViewWorkflowStatistics,
-      FeatureID.CanSendFeedback,
-      FeatureID.CanEditItem,
-      FeatureID.EPersonForgotPassword,
-    ]
+  siteAuthorizationFeaturesConfig : [
+    FeatureID.AdministratorOf,
+    FeatureID.IsCommunityAdmin,
+    FeatureID.IsCollectionAdmin,
+    FeatureID.EPersonRegistration,
+    FeatureID.CanManageGroups,
+    FeatureID.CanChangePassword,
+    FeatureID.CanViewUsageStatistics,
+    FeatureID.CanViewLoginStatistics,
+    FeatureID.CanViewWorkflowStatistics,
+    FeatureID.CanSendFeedback,
+    FeatureID.CanEditItem,
+    FeatureID.EPersonForgotPassword,
+  ],
+
+  discoveryAuthorizationFeaturesConfig: {
+    'workspace': {
+      'Workspace': [
+        FeatureID.CanEditItem
+      ]
+    },
+    default: {
+
+    }
   },
 
   // Form settings

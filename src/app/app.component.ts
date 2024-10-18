@@ -100,7 +100,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.storeCSSVariables();
 
     this.socialService.initialize();
-
     this.siteAuthorizationService.getAllSiteAuthorizations();
   }
 

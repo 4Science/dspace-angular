@@ -4,7 +4,7 @@ import { AuthorizationsState } from './authorization-config.interfaces';
 
 const initialState = Object.create(null);
 
-export function authorizationReducer(storeState = initialState, action: AuthorizationAction): AuthorizationsState {
+export function siteAuthorizationReducer(storeState = initialState, action: AuthorizationAction): AuthorizationsState {
   switch (action.type) {
 
     case AuthorizationActionTypes.CONFIGURE_SITE_AUTHORIZATIONS: {

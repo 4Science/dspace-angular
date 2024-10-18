@@ -5,6 +5,11 @@ export interface AuthorizationFeaturesConfig {
   [key: string]: FeatureID[]
 }
 
+export interface DiscoveryConfigurationFeaturesConfig {
+  [key: string]: AuthorizationFeaturesConfig
+}
+
+
 export interface AuthorizationsState {
   [key: string]: AuthorizationFeaturesMap;
 }

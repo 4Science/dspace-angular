@@ -28,6 +28,7 @@ import { IDENTIFIERS } from '../../shared/object-list/identifier-data/identifier
 import { IdentifierData } from '../../shared/object-list/identifier-data/identifier-data.model';
 import { Metric } from './metric.model';
 import { METRIC } from './metric.resource-type';
+import { FeatureID } from "../data/feature-authorization/feature-id";
 
 /**
  * Class representing a DSpace Item
@@ -151,7 +152,13 @@ export class Item extends DSpaceObject implements ChildHALResource, HandleObject
   /**
    * Manually set property for thumbnail authorization
    */
-  userCanDownloadThumbnail: boolean;
+  canDownload: boolean;
+
+  /**
+   * List of configured authorizations for the current user.
+   * The authorizations are configured based on the discovery configuration and on the item entity type
+   */
+  userAuthorizations: FeatureID[]
 
   /**
    * Method that returns as which type of object this object should be rendered
