@@ -1,8 +1,8 @@
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthorizationDataService } from '../data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../data/feature-authorization/feature-id';
 import { Injectable } from '@angular/core';
-import { SiteAuthorizationService } from '../data/feature-authorization/site-authorization.service';
 
 /**
  * An guard for redirecting users to the feedback page if user is authorized
@@ -10,11 +10,11 @@ import { SiteAuthorizationService } from '../data/feature-authorization/site-aut
 @Injectable()
 export class FeedbackGuard implements CanActivate {
 
-  constructor(private siteAuthorizationService: SiteAuthorizationService) {
+  constructor(private authorizationService: AuthorizationDataService) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
-    return this.siteAuthorizationService.getSiteAuthorization(FeatureID.CanSendFeedback);
+    return this.authorizationService.isAuthorized(FeatureID.CanSendFeedback);
   }
 
 }

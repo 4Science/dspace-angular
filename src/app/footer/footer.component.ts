@@ -3,13 +3,13 @@ import { hasValue, isEmpty } from '../shared/empty.util';
 import { KlaroService } from '../shared/cookies/klaro.service';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
+import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../core/data/feature-authorization/feature-id';
 import { take } from 'rxjs/operators';
 import { Site } from '../core/shared/site.model';
 import { SiteDataService } from '../core/data/site-data.service';
 import { TextRowSection } from '../core/layout/models/section.model';
 import { LocaleService } from '../core/locale/locale.service';
-import { SiteAuthorizationService } from '../core/data/feature-authorization/site-authorization.service';
 
 @Component({
   selector: 'ds-footer',
@@ -41,14 +41,14 @@ export class FooterComponent implements OnInit {
 
   constructor(
     @Optional() private cookies: KlaroService,
-    private siteAuthorizationService: SiteAuthorizationService,
+    private authorizationService: AuthorizationDataService,
     private locale: LocaleService,
     private siteService: SiteDataService
   ) {
   }
 
   ngOnInit() {
-    this.showSendFeedback$ = this.siteAuthorizationService.getSiteAuthorization(FeatureID.CanSendFeedback);
+    this.showSendFeedback$ = this.authorizationService.isAuthorized(FeatureID.CanSendFeedback);
     this.section = {
       content: 'cris.cms.footer',
       contentType: 'text-metadata',

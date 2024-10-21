@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import {
   BehaviorSubject,
@@ -37,7 +38,6 @@ import { NoContent } from '../../core/shared/NoContent.model';
 import { PaginationService } from '../../core/pagination/pagination.service';
 import { followLink } from '../../shared/utils/follow-link-config.model';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
-import { SiteAuthorizationService } from '../../core/data/feature-authorization/site-authorization.service';
 
 @Component({
   selector: 'ds-groups-registry',
@@ -95,20 +95,18 @@ export class GroupsRegistryComponent implements OnInit, OnDestroy {
    */
   subs: Subscription[] = [];
 
-  constructor(
-    public groupService: GroupDataService,
-    private ePersonDataService: EPersonDataService,
-    private dSpaceObjectDataService: DSpaceObjectDataService,
-    private translateService: TranslateService,
-    private notificationsService: NotificationsService,
-    private formBuilder: UntypedFormBuilder,
-    protected routeService: RouteService,
-    private authorizationService: AuthorizationDataService,
-    private siteAuthorizationService: SiteAuthorizationService,
-    private paginationService: PaginationService,
-    public requestService: RequestService,
-    public dsoNameService: DSONameService,
-    ) {
+  constructor(public groupService: GroupDataService,
+              private ePersonDataService: EPersonDataService,
+              private dSpaceObjectDataService: DSpaceObjectDataService,
+              private translateService: TranslateService,
+              private notificationsService: NotificationsService,
+              private formBuilder: UntypedFormBuilder,
+              protected routeService: RouteService,
+              private router: Router,
+              private authorizationService: AuthorizationDataService,
+              private paginationService: PaginationService,
+              public requestService: RequestService,
+              public dsoNameService: DSONameService,) {
     this.currentSearchQuery = '';
     this.searchForm = this.formBuilder.group(({
       query: this.currentSearchQuery,
@@ -147,7 +145,7 @@ export class GroupsRegistryComponent implements OnInit, OnDestroy {
         if (groups.page.length === 0) {
           return observableOf(buildPaginatedList(groups.pageInfo, []));
         }
-        return this.siteAuthorizationService.getSiteAuthorization(FeatureID.AdministratorOf).pipe(
+        return this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(
           switchMap((isSiteAdmin: boolean) => {
             return observableCombineLatest([...groups.page.map((group: Group) => {
               if (hasValue(group) && !this.deletedGroupsIds.includes(group.id)) {
