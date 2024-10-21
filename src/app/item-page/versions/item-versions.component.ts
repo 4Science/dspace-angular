@@ -50,7 +50,6 @@ import { WorkflowItemDataService } from '../../core/submission/workflowitem-data
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
 import { RenderCrisLayoutBoxFor } from '../../cris-layout/decorators/cris-layout-box.decorator';
 import { LayoutBox } from '../../cris-layout/enums/layout-box.enum';
-import { SiteAuthorizationService } from '../../core/data/feature-authorization/site-authorization.service';
 
 
 @RenderCrisLayoutBoxFor(LayoutBox.VERSIONING)
@@ -179,7 +178,6 @@ export class ItemVersionsComponent implements OnDestroy, OnInit {
               private router: Router,
               private itemVersionShared: ItemVersionsSharedService,
               private authorizationService: AuthorizationDataService,
-              private siteAuthorizationService: SiteAuthorizationService,
               private workspaceItemDataService: WorkspaceitemDataService,
               private workflowItemDataService: WorkflowItemDataService,
               private configurationService: ConfigurationDataService,
@@ -396,9 +394,9 @@ export class ItemVersionsComponent implements OnDestroy, OnInit {
     );
 
     const isAdmin$ = combineLatest([
-      this.siteAuthorizationService.getSiteAuthorization(FeatureID.IsCollectionAdmin),
-      this.siteAuthorizationService.getSiteAuthorization(FeatureID.IsCommunityAdmin),
-      this.siteAuthorizationService.getSiteAuthorization(FeatureID.AdministratorOf),
+      this.authorizationService.isAuthorized(FeatureID.IsCollectionAdmin),
+      this.authorizationService.isAuthorized(FeatureID.IsCommunityAdmin),
+      this.authorizationService.isAuthorized(FeatureID.AdministratorOf),
     ]).pipe(
       map(([isCollectionAdmin, isCommunityAdmin, isSiteAdmin]) => {
         return isCollectionAdmin || isCommunityAdmin || isSiteAdmin;

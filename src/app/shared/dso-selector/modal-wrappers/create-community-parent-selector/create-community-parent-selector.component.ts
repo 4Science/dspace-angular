@@ -16,7 +16,7 @@ import { SortDirection, SortOptions } from '../../../../core/cache/models/sort-o
 import { environment } from '../../../../../environments/environment';
 import { Observable } from 'rxjs/internal/Observable';
 import { FeatureID } from '../../../../core/data/feature-authorization/feature-id';
-import { SiteAuthorizationService } from '../../../../core/data/feature-authorization/site-authorization.service';
+import { AuthorizationDataService } from '../../../../core/data/feature-authorization/authorization-data.service';
 
 /**
  * Component to wrap a button - for top communities -
@@ -38,17 +38,12 @@ export class CreateCommunityParentSelectorComponent extends DSOSelectorModalWrap
   configuration = 'editCommunity';
   isAdmin$: Observable<boolean>;
 
-  constructor(
-    protected activeModal: NgbActiveModal,
-    protected route: ActivatedRoute,
-    private router: Router,
-    protected siteAuthorizationService: SiteAuthorizationService
-  ) {
+  constructor(protected activeModal: NgbActiveModal, protected route: ActivatedRoute, private router: Router, protected authorizationService: AuthorizationDataService) {
     super(activeModal, route);
   }
 
   ngOnInit() {
-    this.isAdmin$ = this.siteAuthorizationService.getSiteAuthorization(FeatureID.AdministratorOf);
+    this.isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf);
   }
 
   /**

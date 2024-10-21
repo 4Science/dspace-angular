@@ -9,12 +9,12 @@ import { SearchOptions } from '../../models/search-options.model';
 import { ItemExportComponent } from '../item-export/item-export.component';
 import { AuthService } from '../../../../core/auth/auth.service';
 import { ItemExportFormatMolteplicity } from '../../../../core/itemexportformat/item-export-format.service';
+import { AuthorizationDataService } from '../../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../../core/data/feature-authorization/feature-id';
 import { ConfigurationDataService } from '../../../../core/data/configuration-data.service';
 import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
 import { isNotEmpty } from '../../../empty.util';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap/modal/modal-config';
-import { SiteAuthorizationService } from '../../../../core/data/feature-authorization/site-authorization.service';
 
 export const BULK_EXPORT_LIMIT_ADMIN = 'bulk-export.limit.admin';
 export const BULK_EXPORT_LIMIT_LOGGEDIN = 'bulk-export.limit.loggedIn';
@@ -36,7 +36,7 @@ export class ItemExportModalLauncherComponent implements OnInit {
 
   constructor(private modalService: NgbModal,
               private authService: AuthService,
-              private siteAuthorizationService: SiteAuthorizationService,
+              private authorizationService: AuthorizationDataService,
               private configService: ConfigurationDataService,
               private viewContainerRef: ViewContainerRef) { }
 
@@ -107,7 +107,7 @@ export class ItemExportModalLauncherComponent implements OnInit {
    * Return if the user is admin
    */
   isCurrentUserAdmin(): Observable<boolean> {
-    return this.siteAuthorizationService.getSiteAuthorization(FeatureID.AdministratorOf);
+    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf, undefined, undefined);
   }
 
   /**

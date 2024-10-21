@@ -14,11 +14,11 @@ import { hasValue, isNotEmpty } from '../shared/empty.util';
 import { followLink } from '../shared/utils/follow-link-config.model';
 import { AuthService } from '../core/auth/auth.service';
 import { Operation } from 'fast-json-patch';
+import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../core/data/feature-authorization/feature-id';
 import { ConfigurationDataService } from '../core/data/configuration-data.service';
 import { ConfigurationProperty } from '../core/shared/configuration-property.model';
 import { DSONameService } from '../core/breadcrumbs/dso-name.service';
-import { SiteAuthorizationService } from '../core/data/feature-authorization/site-authorization.service';
 
 @Component({
   selector: 'ds-profile-page',
@@ -81,14 +81,13 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
 
   isResearcherProfileEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(
-    private authService: AuthService,
-    private notificationsService: NotificationsService,
-    private translate: TranslateService,
-    private epersonService: EPersonDataService,
-    private siteAuthorizationService: SiteAuthorizationService,
-    private configurationService: ConfigurationDataService,
-    public dsoNameService: DSONameService,
+  constructor(private authService: AuthService,
+              private notificationsService: NotificationsService,
+              private translate: TranslateService,
+              private epersonService: EPersonDataService,
+              private authorizationService: AuthorizationDataService,
+              private configurationService: ConfigurationDataService,
+              public dsoNameService: DSONameService,
   ) {
   }
 
@@ -101,7 +100,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
       tap((user: EPerson) => this.currentUser = user)
     );
     this.groupsRD$ = this.user$.pipe(switchMap((user: EPerson) => user.groups));
-    this.canChangePassword$ = this.user$.pipe(switchMap((user: EPerson) => this.siteAuthorizationService.getSiteAuthorization(FeatureID.CanChangePassword)));
+    this.canChangePassword$ = this.user$.pipe(switchMap((user: EPerson) => this.authorizationService.isAuthorized(FeatureID.CanChangePassword, user._links.self.href)));
     this.specialGroupsRD$ = this.authService.getSpecialGroupsFromAuthStatus();
 
     this.configurationService.findByPropertyName('researcher-profile.entity-type').pipe(

@@ -10,7 +10,7 @@ import { redirectOn204, redirectOn4xx } from '../core/shared/authorized.operator
 import { fadeInOut } from '../shared/animations/fade';
 import { AuthService } from '../core/auth/auth.service';
 import { FeatureID } from '../core/data/feature-authorization/feature-id';
-import { SiteAuthorizationService } from '../core/data/feature-authorization/site-authorization.service';
+import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
 
 /**
  * This component is the entry point for the page that renders items.
@@ -31,11 +31,10 @@ export class CrisItemPageComponent implements OnInit {
   itemRD$: Observable<RemoteData<Item>>;
 
   constructor(
-    private siteAuthorizationService: SiteAuthorizationService,
+    private authorizationService: AuthorizationDataService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router
-  ) { }
+    private router: Router) { }
 
   ngOnInit() {
     this.itemRD$ = this.route.data.pipe(
@@ -46,7 +45,7 @@ export class CrisItemPageComponent implements OnInit {
       redirectOn4xx<Item>(this.router, this.authService)
     );
 
-    this.isAdmin$ = this.siteAuthorizationService.getSiteAuthorization(FeatureID.AdministratorOf);
+    this.isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf);
   }
 
 }
