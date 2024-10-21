@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription, combineLatest, BehaviorSubject } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { Observable, Subscription, combineLatest } from 'rxjs';
+import { filter, map, shareReplay } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import uniqBy from 'lodash/uniqBy';
 
@@ -18,7 +18,7 @@ import { CoreState } from '../../core/core-state.model';
 import { rendersAuthMethodType } from './methods/log-in.methods-decorator';
 import { AuthMethodType } from '../../core/auth/models/auth.method-type';
 import { FeatureID } from '../../core/data/feature-authorization/feature-id';
-import { SiteAuthorizationService } from '../../core/data/feature-authorization/site-authorization.service';
+import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 
 @Component({
   selector: 'ds-log-in',
@@ -64,29 +64,29 @@ export class LogInComponent implements OnInit, OnDestroy {
   /**
    * Whether or not the current user (or anonymous) is authorized to register an account
    */
-  canRegister$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  canRegister$: Observable<boolean>;
 
   /**
    * Whether or not the current user (or anonymous) is authorized to register an account
    */
-  canForgot$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  canForgot$: Observable<boolean>;
 
   /**
    * Shows the divider only if contains at least one link to show
    */
-  canShowDivider$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  canShowDivider$: Observable<boolean>;
 
   /**
-   * Track subscriptions to unsubscribe on destroy
+   * Track subscription to unsubscribe on destroy
    * @private
    */
-  private subs: Subscription[] = [];
+  private authErrorSubscription: Subscription;
 
-  constructor(
-    private store: Store<CoreState>,
-    private authService: AuthService,
-    protected siteAuthorizationService: SiteAuthorizationService
-  ) {}
+  constructor(private store: Store<CoreState>,
+              private authService: AuthService,
+              protected authorizationService: AuthorizationDataService
+  ) {
+  }
 
   ngOnInit(): void {
     this.authMethods = this.store.pipe(
@@ -108,25 +108,21 @@ export class LogInComponent implements OnInit, OnDestroy {
     this.isAuthenticated = this.store.pipe(select(isAuthenticated));
 
     // Clear the redirect URL if an authentication error occurs and this is not a standalone page
-    this.subs.push(
-      this.store.pipe(select(getAuthenticationError)).subscribe((error) => {
-        if (hasValue(error) && !this.isStandalonePage) {
-          this.authService.clearRedirectUrl();
-        }
-      })
-    );
+    this.authErrorSubscription = this.store.pipe(select(getAuthenticationError)).subscribe((error) => {
+      if (hasValue(error) && !this.isStandalonePage) {
+        this.authService.clearRedirectUrl();
+      }
+    });
 
-    this.subs.push(
-      combineLatest([
-        this.siteAuthorizationService.getSiteAuthorization(FeatureID.EPersonForgotPassword),
-        this.siteAuthorizationService.getSiteAuthorization(FeatureID.EPersonRegistration),
-        ]
-      ).pipe(shareReplay(1)).subscribe(([canForgot, canRegister]) => {
-        this.canForgot$.next(canForgot);
-        this.canRegister$.next(canRegister);
-        this.canShowDivider$.next(canForgot || canRegister);
-      })
-    );
+    this.canRegister$ = this.authorizationService.isAuthorized(FeatureID.EPersonRegistration);
+
+    this.canForgot$ = this.authorizationService.isAuthorized(FeatureID.EPersonForgotPassword).pipe(shareReplay(1));
+    this.canShowDivider$ =
+      combineLatest([this.canRegister$, this.canForgot$])
+        .pipe(
+          map(([canRegister, canForgot]) => canRegister || canForgot),
+          filter(Boolean)
+        );
   }
 
   getRegisterRoute() {
@@ -138,8 +134,8 @@ export class LogInComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (hasValue(this.subs) && this.subs.length) {
-      this.subs.forEach(sub => sub.unsubscribe());
+    if (hasValue(this.authErrorSubscription)) {
+      this.authErrorSubscription.unsubscribe();
     }
   }
 }

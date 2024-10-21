@@ -55,15 +55,7 @@ import { NOTIFICATIONS_RECITER_SUGGESTION_PATH } from './admin/admin-notificatio
 import { isPlatformBrowser } from '@angular/common';
 import { ConfigurationDataService } from './core/data/configuration-data.service';
 import { ConfigurationProperty } from './core/shared/configuration-property.model';
-import { SiteDataService } from './core/data/site-data.service';
-import { AuthorizationFeaturesMap } from './core/shared/authorization.model';
-import { SiteAuthorizationService } from './core/data/feature-authorization/site-authorization.service';
 
-
-export interface MenuResolverAuthorization {
-  itemUuid: string,
-  siteUuid: string
-}
 /**
  * Creates all the app's menus
  */
@@ -83,8 +75,6 @@ export class MenuResolver implements Resolve<boolean> {
     protected scriptDataService: ScriptDataService,
     protected sectionDataService: SectionDataService,
     protected configService: ConfigurationDataService,
-    protected siteDataService: SiteDataService,
-    protected siteAuthorizationService: SiteAuthorizationService
   ) {
   }
 
@@ -194,17 +184,12 @@ export class MenuResolver implements Resolve<boolean> {
   }
 
   createStatisticsMenu() {
-    this.getAuthorizationFeaturesMap(
-      [
-        FeatureID.CanViewUsageStatistics,
-        FeatureID.CanViewLoginStatistics,
-        FeatureID.CanViewWorkflowStatistics
-      ]
-    ).pipe(take(1)).subscribe((authorizationMap) => {
-      const canViewUsage = authorizationMap[FeatureID.CanViewUsageStatistics];
-      const canViewLogin = authorizationMap[FeatureID.CanViewLoginStatistics];
-      const canViewWorkflow = authorizationMap[FeatureID.CanViewWorkflowStatistics];
-
+    this.activatedRouteLastChild = this.getActivatedRoute(this.route);
+    observableCombineLatest([
+      this.getAuthorizedUsageStatistics(),
+      this.getAuthorizedLoginStatistics(),
+      this.getAuthorizedWorkflowStatistics()
+    ]).pipe(take(1)).subscribe(([canViewUsage, canViewLogin, canViewWorkflow]) => {
       const menuList = [];
       if (canViewUsage || canViewLogin || canViewWorkflow) {
         if (canViewUsage) {
@@ -287,19 +272,13 @@ export class MenuResolver implements Resolve<boolean> {
    * edit_community / edit_collection is only included if the current user is a Community or Collection admin
    */
   createMainMenuSections() {
-    this.getAuthorizationFeaturesMap(
-      [
-        FeatureID.IsCollectionAdmin,
-        FeatureID.IsCommunityAdmin,
-        FeatureID.AdministratorOf,
-        FeatureID.CanEditItem,
-      ]
-    ).pipe(take(1)).subscribe((authorizationMap) => {
-      const isCollectionAdmin = authorizationMap[FeatureID.IsCollectionAdmin];
-      const isCommunityAdmin = authorizationMap[FeatureID.IsCommunityAdmin];
-      const isSiteAdmin = authorizationMap[FeatureID.AdministratorOf];
-      const canEditItem = authorizationMap[FeatureID.CanEditItem];
-
+    observableCombineLatest([
+      this.authorizationService.isAuthorized(FeatureID.IsCollectionAdmin),
+      this.authorizationService.isAuthorized(FeatureID.IsCommunityAdmin),
+      this.authorizationService.isAuthorized(FeatureID.AdministratorOf),
+      this.authorizationService.isAuthorized(FeatureID.CanSubmit),
+      this.authorizationService.isAuthorized(FeatureID.CanEditItem),
+    ]).subscribe(([isCollectionAdmin, isCommunityAdmin, isSiteAdmin, canSubmit, canEditItem]) => {
       const newSubMenuList = [
         /* Communities and Collections */
         {
@@ -570,17 +549,13 @@ export class MenuResolver implements Resolve<boolean> {
     ];
     menuList.forEach((menuSection) => this.menuService.addSection(MenuID.ADMIN, menuSection));
 
-    this.getAuthorizationFeaturesMap(
-      [
-        FeatureID.AdministratorOf,
-        FeatureID.IsCommunityAdmin,
-        FeatureID.IsCollectionAdmin
-      ]
-    ).pipe(
-      filter((authorizationMap) =>
-        authorizationMap[FeatureID.AdministratorOf] ||
-        authorizationMap[FeatureID.IsCommunityAdmin] ||
-        authorizationMap[FeatureID.IsCollectionAdmin]
+    observableCombineLatest([
+      this.authorizationService.isAuthorized(FeatureID.AdministratorOf),
+      this.authorizationService.isAuthorized(FeatureID.IsCommunityAdmin),
+      this.authorizationService.isAuthorized(FeatureID.IsCollectionAdmin),
+    ]).pipe(
+      filter(([isAdmin, isCommunityAdmin, isCollectionAdmin]) =>
+        isAdmin || isCollectionAdmin || isCommunityAdmin
       ),
       take(1),
       switchMap(() => this.scriptDataService.scriptWithNameExistsAndCanExecute(METADATA_EXPORT_SCRIPT_NAME)),
@@ -665,8 +640,7 @@ export class MenuResolver implements Resolve<boolean> {
    * Add the DL Exporter menu item to the admin menu
    */
   createDLExporterMenuItem() {
-    this.siteAuthorizationService.getSiteAuthorizationState().pipe(
-      map(state => state[FeatureID.AdministratorOf] ?? false),
+    this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(
       filter((authorized: boolean) => authorized),
       take(1),
       switchMap(() => observableCombineLatest([
@@ -708,17 +682,13 @@ export class MenuResolver implements Resolve<boolean> {
     const menuList = [];
     menuList.forEach((menuSection) => this.menuService.addSection(MenuID.ADMIN, menuSection));
 
-    this.getAuthorizationFeaturesMap(
-      [
-        FeatureID.AdministratorOf,
-        FeatureID.IsCommunityAdmin,
-        FeatureID.IsCollectionAdmin
-      ]
-    ).pipe(
-      filter((authorizationMap) =>
-        authorizationMap[FeatureID.AdministratorOf] ||
-        authorizationMap[FeatureID.IsCommunityAdmin] ||
-        authorizationMap[FeatureID.IsCollectionAdmin]
+    observableCombineLatest([
+      this.authorizationService.isAuthorized(FeatureID.AdministratorOf),
+      this.authorizationService.isAuthorized(FeatureID.IsCommunityAdmin),
+      this.authorizationService.isAuthorized(FeatureID.IsCollectionAdmin),
+    ]).pipe(
+      filter(([isAdmin, isCommunityAdmin, isCollectionAdmin]) =>
+        isAdmin || isCollectionAdmin || isCommunityAdmin
       ),
       take(1),
       switchMap(() => this.scriptDataService.scriptWithNameExistsAndCanExecute(METADATA_IMPORT_SCRIPT_NAME)),
@@ -771,9 +741,7 @@ export class MenuResolver implements Resolve<boolean> {
    * Create menu sections dependent on whether or not the current user is a site administrator
    */
   createSiteAdministratorMenuSections() {
-    this.siteAuthorizationService.getSiteAuthorizationState().pipe(
-      map(state => state[FeatureID.AdministratorOf] ?? false)
-    ).subscribe((authorized) => {
+    this.authorizationService.isAuthorized(FeatureID.AdministratorOf).subscribe((authorized) => {
       const menuList = [
         /* Communities & Collections */
         {
@@ -934,15 +902,10 @@ export class MenuResolver implements Resolve<boolean> {
    * Create menu sections dependent on whether or not the current user can manage access control groups
    */
   createAccessControlMenuSections() {
-    this.getAuthorizationFeaturesMap(
-      [
-        FeatureID.AdministratorOf,
-        FeatureID.CanManageGroups,
-      ]
-    ).pipe(take(1)).subscribe((authorizationFeaturesMap) => {
-      const isSiteAdmin = authorizationFeaturesMap[FeatureID.AdministratorOf];
-      const canManageGroups = authorizationFeaturesMap[FeatureID.CanManageGroups];
-
+    observableCombineLatest([
+      this.authorizationService.isAuthorized(FeatureID.AdministratorOf),
+      this.authorizationService.isAuthorized(FeatureID.CanManageGroups)
+    ]).subscribe(([isSiteAdmin, canManageGroups]) => {
       const menuList = [
         /* Access Control */
         {
@@ -1021,6 +984,48 @@ export class MenuResolver implements Resolve<boolean> {
   }
 
   /**
+   *  Checking authorization for Usage
+   */
+  getAuthorizedUsageStatistics() {
+    return this.activatedRouteLastChild.data.pipe(
+      switchMap((data) => {
+        return this.authorizationService.isAuthorized(FeatureID.CanViewUsageStatistics, this.getObjectUrl(data)).pipe(
+          map((canViewUsageStatistics: boolean) => {
+            return canViewUsageStatistics;
+          }));
+      })
+    );
+  }
+
+  /**
+   *  Checking authorization for Login
+   */
+  getAuthorizedLoginStatistics() {
+    return this.activatedRouteLastChild.data.pipe(
+      switchMap((data) => {
+        return this.authorizationService.isAuthorized(FeatureID.CanViewLoginStatistics, this.getObjectUrl(data)).pipe(
+          map((canViewLoginStatistics: boolean) => {
+            return canViewLoginStatistics;
+          }));
+      })
+    );
+  }
+
+  /**
+   *  Checking authorization for Workflow
+   */
+  getAuthorizedWorkflowStatistics() {
+    return this.activatedRouteLastChild.data.pipe(
+      switchMap((data) => {
+        return this.authorizationService.isAuthorized(FeatureID.CanViewWorkflowStatistics, this.getObjectUrl(data)).pipe(
+          map((canViewWorkflowStatistics: boolean) => {
+            return canViewWorkflowStatistics;
+          }));
+      })
+    );
+  }
+
+  /**
    *  Get statistics route dso data
    */
   getObjectUrl(data) {
@@ -1032,7 +1037,7 @@ export class MenuResolver implements Resolve<boolean> {
    * Get the DL Exporter URL from the configuration
    */
   getDLExporterURL(): Observable<string> {
-   return this.configService.findByPropertyName('loginmiur.dlexporter.url').pipe(
+    return this.configService.findByPropertyName('loginmiur.dlexporter.url').pipe(
       getFirstCompletedRemoteData(),
       map((res: RemoteData<ConfigurationProperty>) => {
         return res?.payload?.values[0];
@@ -1045,54 +1050,6 @@ export class MenuResolver implements Resolve<boolean> {
       getFirstCompletedRemoteData(),
       map((res: RemoteData<ConfigurationProperty>) => {
         return res?.payload?.values[0];
-      })
-    );
-  }
-
-
-  /**
-   *  Get route dso uuid
-   */
-  private getObjectUuid(data): string {
-    return data.dso?.payload?.uuid;
-  }
-
-  private getItemAndSiteUuid(): Observable<MenuResolverAuthorization> {
-    this.activatedRouteLastChild = this.getActivatedRoute(this.route);
-    return observableCombineLatest([
-      this.activatedRouteLastChild.data,
-      this.siteDataService.find(),
-    ]).pipe(switchMap(([data, site]) => {
-      return of({
-        itemUuid: this.getObjectUuid(data),
-        siteUuid: site.uuid,
-      });
-    }));
-  }
-
-  /**
-   * Given the features id return a map of features authorizations for the user
-   * @private
-   * @param featuresId
-   */
-  private getAuthorizationFeaturesMap(featuresId: FeatureID[]): Observable<AuthorizationFeaturesMap> {
-    return this.getItemAndSiteUuid().pipe(
-      switchMap(menuAuth => {
-        const uuid = menuAuth.itemUuid || menuAuth.siteUuid;
-        const autorizations$ = menuAuth.itemUuid ? this.authorizationService.getAuthorizationForObjects(
-          [uuid],
-          featuresId,
-          'core.item'
-        ) : this.siteAuthorizationService.getSiteAuthorizationState();
-
-        return autorizations$.pipe(
-          map((authMap) => {
-            let mapToReturn = {} as AuthorizationFeaturesMap;
-            //Prevent undefined for compatibility with previous method interface
-            featuresId.forEach(id => authMap[id] ? (mapToReturn[id] = true) :  (mapToReturn[id] = false));
-            return mapToReturn;
-          })
-        );
       })
     );
   }

@@ -20,11 +20,8 @@ import { createPaginatedList } from './shared/testing/utils.test';
 import { SectionDataService } from './core/layout/section-data.service';
 import createSpy = jasmine.createSpy;
 import { ConfigurationDataService } from './core/data/configuration-data.service';
-import { SiteDataService } from './core/data/site-data.service';
-import { SiteAuthorizationService } from './core/data/feature-authorization/site-authorization.service';
 
 const BOOLEAN = { t: true, f: false };
-const SITE_ID = 'f92d103c-e4ad-4dfb-b59f-f90c7425407e';
 const MENU_STATE = {
   id: 'some menu'
 };
@@ -73,9 +70,6 @@ describe('MenuResolver', () => {
   let authorizationService;
   let scriptService;
   let configService;
-  let siteService;
-  let siteAuthorizationService;
-
 
   beforeEach(waitForAsync(() => {
     menuService = new MenuServiceStub();
@@ -86,21 +80,13 @@ describe('MenuResolver', () => {
       findVisibleSections: createSuccessfulRemoteDataObject$(createPaginatedList(EXPLORE_SECTIONS_DEFINITIONS))
     });
     authorizationService = jasmine.createSpyObj('authorizationService', {
-      isAuthorized: observableOf(true),
-      getAuthorizationForObjects: observableOf({})
+      isAuthorized: observableOf(true)
     });
     scriptService = jasmine.createSpyObj('scriptService', {
       scriptWithNameExistsAndCanExecute: observableOf(true)
     });
     configService = jasmine.createSpyObj('ConfigurationDataService', {
       findByPropertyName: observableOf({})
-    });
-    siteService = jasmine.createSpyObj('SiteDataService', {
-      find: observableOf(SITE_ID),
-    });
-
-    siteAuthorizationService = jasmine.createSpyObj('SiteAuthorizationService', {
-      getSiteAuthorizationState: observableOf({}),
     });
 
     TestBed.configureTestingModule({
@@ -112,14 +98,12 @@ describe('MenuResolver', () => {
         { provide: AuthorizationDataService, useValue: authorizationService },
         { provide: ScriptDataService, useValue: scriptService },
         { provide: ConfigurationDataService, useValue: configService },
-        { provide: SiteDataService, useValue: siteService },
         {
           provide: NgbModal, useValue: {
             open: () => {/*comment*/
             }
           }
-        },
-        { provide: SiteAuthorizationService, useValue: siteAuthorizationService },
+        }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
@@ -355,14 +339,6 @@ describe('MenuResolver', () => {
         authorizationService.isAuthorized = createSpy('isAuthorized').and.callFake((featureID) => {
           return observableOf(false);
         });
-
-        authorizationService.getAuthorizationForObjects = createSpy('getAuthorizationForObjects').and.callFake((_) => {
-          return observableOf({});
-        });
-
-        siteAuthorizationService.getSiteAuthorizationState = createSpy('getSiteAuthorizationState').and.callFake((_) => {
-          return observableOf({});
-        });
       });
 
       beforeEach((done) => {
@@ -376,17 +352,39 @@ describe('MenuResolver', () => {
       dontShowEditSection();
     });
 
+    describe('regular user who can submit', () => {
+      beforeEach(() => {
+        authorizationService.isAuthorized = createSpy('isAuthorized')
+          .and.callFake((featureID: FeatureID) => {
+            return observableOf(featureID === FeatureID.CanSubmit);
+          });
+      });
+
+      beforeEach((done) => {
+        resolver.createAdminMenu$().subscribe((_) => {
+          done();
+        });
+      });
+
+      it('should not show "New Item" section', () => {
+        expect(menuService.addSection).toHaveBeenCalledWith(MenuID.ADMIN, jasmine.objectContaining({
+          id: 'new_item', visible: false,
+        }));
+        expect(menuService.addSection).toHaveBeenCalledWith(MenuID.ADMIN, jasmine.objectContaining({
+          id: 'new', visible: false,
+        }));
+      });
+
+      dontShowAdminSections();
+      dontShowEditSection();
+    });
+
     describe('regular user who can edit items', () => {
       beforeEach(() => {
-        authorizationService.isAuthorized = createSpy('isAuthorized').and.callFake((featureID: FeatureID) => {
-          return observableOf(featureID === FeatureID.CanEditItem);
-        });
-        authorizationService.getAuthorizationForObjects = createSpy('getAuthorizationForObjects').and.callFake((_) => {
-          return observableOf({[FeatureID.CanEditItem]: true});
-        });
-        siteAuthorizationService.getSiteAuthorizationState = createSpy('getSiteAuthorizationState').and.callFake((_) => {
-          return observableOf({[FeatureID.CanEditItem]: true});
-        });
+        authorizationService.isAuthorized = createSpy('isAuthorized')
+          .and.callFake((featureID: FeatureID) => {
+            return observableOf(featureID === FeatureID.CanEditItem);
+          });
       });
 
       beforeEach((done) => {
@@ -413,14 +411,6 @@ describe('MenuResolver', () => {
         authorizationService.isAuthorized = createSpy('isAuthorized').and.callFake((featureID: FeatureID) => {
           return observableOf(featureID === FeatureID.AdministratorOf);
         });
-        authorizationService.getAuthorizationForObjects = createSpy('getAuthorizationForObjects').and.callFake((_) => {
-          return observableOf({[FeatureID.AdministratorOf]: true});
-        });
-
-        siteAuthorizationService.getSiteAuthorizationState = createSpy('getSiteAuthorizationState').and.callFake((_) => {
-          return observableOf({[FeatureID.AdministratorOf]: true});
-        });
-
       });
 
       beforeEach((done) => {
@@ -471,11 +461,8 @@ describe('MenuResolver', () => {
 
     describe('for community admin', () => {
       beforeEach(() => {
-        authorizationService.getAuthorizationForObjects = createSpy('getAuthorizationForObjects').and.callFake((_) => {
-          return observableOf({[FeatureID.IsCommunityAdmin]: true});
-        });
-        siteAuthorizationService.getSiteAuthorizationState = createSpy('getSiteAuthorizationState').and.callFake((_) => {
-          return observableOf({[FeatureID.IsCommunityAdmin]: true});
+        authorizationService.isAuthorized = createSpy('isAuthorized').and.callFake((featureID: FeatureID) => {
+          return observableOf(featureID === FeatureID.IsCommunityAdmin);
         });
       });
 
@@ -494,11 +481,8 @@ describe('MenuResolver', () => {
 
     describe('for collection admin', () => {
       beforeEach(() => {
-        authorizationService.getAuthorizationForObjects = createSpy('getAuthorizationForObjects').and.callFake((_) => {
-          return observableOf({[FeatureID.IsCollectionAdmin]: true});
-        });
-        siteAuthorizationService.getSiteAuthorizationState = createSpy('getSiteAuthorizationState').and.callFake((_) => {
-          return observableOf({[FeatureID.IsCollectionAdmin]: true});
+        authorizationService.isAuthorized = createSpy('isAuthorized').and.callFake((featureID: FeatureID) => {
+          return observableOf(featureID === FeatureID.IsCollectionAdmin);
         });
       });
 
@@ -517,11 +501,8 @@ describe('MenuResolver', () => {
 
     describe('for group admin', () => {
       beforeEach(() => {
-        authorizationService.getAuthorizationForObjects = createSpy('getAuthorizationForObjects').and.callFake((_) => {
-          return observableOf({[FeatureID.CanManageGroups]: true});
-        });
-        siteAuthorizationService.getSiteAuthorizationState = createSpy('getSiteAuthorizationState').and.callFake((_) => {
-          return observableOf({[FeatureID.CanManageGroups]: true});
+        authorizationService.isAuthorized = createSpy('isAuthorized').and.callFake((featureID: FeatureID) => {
+          return observableOf(featureID === FeatureID.CanManageGroups);
         });
       });
 

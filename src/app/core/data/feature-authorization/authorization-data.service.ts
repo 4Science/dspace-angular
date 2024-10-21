@@ -21,6 +21,7 @@ import { FindListOptions } from '../find-list-options.model';
 import { BaseDataService } from '../base/base-data.service';
 import { SearchData, SearchDataImpl } from '../base/search-data';
 import { dataService } from '../base/data-service.decorator';
+import { SiteAuthorizationService } from "./site-authorization.service";
 
 /**
  * A service to retrieve {@link Authorization}s from the REST API
@@ -40,6 +41,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
     protected objectCache: ObjectCacheService,
     protected halService: HALEndpointService,
     protected siteService: SiteDataService,
+    protected siteAuthorizationService: SiteAuthorizationService,
   ) {
     super('authorizations', requestService, rdbService, objectCache, halService);
 
@@ -79,6 +81,11 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    *                                    requested after the response becomes stale
    */
   isAuthorized(featureId?: FeatureID, objectUrl?: string, ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<boolean> {
+    // If the object Url is missing the authorization relates to the site so we can read it from the state
+    if(!hasValue(objectUrl) && hasValue(featureId) && !hasValue(ePersonUuid)) {
+      return this.siteAuthorizationService.getSiteAuthorization(featureId)
+    }
+
     return this.searchByObject(featureId, objectUrl, ePersonUuid, {}, useCachedVersionIfAvailable, reRequestOnStale, followLink('feature')).pipe(
       getFirstCompletedRemoteData(),
       map((authorizationRD) => {
