@@ -39,7 +39,7 @@ import { APP_CONFIG } from '../config/app-config.interface';
 import { environment } from '../environments/environment';
 import { KlaroService } from './shared/cookies/klaro.service';
 import { DatadogRumService } from './shared/datadog-rum/datadog-rum.service';
-import { SiteAuthorizationService } from './core/data/feature-authorization/site-authorization.service';
+import { AuthorizationService } from './core/data/feature-authorization/authorization.service';
 
 let comp: AppComponent;
 let fixture: ComponentFixture<AppComponent>;
@@ -113,7 +113,7 @@ describe('App component', () => {
         { provide: APP_CONFIG, useValue: environment },
         { provide: KlaroService, useValue: klaroServiceSpy },
         { provide: DatadogRumService, useValue: datadogRumServiceSpy },
-        { provide: SiteAuthorizationService, useValue: siteAuthorizationService },
+        { provide: AuthorizationService, useValue: siteAuthorizationService },
         provideMockStore({ initialState }),
         AppComponent,
         // RouteService

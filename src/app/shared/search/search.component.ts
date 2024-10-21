@@ -53,7 +53,7 @@ import { AlertType } from '../alert/alert-type';
 import { isPlatformServer } from '@angular/common';
 import { APP_CONFIG } from '../../../config/app-config.interface';
 import { FeatureID } from '../../core/data/feature-authorization/feature-id';
-import { SiteAuthorizationService } from '../../core/data/feature-authorization/site-authorization.service';
+import { AuthorizationService } from '../../core/data/feature-authorization/authorization.service';
 
 @Component({
   selector: 'ds-search',
@@ -389,7 +389,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     protected routeService: RouteService,
     protected router: Router,
     @Inject(APP_CONFIG) protected appConfig: any,
-    protected siteAuthorizationService: SiteAuthorizationService,
+    protected siteAuthorizationService: AuthorizationService,
     ){
     this.isXsOrSm$ = this.windowService.isXsOrSm();
   }

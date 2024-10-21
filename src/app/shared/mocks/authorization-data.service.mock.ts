@@ -1,4 +1,4 @@
-import { AuthorizationDataService } from "../../core/data/feature-authorization/authorization-data.service";
+import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 
 
 /**

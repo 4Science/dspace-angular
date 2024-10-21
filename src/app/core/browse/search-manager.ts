@@ -129,7 +129,7 @@ export class SearchManager {
     const authorizationRequests = [...uiidListsMappedToAuthorizations.keys()].map((features) => {
       const uuidList = uiidListsMappedToAuthorizations.get(features);
       const type = objects.find(object => object.id === uuidList[0]).uniqueType;
-      return this.authorizationService.getObjectsAuthorizations(uuidList, features, type);
+      return this.authorizationService.getObjectsAuthorizations(uuidList, type, features);
     });
 
     return combineLatest(authorizationRequests).pipe(
@@ -237,8 +237,8 @@ export class SearchManager {
       return combineLatest(...thumbnails$).pipe(
           switchMap(bitstreams => this.authorizationService.getObjectsAuthorizations(
             bitstreams.filter(value => hasValue(value?.payload)).map(bit => bit.payload.uuid),
-            [FeatureID.CanDownload],
-            bitstreams[0].payload.uniqueType
+            bitstreams[0].payload.uniqueType,
+            [FeatureID.CanDownload]
           )),
           tap(allRemoteAuthorizations => allAuthorizations = allRemoteAuthorizations),
           switchMap(authorizations => combineLatest(authorizations

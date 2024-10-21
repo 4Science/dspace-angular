@@ -12,7 +12,6 @@ import { of as observableOf, of } from 'rxjs';
 import { MetadataValue } from '../shared/metadata.models';
 import { v4 as uuidv4 } from 'uuid';
 import { AUTHORITY_REFERENCE } from '../shared/metadata.utils';
-import { AuthorizationDataService } from "../data/feature-authorization/authorization-data.service";
 
 describe('SearchManager', () => {
   let scheduler: TestScheduler;

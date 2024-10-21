@@ -30,7 +30,7 @@ import { RouteService } from './core/services/route.service';
 import { getEditItemPageRoute, getWorkflowItemModuleRoute, getWorkspaceItemModuleRoute } from './app-routing-paths';
 import { SocialService } from './social/social.service';
 import { DatadogRumService } from './shared/datadog-rum/datadog-rum.service';
-import { SiteAuthorizationService } from './core/data/feature-authorization/site-authorization.service';
+import { AuthorizationService } from './core/data/feature-authorization/authorization.service';
 
 @Component({
   selector: 'ds-app',
@@ -83,7 +83,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     private modalConfig: NgbModalConfig,
     private socialService: SocialService,
     private datadogRumService: DatadogRumService,
-    private siteAuthorizationService: SiteAuthorizationService
+    private siteAuthorizationService: AuthorizationService
   ) {
     this.notificationOptions = environment.notifications;
     this.browserPlatform = isPlatformBrowser(this.platformId);
@@ -100,7 +100,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.storeCSSVariables();
 
     this.socialService.initialize();
-    this.siteAuthorizationService.getAllSiteAuthorizations();
+    this.siteAuthorizationService.initialize();
   }
 
   ngOnInit() {

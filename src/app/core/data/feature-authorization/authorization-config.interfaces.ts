@@ -10,6 +10,12 @@ export interface DiscoveryConfigurationFeaturesConfig {
 }
 
 
-export interface AuthorizationsState {
+export interface AuthorizationsMapState {
   [key: string]: AuthorizationFeaturesMap;
+}
+
+export interface AuthorizationsState {
+  authorizations: AuthorizationsMapState,
+  initialized: boolean,
+  hasError: boolean,
 }
