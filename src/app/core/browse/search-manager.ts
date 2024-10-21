@@ -75,7 +75,10 @@ export class SearchManager {
       .pipe(this.completeSearchObjectsWithExtraData(searchOptions));
   }
 
-
+  /**
+   * Perform extra calls after search to enhance the item data with extra info
+   * @protected
+   */
   protected completeWithExtraData() {
     return switchMap((itemsRD: RemoteData<PaginatedList<Item>>) => {
       if (itemsRD.isSuccess) {
@@ -87,7 +90,12 @@ export class SearchManager {
     });
   }
 
-
+  /**
+   * Complete search with extra data if successful
+   *
+   * @param searchOptions
+   * @protected
+   */
   protected completeSearchObjectsWithExtraData<T extends DSpaceObject>(searchOptions: SearchOptions) {
     return switchMap((searchObjectsRD: RemoteData<SearchObjects<T>>) => {
       if (searchObjectsRD.isSuccess) {
@@ -105,6 +113,13 @@ export class SearchManager {
     });
   }
 
+  /**
+   * Map configured user authorization on each item to avoid multiple request for each item
+   *
+   * @param searchObjects
+   * @param configuration
+   * @protected
+   */
   protected enrichItemsWithCurrentUserAuthorizations<T extends DSpaceObject>(searchObjects: RemoteData<SearchObjects<T>>, configuration: string): Observable<RemoteData<any>> {
     let pageToEnrich = Object.assign([], searchObjects.payload.page);
 
@@ -140,6 +155,13 @@ export class SearchManager {
     );
   }
 
+  /**
+   * Group items by authorization ID in a map
+   *
+   * @param objects
+   * @param mappedEntities
+   * @private
+   */
   private groupItemsUuidsByAuthorizations<T extends DSpaceObject>(objects: T[], mappedEntities: Map<string, FeatureID[]>): Map<FeatureID[], string[]> {
     const mappedUuidListsToFeatures = new Map();
     objects.forEach(object => {
@@ -156,11 +178,24 @@ export class SearchManager {
     return mappedUuidListsToFeatures;
   }
 
+  /**
+   * Return object type to use for configured authorizations
+   *
+   * @param object
+   * @private
+   */
 
   private getObjectType<T extends DSpaceObject>(object: T): string {
     return object.firstMetadataValue('dspace.entity.type') ?? (object as any as Item)?.entityType ?? object?.uniqueType;
   }
 
+  /**
+   * Map entity types to required authorizations so that we can group the items by feature
+   *
+   * @param objects
+   * @param configuration
+   * @private
+   */
   private getEntityTypeToAuthorizationsMap<T extends DSpaceObject>(objects: T[], configuration: string): Map<string, FeatureID[]> {
     const configuredAuthorizationsForDiscovery =
       environment.discoveryAuthorizationFeaturesConfig[configuration] ?? environment.discoveryAuthorizationFeaturesConfig.default;
@@ -175,6 +210,13 @@ export class SearchManager {
     return mappedEntities;
   }
 
+  /**
+   * Enrichment method dedicated to thumbnails related to items, to avoid multiple authorizations call on each search.
+   * If the thumbnail link has not been resolved this function won't execute any logic.
+   *
+   * @param searchObjects
+   * @protected
+   */
 
   protected enrichWithThumbnailDownloadAuthorizations<T extends DSpaceObject>(searchObjects: RemoteData<SearchObjects<T>>): Observable<RemoteData<any>> {
     const objects = searchObjects.payload.page.map((searchResult) => searchResult.indexableObject) as any;
@@ -211,7 +253,6 @@ export class SearchManager {
 
             itemsWithNoThumbnail.forEach(uuid => {
               const itemIndexWithNoThumbnail = enrichedItems.indexOf(enrichedItems.find(item => item.uuid === uuid));
-
               enrichedItems[itemIndexWithNoThumbnail].canDownload = false;
             });
 
@@ -220,13 +261,11 @@ export class SearchManager {
               const isCurrentUserAuthorizedToDownloadBitstream = hasValue(bitstreamToAuthorizationMap.get(bitstreamId));
               const mappedItemUuid =  [...itemToBitstreamMap.keys()].find(key => itemToBitstreamMap.get(key) === bitstreamId);
               const itemIndexToEnrich = enrichedItems.indexOf(enrichedItems.find(item => item.uuid === mappedItemUuid));
-
               enrichedItems[itemIndexToEnrich].canDownload = isCurrentUserAuthorizedToDownloadBitstream;
             });
 
             const pageToReturn = searchObjects.payload.page.map(item => {
               const enrichedItem = enrichedItems.find(dso => dso.uuid === item.indexableObject.uuid);
-
               return Object.assign(item, {canDownload: enrichedItem.canDownload});
             });
 

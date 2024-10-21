@@ -8,14 +8,16 @@ import { toRemoteData } from '../../browse-by/browse-by-metadata-page/browse-by-
 import { Item } from '../shared/item.model';
 import { FindListOptions } from '../data/find-list-options.model';
 import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
-import { of } from 'rxjs';
+import { of as observableOf, of } from 'rxjs';
 import { MetadataValue } from '../shared/metadata.models';
 import { v4 as uuidv4 } from 'uuid';
 import { AUTHORITY_REFERENCE } from '../shared/metadata.utils';
+import { AuthorizationDataService } from "../data/feature-authorization/authorization-data.service";
 
 describe('SearchManager', () => {
   let scheduler: TestScheduler;
   let service: SearchManager;
+
   const validAuthority = uuidv4();
   const validAuthority2 = uuidv4();
   const validAuthority3 = uuidv4();
@@ -104,8 +106,13 @@ describe('SearchManager', () => {
       of(createSuccessfulRemoteDataObject(createPaginatedList([])))
   };
 
+
+  const mockAuthorizationService = jasmine.createSpyObj('authorizationService', {
+    getObjectsAuthorizations: observableOf([])
+  });
+
   function initTestService() {
-    return new SearchManager(mockItemService, mockBrowseService, mockSearchService);
+    return new SearchManager(mockItemService, mockBrowseService, mockSearchService, mockAuthorizationService);
   }
 
   beforeEach(() => {
