@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { combineLatest, Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { PaginatedList } from '../data/paginated-list.model';
@@ -9,7 +9,6 @@ import { BrowseEntrySearchOptions } from './browse-entry-search-options.model';
 import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { ItemDataService } from '../data/item-data.service';
 import { BrowseService } from './browse.service';
-import { environment } from '../../../environments/environment';
 import { DSpaceObject } from '../shared/dspace-object.model';
 import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { SearchObjects } from '../../shared/search/models/search-objects.model';
@@ -26,6 +25,7 @@ import { AuthorizationDataService } from '../data/feature-authorization/authoriz
 import { FeatureID } from '../data/feature-authorization/feature-id';
 import { Authorization } from '../shared/authorization.model';
 import { SearchOptions } from '../../shared/search/models/search-options.model';
+import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
 
 /**
  * The service aims to manage browse requests and subsequent extra fetch requests.
@@ -38,6 +38,7 @@ export class SearchManager {
     protected browseService: BrowseService,
     protected searchService: SearchService,
     protected authorizationService: AuthorizationDataService,
+    @Inject(APP_CONFIG) protected appConfig: AppConfig
   ) {
   }
 
@@ -121,10 +122,16 @@ export class SearchManager {
    * @protected
    */
   protected enrichItemsWithCurrentUserAuthorizations<T extends DSpaceObject>(searchObjects: RemoteData<SearchObjects<T>>, configuration: string): Observable<RemoteData<any>> {
-    let pageToEnrich = Object.assign([], searchObjects.payload.page);
-
     const objects = searchObjects.payload.page.map((searchResult) => searchResult.indexableObject) as any;
     const mappedEntities = this.getEntityTypeToAuthorizationsMap(objects, configuration);
+
+    if ([...mappedEntities.keys()].length === 0) {
+      return of(searchObjects);
+    }
+
+
+    let pageToEnrich = Object.assign([], searchObjects.payload.page);
+
     const uiidListsMappedToAuthorizations = this.groupItemsUuidsByAuthorizations(objects, mappedEntities);
     const authorizationRequests = [...uiidListsMappedToAuthorizations.keys()].map((features) => {
       const uuidList = uiidListsMappedToAuthorizations.get(features);
@@ -137,8 +144,7 @@ export class SearchManager {
         const flatList = [].concat.apply([], authorizationsLists);
         flatList.forEach((authorization: Authorization) => {
           const objectId = this.extractUuidFromAuthorizationId(authorization.id);
-          const indexToUpdate = pageToEnrich.indexOf(pageToEnrich.find(object => object.indexableObject.id === objectId));
-
+          const indexToUpdate = pageToEnrich.indexOf(pageToEnrich.find(object => object.indexableObject.id.toString() === objectId));
           pageToEnrich[indexToUpdate].indexableObject.userAuthorizations = [
             ...pageToEnrich[indexToUpdate].indexableObject.userAuthorizations,
             this.extractFeatureIdFromAuthorizationId(authorization.id)
@@ -198,8 +204,13 @@ export class SearchManager {
    */
   private getEntityTypeToAuthorizationsMap<T extends DSpaceObject>(objects: T[], configuration: string): Map<string, FeatureID[]> {
     const configuredAuthorizationsForDiscovery =
-      environment.discoveryAuthorizationFeaturesConfig[configuration] ?? environment.discoveryAuthorizationFeaturesConfig.default;
+      this.appConfig.discoveryAuthorizationFeaturesConfig[configuration] ?? this.appConfig.discoveryAuthorizationFeaturesConfig.default;
     const mappedEntities = new Map();
+
+    if (!hasValue(configuredAuthorizationsForDiscovery)) {
+      return mappedEntities;
+    }
+
     const entityTypes =  [...new Set(objects.map(dso => this.getObjectType(dso)))];
     entityTypes.forEach((entity) => {
       const config = configuredAuthorizationsForDiscovery[entity];
@@ -235,11 +246,14 @@ export class SearchManager {
         )) as Observable<RemoteData<Bitstream>>[];
 
       return combineLatest(...thumbnails$).pipe(
-          switchMap(bitstreams => this.authorizationService.getObjectsAuthorizations(
-            bitstreams.filter(value => hasValue(value?.payload)).map(bit => bit.payload.uuid),
-            bitstreams[0].payload.uniqueType,
-            [FeatureID.CanDownload]
-          )),
+          switchMap(bitstreams => {
+            const bitstreamsToAuthorize =  bitstreams.filter(value => hasValue(value?.payload));
+            return this.authorizationService.getObjectsAuthorizations(
+              bitstreamsToAuthorize.map(bit => bit.payload.uuid),
+              bitstreamsToAuthorize[0].payload.uniqueType,
+              [FeatureID.CanDownload]
+            );
+          }),
           tap(allRemoteAuthorizations => allAuthorizations = allRemoteAuthorizations),
           switchMap(authorizations => combineLatest(authorizations
             .map(auth => auth.feature.pipe(
@@ -286,7 +300,9 @@ export class SearchManager {
     //we read the bitstream uuid from the authorization id that is composed as follows:
     // epersonUuid_featureID_itemType_itemUuid
     const authSegments = authId.split('_');
-    return authSegments[authSegments.length - 1];
+    const idSegment = authSegments[authSegments.length - 1];
+    // id of workspace or workflow items are made as follows workspace_idNumber
+    return idSegment.includes('_') ? idSegment.split('_')[1] : idSegment;
   }
 
   private extractFeatureIdFromAuthorizationId(authId: string): FeatureID {
@@ -309,7 +325,7 @@ export class SearchManager {
       })
       .filter((item) => hasValue(item));
 
-    const uuidList = this.extractUUID(items, environment.followAuthorityMetadata);
+    const uuidList = this.extractUUID(items, this.appConfig.followAuthorityMetadata);
     return uuidList.length > 0 ? this.itemService.findAllById(uuidList).pipe(
       getFirstCompletedRemoteData(),
       map(data => {

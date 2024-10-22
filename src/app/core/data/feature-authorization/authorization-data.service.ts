@@ -1,4 +1,4 @@
-import { Observable, of as observableOf } from 'rxjs';
+import { combineLatest, Observable, of as observableOf } from 'rxjs';
 import { Inject, Injectable } from '@angular/core';
 import { AUTHORIZATION } from '../../shared/authorization.resource-type';
 import { Authorization, AuthorizationFeaturesMap } from '../../shared/authorization.model';
@@ -87,22 +87,41 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    *                                    requested after the response becomes stale
    */
   isAuthorized(featureId?: FeatureID, objectUrl?: string, ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<boolean> {
-    // If the object Url is missing the authorization relates to the site so we can read it from the state
-    if (!hasValue(objectUrl) && hasValue(featureId) && !hasValue(ePersonUuid)) {
-      return this.siteAuthorizationService.getSiteAuthorization(featureId);
-    }
+    const isSiteServiceInitialized$ = this.siteAuthorizationService.isInitialized();
+    const hasSiteServiceErrors$ = this.siteAuthorizationService.hasErrors();
 
-    return this.searchByObject(featureId, objectUrl, ePersonUuid, {}, useCachedVersionIfAvailable, reRequestOnStale, followLink('feature')).pipe(
-      getFirstCompletedRemoteData(),
-      map((authorizationRD) => {
-        if (authorizationRD.statusCode !== 401 && hasValue(authorizationRD.payload) && isNotEmpty(authorizationRD.payload.page)) {
-          return authorizationRD.payload.page;
-        } else {
-          return [];
+    return combineLatest([
+      isSiteServiceInitialized$,
+      hasSiteServiceErrors$
+    ]).pipe(
+      switchMap(([isInitialized, hasErrors]) => {
+        const canUseSiteService = !hasValue(objectUrl) && hasValue(featureId) && !hasValue(ePersonUuid);
+
+        if (!isInitialized) {
+          this.siteAuthorizationService.initialize();
         }
-      }),
-      catchError(() => observableOf([])),
-      oneAuthorizationMatchesFeature(featureId)
+
+        if (!hasErrors && canUseSiteService) {
+          // If the object Url is missing the authorization relates to the site so we can read it from the state
+          return this.siteAuthorizationService.getSiteAuthorization(featureId);
+        }
+
+        if ((hasErrors) || !canUseSiteService) {
+          // we fallback on old method if site service had initialization issues or if some parameters more than the only feature ID are provided.
+          return this.searchByObject(featureId, objectUrl, ePersonUuid, {}, useCachedVersionIfAvailable, reRequestOnStale, followLink('feature')).pipe(
+            getFirstCompletedRemoteData(),
+            map((authorizationRD) => {
+              if (authorizationRD.statusCode !== 401 && hasValue(authorizationRD.payload) && isNotEmpty(authorizationRD.payload.page)) {
+                return authorizationRD.payload.page;
+              } else {
+                return [];
+              }
+            }),
+            catchError(() => observableOf([])),
+            oneAuthorizationMatchesFeature(featureId)
+          );
+        }
+      })
     );
   }
 

@@ -28,22 +28,30 @@ const getInitializationStatus = createSelector(
 );
 
 /**
+ * The selector function to check if service has errors
+ */
+const getErrorStatus = createSelector(
+  authorizationsSelector,
+  (state: AuthorizationsState) =>  state.hasError
+);
+
+/**
  * A service to retrieve {@link Authorization}s for the site
  */
 @Injectable()
 export class AuthorizationService {
   constructor(
     private siteService: SiteDataService,
-    protected store: Store<AppState>,
+    private store: Store<AppState>,
   ) {}
 
-  public initialize(): void {
+  initialize(): void {
     this.store.dispatch(new FetchSiteAuthorizationsAction());
   }
 
-  public getAllAuthorizationsState(): Observable<AuthorizationsMapState> {
+  getAllAuthorizationsState(): Observable<AuthorizationsMapState> {
     return this.isInitialized().pipe(
-      filter(initialized => initialized),
+      filter(initialized => Boolean(initialized)),
       switchMap(() => {
         return this.store.pipe(
           select(getAllAuthorizations),
@@ -54,19 +62,30 @@ export class AuthorizationService {
     );
   }
 
-  public getSiteAuthorization(featureId: FeatureID): Observable<boolean> {
-    return this.siteService.find().pipe(
-      switchMap((site) => {
-        return this.getAllAuthorizationsState().pipe(
-          map(state => state[site.uuid][featureId])
-        );
-      })
+  getSiteAuthorization(featureId: FeatureID): Observable<boolean> {
+    return  this.isInitialized().pipe(
+      filter(initialized => Boolean(initialized)),
+      switchMap(() => this.siteService.find().pipe(
+        switchMap((site) => {
+          return this.getAllAuthorizationsState().pipe(
+            map(state => state[site.uuid][featureId])
+          );
+        })
+      ))
     );
   }
 
-  private isInitialized(): Observable<boolean> {
+  isInitialized(): Observable<boolean> {
     return this.store.pipe(
-      select(getInitializationStatus)
+      select(getInitializationStatus),
+      distinctUntilChanged(),
+    );
+  }
+
+  hasErrors(): Observable<boolean> {
+    return this.store.pipe(
+      select(getErrorStatus),
+      distinctUntilChanged(),
     );
   }
 

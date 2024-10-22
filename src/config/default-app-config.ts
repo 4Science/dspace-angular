@@ -158,12 +158,9 @@ export class DefaultAppConfig implements AppConfig {
 
   discoveryAuthorizationFeaturesConfig: DiscoveryConfigurationFeaturesConfig = {
     'workspace': {
-      // TODO: uncomment once https://4science.atlassian.net/browse/DSC-1982 is implemented
-      //  'submission.workspaceitem': [
-      //    FeatureID.CanEditItem
-      //  ]
-      //Todo: comment out once implementation is done. Only for test purpose
-      'Publication': [FeatureID.CanEditItem]
+      'submission.workspaceitem': [
+        FeatureID.CanEditItem
+      ]
     },
   };
 
