@@ -1,10 +1,11 @@
 import { Item } from '../../core/shared/item.model';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbCarousel, NgbSlideEvent } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject } from 'rxjs';
 import { CarouselOptions } from '../carousel/carousel-options.model';
 import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
 import { HostWindowService } from '../host-window.service';
+import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
 
 @Component({
   selector: 'ds-carousel-with-thumbnails',
@@ -108,11 +109,13 @@ export class CarouselWithThumbnailsComponent implements OnInit {
    */
   sliderEventSource: NgbSlideEvent;
 
-  public readonly bundle = 'BRANDED_PREVIEW';
+  public readonly bundle: string;
 
   constructor(
     private hostWindowService: HostWindowService,
+    @Inject(APP_CONFIG) protected appConfig: AppConfig,
   ) {
+    this.bundle = this.appConfig.bundle.previewBundle;
   }
 
   /**
