@@ -13,10 +13,14 @@ import { Feature } from '../../shared/feature.model';
 import { FindListOptions } from '../find-list-options.model';
 import { testSearchDataImplementation } from '../base/search-data.spec';
 import { getMockObjectCacheService } from '../../../shared/mocks/object-cache.service.mock';
+import { AuthorizationService } from './authorization.service';
+import { AppConfig } from '../../../../config/app-config.interface';
+import { environment } from '../../../../environments/environment';
 
 describe('AuthorizationDataService', () => {
   let service: AuthorizationDataService;
   let siteService: SiteDataService;
+  let siteAuthorizationService: AuthorizationService;
   let objectCache;
 
   let site: Site;
@@ -40,8 +44,14 @@ describe('AuthorizationDataService', () => {
     siteService = jasmine.createSpyObj('siteService', {
       find: observableOf(site),
     });
+
+    siteAuthorizationService = jasmine.createSpyObj('siteAuthorizationService', {
+      isInitialized: observableOf(true),
+      hasErrors: observableOf(true),
+      getSiteAuthorization: observableOf(false),
+    });
     objectCache = getMockObjectCacheService();
-    service = new AuthorizationDataService(requestService, undefined, objectCache, undefined, siteService);
+    service = new AuthorizationDataService(requestService, undefined, objectCache, undefined, siteService, siteAuthorizationService, undefined, environment as AppConfig);
   }
 
   beforeEach(() => {
@@ -50,7 +60,7 @@ describe('AuthorizationDataService', () => {
   });
 
   describe('composition', () => {
-    const initService = () => new AuthorizationDataService(null, null, null, null, null);
+    const initService = () => new AuthorizationDataService(null, null, null, null, null,null, null, null);
     testSearchDataImplementation(initService);
   });
 

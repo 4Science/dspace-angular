@@ -8,18 +8,34 @@ import { toRemoteData } from '../../browse-by/browse-by-metadata-page/browse-by-
 import { Item } from '../shared/item.model';
 import { FindListOptions } from '../data/find-list-options.model';
 import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
-import { of as observableOf, of } from 'rxjs';
+import { of } from 'rxjs';
 import { MetadataValue } from '../shared/metadata.models';
 import { v4 as uuidv4 } from 'uuid';
 import { AUTHORITY_REFERENCE } from '../shared/metadata.utils';
+import { AppConfig } from '../../../config/app-config.interface';
+import { FeatureID } from '../data/feature-authorization/feature-id';
+
 
 describe('SearchManager', () => {
   let scheduler: TestScheduler;
   let service: SearchManager;
-
   const validAuthority = uuidv4();
   const validAuthority2 = uuidv4();
   const validAuthority3 = uuidv4();
+
+  const appConfig: Partial<AppConfig> = {
+    discoveryAuthorizationFeaturesConfig: {},
+    followAuthorityMetadata:  [
+      {
+        type: 'Publication',
+        metadata: ['dc.contributor.author']
+      },
+      {
+        type: 'Product',
+        metadata: ['dc.contributor.author']
+      }
+    ]
+  };
 
   const firstPublication = Object.assign(new Item(), {
     id: '13a4a8c3-3b94-4797-863d-b831f360cc60',
@@ -105,13 +121,14 @@ describe('SearchManager', () => {
       of(createSuccessfulRemoteDataObject(createPaginatedList([])))
   };
 
+  const mockAuthorizationService: any = {
+    getObjectsAuthorizations: (uuidList: string[], uniqueType: string, featuresId?: FeatureID[]) =>
+      of([])
+  };
 
-  const mockAuthorizationService = jasmine.createSpyObj('authorizationService', {
-    getObjectsAuthorizations: observableOf([])
-  });
 
   function initTestService() {
-    return new SearchManager(mockItemService, mockBrowseService, mockSearchService, mockAuthorizationService);
+    return new SearchManager(mockItemService, mockBrowseService, mockSearchService, mockAuthorizationService, appConfig as AppConfig);
   }
 
   beforeEach(() => {

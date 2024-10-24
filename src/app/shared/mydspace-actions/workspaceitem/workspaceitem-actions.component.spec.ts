@@ -27,6 +27,7 @@ import { getMockSearchService } from '../../mocks/search-service.mock';
 import { SearchService } from '../../../core/shared/search/search.service';
 import { AuthService } from '../../../core/auth/auth.service';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
+import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 
 let component: WorkspaceitemActionsComponent;
 let fixture: ComponentFixture<WorkspaceitemActionsComponent>;
@@ -43,6 +44,7 @@ const mockDataService = jasmine.createSpyObj('WorkspaceitemDataService', {
 const searchService = getMockSearchService();
 
 const requestServce = getMockRequestService();
+
 
 const item = Object.assign(new Item(), {
   bundles: observableOf({}),
@@ -74,7 +76,7 @@ const item = Object.assign(new Item(), {
   }
 });
 const rd = createSuccessfulRemoteDataObject(item);
-mockObject = Object.assign(new WorkspaceItem(), { item: observableOf(rd), id: '1234', uuid: '1234' });
+mockObject = Object.assign(new WorkspaceItem(), { item: observableOf(rd), id: '1234', uuid: '1234', userAuthorizations: [FeatureID.CanEditItem] });
 
 const ePersonMock: EPerson = Object.assign(new EPerson(), {
   handle: null,
