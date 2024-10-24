@@ -141,7 +141,7 @@ export class BrowseByComponent implements OnInit, OnDestroy {
    */
   back = () => {
     const page = +this.previousPage$.value > 1 ? +this.previousPage$.value : 1;
-    this.paginationService.updateRoute(this.paginationConfig.id, {page: page}, {[this.paginationConfig.id + '.return']: null, value: null, startsWith: null});
+    this.paginationService.updateRoute(this.paginationConfig.id, {page: page}, {[this.paginationConfig.id + '.return']: null, value: null, authority: null, startsWith: null});
   };
 
   /**
