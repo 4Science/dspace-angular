@@ -13,8 +13,8 @@ import { MetadataValue } from '../shared/metadata.models';
 import { v4 as uuidv4 } from 'uuid';
 import { AUTHORITY_REFERENCE } from '../shared/metadata.utils';
 import { ITEM } from '../shared/item.resource-type';
-import { AppConfig } from "../../../config/app-config.interface";
-import { FeatureID } from "../data/feature-authorization/feature-id";
+import { AppConfig } from '../../../config/app-config.interface';
+import { FeatureID } from '../data/feature-authorization/feature-id';
 
 describe('SearchManager', () => {
   let scheduler: TestScheduler;

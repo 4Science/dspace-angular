@@ -22,12 +22,12 @@ import isArray from 'lodash/isArray';
 import { WORKSPACEITEM } from '../eperson/models/workspaceitem.resource-type';
 import { WORKFLOWITEM } from '../eperson/models/workflowitem.resource-type';
 import { ITEM } from '../shared/item.resource-type';
-import { APP_CONFIG, AppConfig } from "../../../config/app-config.interface";
-import { AuthorizationDataService } from "../data/feature-authorization/authorization-data.service";
+import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
+import { AuthorizationDataService } from '../data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../data/feature-authorization/feature-id';
-import { Bitstream } from "../shared/bitstream.model";
-import { Authorization } from "../shared/authorization.model";
-import { SearchOptions } from "../../shared/search/models/search-options.model";
+import { Bitstream } from '../shared/bitstream.model';
+import { Authorization } from '../shared/authorization.model';
+import { SearchOptions } from '../../shared/search/models/search-options.model';
 
 /**
  * The service aims to manage browse requests and subsequent extra fetch requests.

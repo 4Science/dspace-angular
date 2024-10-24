@@ -52,8 +52,7 @@ import { SearchManager } from '../../core/browse/search-manager';
 import { AlertType } from '../alert/alert-type';
 import { isPlatformServer } from '@angular/common';
 import { FeatureID } from '../../core/data/feature-authorization/feature-id';
-import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
-import { AuthorizationService } from "../../core/data/feature-authorization/authorization.service";
+import { AuthorizationService } from '../../core/data/feature-authorization/authorization.service';
 
 @Component({
   selector: 'ds-search',
