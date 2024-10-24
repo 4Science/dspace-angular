@@ -189,7 +189,7 @@ export class SearchManager {
   }
 
   /**
-   * Map entity types to required authorizations so that we can group the items by feature
+   * Map entity types oe unique type to required authorizations so that we can group the items by feature
    *
    * @param objects
    * @param configuration
@@ -228,10 +228,10 @@ export class SearchManager {
 
     if (areThumbnailPresent) {
       let enrichedItems = Object.assign([], objects);
-      let itemToBitstreamMap = new Map();
-      let bitstreamToAuthorizationMap = new Map();
-      let allAuthorizations: Authorization[] = [];
+      let itemToBitstreamMap: Map<string, string> = new Map();
+      let bitstreamToAuthorizationFeatureMap: Map<string, string> = new Map();
 
+      // List of all thumbnails which could fail to load and on which an authorization for the download link will be requested
       const thumbnails$ = objects
         .map(dso => hasValue((dso as any)?.thumbnail) ? (dso as any)?.thumbnail.pipe(getFirstCompletedRemoteData()) : of(null))
         .map((remoteThumbnail, index) => remoteThumbnail.pipe(
@@ -241,35 +241,21 @@ export class SearchManager {
       return combineLatest(...thumbnails$).pipe(
         switchMap(bitstreams => {
           const bitstreamsToAuthorize =  bitstreams.filter(value => hasValue(value?.payload));
+
           return this.authorizationService.getObjectsAuthorizations(
             bitstreamsToAuthorize.map(bit => bit.payload.uuid),
             bitstreamsToAuthorize[0].payload.uniqueType,
             [FeatureID.CanDownload]
           );
         }),
-        tap(allRemoteAuthorizations => allAuthorizations = allRemoteAuthorizations),
-        switchMap(authorizations => combineLatest(authorizations
-          .map(auth => auth.feature.pipe(
-            getFirstCompletedRemoteData(),
-            map(data => data?.payload),
-            tap(feature => bitstreamToAuthorizationMap.set(this.extractUuidFromAuthorizationId(auth.id), feature))
-          ))
-        )),
-        map(() => {
-          const itemsWithNoThumbnail = [...itemToBitstreamMap.keys()].filter(key => !hasValue(itemToBitstreamMap[key]));
+        map((authorizations) => {
+          authorizations.forEach(authorization => {
+            const bitstreamUuid = this.extractUuidFromAuthorizationId(authorization.id);
+            const featureId = this.extractFeatureIdFromAuthorizationId(authorization.id);
 
-          itemsWithNoThumbnail.forEach(uuid => {
-            const itemIndexWithNoThumbnail = enrichedItems.indexOf(enrichedItems.find(item => item.uuid === uuid));
-            enrichedItems[itemIndexWithNoThumbnail].canDownload = false;
+            bitstreamToAuthorizationFeatureMap.set(bitstreamUuid, featureId);
           });
-
-          allAuthorizations.forEach(auth => {
-            const bitstreamId = this.extractUuidFromAuthorizationId(auth.id);
-            const isCurrentUserAuthorizedToDownloadBitstream = hasValue(bitstreamToAuthorizationMap.get(bitstreamId));
-            const mappedItemUuid =  [...itemToBitstreamMap.keys()].find(key => itemToBitstreamMap.get(key) === bitstreamId);
-            const itemIndexToEnrich = enrichedItems.indexOf(enrichedItems.find(item => item.uuid === mappedItemUuid));
-            enrichedItems[itemIndexToEnrich].canDownload = isCurrentUserAuthorizedToDownloadBitstream;
-          });
+          enrichedItems = this.mapCanDownloadFeatureToBitstreams(enrichedItems, itemToBitstreamMap, bitstreamToAuthorizationFeatureMap, authorizations);
 
           const pageToReturn = searchObjects.payload.page.map(item => {
             const enrichedItem = enrichedItems.find(dso => dso.uuid === item.indexableObject.uuid);
@@ -289,18 +275,59 @@ export class SearchManager {
     }
   }
 
+  /**
+   * Map CanDownload feature to bitstreams belonging to items
+   *
+   * @param objects
+   * @param itemToBitstreamMap
+   * @param bitstreamToAuthorizationMap
+   * @param authorizations
+   * @private
+   */
+  private mapCanDownloadFeatureToBitstreams<T extends Item>(objects: T[], itemToBitstreamMap: Map<string,string>, bitstreamToAuthorizationMap: Map<string,string>, authorizations: Authorization[]): T[] {
+    const itemsWithNoThumbnail = [...itemToBitstreamMap.keys()].filter(key => !hasValue(itemToBitstreamMap[key]));
+
+    itemsWithNoThumbnail.forEach(uuid => {
+      const itemIndexWithNoThumbnail = objects.indexOf(objects.find(item => item.uuid === uuid));
+      objects[itemIndexWithNoThumbnail].canDownload = false;
+    });
+
+    authorizations.forEach(auth => {
+      const bitstreamId = this.extractUuidFromAuthorizationId(auth.id);
+      const isCurrentUserAuthorizedToDownloadBitstream = hasValue(bitstreamToAuthorizationMap.get(bitstreamId));
+      const mappedItemUuid =  [...itemToBitstreamMap.keys()].find(key => itemToBitstreamMap.get(key) === bitstreamId);
+      const itemIndexToEnrich = objects.indexOf(objects.find(item => item.uuid === mappedItemUuid));
+      objects[itemIndexToEnrich].canDownload = isCurrentUserAuthorizedToDownloadBitstream;
+    });
+
+    return  objects;
+  }
+
+  /**
+   * Extract Uuid from authorization id.
+   * the feature id from the authorization id that is composed as follows:
+   * epersonUuid_featureID_itemType_itemUuid
+   *
+   * uuid of workspace or workflow items are made as follows workspace_id or workflow_id
+   * @param authId
+   * @private
+   */
+
   private extractUuidFromAuthorizationId(authId: string): string {
-    //we read the bitstream uuid from the authorization id that is composed as follows:
-    // epersonUuid_featureID_itemType_itemUuid
     const authSegments = authId.split('_');
     const idSegment = authSegments[authSegments.length - 1];
-    // id of workspace or workflow items are made as follows workspace_idNumber
     return idSegment.includes('_') ? idSegment.split('_')[1] : idSegment;
   }
 
+  /**
+   * Extract FeatureId from authorization id.
+   * the feature id from the authorization id that is composed as follows:
+   * epersonUuid_featureID_itemType_itemUuid
+   *
+   * @param authId
+   * @private
+   */
   private extractFeatureIdFromAuthorizationId(authId: string): FeatureID {
-    //we read the feature id from the authorization id that is composed as follows:
-    // epersonUuid_featureID_itemType_itemUuid
     const authSegments = authId.split('_');
     return authSegments[1] as FeatureID;
   }
