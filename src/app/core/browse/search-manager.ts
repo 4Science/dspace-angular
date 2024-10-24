@@ -122,22 +122,24 @@ export class SearchManager {
       return of(searchObjects);
     }
 
-
     let pageToEnrich = Object.assign([], searchObjects.payload.page);
 
     const uiidListsMappedToAuthorizations = this.groupItemsUuidsByAuthorizations(objects, mappedEntities);
     const authorizationRequests = [...uiidListsMappedToAuthorizations.keys()].map((features) => {
       const uuidList = uiidListsMappedToAuthorizations.get(features);
       const type = objects.find(object => object.id === uuidList[0]).uniqueType;
+
       return this.authorizationService.getObjectsAuthorizations(uuidList, type, features);
     });
 
     return combineLatest(authorizationRequests).pipe(
       map(authorizationsLists => {
         const flatList = [].concat.apply([], authorizationsLists);
+
         flatList.forEach((authorization: Authorization) => {
           const objectId = this.extractUuidFromAuthorizationId(authorization.id);
           const indexToUpdate = pageToEnrich.indexOf(pageToEnrich.find(object => object.indexableObject.id.toString() === objectId));
+
           pageToEnrich[indexToUpdate].indexableObject.userAuthorizations = [
             ...pageToEnrich[indexToUpdate].indexableObject.userAuthorizations,
             this.extractFeatureIdFromAuthorizationId(authorization.id)
@@ -163,15 +165,16 @@ export class SearchManager {
    */
   private groupItemsUuidsByAuthorizations<T extends DSpaceObject>(objects: T[], mappedEntities: Map<string, FeatureID[]>): Map<FeatureID[], string[]> {
     const mappedUuidListsToFeatures = new Map();
+
     objects.forEach(object => {
       const objectType = this.getObjectType(object);
       const features = mappedEntities.get(objectType);
+
       if (hasValue(features) && hasValue(mappedUuidListsToFeatures.get(features))) {
         mappedUuidListsToFeatures.set(features, [...mappedUuidListsToFeatures.get(features), object.id]);
       } else if (hasValue(features)) {
         mappedUuidListsToFeatures.set(features, [object.id]);
       }
-
     });
 
     return mappedUuidListsToFeatures;
@@ -205,12 +208,15 @@ export class SearchManager {
     }
 
     const entityTypes =  [...new Set(objects.map(dso => this.getObjectType(dso)))];
+
     entityTypes.forEach((entity) => {
       const config = configuredAuthorizationsForDiscovery[entity];
+
       if (hasValue(config)) {
         mappedEntities.set(entity, config);
       }
     });
+
     return mappedEntities;
   }
 
@@ -255,10 +261,12 @@ export class SearchManager {
 
             bitstreamToAuthorizationFeatureMap.set(bitstreamUuid, featureId);
           });
+
           enrichedItems = this.mapCanDownloadFeatureToBitstreams(enrichedItems, itemToBitstreamMap, bitstreamToAuthorizationFeatureMap, authorizations);
 
           const pageToReturn = searchObjects.payload.page.map(item => {
             const enrichedItem = enrichedItems.find(dso => dso.uuid === item.indexableObject.uuid);
+
             return Object.assign(item, {canDownload: enrichedItem.canDownload});
           });
 
@@ -289,6 +297,7 @@ export class SearchManager {
 
     itemsWithNoThumbnail.forEach(uuid => {
       const itemIndexWithNoThumbnail = objects.indexOf(objects.find(item => item.uuid === uuid));
+
       objects[itemIndexWithNoThumbnail].canDownload = false;
     });
 
@@ -297,6 +306,7 @@ export class SearchManager {
       const isCurrentUserAuthorizedToDownloadBitstream = hasValue(bitstreamToAuthorizationMap.get(bitstreamId));
       const mappedItemUuid =  [...itemToBitstreamMap.keys()].find(key => itemToBitstreamMap.get(key) === bitstreamId);
       const itemIndexToEnrich = objects.indexOf(objects.find(item => item.uuid === mappedItemUuid));
+
       objects[itemIndexToEnrich].canDownload = isCurrentUserAuthorizedToDownloadBitstream;
     });
 
@@ -316,6 +326,7 @@ export class SearchManager {
   private extractUuidFromAuthorizationId(authId: string): string {
     const authSegments = authId.split('_');
     const idSegment = authSegments[authSegments.length - 1];
+
     return idSegment.includes('_') ? idSegment.split('_')[1] : idSegment;
   }
 
@@ -329,6 +340,7 @@ export class SearchManager {
    */
   private extractFeatureIdFromAuthorizationId(authId: string): FeatureID {
     const authSegments = authId.split('_');
+
     return authSegments[1] as FeatureID;
   }
 
