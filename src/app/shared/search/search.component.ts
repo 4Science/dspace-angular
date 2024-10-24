@@ -47,12 +47,12 @@ import { WorkspaceItem } from '../../core/submission/models/workspaceitem.model'
 import { ITEM_MODULE_PATH } from '../../item-page/item-page-routing-paths';
 import { COLLECTION_MODULE_PATH } from '../../collection-page/collection-page-routing-paths';
 import { COMMUNITY_MODULE_PATH } from '../../community-page/community-page-routing-paths';
+import { AppConfig, APP_CONFIG } from '../../../config/app-config.interface';
 import { SearchManager } from '../../core/browse/search-manager';
 import { AlertType } from '../alert/alert-type';
 import { isPlatformServer } from '@angular/common';
-import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
 import { FeatureID } from '../../core/data/feature-authorization/feature-id';
-import { AuthorizationService } from '../../core/data/feature-authorization/authorization.service';
+import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 
 @Component({
   selector: 'ds-search',
@@ -96,15 +96,18 @@ export class SearchComponent implements OnInit, OnDestroy {
   @Input() fixedFilterQuery: string;
 
   /**
+   * Embedded keys to force during the search
+   */
+  @Input() forcedEmbeddedKeys: Map<string, string[]> = new Map([
+    ['default', ['metrics']],
+    ['workspace', ['item','metrics']],
+    ['workflow', ['workflowitem', 'item','metrics']]
+  ]);
+
+  /**
    * A hidden query that will be used but not displayed in the url/searchbar
    */
   @Input() hiddenQuery: string;
-
-
-  /**
-   * Embedded keys to force during the search
-   */
-  @Input() forcedEmbeddedKeys: Map<string, string[]> = new Map([['default', ['metrics']]]);
 
   /**
    * If this is true, the request will only be sent if there's
@@ -140,7 +143,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   /**
    * Optional projection to use during the search
    */
-  @Input() projection;
+  @Input() projection = 'preventMetadataSecurity';
 
   /**
    * Whether or not the search bar should be visible
@@ -268,7 +271,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   @Input() query: string;
 
   /**
-   * The scope for teh search options
+   * The fallback scope when no scope is defined in the url, if this is also undefined no scope will be set
    */
   @Input() scope: string;
 
@@ -389,8 +392,7 @@ export class SearchComponent implements OnInit, OnDestroy {
    */
   @Output() customEvent = new EventEmitter<any>();
 
-  constructor(
-      protected service: SearchService,
+  constructor(protected service: SearchService,
     protected searchManager: SearchManager,
     protected sidebarService: SidebarService,
     protected windowService: HostWindowService,
@@ -399,8 +401,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     protected routeService: RouteService,
     protected router: Router,
     @Inject(APP_CONFIG) protected appConfig: AppConfig,
-    protected siteAuthorizationService: AuthorizationService
-  ){
+    protected authorizationService: AuthorizationDataService,){
     this.isXsOrSm$ = this.windowService.isXsOrSm();
   }
 
@@ -417,16 +418,11 @@ export class SearchComponent implements OnInit, OnDestroy {
       return;
     }
 
-
-    this.currentScope$ = this.routeService.getQueryParameterValue('scope').pipe(
-      map((routeValue: string) => hasValue(routeValue) ? routeValue : this.scope),
-    );
-
     this.showThumbnails = this.showThumbnails ?? this.appConfig.browseBy.showThumbnails;
 
     if (this.showCorrection === null || this.showCorrection === undefined) {
       this.subs.push(
-        this.siteAuthorizationService.getSiteAuthorization(FeatureID.CanCorrectItem)
+        this.authorizationService.isAuthorized(FeatureID.CanCorrectItem, null, null, true)
         .subscribe((showCorrection) => {
           this.showCorrection = showCorrection;
         }));
@@ -446,6 +442,10 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.routeService.setParameter('fixedFilterQuery', this.fixedFilterQuery);
     }
 
+    this.currentScope$ = this.routeService.getQueryParameterValue('scope').pipe(
+      map((routeValue: string) => hasValue(routeValue) ? routeValue : this.scope),
+    );
+
     this.isSidebarCollapsed$ = this.isSidebarCollapsed();
     this.searchLink = this.getSearchLink();
     this.currentContext$.next(this.context);
@@ -454,9 +454,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     const configuration$: Observable<string> = this.searchConfigService
       .getCurrentConfiguration(this.configuration).pipe(distinctUntilChanged());
     const searchSortOptions$: Observable<SortOptions[]> = combineLatest([configuration$, this.currentScope$]).pipe(
-        switchMap(([configuration, scope]: [string, string]) => this.searchConfigService.getConfigurationSearchConfig(configuration, scope)),
-        map((searchConfig: SearchConfig) => this.searchConfigService.getConfigurationSortOptions(searchConfig)),
-        distinctUntilChanged()
+      switchMap(([configuration, scope]: [string, string]) => this.searchConfigService.getConfigurationSearchConfig(configuration, scope)),
+      map((searchConfig: SearchConfig) => this.searchConfigService.getConfigurationSortOptions(searchConfig)),
+      distinctUntilChanged()
     );
     const sortOption$: Observable<SortOptions> = searchSortOptions$.pipe(
       switchMap((searchSortOptions: SortOptions[]) => {
@@ -468,20 +468,20 @@ export class SearchComponent implements OnInit, OnDestroy {
     const searchOptions$: Observable<PaginatedSearchOptions> = this.getSearchOptions().pipe(distinctUntilChanged());
 
     this.subs.push(combineLatest([configuration$, searchSortOptions$, searchOptions$, sortOption$, this.currentScope$]).pipe(
-        filter(([configuration, searchSortOptions, searchOptions, sortOption, scope]: [string, SortOptions[], PaginatedSearchOptions, SortOptions, string]) => {
-          // filter for search options related to instanced paginated id
-          return searchOptions.pagination.id === this.paginationId;
-        }),
-        debounceTime(100)
+      filter(([configuration, searchSortOptions, searchOptions, sortOption, scope]: [string, SortOptions[], PaginatedSearchOptions, SortOptions, string]) => {
+        // filter for search options related to instanced paginated id
+        return searchOptions.pagination.id === this.paginationId;
+      }),
+      debounceTime(100)
     ).subscribe(([configuration, searchSortOptions, searchOptions, sortOption, scope]: [string, SortOptions[], PaginatedSearchOptions, SortOptions, string]) => {
       // Build the PaginatedSearchOptions object
       const searchOptionsConfiguration = searchOptions.configuration || configuration;
       const combinedOptions = Object.assign({}, searchOptions,
-          {
-            configuration: searchOptions.configuration || configuration,
-            sort: sortOption || searchOptions.sort,
-            forcedEmbeddedKeys: this.forcedEmbeddedKeys.get(searchOptionsConfiguration) || this.forcedEmbeddedKeys.get('default')
-          });
+        {
+          configuration: searchOptionsConfiguration,
+          sort: sortOption || searchOptions.sort,
+          forcedEmbeddedKeys: this.forcedEmbeddedKeys.get(searchOptionsConfiguration) || this.forcedEmbeddedKeys.get('default')
+        });
       if (combinedOptions.query === '') {
         combinedOptions.query = this.query;
       }
@@ -610,7 +610,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   private retrieveSearchResults(searchOptions: PaginatedSearchOptions) {
     this.resultsRD$.next(null);
     this.lastSearchOptions = searchOptions;
-    let followLinks;
+    let followLinks = [];
     if (this.showThumbnails) {
       followLinks = [
         followLink<Item>('thumbnail', { isOptional: true }),
@@ -637,8 +637,17 @@ export class SearchComponent implements OnInit, OnDestroy {
       });
     }
 
+    const searchOptionsWithHidden = Object.assign (new PaginatedSearchOptions({}), searchOptions);
+    if (isNotEmpty(this.hiddenQuery)) {
+      if (isNotEmpty(searchOptionsWithHidden.query)) {
+        searchOptionsWithHidden.query = searchOptionsWithHidden.query + ' AND ' + this.hiddenQuery;
+      } else {
+        searchOptionsWithHidden.query = this.hiddenQuery;
+      }
+    }
+
     this.searchManager.search(
-      searchOptions,
+      searchOptionsWithHidden,
       undefined,
       this.useCachedVersionIfAvailable,
       true,
@@ -647,7 +656,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       .subscribe((results: RemoteData<SearchObjects<DSpaceObject>>) => {
         if (results.hasSucceeded) {
           if (this.trackStatistics) {
-            this.service.trackSearch(searchOptions, results.payload);
+            this.service.trackSearch(searchOptionsWithHidden, results.payload);
           }
           if (results.payload?.page?.length > 0) {
             this.resultFound.emit(results.payload);

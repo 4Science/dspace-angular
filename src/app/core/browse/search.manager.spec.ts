@@ -12,9 +12,7 @@ import { of } from 'rxjs';
 import { MetadataValue } from '../shared/metadata.models';
 import { v4 as uuidv4 } from 'uuid';
 import { AUTHORITY_REFERENCE } from '../shared/metadata.utils';
-import { AppConfig } from '../../../config/app-config.interface';
-import { FeatureID } from '../data/feature-authorization/feature-id';
-
+import { ITEM } from '../shared/item.resource-type';
 
 describe('SearchManager', () => {
   let scheduler: TestScheduler;
@@ -22,20 +20,6 @@ describe('SearchManager', () => {
   const validAuthority = uuidv4();
   const validAuthority2 = uuidv4();
   const validAuthority3 = uuidv4();
-
-  const appConfig: Partial<AppConfig> = {
-    discoveryAuthorizationFeaturesConfig: {},
-    followAuthorityMetadata:  [
-      {
-        type: 'Publication',
-        metadata: ['dc.contributor.author']
-      },
-      {
-        type: 'Product',
-        metadata: ['dc.contributor.author']
-      }
-    ]
-  };
 
   const firstPublication = Object.assign(new Item(), {
     id: '13a4a8c3-3b94-4797-863d-b831f360cc60',
@@ -48,7 +32,8 @@ describe('SearchManager', () => {
         })
 
       ]
-    }
+    },
+    type: ITEM.value
   });
 
   const secondPublication = Object.assign(new Item(), {
@@ -61,7 +46,8 @@ describe('SearchManager', () => {
           value: 'author2'
         })
       ]
-    }
+    },
+    type: ITEM.value
   });
 
   const firstProject = Object.assign(new Item(), {
@@ -74,7 +60,8 @@ describe('SearchManager', () => {
           value: 'author3'
         })
       ]
-    }
+    },
+    type: ITEM.value
   });
 
   const thirdPublication = Object.assign(new Item(), {
@@ -87,7 +74,8 @@ describe('SearchManager', () => {
         })
 
       ]
-    }
+    },
+    type: ITEM.value
   });
 
   const invalidAuthorityPublication = Object.assign(new Item(), {
@@ -101,7 +89,8 @@ describe('SearchManager', () => {
         })
 
       ]
-    }
+    },
+    type: ITEM.value
   });
 
   const mockBrowseService: any = {
@@ -121,14 +110,8 @@ describe('SearchManager', () => {
       of(createSuccessfulRemoteDataObject(createPaginatedList([])))
   };
 
-  const mockAuthorizationService: any = {
-    getObjectsAuthorizations: (uuidList: string[], uniqueType: string, featuresId?: FeatureID[]) =>
-      of([])
-  };
-
-
   function initTestService() {
-    return new SearchManager(mockItemService, mockBrowseService, mockSearchService, mockAuthorizationService, appConfig as AppConfig);
+    return new SearchManager(mockItemService, mockBrowseService, mockSearchService);
   }
 
   beforeEach(() => {
@@ -150,10 +133,10 @@ describe('SearchManager', () => {
       const options: BrowseEntrySearchOptions = { options: null} as any;
       const followLink: FollowLinkConfig<any> = {} as any;
 
-      scheduler.schedule(() => service.getBrowseItemsFor(filterValue, filterAuthority, options).subscribe());
+      scheduler.schedule(() => service.getBrowseItemsFor(filterValue, filterAuthority, options, followLink).subscribe());
       scheduler.flush();
 
-      expect(mockBrowseService.getBrowseItemsFor).toHaveBeenCalledWith(filterValue, null, options);
+      expect(mockBrowseService.getBrowseItemsFor).toHaveBeenCalledWith(filterValue, null, options, followLink);
       expect(mockItemService.findAllById).toHaveBeenCalledWith([validAuthority, validAuthority2]);
 
     });
@@ -165,10 +148,10 @@ describe('SearchManager', () => {
       const options: BrowseEntrySearchOptions = { options: null} as any;
       const followLink: FollowLinkConfig<any> = {} as any;
 
-      scheduler.schedule(() => service.getBrowseItemsFor(filterValue, filterAuthority, options).subscribe());
+      scheduler.schedule(() => service.getBrowseItemsFor(filterValue, filterAuthority, options, followLink).subscribe());
       scheduler.flush();
 
-      expect(mockBrowseService.getBrowseItemsFor).toHaveBeenCalledWith(filterValue, filterAuthority, options);
+      expect(mockBrowseService.getBrowseItemsFor).toHaveBeenCalledWith(filterValue, filterAuthority, options, followLink);
       expect(mockItemService.findAllById).toHaveBeenCalledWith([validAuthority, validAuthority2]);
 
     });
