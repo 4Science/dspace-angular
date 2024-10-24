@@ -13,6 +13,8 @@ import { MetadataValue } from '../shared/metadata.models';
 import { v4 as uuidv4 } from 'uuid';
 import { AUTHORITY_REFERENCE } from '../shared/metadata.utils';
 import { ITEM } from '../shared/item.resource-type';
+import { AppConfig } from "../../../config/app-config.interface";
+import { FeatureID } from "../data/feature-authorization/feature-id";
 
 describe('SearchManager', () => {
   let scheduler: TestScheduler;
@@ -93,6 +95,20 @@ describe('SearchManager', () => {
     type: ITEM.value
   });
 
+  const appConfig: Partial<AppConfig> = {
+    discoveryAuthorizationFeaturesConfig: {},
+    followAuthorityMetadata:  [
+      {
+        type: 'Publication',
+        metadata: ['dc.contributor.author']
+      },
+      {
+        type: 'Product',
+        metadata: ['dc.contributor.author']
+      }
+    ]
+  };
+
   const mockBrowseService: any = {
     getBrowseItemsFor: (options: BrowseEntrySearchOptions) =>
       toRemoteData([firstPublication, secondPublication, firstProject]),
@@ -110,8 +126,13 @@ describe('SearchManager', () => {
       of(createSuccessfulRemoteDataObject(createPaginatedList([])))
   };
 
+  const mockAuthorizationService: any = {
+    getObjectsAuthorizations: (uuidList: string[], uniqueType: string, featuresId?: FeatureID[]) =>
+      of([])
+  };
+
   function initTestService() {
-    return new SearchManager(mockItemService, mockBrowseService, mockSearchService);
+    return new SearchManager(mockItemService, mockBrowseService, mockSearchService, mockAuthorizationService, appConfig as AppConfig);
   }
 
   beforeEach(() => {
