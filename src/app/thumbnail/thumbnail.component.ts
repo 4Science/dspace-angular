@@ -3,7 +3,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { Bitstream } from '../core/shared/bitstream.model';
 import { hasNoValue, hasValue } from '../shared/empty.util';
 import { RemoteData } from '../core/data/remote-data';
-import { BehaviorSubject, of, of as observableOf } from 'rxjs';
+import { BehaviorSubject, of as observableOf } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { FeatureID } from '../core/data/feature-authorization/feature-id';
 import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
@@ -31,11 +31,6 @@ export class ThumbnailComponent implements OnChanges {
    * If defaultImage is null, a HTML placeholder is used instead.
    */
   @Input() defaultImage? = null;
-
-  /**
-   * Whether the user is authorized to access the download link of the thubmnail
-   */
-  @Input() canUserDownload?: boolean;
 
   /**
    * The src attribute used in the template to render the image.
@@ -132,7 +127,7 @@ export class ThumbnailComponent implements OnChanges {
       this.auth.isAuthenticated().pipe(
         switchMap((isLoggedIn) => {
           if (isLoggedIn) {
-            return (typeof this.canUserDownload === 'boolean') ? of(this.canUserDownload) : this.authorizationService.isAuthorized(FeatureID.CanDownload, thumbnail.self);
+            return this.authorizationService.isAuthorized(FeatureID.CanDownload, thumbnail.self);
           } else {
             return observableOf(false);
           }

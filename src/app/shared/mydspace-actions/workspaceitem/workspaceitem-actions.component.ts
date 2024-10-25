@@ -1,10 +1,11 @@
 import { AuthorizationDataService } from 'src/app/core/data/feature-authorization/authorization-data.service';
 import { AuthService } from '../../../core/auth/auth.service';
+import { Item } from '../../../core/shared/item.model';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { Component, Injector, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -14,7 +15,7 @@ import { WorkspaceitemDataService } from '../../../core/submission/workspaceitem
 import { NotificationsService } from '../../notifications/notifications.service';
 import { RequestService } from '../../../core/data/request.service';
 import { SearchService } from '../../../core/shared/search/search.service';
-import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
+import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../../../core/shared/operators';
 import { RemoteData } from '../../../core/data/remote-data';
 import { NoContent } from '../../../core/shared/NoContent.model';
 import { getWorkspaceItemViewRoute } from '../../../workspaceitems-edit-page/workspaceitems-edit-page-routing-paths';
@@ -46,7 +47,7 @@ export class WorkspaceitemActionsComponent extends MyDSpaceActionsComponent<Work
    * (since the user can discard the item also from the edit page)
    * @type {Observable<boolean>}
    */
-  canEditItem: boolean;
+  canEditItem$: Observable<boolean>;
 
   /**
    * Initialize instance variables
@@ -60,15 +61,15 @@ export class WorkspaceitemActionsComponent extends MyDSpaceActionsComponent<Work
    * @param {RequestService} requestService
    */
   constructor(protected injector: Injector,
-    protected router: Router,
-    protected modalService: NgbModal,
-    protected notificationsService: NotificationsService,
-    protected translate: TranslateService,
-    protected searchService: SearchService,
-    protected requestService: RequestService,
-    private authService: AuthService,
-    public authorizationService: AuthorizationDataService,
-    ) {
+              protected router: Router,
+              protected modalService: NgbModal,
+              protected notificationsService: NotificationsService,
+              protected translate: TranslateService,
+              protected searchService: SearchService,
+              protected requestService: RequestService,
+              private authService: AuthService,
+              public authorizationService: AuthorizationDataService,
+  ) {
     super(WorkspaceItem.type, injector, router, notificationsService, translate, searchService, requestService);
 
   }
@@ -96,7 +97,16 @@ export class WorkspaceitemActionsComponent extends MyDSpaceActionsComponent<Work
   ngOnInit(): void {
     const activeEPerson$ = this.authService.getAuthenticatedUserFromStore();
 
-    this.canEditItem = this.object.userAuthorizations.includes(FeatureID.CanEditItem);
+    this.canEditItem$ = activeEPerson$.pipe(
+      switchMap((eperson) => {
+        return this.object?.item.pipe(
+          getFirstCompletedRemoteData(),
+          getRemoteDataPayload(),
+          switchMap((item: Item) => {
+            return this.authorizationService.isAuthorized(FeatureID.CanEditItem, this.object.self);
+          })
+        ) as Observable<boolean>;
+      }));
   }
 
   /**

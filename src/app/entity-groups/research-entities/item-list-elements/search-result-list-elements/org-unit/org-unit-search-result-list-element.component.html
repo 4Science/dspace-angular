@@ -4,7 +4,6 @@
            [attr.rel]="(linkType == linkTypes.ExternalLink) ? 'noopener noreferrer' : null"
            [routerLink]="[itemPageRoute]" class="dont-break-out">
             <ds-thumbnail [thumbnail]="dso?.thumbnail | async"
-                          [canUserDownload]="dso.canDownload"
                           [defaultImage]="'assets/images/orgunit-placeholder.svg'"
                           [alt]="'thumbnail.orgunit.alt'"
                           [placeholder]="'thumbnail.orgunit.placeholder'">
@@ -12,7 +11,6 @@
         </a>
         <span *ngIf="linkType == linkTypes.None" class="dont-break-out">
             <ds-thumbnail [thumbnail]="dso?.thumbnail | async"
-                          [canUserDownload]="dso.canDownload"
                           [defaultImage]="'assets/images/orgunit-placeholder.svg'"
                           [alt]="'thumbnail.orgunit.alt'"
                           [placeholder]="'thumbnail.orgunit.placeholder'">

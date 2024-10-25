@@ -99,7 +99,6 @@ export class SearchManager {
           map(() => {
             return searchObjectsRD;
           }),
-          switchMap(() => this.enrichWithThumbnailDownloadAuthorizations(searchObjectsRD)),
           switchMap(() => this.enrichItemsWithCurrentUserAuthorizations(searchObjectsRD, searchOptions.configuration ?? 'default')),
         );
       }
@@ -188,7 +187,7 @@ export class SearchManager {
    */
 
   private getObjectType<T extends DSpaceObject>(object: T): string {
-    return object.firstMetadataValue('dspace.entity.type') ?? (object as any as Item)?.entityType ?? object?.uniqueType;
+    return object?.uniqueType;
   }
 
   /**
@@ -220,98 +219,6 @@ export class SearchManager {
     return mappedEntities;
   }
 
-  /**
-   * Enrichment method dedicated to thumbnails related to items, to avoid multiple authorizations call on each search.
-   * If the thumbnail link has not been resolved this function won't execute any logic.
-   *
-   * @param searchObjects
-   * @protected
-   */
-
-  protected enrichWithThumbnailDownloadAuthorizations<T extends DSpaceObject>(searchObjects: RemoteData<SearchObjects<T>>): Observable<RemoteData<any>> {
-    const objects = searchObjects.payload.page.map((searchResult) => searchResult.indexableObject) as any;
-    const areThumbnailPresent = objects.map(object => object.thumbnail).filter(thumbnail =>  hasValue(thumbnail)).length > 0;
-
-    if (areThumbnailPresent) {
-      let enrichedItems = Object.assign([], objects);
-      let itemToBitstreamMap: Map<string, string> = new Map();
-      let bitstreamToAuthorizationFeatureMap: Map<string, string> = new Map();
-
-      // List of all thumbnails which could fail to load and on which an authorization for the download link will be requested
-      const thumbnails$ = objects
-        .map(dso => hasValue((dso as any)?.thumbnail) ? (dso as any)?.thumbnail.pipe(getFirstCompletedRemoteData()) : of(null))
-        .map((remoteThumbnail, index) => remoteThumbnail.pipe(
-          tap(bitstream  => itemToBitstreamMap.set(objects[index].uuid, (bitstream as RemoteData<Bitstream>)?.payload?.uuid)),
-        )) as Observable<RemoteData<Bitstream>>[];
-
-      return combineLatest(...thumbnails$).pipe(
-        switchMap(bitstreams => {
-          const bitstreamsToAuthorize =  bitstreams.filter(value => hasValue(value?.payload));
-
-          return this.authorizationService.getObjectsAuthorizations(
-            bitstreamsToAuthorize.map(bit => bit.payload.uuid),
-            bitstreamsToAuthorize[0].payload.uniqueType,
-            [FeatureID.CanDownload]
-          );
-        }),
-        map((authorizations) => {
-          authorizations.forEach(authorization => {
-            const bitstreamUuid = this.extractUuidFromAuthorizationId(authorization.id);
-            const featureId = this.extractFeatureIdFromAuthorizationId(authorization.id);
-
-            bitstreamToAuthorizationFeatureMap.set(bitstreamUuid, featureId);
-          });
-
-          enrichedItems = this.mapCanDownloadFeatureToBitstreams(enrichedItems, itemToBitstreamMap, bitstreamToAuthorizationFeatureMap, authorizations);
-
-          const pageToReturn = searchObjects.payload.page.map(item => {
-            const enrichedItem = enrichedItems.find(dso => dso.uuid === item.indexableObject.uuid);
-
-            return Object.assign(item, {canDownload: enrichedItem.canDownload});
-          });
-
-          return Object.assign(searchObjects, {
-            payload: {
-              ...searchObjects.payload,
-              page: pageToReturn
-            }
-          });
-        })
-      );
-    } else {
-      return of(searchObjects);
-    }
-  }
-
-  /**
-   * Map CanDownload feature to bitstreams belonging to items
-   *
-   * @param objects
-   * @param itemToBitstreamMap
-   * @param bitstreamToAuthorizationMap
-   * @param authorizations
-   * @private
-   */
-  private mapCanDownloadFeatureToBitstreams<T extends Item>(objects: T[], itemToBitstreamMap: Map<string,string>, bitstreamToAuthorizationMap: Map<string,string>, authorizations: Authorization[]): T[] {
-    const itemsWithNoThumbnail = [...itemToBitstreamMap.keys()].filter(key => !hasValue(itemToBitstreamMap[key]));
-
-    itemsWithNoThumbnail.forEach(uuid => {
-      const itemIndexWithNoThumbnail = objects.indexOf(objects.find(item => item.uuid === uuid));
-
-      objects[itemIndexWithNoThumbnail].canDownload = false;
-    });
-
-    authorizations.forEach(auth => {
-      const bitstreamId = this.extractUuidFromAuthorizationId(auth.id);
-      const isCurrentUserAuthorizedToDownloadBitstream = hasValue(bitstreamToAuthorizationMap.get(bitstreamId));
-      const mappedItemUuid =  [...itemToBitstreamMap.keys()].find(key => itemToBitstreamMap.get(key) === bitstreamId);
-      const itemIndexToEnrich = objects.indexOf(objects.find(item => item.uuid === mappedItemUuid));
-
-      objects[itemIndexToEnrich].canDownload = isCurrentUserAuthorizedToDownloadBitstream;
-    });
-
-    return  objects;
-  }
 
   /**
    * Extract Uuid from authorization id.

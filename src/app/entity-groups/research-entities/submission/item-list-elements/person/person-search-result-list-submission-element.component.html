@@ -3,7 +3,6 @@
     <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'"
        [attr.rel]="(linkType == linkTypes.ExternalLink) ? 'noopener noreferrer' : null" class="dont-break-out">
       <ds-thumbnail [thumbnail]="dso?.thumbnail | async"
-                    [canUserDownload]="dso.canDownload"
                     [defaultImage]="'assets/images/person-placeholder.svg'"
                     [alt]="'thumbnail.person.alt'"
                     [placeholder]="'thumbnail.person.placeholder'">
@@ -11,7 +10,6 @@
     </a>
     <span *ngIf="linkType == linkTypes.None" class="dont-break-out">
       <ds-thumbnail [thumbnail]="dso?.thumbnail | async"
-                    [canUserDownload]="dso.canDownload"
                     [defaultImage]="'assets/images/person-placeholder.svg'"
                     [alt]="'thumbnail.person.alt'"
                     [placeholder]="'thumbnail.person.placeholder'">
