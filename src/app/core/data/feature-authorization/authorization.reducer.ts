@@ -1,28 +1,36 @@
 import {
   AuthorizationAction,
   AuthorizationActionTypes,
-  SiteAuthorizationsConfigureAction, SiteAuthorizationsErrorAction, SiteAuthorizationsInitializedAction
+  GetAuthorizationsAction,
+  GetAuthorizationsErrorAction,
+  GetAuthorizationsSuccessAction,
+  SetPendingAuthorizationAction,
 } from './authorization.actions';
-import { AuthorizationsState } from './authorization-config.interfaces';
+import { AuthorizationsState } from './authorization.interfaces';
+import { object } from "prop-types";
 
 
-const initialState = Object.create(null);
+const initialState = Object.create({
+  authorizations: null,
+  loading: false,
+  hasError: false
+});
 
 export function authorizationReducer(storeState = initialState, action: AuthorizationAction): AuthorizationsState {
   switch (action.type) {
 
-    case AuthorizationActionTypes.CONFIGURE_SITE_AUTHORIZATIONS: {
-      return configureAuthorizations(storeState, action as SiteAuthorizationsConfigureAction);
+
+    case AuthorizationActionTypes.GET_AUTHORIZATIONS: {
+      return setAuthorizationsLoading(storeState, action as GetAuthorizationsAction);
     }
 
-    case AuthorizationActionTypes.SET_AUTHORIZATIONS_INITIALIZED: {
-      return setAuthorizationsInitialized(storeState, action as SiteAuthorizationsInitializedAction);
+    case AuthorizationActionTypes.GET_AUTHORIZATIONS_SUCCESS: {
+      return setAuthorizationsSuccess(storeState, action as GetAuthorizationsSuccessAction);
     }
 
-    case AuthorizationActionTypes.SET_AUTHORIZATIONS_ERROR: {
-      return setAuthorizationsError(storeState, action as SiteAuthorizationsErrorAction);
+    case AuthorizationActionTypes.GET_AUTHORIZATIONS_ERROR: {
+      return setAuthorizationsError(storeState, action as GetAuthorizationsErrorAction);
     }
-
 
     default: {
       return storeState;
@@ -30,20 +38,32 @@ export function authorizationReducer(storeState = initialState, action: Authoriz
   }
 }
 
-function configureAuthorizations(storeState: AuthorizationsState, action: SiteAuthorizationsConfigureAction): AuthorizationsState {
+function setAuthorizationsError(storeState: AuthorizationsState, action: GetAuthorizationsErrorAction): AuthorizationsState {
   return Object.assign({}, storeState, {
-    authorizations: Object.assign({}, storeState.authorizations, action.payload)
+    hasError: true,
+    loading: false
   });
 }
 
-function setAuthorizationsError(storeState: AuthorizationsState, action: SiteAuthorizationsErrorAction): AuthorizationsState {
+function setAuthorizationsLoading(storeState: AuthorizationsState, action: GetAuthorizationsAction): AuthorizationsState {
   return Object.assign({}, storeState, {
-    hasError: action.payload
+    loading: true,
+    pendingObjects: action.payload.uuidList
   });
 }
 
-function setAuthorizationsInitialized(storeState: AuthorizationsState, action: SiteAuthorizationsInitializedAction): AuthorizationsState {
+
+function setAuthorizationsSuccess(storeState: AuthorizationsState, action: GetAuthorizationsSuccessAction): AuthorizationsState {
+  let newAuthorizationsState = Object.assign({}, storeState.authorizations ?? {})
+  const objectsEntries = Object.keys(action.payload.authorizations);
+
+  objectsEntries.forEach(entry => {
+    newAuthorizationsState[entry] = {...newAuthorizationsState[entry], ...action.payload.authorizations[entry]}
+  })
+
   return Object.assign({}, storeState, {
-    initialized: action.payload
+    authorizations: newAuthorizationsState,
+    loading: false,
+    pendingObjects: storeState.pendingObjects.filter(uuid => !action.payload.pendingObjects.includes(uuid))
   });
 }

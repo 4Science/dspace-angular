@@ -43,7 +43,7 @@ import { DatadogRumConfig } from './datadog-rum-config.interfaces';
 import { FeatureID } from '../app/core/data/feature-authorization/feature-id';
 import {
   DiscoveryConfigurationFeaturesConfig
-} from '../app/core/data/feature-authorization/authorization-config.interfaces';
+} from '../app/core/data/feature-authorization/authorization.interfaces';
 
 export class DefaultAppConfig implements AppConfig {
   production = false;

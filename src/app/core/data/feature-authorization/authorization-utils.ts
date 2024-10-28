@@ -1,13 +1,21 @@
 import { map, switchMap } from 'rxjs/operators';
-import { combineLatest as observableCombineLatest, Observable, of as observableOf } from 'rxjs';
+import {
+  combineLatest,
+  combineLatest as observableCombineLatest,
+  forkJoin,
+  from,
+  Observable,
+  of as observableOf
+} from 'rxjs';
 import { AuthorizationSearchParams } from './authorization-search-params';
 import { SiteDataService } from '../site-data.service';
 import { hasNoValue, hasValue, isNotEmpty } from '../../../shared/empty.util';
 import { AuthService } from '../../auth/auth.service';
-import { Authorization, AuthorizationFeaturesMap } from '../../shared/authorization.model';
+import { Authorization } from '../../shared/authorization.model';
 import { Feature } from '../../shared/feature.model';
 import { FeatureID } from './feature-id';
-import { getFirstSucceededRemoteDataPayload } from '../../shared/operators';
+import { getFirstCompletedRemoteData, getFirstSucceededRemoteDataPayload } from '../../shared/operators';
+import { ObjectAuthorizationFeaturesMap, ObjectAuthorizationsState } from "./authorization.interfaces";
 
 /**
  * Operator accepting {@link AuthorizationSearchParams} and adding the current {@link Site}'s selflink to the parameter's
@@ -84,34 +92,78 @@ export const oneAuthorizationMatchesFeature = (featureID: FeatureID) =>
 
 
 /**
- * Operator mapping {@link Authorization}s features to a boolean
- * provided {@link FeatureID}
  * Note: This expects the {@link Authorization}s to contain a resolved link to their {@link Feature}. If they don't,
  * this observable will always emit false.
- * @param featureID
- * @returns true if at least one {@link Feature} matches, false if none do
+ * @returns a list to {@link Feature}s IDs.
  */
-export const mapAuthorizationsToFeatures = () =>
-  (source: Observable<Authorization[]>): Observable<AuthorizationFeaturesMap> =>
+export const getAuthorizationFeaturesIDs = (featureIDs: FeatureID[]) =>
+  (source: Observable<Authorization[]>): Observable<ObjectAuthorizationsState> =>
     source.pipe(
       switchMap((authorizations: Authorization[]) => {
         if (isNotEmpty(authorizations)) {
-          return observableCombineLatest(
-            authorizations
-              .filter((authorization: Authorization) => hasValue(authorization.feature))
-              .map((authorization: Authorization) => authorization.feature.pipe(
-                getFirstSucceededRemoteDataPayload()
-              ))
-          );
+          return combineLatest([
+            ...authorizations.map(auth => auth.object.pipe(getFirstCompletedRemoteData())),
+            ...authorizations.map(auth => auth.feature.pipe(getFirstCompletedRemoteData())),
+          ]).pipe(
+            map((data) => {
+              const features = data.map(rd => rd.payload).filter(dso => dso instanceof Feature) as Feature[];
+              const objects = data.map(rd => rd.payload).filter(dso => !(dso instanceof Feature))
+              let objectToFeaturesMap = {}
+
+              objects.forEach(object => {
+                objectToFeaturesMap = Object.assign({}, objectToFeaturesMap, {
+                  [object.self]: getFeatureIdToBooleanMap(featureIDs, features)
+                })
+              })
+              return objectToFeaturesMap
+            })
+          )
         } else {
-          return observableOf([]);
+          return observableOf({});
         }
       }),
-      map((features: Feature[]) => {
-        let featureMap = {};
-        features.forEach(feature => {
-          featureMap[feature.id] = true;
-        });
-        return featureMap as AuthorizationFeaturesMap;
-      })
     );
+
+
+/**
+ *
+ */
+export const getFeatureIdToBooleanMap = (featureIDs: FeatureID[], features: Feature[]) : ObjectAuthorizationFeaturesMap => {
+  let mapFeatureToBoolean = {};
+  featureIDs.forEach(id => {
+    mapFeatureToBoolean[id] = hasValue(features.find(feature => feature.id === id))
+  })
+  return  mapFeatureToBoolean
+}
+
+
+/**
+ * Extract Uuid from authorization id.
+ * the feature id from the authorization id that is composed as follows:
+ * epersonUuid_featureID_itemType_itemUuid
+ *
+ * uuid of workspace or workflow items are made as follows workspace_id or workflow_id
+ * @param authId
+ * @private
+ */
+
+export const extractUuidFromAuthorizationId = (authId: string): string => {
+  const authSegments = authId.split('_');
+  const idSegment = authSegments[authSegments.length - 1];
+
+  return idSegment.includes('_') ? idSegment.split('_')[1] : idSegment;
+}
+
+/**
+ * Extract FeatureId from authorization id.
+ * the feature id from the authorization id that is composed as follows:
+ * epersonUuid_featureID_itemType_itemUuid
+ *
+ * @param authId
+ * @private
+ */
+export const extractFeatureIdFromAuthorizationId = (authId: string): string => {
+  const authSegments = authId.split('_');
+
+  return authSegments[1] as FeatureID;
+}

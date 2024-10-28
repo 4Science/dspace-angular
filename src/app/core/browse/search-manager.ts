@@ -28,6 +28,10 @@ import { FeatureID } from '../data/feature-authorization/feature-id';
 import { Bitstream } from '../shared/bitstream.model';
 import { Authorization } from '../shared/authorization.model';
 import { SearchOptions } from '../../shared/search/models/search-options.model';
+import {
+  extractFeatureIdFromAuthorizationId,
+  extractUuidFromAuthorizationId
+} from "../data/feature-authorization/authorization-utils";
 
 /**
  * The service aims to manage browse requests and subsequent extra fetch requests.
@@ -136,12 +140,12 @@ export class SearchManager {
         const flatList = [].concat.apply([], authorizationsLists);
 
         flatList.forEach((authorization: Authorization) => {
-          const objectId = this.extractUuidFromAuthorizationId(authorization.id);
+          const objectId = extractUuidFromAuthorizationId(authorization.id);
           const indexToUpdate = pageToEnrich.indexOf(pageToEnrich.find(object => object.indexableObject.id.toString() === objectId));
 
           pageToEnrich[indexToUpdate].indexableObject.userAuthorizations = [
             ...pageToEnrich[indexToUpdate].indexableObject.userAuthorizations,
-            this.extractFeatureIdFromAuthorizationId(authorization.id)
+            extractFeatureIdFromAuthorizationId(authorization.id)
           ];
         });
 
@@ -219,37 +223,6 @@ export class SearchManager {
     return mappedEntities;
   }
 
-
-  /**
-   * Extract Uuid from authorization id.
-   * the feature id from the authorization id that is composed as follows:
-   * epersonUuid_featureID_itemType_itemUuid
-   *
-   * uuid of workspace or workflow items are made as follows workspace_id or workflow_id
-   * @param authId
-   * @private
-   */
-
-  private extractUuidFromAuthorizationId(authId: string): string {
-    const authSegments = authId.split('_');
-    const idSegment = authSegments[authSegments.length - 1];
-
-    return idSegment.includes('_') ? idSegment.split('_')[1] : idSegment;
-  }
-
-  /**
-   * Extract FeatureId from authorization id.
-   * the feature id from the authorization id that is composed as follows:
-   * epersonUuid_featureID_itemType_itemUuid
-   *
-   * @param authId
-   * @private
-   */
-  private extractFeatureIdFromAuthorizationId(authId: string): FeatureID {
-    const authSegments = authId.split('_');
-
-    return authSegments[1] as FeatureID;
-  }
 
   protected fetchExtraData<T extends DSpaceObject>(objects: T[]): Observable<any> {
 

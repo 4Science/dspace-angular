@@ -2,73 +2,98 @@
 
 import { type } from '../../../shared/ngrx/type';
 import { Action } from '@ngrx/store';
-import { AuthorizationsMapState } from './authorization-config.interfaces';
+import { FeatureID } from "./feature-id";
+import {
+  AuthorizationActionPayload, AuthorizationsState,
+  ObjectAuthorizationsState
+} from "./authorization.interfaces";
 
 
 /**
  * The list of AuthorizationActions type definitions
  */
 export const AuthorizationActionTypes = {
-  CONFIGURE_SITE_AUTHORIZATIONS: type('dspace/authorizations/CONFIGURE_SITE_AUTHORIZATION'),
-  FETCH_SITE_AUTHORIZATIONS: type('dspace/authorizations/FETCH_SITE_AUTHORIZATION'),
-  SET_AUTHORIZATIONS_INITIALIZED: type('dspace/authorizations/SET_AUTHORIZATIONS_INITIALIZED'),
-  SET_AUTHORIZATIONS_ERROR: type('dspace/authorizations/SET_AUTHORIZATIONS_ERROR'),
+  GET_AUTHORIZATIONS: type('dspace/authorizations/GET_AUTHORIZATIONS'),
+  GET_AUTHORIZATIONS_SUCCESS: type('dspace/authorizations/GET_AUTHORIZATIONS_SUCCESS'),
+  GET_AUTHORIZATIONS_ERROR: type('dspace/authorizations/GET_AUTHORIZATIONS_ERROR'),
+  SET_PENDING_AUTHORIZATIONS: type('dspace/authorizations/SET_PENDING_AUTHORIZATIONS'),
 };
 
 export abstract class AbstractAuthorizationAction implements Action {
   abstract type: string;
 }
 
-export class SiteAuthorizationsConfigureAction extends AbstractAuthorizationAction {
-  type = AuthorizationActionTypes.CONFIGURE_SITE_AUTHORIZATIONS;
-  payload: AuthorizationsMapState;
+export class GetAuthorizationsAction extends AbstractAuthorizationAction {
+  type = AuthorizationActionTypes.GET_AUTHORIZATIONS;
+  payload: AuthorizationActionPayload;
 
   constructor(
-    authMap: AuthorizationsMapState
+    uuidList: string[],
+    type: string,
+    featureIDs: FeatureID[]
   ) {
     super();
-    this.payload = authMap;
+    this.payload = {
+      uuidList,
+      type,
+      featureIDs
+    };
   }
 }
 
-export class SiteAuthorizationsInitializedAction extends AbstractAuthorizationAction {
-  type = AuthorizationActionTypes.SET_AUTHORIZATIONS_INITIALIZED;
-  payload: boolean;
+export class GetAuthorizationsSuccessAction extends AbstractAuthorizationAction {
+  type = AuthorizationActionTypes.GET_AUTHORIZATIONS_SUCCESS;
+  payload: AuthorizationsState;
 
   constructor(
-    initialized: boolean
+    map: ObjectAuthorizationsState,
+    uuidList: string[]
   ) {
     super();
-    this.payload = initialized;
+    this.payload = {
+      authorizations: map,
+      pendingObjects: uuidList,
+      hasError: false,
+      loading: false
+    }
   }
 }
 
-export class SiteAuthorizationsErrorAction extends AbstractAuthorizationAction {
-  type = AuthorizationActionTypes.SET_AUTHORIZATIONS_ERROR;
-  payload: boolean;
+export class GetAuthorizationsErrorAction extends AbstractAuthorizationAction {
+  type = AuthorizationActionTypes.GET_AUTHORIZATIONS_ERROR;
+  payload: AuthorizationActionPayload;
 
   constructor(
-    error: boolean
+    uuidList: string[],
+    featureIDs: FeatureID[]
   ) {
     super();
-    this.payload = error;
+    this.payload = {
+      uuidList,
+      featureIDs
+    };
   }
 }
 
-export class FetchSiteAuthorizationsAction extends AbstractAuthorizationAction {
-  type = AuthorizationActionTypes.FETCH_SITE_AUTHORIZATIONS;
+export class SetPendingAuthorizationAction extends AbstractAuthorizationAction {
+  type = AuthorizationActionTypes.SET_PENDING_AUTHORIZATIONS;
+  payload: string[];
 
-  constructor() {
+  constructor(
+    uuidList: string[],
+  ) {
     super();
+    this.payload = uuidList
   }
 }
+
 
 
 /**
  * A type to encompass all AuthorizationActions
  */
 export type AuthorizationAction
-  = FetchSiteAuthorizationsAction
-  | SiteAuthorizationsConfigureAction
-  | SiteAuthorizationsErrorAction
-  | SiteAuthorizationsInitializedAction;
+  = GetAuthorizationsAction
+  | GetAuthorizationsSuccessAction
+  | GetAuthorizationsErrorAction
+  | SetPendingAuthorizationAction

@@ -39,7 +39,7 @@ import { IdentifierSubtypesConfig } from './identifier-subtypes-config.interface
 import { DatadogRumConfig } from './datadog-rum-config.interfaces';
 import {
   DiscoveryConfigurationFeaturesConfig
-} from '../app/core/data/feature-authorization/authorization-config.interfaces';
+} from '../app/core/data/feature-authorization/authorization.interfaces';
 import { FeatureID } from '../app/core/data/feature-authorization/feature-id';
 
 interface AppConfig extends Config {

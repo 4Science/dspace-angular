@@ -1,14 +1,13 @@
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
-  AuthorizationActionTypes,
-  SiteAuthorizationsConfigureAction,
-  SiteAuthorizationsErrorAction, SiteAuthorizationsInitializedAction
+  AuthorizationActionTypes, GetAuthorizationsAction, GetAuthorizationsErrorAction, GetAuthorizationsSuccessAction,
 } from './authorization.actions';
 import { AuthorizationDataService } from './authorization-data.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app.reducer';
+import { combineLatest, of } from "rxjs";
 
 
 @Injectable()
@@ -18,25 +17,20 @@ export class AuthorizationEffects {
    * Fetch all site related authorizations
    */
 
-  fetchSiteAuthorizations = createEffect(() => this.actions$
-    .pipe(ofType(AuthorizationActionTypes.FETCH_SITE_AUTHORIZATIONS),
-      switchMap(() => this.authorizationDataService.getSiteAuthorizationMap().pipe(
-        catchError((error) => {
-          this.store.dispatch(new SiteAuthorizationsErrorAction(true));
-          throw error;
-        })
-      )),
-      map((authorizationsMap) => new SiteAuthorizationsConfigureAction(authorizationsMap))
+  getAuthorizations$ = createEffect(() => this.actions$
+    .pipe(ofType(AuthorizationActionTypes.GET_AUTHORIZATIONS),
+      switchMap((action: GetAuthorizationsAction) => combineLatest([
+        this.authorizationDataService.getAuthorizationForObjects(action.payload.uuidList, action.payload.type, action.payload.featureIDs).pipe(
+          catchError((error) => {
+            this.store.dispatch(new GetAuthorizationsErrorAction(action.payload.uuidList, action.payload.featureIDs));
+            throw error;
+          })
+        ),
+        of(action.payload)
+      ])),
+      map(([authorizationsMap, payload]) => new GetAuthorizationsSuccessAction(authorizationsMap, payload.uuidList))
     ));
 
-
-  /**
-   * Set initialization state
-   */
-  setInitialized = createEffect(() => this.actions$
-    .pipe(ofType(AuthorizationActionTypes.CONFIGURE_SITE_AUTHORIZATIONS),
-      map(() => new SiteAuthorizationsInitializedAction(true))
-    ));
 
   constructor(
     private actions$: Actions,

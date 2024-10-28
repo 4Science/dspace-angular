@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
-import { SiteDataService } from '../site-data.service';
-import { Observable, switchMap } from 'rxjs';
+import { Observable} from 'rxjs';
 import { createFeatureSelector, createSelector, select, Store } from '@ngrx/store';
-import { AuthorizationsMapState, AuthorizationsState } from './authorization-config.interfaces';
+import {
+  AuthorizationsState,
+  ObjectAuthorizationsState
+} from './authorization.interfaces';
 import { distinctUntilChanged, filter, map, take } from 'rxjs/operators';
 import { AppState } from '../../../app.reducer';
-import { FetchSiteAuthorizationsAction } from './authorization.actions';
 import { FeatureID } from './feature-id';
+import { hasValue } from "../../../shared/empty.util";
+import { GetAuthorizationsAction } from "./authorization.actions";
+import { SiteDataService } from "../site-data.service";
 
 
-const authorizationsSelector = createFeatureSelector<AuthorizationsState>('authorizationFeaturesConfig');
+const authorizationsSelector = createFeatureSelector<AuthorizationsState>('authorizationFeatures');
 
 /**
  * The base selector function to select the authorizations for the site
@@ -19,13 +23,6 @@ const getAllAuthorizations = createSelector(
   (state: AuthorizationsState) =>  state.authorizations
 );
 
-/**
- * The selector function to select initialization state
- */
-const getInitializationStatus = createSelector(
-  authorizationsSelector,
-  (state: AuthorizationsState) =>  state.initialized
-);
 
 /**
  * The selector function to check if service has errors
@@ -33,6 +30,17 @@ const getInitializationStatus = createSelector(
 const getErrorStatus = createSelector(
   authorizationsSelector,
   (state: AuthorizationsState) =>  state.hasError
+);
+
+
+const getLoadingStatus = createSelector(
+  authorizationsSelector,
+  (state: AuthorizationsState) =>  state.loading
+);
+
+const getPendingObjects = createSelector(
+  authorizationsSelector,
+  (state: AuthorizationsState) =>  state.pendingObjects
 );
 
 /**
@@ -45,47 +53,58 @@ export class AuthorizationService {
     private store: Store<AppState>,
   ) {}
 
-  initialize(): void {
-    this.store.dispatch(new FetchSiteAuthorizationsAction());
+  initStateForObjects(uuidList: string[], type: string, featureIDs: FeatureID[]) {
+    this.store.dispatch(new GetAuthorizationsAction(uuidList, type, featureIDs))
   }
 
-  getAllAuthorizationsState(): Observable<AuthorizationsMapState> {
-    return this.isInitialized().pipe(
-      filter(initialized => Boolean(initialized)),
-      switchMap(() => {
-        return this.store.pipe(
-          select(getAllAuthorizations),
-          distinctUntilChanged(),
-          take(1),
-        );
-      })
-    );
+  initStateForSite(featureIDs: FeatureID[]) {
+    this.siteService.find().pipe(
+      take(1)
+    ).subscribe(site => this.initStateForObjects([site.uuid], site.uniqueType, featureIDs))
   }
 
-  getSiteAuthorization(featureId: FeatureID): Observable<boolean> {
-    return  this.isInitialized().pipe(
-      filter(initialized => Boolean(initialized)),
-      switchMap(() => this.siteService.find().pipe(
-        switchMap((site) => {
-          return this.getAllAuthorizationsState().pipe(
-            map(state => state[site.uuid][featureId])
-          );
-        })
-      ))
-    );
-  }
 
-  isInitialized(): Observable<boolean> {
+  getAllAuthorizationsState(): Observable<ObjectAuthorizationsState> {
     return this.store.pipe(
-      select(getInitializationStatus),
+      select(getAllAuthorizations),
       distinctUntilChanged(),
     );
   }
+
+
+  getAuthorizationForObject(featureId: FeatureID, objectUrl?: string): Observable<boolean | undefined> {
+    return this.getAllAuthorizationsState().pipe(
+      map(state => {
+
+        if (hasValue(state)) {
+          return objectUrl && state[objectUrl] ? state[objectUrl][featureId] : undefined
+        }
+
+        return undefined
+      }),
+    );
+  }
+
 
   hasErrors(): Observable<boolean> {
     return this.store.pipe(
       select(getErrorStatus),
       distinctUntilChanged(),
+    );
+  }
+
+  isLoading(): Observable<boolean> {
+    return this.store.pipe(
+      select(getLoadingStatus),
+      distinctUntilChanged(),
+    );
+  }
+
+  isObjectAuthorizationLoading(uuid: string): Observable<boolean> {
+    return this.store.pipe(
+      select(getPendingObjects),
+      distinctUntilChanged(),
+      map(state => state.includes(uuid)),
     );
   }
 

@@ -422,7 +422,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     if (this.showCorrection === null || this.showCorrection === undefined) {
       this.subs.push(
-        this.authorizationService.getSiteAuthorization(FeatureID.CanCorrectItem)
+        this.authorizationService.getAuthorizationForObject(FeatureID.CanCorrectItem)
         .subscribe((showCorrection) => {
           this.showCorrection = showCorrection;
         }));

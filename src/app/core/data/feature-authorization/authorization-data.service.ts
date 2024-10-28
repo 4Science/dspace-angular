@@ -1,7 +1,7 @@
-import { combineLatest, Observable, of as observableOf } from 'rxjs';
+import { combineLatest, Observable, of as observableOf, of } from 'rxjs';
 import { Inject, Injectable } from '@angular/core';
 import { AUTHORIZATION } from '../../shared/authorization.resource-type';
-import { Authorization, AuthorizationFeaturesMap } from '../../shared/authorization.model';
+import { Authorization } from '../../shared/authorization.model';
 import { RequestService } from '../request.service';
 import { RemoteDataBuildService } from '../../cache/builders/remote-data-build.service';
 import { ObjectCacheService } from '../../cache/object-cache.service';
@@ -10,11 +10,14 @@ import { SiteDataService } from '../site-data.service';
 import { followLink, FollowLinkConfig } from '../../../shared/utils/follow-link-config.model';
 import { RemoteData } from '../remote-data';
 import { PaginatedList } from '../paginated-list.model';
-import { catchError, map, switchMap, take, tap } from 'rxjs/operators';
+import { catchError, filter, map, switchMap, take, tap } from 'rxjs/operators';
 import { hasNoValue, hasValue, isNotEmpty } from '../../../shared/empty.util';
 import { RequestParam } from '../../cache/models/request-param.model';
 import { AuthorizationSearchParams } from './authorization-search-params';
-import { mapAuthorizationsToFeatures, oneAuthorizationMatchesFeature } from './authorization-utils';
+import {
+  getAuthorizationFeaturesIDs,
+  oneAuthorizationMatchesFeature
+} from './authorization-utils';
 import { FeatureID } from './feature-id';
 import { getFirstCompletedRemoteData } from '../../shared/operators';
 import { FindListOptions } from '../find-list-options.model';
@@ -25,7 +28,9 @@ import { AuthorizationService } from './authorization.service';
 import { APP_CONFIG, AppConfig } from '../../../../config/app-config.interface';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app.reducer';
-import { AuthorizationsMapState } from './authorization-config.interfaces';
+import { DSpaceObject } from "../../shared/dspace-object.model";
+import { ObjectAuthorizationsState } from "./authorization.interfaces";
+import { startsWith } from "lodash";
 
 /**
  * A service to retrieve {@link Authorization}s from the REST API
@@ -45,7 +50,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
     protected objectCache: ObjectCacheService,
     protected halService: HALEndpointService,
     protected siteService: SiteDataService,
-    protected siteAuthorizationService: AuthorizationService,
+    protected authorizationService: AuthorizationService,
     protected store: Store<AppState>,
     @Inject(APP_CONFIG) private appConfig: AppConfig,
   ) {
@@ -87,26 +92,34 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    *                                    requested after the response becomes stale
    */
   isAuthorized(featureId?: FeatureID, objectUrl?: string, ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<boolean> {
-    const isSiteServiceInitialized$ = this.siteAuthorizationService.isInitialized();
-    const hasSiteServiceErrors$ = this.siteAuthorizationService.hasErrors();
-
-    return combineLatest([
-      isSiteServiceInitialized$,
-      hasSiteServiceErrors$
-    ]).pipe(
-      switchMap(([isInitialized, hasErrors]) => {
-        const canUseSiteService = !hasValue(objectUrl) && hasValue(featureId) && !hasValue(ePersonUuid);
-
-        if (!isInitialized) {
-          this.siteAuthorizationService.initialize();
-        }
-
-        if (!hasErrors && canUseSiteService) {
-          // If the object Url is missing the authorization relates to the site so we can read it from the state
-          return this.siteAuthorizationService.getSiteAuthorization(featureId);
-        }
-
-        if ((hasErrors) || !canUseSiteService) {
+    return this.authorizationService.hasErrors().pipe(
+      switchMap(( hasErrors) => {
+        if(!hasErrors) {
+          console.log('no errors')
+          this.authorizationService.getAuthorizationForObject(featureId, objectUrl).pipe(
+            take(1),
+            switchMap(authorization => {
+              console.log(authorization)
+              if (authorization === undefined) {
+                const dsoRequest$ = (objectUrl ? this.objectCache.getObjectByHref(objectUrl) : this.siteService.find()) as Observable<DSpaceObject>
+                return dsoRequest$.pipe(
+                  switchMap((dso: DSpaceObject) => combineLatest([of(dso), this.authorizationService.isObjectAuthorizationLoading(dso.uuid)])),
+                  map(([object, isPending]) => {
+                    if (!isPending) {
+                      this.authorizationService.initStateForObjects([object.uuid], object.uniqueType, [featureId])
+                    }
+                    console.log('here')
+                    return this.authorizationService.isObjectAuthorizationLoading(object.uuid).pipe(
+                      tap(console.log),
+                      switchMap(() => this.authorizationService.getAuthorizationForObject(featureId, object.self))
+                    )
+                  })
+                )
+              }
+              return of(authorization)
+            }),
+          )
+        } else {
           // we fallback on old method if site service had initialization issues or if some parameters more than the only feature ID are provided.
           return this.searchByObject(featureId, objectUrl, ePersonUuid, {}, useCachedVersionIfAvailable, reRequestOnStale, followLink('feature')).pipe(
             getFirstCompletedRemoteData(),
@@ -137,35 +150,12 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    * @param reRequestOnStale            Whether or not the request should automatically be re-
    *                                    requested after the response becomes stale
    */
-  getAuthorizationForObjects(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<AuthorizationFeaturesMap> {
+  getAuthorizationForObjects(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<ObjectAuthorizationsState> {
     return this.getObjectsAuthorizations(uuidList,  type, featuresId, ePersonUuid, useCachedVersionIfAvailable, reRequestOnStale).pipe(
-      mapAuthorizationsToFeatures()
+      getAuthorizationFeaturesIDs(featuresId)
     );
   }
 
-  /**
-   * Return a map of the site authorizations
-   * @private
-   */
-
-  getSiteAuthorizationMap(): Observable<AuthorizationsMapState> {
-    let siteUuid: string;
-
-    return this.siteService.find().pipe(
-      tap(siteData => siteUuid = siteData.uuid),
-      switchMap((site) => this.getAuthorizationForObjects(
-        [siteUuid],
-        site.uniqueType,
-        this.appConfig.siteAuthorizationFeaturesConfig
-      )),
-      map(authMap => {
-        return {
-          [siteUuid] : authMap
-        };
-      }),
-      take(1)
-    );
-  }
 
   /**
    * Return a list of authorizations give a list of uuid and a list of features
@@ -177,8 +167,13 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    * @param reRequestOnStale
    * @private
    */
-  getObjectsAuthorizations(uuidList: string[],   type: string, featuresId?: FeatureID[], ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true, isSite = false): Observable<Authorization[]> {
-    return this.searchByObjects(uuidList, type, featuresId, ePersonUuid, {}, useCachedVersionIfAvailable, reRequestOnStale, followLink('feature')).pipe(
+  getObjectsAuthorizations(uuidList: string[],   type: string, featuresId?: FeatureID[], ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<Authorization[]> {
+    const followLinks = [
+      followLink<Authorization>('feature', { isOptional: true }),
+      followLink<Authorization>('object', { isOptional: true }),
+    ];
+
+    return this.searchByObjects(uuidList, type, featuresId, ePersonUuid, {}, useCachedVersionIfAvailable, reRequestOnStale, ...followLinks).pipe(
       getFirstCompletedRemoteData(),
       map((authorizationRD) => {
         if (authorizationRD.statusCode !== 401 && hasValue(authorizationRD.payload) && isNotEmpty(authorizationRD.payload.page)) {
@@ -189,6 +184,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
       }),
       catchError(() => observableOf([]))
     );
+
   }
 
   /**
