@@ -1,11 +1,9 @@
 import { AuthorizationDataService } from 'src/app/core/data/feature-authorization/authorization-data.service';
-import { AuthService } from '../../../core/auth/auth.service';
-import { Item } from '../../../core/shared/item.model';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { Component, Injector, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { BehaviorSubject, Observable, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -15,7 +13,7 @@ import { WorkspaceitemDataService } from '../../../core/submission/workspaceitem
 import { NotificationsService } from '../../notifications/notifications.service';
 import { RequestService } from '../../../core/data/request.service';
 import { SearchService } from '../../../core/shared/search/search.service';
-import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../../../core/shared/operators';
+import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { RemoteData } from '../../../core/data/remote-data';
 import { NoContent } from '../../../core/shared/NoContent.model';
 import { getWorkspaceItemViewRoute } from '../../../workspaceitems-edit-page/workspaceitems-edit-page-routing-paths';
@@ -95,7 +93,7 @@ export class WorkspaceitemActionsComponent extends MyDSpaceActionsComponent<Work
 
 
   ngOnInit(): void {
-    this.canEditItem$ = this.authorizationService.isAuthorized(FeatureID.CanEditItem, this.object.self)
+    this.canEditItem$ = this.authorizationService.isAuthorized(FeatureID.CanEditItem, this.object.self);
   }
 
   /**

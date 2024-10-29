@@ -38,11 +38,6 @@ const getLoadingStatus = createSelector(
   (state: AuthorizationsState) =>  state.loading
 );
 
-const getPendingObjects = createSelector(
-  authorizationsSelector,
-  (state: AuthorizationsState) =>  state.pendingObjects
-);
-
 /**
  * A service to retrieve {@link Authorization}s for the site
  */
@@ -100,14 +95,6 @@ export class AuthorizationService {
   isLoading(): Observable<boolean> {
     return this.store.pipe(
       select(getLoadingStatus),
-      distinctUntilChanged(),
-    );
-  }
-
-  isObjectAuthorizationLoading(uuid: string): Observable<boolean> {
-    return this.store.pipe(
-      select(getPendingObjects),
-      map(state => state.includes(uuid)),
       distinctUntilChanged(),
     );
   }

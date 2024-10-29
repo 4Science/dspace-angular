@@ -47,7 +47,6 @@ function setAuthorizationsError(storeState: AuthorizationsState, action: GetAuth
 function setAuthorizationsLoading(storeState: AuthorizationsState, action: GetAuthorizationsAction): AuthorizationsState {
   return Object.assign({}, storeState, {
     loading: true,
-    pendingObjects: action.payload.uuidList
   });
 }
 
@@ -63,6 +62,5 @@ function setAuthorizationsSuccess(storeState: AuthorizationsState, action: GetAu
   return Object.assign({}, storeState, {
     authorizations: newAuthorizationsState,
     loading: false,
-    pendingObjects: storeState.pendingObjects.filter(uuid => !action.payload.pendingObjects.includes(uuid))
   });
 }

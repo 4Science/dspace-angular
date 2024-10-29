@@ -26,5 +26,4 @@ export interface AuthorizationsState {
   authorizations: ObjectAuthorizationsState,
   loading: boolean,
   hasError: boolean,
-  pendingObjects: string[]
 }

@@ -19,16 +19,13 @@ export class AuthorizationEffects {
 
   getAuthorizations$ = createEffect(() => this.actions$
     .pipe(ofType(AuthorizationActionTypes.GET_AUTHORIZATIONS),
-      switchMap((action: GetAuthorizationsAction) => combineLatest([
-        this.authorizationDataService.getAuthorizationForObjects(action.payload.uuidList, action.payload.type, action.payload.featureIDs, null, true).pipe(
-          catchError((error) => {
-            this.store.dispatch(new GetAuthorizationsErrorAction(action.payload.uuidList, action.payload.featureIDs));
-            throw error;
-          })
-        ),
-        of(action.payload)
-      ])),
-      map(([authorizationsMap, payload]) => new GetAuthorizationsSuccessAction(authorizationsMap, payload.uuidList))
+      switchMap((action: GetAuthorizationsAction) =>  this.authorizationDataService.getAuthorizationForObjects(action.payload.uuidList, action.payload.type, action.payload.featureIDs, null, true).pipe(
+        catchError((error) => {
+          this.store.dispatch(new GetAuthorizationsErrorAction(action.payload.uuidList, action.payload.featureIDs));
+          throw error;
+        })
+      )),
+      map((authorizationsMap) => new GetAuthorizationsSuccessAction(authorizationsMap))
     ));
 
 

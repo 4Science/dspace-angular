@@ -16,7 +16,6 @@ import {
 import { Metadata } from './metadata.utils';
 import { ResourceType } from './resource-type';
 import { CacheableObject } from '../cache/cacheable-object.model';
-import { FeatureID } from '../data/feature-authorization/feature-id';
 
 /**
  * An abstract model class for a DSpaceObject.

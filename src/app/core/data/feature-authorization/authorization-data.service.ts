@@ -98,7 +98,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
 
           return dsoRequest$.pipe(
             // Get correct item and check that has not already pending authorizations
-            switchMap((dso: DSpaceObject) => combineLatest([of(dso), this.authorizationService.isObjectAuthorizationLoading(getNormalizedUuid(dso)).pipe(take(1))])),
+            switchMap((dso: DSpaceObject) => combineLatest([of(dso), this.authorizationService.isLoading().pipe(take(1))])),
             filter(([dso, _]) => hasValue(dso)),
             switchMap(([object, isPending]) => this.readOrFetchAuthorization(object, featureId, isPending))
           );
@@ -135,7 +135,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
           this.authorizationService.initStateForObjects([getNormalizedUuid(dso)], dso.uniqueType, [featureId]);
         }
 
-        return this.authorizationService.isObjectAuthorizationLoading(getNormalizedUuid(dso)).pipe(
+        return this.authorizationService.isLoading().pipe(
           distinctUntilChanged(),
           filter(loading => !loading),
           switchMap(() => this.authorizationService.getAuthorizationForObject(featureId, dso.self))

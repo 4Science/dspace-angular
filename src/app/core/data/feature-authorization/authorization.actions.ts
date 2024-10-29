@@ -16,7 +16,6 @@ export const AuthorizationActionTypes = {
   GET_AUTHORIZATIONS: type('dspace/authorizations/GET_AUTHORIZATIONS'),
   GET_AUTHORIZATIONS_SUCCESS: type('dspace/authorizations/GET_AUTHORIZATIONS_SUCCESS'),
   GET_AUTHORIZATIONS_ERROR: type('dspace/authorizations/GET_AUTHORIZATIONS_ERROR'),
-  SET_PENDING_AUTHORIZATIONS: type('dspace/authorizations/SET_PENDING_AUTHORIZATIONS'),
 };
 
 export abstract class AbstractAuthorizationAction implements Action {
@@ -47,12 +46,10 @@ export class GetAuthorizationsSuccessAction extends AbstractAuthorizationAction 
 
   constructor(
     map: ObjectAuthorizationsState,
-    uuidList: string[]
   ) {
     super();
     this.payload = {
       authorizations: map,
-      pendingObjects: uuidList,
       hasError: false,
       loading: false
     };
@@ -75,18 +72,6 @@ export class GetAuthorizationsErrorAction extends AbstractAuthorizationAction {
   }
 }
 
-export class SetPendingAuthorizationAction extends AbstractAuthorizationAction {
-  type = AuthorizationActionTypes.SET_PENDING_AUTHORIZATIONS;
-  payload: string[];
-
-  constructor(
-    uuidList: string[],
-  ) {
-    super();
-    this.payload = uuidList;
-  }
-}
-
 
 
 /**
@@ -96,4 +81,3 @@ export type AuthorizationAction
   = GetAuthorizationsAction
   | GetAuthorizationsSuccessAction
   | GetAuthorizationsErrorAction
-  | SetPendingAuthorizationAction;
