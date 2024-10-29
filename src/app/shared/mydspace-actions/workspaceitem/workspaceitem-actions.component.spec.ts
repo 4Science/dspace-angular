@@ -71,10 +71,19 @@ const item = Object.assign(new Item(), {
         value: '2015-06-26'
       }
     ]
-  }
+  },
 });
 const rd = createSuccessfulRemoteDataObject(item);
-mockObject = Object.assign(new WorkspaceItem(), { item: observableOf(rd), id: '1234', uuid: '1234' });
+mockObject = Object.assign(new WorkspaceItem(), {
+  item: observableOf(rd),
+  id: '1234',
+  uuid: '1234',
+  _links: {
+    self: {
+      href: 'selfHref'
+    }
+  }
+});
 
 const ePersonMock: EPerson = Object.assign(new EPerson(), {
   handle: null,
