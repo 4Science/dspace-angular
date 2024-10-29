@@ -10,7 +10,6 @@ import { FEATURE } from './feature.resource-type';
 import { DSpaceObject } from './dspace-object.model';
 import { Feature } from './feature.model';
 import { ITEM } from './item.resource-type';
-import { FeatureID } from '../data/feature-authorization/feature-id';
 
 /**
  * Class representing a DSpace Authorization

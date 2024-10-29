@@ -33,7 +33,7 @@ import { MenuService } from '../../app/shared/menu/menu.service';
 import { RootDataService } from '../../app/core/data/root-data.service';
 import { firstValueFrom, lastValueFrom, Subscription } from 'rxjs';
 import { ServerCheckGuard } from '../../app/core/server-check/server-check.guard';
-import { AuthorizationService } from "../../app/core/data/feature-authorization/authorization.service";
+import { AuthorizationService } from '../../app/core/data/feature-authorization/authorization.service';
 
 /**
  * Performs client-side initialization.
@@ -105,7 +105,7 @@ export class BrowserInitService extends InitService {
 
       this.initKlaro();
 
-      this.authorizationService.initStateForSite(this.appConfig.siteAuthorizationFeaturesConfig)
+      this.authorizationService.initStateForSite(this.appConfig.siteAuthorizationFeaturesConfig);
 
       await lastValueFrom(this.authenticationReady$());
 

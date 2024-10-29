@@ -2,11 +2,11 @@
 
 import { type } from '../../../shared/ngrx/type';
 import { Action } from '@ngrx/store';
-import { FeatureID } from "./feature-id";
+import { FeatureID } from './feature-id';
 import {
   AuthorizationActionPayload, AuthorizationsState,
   ObjectAuthorizationsState
-} from "./authorization.interfaces";
+} from './authorization.interfaces';
 
 
 /**
@@ -29,13 +29,13 @@ export class GetAuthorizationsAction extends AbstractAuthorizationAction {
 
   constructor(
     uuidList: string[],
-    type: string,
+    uniqueType: string,
     featureIDs: FeatureID[]
   ) {
     super();
     this.payload = {
       uuidList,
-      type,
+      type: uniqueType,
       featureIDs
     };
   }
@@ -55,7 +55,7 @@ export class GetAuthorizationsSuccessAction extends AbstractAuthorizationAction 
       pendingObjects: uuidList,
       hasError: false,
       loading: false
-    }
+    };
   }
 }
 
@@ -83,7 +83,7 @@ export class SetPendingAuthorizationAction extends AbstractAuthorizationAction {
     uuidList: string[],
   ) {
     super();
-    this.payload = uuidList
+    this.payload = uuidList;
   }
 }
 
@@ -96,4 +96,4 @@ export type AuthorizationAction
   = GetAuthorizationsAction
   | GetAuthorizationsSuccessAction
   | GetAuthorizationsErrorAction
-  | SetPendingAuthorizationAction
+  | SetPendingAuthorizationAction;

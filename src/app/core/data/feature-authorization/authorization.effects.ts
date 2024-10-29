@@ -1,4 +1,4 @@
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
@@ -7,7 +7,7 @@ import {
 import { AuthorizationDataService } from './authorization-data.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app.reducer';
-import { combineLatest, of } from "rxjs";
+import { combineLatest, of } from 'rxjs';
 
 
 @Injectable()
@@ -20,7 +20,7 @@ export class AuthorizationEffects {
   getAuthorizations$ = createEffect(() => this.actions$
     .pipe(ofType(AuthorizationActionTypes.GET_AUTHORIZATIONS),
       switchMap((action: GetAuthorizationsAction) => combineLatest([
-        this.authorizationDataService.getAuthorizationForObjects(action.payload.uuidList, action.payload.type, action.payload.featureIDs).pipe(
+        this.authorizationDataService.getAuthorizationForObjects(action.payload.uuidList, action.payload.type, action.payload.featureIDs, null, true).pipe(
           catchError((error) => {
             this.store.dispatch(new GetAuthorizationsErrorAction(action.payload.uuidList, action.payload.featureIDs));
             throw error;

@@ -39,7 +39,6 @@ import { APP_CONFIG } from '../config/app-config.interface';
 import { environment } from '../environments/environment';
 import { KlaroService } from './shared/cookies/klaro.service';
 import { DatadogRumService } from './shared/datadog-rum/datadog-rum.service';
-import { AuthorizationService } from './core/data/feature-authorization/authorization.service';
 
 let comp: AppComponent;
 let fixture: ComponentFixture<AppComponent>;
@@ -60,7 +59,6 @@ describe('App component', () => {
   let routeServiceMock;
   let klaroServiceSpy: jasmine.SpyObj<KlaroService>;
   let datadogRumServiceSpy: jasmine.SpyObj<DatadogRumService>;
-  let siteAuthorizationService;
 
   const getDefaultTestBedConf = () => {
     breadcrumbsServiceSpy = jasmine.createSpyObj(['listenForRouteChanges']);
@@ -78,10 +76,6 @@ describe('App component', () => {
     datadogRumServiceSpy = jasmine.createSpyObj('DatadogRumService', {
       initDatadogRum: jasmine.createSpy('initDatadogRum'),
       getDatadogRumState: jasmine.createSpy('getDatadogRumState')
-    });
-
-    siteAuthorizationService = jasmine.createSpyObj('SiteAuthorizationService', {
-      getAllSiteAuthorizations: jasmine.createSpy('getAllSiteAuthorizations'),
     });
 
     return {
@@ -113,7 +107,6 @@ describe('App component', () => {
         { provide: APP_CONFIG, useValue: environment },
         { provide: KlaroService, useValue: klaroServiceSpy },
         { provide: DatadogRumService, useValue: datadogRumServiceSpy },
-        { provide: AuthorizationService, useValue: siteAuthorizationService },
         provideMockStore({ initialState }),
         AppComponent,
         // RouteService

@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
-import { combineLatest, Observable, of } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { PaginatedList } from '../data/paginated-list.model';
 import { RemoteData } from '../data/remote-data';
 import { Item } from '../shared/item.model';
@@ -23,15 +23,11 @@ import { WORKSPACEITEM } from '../eperson/models/workspaceitem.resource-type';
 import { WORKFLOWITEM } from '../eperson/models/workflowitem.resource-type';
 import { ITEM } from '../shared/item.resource-type';
 import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
-import { AuthorizationDataService } from '../data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../data/feature-authorization/feature-id';
-import { Bitstream } from '../shared/bitstream.model';
-import { Authorization } from '../shared/authorization.model';
 import { SearchOptions } from '../../shared/search/models/search-options.model';
-import {
-  extractFeatureIdFromAuthorizationId,
-  extractUuidFromAuthorizationId
-} from "../data/feature-authorization/authorization-utils";
+
+
+import { AuthorizationService } from '../data/feature-authorization/authorization.service';
 
 /**
  * The service aims to manage browse requests and subsequent extra fetch requests.
@@ -43,7 +39,7 @@ export class SearchManager {
     protected itemService: ItemDataService,
     protected browseService: BrowseService,
     protected searchService: SearchService,
-    protected authorizationService: AuthorizationDataService,
+    protected authorizationService: AuthorizationService,
     @Inject(APP_CONFIG) protected appConfig: AppConfig
   ) {
   }
@@ -100,10 +96,10 @@ export class SearchManager {
         const items: Item[] = searchObjectsRD.payload.page
           .map((searchResult) => isNotEmpty(searchResult?._embedded?.indexableObject) ? searchResult._embedded.indexableObject : searchResult.indexableObject) as any;
         return this.fetchExtraData(items).pipe(
+          switchMap(() => this.fetchConfiguredAuthorizations(searchObjectsRD, searchOptions.configuration ?? 'default')),
           map(() => {
             return searchObjectsRD;
           }),
-          switchMap(() => this.enrichItemsWithCurrentUserAuthorizations(searchObjectsRD, searchOptions.configuration ?? 'default')),
         );
       }
       return of(searchObjectsRD);
@@ -111,50 +107,32 @@ export class SearchManager {
   }
 
   /**
-   * Map configured user authorization on each item to avoid multiple request for each item
+   * Retrieve configured authorizations related to current discovery configuration
    *
    * @param searchObjects
    * @param configuration
    * @protected
    */
-  protected enrichItemsWithCurrentUserAuthorizations<T extends DSpaceObject>(searchObjects: RemoteData<SearchObjects<T>>, configuration: string): Observable<RemoteData<any>> {
+  protected fetchConfiguredAuthorizations<T extends DSpaceObject>(searchObjects: RemoteData<SearchObjects<T>>, configuration: string): Observable<any> {
     const objects = searchObjects.payload.page.map((searchResult) => searchResult.indexableObject) as any;
-    const mappedEntities = this.getEntityTypeToAuthorizationsMap(objects, configuration);
+    const mappedObjects = this.getConfiguredAuthorizationsMap(objects, configuration);
 
-    if ([...mappedEntities.keys()].length === 0) {
+    if ([...mappedObjects.keys()].length === 0) {
       return of(searchObjects);
     }
 
-    let pageToEnrich = Object.assign([], searchObjects.payload.page);
-
-    const uiidListsMappedToAuthorizations = this.groupItemsUuidsByAuthorizations(objects, mappedEntities);
-    const authorizationRequests = [...uiidListsMappedToAuthorizations.keys()].map((features) => {
+    const uiidListsMappedToAuthorizations = this.groupItemsUuidsByAuthorizations(objects, mappedObjects);
+    [...uiidListsMappedToAuthorizations.keys()].forEach((features) => {
       const uuidList = uiidListsMappedToAuthorizations.get(features);
       const type = objects.find(object => object.id === uuidList[0]).uniqueType;
 
-      return this.authorizationService.getObjectsAuthorizations(uuidList, type, features);
+      this.authorizationService.initStateForObjects(uuidList, type, features);
     });
 
-    return combineLatest(authorizationRequests).pipe(
-      map(authorizationsLists => {
-        const flatList = [].concat.apply([], authorizationsLists);
-
-        flatList.forEach((authorization: Authorization) => {
-          const objectId = extractUuidFromAuthorizationId(authorization.id);
-          const indexToUpdate = pageToEnrich.indexOf(pageToEnrich.find(object => object.indexableObject.id.toString() === objectId));
-
-          pageToEnrich[indexToUpdate].indexableObject.userAuthorizations = [
-            ...pageToEnrich[indexToUpdate].indexableObject.userAuthorizations,
-            extractFeatureIdFromAuthorizationId(authorization.id)
-          ];
-        });
-
-        return Object.assign(searchObjects, {
-          payload: {
-            ...searchObjects.payload,
-            page: pageToEnrich
-          }
-        });
+    return this.authorizationService.isLoading().pipe(
+      filter(loading => !loading),
+      map(() => {
+        return searchObjects;
       }),
     );
   }
@@ -170,7 +148,7 @@ export class SearchManager {
     const mappedUuidListsToFeatures = new Map();
 
     objects.forEach(object => {
-      const objectType = this.getObjectType(object);
+      const objectType = object.uniqueType;
       const features = mappedEntities.get(objectType);
 
       if (hasValue(features) && hasValue(mappedUuidListsToFeatures.get(features))) {
@@ -184,43 +162,32 @@ export class SearchManager {
   }
 
   /**
-   * Return object type to use for configured authorizations
-   *
-   * @param object
-   * @private
-   */
-
-  private getObjectType<T extends DSpaceObject>(object: T): string {
-    return object?.uniqueType;
-  }
-
-  /**
    * Map entity types oe unique type to required authorizations so that we can group the items by feature
    *
    * @param objects
    * @param configuration
    * @private
    */
-  private getEntityTypeToAuthorizationsMap<T extends DSpaceObject>(objects: T[], configuration: string): Map<string, FeatureID[]> {
+  private getConfiguredAuthorizationsMap<T extends DSpaceObject>(objects: T[], configuration: string): Map<string, FeatureID[]> {
     const configuredAuthorizationsForDiscovery =
       this.appConfig.discoveryAuthorizationFeaturesConfig[configuration] ?? this.appConfig.discoveryAuthorizationFeaturesConfig.default;
-    const mappedEntities = new Map();
+    const configuredAuthorizationsToType = new Map();
 
     if (!hasValue(configuredAuthorizationsForDiscovery)) {
-      return mappedEntities;
+      return configuredAuthorizationsToType;
     }
 
-    const entityTypes =  [...new Set(objects.map(dso => this.getObjectType(dso)))];
+    const objectUniqueTypes =  [...new Set(objects.map(dso => dso?.uniqueType))];
 
-    entityTypes.forEach((entity) => {
+    objectUniqueTypes.forEach((entity) => {
       const config = configuredAuthorizationsForDiscovery[entity];
 
       if (hasValue(config)) {
-        mappedEntities.set(entity, config);
+        configuredAuthorizationsToType.set(entity, config);
       }
     });
 
-    return mappedEntities;
+    return configuredAuthorizationsToType;
   }
 
 

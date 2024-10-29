@@ -1,9 +1,7 @@
-import { map, switchMap } from 'rxjs/operators';
+import { distinctUntilChanged, map, switchMap, take } from 'rxjs/operators';
 import {
   combineLatest,
   combineLatest as observableCombineLatest,
-  forkJoin,
-  from,
   Observable,
   of as observableOf
 } from 'rxjs';
@@ -15,7 +13,8 @@ import { Authorization } from '../../shared/authorization.model';
 import { Feature } from '../../shared/feature.model';
 import { FeatureID } from './feature-id';
 import { getFirstCompletedRemoteData, getFirstSucceededRemoteDataPayload } from '../../shared/operators';
-import { ObjectAuthorizationFeaturesMap, ObjectAuthorizationsState } from "./authorization.interfaces";
+import { ObjectAuthorizationFeaturesMap, ObjectAuthorizationsState } from './authorization.interfaces';
+import { DSpaceObject } from '../../shared/dspace-object.model';
 
 /**
  * Operator accepting {@link AuthorizationSearchParams} and adding the current {@link Site}'s selflink to the parameter's
@@ -102,39 +101,40 @@ export const getAuthorizationFeaturesIDs = (featureIDs: FeatureID[]) =>
       switchMap((authorizations: Authorization[]) => {
         if (isNotEmpty(authorizations)) {
           return combineLatest([
-            ...authorizations.map(auth => auth.object.pipe(getFirstCompletedRemoteData())),
-            ...authorizations.map(auth => auth.feature.pipe(getFirstCompletedRemoteData())),
+            ...authorizations.map(auth => auth.object.pipe(getFirstCompletedRemoteData(),take(1))),
+            ...authorizations.map(auth => auth.feature.pipe(getFirstCompletedRemoteData(),take(1))),
           ]).pipe(
             map((data) => {
               const features = data.map(rd => rd.payload).filter(dso => dso instanceof Feature) as Feature[];
-              const objects = data.map(rd => rd.payload).filter(dso => !(dso instanceof Feature))
-              let objectToFeaturesMap = {}
+              const objects = data.map(rd => rd.payload).filter(dso => !(dso instanceof Feature));
+              let objectToFeaturesMap = {};
 
               objects.forEach(object => {
                 objectToFeaturesMap = Object.assign({}, objectToFeaturesMap, {
                   [object.self]: getFeatureIdToBooleanMap(featureIDs, features)
-                })
-              })
-              return objectToFeaturesMap
+                });
+              });
+              return objectToFeaturesMap;
             })
-          )
+          );
         } else {
           return observableOf({});
         }
       }),
+      distinctUntilChanged(),
     );
 
 
 /**
  *
  */
-export const getFeatureIdToBooleanMap = (featureIDs: FeatureID[], features: Feature[]) : ObjectAuthorizationFeaturesMap => {
+export const getFeatureIdToBooleanMap = (featureIDs: FeatureID[], features: Feature[]): ObjectAuthorizationFeaturesMap => {
   let mapFeatureToBoolean = {};
   featureIDs.forEach(id => {
-    mapFeatureToBoolean[id] = hasValue(features.find(feature => feature.id === id))
-  })
-  return  mapFeatureToBoolean
-}
+    mapFeatureToBoolean[id] = hasValue(features.find(feature => feature.id === id));
+  });
+  return  mapFeatureToBoolean;
+};
 
 
 /**
@@ -152,7 +152,19 @@ export const extractUuidFromAuthorizationId = (authId: string): string => {
   const idSegment = authSegments[authSegments.length - 1];
 
   return idSegment.includes('_') ? idSegment.split('_')[1] : idSegment;
-}
+};
+
+/**
+ * Normalize Uuid of objects like workspace and workflow e.g. workflow-1234
+ * uuid of workspace or workflow items are made as follows workspace_id or workflow_id
+ * @private
+ * @param dso
+ */
+
+export const getNormalizedUuid = (dso: DSpaceObject): string => {
+  return dso.type.toString() === 'workspaceitem' || dso.type.toString() === 'workflowitem' ?
+    dso.uuid.split('-')[1] : dso.uuid;
+};
 
 /**
  * Extract FeatureId from authorization id.
@@ -166,4 +178,4 @@ export const extractFeatureIdFromAuthorizationId = (authId: string): string => {
   const authSegments = authId.split('_');
 
   return authSegments[1] as FeatureID;
-}
+};

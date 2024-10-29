@@ -52,7 +52,7 @@ import { SearchManager } from '../../core/browse/search-manager';
 import { AlertType } from '../alert/alert-type';
 import { isPlatformServer } from '@angular/common';
 import { FeatureID } from '../../core/data/feature-authorization/feature-id';
-import { AuthorizationService } from '../../core/data/feature-authorization/authorization.service';
+import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 
 @Component({
   selector: 'ds-search',
@@ -401,7 +401,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     protected routeService: RouteService,
     protected router: Router,
     @Inject(APP_CONFIG) protected appConfig: AppConfig,
-    protected authorizationService: AuthorizationService){
+    protected authorizationService: AuthorizationDataService){
     this.isXsOrSm$ = this.windowService.isXsOrSm();
   }
 
@@ -422,7 +422,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     if (this.showCorrection === null || this.showCorrection === undefined) {
       this.subs.push(
-        this.authorizationService.getAuthorizationForObject(FeatureID.CanCorrectItem)
+        this.authorizationService.isAuthorized(FeatureID.CanCorrectItem)
         .subscribe((showCorrection) => {
           this.showCorrection = showCorrection;
         }));

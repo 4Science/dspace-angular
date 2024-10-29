@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable} from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { createFeatureSelector, createSelector, select, Store } from '@ngrx/store';
 import {
   AuthorizationsState,
@@ -8,9 +8,9 @@ import {
 import { distinctUntilChanged, filter, map, take } from 'rxjs/operators';
 import { AppState } from '../../../app.reducer';
 import { FeatureID } from './feature-id';
-import { hasValue } from "../../../shared/empty.util";
-import { GetAuthorizationsAction } from "./authorization.actions";
-import { SiteDataService } from "../site-data.service";
+import { hasValue } from '../../../shared/empty.util';
+import { GetAuthorizationsAction } from './authorization.actions';
+import { SiteDataService } from '../site-data.service';
 
 
 const authorizationsSelector = createFeatureSelector<AuthorizationsState>('authorizationFeatures');
@@ -54,34 +54,38 @@ export class AuthorizationService {
   ) {}
 
   initStateForObjects(uuidList: string[], type: string, featureIDs: FeatureID[]) {
-    this.store.dispatch(new GetAuthorizationsAction(uuidList, type, featureIDs))
+    this.store.dispatch(new GetAuthorizationsAction(uuidList, type, featureIDs));
   }
 
   initStateForSite(featureIDs: FeatureID[]) {
     this.siteService.find().pipe(
       take(1)
-    ).subscribe(site => this.initStateForObjects([site.uuid], site.uniqueType, featureIDs))
+    ).subscribe(site => this.initStateForObjects([site.uuid], site.uniqueType, featureIDs));
   }
 
 
   getAllAuthorizationsState(): Observable<ObjectAuthorizationsState> {
-    return this.store.pipe(
-      select(getAllAuthorizations),
-      distinctUntilChanged(),
+    return this.isLoading().pipe(
+      filter(loading => !loading),
+      switchMap(() =>
+        this.store.pipe(
+          select(getAllAuthorizations),
+          distinctUntilChanged(),
+        )
+      )
     );
   }
 
 
-  getAuthorizationForObject(featureId: FeatureID, objectUrl?: string): Observable<boolean | undefined> {
+  getAuthorizationForObject(featureId: FeatureID, objectUrl: string): Observable<boolean> {
     return this.getAllAuthorizationsState().pipe(
       map(state => {
-
         if (hasValue(state)) {
-          return objectUrl && state[objectUrl] ? state[objectUrl][featureId] : undefined
+          return objectUrl && state[objectUrl] ? state[objectUrl][featureId] : undefined;
         }
-
-        return undefined
+        return undefined;
       }),
+      distinctUntilChanged(),
     );
   }
 
@@ -103,8 +107,8 @@ export class AuthorizationService {
   isObjectAuthorizationLoading(uuid: string): Observable<boolean> {
     return this.store.pipe(
       select(getPendingObjects),
-      distinctUntilChanged(),
       map(state => state.includes(uuid)),
+      distinctUntilChanged(),
     );
   }
 

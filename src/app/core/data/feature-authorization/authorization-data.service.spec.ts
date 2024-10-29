@@ -14,8 +14,6 @@ import { FindListOptions } from '../find-list-options.model';
 import { testSearchDataImplementation } from '../base/search-data.spec';
 import { getMockObjectCacheService } from '../../../shared/mocks/object-cache.service.mock';
 import { AuthorizationService } from './authorization.service';
-import { AppConfig } from '../../../../config/app-config.interface';
-import { environment } from '../../../../environments/environment';
 
 describe('AuthorizationDataService', () => {
   let service: AuthorizationDataService;
@@ -51,7 +49,7 @@ describe('AuthorizationDataService', () => {
       getSiteAuthorization: observableOf(false),
     });
     objectCache = getMockObjectCacheService();
-    service = new AuthorizationDataService(requestService, undefined, objectCache, undefined, siteService, siteAuthorizationService, undefined, environment as AppConfig);
+    service = new AuthorizationDataService(requestService, undefined, objectCache, undefined, siteService, siteAuthorizationService, undefined);
   }
 
   beforeEach(() => {
@@ -60,7 +58,7 @@ describe('AuthorizationDataService', () => {
   });
 
   describe('composition', () => {
-    const initService = () => new AuthorizationDataService(null, null, null, null, null,null, null, null);
+    const initService = () => new AuthorizationDataService(null, null, null, null, null,null, null);
     testSearchDataImplementation(initService);
   });
 

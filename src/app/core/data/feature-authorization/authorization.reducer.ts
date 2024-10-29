@@ -4,16 +4,15 @@ import {
   GetAuthorizationsAction,
   GetAuthorizationsErrorAction,
   GetAuthorizationsSuccessAction,
-  SetPendingAuthorizationAction,
 } from './authorization.actions';
 import { AuthorizationsState } from './authorization.interfaces';
-import { object } from "prop-types";
 
 
 const initialState = Object.create({
-  authorizations: null,
-  loading: false,
-  hasError: false
+  authorizations: {},
+  loading: true,
+  hasError: false,
+  pendingObjects: []
 });
 
 export function authorizationReducer(storeState = initialState, action: AuthorizationAction): AuthorizationsState {
@@ -54,12 +53,12 @@ function setAuthorizationsLoading(storeState: AuthorizationsState, action: GetAu
 
 
 function setAuthorizationsSuccess(storeState: AuthorizationsState, action: GetAuthorizationsSuccessAction): AuthorizationsState {
-  let newAuthorizationsState = Object.assign({}, storeState.authorizations ?? {})
+  let newAuthorizationsState = Object.assign({}, storeState.authorizations ?? {});
   const objectsEntries = Object.keys(action.payload.authorizations);
 
   objectsEntries.forEach(entry => {
-    newAuthorizationsState[entry] = {...newAuthorizationsState[entry], ...action.payload.authorizations[entry]}
-  })
+    newAuthorizationsState[entry] = {...newAuthorizationsState[entry], ...action.payload.authorizations[entry]};
+  });
 
   return Object.assign({}, storeState, {
     authorizations: newAuthorizationsState,

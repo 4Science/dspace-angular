@@ -154,6 +154,7 @@ export class DefaultAppConfig implements AppConfig {
     FeatureID.CanEditItem,
     FeatureID.EPersonForgotPassword,
     FeatureID.CanCorrectItem,
+    FeatureID.CanSubmit,
   ];
 
   discoveryAuthorizationFeaturesConfig: DiscoveryConfigurationFeaturesConfig = {

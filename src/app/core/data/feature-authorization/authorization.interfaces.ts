@@ -16,7 +16,7 @@ export interface AuthorizationActionPayload {
 
 export interface ObjectAuthorizationFeaturesMap {
   [key: string]: boolean;
-};
+}
 
 export interface ObjectAuthorizationsState {
   [key: string]: ObjectAuthorizationFeaturesMap

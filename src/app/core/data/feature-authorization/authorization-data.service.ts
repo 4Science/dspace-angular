@@ -1,5 +1,5 @@
 import { combineLatest, Observable, of as observableOf, of } from 'rxjs';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AUTHORIZATION } from '../../shared/authorization.resource-type';
 import { Authorization } from '../../shared/authorization.model';
 import { RequestService } from '../request.service';
@@ -10,12 +10,12 @@ import { SiteDataService } from '../site-data.service';
 import { followLink, FollowLinkConfig } from '../../../shared/utils/follow-link-config.model';
 import { RemoteData } from '../remote-data';
 import { PaginatedList } from '../paginated-list.model';
-import { catchError, filter, map, switchMap, take, tap } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, filter, map, switchMap, take } from 'rxjs/operators';
 import { hasNoValue, hasValue, isNotEmpty } from '../../../shared/empty.util';
 import { RequestParam } from '../../cache/models/request-param.model';
 import { AuthorizationSearchParams } from './authorization-search-params';
 import {
-  getAuthorizationFeaturesIDs,
+  getAuthorizationFeaturesIDs, getNormalizedUuid,
   oneAuthorizationMatchesFeature
 } from './authorization-utils';
 import { FeatureID } from './feature-id';
@@ -25,12 +25,10 @@ import { BaseDataService } from '../base/base-data.service';
 import { SearchData, SearchDataImpl } from '../base/search-data';
 import { dataService } from '../base/data-service.decorator';
 import { AuthorizationService } from './authorization.service';
-import { APP_CONFIG, AppConfig } from '../../../../config/app-config.interface';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app.reducer';
-import { DSpaceObject } from "../../shared/dspace-object.model";
-import { ObjectAuthorizationsState } from "./authorization.interfaces";
-import { startsWith } from "lodash";
+import { DSpaceObject } from '../../shared/dspace-object.model';
+import { ObjectAuthorizationsState } from './authorization.interfaces';
 
 /**
  * A service to retrieve {@link Authorization}s from the REST API
@@ -52,7 +50,6 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
     protected siteService: SiteDataService,
     protected authorizationService: AuthorizationService,
     protected store: Store<AppState>,
-    @Inject(APP_CONFIG) private appConfig: AppConfig,
   ) {
     super('authorizations', requestService, rdbService, objectCache, halService);
 
@@ -93,32 +90,18 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    */
   isAuthorized(featureId?: FeatureID, objectUrl?: string, ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<boolean> {
     return this.authorizationService.hasErrors().pipe(
+      take(1),
       switchMap(( hasErrors) => {
-        if(!hasErrors) {
-          console.log('no errors')
-          this.authorizationService.getAuthorizationForObject(featureId, objectUrl).pipe(
-            take(1),
-            switchMap(authorization => {
-              console.log(authorization)
-              if (authorization === undefined) {
-                const dsoRequest$ = (objectUrl ? this.objectCache.getObjectByHref(objectUrl) : this.siteService.find()) as Observable<DSpaceObject>
-                return dsoRequest$.pipe(
-                  switchMap((dso: DSpaceObject) => combineLatest([of(dso), this.authorizationService.isObjectAuthorizationLoading(dso.uuid)])),
-                  map(([object, isPending]) => {
-                    if (!isPending) {
-                      this.authorizationService.initStateForObjects([object.uuid], object.uniqueType, [featureId])
-                    }
-                    console.log('here')
-                    return this.authorizationService.isObjectAuthorizationLoading(object.uuid).pipe(
-                      tap(console.log),
-                      switchMap(() => this.authorizationService.getAuthorizationForObject(featureId, object.self))
-                    )
-                  })
-                )
-              }
-              return of(authorization)
-            }),
-          )
+        if (!hasErrors) {
+          //If no object url is provided than it means is a site authorization
+          const dsoRequest$ = (objectUrl ? this.objectCache.getObjectByHref(objectUrl) : this.siteService.find()) as Observable<DSpaceObject>;
+
+          return dsoRequest$.pipe(
+            // Get correct item and check that has not already pending authorizations
+            switchMap((dso: DSpaceObject) => combineLatest([of(dso), this.authorizationService.isObjectAuthorizationLoading(getNormalizedUuid(dso)).pipe(take(1))])),
+            filter(([dso, _]) => hasValue(dso)),
+            switchMap(([object, isPending]) => this.readOrFetchAuthorization(object, featureId, isPending))
+          );
         } else {
           // we fallback on old method if site service had initialization issues or if some parameters more than the only feature ID are provided.
           return this.searchByObject(featureId, objectUrl, ePersonUuid, {}, useCachedVersionIfAvailable, reRequestOnStale, followLink('feature')).pipe(
@@ -134,6 +117,29 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
             oneAuthorizationMatchesFeature(featureId)
           );
         }
+      })
+    );
+  }
+
+  /**
+   * Get the authorization from the state, if not present we fetch them for the first time and wait for the state update
+   * @param dso
+   * @param featureId
+   * @param pending
+   * @private
+   */
+  private readOrFetchAuthorization(dso: DSpaceObject, featureId: FeatureID, pending: boolean): Observable<boolean> {
+    return this.authorizationService.getAuthorizationForObject(featureId, dso.self).pipe(
+      switchMap((authorization) => {
+        if (authorization === undefined && !pending) {
+          this.authorizationService.initStateForObjects([getNormalizedUuid(dso)], dso.uniqueType, [featureId]);
+        }
+
+        return this.authorizationService.isObjectAuthorizationLoading(getNormalizedUuid(dso)).pipe(
+          distinctUntilChanged(),
+          filter(loading => !loading),
+          switchMap(() => this.authorizationService.getAuthorizationForObject(featureId, dso.self))
+        );
       })
     );
   }
