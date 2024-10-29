@@ -59,13 +59,6 @@ export class DSpaceObject extends ListableObject implements CacheableObject {
   @autoserialize
   uniqueType: string;
 
-
-  /**
-   * List of configured authorizations for the current user.
-   * The authorizations are configured based on the discovery configuration and on the item entity type
-   */
-  userAuthorizations: FeatureID[] = [];
-
   /**
    * A shorthand to get this DSpaceObject's self link
    */
