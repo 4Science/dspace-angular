@@ -7,7 +7,6 @@ import {
 import { AuthorizationDataService } from './authorization-data.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app.reducer';
-import { combineLatest, of } from 'rxjs';
 
 
 @Injectable()

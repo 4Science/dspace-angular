@@ -80,4 +80,4 @@ export class GetAuthorizationsErrorAction extends AbstractAuthorizationAction {
 export type AuthorizationAction
   = GetAuthorizationsAction
   | GetAuthorizationsSuccessAction
-  | GetAuthorizationsErrorAction
+  | GetAuthorizationsErrorAction;

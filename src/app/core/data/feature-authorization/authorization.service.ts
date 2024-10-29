@@ -12,41 +12,43 @@ import { hasValue } from '../../../shared/empty.util';
 import { GetAuthorizationsAction } from './authorization.actions';
 import { SiteDataService } from '../site-data.service';
 
+export const authorizationsSelector = createFeatureSelector<AuthorizationsState>('authorizationFeatures');
 
-const authorizationsSelector = createFeatureSelector<AuthorizationsState>('authorizationFeatures');
-
-/**
- * The base selector function to select the authorizations for the site
- */
-const getAllAuthorizations = createSelector(
-  authorizationsSelector,
-  (state: AuthorizationsState) =>  state.authorizations
-);
-
-
-/**
- * The selector function to check if service has errors
- */
-const getErrorStatus = createSelector(
-  authorizationsSelector,
-  (state: AuthorizationsState) =>  state.hasError
-);
-
-
-const getLoadingStatus = createSelector(
-  authorizationsSelector,
-  (state: AuthorizationsState) =>  state.loading
-);
 
 /**
  * A service to retrieve {@link Authorization}s for the site
  */
 @Injectable()
 export class AuthorizationService {
+
+  /**
+   * The base selector function to select the authorizations for the site
+   */
+  getAllAuthorizations = createSelector(
+    authorizationsSelector,
+    (state: AuthorizationsState) =>  state.authorizations
+  );
+
+
+  /**
+   * The selector function to check if service has errors
+   */
+  getErrorStatus = createSelector(
+    authorizationsSelector,
+    (state: AuthorizationsState) =>  state.hasError
+  );
+
+
+  getLoadingStatus = createSelector(
+    authorizationsSelector,
+    (state: AuthorizationsState) =>  state.loading
+  );
+
   constructor(
     private siteService: SiteDataService,
     private store: Store<AppState>,
   ) {}
+
 
   initStateForObjects(uuidList: string[], type: string, featureIDs: FeatureID[]) {
     this.store.dispatch(new GetAuthorizationsAction(uuidList, type, featureIDs));
@@ -64,7 +66,7 @@ export class AuthorizationService {
       filter(loading => !loading),
       switchMap(() =>
         this.store.pipe(
-          select(getAllAuthorizations),
+          select(this.getAllAuthorizations),
           distinctUntilChanged(),
         )
       )
@@ -87,14 +89,14 @@ export class AuthorizationService {
 
   hasErrors(): Observable<boolean> {
     return this.store.pipe(
-      select(getErrorStatus),
+      select(this.getErrorStatus),
       distinctUntilChanged(),
     );
   }
 
   isLoading(): Observable<boolean> {
     return this.store.pipe(
-      select(getLoadingStatus),
+      select(this.getLoadingStatus),
       distinctUntilChanged(),
     );
   }
