@@ -96,10 +96,8 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
           //If no object url is provided than it means is a site authorization
           const dsoRequest$ = (objectUrl ? this.objectCache.getObjectByHref(objectUrl) : this.siteService.find()) as Observable<DSpaceObject>;
 
-          return dsoRequest$.pipe(
+          return combineLatest([dsoRequest$, this.authorizationService.isLoading().pipe(take(1))]).pipe(
             // Get correct item and check that has not already pending authorizations
-            switchMap((dso: DSpaceObject) => combineLatest([of(dso), this.authorizationService.isLoading().pipe(take(1))])),
-            filter(([dso, _]) => hasValue(dso)),
             switchMap(([object, isPending]) => this.readOrFetchAuthorization(object, featureId, isPending))
           );
         } else {
