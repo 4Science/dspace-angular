@@ -22,6 +22,7 @@ describe('AuthorizationEffects success', () => {
 
   afterEach(() => {
     TestBed.resetTestingModule();
+    authorizationEffects = null;
   });
 
   beforeEach(() => {

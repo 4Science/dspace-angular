@@ -2,7 +2,7 @@ import { AuthorizationDataService } from './authorization-data.service';
 import { SiteDataService } from '../site-data.service';
 import { Site } from '../../shared/site.model';
 import { EPerson } from '../../eperson/models/eperson.model';
-import { combineLatest as observableCombineLatest, Observable, of as observableOf } from 'rxjs';
+import { combineLatest as observableCombineLatest, Observable, of as observableOf, of } from 'rxjs';
 import { FeatureID } from './feature-id';
 import { hasValue } from '../../../shared/empty.util';
 import { RequestParam } from '../../cache/models/request-param.model';
@@ -31,6 +31,7 @@ describe('AuthorizationDataService', () => {
   function init() {
     site = Object.assign(new Site(), {
       id: 'test-site',
+      type: 'core.site',
       _links: {
         self: { href: 'test-site-href' }
       }
@@ -43,10 +44,12 @@ describe('AuthorizationDataService', () => {
       find: observableOf(site),
     });
 
-    authorizationService = jasmine.createSpyObj('siteAuthorizationService', {
-      isInitialized: observableOf(true),
-      hasErrors: observableOf(true),
-      getSiteAuthorization: observableOf(false),
+    authorizationService = jasmine.createSpyObj('authorizationService', {
+      isLoading: jasmine.createSpy('isLoading'),
+      hasErrors: jasmine.createSpy('hasErrors'),
+      getSiteAuthorization: jasmine.createSpy('getSiteAuthorization'),
+      getAuthorizationForObject: jasmine.createSpy('getAuthorizationForObject'),
+      initStateForObjects: jasmine.createSpy('initStateForObjects')
     });
     objectCache = getMockObjectCacheService();
     service = new AuthorizationDataService(requestService, undefined, objectCache, undefined, siteService, authorizationService, undefined);
@@ -55,6 +58,7 @@ describe('AuthorizationDataService', () => {
   beforeEach(() => {
     init();
     spyOn(service, 'searchBy').and.returnValue(observableOf(undefined));
+    spyOn(authorizationService, 'hasErrors').and.returnValue(of(true));
   });
 
   describe('composition', () => {
@@ -280,6 +284,37 @@ describe('AuthorizationDataService', () => {
       it('should return true', (done) => {
         service.isAuthorized(featureID).subscribe((result) => {
           expect(result).toEqual(true);
+          done();
+        });
+      });
+    });
+
+
+    describe('it should read value from state if present', () => {
+      beforeEach(() => {
+        spyOn(authorizationService, 'getAuthorizationForObject').and.returnValue(of(true));
+        spyOn(authorizationService, 'hasErrors').and.returnValue(of(false));
+        spyOn(authorizationService, 'isLoading').and.returnValue(of(false));
+      });
+
+      it('should return true for object', (done) => {
+        service.isAuthorized(featureID).subscribe((result) => {
+          expect(result).toEqual(true);
+          done();
+        });
+      });
+    });
+
+    describe('it should init value in state if is not present', () => {
+      beforeEach(() => {
+        spyOn(authorizationService, 'getAuthorizationForObject').and.returnValue(of(undefined));
+        spyOn(authorizationService, 'hasErrors').and.returnValue(of(false));
+        spyOn(authorizationService, 'isLoading').and.returnValue(of(false));
+      });
+
+      it('should call init method', (done) => {
+        service.isAuthorized(featureID).subscribe((result) => {
+          expect(authorizationService.initStateForObjects).toHaveBeenCalled();
           done();
         });
       });
