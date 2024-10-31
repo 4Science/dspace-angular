@@ -1,4 +1,4 @@
-import { combineLatest, Observable, of as observableOf, of } from 'rxjs';
+import { combineLatest, Observable, of as observableOf } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AUTHORIZATION } from '../../shared/authorization.resource-type';
 import { Authorization } from '../../shared/authorization.model';
@@ -92,8 +92,9 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
     return this.authorizationService.hasErrors().pipe(
       take(1),
       switchMap(( hasErrors) => {
-        if (!hasErrors) {
-          //If no object url is provided than it means is a site authorization
+        if (!hasErrors && !ePersonUuid) {
+          //If no object url is provided than it means is a site authorization.
+          //If a person uuid is provided we don't use the state service as it keeps track only of authorizations for the active user.
           const dsoRequest$ = (objectUrl ? this.objectCache.getObjectByHref(objectUrl) : this.siteService.find()) as Observable<DSpaceObject>;
 
           return combineLatest([dsoRequest$, this.authorizationService.isLoading().pipe(take(1))]).pipe(
@@ -258,7 +259,6 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
       reRequestOnStale,
       ...linksToFollow
     );
-    //Todo: find a convenient way to add dependency for UI cache invalidation
   }
 
   /**

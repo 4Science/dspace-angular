@@ -81,7 +81,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     private modalService: NgbModal,
     private modalConfig: NgbModalConfig,
     private socialService: SocialService,
-    private datadogRumService: DatadogRumService,
+    private datadogRumService: DatadogRumService
   ) {
     this.notificationOptions = environment.notifications;
     this.browserPlatform = isPlatformBrowser(this.platformId);

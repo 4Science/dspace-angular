@@ -18,7 +18,7 @@ import { AuthorizationService } from './authorization.service';
 describe('AuthorizationDataService', () => {
   let service: AuthorizationDataService;
   let siteService: SiteDataService;
-  let siteAuthorizationService: AuthorizationService;
+  let authorizationService: AuthorizationService;
   let objectCache;
 
   let site: Site;
@@ -43,13 +43,13 @@ describe('AuthorizationDataService', () => {
       find: observableOf(site),
     });
 
-    siteAuthorizationService = jasmine.createSpyObj('siteAuthorizationService', {
+    authorizationService = jasmine.createSpyObj('siteAuthorizationService', {
       isInitialized: observableOf(true),
       hasErrors: observableOf(true),
       getSiteAuthorization: observableOf(false),
     });
     objectCache = getMockObjectCacheService();
-    service = new AuthorizationDataService(requestService, undefined, objectCache, undefined, siteService, siteAuthorizationService, undefined);
+    service = new AuthorizationDataService(requestService, undefined, objectCache, undefined, siteService, authorizationService, undefined);
   }
 
   beforeEach(() => {

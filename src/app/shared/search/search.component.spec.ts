@@ -38,7 +38,6 @@ import { getCollectionPageRoute } from '../../collection-page/collection-page-ro
 import { environment } from '../../../environments/environment.test';
 import { APP_CONFIG } from '../../../config/app-config.interface';
 import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
-import { AuthorizationService } from '../../core/data/feature-authorization/authorization.service';
 
 let comp: SearchComponent;
 let fixture: ComponentFixture<SearchComponent>;
@@ -47,10 +46,6 @@ let searchConfigurationServiceObject: SearchConfigurationService;
 
 const authorizationDataService = jasmine.createSpyObj('authorizationDataService', {
   isAuthorized: of(true)
-});
-
-const authorizationService = jasmine.createSpyObj('authorizationService', {
-  getSiteAuthorization: of(true)
 });
 
 const store: Store<SearchComponent> = jasmine.createSpyObj('store', {
@@ -250,10 +245,6 @@ export function configureSearchComponentTestingModule(compType, additionalDeclar
       {
         provide: AuthorizationDataService,
         useValue: authorizationDataService
-      },
-      {
-        provide: AuthorizationService,
-        useValue: authorizationService
       }
     ],
     schemas: [NO_ERRORS_SCHEMA]
