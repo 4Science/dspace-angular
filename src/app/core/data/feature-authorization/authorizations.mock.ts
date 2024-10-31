@@ -57,7 +57,7 @@ export const mockSiteAuthorizations = [
 
 
 
-export class AuthServiceStub {
+export class AuthorizationServiceStub {
 
   constructor(
     private siteService: SiteDataService,

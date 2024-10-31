@@ -8,19 +8,19 @@ import { Observable, of } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 import { AuthorizationEffects } from './authorization.effects';
 import { AppState } from '../../../app.reducer';
-import { AuthServiceStub, mockAuthSiteObject } from './authorizations.mock';
+import { mockAuthSiteObject } from './authorizations.mock';
 import { authorizationReducer } from './authorization.reducer';
 import { SiteDataService } from '../site-data.service';
 import { AuthorizationActionTypes, GetAuthorizationsSuccessAction } from './authorization.actions';
 import { environment } from '../../../../environments/environment';
-import { ObjectAuthorizationsState } from './authorization.interfaces';
+import { AuthorizationDataService } from './authorization-data.service';
+import { AuthorizationDataServiceStub } from '../../../shared/testing/authorization-service.stub';
 
 
 
-xdescribe('AuthorizationEffects', () => {
+describe('AuthorizationEffects', () => {
   let authorizationEffects: AuthorizationEffects;
   let actions: Observable<any>;
-  let authorizationServiceStub;
   let initialState;
   let store: MockStore<AppState>;
   let scheduler: TestScheduler;
@@ -28,7 +28,6 @@ xdescribe('AuthorizationEffects', () => {
   const siteService = jasmine.createSpyObj(['find']);
 
   function init() {
-    authorizationServiceStub = new AuthServiceStub(siteService,store, initialState);
     siteService.find.and.returnValue(of(mockAuthSiteObject));
 
     initialState = {
@@ -53,6 +52,7 @@ xdescribe('AuthorizationEffects', () => {
       ],
       providers: [
         { provide: SiteDataService, useValue: siteService },
+        { provide: AuthorizationDataService, useClass: AuthorizationDataServiceStub },
         AuthorizationEffects,
         provideMockStore({ initialState }),
         provideMockActions(() => actions),
@@ -74,7 +74,7 @@ xdescribe('AuthorizationEffects', () => {
           }
         });
 
-        const expected = cold('--b-', { b: new GetAuthorizationsSuccessAction(featureIDs.map(feature => { return { [feature]:true };}) as any as ObjectAuthorizationsState) });
+        const expected = cold('--b-', { b: new GetAuthorizationsSuccessAction({})});
 
         expect(authorizationEffects.getAuthorizations$).toBeObservable(expected);
         done();
