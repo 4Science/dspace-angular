@@ -4,11 +4,6 @@ import { Feature } from '../../shared/feature.model';
 import { DSpaceObject } from '../../shared/dspace-object.model';
 import { Observable, of } from 'rxjs';
 import { FeatureID } from './feature-id';
-import { GetAuthorizationsAction } from './authorization.actions';
-import { SiteDataService } from '../site-data.service';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../../app.reducer';
-import { take } from 'rxjs/operators';
 import { ObjectAuthorizationsState } from './authorization.interfaces';
 
 export const mockFeatures = [
@@ -60,20 +55,16 @@ export const mockSiteAuthorizations = [
 export class AuthorizationServiceStub {
 
   constructor(
-    private siteService: SiteDataService,
-    private store: Store<AppState>,
     private state: any,
   ) {
   }
 
   initStateForObjects(uuidList: string[], type: string, featureIDs: FeatureID[]) {
-    this.store.dispatch(new GetAuthorizationsAction(uuidList, type, featureIDs));
+   return;
   }
 
   initStateForSite(featureIDs: FeatureID[]) {
-    this.siteService.find().pipe(
-      take(1)
-    ).subscribe(site => this.initStateForObjects([site.uuid], site.uniqueType, featureIDs));
+    return;
   }
 
   getAllAuthorizationsState(): Observable<ObjectAuthorizationsState> {

@@ -12,7 +12,6 @@ const initialState = Object.create({
   authorizations: {},
   loading: true,
   hasError: false,
-  pendingObjects: []
 });
 
 export function authorizationReducer(storeState = initialState, action: AuthorizationAction): AuthorizationsState {

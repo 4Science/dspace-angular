@@ -58,17 +58,9 @@ export class GetAuthorizationsSuccessAction extends AbstractAuthorizationAction 
 
 export class GetAuthorizationsErrorAction extends AbstractAuthorizationAction {
   type = AuthorizationActionTypes.GET_AUTHORIZATIONS_ERROR;
-  payload: AuthorizationActionPayload;
 
-  constructor(
-    uuidList: string[],
-    featureIDs: FeatureID[]
-  ) {
+  constructor() {
     super();
-    this.payload = {
-      uuidList,
-      featureIDs
-    };
   }
 }
 
