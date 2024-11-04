@@ -156,7 +156,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    *                                    requested after the response becomes stale
    */
   getAuthorizationForObjects(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<ObjectAuthorizationsState> {
-    return this.getObjectsAuthorizations(uuidList,  type, featuresId, ePersonUuid, useCachedVersionIfAvailable, reRequestOnStale).pipe(
+    return this.searchObjectsAuthorizations(uuidList,  type, featuresId, ePersonUuid, useCachedVersionIfAvailable, reRequestOnStale).pipe(
       getAuthorizationFeaturesIDs(featuresId)
     );
   }
@@ -172,7 +172,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    * @param reRequestOnStale
    * @private
    */
-  getObjectsAuthorizations(uuidList: string[],   type: string, featuresId?: FeatureID[], ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<Authorization[]> {
+  searchObjectsAuthorizations(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<Authorization[]> {
     const followLinks = [
       followLink<Authorization>('feature', { isOptional: true }),
       followLink<Authorization>('object', { isOptional: true }),

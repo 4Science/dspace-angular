@@ -118,11 +118,11 @@ export class LogInComponent implements OnInit, OnDestroy {
 
     this.canForgot$ = this.authorizationService.isAuthorized(FeatureID.EPersonForgotPassword).pipe(shareReplay(1));
     this.canShowDivider$ =
-      combineLatest([this.canRegister$, this.canForgot$])
-        .pipe(
-          map(([canRegister, canForgot]) => canRegister || canForgot),
-          filter(Boolean)
-        );
+        combineLatest([this.canRegister$, this.canForgot$])
+          .pipe(
+            map(([canRegister, canForgot]) => canRegister || canForgot),
+            filter(Boolean)
+          );
   }
 
   getRegisterRoute() {
