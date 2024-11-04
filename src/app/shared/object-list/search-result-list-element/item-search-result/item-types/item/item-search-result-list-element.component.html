@@ -22,8 +22,8 @@
         </div>
         <ds-truncatable [id]="dso.id" *ngIf="object !== undefined && object !== null">
           <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'" [attr.rel]="(linkType == linkTypes.ExternalLink) ? 'noopener noreferrer' : null"
-               [routerLink]="[itemPageRoute]" class="lead item-list-title dont-break-out"
-               [innerHTML]="dsoTitle"></a>
+             [routerLink]="[itemPageRoute]" class="lead item-list-title dont-break-out"
+             [innerHTML]="dsoTitle"></a>
           <span *ngIf="linkType == linkTypes.None" class="lead item-list-title dont-break-out"
                 [innerHTML]="dsoTitle"></span>
           <span class="text-muted">
@@ -42,11 +42,11 @@
             </ds-truncatable-part>
           </span>
           <div *ngIf="dso.firstMetadataValue('dc.description.abstract')" class="item-list-abstract">
-          <ds-truncatable-part [id]="dso.id" [minLines]="3">
-            <div [innerHTML]="firstMetadataValue('dc.description.abstract')"></div>
+            <ds-truncatable-part [id]="dso.id" [minLines]="3">
+              <div [innerHTML]="firstMetadataValue('dc.description.abstract')"></div>
             </ds-truncatable-part>
           </div>
-           <ds-additional-metadata [object]="dso"></ds-additional-metadata>
+          <ds-additional-metadata [object]="dso"></ds-additional-metadata>
         </ds-truncatable>
         <ds-metric-badges *ngIf="showMetrics" class="d-block clearfix" [item]="dso"></ds-metric-badges>
       </div>
