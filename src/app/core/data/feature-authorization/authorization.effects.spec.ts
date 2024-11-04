@@ -21,8 +21,8 @@ const featureIDs = environment.siteAuthorizationFeaturesConfig;
 describe('AuthorizationEffects success', () => {
 
   afterEach(() => {
-    TestBed.resetTestingModule();
     authorizationEffects = null;
+    TestBed.resetTestingModule();
   });
 
   beforeEach(() => {
@@ -63,6 +63,7 @@ describe('AuthorizationEffects success', () => {
 });
 describe('AuthorizationEffects error', () => {
   afterEach(() => {
+    authorizationEffects = null;
     TestBed.resetTestingModule();
   });
 
