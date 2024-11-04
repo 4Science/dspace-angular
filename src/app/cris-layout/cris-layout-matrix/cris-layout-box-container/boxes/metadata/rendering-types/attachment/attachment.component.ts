@@ -80,13 +80,14 @@ export class AttachmentComponent extends BitstreamAttachmentRenderingModelCompon
    */
   retrieveBitstreams(): void {
 
-    this.getTotalBitstreamsByItem(this.pageOptions).pipe(
-      map((bitstreamList: PaginatedList<Bitstream>) => {
-        this.bitstreamsNumber = bitstreamList.totalElements;
-        return bitstreamList.page;
-      }),
-      take(1)
-    ).subscribe();
+    // TODO temporary disable until the endpoint will be optimized
+    // this.getTotalBitstreamsByItem(this.pageOptions).pipe(
+    //   map((bitstreamList: PaginatedList<Bitstream>) => {
+    //     this.bitstreamsNumber = bitstreamList.totalElements;
+    //     return bitstreamList.page;
+    //   }),
+    //   take(1)
+    // ).subscribe();
 
     this.getBitstreamsByItem(this.pageOptions).pipe(
       map((bitstreamList: PaginatedList<Bitstream>) => {

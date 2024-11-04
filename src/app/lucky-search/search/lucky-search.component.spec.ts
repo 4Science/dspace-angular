@@ -1,30 +1,30 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {LuckySearchComponent} from './lucky-search.component';
-import {LuckySearchService} from '../lucky-search.service';
-import {SearchConfigurationService} from '../../core/shared/search/search-configuration.service';
-import {Router, UrlTree} from '@angular/router';
-import {createSuccessfulRemoteDataObject, createSuccessfulRemoteDataObject$} from '../../shared/remote-data.utils';
-import {createPaginatedList} from '../../shared/testing/utils.test';
-import {Item} from '../../core/shared/item.model';
-import {of as observableOf} from 'rxjs';
-import {PaginatedSearchOptions} from '../../shared/search/models/paginated-search-options.model';
-import {PaginationComponentOptions} from '../../shared/pagination/pagination-component-options.model';
-import {SortDirection, SortOptions} from '../../core/cache/models/sort-options.model';
-import {TranslateModule} from '@ngx-translate/core';
-import {By} from '@angular/platform-browser';
-import {SearchResult} from '../../shared/search/models/search-result.model';
-import {DSpaceObject} from '../../core/shared/dspace-object.model';
-import {BitstreamDataService, MetadataFilter} from '../../core/data/bitstream-data.service';
-import {Bitstream} from '../../core/shared/bitstream.model';
-import {RouterMock} from '../../shared/mocks/router.mock';
-import {MetadataMap, MetadataValue} from '../../core/shared/metadata.models';
-import {FileSizePipe} from '../../shared/utils/file-size-pipe';
-import {HardRedirectService} from '../../core/services/hard-redirect.service';
-import {getBitstreamDownloadRoute} from '../../app-routing-paths';
-import {PLATFORM_ID} from '@angular/core';
-import {NotificationsService} from '../../shared/notifications/notifications.service';
-import {NotificationsServiceStub} from '../../shared/testing/notifications-service.stub';
+import { LuckySearchComponent } from './lucky-search.component';
+import { LuckySearchService } from '../lucky-search.service';
+import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
+import { Router, UrlTree } from '@angular/router';
+import { createSuccessfulRemoteDataObject, createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
+import { createPaginatedList } from '../../shared/testing/utils.test';
+import { Item } from '../../core/shared/item.model';
+import { of as observableOf } from 'rxjs';
+import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
+import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
+import { SortDirection, SortOptions } from '../../core/cache/models/sort-options.model';
+import { TranslateModule } from '@ngx-translate/core';
+import { By } from '@angular/platform-browser';
+import { SearchResult } from '../../shared/search/models/search-result.model';
+import { DSpaceObject } from '../../core/shared/dspace-object.model';
+import { BitstreamDataService, MetadataFilter } from '../../core/data/bitstream-data.service';
+import { Bitstream } from '../../core/shared/bitstream.model';
+import { RouterMock } from '../../shared/mocks/router.mock';
+import { MetadataMap, MetadataValue } from '../../core/shared/metadata.models';
+import { FileSizePipe } from '../../shared/utils/file-size-pipe';
+import { HardRedirectService } from '../../core/services/hard-redirect.service';
+import { getBitstreamDownloadRoute } from '../../app-routing-paths';
+import { PLATFORM_ID } from '@angular/core';
+import { NotificationsService } from '../../shared/notifications/notifications.service';
+import { NotificationsServiceStub } from '../../shared/testing/notifications-service.stub';
 
 describe('LuckySearchComponent', () => {
   let fixture: ComponentFixture<LuckySearchComponent>;
@@ -78,15 +78,15 @@ describe('LuckySearchComponent', () => {
     index: 'test',
     'value': 'test'
   };
-  const routerStub = new RouterMock();
+  let routerStub = new RouterMock();
 
   const bitstreamMetadata = {
-    'dc.title': [{value: 'test.pdf'} as MetadataValue],
-    'dc.description': [{value: 'TestDescription'} as MetadataValue]
+    'dc.title': [{ value: 'test.pdf' } as MetadataValue],
+    'dc.description': [{ value: 'TestDescription' } as MetadataValue]
   } as MetadataMap;
   const bitstream = Object.assign(
     new Bitstream(),
-    {_name: 'test.pdf', sizeBytes: 15, uuid: 'fa272dbf-e458-4ad2-868b-b4a27c6eac15', metadata: bitstreamMetadata}
+    { _name: 'test.pdf', sizeBytes: 15, uuid: 'fa272dbf-e458-4ad2-868b-b4a27c6eac15', metadata: bitstreamMetadata }
   ) as Bitstream;
 
   beforeEach(async () => {
@@ -94,22 +94,20 @@ describe('LuckySearchComponent', () => {
       declarations: [LuckySearchComponent, FileSizePipe],
       imports: [TranslateModule.forRoot()],
       providers: [
-        {provide: Router, useValue: routerStub},
-        {provide: SearchConfigurationService, useValue: searchConfigServiceStub},
-        {provide: LuckySearchService, useValue: searchServiceStub},
-        {provide: BitstreamDataService, useValue: bitstreamDataService},
-        {provide: HardRedirectService, useValue: hardRedirectService},
-        {provide: PLATFORM_ID, useValue: 'browser'},
-        {provide: NotificationsService, useValue: new NotificationsServiceStub()},
+        { provide: Router, useValue: routerStub },
+        { provide: SearchConfigurationService, useValue: searchConfigServiceStub },
+        { provide: LuckySearchService, useValue: searchServiceStub },
+        { provide: BitstreamDataService, useValue: bitstreamDataService },
+        { provide: HardRedirectService, useValue: hardRedirectService },
+        { provide: PLATFORM_ID, useValue: 'browser' },
+        { provide: NotificationsService, useValue: new NotificationsServiceStub() },
       ],
     })
       .compileComponents();
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(LuckySearchComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  afterEach(() => {
+    routerStub = new RouterMock();
   });
 
   describe('should search items', () => {
@@ -123,7 +121,7 @@ describe('LuckySearchComponent', () => {
           name: 'My first publication',
           metadata: {
             'dspace.entity.type': [
-              {value: 'Publication'}
+              { value: 'Publication' }
             ]
           }
         })
@@ -136,12 +134,12 @@ describe('LuckySearchComponent', () => {
           name: 'publication',
           metadata: {
             'dspace.entity.type': [
-              {value: 'Publication'}
+              { value: 'Publication' }
             ]
           }
         })
       });
-      spyOn(routerStub, 'parseUrl').and.returnValue(urlTree);
+      routerStub.parseUrl.and.returnValue(urlTree);
       const data = createSuccessfulRemoteDataObject(createPaginatedList([
         firstSearchResult, secondSearchResult
       ]));
@@ -161,7 +159,7 @@ describe('LuckySearchComponent', () => {
 
     it('should call router.navigateByUrl when platform is browser', () => {
       component.redirect('test-url');
-      expect(routerStub.navigateByUrl).toHaveBeenCalledWith('test-url', {replaceUrl: true});
+      expect(routerStub.navigateByUrl).toHaveBeenCalledWith('test-url', { replaceUrl: true });
     });
   });
 
@@ -187,25 +185,25 @@ describe('LuckySearchComponent', () => {
           name: 'My first publication',
           metadata: {
             'dspace.entity.type': [
-              {value: 'Publication'}
+              { value: 'Publication' }
             ]
           }
         })
       });
       const data = createSuccessfulRemoteDataObject(createPaginatedList([searchResult]));
-      const metadataFilters = [{metadataName: 'dc.title', metadataValue: 'title.pdf'}] as MetadataFilter[];
+      const metadataFilters = [{ metadataName: 'dc.title', metadataValue: 'title.pdf' }] as MetadataFilter[];
       component.bitstreamFilters$.next(metadataFilters);
       bitstreamDataService.findByItem.withArgs(itemUUID, 'ORIGINAL', metadataFilters, {})
         .and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([bitstream])));
 
-      component.currentFilter = {identifier: 'test', value: 'test', bitstreamValue: 'test'};
+      component.currentFilter = { identifier: 'test', value: 'test', bitstreamValue: 'test' };
       component.searchOptions$ = observableOf(defaultPagination);
 
       spyOn((component as any), 'getLuckySearchResults').and.returnValue(observableOf(data));
       spyOn((component as any), 'loadBitstreamsAndRedirectIfNeeded').and.returnValue(observableOf([bitstream]));
       spyOn((component as any), 'hasBitstreamFilters').and.returnValue(true);
       spyOn(component, 'redirect');
-      spyOn(routerStub, 'parseUrl').and.returnValue(bitstreamSearchTree);
+      routerStub.parseUrl.and.returnValue(bitstreamSearchTree);
 
       component.resultsRD$.next(data);
 
@@ -250,25 +248,25 @@ describe('LuckySearchComponent', () => {
           name: 'My first publication',
           metadata: {
             'dspace.entity.type': [
-              {value: 'Publication'}
+              { value: 'Publication' }
             ]
           }
         })
       });
       const data = createSuccessfulRemoteDataObject(createPaginatedList([firstSearchResult]));
-      const metadataFilters = [{metadataName: 'dc.title', metadataValue: 'test.pdf'}] as MetadataFilter[];
+      const metadataFilters = [{ metadataName: 'dc.title', metadataValue: 'test.pdf' }] as MetadataFilter[];
       component.bitstreamFilters$.next(metadataFilters);
       bitstreamDataService.findByItem.withArgs(itemUUID, 'ORIGINAL', metadataFilters, {})
         .and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([bitstream])));
 
-      component.currentFilter = {identifier: 'test', value: 'test', bitstreamValue: 'test'};
+      component.currentFilter = { identifier: 'test', value: 'test', bitstreamValue: 'test' };
       component.searchOptions$ = observableOf(defaultPagination);
 
       spyOn((component as any), 'getLuckySearchResults').and.returnValue(observableOf(data));
       spyOn((component as any), 'loadBitstreamsAndRedirectIfNeeded').and.returnValue(observableOf([bitstream]));
       spyOn((component as any), 'hasBitstreamFilters').and.returnValue(true);
       spyOn(component, 'redirect');
-      spyOn(routerStub, 'parseUrl').and.returnValue(bitstreamSearchTree);
+      routerStub.parseUrl.and.returnValue(bitstreamSearchTree);
 
       component.resultsRD$.next(data);
 
@@ -284,27 +282,36 @@ describe('LuckySearchComponent', () => {
     });
   });
 
-  it('should not redirect when no bitstreams are found', () => {
-    const item = Object.assign(new Item(), {uuid: 'item-uuid-1', name: 'Test item 1'});
-    const data = createSuccessfulRemoteDataObject(createPaginatedList([
-      {indexableObject: item, hitHighlights: {}}
-    ])) as any;
-    component.resultsRD$.next(data);
-    component.bitstreamFilters$.next([{metadataName: 'dc.title', metadataValue: 'Non-existent bitstream'}]);
-    bitstreamDataService.findByItem.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([])));
-    spyOn(component, 'redirect');
-    fixture.detectChanges();
-    expect(component.redirect).not.toHaveBeenCalled();
-  });
+  describe('', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(LuckySearchComponent);
+      component = fixture.componentInstance;
+    });
 
-  it('should update showEmptySearchSection$ when no results are found', () => {
-    const emptyResults = createSuccessfulRemoteDataObject(createPaginatedList([]));
+    it('should not redirect when no bitstreams are found', () => {
+      const item = Object.assign(new Item(), { uuid: 'item-uuid-1', name: 'Test item 1' });
+      const data = createSuccessfulRemoteDataObject(createPaginatedList([
+        { indexableObject: item, hitHighlights: {} }
+      ])) as any;
+      component.resultsRD$.next(data);
+      component.bitstreamFilters$.next([{ metadataName: 'dc.title', metadataValue: 'Non-existent bitstream' }]);
+      bitstreamDataService.findByItem.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([])));
+      spyOn(component, 'redirect');
+      fixture.detectChanges();
+      expect(component.redirect).not.toHaveBeenCalled();
+    });
 
-    spyOn(component as any, 'getLuckySearchResults').and.returnValue(observableOf(emptyResults));
-    spyOn(component as any, 'processSearchResults').and.returnValue(observableOf(emptyResults));
+    it('should update showEmptySearchSection$ when no results are found', () => {
+      fixture.detectChanges();
+      const emptyResults = createSuccessfulRemoteDataObject(createPaginatedList([]));
 
-    component.getSearchResults();
+      spyOn(component as any, 'getLuckySearchResults').and.returnValue(observableOf(emptyResults));
+      spyOn(component as any, 'processSearchResults').and.returnValue(observableOf(emptyResults));
 
-    expect(component.showEmptySearchSection$.getValue()).toBe(true);
+      component.getSearchResults();
+
+      expect(component.showEmptySearchSection$.getValue()).toBe(true);
+    });
+
   });
 });
