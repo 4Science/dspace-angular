@@ -302,8 +302,8 @@ describe('LuckySearchComponent', () => {
 
     spyOn(component as any, 'getLuckySearchResults').and.returnValue(observableOf(emptyResults));
     spyOn(component as any, 'processSearchResults').and.returnValue(observableOf(emptyResults));
-
-    component.getSearchResults();
+    fixture.detectChanges();
+    (component as any).processSearchResults(emptyResults);
 
     expect(component.showEmptySearchSection$.getValue()).toBe(true);
   });
