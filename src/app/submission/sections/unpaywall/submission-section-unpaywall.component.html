@@ -11,7 +11,7 @@
                     [content]="'submission.sections.unpaywall.status.imported' | translate"></ds-alert>
         </ng-container>
         <ng-container *ngSwitchCase="UnpaywallSectionStatus.PENDING">
-          <ds-alert [type]="AlertType.Info"
+          <ds-alert [type]="AlertType.Warning"
                     [content]="'submission.sections.unpaywall.status.pending' | translate"></ds-alert>
         </ng-container>
         <ng-container *ngSwitchCase="UnpaywallSectionStatus.NO_FILE">
@@ -35,7 +35,8 @@
             <span aria-hidden="true">{{'submission.sections.unpaywall.refresh' | translate}}</span>
           </button>
           <button type="button" class="btn btn-success" aria-label="import from unpaywall"
-                  (click)="confirmImport()" [disabled]="(status$ | async) !== UnpaywallSectionStatus.SUCCESSFUL">
+                  *ngIf="(status$ | async) === UnpaywallSectionStatus.SUCCESSFUL"
+                  (click)="confirmImport()">
             <span aria-hidden="true">{{'submission.sections.unpaywall.import' | translate}}</span>
           </button>
         </ng-container>

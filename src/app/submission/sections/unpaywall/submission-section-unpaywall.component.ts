@@ -204,6 +204,8 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
       this.loading$.next(isLoading);
       if (!isLoading) {
         this.stopFetch$.next();
+      } else if (unpaywall?.status === UnpaywallSectionStatus.PENDING) {
+        this.notificationsService.warning(this.translate.instant('submission.sections.unpaywall.status.pending'));
       }
     });
   }
@@ -217,12 +219,6 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
 
   protected handleStatusNotification(status: UnpaywallSectionStatus) {
     switch (status) {
-      case UnpaywallSectionStatus.NOT_FOUND:
-        this.notificationsService.error(this.translate.instant('submission.sections.unpaywall.status.not-found'));
-        break;
-      case UnpaywallSectionStatus.NO_FILE:
-        this.notificationsService.warning(this.translate.instant('submission.sections.unpaywall.status.no-file'));
-        break;
       case UnpaywallSectionStatus.SUCCESSFUL:
         this.notificationsService.success(this.translate.instant('submission.sections.unpaywall.status.successful'));
         break;
@@ -357,7 +353,9 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
   }
 
   private getDoiMetadataValue(value: SubmissionObjectEntry): string {
-    return value.sections[value.definition]?.data?.[DOI_METADATA]?.[0]?.value;
+    return Object.values(value.sections)
+      .find((section) => section?.data?.[DOI_METADATA]?.[0]?.value !== undefined)
+      ?.data?.[DOI_METADATA]?.[0]?.value;
   }
 
   private hideCurrentSection(): void {
