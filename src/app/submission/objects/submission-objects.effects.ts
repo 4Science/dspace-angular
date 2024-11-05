@@ -485,7 +485,7 @@ export class SubmissionObjectEffects {
         }
 
         const sections: WorkspaceitemSectionsObject = (item.sections && isNotEmpty(item.sections)) ? item.sections : {};
-        const sectionsKeys: string[] = union(Object.keys(sections), Object.keys(errorsList));
+        const sectionsKeys = union(Object.keys(sections), Object.keys(currentState.sections).filter(key => currentState.sections[key].errorsToShow.length > 0),  Object.keys(errorsList));
 
         for (const sectionId of sectionsKeys) {
           const sectionErrors = errorsList[sectionId] || [];
