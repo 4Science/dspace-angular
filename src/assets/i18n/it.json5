@@ -4265,6 +4265,7 @@
   // "file-section.error.header": "Error obtaining files for this item",
   "file-section.error.header": "Errore durante il recupero dei file per questo item",
 
+  "fondsHomePage.search.results.head": "Fondi",
 
   // "footer.built-with": "Built with",
   "footer.built-with": "Realizzato con",
