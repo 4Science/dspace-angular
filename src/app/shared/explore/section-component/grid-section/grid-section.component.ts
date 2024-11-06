@@ -82,7 +82,8 @@ export class GridSectionComponent implements OnInit {
     this.paginatedSearchOptions = new PaginatedSearchOptions({
       configuration: this.gridSection.discoveryConfigurationName,
       pagination: pagination,
-      sort: new SortOptions(this.gridSection.sortField ?? 'dc.date.accessioned', this.gridSection.order ?? SortDirection.DESC)
+      sort: new SortOptions(this.gridSection.sortField ?? 'dc.date.accessioned', this.gridSection.order ?? SortDirection.DESC),
+      projection: 'preventMetadataSecurity'
     });
 
     this.getMainBoxResults();
@@ -138,8 +139,8 @@ export class GridSectionComponent implements OnInit {
   private getAllBitstreams() {
     from(this.searchResults).pipe(
       map((itemSR) => itemSR.indexableObject),
-      mergeMap((item) => this.bitstreamDataService.findAllByItemAndBundleName(
-          item as Item, 'ORIGINAL', {}, true, true, followLink('format')
+      mergeMap((item: Item) => this.bitstreamDataService.showableByItem(
+          item.uuid, 'ORIGINAL', [], {}, true, true, followLink('format')
         ).pipe(
           getFirstCompletedRemoteData(),
           switchMap((rd: RemoteData<PaginatedList<Bitstream>>) => rd.hasSucceeded ? rd.payload.page : []),
