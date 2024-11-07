@@ -170,6 +170,12 @@ export class OpenStreetMapComponent implements OnInit {
         },
         error: (err) => {
           this.invalidLocationErrorCode.next(err.message); // either INVALID_COORDINATES or API_ERROR
+          // show the map centered on provided coordinates despite the possibility to retrieve a description for the place
+          const coordinates = this.locationService.parseCoordinates(position);
+          const place: LocationPlace = {
+            coordinates: coordinates,
+          };
+          this.place.next(place);
           if (err.message === LocationErrorCodes.API_ERROR) {
             console.error(err.message);
           } else {
@@ -189,6 +195,12 @@ export class OpenStreetMapComponent implements OnInit {
         },
         error: (err) => {
           this.invalidLocationErrorCode.next(err.message); // either LOCATION_NOT_FOUND or API_ERROR
+          // show the map centered on provided coordinates despite the possibility to retrieve a description for the place
+          const coordinates = this.locationService.parseCoordinates(position);
+          const place: LocationPlace = {
+            coordinates: coordinates,
+          };
+          this.place.next(place);
           if (err.message === LocationErrorCodes.API_ERROR) {
             console.error(err.message);
           } else {
