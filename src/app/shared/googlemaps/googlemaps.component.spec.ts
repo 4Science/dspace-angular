@@ -42,15 +42,24 @@ describe('GooglemapsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should rendered google map.',() => {
+  it('should render google map.',() => {
     const container = fixture.debugElement.query(By.css('.map-container'));
     expect(container).toBeTruthy();
   });
 
-  it('should not rendered google map.',() => {
+  it('should not render google map if coordinates are not valid.',() => {
     fixture = TestBed.createComponent(GooglemapsComponent);
     component = fixture.componentInstance;
     component.coordinates = '';
+    const container = fixture.debugElement.query(By.css('.map-container'));
+    expect(container).toBeFalsy();
+  });
+
+  it('should not render google map if the google maps api key is not present.',() => {
+    fixture = TestBed.createComponent(GooglemapsComponent);
+    component = fixture.componentInstance;
+    component.coordinates = coordinates;
+    component.noKeyConfigured = true;
     const container = fixture.debugElement.query(By.css('.map-container'));
     expect(container).toBeFalsy();
   });

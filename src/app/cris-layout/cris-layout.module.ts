@@ -152,6 +152,12 @@ import { OpenStreetMapModule } from '../shared/open-street-map/open-street-map.m
 import { OpenStreetMapRenderingComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/open-street-map/open-street-map-rendering.component';
 import { GooglemapsGroupComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/metadataGroup/googlemaps-group/googlemaps-group.component';
 import { OpenstreetmapGroupComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/metadataGroup/openstreetmap-group/openstreetmap-group.component';
+import {
+  LongmarkdownComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/longmarkdown/longmarkdown.component';
+import {
+  LonghtmlComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/longhtml/longhtml.component';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -161,6 +167,7 @@ const ENTRY_COMPONENTS = [
   CrisLayoutCollectionBoxComponent,
   TextComponent,
   HtmlComponent,
+  LonghtmlComponent,
   HeadingComponent,
   CrisLayoutRelationBoxComponent,
   CrisLayoutIIIFViewerBoxComponent,
@@ -186,6 +193,7 @@ const ENTRY_COMPONENTS = [
   BrowseComponent,
   TagBrowseComponent,
   MarkdownComponent,
+  LongmarkdownComponent,
   SearchComponent,
   TagSearchComponent,
   CrisLayoutMediaBoxComponent,
@@ -215,7 +223,6 @@ const ENTRY_COMPONENTS = [
     RowComponent,
     MetadataContainerComponent,
     MetadataRenderComponent,
-    MarkdownComponent,
     BitstreamAttachmentComponent,
     AttachmentRenderComponent,
   ],

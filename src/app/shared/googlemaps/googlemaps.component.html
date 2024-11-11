@@ -1,2 +1,3 @@
 <ds-alert *ngIf="!coordinates" [content]=" 'map.coordinates-invalid' | translate "></ds-alert>
-<div *ngIf="coordinates" #gmap class="map-container"></div>
+<ds-alert *ngIf="noKeyConfigured" [content]=" 'map.no-key-configured' | translate "></ds-alert>
+<div *ngIf="coordinates && !noKeyConfigured" #gmap class="map-container"></div>

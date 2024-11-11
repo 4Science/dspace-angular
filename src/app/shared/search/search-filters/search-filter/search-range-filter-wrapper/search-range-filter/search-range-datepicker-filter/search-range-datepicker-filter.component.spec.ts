@@ -13,6 +13,7 @@ import {
   FILTER_CONFIG,
   IN_PLACE_SEARCH,
   REFRESH_FILTER,
+  SCOPE,
   SearchFilterService
 } from '../../../../../../../core/shared/search/search-filter.service';
 import { RemoteDataBuildService } from '../../../../../../../core/cache/builders/remote-data-build.service';
@@ -40,6 +41,7 @@ describe('SearchRangeDatepickerFilterComponent', () => {
         { provide: SEARCH_CONFIG_SERVICE, useValue: new SearchConfigurationServiceStub() },
         { provide: IN_PLACE_SEARCH, useValue: false },
         { provide: REFRESH_FILTER, useValue: new BehaviorSubject<boolean>(false) },
+        { provide: SCOPE, useValue: '' },
         {
           provide: SearchFilterService, useValue: {
             getSelectedValuesForFilter: () => of([]),

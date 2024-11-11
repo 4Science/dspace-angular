@@ -1,7 +1,6 @@
 <ng-container *ngIf="!noPagination;else withoutPagination">
   <ds-pagination
     [paginationOptions]="config"
-    [pageInfoState]="objects?.payload"
     [collectionSize]="objects?.payload?.totalElements"
     [sortOptions]="sortConfig"
     [hideGear]="hideGear"

@@ -2,7 +2,7 @@ import { TopSection, LayoutModeEnum } from '../../core/layout/models/section.mod
 import { Component, Input } from '@angular/core';
 import { ThemedComponent } from '../theme-support/themed.component';
 import { BrowseMostElementsComponent } from './browse-most-elements.component';
-import { Context } from 'vm';
+import { Context } from '../../core/shared/context.model';
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
 
 /**
@@ -19,11 +19,19 @@ export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMos
 
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
-  @Input() topSection: TopSection;
+  @Input() projection = 'preventMetadataSecurity';
 
   @Input() mode: LayoutModeEnum;
 
-  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'topSection', 'mode'];
+  @Input() showLabel: boolean;
+
+  @Input() showMetrics: boolean;
+
+  @Input() showThumbnails: boolean;
+
+  @Input() topSection: TopSection;
+
+  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'projection', 'mode', 'showLabel', 'showMetrics', 'showThumbnails', 'topSection'];
 
   protected getComponentName(): string {
     return 'BrowseMostElementsComponent';

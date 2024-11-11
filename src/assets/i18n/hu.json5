@@ -6,7 +6,8 @@
   // "401.link.home-page": "Take me to the home page",
   "401.link.home-page": "Vissza a főoldalra",
 
-  // "401.unauthorized": "unauthorized",
+  // "401.unauthorized": "Unauthorized",
+  // TODO Source message changed - Revise the translation
   "401.unauthorized": "jogosulatlan",
 
   // "403.help": "You don't have permission to access this page. You can use the button below to get back to the home page.",
@@ -15,10 +16,12 @@
   // "403.link.home-page": "Take me to the home page",
   "403.link.home-page": "Vissza a főoldalra",
 
-  // "403.forbidden": "forbidden",
+  // "403.forbidden": "Forbidden",
+  // TODO Source message changed - Revise the translation
   "403.forbidden": "elérhetetlen",
 
-  // "500.page-internal-server-error": "Service Unavailable",
+  // "500.page-internal-server-error": "Service unavailable",
+  // TODO Source message changed - Revise the translation
   "404.help": "A keresett oldal nem található. Az oldalt elköltöztették, vagy letörölték. Az alsó gombbal visszakerülhet a honlapra ",
 
   // "500.help": "The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.",
@@ -34,7 +37,8 @@
   // "404.link.home-page": "Take me to the home page",
   "404.link.home-page": "Vissza a főoldalra",
 
-  // "404.page-not-found": "page not found",
+  // "404.page-not-found": "Page not found",
+  // TODO Source message changed - Revise the translation
   "404.page-not-found": "oldal nem található",
 
   // "410.gone-handle": "This object is no longer available",
@@ -45,44 +49,38 @@
   // TODO New key - Add a translation
   "410.link.home-page": "Take me to the home page",
 
-  // "error-page.description.401": "unauthorized",
-  // TODO New key - Add a translation
+  // "error-page.description.401": "Unauthorized",
+  // TODO Source message changed - Revise the translation
   "error-page.description.401": "unauthorized",
 
-  // "error-page.description.403": "forbidden",
-  // TODO New key - Add a translation
+  // "error-page.description.403": "Forbidden",
+  // TODO Source message changed - Revise the translation
   "error-page.description.403": "forbidden",
 
-  // "error-page.description.500": "Service Unavailable",
-  // TODO New key - Add a translation
+  // "error-page.description.500": "Service unavailable",
+  // TODO Source message changed - Revise the translation
   "error-page.description.500": "Service Unavailable",
 
-  // "error-page.description.404": "page not found",
-  // TODO New key - Add a translation
+  // "error-page.description.404": "Page not found",
+  // TODO Source message changed - Revise the translation
   "error-page.description.404": "page not found",
 
   // "error-page.orcid.generic-error": "An error occurred during login via ORCID. Make sure you have shared your ORCID account email address with DSpace. If the error persists, contact the administrator",
-  // TODO New key - Add a translation
   "error-page.orcid.generic-error": "An error occurred during login via ORCID. Make sure you have shared your ORCID account email address with DSpace. If the error persists, contact the administrator",
 
   // "access-status.embargo.listelement.badge": "Embargo",
-  // TODO New key - Add a translation
   "access-status.embargo.listelement.badge": "Embargo",
 
   // "access-status.metadata.only.listelement.badge": "Metadata only",
-  // TODO New key - Add a translation
   "access-status.metadata.only.listelement.badge": "Metadata only",
 
   // "access-status.open.access.listelement.badge": "Open Access",
-  // TODO New key - Add a translation
   "access-status.open.access.listelement.badge": "Open Access",
 
   // "access-status.restricted.listelement.badge": "Restricted",
-  // TODO New key - Add a translation
   "access-status.restricted.listelement.badge": "Restricted",
 
   // "access-status.unknown.listelement.badge": "Unknown",
-  // TODO New key - Add a translation
   "access-status.unknown.listelement.badge": "Unknown",
 
   // "admin.curation-tasks.breadcrumbs": "System curation tasks",
@@ -263,7 +261,8 @@
   // "admin.registries.bitstream-formats.create.failure.head": "Failure",
   "admin.registries.bitstream-formats.create.failure.head": "Nem sikerült",
 
-  // "admin.registries.bitstream-formats.create.head": "Create Bitstream format",
+  // "admin.registries.bitstream-formats.create.head": "Create bitstream format",
+  // TODO Source message changed - Revise the translation
   "admin.registries.bitstream-formats.create.head": "Bitfolyam formátum létrehozása",
 
   // "admin.registries.bitstream-formats.create.new": "Add a new bitstream format",
@@ -368,6 +367,10 @@
   // "admin.registries.bitstream-formats.table.name": "Name",
   "admin.registries.bitstream-formats.table.name": "Név",
 
+  // "admin.registries.bitstream-formats.table.selected": "Selected bitstream formats",
+  // TODO New key - Add a translation
+  "admin.registries.bitstream-formats.table.selected": "Selected bitstream formats",
+
   // "admin.registries.bitstream-formats.table.id": "ID",
   // TODO Source message changed - Revise the translation
   "admin.registries.bitstream-formats.table.id": "ID",
@@ -388,8 +391,15 @@
   "admin.registries.bitstream-formats.table.supportLevel.head": "Támogatási szint",
 
   // "admin.registries.bitstream-formats.title": "Bitstream Format Registry",
-  // TODO Source message changed - Revise the translation
   "admin.registries.bitstream-formats.title": "Bitfolyam formátum leíró adatbázis",
+
+  // "admin.registries.bitstream-formats.select": "Select",
+  // TODO New key - Add a translation
+  "admin.registries.bitstream-formats.select": "Select",
+
+  // "admin.registries.bitstream-formats.deselect": "Deselect",
+  // TODO New key - Add a translation
+  "admin.registries.bitstream-formats.deselect": "Deselect",
 
   // "admin.registries.metadata.breadcrumbs": "Metadata registry",
   "admin.registries.metadata.breadcrumbs": "Metaadat leíró adatbázis",
@@ -415,8 +425,20 @@
   // "admin.registries.metadata.schemas.no-items": "No metadata schemas to show.",
   "admin.registries.metadata.schemas.no-items": "Nincs elérhető metaadat séma.",
 
+  // "admin.registries.metadata.schemas.select": "Select",
+  // TODO New key - Add a translation
+  "admin.registries.metadata.schemas.select": "Select",
+
+  // "admin.registries.metadata.schemas.deselect": "Deselect",
+  // TODO New key - Add a translation
+  "admin.registries.metadata.schemas.deselect": "Deselect",
+
   // "admin.registries.metadata.schemas.table.delete": "Delete selected",
   "admin.registries.metadata.schemas.table.delete": "Kiválasztottak törlése",
+
+  // "admin.registries.metadata.schemas.table.selected": "Selected schemas",
+  // TODO New key - Add a translation
+  "admin.registries.metadata.schemas.table.selected": "Selected schemas",
 
   // "admin.registries.metadata.schemas.table.id": "ID",
   "admin.registries.metadata.schemas.table.id": "Azonosító",
@@ -431,7 +453,6 @@
   "admin.registries.metadata.schemas.table.download": "Download",
 
   // "admin.registries.metadata.title": "Metadata Registry",
-  // TODO Source message changed - Revise the translation
   "admin.registries.metadata.title": "Metaadat leíró adatbázis",
 
   // "admin.registries.schema.breadcrumbs": "Metadata schema",
@@ -439,6 +460,14 @@
 
   // "admin.registries.schema.description": "This is the metadata schema for \"{{namespace}}\".",
   "admin.registries.schema.description": "Ez a metaadat séma a következőhöz \"{{namespace}}\".",
+
+  // "admin.registries.schema.fields.select": "Select",
+  // TODO New key - Add a translation
+  "admin.registries.schema.fields.select": "Select",
+
+  // "admin.registries.schema.fields.deselect": "Deselect",
+  // TODO New key - Add a translation
+  "admin.registries.schema.fields.deselect": "Deselect",
 
   // "admin.registries.schema.fields.head": "Schema metadata fields",
   "admin.registries.schema.fields.head": "Séma metaadat mezők",
@@ -451,6 +480,10 @@
 
   // "admin.registries.schema.fields.table.field": "Field",
   "admin.registries.schema.fields.table.field": "Mező",
+
+  // "admin.registries.schema.fields.table.selected": "Selected metadata fields",
+  // TODO New key - Add a translation
+  "admin.registries.schema.fields.table.selected": "Selected metadata fields",
 
   // "admin.registries.schema.fields.table.id": "ID",
   // TODO Source message changed - Revise the translation
@@ -511,7 +544,6 @@
   "admin.registries.schema.return": "Vissza",
 
   // "admin.registries.schema.title": "Metadata Schema Registry",
-  // TODO Source message changed - Revise the translation
   "admin.registries.schema.title": "Metaadat Séma leíró adatbázis",
 
   // "admin.access-control.bulk-access.breadcrumbs": "Bulk Access Management",
@@ -592,7 +624,8 @@
   // "admin.access-control.epeople.search.scope.metadata": "Metadata",
   "admin.access-control.epeople.search.scope.metadata": "Metaadat",
 
-  // "admin.access-control.epeople.search.scope.email": "E-mail (exact)",
+  // "admin.access-control.epeople.search.scope.email": "Email (exact)",
+  // TODO Source message changed - Revise the translation
   "admin.access-control.epeople.search.scope.email": "E-mail (pontosan)",
 
   // "admin.access-control.epeople.search.button": "Search",
@@ -610,7 +643,8 @@
   // "admin.access-control.epeople.table.name": "Name",
   "admin.access-control.epeople.table.name": "Név",
 
-  // "admin.access-control.epeople.table.email": "E-mail (exact)",
+  // "admin.access-control.epeople.table.email": "Email (exact)",
+  // TODO Source message changed - Revise the translation
   "admin.access-control.epeople.table.email": "E-mail (pontosan)",
 
   // "admin.access-control.epeople.table.edit": "Edit",
@@ -640,10 +674,12 @@
   // "admin.access-control.epeople.form.lastName": "Last name",
   "admin.access-control.epeople.form.lastName": "Családnév",
 
-  // "admin.access-control.epeople.form.email": "E-mail",
+  // "admin.access-control.epeople.form.email": "Email",
+  // TODO Source message changed - Revise the translation
   "admin.access-control.epeople.form.email": "E-mail",
 
-  // "admin.access-control.epeople.form.emailHint": "Must be valid e-mail address",
+  // "admin.access-control.epeople.form.emailHint": "Must be a valid email address",
+  // TODO Source message changed - Revise the translation
   "admin.access-control.epeople.form.emailHint": "Érvényes e-mail cím kell, hogy legyen",
 
   // "admin.access-control.epeople.form.canLogIn": "Can log in",
@@ -754,7 +790,6 @@
   "admin.access-control.groups.title.singleGroup": "Csoport szerkesztése",
 
   // "admin.access-control.groups.title.addGroup": "New Group",
-  // TODO Source message changed - Revise the translation
   "admin.access-control.groups.title.addGroup": "Új csoport",
 
   // "admin.access-control.groups.addGroup.breadcrumbs": "New Group",
@@ -1197,13 +1232,13 @@
   // "admin.metadata-import.page.error.addFile": "Select file first!",
   "admin.metadata-import.page.error.addFile": "Előbb válassza ki a fájlt!",
 
-  // "admin.metadata-import.page.error.addFileUrl": "Insert file url first!",
+  // "admin.metadata-import.page.error.addFileUrl": "Insert file URL first!",
   // TODO New key - Add a translation
-  "admin.metadata-import.page.error.addFileUrl": "Insert file url first!",
+  "admin.metadata-import.page.error.addFileUrl": "Insert file URL first!",
 
-  // "admin.batch-import.page.error.addFile": "Select Zip file first!",
+  // "admin.batch-import.page.error.addFile": "Select ZIP file first!",
   // TODO New key - Add a translation
-  "admin.batch-import.page.error.addFile": "Select Zip file first!",
+  "admin.batch-import.page.error.addFile": "Select ZIP file first!",
 
   // "admin.metadata-import.page.toggle.upload": "Upload",
   // TODO New key - Add a translation
@@ -1657,9 +1692,9 @@
   // TODO New key - Add a translation
   "bitstream-request-a-copy.name.error": "The name is required",
 
-  // "bitstream-request-a-copy.email.label": "Your e-mail address *",
+  // "bitstream-request-a-copy.email.label": "Your email address *",
   // TODO New key - Add a translation
-  "bitstream-request-a-copy.email.label": "Your e-mail address *",
+  "bitstream-request-a-copy.email.label": "Your email address *",
 
   // "bitstream-request-a-copy.email.hint": "This email address is used for sending the file.",
   // TODO New key - Add a translation
@@ -1955,17 +1990,19 @@
   // TODO New key - Add a translation
   "browse.startsWith.input": "Filter",
 
+  // "browse.taxonomy_srsc.title": "Browsing by Subject Category",
+  // TODO New key - Add a translation
+  "browse.taxonomy_srsc.title": "Browsing by Subject Category",
+
   // "browse.taxonomy.button": "Browse",
   // TODO New key - Add a translation
   "browse.taxonomy.button": "Browse",
 
   // "browse.title": "Browsing {{ collection }} by {{ field }}{{ startsWith }} {{ value }}",
-  // TODO Source message changed - Revise the translation
-  "browse.title": "Böngészés {{ collection }} szerint {{ field }} {{ value }}",
+  "browse.title": "{{ collection }} böngészése, {{ field }} {{ value }} szerint",
 
   // "browse.title.page": "Browsing {{ collection }} by {{ field }} {{ value }}",
-  // TODO New key - Add a translation
-  "browse.title.page": "Browsing {{ collection }} by {{ field }} {{ value }}",
+  "browse.title.page": "{{ collection }} böngészése, {{ field }} {{ value }} szerint",
 
 
   // "bulk-import.abort-on-error": "Abort on first error",
@@ -2035,6 +2072,14 @@
   // "claimed-declined-task-search-result-list-element.title": "Declined, sent back to Review Manager's workflow",
   // TODO New key - Add a translation
   "claimed-declined-task-search-result-list-element.title": "Declined, sent back to Review Manager's workflow",
+
+  // "collection.create.breadcrumbs": "Create collection",
+  // TODO New key - Add a translation
+  "collection.create.breadcrumbs": "Create collection",
+
+  // "collection.browse.logo": "Browse for a collection logo",
+  // TODO New key - Add a translation
+  "collection.browse.logo": "Browse for a collection logo",
 
   // "collection.create.head": "Create a Collection",
   "collection.create.head": "Hozzon létre egy gyűjteményt",
@@ -2286,7 +2331,6 @@
   "collection.edit.tabs.source.notifications.discarded.content": "Változtatások elvetve. Visszaállításukhoz kattintson a 'Visszaállítás' gombra",
 
   // "collection.edit.tabs.source.notifications.discarded.title": "Changes discarded",
-  // TODO Source message changed - Revise the translation
   "collection.edit.tabs.source.notifications.discarded.title": "Változások elvetve",
 
   // "collection.edit.tabs.source.notifications.invalid.content": "Your changes were not saved. Please make sure all fields are valid before you save.",
@@ -2310,8 +2354,9 @@
   // "collection.edit.template.breadcrumbs": "Item template",
   "collection.edit.template.breadcrumbs": "Elemsablon",
 
-  // "collection.edit.template.cancel": "Cancel",
-  "collection.edit.template.cancel": "Mégsem",
+  // "collection.edit.template.back": "Back",
+  // TODO New key - Add a translation
+  "collection.edit.template.back": "Back",
 
   // "collection.edit.template.delete-button": "Delete",
   "collection.edit.template.delete-button": "Töröl",
@@ -2405,6 +2450,10 @@
   // "collection.listelement.badge": "Collection",
   "collection.listelement.badge": "Gyűjtemény",
 
+  // "collection.logo": "Collection logo",
+  // TODO New key - Add a translation
+  "collection.logo": "Collection logo",
+
   // "collection.page.browse.recent.head": "Recent Submissions",
   "collection.page.browse.recent.head": "Friss feltöltések",
 
@@ -2432,6 +2481,18 @@
 
   // "collection.select.empty": "No collections to show",
   "collection.select.empty": "Nincs gyűjtemény",
+
+  // "collection.select.table.selected": "Selected collections",
+  // TODO New key - Add a translation
+  "collection.select.table.selected": "Selected collections",
+
+  // "collection.select.table.select": "Select collection",
+  // TODO New key - Add a translation
+  "collection.select.table.select": "Select collection",
+
+  // "collection.select.table.deselect": "Deselect collection",
+  // TODO New key - Add a translation
+  "collection.select.table.deselect": "Deselect collection",
 
   // "collection.select.table.title": "Title",
   "collection.select.table.title": "Cím",
@@ -2539,7 +2600,6 @@
   "communityList.breadcrumbs": "Community List",
 
   // "communityList.tabTitle": "Community List",
-  // TODO Source message changed - Revise the translation
   "communityList.tabTitle": "DSpace - Közösség lista",
 
   // "communityList.title": "List of Communities",
@@ -2547,6 +2607,22 @@
 
   // "communityList.showMore": "Show More",
   "communityList.showMore": "Tovább",
+
+  // "communityList.expand": "Expand {{ name }}",
+  // TODO New key - Add a translation
+  "communityList.expand": "Expand {{ name }}",
+
+  // "communityList.collapse": "Collapse {{ name }}",
+  // TODO New key - Add a translation
+  "communityList.collapse": "Collapse {{ name }}",
+
+  // "community.browse.logo": "Browse for a community logo",
+  // TODO New key - Add a translation
+  "community.browse.logo": "Browse for a community logo",
+
+  // "community.create.breadcrumbs": "Create Community",
+  // TODO New key - Add a translation
+  "community.create.breadcrumbs": "Create Community",
 
   // "community.create.head": "Create a Community",
   "community.create.head": "Hozzon létre egy közösséget",
@@ -2610,10 +2686,12 @@
   // "community.edit.logo.label": "Community logo",
   "community.edit.logo.label": "Közösségi logo",
 
-  // "community.edit.logo.notifications.add.error": "Uploading Community logo failed. Please verify the content before retrying.",
+  // "community.edit.logo.notifications.add.error": "Uploading community logo failed. Please verify the content before retrying.",
+  // TODO Source message changed - Revise the translation
   "community.edit.logo.notifications.add.error": "Közösségi logo feltöltése nem sikerült Kérjük, ellenőrizze a tartalmat, mielőtt újra próbálkozna.",
 
-  // "community.edit.logo.notifications.add.success": "Upload Community logo successful.",
+  // "community.edit.logo.notifications.add.success": "Upload community logo successful.",
+  // TODO Source message changed - Revise the translation
   "community.edit.logo.notifications.add.success": "Közösségi logo feltöltve.",
 
   // "community.edit.logo.notifications.delete.success.title": "Logo deleted",
@@ -2625,7 +2703,8 @@
   // "community.edit.logo.notifications.delete.error.title": "Error deleting logo",
   "community.edit.logo.notifications.delete.error.title": "Logo törlése közben hiba történt",
 
-  // "community.edit.logo.upload": "Drop a Community Logo to upload",
+  // "community.edit.logo.upload": "Drop a community logo to upload",
+  // TODO Source message changed - Revise the translation
   "community.edit.logo.upload": "Feltöltéshez húzza ide a közösségi logót",
 
   // "community.edit.notifications.success": "Successfully edited the Community",
@@ -2634,7 +2713,8 @@
   // "community.edit.notifications.unauthorized": "You do not have privileges to make this change",
   "community.edit.notifications.unauthorized": "Nincs meg a szükséges jogosultsága a változtatáshoz",
 
-  // "community.edit.notifications.error": "An error occured while editing the Community",
+  // "community.edit.notifications.error": "An error occured while editing the community",
+  // TODO Source message changed - Revise the translation
   "community.edit.notifications.error": "Hiba történt a közösség szerkesztésekor",
 
   // "community.edit.return": "Back",
@@ -2674,6 +2754,10 @@
 
   // "community.listelement.badge": "Community",
   "community.listelement.badge": "Közösség",
+
+  // "community.logo": "Community logo",
+  // TODO New key - Add a translation
+  "community.logo": "Community logo",
 
   // "comcol-role.edit.no-group": "None",
   "comcol-role.edit.no-group": "Semmi",
@@ -2725,7 +2809,8 @@
   // "comcol-role.edit.bitstream_read.name": "Default bitstream read access",
   "comcol-role.edit.bitstream_read.name": "Bitfolyam olvasási hozzáférés alapbeállítás",
 
-  // "comcol-role.edit.bitstream_read.description": "Community administrators can create sub-communities or collections, and manage or assign management for those sub-communities or collections. In addition, they decide who can submit items to any sub-collections, edit item metadata (after submission), and add (map) existing items from other collections (subject to authorization).",
+  // "comcol-role.edit.bitstream_read.description": "E-People and Groups that can read new bitstreams submitted to this collection. Changes to this role are not retroactive. Existing bitstreams in the system will still be viewable by those who had read access at the time of their addition.",
+  // TODO Source message changed - Revise the translation
   "comcol-role.edit.bitstream_read.description": "A közösségek adminisztrátorai létrehozhatnak alkategóriákat vagy gyűjteményeket, irányíthatják azokat, vagy kijelölhetik azok irányítását. Továbbá ők döntik el ki tölthet fel tárgyakat bármely algyűjteménybe, ki szerkesztheti a tárgyak metaadatait (feltöltést követően) és ki adhat hozzá (térképezhet) létező tárgyakat más gyűjteményekből (felhatalmazás szükséges).",
 
   // "comcol-role.edit.bitstream_read.anonymous-group": "Default read for incoming bitstreams is currently set to Anonymous.",
@@ -2855,9 +2940,13 @@
   // TODO New key - Add a translation
   "context-menu.actions.request-correction.confirm.submit": "Yes, I'm sure",
 
-  // "context-menu.actions.request-correction.error.403": "A request for correction has already been sent, impossible to proceed with the operation.",
+  // "context-menu.actions.request-correction.error.403": "You are not authorized, impossible to proceed with the operation.",
   // TODO New key - Add a translation
-  "context-menu.actions.request-correction.error.403": "A request for correction has already been sent, impossible to proceed with the operation.",
+  "context-menu.actions.request-correction.error.403": "You are not authorized, impossible to proceed with the operation.",
+
+  // "context-menu.actions.request-correction.error.422": "A correction request for this item is already in progress. Please contact the support if you need to perform urgent changes to this item.",
+  // TODO New key - Add a translation
+  "context-menu.actions.request-correction.error.422": "A correction request for this item is already in progress. Please contact the support if you need to perform urgent changes to this item.",
 
   // "context-menu.actions.request-correction.error.generic": "There was an issue when requesting a correction for the item, please try again later.",
   // TODO New key - Add a translation
@@ -3413,6 +3502,14 @@
   // TODO New key - Add a translation
   "deny-request-copy.success": "Successfully denied item request",
 
+  // "dropdown.clear": "Clear selection",
+  // TODO New key - Add a translation
+  "dropdown.clear": "Clear selection",
+
+  // "dropdown.clear.tooltip": "Clear the selected option",
+  // TODO New key - Add a translation
+  "dropdown.clear.tooltip": "Clear the selected option",
+
   // "dso.name.untitled": "Untitled",
   // TODO New key - Add a translation
   "dso.name.untitled": "Untitled",
@@ -3816,17 +3913,21 @@
   // TODO New key - Add a translation
   "error.validation.required": "This field is required",
 
-  // "error.validation.NotValidEmail": "This E-mail is not a valid email",
+  // "error.validation.NotValidEmail": "This is not a valid email",
   // TODO New key - Add a translation
-  "error.validation.NotValidEmail": "This E-mail is not a valid email",
+  "error.validation.NotValidEmail": "This is not a valid email",
 
-  // "error.validation.emailTaken": "This E-mail is already taken",
+  // "error.validation.emailTaken": "This email is already taken",
   // TODO New key - Add a translation
-  "error.validation.emailTaken": "This E-mail is already taken",
+  "error.validation.emailTaken": "This email is already taken",
 
   // "error.validation.groupExists": "This group already exists",
   // TODO New key - Add a translation
   "error.validation.groupExists": "This group already exists",
+
+  // "error.validation.invalidProjectURL": "The URL of the project is invalid",
+  // TODO New key - Add a translation
+  "error.validation.invalidProjectURL": "The URL of the project is invalid",
 
   // "error.validation.metadata.name.invalid-pattern": "This field cannot contain dots, commas or spaces. Please use the Element & Qualifier fields instead",
   // TODO New key - Add a translation
@@ -3872,6 +3973,9 @@
   // TODO New key - Add a translation
   "event.listelement.badge": "Event",
 
+  // "event.page.titleprefix": "Event:",
+  // TODO New key - Add a translation
+  "event.page.titleprefix": "Event:",
 
   // "explore.browse-section.title": "Browse",
   // TODO New key - Add a translation
@@ -4213,6 +4317,10 @@
   // TODO New key - Add a translation
   "feed.description": "Syndication feed",
 
+  // "file-download-link.restricted": "Restricted bitstream",
+  // TODO New key - Add a translation
+  "file-download-link.restricted": "Restricted bitstream",
+
   // "file-section.error.header": "Error obtaining files for this item",
   "file-section.error.header": "Hiba történ az elemhez tartozó fájlok beszerzésekor",
 
@@ -4279,7 +4387,6 @@
   "forgot-email.form.submit": "Jelszó visszaállítása",
 
   // "forgot-email.form.success.head": "Password reset email sent",
-  // TODO Source message changed - Revise the translation
   "forgot-email.form.success.head": "Jelszóvisszaállító e-mail küldve",
 
   // "forgot-email.form.success.content": "An email has been sent to {{ email }} containing a special URL and further instructions.",
@@ -4316,7 +4423,8 @@
   // "forgot-password.form.label.passwordrepeat": "Retype to confirm",
   "forgot-password.form.label.passwordrepeat": "Írja újra a visszaigazoláshoz",
 
-  // "forgot-password.form.error.empty-password": "Please enter a password in the box below.",
+  // "forgot-password.form.error.empty-password": "Please enter a password in the boxes above.",
+  // TODO Source message changed - Revise the translation
   "forgot-password.form.error.empty-password": "Írja be a jelszót a lenti mezőbe.",
 
   // "forgot-password.form.error.matching-passwords": "The passwords do not match.",
@@ -4544,6 +4652,14 @@
   // "form.repeatable.sort.tip": "Drop the item in the new position",
   // TODO New key - Add a translation
   "form.repeatable.sort.tip": "Drop the item in the new position",
+
+  // "form.number-picker.decrement": "Decrement {{field}}",
+  // TODO New key - Add a translation
+  "form.number-picker.decrement": "Decrement {{field}}",
+
+  // "form.number-picker.increment": "Increment {{field}}",
+  // TODO New key - Add a translation
+  "form.number-picker.increment": "Increment {{field}}",
 
   // "funding.listelement.badge": "Funding",
   // TODO New key - Add a translation
@@ -4851,9 +4967,9 @@
   // TODO New key - Add a translation
   "info.feedback.page-label": "Page",
 
-  // "info.feedback.page_help": "Tha page related to your feedback",
+  // "info.feedback.page_help": "The page related to your feedback",
   // TODO New key - Add a translation
-  "info.feedback.page_help": "Tha page related to your feedback",
+  "info.feedback.page_help": "The page related to your feedback",
 
   // "item.alerts.private": "This item is non-discoverable",
   "item.alerts.private": "Ez az elem privát",
@@ -5178,6 +5294,14 @@
   // "item.edit.metadata.discard-button": "Discard",
   "item.edit.metadata.discard-button": "Elvetés",
 
+  // "item.edit.metadata.edit.language": "Edit language",
+  // TODO New key - Add a translation
+  "item.edit.metadata.edit.language": "Edit language",
+
+  // "item.edit.metadata.edit.value": "Edit value",
+  // TODO New key - Add a translation
+  "item.edit.metadata.edit.value": "Edit value",
+
   // "item.edit.metadata.edit.buttons.confirm": "Confirm",
   // TODO New key - Add a translation
   "item.edit.metadata.edit.buttons.confirm": "Confirm",
@@ -5225,6 +5349,10 @@
   // "item.edit.metadata.headers.value": "Value",
   "item.edit.metadata.headers.value": "Érték",
 
+  // "item.edit.metadata.metadatafield": "Edit field",
+  // TODO New key - Add a translation
+  "item.edit.metadata.metadatafield": "Edit field",
+
   // "item.edit.metadata.metadatafield.error": "An error occurred validating the metadata field",
   // TODO New key - Add a translation
   "item.edit.metadata.metadatafield.error": "An error occurred validating the metadata field",
@@ -5236,7 +5364,6 @@
   "item.edit.metadata.notifications.discarded.content": "Módosításai elvetve. Visszaállításukhoz kattintson a 'Visszaállítás' gombra",
 
   // "item.edit.metadata.notifications.discarded.title": "Changes discarded",
-  // TODO Source message changed - Revise the translation
   "item.edit.metadata.notifications.discarded.title": "Módosítás elvetve",
 
   // "item.edit.metadata.notifications.error.title": "An error occurred",
@@ -5252,7 +5379,6 @@
   "item.edit.metadata.notifications.outdated.content": "A tárgyon amin dolgozik egy másik felhasználó módosításokat eszközölt. Az ön módosításait elvetettük, hogy megelőzzük a konfliktust",
 
   // "item.edit.metadata.notifications.outdated.title": "Changes outdated",
-  // TODO Source message changed - Revise the translation
   "item.edit.metadata.notifications.outdated.title": "Módosítás idejemúlt",
 
   // "item.edit.metadata.notifications.saved.content": "Your changes to this item's metadata were saved.",
@@ -5891,9 +6017,9 @@
   // TODO New key - Add a translation
   "item.page.version.create": "Create new version",
 
-  // "item.page.version.hasDraft": "A new version cannot be created because there is an inprogress submission in the version history",
+  // "item.page.version.hasDraft": "A new version cannot be created because there is an in-progress submission in the version history",
   // TODO New key - Add a translation
-  "item.page.version.hasDraft": "A new version cannot be created because there is an inprogress submission in the version history",
+  "item.page.version.hasDraft": "A new version cannot be created because there is an in-progress submission in the version history",
 
   // "item.page.claim.button": "Claim",
   // TODO New key - Add a translation
@@ -6206,6 +6332,18 @@
   // "item.select.empty": "No items to show",
   "item.select.empty": "Nincs megtekinthető tárgy",
 
+  // "item.select.table.selected": "Selected items",
+  // TODO New key - Add a translation
+  "item.select.table.selected": "Selected items",
+
+  // "item.select.table.select": "Select item",
+  // TODO New key - Add a translation
+  "item.select.table.select": "Select item",
+
+  // "item.select.table.deselect": "Deselect item",
+  // TODO New key - Add a translation
+  "item.select.table.deselect": "Deselect item",
+
   // "item.select.table.author": "Author",
   "item.select.table.author": "Szerző",
 
@@ -6283,9 +6421,9 @@
   // TODO New key - Add a translation
   "item.version.history.table.action.deleteVersion": "Delete version",
 
-  // "item.version.history.table.action.hasDraft": "A new version cannot be created because there is an inprogress submission in the version history",
+  // "item.version.history.table.action.hasDraft": "A new version cannot be created because there is an in-progress submission in the version history",
   // TODO New key - Add a translation
-  "item.version.history.table.action.hasDraft": "A new version cannot be created because there is an inprogress submission in the version history",
+  "item.version.history.table.action.hasDraft": "A new version cannot be created because there is an in-progress submission in the version history",
 
   // "item.version.notice": "This is not the latest version of this item. The latest version can be found <a href='{{destination}}'>here</a>.",
   "item.version.notice": "Ez nem ennek a tárgynak a legutóbbi változata. A legutóbbi változat megtalálható itt <a href='{{destination}}'>here</a>.",
@@ -6342,9 +6480,9 @@
   // TODO New key - Add a translation
   "item.version.create.notification.failure": "New version has not been created",
 
-  // "item.version.create.notification.inProgress": "A new version cannot be created because there is an inprogress submission in the version history",
+  // "item.version.create.notification.inProgress": "A new version cannot be created because there is an in-progress submission in the version history",
   // TODO New key - Add a translation
-  "item.version.create.notification.inProgress": "A new version cannot be created because there is an inprogress submission in the version history",
+  "item.version.create.notification.inProgress": "A new version cannot be created because there is an in-progress submission in the version history",
 
   // "item.version.delete.modal.header": "Delete version",
   // TODO New key - Add a translation
@@ -6466,6 +6604,14 @@
   // TODO New key - Add a translation
   "itemtemplate.edit.metadata.discard-button": "Discard",
 
+  // "itemtemplate.edit.metadata.edit.language": "Edit language",
+  // TODO New key - Add a translation
+  "itemtemplate.edit.metadata.edit.language": "Edit language",
+
+  // "itemtemplate.edit.metadata.edit.value": "Edit value",
+  // TODO New key - Add a translation
+  "itemtemplate.edit.metadata.edit.value": "Edit value",
+
   // "itemtemplate.edit.metadata.edit.buttons.confirm": "Confirm",
   // TODO New key - Add a translation
   "itemtemplate.edit.metadata.edit.buttons.confirm": "Confirm",
@@ -6509,6 +6655,14 @@
   // "itemtemplate.edit.metadata.headers.value": "Value",
   // TODO New key - Add a translation
   "itemtemplate.edit.metadata.headers.value": "Value",
+
+  // "itemtemplate.edit.metadata.headers.authority": "Authority",
+  // TODO New key - Add a translation
+  "itemtemplate.edit.metadata.headers.authority": "Authority",
+
+  // "itemtemplate.edit.metadata.metadatafield": "Edit field",
+  // TODO New key - Add a translation
+  "itemtemplate.edit.metadata.metadatafield": "Edit field",
 
   // "itemtemplate.edit.metadata.metadatafield.error": "An error occurred validating the metadata field",
   // TODO New key - Add a translation
@@ -6873,6 +7027,10 @@
   // TODO New key - Add a translation
   "manage.relationships.hidden-related-items-alert": "Please note that hidden related items will always be visible among Item’s relations to administrators and owner of the Item",
 
+
+  // "menu.header.nav.description": "Admin navigation bar",
+  // TODO New key - Add a translation
+  "menu.header.nav.description": "Admin navigation bar",
 
   // "menu.header.admin": "Management",
   // TODO Source message changed - Revise the translation
@@ -7370,22 +7528,24 @@
   // "mydspace.results.no-title": "No title",
   "mydspace.results.no-title": "Nincs cím",
 
-  // "mydspace.results.no-uri": "No Uri",
+  // "mydspace.results.no-uri": "No URI",
+  // TODO Source message changed - Revise the translation
   "mydspace.results.no-uri": "Nincs Uri",
 
   // "mydspace.results.is-correction": "Is a request of correction",
   // TODO New key - Add a translation
   "mydspace.results.is-correction": "Is a request of correction",
 
-  // "mydspace.search-form.placeholder": "Search in mydspace...",
+  // "mydspace.search-form.placeholder": "Search in MyDSpace...",
   // TODO New key - Add a translation
-  "mydspace.search-form.placeholder": "Search in mydspace...",
+  "mydspace.search-form.placeholder": "Search in MyDSpace...",
 
   // "mydspace.show.workflow": "Workflow tasks",
   // TODO Source message changed - Revise the translation
   "mydspace.show.workflow": "Valamennyi feladat",
 
-  // "mydspace.show.workspace": "Your Submissions",
+  // "mydspace.show.workspace": "Your submissions",
+  // TODO Source message changed - Revise the translation
   "mydspace.show.workspace": "Az ön feltöltései",
 
   // "mydspace.show.supervisedWorkspace": "Supervised items",
@@ -7402,7 +7562,7 @@
   // "mydspace.status.mydspaceValidation": "Validation",
   "mydspace.status.mydspaceValidation": "Érvényesítés",
 
-  // "mydspace.status.mydspaceWaitingController": "Waiting for controller",
+  // "mydspace.status.mydspaceWaitingController": "Waiting for reviewer",
   "mydspace.status.mydspaceWaitingController": "Várakozás a kontrollerre",
 
   // "mydspace.status.mydspaceWorkflow": "Workflow",
@@ -7442,6 +7602,10 @@
   "mydspace.notification.suggestion.page": "We found <b>{{count}} {{type}}</b> in the {{source}} that seems to be related to your profile. Please <a href='/suggestions/{{suggestionId}}'>review the suggestions.</a>",
 
 
+  // "nav.expandable-navbar-section-suffix": "(submenu)",
+  // TODO New key - Add a translation
+  "nav.expandable-navbar-section-suffix": "(submenu)",
+
   // "nav.browse.header": "All of DSpace",
   "nav.browse.header": "Böngészés",
 
@@ -7458,9 +7622,9 @@
   // "nav.login": "Log In",
   "nav.login": "Bejelentkezés",
 
-  // "nav.user-profile-menu-and-logout": "User profile menu and Log Out",
+  // "nav.user-profile-menu-and-logout": "User profile menu and log out",
   // TODO New key - Add a translation
-  "nav.user-profile-menu-and-logout": "User profile menu and Log Out",
+  "nav.user-profile-menu-and-logout": "User profile menu and log out",
 
   // "nav.logout": "Log Out",
   "nav.logout": "Kilépés",
@@ -7471,6 +7635,10 @@
 
   // "nav.mydspace": "MyDSpace",
   "nav.mydspace": "MyDSpace",
+
+  // "nav.processes": "My Processes",
+  // TODO New key - Add a translation
+  "nav.processes": "My Processes",
 
   // "nav.profile": "Profile",
   "nav.profile": "Profil",
@@ -7905,6 +8073,10 @@
   // "orgunit.page.titleprefix": "Organizational Unit: ",
   "orgunit.page.titleprefix": "Szervezeti egység: ",
 
+  // "orgunit.search.results.head": "Organizational Unit Search Results",
+  // TODO New key - Add a translation
+  "orgunit.search.results.head": "Organizational Unit Search Results",
+
   // "pagination.options.description": "Pagination options",
   // TODO New key - Add a translation
   "pagination.options.description": "Pagination options",
@@ -7974,6 +8146,22 @@
   // "process.new.select-parameters": "Parameters",
   "process.new.select-parameters": "Paraméterek",
 
+  // "process.new.select-parameter": "Select parameter",
+  // TODO New key - Add a translation
+  "process.new.select-parameter": "Select parameter",
+
+  // "process.new.add-parameter": "Add a parameter...",
+  // TODO New key - Add a translation
+  "process.new.add-parameter": "Add a parameter...",
+
+  // "process.new.delete-parameter": "Delete parameter",
+  // TODO New key - Add a translation
+  "process.new.delete-parameter": "Delete parameter",
+
+  // "process.new.parameter.label": "Parameter value",
+  // TODO New key - Add a translation
+  "process.new.parameter.label": "Parameter value",
+
   // "process.new.cancel": "Cancel",
   "process.new.cancel": "Mégsem",
 
@@ -8031,6 +8219,14 @@
   // "process.new.notification.process.files": "Output Files: ",
   // TODO New key - Add a translation
   "process.new.notification.process.files": "Output Files: ",
+
+  // "process.new.notification.process.status.completed": "Completed",
+  // TODO New key - Add a translation
+  "process.new.notification.process.status.completed": "Completed",
+
+  // "process.new.notification.process.status.failed": "Failed",
+  // TODO New key - Add a translation
+  "process.new.notification.process.status.failed": "Failed",
 
   // "process.new.header": "Create a new process",
   "process.new.header": "Új folyamat létrehozása",
@@ -8179,6 +8375,10 @@
   // TODO New key - Add a translation
   "process.overview.delete": "Delete {{count}} processes",
 
+  // "process.overview.delete-process": "Delete process",
+  // TODO New key - Add a translation
+  "process.overview.delete-process": "Delete process",
+
   // "process.overview.delete.clear": "Clear delete selection",
   // TODO New key - Add a translation
   "process.overview.delete.clear": "Clear delete selection",
@@ -8299,9 +8499,6 @@
   // "profile.special.groups.head": "Authorization special groups you belong to",
   // TODO New key - Add a translation
   "profile.special.groups.head": "Authorization special groups you belong to",
-
-  // "profile.head": "Update Profile",
-  "profile.head": "Profil frissítése",
 
   // "profile.metadata.form.error.firstname.required": "First Name is required",
   "profile.metadata.form.error.firstname.required": "Keresztnév kötelező",
@@ -8696,9 +8893,11 @@
   "repository.image.logo": "Adattár logó",
 
   // "repository.title": "{{ repositoryName }}",
+  // TODO New key - Add a translation
   "repository.title": "{{ repositoryName }}",
 
   // "repository.title.prefix": "{{ repositoryName }} Angular :: ",
+  // TODO New key - Add a translation
   "repository.title.prefix": "{{ repositoryName }} Angular :: ",
 
   // "resource-policies.add.button": "Add",
@@ -8830,6 +9029,10 @@
   // "resource-policies.form.name.label": "Name",
   "resource-policies.form.name.label": "Név",
 
+  // "resource-policies.form.name.hint": "Max 30 characters",
+  // TODO New key - Add a translation
+  "resource-policies.form.name.hint": "Max 30 characters",
+
   // "resource-policies.form.policy-type.label": "Select the policy type",
   "resource-policies.form.policy-type.label": "Szabály típus kiválasztása",
 
@@ -8859,6 +9062,22 @@
 
   // "resource-policies.table.headers.group": "Group",
   "resource-policies.table.headers.group": "Csoport",
+
+  // "resource-policies.table.headers.select-all": "Select all",
+  // TODO New key - Add a translation
+  "resource-policies.table.headers.select-all": "Select all",
+
+  // "resource-policies.table.headers.deselect-all": "Deselect all",
+  // TODO New key - Add a translation
+  "resource-policies.table.headers.deselect-all": "Deselect all",
+
+  // "resource-policies.table.headers.select": "Select",
+  // TODO New key - Add a translation
+  "resource-policies.table.headers.select": "Select",
+
+  // "resource-policies.table.headers.deselect": "Deselect",
+  // TODO New key - Add a translation
+  "resource-policies.table.headers.deselect": "Deselect",
 
   // "resource-policies.table.headers.id": "ID",
   "resource-policies.table.headers.id": "ID",
@@ -8903,6 +9122,10 @@
 
   // "search.search-form.placeholder": "Search the repository ...",
   "search.search-form.placeholder": "Keresés az adattárban ...",
+
+  // "search.filters.remove": "Remove filter of type {{ type }} with value {{ value }}",
+  // TODO New key - Add a translation
+  "search.filters.remove": "Remove filter of type {{ type }} with value {{ value }}",
 
   // "search.filters.applied.f.author": "Author",
   "search.filters.applied.f.author": "Szerző",
@@ -9460,9 +9683,9 @@
   // TODO New key - Add a translation
   "search.filters.namedresourcetype.Validation": "Validation",
 
-  // "search.filters.namedresourcetype.Waiting for Controller": "Waiting for Controller",
+  // "search.filters.namedresourcetype.Waiting for Controller": "Waiting for reviewer",
   // TODO New key - Add a translation
-  "search.filters.namedresourcetype.Waiting for Controller": "Waiting for Controller",
+  "search.filters.namedresourcetype.Waiting for Controller": "Waiting for reviewer",
 
   // "search.filters.namedresourcetype.Workflow": "Workflow",
   // TODO New key - Add a translation
@@ -9596,6 +9819,14 @@
   // "search.view-switch.show-list": "Show as list",
   "search.view-switch.show-list": "Megjelenítés listaként",
 
+  // "selectable-list-item-control.deselect": "Deselect item",
+  // TODO New key - Add a translation
+  "selectable-list-item-control.deselect": "Deselect item",
+
+  // "selectable-list-item-control.select": "Select item",
+  // TODO New key - Add a translation
+  "selectable-list-item-control.select": "Select item",
+
   // "sorting.ASC": "Ascending",
   "sorting.ASC": "Növekvő",
 
@@ -9695,6 +9926,30 @@
   // "sorting.organisation.address.foundingDate.DESC": "Founding Date Descending",
   // TODO New key - Add a translation
   "sorting.organisation.address.foundingDate.DESC": "Founding Date Descending",
+
+  // "sorting.person.familyName.ASC": "Surname Ascending",
+  // TODO New key - Add a translation
+  "sorting.person.familyName.ASC": "Surname Ascending",
+
+  // "sorting.person.familyName.DESC": "Surname Descending",
+  // TODO New key - Add a translation
+  "sorting.person.familyName.DESC": "Surname Descending",
+
+  // "sorting.person.givenName.ASC": "Name Ascending",
+  // TODO New key - Add a translation
+  "sorting.person.givenName.ASC": "Name Ascending",
+
+  // "sorting.person.givenName.DESC": "Name Descending",
+  // TODO New key - Add a translation
+  "sorting.person.givenName.DESC": "Name Descending",
+
+  // "sorting.person.birthDate.ASC": "Birth Date Ascending",
+  // TODO New key - Add a translation
+  "sorting.person.birthDate.ASC": "Birth Date Ascending",
+
+  // "sorting.person.birthDate.DESC": "Birth Date Descending",
+  // TODO New key - Add a translation
+  "sorting.person.birthDate.DESC": "Birth Date Descending",
 
 
   // "statistics": "Statistics",
@@ -10490,9 +10745,9 @@
   // TODO New key - Add a translation
   "submission.import-external.source.cinii": "CiNii",
 
-  // "submission.import-external.source.crossref": "CrossRef",
+  // "submission.import-external.source.crossref": "Crossref",
   // TODO New key - Add a translation
-  "submission.import-external.source.crossref": "CrossRef",
+  "submission.import-external.source.crossref": "Crossref",
 
   // "submission.import-external.source.datacite": "DataCite",
   // TODO New key - Add a translation
@@ -11313,9 +11568,9 @@
   // "submission.sections.general.no-collection": "No collection found",
   "submission.sections.general.no-collection": "Nem található gyűjtemény",
 
-  // "submission.sections.general.no-entity": "No entity found",
+  // "submission.sections.general.no-entity": "No entity types found",
   // TODO New key - Add a translation
-  "submission.sections.general.no-entity": "No entity found",
+  "submission.sections.general.no-entity": "No entity types found",
 
   // "submission.sections.general.no-sections": "No options available",
   "submission.sections.general.no-sections": "Nincs elérhető opció",
@@ -11558,6 +11813,10 @@
   // "submission.sections.upload.delete.confirm.title": "Delete bitstream",
   "submission.sections.upload.delete.confirm.title": "Bitfolyam törlése",
 
+  // "submission.sections.upload.genericError": "The file details are incomplete or invalid. Please open edit the file details for more details",
+  // TODO New key - Add a translation
+  "submission.sections.upload.genericError": "The file details are incomplete or invalid. Please open edit the file details for more details",
+
   // "submission.sections.upload.delete.submit": "Delete",
   "submission.sections.upload.delete.submit": "Törlés",
 
@@ -11646,6 +11905,10 @@
 
   // "submission.sections.upload.upload-successful": "Upload successful",
   "submission.sections.upload.upload-successful": "Feltöltés sikerült",
+
+  // "submission.sections.upload.upload-warning": "Some information are missing. Please check the upload section",
+  // TODO New key - Add a translation
+  "submission.sections.upload.upload-warning": "Some information are missing. Please check the upload section",
 
   // "submission.sections.custom-url.label.previous-urls": "Previous Urls",
   // TODO New key - Add a translation
@@ -12334,6 +12597,10 @@
 
   // "vocabulary-treeview.search.form.search": "Search",
   "vocabulary-treeview.search.form.search": "Keresés",
+
+  // "vocabulary-treeview.search.form.search-placeholder": "Filter results by typing the first few letters",
+  // TODO New key - Add a translation
+  "vocabulary-treeview.search.form.search-placeholder": "Filter results by typing the first few letters",
 
   // "vocabulary-treeview.search.no-result": "There were no items to show",
   "vocabulary-treeview.search.no-result": "Nincsenek megjelenítendő elemek",
@@ -13165,6 +13432,10 @@
   // TODO New key - Add a translation
   "lucky.search.multiple.records": "may refer to multiple records",
 
+  // "lucky.search.bitstream.notfound": "We are unable to find the file that you have mentioned but it seems to be related to this item.",
+  // TODO New key - Add a translation
+  "lucky.search.bitstream.notfound": "We are unable to find the file that you have mentioned but it seems to be related to this item.",
+
   // "invitation.group.msg": "You have been invited to join the following groups",
   // TODO New key - Add a translation
   "invitation.group.msg": "You have been invited to join the following groups",
@@ -13517,6 +13788,10 @@
   // TODO New key - Add a translation
   "map.coordinates-invalid": "Coordinates are not valid",
 
+  // "map.no-key-configured": "No Google Maps key found in the configuration",
+  // TODO New key - Add a translation
+  "map.no-key-configured": "No Google Maps key found in the configuration",
+
   // "statistics-page.export-map-as-image": "Export map",
   // TODO New key - Add a translation
   "statistics-page.export-map-as-image": "Export map",
@@ -13661,6 +13936,10 @@
   // TODO New key - Add a translation
   "system-wide-alert.form.label.countdownTo.hint": "Hint: Set a countdown timer. When enabled, a date can be set in the future and the system-wide alert banner will perform a countdown to the set date. When this timer ends, it will disappear from the alert. The server will NOT be automatically stopped.",
 
+  // "system-wide-alert-form.select-date-by-calendar": "Select date using calendar",
+  // TODO New key - Add a translation
+  "system-wide-alert-form.select-date-by-calendar": "Select date using calendar",
+
   // "system-wide-alert.form.label.preview": "System-wide alert preview",
   // TODO New key - Add a translation
   "system-wide-alert.form.label.preview": "System-wide alert preview",
@@ -13705,9 +13984,25 @@
   // TODO New key - Add a translation
   "access-control-item-header-toggle": "Item's Metadata",
 
+  // "access-control-item-toggle.enable": "Enable option to perform changes on the item's metadata",
+  // TODO New key - Add a translation
+  "access-control-item-toggle.enable": "Enable option to perform changes on the item's metadata",
+
+  // "access-control-item-toggle.disable": "Disable option to perform changes on the item's metadata",
+  // TODO New key - Add a translation
+  "access-control-item-toggle.disable": "Disable option to perform changes on the item's metadata",
+
   // "access-control-bitstream-header-toggle": "Bitstreams",
   // TODO New key - Add a translation
   "access-control-bitstream-header-toggle": "Bitstreams",
+
+  // "access-control-bitstream-toggle.enable": "Enable option to perform changes on the bitstreams",
+  // TODO New key - Add a translation
+  "access-control-bitstream-toggle.enable": "Enable option to perform changes on the bitstreams",
+
+  // "access-control-bitstream-toggle.disable": "Disable option to perform changes on the bitstreams",
+  // TODO New key - Add a translation
+  "access-control-bitstream-toggle.disable": "Disable option to perform changes on the bitstreams",
 
   // "access-control-mode": "Mode",
   // TODO New key - Add a translation
@@ -13741,6 +14036,10 @@
   // TODO New key - Add a translation
   "access-control-bitstreams-selected": "bitstreams selected",
 
+  // "access-control-bitstreams-select": "Select bitstreams",
+  // TODO New key - Add a translation
+  "access-control-bitstreams-select": "Select bitstreams",
+
   // "access-control-cancel": "Cancel",
   // TODO New key - Add a translation
   "access-control-cancel": "Cancel",
@@ -13760,6 +14059,10 @@
   // "access-control-add-more": "Add more",
   // TODO New key - Add a translation
   "access-control-add-more": "Add more",
+
+  // "access-control-remove": "Remove access condition",
+  // TODO New key - Add a translation
+  "access-control-remove": "Remove access condition",
 
   // "access-control-select-bitstreams-modal.title": "Select bitstreams",
   // TODO New key - Add a translation
@@ -13801,6 +14104,13 @@
   // TODO New key - Add a translation
   "vocabulary-treeview.search.form.add": "Add",
 
+  // "process.overview.unknown.user": "Unknown",
+  // TODO New key - Add a translation
+  "process.overview.unknown.user": "Unknown",
+
+  // "browse.search-form.placeholder": "Search the repository",
+  // TODO New key - Add a translation
+  "browse.search-form.placeholder": "Search the repository",
 
   // "external-login.form.email": "Enter the email",
   // TODO New key - Add a translation
@@ -13974,6 +14284,737 @@
   // "vocabulary-treeview.header.aggregationboxtree": "Collection Tree",
   // TODO New key - Add a translation
   "vocabulary-treeview.header.aggregationboxtree": "Collection Tree",
+
+
+  // "metadata-link-view.popover.label.Person.dc.title": "Fullname",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Person.dc.title": "Fullname",
+
+  // "metadata-link-view.popover.label.Person.person.affiliation.name": "Main affiliation",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Person.person.affiliation.name": "Main affiliation",
+
+  // "metadata-link-view.popover.label.Person.person.email": "Email",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Person.person.email": "Email",
+
+  // "metadata-link-view.popover.label.Person.person.identifier.orcid": "ORCID",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Person.person.identifier.orcid": "ORCID",
+
+  // "metadata-link-view.popover.label.Person.dc.description.abstract": "Abstract",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Person.dc.description.abstract": "Abstract",
+
+  // "metadata-link-view.popover.label.OrgUnit.dc.title": "Fullname",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.OrgUnit.dc.title": "Fullname",
+
+  // "metadata-link-view.popover.label.OrgUnit.organization.identifier.ror": "ROR",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.OrgUnit.organization.identifier.ror": "ROR",
+
+  // "metadata-link-view.popover.label.OrgUnit.crisou.director": "Director",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.OrgUnit.crisou.director": "Director",
+
+  // "metadata-link-view.popover.label.OrgUnit.organization.parentOrganization": "Parent Organization",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.OrgUnit.organization.parentOrganization": "Parent Organization",
+
+  // "metadata-link-view.popover.label.OrgUnit.dc.description.abstract": "Description",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.OrgUnit.dc.description.abstract": "Description",
+
+  // "metadata-link-view.popover.label.Project.dc.title": "Title",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Project.dc.title": "Title",
+
+  // "metadata-link-view.popover.label.Project.oairecerif.project.status": "Status",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Project.oairecerif.project.status": "Status",
+
+  // "metadata-link-view.popover.label.Project.dc.description.abstract": "Abstract",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Project.dc.description.abstract": "Abstract",
+
+  // "metadata-link-view.popover.label.Funding.dc.title": "Title",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Funding.dc.title": "Title",
+
+  // "metadata-link-view.popover.label.Funding.oairecerif.funder": "Funder",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Funding.oairecerif.funder": "Funder",
+
+  // "metadata-link-view.popover.label.Funding.oairecerif.fundingProgram": "Funding program",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Funding.oairecerif.fundingProgram": "Funding program",
+
+  // "metadata-link-view.popover.label.Funding.dc.description.abstract": "Abstract",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Funding.dc.description.abstract": "Abstract",
+
+  // "metadata-link-view.popover.label.Publication.dc.title": "Title",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Publication.dc.title": "Title",
+
+  // "metadata-link-view.popover.label.Publication.dc.identifier.doi": "DOI",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Publication.dc.identifier.doi": "DOI",
+
+  // "metadata-link-view.popover.label.Publication.dc.identifier.uri": "URL",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Publication.dc.identifier.uri": "URL",
+
+  // "metadata-link-view.popover.label.Publication.dc.description.abstract": "Abstract",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Publication.dc.description.abstract": "Abstract",
+
+  // "metadata-link-view.popover.label.other.dc.title": "Title",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.other.dc.title": "Title",
+
+  // "metadata-link-view.popover.label.other.dc.description.abstract": "Description",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.other.dc.description.abstract": "Description",
+
+  // "metadata-link-view.popover.label.more-info": "More info",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.more-info": "More info",
+
+
+
+
+
+  // Layout - Common i18n keys: Metadata fallback values (not generated by CRIS layout tool)
+  // Layout - Autogenerated i18n keys: Tab headers
+  // "layout.tab.header.Person.details": "Profile",
+  // TODO New key - Add a translation
+  "layout.tab.header.Person.details": "Profile",
+  // "layout.tab.header.Person.publications": "Publications",
+  // TODO New key - Add a translation
+  "layout.tab.header.Person.publications": "Publications",
+  // "layout.tab.header.Person.projects": "Projects",
+  // TODO New key - Add a translation
+  "layout.tab.header.Person.projects": "Projects",
+  // "layout.tab.header.Person.otherinfo": "Other",
+  // TODO New key - Add a translation
+  "layout.tab.header.Person.otherinfo": "Other",
+  // "layout.tab.header.Person.indicators": "Metrics",
+  // TODO New key - Add a translation
+  "layout.tab.header.Person.indicators": "Metrics",
+  // "layout.tab.header.Person.secure": "Secured Tab",
+  // TODO New key - Add a translation
+  "layout.tab.header.Person.secure": "Secured Tab",
+  // "layout.tab.header.OrgUnit.maininformation": "Information",
+  // TODO New key - Add a translation
+  "layout.tab.header.OrgUnit.maininformation": "Information",
+  // "layout.tab.header.OrgUnit.details": "Details",
+  // TODO New key - Add a translation
+  "layout.tab.header.OrgUnit.details": "Details",
+  // "layout.tab.header.OrgUnit.organizations": "Organizations",
+  // TODO New key - Add a translation
+  "layout.tab.header.OrgUnit.organizations": "Organizations",
+  // "layout.tab.header.OrgUnit.publications": "Publications",
+  // TODO New key - Add a translation
+  "layout.tab.header.OrgUnit.publications": "Publications",
+  // "layout.tab.header.OrgUnit.rppublications": "Researchers publications",
+  // TODO New key - Add a translation
+  "layout.tab.header.OrgUnit.rppublications": "Researchers publications",
+  // "layout.tab.header.OrgUnit.projects": "Projects",
+  // TODO New key - Add a translation
+  "layout.tab.header.OrgUnit.projects": "Projects",
+  // "layout.tab.header.OrgUnit.rpprojects": "Researchers projects",
+  // TODO New key - Add a translation
+  "layout.tab.header.OrgUnit.rpprojects": "Researchers projects",
+  // "layout.tab.header.OrgUnit.people": "People",
+  // TODO New key - Add a translation
+  "layout.tab.header.OrgUnit.people": "People",
+  // "layout.tab.header.Project.details": "Details",
+  // TODO New key - Add a translation
+  "layout.tab.header.Project.details": "Details",
+  // "layout.tab.header.Project.outputs::projectoutputs": "Outputs::Publications",
+  // TODO New key - Add a translation
+  "layout.tab.header.Project.outputs::projectoutputs": "Outputs::Publications",
+  // "layout.tab.header.Project.outputs::fundings": "Outputs::Fundings",
+  // TODO New key - Add a translation
+  "layout.tab.header.Project.outputs::fundings": "Outputs::Fundings",
+  // "layout.tab.header.Journal.details": "Details",
+  // TODO New key - Add a translation
+  "layout.tab.header.Journal.details": "Details",
+  // "layout.tab.header.Event.details": "Details",
+  // TODO New key - Add a translation
+  "layout.tab.header.Event.details": "Details",
+  // "layout.tab.header.Equipment.details": "Details",
+  // TODO New key - Add a translation
+  "layout.tab.header.Equipment.details": "Details",
+  // "layout.tab.header.Funding.details": "Details",
+  // TODO New key - Add a translation
+  "layout.tab.header.Funding.details": "Details",
+  // "layout.tab.header.Publication.details": "Details",
+  // TODO New key - Add a translation
+  "layout.tab.header.Publication.details": "Details",
+  // "layout.tab.header.Product.details": "Details",
+  // TODO New key - Add a translation
+  "layout.tab.header.Product.details": "Details",
+  // "layout.tab.header.Patent.details": "Details",
+  // TODO New key - Add a translation
+  "layout.tab.header.Patent.details": "Details",
+
+
+
+  // Layout - Autogenerated i18n keys: box headers
+  // "layout.box.header.Person.projects": "Projects",
+  // TODO New key - Add a translation
+  "layout.box.header.Person.projects": "Projects",
+  // "layout.box.header.Person.researchoutputs": "Publications",
+  // TODO New key - Add a translation
+  "layout.box.header.Person.researchoutputs": "Publications",
+  // "layout.box.header.Person.qualifications": "Professional Qualifications",
+  // TODO New key - Add a translation
+  "layout.box.header.Person.qualifications": "Professional Qualifications",
+  // "layout.box.header.Person.media": "Media Contact Directory",
+  // TODO New key - Add a translation
+  "layout.box.header.Person.media": "Media Contact Directory",
+  // "layout.box.header.Person.namecard": "Name Card",
+  // TODO New key - Add a translation
+  "layout.box.header.Person.namecard": "Name Card",
+  // "layout.box.header.Person.researcherprofile": "Profile",
+  // TODO New key - Add a translation
+  "layout.box.header.Person.researcherprofile": "Profile",
+  // "layout.box.header.Person.metrics": "Metrics",
+  // TODO New key - Add a translation
+  "layout.box.header.Person.metrics": "Metrics",
+  // "layout.box.header.Person.usagemetrics": "Usage Metrics",
+  // TODO New key - Add a translation
+  "layout.box.header.Person.usagemetrics": "Usage Metrics",
+  // "layout.box.header.Person.secure": "Secured box",
+  // TODO New key - Add a translation
+  "layout.box.header.Person.secure": "Secured box",
+
+  // "layout.box.header.OrgUnit.rpprojects": "OrgUnit's Researchers projects",
+  // TODO New key - Add a translation
+  "layout.box.header.OrgUnit.rpprojects": "OrgUnit's Researchers projects",
+  // "layout.box.header.OrgUnit.publications": "OrgUnit's Publications",
+  // TODO New key - Add a translation
+  "layout.box.header.OrgUnit.publications": "OrgUnit's Publications",
+  // "layout.box.header.OrgUnit.rppublications": "OrgUnit's Researchers publications",
+  // TODO New key - Add a translation
+  "layout.box.header.OrgUnit.rppublications": "OrgUnit's Researchers publications",
+  // "layout.box.header.OrgUnit.people": "OrgUnit's Researchers",
+  // TODO New key - Add a translation
+  "layout.box.header.OrgUnit.people": "OrgUnit's Researchers",
+  // "layout.box.header.OrgUnit.projects": "OrgUnit funded Projects",
+  // TODO New key - Add a translation
+  "layout.box.header.OrgUnit.projects": "OrgUnit funded Projects",
+  // "layout.box.header.OrgUnit.description": "Description",
+  // TODO New key - Add a translation
+  "layout.box.header.OrgUnit.description": "Description",
+  // "layout.box.header.OrgUnit.organizations": "SubOrgUnits",
+  // TODO New key - Add a translation
+  "layout.box.header.OrgUnit.organizations": "SubOrgUnits",
+  // "layout.box.header.OrgUnit.details": "Details",
+  // TODO New key - Add a translation
+  "layout.box.header.OrgUnit.details": "Details",
+  // "layout.box.header.OrgUnit.orgcard": "Card",
+  // TODO New key - Add a translation
+  "layout.box.header.OrgUnit.orgcard": "Card",
+  // "layout.box.header.OrgUnit.metrics": "Metrics",
+  // TODO New key - Add a translation
+  "layout.box.header.OrgUnit.metrics": "Metrics",
+
+  // "layout.box.header.Project.description": "Description",
+  // TODO New key - Add a translation
+  "layout.box.header.Project.description": "Description",
+  // "layout.box.header.Project.researchoutputs": "Publications",
+  // TODO New key - Add a translation
+  "layout.box.header.Project.researchoutputs": "Publications",
+  // "layout.box.header.Project.fundings": "Fundings",
+  // TODO New key - Add a translation
+  "layout.box.header.Project.fundings": "Fundings",
+  // "layout.box.header.Project.primarydata": "Primary Data",
+  // TODO New key - Add a translation
+  "layout.box.header.Project.primarydata": "Primary Data",
+  // "layout.box.header.Project.projectcard": "Project Card",
+  // TODO New key - Add a translation
+  "layout.box.header.Project.projectcard": "Project Card",
+  // "layout.box.header.Project.metrics": "Metrics",
+  // TODO New key - Add a translation
+  "layout.box.header.Project.metrics": "Metrics",
+
+  // "layout.box.header.Funding.primarydata": "Primary Data",
+  // TODO New key - Add a translation
+  "layout.box.header.Funding.primarydata": "Primary Data",
+  // "layout.box.header.Funding.financialdata": "Financial Data",
+  // TODO New key - Add a translation
+  "layout.box.header.Funding.financialdata": "Financial Data",
+  // "layout.box.header.Funding.metrics": "Metrics",
+  // TODO New key - Add a translation
+  "layout.box.header.Funding.metrics": "Metrics",
+
+  // "layout.box.header.Journal.details": "Journal description",
+  // TODO New key - Add a translation
+  "layout.box.header.Journal.details": "Journal description",
+  // "layout.box.header.Journal.metrics": "Metrics",
+  // TODO New key - Add a translation
+  "layout.box.header.Journal.metrics": "Metrics",
+
+  // "layout.box.header.Event.details": "Description",
+  // TODO New key - Add a translation
+  "layout.box.header.Event.details": "Description",
+  // "layout.box.header.Event.metrics": "Metrics",
+  // TODO New key - Add a translation
+  "layout.box.header.Event.metrics": "Metrics",
+
+  // "layout.box.header.Equipment.details": "Equipment description",
+  // TODO New key - Add a translation
+  "layout.box.header.Equipment.details": "Equipment description",
+  // "layout.box.header.Equipment.metrics": "Metrics",
+  // TODO New key - Add a translation
+  "layout.box.header.Equipment.metrics": "Metrics",
+
+  // "layout.box.header.Publication.details": "Details",
+  // TODO New key - Add a translation
+  "layout.box.header.Publication.details": "Details",
+  // "layout.box.header.Publication.metrics": "Metrics",
+  // TODO New key - Add a translation
+  "layout.box.header.Publication.metrics": "Metrics",
+  // "layout.box.header.Publication.altmetrics": "Alternative Metrics",
+  // TODO New key - Add a translation
+  "layout.box.header.Publication.altmetrics": "Alternative Metrics",
+  // "layout.box.header.Publication.usagemetrics": "Usage Metrics",
+  // TODO New key - Add a translation
+  "layout.box.header.Publication.usagemetrics": "Usage Metrics",
+
+  // "layout.box.header.Patent.details": "Details",
+  // TODO New key - Add a translation
+  "layout.box.header.Patent.details": "Details",
+  // "layout.box.header.Patent.metrics": "Metrics",
+  // TODO New key - Add a translation
+  "layout.box.header.Patent.metrics": "Metrics",
+  // "layout.box.header.Patent.altmetrics": "Metrics",
+  // TODO New key - Add a translation
+  "layout.box.header.Patent.altmetrics": "Metrics",
+  // "layout.box.header.Patent.usagemetrics": "Metrics",
+  // TODO New key - Add a translation
+  "layout.box.header.Patent.usagemetrics": "Metrics",
+
+  // "layout.box.header.Product.details": "Details",
+  // TODO New key - Add a translation
+  "layout.box.header.Product.details": "Details",
+  // "layout.box.header.Product.metrics": "Metrics",
+  // TODO New key - Add a translation
+  "layout.box.header.Product.metrics": "Metrics",
+  // "layout.box.header.Product.altmetrics": "Metrics",
+  // TODO New key - Add a translation
+  "layout.box.header.Product.altmetrics": "Metrics",
+  // "layout.box.header.Product.usagemetrics": "Metrics",
+  // TODO New key - Add a translation
+  "layout.box.header.Product.usagemetrics": "Metrics",
+
+
+
+  // Layout - Autogenerated i18n keys: metadata
+  // "layout.field.label.OrgUnit.[organization.address.addressCountry]": "Country",
+  // TODO New key - Add a translation
+  "layout.field.label.OrgUnit.[organization.address.addressCountry]": "Country",
+  // "layout.field.label.OrgUnit.[organization.address.addressLocality]": "City",
+  // TODO New key - Add a translation
+  "layout.field.label.OrgUnit.[organization.address.addressLocality]": "City",
+  // "layout.field.label.OrgUnit.[dc.description.abstract]": "Description",
+  // TODO New key - Add a translation
+  "layout.field.label.OrgUnit.[dc.description.abstract]": "Description",
+  // "layout.field.label.OrgUnit.[crisou.director]": "Director",
+  // TODO New key - Add a translation
+  "layout.field.label.OrgUnit.[crisou.director]": "Director",
+  // "layout.field.label.OrgUnit.[organization.parentOrganization]": "Parent Organisation",
+  // TODO New key - Add a translation
+  "layout.field.label.OrgUnit.[organization.parentOrganization]": "Parent Organisation",
+  // "layout.field.label.OrgUnit.[organization.foundingDate]": "Founding Date",
+  // TODO New key - Add a translation
+  "layout.field.label.OrgUnit.[organization.foundingDate]": "Founding Date",
+  // "layout.field.label.OrgUnit.[crisou.boards]": "Boards",
+  // TODO New key - Add a translation
+  "layout.field.label.OrgUnit.[crisou.boards]": "Boards",
+  // "layout.field.label.OrgUnit.[organization.identifier.ror]": "ROR Identifier",
+  // TODO New key - Add a translation
+  "layout.field.label.OrgUnit.[organization.identifier.ror]": "ROR Identifier",
+  // "layout.field.label.OrgUnit.[dc.title]": "Organisation Name",
+  // TODO New key - Add a translation
+  "layout.field.label.OrgUnit.[dc.title]": "Organisation Name",
+
+  // "layout.field.label.Project.[dc.description.abstract]": "Description",
+  // TODO New key - Add a translation
+  "layout.field.label.Project.[dc.description.abstract]": "Description",
+  // "layout.field.label.Project.[dc.subject]": "Keywords",
+  // TODO New key - Add a translation
+  "layout.field.label.Project.[dc.subject]": "Keywords",
+  // "layout.field.label.Project.[oairecerif.acronym]": "Acronym",
+  // TODO New key - Add a translation
+  "layout.field.label.Project.[oairecerif.acronym]": "Acronym",
+  // "layout.field.label.Project.[dc.title]": "Project Title",
+  // TODO New key - Add a translation
+  "layout.field.label.Project.[dc.title]": "Project Title",
+  // "layout.field.label.Project.[crispj.coordinator]": "Consortium Coordinator",
+  // TODO New key - Add a translation
+  "layout.field.label.Project.[crispj.coordinator]": "Consortium Coordinator",
+  // "layout.field.label.Project.[crispj.partnerou]": "Partner Organisations",
+  // TODO New key - Add a translation
+  "layout.field.label.Project.[crispj.partnerou]": "Partner Organisations",
+  // "layout.field.label.Project.[oairecerif.internalid]": "Internal ID",
+  // TODO New key - Add a translation
+  "layout.field.label.Project.[oairecerif.internalid]": "Internal ID",
+  // "layout.field.label.Project.[crispj.investigator]": "Principal Investigator",
+  // TODO New key - Add a translation
+  "layout.field.label.Project.[crispj.investigator]": "Principal Investigator",
+  // "layout.field.label.Project.[oairecerif.project.status]": "Status",
+  // TODO New key - Add a translation
+  "layout.field.label.Project.[oairecerif.project.status]": "Status",
+  // "layout.field.label.Project.[oairecerif.project.startDate]": "Start Date",
+  // TODO New key - Add a translation
+  "layout.field.label.Project.[oairecerif.project.startDate]": "Start Date",
+  // "layout.field.label.Project.[oairecerif.project.endDate]": "End Date",
+  // TODO New key - Add a translation
+  "layout.field.label.Project.[oairecerif.project.endDate]": "End Date",
+  // "layout.field.label.Project.[crispj.coinvestigators]": "Investigators",
+  // TODO New key - Add a translation
+  "layout.field.label.Project.[crispj.coinvestigators]": "Investigators",
+  // "layout.field.label.Project.[crispj.organization]": "Organisations",
+  // TODO New key - Add a translation
+  "layout.field.label.Project.[crispj.organization]": "Organisations",
+  // "layout.field.label.Project.[dc.relation.equipment]": "Uses",
+  // TODO New key - Add a translation
+  "layout.field.label.Project.[dc.relation.equipment]": "Uses",
+  // "layout.field.label.Project.[oairecerif.identifier.url]": "Project Web Site",
+  // TODO New key - Add a translation
+  "layout.field.label.Project.[oairecerif.identifier.url]": "Project Web Site",
+  // "layout.field.label.Project.[crispj.openaireid]": "OpenAIRE ID",
+  // TODO New key - Add a translation
+  "layout.field.label.Project.[crispj.openaireid]": "OpenAIRE ID",
+
+  // "layout.field.label.Funding.[dc.relation.project]": "Project",
+  // TODO New key - Add a translation
+  "layout.field.label.Funding.[dc.relation.project]": "Project",
+  // "layout.field.label.Funding.[dc.type]": "Type",
+  // TODO New key - Add a translation
+  "layout.field.label.Funding.[dc.type]": "Type",
+  // "layout.field.label.Funding.[oairecerif.funder]": "Funder",
+  // TODO New key - Add a translation
+  "layout.field.label.Funding.[oairecerif.funder]": "Funder",
+  // "layout.field.label.Funding.[oairecerif.fundingParent]": "Funding Program",
+  // TODO New key - Add a translation
+  "layout.field.label.Funding.[oairecerif.fundingParent]": "Funding Program",
+  // "layout.field.label.Funding.[oairecerif.identifier.url]": "Award URL",
+  // TODO New key - Add a translation
+  "layout.field.label.Funding.[oairecerif.identifier.url]": "Award URL",
+  // "layout.field.label.Funding.[oairecerif.oamandate]": "OA Mandate",
+  // TODO New key - Add a translation
+  "layout.field.label.Funding.[oairecerif.oamandate]": "OA Mandate",
+  // "layout.field.label.Funding.[oairecerif.internalid]": "Funding code",
+  // TODO New key - Add a translation
+  "layout.field.label.Funding.[oairecerif.internalid]": "Funding code",
+  // "layout.field.label.Funding.[oairecerif.amount]": "Amount",
+  // TODO New key - Add a translation
+  "layout.field.label.Funding.[oairecerif.amount]": "Amount",
+  // "layout.field.label.Funding.[oairecerif.amount.currency]": "Currency",
+  // TODO New key - Add a translation
+  "layout.field.label.Funding.[oairecerif.amount.currency]": "Currency",
+
+  // "layout.field.label.Person.[dc.subject]": "Research Interests",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.[dc.subject]": "Research Interests",
+  // "layout.field.label.Person.[person.knowsLanguage]": "Knows Language",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.[person.knowsLanguage]": "Knows Language",
+  // "layout.field.label.Person.[crisrp.qualification]": "Qualification",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.[crisrp.qualification]": "Qualification",
+  // "layout.field.label.Person.[dc.title]": "Preferred name",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.[dc.title]": "Preferred name",
+  // "layout.field.label.Person.[crisrp.name]": "Official Name",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.[crisrp.name]": "Official Name",
+  // "layout.field.label.Person.[crisrp.name.translated]": "Translated Name",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.[crisrp.name.translated]": "Translated Name",
+  // "layout.field.label.Person.[crisrp.name.variant]": "Alternative Name",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.[crisrp.name.variant]": "Alternative Name",
+  // "layout.field.label.Person.[person.affiliation.name]": "Main Affiliation",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.[person.affiliation.name]": "Main Affiliation",
+  // "layout.field.label.Person.[oairecerif.identifier.url]": "Web Site",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.[oairecerif.identifier.url]": "Web Site",
+  // "layout.field.label.Person.[person.email]": "Email",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.[person.email]": "Email",
+  // "layout.field.label.Person.[person.identifier.orcid]": "ORCID",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.[person.identifier.orcid]": "ORCID",
+  // "layout.field.label.Person.[person.identifier.scopus-author-id]": "Scopus Author ID",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.[person.identifier.scopus-author-id]": "Scopus Author ID",
+  // "layout.field.label.Person.[person.identifier.rid]": "Researcher ID",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.[person.identifier.rid]": "Researcher ID",
+  // "layout.field.label.Person.[dc.description.abstract]": "Biography",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.[dc.description.abstract]": "Biography",
+  // "layout.field.label.Person.[oairecerif.person.affiliation]": "Affiliation",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.[oairecerif.person.affiliation]": "Affiliation",
+  // "layout.field.label.Person.[crisrp.education]": "Education",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.[crisrp.education]": "Education",
+  // "layout.field.label.Person.[crisrp.country]": "Country",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.[crisrp.country]": "Country",
+  // "layout.field.label.Person.[person.birthDate]": "Birth Date",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.[person.birthDate]": "Birth Date",
+
+  // "layout.field.label.Journal.[dc.title]": "Journal Title",
+  // TODO New key - Add a translation
+  "layout.field.label.Journal.[dc.title]": "Journal Title",
+  // "layout.field.label.Journal.[dc.subject]": "Keywords",
+  // TODO New key - Add a translation
+  "layout.field.label.Journal.[dc.subject]": "Keywords",
+  // "layout.field.label.Journal.[dc.identifier.issn]": "ISSN",
+  // TODO New key - Add a translation
+  "layout.field.label.Journal.[dc.identifier.issn]": "ISSN",
+
+  // "layout.field.label.Event.[dc.title]": "Title",
+  // TODO New key - Add a translation
+  "layout.field.label.Event.[dc.title]": "Title",
+  // "layout.field.label.Event.[oairecerif.event.startDate]": "Start Date",
+  // TODO New key - Add a translation
+  "layout.field.label.Event.[oairecerif.event.startDate]": "Start Date",
+  // "layout.field.label.Event.[oairecerif.event.endDate]": "End Date",
+  // TODO New key - Add a translation
+  "layout.field.label.Event.[oairecerif.event.endDate]": "End Date",
+  // "layout.field.label.Event.[oairecerif.event.place]": "Location",
+  // TODO New key - Add a translation
+  "layout.field.label.Event.[oairecerif.event.place]": "Location",
+  // "layout.field.label.Event.[dc.type]": "Type",
+  // TODO New key - Add a translation
+  "layout.field.label.Event.[dc.type]": "Type",
+  // "layout.field.label.Event.[crisevent.organizerou]": "Organizer",
+  // TODO New key - Add a translation
+  "layout.field.label.Event.[crisevent.organizerou]": "Organizer",
+  // "layout.field.label.Event.[crisevent.organizerpj]": "Organizer",
+  // TODO New key - Add a translation
+  "layout.field.label.Event.[crisevent.organizerpj]": "Organizer",
+  // "layout.field.label.Event.[crisevent.sponsorou]": "Sponsor",
+  // TODO New key - Add a translation
+  "layout.field.label.Event.[crisevent.sponsorou]": "Sponsor",
+  // "layout.field.label.Event.[crisevent.sponsorpj]": "Sponsor",
+  // TODO New key - Add a translation
+  "layout.field.label.Event.[crisevent.sponsorpj]": "Sponsor",
+  // "layout.field.label.Event.[crisevent.partnerou]": "Partner Organisation",
+  // TODO New key - Add a translation
+  "layout.field.label.Event.[crisevent.partnerou]": "Partner Organisation",
+  // "layout.field.label.Event.[crisevent.partnerpj]": "Partner Project",
+  // TODO New key - Add a translation
+  "layout.field.label.Event.[crisevent.partnerpj]": "Partner Project",
+  // "layout.field.label.Event.[oairecerif.acronym]": "Acronym",
+  // TODO New key - Add a translation
+  "layout.field.label.Event.[oairecerif.acronym]": "Acronym",
+  // "layout.field.label.Event.[dc.description.abstract]": "Abstract",
+  // TODO New key - Add a translation
+  "layout.field.label.Event.[dc.description.abstract]": "Abstract",
+  // "layout.field.label.Event.[dc.subject]": "Keywords",
+  // TODO New key - Add a translation
+  "layout.field.label.Event.[dc.subject]": "Keywords",
+  // "layout.field.label.Event.[oairecerif.event.country]": "Country",
+  // TODO New key - Add a translation
+  "layout.field.label.Event.[oairecerif.event.country]": "Country",
+
+  // "layout.field.label.Equipment.[oairecerif.acronym]": "Acronym",
+  // TODO New key - Add a translation
+  "layout.field.label.Equipment.[oairecerif.acronym]": "Acronym",
+  // "layout.field.label.Equipment.[dc.description]": "Description",
+  // TODO New key - Add a translation
+  "layout.field.label.Equipment.[dc.description]": "Description",
+  // "layout.field.label.Equipment.[oairecerif.internalid]": "Internal ID",
+  // TODO New key - Add a translation
+  "layout.field.label.Equipment.[oairecerif.internalid]": "Internal ID",
+  // "layout.field.label.Equipment.[dc.title]": "Name",
+  // TODO New key - Add a translation
+  "layout.field.label.Equipment.[dc.title]": "Name",
+  // "layout.field.label.Equipment.[crisequipment.ownerou]": "Owner Organisation",
+  // TODO New key - Add a translation
+  "layout.field.label.Equipment.[crisequipment.ownerou]": "Owner Organisation",
+
+  // "layout.field.label.Publication.[dc.relation.ispartof]": "Journal",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.relation.ispartof]": "Journal",
+  // "layout.field.label.Publication.[dc.relation.issn]": "ISSN",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.relation.issn]": "ISSN",
+  // "layout.field.label.Publication.[dc.date.issued]": "Date Issued",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.date.issued]": "Date Issued",
+  // "layout.field.label.Publication.[dc.contributor.author]": "Author(s)",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.contributor.author]": "Author(s)",
+  // "layout.field.label.Publication.[dc.contributor.editor]": "Editor(s)",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.contributor.editor]": "Editor(s)",
+  // "layout.field.label.Publication.[dc.identifier.doi]": "DOI",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.identifier.doi]": "DOI",
+  // "layout.field.label.Publication.[dc.description.abstract]": "Abstract",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.description.abstract]": "Abstract",
+  // "layout.field.label.Publication.[dc.relation.project]": "Project(s)",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.relation.project]": "Project(s)",
+  // "layout.field.label.Publication.[dc.relation.funding]": "Funding(s)",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.relation.funding]": "Funding(s)",
+  // "layout.field.label.Publication.[dc.subject]": "Subjects",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.subject]": "Subjects",
+  // "layout.field.label.Publication.BITSTREAM": "File(s)",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.BITSTREAM": "File(s)",
+
+  // "layout.field.label.Product.[dc.title]": "Title",
+  // TODO New key - Add a translation
+  "layout.field.label.Product.[dc.title]": "Title",
+  // "layout.field.label.Product.[dc.relation.ispartof]": "Journal",
+  // TODO New key - Add a translation
+  "layout.field.label.Product.[dc.relation.ispartof]": "Journal",
+  // "layout.field.label.Product.[dc.relation.issn]": "ISSN",
+  // TODO New key - Add a translation
+  "layout.field.label.Product.[dc.relation.issn]": "ISSN",
+  // "layout.field.label.Product.[dc.date.issued]": "Date Issued",
+  // TODO New key - Add a translation
+  "layout.field.label.Product.[dc.date.issued]": "Date Issued",
+  // "layout.field.label.Product.[dc.contributor.author]": "Author(s)",
+  // TODO New key - Add a translation
+  "layout.field.label.Product.[dc.contributor.author]": "Author(s)",
+  // "layout.field.label.Product.[dc.identifier.doi]": "DOI",
+  // TODO New key - Add a translation
+  "layout.field.label.Product.[dc.identifier.doi]": "DOI",
+  // "layout.field.label.Product.[dc.description.abstract]": "Abstract",
+  // TODO New key - Add a translation
+  "layout.field.label.Product.[dc.description.abstract]": "Abstract",
+  // "layout.field.label.Product.[dc.relation.project]": "Project(s)",
+  // TODO New key - Add a translation
+  "layout.field.label.Product.[dc.relation.project]": "Project(s)",
+  // "layout.field.label.Product.[dc.relation.funding]": "Funding(s)",
+  // TODO New key - Add a translation
+  "layout.field.label.Product.[dc.relation.funding]": "Funding(s)",
+  // "layout.field.label.Product.[dc.subject]": "Subjects",
+  // TODO New key - Add a translation
+  "layout.field.label.Product.[dc.subject]": "Subjects",
+  // "layout.field.label.Product.BITSTREAM": "File(s)",
+  // TODO New key - Add a translation
+  "layout.field.label.Product.BITSTREAM": "File(s)",
+
+  // "layout.field.label.Patent.[dc.title]": "Title",
+  // TODO New key - Add a translation
+  "layout.field.label.Patent.[dc.title]": "Title",
+  // "layout.field.label.Patent.[dc.relation.ispartof]": "Journal",
+  // TODO New key - Add a translation
+  "layout.field.label.Patent.[dc.relation.ispartof]": "Journal",
+  // "layout.field.label.Patent.[dc.relation.issn]": "ISSN",
+  // TODO New key - Add a translation
+  "layout.field.label.Patent.[dc.relation.issn]": "ISSN",
+  // "layout.field.label.Patent.[dc.date.issued]": "Date Issued",
+  // TODO New key - Add a translation
+  "layout.field.label.Patent.[dc.date.issued]": "Date Issued",
+  // "layout.field.label.Patent.[dc.contributor.author]": "Author(s)",
+  // TODO New key - Add a translation
+  "layout.field.label.Patent.[dc.contributor.author]": "Author(s)",
+  // "layout.field.label.Patent.[dc.identifier.patentno]": "DOI",
+  // TODO New key - Add a translation
+  "layout.field.label.Patent.[dc.identifier.patentno]": "DOI",
+  // "layout.field.label.Patent.[dc.description.abstract]": "Abstract",
+  // TODO New key - Add a translation
+  "layout.field.label.Patent.[dc.description.abstract]": "Abstract",
+  // "layout.field.label.Patent.[dc.relation.project]": "Project(s)",
+  // TODO New key - Add a translation
+  "layout.field.label.Patent.[dc.relation.project]": "Project(s)",
+  // "layout.field.label.Patent.[dc.relation.funding]": "Funding(s)",
+  // TODO New key - Add a translation
+  "layout.field.label.Patent.[dc.relation.funding]": "Funding(s)",
+  // "layout.field.label.Patent.[dc.subject]": "Subjects",
+  // TODO New key - Add a translation
+  "layout.field.label.Patent.[dc.subject]": "Subjects",
+  // "layout.field.label.Patent.BITSTREAM": "File(s)",
+  // TODO New key - Add a translation
+  "layout.field.label.Patent.BITSTREAM": "File(s)",
+
+
+
+  // Layout - Autogenerated i18n keys: metadata groups
+  // "layout.field.label.Person.NESTED[crisrp.qualification]": "Title",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.NESTED[crisrp.qualification]": "Title",
+  // "layout.field.label.Person.NESTED[crisrp.qualification.start]": "Start",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.NESTED[crisrp.qualification.start]": "Start",
+  // "layout.field.label.Person.NESTED[crisrp.qualification.end]": "End",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.NESTED[crisrp.qualification.end]": "End",
+  // "layout.field.label.Person.NESTED[oairecerif.affiliation.role]": "Role",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.NESTED[oairecerif.affiliation.role]": "Role",
+  // "layout.field.label.Person.NESTED[oairecerif.person.affiliation]": "Organisation",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.NESTED[oairecerif.person.affiliation]": "Organisation",
+  // "layout.field.label.Person.NESTED[oairecerif.affiliation.startDate]": "Start",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.NESTED[oairecerif.affiliation.startDate]": "Start",
+  // "layout.field.label.Person.NESTED[oairecerif.affiliation.endDate]": "End",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.NESTED[oairecerif.affiliation.endDate]": "End",
+  // "layout.field.label.Person.NESTED[crisrp.education.role]": "Role",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.NESTED[crisrp.education.role]": "Role",
+  // "layout.field.label.Person.NESTED[crisrp.education]": "Organisation",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.NESTED[crisrp.education]": "Organisation",
+  // "layout.field.label.Person.NESTED[crisrp.education.start]": "Start",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.NESTED[crisrp.education.start]": "Start",
+  // "layout.field.label.Person.NESTED[crisrp.education.end]": "End",
+  // TODO New key - Add a translation
+  "layout.field.label.Person.NESTED[crisrp.education.end]": "End",
+
+  // "layout.field.label.Publication.NESTED[dc.contributor.author]": "Author",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.NESTED[dc.contributor.author]": "Author",
+  // "layout.field.label.Publication.NESTED[oairecerif.author.affiliation]": "Affiliation",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.NESTED[oairecerif.author.affiliation]": "Affiliation",
+  // "layout.field.label.Publication.NESTED[dc.contributor.editor]": "Editor",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.NESTED[dc.contributor.editor]": "Editor",
+  // "layout.field.label.Publication.NESTED[oairecerif.editor.affiliation]": "Affiliation",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.NESTED[oairecerif.editor.affiliation]": "Affiliation",
+
+  // "layout.field.label.Product.NESTED[dc.contributor.author]": "Creator",
+  // TODO New key - Add a translation
+  "layout.field.label.Product.NESTED[dc.contributor.author]": "Creator",
+  // "layout.field.label.Product.NESTED[oairecerif.author.affiliation]": "Affiliation",
+  // TODO New key - Add a translation
+  "layout.field.label.Product.NESTED[oairecerif.author.affiliation]": "Affiliation",
+
+  // "layout.field.label.Patent.NESTED[dc.contributor.author]": "Inventor",
+  // TODO New key - Add a translation
+  "layout.field.label.Patent.NESTED[dc.contributor.author]": "Inventor",
+  // "layout.field.label.Patent.NESTED[oairecerif.author.affiliation]": "Affiliation",
+  // TODO New key - Add a translation
+  "layout.field.label.Patent.NESTED[oairecerif.author.affiliation]": "Affiliation",
+
+
+
 
 
 }

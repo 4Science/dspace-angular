@@ -3,7 +3,7 @@
   <ng-container *ngSwitchCase="templateTypeEnum.CARD">
     <ds-themed-cards-browse-elements
       [topSection]="topSection"
-      [paginatedSearchOptions]="paginatedSearchOptionsBS.asObservable() | async"
+      [paginatedSearchOptions]="paginatedSearchOptions$.asObservable() | async"
       [context]="context"
     >
     </ds-themed-cards-browse-elements>
@@ -12,10 +12,10 @@
   <ng-container *ngSwitchDefault>
     <ds-themed-default-browse-elements
       [showMetrics]="showMetrics"
-      [showThumbnails]="topSection.showThumbnails"
-      [showLabel]="showLabel"
+      [showThumbnails]="showThumbnails ?? topSection.showThumbnails"
       [topSection]="topSection"
-      [paginatedSearchOptions]="paginatedSearchOptionsBS.asObservable() | async"
+      [showLabel]="showLabel"
+      [paginatedSearchOptions]="paginatedSearchOptions$.asObservable() | async"
       [context]="context"
       [mode]="mode"
     ></ds-themed-default-browse-elements>
