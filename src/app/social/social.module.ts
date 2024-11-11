@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { TranslateModule } from '@ngx-translate/core';
 import { SocialComponent } from './social.component';
 
 @NgModule({
@@ -8,7 +8,8 @@ import { SocialComponent } from './social.component';
     SocialComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    TranslateModule
   ],
   exports: [
     SocialComponent

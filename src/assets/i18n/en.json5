@@ -4357,6 +4357,8 @@
 
   "none.listelement.badge": "Item",
 
+  "no.description.available": "No description available",
+
   "openaire.broker.title": "OpenAIRE Broker",
 
   "openaire.broker.topics.description": "Below you can see all the topics received from the subscriptions to OpenAIRE.",
@@ -5579,6 +5581,8 @@
   "selectable-list-item-control.deselect": "Deselect item",
 
   "selectable-list-item-control.select": "Select item",
+
+  "social.component.title": "Social Share",
 
   "sorting.ASC": "Ascending",
 
