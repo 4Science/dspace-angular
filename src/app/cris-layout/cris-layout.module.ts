@@ -158,6 +158,9 @@ import {
 import {
   LonghtmlComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/longhtml/longhtml.component';
+import {
+  ImageComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/image/image.component';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -199,6 +202,7 @@ const ENTRY_COMPONENTS = [
   CrisLayoutMediaBoxComponent,
   GooglemapsGroupComponent,
   OpenstreetmapGroupComponent,
+  ImageComponent
 ];
 
 @NgModule({
@@ -225,6 +229,8 @@ const ENTRY_COMPONENTS = [
     MetadataRenderComponent,
     BitstreamAttachmentComponent,
     AttachmentRenderComponent,
+    MarkdownComponent,
+    ImageComponent
   ],
   providers:[ LoadMoreService, NgbActiveModal ],
   imports: [
