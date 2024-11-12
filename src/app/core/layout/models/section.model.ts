@@ -67,6 +67,7 @@ export interface TopSection extends SectionComponent {
   itemListStyle?: string;
   cardColumnStyle?: string;
   showAllResults: boolean;
+  template: TopSectionTemplateType;
 }
 
 export interface GridSection extends SectionComponent {
@@ -107,6 +108,14 @@ export interface TopSectionColumn {
   style: string;
   metadataField: string;
   titleKey: string;
+}
+
+/**
+ * Represents the type of template to use for the section
+ */
+export enum TopSectionTemplateType {
+  DEFAULT = 'default', // CRIS default template
+  CARD = 'card', // Card template
 }
 
 export enum LayoutModeEnum {

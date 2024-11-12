@@ -352,9 +352,18 @@ import { ItemCollectionComponent } from './object-collection/shared/mydspace-ite
 import { ThemedItemListPreviewComponent } from './object-list/my-dspace-result-list-element/item-list-preview/themed-item-list-preview.component';
 import { ItemListPreviewComponent } from './object-list/my-dspace-result-list-element/item-list-preview/item-list-preview.component';
 import { MarkdownDirective } from './utils/markdown.directive';
+import { DefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/default-browse-elements.component';
+import { ThemedDefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/themed-default-browse-elements.component';
 import { MetadataLinkViewPopoverComponent } from './metadata-link-view/metadata-link-view-popover/metadata-link-view-popover.component';
 import { MetadataLinkViewAvatarPopoverComponent } from './metadata-link-view/metadata-link-view-avatar-popover/metadata-link-view-avatar-popover.component';
 import { MetadataLinkViewOrcidComponent } from './metadata-link-view/metadata-link-view-orcid/metadata-link-view-orcid.component';
+import { SwitchComponent } from './switch/switch.component';
+import { StickyPopoverDirective } from './metadata-link-view/sticky-popover.directive';
+import { SortPipe } from './utils/sort.pipe';
+import { CardsBrowseElementsComponent } from './browse-most-elements/cards-browse-elements/cards-browse-elements.component';
+import {
+  ThemedCardsBrowseElementsComponent
+} from './browse-most-elements/cards-browse-elements/themed-cards-browse-elements.component';
 
 const MODULES = [
   CommonModule,
@@ -401,7 +410,8 @@ const PIPES = [
   ConsolePipe,
   ObjNgFor,
   BrowserOnlyPipe,
-  ShortNumberPipe
+  ShortNumberPipe,
+  SortPipe,
 ];
 
 const COMPONENTS = [
@@ -513,7 +523,13 @@ const COMPONENTS = [
   SearchChartBarHorizontalComponent,
   ItemListPreviewComponent,
   ThemedItemListPreviewComponent,
-  ItemCollectionComponent
+  ItemCollectionComponent,
+  DefaultBrowseElementsComponent,
+  ThemedDefaultBrowseElementsComponent,
+  DefaultBrowseElementsComponent,
+  ThemedDefaultBrowseElementsComponent,
+  CardsBrowseElementsComponent,
+  ThemedCardsBrowseElementsComponent,
 ];
 
 const ENTRY_COMPONENTS = [
@@ -590,6 +606,9 @@ const ENTRY_COMPONENTS = [
   SearchChartBarHorizontalComponent,
   RelationshipsListComponent,
   AdditionalMetadataComponent,
+  ThemedDefaultBrowseElementsComponent,
+  SwitchComponent,
+  ThemedCardsBrowseElementsComponent,
 ];
 
 const PROVIDERS = [
@@ -618,6 +637,7 @@ const DIRECTIVES = [
   ContextHelpDirective,
   EntityIconDirective,
   MarkdownDirective,
+  StickyPopoverDirective
 ];
 
 @NgModule({

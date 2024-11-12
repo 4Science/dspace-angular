@@ -1,11 +1,12 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, Input, OnInit, Renderer2, ViewChild, } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input, OnInit, Renderer2, ViewChild, } from '@angular/core';
 
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { isNotEmpty } from '../empty.util';
 import { RemoteData } from '../../core/data/remote-data';
 import { ConfigurationProperty } from '../../core/shared/configuration-property.model';
+import { LocationService } from '../../core/services/location.service';
 
 @Component({
   selector: 'ds-googlemaps',
@@ -38,10 +39,17 @@ export class GooglemapsComponent implements OnInit {
    */
   longitude: string;
 
+  /**
+   * A flag that indicates if the google maps api key is not configured
+   */
+  noKeyConfigured = false;
+
   constructor(
     @Inject(DOCUMENT) private _document: Document,
     private renderer: Renderer2,
     private configService: ConfigurationDataService,
+    private cdr: ChangeDetectorRef,
+    private locationService: LocationService,
   ) {
   }
 
@@ -57,6 +65,9 @@ export class GooglemapsComponent implements OnInit {
           this.loadScript(this.buildMapUrl(res?.payload?.values[0])).then(() => {
             this.loadMap();
           });
+        } else if (res.hasSucceeded && !res?.payload?.values[0]) {
+          this.noKeyConfigured = true;
+          this.cdr.detectChanges();
         }
       });
     }
@@ -76,14 +87,26 @@ export class GooglemapsComponent implements OnInit {
    * Set latitude and longitude when metadata has an address
    */
   setLatAndLongFromAddress() {
-    return new Promise((reslove, reject) => {
+    return new Promise((resolve, reject) => {
       new google.maps.Geocoder().geocode({ 'address': this.coordinates }, (results, status) => {
         if (status === google.maps.GeocoderStatus.OK) {
           this.latitude = results[0].geometry.location.lat().toString();
           this.longitude = results[0].geometry.location.lng().toString();
-          reslove(1);
+          resolve(1);
         } else {
-          reject(1);
+          console.error('Error from Geocoder API: ', results, status);
+          try {
+            const coordinates = this.locationService.parseCoordinates(this.coordinates);
+            if (coordinates) {
+              this.latitude = coordinates.latitude.toString();
+              this.longitude = coordinates.longitude.toString();
+              resolve(1);
+            } else {
+              reject(1);
+            }
+          } catch (e) {
+            reject(1);
+          }
         }
       });
     });

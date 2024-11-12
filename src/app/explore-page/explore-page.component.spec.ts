@@ -1,19 +1,27 @@
-import { CommonModule } from '@angular/common';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule, By } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { Observable, of } from 'rxjs';
-import { TranslateLoaderMock } from '../shared/mocks/translate-loader.mock';
-import { RemoteData } from '../core/data/remote-data';
-import { BrowseSection, FacetSection, LayoutModeEnum, SearchSection, Section, TopSection } from '../core/layout/models/section.model';
-import { SectionDataService } from '../core/layout/section-data.service';
-import { createSuccessfulRemoteDataObject$ } from '../shared/remote-data.utils';
-import { ExplorePageComponent } from './explore-page.component';
+import {CommonModule} from '@angular/common';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {BrowserModule, By} from '@angular/platform-browser';
+import {ActivatedRoute} from '@angular/router';
+import {RouterTestingModule} from '@angular/router/testing';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {Observable, of} from 'rxjs';
+import {TranslateLoaderMock} from '../shared/mocks/translate-loader.mock';
+import {RemoteData} from '../core/data/remote-data';
+import {
+  BrowseSection,
+  FacetSection,
+  LayoutModeEnum,
+  SearchSection,
+  Section,
+  TopSection,
+  TopSectionTemplateType
+} from '../core/layout/models/section.model';
+import {SectionDataService} from '../core/layout/section-data.service';
+import {createSuccessfulRemoteDataObject$} from '../shared/remote-data.utils';
+import {ExplorePageComponent} from './explore-page.component';
 
 describe('ExploreComponent', () => {
   let component: ExplorePageComponent;
@@ -41,6 +49,7 @@ describe('ExploreComponent', () => {
     showLayoutSwitch: true,
     defaultLayoutMode: LayoutModeEnum.LIST,
     showAllResults: true,
+    template: TopSectionTemplateType.DEFAULT
   };
 
   const searchComponent: SearchSection = {

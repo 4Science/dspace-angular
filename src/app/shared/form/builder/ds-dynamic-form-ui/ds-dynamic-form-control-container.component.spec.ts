@@ -82,6 +82,7 @@ import { FormBuilderService } from '../form-builder.service';
 import { NgxMaskModule } from 'ngx-mask';
 import { APP_CONFIG } from '../../../../../config/app-config.interface';
 import { environment } from '../../../../../environments/environment';
+import { getMockFormBuilderService } from '../../../mocks/form-builder-service.mock';
 import { DynamicMarkdownModel } from './models/markdown/dynamic-markdown.model';
 import { DsDynamicMarkdownComponent } from './models/markdown/dynamic-markdown.component';
 
@@ -255,7 +256,7 @@ describe('DsDynamicFormControlContainerComponent test suite', () => {
         { provide: RelationshipDataService, useValue: {} },
         { provide: SelectableListService, useValue: {} },
         { provide: FormService, useValue: {} },
-        { provide: FormBuilderService, useValue: {} },
+        { provide: FormBuilderService, useValue: getMockFormBuilderService() },
         { provide: SubmissionService, useValue: {} },
         {
           provide: SubmissionObjectDataService,

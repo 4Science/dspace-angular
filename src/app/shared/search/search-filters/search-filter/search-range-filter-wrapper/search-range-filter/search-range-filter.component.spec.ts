@@ -4,6 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {
   FILTER_CONFIG,
+  SCOPE,
   IN_PLACE_SEARCH,
   REFRESH_FILTER,
   SearchFilterService
@@ -106,6 +107,7 @@ xdescribe('SearchRangeFilterComponent', () => {
         { provide: IN_PLACE_SEARCH, useValue: false },
         { provide: PLATFORM_ID, useValue: platformId },
         { provide: REFRESH_FILTER, useValue: new BehaviorSubject<boolean>(false) },
+        { provide: SCOPE, useValue: undefined },
         {
           provide: SearchFilterService, useValue: {
             getSelectedValuesForFilter: () => selectedValues,

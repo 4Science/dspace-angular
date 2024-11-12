@@ -22,7 +22,6 @@ import { NotificationsService } from '../../../notifications/notifications.servi
 import { HttpClient } from '@angular/common/http';
 import { DSOChangeAnalyzer } from '../../../../core/data/dso-change-analyzer.service';
 import { DefaultChangeAnalyzer } from '../../../../core/data/default-change-analyzer.service';
-import { cold } from 'jasmine-marbles';
 import { ItemSearchResult } from '../../../object-collection/shared/item-search-result.model';
 
 describe('CarouselSectionComponent', () => {
@@ -117,11 +116,5 @@ describe('CarouselSectionComponent', () => {
     it('should create CarouselSectionComponent', inject([CarouselSectionComponent], (comp: CarouselSectionComponent) => {
         expect(comp).toBeDefined();
     }));
-
-    it('should init search results data properly', (done) => {
-        const expected = cold('(a|)', { a: [searchResult] });
-        expect(component.searchResults$).toBeObservable(expected);
-        done();
-    });
 
 });

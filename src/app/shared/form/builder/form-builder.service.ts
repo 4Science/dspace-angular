@@ -51,6 +51,9 @@ import { CONCAT_GROUP_SUFFIX, DynamicConcatModel } from './ds-dynamic-form-ui/mo
 import { VIRTUAL_METADATA_PREFIX } from '../../../core/shared/metadata.models';
 import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
 import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
+import {
+  DYNAMIC_FORM_CONTROL_TYPE_SCROLLABLE_DROPDOWN
+} from './ds-dynamic-form-ui/models/scrollable-dropdown/dynamic-scrollable-dropdown.model';
 
 @Injectable()
 export class FormBuilderService extends DynamicFormService {
@@ -358,7 +361,7 @@ export class FormBuilderService extends DynamicFormService {
 
   modelFromConfiguration(submissionId: string, json: string | SubmissionFormsModel, scopeUUID: string, sectionData: any = {},
                          submissionScope?: string, readOnly = false, typeBindModel = null,
-                         isInnerForm = false, securityConfig: any = null): DynamicFormControlModel[] | never {
+                         isInnerForm = false, securityConfig: any = null, setTypeBind: boolean = true): DynamicFormControlModel[] | never {
      let rows: DynamicFormControlModel[] = [];
      const rawData = typeof json === 'string' ? JSON.parse(json, parseReviver) : json;
     if (rawData.rows && !isEmpty(rawData.rows)) {
@@ -375,12 +378,14 @@ export class FormBuilderService extends DynamicFormService {
       });
     }
 
-    if (hasNoValue(typeBindModel)) {
-      typeBindModel = this.findById(this.typeField, rows);
-    }
+    if (setTypeBind) {
+      if (hasNoValue(typeBindModel)) {
+        typeBindModel = this.findById(this.typeField, rows);
+      }
 
-    if (hasValue(typeBindModel)) {
-      this.setTypeBindModel(typeBindModel);
+      if (hasValue(typeBindModel)) {
+        this.setTypeBindModel(typeBindModel);
+      }
     }
     return rows;
   }
@@ -396,6 +401,10 @@ export class FormBuilderService extends DynamicFormService {
   hasMappedGroupValue(model: DynamicFormControlModel): boolean {
     return (this.isQualdropGroup((model as any).parent)
       || this.isRelationGroup((model as any).parent));
+  }
+
+  isScrollableDropdown(model: DynamicFormControlModel): boolean {
+    return model && (model.type === DYNAMIC_FORM_CONTROL_TYPE_SCROLLABLE_DROPDOWN);
   }
 
   isGroup(model: DynamicFormControlModel): boolean {

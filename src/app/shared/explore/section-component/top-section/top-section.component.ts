@@ -26,15 +26,13 @@ export class TopSectionComponent implements OnInit {
 
   paginatedSearchOptions: PaginatedSearchOptions;
 
-  showThumbnails: boolean;
-
   layoutMode: LayoutModeEnum = LayoutModeEnum.CARD;
 
   ngOnInit() {
     const order = this.topSection.order;
     const numberOfItems = this.topSection.numberOfItems;
     const sortDirection = order && order.toUpperCase() === 'ASC' ? SortDirection.ASC : SortDirection.DESC;
-    const pagination = Object.assign(new PaginationComponentOptions(), {
+    const pagination: PaginationComponentOptions = Object.assign(new PaginationComponentOptions(), {
       id: 'search-object-pagination',
       pageSize: numberOfItems,
       currentPage: 1
@@ -45,7 +43,5 @@ export class TopSectionComponent implements OnInit {
       pagination: pagination,
       sort: new SortOptions(this.topSection.sortField, sortDirection)
     });
-
-    this.showThumbnails = this.topSection.showThumbnails;
   }
 }

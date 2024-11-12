@@ -11,6 +11,7 @@ import {
   FILTER_CONFIG,
   IN_PLACE_SEARCH,
   REFRESH_FILTER,
+  SCOPE,
   SearchFilterService
 } from '../../../../../../core/shared/search/search-filter.service';
 import { SearchService } from '../../../../../../core/shared/search/search.service';
@@ -84,9 +85,10 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
     @Inject(IN_PLACE_SEARCH) public inPlaceSearch: boolean,
     @Inject(FILTER_CONFIG) public filterConfig: SearchFilterConfig,
     @Inject(PLATFORM_ID) protected platformId: any,
-    @Inject(REFRESH_FILTER) public refreshFilters: BehaviorSubject<boolean>
+    @Inject(REFRESH_FILTER) public refreshFilters: BehaviorSubject<boolean>,
+    @Inject(SCOPE) public scope: string,
   ) {
-    super(searchService, filterService, rdbs, router, searchConfigService, inPlaceSearch, filterConfig, refreshFilters);
+    super(searchService, filterService, rdbs, router, searchConfigService, inPlaceSearch, filterConfig, refreshFilters, scope);
   }
 
   /**

@@ -13,7 +13,6 @@ import { AdminEditUserAgreementComponent } from './admin-edit-user-agreement/adm
 import { EditCmsMetadataComponent } from './edit-cms-metadata/edit-cms-metadata.component';
 import { MarkdownEditorModule } from '../shared/markdown-editor/markdown-editor.module';
 import { BatchImportPageComponent } from './admin-import-batch-page/batch-import-page.component';
-import { UiSwitchModule } from 'ngx-ui-switch';
 import { UploadModule } from '../shared/upload/upload.module';
 
 const ENTRY_COMPONENTS = [
@@ -31,7 +30,6 @@ const ENTRY_COMPONENTS = [
     AdminSearchModule.withEntryComponents(),
     AdminWorkflowModuleModule.withEntryComponents(),
     SharedModule,
-    UiSwitchModule,
     UploadModule,
     MarkdownEditorModule
   ],

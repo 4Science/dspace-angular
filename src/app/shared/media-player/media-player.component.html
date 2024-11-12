@@ -6,7 +6,7 @@
       </div>
       <div #videoContainerRef>
         <div id="video-content-wrapper h-100 w-100" *ngIf="(isVideoPlayerInitialized$ | async) && (isVideo$ | async)">
-          <video class="video-js vjs-big-play-centered" id="video_player" controls playsinline
+          <video class="video-js vjs-big-play-centered vjs-16-9 vjs-fill" id="video_player" controls playsinline
                  preload="none"></video>
         </div>
         <div id="audio-content-wrapper h-100 w-100" *ngIf="(isAudioPlayerInitialized$ | async) && !(isVideo$ | async)">

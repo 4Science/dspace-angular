@@ -100,6 +100,41 @@ describe('LinkComponent', () => {
     });
   });
 
+  describe('with markdown link', () => {
+    beforeEach(() => {
+      component.metadataValue = { value: '[Example](http://example.com)' } as MetadataValue;
+      fixture.detectChanges();
+    });
+
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
+
+    it('check metadata rendering', (done) => {
+      const spanValueFound = fixture.debugElement.queryAll(By.css('span.link-value'));
+      expect(spanValueFound.length).toBe(1);
+
+      const valueFound = fixture.debugElement.queryAll(By.css('a'));
+      expect(valueFound.length).toBe(1);
+
+      expect(valueFound[0].nativeElement.textContent).toContain('Example');
+      expect(valueFound[0].nativeElement.href).toBe('http://example.com/');
+      done();
+    });
+
+    it('check value style', (done) => {
+      const valueFound = fixture.debugElement.queryAll(By.css('.test-style-value'));
+      expect(valueFound.length).toBe(1);
+      done();
+    });
+
+    it('should return markdown link when metadataValue is in markdown format', () => {
+      const result = component.getLinkFromValue();
+      expect(result.href).toBe('http://example.com');
+      expect(result.text).toBe('Example');
+    });
+  });
+
   describe('with sub-type label', () => {
     beforeEach(() => {
       component.renderingSubType = 'LABEL';

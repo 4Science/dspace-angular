@@ -60,17 +60,22 @@ export class LinkComponent extends RenderingTypeValueModelComponent implements O
     // If the component has label subtype get the text from translate service
     let linkText: string;
     let metadataValue: string;
+    const isMarkdownURLRegex = /^\[(?<label>.*)\]\((?<url>(?:http|ftp)s?:.*)\)$/;
 
     if (hasValue(this.renderingSubType) && this.renderingSubType.toUpperCase() === TYPES.EMAIL) {
-        this.isEmail = true;
-        metadataValue = 'mailto:' + this.metadataValue.value;
-        linkText = (hasValue(this.renderingSubType) &&
+      this.isEmail = true;
+      metadataValue = 'mailto:' + this.metadataValue.value;
+      linkText = (hasValue(this.renderingSubType) &&
         this.renderingSubType.toUpperCase() === TYPES.EMAIL) ? this.metadataValue.value : this.translateService.instant(this.field.label);
+    } else if (isMarkdownURLRegex.test(this.metadataValue.value)) {
+      const execRegex = isMarkdownURLRegex.exec(this.metadataValue.value).groups;
+      linkText = execRegex.label;
+      metadataValue = execRegex.url;
     } else {
-        const startsWithProtocol = [/^https?:\/\//, /^ftp:\/\//];
-        metadataValue = startsWithProtocol.some(rx => rx.test(this.metadataValue.value)) ? this.metadataValue.value : 'http://' + this.metadataValue.value;
-        linkText = (hasValue(this.renderingSubType) &&
-        this.renderingSubType.toUpperCase() === TYPES.LABEL) ? this.translateService.instant(this.field.label) : this.metadataValue.value;
+      const startsWithProtocol = [/^https?:\/\//, /^ftp:\/\//];
+      metadataValue = startsWithProtocol.some(rx => rx.test(this.metadataValue.value)) ? this.metadataValue.value : 'http://' + this.metadataValue.value;
+      linkText = (hasValue(this.renderingSubType) &&
+        this.renderingSubType?.toUpperCase() === TYPES.LABEL) ? this.translateService.instant(this.field.label) : this.metadataValue.value;
     }
 
     return {
