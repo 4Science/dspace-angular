@@ -160,7 +160,7 @@ import {
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/longhtml/longhtml.component';
 import {
   ImageComponent
-} from "./cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/image/image.component";
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/image/image.component';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
