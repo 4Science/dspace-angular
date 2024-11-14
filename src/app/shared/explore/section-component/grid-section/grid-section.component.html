@@ -14,11 +14,8 @@
   </div>
   <div class="bg-light text-center position-relative border border-dark d-flex flex-column
               justify-content-between align-items-center"
+       [dsBackgroundImage]="(itemToImageHrefMap$ | async).get(item.indexableObject?.uuid)"
        *ngFor="let item of searchResults | slice:0:8; index as i">
-    <ds-thumbnail [thumbnail]="item.indexableObject?.thumbnail | async" [limitWidth]="false"
-                  [defaultImage]="'assets/images/replacement_image.svg'"
-                  [alt]="'menu.header.image.logo' | translate" [keepAspectRatio]="true">
-    </ds-thumbnail>
     <h5 class="text-dark text-truncate position-absolute py-3 px-1">{{item.indexableObject?.firstMetadataValue('dc.title')}}</h5>
   </div>
 </div>

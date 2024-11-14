@@ -1,5 +1,5 @@
-import { LayoutModeEnum, GridSection } from '../../../../core/layout/models/section.model';
-import { Component, Input, OnInit } from '@angular/core';
+import { GridSection } from '../../../../core/layout/models/section.model';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 
 import { SortDirection, SortOptions } from '../../../../core/cache/models/sort-options.model';
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
@@ -16,6 +16,12 @@ import { Site } from '../../../../core/shared/site.model';
 import { LocaleService } from '../../../../core/locale/locale.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { BehaviorSubject, filter, from, map, mergeMap, scan, switchMap, take } from 'rxjs';
+import { BitstreamDataService } from 'src/app/core/data/bitstream-data.service';
+import { Item } from 'src/app/core/shared/item.model';
+import { Bitstream } from 'src/app/core/shared/bitstream.model';
+import { BitstreamFormat } from 'src/app/core/shared/bitstream-format.model';
+import { hasValue } from 'src/app/shared/empty.util';
 
 /**
  * Component representing the Grid component section.
@@ -41,8 +47,6 @@ export class GridSectionComponent implements OnInit {
 
   paginatedSearchOptions: PaginatedSearchOptions;
 
-  layoutMode: LayoutModeEnum = LayoutModeEnum.CARD;
-
   maincontentBadge: string;
 
   maincontentTitle: string;
@@ -53,13 +57,17 @@ export class GridSectionComponent implements OnInit {
 
   maincontentLink: string;
 
-  searchResults;
+  searchResults: SearchResult<DSpaceObject>[];
+
+  itemToImageHrefMap$ = new BehaviorSubject<Map<string, string>>(new Map<string, string>());
 
   constructor(
     private searchService: SearchService,
     private locale: LocaleService,
     private router: Router,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private bitstreamDataService: BitstreamDataService,
+    private cdr: ChangeDetectorRef
   ) {
   }
 
@@ -111,10 +119,45 @@ export class GridSectionComponent implements OnInit {
       .pipe(getFirstCompletedRemoteData())
       .subscribe(
         (response: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>) => {
-          this.searchResults = response.payload.page as any;
+          this.searchResults = response.payload.page;
+          this.getAllBitstreams();
         }
       );
   }
+
+  private getAllBitstreams() {
+    from(this.searchResults).pipe(
+      map((itemSR) => itemSR.indexableObject),
+      mergeMap((item: Item) => this.bitstreamDataService.showableByItem(
+          item.uuid, 'ORIGINAL', [], {}, true, true, followLink('format')
+        ).pipe(
+          getFirstCompletedRemoteData(),
+          switchMap((rd: RemoteData<PaginatedList<Bitstream>>) => rd.hasSucceeded ? rd.payload.page : []),
+          mergeMap((bitstream: Bitstream) => bitstream.format.pipe(
+            getFirstCompletedRemoteData(),
+            filter((formatRemoteData: RemoteData<BitstreamFormat>) =>
+              formatRemoteData.hasSucceeded && hasValue(formatRemoteData.payload) && hasValue(bitstream) &&
+              formatRemoteData.payload.mimetype.includes('image/')
+            ),
+            map(() => bitstream)
+          )),
+          take(1),
+          map((bitstream: Bitstream) => {
+            return [item.uuid, bitstream._links.content.href];
+          })
+        )
+      ),
+      scan((acc: Map<string, string>, value: [string, string]) => {
+        acc.set(value[0], value[1]);
+        return acc;
+      }, new Map<string, string>())
+    ).subscribe((res) => {
+      this.itemToImageHrefMap$.next(res);
+      this.cdr.detectChanges();
+    });
+
+  }
+
 
   goToMainContentLink() {
     this.router.navigateByUrl(this.maincontentLink);

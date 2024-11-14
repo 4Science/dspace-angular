@@ -364,6 +364,7 @@ import { CardsBrowseElementsComponent } from './browse-most-elements/cards-brows
 import {
   ThemedCardsBrowseElementsComponent
 } from './browse-most-elements/cards-browse-elements/themed-cards-browse-elements.component';
+import { BackgroundImageDirective } from './utils/background-image.directive';
 
 const MODULES = [
   CommonModule,
@@ -637,7 +638,8 @@ const DIRECTIVES = [
   ContextHelpDirective,
   EntityIconDirective,
   MarkdownDirective,
-  StickyPopoverDirective
+  StickyPopoverDirective,
+  BackgroundImageDirective
 ];
 
 @NgModule({

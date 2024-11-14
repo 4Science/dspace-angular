@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ChangeDetectorRef, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,6 +17,17 @@ import { createSuccessfulRemoteDataObject$ } from '../../../remote-data.utils';
 import { LocaleService } from '../../../../core/locale/locale.service';
 import { Site } from '../../../../core/shared/site.model';
 import { of } from 'rxjs';
+import { ObjectCacheService } from '../../../../core/cache/object-cache.service';
+import { getMockObjectCacheService } from '../../../mocks/object-cache.service.mock';
+import { UUIDService } from '../../../../core/shared/uuid.service';
+import { getMockUUIDService } from '../../../mocks/uuid.service.mock';
+import { provideMockStore } from '@ngrx/store/testing';
+import { RemoteDataBuildService } from '../../../../core/cache/builders/remote-data-build.service';
+import { getMockRemoteDataBuildService } from '../../../mocks/remote-data-build.service.mock';
+import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service';
+import { DSOChangeAnalyzer } from '../../../../core/data/dso-change-analyzer.service';
+import { BitstreamFormatDataService } from '../../../../core/data/bitstream-format-data.service';
+import { NotificationsService } from '../../../notifications/notifications.service';
 
 describe('GridSectionComponent', () => {
   let component: GridSectionComponent;
@@ -81,6 +92,19 @@ describe('GridSectionComponent', () => {
       providers: [GridSectionComponent,
         { provide: SearchService, useValue: searchServiceStub },
         { provide: LocaleService, useValue: mockLocaleService },
+        { provide: ObjectCacheService, useValue: getMockObjectCacheService() },
+        { provide: UUIDService, useValue: getMockUUIDService() },
+        { provide: RemoteDataBuildService, useValue: getMockRemoteDataBuildService() },
+        { provide: HALEndpointService, useValue: {} },
+        { provide: DSOChangeAnalyzer, useValue: {} },
+        { provide: BitstreamFormatDataService, useValue: {} },
+        { provide: NotificationsService, useValue: {} },
+        {
+          provide: ChangeDetectorRef, useValue: {
+            detectChanges: () => fixture.detectChanges()
+          }
+        },
+        provideMockStore({ core: { auth: { loading: false } } } as any),
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
