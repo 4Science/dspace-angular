@@ -2,6 +2,8 @@
   <h2 class="h1 font-weight-bold mb-4">
     {{ 'home.advanced-top-section.' + advancedTopSection.sortField | translate }}
   </h2>
+
+
   <div class="d-flex justify-content-center mb-3" *ngIf="advancedTopSection.discoveryConfigurationName?.length > 1">
     <div [ngClass]="(isXs() | async) ? 'btn-group-vertical' : 'btn-group'">
       <ng-container *ngFor="let discoveryConfigurationName of advancedTopSection.discoveryConfigurationName">
@@ -16,10 +18,18 @@
     </div>
   </div>
   <div>
-    <ds-themed-browse-most-elements [context]="context"
-                                    [discoveryConfigurationsTotalElementsMap]="discoveryConfigurationsTotalElementsMap"
-                                    [paginatedSearchOptions]="paginatedSearchOptions.asObservable() | async"
-                                    [topSection]="$any(advancedTopSection)">
-    </ds-themed-browse-most-elements>
+    <div class="row justify-content-center">
+      <ds-loading *ngIf="(loading$ | async)"></ds-loading>
+    </div>
+
+    <ds-themed-browse-most-elements
+      *ngIf="!(loading$ | async)"
+      [context]="context"
+      [discoveryConfigurationsTotalElementsMap]="discoveryConfigurationsTotalElementsMap"
+      [paginatedSearchOptions]="paginatedSearchOptions.asObservable() | async"
+      [topSection]="$any(advancedTopSection)"
+    ></ds-themed-browse-most-elements>
   </div>
 </div>
+
+
