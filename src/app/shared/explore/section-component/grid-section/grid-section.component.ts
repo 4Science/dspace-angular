@@ -22,6 +22,7 @@ import { Item } from 'src/app/core/shared/item.model';
 import { Bitstream } from 'src/app/core/shared/bitstream.model';
 import { BitstreamFormat } from 'src/app/core/shared/bitstream-format.model';
 import { hasValue } from 'src/app/shared/empty.util';
+import { getItemPageRoute } from 'src/app/item-page/item-page-routing-paths';
 
 /**
  * Component representing the Grid component section.
@@ -80,7 +81,7 @@ export class GridSectionComponent implements OnInit {
     this.paginatedSearchOptions = new PaginatedSearchOptions({
       configuration: this.gridSection.discoveryConfigurationName,
       pagination: pagination,
-      sort: new SortOptions('dc.title', SortDirection.ASC)
+      //sort: new SortOptions('dc.title', SortDirection.ASC)
     });
 
     this.getMainBoxResults();
@@ -158,6 +159,15 @@ export class GridSectionComponent implements OnInit {
 
   }
 
+
+  /**
+   * to get the route of the item
+   * @param item
+   * @returns route to the item as a string
+   */
+  getItemPageRoute(item: DSpaceObject) {
+    return getItemPageRoute(item as Item);
+  }
 
   goToMainContentLink() {
     this.router.navigateByUrl(this.maincontentLink);

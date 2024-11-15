@@ -43,7 +43,6 @@ describe('GridSectionComponent', () => {
   });
 
   const firstSearchResult = Object.assign(new SearchResult(), {
-    _embedded: {
       indexableObject: Object.assign(new DSpaceObject(), {
         id: 'd317835d-7b06-4219-91e2-1191900cb897',
         uuid: 'd317835d-7b06-4219-91e2-1191900cb897',
@@ -57,11 +56,9 @@ describe('GridSectionComponent', () => {
           return '';
         },
       })
-    }
   });
 
   const secondSearchResult = Object.assign(new SearchResult(), {
-    _embedded: {
       indexableObject: Object.assign(new DSpaceObject(), {
         id: '0c34d491-b5ed-4a78-8b29-83d0bad80e5a',
         uuid: '0c34d491-b5ed-4a78-8b29-83d0bad80e5a',
@@ -70,7 +67,6 @@ describe('GridSectionComponent', () => {
           return '';
         },
       })
-    }
   });
 
   beforeEach(waitForAsync(() => {
