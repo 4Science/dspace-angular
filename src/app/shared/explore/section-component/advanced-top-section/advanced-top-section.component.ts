@@ -65,6 +65,8 @@ export class AdvancedTopSectionComponent implements OnInit {
    */
   selectedDiscoverConfiguration = new BehaviorSubject<string>(null);
 
+  loading$ = new BehaviorSubject<boolean>(true);
+
   discoveryConfigurationsTotalElementsMap: Map<string, number> = new Map<string, number>();
 
   constructor(private searchService: SearchService) { }
@@ -73,7 +75,6 @@ export class AdvancedTopSectionComponent implements OnInit {
     const sortDirection = SortDirection[this.advancedTopSection.order?.toUpperCase()] ?? SortDirection.ASC;
     this.sortOptions = new SortOptions(this.advancedTopSection.sortField, sortDirection);
     this.template = this.advancedTopSection.template ?? TopSectionTemplateType.DEFAULT;
-    this.selectDiscoveryConfiguration(this.advancedTopSection.discoveryConfigurationName[0]); // ADVANCED top sections use an ARRAY of configurations
     this.setDiscoveryConfigurationsTotalElementsMap();
   }
 
@@ -134,6 +135,13 @@ export class AdvancedTopSectionComponent implements OnInit {
       results.forEach(({ configName, totalElements }) => {
         this.discoveryConfigurationsTotalElementsMap.set(configName, totalElements);
       });
+      this.selectDiscoveryConfiguration(this.getFirstConfigurationWithData());
+      this.loading$.next(false);
     });
+  }
+
+  private getFirstConfigurationWithData(): string {
+    return [...this.discoveryConfigurationsTotalElementsMap.keys()]
+      .filter(key => this.discoveryConfigurationsTotalElementsMap.get(key) > 0)[0];
   }
 }

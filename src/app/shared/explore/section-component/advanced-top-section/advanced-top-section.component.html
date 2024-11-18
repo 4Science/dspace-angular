@@ -16,10 +16,15 @@
     </div>
   </div>
   <div>
-    <ds-themed-browse-most-elements [context]="context"
-                                    [discoveryConfigurationsTotalElementsMap]="discoveryConfigurationsTotalElementsMap"
-                                    [paginatedSearchOptions]="paginatedSearchOptions.asObservable() | async"
-                                    [topSection]="$any(advancedTopSection)">
-    </ds-themed-browse-most-elements>
+    <div class="row justify-content-center">
+      <ds-loading *ngIf="(loading$ | async)"></ds-loading>
+    </div>
+    <ds-themed-browse-most-elements
+      *ngIf="!(loading$ | async)"
+      [context]="context"
+      [discoveryConfigurationsTotalElementsMap]="discoveryConfigurationsTotalElementsMap"
+      [paginatedSearchOptions]="paginatedSearchOptions.asObservable() | async"
+      [topSection]="$any(advancedTopSection)"
+    ></ds-themed-browse-most-elements>
   </div>
 </div>
