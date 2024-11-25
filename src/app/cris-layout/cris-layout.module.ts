@@ -107,9 +107,6 @@ import { ComcolModule } from '../shared/comcol/comcol.module';
 import { SearchModule } from '../shared/search/search.module';
 import { HierarchyComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/hierarchy/hierarchy.component';
 import {
-  HtmlComponent
-} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/html/html.component';
-import {
   BrowseComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/browse/browse.component';
 import {
@@ -145,6 +142,12 @@ import {
   LinkAuthorityComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/link-authority/link-authority.component';
 import {
+  HtmlComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/html/html.component';
+import {
+  LonghtmlComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/longhtml/longhtml.component';
+import {
   CrisLayoutMediaBoxComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/media-box/cris-layout-media-box.component';
 import { MediaPlayerModule } from '../shared/media-player/media-player.module';
@@ -155,9 +158,6 @@ import { OpenstreetmapGroupComponent } from './cris-layout-matrix/cris-layout-bo
 import {
   LongmarkdownComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/longmarkdown/longmarkdown.component';
-import {
-  LonghtmlComponent
-} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/longhtml/longhtml.component';
 import {
   ImageComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/image/image.component';
@@ -190,6 +190,9 @@ const ENTRY_COMPONENTS = [
   ValuepairComponent,
   TagComponent,
   AdvancedAttachmentComponent,
+  LinkAuthorityComponent,
+  HtmlComponent,
+  LonghtmlComponent,
   LinkAuthorityComponent,
   GmapComponent,
   OpenStreetMapRenderingComponent,
