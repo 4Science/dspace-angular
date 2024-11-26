@@ -1,7 +1,5 @@
 import {
   AsyncPipe,
-  NgFor,
-  NgIf,
   TitleCasePipe,
 } from '@angular/common';
 import {
@@ -19,12 +17,16 @@ import {
   TranslateModule,
   TranslateService,
 } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
 
 import { AdvancedAttachmentElementType } from '../../../../../../../../../config/advanced-attachment-rendering.config';
 import { environment } from '../../../../../../../../../environments/environment';
 import { BitstreamDataService } from '../../../../../../../../core/data/bitstream-data.service';
 import { LayoutField } from '../../../../../../../../core/layout/models/box.model';
-import { Bitstream } from '../../../../../../../../core/shared/bitstream.model';
+import {
+  Bitstream,
+  ChecksumInfo,
+} from '../../../../../../../../core/shared/bitstream.model';
 import { Item } from '../../../../../../../../core/shared/item.model';
 import { TruncatableComponent } from '../../../../../../../../shared/truncatable/truncatable.component';
 import { TruncatablePartComponent } from '../../../../../../../../shared/truncatable/truncatable-part/truncatable-part.component';
@@ -40,9 +42,7 @@ import { AttachmentRenderingType } from './attachment-type.decorator';
   styleUrls: ['./bitstream-attachment.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     ThemedThumbnailComponent,
-    NgFor,
     AttachmentRenderComponent,
     TruncatableComponent,
     TruncatablePartComponent,
@@ -65,6 +65,9 @@ export class BitstreamAttachmentComponent extends BitstreamRenderingModelCompone
    */
   AdvancedAttachmentElementType = AdvancedAttachmentElementType;
 
+  /**
+   * Configuration type enum
+   */
   AttachmentRenderingType = AttachmentRenderingType;
 
   /**
@@ -75,11 +78,26 @@ export class BitstreamAttachmentComponent extends BitstreamRenderingModelCompone
   /**
    * Attachment metadata to be displayed in title case
    */
-
   attachmentTypeMetadata = 'dc.type';
 
-  @Input()
-    attachment: Bitstream;
+  /**
+   * Attachment to be displayed
+   */
+  @Input() attachment: Bitstream;
+
+  /**
+   * Format of the bitstream
+   */
+  bitstreamFormat$: Observable<string>;
+
+  /**
+   * Size of the bitstream
+   */
+  bitstreamSize: number;
+  /**
+   * Checksum info of the bitstream
+   */
+  checksumInfo: ChecksumInfo;
 
   constructor(
     @Inject('fieldProvider') public fieldProvider: LayoutField,
@@ -96,5 +114,8 @@ export class BitstreamAttachmentComponent extends BitstreamRenderingModelCompone
 
   ngOnInit() {
     this.allAttachmentProviders = this.attachment?.allMetadataValues('bitstream.viewer.provider');
+    this.bitstreamFormat$ = this.getFormat(this.attachment);
+    this.bitstreamSize = this.getSize(this.attachment);
+    this.checksumInfo = this.getChecksum(this.attachment);
   }
 }
