@@ -8,7 +8,6 @@ import {
 
 export const environment: BuildConfig = {
   production: false,
-  mainSiteUrl: 'www.sito.principale',
 
   // Angular Universal settings
   universal: {
