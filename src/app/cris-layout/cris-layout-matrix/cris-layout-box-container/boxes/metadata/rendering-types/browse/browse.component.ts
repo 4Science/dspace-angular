@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
 
-import {
-  FieldRenderingType,
-  MetadataBoxFieldRendering,
-} from '../metadata-box.decorator';
 import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
 
 /**
@@ -14,8 +10,8 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   selector: 'div[ds-browse]',
   templateUrl: './browse.component.html',
   styleUrls: ['./browse.component.scss'],
+  standalone: true,
 })
-@MetadataBoxFieldRendering(FieldRenderingType.BROWSE)
 export class BrowseComponent extends RenderingTypeValueModelComponent {
 
 }

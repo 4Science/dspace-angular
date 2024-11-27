@@ -16,6 +16,14 @@ import { TagComponent } from './tag/tag.component';
 import { TextComponent } from './text/text.component';
 import { ThumbnailRenderingComponent } from './thumbnail/thumbnail.component';
 import { ValuepairComponent } from './valuepair/valuepair.component';
+import { HtmlComponent } from './html/html.component';
+import { GmapComponent } from './gmap/gmap.component';
+import { OpenStreetMapRenderingComponent } from './open-street-map/open-street-map-rendering.component';
+import { BrowseComponent } from './browse/browse.component';
+import { TagBrowseComponent } from './tag-browse/tag-browse.component';
+import { MarkdownComponent } from './markdown/markdown.component';
+import { SearchComponent } from './search/search.component';
+import { TagSearchComponent } from './tag-search/tag-search.component';
 
 export const layoutBoxesMap = new Map<FieldRenderingType, MetadataBoxFieldRenderOptions>([
   [FieldRenderingType.TEXT, { componentRef: TextComponent, structured: false } as MetadataBoxFieldRenderOptions],
@@ -53,6 +61,39 @@ export const layoutBoxesMap = new Map<FieldRenderingType, MetadataBoxFieldRender
   } as MetadataBoxFieldRenderOptions],
   [FieldRenderingType.AUTHORITYLINK, {
     componentRef: LinkAuthorityComponent,
+    structured: false,
+  } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.HTML, {
+    componentRef: HtmlComponent,
+    structured: false,
+  } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.GMAP, {
+    componentRef: GmapComponent,
+    structured: false,
+  } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.OSMAP, {
+    componentRef: OpenStreetMapRenderingComponent,
+    structured: false,
+  } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.BROWSE, {
+    componentRef: BrowseComponent,
+    structured: false,
+  } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.TAGBROWSE, {
+    componentRef: TagBrowseComponent,
+    structured: false,
+  } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.MARKDOWN, {
+    componentRef: MarkdownComponent,
+    structured: false,
+  } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.SEARCH, {
+    /* eslint-disable-next-line dspace-angular-ts/themed-component-usages */
+    componentRef: SearchComponent,
+    structured: false,
+  } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.TAGSEARCH, {
+    componentRef: TagSearchComponent,
     structured: false,
   } as MetadataBoxFieldRenderOptions],
 ]);

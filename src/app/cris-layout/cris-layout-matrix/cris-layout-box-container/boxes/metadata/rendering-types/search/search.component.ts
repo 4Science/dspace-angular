@@ -13,22 +13,18 @@ import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
 import { ResolverStrategyService } from '../../../../../../services/resolver-strategy.service';
-import {
-  FieldRenderingType,
-  MetadataBoxFieldRendering,
-} from '../metadata-box.decorator';
 import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
 
 /**
  * This component renders the search metadata fields
  */
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector, dspace-angular-ts/themed-component-selectors
   selector: 'div[ds-search]',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
+  standalone: true,
 })
-@MetadataBoxFieldRendering(FieldRenderingType.SEARCH)
 export class SearchComponent extends RenderingTypeValueModelComponent implements OnInit {
 
   /**

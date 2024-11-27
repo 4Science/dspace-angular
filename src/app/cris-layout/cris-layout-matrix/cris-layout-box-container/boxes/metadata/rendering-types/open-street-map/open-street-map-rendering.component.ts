@@ -45,7 +45,6 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   ],
   standalone: true,
 })
-@MetadataBoxFieldRendering(FieldRenderingType.OSMAP)
 export class OpenStreetMapRenderingComponent extends RenderingTypeValueModelComponent implements OnInit {
 
   place = new BehaviorSubject<LocationPlace>(undefined);
