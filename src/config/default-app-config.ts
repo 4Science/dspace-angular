@@ -830,7 +830,4 @@ export class DefaultAppConfig implements AppConfig {
       statusEndpoint: 'https://nominatim.openstreetmap.org/status',
     }
   };
-
-  //main site url for glam theme
-  mainSiteUrl = 'www.sito.principale';
 }

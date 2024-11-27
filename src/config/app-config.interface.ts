@@ -72,7 +72,7 @@ interface AppConfig extends Config {
   searchResult: SearchResultConfig;
   mirador: MiradorConfig;
   location: LocationConfig;
-  mainSiteUrl: string;
+  mainSiteUrl?: string;
 }
 
 /**
