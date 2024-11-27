@@ -35,9 +35,9 @@
                                    [sectionId]="sectionId"
                                    [facetSection]="$any(sectionComponent)"></ds-facet-section>
 
-          <ds-themed-carousel-section *ngSwitchCase="'carousel'"
+          <ds-carousel-section *ngSwitchCase="'carousel'"
                                       [sectionId]="sectionId"
-                                      [carouselSection]="$any(sectionComponent)"></ds-themed-carousel-section>
+                                      [carouselSection]="$any(sectionComponent)"></ds-carousel-section>
 
           <ds-counters-section *ngSwitchCase="'counters'"
                                       [sectionId]="sectionId"
@@ -48,13 +48,13 @@
                                   [textRowSection]="$any(sectionComponent)"
                                   [site]="$any(sectionComponent).contentType === 'text-metadata' ? site$.value : null"></ds-text-section>
 
-          <ds-themed-grid-section *ngSwitchCase="'grid'"
+          <ds-grid-section *ngSwitchCase="'grid'"
                                   [sectionId]="sectionId" [site]="site$.value"
-                                  [gridSection]="$any(sectionComponent)"></ds-themed-grid-section>
+                                  [gridSection]="$any(sectionComponent)"></ds-grid-section>
 
-          <ds-themed-twitter-section *ngSwitchCase="'twitter'"
+          <ds-twitter-section *ngSwitchCase="'twitter'"
                                      [sectionId]="sectionId"
-                                     [twitterSection]="$any(sectionComponent)"></ds-themed-twitter-section>
+                                     [twitterSection]="$any(sectionComponent)"></ds-twitter-section>
 
         </div>
       </div>

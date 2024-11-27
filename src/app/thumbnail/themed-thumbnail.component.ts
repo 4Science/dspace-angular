@@ -27,6 +27,8 @@ export class ThemedThumbnailComponent extends ThemedComponent<ThumbnailComponent
 
   @Input() limitWidth?: boolean;
 
+  @Input() keepAspectRatio?: boolean;
+
   protected inAndOutputNames: (keyof ThumbnailComponent & keyof this)[] = [
     'thumbnail',
     'defaultImage',

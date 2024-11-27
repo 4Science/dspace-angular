@@ -1,12 +1,21 @@
 import {
+  AsyncPipe,
+  NgClass,
+  NgIf,
+  NgStyle,
+  NgTemplateOutlet,
+} from '@angular/common';
+import {
   Component,
   Inject,
   Input,
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   NgbCarousel,
+  NgbCarouselModule,
   NgbSlideEvent,
   NgbSlideEventSource,
 } from '@ng-bootstrap/ng-bootstrap';
@@ -49,6 +58,16 @@ import { CarouselOptions } from './carousel-options.model';
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
   providers: [],
+  imports: [
+    NgbCarouselModule,
+    NgIf,
+    NgTemplateOutlet,
+    NgStyle,
+    RouterLink,
+    AsyncPipe,
+    NgClass,
+  ],
+  standalone: true,
 })
 export class CarouselComponent implements OnInit {
   /**

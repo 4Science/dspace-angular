@@ -1,8 +1,13 @@
 import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
+import {
   Component,
   Input,
   OnInit,
 } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import {
   BehaviorSubject,
   Observable,
@@ -17,7 +22,9 @@ import { CarouselSection } from '../../../../core/layout/models/section.model';
 import { DSpaceObjectType } from '../../../../core/shared/dspace-object-type.model';
 import { getFirstSucceededRemoteListPayload } from '../../../../core/shared/operators';
 import { SearchService } from '../../../../core/shared/search/search.service';
+import { CarouselComponent } from '../../../carousel/carousel.component';
 import { CarouselOptions } from '../../../carousel/carousel-options.model';
+import { ThemedLoadingComponent } from '../../../loading/themed-loading.component';
 import { ItemSearchResult } from '../../../object-collection/shared/item-search-result.model';
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
@@ -26,10 +33,18 @@ import { PaginatedSearchOptions } from '../../../search/models/paginated-search-
  * Component representing the Carousel component section.
  */
 @Component({
-  selector: 'ds-carousel-section',
+  selector: 'ds-base-carousel-section',
   templateUrl: './carousel-section.component.html',
   styleUrls: ['./carousel-section.component.scss'],
   providers: [],
+  standalone: true,
+  imports: [
+    CarouselComponent,
+    AsyncPipe,
+    TranslateModule,
+    ThemedLoadingComponent,
+    NgIf,
+  ],
 })
 export class CarouselSectionComponent implements OnInit {
   /**

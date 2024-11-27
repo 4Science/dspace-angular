@@ -51,11 +51,14 @@ import {
   isNotEmpty,
 } from '../shared/empty.util';
 import { ThemedBrowseSectionComponent } from '../shared/explore/section-component/browse-section/themed-browse-section.component';
+import { ThemedCarouselSectionComponent } from '../shared/explore/section-component/carousel-section/themed-carousel-section.component';
 import { ThemedCountersSectionComponent } from '../shared/explore/section-component/counters-section/themed-counters-section.component';
 import { ThemedFacetSectionComponent } from '../shared/explore/section-component/facet-section/themed-facet-section.component';
+import { ThemedGridSectionComponent } from '../shared/explore/section-component/grid-section/themed-grid-section.component';
 import { ThemedSearchSectionComponent } from '../shared/explore/section-component/search-section/themed-search-section.component';
 import { ThemedTextSectionComponent } from '../shared/explore/section-component/text-section/themed-text-section.component';
 import { ThemedTopSectionComponent } from '../shared/explore/section-component/top-section/themed-top-section.component';
+import { ThemedTwitterSectionComponent } from '../shared/explore/section-component/twitter-section/themed-twitter-section.component';
 import { ViewTrackerComponent } from '../statistics/angulartics/dspace/view-tracker.component';
 import { HomeCoarComponent } from './home-coar/home-coar.component';
 import { ThemedHomeNewsComponent } from './home-news/themed-home-news.component';
@@ -81,6 +84,9 @@ import { ThemedHomeNewsComponent } from './home-news/themed-home-news.component'
     ViewTrackerComponent,
     SuggestionsPopupComponent,
     AsyncPipe,
+    ThemedCarouselSectionComponent,
+    ThemedGridSectionComponent,
+    ThemedTwitterSectionComponent,
   ],
 })
 export class HomePageComponent implements OnInit, OnDestroy {

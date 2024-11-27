@@ -1,9 +1,16 @@
 import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
+import {
   Component,
   Inject,
   OnInit,
 } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 import {
   BehaviorSubject,
   Observable,
@@ -19,17 +26,24 @@ import {
 } from '../../../../../../../core/services/location.service';
 import { Item } from '../../../../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
-import { OpenStreetMapPointer } from '../../../../../../../shared/open-street-map/open-street-map.component';
 import {
-  FieldRenderingType,
-  MetadataBoxFieldRendering,
-} from '../metadata-box.decorator';
+  OpenStreetMapComponent,
+  OpenStreetMapPointer,
+} from '../../../../../../../shared/open-street-map/open-street-map.component';
+import { FieldRenderingType } from '../field-rendering-type';
 import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
 
 @Component({
   selector: 'ds-open-street-map-rendering',
   templateUrl: './open-street-map-rendering.component.html',
   styleUrls: ['./open-street-map-rendering.component.scss'],
+  imports: [
+    OpenStreetMapComponent,
+    AsyncPipe,
+    NgIf,
+    TranslateModule,
+  ],
+  standalone: true,
 })
 @MetadataBoxFieldRendering(FieldRenderingType.OSMAP)
 export class OpenStreetMapRenderingComponent extends RenderingTypeValueModelComponent implements OnInit {
@@ -96,7 +110,7 @@ export class OpenStreetMapRenderingComponent extends RenderingTypeValueModelComp
               coordinates: coordinates,
             };
             this.place.next(place);
-            if ((err as Error)?.message === LocationErrorCodes.API_ERROR) {
+            if (((err as Error)?.message as LocationErrorCodes) === LocationErrorCodes.API_ERROR) {
               console.error((err as Error).message);
             } else {
               console.warn((err as Error).message);

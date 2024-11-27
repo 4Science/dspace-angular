@@ -2,6 +2,8 @@ import {
   Component,
   Input,
 } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { AngularOpenlayersModule } from 'ngx-openlayers';
 
 import { LocationCoordinates } from '../../core/services/location.service';
 
@@ -14,6 +16,11 @@ export interface OpenStreetMapPointer {
   selector: 'ds-open-street-map',
   templateUrl: './open-street-map.component.html',
   styleUrls: ['./open-street-map.component.scss'],
+  imports: [
+    AngularOpenlayersModule,
+    TranslateModule,
+  ],
+  standalone: true,
 })
 export class OpenStreetMapComponent {
 

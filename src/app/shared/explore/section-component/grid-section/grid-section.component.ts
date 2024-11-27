@@ -1,10 +1,18 @@
 import {
+  AsyncPipe,
+  NgForOf,
+  SlicePipe,
+} from '@angular/common';
+import {
   Component,
   Input,
   OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 
 import {
   SortDirection,
@@ -24,6 +32,7 @@ import { SearchService } from '../../../../core/shared/search/search.service';
 import { Site } from '../../../../core/shared/site.model';
 import { SearchResult } from '../../../../shared/search/models/search-result.model';
 import { followLink } from '../../../../shared/utils/follow-link-config.model';
+import { ThemedThumbnailComponent } from '../../../../thumbnail/themed-thumbnail.component';
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
 
@@ -31,9 +40,17 @@ import { PaginatedSearchOptions } from '../../../search/models/paginated-search-
  * Component representing the Grid component section.
  */
 @Component({
-  selector: 'ds-grid-section',
+  selector: 'ds-base-grid-section',
   templateUrl: './grid-section.component.html',
   styleUrls: ['./grid-section.component.scss'],
+  imports: [
+    ThemedThumbnailComponent,
+    NgForOf,
+    SlicePipe,
+    AsyncPipe,
+    TranslateModule,
+  ],
+  standalone: true,
 })
 export class GridSectionComponent implements OnInit {
 
