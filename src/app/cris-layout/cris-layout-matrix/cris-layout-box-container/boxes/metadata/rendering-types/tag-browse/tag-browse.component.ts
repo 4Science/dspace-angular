@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../core/shared/item.model';
+import { ChipsComponent } from '../../../../../../../shared/form/chips/chips.component';
 import { Chips } from '../../../../../../../shared/form/chips/models/chips.model';
 import { RenderingTypeStructuredModelComponent } from '../rendering-type-structured.model';
 
@@ -19,6 +20,9 @@ import { RenderingTypeStructuredModelComponent } from '../rendering-type-structu
   templateUrl: './tag-browse.component.html',
   styleUrls: ['./tag-browse.component.scss'],
   standalone: true,
+  imports: [
+    ChipsComponent,
+  ],
 })
 export class TagBrowseComponent extends RenderingTypeStructuredModelComponent implements OnInit {
   /**

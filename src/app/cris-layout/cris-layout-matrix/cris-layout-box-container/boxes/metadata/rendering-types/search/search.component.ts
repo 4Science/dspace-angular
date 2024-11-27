@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 import {
   Router,
+  RouterLink,
   UrlTree,
 } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -24,6 +25,9 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
   standalone: true,
+  imports: [
+    RouterLink,
+  ],
 })
 export class SearchComponent extends RenderingTypeValueModelComponent implements OnInit {
 

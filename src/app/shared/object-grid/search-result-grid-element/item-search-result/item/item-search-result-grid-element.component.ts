@@ -1,5 +1,6 @@
 import {
   AsyncPipe,
+  NgClass,
   NgFor,
   NgIf,
 } from '@angular/common';
@@ -53,7 +54,7 @@ import { SearchResultGridElementComponent } from '../../search-result-grid-eleme
   templateUrl: './item-search-result-grid-element.component.html',
   animations: [focusShadow],
   standalone: true,
-  imports: [NgIf, RouterLink, ThemedThumbnailComponent, ThemedBadgesComponent, TruncatableComponent, TruncatablePartComponent, NgFor, AsyncPipe, TranslateModule],
+  imports: [NgIf, RouterLink, ThemedThumbnailComponent, ThemedBadgesComponent, TruncatableComponent, TruncatablePartComponent, NgFor, AsyncPipe, TranslateModule, NgClass],
 })
 /**
  * The component for displaying a grid element for an item search result of the type Publication

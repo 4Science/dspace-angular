@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NuMarkdownModule } from '@ng-util/markdown';
+import { NuMarkdownComponent, NuMarkdownModule } from '@ng-util/markdown';
 
 @Component({
   selector: 'ds-markdown-editor',
@@ -14,8 +14,8 @@ import { NuMarkdownModule } from '@ng-util/markdown';
   styleUrls: ['./markdown-editor.component.scss'],
   standalone: true,
   imports: [
-    NuMarkdownModule,
     FormsModule,
+    NuMarkdownComponent,
   ],
 })
 export class MarkdownEditorComponent implements OnInit {

@@ -4,6 +4,7 @@ import {
   NgSwitch,
 } from '@angular/common';
 import { Component } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { BrowseMostElementsComponent as BaseComponent } from '../../../../app/shared/browse-most-elements/browse-most-elements.component';
 import { ThemedDefaultBrowseElementsComponent } from '../../../../app/shared/browse-most-elements/default-browse-elements/themed-default-browse-elements.component';
@@ -23,6 +24,7 @@ import { ThemedDefaultBrowseElementsComponent } from '../../../../app/shared/bro
     AsyncPipe,
     LowerCasePipe,
     NgSwitch,
+    TranslateModule,
   ],
 })
 export class BrowseMostElementsComponent extends BaseComponent {

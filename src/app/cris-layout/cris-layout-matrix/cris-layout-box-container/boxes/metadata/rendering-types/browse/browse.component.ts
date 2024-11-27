@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
 
@@ -11,6 +12,9 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   templateUrl: './browse.component.html',
   styleUrls: ['./browse.component.scss'],
   standalone: true,
+  imports: [
+    RouterLink,
+  ],
 })
 export class BrowseComponent extends RenderingTypeValueModelComponent {
 

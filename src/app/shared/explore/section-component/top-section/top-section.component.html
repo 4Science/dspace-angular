@@ -20,11 +20,11 @@
           </div>
         </div>
         <ds-browse-most-elements [context]="context"
-                                        [paginatedSearchOptions]="paginatedSearchOptions"
-                                        [showLabel]="true"
-                               [showMetrics]="true"
-                               [topSection]="topSection"
-                                        [topSection]="topSection" [mode]="layoutMode">
+                                 [paginatedSearchOptions]="paginatedSearchOptions"
+                                 [showLabel]="true"
+                                 [showMetrics]="true"
+                                 [topSection]="topSection"
+                                 [mode]="layoutMode">
         </ds-browse-most-elements>
       </div>
     </div>
@@ -49,11 +49,11 @@
       <div class="col px-2">
         <h3 *ngIf="topSection.titleKey" class="mx-2">{{ 'explore.index.' + topSection.titleKey | translate }}</h3>
         <h3 *ngIf="!topSection.titleKey" class="mx-2">{{ 'explore.index.' + topSection.sortField | translate }}</h3>
-        <ds-themed-browse-most-elements [context]="context"
+        <ds-browse-most-elements [context]="context"
                                         [paginatedSearchOptions]="paginatedSearchOptions"
                                         [showThumbnails]="showThumbnails"
                                         [topSection]="topSection" [mode]="layoutMode">
-        </ds-themed-browse-most-elements>
+        </ds-browse-most-elements>
       </div>
     </div>
   </ng-container>

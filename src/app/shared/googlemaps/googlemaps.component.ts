@@ -1,4 +1,7 @@
-import { DOCUMENT } from '@angular/common';
+import {
+  DOCUMENT,
+  NgIf,
+} from '@angular/common';
 import {
   Component,
   Inject,
@@ -7,17 +10,25 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
 import { RemoteData } from '../../core/data/remote-data';
 import { ConfigurationProperty } from '../../core/shared/configuration-property.model';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { AlertComponent } from '../alert/alert.component';
 import { isNotEmpty } from '../empty.util';
 
 @Component({
   selector: 'ds-googlemaps',
   templateUrl: './googlemaps.component.html',
   styleUrls: ['./googlemaps.component.scss'],
+  imports: [
+    NgIf,
+    AlertComponent,
+    TranslateModule,
+  ],
+  standalone: true,
 })
 export class GooglemapsComponent implements OnInit {
   /**

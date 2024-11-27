@@ -4,7 +4,7 @@ import {
   OnInit,
 } from '@angular/core';
 
-import { GooglemapsModule } from '../../../../../../../shared/googlemaps/googlemaps.module';
+import { GooglemapsComponent } from '../../../../../../../shared/googlemaps/googlemaps.component';
 import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
 
 @Component({
@@ -12,8 +12,8 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   templateUrl: './gmap.component.html',
   styleUrls: ['./gmap.component.scss'],
   imports: [
-    GooglemapsModule,
     NgIf,
+    GooglemapsComponent,
   ],
   standalone: true,
 })

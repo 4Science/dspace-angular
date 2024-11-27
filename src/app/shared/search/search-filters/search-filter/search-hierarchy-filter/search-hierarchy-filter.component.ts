@@ -8,7 +8,8 @@ import {
   Component,
   Inject,
   OnDestroy,
-  OnInit, PLATFORM_ID,
+  OnInit,
+  PLATFORM_ID,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
@@ -43,9 +44,11 @@ import { PageInfo } from '../../../../../core/shared/page-info.model';
 import { SearchService } from '../../../../../core/shared/search/search.service';
 import { SearchConfigurationService } from '../../../../../core/shared/search/search-configuration.service';
 import {
-  FILTER_CONFIG, IN_PLACE_SEARCH,
-  REFRESH_FILTER, SCOPE,
-  SearchFilterService
+  FILTER_CONFIG,
+  IN_PLACE_SEARCH,
+  REFRESH_FILTER,
+  SCOPE,
+  SearchFilterService,
 } from '../../../../../core/shared/search/search-filter.service';
 import { VocabularyEntryDetail } from '../../../../../core/submission/vocabularies/models/vocabulary-entry-detail.model';
 import { VocabularyService } from '../../../../../core/submission/vocabularies/vocabulary.service';
@@ -53,6 +56,7 @@ import { SEARCH_CONFIG_SERVICE } from '../../../../../my-dspace-page/my-dspace-c
 import { isNotEmpty } from '../../../../empty.util';
 import { VocabularyTreeviewModalComponent } from '../../../../form/vocabulary-treeview-modal/vocabulary-treeview-modal.component';
 import { FilterInputSuggestionsComponent } from '../../../../input-suggestions/filter-suggestions/filter-input-suggestions.component';
+import { SearchFilterConfig } from '../../../models/search-filter-config.model';
 import { addOperatorToFilterValue } from '../../../search.utils';
 import {
   facetLoad,
@@ -60,7 +64,6 @@ import {
 } from '../search-facet-filter/search-facet-filter.component';
 import { SearchFacetOptionComponent } from '../search-facet-filter-options/search-facet-option/search-facet-option.component';
 import { SearchFacetSelectedOptionComponent } from '../search-facet-filter-options/search-facet-selected-option/search-facet-selected-option.component';
-import { SearchFilterConfig } from '../../../models/search-filter-config.model';
 
 @Component({
   selector: 'ds-search-hierarchy-filter',
@@ -90,7 +93,7 @@ export class SearchHierarchyFilterComponent extends SearchFacetFilterComponent i
               @Inject(PLATFORM_ID) protected platformId: any,
               @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
   ) {
-    super(searchService, filterService, rdbs, router, searchConfigService, inPlaceSearch, filterConfig, refreshFilters, scope);
+    super(searchService, filterService, rdbs, router, searchConfigService);
   }
 
   vocabularyExists$: BehaviorSubject<boolean> = new BehaviorSubject(false);

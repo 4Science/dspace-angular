@@ -71,7 +71,7 @@ export class SearchChartPieComponent extends SearchChartFilterComponent {
     @Inject(REFRESH_FILTER) public refreshFilters: BehaviorSubject<boolean>,
     @Inject(SCOPE) public scope: string,
   ) {
-    super(searchService, filterService, rdbs, router, searchConfigService, inPlaceSearch, filterConfig, refreshFilters, scope);
+    super(searchService, filterService, rdbs, router, searchConfigService);
   }
 
   protected getInitData(): Observable<ChartSeries[] | ChartData[]> {
