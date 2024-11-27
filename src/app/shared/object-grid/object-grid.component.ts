@@ -1,5 +1,5 @@
 import {
-  AsyncPipe,
+  AsyncPipe, NgClass,
   NgFor,
   NgIf,
 } from '@angular/common';
@@ -45,6 +45,7 @@ import { ListableObjectComponentLoaderComponent } from '../object-collection/sha
 import { PaginationComponent } from '../pagination/pagination.component';
 import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
 import { BrowserOnlyPipe } from '../utils/browser-only.pipe';
+import { LoadingComponent } from '../../../themes/custom/app/shared/loading/loading.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.Default,
@@ -54,7 +55,7 @@ import { BrowserOnlyPipe } from '../utils/browser-only.pipe';
   templateUrl: './object-grid.component.html',
   animations: [fadeIn],
   standalone: true,
-  imports: [PaginationComponent, NgIf, NgFor, ListableObjectComponentLoaderComponent, ErrorComponent, ThemedLoadingComponent, AsyncPipe, TranslateModule, BrowserOnlyPipe],
+  imports: [PaginationComponent, NgIf, NgFor, ListableObjectComponentLoaderComponent, ErrorComponent, ThemedLoadingComponent, AsyncPipe, TranslateModule, BrowserOnlyPipe, NgClass, LoadingComponent],
 })
 
 export class ObjectGridComponent implements OnInit {

@@ -1,18 +1,21 @@
 import {
-  Component,
-  Inject,
-} from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-
-import { LayoutField } from '../../../../../../../../../app/core/layout/models/box.model';
-import { Item } from '../../../../../../../../core/shared/item.model';
-import { LoadMoreService } from '../../../../../../../services/load-more.service';
-import {
   AsyncPipe,
   NgFor,
   NgIf,
 } from '@angular/common';
+import {
+  Component,
+  Inject,
+} from '@angular/core';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 
+import { LayoutField } from '../../../../../../../../../app/core/layout/models/box.model';
+import { Item } from '../../../../../../../../core/shared/item.model';
+import { LoadMoreService } from '../../../../../../../services/load-more.service';
 import { MetadataRenderComponent } from '../../../row/metadata-container/metadata-render/metadata-render.component';
 import { MetadataGroupComponent } from '../metadata-group.component';
 
@@ -29,6 +32,8 @@ import { MetadataGroupComponent } from '../metadata-group.component';
     NgFor,
     MetadataRenderComponent,
     AsyncPipe,
+    NgbTooltipModule,
+    TranslateModule,
   ],
 })
 export class TableComponent extends MetadataGroupComponent {

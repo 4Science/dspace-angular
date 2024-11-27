@@ -25,6 +25,7 @@ import {
 } from '@angular/core';
 import {
   Router,
+  RouterLink,
   UrlTree,
 } from '@angular/router';
 import {
@@ -66,6 +67,7 @@ const TOOLTIP_TEXT_LIMIT = 21;
     CdkDrag,
     CdkDropList,
     NgTemplateOutlet,
+    RouterLink,
   ],
   standalone: true,
 })

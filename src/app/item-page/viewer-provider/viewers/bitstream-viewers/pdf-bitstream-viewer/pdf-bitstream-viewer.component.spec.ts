@@ -21,20 +21,20 @@ describe('PdfBitstreamViewerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PdfBitstreamViewerComponent ],
-      providers: [
+    declarations: [PdfBitstreamViewerComponent],
+    providers: [
         DspaceRestService,
         { provide: NativeWindowService, useValue: window },
         { provide: AuthService, useValue: AuthServiceMock },
         {
-          provide: HTTP_INTERCEPTORS,
-          useClass: AuthInterceptor,
-          multi: true,
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true,
         },
         { provide: HttpClient, useValue: {} },
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-    })
+    ],
+    schemas: [NO_ERRORS_SCHEMA],
+})
       .compileComponents();
   });
 

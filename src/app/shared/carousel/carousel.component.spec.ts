@@ -173,16 +173,16 @@ describe('CarouselComponent', () => {
   beforeEach(waitForAsync(() => {
     notificationService = new NotificationsServiceStub();
     TestBed.configureTestingModule({
-      imports: [CommonModule, NgbModule, FormsModule, ReactiveFormsModule, BrowserModule, RouterTestingModule,
+    imports: [CommonModule, NgbModule, FormsModule, ReactiveFormsModule, BrowserModule, RouterTestingModule,
         TranslateModule.forRoot({
-          loader: {
-            provide: TranslateLoader,
-            useClass: TranslateLoaderMock,
-          },
+            loader: {
+                provide: TranslateLoader,
+                useClass: TranslateLoaderMock,
+            },
         }),
-      ],
-      declarations: [CarouselComponent],
-      providers: [
+    ],
+    declarations: [CarouselComponent],
+    providers: [
         CarouselComponent,
         { provide: ObjectCacheService, useValue: {} },
         { provide: InternalLinkService, useValue: {} },
@@ -196,9 +196,9 @@ describe('CarouselComponent', () => {
         { provide: DefaultChangeAnalyzer, useValue: {} },
         { provide: BitstreamDataService, useValue: mockBitstreamDataService },
         { provide: NativeWindowService, useValue: new NativeWindowRef() },
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
+    ],
+    schemas: [NO_ERRORS_SCHEMA],
+}).compileComponents();
 
   }));
 

@@ -22,17 +22,17 @@ describe('PdfViewerButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PdfViewerButtonComponent ],
-      providers: [{
-        provide: AuthorizationDataService,
-        useValue: authorizationServiceSpy,
-      }],
-      imports: [
+    declarations: [PdfViewerButtonComponent],
+    providers: [{
+            provide: AuthorizationDataService,
+            useValue: authorizationServiceSpy,
+        }],
+    imports: [
         CommonModule,
         RouterTestingModule.withRoutes([]),
         TranslateModule.forRoot(),
-      ],
-    })
+    ],
+})
       .compileComponents();
   });
 

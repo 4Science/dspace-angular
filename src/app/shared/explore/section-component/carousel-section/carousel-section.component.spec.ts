@@ -67,16 +67,16 @@ describe('CarouselSectionComponent', () => {
 
     notificationService = new NotificationsServiceStub();
     TestBed.configureTestingModule({
-      imports: [CommonModule, NgbModule, FormsModule, ReactiveFormsModule, BrowserModule, RouterTestingModule,
+    imports: [CommonModule, NgbModule, FormsModule, ReactiveFormsModule, BrowserModule, RouterTestingModule,
         TranslateModule.forRoot({
-          loader: {
-            provide: TranslateLoader,
-            useClass: TranslateLoaderMock,
-          },
+            loader: {
+                provide: TranslateLoader,
+                useClass: TranslateLoaderMock,
+            },
         }),
-      ],
-      declarations: [CarouselSectionComponent],
-      providers: [
+    ],
+    declarations: [CarouselSectionComponent],
+    providers: [
         CarouselSectionComponent,
         { provide: SearchService, useValue: searchServiceStub },
         { provide: ObjectCacheService, useValue: {} },
@@ -88,9 +88,9 @@ describe('CarouselSectionComponent', () => {
         { provide: HttpClient, useValue: {} },
         { provide: DSOChangeAnalyzer, useValue: {} },
         { provide: DefaultChangeAnalyzer, useValue: {} },
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
+    ],
+    schemas: [NO_ERRORS_SCHEMA],
+}).compileComponents();
 
   }));
 

@@ -54,21 +54,21 @@ describe('HtmlComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useClass: TranslateLoaderMock,
-        },
-      }), BrowserAnimationsModule],
-      providers: [
+    imports: [TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useClass: TranslateLoaderMock,
+            },
+        }), BrowserAnimationsModule, DsDatePipe],
+    providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
         { provide: 'metadataValueProvider', useValue: metadataValue },
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
-      ],
-      declarations: [HtmlComponent, DsDatePipe],
-    })
+    ],
+    declarations: [HtmlComponent],
+})
       .compileComponents();
   }));
 

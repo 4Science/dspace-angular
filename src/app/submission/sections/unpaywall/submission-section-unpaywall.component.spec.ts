@@ -109,18 +109,18 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
+    imports: [
         HttpClientTestingModule,
         RouterTestingModule,
         StoreModule.forRoot({}, storeModuleConfig),
         TranslateModule.forRoot({
-          loader: {
-            provide: TranslateLoader,
-            useClass: TranslateLoaderMock,
-          },
+            loader: {
+                provide: TranslateLoader,
+                useClass: TranslateLoaderMock,
+            },
         }),
-      ],
-      providers: [
+    ],
+    providers: [
         SectionsService,
         FormService,
         FormBuilderService,
@@ -156,10 +156,10 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
         { provide: 'sectionDataProvider', useValue: {} },
         { provide: 'submissionIdProvider', useValue: mockSubmissionId },
         { provide: SectionUploadService, useValue: getMockSectionUploadService() },
-      ],
-      declarations: [SubmissionSectionUnpaywallComponent],
-      schemas: [NO_ERRORS_SCHEMA],
-    })
+    ],
+    declarations: [SubmissionSectionUnpaywallComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+})
       .compileComponents();
   });
 

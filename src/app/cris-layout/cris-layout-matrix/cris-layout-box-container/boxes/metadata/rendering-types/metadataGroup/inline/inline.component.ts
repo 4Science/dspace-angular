@@ -9,7 +9,11 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 
 import { LayoutField } from '../../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../../core/shared/item.model';
@@ -32,6 +36,8 @@ import { MetadataGroupComponent } from '../metadata-group.component';
     NgFor,
     MetadataRenderComponent,
     AsyncPipe,
+    NgbTooltipModule,
+    TranslateModule,
   ],
 })
 export class InlineComponent extends MetadataGroupComponent implements OnInit {

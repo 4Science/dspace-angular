@@ -20,6 +20,7 @@ import { environment } from '../../../environments/environment';
 import { SiteDataService } from '../../core/data/site-data.service';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { Site } from '../../core/shared/site.model';
+import { MarkdownEditorComponent } from '../../shared/markdown-editor/markdown-editor.component';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 
 /**
@@ -36,6 +37,7 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
     AsyncPipe,
     NgIf,
     NgTemplateOutlet,
+    MarkdownEditorComponent,
   ],
   standalone: true,
 })

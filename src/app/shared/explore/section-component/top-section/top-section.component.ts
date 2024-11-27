@@ -4,6 +4,8 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgbButtonsModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 
 import {
@@ -30,6 +32,8 @@ import { PaginatedSearchOptions } from '../../../search/models/paginated-search-
     ThemedBrowseMostElementsComponent,
     NgIf,
     TranslateModule,
+    FormsModule,
+    NgbButtonsModule,
   ],
 })
 export class TopSectionComponent implements OnInit {

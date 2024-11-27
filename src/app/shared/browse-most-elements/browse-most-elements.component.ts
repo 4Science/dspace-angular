@@ -35,6 +35,7 @@ import { CollectionElementLinkType } from '../object-collection/collection-eleme
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
 import { ThemedDefaultBrowseElementsComponent } from './default-browse-elements/themed-default-browse-elements.component';
 import { SearchResult } from '../search/models/search-result.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'ds-base-browse-most-elements',
@@ -47,6 +48,7 @@ import { SearchResult } from '../search/models/search-result.model';
     LowerCasePipe,
     NgSwitch,
     NgSwitchDefault,
+    TranslateModule,
   ],
 })
 

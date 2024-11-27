@@ -149,11 +149,7 @@ export class SearchFacetFilterComponent implements OnInit, OnDestroy {
               protected filterService: SearchFilterService,
               protected rdbs: RemoteDataBuildService,
               protected router: Router,
-              @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
-              inPlaceSearch: boolean,
-              filterConfig: SearchFilterConfig,
-              refreshFilters: BehaviorSubject<boolean>,
-              scope: string) {
+              @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService) {
   }
 
   /**

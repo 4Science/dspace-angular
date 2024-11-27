@@ -17,6 +17,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import {
@@ -36,6 +37,7 @@ import {
   isEmpty,
   isNotEmpty,
 } from '../../empty.util';
+import { EntityIconDirective } from '../../entity-icon/entity-icon.directive';
 import { ThemedLoadingComponent } from '../../loading/themed-loading.component';
 import { FormFieldMetadataValueObject } from '../builder/models/form-field-metadata-value.model';
 import { VocabularyTreeFlatDataSource } from './vocabulary-tree-flat-data-source';
@@ -66,6 +68,8 @@ export type VocabularyTreeItemType = FormFieldMetadataValueObject | VocabularyEn
     AsyncPipe,
     ThemedLoadingComponent,
     AlertComponent,
+    EntityIconDirective,
+    RouterLink,
   ],
   standalone: true,
 })

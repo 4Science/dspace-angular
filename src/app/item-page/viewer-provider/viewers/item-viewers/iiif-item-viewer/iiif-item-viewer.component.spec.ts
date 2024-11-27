@@ -15,13 +15,13 @@ describe('IiifItemViewerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IIIFItemViewerComponent ],
-      imports: [ RouterTestingModule.withRoutes([]) ],
-      providers: [
+    declarations: [IIIFItemViewerComponent],
+    imports: [RouterTestingModule.withRoutes([])],
+    providers: [
         { provide: Store, useValue: provideMockStore() },
-      ],
-      schemas: [ NO_ERRORS_SCHEMA ],
-    })
+    ],
+    schemas: [NO_ERRORS_SCHEMA],
+})
       .compileComponents();
   });
 

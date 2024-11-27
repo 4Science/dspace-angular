@@ -79,21 +79,21 @@ describe('GridSectionComponent', () => {
     });
 
     TestBed.configureTestingModule({
-      imports: [CommonModule, NgbModule, FormsModule, ReactiveFormsModule, BrowserModule, RouterTestingModule,
+    imports: [CommonModule, NgbModule, FormsModule, ReactiveFormsModule, BrowserModule, RouterTestingModule,
         TranslateModule.forRoot({
-          loader: {
-            provide: TranslateLoader,
-            useClass: TranslateLoaderMock,
-          },
+            loader: {
+                provide: TranslateLoader,
+                useClass: TranslateLoaderMock,
+            },
         }),
-      ],
-      declarations: [GridSectionComponent],
-      providers: [GridSectionComponent,
+    ],
+    declarations: [GridSectionComponent],
+    providers: [GridSectionComponent,
         { provide: SearchService, useValue: searchServiceStub },
         { provide: LocaleService, useValue: mockLocaleService },
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
+    ],
+    schemas: [NO_ERRORS_SCHEMA],
+}).compileComponents();
 
   }));
 

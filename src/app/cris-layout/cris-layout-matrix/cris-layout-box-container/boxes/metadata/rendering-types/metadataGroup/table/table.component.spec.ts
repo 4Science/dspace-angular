@@ -245,26 +245,23 @@ describe('TableComponent component when .first and .last is present in rendering
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useClass: TranslateLoaderMock,
-        },
-      })],
-      providers: [
+    imports: [TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useClass: TranslateLoaderMock,
+            },
+        }), DsDatePipe,
+        MetadataRenderComponent,
+        TableComponent,
+        TextComponent],
+    providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
         LoadMoreService,
-      ],
-      declarations: [
-        DsDatePipe,
-        MetadataRenderComponent,
-        TableComponent,
-        TextComponent,
-      ],
-    }).overrideComponent(TableComponent, {
+    ],
+}).overrideComponent(TableComponent, {
       set: { changeDetection: ChangeDetectionStrategy.OnPush },
     }).compileComponents();
   }));

@@ -44,9 +44,8 @@ describe('SearchRangeDatepickerFilterComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), NoopAnimationsModule, FormsModule],
-      declarations: [SearchRangeFilterComponent],
-      providers: [
+    imports: [TranslateModule.forRoot(), NoopAnimationsModule, FormsModule, SearchRangeFilterComponent],
+    providers: [
         { provide: SearchService, useValue: new SearchServiceStub() },
         { provide: Router, useValue: new RouterStub() },
         { provide: FILTER_CONFIG, useValue: mockFilterConfig },
@@ -56,22 +55,22 @@ describe('SearchRangeDatepickerFilterComponent', () => {
         { provide: IN_PLACE_SEARCH, useValue: false },
         { provide: REFRESH_FILTER, useValue: new BehaviorSubject<boolean>(false) },
         {
-          provide: SearchFilterService, useValue: {
-            getSelectedValuesForFilter: () => of([]),
-            isFilterActiveWithValue: (paramName: string, filterValue: string) => true,
-            getPage: (paramName: string) => of(0),
-            /* eslint-disable no-empty,@typescript-eslint/no-empty-function */
-            incrementPage: (filterName: string) => {
+            provide: SearchFilterService, useValue: {
+                getSelectedValuesForFilter: () => of([]),
+                isFilterActiveWithValue: (paramName: string, filterValue: string) => true,
+                getPage: (paramName: string) => of(0),
+                /* eslint-disable no-empty,@typescript-eslint/no-empty-function */
+                incrementPage: (filterName: string) => {
+                },
+                resetPage: (filterName: string) => {
+                },
+                /* eslint-enable no-empty, @typescript-eslint/no-empty-function */
             },
-            resetPage: (filterName: string) => {
-            },
-            /* eslint-enable no-empty, @typescript-eslint/no-empty-function */
-          },
         },
         { provide: SCOPE, useValue: 'test' },
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).overrideComponent(SearchRangeFilterComponent, {
+    ],
+    schemas: [NO_ERRORS_SCHEMA],
+}).overrideComponent(SearchRangeFilterComponent, {
       set: { changeDetection: ChangeDetectionStrategy.Default },
     }).compileComponents();
   }));

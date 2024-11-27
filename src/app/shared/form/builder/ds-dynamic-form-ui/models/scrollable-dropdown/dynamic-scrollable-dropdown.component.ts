@@ -14,7 +14,10 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
+import {
+  FormsModule,
+  UntypedFormGroup,
+} from '@angular/forms';
 import {
   NgbDropdown,
   NgbDropdownModule,
@@ -74,6 +77,7 @@ import { DynamicScrollableDropdownModel } from './dynamic-scrollable-dropdown.mo
     InfiniteScrollDirective,
     NgForOf,
     TranslateModule,
+    FormsModule,
   ],
   standalone: true,
 })

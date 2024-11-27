@@ -22,6 +22,7 @@ import { SiteDataService } from '../../core/data/site-data.service';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { Site } from '../../core/shared/site.model';
 import { AlertComponent } from '../../shared/alert/alert.component';
+import { MarkdownEditorComponent } from '../../shared/markdown-editor/markdown-editor.component';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 
 /**
@@ -36,6 +37,7 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
     KeyValuePipe,
     FormsModule,
     NgForOf,
+    MarkdownEditorComponent,
   ],
   standalone: true,
 })

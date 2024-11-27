@@ -14,15 +14,15 @@ describe('OpenStreetMapComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [OpenStreetMapComponent],
-      imports: [
+    declarations: [OpenStreetMapComponent],
+    imports: [
         TranslateModule.forRoot(),
-      ],
-      providers: [
+    ],
+    providers: [
         LocationService,
         { provide: HttpClient, useValue: {} },
-      ],
-    })
+    ],
+})
       .compileComponents();
   });
 

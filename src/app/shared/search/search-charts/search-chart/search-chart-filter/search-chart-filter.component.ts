@@ -12,14 +12,15 @@ import { FacetValue } from '../../../models/facet-value.model';
 import { FacetValues } from '../../../models/facet-values.model';
 import { SearchFacetFilterComponent } from '../../../search-filters/search-filter/search-facet-filter/search-facet-filter.component';
 
+
+/**
+ * Component that represents a search chart filter
+ */
 @Component({
   selector: 'ds-search-chart-filter',
   template: ``,
   standalone: true,
 })
-/**
- * Component that represents a search chart filter
- */
 export class SearchChartFilterComponent extends SearchFacetFilterComponent implements OnInit {
 
   /**

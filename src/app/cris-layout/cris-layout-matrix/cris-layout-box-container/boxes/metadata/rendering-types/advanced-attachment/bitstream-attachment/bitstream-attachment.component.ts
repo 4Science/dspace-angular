@@ -14,6 +14,7 @@ import {
   ActivatedRoute,
   Router,
 } from '@angular/router';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   TranslateModule,
   TranslateService,
@@ -49,6 +50,7 @@ import { AttachmentRenderingType } from './attachment-type.decorator';
     TitleCasePipe,
     TranslateModule,
     FileSizePipe,
+    NgbTooltipModule,
   ],
 })
 export class BitstreamAttachmentComponent extends BitstreamRenderingModelComponent implements OnInit {

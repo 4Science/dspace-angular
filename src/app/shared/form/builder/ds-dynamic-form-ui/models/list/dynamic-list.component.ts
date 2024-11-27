@@ -2,6 +2,7 @@ import {
   NgClass,
   NgForOf,
   NgIf,
+  NgTemplateOutlet,
 } from '@angular/common';
 import {
   ChangeDetectorRef,
@@ -14,6 +15,7 @@ import {
 } from '@angular/core';
 import {
   AbstractControl,
+  FormsModule,
   ReactiveFormsModule,
   UntypedFormGroup,
   ValidationErrors,
@@ -26,6 +28,7 @@ import {
   DynamicFormLayoutService,
   DynamicFormValidationService,
 } from '@ng-dynamic-forms/core';
+import { TranslateModule } from '@ngx-translate/core';
 import findKey from 'lodash/findKey';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -63,6 +66,9 @@ export interface ListItem {
     NgbButtonsModule,
     NgForOf,
     ReactiveFormsModule,
+    FormsModule,
+    TranslateModule,
+    NgTemplateOutlet,
   ],
   standalone: true,
 })

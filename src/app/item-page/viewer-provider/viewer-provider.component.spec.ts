@@ -34,17 +34,17 @@ describe('ViewerProviderComponent', () => {
   beforeEach(async () => {
     // location = jasmine.createSpyObj('location', ['back', 'path']);
     await TestBed.configureTestingModule({
-      declarations: [ ViewerProviderComponent ],
-      imports: [ RouterTestingModule.withRoutes([]), TranslateModule.forRoot() ],
-      providers: [
+    declarations: [ViewerProviderComponent],
+    imports: [RouterTestingModule.withRoutes([]), TranslateModule.forRoot()],
+    providers: [
         { provide: Store, useValue: StoreMock },
         { provide: ItemDataService, useValue: {} },
         { provide: Location, useValue: new SpyLocation() },
         { provide: AuthService, useValue: new AuthServiceMock() },
         { provide: BitstreamDataService, useValue: mockBitstreamDataService },
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-    })
+    ],
+    schemas: [NO_ERRORS_SCHEMA],
+})
       .compileComponents();
   });
 

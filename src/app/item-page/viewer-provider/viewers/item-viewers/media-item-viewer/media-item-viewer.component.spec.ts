@@ -13,14 +13,14 @@ describe('MediaItemViewerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MediaItemViewerComponent ],
-      imports: [
+    declarations: [MediaItemViewerComponent],
+    imports: [
         RouterTestingModule,
-      ],
-      schemas: [
+    ],
+    schemas: [
         NO_ERRORS_SCHEMA,
-      ],
-    })
+    ],
+})
       .compileComponents();
   });
 

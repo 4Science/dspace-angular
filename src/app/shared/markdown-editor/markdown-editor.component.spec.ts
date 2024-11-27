@@ -15,13 +15,13 @@ describe('MarkdownEditorComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [MarkdownEditorComponent],
-      imports: [
+    declarations: [MarkdownEditorComponent],
+    imports: [
         RouterTestingModule.withRoutes([]),
-      ],
-      providers: [],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
+    ],
+    providers: [],
+    schemas: [NO_ERRORS_SCHEMA],
+}).compileComponents();
   }));
 
   beforeEach(() => {

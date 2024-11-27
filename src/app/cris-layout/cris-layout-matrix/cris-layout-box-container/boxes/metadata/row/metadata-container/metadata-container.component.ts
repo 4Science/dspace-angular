@@ -1,4 +1,5 @@
 import {
+  NgClass,
   NgFor,
   NgIf,
 } from '@angular/common';
@@ -10,7 +11,11 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import {
   map,
@@ -38,11 +43,11 @@ import {
   hasValue,
   isNotEmpty,
 } from '../../../../../../../shared/empty.util';
-import { FieldRenderingType } from '../../rendering-types/field-rendering-type';
 import {
   LoadMoreService,
   NestedMetadataGroupEntry,
 } from '../../../../../../services/load-more.service';
+import { FieldRenderingType } from '../../rendering-types/field-rendering-type';
 import {
   computeRenderingFn,
   getMetadataBoxFieldRenderOptionsFn,
@@ -60,6 +65,9 @@ import { MetadataRenderComponent } from './metadata-render/metadata-render.compo
     NgIf,
     NgFor,
     MetadataRenderComponent,
+    NgClass,
+    TranslateModule,
+    NgbTooltipModule,
   ],
 })
 export class MetadataContainerComponent implements OnInit {

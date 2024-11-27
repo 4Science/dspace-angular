@@ -6,7 +6,10 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {
+  ActivatedRoute,
+  RouterOutlet,
+} from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -38,6 +41,7 @@ import { ViewTrackerComponent } from '../statistics/angulartics/dspace/view-trac
     CrisLayoutComponent,
     AsyncPipe,
     TranslateModule,
+    RouterOutlet,
   ],
 })
 export class CrisItemPageComponent implements OnInit {
