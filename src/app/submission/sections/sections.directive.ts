@@ -33,6 +33,7 @@ import { SectionsType } from './sections-type';
 @Directive({
   selector: '[dsSection]',
   exportAs: 'sectionRef',
+  standalone: true,
 })
 export class SectionsDirective implements OnDestroy, OnInit {
 
@@ -115,6 +116,12 @@ export class SectionsDirective implements OnDestroy, OnInit {
   private subs: Subscription[] = [];
 
   /**
+   * Dedicated properties for error checking
+   * @private
+   */
+  private errorsSub: Subscription;
+
+  /**
    * A boolean representing if section is valid
    * @type {boolean}
    */
@@ -141,29 +148,16 @@ export class SectionsDirective implements OnDestroy, OnInit {
       map((valid: boolean) => {
         if (valid) {
           this.resetErrors();
+        } else if (hasValue(this.errorsSub)) {
+          //create new subscription to set any possible remaining error, so to avoid timing issue in status update
+          this.errorsSub.unsubscribe();
+          this.checkForNewErrors();
         }
         return valid;
       }));
 
+    this.errorsSub = this.checkForNewErrors();
     this.subs.push(
-      this.sectionService.getShownSectionErrors(this.submissionId, this.sectionId, this.sectionType)
-        .subscribe((errors: SubmissionSectionError[]) => {
-          if (isNotEmpty(errors)) {
-            errors.forEach((errorItem: SubmissionSectionError) => {
-              const parsedErrors: SectionErrorPath[] = parseSectionErrorPaths(errorItem.path);
-
-              parsedErrors.forEach((error: SectionErrorPath) => {
-                if (!error.fieldId) {
-                  this.genericSectionErrors = uniq(this.genericSectionErrors.concat(errorItem.message));
-                } else {
-                  this.allSectionErrors.push(errorItem.message);
-                }
-              });
-            });
-          } else {
-            this.resetErrors();
-          }
-        }),
       this.submissionService.getActiveSectionId(this.submissionId)
         .subscribe((activeSectionId) => {
           const previousActive = this.active;
@@ -381,5 +375,26 @@ export class SectionsDirective implements OnDestroy, OnInit {
     this.genericSectionErrors = [];
     this.allSectionErrors = [];
 
+  }
+
+  private checkForNewErrors() {
+    return this.sectionService.getShownSectionErrors(this.submissionId, this.sectionId, this.sectionType)
+      .subscribe((errors: SubmissionSectionError[]) => {
+        if (isNotEmpty(errors)) {
+          errors.forEach((errorItem: SubmissionSectionError) => {
+            const parsedErrors: SectionErrorPath[] = parseSectionErrorPaths(errorItem.path);
+
+            parsedErrors.forEach((error: SectionErrorPath) => {
+              if (!error.fieldId) {
+                this.genericSectionErrors = uniq(this.genericSectionErrors.concat(errorItem.message));
+              } else {
+                this.allSectionErrors.push(errorItem.message);
+              }
+            });
+          });
+        } else {
+          this.resetErrors();
+        }
+      });
   }
 }

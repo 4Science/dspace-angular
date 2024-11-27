@@ -4,11 +4,22 @@ import {
   isEmpty,
 } from '../../../empty.util';
 import { FilterType } from '../../models/filter-type.model';
+import { SearchAuthorityFilterComponent } from './search-authority-filter/search-authority-filter.component';
+import { SearchBooleanFilterComponent } from './search-boolean-filter/search-boolean-filter.component';
+import { SearchHierarchyFilterComponent } from './search-hierarchy-filter/search-hierarchy-filter.component';
+import { SearchRangeFilterComponent } from './search-range-filter/search-range-filter.component';
+import { SearchTextFilterComponent } from './search-text-filter/search-text-filter.component';
 
 /**
  * Contains the mapping between a facet component and a FilterType
  */
 const filterTypeMap = new Map();
+
+filterTypeMap.set(FilterType.text, SearchTextFilterComponent);
+filterTypeMap.set(FilterType.authority, SearchAuthorityFilterComponent);
+filterTypeMap.set(FilterType.boolean, SearchBooleanFilterComponent);
+filterTypeMap.set(FilterType.hierarchy, SearchHierarchyFilterComponent);
+filterTypeMap.set(FilterType.range, SearchRangeFilterComponent);
 
 /**
  * Contains the mapping between an {@link BuildConfig} path and a {@link FilterType}
@@ -18,6 +29,7 @@ const filterTypeEnvironmentMap = new Map();
 /**
  * Sets the mapping for a facet component in relation to a filter type
  * @param {FilterType} type The type for which the matching component is mapped
+ * @deprecated
  * @returns Decorator function that performs the actual mapping on initialization of the facet component
  */
 export function renderFacetFor(type: FilterType) {

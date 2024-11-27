@@ -8,9 +8,12 @@ import { LayoutField } from '../../../../../../../../../app/core/layout/models/b
 import { Item } from '../../../../../../../../core/shared/item.model';
 import { LoadMoreService } from '../../../../../../../services/load-more.service';
 import {
-  FieldRenderingType,
-  MetadataBoxFieldRendering,
-} from '../../metadata-box.decorator';
+  AsyncPipe,
+  NgFor,
+  NgIf,
+} from '@angular/common';
+
+import { MetadataRenderComponent } from '../../../row/metadata-container/metadata-render/metadata-render.component';
 import { MetadataGroupComponent } from '../metadata-group.component';
 
 /**
@@ -20,8 +23,14 @@ import { MetadataGroupComponent } from '../metadata-group.component';
   selector: 'ds-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    NgFor,
+    MetadataRenderComponent,
+    AsyncPipe,
+  ],
 })
-@MetadataBoxFieldRendering(FieldRenderingType.TABLE, true)
 export class TableComponent extends MetadataGroupComponent {
   constructor(
     @Inject('fieldProvider') public fieldProvider: LayoutField,

@@ -1,14 +1,19 @@
-import { isPlatformServer } from '@angular/common';
+import {
+  AsyncPipe,
+  LowerCasePipe,
+  NgSwitch,
+  NgSwitchDefault,
+} from '@angular/common';
 import {
   ChangeDetectorRef,
-  Component,
-  Inject,
+  Component, Inject,
   Input,
-  OnInit,
-  PLATFORM_ID,
+  OnChanges,
+  OnInit, PLATFORM_ID,
 } from '@angular/core';
 import {  Router } from '@angular/router';
 import isEqual from 'lodash/isEqual';
+import { BehaviorSubject } from 'rxjs';
 
 import {
   APP_CONFIG,
@@ -20,6 +25,7 @@ import { RemoteData } from '../../core/data/remote-data';
 import {
   LayoutModeEnum,
   TopSection,
+  TopSectionTemplateType,
 } from '../../core/layout/models/section.model';
 import { Context } from '../../core/shared/context.model';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
@@ -27,30 +33,54 @@ import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { ViewMode } from '../../core/shared/view-mode.model';
 import { CollectionElementLinkType } from '../object-collection/collection-element-link.type';
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
+import { ThemedDefaultBrowseElementsComponent } from './default-browse-elements/themed-default-browse-elements.component';
 import { SearchResult } from '../search/models/search-result.model';
-import { followLink } from '../utils/follow-link-config.model';
 
 @Component({
-  selector: 'ds-browse-most-elements',
+  selector: 'ds-base-browse-most-elements',
   styleUrls: ['./browse-most-elements.component.scss'],
   templateUrl: './browse-most-elements.component.html',
+  standalone: true,
+  imports: [
+    ThemedDefaultBrowseElementsComponent,
+    AsyncPipe,
+    LowerCasePipe,
+    NgSwitch,
+    NgSwitchDefault,
+  ],
 })
 
-export class BrowseMostElementsComponent implements OnInit {
+export class BrowseMostElementsComponent implements OnInit, OnChanges {
 
+  /**
+   * The pagination options
+   */
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
+  /**
+   * The context of listable object
+   */
   @Input() context: Context;
+
+  /**
+   * Optional projection to use during the search
+   */
+  @Input() projection = 'preventMetadataSecurity';
+
+  /**
+   * Whether to show the badge label or not
+   */
+  @Input() showLabel: boolean;
 
   /**
    * Whether to show the metrics badges
    */
-  @Input() showMetrics;
+  @Input() showMetrics: boolean;
 
   /**
    * Whether to show the thumbnail preview
    */
-  @Input() showThumbnails;
+  @Input() showThumbnails: boolean;
 
   @Input() topSection: TopSection;
 
@@ -62,6 +92,10 @@ export class BrowseMostElementsComponent implements OnInit {
 
   public collectionElementLinkTypeEnum = CollectionElementLinkType;
 
+  paginatedSearchOptions$ = new BehaviorSubject<PaginatedSearchOptions>(null);
+
+  sectionTemplateType: TopSectionTemplateType;
+
   constructor(
     @Inject(APP_CONFIG) protected appConfig: AppConfig,
     @Inject(PLATFORM_ID) private platformId: any,
@@ -71,19 +105,13 @@ export class BrowseMostElementsComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-    if (isPlatformServer(this.platformId)) {
-      return;
-    }
 
-    const showThumbnails = this.showThumbnails ?? this.appConfig.browseBy.showThumbnails;
-    const followLinks = showThumbnails ? [followLink('thumbnail')] : [];
-    this.searchService.search(this.paginatedSearchOptions, null, true, true, ...followLinks).pipe(
-      getFirstCompletedRemoteData(),
-    ).subscribe((response: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>) => {
-      this.searchResults = response as any;
-      this.cdr.detectChanges();
-    });
+  ngOnInit(): void {
+    this.sectionTemplateType = this.topSection?.template ?? TopSectionTemplateType.DEFAULT;
+  }
+
+  ngOnChanges() { // trigger change detection on child components
+    this.paginatedSearchOptions$.next(this.paginatedSearchOptions);
   }
 
   async showAllResults() {

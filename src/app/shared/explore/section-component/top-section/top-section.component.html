@@ -19,11 +19,13 @@
             </div>
           </div>
         </div>
-        <ds-themed-browse-most-elements [context]="context"
+        <ds-browse-most-elements [context]="context"
                                         [paginatedSearchOptions]="paginatedSearchOptions"
-                                        [showThumbnails]="showThumbnails"
+                                        [showLabel]="true"
+                               [showMetrics]="true"
+                               [topSection]="topSection"
                                         [topSection]="topSection" [mode]="layoutMode">
-        </ds-themed-browse-most-elements>
+        </ds-browse-most-elements>
       </div>
     </div>
   </ng-container>

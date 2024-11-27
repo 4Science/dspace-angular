@@ -16,9 +16,11 @@ import { BrowseMostElementsComponent } from './browse-most-elements.component';
  * Themed wrapper for BrowseMostElementsComponent
  */
 @Component({
-  selector: 'ds-themed-browse-most-elements',
+  selector: 'ds-browse-most-elements',
   styleUrls: [],
   templateUrl: '../theme-support/themed.component.html',
+  standalone: true,
+  imports: [BrowseMostElementsComponent],
 })
 export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMostElementsComponent> {
 
@@ -26,15 +28,19 @@ export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMos
 
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
-  @Input() showMetrics;
+  @Input() projection = 'preventMetadataSecurity';
 
-  @Input() showThumbnails;
+  @Input() showLabel: boolean;
+
+  @Input() showMetrics: boolean;
 
   @Input() topSection: TopSection;
 
   @Input() mode: LayoutModeEnum;
 
-  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'showMetrics', 'showThumbnails', 'topSection', 'mode'];
+  @Input() showThumbnails: boolean;
+
+  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'projection', 'showLabel', 'showMetrics', 'showThumbnails', 'topSection', 'mode'];
 
   protected getComponentName(): string {
     return 'BrowseMostElementsComponent';

@@ -7,7 +7,7 @@ import { ParserType } from './parser-type';
 
 export class ListFieldParser extends FieldParser {
 
-  public modelFactory(fieldValue?: FormFieldMetadataValueObject | any, label?: boolean): any {
+  public modelFactory(fieldValue?: FormFieldMetadataValueObject, label?: boolean): any {
     const listModelConfig = this.initModel(null, label);
     listModelConfig.repeatable = this.configData.repeatable;
     if (this.configData.input.type === ParserType.OpenList) {

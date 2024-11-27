@@ -3,6 +3,7 @@ import {
   NO_ERRORS_SCHEMA,
   PLATFORM_ID,
 } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {
   ComponentFixture,
   TestBed,
@@ -25,13 +26,11 @@ import { buildPaginatedList } from '../../../../../../core/data/paginated-list.m
 import { PageInfo } from '../../../../../../core/shared/page-info.model';
 import { SearchService } from '../../../../../../core/shared/search/search.service';
 import {
-  FILTER_CONFIG,
   IN_PLACE_SEARCH,
-  REFRESH_FILTER,
-  SCOPE,
-  SearchFilterService,
+  REFRESH_FILTER, SCOPE,
+  SearchFilterService
 } from '../../../../../../core/shared/search/search-filter.service';
-import { SEARCH_CONFIG_SERVICE } from '../../../../../../my-dspace-page/my-dspace-page.component';
+import { SEARCH_CONFIG_SERVICE } from '../../../../../../my-dspace-page/my-dspace-configuration.service';
 import { createSuccessfulRemoteDataObject$ } from '../../../../../remote-data.utils';
 import { RouterStub } from '../../../../../testing/router.stub';
 import { SearchConfigurationServiceStub } from '../../../../../testing/search-configuration-service.stub';
@@ -40,6 +39,13 @@ import { FacetValue } from '../../../../models/facet-value.model';
 import { FilterType } from '../../../../models/filter-type.model';
 import { SearchFilterConfig } from '../../../../models/search-filter-config.model';
 import { SearchRangeFilterComponent } from './search-range-filter.component';
+import { RouteService } from '../../../../../../core/services/route.service';
+import { SearchFilterServiceStub } from '../../../../../testing/search-filter-service.stub';
+import { routeServiceStub } from '../../../../../testing/route-service.stub';
+import { ActivatedRouteStub } from '../../../../../testing/active-router.stub';
+import {
+  SearchFacetRangeOptionComponent
+} from '../../search-facet-filter-options/search-facet-range-option/search-facet-range-option.component';
 
 xdescribe('SearchRangeFilterComponent', () => {
   let comp: SearchRangeFilterComponent;
@@ -99,25 +105,31 @@ xdescribe('SearchRangeFilterComponent', () => {
     },
   ];
 
-  const searchLink = '/search';
   const selectedValues = observableOf([value1]);
-  let filterService;
-  let searchService;
-  let router;
   const page = observableOf(0);
   const platformId = 'Chrome';
 
   const mockValues = createSuccessfulRemoteDataObject$(buildPaginatedList(new PageInfo(), values));
+
+  const searchLink = '/search';
+  let filterService: SearchFilterServiceStub;
+  let router: RouterStub;
+  let searchService: SearchServiceStub;
+
   beforeEach(waitForAsync(() => {
+    filterService = new SearchFilterServiceStub();
+    router = new RouterStub();
+    searchService =  new SearchServiceStub(searchLink);
+
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), NoopAnimationsModule, FormsModule],
-      declarations: [SearchRangeFilterComponent],
+      imports: [TranslateModule.forRoot(), NoopAnimationsModule, FormsModule, SearchRangeFilterComponent],
       providers: [
-        { provide: SearchService, useValue: new SearchServiceStub(searchLink) },
-        { provide: Router, useValue: new RouterStub() },
-        { provide: FILTER_CONFIG, useValue: mockFilterConfig },
-        { provide: RemoteDataBuildService, useValue: { aggregate: () => observableOf({}) } },
-        { provide: ActivatedRoute, useValue: { queryParamMap: observableOf({ get: () => null }) } },
+        { provide: SearchService, useValue: searchService },
+        { provide: SearchFilterService, useValue: filterService },
+        { provide: Router, useValue: router },
+        { provide: RouteService, useValue: routeServiceStub },
+        { provide: RemoteDataBuildService, useValue: { aggregate: () => observableOf({}), getQueryParameterValue: () => observableOf({}) } },
+        { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
         { provide: SEARCH_CONFIG_SERVICE, useValue: new SearchConfigurationServiceStub() },
         { provide: IN_PLACE_SEARCH, useValue: false },
         { provide: PLATFORM_ID, useValue: platformId },
@@ -137,19 +149,23 @@ xdescribe('SearchRangeFilterComponent', () => {
           },
         },
       ],
-      schemas: [NO_ERRORS_SCHEMA],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).overrideComponent(SearchRangeFilterComponent, {
-      set: { changeDetection: ChangeDetectionStrategy.Default },
+      remove: {
+        imports: [
+          SearchFacetRangeOptionComponent,
+        ],
+      },
     }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SearchRangeFilterComponent);
     comp = fixture.componentInstance; // SearchPageComponent test instance
-    filterService = (comp as any).filterService;
-    searchService = (comp as any).searchService;
+    comp.filterConfig = mockFilterConfig;
+    comp.inPlaceSearch = false;
+    comp.refreshFilters = new BehaviorSubject<boolean>(false);
     spyOn(searchService, 'getFacetValuesFor').and.returnValue(mockValues);
-    router = (comp as any).router;
     fixture.detectChanges();
   });
 

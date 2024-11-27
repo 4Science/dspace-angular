@@ -21,9 +21,10 @@ import {
   TranslateModule,
 } from '@ngx-translate/core';
 
-import { LayoutModeEnum } from '../../../../core/layout/models/section.model';
+import { LayoutModeEnum, TopSectionTemplateType } from '../../../../core/layout/models/section.model';
 import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
 import { SearchService } from '../../../../core/shared/search/search.service';
+import { ThemedBrowseMostElementsComponent } from '../../../browse-most-elements/themed-browse-most-elements.component';
 import { TranslateLoaderMock } from '../../../mocks/translate-loader.mock';
 import { createSuccessfulRemoteDataObject$ } from '../../../remote-data.utils';
 import { SearchResult } from '../../../search/models/search-result.model';
@@ -73,13 +74,11 @@ describe('TopSectionComponent', () => {
             provide: TranslateLoader,
             useClass: TranslateLoaderMock,
           },
-        }),
-      ],
-      declarations: [TopSectionComponent],
+        }), TopSectionComponent],
       providers: [TopSectionComponent,
         { provide: SearchService, useValue: searchServiceStub }],
       schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
+    }).overrideComponent(TopSectionComponent, { remove: { imports: [ThemedBrowseMostElementsComponent] } }).compileComponents();
 
   }));
 
@@ -98,6 +97,7 @@ describe('TopSectionComponent', () => {
       numberOfItems: 5,
       titleKey: undefined,
       showThumbnails: false,
+      template: TopSectionTemplateType.DEFAULT,
       showAsCard: true,
       showLayoutSwitch: true,
       defaultLayoutMode: LayoutModeEnum.LIST,
@@ -142,6 +142,7 @@ describe('TopSectionComponent', () => {
         numberOfItems: 5,
         titleKey: 'lastPublications',
         showThumbnails: false,
+        template: TopSectionTemplateType.DEFAULT,
         showAsCard: true,
         showLayoutSwitch: true,
         defaultLayoutMode: LayoutModeEnum.LIST,
