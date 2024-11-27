@@ -9,7 +9,7 @@ import { TSESLint } from '@typescript-eslint/utils';
 import { RuleTester } from 'eslint';
 import { EnumType } from 'typescript';
 
-export type Meta = TSESLint.RuleMetaData<string>;
+export type Meta = TSESLint.RuleMetaData<string, unknown[]>;
 export type Valid = TSESLint.ValidTestCase<unknown[]> | RuleTester.ValidTestCase;
 export type Invalid = TSESLint.InvalidTestCase<string, unknown[]> | RuleTester.InvalidTestCase;
 
