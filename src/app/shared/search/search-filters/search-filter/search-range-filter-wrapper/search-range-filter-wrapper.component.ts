@@ -21,7 +21,6 @@ import {
   SCOPE,
   SearchFilterService,
 } from '../../../../../core/shared/search/search-filter.service';
-import { SEARCH_CONFIG_SERVICE } from '../../../../../my-dspace-page/my-dspace-page.component';
 import { FilterType } from '../../../models/filter-type.model';
 import { SearchFilterConfig } from '../../../models/search-filter-config.model';
 import {
@@ -32,12 +31,24 @@ import {
   renderFacetFor,
   renderFilterTypeEnvironment,
 } from '../search-filter-type-decorator';
+import {
+  SearchFacetRangeOptionComponent
+} from '../search-facet-filter-options/search-facet-range-option/search-facet-range-option.component';
+import { AsyncPipe, NgComponentOutlet, NgForOf } from '@angular/common';
+import { SEARCH_CONFIG_SERVICE } from '../../../../../my-dspace-page/my-dspace-configuration.service';
 
 @Component({
   selector: 'ds-search-range-filter-wrapper',
   templateUrl: './search-range-filter-wrapper.component.html',
   styleUrls: ['./search-range-filter-wrapper.component.scss'],
   animations: [facetLoad],
+  imports: [
+    SearchFacetRangeOptionComponent,
+    AsyncPipe,
+    NgComponentOutlet,
+    NgForOf
+  ],
+  standalone: true
 })
 @renderFacetFor(FilterType.range)
 export class SearchRangeFilterWrapperComponent extends SearchFacetFilterComponent implements OnInit, OnDestroy {

@@ -36,7 +36,6 @@ import {
   SCOPE,
   SearchFilterService,
 } from '../../../../../../core/shared/search/search-filter.service';
-import { SEARCH_CONFIG_SERVICE } from '../../../../../../my-dspace-page/my-dspace-page.component';
 import {
   hasValue,
   isNotEmpty,
@@ -48,6 +47,7 @@ import {
   SearchFacetFilterComponent,
 } from '../../search-facet-filter/search-facet-filter.component';
 import { renderFacetForEnvironment } from '../../search-filter-type-decorator';
+import { SEARCH_CONFIG_SERVICE } from '../../../../../../my-dspace-page/my-dspace-configuration.service';
 
 /**
  * The suffix for a range filters' minimum in the frontend URL
@@ -69,6 +69,7 @@ export const RANGE_FILTER_MAX_SUFFIX = '.max';
   styleUrls: ['./search-range-filter.component.scss'],
   templateUrl: './search-range-filter.component.html',
   animations: [facetLoad],
+  standalone: true
 })
 
 /**

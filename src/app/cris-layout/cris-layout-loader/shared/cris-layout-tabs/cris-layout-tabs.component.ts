@@ -138,7 +138,7 @@ export abstract class CrisLayoutTabsComponent {
   navigateToTab(tab: CrisLayoutTab): void {
     this.activeTab$.next(tab);
     const itemPageRoute = (getItemPageRoute(this.item) + '/' + tab.shortname);
-    this.router.navigateByUrl(itemPageRoute, { onSameUrlNavigation: 'ignore' }).then(() => {
+    this.router.navigateByUrl(itemPageRoute).then(() => {
       this.location.replaceState(itemPageRoute);
     });
   }
