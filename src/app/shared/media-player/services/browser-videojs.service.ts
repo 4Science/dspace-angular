@@ -19,10 +19,9 @@ export class BrowserVideojsService implements VideojsService {
     controls: true,
     bigPlayButton: false,
     autoplay: false,
-    fluid: false,
+    responsive: true,
+    fluid: true,
     loop: false,
-    with: 600,
-    height: 480,
     plugins: {
       wavesurfer: {
         backend: 'MediaElement',
@@ -44,10 +43,11 @@ export class BrowserVideojsService implements VideojsService {
     controls: true,
     bigPlayButton: true,
     autoplay: false,
-    fluid: false,
     loop: false,
     with: 600,
     height: 480,
+    responsive: true,
+    fluid: true,
   };
 
   /**
@@ -76,4 +76,5 @@ export class BrowserVideojsService implements VideojsService {
 
     return videoPlayer;
   }
+
 }

@@ -128,10 +128,10 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
     @Inject(IN_PLACE_SEARCH) public inPlaceSearch: boolean,
     @Inject(FILTER_CONFIG) public filterConfig: SearchFilterConfig,
     @Inject(REFRESH_FILTER) public refreshFilters: BehaviorSubject<boolean>,
-    @Inject(SCOPE) public scope: string,
     @Inject(PLATFORM_ID) protected platformId: any,
+    @Inject(SCOPE) public scope: string,
   ) {
-    super(searchService, filterService, rdbs, router, searchConfigService);
+    super(searchService, filterService, rdbs, router, searchConfigService, inPlaceSearch, filterConfig, refreshFilters, scope);
   }
 
   /**

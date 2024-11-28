@@ -2459,6 +2459,8 @@
 
   "error.validation.filerequired": "The file upload is mandatory",
 
+  "error.validation.filenotfound": "File not found",
+
   "error.validation.required": "This field is required",
 
   "error.validation.NotValidEmail": "This is not a valid email",
@@ -6868,6 +6870,10 @@
 
   "submission.sections.describe.relationship-lookup.external-source.import-modal.isOrgUnitOfProject.added.new-entity": "Successfully imported and added external organization to the selection",
 
+  "submission.sections.external-upload.upload-success-notice": "Upload executed succesfully",
+
+  "submission.sections.external-upload.upload-error-notice": "Upload failed. Please try again",
+
   "submission.sections.describe.relationship-lookup.search-tab.deselect-all": "Deselect all",
 
   "submission.sections.describe.relationship-lookup.search-tab.deselect-page": "Deselect page",
@@ -7098,6 +7104,14 @@
 
   "submission.sections.ccLicense.confirmation": "I grant the license above",
 
+  "submission.sections.external-upload.info": "You can import from remote url or local path",
+
+  "submission.sections.external-upload.placeholder": "Insert remote url or local path",
+
+  "submission.sections.external-upload.source": "Source",
+
+  "submission.sections.external-upload.import": "Import from source",
+
   "submission.sections.general.add-more": "Add more",
 
   "submission.sections.general.cannot_deposit": "Deposit cannot be completed due to errors in the form.<br>Please fill out all required fields to complete the deposit.",
@@ -7154,6 +7168,8 @@
 
   "submission.sections.submit.progressbar.describe.event": "Event basic information",
 
+  "submission.sections.submit.progressbar.describe.external-upload": "External upload",
+
   "submission.sections.submit.progressbar.describe.funding": "Funding basic information",
 
   "submission.sections.submit.progressbar.describe.journal": "Journal basic information",
@@ -7197,6 +7213,8 @@
   "submission.sections.submit.progressbar.describe.steptwo": "Describe",
 
   "submission.sections.submit.progressbar.duplicates": "Potential duplicates",
+
+  "submission.sections.submit.progressbar.external-upload": "External upload",
 
   "submission.sections.submit.progressbar.identifiers": "Identifiers",
 
@@ -8267,6 +8285,8 @@
 
   "map.coordinates-invalid": "Coordinates are not valid",
 
+  "map.no-key-configured": "No Google Maps key found in the configuration",
+
   "statistics-page.export-map-as-image": "Export map",
 
   "curation-task.task.hocr.label": "Extract text (HOCR) from images",
@@ -9153,6 +9173,14 @@
   "form.other-information.selection.alternative-names": "Select alternative name",
 
   "meta.tag.missing.description": "No description available",
+
+
+  "vocabulary-treeview.header.fondboxtree": "Fond Tree",
+
+  "vocabulary-treeview.header.journalfondboxtree": "Journal Fond Tree",
+
+  "vocabulary-treeview.header.aggregationboxtree": "Collection Tree",
+
 
   "metadata-link-view.popover.label.Person.dc.title": "Fullname",
 

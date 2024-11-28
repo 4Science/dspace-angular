@@ -13,5 +13,6 @@ export enum SectionsType {
   Duplicates = 'duplicates',
   DetectDuplicate = 'detect-duplicate',
   Correction = 'correction',
-  Unpaywall = 'unpaywall'
+  Unpaywall = 'unpaywall',
+  ExternalUpload = 'external-upload',
 }

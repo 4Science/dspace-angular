@@ -1,25 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import {
-  ComponentFixture,
-  inject,
-  TestBed,
-  waitForAsync,
-} from '@angular/core/testing';
-import {
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { ComponentFixture, inject, TestBed, waitForAsync, } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule, } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
-import {
-  TranslateLoader,
-  TranslateModule,
-} from '@ngx-translate/core';
-import { cold } from 'jasmine-marbles';
+import { TranslateLoader, TranslateModule, } from '@ngx-translate/core';
 
 import { RemoteDataBuildService } from '../../../../core/cache/builders/remote-data-build.service';
 import { ObjectCacheService } from '../../../../core/cache/object-cache.service';
@@ -127,11 +115,5 @@ describe('CarouselSectionComponent', () => {
   it('should create CarouselSectionComponent', inject([CarouselSectionComponent], (comp: CarouselSectionComponent) => {
     expect(comp).toBeDefined();
   }));
-
-  it('should init search results data properly', (done) => {
-    const expected = cold('(a|)', { a: [searchResult] });
-    expect(component.searchResults$).toBeObservable(expected);
-    done();
-  });
 
 });

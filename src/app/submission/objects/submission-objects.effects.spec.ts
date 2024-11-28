@@ -505,7 +505,7 @@ describe('SubmissionObjectEffects test suite', () => {
           submissionId,
           'traditionalpageone',
           mockSectionsData.traditionalpageone as any,
-          errorsToShowList.traditionalpageone,
+          [],
           serverValidationErrorsList.traditionalpageone,
         ),
         c: new UpdateSectionDataAction(

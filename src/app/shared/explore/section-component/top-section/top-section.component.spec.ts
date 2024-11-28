@@ -29,6 +29,7 @@ import { TranslateLoaderMock } from '../../../mocks/translate-loader.mock';
 import { createSuccessfulRemoteDataObject$ } from '../../../remote-data.utils';
 import { SearchResult } from '../../../search/models/search-result.model';
 import { TopSectionComponent } from './top-section.component';
+import { LayoutModeEnum } from '../../../../core/layout/models/section.model';
 
 describe('TopSectionComponent', () => {
   let component: TopSectionComponent;
@@ -97,6 +98,10 @@ describe('TopSectionComponent', () => {
       numberOfItems: 5,
       titleKey: undefined,
       showThumbnails: false,
+      showAsCard: true,
+      showLayoutSwitch: true,
+      defaultLayoutMode: LayoutModeEnum.LIST,
+      showAllResults: true,
       template: TopSectionTemplateType.DEFAULT,
       showAsCard: true,
       showLayoutSwitch: true,
@@ -142,6 +147,10 @@ describe('TopSectionComponent', () => {
         numberOfItems: 5,
         titleKey: 'lastPublications',
         showThumbnails: false,
+        showAsCard: true,
+        showLayoutSwitch: true,
+        defaultLayoutMode: LayoutModeEnum.LIST,
+        showAllResults: true,
         template: TopSectionTemplateType.DEFAULT,
         showAsCard: true,
         showLayoutSwitch: true,

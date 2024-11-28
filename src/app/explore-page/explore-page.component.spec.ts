@@ -1,30 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import {
-  ComponentFixture,
-  inject,
-  TestBed,
-  waitForAsync,
-} from '@angular/core/testing';
-import {
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import {
-  BrowserModule,
-  By,
-} from '@angular/platform-browser';
+import { ComponentFixture, inject, TestBed, waitForAsync, } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule, } from '@angular/forms';
+import { BrowserModule, By, } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {
-  TranslateLoader,
-  TranslateModule,
-} from '@ngx-translate/core';
-import {
-  Observable,
-  of,
-} from 'rxjs';
+import { TranslateLoader, TranslateModule, } from '@ngx-translate/core';
+import { Observable, of, } from 'rxjs';
 
 import { RemoteData } from '../core/data/remote-data';
 import {
@@ -37,12 +20,24 @@ import {
   TopSectionTemplateType,
 } from '../core/layout/models/section.model';
 import { SectionDataService } from '../core/layout/section-data.service';
-import { ThemedBrowseSectionComponent } from '../shared/explore/section-component/browse-section/themed-browse-section.component';
-import { ThemedCountersSectionComponent } from '../shared/explore/section-component/counters-section/themed-counters-section.component';
-import { ThemedFacetSectionComponent } from '../shared/explore/section-component/facet-section/themed-facet-section.component';
-import { ThemedSearchSectionComponent } from '../shared/explore/section-component/search-section/themed-search-section.component';
-import { ThemedTextSectionComponent } from '../shared/explore/section-component/text-section/themed-text-section.component';
-import { ThemedTopSectionComponent } from '../shared/explore/section-component/top-section/themed-top-section.component';
+import {
+  ThemedBrowseSectionComponent
+} from '../shared/explore/section-component/browse-section/themed-browse-section.component';
+import {
+  ThemedCountersSectionComponent
+} from '../shared/explore/section-component/counters-section/themed-counters-section.component';
+import {
+  ThemedFacetSectionComponent
+} from '../shared/explore/section-component/facet-section/themed-facet-section.component';
+import {
+  ThemedSearchSectionComponent
+} from '../shared/explore/section-component/search-section/themed-search-section.component';
+import {
+  ThemedTextSectionComponent
+} from '../shared/explore/section-component/text-section/themed-text-section.component';
+import {
+  ThemedTopSectionComponent
+} from '../shared/explore/section-component/top-section/themed-top-section.component';
 import { TranslateLoaderMock } from '../shared/mocks/translate-loader.mock';
 import { createSuccessfulRemoteDataObject$ } from '../shared/remote-data.utils';
 import { ExplorePageComponent } from './explore-page.component';
@@ -68,12 +63,12 @@ describe('ExploreComponent', () => {
     sortField: 'dc.date.accessioned',
     numberOfItems: 5,
     titleKey: 'lastPublications',
-    template: TopSectionTemplateType.DEFAULT,
     showThumbnails: false,
     showAsCard: true,
     showLayoutSwitch: true,
     defaultLayoutMode: LayoutModeEnum.LIST,
     showAllResults: true,
+    template: TopSectionTemplateType.DEFAULT
   };
 
   const searchComponent: SearchSection = {

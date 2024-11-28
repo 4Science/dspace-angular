@@ -3,7 +3,7 @@ import {
   NgIf,
 } from '@angular/common';
 import {
-  Component,
+ ChangeDetectorRef, Component,
   Inject,
   Input,
   OnInit,
@@ -56,10 +56,16 @@ export class GooglemapsComponent implements OnInit {
    */
   longitude: string;
 
+  /**
+   * A flag that indicates if the google maps api key is not configured
+   */
+  noKeyConfigured = false;
+
   constructor(
     @Inject(DOCUMENT) private _document: Document,
     private renderer: Renderer2,
     private configService: ConfigurationDataService,
+    private cdr: ChangeDetectorRef,
   ) {
   }
 
@@ -75,6 +81,9 @@ export class GooglemapsComponent implements OnInit {
           this.loadScript(this.buildMapUrl(res?.payload?.values[0])).then(() => {
             this.loadMap();
           });
+        } else if (res.hasSucceeded && !res?.payload?.values[0]) {
+          this.noKeyConfigured = true;
+          this.cdr.detectChanges();
         }
       });
     }

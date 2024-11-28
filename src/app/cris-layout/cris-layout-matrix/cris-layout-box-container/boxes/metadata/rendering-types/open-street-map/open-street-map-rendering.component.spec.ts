@@ -82,6 +82,7 @@ describe('OpenStreetMapRenderingComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    expect(component.coordinates).toBe(metadataValue.value);
   });
 
 });

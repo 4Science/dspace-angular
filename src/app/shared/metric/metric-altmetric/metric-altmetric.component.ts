@@ -48,6 +48,7 @@ export class MetricAltmetricComponent extends BaseEmbeddedMetricComponent implem
     if (hasValue(this.metric.remark)) {
       this.remark = this.parseRemark();
     }
+    super.ngOnInit();
   }
 
   applyScript(): void {

@@ -101,6 +101,8 @@ import { DsDynamicScrollableDropdownComponent } from './models/scrollable-dropdo
 import { DynamicScrollableDropdownModel } from './models/scrollable-dropdown/dynamic-scrollable-dropdown.model';
 import { DsDynamicTagComponent } from './models/tag/dynamic-tag.component';
 import { DynamicTagModel } from './models/tag/dynamic-tag.model';
+import { DynamicMarkdownModel } from './models/markdown/dynamic-markdown.model';
+import { DsDynamicMarkdownComponent } from './models/markdown/dynamic-markdown.component';
 
 function getMockDsDynamicTypeBindRelationService(): DsDynamicTypeBindRelationService {
   return jasmine.createSpyObj('DsDynamicTypeBindRelationService', {

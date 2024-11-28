@@ -181,7 +181,6 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
       it('should display other dropdown menu option', () => {
         const de = scrollableDropdownFixture.debugElement.query(By.css('input.form-control'));
         const btnEl = de.nativeElement;
-
         btnEl.click();
         scrollableDropdownFixture.detectChanges();
 
@@ -190,22 +189,23 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
         scrollableDropdownComp.pageInfo.totalPages = 1;
         scrollableDropdownFixture.detectChanges();
 
-        const deMenu = scrollableDropdownFixture.debugElement.query(By.css('#otherOption'));
+        const deMenu = scrollableDropdownFixture.debugElement.query(By.css('[data-test="otherOption"]'));
 
         expect(deMenu).toBeTruthy();
       });
 
       it('should not display other dropdown menu option', () => {
+        const de = scrollableDropdownFixture.debugElement.query(By.css('input.form-control'));
+        const btnEl = de.nativeElement;
+        btnEl.click();
+        scrollableDropdownFixture.detectChanges();
+
         scrollableDropdownComp.model.openType = true;
         scrollableDropdownComp.pageInfo.currentPage = 2;
         scrollableDropdownComp.pageInfo.totalPages = 3;
-        const de = scrollableDropdownFixture.debugElement.query(By.css('input.form-control'));
-        const btnEl = de.nativeElement;
-
-        btnEl.click();
-
         scrollableDropdownFixture.detectChanges();
-        const deMenu = scrollableDropdownFixture.debugElement.query(By.css('#otherOption'));
+
+        const deMenu = scrollableDropdownFixture.debugElement.query(By.css('[data-test="otherOption"]'));
 
         expect(deMenu).toBeFalsy();
       });
@@ -250,17 +250,17 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
         const de = scrollableDropdownFixture.debugElement.query(By.css('input.form-control'));
         let btnEl = de.nativeElement;
 
-        btnEl.click();
-        scrollableDropdownFixture.detectChanges();
+        btnEl.click();scrollableDropdownFixture.detectChanges();
 
         scrollableDropdownComp.model.openType = true;
         scrollableDropdownComp.pageInfo.currentPage = 2;
         scrollableDropdownComp.pageInfo.totalPages = 1;
+        scrollableDropdownFixture.detectChanges();
         scrollableDropdownComp.otherListEntry = selectedValue.value;
 
         scrollableDropdownFixture.detectChanges();
 
-        btnEl = scrollableDropdownFixture.debugElement.nativeElement.querySelector('#otherOptionBtn');
+        btnEl = scrollableDropdownFixture.debugElement.nativeElement.querySelector('[data-test="otherOptionBtn"]');
 
         btnEl.click();
         scrollableDropdownFixture.detectChanges();

@@ -21,19 +21,19 @@ describe('LocationService', () => {
 
   describe('Test utility methods', () => {
     it('isCoordinateString() should validate coordinate strings correctly', () => {
-      expect(service.isCoordinateString(null)).toBeFalse();             // invalid pattern
-      expect(service.isCoordinateString(undefined)).toBeFalse();        // invalid pattern
-      expect(service.isCoordinateString('qwerty')).toBeFalse();         // invalid pattern
-      expect(service.isCoordinateString('45')).toBeFalse();             // invalid pattern, wrong array size
-      expect(service.isCoordinateString('45,')).toBeFalse();            // invalid pattern, wrong array size
-      expect(service.isCoordinateString(',45')).toBeFalse();            // invalid pattern, wrong array size
-      expect(service.isCoordinateString('45,45')).toBeTrue();
-      expect(service.isCoordinateString('45,45,')).toBeFalse();         // invalid pattern, wrong array size
-      expect(service.isCoordinateString('45,45,45')).toBeFalse();       // invalid pattern, wrong array size
-      expect(service.isCoordinateString('.0,.0')).toBeFalse();          // valid numbers, but invalid pattern
-      expect(service.isCoordinateString('45.000,45.000')).toBeTrue();
-      expect(service.isCoordinateString('45.000, 45.000')).toBeFalse(); // it contains a space
-      expect(service.isCoordinateString('200,200')).toBeTrue();         // invalid numbers, but valid pattern
+      expect(service.isDecimalCoordinateString(null)).toBeFalse();             // invalid pattern
+      expect(service.isDecimalCoordinateString(undefined)).toBeFalse();        // invalid pattern
+      expect(service.isDecimalCoordinateString('qwerty')).toBeFalse();         // invalid pattern
+      expect(service.isDecimalCoordinateString('45')).toBeFalse();             // invalid pattern, wrong array size
+      expect(service.isDecimalCoordinateString('45,')).toBeFalse();            // invalid pattern, wrong array size
+      expect(service.isDecimalCoordinateString(',45')).toBeFalse();            // invalid pattern, wrong array size
+      expect(service.isDecimalCoordinateString('45,45')).toBeTrue();
+      expect(service.isDecimalCoordinateString('45,45,')).toBeFalse();         // invalid pattern, wrong array size
+      expect(service.isDecimalCoordinateString('45,45,45')).toBeFalse();       // invalid pattern, wrong array size
+      expect(service.isDecimalCoordinateString('.0,.0')).toBeFalse();          // valid numbers, but invalid pattern
+      expect(service.isDecimalCoordinateString('45.000,45.000')).toBeTrue();
+      expect(service.isDecimalCoordinateString('45.000, 45.000')).toBeFalse(); // it contains a space
+      expect(service.isDecimalCoordinateString('200,200')).toBeTrue();         // invalid numbers, but valid pattern
     });
 
     it('isValidCoordinateString() should validate coordinate strings and check for their values correctly', () => {
@@ -42,15 +42,15 @@ describe('LocationService', () => {
     });
 
     it('should validate coordinate pairs correctly', () => {
-      expect(service.isValidCoordinatePair(0, 0)).toBeTrue();
-      expect(service.isValidCoordinatePair(45, 45)).toBeTrue();
-      expect(service.isValidCoordinatePair(-45, -45)).toBeTrue();
-      expect(service.isValidCoordinatePair(200, 0)).toBeFalse();
-      expect(service.isValidCoordinatePair(0, 200)).toBeFalse();
-      expect(service.isValidCoordinatePair(-200, 0)).toBeFalse();
-      expect(service.isValidCoordinatePair(0, -200)).toBeFalse();
-      expect(service.isValidCoordinatePair(NaN, 0)).toBeFalse();
-      expect(service.isValidCoordinatePair(0, NaN)).toBeFalse();
+      expect(service.isValidDecimalCoordinatePair(0, 0)).toBeTrue();
+      expect(service.isValidDecimalCoordinatePair(45, 45)).toBeTrue();
+      expect(service.isValidDecimalCoordinatePair(-45, -45)).toBeTrue();
+      expect(service.isValidDecimalCoordinatePair(200, 0)).toBeFalse();
+      expect(service.isValidDecimalCoordinatePair(0, 200)).toBeFalse();
+      expect(service.isValidDecimalCoordinatePair(-200, 0)).toBeFalse();
+      expect(service.isValidDecimalCoordinatePair(0, -200)).toBeFalse();
+      expect(service.isValidDecimalCoordinatePair(NaN, 0)).toBeFalse();
+      expect(service.isValidDecimalCoordinatePair(0, NaN)).toBeFalse();
     });
   });
 });

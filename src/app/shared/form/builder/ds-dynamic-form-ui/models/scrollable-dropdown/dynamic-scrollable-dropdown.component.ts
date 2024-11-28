@@ -356,6 +356,7 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
           list.pageInfo.totalElements,
           list.pageInfo.totalPages,
         );
+        this.selectedIndex = 0;
         // After all entries have been retrieved, if the component is an opendropdown then
         // check if the current value is a custom value and add it to the list
         const isLastPage = this.pageInfo.currentPage === this.pageInfo.totalPages;
@@ -367,7 +368,6 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
             this.optionsList.push(object);
           }
         }
-        this.selectedIndex = 0;
         this.cdr.detectChanges();
       });
   }
@@ -410,7 +410,7 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
       value: value,
       display: display,
       otherInformation: otherInformation,
-      type: 'vocabularyEntry',
+      type: 'vocabularyEntry'
     });
     return object;
   }

@@ -4,12 +4,12 @@ import {
 } from '@angular/common';
 import {
   Component,
-  Inject,
+ HostListener, Inject,
   Input,
   OnDestroy,
   OnInit,
   PLATFORM_ID,
-  ViewEncapsulation,
+ ViewChild, ViewEncapsulation,
 } from '@angular/core';
 import {
   BehaviorSubject,
@@ -18,6 +18,7 @@ import {
 
 import { MediaViewerItem } from '../../core/shared/media-viewer-item.model';
 import { VideojsService } from './services/videojs.service';
+import { hasValue } from '../empty.util';
 
 @Component({
   selector: 'ds-media-player',
@@ -36,6 +37,17 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
    * If given, the uuid of the bitstream to start playing
    */
   @Input() startUUID: string;
+
+  /**
+   * A reference to the video player container
+   */
+  @ViewChild('videoContainerRef', {static: false}) videoContainerRef;
+
+  /**
+   * A reference to the video playlist container
+   */
+  @ViewChild('playlistContainerRef', {static: false}) playlistContainerRef;
+
 
   /**
    * A boolean representing whether audio player is initialized or not
@@ -116,15 +128,15 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
     this.isVideo$.next(this.mediaIsVideo(item));
     if (this.isVideo$.value) {
       if (this.isVideoPlayerInitialized$.value) {
-        this.changePlayingItem(item);
+        this.changePlayingItem();
       } else {
-        this.initPlayer(item);
+        this.initPlayer();
       }
     } else {
       if (this.isAudioPlayerInitialized$.value) {
-        this.changePlayingItem(item);
+        this.changePlayingItem();
       } else {
-        this.initPlayer(item);
+        this.initPlayer();
       }
     }
   }
@@ -139,12 +151,19 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Listen to window resize to adapt playlist size based on video size
+   */
+  @HostListener('window:resize')
+  onResize(): void {
+    this.resizeMediaPlaylist();
+  }
+
+  /**
    * Init videojs player with the given item as source
    *
-   * @param item
    * @private
    */
-  private initPlayer(item: MediaViewerItem): void {
+  private initPlayer(): void {
     if (this.isVideo$.value) {
       this.isVideoPlayerInitialized$.next(true);
       // stop audio player when switching from audio to video
@@ -154,6 +173,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
           this._document.getElementById('video_player'),
           this.currentItem$?.value,
         );
+        this.resizeMediaPlaylist();
       }, 100);
 
     } else {
@@ -165,6 +185,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
           this._document.getElementById('audio_player'),
           this.currentItem$?.value,
         );
+        this.resizeMediaPlaylist();
       }, 100);
 
     }
@@ -178,10 +199,9 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
   /**
    * Change the source according to the given item
    *
-   * @param item
    * @private
    */
-  private changePlayingItem(item: MediaViewerItem) {
+  private changePlayingItem() {
     if (this.isVideo$.value) {
       // stop audio player when switching from audio to video
       this.disposeAudioPlayer();
@@ -244,6 +264,15 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
       this.videoPlayer.dispose();
       this.videoPlayer = false;
       this.isVideoPlayerInitialized$.next(false);
+    }
+  }
+
+  /**
+   * Resize playlist container
+   */
+  private resizeMediaPlaylist(): void {
+    if (hasValue(this.playlistContainerRef?.nativeElement)) {
+      this.playlistContainerRef.nativeElement.style.height = `${this.videoContainerRef.nativeElement.getBoundingClientRect().height}px`;
     }
   }
 }

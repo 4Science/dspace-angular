@@ -61,11 +61,11 @@
               [attr.id]="listEntry.display === (currentValue|async) ? ('combobox_' + id + '_selected') : null">
         {{inputFormatter(listEntry)}}
       </button>
-      <div class="d-flex align-items-center pl-4 pr-3 py-2" id="otherOption"
+      <div class="d-flex align-items-center pl-4 pr-3 py-2" data-test="otherOption"
            *ngIf="model.openType && (pageInfo.currentPage >= pageInfo.totalPages)">
         <label class="m-0">{{'form.other-option' | translate}}</label>
-        <input id="otherOptionInput" type="text" class="form-control form-control-sm mx-2" [(ngModel)]="otherListEntry" (keyup.enter)="addListItem(sdRef)" />
-        <button id="otherOptionBtn" class="btn btn-primary btn-sm" type="button"
+        <input data-test="otherOptionInput" type="text" class="form-control form-control-sm mx-2" [(ngModel)]="otherListEntry" (keyup.enter)="addListItem(sdRef)" />
+        <button data-test="otherOptionBtn" class="btn btn-primary btn-sm" type="button"
                 (click)="addListItem(sdRef)" [disabled]="addButtonDisabled">
           {{'form.other-option.add-button' | translate}}
         </button>

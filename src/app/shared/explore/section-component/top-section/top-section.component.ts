@@ -15,7 +15,7 @@ import {
 import {
   LayoutModeEnum,
   TopSection,
-} from '../../../../core/layout/models/section.model';
+} from './../../../../core/layout/models/section.model';
 import { Context } from '../../../../core/shared/context.model';
 import { ThemedBrowseMostElementsComponent } from '../../../browse-most-elements/themed-browse-most-elements.component';
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';

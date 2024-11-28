@@ -3,7 +3,7 @@ import {
   Input,
 } from '@angular/core';
 
-import { TopSection } from '../../../core/layout/models/section.model';
+import { LayoutModeEnum, TopSection } from '../../../core/layout/models/section.model';
 import { Context } from '../../../core/shared/context.model';
 import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
 import { ThemedComponent } from '../../theme-support/themed.component';
@@ -33,13 +33,15 @@ export class ThemedDefaultBrowseElementsComponent extends ThemedComponent<Defaul
 
   @Input() projection: string;
 
+  @Input() mode: LayoutModeEnum;
+
   @Input() showMetrics: boolean;
 
   @Input() showThumbnails: boolean;
 
   @Input() showLabel: boolean;
 
-  protected inAndOutputNames: (keyof DefaultBrowseElementsComponent & keyof this)[] = ['paginatedSearchOptions', 'context', 'showMetrics', 'showThumbnails', 'showLabel', 'projection'];
+  protected inAndOutputNames: (keyof DefaultBrowseElementsComponent & keyof this)[] = ['paginatedSearchOptions', 'context', 'showMetrics', 'showThumbnails', 'showLabel', 'projection', 'mode'];
 
   protected getComponentName(): string {
     return 'DefaultBrowseElementsComponent';

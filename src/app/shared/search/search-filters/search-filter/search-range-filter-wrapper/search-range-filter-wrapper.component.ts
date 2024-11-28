@@ -1,11 +1,4 @@
-import {
-  Component,
-  Inject,
-  Injector,
-  OnDestroy,
-  OnInit,
-  PLATFORM_ID,
-} from '@angular/core';
+import { Component, Inject, Injector, OnDestroy, OnInit, PLATFORM_ID, } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
@@ -23,14 +16,8 @@ import {
 } from '../../../../../core/shared/search/search-filter.service';
 import { FilterType } from '../../../models/filter-type.model';
 import { SearchFilterConfig } from '../../../models/search-filter-config.model';
-import {
-  facetLoad,
-  SearchFacetFilterComponent,
-} from '../search-facet-filter/search-facet-filter.component';
-import {
-  renderFacetFor,
-  renderFilterTypeEnvironment,
-} from '../search-filter-type-decorator';
+import { facetLoad, SearchFacetFilterComponent, } from '../search-facet-filter/search-facet-filter.component';
+import { renderFacetFor, renderFilterTypeEnvironment, } from '../search-filter-type-decorator';
 import {
   SearchFacetRangeOptionComponent
 } from '../search-facet-filter-options/search-facet-range-option/search-facet-range-option.component';

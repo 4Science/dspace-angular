@@ -1,0 +1,13 @@
+<ng-container *ngIf="(searchResults$ | async) as searchResults">
+      <ds-object-grid
+        [configStyle]="topSection?.cardStyle"
+        [columnStyle]="topSection?.cardColumnStyle"
+        [config]="paginatedSearchOptions.pagination"
+        [sortConfig]="paginatedSearchOptions.sort"
+        [objects]="searchResults"
+        [linkType]="collectionElementLinkTypeEnum.Link"
+        [context]="context"
+        [noPagination]="true"
+      >
+      </ds-object-grid>
+</ng-container>

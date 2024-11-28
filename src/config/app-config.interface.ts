@@ -1,13 +1,15 @@
-import {
-  InjectionToken,
-  makeStateKey,
-  Type,
-} from '@angular/core';
+import { InjectionToken, makeStateKey, Type, } from '@angular/core';
 
-import { AdminNotifyMetricsRow } from '../app/admin/admin-notify-dashboard/admin-notify-metrics/admin-notify-metrics.model';
+import {
+  AdminNotifyMetricsRow
+} from '../app/admin/admin-notify-dashboard/admin-notify-metrics/admin-notify-metrics.model';
 import { HALDataService } from '../app/core/data/base/hal-data-service.interface';
-import { FieldRenderingType } from '../app/cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/field-rendering-type';
-import { MetadataBoxFieldRenderOptions } from '../app/cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/rendering-type.model';
+import {
+  FieldRenderingType
+} from '../app/cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/field-rendering-type';
+import {
+  MetadataBoxFieldRenderOptions
+} from '../app/cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/rendering-type.model';
 import { ActuatorsConfig } from './actuators.config';
 import { AddToAnyPluginConfig } from './add-to-any-plugin-config';
 import { AdvancedAttachmentRenderingConfig } from './advanced-attachment-rendering.config';
@@ -30,10 +32,7 @@ import { IdentifierSubtypesConfig } from './identifier-subtypes-config.interface
 import { InfoConfig } from './info-config.interface';
 import { ItemConfig } from './item-config.interface';
 import { LangConfig } from './lang-config.interface';
-import {
-  CrisLayoutConfig,
-  LayoutConfig,
-} from './layout-config.interfaces';
+import { CrisLayoutConfig, LayoutConfig, } from './layout-config.interfaces';
 import { LoaderConfig } from './loader-config.interfaces';
 import { LocationConfig } from './location-config.interface';
 import { MarkdownConfig } from './markdown-config.interface';

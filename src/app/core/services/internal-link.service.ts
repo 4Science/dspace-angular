@@ -7,6 +7,7 @@ import {
   NativeWindowRef,
   NativeWindowService,
 } from './window.service';
+import { isEmpty } from '../../shared/empty.util';
 
 /**
  * LinkService provides utility functions for working with links, such as checking if a link is internal
@@ -29,6 +30,10 @@ export class InternalLinkService {
    * @returns A boolean indicating whether the link is internal.
    */
   public isLinkInternal(link: string): boolean {
+    if (isEmpty(this.currentURL)) {
+      return false;
+    }
+
     // Create a Domain object for the provided link
     const currentDomain = new URL(this.currentURL).hostname;
 
@@ -46,6 +51,10 @@ export class InternalLinkService {
    * @returns The relative path for the given internal link.
    */
   public getRelativePath(link: string): string {
+    if (isEmpty(this.currentURL)) {
+      return link;
+    }
+
     // Obtaining the base URL, disregarding query parameters
     const baseUrl = link.split('?')[0];
     const currentDomain = new URL(this.currentURL).hostname;

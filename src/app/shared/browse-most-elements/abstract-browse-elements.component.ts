@@ -32,6 +32,7 @@ import { CollectionElementLinkType } from '../object-collection/collection-eleme
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
 import { SearchResult } from '../search/models/search-result.model';
 import { followLink } from '../utils/follow-link-config.model';
+import { LayoutModeEnum, TopSection } from '../../core/layout/models/section.model';
 
 @Component({
   template: '',
@@ -59,6 +60,8 @@ export abstract class AbstractBrowseElementsComponent implements OnInit, OnChang
    * Optional projection to use during the search
    */
   @Input() projection = 'preventMetadataSecurity';
+
+  @Input() mode: LayoutModeEnum;
 
   /**
    * Whether to show the badge label or not
