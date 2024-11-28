@@ -16,7 +16,10 @@ import {
 import { APP_CONFIG } from '../../../config/app-config.interface';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { RemoteData } from '../../core/data/remote-data';
-import { TopSection } from '../../core/layout/models/section.model';
+import {
+  LayoutModeEnum,
+  TopSection,
+} from '../../core/layout/models/section.model';
 import { Context } from '../../core/shared/context.model';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
 import { Item } from '../../core/shared/item.model';
@@ -32,7 +35,6 @@ import { CollectionElementLinkType } from '../object-collection/collection-eleme
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
 import { SearchResult } from '../search/models/search-result.model';
 import { followLink } from '../utils/follow-link-config.model';
-import { LayoutModeEnum, TopSection } from '../../core/layout/models/section.model';
 
 @Component({
   template: '',

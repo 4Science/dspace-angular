@@ -24,8 +24,10 @@ import { TabDataService } from '../core/layout/tab-data.service';
 import { HardRedirectService } from '../core/services/hard-redirect.service';
 import { Item } from '../core/shared/item.model';
 import { getFirstCompletedRemoteData } from '../core/shared/operators';
-import { isNotEmpty } from '../shared/empty.util';
-import { isEmpty } from '../shared/empty.util';
+import {
+  isEmpty,
+  isNotEmpty,
+} from '../shared/empty.util';
 import { createFailedRemoteDataObject$ } from '../shared/remote-data.utils';
 import { getItemPageRoute } from './item-page-routing-paths';
 
@@ -60,9 +62,9 @@ export const crisItemPageTabResolver: ResolveFn<RemoteData<PaginatedList<CrisLay
             if (tabsRD.hasSucceeded && tabsRD?.payload?.page?.length > 0) {
               // By splitting the url with uuid we can understand if the item is primary item page or a tab
               const urlSplit = state.url.split(route.params.id);
-                const tabArguments = urlSplit[1]?.split('/');
-                const givenTab = tabArguments[1];
-                const hasViewer: boolean = isNotEmpty(tabArguments[2]) && tabArguments[2] === 'viewer';
+              const tabArguments = urlSplit[1]?.split('/');
+              const givenTab = tabArguments[1];
+              const hasViewer: boolean = isNotEmpty(tabArguments[2]) && tabArguments[2] === 'viewer';
               const itemPageRoute = getItemPageRoute(itemRD.payload);
               const isValidTab = isEmpty(givenTab) || tabsRD.payload.page.some((tab) => `/${tab.shortname}` === givenTab);
 

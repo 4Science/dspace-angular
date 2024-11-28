@@ -1,31 +1,30 @@
 import { AdvancedAttachmentComponent } from './advanced-attachment/advanced-attachment.component';
 import { AttachmentComponent } from './attachment/attachment.component';
+import { BrowseComponent } from './browse/browse.component';
 import { CrisrefComponent } from './crisref/crisref.component';
 import { DateComponent } from './date/date.component';
 import { FieldRenderingType } from './field-rendering-type';
+import { GmapComponent } from './gmap/gmap.component';
 import { HeadingComponent } from './heading/heading.component';
+import { HtmlComponent } from './html/html.component';
 import { IdentifierComponent } from './identifier/identifier.component';
 import { LinkComponent } from './link/link.component';
 import { LinkAuthorityComponent } from './link-authority/link-authority.component';
 import { LongtextComponent } from './longtext/longtext.component';
+import { MarkdownComponent } from './markdown/markdown.component';
+import { GooglemapsGroupComponent } from './metadataGroup/googlemaps-group/googlemaps-group.component';
 import { InlineComponent } from './metadataGroup/inline/inline.component';
+import { OpenstreetmapGroupComponent } from './metadataGroup/openstreetmap-group/openstreetmap-group.component';
 import { TableComponent } from './metadataGroup/table/table.component';
+import { OpenStreetMapRenderingComponent } from './open-street-map/open-street-map-rendering.component';
 import { OrcidComponent } from './orcid/orcid.component';
 import { MetadataBoxFieldRenderOptions } from './rendering-type.model';
 import { TagComponent } from './tag/tag.component';
+import { TagBrowseComponent } from './tag-browse/tag-browse.component';
+import { TagSearchComponent } from './tag-search/tag-search.component';
 import { TextComponent } from './text/text.component';
 import { ThumbnailRenderingComponent } from './thumbnail/thumbnail.component';
 import { ValuepairComponent } from './valuepair/valuepair.component';
-import { HtmlComponent } from './html/html.component';
-import { GmapComponent } from './gmap/gmap.component';
-import { OpenStreetMapRenderingComponent } from './open-street-map/open-street-map-rendering.component';
-import { BrowseComponent } from './browse/browse.component';
-import { TagBrowseComponent } from './tag-browse/tag-browse.component';
-import { MarkdownComponent } from './markdown/markdown.component';
-import { SearchComponent } from './search/search.component';
-import { TagSearchComponent } from './tag-search/tag-search.component';
-import { OpenstreetmapGroupComponent } from './metadataGroup/openstreetmap-group/openstreetmap-group.component';
-import { GooglemapsGroupComponent } from './metadataGroup/googlemaps-group/googlemaps-group.component';
 
 export const layoutBoxesMap = new Map<FieldRenderingType, MetadataBoxFieldRenderOptions>([
   [FieldRenderingType.TEXT, { componentRef: TextComponent, structured: false } as MetadataBoxFieldRenderOptions],

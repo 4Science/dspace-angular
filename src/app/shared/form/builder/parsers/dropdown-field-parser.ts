@@ -19,7 +19,6 @@ import {
 } from './field-parser';
 import { ParserOptions } from './parser-options';
 import { ParserType } from './parser-type';
-import { ParserType } from './parser-type';
 
 export class DropdownFieldParser extends FieldParser {
 
@@ -41,7 +40,7 @@ export class DropdownFieldParser extends FieldParser {
     if (isNotEmpty(this.configData.selectableMetadata[0].controlledVocabulary)) {
       this.setVocabularyOptions(dropdownModelConfig, this.parserOptions.collectionUUID);
       this.setValues(dropdownModelConfig, fieldValue, true);
-      dropdownModelConfig.openType = this.configData.input.type === ParserType.OpenDropdown;
+      dropdownModelConfig.openType = this.configData.input.type === ParserType.OpenDropdown.valueOf();
       layout = {
         element: {
           control: 'col',

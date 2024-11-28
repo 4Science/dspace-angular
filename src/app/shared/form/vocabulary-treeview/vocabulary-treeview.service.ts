@@ -1,8 +1,17 @@
 import { Injectable } from '@angular/core';
-
-import { BehaviorSubject, combineLatest, Observable, of as observableOf } from 'rxjs';
-import { map, merge, mergeMap, scan } from 'rxjs/operators';
 import findIndex from 'lodash/findIndex';
+import {
+  BehaviorSubject,
+  combineLatest,
+  Observable,
+  of as observableOf,
+} from 'rxjs';
+import {
+  map,
+  merge,
+  mergeMap,
+  scan,
+} from 'rxjs/operators';
 import { RemoteData } from 'src/app/core/data/remote-data';
 
 import { PaginatedList } from '../../../core/data/paginated-list.model';
@@ -16,8 +25,17 @@ import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vo
 import { VocabularyEntryDetail } from '../../../core/submission/vocabularies/models/vocabulary-entry-detail.model';
 import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
 import { VocabularyService } from '../../../core/submission/vocabularies/vocabulary.service';
-import { hasValue, isEmpty, isNotEmpty, } from '../../empty.util';
-import { LOAD_MORE_NODE, LOAD_MORE_ROOT_NODE, TreeviewFlatNode, TreeviewNode, } from './vocabulary-treeview-node.model';
+import {
+  hasValue,
+  isEmpty,
+  isNotEmpty,
+} from '../../empty.util';
+import {
+  LOAD_MORE_NODE,
+  LOAD_MORE_ROOT_NODE,
+  TreeviewFlatNode,
+  TreeviewNode,
+} from './vocabulary-treeview-node.model';
 
 /**
  * A service that provides methods to deal with vocabulary tree
@@ -371,21 +389,21 @@ export class VocabularyTreeviewService {
 
     combineLatest([
       rootNode$,
-      this.getChildrenNodesByParent(entry, pageInfo)
+      this.getChildrenNodesByParent(entry, pageInfo),
     ]).pipe(
       mergeMap(([rootNode, list]) => {
         tempList = list;
 
         const childNodes: TreeviewNode[] = list.page.map((entryDetail: VocabularyEntryDetail) => this._generateNode(entryDetail, selectedItems));
         return this.getNodeHierarchy(rootNode, selectedItems, childNodes);
-      })
+      }),
     ).subscribe(hierarchy => {
       nodes.push(hierarchy);
 
       if ((tempList.pageInfo.currentPage + 1) <= tempList.pageInfo.totalPages) {
         // Need a new load more node
         const newPageInfo: PageInfo = Object.assign(new PageInfo(), tempList.pageInfo, {
-          currentPage: tempList.pageInfo.currentPage + 1
+          currentPage: tempList.pageInfo.currentPage + 1,
         });
         const loadMoreNode = new TreeviewNode(LOAD_MORE_ROOT_NODE, false, newPageInfo);
         loadMoreNode.updatePageInfo(newPageInfo);

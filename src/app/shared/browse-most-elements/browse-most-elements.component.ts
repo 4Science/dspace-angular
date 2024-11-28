@@ -1,24 +1,43 @@
-import { AsyncPipe, LowerCasePipe, NgSwitch, NgSwitchDefault, } from '@angular/common';
-import { ChangeDetectorRef, Component, Inject, inject, Input, OnChanges, OnInit, PLATFORM_ID, } from '@angular/core';
+import {
+  AsyncPipe,
+  LowerCasePipe,
+  NgSwitch,
+  NgSwitchDefault,
+} from '@angular/common';
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  inject,
+  Input,
+  OnChanges,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import isEqual from 'lodash/isEqual';
-import { LayoutModeEnum, TopSection, TopSectionTemplateType } from '../../core/layout/models/section.model';
-import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
-import { Context } from '../../core/shared/context.model';
 import { BehaviorSubject } from 'rxjs';
-import { ViewMode } from '../../core/shared/view-mode.model';
 
-import { APP_CONFIG, AppConfig, } from '../../../config/app-config.interface';
+import {
+  APP_CONFIG,
+  AppConfig,
+} from '../../../config/app-config.interface';
 import { SearchManager } from '../../core/browse/search-manager';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { RemoteData } from '../../core/data/remote-data';
-import { DSpaceObject } from '../../core/shared/dspace-object.model';
-import { CollectionElementLinkType } from '../object-collection/collection-element-link.type';
 import {
-  ThemedDefaultBrowseElementsComponent
-} from './default-browse-elements/themed-default-browse-elements.component';
+  LayoutModeEnum,
+  TopSection,
+  TopSectionTemplateType,
+} from '../../core/layout/models/section.model';
+import { Context } from '../../core/shared/context.model';
+import { DSpaceObject } from '../../core/shared/dspace-object.model';
+import { ViewMode } from '../../core/shared/view-mode.model';
+import { CollectionElementLinkType } from '../object-collection/collection-element-link.type';
+import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
 import { SearchResult } from '../search/models/search-result.model';
-import { TranslateModule } from '@ngx-translate/core';
+import { ThemedDefaultBrowseElementsComponent } from './default-browse-elements/themed-default-browse-elements.component';
 
 @Component({
   selector: 'ds-base-browse-most-elements',

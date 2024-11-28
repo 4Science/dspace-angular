@@ -25,7 +25,9 @@ import {
 import { Observable } from 'rxjs';
 import { InternalLinkService } from 'src/app/core/services/internal-link.service';
 
+import { SearchManager } from '../../core/browse/search-manager';
 import { RemoteDataBuildService } from '../../core/cache/builders/remote-data-build.service';
+import { SortDirection } from '../../core/cache/models/sort-options.model';
 import { ObjectCacheService } from '../../core/cache/object-cache.service';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { DefaultChangeAnalyzer } from '../../core/data/default-change-analyzer.service';
@@ -52,10 +54,6 @@ import { createPaginatedList } from '../testing/utils.test';
 import { FollowLinkConfig } from '../utils/follow-link-config.model';
 import { CarouselComponent } from './carousel.component';
 import { CarouselOptions } from './carousel-options.model';
-import { SortDirection } from '../../core/cache/models/sort-options.model';
-import { SearchManager } from '../../core/browse/search-manager';
-import { toRemoteData } from '../../browse-by/browse-by-metadata-page/browse-by-metadata-page.component.spec';
-import { InternalLinkService } from '../../core/services/internal-link.service';
 
 describe('CarouselComponent', () => {
   let component: CarouselComponent;
@@ -67,7 +65,7 @@ describe('CarouselComponent', () => {
     getThumbnailFor(item: Item): Observable<RemoteData<Bitstream>> {
       return createSuccessfulRemoteDataObject$(new Bitstream());
     },
-        showableByItem(item: Item, bundleName: string, options?: FindListOptions, ...linksToFollow: FollowLinkConfig<Bitstream>[]): Observable<RemoteData<PaginatedList<Bitstream>>> {
+    showableByItem(item: Item, bundleName: string, options?: FindListOptions, ...linksToFollow: FollowLinkConfig<Bitstream>[]): Observable<RemoteData<PaginatedList<Bitstream>>> {
       return createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream1]));
     },
   });
@@ -89,7 +87,7 @@ describe('CarouselComponent', () => {
     sortField: 'testField',
     sortDirection: SortDirection.DESC,
     numberOfItems: 5,
-    order: 'testOrder'
+    order: 'testOrder',
   };
 
   const firstItemResult = Object.assign(new ItemSearchResult(), {
@@ -179,23 +177,23 @@ describe('CarouselComponent', () => {
         })),
     });
 
-    const mockSearchManager = {
-      search: (options: any) => toRemoteData([firstItemResult])
-    };
+  const mockSearchManager = {
+    search: (options: any) => toRemoteData([firstItemResult]),
+  };
 
   beforeEach(waitForAsync(() => {
     notificationService = new NotificationsServiceStub();
     TestBed.configureTestingModule({
-    imports: [CommonModule, NgbModule, FormsModule, ReactiveFormsModule, BrowserModule, RouterTestingModule,
+      imports: [CommonModule, NgbModule, FormsModule, ReactiveFormsModule, BrowserModule, RouterTestingModule,
         TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useClass: TranslateLoaderMock,
-            },
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock,
+          },
         }),
-    ],
-    declarations: [CarouselComponent],
-    providers: [
+      ],
+      declarations: [CarouselComponent],
+      providers: [
         CarouselComponent,
         { provide: ObjectCacheService, useValue: {} },
         { provide: InternalLinkService, useValue: {} },
@@ -209,17 +207,17 @@ describe('CarouselComponent', () => {
         { provide: DefaultChangeAnalyzer, useValue: {} },
         { provide: BitstreamDataService, useValue: mockBitstreamDataService },
         { provide: NativeWindowService, useValue: new NativeWindowRef() },
-                { provide: SearchManager, useValue: mockSearchManager },
-    ],
-    schemas: [NO_ERRORS_SCHEMA],
-}).compileComponents();
+        { provide: SearchManager, useValue: mockSearchManager },
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
 
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CarouselComponent);
     component = fixture.componentInstance;
-        mockBitstreamDataService.showableByItem.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream1])));
+    mockBitstreamDataService.showableByItem.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream1])));
     component.carouselOptions = carouselOptions;
 
     fixture.detectChanges();
@@ -252,7 +250,7 @@ describe('CarouselComponent', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(CarouselComponent);
       component = fixture.componentInstance;
-            mockBitstreamDataService.showableByItem.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream2])));
+      mockBitstreamDataService.showableByItem.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream2])));
       component.carouselOptions = carouselOptions;
 
       fixture.detectChanges();

@@ -3,7 +3,10 @@ import {
   Input,
 } from '@angular/core';
 
-import { LayoutModeEnum, TopSection } from '../../../core/layout/models/section.model';
+import {
+  LayoutModeEnum,
+  TopSection,
+} from '../../../core/layout/models/section.model';
 import { Context } from '../../../core/shared/context.model';
 import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
 import { ThemedComponent } from '../../theme-support/themed.component';

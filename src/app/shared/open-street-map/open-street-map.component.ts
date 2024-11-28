@@ -1,16 +1,40 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+} from '@angular/core';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import {
+  icon,
+  LatLng,
+  latLng,
+  Layer,
+  MapOptions,
+  marker,
+  tileLayer,
+} from 'leaflet';
+import {
+  BehaviorSubject,
+  Observable,
+} from 'rxjs';
+import {
+  filter,
+  map,
+  tap,
+} from 'rxjs/operators';
+
 import {
   LocationCoordinates,
   LocationDDCoordinates,
   LocationErrorCodes,
   LocationPlace,
-  LocationService
+  LocationService,
 } from '../../core/services/location.service';
-import { filter, map, tap } from 'rxjs/operators';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { isNotEmpty } from '../empty.util';
-import { icon, latLng, LatLng, Layer, MapOptions, marker, tileLayer } from 'leaflet';
 
 export interface OpenStreetMapPointer {
   coordinates: LocationCoordinates,
@@ -109,7 +133,7 @@ export class OpenStreetMapComponent implements OnInit {
   leafletOptions: MapOptions = {
     // attribution is still needed
     // attributionControl: false,
-    zoomControl: this.showControlsZoom
+    zoomControl: this.showControlsZoom,
   };
 
   constructor(
@@ -122,13 +146,13 @@ export class OpenStreetMapComponent implements OnInit {
 
     this.mapStyle = {
       width: this.width || '100%',
-      height: this.height || `${(+this.width || this.elementRef.nativeElement.parentElement.offsetWidth) / 2}px`
+      height: this.height || `${(+this.width || this.elementRef.nativeElement.parentElement.offsetWidth) / 2}px`,
     };
 
     this.coordinates$ = this.place.asObservable().pipe(
       filter((place) => isNotEmpty(place)),
       map((place) => place.coordinates),
-      tap(coordinates => this.setCenterAndPointer(coordinates))
+      tap(coordinates => this.setCenterAndPointer(coordinates)),
     );
 
     this.displayName$ = this.place.asObservable().pipe(
@@ -145,14 +169,14 @@ export class OpenStreetMapComponent implements OnInit {
       if (this.locationService.isValidCoordinateString(position)) {
         const coordinates = this.locationService.parseCoordinates(position);
         this.locationService.searchByCoordinates(coordinates).subscribe({
-          next: (displayName) => {
+          next: (displayName: any) => {
             const place: LocationPlace = {
               coordinates: coordinates,
               displayName: displayName, // Show the name retrieved from Nominatim
             };
             this.place.next(place);
           },
-          error: (err) => {
+          error: (err: unknown) => {
             // show the map centered on provided coordinates despite the possibility to retrieve a description for the place
             const place: LocationPlace = {
               coordinates: coordinates,
@@ -175,10 +199,10 @@ export class OpenStreetMapComponent implements OnInit {
       // Retrieve the decimal coordinates and the place name for the provided coordinates
 
       this.locationService.findPlaceAndDecimalCoordinates(position).subscribe({
-        next: (place) => {
+        next: (place: any) => {
           this.place.next(place);
         },
-        error: (err) => {
+        error: (err: unknown) => {
           this.invalidLocationErrorCode.next(err.message); // either INVALID_COORDINATES or API_ERROR
           if (err.message === LocationErrorCodes.API_ERROR) {
             console.error(err.message);
@@ -193,11 +217,11 @@ export class OpenStreetMapComponent implements OnInit {
       // Retrieve the coordinates for the provided POI or address
 
       this.locationService.findPlaceCoordinates(position).subscribe({
-        next: (place) => {
+        next: (place: any) => {
           place.displayName = position; // Show the name stored in metadata (comment out to show name retrieved from Nominatim)
           this.place.next(place);
         },
-        error: (err) => {
+        error: (err: unknown) => {
           this.invalidLocationErrorCode.next(err.message); // either LOCATION_NOT_FOUND or API_ERROR
           if (err.message === LocationErrorCodes.API_ERROR) {
             console.error(err.message);
@@ -213,10 +237,10 @@ export class OpenStreetMapComponent implements OnInit {
   private setCenterAndPointer(coordinates: LocationDDCoordinates) {
     this.leafletCenter = latLng(+coordinates.latitude, +coordinates.longitude);
     this.leafletLayers = [
-      tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 18, attribution: 'Leaflet'}),
+      tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: 'Leaflet' }),
       marker(
         [+coordinates.latitude, +coordinates.longitude],
-        {icon: icon({iconUrl: 'assets/images/marker-icon.png', shadowUrl: 'assets/images/marker-shadow.png'})})
+        { icon: icon({ iconUrl: 'assets/images/marker-icon.png', shadowUrl: 'assets/images/marker-shadow.png' }) }),
     ];
   }
 }

@@ -1,17 +1,26 @@
-import {Component, Input} from '@angular/core';
-import { ThemedComponent } from '../../theme-support/themed.component';
+import {
+  Component,
+  Input,
+} from '@angular/core';
+
+import {
+  LayoutModeEnum,
+  TopSection,
+} from '../../../core/layout/models/section.model';
 import { Context } from '../../../core/shared/context.model';
 import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
-import { LayoutModeEnum, TopSection } from '../../../core/layout/models/section.model';
-import {CardsBrowseElementsComponent} from './cards-browse-elements.component';
+import { ThemedComponent } from '../../theme-support/themed.component';
+import { CardsBrowseElementsComponent } from './cards-browse-elements.component';
 
 /**
  * This component is a wrapper for the CardsBrowseElementsComponent
  */
 @Component({
-  selector: 'ds-themed-cards-browse-elements',
+  selector: 'ds-cards-browse-elements',
   styleUrls: [],
   templateUrl: './../../theme-support/themed.component.html',
+  standalone: true,
+  imports: [CardsBrowseElementsComponent],
 })
 export class ThemedCardsBrowseElementsComponent extends ThemedComponent<CardsBrowseElementsComponent> {
 

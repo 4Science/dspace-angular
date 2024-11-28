@@ -35,23 +35,23 @@ describe('CrisLayoutMediaBoxComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [CrisLayoutMediaBoxComponent],
-    imports: [
+      declarations: [CrisLayoutMediaBoxComponent],
+      imports: [
         TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useClass: TranslateLoaderMock,
-            },
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock,
+          },
         }),
-    ],
-    providers: [
+      ],
+      providers: [
         { provide: 'boxProvider', useValue: boxMetadata },
         { provide: 'itemProvider', useValue: testItem },
-    ],
-    schemas: [
+      ],
+      schemas: [
         NO_ERRORS_SCHEMA,
-    ],
-})
+      ],
+    })
       .compileComponents();
   });
 

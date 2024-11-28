@@ -1,37 +1,54 @@
-import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
-import { BrowserModule, By } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
+import {
+  Component,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
+import {
+  ComponentFixture,
+  inject,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import {
+  BrowserModule,
+  By,
+} from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
-import { NgxPaginationModule } from 'ngx-pagination';
-import { of, of as observableOf } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgxPaginationModule } from 'ngx-pagination';
+import {
+  of as observableOf,
+  of,
+} from 'rxjs';
 
+import { CollectionDataService } from '../../../core/data/collection-data.service';
+import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder/json-patch-operation-path-combiner';
+import { JsonPatchOperationsBuilder } from '../../../core/json-patch/builder/json-patch-operations-builder';
+import { Collection } from '../../../core/shared/collection.model';
+import { License } from '../../../core/shared/license.model';
+import {
+  mockSubmissionCollectionId,
+  mockSubmissionId,
+} from '../../../shared/mocks/submission.mock';
 import { createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
+import { SubmissionServiceStub } from '../../../shared/testing/submission-service.stub';
 import { createTestComponent } from '../../../shared/testing/utils.test';
 import { SubmissionService } from '../../submission.service';
-import { SubmissionServiceStub } from '../../../shared/testing/submission-service.stub';
-import { SectionsService } from '../sections.service';
 import { SectionDataObject } from '../models/section-data.model';
+import { SectionsService } from '../sections.service';
 import { SectionsType } from '../sections-type';
-import { mockSubmissionCollectionId, mockSubmissionId } from '../../../shared/mocks/submission.mock';
-import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder/json-patch-operation-path-combiner';
-import { CollectionDataService } from '../../../core/data/collection-data.service';
-import { JsonPatchOperationsBuilder } from '../../../core/json-patch/builder/json-patch-operations-builder';
-import { License } from '../../../core/shared/license.model';
-import { Collection } from '../../../core/shared/collection.model';
-
-
-import { SectionExternalUploadComponent } from './section-external-upload.component';
 import { ExternalUploadService } from './external-upload.service';
 import { ExternalServiceStub } from './external-upload-service.mock';
+import { SectionExternalUploadComponent } from './section-external-upload.component';
 
 function getMockCollectionDataService(): CollectionDataService {
   return jasmine.createSpyObj('CollectionDataService', {
     findById: jasmine.createSpy('findById'),
-    findByHref: jasmine.createSpy('findByHref')
+    findByHref: jasmine.createSpy('findByHref'),
   });
 }
 
@@ -45,7 +62,7 @@ const sectionObject: SectionDataObject = {
   header: 'submit.progressbar.detect-duplicate',
   id: 'external-upload',
   sectionType: SectionsType.DetectDuplicate,
-  sectionVisibility: null
+  sectionVisibility: null,
 };
 
 describe('SectionExternalUploadComponent test suite', () => {
@@ -61,7 +78,7 @@ describe('SectionExternalUploadComponent test suite', () => {
   const sectionsService: any = jasmine.createSpyObj('sectionsService', {
     isSectionTypeAvailable: of(true),
     isSectionActive: of(true),
-    setSectionStatus: () => null
+    setSectionStatus: () => null,
   });
 
   const submissionId = mockSubmissionId;
@@ -80,9 +97,9 @@ describe('SectionExternalUploadComponent test suite', () => {
       {
         key: 'dc.title',
         language: 'en_US',
-        value: 'Community 1-Collection 1'
+        value: 'Community 1-Collection 1',
       }],
-    license: createSuccessfulRemoteDataObject$(Object.assign(new License(), { text: licenseText }))
+    license: createSuccessfulRemoteDataObject$(Object.assign(new License(), { text: licenseText })),
   });
 
   beforeEach(waitForAsync(() => {
@@ -109,9 +126,9 @@ describe('SectionExternalUploadComponent test suite', () => {
         { provide: 'collectionIdProvider', useValue: collectionId },
         { provide: 'sectionDataProvider', useValue: sectionObject },
         { provide: 'submissionIdProvider', useValue: submissionId },
-        SectionExternalUploadComponent
+        SectionExternalUploadComponent,
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents().then();
   }));
 
@@ -198,7 +215,7 @@ describe('SectionExternalUploadComponent test suite', () => {
 // declare a test component
 @Component({
   selector: 'ds-test-cmp',
-  template: ``
+  template: ``,
 })
 class TestComponent {
 

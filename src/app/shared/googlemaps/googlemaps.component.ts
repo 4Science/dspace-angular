@@ -3,7 +3,8 @@ import {
   NgIf,
 } from '@angular/common';
 import {
- ChangeDetectorRef, Component,
+  ChangeDetectorRef,
+  Component,
   Inject,
   Input,
   OnInit,

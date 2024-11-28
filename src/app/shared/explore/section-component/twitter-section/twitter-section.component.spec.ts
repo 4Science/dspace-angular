@@ -11,8 +11,8 @@ describe('TwitterSectionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [TwitterSectionComponent],
-})
+      declarations: [TwitterSectionComponent],
+    })
       .compileComponents();
   });
 

@@ -1,8 +1,15 @@
-import { AsyncPipe, NgIf, } from '@angular/common';
-import { Component, Input, OnInit, } from '@angular/core';
+import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { SortDirection, } from '../../../../core/cache/models/sort-options.model';
+import { SortDirection } from '../../../../core/cache/models/sort-options.model';
 import { CarouselSection } from '../../../../core/layout/models/section.model';
 import { CarouselComponent } from '../../../carousel/carousel.component';
 import { CarouselOptions } from '../../../carousel/carousel-options.model';
@@ -76,7 +83,7 @@ export class CarouselSectionComponent implements OnInit {
       order: this.carouselSection.order,
       sortField: this.carouselSection.sortField ?? this.DEFAULT_SORT_FIELD,
       sortDirection:  this.carouselSection.order && this.carouselSection.order.toUpperCase() === 'ASC' ? SortDirection.ASC : SortDirection.DESC,
-      numberOfItems: this.carouselSection.numberOfItems &&  this.carouselSection.numberOfItems  > 0 ? this.carouselSection.numberOfItems : 20
+      numberOfItems: this.carouselSection.numberOfItems &&  this.carouselSection.numberOfItems  > 0 ? this.carouselSection.numberOfItems : 20,
     };
   }
 

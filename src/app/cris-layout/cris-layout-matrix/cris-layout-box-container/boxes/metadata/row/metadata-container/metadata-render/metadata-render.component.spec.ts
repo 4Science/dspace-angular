@@ -20,7 +20,6 @@ import { PLACEHOLDER_PARENT_METADATA } from '../../../../../../../../shared/form
 import { TranslateLoaderMock } from '../../../../../../../../shared/mocks/translate-loader.mock';
 import { boxMetadata } from '../../../../../../../../shared/testing/box.mock';
 import { DsDatePipe } from '../../../../../../../pipes/ds-date.pipe';
-import { LoadMoreService } from '../../../../../../../services/load-more.service';
 import { FieldRenderingType } from '../../../rendering-types/field-rendering-type';
 import { layoutBoxesMap } from '../../../rendering-types/metadata-box-rendering-map';
 import { TableComponent } from '../../../rendering-types/metadataGroup/table/table.component';

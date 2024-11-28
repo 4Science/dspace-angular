@@ -24,23 +24,23 @@ describe('CrisLayoutIiifToolbarBoxComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [
+      imports: [
         TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useClass: TranslateLoaderMock,
-            },
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock,
+          },
         }),
-    ],
-    declarations: [CrisLayoutIIIFToolbarBoxComponent],
-    providers: [
+      ],
+      declarations: [CrisLayoutIIIFToolbarBoxComponent],
+      providers: [
         { provide: 'boxProvider', useValue: {} },
         { provide: 'itemProvider', useValue: {} },
         { provide: NotificationsService, useValue: notificationService },
         { provide: Router, useValue: {} },
         { provide: ActivatedRoute, useValue: {} },
-    ],
-})
+      ],
+    })
       .compileComponents();
   });
 

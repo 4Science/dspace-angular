@@ -3078,7 +3078,7 @@ export const mockSubmissionState: SubmissionObjectState = Object.assign({}, {
         errorsToShow: [],
         isLoading: false,
         isValid: false,
-        removePending: false
+        removePending: false,
       } as any,
       'external-upload': {
         header: 'submit.progressbar.external-upload',
@@ -3088,7 +3088,7 @@ export const mockSubmissionState: SubmissionObjectState = Object.assign({}, {
         collapsed: false,
         enabled: true,
         data: {
-          files: []
+          files: [],
         },
         errorsToShow: [],
         isLoading: false,
@@ -3136,7 +3136,7 @@ export const mockSubmissionState: SubmissionObjectState = Object.assign({}, {
     savePending: false,
     depositPending: false,
     externalUploadPending: false,
-  }
+  },
 });
 
 export const mockSubmissionStateWithDuplicate: SubmissionObjectState = Object.assign({}, {

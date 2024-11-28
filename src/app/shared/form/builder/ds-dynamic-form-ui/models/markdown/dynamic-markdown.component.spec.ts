@@ -13,11 +13,11 @@ describe('DsDynamicMarkdownComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    declarations: [DsDynamicMarkdownComponent],
-    imports: [],
-    providers: [],
-    schemas: [NO_ERRORS_SCHEMA],
-}).compileComponents();
+      declarations: [DsDynamicMarkdownComponent],
+      imports: [],
+      providers: [],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

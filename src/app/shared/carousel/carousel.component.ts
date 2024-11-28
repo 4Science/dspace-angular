@@ -1,10 +1,40 @@
-import { AsyncPipe, NgClass, NgIf, NgStyle, NgTemplateOutlet, } from '@angular/common';
-import { Component, Input, OnInit, ViewChild, } from '@angular/core';
+import {
+  AsyncPipe,
+  NgClass,
+  NgIf,
+  NgStyle,
+  NgTemplateOutlet,
+} from '@angular/common';
+import {
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NgbCarousel, NgbCarouselModule, NgbSlideEvent, NgbSlideEventSource, } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, from, Observable, } from 'rxjs';
-import { filter, map, mergeMap, reduce, switchMap, take, } from 'rxjs/operators';
+import {
+  NgbCarousel,
+  NgbCarouselModule,
+  NgbSlideEvent,
+  NgbSlideEventSource,
+} from '@ng-bootstrap/ng-bootstrap';
+import difference from 'lodash/difference';
+import {
+  BehaviorSubject,
+  from,
+  Observable,
+} from 'rxjs';
+import {
+  filter,
+  map,
+  mergeMap,
+  reduce,
+  switchMap,
+  take,
+} from 'rxjs/operators';
 
+import { SearchManager } from '../../core/browse/search-manager';
+import { SortOptions } from '../../core/cache/models/sort-options.model';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { RemoteData } from '../../core/data/remote-data';
@@ -12,16 +42,16 @@ import { Bitstream } from '../../core/shared/bitstream.model';
 import { BitstreamFormat } from '../../core/shared/bitstream-format.model';
 import { Item } from '../../core/shared/item.model';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
-import { hasValue, isNotEmpty } from '../empty.util';
+import {
+  hasValue,
+  isNotEmpty,
+} from '../empty.util';
 import { ItemSearchResult } from '../object-collection/shared/item-search-result.model';
-import { followLink } from '../utils/follow-link-config.model';
-import { CarouselOptions } from './carousel-options.model';
-import { SearchManager } from '../../core/browse/search-manager';
-import { SearchObjects } from '../search/models/search-objects.model';
-import { SortOptions } from '../../core/cache/models/sort-options.model';
 import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
-import difference from 'lodash/difference';
+import { SearchObjects } from '../search/models/search-objects.model';
+import { followLink } from '../utils/follow-link-config.model';
+import { CarouselOptions } from './carousel-options.model';
 
 /**
  * Component representing the Carousel component section.
@@ -90,7 +120,7 @@ export class CarouselComponent implements OnInit {
   /**
    * reference to the carousel
    */
-  @ViewChild('carousel', {static: false}) carousel: NgbCarousel;
+  @ViewChild('carousel', { static: false }) carousel: NgbCarousel;
 
   isLoading$ = new BehaviorSubject(true);
 
@@ -141,7 +171,7 @@ export class CarouselComponent implements OnInit {
           return null;
         }
       }),
-      take(1)
+      take(1),
     ).subscribe((res) => {
       this.itemToImageHrefMap$.next(res);
       this.isLoading$.next(false);
@@ -178,7 +208,7 @@ export class CarouselComponent implements OnInit {
 
     if (!this.pageToBitstreamsMap.get(currentPage + 1) && currentSlideIndex + this.slideLoadingBuffer === currentPage * this.pageSize) {
       this.loadNextPageBitstreams();
-    } else if (slideEvent.source === 'indicator' && currentSlideIndex > this.pageSize * this.currentSliderPage) {
+    } else if (slideEvent.source === NgbSlideEventSource.INDICATOR && currentSlideIndex > this.pageSize * this.currentSliderPage) {
       this.isLoading$.next(true);
       this.currentSliderPage = currentPage;
       this.loadNextPageBitstreams();
@@ -194,21 +224,21 @@ export class CarouselComponent implements OnInit {
     return from(items).pipe(
       map((itemSR) => itemSR.indexableObject),
       mergeMap((item) => this.bitstreamDataService.showableByItem(
-          item.uuid, this.bundle, [], {}, true, true, followLink('format'),
-        ).pipe(
+        item.uuid, this.bundle, [], {}, true, true, followLink('format'),
+      ).pipe(
+        getFirstCompletedRemoteData(),
+        switchMap((rd: RemoteData<PaginatedList<Bitstream>>) => rd.hasSucceeded ? rd.payload.page : []),
+        mergeMap((bitstream: Bitstream) => bitstream.format.pipe(
           getFirstCompletedRemoteData(),
-          switchMap((rd: RemoteData<PaginatedList<Bitstream>>) => rd.hasSucceeded ? rd.payload.page : []),
-          mergeMap((bitstream: Bitstream) => bitstream.format.pipe(
-            getFirstCompletedRemoteData(),
-            filter((bitstreamFormatRD: RemoteData<BitstreamFormat>) =>
-              bitstreamFormatRD.hasSucceeded && hasValue(bitstreamFormatRD.payload) && hasValue(bitstream) &&
+          filter((bitstreamFormatRD: RemoteData<BitstreamFormat>) =>
+            bitstreamFormatRD.hasSucceeded && hasValue(bitstreamFormatRD.payload) && hasValue(bitstream) &&
               bitstreamFormatRD.payload.mimetype.includes('image/'),
-            ),
-            map(() => bitstream),
-          )),
-          take(1),
-          map((bitstream: Bitstream) => [item.uuid, bitstream._links.content.href]),
-        ),
+          ),
+          map(() => bitstream),
+        )),
+        take(1),
+        map((bitstream: Bitstream) => [item.uuid, bitstream._links.content.href]),
+      ),
       ),
       reduce((acc: Map<string, string>, value: [string, string]) => {
         acc.set(value[0], value[1]);
@@ -229,14 +259,14 @@ export class CarouselComponent implements OnInit {
     const pagination: PaginationComponentOptions = Object.assign(new PaginationComponentOptions(), {
       id: this.paginationOptionId,
       pageSize: this.carouselOptions.numberOfItems,
-      currentPage: 1
+      currentPage: 1,
     });
 
     const paginatedSearchOptions = new PaginatedSearchOptions({
       configuration: this.carouselOptions.discoveryConfiguration,
       pagination: pagination,
       sort: new SortOptions(this.carouselOptions.sortField, this.carouselOptions.sortDirection),
-      projection: 'preventMetadataSecurity'
+      projection: 'preventMetadataSecurity',
     });
     return this.searchManager.search(paginatedSearchOptions).pipe(
       getFirstCompletedRemoteData(),
@@ -246,19 +276,19 @@ export class CarouselComponent implements OnInit {
         } else {
           return null;
         }
-      })
+      }),
     );
   }
 
 
   pages = () => {
-    return Array.from({length: this.carouselOptions.numberOfItems / this.pageSize}, (_, i) => i + 1);
+    return Array.from({ length: this.carouselOptions.numberOfItems / this.pageSize }, (_, i) => i + 1);
   };
 
 
   private loadNextPageBitstreams(): void {
     const items = this.carouselItems$.value;
-    const itemsWithLoadedImages = [].concat((Array.from({length: this.currentSliderPage}, (_, i) => i + 1).map(page => this.pageToBitstreamsMap.get(page))));
+    const itemsWithLoadedImages = [].concat((Array.from({ length: this.currentSliderPage }, (_, i) => i + 1).map(page => this.pageToBitstreamsMap.get(page))));
     const itemsWithoutBistreamsInNextPage = difference(items, itemsWithLoadedImages).filter(item => (items.indexOf(item) > itemsWithLoadedImages.length - 1) && items.indexOf(item) < (this.currentSliderPage + 1) * this.pageSize);
 
     this.findAllBitstreamImages(itemsWithoutBistreamsInNextPage).pipe(

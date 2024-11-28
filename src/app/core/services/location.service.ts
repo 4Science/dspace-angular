@@ -93,10 +93,10 @@ export class LocationService {
    * @returns {LocationPlace} the information related to the searched coordinates
    */
   public findPlaceAndDecimalCoordinates(coordinates: string): Observable<LocationPlace> {
-    let params = new HttpParams().append('q', coordinates).append('format', NOMINATIM_RESPONSE_FORMAT);
+    const params = new HttpParams().append('q', coordinates).append('format', NOMINATIM_RESPONSE_FORMAT);
 
     return this.http.get<Record<string,any>[]>(this.searchEndpoint, { params: params }).pipe(
-      catchError((err) => {
+      catchError((err: unknown) => {
         console.error('Location service', err);
         throw Error(LocationErrorCodes.API_ERROR);
       }),

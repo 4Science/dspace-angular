@@ -51,26 +51,26 @@ describe('OpenStreetMapRenderingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [
+      imports: [
         TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useClass: TranslateLoaderMock,
-            },
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock,
+          },
         }),
         BrowserAnimationsModule,
         HttpClientTestingModule,
-    ],
-    providers: [
+      ],
+      providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
         { provide: 'metadataValueProvider', useValue: metadataValue },
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
         // { provide: HttpClient, useValue: {} },
-    ],
-    declarations: [OpenStreetMapRenderingComponent],
-})
+      ],
+      declarations: [OpenStreetMapRenderingComponent],
+    })
       .compileComponents();
   });
 

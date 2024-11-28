@@ -1,5 +1,6 @@
 import {
-  AsyncPipe, NgClass,
+  AsyncPipe,
+  NgClass,
   NgFor,
   NgIf,
 } from '@angular/common';
@@ -29,15 +30,8 @@ import { RemoteData } from '../../core/data/remote-data';
 import { Context } from '../../core/shared/context.model';
 import { ViewMode } from '../../core/shared/view-mode.model';
 import { fadeIn } from '../animations/fade';
-import {
-  hasNoValue,
-  hasValue,
-} from '../empty.util';
+import { hasValue } from '../empty.util';
 import { ErrorComponent } from '../error/error.component';
-import {
-  HostWindowService,
-  WidthCategory,
-} from '../host-window.service';
 import { ThemedLoadingComponent } from '../loading/themed-loading.component';
 import { CollectionElementLinkType } from '../object-collection/collection-element-link.type';
 import { ListableObject } from '../object-collection/shared/listable-object.model';
@@ -45,7 +39,6 @@ import { ListableObjectComponentLoaderComponent } from '../object-collection/sha
 import { PaginationComponent } from '../pagination/pagination.component';
 import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
 import { BrowserOnlyPipe } from '../utils/browser-only.pipe';
-import { LoadingComponent } from '../../../themes/custom/app/shared/loading/loading.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.Default,
@@ -55,7 +48,7 @@ import { LoadingComponent } from '../../../themes/custom/app/shared/loading/load
   templateUrl: './object-grid.component.html',
   animations: [fadeIn],
   standalone: true,
-  imports: [PaginationComponent, NgIf, NgFor, ListableObjectComponentLoaderComponent, ErrorComponent, ThemedLoadingComponent, AsyncPipe, TranslateModule, BrowserOnlyPipe, NgClass, LoadingComponent],
+  imports: [PaginationComponent, NgIf, NgFor, ListableObjectComponentLoaderComponent, ErrorComponent, ThemedLoadingComponent, AsyncPipe, TranslateModule, BrowserOnlyPipe, NgClass],
 })
 
 export class ObjectGridComponent implements OnInit {

@@ -1,4 +1,16 @@
-import { Component, Inject, Injector, OnDestroy, OnInit, PLATFORM_ID, } from '@angular/core';
+import {
+  AsyncPipe,
+  NgComponentOutlet,
+  NgForOf,
+} from '@angular/common';
+import {
+  Component,
+  Inject,
+  Injector,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
@@ -14,15 +26,18 @@ import {
   SCOPE,
   SearchFilterService,
 } from '../../../../../core/shared/search/search-filter.service';
+import { SEARCH_CONFIG_SERVICE } from '../../../../../my-dspace-page/my-dspace-configuration.service';
 import { FilterType } from '../../../models/filter-type.model';
 import { SearchFilterConfig } from '../../../models/search-filter-config.model';
-import { facetLoad, SearchFacetFilterComponent, } from '../search-facet-filter/search-facet-filter.component';
-import { renderFacetFor, renderFilterTypeEnvironment, } from '../search-filter-type-decorator';
 import {
-  SearchFacetRangeOptionComponent
-} from '../search-facet-filter-options/search-facet-range-option/search-facet-range-option.component';
-import { AsyncPipe, NgComponentOutlet, NgForOf } from '@angular/common';
-import { SEARCH_CONFIG_SERVICE } from '../../../../../my-dspace-page/my-dspace-configuration.service';
+  facetLoad,
+  SearchFacetFilterComponent,
+} from '../search-facet-filter/search-facet-filter.component';
+import { SearchFacetRangeOptionComponent } from '../search-facet-filter-options/search-facet-range-option/search-facet-range-option.component';
+import {
+  renderFacetFor,
+  renderFilterTypeEnvironment,
+} from '../search-filter-type-decorator';
 
 @Component({
   selector: 'ds-search-range-filter-wrapper',
@@ -33,9 +48,9 @@ import { SEARCH_CONFIG_SERVICE } from '../../../../../my-dspace-page/my-dspace-c
     SearchFacetRangeOptionComponent,
     AsyncPipe,
     NgComponentOutlet,
-    NgForOf
+    NgForOf,
   ],
-  standalone: true
+  standalone: true,
 })
 @renderFacetFor(FilterType.range)
 export class SearchRangeFilterWrapperComponent extends SearchFacetFilterComponent implements OnInit, OnDestroy {

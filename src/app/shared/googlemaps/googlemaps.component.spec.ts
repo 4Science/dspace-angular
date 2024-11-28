@@ -24,11 +24,11 @@ describe('GooglemapsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [GooglemapsComponent],
-    providers: [
+      declarations: [GooglemapsComponent],
+      providers: [
         { provide: ConfigurationDataService, useValue: configurationDataService },
-    ],
-})
+      ],
+    })
       .compileComponents();
   });
 

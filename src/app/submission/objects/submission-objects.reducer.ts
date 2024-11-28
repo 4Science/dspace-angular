@@ -60,8 +60,8 @@ import {
   UpdateSectionErrorsAction,
   UpdateSectionVisibilityAction,
 } from './submission-objects.actions';
-import { SubmissionSectionObject } from './submission-section-object.model';
 import { SubmissionSectionError } from './submission-section-error.model';
+import { SubmissionSectionObject } from './submission-section-object.model';
 
 /**
  * An interface to represent SubmissionSectionObject entry
@@ -1192,7 +1192,7 @@ function startExternalUploadExecution(state: SubmissionObjectState, action: Exec
     return Object.assign({}, state, {
       [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
         externalUploadPending: true,
-      })
+      }),
     });
   } else {
     return state;
@@ -1223,10 +1223,10 @@ function updateExternalUploadState(state: SubmissionObjectState, submissionId: s
             enabled: true,
             errorsToShow: errors,
             serverValidationErrors: errors,
-          })
+          }),
         }),
         externalUploadPending: false,
-      })
+      }),
     });
   } else {
     return state;

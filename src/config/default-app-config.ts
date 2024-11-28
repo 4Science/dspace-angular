@@ -1,6 +1,4 @@
-import {
-  AdminNotifyMetricsRow
-} from '../app/admin/admin-notify-dashboard/admin-notify-metrics/admin-notify-metrics.model';
+import { AdminNotifyMetricsRow } from '../app/admin/admin-notify-dashboard/admin-notify-metrics/admin-notify-metrics.model';
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
 import { ActuatorsConfig } from './actuators.config';
@@ -24,11 +22,18 @@ import { DiscoverySortConfig } from './discovery-sort.config';
 import { FilterVocabularyConfig } from './filter-vocabulary-config';
 import { FormConfig } from './form-config.interfaces';
 import { HomeConfig } from './homepage-config.interface';
-import { IdentifierSubtypesConfig, IdentifierSubtypesIconPositionEnum, } from './identifier-subtypes-config.interface';
+import {
+  IdentifierSubtypesConfig,
+  IdentifierSubtypesIconPositionEnum,
+} from './identifier-subtypes-config.interface';
 import { InfoConfig } from './info-config.interface';
 import { ItemConfig } from './item-config.interface';
 import { LangConfig } from './lang-config.interface';
-import { CrisLayoutConfig, LayoutConfig, SuggestionConfig, } from './layout-config.interfaces';
+import {
+  CrisLayoutConfig,
+  LayoutConfig,
+  SuggestionConfig,
+} from './layout-config.interfaces';
 import { LoaderConfig } from './loader-config.interfaces';
 import { LocationConfig } from './location-config.interface';
 import { MarkdownConfig } from './markdown-config.interface';

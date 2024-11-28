@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-
 import { Store } from '@ngrx/store';
 
-import { SubmissionState } from '../../submission.reducers';
 import { ExecuteExternalUploadAction } from '../../objects/submission-objects.actions';
+import { SubmissionState } from '../../submission.reducers';
 
 
 /**

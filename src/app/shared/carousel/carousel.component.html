@@ -1,4 +1,4 @@
-<ngb-carousel #carousel [interval]="2000" (slide)="onSlide($event)" class="ds-carousel" *ngIf="!(isLoading$ | async)">
+<ngb-carousel #carousel [interval]="2000" (slide)="onSlide($event)" class="ds-carousel" *ngIf="(isLoading$ | async) === false">
   <ng-template ngbSlide *ngFor="let item of (carouselItems$ | async); let i = index; let last = last">
     <ng-container *ngIf="getItemLink(item.indexableObject); let currentLink; else carouselContent">
       <a *ngIf="internalLinkService.isLinkInternal(currentLink)" [routerLink]="internalLinkService.getRelativePath(currentLink)">

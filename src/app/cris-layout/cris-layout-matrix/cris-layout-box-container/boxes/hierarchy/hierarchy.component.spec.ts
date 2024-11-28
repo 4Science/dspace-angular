@@ -67,22 +67,22 @@ describe('HierarchyComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [
+      imports: [
         TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useClass: TranslateLoaderMock,
-            },
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock,
+          },
         }),
-    ],
-    declarations: [HierarchyComponent],
-    providers: [
+      ],
+      declarations: [HierarchyComponent],
+      providers: [
         { provide: 'boxProvider', useValue: testBox },
         { provide: 'itemProvider', useValue: testItem },
         { provide: Router, useValue: {} },
         { provide: ActivatedRoute, useValue: {} },
-    ],
-})
+      ],
+    })
       .compileComponents();
   });
 

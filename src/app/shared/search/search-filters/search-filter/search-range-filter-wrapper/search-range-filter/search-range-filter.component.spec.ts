@@ -1,9 +1,7 @@
 import {
-  ChangeDetectionStrategy,
-  NO_ERRORS_SCHEMA,
+  CUSTOM_ELEMENTS_SCHEMA,
   PLATFORM_ID,
 } from '@angular/core';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {
   ComponentFixture,
   TestBed,
@@ -23,29 +21,28 @@ import {
 
 import { RemoteDataBuildService } from '../../../../../../core/cache/builders/remote-data-build.service';
 import { buildPaginatedList } from '../../../../../../core/data/paginated-list.model';
+import { RouteService } from '../../../../../../core/services/route.service';
 import { PageInfo } from '../../../../../../core/shared/page-info.model';
 import { SearchService } from '../../../../../../core/shared/search/search.service';
 import {
   IN_PLACE_SEARCH,
-  REFRESH_FILTER, SCOPE,
-  SearchFilterService
+  REFRESH_FILTER,
+  SCOPE,
+  SearchFilterService,
 } from '../../../../../../core/shared/search/search-filter.service';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../../my-dspace-page/my-dspace-configuration.service';
 import { createSuccessfulRemoteDataObject$ } from '../../../../../remote-data.utils';
+import { ActivatedRouteStub } from '../../../../../testing/active-router.stub';
+import { routeServiceStub } from '../../../../../testing/route-service.stub';
 import { RouterStub } from '../../../../../testing/router.stub';
 import { SearchConfigurationServiceStub } from '../../../../../testing/search-configuration-service.stub';
+import { SearchFilterServiceStub } from '../../../../../testing/search-filter-service.stub';
 import { SearchServiceStub } from '../../../../../testing/search-service.stub';
 import { FacetValue } from '../../../../models/facet-value.model';
 import { FilterType } from '../../../../models/filter-type.model';
 import { SearchFilterConfig } from '../../../../models/search-filter-config.model';
+import { SearchFacetRangeOptionComponent } from '../../search-facet-filter-options/search-facet-range-option/search-facet-range-option.component';
 import { SearchRangeFilterComponent } from './search-range-filter.component';
-import { RouteService } from '../../../../../../core/services/route.service';
-import { SearchFilterServiceStub } from '../../../../../testing/search-filter-service.stub';
-import { routeServiceStub } from '../../../../../testing/route-service.stub';
-import { ActivatedRouteStub } from '../../../../../testing/active-router.stub';
-import {
-  SearchFacetRangeOptionComponent
-} from '../../search-facet-filter-options/search-facet-range-option/search-facet-range-option.component';
 
 xdescribe('SearchRangeFilterComponent', () => {
   let comp: SearchRangeFilterComponent;

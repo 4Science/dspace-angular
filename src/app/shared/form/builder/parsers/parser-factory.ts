@@ -17,6 +17,7 @@ import { LinkFieldParser } from './link-field-parser';
 import { ListFieldParser } from './list-field-parser';
 import { LookupFieldParser } from './lookup-field-parser';
 import { LookupNameFieldParser } from './lookup-name-field-parser';
+import { MarkdownFieldParser } from './markdown-field-parser';
 import { NameFieldParser } from './name-field-parser';
 import { NumberFieldParser } from './number-field-parser';
 import { OneboxFieldParser } from './onebox-field-parser';
@@ -25,7 +26,6 @@ import { RelationGroupFieldParser } from './relation-group-field-parser';
 import { SeriesFieldParser } from './series-field-parser';
 import { TagFieldParser } from './tag-field-parser';
 import { TextareaFieldParser } from './textarea-field-parser';
-import { MarkdownFieldParser } from './markdown-field-parser';
 
 const fieldParserDeps = [
   SUBMISSION_ID,

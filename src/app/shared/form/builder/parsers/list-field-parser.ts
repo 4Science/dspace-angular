@@ -10,11 +10,7 @@ export class ListFieldParser extends FieldParser {
   public modelFactory(fieldValue?: FormFieldMetadataValueObject, label?: boolean): any {
     const listModelConfig = this.initModel(null, label);
     listModelConfig.repeatable = this.configData.repeatable;
-    if (this.configData.input.type === ParserType.OpenList) {
-      listModelConfig.openType = true;
-    } else {
-      listModelConfig.openType = false;
-    }
+    listModelConfig.openType = this.configData.input.type === ParserType.OpenList.valueOf();
 
     if (this.configData.selectableMetadata[0].controlledVocabulary
       && this.configData.selectableMetadata[0].controlledVocabulary.length > 0) {

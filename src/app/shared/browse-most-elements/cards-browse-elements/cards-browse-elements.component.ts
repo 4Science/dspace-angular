@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import {AbstractBrowseElementsComponent} from '../abstract-browse-elements.component';
-import {CollectionElementLinkType} from '../../object-collection/collection-element-link.type';
+
+import { CollectionElementLinkType } from '../../object-collection/collection-element-link.type';
+import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
 
 @Component({
-  selector: 'ds-cards-browse-elements',
+  selector: 'ds-base-cards-browse-elements',
   templateUrl: './cards-browse-elements.component.html',
-  styleUrls: ['./cards-browse-elements.component.scss']
+  styleUrls: ['./cards-browse-elements.component.scss'],
+  standalone: true,
 })
 export class CardsBrowseElementsComponent extends AbstractBrowseElementsComponent {
 

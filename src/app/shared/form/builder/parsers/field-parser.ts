@@ -78,7 +78,7 @@ export abstract class FieldParser {
   public parse() {
     if (((this.getInitValueCount() > 1 && !this.configData.repeatable) || (this.configData.repeatable))
       && (this.configData.input.type !== ParserType.List.valueOf())
-      && (this.configData.input.type !== ParserType.OpenList)
+      && (this.configData.input.type !== ParserType.OpenList.valueOf())
       && (this.configData.input.type !== ParserType.Tag.valueOf())
       && (this.configData.input.type !== ParserType.RelationGroup.toString())
       && (this.configData.input.type !== ParserType.InlineGroup.toString())
@@ -97,7 +97,7 @@ export abstract class FieldParser {
         isDraggable = false;
       }
       let openType = false;
-      if (this.configData.input.type === ParserType.OpenDropdown || this.configData.input.type === ParserType.OpenList) {
+      if (this.configData.input.type === ParserType.OpenDropdown.valueOf() || this.configData.input.type === ParserType.OpenList.valueOf()) {
         openType = true;
       }
       const config = {

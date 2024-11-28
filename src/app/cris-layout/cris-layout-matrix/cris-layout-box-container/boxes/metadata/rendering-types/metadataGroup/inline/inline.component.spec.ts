@@ -236,24 +236,24 @@ describe('Inline component when .first and .last is present in rendering configu
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    imports: [TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useClass: TranslateLoaderMock,
-            },
-        }), BrowserAnimationsModule, DsDatePipe,
-        MetadataRenderComponent,
-        InlineComponent,
-        TextComponent],
-    providers: [
+      imports: [TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useClass: TranslateLoaderMock,
+        },
+      }), BrowserAnimationsModule, DsDatePipe,
+      MetadataRenderComponent,
+      InlineComponent,
+      TextComponent],
+      providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
         LoadMoreService,
-    ],
-    schemas: [NO_ERRORS_SCHEMA],
-}).overrideComponent(InlineComponent, {
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).overrideComponent(InlineComponent, {
       set: { changeDetection: ChangeDetectionStrategy.OnPush },
     }).compileComponents();
   }));

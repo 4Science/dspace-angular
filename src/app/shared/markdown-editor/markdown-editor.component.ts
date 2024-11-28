@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NuMarkdownComponent, NuMarkdownModule } from '@ng-util/markdown';
+import { NuMarkdownComponent } from '@ng-util/markdown';
 
 @Component({
   selector: 'ds-markdown-editor',

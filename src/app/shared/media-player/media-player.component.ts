@@ -4,12 +4,14 @@ import {
 } from '@angular/common';
 import {
   Component,
- HostListener, Inject,
+  HostListener,
+  Inject,
   Input,
   OnDestroy,
   OnInit,
   PLATFORM_ID,
- ViewChild, ViewEncapsulation,
+  ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import {
   BehaviorSubject,
@@ -17,8 +19,8 @@ import {
 } from 'rxjs';
 
 import { MediaViewerItem } from '../../core/shared/media-viewer-item.model';
-import { VideojsService } from './services/videojs.service';
 import { hasValue } from '../empty.util';
+import { VideojsService } from './services/videojs.service';
 
 @Component({
   selector: 'ds-media-player',
@@ -41,12 +43,12 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
   /**
    * A reference to the video player container
    */
-  @ViewChild('videoContainerRef', {static: false}) videoContainerRef;
+  @ViewChild('videoContainerRef', { static: false }) videoContainerRef;
 
   /**
    * A reference to the video playlist container
    */
-  @ViewChild('playlistContainerRef', {static: false}) playlistContainerRef;
+  @ViewChild('playlistContainerRef', { static: false }) playlistContainerRef;
 
 
   /**

@@ -1,27 +1,27 @@
-import { ChangeDetectorRef, NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
 import {
   ComponentFixture,
   TestBed,
   waitForAsync,
 } from '@angular/core/testing';
-import { Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { of } from 'rxjs';
 
-import { TopSectionTemplateType } from '../../core/layout/models/section.model';
-import { Item } from '../../core/shared/item.model';
-import { ItemSearchResult } from '../object-collection/shared/item-search-result.model';
-import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
-import { createSuccessfulRemoteDataObject } from '../remote-data.utils';
-import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
-import { RouterStub } from '../testing/router.stub';
-import { followLink } from '../utils/follow-link-config.model';
-import { BrowseMostElementsComponent } from './browse-most-elements.component';
-import { ThemedDefaultBrowseElementsComponent } from './default-browse-elements/themed-default-browse-elements.component';
 import { APP_CONFIG } from '../../../config/app-config.interface';
 import { SearchManager } from '../../core/browse/search-manager';
 import { buildPaginatedList } from '../../core/data/paginated-list.model';
+import { TopSectionTemplateType } from '../../core/layout/models/section.model';
+import { Item } from '../../core/shared/item.model';
 import { PageInfo } from '../../core/shared/page-info.model';
+import { ItemSearchResult } from '../object-collection/shared/item-search-result.model';
+import { createSuccessfulRemoteDataObject } from '../remote-data.utils';
+import { RouterStub } from '../testing/router.stub';
+import { BrowseMostElementsComponent } from './browse-most-elements.component';
+import { ThemedDefaultBrowseElementsComponent } from './default-browse-elements/themed-default-browse-elements.component';
 
 describe('BrowseMostElementsComponent', () => {
   let component: BrowseMostElementsComponent;

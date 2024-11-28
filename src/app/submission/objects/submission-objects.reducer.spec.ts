@@ -785,7 +785,7 @@ describe('submissionReducer test suite', () => {
   it('should set the errors fo the external Upload section', () => {
     const errors = [{
       path: '/sections/external-upload',
-      message: 'error.validation.notfound'
+      message: 'error.validation.notfound',
     }];
     const action: any = new ExecuteExternalUploadErrorAction(submissionId, 'external-upload', errors);
 
@@ -799,7 +799,7 @@ describe('submissionReducer test suite', () => {
   it('should clean the errors fo the external Upload section', () => {
     const errors = [{
       path: '/sections/external-upload',
-      message: 'error.validation.notfound'
+      message: 'error.validation.notfound',
     }];
     let action: any = new ExecuteExternalUploadErrorAction(submissionId, 'external-upload', errors);
     let newState = submissionObjectReducer(initState, action);

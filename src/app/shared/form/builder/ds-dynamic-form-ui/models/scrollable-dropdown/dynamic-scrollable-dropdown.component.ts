@@ -410,7 +410,7 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
       value: value,
       display: display,
       otherInformation: otherInformation,
-      type: 'vocabularyEntry'
+      type: 'vocabularyEntry',
     });
     return object;
   }

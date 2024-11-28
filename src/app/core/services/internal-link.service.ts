@@ -3,11 +3,11 @@ import {
   Injectable,
 } from '@angular/core';
 
+import { isEmpty } from '../../shared/empty.util';
 import {
   NativeWindowRef,
   NativeWindowService,
 } from './window.service';
-import { isEmpty } from '../../shared/empty.util';
 
 /**
  * LinkService provides utility functions for working with links, such as checking if a link is internal

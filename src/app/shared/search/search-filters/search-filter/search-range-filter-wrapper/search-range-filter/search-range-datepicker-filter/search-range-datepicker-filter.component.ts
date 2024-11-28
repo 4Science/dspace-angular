@@ -1,5 +1,15 @@
-import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild, } from '@angular/core';
-import { ActivatedRoute, Router, } from '@angular/router';
+import {
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+  ViewChild,
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 import {
   NgbCalendar,
   NgbDate,
@@ -8,8 +18,15 @@ import {
   NgbInputDatepicker,
 } from '@ng-bootstrap/ng-bootstrap';
 import isEqual from 'lodash/isEqual';
-import { BehaviorSubject, Subject, } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, } from 'rxjs/operators';
+import {
+  BehaviorSubject,
+  Subject,
+} from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+} from 'rxjs/operators';
 
 import { RemoteDataBuildService } from '../../../../../../../core/cache/builders/remote-data-build.service';
 import { SearchService } from '../../../../../../../core/shared/search/search.service';
@@ -23,7 +40,10 @@ import {
 } from '../../../../../../../core/shared/search/search-filter.service';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../../../my-dspace-page/my-dspace-page.component';
 import { stringToNgbDateStruct } from '../../../../../../date.util';
-import { hasValue, isNotEmpty, } from '../../../../../../empty.util';
+import {
+  hasValue,
+  isNotEmpty,
+} from '../../../../../../empty.util';
 import { FilterType } from '../../../../../models/filter-type.model';
 import { SearchFilterConfig } from '../../../../../models/search-filter-config.model';
 import { renderFacetForEnvironment } from '../../../search-filter-type-decorator';

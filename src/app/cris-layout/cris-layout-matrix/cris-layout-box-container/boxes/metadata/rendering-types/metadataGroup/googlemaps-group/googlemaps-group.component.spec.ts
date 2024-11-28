@@ -1,16 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { GooglemapsGroupComponent } from './googlemaps-group.component';
-import { Item } from '../../../../../../../../core/shared/item.model';
-import { of } from 'rxjs';
-import { LayoutField } from '../../../../../../../../core/layout/models/box.model';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateLoaderMock } from '../../../../../../../../shared/mocks/translate-loader.mock';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoadMoreService } from '../../../../../../../services/load-more.service';
-import { GooglemapsComponent } from '../../../../../../../../shared/googlemaps/googlemaps.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
+import { of } from 'rxjs';
+
 import { ConfigurationDataService } from '../../../../../../../../core/data/configuration-data.service';
+import { LayoutField } from '../../../../../../../../core/layout/models/box.model';
+import { Item } from '../../../../../../../../core/shared/item.model';
+import { GooglemapsComponent } from '../../../../../../../../shared/googlemaps/googlemaps.component';
+import { TranslateLoaderMock } from '../../../../../../../../shared/mocks/translate-loader.mock';
 import { createSuccessfulRemoteDataObject$ } from '../../../../../../../../shared/remote-data.utils';
+import { LoadMoreService } from '../../../../../../../services/load-more.service';
+import { GooglemapsGroupComponent } from './googlemaps-group.component';
 
 describe('GooglemapsGroupComponent', () => {
   let component: GooglemapsGroupComponent;
@@ -18,7 +25,7 @@ describe('GooglemapsGroupComponent', () => {
   let fixture: ComponentFixture<GooglemapsGroupComponent>;
 
   const configurationDataService = jasmine.createSpyObj('configurationDataService', {
-    findByPropertyName: jasmine.createSpy('findByPropertyName')
+    findByPropertyName: jasmine.createSpy('findByPropertyName'),
   });
 
   const confResponse$ = createSuccessfulRemoteDataObject$({ values: ['valid-googlemap-key'] });
@@ -28,15 +35,15 @@ describe('GooglemapsGroupComponent', () => {
     metadata: {
       'dc.coverage.spatialgpdpy': [
         {
-          value: '45.4899793'
+          value: '45.4899793',
         },
       ],
       'dc.coverage.spatialgpdpx': [
         {
-          value: '9.138292'
+          value: '9.138292',
         },
-      ]
-    }
+      ],
+    },
   });
 
   const mockField = Object.assign({
@@ -58,7 +65,7 @@ describe('GooglemapsGroupComponent', () => {
           fieldType: 'METADATA',
           style: null,
           styleLabel: 'font-weight-bold col-0',
-          styleValue: 'col'
+          styleValue: 'col',
         },
         {
           metadata: 'dc.coverage.spatialgpdpx',
@@ -67,10 +74,10 @@ describe('GooglemapsGroupComponent', () => {
           fieldType: 'METADATA',
           style: null,
           styleLabel: 'font-weight-bold col-0',
-          styleValue: 'col'
-        }
-      ]
-    }
+          styleValue: 'col',
+        },
+      ],
+    },
   }) as LayoutField;
 
   beforeEach(async () => {
@@ -78,8 +85,8 @@ describe('GooglemapsGroupComponent', () => {
       imports: [TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
-          useClass: TranslateLoaderMock
-        }
+          useClass: TranslateLoaderMock,
+        },
       }), BrowserAnimationsModule],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
@@ -92,9 +99,9 @@ describe('GooglemapsGroupComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
       declarations: [
         GooglemapsGroupComponent,
-        GooglemapsComponent]
+        GooglemapsComponent],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(GooglemapsGroupComponent);
     component = fixture.componentInstance;
