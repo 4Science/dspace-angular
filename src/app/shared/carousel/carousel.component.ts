@@ -18,6 +18,7 @@ import {
   NgbSlideEvent,
   NgbSlideEventSource,
 } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 import difference from 'lodash/difference';
 import {
   BehaviorSubject,
@@ -69,6 +70,7 @@ import { CarouselOptions } from './carousel-options.model';
     RouterLink,
     AsyncPipe,
     NgClass,
+    TranslateModule,
   ],
   standalone: true,
 })

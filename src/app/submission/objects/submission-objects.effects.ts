@@ -465,9 +465,13 @@ export class SubmissionObjectEffects {
           }
         }),
         mergeMap((actions) => observableFrom(actions)),
-        catchError((rd: unknown) => observableFrom(
-          this.parseErrorResponse(false, rd.errors, action.payload.submissionId, rd.statusCode, rd.errorMessage),
-        )),
+        catchError((rd: unknown) => {
+          if (rd instanceof RemoteData) {
+            return observableFrom(
+              this.parseErrorResponse(false, rd.errors, action.payload.submissionId, rd.statusCode, rd.errorMessage),
+            );
+          }
+        }),
       );
     })),
   );

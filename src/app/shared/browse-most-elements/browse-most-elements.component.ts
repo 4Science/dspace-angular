@@ -1,7 +1,9 @@
 import {
   AsyncPipe,
   LowerCasePipe,
+  NgIf,
   NgSwitch,
+  NgSwitchCase,
   NgSwitchDefault,
 } from '@angular/common';
 import {
@@ -37,6 +39,7 @@ import { ViewMode } from '../../core/shared/view-mode.model';
 import { CollectionElementLinkType } from '../object-collection/collection-element-link.type';
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
 import { SearchResult } from '../search/models/search-result.model';
+import { ThemedCardsBrowseElementsComponent } from './cards-browse-elements/themed-cards-browse-elements.component';
 import { ThemedDefaultBrowseElementsComponent } from './default-browse-elements/themed-default-browse-elements.component';
 
 @Component({
@@ -51,6 +54,9 @@ import { ThemedDefaultBrowseElementsComponent } from './default-browse-elements/
     NgSwitch,
     NgSwitchDefault,
     TranslateModule,
+    ThemedCardsBrowseElementsComponent,
+    NgSwitchCase,
+    NgIf,
   ],
 })
 

@@ -25,6 +25,7 @@ import {
 import { Observable } from 'rxjs';
 import { InternalLinkService } from 'src/app/core/services/internal-link.service';
 
+import { toRemoteData } from '../../browse-by/browse-by-metadata/browse-by-metadata.component.spec';
 import { SearchManager } from '../../core/browse/search-manager';
 import { RemoteDataBuildService } from '../../core/cache/builders/remote-data-build.service';
 import { SortDirection } from '../../core/cache/models/sort-options.model';

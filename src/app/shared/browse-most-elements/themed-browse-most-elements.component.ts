@@ -38,8 +38,6 @@ export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMos
 
   @Input() topSection: TopSection;
 
-  @Input() mode: LayoutModeEnum;
-
   @Input() showThumbnails: boolean;
 
   protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'projection', 'mode', 'showLabel', 'showMetrics', 'showThumbnails', 'topSection', 'mode'];

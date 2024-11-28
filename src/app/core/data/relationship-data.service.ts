@@ -647,8 +647,8 @@ export class RelationshipDataService extends IdentifiableDataService<Relationshi
    * @param itemType    The type of item this metadata value represents (will only be used when no related item can be found, as a fallback)
    */
   resolveMetadataRepresentation(metadatum: MetadataValue, parentItem: DSpaceObject, itemType: string): Observable<MetadataRepresentation> {
-    if (this.metadataService.isVirtual(metadatum)) {
-      return this.findById(this.metadataService.virtualValue(metadatum), true, false, followLink('leftItem'), followLink('rightItem')).pipe(
+    if (metadatum.isVirtual) {
+      return this.findById(metadatum.virtualValue, true, false, followLink('leftItem'), followLink('rightItem')).pipe(
         getFirstSucceededRemoteData(),
         switchMap((relRD: RemoteData<Relationship>) =>
           observableCombineLatest(relRD.payload.leftItem, relRD.payload.rightItem).pipe(

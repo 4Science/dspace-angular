@@ -1,9 +1,15 @@
 import {
+  AsyncPipe,
+  NgIf,
+  NgStyle,
+} from '@angular/common';
+import {
   Component,
   ElementRef,
   Input,
   OnInit,
 } from '@angular/core';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import {
   TranslateModule,
   TranslateService,
@@ -28,7 +34,6 @@ import {
 } from 'rxjs/operators';
 
 import {
-  LocationCoordinates,
   LocationDDCoordinates,
   LocationErrorCodes,
   LocationPlace,
@@ -36,10 +41,6 @@ import {
 } from '../../core/services/location.service';
 import { isNotEmpty } from '../empty.util';
 
-export interface OpenStreetMapPointer {
-  coordinates: LocationCoordinates,
-  color: string,
-}
 
 @Component({
   selector: 'ds-open-street-map',
@@ -47,6 +48,10 @@ export interface OpenStreetMapPointer {
   styleUrls: ['./open-street-map.component.scss'],
   imports: [
     TranslateModule,
+    AsyncPipe,
+    NgIf,
+    LeafletModule,
+    NgStyle,
   ],
   standalone: true,
 })
@@ -182,10 +187,12 @@ export class OpenStreetMapComponent implements OnInit {
               coordinates: coordinates,
             };
             this.place.next(place);
-            if (err.message === LocationErrorCodes.API_ERROR) {
-              console.error(err.message);
-            } else {
-              console.warn(err.message);
+            if (err instanceof Error) {
+              if (err.message === LocationErrorCodes.API_ERROR.valueOf()) {
+                console.error(err.message);
+              } else {
+                console.warn(err.message);
+              }
             }
           },
         });
@@ -203,11 +210,13 @@ export class OpenStreetMapComponent implements OnInit {
           this.place.next(place);
         },
         error: (err: unknown) => {
-          this.invalidLocationErrorCode.next(err.message); // either INVALID_COORDINATES or API_ERROR
-          if (err.message === LocationErrorCodes.API_ERROR) {
-            console.error(err.message);
-          } else {
-            console.warn(err.message);
+          if (err instanceof Error) {
+            this.invalidLocationErrorCode.next(err.message); // either INVALID_COORDINATES or API_ERROR
+            if (err.message === LocationErrorCodes.API_ERROR.valueOf()) {
+              console.error(err.message);
+            } else {
+              console.warn(err.message);
+            }
           }
         },
       });
@@ -222,11 +231,13 @@ export class OpenStreetMapComponent implements OnInit {
           this.place.next(place);
         },
         error: (err: unknown) => {
-          this.invalidLocationErrorCode.next(err.message); // either LOCATION_NOT_FOUND or API_ERROR
-          if (err.message === LocationErrorCodes.API_ERROR) {
-            console.error(err.message);
-          } else {
-            console.warn(err.message);
+          if (err instanceof Error) {
+            this.invalidLocationErrorCode.next(err.message); // either LOCATION_NOT_FOUND or API_ERROR
+            if (err.message === LocationErrorCodes.API_ERROR.valueOf()) {
+              console.error(err.message);
+            } else {
+              console.warn(err.message);
+            }
           }
         },
       });

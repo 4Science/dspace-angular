@@ -33,7 +33,7 @@ export enum LocationErrorCodes {
   API_ERROR = 'api-error',
 }
 
-const IS_DD_COORDINATE_PAIR_REGEXP = /^\d+\.?\d*,\d+\.?\d*$/;
+const IS_DD_COORDINATE_PAIR_REGEXP = /^\d+\.?\d*,\s?\d+\.?\d*$/;
 const IS_SG_COORDINATE_PAIR_REGEXP = /^[NS] *\d+° *\d+['′] *\d+(?:"|″|\.\d+),? *[EW] *\d+° *\d+['′] *\d+(?:"|″|\.\d+)|\d+° *\d+['′] *\d+(?:"|″|\.\d+) *[NS],? *\d+° *\d+['′] *\d+(?:"|″|\.\d+) *[EW]$/;
 
 const NOMINATIM_RESPONSE_FORMAT = 'jsonv2';

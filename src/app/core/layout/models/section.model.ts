@@ -114,6 +114,14 @@ export interface TopSectionColumn {
   titleKey: string;
 }
 
+/**
+ * Represents the type of template to use for the section
+ */
+export enum TopSectionTemplateType {
+  DEFAULT = 'default', // CRIS default template
+  CARD = 'card', // Card template
+}
+
 export enum LayoutModeEnum {
   LIST = 'list',
   CARD = 'card'
@@ -138,11 +146,4 @@ export interface CarouselSection extends SectionComponent {
   captionStyle: string;
   titleStyle: string;
   bundle: string;
-}
-
-/**
- * Represents the type of template to use for the section
- */
-export enum TopSectionTemplateType {
-  DEFAULT = 'default', // CRIS default template
 }

@@ -313,7 +313,7 @@ export class DsoEditMetadataValueComponent implements OnInit, OnChanges, OnDestr
    * Initialise potential properties of a virtual metadata value
    */
   initVirtualProperties(): void {
-    this.mdRepresentation$ = this.metadataService.isVirtual(this.mdValue.newValue) ?
+    this.mdRepresentation$ = this.mdValue.newValue.isVirtual ?
       this.relationshipService.resolveMetadataRepresentation(this.mdValue.newValue, this.dso, 'Item')
         .pipe(
           map((mdRepresentation: MetadataRepresentation) =>

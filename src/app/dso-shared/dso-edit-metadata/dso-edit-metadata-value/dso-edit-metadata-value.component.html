@@ -1,4 +1,4 @@
-<div class="d-flex flex-row ds-value-row" *ngVar="metadataService.isVirtual(mdValue.newValue) as isVirtual" role="row"
+<div class="d-flex flex-row ds-value-row" *ngVar="mdValue.newValue.isVirtual as isVirtual" role="row"
      cdkDrag (cdkDragStarted)="dragging.emit(true)" (cdkDragEnded)="dragging.emit(false)"
      [ngClass]="{ 'ds-warning': mdValue.reordered || mdValue.change === DsoEditMetadataChangeTypeEnum.UPDATE, 'ds-danger': mdValue.change === DsoEditMetadataChangeTypeEnum.REMOVE, 'ds-success': mdValue.change === DsoEditMetadataChangeTypeEnum.ADD, 'h-100': isOnlyValue }">
   <div class="flex-grow-1 ds-flex-cell ds-value-cell d-flex flex-column" *ngVar="(mdRepresentation$ | async) as mdRepresentation" role="cell">
@@ -39,13 +39,13 @@
         <input class="form-control form-outline" data-test="authority-input" [(ngModel)]="mdValue.newValue.authority" [disabled]="!editingAuthority"
               [attr.aria-label]="(dsoType + '.edit.metadata.edit.authority.key') | translate"
               (change)="onChangeAuthorityKey()" />
-        <button class="btn btn-outline-secondary btn-sm ng-star-inserted" id="metadata-confirm-btn" *ngIf="!editingAuthority"
+        <button class="btn btn-outline-secondary btn-sm ng-star-inserted" id="{{'metadata-confirm-btn'}}" *ngIf="!editingAuthority"
                 [title]="dsoType + '.edit.metadata.edit.buttons.open-authority-edition' | translate"
                 ngbTooltip="{{ dsoType + '.edit.metadata.edit.buttons.open-authority-edition' | translate }}"
                 (click)="onChangeEditingAuthorityStatus(true)">
           <i class="fas fa-lock fa-fw"></i>
         </button>
-        <button class="btn btn-outline-success btn-sm ng-star-inserted" id="metadata-confirm-btn" *ngIf="editingAuthority"
+        <button class="btn btn-outline-success btn-sm ng-star-inserted" id="{{'metadata-confirm-btn'}}" *ngIf="editingAuthority"
                 [title]="dsoType + '.edit.metadata.edit.buttons.close-authority-edition' | translate"
                 ngbTooltip="{{ dsoType + '.edit.metadata.edit.buttons.close-authority-edition' | translate }}"
                 (click)="onChangeEditingAuthorityStatus(false)">
