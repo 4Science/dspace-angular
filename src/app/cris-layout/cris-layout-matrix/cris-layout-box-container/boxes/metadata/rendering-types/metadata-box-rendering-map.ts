@@ -24,6 +24,8 @@ import { TagBrowseComponent } from './tag-browse/tag-browse.component';
 import { MarkdownComponent } from './markdown/markdown.component';
 import { SearchComponent } from './search/search.component';
 import { TagSearchComponent } from './tag-search/tag-search.component';
+import { OpenstreetmapGroupComponent } from './metadataGroup/openstreetmap-group/openstreetmap-group.component';
+import { GooglemapsGroupComponent } from './metadataGroup/googlemaps-group/googlemaps-group.component';
 
 export const layoutBoxesMap = new Map<FieldRenderingType, MetadataBoxFieldRenderOptions>([
   [FieldRenderingType.TEXT, { componentRef: TextComponent, structured: false } as MetadataBoxFieldRenderOptions],
@@ -71,9 +73,17 @@ export const layoutBoxesMap = new Map<FieldRenderingType, MetadataBoxFieldRender
     componentRef: GmapComponent,
     structured: false,
   } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.GMAPGROUP, {
+    componentRef: GooglemapsGroupComponent,
+    structured: true,
+  } as MetadataBoxFieldRenderOptions],
   [FieldRenderingType.OSMAP, {
     componentRef: OpenStreetMapRenderingComponent,
     structured: false,
+  } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.OSMAPGROUP, {
+    componentRef: OpenstreetmapGroupComponent,
+    structured: true,
   } as MetadataBoxFieldRenderOptions],
   [FieldRenderingType.BROWSE, {
     componentRef: BrowseComponent,
