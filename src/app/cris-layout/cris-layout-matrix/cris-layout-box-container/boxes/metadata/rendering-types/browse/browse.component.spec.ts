@@ -59,7 +59,7 @@ describe('BrowseComponent', () => {
           provide: TranslateLoader,
           useClass: TranslateLoaderMock,
         },
-      }), BrowserAnimationsModule, DsDatePipe],
+      }), BrowserAnimationsModule, DsDatePipe, BrowseComponent],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
@@ -67,7 +67,6 @@ describe('BrowseComponent', () => {
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
       ],
-      declarations: [BrowseComponent],
     })
       .compileComponents();
   }));

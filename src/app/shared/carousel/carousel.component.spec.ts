@@ -191,9 +191,7 @@ describe('CarouselComponent', () => {
             provide: TranslateLoader,
             useClass: TranslateLoaderMock,
           },
-        }),
-      ],
-      declarations: [CarouselComponent],
+        }), CarouselComponent],
       providers: [
         CarouselComponent,
         { provide: ObjectCacheService, useValue: {} },

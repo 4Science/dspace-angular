@@ -102,7 +102,8 @@ describe('OpenstreetmapGroupComponent', () => {
           provide: TranslateLoader,
           useClass: TranslateLoaderMock,
         },
-      }), BrowserAnimationsModule],
+      }), BrowserAnimationsModule, OpenstreetmapGroupComponent,
+      OpenStreetMapComponent],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
@@ -112,9 +113,6 @@ describe('OpenstreetmapGroupComponent', () => {
         LoadMoreService,
       ],
       schemas: [NO_ERRORS_SCHEMA],
-      declarations: [
-        OpenstreetmapGroupComponent,
-        OpenStreetMapComponent],
     })
       .compileComponents();
 

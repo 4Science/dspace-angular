@@ -21,7 +21,7 @@ describe('PdfBitstreamViewerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PdfBitstreamViewerComponent],
+      imports: [PdfBitstreamViewerComponent],
       providers: [
         DspaceRestService,
         { provide: NativeWindowService, useValue: window },

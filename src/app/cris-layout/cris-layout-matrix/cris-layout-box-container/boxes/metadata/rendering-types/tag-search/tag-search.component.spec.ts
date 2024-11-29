@@ -59,7 +59,7 @@ describe('TagSearchComponent', () => {
           provide: TranslateLoader,
           useClass: TranslateLoaderMock,
         },
-      }), BrowserAnimationsModule, DsDatePipe],
+      }), BrowserAnimationsModule, DsDatePipe, TagSearchComponent],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
@@ -67,7 +67,6 @@ describe('TagSearchComponent', () => {
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
       ],
-      declarations: [TagSearchComponent],
     })
       .compileComponents();
   }));

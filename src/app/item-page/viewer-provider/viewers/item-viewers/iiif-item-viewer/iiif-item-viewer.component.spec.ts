@@ -15,8 +15,7 @@ describe('IiifItemViewerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [IIIFItemViewerComponent],
-      imports: [RouterTestingModule.withRoutes([])],
+      imports: [RouterTestingModule.withRoutes([]), IIIFItemViewerComponent],
       providers: [
         { provide: Store, useValue: provideMockStore() },
       ],

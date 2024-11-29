@@ -35,7 +35,6 @@ describe('CrisLayoutMediaBoxComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CrisLayoutMediaBoxComponent],
       imports: [
         TranslateModule.forRoot({
           loader: {
@@ -43,6 +42,7 @@ describe('CrisLayoutMediaBoxComponent', () => {
             useClass: TranslateLoaderMock,
           },
         }),
+        CrisLayoutMediaBoxComponent,
       ],
       providers: [
         { provide: 'boxProvider', useValue: boxMetadata },

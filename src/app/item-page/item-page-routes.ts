@@ -2,6 +2,7 @@ import { Route } from '@angular/router';
 
 import { REQUEST_COPY_MODULE_PATH } from '../app-routing-paths';
 import { authenticatedGuard } from '../core/auth/authenticated.guard';
+import { i18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.resolver';
 import { itemBreadcrumbResolver } from '../core/breadcrumbs/item-breadcrumb.resolver';
 import { LinkMenuItemModel } from '../shared/menu/menu-item/models/link.model';
 import { MenuItemType } from '../shared/menu/menu-item-type.model';
@@ -14,11 +15,14 @@ import { itemPageAdministratorGuard } from './item-page-administrator.guard';
 import {
   ITEM_EDIT_PATH,
   ORCID_PATH,
+  UNPAYWALL_VERSIONS_PATH,
   UPLOAD_BITSTREAM_PATH,
+  VIEWERS_PATH,
 } from './item-page-routing-paths';
 import { OrcidPageComponent } from './orcid-page/orcid-page.component';
 import { orcidPageGuard } from './orcid-page/orcid-page.guard';
 import { ThemedItemPageComponent } from './simple/themed-item-page.component';
+import { UnpaywallVersionsComponent } from './unpaywall-versions/unpaywall-versions.component';
 import { versionResolver } from './version-page/version.resolver';
 import { VersionPageComponent } from './version-page/version-page/version-page.component';
 
@@ -64,11 +68,33 @@ export const ROUTES: Route[] = [
         canActivate: [authenticatedGuard, orcidPageGuard],
       },
       {
+        path: VIEWERS_PATH,
+        loadChildren: () => import('./viewer-provider/viewer-provider-routes').then(m => m.ROUTES),
+      },
+      {
+        path: UNPAYWALL_VERSIONS_PATH,
+        component: UnpaywallVersionsComponent,
+        resolve: {
+          breadcrumb: i18nBreadcrumbResolver,
+        },
+        data: {
+          title: 'submission.unpaywall.versions.title',
+          breadcrumbKey: 'submission.unpaywall.versions',
+          showBreadcrumbs: true,
+        },
+      },
+      {
         path: ':tab',
         component: ThemedItemPageComponent,
         resolve: {
           tabs: crisItemPageTabResolver,
         },
+        children: [
+          {
+            path: VIEWERS_PATH,
+            loadChildren: () => import('./viewer-provider/viewer-provider-routes').then(m => m.ROUTES),
+          },
+        ],
       },
     ],
     data: {

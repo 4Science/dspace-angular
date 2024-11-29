@@ -87,7 +87,8 @@ describe('GooglemapsGroupComponent', () => {
           provide: TranslateLoader,
           useClass: TranslateLoaderMock,
         },
-      }), BrowserAnimationsModule],
+      }), BrowserAnimationsModule, GooglemapsGroupComponent,
+      GooglemapsComponent],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
@@ -97,9 +98,6 @@ describe('GooglemapsGroupComponent', () => {
         LoadMoreService,
       ],
       schemas: [NO_ERRORS_SCHEMA],
-      declarations: [
-        GooglemapsGroupComponent,
-        GooglemapsComponent],
     })
       .compileComponents();
 

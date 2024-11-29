@@ -34,8 +34,7 @@ describe('ViewerProviderComponent', () => {
   beforeEach(async () => {
     // location = jasmine.createSpyObj('location', ['back', 'path']);
     await TestBed.configureTestingModule({
-      declarations: [ViewerProviderComponent],
-      imports: [RouterTestingModule.withRoutes([]), TranslateModule.forRoot()],
+      imports: [RouterTestingModule.withRoutes([]), TranslateModule.forRoot(), ViewerProviderComponent],
       providers: [
         { provide: Store, useValue: StoreMock },
         { provide: ItemDataService, useValue: {} },

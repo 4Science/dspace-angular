@@ -74,8 +74,8 @@ describe('HierarchyComponent', () => {
             useClass: TranslateLoaderMock,
           },
         }),
+        HierarchyComponent,
       ],
-      declarations: [HierarchyComponent],
       providers: [
         { provide: 'boxProvider', useValue: testBox },
         { provide: 'itemProvider', useValue: testItem },

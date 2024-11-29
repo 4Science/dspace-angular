@@ -112,11 +112,9 @@ describe('SectionExternalUploadComponent test suite', () => {
         NgxPaginationModule,
         NoopAnimationsModule,
         TranslateModule.forRoot(),
-      ],
-      declarations: [
-        SectionExternalUploadComponent,
         TestComponent,
       ],
+      declarations: [SectionExternalUploadComponent],
       providers: [
         { provide: CollectionDataService, useValue: getMockCollectionDataService() },
         { provide: SectionsService, useValue: sectionsService },
@@ -216,6 +214,12 @@ describe('SectionExternalUploadComponent test suite', () => {
 @Component({
   selector: 'ds-test-cmp',
   template: ``,
+  standalone: true,
+  imports: [BrowserModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxPaginationModule],
 })
 class TestComponent {
 

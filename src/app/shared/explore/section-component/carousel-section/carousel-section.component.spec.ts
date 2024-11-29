@@ -72,9 +72,7 @@ describe('CarouselSectionComponent', () => {
             provide: TranslateLoader,
             useClass: TranslateLoaderMock,
           },
-        }),
-      ],
-      declarations: [CarouselSectionComponent],
+        }), CarouselSectionComponent],
       providers: [
         CarouselSectionComponent,
         { provide: SearchService, useValue: searchServiceStub },

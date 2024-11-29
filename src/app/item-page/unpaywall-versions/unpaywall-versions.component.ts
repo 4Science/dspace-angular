@@ -1,11 +1,19 @@
-import { Location } from '@angular/common';
+import {
+  AsyncPipe,
+  Location,
+  NgForOf,
+  NgIf,
+} from '@angular/common';
 import {
   Component,
   OnDestroy,
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 import {
   combineLatest,
   Observable,
@@ -26,6 +34,13 @@ import { UnpaywallItemVersionModel } from '../../core/submission/models/unpaywal
   selector: 'ds-unpaywall-versions',
   templateUrl: './unpaywall-versions.component.html',
   styleUrls: ['./unpaywall-versions.component.scss'],
+  imports: [
+    NgForOf,
+    AsyncPipe,
+    TranslateModule,
+    NgIf,
+  ],
+  standalone: true,
 })
 export class UnpaywallVersionsComponent implements OnInit, OnDestroy {
 

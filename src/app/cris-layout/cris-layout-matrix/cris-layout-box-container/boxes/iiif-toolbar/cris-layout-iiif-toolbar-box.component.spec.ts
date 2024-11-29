@@ -31,8 +31,8 @@ describe('CrisLayoutIiifToolbarBoxComponent', () => {
             useClass: TranslateLoaderMock,
           },
         }),
+        CrisLayoutIIIFToolbarBoxComponent,
       ],
-      declarations: [CrisLayoutIIIFToolbarBoxComponent],
       providers: [
         { provide: 'boxProvider', useValue: {} },
         { provide: 'itemProvider', useValue: {} },

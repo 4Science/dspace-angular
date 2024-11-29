@@ -59,9 +59,9 @@ describe('OpenStreetMapComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [OpenStreetMapComponent],
       imports: [
         TranslateModule.forRoot(),
+        OpenStreetMapComponent,
       ],
       providers: [
         { provide: LocationService, useValue: locationService },

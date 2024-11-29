@@ -1,4 +1,7 @@
-import { AsyncPipe, NgForOf } from '@angular/common';
+import {
+  AsyncPipe,
+  NgForOf,
+} from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -39,8 +42,8 @@ import {
   isEmpty,
   isNotEmpty,
 } from '../../empty.util';
-import { followLink } from '../../utils/follow-link-config.model';
 import { FileSizePipe } from '../../utils/file-size-pipe';
+import { followLink } from '../../utils/follow-link-config.model';
 
 @Component({
   selector: 'ds-media-player-playlist',

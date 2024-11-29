@@ -10,6 +10,7 @@ import {
   ADMIN_MODULE_PATH,
   BITSTREAM_MODULE_PATH,
   BULK_IMPORT_PATH,
+  BUNDLE_PATH,
   EDIT_ITEM_PATH,
   ERROR_PAGE,
   FORBIDDEN_PATH,
@@ -274,6 +275,12 @@ export const APP_ROUTES: Route[] = [
       {
         path: EDIT_ITEM_PATH,
         loadChildren: () => import('./edit-item/edit-item-routes').then((m) => m.ROUTES),
+        canActivate: [endUserAgreementCurrentUserGuard],
+      },
+      {
+        path: BUNDLE_PATH,
+        loadChildren: () => import('./bitstream-page/bundle-bitstream-page/bundle-page-routes')
+          .then((m) => m.ROUTES),
         canActivate: [endUserAgreementCurrentUserGuard],
       },
       {

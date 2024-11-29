@@ -60,7 +60,7 @@ describe('SearchComponent', () => {
           provide: TranslateLoader,
           useClass: TranslateLoaderMock,
         },
-      }), BrowserAnimationsModule, RouterTestingModule, DsDatePipe],
+      }), BrowserAnimationsModule, RouterTestingModule, DsDatePipe, SearchComponent],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
@@ -68,7 +68,6 @@ describe('SearchComponent', () => {
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
       ],
-      declarations: [SearchComponent],
     })
       .compileComponents();
   }));

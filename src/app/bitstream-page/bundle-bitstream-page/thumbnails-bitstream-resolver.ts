@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
-  Resolve,
+  ResolveFn,
   RouterStateSnapshot,
 } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -16,33 +16,30 @@ import {
 } from '../../shared/remote-data.utils';
 import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 
+/**
+ * Function for resolving a bitstream based on the parameters in the current route
+ * @param {ActivatedRouteSnapshot} route The current ActivatedRouteSnapshot
+ * @param {RouterStateSnapshot} state The current RouterStateSnapshot
+ * @returns Observable<RemoteData<PaginatedList<Bitstream>>> Emits the found bitstream based on the parameters in the current route,
+ * or an error if something went wrong
+ */
+export const thumbnailsBitstreamResolver: ResolveFn<any> = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot,
+): Observable<any> => {
+  const bundleDataService = inject(BundleDataService);
+  const bundleId = route.params.bundle_uuid;
+  const thumbnailIndex = route.params.thumbnail_id;
+  const paginatedOptions = new PaginatedSearchOptions({
+    pagination: Object.assign(new PaginationComponentOptions(), { id: thumbnailIndex, pageSize: 1, currentPage: thumbnailIndex }),
+  });
 
-@Injectable({
-  providedIn: 'root',
-})
-export class ThumbnailsBitstreamResolver implements Resolve<any> {
-  constructor(protected bundleDataService: BundleDataService) {
-  }
-  /**
-   * Method for resolving a bitstream based on the parameters in the current route
-   * @param {ActivatedRouteSnapshot} route The current ActivatedRouteSnapshot
-   * @param {RouterStateSnapshot} state The current RouterStateSnapshot
-   * @returns Observable<RemoteData<PaginatedList<Bitstream>>> Emits the found bitstream based on the parameters in the current route,
-   * or an error if something went wrong
-   */
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-    const bundleId = route.params.bundle_uuid;
-    const thumbnailIndex = route.params.thumbnail_id;
-    const paginatedOptions = new PaginatedSearchOptions({
-      pagination: Object.assign(new PaginationComponentOptions(), { id: thumbnailIndex , pageSize: 1, currentPage: thumbnailIndex }) });
-    return this.bundleDataService.getBitstreams(bundleId, paginatedOptions)
-      .pipe(
-        getFirstCompletedRemoteData(),
-        map ((data) => data.payload?.page[0]),
-        map ((data) => {
-          return data ? createSuccessfulRemoteDataObject(data) : createNoContentRemoteDataObject();
-        }),
-      );
-  }
-}
-
+  return bundleDataService.getBitstreams(bundleId, paginatedOptions)
+    .pipe(
+      getFirstCompletedRemoteData(),
+      map((data) => data.payload?.page[0]),
+      map((data) => {
+        return data ? createSuccessfulRemoteDataObject(data) : createNoContentRemoteDataObject();
+      }),
+    );
+};

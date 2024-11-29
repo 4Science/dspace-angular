@@ -41,6 +41,8 @@ import { DynamicListRadioGroupModel } from './models/list/dynamic-list-radio-gro
 import { DsDynamicLookupComponent } from './models/lookup/dynamic-lookup.component';
 import { DYNAMIC_FORM_CONTROL_TYPE_LOOKUP } from './models/lookup/dynamic-lookup.model';
 import { DYNAMIC_FORM_CONTROL_TYPE_LOOKUP_NAME } from './models/lookup/dynamic-lookup-name.model';
+import { DsDynamicMarkdownComponent } from './models/markdown/dynamic-markdown.component';
+import { DYNAMIC_FORM_CONTROL_TYPE_MARKDOWN } from './models/markdown/dynamic-markdown.model';
 import { DsDynamicOneboxComponent } from './models/onebox/dynamic-onebox.component';
 import { DYNAMIC_FORM_CONTROL_TYPE_ONEBOX } from './models/onebox/dynamic-onebox.model';
 import { DsDynamicRelationGroupComponent } from './models/relation-group/dynamic-relation-group.components';
@@ -111,6 +113,9 @@ export function dsDynamicFormControlMapFn(model: DynamicFormControlModel): Type<
 
     case DYNAMIC_FORM_CONTROL_TYPE_CUSTOM_SWITCH:
       return CustomSwitchComponent;
+
+    case DYNAMIC_FORM_CONTROL_TYPE_MARKDOWN:
+      return DsDynamicMarkdownComponent;
 
     default:
       return null;

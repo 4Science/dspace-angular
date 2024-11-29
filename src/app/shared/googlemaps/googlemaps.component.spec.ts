@@ -24,7 +24,7 @@ describe('GooglemapsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GooglemapsComponent],
+      imports: [GooglemapsComponent],
       providers: [
         { provide: ConfigurationDataService, useValue: configurationDataService },
       ],
