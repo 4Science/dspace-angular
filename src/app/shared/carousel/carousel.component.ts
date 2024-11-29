@@ -33,6 +33,7 @@ import {
   switchMap,
   take,
 } from 'rxjs/operators';
+import { InternalLinkService } from 'src/app/core/services/internal-link.service';
 
 import { SearchManager } from '../../core/browse/search-manager';
 import { SortOptions } from '../../core/cache/models/sort-options.model';
@@ -151,8 +152,8 @@ export class CarouselComponent implements OnInit {
   constructor(
     protected bitstreamDataService: BitstreamDataService,
     private searchManager: SearchManager,
-  ) {
-  }
+    public internalLinkService: InternalLinkService,
+  ) {}
 
   ngOnInit() {
     this.title = this.carouselOptions.title;

@@ -131,7 +131,7 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
     @Inject(PLATFORM_ID) protected platformId: any,
     @Inject(SCOPE) public scope: string,
   ) {
-    super(searchService, filterService, rdbs, router, searchConfigService, inPlaceSearch, filterConfig, refreshFilters, scope);
+    super(searchService, filterService, rdbs, router, searchConfigService);
   }
 
   /**

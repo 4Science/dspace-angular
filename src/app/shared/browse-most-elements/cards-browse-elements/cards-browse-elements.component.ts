@@ -1,6 +1,11 @@
+import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
 import { Component } from '@angular/core';
 
 import { CollectionElementLinkType } from '../../object-collection/collection-element-link.type';
+import { ObjectGridComponent } from '../../object-grid/object-grid.component';
 import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
 
 @Component({
@@ -8,6 +13,11 @@ import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.com
   templateUrl: './cards-browse-elements.component.html',
   styleUrls: ['./cards-browse-elements.component.scss'],
   standalone: true,
+  imports: [
+    NgIf,
+    AsyncPipe,
+    ObjectGridComponent,
+  ],
 })
 export class CardsBrowseElementsComponent extends AbstractBrowseElementsComponent {
 

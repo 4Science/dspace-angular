@@ -1,4 +1,7 @@
-import { NgIf } from '@angular/common';
+import {
+  NgClass,
+  NgIf,
+} from '@angular/common';
 import {
   Component,
   Input,
@@ -34,6 +37,7 @@ import {
     TranslateModule,
     FormsModule,
     NgbButtonsModule,
+    NgClass,
   ],
 })
 export class TopSectionComponent implements OnInit {

@@ -19,6 +19,8 @@ import { TableComponent } from './metadataGroup/table/table.component';
 import { OpenStreetMapRenderingComponent } from './open-street-map/open-street-map-rendering.component';
 import { OrcidComponent } from './orcid/orcid.component';
 import { MetadataBoxFieldRenderOptions } from './rendering-type.model';
+// eslint-disable-next-line dspace-angular-ts/themed-component-usages
+import { SearchComponent } from './search/search.component';
 import { TagComponent } from './tag/tag.component';
 import { TagBrowseComponent } from './tag-browse/tag-browse.component';
 import { TagSearchComponent } from './tag-search/tag-search.component';

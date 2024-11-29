@@ -1,5 +1,6 @@
 import {
   AsyncPipe,
+  NgClass,
   NgForOf,
   NgIf,
 } from '@angular/common';
@@ -26,6 +27,7 @@ import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.com
     AsyncPipe,
     NgIf,
     NgForOf,
+    NgClass,
   ],
 })
 export class DefaultBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnInit, OnChanges {
