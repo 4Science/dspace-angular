@@ -6831,6 +6831,8 @@
 
   "submission.sections.unpaywall.import": "Import from Unpaywall",
 
+  "submission.sections.unpaywall.status.error": "An unexpected error has occurred.",
+
   "submission.sections.unpaywall.status.successful": "There are available files to import from Unpaywall.",
 
   "submission.sections.unpaywall.status.not-found": "Cannot find record using Unpaywall API.",

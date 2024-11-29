@@ -289,7 +289,7 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
           this.notificationsService.error(err?.message);
           return of(Object.assign({}, {
             ...this.unpaywallSection$.getValue(),
-            status: UnpaywallSectionStatus.NO_FILE
+            status: UnpaywallSectionStatus.ERROR
           }));
         }),
       ).subscribe((unpaywall) => {

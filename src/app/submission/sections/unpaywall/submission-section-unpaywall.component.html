@@ -22,6 +22,10 @@
           <ds-alert [type]="AlertType.Error"
                     [content]="'submission.sections.unpaywall.status.not-found' | translate"></ds-alert>
         </ng-container>
+        <ng-container *ngSwitchCase="UnpaywallSectionStatus.ERROR">
+          <ds-alert [type]="AlertType.Error"
+                    [content]="'submission.sections.unpaywall.status.error' | translate"></ds-alert>
+        </ng-container>
       </div>
     </div>
   </div>
@@ -31,6 +35,7 @@
         <ds-themed-loading *ngSwitchCase="true" class="ds-themed-loading"></ds-themed-loading>
         <ng-container *ngSwitchCase="false">
           <button type="button" class="btn btn-secondary mr-2" aria-label="refresh"
+                  *ngIf="(status$ | async) !== UnpaywallSectionStatus.IMPORTED"
                   (click)="refreshApiCheck()">
             <span aria-hidden="true">{{'submission.sections.unpaywall.refresh' | translate}}</span>
           </button>
