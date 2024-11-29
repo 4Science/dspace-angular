@@ -29,10 +29,6 @@ import {
 } from '../../../../../../../../../../../item-page/item-page-routing-paths';
 import { isNotEmpty } from '../../../../../../../../../../../shared/empty.util';
 import { NotificationsService } from '../../../../../../../../../../../shared/notifications/notifications.service';
-import {
-  AttachmentRenderingType,
-  AttachmentTypeRendering,
-} from '../../../attachment-type.decorator';
 
 @Component({
   selector: 'ds-iiif-toolbar',
@@ -46,7 +42,6 @@ import {
   ],
   standalone: true,
 })
-@AttachmentTypeRendering(AttachmentRenderingType.IIIF, true)
 export class IIIFToolbarComponent implements OnInit {
 
   @Input()

@@ -1,9 +1,14 @@
 import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
+import {
   Component,
   Input,
   OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../../../../../../../../../../environments/environment';
@@ -15,18 +20,18 @@ import {
   getBitstreamItemViewerDetailsPath,
   getBitstreamItemViewerPath,
 } from '../../../../../../../../../../../item-page/item-page-routing-paths';
-import {
-  AttachmentRenderingType,
-  AttachmentTypeRendering,
-} from '../../../attachment-type.decorator';
 
 @Component({
   selector: 'ds-media-viewer-button',
   templateUrl: './media-viewer-button.component.html',
   styleUrls: ['./media-viewer-button.component.scss'],
+  imports: [
+    NgIf,
+    AsyncPipe,
+    TranslateModule,
+  ],
+  standalone: true,
 })
-@AttachmentTypeRendering(AttachmentRenderingType.VIDEO, true)
-@AttachmentTypeRendering(AttachmentRenderingType.AUDIO, true)
 export class MediaViewerButtonComponent implements OnInit {
 
   /**
