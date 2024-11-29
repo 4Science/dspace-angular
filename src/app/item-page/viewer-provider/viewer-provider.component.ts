@@ -1,6 +1,7 @@
 import {
   DOCUMENT,
   Location,
+  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -13,6 +14,7 @@ import {
   ActivatedRoute,
   Router,
 } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import {
   combineLatest,
   Observable,
@@ -43,6 +45,12 @@ import {
   selector: 'ds-viewer-provider',
   templateUrl: './viewer-provider.component.html',
   styleUrls: ['./viewer-provider.component.scss'],
+  imports: [
+    NgIf,
+    TranslateModule,
+    ViewerProviderDirective,
+  ],
+  standalone: true,
 })
 export class ViewerProviderComponent implements OnInit, OnDestroy {
 

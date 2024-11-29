@@ -18,10 +18,8 @@ import { HttpOptions } from '../dspace-rest/dspace-rest.service';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { Item } from '../shared/item.model';
 import { UnpaywallItemVersionRequest } from '../shared/unpaywall-item-version.request.model';
-import { UNPAYWALL_ITEM_VERSION_REQUEST } from '../shared/unpaywall-item-version-request.resource-type';
 import { UnpaywallItemVersionModel } from '../submission/models/unpaywall-item-version.model';
 import { BaseDataService } from './base/base-data.service';
-import { dataService } from './base/data-service.decorator';
 import { DefaultChangeAnalyzer } from './default-change-analyzer.service';
 import { RemoteData } from './remote-data';
 import { GetRequest } from './request.models';
@@ -33,7 +31,6 @@ import { RestRequest } from './rest-request.model';
  * Service responsible for interacting with the Unpaywall API.
  */
 @Injectable()
-@dataService(UNPAYWALL_ITEM_VERSION_REQUEST)
 export class UnpaywallItemService extends BaseDataService<UnpaywallItemVersionRequest> {
 
   constructor(

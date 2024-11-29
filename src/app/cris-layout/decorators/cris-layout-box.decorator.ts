@@ -3,7 +3,10 @@ import { Component } from '@angular/core';
 import { GenericConstructor } from '../../core/shared/generic-constructor';
 import { ItemVersionsComponent } from '../../item-page/versions/item-versions.component';
 import { CrisLayoutCollectionBoxComponent } from '../cris-layout-matrix/cris-layout-box-container/boxes/cris-layout-collection-box/cris-layout-collection-box.component';
+import { HierarchyComponent } from '../cris-layout-matrix/cris-layout-box-container/boxes/hierarchy/hierarchy.component';
+import { CrisLayoutIIIFToolbarBoxComponent } from '../cris-layout-matrix/cris-layout-box-container/boxes/iiif-toolbar/cris-layout-iiif-toolbar-box.component';
 import { CrisLayoutIIIFViewerBoxComponent } from '../cris-layout-matrix/cris-layout-box-container/boxes/iiif-viewer/cris-layout-iiif-viewer-box.component';
+import { CrisLayoutMediaBoxComponent } from '../cris-layout-matrix/cris-layout-box-container/boxes/media-box/cris-layout-media-box.component';
 import { CrisLayoutMetadataBoxComponent } from '../cris-layout-matrix/cris-layout-box-container/boxes/metadata/cris-layout-metadata-box.component';
 import { CrisLayoutMetricsBoxComponent } from '../cris-layout-matrix/cris-layout-box-container/boxes/metrics/cris-layout-metrics-box.component';
 import { CrisLayoutRelationBoxComponent } from '../cris-layout-matrix/cris-layout-box-container/boxes/relation/cris-layout-relation-box.component';
@@ -21,6 +24,9 @@ const layoutBoxesMap = new Map<LayoutBox, CrisLayoutBoxRenderOptions>([
   [ LayoutBox.METRICS, { componentRef: CrisLayoutMetricsBoxComponent, hasOwnContainer: true } as CrisLayoutBoxRenderOptions ],
   [ LayoutBox.RELATION, { componentRef: CrisLayoutRelationBoxComponent, hasOwnContainer: false } as CrisLayoutBoxRenderOptions ],
   [ LayoutBox.VERSIONING, { componentRef: ItemVersionsComponent, hasOwnContainer: false } as CrisLayoutBoxRenderOptions ],
+  [LayoutBox.IIIFTOOLBAR, { componentRef: CrisLayoutIIIFToolbarBoxComponent, hasOwnContainer: false } as CrisLayoutBoxRenderOptions],
+  [LayoutBox.VIDEOVIEWER, { componentRef: CrisLayoutMediaBoxComponent, hasOwnContainer: false } as CrisLayoutBoxRenderOptions],
+  [LayoutBox.HIERARCHY, { componentRef: HierarchyComponent, hasOwnContainer: true } as CrisLayoutBoxRenderOptions],
 ]);
 
 export function getCrisLayoutBox(boxType: LayoutBox): CrisLayoutBoxRenderOptions {

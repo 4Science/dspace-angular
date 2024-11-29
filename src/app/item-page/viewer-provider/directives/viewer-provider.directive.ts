@@ -5,6 +5,7 @@ import {
 
 @Directive({
   selector: '[dsViewerProvider]',
+  standalone: true,
 })
 export class ViewerProviderDirective {
 

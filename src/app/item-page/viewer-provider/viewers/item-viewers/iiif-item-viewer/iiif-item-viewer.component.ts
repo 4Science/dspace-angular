@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -11,6 +12,7 @@ import {
 } from 'rxjs/operators';
 
 import { RouteService } from '../../../../../core/services/route.service';
+import { MiradorViewerComponent } from '../../../../mirador-viewer/mirador-viewer.component';
 import {
   getDSpaceQuery,
   isIiifSearchEnabled,
@@ -21,6 +23,11 @@ import { BaseItemViewerComponent } from '../base-item-viewer.component';
   selector: 'ds-iiif-item-viewer',
   templateUrl: './iiif-item-viewer.component.html',
   styleUrls: ['./iiif-item-viewer.component.scss'],
+  imports: [
+    MiradorViewerComponent,
+    AsyncPipe,
+  ],
+  standalone: true,
 })
 export class IIIFItemViewerComponent extends BaseItemViewerComponent implements OnInit {
 

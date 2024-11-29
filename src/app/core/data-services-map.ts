@@ -59,6 +59,7 @@ import { RELATIONSHIP_TYPE } from './shared/item-relationships/relationship-type
 import { LICENSE } from './shared/license.resource-type';
 import { METRIC } from './shared/metric.resource-type';
 import { SITE } from './shared/site.resource-type';
+import { UNPAYWALL_ITEM_VERSION_REQUEST } from './shared/unpaywall-item-version-request.resource-type';
 import { VERSION } from './shared/version.resource-type';
 import { VERSION_HISTORY } from './shared/version-history.resource-type';
 import { LOGIN_STATISTICS } from './statistics/models/login-statistics.resource-type';
@@ -160,4 +161,5 @@ export const LAZY_DATA_SERVICES: LazyDataServicesMap = new Map([
   [WORKFLOW_STEP_STATISTICS.value, () => import('./statistics/workflow-step-statistics-data.service').then(m => m.WorkflowStepStatisticsDataService)],
   [ITEM_EXPORT_FORMAT.value, () => import('./itemexportformat/item-export-format.service').then(m => m.ItemExportFormatService)],
   [LOGIN_STATISTICS.value, () => import('./statistics/login-statistics.service').then(m => m.LoginStatisticsService)],
+  [UNPAYWALL_ITEM_VERSION_REQUEST.value, () => import('./data/unpaywall-item.service').then(m => m.UnpaywallItemService)],
 ]);

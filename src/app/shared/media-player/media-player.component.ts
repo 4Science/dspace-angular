@@ -1,6 +1,8 @@
 import {
+  AsyncPipe,
   DOCUMENT,
   isPlatformBrowser,
+  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -20,6 +22,9 @@ import {
 
 import { MediaViewerItem } from '../../core/shared/media-viewer-item.model';
 import { hasValue } from '../empty.util';
+import { ThemedLoadingComponent } from '../loading/themed-loading.component';
+import { MediaPlayerPlaylistComponent } from './media-player-playlist/media-player-playlist.component';
+import { MediaSelectionBarComponent } from './media-selection-bar/media-selection-bar.component';
 import { VideojsService } from './services/videojs.service';
 
 @Component({
@@ -27,6 +32,14 @@ import { VideojsService } from './services/videojs.service';
   templateUrl: './media-player.component.html',
   styleUrls: ['./media-player.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  imports: [
+    ThemedLoadingComponent,
+    AsyncPipe,
+    NgIf,
+    MediaSelectionBarComponent,
+    MediaPlayerPlaylistComponent,
+  ],
+  standalone: true,
 })
 export class MediaPlayerComponent implements OnInit, OnDestroy {
 
