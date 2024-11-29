@@ -1,5 +1,5 @@
-<ngb-carousel #carousel [interval]="2000" (slide)="onSlide($event)" class="ds-carousel">
-  <ng-template ngbSlide *ngFor="let item of currentPageItems(); let i = index; let last = last">
+<ngb-carousel #carousel [interval]="2000" (slide)="onSlide($event)" class="ds-carousel" *ngIf="!(isLoading$ | async)">
+  <ng-template ngbSlide *ngFor="let item of (carouselItems$ | async); let i = index; let last = last">
     <ng-container *ngIf="getItemLink(item.indexableObject); let currentLink; else carouselContent">
       <a *ngIf="internalLinkService.isLinkInternal(currentLink)" [routerLink]="internalLinkService.getRelativePath(currentLink)">
         <ng-container *ngTemplateOutlet="carouselContent"></ng-container>
@@ -18,11 +18,11 @@
           <img [src]="href" [alt]="item.indexableObject.metadata[title][0].value" class="img-fluid"
                [ngClass]="{'w-100': carouselOptions.fitWidth, 'h-100': carouselOptions.fitHeight}">
         </div>
-        <div class="carousel-caption">
+        <div class="carousel-caption" *ngIf="item.indexableObject.metadata">
           <div class="carousel-caption-inner">
-            <h3 data-test="carouselObjTitle" [class]="carouselOptions.titleStyle"
+            <h1 data-test="carouselObjTitle" [class]="carouselOptions.titleStyle" class="h3"
                 *ngIf="item.indexableObject.metadata[title]">
-              {{item.indexableObject.metadata[title][0].value}}</h3>
+              {{item.indexableObject.metadata[title][0].value}}</h1>
             <div data-test="carouselObjDesc" class="carousel-caption-text pr-3 pl-2" [class]="carouselOptions.captionStyle"
                  *ngIf="item.indexableObject.metadata[description]; let descriptionObj">
               {{descriptionObj[0].value}}
@@ -33,28 +33,6 @@
     </ng-template>
   </ng-template>
 </ngb-carousel>
-<div class="text-center play-pause-button">
-  <button type="button" class="btn btn-sm toggle-paused" (click)="togglePaused()">
-    <i class="fas fa-play" *ngIf="paused"></i>
-    <i class="fas fa-pause" *ngIf="!paused"></i>
-  </button>
-</div>
-<div class="mt-4 w-100 d-flex justify-content-center align-items-center" *ngIf="totalPages > 1">
-  <button (click)="previousPage()" [disabled]="currentPage === 1" class="prev border-0 bg-transparent">
-    <i class="fa fa-arrow-left"></i>
-  </button>
-  <button
-    *ngFor="let page of pages()"
-    class="number"
-    (click)="changePage(page)"
-    style="border: none; background: none; margin: 0 5px"
-    [style.color]="page === currentPage ? '#000000' : '#7c7c7c'">
-    {{ page < 10 ? '0' + page : page }}
-  </button>
-  <button (click)="nextPage()" [disabled]="currentPage === pages().length" class="next border-0 bg-transparent">
-    <i class="fa fa-arrow-right"></i>
-  </button>
-</div>
 
 <div
   class="carousel-content-wrapper"
@@ -64,13 +42,20 @@
            }"
   *ngIf="(isLoading$ | async)"
 >
-  <a
-    href="#"
-    target="_blank"
-    class="img-container-el">
+  <div class="h-100 img-container-el">
     <div class="picsum-img-wrapper flex-column">
       <img class="img-fluid" src="assets/images/replacement_image.svg">
       {{'loading.default' | translate}}
     </div>
-  </a>
+  </div>
 </div>
+
+<div class="text-center play-pause-button">
+  <button [disabled]="isLoading$ | async" [attr.aria-label]="'carousel.play.pause' | translate" type="button" class="btn btn-sm toggle-paused" (click)="togglePaused()">
+    <i class="fas fa-play" *ngIf="paused"></i>
+    <i class="fas fa-pause" *ngIf="!paused"></i>
+  </button>
+</div>
+
+
+

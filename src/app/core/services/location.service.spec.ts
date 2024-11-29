@@ -32,7 +32,7 @@ describe('LocationService', () => {
       expect(service.isDecimalCoordinateString('45,45,45')).toBeFalse();       // invalid pattern, wrong array size
       expect(service.isDecimalCoordinateString('.0,.0')).toBeFalse();          // valid numbers, but invalid pattern
       expect(service.isDecimalCoordinateString('45.000,45.000')).toBeTrue();
-      expect(service.isDecimalCoordinateString('45.000, 45.000')).toBeFalse(); // it contains a space
+      expect(service.isDecimalCoordinateString('45.000, 45.000')).toBeTrue();  // it contains a space but it can be trimmed
       expect(service.isDecimalCoordinateString('200,200')).toBeTrue();         // invalid numbers, but valid pattern
     });
 

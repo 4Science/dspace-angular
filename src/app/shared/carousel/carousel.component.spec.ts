@@ -50,7 +50,7 @@ describe('CarouselComponent', () => {
         getThumbnailFor(item: Item): Observable<RemoteData<Bitstream>> {
             return createSuccessfulRemoteDataObject$(new Bitstream());
         },
-        findAllByItemAndBundleName(item: Item, bundleName: string, options?: FindListOptions, ...linksToFollow: FollowLinkConfig<Bitstream>[]): Observable<RemoteData<PaginatedList<Bitstream>>> {
+        showableByItem(item: Item, bundleName: string, options?: FindListOptions, ...linksToFollow: FollowLinkConfig<Bitstream>[]): Observable<RemoteData<PaginatedList<Bitstream>>> {
             return createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream1]));
         },
     });
@@ -181,8 +181,8 @@ describe('CarouselComponent', () => {
             providers: [
                 CarouselComponent,
                 { provide: ObjectCacheService, useValue: {} },
-              { provide: InternalLinkService, useValue: {} },
-              { provide: UUIDService, useValue: {} },
+                { provide: InternalLinkService, useValue: {} },
+                { provide: UUIDService, useValue: {} },
                 { provide: Store, useValue: {} },
                 { provide: RemoteDataBuildService, useValue: {} },
                 { provide: HALEndpointService, useValue: {} },
@@ -202,7 +202,7 @@ describe('CarouselComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(CarouselComponent);
         component = fixture.componentInstance;
-        mockBitstreamDataService.findAllByItemAndBundleName.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream1])));
+        mockBitstreamDataService.showableByItem.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream1])));
         component.carouselOptions = carouselOptions;
 
         fixture.detectChanges();
@@ -235,7 +235,7 @@ describe('CarouselComponent', () => {
         beforeEach(() => {
             fixture = TestBed.createComponent(CarouselComponent);
             component = fixture.componentInstance;
-            mockBitstreamDataService.findAllByItemAndBundleName.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream2])));
+            mockBitstreamDataService.showableByItem.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream2])));
             component.carouselOptions = carouselOptions;
 
             fixture.detectChanges();

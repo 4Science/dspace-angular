@@ -4278,6 +4278,10 @@
 
   "mydspace.results.is-correction": "Is a request of correction",
 
+  "mydspace.results.in-workflow-since": "In workflow since:",
+
+  "mydspace.results.in-workflow-for": "In workflow for:",
+
   "mydspace.search-form.placeholder": "Search in MyDSpace...",
 
   "mydspace.show.workflow": "Workflow tasks",
@@ -4356,6 +4360,8 @@
   "nav.user.description": "User profile bar",
 
   "none.listelement.badge": "Item",
+
+  "no.description.available": "No description available",
 
   "openaire.broker.title": "OpenAIRE Broker",
 
@@ -5579,6 +5585,8 @@
   "selectable-list-item-control.deselect": "Deselect item",
 
   "selectable-list-item-control.select": "Select item",
+
+  "social.component.title": "Social Share",
 
   "sorting.ASC": "Ascending",
 
@@ -6870,6 +6878,22 @@
   "submission.workflow.generic.submit_score": "Rate",
 
   "submission.workflow.generic.submit_score-help": "",
+
+  "submission.workflow.tasks.bulk.item.success": "Operation successful for {{itemNumber}} items",
+
+  "submission.workflow.tasks.bulk.item.error": "Skipped action for {{itemNumber}} items",
+
+  "submission.workflow.tasks.pool.claim.selected": "Claim selected",
+
+  "submission.workflow.tasks.claimed.approve.selected": "Approve selected",
+
+  "submission.workflow.tasks.claimed.reject.selected.submit": "Reject selected",
+
+  "submission.workflow.tasks.claimed.return.selected": "Return selected to pool",
+
+  "submission.workflow.tasks.pool.claim_selected_help": "Assign selected tasks to yourself.",
+
+  "submission.workflow.tasks.claimed.approve_selected_help": "Approve selected tasks.",
 
   "submission.workflow.tasks.claimed.approve": "Approve",
 

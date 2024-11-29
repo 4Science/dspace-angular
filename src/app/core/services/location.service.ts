@@ -25,7 +25,7 @@ export enum LocationErrorCodes {
   API_ERROR = 'api-error',
 }
 
-const IS_DD_COORDINATE_PAIR_REGEXP = /^\d+\.?\d*,\d+\.?\d*$/;
+const IS_DD_COORDINATE_PAIR_REGEXP = /^\d+\.?\d*,\s?\d+\.?\d*$/;
 const IS_SG_COORDINATE_PAIR_REGEXP = /^[NS] *\d+° *\d+['′] *\d+(?:"|″|\.\d+),? *[EW] *\d+° *\d+['′] *\d+(?:"|″|\.\d+)|\d+° *\d+['′] *\d+(?:"|″|\.\d+) *[NS],? *\d+° *\d+['′] *\d+(?:"|″|\.\d+) *[EW]$/;
 
 const NOMINATIM_RESPONSE_FORMAT = 'jsonv2';
@@ -176,8 +176,8 @@ export class LocationService {
   public isValidCoordinateString(coordinateString: string): boolean {
     if (this.isDecimalCoordinateString(coordinateString)) {
       const coordinateArray = coordinateString.split(',');
-      const latitude = parseFloat(coordinateArray[0]);
-      const longitude = parseFloat(coordinateArray[1]);
+      const latitude = parseFloat(coordinateArray[0].trim());
+      const longitude = parseFloat(coordinateArray[1].trim());
       return !isNaN(latitude) && !isNaN(longitude) && this.isValidDecimalCoordinatePair(latitude, longitude);
     } else {
       return false;
