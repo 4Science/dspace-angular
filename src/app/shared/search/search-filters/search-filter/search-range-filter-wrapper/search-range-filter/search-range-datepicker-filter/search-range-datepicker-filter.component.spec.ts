@@ -29,7 +29,7 @@ import {
   SCOPE,
   SearchFilterService,
 } from '../../../../../../../core/shared/search/search-filter.service';
-import { SEARCH_CONFIG_SERVICE } from '../../../../../../../my-dspace-page/my-dspace-page.component';
+import { SEARCH_CONFIG_SERVICE } from '../../../../../../../my-dspace-page/my-dspace-configuration.service';
 import { RouterStub } from '../../../../../../testing/router.stub';
 import { SearchConfigurationServiceStub } from '../../../../../../testing/search-configuration-service.stub';
 import { SearchServiceStub } from '../../../../../../testing/search-service.stub';

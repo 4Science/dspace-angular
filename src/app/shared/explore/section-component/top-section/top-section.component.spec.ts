@@ -105,10 +105,6 @@ describe('TopSectionComponent', () => {
       defaultLayoutMode: LayoutModeEnum.LIST,
       showAllResults: true,
       template: TopSectionTemplateType.DEFAULT,
-      showAsCard: true,
-      showLayoutSwitch: true,
-      defaultLayoutMode: LayoutModeEnum.LIST,
-      showAllResults: true,
     };
 
     fixture.detectChanges();
@@ -154,10 +150,6 @@ describe('TopSectionComponent', () => {
         defaultLayoutMode: LayoutModeEnum.LIST,
         showAllResults: true,
         template: TopSectionTemplateType.DEFAULT,
-        showAsCard: true,
-        showLayoutSwitch: true,
-        defaultLayoutMode: LayoutModeEnum.LIST,
-        showAllResults: true,
       };
 
       fixture.detectChanges();

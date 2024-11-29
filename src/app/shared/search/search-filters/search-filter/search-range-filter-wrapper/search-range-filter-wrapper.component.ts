@@ -34,10 +34,7 @@ import {
   SearchFacetFilterComponent,
 } from '../search-facet-filter/search-facet-filter.component';
 import { SearchFacetRangeOptionComponent } from '../search-facet-filter-options/search-facet-range-option/search-facet-range-option.component';
-import {
-  renderFacetFor,
-  renderFilterTypeEnvironment,
-} from '../search-filter-type-decorator';
+import { renderFilterTypeEnvironment } from '../search-filter-type-decorator';
 
 @Component({
   selector: 'ds-search-range-filter-wrapper',
@@ -52,7 +49,6 @@ import {
   ],
   standalone: true,
 })
-@renderFacetFor(FilterType.range)
 export class SearchRangeFilterWrapperComponent extends SearchFacetFilterComponent implements OnInit, OnDestroy {
 
   /**
@@ -77,7 +73,7 @@ export class SearchRangeFilterWrapperComponent extends SearchFacetFilterComponen
     @Inject(PLATFORM_ID) protected platformId: any,
     private injector: Injector,
   ) {
-    super(searchService, filterService, rdbs, router, searchConfigService, inPlaceSearch, filterConfig, refreshFilters, scope);
+    super(searchService, filterService, rdbs, router, searchConfigService);
   }
 
   ngOnInit(): void {

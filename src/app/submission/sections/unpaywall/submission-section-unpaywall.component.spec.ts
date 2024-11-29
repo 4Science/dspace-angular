@@ -14,7 +14,6 @@ import {
   StoreModule,
 } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
-import { REQUEST } from '@nguniversal/express-engine/tokens';
 import {
   TranslateLoader,
   TranslateModule,
@@ -27,6 +26,7 @@ import {
 } from 'angulartics2';
 import { of } from 'rxjs';
 
+import { REQUEST } from '../../../../express.tokens';
 import { storeModuleConfig } from '../../../app.reducer';
 import { AuthService } from '../../../core/auth/auth.service';
 import { AuthRequestService } from '../../../core/auth/auth-request.service';

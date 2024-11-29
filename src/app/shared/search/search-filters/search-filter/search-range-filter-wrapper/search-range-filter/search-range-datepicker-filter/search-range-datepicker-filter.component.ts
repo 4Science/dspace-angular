@@ -1,3 +1,4 @@
+import { NgStyle } from '@angular/common';
 import {
   Component,
   Inject,
@@ -14,9 +15,11 @@ import {
   NgbCalendar,
   NgbDate,
   NgbDateParserFormatter,
+  NgbDatepickerModule,
   NgbDateStruct,
   NgbInputDatepicker,
 } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 import isEqual from 'lodash/isEqual';
 import {
   BehaviorSubject,
@@ -38,15 +41,13 @@ import {
   SCOPE,
   SearchFilterService,
 } from '../../../../../../../core/shared/search/search-filter.service';
-import { SEARCH_CONFIG_SERVICE } from '../../../../../../../my-dspace-page/my-dspace-page.component';
+import { SEARCH_CONFIG_SERVICE } from '../../../../../../../my-dspace-page/my-dspace-configuration.service';
 import { stringToNgbDateStruct } from '../../../../../../date.util';
 import {
   hasValue,
   isNotEmpty,
 } from '../../../../../../empty.util';
-import { FilterType } from '../../../../../models/filter-type.model';
 import { SearchFilterConfig } from '../../../../../models/search-filter-config.model';
-import { renderFacetForEnvironment } from '../../../search-filter-type-decorator';
 import { SearchRangeFilterComponent } from '../search-range-filter.component';
 
 
@@ -54,8 +55,13 @@ import { SearchRangeFilterComponent } from '../search-range-filter.component';
   selector: 'ds-search-range-datepicker-filter',
   templateUrl: './search-range-datepicker-filter.component.html',
   styleUrls: ['./search-range-datepicker-filter.component.scss'],
+  imports: [
+    NgbDatepickerModule,
+    TranslateModule,
+    NgStyle,
+  ],
+  standalone: true,
 })
-@renderFacetForEnvironment(FilterType.range, 'layout.search.filters.datepicker')
 export class SearchRangeDatepickerFilterComponent extends SearchRangeFilterComponent implements OnInit, OnDestroy {
 
   /**

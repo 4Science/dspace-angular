@@ -48,13 +48,11 @@ import {
   isNotEmpty,
 } from '../../../../../empty.util';
 import { DebounceDirective } from '../../../../../utils/debounce.directive';
-import { FilterType } from '../../../../models/filter-type.model';
 import { SearchFilterConfig } from '../../../../models/search-filter-config.model';
 import {
   facetLoad,
   SearchFacetFilterComponent,
 } from '../../search-facet-filter/search-facet-filter.component';
-import { renderFacetForEnvironment } from '../../search-filter-type-decorator';
 
 /**
  * The suffix for a range filters' minimum in the frontend URL
@@ -89,7 +87,6 @@ export const RANGE_FILTER_MAX_SUFFIX = '.max';
 /**
  * Component that represents a range facet for a specific filter configuration
  */
-@renderFacetForEnvironment(FilterType.range)
 export class SearchRangeFilterComponent extends SearchFacetFilterComponent implements OnInit, OnDestroy {
 
   /**

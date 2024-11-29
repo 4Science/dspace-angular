@@ -7,7 +7,9 @@ import { FilterType } from '../../models/filter-type.model';
 import { SearchAuthorityFilterComponent } from './search-authority-filter/search-authority-filter.component';
 import { SearchBooleanFilterComponent } from './search-boolean-filter/search-boolean-filter.component';
 import { SearchHierarchyFilterComponent } from './search-hierarchy-filter/search-hierarchy-filter.component';
+import { SearchRangeDatepickerFilterComponent } from './search-range-filter-wrapper/search-range-filter/search-range-datepicker-filter/search-range-datepicker-filter.component';
 import { SearchRangeFilterComponent } from './search-range-filter-wrapper/search-range-filter/search-range-filter.component';
+import { SearchRangeFilterWrapperComponent } from './search-range-filter-wrapper/search-range-filter-wrapper.component';
 import { SearchTextFilterComponent } from './search-text-filter/search-text-filter.component';
 
 /**
@@ -19,12 +21,18 @@ filterTypeMap.set(FilterType.text, SearchTextFilterComponent);
 filterTypeMap.set(FilterType.authority, SearchAuthorityFilterComponent);
 filterTypeMap.set(FilterType.boolean, SearchBooleanFilterComponent);
 filterTypeMap.set(FilterType.hierarchy, SearchHierarchyFilterComponent);
-filterTypeMap.set(FilterType.range, SearchRangeFilterComponent);
+filterTypeMap.set(FilterType.range, SearchRangeFilterWrapperComponent);
 
 /**
  * Contains the mapping between an {@link BuildConfig} path and a {@link FilterType}
  */
 const filterTypeEnvironmentMap = new Map();
+filterTypeMap.set(FilterType.range, [{
+  environment: 'layout.search.filters.datepicker',
+  objectElement: SearchRangeDatepickerFilterComponent,
+}, {
+  objectElement: SearchRangeFilterComponent,
+}]);
 
 /**
  * Sets the mapping for a facet component in relation to a filter type
