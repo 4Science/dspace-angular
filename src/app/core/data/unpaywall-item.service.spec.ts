@@ -8,6 +8,7 @@ import {
 } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
+import { APP_DATA_SERVICES_MAP } from '../../../config/app-config.interface';
 import { storeModuleConfig } from '../../app.reducer';
 import { TranslateLoaderMock } from '../../shared/mocks/translate-loader.mock';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
@@ -64,6 +65,7 @@ describe('UnpaywallItemService', () => {
         { provide: HALEndpointService, useValue: halService },
         { provide: RemoteDataBuildService, useValue: remoteDataBuildService },
         { provide: RequestService, useValue: requestService },
+        { provide: APP_DATA_SERVICES_MAP, useValue: {} },
       ],
     });
     service = TestBed.inject(UnpaywallItemService);

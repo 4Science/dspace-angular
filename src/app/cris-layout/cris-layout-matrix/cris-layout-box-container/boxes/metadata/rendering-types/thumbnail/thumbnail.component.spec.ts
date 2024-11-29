@@ -1,3 +1,5 @@
+import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import {
   DebugElement,
   NO_ERRORS_SCHEMA,
@@ -102,6 +104,7 @@ describe('', () => {
   const getDefaultTestBedConf = (fieldProvider) => {
     return {
       imports: [
+        HttpClientTestingModule,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
@@ -119,6 +122,7 @@ describe('', () => {
         { provide: AuthorizationDataService, useValue: mockAuthorizedService },
         { provide: ConfigurationDataService, useValue: {} },
         { provide: ThumbnailService, useValue: mockThumbnailService },
+        { provide: HttpClient, useValue: {} },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     };

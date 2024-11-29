@@ -1,4 +1,5 @@
 import {
+  HttpClient,
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
@@ -58,7 +59,10 @@ describe('DspaceRestService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [DspaceRestService],
+      providers: [
+        DspaceRestService,
+        { provide: HttpClient, useValue: {} },
+      ],
     });
 
     dspaceRestService = TestBed.inject(DspaceRestService);

@@ -7,6 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 
+import { MiradorViewerComponent } from '../../../../mirador-viewer/mirador-viewer.component';
 import { IIIFItemViewerComponent } from './iiif-item-viewer.component';
 
 describe('IiifItemViewerComponent', () => {
@@ -21,6 +22,11 @@ describe('IiifItemViewerComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA],
     })
+      .overrideComponent(IIIFItemViewerComponent, {
+        remove: {
+          imports: [MiradorViewerComponent],
+        },
+      })
       .compileComponents();
   });
 

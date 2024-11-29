@@ -52,7 +52,6 @@ import { NotificationsService } from 'src/app/shared/notifications/notifications
 import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
 import { ItemDataService } from '../../../core/data/item-data.service';
 import { RelationshipDataService } from '../../../core/data/relationship-data.service';
-import { MetadataService } from '../../../core/metadata/metadata.service';
 import { Collection } from '../../../core/shared/collection.model';
 import { ConfidenceType } from '../../../core/shared/confidence-type';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
@@ -278,7 +277,6 @@ export class DsoEditMetadataValueComponent implements OnInit, OnChanges, OnDestr
     protected registryService: RegistryService,
     protected notificationsService: NotificationsService,
     protected translate: TranslateService,
-    protected metadataService: MetadataService,
   ) {
   }
 

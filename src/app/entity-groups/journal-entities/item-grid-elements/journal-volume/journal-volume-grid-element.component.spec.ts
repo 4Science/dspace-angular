@@ -31,6 +31,7 @@ import { ThemeService } from '../../../../shared/theme-support/theme.service';
 import { ThumbnailService } from '../../../../shared/thumbnail/thumbnail.service';
 import { TruncatableService } from '../../../../shared/truncatable/truncatable.service';
 import { TruncatePipe } from '../../../../shared/utils/truncate.pipe';
+import { JournalVolumeSearchResultGridElementComponent } from '../search-result-grid-elements/journal-volume/journal-volume-search-result-grid-element.component';
 import { JournalVolumeGridElementComponent } from './journal-volume-grid-element.component';
 
 const mockItem = Object.assign(new Item(), {
@@ -84,7 +85,10 @@ describe('JournalVolumeGridElementComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(JournalVolumeGridElementComponent, {
       set: { changeDetection: ChangeDetectionStrategy.Default },
-    }).compileComponents();
+    }).overrideComponent(JournalVolumeGridElementComponent, {
+      remove: { imports: [JournalVolumeSearchResultGridElementComponent] },
+    })
+      .compileComponents();
   }));
 
   beforeEach(waitForAsync(() => {

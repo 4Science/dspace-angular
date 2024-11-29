@@ -17,6 +17,7 @@ import { AuthorizationDataService } from '../core/data/feature-authorization/aut
 import { RemoteData } from '../core/data/remote-data';
 import { Bitstream } from '../core/shared/bitstream.model';
 import { FileService } from '../core/shared/file.service';
+import { ThemedLoadingComponent } from '../shared/loading/themed-loading.component';
 import { getMockThemeService } from '../shared/mocks/theme-service.mock';
 import {
   createFailedRemoteDataObject,
@@ -80,6 +81,11 @@ describe('ThumbnailComponent', () => {
         imports: [MockTranslatePipe],
       },
     })
+      .overrideComponent(ThumbnailComponent, {
+        remove: {
+          imports: [ThemedLoadingComponent],
+        },
+      })
       .compileComponents();
   }));
 

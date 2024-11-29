@@ -17,7 +17,6 @@ import { map } from 'rxjs/operators';
 import { BrowseService } from '../../../core/browse/browse.service';
 import { BrowseDefinitionDataService } from '../../../core/browse/browse-definition-data.service';
 import { RelationshipDataService } from '../../../core/data/relationship-data.service';
-import { MetadataService } from '../../../core/metadata/metadata.service';
 import { Item } from '../../../core/shared/item.model';
 import { MetadataValue } from '../../../core/shared/metadata.models';
 import { MetadataRepresentation } from '../../../core/shared/metadata-representation/metadata-representation.model';
@@ -77,7 +76,6 @@ export class MetadataRepresentationListComponent extends AbstractIncrementalList
   constructor(
     public relationshipService: RelationshipDataService,
     protected browseDefinitionDataService: BrowseDefinitionDataService,
-    protected metadataService: MetadataService,
   ) {
     super();
   }
