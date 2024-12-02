@@ -25,6 +25,7 @@ import { ActivatedRouteStub } from '../../../../shared/testing/active-router.stu
 import { ThemeService } from '../../../../shared/theme-support/theme.service';
 import { TruncatableService } from '../../../../shared/truncatable/truncatable.service';
 import { TruncatePipe } from '../../../../shared/utils/truncate.pipe';
+import { JournalIssueSearchResultListElementComponent } from '../search-result-list-elements/journal-issue/journal-issue-search-result-list-element.component';
 import { JournalIssueListElementComponent } from './journal-issue-list-element.component';
 
 const mockItem: Item = Object.assign(new Item(), {
@@ -70,6 +71,8 @@ describe('JournalIssueListElementComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(JournalIssueListElementComponent, {
       set: { changeDetection: ChangeDetectionStrategy.Default },
+    }).overrideComponent(JournalIssueListElementComponent, {
+      remove: { imports: [JournalIssueSearchResultListElementComponent] },
     }).compileComponents();
   }));
 

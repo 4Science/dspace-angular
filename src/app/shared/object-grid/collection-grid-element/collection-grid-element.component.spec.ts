@@ -15,6 +15,7 @@ import { AuthService } from '../../../core/auth/auth.service';
 import { LinkService } from '../../../core/cache/builders/link.service';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { Collection } from '../../../core/shared/collection.model';
+import { ThemedThumbnailComponent } from '../../../thumbnail/themed-thumbnail.component';
 import { AuthServiceMock } from '../../mocks/auth.service.mock';
 import { getMockThemeService } from '../../mocks/theme-service.mock';
 import { ActivatedRouteStub } from '../../testing/active-router.stub';
@@ -68,6 +69,8 @@ describe('CollectionGridElementComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(CollectionGridElementComponent, {
       set: { changeDetection: ChangeDetectionStrategy.Default },
+    }).overrideComponent(CollectionGridElementComponent, {
+      remove: { imports: [ThemedThumbnailComponent] },
     }).compileComponents();
   }));
 
