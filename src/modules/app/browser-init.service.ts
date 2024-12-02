@@ -60,7 +60,7 @@ export class BrowserInitService extends InitService {
     protected menuService: MenuService,
     private rootDataService: RootDataService,
     protected serverCheckGuard: ServerCheckGuard,
-    private authorizationService: AuthorizationService
+    protected authorizationService: AuthorizationService
   ) {
     super(
       store,
@@ -73,6 +73,7 @@ export class BrowserInitService extends InitService {
       breadcrumbsService,
       themeService,
       menuService,
+      authorizationService
     );
   }
 

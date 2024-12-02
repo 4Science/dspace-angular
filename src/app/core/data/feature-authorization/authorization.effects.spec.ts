@@ -22,10 +22,13 @@ describe('AuthorizationEffects success', () => {
 
   afterEach(() => {
     authorizationEffects = null;
+    authorizationDataService = null;
     TestBed.resetTestingModule();
   });
 
   beforeEach(() => {
+    authorizationDataService = new AuthorizationDataServiceStub();
+
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({ authorizationReducer }, {
@@ -64,6 +67,7 @@ describe('AuthorizationEffects success', () => {
 describe('AuthorizationEffects error', () => {
   afterEach(() => {
     authorizationEffects = null;
+    authorizationDataService = null;
     TestBed.resetTestingModule();
   });
 
