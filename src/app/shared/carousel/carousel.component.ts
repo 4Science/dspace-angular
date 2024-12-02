@@ -1,6 +1,7 @@
 import {
   AsyncPipe,
   NgClass,
+  NgForOf,
   NgIf,
   NgStyle,
   NgTemplateOutlet,
@@ -66,6 +67,7 @@ import { CarouselOptions } from './carousel-options.model';
   imports: [
     NgbCarouselModule,
     NgIf,
+    NgForOf,
     NgTemplateOutlet,
     NgStyle,
     RouterLink,

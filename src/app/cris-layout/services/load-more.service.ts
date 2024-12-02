@@ -16,7 +16,7 @@ interface ComputedData {
   lastLimit: number;
 }
 
-export class LoadMoreService  {
+export class LoadMoreService {
 
   /**
    * returns the limits of how many data loaded from first and last
