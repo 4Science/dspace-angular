@@ -12,6 +12,7 @@ import {
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
+import { GooglemapsComponent } from '../../../../../../../shared/googlemaps/googlemaps.component';
 import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate-loader.mock';
 import { GmapComponent } from './gmap.component';
 
@@ -65,6 +66,11 @@ describe('GmapComponent', () => {
         { provide: 'tabNameProvider', useValue: '' },
       ],
     })
+      .overrideComponent(GmapComponent, {
+        remove: {
+          imports: [GooglemapsComponent],
+        },
+      })
       .compileComponents();
   });
 

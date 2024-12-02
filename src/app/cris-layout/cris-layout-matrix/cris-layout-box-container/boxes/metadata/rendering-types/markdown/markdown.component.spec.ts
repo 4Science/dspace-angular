@@ -13,6 +13,7 @@ import {
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
+import { MarkdownViewerComponent } from '../../../../../../../shared/markdown-viewer/markdown-viewer.component';
 import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate-loader.mock';
 import { MarkdownComponent } from './markdown.component';
 
@@ -67,7 +68,9 @@ describe('MarkdownComponent', () => {
         { provide: 'tabNameProvider', useValue: '' },
       ],
     })
-      .compileComponents();
+      .overrideComponent(MarkdownComponent, {
+        remove: { imports: [MarkdownViewerComponent] } },
+      ).compileComponents();
   }));
 
   beforeEach(() => {

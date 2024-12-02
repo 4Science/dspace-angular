@@ -26,6 +26,11 @@ import {
 } from 'angulartics2';
 import { of } from 'rxjs';
 
+import {
+  APP_CONFIG,
+  APP_DATA_SERVICES_MAP,
+} from '../../../../config/app-config.interface';
+import { environment } from '../../../../environments/environment.test';
 import { REQUEST } from '../../../../express.tokens';
 import { storeModuleConfig } from '../../../app.reducer';
 import { AuthService } from '../../../core/auth/auth.service';
@@ -57,8 +62,10 @@ import { WorkspaceitemSectionUploadObject } from '../../../core/submission/model
 import { WorkspaceitemSectionUploadFileObject } from '../../../core/submission/models/workspaceitem-section-upload-file.model';
 import { SubmissionJsonPatchOperationsService } from '../../../core/submission/submission-json-patch-operations.service';
 import { SubmissionRestService } from '../../../core/submission/submission-rest.service';
+import { AlertComponent } from '../../../shared/alert/alert.component';
 import { FormBuilderService } from '../../../shared/form/builder/form-builder.service';
 import { FormService } from '../../../shared/form/form.service';
+import { ThemedLoadingComponent } from '../../../shared/loading/themed-loading.component';
 import { HttpXsrfTokenExtractorMock } from '../../../shared/mocks/http-xsrf-token-extractor.mock';
 import { getMockRequestService } from '../../../shared/mocks/request.service.mock';
 import { getMockScrollToService } from '../../../shared/mocks/scroll-to-service.mock';
@@ -78,7 +85,7 @@ import { SectionUploadService } from '../upload/section-upload.service';
 import { UnpaywallSectionStatus } from './models/unpaywall-section-status';
 import { SubmissionSectionUnpaywallComponent } from './submission-section-unpaywall.component';
 
-describe('SubmissionSectionUnpaywallComponentComponent', () => {
+describe('SubmissionSectionUnpaywallComponent', () => {
   let component: SubmissionSectionUnpaywallComponent;
   let fixture: ComponentFixture<SubmissionSectionUnpaywallComponent>;
   let httpMock: HttpTestingController;
@@ -119,6 +126,7 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
             useClass: TranslateLoaderMock,
           },
         }),
+        SubmissionSectionUnpaywallComponent,
       ],
       providers: [
         SectionsService,
@@ -156,10 +164,19 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
         { provide: 'sectionDataProvider', useValue: {} },
         { provide: 'submissionIdProvider', useValue: mockSubmissionId },
         { provide: SectionUploadService, useValue: getMockSectionUploadService() },
+        { provide: APP_DATA_SERVICES_MAP, useValue: {} },
+        { provide: APP_CONFIG, useValue: environment },
       ],
-      declarations: [SubmissionSectionUnpaywallComponent],
       schemas: [NO_ERRORS_SCHEMA],
     })
+      .overrideComponent(SubmissionSectionUnpaywallComponent, {
+        remove: {
+          imports: [
+            AlertComponent,
+            ThemedLoadingComponent,
+          ],
+        },
+      })
       .compileComponents();
   });
 

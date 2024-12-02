@@ -13,6 +13,7 @@ import {
 
 import { CrisLayoutBox } from '../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../core/shared/item.model';
+import { VocabularyTreeviewComponent } from '../../../../../shared/form/vocabulary-treeview/vocabulary-treeview.component';
 import { TranslateLoaderMock } from '../../../../../shared/mocks/translate-loader.mock';
 import { HierarchyComponent } from './hierarchy.component';
 
@@ -83,6 +84,9 @@ describe('HierarchyComponent', () => {
         { provide: ActivatedRoute, useValue: {} },
       ],
     })
+      .overrideComponent(HierarchyComponent, {
+        remove: { imports: [VocabularyTreeviewComponent] },
+      })
       .compileComponents();
   });
 

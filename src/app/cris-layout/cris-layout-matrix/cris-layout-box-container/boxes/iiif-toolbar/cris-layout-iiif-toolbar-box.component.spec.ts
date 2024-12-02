@@ -14,6 +14,7 @@ import {
 import { TranslateLoaderMock } from '../../../../../shared/mocks/translate-loader.mock';
 import { NotificationsService } from '../../../../../shared/notifications/notifications.service';
 import { NotificationsServiceStub } from '../../../../../shared/testing/notifications-service.stub';
+import { IIIFToolbarComponent } from '../metadata/rendering-types/advanced-attachment/bitstream-attachment/attachment-render/types/iiif-toolbar/iiif-toolbar.component';
 import { CrisLayoutIIIFToolbarBoxComponent } from './cris-layout-iiif-toolbar-box.component';
 
 describe('CrisLayoutIiifToolbarBoxComponent', () => {
@@ -41,6 +42,11 @@ describe('CrisLayoutIiifToolbarBoxComponent', () => {
         { provide: ActivatedRoute, useValue: {} },
       ],
     })
+      .overrideComponent(CrisLayoutIIIFToolbarBoxComponent, {
+        remove: {
+          imports: [IIIFToolbarComponent],
+        },
+      })
       .compileComponents();
   });
 

@@ -6,6 +6,10 @@ import {
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
+  ActivatedRoute,
+  RouterModule,
+} from '@angular/router';
+import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
@@ -59,13 +63,14 @@ describe('BrowseComponent', () => {
           provide: TranslateLoader,
           useClass: TranslateLoaderMock,
         },
-      }), BrowserAnimationsModule, DsDatePipe, BrowseComponent],
+      }), BrowserAnimationsModule, DsDatePipe, BrowseComponent, RouterModule.forRoot([])],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
         { provide: 'metadataValueProvider', useValue: metadataValue },
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
+        { provide: ActivatedRoute, useValue: {} },
       ],
     })
       .compileComponents();

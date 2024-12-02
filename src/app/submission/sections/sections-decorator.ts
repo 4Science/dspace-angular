@@ -4,12 +4,14 @@ import { SubmissionSectionCorrectionComponent } from './correction/section-corre
 import { SubmissionSectionCustomUrlComponent } from './custom-url/submission-section-custom-url.component';
 import { SubmissionSectionDetectDuplicateComponent } from './detect-duplicate/section-detect-duplicate.component';
 import { SubmissionSectionDuplicatesComponent } from './duplicates/section-duplicates.component';
+import { SectionExternalUploadComponent } from './external-upload/section-external-upload.component';
 import { SubmissionSectionFormComponent } from './form/section-form.component';
 import { SubmissionSectionIdentifiersComponent } from './identifiers/section-identifiers.component';
 import { SubmissionSectionLicenseComponent } from './license/section-license.component';
 import { SubmissionSectionCoarNotifyComponent } from './section-coar-notify/section-coar-notify.component';
 import { SectionsType } from './sections-type';
 import { SubmissionSectionSherpaPoliciesComponent } from './sherpa-policies/section-sherpa-policies.component';
+import { SubmissionSectionUnpaywallComponent } from './unpaywall/submission-section-unpaywall.component';
 import { SubmissionSectionUploadComponent } from './upload/section-upload.component';
 
 const submissionSectionsMap = new Map();
@@ -26,6 +28,8 @@ submissionSectionsMap.set(SectionsType.Duplicates, SubmissionSectionDuplicatesCo
 submissionSectionsMap.set(SectionsType.Correction, SubmissionSectionCorrectionComponent);
 submissionSectionsMap.set(SectionsType.DetectDuplicate, SubmissionSectionDetectDuplicateComponent);
 submissionSectionsMap.set(SectionsType.CustomUrl, SubmissionSectionCustomUrlComponent);
+submissionSectionsMap.set(SectionsType.ExternalUpload, SectionExternalUploadComponent);
+submissionSectionsMap.set(SectionsType.Unpaywall, SubmissionSectionUnpaywallComponent);
 
 /**
  * @deprecated

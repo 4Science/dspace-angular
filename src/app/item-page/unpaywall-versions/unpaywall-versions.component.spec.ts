@@ -72,19 +72,20 @@ describe('UnpaywallVersionsComponent', () => {
       getItemVersions: jasmine.createSpy(),
     });
     await TestBed.configureTestingModule({
-      declarations: [UnpaywallVersionsComponent, TranslatePipe],
-      imports: [
+    declarations: [TranslatePipe],
+    imports: [
         HttpClientTestingModule,
         CommonModule,
         StoreModule.forRoot(requestReducer, storeModuleConfig),
         TranslateModule.forRoot({
-          loader: {
-            provide: TranslateLoader,
-            useValue: TranslateLoaderMock,
-          },
+            loader: {
+                provide: TranslateLoader,
+                useValue: TranslateLoaderMock,
+            },
         }),
-      ],
-      providers: [
+        UnpaywallVersionsComponent,
+    ],
+    providers: [
         { provide: ActivatedRoute, useValue: route },
         { provide: Location, useValue: location },
         { provide: UnpaywallItemService, useValue: unpaywallItemService },
@@ -95,8 +96,8 @@ describe('UnpaywallVersionsComponent', () => {
         RemoteDataBuildService,
         RequestService,
         UUIDService,
-      ],
-    })
+    ],
+})
       .compileComponents();
   });
 

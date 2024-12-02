@@ -107,6 +107,8 @@ describe('Inline component when .first and .last is not in rendering configurati
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(InlineComponent, {
       set: { changeDetection: ChangeDetectionStrategy.OnPush },
+    }).overrideComponent(InlineComponent, {
+      remove: { imports: [MetadataRenderComponent] },
     }).compileComponents();
   }));
 
@@ -250,6 +252,7 @@ describe('Inline component when .first and .last is present in rendering configu
         { provide: 'itemProvider', useValue: testItem },
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
+        { provide: CRIS_FIELD_RENDERING_MAP, useValue: layoutBoxesMap },
         LoadMoreService,
       ],
       schemas: [NO_ERRORS_SCHEMA],

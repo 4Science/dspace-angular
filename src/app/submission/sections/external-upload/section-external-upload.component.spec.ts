@@ -5,7 +5,6 @@ import {
 } from '@angular/core';
 import {
   ComponentFixture,
-  inject,
   TestBed,
   waitForAsync,
 } from '@angular/core/testing';
@@ -13,10 +12,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import {
-  BrowserModule,
-  By,
-} from '@angular/platform-browser';
+import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -105,7 +101,6 @@ describe('SectionExternalUploadComponent test suite', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
-        BrowserModule,
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
@@ -113,8 +108,8 @@ describe('SectionExternalUploadComponent test suite', () => {
         NoopAnimationsModule,
         TranslateModule.forRoot(),
         TestComponent,
+        SectionExternalUploadComponent,
       ],
-      declarations: [SectionExternalUploadComponent],
       providers: [
         { provide: CollectionDataService, useValue: getMockCollectionDataService() },
         { provide: SectionsService, useValue: sectionsService },
@@ -124,7 +119,6 @@ describe('SectionExternalUploadComponent test suite', () => {
         { provide: 'collectionIdProvider', useValue: collectionId },
         { provide: 'sectionDataProvider', useValue: sectionObject },
         { provide: 'submissionIdProvider', useValue: submissionId },
-        SectionExternalUploadComponent,
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents().then();
@@ -147,9 +141,9 @@ describe('SectionExternalUploadComponent test suite', () => {
       testFixture.destroy();
     });
 
-    it('should create SectionExternalUploadComponent', inject([SectionExternalUploadComponent], (app: SectionExternalUploadComponent) => {
-      expect(app).toBeDefined();
-    }));
+    it('should create SectionExternalUploadComponent', () => {
+      expect(testComp).toBeDefined();
+    });
   });
 
   describe('', () => {
@@ -215,7 +209,7 @@ describe('SectionExternalUploadComponent test suite', () => {
   selector: 'ds-test-cmp',
   template: ``,
   standalone: true,
-  imports: [BrowserModule,
+  imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
