@@ -286,7 +286,7 @@ describe('EditRelationshipListComponent', () => {
       remove: {
         imports: [
           EditRelationshipComponent,
-          PaginationComponent,
+          // PaginationComponent,
           ThemedLoadingComponent,
         ],
       },

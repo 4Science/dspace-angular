@@ -108,8 +108,6 @@ describe('TableComponent component when .first and .last is not in rendering con
       ],
     }).overrideComponent(TableComponent, {
       set: { changeDetection: ChangeDetectionStrategy.OnPush },
-    }).overrideComponent(TableComponent, {
-      remove: { imports: [MetadataRenderComponent] },
     })
       .compileComponents();
   }));
@@ -266,8 +264,6 @@ describe('TableComponent component when .first and .last is present in rendering
       ],
     }).overrideComponent(TableComponent, {
       set: { changeDetection: ChangeDetectionStrategy.OnPush },
-    }).overrideComponent(TableComponent, {
-      remove: { imports: [MetadataRenderComponent] },
     }).compileComponents();
   }));
 

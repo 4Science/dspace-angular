@@ -107,8 +107,8 @@ describe('Inline component when .first and .last is not in rendering configurati
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(InlineComponent, {
       set: { changeDetection: ChangeDetectionStrategy.OnPush },
-    }).overrideComponent(InlineComponent, {
-      remove: { imports: [MetadataRenderComponent] },
+    // }).overrideComponent(InlineComponent, {
+    //   remove: { imports: [MetadataRenderComponent] },
     }).compileComponents();
   }));
 

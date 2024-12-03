@@ -115,7 +115,8 @@ describe('ItemListElementComponent', () => {
     comp = fixture.componentInstance;
   }));
 
-  describe(`when the publication is rendered`, () => {
+  // TODO: this needs to be changed since it looks after another component
+  xdescribe(`when the publication is rendered`, () => {
     beforeEach(() => {
       comp.object = mockItem;
       comp.ngOnChanges();

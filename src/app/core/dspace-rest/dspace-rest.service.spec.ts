@@ -1,5 +1,4 @@
 import {
-  HttpClient,
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
@@ -61,7 +60,6 @@ describe('DspaceRestService', () => {
       imports: [HttpClientTestingModule],
       providers: [
         DspaceRestService,
-        { provide: HttpClient, useValue: {} },
       ],
     });
 
