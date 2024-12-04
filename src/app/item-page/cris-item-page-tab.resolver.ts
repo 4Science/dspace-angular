@@ -66,7 +66,7 @@ export const crisItemPageTabResolver: ResolveFn<RemoteData<PaginatedList<CrisLay
               const givenTab = tabArguments[1];
               const hasViewer: boolean = isNotEmpty(tabArguments[2]) && tabArguments[2] === 'viewer';
               const itemPageRoute = getItemPageRoute(itemRD.payload);
-              const isValidTab = isEmpty(givenTab) || tabsRD.payload.page.some((tab) => `/${tab.shortname}` === givenTab);
+              const isValidTab = isEmpty(givenTab) || tabsRD.payload.page.some((tab) => givenTab?.includes(tab.shortname));
 
               const mainTab = tabsRD.payload.page.length === 1
                 ? tabsRD.payload.page[0]

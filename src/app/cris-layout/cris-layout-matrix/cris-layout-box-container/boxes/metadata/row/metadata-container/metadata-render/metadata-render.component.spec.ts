@@ -123,6 +123,10 @@ describe('MetadataRenderComponent', () => {
     },
   }) as LayoutField;
 
+  const mockLoadMoreService = jasmine.createSpyObj('LoadMoreService',{
+    getComputedData: jasmine.createSpy('getComputedData'),
+  });
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
@@ -141,7 +145,7 @@ describe('MetadataRenderComponent', () => {
         Injector,
         { provide: 'tabNameProvider', useValue: '' },
         { provide: CRIS_FIELD_RENDERING_MAP, useValue: layoutBoxesMap },
-        { provide: LoadMoreService, useValue: {} },
+        { provide: LoadMoreService, useValue: mockLoadMoreService },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(TableComponent, {

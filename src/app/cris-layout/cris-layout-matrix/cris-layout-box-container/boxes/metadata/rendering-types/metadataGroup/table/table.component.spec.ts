@@ -260,6 +260,7 @@ describe('TableComponent component when .first and .last is present in rendering
         { provide: 'itemProvider', useValue: testItem },
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
+        { provide: CRIS_FIELD_RENDERING_MAP, useValue: layoutBoxesMap },
         LoadMoreService,
       ],
     }).overrideComponent(TableComponent, {
