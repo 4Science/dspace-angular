@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -41,6 +42,7 @@ import {
   imports: [
     AdministeredCollectionSelectorComponent,
     TranslateModule,
+    NgIf,
   ],
 })
 export class ExportExcelSelectorComponent extends DSOSelectorModalWrapperComponent implements OnInit {

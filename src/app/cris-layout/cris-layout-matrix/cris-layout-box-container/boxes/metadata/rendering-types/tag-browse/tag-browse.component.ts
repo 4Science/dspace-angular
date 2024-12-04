@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
   Component,
   Inject,
@@ -22,6 +23,7 @@ import { RenderingTypeStructuredModelComponent } from '../rendering-type-structu
   standalone: true,
   imports: [
     ChipsComponent,
+    NgIf,
   ],
 })
 export class TagBrowseComponent extends RenderingTypeStructuredModelComponent implements OnInit {

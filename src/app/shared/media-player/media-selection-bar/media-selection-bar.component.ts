@@ -2,6 +2,7 @@ import {
   AsyncPipe,
   DatePipe,
   NgForOf,
+  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -49,6 +50,7 @@ import { MediaSelectionBarItem } from './media-selection-bar-item.model';
     DatePipe,
     AsyncPipe,
     NgForOf,
+    NgIf,
   ],
   standalone: true,
 })

@@ -2,6 +2,7 @@ import {
   AsyncPipe,
   isPlatformServer,
   Location,
+  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -56,6 +57,7 @@ import {
   imports: [
     AsyncPipe,
     TranslateModule,
+    NgIf,
   ],
   standalone: true,
 })

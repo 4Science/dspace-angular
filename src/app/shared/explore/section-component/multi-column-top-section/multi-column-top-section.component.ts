@@ -1,8 +1,15 @@
 import {
+  AsyncPipe,
+  NgClass,
+  NgForOf,
+} from '@angular/common';
+import {
   Component,
   Input,
   OnInit,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -29,6 +36,13 @@ import { SearchResult } from '../../../search/models/search-result.model';
   selector: 'ds-base-multi-column-top-section',
   templateUrl: './multi-column-top-section.component.html',
   standalone: true,
+  imports: [
+    NgForOf,
+    RouterLink,
+    AsyncPipe,
+    NgClass,
+    TranslateModule,
+  ],
 })
 export class MultiColumnTopSectionComponent implements OnInit {
 
