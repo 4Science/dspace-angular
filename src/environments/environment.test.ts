@@ -8,7 +8,6 @@ import {
 
 export const environment: BuildConfig = {
   production: false,
-  mainSiteUrl: 'www.sito.principale',
 
   // Angular Universal settings
   universal: {
@@ -324,6 +323,7 @@ export const environment: BuildConfig = {
   ],
   bundle: {
     standardBundles: ['ORIGINAL', 'THUMBNAIL', 'LICENSE'],
+    previewBundle: 'BRANDED_PREVIEW'
   },
   mediaViewer: {
     image: true,

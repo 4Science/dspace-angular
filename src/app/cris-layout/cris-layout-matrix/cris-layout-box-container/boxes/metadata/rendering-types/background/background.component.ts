@@ -63,6 +63,7 @@ export class BackgroundComponent extends BitstreamRenderingModelComponent implem
         element.style.backgroundSize = 'cover';
         element.style.backgroundRepeat = 'no-repeat';
         element.style.backgroundPosition = 'center';
+        element.style.minHeight = '350px';
       }
     });
   }

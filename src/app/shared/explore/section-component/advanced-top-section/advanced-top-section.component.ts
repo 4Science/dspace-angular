@@ -7,10 +7,11 @@ import { Context } from '../../../../core/shared/context.model';
 import {BehaviorSubject, forkJoin, Observable} from 'rxjs';
 import { HostWindowService } from '../../../host-window.service';
 import {SearchService} from '../../../../core/shared/search/search.service';
-import {map, take} from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import {RemoteData} from '../../../../core/data/remote-data';
 import {SearchObjects} from '../../../search/models/search-objects.model';
 import {DSpaceObject} from '../../../../core/shared/dspace-object.model';
+import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
 
 /**
  * Component representing the Advanced-Top component section.
@@ -64,6 +65,8 @@ export class AdvancedTopSectionComponent implements OnInit {
    */
   selectedDiscoverConfiguration = new BehaviorSubject<string>(null);
 
+  loading$ = new BehaviorSubject<boolean>(true);
+
   discoveryConfigurationsTotalElementsMap: Map<string, number> = new Map<string, number>();
 
   constructor(private searchService: SearchService) { }
@@ -72,7 +75,6 @@ export class AdvancedTopSectionComponent implements OnInit {
     const sortDirection = SortDirection[this.advancedTopSection.order?.toUpperCase()] ?? SortDirection.ASC;
     this.sortOptions = new SortOptions(this.advancedTopSection.sortField, sortDirection);
     this.template = this.advancedTopSection.template ?? TopSectionTemplateType.DEFAULT;
-    this.selectDiscoveryConfiguration(this.advancedTopSection.discoveryConfigurationName[0]); // ADVANCED top sections use an ARRAY of configurations
     this.setDiscoveryConfigurationsTotalElementsMap();
   }
 
@@ -116,6 +118,7 @@ export class AdvancedTopSectionComponent implements OnInit {
       sort: this.sortOptions,
     });
     return this.searchService.search(paginatedSearchOptions).pipe(
+      getFirstCompletedRemoteData(),
       take(1),
       map((searchResults: RemoteData<SearchObjects<DSpaceObject>>) => searchResults?.payload?.pageInfo?.totalElements ?? 0)
     );
@@ -132,6 +135,13 @@ export class AdvancedTopSectionComponent implements OnInit {
       results.forEach(({ configName, totalElements }) => {
         this.discoveryConfigurationsTotalElementsMap.set(configName, totalElements);
       });
+      this.selectDiscoveryConfiguration(this.getFirstConfigurationWithData());
+      this.loading$.next(false);
     });
+  }
+
+  private getFirstConfigurationWithData(): string {
+    return [...this.discoveryConfigurationsTotalElementsMap.keys()]
+      .filter(key => this.discoveryConfigurationsTotalElementsMap.get(key) > 0)[0];
   }
 }

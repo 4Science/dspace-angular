@@ -19,7 +19,6 @@ import { REQUEST_COPY_MODULE_PATH } from '../app-routing-paths';
 import { CrisItemPageTabResolver } from './cris-item-page-tab.resolver';
 import { OrcidPageComponent } from './orcid-page/orcid-page.component';
 import { OrcidPageGuard } from './orcid-page/orcid-page.guard';
-import { DSOEditMenuResolver } from '../shared/dso-page/dso-edit-menu.resolver';
 import { UnpaywallVersionsComponent } from './unpaywall-versions/unpaywall-versions.component';
 import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.resolver';
 
@@ -31,7 +30,6 @@ import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.reso
         resolve: {
           dso: ItemPageResolver,
           breadcrumb: ItemBreadcrumbResolver,
-          menu: DSOEditMenuResolver
         },
         runGuardsAndResolvers: 'always',
         children: [

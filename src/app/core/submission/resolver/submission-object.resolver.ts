@@ -28,7 +28,7 @@ export class SubmissionObjectResolver<T> implements Resolve<RemoteData<T>> {
      */
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RemoteData<T>> {
         const itemRD$ = this.dataService.findById(route.params.id,
-            true,
+            false,
             false,
             followLink('item'),
         ).pipe(
