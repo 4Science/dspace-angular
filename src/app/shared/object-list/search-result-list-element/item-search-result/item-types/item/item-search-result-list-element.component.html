@@ -57,6 +57,9 @@
           <div *ngIf="dso.firstMetadataValue('cris.virtual.rootFond')" class="item-list-rootfond">
             <div [innerHTML]="firstMetadataValue('cris.virtual.rootFond')"></div>
           </div>
+          <div *ngIf="dso.firstMetadataValue('cris.virtual.rootJournalFond')" class="item-list-rootjournalfond">
+            <div [innerHTML]="firstMetadataValue('cris.virtual.rootJournalFond')"></div>
+          </div>
           <ds-additional-metadata [object]="dso"></ds-additional-metadata>
         </ds-truncatable>
         <div *ngIf="fullTextHighlights.length" class="d-flex flex-row item-list-highlights p-3 border-bottom">
