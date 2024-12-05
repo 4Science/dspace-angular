@@ -6202,8 +6202,6 @@
 
   "researchoutputs.search.results.head": "Publications Search Results",
 
-  "orgunit.search.results.head": "Organizations Search Results",
-
   "homePageTopItems.search.results.head": "Home Page Items Results",
 
   "search.results.no-results": "Your search returned no results. Having trouble finding what you're looking for? Try putting",
@@ -8246,7 +8244,6 @@
 
   "aggregation.page.titleprefix": "Aggregation: ",
   "archivalmaterial.page.titleprefix": "Archival Material: ",
-  "event.page.titleprefix": "Event: ",
   "family.page.titleprefix": "Family: ",
   "fonds.page.titleprefix": "Fonds: ",
   "picture.page.titleprefix": "Picture: ",
@@ -8660,12 +8657,6 @@
 
   "external-login-page.confirm-email.create-account.notifications.error.no-netId": "Something went wrong with this email account. Try again or use a different method to login.",
 
-  "third-party-metrics-cookies.message": "{{ metricType }} badge is blocked by your ",
-
-  "third-party-metrics-cookies.consent-settings": "consent settings",
-
-  "third-party-metrics-blocked": "Some of the metrics are blocked by your",
-
   "form.other-information.alternative-names": "Alternative names",
 
   "form.other-information.selection.data-oairecerif_author_affiliation": "Select alternative affiliation",
@@ -8682,9 +8673,6 @@
   "vocabulary-treeview.header.fondboxtree": "Fond Tree",
 
   "vocabulary-treeview.header.journalfondboxtree": "Journal Fond Tree",
-
-  "vocabulary-treeview.header.aggregationboxtree": "Collection Tree",
-
 
   "metadata-link-view.popover.label.Person.dc.title": "Fullname",
 

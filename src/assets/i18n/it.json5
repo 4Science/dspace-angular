@@ -806,12 +806,6 @@
   // "admin.access-control.groups.notification.deleted.failure.content": "Cause: \"{{cause}}\"",
   "admin.access-control.groups.notification.deleted.failure.content": "Causa: \"{{cause}}\"",
 
-  // "admin.access-control.groups.notification.edit.success": "Successfully edited group \"{{name}}\"",
-  "admin.access-control.groups.notification.edit.success": "Gruppo \"{{name}}\" modificato correttamente",
-
-  // "admin.access-control.groups.notification.edit.failure": "Failed to edit group \"{{name}}\"",
-  "admin.access-control.groups.notification.edit.failure": "Impossibile modificare il gruppo \"{{name}}\"",
-
   // "admin.access-control.groups.form.alert.permanent": "This group is permanent, so it can't be edited or deleted. You can still add and remove group members using this page.",
   "admin.access-control.groups.form.alert.permanent": "Questo gruppo è permanente, quindi non può essere modificato o eliminato. Puoi comunque aggiungere e rimuovere membri del gruppo utilizzando questa pagina.",
 
@@ -911,12 +905,6 @@
   // "admin.access-control.groups.form.members-list.headMembers": "Current Members",
   "admin.access-control.groups.form.members-list.headMembers": "Membri attuali",
 
-  // "admin.access-control.groups.form.members-list.search.scope.metadata": "Metadata",
-  "admin.access-control.groups.form.members-list.search.scope.metadata": "Metadati",
-
-  // "admin.access-control.groups.form.members-list.search.scope.email": "E-mail (exact)",
-  "admin.access-control.groups.form.members-list.search.scope.email": "E-mail (esatta)",
-
   // "admin.access-control.groups.form.members-list.search.button": "Search",
   "admin.access-control.groups.form.members-list.search.button": "Ricerca",
 
@@ -1000,9 +988,6 @@
 
   // "admin.access-control.groups.form.subgroups-list.table.edit.buttons.add": "Add subgroup with name \"{{name}}\"",
   "admin.access-control.groups.form.subgroups-list.table.edit.buttons.add": "Aggiungi sottogruppo con nome \"{{name}}\"",
-
-  // "admin.access-control.groups.form.subgroups-list.table.edit.currentGroup": "Current group",
-  "admin.access-control.groups.form.subgroups-list.table.edit.currentGroup": "Gruppo corrente",
 
   // "admin.access-control.groups.form.subgroups-list.notification.success.addSubgroup": "Successfully added subgroup: \"{{name}}\"",
   "admin.access-control.groups.form.subgroups-list.notification.success.addSubgroup": "Sottogruppo aggiunto con successo: \"{{name}}\"",
@@ -1213,10 +1198,12 @@
   // "admin.metadata-import.page.error.addFile": "Select file first!",
   "admin.metadata-import.page.error.addFile": "Seleziona prima il file!",
 
-  // "admin.metadata-import.page.error.addFileUrl": "Insert file url first!",
+  // "admin.metadata-import.page.error.addFileUrl": "Insert file URL first!",
+  // TODO Source message changed - Revise the translation
   "admin.metadata-import.page.error.addFileUrl": "Inserire prima la URL!",
 
-  // "admin.batch-import.page.error.addFile": "Select Zip file first!",
+  // "admin.batch-import.page.error.addFile": "Select ZIP file first!",
+  // TODO Source message changed - Revise the translation
   "admin.batch-import.page.error.addFile": "Seleziona prima il file ZIP!",
 
   // "admin.metadata-import.page.toggle.upload": "Upload",
@@ -1269,12 +1256,6 @@
 
   // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.headMembers": "Current Members",
   "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.headMembers": "Membri attuali",
-
-  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.search.scope.metadata": "Metadata",
-  "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.search.scope.metadata": "Metadati",
-
-  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.search.scope.email": "E-mail (exact)",
-  "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.search.scope.email": "E-mail (esatta)",
 
   // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.search.button": "Search",
   "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.search.button": "Ricerca",
@@ -2328,6 +2309,10 @@
   // "carousel.button.see-more": "See more",
   "carousel.button.see-more": "Approfondisci",
 
+  // "carousel.play.pause": "Play/Pause",
+  // TODO New key - Add a translation
+  "carousel.play.pause": "Play/Pause",
+
 
   // "search.browse.item-back": "Back to Results",
   "search.browse.item-back": "Torna ai risultati",
@@ -2612,8 +2597,9 @@
   // "collection.edit.template.breadcrumbs": "Item template",
   "collection.edit.template.breadcrumbs": "Modello di Item",
 
-  // "collection.edit.template.cancel": "Cancel",
-  "collection.edit.template.cancel": "Annulla",
+  // "collection.edit.template.back": "Back",
+  // TODO New key - Add a translation
+  "collection.edit.template.back": "Back",
 
   // "collection.edit.template.delete-button": "Delete",
   "collection.edit.template.delete-button": "Cancella",
@@ -3098,6 +3084,7 @@
   // TODO Source message changed - Revise the translation
   "community.sub-community-list.head": "Communities di questa Community",
 
+
   // "context-menu.actions": "Actions",
   "context-menu.actions": "Azioni",
 
@@ -3269,14 +3256,13 @@
   // TODO Source message changed - Revise the translation
   "RELATION.Person.researchoutputs.search.results.head": "Output della ricerca",
 
-  // "RELATION.Person.projects.search.results.head": "Projects",
-
-  // TODO Source message changed - Revise the translation
   // "RELATION.Person.publications.search.results.head": "Publications",
+  // TODO Source message changed - Revise the translation
   "RELATION.Person.publications.search.results.head": "Pubblicazioni",
 
   // "RELATION.Person.projects.search.results.head": "Projects",
-  "RELATION.Person.projects.search.results.head": "Progetti",
+  // TODO Source message changed - Revise the translation
+  "RELATION.Person.publications.search.results.head": "Pubblicazioni",
 
   // "RELATION.OrgUnit.organizations.search.results.head": "Organizations",
   // TODO Source message changed - Revise the translation
@@ -3298,22 +3284,19 @@
   // TODO Source message changed - Revise the translation
   "RELATION.OrgUnit.projects.search.results.head": "Progetti",
 
-  // "RELATION.Project.researchoutputs.search.results.head": "Publications",
-  // TODO Source message changed - Revise the translation
-
   // "RELATION.OrgUnit.orgunitfonds.search.results.head": "Fonds",
+  // TODO Source message changed - Revise the translation
   "RELATION.OrgUnit.orgunitfonds.search.results.head": "Fondi",
 
   // "RELATION.OrgUnit.archivalmaterial.search.results.head": "Archival Material",
   "RELATION.OrgUnit.archivalmaterial.search.results.head": "Materiale Archivistico",
 
   // "RELATION.Project.researchoutputs.search.results.head": "Publications",
-  "RELATION.Project.researchoutputs.search.results.head": "Pubblicazioni",
-
-  // "RELATION.OrgUnit.people.search.results.head": "People",
   // TODO Source message changed - Revise the translation
+  "RELATION.OrgUnit.orgunitfonds.search.results.head": "Fondi",
 
   // "RELATION.Project.projects.search.results.head": "Projects",
+  // TODO Source message changed - Revise the translation
   "RELATION.Project.projects.search.results.head": "Progetti",
 
   // "RELATION.Project.fundings.search.results.head": "Fundings",
@@ -3323,7 +3306,8 @@
   "RELATION.Project.publications.search.results.head": "Pubblicazioni",
 
   // "RELATION.OrgUnit.people.search.results.head": "People",
-  "RELATION.OrgUnit.people.search.results.head": "Persone",
+  // TODO Source message changed - Revise the translation
+  "RELATION.Project.projects.search.results.head": "Progetti",
 
   // "RELATION.Path.pathpublications.search.results.head": "Paths Publications",
   "RELATION.Path.pathpublications.search.results.head": "Pubblicazioni",
@@ -3607,10 +3591,11 @@
   // "cris-layout.advanced-attachment.requestACopy": "Request a copy",
   "cris-layout.advanced-attachment.requestACopy": "Richiedi una copia",
 
-  // "cris-layout.advanced-attachment.viewMore": "View More",
+  // "cris-layout.advanced-attachment.viewMore": "View more",
+  // TODO Source message changed - Revise the translation
   "cris-layout.advanced-attachment.viewMore": "Vedi altro",
 
-  // "cris-layout.advanced-attachment.label.not-present":"(not present)",
+  // "cris-layout.advanced-attachment.label.not-present": "(not present)",
   // TODO New key - Add a translation
   "cris-layout.advanced-attachment.label.not-present": "(not present)",
 
@@ -3618,7 +3603,8 @@
   // TODO New key - Add a translation
   "cris-layout.advanced-attachment.view-pdf": "Open PDF",
 
-  // "cris-layout.attachment.viewMore": "View More",
+  // "cris-layout.attachment.viewMore": "View more",
+  // TODO Source message changed - Revise the translation
   "cris-layout.attachment.viewMore": "Vedi altro",
 
   // "cris-layout.rendering.collections.owning-collection.label": "Owning collection",
@@ -3658,9 +3644,6 @@
   // "curation-task.task.profileformats.label": "Profile Bitstream Formats",
   "curation-task.task.profileformats.label": "Formati Bitstream del profilo",
 
-  // "curation-task.task.registerdoi.label": "Mint DOI",
-  "curation-task.task.registerdoi.label": "Genera DOI",
-
   // "curation-task.task.requiredmetadata.label": "Check for Required Metadata",
   "curation-task.task.requiredmetadata.label": "Verifica la disponibilità di metadati richiesti",
 
@@ -3669,6 +3652,10 @@
 
   // "curation-task.task.vscan.label": "Virus Scan",
   "curation-task.task.vscan.label": "Scansione antivirus",
+
+  // "curation-task.task.registerdoi.label": "Register DOI",
+  // TODO Source message changed - Revise the translation
+  "curation-task.task.registerdoi.label": "Genera DOI",
 
   // "curation.form.task-select.label": "Task:",
   "curation.form.task-select.label": "Task:",
@@ -4057,10 +4044,6 @@
   // "error.validation.license.required": "You must grant this license to complete your submission. If you are unable to grant this license at this time you may save your work and return later or remove the submission.",
   "error.validation.license.notgranted": "È necessario concedere questa licenza per completare l'immisione. Se non sei in grado di concedere questa licenza in questo momento, puoi salvare il tuo lavoro e tornare più tardi o rimuovere l'immissione.",
 
-  // "error.validation.license.required": "You must grant this license to complete your submission. If you are unable to grant this license at this time you may save your work and return later or remove the submission.",
-  // TODO New key - Add a translation
-  "error.validation.license.required": "You must grant this license to complete your submission. If you are unable to grant this license at this time you may save your work and return later or remove the submission.",
-
   // "error.validation.pattern": "This input is restricted by the current pattern: {{ pattern }}.",
   "error.validation.pattern": "L'input è limitato dal pattern in uso: {{ pattern }}.",
 
@@ -4133,8 +4116,8 @@
   "event.listelement.badge": "Evento",
 
   // "event.page.titleprefix": "Event:",
-  // TODO New key - Add a translation
-  "event.page.titleprefix": "Event:",
+  // TODO Source message changed - Revise the translation
+  "event.page.titleprefix": "Evento: ",
 
   // "explore.browse-section.title": "Browse",
   // TODO Source message changed - Revise the translation
@@ -4153,7 +4136,8 @@
   // "explore.counters-section.publications": "Research outputs",
   "explore.counters-section.publications": "Output della ricerca",
 
-  // "explore.counters-section.project_funding" : "Projects",
+  // "explore.counters-section.project_funding": "Projects",
+  // TODO Source message changed - Revise the translation
   "explore.counters-section.project_funding": "Progetti",
 
   // "explore.facet-section.entityType.Publication": "Publication",
@@ -4210,44 +4194,56 @@
   // "explore.grid-section.seeAll": "See all",
   "explore.grid-section.seeAll": "Visualizza tutti",
 
-  // "explore.facet-section.title" : "Discover",
+  // "explore.facet-section.title": "Discover",
+  // TODO Source message changed - Revise the translation
   "explore.facet-section.title": "Scopri",
 
-  // "explore.index.all" : "All",
+  // "explore.index.all": "All",
+  // TODO Source message changed - Revise the translation
   "explore.index.all": "Tutto",
 
-  // "explore.index.author" : "Author",
+  // "explore.index.author": "Author",
+  // TODO Source message changed - Revise the translation
   "explore.index.author": "Autore",
 
-  // "explore.index.graphitemtype" : "Graph by type",
+  // "explore.index.graphitemtype": "Graph by type",
+  // TODO Source message changed - Revise the translation
   "explore.index.graphitemtype": "Grafico per tipo",
 
-  // "explore.index.graphpubldate" : "Graph by date",
+  // "explore.index.graphpubldate": "Graph by date",
+  // TODO Source message changed - Revise the translation
   "explore.index.graphpubldate": "Grafico per data",
 
-  // "explore.index.birthDate" : "Birthday",
+  // "explore.index.birthDate": "Birthday",
+  // TODO Source message changed - Revise the translation
   "explore.index.birthDate": "Data di nascita",
 
-  // "explore.index.metric.view" : "Most viewed",
+  // "explore.index.metric.view": "Most viewed",
+  // TODO Source message changed - Revise the translation
   "explore.index.metric.view": "Più visitati",
 
-  // "explore.index.metric.download" : "Most downloaded",
+  // "explore.index.metric.download": "Most downloaded",
+  // TODO Source message changed - Revise the translation
   "explore.index.metric.download": "Più scaricati",
 
-  // "explore.index.metric.scopus.citation" : "Most cited",
+  // "explore.index.metric.scopus.citation": "Most cited",
+  // TODO Source message changed - Revise the translation
   "explore.index.metric.scopus.citation": "Più citati",
 
-  // "explore.index.chart.pie.itemtype_filter" : "Item Type",
+  // "explore.index.chart.pie.itemtype_filter": "Item Type",
+  // TODO Source message changed - Revise the translation
   "explore.index.chart.pie.itemtype_filter": "Tipologia di Item",
 
   // "explore.index.chart.bar.dateIssued.year": "Year",
   "explore.index.chart.bar.dateIssued.year": "Anno",
 
 
-  // "explore.index.dateIssued" : "Date issued",
+  // "explore.index.dateIssued": "Date issued",
+  // TODO Source message changed - Revise the translation
   "explore.index.dateIssued": "Data puntuale",
 
-  // "explore.index.dateissued" : "Date issued",
+  // "explore.index.dateissued": "Date issued",
+  // TODO Source message changed - Revise the translation
   "explore.index.dateissued": "Data puntuale",
 
   // "explore.index.dc.date.accessioned": "New accessions",
@@ -4256,49 +4252,63 @@
   // "explore.index.paths": "Paths",
   "explore.index.paths": "Percorsi",
 
-  // "explore.index.dc.title" : "Title",
+  // "explore.index.dc.title": "Title",
+  // TODO Source message changed - Revise the translation
   "explore.index.dc.title": "Titolo",
 
-  // "explore.index.editor" : "Editor",
+  // "explore.index.editor": "Editor",
+  // TODO Source message changed - Revise the translation
   "explore.index.editor": "Editore",
 
-  // "explore.index.eqtitle" : "Title",
+  // "explore.index.eqtitle": "Title",
+  // TODO Source message changed - Revise the translation
   "explore.index.eqtitle": "Titolo",
 
   // "explore.index.eqowner": "Researcher",
   "explore.index.eqowner": "Ricercatore",
 
-  // "explore.index.eqorgunit" : "Organization",
+  // "explore.index.eqorgunit": "Organization",
+  // TODO Source message changed - Revise the translation
   "explore.index.eqorgunit": "Organizzazione",
 
-  // "explore.index.entityType" : "Entity type",
+  // "explore.index.entityType": "Entity type",
+  // TODO Source message changed - Revise the translation
   "explore.index.entityType": "Tipo di entità",
 
-  // "explore.index.familyName" : "Family name",
+  // "explore.index.familyName": "Family name",
+  // TODO Source message changed - Revise the translation
   "explore.index.familyName": "Cognome",
 
-  // "explore.index.funding" : "Funding",
+  // "explore.index.funding": "Funding",
+  // TODO Source message changed - Revise the translation
   "explore.index.funding": "Finanziamento",
 
-  // "explore.index.givenName" : "Given name",
+  // "explore.index.givenName": "Given name",
+  // TODO Source message changed - Revise the translation
   "explore.index.givenName": "Nome puntuale",
 
-  // "explore.index.has_content_in_original_bundle" : "Has content in original bundle",
+  // "explore.index.has_content_in_original_bundle": "Has content in original bundle",
+  // TODO Source message changed - Revise the translation
   "explore.index.has_content_in_original_bundle": "Sono presenti dei contenuti nel bundle original",
 
-  // "explore.index.investigators" : "Researchers",
+  // "explore.index.investigators": "Researchers",
+  // TODO Source message changed - Revise the translation
   "explore.index.investigators": "Ricercatori",
 
-  // "explore.index.isAuthorOfPublication" : "Publication's author",
+  // "explore.index.isAuthorOfPublication": "Publication's author",
+  // TODO Source message changed - Revise the translation
   "explore.index.isAuthorOfPublication": "Autore della pubblicazione",
 
-  // "explore.index.isJournalOfPublication" : "Publication's journal",
+  // "explore.index.isJournalOfPublication": "Publication's journal",
+  // TODO Source message changed - Revise the translation
   "explore.index.isJournalOfPublication": "Periodico della pubblicazione",
 
-  // "explore.index.isOrgUnitOfPerson" : "Person's organization",
+  // "explore.index.isOrgUnitOfPerson": "Person's organization",
+  // TODO Source message changed - Revise the translation
   "explore.index.isOrgUnitOfPerson": "Organizzazione del ricercatore",
 
-  // "explore.index.isOrgUnitOfProject" : "Project's organization",
+  // "explore.index.isOrgUnitOfProject": "Project's organization",
+  // TODO Source message changed - Revise the translation
   "explore.index.isOrgUnitOfProject": "Organizzazione del progetto",
 
   // "explore.index.isOrgUnitOfPublication": "Publication's organization",
@@ -4413,12 +4423,13 @@
   // TODO Source message changed - Revise the translation
   "explore.index.rpname": "Nome",
 
-  // "explore.index.subject": "Subject",
+  // "explore.index.subject": "Keyword",
+  // TODO Source message changed - Revise the translation
   "explore.index.subject": "Parola chiave",
 
-  // "explore.index.subject": "Subject",
-  // TODO Source message changed - Revise the translation
-  "explore.index.subject": "Soggetto",
+  // "explore.index.glamsubject": "Subject",
+  // TODO New key - Add a translation
+  "explore.index.glamsubject": "Subject",
 
   // "explore.index.title": "Title",
   // TODO Source message changed - Revise the translation
@@ -4528,6 +4539,7 @@
   // "file-section.error.header": "Error obtaining files for this item",
   "file-section.error.header": "Errore durante il recupero dei file per questo item",
 
+  // "fondsHomePage.search.results.head": "Fonds",
   "fondsHomePage.search.results.head": "Fondi",
 
   // "footer.built-with": "Built with",
@@ -4815,18 +4827,6 @@
   // TODO New key - Add a translation
   "form.other-information.ror_orgunit_acronym": "ROR acronym",
 
-  // "form.other-information.ror_orgunit_id": "ROR ID",
-  // TODO New key - Add a translation
-  "form.other-information.ror_orgunit_id": "ROR ID",
-
-  // "form.other-information.ror_orgunit_type": "ROR type",
-  // TODO New key - Add a translation
-  "form.other-information.ror_orgunit_type": "ROR type",
-
-  // "form.other-information.ror_orgunit_acronym": "ROR acronym",
-  // TODO New key - Add a translation
-  "form.other-information.ror_orgunit_acronym": "ROR acronym",
-
   // "form.other-information.ror_orgunit_countryName": "ROR country",
   // TODO New key - Add a translation
   "form.other-information.ror_orgunit_countryName": "ROR country",
@@ -4894,8 +4894,9 @@
   // TODO Source message changed - Revise the translation
   "funding.listelement.badge": "Finanziamento",
 
-  // "funding.page.titleprefix" : "Funding:",
-  "funding.page.titleprefix": "Finanziamento:",
+  // "funding.page.titleprefix": "Funding:",
+  // TODO New key - Add a translation
+  "funding.page.titleprefix": "Funding:",
 
 
 
@@ -4943,9 +4944,6 @@
 
   // "grant-deny-request-copy.processed": "This request has already been processed. You can use the button below to get back to the home page.",
   "grant-deny-request-copy.processed": "Questa richiesta è già stata elaborata. Puoi cliccare il pulsante qui sotto per tornare alla home page.",
-
-  // "grant-request-copy.email.message": "Dear {{ recipientName }},\nIn response to your request I have the pleasure to send you in attachment a copy of the file(s) concerning the document: \"{{ itemUrl }}\" ({{ itemName }}), of which I am an author.\n\nBest regards,\n{{ authorName }} <{{ authorEmail }}>",
-  "grant-request-copy.email.message": "Gentile {{ recipientName }},\nin tisposta alla tua richiesta, ho il piacere di inviarti come allegato una copia del file riferito al documento: \"{{ itemUrl }}\" ({{ itemName }}), di cui sono l'autore.\n\nUn cordiale saluto,\n{{ authorName }} <{{ authorEmail }}>",
 
   // "grant-request-copy.email.subject": "Request copy of document",
   "grant-request-copy.email.subject": "Richiedi una copia del documento",
@@ -5126,18 +5124,6 @@
   // "info.end-user-agreement.hosting-country": "the United States",
   "info.end-user-agreement.hosting-country": "gli Stati Uniti",
 
-  // "info.privacy.breadcrumbs": "Privacy",
-  // TODO New key - Add a translation
-  "info.privacy.breadcrumbs": "Privacy",
-
-  // "info.privacy.head": "Privacy",
-  // TODO New key - Add a translation
-  "info.privacy.head": "Privacy",
-
-  // "info.privacy.title": "Privacy",
-  // TODO New key - Add a translation
-  "info.privacy.title": "Privacy",
-
   // "info.general-information.breadcrumbs": "General Information",
   // TODO New key - Add a translation
   "info.general-information.breadcrumbs": "General Information",
@@ -5169,6 +5155,22 @@
   // "info.history-digital-lid.head": "History of the digital library",
   // TODO New key - Add a translation
   "info.history-digital-lid.head": "History of the digital library",
+
+  // "info.end-user-agreement.content.fallback": "Accept the user agreement.",
+  // TODO New key - Add a translation
+  "info.end-user-agreement.content.fallback": "Accept the user agreement.",
+
+  // "info.privacy.breadcrumbs": "Privacy Statement",
+  // TODO New key - Add a translation
+  "info.privacy.breadcrumbs": "Privacy Statement",
+
+  // "info.privacy.head": "Privacy Statement",
+  // TODO New key - Add a translation
+  "info.privacy.head": "Privacy Statement",
+
+  // "info.privacy.title": "Privacy Statement",
+  // TODO New key - Add a translation
+  "info.privacy.title": "Privacy Statement",
 
   // "info.history-digital-lid.title": "History of the digital library",
   // TODO New key - Add a translation
@@ -6201,7 +6203,8 @@
   // "item.page.version.create": "Create new version",
   "item.page.version.create": "Crea una nuova versione",
 
-  // "item.page.version.hasDraft": "A new version cannot be created because there is an inprogress submission in the version history",
+  // "item.page.version.hasDraft": "A new version cannot be created because there is an in-progress submission in the version history",
+  // TODO Source message changed - Revise the translation
   "item.page.version.hasDraft": "Impossibile creare una nuova versione perché è presente un'submission in corso nella cronologia delle versioni",
 
   // "item.page.claim.button": "Claim",
@@ -6221,14 +6224,44 @@
   // "item.preview.dc.identifier.arxiv": "arXiv ID",
   "item.preview.dc.identifier.arxiv": "ID arXiv",
 
-  // "item.preview.dc.identifier.patentno": "Patent Number",
-  "item.preview.dc.identifier.patentno": "Numero di brevetto",
+  // "item.preview.crispatent.document.description": "Document description:",
+  // TODO New key - Add a translation
+  "item.preview.crispatent.document.description": "Document description:",
+
+  // "item.preview.crispatent.document.issueDate": "Publication date:",
+  // TODO New key - Add a translation
+  "item.preview.crispatent.document.issueDate": "Publication date:",
+
+  // "item.preview.crispatent.document.kind": "Document Kind code:",
+  // TODO New key - Add a translation
+  "item.preview.crispatent.document.kind": "Document Kind code:",
+
+  // "item.preview.crispatent.document.title": "Document title:",
+  // TODO New key - Add a translation
+  "item.preview.crispatent.document.title": "Document title:",
+
+  // "item.preview.crispatent.kind": "Kind code:",
+  // TODO New key - Add a translation
+  "item.preview.crispatent.kind": "Kind code:",
+
+  // "item.preview.dc.contributor": "Applicants:",
+  // TODO New key - Add a translation
+  "item.preview.dc.contributor": "Applicants:",
+
+  // "item.preview.dc.identifier.applicationnumber": "Application number:",
+  // TODO New key - Add a translation
+  "item.preview.dc.identifier.applicationnumber": "Application number:",
+
+  // "item.preview.dc.identifier.patentno": "Patent number:",
+  // TODO New key - Add a translation
+  "item.preview.dc.identifier.patentno": "Patent number:",
 
   // "item.preview.dc.subject.ipc": "Subject IPC",
   "item.preview.dc.subject.ipc": "IPC Subject",
 
-  // "item.preview.dcterms.dateSubmitted": "Registration Date",
-  "item.preview.dcterms.dateSubmitted": "Data di registrazione",
+  // "item.preview.dcterms.dateSubmitted": "Registration date:",
+  // TODO New key - Add a translation
+  "item.preview.dcterms.dateSubmitted": "Registration date:",
 
   // "item.preview.dc.identifier.isi": "ISI",
   // TODO Source message changed - Revise the translation
@@ -6399,18 +6432,6 @@
   // TODO Source message changed - Revise the translation
   "item.preview.oairecerif.oamandate": "Mandato OA",
 
-  // "item.preview.oairecerif.identifier.url": "Link",
-  "item.preview.oairecerif.identifier.url": "Link",
-
-  // "item.preview.organization.identifier.ror": "ROR ID",
-  "item.preview.organization.identifier.ror": "ROR ID",
-
-  // "item.preview.organization.foundingDate": "Founding Date",
-  "item.preview.organization.foundingDate": "Data di fondazione",
-
-  // "item.preview.organization.address.addressCountry": "Country",
-  "item.preview.organization.address.addressCountry": "Paese",
-
   // "item.preview.organization.parentOrganization": "Parent Organization",
   "item.preview.organization.parentOrganization": "Ente superiore",
 
@@ -6437,6 +6458,31 @@
 
   // "item.preview.oaire.fundingStream": "Funding Stream:",
   "item.preview.oaire.fundingStream": "Flusso di finanziamento:",
+
+  // "item.preview.oairecerif.identifier.url": "URL",
+  // TODO Source message changed - Revise the translation
+  "item.preview.oairecerif.identifier.url": "Link",
+
+  // "item.preview.organization.address.addressCountry": "Country",
+  "item.preview.organization.address.addressCountry": "Paese",
+
+  // "item.preview.organization.foundingDate": "Founding Date",
+  "item.preview.organization.foundingDate": "Data di fondazione",
+
+  // "item.preview.organization.identifier.crossrefid": "CrossRef ID",
+  // TODO New key - Add a translation
+  "item.preview.organization.identifier.crossrefid": "CrossRef ID",
+
+  // "item.preview.organization.identifier.isni": "ISNI",
+  // TODO New key - Add a translation
+  "item.preview.organization.identifier.isni": "ISNI",
+
+  // "item.preview.organization.identifier.ror": "ROR ID",
+  "item.preview.organization.identifier.ror": "ROR ID",
+
+  // "item.preview.organization.legalName": "Legal Name",
+  // TODO New key - Add a translation
+  "item.preview.organization.legalName": "Legal Name",
 
   // "item.preview.person.identifier.rid": "Researcher ID:",
   "item.preview.person.identifier.rid": "ID del Ricercatore:",
@@ -6528,7 +6574,8 @@
   // "item.version.history.table.action.deleteVersion": "Delete version",
   "item.version.history.table.action.deleteVersion": "Elimina versione",
 
-  // "item.version.history.table.action.hasDraft": "A new version cannot be created because there is an inprogress submission in the version history",
+  // "item.version.history.table.action.hasDraft": "A new version cannot be created because there is an in-progress submission in the version history",
+  // TODO Source message changed - Revise the translation
   "item.version.history.table.action.hasDraft": "Non è possibile creare una nuova versione perchè c'è già una submission in progress nella cronologia delle versioni",
 
   // "item.version.notice": "This is not the latest version of this item. The latest version can be found <a href='{{destination}}'>here</a>.",
@@ -6966,9 +7013,6 @@
   // "login.form.new-user": "New user? Click here to register.",
   "login.form.new-user": "Nuovo utente? Clicca qui per registrarti.",
 
-  // "login.form.or-divider": "or",
-  "login.form.or-divider": "oppure",
-
   // "login.form.oidc": "Log in with OIDC",
   "login.form.oidc": "Accedi con OIDC",
 
@@ -7343,159 +7387,6 @@
   "modal.item-detail-page.confirm.cancel": "Chiudi",
 
 
-  // "statistics": "Statistics",
-  "statistics": "Statistiche",
-
-  // "statistics.workflow.breadcrumbs": "Workflow Statistics",
-  "statistics.workflow.breadcrumbs": "Statistiche del Workflow",
-
-  // "statistics.workflow.page.header": "Workflow Statistics",
-  "statistics.workflow.page.header": "Statistiche del Workflow",
-
-  // "statistics.workflow.page.current-table.header": "Current workflows",
-  "statistics.workflow.page.current-table.header": "Workflow correnti",
-
-  // "statistics.workflow.page.owner-table.header": "Actions performed by actor",
-  "statistics.workflow.page.owner-table.header": "Azioni eseguite dall'attore",
-
-  // "statistics.workflow.page.owner-table.count": "Performed",
-  "statistics.workflow.page.owner-table.count": "Eseguito",
-
-  // "statistics.workflow.page.owner-table.email": "Email",
-  "statistics.workflow.page.owner-table.email": "Email",
-
-  // "statistics.workflow.page.step-table.header": "Workflow steps performed",
-  "statistics.workflow.page.step-table.header": "Passaggi del Workflow eseguiti",
-
-  // "statistics.workflow.page.step-table.step": "Step",
-  "statistics.workflow.page.step-table.step": "Step",
-
-  // "statistics.workflow.page.step-table.count": "Performed",
-  "statistics.workflow.page.step-table.count": "Eseguito",
-
-  // "statistics.workflow.page.step-table.submit" : "Submit",
-  "statistics.workflow.page.step-table.submit": "Invia",
-
-  // "statistics.workflow.page.step-table.reviewstep" : "Review",
-  "statistics.workflow.page.step-table.reviewstep": "Riesamina",
-
-  // "statistics.workflow.page.step-table.editstep" : "Edit",
-  "statistics.workflow.page.step-table.editstep": "Modifica",
-
-  // "statistics.workflow.page.step-table.finaleditstep" : "Final edit",
-  "statistics.workflow.page.step-table.finaleditstep": "Modifica finale",
-
-  // "statistics.workflow.page.step-table.item" : "Archive",
-  "statistics.workflow.page.step-table.item": "Archivia",
-
-  // "statistics.workflow.page.step-table.workspace" : "Reject",
-  "statistics.workflow.page.step-table.workspace": "Rifiuta",
-
-  // "statistics.workflow.page.current-table.reviewstep" : "Review",
-  "statistics.workflow.page.current-table.reviewstep": "Riesamina",
-
-  // "statistics.workflow.page.current-table.editstep" : "Edit",
-  "statistics.workflow.page.current-table.editstep": "Modifica",
-
-  // "statistics.workflow.page.current-table.finaleditstep" : "Final edit",
-  "statistics.workflow.page.current-table.finaleditstep": "Modifica finale",
-
-  // "statistics.workflow.page.current-table.step": "Step",
-  "statistics.workflow.page.current-table.step": "Passo",
-
-  // "statistics.workflow.page.current-table.count": "Count",
-  "statistics.workflow.page.current-table.count": "Conteggio",
-
-  // "statistics.workflow.page.max": "Max",
-  "statistics.workflow.page.max": "Max",
-
-  // "statistics.workflow.page.collection": "Collection",
-  "statistics.workflow.page.collection": "Collezione",
-
-  // "statistics.workflow.page.endDate": "End date",
-  "statistics.workflow.page.endDate": "Data di fine",
-
-  // "statistics.workflow.page.startDate": "Start date",
-  "statistics.workflow.page.startDate": "Data di inizio",
-
-  // "statistics.workflow.page.reset": "Reset filters",
-  "statistics.workflow.page.reset": "Reimposta filtri",
-
-  // "statistics.workflow.page.actions.title": "Actions",
-  "statistics.workflow.page.actions.title": "Azione",
-
-  // "statistics.workflow.page.action-table.action": "Action",
-  "statistics.workflow.page.action-table.action": "Approva",
-
-  // "statistics.workflow.page.action-table.count": "Count",
-  "statistics.workflow.page.action-table.count": "Modifica",
-
-  // "statistics.workflow.page.action-table.editstep.editaction": "Edit",
-  "statistics.workflow.page.action-table.editstep.editaction": "Modifica",
-
-  // "statistics.workflow.page.action-table.finaleditstep.finaleditaction": "Final Edit",
-  "statistics.workflow.page.action-table.finaleditstep.finaleditaction": "Modifica finale",
-
-  // "statistics.workflow.page.action-table.reviewstep.reviewaction": "Review",
-  "statistics.workflow.page.action-table.reviewstep.reviewaction": "Riesamina",
-
-  // "statistics.workflow.page.action-table.submit": "Submit",
-  "statistics.workflow.page.action-table.submit": "Invia",
-
-  // "statistics.workflow.page.action-table.approve": "Approve",
-  "statistics.workflow.page.action-table.approve": "Approva",
-
-  // "statistics.workflow.page.action-table.reject": "Reject",
-  "statistics.workflow.page.action-table.reject": "Revisione",
-
-  // "statistics.workflow.page.action-table.editaction": "Edit",
-  "statistics.workflow.page.action-table.editaction": "Modifica",
-
-  // "statistics.workflow.page.action-table.finaleditaction": "Final Edit",
-  "statistics.workflow.page.action-table.finaleditaction": "Modifica finale",
-
-  // "statistics.workflow.page.action-table.reviewaction": "Review",
-  "statistics.workflow.page.action-table.reviewaction": "Revisione",
-
-  // "statistics.workflow.page.action-table.claimaction" : "Claim",
-  "statistics.workflow.page.action-table.claimaction": "Associa",
-
-  // "statistics.workflow.page.no-data-found": "No data found",
-  "statistics.workflow.page.no-data-found": "Nessun dato trovato",
-
-  // "statistics.login.breadcrumbs": "Login Statistics",
-  "statistics.login.breadcrumbs": "Statistiche di accesso",
-
-  // "statistics.login.page.header": "Login Statistics",
-  "statistics.login.page.header": "Statistiche di accesso",
-
-  // "statistics.login.page.reset": "Reset filters",
-  "statistics.login.page.reset": "Ripristina filtri",
-
-  // "statistics.login.page.table.user": "User",
-  "statistics.login.page.table.user": "Utente",
-
-  // "statistics.login.page.table.email": "Email",
-  "statistics.login.page.table.email": "Email",
-
-  // "statistics.login.page.table.count": "Login",
-  "statistics.login.page.table.count": "Login",
-
-  // "statistics.login.page.max": "Max",
-  "statistics.login.page.max": "Max",
-
-  // "statistics.login.page.endDate": "End date",
-  "statistics.login.page.endDate": "Data di fine",
-
-  // "statistics.login.page.startDate": "Start date",
-  "statistics.login.page.startDate": "Data di inizio",
-
-  // "statistics.login.page.no-data-found": "No data found",
-  "statistics.login.page.no-data-found": "Nessun dato trovato",
-
-  // "statistics.login.title statistics.workflow.title" : "Login Statistics",
-  "statistics.login.title statistics.workflow.title": "Statistiche di accesso",
-
   // "manage.relations": "Manage Relations",
   "manage.relations": "Gestire le relazioni",
 
@@ -7692,7 +7583,8 @@
   // "mydspace.status.mydspaceValidation": "Validation",
   "mydspace.status.mydspaceValidation": "Convalida",
 
-  // "mydspace.status.mydspaceWaitingController": "Waiting for controller",
+  // "mydspace.status.mydspaceWaitingController": "Waiting for reviewer",
+  // TODO Source message changed - Revise the translation
   "mydspace.status.mydspaceWaitingController": "In attesa del controllo",
 
   // "mydspace.status.mydspaceWorkflow": "Workflow",
@@ -7728,6 +7620,11 @@
   // "mydspace.notification.suggestion.page": "We found <b>{{count}} {{type}}</b> in the {{source}} that seems to be related to your profile. Please <a href='/suggestions/{{suggestionId}}'>review the suggestions.</a>",
   "mydspace.notification.suggestion.page": "Abbiamo trovato <b>{{count}} {{type}}</b> nel {{source}} che sembra essere correlato al tuo profilo. Si prega di <a href='/suggestions/{{suggestionId}}'>controllare i suggerimenti.</a>",
 
+
+  // "nav.expandable-navbar-section-suffix": "(submenu)",
+  // TODO New key - Add a translation
+  "nav.expandable-navbar-section-suffix": "(submenu)",
+
   // "nav.browse.header": "All of DSpace",
   "nav.browse.header": "Tutto DSpace-GLAM",
 
@@ -7746,7 +7643,8 @@
   // "nav.login": "Log In",
   "nav.login": "Accedi",
 
-  // "nav.user-profile-menu-and-logout": "User profile menu and Log Out",
+  // "nav.user-profile-menu-and-logout": "User profile menu and log out",
+  // TODO Source message changed - Revise the translation
   "nav.user-profile-menu-and-logout": "Menù di autenticazione e Log Out",
 
   // "nav.logout": "Log Out",
@@ -7791,6 +7689,10 @@
 
   // "none.listelement.badge": "Item",
   "none.listelement.badge": "Item",
+
+  // "no.description.available": "No description available",
+  // TODO New key - Add a translation
+  "no.description.available": "No description available",
 
   // "openaire.broker.title": "OpenAIRE Broker",
   "openaire.broker.title": "OpenAIRE Broker",
@@ -8411,67 +8313,9 @@
   "process.bulk.delete.success": "{{count}} processi sono stati eliminati con successo",
 
 
-
-  // "audit.overview.title": "Audit Logs Overview",
-  "audit.overview.title": "Panoramica dei log di revisione",
-
-  // "audit.overview.table.id" : "Audit ID",
-  "audit.overview.table.id": "ID della revisione",
-
-  // "audit.overview.table.objectUUID" : "Object ID",
-  "audit.overview.table.objectUUID": "ID dell'oggetto",
-
-  // "audit.overview.table.objectType" : "Object Type",
-  "audit.overview.table.objectType": "Tipo di oggetto",
-
-  // "audit.overview.table.subjectUUID" : "Subject ID",
-  "audit.overview.table.subjectUUID": "ID del soggetto",
-
-  // "audit.overview.table.subjectType" : "Subject Type",
-  "audit.overview.table.subjectType": "Tipo di soggetto",
-
-  // "audit.overview.table.entityType" : "Audit Type",
-  "audit.overview.table.entityType": "Tipo di revisione",
-
-  // "audit.overview.table.eperson" : "EPerson",
-  "audit.overview.table.eperson": "EPerson",
-
-  // "audit.overview.table.timestamp" : "Time",
-  "audit.overview.table.timestamp": "Orario",
-
-  // "audit.overview.breadcrumbs": "Audit Logs Overview",
-  "audit.overview.breadcrumbs": "Panoramica dei log di revisione",
-
-  // "audit.object.overview.title": "Subject Audit Logs Overview",
-  "audit.object.overview.title": "Cenni generali dei log di revisione dell'oggetto",
-
-
-  // "audit.detail.title" : "Audit Detail",
-  "audit.detail.title": "Dettagli della revisione",
-
-  // "audit.detail.id" : "Audit Id",
-  "audit.detail.id": "ID della revisione",
-
-  // "audit.detail.subjectUUID" : "Subject ID",
-  "audit.detail.subjectUUID": "ID del soggetto",
-
-  // "audit.detail.subjectType" : "Subject Type",
-  "audit.detail.subjectType": "Tipo di soggetto",
-
-  // "audit.detail.eventType" : "Audit Type",
-  "audit.detail.eventType": "Tipo di revisione",
-
-  // "audit.detail.eperson" : "EPerson",
-  "audit.detail.eperson": "EPerson",
-
-  // "audit.detail.timeStamp" : "Time",
-  "audit.detail.timeStamp": "Orario",
-
-  // "audit.detail.back" : "All Audit Logs",
-  "audit.detail.back": "Tutti i log di revisione",
-
-  // "audit.detail.back.subject": "Subject Audit Logs",
-  "audit.detail.back.subject": "Log di revisione del soggetto",
+  // "patent.page.titleprefix": "Patent",
+  // TODO New key - Add a translation
+  "patent.page.titleprefix": "Patent",
 
   // "patent.listelement.badge": "Patent",
   "patent.listelement.badge": "Brevetto",
@@ -9176,7 +9020,8 @@
   // "search.filters.applied.f.projectorgunits": "Organisation",
   "search.filters.applied.f.projectorgunits": "Organizzazione",
 
-  // "search.filters.applied.f.subject": "Subject",
+  // "search.filters.applied.f.subject": "Keyword",
+  // TODO Source message changed - Revise the translation
   "search.filters.applied.f.subject": "Parola chiave",
 
   // "search.filters.applied.f.glamsubject": "Subject",
@@ -9605,13 +9450,16 @@
   // "search.filters.filter.show-more": "Show more",
   "search.filters.filter.show-more": "Mostra altro",
 
-  // "search.filters.filter.subject.head": "Subject",
+  // "search.filters.filter.subject.head": "Keyword",
+  // TODO Source message changed - Revise the translation
   "search.filters.filter.subject.head": "Parola chiave",
 
-  // "search.filters.filter.subject.placeholder": "Subject",
+  // "search.filters.filter.subject.placeholder": "Keyword",
+  // TODO Source message changed - Revise the translation
   "search.filters.filter.subject.placeholder": "Parola chiave",
 
-  // "search.filters.filter.subject.label": "Search subject",
+  // "search.filters.filter.subject.label": "Search keyword",
+  // TODO Source message changed - Revise the translation
   "search.filters.filter.subject.label": "Oggetto della ricerca",
 
   // "search.filters.filter.glamsubject.head": "Subject",
@@ -9824,7 +9672,8 @@
   // "search.filters.namedresourcetype.Validation": "Validation",
   "search.filters.namedresourcetype.Validation": "Convalida",
 
-  // "search.filters.namedresourcetype.Waiting for Controller": "Waiting for Controller",
+  // "search.filters.namedresourcetype.Waiting for Controller": "Waiting for reviewer",
+  // TODO Source message changed - Revise the translation
   "search.filters.namedresourcetype.Waiting for Controller": "In attesa del controllo",
 
   // "search.filters.namedresourcetype.Workflow": "Workflow",
@@ -9854,7 +9703,8 @@
   // "search.form.search_dspace": "All repository",
   "search.form.search_dspace": "Tutto il portale",
 
-  // "search.form.scope.all": "All of DSpace",
+  // "search.form.scope.all": "All items",
+  // TODO Source message changed - Revise the translation
   "search.form.scope.all": "Tutto DSpace-GLAM",
 
   // "search.results.head": "Search Results",
@@ -9880,9 +9730,6 @@
 
   // "researchoutputs.search.results.head": "Publications Search Results",
   "researchoutputs.search.results.head": "Risultati della ricerca: Pubblicazioni",
-
-  // "orgunit.search.results.head": "Organizations Search Results",
-  "orgunit.search.results.head": "Risultati della ricerca: Strutture",
 
   // "homePageTopItems.search.results.head": "Home Page Items Results",
   "homePageTopItems.search.results.head": "Risultati",
@@ -9942,6 +9789,10 @@
 
   // "search.view-switch.show-list": "Show as list",
   "search.view-switch.show-list": "Visualizzazione a lista",
+
+  // "social.component.title": "Social Share",
+  // TODO New key - Add a translation
+  "social.component.title": "Social Share",
 
   // "selectable-list-item-control.deselect": "Deselect item",
   // TODO New key - Add a translation
@@ -10079,7 +9930,6 @@
   // TODO New key - Add a translation
   "sorting.person.birthDate.DESC": "Birth Date Descending",
 
-
   // "statistics": "Statistics",
   "statistics": "Statistiche",
 
@@ -10242,159 +10092,6 @@
 
   // "statistics.login.title statistics.workflow.title": "Login Statistics",
   // TODO Source message changed - Revise the translation
-  "statistics.login.title statistics.workflow.title": "Statistiche di accesso",
-
-  // "statistics": "Statistics",
-  "statistics": "Statistiche",
-
-  // "statistics.workflow.breadcrumbs": "Workflow Statistics",
-  "statistics.workflow.breadcrumbs": "Statistiche del Workflow",
-
-  // "statistics.workflow.page.header": "Workflow Statistics",
-  "statistics.workflow.page.header": "Statistiche del Workflow",
-
-  // "statistics.workflow.page.current-table.header": "Current workflows",
-  "statistics.workflow.page.current-table.header": "Workflow correnti",
-
-  // "statistics.workflow.page.owner-table.header": "Actions performed by actor",
-  "statistics.workflow.page.owner-table.header": "Azioni eseguite dall'attore",
-
-  // "statistics.workflow.page.owner-table.count": "Performed",
-  "statistics.workflow.page.owner-table.count": "Eseguito",
-
-  // "statistics.workflow.page.owner-table.email": "Email",
-  "statistics.workflow.page.owner-table.email": "Email",
-
-  // "statistics.workflow.page.step-table.header": "Workflow steps performed",
-  "statistics.workflow.page.step-table.header": "Passaggi del Workflow eseguiti",
-
-  // "statistics.workflow.page.step-table.step": "Step",
-  "statistics.workflow.page.step-table.step": "Step",
-
-  // "statistics.workflow.page.step-table.count": "Performed",
-  "statistics.workflow.page.step-table.count": "Eseguito",
-
-  // "statistics.workflow.page.step-table.submit": "Submit",
-  "statistics.workflow.page.step-table.submit": "Invia",
-
-  // "statistics.workflow.page.step-table.reviewstep": "Review",
-  "statistics.workflow.page.step-table.reviewstep": "Riesamina",
-
-  // "statistics.workflow.page.step-table.editstep": "Edit",
-  "statistics.workflow.page.step-table.editstep": "Modifica",
-
-  // "statistics.workflow.page.step-table.finaleditstep": "Final edit",
-  "statistics.workflow.page.step-table.finaleditstep": "Modifica finale",
-
-  // "statistics.workflow.page.step-table.item": "Archive",
-  "statistics.workflow.page.step-table.item": "Archivia",
-
-  // "statistics.workflow.page.step-table.workspace": "Reject",
-  "statistics.workflow.page.step-table.workspace": "Rifiuta",
-
-  // "statistics.workflow.page.current-table.reviewstep": "Review",
-  "statistics.workflow.page.current-table.reviewstep": "Riesamina",
-
-  // "statistics.workflow.page.current-table.editstep": "Edit",
-  "statistics.workflow.page.current-table.editstep": "Modifica",
-
-  // "statistics.workflow.page.current-table.finaleditstep": "Final edit",
-  "statistics.workflow.page.current-table.finaleditstep": "Modifica finale",
-
-  // "statistics.workflow.page.current-table.step": "Step",
-  "statistics.workflow.page.current-table.step": "Passo",
-
-  // "statistics.workflow.page.current-table.count": "Count",
-  "statistics.workflow.page.current-table.count": "Conteggio",
-
-  // "statistics.workflow.page.max": "Max",
-  "statistics.workflow.page.max": "Max",
-
-  // "statistics.workflow.page.collection": "Collection",
-  "statistics.workflow.page.collection": "Collezione",
-
-  // "statistics.workflow.page.endDate": "End date",
-  "statistics.workflow.page.endDate": "Data di fine",
-
-  // "statistics.workflow.page.startDate": "Start date",
-  "statistics.workflow.page.startDate": "Data di inizio",
-
-  // "statistics.workflow.page.reset": "Reset filters",
-  "statistics.workflow.page.reset": "Reimposta filtri",
-
-  // "statistics.workflow.page.actions.title": "Actions",
-  "statistics.workflow.page.actions.title": "Azione",
-
-  // "statistics.workflow.page.action-table.action": "Action",
-  "statistics.workflow.page.action-table.action": "Approva",
-
-  // "statistics.workflow.page.action-table.count": "Count",
-  "statistics.workflow.page.action-table.count": "Modifica",
-
-  // "statistics.workflow.page.action-table.editstep.editaction": "Edit",
-  "statistics.workflow.page.action-table.editstep.editaction": "Modifica",
-
-  // "statistics.workflow.page.action-table.finaleditstep.finaleditaction": "Final Edit",
-  "statistics.workflow.page.action-table.finaleditstep.finaleditaction": "Modifica finale",
-
-  // "statistics.workflow.page.action-table.reviewstep.reviewaction": "Review",
-  "statistics.workflow.page.action-table.reviewstep.reviewaction": "Riesamina",
-
-  // "statistics.workflow.page.action-table.submit": "Submit",
-  "statistics.workflow.page.action-table.submit": "Invia",
-
-  // "statistics.workflow.page.action-table.approve": "Approve",
-  "statistics.workflow.page.action-table.approve": "Approva",
-
-  // "statistics.workflow.page.action-table.reject": "Reject",
-  "statistics.workflow.page.action-table.reject": "Revisione",
-
-  // "statistics.workflow.page.action-table.editaction": "Edit",
-  "statistics.workflow.page.action-table.editaction": "Modifica",
-
-  // "statistics.workflow.page.action-table.finaleditaction": "Final Edit",
-  "statistics.workflow.page.action-table.finaleditaction": "Modifica finale",
-
-  // "statistics.workflow.page.action-table.reviewaction": "Review",
-  "statistics.workflow.page.action-table.reviewaction": "Revisione",
-
-  // "statistics.workflow.page.action-table.claimaction": "Claim",
-  "statistics.workflow.page.action-table.claimaction": "Associa",
-
-  // "statistics.workflow.page.no-data-found": "No data found",
-  "statistics.workflow.page.no-data-found": "Nessun dato trovato",
-
-  // "statistics.login.breadcrumbs": "Login Statistics",
-  "statistics.login.breadcrumbs": "Statistiche di accesso",
-
-  // "statistics.login.page.header": "Login Statistics",
-  "statistics.login.page.header": "Statistiche di accesso",
-
-  // "statistics.login.page.reset": "Reset filters",
-  "statistics.login.page.reset": "Ripristina filtri",
-
-  // "statistics.login.page.table.user": "User",
-  "statistics.login.page.table.user": "Utente",
-
-  // "statistics.login.page.table.email": "Email",
-  "statistics.login.page.table.email": "Email",
-
-  // "statistics.login.page.table.count": "Login",
-  "statistics.login.page.table.count": "Login",
-
-  // "statistics.login.page.max": "Max",
-  "statistics.login.page.max": "Max",
-
-  // "statistics.login.page.endDate": "End date",
-  "statistics.login.page.endDate": "Data di fine",
-
-  // "statistics.login.page.startDate": "Start date",
-  "statistics.login.page.startDate": "Data di inizio",
-
-  // "statistics.login.page.no-data-found": "No data found",
-  "statistics.login.page.no-data-found": "Nessun dato trovato",
-
-  // "statistics.login.title statistics.workflow.title": "Login Statistics",
   "statistics.login.title statistics.workflow.title": "Statistiche di accesso",
 
   // "statistics.export.csv": "Export CSV",
@@ -11681,9 +11378,6 @@
 
   // "submission.sections.submit.progressbar.describe.audiovideo-file": "File Description",
   "submission.sections.submit.progressbar.describe.audiovideo-file": "Informazioni sul file dell'audiovideo",
-  // "submission.sections.submit.progressbar.custom-url": "Custom url",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.custom-url": "Custom url",
 
   // "submission.sections.submit.progressbar.describe.equipment": "Equipment basic information",
   "submission.sections.submit.progressbar.describe.equipment": "Informazioni di base sull'attrezzatura",
@@ -11779,9 +11473,6 @@
 
   // "submission.sections.submit.progressbar.sherpaPolicies": "Publisher open access policy information",
   "submission.sections.submit.progressbar.sherpaPolicies": "Informazioni sulle policy open access dell'editore",
-
-  // "submission.sections.submit.progressbar.correction-step": "Corrections",
-  "submission.sections.submit.progressbar.correction-step": "Correzioni",
 
   // "submission.sections.sherpa-policy.title-empty": "No publisher policy information available. If your work has an associated ISSN, please enter it above to see any related publisher open access policies.",
   "submission.sections.sherpa-policy.title-empty": "Non sono disponibili informazioni sulle policy dell'editore. Se il vostro lavoro ha un ISSN associato, inseritelo qui sopra per vedere le open access policies dell'editore.",
@@ -12158,13 +11849,15 @@
   // "submission.workflow.tasks.claimed.approve": "Approve",
   "submission.workflow.tasks.claimed.approve": "Approva",
 
-  // "submission.workflow.tasks.claimed.approve_help": "If you have reviewed the item and it is suitable for inclusion in the collection, select \"Approve\".",
+  // "submission.workflow.tasks.claimed.approve_help": "If you have reviewed the item and it is suitable for inclusion in the collection, select \"Approve\"",
+  // TODO Source message changed - Revise the translation
   "submission.workflow.tasks.claimed.approve_help": "Se hai esaminato l'item ed è adatto per l'inclusione nella collezione, seleziona \"Approva\".",
 
   // "submission.workflow.tasks.claimed.edit": "Edit",
   "submission.workflow.tasks.claimed.edit": "Modifica",
 
-  // "submission.workflow.tasks.claimed.edit_help": "Select this option to change the item's metadata.",
+  // "submission.workflow.tasks.claimed.edit_help": "Select this option to change the item's metadata",
+  // TODO Source message changed - Revise the translation
   "submission.workflow.tasks.claimed.edit_help": "Selezionare questa opzione per modificare i metadati dell'item.",
 
   // "submission.workflow.tasks.claimed.decline": "Decline",
@@ -12188,13 +11881,15 @@
   // "submission.workflow.tasks.claimed.reject.submit": "Reject",
   "submission.workflow.tasks.claimed.reject.submit": "Rifiuta",
 
-  // "submission.workflow.tasks.claimed.reject_help": "If you have reviewed the item and found it is <strong>not</strong> suitable for inclusion in the collection, select \"Reject\".  You will then be asked to enter a message indicating why the item is unsuitable, and whether the submitter should change something and resubmit.",
+  // "submission.workflow.tasks.claimed.reject_help": "If the reviewed item is not ready to be included in the collection, select \"Reject\". You will be asked to indicate the reason for rejection and further edits the user should make before resubmission",
+  // TODO Source message changed - Revise the translation
   "submission.workflow.tasks.claimed.reject_help": "Se l'item esaminato <strong>non</strong> è adatto per essere inserito nella collezione, seleziona \"Rifiuta\".  Ti verrà quindi chiesto di inserire un messaggio che indichi perché l'item non è adatto e se chi ha inviato l'item deve cambiare qualcosa e inviarlo di nuovo.",
 
   // "submission.workflow.tasks.claimed.return": "Return to pool",
   "submission.workflow.tasks.claimed.return": "Restituisci al pool",
 
-  // "submission.workflow.tasks.claimed.return_help": "Return the task to the pool so that another user may perform the task.",
+  // "submission.workflow.tasks.claimed.return_help": "Return the task to the pool so that another user may perform the task",
+  // TODO Source message changed - Revise the translation
   "submission.workflow.tasks.claimed.return_help": "Restituire il task al pool in modo che un altro utente possa prenderlo in carico.",
 
   // "submission.workflow.tasks.generic.error": "Error occurred during operation...",
@@ -12212,7 +11907,8 @@
   // "submission.workflow.tasks.pool.claim": "Claim",
   "submission.workflow.tasks.pool.claim": "Associa",
 
-  // "submission.workflow.tasks.pool.claim_help": "Assign this task to yourself.",
+  // "submission.workflow.tasks.pool.claim_help": "Assign this task to yourself",
+  // TODO Source message changed - Revise the translation
   "submission.workflow.tasks.pool.claim_help": "Assegnati il task.",
 
   // "submission.workflow.tasks.pool.hide-detail": "Hide detail",
@@ -12224,8 +11920,21 @@
   // "submission.workspace.generic.view": "View",
   "submission.workspace.generic.view": "Elenco",
 
-  // "submission.workspace.generic.view-help": "Select this option to view the item's metadata.",
+  // "submission.workspace.generic.view-help": "Select this option to view the item's metadata",
+  // TODO Source message changed - Revise the translation
   "submission.workspace.generic.view-help": "Seleziona questa opzione per vedere i metadata dell'item.",
+
+  // "submission.product.roles.info": "<div class='my-2'><b>1. Project Leader:</b><br/> Leader of a research project, Principal Investigator (PI).</div><br/><div class='my-2'><b>2. Project Member:</b><br/> Research fellow, collaborator or other person who works in a research project.</div><br/><div class='my-2'><b>3. Research Group Leader</b></div><br/><div class='my-2'><b>4. Project Manager:</b><br/> Person who manages a research project.</div><br/><div class='my-2'><b>5. Data Manager:</b><br/> Person responsible for maintaining final dataset.</div><br/><div class='my-2'><b>6. Data Collector:</b><br/> Person responsible for finding, gathering, collecting, or otherwise generating data.</div><br/><div class='my-2'><b>7. Data Curator:</b><br/> Person tasked with reviewing, enhancing, cleaning, or standardizing data.</div>",
+  // TODO New key - Add a translation
+  "submission.product.roles.info": "<div class='my-2'><b>1. Project Leader:</b><br/> Leader of a research project, Principal Investigator (PI).</div><br/><div class='my-2'><b>2. Project Member:</b><br/> Research fellow, collaborator or other person who works in a research project.</div><br/><div class='my-2'><b>3. Research Group Leader</b></div><br/><div class='my-2'><b>4. Project Manager:</b><br/> Person who manages a research project.</div><br/><div class='my-2'><b>5. Data Manager:</b><br/> Person responsible for maintaining final dataset.</div><br/><div class='my-2'><b>6. Data Collector:</b><br/> Person responsible for finding, gathering, collecting, or otherwise generating data.</div><br/><div class='my-2'><b>7. Data Curator:</b><br/> Person tasked with reviewing, enhancing, cleaning, or standardizing data.</div>",
+
+  // "submission.product.dataavailability.info": "<div class='my-2'><b>Open</b><br/> - Open data means the data files you submit will be openly accessible and downloadable without any restrictions.</div> <br/><div class='my-2'><b>Embargoed</b><br/> - Apply an Embargo if you have to hold your data back for a specific time period, e.g. due to a non-disclosure-agreement. Specify the embargo end date manually. If you want to permit individuals to request access before the embargo ends, you can include a Data Transfer Agreement (DTA).</div><br/><div class='my-2'><b>Restricted</b><br/> - Restricted means that data are uploaded to the repository, but users cannot download data without your permission. They have to request access. Then please include a Data Transfer Agreement (DTA), specifying data sharing conditions, in the submission step “Upload” Select this option if you want to upload anonymized data that need special protection, e.g. in medical research.<br/>Be aware that your funder might request to publish your data openly (Data Availability type: Open) if it was fully anonymized. If you still would like to restrict your anonymised data and nonetheless permit individual users to gain access to it, you may upload a Data Transfer Agreement (DTA) under “Upload”, specifying your data sharing conditions. We also recommend to upload a supplemental material under “Supplement Upload” to document your data.</div><br/><div class='my-2'><b>Closed</b><br/> - Closed means that NO DATA will be uploaded. Metadata can be entered.Choose this option if your data cannot be shared via the repository.If you want to grant access to users, you can include a Data Transfer Agreement (DTA) in the submission step “Upload”</div>.<br/><div class='my-2'><b>Metadata Only</b><br/> - Metadata Only means that no data will be uploaded, but metadata will be entered. Choose this option if your data has been shared elsewhere, and provide details about this location below (External Resource).</div>",
+  // TODO New key - Add a translation
+  "submission.product.dataavailability.info": "<div class='my-2'><b>Open</b><br/> - Open data means the data files you submit will be openly accessible and downloadable without any restrictions.</div> <br/><div class='my-2'><b>Embargoed</b><br/> - Apply an Embargo if you have to hold your data back for a specific time period, e.g. due to a non-disclosure-agreement. Specify the embargo end date manually. If you want to permit individuals to request access before the embargo ends, you can include a Data Transfer Agreement (DTA).</div><br/><div class='my-2'><b>Restricted</b><br/> - Restricted means that data are uploaded to the repository, but users cannot download data without your permission. They have to request access. Then please include a Data Transfer Agreement (DTA), specifying data sharing conditions, in the submission step “Upload” Select this option if you want to upload anonymized data that need special protection, e.g. in medical research.<br/>Be aware that your funder might request to publish your data openly (Data Availability type: Open) if it was fully anonymized. If you still would like to restrict your anonymised data and nonetheless permit individual users to gain access to it, you may upload a Data Transfer Agreement (DTA) under “Upload”, specifying your data sharing conditions. We also recommend to upload a supplemental material under “Supplement Upload” to document your data.</div><br/><div class='my-2'><b>Closed</b><br/> - Closed means that NO DATA will be uploaded. Metadata can be entered.Choose this option if your data cannot be shared via the repository.If you want to grant access to users, you can include a Data Transfer Agreement (DTA) in the submission step “Upload”</div>.<br/><div class='my-2'><b>Metadata Only</b><br/> - Metadata Only means that no data will be uploaded, but metadata will be entered. Choose this option if your data has been shared elsewhere, and provide details about this location below (External Resource).</div>",
+
+  // "submission.roles.modal.open": "Roles Info",
+  // TODO New key - Add a translation
+  "submission.roles.modal.open": "Roles Info",
 
   // "submitter.empty": "N/A",
   // TODO New key - Add a translation
@@ -12380,6 +12089,8 @@
 
   // "title": "DSpace-GLAM",
   "title": "DSpace-GLAM",
+
+
 
   // "tree.description.srsc": "Research Subject Categories",
   "tree.description.srsc": "Categorie di oggetti di ricerca",
@@ -13247,8 +12958,6 @@
   "aggregation.page.titleprefix": "Aggregazione: ",
   // "archivalmaterial.page.titleprefix": "Archival Material: ",
   "archivalmaterial.page.titleprefix": "Materiale archivistico: ",
-  // "event.page.titleprefix": "Event: ",
-  "event.page.titleprefix": "Evento: ",
   // "family.page.titleprefix": "Family: ",
   "family.page.titleprefix": "Famiglia: ",
   // "fonds.page.titleprefix": "Fonds: ",
@@ -13457,6 +13166,10 @@
   // "submission.sections.submit.progressbar.describe.opera": "Opera Details",
   "submission.sections.submit.progressbar.describe.opera": "Informazioni di dettaglio",
 
+  // "submission.sections.submit.progressbar.describe.coin": "Coin Details",
+  // TODO Source message changed - Revise the translation
+  "submission.sections.submit.progressbar.describe.coin": "Infomazioni di dettaglio",
+
   // "submission.sections.submit.progressbar.describe.picture": "Picture Details",
   "submission.sections.submit.progressbar.describe.picture": "Informazioni di dettaglio",
 
@@ -13539,10 +13252,6 @@
   // "map.coordinates-invalid": "Coordinates are not valid",
   "map.coordinates-invalid": "Le coordinate non sono valide",
 
-  // "statistics-page.export-map-as-image": "Export map",
-  // TODO New key - Add a translation
-  "statistics-page.export-map-as-image": "Export map",
-
   // "map.no-key-configured": "No Google Maps key found in the configuration",
   // TODO New key - Add a translation
   "map.no-key-configured": "No Google Maps key found in the configuration",
@@ -13559,6 +13268,7 @@
 
   // "curation-task.task.pushocr.label": "Send OCR to the Annotation Server",
   "curation-task.task.pushocr.label": "Invia OCR all'Annotation Server",
+
 
   // "curation-task.task.pushocr.force.label": "Clean OCR from the Annotation Server and send again",
   "curation-task.task.pushocr.force.label": "Ripulisci l'OCR dall'Annotation Server e invia di nuovo",
@@ -13724,9 +13434,25 @@
   // TODO New key - Add a translation
   "access-control-item-header-toggle": "Item's Metadata",
 
+  // "access-control-item-toggle.enable": "Enable option to perform changes on the item's metadata",
+  // TODO New key - Add a translation
+  "access-control-item-toggle.enable": "Enable option to perform changes on the item's metadata",
+
+  // "access-control-item-toggle.disable": "Disable option to perform changes on the item's metadata",
+  // TODO New key - Add a translation
+  "access-control-item-toggle.disable": "Disable option to perform changes on the item's metadata",
+
   // "access-control-bitstream-header-toggle": "Bitstreams",
   // TODO New key - Add a translation
   "access-control-bitstream-header-toggle": "Bitstreams",
+
+  // "access-control-bitstream-toggle.enable": "Enable option to perform changes on the bitstreams",
+  // TODO New key - Add a translation
+  "access-control-bitstream-toggle.enable": "Enable option to perform changes on the bitstreams",
+
+  // "access-control-bitstream-toggle.disable": "Disable option to perform changes on the bitstreams",
+  // TODO New key - Add a translation
+  "access-control-bitstream-toggle.disable": "Disable option to perform changes on the bitstreams",
 
   // "access-control-mode": "Mode",
   // TODO New key - Add a translation
@@ -13760,9 +13486,21 @@
   // TODO New key - Add a translation
   "access-control-bitstreams-selected": "bitstreams selected",
 
+  // "access-control-bitstreams-select": "Select bitstreams",
+  // TODO New key - Add a translation
+  "access-control-bitstreams-select": "Select bitstreams",
+
   // "access-control-cancel": "Cancel",
   // TODO New key - Add a translation
   "access-control-cancel": "Cancel",
+
+  // "access-control-reset": "Reset",
+  // TODO New key - Add a translation
+  "access-control-reset": "Reset",
+
+  // "access-control-back": "Back",
+  // TODO New key - Add a translation
+  "access-control-back": "Back",
 
   // "access-control-execute": "Execute",
   // TODO New key - Add a translation
@@ -13771,6 +13509,10 @@
   // "access-control-add-more": "Add more",
   // TODO New key - Add a translation
   "access-control-add-more": "Add more",
+
+  // "access-control-remove": "Remove access condition",
+  // TODO New key - Add a translation
+  "access-control-remove": "Remove access condition",
 
   // "access-control-select-bitstreams-modal.title": "Select bitstreams",
   // TODO New key - Add a translation
@@ -13812,6 +13554,13 @@
   // TODO New key - Add a translation
   "vocabulary-treeview.search.form.add": "Add",
 
+  // "process.overview.unknown.user": "Unknown",
+  // TODO New key - Add a translation
+  "process.overview.unknown.user": "Unknown",
+
+  // "browse.search-form.placeholder": "Search the repository",
+  // TODO New key - Add a translation
+  "browse.search-form.placeholder": "Search the repository",
 
   // "external-login.form.email": "Enter the email",
   // TODO New key - Add a translation
@@ -13936,6 +13685,138 @@
   // "external-login-page.confirm-email.create-account.notifications.error.no-netId": "Something went wrong with this email account. Try again or use a different method to login.",
   // TODO New key - Add a translation
   "external-login-page.confirm-email.create-account.notifications.error.no-netId": "Something went wrong with this email account. Try again or use a different method to login.",
+
+  // "form.other-information.alternative-names": "Alternative names",
+  // TODO New key - Add a translation
+  "form.other-information.alternative-names": "Alternative names",
+
+  // "form.other-information.selection.data-oairecerif_author_affiliation": "Select alternative affiliation",
+  // TODO New key - Add a translation
+  "form.other-information.selection.data-oairecerif_author_affiliation": "Select alternative affiliation",
+
+  // "form.other-information.data-oairecerif_author_affiliation": "Affiliation",
+  // TODO New key - Add a translation
+  "form.other-information.data-oairecerif_author_affiliation": "Affiliation",
+
+  // "form.other-information.selection.data-crispj_coinvestigator_affiliation": "Affiliation",
+  // TODO New key - Add a translation
+  "form.other-information.selection.data-crispj_coinvestigator_affiliation": "Affiliation",
+
+  // "form.other-information.selection.alternative-names": "Select alternative name",
+  // TODO New key - Add a translation
+  "form.other-information.selection.alternative-names": "Select alternative name",
+
+  // "meta.tag.missing.description": "No description available",
+  // TODO New key - Add a translation
+  "meta.tag.missing.description": "No description available",
+
+
+  // "vocabulary-treeview.header.fondboxtree": "Fond Tree",
+  // TODO New key - Add a translation
+  "vocabulary-treeview.header.fondboxtree": "Fond Tree",
+
+  // "vocabulary-treeview.header.journalfondboxtree": "Journal Fond Tree",
+  // TODO New key - Add a translation
+  "vocabulary-treeview.header.journalfondboxtree": "Journal Fond Tree",
+
+  // "metadata-link-view.popover.label.Person.dc.title": "Fullname",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Person.dc.title": "Fullname",
+
+  // "metadata-link-view.popover.label.Person.person.affiliation.name": "Main affiliation",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Person.person.affiliation.name": "Main affiliation",
+
+  // "metadata-link-view.popover.label.Person.person.email": "Email",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Person.person.email": "Email",
+
+  // "metadata-link-view.popover.label.Person.person.identifier.orcid": "ORCID",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Person.person.identifier.orcid": "ORCID",
+
+  // "metadata-link-view.popover.label.Person.dc.description.abstract": "Abstract",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Person.dc.description.abstract": "Abstract",
+
+  // "metadata-link-view.popover.label.OrgUnit.dc.title": "Fullname",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.OrgUnit.dc.title": "Fullname",
+
+  // "metadata-link-view.popover.label.OrgUnit.organization.identifier.ror": "ROR",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.OrgUnit.organization.identifier.ror": "ROR",
+
+  // "metadata-link-view.popover.label.OrgUnit.crisou.director": "Director",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.OrgUnit.crisou.director": "Director",
+
+  // "metadata-link-view.popover.label.OrgUnit.organization.parentOrganization": "Parent Organization",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.OrgUnit.organization.parentOrganization": "Parent Organization",
+
+  // "metadata-link-view.popover.label.OrgUnit.dc.description.abstract": "Description",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.OrgUnit.dc.description.abstract": "Description",
+
+  // "metadata-link-view.popover.label.Project.dc.title": "Title",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Project.dc.title": "Title",
+
+  // "metadata-link-view.popover.label.Project.oairecerif.project.status": "Status",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Project.oairecerif.project.status": "Status",
+
+  // "metadata-link-view.popover.label.Project.dc.description.abstract": "Abstract",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Project.dc.description.abstract": "Abstract",
+
+  // "metadata-link-view.popover.label.Funding.dc.title": "Title",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Funding.dc.title": "Title",
+
+  // "metadata-link-view.popover.label.Funding.oairecerif.funder": "Funder",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Funding.oairecerif.funder": "Funder",
+
+  // "metadata-link-view.popover.label.Funding.oairecerif.fundingProgram": "Funding program",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Funding.oairecerif.fundingProgram": "Funding program",
+
+  // "metadata-link-view.popover.label.Funding.dc.description.abstract": "Abstract",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Funding.dc.description.abstract": "Abstract",
+
+  // "metadata-link-view.popover.label.Publication.dc.title": "Title",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Publication.dc.title": "Title",
+
+  // "metadata-link-view.popover.label.Publication.dc.identifier.doi": "DOI",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Publication.dc.identifier.doi": "DOI",
+
+  // "metadata-link-view.popover.label.Publication.dc.identifier.uri": "URL",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Publication.dc.identifier.uri": "URL",
+
+  // "metadata-link-view.popover.label.Publication.dc.description.abstract": "Abstract",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.Publication.dc.description.abstract": "Abstract",
+
+  // "metadata-link-view.popover.label.other.dc.title": "Title",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.other.dc.title": "Title",
+
+  // "metadata-link-view.popover.label.other.dc.description.abstract": "Description",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.other.dc.description.abstract": "Description",
+
+  // "metadata-link-view.popover.label.more-info": "More info",
+  // TODO New key - Add a translation
+  "metadata-link-view.popover.label.more-info": "More info",
+
+
+
 
   // Layout - Common i18n keys: Metadata fallback values (not generated by CRIS layout tool)
   // Layout - Autogenerated i18n keys: Tab headers
@@ -14564,7 +14445,8 @@
   "layout.field.label.Publication.[dc.relation.otherlinks]": "Altri Collegamenti",
   // "layout.field.label.Publication.[dc.description.note]": "Notes",
   "layout.field.label.Publication.[dc.description.note]": "Note",
-  // "layout.field.label.Publication.BITSTREAM": "File / Documantation",
+  // "layout.field.label.Publication.BITSTREAM": "File / Documentation",
+  // TODO Source message changed - Revise the translation
   "layout.field.label.Publication.BITSTREAM": "File / Documentazione",
   // "layout.field.label.Publication.[dc.relation.journalfonds]": "Journal Fonds ",
   "layout.field.label.Publication.[dc.relation.journalfonds]": "Testata Correlata",
