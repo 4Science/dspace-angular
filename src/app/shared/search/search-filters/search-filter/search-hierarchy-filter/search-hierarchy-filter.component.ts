@@ -7,10 +7,8 @@ import {
 import {
   Component,
   Inject,
-  Input,
   OnDestroy,
   OnInit,
-  PLATFORM_ID,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
@@ -44,19 +42,13 @@ import { getFirstCompletedRemoteData } from '../../../../../core/shared/operator
 import { PageInfo } from '../../../../../core/shared/page-info.model';
 import { SearchService } from '../../../../../core/shared/search/search.service';
 import { SearchConfigurationService } from '../../../../../core/shared/search/search-configuration.service';
-import {
-  FILTER_CONFIG,
-  REFRESH_FILTER,
-  SCOPE,
-  SearchFilterService,
-} from '../../../../../core/shared/search/search-filter.service';
+import { SearchFilterService } from '../../../../../core/shared/search/search-filter.service';
 import { VocabularyEntryDetail } from '../../../../../core/submission/vocabularies/models/vocabulary-entry-detail.model';
 import { VocabularyService } from '../../../../../core/submission/vocabularies/vocabulary.service';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../my-dspace-page/my-dspace-configuration.service';
 import { isNotEmpty } from '../../../../empty.util';
 import { VocabularyTreeviewModalComponent } from '../../../../form/vocabulary-treeview-modal/vocabulary-treeview-modal.component';
 import { FilterInputSuggestionsComponent } from '../../../../input-suggestions/filter-suggestions/filter-input-suggestions.component';
-import { SearchFilterConfig } from '../../../models/search-filter-config.model';
 import { addOperatorToFilterValue } from '../../../search.utils';
 import {
   facetLoad,
@@ -79,8 +71,6 @@ import { SearchFacetSelectedOptionComponent } from '../search-facet-filter-optio
  */
 export class SearchHierarchyFilterComponent extends SearchFacetFilterComponent implements OnDestroy, OnInit {
 
-  @Input() inPlaceSearch: boolean;
-
   constructor(protected searchService: SearchService,
               protected filterService: SearchFilterService,
               protected rdbs: RemoteDataBuildService,
@@ -88,13 +78,15 @@ export class SearchHierarchyFilterComponent extends SearchFacetFilterComponent i
               protected modalService: NgbModal,
               protected vocabularyService: VocabularyService,
               @Inject(APP_CONFIG) protected appConfig: AppConfig,
-              @Inject(FILTER_CONFIG) public filterConfig: SearchFilterConfig,
-              @Inject(REFRESH_FILTER) public refreshFilters: BehaviorSubject<boolean>,
-              @Inject(SCOPE) public scope: string,
-              @Inject(PLATFORM_ID) protected platformId: any,
               @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
   ) {
-    super(searchService, filterService, rdbs, router, searchConfigService);
+    super(
+      searchService,
+      filterService,
+      rdbs,
+      router,
+      searchConfigService,
+    );
   }
 
   vocabularyExists$: BehaviorSubject<boolean> = new BehaviorSubject(false);

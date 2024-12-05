@@ -35,10 +35,7 @@ import { RemoteDataBuildService } from '../../../../../core/cache/builders/remot
 import { getFirstSucceededRemoteDataPayload } from '../../../../../core/shared/operators';
 import { SearchService } from '../../../../../core/shared/search/search.service';
 import { SearchConfigurationService } from '../../../../../core/shared/search/search-configuration.service';
-import {
-  IN_PLACE_SEARCH,
-  SearchFilterService,
-} from '../../../../../core/shared/search/search-filter.service';
+import { SearchFilterService } from '../../../../../core/shared/search/search-filter.service';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../my-dspace-page/my-dspace-configuration.service';
 import {
   hasNoValue,
@@ -76,6 +73,11 @@ export class SearchFacetFilterComponent implements OnInit, OnDestroy {
    * Configuration for the filter of this wrapper component
    */
   @Input() filterConfig: SearchFilterConfig;
+
+  /**
+   * True when the search component should show results on the current page
+   */
+  @Input() inPlaceSearch: boolean;
 
   /**
    * Emits when the search filters values may be stale, and so they must be refreshed.
@@ -148,7 +150,6 @@ export class SearchFacetFilterComponent implements OnInit, OnDestroy {
               protected rdbs: RemoteDataBuildService,
               protected router: Router,
               @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
-              @Inject(IN_PLACE_SEARCH) public inPlaceSearch?: boolean,
   ) {
   }
 

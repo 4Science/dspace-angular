@@ -18,7 +18,6 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import { NouisliderComponent } from 'ng2-nouislider';
 import {
-  BehaviorSubject,
   from,
   Observable,
   of,
@@ -37,9 +36,6 @@ import { SearchService } from '../../../../../../core/shared/search/search.servi
 import { SearchConfigurationService } from '../../../../../../core/shared/search/search-configuration.service';
 import {
   FILTER_CONFIG,
-  IN_PLACE_SEARCH,
-  REFRESH_FILTER,
-  SCOPE,
   SearchFilterService,
 } from '../../../../../../core/shared/search/search-filter.service';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../../my-dspace-page/my-dspace-configuration.service';
@@ -122,11 +118,8 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
     protected rdbs: RemoteDataBuildService,
     protected route: ActivatedRoute,
     @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
-    @Inject(IN_PLACE_SEARCH) public inPlaceSearch: boolean,
+    @Inject(PLATFORM_ID) public platformId: any,
     @Inject(FILTER_CONFIG) public filterConfig: SearchFilterConfig,
-    @Inject(REFRESH_FILTER) public refreshFilters: BehaviorSubject<boolean>,
-    @Inject(PLATFORM_ID) protected platformId: any,
-    @Inject(SCOPE) public scope: string,
   ) {
     super(searchService, filterService, rdbs, router, searchConfigService);
   }

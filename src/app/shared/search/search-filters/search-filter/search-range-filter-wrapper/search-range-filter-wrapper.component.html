@@ -1,6 +1,6 @@
 <div>
   <div class="filters py-2">
-    <ng-container *ngComponentOutlet="searchFilter injector: objectInjector;"></ng-container>
+    <ng-container *ngComponentOutlet="searchFilter; injector: objectInjector;"></ng-container>
   </div>
   <ng-container *ngFor="let page of (facetValues$ | async)">
     <div [@facetLoad]="animationState">

@@ -12,7 +12,6 @@ import {
   PLATFORM_ID,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 
 import { environment } from '../../../../../../environments/environment';
 import { RemoteDataBuildService } from '../../../../../core/cache/builders/remote-data-build.service';
@@ -23,12 +22,10 @@ import {
   FILTER_CONFIG,
   IN_PLACE_SEARCH,
   REFRESH_FILTER,
-  SCOPE,
   SearchFilterService,
 } from '../../../../../core/shared/search/search-filter.service';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../my-dspace-page/my-dspace-configuration.service';
 import { FilterType } from '../../../models/filter-type.model';
-import { SearchFilterConfig } from '../../../models/search-filter-config.model';
 import {
   facetLoad,
   SearchFacetFilterComponent,
@@ -66,12 +63,8 @@ export class SearchRangeFilterWrapperComponent extends SearchFacetFilterComponen
     protected rdbs: RemoteDataBuildService,
     protected router: Router,
     @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
-    @Inject(IN_PLACE_SEARCH) public inPlaceSearch: boolean,
-    @Inject(FILTER_CONFIG) public filterConfig: SearchFilterConfig,
-    @Inject(REFRESH_FILTER) public refreshFilters: BehaviorSubject<boolean>,
-    @Inject(SCOPE) public scope: string,
-    @Inject(PLATFORM_ID) protected platformId: any,
     private injector: Injector,
+    @Inject(PLATFORM_ID) public platformId: any,
   ) {
     super(searchService, filterService, rdbs, router, searchConfigService);
   }

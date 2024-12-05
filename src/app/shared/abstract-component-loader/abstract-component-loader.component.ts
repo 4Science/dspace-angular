@@ -1,7 +1,6 @@
 import {
   Component,
   ComponentRef,
-  Injector,
   OnChanges,
   OnDestroy,
   OnInit,
@@ -110,16 +109,7 @@ export abstract class AbstractComponentLoaderComponent<T> implements OnInit, OnC
    * Creates the component and connects the @Input() & @Output() from the ThemedComponent to its child Component.
    */
   public instantiateComponent(): void {
-    const getComponentResult = this.getComponent();
-
-    let component: GenericConstructor<T>;
-    let injector: Injector;
-
-    if (Array.isArray(getComponentResult)) {
-      [component, injector] = getComponentResult;
-    } else {
-      component = getComponentResult;
-    }
+    const component: GenericConstructor<T> = this.getComponent();
 
     const viewContainerRef: ViewContainerRef = this.componentViewContainerRef;
     viewContainerRef.clear();
@@ -127,7 +117,7 @@ export abstract class AbstractComponentLoaderComponent<T> implements OnInit, OnC
     this.compRef = viewContainerRef.createComponent(
       component, {
         index: 0,
-        injector,
+        injector: undefined,
       },
     );
 
@@ -147,7 +137,7 @@ export abstract class AbstractComponentLoaderComponent<T> implements OnInit, OnC
   /**
    * Fetch the component depending on the item's entity type, metadata representation type and context
    */
-  public abstract getComponent(): GenericConstructor<T> | [GenericConstructor<T>, Injector];
+  public abstract getComponent(): GenericConstructor<T>;
 
   /**
    * Connect the inputs and outputs of this component to the dynamic component,

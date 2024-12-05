@@ -21,10 +21,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import isEqual from 'lodash/isEqual';
-import {
-  BehaviorSubject,
-  Subject,
-} from 'rxjs';
+import { Subject } from 'rxjs';
 import {
   debounceTime,
   distinctUntilChanged,
@@ -36,9 +33,6 @@ import { SearchService } from '../../../../../../../core/shared/search/search.se
 import { SearchConfigurationService } from '../../../../../../../core/shared/search/search-configuration.service';
 import {
   FILTER_CONFIG,
-  IN_PLACE_SEARCH,
-  REFRESH_FILTER,
-  SCOPE,
   SearchFilterService,
 } from '../../../../../../../core/shared/search/search-filter.service';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../../../my-dspace-page/my-dspace-configuration.service';
@@ -122,13 +116,10 @@ export class SearchRangeDatepickerFilterComponent extends SearchRangeFilterCompo
     protected readonly rdbs: RemoteDataBuildService,
     protected readonly route: ActivatedRoute,
     @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
-    @Inject(IN_PLACE_SEARCH) public inPlaceSearch: boolean,
+    @Inject(PLATFORM_ID) public platformId: any,
     @Inject(FILTER_CONFIG) public filterConfig: SearchFilterConfig,
-    @Inject(REFRESH_FILTER) public refreshFilters: BehaviorSubject<boolean>,
-    @Inject(PLATFORM_ID) protected platformId: any,
-    @Inject(SCOPE) public scope: string,
   ) {
-    super(searchService, filterService, router, rdbs, route, searchConfigService, inPlaceSearch, filterConfig, refreshFilters, scope, platformId);
+    super(searchService, filterService, router, rdbs, route, searchConfigService, platformId, filterConfig);
   }
 
   public override ngOnInit() {

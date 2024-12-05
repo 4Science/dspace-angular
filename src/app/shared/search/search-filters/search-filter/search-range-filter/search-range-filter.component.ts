@@ -19,7 +19,6 @@ import {
 } from '@ngx-translate/core';
 import { NouisliderComponent } from 'ng2-nouislider';
 import {
-  BehaviorSubject,
   combineLatest as observableCombineLatest,
   Subscription,
 } from 'rxjs';
@@ -33,17 +32,10 @@ import { RemoteDataBuildService } from '../../../../../core/cache/builders/remot
 import { RouteService } from '../../../../../core/services/route.service';
 import { SearchService } from '../../../../../core/shared/search/search.service';
 import { SearchConfigurationService } from '../../../../../core/shared/search/search-configuration.service';
-import {
-  FILTER_CONFIG,
-  IN_PLACE_SEARCH,
-  REFRESH_FILTER,
-  SCOPE,
-  SearchFilterService,
-} from '../../../../../core/shared/search/search-filter.service';
+import { SearchFilterService } from '../../../../../core/shared/search/search-filter.service';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../my-dspace-page/my-dspace-configuration.service';
 import { hasValue } from '../../../../empty.util';
 import { DebounceDirective } from '../../../../utils/debounce.directive';
-import { SearchFilterConfig } from '../../../models/search-filter-config.model';
 import {
   facetLoad,
   SearchFacetFilterComponent,
@@ -132,17 +124,19 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
   constructor(protected searchService: SearchService,
               protected filterService: SearchFilterService,
               protected router: Router,
+              protected route: RouteService,
               protected rdbs: RemoteDataBuildService,
               private translateService: TranslateService,
               @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
-              @Inject(IN_PLACE_SEARCH) public inPlaceSearch: boolean,
-              @Inject(FILTER_CONFIG) public filterConfig: SearchFilterConfig,
               @Inject(PLATFORM_ID) private platformId: any,
-              @Inject(REFRESH_FILTER) public refreshFilters: BehaviorSubject<boolean>,
-              @Inject(SCOPE) public scope: string,
-              private route: RouteService) {
-    super(searchService, filterService, rdbs, router, searchConfigService);
-
+  ) {
+    super(
+      searchService,
+      filterService,
+      rdbs,
+      router,
+      searchConfigService,
+    );
   }
 
   /**
