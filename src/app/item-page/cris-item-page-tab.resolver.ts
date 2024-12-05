@@ -15,8 +15,8 @@ import { getItemPageRoute } from './item-page-routing-paths';
 import { createFailedRemoteDataObject$ } from '../shared/remote-data.utils';
 import { HardRedirectService } from '../core/services/hard-redirect.service';
 import { getPageNotFoundRoute } from '../app-routing-paths';
-import { isNotEmpty } from '../shared/empty.util';
 import { isPlatformServer } from '@angular/common';
+import { isNotEmpty } from '../shared/empty.util';
 
 /**
  * This class represents a resolver that requests the tabs of specific

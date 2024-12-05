@@ -17,11 +17,14 @@ describe('OpenstreetmapGroupComponent', () => {
   let fixture: ComponentFixture<OpenstreetmapGroupComponent>;
 
   const locationService = jasmine.createSpyObj('locationService', {
-    searchPlace: jasmine.createSpy('searchPlace'),
-    searchCoordinates: jasmine.createSpy('searchCoordinates'),
+    findPlaceCoordinates: jasmine.createSpy('findPlaceCoordinates'),
+    findPlaceAndDecimalCoordinates: jasmine.createSpy('findPlaceAndDecimalCoordinates'),
+    searchByCoordinates: jasmine.createSpy('searchByCoordinates'),
+    isValidDecimalCoordinatePair: jasmine.createSpy('isValidDecimalCoordinatePair'),
+    isDecimalCoordinateString: jasmine.createSpy('isDecimalCoordinateString'),
+    isSexagesimalCoordinateString: jasmine.createSpy('isSexagesimalCoordinateString'),
     isValidCoordinateString: jasmine.createSpy('isValidCoordinateString'),
     parseCoordinates: jasmine.createSpy('parseCoordinates'),
-    isCoordinateString: jasmine.createSpy('isCoordinateString'),
   });
 
   const place: LocationPlace = {
@@ -107,10 +110,10 @@ describe('OpenstreetmapGroupComponent', () => {
 
     fixture = TestBed.createComponent(OpenstreetmapGroupComponent);
     component = fixture.componentInstance;
-    locationService.isCoordinateString.and.returnValue(true);
+    locationService.isDecimalCoordinateString.and.returnValue(true);
     locationService.isValidCoordinateString.and.returnValue(true);
     locationService.parseCoordinates.and.returnValue(place.coordinates);
-    locationService.searchCoordinates.and.returnValue(of(place.displayName));
+    locationService.searchByCoordinates.and.returnValue(of(place.displayName));
     fixture.detectChanges();
   });
 

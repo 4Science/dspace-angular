@@ -352,14 +352,23 @@ import {
 import { ItemCollectionComponent } from './object-collection/shared/mydspace-item-collection/item-collection.component';
 import { ThemedItemListPreviewComponent } from './object-list/my-dspace-result-list-element/item-list-preview/themed-item-list-preview.component';
 import { ItemListPreviewComponent } from './object-list/my-dspace-result-list-element/item-list-preview/item-list-preview.component';
-import { DefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/default-browse-elements.component';
 import { ImagesBrowseElementsComponent } from './browse-most-elements/images-browse-elements/images-browse-elements.component';
 import { ThemedSliderBrowseElementsComponent } from './browse-most-elements/slider-browse-elements/themed-slider-browse-elements.component';
 import { SliderBrowseElementsComponent } from './browse-most-elements/slider-browse-elements/slider-browse-elements.component';
 import { ThemedImagesBrowseElementsComponent } from './browse-most-elements/images-browse-elements/themed-images-browse-elements.component';
-import { ThemedDefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/themed-default-browse-elements.component';
 import { MarkdownDirective } from './utils/markdown.directive';
+import { DefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/default-browse-elements.component';
+import { ThemedDefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/themed-default-browse-elements.component';
+import { MetadataLinkViewPopoverComponent } from './metadata-link-view/metadata-link-view-popover/metadata-link-view-popover.component';
+import { MetadataLinkViewAvatarPopoverComponent } from './metadata-link-view/metadata-link-view-avatar-popover/metadata-link-view-avatar-popover.component';
+import { MetadataLinkViewOrcidComponent } from './metadata-link-view/metadata-link-view-orcid/metadata-link-view-orcid.component';
+import { SwitchComponent } from './switch/switch.component';
+import { StickyPopoverDirective } from './metadata-link-view/sticky-popover.directive';
 import { SortPipe } from './utils/sort.pipe';
+import { CardsBrowseElementsComponent } from './browse-most-elements/cards-browse-elements/cards-browse-elements.component';
+import {
+  ThemedCardsBrowseElementsComponent
+} from './browse-most-elements/cards-browse-elements/themed-cards-browse-elements.component';
 
 const MODULES = [
   CommonModule,
@@ -379,7 +388,7 @@ const MODULES = [
   MenuModule,
   NgxPaginationModule,
   MetricsModule,
-  NgbModule,
+  NgbModule
 ];
 
 const ROOT_MODULES = [
@@ -506,12 +515,16 @@ const COMPONENTS = [
   SearchChartComponent,
   SearchChartFilterComponent,
   VocabularyExternalSourceComponent,
+  SearchNavbarComponent,
   RelationshipsListComponent,
   RelationshipsItemsActionsComponent,
   RelationshipsItemsListPreviewComponent,
   BrowseMostElementsComponent,
   EditMetadataSecurityComponent,
   MetadataLinkViewComponent,
+  MetadataLinkViewPopoverComponent,
+  MetadataLinkViewAvatarPopoverComponent,
+  MetadataLinkViewOrcidComponent,
   ExportExcelSelectorComponent,
   ThemedBrowseMostElementsComponent,
   SearchChartBarHorizontalComponent,
@@ -524,6 +537,8 @@ const COMPONENTS = [
   ThemedImagesBrowseElementsComponent,
   SliderBrowseElementsComponent,
   ThemedSliderBrowseElementsComponent,
+  CardsBrowseElementsComponent,
+  ThemedCardsBrowseElementsComponent,
 ];
 
 const ENTRY_COMPONENTS = [
@@ -603,6 +618,8 @@ const ENTRY_COMPONENTS = [
   ThemedDefaultBrowseElementsComponent,
   ThemedImagesBrowseElementsComponent,
   ThemedSliderBrowseElementsComponent,
+  SwitchComponent,
+  ThemedCardsBrowseElementsComponent,
 ];
 
 const PROVIDERS = [
@@ -633,6 +650,7 @@ const DIRECTIVES = [
   ContextHelpDirective,
   EntityIconDirective,
   MarkdownDirective,
+  StickyPopoverDirective
 ];
 
 @NgModule({

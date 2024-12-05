@@ -62,16 +62,13 @@ windowSettings.manifestId = manifest;
       }
     }
   }
-  if (canvasId != null && canvasId !== 'null') {
+  if (canvasId && canvasId !== 'null') {
     windowSettings.canvasId =
       `${(manifest.replace(MANIFEST_URL_PART, ''))}/canvas/${canvasId}`;
   }
 })();
 
-const miradorConfiguration = {
-  annotation: {
-    adapter: (canvasId) => new LocalStorageAdapter(`localStorage://?canvasId=${canvasId}`),
-  },
+let miradorConfiguration = {
   id: 'mirador',
   mainMenuSettings: {
     show: true
@@ -150,7 +147,7 @@ const miradorConfiguration = {
     },
   },
   window: {
-    allowClose: !0,
+    allowClose: false,
     // sideBarOpenByDefault: false,
     allowFullscreen: true,
     allowMaximize: false,
@@ -176,12 +173,12 @@ const miradorConfiguration = {
     imageToolsEnabled: true
   },
   workspace: {
-    allowNewWindows: !0,
+    allowNewWindows: false,
     showZoomControls: true,
     type: 'mosaic'
   },
   workspaceControlPanel: {
-    enabled: !0
+    enabled: false
   }
 };
 

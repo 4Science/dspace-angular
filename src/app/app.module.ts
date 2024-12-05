@@ -33,6 +33,9 @@ import { GooglemapsModule } from './shared/googlemaps/googlemaps.module';
 import { RootModule } from './root.module';
 import { NuMarkdownModule } from '@ng-util/markdown';
 import { FooterModule } from './footer/footer.module';
+import { SocialModule } from './social/social.module';
+import { DspaceRestInterceptor } from './core/dspace-rest/dspace-rest.interceptor';
+import { DirectivesModule } from './directives/directives.module';
 
 export function getConfig() {
   return environment;
@@ -68,6 +71,7 @@ const IMPORTS = [
   StoreDevModules,
   EagerThemesModule,
   RootModule,
+  DirectivesModule
 ];
 
 const PROVIDERS = [
@@ -110,6 +114,11 @@ const PROVIDERS = [
     useClass: LogInterceptor,
     multi: true
   },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: DspaceRestInterceptor,
+    multi: true
+  },
   // register the dynamic matcher used by form. MUST be provided by the app module
   ...DYNAMIC_MATCHER_PROVIDERS,
 ];
@@ -122,10 +131,11 @@ const EXPORTS = [
 ];
 
 @NgModule({
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'dspace-angular' }),
-    ...IMPORTS
-  ],
+    imports: [
+        BrowserModule.withServerTransition({appId: 'dspace-angular'}),
+        ...IMPORTS,
+        SocialModule
+    ],
   providers: [
     ...PROVIDERS
   ],

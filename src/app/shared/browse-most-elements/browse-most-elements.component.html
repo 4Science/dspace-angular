@@ -1,35 +1,32 @@
 <div [ngSwitch]="(sectionTemplateType | lowercase)">
-  <ng-container *ngSwitchCase="templateTypeEnum.IMAGES">
-    <ds-themed-images-browse-elements
+
+  <ng-container *ngSwitchCase="templateTypeEnum.CARD">
+    <ds-themed-cards-browse-elements
       [topSection]="topSection"
-      [paginatedSearchOptions]="paginatedSearchOptionsBS.asObservable() | async"
+      [paginatedSearchOptions]="paginatedSearchOptions$.asObservable() | async"
       [context]="context"
     >
-    </ds-themed-images-browse-elements>
-  </ng-container>
-
-  <ng-container *ngSwitchCase="templateTypeEnum.SLIDER">
-    <ds-themed-slider-browse-elements
-      [topSection]="topSection"
-      [paginatedSearchOptions]="paginatedSearchOptionsBS.asObservable() | async"
-      [context]="context"
-    >
-    </ds-themed-slider-browse-elements>
-
+    </ds-themed-cards-browse-elements>
   </ng-container>
 
   <ng-container *ngSwitchDefault>
     <ds-themed-default-browse-elements
+      [showMetrics]="showMetrics"
+      [showThumbnails]="showThumbnails ?? topSection.showThumbnails"
       [topSection]="topSection"
-      [paginatedSearchOptions]="paginatedSearchOptionsBS.asObservable() | async"
+      [showLabel]="showLabel"
+      [paginatedSearchOptions]="paginatedSearchOptions$.asObservable() | async"
       [context]="context"
+      [mode]="mode"
     ></ds-themed-default-browse-elements>
   </ng-container>
 
-  <div *ngIf="topSection.showAllResults && (discoveryConfigurationsTotalElementsMap == null || discoveryConfigurationsTotalElementsMap.get(paginatedSearchOptions.configuration)) > 0" class="d-flex justify-content-center">
-    <button type="button" class="btn btn-link" (click)="showAllResults()">
-      {{ "home.top-section.view-results" | translate }}
-    </button>
-  </div>
-
+</div>
+<div
+  class="row justify-content-center"
+  *ngIf="topSection && topSection.showAllResults"
+>
+  <button type="button" class="btn btn-link" (click)="showAllResults()">
+    {{ "home.top-section.view-results" | translate }}
+  </button>
 </div>

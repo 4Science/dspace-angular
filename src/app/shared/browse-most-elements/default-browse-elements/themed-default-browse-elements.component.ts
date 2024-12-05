@@ -1,6 +1,6 @@
 import { Context } from '../../../core/shared/context.model';
 import { ThemedComponent } from '../../theme-support/themed.component';
-import { TopSection } from '../../../core/layout/models/section.model';
+import { LayoutModeEnum, TopSection } from '../../../core/layout/models/section.model';
 import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
 import { DefaultBrowseElementsComponent } from './default-browse-elements.component';
 import { Component, Input } from '@angular/core';
@@ -25,11 +25,17 @@ export class ThemedDefaultBrowseElementsComponent extends ThemedComponent<Defaul
 
   // DefaultBrowseElementsComponent I/O variables
 
+  @Input() projection: string;
+
+  @Input() mode: LayoutModeEnum;
+
   @Input() showMetrics: boolean;
 
   @Input() showThumbnails: boolean;
 
-  protected inAndOutputNames: (keyof DefaultBrowseElementsComponent & keyof this)[] = ['paginatedSearchOptions', 'context', 'topSection', 'showMetrics', 'showThumbnails'];
+  @Input() showLabel: boolean;
+
+  protected inAndOutputNames: (keyof DefaultBrowseElementsComponent & keyof this)[] = ['paginatedSearchOptions', 'context', 'showMetrics', 'showThumbnails', 'showLabel', 'projection', 'mode'];
 
   protected getComponentName(): string {
     return 'DefaultBrowseElementsComponent';

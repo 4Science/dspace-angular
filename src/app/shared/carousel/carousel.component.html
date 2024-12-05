@@ -1,10 +1,10 @@
-<ngb-carousel #carousel [interval]="2000" (slide)="onSlide($event)" class="ds-carousel">
-  <ng-template ngbSlide *ngFor="let item of items; let i = index; let last = last">
+<ngb-carousel #carousel [interval]="2000" (slide)="onSlide($event)" class="ds-carousel" *ngIf="!(isLoading$ | async)">
+  <ng-template ngbSlide *ngFor="let item of (carouselItems$ | async); let i = index; let last = last">
     <ng-container *ngIf="getItemLink(item.indexableObject); let currentLink; else carouselContent">
-      <a *ngIf="isLinkInternal(currentLink)" [routerLink]="currentLink">
+      <a *ngIf="internalLinkService.isLinkInternal(currentLink)" [routerLink]="internalLinkService.getRelativePath(currentLink)">
         <ng-container *ngTemplateOutlet="carouselContent"></ng-container>
       </a>
-      <a *ngIf="!isLinkInternal(currentLink)" [href]="currentLink" [target]="carouselOptions.targetBlank ? '_blank' : null">
+      <a *ngIf="!internalLinkService.isLinkInternal(currentLink)" [href]="currentLink" [target]="carouselOptions.targetBlank ? '_blank' : null">
         <ng-container *ngTemplateOutlet="carouselContent"></ng-container>
       </a>
     </ng-container>
@@ -18,7 +18,7 @@
           <img [src]="href" [alt]="item.indexableObject.metadata[title][0].value" class="img-fluid"
                [ngClass]="{'w-100': carouselOptions.fitWidth, 'h-100': carouselOptions.fitHeight}">
         </div>
-        <div class="carousel-caption">
+        <div class="carousel-caption" *ngIf="item.indexableObject.metadata">
           <div class="carousel-caption-inner">
             <h3 data-test="carouselObjTitle" [class]="carouselOptions.titleStyle"
                 *ngIf="item.indexableObject.metadata[title]">
@@ -33,9 +33,29 @@
     </ng-template>
   </ng-template>
 </ngb-carousel>
+
+<div
+  class="carousel-content-wrapper"
+  [ngStyle]="{
+                'height': carouselOptions.keepAspectRatio ? null : carouselOptions.carouselHeightPx + 'px',
+                'aspect-ratio': carouselOptions.keepAspectRatio ? carouselOptions.aspectRatio : null
+           }"
+  *ngIf="(isLoading$ | async)"
+>
+  <div class="h-100 img-container-el">
+    <div class="picsum-img-wrapper flex-column">
+      <img class="img-fluid" src="assets/images/replacement_image.svg">
+      {{'loading.default' | translate}}
+    </div>
+  </div>
+</div>
+
 <div class="text-center play-pause-button">
-  <button type="button" class="btn btn-sm toggle-paused" (click)="togglePaused()">
+  <button [disabled]="isLoading$ | async" type="button" class="btn btn-sm toggle-paused" (click)="togglePaused()">
     <i class="fas fa-play" *ngIf="paused"></i>
     <i class="fas fa-pause" *ngIf="!paused"></i>
   </button>
 </div>
+
+
+

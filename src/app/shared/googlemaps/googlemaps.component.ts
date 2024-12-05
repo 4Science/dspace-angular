@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, Input, OnInit, Renderer2, ViewChild, } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input, OnInit, Renderer2, ViewChild, } from '@angular/core';
 
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
@@ -38,10 +38,16 @@ export class GooglemapsComponent implements OnInit {
    */
   longitude: string;
 
+  /**
+   * A flag that indicates if the google maps api key is not configured
+   */
+  noKeyConfigured = false;
+
   constructor(
     @Inject(DOCUMENT) private _document: Document,
     private renderer: Renderer2,
     private configService: ConfigurationDataService,
+    private cdr: ChangeDetectorRef,
   ) {
   }
 
@@ -57,6 +63,9 @@ export class GooglemapsComponent implements OnInit {
           this.loadScript(this.buildMapUrl(res?.payload?.values[0])).then(() => {
             this.loadMap();
           });
+        } else if (res.hasSucceeded && !res?.payload?.values[0]) {
+          this.noKeyConfigured = true;
+          this.cdr.detectChanges();
         }
       });
     }

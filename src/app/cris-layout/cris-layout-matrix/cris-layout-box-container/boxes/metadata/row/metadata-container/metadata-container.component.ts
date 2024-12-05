@@ -4,7 +4,7 @@ import { CrisLayoutBox, LayoutField, LayoutFieldType } from '../../../../../../.
 import {
   FieldRenderingType,
   getMetadataBoxFieldRendering,
-  MetadataBoxFieldRenderOptions
+  MetadataBoxFieldRenderOptions,
 } from '../../rendering-types/metadata-box.decorator';
 import { hasValue, isEmpty, isNotEmpty } from '../../../../../../../shared/empty.util';
 import { TranslateService } from '@ngx-translate/core';
@@ -17,15 +17,14 @@ import { BitstreamDataService, MetadataFilter } from '../../../../../../../core/
 import { RemoteData } from '../../../../../../../core/data/remote-data';
 import { PaginatedList } from '../../../../../../../core/data/paginated-list.model';
 import { Observable } from 'rxjs';
-import { LoadMoreService, NestedMetadataGroupEntry } from '../../../../../../services/load-more.service';
 import { inject } from '@angular/core';
-
+import { LoadMoreService, NestedMetadataGroupEntry } from '../../../../../../services/load-more.service';
 
 @Component({
   selector: 'ds-metadata-container',
   templateUrl: './metadata-container.component.html',
   styleUrls: ['./metadata-container.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MetadataContainerComponent implements OnInit {
   /**
@@ -102,8 +101,8 @@ export class MetadataContainerComponent implements OnInit {
 
   protected readonly bitstreamDataService = inject(BitstreamDataService);
   protected readonly translateService = inject(TranslateService);
-  public readonly loadMoreService: LoadMoreService = inject(LoadMoreService);
   protected readonly cd = inject(ChangeDetectorRef);
+  protected readonly loadMoreService = inject(LoadMoreService);
 
   /**
    * Returns all metadata values in the item

@@ -71,7 +71,7 @@ export function getEntityEditRoute(entityType: string, itemId: string) {
  * @param versionId the ID of the version for which the route will be retrieved
  */
 export function getItemVersionRoute(versionId: string) {
-  return new URLCombiner(getItemModuleRoute(), ITEM_VERSION_PATH, versionId).toString();
+  return new URLCombiner(getItemModuleRoute(), versionId).toString();
 }
 
 export const ITEM_EDIT_PATH = 'edit';

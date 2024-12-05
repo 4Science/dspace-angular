@@ -1,8 +1,8 @@
-import { TopSection } from '../../core/layout/models/section.model';
+import { LayoutModeEnum, TopSection } from '../../core/layout/models/section.model';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ThemedComponent } from '../theme-support/themed.component';
 import { BrowseMostElementsComponent } from './browse-most-elements.component';
-import { Context } from 'vm';
+import { Context } from '../../core/shared/context.model';
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
 
 /**
@@ -21,11 +21,22 @@ export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMos
 
   @Input() topSection: TopSection;
 
+  @Input() projection = 'preventMetadataSecurity';
+
+  @Input() mode: LayoutModeEnum;
+
   @Input() discoveryConfigurationsTotalElementsMap: Map<string, number>;
+
+  @Input() showLabel: boolean;
+
+  @Input() showMetrics: boolean;
+
+  @Input() showThumbnails: boolean;
+
 
   @Output() totalElements: EventEmitter<number> = new EventEmitter<number>();
 
-  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'topSection', 'discoveryConfigurationsTotalElementsMap'];
+  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'projection', 'mode', 'showLabel', 'showMetrics', 'showThumbnails', 'topSection', 'discoveryConfigurationsTotalElementsMap'];
 
   protected getComponentName(): string {
     return 'BrowseMostElementsComponent';

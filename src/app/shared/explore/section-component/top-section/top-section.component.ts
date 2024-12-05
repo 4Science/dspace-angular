@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { SortDirection, SortOptions } from '../../../../core/cache/models/sort-options.model';
-import { TopSection, TopSectionTemplateType } from '../../../../core/layout/models/section.model';
+import { LayoutModeEnum, TopSection, TopSectionTemplateType } from './../../../../core/layout/models/section.model';
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
 import { Context } from '../../../../core/shared/context.model';
@@ -11,7 +12,7 @@ import { BehaviorSubject } from 'rxjs';
  */
 @Component({
   selector: 'ds-top-section',
-  templateUrl: './top-section.component.html',
+  templateUrl: './top-section.component.html'
 })
 export class TopSectionComponent implements OnInit {
 
@@ -48,6 +49,8 @@ export class TopSectionComponent implements OnInit {
    */
   template: TopSectionTemplateType;
 
+  layoutMode: LayoutModeEnum = LayoutModeEnum.CARD;
+
   ngOnInit() {
     const sortDirection = SortDirection[this.topSection.order?.toUpperCase()] ?? SortDirection.ASC;
     this.sortOptions = new SortOptions(this.topSection.sortField, sortDirection);
@@ -66,11 +69,11 @@ export class TopSectionComponent implements OnInit {
       pageSize: this.topSection.numberOfItems,
       currentPage: 1,
     });
+    this.layoutMode = this.topSection.defaultLayoutMode;
     this.paginatedSearchOptions.next(new PaginatedSearchOptions({
       configuration: name,
       pagination: pagination,
       sort: this.sortOptions,
     }));
   }
-
 }

@@ -1,5 +1,11 @@
-@import 'openlayers/dist/ol.css';
-
-#osm-wrapper {
-  position: relative; // required to align internal elements
+::ng-deep {
+  // remove leaflet default attribution
+  .leaflet-control-attribution.leaflet-control {
+    span {
+      display: none;
+    }
+    a {
+      display: none;
+    }
+  }
 }

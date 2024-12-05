@@ -98,6 +98,9 @@ export class MiradorViewerComponent implements OnInit {
     if (environment.mirador.enableDownloadPlugin) {
       viewerPath += '&enableDownloadPlugin=true';
     }
+    if (this.canvasId) {
+      viewerPath += `&canvasId=${this.canvasId}`;
+    }
 
     // TODO: Should the query term be trusted here?
     return this.sanitizer.bypassSecurityTrustResourceUrl(viewerPath);

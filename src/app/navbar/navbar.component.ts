@@ -1,8 +1,8 @@
-import { Component, Injector } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { slideMobileNav } from '../shared/animations/slide';
 import { MenuComponent } from '../shared/menu/menu.component';
 import { MenuService } from '../shared/menu/menu.service';
-import { HostWindowService } from '../shared/host-window.service';
+import { HostWindowService, WidthCategory } from '../shared/host-window.service';
 import { BrowseService } from '../core/browse/browse.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
@@ -23,12 +23,13 @@ import { environment } from '../../environments/environment';
   templateUrl: './navbar.component.html',
   animations: [slideMobileNav]
 })
-export class NavbarComponent extends MenuComponent {
+export class NavbarComponent extends MenuComponent implements OnInit {
   /**
    * The menu ID of the Navbar is PUBLIC
    * @type {MenuID.PUBLIC}
    */
   menuID = MenuID.PUBLIC;
+  maxMobileWidth = WidthCategory.SM;
 
   /**
    * Whether user is authenticated.
@@ -36,7 +37,7 @@ export class NavbarComponent extends MenuComponent {
    */
   public isAuthenticated$: Observable<boolean>;
 
-  public isXsOrSm$: Observable<boolean>;
+  public isMobile$: Observable<boolean>;
 
   mainSiteUrl = environment.mainSiteUrl;
   constructor(protected menuService: MenuService,
@@ -53,7 +54,7 @@ export class NavbarComponent extends MenuComponent {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.isXsOrSm$ = this.windowService.isXsOrSm();
+    this.isMobile$ = this.windowService.isUpTo(this.maxMobileWidth);
     this.isAuthenticated$ = this.store.pipe(select(isAuthenticated));
   }
 }
