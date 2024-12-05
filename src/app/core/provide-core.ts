@@ -177,7 +177,6 @@ export const models =
     VocabularyEntryDetail,
     ConfigurationProperty,
     ShortLivedToken,
-    Registration,
     UsageReport,
     QualityAssuranceTopicObject,
     QualityAssuranceEventObject,
@@ -189,7 +188,6 @@ export const models =
     ResearcherProfile,
     OrcidQueue,
     OrcidHistory,
-    AccessStatusObject,
     IdentifierData,
     Subscription,
     ItemRequest,
@@ -214,5 +212,4 @@ export const models =
     WorkflowStepStatistics,
     WorkflowOwnerStatistics,
     LoginStatistics,
-    Metric,
   ];

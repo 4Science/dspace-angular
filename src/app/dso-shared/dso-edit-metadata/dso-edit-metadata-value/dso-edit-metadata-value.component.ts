@@ -253,7 +253,7 @@ export class DsoEditMetadataValueComponent implements OnInit, OnChanges, OnDestr
   /**
    * Model to use for editing authorities values
    */
-  private model$: BehaviorSubject<DynamicOneboxModel | DynamicScrollableDropdownModel> = new BehaviorSubject(null);
+  model$: BehaviorSubject<DynamicOneboxModel | DynamicScrollableDropdownModel> = new BehaviorSubject(null);
 
   /**
    * Observable with information about the authority vocabulary used
@@ -263,10 +263,10 @@ export class DsoEditMetadataValueComponent implements OnInit, OnChanges, OnDestr
   /**
    * Observables with information about the authority vocabulary type used
    */
-  private isAuthorityControlled$: Observable<boolean>;
-  private isHierarchicalVocabulary$: Observable<boolean>;
-  private isScrollableVocabulary$: Observable<boolean>;
-  private isSuggesterVocabulary$: Observable<boolean>;
+  isAuthorityControlled$: Observable<boolean>;
+  isHierarchicalVocabulary$: Observable<boolean>;
+  isScrollableVocabulary$: Observable<boolean>;
+  isSuggesterVocabulary$: Observable<boolean>;
 
   constructor(
     protected relationshipService: RelationshipDataService,
