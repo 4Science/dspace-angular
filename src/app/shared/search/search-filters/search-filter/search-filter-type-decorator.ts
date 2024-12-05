@@ -26,8 +26,8 @@ filterTypeMap.set(FilterType.range, SearchRangeFilterWrapperComponent);
 /**
  * Contains the mapping between an {@link BuildConfig} path and a {@link FilterType}
  */
-const filterTypeEnvironmentMap = new Map();
-filterTypeMap.set(FilterType.range, [{
+const filterTypeEnvironmentMap: Map<FilterType, { environment?: string, objectElement: any }[]> = new Map();
+filterTypeEnvironmentMap.set(FilterType.range, [{
   environment: 'layout.search.filters.datepicker',
   objectElement: SearchRangeDatepickerFilterComponent,
 }, {
