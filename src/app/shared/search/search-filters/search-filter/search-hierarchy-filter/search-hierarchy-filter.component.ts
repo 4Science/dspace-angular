@@ -7,6 +7,7 @@ import {
 import {
   Component,
   Inject,
+  Input,
   OnDestroy,
   OnInit,
   PLATFORM_ID,
@@ -45,7 +46,6 @@ import { SearchService } from '../../../../../core/shared/search/search.service'
 import { SearchConfigurationService } from '../../../../../core/shared/search/search-configuration.service';
 import {
   FILTER_CONFIG,
-  IN_PLACE_SEARCH,
   REFRESH_FILTER,
   SCOPE,
   SearchFilterService,
@@ -79,6 +79,8 @@ import { SearchFacetSelectedOptionComponent } from '../search-facet-filter-optio
  */
 export class SearchHierarchyFilterComponent extends SearchFacetFilterComponent implements OnDestroy, OnInit {
 
+  @Input() inPlaceSearch: boolean;
+
   constructor(protected searchService: SearchService,
               protected filterService: SearchFilterService,
               protected rdbs: RemoteDataBuildService,
@@ -86,7 +88,6 @@ export class SearchHierarchyFilterComponent extends SearchFacetFilterComponent i
               protected modalService: NgbModal,
               protected vocabularyService: VocabularyService,
               @Inject(APP_CONFIG) protected appConfig: AppConfig,
-              @Inject(IN_PLACE_SEARCH) public inPlaceSearch: boolean,
               @Inject(FILTER_CONFIG) public filterConfig: SearchFilterConfig,
               @Inject(REFRESH_FILTER) public refreshFilters: BehaviorSubject<boolean>,
               @Inject(SCOPE) public scope: string,
