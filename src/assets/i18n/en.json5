@@ -239,6 +239,14 @@
 
   "admin.registries.metadata.form.namespace": "Namespace",
 
+  "admin.registries.metadata.search.form.search": "Search metadata schema",
+
+  "admin.registries.metadata.search.form.namespace": "Namespace",
+
+  "admin.registries.metadata.search.form.element": "Element",
+
+  "admin.registries.metadata.search.form.qualifier": "Qualifier",
+
   "admin.registries.metadata.head": "Metadata Registry",
 
   "admin.registries.metadata.schemas.no-items": "No metadata schemas to show.",
