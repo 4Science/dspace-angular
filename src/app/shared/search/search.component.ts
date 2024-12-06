@@ -12,7 +12,7 @@ import {
 import { NavigationStart, Router } from '@angular/router';
 
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
 import uniqueId from 'lodash/uniqueId';
 
 import { PaginatedList } from '../../core/data/paginated-list.model';
@@ -413,6 +413,8 @@ export class SearchComponent implements OnInit, OnDestroy {
    * If something changes, update the list of scopes for the dropdown
    */
   ngOnInit(): void {
+    let defaultSortOrder;
+
     if (!this.renderOnServerSide && isPlatformServer(this.platformId)) {
       this.initialized$.next(true);
       return;
@@ -455,12 +457,13 @@ export class SearchComponent implements OnInit, OnDestroy {
       .getCurrentConfiguration(this.configuration).pipe(distinctUntilChanged());
     const searchSortOptions$: Observable<SortOptions[]> = combineLatest([configuration$, this.currentScope$]).pipe(
       switchMap(([configuration, scope]: [string, string]) => this.searchConfigService.getConfigurationSearchConfig(configuration, scope)),
+      tap(config => defaultSortOrder = config.defaultSortOption?.sortOrder),
       map((searchConfig: SearchConfig) => this.searchConfigService.getConfigurationSortOptions(searchConfig)),
       distinctUntilChanged()
     );
     const sortOption$: Observable<SortOptions> = searchSortOptions$.pipe(
       switchMap((searchSortOptions: SortOptions[]) => {
-        const defaultSort: SortOptions = searchSortOptions[0];
+        const defaultSort = new SortOptions(searchSortOptions[0].field, defaultSortOrder ?? searchSortOptions[0].direction);
         return this.searchConfigService.getCurrentSort(this.paginationId, defaultSort);
       }),
       distinctUntilChanged()

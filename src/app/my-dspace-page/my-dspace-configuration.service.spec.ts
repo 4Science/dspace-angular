@@ -13,6 +13,7 @@ import { PaginationServiceStub } from '../shared/testing/pagination-service.stub
 import { Context } from '../core/shared/context.model';
 import { HALEndpointServiceStub } from '../shared/testing/hal-endpoint-service.stub';
 import { getMockRemoteDataBuildService } from '../shared/mocks/remote-data-build.service.mock';
+import { getMockUUIDService } from '../shared/mocks/uuid.service.mock';
 
 describe('MyDSpaceConfigurationService', () => {
   let service: MyDSpaceConfigurationService;
@@ -52,7 +53,7 @@ describe('MyDSpaceConfigurationService', () => {
   const rdb: any = getMockRemoteDataBuildService();
 
   beforeEach(() => {
-    service = new MyDSpaceConfigurationService(roleService, spy, paginationService as any, activatedRoute, linkService, halService, requestService, rdb);
+    service = new MyDSpaceConfigurationService(roleService, spy, paginationService as any, activatedRoute, linkService, halService, requestService, rdb, getMockUUIDService());
   });
 
   describe('when the scope is called', () => {

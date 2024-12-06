@@ -18,7 +18,7 @@
             role="menuitem"
             title="{{ listItem.translatedLabel }}"
             (click)="onSelect(listItem)">
-      <span class="text-truncate font-weight-bold">{{ listItem.translatedLabel }}</span>
+      <span class="text-primary text-truncate font-weight-bold">{{ listItem.translatedLabel }}</span>
     </button>
   </li>
   <li *ngIf="(isLoadingList | async)">

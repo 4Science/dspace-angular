@@ -8,8 +8,8 @@
                       <li *ngIf="page.page != 'relationships'" class="nav-item" role="presentation">
                           <a *ngIf="(page.enabled | async)"
                            [attr.aria-selected]="page.page === currentPage"
-                             class="nav-link"
-                             [ngClass]="{'active' : page.page === currentPage}"
+                           class="nav-link"
+                           [ngClass]="{'active' : page.page === currentPage}"
                            [routerLink]="['./' + page.page]"
                            [attr.data-test]="page.page"
                            role="tab">

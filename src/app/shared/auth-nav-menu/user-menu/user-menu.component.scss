@@ -13,7 +13,13 @@
         a.ds-menu-item {
           display: block;
           color: var(--ds-expandable-navbar-link-color);
-          &:hover {
+          text-decoration: none;
+
+          &.active {
+            color: var(--bs-white);
+            background-color: var(--bs-dark);
+          }
+          &:hover:not(.active) {
             color: var(--ds-expandable-navbar-link-color-hover);
             background-color: var(--ds-user-menu-dropdown-link-background-hover);
           }
