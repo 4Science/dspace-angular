@@ -255,7 +255,6 @@ export const environment: BuildConfig = {
     // The number of entries in a paginated browse results list.
     // Rounded to the nearest size in the list of selectable sizes on the
     // settings menu.  See pageSizeOptions in 'pagination-component-options.model.ts'.
-    showMetrics: true,
     pageSize: 20,
   },
   communityList: {

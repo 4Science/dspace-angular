@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { MenuService } from '../shared/menu/menu.service';
 import { MenuID } from '../shared/menu/menu-id.model';
 import { HostWindowService, WidthCategory } from '../shared/host-window.service';
-import { environment } from "../../environments/environment";
+import { environment } from '../../environments/environment';
 
 /**
  * Represents the header with the logo and simple navigation

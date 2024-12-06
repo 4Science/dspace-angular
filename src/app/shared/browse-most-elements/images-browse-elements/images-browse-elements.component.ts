@@ -17,6 +17,7 @@ export class ImagesBrowseElementsComponent extends AbstractBrowseElementsCompone
   readonly maxSquareRatio = 1.3;
 
   protected followThumbnailLink = false; // not required as ORIGINAL bundle is used
+  protected followMetricsLink = false;
 
   private readonly bitstreamImagesService = inject(BitstreamImagesService);
 

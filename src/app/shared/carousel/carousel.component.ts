@@ -73,7 +73,7 @@ export class CarouselComponent implements OnInit {
   /**
    * reference to the carousel
    */
-  @ViewChild('carousel', {static: false}) carousel: NgbCarousel;
+  @ViewChild('carousel', {static: true}) carousel: NgbCarousel;
 
   isLoading$ = new BehaviorSubject(false);
 
@@ -132,7 +132,6 @@ export class CarouselComponent implements OnInit {
       (slideEvent.source === NgbSlideEventSource.ARROW_LEFT || slideEvent.source === NgbSlideEventSource.ARROW_RIGHT)) {
       this.togglePaused();
     }
-
     if (this.pauseOnIndicator && !slideEvent.paused && slideEvent.source === NgbSlideEventSource.INDICATOR) {
       this.togglePaused();
     }

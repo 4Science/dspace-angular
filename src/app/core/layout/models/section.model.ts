@@ -113,14 +113,6 @@ export interface TopSectionColumn {
   titleKey: string;
 }
 
-/**
- * Represents the type of template to use for the section
- */
-export enum TopSectionTemplateType {
-  DEFAULT = 'default', // CRIS default template
-  CARD = 'card', // Card template
-}
-
 export enum LayoutModeEnum {
   LIST = 'list',
   CARD = 'card'
@@ -193,4 +185,5 @@ export enum TopSectionTemplateType {
   DEFAULT = 'default',  // CRIS default template
   IMAGES = 'images',
   SLIDER = 'slider',
+  CARD = 'card',
 }

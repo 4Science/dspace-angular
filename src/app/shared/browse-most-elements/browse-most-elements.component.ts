@@ -53,6 +53,9 @@ export class BrowseMostElementsComponent implements OnInit, OnChanges {
    */
   @Input() topSection: TopSection;
 
+  @Input() discoveryConfigurationsTotalElementsMap: Map<string, number>;
+
+
   paginatedSearchOptions$ = new BehaviorSubject<PaginatedSearchOptions>(null);
 
   sectionTemplateType: TopSectionTemplateType;
@@ -61,6 +64,7 @@ export class BrowseMostElementsComponent implements OnInit, OnChanges {
    * The type of the template to render
    */
   templateTypeEnum = TopSectionTemplateType;
+
 
   ngOnInit(): void {
     this.sectionTemplateType = this.topSection?.template
