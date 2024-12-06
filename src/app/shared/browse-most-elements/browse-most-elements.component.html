@@ -1,32 +1,35 @@
 <div [ngSwitch]="(sectionTemplateType | lowercase)">
-
-  <ng-container *ngSwitchCase="templateTypeEnum.CARD">
-    <ds-themed-cards-browse-elements
+  <ng-container *ngSwitchCase="templateTypeEnum.IMAGES">
+    <ds-themed-images-browse-elements
       [topSection]="topSection"
-      [paginatedSearchOptions]="paginatedSearchOptions$.asObservable() | async"
+      [paginatedSearchOptions]="paginatedSearchOptions$ | async"
       [context]="context"
     >
-    </ds-themed-cards-browse-elements>
+    </ds-themed-images-browse-elements>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="templateTypeEnum.SLIDER">
+    <ds-themed-slider-browse-elements
+      [topSection]="topSection"
+      [paginatedSearchOptions]="paginatedSearchOptions$ | async"
+      [context]="context"
+    >
+    </ds-themed-slider-browse-elements>
+
   </ng-container>
 
   <ng-container *ngSwitchDefault>
     <ds-themed-default-browse-elements
-      [showMetrics]="showMetrics"
-      [showThumbnails]="showThumbnails ?? topSection.showThumbnails"
       [topSection]="topSection"
-      [showLabel]="showLabel"
-      [paginatedSearchOptions]="paginatedSearchOptions$.asObservable() | async"
+      [paginatedSearchOptions]="paginatedSearchOptions$ | async"
       [context]="context"
-      [mode]="mode"
     ></ds-themed-default-browse-elements>
   </ng-container>
 
-</div>
-<div
-  class="row justify-content-center"
-  *ngIf="topSection && topSection.showAllResults"
->
-  <button type="button" class="btn btn-link" (click)="showAllResults()">
-    {{ "home.top-section.view-results" | translate }}
-  </button>
+  <div *ngIf="topSection.showAllResults && (discoveryConfigurationsTotalElementsMap == null || discoveryConfigurationsTotalElementsMap.get(paginatedSearchOptions.configuration)) > 0" class="d-flex justify-content-center">
+    <button type="button" class="btn btn-link" (click)="showAllResults()">
+      {{ "home.top-section.view-results" | translate }}
+    </button>
+  </div>
+
 </div>

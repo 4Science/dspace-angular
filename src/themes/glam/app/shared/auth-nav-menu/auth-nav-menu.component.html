@@ -1,5 +1,5 @@
-<ul class="navbar-nav" [ngClass]="{'mr-auto': (isXsOrSm$ | async)}">
-  <li *ngIf="!(isAuthenticated | async) && !(isXsOrSm$ | async) && (showAuth | async)" class="nav-item"
+<ul class="navbar-nav" [ngClass]="{'mr-auto': (isMobile$ | async)}">
+  <li *ngIf="!(isAuthenticated | async) && !(isMobile$ | async) && (showAuth | async)" class="nav-item"
       (click)="$event.stopPropagation();">
     <div ngbDropdown #loginDrop display="dynamic" placement="bottom-right" class="d-inline-block" @fadeInOut>
       <a role="button" href="javascript:void(0);" [attr.aria-label]="'nav.login' | translate"
@@ -11,12 +11,12 @@
       </div>
     </div>
   </li>
-  <li *ngIf="!(isAuthenticated | async) && (isXsOrSm$ | async)" class="nav-item">
+  <li *ngIf="!(isAuthenticated | async) && (isMobile$ | async)" class="nav-item">
     <a routerLink="/login" routerLinkActive="active" class="loginLink px-1">
       {{ 'nav.login' | translate }}<span class="sr-only">(current)</span>
     </a>
   </li>
-  <li *ngIf="(isAuthenticated | async) && !(isXsOrSm$ | async) && (showAuth | async)" class="nav-item">
+  <li *ngIf="(isAuthenticated | async) && !(isMobile$ | async) && (showAuth | async)" class="nav-item">
     <div ngbDropdown display="dynamic" placement="bottom-right" class="d-inline-block" @fadeInOut>
       <a href="javascript:void(0);" role="button" [attr.aria-label]="'nav.user-profile-menu-and-logout' |translate" (click)="$event.preventDefault()" [title]="'nav.user-profile-menu-and-logout' | translate" class="nav-link px-1" [attr.data-test]="'user-menu' | dsBrowserOnly" ngbDropdownToggle>
         <i class="fas fa-user-circle fa-lg fa-fw"></i></a>
@@ -25,7 +25,7 @@
       </div>
     </div>
   </li>
-  <li *ngIf="(isAuthenticated | async) && (isXsOrSm$ | async)" class="nav-item">
+  <li *ngIf="(isAuthenticated | async) && (isMobile$ | async)" class="nav-item">
     <a id="logoutLink" role="button" [attr.aria-label]="'nav.logout' |translate" [title]="'nav.logout' | translate" routerLink="/logout" routerLinkActive="active" class="px-1">
       <i class="fas fa-sign-out-alt fa-lg fa-fw"></i>
       <span class="sr-only">(current)</span>
