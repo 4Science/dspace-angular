@@ -31,7 +31,7 @@ import {
   SearchFacetFilterComponent,
 } from '../search-facet-filter/search-facet-filter.component';
 import { SearchFacetRangeOptionComponent } from '../search-facet-filter-options/search-facet-range-option/search-facet-range-option.component';
-import { renderFilterTypeEnvironment } from '../search-filter-type-decorator';
+import { renderFilterTypeEnvironment } from '../search-filter-type-environment-decorator';
 
 @Component({
   selector: 'ds-search-range-filter-wrapper',

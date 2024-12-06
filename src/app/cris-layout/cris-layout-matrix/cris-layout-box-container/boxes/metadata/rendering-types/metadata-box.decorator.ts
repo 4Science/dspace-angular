@@ -3,7 +3,7 @@ import {
   isEmpty,
 } from '../../../../../../shared/empty.util';
 import { FieldRenderingType } from './field-rendering-type';
-import { MetadataBoxFieldRenderOptions } from './rendering-type.model';
+import { MetadataBoxFieldRenderOptions } from './metadata-box-field-render-options';
 
 /**
  * Return the rendering type of the field to render

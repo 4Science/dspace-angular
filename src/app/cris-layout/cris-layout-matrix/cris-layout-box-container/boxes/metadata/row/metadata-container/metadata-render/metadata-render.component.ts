@@ -25,7 +25,7 @@ import {
   computeRenderingFn,
   getMetadataBoxFieldRenderOptionsFn,
 } from '../../../rendering-types/metadata-box.decorator';
-import { MetadataBoxFieldRenderOptions } from '../../../rendering-types/rendering-type.model';
+import { MetadataBoxFieldRenderOptions } from '../../../rendering-types/metadata-box-field-render-options';
 
 @Component({
   selector: 'ds-metadata-render',
