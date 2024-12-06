@@ -1,0 +1,55 @@
+<ng-container *ngIf="(searchResults$ | async); else loading">
+  <div class="btn-group btn-group-toggle mb-3" ngbRadioGroup name="radioBasic" [(ngModel)]="layoutMode" *ngIf="topSection.showLayoutSwitch">
+    <label ngbButtonLabel class="btn-outline-primary">
+      <input ngbButton type="radio" [value]="'list'" />
+      <i class="fa fa-list-ul" title="List"></i>
+    </label>
+    <label ngbButtonLabel class="btn-outline-primary">
+      <input ngbButton type="radio" [value]="'card'" />
+      <i class="fas fa-th-large" title="Cards"></i>
+    </label>
+  </div>
+  <ng-container *ngIf="topSection && layoutMode == cardLayoutMode; then gridLayout; else listLayout"></ng-container>
+  <div *ngIf="(searchResults$ | async).hasFailed">
+    {{ "remote.error" | translate }}
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <ds-loading></ds-loading>
+</ng-template>
+
+<ng-template #gridLayout>
+  <ds-object-grid
+    [configStyle]="topSection?.cardStyle"
+    [columnStyle]="topSection?.cardColumnStyle"
+    [config]="paginatedSearchOptions.pagination"
+    [sortConfig]="paginatedSearchOptions.sort"
+    [objects]="(searchResults$ | async)"
+    [linkType]="collectionElementLinkTypeEnum.Link"
+    [context]="context"
+    [noPagination]="true"
+  >
+  </ds-object-grid>
+</ng-template>
+<ng-template #listLayout>
+  <ul *ngIf="(searchResults$ | async).hasSucceeded" class="list-unstyled">
+    <li
+      *ngFor="
+              let object of (searchResultArray$ | async);
+              let i = index;
+              let last = last
+            "
+      class="mt-4 mb-4 d-flex"
+      [ngClass]="topSection?.itemListStyle"
+    >
+      <ds-listable-object-component-loader [context]="context"
+                                           [index]="i"
+                                           [listID]="paginatedSearchOptions.configuration"
+                                           [object]="object"
+                                           [showMetrics]="showMetrics"
+                                           [showThumbnails]="showThumbnails"
+                                           [viewMode]="paginatedSearchOptions.view"></ds-listable-object-component-loader>
+    </li>
+  </ul>
+</ng-template>

@@ -4,19 +4,21 @@ import { isPlatformServer } from '@angular/common';
 import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { NativeWindowRef, NativeWindowService } from '../../../../core/services/window.service';
 import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
 import { SearchObjects } from '../../../search/models/search-objects.model';
 import { getFirstSucceededRemoteDataPayload } from '../../../../core/shared/operators';
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
 import { SectionComponent } from '../../../../core/layout/models/section.model';
-import { SearchService } from '../../../../core/shared/search/search.service';
+import { SearchManager } from '../../../../core/browse/search-manager';
 import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
-import { hasValue } from '../../../empty.util';
 import { UUIDService } from '../../../../core/shared/uuid.service';
+import { InternalLinkService } from 'src/app/core/services/internal-link.service';
+import { hasValue } from '../../../empty.util';
+import { NativeWindowRef, NativeWindowService } from '../../../../core/services/window.service';
 
 @Component({
   selector: 'ds-counters-section',
+  styleUrls: ['./counters-section.component.scss'],
   templateUrl: './counters-section.component.html'
 })
 export class CountersSectionComponent implements OnInit {
@@ -38,10 +40,13 @@ export class CountersSectionComponent implements OnInit {
   });
 
 
-  constructor(private searchService: SearchService,
-              private uuidService: UUIDService,
-              @Inject(PLATFORM_ID) private platformId: Object,
-              @Inject(NativeWindowService) protected _window: NativeWindowRef,) {
+  constructor(
+              protected internalLinkService: InternalLinkService,
+              protected searchService: SearchManager,
+              @Inject(NativeWindowService) protected _window: NativeWindowRef,
+              protected uuidService: UUIDService,
+              @Inject(PLATFORM_ID) protected platformId: Object,
+  ) {
 
   }
 

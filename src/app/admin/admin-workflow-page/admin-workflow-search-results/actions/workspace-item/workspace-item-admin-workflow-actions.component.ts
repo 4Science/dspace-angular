@@ -77,6 +77,11 @@ export class WorkspaceItemAdminWorkflowActionsComponent implements OnInit {
   @Output() delete: EventEmitter<DSpaceObject> = new EventEmitter<DSpaceObject>();
 
   /**
+   * Whether to show the supervision button or not
+   */
+  hideSupervisionButton = true;
+
+  /**
    * Event emitted when a new SupervisionOrder has been created
    */
   constructor(

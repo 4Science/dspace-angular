@@ -26,11 +26,6 @@ export interface WorkspaceitemSectionUnpaywallObject {
   status: UnpaywallSectionStatus;
 
   /**
-   * Item json record.
-   */
-  jsonRecord: string;
-
-  /**
    * Timestamp created.
    */
   timestampCreated: Date;

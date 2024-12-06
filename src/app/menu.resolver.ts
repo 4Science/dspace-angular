@@ -271,6 +271,19 @@ export class MenuResolver implements Resolve<boolean> {
       this.authorizationService.isAuthorized(FeatureID.CanEditItem),
     ]).subscribe(([isCollectionAdmin, isCommunityAdmin, isSiteAdmin, canSubmit, canEditItem]) => {
       const newSubMenuList = [
+        /* Communities and Collections */
+        {
+          id: `browse_global_communities_and_collections`,
+          active: false,
+          visible: false,
+          model: {
+            type: MenuItemType.LINK,
+            text: `menu.section.communities_and_collections`,
+            link: `/community-list`
+          } as LinkMenuItemModel,
+          icon: 'users',
+          index: 0
+        },
         {
           id: 'new_community',
           parentID: 'new',
@@ -688,7 +701,7 @@ export class MenuResolver implements Resolve<boolean> {
         {
           id: 'notifications',
           active: false,
-          visible: authorized,
+          visible: false,
           model: {
             type: MenuItemType.TEXT,
             text: 'menu.section.notifications'

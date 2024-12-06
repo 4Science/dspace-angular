@@ -106,7 +106,7 @@ const DECLARATIONS = [
     FooterModule,
     ExploreModule,
     SocialModule,
-    OpenaireModule
+    OpenaireModule,
   ],
   declarations: DECLARATIONS,
 })

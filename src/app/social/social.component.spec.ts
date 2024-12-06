@@ -4,6 +4,8 @@ import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { SocialService } from './social.service';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateLoaderMock } from '../shared/mocks/translate-loader.mock';
 
 describe('SocialComponent', () => {
   let component: SocialComponent;
@@ -17,7 +19,15 @@ describe('SocialComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SocialComponent],
-      imports: [StoreModule.forRoot({})],
+      imports: [
+        StoreModule.forRoot({}),
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock
+          }
+        })
+      ],
       providers: [
         { provide: ActivatedRoute, useValue: activatedRouteStub },
         { provide: SocialService, useValue: socialServiceStub },

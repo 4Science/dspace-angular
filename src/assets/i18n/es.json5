@@ -1345,6 +1345,16 @@
   // TODO New key - Add a translation
   "alert.toggle.show": "Show more",
 
+
+  // "artwork.listelement.badge": "Artworks",
+  // TODO New key - Add a translation
+  "artwork.listelement.badge": "Artworks",
+
+  // "artwork.page.titleprefix": "Artworks",
+  // TODO New key - Add a translation
+  "artwork.page.titleprefix": "Artworks",
+
+
   // "audiovideo.page.titleprefix": "Audio/Video",
   // TODO New key - Add a translation
   "audiovideo.page.titleprefix": "Audio/Video",
@@ -1437,6 +1447,45 @@
   // TODO New key - Add a translation
   "audit.detail.back.subject": "Subject Audit Logs",
 
+  // "errors.location.unsupportedBrowser": "Browser does not support location services",
+  // TODO New key - Add a translation
+  "errors.location.unsupportedBrowser": "Browser does not support location services",
+
+  // "errors.location.permissionDenied": "You have rejected access to your location",
+  // TODO New key - Add a translation
+  "errors.location.permissionDenied": "You have rejected access to your location",
+
+  // "errors.location.positionUnavailable": "Unable to determine your location",
+  // TODO New key - Add a translation
+  "errors.location.positionUnavailable": "Unable to determine your location",
+
+  // "errors.location.timeout": "Service timeout has been reached",
+  // TODO New key - Add a translation
+  "errors.location.timeout": "Service timeout has been reached",
+
+  // "openstreetmap.location.zoomIn": "Zoom in",
+  // TODO New key - Add a translation
+  "openstreetmap.location.zoomIn": "Zoom in",
+
+  // "openstreetmap.location.zoomOut": "Zoom out",
+  // TODO New key - Add a translation
+  "openstreetmap.location.zoomOut": "Zoom out",
+
+  // "openstreetmap.location.center": "Center the map",
+  // TODO New key - Add a translation
+  "openstreetmap.location.center": "Center the map",
+
+  // "location.error.invalid-coordinates": "Invalid coordinates",
+  // TODO New key - Add a translation
+  "location.error.invalid-coordinates": "Invalid coordinates",
+
+  // "location.error.location-not-found": "Location not found",
+  // TODO New key - Add a translation
+  "location.error.location-not-found": "Location not found",
+
+  // "location.error.api-error": "The service that retrieves the position on the map is currently not available.",
+  // TODO New key - Add a translation
+  "location.error.api-error": "The service that retrieves the position on the map is currently not available.",
 
   // "auth.errors.invalid-user": "Invalid email address or password.",
   "auth.errors.invalid-user": "Dirección de correo electrónico o contraseña no válidos.",
@@ -3547,7 +3596,8 @@
   // "cookies.consent.ok": "That's ok",
   "cookies.consent.ok": "Aceptar",
 
-  // "cookies.consent.save": "Save",
+  // "cookies.consent.save": "Close",
+  // TODO Source message changed - Revise the translation
   "cookies.consent.save": "Guardar",
 
   // "cookies.consent.content-notice.title": "Cookie Consent",
@@ -3622,10 +3672,36 @@
   // "cookies.consent.purpose.sharing": "Sharing",
   "cookies.consent.purpose.sharing": "Compartición",
 
+  // "cookies.consent.app.title.plumX": "PlumX",
+  // TODO New key - Add a translation
+  "cookies.consent.app.title.plumX": "PlumX",
+
+  // "cookies.consent.app.description.plumX": "PlumX Metrics provide insights into the ways people interact with individual pieces of research output (articles, conference proceedings, book chapters, and many more) in the online environment. (https://plumanalytics.com/)",
+  // TODO New key - Add a translation
+  "cookies.consent.app.description.plumX": "PlumX Metrics provide insights into the ways people interact with individual pieces of research output (articles, conference proceedings, book chapters, and many more) in the online environment. (https://plumanalytics.com/)",
+
+  // "cookies.consent.app.title.altmetric": "Altmetric",
+  // TODO New key - Add a translation
+  "cookies.consent.app.title.altmetric": "Altmetric",
+
+  // "cookies.consent.app.description.altmetric": "Altmetric’s interface tracks online engagement to reveal how and where your research is being visualized. (https://www.altmetric.com)",
+  // TODO New key - Add a translation
+  "cookies.consent.app.description.altmetric": "Altmetric’s interface tracks online engagement to reveal how and where your research is being visualized. (https://www.altmetric.com)",
+
+  // "cookies.consent.app.title.dimensions": "Dimensions",
+  // TODO New key - Add a translation
+  "cookies.consent.app.title.dimensions": "Dimensions",
+
+  // "cookies.consent.app.description.dimensions": "Dimensions analyses references from publications and calculates a set of article-level indicators. (https://www.dimensions.ai)",
+  // TODO New key - Add a translation
+  "cookies.consent.app.description.dimensions": "Dimensions analyses references from publications and calculates a set of article-level indicators. (https://www.dimensions.ai)",
+
+  // "cookies.consent.purpose.thirdPartyJs": "Third-party JavaScript",
+  // TODO New key - Add a translation
+  "cookies.consent.purpose.thirdPartyJs": "Third-party JavaScript",
 
   // "curation-task.task.citationpage.label": "Generate Citation Page",
   "curation-task.task.citationpage.label": "Generar página de cita",
-
 
   // "curation-task.task.migratedocviewer.label": "Migrate the previously generated doc. viewer resources",
   // TODO New key - Add a translation
@@ -3771,6 +3847,22 @@
   // TODO New key - Add a translation
   "cris-layout.rendering.collections.load-more": "Load more",
 
+  // "cris-layout-box-container.collapse.details.show": "Show description",
+  // TODO New key - Add a translation
+  "cris-layout-box-container.collapse.details.show": "Show description",
+
+  // "cris-layout-box-container.collapse.details.hide": "Hide description",
+  // TODO New key - Add a translation
+  "cris-layout-box-container.collapse.details.hide": "Hide description",
+
+  // "cris-layout-box-container.collapse.pathpublications.show": "Show path",
+  // TODO New key - Add a translation
+  "cris-layout-box-container.collapse.pathpublications.show": "Show path",
+
+  // "cris-layout-box-container.collapse.pathpublications.hide": "Hide path",
+  // TODO New key - Add a translation
+  "cris-layout-box-container.collapse.pathpublications.hide": "Hide path",
+
   // "curation-task.task.checklinks.label": "Check Links in Metadata",
   "curation-task.task.checklinks.label": "Comprobar enlaces en metadatos",
 
@@ -3837,6 +3929,10 @@
 
   // "deny-request-copy.success": "Successfully denied item request",
   "deny-request-copy.success": "Solicitud de copia de documento denegada",
+
+  // "discoverable.search.results.head": "Search Results",
+  // TODO New key - Add a translation
+  "discoverable.search.results.head": "Search Results",
 
   // "dso.name.untitled": "Untitled",
   "dso.name.untitled": "Sin título",
@@ -4614,6 +4710,10 @@
   // TODO New key - Add a translation
   "explore.index.corporate": "Organizational Unit",
 
+  // "explore.index.opera": "Opera",
+  // TODO New key - Add a translation
+  "explore.index.opera": "Opera",
+
   // "explore.search-section.infrastructure.title": "Infrastructure",
   // TODO New key - Add a translation
   "explore.search-section.infrastructure.title": "Infrastructure",
@@ -4744,6 +4844,10 @@
   // "footer.involved-institution": "Institutions involved",
   // TODO New key - Add a translation
   "footer.involved-institution": "Institutions involved",
+
+  // "footer.social-media": "Social media",
+  // TODO New key - Add a translation
+  "footer.social-media": "Social media",
 
   // "footer.information": "Information",
   // TODO New key - Add a translation
@@ -4986,6 +5090,18 @@
   // TODO New key - Add a translation
   "form.other-information.not-available": "Not available",
 
+  // "form.other-information.ror_orgunit_id": "ROR ID",
+  // TODO New key - Add a translation
+  "form.other-information.ror_orgunit_id": "ROR ID",
+
+  // "form.other-information.ror_orgunit_type": "ROR type",
+  // TODO New key - Add a translation
+  "form.other-information.ror_orgunit_type": "ROR type",
+
+  // "form.other-information.ror_orgunit_acronym": "ROR acronym",
+  // TODO New key - Add a translation
+  "form.other-information.ror_orgunit_acronym": "ROR acronym",
+
   // "form.remove": "Remove",
   "form.remove": "Eliminar",
 
@@ -5097,9 +5213,9 @@
   // TODO New key - Add a translation
   "grid.component.subtitle": "...new ways to explore our digital libraries.",
 
-  // "grid.component.abstract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  // "grid.component.abstract": "Beyond traditional boundaries, explore the complex system of unique relationships for new narratives between interdisciplinary content coexisting in different domains.",
   // TODO New key - Add a translation
-  "grid.component.abstract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "grid.component.abstract": "Beyond traditional boundaries, explore the complex system of unique relationships for new narratives between interdisciplinary content coexisting in different domains.",
 
   // "grid.component.link": "/explore/paths",
   // TODO New key - Add a translation
@@ -5190,7 +5306,45 @@
   // TODO New key - Add a translation
   "home.top-section.view-results": "View all results",
 
+  // "home.top-section.view-all": "View all",
+  // TODO New key - Add a translation
+  "home.top-section.view-all": "View all",
 
+  // "home.top-section.no-results": "No results found for this category",
+  // TODO New key - Add a translation
+  "home.top-section.no-results": "No results found for this category",
+
+  // "home.advanced-top-section.dc.date.accessioned": "Highlights",
+  // TODO New key - Add a translation
+  "home.advanced-top-section.dc.date.accessioned": "Highlights",
+
+  // "home.advanced-top-section.dc.date.issued": "Highlights",
+  // TODO New key - Add a translation
+  "home.advanced-top-section.dc.date.issued": "Highlights",
+
+  // "home.advanced-top-section.metric.view": "Highlights",
+  // TODO New key - Add a translation
+  "home.advanced-top-section.metric.view": "Highlights",
+
+  // "home.advanced-top-section.metric.download": "Highlights",
+  // TODO New key - Add a translation
+  "home.advanced-top-section.metric.download": "Highlights",
+
+  // "home.advanced-top-section.cris.priority": "Highlights",
+  // TODO New key - Add a translation
+  "home.advanced-top-section.cris.priority": "Highlights",
+
+  // "home.advanced-top-section.discovery.aggregationsHomePage": "Aggregations",
+  // TODO New key - Add a translation
+  "home.advanced-top-section.discovery.aggregationsHomePage": "Aggregations",
+
+  // "home.advanced-top-section.discovery.fondsHomePage": "Fonds",
+  // TODO New key - Add a translation
+  "home.advanced-top-section.discovery.fondsHomePage": "Fonds",
+
+  // "home.advanced-top-section.discovery.journalfondsHomePage": "Journal Fonds",
+  // TODO New key - Add a translation
+  "home.advanced-top-section.discovery.journalfondsHomePage": "Journal Fonds",
 
   // "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
   "info.end-user-agreement.accept": "He leído y acepto el Acuerdo de usuario final.",
@@ -5223,14 +5377,65 @@
   // "info.end-user-agreement.hosting-country": "the United States",
   "info.end-user-agreement.hosting-country": "los Estados Unidos de América",
 
-  // "info.privacy.breadcrumbs": "Privacy Statement",
+  // "info.privacy.breadcrumbs": "Privacy",
+  // TODO Source message changed - Revise the translation
   "info.privacy.breadcrumbs": "Declaracion de privacidad",
 
-  // "info.privacy.head": "Privacy Statement",
+  // "info.privacy.head": "Privacy",
+  // TODO Source message changed - Revise the translation
   "info.privacy.head": "Declaracion de privacidad",
 
-  // "info.privacy.title": "Privacy Statement",
+  // "info.privacy.title": "Privacy",
+  // TODO Source message changed - Revise the translation
   "info.privacy.title": "Declaracion de privacidad",
+
+  // "info.general-information.breadcrumbs": "General Information",
+  // TODO New key - Add a translation
+  "info.general-information.breadcrumbs": "General Information",
+
+  // "info.general-information.head": "General Information",
+  // TODO New key - Add a translation
+  "info.general-information.head": "General Information",
+
+  // "info.general-information.title": "General Information",
+  // TODO New key - Add a translation
+  "info.general-information.title": "General Information",
+
+  // "info.offered-services.breadcrumbs": "Offered Services",
+  // TODO New key - Add a translation
+  "info.offered-services.breadcrumbs": "Offered Services",
+
+  // "info.offered-services.head": "Offered Services",
+  // TODO New key - Add a translation
+  "info.offered-services.head": "Offered Services",
+
+  // "info.offered-services.title": "Offered Services",
+  // TODO New key - Add a translation
+  "info.offered-services.title": "Offered Services",
+
+  // "info.history-digital-lid.breadcrumbs": "History of the digital LID",
+  // TODO New key - Add a translation
+  "info.history-digital-lid.breadcrumbs": "History of the digital LID",
+
+  // "info.history-digital-lid.head": "History of the digital LID",
+  // TODO New key - Add a translation
+  "info.history-digital-lid.head": "History of the digital LID",
+
+  // "info.history-digital-lid.title": "History of the digital LID",
+  // TODO New key - Add a translation
+  "info.history-digital-lid.title": "History of the digital LID",
+
+  // "info.organizational-structure.breadcrumbs": "Organizational structure",
+  // TODO New key - Add a translation
+  "info.organizational-structure.breadcrumbs": "Organizational structure",
+
+  // "info.organizational-structure.head": "Organizational structure",
+  // TODO New key - Add a translation
+  "info.organizational-structure.head": "Organizational structure",
+
+  // "info.organizational-structure.title": "Organizational structure",
+  // TODO New key - Add a translation
+  "info.organizational-structure.title": "Organizational structure",
 
   // "info.feedback.breadcrumbs": "Feedback",
   "info.feedback.breadcrumbs": "Sugerencias",
@@ -5270,6 +5475,10 @@
 
   // "info.feedback.page_help": "Tha page related to your feedback",
   "info.feedback.page_help": "La página relacionada con su sugerencia",
+
+  // "info.empty-cms-metadata-error": "Page content not found",
+  // TODO New key - Add a translation
+  "info.empty-cms-metadata-error": "Page content not found",
 
   // "item.alerts.private": "This item is non-discoverable",
   "item.alerts.private": "Este ítem es privado",
@@ -6138,9 +6347,13 @@
   // TODO New key - Add a translation
   "item.page.metric.details": "Details",
 
-  // "item.page.metric.label.altmetrics": "Altmetrics©",
+  // "item.page.metric.label.altmetric": "Altmetrics©",
   // TODO New key - Add a translation
-  "item.page.metric.label.altmetrics": "Altmetrics©",
+  "item.page.metric.label.altmetric": "Altmetrics©",
+
+  // "item.page.metric.label.dimensions": "Dimensions",
+  // TODO New key - Add a translation
+  "item.page.metric.label.dimensions": "Dimensions",
 
   // "item.page.metric.label.check": "Check",
   // TODO New key - Add a translation
@@ -9682,6 +9895,18 @@
   // TODO New key - Add a translation
   "search.filters.filter.family.placeholder": "Family",
 
+  // "search.filters.filter.opera.head": "Opera",
+  // TODO New key - Add a translation
+  "search.filters.filter.opera.head": "Opera",
+
+  // "search.filters.filter.opera.label": "Opera",
+  // TODO New key - Add a translation
+  "search.filters.filter.opera.label": "Opera",
+
+  // "search.filters.filter.opera.placeholder": "Opera",
+  // TODO New key - Add a translation
+  "search.filters.filter.opera.placeholder": "Opera",
+
   // "search.filters.entityType.JournalIssue": "Journal Issue",
   "search.filters.entityType.JournalIssue": "Número de la revista",
 
@@ -9754,6 +9979,26 @@
   // "search.filters.entityType.Picture": "Picture",
   // TODO New key - Add a translation
   "search.filters.entityType.Picture": "Picture",
+
+  // "search.filters.entityType.Artwork": "Artwork",
+  // TODO New key - Add a translation
+  "search.filters.entityType.Artwork": "Artwork",
+
+  // "search.filters.entityType.BnmScheme": "Naturalistic-Mineralogical Heritage",
+  // TODO New key - Add a translation
+  "search.filters.entityType.BnmScheme": "Naturalistic-Mineralogical Heritage",
+
+  // "search.filters.entityType.ScientificMaterial": "Scientific Material",
+  // TODO New key - Add a translation
+  "search.filters.entityType.ScientificMaterial": "Scientific Material",
+
+  // "search.filters.entityType.MusicalLibrettos": "Musical Librettos",
+  // TODO New key - Add a translation
+  "search.filters.entityType.MusicalLibrettos": "Musical Librettos",
+
+  // "search.filters.entityType.Coin": "Coin",
+  // TODO New key - Add a translation
+  "search.filters.entityType.Coin": "Coin",
 
   // "search.filters.has_content_in_original_bundle.true": "Yes",
   "search.filters.has_content_in_original_bundle.true": "Sí",
@@ -10792,6 +11037,10 @@
   // TODO New key - Add a translation
   "submission.import-external.source.rorOrgUnits": "ROR",
 
+  // "submission.import-external.source.ror": "ROR",
+  // TODO New key - Add a translation
+  "submission.import-external.source.ror": "ROR",
+
   // "submission.import-external.preview.title.Equipment": "Equipment Preview",
   // TODO New key - Add a translation
   "submission.import-external.preview.title.Equipment": "Equipment Preview",
@@ -11507,15 +11756,16 @@
   // "submission.sections.identifiers.otherIdentifiers_label": "Other identifiers: ",
   "submission.sections.identifiers.otherIdentifiers_label": "Otros identificadores: ",
 
-  // "submission.sections.submit.progressbar.accessCondition": "Item access conditions",
-  "submission.sections.submit.progressbar.accessCondition": "Condiciones de acceso al ítem",
+  // "submission.sections.submit.progressbar.itemAccessConditions": "Item access conditions",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.itemAccessConditions": "Item access conditions",
 
   // "submission.sections.submit.progressbar.CClicense": "Creative commons license",
   "submission.sections.submit.progressbar.CClicense": "Licencia Creative Commons",
 
-  // "submission.sections.submit.progressbar.CustomUrlStep": "Custom url",
+  // "submission.sections.submit.progressbar.custom-url": "Custom url",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.CustomUrlStep": "Custom url",
+  "submission.sections.submit.progressbar.custom-url": "Custom url",
 
   // "submission.sections.submit.progressbar.describe.audiovideo": "Item Description",
   // TODO New key - Add a translation
@@ -11630,12 +11880,6 @@
 
   // "submission.sections.submit.progressbar.sherpaPolicies": "Publisher open access policy information",
   "submission.sections.submit.progressbar.sherpaPolicies": "Información sobre políticas editoriales de acceso abierto",
-
-  // "submission.sections.submit.progressbar.correction-step": "Corrections",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.correction-step": "Corrections",
-
-
 
   // "submission.sections.sherpa-policy.title-empty": "No publisher policy information available. If your work has an associated ISSN, please enter it above to see any related publisher open access policies.",
   "submission.sections.sherpa-policy.title-empty": "No se encuentra disponible la información sobre política editorial. Si tiene un ISSN asociado, introdúzcalo arriba para ver información sobre políticas editoriales de acceso abierto.",
@@ -11958,6 +12202,9 @@
   // "submission.sections.unpaywall.status.no-file": "There are no files to be imported",
   // TODO New key - Add a translation
   "submission.sections.unpaywall.status.no-file": "There are no files to be imported",
+  // "submission.sections.unpaywall.status.imported": "The Unpaywall resource has been imported!",
+  // TODO New key - Add a translation
+  "submission.sections.unpaywall.status.imported": "The Unpaywall resource has been imported!",
 
   // "submission.sections.submit.progressbar.unpaywall": "Unpaywall",
   // TODO New key - Add a translation
@@ -12188,6 +12435,18 @@
 
   // "subscriptions.table.empty.message": "You do not have any subscriptions at this time. To subscribe to email updates for a Community or Collection, use the subscription button on the object's page.",
   "subscriptions.table.empty.message": "Usted no tiene suscripciones. Para subscribirse a las actualizaciones por correo electrónico de una Comunidad o Colección, utilice el botón de suscripción en la página del objeto.",
+
+  // "third-party-metrics-cookies.message": "{{ metricType }} badge is blocked by your ",
+  // TODO New key - Add a translation
+  "third-party-metrics-cookies.message": "{{ metricType }} badge is blocked by your ",
+
+  // "third-party-metrics-cookies.consent-settings": "consent settings",
+  // TODO New key - Add a translation
+  "third-party-metrics-cookies.consent-settings": "consent settings",
+
+  // "third-party-metrics-blocked": "Some of the metrics are blocked by your",
+  // TODO New key - Add a translation
+  "third-party-metrics-blocked": "Some of the metrics are blocked by your",
 
   // "thumbnail.default.alt": "Thumbnail Image",
   "thumbnail.default.alt": "Miniatura",
@@ -12669,6 +12928,14 @@
   // "person.page.orcid.funding-preferences": "Funding preferences",
   "person.page.orcid.funding-preferences": "Preferencias de financiación",
 
+  // "person.page.orcid.products-preferences": "Product preferences",
+  // TODO New key - Add a translation
+  "person.page.orcid.products-preferences": "Product preferences",
+
+  // "person.page.orcid.patent-preferences": "Patent preferences",
+  // TODO New key - Add a translation
+  "person.page.orcid.patent-preferences": "Patent preferences",
+
   // "person.page.orcid.publications-preferences": "Publication preferences",
   "person.page.orcid.publications-preferences": "Preferencias de publicación",
 
@@ -12702,6 +12969,22 @@
   // "person.page.orcid.sync-fundings.disabled": "Disabled",
   "person.page.orcid.sync-fundings.disabled": "Deshabilitado",
 
+  // "person.page.orcid.sync-patents.all": "All patents",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-patents.all": "All patents",
+
+  // "person.page.orcid.sync-patents.mine": "My patents",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-patents.mine": "My patents",
+
+  // "person.page.orcid.sync-patents.my_selected": "Selected patents",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-patents.my_selected": "Selected patents",
+
+  // "person.page.orcid.sync-patents.disabled": "Disabled",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-patents.disabled": "Disabled",
+
   // "person.page.orcid.sync-publications.all": "All publications",
   "person.page.orcid.sync-publications.all": "Todas las publicaciones",
 
@@ -12713,6 +12996,22 @@
 
   // "person.page.orcid.sync-publications.disabled": "Disabled",
   "person.page.orcid.sync-publications.disabled": "Deshabilitado",
+
+  // "person.page.orcid.sync-products.all": "All products",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-products.all": "All products",
+
+  // "person.page.orcid.sync-products.mine": "My products",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-products.mine": "My products",
+
+  // "person.page.orcid.sync-products.my_selected": "Selected products",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-products.my_selected": "Selected products",
+
+  // "person.page.orcid.sync-products.disabled": "Disabled",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-products.disabled": "Disabled",
 
   // "person.page.orcid.sync-queue.discard": "Discard the change and do not synchronize with the ORCID registry",
   "person.page.orcid.sync-queue.discard": "Deshechar el cambio y no sincronizar con el registro ORCID",
@@ -12768,8 +13067,16 @@
   // "person.page.orcid.sync-queue.tooltip.delete": "Remove this entry from the ORCID registry",
   "person.page.orcid.sync-queue.tooltip.delete": "Retirar esta entrada del registro ORCID",
 
+  // "person.page.orcid.sync-queue.tooltip.patent": "Patent",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.tooltip.patent": "Patent",
+
   // "person.page.orcid.sync-queue.tooltip.publication": "Publication",
   "person.page.orcid.sync-queue.tooltip.publication": "Publicación",
+
+  // "person.page.orcid.sync-queue.tooltip.product": "Product",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.tooltip.product": "Product",
 
   // "person.page.orcid.sync-queue.tooltip.project": "Project",
   "person.page.orcid.sync-queue.tooltip.project": "Proyecto",
@@ -12891,8 +13198,16 @@
   // "person.page.orcid.synchronization-mode-funding-message": "Select whether to send your linked Project entities to your ORCID record's list of funding information.",
   "person.page.orcid.synchronization-mode-funding-message": "Seleccione si enviará información de sus entidades conectadas de tipo Proyecto a la información de financiación de ORCID.",
 
+  // "person.page.orcid.synchronization-mode-patent-message": "Select whether to send your linked Patent entities to your ORCID record's list of works.",
+  // TODO New key - Add a translation
+  "person.page.orcid.synchronization-mode-patent-message": "Select whether to send your linked Patent entities to your ORCID record's list of works.",
+
   // "person.page.orcid.synchronization-mode-publication-message": "Select whether to send your linked Publication entities to your ORCID record's list of works.",
   "person.page.orcid.synchronization-mode-publication-message": "Seleccione si enviará información de sus entidades conectadas de tipo Publicación a la información de trabajos de ORCID.",
+
+  // "person.page.orcid.synchronization-mode-product-message": "Select whether to send your linked Product entities to your ORCID record's list of works.",
+  // TODO New key - Add a translation
+  "person.page.orcid.synchronization-mode-product-message": "Select whether to send your linked Product entities to your ORCID record's list of works.",
 
   // "person.page.orcid.synchronization-mode-profile-message": "Select whether to send your biographical data or personal identifiers to your ORCID record.",
   "person.page.orcid.synchronization-mode-profile-message": "Seleccione si enviará información de sus datos biográficos o identificadores personales a ORCID",
@@ -13039,6 +13354,55 @@
   // TODO New key - Add a translation
   "journalfond.listelement.badge": "Journal Fond",
 
+  // "aggregation.page.titleprefix": "Aggregation: ",
+  // TODO New key - Add a translation
+  "aggregation.page.titleprefix": "Aggregation: ",
+  // "archivalmaterial.page.titleprefix": "Archival Material: ",
+  // TODO New key - Add a translation
+  "archivalmaterial.page.titleprefix": "Archival Material: ",
+  // "event.page.titleprefix": "Event: ",
+  // TODO New key - Add a translation
+  "event.page.titleprefix": "Event: ",
+  // "family.page.titleprefix": "Family: ",
+  // TODO New key - Add a translation
+  "family.page.titleprefix": "Family: ",
+  // "fonds.page.titleprefix": "Fonds: ",
+  // TODO New key - Add a translation
+  "fonds.page.titleprefix": "Fonds: ",
+  // "picture.page.titleprefix": "Picture: ",
+  // TODO New key - Add a translation
+  "picture.page.titleprefix": "Picture: ",
+  // "journalfonds.page.titleprefix": "Journal Fonds: ",
+  // TODO New key - Add a translation
+  "journalfonds.page.titleprefix": "Journal Fonds: ",
+  // "journalfile.page.titleprefix": "Journal File: ",
+  // TODO New key - Add a translation
+  "journalfile.page.titleprefix": "Journal File: ",
+  // "news.page.titleprefix": "News: ",
+  // TODO New key - Add a translation
+  "news.page.titleprefix": "News: ",
+  // "path.page.titleprefix": "Path: ",
+  // TODO New key - Add a translation
+  "path.page.titleprefix": "Path: ",
+  // "place.page.titleprefix": "Place: ",
+  // TODO New key - Add a translation
+  "place.page.titleprefix": "Place: ",
+  // "staticpage.page.titleprefix": "Page: ",
+  // TODO New key - Add a translation
+  "staticpage.page.titleprefix": "Page: ",
+  // "opera.page.titleprefix": "Opera: ",
+  // TODO New key - Add a translation
+  "opera.page.titleprefix": "Opera: ",
+  // "coin.page.titleprefix": "Coin: ",
+  // TODO New key - Add a translation
+  "coin.page.titleprefix": "Coin: ",
+  // "scientificmaterial.page.titleprefix": "Scientific Material: ",
+  // TODO New key - Add a translation
+  "scientificmaterial.page.titleprefix": "Scientific Material: ",
+  // "musicallibrettos.page.titleprefix": "Musical Librettos: ",
+  // TODO New key - Add a translation
+  "musicallibrettos.page.titleprefix": "Musical Librettos: ",
+
   // "aggregation.listelement.badge": "Aggregation",
   // TODO New key - Add a translation
   "aggregation.listelement.badge": "Aggregation",
@@ -13060,6 +13424,9 @@
   // "scientificmaterial.listelement.badge": "Scientific Material",
   // TODO New key - Add a translation
   "scientificmaterial.listelement.badge": "Scientific Material",
+  // "musicallibrettos.listelement.badge": "Musical Librettos",
+  // TODO New key - Add a translation
+  "musicallibrettos.listelement.badge": "Musical Librettos",
 
   // "picture.listelement.badge": "Picture",
   // TODO New key - Add a translation
@@ -13183,6 +13550,15 @@
   // "aggregations.search.results.head": "Aggregations Search Results",
   // TODO New key - Add a translation
   "aggregations.search.results.head": "Aggregations Search Results",
+  // "fonds.searchHomePage.results.head": "Fonds Search Results",
+  // TODO New key - Add a translation
+  "fonds.searchHomePage.results.head": "Fonds Search Results",
+  // "journalfondsHomePage.search.results.head": "Journal Fonds Search Results",
+  // TODO New key - Add a translation
+  "journalfondsHomePage.search.results.head": "Journal Fonds Search Results",
+  // "aggregationsHomePage.search.results.head": "Aggregations Search Results",
+  // TODO New key - Add a translation
+  "aggregationsHomePage.search.results.head": "Aggregations Search Results",
   // "path.search.results.head": "Paths Search Results",
   // TODO New key - Add a translation
   "path.search.results.head": "Paths Search Results",
@@ -13288,10 +13664,6 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.opera": "Opera Details",
 
-  // "submission.sections.submit.progressbar.describe.coin": "Coin Details",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.coin": "Coin Details",
-
   // "submission.sections.submit.progressbar.describe.picture": "Picture Details",
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.picture": "Picture Details",
@@ -13335,6 +13707,66 @@
   // "submission.sections.submit.progressbar.describe.journal_file": "Journal File Details",
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.journal_file": "Journal File Details",
+
+  // "submission.sections.submit.progressbar.describe.books": "Book basic information",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.books": "Book basic information",
+
+  // "submission.sections.submit.progressbar.describe.coin": "Coin basic information",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.coin": "Coin basic information",
+
+  // "submission.sections.submit.progressbar.describe.coin-glam-bibliography": "Coin bibliographic details",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.coin-glam-bibliography": "Coin bibliographic details",
+
+  // "submission.sections.submit.progressbar.describe.artworks": "Artwork basic information",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.artworks": "Artwork basic information",
+
+  // "submission.sections.submit.progressbar.describe.artworks-glam-bibliography": "Artwork bibliographic details",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.artworks-glam-bibliography": "Artwork bibliographic details",
+
+  // "submission.sections.submit.progressbar.describe.artworks-dc-contributor-author": "Authors basic information",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.artworks-dc-contributor-author": "Authors basic information",
+
+  // "submission.sections.submit.progressbar.describe.musical_librettos": "Musical Libretto basic information",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.musical_librettos": "Musical Libretto basic information",
+
+  // "submission.sections.submit.progressbar.describe.scientific_materials": "Scientific Material basic information",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.scientific_materials": "Scientific Material basic information",
+
+  // "submission.sections.submit.progressbar.describe.scientific_materials-glam-bibliography": "Scientific Material bibliographic details",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.scientific_materials-glam-bibliography": "Scientific Material bibliographic details",
+
+  // "submission.sections.submit.progressbar.describe.scientific_materials-glam-inscription": "Inscription basic information",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.scientific_materials-glam-inscription": "Inscription basic information",
+
+  // "submission.sections.submit.progressbar.describe.scientific_materials-dc-contributor-author": "Authors basic information",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.scientific_materials-dc-contributor-author": "Authors basic information",
+
+  // "submission.sections.submit.progressbar.describe.bnm_scheme": "Bnm scheme basic information",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.bnm_scheme": "Bnm scheme basic information",
+
+  // "submission.sections.submit.progressbar.describe.bnm_scheme_physicalproperties": "Physical Properties",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.bnm_scheme_physicalproperties": "Physical Properties",
+
+  // "submission.sections.submit.progressbar.describe.bnm_scheme_geolocalization": "Geolocation",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.bnm_scheme_geolocalization": "Geolocation",
+
+  // "submission.sections.submit.progressbar.describe.bnm_scheme_relation": "Relationships",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.bnm_scheme_relation": "Relationships",
 
   // "map.coordinates-invalid": "Coordinates are not valid",
   // TODO New key - Add a translation
@@ -13729,6 +14161,12 @@
   // TODO New key - Add a translation
   "external-login-page.confirm-email.create-account.notifications.error.no-netId": "Something went wrong with this email account. Try again or use a different method to login.",
 
+
+
+
+
+  // Layout - Common i18n keys: Metadata fallback values (not generated by CRIS layout tool)
+  // Layout - Autogenerated i18n keys: Tab headers
   // "layout.tab.header.Person.details": "Profile",
   // TODO New key - Add a translation
   "layout.tab.header.Person.details": "Profile",
@@ -13750,6 +14188,7 @@
   // "layout.tab.header.Person.relations": "Relations",
   // TODO New key - Add a translation
   "layout.tab.header.Person.relations": "Relations",
+
   // "layout.tab.header.OrgUnit.maininformation": "Information",
   // TODO New key - Add a translation
   "layout.tab.header.OrgUnit.maininformation": "Information",
@@ -13771,6 +14210,7 @@
   // "layout.tab.header.OrgUnit.relations": "Relations",
   // TODO New key - Add a translation
   "layout.tab.header.OrgUnit.relations": "Relations",
+
   // "layout.tab.header.Project.maininformation": "Information",
   // TODO New key - Add a translation
   "layout.tab.header.Project.maininformation": "Information",
@@ -13780,6 +14220,7 @@
   // "layout.tab.header.Project.relations": "Relations",
   // TODO New key - Add a translation
   "layout.tab.header.Project.relations": "Relations",
+
   // "layout.tab.header.Event.details": "Details",
   // TODO New key - Add a translation
   "layout.tab.header.Event.details": "Details",
@@ -13795,9 +14236,11 @@
   // "layout.tab.header.Event.relations": "Relations",
   // TODO New key - Add a translation
   "layout.tab.header.Event.relations": "Relations",
+
   // "layout.tab.header.Publication.details": "Details",
   // TODO New key - Add a translation
   "layout.tab.header.Publication.details": "Details",
+
   // "layout.tab.header.Fonds.details": "Fonds Details",
   // TODO New key - Add a translation
   "layout.tab.header.Fonds.details": "Fonds Details",
@@ -13819,6 +14262,7 @@
   // "layout.tab.header.Fonds.relations": "Relations",
   // TODO New key - Add a translation
   "layout.tab.header.Fonds.relations": "Relations",
+
   // "layout.tab.header.Place.details": "Place Details",
   // TODO New key - Add a translation
   "layout.tab.header.Place.details": "Place Details",
@@ -13840,6 +14284,7 @@
   // "layout.tab.header.Place.relations": "Relations",
   // TODO New key - Add a translation
   "layout.tab.header.Place.relations": "Relations",
+
   // "layout.tab.header.Family.details": "Family details",
   // TODO New key - Add a translation
   "layout.tab.header.Family.details": "Family details",
@@ -13849,6 +14294,7 @@
   // "layout.tab.header.Family.relations": "Relations",
   // TODO New key - Add a translation
   "layout.tab.header.Family.relations": "Relations",
+
   // "layout.tab.header.JournalFonds.details": "Journal Fonds Details",
   // TODO New key - Add a translation
   "layout.tab.header.JournalFonds.details": "Journal Fonds Details",
@@ -13861,21 +14307,25 @@
   // "layout.tab.header.JournalFonds.relations": "Relations",
   // TODO New key - Add a translation
   "layout.tab.header.JournalFonds.relations": "Relations",
+
   // "layout.tab.header.News.details": "Details",
   // TODO New key - Add a translation
   "layout.tab.header.News.details": "Details",
+
   // "layout.tab.header.Path.details": "Path Details",
   // TODO New key - Add a translation
   "layout.tab.header.Path.details": "Path Details",
   // "layout.tab.header.Path.relations": "Relations",
   // TODO New key - Add a translation
   "layout.tab.header.Path.relations": "Relations",
+
   // "layout.tab.header.ArchivalMaterial.details": "Details",
   // TODO New key - Add a translation
   "layout.tab.header.ArchivalMaterial.details": "Details",
   // "layout.tab.header.ArchivalMaterial.relations": "Relations",
   // TODO New key - Add a translation
   "layout.tab.header.ArchivalMaterial.relations": "Relations",
+
   // "layout.tab.header.Aggregation.details": "Aggregation Details",
   // TODO New key - Add a translation
   "layout.tab.header.Aggregation.details": "Aggregation Details",
@@ -13888,28 +14338,41 @@
   // "layout.tab.header.Aggregation.children": "Aggregation’s Children",
   // TODO New key - Add a translation
   "layout.tab.header.Aggregation.children": "Aggregation’s Children",
+  // "layout.tab.header.Aggregation.relations": "Relations",
+  // TODO New key - Add a translation
+  "layout.tab.header.Aggregation.relations": "Relations",
+
   // "layout.tab.header.StaticPage.details": "Details",
   // TODO New key - Add a translation
   "layout.tab.header.StaticPage.details": "Details",
+
   // "layout.tab.header.JournalFile.details": "Details",
   // TODO New key - Add a translation
   "layout.tab.header.JournalFile.details": "Details",
   // "layout.tab.header.JournalFile.relations": "Relations",
   // TODO New key - Add a translation
   "layout.tab.header.JournalFile.relations": "Relations",
+
   // "layout.tab.header.Picture.details": "Details",
   // TODO New key - Add a translation
   "layout.tab.header.Picture.details": "Details",
   // "layout.tab.header.Picture.relations": "Relations",
   // TODO New key - Add a translation
   "layout.tab.header.Picture.relations": "Relations",
+
   // "layout.tab.header.Publication.relations": "Relations",
   // TODO New key - Add a translation
   "layout.tab.header.Publication.relations": "Relations",
+
   // "layout.tab.header.AudioVideo.details": "Details",
   // TODO New key - Add a translation
   "layout.tab.header.AudioVideo.details": "Details",
+  // "layout.tab.header.Opera.details": "Details",
+  // TODO New key - Add a translation
+  "layout.tab.header.Opera.details": "Details",
 
+
+  // Layout - Autogenerated i18n keys: box headers
   // "layout.box.header.Person.profile": "Profile",
   // TODO New key - Add a translation
   "layout.box.header.Person.profile": "Profile",
@@ -13925,6 +14388,9 @@
   // "layout.box.header.Person.fonds": "Fonds Parent",
   // TODO New key - Add a translation
   "layout.box.header.Person.fonds": "Fonds Parent",
+  // "layout.box.header.Person.networklab": "Network Lab",
+  // TODO New key - Add a translation
+  "layout.box.header.Person.networklab": "Network Lab",
   // "layout.box.header.Person.personlinks": "Person Links",
   // TODO New key - Add a translation
   "layout.box.header.Person.personlinks": "Person Links",
@@ -13940,6 +14406,7 @@
   // "layout.box.header.Person.relationpath": "Paths",
   // TODO New key - Add a translation
   "layout.box.header.Person.relationpath": "Paths",
+
   // "layout.box.header.OrgUnit.details": "Details",
   // TODO New key - Add a translation
   "layout.box.header.OrgUnit.details": "Details",
@@ -13976,6 +14443,7 @@
   // "layout.box.header.OrgUnit.relationpath": "Paths",
   // TODO New key - Add a translation
   "layout.box.header.OrgUnit.relationpath": "Paths",
+
   // "layout.box.header.Project.primarydata": "Primary Data",
   // TODO New key - Add a translation
   "layout.box.header.Project.primarydata": "Primary Data",
@@ -13991,6 +14459,7 @@
   // "layout.box.header.Project.relationpath": "Paths",
   // TODO New key - Add a translation
   "layout.box.header.Project.relationpath": "Paths",
+
   // "layout.box.header.Event.details": "Details",
   // TODO New key - Add a translation
   "layout.box.header.Event.details": "Details",
@@ -14009,9 +14478,11 @@
   // "layout.box.header.Event.relationpath": "Paths",
   // TODO New key - Add a translation
   "layout.box.header.Event.relationpath": "Paths",
+
   // "layout.box.header.Publication.details": "Details",
   // TODO New key - Add a translation
   "layout.box.header.Publication.details": "Details",
+
   // "layout.box.header.Fonds.fondsdescription": "Description",
   // TODO New key - Add a translation
   "layout.box.header.Fonds.fondsdescription": "Description",
@@ -14039,6 +14510,7 @@
   // "layout.box.header.Fonds.relationpath": "Paths",
   // TODO New key - Add a translation
   "layout.box.header.Fonds.relationpath": "Paths",
+
   // "layout.box.header.Place.placedescription": "Description",
   // TODO New key - Add a translation
   "layout.box.header.Place.placedescription": "Description",
@@ -14066,6 +14538,7 @@
   // "layout.box.header.Place.relationpath": "Paths",
   // TODO New key - Add a translation
   "layout.box.header.Place.relationpath": "Paths",
+
   // "layout.box.header.Family.familydescription": "Description",
   // TODO New key - Add a translation
   "layout.box.header.Family.familydescription": "Description",
@@ -14081,6 +14554,7 @@
   // "layout.box.header.Family.relationpath": "Paths",
   // TODO New key - Add a translation
   "layout.box.header.Family.relationpath": "Paths",
+
   // "layout.box.header.JournalFonds.journalfondsdescription": "Description",
   // TODO New key - Add a translation
   "layout.box.header.JournalFonds.journalfondsdescription": "Description",
@@ -14099,15 +14573,18 @@
   // "layout.box.header.JournalFonds.relationparent": "Parent",
   // TODO New key - Add a translation
   "layout.box.header.JournalFonds.relationparent": "Parent",
+
   // "layout.box.header.News.newsdescription": "Description",
   // TODO New key - Add a translation
   "layout.box.header.News.newsdescription": "Description",
+
   // "layout.box.header.Path.pathpublications": "Digital Resources",
   // TODO New key - Add a translation
   "layout.box.header.Path.pathpublications": "Digital Resources",
   // "layout.box.header.Path.relationaggregation": "Aggregations",
   // TODO New key - Add a translation
   "layout.box.header.Path.relationaggregation": "Aggregations",
+
   // "layout.box.header.ArchivalMaterial.details": "Description",
   // TODO New key - Add a translation
   "layout.box.header.ArchivalMaterial.details": "Description",
@@ -14135,6 +14612,7 @@
   // "layout.box.header.ArchivalMaterial.relationplace": "Places",
   // TODO New key - Add a translation
   "layout.box.header.ArchivalMaterial.relationplace": "Places",
+
   // "layout.box.header.Aggregation.aggregationdescription": "Description",
   // TODO New key - Add a translation
   "layout.box.header.Aggregation.aggregationdescription": "Description",
@@ -14147,9 +14625,14 @@
   // "layout.box.header.Aggregation.children": "Aggregation’s Children",
   // TODO New key - Add a translation
   "layout.box.header.Aggregation.children": "Aggregation’s Children",
+  // "layout.box.header.Aggregation.aggregationparent": "Aggregation’s Parent",
+  // TODO New key - Add a translation
+  "layout.box.header.Aggregation.aggregationparent": "Aggregation’s Parent",
+
   // "layout.box.header.StaticPage.details": "Description",
   // TODO New key - Add a translation
   "layout.box.header.StaticPage.details": "Description",
+
   // "layout.box.header.JournalFile.details": "Description",
   // TODO New key - Add a translation
   "layout.box.header.JournalFile.details": "Description",
@@ -14165,6 +14648,7 @@
   // "layout.box.header.JournalFile.relationisreferencedby": "Related Documents",
   // TODO New key - Add a translation
   "layout.box.header.JournalFile.relationisreferencedby": "Related Documents",
+
   // "layout.box.header.Picture.details": "Description",
   // TODO New key - Add a translation
   "layout.box.header.Picture.details": "Description",
@@ -14186,6 +14670,7 @@
   // "layout.box.header.Picture.relationispartofcontainer": "Is part of",
   // TODO New key - Add a translation
   "layout.box.header.Picture.relationispartofcontainer": "Is part of",
+
   // "layout.box.header.Publication.relationpath": "Path",
   // TODO New key - Add a translation
   "layout.box.header.Publication.relationpath": "Path",
@@ -14234,1154 +14719,1343 @@
   // "layout.box.header.Publication.relationhaspart": "Contains",
   // TODO New key - Add a translation
   "layout.box.header.Publication.relationhaspart": "Contains",
+
   // "layout.box.header.AudioVideo.details": "Details",
   // TODO New key - Add a translation
   "layout.box.header.AudioVideo.details": "Details",
+  // "layout.box.header.Opera.details": "Details",
+  // TODO New key - Add a translation
+  "layout.box.header.Opera.details": "Details",
 
-  // "layout.field.label.Person.crisrp.name.translated": "Translated Name",
+
+  // Layout - Autogenerated i18n keys: metadata
+  // "layout.field.label.Person.[crisrp.name.translated]": "Translated Name",
   // TODO New key - Add a translation
-  "layout.field.label.Person.crisrp.name.translated": "Translated Name",
-  // "layout.field.label.Person.crisrp.name.variant": "Alternative Names",
+  "layout.field.label.Person.[crisrp.name.translated]": "Translated Name",
+  // "layout.field.label.Person.[crisrp.name.variant]": "Alternative Names",
   // TODO New key - Add a translation
-  "layout.field.label.Person.crisrp.name.variant": "Alternative Names",
-  // "layout.field.label.Person.glamperson.gender": "Gender",
+  "layout.field.label.Person.[crisrp.name.variant]": "Alternative Names",
+  // "layout.field.label.Person.[glamperson.gender]": "Gender",
   // TODO New key - Add a translation
-  "layout.field.label.Person.glamperson.gender": "Gender",
-  // "layout.field.label.Person.glamperson.role": "Role",
+  "layout.field.label.Person.[glamperson.gender]": "Gender",
+  // "layout.field.label.Person.[glamperson.role]": "Role",
   // TODO New key - Add a translation
-  "layout.field.label.Person.glamperson.role": "Role",
-  // "layout.field.label.Person.glamperson.nationality": "Nationality",
+  "layout.field.label.Person.[glamperson.role]": "Role",
+  // "layout.field.label.Person.[glamperson.nationality]": "Nationality",
   // TODO New key - Add a translation
-  "layout.field.label.Person.glamperson.nationality": "Nationality",
-  // "layout.field.label.Person.person.birthDate": "Birth Date",
+  "layout.field.label.Person.[glamperson.nationality]": "Nationality",
+  // "layout.field.label.Person.[person.birthDate]": "Birth Date",
   // TODO New key - Add a translation
-  "layout.field.label.Person.person.birthDate": "Birth Date",
-  // "layout.field.label.Person.glamperson.deathDate": "Death Date",
+  "layout.field.label.Person.[person.birthDate]": "Birth Date",
+  // "layout.field.label.Person.[glamperson.deathDate]": "Death Date",
   // TODO New key - Add a translation
-  "layout.field.label.Person.glamperson.deathDate": "Death Date",
-  // "layout.field.label.Person.glamperson.birthYear": "Birth Year",
+  "layout.field.label.Person.[glamperson.deathDate]": "Death Date",
+  // "layout.field.label.Person.[glamperson.birthYear]": "Birth Year",
   // TODO New key - Add a translation
-  "layout.field.label.Person.glamperson.birthYear": "Birth Year",
-  // "layout.field.label.Person.glamperson.deathYear": "Death Year",
+  "layout.field.label.Person.[glamperson.birthYear]": "Birth Year",
+  // "layout.field.label.Person.[glamperson.deathYear]": "Death Year",
   // TODO New key - Add a translation
-  "layout.field.label.Person.glamperson.deathYear": "Death Year",
-  // "layout.field.label.Person.glamperson.birthPlace": "Birth Place",
+  "layout.field.label.Person.[glamperson.deathYear]": "Death Year",
+  // "layout.field.label.Person.[glamperson.birthPlace]": "Birth Place",
   // TODO New key - Add a translation
-  "layout.field.label.Person.glamperson.birthPlace": "Birth Place",
-  // "layout.field.label.Person.glamperson.deathPlace": "Death Place",
+  "layout.field.label.Person.[glamperson.birthPlace]": "Birth Place",
+  // "layout.field.label.Person.[glamperson.deathPlace]": "Death Place",
   // TODO New key - Add a translation
-  "layout.field.label.Person.glamperson.deathPlace": "Death Place",
-  // "layout.field.label.Person.dc.description.abstract": "Abstract",
+  "layout.field.label.Person.[glamperson.deathPlace]": "Death Place",
+  // "layout.field.label.Person.[dc.description.abstract]": "Abstract",
   // TODO New key - Add a translation
-  "layout.field.label.Person.dc.description.abstract": "Abstract",
-  // "layout.field.label.Person.glamperson.activityPeriod": "Activity Period",
+  "layout.field.label.Person.[dc.description.abstract]": "Abstract",
+  // "layout.field.label.Person.[dc.relation.event]": "Partecipated in",
   // TODO New key - Add a translation
-  "layout.field.label.Person.glamperson.activityPeriod": "Activity Period",
-  // "layout.field.label.Person.glamperson.biography": "Biography",
+  "layout.field.label.Person.[dc.relation.event]": "Partecipated in",
+  // "layout.field.label.Person.[glamperson.activityPeriod]": "Activity Period",
   // TODO New key - Add a translation
-  "layout.field.label.Person.glamperson.biography": "Biography",
-  // "layout.field.label.Person.dc.relation.opac": "OPAC Link",
+  "layout.field.label.Person.[glamperson.activityPeriod]": "Activity Period",
+  // "layout.field.label.Person.[glamperson.biography]": "Biography",
   // TODO New key - Add a translation
-  "layout.field.label.Person.dc.relation.opac": "OPAC Link",
-  // "layout.field.label.Person.glamperson.link.otherbibliographic": "Other Bibliographic Links",
+  "layout.field.label.Person.[glamperson.biography]": "Biography",
+  // "layout.field.label.Person.[dc.relation.aggregation]": "Aggregation",
   // TODO New key - Add a translation
-  "layout.field.label.Person.glamperson.link.otherbibliographic": "Other Bibliographic Links",
-  // "layout.field.label.Person.glamperson.link.dbi": "DBI Link",
+  "layout.field.label.Person.[dc.relation.aggregation]": "Aggregation",
+  // "layout.field.label.Person.[dc.relation.path]": "Path",
   // TODO New key - Add a translation
-  "layout.field.label.Person.glamperson.link.dbi": "DBI Link",
-  // "layout.field.label.Person.glamperson.link.ei": "EI Link",
+  "layout.field.label.Person.[dc.relation.path]": "Path",
+  // "layout.field.label.Person.[dc.relation.opac]": "OPAC Link",
   // TODO New key - Add a translation
-  "layout.field.label.Person.glamperson.link.ei": "EI Link",
-  // "layout.field.label.Person.glam.link.wikipedia": "Wikipedia Link",
+  "layout.field.label.Person.[dc.relation.opac]": "OPAC Link",
+  // "layout.field.label.Person.[glamperson.link.otherbibliographic]": "Other Bibliographic Links",
   // TODO New key - Add a translation
-  "layout.field.label.Person.glam.link.wikipedia": "Wikipedia Link",
-  // "layout.field.label.Person.glam.link.dbpedia": "Dbpedia Link",
+  "layout.field.label.Person.[glamperson.link.otherbibliographic]": "Other Bibliographic Links",
+  // "layout.field.label.Person.[glamperson.link.dbi]": "DBI Link",
   // TODO New key - Add a translation
-  "layout.field.label.Person.glam.link.dbpedia": "Dbpedia Link",
-  // "layout.field.label.Person.glam.link.viaf": "VIAF Link",
+  "layout.field.label.Person.[glamperson.link.dbi]": "DBI Link",
+  // "layout.field.label.Person.[glamperson.link.ei]": "EI Link",
   // TODO New key - Add a translation
-  "layout.field.label.Person.glam.link.viaf": "VIAF Link",
-  // "layout.field.label.Person.glam.link.eb": "EB Link",
+  "layout.field.label.Person.[glamperson.link.ei]": "EI Link",
+  // "layout.field.label.Person.[glam.link.wikipedia]": "Wikipedia Link",
   // TODO New key - Add a translation
-  "layout.field.label.Person.glam.link.eb": "EB Link",
-  // "layout.field.label.Person.glamperson.link.ulan": "Getty ULAN Link",
+  "layout.field.label.Person.[glam.link.wikipedia]": "Wikipedia Link",
+  // "layout.field.label.Person.[glam.link.dbpedia]": "Dbpedia Link",
   // TODO New key - Add a translation
-  "layout.field.label.Person.glamperson.link.ulan": "Getty ULAN Link",
-  // "layout.field.label.Person.dc.relation.otherlinks": "Other Links",
+  "layout.field.label.Person.[glam.link.dbpedia]": "Dbpedia Link",
+  // "layout.field.label.Person.[glam.link.viaf]": "VIAF Link",
   // TODO New key - Add a translation
-  "layout.field.label.Person.dc.relation.otherlinks": "Other Links",
-  // "layout.field.label.Person.dc.relation.event": "Events",
+  "layout.field.label.Person.[glam.link.viaf]": "VIAF Link",
+  // "layout.field.label.Person.[glam.link.eb]": "EB Link",
   // TODO New key - Add a translation
-  "layout.field.label.Person.dc.relation.event": "Events",
-  // "layout.field.label.Person.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.Person.[glam.link.eb]": "EB Link",
+  // "layout.field.label.Person.[glamperson.link.ulan]": "Getty ULAN Link",
   // TODO New key - Add a translation
-  "layout.field.label.Person.dc.relation.aggregation": "Aggregations",
-  // "layout.field.label.Person.dc.relation.path": "Paths",
+  "layout.field.label.Person.[glamperson.link.ulan]": "Getty ULAN Link",
+  // "layout.field.label.Person.[dc.relation.otherlinks]": "Other Links",
   // TODO New key - Add a translation
-  "layout.field.label.Person.dc.relation.path": "Paths",
-  // "layout.field.label.OrgUnit.organization.parentOrganization": "Parent Organisation",
+  "layout.field.label.Person.[dc.relation.otherlinks]": "Other Links",
+
+  // "layout.field.label.OrgUnit.[organization.parentOrganization]": "Parent Organisation",
   // TODO New key - Add a translation
-  "layout.field.label.OrgUnit.organization.parentOrganization": "Parent Organisation",
-  // "layout.field.label.OrgUnit.crisou.director": "Director",
+  "layout.field.label.OrgUnit.[organization.parentOrganization]": "Parent Organisation",
+  // "layout.field.label.OrgUnit.[crisou.director]": "Director",
   // TODO New key - Add a translation
-  "layout.field.label.OrgUnit.crisou.director": "Director",
-  // "layout.field.label.OrgUnit.organization.foundingDate": "Founding Date",
+  "layout.field.label.OrgUnit.[crisou.director]": "Director",
+  // "layout.field.label.OrgUnit.[organization.foundingDate]": "Founding Date",
   // TODO New key - Add a translation
-  "layout.field.label.OrgUnit.organization.foundingDate": "Founding Date",
-  // "layout.field.label.OrgUnit.dc.description.abstract": "Description",
+  "layout.field.label.OrgUnit.[organization.foundingDate]": "Founding Date",
+  // "layout.field.label.OrgUnit.[dc.description.abstract]": "Description",
   // TODO New key - Add a translation
-  "layout.field.label.OrgUnit.dc.description.abstract": "Description",
-  // "layout.field.label.OrgUnit.organization.address.addressLocality": "City",
+  "layout.field.label.OrgUnit.[dc.description.abstract]": "Description",
+  // "layout.field.label.OrgUnit.[organization.address.addressLocality]": "City",
   // TODO New key - Add a translation
-  "layout.field.label.OrgUnit.organization.address.addressLocality": "City",
-  // "layout.field.label.OrgUnit.organization.address.addressCountry": "Country",
+  "layout.field.label.OrgUnit.[organization.address.addressLocality]": "City",
+  // "layout.field.label.OrgUnit.[organization.address.addressCountry]": "Country",
   // TODO New key - Add a translation
-  "layout.field.label.OrgUnit.organization.address.addressCountry": "Country",
-  // "layout.field.label.OrgUnit.glamou.address": "Address",
+  "layout.field.label.OrgUnit.[organization.address.addressCountry]": "Country",
+  // "layout.field.label.OrgUnit.[glamou.address]": "Address",
   // TODO New key - Add a translation
-  "layout.field.label.OrgUnit.glamou.address": "Address",
-  // "layout.field.label.OrgUnit.glamou.address.postcode": "Postal Code",
+  "layout.field.label.OrgUnit.[glamou.address]": "Address",
+  // "layout.field.label.OrgUnit.[glamou.address.postcode]": "Postal Code",
   // TODO New key - Add a translation
-  "layout.field.label.OrgUnit.glamou.address.postcode": "Postal Code",
-  // "layout.field.label.OrgUnit.dc.type": "Type",
+  "layout.field.label.OrgUnit.[glamou.address.postcode]": "Postal Code",
+  // "layout.field.label.OrgUnit.[dc.type]": "Type",
   // TODO New key - Add a translation
-  "layout.field.label.OrgUnit.dc.type": "Type",
-  // "layout.field.label.OrgUnit.glamou.accessibility": "Accessibility",
+  "layout.field.label.OrgUnit.[dc.type]": "Type",
+  // "layout.field.label.OrgUnit.[glamou.accessibility]": "Accessibility",
   // TODO New key - Add a translation
-  "layout.field.label.OrgUnit.glamou.accessibility": "Accessibility",
-  // "layout.field.label.OrgUnit.glamou.services": "Services",
+  "layout.field.label.OrgUnit.[glamou.accessibility]": "Accessibility",
+  // "layout.field.label.OrgUnit.[glamou.services]": "Services",
   // TODO New key - Add a translation
-  "layout.field.label.OrgUnit.glamou.services": "Services",
-  // "layout.field.label.OrgUnit.glamou.collectingPolicies": "Collecting Policies",
+  "layout.field.label.OrgUnit.[glamou.services]": "Services",
+  // "layout.field.label.OrgUnit.[glamou.collectingPolicies]": "Collecting Policies",
   // TODO New key - Add a translation
-  "layout.field.label.OrgUnit.glamou.collectingPolicies": "Collecting Policies",
-  // "layout.field.label.OrgUnit.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.OrgUnit.[glamou.collectingPolicies]": "Collecting Policies",
+  // "layout.field.label.OrgUnit.[dc.relation.aggregation]": "Aggregation",
   // TODO New key - Add a translation
-  "layout.field.label.OrgUnit.dc.relation.aggregation": "Aggregations",
-  // "layout.field.label.OrgUnit.dc.relation.path": "Paths",
+  "layout.field.label.OrgUnit.[dc.relation.aggregation]": "Aggregation",
+  // "layout.field.label.OrgUnit.[dc.relation.path]": "Path",
   // TODO New key - Add a translation
-  "layout.field.label.OrgUnit.dc.relation.path": "Paths",
-  // "layout.field.label.Project.oairecerif.acronym": "Acronym",
+  "layout.field.label.OrgUnit.[dc.relation.path]": "Path",
+
+  // "layout.field.label.Project.[oairecerif.acronym]": "Acronym",
   // TODO New key - Add a translation
-  "layout.field.label.Project.oairecerif.acronym": "Acronym",
-  // "layout.field.label.Project.crispj.coordinator": "Consortium Coordinator",
+  "layout.field.label.Project.[oairecerif.acronym]": "Acronym",
+  // "layout.field.label.Project.[crispj.coordinator]": "Consortium Coordinator",
   // TODO New key - Add a translation
-  "layout.field.label.Project.crispj.coordinator": "Consortium Coordinator",
-  // "layout.field.label.Project.oairecerif.internalid": "Internal ID",
+  "layout.field.label.Project.[crispj.coordinator]": "Consortium Coordinator",
+  // "layout.field.label.Project.[oairecerif.internalid]": "Internal ID",
   // TODO New key - Add a translation
-  "layout.field.label.Project.oairecerif.internalid": "Internal ID",
-  // "layout.field.label.Project.crispj.partnerou": "Partner Organisations",
+  "layout.field.label.Project.[oairecerif.internalid]": "Internal ID",
+  // "layout.field.label.Project.[crispj.partnerou]": "Partner Organisations",
   // TODO New key - Add a translation
-  "layout.field.label.Project.crispj.partnerou": "Partner Organisations",
-  // "layout.field.label.Project.crispj.investigator": "Principal Investigator",
+  "layout.field.label.Project.[crispj.partnerou]": "Partner Organisations",
+  // "layout.field.label.Project.[crispj.investigator]": "Principal Investigator",
   // TODO New key - Add a translation
-  "layout.field.label.Project.crispj.investigator": "Principal Investigator",
-  // "layout.field.label.Project.crispj.openaireid": "OpenAIRE ID",
+  "layout.field.label.Project.[crispj.investigator]": "Principal Investigator",
+  // "layout.field.label.Project.[crispj.openaireid]": "OpenAIRE ID",
   // TODO New key - Add a translation
-  "layout.field.label.Project.crispj.openaireid": "OpenAIRE ID",
-  // "layout.field.label.Project.crispj.organization": "Organisations",
+  "layout.field.label.Project.[crispj.openaireid]": "OpenAIRE ID",
+  // "layout.field.label.Project.[crispj.organization]": "Organisations",
   // TODO New key - Add a translation
-  "layout.field.label.Project.crispj.organization": "Organisations",
-  // "layout.field.label.Project.oairecerif.identifier.url": "Project Web Site",
+  "layout.field.label.Project.[crispj.organization]": "Organisations",
+  // "layout.field.label.Project.[oairecerif.identifier.url]": "Project Web Site",
   // TODO New key - Add a translation
-  "layout.field.label.Project.oairecerif.identifier.url": "Project Web Site",
-  // "layout.field.label.Project.oairecerif.oamandate": "OA Mandate",
+  "layout.field.label.Project.[oairecerif.identifier.url]": "Project Web Site",
+  // "layout.field.label.Project.[oairecerif.oamandate]": "OA Mandate",
   // TODO New key - Add a translation
-  "layout.field.label.Project.oairecerif.oamandate": "OA Mandate",
-  // "layout.field.label.Project.oairecerif.oamandate.url": "OA Mandate URL",
+  "layout.field.label.Project.[oairecerif.oamandate]": "OA Mandate",
+  // "layout.field.label.Project.[oairecerif.oamandate.url]": "OA Mandate URL",
   // TODO New key - Add a translation
-  "layout.field.label.Project.oairecerif.oamandate.url": "OA Mandate URL",
-  // "layout.field.label.Project.oairecerif.project.startDate": "Start Date",
+  "layout.field.label.Project.[oairecerif.oamandate.url]": "OA Mandate URL",
+  // "layout.field.label.Project.[oairecerif.project.startDate]": "Start Date",
   // TODO New key - Add a translation
-  "layout.field.label.Project.oairecerif.project.startDate": "Start Date",
-  // "layout.field.label.Project.oairecerif.project.endDate": "End Date",
+  "layout.field.label.Project.[oairecerif.project.startDate]": "Start Date",
+  // "layout.field.label.Project.[oairecerif.project.endDate]": "End Date",
   // TODO New key - Add a translation
-  "layout.field.label.Project.oairecerif.project.endDate": "End Date",
-  // "layout.field.label.Project.oairecerif.project.status": "Status",
+  "layout.field.label.Project.[oairecerif.project.endDate]": "End Date",
+  // "layout.field.label.Project.[oairecerif.project.status]": "Status",
   // TODO New key - Add a translation
-  "layout.field.label.Project.oairecerif.project.status": "Status",
-  // "layout.field.label.Project.crispj.coinvestigators": "Investigators",
+  "layout.field.label.Project.[oairecerif.project.status]": "Status",
+  // "layout.field.label.Project.[crispj.coinvestigators]": "Investigators",
   // TODO New key - Add a translation
-  "layout.field.label.Project.crispj.coinvestigators": "Investigators",
-  // "layout.field.label.Project.dc.type": "Type",
+  "layout.field.label.Project.[crispj.coinvestigators]": "Investigators",
+  // "layout.field.label.Project.[dc.type]": "Type",
   // TODO New key - Add a translation
-  "layout.field.label.Project.dc.type": "Type",
-  // "layout.field.label.Project.dc.description.abstract": "Description",
+  "layout.field.label.Project.[dc.type]": "Type",
+  // "layout.field.label.Project.[dc.description.abstract]": "Description",
   // TODO New key - Add a translation
-  "layout.field.label.Project.dc.description.abstract": "Description",
-  // "layout.field.label.Project.dc.subject": "Keywords",
+  "layout.field.label.Project.[dc.description.abstract]": "Description",
+  // "layout.field.label.Project.[dc.subject]": "Keywords",
   // TODO New key - Add a translation
-  "layout.field.label.Project.dc.subject": "Keywords",
-  // "layout.field.label.Project.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.Project.[dc.subject]": "Keywords",
+  // "layout.field.label.Project.[dc.relation.aggregation]": "Aggregation",
   // TODO New key - Add a translation
-  "layout.field.label.Project.dc.relation.aggregation": "Aggregations",
-  // "layout.field.label.Project.dc.relation.path": "Paths",
+  "layout.field.label.Project.[dc.relation.aggregation]": "Aggregation",
+  // "layout.field.label.Project.[dc.relation.path]": "Path",
   // TODO New key - Add a translation
-  "layout.field.label.Project.dc.relation.path": "Paths",
-  // "layout.field.label.Event.oairecerif.acronym": "Acronym",
+  "layout.field.label.Project.[dc.relation.path]": "Path",
+
+  // "layout.field.label.Event.[oairecerif.acronym]": "Acronym",
   // TODO New key - Add a translation
-  "layout.field.label.Event.oairecerif.acronym": "Acronym",
-  // "layout.field.label.Event.glamevent.variants": "Variants",
+  "layout.field.label.Event.[oairecerif.acronym]": "Acronym",
+  // "layout.field.label.Event.[glamevent.variants]": "Variants",
   // TODO New key - Add a translation
-  "layout.field.label.Event.glamevent.variants": "Variants",
-  // "layout.field.label.Event.dc.type": "Type",
+  "layout.field.label.Event.[glamevent.variants]": "Variants",
+  // "layout.field.label.Event.[dc.type]": "Type",
   // TODO New key - Add a translation
-  "layout.field.label.Event.dc.type": "Type",
-  // "layout.field.label.Event.oairecerif.event.startDate": "Start Date",
+  "layout.field.label.Event.[dc.type]": "Type",
+  // "layout.field.label.Event.[oairecerif.event.startDate]": "Start Date",
   // TODO New key - Add a translation
-  "layout.field.label.Event.oairecerif.event.startDate": "Start Date",
-  // "layout.field.label.Event.oairecerif.event.endDate": "End Date",
+  "layout.field.label.Event.[oairecerif.event.startDate]": "Start Date",
+  // "layout.field.label.Event.[oairecerif.event.endDate]": "End Date",
   // TODO New key - Add a translation
-  "layout.field.label.Event.oairecerif.event.endDate": "End Date",
-  // "layout.field.label.Event.oairecerif.event.place": "Location",
+  "layout.field.label.Event.[oairecerif.event.endDate]": "End Date",
+  // "layout.field.label.Event.[oairecerif.event.place]": "Location",
   // TODO New key - Add a translation
-  "layout.field.label.Event.oairecerif.event.place": "Location",
-  // "layout.field.label.Event.oairecerif.event.country": "Country",
+  "layout.field.label.Event.[oairecerif.event.place]": "Location",
+  // "layout.field.label.Event.[oairecerif.event.country]": "Country",
   // TODO New key - Add a translation
-  "layout.field.label.Event.oairecerif.event.country": "Country",
-  // "layout.field.label.Event.dc.description.abstract": "Abstract",
+  "layout.field.label.Event.[oairecerif.event.country]": "Country",
+  // "layout.field.label.Event.[dc.description.abstract]": "Abstract",
   // TODO New key - Add a translation
-  "layout.field.label.Event.dc.description.abstract": "Abstract",
-  // "layout.field.label.Event.dc.subject": "Keywords",
+  "layout.field.label.Event.[dc.description.abstract]": "Abstract",
+  // "layout.field.label.Event.[dc.subject]": "Keywords",
   // TODO New key - Add a translation
-  "layout.field.label.Event.dc.subject": "Keywords",
-  // "layout.field.label.Event.glam.link.wikipedia": "Wikipedia Link",
+  "layout.field.label.Event.[dc.subject]": "Keywords",
+  // "layout.field.label.Event.[dc.relation.aggregation]": "Aggregation",
   // TODO New key - Add a translation
-  "layout.field.label.Event.glam.link.wikipedia": "Wikipedia Link",
-  // "layout.field.label.Event.glam.link.dbpedia": "Dbpedia Link",
+  "layout.field.label.Event.[dc.relation.aggregation]": "Aggregation",
+  // "layout.field.label.Event.[dc.relation.path]": "Path",
   // TODO New key - Add a translation
-  "layout.field.label.Event.glam.link.dbpedia": "Dbpedia Link",
-  // "layout.field.label.Event.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.Event.[dc.relation.path]": "Path",
+  // "layout.field.label.Event.[glam.link.wikipedia]": "Wikipedia Link",
   // TODO New key - Add a translation
-  "layout.field.label.Event.dc.relation.aggregation": "Aggregations",
-  // "layout.field.label.Event.dc.relation.path": "Paths",
+  "layout.field.label.Event.[glam.link.wikipedia]": "Wikipedia Link",
+  // "layout.field.label.Event.[glam.link.dbpedia]": "Dbpedia Link",
   // TODO New key - Add a translation
-  "layout.field.label.Event.dc.relation.path": "Paths",
-  // "layout.field.label.Publication.dc.title.alternative": "Alternative Title",
+  "layout.field.label.Event.[glam.link.dbpedia]": "Dbpedia Link",
+
+  // "layout.field.label.Publication.[dc.title.alternative]": "Alternative Title",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.title.alternative": "Alternative Title",
-  // "layout.field.label.Publication.dc.identifier.isbn": "ISBN",
+  "layout.field.label.Publication.[dc.title.alternative]": "Alternative Title",
+  // "layout.field.label.Publication.[dc.identifier.isbn]": "ISBN",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.identifier.isbn": "ISBN",
-  // "layout.field.label.Publication.dc.identifier.issn": "ISSN",
+  "layout.field.label.Publication.[dc.identifier.isbn]": "ISBN",
+  // "layout.field.label.Publication.[dc.identifier.issn]": "ISSN",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.identifier.issn": "ISSN",
-  // "layout.field.label.Publication.dc.identifier.bid": "BID",
+  "layout.field.label.Publication.[dc.identifier.issn]": "ISSN",
+  // "layout.field.label.Publication.[dc.identifier.bid]": "BID",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.identifier.bid": "BID",
-  // "layout.field.label.Publication.dc.identifier.doi": "DOI",
+  "layout.field.label.Publication.[dc.identifier.bid]": "BID",
+  // "layout.field.label.Publication.[dc.identifier.doi]": "DOI",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.identifier.doi": "DOI",
-  // "layout.field.label.Publication.dc.identifier.uri": "URI",
+  "layout.field.label.Publication.[dc.identifier.doi]": "DOI",
+  // "layout.field.label.Publication.[dc.identifier.uri]": "URI",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.identifier.uri": "URI",
-  // "layout.field.label.Publication.dc.identifier.nbn": "NBN:IT",
+  "layout.field.label.Publication.[dc.identifier.uri]": "URI",
+  // "layout.field.label.Publication.[dc.identifier.nbn]": "NBN:IT",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.identifier.nbn": "NBN:IT",
-  // "layout.field.label.Publication.dc.identifier.inventorynumber": "Inventory Number",
+  "layout.field.label.Publication.[dc.identifier.nbn]": "NBN:IT",
+  // "layout.field.label.Publication.[dc.identifier.inventorynumber]": "Inventory Number",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.identifier.inventorynumber": "Inventory Number",
-  // "layout.field.label.Publication.dc.identifier.shelfmark": "Shelfmark",
+  "layout.field.label.Publication.[dc.identifier.inventorynumber]": "Inventory Number",
+  // "layout.field.label.Publication.[dc.identifier.shelfmark]": "Shelfmark",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.identifier.shelfmark": "Shelfmark",
-  // "layout.field.label.Publication.dc.identifier.other": "Other Identifier",
+  "layout.field.label.Publication.[dc.identifier.shelfmark]": "Shelfmark",
+  // "layout.field.label.Publication.[dc.identifier.other]": "Other Identifier",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.identifier.other": "Other Identifier",
-  // "layout.field.label.Publication.dc.identifier.codex": "Codex",
+  "layout.field.label.Publication.[dc.identifier.other]": "Other Identifier",
+  // "layout.field.label.Publication.[dc.identifier.codex]": "Codex",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.identifier.codex": "Codex",
-  // "layout.field.label.Publication.dc.identifier.archivalunit": "Archival Unit",
+  "layout.field.label.Publication.[dc.identifier.codex]": "Codex",
+  // "layout.field.label.Publication.[dc.identifier.archivalunit]": "Archival Unit",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.identifier.archivalunit": "Archival Unit",
-  // "layout.field.label.Publication.dc.date.issued": "Date Issued",
+  "layout.field.label.Publication.[dc.identifier.archivalunit]": "Archival Unit",
+  // "layout.field.label.Publication.[dc.date.issued]": "Date Issued",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.date.issued": "Date Issued",
-  // "layout.field.label.Publication.dc.contributor.author": "Author(s)",
+  "layout.field.label.Publication.[dc.date.issued]": "Date Issued",
+  // "layout.field.label.Publication.[dc.contributor.author]": "Author(s)",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.contributor.author": "Author(s)",
-  // "layout.field.label.Publication.dc.contributor.contributor": "Secondary Author(s)",
+  "layout.field.label.Publication.[dc.contributor.author]": "Author(s)",
+  // "layout.field.label.Publication.[dc.contributor.contributor]": "Secondary Author(s)",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.contributor.contributor": "Secondary Author(s)",
-  // "layout.field.label.Publication.dc.type": "Type",
+  "layout.field.label.Publication.[dc.contributor.contributor]": "Secondary Author(s)",
+  // "layout.field.label.Publication.[dc.type]": "Type",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.type": "Type",
-  // "layout.field.label.Publication.dc.publisher": "Editor",
+  "layout.field.label.Publication.[dc.type]": "Type",
+  // "layout.field.label.Publication.[dc.format]": "Format",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.publisher": "Editor",
-  // "layout.field.label.Publication.dc.description.abstract": "Abstract",
+  "layout.field.label.Publication.[dc.format]": "Format",
+  // "layout.field.label.Publication.[dc.publisher]": "Editor",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.description.abstract": "Abstract",
-  // "layout.field.label.Publication.dc.description": "Physical Description",
+  "layout.field.label.Publication.[dc.publisher]": "Editor",
+  // "layout.field.label.Publication.[dc.source.content]": "Content",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.description": "Physical Description",
-  // "layout.field.label.Publication.dc.language.iso": "Language",
+  "layout.field.label.Publication.[dc.source.content]": "Content",
+  // "layout.field.label.Publication.[dc.relation.publication]": "Related Publications",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.language.iso": "Language",
-  // "layout.field.label.Publication.dc.subject": "Keywords",
+  "layout.field.label.Publication.[dc.relation.publication]": "Related Publications",
+  // "layout.field.label.Publication.[dc.relation.ispublishedin]": "Published in",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.subject": "Keywords",
-  // "layout.field.label.Publication.dc.rights.license": "License",
+  "layout.field.label.Publication.[dc.relation.ispublishedin]": "Published in",
+  // "layout.field.label.Publication.[dc.relation.references]": "References",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.rights.license": "License",
-  // "layout.field.label.Publication.dc.relation.ispartofseries": "Series",
+  "layout.field.label.Publication.[dc.relation.references]": "References",
+  // "layout.field.label.Publication.[dc.description.abstract]": "Abstract",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.ispartofseries": "Series",
-  // "layout.field.label.Publication.dc.relation.opac": "OPAC Link",
+  "layout.field.label.Publication.[dc.description.abstract]": "Abstract",
+  // "layout.field.label.Publication.[dc.description]": "Physical Description",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.opac": "OPAC Link",
-  // "layout.field.label.Publication.dc.relation.otherlinks": "Other Links",
+  "layout.field.label.Publication.[dc.description]": "Physical Description",
+  // "layout.field.label.Publication.[dc.language.iso]": "Language",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.otherlinks": "Other Links",
-  // "layout.field.label.Publication.dc.description.note": "Notes",
+  "layout.field.label.Publication.[dc.language.iso]": "Language",
+  // "layout.field.label.Publication.[dc.subject]": "Keywords",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.description.note": "Notes",
+  "layout.field.label.Publication.[dc.subject]": "Keywords",
+  // "layout.field.label.Publication.[dc.relation.place]": "Related Place(s)",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.relation.place]": "Related Place(s)",
+  // "layout.field.label.Publication.[dc.rights.license]": "License",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.rights.license]": "License",
+  // "layout.field.label.Publication.[dc.rights.holder]": "Holder",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.rights.holder]": "Holder",
+  // "layout.field.label.Publication.[dc.relation.aggregation]": "Aggregation",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.relation.aggregation]": "Aggregation",
+  // "layout.field.label.Publication.[dc.relation.path]": "Path",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.relation.path]": "Path",
+  // "layout.field.label.Publication.[dc.relation.isreferencedby]": "Related Documents",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.relation.isreferencedby]": "Related Documents",
+  // "layout.field.label.Publication.[dc.relation.ispartofseries]": "Series",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.relation.ispartofseries]": "Series",
+  // "layout.field.label.Publication.[dc.relation.project]": "Project",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.relation.project]": "Project",
+  // "layout.field.label.Publication.[dc.relation.conference]": "Event",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.relation.conference]": "Event",
+  // "layout.field.label.Publication.[dc.relation.fonds]": "Fonds",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.relation.fonds]": "Fonds",
+  // "layout.field.label.Publication.[dc.relation.person]": "Person",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.relation.person]": "Person",
+  // "layout.field.label.Publication.[dc.relation.opac]": "OPAC Link",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.relation.opac]": "OPAC Link",
+  // "layout.field.label.Publication.[dc.relation.otherlinks]": "Other Links",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.relation.otherlinks]": "Other Links",
+  // "layout.field.label.Publication.[dc.description.note]": "Notes",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.[dc.description.note]": "Notes",
   // "layout.field.label.Publication.BITSTREAM": "File(s)",
   // TODO New key - Add a translation
   "layout.field.label.Publication.BITSTREAM": "File(s)",
-  // "layout.field.label.Fonds.dc.title.alternative": "Alternative Title",
+  // "layout.field.label.Publication.[dc.relation.journalfonds]": "Journal Fonds ",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.dc.title.alternative": "Alternative Title",
-  // "layout.field.label.Fonds.dc.type": "Type",
+  "layout.field.label.Publication.[dc.relation.journalfonds]": "Journal Fonds ",
+  // "layout.field.label.Publication.[dc.relation.event]": "Events",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.dc.type": "Type",
-  // "layout.field.label.Fonds.dc.contributor.author": "Author(s)",
+  "layout.field.label.Publication.[dc.relation.event]": "Events",
+  // "layout.field.label.Publication.[glamjournalfonds.relation.journalfonds]": "Related Journal Fonds",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.dc.contributor.author": "Author(s)",
-  // "layout.field.label.Fonds.dc.contributor.corporatebody": "Corporate Body",
+  "layout.field.label.Publication.[glamjournalfonds.relation.journalfonds]": "Related Journal Fonds",
+  // "layout.field.label.Publication.[glamjournalfonds.relation.person]": "Related People",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.dc.contributor.corporatebody": "Corporate Body",
-  // "layout.field.label.Fonds.dc.contributor.family": "Family",
+  "layout.field.label.Publication.[glamjournalfonds.relation.person]": "Related People",
+  // "layout.field.label.Publication.[glamjournalfonds.parent]": "Parent",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.dc.contributor.family": "Family",
-  // "layout.field.label.Fonds.glamfonds.custodian": "Custodian",
+  "layout.field.label.Publication.[glamjournalfonds.parent]": "Parent",
+  // "layout.field.label.Publication.[glamfonds.parent]": "Parent",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.custodian": "Custodian",
-  // "layout.field.label.Fonds.glamfonds.length": "Length",
+  "layout.field.label.Publication.[glamfonds.parent]": "Parent",
+  // "layout.field.label.Publication.[dc.relation.ispartofcontainer]": "Is part of",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.length": "Length",
-  // "layout.field.label.Fonds.glamfonds.photographictype": "Photographic Type",
+  "layout.field.label.Publication.[dc.relation.ispartofcontainer]": "Is part of",
+  // "layout.field.label.Publication.[dc.relation.haspart]": "Contains",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.photographictype": "Photographic Type",
-  // "layout.field.label.Fonds.glamfonds.shelfmark": "Shelfmark",
+  "layout.field.label.Publication.[dc.relation.haspart]": "Contains",
+
+  // "layout.field.label.Fonds.[dc.title.alternative]": "Alternative Title",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.shelfmark": "Shelfmark",
-  // "layout.field.label.Fonds.dc.description.abstract": "Abstract",
+  "layout.field.label.Fonds.[dc.title.alternative]": "Alternative Title",
+  // "layout.field.label.Fonds.[dc.type]": "Type",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.dc.description.abstract": "Abstract",
-  // "layout.field.label.Fonds.dc.description": "Description",
+  "layout.field.label.Fonds.[dc.type]": "Type",
+  // "layout.field.label.Fonds.[dc.contributor.author]": "Author(s)",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.dc.description": "Description",
-  // "layout.field.label.Fonds.dc.format.extent": "Extent",
+  "layout.field.label.Fonds.[dc.contributor.author]": "Author(s)",
+  // "layout.field.label.Fonds.[dc.contributor.corporatebody]": "Corporate Body",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.dc.format.extent": "Extent",
-  // "layout.field.label.Fonds.glamfonds.history": "History",
+  "layout.field.label.Fonds.[dc.contributor.corporatebody]": "Corporate Body",
+  // "layout.field.label.Fonds.[dc.contributor.family]": "Family",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.history": "History",
-  // "layout.field.label.Fonds.dc.language.iso": "Language",
+  "layout.field.label.Fonds.[dc.contributor.family]": "Family",
+  // "layout.field.label.Fonds.[glamfonds.custodian]": "Custodian",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.dc.language.iso": "Language",
-  // "layout.field.label.Fonds.glamfonds.quantity": "Quantity",
+  "layout.field.label.Fonds.[glamfonds.custodian]": "Custodian",
+  // "layout.field.label.Fonds.[glamfonds.parent]": "Fonds Parent",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.quantity": "Quantity",
-  // "layout.field.label.Fonds.glamfonds.arrangement.note": "Arrangement Notes",
+  "layout.field.label.Fonds.[glamfonds.parent]": "Fonds Parent",
+  // "layout.field.label.Fonds.[glamfonds.length]": "Length",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.arrangement.note": "Arrangement Notes",
-  // "layout.field.label.Fonds.glamfonds.relation.materials": "Materials",
+  "layout.field.label.Fonds.[glamfonds.length]": "Length",
+  // "layout.field.label.Fonds.[glamfonds.photographictype]": "Photographic Type",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.relation.materials": "Materials",
-  // "layout.field.label.Fonds.glamfonds.accesscondition": "Access Condition",
+  "layout.field.label.Fonds.[glamfonds.photographictype]": "Photographic Type",
+  // "layout.field.label.Fonds.[glamfonds.shelfmark]": "Shelfmark",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.accesscondition": "Access Condition",
-  // "layout.field.label.Fonds.glamfonds.note": "Note",
+  "layout.field.label.Fonds.[glamfonds.shelfmark]": "Shelfmark",
+  // "layout.field.label.Fonds.[dc.description.abstract]": "Abstract",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.note": "Note",
-  // "layout.field.label.Fonds.glamfonds.preservation": "Preservation",
+  "layout.field.label.Fonds.[dc.description.abstract]": "Abstract",
+  // "layout.field.label.Fonds.[dc.description]": "Description",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.preservation": "Preservation",
-  // "layout.field.label.Fonds.glamfonds.preservation.note": "Preservation Notes",
+  "layout.field.label.Fonds.[dc.description]": "Description",
+  // "layout.field.label.Fonds.[dc.format.extent]": "Extent",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.preservation.note": "Preservation Notes",
-  // "layout.field.label.Fonds.glamfonds.usecondition": "Use Condition",
+  "layout.field.label.Fonds.[dc.format.extent]": "Extent",
+  // "layout.field.label.Fonds.[glamfonds.history]": "History",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.usecondition": "Use Condition",
-  // "layout.field.label.Fonds.glamfonds.usecondition.note": "Use Condition Notes",
+  "layout.field.label.Fonds.[glamfonds.history]": "History",
+  // "layout.field.label.Fonds.[dc.language.iso]": "Language",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.usecondition.note": "Use Condition Notes",
-  // "layout.field.label.Fonds.glamfonds.bibliography": "Bibliography",
+  "layout.field.label.Fonds.[dc.language.iso]": "Language",
+  // "layout.field.label.Fonds.[glamfonds.quantity]": "Quantity",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.bibliography": "Bibliography",
-  // "layout.field.label.Fonds.dc.identifier.uri": "URL",
+  "layout.field.label.Fonds.[glamfonds.quantity]": "Quantity",
+  // "layout.field.label.Fonds.[glamfonds.arrangement.note]": "Arrangement Notes",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.dc.identifier.uri": "URL",
-  // "layout.field.label.Fonds.glamfonds.editor": "Editor(s)",
+  "layout.field.label.Fonds.[glamfonds.arrangement.note]": "Arrangement Notes",
+  // "layout.field.label.Fonds.[glamfonds.relation.materials]": "Materials",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.editor": "Editor(s)",
-  // "layout.field.label.Fonds.glamfonds.enddate.format": "End Date Format",
+  "layout.field.label.Fonds.[glamfonds.relation.materials]": "Materials",
+  // "layout.field.label.Fonds.[glamfonds.accesscondition]": "Access Condition",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.enddate.format": "End Date Format",
-  // "layout.field.label.Fonds.glamfonds.enddate.from": "End Date From",
+  "layout.field.label.Fonds.[glamfonds.accesscondition]": "Access Condition",
+  // "layout.field.label.Fonds.[glamfonds.note]": "Note",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.enddate.from": "End Date From",
-  // "layout.field.label.Fonds.glamfonds.enddate.spec": "End Date Spec",
+  "layout.field.label.Fonds.[glamfonds.note]": "Note",
+  // "layout.field.label.Fonds.[glamfonds.preservation]": "Preservation",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.enddate.spec": "End Date Spec",
-  // "layout.field.label.Fonds.glamfonds.enddate.to": "End Date To",
+  "layout.field.label.Fonds.[glamfonds.preservation]": "Preservation",
+  // "layout.field.label.Fonds.[glamfonds.preservation.note]": "Preservation Notes",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.enddate.to": "End Date To",
-  // "layout.field.label.Fonds.glamfonds.enddate.valid": "End Date Valid",
+  "layout.field.label.Fonds.[glamfonds.preservation.note]": "Preservation Notes",
+  // "layout.field.label.Fonds.[glamfonds.usecondition]": "Use Condition",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.enddate.valid": "End Date Valid",
-  // "layout.field.label.Fonds.glamfonds.startdate.format": "Start Date Format",
+  "layout.field.label.Fonds.[glamfonds.usecondition]": "Use Condition",
+  // "layout.field.label.Fonds.[glamfonds.usecondition.note]": "Use Condition Notes",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.startdate.format": "Start Date Format",
-  // "layout.field.label.Fonds.glamfonds.startdate.from": "Start Date From",
+  "layout.field.label.Fonds.[glamfonds.usecondition.note]": "Use Condition Notes",
+  // "layout.field.label.Fonds.[glamfonds.bibliography]": "Bibliography",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.startdate.from": "Start Date From",
-  // "layout.field.label.Fonds.glamfonds.startdate.spec": "Start Date Spec",
+  "layout.field.label.Fonds.[glamfonds.bibliography]": "Bibliography",
+  // "layout.field.label.Fonds.[dc.relation.project]": "Project",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.startdate.spec": "Start Date Spec",
-  // "layout.field.label.Fonds.glamfonds.startdate.to": "Start Date To",
+  "layout.field.label.Fonds.[dc.relation.project]": "Project",
+  // "layout.field.label.Fonds.[dc.identifier.uri]": "URL",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.startdate.to": "Start Date To",
-  // "layout.field.label.Fonds.glamfonds.startdate.valid": "Start Date Valid",
+  "layout.field.label.Fonds.[dc.identifier.uri]": "URL",
+  // "layout.field.label.Fonds.[dc.relation.path]": "Path",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.startdate.valid": "Start Date Valid",
-  // "layout.field.label.Fonds.glam.index": "Fonds Index",
+  "layout.field.label.Fonds.[dc.relation.path]": "Path",
+  // "layout.field.label.Fonds.[glamfonds.editor]": "Editor(s)",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glam.index": "Fonds Index",
-  // "layout.field.label.Fonds.dc.relation.project": "Projects",
+  "layout.field.label.Fonds.[glamfonds.editor]": "Editor(s)",
+  // "layout.field.label.Fonds.[glamfonds.enddate.format]": "End Date Format",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.dc.relation.project": "Projects",
-  // "layout.field.label.Fonds.glamfonds.parent": "Parent",
+  "layout.field.label.Fonds.[glamfonds.enddate.format]": "End Date Format",
+  // "layout.field.label.Fonds.[glamfonds.enddate.from]": "End Date From",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.glamfonds.parent": "Parent",
-  // "layout.field.label.Fonds.dc.relation.path": "Paths",
+  "layout.field.label.Fonds.[glamfonds.enddate.from]": "End Date From",
+  // "layout.field.label.Fonds.[glamfonds.enddate.spec]": "End Date Spec",
   // TODO New key - Add a translation
-  "layout.field.label.Fonds.dc.relation.path": "Paths",
-  // "layout.field.label.Place.dc.title.alternative": "Alternative Title",
+  "layout.field.label.Fonds.[glamfonds.enddate.spec]": "End Date Spec",
+  // "layout.field.label.Fonds.[glamfonds.enddate.to]": "End Date To",
   // TODO New key - Add a translation
-  "layout.field.label.Place.dc.title.alternative": "Alternative Title",
-  // "layout.field.label.Place.glamplace.lat": "Latitude",
+  "layout.field.label.Fonds.[glamfonds.enddate.to]": "End Date To",
+  // "layout.field.label.Fonds.[glamfonds.enddate.valid]": "End Date Valid",
   // TODO New key - Add a translation
-  "layout.field.label.Place.glamplace.lat": "Latitude",
-  // "layout.field.label.Place.glamplace.long": "Longitude",
+  "layout.field.label.Fonds.[glamfonds.enddate.valid]": "End Date Valid",
+  // "layout.field.label.Fonds.[glamfonds.startdate.format]": "Start Date Format",
   // TODO New key - Add a translation
-  "layout.field.label.Place.glamplace.long": "Longitude",
-  // "layout.field.label.Place.dc.description.abstract": "Abstract",
+  "layout.field.label.Fonds.[glamfonds.startdate.format]": "Start Date Format",
+  // "layout.field.label.Fonds.[glamfonds.startdate.from]": "Start Date From",
   // TODO New key - Add a translation
-  "layout.field.label.Place.dc.description.abstract": "Abstract",
-  // "layout.field.label.Place.glam.link.dbpedia": "Dbpedia Link",
+  "layout.field.label.Fonds.[glamfonds.startdate.from]": "Start Date From",
+  // "layout.field.label.Fonds.[glamfonds.startdate.spec]": "Start Date Spec",
   // TODO New key - Add a translation
-  "layout.field.label.Place.glam.link.dbpedia": "Dbpedia Link",
-  // "layout.field.label.Place.glamplace.link.geonames": "Geonames Link",
+  "layout.field.label.Fonds.[glamfonds.startdate.spec]": "Start Date Spec",
+  // "layout.field.label.Fonds.[glamfonds.startdate.to]": "Start Date To",
   // TODO New key - Add a translation
-  "layout.field.label.Place.glamplace.link.geonames": "Geonames Link",
-  // "layout.field.label.Place.glamplace.link.tgn": "TGN Link",
+  "layout.field.label.Fonds.[glamfonds.startdate.to]": "Start Date To",
+  // "layout.field.label.Fonds.[glamfonds.startdate.valid]": "Start Date Valid",
   // TODO New key - Add a translation
-  "layout.field.label.Place.glamplace.link.tgn": "TGN Link",
-  // "layout.field.label.Place.glam.link.wikipedia": "Wikipedia Link",
+  "layout.field.label.Fonds.[glamfonds.startdate.valid]": "Start Date Valid",
+
+  // "layout.field.label.Place.[dc.title.alternative]": "Alternative Title",
   // TODO New key - Add a translation
-  "layout.field.label.Place.glam.link.wikipedia": "Wikipedia Link",
-  // "layout.field.label.Place.dc.relation.place": "Places",
+  "layout.field.label.Place.[dc.title.alternative]": "Alternative Title",
+  // "layout.field.label.Place.[glamplace.lat]": "Latitude",
   // TODO New key - Add a translation
-  "layout.field.label.Place.dc.relation.place": "Places",
-  // "layout.field.label.Place.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.Place.[glamplace.lat]": "Latitude",
+  // "layout.field.label.Place.[glamplace.long]": "Longitude",
   // TODO New key - Add a translation
-  "layout.field.label.Place.dc.relation.aggregation": "Aggregations",
-  // "layout.field.label.Place.dc.relation.path": "Paths",
+  "layout.field.label.Place.[glamplace.long]": "Longitude",
+  // "layout.field.label.Place.[dc.description.abstract]": "Abstract",
   // TODO New key - Add a translation
-  "layout.field.label.Place.dc.relation.path": "Paths",
-  // "layout.field.label.Family.dc.title.alternative": "Alternative Title",
+  "layout.field.label.Place.[dc.description.abstract]": "Abstract",
+  // "layout.field.label.Place.[dc.relation.place]": "Related Place(s)",
   // TODO New key - Add a translation
-  "layout.field.label.Family.dc.title.alternative": "Alternative Title",
-  // "layout.field.label.Family.dc.description": "Description",
+  "layout.field.label.Place.[dc.relation.place]": "Related Place(s)",
+  // "layout.field.label.Place.[dc.relation.aggregation]": "Aggregation",
   // TODO New key - Add a translation
-  "layout.field.label.Family.dc.description": "Description",
-  // "layout.field.label.Family.dc.description.abstract": "Abstract",
+  "layout.field.label.Place.[dc.relation.aggregation]": "Aggregation",
+  // "layout.field.label.Place.[dc.relation.path]": "Path",
   // TODO New key - Add a translation
-  "layout.field.label.Family.dc.description.abstract": "Abstract",
-  // "layout.field.label.Family.glamfamily.nationality": "Nationality",
+  "layout.field.label.Place.[dc.relation.path]": "Path",
+  // "layout.field.label.Place.[glam.link.dbpedia]": "Dbpedia Link",
   // TODO New key - Add a translation
-  "layout.field.label.Family.glamfamily.nationality": "Nationality",
-  // "layout.field.label.Family.glamfamily.editor": "Editor(s)",
+  "layout.field.label.Place.[glam.link.dbpedia]": "Dbpedia Link",
+  // "layout.field.label.Place.[glamplace.link.geonames]": "Geonames Link",
   // TODO New key - Add a translation
-  "layout.field.label.Family.glamfamily.editor": "Editor(s)",
-  // "layout.field.label.Family.dc.relation.event": "Events",
+  "layout.field.label.Place.[glamplace.link.geonames]": "Geonames Link",
+  // "layout.field.label.Place.[glamplace.link.tgn]": "TGN Link",
   // TODO New key - Add a translation
-  "layout.field.label.Family.dc.relation.event": "Events",
-  // "layout.field.label.Family.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.Place.[glamplace.link.tgn]": "TGN Link",
+  // "layout.field.label.Place.[glam.link.wikipedia]": "Wikipedia Link",
   // TODO New key - Add a translation
-  "layout.field.label.Family.dc.relation.aggregation": "Aggregations",
-  // "layout.field.label.Family.dc.relation.path": "Paths",
+  "layout.field.label.Place.[glam.link.wikipedia]": "Wikipedia Link",
+
+  // "layout.field.label.Family.[dc.title.alternative]": "Alternative Title",
   // TODO New key - Add a translation
-  "layout.field.label.Family.dc.relation.path": "Paths",
-  // "layout.field.label.JournalFonds.dc.title.alternative": "Alternative Title",
+  "layout.field.label.Family.[dc.title.alternative]": "Alternative Title",
+  // "layout.field.label.Family.[dc.description]": "Description",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFonds.dc.title.alternative": "Alternative Title",
-  // "layout.field.label.JournalFonds.dc.type": "Type",
+  "layout.field.label.Family.[dc.description]": "Description",
+  // "layout.field.label.Family.[dc.description.abstract]": "Abstract",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFonds.dc.type": "Type",
-  // "layout.field.label.JournalFonds.glamfonds.history": "History",
+  "layout.field.label.Family.[dc.description.abstract]": "Abstract",
+  // "layout.field.label.Family.[glamfamily.nationality]": "Nationality",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFonds.glamfonds.history": "History",
-  // "layout.field.label.JournalFonds.dc.coverage.temporal": "Coverage Temporal",
+  "layout.field.label.Family.[glamfamily.nationality]": "Nationality",
+  // "layout.field.label.Family.[dc.relation.event]": "Related Event",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFonds.dc.coverage.temporal": "Coverage Temporal",
-  // "layout.field.label.JournalFonds.dc.language.iso": "Language",
+  "layout.field.label.Family.[dc.relation.event]": "Related Event",
+  // "layout.field.label.Family.[dc.relation.aggregation]": "Aggregation",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFonds.dc.language.iso": "Language",
-  // "layout.field.label.JournalFonds.dc.description.abstract": "Abstract",
+  "layout.field.label.Family.[dc.relation.aggregation]": "Aggregation",
+  // "layout.field.label.Family.[dc.relation.path]": "Path",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFonds.dc.description.abstract": "Abstract",
-  // "layout.field.label.JournalFonds.glamfonds.shelfmark": "Shelfmark",
+  "layout.field.label.Family.[dc.relation.path]": "Path",
+  // "layout.field.label.Family.[glamfamily.editor]": "Editor(s)",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFonds.glamfonds.shelfmark": "Shelfmark",
-  // "layout.field.label.JournalFonds.glamjournalfonds.ownedyears": "Owned Years",
+  "layout.field.label.Family.[glamfamily.editor]": "Editor(s)",
+
+  // "layout.field.label.JournalFonds.[dc.title.alternative]": "Alternative Title",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFonds.glamjournalfonds.ownedyears": "Owned Years",
-  // "layout.field.label.JournalFonds.dc.identifier.other": "Other Identifier(s)",
+  "layout.field.label.JournalFonds.[dc.title.alternative]": "Alternative Title",
+  // "layout.field.label.JournalFonds.[dc.type]": "Type",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFonds.dc.identifier.other": "Other Identifier(s)",
-  // "layout.field.label.JournalFonds.dc.relation.opac": "OPAC Link",
+  "layout.field.label.JournalFonds.[dc.type]": "Type",
+  // "layout.field.label.JournalFonds.[glamfonds.history]": "History",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFonds.dc.relation.opac": "OPAC Link",
-  // "layout.field.label.JournalFonds.dc.relation.otherlinks": "Other Links",
+  "layout.field.label.JournalFonds.[glamfonds.history]": "History",
+  // "layout.field.label.JournalFonds.[dc.coverage.temporal]": "Coverage Temporal",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFonds.dc.relation.otherlinks": "Other Links",
-  // "layout.field.label.JournalFonds.glamjournalfonds.history": "Journal Fonds History",
+  "layout.field.label.JournalFonds.[dc.coverage.temporal]": "Coverage Temporal",
+  // "layout.field.label.JournalFonds.[dc.language.iso]": "Language",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFonds.glamjournalfonds.history": "Journal Fonds History",
-  // "layout.field.label.JournalFonds.dc.relation.path": "Path",
+  "layout.field.label.JournalFonds.[dc.language.iso]": "Language",
+  // "layout.field.label.JournalFonds.[dc.description.abstract]": "Abstract",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFonds.dc.relation.path": "Path",
-  // "layout.field.label.JournalFonds.glam.index": "Journal Fond Index",
+  "layout.field.label.JournalFonds.[dc.description.abstract]": "Abstract",
+  // "layout.field.label.JournalFonds.[glamfonds.shelfmark]": "Shelfmark",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFonds.glam.index": "Journal Fond Index",
-  // "layout.field.label.JournalFonds.glamjournalfonds.relation.journalfonds": "Related Journal Fonds",
+  "layout.field.label.JournalFonds.[glamfonds.shelfmark]": "Shelfmark",
+  // "layout.field.label.JournalFonds.[glamjournalfonds.relation.journalfonds]": "Related Journal Fonds",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFonds.glamjournalfonds.relation.journalfonds": "Related Journal Fonds",
-  // "layout.field.label.JournalFonds.glamjournalfonds.relation.person": "Related People",
+  "layout.field.label.JournalFonds.[glamjournalfonds.relation.journalfonds]": "Related Journal Fonds",
+  // "layout.field.label.JournalFonds.[glamjournalfonds.ownedyears]": "Owned Years",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFonds.glamjournalfonds.relation.person": "Related People",
-  // "layout.field.label.JournalFonds.glamjournalfonds.parent": "Journal Fonds Parent",
+  "layout.field.label.JournalFonds.[glamjournalfonds.ownedyears]": "Owned Years",
+  // "layout.field.label.JournalFonds.[glamjournalfonds.relation.person]": "Related People",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFonds.glamjournalfonds.parent": "Journal Fonds Parent",
-  // "layout.field.label.News.cris.news.enabled": "News Enabled",
+  "layout.field.label.JournalFonds.[glamjournalfonds.relation.person]": "Related People",
+  // "layout.field.label.JournalFonds.[dc.identifier.other]": "Other Identifier(s)",
   // TODO New key - Add a translation
-  "layout.field.label.News.cris.news.enabled": "News Enabled",
-  // "layout.field.label.News.cris.news.url": "News URL",
+  "layout.field.label.JournalFonds.[dc.identifier.other]": "Other Identifier(s)",
+  // "layout.field.label.JournalFonds.[dc.relation.opac]": "OPAC Link",
   // TODO New key - Add a translation
-  "layout.field.label.News.cris.news.url": "News URL",
-  // "layout.field.label.News.dc.description.abstract": "Abstract",
+  "layout.field.label.JournalFonds.[dc.relation.opac]": "OPAC Link",
+  // "layout.field.label.JournalFonds.[dc.relation.otherlinks]": "Other Links",
   // TODO New key - Add a translation
-  "layout.field.label.News.dc.description.abstract": "Abstract",
-  // "layout.field.label.News.cris.priority": "Position",
+  "layout.field.label.JournalFonds.[dc.relation.otherlinks]": "Other Links",
+  // "layout.field.label.JournalFonds.[glamjournalfonds.parent]": "Journal Fonds Parent",
   // TODO New key - Add a translation
-  "layout.field.label.News.cris.priority": "Position",
-  // "layout.field.label.Path.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.JournalFonds.[glamjournalfonds.parent]": "Journal Fonds Parent",
+  // "layout.field.label.JournalFonds.[glamjournalfonds.history]": "Journal Fonds History",
   // TODO New key - Add a translation
-  "layout.field.label.Path.dc.relation.aggregation": "Aggregations",
-  // "layout.field.label.ArchivalMaterial.dc.title.alternative": "Alternative Title",
+  "layout.field.label.JournalFonds.[glamjournalfonds.history]": "Journal Fonds History",
+  // "layout.field.label.JournalFonds.[dc.relation.path]": "Path",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.title.alternative": "Alternative Title",
-  // "layout.field.label.ArchivalMaterial.dc.type": "Type",
+  "layout.field.label.JournalFonds.[dc.relation.path]": "Path",
+
+  // "layout.field.label.News.[cris.news.enabled]": "News Enabled",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.type": "Type",
-  // "layout.field.label.ArchivalMaterial.dc.contributor.author": "Author(s)",
+  "layout.field.label.News.[cris.news.enabled]": "News Enabled",
+  // "layout.field.label.News.[cris.news.url]": "News URL",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.contributor.author": "Author(s)",
-  // "layout.field.label.ArchivalMaterial.dc.contributor.corporatebody": "Corporate Body",
+  "layout.field.label.News.[cris.news.url]": "News URL",
+  // "layout.field.label.News.[dc.description.abstract]": "Abstract",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.contributor.corporatebody": "Corporate Body",
-  // "layout.field.label.ArchivalMaterial.dc.contributor.family": "Family",
+  "layout.field.label.News.[dc.description.abstract]": "Abstract",
+  // "layout.field.label.News.[cris.priority]": "Position",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.contributor.family": "Family",
-  // "layout.field.label.ArchivalMaterial.dc.date.issued": "Date Issued",
+  "layout.field.label.News.[cris.priority]": "Position",
+
+  // "layout.field.label.Path.[dc.relation.aggregation]": "Aggregations",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.date.issued": "Date Issued",
-  // "layout.field.label.ArchivalMaterial.dc.date.start": "Start Date",
+  "layout.field.label.Path.[dc.relation.aggregation]": "Aggregations",
+
+  // "layout.field.label.ArchivalMaterial.[dc.title.alternative]": "Alternative Title",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.date.start": "Start Date",
-  // "layout.field.label.ArchivalMaterial.dc.date.end": "End Date",
+  "layout.field.label.ArchivalMaterial.[dc.title.alternative]": "Alternative Title",
+  // "layout.field.label.ArchivalMaterial.[dc.type]": "Type",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.date.end": "End Date",
-  // "layout.field.label.ArchivalMaterial.dc.coverage.temporal": "Coverage Temporal",
+  "layout.field.label.ArchivalMaterial.[dc.type]": "Type",
+  // "layout.field.label.ArchivalMaterial.[dc.contributor.author]": "Author(s)",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.coverage.temporal": "Coverage Temporal",
-  // "layout.field.label.ArchivalMaterial.dc.date.note": "Date Notes",
+  "layout.field.label.ArchivalMaterial.[dc.contributor.author]": "Author(s)",
+  // "layout.field.label.ArchivalMaterial.[dc.contributor.corporatebody]": "Corporate Body",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.date.note": "Date Notes",
-  // "layout.field.label.ArchivalMaterial.dc.identifier.doi": "DOI",
+  "layout.field.label.ArchivalMaterial.[dc.contributor.corporatebody]": "Corporate Body",
+  // "layout.field.label.ArchivalMaterial.[dc.contributor.family]": "Family",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.identifier.doi": "DOI",
-  // "layout.field.label.ArchivalMaterial.dc.identifier.uri": "URI",
+  "layout.field.label.ArchivalMaterial.[dc.contributor.family]": "Family",
+  // "layout.field.label.ArchivalMaterial.[dc.date.issued]": "Date Issued",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.identifier.uri": "URI",
-  // "layout.field.label.ArchivalMaterial.dc.identifier.nbn": "NBN:IT ID",
+  "layout.field.label.ArchivalMaterial.[dc.date.issued]": "Date Issued",
+  // "layout.field.label.ArchivalMaterial.[dc.date.start]": "Start Date",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.identifier.nbn": "NBN:IT ID",
-  // "layout.field.label.ArchivalMaterial.dc.identifier.inventorynumber": "Inventory Number",
+  "layout.field.label.ArchivalMaterial.[dc.date.start]": "Start Date",
+  // "layout.field.label.ArchivalMaterial.[dc.date.end]": "End Date",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.identifier.inventorynumber": "Inventory Number",
-  // "layout.field.label.ArchivalMaterial.dc.identifier.shelfmark": "Shelfmark",
+  "layout.field.label.ArchivalMaterial.[dc.date.end]": "End Date",
+  // "layout.field.label.ArchivalMaterial.[dc.coverage.temporal]": "Coverage Temporal",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.identifier.shelfmark": "Shelfmark",
-  // "layout.field.label.ArchivalMaterial.dc.identifier.other": "Other Identifier",
+  "layout.field.label.ArchivalMaterial.[dc.coverage.temporal]": "Coverage Temporal",
+  // "layout.field.label.ArchivalMaterial.[dc.date.note]": "Date Notes",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.identifier.other": "Other Identifier",
-  // "layout.field.label.ArchivalMaterial.dc.identifier.archivalunit": "Archival Unit",
+  "layout.field.label.ArchivalMaterial.[dc.date.note]": "Date Notes",
+  // "layout.field.label.ArchivalMaterial.[dc.identifier.doi]": "DOI",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.identifier.archivalunit": "Archival Unit",
-  // "layout.field.label.ArchivalMaterial.dc.description": "Description",
+  "layout.field.label.ArchivalMaterial.[dc.identifier.doi]": "DOI",
+  // "layout.field.label.ArchivalMaterial.[dc.identifier.uri]": "URI",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.description": "Description",
-  // "layout.field.label.ArchivalMaterial.dc.type.physical": "Physical Type",
+  "layout.field.label.ArchivalMaterial.[dc.identifier.uri]": "URI",
+  // "layout.field.label.ArchivalMaterial.[dc.identifier.nbn]": "NBN:IT ID",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.type.physical": "Physical Type",
-  // "layout.field.label.ArchivalMaterial.dc.format.medium": "Format",
+  "layout.field.label.ArchivalMaterial.[dc.identifier.nbn]": "NBN:IT ID",
+  // "layout.field.label.ArchivalMaterial.[dc.identifier.inventorynumber]": "Inventory Number",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.format.medium": "Format",
-  // "layout.field.label.ArchivalMaterial.dcterms.accessRights": "Access Rights",
+  "layout.field.label.ArchivalMaterial.[dc.identifier.inventorynumber]": "Inventory Number",
+  // "layout.field.label.ArchivalMaterial.[dc.identifier.shelfmark]": "Shelfmark",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dcterms.accessRights": "Access Rights",
-  // "layout.field.label.ArchivalMaterial.dc.rights": "Rights",
+  "layout.field.label.ArchivalMaterial.[dc.identifier.shelfmark]": "Shelfmark",
+  // "layout.field.label.ArchivalMaterial.[dc.identifier.other]": "Other Identifier",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.rights": "Rights",
-  // "layout.field.label.ArchivalMaterial.dc.rights.license": "License",
+  "layout.field.label.ArchivalMaterial.[dc.identifier.other]": "Other Identifier",
+  // "layout.field.label.ArchivalMaterial.[dc.identifier.archivalunit]": "Archival Unit",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.rights.license": "License",
-  // "layout.field.label.ArchivalMaterial.dc.rights.note": "Rights Note",
+  "layout.field.label.ArchivalMaterial.[dc.identifier.archivalunit]": "Archival Unit",
+  // "layout.field.label.ArchivalMaterial.[dc.description]": "Description",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.rights.note": "Rights Note",
-  // "layout.field.label.ArchivalMaterial.dcterms.bibliographicCitation": "Bibliographic Citation",
+  "layout.field.label.ArchivalMaterial.[dc.description]": "Description",
+  // "layout.field.label.ArchivalMaterial.[dc.description.abstract]": "Abstract",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dcterms.bibliographicCitation": "Bibliographic Citation",
-  // "layout.field.label.ArchivalMaterial.dc.language.iso": "Language",
+  "layout.field.label.ArchivalMaterial.[dc.description.abstract]": "Abstract",
+  // "layout.field.label.ArchivalMaterial.[dc.type.physical]": "Physical Type",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.language.iso": "Language",
-  // "layout.field.label.ArchivalMaterial.dc.subject": "Keywords",
+  "layout.field.label.ArchivalMaterial.[dc.type.physical]": "Physical Type",
+  // "layout.field.label.ArchivalMaterial.[dc.format.medium]": "Format",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.subject": "Keywords",
-  // "layout.field.label.ArchivalMaterial.dc.relation.opac": "OPAC Link",
+  "layout.field.label.ArchivalMaterial.[dc.format.medium]": "Format",
+  // "layout.field.label.ArchivalMaterial.[dcterms.accessRights]": "Access Rights",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.relation.opac": "OPAC Link",
-  // "layout.field.label.ArchivalMaterial.dc.relation.otherlinks": "Other Links",
+  "layout.field.label.ArchivalMaterial.[dcterms.accessRights]": "Access Rights",
+  // "layout.field.label.ArchivalMaterial.[dc.rights]": "Rights",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.relation.otherlinks": "Other Links",
-  // "layout.field.label.ArchivalMaterial.dc.description.archivist": "Archivist Description",
+  "layout.field.label.ArchivalMaterial.[dc.rights]": "Rights",
+  // "layout.field.label.ArchivalMaterial.[dc.rights.license]": "License",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.description.archivist": "Archivist Description",
-  // "layout.field.label.ArchivalMaterial.dc.description.preservation": "Preservation",
+  "layout.field.label.ArchivalMaterial.[dc.rights.license]": "License",
+  // "layout.field.label.ArchivalMaterial.[dc.rights.note]": "Rights Note",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.description.preservation": "Preservation",
-  // "layout.field.label.ArchivalMaterial.dc.description.preservationnote": "Preservation Notes",
+  "layout.field.label.ArchivalMaterial.[dc.rights.note]": "Rights Note",
+  // "layout.field.label.ArchivalMaterial.[dcterms.bibliographicCitation]": "Bibliographic Citation",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.description.preservationnote": "Preservation Notes",
-  // "layout.field.label.ArchivalMaterial.dc.description.note": "Note",
+  "layout.field.label.ArchivalMaterial.[dcterms.bibliographicCitation]": "Bibliographic Citation",
+  // "layout.field.label.ArchivalMaterial.[dc.relation.aggregation]": "Aggregation",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.description.note": "Note",
-  // "layout.field.label.ArchivalMaterial.dc.relation.uri": "URL",
+  "layout.field.label.ArchivalMaterial.[dc.relation.aggregation]": "Aggregation",
+  // "layout.field.label.ArchivalMaterial.[dc.relation.path]": "Path",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.relation.uri": "URL",
+  "layout.field.label.ArchivalMaterial.[dc.relation.path]": "Path",
+  // "layout.field.label.ArchivalMaterial.[dc.relation.isreferencedby]": "Related Documents",
+  // TODO New key - Add a translation
+  "layout.field.label.ArchivalMaterial.[dc.relation.isreferencedby]": "Related Documents",
+  // "layout.field.label.ArchivalMaterial.[dc.language.iso]": "Language",
+  // TODO New key - Add a translation
+  "layout.field.label.ArchivalMaterial.[dc.language.iso]": "Language",
+  // "layout.field.label.ArchivalMaterial.[dc.subject]": "Keywords",
+  // TODO New key - Add a translation
+  "layout.field.label.ArchivalMaterial.[dc.subject]": "Keywords",
+  // "layout.field.label.ArchivalMaterial.[dc.relation.project]": "Project",
+  // TODO New key - Add a translation
+  "layout.field.label.ArchivalMaterial.[dc.relation.project]": "Project",
+  // "layout.field.label.ArchivalMaterial.[dc.relation.conference]": "Event",
+  // TODO New key - Add a translation
+  "layout.field.label.ArchivalMaterial.[dc.relation.conference]": "Event",
+  // "layout.field.label.ArchivalMaterial.[dc.relation.person]": "Person",
+  // TODO New key - Add a translation
+  "layout.field.label.ArchivalMaterial.[dc.relation.person]": "Person",
+  // "layout.field.label.ArchivalMaterial.[dc.relation.fonds]": "Fonds",
+  // TODO New key - Add a translation
+  "layout.field.label.ArchivalMaterial.[dc.relation.fonds]": "Fonds",
+  // "layout.field.label.ArchivalMaterial.[dc.description.archivist]": "Archivist Description",
+  // TODO New key - Add a translation
+  "layout.field.label.ArchivalMaterial.[dc.description.archivist]": "Archivist Description",
+  // "layout.field.label.ArchivalMaterial.[dc.description.preservation]": "Preservation",
+  // TODO New key - Add a translation
+  "layout.field.label.ArchivalMaterial.[dc.description.preservation]": "Preservation",
+  // "layout.field.label.ArchivalMaterial.[dc.description.preservationnote]": "Preservation Notes",
+  // TODO New key - Add a translation
+  "layout.field.label.ArchivalMaterial.[dc.description.preservationnote]": "Preservation Notes",
+  // "layout.field.label.ArchivalMaterial.[dc.description.note]": "Note",
+  // TODO New key - Add a translation
+  "layout.field.label.ArchivalMaterial.[dc.description.note]": "Note",
+  // "layout.field.label.ArchivalMaterial.[dc.relation.uri]": "URL",
+  // TODO New key - Add a translation
+  "layout.field.label.ArchivalMaterial.[dc.relation.uri]": "URL",
+  // "layout.field.label.ArchivalMaterial.[dc.relation.place]": "Place",
+  // TODO New key - Add a translation
+  "layout.field.label.ArchivalMaterial.[dc.relation.place]": "Place",
   // "layout.field.label.ArchivalMaterial.BITSTREAM": "File(s)",
   // TODO New key - Add a translation
   "layout.field.label.ArchivalMaterial.BITSTREAM": "File(s)",
-  // "layout.field.label.ArchivalMaterial.dc.relation.person": "Person",
+
+  // "layout.field.label.Aggregation.[dc.description]": "Description",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.relation.person": "Person",
-  // "layout.field.label.ArchivalMaterial.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.Aggregation.[dc.description]": "Description",
+  // "layout.field.label.Aggregation.[dc.description.abstract]": "Abstract",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.relation.aggregation": "Aggregations",
-  // "layout.field.label.ArchivalMaterial.dc.relation.path": "Paths",
+  "layout.field.label.Aggregation.[dc.description.abstract]": "Abstract",
+  // "layout.field.label.Aggregation.[glam.index]": "Aggregation Index",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.relation.path": "Paths",
-  // "layout.field.label.ArchivalMaterial.dc.relation.isreferencedby": "Related Documents",
+  "layout.field.label.Aggregation.[glam.index]": "Aggregation Index",
+
+  // "layout.field.label.StaticPage.[dc.description]": "Description",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.relation.isreferencedby": "Related Documents",
-  // "layout.field.label.ArchivalMaterial.dc.relation.fonds": "Fonds",
+  "layout.field.label.StaticPage.[dc.description]": "Description",
+  // "layout.field.label.StaticPage.[dc.description.abstract]": "Abstract",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.relation.fonds": "Fonds",
-  // "layout.field.label.ArchivalMaterial.dc.relation.conference": "Events",
+  "layout.field.label.StaticPage.[dc.description.abstract]": "Abstract",
+  // "layout.field.label.StaticPage.[dc.subject]": "Keywords",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.relation.conference": "Events",
-  // "layout.field.label.ArchivalMaterial.dc.relation.project": "Projects",
+  "layout.field.label.StaticPage.[dc.subject]": "Keywords",
+
+  // "layout.field.label.JournalFile.[dc.relation.issue]": "Issue",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.relation.project": "Projects",
-  // "layout.field.label.ArchivalMaterial.dc.relation.place": "Places",
+  "layout.field.label.JournalFile.[dc.relation.issue]": "Issue",
+  // "layout.field.label.JournalFile.[dc.relation.issueother]": "Issue Other",
   // TODO New key - Add a translation
-  "layout.field.label.ArchivalMaterial.dc.relation.place": "Places",
-  // "layout.field.label.Aggregation.dc.description": "Description",
+  "layout.field.label.JournalFile.[dc.relation.issueother]": "Issue Other",
+  // "layout.field.label.JournalFile.[dc.relation.stpieceper]": "Year Reference",
   // TODO New key - Add a translation
-  "layout.field.label.Aggregation.dc.description": "Description",
-  // "layout.field.label.Aggregation.dc.description.abstract": "Abstract",
+  "layout.field.label.JournalFile.[dc.relation.stpieceper]": "Year Reference",
+  // "layout.field.label.JournalFile.[dc.relation.stpieceperstart]": "Year Reference From",
   // TODO New key - Add a translation
-  "layout.field.label.Aggregation.dc.description.abstract": "Abstract",
-  // "layout.field.label.Aggregation.glamaggregation.parent": "Aggregation Parent",
+  "layout.field.label.JournalFile.[dc.relation.stpieceperstart]": "Year Reference From",
+  // "layout.field.label.JournalFile.[dc.relation.stpieceperend]": "Year Reference To",
   // TODO New key - Add a translation
-  "layout.field.label.Aggregation.glamaggregation.parent": "Aggregation Parent",
-  // "layout.field.label.Aggregation.glam.index": "Aggregation Index",
+  "layout.field.label.JournalFile.[dc.relation.stpieceperend]": "Year Reference To",
+  // "layout.field.label.JournalFile.[dc.relation.stpieceperother]": "Other Reference",
   // TODO New key - Add a translation
-  "layout.field.label.Aggregation.glam.index": "Aggregation Index",
-  // "layout.field.label.StaticPage.dc.description": "Description",
+  "layout.field.label.JournalFile.[dc.relation.stpieceperother]": "Other Reference",
+  // "layout.field.label.JournalFile.[dc.relation.stpieceperotherstart]": "Other Reference From",
   // TODO New key - Add a translation
-  "layout.field.label.StaticPage.dc.description": "Description",
-  // "layout.field.label.StaticPage.dc.subject": "Keywords",
+  "layout.field.label.JournalFile.[dc.relation.stpieceperotherstart]": "Other Reference From",
+  // "layout.field.label.JournalFile.[dc.relation.stpieceperotherend]": "Other Reference To",
   // TODO New key - Add a translation
-  "layout.field.label.StaticPage.dc.subject": "Keywords",
-  // "layout.field.label.JournalFile.dc.relation.issue": "Issue",
+  "layout.field.label.JournalFile.[dc.relation.stpieceperotherend]": "Other Reference To",
+  // "layout.field.label.JournalFile.[dc.date.issued]": "Date Issued",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.relation.issue": "Issue",
-  // "layout.field.label.JournalFile.dc.relation.issueother": "Issue Other",
+  "layout.field.label.JournalFile.[dc.date.issued]": "Date Issued",
+  // "layout.field.label.JournalFile.[dc.date.start]": "Start Date",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.relation.issueother": "Issue Other",
-  // "layout.field.label.JournalFile.dc.relation.stpieceper": "Year Reference",
+  "layout.field.label.JournalFile.[dc.date.start]": "Start Date",
+  // "layout.field.label.JournalFile.[dc.date.end]": "End Date",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.relation.stpieceper": "Year Reference",
-  // "layout.field.label.JournalFile.dc.relation.stpieceperstart": "Year Reference From",
+  "layout.field.label.JournalFile.[dc.date.end]": "End Date",
+  // "layout.field.label.JournalFile.[dc.relation.edition]": "Edition",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.relation.stpieceperstart": "Year Reference From",
-  // "layout.field.label.JournalFile.dc.relation.stpieceperend": "Year Reference To",
+  "layout.field.label.JournalFile.[dc.relation.edition]": "Edition",
+  // "layout.field.label.JournalFile.[dc.description]": "Description",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.relation.stpieceperend": "Year Reference To",
-  // "layout.field.label.JournalFile.dc.relation.stpieceperother": "Other Reference",
+  "layout.field.label.JournalFile.[dc.description]": "Description",
+  // "layout.field.label.JournalFile.[dc.description.abstract]": "Abstract",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.relation.stpieceperother": "Other Reference",
-  // "layout.field.label.JournalFile.dc.relation.stpieceperotherstart": "Other Reference From",
+  "layout.field.label.JournalFile.[dc.description.abstract]": "Abstract",
+  // "layout.field.label.JournalFile.[dc.relation.journalfonds]": "Journal Fonds ",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.relation.stpieceperotherstart": "Other Reference From",
-  // "layout.field.label.JournalFile.dc.relation.stpieceperotherend": "Other Reference To",
+  "layout.field.label.JournalFile.[dc.relation.journalfonds]": "Journal Fonds ",
+  // "layout.field.label.JournalFile.[dc.rights.license]": "License",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.relation.stpieceperotherend": "Other Reference To",
-  // "layout.field.label.JournalFile.dc.date.issued": "Date Issued",
+  "layout.field.label.JournalFile.[dc.rights.license]": "License",
+  // "layout.field.label.JournalFile.[dc.relation.path]": "Path",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.date.issued": "Date Issued",
-  // "layout.field.label.JournalFile.dc.date.start": "Start Date",
+  "layout.field.label.JournalFile.[dc.relation.path]": "Path",
+  // "layout.field.label.JournalFile.[dc.relation.isreferencedby]": "Related Documents",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.date.start": "Start Date",
-  // "layout.field.label.JournalFile.dc.date.end": "End Date",
+  "layout.field.label.JournalFile.[dc.relation.isreferencedby]": "Related Documents",
+  // "layout.field.label.JournalFile.[dc.relation.aggregation]": "Aggregation",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.date.end": "End Date",
-  // "layout.field.label.JournalFile.dc.relation.edition": "Edition",
-  // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.relation.edition": "Edition",
-  // "layout.field.label.JournalFile.dc.description": "Description",
-  // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.description": "Description",
-  // "layout.field.label.JournalFile.dc.description.abstract": "Abstract",
-  // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.description.abstract": "Abstract",
-  // "layout.field.label.JournalFile.dc.identifier.archivalunit": "Archival Unit",
-  // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.identifier.archivalunit": "Archival Unit",
-  // "layout.field.label.JournalFile.dc.rights.license": "License",
-  // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.rights.license": "License",
+  "layout.field.label.JournalFile.[dc.relation.aggregation]": "Aggregation",
   // "layout.field.label.JournalFile.BITSTREAM": "File(s)",
   // TODO New key - Add a translation
   "layout.field.label.JournalFile.BITSTREAM": "File(s)",
-  // "layout.field.label.JournalFile.dc.relation.journalfonds": "Journal Fonds",
+
+  // "layout.field.label.Picture.[dc.title.alternative]": "Alternative Title",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.relation.journalfonds": "Journal Fonds",
-  // "layout.field.label.JournalFile.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.Picture.[dc.title.alternative]": "Alternative Title",
+  // "layout.field.label.Picture.[dc.contributor.author]": "Author(s)",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.relation.aggregation": "Aggregations",
-  // "layout.field.label.JournalFile.dc.relation.path": "Paths",
+  "layout.field.label.Picture.[dc.contributor.author]": "Author(s)",
+  // "layout.field.label.Picture.[dc.date.inventory]": "Date Inventory",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.relation.path": "Paths",
-  // "layout.field.label.JournalFile.dc.relation.isreferencedby": "Related Documents",
+  "layout.field.label.Picture.[dc.date.inventory]": "Date Inventory",
+  // "layout.field.label.Picture.[dc.date.start]": "Start Date",
   // TODO New key - Add a translation
-  "layout.field.label.JournalFile.dc.relation.isreferencedby": "Related Documents",
-  // "layout.field.label.Picture.dc.title.alternative": "Alternative Title",
+  "layout.field.label.Picture.[dc.date.start]": "Start Date",
+  // "layout.field.label.Picture.[dc.date.end]": "End Date",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.title.alternative": "Alternative Title",
-  // "layout.field.label.Picture.dc.contributor.author": "Author(s)",
+  "layout.field.label.Picture.[dc.date.end]": "End Date",
+  // "layout.field.label.Picture.[dc.date.note]": "Date Notes",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.contributor.author": "Author(s)",
-  // "layout.field.label.Picture.dc.date.issued": "Date Issued",
+  "layout.field.label.Picture.[dc.date.note]": "Date Notes",
+  // "layout.field.label.Picture.[dc.identifier.form]": "Form",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.date.issued": "Date Issued",
-  // "layout.field.label.Picture.dc.date.inventory": "Date Inventory",
+  "layout.field.label.Picture.[dc.identifier.form]": "Form",
+  // "layout.field.label.Picture.[dc.identifier.inventorynumber]": "Inventory Number",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.date.inventory": "Date Inventory",
-  // "layout.field.label.Picture.dc.date.start": "Start Date",
+  "layout.field.label.Picture.[dc.identifier.inventorynumber]": "Inventory Number",
+  // "layout.field.label.Picture.[dc.identifier.nctn]": "NCTN",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.date.start": "Start Date",
-  // "layout.field.label.Picture.dc.date.end": "End Date",
+  "layout.field.label.Picture.[dc.identifier.nctn]": "NCTN",
+  // "layout.field.label.Picture.[dc.identifier.region]": "Region",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.date.end": "End Date",
-  // "layout.field.label.Picture.dc.date.note": "Date Notes",
+  "layout.field.label.Picture.[dc.identifier.region]": "Region",
+  // "layout.field.label.Picture.[dc.identifier.shelfmark]": "Shelfmark",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.date.note": "Date Notes",
-  // "layout.field.label.Picture.dc.identifier.form": "Form",
+  "layout.field.label.Picture.[dc.identifier.shelfmark]": "Shelfmark",
+  // "layout.field.label.Picture.[dc.identifier.uri]": "URI",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.identifier.form": "Form",
-  // "layout.field.label.Picture.dc.identifier.inventorynumber": "Inventory Number",
+  "layout.field.label.Picture.[dc.identifier.uri]": "URI",
+  // "layout.field.label.Picture.[dc.identifier.archivalunit]": "Archival Unit",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.identifier.inventorynumber": "Inventory Number",
-  // "layout.field.label.Picture.dc.identifier.nctn": "NCTN",
+  "layout.field.label.Picture.[dc.identifier.archivalunit]": "Archival Unit",
+  // "layout.field.label.Picture.[dc.type.form]": "Form Type",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.identifier.nctn": "NCTN",
-  // "layout.field.label.Picture.dc.identifier.region": "Region",
+  "layout.field.label.Picture.[dc.type.form]": "Form Type",
+  // "layout.field.label.Picture.[dc.type.color]": "Color",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.identifier.region": "Region",
-  // "layout.field.label.Picture.dc.identifier.shelfmark": "Shelfmark",
+  "layout.field.label.Picture.[dc.type.color]": "Color",
+  // "layout.field.label.Picture.[dc.type.materialandtechnique]": "Material And Technique",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.identifier.shelfmark": "Shelfmark",
-  // "layout.field.label.Picture.dc.identifier.uri": "URI",
+  "layout.field.label.Picture.[dc.type.materialandtechnique]": "Material And Technique",
+  // "layout.field.label.Picture.[dc.type.note]": "Type Notes",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.identifier.uri": "URI",
-  // "layout.field.label.Picture.dc.identifier.archivalunit": "Archival Unit",
+  "layout.field.label.Picture.[dc.type.note]": "Type Notes",
+  // "layout.field.label.Picture.[glampicture.type.framing]": "Framing Type",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.identifier.archivalunit": "Archival Unit",
-  // "layout.field.label.Picture.dc.type.form": "Form Type",
+  "layout.field.label.Picture.[glampicture.type.framing]": "Framing Type",
+  // "layout.field.label.Picture.[dc.description.abstract]": "Abstract",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.type.form": "Form Type",
-  // "layout.field.label.Picture.dc.type.color": "Color",
+  "layout.field.label.Picture.[dc.description.abstract]": "Abstract",
+  // "layout.field.label.Picture.[dc.description]": "Physical Description",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.type.color": "Color",
-  // "layout.field.label.Picture.dc.type.materialandtechnique": "Material And Technique",
+  "layout.field.label.Picture.[dc.description]": "Physical Description",
+  // "layout.field.label.Picture.[dc.language.iso]": "Language",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.type.materialandtechnique": "Material And Technique",
-  // "layout.field.label.Picture.dc.type.note": "Type Notes",
+  "layout.field.label.Picture.[dc.language.iso]": "Language",
+  // "layout.field.label.Picture.[dc.coverage.temporal]": "Coverage Temporal",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.type.note": "Type Notes",
-  // "layout.field.label.Picture.glampicture.type.framing": "Framing Type",
+  "layout.field.label.Picture.[dc.coverage.temporal]": "Coverage Temporal",
+  // "layout.field.label.Picture.[dc.coverage.temporalfraction]": "Coverage Temporal Fraction",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.glampicture.type.framing": "Framing Type",
-  // "layout.field.label.Picture.dc.description.abstract": "Abstract",
+  "layout.field.label.Picture.[dc.coverage.temporalfraction]": "Coverage Temporal Fraction",
+  // "layout.field.label.Picture.[dc.coverage.spatialpvcs]": "Country",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.description.abstract": "Abstract",
-  // "layout.field.label.Picture.dc.description": "Physical Description",
+  "layout.field.label.Picture.[dc.coverage.spatialpvcs]": "Country",
+  // "layout.field.label.Picture.[dc.coverage.spatialpvcr]": "Region",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.description": "Physical Description",
-  // "layout.field.label.Picture.dc.language.iso": "Language",
+  "layout.field.label.Picture.[dc.coverage.spatialpvcr]": "Region",
+  // "layout.field.label.Picture.[dc.coverage.spatialpvcn]": "Province",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.language.iso": "Language",
-  // "layout.field.label.Picture.dc.coverage.temporal": "Coverage Temporal",
+  "layout.field.label.Picture.[dc.coverage.spatialpvcn]": "Province",
+  // "layout.field.label.Picture.[dc.coverage.spatialpvcc]": "District",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.coverage.temporal": "Coverage Temporal",
-  // "layout.field.label.Picture.dc.coverage.temporalfraction": "Coverage Temporal Fraction",
+  "layout.field.label.Picture.[dc.coverage.spatialpvcc]": "District",
+  // "layout.field.label.Picture.[dc.coverage.shelfmark]": "Coverage Shelfmark",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.coverage.temporalfraction": "Coverage Temporal Fraction",
-  // "layout.field.label.Picture.dc.coverage.spatialpvcs": "Country",
+  "layout.field.label.Picture.[dc.coverage.shelfmark]": "Coverage Shelfmark",
+  // "layout.field.label.Picture.[glam.subject]": "Subject",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.coverage.spatialpvcs": "Country",
-  // "layout.field.label.Picture.dc.coverage.spatialpvcr": "Region",
+  "layout.field.label.Picture.[glam.subject]": "Subject",
+  // "layout.field.label.Picture.[glampicture.subject.place]": "Subject Place",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.coverage.spatialpvcr": "Region",
-  // "layout.field.label.Picture.dc.coverage.spatialpvcn": "Province",
+  "layout.field.label.Picture.[glampicture.subject.place]": "Subject Place",
+  // "layout.field.label.Picture.[dc.subject]": "Keywords",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.coverage.spatialpvcn": "Province",
-  // "layout.field.label.Picture.dc.coverage.spatialabbreviation": "Province Abbreviation",
+  "layout.field.label.Picture.[dc.subject]": "Keywords",
+  // "layout.field.label.Picture.[dc.rights.license]": "License",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.coverage.spatialabbreviation": "Province Abbreviation",
-  // "layout.field.label.Picture.dc.coverage.spatialpvcc": "District",
+  "layout.field.label.Picture.[dc.rights.license]": "License",
+  // "layout.field.label.Picture.[dc.relation.aggregation]": "Aggregation",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.coverage.spatialpvcc": "District",
-  // "layout.field.label.Picture.dc.coverage.shelfmark": "Coverage Shelfmark",
+  "layout.field.label.Picture.[dc.relation.aggregation]": "Aggregation",
+  // "layout.field.label.Picture.[dc.relation.path]": "Path",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.coverage.shelfmark": "Coverage Shelfmark",
-  // "layout.field.label.Picture.dc.subject": "Subject",
+  "layout.field.label.Picture.[dc.relation.path]": "Path",
+  // "layout.field.label.Picture.[dc.relation.ispartofcontainer]": "Container",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.subject": "Subject",
-  // "layout.field.label.Picture.glampicture.subject.place": "Subject Place",
+  "layout.field.label.Picture.[dc.relation.ispartofcontainer]": "Container",
+  // "layout.field.label.Picture.[dc.relation.haspart]": "Has Part",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.glampicture.subject.place": "Subject Place",
-  // "layout.field.label.Picture.dc.subject.keywords": "Keywords",
+  "layout.field.label.Picture.[dc.relation.haspart]": "Has Part",
+  // "layout.field.label.Picture.[dc.relation.references]": "References",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.subject.keywords": "Keywords",
-  // "layout.field.label.Picture.dc.rights.license": "License",
+  "layout.field.label.Picture.[dc.relation.references]": "References",
+  // "layout.field.label.Picture.[dc.relation.project]": "Project",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.rights.license": "License",
-  // "layout.field.label.Picture.dc.relation.references": "References",
+  "layout.field.label.Picture.[dc.relation.project]": "Project",
+  // "layout.field.label.Picture.[dc.relation.conference]": "Event",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.relation.references": "References",
-  // "layout.field.label.Picture.dc.relation.project": "Project",
+  "layout.field.label.Picture.[dc.relation.conference]": "Event",
+  // "layout.field.label.Picture.[dc.relation.person]": "Person",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.relation.project": "Project",
-  // "layout.field.label.Picture.dc.relation.conference": "Event",
+  "layout.field.label.Picture.[dc.relation.person]": "Person",
+  // "layout.field.label.Picture.[dc.relation.fonds]": "Fonds",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.relation.conference": "Event",
-  // "layout.field.label.Picture.dc.relation.person": "Person",
+  "layout.field.label.Picture.[dc.relation.fonds]": "Fonds",
+  // "layout.field.label.Picture.[dc.relation.opac]": "OPAC Link",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.relation.person": "Person",
-  // "layout.field.label.Picture.dc.relation.opac": "OPAC Link",
+  "layout.field.label.Picture.[dc.relation.opac]": "OPAC Link",
+  // "layout.field.label.Picture.[dc.relation.otherlinks]": "Other Links",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.relation.opac": "OPAC Link",
-  // "layout.field.label.Picture.dc.relation.otherlinks": "Other Links",
+  "layout.field.label.Picture.[dc.relation.otherlinks]": "Other Links",
+  // "layout.field.label.Picture.[dc.format]": "Format",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.relation.otherlinks": "Other Links",
-  // "layout.field.label.Picture.dc.format": "Format",
+  "layout.field.label.Picture.[dc.format]": "Format",
+  // "layout.field.label.Picture.[dc.format.misu]": "Measure Unit",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.format": "Format",
-  // "layout.field.label.Picture.dc.format.misu": "Measure Unit",
+  "layout.field.label.Picture.[dc.format.misu]": "Measure Unit",
+  // "layout.field.label.Picture.[dc.format.misa]": "Height",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.format.misu": "Measure Unit",
-  // "layout.field.label.Picture.dc.format.misa": "Height",
+  "layout.field.label.Picture.[dc.format.misa]": "Height",
+  // "layout.field.label.Picture.[dc.format.misl]": "Width",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.format.misa": "Height",
-  // "layout.field.label.Picture.dc.format.misl": "Width",
+  "layout.field.label.Picture.[dc.format.misl]": "Width",
+  // "layout.field.label.Picture.[dc.description.parts]": "Parts",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.format.misl": "Width",
-  // "layout.field.label.Picture.dc.description.parts": "Parts",
+  "layout.field.label.Picture.[dc.description.parts]": "Parts",
+  // "layout.field.label.Picture.[dc.description.number]": "Number",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.description.parts": "Parts",
-  // "layout.field.label.Picture.dc.description.number": "Number",
+  "layout.field.label.Picture.[dc.description.number]": "Number",
+  // "layout.field.label.Picture.[dc.description.function]": "Function",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.description.number": "Number",
-  // "layout.field.label.Picture.dc.description.function": "Function",
+  "layout.field.label.Picture.[dc.description.function]": "Function",
+  // "layout.field.label.Picture.[dc.description.use]": "Use Condition",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.description.function": "Function",
-  // "layout.field.label.Picture.dc.description.use": "Use Condition",
+  "layout.field.label.Picture.[dc.description.use]": "Use Condition",
+  // "layout.field.label.Picture.[dc.description.collection]": "Collection",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.description.use": "Use Condition",
-  // "layout.field.label.Picture.dc.description.collection": "Collection",
+  "layout.field.label.Picture.[dc.description.collection]": "Collection",
+  // "layout.field.label.Picture.[dc.description.collectionholder]": "Collection Holder",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.description.collection": "Collection",
-  // "layout.field.label.Picture.dc.description.collectionholder": "Collection Holder",
+  "layout.field.label.Picture.[dc.description.collectionholder]": "Collection Holder",
+  // "layout.field.label.Picture.[dc.description.collectionnotes]": "Collection Notes",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.description.collectionholder": "Collection Holder",
-  // "layout.field.label.Picture.dc.description.collectionnotes": "Collection Notes",
+  "layout.field.label.Picture.[dc.description.collectionnotes]": "Collection Notes",
+  // "layout.field.label.Picture.[dc.description.preservationstate]": "Preservation State",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.description.collectionnotes": "Collection Notes",
-  // "layout.field.label.Picture.dc.description.preservationstate": "Preservation State",
+  "layout.field.label.Picture.[dc.description.preservationstate]": "Preservation State",
+  // "layout.field.label.Picture.[dc.description.preservationspecifications]": "Preservation Specifications",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.description.preservationstate": "Preservation State",
-  // "layout.field.label.Picture.dc.description.preservationspecifications": "Preservation Specifications",
+  "layout.field.label.Picture.[dc.description.preservationspecifications]": "Preservation Specifications",
+  // "layout.field.label.Picture.[dc.description.note]": "Notes",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.description.preservationspecifications": "Preservation Specifications",
-  // "layout.field.label.Picture.dc.description.note": "Notes",
+  "layout.field.label.Picture.[dc.description.note]": "Notes",
+  // "layout.field.label.Picture.[glam.inscription]": "Inscription",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.description.note": "Notes",
+  "layout.field.label.Picture.[glam.inscription]": "Inscription",
+  // "layout.field.label.Picture.[glam.mark]": "Mark",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.[glam.mark]": "Mark",
+  // "layout.field.label.Picture.[glam.bibliography]": "Bibliography",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.[glam.bibliography]": "Bibliography",
   // "layout.field.label.Picture.BITSTREAM": "File(s)",
   // TODO New key - Add a translation
   "layout.field.label.Picture.BITSTREAM": "File(s)",
-  // "layout.field.label.Picture.dc.relation.fonds": "Fonds",
+  // "layout.field.label.Picture.[dc.relation.isreferencedby]": "Related Documents",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.relation.fonds": "Fonds",
-  // "layout.field.label.Picture.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.Picture.[dc.relation.isreferencedby]": "Related Documents",
+
+
+  // "layout.field.label.AudioVideo.[dc.contributor.author]": "Author(s)",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.relation.aggregation": "Aggregations",
-  // "layout.field.label.Picture.dc.relation.path": "Paths",
+  "layout.field.label.AudioVideo.[dc.contributor.author]": "Author(s)",
+  // "layout.field.label.AudioVideo.[dc.contributor.contributor]": "Agent(s)",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.relation.path": "Paths",
-  // "layout.field.label.Picture.dc.relation.isreferencedby": "Related Documents",
+  "layout.field.label.AudioVideo.[dc.contributor.contributor]": "Agent(s)",
+  // "layout.field.label.AudioVideo.[glam.subject]": "Subject",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.relation.isreferencedby": "Related Documents",
-  // "layout.field.label.Picture.dc.relation.haspart": "Contains",
+  "layout.field.label.AudioVideo.[glam.subject]": "Subject",
+  // "layout.field.label.AudioVideo.[dc.source.content]": "Content",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.relation.haspart": "Contains",
-  // "layout.field.label.Picture.dc.relation.ispartofcontainer": "Is part of",
+  "layout.field.label.AudioVideo.[dc.source.content]": "Content",
+  // "layout.field.label.AudioVideo.[dc.contributor.corporatebody]": "Corporate Body",
   // TODO New key - Add a translation
-  "layout.field.label.Picture.dc.relation.ispartofcontainer": "Is part of",
-  // "layout.field.label.Publication.dc.relation.path": "Path",
+  "layout.field.label.AudioVideo.[dc.contributor.corporatebody]": "Corporate Body",
+  // "layout.field.label.AudioVideo.[dc.relation.fonds]": "Fund",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.path": "Path",
-  // "layout.field.label.Publication.dc.relation.conference": "Event",
+  "layout.field.label.AudioVideo.[dc.relation.fonds]": "Fund",
+  // "layout.field.label.AudioVideo.[dc.relation.event]": "Related Event",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.conference": "Event",
-  // "layout.field.label.Publication.dc.relation.place": "Place",
+  "layout.field.label.AudioVideo.[dc.relation.event]": "Related Event",
+  // "layout.field.label.AudioVideo.[dc.coverage.culture]": "Cultural Area",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.place": "Place",
-  // "layout.field.label.Publication.dc.relation.fonds": "Fonds",
+  "layout.field.label.AudioVideo.[dc.coverage.culture]": "Cultural Area",
+  // "layout.field.label.AudioVideo.[dc.relation.place]": "Place Of Detection",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.fonds": "Fonds",
-  // "layout.field.label.Publication.dc.relation.person": "Person",
+  "layout.field.label.AudioVideo.[dc.relation.place]": "Place Of Detection",
+  // "layout.field.label.AudioVideo.[dc.coverage.spatialpvcs]": "Country",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.person": "Person",
-  // "layout.field.label.Publication.dc.relation.journalfonds": "Journal Fonds ",
+  "layout.field.label.AudioVideo.[dc.coverage.spatialpvcs]": "Country",
+  // "layout.field.label.AudioVideo.[dc.coverage.spatialpvcc]": "City",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.journalfonds": "Journal Fonds ",
-  // "layout.field.label.Publication.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.AudioVideo.[dc.coverage.spatialpvcc]": "City",
+  // "layout.field.label.AudioVideo.[dc.coverage.spatialpvcn]": "Province",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.aggregation": "Aggregations",
-  // "layout.field.label.Publication.dc.relation.isreferencedby": "Related Documents",
+  "layout.field.label.AudioVideo.[dc.coverage.spatialpvcn]": "Province",
+  // "layout.field.label.AudioVideo.[dc.date.issued]": "Date Issued",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.isreferencedby": "Related Documents",
-  // "layout.field.label.Publication.dc.relation.project": "Projects",
+  "layout.field.label.AudioVideo.[dc.date.issued]": "Date Issued",
+  // "layout.field.label.AudioVideo.[dc.date.start]": "Start Date",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.project": "Projects",
-  // "layout.field.label.Publication.dc.relation.event": "Events",
+  "layout.field.label.AudioVideo.[dc.date.start]": "Start Date",
+  // "layout.field.label.AudioVideo.[dc.date.end]": "End Date",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.event": "Events",
-  // "layout.field.label.Publication.glamjournalfonds.relation.journalfonds": "Related Journal Fonds",
+  "layout.field.label.AudioVideo.[dc.date.end]": "End Date",
+  // "layout.field.label.AudioVideo.[dc.description.note]": "Notes",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.glamjournalfonds.relation.journalfonds": "Related Journal Fonds",
-  // "layout.field.label.Publication.glamjournalfonds.relation.person": "Related People",
+  "layout.field.label.AudioVideo.[dc.description.note]": "Notes",
+  // "layout.field.label.AudioVideo.[dc.description.abstract]": "Abstract",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.glamjournalfonds.relation.person": "Related People",
-  // "layout.field.label.Publication.glamjournalfonds.parent": "Parent",
+  "layout.field.label.AudioVideo.[dc.description.abstract]": "Abstract",
+  // "layout.field.label.AudioVideo.[dc.language.iso]": "Language",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.glamjournalfonds.parent": "Parent",
-  // "layout.field.label.Publication.glamfonds.parent": "Parent",
+  "layout.field.label.AudioVideo.[dc.language.iso]": "Language",
+  // "layout.field.label.AudioVideo.[dc.subject]": "Keywords",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.glamfonds.parent": "Parent",
-  // "layout.field.label.Publication.dc.relation.ispartofcontainer": "Is part of",
+  "layout.field.label.AudioVideo.[dc.subject]": "Keywords",
+  // "layout.field.label.AudioVideo.[dc.relation.path]": "Path",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.ispartofcontainer": "Is part of",
-  // "layout.field.label.Publication.dc.relation.haspart": "Contains",
+  "layout.field.label.AudioVideo.[dc.relation.path]": "Path",
+  // "layout.field.label.AudioVideo.[dc.relation.project]": "Project",
   // TODO New key - Add a translation
-  "layout.field.label.Publication.dc.relation.haspart": "Contains",
-  // "layout.field.label.AudioVideo.dc.contributor.author": "Author(s)",
+  "layout.field.label.AudioVideo.[dc.relation.project]": "Project",
+  // "layout.field.label.AudioVideo.[dc.relation.url]": "URL",
   // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.contributor.author": "Author(s)",
-  // "layout.field.label.AudioVideo.dc.contributor.contributor": "Agent(s)",
+  "layout.field.label.AudioVideo.[dc.relation.url]": "URL",
+  // "layout.field.label.AudioVideo.[dc.relation.audiovideo]": "Related Documents",
   // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.contributor.contributor": "Agent(s)",
-  // "layout.field.label.AudioVideo.dc.contributor.corporatebody": "Corporate Body",
+  "layout.field.label.AudioVideo.[dc.relation.audiovideo]": "Related Documents",
+  // "layout.field.label.AudioVideo.[dc.relation.aggregation]": "Aggregation",
   // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.contributor.corporatebody": "Corporate Body",
-  // "layout.field.label.AudioVideo.dc.relation.fonds": "Fund",
+  "layout.field.label.AudioVideo.[dc.relation.aggregation]": "Aggregation",
+  // "layout.field.label.AudioVideo.[dc.rights.license]": "License",
   // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.relation.fonds": "Fund",
-  // "layout.field.label.AudioVideo.dc.relation.event": "Related Event",
+  "layout.field.label.AudioVideo.[dc.rights.license]": "License",
+  // "layout.field.label.AudioVideo.[dc.rights.note]": "Rights Note",
   // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.relation.event": "Related Event",
-  // "layout.field.label.AudioVideo.dc.coverage.culture": "Cultural Area",
+  "layout.field.label.AudioVideo.[dc.rights.note]": "Rights Note",
+  // "layout.field.label.AudioVideo.[dc.type]": "File Type",
   // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.coverage.culture": "Cultural Area",
-  // "layout.field.label.AudioVideo.dc.relation.place": "Place Of Detection",
+  "layout.field.label.AudioVideo.[dc.type]": "File Type",
+  // "layout.field.label.AudioVideo.[dc.type.physical]": "Physical Type",
   // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.relation.place": "Place Of Detection",
-  // "layout.field.label.AudioVideo.dc.coverage.spatialpvcs": "Country",
+  "layout.field.label.AudioVideo.[dc.type.physical]": "Physical Type",
+  // "layout.field.label.AudioVideo.[dc.format.extent]": "Event Time",
   // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.coverage.spatialpvcs": "Country",
-  // "layout.field.label.AudioVideo.dc.coverage.spatialpvcc": "City",
+  "layout.field.label.AudioVideo.[dc.format.extent]": "Event Time",
+  // "layout.field.label.AudioVideo.[dc.format.mimetype]": "Audio/Video File Encoding",
   // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.coverage.spatialpvcc": "City",
-  // "layout.field.label.AudioVideo.dc.coverage.spatialpvcn": "Province",
+  "layout.field.label.AudioVideo.[dc.format.mimetype]": "Audio/Video File Encoding",
+  // "layout.field.label.AudioVideo.[dc.description.channel]": "Number Of Channels",
   // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.coverage.spatialpvcn": "Province",
-  // "layout.field.label.AudioVideo.dc.date.issued": "Date Issued",
+  "layout.field.label.AudioVideo.[dc.description.channel]": "Number Of Channels",
+  // "layout.field.label.AudioVideo.[dc.format.samplerate]": "Sample Rate",
   // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.date.issued": "Date Issued",
-  // "layout.field.label.AudioVideo.dc.language.iso": "Language",
+  "layout.field.label.AudioVideo.[dc.format.samplerate]": "Sample Rate",
+  // "layout.field.label.AudioVideo.[dc.format.bitsample]": "Bits Per Sample",
   // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.language.iso": "Language",
-  // "layout.field.label.AudioVideo.dc.subject.keywords": "Keywords",
+  "layout.field.label.AudioVideo.[dc.format.bitsample]": "Bits Per Sample",
+  // "layout.field.label.AudioVideo.[dc.description.tools]": "Equipment",
   // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.subject.keywords": "Keywords",
-  // "layout.field.label.AudioVideo.dc.relation.path": "Path",
+  "layout.field.label.AudioVideo.[dc.description.tools]": "Equipment",
+  // "layout.field.label.AudioVideo.[dc.format.medium]": "Physical Description Of The Medium",
   // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.relation.path": "Path",
-  // "layout.field.label.AudioVideo.dc.relation.project": "Project",
+  "layout.field.label.AudioVideo.[dc.format.medium]": "Physical Description Of The Medium",
+  // "layout.field.label.AudioVideo.[dc.description.preservationstate]": "Preservation State",
   // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.relation.project": "Project",
-  // "layout.field.label.AudioVideo.dc.relation.url": "URL",
+  "layout.field.label.AudioVideo.[dc.description.preservationstate]": "Preservation State",
+  // "layout.field.label.AudioVideo.[dc.description.preservationnote]": "Preservation Notes",
   // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.relation.url": "URL",
-  // "layout.field.label.AudioVideo.dc.relation.audiovideo": "Related Documents",
+  "layout.field.label.AudioVideo.[dc.description.preservationnote]": "Preservation Notes",
+  // "layout.field.label.AudioVideo.[dc.description.digitaltools]": "Digital tools",
   // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.relation.audiovideo": "Related Documents",
-  // "layout.field.label.AudioVideo.dc.relation.aggregation": "Aggregation",
-  // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.relation.aggregation": "Aggregation",
-  // "layout.field.label.AudioVideo.dc.rights.license": "License",
-  // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.rights.license": "License",
-  // "layout.field.label.AudioVideo.dc.type": "File Type",
-  // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.type": "File Type",
-  // "layout.field.label.AudioVideo.dc.type.physical": "Physical Type",
-  // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.type.physical": "Physical Type",
-  // "layout.field.label.AudioVideo.dc.format.extent": "Event Time",
-  // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.format.extent": "Event Time",
-  // "layout.field.label.AudioVideo.dc.format.mimetype": "Audio/Video File Encoding",
-  // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.format.mimetype": "Audio/Video File Encoding",
-  // "layout.field.label.AudioVideo.dc.description.channel": "Number Of Channels",
-  // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.description.channel": "Number Of Channels",
-  // "layout.field.label.AudioVideo.dc.format.samplerate": "Sample Rate",
-  // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.format.samplerate": "Sample Rate",
-  // "layout.field.label.AudioVideo.dc.format.bitsample": "Bits Per Sample",
-  // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.format.bitsample": "Bits Per Sample",
-  // "layout.field.label.AudioVideo.dc.description.tools": "Equipment",
-  // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.description.tools": "Equipment",
-  // "layout.field.label.AudioVideo.dc.format.medium": "Physical Description Of The Medium",
-  // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.format.medium": "Physical Description Of The Medium",
-  // "layout.field.label.AudioVideo.dc.description.preservationstate": "Preservation State",
-  // TODO New key - Add a translation
-  "layout.field.label.AudioVideo.dc.description.preservationstate": "Preservation State",
+  "layout.field.label.AudioVideo.[dc.description.digitaltools]": "Digital tools",
   // "layout.field.label.AudioVideo.BITSTREAM": "File(s)",
   // TODO New key - Add a translation
   "layout.field.label.AudioVideo.BITSTREAM": "File(s)",
+  // "layout.field.label.Opera.[dc.title.alternative]": "Alternative Title",
+  // TODO New key - Add a translation
+  "layout.field.label.Opera.[dc.title.alternative]": "Alternative Title",
+  // "layout.field.label.Opera.[dc.date.issued]": "Date Issued",
+  // TODO New key - Add a translation
+  "layout.field.label.Opera.[dc.date.issued]": "Date Issued",
+  // "layout.field.label.Opera.[dc.subject]": "Subject",
+  // TODO New key - Add a translation
+  "layout.field.label.Opera.[dc.subject]": "Subject",
+  // "layout.field.label.Opera.[dc.relation.otherlinks]": "Other Links",
+  // TODO New key - Add a translation
+  "layout.field.label.Opera.[dc.relation.otherlinks]": "Other Links",
+  // "layout.field.label.Opera.[dc.relation.conference]": "Event",
+  // TODO New key - Add a translation
+  "layout.field.label.Opera.[dc.relation.conference]": "Event",
+  // "layout.field.label.Opera.[dc.description.note]": "Notes",
+  // TODO New key - Add a translation
+  "layout.field.label.Opera.[dc.description.note]": "Notes",
+  // "layout.field.label.Opera.[dc.relation.path]": "Path",
+  // TODO New key - Add a translation
+  "layout.field.label.Opera.[dc.relation.path]": "Path",
+  // "layout.field.label.Opera.[dc.relation.aggregation]": "Aggregation",
+  // TODO New key - Add a translation
+  "layout.field.label.Opera.[dc.relation.aggregation]": "Aggregation",
+  // "layout.field.label.Opera.[dc.contributor.author]": "Author",
+  // TODO New key - Add a translation
+  "layout.field.label.Opera.[dc.contributor.author]": "Author",
+  // "layout.field.label.Opera.[dc.contributor.authorrole]": "Role",
+  // TODO New key - Add a translation
+  "layout.field.label.Opera.[dc.contributor.authorrole]": "Role",
 
-  // "layout.field.label.Abbreviation": "Abbreviation",
+
+  // Layout - Autogenerated i18n keys: metadata groups
+  // "layout.field.label.Fonds.NESTED[glamfonds.bibliography.abbreviation]": "Abbreviation",
   // TODO New key - Add a translation
-  "layout.field.label.Abbreviation": "Abbreviation",
-  // "layout.field.label.Title": "Title",
+  "layout.field.label.Fonds.NESTED[glamfonds.bibliography.abbreviation]": "Abbreviation",
+  // "layout.field.label.Fonds.NESTED[glamfonds.bibliography.title]": "Title",
   // TODO New key - Add a translation
-  "layout.field.label.Title": "Title",
-  // "layout.field.label.Editor": "Editor",
+  "layout.field.label.Fonds.NESTED[glamfonds.bibliography.title]": "Title",
+  // "layout.field.label.Fonds.NESTED[glamfonds.bibliography.editor]": "Editor",
   // TODO New key - Add a translation
-  "layout.field.label.Editor": "Editor",
-  // "layout.field.label.Publisher": "Publisher",
+  "layout.field.label.Fonds.NESTED[glamfonds.bibliography.editor]": "Editor",
+  // "layout.field.label.Fonds.NESTED[glamfonds.bibliography.publisher]": "Publisher",
   // TODO New key - Add a translation
-  "layout.field.label.Publisher": "Publisher",
-  // "layout.field.label.Place": "Place",
+  "layout.field.label.Fonds.NESTED[glamfonds.bibliography.publisher]": "Publisher",
+  // "layout.field.label.Fonds.NESTED[glamfonds.bibliography.place]": "Place",
   // TODO New key - Add a translation
-  "layout.field.label.Place": "Place",
-  // "layout.field.label.Year": "Year",
+  "layout.field.label.Fonds.NESTED[glamfonds.bibliography.place]": "Place",
+  // "layout.field.label.Fonds.NESTED[glamfonds.bibliography.year]": "Year",
   // TODO New key - Add a translation
-  "layout.field.label.Year": "Year",
-  // "layout.field.label.Author": "Author",
+  "layout.field.label.Fonds.NESTED[glamfonds.bibliography.year]": "Year",
+  // "layout.field.label.Fonds.NESTED[glamfonds.bibliography.author]": "Author",
   // TODO New key - Add a translation
-  "layout.field.label.Author": "Author",
-  // "layout.field.label.Qualifier": "Qualifier",
+  "layout.field.label.Fonds.NESTED[glamfonds.bibliography.author]": "Author",
+  // "layout.field.label.Fonds.NESTED[glamfonds.editor.name]": "Editor",
   // TODO New key - Add a translation
-  "layout.field.label.Qualifier": "Qualifier",
-  // "layout.field.label.Editing Type": "Editing Type",
+  "layout.field.label.Fonds.NESTED[glamfonds.editor.name]": "Editor",
+  // "layout.field.label.Fonds.NESTED[glamfonds.editor.qualifier]": "Qualifier",
   // TODO New key - Add a translation
-  "layout.field.label.Editing Type": "Editing Type",
-  // "layout.field.label.Edited At": "Edited At",
+  "layout.field.label.Fonds.NESTED[glamfonds.editor.qualifier]": "Qualifier",
+  // "layout.field.label.Fonds.NESTED[glamfonds.editing.type]": "Editing Type",
   // TODO New key - Add a translation
-  "layout.field.label.Edited At": "Edited At",
-  // "layout.field.label.From": "From",
+  "layout.field.label.Fonds.NESTED[glamfonds.editing.type]": "Editing Type",
+  // "layout.field.label.Fonds.NESTED[glamfonds.editing.date]": "Edited At",
   // TODO New key - Add a translation
-  "layout.field.label.From": "From",
-  // "layout.field.label.To": "To",
+  "layout.field.label.Fonds.NESTED[glamfonds.editing.date]": "Edited At",
+
+  // "layout.field.label.Family.NESTED[glamfamily.editor.qualifier]": "Qualifier",
   // TODO New key - Add a translation
-  "layout.field.label.To": "To",
-  // "layout.field.label.Format": "Format",
+  "layout.field.label.Family.NESTED[glamfamily.editor.qualifier]": "Qualifier",
+  // "layout.field.label.Family.NESTED[glamfamily.editing.type]": "Editing Type",
   // TODO New key - Add a translation
-  "layout.field.label.Format": "Format",
-  // "layout.field.label.Inventory Number": "Inventory Number",
+  "layout.field.label.Family.NESTED[glamfamily.editing.type]": "Editing Type",
+  // "layout.field.label.Family.NESTED[glamfamily.editing.date]": "Edited At",
   // TODO New key - Add a translation
-  "layout.field.label.Inventory Number": "Inventory Number",
-  // "layout.field.label.Notes": "Notes",
+  "layout.field.label.Family.NESTED[glamfamily.editing.date]": "Edited At",
+
+  // "layout.field.label.JournalFonds.NESTED[dc.date.start]": "From",
   // TODO New key - Add a translation
-  "layout.field.label.Notes": "Notes",
-  // "layout.field.label.Relation Type": "Relation Type",
+  "layout.field.label.JournalFonds.NESTED[dc.date.start]": "From",
+  // "layout.field.label.JournalFonds.NESTED[dc.date.end]": "To",
   // TODO New key - Add a translation
-  "layout.field.label.Relation Type": "Relation Type",
-  // "layout.field.label.Related Journal Fonds": "Related Journal Fonds",
+  "layout.field.label.JournalFonds.NESTED[dc.date.end]": "To",
+  // "layout.field.label.JournalFonds.NESTED[dc.publisher]": "Publisher",
   // TODO New key - Add a translation
-  "layout.field.label.Related Journal Fonds": "Related Journal Fonds",
-  // "layout.field.label.Person Name": "Person Name",
+  "layout.field.label.JournalFonds.NESTED[dc.publisher]": "Publisher",
+  // "layout.field.label.JournalFonds.NESTED[dc.format]": "Format",
   // TODO New key - Add a translation
-  "layout.field.label.Person Name": "Person Name",
-  // "layout.field.label.Person Role": "Person Role",
+  "layout.field.label.JournalFonds.NESTED[dc.format]": "Format",
+  // "layout.field.label.JournalFonds.NESTED[dc.identifier.inventorynumber]": "Inventory Number",
   // TODO New key - Add a translation
-  "layout.field.label.Person Role": "Person Role",
-  // "layout.field.label.Role": "Role",
+  "layout.field.label.JournalFonds.NESTED[dc.identifier.inventorynumber]": "Inventory Number",
+  // "layout.field.label.JournalFonds.NESTED[dc.description.note]": "Notes",
   // TODO New key - Add a translation
-  "layout.field.label.Role": "Role",
-  // "layout.field.label.Other Author": "Other Author",
+  "layout.field.label.JournalFonds.NESTED[dc.description.note]": "Notes",
+  // "layout.field.label.JournalFonds.NESTED[dc.type.relation]": "Relation Type",
   // TODO New key - Add a translation
-  "layout.field.label.Other Author": "Other Author",
-  // "layout.field.label.Agent": "Agent",
+  "layout.field.label.JournalFonds.NESTED[dc.type.relation]": "Relation Type",
+  // "layout.field.label.JournalFonds.NESTED[glamperson.role]": "Person Role",
   // TODO New key - Add a translation
-  "layout.field.label.Agent": "Agent",
-  // "layout.field.label.History": "History",
+  "layout.field.label.JournalFonds.NESTED[glamperson.role]": "Person Role",
+
+  // "layout.field.label.Publication.NESTED[dc.contributor.author]": "Author",
   // TODO New key - Add a translation
-  "layout.field.label.History": "History",
+  "layout.field.label.Publication.NESTED[dc.contributor.author]": "Author",
+  // "layout.field.label.Publication.NESTED[dc.contributor.authorrole]": "Role",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.NESTED[dc.contributor.authorrole]": "Role",
+  // "layout.field.label.Publication.NESTED[dc.contributor.contributor]": "Other Author",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.NESTED[dc.contributor.contributor]": "Other Author",
+  // "layout.field.label.Publication.NESTED[dc.contributor.contributorrole]": "Role",
+  // TODO New key - Add a translation
+  "layout.field.label.Publication.NESTED[dc.contributor.contributorrole]": "Role",
+
+  // "layout.field.label.Picture.NESTED[dc.contributor.authorrole]": "Role",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.NESTED[dc.contributor.authorrole]": "Role",
+  // "layout.field.label.Picture.NESTED[glam.inscription.position]": "Position",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.NESTED[glam.inscription.position]": "Position",
+  // "layout.field.label.Picture.NESTED[glam.inscription.font]": "Font",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.NESTED[glam.inscription.font]": "Font",
+  // "layout.field.label.Picture.NESTED[glam.inscription.technique]": "Technique",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.NESTED[glam.inscription.technique]": "Technique",
+  // "layout.field.label.Picture.NESTED[glam.inscription.language]": "Language",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.NESTED[glam.inscription.language]": "Language",
+  // "layout.field.label.Picture.NESTED[glam.inscription.class]": "Class",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.NESTED[glam.inscription.class]": "Class",
+  // "layout.field.label.Picture.NESTED[glam.mark.position]": "Position",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.NESTED[glam.mark.position]": "Position",
+  // "layout.field.label.Picture.NESTED[glam.mark.identification]": "Identification",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.NESTED[glam.mark.identification]": "Identification",
+  // "layout.field.label.Picture.NESTED[glam.mark.qualification]": "Qualification",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.NESTED[glam.mark.qualification]": "Qualification",
+  // "layout.field.label.Picture.NESTED[glam.mark.quantity]": "Quantity",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.NESTED[glam.mark.quantity]": "Quantity",
+  // "layout.field.label.Picture.NESTED[glam.mark.class]": "Class",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.NESTED[glam.mark.class]": "Class",
+  // "layout.field.label.Picture.NESTED[glam.bibliography.year]": "Year",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.NESTED[glam.bibliography.year]": "Year",
+  // "layout.field.label.Picture.NESTED[glam.bibliography.publisher]": "Publisher",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.NESTED[glam.bibliography.publisher]": "Publisher",
+  // "layout.field.label.Picture.NESTED[glam.bibliography.place]": "Place",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.NESTED[glam.bibliography.place]": "Place",
+  // "layout.field.label.Picture.NESTED[glam.bibliography.author]": "Author",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.NESTED[glam.bibliography.author]": "Author",
+  // "layout.field.label.Picture.NESTED[glam.bibliography.type]": "Type",
+  // TODO New key - Add a translation
+  "layout.field.label.Picture.NESTED[glam.bibliography.type]": "Type",
+
+  // "layout.field.label.AudioVideo.NESTED[dc.contributor.author]": "Author",
+  // TODO New key - Add a translation
+  "layout.field.label.AudioVideo.NESTED[dc.contributor.author]": "Author",
+  // "layout.field.label.AudioVideo.NESTED[dc.contributor.authorrole]": "Role",
+  // TODO New key - Add a translation
+  "layout.field.label.AudioVideo.NESTED[dc.contributor.authorrole]": "Role",
+  // "layout.field.label.AudioVideo.NESTED[dc.contributor.contributor]": "Agent",
+  // TODO New key - Add a translation
+  "layout.field.label.AudioVideo.NESTED[dc.contributor.contributor]": "Agent",
+  // "layout.field.label.AudioVideo.NESTED[dc.contributor.contributorrole]": "Role",
+  // TODO New key - Add a translation
+  "layout.field.label.AudioVideo.NESTED[dc.contributor.contributorrole]": "Role",
+
+  // "layout.field.label.Opera.NESTED[dc.contributor.author]": "Author",
+  // TODO New key - Add a translation
+  "layout.field.label.Opera.NESTED[dc.contributor.author]": "Author",
+  // "layout.field.label.Opera.NESTED[dc.contributor.authorrole]": "Role",
+  // TODO New key - Add a translation
+  "layout.field.label.Opera.NESTED[dc.contributor.authorrole]": "Role",
+  // "layout.field.label.Artwork.NESTED[dc.contributor.author]": "Author",
+  // TODO New key - Add a translation
+  "layout.field.label.Artwork.NESTED[dc.contributor.author]": "Author",
+  // "layout.field.label.Artwork.NESTED[dc.contributor.authorrole]": "Role",
+  // TODO New key - Add a translation
+  "layout.field.label.Artwork.NESTED[dc.contributor.authorrole]": "Role",
+
+
+  // "label.link-text.description-box.section-site.pdl": "Scopri di più",
+  // TODO New key - Add a translation
+  "label.link-text.description-box.section-site.pdl": "Scopri di più",
+  // "label.title.slider.slider_collections": "Collections",
+  // TODO New key - Add a translation
+  "label.title.slider.slider_collections": "Collections",
+  // "label.title.slider.slider_topics": "Topics",
+  // TODO New key - Add a translation
+  "label.title.slider.slider_topics": "Topics",
 
 
 

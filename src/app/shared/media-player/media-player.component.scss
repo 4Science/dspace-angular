@@ -2,6 +2,7 @@
 @import 'videojs-wavesurfer/dist/css/videojs.wavesurfer.css';
 
 .media-container {
+  max-height: 480px;
   margin-bottom: 140px;
 }
 
@@ -38,17 +39,6 @@
   }
 }
 
-.overlay-onchange {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .video-js {
-  width: 85em !important;
+  width: 100%;
 }

@@ -57,7 +57,6 @@ import { EndUserAgreementComponent } from './app/info/end-user-agreement/end-use
 import { PageNotFoundComponent } from './app/pagenotfound/pagenotfound.component';
 import { ObjectNotFoundComponent } from './app/lookup-by-id/objectnotfound/objectnotfound.component';
 import { ForbiddenComponent } from './app/forbidden/forbidden.component';
-import { PrivacyComponent } from './app/info/privacy/privacy.component';
 import { CollectionStatisticsPageComponent } from './app/statistics-page/collection-statistics-page/collection-statistics-page.component';
 import { CommunityStatisticsPageComponent } from './app/statistics-page/community-statistics-page/community-statistics-page.component';
 import { ItemStatisticsPageComponent } from './app/statistics-page/item-statistics-page/item-statistics-page.component';
@@ -170,6 +169,7 @@ import { RequestCopyModule } from 'src/app/request-copy/request-copy.module';
 import {UserMenuComponent} from './app/shared/auth-nav-menu/user-menu/user-menu.component';
 import { BrowseByComponent } from './app/shared/browse-by/browse-by.component';
 import { RegisterEmailFormComponent } from './app/register-email-form/register-email-form.component';
+import { MarkdownViewerModule } from '../../app/shared/markdown-viewer/markdown-viewer.module';
 
 const DECLARATIONS = [
   FileSectionComponent,
@@ -184,7 +184,6 @@ const DECLARATIONS = [
   PageNotFoundComponent,
   ObjectNotFoundComponent,
   ForbiddenComponent,
-  PrivacyComponent,
   CollectionStatisticsPageComponent,
   CommunityStatisticsPageComponent,
   ItemStatisticsPageComponent,
@@ -324,7 +323,8 @@ const DECLARATIONS = [
     MiradorViewerModule,
     FooterModule,
     ExploreModule,
-    SocialModule
+    SocialModule,
+    MarkdownViewerModule,
   ],
   declarations: DECLARATIONS,
     exports: [

@@ -31,6 +31,8 @@ import { FollowAuthorityMetadata } from './search-follow-metadata.interface';
 import { AdvancedAttachmentRenderingConfig } from './advanced-attachment-rendering.config';
 import { AttachmentRenderingConfig } from './attachment-rendering.config';
 import { SearchResultConfig } from './search-result-config.interface';
+import { MiradorConfig } from './mirador-config.interfaces';
+import { LocationConfig } from './location-config.interface';
 
 interface AppConfig extends Config {
   ui: UIServerConfig;
@@ -68,7 +70,9 @@ interface AppConfig extends Config {
   attachmentRendering: AttachmentRenderingConfig;
   advancedAttachmentRendering: AdvancedAttachmentRenderingConfig;
   searchResult: SearchResultConfig;
-  mainSiteUrl: string;
+  mirador: MiradorConfig;
+  location: LocationConfig;
+  mainSiteUrl?: string;
 }
 
 /**

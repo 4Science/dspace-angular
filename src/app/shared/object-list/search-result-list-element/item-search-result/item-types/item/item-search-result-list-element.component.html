@@ -1,6 +1,7 @@
 <div class="row">
   <div *ngIf="showThumbnails" class="col-3 col-xl-2 pr-sm-0">
-    <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'" [attr.rel]="(linkType == linkTypes.ExternalLink) ? 'noopener noreferrer' : null"
+    <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'"
+       [attr.rel]="(linkType == linkTypes.ExternalLink) ? 'noopener noreferrer' : null"
        [routerLink]="[itemPageRoute]" class="dont-break-out">
       <ds-thumbnail [thumbnail]="dso?.thumbnail | async" [limitWidth]="true">
       </ds-thumbnail>
@@ -13,26 +14,37 @@
   <div [ngClass]="showThumbnails ? 'col-9 col-xl-10' : 'col-12'">
     <div class="d-flex justify-content-between">
       <div class="flex-fill">
+        <small class="d-flex text-muted" *ngIf="!(hasLoadedThirdPartyMetrics$ | async) && showMetrics">
+          {{ "third-party-metrics-blocked" | translate }}&nbsp;
+          <div role="button" class="btn-link"
+               (click)="showSettings()">{{ "third-party-metrics-cookies.consent-settings" | translate }}
+          </div>
+        </small>
         <div class="d-flex">
-          <ds-themed-badges *ngIf="showLabel" [object]="dso" [context]="context" [showAccessStatus]="true"></ds-themed-badges>
+          <ds-themed-badges *ngIf="showLabel" [object]="dso" [context]="context"
+                            [showAccessStatus]="true"></ds-themed-badges>
         </div>
         <ds-truncatable [id]="dso.id" *ngIf="object !== undefined && object !== null">
-          <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'" [attr.rel]="(linkType == linkTypes.ExternalLink) ? 'noopener noreferrer' : null"
-                 [routerLink]="[itemPageRoute]" class="lead item-list-title dont-break-out"
-                 [innerHTML]="dsoTitle"></a>
+          <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'"
+             [attr.rel]="(linkType == linkTypes.ExternalLink) ? 'noopener noreferrer' : null"
+             [routerLink]="[itemPageRoute]" class="lead item-list-title dont-break-out"
+             [innerHTML]="dsoTitle"></a>
           <span *ngIf="linkType == linkTypes.None" class="lead item-list-title dont-break-out"
                 [innerHTML]="dsoTitle"></span>
           <span class="text-muted">
             <ds-truncatable-part [id]="dso.id" [minLines]="1">
               <ng-container *ngIf="dso.firstMetadataValue('dc.publisher') || dso.firstMetadataValue('dc.date.issued')">
-                (<span *ngIf="dso.firstMetadataValue('dc.publisher')" class="item-list-publisher" [innerHTML]="firstMetadataValue('dc.publisher')"></span>
-                <span *ngIf="dso.firstMetadataValue('dc.publisher') && dso.firstMetadataValue('dc.date.issued')">, </span>
+                (<span *ngIf="dso.firstMetadataValue('dc.publisher')" class="item-list-publisher"
+                       [innerHTML]="firstMetadataValue('dc.publisher')"></span>
+                <span
+                  *ngIf="dso.firstMetadataValue('dc.publisher') && dso.firstMetadataValue('dc.date.issued')">, </span>
                 <span *ngIf="dso.firstMetadataValue('dc.date.issued')" class="item-list-date"
                       [innerHTML]="firstMetadataValue('dc.date.issued')"></span>)
               </ng-container>
               <span *ngIf="dso.allMetadataValues(authorMetadata).length > 0" class="item-list-authors">
                 <span *ngFor="let author of dso.allMetadata(authorMetadata); let i=index; let last=last;">
-                  <ds-metadata-link-view [item]="dso" [metadata]="author" [metadataName]="authorMetadata" [showRole]="true"></ds-metadata-link-view><span *ngIf="!last">; </span>
+                  <ds-metadata-link-view [item]="dso" [metadata]="author" [metadataName]="authorMetadata"
+                                         [showRole]="true"></ds-metadata-link-view><span *ngIf="!last">; </span>
                 </span>
               </span>
             </ds-truncatable-part>
@@ -46,8 +58,9 @@
         </ds-truncatable>
         <div *ngIf="fullTextHighlights.length" class="d-flex flex-row item-list-highlights p-3 border-bottom">
           <div>
-            <div *ngFor="let highlight of fullTextHighlights" [innerHTML]="highlight"
-                 class="text-monospace small text-highlights"></div>
+            <ng-container *ngFor="let highlight of fullTextHighlights">
+              <span [innerHTML]="highlight" class="d-block text-monospace small"></span>
+            </ng-container>
           </div>
         </div>
         <div *ngIf="fullTextMirador.length" class="d-flex flex-row item-list-highlights p-3 border-bottom">
@@ -73,8 +86,11 @@
             </ng-container>
           </div>
         </div>
+        <ds-metric-badges *ngIf="showMetrics" class="d-block clearfix" [item]="dso"></ds-metric-badges>
       </div>
-      <ds-metric-badges *ngIf="showMetrics" class="d-block clearfix" [item]="dso"></ds-metric-badges>
+      <div class="align-self-center" *ngIf="showMetrics">
+        <ds-metric-donuts [item]="dso"></ds-metric-donuts>
+      </div>
     </div>
   </div>
 </div>

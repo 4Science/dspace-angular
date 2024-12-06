@@ -17,7 +17,15 @@ export class HostWindowServiceStub {
     return observableOf(this.width < 576);
   }
 
+  isMd(): Observable<boolean> {
+    return observableOf(this.width > 576 && this.width < 800);
+  }
+
   isXsOrSm(): Observable<boolean> {
+    return this.isXs();
+  }
+
+  isMobile(): Observable<boolean> {
     return this.isXs();
   }
 }

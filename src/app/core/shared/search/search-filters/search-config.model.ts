@@ -38,6 +38,12 @@ export class SearchConfig implements CacheableObject {
   type: ResourceType;
 
   /**
+   * The default sort option of this search configuration.
+   */
+  @autoserialize
+  defaultSortOption: DefaultSortOption;
+
+  /**
    * The {@link HALLink}s for this Item
    */
   @deserialize
@@ -66,6 +72,15 @@ export interface FilterConfig {
 export interface SortConfig {
   name: string;
   sortOrder: string;
+}
+
+/**
+ * Interface to model sort option's configuration.
+ */
+export interface DefaultSortOption {
+  actualName?: string;
+  name?: string;
+  sortOrder?: string;
 }
 
 /**

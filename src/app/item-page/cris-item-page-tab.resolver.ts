@@ -1,4 +1,4 @@
-import { Injectable} from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 
 import { Observable } from 'rxjs';
@@ -15,6 +15,8 @@ import { getItemPageRoute } from './item-page-routing-paths';
 import { createFailedRemoteDataObject$ } from '../shared/remote-data.utils';
 import { HardRedirectService } from '../core/services/hard-redirect.service';
 import { getPageNotFoundRoute } from '../app-routing-paths';
+import { isNotEmpty } from '../shared/empty.util';
+import { isPlatformServer } from '@angular/common';
 
 /**
  * This class represents a resolver that requests the tabs of specific
@@ -24,6 +26,7 @@ import { getPageNotFoundRoute } from '../app-routing-paths';
 export class CrisItemPageTabResolver implements Resolve<RemoteData<PaginatedList<CrisLayoutTab>>> {
 
   constructor(
+    @Inject(PLATFORM_ID) protected platformId: any,
     private hardRedirectService: HardRedirectService,
     private tabService: TabDataService,
     private itemDataService: ItemDataService,
@@ -51,21 +54,27 @@ export class CrisItemPageTabResolver implements Resolve<RemoteData<PaginatedList
               if (tabsRD.hasSucceeded && tabsRD?.payload?.page?.length > 0) {
                 // By splitting the url with uuid we can understand if the item is primary item page or a tab
                 const urlSplit = state.url.split(route.params.id);
-                const givenTab = urlSplit[1];
+                const tabArguments = urlSplit[1]?.split('/');
+                const givenTab = tabArguments[1];
+                const hasViewer: boolean = isNotEmpty(tabArguments[2]) && tabArguments[2] === 'viewer';
                 const itemPageRoute = getItemPageRoute(itemRD.payload);
-                const isValidTab = tabsRD.payload.page.some((tab) => !givenTab || `/${tab.shortname}` === givenTab);
+                const isValidTab = tabsRD.payload.page.some((tab) => !givenTab || tab.shortname === givenTab);
 
                 // The main tab is the first non-leading tab, unless there is only one tab and it is marked as leading
                 const mainTab = tabsRD.payload.page.length === 1
                   ? tabsRD.payload.page[0]
                   : tabsRD.payload.page.find(tab => !tab.leading);
-
                 if (!isValidTab) {
                   // If wrong tab is given redirect to 404 page
                   this.router.navigateByUrl(getPageNotFoundRoute(), { skipLocationChange: true, replaceUrl: false });
-                } else if (givenTab === `/${mainTab.shortname}`) {
-                  // If first tab is given redirect to root item page
-                  this.hardRedirectService.redirect(itemPageRoute, 302);
+                } else if (givenTab === mainTab.shortname && !hasViewer) {
+                  if (isPlatformServer(this.platformId)) {
+                    // If first tab is given redirect to root item page
+                    this.hardRedirectService.redirect(itemPageRoute, 302);
+                  } else {
+                    this.router.navigateByUrl(itemPageRoute);
+                  }
+
                 }
               }
               return tabsRD;

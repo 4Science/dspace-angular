@@ -39,13 +39,27 @@ export interface NavbarConfig extends Config {
   showCommunityCollection: boolean;
 }
 
-export interface involvedInstitution {
+export interface InvolvedInstitution {
   src: string;
   href: string;
+  alt?: string;
+}
+
+export interface SocialMedia {
+  faIcon: string;
+  url: string;
+  name: string;
 }
 
 export interface FooterConfig extends Config {
-  involvedInstitutions: involvedInstitution[];
+  involvedInstitutions: InvolvedInstitution[];
+  socialMedia: SocialMedia[];
+}
+
+export interface SectionConfig extends Config {
+  enableAlternateBackground: boolean;
+  skipAlternateBackgroundRows: number;
+  startWithDarkRow: boolean;
 }
 
 export interface CrisItemPageConfig extends Config {
@@ -75,6 +89,7 @@ export interface CrisLayoutConfig extends Config {
 export interface LayoutConfig extends Config {
   navbar: NavbarConfig;
   search: SearchLayoutConfig;
+  sections: SectionConfig;
   footer: FooterConfig;
 }
 

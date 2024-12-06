@@ -1,7 +1,7 @@
 import { RemoteData } from 'src/app/core/data/remote-data';
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of as observableOf } from 'rxjs';
 import { map, merge, mergeMap, scan } from 'rxjs/operators';
 import findIndex from 'lodash/findIndex';
 
@@ -114,7 +114,8 @@ export class VocabularyTreeviewService {
         .subscribe((hierarchy: string[]) => {
           if (hasValue(hierarchy) && hierarchy.length > 0) {
             this.initValueHierarchy = hierarchy;
-            this.retrieveTopNodes(pageInfo, [], selectedItems, publicModeOnly ? hierarchy : null);
+            //this.retrieveTopNodes(pageInfo, [], selectedItems, publicModeOnly ? hierarchy : null);
+            this.retrieveNodesTreeByTopParentEntry(hierarchy[0], pageInfo, selectedItems);
           } else {
             this.loading.next(false);
           }
@@ -355,6 +356,47 @@ export class VocabularyTreeviewService {
       // Notify the change.
       this.dataChange.next(nodes);
     });
+  }
+
+  /**
+   * Retrieve the top level vocabulary entries based on current entry
+   * @param entry The root node to use to start building the tree
+   * @param pageInfo The {@link PageInfo} object
+   * @param selectedItems The currently selected items
+   */
+  private retrieveNodesTreeByTopParentEntry(entry: string, pageInfo: PageInfo, selectedItems: string[]): void {
+    const nodes = [];
+    const rootNode$ = this.getById(entry);
+    let tempList;
+
+    combineLatest([
+      rootNode$,
+      this.getChildrenNodesByParent(entry, pageInfo)
+    ]).pipe(
+      mergeMap(([rootNode, list]) => {
+        tempList = list;
+
+        const childNodes: TreeviewNode[] = list.page.map((entryDetail: VocabularyEntryDetail) => this._generateNode(entryDetail, selectedItems));
+        return this.getNodeHierarchy(rootNode, selectedItems, childNodes);
+      })
+    ).subscribe(hierarchy => {
+      nodes.push(hierarchy);
+
+      if ((tempList.pageInfo.currentPage + 1) <= tempList.pageInfo.totalPages) {
+        // Need a new load more node
+        const newPageInfo: PageInfo = Object.assign(new PageInfo(), tempList.pageInfo, {
+          currentPage: tempList.pageInfo.currentPage + 1
+        });
+        const loadMoreNode = new TreeviewNode(LOAD_MORE_ROOT_NODE, false, newPageInfo);
+        loadMoreNode.updatePageInfo(newPageInfo);
+        nodes.push(loadMoreNode);
+      }
+      this.loading.next(false);
+      // Notify the change.
+      this.dataChange.next(nodes);
+
+    });
+
   }
 
   /**

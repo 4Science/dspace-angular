@@ -2,31 +2,47 @@
   class="navbar navbar-expand-md navbar-light p-0 navbar-container" role="navigation" [attr.aria-label]="'nav.main.description' | translate">
   <div class="navbar-inner-container" [class.container]="!(isXsOrSm$ | async)">
     <div class="top-bar mb-3">
-      <a class="navbar-brand text-center" href="/home">
+      <a [attr.aria-label]="'home.title' | translate" class="navbar-brand text-center" routerLink="/home">
         <div class="logo-circle mb-2"></div>
       </a>
       <div class="ml-auto right-container">
-        <ul class="navbar-nav ml-auto ml-auto mb-auto mt-3">
-          <div class="nav-item" id="home-icon" *ngIf="mainSiteUrl">
-            <a class="nav-link navbar-collapsed" target="_blank" [href]="'https://' + mainSiteUrl" [ngbTooltip]="'nav.mainSiteName' | translate">
-              <i class="fas fa-home fa-lg fa-fw"></i>
-            </a>
-          </div>
-          <ds-themed-lang-switch class="navbar-collapsed"></ds-themed-lang-switch>
-          <ds-themed-auth-nav-menu class="navbar-collapsed"></ds-themed-auth-nav-menu>
+        <ul class="navbar-nav ml-auto ml-auto mb-auto mt-3 list-unstyled">
+          <li>
+            <div class="nav-item" id="home-icon">
+              <a *ngIf="mainSiteUrl" [attr.aria-label]="'nav.mainSiteName' | translate" class="nav-link navbar-collapsed" target="_blank" [href]="'https://' + mainSiteUrl" [ngbTooltip]="'nav.mainSiteName' | translate">
+                <i class="fas fa-home fa-lg fa-fw"></i>
+              </a>
+              <a *ngIf="!mainSiteUrl" [attr.aria-label]="'home.title' | translate" class="nav-link navbar-collapsed" [routerLink]="['/home']" [ngbTooltip]="'home.title' | translate">
+                <i class="fas fa-home fa-lg fa-fw"></i>
+              </a>
+            </div>
+          </li>
+          <li>
+            <ds-themed-lang-switch class="navbar-collapsed"></ds-themed-lang-switch>
+          </li>
+          <li>
+            <ds-themed-auth-nav-menu class="navbar-collapsed"></ds-themed-auth-nav-menu>
+          </li>
+          <li>
+            <ds-impersonate-navbar class="navbar-collapsed"></ds-impersonate-navbar>
+          </li>
         </ul>
-        <ul id="collapsingNav" class="navbar-nav mb-3">
+        <ul id="collapsingNav" class="navbar-nav mb-3 list-unstyled">
           <li *ngIf="(isXsOrSm$ | async) && (isAuthenticated$ | async)" class="nav-item">
             <ds-user-menu [inExpandableNavbar]="true"></ds-user-menu>
           </li>
           <ng-container *ngFor="let section of (sections | async)">
-            <ng-container *ngComponentOutlet="(sectionMap$ | async).get(section.id)?.component; injector: (sectionMap$ | async).get(section.id)?.injector;"></ng-container>
+            <li>
+              <ng-container *ngComponentOutlet="(sectionMap$ | async).get(section.id)?.component; injector: (sectionMap$ | async).get(section.id)?.injector;"></ng-container>
+            </li>
           </ng-container>
         </ul>
       </div>
     </div>
-    <div class="navbar-collapsed">
-      <ds-themed-search-navbar></ds-themed-search-navbar>
-    </div>
   </div>
 </nav>
+<div class="search-navbar-wrapper" *ngIf="!(isXsOrSm$ | async)">
+  <div class="container-fluid">
+    <ds-themed-search-navbar class="navbar-collapsed"></ds-themed-search-navbar>
+  </div>
+</div>

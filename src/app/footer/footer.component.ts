@@ -37,7 +37,6 @@ export class FooterComponent implements OnInit {
 
   showPrivacyPolicy = environment.info.enablePrivacyStatement;
   showEndUserAgreement = environment.info.enableEndUserAgreement;
-  involvedInstitutions = environment.layout.footer.involvedInstitutions;
   showSendFeedback$: Observable<boolean>;
 
   constructor(

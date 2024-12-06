@@ -300,7 +300,6 @@ import { SearchExportCsvComponent } from './search/search-export-csv/search-expo
 import {
   ItemPageTitleFieldComponent
 } from '../item-page/simple/field-components/specific-field/title/item-page-title-field.component';
-import { MarkdownPipe } from './utils/markdown.pipe';
 import { GoogleRecaptchaModule } from '../core/google-recaptcha/google-recaptcha.module';
 import { MenuModule } from './menu/menu.module';
 import {
@@ -353,6 +352,14 @@ import {
 import { ItemCollectionComponent } from './object-collection/shared/mydspace-item-collection/item-collection.component';
 import { ThemedItemListPreviewComponent } from './object-list/my-dspace-result-list-element/item-list-preview/themed-item-list-preview.component';
 import { ItemListPreviewComponent } from './object-list/my-dspace-result-list-element/item-list-preview/item-list-preview.component';
+import { DefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/default-browse-elements.component';
+import { ImagesBrowseElementsComponent } from './browse-most-elements/images-browse-elements/images-browse-elements.component';
+import { ThemedSliderBrowseElementsComponent } from './browse-most-elements/slider-browse-elements/themed-slider-browse-elements.component';
+import { SliderBrowseElementsComponent } from './browse-most-elements/slider-browse-elements/slider-browse-elements.component';
+import { ThemedImagesBrowseElementsComponent } from './browse-most-elements/images-browse-elements/themed-images-browse-elements.component';
+import { ThemedDefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/themed-default-browse-elements.component';
+import { MarkdownDirective } from './utils/markdown.directive';
+import { SortPipe } from './utils/sort.pipe';
 
 const MODULES = [
   CommonModule,
@@ -372,7 +379,7 @@ const MODULES = [
   MenuModule,
   NgxPaginationModule,
   MetricsModule,
-  NgbModule
+  NgbModule,
 ];
 
 const ROOT_MODULES = [
@@ -399,8 +406,8 @@ const PIPES = [
   ConsolePipe,
   ObjNgFor,
   BrowserOnlyPipe,
-  MarkdownPipe,
-  ShortNumberPipe
+  ShortNumberPipe,
+  SortPipe,
 ];
 
 const COMPONENTS = [
@@ -510,7 +517,13 @@ const COMPONENTS = [
   SearchChartBarHorizontalComponent,
   ItemListPreviewComponent,
   ThemedItemListPreviewComponent,
-  ItemCollectionComponent
+  ItemCollectionComponent,
+  DefaultBrowseElementsComponent,
+  ThemedDefaultBrowseElementsComponent,
+  ImagesBrowseElementsComponent,
+  ThemedImagesBrowseElementsComponent,
+  SliderBrowseElementsComponent,
+  ThemedSliderBrowseElementsComponent,
 ];
 
 const ENTRY_COMPONENTS = [
@@ -587,6 +600,9 @@ const ENTRY_COMPONENTS = [
   SearchChartBarHorizontalComponent,
   RelationshipsListComponent,
   AdditionalMetadataComponent,
+  ThemedDefaultBrowseElementsComponent,
+  ThemedImagesBrowseElementsComponent,
+  ThemedSliderBrowseElementsComponent,
 ];
 
 const PROVIDERS = [
@@ -616,6 +632,7 @@ const DIRECTIVES = [
   BackgroundImageDirective,
   ContextHelpDirective,
   EntityIconDirective,
+  MarkdownDirective,
 ];
 
 @NgModule({

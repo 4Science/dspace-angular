@@ -17,8 +17,6 @@ import { HomePageModule } from '../../app/home-page/home-page.module';
 import { StatisticsModule } from '../../app/statistics/statistics.module';
 import { OpenaireModule } from '../../app/openaire/openaire.module';
 import { SearchComponent } from './app/shared/search/search.component';
-import { TopSectionComponent } from './app/shared/explore/section-component/top-section/top-section.component';
-import { BrowseMostElementsComponent } from './app/browse-most-elements/browse-most-elements.component';
 import {
   CountersSectionComponent
 } from './app/shared/explore/section-component/counters-section/counters-section.component';
@@ -33,6 +31,10 @@ import {
 } from './app/shared/explore/section-component/carousel-section/carousel-section.component';
 import { GridSectionComponent } from './app/shared/explore/section-component/grid-section/grid-section.component';
 import { CarouselComponent } from './app/shared/carousel/carousel.component';
+import { CarouselWithThumbnailsModule } from 'src/app/shared/carousel-with-thumbnails/carousel-with-thumbnails.module';
+import {
+  ImagesBrowseElementsComponent
+} from './app/shared/browse-most-elements/images-browse-elements/images-browse-elements.component';
 
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
@@ -50,8 +52,6 @@ const DECLARATIONS = [
   ExplorePageComponent,
   HomePageComponent,
   SearchComponent,
-  TopSectionComponent,
-  BrowseMostElementsComponent,
   CountersSectionComponent,
   TextSectionComponent,
   LangSwitchComponent,
@@ -59,7 +59,8 @@ const DECLARATIONS = [
   SearchNavbarComponent,
   CarouselComponent,
   CarouselSectionComponent,
-  GridSectionComponent
+  GridSectionComponent,
+  ImagesBrowseElementsComponent
 ];
 
 @NgModule({
@@ -75,7 +76,8 @@ const DECLARATIONS = [
     StatisticsModule,
     OpenaireModule,
     CarouselModule,
-    MarkdownViewerModule
+    MarkdownViewerModule,
+    CarouselWithThumbnailsModule
   ],
   declarations: DECLARATIONS,
   providers: [

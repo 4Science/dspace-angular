@@ -1,0 +1,84 @@
+:host {
+  ::ng-deep {
+    .carousel-indicators {
+      padding-bottom: 6px;
+    }
+
+    .carousel-indicators li {
+      display: none;
+    }
+
+    .carousel-caption {
+      color: var(--ds-carousel-caption-color);
+    }
+  }
+
+  .ds-carousel {
+    height: fit-content;
+  }
+
+  .carousel-caption-inner {
+    margin: 0 auto;
+  }
+
+  .picsum-img-wrapper {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    backdrop-filter: blur(12px) brightness(.7);
+
+    img.blurry-backdrop {
+      max-width: 95%;
+      max-height: 95%;
+    }
+  }
+
+  .carousel-content-wrapper {
+    z-index: -1;
+    min-height: 180px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .carousel-arrows {
+    .arrow-btn {
+      opacity: 0.8;
+      color: var(--ds-carousel-with-thumbnails-controls-color);
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .carousel-caption-text {
+    overflow-y: scroll;
+    max-height: 4.5rem;
+  }
+
+  .carousel-caption-text::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .carousel-caption-text::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  .carousel-caption-text::-webkit-scrollbar-thumb {
+    background-color: var(--ds-carousel-controls-color);
+    border-radius: 10px;
+    border: none;
+  }
+
+  button.toggle-paused {
+    color: var(--ds-carousel-with-thumbnails-controls-color);
+    outline: none;
+    box-shadow: none !important
+  }
+}
+
+.thumbnail-wrapper, .humbnail-wrapper-h {
+  position: relative;
+}
+

@@ -60,10 +60,11 @@ export class AttachmentComponent extends BitstreamAttachmentRenderingModelCompon
     @Inject('fieldProvider') public fieldProvider: LayoutField,
     @Inject('itemProvider') public itemProvider: Item,
     @Inject('renderingSubTypeProvider') public renderingSubTypeProvider: string,
+    @Inject('tabNameProvider') public tabNameProvider: string,
     protected bitstreamDataService: BitstreamDataService,
     protected translateService: TranslateService
   ) {
-    super(fieldProvider, itemProvider, renderingSubTypeProvider, bitstreamDataService, translateService);
+    super(fieldProvider, itemProvider, renderingSubTypeProvider, tabNameProvider, bitstreamDataService, translateService);
   }
 
   /**
@@ -79,13 +80,14 @@ export class AttachmentComponent extends BitstreamAttachmentRenderingModelCompon
    */
   retrieveBitstreams(): void {
 
-    this.getTotalBitstreamsByItem(this.pageOptions).pipe(
-      map((bitstreamList: PaginatedList<Bitstream>) => {
-        this.bitstreamsNumber = bitstreamList.totalElements;
-        return bitstreamList.page;
-      }),
-      take(1)
-    ).subscribe();
+    // TODO temporary disable until the endpoint will be optimized
+    // this.getTotalBitstreamsByItem(this.pageOptions).pipe(
+    //   map((bitstreamList: PaginatedList<Bitstream>) => {
+    //     this.bitstreamsNumber = bitstreamList.totalElements;
+    //     return bitstreamList.page;
+    //   }),
+    //   take(1)
+    // ).subscribe();
 
     this.getBitstreamsByItem(this.pageOptions).pipe(
       map((bitstreamList: PaginatedList<Bitstream>) => {

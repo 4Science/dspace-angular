@@ -14,7 +14,7 @@ import { TopSectionComponent } from './top-section.component';
 import { SearchResult } from '../../../search/models/search-result.model';
 import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
 import { createSuccessfulRemoteDataObject$ } from '../../../remote-data.utils';
-import { LayoutModeEnum } from '../../../../core/layout/models/section.model';
+import { LayoutModeEnum, TopSectionTemplateType } from '../../../../core/layout/models/section.model';
 
 describe('TopSectionComponent', () => {
   let component: TopSectionComponent;
@@ -89,6 +89,7 @@ describe('TopSectionComponent', () => {
       showLayoutSwitch: true,
       defaultLayoutMode: LayoutModeEnum.LIST,
       showAllResults: true,
+      template: TopSectionTemplateType.DEFAULT
     };
 
     fixture.detectChanges();
@@ -133,6 +134,7 @@ describe('TopSectionComponent', () => {
         showLayoutSwitch: true,
         defaultLayoutMode: LayoutModeEnum.LIST,
         showAllResults: true,
+        template: TopSectionTemplateType.DEFAULT
       };
 
       fixture.detectChanges();
