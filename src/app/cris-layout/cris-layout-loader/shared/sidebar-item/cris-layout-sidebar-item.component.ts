@@ -75,6 +75,9 @@ export class CrisLayoutSidebarItemComponent {
    * @param key the i18n key
    */
   getTranslation(key: string): string {
+    if (!key) {
+      return null;
+    }
     const value = this.translateService.instant(key);
     return value === key ? null : value;
   }
@@ -85,7 +88,7 @@ export class CrisLayoutSidebarItemComponent {
 
     return this.getTranslation(tabHeaderI18nKey) ??
       this.getTranslation(tabHeaderGenericI18nKey) ??
-        this.getTranslation(tab.header) ??
+        this.getTranslation(tab?.header) ??
           tab.header ??
             '';
   }

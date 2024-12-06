@@ -32,6 +32,10 @@ export class MediaViewerButtonComponent implements OnInit {
    * The bitstream
    */
   @Input() bitstream: Bitstream;
+  /**
+   * The tab name
+   */
+  @Input() tabName: string;
 
   showButton$!: Observable<boolean>;
 
@@ -46,7 +50,7 @@ export class MediaViewerButtonComponent implements OnInit {
 
   async openViewer() {
     if (environment.advancedAttachmentRendering.showViewerOnSameItemPage) {
-      await this.router.navigate([getBitstreamItemViewerDetailsPath(this.item, this.bitstream, 'media')], {fragment: 'viewer'});
+      await this.router.navigate([getBitstreamItemViewerDetailsPath(this.item, this.bitstream, 'media', this.tabName)], {fragment: 'viewer'});
     } else {
       await this.router.navigate([getBitstreamItemViewerPath(this.item, this.bitstream, 'media')]);
     }

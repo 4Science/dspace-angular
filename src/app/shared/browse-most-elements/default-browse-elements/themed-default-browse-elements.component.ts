@@ -1,7 +1,7 @@
-import { Context } from './../../../core/shared/context.model';
-import { ThemedComponent } from './../../../shared/theme-support/themed.component';
-import { TopSection } from './../../../core/layout/models/section.model';
-import { PaginatedSearchOptions } from './../../search/models/paginated-search-options.model';
+import { Context } from '../../../core/shared/context.model';
+import { ThemedComponent } from '../../theme-support/themed.component';
+import { TopSection } from '../../../core/layout/models/section.model';
+import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
 import { DefaultBrowseElementsComponent } from './default-browse-elements.component';
 import { Component, Input } from '@angular/core';
 
@@ -36,7 +36,7 @@ export class ThemedDefaultBrowseElementsComponent extends ThemedComponent<Defaul
   }
 
   protected importThemedComponent(themeName: string): Promise<any> {
-    return import(`./../../../../themes/${themeName}/app/browse-most-elements/default-browse-elements/default-browse-elements.component`);
+    return import(`./../../../../themes/${themeName}/app/shared/browse-most-elements/default-browse-elements/default-browse-elements.component`);
   }
 
   protected importUnthemedComponent(): Promise<any> {

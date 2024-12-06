@@ -37,7 +37,6 @@ export class CarouselSectionComponent implements OnInit {
    * Search results of provided carousel configurations.
    */
   searchResults$: Observable<ItemSearchResult[]>;
-  // searchResults$: Observable<PaginatedList<ItemSearchResult>>;
 
   /**
    * Paginated Search Options of current carousel configurations.
@@ -102,7 +101,7 @@ export class CarouselSectionComponent implements OnInit {
       pagination: pagination,
       sort: new SortOptions(sortField, sortDirection),
       dsoTypes: [DSpaceObjectType.ITEM],
-      forcedEmbeddedKeys: ['bundles']
+      projection: 'preventMetadataSecurity'
     });
 
     this.searchResults$ = this.searchService.search(this.paginatedSearchOptions).pipe(

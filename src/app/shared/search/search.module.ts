@@ -70,6 +70,7 @@ import {
 } from './search-filters/search-filter/search-range-filter-wrapper/search-range-filter-wrapper.component';
 import { CarouselRelationsComponent } from '../../item-page/carousel-relations/carousel-relations.component';
 import { CarouselModule } from '../carousel/carousel.module';
+import { CarouselWithThumbnailsModule } from '../carousel-with-thumbnails/carousel-with-thumbnails.module';
 
 const COMPONENTS = [
   SearchComponent,
@@ -142,6 +143,7 @@ export const MODELS = [
     }),
     SharedModule.withEntryComponents(),
     NouisliderModule,
+    CarouselWithThumbnailsModule
   ],
   exports: [
     ...COMPONENTS

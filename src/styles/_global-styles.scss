@@ -348,6 +348,14 @@ ul.dso-edit-menu-dropdown > li .nav-item.nav-link {
 .mb-ncs { margin-bottom: calc(var(--ds-content-spacing) * -1); }
 .my-ncs { margin-top: calc(var(--ds-content-spacing) * -1); margin-bottom: calc(var(--ds-content-spacing) * -1); }
 
+// ellipsis utility classes (.ellpisis-y-N class truncates the content to N lines)
+@for $i from 1 through 10 {
+  .ellipsis-y-#{$i} {
+    @include ellipsis-y($i);
+  }
+}
+
+
 
 .text-gray-500 {
   color: var(--bs-gray-500) !important;

@@ -37,6 +37,11 @@ export abstract class AbstractBrowseElementsComponent implements OnInit, OnChang
 
   @Input() topSection: TopSection;
 
+  /**
+   * Optional projection to use during the search
+   */
+  projection = 'preventMetadataSecurity';
+
   paginatedSearchOptionsBS: BehaviorSubject<PaginatedSearchOptions>;
 
   searchResults$: Observable<RemoteData<PaginatedList<SearchResult<DSpaceObject>>>>;
@@ -58,6 +63,10 @@ export abstract class AbstractBrowseElementsComponent implements OnInit, OnChang
 
   ngOnInit() {
     const followLinks = this.followThumbnailLink ? [followLink('thumbnail')] : [];
+
+    this.paginatedSearchOptions = Object.assign(new PaginatedSearchOptions({}), this.paginatedSearchOptions, {
+      projection: this.projection
+    });
     this.paginatedSearchOptionsBS = new BehaviorSubject<PaginatedSearchOptions>(this.paginatedSearchOptions);
     this.searchResults$ = this.paginatedSearchOptionsBS.asObservable().pipe(
       mergeMap((paginatedSearchOptions) =>

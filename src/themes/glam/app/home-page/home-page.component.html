@@ -1,5 +1,8 @@
 <ng-container *ngIf="site$.value">
-  <div *ngFor="let sectionComponentRow of ( sectionComponents | async )">
+  <div *ngFor="let sectionComponentRow of ( sectionComponents | async ); index as rowIndex"
+       class="cris-section-row" [class]="componentRowClass(sectionComponentRow)"
+       [class.cris-section-light-row]="isLightRow(rowIndex)"
+       [class.cris-section-dark-row]="isDarkRow(rowIndex)">
     <div class="container-fluid">
       <div class="row">
         <div *ngFor="let sectionComponent of sectionComponentRow" [class]="componentClass(sectionComponent)"
@@ -36,6 +39,10 @@
                                       [sectionId]="sectionId"
                                       [carouselSection]="$any(sectionComponent)"></ds-themed-carousel-section>
 
+          <ds-themed-slider-section *ngSwitchCase="'slider'"
+                                      [sectionId]="sectionId"
+                                      [sliderSection]="$any(sectionComponent)"></ds-themed-slider-section>
+
           <ds-themed-grid-section *ngSwitchCase="'grid'"
                                   [sectionId]="sectionId" [site]="site$.value"
                                   [gridSection]="$any(sectionComponent)"></ds-themed-grid-section>
@@ -47,8 +54,8 @@
           <!-- GLAM sections (on GLAM theme only) -->
 
           <ds-themed-advanced-top-section *ngSwitchCase="'advanced-top-component'"
-                                     [sectionId]="sectionId"
-                                     [advancedTopSection]="$any(sectionComponent)"></ds-themed-advanced-top-section>
+                                          [sectionId]="sectionId"
+                                          [advancedTopSection]="$any(sectionComponent)"></ds-themed-advanced-top-section>
 
         </div>
       </div>

@@ -1,8 +1,21 @@
-<div class="d-flex flex-row flex-wrap justify-content-around gap-3">
-    <ng-container *ngFor="let counter of (counterData$ | async)">
-        <div class="text-center border-bottom border-dark d-flex flex-column flex-fill pb-2 mb-2 counter-container" (click)="goToLink(counter.link)" [ngStyle]="{'cursor': counter.link? 'pointer' : 'inherit'}">
-            <div class="text-dark m-0 counter-label"> {{counter.count}}</div>
-            <div class="text-muted"> {{'explore.counters-section.' + counter.label | translate}}</div>
-        </div>
-    </ng-container>
+<div class="counter-section-wrapper">
+  <div *ngIf="isLoading$ | async">
+    <ds-loading message="{{'loading.default' | translate}}"></ds-loading>
+  </div>
+  <ng-container *ngFor="let counter of (counterData$ | async)">
+    <div *ngIf="counter.count !== '0'" class="counter-container px-2 py-3 d-flex flex-column">
+      <div (click)="goToLink(counter.link)"
+           [ngStyle]="{'cursor': counter.link ? 'pointer' : 'inherit'}"
+           role="button"
+           class="text-center counter-number h1">
+        {{counter.count}}
+      </div>
+      <div (click)="goToLink(counter.link)"
+           [ngStyle]="{'cursor': counter.link ? 'pointer' : 'inherit'}"
+           role="button"
+           class="text-center counter-label">
+        {{'explore.counters-section.' + counter.label | translate}}
+      </div>
+    </div>
+  </ng-container>
 </div>

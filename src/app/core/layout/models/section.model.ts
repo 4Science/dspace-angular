@@ -140,6 +140,29 @@ export interface CarouselSection extends SectionComponent {
   showBlurryBackdrop: boolean;
 }
 
+
+
+export interface SliderSection extends SectionComponent {
+  discoveryConfigurationName: string;
+  order: string;
+  sortField: string;
+  numberOfItems: number;
+  style: string;
+  title: string;
+  link: string;
+  description: string;
+  componentType: 'slider';
+  targetBlank: boolean ;
+  fitWidth: boolean;
+  fitHeight: boolean;
+  keepAspectRatio: boolean;
+  aspectRatio: number;
+  carouselHeightPx: number;
+  captionStyle: string;
+  titleStyle: string;
+  showBlurryBackdrop: boolean;
+}
+
 /**
  * Represents an advanced top section in the layout.
  */

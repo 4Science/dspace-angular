@@ -38,3 +38,11 @@
         background-color: var(--ds-dark-scrollbar-bg);
     }
 }
+
+@mixin ellipsis-y($lines) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines; // number of lines
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

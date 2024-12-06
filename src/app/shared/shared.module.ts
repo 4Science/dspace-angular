@@ -300,7 +300,6 @@ import { SearchExportCsvComponent } from './search/search-export-csv/search-expo
 import {
   ItemPageTitleFieldComponent
 } from '../item-page/simple/field-components/specific-field/title/item-page-title-field.component';
-import { MarkdownPipe } from './utils/markdown.pipe';
 import { GoogleRecaptchaModule } from '../core/google-recaptcha/google-recaptcha.module';
 import { MenuModule } from './menu/menu.module';
 import {
@@ -359,6 +358,8 @@ import { ThemedSliderBrowseElementsComponent } from './browse-most-elements/slid
 import { SliderBrowseElementsComponent } from './browse-most-elements/slider-browse-elements/slider-browse-elements.component';
 import { ThemedImagesBrowseElementsComponent } from './browse-most-elements/images-browse-elements/themed-images-browse-elements.component';
 import { ThemedDefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/themed-default-browse-elements.component';
+import { MarkdownDirective } from './utils/markdown.directive';
+import { SortPipe } from './utils/sort.pipe';
 
 const MODULES = [
   CommonModule,
@@ -378,7 +379,7 @@ const MODULES = [
   MenuModule,
   NgxPaginationModule,
   MetricsModule,
-  NgbModule
+  NgbModule,
 ];
 
 const ROOT_MODULES = [
@@ -405,8 +406,8 @@ const PIPES = [
   ConsolePipe,
   ObjNgFor,
   BrowserOnlyPipe,
-  MarkdownPipe,
-  ShortNumberPipe
+  ShortNumberPipe,
+  SortPipe,
 ];
 
 const COMPONENTS = [
@@ -631,6 +632,7 @@ const DIRECTIVES = [
   BackgroundImageDirective,
   ContextHelpDirective,
   EntityIconDirective,
+  MarkdownDirective,
 ];
 
 @NgModule({

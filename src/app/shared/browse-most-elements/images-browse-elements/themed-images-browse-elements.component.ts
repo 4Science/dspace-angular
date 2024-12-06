@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { ThemedComponent } from '../../theme-support/themed.component';
 import { ImagesBrowseElementsComponent } from './images-browse-elements.component';
 import { Context } from '../../../core/shared/context.model';
@@ -30,7 +30,7 @@ export class ThemedImagesBrowseElementsComponent extends ThemedComponent<ImagesB
   }
 
   protected importThemedComponent(themeName: string): Promise<any> {
-    return import(`./../../../../themes/${themeName}/app/browse-most-elements/images-browse-elements/images-browse-elements.component`);
+    return import(`./../../../../themes/${themeName}/app/shared/browse-most-elements/images-browse-elements/images-browse-elements.component`);
   }
 
   protected importUnthemedComponent(): Promise<any> {

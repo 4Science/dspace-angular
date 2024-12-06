@@ -1,13 +1,13 @@
 <header class="header">
   <nav role="navigation" [attr.aria-label]="'nav.user.description' | translate" class="container navbar navbar-expand-md px-0">
     <div class="d-flex flex-grow-1">
-      <a class="navbar-brand text-center" routerLink="/home">
+      <a [attr.aria-label]="'home.title' | translate" class="navbar-brand text-center" routerLink="/home">
         <div class="logo-circle mb-2"></div>
       </a>
     </div>
     <div class="navbar-buttons d-flex flex-grow-1 ml-auto justify-content-end align-items-center gapx-1">
       <div class="nav-item" id="home-icon" *ngIf="mainSiteUrl">
-        <a target="_blank" [href]="'https://' + mainSiteUrl" [ngbTooltip]="'nav.mainSiteName' | translate">
+        <a [attr.aria-label]="'nav.mainSiteName' | translate"  target="_blank" [href]="'https://' + mainSiteUrl" [ngbTooltip]="'nav.mainSiteName' | translate">
           <i class="fas fa-home fa-lg fa-fw"></i>
         </a>
       </div>
