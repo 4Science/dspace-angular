@@ -1,11 +1,26 @@
-div.counter-container {
-  width: 150px;
-  max-width: 150px;
-  height: 120px;
-}
+:host {
 
-.counter-label {
-  font-weight: 600;
-  font-size: 2.5rem;
-  line-height: 1.2;
+  //div.counter-container {
+  //  height: 120px;
+  //}
+
+  .counter-number {
+    font-weight: var(--ds-cris-section-title-font-weight);
+    font-size: var(--ds-cris-section-title-font-size);
+    color: var(--bs-text-muted);
+  }
+
+  .counter-section-wrapper {
+    display: grid;
+    --ds-counters-minmax-min: max(var(--ds-counters-min-width), calc((100% - var(--ds-counters-column-gap) * var(--ds-counters-max-columns-per-row)) / var(--ds-counters-max-columns-per-row)));
+    grid-template-columns: repeat( auto-fit, minmax(var(--ds-counters-minmax-min), 1fr));
+    gap: var(--ds-counters-column-gap);
+  }
+
+  .counter-container {
+    border-bottom: var(--ds-counters-border-bottom);
+    min-height: 120px;
+    min-width: 160px;
+    padding: 1rem;
+  }
 }

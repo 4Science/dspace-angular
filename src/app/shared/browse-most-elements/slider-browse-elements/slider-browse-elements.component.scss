@@ -21,9 +21,8 @@
     }
     .card {
       height: 30rem;
-      max-height: 35rem;
-      min-width: 250px;
-      max-width: 320px;
+      max-width: 530px;
+      flex: 1; // give the same width to all cards
     }
 
     @include media-breakpoint-down(md) {

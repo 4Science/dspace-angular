@@ -1,10 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { SortDirection, SortOptions } from '../../../../core/cache/models/sort-options.model';
 import { AdvancedTopSection, TopSectionTemplateType } from '../../../../core/layout/models/section.model';
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
 import { Context } from '../../../../core/shared/context.model';
-import { BehaviorSubject } from 'rxjs';
+import {BehaviorSubject, forkJoin, Observable} from 'rxjs';
+import { HostWindowService } from '../../../host-window.service';
+import {SearchService} from '../../../../core/shared/search/search.service';
+import { map, take } from 'rxjs/operators';
+import {RemoteData} from '../../../../core/data/remote-data';
+import {SearchObjects} from '../../../search/models/search-objects.model';
+import {DSpaceObject} from '../../../../core/shared/dspace-object.model';
+import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
 
 /**
  * Component representing the Advanced-Top component section.
@@ -12,6 +19,7 @@ import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'ds-advanced-top-section',
   templateUrl: './advanced-top-section.component.html',
+  styleUrls: ['./advanced-top-section.component.scss'],
 })
 export class AdvancedTopSectionComponent implements OnInit {
 
@@ -35,6 +43,8 @@ export class AdvancedTopSectionComponent implements OnInit {
   @Input()
   context: Context = Context.BrowseMostElements;
 
+  private readonly windowService = inject(HostWindowService);
+
   /**
    * The paginated search options for the section
    */
@@ -55,11 +65,17 @@ export class AdvancedTopSectionComponent implements OnInit {
    */
   selectedDiscoverConfiguration = new BehaviorSubject<string>(null);
 
+  loading$ = new BehaviorSubject<boolean>(true);
+
+  discoveryConfigurationsTotalElementsMap: Map<string, number> = new Map<string, number>();
+
+  constructor(private searchService: SearchService) { }
+
   ngOnInit() {
     const sortDirection = SortDirection[this.advancedTopSection.order?.toUpperCase()] ?? SortDirection.ASC;
     this.sortOptions = new SortOptions(this.advancedTopSection.sortField, sortDirection);
     this.template = this.advancedTopSection.template ?? TopSectionTemplateType.DEFAULT;
-    this.selectDiscoveryConfiguration(this.advancedTopSection.discoveryConfigurationName[0]); // ADVANCED top sections use an ARRAY of configurations
+    this.setDiscoveryConfigurationsTotalElementsMap();
   }
 
   /**
@@ -81,4 +97,51 @@ export class AdvancedTopSectionComponent implements OnInit {
     }));
   }
 
+  isXs() {
+    return this.windowService.isXs();
+  }
+
+  /**
+   * Sends a search request with a pagination of 1 item to get the total number of search results.
+   * In order not to display the configurations with no results.
+   * @param configName - The name of the discovery configuration
+   */
+  getSearchResultTotalNumber(configName: string): Observable<number> {
+    const pagination = Object.assign(new PaginationComponentOptions(), {
+      id: `advanced-top-components-${configName}-discovery-configuration-total`,
+      pageSize: 1,
+      currentPage: 1,
+    });
+    const paginatedSearchOptions = new PaginatedSearchOptions({
+      configuration: configName,
+      pagination: pagination,
+      sort: this.sortOptions,
+    });
+    return this.searchService.search(paginatedSearchOptions).pipe(
+      getFirstCompletedRemoteData(),
+      take(1),
+      map((searchResults: RemoteData<SearchObjects<DSpaceObject>>) => searchResults?.payload?.pageInfo?.totalElements ?? 0)
+    );
+  }
+
+  setDiscoveryConfigurationsTotalElementsMap() {
+    const observables = this.advancedTopSection.discoveryConfigurationName.map((configName: string) =>
+      this.getSearchResultTotalNumber(configName).pipe(
+        map((totalElements: number) => ({ configName, totalElements }))
+      )
+    );
+
+    forkJoin(observables).subscribe(results => {
+      results.forEach(({ configName, totalElements }) => {
+        this.discoveryConfigurationsTotalElementsMap.set(configName, totalElements);
+      });
+      this.selectDiscoveryConfiguration(this.getFirstConfigurationWithData());
+      this.loading$.next(false);
+    });
+  }
+
+  private getFirstConfigurationWithData(): string {
+    return [...this.discoveryConfigurationsTotalElementsMap.keys()]
+      .filter(key => this.discoveryConfigurationsTotalElementsMap.get(key) > 0)[0];
+  }
 }

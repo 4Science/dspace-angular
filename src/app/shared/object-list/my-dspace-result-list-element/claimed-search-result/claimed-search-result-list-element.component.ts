@@ -19,7 +19,7 @@ import { ObjectCacheService } from '../../../../core/cache/object-cache.service'
 import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
 import { Item } from '../../../../core/shared/item.model';
 import { mergeMap, tap } from 'rxjs/operators';
-import { isNotEmpty, hasValue } from '../../../empty.util';
+import { hasValue, isNotEmpty } from '../../../empty.util';
 import { Context } from '../../../../core/shared/context.model';
 
 @Component({
@@ -71,7 +71,7 @@ export class ClaimedSearchResultListElementComponent extends SearchResultListEle
   ngOnInit() {
     super.ngOnInit();
     this.linkService.resolveLinks(this.dso, followLink('workflowitem', {},
-      followLink('item', {}, followLink('bundles')),
+      followLink('item'),
       followLink('submitter')
     ), followLink('action'));
 
@@ -93,8 +93,6 @@ export class ClaimedSearchResultListElementComponent extends SearchResultListEle
         }
       })
     ).subscribe();
-
-    this.showThumbnails = this.appConfig.browseBy.showThumbnails;
   }
 
   ngOnDestroy() {

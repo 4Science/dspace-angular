@@ -1,10 +1,13 @@
-import { LayoutModeEnum, TopSection, TopSectionTemplateType } from '../../core/layout/models/section.model';
-import { Component, inject, Input, OnChanges, OnInit } from '@angular/core';
-import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
-import { Context } from '../../core/shared/context.model';
 import { ViewMode } from '../../core/shared/view-mode.model';
 import { Router } from '@angular/router';
+import { LayoutModeEnum, TopSection, TopSectionTemplateType, } from '../../core/layout/models/section.model';
+import { ChangeDetectorRef, Component, Inject, Input, OnChanges, OnInit, PLATFORM_ID } from '@angular/core';
+
+import { SearchManager } from '../../core/browse/search-manager';
+import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
+import { Context } from '../../core/shared/context.model';
 import { BehaviorSubject } from 'rxjs';
+import { AppConfig, APP_CONFIG } from 'src/config/app-config.interface';
 
 @Component({
   selector: 'ds-browse-most-elements',
@@ -20,7 +23,7 @@ export class BrowseMostElementsComponent implements OnInit, OnChanges {
 
   @Input() topSection: TopSection;
 
-  protected readonly router = inject(Router);
+  @Input() discoveryConfigurationsTotalElementsMap: Map<string, number>;
 
   /**
    * The type of the template to render
@@ -30,6 +33,15 @@ export class BrowseMostElementsComponent implements OnInit, OnChanges {
   sectionTemplateType: TopSectionTemplateType;
 
   paginatedSearchOptionsBS = new BehaviorSubject<PaginatedSearchOptions>(null);
+
+  constructor(
+    @Inject(APP_CONFIG) protected appConfig: AppConfig,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private searchService: SearchManager,
+    private router: Router,
+    private cdr: ChangeDetectorRef) {
+
+  }
 
   ngOnInit(): void {
     this.sectionTemplateType = this.topSection?.template ?? TopSectionTemplateType.DEFAULT;

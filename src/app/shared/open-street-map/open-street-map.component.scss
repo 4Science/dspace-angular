@@ -1,0 +1,5 @@
+@import 'openlayers/dist/ol.css';
+
+#osm-wrapper {
+  position: relative; // required to align internal elements
+}

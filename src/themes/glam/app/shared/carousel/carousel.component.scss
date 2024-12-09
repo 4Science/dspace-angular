@@ -5,9 +5,22 @@
     $title-horizontal-margin: -35px; // allow to overlap arrow wrapper
     $title-line-clamp: 2;
 
-    h1.carousel-header {
-      font-size: 2rem;
+
+    // Carousel height
+    @include media-breakpoint-up(lg) {
+      .image-column, .caption-column, .caption-wrapper {
+        height: var(--ds-glam-carousel-height);
+      }
     }
+    @include media-breakpoint-down(md) {
+      .image-column {
+        height: var(--ds-glam-carousel-mobile-image-height);
+      }
+      .caption-column, .caption-wrapper {
+        height: var(--ds-glam-carousel-mobile-caption-height);
+      }
+    }
+
 
     .image-column {
 
@@ -40,16 +53,15 @@
 
     .caption-column {
 
-      h1 {
+      color: var(--ds-glam-carousel-caption-color);
+      background-color: var(--ds-glam-carousel-caption-background);
+
+      .carousel-header {
         margin-left: $title-horizontal-margin;
         margin-right: $title-horizontal-margin;
-        // Line clamping
-        display: -webkit-box;
         white-space: pre-wrap;
-        overflow: hidden;
-        min-height: 2lh;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: $title-line-clamp;
+        font-size: 40px;
+        font-weight: 700;
       }
 
       .arrow-wrapper {
@@ -59,6 +71,7 @@
         align-items: center;
         min-width: $arrow-column-width;
         cursor: pointer;
+        color: var(--ds-glam-carousel-controls-color);
       }
 
       .caption-wrapper {
@@ -71,12 +84,12 @@
             left: 0;
             width: 100%;
             height: 1lh;
-            background-image: linear-gradient(to bottom, transparent, var(--bs-dark));
+            background-image: linear-gradient(to bottom, transparent, var(--ds-glam-carousel-caption-background));
           }
         }
 
         button.toggle-paused {
-          color: var(--ds-carousel-controls-color);
+          color: var(--ds-glam-carousel-controls-color);
           outline: none;
           box-shadow: none !important
         }

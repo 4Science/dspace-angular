@@ -48,12 +48,9 @@ import {
   WorkspaceitemSectionUnpaywallObject
 } from '../../../core/submission/models/workspaceitem-section-unpaywall-object';
 import { UnpaywallSectionStatus } from './models/unpaywall-section-status';
-import { UnpaywallApi } from './models/unpaywall-api';
-import { ResourceService } from '../../../core/services/resource.service';
 import { of } from 'rxjs';
 import { AuthTokenInfo } from '../../../core/auth/models/auth-token-info.model';
 import { provideMockStore } from '@ngrx/store/testing';
-import { FileItem } from 'ng2-file-upload';
 import { SubmissionObject } from '../../../core/submission/models/submission-object.model';
 import { SectionsType } from '../sections-type';
 import { WorkspaceitemSectionUploadObject } from '../../../core/submission/models/workspaceitem-section-upload.model';
@@ -62,12 +59,13 @@ import {
 } from '../../../core/submission/models/workspaceitem-section-upload-file.model';
 import { RawRestResponse } from '../../../core/dspace-rest/raw-rest-response.model';
 import { SubmissionState } from '../../submission.reducers';
+import { SectionUploadService } from '../upload/section-upload.service';
+import { getMockSectionUploadService } from '../../../shared/mocks/section-upload.service.mock';
 
 describe('SubmissionSectionUnpaywallComponentComponent', () => {
   let component: SubmissionSectionUnpaywallComponent;
   let fixture: ComponentFixture<SubmissionSectionUnpaywallComponent>;
   let httpMock: HttpTestingController;
-  let resourceService: ResourceService;
   let submissionService: SubmissionService;
   let halService: HALEndpointService;
   let tokenExtractor: HttpXsrfTokenExtractor;
@@ -76,6 +74,7 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
   let translate: TranslateService;
   let restApi: DspaceRestService;
   let store: Store<SubmissionState>;
+    let sectionUploadService: SectionUploadService;
   const xsrfToken = 'mock-token';
 
   const initialState = {
@@ -140,6 +139,7 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
         { provide: 'collectionIdProvider', useValue: mockSubmissionCollectionId },
         { provide: 'sectionDataProvider', useValue: {} },
         { provide: 'submissionIdProvider', useValue: mockSubmissionId },
+          { provide: SectionUploadService, useValue: getMockSectionUploadService() },
       ],
       declarations: [SubmissionSectionUnpaywallComponent],
       schemas: [NO_ERRORS_SCHEMA]
@@ -149,7 +149,6 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SubmissionSectionUnpaywallComponent);
-    resourceService = TestBed.inject(ResourceService);
     submissionService = TestBed.inject(SubmissionService);
     halService = TestBed.inject(HALEndpointService);
     httpMock = TestBed.inject(HttpTestingController);
@@ -159,6 +158,7 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
     translate = TestBed.inject(TranslateService);
     restApi = TestBed.inject(DspaceRestService);
     store = TestBed.inject(Store);
+      sectionUploadService = TestBed.inject(SectionUploadService);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -171,19 +171,24 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('uploadFileIfNeeded', () => {
-    it('should upload file if needed', () => {
-      const resourceUrl = 'http://resourse-url/test.txt';
-      const resource = new Blob(['Test data'], { type: 'text/plain' });
+  describe('import file', () => {
+    it('should import the linked resource if needed', () => {
       const submissionObjectName = 'workspaceitems';
       const testEndpoint = 'http://test-endpoint';
       const successLabel = of('success-label');
-      const unpaywallApiResp = { best_oa_location: { url: resourceUrl } } as UnpaywallApi;
-      const submissionObject = {
+      const uploadSection: WorkspaceitemSectionUploadObject = { files: [] };
+      const successfulSection: WorkspaceitemSectionUnpaywallObject = {
+        id: 1,
+        status: UnpaywallSectionStatus.SUCCESSFUL,
+        doi: 'test-doi',
+        itemId: 'test-item-id',
+        timestampCreated: new Date(),
+        timestampLastModified: new Date()
+      };
+      const importedResource = {
         sections: {
           [SectionsType.Unpaywall]: {
-            status: UnpaywallSectionStatus.SUCCESSFUL,
-            jsonRecord: JSON.stringify(unpaywallApiResp),
+            status: UnpaywallSectionStatus.IMPORTED,
             doi: 'test-doi',
             itemId: 'test-item-id',
             timestampCreated: new Date(),
@@ -196,27 +201,32 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
           } as WorkspaceitemSectionUploadObject
         }
       } as unknown as SubmissionObject;
-      component.section$.next(<WorkspaceitemSectionUnpaywallObject>submissionObject.sections.unpaywall);
+      component.unpaywallSection$.next(successfulSection);
+      component.uploadSection$.next({ [SectionsType.Upload]: uploadSection });
+      const requestResponse = { payload: importedResource } as unknown as RawRestResponse;
+      jasmine.clock().install();
 
-      spyOn(resourceService, 'download').withArgs(resourceUrl).and.returnValue(of(resource));
       spyOn(submissionService, 'getSubmissionObjectLinkName').and.returnValue(submissionObjectName);
       spyOn(halService, 'getEndpoint').withArgs(submissionObjectName).and.returnValue(of(testEndpoint));
       spyOn(tokenExtractor, 'getToken').and.returnValue(xsrfToken);
-      spyOn(component.uploader, 'uploadAll').and.callFake(() =>
-        (component.uploader as  any)._onSuccessItem(new FileItem(component.uploader, new File([resource], 'test.txt'), {}), JSON.stringify(submissionObject), null, null));
+      spyOn(restApi, 'request').and.returnValue(of(requestResponse));
       spyOn(sectionService, 'isSectionType')
         .withArgs(mockSubmissionId, SectionsType.Unpaywall, SectionsType.Upload).and.returnValue(of(false))
         .withArgs(mockSubmissionId, SectionsType.Upload, SectionsType.Upload).and.returnValue(of(true));
-      spyOn(translate, 'get').withArgs('submission.sections.upload.upload-successful').and.returnValue(successLabel);
+      spyOn(translate, 'get').withArgs('submission.sections.unpaywall.status.imported').and.returnValue(successLabel);
+      spyOn(component.loading$, 'next');
+      spyOn(component.status$, 'next');
+      spyOn(component.unpaywallSection$, 'next');
       spyOn(notificationsService, 'success').withArgs(null, successLabel);
       spyOn(notificationsService, 'error');
-      spyOn(sectionService, 'updateSectionData').withArgs(mockSubmissionId, SectionsType.Upload, submissionObject.sections[SectionsType.Upload], undefined, undefined);
 
-      component.uploadFileIfNeeded();
+      component.confirmImport();
 
-      expect(component.uploader.uploadAll).toHaveBeenCalledTimes(1);
-      expect(notificationsService.success).toHaveBeenCalledTimes(1);
-      expect(notificationsService.error).not.toHaveBeenCalled();
+      expect(component.loading$.next).toHaveBeenCalledWith(false);
+      expect(component.status$.next).toHaveBeenCalledOnceWith((importedResource.sections[SectionsType.Unpaywall] as WorkspaceitemSectionUnpaywallObject).status);
+      expect(component.unpaywallSection$.next).toHaveBeenCalledWith(importedResource.sections[SectionsType.Unpaywall] as WorkspaceitemSectionUnpaywallObject);
+      expect(sectionUploadService.addUploadedFile).toHaveBeenCalledTimes(1);
+      jasmine.clock().uninstall();
     });
   });
 
@@ -228,7 +238,6 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
         sections: {
           [SectionsType.Unpaywall]: {
             status: UnpaywallSectionStatus.SUCCESSFUL,
-            jsonRecord: '',
             doi: 'test-doi',
             itemId: 'test-item-id',
             timestampCreated: new Date(),
@@ -245,7 +254,7 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
       spyOn(component.loading$, 'next');
       spyOn(component.status$, 'next')
         .withArgs((submissionObject.sections[SectionsType.Unpaywall] as WorkspaceitemSectionUnpaywallObject).status);
-      spyOn(component.section$, 'next')
+        spyOn(component.unpaywallSection$, 'next')
         .withArgs(submissionObject.sections[SectionsType.Unpaywall] as WorkspaceitemSectionUnpaywallObject);
 
       component.refreshApiCheck();
@@ -253,7 +262,7 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
 
       expect(component.loading$.next).toHaveBeenCalledWith(false);
       expect(component.status$.next).toHaveBeenCalledOnceWith((submissionObject.sections[SectionsType.Unpaywall] as WorkspaceitemSectionUnpaywallObject).status);
-      expect(component.section$.next).toHaveBeenCalledOnceWith(submissionObject.sections[SectionsType.Unpaywall] as WorkspaceitemSectionUnpaywallObject);
+        expect(component.unpaywallSection$.next).toHaveBeenCalledOnceWith(submissionObject.sections[SectionsType.Unpaywall] as WorkspaceitemSectionUnpaywallObject);
       jasmine.clock().uninstall();
     });
   });

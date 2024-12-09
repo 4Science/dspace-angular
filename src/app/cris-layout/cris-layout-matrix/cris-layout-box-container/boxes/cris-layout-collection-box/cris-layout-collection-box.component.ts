@@ -67,6 +67,8 @@ export class CrisLayoutCollectionBoxComponent extends CrisLayoutBoxModelComponen
   ngOnInit(): void {
     super.ngOnInit();
 
+    console.warn(this.item);
+
     this.owningCollection$ = this.item.owningCollection.pipe(
       getFirstSucceededRemoteDataPayload(),
       shareReplay(),

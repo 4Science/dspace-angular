@@ -4,12 +4,12 @@ import { FieldRenderingType, MetadataBoxFieldRendering, } from '../metadata-box.
 import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
 
 @Component({
-  selector: 'ds-map',
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss'],
+  selector: 'ds-gmap',
+  templateUrl: './gmap.component.html',
+  styleUrls: ['./gmap.component.scss'],
 })
-@MetadataBoxFieldRendering(FieldRenderingType.MAP)
-export class MapComponent extends RenderingTypeValueModelComponent implements OnInit {
+@MetadataBoxFieldRendering(FieldRenderingType.GMAP)
+export class GmapComponent extends RenderingTypeValueModelComponent implements OnInit {
   coordinates: string;
   ngOnInit(): void {
     this.coordinates = this.metadataValue.value;

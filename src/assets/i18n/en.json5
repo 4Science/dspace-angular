@@ -239,6 +239,14 @@
 
   "admin.registries.metadata.form.namespace": "Namespace",
 
+  "admin.registries.metadata.search.form.search": "Search metadata schema",
+
+  "admin.registries.metadata.search.form.namespace": "Namespace",
+
+  "admin.registries.metadata.search.form.element": "Element",
+
+  "admin.registries.metadata.search.form.qualifier": "Qualifier",
+
   "admin.registries.metadata.head": "Metadata Registry",
 
   "admin.registries.metadata.schemas.no-items": "No metadata schemas to show.",
@@ -838,6 +846,12 @@
 
   "alert.toggle.show": "Show more",
 
+
+  "artwork.listelement.badge": "Artworks",
+
+  "artwork.page.titleprefix": "Artworks",
+
+
   "audiovideo.page.titleprefix": "Audio/Video",
 
   "audiovideo.listelement.badge": "Audio/Video",
@@ -884,6 +898,25 @@
 
   "audit.detail.back.subject": "Subject Audit Logs",
 
+  "errors.location.unsupportedBrowser": "Browser does not support location services",
+
+  "errors.location.permissionDenied": "You have rejected access to your location",
+
+  "errors.location.positionUnavailable": "Unable to determine your location",
+
+  "errors.location.timeout": "Service timeout has been reached",
+
+  "openstreetmap.location.zoomIn": "Zoom in",
+
+  "openstreetmap.location.zoomOut": "Zoom out",
+
+  "openstreetmap.location.center": "Center the map",
+
+  "location.error.invalid-coordinates": "Invalid coordinates",
+
+  "location.error.location-not-found": "Location not found",
+
+  "location.error.api-error": "The service that retrieves the position on the map is currently not available.",
 
   "auth.errors.invalid-user": "Invalid email address or password.",
 
@@ -1442,6 +1475,8 @@
 
 
   "carousel.button.see-more": "See more",
+
+  "carousel.play.pause": "Play/Pause",
 
 
   "search.browse.item-back": "Back to Results",
@@ -2110,7 +2145,7 @@
 
   "cookies.consent.ok": "That's ok",
 
-  "cookies.consent.save": "Save",
+  "cookies.consent.save": "Close",
 
   "cookies.consent.content-notice.title": "Cookie Consent",
 
@@ -2160,9 +2195,21 @@
 
   "cookies.consent.purpose.sharing": "Sharing",
 
+  "cookies.consent.app.title.plumX": "PlumX",
+
+  "cookies.consent.app.description.plumX": "PlumX Metrics provide insights into the ways people interact with individual pieces of research output (articles, conference proceedings, book chapters, and many more) in the online environment. (https://plumanalytics.com/)",
+
+  "cookies.consent.app.title.altmetric": "Altmetric",
+
+  "cookies.consent.app.description.altmetric": "Altmetric’s interface tracks online engagement to reveal how and where your research is being visualized. (https://www.altmetric.com)",
+
+  "cookies.consent.app.title.dimensions": "Dimensions",
+
+  "cookies.consent.app.description.dimensions": "Dimensions analyses references from publications and calculates a set of article-level indicators. (https://www.dimensions.ai)",
+
+  "cookies.consent.purpose.thirdPartyJs": "Third-party JavaScript",
 
   "curation-task.task.citationpage.label": "Generate Citation Page",
-
 
   "curation-task.task.migratedocviewer.label": "Migrate the previously generated doc. viewer resources",
 
@@ -2220,13 +2267,13 @@
 
   "cris-layout.advanced-attachment.requestACopy": "Request a copy",
 
-  "cris-layout.advanced-attachment.viewMore": "View More",
+  "cris-layout.advanced-attachment.viewMore": "View more",
 
   "cris-layout.advanced-attachment.label.not-present": "(not present)",
 
   "cris-layout.advanced-attachment.view-pdf": "Open PDF",
 
-  "cris-layout.attachment.viewMore": "View More",
+  "cris-layout.attachment.viewMore": "View more",
 
   "cris-layout.rendering.collections.owning-collection.label": "Owning collection",
 
@@ -2235,6 +2282,14 @@
   "cris-layout.rendering.collections.loading": "Loading...",
 
   "cris-layout.rendering.collections.load-more": "Load more",
+
+  "cris-layout-box-container.collapse.details.show": "Show description",
+
+  "cris-layout-box-container.collapse.details.hide": "Hide description",
+
+  "cris-layout-box-container.collapse.pathpublications.show": "Show path",
+
+  "cris-layout-box-container.collapse.pathpublications.hide": "Hide path",
 
   "curation-task.task.checklinks.label": "Check Links in Metadata",
 
@@ -2279,6 +2334,8 @@
   "deny-request-copy.intro": "This message will be sent to the applicant of the request",
 
   "deny-request-copy.success": "Successfully denied item request",
+
+  "discoverable.search.results.head": "Search Results",
 
   "dso.name.untitled": "Untitled",
 
@@ -2527,9 +2584,9 @@
 
   "explore.counters-section.rprofiles": "People",
 
-  "explore.carousel.view-more": "View More",
+  "explore.carousel.view-more": "View more",
 
-  "explore.text-section.counter.header": "Our Numbers",
+  "explore.text-section.counter.header": "Our numbers",
 
   "explore.counters-section.publications": "Research outputs",
 
@@ -2688,7 +2745,9 @@
 
   "explore.index.rpname": "Name",
 
-  "explore.index.subject": "Subject",
+  "explore.index.subject": "Keyword",
+
+  "explore.index.glamsubject": "Subject",
 
   "explore.index.title": "Title",
 
@@ -2713,6 +2772,8 @@
   "explore.index.jornalfounddate": "Date",
 
   "explore.index.corporate": "Organizational Unit",
+
+  "explore.index.opera": "Opera",
 
   "explore.search-section.infrastructure.title": "Infrastructure",
 
@@ -2755,6 +2816,7 @@
 
   "file-section.error.header": "Error obtaining files for this item",
 
+  "fondsHomePage.search.results.head": "Fonds",
 
   "footer.built-with": "Built with",
 
@@ -2792,15 +2854,15 @@
 
   "footer.offer-service": "Offered services",
 
-  "footer.history-digital": "History of the digital LID",
+  "footer.history-digital": "History of the digital library",
 
   "footer.org-structure": "Organizational structure",
 
-  "footer.contact": "Contacts",
+  "footer.contact": "Contact details",
 
   "footer.contact.href": "https://www.4science.com/contact-us/",
 
-  "footer.terms": "Terms of Use",
+  "footer.terms": "Terms of use",
 
   "footer.made-info": "Made with <a href=\"https://www.4science.it/dspace-glam/\" target=\"_blank\">DSpace-GLAM</a> - Extension maintained and optimized by <a href=\"https://www.4science.it/servizi/\" target=\"_blank\">4Science</a>",
 
@@ -2930,6 +2992,12 @@
 
   "form.other-information.not-available": "Not available",
 
+  "form.other-information.ror_orgunit_id": "ROR ID",
+
+  "form.other-information.ror_orgunit_type": "ROR type",
+
+  "form.other-information.ror_orgunit_acronym": "ROR acronym",
+
   "form.remove": "Remove",
 
   "form.save": "Save",
@@ -3001,7 +3069,7 @@
 
   "grid.component.subtitle": "...new ways to explore our digital libraries.",
 
-  "grid.component.abstract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "grid.component.abstract": "Beyond traditional boundaries, explore the complex system of unique relationships for new narratives between interdisciplinary content coexisting in different domains.",
 
   "grid.component.link": "/explore/paths",
 
@@ -3064,13 +3132,21 @@
 
   "home.top-section.no-results": "No results found for this category",
 
-  "home.advanced-top-section.dc.date.accessioned": "New accessions",
+  "home.advanced-top-section.dc.date.accessioned": "Highlights",
 
-  "home.advanced-top-section.dc.date.issued": "New accessions",
+  "home.advanced-top-section.dc.date.issued": "Highlights",
 
-  "home.advanced-top-section.metric.view": "New accessions",
+  "home.advanced-top-section.metric.view": "Highlights",
 
-  "home.advanced-top-section.metric.download": "New accessions",
+  "home.advanced-top-section.metric.download": "Highlights",
+
+  "home.advanced-top-section.cris.priority": "Highlights",
+
+  "home.advanced-top-section.discovery.aggregationsHomePage": "Aggregations",
+
+  "home.advanced-top-section.discovery.fondsHomePage": "Fonds",
+
+  "home.advanced-top-section.discovery.journalfondsHomePage": "Journal Fonds",
 
   "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
 
@@ -3110,11 +3186,11 @@
 
   "info.offered-services.title": "Offered Services",
 
-  "info.history-digital-lid.breadcrumbs": "History of the digital LID",
+  "info.history-digital-lid.breadcrumbs": "History of the digital library",
 
-  "info.history-digital-lid.head": "History of the digital LID",
+  "info.history-digital-lid.head": "History of the digital library",
 
-  "info.history-digital-lid.title": "History of the digital LID",
+  "info.history-digital-lid.title": "History of the digital library",
 
   "info.organizational-structure.breadcrumbs": "Organizational structure",
 
@@ -3717,7 +3793,9 @@
 
   "item.page.metric.details": "Details",
 
-  "item.page.metric.label.altmetrics": "Altmetrics©",
+  "item.page.metric.label.altmetric": "Altmetrics©",
+
+  "item.page.metric.label.dimensions": "Dimensions",
 
   "item.page.metric.label.check": "Check",
 
@@ -4665,6 +4743,8 @@
 
   "none.listelement.badge": "Item",
 
+  "no.description.available": "No description available",
+
   "openaire.broker.title": "OpenAIRE Broker",
 
   "openaire.broker.topics.description": "Below you can see all the topics received from the subscriptions to OpenAIRE.",
@@ -5496,7 +5576,9 @@
 
   "search.filters.applied.f.projectorgunits": "Organisation",
 
-  "search.filters.applied.f.subject": "Subject",
+  "search.filters.applied.f.subject": "Keyword",
+
+  "search.filters.applied.f.glamsubject": "Subject",
 
   "search.filters.applied.f.submitter": "Submitter",
 
@@ -5773,11 +5855,17 @@
 
   "search.filters.filter.show-more": "Show more",
 
-  "search.filters.filter.subject.head": "Subject",
+  "search.filters.filter.subject.head": "Keyword",
 
-  "search.filters.filter.subject.placeholder": "Subject",
+  "search.filters.filter.subject.placeholder": "Keyword",
 
-  "search.filters.filter.subject.label": "Search subject",
+  "search.filters.filter.subject.label": "Search keyword",
+
+  "search.filters.filter.glamsubject.head": "Subject",
+
+  "search.filters.filter.glamsubject.placeholder": "Subject",
+
+  "search.filters.filter.glamsubject.label": "Search subject",
 
   "search.filters.filter.submitter.head": "Submitter",
 
@@ -5847,6 +5935,12 @@
 
   "search.filters.filter.family.placeholder": "Family",
 
+  "search.filters.filter.opera.head": "Opera",
+
+  "search.filters.filter.opera.label": "Opera",
+
+  "search.filters.filter.opera.placeholder": "Opera",
+
   "search.filters.entityType.JournalIssue": "Journal Issue",
 
   "search.filters.entityType.JournalVolume": "Journal Volume",
@@ -5884,6 +5978,16 @@
   "search.filters.entityType.JournalFonds": "Journal Fonds",
 
   "search.filters.entityType.Picture": "Picture",
+
+  "search.filters.entityType.Artwork": "Artwork",
+
+  "search.filters.entityType.BnmScheme": "Naturalistic-Mineralogical Heritage",
+
+  "search.filters.entityType.ScientificMaterial": "Scientific Material",
+
+  "search.filters.entityType.MusicalLibrettos": "Musical Librettos",
+
+  "search.filters.entityType.Coin": "Coin",
 
   "search.filters.has_content_in_original_bundle.true": "Yes",
 
@@ -5976,6 +6080,8 @@
   "search.view-switch.show-grid": "Show as grid",
 
   "search.view-switch.show-list": "Show as list",
+
+  "social.component.title": "Social Share",
 
   "sorting.ASC": "Ascending",
 
@@ -6454,6 +6560,8 @@
 
   "submission.import-external.source.rorOrgUnits": "ROR",
 
+  "submission.import-external.source.ror": "ROR",
+
   "submission.import-external.preview.title.Equipment": "Equipment Preview",
 
   "submission.import-external.preview.title.Event": "Event Preview",
@@ -6902,11 +7010,11 @@
 
   "submission.sections.identifiers.otherIdentifiers_label": "Other identifiers: ",
 
-  "submission.sections.submit.progressbar.accessCondition": "Item access conditions",
+  "submission.sections.submit.progressbar.itemAccessConditions": "Item access conditions",
 
   "submission.sections.submit.progressbar.CClicense": "Creative commons license",
 
-  "submission.sections.submit.progressbar.CustomUrlStep": "Custom url",
+  "submission.sections.submit.progressbar.custom-url": "Custom url",
 
   "submission.sections.submit.progressbar.describe.audiovideo": "Item Description",
 
@@ -6969,10 +7077,6 @@
   "submission.sections.submit.progressbar.upload": "Upload files",
 
   "submission.sections.submit.progressbar.sherpaPolicies": "Publisher open access policy information",
-
-  "submission.sections.submit.progressbar.correction-step": "Corrections",
-
-
 
   "submission.sections.sherpa-policy.title-empty": "No publisher policy information available. If your work has an associated ISSN, please enter it above to see any related publisher open access policies.",
 
@@ -7178,6 +7282,7 @@
   "submission.sections.unpaywall.status.pending": "Unpaywall api request is initialized",
 
   "submission.sections.unpaywall.status.no-file": "There are no files to be imported",
+  "submission.sections.unpaywall.status.imported": "The Unpaywall resource has been imported!",
 
   "submission.sections.submit.progressbar.unpaywall": "Unpaywall",
 
@@ -7330,6 +7435,12 @@
   "subscriptions.table.not-available-message": "The subscribed item has been deleted, or you don't currently have the permission to view it",
 
   "subscriptions.table.empty.message": "You do not have any subscriptions at this time. To subscribe to email updates for a Community or Collection, use the subscription button on the object's page.",
+
+  "third-party-metrics-cookies.message": "{{ metricType }} badge is blocked by your ",
+
+  "third-party-metrics-cookies.consent-settings": "consent settings",
+
+  "third-party-metrics-blocked": "Some of the metrics are blocked by your",
 
   "thumbnail.default.alt": "Thumbnail Image",
 
@@ -7635,6 +7746,10 @@
 
   "person.page.orcid.funding-preferences": "Funding preferences",
 
+  "person.page.orcid.products-preferences": "Product preferences",
+
+  "person.page.orcid.patent-preferences": "Patent preferences",
+
   "person.page.orcid.publications-preferences": "Publication preferences",
 
   "person.page.orcid.remove-orcid-message": "If you need to remove your ORCID, please contact the repository administrator",
@@ -7657,6 +7772,14 @@
 
   "person.page.orcid.sync-fundings.disabled": "Disabled",
 
+  "person.page.orcid.sync-patents.all": "All patents",
+
+  "person.page.orcid.sync-patents.mine": "My patents",
+
+  "person.page.orcid.sync-patents.my_selected": "Selected patents",
+
+  "person.page.orcid.sync-patents.disabled": "Disabled",
+
   "person.page.orcid.sync-publications.all": "All publications",
 
   "person.page.orcid.sync-publications.mine": "My publications",
@@ -7664,6 +7787,14 @@
   "person.page.orcid.sync-publications.my_selected": "Selected publications",
 
   "person.page.orcid.sync-publications.disabled": "Disabled",
+
+  "person.page.orcid.sync-products.all": "All products",
+
+  "person.page.orcid.sync-products.mine": "My products",
+
+  "person.page.orcid.sync-products.my_selected": "Selected products",
+
+  "person.page.orcid.sync-products.disabled": "Disabled",
 
   "person.page.orcid.sync-queue.discard": "Discard the change and do not synchronize with the ORCID registry",
 
@@ -7701,7 +7832,11 @@
 
   "person.page.orcid.sync-queue.tooltip.delete": "Remove this entry from the ORCID registry",
 
+  "person.page.orcid.sync-queue.tooltip.patent": "Patent",
+
   "person.page.orcid.sync-queue.tooltip.publication": "Publication",
+
+  "person.page.orcid.sync-queue.tooltip.product": "Product",
 
   "person.page.orcid.sync-queue.tooltip.project": "Project",
 
@@ -7783,7 +7918,11 @@
 
   "person.page.orcid.synchronization-mode-funding-message": "Select whether to send your linked Project entities to your ORCID record's list of funding information.",
 
+  "person.page.orcid.synchronization-mode-patent-message": "Select whether to send your linked Patent entities to your ORCID record's list of works.",
+
   "person.page.orcid.synchronization-mode-publication-message": "Select whether to send your linked Publication entities to your ORCID record's list of works.",
+
+  "person.page.orcid.synchronization-mode-product-message": "Select whether to send your linked Product entities to your ORCID record's list of works.",
 
   "person.page.orcid.synchronization-mode-profile-message": "Select whether to send your biographical data or personal identifiers to your ORCID record.",
 
@@ -7817,7 +7956,7 @@
 
   "relation.rp.projects.search.results.head": "Related Projects",
 
-  "layout.i18n.link.default": "link",
+  "layout.i18n.link.default": "links",
 
   "orcid.badge.tooltip": "Connected to ORCID",
 
@@ -7826,6 +7965,8 @@
   "lucky.search.retry.search": "You can try to search for it in the system with a more general query.",
 
   "lucky.search.multiple.records": "may refer to multiple records",
+
+  "lucky.search.bitstream.notfound": "We are unable to find the file that you have mentioned but it seems to be related to this item.",
 
   "invitation.group.msg": "You have been invited to join the following groups",
 
@@ -7875,6 +8016,11 @@
   "news.page.titleprefix": "News: ",
   "path.page.titleprefix": "Path: ",
   "place.page.titleprefix": "Place: ",
+  "staticpage.page.titleprefix": "Page: ",
+  "opera.page.titleprefix": "Opera: ",
+  "coin.page.titleprefix": "Coin: ",
+  "scientificmaterial.page.titleprefix": "Scientific Material: ",
+  "musicallibrettos.page.titleprefix": "Musical Librettos: ",
 
   "aggregation.listelement.badge": "Aggregation",
   "news.listelement.badge": "News",
@@ -7883,17 +8029,18 @@
   "opera.listelement.badge": "Opera",
   "coin.listelement.badge": "Coin",
   "scientificmaterial.listelement.badge": "Scientific Material",
+  "musicallibrettos.listelement.badge": "Musical Librettos",
 
   "picture.listelement.badge": "Picture",
   "menu.section.explore_sectionfonds": "Fonds",
   "menu.section.explore_sectionjournalfonds": "Journal Fonds",
 
   "menu.section.explore_sectionaggregations": "Aggregations",
-  "menu.section.explore_sectiondocuments": "Documents & Other materials",
+  "menu.section.explore_sectiondocuments": "Documents & other materials",
   "explore.counters-section.fonds": "Fonds",
   "explore.counters-section.journalfonds": "Journal Fonds",
   "explore.counters-section.aggregations": "Aggregations",
-  "explore.counters-section.documents": "Documents & Other materials",
+  "explore.counters-section.documents": "Documents & other materials",
 
   "explore.index.titleF": "Title",
   "explore.index.typeF": "Type",
@@ -7913,7 +8060,7 @@
   "explore.index.aggregation": "Aggregation",
   "explore.index.parentA": "Parent",
 
-  "explore.search-section.sectiondocuments.title": "Search Documents & Other materials",
+  "explore.search-section.sectiondocuments.title": "Search Documents & other materials",
 
   "explore.search-section.sectionfonds.title": "Search Fonds",
 
@@ -7921,15 +8068,18 @@
 
   "explore.search-section.sectionaggregations.title": "Search Aggregations",
 
-  "explore.sectiondocuments.breadcrumbs": "Documents & Other materials",
+  "explore.sectiondocuments.breadcrumbs": "Documents & other materials",
 
   "explore.sectionfonds.breadcrumbs": "Fonds",
   "explore.sectionjournalfonds.breadcrumbs": "Journal Fonds",
   "explore.sectionaggregations.breadcrumbs": "Aggregations",
-  "documents.search.results.head": "Documents & Other materials Search Results",
+  "documents.search.results.head": "Documents & other materials Search Results",
   "fonds.search.results.head": "Fonds Search Results",
   "journalfonds.search.results.head": "Journal Fonds Search Results",
   "aggregations.search.results.head": "Aggregations Search Results",
+  "fonds.searchHomePage.results.head": "Fonds Search Results",
+  "journalfondsHomePage.search.results.head": "Journal Fonds Search Results",
+  "aggregationsHomePage.search.results.head": "Aggregations Search Results",
   "path.search.results.head": "Paths Search Results",
   "additions.search.results.head": "Recent Additions Search Results",
   "search.filters.filter.path.head": "Path",
@@ -7973,8 +8123,6 @@
 
   "submission.sections.submit.progressbar.describe.opera": "Opera Details",
 
-  "submission.sections.submit.progressbar.describe.coin": "Coin Details",
-
   "submission.sections.submit.progressbar.describe.picture": "Picture Details",
 
   "submission.sections.submit.progressbar.describe.news": "News Details",
@@ -7996,6 +8144,36 @@
   "submission.sections.submit.progressbar.describe.scientificmaterial_references": "Scientific Material Contextual References",
 
   "submission.sections.submit.progressbar.describe.journal_file": "Journal File Details",
+
+  "submission.sections.submit.progressbar.describe.books": "Book basic information",
+
+  "submission.sections.submit.progressbar.describe.coin": "Coin basic information",
+
+  "submission.sections.submit.progressbar.describe.coin-glam-bibliography": "Coin bibliographic details",
+
+  "submission.sections.submit.progressbar.describe.artworks": "Artwork basic information",
+
+  "submission.sections.submit.progressbar.describe.artworks-glam-bibliography": "Artwork bibliographic details",
+
+  "submission.sections.submit.progressbar.describe.artworks-dc-contributor-author": "Authors basic information",
+
+  "submission.sections.submit.progressbar.describe.musical_librettos": "Musical Libretto basic information",
+
+  "submission.sections.submit.progressbar.describe.scientific_materials": "Scientific Material basic information",
+
+  "submission.sections.submit.progressbar.describe.scientific_materials-glam-bibliography": "Scientific Material bibliographic details",
+
+  "submission.sections.submit.progressbar.describe.scientific_materials-glam-inscription": "Inscription basic information",
+
+  "submission.sections.submit.progressbar.describe.scientific_materials-dc-contributor-author": "Authors basic information",
+
+  "submission.sections.submit.progressbar.describe.bnm_scheme": "Bnm scheme basic information",
+
+  "submission.sections.submit.progressbar.describe.bnm_scheme_physicalproperties": "Physical Properties",
+
+  "submission.sections.submit.progressbar.describe.bnm_scheme_geolocalization": "Geolocation",
+
+  "submission.sections.submit.progressbar.describe.bnm_scheme_relation": "Relationships",
 
   "map.coordinates-invalid": "Coordinates are not valid",
 
@@ -8217,54 +8395,11 @@
 
   "external-login-page.confirm-email.create-account.notifications.error.no-netId": "Something went wrong with this email account. Try again or use a different method to login.",
 
-  "slider-browse-elements.no-results": "No results available for this configuration",
+  // Layout - Common i18n keys: Metadata fallback values (not generated by CRIS layout tool)
 
-  // Layout - Autogenerated i18n keys: metadata groups (remove duplicates)
 
-  "layout.field.label.Fonds.glamfonds.bibliography.abbreviation": "Abbreviation",
-  "layout.field.label.Fonds.glamfonds.bibliography.title": "Title",
-  "layout.field.label.Fonds.glamfonds.bibliography.editor": "Editor",
-  "layout.field.label.Fonds.glamfonds.bibliography.publisher": "Publisher",
-  "layout.field.label.Fonds.glamfonds.bibliography.place": "Place",
-  "layout.field.label.Fonds.glamfonds.bibliography.year": "Year",
-  "layout.field.label.Fonds.glamfonds.bibliography.author": "Author",
-  "layout.field.label.Fonds.glamfonds.editor.name": "Editor",
-  "layout.field.label.Fonds.glamfonds.editor.qualifier": "Qualifier",
-  "layout.field.label.Fonds.glamfonds.editing.type": "Editing Type",
-  "layout.field.label.Fonds.glamfonds.editing.date": "Edited At",
-  "layout.field.label.Family.glamfamily.editor.qualifier": "Qualifier",
-  "layout.field.label.Family.glamfamily.editing.type": "Editing Type",
-  "layout.field.label.Family.glamfamily.editing.date": "Edited At",
-  "layout.field.label.JournalFonds.dc.date.start": "From",
-  "layout.field.label.JournalFonds.dc.date.end": "To",
-  "layout.field.label.JournalFonds.dc.publisher": "Publisher",
-  "layout.field.label.JournalFonds.dc.format": "Format",
-  "layout.field.label.JournalFonds.dc.identifier.inventorynumber": "Inventory Number",
-  "layout.field.label.JournalFonds.dc.description.note": "Notes",
-  "layout.field.label.JournalFonds.dc.type.relation": "Relation Type",
-  "layout.field.label.JournalFonds.glamperson.role": "Person Role",
-  "layout.field.label.Publication.dc.contributor.authorrole": "Role",
-  "layout.field.label.Publication.dc.contributor.contributorrole": "Role",
-  "layout.field.label.Picture.dc.contributor.authorrole": "Role",
-  "layout.field.label.Picture.glam.inscription.position": "Position",
-  "layout.field.label.Picture.glam.inscription.font": "Font",
-  "layout.field.label.Picture.glam.inscription.technique": "Technique",
-  "layout.field.label.Picture.glam.inscription.language": "Language",
-  "layout.field.label.Picture.glam.inscription.class": "Class",
-  "layout.field.label.Picture.glam.mark.position": "Position",
-  "layout.field.label.Picture.glam.mark.identification": "Identification",
-  "layout.field.label.Picture.glam.mark.qualification": "Qualification",
-  "layout.field.label.Picture.glam.mark.quantity": "Quantity",
-  "layout.field.label.Picture.glam.mark.class": "Class",
-  "layout.field.label.Picture.glam.bibliography.year": "Year",
-  "layout.field.label.Picture.glam.bibliography.publisher": "Publisher",
-  "layout.field.label.Picture.glam.bibliography.place": "Place",
-  "layout.field.label.Picture.glam.bibliography.author": "Author",
-  "layout.field.label.Picture.glam.bibliography.type": "Type",
-  "layout.field.label.AudioVideo.dc.contributor.authorrole": "Role",
-  "layout.field.label.AudioVideo.dc.contributor.contributorrole": "Role",
 
-  // Layout - Tab headers
+  // Layout - Autogenerated i18n keys: Tab headers
 
   "layout.tab.header.Person.details": "Profile",
   "layout.tab.header.Person.creators": "Creator of",
@@ -8344,14 +8479,16 @@
   "layout.tab.header.Publication.relations": "Relations",
 
   "layout.tab.header.AudioVideo.details": "Details",
+  "layout.tab.header.Opera.details": "Details",
 
-  // Layout box headers
+  // Layout - Autogenerated i18n keys: box headers
 
   "layout.box.header.Person.profile": "Profile",
   "layout.box.header.Person.publications": "Publications",
   "layout.box.header.Person.copublications": "Publications Contributors",
   "layout.box.header.Person.projects": "Projects",
   "layout.box.header.Person.fonds": "Fonds Parent",
+  "layout.box.header.Person.networklab": "Network Lab",
   "layout.box.header.Person.personlinks": "Person Links",
   "layout.box.header.Person.bibliographiclinks": "Bibliographical links",
   "layout.box.header.Person.relationevent": "Events",
@@ -8474,433 +8611,478 @@
   "layout.box.header.Publication.relationhaspart": "Contains",
 
   "layout.box.header.AudioVideo.details": "Details",
+  "layout.box.header.Opera.details": "Details",
 
   // Layout - Autogenerated i18n keys: metadata
 
-  "layout.field.label.Person.crisrp.name.translated": "Translated Name",
-  "layout.field.label.Person.crisrp.name.variant": "Alternative Names",
-  "layout.field.label.Person.glamperson.gender": "Gender",
-  "layout.field.label.Person.glamperson.role": "Role",
-  "layout.field.label.Person.glamperson.nationality": "Nationality",
-  "layout.field.label.Person.person.birthDate": "Birth Date",
-  "layout.field.label.Person.glamperson.deathDate": "Death Date",
-  "layout.field.label.Person.glamperson.birthYear": "Birth Year",
-  "layout.field.label.Person.glamperson.deathYear": "Death Year",
-  "layout.field.label.Person.glamperson.birthPlace": "Birth Place",
-  "layout.field.label.Person.glamperson.deathPlace": "Death Place",
-  "layout.field.label.Person.dc.description.abstract": "Abstract",
-  "layout.field.label.Person.dc.relation.event": "Partecipated in",
-  "layout.field.label.Person.glamperson.activityPeriod": "Activity Period",
-  "layout.field.label.Person.glamperson.biography": "Biography",
-  "layout.field.label.Person.dc.relation.aggregation": "Aggregation",
-  "layout.field.label.Person.dc.relation.path": "Path",
-  "layout.field.label.Person.dc.relation.opac": "OPAC Link",
-  "layout.field.label.Person.glamperson.link.otherbibliographic": "Other Bibliographic Links",
-  "layout.field.label.Person.glamperson.link.dbi": "DBI Link",
-  "layout.field.label.Person.glamperson.link.ei": "EI Link",
-  "layout.field.label.Person.glam.link.wikipedia": "Wikipedia Link",
-  "layout.field.label.Person.glam.link.dbpedia": "Dbpedia Link",
-  "layout.field.label.Person.glam.link.viaf": "VIAF Link",
-  "layout.field.label.Person.glam.link.eb": "EB Link",
-  "layout.field.label.Person.glamperson.link.ulan": "Getty ULAN Link",
-  "layout.field.label.Person.dc.relation.otherlinks": "Other Links",
+  "layout.field.label.Person.[crisrp.name.translated]": "Translated Name",
+  "layout.field.label.Person.[crisrp.name.variant]": "Alternative Names",
+  "layout.field.label.Person.[glamperson.gender]": "Gender",
+  "layout.field.label.Person.[glamperson.role]": "Role",
+  "layout.field.label.Person.[glamperson.nationality]": "Nationality",
+  "layout.field.label.Person.[person.birthDate]": "Birth Date",
+  "layout.field.label.Person.[glamperson.deathDate]": "Death Date",
+  "layout.field.label.Person.[glamperson.birthYear]": "Birth Year",
+  "layout.field.label.Person.[glamperson.deathYear]": "Death Year",
+  "layout.field.label.Person.[glamperson.birthPlace]": "Birth Place",
+  "layout.field.label.Person.[glamperson.deathPlace]": "Death Place",
+  "layout.field.label.Person.[dc.description.abstract]": "Abstract",
+  "layout.field.label.Person.[dc.relation.event]": "Partecipated in",
+  "layout.field.label.Person.[glamperson.activityPeriod]": "Activity Period",
+  "layout.field.label.Person.[glamperson.biography]": "Biography",
+  "layout.field.label.Person.[dc.relation.aggregation]": "Aggregation",
+  "layout.field.label.Person.[dc.relation.path]": "Path",
+  "layout.field.label.Person.[dc.relation.opac]": "OPAC Link",
+  "layout.field.label.Person.[glamperson.link.otherbibliographic]": "Other Bibliographic Links",
+  "layout.field.label.Person.[glamperson.link.dbi]": "DBI Link",
+  "layout.field.label.Person.[glamperson.link.ei]": "EI Link",
+  "layout.field.label.Person.[glam.link.wikipedia]": "Wikipedia Link",
+  "layout.field.label.Person.[glam.link.dbpedia]": "Dbpedia Link",
+  "layout.field.label.Person.[glam.link.viaf]": "VIAF Link",
+  "layout.field.label.Person.[glam.link.eb]": "EB Link",
+  "layout.field.label.Person.[glamperson.link.ulan]": "Getty ULAN Link",
+  "layout.field.label.Person.[dc.relation.otherlinks]": "Other Links",
 
-  "layout.field.label.OrgUnit.organization.parentOrganization": "Parent Organisation",
-  "layout.field.label.OrgUnit.crisou.director": "Director",
-  "layout.field.label.OrgUnit.organization.foundingDate": "Founding Date",
-  "layout.field.label.OrgUnit.dc.description.abstract": "Description",
-  "layout.field.label.OrgUnit.organization.address.addressLocality": "City",
-  "layout.field.label.OrgUnit.organization.address.addressCountry": "Country",
-  "layout.field.label.OrgUnit.glamou.address": "Address",
-  "layout.field.label.OrgUnit.glamou.address.postcode": "Postal Code",
-  "layout.field.label.OrgUnit.dc.type": "Type",
-  "layout.field.label.OrgUnit.glamou.accessibility": "Accessibility",
-  "layout.field.label.OrgUnit.glamou.services": "Services",
-  "layout.field.label.OrgUnit.glamou.collectingPolicies": "Collecting Policies",
-  "layout.field.label.OrgUnit.dc.relation.aggregation": "Aggregation",
-  "layout.field.label.OrgUnit.dc.relation.path": "Path",
+  "layout.field.label.OrgUnit.[organization.parentOrganization]": "Parent Organisation",
+  "layout.field.label.OrgUnit.[crisou.director]": "Director",
+  "layout.field.label.OrgUnit.[organization.foundingDate]": "Founding Date",
+  "layout.field.label.OrgUnit.[dc.description.abstract]": "Description",
+  "layout.field.label.OrgUnit.[organization.address.addressLocality]": "City",
+  "layout.field.label.OrgUnit.[organization.address.addressCountry]": "Country",
+  "layout.field.label.OrgUnit.[glamou.address]": "Address",
+  "layout.field.label.OrgUnit.[glamou.address.postcode]": "Postal Code",
+  "layout.field.label.OrgUnit.[dc.type]": "Type",
+  "layout.field.label.OrgUnit.[glamou.accessibility]": "Accessibility",
+  "layout.field.label.OrgUnit.[glamou.services]": "Services",
+  "layout.field.label.OrgUnit.[glamou.collectingPolicies]": "Collecting Policies",
+  "layout.field.label.OrgUnit.[dc.relation.aggregation]": "Aggregation",
+  "layout.field.label.OrgUnit.[dc.relation.path]": "Path",
 
-  "layout.field.label.Project.oairecerif.acronym": "Acronym",
-  "layout.field.label.Project.crispj.coordinator": "Consortium Coordinator",
-  "layout.field.label.Project.oairecerif.internalid": "Internal ID",
-  "layout.field.label.Project.crispj.partnerou": "Partner Organisations",
-  "layout.field.label.Project.crispj.investigator": "Principal Investigator",
-  "layout.field.label.Project.crispj.openaireid": "OpenAIRE ID",
-  "layout.field.label.Project.crispj.organization": "Organisations",
-  "layout.field.label.Project.oairecerif.identifier.url": "Project Web Site",
-  "layout.field.label.Project.oairecerif.oamandate": "OA Mandate",
-  "layout.field.label.Project.oairecerif.oamandate.url": "OA Mandate URL",
-  "layout.field.label.Project.oairecerif.project.startDate": "Start Date",
-  "layout.field.label.Project.oairecerif.project.endDate": "End Date",
-  "layout.field.label.Project.oairecerif.project.status": "Status",
-  "layout.field.label.Project.crispj.coinvestigators": "Investigators",
-  "layout.field.label.Project.dc.type": "Type",
-  "layout.field.label.Project.dc.description.abstract": "Description",
-  "layout.field.label.Project.dc.subject": "Keywords",
-  "layout.field.label.Project.dc.relation.aggregation": "Aggregation",
-  "layout.field.label.Project.dc.relation.path": "Path",
+  "layout.field.label.Project.[oairecerif.acronym]": "Acronym",
+  "layout.field.label.Project.[crispj.coordinator]": "Consortium Coordinator",
+  "layout.field.label.Project.[oairecerif.internalid]": "Internal ID",
+  "layout.field.label.Project.[crispj.partnerou]": "Partner Organisations",
+  "layout.field.label.Project.[crispj.investigator]": "Principal Investigator",
+  "layout.field.label.Project.[crispj.openaireid]": "OpenAIRE ID",
+  "layout.field.label.Project.[crispj.organization]": "Organisations",
+  "layout.field.label.Project.[oairecerif.identifier.url]": "Project Web Site",
+  "layout.field.label.Project.[oairecerif.oamandate]": "OA Mandate",
+  "layout.field.label.Project.[oairecerif.oamandate.url]": "OA Mandate URL",
+  "layout.field.label.Project.[oairecerif.project.startDate]": "Start Date",
+  "layout.field.label.Project.[oairecerif.project.endDate]": "End Date",
+  "layout.field.label.Project.[oairecerif.project.status]": "Status",
+  "layout.field.label.Project.[crispj.coinvestigators]": "Investigators",
+  "layout.field.label.Project.[dc.type]": "Type",
+  "layout.field.label.Project.[dc.description.abstract]": "Description",
+  "layout.field.label.Project.[dc.subject]": "Keywords",
+  "layout.field.label.Project.[dc.relation.aggregation]": "Aggregation",
+  "layout.field.label.Project.[dc.relation.path]": "Path",
 
-  "layout.field.label.Event.oairecerif.acronym": "Acronym",
-  "layout.field.label.Event.glamevent.variants": "Variants",
-  "layout.field.label.Event.dc.type": "Type",
-  "layout.field.label.Event.oairecerif.event.startDate": "Start Date",
-  "layout.field.label.Event.oairecerif.event.endDate": "End Date",
-  "layout.field.label.Event.oairecerif.event.place": "Location",
-  "layout.field.label.Event.oairecerif.event.country": "Country",
-  "layout.field.label.Event.dc.description.abstract": "Abstract",
-  "layout.field.label.Event.dc.subject": "Keywords",
-  "layout.field.label.Event.glam.link.wikipedia": "Wikipedia Link",
-  "layout.field.label.Event.glam.link.dbpedia": "Dbpedia Link",
+  "layout.field.label.Event.[oairecerif.acronym]": "Acronym",
+  "layout.field.label.Event.[glamevent.variants]": "Variants",
+  "layout.field.label.Event.[dc.type]": "Type",
+  "layout.field.label.Event.[oairecerif.event.startDate]": "Start Date",
+  "layout.field.label.Event.[oairecerif.event.endDate]": "End Date",
+  "layout.field.label.Event.[oairecerif.event.place]": "Location",
+  "layout.field.label.Event.[oairecerif.event.country]": "Country",
+  "layout.field.label.Event.[dc.description.abstract]": "Abstract",
+  "layout.field.label.Event.[dc.subject]": "Keywords",
+  "layout.field.label.Event.[dc.relation.aggregation]": "Aggregation",
+  "layout.field.label.Event.[dc.relation.path]": "Path",
+  "layout.field.label.Event.[glam.link.wikipedia]": "Wikipedia Link",
+  "layout.field.label.Event.[glam.link.dbpedia]": "Dbpedia Link",
 
-  "layout.field.label.Publication.dc.title.alternative": "Alternative Title",
-  "layout.field.label.Publication.dc.identifier.isbn": "ISBN",
-  "layout.field.label.Publication.dc.identifier.issn": "ISSN",
-  "layout.field.label.Publication.dc.identifier.bid": "BID",
-  "layout.field.label.Publication.dc.identifier.doi": "DOI",
-  "layout.field.label.Publication.dc.identifier.uri": "URI",
-  "layout.field.label.Publication.dc.identifier.nbn": "NBN:IT",
-  "layout.field.label.Publication.dc.identifier.inventorynumber": "Inventory Number",
-  "layout.field.label.Publication.dc.identifier.shelfmark": "Shelfmark",
-  "layout.field.label.Publication.dc.identifier.other": "Other Identifier",
-  "layout.field.label.Publication.dc.identifier.codex": "Codex",
-  "layout.field.label.Publication.dc.identifier.archivalunit": "Archival Unit",
-  "layout.field.label.Publication.dc.date.issued": "Date Issued",
-  "layout.field.label.Publication.dc.contributor.author": "Author(s)",
-  "layout.field.label.Publication.dc.contributor.contributor": "Secondary Author(s)",
-  "layout.field.label.Publication.dc.type": "Type",
-  "layout.field.label.Publication.dc.format": "Format",
-  "layout.field.label.Publication.dc.publisher": "Editor",
-  "layout.field.label.Publication.dc.source.content": "Content",
-  "layout.field.label.Publication.dc.relation.publication": "Related Publications",
-  "layout.field.label.Publication.dc.relation.ispublishedin": "Published in",
-  "layout.field.label.Publication.dc.relation.references": "References",
-  "layout.field.label.Publication.dc.description.abstract": "Abstract",
-  "layout.field.label.Publication.dc.description": "Physical Description",
-  "layout.field.label.Publication.dc.language.iso": "Language",
-  "layout.field.label.Publication.dc.subject": "Keywords",
-  "layout.field.label.Publication.dc.relation.place": "Related Place(s)",
-  "layout.field.label.Publication.dc.rights.license": "License",
-  "layout.field.label.Publication.dc.rights.holder": "Holder",
-  "layout.field.label.Publication.dc.relation.isreferencedby": "Related Documents",
-  "layout.field.label.Publication.dc.relation.ispartofseries": "Series",
-  "layout.field.label.Publication.dc.relation.project": "Project",
-  "layout.field.label.Publication.dc.relation.conference": "Event",
-  "layout.field.label.Publication.dc.relation.fonds": "Fonds",
-  "layout.field.label.Publication.dc.relation.person": "Person",
-  "layout.field.label.Publication.dc.relation.opac": "OPAC Link",
-  "layout.field.label.Publication.dc.relation.otherlinks": "Other Links",
-  "layout.field.label.Publication.dc.description.note": "Notes",
-  "layout.field.label.Publication.BITSTREAM": "File(s)",
+  "layout.field.label.Publication.[dc.title.alternative]": "Alternative Title",
+  "layout.field.label.Publication.[dc.identifier.isbn]": "ISBN",
+  "layout.field.label.Publication.[dc.identifier.issn]": "ISSN",
+  "layout.field.label.Publication.[dc.identifier.bid]": "BID",
+  "layout.field.label.Publication.[dc.identifier.doi]": "DOI",
+  "layout.field.label.Publication.[dc.identifier.uri]": "URI",
+  "layout.field.label.Publication.[dc.identifier.nbn]": "NBN:IT",
+  "layout.field.label.Publication.[dc.identifier.inventorynumber]": "Inventory Number",
+  "layout.field.label.Publication.[dc.identifier.shelfmark]": "Shelfmark",
+  "layout.field.label.Publication.[dc.identifier.other]": "Other Identifier",
+  "layout.field.label.Publication.[dc.identifier.codex]": "Codex",
+  "layout.field.label.Publication.[dc.identifier.archivalunit]": "Archival Unit",
+  "layout.field.label.Publication.[dc.date.issued]": "Date Issued",
+  "layout.field.label.Publication.[dc.contributor.author]": "Author(s)",
+  "layout.field.label.Publication.[dc.contributor.contributor]": "Secondary Author(s)",
+  "layout.field.label.Publication.[dc.type]": "Type",
+  "layout.field.label.Publication.[dc.format]": "Format",
+  "layout.field.label.Publication.[dc.publisher]": "Editor",
+  "layout.field.label.Publication.[dc.source.content]": "Content",
+  "layout.field.label.Publication.[dc.relation.publication]": "Related Publications",
+  "layout.field.label.Publication.[dc.relation.ispublishedin]": "Published in",
+  "layout.field.label.Publication.[dc.relation.references]": "References",
+  "layout.field.label.Publication.[dc.description.abstract]": "Abstract",
+  "layout.field.label.Publication.[dc.description]": "Physical Description",
+  "layout.field.label.Publication.[dc.language.iso]": "Language",
+  "layout.field.label.Publication.[dc.subject]": "Keywords",
+  "layout.field.label.Publication.[dc.relation.place]": "Related Place(s)",
+  "layout.field.label.Publication.[dc.rights.license]": "License",
+  "layout.field.label.Publication.[dc.rights.holder]": "Holder",
+  "layout.field.label.Publication.[dc.relation.aggregation]": "Aggregation",
+  "layout.field.label.Publication.[dc.relation.path]": "Path",
+  "layout.field.label.Publication.[dc.relation.isreferencedby]": "Related Documents",
+  "layout.field.label.Publication.[dc.relation.ispartofseries]": "Series",
+  "layout.field.label.Publication.[dc.relation.project]": "Project",
+  "layout.field.label.Publication.[dc.relation.conference]": "Event",
+  "layout.field.label.Publication.[dc.relation.fonds]": "Fonds",
+  "layout.field.label.Publication.[dc.relation.person]": "Person",
+  "layout.field.label.Publication.[dc.relation.opac]": "OPAC Link",
+  "layout.field.label.Publication.[dc.relation.otherlinks]": "Other Links",
+  "layout.field.label.Publication.[dc.description.note]": "Notes",
+  "layout.field.label.Publication.BITSTREAM": "File / Documentation",
+  "layout.field.label.Publication.[dc.relation.journalfonds]": "Journal Fonds ",
+  "layout.field.label.Publication.[dc.relation.event]": "Events",
+  "layout.field.label.Publication.[glamjournalfonds.relation.journalfonds]": "Related Journal Fonds",
+  "layout.field.label.Publication.[glamjournalfonds.relation.person]": "Related People",
+  "layout.field.label.Publication.[glamjournalfonds.parent]": "Parent",
+  "layout.field.label.Publication.[glamfonds.parent]": "Parent",
+  "layout.field.label.Publication.[dc.relation.ispartofcontainer]": "Is part of",
+  "layout.field.label.Publication.[dc.relation.haspart]": "Contains",
 
-  "layout.field.label.Fonds.dc.title.alternative": "Alternative Title",
-  "layout.field.label.Fonds.dc.type": "Type",
-  "layout.field.label.Fonds.dc.contributor.author": "Author(s)",
-  "layout.field.label.Fonds.dc.contributor.corporatebody": "Corporate Body",
-  "layout.field.label.Fonds.dc.contributor.family": "Family",
-  "layout.field.label.Fonds.glamfonds.custodian": "Custodian",
-  "layout.field.label.Fonds.glamfonds.parent": "Fonds Parent",
-  "layout.field.label.Fonds.glamfonds.length": "Length",
-  "layout.field.label.Fonds.glamfonds.photographictype": "Photographic Type",
-  "layout.field.label.Fonds.glamfonds.shelfmark": "Shelfmark",
-  "layout.field.label.Fonds.dc.description.abstract": "Abstract",
-  "layout.field.label.Fonds.dc.description": "Description",
-  "layout.field.label.Fonds.dc.format.extent": "Extent",
-  "layout.field.label.Fonds.glamfonds.history": "History",
-  "layout.field.label.Fonds.dc.language.iso": "Language",
-  "layout.field.label.Fonds.glamfonds.quantity": "Quantity",
-  "layout.field.label.Fonds.glamfonds.arrangement.note": "Arrangement Notes",
-  "layout.field.label.Fonds.glamfonds.relation.materials": "Materials",
-  "layout.field.label.Fonds.glamfonds.accesscondition": "Access Condition",
-  "layout.field.label.Fonds.glamfonds.note": "Note",
-  "layout.field.label.Fonds.glamfonds.preservation": "Preservation",
-  "layout.field.label.Fonds.glamfonds.preservation.note": "Preservation Notes",
-  "layout.field.label.Fonds.glamfonds.usecondition": "Use Condition",
-  "layout.field.label.Fonds.glamfonds.usecondition.note": "Use Condition Notes",
-  "layout.field.label.Fonds.glamfonds.bibliography": "Bibliography",
-  "layout.field.label.Fonds.dc.relation.project": "Project",
-  "layout.field.label.Fonds.dc.identifier.uri": "URL",
-  "layout.field.label.Fonds.dc.relation.path": "Path",
-  "layout.field.label.Fonds.glamfonds.editor": "Editor(s)",
-  "layout.field.label.Fonds.glamfonds.enddate.format": "End Date Format",
-  "layout.field.label.Fonds.glamfonds.enddate.from": "End Date From",
-  "layout.field.label.Fonds.glamfonds.enddate.spec": "End Date Spec",
-  "layout.field.label.Fonds.glamfonds.enddate.to": "End Date To",
-  "layout.field.label.Fonds.glamfonds.enddate.valid": "End Date Valid",
-  "layout.field.label.Fonds.glamfonds.startdate.format": "Start Date Format",
-  "layout.field.label.Fonds.glamfonds.startdate.from": "Start Date From",
-  "layout.field.label.Fonds.glamfonds.startdate.spec": "Start Date Spec",
-  "layout.field.label.Fonds.glamfonds.startdate.to": "Start Date To",
-  "layout.field.label.Fonds.glamfonds.startdate.valid": "Start Date Valid",
+  "layout.field.label.Fonds.[dc.title.alternative]": "Alternative Title",
+  "layout.field.label.Fonds.[dc.type]": "Type",
+  "layout.field.label.Fonds.[dc.contributor.author]": "Author(s)",
+  "layout.field.label.Fonds.[dc.contributor.corporatebody]": "Corporate Body",
+  "layout.field.label.Fonds.[dc.contributor.family]": "Family",
+  "layout.field.label.Fonds.[glamfonds.custodian]": "Custodian",
+  "layout.field.label.Fonds.[glamfonds.parent]": "Fonds Parent",
+  "layout.field.label.Fonds.[glamfonds.length]": "Length",
+  "layout.field.label.Fonds.[glamfonds.photographictype]": "Photographic Type",
+  "layout.field.label.Fonds.[glamfonds.shelfmark]": "Shelfmark",
+  "layout.field.label.Fonds.[dc.description.abstract]": "Abstract",
+  "layout.field.label.Fonds.[dc.description]": "Description",
+  "layout.field.label.Fonds.[dc.format.extent]": "Extent",
+  "layout.field.label.Fonds.[glamfonds.history]": "History",
+  "layout.field.label.Fonds.[dc.language.iso]": "Language",
+  "layout.field.label.Fonds.[glamfonds.quantity]": "Quantity",
+  "layout.field.label.Fonds.[glamfonds.arrangement.note]": "Arrangement Notes",
+  "layout.field.label.Fonds.[glamfonds.relation.materials]": "Materials",
+  "layout.field.label.Fonds.[glamfonds.accesscondition]": "Access Condition",
+  "layout.field.label.Fonds.[glamfonds.note]": "Note",
+  "layout.field.label.Fonds.[glamfonds.preservation]": "Preservation",
+  "layout.field.label.Fonds.[glamfonds.preservation.note]": "Preservation Notes",
+  "layout.field.label.Fonds.[glamfonds.usecondition]": "Use Condition",
+  "layout.field.label.Fonds.[glamfonds.usecondition.note]": "Use Condition Notes",
+  "layout.field.label.Fonds.[glamfonds.bibliography]": "Bibliography",
+  "layout.field.label.Fonds.[dc.relation.project]": "Project",
+  "layout.field.label.Fonds.[dc.identifier.uri]": "URL",
+  "layout.field.label.Fonds.[dc.relation.path]": "Path",
+  "layout.field.label.Fonds.[glamfonds.editor]": "Editor(s)",
+  "layout.field.label.Fonds.[glamfonds.enddate.format]": "End Date Format",
+  "layout.field.label.Fonds.[glamfonds.enddate.from]": "End Date From",
+  "layout.field.label.Fonds.[glamfonds.enddate.spec]": "End Date Spec",
+  "layout.field.label.Fonds.[glamfonds.enddate.to]": "End Date To",
+  "layout.field.label.Fonds.[glamfonds.enddate.valid]": "End Date Valid",
+  "layout.field.label.Fonds.[glamfonds.startdate.format]": "Start Date Format",
+  "layout.field.label.Fonds.[glamfonds.startdate.from]": "Start Date From",
+  "layout.field.label.Fonds.[glamfonds.startdate.spec]": "Start Date Spec",
+  "layout.field.label.Fonds.[glamfonds.startdate.to]": "Start Date To",
+  "layout.field.label.Fonds.[glamfonds.startdate.valid]": "Start Date Valid",
 
-  "layout.field.label.Place.dc.title.alternative": "Alternative Title",
-  "layout.field.label.Place.glamplace.lat": "Latitude",
-  "layout.field.label.Place.glamplace.long": "Longitude",
-  "layout.field.label.Place.dc.description.abstract": "Abstract",
-  "layout.field.label.Place.dc.relation.place": "Related Place(s)",
-  "layout.field.label.Place.dc.relation.aggregation": "Aggregation",
-  "layout.field.label.Place.dc.relation.path": "Path",
-  "layout.field.label.Place.glam.link.dbpedia": "Dbpedia Link",
-  "layout.field.label.Place.glamplace.link.geonames": "Geonames Link",
-  "layout.field.label.Place.glamplace.link.tgn": "TGN Link",
-  "layout.field.label.Place.glam.link.wikipedia": "Wikipedia Link",
+  "layout.field.label.Place.[dc.title.alternative]": "Alternative Title",
+  "layout.field.label.Place.[glamplace.lat]": "Latitude",
+  "layout.field.label.Place.[glamplace.long]": "Longitude",
+  "layout.field.label.Place.[dc.description.abstract]": "Abstract",
+  "layout.field.label.Place.[dc.relation.place]": "Related Place(s)",
+  "layout.field.label.Place.[dc.relation.aggregation]": "Aggregation",
+  "layout.field.label.Place.[dc.relation.path]": "Path",
+  "layout.field.label.Place.[glam.link.dbpedia]": "Dbpedia Link",
+  "layout.field.label.Place.[glamplace.link.geonames]": "Geonames Link",
+  "layout.field.label.Place.[glamplace.link.tgn]": "TGN Link",
+  "layout.field.label.Place.[glam.link.wikipedia]": "Wikipedia Link",
 
-  "layout.field.label.Family.dc.title.alternative": "Alternative Title",
-  "layout.field.label.Family.dc.description": "Description",
-  "layout.field.label.Family.dc.description.abstract": "Abstract",
-  "layout.field.label.Family.glamfamily.nationality": "Nationality",
-  "layout.field.label.Family.dc.relation.event": "Related Event",
-  "layout.field.label.Family.dc.relation.aggregation": "Aggregation",
-  "layout.field.label.Family.dc.relation.path": "Path",
-  "layout.field.label.Family.glamfamily.editor": "Editor(s)",
+  "layout.field.label.Family.[dc.title.alternative]": "Alternative Title",
+  "layout.field.label.Family.[dc.description]": "Description",
+  "layout.field.label.Family.[dc.description.abstract]": "Abstract",
+  "layout.field.label.Family.[glamfamily.nationality]": "Nationality",
+  "layout.field.label.Family.[dc.relation.event]": "Related Event",
+  "layout.field.label.Family.[dc.relation.aggregation]": "Aggregation",
+  "layout.field.label.Family.[dc.relation.path]": "Path",
+  "layout.field.label.Family.[glamfamily.editor]": "Editor(s)",
 
-  "layout.field.label.JournalFonds.dc.title.alternative": "Alternative Title",
-  "layout.field.label.JournalFonds.dc.type": "Type",
-  "layout.field.label.JournalFonds.glamfonds.history": "History",
-  "layout.field.label.JournalFonds.dc.coverage.temporal": "Coverage Temporal",
-  "layout.field.label.JournalFonds.dc.language.iso": "Language",
-  "layout.field.label.JournalFonds.dc.description.abstract": "Abstract",
-  "layout.field.label.JournalFonds.glamfonds.shelfmark": "Shelfmark",
-  "layout.field.label.JournalFonds.glamjournalfonds.relation.journalfonds": "Related Journal Fonds",
-  "layout.field.label.JournalFonds.glamjournalfonds.ownedyears": "Owned Years",
-  "layout.field.label.JournalFonds.glamjournalfonds.relation.person": "Related People",
-  "layout.field.label.JournalFonds.dc.identifier.other": "Other Identifier(s)",
-  "layout.field.label.JournalFonds.dc.relation.opac": "OPAC Link",
-  "layout.field.label.JournalFonds.dc.relation.otherlinks": "Other Links",
-  "layout.field.label.JournalFonds.glamjournalfonds.parent": "Journal Fonds Parent",
-  "layout.field.label.JournalFonds.glamjournalfonds.history": "Journal Fonds History",
-  "layout.field.label.JournalFonds.dc.relation.path": "Path",
+  "layout.field.label.JournalFonds.[dc.title.alternative]": "Alternative Title",
+  "layout.field.label.JournalFonds.[dc.type]": "Type",
+  "layout.field.label.JournalFonds.[glamfonds.history]": "History",
+  "layout.field.label.JournalFonds.[dc.coverage.temporal]": "Coverage Temporal",
+  "layout.field.label.JournalFonds.[dc.language.iso]": "Language",
+  "layout.field.label.JournalFonds.[dc.description.abstract]": "Abstract",
+  "layout.field.label.JournalFonds.[glamfonds.shelfmark]": "Shelfmark",
+  "layout.field.label.JournalFonds.[glamjournalfonds.relation.journalfonds]": "Related Journal Fonds",
+  "layout.field.label.JournalFonds.[glamjournalfonds.ownedyears]": "Owned Years",
+  "layout.field.label.JournalFonds.[glamjournalfonds.relation.person]": "Related People",
+  "layout.field.label.JournalFonds.[dc.identifier.other]": "Other Identifier(s)",
+  "layout.field.label.JournalFonds.[dc.relation.opac]": "OPAC Link",
+  "layout.field.label.JournalFonds.[dc.relation.otherlinks]": "Other Links",
+  "layout.field.label.JournalFonds.[glamjournalfonds.parent]": "Journal Fonds Parent",
+  "layout.field.label.JournalFonds.[glamjournalfonds.history]": "Journal Fonds History",
+  "layout.field.label.JournalFonds.[dc.relation.path]": "Path",
 
-  "layout.field.label.News.cris.news.enabled": "News Enabled",
-  "layout.field.label.News.cris.news.url": "News URL",
-  "layout.field.label.News.dc.description.abstract": "Abstract",
-  "layout.field.label.News.cris.priority": "Position",
+  "layout.field.label.News.[cris.news.enabled]": "News Enabled",
+  "layout.field.label.News.[cris.news.url]": "News URL",
+  "layout.field.label.News.[dc.description.abstract]": "Abstract",
+  "layout.field.label.News.[cris.priority]": "Position",
 
-  "layout.field.label.Path.dc.relation.aggregation": "Aggregations",
+  "layout.field.label.Path.[dc.relation.aggregation]": "Aggregations",
 
-  "layout.field.label.ArchivalMaterial.dc.title.alternative": "Alternative Title",
-  "layout.field.label.ArchivalMaterial.dc.type": "Type",
-  "layout.field.label.ArchivalMaterial.dc.contributor.author": "Author(s)",
-  "layout.field.label.ArchivalMaterial.dc.contributor.corporatebody": "Corporate Body",
-  "layout.field.label.ArchivalMaterial.dc.contributor.family": "Family",
-  "layout.field.label.ArchivalMaterial.dc.date.issued": "Date Issued",
-  "layout.field.label.ArchivalMaterial.dc.date.start": "Start Date",
-  "layout.field.label.ArchivalMaterial.dc.date.end": "End Date",
-  "layout.field.label.ArchivalMaterial.dc.coverage.temporal": "Coverage Temporal",
-  "layout.field.label.ArchivalMaterial.dc.date.note": "Date Notes",
-  "layout.field.label.ArchivalMaterial.dc.identifier.doi": "DOI",
-  "layout.field.label.ArchivalMaterial.dc.identifier.uri": "URI",
-  "layout.field.label.ArchivalMaterial.dc.identifier.nbn": "NBN:IT ID",
-  "layout.field.label.ArchivalMaterial.dc.identifier.inventorynumber": "Inventory Number",
-  "layout.field.label.ArchivalMaterial.dc.identifier.shelfmark": "Shelfmark",
-  "layout.field.label.ArchivalMaterial.dc.identifier.other": "Other Identifier",
-  "layout.field.label.ArchivalMaterial.dc.identifier.archivalunit": "Archival Unit",
-  "layout.field.label.ArchivalMaterial.dc.description": "Description",
-  "layout.field.label.ArchivalMaterial.dc.description.abstract": "Abstract",
-  "layout.field.label.ArchivalMaterial.dc.type.physical": "Physical Type",
-  "layout.field.label.ArchivalMaterial.dc.format.medium": "Format",
-  "layout.field.label.ArchivalMaterial.dcterms.accessRights": "Access Rights",
-  "layout.field.label.ArchivalMaterial.dc.rights": "Rights",
-  "layout.field.label.ArchivalMaterial.dc.rights.license": "License",
-  "layout.field.label.ArchivalMaterial.dc.rights.note": "Rights Note",
-  "layout.field.label.ArchivalMaterial.dcterms.bibliographicCitation": "Bibliographic Citation",
-  "layout.field.label.ArchivalMaterial.dc.relation.aggregation": "Aggregation",
-  "layout.field.label.ArchivalMaterial.dc.relation.path": "Path",
-  "layout.field.label.ArchivalMaterial.dc.relation.isreferencedby": "Related Documents",
-  "layout.field.label.ArchivalMaterial.dc.language.iso": "Language",
-  "layout.field.label.ArchivalMaterial.dc.subject": "Keywords",
-  "layout.field.label.ArchivalMaterial.dc.relation.project": "Project",
-  "layout.field.label.ArchivalMaterial.dc.relation.conference": "Event",
-  "layout.field.label.ArchivalMaterial.dc.relation.person": "Person",
-  "layout.field.label.ArchivalMaterial.dc.relation.fonds": "Fonds",
-  "layout.field.label.ArchivalMaterial.dc.description.archivist": "Archivist Description",
-  "layout.field.label.ArchivalMaterial.dc.description.preservation": "Preservation",
-  "layout.field.label.ArchivalMaterial.dc.description.preservationnote": "Preservation Notes",
-  "layout.field.label.ArchivalMaterial.dc.description.note": "Note",
-  "layout.field.label.ArchivalMaterial.dc.relation.uri": "URL",
-  "layout.field.label.ArchivalMaterial.dc.relation.place": "Place",
-  "layout.field.label.ArchivalMaterial.BITSTREAM": "File(s)",
+  "layout.field.label.ArchivalMaterial.[dc.title.alternative]": "Alternative Title",
+  "layout.field.label.ArchivalMaterial.[dc.type]": "Type",
+  "layout.field.label.ArchivalMaterial.[dc.contributor.author]": "Author(s)",
+  "layout.field.label.ArchivalMaterial.[dc.contributor.corporatebody]": "Corporate Body",
+  "layout.field.label.ArchivalMaterial.[dc.contributor.family]": "Family",
+  "layout.field.label.ArchivalMaterial.[dc.date.issued]": "Date Issued",
+  "layout.field.label.ArchivalMaterial.[dc.date.start]": "Start Date",
+  "layout.field.label.ArchivalMaterial.[dc.date.end]": "End Date",
+  "layout.field.label.ArchivalMaterial.[dc.coverage.temporal]": "Coverage Temporal",
+  "layout.field.label.ArchivalMaterial.[dc.date.note]": "Date Notes",
+  "layout.field.label.ArchivalMaterial.[dc.identifier.doi]": "DOI",
+  "layout.field.label.ArchivalMaterial.[dc.identifier.uri]": "URI",
+  "layout.field.label.ArchivalMaterial.[dc.identifier.nbn]": "NBN:IT ID",
+  "layout.field.label.ArchivalMaterial.[dc.identifier.inventorynumber]": "Inventory Number",
+  "layout.field.label.ArchivalMaterial.[dc.identifier.shelfmark]": "Shelfmark",
+  "layout.field.label.ArchivalMaterial.[dc.identifier.other]": "Other Identifier",
+  "layout.field.label.ArchivalMaterial.[dc.identifier.archivalunit]": "Archival Unit",
+  "layout.field.label.ArchivalMaterial.[dc.description]": "Description",
+  "layout.field.label.ArchivalMaterial.[dc.description.abstract]": "Abstract",
+  "layout.field.label.ArchivalMaterial.[dc.type.physical]": "Physical Type",
+  "layout.field.label.ArchivalMaterial.[dc.format.medium]": "Format",
+  "layout.field.label.ArchivalMaterial.[dcterms.accessRights]": "Access Rights",
+  "layout.field.label.ArchivalMaterial.[dc.rights]": "Rights",
+  "layout.field.label.ArchivalMaterial.[dc.rights.license]": "License",
+  "layout.field.label.ArchivalMaterial.[dc.rights.note]": "Rights Note",
+  "layout.field.label.ArchivalMaterial.[dcterms.bibliographicCitation]": "Bibliographic Citation",
+  "layout.field.label.ArchivalMaterial.[dc.relation.aggregation]": "Aggregation",
+  "layout.field.label.ArchivalMaterial.[dc.relation.path]": "Path",
+  "layout.field.label.ArchivalMaterial.[dc.relation.isreferencedby]": "Related Documents",
+  "layout.field.label.ArchivalMaterial.[dc.language.iso]": "Language",
+  "layout.field.label.ArchivalMaterial.[dc.subject]": "Keywords",
+  "layout.field.label.ArchivalMaterial.[dc.relation.project]": "Project",
+  "layout.field.label.ArchivalMaterial.[dc.relation.conference]": "Event",
+  "layout.field.label.ArchivalMaterial.[dc.relation.person]": "Person",
+  "layout.field.label.ArchivalMaterial.[dc.relation.fonds]": "Fonds",
+  "layout.field.label.ArchivalMaterial.[dc.description.archivist]": "Archivist Description",
+  "layout.field.label.ArchivalMaterial.[dc.description.preservation]": "Preservation",
+  "layout.field.label.ArchivalMaterial.[dc.description.preservationnote]": "Preservation Notes",
+  "layout.field.label.ArchivalMaterial.[dc.description.note]": "Note",
+  "layout.field.label.ArchivalMaterial.[dc.relation.uri]": "URL",
+  "layout.field.label.ArchivalMaterial.[dc.relation.place]": "Place",
+  "layout.field.label.ArchivalMaterial.BITSTREAM": "File / Documentation",
 
-  "layout.field.label.Aggregation.dc.description": "Description",
-  "layout.field.label.Aggregation.dc.description.abstract": "Abstract",
-  "layout.field.label.Aggregation.glamaggregation.parent": "Aggregation Parent",
-  "layout.field.label.Aggregation.glam.index": "Aggregation Index",
+  "layout.field.label.Aggregation.[dc.description]": "Description",
+  "layout.field.label.Aggregation.[dc.description.abstract]": "Abstract",
+  "layout.field.label.Aggregation.[glam.index]": "Aggregation Index",
 
-  "layout.field.label.StaticPage.dc.description": "Description",
-  "layout.field.label.StaticPage.dc.description.abstract": "Abstract",
-  "layout.field.label.StaticPage.dc.subject": "Keywords",
+  "layout.field.label.StaticPage.[dc.description]": "Description",
+  "layout.field.label.StaticPage.[dc.description.abstract]": "Abstract",
+  "layout.field.label.StaticPage.[dc.subject]": "Keywords",
 
-  "layout.field.label.JournalFile.dc.relation.issue": "Issue",
-  "layout.field.label.JournalFile.dc.relation.issueother": "Issue Other",
-  "layout.field.label.JournalFile.dc.relation.stpieceper": "Year Reference",
-  "layout.field.label.JournalFile.dc.relation.stpieceperstart": "Year Reference From",
-  "layout.field.label.JournalFile.dc.relation.stpieceperend": "Year Reference To",
-  "layout.field.label.JournalFile.dc.relation.stpieceperother": "Other Reference",
-  "layout.field.label.JournalFile.dc.relation.stpieceperotherstart": "Other Reference From",
-  "layout.field.label.JournalFile.dc.relation.stpieceperotherend": "Other Reference To",
-  "layout.field.label.JournalFile.dc.date.issued": "Date Issued",
-  "layout.field.label.JournalFile.dc.date.start": "Start Date",
-  "layout.field.label.JournalFile.dc.date.end": "End Date",
-  "layout.field.label.JournalFile.dc.relation.edition": "Edition",
-  "layout.field.label.JournalFile.dc.description": "Description",
-  "layout.field.label.JournalFile.dc.description.abstract": "Abstract",
-  "layout.field.label.JournalFile.dc.relation.journalfonds": "Journal Fonds",
-  "layout.field.label.JournalFile.dc.rights.license": "License",
-  "layout.field.label.JournalFile.dc.relation.path": "Path",
-  "layout.field.label.JournalFile.dc.relation.isreferencedby": "Related Documents",
-  "layout.field.label.JournalFile.dc.relation.aggregation": "Aggregation",
-  "layout.field.label.JournalFile.BITSTREAM": "File(s)",
+  "layout.field.label.JournalFile.[dc.relation.issue]": "Issue",
+  "layout.field.label.JournalFile.[dc.relation.issueother]": "Issue Other",
+  "layout.field.label.JournalFile.[dc.relation.stpieceper]": "Year Reference",
+  "layout.field.label.JournalFile.[dc.relation.stpieceperstart]": "Year Reference From",
+  "layout.field.label.JournalFile.[dc.relation.stpieceperend]": "Year Reference To",
+  "layout.field.label.JournalFile.[dc.relation.stpieceperother]": "Other Reference",
+  "layout.field.label.JournalFile.[dc.relation.stpieceperotherstart]": "Other Reference From",
+  "layout.field.label.JournalFile.[dc.relation.stpieceperotherend]": "Other Reference To",
+  "layout.field.label.JournalFile.[dc.date.issued]": "Date Issued",
+  "layout.field.label.JournalFile.[dc.date.start]": "Start Date",
+  "layout.field.label.JournalFile.[dc.date.end]": "End Date",
+  "layout.field.label.JournalFile.[dc.relation.edition]": "Edition",
+  "layout.field.label.JournalFile.[dc.description]": "Description",
+  "layout.field.label.JournalFile.[dc.description.abstract]": "Abstract",
+  "layout.field.label.JournalFile.[dc.relation.journalfonds]": "Journal Fonds ",
+  "layout.field.label.JournalFile.[dc.rights.license]": "License",
+  "layout.field.label.JournalFile.[dc.relation.path]": "Path",
+  "layout.field.label.JournalFile.[dc.relation.isreferencedby]": "Related Documents",
+  "layout.field.label.JournalFile.[dc.relation.aggregation]": "Aggregation",
+  "layout.field.label.JournalFile.BITSTREAM": "File / Documentation",
 
-  "layout.field.label.Picture.dc.title.alternative": "Alternative Title",
-  "layout.field.label.Picture.dc.contributor.author": "Author(s)",
-  "layout.field.label.Picture.dc.date.inventory": "Date Inventory",
-  "layout.field.label.Picture.dc.date.start": "Start Date",
-  "layout.field.label.Picture.dc.date.end": "End Date",
-  "layout.field.label.Picture.dc.date.note": "Date Notes",
-  "layout.field.label.Picture.dc.identifier.form": "Form",
-  "layout.field.label.Picture.dc.identifier.inventorynumber": "Inventory Number",
-  "layout.field.label.Picture.dc.identifier.nctn": "NCTN",
-  "layout.field.label.Picture.dc.identifier.region": "Region",
-  "layout.field.label.Picture.dc.identifier.shelfmark": "Shelfmark",
-  "layout.field.label.Picture.dc.identifier.uri": "URI",
-  "layout.field.label.Picture.dc.identifier.archivalunit": "Archival Unit",
-  "layout.field.label.Picture.dc.type.form": "Form Type",
-  "layout.field.label.Picture.dc.type.color": "Color",
-  "layout.field.label.Picture.dc.type.materialandtechnique": "Material And Technique",
-  "layout.field.label.Picture.dc.type.note": "Type Notes",
-  "layout.field.label.Picture.glampicture.type.framing": "Framing Type",
-  "layout.field.label.Picture.dc.description.abstract": "Abstract",
-  "layout.field.label.Picture.dc.description": "Physical Description",
-  "layout.field.label.Picture.dc.language.iso": "Language",
-  "layout.field.label.Picture.dc.coverage.temporal": "Coverage Temporal",
-  "layout.field.label.Picture.dc.coverage.temporalfraction": "Coverage Temporal Fraction",
-  "layout.field.label.Picture.dc.coverage.spatialpvcs": "Country",
-  "layout.field.label.Picture.dc.coverage.spatialpvcr": "Region",
-  "layout.field.label.Picture.dc.coverage.spatialpvcn": "Province",
-  "layout.field.label.Picture.dc.coverage.spatialpvcc": "District",
-  "layout.field.label.Picture.dc.coverage.shelfmark": "Coverage Shelfmark",
-  "layout.field.label.Picture.glam.subject": "Subject",
-  "layout.field.label.Picture.glampicture.subject.place": "Subject Place",
-  "layout.field.label.Picture.dc.subject": "Keywords",
-  "layout.field.label.Picture.dc.rights.license": "License",
-  "layout.field.label.Picture.dc.relation.aggregation": "Aggregation",
-  "layout.field.label.Picture.dc.relation.path": "Path",
-  "layout.field.label.Picture.dc.relation.ispartofcontainer": "Container",
-  "layout.field.label.Picture.dc.relation.haspart": "Has Part",
-  "layout.field.label.Picture.dc.relation.references": "References",
-  "layout.field.label.Picture.dc.relation.project": "Project",
-  "layout.field.label.Picture.dc.relation.conference": "Event",
-  "layout.field.label.Picture.dc.relation.person": "Person",
-  "layout.field.label.Picture.dc.relation.fonds": "Fonds",
-  "layout.field.label.Picture.dc.relation.opac": "OPAC Link",
-  "layout.field.label.Picture.dc.relation.otherlinks": "Other Links",
-  "layout.field.label.Picture.dc.format": "Format",
-  "layout.field.label.Picture.dc.format.misu": "Measure Unit",
-  "layout.field.label.Picture.dc.format.misa": "Height",
-  "layout.field.label.Picture.dc.format.misl": "Width",
-  "layout.field.label.Picture.dc.description.parts": "Parts",
-  "layout.field.label.Picture.dc.description.number": "Number",
-  "layout.field.label.Picture.dc.description.function": "Function",
-  "layout.field.label.Picture.dc.description.use": "Use Condition",
-  "layout.field.label.Picture.dc.description.collection": "Collection",
-  "layout.field.label.Picture.dc.description.collectionholder": "Collection Holder",
-  "layout.field.label.Picture.dc.description.collectionnotes": "Collection Notes",
-  "layout.field.label.Picture.dc.description.preservationstate": "Preservation State",
-  "layout.field.label.Picture.dc.description.preservationspecifications": "Preservation Specifications",
-  "layout.field.label.Picture.dc.description.note": "Notes",
-  "layout.field.label.Picture.glam.inscription": "Inscription",
-  "layout.field.label.Picture.glam.mark": "Mark",
-  "layout.field.label.Picture.glam.bibliography": "Bibliography",
-  "layout.field.label.Picture.BITSTREAM": "File(s)",
-  "layout.field.label.Picture.dc.relation.isreferencedby": "Related Documents",
+  "layout.field.label.Picture.[dc.title.alternative]": "Alternative Title",
+  "layout.field.label.Picture.[dc.contributor.author]": "Author(s)",
+  "layout.field.label.Picture.[dc.date.inventory]": "Date Inventory",
+  "layout.field.label.Picture.[dc.date.start]": "Start Date",
+  "layout.field.label.Picture.[dc.date.end]": "End Date",
+  "layout.field.label.Picture.[dc.date.note]": "Date Notes",
+  "layout.field.label.Picture.[dc.identifier.form]": "Form",
+  "layout.field.label.Picture.[dc.identifier.inventorynumber]": "Inventory Number",
+  "layout.field.label.Picture.[dc.identifier.nctn]": "NCTN",
+  "layout.field.label.Picture.[dc.identifier.region]": "Region",
+  "layout.field.label.Picture.[dc.identifier.shelfmark]": "Shelfmark",
+  "layout.field.label.Picture.[dc.identifier.uri]": "URI",
+  "layout.field.label.Picture.[dc.identifier.archivalunit]": "Archival Unit",
+  "layout.field.label.Picture.[dc.type.form]": "Form Type",
+  "layout.field.label.Picture.[dc.type.color]": "Color",
+  "layout.field.label.Picture.[dc.type.materialandtechnique]": "Material And Technique",
+  "layout.field.label.Picture.[dc.type.note]": "Type Notes",
+  "layout.field.label.Picture.[glampicture.type.framing]": "Framing Type",
+  "layout.field.label.Picture.[dc.description.abstract]": "Abstract",
+  "layout.field.label.Picture.[dc.description]": "Physical Description",
+  "layout.field.label.Picture.[dc.language.iso]": "Language",
+  "layout.field.label.Picture.[dc.coverage.temporal]": "Coverage Temporal",
+  "layout.field.label.Picture.[dc.coverage.temporalfraction]": "Coverage Temporal Fraction",
+  "layout.field.label.Picture.[dc.coverage.spatialpvcs]": "Country",
+  "layout.field.label.Picture.[dc.coverage.spatialpvcr]": "Region",
+  "layout.field.label.Picture.[dc.coverage.spatialpvcn]": "Province",
+  "layout.field.label.Picture.[dc.coverage.spatialpvcc]": "District",
+  "layout.field.label.Picture.[dc.coverage.shelfmark]": "Coverage Shelfmark",
+  "layout.field.label.Picture.[glam.subject]": "Subject",
+  "layout.field.label.Picture.[glampicture.subject.place]": "Subject Place",
+  "layout.field.label.Picture.[dc.subject]": "Keywords",
+  "layout.field.label.Picture.[dc.rights.license]": "License",
+  "layout.field.label.Picture.[dc.relation.aggregation]": "Aggregation",
+  "layout.field.label.Picture.[dc.relation.path]": "Path",
+  "layout.field.label.Picture.[dc.relation.ispartofcontainer]": "Container",
+  "layout.field.label.Picture.[dc.relation.haspart]": "Has Part",
+  "layout.field.label.Picture.[dc.relation.references]": "References",
+  "layout.field.label.Picture.[dc.relation.project]": "Project",
+  "layout.field.label.Picture.[dc.relation.conference]": "Event",
+  "layout.field.label.Picture.[dc.relation.person]": "Person",
+  "layout.field.label.Picture.[dc.relation.fonds]": "Fonds",
+  "layout.field.label.Picture.[dc.relation.opac]": "OPAC Link",
+  "layout.field.label.Picture.[dc.relation.otherlinks]": "Other Links",
+  "layout.field.label.Picture.[dc.format]": "Format",
+  "layout.field.label.Picture.[dc.format.misu]": "Measure Unit",
+  "layout.field.label.Picture.[dc.format.misa]": "Height",
+  "layout.field.label.Picture.[dc.format.misl]": "Width",
+  "layout.field.label.Picture.[dc.description.parts]": "Parts",
+  "layout.field.label.Picture.[dc.description.number]": "Number",
+  "layout.field.label.Picture.[dc.description.function]": "Function",
+  "layout.field.label.Picture.[dc.description.use]": "Use Condition",
+  "layout.field.label.Picture.[dc.description.collection]": "Collection",
+  "layout.field.label.Picture.[dc.description.collectionholder]": "Collection Holder",
+  "layout.field.label.Picture.[dc.description.collectionnotes]": "Collection Notes",
+  "layout.field.label.Picture.[dc.description.preservationstate]": "Preservation State",
+  "layout.field.label.Picture.[dc.description.preservationspecifications]": "Preservation Specifications",
+  "layout.field.label.Picture.[dc.description.note]": "Notes",
+  "layout.field.label.Picture.[glam.inscription]": "Inscription",
+  "layout.field.label.Picture.[glam.mark]": "Mark",
+  "layout.field.label.Picture.[glam.bibliography]": "Bibliography",
+  "layout.field.label.Picture.BITSTREAM": "File / Documantation",
+  "layout.field.label.Picture.[dc.relation.isreferencedby]": "Related Documents",
 
-  "layout.field.label.Publication.dc.relation.path": "Path",
-  "layout.field.label.Publication.dc.relation.journalfonds": "Journal Fonds ",
-  "layout.field.label.Publication.dc.relation.aggregation": "Aggregations",
-  "layout.field.label.Publication.dc.relation.event": "Events",
-  "layout.field.label.Publication.glamjournalfonds.relation.journalfonds": "Related Journal Fonds",
-  "layout.field.label.Publication.glamjournalfonds.relation.person": "Related People",
-  "layout.field.label.Publication.glamjournalfonds.parent": "Parent",
-  "layout.field.label.Publication.glamfonds.parent": "Parent",
-  "layout.field.label.Publication.dc.relation.ispartofcontainer": "Is part of",
-  "layout.field.label.Publication.dc.relation.haspart": "Contains",
 
-  "layout.field.label.AudioVideo.dc.contributor.author": "Author(s)",
-  "layout.field.label.AudioVideo.dc.contributor.contributor": "Agent(s)",
-  "layout.field.label.AudioVideo.glam.subject": "Subject",
-  "layout.field.label.AudioVideo.dc.source.content": "Content",
-  "layout.field.label.AudioVideo.dc.contributor.corporatebody": "Corporate Body",
-  "layout.field.label.AudioVideo.dc.relation.fonds": "Fund",
-  "layout.field.label.AudioVideo.dc.relation.event": "Related Event",
-  "layout.field.label.AudioVideo.dc.coverage.culture": "Cultural Area",
-  "layout.field.label.AudioVideo.dc.relation.place": "Place Of Detection",
-  "layout.field.label.AudioVideo.dc.coverage.spatialpvcs": "Country",
-  "layout.field.label.AudioVideo.dc.coverage.spatialpvcc": "City",
-  "layout.field.label.AudioVideo.dc.coverage.spatialpvcn": "Province",
-  "layout.field.label.AudioVideo.dc.date.issued": "Date Issued",
-  "layout.field.label.AudioVideo.dc.date.start": "Start Date",
-  "layout.field.label.AudioVideo.dc.date.end": "End Date",
-  "layout.field.label.AudioVideo.dc.description.note": "Notes",
-  "layout.field.label.AudioVideo.dc.description.abstract": "Abstract",
-  "layout.field.label.AudioVideo.dc.language.iso": "Language",
-  "layout.field.label.AudioVideo.dc.subject": "Keywords",
-  "layout.field.label.AudioVideo.dc.relation.path": "Path",
-  "layout.field.label.AudioVideo.dc.relation.project": "Project",
-  "layout.field.label.AudioVideo.dc.relation.url": "URL",
-  "layout.field.label.AudioVideo.dc.relation.audiovideo": "Related Documents",
-  "layout.field.label.AudioVideo.dc.relation.aggregation": "Aggregation",
-  "layout.field.label.AudioVideo.dc.rights.license": "License",
-  "layout.field.label.AudioVideo.dc.rights.note": "Rights Note",
-  "layout.field.label.AudioVideo.dc.type": "File Type",
-  "layout.field.label.AudioVideo.dc.type.physical": "Physical Type",
-  "layout.field.label.AudioVideo.dc.format.extent": "Event Time",
-  "layout.field.label.AudioVideo.dc.format.mimetype": "Audio/Video File Encoding",
-  "layout.field.label.AudioVideo.dc.description.channel": "Number Of Channels",
-  "layout.field.label.AudioVideo.dc.format.samplerate": "Sample Rate",
-  "layout.field.label.AudioVideo.dc.format.bitsample": "Bits Per Sample",
-  "layout.field.label.AudioVideo.dc.description.tools": "Equipment",
-  "layout.field.label.AudioVideo.dc.format.medium": "Physical Description Of The Medium",
-  "layout.field.label.AudioVideo.dc.description.preservationstate": "Preservation State",
-  "layout.field.label.AudioVideo.dc.description.preservationnote": "Preservation Notes",
-  "layout.field.label.AudioVideo.dc.description.digitaltools": "Digital tools",
-  "layout.field.label.AudioVideo.BITSTREAM": "File(s)",
+  "layout.field.label.AudioVideo.[dc.contributor.author]": "Author(s)",
+  "layout.field.label.AudioVideo.[dc.contributor.contributor]": "Agent(s)",
+  "layout.field.label.AudioVideo.[glam.subject]": "Subject",
+  "layout.field.label.AudioVideo.[dc.source.content]": "Content",
+  "layout.field.label.AudioVideo.[dc.contributor.corporatebody]": "Corporate Body",
+  "layout.field.label.AudioVideo.[dc.relation.fonds]": "Fund",
+  "layout.field.label.AudioVideo.[dc.relation.event]": "Related Event",
+  "layout.field.label.AudioVideo.[dc.coverage.culture]": "Cultural Area",
+  "layout.field.label.AudioVideo.[dc.relation.place]": "Place Of Detection",
+  "layout.field.label.AudioVideo.[dc.coverage.spatialpvcs]": "Country",
+  "layout.field.label.AudioVideo.[dc.coverage.spatialpvcc]": "City",
+  "layout.field.label.AudioVideo.[dc.coverage.spatialpvcn]": "Province",
+  "layout.field.label.AudioVideo.[dc.date.issued]": "Date Issued",
+  "layout.field.label.AudioVideo.[dc.date.start]": "Start Date",
+  "layout.field.label.AudioVideo.[dc.date.end]": "End Date",
+  "layout.field.label.AudioVideo.[dc.description.note]": "Notes",
+  "layout.field.label.AudioVideo.[dc.description.abstract]": "Abstract",
+  "layout.field.label.AudioVideo.[dc.language.iso]": "Language",
+  "layout.field.label.AudioVideo.[dc.subject]": "Keywords",
+  "layout.field.label.AudioVideo.[dc.relation.path]": "Path",
+  "layout.field.label.AudioVideo.[dc.relation.project]": "Project",
+  "layout.field.label.AudioVideo.[dc.relation.url]": "URL",
+  "layout.field.label.AudioVideo.[dc.relation.audiovideo]": "Related Documents",
+  "layout.field.label.AudioVideo.[dc.relation.aggregation]": "Aggregation",
+  "layout.field.label.AudioVideo.[dc.rights.license]": "License",
+  "layout.field.label.AudioVideo.[dc.rights.note]": "Rights Note",
+  "layout.field.label.AudioVideo.[dc.type]": "File Type",
+  "layout.field.label.AudioVideo.[dc.type.physical]": "Physical Type",
+  "layout.field.label.AudioVideo.[dc.format.extent]": "Event Time",
+  "layout.field.label.AudioVideo.[dc.format.mimetype]": "Audio/Video File Encoding",
+  "layout.field.label.AudioVideo.[dc.description.channel]": "Number Of Channels",
+  "layout.field.label.AudioVideo.[dc.format.samplerate]": "Sample Rate",
+  "layout.field.label.AudioVideo.[dc.format.bitsample]": "Bits Per Sample",
+  "layout.field.label.AudioVideo.[dc.description.tools]": "Equipment",
+  "layout.field.label.AudioVideo.[dc.format.medium]": "Physical Description Of The Medium",
+  "layout.field.label.AudioVideo.[dc.description.preservationstate]": "Preservation State",
+  "layout.field.label.AudioVideo.[dc.description.preservationnote]": "Preservation Notes",
+  "layout.field.label.AudioVideo.[dc.description.digitaltools]": "Digital tools",
+  "layout.field.label.AudioVideo.BITSTREAM": "File / Documantation",
+  "layout.field.label.Opera.[dc.title.alternative]": "Alternative Title",
+  "layout.field.label.Opera.[dc.date.issued]": "Date Issued",
+  "layout.field.label.Opera.[dc.subject]": "Subject",
+  "layout.field.label.Opera.[dc.relation.otherlinks]": "Other Links",
+  "layout.field.label.Opera.[dc.relation.conference]": "Event",
+  "layout.field.label.Opera.[dc.description.note]": "Notes",
+  "layout.field.label.Opera.[dc.relation.path]": "Path",
+  "layout.field.label.Opera.[dc.relation.aggregation]": "Aggregation",
+  "layout.field.label.Opera.[dc.contributor.author]": "Author",
+  "layout.field.label.Opera.[dc.contributor.authorrole]": "Role",
 
-  "layout.field.label.Abbreviation": "Abbreviation",
-  "layout.field.label.Title": "Title",
-  "layout.field.label.Editor": "Editor",
-  "layout.field.label.Qualifier": "Qualifier",
-  "layout.field.label.Editing Type": "Editing Type",
-  "layout.field.label.Edited At": "Edited At",
-  "layout.field.label.From": "From",
-  "layout.field.label.To": "To",
-  "layout.field.label.Format": "Format",
-  "layout.field.label.Inventory Number": "Inventory Number",
-  "layout.field.label.Notes": "Notes",
-  "layout.field.label.Relation Type": "Relation Type",
-  "layout.field.label.Related Journal Fonds": "Related Journal Fonds",
-  "layout.field.label.Person Name": "Person Name",
-  "layout.field.label.Person Role": "Person Role",
-  "layout.field.label.Role": "Role",
-  "layout.field.label.Other Author": "Other Author",
-  "layout.field.label.Agent": "Agent",
-  "layout.field.label.History": "History",
+  // Layout - Autogenerated i18n keys: metadata groups
 
-  "layout.field.label.Inscription": "Inscription",
-  "layout.field.label.Position": "Position",
-  "layout.field.label.Font": "Font",
-  "layout.field.label.Technique": "Technique",
-  "layout.field.label.Language": "Language",
-  "layout.field.label.Class": "Class",
-  "layout.field.label.Mark": "Mark",
-  "layout.field.label.Identification": "Identification",
-  "layout.field.label.Qualification": "Qualification",
-  "layout.field.label.Quantity": "Quantity",
-  "layout.field.label.Bibliography": "Bibliography",
-  "layout.field.label.Year": "Year",
-  "layout.field.label.Publisher": "Publisher",
-  "layout.field.label.Place": "Place",
-  "layout.field.label.Author": "Author",
-  "layout.field.label.Type": "Type",
+  "layout.field.label.Fonds.NESTED[glamfonds.bibliography.abbreviation]": "Abbreviation",
+  "layout.field.label.Fonds.NESTED[glamfonds.bibliography.title]": "Title",
+  "layout.field.label.Fonds.NESTED[glamfonds.bibliography.editor]": "Editor",
+  "layout.field.label.Fonds.NESTED[glamfonds.bibliography.publisher]": "Publisher",
+  "layout.field.label.Fonds.NESTED[glamfonds.bibliography.place]": "Place",
+  "layout.field.label.Fonds.NESTED[glamfonds.bibliography.year]": "Year",
+  "layout.field.label.Fonds.NESTED[glamfonds.bibliography.author]": "Author",
+  "layout.field.label.Fonds.NESTED[glamfonds.editor.name]": "Editor",
+  "layout.field.label.Fonds.NESTED[glamfonds.editor.qualifier]": "Qualifier",
+  "layout.field.label.Fonds.NESTED[glamfonds.editing.type]": "Editing Type",
+  "layout.field.label.Fonds.NESTED[glamfonds.editing.date]": "Edited At",
 
-  "discoverable.search.results.head": "Search Results",
+  "layout.field.label.Family.NESTED[glamfamily.editor.qualifier]": "Qualifier",
+  "layout.field.label.Family.NESTED[glamfamily.editing.type]": "Editing Type",
+  "layout.field.label.Family.NESTED[glamfamily.editing.date]": "Edited At",
 
+  "layout.field.label.JournalFonds.NESTED[dc.date.start]": "From",
+  "layout.field.label.JournalFonds.NESTED[dc.date.end]": "To",
+  "layout.field.label.JournalFonds.NESTED[dc.publisher]": "Publisher",
+  "layout.field.label.JournalFonds.NESTED[dc.format]": "Format",
+  "layout.field.label.JournalFonds.NESTED[dc.identifier.inventorynumber]": "Inventory Number",
+  "layout.field.label.JournalFonds.NESTED[dc.description.note]": "Notes",
+  "layout.field.label.JournalFonds.NESTED[dc.type.relation]": "Relation Type",
+  "layout.field.label.JournalFonds.NESTED[glamperson.role]": "Person Role",
+
+  "layout.field.label.Publication.NESTED[dc.contributor.author]": "Author",
+  "layout.field.label.Publication.NESTED[dc.contributor.authorrole]": "Role",
+  "layout.field.label.Publication.NESTED[dc.contributor.contributor]": "Other Author",
+  "layout.field.label.Publication.NESTED[dc.contributor.contributorrole]": "Role",
+
+  "layout.field.label.Picture.NESTED[dc.contributor.authorrole]": "Role",
+  "layout.field.label.Picture.NESTED[glam.inscription.position]": "Position",
+  "layout.field.label.Picture.NESTED[glam.inscription.font]": "Font",
+  "layout.field.label.Picture.NESTED[glam.inscription.technique]": "Technique",
+  "layout.field.label.Picture.NESTED[glam.inscription.language]": "Language",
+  "layout.field.label.Picture.NESTED[glam.inscription.class]": "Class",
+  "layout.field.label.Picture.NESTED[glam.mark.position]": "Position",
+  "layout.field.label.Picture.NESTED[glam.mark.identification]": "Identification",
+  "layout.field.label.Picture.NESTED[glam.mark.qualification]": "Qualification",
+  "layout.field.label.Picture.NESTED[glam.mark.quantity]": "Quantity",
+  "layout.field.label.Picture.NESTED[glam.mark.class]": "Class",
+  "layout.field.label.Picture.NESTED[glam.bibliography.year]": "Year",
+  "layout.field.label.Picture.NESTED[glam.bibliography.publisher]": "Publisher",
+  "layout.field.label.Picture.NESTED[glam.bibliography.place]": "Place",
+  "layout.field.label.Picture.NESTED[glam.bibliography.author]": "Author",
+  "layout.field.label.Picture.NESTED[glam.bibliography.type]": "Type",
+
+  "layout.field.label.AudioVideo.NESTED[dc.contributor.author]": "Author",
+  "layout.field.label.AudioVideo.NESTED[dc.contributor.authorrole]": "Role",
+  "layout.field.label.AudioVideo.NESTED[dc.contributor.contributor]": "Agent",
+  "layout.field.label.AudioVideo.NESTED[dc.contributor.contributorrole]": "Role",
+
+  "layout.field.label.Opera.NESTED[dc.contributor.author]": "Author",
+  "layout.field.label.Opera.NESTED[dc.contributor.authorrole]": "Role",
+  "layout.field.label.Artwork.NESTED[dc.contributor.author]": "Author",
+  "layout.field.label.Artwork.NESTED[dc.contributor.authorrole]": "Role",
+  "layout.field.label.Artwork.BITSTREAM": "File / Documantation",
+
+  "layout.field.label.Coin.BITSTREAM": "File / Documantation",
+
+  "layout.field.label.ScientificMaterial.BITSTREAM": "File / Documantation",
+
+  "layout.field.label.MusicalLibrettos.BITSTREAM": "File / Documantation",
+
+  "label.link-text.description-box.section-site.pdl": "Scopri di più",
+  "label.title.slider.slider_collections": "Collections",
+  "label.title.slider.slider_topics": "Topics",
+
+  // Do not add new labels below layout ones
+  // All new labels should be placed together with similar ones, or in alphabetical order
 }

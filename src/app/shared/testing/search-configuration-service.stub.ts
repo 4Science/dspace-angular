@@ -44,4 +44,8 @@ export class SearchConfigurationServiceStub {
   initializeSortOptionsFromConfiguration() {
    /* empty */
   }
+
+  getConfigurationSearchConfig(configuration: string, scope?: string) {
+    return observableOf(new SearchConfig());
+  }
 }

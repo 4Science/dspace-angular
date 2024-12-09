@@ -29,6 +29,7 @@ const searchOption = params.get('searchable');
 const query = params.get('query');
 const multi = params.get('multi');
 const notMobile = params.get('notMobile');
+const isDownloadPluginEnabled = (params.get('enableDownloadPlugin') === 'true');
 const canvasId = params.get('canvasId');
 
 let windowSettings = {};
@@ -36,6 +37,9 @@ let sideBarPanel = 'info';
 let defaultView = 'single';
 let multipleItems = false;
 let thumbNavigation = 'off';
+let downloadPluginSettings = {
+  restrictDownloadOnSizeDefinition: false
+};
 
 windowSettings.manifestId = manifest;
 
@@ -145,9 +149,6 @@ const miradorConfiguration = {
       ],
     },
   },
-  miradorDownloadPlugin: {
-    restrictDownloadOnSizeDefinition: false
-  },
   window: {
     allowClose: !0,
     // sideBarOpenByDefault: false,
@@ -184,13 +185,19 @@ const miradorConfiguration = {
   }
 };
 
-const miradorPlugins = [
+let miradorPlugins = [
   miradorShareDialogPlugin,
   miradorSharePlugin,
   miradorDownloadDialog,
-  miradorDownloadPlugin,
   ...miradorImageToolsPlugin,
   ...miradorAnnotationPlugins,
 ];
+
+(() => {
+  if (isDownloadPluginEnabled) {
+    miradorPlugins = [...miradorPlugins, miradorDownloadPlugin];
+    miradorConfiguration.miradorDownloadPlugin = downloadPluginSettings;
+  }
+})();
 
 Mirador.viewer(miradorConfiguration, miradorPlugins);

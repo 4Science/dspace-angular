@@ -21,7 +21,6 @@ import { CollectionPageAdministratorGuard } from './collection-page-administrato
 import { LinkMenuItemModel } from '../shared/menu/menu-item/models/link.model';
 import { ThemedCollectionPageComponent } from './themed-collection-page.component';
 import { MenuItemType } from '../shared/menu/menu-item-type.model';
-import { DSOEditMenuResolver } from '../shared/dso-page/dso-edit-menu.resolver';
 import { EditCollectionResolver } from '../core/shared/resolvers/edit-collection.resolver';
 
 @NgModule({
@@ -37,7 +36,6 @@ import { EditCollectionResolver } from '../core/shared/resolvers/edit-collection
         resolve: {
           dso: CollectionPageResolver,
           breadcrumb: CollectionBreadcrumbResolver,
-          menu: DSOEditMenuResolver
         },
         runGuardsAndResolvers: 'always',
         children: [

@@ -22,7 +22,7 @@ interface ItemAndImage {
 @Injectable({ providedIn: 'root' })
 export class BitstreamImagesService {
 
-  private bitstreamDataService = inject(BitstreamDataService);
+  private readonly bitstreamDataService = inject(BitstreamDataService);
 
   /**
    * Retrieve all items and their image bitstreams
@@ -53,8 +53,8 @@ export class BitstreamImagesService {
     const isImageMimetypeRegex = /^image\//;
 
     // retrieve all bundle's bitstreams for the item
-    const bitstreamPayload$: Observable<Bitstream> = this.bitstreamDataService.findAllByItemAndBundleName(
-      item as Item, bundleName, {}, true, true, followLink('format'),
+    const bitstreamPayload$: Observable<Bitstream> = this.bitstreamDataService.showableByItem(
+      item.uuid, bundleName, [], {}, true, true, followLink('format'),
     ).pipe(
       getFirstCompletedRemoteData(),
       switchMap((rd: RemoteData<PaginatedList<Bitstream>>) => rd.hasSucceeded ? rd.payload.page : new Array<Bitstream>()),

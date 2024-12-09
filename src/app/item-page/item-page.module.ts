@@ -62,6 +62,7 @@ import {
   ThemedFullFileSectionComponent
 } from './full/field-components/file-section/themed-full-file-section.component';
 import { UnpaywallVersionsComponent } from './unpaywall-versions/unpaywall-versions.component';
+import { MarkdownViewerModule } from '../shared/markdown-viewer/markdown-viewer.module';
 
 
 const ENTRY_COMPONENTS = [
@@ -126,6 +127,7 @@ const DECLARATIONS = [
     CrisItemPageModule,
     ContextMenuModule.withEntryComponents(),
     MiradorViewerModule,
+    MarkdownViewerModule,
   ],
   declarations: [
     ...DECLARATIONS,
