@@ -4845,71 +4845,65 @@
 
   "quality-assurance.event.reason": "Reason",
 
-  "reciter.suggestion.loading": "Loading ...",
+  "suggestion.loading": "Loading ...",
 
-  "reciter.suggestion.title": "Suggestions",
+  "suggestion.title": "Suggestions",
 
-  "reciter.suggestion.targets.description": "Below you can see all the suggestions ",
+  "suggestion.targets.description": "Below you can see all the suggestions ",
 
-  "reciter.suggestion.targets": "Current Suggestions",
+  "suggestion.targets": "Current Suggestions",
 
-  "reciter.suggestion.table.name": "Researcher Name",
+  "suggestion.table.name": "Researcher Name",
 
-  "reciter.suggestion.table.actions": "Actions",
+  "suggestion.table.actions": "Actions",
 
-  "reciter.suggestion.button.review": "Review {{ total }} suggestion(s)",
+  "suggestion.button.review": "Review {{ total }} suggestion(s)",
 
-  "reciter.suggestion.noTargets": "No target found.",
+  "suggestion.noTargets": "No target found.",
 
-  "reciter.suggestion.target.error.service.retrieve": "An error occurred while loading the Suggestion targets",
+  "suggestion.target.error.service.retrieve": "An error occurred while loading the Suggestion targets",
 
-  "reciter.suggestion.evidence.type": "Type",
+  "suggestion.evidence.type": "Type",
 
-  "reciter.suggestion.evidence.score": "Score",
+  "suggestion.evidence.score": "Score",
 
-  "reciter.suggestion.evidence.notes": "Notes",
+  "suggestion.evidence.notes": "Notes",
 
-  "reciter.suggestion.approveAndImport": "Approve & import",
+  "suggestion.approveAndImport": "Approve & import",
 
-  "reciter.suggestion.approveAndImport.success": "The suggestion has been imported successfully. <a href='/workspaceitems/{{workspaceItemId}}/edit'>View.</a>",
+  "suggestion.approveAndImport.success": "The suggestion has been imported successfully. <a href='/workspaceitems/{{workspaceItemId}}/edit'>View.</a>",
 
-  "reciter.suggestion.approveAndImport.bulk": "Approve & import Selected",
+  "suggestion.approveAndImport.bulk": "Approve & import Selected",
 
-  "reciter.suggestion.approveAndImport.bulk.success": "{{ count }} suggestions have been imported successfully ",
+  "suggestion.approveAndImport.bulk.success": "{{ count }} suggestions have been imported successfully ",
 
-  "reciter.suggestion.approveAndImport.bulk.error": "{{ count }} suggestions haven't been imported due to unexpected server errors",
+  "suggestion.approveAndImport.bulk.error": "{{ count }} suggestions haven't been imported due to unexpected server errors",
 
-  "reciter.suggestion.notMine": "Not mine",
+  "suggestion.notMine": "Not mine",
 
-  "reciter.suggestion.notMine.success": "The suggestion has been discarded",
+  "suggestion.notMine.success": "The suggestion has been discarded",
 
-  "reciter.suggestion.notMine.bulk": "Not mine Selected",
+  "suggestion.notMine.bulk": "Not mine Selected",
 
-  "reciter.suggestion.notMine.bulk.success": "{{ count }} suggestions have been discarded ",
+  "suggestion.notMine.bulk.success": "{{ count }} suggestions have been discarded ",
 
-  "reciter.suggestion.notMine.bulk.error": "{{ count }} suggestions haven't been discarded due to unexpected server errors",
+  "suggestion.notMine.bulk.error": "{{ count }} suggestions haven't been discarded due to unexpected server errors",
 
-  "reciter.suggestion.empty": "All the <b>{{type}}</b> suggestions in the {{source}}<br> related to your profile have been either approved or rejected.",
+  "suggestion.empty": "All the <b>{{type}}</b> suggestions in the {{source}}<br> related to your profile have been either approved or rejected.",
 
-  "reciter.suggestion.seeEvidence": "See evidence",
+  "suggestion.seeEvidence": "See evidence",
 
-  "reciter.suggestion.hideEvidence": "Hide evidence",
+  "suggestion.hideEvidence": "Hide evidence",
 
-  "reciter.suggestion.not-found": "No suggestion found with the given identifier.",
+  "suggestion.not-found": "No suggestion found with the given identifier.",
 
-  "reciter.suggestion.suggestionFor": "Suggestion for",
+  "suggestion.source.oaire": "OpenAIRE Graph",
 
-  "reciter.suggestion.source.oaire": "OpenAIRE Graph",
+  "suggestion.source.orcidWorks": "ORCID registry",
 
-  "reciter.suggestion.source.orcidWorks": "ORCID registry",
+  "suggestion.type.oaire": "Publications",
 
-  "reciter.suggestion.from.source": "from the ",
-
-  "reciter.suggestion.totalScore": "Total Score",
-
-  "reciter.suggestion.type.oaire": "Publications",
-
-  "reciter.suggestion.type.orcidWorks": "Publications",
+  "suggestion.type.orcidWorks": "Publications",
 
   "orgunit.listelement.badge": "Organizational Unit",
 
@@ -5342,10 +5336,6 @@
   "suggestion.ignoreSuggestion.bulk.success": "{{ count }} suggestions have been discarded ",
 
   "suggestion.ignoreSuggestion.bulk.error": "{{ count }} suggestions haven't been discarded due to unexpected server errors",
-
-  "suggestion.seeEvidence": "See evidence",
-
-  "suggestion.hideEvidence": "Hide evidence",
 
   "suggestion.suggestionFor": "Suggestions for",
 
