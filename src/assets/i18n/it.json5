@@ -2240,6 +2240,10 @@
   // "carousel.button.see-more": "See more",
   "carousel.button.see-more": "Approfondisci",
 
+  // "carousel.play.pause": "Play/Pause",
+  // TODO New key - Add a translation
+  "carousel.play.pause": "Play/Pause",
+
 
   // "search.browse.item-back": "Back to Results",
   "search.browse.item-back": "Torna ai risultati",
@@ -3048,7 +3052,8 @@
   // "context-menu.actions.edit-item-relationships.btn.fonds": "Manage Researchers Fonds",
   "context-menu.actions.edit-item-relationships.btn.fonds": "Gestisci i Fondi",
 
-  // "context-menu.actions.edit-item-relationships.btn.children": "Manage Children",
+  // "context-menu.actions.edit-item-relationships.btn.children": "Manage Sub-fonds / Series",
+  // TODO Source message changed - Revise the translation
   "context-menu.actions.edit-item-relationships.btn.children": "Gestisci i livelli di descrizione inferioire",
 
   // "context-menu.actions.edit-item-relationships.btn.events": "Manage Events",
@@ -3171,7 +3176,8 @@
   // "RELATION.Fonds.publications.search.results.head": "Publications",
   "RELATION.Fonds.publications.search.results.head": "Pubblicazioni",
 
-  // "RELATION.Fonds.children.search.results.head": "Fonds Children",
+  // "RELATION.Fonds.children.search.results.head": "Sub-fonds / Series",
+  // TODO Source message changed - Revise the translation
   "RELATION.Fonds.children.search.results.head": "Livello di Descrizione Inferiore",
 
   // "RELATION.JournalFonds.children.search.results.head": "Journal Fonds Children",
@@ -4169,7 +4175,8 @@
   // "explore.index.rpname": "Name",
   "explore.index.rpname": "Nome",
 
-  // "explore.index.subject": "Subject",
+  // "explore.index.subject": "Keyword",
+  // TODO Source message changed - Revise the translation
   "explore.index.subject": "Parola chiave",
 
   // "explore.index.glamsubject": "Subject",
@@ -4277,6 +4284,7 @@
   // "file-section.error.header": "Error obtaining files for this item",
   "file-section.error.header": "Errore durante il recupero dei file per questo item",
 
+  // "fondsHomePage.search.results.head": "Fonds",
   "fondsHomePage.search.results.head": "Fondi",
 
   // "footer.built-with": "Built with",
@@ -7193,6 +7201,10 @@
   // "none.listelement.badge": "Item",
   "none.listelement.badge": "Item",
 
+  // "no.description.available": "No description available",
+  // TODO New key - Add a translation
+  "no.description.available": "No description available",
+
   // "openaire.broker.title": "OpenAIRE Broker",
   "openaire.broker.title": "OpenAIRE Broker",
 
@@ -8439,7 +8451,8 @@
   // "search.filters.applied.f.projectorgunits": "Organisation",
   "search.filters.applied.f.projectorgunits": "Organizzazione",
 
-  // "search.filters.applied.f.subject": "Subject",
+  // "search.filters.applied.f.subject": "Keyword",
+  // TODO Source message changed - Revise the translation
   "search.filters.applied.f.subject": "Parola chiave",
 
   // "search.filters.applied.f.glamsubject": "Subject",
@@ -8856,13 +8869,16 @@
   // "search.filters.filter.show-more": "Show more",
   "search.filters.filter.show-more": "Mostra altro",
 
-  // "search.filters.filter.subject.head": "Subject",
+  // "search.filters.filter.subject.head": "Keyword",
+  // TODO Source message changed - Revise the translation
   "search.filters.filter.subject.head": "Parola chiave",
 
-  // "search.filters.filter.subject.placeholder": "Subject",
+  // "search.filters.filter.subject.placeholder": "Keyword",
+  // TODO Source message changed - Revise the translation
   "search.filters.filter.subject.placeholder": "Parola chiave",
 
-  // "search.filters.filter.subject.label": "Search subject",
+  // "search.filters.filter.subject.label": "Search keyword",
+  // TODO Source message changed - Revise the translation
   "search.filters.filter.subject.label": "Oggetto della ricerca",
 
   // "search.filters.filter.glamsubject.head": "Subject",
@@ -9193,6 +9209,10 @@
 
   // "search.view-switch.show-list": "Show as list",
   "search.view-switch.show-list": "Visualizzazione a lista",
+
+  // "social.component.title": "Social Share",
+  // TODO New key - Add a translation
+  "social.component.title": "Social Share",
 
   // "sorting.ASC": "Ascending",
   "sorting.ASC": "Crescente",
@@ -12072,6 +12092,10 @@
   // "lucky.search.multiple.records": "may refer to multiple records",
   "lucky.search.multiple.records": "può riferirsi a più record",
 
+  // "lucky.search.bitstream.notfound": "We are unable to find the file that you have mentioned but it seems to be related to this item.",
+  // TODO New key - Add a translation
+  "lucky.search.bitstream.notfound": "We are unable to find the file that you have mentioned but it seems to be related to this item.",
+
   // "invitation.group.msg": "You have been invited to join the following groups",
   "invitation.group.msg": "Sei stato invitato a unirti ai seguenti gruppi",
 
@@ -12362,6 +12386,7 @@
 
   // "submission.sections.submit.progressbar.describe.journal_materials_indexing": "Indexing Information",
   "submission.sections.submit.progressbar.describe.journal_materials_indexing": "Informazioni sull'indicizzazione",
+
   // "submission.sections.submit.progressbar.describe.journal_materials_references": "Contextual Information",
   "submission.sections.submit.progressbar.describe.journal_materials_references": "Contesto",
 
@@ -12379,10 +12404,6 @@
 
   // "submission.sections.submit.progressbar.describe.books": "Book basic information",
   "submission.sections.submit.progressbar.describe.books": "Informazioni di base",
-
-  // "submission.sections.submit.progressbar.describe.coin": "Coin basic information",
-  // TODO Source message changed - Revise the translation
-  "submission.sections.submit.progressbar.describe.coin": "Infomazioni di dettaglio",
 
   // "submission.sections.submit.progressbar.describe.coin-glam-bibliography": "Coin bibliographic details",
   "submission.sections.submit.progressbar.describe.coin-glam-bibliography": "Dettagli bibliografici della Moneta",
@@ -13447,7 +13468,8 @@
   "layout.field.label.Publication.[dc.relation.otherlinks]": "Altri Collegamenti",
   // "layout.field.label.Publication.[dc.description.note]": "Notes",
   "layout.field.label.Publication.[dc.description.note]": "Note",
-  // "layout.field.label.Publication.BITSTREAM": "File / Documantation",
+  // "layout.field.label.Publication.BITSTREAM": "File / Documentation",
+  // TODO Source message changed - Revise the translation
   "layout.field.label.Publication.BITSTREAM": "File / Documentazione",
   // "layout.field.label.Publication.[dc.relation.journalfonds]": "Journal Fonds ",
   "layout.field.label.Publication.[dc.relation.journalfonds]": "Testata Correlata",
