@@ -4,7 +4,7 @@
       <div #collapse="ngbCollapse" [ngbCollapse]="isBoxCollapsed(box.shortname)">
         <ng-container *ngComponentOutlet="getComponentRef(); injector: objectInjector;"></ng-container>
       </div>
-      <p class="d-flex justify-content-center">
+      <p class="d-flex justify-content-center mt-3">
         <button type="button" class="btn btn-outline-primary btn-sm collapse-btn d-flex"
           #collapseButton
           (click)="toggleBoxCollapse(box.shortname)" [attr.aria-expanded]="!isBoxCollapsed(box.shortname)"

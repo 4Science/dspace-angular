@@ -1,35 +1,5 @@
 :host {
   ::ng-deep {
-
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-      width: 32px;
-      height: 32px;
-      background-color: var(--ds-carousel-controls-color);
-      background-origin: content-box;
-      border-radius: 16px;
-    }
-
-    .carousel-control-prev-icon {
-      padding: 6px 7px 6px 5px;
-      position: absolute;
-      left: 0;
-      transform: translateX(100%);
-    }
-
-    .carousel-control-next-icon {
-      padding: 6px 5px 6px 7px;
-      position: absolute;
-      right: 0;
-      transform: translateX(-100%);
-    }
-
-    .carousel-control-prev,
-    .carousel-control-next {
-      cursor: pointer;
-      width: 12%;
-    }
-
     .carousel-indicators {
       padding-bottom: 6px;
     }
@@ -48,7 +18,6 @@
   }
 
   .carousel-caption-inner {
-    //width: 80%;
     margin: 0 auto;
   }
 
@@ -73,6 +42,16 @@
     background-repeat: no-repeat;
   }
 
+  .carousel-arrows {
+    .arrow-btn {
+      opacity: 0.8;
+      color: var(--ds-carousel-with-thumbnails-controls-color);
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
   .carousel-caption-text {
     overflow-y: scroll;
     max-height: 4.5rem;
@@ -93,7 +72,7 @@
   }
 
   button.toggle-paused {
-    color: var(--ds-carousel-controls-color);
+    color: var(--ds-carousel-with-thumbnails-controls-color);
     outline: none;
     box-shadow: none !important
   }

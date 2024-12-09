@@ -10,7 +10,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnInit, Outp
 import { BehaviorSubject, map, mergeMap, Observable, take } from 'rxjs';
 import { BitstreamImagesService } from '../../core/services/bitstream-images.service';
 import { SearchObjects } from '../search/models/search-objects.model';
-import { isNotEmpty } from '../empty.util';
+import { hasValue, isNotEmpty } from '../empty.util';
 import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 
@@ -18,6 +18,12 @@ import { getFirstCompletedRemoteData } from '../../core/shared/operators';
   template: ''
 })
 export abstract class SliderComponent implements OnInit {
+
+
+  /**
+   * The bundle to use to look for thumbnails
+   */
+  @Input() bundle: string;
 
   /**
    * The discovery configuration to retrieve the items
@@ -146,7 +152,9 @@ export abstract class SliderComponent implements OnInit {
           this.hasMoreToLoad = this.itemList.length < searchResult.totalElements;
           this.initLoading$.next(false);
           this.itemsImagesLoading$.next(true);
-          return this.bitstreamImagesService.getItemToImageMap(items);
+          return hasValue(this.bundle)
+            ? this.bitstreamImagesService.getItemToImageMap(items, this.bundle)
+            : this.bitstreamImagesService.getItemToImageMap(items);
         } else {
           return null;
         }

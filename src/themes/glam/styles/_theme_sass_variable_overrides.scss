@@ -83,6 +83,13 @@ $table-hover-bg: #ced4da;   // As Bootstrap $gray-400
 $navbar-dark-color: #fff;
 
 
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1200px // 1140px
+) !default;
+
 /*** CUSTOM DSPACE VARIABLES ***/
 
 $ds-home-news-link-color: #92c642;

@@ -101,7 +101,7 @@ export class CarouselSectionComponent implements OnInit {
       pagination: pagination,
       sort: new SortOptions(sortField, sortDirection),
       dsoTypes: [DSpaceObjectType.ITEM],
-      forcedEmbeddedKeys: ['bundles']
+      projection: 'preventMetadataSecurity'
     });
 
     this.searchResults$ = this.searchService.search(this.paginatedSearchOptions).pipe(

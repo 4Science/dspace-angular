@@ -11,6 +11,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateLoaderMock } from '../mocks/translate-loader.mock';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HostWindowService } from '../host-window.service';
+import { APP_CONFIG } from '../../../config/app-config.interface';
+import { environment } from '../../../environments/environment';
 
 describe('CarouselWithThumbnailsComponent', () => {
   let component: CarouselWithThumbnailsComponent;
@@ -41,6 +43,10 @@ describe('CarouselWithThumbnailsComponent', () => {
       declarations: [CarouselWithThumbnailsComponent],
       providers: [
         { provide: HostWindowService, useValue: hostWindowServicve },
+        {
+          provide: APP_CONFIG,
+          useValue: environment
+        }
       ],
       schemas: [
         NO_ERRORS_SCHEMA
