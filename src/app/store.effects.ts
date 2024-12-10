@@ -1,4 +1,7 @@
-import { Injectable } from '@angular/core';
+import {
+  Inject,
+  Injectable,
+} from '@angular/core';
 import {
   Actions,
   createEffect,
@@ -12,6 +15,10 @@ import { of as observableOf } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { AppState } from './app.reducer';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from './core/services/window.service';
 import { HostWindowResizeAction } from './shared/host-window.actions';
 import { StoreActionTypes } from './store.actions';
 
@@ -30,10 +37,14 @@ export class StoreEffects {
 
   resize = createEffect(() => this.actions.pipe(
     ofType(StoreActionTypes.REPLAY, StoreActionTypes.REHYDRATE),
-    map(() => new HostWindowResizeAction(window.innerWidth, window.innerHeight)),
+    map(() => new HostWindowResizeAction(this._window.nativeWindow.innerWidth, this._window.nativeWindow.innerHeight)),
   ));
 
-  constructor(private actions: Actions, private store: Store<AppState>) {
+  constructor(
+    private actions: Actions,
+    private store: Store<AppState>,
+    @Inject(NativeWindowService) private _window: NativeWindowRef,
+  ) {
 
   }
 

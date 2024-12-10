@@ -152,7 +152,7 @@ export class SubmissionUploadFilesComponent implements OnChanges {
 
             const errorsList = parseSectionErrors(errors);
             if (sections && isNotEmpty(sections)) {
-              Object.keys(sections)
+              Object.keys(sections).filter(key=> hasValue(sections[key]))
                 .forEach((sectionId) => {
                   const sectionData = normalizeSectionData(sections[sectionId]);
                   const sectionWarning = hasValue(sectionData.files) ? this.parseErrorsForWarning(sectionData.files, errorsList[sectionId]) : [];
