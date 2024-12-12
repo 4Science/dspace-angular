@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 
 import { itemResolver } from '../item.resolver';
-import { BitstreamViewerResolver } from './resolvers/bitstream-viewer.resolver';
+import { bitstreamViewerProviderResolver } from './resolvers/bitstream-viewer.resolver';
 import { componentProviderResolver } from './resolvers/component-provider.resolver';
 import { i18nBreadcrumbComponentProviderResolver } from './resolvers/i18n-breadcrumb-component-provider.resolver';
 import { ViewerProviderComponent } from './viewer-provider.component';
@@ -23,7 +23,7 @@ export const ROUTES: Route[] = [
     component: ViewerProviderComponent,
     resolve: {
       breadcrumb: i18nBreadcrumbComponentProviderResolver,
-      bitstream: BitstreamViewerResolver,
+      bitstream: bitstreamViewerProviderResolver,
       item: itemResolver,
       viewer: componentProviderResolver,
     },

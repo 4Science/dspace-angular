@@ -3,14 +3,14 @@ import { Route } from '@angular/router';
 import { authenticatedGuard } from '../../core/auth/authenticated.guard';
 import { i18nBreadcrumbResolver } from '../../core/breadcrumbs/i18n-breadcrumb.resolver';
 import { qualityAssuranceBreadcrumbResolver } from '../../core/breadcrumbs/quality-assurance-breadcrumb.resolver';
-import { AdminNotificationsPublicationClaimPageResolver } from '../../quality-assurance-notifications-pages/notifications-suggestion-targets-page/notifications-suggestion-targets-page-resolver.service';
+import { adminNotificationsPublicationClaimPageResolver } from '../../quality-assurance-notifications-pages/notifications-suggestion-targets-page/notifications-suggestion-targets-page-resolver.service';
 import { QualityAssuranceEventsPageComponent } from '../../quality-assurance-notifications-pages/quality-assurance-events-page/quality-assurance-events-page.component';
 import { qualityAssuranceEventsPageResolver } from '../../quality-assurance-notifications-pages/quality-assurance-events-page/quality-assurance-events-page.resolver';
 import { qualityAssuranceSourceDataResolver } from '../../quality-assurance-notifications-pages/quality-assurance-source-page-component/quality-assurance-source-data.resolver';
 import { QualityAssuranceSourcePageComponent } from '../../quality-assurance-notifications-pages/quality-assurance-source-page-component/quality-assurance-source-page.component';
-import { QualityAssuranceSourcePageResolver } from '../../quality-assurance-notifications-pages/quality-assurance-source-page-component/quality-assurance-source-page-resolver.service';
+import { qualityAssuranceSourcePageResolver } from '../../quality-assurance-notifications-pages/quality-assurance-source-page-component/quality-assurance-source-page-resolver.service';
 import { QualityAssuranceTopicsPageComponent } from '../../quality-assurance-notifications-pages/quality-assurance-topics-page/quality-assurance-topics-page.component';
-import { QualityAssuranceTopicsPageResolver } from '../../quality-assurance-notifications-pages/quality-assurance-topics-page/quality-assurance-topics-page-resolver.service';
+import { qualityAssuranceTopicsPageResolver } from '../../quality-assurance-notifications-pages/quality-assurance-topics-page/quality-assurance-topics-page-resolver.service';
 import { AdminNotificationsPublicationClaimPageComponent } from './admin-notifications-publication-claim-page/admin-notifications-publication-claim-page.component';
 import {
   PUBLICATION_CLAIMS_PATH,
@@ -25,7 +25,7 @@ export const ROUTES: Route[] = [
     pathMatch: 'full',
     resolve: {
       breadcrumb: i18nBreadcrumbResolver,
-      suggestionTargetParams: AdminNotificationsPublicationClaimPageResolver,
+      suggestionTargetParams: adminNotificationsPublicationClaimPageResolver,
     },
     data: {
       title: 'admin.notifications.publicationclaim.page.title',
@@ -40,7 +40,7 @@ export const ROUTES: Route[] = [
     pathMatch: 'full',
     resolve: {
       breadcrumb: qualityAssuranceBreadcrumbResolver,
-      openaireQualityAssuranceTopicsParams: QualityAssuranceTopicsPageResolver,
+      openaireQualityAssuranceTopicsParams: qualityAssuranceTopicsPageResolver,
     },
     data: {
       title: 'admin.quality-assurance.page.title',
@@ -55,7 +55,7 @@ export const ROUTES: Route[] = [
     pathMatch: 'full',
     resolve: {
       breadcrumb: i18nBreadcrumbResolver,
-      openaireQualityAssuranceTopicsParams: QualityAssuranceTopicsPageResolver,
+      openaireQualityAssuranceTopicsParams: qualityAssuranceTopicsPageResolver,
     },
     data: {
       title: 'admin.quality-assurance.page.title',
@@ -70,7 +70,7 @@ export const ROUTES: Route[] = [
     pathMatch: 'full',
     resolve: {
       breadcrumb: i18nBreadcrumbResolver,
-      openaireQualityAssuranceSourceParams: QualityAssuranceSourcePageResolver,
+      openaireQualityAssuranceSourceParams: qualityAssuranceSourcePageResolver,
       sourceData: qualityAssuranceSourceDataResolver,
     },
     data: {

@@ -15,7 +15,7 @@ import {
 import { BulkAccessComponent } from './bulk-access/bulk-access.component';
 import { EPeopleRegistryComponent } from './epeople-registry/epeople-registry.component';
 import { EPersonFormComponent } from './epeople-registry/eperson-form/eperson-form.component';
-import { EPersonResolver } from './epeople-registry/eperson-resolver.service';
+import { ePersonResolver } from './epeople-registry/eperson-resolver.service';
 import { GroupFormComponent } from './group-registry/group-form/group-form.component';
 import { groupPageGuard } from './group-registry/group-page.guard';
 import { GroupsRegistryComponent } from './group-registry/groups-registry.component';
@@ -60,7 +60,7 @@ export const ROUTES: Route[] = [
     component: EPersonFormComponent,
     resolve: {
       breadcrumb: i18nBreadcrumbResolver,
-      ePerson: EPersonResolver,
+      ePerson: ePersonResolver,
     },
     providers,
     data: { title: 'admin.access-control.epeople.edit.title', breadcrumbKey: 'admin.access-control.epeople.edit' },
