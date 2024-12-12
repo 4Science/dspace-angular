@@ -1,16 +1,15 @@
-// Todo: To reintroduce once library is fixed or find alternatve
-//import 'videojs-hls-quality-selector'
-//import 'videojs-contrib-quality-levels'
+import 'videojs-hls-quality-selector'
+import 'videojs-contrib-quality-levels'
 
-//import videojs from 'video.js';
-//import Wavesurfer from 'videojs-wavesurfer/dist/videojs.wavesurfer.js';
+import videojs from 'video.js';
+import Wavesurfer from 'videojs-wavesurfer/dist/videojs.wavesurfer.js';
 
 import { MediaViewerItem } from '../../../core/shared/media-viewer-item.model';
 import { VideojsService } from './videojs.service';
 
 export class BrowserVideojsService implements VideojsService {
 
-  plugin ;
+  plugin = Wavesurfer;
 
   /**
    * The config object for audio player
@@ -55,16 +54,32 @@ export class BrowserVideojsService implements VideojsService {
    * Return an instance of videojs player for video media
    */
   initAudioPlayer(element: HTMLElement, mediaItem: MediaViewerItem): any {
+    const audioPlayer: any = videojs(element, this.configAudio, () => {
+      audioPlayer.src({
+        src: mediaItem?.manifestUrl,
+        type: 'application/dash+xml',
+        peaks: mediaItem?.bitstream?.firstMetadataValue('bitstream.audio.peaks'),
+      });
+    });
 
+    return audioPlayer;
   }
 
   /**
    * Return an instance of videojs player for video media
    */
   initVideoPlayer(element: HTMLElement, mediaItem: MediaViewerItem): any {
+    const videoPlayer = videojs(element, this.configVideo, () => {
+      videoPlayer.src({ src: mediaItem?.manifestUrl, type: 'application/dash+xml' });
+    });
 
+    videoPlayer.ready(() => {
+      if ((videoPlayer as any).hlsQualitySelector) {
+        (videoPlayer as any).hlsQualitySelector()
+      }
+    })
 
-    return ;
+    return videoPlayer;
   }
 
 }
