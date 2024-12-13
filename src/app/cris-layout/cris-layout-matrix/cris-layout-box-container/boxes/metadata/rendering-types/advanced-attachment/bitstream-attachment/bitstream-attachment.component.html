@@ -20,43 +20,43 @@
     </div>
 
     <div class="order-lg-2 w-100 mb-3">
-      @for (attachmentConf of envMetadata;  track $index) {
-        @if (attachment.firstMetadataValue(attachmentConf.name) || attachmentConf.type === AdvancedAttachmentElementType.Attribute) {
-          <div class="content" [attr.data-test]="attachmentConf.name">
-            <strong>{{ 'cris-layout.advanced-attachment.' + attachmentConf.name | translate }}</strong>
+      <ng-container *ngFor="let attachmentConf of envMetadata">
 
-            @if (attachmentConf.type === AdvancedAttachmentElementType.Metadata) {
+        <div class="content"
+             [attr.data-test]="attachmentConf.name"
+             *ngIf="attachment.firstMetadataValue(attachmentConf.name) || attachmentConf.type === AdvancedAttachmentElementType.Attribute"
+        >
+          <strong>{{ 'cris-layout.advanced-attachment.'+attachmentConf.name | translate }}</strong>
 
-              <p class="text-break m-0" *ngIf="!attachmentConf.truncatable && attachmentConf.name === attachmentTypeMetadata">
-                {{attachment.firstMetadataValue(attachmentConf.name) | titlecase}}
-              </p>
+          <ng-container *ngIf="attachmentConf.type === AdvancedAttachmentElementType.Metadata">
 
-              <p class="text-break m-0" *ngIf="!attachmentConf.truncatable && attachmentConf.name !== attachmentTypeMetadata">
+            <p class="text-break m-0" *ngIf="!attachmentConf.truncatable && attachmentConf.name === attachmentTypeMetadata">
+              {{attachment.firstMetadataValue(attachmentConf.name) | titlecase}}
+            </p>
+
+            <p class="text-break m-0" *ngIf="!attachmentConf.truncatable && attachmentConf.name !== attachmentTypeMetadata">
+              {{attachment.firstMetadataValue(attachmentConf.name)}}
+            </p>
+
+            <ds-truncatable *ngIf="attachmentConf.truncatable" [id]=" attachment.id">
+              <ds-truncatable-part [id]="attachment.id" [minLines]="1">
                 {{attachment.firstMetadataValue(attachmentConf.name)}}
+              </ds-truncatable-part>
+            </ds-truncatable>
+
+          </ng-container>
+
+          <ng-container *ngIf="attachmentConf.type === AdvancedAttachmentElementType.Attribute">
+            <ng-container *ngIf="attachmentConf.name === 'format'">
+              <p *ngIf="(bitstreamFormat$ | async) === null || (bitstreamFormat$ | async) === undefined" class="text-muted">
+                {{'cris-layout.advanced-attachment.label.not-present' | translate}}
               </p>
+              <p class="word-break m-0">{{bitstreamFormat$ | async}}</p>
+            </ng-container>
 
-              @if (attachmentConf.truncatable) {
-                <ds-truncatable [id]=" attachment.id">
-                  <ds-truncatable-part [id]="attachment.id" [minLines]="1">
-                    {{attachment.firstMetadataValue(attachmentConf.name)}}
-                  </ds-truncatable-part>
-                </ds-truncatable>
-              }
-            }
-            @if (attachmentConf.type === AdvancedAttachmentElementType.Attribute) {
-              @if (attachmentConf.name === 'format') {
-                @if ((bitstreamFormat$ | async) === null || (bitstreamFormat$ | async) === undefined) {
-                  <p class="text-muted">
-                    {{'cris-layout.advanced-attachment.label.not-present' | translate}}
-                  </p>
-                } @else {
-                  <p class="word-break m-0">{{(bitstreamFormat$ | async)}}</p>
-                }
-              }
-
-              @if (attachmentConf.name === 'size' && bitstreamSize) {
-                <p class="word-break m-0">{{bitstreamSize | dsFileSize}}</p>
-              }
+            <ng-container *ngIf="attachmentConf.name === 'size'">
+              <p class="word-break m-0">{{bitstreamSize | dsFileSize}}</p>
+            </ng-container>
 
             <ng-container *ngIf="attachmentConf.name === 'checksum'">
               <p *ngIf="(getChecksum(attachment)?.value) !== true"class="text-muted">
@@ -79,20 +79,10 @@
                 </ng-template>
               </ng-container>
             </ng-container>
-              @if (attachmentConf.name === 'checksum') {
-                @if (checksumInfo?.value === null || checksumInfo?.value === undefined) {
-                  <p class="text-muted">
-                    {{'cris-layout.advanced-attachment.label.not-present' | translate}}
-                  </p>
-                } @else {
-                  <p class="word-break m-0">({{checksumInfo.checkSumAlgorithm}}):{{ checksumInfo.value }}</p>
-                }
-              }
-            }
+          </ng-container>
 
-          </div>
-        }
-      }
+        </div>
+      </ng-container>
 
     </div>
 

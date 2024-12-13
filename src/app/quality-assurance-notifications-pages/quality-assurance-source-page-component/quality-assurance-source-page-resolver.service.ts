@@ -22,10 +22,10 @@ export interface QualityAssuranceSourcePageParams {
 export const qualityAssuranceSourcePageResolver: ResolveFn<QualityAssuranceSourcePageParams> = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
-): Observable<QualityAssuranceSourcePageParams> => {
-  return of({
+): QualityAssuranceSourcePageParams => {
+  return {
     pageId: route.queryParams.pageId,
     pageSize: parseInt(route.queryParams.pageSize, 10),
     currentPage: parseInt(route.queryParams.page, 10),
-  });
+  };
 };

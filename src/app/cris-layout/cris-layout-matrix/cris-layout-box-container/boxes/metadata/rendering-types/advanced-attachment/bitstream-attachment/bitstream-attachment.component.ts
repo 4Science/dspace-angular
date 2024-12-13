@@ -1,5 +1,5 @@
 import {
-  AsyncPipe,
+  AsyncPipe, NgForOf, NgIf,
   TitleCasePipe,
 } from '@angular/common';
 import {
@@ -51,6 +51,8 @@ import { AttachmentRenderingType } from './attachment-type.decorator';
     TranslateModule,
     FileSizePipe,
     NgbTooltipModule,
+    NgIf,
+    NgForOf,
   ],
 })
 export class BitstreamAttachmentComponent extends BitstreamRenderingModelComponent implements OnInit {

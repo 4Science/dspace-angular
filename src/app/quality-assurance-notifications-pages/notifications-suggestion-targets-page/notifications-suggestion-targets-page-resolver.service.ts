@@ -26,10 +26,10 @@ export interface AdminNotificationsPublicationClaimPageParams {
 export const adminNotificationsPublicationClaimPageResolver: ResolveFn<AdminNotificationsPublicationClaimPageParams> = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
-): Observable<AdminNotificationsPublicationClaimPageParams> => {
-  return of({
+): AdminNotificationsPublicationClaimPageParams => {
+  return {
     pageId: route.queryParams.pageId,
     pageSize: parseInt(route.queryParams.pageSize, 10),
     currentPage: parseInt(route.queryParams.page, 10),
-  });
+  };
 };
