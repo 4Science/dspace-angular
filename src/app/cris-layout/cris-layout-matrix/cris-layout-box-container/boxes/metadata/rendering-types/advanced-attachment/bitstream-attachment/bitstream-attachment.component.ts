@@ -1,5 +1,7 @@
 import {
-  AsyncPipe, NgForOf, NgIf,
+  AsyncPipe,
+  NgForOf,
+  NgIf,
   TitleCasePipe,
 } from '@angular/common';
 import {

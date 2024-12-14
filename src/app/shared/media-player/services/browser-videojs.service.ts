@@ -1,5 +1,5 @@
-import 'videojs-hls-quality-selector'
-import 'videojs-contrib-quality-levels'
+import 'videojs-hls-quality-selector';
+import 'videojs-contrib-quality-levels';
 
 import videojs from 'video.js';
 import Wavesurfer from 'videojs-wavesurfer/dist/videojs.wavesurfer.js';
@@ -75,9 +75,9 @@ export class BrowserVideojsService implements VideojsService {
 
     videoPlayer.ready(() => {
       if ((videoPlayer as any).hlsQualitySelector) {
-        (videoPlayer as any).hlsQualitySelector()
+        (videoPlayer as any).hlsQualitySelector();
       }
-    })
+    });
 
     return videoPlayer;
   }

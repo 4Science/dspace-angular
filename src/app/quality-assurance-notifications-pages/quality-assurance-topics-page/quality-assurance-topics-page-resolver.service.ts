@@ -3,10 +3,6 @@ import {
   ResolveFn,
   RouterStateSnapshot,
 } from '@angular/router';
-import {
-  Observable,
-  of,
-} from 'rxjs';
 
 /**
  * Interface for the route parameters.
@@ -25,5 +21,5 @@ export const qualityAssuranceTopicsPageResolver: ResolveFn<QualityAssuranceTopic
     pageId: route.queryParams.pageId,
     pageSize: parseInt(route.queryParams.pageSize, 10),
     currentPage: parseInt(route.queryParams.page, 10),
-  }
+  };
 };

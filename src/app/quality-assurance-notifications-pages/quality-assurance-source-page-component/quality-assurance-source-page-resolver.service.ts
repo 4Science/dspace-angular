@@ -3,10 +3,6 @@ import {
   ResolveFn,
   RouterStateSnapshot,
 } from '@angular/router';
-import {
-  Observable,
-  of,
-} from 'rxjs';
 
 
 /**
