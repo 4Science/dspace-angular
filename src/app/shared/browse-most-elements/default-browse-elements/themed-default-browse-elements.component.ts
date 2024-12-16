@@ -36,7 +36,7 @@ export class ThemedDefaultBrowseElementsComponent extends ThemedComponent<Defaul
   }
 
   protected importThemedComponent(themeName: string): Promise<any> {
-    return import(`./../../../../themes/${themeName}/app/browse-most-elements/default-browse-elements/default-browse-elements.component`);
+    return import(`./../../../../themes/${themeName}/app/shared/browse-most-elements/default-browse-elements/default-browse-elements.component`);
   }
 
   protected importUnthemedComponent(): Promise<any> {

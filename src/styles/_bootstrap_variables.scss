@@ -53,7 +53,8 @@ $link-hover-color: darken($link-color, 15%) !default;
 $yiq-contrasted-threshold: 165 !default;
 
 $navbar-dark-color: rgba(white, .5) !default;
-$navbar-light-color: rgba(black, .5) !default;
+$navbar-light-color: rgba(black, .6) !default;
+$navbar-light-hover-color: rgba(black, .8) !default;
 $navbar-dark-toggler-icon-bg: url("data:image/svg+xml;charset=utf8,<svg+viewBox='0+0+30+30'+xmlns='http://www.w3.org/2000/svg'><path+stroke='#{$navbar-dark-color}'+stroke-width='2'+stroke-linecap='round'+stroke-miterlimit='10'+d='M4+7h22M4+15h22M4+23h22'/></svg>") !default;
 $navbar-light-toggler-icon-bg: url("data:image/svg+xml;charset=utf8,<svg+viewBox='0+0+30+30'+xmlns='http://www.w3.org/2000/svg'><path+stroke='#{$navbar-light-color}'+stroke-width='2'+stroke-linecap='round'+stroke-miterlimit='10'+d='M4+7h22M4+15h22M4+23h22'/></svg>") !default;
 

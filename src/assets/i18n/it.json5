@@ -356,6 +356,18 @@
   // "admin.registries.metadata.form.namespace": "Namespace",
   "admin.registries.metadata.form.namespace": "Namespace",
 
+  // "admin.registries.metadata.search.form.search": "Search metadata schema",
+  "admin.registries.metadata.search.form.search": "Schema dei metadati di ricerca",
+
+  // "admin.registries.metadata.search.form.namespace": "Namespace",
+  "admin.registries.metadata.search.form.namespace": "Namespace",
+
+  // "admin.registries.metadata.search.form.element": "Element",
+  "admin.registries.metadata.search.form.element": "Element",
+
+  // "admin.registries.metadata.search.form.qualifier": "Qualifier",
+  "admin.registries.metadata.search.form.qualifier": "Qualifier",
+
   // "admin.registries.metadata.head": "Metadata Registry",
   "admin.registries.metadata.head": "Registro dei metadati",
 
@@ -2228,6 +2240,10 @@
   // "carousel.button.see-more": "See more",
   "carousel.button.see-more": "Approfondisci",
 
+  // "carousel.play.pause": "Play/Pause",
+  // TODO New key - Add a translation
+  "carousel.play.pause": "Play/Pause",
+
 
   // "search.browse.item-back": "Back to Results",
   "search.browse.item-back": "Torna ai risultati",
@@ -3036,7 +3052,8 @@
   // "context-menu.actions.edit-item-relationships.btn.fonds": "Manage Researchers Fonds",
   "context-menu.actions.edit-item-relationships.btn.fonds": "Gestisci i Fondi",
 
-  // "context-menu.actions.edit-item-relationships.btn.children": "Manage Children",
+  // "context-menu.actions.edit-item-relationships.btn.children": "Manage Sub-fonds / Series",
+  // TODO Source message changed - Revise the translation
   "context-menu.actions.edit-item-relationships.btn.children": "Gestisci i livelli di descrizione inferioire",
 
   // "context-menu.actions.edit-item-relationships.btn.events": "Manage Events",
@@ -3159,7 +3176,8 @@
   // "RELATION.Fonds.publications.search.results.head": "Publications",
   "RELATION.Fonds.publications.search.results.head": "Pubblicazioni",
 
-  // "RELATION.Fonds.children.search.results.head": "Fonds Children",
+  // "RELATION.Fonds.children.search.results.head": "Sub-fonds / Series",
+  // TODO Source message changed - Revise the translation
   "RELATION.Fonds.children.search.results.head": "Livello di Descrizione Inferiore",
 
   // "RELATION.JournalFonds.children.search.results.head": "Journal Fonds Children",
@@ -3419,7 +3437,7 @@
   // "cris-layout.advanced-attachment.requestACopy": "Request a copy",
   "cris-layout.advanced-attachment.requestACopy": "Richiedi una copia",
 
-  // "cris-layout.advanced-attachment.viewMore": "View More",
+  // "cris-layout.advanced-attachment.viewMore": "View more",
   "cris-layout.advanced-attachment.viewMore": "Vedi altro",
 
   // "cris-layout.advanced-attachment.label.not-present": "(not present)",
@@ -3429,7 +3447,7 @@
   // "cris-layout.advanced-attachment.view-pdf": "Open PDF",
   "cris-layout.advanced-attachment.view-pdf": "Open PDF",
 
-  // "cris-layout.attachment.viewMore": "View More",
+  // "cris-layout.attachment.viewMore": "View more",
   "cris-layout.attachment.viewMore": "Vedi altro",
 
   // "cris-layout.rendering.collections.owning-collection.label": "Owning collection",
@@ -3645,7 +3663,7 @@
   "supervision-group-selector.select.type-of-order.option.none": "NESSUNO",
 
   // "supervision-group-selector.select.type-of-order.option.editor": "EDITOR",
-  "supervision-group-selector.select.type-of-order.option.editor": "EDITORE",
+  "supervision-group-selector.select.type-of-order.option.editor": "CURATORE",
 
   // "supervision-group-selector.select.type-of-order.option.observer": "OBSERVER",
   "supervision-group-selector.select.type-of-order.option.observer": "OSSERVATORE",
@@ -3916,10 +3934,10 @@
   // "explore.counters-section.rprofiles": "People",
   "explore.counters-section.rprofiles": "Persone",
 
-  // "explore.carousel.view-more": "View More",
+  // "explore.carousel.view-more": "View more",
   "explore.carousel.view-more": "Approfondisci",
 
-  // "explore.text-section.counter.header": "Our Numbers",
+  // "explore.text-section.counter.header": "Our numbers",
   "explore.text-section.counter.header": "I nostri numeri",
 
   // "explore.counters-section.publications": "Research outputs",
@@ -4032,7 +4050,7 @@
   "explore.index.dc.title": "Titolo",
 
   // "explore.index.editor": "Editor",
-  "explore.index.editor": "Editore",
+  "explore.index.editor": "Curatore",
 
   // "explore.index.eqtitle": "Title",
   "explore.index.eqtitle": "Titolo",
@@ -4157,8 +4175,12 @@
   // "explore.index.rpname": "Name",
   "explore.index.rpname": "Nome",
 
-  // "explore.index.subject": "Subject",
-  "explore.index.subject": "Soggetto",
+  // "explore.index.subject": "Keyword",
+  // TODO Source message changed - Revise the translation
+  "explore.index.subject": "Parola chiave",
+
+  // "explore.index.glamsubject": "Subject",
+  "explore.index.glamsubject": "Soggetto",
 
   // "explore.index.title": "Title",
   "explore.index.title": "Titolo",
@@ -4262,6 +4284,8 @@
   // "file-section.error.header": "Error obtaining files for this item",
   "file-section.error.header": "Errore durante il recupero dei file per questo item",
 
+  // "fondsHomePage.search.results.head": "Fonds",
+  "fondsHomePage.search.results.head": "Fondi",
 
   // "footer.built-with": "Built with",
   "footer.built-with": "Realizzato con",
@@ -4317,19 +4341,19 @@
   // "footer.offer-service": "Offered services",
   "footer.offer-service": "Servizi offerti",
 
-  // "footer.history-digital": "History of the digital LID",
-  "footer.history-digital": "Cronistoria della digital LID",
+  // "footer.history-digital": "History of the digital library",
+  "footer.history-digital": "Cronistoria della digital library",
 
   // "footer.org-structure": "Organizational structure",
-  "footer.org-structure": "struttura organizzativa",
+  "footer.org-structure": "Struttura organizzativa",
 
-  // "footer.contact": "Contacts",
+  // "footer.contact": "Contact details",
   "footer.contact": "Contatti",
 
   // "footer.contact.href": "https://www.4science.com/contact-us/",
   "footer.contact.href": "https://www.4science.it/contatti/",
 
-  // "footer.terms": "Terms of Use",
+  // "footer.terms": "Terms of use",
   "footer.terms": "Condizioni d'uso",
 
   // "footer.made-info": "Made with <a href=\"https://www.4science.it/dspace-glam/\" target=\"_blank\">DSpace-GLAM</a> - Extension maintained and optimized by <a href=\"https://www.4science.it/servizi/\" target=\"_blank\">4Science</a>",
@@ -4744,17 +4768,17 @@
   // "home.advanced-top-section.dc.date.accessioned": "Highlights",
   "home.advanced-top-section.dc.date.accessioned": "In primo piano",
 
-  // "home.advanced-top-section.dc.date.issued": "New accessions",
-  "home.advanced-top-section.dc.date.issued": "Nuove accessioni",
+  // "home.advanced-top-section.dc.date.issued": "Highlights",
+  "home.advanced-top-section.dc.date.issued": "In primo piano",
 
-  // "home.advanced-top-section.metric.view": "New accessions",
-  "home.advanced-top-section.metric.view": "Nuove accessioni",
+  // "home.advanced-top-section.metric.view": "Highlights",
+  "home.advanced-top-section.metric.view": "In primo piano",
 
-  // "home.advanced-top-section.metric.download": "New accessions",
-  "home.advanced-top-section.metric.download": "Nuove accessioni",
+  // "home.advanced-top-section.metric.download": "Highlights",
+  "home.advanced-top-section.metric.download": "In primo piano",
 
-  // "home.advanced-top-section.cris.priority": "New accessions",
-  "home.advanced-top-section.cris.priority": "Nuove accessioni",
+  // "home.advanced-top-section.cris.priority": "Highlights",
+  "home.advanced-top-section.cris.priority": "In primo piano",
 
   // "home.advanced-top-section.discovery.aggregationsHomePage": "Aggregations",
   "home.advanced-top-section.discovery.aggregationsHomePage": "Aggregazioni",
@@ -4831,17 +4855,17 @@
   // TODO New key - Add a translation
   "info.offered-services.title": "Offered Services",
 
-  // "info.history-digital-lid.breadcrumbs": "History of the digital LID",
+  // "info.history-digital-lid.breadcrumbs": "History of the digital library",
   // TODO New key - Add a translation
-  "info.history-digital-lid.breadcrumbs": "History of the digital LID",
+  "info.history-digital-lid.breadcrumbs": "History of the digital library",
 
-  // "info.history-digital-lid.head": "History of the digital LID",
+  // "info.history-digital-lid.head": "History of the digital library",
   // TODO New key - Add a translation
-  "info.history-digital-lid.head": "History of the digital LID",
+  "info.history-digital-lid.head": "History of the digital library",
 
-  // "info.history-digital-lid.title": "History of the digital LID",
+  // "info.history-digital-lid.title": "History of the digital library",
   // TODO New key - Add a translation
-  "info.history-digital-lid.title": "History of the digital LID",
+  "info.history-digital-lid.title": "History of the digital library",
 
   // "info.organizational-structure.breadcrumbs": "Organizational structure",
   // TODO New key - Add a translation
@@ -5543,7 +5567,7 @@
   "item.edit.tabs.status.head": "Stato",
 
   // "item.edit.tabs.status.labels.handle": "Handle",
-  "item.edit.tabs.status.labels.handle": "Handle",
+  "item.edit.tabs.status.labels.handle": "Gestisci",
 
   // "item.edit.tabs.status.labels.id": "Item Internal ID",
   "item.edit.tabs.status.labels.id": "ID interno dell'item",
@@ -5906,7 +5930,7 @@
   "item.preview.dc.contributor.applicant": "Richiedente",
 
   // "item.preview.dc.contributor.editor": "Editors:",
-  "item.preview.dc.contributor.editor": "Editori:",
+  "item.preview.dc.contributor.editor": "Curatore:",
 
   // "item.preview.dc.date.embargoEnd": "Embargo End",
   "item.preview.dc.date.embargoEnd": "Fine embargo",
@@ -6095,7 +6119,7 @@
   "item.version.history.table.item": "Item",
 
   // "item.version.history.table.editor": "Editor",
-  "item.version.history.table.editor": "Editor",
+  "item.version.history.table.editor": "Curatore",
 
   // "item.version.history.table.date": "Date",
   "item.version.history.table.date": "Data",
@@ -7074,7 +7098,7 @@
   "mydspace.show.supervisedWorkspace": "Item supervisionati",
 
   // "mydspace.show.otherworkspace": "Other Workspace Submissions",
-  "mydspace.show.otherworkspace": "Altri insierimenti in workspace",
+  "mydspace.show.otherworkspace": "Altri inserimenti in workspace",
 
   // "mydspace.status.mydspaceArchived": "Archived",
   "mydspace.status.mydspaceArchived": "Archiviati",
@@ -7176,6 +7200,10 @@
 
   // "none.listelement.badge": "Item",
   "none.listelement.badge": "Item",
+
+  // "no.description.available": "No description available",
+  // TODO New key - Add a translation
+  "no.description.available": "No description available",
 
   // "openaire.broker.title": "OpenAIRE Broker",
   "openaire.broker.title": "OpenAIRE Broker",
@@ -8397,7 +8425,7 @@
   "search.filters.applied.f.entityType": "Tipo di item",
 
   // "search.filters.applied.f.editor": "Editor",
-  "search.filters.applied.f.editor": "Editor",
+  "search.filters.applied.f.editor": "Curatore",
 
   // "search.filters.applied.f.has_content_in_original_bundle": "Has files",
   "search.filters.applied.f.has_content_in_original_bundle": "Ha file",
@@ -8423,8 +8451,12 @@
   // "search.filters.applied.f.projectorgunits": "Organisation",
   "search.filters.applied.f.projectorgunits": "Organizzazione",
 
-  // "search.filters.applied.f.subject": "Subject",
-  "search.filters.applied.f.subject": "Soggetto",
+  // "search.filters.applied.f.subject": "Keyword",
+  // TODO Source message changed - Revise the translation
+  "search.filters.applied.f.subject": "Parola chiave",
+
+  // "search.filters.applied.f.glamsubject": "Subject",
+  "search.filters.applied.f.glamsubject": "Soggetto",
 
   // "search.filters.applied.f.submitter": "Submitter",
   "search.filters.applied.f.submitter": "Submitter",
@@ -8546,7 +8578,7 @@
   // "search.filters.applied.charts.RELATION.Fonds.publications.title": "Publications",
   "search.filters.applied.charts.RELATION.Fonds.publications.title": "Pubblicazioni",
 
-  // "search.filters.applied.charts.RELATION.Fonds.children.title": "Fonds Children",
+  // "search.filters.applied.charts.RELATION.Fonds.children.title": "Sub-fonds / Series",
   "search.filters.applied.charts.RELATION.Fonds.children.title": "Livello di Descrizione Inferiore",
 
   // "search.filters.applied.charts.RELATION.JournalFonds.children.title": "Journal Fonds Children",
@@ -8604,13 +8636,13 @@
   "search.filters.filter.creativeDatePublished.label": "Data di ricerca pubblicata",
 
   // "search.filters.filter.creativeWorkEditor.head": "Editor",
-  "search.filters.filter.creativeWorkEditor.head": "Editor",
+  "search.filters.filter.creativeWorkEditor.head": "Curatore",
 
   // "search.filters.filter.creativeWorkEditor.placeholder": "Editor",
-  "search.filters.filter.creativeWorkEditor.placeholder": "Editor",
+  "search.filters.filter.creativeWorkEditor.placeholder": "Curatore",
 
   // "search.filters.filter.creativeWorkEditor.label": "Search editor",
-  "search.filters.filter.creativeWorkEditor.label": "Editor di ricerca",
+  "search.filters.filter.creativeWorkEditor.label": "Ricerca curatore",
 
   // "search.filters.filter.creativeWorkKeywords.head": "Subject",
   "search.filters.filter.creativeWorkKeywords.head": "Soggetto",
@@ -8658,13 +8690,13 @@
   "search.filters.filter.discoverable.head": "Privato",
 
   // "search.filters.filter.editor.head": "Editor",
-  "search.filters.filter.editor.head": "Editore",
+  "search.filters.filter.editor.head": "Curatore",
 
   // "search.filters.filter.editor.placeholder": "Editor",
-  "search.filters.filter.editor.placeholder": "Editore",
+  "search.filters.filter.editor.placeholder": "Curatore",
 
   // "search.filters.filter.editor.label": "Search editor",
-  "search.filters.filter.editor.label": "Ricerca Editore",
+  "search.filters.filter.editor.label": "Ricerca curatore",
 
   // "search.filters.filter.withdrawn.head": "Withdrawn",
   "search.filters.filter.withdrawn.head": "Ritirato",
@@ -8837,14 +8869,26 @@
   // "search.filters.filter.show-more": "Show more",
   "search.filters.filter.show-more": "Mostra altro",
 
-  // "search.filters.filter.subject.head": "Subject",
-  "search.filters.filter.subject.head": "Soggetto",
+  // "search.filters.filter.subject.head": "Keyword",
+  // TODO Source message changed - Revise the translation
+  "search.filters.filter.subject.head": "Parola chiave",
 
-  // "search.filters.filter.subject.placeholder": "Subject",
-  "search.filters.filter.subject.placeholder": "Soggetto",
+  // "search.filters.filter.subject.placeholder": "Keyword",
+  // TODO Source message changed - Revise the translation
+  "search.filters.filter.subject.placeholder": "Parola chiave",
 
-  // "search.filters.filter.subject.label": "Search subject",
+  // "search.filters.filter.subject.label": "Search keyword",
+  // TODO Source message changed - Revise the translation
   "search.filters.filter.subject.label": "Oggetto della ricerca",
+
+  // "search.filters.filter.glamsubject.head": "Subject",
+  "search.filters.filter.glamsubject.head": "Soggetto",
+
+  // "search.filters.filter.glamsubject.placeholder": "Subject",
+  "search.filters.filter.glamsubject.placeholder": "Soggetto",
+
+  // "search.filters.filter.glamsubject.label": "Search subject",
+  "search.filters.filter.glamsubject.label": "Oggetto della ricerca",
 
   // "search.filters.filter.submitter.head": "Submitter",
   "search.filters.filter.submitter.head": "Mittente",
@@ -9165,6 +9209,10 @@
 
   // "search.view-switch.show-list": "Show as list",
   "search.view-switch.show-list": "Visualizzazione a lista",
+
+  // "social.component.title": "Social Share",
+  // TODO New key - Add a translation
+  "social.component.title": "Social Share",
 
   // "sorting.ASC": "Ascending",
   "sorting.ASC": "Crescente",
@@ -12029,7 +12077,7 @@
   // "relation.rp.projects.search.results.head": "Related Projects",
   "relation.rp.projects.search.results.head": "Progetti correlati",
 
-  // "layout.i18n.link.default": "link",
+  // "layout.i18n.link.default": "links",
   "layout.i18n.link.default": "link",
 
   // "orcid.badge.tooltip": "Connected to ORCID",
@@ -12043,6 +12091,10 @@
 
   // "lucky.search.multiple.records": "may refer to multiple records",
   "lucky.search.multiple.records": "può riferirsi a più record",
+
+  // "lucky.search.bitstream.notfound": "We are unable to find the file that you have mentioned but it seems to be related to this item.",
+  // TODO New key - Add a translation
+  "lucky.search.bitstream.notfound": "We are unable to find the file that you have mentioned but it seems to be related to this item.",
 
   // "invitation.group.msg": "You have been invited to join the following groups",
   "invitation.group.msg": "Sei stato invitato a unirti ai seguenti gruppi",
@@ -12122,6 +12174,16 @@
   "path.page.titleprefix": "Percorso: ",
   // "place.page.titleprefix": "Place: ",
   "place.page.titleprefix": "Luogo: ",
+  // "staticpage.page.titleprefix": "Page: ",
+  "staticpage.page.titleprefix": "Pagina: ",
+  // "opera.page.titleprefix": "Opera: ",
+  "opera.page.titleprefix": "Opera: ",
+  // "coin.page.titleprefix": "Coin: ",
+  "coin.page.titleprefix": "Moneta: ",
+  // "scientificmaterial.page.titleprefix": "Scientific Material: ",
+  "scientificmaterial.page.titleprefix": "Materiale scientifico: ",
+  // "musicallibrettos.page.titleprefix": "Musical Librettos: ",
+  "musicallibrettos.page.titleprefix": "Libretti musicali: ",
 
   // "aggregation.listelement.badge": "Aggregation",
   "aggregation.listelement.badge": "Aggregazione",
@@ -12149,7 +12211,7 @@
 
   // "menu.section.explore_sectionaggregations": "Aggregations",
   "menu.section.explore_sectionaggregations": "Aggregazioni",
-  // "menu.section.explore_sectiondocuments": "Documents & Other materials",
+  // "menu.section.explore_sectiondocuments": "Documents & other materials",
   "menu.section.explore_sectiondocuments": "Documenti e altri materiali",
   // "explore.counters-section.fonds": "Fonds",
   "explore.counters-section.fonds": "Fondi",
@@ -12157,7 +12219,7 @@
   "explore.counters-section.journalfonds": "Testate",
   // "explore.counters-section.aggregations": "Aggregations",
   "explore.counters-section.aggregations": "Aggregazioni",
-  // "explore.counters-section.documents": "Documents & Other materials",
+  // "explore.counters-section.documents": "Documents & other materials",
   "explore.counters-section.documents": "Documenti e altri materiali",
 
   // "explore.index.titleF": "Title",
@@ -12195,7 +12257,7 @@
   // "explore.index.parentA": "Parent",
   "explore.index.parentA": "Livello superiore",
 
-  // "explore.search-section.sectiondocuments.title": "Search Documents & Other materials",
+  // "explore.search-section.sectiondocuments.title": "Search Documents & other materials",
   "explore.search-section.sectiondocuments.title": "Risorse",
 
   // "explore.search-section.sectionfonds.title": "Search Fonds",
@@ -12207,7 +12269,7 @@
   // "explore.search-section.sectionaggregations.title": "Search Aggregations",
   "explore.search-section.sectionaggregations.title": "Aggregazioni",
 
-  // "explore.sectiondocuments.breadcrumbs": "Documents & Other materials",
+  // "explore.sectiondocuments.breadcrumbs": "Documents & other materials",
   "explore.sectiondocuments.breadcrumbs": "Risorse",
 
   // "explore.sectionfonds.breadcrumbs": "Fonds",
@@ -12216,7 +12278,7 @@
   "explore.sectionjournalfonds.breadcrumbs": "Testate",
   // "explore.sectionaggregations.breadcrumbs": "Aggregations",
   "explore.sectionaggregations.breadcrumbs": "Aggregazioni",
-  // "documents.search.results.head": "Documents & Other materials Search Results",
+  // "documents.search.results.head": "Documents & other materials Search Results",
   "documents.search.results.head": "Risultati di ricerca per documenti e altri materiali",
   // "fonds.search.results.head": "Fonds Search Results",
   "fonds.search.results.head": "Risultati",
@@ -12266,27 +12328,27 @@
   "search.filters.filter.aggregation.label": "ricerca per titolo",
   // "search.filters.applied.f.aggregation": "Aggregation",
   "search.filters.applied.f.aggregation": "Aggregazione",
-  // "submission.sections.submit.progressbar.describe.archival_material": "Archival Material Basic Information",
-  "submission.sections.submit.progressbar.describe.archival_material": "Informazioni di base",
+  // "submission.sections.submit.progressbar.describe.archival_material": "Details",
+  "submission.sections.submit.progressbar.describe.archival_material": "Infomazioni di dettaglio",
 
-  // "submission.sections.submit.progressbar.describe.archival_material_indexing": "Archival Material Indexing Information",
+  // "submission.sections.submit.progressbar.describe.archival_material_indexing": "Indexing Information",
   "submission.sections.submit.progressbar.describe.archival_material_indexing": "Informazioni sull'indicizzazione",
-  // "submission.sections.submit.progressbar.describe.archival_material_references": "Archival Material Contextual References",
-  "submission.sections.submit.progressbar.describe.archival_material_references": "Contesto",
+  // "submission.sections.submit.progressbar.describe.archival_material_references": "Contextual and Structural Information",
+  "submission.sections.submit.progressbar.describe.archival_material_references": "Informazioni su contesto e struttura",
 
-  // "submission.sections.submit.progressbar.describe.fonds": "Fonds Details",
+  // "submission.sections.submit.progressbar.describe.fonds": "Details",
   "submission.sections.submit.progressbar.describe.fonds": "Infomazioni di dettaglio",
 
-  // "submission.sections.submit.progressbar.describe.place": "Place Details",
+  // "submission.sections.submit.progressbar.describe.place": "Details",
   "submission.sections.submit.progressbar.describe.place": "Informazioni di dettaglio",
 
-  // "submission.sections.submit.progressbar.describe.family": "Family Details",
+  // "submission.sections.submit.progressbar.describe.family": "Details",
   "submission.sections.submit.progressbar.describe.family": "Infomazioni di dettaglio",
 
-  // "submission.sections.submit.progressbar.describe.aggregation": "Aggregation Details",
-  "submission.sections.submit.progressbar.describe.aggregation": "Dettagli dell'aggregazione",
+  // "submission.sections.submit.progressbar.describe.aggregation": "Details",
+  "submission.sections.submit.progressbar.describe.aggregation": "Infomazioni di dettaglio",
 
-  // "submission.sections.submit.progressbar.describe.journal_fonds": "Journal Fonds Details",
+  // "submission.sections.submit.progressbar.describe.journal_fonds": "Details ",
   "submission.sections.submit.progressbar.describe.journal_fonds": "Infomazioni di dettaglio",
 
   // "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-history": "Journal Fonds History",
@@ -12298,56 +12360,53 @@
   // "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-relation-journalfonds": "Journal Fonds Relation",
   "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-relation-journalfonds": "Relazioni",
 
-  // "submission.sections.submit.progressbar.describe.path": "Path Details",
+  // "submission.sections.submit.progressbar.describe.path": "Details",
   "submission.sections.submit.progressbar.describe.path": "Informazioni di dettaglio",
 
-  // "submission.sections.submit.progressbar.describe.opera": "Opera Details",
+  // "submission.sections.submit.progressbar.describe.opera": "Details",
   "submission.sections.submit.progressbar.describe.opera": "Informazioni di dettaglio",
 
-  // "submission.sections.submit.progressbar.describe.coin": "Coin Details",
+  // "submission.sections.submit.progressbar.describe.coin": "Details",
   "submission.sections.submit.progressbar.describe.coin": "Infomazioni di dettaglio",
 
-  // "submission.sections.submit.progressbar.describe.picture": "Picture Details",
+  // "submission.sections.submit.progressbar.describe.picture": "Details",
   "submission.sections.submit.progressbar.describe.picture": "Informazioni di dettaglio",
 
-  // "submission.sections.submit.progressbar.describe.news": "News Details",
+  // "submission.sections.submit.progressbar.describe.news": "Details",
   "submission.sections.submit.progressbar.describe.news": "Informazioni di dettaglio",
 
-  // "submission.sections.submit.progressbar.describe.staticpage": "Page Details",
+  // "submission.sections.submit.progressbar.describe.staticpage": "Details",
   "submission.sections.submit.progressbar.describe.staticpage": "Informazioni di dettaglio",
 
   // "submission.sections.submit.progressbar.describe.staticpage-url": "Page URL",
   "submission.sections.submit.progressbar.describe.staticpage-url": "URL",
 
-  // "submission.sections.submit.progressbar.describe.journal_materials": "Journal Issue Basic Information",
-  "submission.sections.submit.progressbar.describe.journal_materials": "Informazioni di base sulla Journal Issue",
+  // "submission.sections.submit.progressbar.describe.journal_materials": "Details",
+  "submission.sections.submit.progressbar.describe.journal_materials": "Informazioni di dettaglio",
 
-  // "submission.sections.submit.progressbar.describe.journal_materials_indexing": "Journal Issue Indexing Information",
+  // "submission.sections.submit.progressbar.describe.journal_materials_indexing": "Indexing Information",
   "submission.sections.submit.progressbar.describe.journal_materials_indexing": "Informazioni sull'indicizzazione",
 
-  // "submission.sections.submit.progressbar.describe.journal_materials_references": "Journal Issue Contextual References",
+  // "submission.sections.submit.progressbar.describe.journal_materials_references": "Contextual Information",
   "submission.sections.submit.progressbar.describe.journal_materials_references": "Contesto",
 
-  // "submission.sections.submit.progressbar.describe.scientificmaterial": "Scientific Material Basic Information",
-  "submission.sections.submit.progressbar.describe.scientificmaterial": "Informazioni di base",
+  // "submission.sections.submit.progressbar.describe.scientificmaterial": "Details",
+  "submission.sections.submit.progressbar.describe.scientificmaterial": "Informazioni di dettaglio",
 
-  // "submission.sections.submit.progressbar.describe.scientificmaterial_indexing": "Scientific Material Indexing Information",
+  // "submission.sections.submit.progressbar.describe.scientificmaterial_indexing": "Indexing Information",
   "submission.sections.submit.progressbar.describe.scientificmaterial_indexing": "Informazioni sull'indicizzazione",
 
-  // "submission.sections.submit.progressbar.describe.scientificmaterial_references": "Scientific Material Contextual References",
+  // "submission.sections.submit.progressbar.describe.scientificmaterial_references": "Contextual Information",
   "submission.sections.submit.progressbar.describe.scientificmaterial_references": "Contesto",
 
-  // "submission.sections.submit.progressbar.describe.journal_file": "Journal File Details",
+  // "submission.sections.submit.progressbar.describe.journal_file": "Details",
   "submission.sections.submit.progressbar.describe.journal_file": "Informazioni di dettaglio",
 
   // "submission.sections.submit.progressbar.describe.books": "Book basic information",
   "submission.sections.submit.progressbar.describe.books": "Informazioni di base",
 
-  // "submission.sections.submit.progressbar.describe.coins": "Coin basic information",
-  "submission.sections.submit.progressbar.describe.coins": "Informazioni di base",
-
-  // "submission.sections.submit.progressbar.describe.coins-glam-bibliography": "Coin bibliographic details",
-  "submission.sections.submit.progressbar.describe.coins-glam-bibliography": "Dettagli bibliografici della Moneta",
+  // "submission.sections.submit.progressbar.describe.coin-glam-bibliography": "Coin bibliographic details",
+  "submission.sections.submit.progressbar.describe.coin-glam-bibliography": "Dettagli bibliografici della Moneta",
 
   // "submission.sections.submit.progressbar.describe.artworks": "Artwork basic information",
   "submission.sections.submit.progressbar.describe.artworks": "Informazioni di base",
@@ -12407,13 +12466,13 @@
   // "curation-task.task.ocrclean.label": "Remove all metadata bundles and uploaded ocr created by a previous upload to the ocr server",
   "curation-task.task.ocrclean.label": "Rimuovi tutti i metadata bundles and tutti gli OCR caricati in precedenza sul server OCR",
 
-  // "vocabulary-treeview.header.fondsboxtree": "Fonds Tree",
+  // "vocabulary-treeview.header.fondsboxtree": "Archival Arrangement",
   "vocabulary-treeview.header.fondsboxtree": "Albero Archivistico",
 
-  // "vocabulary-treeview.header.journalfondsboxtree": "Journal Fonds Tree",
+  // "vocabulary-treeview.header.journalfondsboxtree": "Journal Fonds Arrangement",
   "vocabulary-treeview.header.journalfondsboxtree": "Albero della Testata",
 
-  // "vocabulary-treeview.header.aggregationboxtree": "Aggregation Tree",
+  // "vocabulary-treeview.header.aggregationboxtree": "Aggregation Arrangement",
   "vocabulary-treeview.header.aggregationboxtree": "Albero Archivistico",
 
   // "curation-task.task.iiifuploader.label": "Upload images to the IIIF Image Server (photo gallery)",
@@ -12838,15 +12897,15 @@
 
   // "layout.tab.header.Fonds.details": "Fonds Details",
   "layout.tab.header.Fonds.details": "Consultazione Analitica",
-  // "layout.tab.header.Fonds.fondscontext": "Fonds Context",
+  // "layout.tab.header.Fonds.fondscontext": "Explore the fond",
   "layout.tab.header.Fonds.fondscontext": "Consulta il Fondo",
-  // "layout.tab.header.Fonds.fondsevents": "Fonds Events",
+  // "layout.tab.header.Fonds.fondsevents": "Covering Dates",
   "layout.tab.header.Fonds.fondsevents": "Eventi Collegati",
-  // "layout.tab.header.Fonds.fondseditors": "Fonds Editors",
+  // "layout.tab.header.Fonds.fondseditors": "Editors",
   "layout.tab.header.Fonds.fondseditors": "Compilatore",
-  // "layout.tab.header.Fonds.publications": "Fonds’ Publications",
+  // "layout.tab.header.Fonds.publications": "Related Publications",
   "layout.tab.header.Fonds.publications": "Pubblicazioni Collegate",
-  // "layout.tab.header.Fonds.children": "Fonds’ Children",
+  // "layout.tab.header.Fonds.children": "Sub-fonds / Series",
   "layout.tab.header.Fonds.children": "Livello di Descrizione Inferiore",
   // "layout.tab.header.Fonds.relations": "Relations",
   "layout.tab.header.Fonds.relations": "Relazioni",
@@ -13011,14 +13070,14 @@
   "layout.box.header.Fonds.fondsdescription": "Descrizione",
   // "layout.box.header.Fonds.publications": "Fonds’ Publications",
   "layout.box.header.Fonds.publications": "Pubblicazioni",
-  // "layout.box.header.Fonds.children": "Fonds’ Children",
+  // "layout.box.header.Fonds.children": "Sub-fonds / Series",
   "layout.box.header.Fonds.children": "Livello di Descrizione Inferiore",
-  // "layout.box.header.Fonds.fondsindex": "Fonds Index",
+  // "layout.box.header.Fonds.fondsindex": "Index",
   "layout.box.header.Fonds.fondsindex": "Indice",
-  // "layout.box.header.Fonds.fondsdates": "Fonds Dates",
+  // "layout.box.header.Fonds.fondsdates": "Covering Dates",
   "layout.box.header.Fonds.fondsdates": "Datazione",
-  // "layout.box.header.Fonds.fondseditors": "Fonds Editors",
-  "layout.box.header.Fonds.fondseditors": "Editore",
+  // "layout.box.header.Fonds.fondseditors": "Editors",
+  "layout.box.header.Fonds.fondseditors": "Compilatore",
   // "layout.box.header.Fonds.relationproject": "Projects",
   "layout.box.header.Fonds.relationproject": "Progetto",
   // "layout.box.header.Fonds.relationparent": "Parent",
@@ -13137,23 +13196,23 @@
   "layout.box.header.Picture.relationispartofcontainer": "Fa parte di",
 
   // "layout.box.header.Publication.relationpath": "Path",
-  "layout.box.header.Publication.relationpath": "Percorso",
+  "layout.box.header.Publication.relationpath": "Percorsi",
   // "layout.box.header.Publication.relationconference": "Conference",
-  "layout.box.header.Publication.relationconference": "Evento",
+  "layout.box.header.Publication.relationconference": "Eventi",
   // "layout.box.header.Publication.relationplace": "Place",
-  "layout.box.header.Publication.relationplace": "Luogo",
+  "layout.box.header.Publication.relationplace": "Luoghi",
   // "layout.box.header.Publication.relationfonds": "Fonds",
-  "layout.box.header.Publication.relationfonds": "Fondo",
+  "layout.box.header.Publication.relationfonds": "Fondi",
   // "layout.box.header.Publication.relationperson": "Person",
-  "layout.box.header.Publication.relationperson": "Persona",
+  "layout.box.header.Publication.relationperson": "Persone",
   // "layout.box.header.Publication.relationjournalfonds": "Journal Fonds",
   "layout.box.header.Publication.relationjournalfonds": "Testata",
   // "layout.box.header.Publication.relationaggregation": "Aggregations",
-  "layout.box.header.Publication.relationaggregation": "Aggregazione",
+  "layout.box.header.Publication.relationaggregation": "Aggregazioni",
   // "layout.box.header.Publication.relationisreferencedby": "Related Documents",
-  "layout.box.header.Publication.relationisreferencedby": "Documento collegato",
+  "layout.box.header.Publication.relationisreferencedby": "Documenti collegati",
   // "layout.box.header.Publication.relationproject": "Projects",
-  "layout.box.header.Publication.relationproject": "Progetto",
+  "layout.box.header.Publication.relationproject": "Progetti",
   // "layout.box.header.Publication.relationevent": "Events",
   "layout.box.header.Publication.relationevent": "Evento",
   // "layout.box.header.Publication.glamjournalfondrelationjournalfond": "Related Journal Fonds",
@@ -13413,7 +13472,7 @@
   "layout.field.label.Publication.[dc.type]": "Tipologia",
   // "layout.field.label.Publication.[dc.format]": "Format",
   "layout.field.label.Publication.[dc.format]": "Formato",
-  // "layout.field.label.Publication.[dc.publisher]": "Editor",
+  // "layout.field.label.Publication.[dc.publisher]": "Publisher",
   "layout.field.label.Publication.[dc.publisher]": "Editore",
   // "layout.field.label.Publication.[dc.source.content]": "Content",
   "layout.field.label.Publication.[dc.source.content]": "Descrizione",
@@ -13460,8 +13519,9 @@
   "layout.field.label.Publication.[dc.relation.otherlinks]": "Altri Collegamenti",
   // "layout.field.label.Publication.[dc.description.note]": "Notes",
   "layout.field.label.Publication.[dc.description.note]": "Note",
-  // "layout.field.label.Publication.BITSTREAM": "File(s)",
-  "layout.field.label.Publication.BITSTREAM": "File",
+  // "layout.field.label.Publication.BITSTREAM": "File / Documentation",
+  // TODO Source message changed - Revise the translation
+  "layout.field.label.Publication.BITSTREAM": "File / Documentazione",
   // "layout.field.label.Publication.[dc.relation.journalfonds]": "Journal Fonds ",
   "layout.field.label.Publication.[dc.relation.journalfonds]": "Testata Correlata",
   // "layout.field.label.Publication.[dc.relation.event]": "Events",
@@ -13483,17 +13543,17 @@
   "layout.field.label.Fonds.[dc.title.alternative]": "Titolo Alternativo",
   // "layout.field.label.Fonds.[dc.type]": "Type",
   "layout.field.label.Fonds.[dc.type]": "Tipologia",
-  // "layout.field.label.Fonds.[dc.contributor.author]": "Author(s)",
-  "layout.field.label.Fonds.[dc.contributor.author]": "Autore",
-  // "layout.field.label.Fonds.[dc.contributor.corporatebody]": "Corporate Body",
-  "layout.field.label.Fonds.[dc.contributor.corporatebody]": "Unità Organizzativa",
-  // "layout.field.label.Fonds.[dc.contributor.family]": "Family",
-  "layout.field.label.Fonds.[dc.contributor.family]": "Famiglia",
+  // "layout.field.label.Fonds.[dc.contributor.author]": "Creator(s)/Person",
+  "layout.field.label.Fonds.[dc.contributor.author]": "Soggetto produttore/Persona",
+  // "layout.field.label.Fonds.[dc.contributor.corporatebody]": "Creator(s)/Corporate Body",
+  "layout.field.label.Fonds.[dc.contributor.corporatebody]": "Soggetto produttore/Unità Organizzativa",
+  // "layout.field.label.Fonds.[dc.contributor.family]": "Creator(s)/Family",
+  "layout.field.label.Fonds.[dc.contributor.family]": "Soggetto produttore/Famiglia",
   // "layout.field.label.Fonds.[glamfonds.custodian]": "Custodian",
   "layout.field.label.Fonds.[glamfonds.custodian]": "Ente Conservatore",
-  // "layout.field.label.Fonds.[glamfonds.parent]": "Fonds Parent",
+  // "layout.field.label.Fonds.[glamfonds.parent]": "Parent",
   "layout.field.label.Fonds.[glamfonds.parent]": "Fondo Radice",
-  // "layout.field.label.Fonds.[glamfonds.length]": "Length",
+  // "layout.field.label.Fonds.[glamfonds.length]": "Extent",
   "layout.field.label.Fonds.[glamfonds.length]": "Estensione",
   // "layout.field.label.Fonds.[glamfonds.photographictype]": "Photographic Type",
   "layout.field.label.Fonds.[glamfonds.photographictype]": "Tipologia di Fotografia",
@@ -13509,7 +13569,7 @@
   "layout.field.label.Fonds.[glamfonds.history]": "Storia",
   // "layout.field.label.Fonds.[dc.language.iso]": "Language",
   "layout.field.label.Fonds.[dc.language.iso]": "Lingua",
-  // "layout.field.label.Fonds.[glamfonds.quantity]": "Quantity",
+  // "layout.field.label.Fonds.[glamfonds.quantity]": "Count",
   "layout.field.label.Fonds.[glamfonds.quantity]": "Consistenza",
   // "layout.field.label.Fonds.[glamfonds.arrangement.note]": "Arrangement Notes",
   "layout.field.label.Fonds.[glamfonds.arrangement.note]": "Notazioni",
@@ -13520,13 +13580,13 @@
   "layout.field.label.Fonds.[glamfonds.accesscondition]": "Condizioni d'accesso",
   // "layout.field.label.Fonds.[glamfonds.note]": "Note",
   "layout.field.label.Fonds.[glamfonds.note]": "Note",
-  // "layout.field.label.Fonds.[glamfonds.preservation]": "Preservation",
-  "layout.field.label.Fonds.[glamfonds.preservation]": "Stato di Conservazione",
+  // "layout.field.label.Fonds.[glamfonds.preservation]": "Preservation Status",
+  "layout.field.label.Fonds.[glamfonds.preservation]": "Stato di conservazione",
   // "layout.field.label.Fonds.[glamfonds.preservation.note]": "Preservation Notes",
   "layout.field.label.Fonds.[glamfonds.preservation.note]": "Note alla Conservazione",
-  // "layout.field.label.Fonds.[glamfonds.usecondition]": "Use Condition",
+  // "layout.field.label.Fonds.[glamfonds.usecondition]": "Terms of use",
   "layout.field.label.Fonds.[glamfonds.usecondition]": "Condizioni di Consultazione",
-  // "layout.field.label.Fonds.[glamfonds.usecondition.note]": "Use Condition Notes",
+  // "layout.field.label.Fonds.[glamfonds.usecondition.note]": "Terms of Use Notes",
   "layout.field.label.Fonds.[glamfonds.usecondition.note]": "Note alle Condizioni di Consultazione",
   // "layout.field.label.Fonds.[glamfonds.bibliography]": "Bibliography",
   "layout.field.label.Fonds.[glamfonds.bibliography]": "Bibliografia",
@@ -13537,7 +13597,7 @@
   // "layout.field.label.Fonds.[dc.relation.path]": "Path",
   "layout.field.label.Fonds.[dc.relation.path]": "Percorso",
   // "layout.field.label.Fonds.[glamfonds.editor]": "Editor(s)",
-  "layout.field.label.Fonds.[glamfonds.editor]": "Editore",
+  "layout.field.label.Fonds.[glamfonds.editor]": "Compilatore",
   // "layout.field.label.Fonds.[glamfonds.enddate.format]": "End Date Format",
   "layout.field.label.Fonds.[glamfonds.enddate.format]": "Formato Data di Fine",
   // "layout.field.label.Fonds.[glamfonds.enddate.from]": "End Date From",
@@ -13546,7 +13606,7 @@
   "layout.field.label.Fonds.[glamfonds.enddate.spec]": "Data di fine",
   // "layout.field.label.Fonds.[glamfonds.enddate.to]": "End Date To",
   "layout.field.label.Fonds.[glamfonds.enddate.to]": "Data di fine a",
-  // "layout.field.label.Fonds.[glamfonds.enddate.valid]": "End Date Valid",
+  // "layout.field.label.Fonds.[glamfonds.enddate.valid]": "Attested End Date",
   "layout.field.label.Fonds.[glamfonds.enddate.valid]": "Data di fine attestata",
   // "layout.field.label.Fonds.[glamfonds.startdate.format]": "Start Date Format",
   "layout.field.label.Fonds.[glamfonds.startdate.format]": "Formato Data di inizio",
@@ -13556,7 +13616,7 @@
   "layout.field.label.Fonds.[glamfonds.startdate.spec]": "Data di inizio",
   // "layout.field.label.Fonds.[glamfonds.startdate.to]": "Start Date To",
   "layout.field.label.Fonds.[glamfonds.startdate.to]": "Data di inizio a",
-  // "layout.field.label.Fonds.[glamfonds.startdate.valid]": "Start Date Valid",
+  // "layout.field.label.Fonds.[glamfonds.startdate.valid]": "Attested Start Date",
   "layout.field.label.Fonds.[glamfonds.startdate.valid]": "Data di inizio attestata",
 
   // "layout.field.label.Place.[dc.title.alternative]": "Alternative Title",
@@ -13668,7 +13728,7 @@
   "layout.field.label.ArchivalMaterial.[dc.date.start]": "Estremo cronologico iniziale",
   // "layout.field.label.ArchivalMaterial.[dc.date.end]": "End Date",
   "layout.field.label.ArchivalMaterial.[dc.date.end]": "Estremo cronologico finale",
-  // "layout.field.label.ArchivalMaterial.[dc.coverage.temporal]": "Coverage Temporal",
+  // "layout.field.label.ArchivalMaterial.[dc.coverage.temporal]": "Coverage Date",
   "layout.field.label.ArchivalMaterial.[dc.coverage.temporal]": "Data secolare",
   // "layout.field.label.ArchivalMaterial.[dc.date.note]": "Date Notes",
   "layout.field.label.ArchivalMaterial.[dc.date.note]": "Note alla data",
@@ -13685,17 +13745,18 @@
   "layout.field.label.ArchivalMaterial.[dc.identifier.shelfmark]": "Segnatura",
   // "layout.field.label.ArchivalMaterial.[dc.identifier.other]": "Other Identifier",
   "layout.field.label.ArchivalMaterial.[dc.identifier.other]": "Altro identificativo",
-  // "layout.field.label.ArchivalMaterial.[dc.identifier.archivalunit]": "Archival Unit",
+  // "layout.field.label.ArchivalMaterial.[dc.identifier.archivalunit]": "Sequential Number",
   "layout.field.label.ArchivalMaterial.[dc.identifier.archivalunit]": "Numero di corda",
-  // "layout.field.label.ArchivalMaterial.[dc.description]": "Description",
+  // "layout.field.label.ArchivalMaterial.[dc.description]": "Extrinsic Description",
   "layout.field.label.ArchivalMaterial.[dc.description]": "Descrizione estrinseca",
-  // "layout.field.label.ArchivalMaterial.[dc.description.abstract]": "Abstract",
+  // "layout.field.label.ArchivalMaterial.[dc.description.abstract]": "Content",
   "layout.field.label.ArchivalMaterial.[dc.description.abstract]": "Сontenuto",
   // "layout.field.label.ArchivalMaterial.[dc.type.physical]": "Physical Type",
   "layout.field.label.ArchivalMaterial.[dc.type.physical]": "Tipologia fisica",
-  // "layout.field.label.ArchivalMaterial.[dc.format.medium]": "Format",
+  // "layout.field.label.ArchivalMaterial.[dc.format.medium]": "Medium",
   "layout.field.label.ArchivalMaterial.[dc.format.medium]": "Supporto fisico",
   // "layout.field.label.ArchivalMaterial.[dcterms.accessRights]": "Access Rights",
+  // TODO Source message changed - Revise the translation
   "layout.field.label.ArchivalMaterial.[dcterms.accessRights]": "Condizione di accesso",
   // "layout.field.label.ArchivalMaterial.[dc.rights]": "Rights",
   "layout.field.label.ArchivalMaterial.[dc.rights]": "Condizioni di riproduzione",
@@ -13703,11 +13764,12 @@
   "layout.field.label.ArchivalMaterial.[dc.rights.license]": "Licenza",
   // "layout.field.label.ArchivalMaterial.[dc.rights.note]": "Rights Note",
   "layout.field.label.ArchivalMaterial.[dc.rights.note]": "Note alla condizione di riproduzione",
-  // "layout.field.label.ArchivalMaterial.[dcterms.bibliographicCitation]": "Bibliographic Citation",
+  // "layout.field.label.ArchivalMaterial.[dcterms.bibliographicCitation]": "Bibliographic Citations",
   "layout.field.label.ArchivalMaterial.[dcterms.bibliographicCitation]": "Citazioni bibliografiche",
   // "layout.field.label.ArchivalMaterial.[dc.relation.aggregation]": "Aggregation",
   "layout.field.label.ArchivalMaterial.[dc.relation.aggregation]": "Aggregazione",
   // "layout.field.label.ArchivalMaterial.[dc.relation.path]": "Path",
+  // TODO Source message changed - Revise the translation
   "layout.field.label.ArchivalMaterial.[dc.relation.path]": "Percorso",
   // "layout.field.label.ArchivalMaterial.[dc.relation.isreferencedby]": "Related Documents",
   "layout.field.label.ArchivalMaterial.[dc.relation.isreferencedby]": "Documento collegato",
@@ -13723,11 +13785,11 @@
   "layout.field.label.ArchivalMaterial.[dc.relation.person]": "Persona",
   // "layout.field.label.ArchivalMaterial.[dc.relation.fonds]": "Fonds",
   "layout.field.label.ArchivalMaterial.[dc.relation.fonds]": "Fondo",
-  // "layout.field.label.ArchivalMaterial.[dc.description.archivist]": "Archivist Description",
+  // "layout.field.label.ArchivalMaterial.[dc.description.archivist]": "Archivist's Notes",
   "layout.field.label.ArchivalMaterial.[dc.description.archivist]": "Note dell'archivista",
-  // "layout.field.label.ArchivalMaterial.[dc.description.preservation]": "Preservation",
+  // "layout.field.label.ArchivalMaterial.[dc.description.preservation]": "Preservation Status",
   "layout.field.label.ArchivalMaterial.[dc.description.preservation]": "Stato di conservazione",
-  // "layout.field.label.ArchivalMaterial.[dc.description.preservationnote]": "Preservation Notes",
+  // "layout.field.label.ArchivalMaterial.[dc.description.preservationnote]": "Preservation Status Notes",
   "layout.field.label.ArchivalMaterial.[dc.description.preservationnote]": "Note allo stato di conservazione",
   // "layout.field.label.ArchivalMaterial.[dc.description.note]": "Note",
   "layout.field.label.ArchivalMaterial.[dc.description.note]": "Altre note",
@@ -13735,8 +13797,8 @@
   "layout.field.label.ArchivalMaterial.[dc.relation.uri]": "URL",
   // "layout.field.label.ArchivalMaterial.[dc.relation.place]": "Place",
   "layout.field.label.ArchivalMaterial.[dc.relation.place]": "Luogo",
-  // "layout.field.label.ArchivalMaterial.BITSTREAM": "File(s)",
-  "layout.field.label.ArchivalMaterial.BITSTREAM": "File",
+  // "layout.field.label.ArchivalMaterial.BITSTREAM": "File / Documentation",
+  "layout.field.label.ArchivalMaterial.BITSTREAM": "File / Documentazione",
   // "layout.field.label.ArchivalMaterial.dc.title.alternative": "Alternative Title",
   "layout.field.label.ArchivalMaterial.dc.title.alternative": "Titolo alternativo",
   // "layout.field.label.ArchivalMaterial.dc.type": "Type",
@@ -13865,8 +13927,8 @@
   "layout.field.label.JournalFile.[dc.relation.isreferencedby]": "Documento collegato",
   // "layout.field.label.JournalFile.[dc.relation.aggregation]": "Aggregation",
   "layout.field.label.JournalFile.[dc.relation.aggregation]": "Aggregazione",
-  // "layout.field.label.JournalFile.BITSTREAM": "File(s)",
-  "layout.field.label.JournalFile.BITSTREAM": "File",
+  // "layout.field.label.JournalFile.BITSTREAM": "File / Documentation",
+  "layout.field.label.JournalFile.BITSTREAM": "File / Documentazione",
 
   // "layout.field.label.Picture.[dc.title.alternative]": "Alternative Title",
   "layout.field.label.Picture.[dc.title.alternative]": "Titolo alternativo",
@@ -13892,7 +13954,7 @@
   "layout.field.label.Picture.[dc.identifier.shelfmark]": "Segnatura",
   // "layout.field.label.Picture.[dc.identifier.uri]": "URI",
   "layout.field.label.Picture.[dc.identifier.uri]": "URI",
-  // "layout.field.label.Picture.[dc.identifier.archivalunit]": "Archival Unit",
+  // "layout.field.label.Picture.[dc.identifier.archivalunit]": "Sequential Number",
   "layout.field.label.Picture.d[c.identifier.archivalunit]": "Numero di corda",
   // "layout.field.label.Picture.[dc.type.form]": "Form Type",
   "layout.field.label.Picture.[dc.type.form]": "Tipo di scheda",
@@ -13978,10 +14040,9 @@
   "layout.field.label.Picture.[dc.description.collectionholder]": "Proprietario della Collezione fisica",
   // "layout.field.label.Picture.[dc.description.collectionnotes]": "Collection Notes",
   "layout.field.label.Picture.[dc.description.collectionnotes]": "Informazioni sulla Collezione fisica",
-  // "layout.field.label.Picture.[dc.description.preservationstate]": "Preservation State",
-  // TODO Source message changed - Revise the translation
+  // "layout.field.label.Picture.[dc.description.preservationstate]": "Preservation Status",
   "layout.field.label.Picture.[dc.description.preservationstate]": "Stato di conservazione",
-  // "layout.field.label.Picture.[dc.description.preservationspecifications]": "Preservation Specifications",
+  // "layout.field.label.Picture.[dc.description.preservationspecifications]": "Preservation Status Specifications",
   "layout.field.label.Picture.[dc.description.preservationspecifications]": "Specifiche sullo stato di conservazione",
   // "layout.field.label.Picture.[dc.description.note]": "Notes",
   // TODO Source message changed - Revise the translation
@@ -13992,8 +14053,8 @@
   "layout.field.label.Picture.[glam.mar]k": "Stemma/Marchio/Timbro",
   // "layout.field.label.Picture.[glam.bibliography]": "Bibliography",
   "layout.field.label.Picture.g[lam.bibliography]": "Bibliografia",
-  // "layout.field.label.Picture.BITSTREAM": "File(s)",
-  "layout.field.label.Picture.BITSTREAM": "File",
+  // "layout.field.label.Picture.BITSTREAM": "File / Documantation",
+  "layout.field.label.Picture.BITSTREAM": "File / Documentazione",
   // "layout.field.label.Picture.[dc.relation.isreferencedby]": "Related Documents",
   "layout.field.label.Picture.[dc.relation.isreferencedby]": "Documento collegato",
 
@@ -14008,7 +14069,7 @@
   "layout.field.label.AudioVideo.[dc.source.content]": "Ambiti e contenuto",
   // "layout.field.label.AudioVideo.[dc.contributor.corporatebody]": "Corporate Body",
   "layout.field.label.AudioVideo.[dc.contributor.corporatebody]": "Soggetto produttore/Organizzazione",
-  // "layout.field.label.AudioVideo.[dc.relation.fonds]": "Fund",
+  // "layout.field.label.AudioVideo.[dc.relation.fonds]": "Fonds",
   "layout.field.label.AudioVideo.[dc.relation.fonds]": "Fondo",
   // "layout.field.label.AudioVideo.[dc.relation.event]": "Related Event",
   "layout.field.label.AudioVideo.[dc.relation.event]": "Evento",
@@ -14070,14 +14131,14 @@
   "layout.field.label.AudioVideo.[dc.description.tools]": "Attrezzatura",
   // "layout.field.label.AudioVideo.[dc.format.medium]": "Physical Description Of The Medium",
   "layout.field.label.AudioVideo.[dc.format.medium]": "Descrizione fisica",
-  // "layout.field.label.AudioVideo.[dc.description.preservationstate]": "Preservation State",
+  // "layout.field.label.AudioVideo.[dc.description.preservationstate]": "Preservation Status",
   "layout.field.label.AudioVideo.[dc.description.preservationstate]": "Stato di conservazione",
-  // "layout.field.label.AudioVideo.[dc.description.preservationnote]": "Preservation Notes",
-  "layout.field.label.AudioVideo.[dc.description.preservationnote]": "Note sullo stato di conservazione",
+  // "layout.field.label.AudioVideo.[dc.description.preservationnote]": "Preservation Status Notes",
+  "layout.field.label.AudioVideo.[dc.description.preservationnote]": "Note allo stato di conservazione",
   // "layout.field.label.AudioVideo.[dc.description.digitaltools]": "Digital tools",
   "layout.field.label.AudioVideo.[dc.description.digitaltools]": "Metodologia e strumentazione",
-  // "layout.field.label.AudioVideo.BITSTREAM": "File(s)",
-  "layout.field.label.AudioVideo.BITSTREAM": "File",
+  // "layout.field.label.AudioVideo.BITSTREAM": "File / Documantation",
+  "layout.field.label.AudioVideo.BITSTREAM": "File / Documentazione",
   // "layout.field.label.Opera.[dc.title.alternative]": "Alternative Title",
   "layout.field.label.Opera.[dc.title.alternative]": "Titolo alternativo",
   // "layout.field.label.Opera.[dc.date.issued]": "Date Issued",
@@ -14106,7 +14167,7 @@
   // "layout.field.label.Fonds.NESTED[glamfonds.bibliography.title]": "Title",
   "layout.field.label.Fonds.NESTED[glamfonds.bibliography.title]": "Titolo",
   // "layout.field.label.Fonds.NESTED[glamfonds.bibliography.editor]": "Editor",
-  "layout.field.label.Fonds.NESTED[glamfonds.bibliography.editor]": "Compilatore",
+  "layout.field.label.Fonds.NESTED[glamfonds.bibliography.editor]": "Curatore",
   // "layout.field.label.Fonds.NESTED[glamfonds.bibliography.publisher]": "Publisher",
   "layout.field.label.Fonds.NESTED[glamfonds.bibliography.publisher]": "Editore",
   // "layout.field.label.Fonds.NESTED[glamfonds.bibliography.place]": "Place",
@@ -14121,14 +14182,14 @@
   "layout.field.label.Fonds.NESTED[glamfonds.editor.qualifier]": "Qualifica del compilatore",
   // "layout.field.label.Fonds.NESTED[glamfonds.editing.type]": "Editing Type",
   "layout.field.label.Fonds.NESTED[glamfonds.editing.type]": "Tipo di modifica",
-  // "layout.field.label.Fonds.NESTED[glamfonds.editing.date]": "Edited At",
+  // "layout.field.label.Fonds.NESTED[glamfonds.editing.date]": "Edited On",
   "layout.field.label.Fonds.NESTED[glamfonds.editing.date]": "Data della modifica",
 
   // "layout.field.label.Family.NESTED[glamfamily.editor.qualifier]": "Qualifier",
   "layout.field.label.Family.NESTED[glamfamily.editor.qualifier]": "Qualifica del compilatore",
   // "layout.field.label.Family.NESTED[glamfamily.editing.type]": "Editing Type",
   "layout.field.label.Family.NESTED[glamfamily.editing.type]": "Tipo di modifica",
-  // "layout.field.label.Family.NESTED[glamfamily.editing.date]": "Edited At",
+  // "layout.field.label.Family.NESTED[glamfamily.editing.date]": "Edited On",
   "layout.field.label.Family.NESTED[glamfamily.editing.date]": "Data della modifica",
 
   // "layout.field.label.JournalFonds.NESTED[dc.date.start]": "From",
@@ -14215,6 +14276,11 @@
   // "layout.field.label.Artwork.NESTED[dc.contributor.authorrole]": "Role",
   // TODO New key - Add a translation
   "layout.field.label.Artwork.NESTED[dc.contributor.authorrole]": "Role",
+  // "layout.field.label.Artwork.BITSTREAM": "File / Documantation",
+  "layout.field.label.Artwork.BITSTREAM": "File / Documentazione",
+
+  // "layout.field.label.Coin.BITSTREAM": "File / Documantation",
+  "layout.field.label.Coin.BITSTREAM": "File / Documentazione",
 
   // "layout.field.label.JournalIssue.dc.relation.issue": "Issue",
   "layout.field.label.JournalIssue.dc.relation.issue": "Dettagli del fascicolo",
@@ -14253,7 +14319,12 @@
   // "layout.field.label.JournalIssue.dc.relation.aggregation": "Aggregation",
   "layout.field.label.JournalIssue.dc.relation.aggregation": "Aggregazione",
   // "layout.field.label.JournalIssue.BITSTREAM": "File(s)",
-  "layout.field.label.JournalIssue.BITSTREAM": "File",
+  "layout.field.label.JournalIssue.BITSTREAM": "File / Documentazione",
+  // "layout.field.label.ScientificMaterial.BITSTREAM": "File / Documantation",
+  "layout.field.label.ScientificMaterial.BITSTREAM": "File / Documentazione",
+
+  // "layout.field.label.MusicalLibrettos.BITSTREAM": "File / Documantation",
+  "layout.field.label.MusicalLibrettos.BITSTREAM": "File / Documentazione",
 
   // "label.link-text.description-box.section-site.pdl": "Scopri di più",
   // TODO New key - Add a translation

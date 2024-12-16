@@ -1,10 +1,11 @@
 import { Item } from '../../core/shared/item.model';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbCarousel, NgbSlideEvent } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject } from 'rxjs';
 import { CarouselOptions } from '../carousel/carousel-options.model';
 import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
 import { HostWindowService } from '../host-window.service';
+import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
 
 @Component({
   selector: 'ds-carousel-with-thumbnails',
@@ -99,13 +100,22 @@ export class CarouselWithThumbnailsComponent implements OnInit {
   thumbnailWidthPx = 160;
 
   /**
+   * The ratio of the small image height to the big image height
+   */
+  smallImageHeightRatio = 0.25;
+
+  /**
    * The event of the slider
    */
   sliderEventSource: NgbSlideEvent;
 
+  public readonly bundle: string;
+
   constructor(
     private hostWindowService: HostWindowService,
+    @Inject(APP_CONFIG) protected appConfig: AppConfig,
   ) {
+    this.bundle = this.appConfig.bundle.previewBundle;
   }
 
   /**
@@ -121,6 +131,9 @@ export class CarouselWithThumbnailsComponent implements OnInit {
     this.title = this.carouselOptions.title;
     this.link = this.carouselOptions.link;
     this.description = this.carouselOptions.description;
+
+    // Calculate the height of the small images
+    this.thumbnailHeightPx = this.carouselOptions.carouselHeightPx * this.smallImageHeightRatio;
 
     this.hostWindowService.isXs().subscribe((isXs) => {
       this.isSmallDevice$.next(isXs);

@@ -269,30 +269,30 @@ export class DefaultAppConfig implements AppConfig {
   // When set to active, users will be able to switch to the use of this language in the user interface.
   languages: LangConfig[] = [
     { code: 'en', label: 'English', active: true },
-    { code: 'ca', label: 'Català', active: true },
-    { code: 'cs', label: 'Čeština', active: true },
-    { code: 'de', label: 'Deutsch', active: true },
-    { code: 'es', label: 'Español', active: true },
-    { code: 'fr', label: 'Français', active: true },
-    { code: 'gd', label: 'Gàidhlig', active: true },
+    { code: 'ca', label: 'Català', active: false },
+    { code: 'cs', label: 'Čeština', active: false },
+    { code: 'de', label: 'Deutsch', active: false },
+    { code: 'es', label: 'Español', active: false },
+    { code: 'fr', label: 'Français', active: false },
+    { code: 'gd', label: 'Gàidhlig', active: false },
     { code: 'it', label: 'Italiano', active: true },
-    { code: 'lv', label: 'Latviešu', active: true },
-    { code: 'hu', label: 'Magyar', active: true },
-    { code: 'nl', label: 'Nederlands', active: true },
-    { code: 'pl', label: 'Polski', active: true },
-    { code: 'pt-PT', label: 'Português', active: true },
-    { code: 'pt-BR', label: 'Português do Brasil', active: true },
-    { code: 'sr-lat', label: 'Srpski (lat)', active: true},
-    { code: 'fi', label: 'Suomi', active: true },
-    { code: 'sv', label: 'Svenska', active: true },
-    { code: 'tr', label: 'Türkçe', active: true },
-    { code: 'vi', label: 'Tiếng Việt', active: true },
-    { code: 'kk', label: 'Қазақ', active: true },
-    { code: 'bn', label: 'বাংলা', active: true },
-    { code: 'hi', label: 'हिंदी', active: true},
-    { code: 'el', label: 'Ελληνικά', active: true },
-    { code: 'sr-cyr', label: 'Српски', active: true},
-    { code: 'uk', label: 'Yкраї́нська', active: true}
+    { code: 'lv', label: 'Latviešu', active: false },
+    { code: 'hu', label: 'Magyar', active: false },
+    { code: 'nl', label: 'Nederlands', active: false },
+    { code: 'pl', label: 'Polski', active: false },
+    { code: 'pt-PT', label: 'Português', active: false },
+    { code: 'pt-BR', label: 'Português do Brasil', active: false },
+    { code: 'sr-lat', label: 'Srpski (lat)', active: false},
+    { code: 'fi', label: 'Suomi', active: false },
+    { code: 'sv', label: 'Svenska', active: false },
+    { code: 'tr', label: 'Türkçe', active: false },
+    { code: 'vi', label: 'Tiếng Việt', active: false },
+    { code: 'kk', label: 'Қазақ', active: false },
+    { code: 'bn', label: 'বাংলা', active: false },
+    { code: 'hi', label: 'हिंदी', active: false},
+    { code: 'el', label: 'Ελληνικά', active: false },
+    { code: 'sr-cyr', label: 'Српски', active: false},
+    { code: 'uk', label: 'Yкраї́нська', active: false}
   ];
 
   // Browse-By Pages
@@ -359,6 +359,10 @@ export class DefaultAppConfig implements AppConfig {
     },
     {
       type: 'Product',
+      metadata: ['dc.contributor.author']
+    },
+    {
+      type: 'Patent',
       metadata: ['dc.contributor.author']
     }
   ];
@@ -470,7 +474,8 @@ export class DefaultAppConfig implements AppConfig {
   // The default bundles that should always be displayed when you edit or add a bundle even when no bundle has been
   // added to the item yet.
   bundle: BundleConfig = {
-    standardBundles: ['ORIGINAL', 'THUMBNAIL', 'LICENSE']
+    standardBundles: ['ORIGINAL', 'THUMBNAIL', 'LICENSE'],
+    previewBundle: 'BRANDED_PREVIEW'
   };
   // Whether to enable media viewer for image and/or video Bitstreams (i.e. Bitstreams whose MIME type starts with "image" or "video").
   // For images, this enables a gallery viewer where you can zoom or page through images.
@@ -693,7 +698,7 @@ export class DefaultAppConfig implements AppConfig {
 
   cms: CmsMetadata = {
     metadataList: [
-      'cris.cms.privacy',
+      'glam.cms.privacy',
       // 'cris.cms.home-header',
       // 'cris.cms.home-news',
       'cris.cms.footer',
@@ -825,7 +830,4 @@ export class DefaultAppConfig implements AppConfig {
       statusEndpoint: 'https://nominatim.openstreetmap.org/status',
     }
   };
-
-  //main site url for glam theme
-  mainSiteUrl = 'www.sito.principale';
 }

@@ -23,6 +23,8 @@ export class BrowseMostElementsComponent implements OnInit, OnChanges {
 
   @Input() topSection: TopSection;
 
+  @Input() discoveryConfigurationsTotalElementsMap: Map<string, number>;
+
   /**
    * The type of the template to render
    */

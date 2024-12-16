@@ -239,6 +239,14 @@
 
   "admin.registries.metadata.form.namespace": "Namespace",
 
+  "admin.registries.metadata.search.form.search": "Search metadata schema",
+
+  "admin.registries.metadata.search.form.namespace": "Namespace",
+
+  "admin.registries.metadata.search.form.element": "Element",
+
+  "admin.registries.metadata.search.form.qualifier": "Qualifier",
+
   "admin.registries.metadata.head": "Metadata Registry",
 
   "admin.registries.metadata.schemas.no-items": "No metadata schemas to show.",
@@ -1468,6 +1476,8 @@
 
   "carousel.button.see-more": "See more",
 
+  "carousel.play.pause": "Play/Pause",
+
 
   "search.browse.item-back": "Back to Results",
 
@@ -2006,7 +2016,7 @@
 
   "context-menu.actions.edit-item-relationships.btn.fonds": "Manage Researchers Fonds",
 
-  "context-menu.actions.edit-item-relationships.btn.children": "Manage Children",
+  "context-menu.actions.edit-item-relationships.btn.children": "Manage Sub-fonds / Series",
 
   "context-menu.actions.edit-item-relationships.btn.events": "Manage Events",
 
@@ -2088,7 +2098,7 @@
 
   "RELATION.Fonds.publications.search.results.head": "Publications",
 
-  "RELATION.Fonds.children.search.results.head": "Fonds Children",
+  "RELATION.Fonds.children.search.results.head": "Sub-fonds / Series",
 
   "RELATION.JournalFonds.children.search.results.head": "Journal Fonds Children",
 
@@ -2257,13 +2267,13 @@
 
   "cris-layout.advanced-attachment.requestACopy": "Request a copy",
 
-  "cris-layout.advanced-attachment.viewMore": "View More",
+  "cris-layout.advanced-attachment.viewMore": "View more",
 
   "cris-layout.advanced-attachment.label.not-present": "(not present)",
 
   "cris-layout.advanced-attachment.view-pdf": "Open PDF",
 
-  "cris-layout.attachment.viewMore": "View More",
+  "cris-layout.attachment.viewMore": "View more",
 
   "cris-layout.rendering.collections.owning-collection.label": "Owning collection",
 
@@ -2574,9 +2584,9 @@
 
   "explore.counters-section.rprofiles": "People",
 
-  "explore.carousel.view-more": "View More",
+  "explore.carousel.view-more": "View more",
 
-  "explore.text-section.counter.header": "Our Numbers",
+  "explore.text-section.counter.header": "Our numbers",
 
   "explore.counters-section.publications": "Research outputs",
 
@@ -2735,7 +2745,9 @@
 
   "explore.index.rpname": "Name",
 
-  "explore.index.subject": "Subject",
+  "explore.index.subject": "Keyword",
+
+  "explore.index.glamsubject": "Subject",
 
   "explore.index.title": "Title",
 
@@ -2804,6 +2816,7 @@
 
   "file-section.error.header": "Error obtaining files for this item",
 
+  "fondsHomePage.search.results.head": "Fonds",
 
   "footer.built-with": "Built with",
 
@@ -2841,15 +2854,15 @@
 
   "footer.offer-service": "Offered services",
 
-  "footer.history-digital": "History of the digital LID",
+  "footer.history-digital": "History of the digital library",
 
   "footer.org-structure": "Organizational structure",
 
-  "footer.contact": "Contacts",
+  "footer.contact": "Contact details",
 
   "footer.contact.href": "https://www.4science.com/contact-us/",
 
-  "footer.terms": "Terms of Use",
+  "footer.terms": "Terms of use",
 
   "footer.made-info": "Made with <a href=\"https://www.4science.it/dspace-glam/\" target=\"_blank\">DSpace-GLAM</a> - Extension maintained and optimized by <a href=\"https://www.4science.it/servizi/\" target=\"_blank\">4Science</a>",
 
@@ -3121,13 +3134,13 @@
 
   "home.advanced-top-section.dc.date.accessioned": "Highlights",
 
-  "home.advanced-top-section.dc.date.issued": "New accessions",
+  "home.advanced-top-section.dc.date.issued": "Highlights",
 
-  "home.advanced-top-section.metric.view": "New accessions",
+  "home.advanced-top-section.metric.view": "Highlights",
 
-  "home.advanced-top-section.metric.download": "New accessions",
+  "home.advanced-top-section.metric.download": "Highlights",
 
-  "home.advanced-top-section.cris.priority": "New accessions",
+  "home.advanced-top-section.cris.priority": "Highlights",
 
   "home.advanced-top-section.discovery.aggregationsHomePage": "Aggregations",
 
@@ -3173,11 +3186,11 @@
 
   "info.offered-services.title": "Offered Services",
 
-  "info.history-digital-lid.breadcrumbs": "History of the digital LID",
+  "info.history-digital-lid.breadcrumbs": "History of the digital library",
 
-  "info.history-digital-lid.head": "History of the digital LID",
+  "info.history-digital-lid.head": "History of the digital library",
 
-  "info.history-digital-lid.title": "History of the digital LID",
+  "info.history-digital-lid.title": "History of the digital library",
 
   "info.organizational-structure.breadcrumbs": "Organizational structure",
 
@@ -4730,6 +4743,8 @@
 
   "none.listelement.badge": "Item",
 
+  "no.description.available": "No description available",
+
   "openaire.broker.title": "OpenAIRE Broker",
 
   "openaire.broker.topics.description": "Below you can see all the topics received from the subscriptions to OpenAIRE.",
@@ -5561,7 +5576,9 @@
 
   "search.filters.applied.f.projectorgunits": "Organisation",
 
-  "search.filters.applied.f.subject": "Subject",
+  "search.filters.applied.f.subject": "Keyword",
+
+  "search.filters.applied.f.glamsubject": "Subject",
 
   "search.filters.applied.f.submitter": "Submitter",
 
@@ -5643,7 +5660,7 @@
 
   "search.filters.applied.charts.RELATION.Fonds.publications.title": "Publications",
 
-  "search.filters.applied.charts.RELATION.Fonds.children.title": "Fonds Children",
+  "search.filters.applied.charts.RELATION.Fonds.children.title": "Sub-fonds / Series",
 
   "search.filters.applied.charts.RELATION.JournalFonds.children.title": "Journal Fonds Children",
 
@@ -5838,11 +5855,17 @@
 
   "search.filters.filter.show-more": "Show more",
 
-  "search.filters.filter.subject.head": "Subject",
+  "search.filters.filter.subject.head": "Keyword",
 
-  "search.filters.filter.subject.placeholder": "Subject",
+  "search.filters.filter.subject.placeholder": "Keyword",
 
-  "search.filters.filter.subject.label": "Search subject",
+  "search.filters.filter.subject.label": "Search keyword",
+
+  "search.filters.filter.glamsubject.head": "Subject",
+
+  "search.filters.filter.glamsubject.placeholder": "Subject",
+
+  "search.filters.filter.glamsubject.label": "Search subject",
 
   "search.filters.filter.submitter.head": "Submitter",
 
@@ -6057,6 +6080,8 @@
   "search.view-switch.show-grid": "Show as grid",
 
   "search.view-switch.show-list": "Show as list",
+
+  "social.component.title": "Social Share",
 
   "sorting.ASC": "Ascending",
 
@@ -7931,7 +7956,7 @@
 
   "relation.rp.projects.search.results.head": "Related Projects",
 
-  "layout.i18n.link.default": "link",
+  "layout.i18n.link.default": "links",
 
   "orcid.badge.tooltip": "Connected to ORCID",
 
@@ -7940,6 +7965,8 @@
   "lucky.search.retry.search": "You can try to search for it in the system with a more general query.",
 
   "lucky.search.multiple.records": "may refer to multiple records",
+
+  "lucky.search.bitstream.notfound": "We are unable to find the file that you have mentioned but it seems to be related to this item.",
 
   "invitation.group.msg": "You have been invited to join the following groups",
 
@@ -7989,6 +8016,11 @@
   "news.page.titleprefix": "News: ",
   "path.page.titleprefix": "Path: ",
   "place.page.titleprefix": "Place: ",
+  "staticpage.page.titleprefix": "Page: ",
+  "opera.page.titleprefix": "Opera: ",
+  "coin.page.titleprefix": "Coin: ",
+  "scientificmaterial.page.titleprefix": "Scientific Material: ",
+  "musicallibrettos.page.titleprefix": "Musical Librettos: ",
 
   "aggregation.listelement.badge": "Aggregation",
   "news.listelement.badge": "News",
@@ -8004,11 +8036,11 @@
   "menu.section.explore_sectionjournalfonds": "Journal Fonds",
 
   "menu.section.explore_sectionaggregations": "Aggregations",
-  "menu.section.explore_sectiondocuments": "Documents & Other materials",
+  "menu.section.explore_sectiondocuments": "Documents & other materials",
   "explore.counters-section.fonds": "Fonds",
   "explore.counters-section.journalfonds": "Journal Fonds",
   "explore.counters-section.aggregations": "Aggregations",
-  "explore.counters-section.documents": "Documents & Other materials",
+  "explore.counters-section.documents": "Documents & other materials",
 
   "explore.index.titleF": "Title",
   "explore.index.typeF": "Type",
@@ -8028,7 +8060,7 @@
   "explore.index.aggregation": "Aggregation",
   "explore.index.parentA": "Parent",
 
-  "explore.search-section.sectiondocuments.title": "Search Documents & Other materials",
+  "explore.search-section.sectiondocuments.title": "Search Documents & other materials",
 
   "explore.search-section.sectionfonds.title": "Search Fonds",
 
@@ -8036,12 +8068,12 @@
 
   "explore.search-section.sectionaggregations.title": "Search Aggregations",
 
-  "explore.sectiondocuments.breadcrumbs": "Documents & Other materials",
+  "explore.sectiondocuments.breadcrumbs": "Documents & other materials",
 
   "explore.sectionfonds.breadcrumbs": "Fonds",
   "explore.sectionjournalfonds.breadcrumbs": "Journal Fonds",
   "explore.sectionaggregations.breadcrumbs": "Aggregations",
-  "documents.search.results.head": "Documents & Other materials Search Results",
+  "documents.search.results.head": "Documents & other materials Search Results",
   "fonds.search.results.head": "Fonds Search Results",
   "journalfonds.search.results.head": "Journal Fonds Search Results",
   "aggregations.search.results.head": "Aggregations Search Results",
@@ -8066,20 +8098,20 @@
   "search.filters.filter.aggregation.placeholder": "Aggregation name",
   "search.filters.filter.aggregation.label": "Search Aggregation name",
   "search.filters.applied.f.aggregation": "Aggregation",
-  "submission.sections.submit.progressbar.describe.archival_material": "Archival Material Basic Information",
+  "submission.sections.submit.progressbar.describe.archival_material": "Details",
 
-  "submission.sections.submit.progressbar.describe.archival_material_indexing": "Archival Material Indexing Information",
-  "submission.sections.submit.progressbar.describe.archival_material_references": "Archival Material Contextual References",
+  "submission.sections.submit.progressbar.describe.archival_material_indexing": "Indexing Information",
+  "submission.sections.submit.progressbar.describe.archival_material_references": "Contextual and Structural Information",
 
-  "submission.sections.submit.progressbar.describe.fonds": "Fonds Details",
+  "submission.sections.submit.progressbar.describe.fonds": "Details",
 
-  "submission.sections.submit.progressbar.describe.place": "Place Details",
+  "submission.sections.submit.progressbar.describe.place": "Details",
 
-  "submission.sections.submit.progressbar.describe.family": "Family Details",
+  "submission.sections.submit.progressbar.describe.family": "Details",
 
-  "submission.sections.submit.progressbar.describe.aggregation": "Aggregation Details",
+  "submission.sections.submit.progressbar.describe.aggregation": "Details",
 
-  "submission.sections.submit.progressbar.describe.journal_fonds": "Journal Fonds Details",
+  "submission.sections.submit.progressbar.describe.journal_fonds": "Details ",
 
   "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-history": "Journal Fonds History",
 
@@ -8087,39 +8119,37 @@
 
   "submission.sections.submit.progressbar.describe.journal_fonds-glamjournalfonds-relation-journalfonds": "Journal Fonds Relation",
 
-  "submission.sections.submit.progressbar.describe.path": "Path Details",
+  "submission.sections.submit.progressbar.describe.path": "Details",
 
-  "submission.sections.submit.progressbar.describe.opera": "Opera Details",
+  "submission.sections.submit.progressbar.describe.opera": "Details",
 
-  "submission.sections.submit.progressbar.describe.coin": "Coin Details",
+  "submission.sections.submit.progressbar.describe.coin": "Details",
 
-  "submission.sections.submit.progressbar.describe.picture": "Picture Details",
+  "submission.sections.submit.progressbar.describe.picture": "Details",
 
-  "submission.sections.submit.progressbar.describe.news": "News Details",
+  "submission.sections.submit.progressbar.describe.news": "Details",
 
-  "submission.sections.submit.progressbar.describe.staticpage": "Page Details",
+  "submission.sections.submit.progressbar.describe.staticpage": "Details",
 
   "submission.sections.submit.progressbar.describe.staticpage-url": "Page URL",
 
-  "submission.sections.submit.progressbar.describe.journal_materials": "Journal Issue Basic Information",
+  "submission.sections.submit.progressbar.describe.journal_materials": "Details",
 
-  "submission.sections.submit.progressbar.describe.journal_materials_indexing": "Journal Issue Indexing Information",
+  "submission.sections.submit.progressbar.describe.journal_materials_indexing": "Indexing Information",
 
-  "submission.sections.submit.progressbar.describe.journal_materials_references": "Journal Issue Contextual References",
+  "submission.sections.submit.progressbar.describe.journal_materials_references": "Contextual Information",
 
-  "submission.sections.submit.progressbar.describe.scientificmaterial": "Scientific Material Basic Information",
+  "submission.sections.submit.progressbar.describe.scientificmaterial": "Details",
 
-  "submission.sections.submit.progressbar.describe.scientificmaterial_indexing": "Scientific Material Indexing Information",
+  "submission.sections.submit.progressbar.describe.scientificmaterial_indexing": "Indexing Information",
 
-  "submission.sections.submit.progressbar.describe.scientificmaterial_references": "Scientific Material Contextual References",
+  "submission.sections.submit.progressbar.describe.scientificmaterial_references": "Contextual Information",
 
-  "submission.sections.submit.progressbar.describe.journal_file": "Journal File Details",
+  "submission.sections.submit.progressbar.describe.journal_file": "Details",
 
   "submission.sections.submit.progressbar.describe.books": "Book basic information",
 
-  "submission.sections.submit.progressbar.describe.coins": "Coin basic information",
-
-  "submission.sections.submit.progressbar.describe.coins-glam-bibliography": "Coin bibliographic details",
+  "submission.sections.submit.progressbar.describe.coin-glam-bibliography": "Coin bibliographic details",
 
   "submission.sections.submit.progressbar.describe.artworks": "Artwork basic information",
 
@@ -8159,11 +8189,11 @@
 
   "curation-task.task.ocrclean.label": "Remove all metadata bundles and uploaded ocr created by a previous upload to the ocr server",
 
-  "vocabulary-treeview.header.fondsboxtree": "Fonds Tree",
+  "vocabulary-treeview.header.fondsboxtree": "Archival Arrangement",
 
-  "vocabulary-treeview.header.journalfondsboxtree": "Journal Fonds Tree",
+  "vocabulary-treeview.header.journalfondsboxtree": "Journal Fonds Arrangement",
 
-  "vocabulary-treeview.header.aggregationboxtree": "Aggregation Tree",
+  "vocabulary-treeview.header.aggregationboxtree": "Aggregation Arrangement",
 
   "curation-task.task.iiifuploader.label": "Upload images to the IIIF Image Server (photo gallery)",
 
@@ -8402,11 +8432,11 @@
   "layout.tab.header.Publication.details": "Details",
 
   "layout.tab.header.Fonds.details": "Fonds Details",
-  "layout.tab.header.Fonds.fondscontext": "Fonds Context",
-  "layout.tab.header.Fonds.fondsevents": "Fonds Events",
-  "layout.tab.header.Fonds.fondseditors": "Fonds Editors",
-  "layout.tab.header.Fonds.publications": "Fonds’ Publications",
-  "layout.tab.header.Fonds.children": "Fonds’ Children",
+  "layout.tab.header.Fonds.fondscontext": "Explore the fond",
+  "layout.tab.header.Fonds.fondsevents": "Covering Dates",
+  "layout.tab.header.Fonds.fondseditors": "Editors",
+  "layout.tab.header.Fonds.publications": "Related Publications",
+  "layout.tab.header.Fonds.children": "Sub-fonds / Series",
   "layout.tab.header.Fonds.relations": "Relations",
 
   "layout.tab.header.Place.details": "Place Details",
@@ -8497,10 +8527,10 @@
 
   "layout.box.header.Fonds.fondsdescription": "Description",
   "layout.box.header.Fonds.publications": "Fonds’ Publications",
-  "layout.box.header.Fonds.children": "Fonds’ Children",
-  "layout.box.header.Fonds.fondsindex": "Fonds Index",
-  "layout.box.header.Fonds.fondsdates": "Fonds Dates",
-  "layout.box.header.Fonds.fondseditors": "Fonds Editors",
+  "layout.box.header.Fonds.children": "Sub-fonds / Series",
+  "layout.box.header.Fonds.fondsindex": "Index",
+  "layout.box.header.Fonds.fondsdates": "Covering Dates",
+  "layout.box.header.Fonds.fondseditors": "Editors",
   "layout.box.header.Fonds.relationproject": "Projects",
   "layout.box.header.Fonds.relationparent": "Parent",
   "layout.box.header.Fonds.relationpath": "Paths",
@@ -8707,7 +8737,7 @@
   "layout.field.label.Publication.[dc.contributor.contributor]": "Secondary Author(s)",
   "layout.field.label.Publication.[dc.type]": "Type",
   "layout.field.label.Publication.[dc.format]": "Format",
-  "layout.field.label.Publication.[dc.publisher]": "Editor",
+  "layout.field.label.Publication.[dc.publisher]": "Publisher",
   "layout.field.label.Publication.[dc.source.content]": "Content",
   "layout.field.label.Publication.[dc.relation.publication]": "Related Publications",
   "layout.field.label.Publication.[dc.relation.ispublishedin]": "Published in",
@@ -8730,7 +8760,7 @@
   "layout.field.label.Publication.[dc.relation.opac]": "OPAC Link",
   "layout.field.label.Publication.[dc.relation.otherlinks]": "Other Links",
   "layout.field.label.Publication.[dc.description.note]": "Notes",
-  "layout.field.label.Publication.BITSTREAM": "File(s)",
+  "layout.field.label.Publication.BITSTREAM": "File / Documentation",
   "layout.field.label.Publication.[dc.relation.journalfonds]": "Journal Fonds ",
   "layout.field.label.Publication.[dc.relation.event]": "Events",
   "layout.field.label.Publication.[glamjournalfonds.relation.journalfonds]": "Related Journal Fonds",
@@ -8742,12 +8772,12 @@
 
   "layout.field.label.Fonds.[dc.title.alternative]": "Alternative Title",
   "layout.field.label.Fonds.[dc.type]": "Type",
-  "layout.field.label.Fonds.[dc.contributor.author]": "Author(s)",
-  "layout.field.label.Fonds.[dc.contributor.corporatebody]": "Corporate Body",
-  "layout.field.label.Fonds.[dc.contributor.family]": "Family",
+  "layout.field.label.Fonds.[dc.contributor.author]": "Creator(s)/Person",
+  "layout.field.label.Fonds.[dc.contributor.corporatebody]": "Creator(s)/Corporate Body",
+  "layout.field.label.Fonds.[dc.contributor.family]": "Creator(s)/Family",
   "layout.field.label.Fonds.[glamfonds.custodian]": "Custodian",
-  "layout.field.label.Fonds.[glamfonds.parent]": "Fonds Parent",
-  "layout.field.label.Fonds.[glamfonds.length]": "Length",
+  "layout.field.label.Fonds.[glamfonds.parent]": "Parent",
+  "layout.field.label.Fonds.[glamfonds.length]": "Extent",
   "layout.field.label.Fonds.[glamfonds.photographictype]": "Photographic Type",
   "layout.field.label.Fonds.[glamfonds.shelfmark]": "Shelfmark",
   "layout.field.label.Fonds.[dc.description.abstract]": "Abstract",
@@ -8755,15 +8785,15 @@
   "layout.field.label.Fonds.[dc.format.extent]": "Extent",
   "layout.field.label.Fonds.[glamfonds.history]": "History",
   "layout.field.label.Fonds.[dc.language.iso]": "Language",
-  "layout.field.label.Fonds.[glamfonds.quantity]": "Quantity",
+  "layout.field.label.Fonds.[glamfonds.quantity]": "Count",
   "layout.field.label.Fonds.[glamfonds.arrangement.note]": "Arrangement Notes",
   "layout.field.label.Fonds.[glamfonds.relation.materials]": "Materials",
   "layout.field.label.Fonds.[glamfonds.accesscondition]": "Access Condition",
   "layout.field.label.Fonds.[glamfonds.note]": "Note",
-  "layout.field.label.Fonds.[glamfonds.preservation]": "Preservation",
+  "layout.field.label.Fonds.[glamfonds.preservation]": "Preservation Status",
   "layout.field.label.Fonds.[glamfonds.preservation.note]": "Preservation Notes",
-  "layout.field.label.Fonds.[glamfonds.usecondition]": "Use Condition",
-  "layout.field.label.Fonds.[glamfonds.usecondition.note]": "Use Condition Notes",
+  "layout.field.label.Fonds.[glamfonds.usecondition]": "Terms of use",
+  "layout.field.label.Fonds.[glamfonds.usecondition.note]": "Terms of Use Notes",
   "layout.field.label.Fonds.[glamfonds.bibliography]": "Bibliography",
   "layout.field.label.Fonds.[dc.relation.project]": "Project",
   "layout.field.label.Fonds.[dc.identifier.uri]": "URL",
@@ -8773,12 +8803,12 @@
   "layout.field.label.Fonds.[glamfonds.enddate.from]": "End Date From",
   "layout.field.label.Fonds.[glamfonds.enddate.spec]": "End Date Spec",
   "layout.field.label.Fonds.[glamfonds.enddate.to]": "End Date To",
-  "layout.field.label.Fonds.[glamfonds.enddate.valid]": "End Date Valid",
+  "layout.field.label.Fonds.[glamfonds.enddate.valid]": "Attested End Date",
   "layout.field.label.Fonds.[glamfonds.startdate.format]": "Start Date Format",
   "layout.field.label.Fonds.[glamfonds.startdate.from]": "Start Date From",
   "layout.field.label.Fonds.[glamfonds.startdate.spec]": "Start Date Spec",
   "layout.field.label.Fonds.[glamfonds.startdate.to]": "Start Date To",
-  "layout.field.label.Fonds.[glamfonds.startdate.valid]": "Start Date Valid",
+  "layout.field.label.Fonds.[glamfonds.startdate.valid]": "Attested Start Date",
 
   "layout.field.label.Place.[dc.title.alternative]": "Alternative Title",
   "layout.field.label.Place.[glamplace.lat]": "Latitude",
@@ -8837,7 +8867,7 @@
   "layout.field.label.ArchivalMaterial.[dc.date.issued]": "Date Issued",
   "layout.field.label.ArchivalMaterial.[dc.date.start]": "Start Date",
   "layout.field.label.ArchivalMaterial.[dc.date.end]": "End Date",
-  "layout.field.label.ArchivalMaterial.[dc.coverage.temporal]": "Coverage Temporal",
+  "layout.field.label.ArchivalMaterial.[dc.coverage.temporal]": "Coverage Date",
   "layout.field.label.ArchivalMaterial.[dc.date.note]": "Date Notes",
   "layout.field.label.ArchivalMaterial.[dc.identifier.doi]": "DOI",
   "layout.field.label.ArchivalMaterial.[dc.identifier.uri]": "URI",
@@ -8845,16 +8875,16 @@
   "layout.field.label.ArchivalMaterial.[dc.identifier.inventorynumber]": "Inventory Number",
   "layout.field.label.ArchivalMaterial.[dc.identifier.shelfmark]": "Shelfmark",
   "layout.field.label.ArchivalMaterial.[dc.identifier.other]": "Other Identifier",
-  "layout.field.label.ArchivalMaterial.[dc.identifier.archivalunit]": "Archival Unit",
-  "layout.field.label.ArchivalMaterial.[dc.description]": "Description",
-  "layout.field.label.ArchivalMaterial.[dc.description.abstract]": "Abstract",
+  "layout.field.label.ArchivalMaterial.[dc.identifier.archivalunit]": "Sequential Number",
+  "layout.field.label.ArchivalMaterial.[dc.description]": "Extrinsic Description",
+  "layout.field.label.ArchivalMaterial.[dc.description.abstract]": "Content",
   "layout.field.label.ArchivalMaterial.[dc.type.physical]": "Physical Type",
-  "layout.field.label.ArchivalMaterial.[dc.format.medium]": "Format",
+  "layout.field.label.ArchivalMaterial.[dc.format.medium]": "Medium",
   "layout.field.label.ArchivalMaterial.[dcterms.accessRights]": "Access Rights",
   "layout.field.label.ArchivalMaterial.[dc.rights]": "Rights",
   "layout.field.label.ArchivalMaterial.[dc.rights.license]": "License",
   "layout.field.label.ArchivalMaterial.[dc.rights.note]": "Rights Note",
-  "layout.field.label.ArchivalMaterial.[dcterms.bibliographicCitation]": "Bibliographic Citation",
+  "layout.field.label.ArchivalMaterial.[dcterms.bibliographicCitation]": "Bibliographic Citations",
   "layout.field.label.ArchivalMaterial.[dc.relation.aggregation]": "Aggregation",
   "layout.field.label.ArchivalMaterial.[dc.relation.path]": "Path",
   "layout.field.label.ArchivalMaterial.[dc.relation.isreferencedby]": "Related Documents",
@@ -8864,13 +8894,13 @@
   "layout.field.label.ArchivalMaterial.[dc.relation.conference]": "Event",
   "layout.field.label.ArchivalMaterial.[dc.relation.person]": "Person",
   "layout.field.label.ArchivalMaterial.[dc.relation.fonds]": "Fonds",
-  "layout.field.label.ArchivalMaterial.[dc.description.archivist]": "Archivist Description",
-  "layout.field.label.ArchivalMaterial.[dc.description.preservation]": "Preservation",
-  "layout.field.label.ArchivalMaterial.[dc.description.preservationnote]": "Preservation Notes",
+  "layout.field.label.ArchivalMaterial.[dc.description.archivist]": "Archivist's Notes",
+  "layout.field.label.ArchivalMaterial.[dc.description.preservation]": "Preservation Status",
+  "layout.field.label.ArchivalMaterial.[dc.description.preservationnote]": "Preservation Status Notes",
   "layout.field.label.ArchivalMaterial.[dc.description.note]": "Note",
   "layout.field.label.ArchivalMaterial.[dc.relation.uri]": "URL",
   "layout.field.label.ArchivalMaterial.[dc.relation.place]": "Place",
-  "layout.field.label.ArchivalMaterial.BITSTREAM": "File(s)",
+  "layout.field.label.ArchivalMaterial.BITSTREAM": "File / Documentation",
   "layout.field.label.ArchivalMaterial.dc.title.alternative": "Alternative Title",
   "layout.field.label.ArchivalMaterial.dc.type": "Type",
   "layout.field.label.ArchivalMaterial.dc.contributor.author": "Author(s)",
@@ -8936,7 +8966,7 @@
   "layout.field.label.JournalFile.[dc.relation.path]": "Path",
   "layout.field.label.JournalFile.[dc.relation.isreferencedby]": "Related Documents",
   "layout.field.label.JournalFile.[dc.relation.aggregation]": "Aggregation",
-  "layout.field.label.JournalFile.BITSTREAM": "File(s)",
+  "layout.field.label.JournalFile.BITSTREAM": "File / Documentation",
 
   "layout.field.label.Picture.[dc.title.alternative]": "Alternative Title",
   "layout.field.label.Picture.[dc.contributor.author]": "Author(s)",
@@ -8950,7 +8980,7 @@
   "layout.field.label.Picture.[dc.identifier.region]": "Region",
   "layout.field.label.Picture.[dc.identifier.shelfmark]": "Shelfmark",
   "layout.field.label.Picture.[dc.identifier.uri]": "URI",
-  "layout.field.label.Picture.[dc.identifier.archivalunit]": "Archival Unit",
+  "layout.field.label.Picture.[dc.identifier.archivalunit]": "Sequential Number",
   "layout.field.label.Picture.[dc.type.form]": "Form Type",
   "layout.field.label.Picture.[dc.type.color]": "Color",
   "layout.field.label.Picture.[dc.type.materialandtechnique]": "Material And Technique",
@@ -8992,13 +9022,13 @@
   "layout.field.label.Picture.[dc.description.collection]": "Collection",
   "layout.field.label.Picture.[dc.description.collectionholder]": "Collection Holder",
   "layout.field.label.Picture.[dc.description.collectionnotes]": "Collection Notes",
-  "layout.field.label.Picture.[dc.description.preservationstate]": "Preservation State",
-  "layout.field.label.Picture.[dc.description.preservationspecifications]": "Preservation Specifications",
+  "layout.field.label.Picture.[dc.description.preservationstate]": "Preservation Status",
+  "layout.field.label.Picture.[dc.description.preservationspecifications]": "Preservation Status Specifications",
   "layout.field.label.Picture.[dc.description.note]": "Notes",
   "layout.field.label.Picture.[glam.inscription]": "Inscription",
   "layout.field.label.Picture.[glam.mark]": "Mark",
   "layout.field.label.Picture.[glam.bibliography]": "Bibliography",
-  "layout.field.label.Picture.BITSTREAM": "File(s)",
+  "layout.field.label.Picture.BITSTREAM": "File / Documantation",
   "layout.field.label.Picture.[dc.relation.isreferencedby]": "Related Documents",
 
 
@@ -9007,7 +9037,7 @@
   "layout.field.label.AudioVideo.[glam.subject]": "Subject",
   "layout.field.label.AudioVideo.[dc.source.content]": "Content",
   "layout.field.label.AudioVideo.[dc.contributor.corporatebody]": "Corporate Body",
-  "layout.field.label.AudioVideo.[dc.relation.fonds]": "Fund",
+  "layout.field.label.AudioVideo.[dc.relation.fonds]": "Fonds",
   "layout.field.label.AudioVideo.[dc.relation.event]": "Related Event",
   "layout.field.label.AudioVideo.[dc.coverage.culture]": "Cultural Area",
   "layout.field.label.AudioVideo.[dc.relation.place]": "Place Of Detection",
@@ -9037,10 +9067,10 @@
   "layout.field.label.AudioVideo.[dc.format.bitsample]": "Bits Per Sample",
   "layout.field.label.AudioVideo.[dc.description.tools]": "Equipment",
   "layout.field.label.AudioVideo.[dc.format.medium]": "Physical Description Of The Medium",
-  "layout.field.label.AudioVideo.[dc.description.preservationstate]": "Preservation State",
-  "layout.field.label.AudioVideo.[dc.description.preservationnote]": "Preservation Notes",
+  "layout.field.label.AudioVideo.[dc.description.preservationstate]": "Preservation Status",
+  "layout.field.label.AudioVideo.[dc.description.preservationnote]": "Preservation Status Notes",
   "layout.field.label.AudioVideo.[dc.description.digitaltools]": "Digital tools",
-  "layout.field.label.AudioVideo.BITSTREAM": "File(s)",
+  "layout.field.label.AudioVideo.BITSTREAM": "File / Documantation",
   "layout.field.label.Opera.[dc.title.alternative]": "Alternative Title",
   "layout.field.label.Opera.[dc.date.issued]": "Date Issued",
   "layout.field.label.Opera.[dc.subject]": "Subject",
@@ -9064,11 +9094,11 @@
   "layout.field.label.Fonds.NESTED[glamfonds.editor.name]": "Editor",
   "layout.field.label.Fonds.NESTED[glamfonds.editor.qualifier]": "Qualifier",
   "layout.field.label.Fonds.NESTED[glamfonds.editing.type]": "Editing Type",
-  "layout.field.label.Fonds.NESTED[glamfonds.editing.date]": "Edited At",
+  "layout.field.label.Fonds.NESTED[glamfonds.editing.date]": "Edited On",
 
   "layout.field.label.Family.NESTED[glamfamily.editor.qualifier]": "Qualifier",
   "layout.field.label.Family.NESTED[glamfamily.editing.type]": "Editing Type",
-  "layout.field.label.Family.NESTED[glamfamily.editing.date]": "Edited At",
+  "layout.field.label.Family.NESTED[glamfamily.editing.date]": "Edited On",
 
   "layout.field.label.JournalFonds.NESTED[dc.date.start]": "From",
   "layout.field.label.JournalFonds.NESTED[dc.date.end]": "To",
@@ -9110,6 +9140,9 @@
   "layout.field.label.Opera.NESTED[dc.contributor.authorrole]": "Role",
   "layout.field.label.Artwork.NESTED[dc.contributor.author]": "Author",
   "layout.field.label.Artwork.NESTED[dc.contributor.authorrole]": "Role",
+  "layout.field.label.Artwork.BITSTREAM": "File / Documantation",
+
+  "layout.field.label.Coin.BITSTREAM": "File / Documantation",
 
   "layout.field.label.JournalIssue.dc.relation.issue": "Issue",
   "layout.field.label.JournalIssue.dc.relation.issueother": "Issue Other",
@@ -9129,12 +9162,15 @@
   "layout.field.label.JournalIssue.dc.rights.license": "License",
   "layout.field.label.JournalIssue.dc.relation.path": "Path",
   "layout.field.label.JournalIssue.dc.relation.aggregation": "Aggregation",
-  "layout.field.label.JournalIssue.BITSTREAM": "File(s)",
+  "layout.field.label.JournalIssue.BITSTREAM": "File / Documantation",
+  "layout.field.label.ScientificMaterial.BITSTREAM": "File / Documantation",
+
+  "layout.field.label.MusicalLibrettos.BITSTREAM": "File / Documantation",
 
   "label.link-text.description-box.section-site.pdl": "Scopri di più",
   "label.title.slider.slider_collections": "Collections",
   "label.title.slider.slider_topics": "Topics",
 
   // Do not add new labels below layout ones
-  // All new labels should be placed together with similar ones, or in alphabetical orders
+  // All new labels should be placed together with similar ones, or in alphabetical order
 }

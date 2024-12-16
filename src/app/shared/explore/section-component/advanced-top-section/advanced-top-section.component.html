@@ -6,6 +6,7 @@
     <div [ngClass]="(isXs() | async) ? 'btn-group-vertical' : 'btn-group'">
       <ng-container *ngFor="let discoveryConfigurationName of advancedTopSection.discoveryConfigurationName">
         <button class="btn text-capitalize select-discovery-btn"
+                *ngIf="discoveryConfigurationsTotalElementsMap.get(discoveryConfigurationName) > 0"
                 [ngClass]="(selectedDiscoverConfiguration.asObservable() | async) === discoveryConfigurationName ? 'btn-primary' : 'btn-outline-primary'"
                 (click)="selectDiscoveryConfiguration(discoveryConfigurationName)"
         >
@@ -15,10 +16,15 @@
     </div>
   </div>
   <div>
-    <ds-themed-browse-most-elements [context]="context"
-                                    [paginatedSearchOptions]="paginatedSearchOptions.asObservable() | async"
-                                    [topSection]="$any(advancedTopSection)">
-    </ds-themed-browse-most-elements>
+    <div class="row justify-content-center">
+      <ds-loading *ngIf="(loading$ | async)"></ds-loading>
+    </div>
+    <ds-themed-browse-most-elements
+      *ngIf="!(loading$ | async)"
+      [context]="context"
+      [discoveryConfigurationsTotalElementsMap]="discoveryConfigurationsTotalElementsMap"
+      [paginatedSearchOptions]="paginatedSearchOptions.asObservable() | async"
+      [topSection]="$any(advancedTopSection)"
+    ></ds-themed-browse-most-elements>
   </div>
 </div>
-

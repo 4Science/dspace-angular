@@ -30,7 +30,7 @@ export class ThemedSliderBrowseElementsComponent extends ThemedComponent<SliderB
   }
 
   protected importThemedComponent(themeName: string): Promise<any> {
-    return import(`./../../../../themes/${themeName}/app/browse-most-elements/slider-browse-elements/slider-browse-elements.component`);
+    return import(`./../../../../themes/${themeName}/app/shared/browse-most-elements/slider-browse-elements/slider-browse-elements.component`);
   }
 
   protected importUnthemedComponent(): Promise<any> {

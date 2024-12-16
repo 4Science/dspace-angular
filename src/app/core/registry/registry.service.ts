@@ -30,6 +30,7 @@ import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { RequestParam } from '../cache/models/request-param.model';
 import { NoContent } from '../shared/NoContent.model';
 import { FindListOptions } from '../data/find-list-options.model';
+import { SchemaFilter } from '../../admin/admin-registries/metadata-registry/metadata-schema-search-form/schema-filter';
 
 const metadataRegistryStateSelector = (state: AppState) => state.metadataRegistry;
 const editMetadataSchemaSelector = createSelector(metadataRegistryStateSelector, (metadataState: MetadataRegistryState) => metadataState.editSchema);
@@ -63,6 +64,21 @@ export class RegistryService {
    */
   public getMetadataSchemas(options: FindListOptions = {}, useCachedVersionIfAvailable = true, reRequestOnStale = true, ...linksToFollow: FollowLinkConfig<MetadataSchema>[]): Observable<RemoteData<PaginatedList<MetadataSchema>>> {
     return this.metadataSchemaService.findAll(options, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
+  }
+
+  /**
+   * Retrieves metadata schemas matching filter
+   * @param filter                      schema filter
+   * @param options                     The options used to retrieve the schemas
+   * @param useCachedVersionIfAvailable If this is true, the request will only be sent if there's
+   *                                    no valid cached version. Defaults to true
+   * @param reRequestOnStale            Whether or not the request should automatically be re-
+   *                                    requested after the response becomes stale
+   * @param linksToFollow               List of {@link FollowLinkConfig} that indicate which
+   *                                    {@link HALLink}s should be automatically resolved
+   */
+  public getMetadataSchemasByMetadata(filter: SchemaFilter, options: FindListOptions = {}, useCachedVersionIfAvailable = true, reRequestOnStale = true, ...linksToFollow: FollowLinkConfig<MetadataSchema>[]): Observable<RemoteData<PaginatedList<MetadataSchema>>> {
+    return this.metadataSchemaService.findByMetadata(filter.namespace, filter.element, filter.qualifier, options, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
   }
 
   /**
