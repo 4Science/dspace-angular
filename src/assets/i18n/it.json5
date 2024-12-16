@@ -2609,8 +2609,9 @@
   // "collection.edit.template.breadcrumbs": "Item template",
   "collection.edit.template.breadcrumbs": "Modello di Item",
 
-  // "collection.edit.template.cancel": "Cancel",
-  "collection.edit.template.cancel": "Annulla",
+  // "collection.edit.template.back": "Back",
+  // TODO New key - Add a translation
+  "collection.edit.template.back": "Back",
 
   // "collection.edit.template.delete-button": "Delete",
   "collection.edit.template.delete-button": "Cancella",
@@ -6259,14 +6260,16 @@
   // TODO New key - Add a translation
   "item.preview.dc.identifier.applicationnumber": "Application number:",
 
-  // "item.preview.dc.identifier.patentno": "Patent Number",
-  "item.preview.dc.identifier.patentno": "Numero di brevetto",
+  // "item.preview.dc.identifier.patentno": "Patent number:",
+  // TODO New key - Add a translation
+  "item.preview.dc.identifier.patentno": "Patent number:",
 
   // "item.preview.dc.subject.ipc": "Subject IPC",
   "item.preview.dc.subject.ipc": "IPC Subject",
 
-  // "item.preview.dcterms.dateSubmitted": "Registration Date",
-  "item.preview.dcterms.dateSubmitted": "Data di registrazione",
+  // "item.preview.dcterms.dateSubmitted": "Registration date:",
+  // TODO New key - Add a translation
+  "item.preview.dcterms.dateSubmitted": "Registration date:",
 
   // "item.preview.dc.identifier.isi": "ISI",
   // TODO Source message changed - Revise the translation
@@ -13685,6 +13688,10 @@
   // "external-login-page.confirm-email.create-account.notifications.error.no-netId": "Something went wrong with this email account. Try again or use a different method to login.",
   // TODO New key - Add a translation
   "external-login-page.confirm-email.create-account.notifications.error.no-netId": "Something went wrong with this email account. Try again or use a different method to login.",
+
+  // "slider-browse-elements.no-results": "No results available for this configuration",
+  // TODO New key - Add a translation
+  "slider-browse-elements.no-results": "No results available for this configuration",
 
   // "form.other-information.alternative-names": "Alternative names",
   // TODO New key - Add a translation
