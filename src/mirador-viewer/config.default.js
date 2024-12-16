@@ -158,7 +158,7 @@ let miradorConfiguration = {
     switchCanvasOnSearch: true,
     views: [
       {key: 'single', behaviors: ['individuals']},
-      {key: 'book', behaviors: ['paged']},
+      {key: 'book'},
       {key: 'scroll', behaviors: ['continuous']},
       {key: 'gallery'},
     ],

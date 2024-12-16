@@ -16,6 +16,8 @@ import { PaginationService } from '../../../core/pagination/pagination.service';
 import {
   MetadataSchemaExportService
 } from '../../../shared/metadata-export/metadata-schema-export/metadata-schema-export.service';
+import { UUIDService } from '../../../core/shared/uuid.service';
+import { SchemaFilter } from './metadata-schema-search-form/schema-filter';
 
 @Component({
   selector: 'ds-metadata-registry',
@@ -37,19 +39,20 @@ export class MetadataRegistryComponent {
    * Pagination config used to display the list of metadata schemas
    */
   config: PaginationComponentOptions = Object.assign(new PaginationComponentOptions(), {
-    id: 'rm',
+    id: this.uuidService.generate(),
     pageSize: 25
   });
 
   /**
    * Whether or not the list of MetadataSchemas needs an update
    */
-  needsUpdate$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  filter$: BehaviorSubject<SchemaFilter> = new BehaviorSubject<SchemaFilter>({});
 
   constructor(private registryService: RegistryService,
               private notificationsService: NotificationsService,
               private paginationService: PaginationService,
               private translateService: TranslateService,
+              private uuidService: UUIDService,
               private readonly metadataSchemaExportService: MetadataSchemaExportService) {
     this.updateSchemas();
   }
@@ -59,10 +62,11 @@ export class MetadataRegistryComponent {
    */
   private updateSchemas() {
 
-    this.metadataSchemas = this.needsUpdate$.pipe(
-      filter((update) => update === true),
-      switchMap(() => this.paginationService.getCurrentPagination(this.config.id, this.config)),
-      switchMap((currentPagination) => this.registryService.getMetadataSchemas(toFindListOptions(currentPagination)))
+    this.metadataSchemas = this.filter$.pipe(
+      switchMap((schemaFilter) => this.paginationService.getCurrentPagination(this.config.id, this.config)
+        .pipe(map(pagination => ({schemaFilter, pagination})))
+      ),
+      switchMap(({schemaFilter, pagination}) => this.registryService.getMetadataSchemasByMetadata(schemaFilter, toFindListOptions(pagination)))
     );
   }
 
@@ -71,7 +75,15 @@ export class MetadataRegistryComponent {
    * a new REST call
    */
   public forceUpdateSchemas() {
-    this.needsUpdate$.next(true);
+    this.filter$.next(this.filter$?.value);
+  }
+
+  /**
+   * Force-update the list of schemas to use search filter.
+   */
+  public searchSchemas(schemaFilter: SchemaFilter) {
+    this.paginationService.updateRoute(this.config.id, {page: 0});
+    this.filter$.next(schemaFilter);
   }
 
   /**

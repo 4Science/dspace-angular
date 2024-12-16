@@ -55,6 +55,7 @@ describe('MetadataRegistryComponent', () => {
   /* eslint-disable no-empty,@typescript-eslint/no-empty-function */
   const registryServiceStub = {
     getMetadataSchemas: () => mockSchemas,
+    getMetadataSchemasByMetadata: () => mockSchemas,
     getActiveMetadataSchema: () => observableOf(undefined),
     getSelectedMetadataSchemas: () => observableOf([]),
     editMetadataSchema: (schema) => {
@@ -120,7 +121,7 @@ describe('MetadataRegistryComponent', () => {
 
     beforeEach(() => {
       spyOn(registryService, 'editMetadataSchema');
-      row = fixture.debugElement.query(By.css('.selectable-row')).nativeElement;
+      row = fixture.debugElement.query(By.css('.selectable-row'))?.nativeElement;
       row.click();
       fixture.detectChanges();
     });

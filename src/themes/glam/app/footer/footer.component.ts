@@ -11,5 +11,9 @@ export class FooterComponent extends BaseComponent {
 
   involvedInstitutions = environment.layout.footer.involvedInstitutions;
   socialMedia = environment.layout.footer.socialMedia;
+  showGeneralInformation = environment.info.enableGeneralInformation;
+  showOfferedServices = environment.info.enableOfferedServices;
+  showHistoryDigitalLibrary = environment.info.enableHistoryDigital;
+  showOrgStructure = environment.info.enableOrgStructure;
 
 }
