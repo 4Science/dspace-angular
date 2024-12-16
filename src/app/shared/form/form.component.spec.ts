@@ -180,7 +180,7 @@ describe('FormComponent test suite', () => {
                  [formId]="formId"
                  [formModel]="formModel"
                  [displaySubmit]="displaySubmit"
-                 [displayReset]="displayCancel"></ds-form>`;
+                 [displayReset]="displayReset"></ds-form>`;
 
       testFixture = createTestComponent(html, TestComponent) as ComponentFixture<TestComponent>;
       testComp = testFixture.componentInstance;
@@ -618,7 +618,7 @@ class TestComponent {
   public formId;
   public formModel: DynamicFormControlModel[];
   public displaySubmit = false;
-  public displayCancel = false;
+  public displayReset = false;
 
   constructor() {
     this.formId = 'testForm';
