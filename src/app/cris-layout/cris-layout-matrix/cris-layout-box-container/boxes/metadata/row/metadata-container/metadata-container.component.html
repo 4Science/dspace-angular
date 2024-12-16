@@ -6,7 +6,7 @@
 
     <div *ngIf="!isStructured" class="d-flex col flex-wrap" [class.flex-column]="!field.valuesInline">
       <!-- First metadata -->
-      <ng-container *ngFor="let index of firstLimitedDataToBeRenderedMap.keys(); let last = last;">
+      <ng-container *ngFor="let index of firstLimitedDataToBeRenderedMap?.keys(); let last = last;">
         <ng-container *ngFor="let mdg of firstLimitedDataToBeRenderedMap.get(index)">
           <ds-metadata-render [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
           </ds-metadata-render>
@@ -35,7 +35,7 @@
         </ng-container>
       </div>
       <!-- Show More/collapse link button END -->
-      <ng-container *ngFor="let index of lastLimitedDataToBeRenderedMap.keys(); let last = last;">
+      <ng-container *ngFor="let index of lastLimitedDataToBeRenderedMap?.keys(); let last = last;">
         <ng-container *ngFor="let mdg of lastLimitedDataToBeRenderedMap.get(index)">
           <ds-metadata-render [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
           </ds-metadata-render>

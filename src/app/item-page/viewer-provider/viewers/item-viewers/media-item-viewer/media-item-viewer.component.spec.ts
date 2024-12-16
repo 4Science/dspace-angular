@@ -13,9 +13,9 @@ describe('MediaItemViewerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MediaItemViewerComponent ],
       imports: [
         RouterTestingModule,
+        MediaItemViewerComponent,
       ],
       schemas: [
         NO_ERRORS_SCHEMA,

@@ -1,4 +1,5 @@
 import { StaticProvider } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 import { CalendarFieldParser } from './calendar-field-parser';
 import { DateFieldParser } from './date-field-parser';
@@ -16,6 +17,7 @@ import { LinkFieldParser } from './link-field-parser';
 import { ListFieldParser } from './list-field-parser';
 import { LookupFieldParser } from './lookup-field-parser';
 import { LookupNameFieldParser } from './lookup-name-field-parser';
+import { MarkdownFieldParser } from './markdown-field-parser';
 import { NameFieldParser } from './name-field-parser';
 import { NumberFieldParser } from './number-field-parser';
 import { OneboxFieldParser } from './onebox-field-parser';
@@ -31,6 +33,7 @@ const fieldParserDeps = [
   INIT_FORM_VALUES,
   PARSER_OPTIONS,
   SECURITY_CONFIG,
+  TranslateService,
 ];
 
 /**
@@ -149,6 +152,13 @@ export class ParserFactory {
         return {
           provide: FieldParser,
           useClass: LinkFieldParser,
+          deps: [...fieldParserDeps],
+        };
+      }
+      case ParserType.Markdown: {
+        return {
+          provide: FieldParser,
+          useClass: MarkdownFieldParser,
           deps: [...fieldParserDeps],
         };
       }

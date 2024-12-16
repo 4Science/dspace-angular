@@ -1,8 +1,14 @@
 import {
+  AsyncPipe,
+  NgClass,
+  NgIf,
+} from '@angular/common';
+import {
   Component,
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import {
   Observable,
   Subscription,
@@ -15,12 +21,21 @@ import {
 } from 'rxjs/operators';
 
 import { FileService } from '../../../../../core/shared/file.service';
+import { VarDirective } from '../../../../../shared/utils/var.directive';
 import { BaseBitstreamViewerComponent } from '../base-bitstream-viewer.component';
 
 @Component({
   selector: 'ds-pdf-bitstream-viewer',
   templateUrl: './pdf-bitstream-viewer.component.html',
   styleUrls: ['./pdf-bitstream-viewer.component.scss'],
+  imports: [
+    NgIf,
+    VarDirective,
+    AsyncPipe,
+    NgClass,
+    PdfJsViewerModule,
+  ],
+  standalone: true,
 })
 export class PdfBitstreamViewerComponent extends BaseBitstreamViewerComponent implements OnInit {
 

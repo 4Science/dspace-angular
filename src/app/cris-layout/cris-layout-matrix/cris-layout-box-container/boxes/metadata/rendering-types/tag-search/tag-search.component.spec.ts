@@ -13,6 +13,7 @@ import {
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
+import { ChipsComponent } from '../../../../../../../shared/form/chips/chips.component';
 import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate-loader.mock';
 import { DsDatePipe } from '../../../../../../pipes/ds-date.pipe';
 import { TagSearchComponent } from './tag-search.component';
@@ -59,7 +60,7 @@ describe('TagSearchComponent', () => {
           provide: TranslateLoader,
           useClass: TranslateLoaderMock,
         },
-      }), BrowserAnimationsModule],
+      }), BrowserAnimationsModule, DsDatePipe, TagSearchComponent],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
@@ -67,8 +68,10 @@ describe('TagSearchComponent', () => {
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
       ],
-      declarations: [TagSearchComponent, DsDatePipe],
     })
+      .overrideComponent(TagSearchComponent, {
+        remove: { imports: [ChipsComponent] },
+      })
       .compileComponents();
   }));
 

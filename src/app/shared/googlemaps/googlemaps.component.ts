@@ -1,5 +1,9 @@
-import { DOCUMENT } from '@angular/common';
 import {
+  DOCUMENT,
+  NgIf,
+} from '@angular/common';
+import {
+  ChangeDetectorRef,
   Component,
   Inject,
   Input,
@@ -7,17 +11,25 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
 import { RemoteData } from '../../core/data/remote-data';
 import { ConfigurationProperty } from '../../core/shared/configuration-property.model';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { AlertComponent } from '../alert/alert.component';
 import { isNotEmpty } from '../empty.util';
 
 @Component({
   selector: 'ds-googlemaps',
   templateUrl: './googlemaps.component.html',
   styleUrls: ['./googlemaps.component.scss'],
+  imports: [
+    NgIf,
+    AlertComponent,
+    TranslateModule,
+  ],
+  standalone: true,
 })
 export class GooglemapsComponent implements OnInit {
   /**
@@ -45,10 +57,16 @@ export class GooglemapsComponent implements OnInit {
    */
   longitude: string;
 
+  /**
+   * A flag that indicates if the google maps api key is not configured
+   */
+  noKeyConfigured = false;
+
   constructor(
     @Inject(DOCUMENT) private _document: Document,
     private renderer: Renderer2,
     private configService: ConfigurationDataService,
+    private cdr: ChangeDetectorRef,
   ) {
   }
 
@@ -64,6 +82,9 @@ export class GooglemapsComponent implements OnInit {
           this.loadScript(this.buildMapUrl(res?.payload?.values[0])).then(() => {
             this.loadMap();
           });
+        } else if (res.hasSucceeded && !res?.payload?.values[0]) {
+          this.noKeyConfigured = true;
+          this.cdr.detectChanges();
         }
       });
     }

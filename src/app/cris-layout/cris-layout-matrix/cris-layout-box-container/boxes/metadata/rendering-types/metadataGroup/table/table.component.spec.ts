@@ -10,13 +10,15 @@ import {
   TranslateModule,
 } from '@ngx-translate/core';
 
+import { CRIS_FIELD_RENDERING_MAP } from '../../../../../../../../../config/app-config.interface';
 import { LayoutField } from '../../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../../core/shared/item.model';
 import { TranslateLoaderMock } from '../../../../../../../../shared/mocks/translate-loader.mock';
 import { DsDatePipe } from '../../../../../../../pipes/ds-date.pipe';
 import { LoadMoreService } from '../../../../../../../services/load-more.service';
 import { MetadataRenderComponent } from '../../../row/metadata-container/metadata-render/metadata-render.component';
-import { FieldRenderingType } from '../../metadata-box.decorator';
+import { FieldRenderingType } from '../../field-rendering-type';
+import { layoutBoxesMap } from '../../metadata-box-rendering-map';
 import { TextComponent } from '../../text/text.component';
 import { TableComponent } from './table.component';
 
@@ -92,23 +94,22 @@ describe('TableComponent component when .first and .last is not in rendering con
           provide: TranslateLoader,
           useClass: TranslateLoaderMock,
         },
-      })],
+      }), DsDatePipe,
+      MetadataRenderComponent,
+      TableComponent,
+      TextComponent],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
+        { provide: CRIS_FIELD_RENDERING_MAP, useValue: layoutBoxesMap },
         LoadMoreService,
-      ],
-      declarations: [
-        DsDatePipe,
-        MetadataRenderComponent,
-        TableComponent,
-        TextComponent,
       ],
     }).overrideComponent(TableComponent, {
       set: { changeDetection: ChangeDetectionStrategy.OnPush },
-    }).compileComponents();
+    })
+      .compileComponents();
   }));
   beforeEach(() => {
     fixture = TestBed.createComponent(TableComponent);
@@ -250,19 +251,17 @@ describe('TableComponent component when .first and .last is present in rendering
           provide: TranslateLoader,
           useClass: TranslateLoaderMock,
         },
-      })],
+      }), DsDatePipe,
+      MetadataRenderComponent,
+      TableComponent,
+      TextComponent],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
+        { provide: CRIS_FIELD_RENDERING_MAP, useValue: layoutBoxesMap },
         LoadMoreService,
-      ],
-      declarations: [
-        DsDatePipe,
-        MetadataRenderComponent,
-        TableComponent,
-        TextComponent,
       ],
     }).overrideComponent(TableComponent, {
       set: { changeDetection: ChangeDetectionStrategy.OnPush },

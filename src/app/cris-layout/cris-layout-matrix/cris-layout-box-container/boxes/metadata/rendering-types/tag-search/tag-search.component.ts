@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
   Component,
   Inject,
@@ -7,11 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../core/shared/item.model';
+import { ChipsComponent } from '../../../../../../../shared/form/chips/chips.component';
 import { Chips } from '../../../../../../../shared/form/chips/models/chips.model';
-import {
-  FieldRenderingType,
-  MetadataBoxFieldRendering,
-} from '../metadata-box.decorator';
 import { RenderingTypeStructuredModelComponent } from '../rendering-type-structured.model';
 
 /**
@@ -22,8 +20,12 @@ import { RenderingTypeStructuredModelComponent } from '../rendering-type-structu
   selector: 'div[ds-tag-search]',
   templateUrl: './tag-search.component.html',
   styleUrls: ['./tag-search.component.scss'],
+  imports: [
+    NgIf,
+    ChipsComponent,
+  ],
+  standalone: true,
 })
-@MetadataBoxFieldRendering(FieldRenderingType.TAGSEARCH, true)
 export class TagSearchComponent extends RenderingTypeStructuredModelComponent implements OnInit {
 
   /**

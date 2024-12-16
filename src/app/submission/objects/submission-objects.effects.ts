@@ -43,6 +43,7 @@ import { WorkspaceitemSectionsObject } from '../../core/submission/models/worksp
 import { SubmissionJsonPatchOperationsService } from '../../core/submission/submission-json-patch-operations.service';
 import { SubmissionObjectDataService } from '../../core/submission/submission-object-data.service';
 import { SubmissionScopeType } from '../../core/submission/submission-scope-type';
+import { WorkspaceitemDataService } from '../../core/submission/workspaceitem-data.service';
 import {
   isEmpty,
   isNotEmpty,
@@ -71,6 +72,8 @@ import {
   DisableSectionSuccessAction,
   DiscardSubmissionErrorAction,
   DiscardSubmissionSuccessAction,
+  ExecuteExternalUploadErrorAction,
+  ExecuteExternalUploadSuccessAction,
   InitSectionAction,
   InitSubmissionFormAction,
   ResetSubmissionFormAction,
@@ -353,7 +356,7 @@ export class SubmissionObjectEffects {
     switchMap(([action, state]: [DepositSubmissionAction, any]) => {
       return this.submissionService.depositSubmission(state.submission.objects[action.payload.submissionId].selfUrl).pipe(
         map(() => new DepositSubmissionSuccessAction(action.payload.submissionId)),
-        catchError((error: unknown) => observableOf(new DepositSubmissionErrorAction(action.payload.submissionId))));
+        catchError(() => observableOf(new DepositSubmissionErrorAction(action.payload.submissionId))));
     })));
 
   /**
@@ -377,6 +380,7 @@ export class SubmissionObjectEffects {
   depositSubmissionSuccess$ = createEffect(() => this.actions$.pipe(
     ofType(SubmissionObjectActionTypes.DEPOSIT_SUBMISSION_SUCCESS),
     tap(() => this.notificationsService.success(null, this.translate.get('submission.sections.general.deposit_success_notice'))),
+    tap((action: DepositSubmissionSuccessAction) => this.workspaceItemDataService.invalidateById(action.payload.submissionId)),
     tap(() => this.submissionService.redirectToMyDSpace())), { dispatch: false });
 
   /**
@@ -431,6 +435,66 @@ export class SubmissionObjectEffects {
   ));
 
   /**
+   * Execute upload from external source
+   */
+
+  executeExternalUpload$ = createEffect(() => this.actions$.pipe(
+    ofType(SubmissionObjectActionTypes.EXECUTE_EXTERNAL_UPLOAD),
+    withLatestFrom(this.store$),
+    switchMap(([action, currentState]: [SetDuplicateDecisionAction, any]) => {
+      return this.operationsService.jsonPatchByResourceID(
+        this.submissionService.getSubmissionObjectLinkName(),
+        action.payload.submissionId,
+        'sections',
+        action.payload.sectionId).pipe(
+        map((response: SubmissionObject[]) => {
+          const { errors } = response[0];
+          const errorsMap = parseSectionErrors(errors);
+          const sectionErrors = errorsMap[action.payload.sectionId];
+
+          if (sectionErrors?.length > 0) {
+            return [new ExecuteExternalUploadErrorAction(action.payload.submissionId, action.payload.sectionId, sectionErrors)];
+          } else {
+            const actions = this.parseSaveResponse((currentState.submission as SubmissionState).objects[action.payload.submissionId],
+              response, action.payload.submissionId, currentState.forms, false, true);
+            actions.push(new ExecuteExternalUploadSuccessAction(
+              action.payload.submissionId,
+              action.payload.sectionId,
+            ));
+            return actions;
+          }
+        }),
+        mergeMap((actions) => observableFrom(actions)),
+        catchError((rd: unknown) => {
+          if (rd instanceof RemoteData) {
+            return observableFrom(
+              this.parseErrorResponse(false, rd.errors, action.payload.submissionId, rd.statusCode, rd.errorMessage),
+            );
+          }
+        }),
+      );
+    })),
+  );
+
+  /**
+   * Set external update status
+   */
+  executeExternalUploadSuccess$ = createEffect(() => this.actions$.pipe(
+    ofType(SubmissionObjectActionTypes.EXECUTE_EXTERNAL_UPLOAD_SUCCESS),
+    tap(() => this.notificationsService.success(null, this.translate.get('submission.sections.external-upload.upload-success-notice')))),
+  { dispatch: false },
+  );
+
+  /**
+   * Show external update errors
+   */
+  executeExternalUploadError$ = createEffect(() => this.actions$.pipe(
+    ofType(SubmissionObjectActionTypes.EXECUTE_EXTERNAL_UPLOAD_ERROR),
+    tap(() => this.notificationsService.error(null, this.translate.get('submission.sections.external-upload.upload-error-notice')))),
+  { dispatch: false },
+  );
+
+  /**
    * Show a notification on success and redirect to MyDSpace page
    */
   discardSubmissionSuccess$ = createEffect(() => this.actions$.pipe(
@@ -445,14 +509,17 @@ export class SubmissionObjectEffects {
     ofType(SubmissionObjectActionTypes.DISCARD_SUBMISSION_ERROR),
     tap(() => this.notificationsService.error(null, this.translate.get('submission.sections.general.discard_error_notice')))), { dispatch: false });
 
-  constructor(private actions$: Actions,
+  constructor(
+    private actions$: Actions,
     private notificationsService: NotificationsService,
     private operationsService: SubmissionJsonPatchOperationsService,
     private sectionService: SectionsService,
     private store$: Store<any>,
     private submissionService: SubmissionService,
     private submissionObjectService: SubmissionObjectDataService,
-    private translate: TranslateService) {
+    private translate: TranslateService,
+    private workspaceItemDataService: WorkspaceitemDataService,
+  ) {
   }
 
   /**
@@ -652,7 +719,7 @@ function getForm(forms, currentState, sectionId) {
  *  Whether notifications are enabled
  */
 function filterErrors(sectionForm: FormState, sectionErrors: SubmissionSectionError[], sectionType: string, notify: boolean): SubmissionSectionError[] {
-  if (notify || sectionType !== SectionsType.SubmissionForm) {
+  if (notify || sectionType !== SectionsType.SubmissionForm.valueOf()) {
     return sectionErrors;
   }
   if (!sectionForm || !sectionForm.touched) {

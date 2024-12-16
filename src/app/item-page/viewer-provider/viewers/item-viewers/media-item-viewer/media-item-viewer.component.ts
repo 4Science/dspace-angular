@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -8,6 +9,7 @@ import {
   Params,
 } from '@angular/router';
 
+import { MediaPlayerComponent } from '../../../../../shared/media-player/media-player.component';
 import { BaseItemViewerComponent } from '../base-item-viewer.component';
 
 @Component({
@@ -15,6 +17,11 @@ import { BaseItemViewerComponent } from '../base-item-viewer.component';
   templateUrl: './media-item-viewer.component.html',
   styleUrls: ['./media-item-viewer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MediaPlayerComponent,
+    NgIf,
+  ],
 })
 export class MediaItemViewerComponent extends BaseItemViewerComponent implements OnInit {
 

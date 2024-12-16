@@ -29,7 +29,7 @@ import {
   SCOPE,
   SearchFilterService,
 } from '../../../../../../../core/shared/search/search-filter.service';
-import { SEARCH_CONFIG_SERVICE } from '../../../../../../../my-dspace-page/my-dspace-page.component';
+import { SEARCH_CONFIG_SERVICE } from '../../../../../../../my-dspace-page/my-dspace-configuration.service';
 import { RouterStub } from '../../../../../../testing/router.stub';
 import { SearchConfigurationServiceStub } from '../../../../../../testing/search-configuration-service.stub';
 import { SearchServiceStub } from '../../../../../../testing/search-service.stub';
@@ -44,8 +44,7 @@ describe('SearchRangeDatepickerFilterComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), NoopAnimationsModule, FormsModule],
-      declarations: [SearchRangeFilterComponent],
+      imports: [TranslateModule.forRoot(), NoopAnimationsModule, FormsModule, SearchRangeFilterComponent],
       providers: [
         { provide: SearchService, useValue: new SearchServiceStub() },
         { provide: Router, useValue: new RouterStub() },
@@ -55,6 +54,7 @@ describe('SearchRangeDatepickerFilterComponent', () => {
         { provide: SEARCH_CONFIG_SERVICE, useValue: new SearchConfigurationServiceStub() },
         { provide: IN_PLACE_SEARCH, useValue: false },
         { provide: REFRESH_FILTER, useValue: new BehaviorSubject<boolean>(false) },
+        { provide: SCOPE, useValue: '' },
         {
           provide: SearchFilterService, useValue: {
             getSelectedValuesForFilter: () => of([]),

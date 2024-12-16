@@ -1,9 +1,14 @@
 import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
+import {
   Component,
   Input,
   OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../../../../../../../../../../environments/environment';
@@ -16,18 +21,18 @@ import {
   getBitstreamItemViewerPath,
 } from '../../../../../../../../../../../item-page/item-page-routing-paths';
 import { isNotEmpty } from '../../../../../../../../../../../shared/empty.util';
-import {
-  AttachmentRenderingType,
-  AttachmentTypeRendering,
-} from '../../../attachment-type.decorator';
 
 @Component({
   selector: 'ds-pdf-viewer-button',
   templateUrl: './pdf-viewer-button.component.html',
   styleUrls: ['./pdf-viewer-button.component.scss'],
+  imports: [
+    NgIf,
+    AsyncPipe,
+    TranslateModule,
+  ],
+  standalone: true,
 })
-
-@AttachmentTypeRendering(AttachmentRenderingType.PDF, true)
 export class PdfViewerButtonComponent implements OnInit {
 
   /**

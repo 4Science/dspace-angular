@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import {
   Component,
   EventEmitter,
+  inject,
   Input,
   Output,
 } from '@angular/core';
@@ -22,6 +23,7 @@ import { isNotNull } from '../../../../shared/empty.util';
 @Component({
   selector: 'ds-cris-layout-tabs-sidebar',
   template: '',
+  standalone: true,
 })
 export abstract class CrisLayoutTabsComponent {
 
@@ -55,11 +57,17 @@ export abstract class CrisLayoutTabsComponent {
    */
   @Output() selectedTab = new EventEmitter<CrisLayoutTab>();
 
+  /**
+   * The item base url
+   */
+  itemBaseUrl: string;
 
-  constructor(public location: Location, public router: Router, public route: ActivatedRoute) {
-  }
+  location = inject(Location);
+  route = inject(ActivatedRoute);
+  router = inject(Router);
 
   init(): void {
+    this.itemBaseUrl = getItemPageRoute(this.item) + '/';
     if (this.tabs && this.tabs.length > 0) {
       if (isNotNull(this.route.snapshot.paramMap.get('tab'))) {
         this.parseTabs(this.route.snapshot.paramMap.get('tab'));
@@ -116,15 +124,8 @@ export abstract class CrisLayoutTabsComponent {
   abstract emitSelected(selectedTab): void;
 
   setActiveTab(tab) {
-    const itemPageRoute = getItemPageRoute(this.item);
     this.activeTab$.next(tab);
     this.emitSelected(tab);
-    if (this.tabs[0].shortname === tab.shortname) {
-      this.location.replaceState(itemPageRoute);
-    } else {
-      const viewerPath = this.location.path().split(this.route.snapshot.paramMap.get('tab'))[1];
-      this.location.replaceState(itemPageRoute + '/' + tab.shortname + (viewerPath  || ''));
-    }
   }
 
 }

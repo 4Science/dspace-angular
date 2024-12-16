@@ -16,9 +16,11 @@ import { BrowseMostElementsComponent } from './browse-most-elements.component';
  * Themed wrapper for BrowseMostElementsComponent
  */
 @Component({
-  selector: 'ds-themed-browse-most-elements',
+  selector: 'ds-browse-most-elements',
   styleUrls: [],
   templateUrl: '../theme-support/themed.component.html',
+  standalone: true,
+  imports: [BrowseMostElementsComponent],
 })
 export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMostElementsComponent> {
 
@@ -26,22 +28,26 @@ export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMos
 
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
-  @Input() showMetrics;
-
-  @Input() showThumbnails;
-
-  @Input() topSection: TopSection;
+  @Input() projection = 'preventMetadataSecurity';
 
   @Input() mode: LayoutModeEnum;
 
-  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'showMetrics', 'showThumbnails', 'topSection', 'mode'];
+  @Input() showLabel: boolean;
+
+  @Input() showMetrics: boolean;
+
+  @Input() topSection: TopSection;
+
+  @Input() showThumbnails: boolean;
+
+  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'projection', 'mode', 'showLabel', 'showMetrics', 'showThumbnails', 'topSection', 'mode'];
 
   protected getComponentName(): string {
     return 'BrowseMostElementsComponent';
   }
 
   protected importThemedComponent(themeName: string): Promise<any> {
-    return import(`../../../themes/${themeName}/app/browse-most-elements/browse-most-elements.component`);
+    return import(`../../../themes/${themeName}/app/shared/browse-most-elements/browse-most-elements.component`);
   }
 
   protected importUnthemedComponent(): Promise<any> {

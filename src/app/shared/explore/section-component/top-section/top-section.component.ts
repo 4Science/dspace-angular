@@ -1,27 +1,44 @@
 import {
+  NgClass,
+  NgIf,
+} from '@angular/common';
+import {
   Component,
   Input,
   OnInit,
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgbButtonsModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 
 import {
   SortDirection,
   SortOptions,
 } from '../../../../core/cache/models/sort-options.model';
+import { Context } from '../../../../core/shared/context.model';
+import { ThemedBrowseMostElementsComponent } from '../../../browse-most-elements/themed-browse-most-elements.component';
+import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
+import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
 import {
   LayoutModeEnum,
   TopSection,
-} from '../../../../core/layout/models/section.model';
-import { Context } from '../../../../core/shared/context.model';
-import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
-import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
+} from './../../../../core/layout/models/section.model';
 
 /**
  * Component representing the Top component section.
  */
 @Component({
-  selector: 'ds-top-section',
+  selector: 'ds-base-top-section',
   templateUrl: './top-section.component.html',
+  standalone: true,
+  imports: [
+    ThemedBrowseMostElementsComponent,
+    NgIf,
+    TranslateModule,
+    FormsModule,
+    NgbButtonsModule,
+    NgClass,
+  ],
 })
 export class TopSectionComponent implements OnInit {
 
@@ -55,7 +72,5 @@ export class TopSectionComponent implements OnInit {
       pagination: pagination,
       sort: new SortOptions(this.topSection.sortField, sortDirection),
     });
-
-    this.showThumbnails = this.topSection.showThumbnails;
   }
 }

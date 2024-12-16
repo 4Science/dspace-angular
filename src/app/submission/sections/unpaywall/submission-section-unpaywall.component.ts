@@ -1,10 +1,19 @@
 import {
+  AsyncPipe,
+  NgIf,
+  NgSwitch,
+  NgSwitchCase,
+} from '@angular/common';
+import {
   Component,
   Inject,
   OnDestroy,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { TranslateService } from '@ngx-translate/core';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 import { Operation } from 'fast-json-patch';
 import {
   BehaviorSubject,
@@ -47,11 +56,13 @@ import { WorkspaceitemSectionUploadObject } from '../../../core/submission/model
 import { WorkspaceitemSectionUploadFileObject } from '../../../core/submission/models/workspaceitem-section-upload-file.model';
 import { WorkspaceitemSectionsObject } from '../../../core/submission/models/workspaceitem-sections.model';
 import { SubmissionScopeType } from '../../../core/submission/submission-scope-type';
+import { AlertComponent } from '../../../shared/alert/alert.component';
 import { AlertType } from '../../../shared/alert/alert-type';
 import {
   hasNoValue,
   hasValue,
 } from '../../../shared/empty.util';
+import { ThemedLoadingComponent } from '../../../shared/loading/themed-loading.component';
 import { NotificationsService } from '../../../shared/notifications/notifications.service';
 import { UpdateSectionVisibilityAction } from '../../objects/submission-objects.actions';
 import { SubmissionObjectEntry } from '../../objects/submission-objects.reducer';
@@ -61,7 +72,6 @@ import { SubmissionService } from '../../submission.service';
 import { SectionModelComponent } from '../models/section.model';
 import { SectionDataObject } from '../models/section-data.model';
 import { SectionsService } from '../sections.service';
-import { renderSectionFor } from '../sections-decorator';
 import { SectionsType } from '../sections-type';
 import { SectionUploadService } from '../upload/section-upload.service';
 import { UnpaywallSectionStatus } from './models/unpaywall-section-status';
@@ -108,8 +118,17 @@ interface UploadSection {
   selector: 'ds-submission-section-unpaywall-component',
   templateUrl: './submission-section-unpaywall.component.html',
   styleUrls: ['./submission-section-unpaywall.component.scss'],
+  imports: [
+    NgSwitch,
+    AlertComponent,
+    NgSwitchCase,
+    AsyncPipe,
+    NgIf,
+    TranslateModule,
+    ThemedLoadingComponent,
+  ],
+  standalone: true,
 })
-@renderSectionFor(SectionsType.Unpaywall)
 export class SubmissionSectionUnpaywallComponent extends SectionModelComponent implements OnDestroy {
 
   public readonly UnpaywallSectionStatus = UnpaywallSectionStatus;

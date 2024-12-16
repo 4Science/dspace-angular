@@ -1,0 +1,54 @@
+import { NgIf } from '@angular/common';
+import {
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+
+import { LayoutField } from '../../../../../../../../core/layout/models/box.model';
+import { Item } from '../../../../../../../../core/shared/item.model';
+import { GooglemapsComponent } from '../../../../../../../../shared/googlemaps/googlemaps.component';
+import {
+  LoadMoreService,
+  NestedMetadataGroupEntry,
+} from '../../../../../../../services/load-more.service';
+import { MetadataGroupComponent } from '../metadata-group.component';
+
+@Component({
+  selector: 'ds-googlemaps-group',
+  templateUrl: './googlemaps-group.component.html',
+  standalone: true,
+  imports: [
+    GooglemapsComponent,
+    NgIf,
+  ],
+  styleUrls: ['./googlemaps-group.component.scss'],
+})
+export class GooglemapsGroupComponent extends MetadataGroupComponent implements OnInit {
+
+  coordinates: string;
+
+  constructor(
+    @Inject('fieldProvider') public fieldProvider: LayoutField,
+    @Inject('itemProvider') public itemProvider: Item,
+    @Inject('renderingSubTypeProvider') public renderingSubTypeProvider: string,
+    @Inject('tabNameProvider') public tabNameProvider: string,
+    protected translateService: TranslateService,
+    public loadMoreService: LoadMoreService,
+  ) {
+    super(fieldProvider, itemProvider, renderingSubTypeProvider, tabNameProvider, translateService, loadMoreService);
+  }
+
+  ngOnInit(): void {
+    super.ngOnInit();
+    const coordinatesEntryMetadata = this.componentsToBeRenderedMap.get(0);
+    const [latitude, longitude] =  coordinatesEntryMetadata;
+    const valueLatitude = this.getNestedMetadataValue(latitude);
+    const valueLongitude = this.getNestedMetadataValue(longitude);
+    this.coordinates = `@${valueLatitude},${valueLongitude}`;
+  }
+  getNestedMetadataValue(nestedMetadaGroupEntry: NestedMetadataGroupEntry){
+    return nestedMetadaGroupEntry?.value?.value;
+  }
+}

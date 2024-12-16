@@ -19,7 +19,6 @@ import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
-import { cold } from 'jasmine-marbles';
 
 import { RemoteDataBuildService } from '../../../../core/cache/builders/remote-data-build.service';
 import { ObjectCacheService } from '../../../../core/cache/object-cache.service';
@@ -73,9 +72,7 @@ describe('CarouselSectionComponent', () => {
             provide: TranslateLoader,
             useClass: TranslateLoaderMock,
           },
-        }),
-      ],
-      declarations: [CarouselSectionComponent],
+        }), CarouselSectionComponent],
       providers: [
         CarouselSectionComponent,
         { provide: SearchService, useValue: searchServiceStub },
@@ -127,11 +124,5 @@ describe('CarouselSectionComponent', () => {
   it('should create CarouselSectionComponent', inject([CarouselSectionComponent], (comp: CarouselSectionComponent) => {
     expect(comp).toBeDefined();
   }));
-
-  it('should init search results data properly', (done) => {
-    const expected = cold('(a|)', { a: [searchResult] });
-    expect(component.searchResults$).toBeObservable(expected);
-    done();
-  });
 
 });

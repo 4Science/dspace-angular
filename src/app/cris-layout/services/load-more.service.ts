@@ -1,3 +1,5 @@
+import { Injectable } from '@angular/core';
+
 import { environment } from '../../../environments/environment';
 import { LayoutField } from '../../core/layout/models/box.model';
 import { MetadataValue } from '../../core/shared/metadata.models';
@@ -16,7 +18,8 @@ interface ComputedData {
   lastLimit: number;
 }
 
-export class LoadMoreService  {
+@Injectable({ providedIn: 'root' })
+export class LoadMoreService {
 
   /**
    * returns the limits of how many data loaded from first and last

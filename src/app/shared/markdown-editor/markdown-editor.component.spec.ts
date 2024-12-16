@@ -15,9 +15,9 @@ describe('MarkdownEditorComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [MarkdownEditorComponent],
       imports: [
         RouterTestingModule.withRoutes([]),
+        MarkdownEditorComponent,
       ],
       providers: [],
       schemas: [NO_ERRORS_SCHEMA],

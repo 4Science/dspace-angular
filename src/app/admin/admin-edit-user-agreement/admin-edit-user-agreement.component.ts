@@ -1,10 +1,18 @@
 import {
+  KeyValuePipe,
+  NgForOf,
+} from '@angular/common';
+import {
   Component,
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 import { Operation } from 'fast-json-patch';
 import { Subscription } from 'rxjs';
 
@@ -13,6 +21,8 @@ import { ScriptDataService } from '../../core/data/processes/script-data.service
 import { SiteDataService } from '../../core/data/site-data.service';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { Site } from '../../core/shared/site.model';
+import { AlertComponent } from '../../shared/alert/alert.component';
+import { MarkdownEditorComponent } from '../../shared/markdown-editor/markdown-editor.component';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 
 /**
@@ -21,6 +31,15 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
 @Component({
   selector: 'ds-admin-edit-user-agreement',
   templateUrl: './admin-edit-user-agreement.component.html',
+  imports: [
+    AlertComponent,
+    TranslateModule,
+    KeyValuePipe,
+    FormsModule,
+    NgForOf,
+    MarkdownEditorComponent,
+  ],
+  standalone: true,
 })
 export class AdminEditUserAgreementComponent implements OnInit, OnDestroy {
 

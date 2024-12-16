@@ -1,4 +1,7 @@
-import { isPlatformBrowser } from '@angular/common';
+import {
+  isPlatformBrowser,
+  NgIf,
+} from '@angular/common';
 import {
   Component,
   Inject,
@@ -6,13 +9,15 @@ import {
   OnInit,
   PLATFORM_ID,
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {
   ActivatedRoute,
   Params,
   Router,
 } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { NouisliderComponent } from 'ng2-nouislider';
 import {
-  BehaviorSubject,
   from,
   Observable,
   of,
@@ -31,23 +36,19 @@ import { SearchService } from '../../../../../../core/shared/search/search.servi
 import { SearchConfigurationService } from '../../../../../../core/shared/search/search-configuration.service';
 import {
   FILTER_CONFIG,
-  IN_PLACE_SEARCH,
-  REFRESH_FILTER,
-  SCOPE,
   SearchFilterService,
 } from '../../../../../../core/shared/search/search-filter.service';
-import { SEARCH_CONFIG_SERVICE } from '../../../../../../my-dspace-page/my-dspace-page.component';
+import { SEARCH_CONFIG_SERVICE } from '../../../../../../my-dspace-page/my-dspace-configuration.service';
 import {
   hasValue,
   isNotEmpty,
 } from '../../../../../empty.util';
-import { FilterType } from '../../../../models/filter-type.model';
+import { DebounceDirective } from '../../../../../utils/debounce.directive';
 import { SearchFilterConfig } from '../../../../models/search-filter-config.model';
 import {
   facetLoad,
   SearchFacetFilterComponent,
 } from '../../search-facet-filter/search-facet-filter.component';
-import { renderFacetForEnvironment } from '../../search-filter-type-decorator';
 
 /**
  * The suffix for a range filters' minimum in the frontend URL
@@ -69,12 +70,19 @@ export const RANGE_FILTER_MAX_SUFFIX = '.max';
   styleUrls: ['./search-range-filter.component.scss'],
   templateUrl: './search-range-filter.component.html',
   animations: [facetLoad],
+  imports: [
+    FormsModule,
+    TranslateModule,
+    NouisliderComponent,
+    DebounceDirective,
+    NgIf,
+  ],
+  standalone: true,
 })
 
 /**
  * Component that represents a range facet for a specific filter configuration
  */
-@renderFacetForEnvironment(FilterType.range)
 export class SearchRangeFilterComponent extends SearchFacetFilterComponent implements OnInit, OnDestroy {
 
   /**
@@ -110,13 +118,10 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
     protected rdbs: RemoteDataBuildService,
     protected route: ActivatedRoute,
     @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
-    @Inject(IN_PLACE_SEARCH) public inPlaceSearch: boolean,
+    @Inject(PLATFORM_ID) public platformId: any,
     @Inject(FILTER_CONFIG) public filterConfig: SearchFilterConfig,
-    @Inject(REFRESH_FILTER) public refreshFilters: BehaviorSubject<boolean>,
-    @Inject(SCOPE) public scope: string,
-    @Inject(PLATFORM_ID) protected platformId: any,
   ) {
-    super(searchService, filterService, rdbs, router, searchConfigService, inPlaceSearch, filterConfig, refreshFilters, scope);
+    super(searchService, filterService, rdbs, router, searchConfigService);
   }
 
   /**

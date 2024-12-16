@@ -1,16 +1,27 @@
 import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
+import {
   Component,
   Inject,
   OnInit,
 } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import {
+  combineLatest,
+  Observable,
+} from 'rxjs';
+import {
+  map,
+  take,
+} from 'rxjs/operators';
 
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
-import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { ContextMenuEntryComponent } from '../context-menu-entry.component';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 
@@ -20,11 +31,17 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
 @Component({
   selector: 'ds-context-menu-audit-item',
   templateUrl: './audit-item-menu.component.html',
+  standalone: true,
+  imports: [
+    NgIf,
+    RouterLink,
+    AsyncPipe,
+    TranslateModule,
+  ],
 })
-@rendersContextMenuEntriesForType(DSpaceObjectType.ITEM)
 export class AuditItemMenuComponent extends ContextMenuEntryComponent implements OnInit {
 
-  public isAdmin: BehaviorSubject<boolean> =  new BehaviorSubject<boolean>(false);
+  public isAuthorized$: Observable<boolean>;
 
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
@@ -35,8 +52,15 @@ export class AuditItemMenuComponent extends ContextMenuEntryComponent implements
   }
 
   ngOnInit(): void {
-    this.authorizationService.isAuthorized(FeatureID.AdministratorOf, undefined, undefined).pipe(
+    this.isAuthorized$ = combineLatest(
+      [
+        this.authorizationService.isAuthorized(FeatureID.AdministratorOf),
+        this.authorizationService.isAuthorized(FeatureID.IsCollectionAdmin),
+        this.authorizationService.isAuthorized(FeatureID.IsCommunityAdmin),
+      ],
+    ).pipe(
       take(1),
-    ).subscribe((isAuthorized: boolean) => (this.isAdmin.next(isAuthorized)));
+      map(([isAdmin, isCollectionAdmin, isCommunityAdmin]) => isAdmin || isCollectionAdmin || isCommunityAdmin),
+    );
   }
 }

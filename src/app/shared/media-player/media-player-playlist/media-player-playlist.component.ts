@@ -1,4 +1,8 @@
 import {
+  AsyncPipe,
+  NgForOf,
+} from '@angular/common';
+import {
   Component,
   EventEmitter,
   Input,
@@ -6,6 +10,7 @@ import {
   Output,
 } from '@angular/core';
 import findIndex from 'lodash/findIndex';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import {
   BehaviorSubject,
   combineLatest,
@@ -32,16 +37,26 @@ import { Bitstream } from '../../../core/shared/bitstream.model';
 import { BitstreamFormat } from '../../../core/shared/bitstream-format.model';
 import { MediaViewerItem } from '../../../core/shared/media-viewer-item.model';
 import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
+import { ThemedThumbnailComponent } from '../../../thumbnail/themed-thumbnail.component';
 import {
   isEmpty,
   isNotEmpty,
 } from '../../empty.util';
+import { FileSizePipe } from '../../utils/file-size-pipe';
 import { followLink } from '../../utils/follow-link-config.model';
 
 @Component({
   selector: 'ds-media-player-playlist',
   templateUrl: './media-player-playlist.component.html',
   styleUrls: ['./media-player-playlist.component.scss'],
+  imports: [
+    ThemedThumbnailComponent,
+    InfiniteScrollDirective,
+    NgForOf,
+    FileSizePipe,
+    AsyncPipe,
+  ],
+  standalone: true,
 })
 export class MediaPlayerPlaylistComponent implements OnInit {
 

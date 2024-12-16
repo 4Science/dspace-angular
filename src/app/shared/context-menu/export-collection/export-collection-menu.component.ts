@@ -1,9 +1,17 @@
 import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
+import {
   Component,
   Inject,
+  OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
@@ -20,7 +28,6 @@ import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { Process } from '../../../process-page/processes/process.model';
 import { ProcessParameter } from '../../../process-page/processes/process-parameter.model';
 import { NotificationsService } from '../../notifications/notifications.service';
-import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { ContextMenuEntryComponent } from '../context-menu-entry.component';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 
@@ -30,9 +37,16 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
 @Component({
   selector: 'ds-context-menu-export-item',
   templateUrl: './export-collection-menu.component.html',
+  standalone: true,
+  imports: [
+    NgIf,
+    AsyncPipe,
+    TranslateModule,
+  ],
 })
-@rendersContextMenuEntriesForType(DSpaceObjectType.COLLECTION)
-export class ExportCollectionMenuComponent extends ContextMenuEntryComponent {
+export class ExportCollectionMenuComponent extends ContextMenuEntryComponent implements OnInit {
+
+  isCollectionAdmin$: Observable<boolean>;
 
   /**
    * Initialize instance variables
@@ -59,6 +73,10 @@ export class ExportCollectionMenuComponent extends ContextMenuEntryComponent {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.ExportCollection);
   }
 
+  ngOnInit() {
+    this.isCollectionAdmin$ = this.isCollectionAdmin(false);
+  }
+
   /**
    * Launch a process to export collection
    */
@@ -77,9 +95,6 @@ export class ExportCollectionMenuComponent extends ContextMenuEntryComponent {
           this.notificationService.error(this.translationService.get('collection-export.error'));
         }
       });
-    this.notificationService.claimedProfile.subscribe(() => {
-      this.isCollectionAdmin(false);
-    });
   }
 
   /**

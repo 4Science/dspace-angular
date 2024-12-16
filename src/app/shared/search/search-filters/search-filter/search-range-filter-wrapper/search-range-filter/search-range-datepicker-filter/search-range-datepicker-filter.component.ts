@@ -1,3 +1,4 @@
+import { NgStyle } from '@angular/common';
 import {
   Component,
   Inject,
@@ -14,14 +15,13 @@ import {
   NgbCalendar,
   NgbDate,
   NgbDateParserFormatter,
+  NgbDatepickerModule,
   NgbDateStruct,
   NgbInputDatepicker,
 } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 import isEqual from 'lodash/isEqual';
-import {
-  BehaviorSubject,
-  Subject,
-} from 'rxjs';
+import { Subject } from 'rxjs';
 import {
   debounceTime,
   distinctUntilChanged,
@@ -33,20 +33,15 @@ import { SearchService } from '../../../../../../../core/shared/search/search.se
 import { SearchConfigurationService } from '../../../../../../../core/shared/search/search-configuration.service';
 import {
   FILTER_CONFIG,
-  IN_PLACE_SEARCH,
-  REFRESH_FILTER,
-  SCOPE,
   SearchFilterService,
 } from '../../../../../../../core/shared/search/search-filter.service';
-import { SEARCH_CONFIG_SERVICE } from '../../../../../../../my-dspace-page/my-dspace-page.component';
+import { SEARCH_CONFIG_SERVICE } from '../../../../../../../my-dspace-page/my-dspace-configuration.service';
 import { stringToNgbDateStruct } from '../../../../../../date.util';
 import {
   hasValue,
   isNotEmpty,
 } from '../../../../../../empty.util';
-import { FilterType } from '../../../../../models/filter-type.model';
 import { SearchFilterConfig } from '../../../../../models/search-filter-config.model';
-import { renderFacetForEnvironment } from '../../../search-filter-type-decorator';
 import { SearchRangeFilterComponent } from '../search-range-filter.component';
 
 
@@ -54,8 +49,13 @@ import { SearchRangeFilterComponent } from '../search-range-filter.component';
   selector: 'ds-search-range-datepicker-filter',
   templateUrl: './search-range-datepicker-filter.component.html',
   styleUrls: ['./search-range-datepicker-filter.component.scss'],
+  imports: [
+    NgbDatepickerModule,
+    TranslateModule,
+    NgStyle,
+  ],
+  standalone: true,
 })
-@renderFacetForEnvironment(FilterType.range, 'layout.search.filters.datepicker')
 export class SearchRangeDatepickerFilterComponent extends SearchRangeFilterComponent implements OnInit, OnDestroy {
 
   /**
@@ -116,13 +116,10 @@ export class SearchRangeDatepickerFilterComponent extends SearchRangeFilterCompo
     protected readonly rdbs: RemoteDataBuildService,
     protected readonly route: ActivatedRoute,
     @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
-    @Inject(IN_PLACE_SEARCH) public inPlaceSearch: boolean,
+    @Inject(PLATFORM_ID) public platformId: any,
     @Inject(FILTER_CONFIG) public filterConfig: SearchFilterConfig,
-    @Inject(REFRESH_FILTER) public refreshFilters: BehaviorSubject<boolean>,
-    @Inject(SCOPE) public scope: string,
-    @Inject(PLATFORM_ID) protected platformId: any,
   ) {
-    super(searchService, filterService, router, rdbs, route, searchConfigService, inPlaceSearch, filterConfig, refreshFilters, scope, platformId);
+    super(searchService, filterService, router, rdbs, route, searchConfigService, platformId, filterConfig);
   }
 
   public override ngOnInit() {

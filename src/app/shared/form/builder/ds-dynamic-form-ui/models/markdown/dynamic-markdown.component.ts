@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -11,12 +12,18 @@ import {
 } from '@ng-dynamic-forms/core';
 import { DynamicNGBootstrapInputComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
 
+import { MarkdownEditorComponent } from '../../../../../markdown-editor/markdown-editor.component';
 import { DynamicMarkdownModel } from './dynamic-markdown.model';
 
 @Component({
   selector: 'ds-dynamic-markdown',
   styleUrls: ['./dynamic-markdown.component.scss'],
   templateUrl: './dynamic-markdown.component.html',
+  standalone: true,
+  imports: [
+    MarkdownEditorComponent,
+    NgIf,
+  ],
 })
 /**
  * Component displaying a markdown usable in dynamic forms

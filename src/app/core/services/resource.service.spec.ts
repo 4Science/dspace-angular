@@ -6,6 +6,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 
+import { APP_DATA_SERVICES_MAP } from '../../../config/app-config.interface';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { ObjectCacheService } from '../cache/object-cache.service';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
@@ -23,6 +24,7 @@ describe('ResourceService', () => {
       imports: [HttpClientTestingModule],
       providers: [HALEndpointService, ObjectCacheService, UUIDService, RemoteDataBuildService,
         { provide: Store, useValue: {} },
+        { provide: APP_DATA_SERVICES_MAP, useValue: {} },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     });

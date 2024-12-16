@@ -1,5 +1,6 @@
 import {
   DynamicFormControlLayout,
+  DynamicFormControlRelation,
   DynamicRadioGroupModel,
   DynamicRadioGroupModelConfig,
   serializable,
@@ -16,6 +17,7 @@ export interface DynamicListModelConfig extends DynamicRadioGroupModelConfig<any
   value?: VocabularyEntry[];
   required: boolean;
   hint?: string;
+  typeBindRelations?: DynamicFormControlRelation[];
   openType?: boolean;
 }
 
@@ -23,6 +25,7 @@ export class DynamicListRadioGroupModel extends DynamicRadioGroupModel<any> {
 
   @serializable() vocabularyOptions: VocabularyOptions;
   @serializable() repeatable: boolean;
+  @serializable() typeBindRelations: DynamicFormControlRelation[];
   @serializable() groupLength: number;
   @serializable() required: boolean;
   @serializable() hint: string;
@@ -38,6 +41,7 @@ export class DynamicListRadioGroupModel extends DynamicRadioGroupModel<any> {
     this.required = config.required;
     this.hint = config.hint;
     this.value = config.value;
+    this.typeBindRelations = config.typeBindRelations ? config.typeBindRelations : [];
     this.openType = config.openType;
   }
 

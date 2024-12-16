@@ -4,7 +4,6 @@ export enum SectionsType {
   Upload = 'upload',
   License = 'license',
   CcLicense = 'cclicense',
-  collection = 'collection',
   CustomUrl = 'custom-url',
   AccessesCondition = 'accessCondition',
   SherpaPolicies = 'sherpaPolicy',
@@ -14,5 +13,6 @@ export enum SectionsType {
   Duplicates = 'duplicates',
   DetectDuplicate = 'detect-duplicate',
   Correction = 'correction',
-  Unpaywall = 'unpaywall'
+  Unpaywall = 'unpaywall',
+  ExternalUpload = 'external-upload',
 }

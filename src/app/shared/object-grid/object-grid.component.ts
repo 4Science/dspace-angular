@@ -1,4 +1,10 @@
 import {
+  AsyncPipe,
+  NgClass,
+  NgFor,
+  NgIf,
+} from '@angular/common';
+import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
@@ -7,6 +13,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import {
   BehaviorSubject,
   combineLatest as observableCombineLatest,
@@ -24,9 +31,14 @@ import { Context } from '../../core/shared/context.model';
 import { ViewMode } from '../../core/shared/view-mode.model';
 import { fadeIn } from '../animations/fade';
 import { hasValue } from '../empty.util';
+import { ErrorComponent } from '../error/error.component';
+import { ThemedLoadingComponent } from '../loading/themed-loading.component';
 import { CollectionElementLinkType } from '../object-collection/collection-element-link.type';
 import { ListableObject } from '../object-collection/shared/listable-object.model';
+import { ListableObjectComponentLoaderComponent } from '../object-collection/shared/listable-object/listable-object-component-loader.component';
+import { PaginationComponent } from '../pagination/pagination.component';
 import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
+import { BrowserOnlyPipe } from '../utils/browser-only.pipe';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.Default,
@@ -35,6 +47,8 @@ import { PaginationComponentOptions } from '../pagination/pagination-component-o
   styleUrls: ['./object-grid.component.scss'],
   templateUrl: './object-grid.component.html',
   animations: [fadeIn],
+  standalone: true,
+  imports: [PaginationComponent, NgIf, NgFor, ListableObjectComponentLoaderComponent, ErrorComponent, ThemedLoadingComponent, AsyncPipe, TranslateModule, BrowserOnlyPipe, NgClass],
 })
 
 export class ObjectGridComponent implements OnInit {
@@ -54,6 +68,11 @@ export class ObjectGridComponent implements OnInit {
   @Input() sortConfig: SortOptions;
 
   /**
+   * Whether to show the badge label or not
+   */
+  @Input() showLabel: boolean;
+
+  /**
    * Whether to show the metrics badges
    */
   @Input() showMetrics = true;
@@ -66,7 +85,7 @@ export class ObjectGridComponent implements OnInit {
   /**
    * Whether to show the thumbnail preview
    */
-  @Input() showThumbnails;
+  @Input() showThumbnails: boolean;
 
   /**
    * The whether or not the gear is hidden

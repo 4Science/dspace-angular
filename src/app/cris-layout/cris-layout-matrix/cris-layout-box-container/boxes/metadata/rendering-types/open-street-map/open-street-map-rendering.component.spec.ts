@@ -60,6 +60,7 @@ describe('OpenStreetMapRenderingComponent', () => {
         }),
         BrowserAnimationsModule,
         HttpClientTestingModule,
+        OpenStreetMapRenderingComponent,
       ],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
@@ -69,7 +70,6 @@ describe('OpenStreetMapRenderingComponent', () => {
         { provide: 'tabNameProvider', useValue: '' },
         // { provide: HttpClient, useValue: {} },
       ],
-      declarations: [ OpenStreetMapRenderingComponent ],
     })
       .compileComponents();
   });
@@ -82,6 +82,7 @@ describe('OpenStreetMapRenderingComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    expect(component.coordinates).toBe(metadataValue.value);
   });
 
 });

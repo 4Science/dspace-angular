@@ -72,7 +72,7 @@ describe('UnpaywallVersionsComponent', () => {
       getItemVersions: jasmine.createSpy(),
     });
     await TestBed.configureTestingModule({
-      declarations: [UnpaywallVersionsComponent, TranslatePipe],
+      declarations: [TranslatePipe],
       imports: [
         HttpClientTestingModule,
         CommonModule,
@@ -83,6 +83,7 @@ describe('UnpaywallVersionsComponent', () => {
             useValue: TranslateLoaderMock,
           },
         }),
+        UnpaywallVersionsComponent,
       ],
       providers: [
         { provide: ActivatedRoute, useValue: route },

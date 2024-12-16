@@ -1,0 +1,9 @@
+<div *ngIf="coordinates">
+  @defer {
+    <ds-open-street-map
+      [coordinates]="coordinates"
+      [showControlsZoom]="true"
+      [showDisplayName]="true"
+    ></ds-open-street-map>
+  }
+</div>

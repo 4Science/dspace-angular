@@ -3080,6 +3080,21 @@ export const mockSubmissionState: SubmissionObjectState = Object.assign({}, {
         isValid: false,
         removePending: false,
       } as any,
+      'external-upload': {
+        header: 'submit.progressbar.external-upload',
+        config: 'https://rest.api/dspace-spring-rest/api/config/submissionuploads/external-upload',
+        mandatory: true,
+        sectionType: 'external-upload',
+        collapsed: false,
+        enabled: true,
+        data: {
+          files: [],
+        },
+        errorsToShow: [],
+        isLoading: false,
+        isValid: false,
+        removePending: false,
+      } as any,
       'upload': {
         header: 'submit.progressbar.upload',
         config: 'https://rest.api/dspace-spring-rest/api/config/submissionuploads/upload',
@@ -3120,6 +3135,7 @@ export const mockSubmissionState: SubmissionObjectState = Object.assign({}, {
     isDiscarding: false,
     savePending: false,
     depositPending: false,
+    externalUploadPending: false,
   },
 });
 

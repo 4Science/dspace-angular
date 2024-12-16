@@ -25,7 +25,10 @@ import {
 import { Observable } from 'rxjs';
 import { InternalLinkService } from 'src/app/core/services/internal-link.service';
 
+import { toRemoteData } from '../../browse-by/browse-by-metadata/browse-by-metadata.component.spec';
+import { SearchManager } from '../../core/browse/search-manager';
 import { RemoteDataBuildService } from '../../core/cache/builders/remote-data-build.service';
+import { SortDirection } from '../../core/cache/models/sort-options.model';
 import { ObjectCacheService } from '../../core/cache/object-cache.service';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { DefaultChangeAnalyzer } from '../../core/data/default-change-analyzer.service';
@@ -63,7 +66,7 @@ describe('CarouselComponent', () => {
     getThumbnailFor(item: Item): Observable<RemoteData<Bitstream>> {
       return createSuccessfulRemoteDataObject$(new Bitstream());
     },
-    findAllByItemAndBundleName(item: Item, bundleName: string, options?: FindListOptions, ...linksToFollow: FollowLinkConfig<Bitstream>[]): Observable<RemoteData<PaginatedList<Bitstream>>> {
+    showableByItem(item: Item, bundleName: string, options?: FindListOptions, ...linksToFollow: FollowLinkConfig<Bitstream>[]): Observable<RemoteData<PaginatedList<Bitstream>>> {
       return createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream1]));
     },
   });
@@ -81,6 +84,11 @@ describe('CarouselComponent', () => {
     captionStyle: '',
     titleStyle: '',
     bundle: 'ORIGINAL',
+    discoveryConfiguration: 'person',
+    sortField: 'testField',
+    sortDirection: SortDirection.DESC,
+    numberOfItems: 5,
+    order: 'testOrder',
   };
 
   const firstItemResult = Object.assign(new ItemSearchResult(), {
@@ -170,6 +178,10 @@ describe('CarouselComponent', () => {
         })),
     });
 
+  const mockSearchManager = {
+    search: (options: any) => toRemoteData([firstItemResult]),
+  };
+
   beforeEach(waitForAsync(() => {
     notificationService = new NotificationsServiceStub();
     TestBed.configureTestingModule({
@@ -179,9 +191,7 @@ describe('CarouselComponent', () => {
             provide: TranslateLoader,
             useClass: TranslateLoaderMock,
           },
-        }),
-      ],
-      declarations: [CarouselComponent],
+        }), CarouselComponent],
       providers: [
         CarouselComponent,
         { provide: ObjectCacheService, useValue: {} },
@@ -196,6 +206,7 @@ describe('CarouselComponent', () => {
         { provide: DefaultChangeAnalyzer, useValue: {} },
         { provide: BitstreamDataService, useValue: mockBitstreamDataService },
         { provide: NativeWindowService, useValue: new NativeWindowRef() },
+        { provide: SearchManager, useValue: mockSearchManager },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
@@ -205,8 +216,7 @@ describe('CarouselComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CarouselComponent);
     component = fixture.componentInstance;
-    mockBitstreamDataService.findAllByItemAndBundleName.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream1])));
-    component.items = [firstItemResult];
+    mockBitstreamDataService.showableByItem.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream1])));
     component.carouselOptions = carouselOptions;
 
     fixture.detectChanges();
@@ -239,8 +249,7 @@ describe('CarouselComponent', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(CarouselComponent);
       component = fixture.componentInstance;
-      mockBitstreamDataService.findAllByItemAndBundleName.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream2])));
-      component.items = [secondItemResult];
+      mockBitstreamDataService.showableByItem.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream2])));
       component.carouselOptions = carouselOptions;
 
       fixture.detectChanges();

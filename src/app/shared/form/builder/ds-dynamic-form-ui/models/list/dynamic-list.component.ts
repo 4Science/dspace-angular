@@ -1,4 +1,10 @@
 import {
+  NgClass,
+  NgForOf,
+  NgIf,
+  NgTemplateOutlet,
+} from '@angular/common';
+import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
@@ -9,16 +15,20 @@ import {
 } from '@angular/core';
 import {
   AbstractControl,
+  FormsModule,
+  ReactiveFormsModule,
   UntypedFormGroup,
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms';
+import { NgbButtonsModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   DynamicCheckboxModel,
   DynamicFormControlComponent,
   DynamicFormLayoutService,
   DynamicFormValidationService,
 } from '@ng-dynamic-forms/core';
+import { TranslateModule } from '@ngx-translate/core';
 import findKey from 'lodash/findKey';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -50,6 +60,17 @@ export interface ListItem {
   selector: 'ds-dynamic-list',
   styleUrls: ['./dynamic-list.component.scss'],
   templateUrl: './dynamic-list.component.html',
+  imports: [
+    NgClass,
+    NgIf,
+    NgbButtonsModule,
+    NgForOf,
+    ReactiveFormsModule,
+    FormsModule,
+    TranslateModule,
+    NgTemplateOutlet,
+  ],
+  standalone: true,
 })
 export class DsDynamicListComponent extends DynamicFormControlComponent implements OnInit, OnDestroy {
 

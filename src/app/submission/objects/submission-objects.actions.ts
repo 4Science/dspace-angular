@@ -63,6 +63,9 @@ export const SubmissionObjectActionTypes = {
   SET_DUPLICATE_DECISION: type('dspace/submission/SET_DUPLICATE_DECISION'),
   SET_DUPLICATE_DECISION_SUCCESS: type('dspace/submission/SET_DUPLICATE_DECISION_SUCCESS'),
   SET_DUPLICATE_DECISION_ERROR: type('dspace/submission/SET_DUPLICATE_DECISION_ERROR'),
+  EXECUTE_EXTERNAL_UPLOAD: type('dspace/submission/EXECUTE_EXTERNAL_UPLOAD'),
+  EXECUTE_EXTERNAL_UPLOAD_SUCCESS: type('dspace/submission/EXECUTE_EXTERNAL_UPLOAD_SUCCESS'),
+  EXECUTE_EXTERNAL_UPLOAD_ERROR: type('dspace/submission/EXECUTE_EXTERNAL_UPLOAD_ERROR'),
 
   // Clearing active section types
   CLEAN_DUPLICATE_DETECTION: type('dspace/submission/CLEAN_DUPLICATE_DETECTION'),
@@ -1083,6 +1086,69 @@ export class SetDuplicateDecisionErrorAction implements Action {
   }
 }
 
+export class ExecuteExternalUploadAction implements Action {
+  type = SubmissionObjectActionTypes.EXECUTE_EXTERNAL_UPLOAD;
+  payload: {
+    submissionId: string;
+    sectionId: string;
+  };
+
+  /**
+   * Create a new ExecuteExternalUploadAction
+   *
+   * @param submissionId
+   *    the submission's ID
+   * @param sectionId
+   *    the section's ID
+   */
+  constructor(submissionId: string, sectionId: string) {
+    this.payload = { submissionId, sectionId };
+  }
+}
+
+export class ExecuteExternalUploadSuccessAction implements Action {
+  type = SubmissionObjectActionTypes.EXECUTE_EXTERNAL_UPLOAD_SUCCESS;
+  payload: {
+    submissionId: string;
+    sectionId: string;
+  };
+
+  /**
+   * Create a new ExecuteExternalUploadActionSuccess
+   *
+   * @param submissionId
+   *    the submission's ID
+   * @param sectionId
+   */
+  constructor(submissionId: string, sectionId: string) {
+    this.payload = { submissionId, sectionId };
+  }
+}
+
+export class ExecuteExternalUploadErrorAction implements Action {
+  type = SubmissionObjectActionTypes.EXECUTE_EXTERNAL_UPLOAD_ERROR;
+  payload: {
+    submissionId: string;
+    sectionId: string;
+    errors: SubmissionSectionError[]
+  };
+
+  /**
+   * Create a new ExecuteExternalUploadActionError
+   *
+   * @param submissionId
+   *    the submission's ID
+   * @param sectionId
+   *    the section's ID
+   * @param errors
+   *    the section's ID
+   */
+  constructor(submissionId: string,  sectionId: string, errors: SubmissionSectionError[]) {
+    this.payload = { submissionId, sectionId, errors };
+  }
+}
+
+
 
 /**
  * Export a type alias of all actions in this action group
@@ -1130,4 +1196,7 @@ export type SubmissionObjectAction = DisableSectionAction
   | SetDuplicateDecisionAction
   | SetDuplicateDecisionSuccessAction
   | SetDuplicateDecisionErrorAction
-  | UpdateSectionErrorsAction;
+  | UpdateSectionErrorsAction
+  | ExecuteExternalUploadAction
+  | ExecuteExternalUploadSuccessAction
+  | ExecuteExternalUploadErrorAction;

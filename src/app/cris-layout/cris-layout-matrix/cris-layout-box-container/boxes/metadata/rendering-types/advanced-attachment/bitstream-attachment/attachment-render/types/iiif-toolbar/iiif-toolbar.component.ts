@@ -1,4 +1,8 @@
 import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
+import {
   Component,
   Input,
   OnInit,
@@ -7,7 +11,11 @@ import {
   ActivatedRoute,
   Router,
 } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 import { of } from 'rxjs';
 
 import { environment } from '../../../../../../../../../../../../environments/environment';
@@ -21,17 +29,19 @@ import {
 } from '../../../../../../../../../../../item-page/item-page-routing-paths';
 import { isNotEmpty } from '../../../../../../../../../../../shared/empty.util';
 import { NotificationsService } from '../../../../../../../../../../../shared/notifications/notifications.service';
-import {
-  AttachmentRenderingType,
-  AttachmentTypeRendering,
-} from '../../../attachment-type.decorator';
 
 @Component({
   selector: 'ds-iiif-toolbar',
   templateUrl: './iiif-toolbar.component.html',
   styleUrls: ['./iiif-toolbar.component.scss'],
+  imports: [
+    NgbDropdownModule,
+    TranslateModule,
+    AsyncPipe,
+    NgIf,
+  ],
+  standalone: true,
 })
-@AttachmentTypeRendering(AttachmentRenderingType.IIIF, true)
 export class IIIFToolbarComponent implements OnInit {
 
   @Input()

@@ -1,3 +1,4 @@
+import { NgForOf } from '@angular/common';
 import {
   Component,
   Input,
@@ -6,9 +7,13 @@ import {
 import { SectionComponent } from '../../../../core/layout/models/section.model';
 
 @Component({
-  selector: 'ds-twitter-section',
+  selector: 'ds-base-twitter-section',
   templateUrl: './twitter-section.component.html',
   styleUrls: ['./twitter-section.component.scss'],
+  imports: [
+    NgForOf,
+  ],
+  standalone: true,
 })
 export class TwitterSectionComponent {
 

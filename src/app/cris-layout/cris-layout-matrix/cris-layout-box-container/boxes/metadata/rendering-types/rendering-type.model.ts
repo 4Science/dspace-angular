@@ -10,12 +10,15 @@ import { MetadataValue } from '../../../../../../core/shared/metadata.models';
 import { hasValue } from '../../../../../../shared/empty.util';
 import { Chips } from '../../../../../../shared/form/chips/models/chips.model';
 
+
+
 /**
  * This class defines the basic model to extends for create a new
  * field render component
  */
 @Component({
   template: '',
+  standalone: true,
 })
 export abstract class RenderingTypeModelComponent {
 
@@ -156,3 +159,4 @@ export abstract class RenderingTypeModelComponent {
     return new Chips(initChipsValues,'value');
   }
 }
+

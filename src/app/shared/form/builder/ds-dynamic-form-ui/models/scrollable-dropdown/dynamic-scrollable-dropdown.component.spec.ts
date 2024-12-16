@@ -7,7 +7,6 @@ import {
 import {
   ComponentFixture,
   fakeAsync,
-  inject,
   TestBed,
   tick,
   waitForAsync,
@@ -29,9 +28,14 @@ import {
   DynamicFormValidationService,
 } from '@ng-dynamic-forms/core';
 import { DynamicFormsNGBootstrapUIModule } from '@ng-dynamic-forms/ui-ng-bootstrap';
+import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import {
+  InfiniteScrollDirective,
+  InfiniteScrollModule,
+} from 'ngx-infinite-scroll';
 
+import { APP_DATA_SERVICES_MAP } from '../../../../../../../config/app-config.interface';
 import { buildPaginatedList } from '../../../../../../core/data/paginated-list.model';
 import { PageInfo } from '../../../../../../core/shared/page-info.model';
 import { VocabularyEntry } from '../../../../../../core/submission/vocabularies/models/vocabulary-entry.model';
@@ -97,24 +101,23 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
         DynamicFormsCoreModule,
         DynamicFormsNGBootstrapUIModule,
         FormsModule,
-        InfiniteScrollModule,
+        InfiniteScrollDirective,
         ReactiveFormsModule,
         NgbModule,
         TranslateModule.forRoot(),
-      ],
-      declarations: [
         DsDynamicScrollableDropdownComponent,
         TestComponent,
-      ], // declare the test component
+      ],
       providers: [
         ChangeDetectorRef,
-        DsDynamicScrollableDropdownComponent,
         { provide: VocabularyService, useValue: vocabularyServiceStub },
         { provide: DynamicFormLayoutService, useValue: mockDynamicFormLayoutService },
         { provide: DynamicFormValidationService, useValue: mockDynamicFormValidationService },
         { provide: FormBuilderService },
         { provide: SubmissionService, useClass: SubmissionServiceStub },
+        { provide: APP_DATA_SERVICES_MAP, useValue: {} },
         NgbModal,
+        provideMockStore(),
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     });
@@ -136,10 +139,9 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
       testComp = testFixture.componentInstance;
     });
 
-    it('should create DsDynamicScrollableDropdownComponent', inject([DsDynamicScrollableDropdownComponent], (app: DsDynamicScrollableDropdownComponent) => {
-
-      expect(app).toBeDefined();
-    }));
+    it('should create DsDynamicScrollableDropdownComponent', () => {
+      expect(testComp).toBeDefined();
+    });
   });
 
   describe('', () => {
@@ -179,7 +181,6 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
       it('should display other dropdown menu option', () => {
         const de = scrollableDropdownFixture.debugElement.query(By.css('input.form-control'));
         const btnEl = de.nativeElement;
-
         btnEl.click();
         scrollableDropdownFixture.detectChanges();
 
@@ -188,22 +189,23 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
         scrollableDropdownComp.pageInfo.totalPages = 1;
         scrollableDropdownFixture.detectChanges();
 
-        const deMenu = scrollableDropdownFixture.debugElement.query(By.css('#otherOption'));
+        const deMenu = scrollableDropdownFixture.debugElement.query(By.css('[data-test="otherOption"]'));
 
         expect(deMenu).toBeTruthy();
       });
 
       it('should not display other dropdown menu option', () => {
+        const de = scrollableDropdownFixture.debugElement.query(By.css('input.form-control'));
+        const btnEl = de.nativeElement;
+        btnEl.click();
+        scrollableDropdownFixture.detectChanges();
+
         scrollableDropdownComp.model.openType = true;
         scrollableDropdownComp.pageInfo.currentPage = 2;
         scrollableDropdownComp.pageInfo.totalPages = 3;
-        const de = scrollableDropdownFixture.debugElement.query(By.css('input.form-control'));
-        const btnEl = de.nativeElement;
-
-        btnEl.click();
-
         scrollableDropdownFixture.detectChanges();
-        const deMenu = scrollableDropdownFixture.debugElement.query(By.css('#otherOption'));
+
+        const deMenu = scrollableDropdownFixture.debugElement.query(By.css('[data-test="otherOption"]'));
 
         expect(deMenu).toBeFalsy();
       });
@@ -232,7 +234,7 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
         scrollableDropdownFixture.detectChanges();
 
         de = scrollableDropdownFixture.debugElement.queryAll(By.css('button.dropdown-item'));
-        btnEl = de[0].nativeElement;
+        btnEl = de[1].nativeElement;
 
         btnEl.dispatchEvent(mousedownEvent);
         scrollableDropdownFixture.detectChanges();
@@ -248,17 +250,17 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
         const de = scrollableDropdownFixture.debugElement.query(By.css('input.form-control'));
         let btnEl = de.nativeElement;
 
-        btnEl.click();
-        scrollableDropdownFixture.detectChanges();
+        btnEl.click();scrollableDropdownFixture.detectChanges();
 
         scrollableDropdownComp.model.openType = true;
         scrollableDropdownComp.pageInfo.currentPage = 2;
         scrollableDropdownComp.pageInfo.totalPages = 1;
+        scrollableDropdownFixture.detectChanges();
         scrollableDropdownComp.otherListEntry = selectedValue.value;
 
         scrollableDropdownFixture.detectChanges();
 
-        btnEl = scrollableDropdownFixture.debugElement.nativeElement.querySelector('#otherOptionBtn');
+        btnEl = scrollableDropdownFixture.debugElement.nativeElement.querySelector('[data-test="otherOptionBtn"]');
 
         btnEl.click();
         scrollableDropdownFixture.detectChanges();
@@ -335,6 +337,13 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
 @Component({
   selector: 'ds-test-cmp',
   template: ``,
+  standalone: true,
+  imports: [DynamicFormsCoreModule,
+    DynamicFormsNGBootstrapUIModule,
+    FormsModule,
+    InfiniteScrollModule,
+    ReactiveFormsModule,
+    NgbModule],
 })
 class TestComponent {
 

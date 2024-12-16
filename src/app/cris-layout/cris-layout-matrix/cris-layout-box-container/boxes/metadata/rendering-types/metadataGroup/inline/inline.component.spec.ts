@@ -15,12 +15,14 @@ import {
 } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
+import { CRIS_FIELD_RENDERING_MAP } from '../../../../../../../../../config/app-config.interface';
 import { LayoutField } from '../../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../../core/shared/item.model';
 import { TranslateLoaderMock } from '../../../../../../../../shared/mocks/translate-loader.mock';
 import { DsDatePipe } from '../../../../../../../pipes/ds-date.pipe';
 import { LoadMoreService } from '../../../../../../../services/load-more.service';
 import { MetadataRenderComponent } from '../../../row/metadata-container/metadata-render/metadata-render.component';
+import { layoutBoxesMap } from '../../metadata-box-rendering-map';
 import { TextComponent } from '../../text/text.component';
 import { InlineComponent } from './inline.component';
 
@@ -90,23 +92,23 @@ describe('Inline component when .first and .last is not in rendering configurati
           provide: TranslateLoader,
           useClass: TranslateLoaderMock,
         },
-      }), BrowserAnimationsModule],
+      }), BrowserAnimationsModule, DsDatePipe,
+      MetadataRenderComponent,
+      InlineComponent,
+      TextComponent],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
         { provide: 'renderingSubTypeProvider', useValue: '' },
         LoadMoreService,
         { provide: 'tabNameProvider', useValue: '' },
-      ],
-      declarations: [
-        DsDatePipe,
-        MetadataRenderComponent,
-        InlineComponent,
-        TextComponent,
+        { provide: CRIS_FIELD_RENDERING_MAP, useValue: layoutBoxesMap },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(InlineComponent, {
       set: { changeDetection: ChangeDetectionStrategy.OnPush },
+    // }).overrideComponent(InlineComponent, {
+    //   remove: { imports: [MetadataRenderComponent] },
     }).compileComponents();
   }));
 
@@ -241,19 +243,17 @@ describe('Inline component when .first and .last is present in rendering configu
           provide: TranslateLoader,
           useClass: TranslateLoaderMock,
         },
-      }), BrowserAnimationsModule],
+      }), BrowserAnimationsModule, DsDatePipe,
+      MetadataRenderComponent,
+      InlineComponent,
+      TextComponent],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
+        { provide: CRIS_FIELD_RENDERING_MAP, useValue: layoutBoxesMap },
         LoadMoreService,
-      ],
-      declarations: [
-        DsDatePipe,
-        MetadataRenderComponent,
-        InlineComponent,
-        TextComponent,
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(InlineComponent, {

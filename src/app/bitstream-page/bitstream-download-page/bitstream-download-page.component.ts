@@ -1,6 +1,8 @@
 import {
+  AsyncPipe,
   isPlatformServer,
   Location,
+  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -12,6 +14,7 @@ import {
   ActivatedRoute,
   Router,
 } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import {
   combineLatest as observableCombineLatest,
   Observable,
@@ -51,6 +54,12 @@ import {
 @Component({
   selector: 'ds-bitstream-download-page',
   templateUrl: './bitstream-download-page.component.html',
+  imports: [
+    AsyncPipe,
+    TranslateModule,
+    NgIf,
+  ],
+  standalone: true,
 })
 /**
  * Page component for downloading a bitstream

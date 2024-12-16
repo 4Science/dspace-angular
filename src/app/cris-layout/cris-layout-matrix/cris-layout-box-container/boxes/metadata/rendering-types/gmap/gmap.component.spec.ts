@@ -12,6 +12,7 @@ import {
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
+import { GooglemapsComponent } from '../../../../../../../shared/googlemaps/googlemaps.component';
 import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate-loader.mock';
 import { GmapComponent } from './gmap.component';
 
@@ -56,7 +57,7 @@ describe('GmapComponent', () => {
           provide: TranslateLoader,
           useClass: TranslateLoaderMock,
         },
-      }), BrowserAnimationsModule],
+      }), BrowserAnimationsModule, GmapComponent],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
@@ -64,8 +65,12 @@ describe('GmapComponent', () => {
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
       ],
-      declarations: [ GmapComponent ],
     })
+      .overrideComponent(GmapComponent, {
+        remove: {
+          imports: [GooglemapsComponent],
+        },
+      })
       .compileComponents();
   });
 

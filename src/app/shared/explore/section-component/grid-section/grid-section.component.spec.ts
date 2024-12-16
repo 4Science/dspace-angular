@@ -23,6 +23,7 @@ import { LocaleService } from '../../../../core/locale/locale.service';
 import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
 import { SearchService } from '../../../../core/shared/search/search.service';
 import { Site } from '../../../../core/shared/site.model';
+import { ThemedThumbnailComponent } from '../../../../thumbnail/themed-thumbnail.component';
 import { TranslateLoaderMock } from '../../../mocks/translate-loader.mock';
 import { createSuccessfulRemoteDataObject$ } from '../../../remote-data.utils';
 import { SearchResult } from '../../../search/models/search-result.model';
@@ -85,15 +86,18 @@ describe('GridSectionComponent', () => {
             provide: TranslateLoader,
             useClass: TranslateLoaderMock,
           },
-        }),
-      ],
-      declarations: [GridSectionComponent],
+        }), GridSectionComponent],
       providers: [GridSectionComponent,
         { provide: SearchService, useValue: searchServiceStub },
         { provide: LocaleService, useValue: mockLocaleService },
       ],
       schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
+    }).overrideComponent(GridSectionComponent, {
+      remove: {
+        imports: [ThemedThumbnailComponent],
+      },
+    })
+      .compileComponents();
 
   }));
 

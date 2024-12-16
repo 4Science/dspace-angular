@@ -1,4 +1,9 @@
 import {
+  AsyncPipe,
+  NgForOf,
+  NgIf,
+} from '@angular/common';
+import {
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -9,9 +14,13 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
+import {
+  FormsModule,
+  UntypedFormGroup,
+} from '@angular/forms';
 import {
   NgbDropdown,
+  NgbDropdownModule,
   NgbModal,
 } from '@ng-bootstrap/ng-bootstrap';
 import {
@@ -19,6 +28,8 @@ import {
   DynamicFormLayoutService,
   DynamicFormValidationService,
 } from '@ng-dynamic-forms/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import {
   Observable,
   of as observableOf,
@@ -59,6 +70,16 @@ import { DynamicScrollableDropdownModel } from './dynamic-scrollable-dropdown.mo
   selector: 'ds-dynamic-scrollable-dropdown',
   styleUrls: ['./dynamic-scrollable-dropdown.component.scss'],
   templateUrl: './dynamic-scrollable-dropdown.component.html',
+  imports: [
+    NgbDropdownModule,
+    NgIf,
+    AsyncPipe,
+    InfiniteScrollDirective,
+    NgForOf,
+    TranslateModule,
+    FormsModule,
+  ],
+  standalone: true,
 })
 export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownMenu', { read: ElementRef }) dropdownMenu: ElementRef;
@@ -335,6 +356,7 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
           list.pageInfo.totalElements,
           list.pageInfo.totalPages,
         );
+        this.selectedIndex = 0;
         // After all entries have been retrieved, if the component is an opendropdown then
         // check if the current value is a custom value and add it to the list
         const isLastPage = this.pageInfo.currentPage === this.pageInfo.totalPages;

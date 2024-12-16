@@ -10,9 +10,11 @@ import { ThemedComponent } from '../../../theme-support/themed.component';
 import { GridSectionComponent } from './grid-section.component';
 
 @Component({
-  selector: 'ds-themed-grid-section',
+  selector: 'ds-grid-section',
   styleUrls: [],
   templateUrl: '../../../theme-support/themed.component.html',
+  standalone: true,
+  imports: [GridSectionComponent],
 })
 export class ThemedGridSectionComponent extends ThemedComponent<GridSectionComponent> {
 

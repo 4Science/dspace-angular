@@ -8,20 +8,19 @@ import { map } from 'rxjs/operators';
 import { ChartData } from '../../../../../charts/models/chart-data';
 import { ChartSeries } from '../../../../../charts/models/chart-series';
 import { ChartType } from '../../../../../charts/models/chart-type';
-import { PaginatedList } from '../../../../../core/data/paginated-list.model';
-import { RemoteData } from '../../../../../core/data/remote-data';
-import { getAllCompletedRemoteData } from '../../../../../core/shared/operators';
 import { FacetValue } from '../../../models/facet-value.model';
 import { FacetValues } from '../../../models/facet-values.model';
 import { SearchFacetFilterComponent } from '../../../search-filters/search-filter/search-facet-filter/search-facet-filter.component';
 
-@Component({
-  selector: 'ds-search-chart-filter',
-  template: ``,
-})
+
 /**
  * Component that represents a search chart filter
  */
+@Component({
+  selector: 'ds-search-chart-filter',
+  template: ``,
+  standalone: true,
+})
 export class SearchChartFilterComponent extends SearchFacetFilterComponent implements OnInit {
 
   /**
@@ -94,7 +93,7 @@ export class SearchChartFilterComponent extends SearchFacetFilterComponent imple
       });
 
       if (this.currentUrl) {
-        const currentQueryParams = this.currentUrl.split('?')[1].split('&');
+        const currentQueryParams = (this.currentUrl.split('?')[1] || '').split('&');
         const pageParam = currentQueryParams.filter((param) => param.includes('page'));
         if (pageParam.length > 0) {
           const paramName = pageParam[0].split('=')[0];
@@ -112,11 +111,10 @@ export class SearchChartFilterComponent extends SearchFacetFilterComponent imple
   }
 
   protected getInitData(): Observable<ChartSeries[] | ChartData[]> {
-    return this.filterValues$.pipe(
-      getAllCompletedRemoteData(),
-      map((facetValues: RemoteData<PaginatedList<FacetValue>[]>) => {
+    return this.facetValues$.pipe(
+      map((facetValues: FacetValues[]) => {
         const values = [];
-        facetValues.payload.forEach((facetValue: FacetValues) => {
+        facetValues.forEach((facetValue: FacetValues) => {
           this.xAxisLabel = this.xAxisLabel.replace(this.keyPlaceholder, facetValue.name);
           this.yAxisLabel = this.yAxisLabel.replace(this.keyPlaceholder, facetValue.name);
           if (this.isReverseChart) {

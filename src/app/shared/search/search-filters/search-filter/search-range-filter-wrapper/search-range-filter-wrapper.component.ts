@@ -1,4 +1,9 @@
 import {
+  AsyncPipe,
+  NgComponentOutlet,
+  NgForOf,
+} from '@angular/common';
+import {
   Component,
   Inject,
   Injector,
@@ -7,7 +12,6 @@ import {
   PLATFORM_ID,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 
 import { environment } from '../../../../../../environments/environment';
 import { RemoteDataBuildService } from '../../../../../core/cache/builders/remote-data-build.service';
@@ -18,28 +22,30 @@ import {
   FILTER_CONFIG,
   IN_PLACE_SEARCH,
   REFRESH_FILTER,
-  SCOPE,
   SearchFilterService,
 } from '../../../../../core/shared/search/search-filter.service';
-import { SEARCH_CONFIG_SERVICE } from '../../../../../my-dspace-page/my-dspace-page.component';
+import { SEARCH_CONFIG_SERVICE } from '../../../../../my-dspace-page/my-dspace-configuration.service';
 import { FilterType } from '../../../models/filter-type.model';
-import { SearchFilterConfig } from '../../../models/search-filter-config.model';
 import {
   facetLoad,
   SearchFacetFilterComponent,
 } from '../search-facet-filter/search-facet-filter.component';
-import {
-  renderFacetFor,
-  renderFilterTypeEnvironment,
-} from '../search-filter-type-decorator';
+import { SearchFacetRangeOptionComponent } from '../search-facet-filter-options/search-facet-range-option/search-facet-range-option.component';
+import { renderFilterTypeEnvironment } from '../search-filter-type-environment-decorator';
 
 @Component({
   selector: 'ds-search-range-filter-wrapper',
   templateUrl: './search-range-filter-wrapper.component.html',
   styleUrls: ['./search-range-filter-wrapper.component.scss'],
   animations: [facetLoad],
+  imports: [
+    SearchFacetRangeOptionComponent,
+    AsyncPipe,
+    NgComponentOutlet,
+    NgForOf,
+  ],
+  standalone: true,
 })
-@renderFacetFor(FilterType.range)
 export class SearchRangeFilterWrapperComponent extends SearchFacetFilterComponent implements OnInit, OnDestroy {
 
   /**
@@ -57,14 +63,10 @@ export class SearchRangeFilterWrapperComponent extends SearchFacetFilterComponen
     protected rdbs: RemoteDataBuildService,
     protected router: Router,
     @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
-    @Inject(IN_PLACE_SEARCH) public inPlaceSearch: boolean,
-    @Inject(FILTER_CONFIG) public filterConfig: SearchFilterConfig,
-    @Inject(REFRESH_FILTER) public refreshFilters: BehaviorSubject<boolean>,
-    @Inject(SCOPE) public scope: string,
-    @Inject(PLATFORM_ID) protected platformId: any,
     private injector: Injector,
+    @Inject(PLATFORM_ID) public platformId: any,
   ) {
-    super(searchService, filterService, rdbs, router, searchConfigService, inPlaceSearch, filterConfig, refreshFilters, scope);
+    super(searchService, filterService, rdbs, router, searchConfigService);
   }
 
   ngOnInit(): void {

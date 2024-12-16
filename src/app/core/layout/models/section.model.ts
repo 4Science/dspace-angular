@@ -64,6 +64,7 @@ export interface TopSection extends SectionComponent {
   componentType: 'top';
   numberOfItems: number;
   showThumbnails: boolean;
+  template: TopSectionTemplateType;
   showAsCard: boolean;
   showLayoutSwitch: boolean;
   defaultLayoutMode: LayoutModeEnum;
@@ -111,6 +112,14 @@ export interface TopSectionColumn {
   style: string;
   metadataField: string;
   titleKey: string;
+}
+
+/**
+ * Represents the type of template to use for the section
+ */
+export enum TopSectionTemplateType {
+  DEFAULT = 'default', // CRIS default template
+  CARD = 'card', // Card template
 }
 
 export enum LayoutModeEnum {

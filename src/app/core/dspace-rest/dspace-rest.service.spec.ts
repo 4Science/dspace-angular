@@ -58,7 +58,9 @@ describe('DspaceRestService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [DspaceRestService],
+      providers: [
+        DspaceRestService,
+      ],
     });
 
     dspaceRestService = TestBed.inject(DspaceRestService);

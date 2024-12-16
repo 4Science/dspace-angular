@@ -5,11 +5,18 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NuMarkdownComponent } from '@ng-util/markdown';
 
 @Component({
   selector: 'ds-markdown-editor',
   templateUrl: './markdown-editor.component.html',
   styleUrls: ['./markdown-editor.component.scss'],
+  standalone: true,
+  imports: [
+    FormsModule,
+    NuMarkdownComponent,
+  ],
 })
 export class MarkdownEditorComponent implements OnInit {
   // to allow multiple textarea on the same screen, need to set an uniqueId for the textarea
@@ -18,6 +25,12 @@ export class MarkdownEditorComponent implements OnInit {
    * Markdown Editor String value
    */
   @Input() editValue: string;
+
+  /**
+   * Indicates whether the markdown editor is required.
+   */
+  @Input() required: boolean;
+
   /**
    * Markdown Editor String value Emitter
    */

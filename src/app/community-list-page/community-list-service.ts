@@ -25,7 +25,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { AppState } from '../app.reducer';
 import { getCollectionPageRoute } from '../collection-page/collection-page-routing-paths';
-import { getCommunityPageRoute } from '../community-page/community-page-routing-paths';
+import { getSubCommunitiesAndCollectionsPageRoute } from '../community-page/community-page-routing-paths';
 import { CollectionDataService } from '../core/data/collection-data.service';
 import { CommunityDataService } from '../core/data/community-data.service';
 import { FindListOptions } from '../core/data/find-list-options.model';
@@ -81,7 +81,7 @@ export const toFlatNode = (
   parent,
   payload: c,
   isShowMoreNode: false,
-  route: c instanceof Community ? getCommunityPageRoute(c.id) : getCollectionPageRoute(c.id),
+  route: c instanceof Community ? getSubCommunitiesAndCollectionsPageRoute(c.id) : getCollectionPageRoute(c.id),
 });
 
 /**
@@ -111,7 +111,7 @@ const loadingNodeSelector = createSelector(communityListStateSelector, (communit
  * Service class for the community list, responsible for the creating of the flat list used by communityList dataSource
  *  and connection to the store to retrieve and save the state of the community list
  */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CommunityListService {
 
   private pageSize: number;

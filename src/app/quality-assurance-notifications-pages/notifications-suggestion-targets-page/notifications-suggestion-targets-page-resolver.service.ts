@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
-  Resolve,
+  ResolveFn,
   RouterStateSnapshot,
 } from '@angular/router';
 
@@ -18,22 +17,15 @@ export interface AdminNotificationsPublicationClaimPageParams {
 /**
  * This class represents a resolver that retrieve the route data before the route is activated.
  */
-@Injectable()
 
-export class AdminNotificationsPublicationClaimPageResolver implements Resolve<AdminNotificationsPublicationClaimPageParams> {
 
-  /**
-   * Method for resolving the parameters in the current route.
-   * @param {ActivatedRouteSnapshot} route The current ActivatedRouteSnapshot
-   * @param {RouterStateSnapshot} state The current RouterStateSnapshot
-   * @returns AdminNotificationsSuggestionTargetsPageParams Emits the route parameters
-   */
-
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): AdminNotificationsPublicationClaimPageParams {
-    return {
-      pageId: route.queryParams.pageId,
-      pageSize: parseInt(route.queryParams.pageSize, 10),
-      currentPage: parseInt(route.queryParams.page, 10),
-    };
-  }
-}
+export const adminNotificationsPublicationClaimPageResolver: ResolveFn<AdminNotificationsPublicationClaimPageParams> = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot,
+): AdminNotificationsPublicationClaimPageParams => {
+  return {
+    pageId: route.queryParams.pageId,
+    pageSize: parseInt(route.queryParams.pageSize, 10),
+    currentPage: parseInt(route.queryParams.page, 10),
+  };
+};

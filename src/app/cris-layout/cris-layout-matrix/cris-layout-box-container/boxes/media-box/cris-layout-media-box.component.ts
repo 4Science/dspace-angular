@@ -11,8 +11,7 @@ import {
   MediaBoxConfiguration,
 } from '../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../core/shared/item.model';
-import { RenderCrisLayoutBoxFor } from '../../../../decorators/cris-layout-box.decorator';
-import { LayoutBox } from '../../../../enums/layout-box.enum';
+import { MediaPlayerComponent } from '../../../../../shared/media-player/media-player.component';
 import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-component.model';
 
 @Component({
@@ -20,8 +19,11 @@ import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-
   templateUrl: './cris-layout-media-box.component.html',
   styleUrls: ['./cris-layout-media-box.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MediaPlayerComponent,
+  ],
 })
-@RenderCrisLayoutBoxFor(LayoutBox.VIDEOVIEWER)
 export class CrisLayoutMediaBoxComponent extends CrisLayoutBoxModelComponent implements OnInit {
   configuration: string;
 

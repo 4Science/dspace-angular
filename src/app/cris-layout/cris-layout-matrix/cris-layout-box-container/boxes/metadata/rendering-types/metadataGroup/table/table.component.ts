@@ -1,16 +1,22 @@
 import {
+  AsyncPipe,
+  NgFor,
+  NgIf,
+} from '@angular/common';
+import {
   Component,
   Inject,
 } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 
 import { LayoutField } from '../../../../../../../../../app/core/layout/models/box.model';
 import { Item } from '../../../../../../../../core/shared/item.model';
 import { LoadMoreService } from '../../../../../../../services/load-more.service';
-import {
-  FieldRenderingType,
-  MetadataBoxFieldRendering,
-} from '../../metadata-box.decorator';
+import { MetadataRenderComponent } from '../../../row/metadata-container/metadata-render/metadata-render.component';
 import { MetadataGroupComponent } from '../metadata-group.component';
 
 /**
@@ -20,8 +26,16 @@ import { MetadataGroupComponent } from '../metadata-group.component';
   selector: 'ds-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    NgFor,
+    MetadataRenderComponent,
+    AsyncPipe,
+    NgbTooltipModule,
+    TranslateModule,
+  ],
 })
-@MetadataBoxFieldRendering(FieldRenderingType.TABLE, true)
 export class TableComponent extends MetadataGroupComponent {
   constructor(
     @Inject('fieldProvider') public fieldProvider: LayoutField,

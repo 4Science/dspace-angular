@@ -1,9 +1,19 @@
 import {
+  CdkDrag,
   CdkDragDrop,
+  CdkDropList,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
-import { isPlatformBrowser } from '@angular/common';
 import {
+  AsyncPipe,
+  isPlatformBrowser,
+  NgClass,
+  NgForOf,
+  NgIf,
+  NgTemplateOutlet,
+} from '@angular/common';
+import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Inject,
@@ -15,10 +25,17 @@ import {
 } from '@angular/core';
 import {
   Router,
+  RouterLink,
   UrlTree,
 } from '@angular/router';
-import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import {
+  NgbTooltip,
+  NgbTooltipModule,
+} from '@ng-bootstrap/ng-bootstrap';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 import isObject from 'lodash/isObject';
 import {
   BehaviorSubject,
@@ -30,6 +47,7 @@ import {
 } from 'rxjs/operators';
 
 import { isNotEmpty } from '../../empty.util';
+import { AuthorityConfidenceStateDirective } from '../directives/authority-confidence-state.directive';
 import { Chips } from './models/chips.model';
 import { ChipsItem } from './models/chips-item.model';
 
@@ -38,6 +56,20 @@ const TOOLTIP_TEXT_LIMIT = 21;
   selector: 'ds-chips',
   styleUrls: ['./chips.component.scss'],
   templateUrl: './chips.component.html',
+  imports: [
+    NgbTooltipModule,
+    NgClass,
+    NgForOf,
+    AsyncPipe,
+    AuthorityConfidenceStateDirective,
+    NgIf,
+    TranslateModule,
+    CdkDrag,
+    CdkDropList,
+    NgTemplateOutlet,
+    RouterLink,
+  ],
+  standalone: true,
 })
 export class ChipsComponent implements OnChanges {
   @Input() chips: Chips;
@@ -61,6 +93,7 @@ export class ChipsComponent implements OnChanges {
 
   constructor(
     @Inject(PLATFORM_ID) protected platformId: string,
+    private cdr: ChangeDetectorRef,
     private translate: TranslateService,
     private router: Router,
   ) {
@@ -142,6 +175,7 @@ export class ChipsComponent implements OnChanges {
         textToDisplay.push(chipsItem.display);
         canShowToolTip = this.toolTipVisibleCheck(chipsItem.display);
       }
+      this.cdr.detectChanges();
       if ((!chipsItem.hasIcons() || !chipsItem.hasVisibleIcons() || field) && canShowToolTip) {
         this.tipText$.next(textToDisplay);
         tooltip.open();
@@ -194,9 +228,11 @@ export class ChipsComponent implements OnChanges {
     }
     return text;
   }
+
   getHrefRoot(url) {
     return url.split('?')[0];
   }
+
   getHrefQueryParams(url) {
     const tree: UrlTree = this.router.parseUrl(url);
     return tree.queryParams;

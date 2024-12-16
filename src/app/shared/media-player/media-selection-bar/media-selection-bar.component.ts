@@ -1,4 +1,10 @@
 import {
+  AsyncPipe,
+  DatePipe,
+  NgForOf,
+  NgIf,
+} from '@angular/common';
+import {
   Component,
   ElementRef,
   EventEmitter,
@@ -8,6 +14,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import {
   BehaviorSubject,
   Observable,
@@ -38,6 +45,14 @@ import { MediaSelectionBarItem } from './media-selection-bar-item.model';
   selector: 'ds-media-selection-bar',
   templateUrl: './media-selection-bar.component.html',
   styleUrls: ['./media-selection-bar.component.scss'],
+  imports: [
+    InfiniteScrollDirective,
+    DatePipe,
+    AsyncPipe,
+    NgForOf,
+    NgIf,
+  ],
+  standalone: true,
 })
 export class MediaSelectionBarComponent implements OnChanges {
   /**

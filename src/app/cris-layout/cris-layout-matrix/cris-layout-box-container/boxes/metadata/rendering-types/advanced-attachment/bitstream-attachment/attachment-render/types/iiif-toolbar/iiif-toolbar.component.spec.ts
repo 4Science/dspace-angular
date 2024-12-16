@@ -59,13 +59,12 @@ describe('IiifToolbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IIIFToolbarComponent ],
-      imports: [ RouterTestingModule.withRoutes([]), TranslateModule.forRoot() ],
+      imports: [RouterTestingModule.withRoutes([]), TranslateModule.forRoot(), IIIFToolbarComponent],
       providers: [
         { provide: NotificationsService, useValue: NotificationsServiceStub },
         { provide: AuthorizationDataService, useClass: AuthorizationDataServiceStub },
       ],
-      schemas: [ NO_ERRORS_SCHEMA ],
+      schemas: [NO_ERRORS_SCHEMA],
     })
       .compileComponents();
   });

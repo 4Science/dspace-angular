@@ -1,5 +1,6 @@
 import { Inject } from '@angular/core';
 import { DynamicFormControlLayout } from '@ng-dynamic-forms/core';
+import { TranslateService } from '@ngx-translate/core';
 
 import { isNotEmpty } from '../../../empty.util';
 import {
@@ -27,22 +28,19 @@ export class DropdownFieldParser extends FieldParser {
     @Inject(INIT_FORM_VALUES) initFormValues,
     @Inject(PARSER_OPTIONS) parserOptions: ParserOptions,
     @Inject(SECURITY_CONFIG)  securityConfig: any = null,
+    protected translateService: TranslateService,
   ) {
-    super(submissionId, configData, initFormValues, parserOptions, securityConfig);
+    super(submissionId, configData, initFormValues, parserOptions, securityConfig, translateService);
   }
 
-  public modelFactory(fieldValue?: FormFieldMetadataValueObject | any, label?: boolean): any {
+  public modelFactory(fieldValue?: FormFieldMetadataValueObject, label?: boolean): any {
     const dropdownModelConfig: DynamicScrollableDropdownModelConfig = this.initModel(null, label);
     let layout: DynamicFormControlLayout;
 
     if (isNotEmpty(this.configData.selectableMetadata[0].controlledVocabulary)) {
       this.setVocabularyOptions(dropdownModelConfig, this.parserOptions.collectionUUID);
       this.setValues(dropdownModelConfig, fieldValue, true);
-      if (this.configData.input.type === ParserType.OpenDropdown) {
-        dropdownModelConfig.openType = true;
-      } else {
-        dropdownModelConfig.openType = false;
-      }
+      dropdownModelConfig.openType = this.configData.input.type === ParserType.OpenDropdown.valueOf();
       layout = {
         element: {
           control: 'col',
@@ -51,8 +49,7 @@ export class DropdownFieldParser extends FieldParser {
           host: 'col',
         },
       };
-      const dropdownModel = new DynamicScrollableDropdownModel(dropdownModelConfig, layout);
-      return dropdownModel;
+      return new DynamicScrollableDropdownModel(dropdownModelConfig, layout);
     } else {
       throw  Error(`Controlled Vocabulary name is not available. Please check the form configuration file.`);
     }

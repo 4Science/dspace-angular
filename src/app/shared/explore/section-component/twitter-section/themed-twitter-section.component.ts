@@ -10,9 +10,11 @@ import {
 } from './twitter-section.component';
 
 @Component({
-  selector: 'ds-themed-twitter-section',
+  selector: 'ds-twitter-section',
   styleUrls: [],
   templateUrl: '../../../theme-support/themed.component.html',
+  standalone: true,
+  imports: [TwitterSectionComponent],
 })
 export class ThemedTwitterSectionComponent extends ThemedComponent<TwitterSectionComponent> {
 
