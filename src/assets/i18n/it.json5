@@ -13313,6 +13313,7 @@
   "layout.field.label.Person.crisrp.name.variant": "Varianti del nome",
   // "layout.field.label.Person.glamperson.gender": "Gender",
   "layout.field.label.Person.glamperson.gender": "Genere",
+  // "layout.field.label.Person.glamperson.role": "Role",
   "layout.field.label.Person.glamperson.role": "Ruolo",
   // "layout.field.label.Person.glamperson.nationality": "Nationality",
   "layout.field.label.Person.glamperson.nationality": "Nazionalità della Persona",
@@ -14318,7 +14319,8 @@
   "layout.field.label.JournalIssue.dc.relation.path": "Percorso",
   // "layout.field.label.JournalIssue.dc.relation.aggregation": "Aggregation",
   "layout.field.label.JournalIssue.dc.relation.aggregation": "Aggregazione",
-  // "layout.field.label.JournalIssue.BITSTREAM": "File(s)",
+  // "layout.field.label.JournalIssue.BITSTREAM": "File / Documantation",
+  // TODO Source message changed - Revise the translation
   "layout.field.label.JournalIssue.BITSTREAM": "File / Documentazione",
   // "layout.field.label.ScientificMaterial.BITSTREAM": "File / Documantation",
   "layout.field.label.ScientificMaterial.BITSTREAM": "File / Documentazione",
