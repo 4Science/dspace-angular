@@ -682,13 +682,17 @@ export class MenuResolver implements Resolve<boolean> {
    * Create menu sections dependent on whether or not the current user is a site administrator
    */
   createSiteAdministratorMenuSections() {
-    this.authorizationService.isAuthorized(FeatureID.AdministratorOf).subscribe((authorized) => {
+    observableCombineLatest([
+      this.authorizationService.isAuthorized(FeatureID.AdministratorOf),
+      this.authorizationService.isAuthorized(FeatureID.IsCollectionAdmin),
+      this.authorizationService.isAuthorized(FeatureID.IsCommunityAdmin),
+    ]).subscribe(([authorized, isCollectionAdmin, isCommunityAdmin]) => {
       const menuList = [
         /* Community List */
         {
           id: 'communities_and_collections',
           active: false,
-          visible: authorized,
+          visible: !environment.layout.navbar.showCommunityCollection && (isCollectionAdmin || isCommunityAdmin || authorized),
           model: {
             type: MenuItemType.LINK,
             text: 'menu.section.communities_and_collections',
