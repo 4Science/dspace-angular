@@ -9304,6 +9304,12 @@
   // "sorting.organisation.address.foundingDate.DESC": "Founding Date Descending",
   "sorting.organisation.address.foundingDate.DESC": "Data di fondazione in ordine decrescente",
 
+  // "sorting.glamfonds.index.ASC": "Fonds Order Ascending",
+  "sorting.glamfonds.index.ASC": "Ordine Fondi crescente",
+
+  // "sorting.glamfonds.index.DESC": "Fonds Order Descending",
+  "sorting.glamfonds.index.DESC": "Ordine Fondi decrescente",
+
 
   // "statistics": "Statistics",
   "statistics": "Statistiche",

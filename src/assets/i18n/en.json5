@@ -6143,6 +6143,10 @@
 
   "sorting.organisation.address.foundingDate.DESC": "Founding Date Descending",
 
+  "sorting.glamfonds.index.ASC": "Fonds Order Ascending",
+
+  "sorting.glamfonds.index.DESC": "Fonds Order Descending",
+
 
   "statistics": "Statistics",
 
