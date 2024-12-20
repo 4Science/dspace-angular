@@ -23,6 +23,7 @@ import { PaginationServiceStub } from '../../../shared/testing/pagination-servic
 import {
   MetadataSchemaExportService
 } from '../../../shared/metadata-export/metadata-schema-export/metadata-schema-export.service';
+import { UUIDService } from '../../../core/shared/uuid.service';
 
 describe('MetadataRegistryComponent', () => {
   let comp: MetadataRegistryComponent;
@@ -85,7 +86,8 @@ describe('MetadataRegistryComponent', () => {
           useValue: jasmine.createSpyObj('metadataSchemaExportService', {
             exportSchema: of(1),
           })
-        }
+        },
+        { provide: UUIDService, useClass: UUIDService },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(MetadataRegistryComponent, {

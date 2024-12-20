@@ -11038,6 +11038,15 @@
   // TODO New key - Add a translation
   "sorting.person.birthDate.DESC": "Birth Date Descending",
 
+  // "sorting.glamfonds.index.ASC": "Fonds Order Ascending",
+  // TODO New key - Add a translation
+  "sorting.glamfonds.index.ASC": "Fonds Order Ascending",
+
+  // "sorting.glamfonds.index.DESC": "Fonds Order Descending",
+  // TODO New key - Add a translation
+  "sorting.glamfonds.index.DESC": "Fonds Order Descending",
+
+
   // "statistics": "Statistics",
   // TODO New key - Add a translation
   "statistics": "Statistics",

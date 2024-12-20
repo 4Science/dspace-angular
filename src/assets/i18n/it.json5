@@ -6262,13 +6262,14 @@
 
   // "item.preview.dc.identifier.patentno": "Patent number:",
   // TODO New key - Add a translation
-  "item.preview.dc.identifier.patentno": "Numero di brevetto:",
+  "item.preview.dc.identifier.patentno": "Patent number:",
 
   // "item.preview.dc.subject.ipc": "Subject IPC",
   "item.preview.dc.subject.ipc": "IPC Subject",
 
-  // "item.preview.dcterms.dateSubmitted": "Registration Date",
-  "item.preview.dcterms.dateSubmitted": "Data di registrazione:",
+  // "item.preview.dcterms.dateSubmitted": "Registration date:",
+  // TODO New key - Add a translation
+  "item.preview.dcterms.dateSubmitted": "Registration date:",
 
   // "item.preview.dc.identifier.isi": "ISI",
   // TODO Source message changed - Revise the translation
@@ -9913,12 +9914,6 @@
   // TODO Source message changed - Revise the translation
   "sorting.organisation.address.foundingDate.DESC": "Data di fondazione in ordine decrescente",
 
-  // "sorting.glamfonds.index.ASC": "Fonds Order Ascending",
-  "sorting.glamfonds.index.ASC": "Ordine Fondi crescente",
-
-  // "sorting.glamfonds.index.DESC": "Fonds Order Descending",
-  "sorting.glamfonds.index.DESC": "Ordine Fondi decrescente",
-
   // "sorting.person.familyName.ASC": "Surname Ascending",
   // TODO New key - Add a translation
   "sorting.person.familyName.ASC": "Surname Ascending",
@@ -9942,6 +9937,13 @@
   // "sorting.person.birthDate.DESC": "Birth Date Descending",
   // TODO New key - Add a translation
   "sorting.person.birthDate.DESC": "Birth Date Descending",
+
+  // "sorting.glamfonds.index.ASC": "Fonds Order Ascending",
+  "sorting.glamfonds.index.ASC": "Ordine Fondi crescente",
+
+  // "sorting.glamfonds.index.DESC": "Fonds Order Descending",
+  "sorting.glamfonds.index.DESC": "Ordine Fondi decrescente",
+
 
   // "statistics": "Statistics",
   "statistics": "Statistiche",
