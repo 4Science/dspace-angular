@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { NativeWindowRef, NativeWindowService } from './window.service';
+import { isEmpty } from '../../shared/empty.util';
 
 /**
  * LinkService provides utility functions for working with links, such as checking if a link is internal
@@ -7,7 +8,7 @@ import { NativeWindowRef, NativeWindowService } from './window.service';
  */
 @Injectable()
 export class InternalLinkService {
-  currentURL = this._window.nativeWindow.location?.origin;
+  currentURL = this._window.nativeWindow?.location?.origin;
 
   constructor(
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
@@ -22,6 +23,10 @@ export class InternalLinkService {
    * @returns A boolean indicating whether the link is internal.
    */
   public isLinkInternal(link: string): boolean {
+    if (isEmpty(this.currentURL)) {
+      return false;
+    }
+
     // Create a Domain object for the provided link
     const currentDomain = new URL(this.currentURL).hostname;
 
@@ -39,19 +44,45 @@ export class InternalLinkService {
    * @returns The relative path for the given internal link.
    */
   public getRelativePath(link: string): string {
-    // Create a Domain object for the provided link
+    if (isEmpty(this.currentURL)) {
+      return link;
+    }
+
+    // Obtaining the base URL, disregarding query parameters
+    const baseUrl = link.split('?')[0];
     const currentDomain = new URL(this.currentURL).hostname;
 
-    if (link.startsWith(this.currentURL)) {
-      const currentSegments = link.substring(this.currentURL.length);
+    if (baseUrl.startsWith(this.currentURL) || baseUrl.startsWith(currentDomain)) {
+      const base = baseUrl.startsWith(this.currentURL) ? this.currentURL : currentDomain;
+      const currentSegments = baseUrl.substring(base.length);
       return currentSegments.startsWith('/') ? currentSegments : `/${currentSegments}`;
     }
 
-    if (link.startsWith(currentDomain)) {
-      const currentSegments = link.substring(currentDomain.length);
-      return currentSegments.startsWith('/') ? currentSegments : `/${currentSegments}`;
+    return baseUrl.startsWith('/') ? baseUrl : `/${baseUrl}`;
+  }
+
+  /**
+   * Parse the query parameters from a given URL link.
+   *
+   * @param link The URL link containing query parameters.
+   * @returns An object containing the parsed query parameters.
+   */
+  public getQueryParams(link: string): Record<string, string> {
+    const queryParams: Record<string, string> = {};
+
+    const queryStringStartIndex = link.indexOf('?');
+    if (queryStringStartIndex !== -1) {
+        const paramsString = link.substring(queryStringStartIndex + 1);
+        const paramsArray = paramsString.split('&');
+
+        paramsArray.forEach(param => {
+            const [key, value] = param.split('=');
+            if (key && value) {
+                queryParams[key] = decodeURIComponent(value.replace(/\+/g, ' '));
+            }
+        });
     }
 
-    return link;
+    return queryParams;
   }
 }

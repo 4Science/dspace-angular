@@ -35,6 +35,12 @@ export class BitstreamAttachmentComponent extends BitstreamRenderingModelCompone
    */
   allAttachmentProviders: string[] = [];
 
+  /**
+   * Attachment metadata to be displayed in title case
+   */
+
+  attachmentTypeMetadata = 'dc.type';
+
   @Input()
   attachment: Bitstream;
 

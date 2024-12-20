@@ -14,6 +14,7 @@ import {
   FILTER_CONFIG,
   IN_PLACE_SEARCH,
   REFRESH_FILTER,
+  SCOPE,
   SearchFilterService
 } from '../../../../../../../core/shared/search/search-filter.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -97,9 +98,10 @@ export class SearchRangeDatepickerFilterComponent extends SearchRangeFilterCompo
     @Inject(IN_PLACE_SEARCH) public inPlaceSearch: boolean,
     @Inject(FILTER_CONFIG) public filterConfig: SearchFilterConfig,
     @Inject(PLATFORM_ID) protected platformId: any,
-    @Inject(REFRESH_FILTER) public refreshFilters: BehaviorSubject<boolean>
+    @Inject(REFRESH_FILTER) public refreshFilters: BehaviorSubject<boolean>,
+    @Inject(SCOPE) public scope: string,
   ) {
-    super(searchService, filterService, router, rdbs, route, searchConfigService, inPlaceSearch, filterConfig, platformId, refreshFilters);
+    super(searchService, filterService, router, rdbs, route, searchConfigService, inPlaceSearch, filterConfig, platformId, refreshFilters, scope);
   }
 
   public override ngOnInit() {

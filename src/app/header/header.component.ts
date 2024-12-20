@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MenuService } from '../shared/menu/menu.service';
 import { MenuID } from '../shared/menu/menu-id.model';
-import { HostWindowService } from '../shared/host-window.service';
-import { environment } from 'src/environments/environment';
+import { HostWindowService, WidthCategory } from '../shared/host-window.service';
+import { environment } from '../../environments/environment';
 
 /**
  * Represents the header with the logo and simple navigation
@@ -19,9 +19,11 @@ export class HeaderComponent implements OnInit {
    * @type {Observable<string>}
    */
   public isAuthenticated: Observable<boolean>;
-  public isXsOrSm$: Observable<boolean>;
+  public isMobile$: Observable<boolean>;
   public showAuth = false;
+
   menuID = MenuID.PUBLIC;
+  maxMobileWidth = WidthCategory.SM;
   mainSiteUrl = environment.mainSiteUrl;
 
   constructor(
@@ -31,7 +33,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isXsOrSm$ = this.windowService.isXsOrSm();
+    this.isMobile$ = this.windowService.isUpTo(this.maxMobileWidth);
   }
 
   public toggleNavbar(): void {

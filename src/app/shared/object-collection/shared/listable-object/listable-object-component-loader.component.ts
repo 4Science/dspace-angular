@@ -68,7 +68,7 @@ export class ListableObjectComponentLoaderComponent implements OnInit, OnChanges
   /**
    * Whether to show the badge label or not
    */
-  @Input() showLabel = true;
+  @Input() showLabel: boolean;
 
   /**
    * Whether to show the metrics badges
@@ -78,7 +78,12 @@ export class ListableObjectComponentLoaderComponent implements OnInit, OnChanges
   /**
    * Whether to show the thumbnail preview
    */
-  @Input() showThumbnails;
+  @Input() showThumbnails: boolean;
+
+  /**
+   * Whether to show if the item is a correction
+   */
+  @Input() showCorrection = false;
 
   /**
    * The value to display for this element
@@ -138,6 +143,7 @@ export class ListableObjectComponentLoaderComponent implements OnInit, OnChanges
     'showLabel',
     'showMetrics',
     'showThumbnails',
+    'showCorrection',
     'context',
     'viewMode',
     'value',
@@ -153,7 +159,9 @@ export class ListableObjectComponentLoaderComponent implements OnInit, OnChanges
    * Setup the dynamic child component
    */
   ngOnInit(): void {
-    this.instantiateComponent(this.object);
+    if (hasNoValue(this.compRef)) {
+      this.instantiateComponent(this.object);
+    }
   }
 
   /**
@@ -175,7 +183,11 @@ export class ListableObjectComponentLoaderComponent implements OnInit, OnChanges
     }
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
+    if (hasValue(this.compRef)) {
+      this.compRef.destroy();
+      this.compRef = undefined;
+    }
     this.subs
       .filter((subscription) => hasValue(subscription))
       .forEach((subscription) => subscription.unsubscribe());

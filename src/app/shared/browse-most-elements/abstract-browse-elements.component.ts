@@ -1,6 +1,8 @@
+import { followLink } from '../utils/follow-link-config.model';
 import { CollectionElementLinkType } from '../object-collection/collection-element-link.type';
-import { LayoutModeEnum, TopSection } from '../../core/layout/models/section.model';
-import { Component, inject, Input, OnChanges, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformServer } from '@angular/common';
+
 import { SearchService } from '../../core/shared/search/search.service';
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
@@ -8,41 +10,70 @@ import { SearchResult } from '../search/models/search-result.model';
 import { Context } from '../../core/shared/context.model';
 import { RemoteData } from '../../core/data/remote-data';
 import { PaginatedList } from '../../core/data/paginated-list.model';
-import { APP_CONFIG } from '../../../config/app-config.interface';
-import { isPlatformServer } from '@angular/common';
-import { followLink } from '../utils/follow-link-config.model';
 import {
   getAllCompletedRemoteData,
   getPaginatedListPayload,
   getRemoteDataPayload,
   toDSpaceObjectListRD,
 } from '../../core/shared/operators';
-import { BehaviorSubject, mergeMap, Observable } from 'rxjs';
+import { APP_CONFIG } from '../../../config/app-config.interface';
+import { BehaviorSubject, Observable, mergeMap } from 'rxjs';
 import { Item } from '../../core/shared/item.model';
 import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
+import { LayoutModeEnum, TopSection } from '../../core/layout/models/section.model';
 
-
-@Component({ template: '' })
+@Component({
+  template: ''
+})
 export abstract class AbstractBrowseElementsComponent implements OnInit, OnChanges {
 
   protected readonly appConfig = inject(APP_CONFIG);
   protected readonly platformId = inject(PLATFORM_ID);
   protected readonly searchService = inject(SearchService);
 
-  protected followThumbnailLink: boolean; // to be overridden
+  protected abstract followMetricsLink: boolean; // to be overridden
+  protected abstract followThumbnailLink: boolean; // to be overridden
 
-  @Input() paginatedSearchOptions: PaginatedSearchOptions;
-
+  /**
+   * The context of listable object
+   */
   @Input() context: Context;
 
-  @Input() topSection: TopSection;
+  /**
+   * The pagination options
+   */
+  @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
   /**
    * Optional projection to use during the search
    */
-  projection = 'preventMetadataSecurity';
+  @Input() projection = 'preventMetadataSecurity';
 
-  paginatedSearchOptionsBS: BehaviorSubject<PaginatedSearchOptions>;
+  @Input() mode: LayoutModeEnum;
+
+  /**
+   * Whether to show the badge label or not
+   */
+  @Input() showLabel: boolean;
+
+  /**
+   * Whether to show the metrics badges
+   */
+  @Input() showMetrics = this.appConfig.browseBy.showMetrics;
+
+  /**
+   * Whether to show the thumbnail preview
+   */
+  @Input() showThumbnails = this.appConfig.browseBy.showThumbnails;
+
+  /**
+   * TopSection object
+   */
+  @Input() topSection: TopSection;
+
+  public collectionElementLinkTypeEnum = CollectionElementLinkType;
+
+  paginatedSearchOptions$: BehaviorSubject<PaginatedSearchOptions>;
 
   searchResults$: Observable<RemoteData<PaginatedList<SearchResult<DSpaceObject>>>>;
 
@@ -52,23 +83,27 @@ export abstract class AbstractBrowseElementsComponent implements OnInit, OnChang
 
   public cardLayoutMode = LayoutModeEnum.CARD;
 
-  public collectionElementLinkTypeEnum = CollectionElementLinkType;
-
   ngOnChanges() {
     if (isPlatformServer(this.platformId)) {
       return;
     }
-    this.paginatedSearchOptionsBS?.next(this.paginatedSearchOptions);
+    this.paginatedSearchOptions$?.next(this.paginatedSearchOptions);
   }
 
   ngOnInit() {
-    const followLinks = this.followThumbnailLink ? [followLink('thumbnail')] : [];
+    const followLinks = [];
+    if (this.followThumbnailLink) {
+      followLinks.push(followLink('thumbnail'));
+    }
+    if (this.followMetricsLink) {
+      followLinks.push(followLink('metrics'));
+    }
 
     this.paginatedSearchOptions = Object.assign(new PaginatedSearchOptions({}), this.paginatedSearchOptions, {
       projection: this.projection
     });
-    this.paginatedSearchOptionsBS = new BehaviorSubject<PaginatedSearchOptions>(this.paginatedSearchOptions);
-    this.searchResults$ = this.paginatedSearchOptionsBS.asObservable().pipe(
+    this.paginatedSearchOptions$ = new BehaviorSubject<PaginatedSearchOptions>(this.paginatedSearchOptions);
+    this.searchResults$ = this.paginatedSearchOptions$.asObservable().pipe(
       mergeMap((paginatedSearchOptions) =>
         this.searchService.search(paginatedSearchOptions, null, true, true, ...followLinks),
       ),
@@ -85,5 +120,4 @@ export abstract class AbstractBrowseElementsComponent implements OnInit, OnChang
   getItemPageRoute(item: DSpaceObject | Item) {
     return getItemPageRoute(item as Item);
   }
-
 }

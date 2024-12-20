@@ -21,6 +21,7 @@ export class SliderBrowseElementsComponent extends AbstractBrowseElementsCompone
   readonly cardGap = 16; // corresponding to gapx-3
 
   protected followThumbnailLink = false; // not required as ORIGINAL bundle is used
+  protected followMetricsLink = false;
 
   private readonly bitstreamImagesService = inject(BitstreamImagesService);
 

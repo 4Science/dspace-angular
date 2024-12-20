@@ -14,6 +14,9 @@ import {
   DiscardSubmissionSuccessAction,
   EditFileDataAction,
   EnableSectionAction,
+  ExecuteExternalUploadAction,
+  ExecuteExternalUploadErrorAction,
+  ExecuteExternalUploadSuccessAction,
   InertSectionErrorsAction,
   InitSectionAction,
   InitSubmissionFormAction,
@@ -87,6 +90,7 @@ describe('submissionReducer test suite', () => {
         isDiscarding: false,
         savePending: false,
         saveDecisionPending: false,
+        externalUploadPending: false,
         depositPending: false,
         metadataSecurityConfiguration: metadataSecurityConfiguration as any,
       }
@@ -121,7 +125,8 @@ describe('submissionReducer test suite', () => {
         isLoading: true,
         isDiscarding: false,
         savePending: false,
-        depositPending: false
+        depositPending: false,
+        externalUploadPending: false,
       }
     };
 
@@ -746,6 +751,50 @@ describe('submissionReducer test suite', () => {
     const newState = submissionObjectReducer(state, action);
 
     expect(newState[826].saveDecisionPending).toBeFalsy();
+  });
+
+  it('should set the externalUploadPending to true', () => {
+    const action: any = new ExecuteExternalUploadAction(submissionId, 'external-upload');
+    let newState;
+
+    newState = submissionObjectReducer(initState, action);
+
+    expect(newState[826].externalUploadPending).toBeTrue();
+  });
+
+  it('should set the errors fo the external Upload section', () => {
+    const errors = [{
+      path: '/sections/external-upload',
+      message: 'error.validation.notfound'
+    }];
+    const action: any = new ExecuteExternalUploadErrorAction(submissionId, 'external-upload', errors);
+
+    const newState = submissionObjectReducer(initState, action);
+
+    expect(newState[826].externalUploadPending).toBeFalse();
+    expect(newState[826].sections['external-upload'].errorsToShow).toEqual(errors);
+    expect(newState[826].sections['external-upload'].serverValidationErrors).toEqual(errors);
+  });
+
+  it('should clean the errors fo the external Upload section', () => {
+    const errors = [{
+      path: '/sections/external-upload',
+      message: 'error.validation.notfound'
+    }];
+    let action: any = new ExecuteExternalUploadErrorAction(submissionId, 'external-upload', errors);
+    let newState = submissionObjectReducer(initState, action);
+
+    expect(newState[826].externalUploadPending).toBeFalse();
+    expect(newState[826].sections['external-upload'].errorsToShow).toEqual(errors);
+    expect(newState[826].sections['external-upload'].serverValidationErrors).toEqual(errors);
+
+    action = new ExecuteExternalUploadSuccessAction(submissionId, 'external-upload');
+
+    newState = submissionObjectReducer(initState, action);
+
+    expect(newState[826].externalUploadPending).toBeFalse();
+    expect(newState[826].sections['external-upload'].errorsToShow).toEqual([]);
+    expect(newState[826].sections['external-upload'].serverValidationErrors).toEqual([]);
   });
 
 });

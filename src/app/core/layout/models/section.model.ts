@@ -185,4 +185,5 @@ export enum TopSectionTemplateType {
   DEFAULT = 'default',  // CRIS default template
   IMAGES = 'images',
   SLIDER = 'slider',
+  CARD = 'card',
 }

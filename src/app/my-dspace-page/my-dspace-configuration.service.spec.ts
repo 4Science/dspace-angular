@@ -51,10 +51,9 @@ describe('MyDSpaceConfigurationService', () => {
   const halService: any = new HALEndpointServiceStub('');
   const requestService: any = {};
   const rdb: any = getMockRemoteDataBuildService();
-  const uuidService = getMockUUIDService();
 
   beforeEach(() => {
-    service = new MyDSpaceConfigurationService(roleService, spy, paginationService as any, activatedRoute, linkService, halService, requestService, rdb, uuidService);
+    service = new MyDSpaceConfigurationService(roleService, spy, paginationService as any, activatedRoute, linkService, halService, requestService, rdb, getMockUUIDService());
   });
 
   describe('when the scope is called', () => {

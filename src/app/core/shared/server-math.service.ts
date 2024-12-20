@@ -5,6 +5,9 @@ import { MathJaxConfig, MathService } from './math.service';
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Provide the MathService for SSR
+ */
 export class ServerMathService extends MathService {
 
   protected signal: Subject<boolean>;
@@ -36,6 +39,6 @@ export class ServerMathService extends MathService {
   }
 
   render(element: HTMLElement) {
-    return;
+    return Promise.resolve();
   }
 }

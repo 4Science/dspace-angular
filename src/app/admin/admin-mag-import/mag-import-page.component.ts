@@ -20,6 +20,7 @@ import {
 } from '../../shared/dso-selector/modal-wrappers/import-batch-selector/import-batch-selector.component';
 import { take } from 'rxjs/operators';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
+import { SwitchColor, SwitchOption } from '../../shared/switch/switch.component';
 
 @Component({
   selector: 'ds-admin-mag-import',
@@ -46,6 +47,12 @@ export class MagImportPageComponent {
    * File URL when flag is for url
    */
   fileURL: string;
+
+  switchOptions: SwitchOption[] = [
+    { value: 'upload', icon: 'fa fa-upload', label: 'admin.mag-import.page.toggle.upload', iconColor: SwitchColor.Primary },
+    { value: 'url', icon: 'fa fa-link', label: 'admin.mag-import.page.toggle.url', iconColor: SwitchColor.Primary },
+  ];
+
 
   public constructor(private location: Location,
                      protected translate: TranslateService,

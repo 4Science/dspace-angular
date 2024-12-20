@@ -1,6 +1,6 @@
 <nav [ngClass]="{'open': !(menuCollapsed | async)}" [@slideMobileNav]="!(windowService.isXsOrSm() | async) ? 'default' : ((menuCollapsed | async) ? 'collapsed' : 'expanded')"
   class="navbar navbar-expand-md navbar-light p-0 navbar-container" role="navigation" [attr.aria-label]="'nav.main.description' | translate">
-  <div class="navbar-inner-container" [class.container]="!(isXsOrSm$ | async)">
+  <div class="navbar-inner-container" [class.container]="!(isMobile$ | async)">
     <div class="top-bar mb-3">
       <a [attr.aria-label]="'home.title' | translate" class="navbar-brand text-center" routerLink="/home">
         <div class="logo-circle mb-2"></div>
@@ -28,7 +28,7 @@
           </li>
         </ul>
         <ul id="collapsingNav" class="navbar-nav mb-3 list-unstyled">
-          <li *ngIf="(isXsOrSm$ | async) && (isAuthenticated$ | async)" class="nav-item">
+          <li *ngIf="(isMobile$ | async) && (isAuthenticated$ | async)" class="nav-item">
             <ds-user-menu [inExpandableNavbar]="true"></ds-user-menu>
           </li>
           <ng-container *ngFor="let section of (sections | async)">
@@ -41,7 +41,7 @@
     </div>
   </div>
 </nav>
-<div class="search-navbar-wrapper" *ngIf="!(isXsOrSm$ | async)">
+<div class="search-navbar-wrapper" *ngIf="!(isMobile$ | async)">
   <div class="container-fluid">
     <ds-themed-search-navbar class="navbar-collapsed"></ds-themed-search-navbar>
   </div>

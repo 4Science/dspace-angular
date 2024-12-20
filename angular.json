@@ -74,7 +74,8 @@
                 "input": "src/themes/glam/styles/theme.scss",
                 "inject": false,
                 "bundleName": "glam-theme"
-              }
+              },
+              "./node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": [],
             "baseHref": "/"

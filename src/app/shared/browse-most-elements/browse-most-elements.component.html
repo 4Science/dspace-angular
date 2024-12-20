@@ -2,7 +2,7 @@
   <ng-container *ngSwitchCase="templateTypeEnum.IMAGES">
     <ds-themed-images-browse-elements
       [topSection]="topSection"
-      [paginatedSearchOptions]="paginatedSearchOptionsBS.asObservable() | async"
+      [paginatedSearchOptions]="paginatedSearchOptions$ | async"
       [context]="context"
     >
     </ds-themed-images-browse-elements>
@@ -11,7 +11,7 @@
   <ng-container *ngSwitchCase="templateTypeEnum.SLIDER">
     <ds-themed-slider-browse-elements
       [topSection]="topSection"
-      [paginatedSearchOptions]="paginatedSearchOptionsBS.asObservable() | async"
+      [paginatedSearchOptions]="paginatedSearchOptions$ | async"
       [context]="context"
     >
     </ds-themed-slider-browse-elements>
@@ -21,7 +21,7 @@
   <ng-container *ngSwitchDefault>
     <ds-themed-default-browse-elements
       [topSection]="topSection"
-      [paginatedSearchOptions]="paginatedSearchOptionsBS.asObservable() | async"
+      [paginatedSearchOptions]="paginatedSearchOptions$ | async"
       [context]="context"
     ></ds-themed-default-browse-elements>
   </ng-container>

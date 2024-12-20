@@ -76,6 +76,7 @@ export class MyDSpaceConfigurationService extends SearchConfigurationService {
    * @param halService
    * @param requestService
    * @param rdb
+   * @param uuidService
    */
   constructor(protected roleService: RoleService,
               protected routeService: RouteService,
@@ -85,7 +86,8 @@ export class MyDSpaceConfigurationService extends SearchConfigurationService {
               protected halService: HALEndpointService,
               protected requestService: RequestService,
               protected rdb: RemoteDataBuildService,
-              protected uuidService: UUIDService) {
+              protected uuidService: UUIDService
+  ) {
 
     super(routeService, paginationService, route, linkService, halService, requestService, rdb);
 
@@ -107,7 +109,7 @@ export class MyDSpaceConfigurationService extends SearchConfigurationService {
   public getAvailableConfigurationTypes(): Observable<MyDSpaceConfigurationValueType[]> {
     return combineLatest([this.isSubmitter$, this.isController$, this.isAdmin$]).pipe(
       take(1),
-       map(([isSubmitter, isController, isAdmin]: [boolean, boolean, boolean]) => {
+      map(([isSubmitter, isController, isAdmin]: [boolean, boolean, boolean]) => {
         const availableConf: MyDSpaceConfigurationValueType[] = [];
         if (isSubmitter) {
           availableConf.push(MyDSpaceConfigurationValueType.Workspace);

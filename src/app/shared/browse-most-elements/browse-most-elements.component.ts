@@ -1,13 +1,11 @@
-import { ViewMode } from '../../core/shared/view-mode.model';
-import { Router } from '@angular/router';
-import { LayoutModeEnum, TopSection, TopSectionTemplateType, } from '../../core/layout/models/section.model';
-import { ChangeDetectorRef, Component, Inject, Input, OnChanges, OnInit, PLATFORM_ID } from '@angular/core';
-
-import { SearchManager } from '../../core/browse/search-manager';
+import { LayoutModeEnum, TopSection, TopSectionTemplateType } from '../../core/layout/models/section.model';
+import { Component, inject, Input, OnChanges, OnInit } from '@angular/core';
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
 import { Context } from '../../core/shared/context.model';
 import { BehaviorSubject } from 'rxjs';
-import { AppConfig, APP_CONFIG } from 'src/config/app-config.interface';
+import isEqual from 'lodash/isEqual';
+import { ViewMode } from '../../core/shared/view-mode.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ds-browse-most-elements',
@@ -16,53 +14,77 @@ import { AppConfig, APP_CONFIG } from 'src/config/app-config.interface';
 })
 
 export class BrowseMostElementsComponent implements OnInit, OnChanges {
+  private readonly router = inject(Router);
 
+  /**
+   * The pagination options
+   */
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
+  /**
+   * The context of listable object
+   */
   @Input() context: Context;
 
+  /**
+   * Optional projection to use during the search
+   */
+  @Input() projection = 'preventMetadataSecurity';
+
+  @Input() mode: LayoutModeEnum;
+
+  /**
+   * Whether to show the badge label or not
+   */
+  @Input() showLabel: boolean;
+
+  /**
+   * Whether to show the metrics badges
+   */
+  @Input() showMetrics: boolean;
+
+  /**
+   * Whether to show the thumbnail preview
+   */
+  @Input() showThumbnails: boolean;
+
+  /*
+   * The top section object
+   */
   @Input() topSection: TopSection;
 
   @Input() discoveryConfigurationsTotalElementsMap: Map<string, number>;
+
+
+  paginatedSearchOptions$ = new BehaviorSubject<PaginatedSearchOptions>(null);
+
+  sectionTemplateType: TopSectionTemplateType;
 
   /**
    * The type of the template to render
    */
   templateTypeEnum = TopSectionTemplateType;
 
-  sectionTemplateType: TopSectionTemplateType;
-
-  paginatedSearchOptionsBS = new BehaviorSubject<PaginatedSearchOptions>(null);
-
-  constructor(
-    @Inject(APP_CONFIG) protected appConfig: AppConfig,
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private searchService: SearchManager,
-    private router: Router,
-    private cdr: ChangeDetectorRef) {
-
-  }
 
   ngOnInit(): void {
-    this.sectionTemplateType = this.topSection?.template ?? TopSectionTemplateType.DEFAULT;
+    this.sectionTemplateType = this.topSection?.template
+      ?? (this.mode === LayoutModeEnum.CARD ? TopSectionTemplateType.CARD : TopSectionTemplateType.DEFAULT);
   }
 
   ngOnChanges() { // trigger change detection on child components
-    this.paginatedSearchOptionsBS.next(this.paginatedSearchOptions);
+    this.paginatedSearchOptions$.next(this.paginatedSearchOptions);
   }
 
-  showAllResults() {
-    const viewMode: ViewMode =
-      this.sectionTemplateType === TopSectionTemplateType.DEFAULT && this.topSection.defaultLayoutMode === LayoutModeEnum.LIST ?
-        ViewMode.ListElement : ViewMode.GridElement;
-
-    void this.router.navigate(['/search'], {
+  async showAllResults() {
+    const view = isEqual(this.topSection.defaultLayoutMode, LayoutModeEnum.LIST)
+      ? ViewMode.ListElement
+      : ViewMode.GridElement;
+    await this.router.navigate(['/search'], {
       queryParams: {
         configuration: this.paginatedSearchOptions.configuration,
-        view: viewMode,
+        view: view,
       },
       replaceUrl: true,
     });
   }
-
 }

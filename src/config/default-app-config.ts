@@ -35,6 +35,11 @@ import {
 import { AttachmentRenderingConfig } from './attachment-rendering.config';
 import { SearchResultConfig } from './search-result-config.interface';
 import { MiradorConfig } from './mirador-config.interfaces';
+import { LoaderConfig } from './loader-config.interfaces';
+import { MetaTagsConfig } from './meta-tags.config';
+import { MetadataLinkViewPopoverDataConfig } from './metadata-link-view-popoverdata-config.interface';
+import { IdentifierSubtypesConfig, IdentifierSubtypesIconPositionEnum } from './identifier-subtypes-config.interface';
+import { DatadogRumConfig } from './datadog-rum-config.interfaces';
 import { LocationConfig } from './location-config.interface';
 
 export class DefaultAppConfig implements AppConfig {
@@ -98,7 +103,7 @@ export class DefaultAppConfig implements AppConfig {
       // Defaults to caching 1,000 pages. Each page expires after 1 day
       botCache: {
         // Maximum number of pages (rendered via SSR) to cache. Setting max=0 disables the cache.
-        max: 1000,
+        max: 0, // disabled by default
         // Amount of time after which cached pages are considered stale (in ms)
         timeToLive: 24 * 60 * 60 * 1000, // 1 day
         allowStale: true,
@@ -250,6 +255,32 @@ export class DefaultAppConfig implements AppConfig {
             style: 'text-gray-500'
           }
 
+        ],
+        sourceIcons: [
+          {
+            source: 'orcid',
+            path: 'assets/images/orcid.logo.icon.svg'
+          },
+          {
+            source: 'openaire',
+            path: 'assets/images/openaire.logo.icon.svg'
+          },
+          {
+            source: 'ror',
+            path: 'assets/images/ror.logo.icon.svg'
+          },
+          {
+            source: 'sherpa',
+            path: 'assets/images/sherpa.logo.icon.svg'
+          },
+          {
+            source: 'zdb',
+            path: 'assets/images/zdb.logo.icon.svg'
+          },
+          {
+            source: 'local',
+            path: 'assets/images/local.logo.icon.svg'
+          },
         ]
       },
       iconsVisibleWithNoAuthority: ['fas fa-user']
@@ -259,6 +290,10 @@ export class DefaultAppConfig implements AppConfig {
       metadataDetailsList: [
         { label: 'Document type', name: 'dc.type' }
       ]
+    },
+    dropdownHintEnabled: {
+      // NOTE: list of metadata fields for which the dropdown hint is enabled
+      // eg. 'dc.access.rights': true,
     }
   };
 
@@ -269,30 +304,31 @@ export class DefaultAppConfig implements AppConfig {
   // When set to active, users will be able to switch to the use of this language in the user interface.
   languages: LangConfig[] = [
     { code: 'en', label: 'English', active: true },
+    { code: 'ar', label: 'العربية', active: false },
+    { code: 'bn', label: 'বাংলা', active: false },
     { code: 'ca', label: 'Català', active: false },
     { code: 'cs', label: 'Čeština', active: false },
     { code: 'de', label: 'Deutsch', active: false },
+    { code: 'el', label: 'Ελληνικά', active: false },
     { code: 'es', label: 'Español', active: false },
+    { code: 'fi', label: 'Suomi', active: false },
     { code: 'fr', label: 'Français', active: false },
     { code: 'gd', label: 'Gàidhlig', active: false },
-    { code: 'it', label: 'Italiano', active: true },
-    { code: 'lv', label: 'Latviešu', active: false },
+    { code: 'hi', label: 'हिंदी', active: false },
     { code: 'hu', label: 'Magyar', active: false },
+    { code: 'it', label: 'Italiano', active: true },
+    { code: 'kk', label: 'Қазақ', active: false },
+    { code: 'lv', label: 'Latviešu', active: false },
     { code: 'nl', label: 'Nederlands', active: false },
     { code: 'pl', label: 'Polski', active: false },
     { code: 'pt-PT', label: 'Português', active: false },
     { code: 'pt-BR', label: 'Português do Brasil', active: false },
-    { code: 'sr-lat', label: 'Srpski (lat)', active: false},
-    { code: 'fi', label: 'Suomi', active: false },
+    { code: 'sr-lat', label: 'Srpski (lat)', active: false },
+    { code: 'sr-cyr', label: 'Српски', active: false },
     { code: 'sv', label: 'Svenska', active: false },
     { code: 'tr', label: 'Türkçe', active: false },
+    { code: 'uk', label: 'Yкраї́нська', active: false },
     { code: 'vi', label: 'Tiếng Việt', active: false },
-    { code: 'kk', label: 'Қазақ', active: false },
-    { code: 'bn', label: 'বাংলা', active: false },
-    { code: 'hi', label: 'हिंदी', active: false},
-    { code: 'el', label: 'Ελληνικά', active: false },
-    { code: 'sr-cyr', label: 'Српски', active: false},
-    { code: 'uk', label: 'Yкраї́нська', active: false}
   ];
 
   // Browse-By Pages
@@ -303,6 +339,8 @@ export class DefaultAppConfig implements AppConfig {
     fiveYearLimit: 30,
     // The absolute lowest year to display in the dropdown (only used when no lowest date can be found for all items)
     defaultLowerLimit: 1900,
+    // Whether to add item badges to BOTH browse and search result lists.
+    showLabels: true,
     // Whether to add item thumbnail images to BOTH browse and search result lists.
     showThumbnails: true,
     // Whether to add item thumbnail images to BOTH browse and search result lists.
@@ -821,6 +859,72 @@ export class DefaultAppConfig implements AppConfig {
 
   mirador: MiradorConfig = {
     enableDownloadPlugin: true,
+  };
+
+  loader: LoaderConfig = {
+    showFallbackMessagesByDefault: false,
+    warningMessageDelay: 5000, // 5 seconds
+    errorMessageDelay: 15000, // 15 seconds
+    numberOfAutomaticPageReloads: 2,
+  };
+
+  metaTags: MetaTagsConfig = {
+    defaultLogo: '/assets/images/dspace-cris-logo-hd.png',
+    defaultDescription: 'DSpace-CRIS is a comprehensive, free and open-source Research Information Management System (CRIS/RIMS).\n' +
+      'It is based on DSpace, providing broader functionality and an expanded data model, relying on its large community.\n' +
+      'It is compliant with and supports key international standards, facilitating interoperability and data transfer.\n' +
+      'DSpace-CRIS enables secure, integrated and interoperable research information and data management – in a single solution.'
+  };
+
+  // Configuration for the metadata link view popover
+  metadataLinkViewPopoverData: MetadataLinkViewPopoverDataConfig =
+    {
+      fallbackMetdataList: ['dc.description.abstract'],
+
+      entityDataConfig: [
+        {
+          entityType: 'Person',
+          metadataList: ['person.affiliation.name', 'person.email', 'person.identifier.orcid', 'dc.description.abstract']
+        },
+        {
+          entityType: 'OrgUnit',
+          metadataList: ['organization.parentOrganization', 'organization.identifier.ror', 'crisou.director', 'dc.description.abstract']
+        },
+        {
+          entityType: 'Project',
+          metadataList: ['oairecerif.project.status', 'dc.description.abstract']
+        },
+        {
+          entityType: 'Funding',
+          metadataList: ['oairecerif.funder', 'oairecerif.fundingProgram', 'dc.description.abstract']
+        },
+        {
+          entityType: 'Publication',
+          metadataList: ['dc.identifier.doi', 'dc.identifier.uri', 'dc.description.abstract']
+        },
+      ]
+    };
+
+  identifierSubtypes: IdentifierSubtypesConfig[] = [
+    {
+      name: 'ror',
+      icon: 'assets/images/ror.logo.icon.svg',
+      iconPosition: IdentifierSubtypesIconPositionEnum.LEFT,
+      link: 'https://ror.org'
+    }
+  ];
+  datadogRum: DatadogRumConfig = {
+    clientToken: undefined,
+    applicationId: undefined,
+    site: 'datadoghq.eu',
+    service: undefined,
+    env: undefined,
+    sessionSampleRate: 50,
+    sessionReplaySampleRate: 20,
+    trackUserInteractions: true,
+    trackResources: true,
+    trackLongTasks: true,
+    defaultPrivacyLevel: 'mask-user-input',
   };
 
   location: LocationConfig = {

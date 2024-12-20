@@ -151,31 +151,33 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
       });
 
       it('should display other dropdown menu option', () => {
+        const de = scrollableDropdownFixture.debugElement.query(By.css('input.form-control'));
+        const btnEl = de.nativeElement;
+        btnEl.click();
+        scrollableDropdownFixture.detectChanges();
+
         scrollableDropdownComp.model.openType = true;
         scrollableDropdownComp.pageInfo.currentPage = 2;
         scrollableDropdownComp.pageInfo.totalPages = 1;
-        const de = scrollableDropdownFixture.debugElement.query(By.css('input.form-control'));
-        const btnEl = de.nativeElement;
-
-        btnEl.click();
-
         scrollableDropdownFixture.detectChanges();
-        const deMenu = scrollableDropdownFixture.debugElement.query(By.css('#otherOption'));
+
+        const deMenu = scrollableDropdownFixture.debugElement.query(By.css('[data-test="otherOption"]'));
 
         expect(deMenu).toBeTruthy();
       });
 
       it('should not display other dropdown menu option', () => {
+        const de = scrollableDropdownFixture.debugElement.query(By.css('input.form-control'));
+        const btnEl = de.nativeElement;
+        btnEl.click();
+        scrollableDropdownFixture.detectChanges();
+
         scrollableDropdownComp.model.openType = true;
         scrollableDropdownComp.pageInfo.currentPage = 2;
         scrollableDropdownComp.pageInfo.totalPages = 3;
-        const de = scrollableDropdownFixture.debugElement.query(By.css('input.form-control'));
-        const btnEl = de.nativeElement;
-
-        btnEl.click();
-
         scrollableDropdownFixture.detectChanges();
-        const deMenu = scrollableDropdownFixture.debugElement.query(By.css('#otherOption'));
+
+        const deMenu = scrollableDropdownFixture.debugElement.query(By.css('[data-test="otherOption"]'));
 
         expect(deMenu).toBeFalsy();
       });
@@ -204,7 +206,7 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
         scrollableDropdownFixture.detectChanges();
 
         de = scrollableDropdownFixture.debugElement.queryAll(By.css('button.dropdown-item'));
-        btnEl = de[0].nativeElement;
+        btnEl = de[1].nativeElement;
 
         btnEl.dispatchEvent(mousedownEvent);
         scrollableDropdownFixture.detectChanges();
@@ -215,17 +217,20 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
       it('should add other dropdown option value', () => {
         const selectedValue = Object.assign(new VocabularyEntry(), { authority: 3, display: 'three', value: 'three' });
         spyOn((scrollableDropdownComp as any), 'addListItem');
-        scrollableDropdownComp.model.openType = true;
-        scrollableDropdownComp.pageInfo.currentPage = 2;
-        scrollableDropdownComp.pageInfo.totalPages = 1;
+
         const de = scrollableDropdownFixture.debugElement.query(By.css('input.form-control'));
         let btnEl = de.nativeElement;
 
         btnEl.click();
-
         scrollableDropdownFixture.detectChanges();
+
+        scrollableDropdownComp.model.openType = true;
+        scrollableDropdownComp.pageInfo.currentPage = 2;
+        scrollableDropdownComp.pageInfo.totalPages = 1;
+        scrollableDropdownFixture.detectChanges();
+
         scrollableDropdownComp.otherListEntry = selectedValue.value;
-        btnEl = scrollableDropdownFixture.debugElement.nativeElement.querySelector('#otherOptionBtn');
+        btnEl = scrollableDropdownFixture.debugElement.nativeElement.querySelector('[data-test="otherOptionBtn"]');
 
         btnEl.click();
         scrollableDropdownFixture.detectChanges();
