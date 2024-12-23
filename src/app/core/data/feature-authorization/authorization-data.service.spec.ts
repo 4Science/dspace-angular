@@ -45,10 +45,10 @@ describe('AuthorizationDataService', () => {
     });
 
     authorizationService = jasmine.createSpyObj('authorizationService', {
-      isLoading: jasmine.createSpy('isLoading'),
-      hasErrors: jasmine.createSpy('hasErrors'),
-      getSiteAuthorization: jasmine.createSpy('getSiteAuthorization'),
-      getAuthorizationForObject: jasmine.createSpy('getAuthorizationForObject'),
+      isLoading: observableOf(true),
+      hasErrors: observableOf(false),
+      getSiteAuthorization: observableOf([]),
+      getAuthorizationForObject: observableOf(false),
       initStateForObjects: jasmine.createSpy('initStateForObjects')
     });
     objectCache = getMockObjectCacheService();
