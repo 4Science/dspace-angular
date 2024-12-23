@@ -60,6 +60,12 @@ export class AuthorizationService {
     ).subscribe(site => this.initStateForObjects([site.uuid], site.uniqueType, featureIDs));
   }
 
+  initAnonymousStateForSite() {
+    this.siteService.find().pipe(
+      take(1)
+    ).subscribe(site => this.initStateForObjects([site.uuid], site.uniqueType, []));
+  }
+
 
   getAllAuthorizationsState(): Observable<ObjectAuthorizationsState> {
     return this.isLoading().pipe(

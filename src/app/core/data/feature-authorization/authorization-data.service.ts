@@ -174,8 +174,8 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    */
   searchObjectsAuthorizations(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<Authorization[]> {
     const followLinks = [
-      followLink<Authorization>('feature', { isOptional: true }),
-      followLink<Authorization>('object', { isOptional: true }),
+      followLink<Authorization>('object'),
+      followLink<Authorization>('feature'),
     ];
 
     return this.searchByObjects(uuidList, type, featuresId, ePersonUuid, {}, useCachedVersionIfAvailable, reRequestOnStale, ...followLinks).pipe(

@@ -71,9 +71,9 @@ export class ServerInitService extends InitService {
       this.initRouteListeners();
       this.themeService.listenForThemeChanges(false);
 
-      this.authorizationService.initStateForSite(this.appConfig.siteAuthorizationFeaturesConfig);
-
       await this.authenticationReady$().toPromise();
+
+      this.authorizationService.initAnonymousStateForSite();
 
       return true;
     };
