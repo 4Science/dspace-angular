@@ -24,6 +24,7 @@ import {
 } from 'rxjs';
 import {
   catchError,
+  switchMap,
   take,
 } from 'rxjs/operators';
 
@@ -134,7 +135,9 @@ export class RequestCorrectionMenuComponent extends ContextMenuEntryComponent im
       }
     });
 
-    this.canCreateCorrection$ = this.canCreateCorrection(false);
+    this.canCreateCorrection$ = this.notificationService.claimedProfile.pipe(
+      switchMap(() => this.canCreateCorrection(false)),
+    );
   }
 
   /**
