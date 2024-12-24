@@ -80,6 +80,7 @@ import { AppState } from '../../../../app.reducer';
 import { PaginatedList } from '../../../../core/data/paginated-list.model';
 import { RelationshipDataService } from '../../../../core/data/relationship-data.service';
 import { RemoteData } from '../../../../core/data/remote-data';
+import { MetadataService } from '../../../../core/metadata/metadata.service';
 import { Collection } from '../../../../core/shared/collection.model';
 import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
 import { Item } from '../../../../core/shared/item.model';
@@ -218,6 +219,7 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
     protected ref: ChangeDetectorRef,
     protected formBuilderService: FormBuilderService,
     protected submissionService: SubmissionService,
+    protected metadataService: MetadataService,
     @Inject(APP_CONFIG) protected appConfig: AppConfig,
     @Inject(DYNAMIC_FORM_CONTROL_MAP_FN) protected dynamicFormControlFn: DynamicFormControlMapFn,
   ) {
