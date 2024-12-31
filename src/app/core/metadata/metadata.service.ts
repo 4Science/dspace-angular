@@ -796,7 +796,9 @@ export class MetadataService {
     const pageUrl = new URLCombiner(this.hardRedirectService.getCurrentOrigin(), this.router.url).toString();
     const genericPageOpenGraphType = 'website';
 
-    this.setTitleTags(pageDocumentTitle);
+    if (hasValue(pageDocumentTitle)) {
+      this.setTitleTags(pageDocumentTitle);
+    }
     this.setDescriptionTags(this.defaultPageDescription);
 
     this.setOpenGraphUrlTag(pageUrl);
