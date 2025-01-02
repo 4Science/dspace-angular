@@ -107,6 +107,7 @@ describe('LuckySearchComponent', () => {
   });
 
   afterEach(() => {
+    TestBed.resetTestingModule();
     routerStub = new RouterMock();
   });
 
