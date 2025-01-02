@@ -5902,7 +5902,7 @@
   "item.edit.tabs.status.head": "Stato",
 
   // "item.edit.tabs.status.labels.handle": "Handle",
-  "item.edit.tabs.status.labels.handle": "Gestisci",
+  "item.edit.tabs.status.labels.handle": "Handle",
 
   // "item.edit.tabs.status.labels.id": "Item Internal ID",
   "item.edit.tabs.status.labels.id": "ID interno dell'item",
