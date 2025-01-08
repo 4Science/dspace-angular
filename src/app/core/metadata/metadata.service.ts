@@ -797,6 +797,7 @@ export class MetadataService {
     const genericPageOpenGraphType = 'website';
 
     this.setTitleTags(pageDocumentTitle);
+
     this.setDescriptionTags(this.defaultPageDescription);
 
     this.setOpenGraphUrlTag(pageUrl);
