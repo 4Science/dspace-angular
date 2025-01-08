@@ -5902,7 +5902,7 @@
   "item.edit.tabs.status.head": "Stato",
 
   // "item.edit.tabs.status.labels.handle": "Handle",
-  "item.edit.tabs.status.labels.handle": "Gestisci",
+  "item.edit.tabs.status.labels.handle": "Handle",
 
   // "item.edit.tabs.status.labels.id": "Item Internal ID",
   "item.edit.tabs.status.labels.id": "ID interno dell'item",
@@ -14451,7 +14451,7 @@
   // "layout.field.label.Person.[glamperson.link.dbi]": "DBI Link",
   "layout.field.label.Person.[glamperson.link.dbi]": "Dizionario Biografico degli Italiani link",
   // "layout.field.label.Person.[glamperson.link.ei]": "EI Link",
-  "layout.field.label.Person.[glamperson.link.ei]": "Enciclopedia Italiana link",
+  "layout.field.label.Person.[glamperson.link.ei]": "Link all'Enciclopedia Italiana",
   // "layout.field.label.Person.[glam.link.wikipedia]": "Wikipedia Link",
   "layout.field.label.Person.[glam.link.wikipedia]": "Link a Wikipedia",
   // "layout.field.label.Person.[glam.link.dbpedia]": "Dbpedia Link",
