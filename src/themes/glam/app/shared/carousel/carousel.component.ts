@@ -1,8 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { CarouselComponent as BaseComponent} from '../../../../../app/shared/carousel/carousel.component';
 import { BitstreamDataService } from '../../../../../app/core/data/bitstream-data.service';
 import { NativeWindowRef, NativeWindowService } from '../../../../../app/core/services/window.service';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, isPlatformServer } from '@angular/common';
 import {HostWindowService} from '../../../../../app/shared/host-window.service';
 import {Observable} from 'rxjs';
 import {BitstreamImagesService} from '../../../../../app/core/services/bitstream-images.service';
@@ -31,12 +31,17 @@ export class CarouselComponent extends BaseComponent implements OnInit {
     private hostWindowService: HostWindowService,
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
     @Inject(DOCUMENT) private _document: Document,
+    @Inject(PLATFORM_ID) protected platformId: Object,
   ) {
     super(bitstreamDataService, bitstreamImagesService,  _window);
   }
 
   ngOnInit() {
     super.ngOnInit();
+
+    if (isPlatformServer(this.platformId)) {
+      return;
+    }
 
     if (this.carouselOptions.keepAspectRatio) {
       const defaultAspectRatio = 2 / 3;

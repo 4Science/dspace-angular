@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
 
-import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
@@ -52,6 +52,7 @@ export class CountersSectionComponent implements OnInit {
 
   ngOnInit() {
     if (isPlatformServer(this.platformId)) {
+      this.counterData$ = of([]);
       return;
     }
 
