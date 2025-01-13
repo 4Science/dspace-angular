@@ -233,7 +233,7 @@ const enviromentNoThumbs = {
   }
 };
 
-fdescribe('ItemSearchResultListElementComponent', () => {
+describe('ItemSearchResultListElementComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot()],
