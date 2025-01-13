@@ -63,10 +63,10 @@
             </ng-container>
           </div>
         </div>
-        <div *ngIf="fullTextMirador.length" class="d-flex flex-row item-list-highlights p-3 border-bottom">
+        <div *ngIf="fullTextMirador.length" class="d-flex flex-row item-list-highlights p-3 border-bottom" data-test="fulltextmirador">
           <div>
             <ng-container *ngFor="let mirador of fullTextMirador">
-              <span [innerHTML]="mirador" class="d-block text-monospace small"></span>
+              <span [innerHTML]="mirador" class="d-block text-monospace small" data-test="mirador"></span>
             </ng-container>
           </div>
           <div class="mirador-btn-wrapper ml-2 pl-2 border-left">

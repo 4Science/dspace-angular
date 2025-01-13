@@ -50,8 +50,8 @@ export class SearchResultListElementComponent<T extends SearchResult<K>, K exten
    * @returns {string[]} the matching string values or an empty array.
    */
   allMetadataValues(keyOrKeys: string | string[]): string[] {
-    let dsoMetadata: string[] = Metadata.allValues([this.dso.metadata], keyOrKeys);
-    let highlights: string[] = Metadata.allValues([this.object.hitHighlights], keyOrKeys);
+    let dsoMetadata: string[] = this.getMetadataValues(keyOrKeys);
+    let highlights: string[] = this.getHighlights(keyOrKeys);
     let removedHighlights: string[] = highlights.map(str => str.replace(/<\/?em>/g, ''));
     for (let i = 0; i < removedHighlights.length; i++) {
         let index = dsoMetadata.indexOf(removedHighlights[i]);
@@ -60,6 +60,14 @@ export class SearchResultListElementComponent<T extends SearchResult<K>, K exten
         }
     }
     return dsoMetadata;
+  }
+
+  protected getMetadataValues(keyOrKeys: string | string[]) {
+    return Metadata.allValues([this.dso.metadata], keyOrKeys);
+  }
+
+  protected getHighlights(keyOrKeys: string | string[]) {
+    return Metadata.allValues([this.object.hitHighlights], keyOrKeys);
   }
 
   /**

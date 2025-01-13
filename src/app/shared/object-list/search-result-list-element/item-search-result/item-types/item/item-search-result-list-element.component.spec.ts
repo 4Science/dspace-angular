@@ -59,6 +59,53 @@ const mockItemWithMetadata: ItemSearchResult = Object.assign(new ItemSearchResul
       }
     })
 });
+const mockMiradorItem: ItemSearchResult = Object.assign(new ItemSearchResult(), {
+  hitHighlights: {
+    'dc.title': [{
+      value: dcTitle
+    }],
+    'fulltext.mirador': [
+      { value: '<em>First</em> <em>Hit</em>' },
+      { value: '<em>Second</em> <em>Hit</em>' }
+    ]
+  },
+  indexableObject:
+    Object.assign(new Item(), {
+      bundles: observableOf({}),
+      metadata: {
+        'dc.title': [
+          {
+            language: 'en_US',
+            value: dcTitle
+          }
+        ],
+        'dc.contributor.author': [
+          {
+            language: 'en_US',
+            value: 'Smith, Donald'
+          }
+        ],
+        'dc.publisher': [
+          {
+            language: 'en_US',
+            value: 'a publisher'
+          }
+        ],
+        'dc.date.issued': [
+          {
+            language: 'en_US',
+            value: '2015-06-26'
+          }
+        ],
+        'dc.description.abstract': [
+          {
+            language: 'en_US',
+            value: 'This is the abstract'
+          }
+        ]
+      }
+    })
+});
 const mockItemWithoutMetadata: ItemSearchResult = Object.assign(new ItemSearchResult(), {
   indexableObject:
     Object.assign(new Item(), {
@@ -186,7 +233,7 @@ const enviromentNoThumbs = {
   }
 };
 
-describe('ItemSearchResultListElementComponent', () => {
+fdescribe('ItemSearchResultListElementComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot()],
@@ -366,6 +413,31 @@ describe('ItemSearchResultListElementComponent', () => {
       expect(titleField.nativeElement.textContent.trim()).toEqual(UNDEFINED_NAME);
     });
   });
+
+  describe('with mirador entry result', () => {
+    beforeEach(() => {
+
+      publicationListElementComponent.object = mockMiradorItem;
+      fixture.detectChanges();
+    });
+
+    it('should display fulltextmirador hit', () => {
+      const thumbnailElement = fixture.debugElement.query(By.css('[data-test="fulltextmirador"]'));
+      expect(thumbnailElement).toBeTruthy();
+    });
+
+    it('should display two mirador hits', () => {
+      const miradorElements = fixture.debugElement.queryAll(By.css('[data-test="mirador"]'));
+      expect(miradorElements).toHaveSize(2);
+
+      const hitContent = miradorElements.map(element => (element.nativeElement as HTMLElement).innerHTML.trim());
+      expect(hitContent.length).toBe(2);
+
+      const textHit = mockMiradorItem.hitHighlights['fulltext.mirador'].map(mv => mv.value);
+      expect(hitContent).toEqual(textHit);
+    });
+  });
+
 });
 
 describe('ItemSearchResultListElementComponent', () => {

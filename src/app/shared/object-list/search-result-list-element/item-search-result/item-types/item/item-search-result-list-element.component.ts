@@ -6,10 +6,7 @@ import { ViewMode } from '../../../../../../core/shared/view-mode.model';
 import { ItemSearchResult } from '../../../../../object-collection/shared/item-search-result.model';
 import { SearchResultListElementComponent } from '../../../search-result-list-element.component';
 import { Item } from '../../../../../../core/shared/item.model';
-import {
-  getItemPageRoute,
-  getItemViewerPath
-} from '../../../../../../item-page/item-page-routing-paths';
+import { getItemPageRoute, getItemViewerPath } from '../../../../../../item-page/item-page-routing-paths';
 import { Context } from '../../../../../../core/shared/context.model';
 import { environment } from '../../../../../../../environments/environment';
 import { KlaroService } from '../../../../../cookies/klaro.service';
@@ -71,9 +68,9 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
     super.ngOnInit();
     this.itemPageRoute = getItemPageRoute(this.dso);
     this.itemViewerRoute = getItemViewerPath(this.dso, 'iiif');
-    this.fullTextHighlights = this.allMetadataValues('fulltext');
-    this.fullTextMirador = this.allMetadataValues('fulltext.mirador');
-    this.fullTextVideo = this.allMetadataValues('fulltext.video');
+    this.fullTextHighlights = this.getHighlights('fulltext');
+    this.fullTextMirador = this.getHighlights('fulltext.mirador');
+    this.fullTextVideo = this.getHighlights('fulltext.video');
   }
 
   /**
