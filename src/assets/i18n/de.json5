@@ -2872,9 +2872,9 @@
   // TODO New key - Add a translation
   "context-menu.actions.edit-item.btn.FULL": "Edit all the details",
 
-  // "context-menu.actions.edit-item.btn.OWNER": "Edit",
+  // "context-menu.actions.edit-item.btn.OWNER": "Edit Profile",
   // TODO New key - Add a translation
-  "context-menu.actions.edit-item.btn.OWNER": "Edit",
+  "context-menu.actions.edit-item.btn.OWNER": "Edit Profile",
 
   // "context-menu.actions.edit-item.btn.DIRECTOR": "Edit",
   // TODO New key - Add a translation
