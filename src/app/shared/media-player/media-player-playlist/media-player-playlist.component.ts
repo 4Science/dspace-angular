@@ -140,7 +140,7 @@ export class MediaPlayerPlaylistComponent implements OnInit {
         return response.hasSucceeded ? response.payload : buildPaginatedList(null, []);
       }),
       mergeMap((bitstreamList: PaginatedList<Bitstream>) => {
-        this.hasMoreElements = this.pageOptions.currentPage > bitstreamList?.pageInfo?.totalPages - 1;
+        this.hasMoreElements = this.pageOptions.currentPage < bitstreamList?.pageInfo?.totalPages - 1;
         if (scrollToGivenUUID && isEmpty(this.selectedMediaItem)) {
 
           const bitstreamIndex = findIndex(bitstreamList.page, { uuid: this.startUUID });
