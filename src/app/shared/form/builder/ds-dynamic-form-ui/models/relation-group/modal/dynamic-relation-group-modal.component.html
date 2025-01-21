@@ -39,7 +39,7 @@
       <button *ngIf="!model.readOnly"
               type="button"
               class="btn btn-primary mr-2"
-              [disabled]="isMandatoryFieldEmpty()"
+              [disabled]="isMandatoryFieldEmpty() || !formRef.formGroup?.valid"
               (click)="save()">
         <span *ngIf="item"><i class="fas fa-save"></i> {{'form.group.set' | translate}}</span>
         <span *ngIf="!item"><i class="fas fa-save"></i> {{'form.group.add' | translate}}</span>
