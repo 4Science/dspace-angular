@@ -401,7 +401,7 @@ export class VocabularyTreeviewService {
         if ((tempList.pageInfo.currentPage + 1) <= tempList.pageInfo.totalPages) {
           // Need a new load more node
           const newPageInfo: PageInfo = Object.assign(new PageInfo(), tempList.pageInfo, {
-            currentPage: tempList.pageInfo.currentPage + 1
+            currentPage: tempList.pageInfo.currentPage + 1,
           });
           const loadMoreNode = new TreeviewNode(LOAD_MORE_NODE, false, newPageInfo);
           loadMoreNode.updatePageInfo(newPageInfo);
@@ -409,7 +409,7 @@ export class VocabularyTreeviewService {
         }
 
         return this.getNodeHierarchy(rootNode, selectedItems, childNodes);
-      })
+      }),
     ).subscribe(hierarchy => {
       nodes.push(hierarchy);
 

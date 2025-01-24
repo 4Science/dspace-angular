@@ -19,8 +19,6 @@ import {
   switchMap,
 } from 'rxjs/operators';
 import { TestScheduler } from 'rxjs/testing';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-import { cold, getTestScheduler, hot } from 'jasmine-marbles';
 
 import { buildPaginatedList } from '../../../core/data/paginated-list.model';
 import { PageInfo } from '../../../core/shared/page-info.model';
@@ -29,15 +27,14 @@ import { VocabularyEntryDetail } from '../../../core/submission/vocabularies/mod
 import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
 import { VocabularyService } from '../../../core/submission/vocabularies/vocabulary.service';
 import { TranslateLoaderMock } from '../../mocks/translate-loader.mock';
-import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
-import { LOAD_MORE_NODE, LOAD_MORE_ROOT_NODE, TreeviewFlatNode, TreeviewNode } from './vocabulary-treeview-node.model';
-import { PageInfo } from '../../../core/shared/page-info.model';
-import { VocabularyEntryDetail } from '../../../core/submission/vocabularies/models/vocabulary-entry-detail.model';
-import { buildPaginatedList } from '../../../core/data/paginated-list.model';
 import { createSuccessfulRemoteDataObject } from '../../remote-data.utils';
-import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
-import { expand, map, switchMap } from 'rxjs/operators';
-import { from as observableFrom } from 'rxjs';
+import { VocabularyTreeviewService } from './vocabulary-treeview.service';
+import {
+  LOAD_MORE_NODE,
+  LOAD_MORE_ROOT_NODE,
+  TreeviewFlatNode,
+  TreeviewNode,
+} from './vocabulary-treeview-node.model';
 
 describe('VocabularyTreeviewService test suite', () => {
 
@@ -228,12 +225,12 @@ describe('VocabularyTreeviewService test suite', () => {
 
     it('should set initValueHierarchy', () => {
       serviceAsAny.vocabularyService.searchTopEntries.and.returnValue(hot('--a', {
-        a: createSuccessfulRemoteDataObject(buildPaginatedList(pageInfo, [item, item2, item3]))
+        a: createSuccessfulRemoteDataObject(buildPaginatedList(pageInfo, [item, item2, item3])),
       }));
       serviceAsAny.vocabularyService.findEntryDetailById.and.returnValue(
         hot('-a', {
-          a: createSuccessfulRemoteDataObject(child2)
-        })
+          a: createSuccessfulRemoteDataObject(child2),
+        }),
       );
       serviceAsAny.vocabularyService.getEntryDetailParent.and.returnValue(
         hot('-b', {
@@ -250,12 +247,12 @@ describe('VocabularyTreeviewService test suite', () => {
 
     it('should show only nodes restricted to init Value Hierarchy', () => {
       serviceAsAny.vocabularyService.searchTopEntries.and.returnValue(hot('--a', {
-        a: createSuccessfulRemoteDataObject(buildPaginatedList(pageInfo, [item, item2, item3]))
+        a: createSuccessfulRemoteDataObject(buildPaginatedList(pageInfo, [item, item2, item3])),
       }));
       serviceAsAny.vocabularyService.findEntryDetailById.and.returnValue(
         hot('-a', {
-          a: createSuccessfulRemoteDataObject(child2)
-        })
+          a: createSuccessfulRemoteDataObject(child2),
+        }),
       );
       serviceAsAny.vocabularyService.getEntryDetailParent.and.returnValue(
         hot('-b', {
@@ -273,20 +270,20 @@ describe('VocabularyTreeviewService test suite', () => {
     it('should call retrieveNodesTreeByTopParentEntry properly when is a relation component', () => {
       serviceAsAny.vocabularyService.findEntryDetailById.and.returnValues(
         hot('-a', {
-          a: createSuccessfulRemoteDataObject(child)
+          a: createSuccessfulRemoteDataObject(child),
         }),
         hot('-b', {
-          b: createSuccessfulRemoteDataObject(item)
+          b: createSuccessfulRemoteDataObject(item),
         }),
       );
 
       serviceAsAny.vocabularyService.getEntryDetailChildren.and.returnValue(hot('-a', {
-        a: createSuccessfulRemoteDataObject([child])
+        a: createSuccessfulRemoteDataObject([child]),
       }));
 
       serviceAsAny.vocabularyService.getEntryDetailParent.and.returnValue(
         hot('-a', {
-          a: createSuccessfulRemoteDataObject(item)
+          a: createSuccessfulRemoteDataObject(item),
         }),
       );
       spyOn(serviceAsAny, 'retrieveNodesTreeByTopParentEntry');
