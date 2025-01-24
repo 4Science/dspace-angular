@@ -19,6 +19,8 @@ import {
   switchMap,
 } from 'rxjs/operators';
 import { TestScheduler } from 'rxjs/testing';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { cold, getTestScheduler, hot } from 'jasmine-marbles';
 
 import { buildPaginatedList } from '../../../core/data/paginated-list.model';
 import { PageInfo } from '../../../core/shared/page-info.model';
@@ -27,14 +29,15 @@ import { VocabularyEntryDetail } from '../../../core/submission/vocabularies/mod
 import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
 import { VocabularyService } from '../../../core/submission/vocabularies/vocabulary.service';
 import { TranslateLoaderMock } from '../../mocks/translate-loader.mock';
+import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
+import { LOAD_MORE_NODE, LOAD_MORE_ROOT_NODE, TreeviewFlatNode, TreeviewNode } from './vocabulary-treeview-node.model';
+import { PageInfo } from '../../../core/shared/page-info.model';
+import { VocabularyEntryDetail } from '../../../core/submission/vocabularies/models/vocabulary-entry-detail.model';
+import { buildPaginatedList } from '../../../core/data/paginated-list.model';
 import { createSuccessfulRemoteDataObject } from '../../remote-data.utils';
-import { VocabularyTreeviewService } from './vocabulary-treeview.service';
-import {
-  LOAD_MORE_NODE,
-  LOAD_MORE_ROOT_NODE,
-  TreeviewFlatNode,
-  TreeviewNode,
-} from './vocabulary-treeview-node.model';
+import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
+import { expand, map, switchMap } from 'rxjs/operators';
+import { from as observableFrom } from 'rxjs';
 
 describe('VocabularyTreeviewService test suite', () => {
 
@@ -224,53 +227,74 @@ describe('VocabularyTreeviewService test suite', () => {
     });
 
     it('should set initValueHierarchy', () => {
-      serviceAsAny.vocabularyService.getEntryDetailChildren.and.returnValue(hot('--a', {
-        a: createSuccessfulRemoteDataObject(buildPaginatedList(pageInfo, [child, child2])),
+      serviceAsAny.vocabularyService.searchTopEntries.and.returnValue(hot('--a', {
+        a: createSuccessfulRemoteDataObject(buildPaginatedList(pageInfo, [item, item2, item3]))
       }));
-      serviceAsAny.vocabularyService.findEntryDetailById.and.returnValues(
+      serviceAsAny.vocabularyService.findEntryDetailById.and.returnValue(
         hot('-a', {
-          a: createSuccessfulRemoteDataObject(child),
-        }),
-        hot('-b', {
-          b: createSuccessfulRemoteDataObject(item),
-        }),
+          a: createSuccessfulRemoteDataObject(child2)
+        })
       );
       serviceAsAny.vocabularyService.getEntryDetailParent.and.returnValue(
         hot('-b', {
           b: createSuccessfulRemoteDataObject(item),
         }),
       );
-
-      scheduler.schedule(() => service.initialize(vocabularyOptions, pageInfo, [], 'root1'));
+      scheduler.schedule(() => service.initialize(vocabularyOptions, pageInfo, [], 'root2'));
       scheduler.flush();
 
       expect(serviceAsAny.vocabularyName).toEqual(vocabularyOptions.name);
-      expect(serviceAsAny.initValueHierarchy).toEqual(['root1', 'root1-child1']);
+      expect(serviceAsAny.initValueHierarchy).toEqual(['root1', 'root1-child2']);
+      expect(serviceAsAny.dataChange.value).toEqual([itemInitNode, itemNode2, itemNode3]);
     });
-    // Disabled as we don't limt the tree anymore to the first value of the hierarchy but we start building the tree directly from that one (root node) for any case
-    xit('should show only nodes restricted to init Value Hierarchy', () => {
-      serviceAsAny.vocabularyService.getEntryDetailChildren.and.returnValue(hot('--a', {
-        a: createSuccessfulRemoteDataObject(buildPaginatedList(pageInfo, [child, child2])),
+
+    it('should show only nodes restricted to init Value Hierarchy', () => {
+      serviceAsAny.vocabularyService.searchTopEntries.and.returnValue(hot('--a', {
+        a: createSuccessfulRemoteDataObject(buildPaginatedList(pageInfo, [item, item2, item3]))
       }));
-      serviceAsAny.vocabularyService.findEntryDetailById.and.returnValues(
+      serviceAsAny.vocabularyService.findEntryDetailById.and.returnValue(
         hot('-a', {
-          a: createSuccessfulRemoteDataObject(child),
-        }),
-        hot('-b', {
-          b: createSuccessfulRemoteDataObject(item),
-        }),
+          a: createSuccessfulRemoteDataObject(child2)
+        })
       );
       serviceAsAny.vocabularyService.getEntryDetailParent.and.returnValue(
         hot('-b', {
           b: createSuccessfulRemoteDataObject(item),
         }),
       );
-      scheduler.schedule(() => service.initialize(vocabularyOptions, pageInfo, ['root1-child1'], 'root1-child1', true));
+      scheduler.schedule(() => service.initialize(vocabularyOptions, pageInfo, ['root2'], 'root2', true));
       scheduler.flush();
 
       expect(serviceAsAny.vocabularyName).toEqual(vocabularyOptions.name);
-      expect(serviceAsAny.initValueHierarchy).toEqual(['root1', 'root1-child1']);
+      expect(serviceAsAny.initValueHierarchy).toEqual(['root1', 'root1-child2']);
       expect(serviceAsAny.dataChange.value).toEqual([itemInitNode]);
+    });
+
+    it('should call retrieveNodesTreeByTopParentEntry properly when is a relation component', () => {
+      serviceAsAny.vocabularyService.findEntryDetailById.and.returnValues(
+        hot('-a', {
+          a: createSuccessfulRemoteDataObject(child)
+        }),
+        hot('-b', {
+          b: createSuccessfulRemoteDataObject(item)
+        }),
+      );
+
+      serviceAsAny.vocabularyService.getEntryDetailChildren.and.returnValue(hot('-a', {
+        a: createSuccessfulRemoteDataObject([child])
+      }));
+
+      serviceAsAny.vocabularyService.getEntryDetailParent.and.returnValue(
+        hot('-a', {
+          a: createSuccessfulRemoteDataObject(item)
+        }),
+      );
+      spyOn(serviceAsAny, 'retrieveNodesTreeByTopParentEntry');
+
+      scheduler.schedule(() => service.initialize(vocabularyOptions, pageInfo, [child.id], child.id, false, true));
+      scheduler.flush();
+
+      expect(serviceAsAny.retrieveNodesTreeByTopParentEntry).toHaveBeenCalledWith(child.otherInformation.parent, pageInfo, [child.id]);
     });
   });
 
