@@ -4475,8 +4475,8 @@
   // "explore.index.jornalfounddate": "Date",
   "explore.index.jornalfounddate": "Periodo di attività",
 
-  // "explore.index.corporate": "Organizational Unit",
-  "explore.index.corporate": "Organizzazione",
+  // "explore.index.corporate": "Corporate body",
+  "explore.index.corporate": "Soggetto Produttore/Organizzazione",
 
   // "explore.index.opera": "Opera",
   "explore.index.opera": "Lirico",
