@@ -17,8 +17,9 @@ import miradorSharePlugin from 'mirador-share-plugin/es/miradorSharePlugin';
 import miradorDownloadPlugin from 'mirador-dl-plugin/es/miradorDownloadPlugin';
 import miradorDownloadDialog from 'mirador-dl-plugin/es/MiradorDownloadDialog';
 import miradorAnnotationPlugins from 'mirador-annotations/es/index';
-import LocalStorageAdapter from 'mirador-annotations/es/LocalStorageAdapter';
 import miradorImageToolsPlugin from 'mirador-image-tools/es/plugins/miradorImageToolsPlugin';
+import DspaceAnnotationServerAdapter from "./dspace-annotation-server-adapter";
+import LocalStorageAdapter from 'mirador-annotations/es/LocalStorageAdapter';
 
 const MANIFEST_URL_PART = /\/manifest$/;
 
@@ -30,6 +31,8 @@ const query = params.get('query');
 const multi = params.get('multi');
 const notMobile = params.get('notMobile');
 const isDownloadPluginEnabled = (params.get('enableDownloadPlugin') === 'true');
+const isAnnotationServerEnabled = (params.get('enableAnnotationServer') === 'true');
+const annotationServerUrl = params.get('annotationServerUrl');
 const canvasId = params.get('canvasId');
 
 let windowSettings = {};
@@ -70,7 +73,10 @@ windowSettings.manifestId = manifest;
 
 const miradorConfiguration = {
   annotation: {
-    adapter: (canvasId) => new LocalStorageAdapter(`localStorage://?canvasId=${canvasId}`),
+    adapter: (canvasId) =>
+      (isAnnotationServerEnabled && annotationServerUrl) ?
+      new DspaceAnnotationServerAdapter(canvasId, annotationServerUrl) :
+      new LocalStorageAdapter(`localStorage://?canvasId=${canvasId}`),
   },
   id: 'mirador',
   mainMenuSettings: {

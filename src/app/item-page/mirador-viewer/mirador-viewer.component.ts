@@ -98,6 +98,12 @@ export class MiradorViewerComponent implements OnInit {
     if (environment.mirador.enableDownloadPlugin) {
       viewerPath += '&enableDownloadPlugin=true';
     }
+    if (environment.mirador.enableAnnotationServer) {
+      viewerPath += '&enableAnnotationServer=true';
+    }
+    if (environment.mirador.annotationServerUrl) {
+      viewerPath += '&annotationServerUrl=' + environment.mirador.annotationServerUrl;
+    }
     if (this.canvasId) {
       viewerPath += `&canvasId=${this.canvasId}`;
     }

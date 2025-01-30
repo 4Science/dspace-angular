@@ -9340,7 +9340,7 @@ minizlib@^2.1.1, minizlib@^2.1.2:
     minipass "^3.0.0"
     yallist "^4.0.0"
 
-mirador-annotations@^0.5.0:
+mirador-annotations@0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/mirador-annotations/-/mirador-annotations-0.5.0.tgz#22d953157bc57667ff6e6b128c4a6b2829be9861"
   integrity sha512-y99yqig1Uwk6562YBtKBakgzEOIZqyMXdlOvN2HerbkK+zDJqWQTyb12NabCcVeoJlTFzFiLnxr7mrk/msrLsA==
