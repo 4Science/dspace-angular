@@ -69,6 +69,11 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges
   @Input() selectedItems: VocabularyTreeItemType[] = [];
 
   /**
+   * Whether the component is used as a relation component
+   */
+  @Input() isRelationComponent = false;
+
+  /**
    * A map containing the current node showed by the tree
    */
   nodeMap = new Map<string, TreeviewFlatNode>();
@@ -228,7 +233,7 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges
     this.loading = this.vocabularyTreeviewService.isLoading();
 
     const entryId: string = (this.selectedItems?.length > 0) ? this.getEntryId(this.selectedItems[0]) : null;
-    this.vocabularyTreeviewService.initialize(this.vocabularyOptions, new PageInfo(), this.getSelectedEntryIds(), entryId, this.publicModeOnly);
+    this.vocabularyTreeviewService.initialize(this.vocabularyOptions, new PageInfo(), this.getSelectedEntryIds(), entryId, this.publicModeOnly, this.isRelationComponent);
   }
 
   /**
