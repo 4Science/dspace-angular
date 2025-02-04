@@ -8451,6 +8451,12 @@
 
   "vocabulary-treeview.header.aggregationboxtree": "Aggregation Arrangement",
 
+  "vocabulary-treeview.tree.description.fondsTree": "Fonds",
+
+  "vocabulary-treeview.tree.description.journalfondsTree": "Journal Fonds",
+
+  "vocabulary-treeview.tree.description.aggregationsTree": "Aggreagations",
+
   "curation-task.task.iiifuploader.label": "Upload images to the IIIF Image Server (photo gallery)",
 
   "curation-task.task.iiifuploader.primary.label": "Upload images to the IIIF Image Server (digitized book)",
