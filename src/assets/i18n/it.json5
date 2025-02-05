@@ -12229,6 +12229,15 @@
   // TODO New key - Add a translation
   "vocabulary-treeview.tree.description.publication-coar-types": "Publication types",
 
+  // "vocabulary-treeview.tree.description.fondsTree": "Fondi",
+  "vocabulary-treeview.tree.description.fondsTree": "Fondi",
+
+  // "vocabulary-treeview.tree.description.journalfondsTree": "Periodici",
+  "vocabulary-treeview.tree.description.journalfondsTree": "Periodici",
+
+  // "vocabulary-treeview.tree.description.aggregationsTree": "Aggregazione",
+  "vocabulary-treeview.tree.description.aggregationsTree": "Aggregazioni",
+
   // "vocabulary-treeview.info": "Select a subject to add as search filter",
   "vocabulary-treeview.info": "Seleziona un soggetto da aggiungere come filtro di ricerca",
 
