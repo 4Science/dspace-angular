@@ -35,6 +35,7 @@ import { KlaroService } from './klaro.service';
 import {
   ANONYMOUS_STORAGE_NAME_KLARO,
   klaroConfiguration,
+  MATOMO_KLARO_KEY,
 } from './klaro-configuration';
 
 /**
@@ -126,14 +127,19 @@ export class BrowserKlaroService extends KlaroService {
       ),
     );
 
-    const servicesToHide$: Observable<string[]> = observableCombineLatest([hideGoogleAnalytics$, hideRegistrationVerification$]).pipe(
-      map(([hideGoogleAnalytics, hideRegistrationVerification]) => {
+    const hideMatomo$ = observableOf(!(environment.matomo?.trackerUrl && environment.matomo?.siteId));
+
+    const servicesToHide$: Observable<string[]> = observableCombineLatest([hideGoogleAnalytics$, hideRegistrationVerification$, hideMatomo$]).pipe(
+      map(([hideGoogleAnalytics, hideRegistrationVerification, hideMatomo]) => {
         const servicesToHideArray: string[] = [];
         if (hideGoogleAnalytics) {
           servicesToHideArray.push(this.GOOGLE_ANALYTICS_SERVICE_NAME);
         }
         if (hideRegistrationVerification) {
           servicesToHideArray.push(CAPTCHA_NAME);
+        }
+        if (hideMatomo) {
+          servicesToHideArray.push(MATOMO_KLARO_KEY);
         }
         return servicesToHideArray;
       }),

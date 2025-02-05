@@ -21,6 +21,10 @@ export const ANONYMOUS_STORAGE_NAME_KLARO = 'klaro-anonymous';
 
 export const GOOGLE_ANALYTICS_KLARO_KEY = 'google-analytics';
 
+export const MATOMO_KLARO_KEY = 'matomo';
+
+export const MATOMO_COOKIE = 'dsMatomo';
+
 /**
  * Klaro configuration
  * For more information see https://klaro.org/docs/integration/annotated-configuration
@@ -149,6 +153,16 @@ export const klaroConfiguration: any = {
         [/^klaro-.+$/],
         HAS_AGREED_END_USER,
       ],
+    },
+    {
+      name: MATOMO_KLARO_KEY,
+      purposes: ['statistical'],
+      required: false,
+      cookies: [
+        MATOMO_COOKIE,
+      ],
+      onAccept: `window?.changeMatomoConsent(true)`,
+      onDecline: `window?.changeMatomoConsent(false)`,
     },
     {
       name: GOOGLE_ANALYTICS_KLARO_KEY,
