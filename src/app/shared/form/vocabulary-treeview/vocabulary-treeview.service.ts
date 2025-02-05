@@ -395,21 +395,26 @@ export class VocabularyTreeviewService {
     ]).pipe(
       mergeMap(([rootNode, list]) => {
         tempList = list;
+        let newPageInfo: PageInfo;
 
         const childNodes: TreeviewNode[] = list.page.map((entryDetail: VocabularyEntryDetail) => this._generateNode(entryDetail, selectedItems));
 
         if ((tempList.pageInfo.currentPage + 1) <= tempList.pageInfo.totalPages) {
           // Need a new load more node
-          const newPageInfo: PageInfo = Object.assign(new PageInfo(), tempList.pageInfo, {
-            currentPage: tempList.pageInfo.currentPage + 1,
+          newPageInfo = Object.assign(new PageInfo(), tempList.pageInfo, {
+            currentPage: tempList.pageInfo.currentPage + 1
           });
           const loadMoreNode = new TreeviewNode(LOAD_MORE_NODE, false, newPageInfo);
           loadMoreNode.updatePageInfo(newPageInfo);
           childNodes.push(loadMoreNode);
         }
-
-        return this.getNodeHierarchy(rootNode, selectedItems, childNodes);
-      }),
+        return this.getNodeHierarchy(rootNode, selectedItems, childNodes).pipe(
+          map(node => {
+            node.updatePageInfo(newPageInfo);
+            return node;
+          }),
+        );
+      })
     ).subscribe(hierarchy => {
       nodes.push(hierarchy);
 
@@ -439,7 +444,7 @@ export class VocabularyTreeviewService {
     if (isNotEmpty(children)) {
       const newChildren = children
         .filter((entry: TreeviewNode) => {
-          return findIndex(node.children, (nodeEntry) => nodeEntry.item.otherInformation.id === entry.item.otherInformation.id) === -1;
+          return findIndex(node.children, (nodeEntry) => nodeEntry.item.otherInformation?.id === entry.item.otherInformation?.id) === -1;
         });
       newChildren.forEach((entry: TreeviewNode) => {
         entry.loadMoreParentItem = node.item;
