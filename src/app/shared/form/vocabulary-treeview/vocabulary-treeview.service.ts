@@ -402,7 +402,7 @@ export class VocabularyTreeviewService {
         if ((tempList.pageInfo.currentPage + 1) <= tempList.pageInfo.totalPages) {
           // Need a new load more node
           newPageInfo = Object.assign(new PageInfo(), tempList.pageInfo, {
-            currentPage: tempList.pageInfo.currentPage + 1
+            currentPage: tempList.pageInfo.currentPage + 1,
           });
           const loadMoreNode = new TreeviewNode(LOAD_MORE_NODE, false, newPageInfo);
           loadMoreNode.updatePageInfo(newPageInfo);
@@ -414,7 +414,7 @@ export class VocabularyTreeviewService {
             return node;
           }),
         );
-      })
+      }),
     ).subscribe(hierarchy => {
       nodes.push(hierarchy);
 
