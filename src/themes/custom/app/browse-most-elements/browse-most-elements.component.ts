@@ -2,6 +2,7 @@ import {
   AsyncPipe,
   LowerCasePipe,
   NgSwitch,
+  NgSwitchDefault,
 } from '@angular/common';
 import { Component } from '@angular/core';
 
@@ -23,6 +24,7 @@ import { ThemedDefaultBrowseElementsComponent } from '../../../../app/shared/bro
     AsyncPipe,
     LowerCasePipe,
     NgSwitch,
+    NgSwitchDefault,
   ],
 })
 export class BrowseMostElementsComponent extends BaseComponent {
