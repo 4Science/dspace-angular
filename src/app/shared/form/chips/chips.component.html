@@ -5,7 +5,6 @@
 
 <div [className]="'float-left w-100 ' + wrapperClass">
   <div  *ngIf="isPlatformBrowser" role="list" class="nav nav-pills d-flex flex-column flex-sm-row" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="onDrop($event)">
-    <ng-container *ngFor="let c of chips.getChips(); let i = index">
     <ng-template #tipContent>
         <p class="text-left p-0 m-0" *ngFor="let tip of (tipText$ | async)">
         {{tip}}
@@ -62,8 +61,7 @@
                [title]="'chips.remove' | translate"></i>
           </span>
         </a>
-      </div>
-    </ng-container>
+    </div>
     <div [class.chips-sort-ignore]="(isDragging | async)" class="flex-grow-1">
       <ng-container *ngTemplateOutlet="inputContent"></ng-container>
     </div>
