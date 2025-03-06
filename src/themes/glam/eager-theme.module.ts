@@ -35,6 +35,7 @@ import { CarouselWithThumbnailsModule } from 'src/app/shared/carousel-with-thumb
 import {
   ImagesBrowseElementsComponent
 } from './app/shared/browse-most-elements/images-browse-elements/images-browse-elements.component';
+import { MobileSearchNavbarComponent } from "./app/search-navbar/mobile-search-navbar/mobile-search-navbar.component";
 
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
@@ -60,7 +61,8 @@ const DECLARATIONS = [
   CarouselComponent,
   CarouselSectionComponent,
   GridSectionComponent,
-  ImagesBrowseElementsComponent
+  ImagesBrowseElementsComponent,
+  MobileSearchNavbarComponent
 ];
 
 @NgModule({

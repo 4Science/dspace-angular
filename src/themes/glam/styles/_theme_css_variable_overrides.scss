@@ -38,5 +38,7 @@
   --ds-counters-column-gap: 1rem;
   --ds-counters-min-width: 220px;
   --ds-counters-border-bottom: solid 1px #{$body-color};
+  //change this on glam porting
+  --ds-mobile-nav-link-hover-color: #{$link-hover-color};
 }
 
