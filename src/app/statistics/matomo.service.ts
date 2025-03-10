@@ -30,7 +30,7 @@ export class MatomoService {
       const preferences$ = this.klaroService.getSavedPreferences();
 
       preferences$.subscribe(preferences => {
-        this.changeMatomoConsent(preferences.matomo);
+        this.changeMatomoConsent(preferences?.matomo);
 
         if (environment.matomo?.siteId && environment.matomo?.trackerUrl) {
           this.matomoInitializer.initializeTracker({
