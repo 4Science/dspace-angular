@@ -19,6 +19,7 @@ import { REQUEST_COPY_MODULE_PATH } from '../app-routing-paths';
 import { CrisItemPageTabResolver } from './cris-item-page-tab.resolver';
 import { OrcidPageComponent } from './orcid-page/orcid-page.component';
 import { OrcidPageGuard } from './orcid-page/orcid-page.guard';
+import { signpostingLinksResolver } from './simple/link-resolver/signposting-links.resolver';
 import { UnpaywallVersionsComponent } from './unpaywall-versions/unpaywall-versions.component';
 import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.resolver';
 
@@ -30,6 +31,7 @@ import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.reso
         resolve: {
           dso: ItemPageResolver,
           breadcrumb: ItemBreadcrumbResolver,
+          links: signpostingLinksResolver,
         },
         runGuardsAndResolvers: 'always',
         children: [
