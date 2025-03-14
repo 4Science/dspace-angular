@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Inject,
+  Input,
+  OnInit,
+  PLATFORM_ID,
+  ViewChild
+} from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Item } from '../../core/shared/item.model';
 import { environment } from '../../../environments/environment';
@@ -9,15 +19,17 @@ import { isPlatformBrowser } from '@angular/common';
 import { MiradorViewerService } from './mirador-viewer.service';
 import { HostWindowService, WidthCategory } from '../../shared/host-window.service';
 import { BundleDataService } from '../../core/data/bundle-data.service';
+import { AuthService } from '../../core/auth/auth.service';
+import { CookieService } from '../../core/services/cookie.service';
 
 @Component({
   selector: 'ds-mirador-viewer',
   styleUrls: ['./mirador-viewer.component.scss'],
   templateUrl: './mirador-viewer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ MiradorViewerService ]
+  providers: [MiradorViewerService]
 })
-export class MiradorViewerComponent implements OnInit {
+export class MiradorViewerComponent implements OnInit, AfterViewInit {
 
   @Input() object: Item;
 
@@ -58,11 +70,15 @@ export class MiradorViewerComponent implements OnInit {
 
   viewerMessage = 'Sorry, the Mirador viewer is not currently available in development mode.';
 
+  @ViewChild('miradorViewer') miradorViewer: ElementRef;
+
   constructor(private sanitizer: DomSanitizer,
               private viewerService: MiradorViewerService,
               private bitstreamDataService: BitstreamDataService,
               private bundleDataService: BundleDataService,
               private hostWindowService: HostWindowService,
+              private authService: AuthService,
+              private cookieService: CookieService,
               @Inject(PLATFORM_ID) private platformId: any) {
   }
 
@@ -110,6 +126,29 @@ export class MiradorViewerComponent implements OnInit {
 
     // TODO: Should the query term be trusted here?
     return this.sanitizer.bypassSecurityTrustResourceUrl(viewerPath);
+  }
+
+  ngAfterViewInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      const iframe = this.miradorViewer.nativeElement;
+
+      iframe.onload = () => {
+        // Set auth token
+        iframe.contentWindow.postMessage({
+          type: 'setAuthToken',
+          token: this.authService.getToken()
+        }, '*');
+
+        // Set cookies
+        this.cookieService.cookies$
+          .subscribe(cookies => {
+            iframe.contentWindow.postMessage({
+              type: 'setCookies',
+              cookies: cookies
+            }, '*');
+          });
+      };
+    }
   }
 
   ngOnInit(): void {

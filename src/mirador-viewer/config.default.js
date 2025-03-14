@@ -6,10 +6,8 @@ import Mirador from 'mirador/dist/es/src/index';
 // your local Mirador instance. This allows you to keep local
 // Mirador configuration separate from this default distribution
 // copy.
-
 // For an example of all Mirador configuration options, see
 // https://github.com/ProjectMirador/mirador/blob/master/src/config/settings.js
-
 // You can add or remove plugins. When adding new plugins be sure to also
 // import them into the project via your package.json dependencies.
 import miradorShareDialogPlugin from 'mirador-share-plugin/es/MiradorShareDialog';
@@ -69,6 +67,25 @@ windowSettings.manifestId = manifest;
     windowSettings.canvasId =
       `${(manifest.replace(MANIFEST_URL_PART, ''))}/canvas/${canvasId}`;
   }
+})();
+
+(() => {
+  window.addEventListener('message', (event) => {
+
+    console.log('Received message:', event.data);
+
+    // Handle auth token
+    if (event.data.type === 'setAuthToken') {
+      localStorage.setItem('dspace-auth-token', JSON.stringify(event.data.token));
+    }
+
+    // Handle cookies
+    /*if (event.data.type === 'setCookies') {
+      Object.entries(event.data.cookies).forEach(([name, value]) => {
+        document.cookie = `${name}=${value}`;
+      });
+    }*/
+  }, false);
 })();
 
 const miradorConfiguration = {
