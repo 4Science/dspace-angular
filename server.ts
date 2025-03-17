@@ -715,9 +715,10 @@ function healthCheck(req, res) {
 function redirectManifest(req, res) {
   console.info('Redirecting old manifest');
   const url = req.url;
-  const regex = /json\/iiif\/(.+?)\/manifest/;
+  const regex = /json\/iiif\/([^\/]+\/[^\/]+)(?:\/([^\/]+))?\/manifest/;
   const match = url.match(regex);
   let handle;
+  let id;
 
   if (match) {
     handle = match[1];
