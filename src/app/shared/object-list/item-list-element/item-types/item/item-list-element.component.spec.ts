@@ -26,7 +26,6 @@ import { METRIC } from '../../../../../core/shared/metric.resource-type';
 import { XSRFService } from '../../../../../core/xsrf/xsrf.service';
 import { DSONameServiceMock } from '../../../../mocks/dso-name.service.mock';
 import { getMockThemeService } from '../../../../mocks/theme-service.mock';
-import { ListableObjectComponentLoaderComponent } from '../../../../object-collection/shared/listable-object/listable-object-component-loader.component';
 import { ActivatedRouteStub } from '../../../../testing/active-router.stub';
 import { AuthServiceStub } from '../../../../testing/auth-service.stub';
 import { AuthorizationDataServiceStub } from '../../../../testing/authorization-service.stub';
