@@ -19,6 +19,7 @@ import {
   INFO_MODULE_PATH,
   INTERNAL_SERVER_ERROR,
   LEGACY_BITSTREAM_MODULE_PATH,
+  PAGE_NOT_FOUND_PATH,
   PROFILE_MODULE_PATH,
   REGISTER_PATH,
   REQUEST_COPY_MODULE_PATH,
@@ -47,8 +48,8 @@ import { provideSubmissionState } from './submission/provide-submission-state';
 import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-routing-paths';
 
 export const APP_ROUTES: Route[] = [
-  { path: INTERNAL_SERVER_ERROR, component: ThemedPageInternalServerErrorComponent },
-  { path: ERROR_PAGE, component: ThemedPageErrorComponent },
+  { path: INTERNAL_SERVER_ERROR, component: ThemedPageInternalServerErrorComponent, data: { title: INTERNAL_SERVER_ERROR } },
+  { path: ERROR_PAGE, component: ThemedPageErrorComponent, data: { title: ERROR_PAGE }  },
   {
     path: '',
     canActivate: [authBlockingGuard],
@@ -61,6 +62,9 @@ export const APP_ROUTES: Route[] = [
         component: ThemedPageNotFoundComponent,
         pathMatch: 'full',
         canActivate: [reloadGuard],
+        data: {
+          title: PAGE_NOT_FOUND_PATH,
+        },
       },
       {
         path: 'home',
@@ -237,6 +241,9 @@ export const APP_ROUTES: Route[] = [
       {
         path: FORBIDDEN_PATH,
         component: ThemedForbiddenComponent,
+        data: {
+          title: FORBIDDEN_PATH,
+        },
       },
       {
         path: 'statistics',
@@ -314,7 +321,7 @@ export const APP_ROUTES: Route[] = [
           .then((m) => m.ROUTES),
         canActivate: [authenticatedGuard],
       },
-      { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent },
+      { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent, data: { title: PAGE_NOT_FOUND_PATH }  },
     ],
   },
 ];

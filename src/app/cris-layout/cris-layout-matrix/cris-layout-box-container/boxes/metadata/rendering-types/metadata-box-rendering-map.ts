@@ -10,6 +10,7 @@ import { HtmlComponent } from './html/html.component';
 import { IdentifierComponent } from './identifier/identifier.component';
 import { LinkComponent } from './link/link.component';
 import { LinkAuthorityComponent } from './link-authority/link-authority.component';
+import { LonghtmlComponent } from './longhtml/longhtml.component';
 import { LongtextComponent } from './longtext/longtext.component';
 import { MarkdownComponent } from './markdown/markdown.component';
 import { MetadataBoxFieldRenderOptions } from './metadata-box-field-render-options';
@@ -68,6 +69,10 @@ export const layoutBoxesMap = new Map<FieldRenderingType, MetadataBoxFieldRender
   } as MetadataBoxFieldRenderOptions],
   [FieldRenderingType.HTML, {
     componentRef: HtmlComponent,
+    structured: false,
+  } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.LONGHTML, {
+    componentRef: LonghtmlComponent,
     structured: false,
   } as MetadataBoxFieldRenderOptions],
   [FieldRenderingType.GMAP, {
