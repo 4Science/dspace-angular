@@ -69,25 +69,6 @@ windowSettings.manifestId = manifest;
   }
 })();
 
-(() => {
-  window.addEventListener('message', (event) => {
-
-    console.log('Received message:', event.data);
-
-    // Handle auth token
-    if (event.data.type === 'setAuthToken') {
-      localStorage.setItem('dspace-auth-token', JSON.stringify(event.data.token));
-    }
-
-    // Handle cookies
-    /*if (event.data.type === 'setCookies') {
-      Object.entries(event.data.cookies).forEach(([name, value]) => {
-        document.cookie = `${name}=${value}`;
-      });
-    }*/
-  }, false);
-})();
-
 const miradorConfiguration = {
   annotation: {
     adapter: (canvasId) =>

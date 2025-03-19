@@ -4,67 +4,81 @@ import SimpleAnnotationServerV2Adapter from 'mirador-annotations/es/SimpleAnnota
 export default class DspaceAnnotationServerAdapter extends SimpleAnnotationServerV2Adapter {
 
   async create(annotation) {
-    const authToken = JSON.parse(localStorage.getItem('dspace-auth-token'))?.accessToken;
-    if (annotation.target != null) {
-      annotation.target.source = {id: annotation.target.source};
-    }
-    console.log(`Creating annotation ${annotation.target} - ${authToken}`);
+    const headers = this.getHeaders();
+    annotation.target.source = {id: annotation.target.source};
     return fetch(`${this.endpointUrl}/create`, {
       body: JSON.stringify(SimpleAnnotationServerV2Adapter.createV2Anno(annotation)),
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`
-      },
-      method: 'POST',
-      credentials: 'include'
+      headers: headers,
+      method: 'POST'
     })
       .then((response) => this.all())
       .catch(() => this.all());
   }
 
   async update(annotation) {
-    const authToken = JSON.parse(localStorage.getItem('dspace-auth-token'))?.accessToken;
-    if (annotation.target != null) {
-      annotation.target.source = {id: annotation.target.source};
-    }
-    console.log(`Updating annotation ${annotation.target} - ${authToken}`);
+    const headers = this.getHeaders();
+    annotation.target.source = {id: annotation.target.source};
     return fetch(`${this.endpointUrl}/update`, {
       body: JSON.stringify(SimpleAnnotationServerV2Adapter.createV2Anno(annotation)),
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`
-      },
-      method: 'POST',
-      credentials: 'include'
+      headers: headers,
+      method: 'POST'
     })
       .then((response) => this.all())
       .catch(() => this.all());
   }
 
   async delete(annoId) {
-    const authToken = JSON.parse(localStorage.getItem('dspace-auth-token'))?.accessToken;
-    console.log(`Deleting annotation ${annoId} - ${authToken}`);
+    const headers = this.getHeaders();
     return fetch(`${this.endpointUrl}/destroy?uri=${encodeURIComponent(annoId)}`, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`
-      },
-      method: 'DELETE',
-      credentials: 'include'
+      headers: headers,
+      method: 'DELETE'
     })
       .then((response) => this.all())
       .catch(() => this.all());
   }
 
-  async get(annoId) {
-    // SAS does not have GET for a single annotation
-    const annotationPage = await this.all();
-    if (annotationPage) {
-      return annotationPage.items.find((item) => item.id === annoId);
+  getHeaders() {
+    const authToken = this.getAuthToken();
+    const headers = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    };
+    if (authToken) {
+      headers.Authorization = `Bearer ${authToken}`;
+    }
+    return headers;
+  }
+
+  getAuthToken() {
+    const tokenCookie = this.getCookie('dsAuthInfo');
+    if (!tokenCookie) {
+      return "";
+    }
+    return JSON.parse(decodeURIComponent(tokenCookie.value))?.accessToken;
+  }
+
+  getCookies() {
+    const cookieStrings = document.cookie.split(';');
+    const cookies = [];
+    const regex = new RegExp('^\\s*([^=]+)\\s*=\\s*(.*?)$');
+    for (let i = 0; i < cookieStrings.length; i++) {
+      const cookieStr = cookieStrings[i];
+      const match = regex.exec(cookieStr);
+      if (match === null) continue;
+      cookies.push({
+        name: match[1],
+        value: match[2],
+      });
+    }
+    return cookies;
+  }
+
+  getCookie(name) {
+    const cookies = this.getCookies();
+    for (let i = 0; i < cookies.length; i++) {
+      if (cookies[i].name === name) return cookies[i];
     }
     return null;
   }
+
 }

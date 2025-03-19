@@ -12999,6 +12999,9 @@
   "scientificmaterial.page.titleprefix": "Materiale scientifico: ",
   // "musicallibrettos.page.titleprefix": "Musical Librettos: ",
   "musicallibrettos.page.titleprefix": "Libretti musicali: ",
+  // "webannotation.page.titleprefix": "Web Annotation: ",
+  "webannotation.page.titleprefix": "Annotazioni: ",
+
 
   // "aggregation.listelement.badge": "Aggregation",
   "aggregation.listelement.badge": "Aggregazione",
@@ -13019,6 +13022,9 @@
 
   // "picture.listelement.badge": "Picture",
   "picture.listelement.badge": "Immagine",
+  // "webannotation.listelement.badge": "Web Annotation",
+  "webannotation.listelement.badge": "Annotazione",
+
   // "menu.section.explore_sectionfonds": "Fonds",
   "menu.section.explore_sectionfonds": "Fondi",
   // "menu.section.explore_sectionjournalfonds": "Journal Fonds",
@@ -15549,7 +15555,5 @@
   // "label.title.slider.slider_topics": "Topics",
   // TODO New key - Add a translation
   "label.title.slider.slider_topics": "Topics",
-
-
 
 }

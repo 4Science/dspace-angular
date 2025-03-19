@@ -8270,6 +8270,7 @@
   "coin.page.titleprefix": "Coin: ",
   "scientificmaterial.page.titleprefix": "Scientific Material: ",
   "musicallibrettos.page.titleprefix": "Musical Librettos: ",
+  "webannotation.page.titleprefix": "Web Annotation: ",
 
   "aggregation.listelement.badge": "Aggregation",
   "news.listelement.badge": "News",
@@ -8279,6 +8280,7 @@
   "coin.listelement.badge": "Coin",
   "scientificmaterial.listelement.badge": "Scientific Material",
   "musicallibrettos.listelement.badge": "Musical Librettos",
+  "webannotation.listelement.badge": "Web Annotation",
 
   "picture.listelement.badge": "Picture",
   "menu.section.explore_sectionfonds": "Fonds",
