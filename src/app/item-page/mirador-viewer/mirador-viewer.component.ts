@@ -3,12 +3,16 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Item } from '../../core/shared/item.model';
 import { environment } from '../../../environments/environment';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
-import { Observable, of } from 'rxjs';
+import { combineLatest, Observable, of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 import { MiradorViewerService } from './mirador-viewer.service';
 import { HostWindowService, WidthCategory } from '../../shared/host-window.service';
 import { BundleDataService } from '../../core/data/bundle-data.service';
+import { ConfigurationDataService } from "../../core/data/configuration-data.service";
+import { APP_CONFIG, AppConfig } from "../../../config/app-config.interface";
+import { getFirstCompletedRemoteData } from "../../core/shared/operators";
+import { MiradorMetadataDownloadValue } from "../../../config/mirador-config.interfaces";
 
 @Component({
   selector: 'ds-mirador-viewer',
@@ -58,11 +62,15 @@ export class MiradorViewerComponent implements OnInit {
 
   viewerMessage = 'Sorry, the Mirador viewer is not currently available in development mode.';
 
+  private downloadLevelConfig$: Observable<MiradorMetadataDownloadValue>;
+
   constructor(private sanitizer: DomSanitizer,
               private viewerService: MiradorViewerService,
               private bitstreamDataService: BitstreamDataService,
               private bundleDataService: BundleDataService,
               private hostWindowService: HostWindowService,
+              private configurationDataService: ConfigurationDataService,
+              @Inject(APP_CONFIG) private appConfig: AppConfig,
               @Inject(PLATFORM_ID) private platformId: any) {
   }
 
@@ -114,6 +122,21 @@ export class MiradorViewerComponent implements OnInit {
 
       // Viewer is not currently available in dev mode so hide it in that case.
       this.isViewerAvailable = this.viewerService.showEmbeddedViewer();
+
+      console.log(this.object)
+
+      this.downloadLevelConfig$ = combineLatest([
+        this.configurationDataService.findByPropertyName(this.appConfig.mirador.restPropertyDownloadConfig)
+          .pipe(getFirstCompletedRemoteData()),
+        this.object.owningCollection
+          .pipe(getFirstCompletedRemoteData())
+      ]).pipe(
+        map(([restPropertyDownloadConfig, owningCollection]) =>
+          (this.object.firstMetadataValue(this.appConfig.mirador.itemDownloadMetadataConfig) ||
+          owningCollection.payload.firstMetadataValue(this.appConfig.mirador.itemDownloadMetadataConfig) ||
+          restPropertyDownloadConfig.payload.values[0]) as MiradorMetadataDownloadValue
+        )
+      )
 
       // The notMobile property affects the thumbnail navigation
       // menu by hiding it for smaller viewports. This will not be

@@ -858,7 +858,10 @@ export class DefaultAppConfig implements AppConfig {
   };
 
   mirador: MiradorConfig = {
-    enableDownloadPlugin: true,
+    enableDownloadPlugin: false,
+    itemDownloadMetadataConfig: 'viewer.mirador.download',
+    collectionDownloadMetadataConfig: 'viewer.mirador.download',
+    restPropertyDownloadConfig: 'viewer.mirador.download.default'
   };
 
   loader: LoaderConfig = {
