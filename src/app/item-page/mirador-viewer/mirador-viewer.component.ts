@@ -3,7 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Item } from '../../core/shared/item.model';
 import { environment } from '../../../environments/environment';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
-import { combineLatest, Observable, of } from 'rxjs';
+import { combineLatest, Observable, of, switchMap } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 import { MiradorViewerService } from './mirador-viewer.service';
@@ -62,7 +62,7 @@ export class MiradorViewerComponent implements OnInit {
 
   viewerMessage = 'Sorry, the Mirador viewer is not currently available in development mode.';
 
-  private downloadLevelConfig$: Observable<MiradorMetadataDownloadValue>;
+  private defaultDownloadConfig: MiradorMetadataDownloadValue = 'all';
 
   constructor(private sanitizer: DomSanitizer,
               private viewerService: MiradorViewerService,
@@ -78,7 +78,7 @@ export class MiradorViewerComponent implements OnInit {
    * Creates the url for the Mirador iframe. Adds parameters for the displaying the search panel, query results,
    * or  multi-page thumbnail navigation.
    */
-  setURL() {
+  setURL(downloadEnabled = true) {
     // The path to the REST manifest endpoint.
     const manifestApiEndpoint = encodeURIComponent(environment.rest.baseUrl + '/iiif/'
       + this.object.id + '/manifest');
@@ -103,7 +103,7 @@ export class MiradorViewerComponent implements OnInit {
     if (this.canvasId) {
       viewerPath += `&canvasId=${this.canvasId}`;
     }
-    if (environment.mirador.enableDownloadPlugin) {
+    if (environment.mirador.enableDownloadPlugin && downloadEnabled) {
       viewerPath += '&enableDownloadPlugin=true';
     }
     if (this.canvasId) {
@@ -119,25 +119,8 @@ export class MiradorViewerComponent implements OnInit {
      * Initializes the iframe url observable.
      */
     if (isPlatformBrowser(this.platformId)) {
-
       // Viewer is not currently available in dev mode so hide it in that case.
       this.isViewerAvailable = this.viewerService.showEmbeddedViewer();
-
-      console.log(this.object)
-
-      this.downloadLevelConfig$ = combineLatest([
-        this.configurationDataService.findByPropertyName(this.appConfig.mirador.restPropertyDownloadConfig)
-          .pipe(getFirstCompletedRemoteData()),
-        this.object.owningCollection
-          .pipe(getFirstCompletedRemoteData())
-      ]).pipe(
-        map(([restPropertyDownloadConfig, owningCollection]) =>
-          (this.object.firstMetadataValue(this.appConfig.mirador.itemDownloadMetadataConfig) ||
-          owningCollection.payload.firstMetadataValue(this.appConfig.mirador.itemDownloadMetadataConfig) ||
-          restPropertyDownloadConfig.payload.values[0]) as MiradorMetadataDownloadValue
-        )
-      )
-
       // The notMobile property affects the thumbnail navigation
       // menu by hiding it for smaller viewports. This will not be
       // responsive to resizing.
@@ -154,26 +137,63 @@ export class MiradorViewerComponent implements OnInit {
       if (this.searchable) {
         this.multi = true;
         const observable = of('');
-        this.iframeViewerUrl = observable.pipe(
-          map((val) => {
-            return this.setURL();
+        this.iframeViewerUrl = this.isDownloadEnabled().pipe(
+          map(( downloadEnabled) => {
+            return this.setURL(downloadEnabled);
           })
         );
       } else {
         // Set the multi property based on the image count in IIIF-eligible bundles.
         // Any count greater than 1 sets the value to 'true'.
-        this.iframeViewerUrl = this.viewerService.getImageCount(
+        this.iframeViewerUrl = this.viewerService.getBitstreamMatchingMimeTypeCount(
           this.object,
           this.bitstreamDataService,
-          this.bundleDataService).pipe(
-          map(c => {
+          this.bundleDataService
+        ).pipe(
+          switchMap(c => combineLatest([of(c), this.isDownloadEnabled()])),
+          map(([c, downloadEnabled]) => {
             if (c > 1) {
               this.multi = true;
             }
-            return this.setURL();
+            return this.setURL(downloadEnabled);
           })
         );
       }
     }
+
+  }
+
+  isDownloadEnabled(): Observable<boolean> {
+    return combineLatest([
+      this.configurationDataService.findByPropertyName(this.appConfig.mirador.restPropertyDownloadConfig)
+        .pipe(
+          getFirstCompletedRemoteData()
+        ),
+      this.object.owningCollection
+        .pipe(getFirstCompletedRemoteData())
+    ]).pipe(
+      map(([restPropertyDownloadConfig, owningCollection]) =>
+        (this.object.firstMetadataValue(this.appConfig.mirador.itemDownloadMetadataConfig) ||
+          owningCollection.payload.firstMetadataValue(this.appConfig.mirador.itemDownloadMetadataConfig) ||
+          restPropertyDownloadConfig?.payload?.values[0] || this.defaultDownloadConfig) as MiradorMetadataDownloadValue
+      ),
+      switchMap((level) => combineLatest([
+        of(level),
+        this.viewerService.getBitstreamMatchingMimeTypeCount(this.object, this.bitstreamDataService, this.bundleDataService),
+        this.viewerService.getBitstreamMatchingMimeTypeCount(this.object, this.bitstreamDataService, this.bundleDataService, 'pdf'),
+      ])),
+      map(([downloadLevel, imageCount, pdfCount]) => {
+        switch (downloadLevel) {
+          case 'all':
+            return true;
+          case 'no':
+            return false;
+          case 'single-image':
+            return imageCount > 0;
+          case 'alternative':
+            return pdfCount > 0;
+        }
+      })
+    )
   }
 }
