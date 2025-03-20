@@ -35,10 +35,9 @@ export class MiradorViewerService {
    * @param item
    * @param bitstreamDataService
    * @param bundleDataService
-   * @param mimeType
    * @returns the total image count
    */
-  getBitstreamMatchingMimeTypeCount(item: Item, bitstreamDataService: BitstreamDataService, bundleDataService: BundleDataService, mimeType = 'image'):
+  getImageCount(item: Item, bitstreamDataService: BitstreamDataService, bundleDataService: BundleDataService):
       Observable<number> {
       let count = 0;
       return bundleDataService.findAllByItem(item).pipe(
@@ -66,7 +65,7 @@ export class MiradorViewerService {
                               return formatRD.payload;
                           }),
                           map((format: BitstreamFormat) => {
-                              if (format.mimetype.includes(mimeType)) {
+                              if (format.mimetype.includes('image')) {
                                   count++;
                               }
                               return count;

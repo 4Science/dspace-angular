@@ -62,8 +62,6 @@ export class MiradorViewerComponent implements OnInit {
 
   viewerMessage = 'Sorry, the Mirador viewer is not currently available in development mode.';
 
-  private defaultDownloadConfig: MiradorMetadataDownloadValue = 'all';
-
   constructor(private sanitizer: DomSanitizer,
               private viewerService: MiradorViewerService,
               private bitstreamDataService: BitstreamDataService,
@@ -137,7 +135,7 @@ export class MiradorViewerComponent implements OnInit {
       if (this.searchable) {
         this.multi = true;
         const observable = of('');
-        this.iframeViewerUrl = this.isDownloadEnabled().pipe(
+        this.iframeViewerUrl = this.isDownloadEnabled$().pipe(
           map(( downloadEnabled) => {
             return this.setURL(downloadEnabled);
           })
@@ -145,12 +143,12 @@ export class MiradorViewerComponent implements OnInit {
       } else {
         // Set the multi property based on the image count in IIIF-eligible bundles.
         // Any count greater than 1 sets the value to 'true'.
-        this.iframeViewerUrl = this.viewerService.getBitstreamMatchingMimeTypeCount(
+        this.iframeViewerUrl = this.viewerService.getImageCount(
           this.object,
           this.bitstreamDataService,
           this.bundleDataService
         ).pipe(
-          switchMap(c => combineLatest([of(c), this.isDownloadEnabled()])),
+          switchMap(c => combineLatest([of(c), this.isDownloadEnabled$()])),
           map(([c, downloadEnabled]) => {
             if (c > 1) {
               this.multi = true;
@@ -163,7 +161,7 @@ export class MiradorViewerComponent implements OnInit {
 
   }
 
-  isDownloadEnabled(): Observable<boolean> {
+  isDownloadEnabled$(): Observable<boolean> {
     return combineLatest([
       this.configurationDataService.findByPropertyName(this.appConfig.mirador.restPropertyDownloadConfig)
         .pipe(
@@ -174,24 +172,19 @@ export class MiradorViewerComponent implements OnInit {
     ]).pipe(
       map(([restPropertyDownloadConfig, owningCollection]) =>
         (this.object.firstMetadataValue(this.appConfig.mirador.itemDownloadMetadataConfig) ||
-          owningCollection.payload.firstMetadataValue(this.appConfig.mirador.itemDownloadMetadataConfig) ||
-          restPropertyDownloadConfig?.payload?.values[0] || this.defaultDownloadConfig) as MiradorMetadataDownloadValue
+          owningCollection?.payload?.firstMetadataValue(this.appConfig.mirador.itemDownloadMetadataConfig) ||
+          restPropertyDownloadConfig?.payload?.values[0]) as MiradorMetadataDownloadValue
       ),
-      switchMap((level) => combineLatest([
-        of(level),
-        this.viewerService.getBitstreamMatchingMimeTypeCount(this.object, this.bitstreamDataService, this.bundleDataService),
-        this.viewerService.getBitstreamMatchingMimeTypeCount(this.object, this.bitstreamDataService, this.bundleDataService, 'pdf'),
-      ])),
-      map(([downloadLevel, imageCount, pdfCount]) => {
+      map((downloadLevel) => {
         switch (downloadLevel) {
           case 'all':
+          case 'single-image':
             return true;
           case 'no':
-            return false;
-          case 'single-image':
-            return imageCount > 0;
           case 'alternative':
-            return pdfCount > 0;
+            return false;
+          default:
+            return true;
         }
       })
     )
