@@ -9,10 +9,10 @@ import { isPlatformBrowser } from '@angular/common';
 import { MiradorViewerService } from './mirador-viewer.service';
 import { HostWindowService, WidthCategory } from '../../shared/host-window.service';
 import { BundleDataService } from '../../core/data/bundle-data.service';
-import { ConfigurationDataService } from "../../core/data/configuration-data.service";
-import { APP_CONFIG, AppConfig } from "../../../config/app-config.interface";
-import { getFirstCompletedRemoteData } from "../../core/shared/operators";
-import { MiradorMetadataDownloadValue } from "../../../config/mirador-config.interfaces";
+import { ConfigurationDataService } from '../../core/data/configuration-data.service';
+import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { MiradorMetadataDownloadValue } from '../../../config/mirador-config.interfaces';
 
 @Component({
   selector: 'ds-mirador-viewer',
@@ -62,6 +62,8 @@ export class MiradorViewerComponent implements OnInit {
 
   viewerMessage = 'Sorry, the Mirador viewer is not currently available in development mode.';
 
+  private downloadConfigKey: string;
+
   constructor(private sanitizer: DomSanitizer,
               private viewerService: MiradorViewerService,
               private bitstreamDataService: BitstreamDataService,
@@ -101,7 +103,7 @@ export class MiradorViewerComponent implements OnInit {
     if (this.canvasId) {
       viewerPath += `&canvasId=${this.canvasId}`;
     }
-    if (environment.mirador.enableDownloadPlugin && downloadEnabled) {
+    if (downloadEnabled) {
       viewerPath += '&enableDownloadPlugin=true';
     }
     if (this.canvasId) {
@@ -117,6 +119,7 @@ export class MiradorViewerComponent implements OnInit {
      * Initializes the iframe url observable.
      */
     if (isPlatformBrowser(this.platformId)) {
+      this.downloadConfigKey = this.appConfig.mirador.downloadMetadataConfig;
       // Viewer is not currently available in dev mode so hide it in that case.
       this.isViewerAvailable = this.viewerService.showEmbeddedViewer();
       // The notMobile property affects the thumbnail navigation
@@ -161,9 +164,12 @@ export class MiradorViewerComponent implements OnInit {
 
   }
 
+  /**
+   * Check whether to include download plugin
+   */
   isDownloadEnabled$(): Observable<boolean> {
     return combineLatest([
-      this.configurationDataService.findByPropertyName(this.appConfig.mirador.restPropertyDownloadConfig)
+      this.configurationDataService.findByPropertyName(this.appConfig.mirador.downloadRestConfig)
         .pipe(
           getFirstCompletedRemoteData()
         ),
@@ -171,8 +177,8 @@ export class MiradorViewerComponent implements OnInit {
         .pipe(getFirstCompletedRemoteData())
     ]).pipe(
       map(([restPropertyDownloadConfig, owningCollection]) =>
-        (this.object.firstMetadataValue(this.appConfig.mirador.itemDownloadMetadataConfig) ||
-          owningCollection?.payload?.firstMetadataValue(this.appConfig.mirador.itemDownloadMetadataConfig) ||
+        (this.object.firstMetadataValue(this.downloadConfigKey) ||
+          owningCollection?.payload?.firstMetadataValue(this.downloadConfigKey) ||
           restPropertyDownloadConfig?.payload?.values[0]) as MiradorMetadataDownloadValue
       ),
       map((downloadLevel) => {
@@ -184,9 +190,9 @@ export class MiradorViewerComponent implements OnInit {
           case 'alternative':
             return false;
           default:
-            return true;
+            return this.appConfig.mirador.enableDownloadPlugin;
         }
       })
-    )
+    );
   }
 }

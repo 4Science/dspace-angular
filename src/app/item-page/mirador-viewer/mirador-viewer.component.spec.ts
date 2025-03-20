@@ -5,7 +5,7 @@ import { TranslateLoaderMock } from '../../shared/mocks/translate-loader.mock';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { createRelationshipsObservable } from '../simple/item-types/shared/item.component.spec';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MetadataMap } from '../../core/shared/metadata.models';
+import { MetadataMap, MetadataValue } from '../../core/shared/metadata.models';
 import { Item } from '../../core/shared/item.model';
 import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
 import { createPaginatedList } from '../../shared/testing/utils.test';
@@ -13,13 +13,19 @@ import { of as observableOf } from 'rxjs';
 import { MiradorViewerService } from './mirador-viewer.service';
 import { HostWindowService } from '../../shared/host-window.service';
 import { BundleDataService } from '../../core/data/bundle-data.service';
+import { ConfigurationProperty } from '../../core/shared/configuration-property.model';
+import { ConfigurationDataService } from '../../core/data/configuration-data.service';
+import { APP_CONFIG } from '../../../config/app-config.interface';
+import { environment } from '../../../environments/environment';
+import { Collection } from '../../core/shared/collection.model';
 
 
-function getItem(metadata: MetadataMap) {
+function getItem(metadata: MetadataMap, collectionMetadata?: MetadataMap): Item {
   return Object.assign(new Item(), {
     bundles: createSuccessfulRemoteDataObject$(createPaginatedList([])),
     metadata: metadata,
-    relationships: createRelationshipsObservable()
+    relationships: createRelationshipsObservable(),
+    owningCollection: createSuccessfulRemoteDataObject$(Object.assign(new Collection(), {metadata: collectionMetadata})),
   });
 }
 
@@ -29,6 +35,15 @@ const mockHostWindowService = {
   // This isn't really testing mobile status, the return observable just allows the test to run.
   widthCategory: observableOf(true),
 };
+
+const defaultConfigProperty = Object.assign(new ConfigurationProperty(), {
+  name: 'viewer.mirador.download.default',
+  values: ['all']
+});
+
+const configurationDataService = jasmine.createSpyObj('configurationDataService', {
+  findByPropertyName: createSuccessfulRemoteDataObject$(defaultConfigProperty)
+});
 
 describe('MiradorViewerComponent with search', () => {
   let comp: MiradorViewerComponent;
@@ -48,7 +63,9 @@ describe('MiradorViewerComponent with search', () => {
       providers: [
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
-        { provide: HostWindowService, useValue: mockHostWindowService }
+        { provide: HostWindowService, useValue: mockHostWindowService },
+        { provide: ConfigurationDataService, useValue: configurationDataService },
+        { provide: APP_CONFIG, useValue: environment },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(MiradorViewerComponent, {
@@ -111,7 +128,9 @@ describe('MiradorViewerComponent with multiple images', () => {
       providers: [
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
-        { provide: HostWindowService, useValue: mockHostWindowService  }
+        { provide: HostWindowService, useValue: mockHostWindowService  },
+        { provide: ConfigurationDataService, useValue: configurationDataService },
+        { provide: APP_CONFIG, useValue: environment },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(MiradorViewerComponent, {
@@ -171,7 +190,9 @@ describe('MiradorViewerComponent with a single image', () => {
       providers: [
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
-        { provide: HostWindowService, useValue: mockHostWindowService }
+        { provide: HostWindowService, useValue: mockHostWindowService },
+        { provide: ConfigurationDataService, useValue: configurationDataService },
+        { provide: APP_CONFIG, useValue: environment },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(MiradorViewerComponent, {
@@ -230,7 +251,9 @@ describe('MiradorViewerComponent in development mode', () => {
         providers: [
           { provide: MiradorViewerService, useValue: viewerService },
           { provide: BundleDataService, useValue: {} },
-          { provide: HostWindowService, useValue: mockHostWindowService  }
+          { provide: HostWindowService, useValue: mockHostWindowService  },
+          { provide: ConfigurationDataService, useValue: configurationDataService },
+          { provide: APP_CONFIG, useValue: environment },
         ]
       }
     }).compileComponents();
@@ -258,3 +281,220 @@ describe('MiradorViewerComponent in development mode', () => {
 
   });
 });
+
+describe('MiradorViewerComponent download plugin config', () => {
+
+  let comp: MiradorViewerComponent;
+  let fixture: ComponentFixture<MiradorViewerComponent>;
+  const viewerService = jasmine.createSpyObj('MiradorViewerService', ['showEmbeddedViewer', 'getImageCount']);
+
+  beforeEach(waitForAsync(() => {
+    viewerService.showEmbeddedViewer.and.returnValue(true);
+    viewerService.getImageCount.and.returnValue(observableOf(2));
+    TestBed.configureTestingModule({
+      imports: [TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useClass: TranslateLoaderMock
+        }
+      })],
+      declarations: [MiradorViewerComponent],
+      providers: [
+        { provide: BitstreamDataService, useValue: {} },
+        { provide: BundleDataService, useValue: {} },
+        { provide: HostWindowService, useValue: mockHostWindowService  },
+        { provide: ConfigurationDataService, useValue: configurationDataService },
+        { provide: APP_CONFIG, useValue: environment },
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).overrideComponent(MiradorViewerComponent, {
+      set: {
+        providers: [
+          { provide: MiradorViewerService, useValue: viewerService }
+        ]
+      }
+    }).compileComponents();
+  }));
+
+  describe('No metadata, only environment config', () => {
+    beforeEach(waitForAsync(() => {
+      fixture = TestBed.createComponent(MiradorViewerComponent);
+      comp = fixture.componentInstance;
+      comp.object = getItem(noMetadata);
+      comp.searchable = false;
+      configurationDataService.findByPropertyName.and.returnValue(createSuccessfulRemoteDataObject$([]));
+      fixture.detectChanges();
+    }));
+
+    it('Download plugin should be driven by env config', ((done) => {
+      comp.isDownloadEnabled$().subscribe(enabled => {
+        expect(enabled).toBe(environment.mirador.enableDownloadPlugin);
+        done();
+      });
+    }));
+  });
+
+  describe('Item with metadata', () => {
+    beforeEach(waitForAsync(() => {
+      fixture = TestBed.createComponent(MiradorViewerComponent);
+      comp = fixture.componentInstance;
+      const metadataMap = new MetadataMap();
+      const metadata = new MetadataValue();
+      metadata.value = 'all';
+      metadataMap[environment.mirador.downloadMetadataConfig] = [metadata];
+      comp.object = getItem(metadataMap);
+      comp.searchable = false;
+      configurationDataService.findByPropertyName.and.returnValue(createSuccessfulRemoteDataObject$([]));
+      fixture.detectChanges();
+    }));
+
+    it('Download plugin should be enabled if value is "all"', ((done) => {
+      comp.isDownloadEnabled$().subscribe(enabled => {
+        expect(enabled).toBe(true);
+        done();
+      });
+    }));
+
+    it('Download plugin should be enabled if value is "single-image"', ((done) => {
+      const metadataMap = new MetadataMap();
+      const metadata = new MetadataValue();
+      metadata.value = 'single-image';
+      metadataMap[environment.mirador.downloadMetadataConfig] = [metadata];
+      comp.object = getItem(metadataMap);
+      comp.isDownloadEnabled$().subscribe(enabled => {
+        expect(enabled).toBe(true);
+        done();
+      });
+    }));
+
+    it('Download plugin should be disabled if value is "no"', ((done) => {
+      const metadataMap = new MetadataMap();
+      const metadata = new MetadataValue();
+      metadata.value = 'no';
+      metadataMap[environment.mirador.downloadMetadataConfig] = [metadata];
+      comp.object = getItem(metadataMap);
+      comp.isDownloadEnabled$().subscribe(enabled => {
+        expect(enabled).toBe(false);
+        done();
+      });
+    }));
+
+    it('Download plugin should be disabled if value is "alternative"', ((done) => {
+      const metadataMap = new MetadataMap();
+      const metadata = new MetadataValue();
+      metadata.value = 'alternative';
+      metadataMap[environment.mirador.downloadMetadataConfig] = [metadata];
+      comp.object = getItem(metadataMap);
+      comp.isDownloadEnabled$().subscribe(enabled => {
+        expect(enabled).toBe(false);
+        done();
+      });
+    }));
+  });
+
+  describe('Collection with metadata', () => {
+    beforeEach(waitForAsync(() => {
+      fixture = TestBed.createComponent(MiradorViewerComponent);
+      comp = fixture.componentInstance;
+      const metadataMap = new MetadataMap();
+      const metadata = new MetadataValue();
+      metadata.value = 'all';
+      metadataMap[environment.mirador.downloadMetadataConfig] = [metadata];
+      comp.object = getItem(noMetadata, metadataMap);
+      comp.searchable = false;
+      configurationDataService.findByPropertyName.and.returnValue(createSuccessfulRemoteDataObject$([]));
+      fixture.detectChanges();
+    }));
+
+    it('Download plugin should be enabled if value is "all"', ((done) => {
+      comp.isDownloadEnabled$().subscribe(enabled => {
+        expect(enabled).toBe(true);
+        done();
+      });
+    }));
+
+    it('Download plugin should be enabled if value is "single-image"', ((done) => {
+      const metadataMap = new MetadataMap();
+      const metadata = new MetadataValue();
+      metadata.value = 'single-image';
+      metadataMap[environment.mirador.downloadMetadataConfig] = [metadata];
+      comp.object = getItem(noMetadata, metadataMap);
+      comp.isDownloadEnabled$().subscribe(enabled => {
+        expect(enabled).toBe(true);
+        done();
+      });
+    }));
+
+    it('Download plugin should be disabled if value is "no"', ((done) => {
+      const metadataMap = new MetadataMap();
+      const metadata = new MetadataValue();
+      metadata.value = 'no';
+      metadataMap[environment.mirador.downloadMetadataConfig] = [metadata];
+      comp.object = getItem(noMetadata, metadataMap);
+      comp.isDownloadEnabled$().subscribe(enabled => {
+        expect(enabled).toBe(false);
+        done();
+      });
+    }));
+
+    it('Download plugin should be disabled if value is "alternative"', ((done) => {
+      const metadataMap = new MetadataMap();
+      const metadata = new MetadataValue();
+      metadata.value = 'alternative';
+      metadataMap[environment.mirador.downloadMetadataConfig] = [metadata];
+      comp.object = getItem(noMetadata, metadataMap);
+      comp.isDownloadEnabled$().subscribe(enabled => {
+        expect(enabled).toBe(false);
+        done();
+      });
+    }));
+  });
+
+  describe('No metadata, only rest property', () => {
+    beforeEach(waitForAsync(() => {
+      fixture = TestBed.createComponent(MiradorViewerComponent);
+      comp = fixture.componentInstance;
+      comp.object = getItem(noMetadata);
+      comp.searchable = false;
+      fixture.detectChanges();
+    }));
+
+    it('Download plugin should be enabled if value is "all"', ((done) => {
+      comp.isDownloadEnabled$().subscribe(enabled => {
+        expect(enabled).toBe(true);
+        done();
+      });
+    }));
+
+    it('Download plugin should be enabled if value is "single-image"', ((done) => {
+      defaultConfigProperty.values[0] = 'single-image';
+      configurationDataService.findByPropertyName.and.returnValue(createSuccessfulRemoteDataObject$(defaultConfigProperty));
+      fixture.detectChanges();
+      comp.isDownloadEnabled$().subscribe(enabled => {
+        expect(enabled).toBe(true);
+        done();
+      });
+    }));
+
+    it('Download plugin should be disabled if value is "no"', ((done) => {
+      defaultConfigProperty.values[0] = 'no';
+      configurationDataService.findByPropertyName.and.returnValue(createSuccessfulRemoteDataObject$(defaultConfigProperty));
+      fixture.detectChanges();
+      comp.isDownloadEnabled$().subscribe(enabled => {
+        expect(enabled).toBe(false);
+        done();
+      });
+    }));
+
+    it('Download plugin should be disabled if value is "alternative"', ((done) => {
+      defaultConfigProperty.values[0] = 'alternative';
+      configurationDataService.findByPropertyName.and.returnValue(createSuccessfulRemoteDataObject$(defaultConfigProperty));
+      fixture.detectChanges();
+      comp.isDownloadEnabled$().subscribe(enabled => {
+        expect(enabled).toBe(false);
+        done();
+      });
+    }));
+  });
+});
+
