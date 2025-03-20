@@ -7,10 +7,10 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateLoaderMock } from '../../../../../../../../shared/mocks/translate-loader.mock';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoadMoreService } from '../../../../../../../services/load-more.service';
-import { GooglemapsComponent } from '../../../../../../../../shared/googlemaps/googlemaps.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ConfigurationDataService } from '../../../../../../../../core/data/configuration-data.service';
 import { createSuccessfulRemoteDataObject$ } from '../../../../../../../../shared/remote-data.utils';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('GooglemapsGroupComponent', () => {
   let component: GooglemapsGroupComponent;
@@ -80,7 +80,9 @@ describe('GooglemapsGroupComponent', () => {
           provide: TranslateLoader,
           useClass: TranslateLoaderMock
         }
-      }), BrowserAnimationsModule],
+      }),
+        BrowserAnimationsModule,
+        HttpClientTestingModule],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
@@ -91,8 +93,8 @@ describe('GooglemapsGroupComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA],
       declarations: [
-        GooglemapsGroupComponent,
-        GooglemapsComponent]
+        GooglemapsGroupComponent
+      ]
     })
     .compileComponents();
 
