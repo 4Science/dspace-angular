@@ -1,4 +1,5 @@
 import SimpleAnnotationServerV2Adapter from 'mirador-annotations/es/SimpleAnnotationServerV2Adapter';
+import CookieService from "./cookie-service";
 
 
 export default class DspaceAnnotationServerAdapter extends SimpleAnnotationServerV2Adapter {
@@ -50,35 +51,16 @@ export default class DspaceAnnotationServerAdapter extends SimpleAnnotationServe
   }
 
   getAuthToken() {
-    const tokenCookie = this.getCookie('dsAuthInfo');
+    const tokenCookie = CookieService.getCookie('dsAuthInfo');
     if (!tokenCookie) {
+      console.warn('Authentication token not found in cookies');
       return "";
     }
-    return JSON.parse(decodeURIComponent(tokenCookie.value))?.accessToken;
-  }
-
-  getCookies() {
-    const cookieStrings = document.cookie.split(';');
-    const cookies = [];
-    const regex = new RegExp('^\\s*([^=]+)\\s*=\\s*(.*?)$');
-    for (let i = 0; i < cookieStrings.length; i++) {
-      const cookieStr = cookieStrings[i];
-      const match = regex.exec(cookieStr);
-      if (match === null) continue;
-      cookies.push({
-        name: match[1],
-        value: match[2],
-      });
+    const token = JSON.parse(decodeURIComponent(tokenCookie.value))?.accessToken;
+    if (!token) {
+      console.warn('Invalid or empty authentication token');
     }
-    return cookies;
-  }
-
-  getCookie(name) {
-    const cookies = this.getCookies();
-    for (let i = 0; i < cookies.length; i++) {
-      if (cookies[i].name === name) return cookies[i];
-    }
-    return null;
+    return token;
   }
 
 }
