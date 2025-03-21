@@ -4709,6 +4709,8 @@
 
   "none.listelement.badge": "Item",
 
+  "no.description.available": "No description available",
+
   "quality-assurance.title": "Quality Assurance",
 
   "quality-assurance.topics.description": "Below you can see all the topics received from the subscriptions to {{source}}.",
@@ -6109,6 +6111,8 @@
 
   "selectable-list-item-control.select": "Select item",
 
+  "social.component.title": "Social Share",
+
   "sorting.ASC": "Ascending",
 
   "sorting.DESC": "Descending",
@@ -7444,15 +7448,18 @@
 
   "submission.sections.unpaywall.refresh": "Refresh",
 
-  "submission.sections.unpaywall.import": "Import from unpaywall",
+  "submission.sections.unpaywall.import": "Import from Unpaywall",
 
-  "submission.sections.unpaywall.status.successful": "You can import from unpaywall",
+  "submission.sections.unpaywall.status.error": "An unexpected error has occurred.",
 
-  "submission.sections.unpaywall.status.not-found": "Can't find record using Unpaywall api",
+  "submission.sections.unpaywall.status.successful": "There are available files to import from Unpaywall.",
 
-  "submission.sections.unpaywall.status.pending": "Unpaywall api request is initialized",
+  "submission.sections.unpaywall.status.not-found": "Cannot find record using Unpaywall API.",
 
-  "submission.sections.unpaywall.status.no-file": "There are no files to be imported",
+  "submission.sections.unpaywall.status.pending": "Unable to retrieve information from the Unpaywall service. You can use the refresh button to manually check if an answer has been received.",
+
+  "submission.sections.unpaywall.status.no-file": "There are no available files to be imported.",
+
   "submission.sections.unpaywall.status.imported": "The Unpaywall resource has been imported!",
 
   "submission.sections.submit.progressbar.unpaywall": "Unpaywall",

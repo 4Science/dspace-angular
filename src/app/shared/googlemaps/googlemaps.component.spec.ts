@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import {
   ComponentFixture,
   TestBed,
@@ -5,13 +6,13 @@ import {
 import { By } from '@angular/platform-browser';
 
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
+import { LocationService } from '../../core/services/location.service';
 import { createSuccessfulRemoteDataObject$ } from '../remote-data.utils';
 import { GooglemapsComponent } from './googlemaps.component';
 
 describe('GooglemapsComponent', () => {
 
   let component: GooglemapsComponent;
-
   let fixture: ComponentFixture<GooglemapsComponent>;
 
   const coordinates = '@41.3455,456.67';
@@ -22,16 +23,30 @@ describe('GooglemapsComponent', () => {
 
   const confResponse$ = createSuccessfulRemoteDataObject$({ values: ['valid-googlemap-key'] });
 
+  const locationService = jasmine.createSpyObj('locationService', {
+    findPlaceCoordinates: jasmine.createSpy('findPlaceCoordinates'),
+    findPlaceAndDecimalCoordinates: jasmine.createSpy('findPlaceAndDecimalCoordinates'),
+    searchByCoordinates: jasmine.createSpy('searchByCoordinates'),
+    isValidDecimalCoordinatePair: jasmine.createSpy('isValidDecimalCoordinatePair'),
+    isDecimalCoordinateString: jasmine.createSpy('isDecimalCoordinateString'),
+    isSexagesimalCoordinateString: jasmine.createSpy('isSexagesimalCoordinateString'),
+    isValidCoordinateString: jasmine.createSpy('isValidCoordinateString'),
+    parseCoordinates: jasmine.createSpy('parseCoordinates'),
+  });
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GooglemapsComponent],
+      imports: [
+        GooglemapsComponent,
+        HttpClientTestingModule,
+      ],
       providers: [
         { provide: ConfigurationDataService, useValue: configurationDataService },
+        { provide: LocationService, useValue: locationService },
       ],
     })
       .compileComponents();
   });
-
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GooglemapsComponent);

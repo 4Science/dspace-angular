@@ -8,6 +8,7 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 
 import { SocialService } from './social.service';
@@ -22,6 +23,7 @@ import { SocialService } from './social.service';
     NgFor,
     NgIf,
     AsyncPipe,
+    TranslateModule,
   ],
 })
 /**
