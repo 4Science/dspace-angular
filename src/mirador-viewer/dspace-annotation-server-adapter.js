@@ -38,6 +38,15 @@ export default class DspaceAnnotationServerAdapter extends SimpleAnnotationServe
       .catch(() => this.all());
   }
 
+  async all() {
+    const headers = this.getHeaders();
+    const resp = await fetch(`${this.endpointUrl}/search?uri=${this.annotationPageId}`, {
+      headers: headers,
+    });
+    const annos = await resp.json();
+    return this.createAnnotationPage(annos);
+  }
+
   getHeaders() {
     const authToken = this.getAuthToken();
     const headers = {
