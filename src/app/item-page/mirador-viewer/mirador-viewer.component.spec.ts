@@ -316,23 +316,6 @@ describe('MiradorViewerComponent download plugin config', () => {
     }).compileComponents();
   }));
 
-  describe('No metadata, only environment config', () => {
-    beforeEach(waitForAsync(() => {
-      fixture = TestBed.createComponent(MiradorViewerComponent);
-      comp = fixture.componentInstance;
-      comp.object = getItem(noMetadata);
-      comp.searchable = false;
-      configurationDataService.findByPropertyName.and.returnValue(createSuccessfulRemoteDataObject$([]));
-      fixture.detectChanges();
-    }));
-
-    it('Download plugin should be driven by env config', ((done) => {
-      comp.isDownloadEnabled$().subscribe(enabled => {
-        expect(enabled).toBe(environment.mirador.enableDownloadPlugin);
-        done();
-      });
-    }));
-  });
 
   describe('Item with metadata', () => {
     beforeEach(waitForAsync(() => {
@@ -344,6 +327,7 @@ describe('MiradorViewerComponent download plugin config', () => {
       metadataMap[environment.mirador.downloadMetadataConfig] = [metadata];
       comp.object = getItem(metadataMap);
       comp.searchable = false;
+      comp.getIiifDownloadConfig = () => observableOf(['all', 'single-image']);
       configurationDataService.findByPropertyName.and.returnValue(createSuccessfulRemoteDataObject$([]));
       fixture.detectChanges();
     }));
@@ -402,6 +386,7 @@ describe('MiradorViewerComponent download plugin config', () => {
       metadataMap[environment.mirador.downloadMetadataConfig] = [metadata];
       comp.object = getItem(noMetadata, metadataMap);
       comp.searchable = false;
+      comp.getIiifDownloadConfig = () => observableOf(['all', 'single-image']);
       configurationDataService.findByPropertyName.and.returnValue(createSuccessfulRemoteDataObject$([]));
       fixture.detectChanges();
     }));
@@ -450,16 +435,20 @@ describe('MiradorViewerComponent download plugin config', () => {
     }));
   });
 
-  describe('No metadata, only rest property', () => {
+  describe('No metadata and no download config, only rest property', () => {
     beforeEach(waitForAsync(() => {
       fixture = TestBed.createComponent(MiradorViewerComponent);
       comp = fixture.componentInstance;
       comp.object = getItem(noMetadata);
       comp.searchable = false;
+      comp.getIiifDownloadConfig = () => observableOf(['all', 'single-image']);
       fixture.detectChanges();
     }));
 
     it('Download plugin should be enabled if value is "all"', ((done) => {
+      defaultConfigProperty.values[0] = 'all';
+      configurationDataService.findByPropertyName.and.returnValue(createSuccessfulRemoteDataObject$(defaultConfigProperty));
+      fixture.detectChanges();
       comp.isDownloadEnabled$().subscribe(enabled => {
         expect(enabled).toBe(true);
         done();

@@ -3,7 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Item } from '../../core/shared/item.model';
 import { environment } from '../../../environments/environment';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
-import { combineLatest, Observable, of, switchMap } from 'rxjs';
+import { combineLatest, from, Observable, of, switchMap } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 import { MiradorViewerService } from './mirador-viewer.service';
@@ -13,6 +13,7 @@ import { ConfigurationDataService } from '../../core/data/configuration-data.ser
 import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { MiradorMetadataDownloadValue } from '../../../config/mirador-config.interfaces';
+
 
 @Component({
   selector: 'ds-mirador-viewer',
@@ -103,7 +104,7 @@ export class MiradorViewerComponent implements OnInit {
     if (this.canvasId) {
       viewerPath += `&canvasId=${this.canvasId}`;
     }
-    if (downloadEnabled) {
+    if (downloadEnabled && this.appConfig.mirador.enableDownloadPlugin) {
       viewerPath += '&enableDownloadPlugin=true';
     }
     if (this.canvasId) {
@@ -118,6 +119,7 @@ export class MiradorViewerComponent implements OnInit {
     /**
      * Initializes the iframe url observable.
      */
+    this.getIiifDownloadConfig().subscribe(console.log);
     if (isPlatformBrowser(this.platformId)) {
       this.downloadConfigKey = this.appConfig.mirador.downloadMetadataConfig;
       // Viewer is not currently available in dev mode so hide it in that case.
@@ -181,18 +183,18 @@ export class MiradorViewerComponent implements OnInit {
           owningCollection?.payload?.firstMetadataValue(this.downloadConfigKey) ||
           restPropertyDownloadConfig?.payload?.values[0]) as MiradorMetadataDownloadValue
       ),
-      map((downloadLevel) => {
-        switch (downloadLevel) {
-          case 'all':
-          case 'single-image':
-            return true;
-          case 'no':
-          case 'alternative':
-            return false;
-          default:
-            return this.appConfig.mirador.enableDownloadPlugin;
-        }
+      switchMap((downloadLevel) => {
+        return this.getIiifDownloadConfig().pipe(
+          map((downloadConfig) => downloadLevel && downloadConfig.includes(downloadLevel)),
+        );
       })
+    );
+  }
+
+  getIiifDownloadConfig(): Observable<MiradorMetadataDownloadValue[]> {
+    const href = `${this.appConfig.rest.baseUrl}/iiif/${this.object.id}/download`;
+    return from(fetch(href)).pipe(
+      switchMap((response: Response) => response.ok ? from(response.json()) : from([])),
     );
   }
 }
