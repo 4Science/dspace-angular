@@ -18,6 +18,7 @@ import { ConfigurationDataService } from '../../core/data/configuration-data.ser
 import { APP_CONFIG } from '../../../config/app-config.interface';
 import { environment } from '../../../environments/environment';
 import { Collection } from '../../core/shared/collection.model';
+import { SafeUrlPipe } from '../../shared/utils/safe-url-pipe';
 
 
 function getItem(metadata: MetadataMap, collectionMetadata?: MetadataMap): Item {
@@ -59,7 +60,7 @@ describe('MiradorViewerComponent with search', () => {
           useClass: TranslateLoaderMock
         }
       })],
-      declarations: [MiradorViewerComponent],
+      declarations: [MiradorViewerComponent, SafeUrlPipe],
       providers: [
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
@@ -124,7 +125,7 @@ describe('MiradorViewerComponent with multiple images', () => {
           useClass: TranslateLoaderMock
         }
       })],
-      declarations: [MiradorViewerComponent],
+      declarations: [MiradorViewerComponent, SafeUrlPipe],
       providers: [
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
@@ -186,7 +187,7 @@ describe('MiradorViewerComponent with a single image', () => {
           useClass: TranslateLoaderMock
         }
       })],
-      declarations: [MiradorViewerComponent],
+      declarations: [MiradorViewerComponent, SafeUrlPipe],
       providers: [
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
@@ -241,7 +242,7 @@ describe('MiradorViewerComponent in development mode', () => {
           useClass: TranslateLoaderMock
         }
       })],
-      declarations: [MiradorViewerComponent],
+      declarations: [MiradorViewerComponent, SafeUrlPipe],
       providers: [
         { provide: BitstreamDataService, useValue: {} }
       ],
@@ -298,7 +299,7 @@ describe('MiradorViewerComponent download plugin config', () => {
           useClass: TranslateLoaderMock
         }
       })],
-      declarations: [MiradorViewerComponent],
+      declarations: [MiradorViewerComponent, SafeUrlPipe],
       providers: [
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },

@@ -111,8 +111,7 @@ export class MiradorViewerComponent implements OnInit {
       viewerPath += `&canvasId=${this.canvasId}`;
     }
 
-    // TODO: Should the query term be trusted here?
-    return this.sanitizer.bypassSecurityTrustResourceUrl(viewerPath);
+    return viewerPath;
   }
 
   ngOnInit(): void {
@@ -193,6 +192,7 @@ export class MiradorViewerComponent implements OnInit {
 
   getIiifDownloadConfig(): Observable<MiradorMetadataDownloadValue[]> {
     const href = `${this.appConfig.rest.baseUrl}/iiif/${this.object.id}/download`;
+    //TODO: pass authorization bearer
     return from(fetch(href)).pipe(
       switchMap((response: Response) => response.ok ? from(response.json()) : from([])),
     );
