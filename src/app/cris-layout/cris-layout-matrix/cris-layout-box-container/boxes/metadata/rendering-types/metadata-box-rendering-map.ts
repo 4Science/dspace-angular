@@ -100,11 +100,11 @@ export const layoutBoxesMap = new Map<FieldRenderingType, MetadataBoxFieldRender
   } as MetadataBoxFieldRenderOptions],
   [FieldRenderingType.TAGBROWSE, {
     componentRef: TagBrowseComponent,
-    structured: false,
+    structured: true,
   } as MetadataBoxFieldRenderOptions],
   [FieldRenderingType.MARKDOWN, {
     componentRef: MarkdownComponent,
-    structured: false,
+    structured: true,
   } as MetadataBoxFieldRenderOptions],
   [FieldRenderingType.SEARCH, {
     /* eslint-disable-next-line dspace-angular-ts/themed-component-usages */
