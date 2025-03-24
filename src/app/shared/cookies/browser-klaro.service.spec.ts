@@ -28,6 +28,7 @@ import { ANONYMOUS_STORAGE_NAME_KLARO } from './klaro-configuration';
 describe('BrowserKlaroService', () => {
   const trackingIdProp = 'google.analytics.key';
   const trackingIdTestValue = 'mock-tracking-id';
+  const matomoTrackingId = 'matomo-tracking-id';
   const googleAnalytics = 'google-analytics';
   const recaptchaProp = 'registration.verification.enabled';
   const recaptchaValue = 'true';
@@ -309,9 +310,11 @@ describe('BrowserKlaroService', () => {
   describe('initialize google analytics configuration', () => {
     let GOOGLE_ANALYTICS_KEY;
     let REGISTRATION_VERIFICATION_ENABLED_KEY;
+    let MATOMO_ENABLED;
     beforeEach(() => {
       GOOGLE_ANALYTICS_KEY = clone((service as any).GOOGLE_ANALYTICS_KEY);
       REGISTRATION_VERIFICATION_ENABLED_KEY = clone((service as any).REGISTRATION_VERIFICATION_ENABLED_KEY);
+      MATOMO_ENABLED = clone((service as any).MATOMO_ENABLED);
       spyOn((service as any), 'getUser$').and.returnValue(observableOf(user));
       translateService.get.and.returnValue(observableOf('loading...'));
       spyOn(service, 'addAppMessages');
@@ -360,6 +363,15 @@ describe('BrowserKlaroService', () => {
               name: trackingIdTestValue,
               values: ['false'],
             }),
+          )
+          .withArgs(MATOMO_ENABLED)
+          .and
+          .returnValue(
+            createSuccessfulRemoteDataObject$({
+              ... new ConfigurationProperty(),
+              name: matomoTrackingId,
+              values: ['false'],
+            }),
           );
 
       service.initialize();
@@ -379,6 +391,15 @@ describe('BrowserKlaroService', () => {
               name: trackingIdTestValue,
               values: ['false'],
             }),
+          )
+          .withArgs(MATOMO_ENABLED)
+          .and
+          .returnValue(
+            createSuccessfulRemoteDataObject$({
+              ... new ConfigurationProperty(),
+              name: matomoTrackingId,
+              values: ['false'],
+            }),
           );
       service.initialize();
       expect(service.klaroConfig.services).not.toContain(jasmine.objectContaining({ name: googleAnalytics }));
@@ -395,6 +416,15 @@ describe('BrowserKlaroService', () => {
             createSuccessfulRemoteDataObject$({
               ... new ConfigurationProperty(),
               name: trackingIdTestValue,
+              values: ['false'],
+            }),
+          )
+          .withArgs(MATOMO_ENABLED)
+          .and
+          .returnValue(
+            createSuccessfulRemoteDataObject$({
+              ... new ConfigurationProperty(),
+              name: matomoTrackingId,
               values: ['false'],
             }),
           );
