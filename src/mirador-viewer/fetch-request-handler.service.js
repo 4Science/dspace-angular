@@ -1,5 +1,9 @@
+self.addEventListener("install", (event) => {
+  self.skipWaiting(); // Make sure the SW activates immediately
+});
 
 self.addEventListener("fetch", (event) => {
+  event.waitUntil(self.clients.claim()); // Take control of page immediately
   event.respondWith(
     (async () => {
       const authHeader = new URL(location).searchParams.get('accessToken');
@@ -20,13 +24,16 @@ self.addEventListener("fetch", (event) => {
 
           return await fetch(modifiedRequest);
         } catch (error) {
-          console.error('Fetch interception failed:', error);
-          return new Response('Error fetching resource', { status: 500 });
+          const errorMessage = `Fetch interception failed for URL ${url}: ${error.message}`;
+          console.error(errorMessage, error);
+          return new Response(errorMessage, {
+            status: 500,
+            headers: { 'Content-Type': 'text/plain' }
+          });
         }
       } else {
         return await fetch(event.request);
       }
-
     })()
   );
 });
