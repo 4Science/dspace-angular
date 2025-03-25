@@ -14,7 +14,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '..' , 'dist/iiif/mirador'),
     filename: '[name].js',
-    publicPath: '/'
   },
   devServer: {
     contentBase: '../dist/iiif/mirador',
@@ -30,8 +29,6 @@ module.exports = {
     new CopyWebpackPlugin({
     patterns: [
       {from: './src/mirador-viewer/mirador.html', to: './index.html'},
-      {from: './src/mirador-viewer/fetch-request-handler.service.js',
-        to: path.resolve(__dirname, '../dist/fetch-request-handler.service.js')}
     ]
   })]
 };
