@@ -15,7 +15,7 @@ import { BundleDataService } from '../../core/data/bundle-data.service';
   styleUrls: ['./mirador-viewer.component.scss'],
   templateUrl: './mirador-viewer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ MiradorViewerService ]
+  providers: [MiradorViewerService]
 })
 export class MiradorViewerComponent implements OnInit {
 
@@ -98,6 +98,12 @@ export class MiradorViewerComponent implements OnInit {
     if (environment.mirador.enableDownloadPlugin) {
       viewerPath += '&enableDownloadPlugin=true';
     }
+    if (environment.mirador.enableAnnotationServer) {
+      viewerPath += '&enableAnnotationServer=true';
+    }
+    if (environment.mirador.annotationServerUrl) {
+      viewerPath += '&annotationServerUrl=' + environment.mirador.annotationServerUrl;
+    }
     if (this.canvasId) {
       viewerPath += `&canvasId=${this.canvasId}`;
     }
@@ -153,4 +159,5 @@ export class MiradorViewerComponent implements OnInit {
       }
     }
   }
+
 }

@@ -13008,6 +13008,11 @@
   "scientificmaterial.page.titleprefix": "Materiale scientifico: ",
   // "musicallibrettos.page.titleprefix": "Musical Librettos: ",
   "musicallibrettos.page.titleprefix": "Libretti musicali: ",
+  // "webannotation.page.titleprefix": "Web Annotation: ",
+  "webannotation.page.titleprefix": "Annotazione: ",
+  // "personalannotation.page.titleprefix": "Personal Annotation: ",
+  "personalannotation.page.titleprefix": "Annotazione Personale: ",
+
 
   // "aggregation.listelement.badge": "Aggregation",
   "aggregation.listelement.badge": "Aggregazione",
@@ -13028,6 +13033,11 @@
 
   // "picture.listelement.badge": "Picture",
   "picture.listelement.badge": "Immagine",
+  // "webannotation.listelement.badge": "Web Annotation",
+  "webannotation.listelement.badge": "Annotazione",
+  // "personalannotation.listelement.badge": "Personal Annotation",
+  "personalannotation.listelement.badge": "Annotazione Personale",
+
   // "menu.section.explore_sectionfonds": "Fonds",
   "menu.section.explore_sectionfonds": "Fondi",
   // "menu.section.explore_sectionjournalfonds": "Journal Fonds",
@@ -13267,6 +13277,12 @@
 
   // "submission.sections.submit.progressbar.describe.bnm_scheme_relation": "Relationships",
   "submission.sections.submit.progressbar.describe.bnm_scheme_relation": "Relazioni",
+
+  // "submission.sections.submit.progressbar.describe.web_annotation": "Web Annotation",
+  "submission.sections.submit.progressbar.describe.web_annotation": "Annotazione",
+
+  // "submission.sections.submit.progressbar.describe.personal_annotation": "Personal Annotation",
+  "submission.sections.submit.progressbar.describe.personal_annotation": "Annotazione Personale",
 
   // "map.coordinates-invalid": "Coordinates are not valid",
   "map.coordinates-invalid": "Le coordinate non sono valide",
@@ -15558,7 +15574,5 @@
   // "label.title.slider.slider_topics": "Topics",
   // TODO New key - Add a translation
   "label.title.slider.slider_topics": "Topics",
-
-
 
 }

@@ -859,6 +859,7 @@ export class DefaultAppConfig implements AppConfig {
 
   mirador: MiradorConfig = {
     enableDownloadPlugin: true,
+    enableAnnotationServer: false,
   };
 
   loader: LoaderConfig = {

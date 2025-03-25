@@ -620,6 +620,7 @@ export const environment: BuildConfig = {
 
   mirador: {
     enableDownloadPlugin: true,
+    enableAnnotationServer: false,
   },
 
   loader: {
