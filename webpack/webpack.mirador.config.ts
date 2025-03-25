@@ -8,7 +8,8 @@ module.exports = {
   mode: 'production',
   entry: {
     mirador: fs.existsSync('./src/mirador-viewer/config.local.js')? './src/mirador-viewer/config.local.js' :
-      './src/mirador-viewer/config.default.js'
+      './src/mirador-viewer/config.default.js',
+    serviceWorker: './src/mirador-viewer/fetch-request-handler.service.js'
   },
   output: {
     path: path.resolve(__dirname, '..' , 'dist/iiif/mirador'),
