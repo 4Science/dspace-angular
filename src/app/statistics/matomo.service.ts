@@ -130,7 +130,7 @@ export class MatomoService {
    */
   private appendTrackerId(url: string, visitorId: string) {
     const updatedURL = new URL(url);
-    if (visitorId != null) {
+    if (isNotEmpty(visitorId)) {
       updatedURL.searchParams.append('trackerId', visitorId);
     }
     return updatedURL.toString();
