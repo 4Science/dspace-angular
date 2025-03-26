@@ -819,6 +819,7 @@ export const environment: BuildConfig = {
     ],
     spatialFacetDiscoveryConfiguration: 'geospatial',
     spatialPointFilterName: 'point',
+    enableItemPageFields: true,
     enableSearchViewMode: true,
     enableBrowseMap: true,
     tileProviders: [
