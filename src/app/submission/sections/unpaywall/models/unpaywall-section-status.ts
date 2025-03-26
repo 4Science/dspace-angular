@@ -4,4 +4,5 @@ export enum UnpaywallSectionStatus {
   SUCCESSFUL = 'SUCCESSFUL',
   NO_FILE = 'NO_FILE',
   IMPORTED = 'IMPORTED',
+  ERROR = 'ERROR',
 }

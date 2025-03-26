@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
 import {
   ComponentFixture,
   inject,
@@ -13,16 +16,27 @@ import {
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { provideMockStore } from '@ngrx/store/testing';
 import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
+import { RemoteDataBuildService } from '../../../../core/cache/builders/remote-data-build.service';
+import { ObjectCacheService } from '../../../../core/cache/object-cache.service';
+import { BitstreamFormatDataService } from '../../../../core/data/bitstream-format-data.service';
+import { DSOChangeAnalyzer } from '../../../../core/data/dso-change-analyzer.service';
 import { LocaleService } from '../../../../core/locale/locale.service';
 import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
+import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service';
 import { SearchService } from '../../../../core/shared/search/search.service';
 import { Site } from '../../../../core/shared/site.model';
+import { UUIDService } from '../../../../core/shared/uuid.service';
+import { getMockObjectCacheService } from '../../../../shared/mocks/object-cache.service.mock';
+import { getMockRemoteDataBuildService } from '../../../../shared/mocks/remote-data-build.service.mock';
+import { getMockUUIDService } from '../../../../shared/mocks/uuid.service.mock';
+import { NotificationsService } from '../../../../shared/notifications/notifications.service';
 import { ThemedThumbnailComponent } from '../../../../thumbnail/themed-thumbnail.component';
 import { TranslateLoaderMock } from '../../../mocks/translate-loader.mock';
 import { createSuccessfulRemoteDataObject$ } from '../../../remote-data.utils';
@@ -43,34 +57,30 @@ describe('GridSectionComponent', () => {
   });
 
   const firstSearchResult = Object.assign(new SearchResult(), {
-    _embedded: {
-      indexableObject: Object.assign(new DSpaceObject(), {
-        id: 'd317835d-7b06-4219-91e2-1191900cb897',
-        uuid: 'd317835d-7b06-4219-91e2-1191900cb897',
-        name: 'My first publication',
-        metadata: {
-          'dspace.entity.type': [
-            { value: 'Publication' },
-          ],
-        },
-        firstMetadataValue(keyOrKeys: string | string[]): string {
-          return '';
-        },
-      }),
-    },
+    indexableObject: Object.assign(new DSpaceObject(), {
+      id: 'd317835d-7b06-4219-91e2-1191900cb897',
+      uuid: 'd317835d-7b06-4219-91e2-1191900cb897',
+      name: 'My first publication',
+      metadata: {
+        'dspace.entity.type': [
+          { value: 'Publication' },
+        ],
+      },
+      firstMetadataValue(keyOrKeys: string | string[]): string {
+        return '';
+      },
+    }),
   });
 
   const secondSearchResult = Object.assign(new SearchResult(), {
-    _embedded: {
-      indexableObject: Object.assign(new DSpaceObject(), {
-        id: '0c34d491-b5ed-4a78-8b29-83d0bad80e5a',
-        uuid: '0c34d491-b5ed-4a78-8b29-83d0bad80e5a',
-        name: 'This is a publication',
-        firstMetadataValue(keyOrKeys: string | string[]): string {
-          return '';
-        },
-      }),
-    },
+    indexableObject: Object.assign(new DSpaceObject(), {
+      id: '0c34d491-b5ed-4a78-8b29-83d0bad80e5a',
+      uuid: '0c34d491-b5ed-4a78-8b29-83d0bad80e5a',
+      name: 'This is a publication',
+      firstMetadataValue(keyOrKeys: string | string[]): string {
+        return '';
+      },
+    }),
   });
 
   beforeEach(waitForAsync(() => {
@@ -90,6 +100,19 @@ describe('GridSectionComponent', () => {
       providers: [GridSectionComponent,
         { provide: SearchService, useValue: searchServiceStub },
         { provide: LocaleService, useValue: mockLocaleService },
+        { provide: ObjectCacheService, useValue: getMockObjectCacheService() },
+        { provide: UUIDService, useValue: getMockUUIDService() },
+        { provide: RemoteDataBuildService, useValue: getMockRemoteDataBuildService() },
+        { provide: HALEndpointService, useValue: {} },
+        { provide: DSOChangeAnalyzer, useValue: {} },
+        { provide: BitstreamFormatDataService, useValue: {} },
+        { provide: NotificationsService, useValue: {} },
+        {
+          provide: ChangeDetectorRef, useValue: {
+            detectChanges: () => fixture.detectChanges(),
+          },
+        },
+        provideMockStore({ core: { auth: { loading: false } } } as any),
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(GridSectionComponent, {

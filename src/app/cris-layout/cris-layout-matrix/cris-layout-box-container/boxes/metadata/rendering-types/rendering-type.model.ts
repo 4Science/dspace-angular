@@ -141,22 +141,16 @@ export abstract class RenderingTypeModelComponent {
    * @params initChipsValues values to be rendered in chip items
    */
   initRenderingChips(initChipsValues: any[], type = 'tag', metadataType = '') {
-    if (type === 'search') {
-      initChipsValues.forEach((element, ind) => {
-        initChipsValues[ind] = {
-          value: element,
-          href: this.getSearchHrefLink(this.field.rendering, this.renderingSubType, this.field.metadata, element),
-        };
-      });
-    } else if (type === 'browse') {
-      initChipsValues.forEach((element, ind) => {
-        initChipsValues[ind] = {
-          value: element,
-          href: `/browse/${metadataType}?value=${element}`,
-        };
-      });
+    let values = [...initChipsValues];
+    if (type === 'search' || type === 'browse') {
+      values = [...initChipsValues.map((element) => ({
+        value: element,
+        href: type === 'search' ?
+          this.getSearchHrefLink(this.field.rendering, this.renderingSubType, this.field.metadata, element) :
+          `/browse/${metadataType}?value=${element}`,
+      }))];
     }
-    return new Chips(initChipsValues,'value');
+    return new Chips(values,'value');
   }
 }
 

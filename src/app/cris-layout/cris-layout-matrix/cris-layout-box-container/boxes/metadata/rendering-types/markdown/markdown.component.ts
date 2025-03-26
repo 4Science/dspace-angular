@@ -18,12 +18,4 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
 })
 export class MarkdownComponent extends RenderingTypeValueModelComponent {
 
-  /**
-   * Id for truncable component
-   */
-  truncableId: string;
-
-  ngOnInit(): void {
-    this.truncableId = `${this.item.id}_${this.field.metadata}`;
-  }
 }

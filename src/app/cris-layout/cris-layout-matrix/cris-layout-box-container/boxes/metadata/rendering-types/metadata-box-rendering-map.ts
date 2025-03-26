@@ -1,3 +1,6 @@
+import { ImageComponent } from 'src/app/cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/image/image.component';
+import { LongmarkdownComponent } from 'src/app/cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/longmarkdown/longmarkdown.component';
+
 import { AdvancedAttachmentComponent } from './advanced-attachment/advanced-attachment.component';
 import { AttachmentComponent } from './attachment/attachment.component';
 import { BrowseComponent } from './browse/browse.component';
@@ -97,11 +100,11 @@ export const layoutBoxesMap = new Map<FieldRenderingType, MetadataBoxFieldRender
   } as MetadataBoxFieldRenderOptions],
   [FieldRenderingType.TAGBROWSE, {
     componentRef: TagBrowseComponent,
-    structured: false,
+    structured: true,
   } as MetadataBoxFieldRenderOptions],
   [FieldRenderingType.MARKDOWN, {
     componentRef: MarkdownComponent,
-    structured: false,
+    structured: true,
   } as MetadataBoxFieldRenderOptions],
   [FieldRenderingType.SEARCH, {
     /* eslint-disable-next-line dspace-angular-ts/themed-component-usages */
@@ -111,5 +114,13 @@ export const layoutBoxesMap = new Map<FieldRenderingType, MetadataBoxFieldRender
   [FieldRenderingType.TAGSEARCH, {
     componentRef: TagSearchComponent,
     structured: false,
+  } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.LONGMARKDOWN, {
+    componentRef: LongmarkdownComponent,
+    structured: false,
+  } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.IMAGE, {
+    componentRef: ImageComponent,
+    structured: true,
   } as MetadataBoxFieldRenderOptions],
 ]);

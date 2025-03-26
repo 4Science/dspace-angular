@@ -184,8 +184,8 @@ export class LocationService {
   public isValidCoordinateString(coordinateString: string): boolean {
     if (this.isDecimalCoordinateString(coordinateString)) {
       const coordinateArray = coordinateString.split(',');
-      const latitude = parseFloat(coordinateArray[0]);
-      const longitude = parseFloat(coordinateArray[1]);
+      const latitude = parseFloat(coordinateArray[0].trim());
+      const longitude = parseFloat(coordinateArray[1].trim());
       return !isNaN(latitude) && !isNaN(longitude) && this.isValidDecimalCoordinatePair(latitude, longitude);
     } else {
       return false;

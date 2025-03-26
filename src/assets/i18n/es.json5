@@ -11377,25 +11377,26 @@
   // TODO New key - Add a translation
   "submission.sections.unpaywall.refresh": "Refresh",
 
-  // "submission.sections.unpaywall.import": "Import from unpaywall",
+  // "submission.sections.unpaywall.import": "Import from Unpaywall",
   // TODO New key - Add a translation
-  "submission.sections.unpaywall.import": "Import from unpaywall",
+  "submission.sections.unpaywall.import": "Import from Unpaywall",
 
-  // "submission.sections.unpaywall.status.successful": "You can import from unpaywall",
+  // "submission.sections.unpaywall.status.successful": "There are available files to import from Unpaywall.",
   // TODO New key - Add a translation
-  "submission.sections.unpaywall.status.successful": "You can import from unpaywall",
+  "submission.sections.unpaywall.status.successful": "There are available files to import from Unpaywall.",
 
-  // "submission.sections.unpaywall.status.not-found": "Can't find record using Unpaywall api",
+  // "submission.sections.unpaywall.status.not-found": "Cannot find record using Unpaywall API.",
   // TODO New key - Add a translation
-  "submission.sections.unpaywall.status.not-found": "Can't find record using Unpaywall api",
+  "submission.sections.unpaywall.status.not-found": "Cannot find record using Unpaywall API.",
 
-  // "submission.sections.unpaywall.status.pending": "Unpaywall api request is initialized",
+  // "submission.sections.unpaywall.status.pending": "Unable to retrieve information from the Unpaywall service. You can use the refresh button to manually check if an answer has been received.",
   // TODO New key - Add a translation
-  "submission.sections.unpaywall.status.pending": "Unpaywall api request is initialized",
+  "submission.sections.unpaywall.status.pending": "Unable to retrieve information from the Unpaywall service. You can use the refresh button to manually check if an answer has been received.",
 
-  // "submission.sections.unpaywall.status.no-file": "There are no files to be imported",
+  // "submission.sections.unpaywall.status.no-file": "There are no available files to be imported.",
   // TODO New key - Add a translation
-  "submission.sections.unpaywall.status.no-file": "There are no files to be imported",
+  "submission.sections.unpaywall.status.no-file": "There are no available files to be imported.",
+
   // "submission.sections.unpaywall.status.imported": "The Unpaywall resource has been imported!",
   // TODO New key - Add a translation
   "submission.sections.unpaywall.status.imported": "The Unpaywall resource has been imported!",
