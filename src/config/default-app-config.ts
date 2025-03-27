@@ -860,7 +860,6 @@ export class DefaultAppConfig implements AppConfig {
   mirador: MiradorConfig = {
     enableDownloadPlugin: true,
     enableAnnotationServer: false,
-    enableDownloadPlugin: false,
     downloadMetadataConfig: 'viewer.mirador.download',
     downloadRestConfig: 'viewer.mirador.download.default',
     downloadSelectOptions: [ 'all', 'no', 'alternative', 'single-image'],
