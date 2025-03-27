@@ -18,6 +18,7 @@ import { ConfigurationDataService } from '../../core/data/configuration-data.ser
 import { APP_CONFIG } from '../../../config/app-config.interface';
 import { environment } from '../../../environments/environment';
 import { Collection } from '../../core/shared/collection.model';
+import { DspaceRestService } from '../../core/dspace-rest/dspace-rest.service';
 
 
 function getItem(metadata: MetadataMap, collectionMetadata?: MetadataMap): Item {
@@ -45,6 +46,10 @@ const configurationDataService = jasmine.createSpyObj('configurationDataService'
   findByPropertyName: createSuccessfulRemoteDataObject$(defaultConfigProperty)
 });
 
+const restService = Object.assign({}, {
+  get: () => observableOf({payload: { page: ['all', 'single-images'] }})
+});
+
 describe('MiradorViewerComponent with search', () => {
   let comp: MiradorViewerComponent;
   let fixture: ComponentFixture<MiradorViewerComponent>;
@@ -61,6 +66,7 @@ describe('MiradorViewerComponent with search', () => {
       })],
       declarations: [MiradorViewerComponent],
       providers: [
+        { provide: DspaceRestService, useValue: restService },
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
         { provide: HostWindowService, useValue: mockHostWindowService },
@@ -127,6 +133,7 @@ describe('MiradorViewerComponent with multiple images', () => {
       })],
       declarations: [MiradorViewerComponent],
       providers: [
+        { provide: DspaceRestService, useValue: restService },
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
         { provide: HostWindowService, useValue: mockHostWindowService  },
@@ -190,6 +197,7 @@ describe('MiradorViewerComponent with a single image', () => {
       })],
       declarations: [MiradorViewerComponent],
       providers: [
+        { provide: DspaceRestService, useValue: restService },
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
         { provide: HostWindowService, useValue: mockHostWindowService },
@@ -252,6 +260,7 @@ describe('MiradorViewerComponent in development mode', () => {
     }).overrideComponent(MiradorViewerComponent, {
       set: {
         providers: [
+          { provide: DspaceRestService, useValue: restService },
           { provide: MiradorViewerService, useValue: viewerService },
           { provide: BundleDataService, useValue: {} },
           { provide: HostWindowService, useValue: mockHostWindowService  },
@@ -304,6 +313,7 @@ describe('MiradorViewerComponent download plugin config', () => {
       })],
       declarations: [MiradorViewerComponent],
       providers: [
+        { provide: DspaceRestService, useValue: restService },
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
         { provide: HostWindowService, useValue: mockHostWindowService  },

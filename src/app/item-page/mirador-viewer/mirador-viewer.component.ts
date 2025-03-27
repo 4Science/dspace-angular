@@ -3,7 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Item } from '../../core/shared/item.model';
 import { environment } from '../../../environments/environment';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
-import { combineLatest, from, Observable, of, switchMap } from 'rxjs';
+import { combineLatest, Observable, of, switchMap } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 import { MiradorViewerService } from './mirador-viewer.service';
@@ -13,6 +13,7 @@ import { ConfigurationDataService } from '../../core/data/configuration-data.ser
 import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { MiradorMetadataDownloadValue } from '../../../config/mirador-config.interfaces';
+import { DspaceRestService } from '../../core/dspace-rest/dspace-rest.service';
 
 
 @Component({
@@ -71,6 +72,7 @@ export class MiradorViewerComponent implements OnInit {
               private bundleDataService: BundleDataService,
               private hostWindowService: HostWindowService,
               private configurationDataService: ConfigurationDataService,
+              private restService: DspaceRestService,
               @Inject(APP_CONFIG) private appConfig: AppConfig,
               @Inject(PLATFORM_ID) private platformId: any) {
   }
@@ -192,9 +194,10 @@ export class MiradorViewerComponent implements OnInit {
 
   getIiifDownloadConfig(): Observable<MiradorMetadataDownloadValue[]> {
     const href = `${this.appConfig.rest.baseUrl}/iiif/${this.object.id}/download`;
-    //TODO: pass authorization bearer
-    return from(fetch(href)).pipe(
-      switchMap((response: Response) => response.ok ? from(response.json()) : from([])),
+    // To make this call work in dev mode you must set up a proxy configuration under the serve option in angular.json ad use appConfig.ui.baseUrl instead of rest.baseUrl.
+    // The file can be found in the root of the project as dev-proxy.conf.js
+    return this.restService.get(href).pipe(
+      map(res => res.payload.page)
     );
   }
 }

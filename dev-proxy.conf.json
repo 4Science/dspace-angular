@@ -1,0 +1,8 @@
+{
+  "/iiif": {
+    "target": "http://localhost:8080/server",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
