@@ -67,7 +67,7 @@ export const crisItemPageTabResolver: ResolveFn<RemoteData<PaginatedList<CrisLay
               const isValidTab = !givenTab || tabsRD.payload.page.some((tab) => {
                 const shortnameSplit = tab.shortname.split('::');
                 const shortname = shortnameSplit[shortnameSplit.length - 1];
-                return `/${shortname}` === givenTab;
+                return shortname === givenTab;
               });
 
               const mainTab = tabsRD.payload.page.length === 1
