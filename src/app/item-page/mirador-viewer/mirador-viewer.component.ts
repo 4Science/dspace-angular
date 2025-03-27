@@ -120,7 +120,6 @@ export class MiradorViewerComponent implements OnInit {
     /**
      * Initializes the iframe url observable.
      */
-    this.getIiifDownloadConfig().subscribe(console.log);
     if (isPlatformBrowser(this.platformId)) {
       this.downloadConfigKey = this.appConfig.mirador.downloadMetadataConfig;
       // Viewer is not currently available in dev mode so hide it in that case.
@@ -194,10 +193,10 @@ export class MiradorViewerComponent implements OnInit {
 
   getIiifDownloadConfig(): Observable<MiradorMetadataDownloadValue[]> {
     const href = `${this.appConfig.rest.baseUrl}/iiif/${this.object.id}/download`;
-    // To make this call work in dev mode you must set up a proxy configuration under the serve option in angular.json ad use appConfig.ui.baseUrl instead of rest.baseUrl.
+    // To make this call work in dev mode with local rests you must set up a proxy configuration under the serve option in angular.json ad use appConfig.ui.baseUrl instead of rest.baseUrl.
     // The file can be found in the root of the project as dev-proxy.conf.js
     return this.restService.get(href).pipe(
-      map(res => res.payload.page)
+      map(res => res.payload as MiradorMetadataDownloadValue[])
     );
   }
 }
