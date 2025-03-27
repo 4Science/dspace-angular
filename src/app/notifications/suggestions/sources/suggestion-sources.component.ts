@@ -5,7 +5,7 @@ import {
   ActivatedRoute,
   Router,
 } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import {
   BehaviorSubject,
   Observable,
@@ -37,7 +37,7 @@ import {
     SourceListComponent,
     AsyncPipe,
     AlertComponent,
-    TranslatePipe,
+    TranslateModule,
   ],
   templateUrl: './suggestion-sources.component.html',
   styleUrl: './suggestion-sources.component.scss',
