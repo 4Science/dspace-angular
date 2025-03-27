@@ -8278,6 +8278,8 @@
   "coin.page.titleprefix": "Coin: ",
   "scientificmaterial.page.titleprefix": "Scientific Material: ",
   "musicallibrettos.page.titleprefix": "Musical Librettos: ",
+  "webannotation.page.titleprefix": "Web Annotation: ",
+  "personalannotation.page.titleprefix": "Personal Annotation: ",
 
   "aggregation.listelement.badge": "Aggregation",
   "news.listelement.badge": "News",
@@ -8287,6 +8289,8 @@
   "coin.listelement.badge": "Coin",
   "scientificmaterial.listelement.badge": "Scientific Material",
   "musicallibrettos.listelement.badge": "Musical Librettos",
+  "webannotation.listelement.badge": "Web Annotation",
+  "personalannotation.listelement.badge": "Personal Annotation",
 
   "picture.listelement.badge": "Picture",
   "menu.section.explore_sectionfonds": "Fonds",
@@ -8431,6 +8435,10 @@
   "submission.sections.submit.progressbar.describe.bnm_scheme_geolocalization": "Geolocation",
 
   "submission.sections.submit.progressbar.describe.bnm_scheme_relation": "Relationships",
+
+  "submission.sections.submit.progressbar.describe.web_annotation": "Web Annotation",
+
+  "submission.sections.submit.progressbar.describe.personal_annotation": "Personal Annotation",
 
   "map.coordinates-invalid": "Coordinates are not valid",
 

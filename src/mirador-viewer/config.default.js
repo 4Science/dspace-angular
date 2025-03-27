@@ -6,10 +6,8 @@ import Mirador from 'mirador/dist/es/src/index';
 // your local Mirador instance. This allows you to keep local
 // Mirador configuration separate from this default distribution
 // copy.
-
 // For an example of all Mirador configuration options, see
 // https://github.com/ProjectMirador/mirador/blob/master/src/config/settings.js
-
 // You can add or remove plugins. When adding new plugins be sure to also
 // import them into the project via your package.json dependencies.
 import miradorShareDialogPlugin from 'mirador-share-plugin/es/MiradorShareDialog';
@@ -17,8 +15,9 @@ import miradorSharePlugin from 'mirador-share-plugin/es/miradorSharePlugin';
 import miradorDownloadPlugin from 'mirador-dl-plugin/es/miradorDownloadPlugin';
 import miradorDownloadDialog from 'mirador-dl-plugin/es/MiradorDownloadDialog';
 import miradorAnnotationPlugins from 'mirador-annotations/es/index';
-import LocalStorageAdapter from 'mirador-annotations/es/LocalStorageAdapter';
 import miradorImageToolsPlugin from 'mirador-image-tools/es/plugins/miradorImageToolsPlugin';
+import DspaceAnnotationServerAdapter from "./dspace-annotation-server-adapter";
+import LocalStorageAdapter from 'mirador-annotations/es/LocalStorageAdapter';
 
 const MANIFEST_URL_PART = /\/manifest$/;
 
@@ -30,6 +29,8 @@ const query = params.get('query');
 const multi = params.get('multi');
 const notMobile = params.get('notMobile');
 const isDownloadPluginEnabled = (params.get('enableDownloadPlugin') === 'true');
+const isAnnotationServerEnabled = (params.get('enableAnnotationServer') === 'true');
+const annotationServerUrl = params.get('annotationServerUrl');
 const canvasId = params.get('canvasId');
 
 let windowSettings = {};
@@ -66,11 +67,34 @@ windowSettings.manifestId = manifest;
     windowSettings.canvasId =
       `${(manifest.replace(MANIFEST_URL_PART, ''))}/canvas/${canvasId}`;
   }
+
+  // Method to extract access token and return bearer header
+  const getAuthorizationHeader = () => {
+    const authCookieName = 'dsAuthInfo';
+    const tokenName = 'accessToken';
+    const cookies = document.cookie.split('; ');
+    for (const cookie of cookies) {
+      const [key, value] = cookie.split('=');
+      if (key === authCookieName) {
+        const authCookie = decodeURIComponent(value);
+        const parsedCookie = JSON.parse(authCookie);
+        if (parsedCookie && parsedCookie[tokenName]) {
+          return `Bearer ${parsedCookie[tokenName]}`;
+        }
+      }
+    }
+    return null; // Return null if the cookie is not found
+  };
+
+  windowSettings.bearer = getAuthorizationHeader();
 })();
 
 const miradorConfiguration = {
   annotation: {
-    adapter: (canvasId) => new LocalStorageAdapter(`localStorage://?canvasId=${canvasId}`),
+    adapter: (canvasId) =>
+      (isAnnotationServerEnabled && annotationServerUrl) ?
+      new DspaceAnnotationServerAdapter(canvasId, annotationServerUrl) :
+      new LocalStorageAdapter(`localStorage://?canvasId=${canvasId}`),
   },
   id: 'mirador',
   mainMenuSettings: {
@@ -185,6 +209,28 @@ const miradorConfiguration = {
   }
 };
 
+// Authentication settings
+(() => {
+  if(windowSettings.bearer) {
+    // Preprocess requests so that we can add an authorization header if a token is found
+    miradorConfiguration.requests = {
+      preprocessors: [
+        (url, options) => ({ ...options, headers: { ...options.headers, Authorization: windowSettings.bearer }})
+      ]
+    };
+    // Configuration of OpenSeaDragon https://openseadragon.github.io/docs/OpenSeadragon.html#.Options, the viewer used by Mirador.
+    // This configuration affects all the requests made for images in the viewer.
+    miradorConfiguration.osdConfig = {
+      loadTilesWithAjax: true,
+      ajaxHeaders: {
+        'Authorization': windowSettings.bearer
+      },
+      ajaxWithCredentials: true,
+      crossOriginPolicy: 'anonymous',
+    };
+  }
+})()
+
 let miradorPlugins = [
   miradorShareDialogPlugin,
   miradorSharePlugin,
@@ -200,4 +246,16 @@ let miradorPlugins = [
   }
 })();
 
-Mirador.viewer(miradorConfiguration, miradorPlugins);
+if (("serviceWorker" in navigator) && windowSettings.bearer) {
+  navigator.serviceWorker.register(`./serviceWorker.js?accessToken=${windowSettings.bearer}`)
+    .then(() => {
+      Mirador.viewer(miradorConfiguration, miradorPlugins);
+    })
+    .catch((error) => {
+      console.error("Service Worker registration failed:", error);
+      console.error("Not all private images will be available");
+      Mirador.viewer(miradorConfiguration, miradorPlugins);
+    });
+} else {
+  Mirador.viewer(miradorConfiguration, miradorPlugins);
+}
