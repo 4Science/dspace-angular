@@ -17,7 +17,7 @@ import {
   NativeWindowService,
 } from '../core/services/window.service';
 import { ConfigurationProperty } from '../core/shared/configuration-property.model';
-import { OrejimeService } from '../shared/cookies/orejime.service';
+import { KlaroService } from '../shared/cookies/klaro.service';
 import {
   createFailedRemoteDataObject$,
   createSuccessfulRemoteDataObject$,
@@ -32,14 +32,14 @@ describe('MatomoService', () => {
   let service: MatomoService;
   let matomoTracker: jasmine.SpyObj<MatomoTracker>;
   let matomoInitializer: jasmine.SpyObj<MatomoInitializerService>;
-  let orejimeService: jasmine.SpyObj<OrejimeService>;
+  let klaroService: jasmine.SpyObj<KlaroService>;
   let nativeWindowService: jasmine.SpyObj<NativeWindowRef>;
   let configService: jasmine.SpyObj<ConfigurationDataService>;
 
   beforeEach(() => {
     matomoTracker = jasmine.createSpyObj('MatomoTracker', ['setConsentGiven', 'forgetConsentGiven', 'getVisitorId']);
     matomoInitializer = jasmine.createSpyObj('MatomoInitializerService', ['initializeTracker']);
-    orejimeService = jasmine.createSpyObj('OrejimeService', ['getSavedPreferences']);
+    klaroService = jasmine.createSpyObj('KlaroService', ['getSavedPreferences']);
     nativeWindowService = jasmine.createSpyObj('NativeWindowService', [], { nativeWindow: {} });
     configService = jasmine.createSpyObj('ConfigurationDataService', ['findByPropertyName']);
     configService.findByPropertyName.and.returnValue(createFailedRemoteDataObject$());
@@ -49,7 +49,7 @@ describe('MatomoService', () => {
       providers: [
         { provide: MatomoTracker, useValue: matomoTracker },
         { provide: MatomoInitializerService, useValue: matomoInitializer },
-        { provide: OrejimeService, useValue: orejimeService },
+        { provide: KlaroService, useValue: klaroService },
         { provide: NativeWindowService, useValue: nativeWindowService },
         { provide: ConfigurationDataService, useValue: configService },
       ],
@@ -63,7 +63,7 @@ describe('MatomoService', () => {
   });
 
   it('should set changeMatomoConsent on native window', () => {
-    orejimeService.getSavedPreferences.and.returnValue(of({ matomo: true }));
+    klaroService.getSavedPreferences.and.returnValue(of({ matomo: true }));
     service.init();
     expect(nativeWindowService.nativeWindow.changeMatomoConsent).toBe(service.changeMatomoConsent);
   });
@@ -85,7 +85,7 @@ describe('MatomoService', () => {
     );
     configService.findByPropertyName.withArgs(MATOMO_SITE_ID).and.returnValue(
       createSuccessfulRemoteDataObject$(Object.assign(new ConfigurationProperty(), { values: ['1'] })));
-    orejimeService.getSavedPreferences.and.returnValue(of({ matomo: true }));
+    klaroService.getSavedPreferences.and.returnValue(of({ matomo: true }));
 
     service.init();
 
