@@ -20,7 +20,6 @@ import {
 import { RequestService } from './request.service';
 import { ParsedResponse } from '../cache/response.models';
 import { RequestError } from './request-error.model';
-import { RestRequestMethod } from './rest-request-method';
 import { RestRequestWithResponseParser } from './rest-request-with-response-parser.model';
 import { RequestEntry } from './request-entry.model';
 
@@ -38,7 +37,7 @@ export class RequestEffects {
     withLatestFrom(this.xsrfService.tokenInitialized$),
     // If it's a GET request, or we have an XSRF token, dispatch it immediately
     // Otherwise wait for the XSRF token first
-    filter(([entry, tokenInitialized]: [RequestEntry, boolean]) => entry.request.method === RestRequestMethod.GET || tokenInitialized === true),
+    //filter(([entry, tokenInitialized]: [RequestEntry, boolean]) => entry.request.method === RestRequestMethod.GET || tokenInitialized === true),
     map(([entry, tokenInitialized]: [RequestEntry, boolean]) => entry.request),
     mergeMap((request: RestRequestWithResponseParser) => {
       let body = request.body;

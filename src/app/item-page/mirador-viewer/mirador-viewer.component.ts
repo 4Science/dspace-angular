@@ -111,7 +111,7 @@ export class MiradorViewerComponent implements OnInit {
       viewerPath += `&canvasId=${this.canvasId}`;
     }
 
-    return viewerPath;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(viewerPath);
   }
 
   ngOnInit(): void {

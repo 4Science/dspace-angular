@@ -18,7 +18,6 @@ import { ConfigurationDataService } from '../../core/data/configuration-data.ser
 import { APP_CONFIG } from '../../../config/app-config.interface';
 import { environment } from '../../../environments/environment';
 import { Collection } from '../../core/shared/collection.model';
-import { SafeUrlPipe } from '../../shared/utils/safe-url-pipe';
 
 
 function getItem(metadata: MetadataMap, collectionMetadata?: MetadataMap): Item {
@@ -60,7 +59,7 @@ describe('MiradorViewerComponent with search', () => {
           useClass: TranslateLoaderMock
         }
       })],
-      declarations: [MiradorViewerComponent, SafeUrlPipe],
+      declarations: [MiradorViewerComponent],
       providers: [
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
@@ -83,6 +82,7 @@ describe('MiradorViewerComponent with search', () => {
       comp = fixture.componentInstance;
       comp.object = getItem(noMetadata);
       comp.searchable = true;
+      comp.isDownloadEnabled$ = () => observableOf(true);
       fixture.detectChanges();
     }));
 
@@ -125,7 +125,7 @@ describe('MiradorViewerComponent with multiple images', () => {
           useClass: TranslateLoaderMock
         }
       })],
-      declarations: [MiradorViewerComponent, SafeUrlPipe],
+      declarations: [MiradorViewerComponent],
       providers: [
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
@@ -149,6 +149,7 @@ describe('MiradorViewerComponent with multiple images', () => {
       comp = fixture.componentInstance;
       comp.object = getItem(noMetadata);
       comp.searchable = false;
+      comp.isDownloadEnabled$ = () => observableOf(true);
       fixture.detectChanges();
     }));
 
@@ -187,7 +188,7 @@ describe('MiradorViewerComponent with a single image', () => {
           useClass: TranslateLoaderMock
         }
       })],
-      declarations: [MiradorViewerComponent, SafeUrlPipe],
+      declarations: [MiradorViewerComponent],
       providers: [
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
@@ -210,6 +211,7 @@ describe('MiradorViewerComponent with a single image', () => {
       fixture = TestBed.createComponent(MiradorViewerComponent);
       comp = fixture.componentInstance;
       comp.object = getItem(noMetadata);
+      comp.isDownloadEnabled$ = () => observableOf(true);
       fixture.detectChanges();
     }));
 
@@ -242,7 +244,7 @@ describe('MiradorViewerComponent in development mode', () => {
           useClass: TranslateLoaderMock
         }
       })],
-      declarations: [MiradorViewerComponent, SafeUrlPipe],
+      declarations: [MiradorViewerComponent],
       providers: [
         { provide: BitstreamDataService, useValue: {} }
       ],
@@ -265,6 +267,7 @@ describe('MiradorViewerComponent in development mode', () => {
       fixture = TestBed.createComponent(MiradorViewerComponent);
       comp = fixture.componentInstance;
       comp.object = getItem(noMetadata);
+      comp.isDownloadEnabled$ = () => observableOf(true);
       fixture.detectChanges();
     }));
 
@@ -299,7 +302,7 @@ describe('MiradorViewerComponent download plugin config', () => {
           useClass: TranslateLoaderMock
         }
       })],
-      declarations: [MiradorViewerComponent, SafeUrlPipe],
+      declarations: [MiradorViewerComponent],
       providers: [
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },

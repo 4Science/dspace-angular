@@ -1743,7 +1743,15 @@
 
   "collection.form.correctionSubmissionDefinition": "Submission definition for correction request",
 
+  "collection.form.iiifViewerSubmissionDefinition": "Download configuration for IIIF viewer",
 
+  "collection.form.iiifViewerSubmissionDefinition.all": "Enable download for single images and multi-pages PDF",
+
+  "collection.form.iiifViewerSubmissionDefinition.no": "Disable all download options",
+
+  "collection.form.iiifViewerSubmissionDefinition.single-images": "Enable download for single images only",
+
+  "collection.form.iiifViewerSubmissionDefinition.alternative": "Enable download for multi-pages PDF only",
 
   "collection.listelement.badge": "Collection",
 
