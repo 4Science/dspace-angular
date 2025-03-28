@@ -1749,7 +1749,7 @@
 
   "collection.form.iiifViewerSubmissionDefinition.no": "Disable all download options",
 
-  "collection.form.iiifViewerSubmissionDefinition.single-images": "Enable download for single images only",
+  "collection.form.iiifViewerSubmissionDefinition.single-image": "Enable download for single images only",
 
   "collection.form.iiifViewerSubmissionDefinition.alternative": "Enable download for multi-pages PDF only",
 
