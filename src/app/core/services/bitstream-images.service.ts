@@ -10,7 +10,7 @@ import { PaginatedList } from '../data/paginated-list.model';
 import { Bitstream } from '../shared/bitstream.model';
 import { BitstreamFormat } from '../shared/bitstream-format.model';
 import { hasValue } from '../../shared/empty.util';
-import { BitstreamDataService } from '../data/bitstream-data.service';
+import { BitstreamDataService, MetadataFilter } from '../data/bitstream-data.service';
 import { Item } from '../shared/item.model';
 import { DSpaceObject } from '../shared/dspace-object.model';
 
@@ -44,17 +44,39 @@ export class BitstreamImagesService {
     );
   }
 
+  getPrimaryBitstreamInNonOriginalBundleItemToImageMap(items: Item[], bundleName = 'BRANDED_PREVIEW'): Observable<Map<string, string>> {
+    return from(items).pipe(
+      mergeMap(item => this.findImageBitstreams(item).pipe(
+        mergeMap(originalBitstream => {
+          const titleFilter: MetadataFilter = {
+            metadataName: 'dc.title',
+            metadataValue: `(${originalBitstream.name}.*)`
+          };
+          return this.findImageBitstreams(item, bundleName, [titleFilter]).pipe(
+            take(1),
+            map(bitstream => ({
+              itemUUID: item.uuid,
+              imageHref: bitstream._links.content.href
+            }))
+          );
+        })
+      )),
+      reduce((acc, value) => acc.set(value.itemUUID, value.imageHref), new Map())
+    );
+  }
+
   /**
    * Find all image bitstreams for an item
    * @param item the item for which the images should be retrieved
    * @param bundleName the bundle name (ORIGINAL by default)
+   * @param metadataFilters the metadata filters (empty by default)
    */
-  findImageBitstreams(item: Item | DSpaceObject, bundleName = 'ORIGINAL') {
+  findImageBitstreams(item: Item | DSpaceObject, bundleName = 'ORIGINAL', metadataFilters: MetadataFilter[] = []): Observable<Bitstream> {
     const isImageMimetypeRegex = /^image\//;
 
     // retrieve all bundle's bitstreams for the item
     const bitstreamPayload$: Observable<Bitstream> = this.bitstreamDataService.showableByItem(
-      item.uuid, bundleName, [], {}, true, true, followLink('format'),
+      item.uuid, bundleName, metadataFilters, {}, true, true, followLink('format'),
     ).pipe(
       getFirstCompletedRemoteData(),
       switchMap((rd: RemoteData<PaginatedList<Bitstream>>) => rd.hasSucceeded ? rd.payload.page : new Array<Bitstream>()),

@@ -152,14 +152,16 @@ export abstract class SliderComponent implements OnInit {
           this.hasMoreToLoad = this.itemList.length < searchResult.totalElements;
           this.initLoading$.next(false);
           this.itemsImagesLoading$.next(true);
-          return hasValue(this.bundle)
-            ? this.bitstreamImagesService.getItemToImageMap(items, this.bundle)
-            : this.bitstreamImagesService.getItemToImageMap(items);
+          if (!hasValue(this.bundle) || this.bundle === 'ORIGINAL') {
+            return this.bitstreamImagesService.getItemToImageMap(items);
+          } else {
+            return this.bitstreamImagesService.getPrimaryBitstreamInNonOriginalBundleItemToImageMap(items, this.bundle);
+          }
         } else {
           return null;
         }
       }),
-      take(1)
+      take(1),
     ).subscribe((itemToImageHrefMap: Map<string,string>) => {
       if (isNotEmpty(itemToImageHrefMap)) {
         this.itemToImageHrefMap$.next(new Map([...Array.from(this.itemToImageHrefMap$.value.entries()), ...Array.from(itemToImageHrefMap.entries())]));
