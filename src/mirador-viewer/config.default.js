@@ -246,8 +246,9 @@ let miradorPlugins = [
   }
 })();
 
-if (("serviceWorker" in navigator) && windowSettings.bearer) {
-  navigator.serviceWorker.register(`./serviceWorker.js?accessToken=${windowSettings.bearer}`)
+if (("serviceWorker" in navigator)) {
+  const url =  windowSettings.bearer ? `./serviceWorker.js?accessToken=${windowSettings.bearer}` : './serviceWorker.js';
+  navigator.serviceWorker.register(url)
     .then(() => {
       Mirador.viewer(miradorConfiguration, miradorPlugins);
     })
