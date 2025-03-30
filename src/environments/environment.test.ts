@@ -825,5 +825,9 @@ export const environment: BuildConfig = {
     tileProviders: [
       'OpenStreetMap.Mapnik',
     ],
+    defaultCentrePoint: {
+      lat: 41.015137,
+      lng: 28.979530,
+    },
   },
 };
