@@ -159,15 +159,17 @@ export class VocabularyTreeviewService {
     }
     const parent: TreeviewNode = this.nodeMap.get(item.otherInformation.id)!;
     const children = this.nodeMap.get(item.otherInformation.id)!.children || [];
-    this.getChildrenNodesByParent(item.otherInformation.id, parent.pageInfo).subscribe((list: PaginatedList<VocabularyEntryDetail>) => {
-
-      if (onlyFirstTime && parent.children!.length > 0) {
+    this.getChildrenNodesByParent(item.otherInformation.id, parent.pageInfo, loadAll).subscribe((list: PaginatedList<VocabularyEntryDetail>) => {
+      if (onlyFirstTime && parent.children!.length > 0 && !loadAll) {
         return;
       }
 
       const newNodes: TreeviewNode[] = list.page.map((entry) => this._generateNode(entry, selectedItems));
       if (newNodes.length > 0) {
-        children.pop();
+        if (!loadAll) {
+          //remove load more button
+          children.pop();
+        }
         children.push(...newNodes);
       }
 
@@ -179,13 +181,10 @@ export class VocabularyTreeviewService {
         parent.updatePageInfo(newPageInfo);
         parent.childrenChange.next(children);
 
-        if (loadAll) {
-          // Need a new load more node
-          this.loadMore(item, selectedItems);
-          return;
+        if (!loadAll) {
+          // if not all loaded add a load more button
+          children.push(new TreeviewNode(LOAD_MORE_NODE, false, newPageInfo, item));
         }
-
-        children.push(new TreeviewNode(LOAD_MORE_NODE, false, newPageInfo, item));
       } else {
         parent.childrenChange.next(children);
       }
@@ -306,16 +305,25 @@ export class VocabularyTreeviewService {
     return this.vocabularyService.getEntryDetailChildren(parentId, this.vocabularyName, pageInfo).pipe(
       getFirstSucceededRemoteDataPayload(),
     ).pipe(
-      expand(res => {
-        if (res.pageInfo.currentPage + 1 <= res.pageInfo.totalPages && loadAll) {
-          const newPageInfo = Object.assign({}, res.pageInfo, {currentPage: res.pageInfo.currentPage + 1});
-          return this.vocabularyService.getEntryDetailChildren(parentId, this.vocabularyName, newPageInfo).pipe(
-            getFirstSucceededRemoteDataPayload(),
-          );
-        }
-        return EMPTY;
-      })
+      expand(res => this.getPaginatedChildren(res, parentId, loadAll))
     );
+  }
+
+  /**
+   * Get children recursively in expand to load all children
+   * @param res
+   * @param parentId
+   * @param loadAll
+   * @private
+   */
+  private getPaginatedChildren(res: PaginatedList<VocabularyEntryDetail>, parentId: string, loadAll: boolean): Observable<PaginatedList<VocabularyEntryDetail>> {
+    if (res.pageInfo.currentPage + 1 <= res.pageInfo.totalPages && loadAll) {
+      const newPageInfo = Object.assign({}, res.pageInfo, {currentPage: res.pageInfo.currentPage + 1});
+      return this.vocabularyService.getEntryDetailChildren(parentId, this.vocabularyName, newPageInfo).pipe(
+        getFirstSucceededRemoteDataPayload()
+      );
+    }
+    return EMPTY;
   }
 
   /**
