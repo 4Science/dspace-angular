@@ -72,7 +72,7 @@ if (environment.info.enableOrgStructure) {
 if (environment.info.enablePrivacyStatement) {
   imports.push(
     RouterModule.forChild([
-      cmsInfoRoute(PRIVACY_PATH, 'cris'),
+      cmsInfoRoute(PRIVACY_PATH, 'glam'),
     ]),
   );
 }
