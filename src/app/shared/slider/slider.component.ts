@@ -153,9 +153,9 @@ export abstract class SliderComponent implements OnInit {
           this.initLoading$.next(false);
           this.itemsImagesLoading$.next(true);
           if (!hasValue(this.bundle) || this.bundle === 'ORIGINAL') {
-            return this.bitstreamImagesService.getItemToImageMap(items);
+            return this.bitstreamImagesService.getItemToImageMap(items, undefined, { elementsPerPage: 1 });
           } else {
-            return this.bitstreamImagesService.getPrimaryBitstreamInNonOriginalBundleItemToImageMap(items, this.bundle);
+            return this.bitstreamImagesService.getPrimaryBitstreamInNonOriginalBundleItemToImageMap(items, this.bundle, { elementsPerPage: 1 });
           }
         } else {
           return null;
