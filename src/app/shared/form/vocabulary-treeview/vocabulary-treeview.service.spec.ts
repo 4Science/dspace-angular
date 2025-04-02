@@ -266,24 +266,46 @@ describe('VocabularyTreeviewService test suite', () => {
       expect(serviceAsAny.initValueHierarchy).toEqual(['root1', 'root1-child2']);
       expect(serviceAsAny.dataChange.value).toEqual([itemInitNode]);
     });
+    // Disabled as we don't limt the tree anymore to the first value of the hierarchy but we start building the tree directly from that one (root node) for any case
+    xit('should show only nodes restricted to init Value Hierarchy', () => {
+      serviceAsAny.vocabularyService.getEntryDetailChildren.and.returnValue(hot('--a', {
+        a: createSuccessfulRemoteDataObject(buildPaginatedList(pageInfo, [child, child2]))
+      }));
+      serviceAsAny.vocabularyService.findEntryDetailById.and.returnValues(
+        hot('-a', {
+          a: createSuccessfulRemoteDataObject(child2)
+        })
+      );
+      serviceAsAny.vocabularyService.getEntryDetailParent.and.returnValue(
+        hot('-b', {
+          b: createSuccessfulRemoteDataObject(item)
+        })
+      );
+      scheduler.schedule(() => service.initialize(vocabularyOptions, pageInfo, ['root2'], 'root2', true));
+      scheduler.flush();
+
+      expect(serviceAsAny.vocabularyName).toEqual(vocabularyOptions.name);
+      expect(serviceAsAny.initValueHierarchy).toEqual(['root1', 'root1-child2']);
+      expect(serviceAsAny.dataChange.value).toEqual([itemInitNode]);
+    });
 
     it('should call retrieveNodesTreeByTopParentEntry properly when is a relation component', () => {
       serviceAsAny.vocabularyService.findEntryDetailById.and.returnValues(
         hot('-a', {
-          a: createSuccessfulRemoteDataObject(child),
+          a: createSuccessfulRemoteDataObject(child)
         }),
         hot('-b', {
-          b: createSuccessfulRemoteDataObject(item),
+          b: createSuccessfulRemoteDataObject(item)
         }),
       );
 
       serviceAsAny.vocabularyService.getEntryDetailChildren.and.returnValue(hot('-a', {
-        a: createSuccessfulRemoteDataObject([child]),
+        a: createSuccessfulRemoteDataObject([child])
       }));
 
       serviceAsAny.vocabularyService.getEntryDetailParent.and.returnValue(
         hot('-a', {
-          a: createSuccessfulRemoteDataObject(item),
+          a: createSuccessfulRemoteDataObject(item)
         }),
       );
       spyOn(serviceAsAny, 'retrieveNodesTreeByTopParentEntry');
