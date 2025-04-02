@@ -24,10 +24,7 @@ import { TabDataService } from '../core/layout/tab-data.service';
 import { HardRedirectService } from '../core/services/hard-redirect.service';
 import { Item } from '../core/shared/item.model';
 import { getFirstCompletedRemoteData } from '../core/shared/operators';
-import {
-  isEmpty,
-  isNotEmpty,
-} from '../shared/empty.util';
+import { isNotEmpty } from '../shared/empty.util';
 import { createFailedRemoteDataObject$ } from '../shared/remote-data.utils';
 import { getItemPageRoute } from './item-page-routing-paths';
 
@@ -66,7 +63,12 @@ export const crisItemPageTabResolver: ResolveFn<RemoteData<PaginatedList<CrisLay
               const givenTab = tabArguments[1];
               const hasViewer: boolean = isNotEmpty(tabArguments[2]) && tabArguments[2] === 'viewer';
               const itemPageRoute = getItemPageRoute(itemRD.payload);
-              const isValidTab = isEmpty(givenTab) || tabsRD.payload.page.some((tab) => givenTab?.includes(tab.shortname));
+
+              const isValidTab = !givenTab || tabsRD.payload.page.some((tab) => {
+                const shortnameSplit = tab.shortname.split('::');
+                const shortname = shortnameSplit[shortnameSplit.length - 1];
+                return shortname === givenTab;
+              });
 
               const mainTab = tabsRD.payload.page.length === 1
                 ? tabsRD.payload.page[0]

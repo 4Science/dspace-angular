@@ -1,3 +1,6 @@
+import { ImageComponent } from 'src/app/cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/image/image.component';
+import { LongmarkdownComponent } from 'src/app/cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/longmarkdown/longmarkdown.component';
+
 import { AdvancedAttachmentComponent } from './advanced-attachment/advanced-attachment.component';
 import { AttachmentComponent } from './attachment/attachment.component';
 import { BrowseComponent } from './browse/browse.component';
@@ -10,6 +13,7 @@ import { HtmlComponent } from './html/html.component';
 import { IdentifierComponent } from './identifier/identifier.component';
 import { LinkComponent } from './link/link.component';
 import { LinkAuthorityComponent } from './link-authority/link-authority.component';
+import { LonghtmlComponent } from './longhtml/longhtml.component';
 import { LongtextComponent } from './longtext/longtext.component';
 import { MarkdownComponent } from './markdown/markdown.component';
 import { MetadataBoxFieldRenderOptions } from './metadata-box-field-render-options';
@@ -70,6 +74,10 @@ export const layoutBoxesMap = new Map<FieldRenderingType, MetadataBoxFieldRender
     componentRef: HtmlComponent,
     structured: false,
   } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.LONGHTML, {
+    componentRef: LonghtmlComponent,
+    structured: false,
+  } as MetadataBoxFieldRenderOptions],
   [FieldRenderingType.GMAP, {
     componentRef: GmapComponent,
     structured: false,
@@ -92,11 +100,11 @@ export const layoutBoxesMap = new Map<FieldRenderingType, MetadataBoxFieldRender
   } as MetadataBoxFieldRenderOptions],
   [FieldRenderingType.TAGBROWSE, {
     componentRef: TagBrowseComponent,
-    structured: false,
+    structured: true,
   } as MetadataBoxFieldRenderOptions],
   [FieldRenderingType.MARKDOWN, {
     componentRef: MarkdownComponent,
-    structured: false,
+    structured: true,
   } as MetadataBoxFieldRenderOptions],
   [FieldRenderingType.SEARCH, {
     /* eslint-disable-next-line dspace-angular-ts/themed-component-usages */
@@ -106,5 +114,13 @@ export const layoutBoxesMap = new Map<FieldRenderingType, MetadataBoxFieldRender
   [FieldRenderingType.TAGSEARCH, {
     componentRef: TagSearchComponent,
     structured: false,
+  } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.LONGMARKDOWN, {
+    componentRef: LongmarkdownComponent,
+    structured: false,
+  } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.IMAGE, {
+    componentRef: ImageComponent,
+    structured: true,
   } as MetadataBoxFieldRenderOptions],
 ]);

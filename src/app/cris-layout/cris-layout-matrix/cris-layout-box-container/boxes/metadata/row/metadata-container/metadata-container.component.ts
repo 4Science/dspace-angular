@@ -209,6 +209,7 @@ export class MetadataContainerComponent implements OnInit {
     const rendering = computeRenderingFn(this.field?.rendering);
     if (this.field.fieldType === LayoutFieldType.BITSTREAM.toString()
       && (rendering.toLocaleLowerCase() === FieldRenderingType.ATTACHMENT.toLocaleLowerCase()
+        || rendering.toLocaleLowerCase() === FieldRenderingType.IMAGE.toLocaleLowerCase()
         || rendering.toLocaleLowerCase() === FieldRenderingType.ADVANCEDATTACHMENT.toLocaleLowerCase())) {
       this.hasBitstream().pipe(take(1)).subscribe((hasBitstream: boolean) => {
         if (hasBitstream) {

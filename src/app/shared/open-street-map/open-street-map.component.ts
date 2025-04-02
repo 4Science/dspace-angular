@@ -148,110 +148,77 @@ export class OpenStreetMapComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.mapStyle = {
       width: this.width || '100%',
       height: this.height || `${(+this.width || this.elementRef.nativeElement.parentElement.offsetWidth) / 2}px`,
     };
 
     this.coordinates$ = this.place.asObservable().pipe(
-      filter((place) => isNotEmpty(place)),
-      map((place) => place.coordinates),
+      filter(isNotEmpty),
+      map(place => place.coordinates),
       tap(coordinates => this.setCenterAndPointer(coordinates)),
     );
 
     this.displayName$ = this.place.asObservable().pipe(
-      filter((place) => isNotEmpty(place)),
-      map((place) => place.displayName),
+      filter(isNotEmpty),
+      map(place => place.displayName),
     );
 
-    const position = this.coordinates; // this may contain a pair or coordinates, a POI, or an address
+    const position = this.coordinates;
 
     if (this.locationService.isDecimalCoordinateString(position)) {
-
-      // Validate the coordinates, then retrieve the location name
-
-      if (this.locationService.isValidCoordinateString(position)) {
-        const coordinates = this.locationService.parseCoordinates(position);
-        this.locationService.searchByCoordinates(coordinates).subscribe({
-          next: (displayName: any) => {
-            const place: LocationPlace = {
-              coordinates: coordinates,
-              displayName: displayName, // Show the name retrieved from Nominatim
-            };
-            this.place.next(place);
-          },
-          error: (err: unknown) => {
-            // show the map centered on provided coordinates despite the possibility to retrieve a description for the place
-            const place: LocationPlace = {
-              coordinates: coordinates,
-            };
-            this.place.next(place);
-            if (err instanceof Error) {
-              if (err.message === LocationErrorCodes.API_ERROR.valueOf()) {
-                console.error(err.message);
-              } else {
-                console.warn(err.message);
-              }
-            }
-          },
-        });
-      } else {
-        console.error(`Invalid coordinates: "${position}"`);
-        this.invalidLocationErrorCode.next(LocationErrorCodes.INVALID_COORDINATES);
-      }
-
+      this.handleDecimalCoordinates(position);
     } else if (this.locationService.isSexagesimalCoordinateString(position)) {
-
-      // Retrieve the decimal coordinates and the place name for the provided coordinates
-
-      this.locationService.findPlaceAndDecimalCoordinates(position).subscribe({
-        next: (place: any) => {
-          this.place.next(place);
-        },
-        error: (err: unknown) => {
-          if (err instanceof Error) {
-            this.invalidLocationErrorCode.next(err.message); // either INVALID_COORDINATES or API_ERROR
-            if (err.message === LocationErrorCodes.API_ERROR.valueOf()) {
-              console.error(err.message);
-            } else {
-              console.warn(err.message);
-            }
-          }
-        },
-      });
-
+      this.handleSexagesimalCoordinates(position);
     } else {
-
-      // Retrieve the coordinates for the provided POI or address
-
-      this.locationService.findPlaceCoordinates(position).subscribe({
-        next: (place: any) => {
-          place.displayName = position; // Show the name stored in metadata (comment out to show name retrieved from Nominatim)
-          this.place.next(place);
-        },
-        error: (err: unknown) => {
-          if (err instanceof Error) {
-            this.invalidLocationErrorCode.next(err.message); // either LOCATION_NOT_FOUND or API_ERROR
-            if (err.message === LocationErrorCodes.API_ERROR.valueOf()) {
-              console.error(err.message);
-            } else {
-              console.warn(err.message);
-            }
-          }
-        },
-      });
+      this.handlePlaceOrAddress(position);
     }
+  }
 
+  private handleDecimalCoordinates(position: string) {
+    if (this.locationService.isValidCoordinateString(position)) {
+      const coordinates = this.locationService.parseCoordinates(position);
+      this.locationService.searchByCoordinates(coordinates).subscribe({
+        next: displayName => this.place.next({ coordinates, displayName }),
+        error: (err: unknown) => this.handleError(err, coordinates), // Specify type for err
+      });
+    } else {
+      this.invalidLocationErrorCode.next(LocationErrorCodes.INVALID_COORDINATES);
+    }
+  }
+
+  private handleSexagesimalCoordinates(position: string) {
+    this.locationService.findPlaceAndDecimalCoordinates(position).subscribe({
+      next: place => this.place.next(place),
+      error: (err: unknown) => this.handleError(err, this.locationService.parseCoordinates(position)), // Specify type for err
+    });
+  }
+
+  private handlePlaceOrAddress(position: string) {
+    this.locationService.findPlaceCoordinates(position).subscribe({
+      next: place => {
+        place.displayName = position;
+        this.place.next(place);
+      },
+      error: (err: unknown) => this.handleError(err, this.locationService.parseCoordinates(position)), // Specify type for err
+    });
+  }
+
+  private handleError(error: unknown, coordinates: LocationDDCoordinates) {
+    if (error instanceof Error) {
+      this.invalidLocationErrorCode.next(error.message);
+      this.place.next({ coordinates });
+      console.error(error.message);
+    }
   }
 
   private setCenterAndPointer(coordinates: LocationDDCoordinates) {
     this.leafletCenter = latLng(+coordinates.latitude, +coordinates.longitude);
     this.leafletLayers = [
       tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: 'Leaflet' }),
-      marker(
-        [+coordinates.latitude, +coordinates.longitude],
-        { icon: icon({ iconUrl: 'assets/images/marker-icon.png', shadowUrl: 'assets/images/marker-shadow.png' }) }),
+      marker([+coordinates.latitude, +coordinates.longitude], {
+        icon: icon({ iconUrl: 'assets/images/marker-icon.png', shadowUrl: 'assets/images/marker-shadow.png' }),
+      }),
     ];
   }
 }
