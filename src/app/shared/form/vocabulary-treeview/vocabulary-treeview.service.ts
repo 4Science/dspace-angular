@@ -159,7 +159,7 @@ export class VocabularyTreeviewService {
     }
     const parent: TreeviewNode = this.nodeMap.get(item.otherInformation.id)!;
     const children = this.nodeMap.get(item.otherInformation.id)!.children || [];
-    this.getChildrenNodesByParent(item.otherInformation.id, parent.pageInfo, loadAll).subscribe((list: PaginatedList<VocabularyEntryDetail>) => {
+    this.getChildrenNodesByParent(item.otherInformation.id, parent.pageInfo, (loadAll && selectedItems.length > 0)).subscribe((list: PaginatedList<VocabularyEntryDetail>) => {
       if (onlyFirstTime && parent.children!.length > 0 && !loadAll) {
         return;
       }
@@ -181,7 +181,7 @@ export class VocabularyTreeviewService {
         parent.updatePageInfo(newPageInfo);
         parent.childrenChange.next(children);
 
-        if (!loadAll) {
+        if (!(loadAll && selectedItems.length > 0)) {
           // if not all loaded add a load more button
           children.push(new TreeviewNode(LOAD_MORE_NODE, false, newPageInfo, item));
         }
