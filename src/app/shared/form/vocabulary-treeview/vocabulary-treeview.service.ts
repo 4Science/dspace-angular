@@ -121,8 +121,9 @@ export class VocabularyTreeviewService {
    * @param selectedItems The currently selected items
    * @param initValueId     The entry id of the node to mark as selected, if any
    * @param publicModeOnly  Whether the tree is used in a public view
+   * @param isRelationComponent Whether the tree is used as relation component
    */
-  initialize(options: VocabularyOptions, pageInfo: PageInfo, selectedItems: string[], initValueId?: string, publicModeOnly = false): void {
+  initialize(options: VocabularyOptions, pageInfo: PageInfo, selectedItems: string[], initValueId?: string, publicModeOnly = false, isRelationComponent = false): void {
     this.loading.next(true);
     this.vocabularyOptions = options;
     this.vocabularyName = options.name;
@@ -132,8 +133,9 @@ export class VocabularyTreeviewService {
         .subscribe((hierarchy: string[]) => {
           if (hasValue(hierarchy) && hierarchy.length > 0) {
             this.initValueHierarchy = hierarchy;
-            //this.retrieveTopNodes(pageInfo, [], selectedItems, publicModeOnly ? hierarchy : null);
-            this.retrieveNodesTreeByTopParentEntry(hierarchy[0], pageInfo, selectedItems);
+            isRelationComponent ?
+              this.retrieveNodesTreeByTopParentEntry(hierarchy[0], pageInfo, selectedItems) :
+              this.retrieveTopNodes(pageInfo, [], selectedItems, publicModeOnly ? hierarchy : null);
           } else {
             this.loading.next(false);
           }
@@ -393,22 +395,29 @@ export class VocabularyTreeviewService {
     ]).pipe(
       mergeMap(([rootNode, list]) => {
         tempList = list;
+        let newPageInfo: PageInfo;
 
         const childNodes: TreeviewNode[] = list.page.map((entryDetail: VocabularyEntryDetail) => this._generateNode(entryDetail, selectedItems));
-        return this.getNodeHierarchy(rootNode, selectedItems, childNodes);
+
+        if ((tempList.pageInfo.currentPage + 1) <= tempList.pageInfo.totalPages) {
+          // Need a new load more node
+          newPageInfo = Object.assign(new PageInfo(), tempList.pageInfo, {
+            currentPage: tempList.pageInfo.currentPage + 1,
+          });
+          const loadMoreNode = new TreeviewNode(LOAD_MORE_NODE, false, newPageInfo);
+          loadMoreNode.updatePageInfo(newPageInfo);
+          childNodes.push(loadMoreNode);
+        }
+        return this.getNodeHierarchy(rootNode, selectedItems, childNodes).pipe(
+          map(node => {
+            node.updatePageInfo(newPageInfo);
+            return node;
+          }),
+        );
       }),
     ).subscribe(hierarchy => {
       nodes.push(hierarchy);
 
-      if ((tempList.pageInfo.currentPage + 1) <= tempList.pageInfo.totalPages) {
-        // Need a new load more node
-        const newPageInfo: PageInfo = Object.assign(new PageInfo(), tempList.pageInfo, {
-          currentPage: tempList.pageInfo.currentPage + 1,
-        });
-        const loadMoreNode = new TreeviewNode(LOAD_MORE_ROOT_NODE, false, newPageInfo);
-        loadMoreNode.updatePageInfo(newPageInfo);
-        nodes.push(loadMoreNode);
-      }
       this.loading.next(false);
       // Notify the change.
       this.dataChange.next(nodes);
@@ -435,7 +444,7 @@ export class VocabularyTreeviewService {
     if (isNotEmpty(children)) {
       const newChildren = children
         .filter((entry: TreeviewNode) => {
-          return findIndex(node.children, (nodeEntry) => nodeEntry.item.otherInformation.id === entry.item.otherInformation.id) === -1;
+          return findIndex(node.children, (nodeEntry) => nodeEntry.item.otherInformation?.id === entry.item.otherInformation?.id) === -1;
         });
       newChildren.forEach((entry: TreeviewNode) => {
         entry.loadMoreParentItem = node.item;

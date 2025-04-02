@@ -224,15 +224,12 @@ describe('VocabularyTreeviewService test suite', () => {
     });
 
     it('should set initValueHierarchy', () => {
-      serviceAsAny.vocabularyService.getEntryDetailChildren.and.returnValue(hot('--a', {
-        a: createSuccessfulRemoteDataObject(buildPaginatedList(pageInfo, [child, child2])),
+      serviceAsAny.vocabularyService.searchTopEntries.and.returnValue(hot('--a', {
+        a: createSuccessfulRemoteDataObject(buildPaginatedList(pageInfo, [item, item2, item3])),
       }));
-      serviceAsAny.vocabularyService.findEntryDetailById.and.returnValues(
+      serviceAsAny.vocabularyService.findEntryDetailById.and.returnValue(
         hot('-a', {
-          a: createSuccessfulRemoteDataObject(child),
-        }),
-        hot('-b', {
-          b: createSuccessfulRemoteDataObject(item),
+          a: createSuccessfulRemoteDataObject(child2),
         }),
       );
       serviceAsAny.vocabularyService.getEntryDetailParent.and.returnValue(
@@ -240,12 +237,34 @@ describe('VocabularyTreeviewService test suite', () => {
           b: createSuccessfulRemoteDataObject(item),
         }),
       );
-
-      scheduler.schedule(() => service.initialize(vocabularyOptions, pageInfo, [], 'root1'));
+      scheduler.schedule(() => service.initialize(vocabularyOptions, pageInfo, [], 'root2'));
       scheduler.flush();
 
       expect(serviceAsAny.vocabularyName).toEqual(vocabularyOptions.name);
-      expect(serviceAsAny.initValueHierarchy).toEqual(['root1', 'root1-child1']);
+      expect(serviceAsAny.initValueHierarchy).toEqual(['root1', 'root1-child2']);
+      expect(serviceAsAny.dataChange.value).toEqual([itemInitNode, itemNode2, itemNode3]);
+    });
+
+    it('should show only nodes restricted to init Value Hierarchy', () => {
+      serviceAsAny.vocabularyService.searchTopEntries.and.returnValue(hot('--a', {
+        a: createSuccessfulRemoteDataObject(buildPaginatedList(pageInfo, [item, item2, item3])),
+      }));
+      serviceAsAny.vocabularyService.findEntryDetailById.and.returnValue(
+        hot('-a', {
+          a: createSuccessfulRemoteDataObject(child2),
+        }),
+      );
+      serviceAsAny.vocabularyService.getEntryDetailParent.and.returnValue(
+        hot('-b', {
+          b: createSuccessfulRemoteDataObject(item),
+        }),
+      );
+      scheduler.schedule(() => service.initialize(vocabularyOptions, pageInfo, ['root2'], 'root2', true));
+      scheduler.flush();
+
+      expect(serviceAsAny.vocabularyName).toEqual(vocabularyOptions.name);
+      expect(serviceAsAny.initValueHierarchy).toEqual(['root1', 'root1-child2']);
+      expect(serviceAsAny.dataChange.value).toEqual([itemInitNode]);
     });
     // Disabled as we don't limt the tree anymore to the first value of the hierarchy but we start building the tree directly from that one (root node) for any case
     xit('should show only nodes restricted to init Value Hierarchy', () => {
@@ -254,10 +273,7 @@ describe('VocabularyTreeviewService test suite', () => {
       }));
       serviceAsAny.vocabularyService.findEntryDetailById.and.returnValues(
         hot('-a', {
-          a: createSuccessfulRemoteDataObject(child),
-        }),
-        hot('-b', {
-          b: createSuccessfulRemoteDataObject(item),
+          a: createSuccessfulRemoteDataObject(child2),
         }),
       );
       serviceAsAny.vocabularyService.getEntryDetailParent.and.returnValue(
@@ -265,12 +281,39 @@ describe('VocabularyTreeviewService test suite', () => {
           b: createSuccessfulRemoteDataObject(item),
         }),
       );
-      scheduler.schedule(() => service.initialize(vocabularyOptions, pageInfo, ['root1-child1'], 'root1-child1', true));
+      scheduler.schedule(() => service.initialize(vocabularyOptions, pageInfo, ['root2'], 'root2', true));
       scheduler.flush();
 
       expect(serviceAsAny.vocabularyName).toEqual(vocabularyOptions.name);
-      expect(serviceAsAny.initValueHierarchy).toEqual(['root1', 'root1-child1']);
+      expect(serviceAsAny.initValueHierarchy).toEqual(['root1', 'root1-child2']);
       expect(serviceAsAny.dataChange.value).toEqual([itemInitNode]);
+    });
+
+    it('should call retrieveNodesTreeByTopParentEntry properly when is a relation component', () => {
+      serviceAsAny.vocabularyService.findEntryDetailById.and.returnValues(
+        hot('-a', {
+          a: createSuccessfulRemoteDataObject(child),
+        }),
+        hot('-b', {
+          b: createSuccessfulRemoteDataObject(item),
+        }),
+      );
+
+      serviceAsAny.vocabularyService.getEntryDetailChildren.and.returnValue(hot('-a', {
+        a: createSuccessfulRemoteDataObject([child]),
+      }));
+
+      serviceAsAny.vocabularyService.getEntryDetailParent.and.returnValue(
+        hot('-a', {
+          a: createSuccessfulRemoteDataObject(item),
+        }),
+      );
+      spyOn(serviceAsAny, 'retrieveNodesTreeByTopParentEntry');
+
+      scheduler.schedule(() => service.initialize(vocabularyOptions, pageInfo, [child.id], child.id, false, true));
+      scheduler.flush();
+
+      expect(serviceAsAny.retrieveNodesTreeByTopParentEntry).toHaveBeenCalledWith(child.otherInformation.parent, pageInfo, [child.id]);
     });
   });
 
