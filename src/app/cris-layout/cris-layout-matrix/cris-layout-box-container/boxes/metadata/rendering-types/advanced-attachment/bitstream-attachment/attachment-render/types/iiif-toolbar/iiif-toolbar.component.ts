@@ -22,6 +22,11 @@ import { Bitstream } from '../../../../../../../../../../../core/shared/bitstrea
 })
 @AttachmentTypeRendering(AttachmentRenderingType.IIIF, true)
 export class IIIFToolbarComponent implements OnInit {
+  private readonly MD_CANVASID = 'bitstream.iiif.canvasid';
+  private readonly MD_BITSTREAMS_MAP = [{
+    param: 'canvasId',
+    metadata: this.MD_CANVASID
+  }];
 
   @Input()
   item: Item;
@@ -40,6 +45,9 @@ export class IIIFToolbarComponent implements OnInit {
 
   isAuthorized$ = of(false);
 
+  queryParams: {[key: string]: string};
+
+
   getObjectUrl() {
     return isNotEmpty(this.bitstream) ? this.bitstream.self : undefined;
   }
@@ -57,13 +65,14 @@ export class IIIFToolbarComponent implements OnInit {
     this.manifestUrl = environment.rest.baseUrl + '/iiif/' + this.item.id + '/manifest';
     this.isAuthorized$ = this.authorizationService.isAuthorized(FeatureID.CanDownload, this.getObjectUrl());
     this.iiifEnabled = this.isIIIFEnabled();
+    this.queryParams = this.getQueryParams();
   }
 
   async openMiradorViewer() {
     if (environment.advancedAttachmentRendering.showViewerOnSameItemPage) {
-      await this.router.navigate([ getItemViewerDetailsPath(this.item, 'iiif', this.tabName) ], { fragment: 'viewer' });
+      await this.router.navigate([ getItemViewerDetailsPath(this.item, 'iiif', this.tabName) ], { fragment: 'viewer', queryParams: this.queryParams });
     } else {
-      await this.router.navigate([ getItemViewerPath(this.item, 'iiif') ]);
+      await this.router.navigate([ getItemViewerPath(this.item, 'iiif') ], {queryParams: this.queryParams});
     }
   }
 
@@ -85,6 +94,13 @@ export class IIIFToolbarComponent implements OnInit {
   private isIIIFEnabled(): boolean {
     const regexIIIFItem = /true|yes/i;
     return regexIIIFItem.test(this.item.firstMetadataValue('dspace.iiif.enabled'));
+  }
+
+  private getQueryParams() {
+    return this.MD_BITSTREAMS_MAP
+      .filter(({metadata}) => this.bitstream?.metadata[`${metadata}`]?.length > 0)
+      .map(({param,  metadata}) => ({ [`${param}`]: this.bitstream?.metadata[`${metadata}`][0]?.value }))
+      .reduce((acc, curr) => ({ ...acc, ...curr }), {});
   }
 
 }
