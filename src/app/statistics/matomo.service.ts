@@ -106,6 +106,9 @@ export class MatomoService {
    * @returns An Observable that emits the URL with the visitor ID appended.
    */
   appendVisitorId(url: string): Observable<string> {
+    if (!this.matomoTracker) {
+      return of(url);
+    }
     return fromPromise(this.matomoTracker?.getVisitorId())
       .pipe(
         map(visitorId => this.appendTrackerId(url, visitorId)),

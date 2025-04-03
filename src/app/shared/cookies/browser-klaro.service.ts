@@ -26,6 +26,7 @@ import { EPerson } from '../../core/eperson/models/eperson.model';
 import { CAPTCHA_NAME } from '../../core/google-recaptcha/google-recaptcha.service';
 import { CookieService } from '../../core/services/cookie.service';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { MATOMO_ENABLED } from '../../statistics/matomo.service';
 import {
   hasValue,
   isEmpty,
@@ -86,7 +87,7 @@ export class BrowserKlaroService extends KlaroService {
 
   private readonly GOOGLE_ANALYTICS_SERVICE_NAME = 'google-analytics';
 
-  private readonly MATOMO_ENABLED = 'matomo.enabled';
+  private readonly MATOMO_ENABLED = MATOMO_ENABLED;
 
   /**
    * Initial Klaro configuration
