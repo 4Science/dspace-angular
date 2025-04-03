@@ -621,6 +621,9 @@ export const environment: BuildConfig = {
   mirador: {
     enableDownloadPlugin: true,
     enableAnnotationServer: false,
+    downloadMetadataConfig: 'viewer.mirador.download',
+    downloadRestConfig: 'viewer.mirador.download.default',
+    downloadSelectOptions: [ 'all', 'no', 'alternative', 'single-image'],
   },
 
   loader: {

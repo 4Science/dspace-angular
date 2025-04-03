@@ -20,9 +20,9 @@ import {
 import { RequestService } from './request.service';
 import { ParsedResponse } from '../cache/response.models';
 import { RequestError } from './request-error.model';
-import { RestRequestMethod } from './rest-request-method';
 import { RestRequestWithResponseParser } from './rest-request-with-response-parser.model';
 import { RequestEntry } from './request-entry.model';
+import { RestRequestMethod } from './rest-request-method';
 
 @Injectable()
 export class RequestEffects {
