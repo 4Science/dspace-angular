@@ -454,7 +454,8 @@ export class VocabularyTreeviewService {
       }),
     ).subscribe(hierarchy => {
       // Loading stops if we reach the end of the list or if we are done with the first loading and don't need to load all.
-      if ((tempList.pageInfo.currentPage === tempList.pageInfo.totalPages && loadAll) || !loadAll) {
+      // Major or equal because rest seems bugged and return total pages 0 if there is only 1 element
+      if ((tempList.pageInfo.currentPage >= tempList.pageInfo.totalPages && loadAll) || !loadAll) {
         this.loading.next(false);
       }
       // Notify the change.
