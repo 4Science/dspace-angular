@@ -238,7 +238,7 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges
     this.loading = this.vocabularyTreeviewService.isLoading();
 
     const entryId: string = (this.selectedItems?.length > 0) ? this.getEntryId(this.selectedItems[0]) : null;
-    this.vocabularyTreeviewService.initialize(this.vocabularyOptions, this.initialPageInfo, this.getSelectedEntryIds(), entryId, this.publicModeOnly, this.isRelationComponent, this.loadAllNodes);
+    this.vocabularyTreeviewService.initialize(this.vocabularyOptions, new PageInfo(), this.getSelectedEntryIds(), entryId, this.publicModeOnly, this.isRelationComponent, this.loadAllNodes);
   }
 
   /**
@@ -368,7 +368,7 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges
       this.selectedItems = [];
       this.searchText = '';
       this.vocabularyTreeviewService.cleanTree();
-      this.vocabularyTreeviewService.initialize(this.vocabularyOptions, this.initialPageInfo, this.getSelectedEntryIds(), null, null, this.isRelationComponent);
+      this.vocabularyTreeviewService.initialize(this.vocabularyOptions, new PageInfo(), this.getSelectedEntryIds(), null, null, this.isRelationComponent);
     }
   }
 }

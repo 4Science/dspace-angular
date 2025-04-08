@@ -146,7 +146,7 @@ describe('VocabularyTreeviewComponent test suite', () => {
       comp.selectedItems = [currentValue];
       fixture.detectChanges();
       expect(comp.dataSource.data).toEqual([]);
-      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, testPageInfo, ['entryID'], 'entryID', false, false, false);
+      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, new PageInfo(), ['entryID'], 'entryID', false, false, false);
     });
 
     it('should should init component properly with init value as VocabularyEntry', () => {
@@ -158,7 +158,7 @@ describe('VocabularyTreeviewComponent test suite', () => {
       comp.selectedItems = [currentValue];
       fixture.detectChanges();
       expect(comp.dataSource.data).toEqual([]);
-      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, testPageInfo, ['entryID'], 'entryID', false, false, false);
+      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, new PageInfo(), ['entryID'], 'entryID', false, false, false);
     });
 
     it('should should init component properly with init value as VocabularyEntryDetail', () => {
@@ -168,7 +168,7 @@ describe('VocabularyTreeviewComponent test suite', () => {
       comp.selectedItems = [currentValue];
       fixture.detectChanges();
       expect(comp.dataSource.data).toEqual([]);
-      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, testPageInfo, ['entryID'], 'entryID', false, false, false);
+      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, new PageInfo(), ['entryID'], 'entryID', false, false, false);
     });
 
     it('should should init component properly with init value as VocabularyEntry and publicModeOnly enabled', () => {
@@ -181,7 +181,7 @@ describe('VocabularyTreeviewComponent test suite', () => {
       comp.selectedItems = [currentValue];
       fixture.detectChanges();
       expect(comp.dataSource.data).toEqual([]);
-      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, testPageInfo, ['entryID'], 'entryID', true, false, false);
+      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, new PageInfo(), ['entryID'], 'entryID', true, false, false);
     });
 
     it('should call loadMore function', () => {
