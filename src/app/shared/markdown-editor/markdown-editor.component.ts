@@ -1,6 +1,7 @@
 import 'quill-emoji/dist/quill-emoji.js';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SecurityContext } from '@angular/core';
 import { ContentChange, QuillModules } from 'ngx-quill';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'ds-markdown-editor',
@@ -40,11 +41,15 @@ export class MarkdownEditorComponent  {
     syntax: false
   };
 
+  constructor(private sanitizer: DomSanitizer) {}
+
+
   /**
    * Emit content update after editing
    * @param content
    */
   updateContent(content: ContentChange) {
-    this.editValueChange.emit(content.html);
-  }
+    const sanitizedContent = this.sanitizer.sanitize(SecurityContext.HTML, content.html);
+    this.editValueChange.emit(sanitizedContent);
+}
 }
