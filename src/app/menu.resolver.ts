@@ -1049,7 +1049,7 @@ export class MenuResolver implements Resolve<boolean> {
    * Get the DL Exporter URL from the configuration
    */
   getDLExporterURL(): Observable<string> {
-   return this.configService.findByPropertyName('loginmiur.dlexporter.url').pipe(
+    return this.configService.findByPropertyName('loginmiur.dlexporter.url').pipe(
       getFirstCompletedRemoteData(),
       map((res: RemoteData<ConfigurationProperty>) => {
         return res?.payload?.values[0];

@@ -24,6 +24,7 @@ import { isAuthenticationBlocking } from './core/auth/selectors';
 import { distinctUntilChanged, find } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MenuService } from './shared/menu/menu.service';
+import { AuthorizationService } from './core/data/feature-authorization/authorization.service';
 
 /**
  * Performs the initialization of the app.
@@ -53,7 +54,7 @@ export abstract class InitService {
     protected breadcrumbsService: BreadcrumbsService,
     protected themeService: ThemeService,
     protected menuService: MenuService,
-
+    protected authorizationService: AuthorizationService
   ) {
   }
 

@@ -36,6 +36,7 @@ import { firstValueFrom, lastValueFrom, Subscription } from 'rxjs';
 import { ServerCheckGuard } from '../../app/core/server-check/server-check.guard';
 import { HALEndpointService } from '../../app/core/shared/hal-endpoint.service';
 import { BuildConfig } from '../../config/build-config.interface';
+import { AuthorizationService } from '../../app/core/data/feature-authorization/authorization.service';
 
 /**
  * Performs client-side initialization.
@@ -64,6 +65,7 @@ export class BrowserInitService extends InitService {
     protected serverCheckGuard: ServerCheckGuard,
     private requestService: RequestService,
     private halService: HALEndpointService,
+    protected authorizationService: AuthorizationService
   ) {
     super(
       store,
@@ -76,6 +78,7 @@ export class BrowserInitService extends InitService {
       breadcrumbsService,
       themeService,
       menuService,
+      authorizationService
     );
   }
 
@@ -107,6 +110,8 @@ export class BrowserInitService extends InitService {
       this.trackAuthTokenExpiration();
 
       this.initKlaro();
+
+      this.authorizationService.initStateForSite(this.appConfig.siteAuthorizationFeaturesConfig);
 
       await lastValueFrom(this.authenticationReady$());
 

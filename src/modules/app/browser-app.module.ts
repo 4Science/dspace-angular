@@ -39,6 +39,7 @@ import { MathService } from '../../app/core/shared/math.service';
 import { ClientMathService } from '../../app/core/shared/client-math.service';
 import { DatadogRumService } from '../../app/shared/datadog-rum/datadog-rum.service';
 import { BrowserDatadogRumService } from '../../app/shared/datadog-rum/browser-datadog-rum.service';
+import { AuthorizationService } from '../../app/core/data/feature-authorization/authorization.service';
 
 export const REQ_KEY = makeStateKey<string>('req');
 
@@ -140,6 +141,10 @@ export function getRequest(transferState: TransferState): any {
     {
       provide: MathService,
       useClass: ClientMathService
+    },
+    {
+      provide: AuthorizationService,
+      useClass: AuthorizationService
     }
   ]
 })

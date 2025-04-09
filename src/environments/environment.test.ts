@@ -4,6 +4,9 @@ import { RestRequestMethod } from '../app/core/data/rest-request-method';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
 import { AdvancedAttachmentElementType } from '../config/advanced-attachment-rendering.config';
 import { IdentifierSubtypesIconPositionEnum } from 'src/config/identifier-subtypes-config.interface';
+import { FeatureID } from '../app/core/data/feature-authorization/feature-id';
+
+
 
 export const environment: BuildConfig = {
   production: false,
@@ -97,6 +100,32 @@ export const environment: BuildConfig = {
       // This is independent from the idle warning.
       timeLeftBeforeTokenRefresh: 20000, // 20 sec
     },
+  },
+
+  siteAuthorizationFeaturesConfig : [
+    FeatureID.AdministratorOf,
+    FeatureID.IsCommunityAdmin,
+    FeatureID.IsCollectionAdmin,
+    FeatureID.EPersonRegistration,
+    FeatureID.CanManageGroups,
+    FeatureID.CanChangePassword,
+    FeatureID.CanViewUsageStatistics,
+    FeatureID.CanViewLoginStatistics,
+    FeatureID.CanViewWorkflowStatistics,
+    FeatureID.CanSendFeedback,
+    FeatureID.CanEditItem,
+    FeatureID.EPersonForgotPassword,
+  ],
+
+  discoveryAuthorizationFeaturesConfig: {
+    'workspace': {
+      'Workspace': [
+        FeatureID.CanEditItem
+      ]
+    },
+    default: {
+
+    }
   },
 
   // Form settings
