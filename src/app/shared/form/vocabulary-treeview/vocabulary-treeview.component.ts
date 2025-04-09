@@ -121,6 +121,11 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges
   @Input() isRelationComponent = false;
 
   /**
+   * Whether to load all available nodes
+   */
+  @Input() loadAllNodes = false;
+
+  /**
    * A map containing the current node showed by the tree
    */
   nodeMap = new Map<string, TreeviewFlatNode>();
@@ -280,7 +285,7 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges
     this.loading = this.vocabularyTreeviewService.isLoading();
 
     const entryId: string = (this.selectedItems?.length > 0) ? this.getEntryId(this.selectedItems[0]) : null;
-    this.vocabularyTreeviewService.initialize(this.vocabularyOptions, new PageInfo(), this.getSelectedEntryIds(), entryId, this.publicModeOnly, this.isRelationComponent);
+    this.vocabularyTreeviewService.initialize(this.vocabularyOptions, new PageInfo(), this.getSelectedEntryIds(), entryId, this.publicModeOnly, this.isRelationComponent, this.loadAllNodes);
   }
 
   /**
@@ -304,7 +309,7 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges
    * @param node The TreeviewFlatNode for which to load children nodes
    */
   loadChildren(node: TreeviewFlatNode) {
-    this.vocabularyTreeviewService.loadMore(node.item, this.getSelectedEntryIds(), true);
+    this.vocabularyTreeviewService.loadMore(node.item, this.getSelectedEntryIds(), true, this.loadAllNodes);
   }
 
   /**
@@ -410,7 +415,7 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges
       this.selectedItems = [];
       this.searchText = '';
       this.vocabularyTreeviewService.cleanTree();
-      this.vocabularyTreeviewService.initialize(this.vocabularyOptions, new PageInfo(), this.getSelectedEntryIds(), null);
+      this.vocabularyTreeviewService.initialize(this.vocabularyOptions, new PageInfo(), this.getSelectedEntryIds(), null, null, this.isRelationComponent);
     }
   }
 

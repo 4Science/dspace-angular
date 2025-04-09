@@ -313,7 +313,7 @@ describe('VocabularyTreeviewService test suite', () => {
       scheduler.schedule(() => service.initialize(vocabularyOptions, pageInfo, [child.id], child.id, false, true));
       scheduler.flush();
 
-      expect(serviceAsAny.retrieveNodesTreeByTopParentEntry).toHaveBeenCalledWith(child.otherInformation.parent, pageInfo, [child.id]);
+      expect(serviceAsAny.retrieveNodesTreeByTopParentEntry).toHaveBeenCalledWith(child.otherInformation.parent, pageInfo, [child.id], false);
     });
   });
 
