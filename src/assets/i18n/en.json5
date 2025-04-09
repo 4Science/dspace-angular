@@ -8947,6 +8947,17 @@
   "layout.box.header.ArchivalMaterial.relationproject": "Projects",
   "layout.box.header.ArchivalMaterial.relationplace": "Places",
 
+  "layout.box.header.WebAnnotation.relationsubject": "Subject",
+  "layout.box.header.WebAnnotation.relationperson": "Person",
+  "layout.box.header.WebAnnotation.relationplace": "Place",
+  "layout.box.header.WebAnnotation.relationevent": "Event",
+  "layout.box.header.WebAnnotation.relationpath": "Path",
+  "layout.box.header.WebAnnotation.relationaggregation": "Aggregation",
+  "layout.box.header.WebAnnotation.relationfamily": "Family",
+  "layout.box.header.WebAnnotation.relationitem": "Item",
+  "layout.box.header.WebAnnotation.relationdocument": "Document",
+  "layout.box.header.WebAnnotation.relationannotation": "Annotation",
+
   "layout.box.header.Aggregation.aggregationdescription": "Description",
   "layout.box.header.Aggregation.aggregationindex": "Aggregation Index",
   "layout.box.header.Aggregation.items": "Aggregation’s Items",
@@ -9629,6 +9640,9 @@
   "layout.field.label.MusicalLibrettos.[dc.relation.person]": "Person",
   "layout.field.label.MusicalLibrettos.[dc.relation.project]": "Project",
   "layout.field.label.MusicalLibrettos.BITSTREAM": "File / Documentation",
+
+  "layout.field.label.WebAnnotation.[dc.description.abstract]": "Abstract",
+  "layout.field.label.WebAnnotation.[glam.annotation.type]": "Annotation Type",
 
   "label.link-text.description-box.section-site.pdl": "Scopri di più",
   "label.title.slider.slider_collections": "Collections",
