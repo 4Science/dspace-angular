@@ -5,8 +5,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NuMarkdownComponent } from '@ng-util/markdown';
+import { ContentChange, QuillModules } from 'ngx-quill';
 
 @Component({
   selector: 'ds-markdown-editor',
@@ -24,7 +23,7 @@ export class MarkdownEditorComponent implements OnInit {
   /**
    * Markdown Editor String value
    */
-  @Input() editValue: string;
+  @Input() editValue = '';
 
   /**
    * Indicates whether the markdown editor is required.
@@ -35,32 +34,31 @@ export class MarkdownEditorComponent implements OnInit {
    * Markdown Editor String value Emitter
    */
   @Output() editValueChange = new EventEmitter();
+
   /**
-   * Nu markdown library options (default is chinese)
+   * Quill modules config
    */
-  options = {
-    minHeight: 200,
-    lang: 'en_US',
-    mode: 'ir',
-    preview: {
-      markdown: {
-        codeBlockPreview: false,
-      },
-      actions: [
-        'desktop', 'tablet', 'mobile',
-      ],
-    },
+  modules: QuillModules = {
     toolbar: [
-      'emoji', 'headings', 'bold', 'italic', 'strike', 'link', '|',
-      'list', 'ordered-list', 'check', 'outdent', 'indent', 'table', '|',
-      'quote', 'line', 'code', 'inline-code', 'insert-before', 'insert-after', '|',
-      'undo', 'redo', '|',
-      'fullscreen', 'preview',
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ 'header': 1 }, { 'header': 2 }],
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'indent': '-1'}, { 'indent': '+1' }],
+      [{ 'direction': 'rtl' }],
+      [{ 'size': ['small', false, 'large', 'huge'] }],
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+      [{ 'font': [] }],
+      [{ 'align': [] }],
+      ['clean'],
     ],
+    syntax: false
   };
 
-  ngOnInit(): void {
-    this.controlId = `MarkdownEditor-${Math.floor(100000 * Math.random())}`;
+  /**
+   * Emit content update after editing
+   * @param content
+   */
+  updateContent(content: ContentChange) {
+    this.editValueChange.emit(content.html);
   }
-
 }
