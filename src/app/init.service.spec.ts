@@ -31,6 +31,7 @@ import objectContaining = jasmine.objectContaining;
 import createSpyObj = jasmine.createSpyObj;
 import SpyObj = jasmine.SpyObj;
 import { getTestScheduler } from 'jasmine-marbles';
+import { AuthorizationService } from './core/data/feature-authorization/authorization.service';
 
 let spy: SpyObj<any>;
 
@@ -124,6 +125,7 @@ describe('InitService', () => {
     let metadataServiceSpy;
     let breadcrumbsServiceSpy;
     let menuServiceSpy;
+    let authorizationServiceSpy;
 
     const BLOCKING = {
       t: {  core: { auth: { blocking: true } } },
@@ -153,6 +155,9 @@ describe('InitService', () => {
       menuServiceSpy = jasmine.createSpyObj('menuServiceSpy', [
         'listenForRouteChanges',
       ]);
+      authorizationServiceSpy = jasmine.createSpyObj('authorizationServiceSpy', [
+        'initStateForSite',
+      ]);
 
 
       TestBed.resetTestingModule();
@@ -180,6 +185,7 @@ describe('InitService', () => {
           { provide: ActivatedRoute, useValue: new MockActivatedRoute() },
           { provide: MenuService, useValue: menuServiceSpy },
           { provide: ThemeService, useValue: getMockThemeService() },
+          { provide: AuthorizationService, useValue: authorizationServiceSpy },
           provideMockStore({ initialState }),
           AppComponent,
           RouteService,

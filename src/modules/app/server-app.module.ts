@@ -43,6 +43,7 @@ import { MathService } from '../../app/core/shared/math.service';
 import { ServerMathService } from '../../app/core/shared/server-math.service';
 import { DatadogRumService } from '../../app/shared/datadog-rum/datadog-rum.service';
 import { ServerDatadogRumService } from '../../app/shared/datadog-rum/server-datadog-rum.service';
+import { AuthorizationService } from '../../app/core/data/feature-authorization/authorization.service';
 
 export function createTranslateLoader(transferState: TransferState) {
   return new TranslateServerLoader(transferState, 'dist/server/assets/i18n/', '.json');
@@ -134,6 +135,10 @@ export function createTranslateLoader(transferState: TransferState) {
       provide: DatadogRumService,
       useClass: ServerDatadogRumService
     },
+    {
+      provide: AuthorizationService,
+      useClass: AuthorizationService
+    }
   ]
 })
 export class ServerAppModule {

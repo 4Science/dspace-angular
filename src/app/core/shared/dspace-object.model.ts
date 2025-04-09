@@ -52,6 +52,13 @@ export class DSpaceObject extends ListableObject implements CacheableObject {
   type: ResourceType;
 
   /**
+   * A string representing the kind of DSpaceObject based on the Rest Item type
+   */
+  @excludeFromEquals
+  @autoserialize
+  uniqueType: string;
+
+  /**
    * A shorthand to get this DSpaceObject's self link
    */
   get self(): string {

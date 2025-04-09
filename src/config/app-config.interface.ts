@@ -39,6 +39,10 @@ import { MetaTagsConfig } from './meta-tags.config';
 import { MetadataLinkViewPopoverDataConfig } from './metadata-link-view-popoverdata-config.interface';
 import { IdentifierSubtypesConfig } from './identifier-subtypes-config.interface';
 import { DatadogRumConfig } from './datadog-rum-config.interfaces';
+import {
+  DiscoveryConfigurationFeaturesConfig
+} from '../app/core/data/feature-authorization/authorization.interfaces';
+import { FeatureID } from '../app/core/data/feature-authorization/feature-id';
 
 interface AppConfig extends Config {
   ui: UIServerConfig;
@@ -86,6 +90,8 @@ interface AppConfig extends Config {
   metadataLinkViewPopoverData: MetadataLinkViewPopoverDataConfig;
   identifierSubtypes: IdentifierSubtypesConfig[];
   datadogRum?: DatadogRumConfig;
+  siteAuthorizationFeaturesConfig: FeatureID[];
+  discoveryAuthorizationFeaturesConfig: DiscoveryConfigurationFeaturesConfig;
 }
 
 /**

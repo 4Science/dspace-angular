@@ -42,6 +42,10 @@ import { MetaTagsConfig } from './meta-tags.config';
 import { MetadataLinkViewPopoverDataConfig } from './metadata-link-view-popoverdata-config.interface';
 import { IdentifierSubtypesConfig, IdentifierSubtypesIconPositionEnum } from './identifier-subtypes-config.interface';
 import { DatadogRumConfig } from './datadog-rum-config.interfaces';
+import { FeatureID } from '../app/core/data/feature-authorization/feature-id';
+import {
+  DiscoveryConfigurationFeaturesConfig
+} from '../app/core/data/feature-authorization/authorization.interfaces';
 
 export class DefaultAppConfig implements AppConfig {
   production = false;
@@ -136,6 +140,31 @@ export class DefaultAppConfig implements AppConfig {
       // This is independent from the idle warning.
       timeLeftBeforeTokenRefresh: 2 * 60 * 1000 // 2 minutes
     }
+  };
+
+  siteAuthorizationFeaturesConfig: FeatureID[] = [
+    FeatureID.AdministratorOf,
+    FeatureID.IsCommunityAdmin,
+    FeatureID.IsCollectionAdmin,
+    FeatureID.EPersonRegistration,
+    FeatureID.CanManageGroups,
+    FeatureID.CanChangePassword,
+    FeatureID.CanViewUsageStatistics,
+    FeatureID.CanViewLoginStatistics,
+    FeatureID.CanViewWorkflowStatistics,
+    FeatureID.CanSendFeedback,
+    FeatureID.CanEditItem,
+    FeatureID.EPersonForgotPassword,
+    FeatureID.CanCorrectItem,
+    FeatureID.CanSubmit,
+  ];
+
+  discoveryAuthorizationFeaturesConfig: DiscoveryConfigurationFeaturesConfig = {
+    'workspace': {
+      'submission.workspaceitem': [
+        FeatureID.CanEditItem
+      ]
+    },
   };
 
   // Form settings
