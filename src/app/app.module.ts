@@ -57,7 +57,6 @@ const IMPORTS = [
   FooterModule,
   HttpClientModule,
   AppRoutingModule,
-  NuMarkdownModule.forRoot({}),
   CoreModule.forRoot(),
   ScrollToModule.forRoot(),
   NgbModule,
