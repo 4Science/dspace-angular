@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="(!ssrRenderingDisabled)">
     <ng-container *ngVar="(parent$ | async) as parent">
     <ng-container *ngIf="parent?.payload as parentContext">
         <div class="d-flex flex-row border-bottom mb-4 pb-4">
@@ -24,7 +24,7 @@
         <ds-comcol-page-content [content]="parentContext.sidebarText" [hasInnerHtml]="true" [title]="'community.page.news'">
         </ds-comcol-page-content>
       </header>
-        <ds-dso-edit-menu></ds-dso-edit-menu>
+          <ds-context-menu [contextMenuObject]="parentContext" [contextMenuObjectType]="parentContext.type | uppercase"></ds-context-menu>
         </div>
       <!-- Browse-By Links -->
       <ds-themed-comcol-page-browse-by [id]="parentContext.id" [contentType]="parentContext.type"></ds-themed-comcol-page-browse-by>
