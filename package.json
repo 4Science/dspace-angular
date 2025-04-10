@@ -100,7 +100,6 @@
     "@nicky-lenaers/ngx-scroll-to": "^14.0.0",
     "@swimlane/ngx-charts": "^20.4.1",
     "@types/googlemaps": "^3.43.3",
-    "@types/grecaptcha": "^3.0.4",
     "@types/leaflet": "^1.9.12",
     "angular-idle-preload": "3.0.0",
     "angulartics2": "^12.2.1",

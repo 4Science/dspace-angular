@@ -18,6 +18,8 @@ import { getFirstSucceededRemoteListPayload } from '../../../../../../core/share
 import { differenceInDays, differenceInMilliseconds, parseISO} from 'date-fns';
 import { filter, map } from 'rxjs/operators';
 import { isNotEmpty } from '../../../../../empty.util';
+import { MetadataValueFilter } from '../../../../../../core/shared/metadata.models';
+import { PLACEHOLDER_VALUE } from '../../../../../../core/shared/metadata.utils';
 
 @listableObjectComponent('PublicationSearchResult', ViewMode.ListElement)
 @listableObjectComponent(ItemSearchResult, ViewMode.ListElement)
@@ -53,6 +55,11 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
   fullTextVideo: string[];
 
   hasLoadedThirdPartyMetrics$: Observable<boolean>;
+
+  readonly placeholderFilter: MetadataValueFilter = {
+    negate: true,
+    value: PLACEHOLDER_VALUE
+  };
 
   private thirdPartyMetrics = environment.info.metricsConsents.filter(metric => metric.enabled).map(metric => metric.key);
 
