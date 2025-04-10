@@ -57,7 +57,12 @@ describe('CrisStatisticsPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports : [
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          {
+            path: 'fake-url',
+            redirectTo: '/',
+          },
+        ]),
         SharedModule,
         TranslateModule.forRoot({
           loader: {
