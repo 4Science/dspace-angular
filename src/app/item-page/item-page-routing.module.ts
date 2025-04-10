@@ -27,6 +27,18 @@ import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.reso
   imports: [
     RouterModule.forChild([
       {
+        path: 'version',
+        children: [
+          {
+            path: ':id',
+            component: VersionPageComponent,
+            resolve: {
+              dso: VersionResolver,
+            },
+          }
+        ],
+      },
+      {
         path: ':id',
         resolve: {
           dso: ItemPageResolver,
@@ -115,18 +127,7 @@ import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.reso
           showSocialButtons: true
         },
       },
-      {
-        path: 'version',
-        children: [
-          {
-            path: ':id',
-            component: VersionPageComponent,
-            resolve: {
-              dso: VersionResolver,
-            },
-          }
-        ],
-      }
+
     ])
   ],
   providers: [

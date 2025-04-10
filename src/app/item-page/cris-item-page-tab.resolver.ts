@@ -58,7 +58,12 @@ export class CrisItemPageTabResolver implements Resolve<RemoteData<PaginatedList
                 const givenTab = tabArguments[1];
                 const hasViewer: boolean = isNotEmpty(tabArguments[2]) && tabArguments[2] === 'viewer';
                 const itemPageRoute = getItemPageRoute(itemRD.payload);
-                const isValidTab = tabsRD.payload.page.some((tab) => !givenTab || tab.shortname === givenTab);
+
+                const isValidTab = !givenTab || tabsRD.payload.page.some((tab) => {
+                  const shortnameSplit = tab.shortname.split('::');
+                  const shortname = shortnameSplit[shortnameSplit.length - 1];
+                  return shortname === givenTab;
+                });
 
                 const mainTab = tabsRD.payload.page.length === 1
                   ? tabsRD.payload.page[0]
