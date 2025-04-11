@@ -9,7 +9,7 @@ import { QuillModule } from 'ngx-quill';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    QuillModule.forRoot()
+    QuillModule
   ],
   exports: [ MarkdownEditorComponent ],
   declarations: [ MarkdownEditorComponent ],
