@@ -4,7 +4,10 @@ import {
   TestBed,
   waitForAsync,
 } from '@angular/core/testing';
-import { By, DomSanitizer } from '@angular/platform-browser';
+import {
+  By,
+  DomSanitizer,
+} from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { MarkdownEditorComponent } from './markdown-editor.component';
@@ -20,7 +23,7 @@ describe('MarkdownEditorComponent', () => {
         MarkdownEditorComponent,
       ],
       providers: [DomSanitizer],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 

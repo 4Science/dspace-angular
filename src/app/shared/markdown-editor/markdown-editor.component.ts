@@ -3,15 +3,15 @@ import {
   EventEmitter,
   Input,
   Output,
-  SecurityContext
+  SecurityContext,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import {
   ContentChange,
   QuillEditorComponent,
   QuillModules,
 } from 'ngx-quill';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'ds-markdown-editor',
@@ -69,5 +69,5 @@ export class MarkdownEditorComponent  {
   updateContent(content: ContentChange) {
     const sanitizedContent = this.sanitizer.sanitize(SecurityContext.HTML, content.html);
     this.editValueChange.emit(sanitizedContent);
-}
+  }
 }
