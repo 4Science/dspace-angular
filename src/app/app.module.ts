@@ -31,7 +31,6 @@ import { APP_CONFIG, AppConfig } from '../config/app-config.interface';
 import { StoreDevModules } from '../config/store/devtools';
 import { RootModule } from './root.module';
 import { DspaceRestInterceptor } from './core/dspace-rest/dspace-rest.interceptor';
-import { NuMarkdownModule } from '@ng-util/markdown';
 import { FooterModule } from './footer/footer.module';
 import { SocialModule } from './social/social.module';
 import { DirectivesModule } from './directives/directives.module';
@@ -57,7 +56,6 @@ const IMPORTS = [
   FooterModule,
   HttpClientModule,
   AppRoutingModule,
-  NuMarkdownModule.forRoot({}),
   CoreModule.forRoot(),
   ScrollToModule.forRoot(),
   NgbModule,
