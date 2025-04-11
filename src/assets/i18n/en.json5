@@ -9643,6 +9643,7 @@
 
   "layout.field.label.WebAnnotation.[dc.description.abstract]": "Abstract",
   "layout.field.label.WebAnnotation.[glam.annotation.type]": "Annotation Type",
+  "layout.field.label.WebAnnotation.[glam.subject.annotation]": "Subject",
 
   "label.link-text.description-box.section-site.pdl": "Scopri di più",
   "label.title.slider.slider_collections": "Collections",

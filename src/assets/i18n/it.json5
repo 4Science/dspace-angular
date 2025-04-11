@@ -15590,6 +15590,8 @@
   "layout.field.label.WebAnnotation.[dc.description.abstract]": "Abstract",
   // "layout.field.label.WebAnnotation.[glam.annotation.type]": "Annotation Type",
   "layout.field.label.WebAnnotation.[glam.annotation.type]": "Tipo annotazione",
+  // "layout.field.label.WebAnnotation.[glam.subject.annotation]": "Subject",
+  "layout.field.label.WebAnnotation.[glam.subject.annotation]": "Soggetto",
 
   // "label.link-text.description-box.section-site.pdl": "Scopri di più",
   // TODO New key - Add a translation
