@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SearchNavbarComponent } from "../search-navbar.component";
+import { SearchNavbarComponent } from '../search-navbar.component';
 
 /**
  * The search box in the header that expands on focus and collapses on focus out
