@@ -212,7 +212,6 @@ export class VocabularyTreeviewService {
     });
 
   }
-
   /**
    * Check if any operation is pending
    */
@@ -326,8 +325,8 @@ export class VocabularyTreeviewService {
       getFirstSucceededRemoteDataPayload(),
     ).pipe(
       expand(res => this.getPaginatedChildren(res, parentId, loadAll)),
-    );
-  }
+      );
+    }
 
   /**
    * Get children recursively in expand to load all children

@@ -6376,6 +6376,10 @@
 
   "statistics.table.mainReports.header.item": "Item",
 
+  "statistics.table.mainReports.header.community": "Community",
+
+  "statistics.table.mainReports.header.collection": "Collection",
+
   "statistics.table.downloadReports.header.views": "Downloads",
 
   "statistics.table.downloadReports.header.continent": "Continent",
