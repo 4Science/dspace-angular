@@ -191,7 +191,11 @@ export class BrowserOrejimeService extends OrejimeService {
          */
         this.translateConfiguration();
 
-        this.orejimeConfig.apps = this.filterConfigApps(appsToHide);
+        if (this._window?.nativeWindow?.Cypress) {
+          this.orejimeConfig.apps = [];
+        } else {
+          this.orejimeConfig.apps = this.filterConfigApps(appsToHide);
+        }
         this.lazyOrejime.then(({ init }) => {
           this.orejimeInstance = init(this.orejimeConfig);
         });
