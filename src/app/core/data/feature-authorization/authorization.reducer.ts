@@ -6,12 +6,14 @@ import {
   GetAuthorizationsSuccessAction,
 } from './authorization.actions';
 import { AuthorizationsState } from './authorization.interfaces';
+import { getRequestIdFromParams } from './authorization-utils';
 
 
 const initialState = Object.create({
   authorizations: {},
   loading: true,
   hasError: false,
+  pendingRequests: []
 });
 
 export function authorizationReducer(storeState = initialState, action: AuthorizationAction): AuthorizationsState {
@@ -44,8 +46,10 @@ function setAuthorizationsError(storeState: AuthorizationsState, action: GetAuth
 }
 
 function setAuthorizationsLoading(storeState: AuthorizationsState, action: GetAuthorizationsAction): AuthorizationsState {
+  const requestId = getRequestIdFromParams(action.payload.type, action.payload.uuidList, action.payload.featureIDs);
   return Object.assign({}, storeState, {
     loading: true,
+    pendingRequests: [...new Set([...storeState.pendingRequests, requestId])]
   });
 }
 
@@ -57,9 +61,15 @@ function setAuthorizationsSuccess(storeState: AuthorizationsState, action: GetAu
   objectsEntries.forEach(entry => {
     newAuthorizationsState[entry] = {...newAuthorizationsState[entry], ...action.payload.authorizations[entry]};
   });
-
+  const pendingRequests = [...storeState.pendingRequests];
+  const resolvedRequestIndex = pendingRequests.findIndex(value => value === action.payload.resolvedRequestId);
+  if (resolvedRequestIndex >= 0) {
+    pendingRequests.splice(pendingRequests.indexOf(action.payload.resolvedRequestId), 1);
+  }
   return Object.assign({}, storeState, {
     authorizations: newAuthorizationsState,
     loading: false,
+    pendingRequests,
+    resolvedRequestId: null
   });
 }

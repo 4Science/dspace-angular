@@ -24,6 +24,7 @@ export interface ObjectAuthorizationsState {
 
 export interface AuthorizationsState {
   authorizations: ObjectAuthorizationsState,
-  loading: boolean,
   hasError: boolean,
+  pendingRequests?: string[],
+  resolvedRequestId?: string
 }

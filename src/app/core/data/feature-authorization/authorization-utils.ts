@@ -5,10 +5,7 @@ import {
   Observable,
   of as observableOf
 } from 'rxjs';
-import { AuthorizationSearchParams } from './authorization-search-params';
-import { SiteDataService } from '../site-data.service';
-import { hasNoValue, hasValue, isNotEmpty } from '../../../shared/empty.util';
-import { AuthService } from '../../auth/auth.service';
+import { hasValue, isNotEmpty } from '../../../shared/empty.util';
 import { Authorization } from '../../shared/authorization.model';
 import { Feature } from '../../shared/feature.model';
 import { FeatureID } from './feature-id';
@@ -16,51 +13,6 @@ import { getFirstCompletedRemoteData, getFirstSucceededRemoteDataPayload } from 
 import { ObjectAuthorizationFeaturesMap, ObjectAuthorizationsState } from './authorization.interfaces';
 import { DSpaceObject } from '../../shared/dspace-object.model';
 
-/**
- * Operator accepting {@link AuthorizationSearchParams} and adding the current {@link Site}'s selflink to the parameter's
- * objectUrl property, if this property is empty
- * @param siteService The {@link SiteDataService} used for retrieving the repository's {@link Site}
- */
-export const addSiteObjectUrlIfEmpty = (siteService: SiteDataService) =>
-  (source: Observable<AuthorizationSearchParams>): Observable<AuthorizationSearchParams> =>
-    source.pipe(
-      switchMap((params: AuthorizationSearchParams) => {
-        if (hasNoValue(params.objectUrl)) {
-          return siteService.find().pipe(
-            map((site) => Object.assign({}, params, { objectUrl: site.self }))
-          );
-        } else {
-          return observableOf(params);
-        }
-      })
-    );
-
-/**
- * Operator accepting {@link AuthorizationSearchParams} and adding the authenticated user's uuid to the parameter's
- * ePersonUuid property, if this property is empty and an {@link EPerson} is currently authenticated
- * @param authService The {@link AuthService} used for retrieving the currently authenticated {@link EPerson}
- */
-export const addAuthenticatedUserUuidIfEmpty = (authService: AuthService) =>
-  (source: Observable<AuthorizationSearchParams>): Observable<AuthorizationSearchParams> =>
-    source.pipe(
-      switchMap((params: AuthorizationSearchParams) => {
-        if (hasNoValue(params.ePersonUuid)) {
-          return authService.isAuthenticated().pipe(
-            switchMap((authenticated) => {
-              if (authenticated) {
-                return authService.getAuthenticatedUserFromStore().pipe(
-                  map((ePerson) => Object.assign({}, params, { ePersonUuid: ePerson.uuid }))
-                );
-              } else {
-                return observableOf(params);
-              }
-            })
-          );
-        } else {
-          return observableOf(params);
-        }
-      })
-    );
 
 /**
  * Operator checking if at least one of the provided {@link Authorization}s contains a {@link Feature} that matches the
@@ -138,23 +90,6 @@ export const getFeatureIdToBooleanMap = (featureIDs: FeatureID[], features: Feat
 
 
 /**
- * Extract Uuid from authorization id.
- * the feature id from the authorization id that is composed as follows:
- * epersonUuid_featureID_itemType_itemUuid
- *
- * uuid of workspace or workflow items are made as follows workspace_id or workflow_id
- * @param authId
- * @private
- */
-
-export const extractUuidFromAuthorizationId = (authId: string): string => {
-  const authSegments = authId.split('_');
-  const idSegment = authSegments[authSegments.length - 1];
-
-  return idSegment.includes('_') ? idSegment.split('_')[1] : idSegment;
-};
-
-/**
  * Normalize Uuid of objects like workspace and workflow e.g. workflow-1234
  * uuid of workspace or workflow items are made as follows workspace_id or workflow_id
  * @private
@@ -166,16 +101,10 @@ export const getNormalizedUuid = (dso: DSpaceObject): string => {
     dso.uuid.split('-')[1] : dso.uuid;
 };
 
-/**
- * Extract FeatureId from authorization id.
- * the feature id from the authorization id that is composed as follows:
- * epersonUuid_featureID_itemType_itemUuid
- *
- * @param authId
- * @private
- */
-export const extractFeatureIdFromAuthorizationId = (authId: string): string => {
-  const authSegments = authId.split('_');
 
-  return authSegments[1] as FeatureID;
+/**
+ * Method to create an identifier for auth request based on params
+ */
+export const getRequestIdFromParams = (type: string, uuidList: string[], featureIDs: FeatureID[]): string => {
+  return  type.concat(...uuidList).concat(...featureIDs);
 };

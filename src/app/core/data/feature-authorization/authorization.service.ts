@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { createFeatureSelector, createSelector, select, Store } from '@ngrx/store';
 import {
   AuthorizationsState,
   ObjectAuthorizationsState
 } from './authorization.interfaces';
-import { distinctUntilChanged, filter, map, take } from 'rxjs/operators';
+import { distinctUntilChanged, map, take } from 'rxjs/operators';
 import { AppState } from '../../../app.reducer';
 import { FeatureID } from './feature-id';
 import { hasValue } from '../../../shared/empty.util';
@@ -39,9 +39,10 @@ export class AuthorizationService {
   );
 
 
-  getLoadingStatus = createSelector(
+
+  getPendingRequestsStatus = createSelector(
     authorizationsSelector,
-    (state: AuthorizationsState) =>  state.loading
+    (state: AuthorizationsState) =>  state.pendingRequests
   );
 
   constructor(
@@ -68,14 +69,9 @@ export class AuthorizationService {
 
 
   getAllAuthorizationsState(): Observable<ObjectAuthorizationsState> {
-    return this.isLoading().pipe(
-      filter(loading => !loading),
-      switchMap(() =>
-        this.store.pipe(
-          select(this.getAllAuthorizations),
-          distinctUntilChanged(),
-        )
-      )
+    return this.store.pipe(
+      select(this.getAllAuthorizations),
+      distinctUntilChanged(),
     );
   }
 
@@ -100,9 +96,12 @@ export class AuthorizationService {
     );
   }
 
-  isLoading(): Observable<boolean> {
+
+  isRequestLoading(requestId: string): Observable<boolean> {
     return this.store.pipe(
-      select(this.getLoadingStatus),
+      select(this.getPendingRequestsStatus),
+      distinctUntilChanged((a,b) => JSON.stringify(a) === JSON.stringify(b)),
+      map(pendingRequests => pendingRequests.includes(requestId)),
       distinctUntilChanged(),
     );
   }

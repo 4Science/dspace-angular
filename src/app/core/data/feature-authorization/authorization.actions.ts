@@ -46,12 +46,13 @@ export class GetAuthorizationsSuccessAction extends AbstractAuthorizationAction 
 
   constructor(
     map: ObjectAuthorizationsState,
+    requestId: string
   ) {
     super();
     this.payload = {
       authorizations: map,
       hasError: false,
-      loading: false
+      resolvedRequestId: requestId
     };
   }
 }

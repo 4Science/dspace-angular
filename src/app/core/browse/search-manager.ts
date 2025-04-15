@@ -127,11 +127,10 @@ export class SearchManager {
     [...uiidListsMappedToAuthorizations.keys()].forEach((features) => {
       const uuidList = uiidListsMappedToAuthorizations.get(features);
       const type = objects.find(object => object.id === uuidList[0]).uniqueType;
-
       this.authorizationService.initStateForObjects(uuidList, type, features);
     });
-
-    return this.authorizationService.isLoading().pipe(
+    // TODO: fix this
+    return this.authorizationService.isRequestLoading('').pipe(
       filter(loading => !loading),
       map(() => {
         return searchObjects;

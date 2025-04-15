@@ -15,7 +15,7 @@ import { hasNoValue, hasValue, isNotEmpty } from '../../../shared/empty.util';
 import { RequestParam } from '../../cache/models/request-param.model';
 import { AuthorizationSearchParams } from './authorization-search-params';
 import {
-  getAuthorizationFeaturesIDs, getNormalizedUuid,
+  getAuthorizationFeaturesIDs, getNormalizedUuid, getRequestIdFromParams,
   oneAuthorizationMatchesFeature
 } from './authorization-utils';
 import { FeatureID } from './feature-id';
@@ -97,9 +97,10 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
           //If a person uuid is provided we don't use the state service as it keeps track only of authorizations for the active user.
           const dsoRequest$ = (objectUrl ? this.objectCache.getObjectByHref(objectUrl) : this.siteService.find()) as Observable<DSpaceObject>;
 
-          return combineLatest([dsoRequest$, this.authorizationService.isLoading().pipe(take(1))]).pipe(
-            // Get correct item and check that has not already pending authorizations
-            switchMap(([object, isPending]) => this.readOrFetchAuthorization(object, featureId, isPending))
+          return dsoRequest$.pipe(
+            take(1),
+          // Get correct item and check that has not already pending authorizations
+            switchMap((object) => this.readOrFetchAuthorization(object, featureId).pipe(take(1))),
           );
         } else {
           // we fallback on old method if site service had initialization issues or if some parameters more than the only feature ID are provided.
@@ -124,19 +125,22 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    * Get the authorization from the state, if not present we fetch them for the first time and wait for the state update
    * @param dso
    * @param featureId
-   * @param pending
    * @private
    */
-  private readOrFetchAuthorization(dso: DSpaceObject, featureId: FeatureID, pending: boolean): Observable<boolean> {
-    return this.authorizationService.getAuthorizationForObject(featureId, dso.self).pipe(
-      switchMap((authorization) => {
-        if (authorization === undefined && !pending) {
+  private readOrFetchAuthorization(dso: DSpaceObject, featureId: FeatureID): Observable<boolean> {
+    const requestId = getRequestIdFromParams(dso.uniqueType, [getNormalizedUuid(dso)], [featureId]);
+    return combineLatest([
+      this.authorizationService.getAuthorizationForObject(featureId, dso.self),
+      this.authorizationService.isRequestLoading(requestId)
+    ]).pipe(
+      take(1),
+      switchMap(([authorization, loading]: [boolean | undefined, boolean]) => {
+        if (authorization === undefined && !loading) {
           this.authorizationService.initStateForObjects([getNormalizedUuid(dso)], dso.uniqueType, [featureId]);
         }
-
-        return this.authorizationService.isLoading().pipe(
+        return this.authorizationService.isRequestLoading(requestId).pipe(
           distinctUntilChanged(),
-          filter(loading => !loading),
+          filter(isRequestLoading => !isRequestLoading),
           switchMap(() => this.authorizationService.getAuthorizationForObject(featureId, dso.self))
         );
       })
@@ -155,7 +159,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    * @param reRequestOnStale            Whether or not the request should automatically be re-
    *                                    requested after the response becomes stale
    */
-  getAuthorizationForObjects(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<ObjectAuthorizationsState> {
+  getAuthorizationForObjects(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, useCachedVersionIfAvailable: boolean = true, reRequestOnStale: boolean = true): Observable<ObjectAuthorizationsState> {
     return this.searchObjectsAuthorizations(uuidList,  type, featuresId, ePersonUuid, useCachedVersionIfAvailable, reRequestOnStale).pipe(
       getAuthorizationFeaturesIDs(featuresId)
     );
