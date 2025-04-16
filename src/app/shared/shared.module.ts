@@ -348,7 +348,6 @@ import {
 } from './search/search-charts/search-chart/search-chart-bar-horizontal/search-chart-bar-horizontal.component';
 import { ThumbnailService } from './thumbnail/thumbnail.service';
 import { EntityIconDirective } from './entity-icon/entity-icon.directive';
-import { BackgroundImageDirective } from './utils/background-image.directive';
 import {
   AdditionalMetadataComponent
 } from './object-list/search-result-list-element/additional-metadata/additional-metadata.component';
