@@ -4,24 +4,31 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   Output,
-  ViewEncapsulation
+  SimpleChanges,
+  ViewEncapsulation,
 } from '@angular/core';
 
-import { Observable, of as observableOf, Subscription } from 'rxjs';
+import { Observable, of as observableOf, Subscription, switchMap } from 'rxjs';
 
 import { HostWindowService } from '../host-window.service';
 import { PaginationComponentOptions } from './pagination-component-options.model';
 import { SortDirection, SortOptions } from '../../core/cache/models/sort-options.model';
-import { hasValue } from '../empty.util';
+import { hasValue, hasValueOperator } from '../empty.util';
 import { PaginationService } from '../../core/pagination/pagination.service';
-import { map, take } from 'rxjs/operators';
+import { map, take, tap, startWith } from 'rxjs/operators';
 import { RemoteData } from '../../core/data/remote-data';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { ListableObject } from '../object-collection/shared/listable-object.model';
 import { ViewMode } from '../../core/shared/view-mode.model';
+
+interface PaginationDetails {
+  range: string;
+  total: number;
+}
 
 /**
  * The default pagination controls component.
@@ -34,7 +41,7 @@ import { ViewMode } from '../../core/shared/view-mode.model';
   changeDetection: ChangeDetectionStrategy.Default,
   encapsulation: ViewEncapsulation.Emulated
 })
-export class PaginationComponent implements OnDestroy, OnInit {
+export class PaginationComponent implements OnChanges, OnDestroy, OnInit {
   /**
    * ViewMode that should be passed to {@link ListableObjectComponentLoaderComponent}.
    */
@@ -179,6 +186,9 @@ export class PaginationComponent implements OnDestroy, OnInit {
   public sortField$: Observable<string>;
   public defaultSortField = 'name';
 
+
+  public showingDetails$: Observable<PaginationDetails>;
+
   /**
    * Array to track all subscriptions and unsubscribe them onDestroy
    * @type {Array}
@@ -207,6 +217,12 @@ export class PaginationComponent implements OnDestroy, OnInit {
     this.initializeConfig();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.collectionSize.currentValue !== changes.collectionSize.previousValue) {
+      this.showingDetails$ = this.getShowingDetails(this.collectionSize);
+    }
+  }
+
   /**
    * Method provided by Angular. Invoked when the instance is destroyed.
    */
@@ -224,6 +240,7 @@ export class PaginationComponent implements OnDestroy, OnInit {
     this.id = this.paginationOptions.id || null;
     this.pageSizeOptions = this.paginationOptions.pageSizeOptions;
     this.currentPage$ = this.paginationService.getCurrentPagination(this.id, this.paginationOptions).pipe(
+      tap((currentPagination) => this.pageChange.emit(currentPagination.currentPage)),
       map((currentPagination) => currentPagination.currentPage)
     );
     this.pageSize$ = this.paginationService.getCurrentPagination(this.id, this.paginationOptions).pipe(
@@ -244,9 +261,11 @@ export class PaginationComponent implements OnDestroy, OnInit {
       );
   }
 
-  constructor(private cdRef: ChangeDetectorRef,
-              private paginationService: PaginationService,
-              public hostWindowService: HostWindowService) {
+  constructor(
+    protected cdRef: ChangeDetectorRef,
+    protected paginationService: PaginationService,
+    public hostWindowService: HostWindowService,
+  ) {
   }
 
   /**
@@ -258,6 +277,7 @@ export class PaginationComponent implements OnDestroy, OnInit {
   public doPageChange(page: number) {
     this.updateParams({page: page.toString()});
     this.emitPaginationChange();
+    this.pageChange.emit(page);
   }
 
   /**
@@ -300,26 +320,31 @@ export class PaginationComponent implements OnDestroy, OnInit {
   /**
    * Method to get pagination details of the current viewed page.
    */
-  public getShowingDetails(collectionSize: number): Observable<any> {
-    let showingDetails = observableOf({ range: null + ' - ' + null, total: null });
-    if (collectionSize) {
-      showingDetails = this.paginationService.getCurrentPagination(this.id, this.paginationOptions).pipe(
-        map((currentPaginationOptions) => {
-          let firstItem: number;
-          let lastItem: number;
-          const pageMax = currentPaginationOptions.pageSize * currentPaginationOptions.currentPage;
+  public getShowingDetails(collectionSize: number): Observable<PaginationDetails> {
+    return observableOf(collectionSize).pipe(
+      hasValueOperator(),
+      switchMap(() => this.paginationService.getCurrentPagination(this.id, this.paginationOptions)),
+      map((currentPaginationOptions) => {
+        let firstItem: number;
+        let lastItem: number;
+        const pageMax = currentPaginationOptions.pageSize * currentPaginationOptions.currentPage;
 
-          firstItem = currentPaginationOptions.pageSize * (currentPaginationOptions.currentPage - 1) + 1;
-          if (collectionSize > pageMax) {
-            lastItem = pageMax;
-          } else {
-            lastItem = collectionSize;
-          }
-          return {range: firstItem + ' - ' + lastItem, total: collectionSize};
-        })
-      );
-    }
-    return showingDetails;
+        firstItem = currentPaginationOptions.pageSize * (currentPaginationOptions.currentPage - 1) + 1;
+        if (collectionSize > pageMax) {
+          lastItem = pageMax;
+        } else {
+          lastItem = collectionSize;
+        }
+        return {
+          range: `${firstItem} - ${lastItem}`,
+          total: collectionSize,
+        };
+      }),
+      startWith({
+        range: `${null} - ${null}`,
+        total: null,
+      }),
+    );
   }
 
   /**

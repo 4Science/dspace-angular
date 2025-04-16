@@ -1,116 +1,104 @@
-import { BitstreamDataService } from './../../../../../../../core/data/bitstream-data.service';
-import { Item } from './../../../../../../../core/shared/item.model';
-import { FieldRenderingType } from './../metadata-box.decorator';
-import { LayoutField } from './../../../../../../../core/layout/models/box.model';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ImageComponent } from './image.component';
-import { of } from 'rxjs';
-import { CommonModule } from '@angular/common';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateLoaderMock } from './../../../../../../../shared/mocks/translate-loader.mock';
-import { createSuccessfulRemoteDataObject$ } from './../../../../../../../shared/remote-data.utils';
-import { createPaginatedList } from './../../../../../../../shared/testing/utils.test';
-import { Bitstream } from './../../../../../../../core/shared/bitstream.model';
+import {ImageComponent} from './image.component';
+import {LayoutField} from '../../../../../../../core/layout/models/box.model';
+import {FieldRenderingType} from '../metadata-box.decorator';
+import {Item} from '../../../../../../../core/shared/item.model';
+import {Observable, of} from 'rxjs';
+import {BitstreamDataService} from '../../../../../../../core/data/bitstream-data.service';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {RemoteData} from '../../../../../../../core/data/remote-data';
+import {Bitstream} from '../../../../../../../core/shared/bitstream.model';
+import {createSuccessfulRemoteDataObject$} from '../../../../../../../shared/remote-data.utils';
+import {TranslateLoaderMock} from '../../../../../../../shared/mocks/translate-loader.mock';
+import {createPaginatedList} from '../../../../../../../shared/testing/utils.test';
 
 describe('ImageComponent', () => {
-  let component: ImageComponent;
-  let fixture: ComponentFixture<ImageComponent>;
+    let component: ImageComponent;
+    let fixture: ComponentFixture<ImageComponent>;
 
-  const testItem = Object.assign(new Item(), {
-    bundles: of({}),
-    metadata: {
-      'dc.identifier.doi': [
-        {
-          value: 'doi:10.1392/dironix'
+    const mockField: LayoutField = {
+        metadata: '',
+        label: 'Files',
+        rendering: FieldRenderingType.IMAGE,
+        fieldType: 'BITSTREAM',
+        style: null,
+        styleLabel: 'test-style-label',
+        styleValue: 'test-style-value',
+        labelAsHeading: false,
+        valuesInline: true,
+        bitstream: {
+            bundle: 'ORIGINAL',
+            metadataField: null,
+            metadataValue: null
         }
-      ]
-    },
-    _links: {
-      self: { href: 'obj-selflink' }
-    },
-    uuid: 'item-uuid',
-  });
+    };
 
-  const mockField: LayoutField = {
-    metadata: '',
-    label: 'Files',
-    rendering: FieldRenderingType.IMAGE,
-    fieldType: 'BITSTREAM',
-    style: null,
-    styleLabel: 'test-style-label',
-    styleValue: 'test-style-value',
-    labelAsHeading: false,
-    valuesInline: true,
-    bitstream: {
-      bundle: 'ORIGINAL',
-      metadataField: null,
-      metadataValue: null
-    }
-  };
+    const testItem = Object.assign(new Item(), {
+        bundles: of({}),
+        metadata: {
+            'dc.identifier.doi': [
+                {
+                    value: 'doi:10.1392/dironix'
+                }
+            ]
+        },
+        _links: {
+            self: {href: 'obj-selflink'}
+        },
+        uuid: 'item-uuid',
+    });
 
-  const mockBitstreamDataService: any = jasmine.createSpyObj('BitstreamDataService', {
-    findAllByItemAndBundleName: jasmine.createSpy('findAllByItemAndBundleName'),
-    findByItem: jasmine.createSpy('findByItem'),
-  });
-
-  const bitstream = Object.assign(new Bitstream(), {
-    id: 'bitstream4',
-    uuid: 'bitstream4',
-    metadata: {
-      'dc.title': [
-        {
-          value: 'test'
+    const mockBitstreamDataService: any = jasmine.createSpyObj('BitstreamDataService', {
+        getThumbnailFor(item: Item): Observable<RemoteData<Bitstream>> {
+            return createSuccessfulRemoteDataObject$(new Bitstream());
+        },
+        findAllByItemAndBundleName: jasmine.createSpy('findAllByItemAndBundleName'),
+        findByItem: of(createPaginatedList([new Bitstream()])),
+    });
+    const langList = ['en', 'xx', 'de'];
+    const translateServiceStub: any = {
+        getLangs: () => {
+            return langList;
+        },
+        getBrowserLang: () => {
+            return langList;
+        },
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        use: (param: string) => {
         }
-      ],
-      'dc.type': [
-        {
-          value: 'test'
-        }
-      ],
-      'dc.description': [
-        {
-          value: 'test'
-        }
-      ]
-    },
-    _links: {
-      self: { href: 'obj-selflink' }
-    }
-  });
+    };
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [
-        CommonModule,
-        TranslateModule.forRoot({
-          loader: {
-            provide: TranslateLoader,
-            useClass: TranslateLoaderMock
-          }
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [ImageComponent],
+            imports: [
+                TranslateModule.forRoot({
+                    loader: {
+                        provide: TranslateLoader,
+                        useClass: TranslateLoaderMock
+                    }
+                }),
+            ],
+            providers: [
+                {provide: 'fieldProvider', useValue: mockField},
+                {provide: 'itemProvider', useValue: testItem},
+                {provide: 'renderingSubTypeProvider', useValue: ''},
+                {provide: 'tabNameProvider', useValue: ''},
+                {provide: BitstreamDataService, useValue: mockBitstreamDataService},
+                {provide: TranslateService, useValue: translateServiceStub},
+            ]
         })
-      ],
-      declarations: [ ImageComponent ],
-      providers: [
-        { provide: 'fieldProvider', useValue: mockField },
-        { provide: 'itemProvider', useValue: testItem },
-        { provide: 'renderingSubTypeProvider', useValue: '' },
-        { provide: BitstreamDataService, useValue: mockBitstreamDataService },
-        { provide: 'tabNameProvider', useValue: '' },
-      ]
-    })
-    .compileComponents();
-  });
+            .compileComponents();
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ImageComponent);
-    component = fixture.componentInstance;
-    mockBitstreamDataService.findAllByItemAndBundleName.and.returnValues(createSuccessfulRemoteDataObject$(createPaginatedList([bitstream])));
-    mockBitstreamDataService.findByItem.and.returnValues(createSuccessfulRemoteDataObject$(createPaginatedList([bitstream])));
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(ImageComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

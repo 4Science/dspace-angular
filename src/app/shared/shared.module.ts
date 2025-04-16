@@ -338,6 +338,9 @@ import { BitstreamListItemComponent } from './object-list/bitstream-list-item/bi
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ThemedLangSwitchComponent } from './lang-switch/themed-lang-switch.component';
 import { ThemedUserMenuComponent } from './auth-nav-menu/user-menu/themed-user-menu.component';
+import { OrcidBadgeAndTooltipComponent } from './orcid-badge-and-tooltip/orcid-badge-and-tooltip.component';
+import { LiveRegionComponent } from './live-region/live-region.component';
+import { BtnDisabledDirective } from './btn-disabled.directive';
 import { ItemCorrectionComponent } from './object-collection/shared/mydspace-item-correction/item-correction.component';
 import { MetricsModule } from './metric/metrics.module';
 import {
@@ -369,6 +372,7 @@ import { CardsBrowseElementsComponent } from './browse-most-elements/cards-brows
 import {
   ThemedCardsBrowseElementsComponent
 } from './browse-most-elements/cards-browse-elements/themed-cards-browse-elements.component';
+import { BackgroundImageDirective } from './utils/background-image.directive';
 
 const MODULES = [
   CommonModule,
@@ -505,6 +509,7 @@ const COMPONENTS = [
   EpersonSearchBoxComponent,
   GroupSearchBoxComponent,
   ThemedItemPageTitleFieldComponent,
+  OrcidBadgeAndTooltipComponent,
   SearchChartsComponent,
   SearchChartBarComponent,
   SearchChartBarToLeftComponent,
@@ -606,6 +611,7 @@ const ENTRY_COMPONENTS = [
   EpersonGroupListComponent,
   EpersonSearchBoxComponent,
   GroupSearchBoxComponent,
+  LiveRegionComponent,
   SearchChartBarComponent,
   SearchChartBarToLeftComponent,
   SearchChartBarToRightComponent,
@@ -648,9 +654,11 @@ const DIRECTIVES = [
   EntityIconDirective,
   BackgroundImageDirective,
   ContextHelpDirective,
+  BtnDisabledDirective,
   EntityIconDirective,
   MarkdownDirective,
-  StickyPopoverDirective
+  StickyPopoverDirective,
+  BackgroundImageDirective
 ];
 
 @NgModule({

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { By } from '@angular/platform-browser';
+import { By, DomSanitizer } from '@angular/platform-browser';
 
 import { MarkdownEditorComponent } from './markdown-editor.component';
 
@@ -16,7 +16,7 @@ describe('MarkdownEditorComponent', () => {
       imports: [
         RouterTestingModule.withRoutes([]),
       ],
-      providers: [],
+      providers: [DomSanitizer],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));

@@ -13,6 +13,7 @@
   --ds-login-logo-width: 72px;
   --ds-submission-header-z-index: 1001;
   --ds-submission-footer-z-index: 999;
+  --ds-live-region-z-index: 1030;
   // z-index of group form delete button in submission form to not overlay on the footer
   --ds-submission-inline-group-form-delete-z-index: 998;
 
@@ -159,6 +160,8 @@
   --ds-cris-layout-navbar-tab-color-active: #006666;
   --ds-cris-layout-navbar-tab-color-hover : #{theme-color('light')};
 
+  --ds-video-selection-bar-height: calc(107px + 0.25rem);
+
   --ds-carousel-controls-color: #{$gray-600};
   --ds-carousel-with-thumbnails-controls-color: #{$gray-500};
   --ds-carousel-controls-color-hover: #{lighten($gray-600, 8%)};
@@ -181,8 +184,6 @@
   --ds-dso-edit-actions-width: 173px;
   --ds-dso-edit-virtual-tooltip-min-width: 300px;
 
-  --ds-comcol-logo-max-width: 500px;
-  --ds-comcol-logo-max-height: 500px;
 
   --ds-primary-bg: #{$ds-primary-bg};
   --ds-secondary-bg: #{$ds-secondary-bg};
@@ -193,6 +194,22 @@
 
   --green1: #1FB300;  // This variable represents the success color for the Klaro cookie banner
   --button-text-color-cookie: #333; // This variable represents the text color for buttons in the Klaro cookie banner
+  --very-dark-cyan: #215E50; // This variable represents the background color of the save cookies button
+
+  --ds-search-skeleton-text-height: 20px;
+  --ds-search-skeleton-badge-height: 18px;
+  --ds-search-skeleton-thumbnail-margin: 1em;
+  --ds-search-skeleton-text-line-count: 2;
+  --ds-search-skeleton-badge-width: 75px;
+  --ds-search-skeleton-filter-badge-width: 200px;
+  --ds-search-skeleton-info-width: 200px;
+  --ds-search-skeleton-card-height: 435px;
+
+  --ds-filters-skeleton-height: 40px;
+  --ds-filters-skeleton-spacing: 12px;
+
+  --ds-comcol-logo-max-width: 500px;
+  --ds-comcol-logo-max-height: 500px;
 
   --ds-identifier-sybetype-icon-height: 24px;
 }
