@@ -122,7 +122,11 @@ ds-context-help-toggle {
     padding: 0.5rem;
     display: block;
     vertical-align: middle;
-    line-height: 1;
+    line-height: 1.2;
+
+    i {
+      font-size: 17.5px !important;
+    }
   }
   @media screen and (min-width: map-get($grid-breakpoints, md)) {
     .ds-context-help-toggle {
