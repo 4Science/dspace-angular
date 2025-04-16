@@ -18,21 +18,18 @@ import { MetadataSchema } from '../../../core/metadata/metadata-schema.model';
 import { createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
 import { PaginationService } from '../../../core/pagination/pagination.service';
 import { PaginationServiceStub } from '../../../shared/testing/pagination-service.stub';
-import { RegistryServiceStub } from '../../../shared/testing/registry.service.stub';
-import { createPaginatedList } from '../../../shared/testing/utils.test';
 import {
   MetadataSchemaExportService
 } from '../../../shared/metadata-export/metadata-schema-export/metadata-schema-export.service';
-import { UUIDService } from '../../../core/shared/uuid.service';
+import { buildPaginatedList } from '../../../core/data/paginated-list.model';
+import { RestResponse } from '../../../core/cache/response.models';
 
 describe('MetadataRegistryComponent', () => {
   let comp: MetadataRegistryComponent;
   let fixture: ComponentFixture<MetadataRegistryComponent>;
-
-  let paginationService: PaginationServiceStub;
-  let registryService: RegistryServiceStub;
-
-  const mockSchemasList: MetadataSchema[] = [
+  let registryService: RegistryService;
+  let paginationService;
+  const mockSchemasList = [
     {
       id: 1,
       _links: {
@@ -53,18 +50,33 @@ describe('MetadataRegistryComponent', () => {
       prefix: 'mock',
       namespace: 'http://dspace.org/mockschema'
     }
-  ] as MetadataSchema[];
+  ];
+  const mockSchemas = createSuccessfulRemoteDataObject$(buildPaginatedList(null, mockSchemasList));
+  /* eslint-disable no-empty,@typescript-eslint/no-empty-function */
+  const registryServiceStub = {
+    getMetadataSchemas: () => mockSchemas,
+    getMetadataSchemasByMetadata: () => mockSchemas,
+    getActiveMetadataSchema: () => observableOf(undefined),
+    getSelectedMetadataSchemas: () => observableOf([]),
+    editMetadataSchema: (schema) => {
+    },
+    cancelEditMetadataSchema: () => {
+    },
+    deleteMetadataSchema: () => observableOf(new RestResponse(true, 200, 'OK')),
+    deselectAllMetadataSchema: () => {
+    },
+    clearMetadataSchemaRequests: () => observableOf(undefined)
+  };
+  /* eslint-enable no-empty, @typescript-eslint/no-empty-function */
+
+  paginationService = new PaginationServiceStub();
 
   beforeEach(waitForAsync(() => {
-    paginationService = new PaginationServiceStub();
-    registryService = new RegistryServiceStub();
-    spyOn(registryService, 'getMetadataSchemas').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(mockSchemasList)));
-
     TestBed.configureTestingModule({
       imports: [CommonModule, RouterTestingModule.withRoutes([]), TranslateModule.forRoot(), NgbModule],
       declarations: [MetadataRegistryComponent, PaginationComponent, EnumKeysPipe],
       providers: [
-        { provide: RegistryService, useValue: registryService },
+        { provide: RegistryService, useValue: registryServiceStub },
         { provide: HostWindowService, useValue: new HostWindowServiceStub(0) },
         { provide: PaginationService, useValue: paginationService },
         { provide: NotificationsService, useValue: new NotificationsServiceStub() },

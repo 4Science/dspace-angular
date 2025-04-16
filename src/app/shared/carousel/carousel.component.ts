@@ -6,22 +6,21 @@ import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { NativeWindowRef, NativeWindowService } from '../../core/services/window.service';
 import { CarouselOptions } from './carousel-options.model';
 import { Item } from '../../core/shared/item.model';
-import { BitstreamImagesService } from '../../core/services/bitstream-images.service';
 import difference from 'lodash/difference';
 import { filter, map, mergeMap, reduce, switchMap, take } from 'rxjs/operators';
 import { hasValue, isNotEmpty } from '../empty.util';
-import { InternalLinkService } from "../../core/services/internal-link.service";
-import { SearchManager } from "../../core/browse/search-manager";
-import { followLink } from "../utils/follow-link-config.model";
-import { getFirstCompletedRemoteData } from "../../core/shared/operators";
-import { SearchObjects } from "../search/models/search-objects.model";
-import { RemoteData } from "../../core/data/remote-data";
-import { PaginatedList } from "../../core/data/paginated-list.model";
-import { Bitstream } from "../../core/shared/bitstream.model";
-import { BitstreamFormat } from "../../core/shared/bitstream-format.model";
-import { PaginationComponentOptions } from "../pagination/pagination-component-options.model";
-import { PaginatedSearchOptions } from "../search/models/paginated-search-options.model";
-import { SortOptions } from "../../core/cache/models/sort-options.model";
+import { InternalLinkService } from '../../core/services/internal-link.service';
+import { SearchManager } from '../../core/browse/search-manager';
+import { followLink } from '../utils/follow-link-config.model';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { SearchObjects } from '../search/models/search-objects.model';
+import { RemoteData } from '../../core/data/remote-data';
+import { PaginatedList } from '../../core/data/paginated-list.model';
+import { Bitstream } from '../../core/shared/bitstream.model';
+import { BitstreamFormat } from '../../core/shared/bitstream-format.model';
+import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
+import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
+import { SortOptions } from '../../core/cache/models/sort-options.model';
 
 /**
  * Component representing the Carousel component section.

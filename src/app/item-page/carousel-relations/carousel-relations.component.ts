@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { CarouselOptions } from '../../shared/carousel/carousel-options.model';
-import { SortDirection } from "../../core/cache/models/sort-options.model";
 
 @Component({
   selector: 'ds-carousel-relations',

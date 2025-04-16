@@ -28,7 +28,7 @@ import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service
 import { DSOChangeAnalyzer } from '../../../../core/data/dso-change-analyzer.service';
 import { BitstreamFormatDataService } from '../../../../core/data/bitstream-format-data.service';
 import { NotificationsService } from '../../../notifications/notifications.service';
-import { SortDirection } from "../../../../core/cache/models/sort-options.model";
+import { SortDirection } from '../../../../core/cache/models/sort-options.model';
 
 describe('GridSectionComponent', () => {
   let component: GridSectionComponent;

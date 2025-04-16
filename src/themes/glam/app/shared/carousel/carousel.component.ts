@@ -5,9 +5,8 @@ import { NativeWindowRef, NativeWindowService } from '../../../../../app/core/se
 import { DOCUMENT, isPlatformServer } from '@angular/common';
 import {HostWindowService} from '../../../../../app/shared/host-window.service';
 import {Observable} from 'rxjs';
-import {BitstreamImagesService} from '../../../../../app/core/services/bitstream-images.service';
-import { InternalLinkService } from "../../../../../app/core/services/internal-link.service";
-import { SearchManager } from "../../../../../app/core/browse/search-manager";
+import { InternalLinkService } from '../../../../../app/core/services/internal-link.service';
+import { SearchManager } from '../../../../../app/core/browse/search-manager';
 
 /**
  * Component representing the Carousel component section.
