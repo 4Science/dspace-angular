@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ChangeDetectorRef, NO_ERRORS_SCHEMA, PLATFORM_ID } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { By, DomSanitizer } from '@angular/platform-browser';
@@ -16,7 +16,11 @@ describe('MarkdownEditorComponent', () => {
       imports: [
         RouterTestingModule.withRoutes([]),
       ],
-      providers: [DomSanitizer],
+      providers: [
+        DomSanitizer,
+        ChangeDetectorRef,
+        {provide: PLATFORM_ID, useValue: 'browser'},
+      ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
@@ -34,6 +38,8 @@ describe('MarkdownEditorComponent', () => {
   describe('when component loaded', () => {
 
     it('should display markdown editor', () => {
+      component.modulesLoaded = true;
+      fixture.detectChanges();
       const element = fixture.debugElement.query(By.css('.markdown-editor'));
       expect(element).not.toBeNull();
     });
