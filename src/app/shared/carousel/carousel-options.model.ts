@@ -1,3 +1,5 @@
+import { SortDirection } from '../../core/cache/models/sort-options.model';
+
 export interface CarouselOptions {
   /**
    * The title of the item
@@ -60,7 +62,28 @@ export interface CarouselOptions {
   bundle: string;
 
   /**
-   * Applies a blurred backdrop
+   * The discovery configuration name for search results
    */
+  discoveryConfiguration?: string;
+  /**
+   * The search sortOrder
+   */
+  order?: string;
+  /**
+   * The search sortField
+   */
+  sortField?: string;
+
+  /**
+   * The search sort direction
+   */
+  sortDirection?: SortDirection;
+
+  /**
+   * The number of items to be searched
+   */
+  numberOfItems?: number;
+
   showBlurryBackdrop: boolean;
+
 }

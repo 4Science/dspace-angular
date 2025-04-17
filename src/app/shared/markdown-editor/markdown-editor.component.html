@@ -1,7 +1,1 @@
-<!-- The Markdown viewer is not working anymore and it has been temporarily removed. -->
-<!-- Markdown editor has been temporarily replaced with a plain text area -->
-<!-- TODO: wait for a fix to be released, or find a new Markdown viewer, then restore Markdown support -->
-
-<textarea [id]="controlId" [(ngModel)]="editValue" class="d-block w-100 markdown-editor form-control" rows="5"
-             (ngModelChange)="editValueChange.emit($event)">
-</textarea>
+<quill-editor class="markdown-editor" [ngModel]="editValue" [modules]="modules" (onContentChanged)="updateContent($event)"></quill-editor>

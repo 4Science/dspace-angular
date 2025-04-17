@@ -94,6 +94,11 @@ export class CarouselSectionComponent implements OnInit {
       titleStyle: this.carouselSection.titleStyle,
       bundle: this.carouselSection.bundle,
       showBlurryBackdrop: this.carouselSection.showBlurryBackdrop,
+      discoveryConfiguration: this.carouselSection.discoveryConfigurationName,
+      order: this.carouselSection.order,
+      sortField: this.carouselSection.sortField ?? this.DEFAULT_SORT_FIELD,
+      sortDirection:  this.carouselSection.order && this.carouselSection.order.toUpperCase() === 'ASC' ? SortDirection.ASC : SortDirection.DESC,
+      numberOfItems: this.carouselSection.numberOfItems &&  this.carouselSection.numberOfItems  > 0 ? this.carouselSection.numberOfItems : 20
     };
 
     this.paginatedSearchOptions = new PaginatedSearchOptions({

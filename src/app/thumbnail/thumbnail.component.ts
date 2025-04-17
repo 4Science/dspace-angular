@@ -1,14 +1,14 @@
 import { Component, Inject, Input, OnChanges, PLATFORM_ID, SimpleChanges } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 import { Bitstream } from '../core/shared/bitstream.model';
 import { hasNoValue, hasValue } from '../shared/empty.util';
 import { RemoteData } from '../core/data/remote-data';
-import { BehaviorSubject, of as observableOf } from 'rxjs';
+import { of as observableOf } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { FeatureID } from '../core/data/feature-authorization/feature-id';
 import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
 import { AuthService } from '../core/auth/auth.service';
 import { FileService } from '../core/shared/file.service';
+import { isPlatformBrowser } from '@angular/common';
 
 /**
  * This component renders a given Bitstream as a thumbnail.
@@ -35,7 +35,7 @@ export class ThumbnailComponent implements OnChanges {
   /**
    * The src attribute used in the template to render the image.
    */
-  src$ = new BehaviorSubject<string>(undefined);
+  src: string = undefined;
 
   retriedWithToken = false;
 
@@ -63,7 +63,7 @@ export class ThumbnailComponent implements OnChanges {
    * Whether the thumbnail is currently loading
    * Start out as true to avoid flashing the alt text while a thumbnail is being loaded.
    */
-  isLoading$ = new BehaviorSubject(true);
+  isLoading = true;
 
   constructor(
     @Inject(PLATFORM_ID) private platformID: any,
@@ -119,7 +119,7 @@ export class ThumbnailComponent implements OnChanges {
    * Otherwise, fall back to the default image or a HTML placeholder
    */
   errorHandler() {
-    const src = this.src$.getValue();
+    const src = this.src;
     const thumbnail = this.bitstream;
     const thumbnailSrc = thumbnail?._links?.content?.href;
 
@@ -171,9 +171,9 @@ export class ThumbnailComponent implements OnChanges {
    * @param src
    */
   setSrc(src: string): void {
-    this.src$.next(src);
+    this.src = src;
     if (src === null) {
-      this.isLoading$.next(false);
+      this.isLoading = false;
     }
   }
 
@@ -181,6 +181,6 @@ export class ThumbnailComponent implements OnChanges {
    * Stop the loading animation once the thumbnail is successfully loaded
    */
   successHandler() {
-    this.isLoading$.next(false);
+    this.isLoading = false;
   }
 }
