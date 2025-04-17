@@ -11,7 +11,8 @@ export interface DiscoveryConfigurationFeaturesConfig {
 export interface AuthorizationActionPayload {
   uuidList: string[],
   type?: string,
-  featureIDs: FeatureID[]
+  featureIDs: FeatureID[],
+  hrefs: string[]
 }
 
 export interface ObjectAuthorizationFeaturesMap {

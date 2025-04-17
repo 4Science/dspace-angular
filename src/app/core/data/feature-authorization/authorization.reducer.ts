@@ -41,7 +41,8 @@ export function authorizationReducer(storeState = initialState, action: Authoriz
 function setAuthorizationsError(storeState: AuthorizationsState, action: GetAuthorizationsErrorAction): AuthorizationsState {
   return Object.assign({}, storeState, {
     hasError: true,
-    loading: false
+    loading: false,
+    pendingRequests: []
   });
 }
 

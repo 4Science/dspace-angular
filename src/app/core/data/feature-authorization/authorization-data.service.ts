@@ -1,4 +1,4 @@
-import { combineLatest, Observable, of as observableOf } from 'rxjs';
+import { Observable, of as observableOf } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AUTHORIZATION } from '../../shared/authorization.resource-type';
 import { Authorization } from '../../shared/authorization.model';
@@ -99,8 +99,8 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
 
           return dsoRequest$.pipe(
             take(1),
-          // Get correct item and check that has not already pending authorizations
-            switchMap((object) => this.readOrFetchAuthorization(object, featureId).pipe(take(1))),
+            // Get correct item and check that has not already pending authorizations
+            switchMap((object) => this.readOrFetchAuthorization(object, featureId)),
           );
         } else {
           // we fallback on old method if site service had initialization issues or if some parameters more than the only feature ID are provided.
@@ -129,23 +129,39 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    */
   private readOrFetchAuthorization(dso: DSpaceObject, featureId: FeatureID): Observable<boolean> {
     const requestId = getRequestIdFromParams(dso.uniqueType, [getNormalizedUuid(dso)], [featureId]);
-    return combineLatest([
-      this.authorizationService.getAuthorizationForObject(featureId, dso.self),
-      this.authorizationService.isRequestLoading(requestId)
-    ]).pipe(
+
+    return this.authorizationService.getAuthorizationForObject(featureId, dso.self).pipe(
       take(1),
-      switchMap(([authorization, loading]: [boolean | undefined, boolean]) => {
-        if (authorization === undefined && !loading) {
-          this.authorizationService.initStateForObjects([getNormalizedUuid(dso)], dso.uniqueType, [featureId]);
+      switchMap((authorization) => {
+        if (authorization !== undefined) {
+          // Authorization is already cached — return it directly
+          return observableOf(authorization);
         }
+
+        // Authorization is not cached — trigger fetch
+        this.authorizationService.initStateForObjects(
+          [getNormalizedUuid(dso)],
+          dso.uniqueType,
+          [featureId],
+          [dso.self]
+        );
+
+        // Now wait for loading to complete, then fetch authorization again
         return this.authorizationService.isRequestLoading(requestId).pipe(
           distinctUntilChanged(),
-          filter(isRequestLoading => !isRequestLoading),
-          switchMap(() => this.authorizationService.getAuthorizationForObject(featureId, dso.self))
+          filter(isLoading => !isLoading),
+          take(1), // Ensure we only continue after loading finishes
+          switchMap(() =>
+            this.authorizationService.getAuthorizationForObject(featureId, dso.self).pipe(
+              filter(result => result !== undefined), // Ensure we only emit valid results
+              take(1),
+            )
+          )
         );
       })
     );
   }
+
 
   /**
    * Get a map of authorizations for {@link EPerson} (or anonymous)
@@ -154,14 +170,15 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    * @param ePersonUuid                 UUID of the {@link EPerson} to search {@link Authorization}s for.
    *                                    If not provided, the UUID of the currently authenticated {@link EPerson} will be used.
    * @param featuresId                  A list of the IDs of the {@link Feature} to check {@link Authorization} for
-   * @param useCachedVersionIfAvailable If this is true, the request will only be sent if there's
+   * @param hrefs
    *                                    no valid cached version. Defaults to true
-   * @param reRequestOnStale            Whether or not the request should automatically be re-
    *                                    requested after the response becomes stale
+   * @param useCachedVersionIfAvailable
+   * @param reRequestOnStale
    */
-  getAuthorizationForObjects(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, useCachedVersionIfAvailable: boolean = true, reRequestOnStale: boolean = true): Observable<ObjectAuthorizationsState> {
+  getAuthorizationForObjects(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, hrefs?: string[], useCachedVersionIfAvailable: boolean = true, reRequestOnStale: boolean = true): Observable<ObjectAuthorizationsState> {
     return this.searchObjectsAuthorizations(uuidList,  type, featuresId, ePersonUuid, useCachedVersionIfAvailable, reRequestOnStale).pipe(
-      getAuthorizationFeaturesIDs(featuresId)
+      getAuthorizationFeaturesIDs(featuresId, hrefs)
     );
   }
 

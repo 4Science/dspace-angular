@@ -25,6 +25,7 @@ export class AuthorizationEffects {
           action.payload.type,
           action.payload.featureIDs,
           null,
+          action.payload.hrefs,
           true
         ).pipe(
           catchError(() => of(new GetAuthorizationsErrorAction())),

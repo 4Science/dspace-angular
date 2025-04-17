@@ -47,10 +47,11 @@ export const oneAuthorizationMatchesFeature = (featureID: FeatureID) =>
  * this observable will always emit false.
  * @returns a list to {@link Feature}s IDs.
  */
-export const getAuthorizationFeaturesIDs = (featureIDs: FeatureID[]) =>
+export const getAuthorizationFeaturesIDs = (featureIDs: FeatureID[], hrefs: string[]) =>
   (source: Observable<Authorization[]>): Observable<ObjectAuthorizationsState> =>
     source.pipe(
       switchMap((authorizations: Authorization[]) => {
+        let objectToFeaturesMap = {};
         if (isNotEmpty(authorizations)) {
           return combineLatest([
             ...authorizations.map(auth => auth.object.pipe(getFirstCompletedRemoteData(),take(1))),
@@ -59,7 +60,6 @@ export const getAuthorizationFeaturesIDs = (featureIDs: FeatureID[]) =>
             map((data) => {
               const features = data.map(rd => rd.payload).filter(dso => dso instanceof Feature) as Feature[];
               const objects = data.map(rd => rd.payload).filter(dso => !(dso instanceof Feature));
-              let objectToFeaturesMap = {};
 
               objects.forEach(object => {
                 objectToFeaturesMap = Object.assign({}, objectToFeaturesMap, {
@@ -70,7 +70,12 @@ export const getAuthorizationFeaturesIDs = (featureIDs: FeatureID[]) =>
             })
           );
         } else {
-          return observableOf({});
+          hrefs.forEach(href => {
+            objectToFeaturesMap = Object.assign({}, objectToFeaturesMap, {
+              [href]: getFeatureIdToBooleanMap(featureIDs, [])
+            });
+          });
+          return observableOf(objectToFeaturesMap);
         }
       }),
       distinctUntilChanged(),

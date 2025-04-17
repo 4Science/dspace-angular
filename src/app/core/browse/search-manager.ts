@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { PaginatedList } from '../data/paginated-list.model';
 import { RemoteData } from '../data/remote-data';
@@ -28,6 +28,7 @@ import { SearchOptions } from '../../shared/search/models/search-options.model';
 
 
 import { AuthorizationService } from '../data/feature-authorization/authorization.service';
+import { getRequestIdFromParams } from '../data/feature-authorization/authorization-utils';
 
 /**
  * The service aims to manage browse requests and subsequent extra fetch requests.
@@ -123,15 +124,19 @@ export class SearchManager {
       return of(searchObjects);
     }
 
+    const requestsIds = [];
+
     const uiidListsMappedToAuthorizations = this.groupItemsUuidsByAuthorizations(objects, mappedObjects);
     [...uiidListsMappedToAuthorizations.keys()].forEach((features) => {
       const uuidList = uiidListsMappedToAuthorizations.get(features);
       const type = objects.find(object => object.id === uuidList[0]).uniqueType;
-      this.authorizationService.initStateForObjects(uuidList, type, features);
+      const hrefs = objects.map(dso => dso.self);
+      this.authorizationService.initStateForObjects(uuidList, type, features, hrefs);
+      requestsIds.push(getRequestIdFromParams(type, uuidList, features));
     });
-    // TODO: fix this
-    return this.authorizationService.isRequestLoading('').pipe(
-      filter(loading => !loading),
+
+    return forkJoin(requestsIds.map(id => this.authorizationService.isRequestLoading(id))).pipe(
+      filter(loadingItems => loadingItems.every(loading => !loading)),
       map(() => {
         return searchObjects;
       }),
