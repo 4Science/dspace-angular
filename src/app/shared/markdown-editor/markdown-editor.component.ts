@@ -23,6 +23,10 @@ export class MarkdownEditorComponent implements AfterViewInit {
    */
   @Input() editValue = '';
   /**
+   * Whether the field is required
+   */
+  @Input() required: boolean;
+  /**
    * Markdown Editor String value Emitter
    */
   @Output() editValueChange = new EventEmitter();
