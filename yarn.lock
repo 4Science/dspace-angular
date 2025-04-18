@@ -11714,10 +11714,10 @@ quill-delta@^3.6.2:
     extend "^3.0.2"
     fast-diff "1.1.2"
 
-quill-emoji@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/quill-emoji/-/quill-emoji-0.2.0.tgz#2d8b830cfd3389a408100f3b7de8d656da74d06f"
-  integrity sha512-0kqHKTFA9hk1Vf5g32KBm/NYZal6n9N/ATmk13Hka/XYsgrEIaShSR84B5VMB7bg5o9+TMeIzc+wey5OP7hv+A==
+quill-emoji@0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/quill-emoji/-/quill-emoji-0.1.7.tgz#8c9f8c542e361c79a208030203626d23c28439cc"
+  integrity sha512-GgU3F2ijTFzcbuCNuIQDqTg/+C3Jo/ZGlYux81CUbYrgaEyysFdGpm0SvnrMxod2EbgducV6wfk+fsge1yPAVA==
   dependencies:
     emoji-data-css "^1.0.1"
     fuse.js "^3.3.0"

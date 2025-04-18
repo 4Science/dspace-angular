@@ -13,7 +13,6 @@ import { NavbarModule } from '../../app/navbar/navbar.module';
 import { ExploreModule } from '../../app/shared/explore/explore.module';
 import { ExplorePageComponent } from './app/explore-page/explore-page.component';
 import { HomePageComponent } from './app/home-page/home-page.component';
-import { HomePageModule } from '../../app/home-page/home-page.module';
 import { StatisticsModule } from '../../app/statistics/statistics.module';
 import { OpenaireModule } from '../../app/openaire/openaire.module';
 import { SearchComponent } from './app/shared/search/search.component';
@@ -72,7 +71,6 @@ const DECLARATIONS = [
     RootModule,
     NavbarModule,
     ExploreModule,
-    HomePageModule,
     StatisticsModule,
     OpenaireModule,
     CarouselModule,

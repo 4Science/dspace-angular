@@ -1,18 +1,31 @@
-import 'quill-emoji/dist/quill-emoji.js';
-import { Component, EventEmitter, Input, Output, SecurityContext } from '@angular/core';
+import {
+  AfterViewInit, ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  Output,
+  PLATFORM_ID,
+  SecurityContext
+} from '@angular/core';
 import { ContentChange, QuillModules } from 'ngx-quill';
 import { DomSanitizer } from '@angular/platform-browser';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'ds-markdown-editor',
   templateUrl: './markdown-editor.component.html',
   styleUrls: ['./markdown-editor.component.scss']
 })
-export class MarkdownEditorComponent  {
+export class MarkdownEditorComponent implements AfterViewInit {
   /**
    * Markdown Editor String value
    */
   @Input() editValue = '';
+  /**
+   * Whether the field is required
+   */
+  @Input() required: boolean;
   /**
    * Markdown Editor String value Emitter
    */
@@ -41,7 +54,34 @@ export class MarkdownEditorComponent  {
     syntax: false
   };
 
-  constructor(private sanitizer: DomSanitizer) {}
+  modulesLoaded = false;
+
+  constructor(
+    private sanitizer: DomSanitizer,
+    private cdr: ChangeDetectorRef,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
+
+  async ngAfterViewInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      try {
+        const quillImport = await import('quill');
+        const quill = quillImport.default || quillImport;
+
+        if (!quill || typeof quill.register !== 'function') {
+          console.error('Quill not loaded correctly:', quill);
+          return;
+        }
+        // Wait for the quill-emoji module
+        await import('quill-emoji');
+
+        this.modulesLoaded = true;
+        this.cdr.detectChanges();
+      } catch (error) {
+        console.error('Error during Quill initialization:', error);
+      }
+    }
+  }
 
 
   /**
@@ -51,5 +91,5 @@ export class MarkdownEditorComponent  {
   updateContent(content: ContentChange) {
     const sanitizedContent = this.sanitizer.sanitize(SecurityContext.HTML, content.html);
     this.editValueChange.emit(sanitizedContent);
-}
+  }
 }
