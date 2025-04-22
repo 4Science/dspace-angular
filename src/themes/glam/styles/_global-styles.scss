@@ -116,3 +116,25 @@ ds-metric-donuts a {
 .padded-metadata-background-overlay > ds-metadata-container > div {
   padding: 1rem;
 }
+// context menu toggle custom style as it is not themeable
+ds-context-help-toggle {
+  a {
+    padding: 0.5rem;
+    display: block;
+    vertical-align: middle;
+    line-height: 1.2;
+
+    i {
+      font-size: 17.5px !important;
+    }
+  }
+  @media screen and (min-width: map-get($grid-breakpoints, md)) {
+    .ds-context-help-toggle {
+      color: var(--bs-navbar-light-color) !important;
+      &:hover, &:focus {
+        color: var(--bs-navbar-light-color-hover) !important;
+      }
+    }
+  }
+}
+
