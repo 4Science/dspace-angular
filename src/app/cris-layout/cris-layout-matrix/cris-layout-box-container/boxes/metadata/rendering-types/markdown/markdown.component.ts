@@ -15,12 +15,4 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
 @MetadataBoxFieldRendering(FieldRenderingType.MARKDOWN)
 export class MarkdownComponent extends RenderingTypeValueModelComponent {
 
-  /**
-   * Id for truncable component
-   */
-  truncableId: string;
-
-  ngOnInit(): void {
-    this.truncableId = `${this.item.id}_${this.field.metadata}`;
-  }
 }

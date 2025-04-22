@@ -39,6 +39,13 @@ export const collectionFormCorrectionSubmissionDefinitionSelectionConfig: Dynami
   disabled: false
 };
 
+export const collectionFormIiifViewerSubmissionDefinitionSelectionConfig: DynamicSelectModelConfig<string> = {
+  id: 'iiifViewerSubmissionDefinition',
+  name: 'viewer.mirador.download',
+  required: false,
+  disabled: false
+};
+
 export const collectionFormSharedWorkspaceCheckboxConfig: DynamicCheckboxModelConfig = {
   id: 'sharedWorkspace',
   name: 'cris.workspace.shared',

@@ -56,7 +56,7 @@ import {
   imports: [
     RouterModule.forRoot([
       { path: INTERNAL_SERVER_ERROR, component: ThemedPageInternalServerErrorComponent, data: { title: INTERNAL_SERVER_ERROR } },
-      { path: ERROR_PAGE , component: ThemedPageErrorComponent, data: { title: ERROR_PAGE} },
+      { path: ERROR_PAGE , component: ThemedPageErrorComponent, data: { title: ERROR_PAGE}  },
       {
         path: '',
         canActivate: [AuthBlockingGuard],
@@ -320,7 +320,7 @@ import {
             loadChildren: () => import('./invitation/invitation.module')
               .then((m) => m.InvitationModule)
           },
-          { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent, canActivate: [RedirectService], data: { title: PAGE_NOT_FOUND_PATH } },
+          { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent, canActivate: [RedirectService], data: { title: PAGE_NOT_FOUND_PATH }  },
         ]
       }
     ], {

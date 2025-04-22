@@ -1418,6 +1418,8 @@
 
   "pagination.next.button.disabled.tooltip": "No more pages of results",
 
+  "pagination.page-number-bar": "Control bar for page navigation, relative to element with ID: ",
+
   "browse.startsWith": ", starting with {{ startsWith }}",
 
   "browse.startsWith.choose_start": "(Choose start)",
@@ -1743,7 +1745,15 @@
 
   "collection.form.correctionSubmissionDefinition": "Submission definition for correction request",
 
+  "collection.form.iiifViewerSubmissionDefinition": "Download configuration for IIIF viewer",
 
+  "collection.form.iiifViewerSubmissionDefinition.all": "Enable download for single images and multi-pages PDF",
+
+  "collection.form.iiifViewerSubmissionDefinition.no": "Disable all download options",
+
+  "collection.form.iiifViewerSubmissionDefinition.single-image": "Enable download for single images only",
+
+  "collection.form.iiifViewerSubmissionDefinition.alternative": "Enable download for multi-pages PDF only",
 
   "collection.listelement.badge": "Collection",
 
@@ -1895,7 +1905,7 @@
 
   "community.edit.notifications.unauthorized": "You do not have privileges to make this change",
 
-  "community.edit.notifications.error": "An error occured while editing the community",
+  "community.edit.notifications.error": "An error occurred while editing the community",
 
   "community.edit.return": "Back",
 
@@ -2371,7 +2381,7 @@
 
   "curation.form.submit.error.head": "Running the curation task failed",
 
-  "curation.form.submit.error.content": "An error occured when trying to start the curation task.",
+  "curation.form.submit.error.content": "An error occurred when trying to start the curation task.",
 
   "curation.form.submit.error.invalid-handle": "Couldn't determine the handle for this object",
 
@@ -2392,6 +2402,8 @@
   "deny-request-copy.success": "Successfully denied item request",
 
   "discoverable.search.results.head": "Search Results",
+
+  "dynamic-list.load-more": "Load more",
 
   "dropdown.clear": "Clear selection",
 
@@ -2586,6 +2598,8 @@
   "error.objects": "Error fetching objects",
 
   "error.recent-submissions": "Error fetching recent submissions",
+
+  "error.profile-groups": "Error retrieving profile groups",
 
   "error.search-results": "Error fetching search results",
 
@@ -2957,7 +2971,7 @@
 
   "forgot-email.form.error.head": "Error when trying to reset password",
 
-  "forgot-email.form.error.content": "An error occured when attempting to reset the password for the account associated with the following email address: {{ email }}",
+  "forgot-email.form.error.content": "An error occurred when attempting to reset the password for the account associated with the following email address: {{ email }}",
 
   "forgot-password.title": "Forgot Password",
 
@@ -3006,6 +3020,12 @@
   "form.clear-help": "Click here to remove the selected value",
 
   "form.copy": "Duplicate",
+
+  "form.date-picker.placeholder.year": "Year",
+
+  "form.date-picker.placeholder.month": "Month",
+
+  "form.date-picker.placeholder.day": "Day",
 
   "form.discard": "Discard",
 
@@ -3365,6 +3385,10 @@
 
   "item.edit.bitstreams.bundle.name": "BUNDLE: {{ name }}",
 
+  "item.edit.bitstreams.bundle.table.aria-label": "Bitstreams in the  {{ bundle }} Bundle",
+
+  "item.edit.bitstreams.bundle.tooltip": "You can move a bitstream to a different page by dropping it on the page number.",
+
   "item.edit.bitstreams.discard-button": "Discard",
 
   "item.edit.bitstreams.edit.buttons.download": "Download",
@@ -3377,7 +3401,19 @@
 
   "item.edit.bitstreams.edit.buttons.undo": "Undo changes",
 
+  "item.edit.bitstreams.edit.live.cancel": "{{ bitstream }} was returned to position {{ toIndex }} and is no longer selected.",
+
+  "item.edit.bitstreams.edit.live.clear": "{{ bitstream }} is no longer selected.",
+
+  "item.edit.bitstreams.edit.live.loading": "Waiting for move to complete.",
+
+  "item.edit.bitstreams.edit.live.select": "{{ bitstream }} is selected.",
+
+  "item.edit.bitstreams.edit.live.move": "{{ bitstream }} is now in position {{ toIndex }}.",
+
   "item.edit.bitstreams.empty": "This item doesn't contain any bitstreams. Click the upload button to create one.",
+
+  "item.edit.bitstreams.info-alert": "Bitstreams can be reordered within their bundles by holding the drag handle and moving the mouse. Alternatively, bitstreams can be moved using the keyboard in the following way: Select the bitstream by pressing enter when the bitstream's drag handle is in focus. Move the bitstream up or down using the arrow keys. Press enter again to confirm the current position of the bitstream.",
 
   "item.edit.bitstreams.headers.actions": "Actions",
 
@@ -3414,6 +3450,8 @@
   "item.edit.bitstreams.save-button": "Save",
 
   "item.edit.bitstreams.upload-button": "Upload",
+
+  "item.edit.bitstreams.load-more.link": "Load more",
 
   "item.edit.delete.cancel": "Cancel",
 
@@ -4805,6 +4843,10 @@
 
   "mydspace.results.is-correction": "Is a request of correction",
 
+  "mydspace.results.in-workflow-since": "In workflow since:",
+
+  "mydspace.results.in-workflow-for": "In workflow for:",
+
   "mydspace.search-form.placeholder": "Search in MyDSpace...",
 
   "mydspace.show.workflow": "Workflow tasks",
@@ -5511,7 +5553,7 @@
 
   "register-page.registration.error.head": "Error when trying to register email",
 
-  "register-page.registration.error.content": "An error occured when registering the following email address: {{ email }}",
+  "register-page.registration.error.content": "An error occurred when registering the following email address: {{ email }}",
 
   "register-page.registration.error.recaptcha": "Error when trying to authenticate with recaptcha",
 
@@ -6250,11 +6292,11 @@
 
   "search.view-switch.show-list": "Show as list",
 
-  "social.component.title": "Social Share",
-
   "selectable-list-item-control.deselect": "Deselect item",
 
   "selectable-list-item-control.select": "Select item",
+
+  "social.component.title": "Social Share",
 
   "sorting.ASC": "Ascending",
 
@@ -6620,6 +6662,18 @@
   "statistics.table.itemReports.title.TopCategories": "Top categories",
 
   "statistics.table.itemReports.title.TotalVisitsPerMonth": "Top views per month",
+
+  "statistics.table.publicationsReports.header.item": "Item",
+
+  "statistics.table.publicationsReports.header.views": "Views",
+
+  "statistics.table.publicationsReports.header.city": "City",
+
+  "statistics.table.projectsReports.header.item": "Item",
+
+  "statistics.table.projectsReports.header.views": "Views",
+
+  "statistics.table.projectsReports.header.city": "City",
 
   "statistics.reports.title": "Reports",
 
@@ -7249,6 +7303,8 @@
 
   "submission.sections.submit.progressbar.itemAccessConditions": "Item access conditions",
 
+  "error.validation.accessconditions.required": "You must provide a value for the access condition",
+
   "submission.sections.submit.progressbar.CClicense": "Creative commons license",
 
   "submission.sections.submit.progressbar.custom-url": "Custom url",
@@ -7517,15 +7573,18 @@
 
   "submission.sections.unpaywall.refresh": "Refresh",
 
-  "submission.sections.unpaywall.import": "Import from unpaywall",
+  "submission.sections.unpaywall.import": "Import from Unpaywall",
 
-  "submission.sections.unpaywall.status.successful": "You can import from unpaywall",
+  "submission.sections.unpaywall.status.error": "An unexpected error has occurred.",
 
-  "submission.sections.unpaywall.status.not-found": "Can't find record using Unpaywall api",
+  "submission.sections.unpaywall.status.successful": "There are available files to import from Unpaywall.",
 
-  "submission.sections.unpaywall.status.pending": "Unpaywall api request is initialized",
+  "submission.sections.unpaywall.status.not-found": "Cannot find record using Unpaywall API.",
 
-  "submission.sections.unpaywall.status.no-file": "There are no files to be imported",
+  "submission.sections.unpaywall.status.pending": "Unable to retrieve information from the Unpaywall service. You can use the refresh button to manually check if an answer has been received.",
+
+  "submission.sections.unpaywall.status.no-file": "There are no available files to be imported.",
+
   "submission.sections.unpaywall.status.imported": "The Unpaywall resource has been imported!",
 
   "submission.sections.submit.progressbar.unpaywall": "Unpaywall",
@@ -7555,6 +7614,22 @@
   "submission.workflow.generic.submit_score": "Rate",
 
   "submission.workflow.generic.submit_score-help": "",
+
+  "submission.workflow.tasks.bulk.item.success": "Operation successful for {{itemNumber}} items",
+
+  "submission.workflow.tasks.bulk.item.error": "Skipped action for {{itemNumber}} items",
+
+  "submission.workflow.tasks.pool.claim.selected": "Claim selected",
+
+  "submission.workflow.tasks.claimed.approve.selected": "Approve selected",
+
+  "submission.workflow.tasks.claimed.reject.selected.submit": "Reject selected",
+
+  "submission.workflow.tasks.claimed.return.selected": "Return selected to pool",
+
+  "submission.workflow.tasks.pool.claim_selected_help": "Assign selected tasks to yourself.",
+
+  "submission.workflow.tasks.claimed.approve_selected_help": "Approve selected tasks.",
 
   "submission.workflow.tasks.claimed.approve": "Approve",
 
@@ -8200,6 +8275,10 @@
 
   "person.orcid.registry.auth": "ORCID Authorizations",
 
+  "person.orcid-tooltip.authenticated": "{{orcid}}",
+
+  "person.orcid-tooltip.not-authenticated": "{{orcid}} (unconfirmed)",
+
   "home.recent-submissions.head": "Recent Submissions",
 
   "relation.rp.researchoutputs.search.results.head": "Related Publications",
@@ -8270,6 +8349,8 @@
   "coin.page.titleprefix": "Coin: ",
   "scientificmaterial.page.titleprefix": "Scientific Material: ",
   "musicallibrettos.page.titleprefix": "Musical Librettos: ",
+  "webannotation.page.titleprefix": "Web Annotation: ",
+  "personalannotation.page.titleprefix": "Personal Annotation: ",
 
   "aggregation.listelement.badge": "Aggregation",
   "news.listelement.badge": "News",
@@ -8279,6 +8360,8 @@
   "coin.listelement.badge": "Coin",
   "scientificmaterial.listelement.badge": "Scientific Material",
   "musicallibrettos.listelement.badge": "Musical Librettos",
+  "webannotation.listelement.badge": "Web Annotation",
+  "personalannotation.listelement.badge": "Personal Annotation",
 
   "picture.listelement.badge": "Picture",
   "menu.section.explore_sectionfonds": "Fonds",
@@ -8423,6 +8506,10 @@
   "submission.sections.submit.progressbar.describe.bnm_scheme_geolocalization": "Geolocation",
 
   "submission.sections.submit.progressbar.describe.bnm_scheme_relation": "Relationships",
+
+  "submission.sections.submit.progressbar.describe.web_annotation": "Web Annotation",
+
+  "submission.sections.submit.progressbar.describe.personal_annotation": "Personal Annotation",
 
   "map.coordinates-invalid": "Coordinates are not valid",
 
@@ -8615,6 +8702,24 @@
   "process.overview.unknown.user": "Unknown",
 
   "browse.search-form.placeholder": "Search the repository",
+
+  "file-download-link.download": "Download ",
+
+  "register-page.registration.aria.label": "Enter your e-mail address",
+
+  "forgot-email.form.aria.label": "Enter your e-mail address",
+
+  "search-facet-option.update.announcement": "The page will be reloaded. Filter {{ filter }} is selected.",
+
+  "live-region.ordering.instructions": "Press spacebar to reorder {{ itemName }}.",
+
+  "live-region.ordering.status": "{{ itemName }}, grabbed. Current position in list: {{ index }} of  {{ length }}. Press up and down arrow keys to change position, SpaceBar to drop, Escape to cancel.",
+
+  "live-region.ordering.moved": "{{ itemName }}, moved to position {{ index }} of {{ length }}. Press up and down arrow keys to change position, SpaceBar to drop, Escape to cancel.",
+
+  "live-region.ordering.dropped": "{{ itemName }}, dropped at position {{ index }} of {{ length }}.",
+
+  "dynamic-form-array.sortable-list.label": "Sortable list",
 
   "external-login.form.email": "Enter the email",
 
@@ -8930,6 +9035,17 @@
   "layout.box.header.ArchivalMaterial.relationconference": "Events",
   "layout.box.header.ArchivalMaterial.relationproject": "Projects",
   "layout.box.header.ArchivalMaterial.relationplace": "Places",
+
+  "layout.box.header.WebAnnotation.relationsubject": "Subject",
+  "layout.box.header.WebAnnotation.relationperson": "Person",
+  "layout.box.header.WebAnnotation.relationplace": "Place",
+  "layout.box.header.WebAnnotation.relationevent": "Event",
+  "layout.box.header.WebAnnotation.relationpath": "Path",
+  "layout.box.header.WebAnnotation.relationaggregation": "Aggregation",
+  "layout.box.header.WebAnnotation.relationfamily": "Family",
+  "layout.box.header.WebAnnotation.relationitem": "Item",
+  "layout.box.header.WebAnnotation.relationdocument": "Document",
+  "layout.box.header.WebAnnotation.relationannotation": "Annotation",
 
   "layout.box.header.Aggregation.aggregationdescription": "Description",
   "layout.box.header.Aggregation.aggregationindex": "Aggregation Index",
@@ -9613,6 +9729,10 @@
   "layout.field.label.MusicalLibrettos.[dc.relation.person]": "Person",
   "layout.field.label.MusicalLibrettos.[dc.relation.project]": "Project",
   "layout.field.label.MusicalLibrettos.BITSTREAM": "File / Documentation",
+
+  "layout.field.label.WebAnnotation.[dc.description.abstract]": "Abstract",
+  "layout.field.label.WebAnnotation.[glam.annotation.type]": "Annotation Type",
+  "layout.field.label.WebAnnotation.[glam.subject.annotation]": "Subject",
 
   "label.link-text.description-box.section-site.pdl": "Scopri di più",
   "label.title.slider.slider_collections": "Collections",

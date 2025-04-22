@@ -72,6 +72,7 @@
         min-width: $arrow-column-width;
         cursor: pointer;
         color: var(--ds-glam-carousel-controls-color);
+        position: relative;
       }
 
       .caption-wrapper {

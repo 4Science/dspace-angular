@@ -1,4 +1,13 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChange,
+  SimpleChanges
+} from '@angular/core';
 
 import { combineLatest, Observable, of as observableOf } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
@@ -25,7 +34,7 @@ import { SubmissionDefinitionModel } from '../../core/config/models/config-submi
 import { catchError } from 'rxjs/operators';
 import {
   collectionFormCorrectionSubmissionDefinitionSelectionConfig,
-  collectionFormEntityTypeSelectionConfig,
+  collectionFormEntityTypeSelectionConfig, collectionFormIiifViewerSubmissionDefinitionSelectionConfig,
   collectionFormModels,
   collectionFormSharedWorkspaceCheckboxConfig,
   collectionFormSubmissionDefinitionSelectionConfig
@@ -35,6 +44,7 @@ import { ConfigObject } from '../../core/config/models/config.model';
 import { NONE_ENTITY_TYPE } from '../../core/shared/item-relationships/item-type.resource-type';
 import { hasNoValue, isNotNull } from 'src/app/shared/empty.util';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
 
 /**
  * Form used for creating and editing collections
@@ -73,6 +83,12 @@ export class CollectionFormComponent extends ComColFormComponent<Collection> imp
    */
   correctionSubmissionDefinitionSelection: DynamicSelectModel<string> = new DynamicSelectModel(collectionFormCorrectionSubmissionDefinitionSelectionConfig);
 
+  /**
+   * The dynamic form field used for IIIF viewer download config selection
+   * @type {DynamicSelectModel<string>}
+   */
+  iiifViewerSubmissionDefinition: DynamicSelectModel<string> = new DynamicSelectModel(collectionFormIiifViewerSubmissionDefinitionSelectionConfig);
+
   sharedWorkspaceChekbox: DynamicCheckboxModel = new DynamicCheckboxModel(collectionFormSharedWorkspaceCheckboxConfig);
 
   /**
@@ -80,6 +96,8 @@ export class CollectionFormComponent extends ComColFormComponent<Collection> imp
    * @type {DynamicFormControlModel[]}
    */
   formModel: DynamicFormControlModel[];
+
+  iiifViewerSelectOptions: DynamicFormControlModel;
 
   public constructor(protected formService: DynamicFormService,
                      protected translate: TranslateService,
@@ -91,7 +109,8 @@ export class CollectionFormComponent extends ComColFormComponent<Collection> imp
                      protected entityTypeService: EntityTypeDataService,
                      protected chd: ChangeDetectorRef,
                      protected modalService: NgbModal,
-                     protected submissionDefinitionService: SubmissionDefinitionsConfigDataService) {
+                     protected submissionDefinitionService: SubmissionDefinitionsConfigDataService,
+                     @Inject(APP_CONFIG) private appConfig: AppConfig) {
     super(formService, translate, notificationsService, authService, requestService, objectCache, modalService);
   }
 
@@ -117,12 +136,26 @@ export class CollectionFormComponent extends ComColFormComponent<Collection> imp
     let currentDefinitionValue: MetadataValue[];
     let currentCorrectionDefinitionValue: MetadataValue[];
     let currentSharedWorkspaceValue: MetadataValue[];
+    let currentIiifDownloadValue: MetadataValue[];
     if (this.dso && this.dso.metadata) {
       currentRelationshipValue = this.dso.metadata['dspace.entity.type'];
       currentDefinitionValue = this.dso.metadata['cris.submission.definition'];
       currentCorrectionDefinitionValue = this.dso.metadata['cris.submission.definition-correction'];
       currentSharedWorkspaceValue = this.dso.metadata['cris.workspace.shared'];
+      currentIiifDownloadValue = this.dso.metadata[' viewer.mirador.download'];
     }
+
+    this.appConfig.mirador.downloadSelectOptions.forEach((option, index) => {
+      this.iiifViewerSubmissionDefinition.add({
+        disabled: false,
+        label: this.translate.instant(`collection.form.${this.iiifViewerSubmissionDefinition.id}.${option}`),
+        value: option
+      } as DynamicFormOptionConfig<string>);
+
+      if (currentIiifDownloadValue && currentIiifDownloadValue.length > 0 && currentIiifDownloadValue[0].value === option) {
+        this.iiifViewerSubmissionDefinition.select(index);
+      }
+    });
 
     const entities$: Observable<ItemType[]> = this.entityTypeService.findAll({ elementsPerPage: 100, currentPage: 1 }).pipe(
       getFirstSucceededRemoteListPayload()
@@ -174,8 +207,8 @@ export class CollectionFormComponent extends ComColFormComponent<Collection> imp
         });
 
         this.formModel = sortedEntityTypes.length === 0 ?
-          [...collectionFormModels, this.submissionDefinitionSelection, this.correctionSubmissionDefinitionSelection, this.sharedWorkspaceChekbox] :
-          [...collectionFormModels, this.entityTypeSelection, this.submissionDefinitionSelection, this.correctionSubmissionDefinitionSelection, this.sharedWorkspaceChekbox];
+          [...collectionFormModels, this.submissionDefinitionSelection, this.correctionSubmissionDefinitionSelection, this.iiifViewerSelectOptions, this.sharedWorkspaceChekbox] :
+          [...collectionFormModels, this.entityTypeSelection, this.submissionDefinitionSelection, this.correctionSubmissionDefinitionSelection, this.iiifViewerSubmissionDefinition, this.sharedWorkspaceChekbox];
 
         super.ngOnInit();
 

@@ -53,8 +53,8 @@ import {
 } from '../../../core/submission/models/workspaceitem-section-upload-file.model';
 
 const DOI_METADATA = 'dc.identifier.doi';
-const API_CHECK_INTERVAL = 3000;
-const MAX_TRIES = 5;
+const API_CHECK_INTERVAL = 5000;
+const MAX_TRIES = 2;
 
 function attemptsGuardFactory(maxAttempts: number) {
   return (attemptsCount: number) => {
@@ -204,6 +204,8 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
       this.loading$.next(isLoading);
       if (!isLoading) {
         this.stopFetch$.next();
+      } else if (unpaywall?.status === UnpaywallSectionStatus.PENDING) {
+        this.notificationsService.warning(this.translate.instant('submission.sections.unpaywall.status.pending'));
       }
     });
   }
@@ -217,12 +219,6 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
 
   protected handleStatusNotification(status: UnpaywallSectionStatus) {
     switch (status) {
-      case UnpaywallSectionStatus.NOT_FOUND:
-        this.notificationsService.error(this.translate.instant('submission.sections.unpaywall.status.not-found'));
-        break;
-      case UnpaywallSectionStatus.NO_FILE:
-        this.notificationsService.warning(this.translate.instant('submission.sections.unpaywall.status.no-file'));
-        break;
       case UnpaywallSectionStatus.SUCCESSFUL:
         this.notificationsService.success(this.translate.instant('submission.sections.unpaywall.status.successful'));
         break;
@@ -293,7 +289,7 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
           this.notificationsService.error(err?.message);
           return of(Object.assign({}, {
             ...this.unpaywallSection$.getValue(),
-            status: UnpaywallSectionStatus.NO_FILE
+            status: UnpaywallSectionStatus.ERROR
           }));
         }),
       ).subscribe((unpaywall) => {
@@ -357,7 +353,9 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
   }
 
   private getDoiMetadataValue(value: SubmissionObjectEntry): string {
-    return value.sections[value.definition]?.data?.[DOI_METADATA]?.[0]?.value;
+    return Object.values(value.sections)
+      .find((section) => section?.data?.[DOI_METADATA]?.[0]?.value !== undefined)
+      ?.data?.[DOI_METADATA]?.[0]?.value;
   }
 
   private hideCurrentSection(): void {

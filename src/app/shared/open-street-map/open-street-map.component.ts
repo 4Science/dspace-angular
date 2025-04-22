@@ -1,15 +1,10 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
-import {
-  LocationDDCoordinates,
-  LocationErrorCodes,
-  LocationPlace,
-  LocationService
-} from '../../core/services/location.service';
-import { filter, map, tap } from 'rxjs/operators';
+import { LocationService, LocationDDCoordinates, LocationPlace, LocationErrorCodes } from '../../core/services/location.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { filter, map, tap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { isNotEmpty } from '../empty.util';
-import { icon, latLng, LatLng, Layer, MapOptions, marker, tileLayer } from 'leaflet';
+import { icon, LatLng, latLng, Layer, MapOptions, marker, tileLayer } from 'leaflet';
 
 @Component({
   selector: 'ds-open-street-map',
@@ -66,7 +61,7 @@ export class OpenStreetMapComponent implements OnInit {
   /**
    * Contains error codes from the location service
    */
-  invalidLocationErrorCode: BehaviorSubject<string> = new BehaviorSubject(undefined);
+  invalidLocationErrorCode = new BehaviorSubject<string>(undefined);
 
   /**
    * The place to be shown in the map
@@ -76,7 +71,7 @@ export class OpenStreetMapComponent implements OnInit {
   /**
    * The styles that are being applied to the map container
    */
-  mapStyle: {[key: string]: string} = {};
+  mapStyle: { [key: string]: string } = {};
 
   /**
    * The center of the map
@@ -96,11 +91,7 @@ export class OpenStreetMapComponent implements OnInit {
   /**
    * The options for the map
    */
-  leafletOptions: MapOptions = {
-    // attribution is still needed
-    // attributionControl: false,
-    zoomControl: this.showControlsZoom
-  };
+  leafletOptions: MapOptions = { zoomControl: this.showControlsZoom };
 
   constructor(
     protected translateService: TranslateService,
@@ -109,104 +100,75 @@ export class OpenStreetMapComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.mapStyle = {
       width: this.width || '100%',
       height: this.height || `${(+this.width || this.elementRef.nativeElement.parentElement.offsetWidth) / 2}px`
     };
 
     this.coordinates$ = this.place.asObservable().pipe(
-      filter((place) => isNotEmpty(place)),
-      map((place) => place.coordinates),
+      filter(isNotEmpty),
+      map(place => place.coordinates),
       tap(coordinates => this.setCenterAndPointer(coordinates))
     );
 
     this.displayName$ = this.place.asObservable().pipe(
-      filter((place) => isNotEmpty(place)),
-      map((place) => place.displayName),
+      filter(isNotEmpty),
+      map(place => place.displayName)
     );
 
-    const position = this.coordinates; // this may contain a pair or coordinates, a POI, or an address
+    const position = this.coordinates;
 
     if (this.locationService.isDecimalCoordinateString(position)) {
-
-      // Validate the coordinates, then retrieve the location name
-
-      if (this.locationService.isValidCoordinateString(position)) {
-        const coordinates = this.locationService.parseCoordinates(position);
-        this.locationService.searchByCoordinates(coordinates).subscribe({
-          next: (displayName) => {
-            const place: LocationPlace = {
-              coordinates: coordinates,
-              displayName: displayName, // Show the name retrieved from Nominatim
-            };
-            this.place.next(place);
-          },
-          error: (err) => {
-            // show the map centered on provided coordinates despite the possibility to retrieve a description for the place
-            const place: LocationPlace = {
-              coordinates: coordinates,
-            };
-            this.place.next(place);
-            if (err.message === LocationErrorCodes.API_ERROR) {
-              console.error(err.message);
-            } else {
-              console.warn(err.message);
-            }
-          },
-        });
-      } else {
-        console.error(`Invalid coordinates: "${position}"`);
-        this.invalidLocationErrorCode.next(LocationErrorCodes.INVALID_COORDINATES);
-      }
-
+      this.handleDecimalCoordinates(position);
     } else if (this.locationService.isSexagesimalCoordinateString(position)) {
-
-      // Retrieve the decimal coordinates and the place name for the provided coordinates
-
-      this.locationService.findPlaceAndDecimalCoordinates(position).subscribe({
-        next: (place) => {
-          this.place.next(place);
-        },
-        error: (err) => {
-          this.invalidLocationErrorCode.next(err.message); // either INVALID_COORDINATES or API_ERROR
-          if (err.message === LocationErrorCodes.API_ERROR) {
-            console.error(err.message);
-          } else {
-            console.warn(err.message);
-          }
-        },
-      });
-
+      this.handleSexagesimalCoordinates(position);
     } else {
-
-      // Retrieve the coordinates for the provided POI or address
-
-      this.locationService.findPlaceCoordinates(position).subscribe({
-        next: (place) => {
-          place.displayName = position; // Show the name stored in metadata (comment out to show name retrieved from Nominatim)
-          this.place.next(place);
-        },
-        error: (err) => {
-          this.invalidLocationErrorCode.next(err.message); // either LOCATION_NOT_FOUND or API_ERROR
-          if (err.message === LocationErrorCodes.API_ERROR) {
-            console.error(err.message);
-          } else {
-            console.warn(err.message);
-          }
-        },
-      });
+      this.handlePlaceOrAddress(position);
     }
+  }
 
+  private handleDecimalCoordinates(position: string) {
+    if (this.locationService.isValidCoordinateString(position)) {
+      const coordinates = this.locationService.parseCoordinates(position);
+      this.locationService.searchByCoordinates(coordinates).subscribe({
+        next: displayName => this.place.next({ coordinates, displayName }),
+        error: err => this.handleError(err, coordinates)
+      });
+    } else {
+      this.invalidLocationErrorCode.next(LocationErrorCodes.INVALID_COORDINATES);
+    }
+  }
+
+  private handleSexagesimalCoordinates(position: string) {
+    this.locationService.findPlaceAndDecimalCoordinates(position).subscribe({
+      next: place => this.place.next(place),
+      error: err => this.handleError(err, this.locationService.parseCoordinates(position))
+    });
+  }
+
+  private handlePlaceOrAddress(position: string) {
+    this.locationService.findPlaceCoordinates(position).subscribe({
+      next: place => {
+        place.displayName = position;
+        this.place.next(place);
+      },
+      error: err => this.handleError(err, this.locationService.parseCoordinates(position))
+    });
+  }
+
+  private handleError(err: any, coordinates: LocationDDCoordinates) {
+    this.invalidLocationErrorCode.next(err.message);
+    this.place.next({ coordinates });
+    console.error(err.message);
   }
 
   private setCenterAndPointer(coordinates: LocationDDCoordinates) {
     this.leafletCenter = latLng(+coordinates.latitude, +coordinates.longitude);
     this.leafletLayers = [
-      tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 18, attribution: 'Leaflet'}),
-      marker(
-        [+coordinates.latitude, +coordinates.longitude],
-        {icon: icon({iconUrl: 'assets/images/marker-icon.png', shadowUrl: 'assets/images/marker-shadow.png'})})
+      tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: 'Leaflet' }),
+      marker([+coordinates.latitude, +coordinates.longitude], {
+        icon: icon({ iconUrl: 'assets/images/marker-icon.png', shadowUrl: 'assets/images/marker-shadow.png' })
+      })
     ];
   }
 }

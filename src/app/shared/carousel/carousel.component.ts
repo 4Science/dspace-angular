@@ -1,15 +1,26 @@
 import { ItemSearchResult } from '../object-collection/shared/item-search-result.model';
 import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, from, Observable } from 'rxjs';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { NativeWindowRef, NativeWindowService } from '../../core/services/window.service';
 import { CarouselOptions } from './carousel-options.model';
 import { Item } from '../../core/shared/item.model';
-import { BitstreamImagesService } from '../../core/services/bitstream-images.service';
 import difference from 'lodash/difference';
-import { reduce, take } from 'rxjs/operators';
-import { isNotEmpty } from '../empty.util';
+import { filter, map, mergeMap, reduce, switchMap, take } from 'rxjs/operators';
+import { hasValue, isNotEmpty } from '../empty.util';
+import { InternalLinkService } from '../../core/services/internal-link.service';
+import { SearchManager } from '../../core/browse/search-manager';
+import { followLink } from '../utils/follow-link-config.model';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { SearchObjects } from '../search/models/search-objects.model';
+import { RemoteData } from '../../core/data/remote-data';
+import { PaginatedList } from '../../core/data/paginated-list.model';
+import { Bitstream } from '../../core/shared/bitstream.model';
+import { BitstreamFormat } from '../../core/shared/bitstream-format.model';
+import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
+import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
+import { SortOptions } from '../../core/cache/models/sort-options.model';
 
 /**
  * Component representing the Carousel component section.
@@ -73,10 +84,9 @@ export class CarouselComponent implements OnInit {
   /**
    * reference to the carousel
    */
-  @ViewChild('carousel', {static: true}) carousel: NgbCarousel;
+  @ViewChild('carousel', {static: false}) carousel: NgbCarousel;
 
-  isLoading$ = new BehaviorSubject(false);
-
+  isLoading$ = new BehaviorSubject(true);
 
   /**
    * The map of the loaded bitstreams
@@ -89,13 +99,23 @@ export class CarouselComponent implements OnInit {
    */
   currentSliderPage = 1;
 
+  /**
+   * Items contained in currently active page
+   */
+  carouselItems$: BehaviorSubject<ItemSearchResult[]> = new BehaviorSubject<ItemSearchResult[]>([]);
+
+  private paginationOptionId: string;
+
   private pageSize = 5;
 
   private slideLoadingBuffer = 2;
 
+
+
   constructor(
     protected bitstreamDataService: BitstreamDataService,
-    protected bitstreamImagesService: BitstreamImagesService,
+    protected searchManager: SearchManager,
+    protected internalLinkService: InternalLinkService,
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
   ) {
   }
@@ -105,8 +125,22 @@ export class CarouselComponent implements OnInit {
     this.link = this.carouselOptions.link;
     this.description = this.carouselOptions.description;
     this.bundle = this.carouselOptions.bundle ?? 'ORIGINAL';
-    this.isLoading$.next(true);
-    this.findAllBitstreamImages(this.items.filter((_,i) => i < this.pageSize)).subscribe((res) => {
+    this.paginationOptionId = 'carousel-search-' + this.carouselOptions.discoveryConfiguration;
+
+    this.retrieveItems().pipe(
+      mergeMap((searchResult: SearchObjects<Item>) => {
+        if (isNotEmpty(searchResult)) {
+          const items = searchResult.page;
+          this.carouselItems$.next(items);
+          this.isLoading$.next(true);
+
+          return this.findAllBitstreamImages(items.filter((_,i) => i <= this.pageSize - 1));
+        } else {
+          return null;
+        }
+      }),
+      take(1)
+    ).subscribe((res) => {
       this.itemToImageHrefMap$.next(res);
       this.isLoading$.next(false);
     });
@@ -132,6 +166,7 @@ export class CarouselComponent implements OnInit {
       (slideEvent.source === NgbSlideEventSource.ARROW_LEFT || slideEvent.source === NgbSlideEventSource.ARROW_RIGHT)) {
       this.togglePaused();
     }
+
     if (this.pauseOnIndicator && !slideEvent.paused && slideEvent.source === NgbSlideEventSource.INDICATOR) {
       this.togglePaused();
     }
@@ -141,6 +176,10 @@ export class CarouselComponent implements OnInit {
 
     if (!this.pageToBitstreamsMap.get(currentPage + 1) && currentSlideIndex + this.slideLoadingBuffer === currentPage * this.pageSize) {
       this.loadNextPageBitstreams();
+    } else if (slideEvent.source === 'indicator' && currentSlideIndex > this.pageSize * this.currentSliderPage) {
+      this.isLoading$.next(true);
+      this.currentSliderPage = currentPage;
+      this.loadNextPageBitstreams();
     }
   }
 
@@ -148,7 +187,32 @@ export class CarouselComponent implements OnInit {
    * Find the first image of each item
    */
   findAllBitstreamImages(items: ItemSearchResult[]): Observable<Map<string, string>> {
-    return this.bitstreamImagesService.getItemToImageMap(items.map((itemSR) => itemSR.indexableObject), this.bundle);
+    this.pageToBitstreamsMap.set(this.currentSliderPage, items);
+
+    return from(items).pipe(
+      map((itemSR) => itemSR.indexableObject),
+      mergeMap((item) => this.bitstreamDataService.showableByItem(
+          item.uuid, this.bundle, [], {}, true, true, followLink('format'),
+        ).pipe(
+          getFirstCompletedRemoteData(),
+          switchMap((rd: RemoteData<PaginatedList<Bitstream>>) => rd.hasSucceeded ? rd.payload.page : []),
+          mergeMap((bitstream: Bitstream) => bitstream.format.pipe(
+            getFirstCompletedRemoteData(),
+            filter((bitstreamFormatRD: RemoteData<BitstreamFormat>) =>
+              bitstreamFormatRD.hasSucceeded && hasValue(bitstreamFormatRD.payload) && hasValue(bitstream) &&
+              bitstreamFormatRD.payload.mimetype.includes('image/')
+            ),
+            map(() => bitstream)
+          )),
+          take(1),
+          map((bitstream: Bitstream) => [item.uuid, bitstream._links.content.href]),
+        ),
+      ),
+      reduce((acc: Map<string, string>, value: [string, string]) => {
+        acc.set(value[0], value[1]);
+        return acc;
+      }, new Map<string, string>()),
+    );
   }
 
   getItemLink(item: Item): string {
@@ -160,17 +224,44 @@ export class CarouselComponent implements OnInit {
   }
 
   /**
-   * to open a link of an item
+   * Retrieve items by the given page number
+   *
    */
-  openLinkUrl(url) {
-    if (url && url[0].value) {
-      this._window.nativeWindow.open(url[0].value, '_blank');
-    }
+  retrieveItems(): Observable<SearchObjects<Item>> {
+    const pagination: PaginationComponentOptions = Object.assign(new PaginationComponentOptions(), {
+      id: this.paginationOptionId,
+      pageSize: this.carouselOptions.numberOfItems,
+      currentPage: 1
+    });
+
+    const paginatedSearchOptions = new PaginatedSearchOptions({
+      configuration: this.carouselOptions.discoveryConfiguration,
+      pagination: pagination,
+      sort: new SortOptions(this.carouselOptions.sortField, this.carouselOptions.sortDirection),
+      projection: 'preventMetadataSecurity'
+    });
+    return this.searchManager.search(paginatedSearchOptions).pipe(
+      getFirstCompletedRemoteData(),
+      map((searchResultsRD: RemoteData<SearchObjects<Item>>) => {
+        if (searchResultsRD.hasSucceeded) {
+          return searchResultsRD.payload;
+        } else {
+          return null;
+        }
+      })
+    );
   }
 
+
+  pages = () => {
+    return Array.from({length: this.carouselOptions.numberOfItems / this.pageSize }, (_, i) => i + 1);
+  };
+
+
   private loadNextPageBitstreams(): void {
+    const items = this.carouselItems$.value;
     const itemsWithLoadedImages = [].concat((Array.from({length: this.currentSliderPage}, (_, i) => i + 1).map(page => this.pageToBitstreamsMap.get(page))));
-    const itemsWithoutBistreamsInNextPage = difference(this.items, itemsWithLoadedImages).filter(item => (this.items.indexOf(item) > itemsWithLoadedImages.length - 1) && this.items.indexOf(item) < (this.currentSliderPage + 1) * this.pageSize);
+    const itemsWithoutBistreamsInNextPage = difference(items, itemsWithLoadedImages).filter(item => (items.indexOf(item) > itemsWithLoadedImages.length - 1) && items.indexOf(item) < (this.currentSliderPage + 1) * this.pageSize);
 
     this.findAllBitstreamImages(itemsWithoutBistreamsInNextPage).pipe(
       take(1),
@@ -182,6 +273,7 @@ export class CarouselComponent implements OnInit {
       if (isNotEmpty(itemToImageHrefMap)) {
         this.itemToImageHrefMap$.next(new Map([...Array.from(this.itemToImageHrefMap$.value.entries()), ...Array.from(itemToImageHrefMap.entries())]));
       }
+      this.isLoading$.next(false);
     }));
 
   }

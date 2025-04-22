@@ -14,6 +14,11 @@ export const environment: BuildConfig = {
     async: true,
     time: false,
     inlineCriticalCss: false,
+    transferState: true,
+    replaceRestUrl: false,
+    paths: [ '/home', '/items/', '/entities/', '/collections/', '/communities/', '/bitstream/', '/bitstreams/', '/handle/', '/reload/' ],
+    enableSearchComponent: false,
+    enableBrowseComponent: false,
   },
 
   // Angular Universal server settings.
@@ -276,6 +281,8 @@ export const environment: BuildConfig = {
       metadata: ['dc.contributor.author']
     }
   ],
+  followAuthorityMaxItemLimit: 100,
+  followAuthorityMetadataValuesLimit: 5,
   item: {
     edit: {
       undoTimeout: 10000 // 10 seconds
@@ -372,11 +379,25 @@ export const environment: BuildConfig = {
     }
   ],
 
+  liveRegion: {
+    messageTimeOutDurationMs: 30000,
+    isVisible: false,
+  },
+
+  search: {
+    filterPlaceholdersCount: 5
+  },
+
   crisLayout: {
     urn: [
       {
         name: 'doi',
         baseUrl: 'https://doi.org/'
+      },
+      {
+        name: 'keepMyWhiteSpaces',
+        baseUrl: 'https://keepmywhitespaces.com/',
+        shouldKeepWhiteSpaces: true
       },
       {
         name: 'hdl',
@@ -620,6 +641,10 @@ export const environment: BuildConfig = {
 
   mirador: {
     enableDownloadPlugin: true,
+    enableAnnotationServer: false,
+    downloadMetadataConfig: 'viewer.mirador.download',
+    downloadRestConfig: 'viewer.mirador.download.default',
+    downloadSelectOptions: [ 'all', 'no', 'alternative', 'single-image'],
   },
 
   loader: {

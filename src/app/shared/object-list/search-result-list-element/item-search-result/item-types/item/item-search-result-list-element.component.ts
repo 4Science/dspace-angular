@@ -15,8 +15,11 @@ import { TruncatableService } from '../../../../../truncatable/truncatable.servi
 import { DSONameService } from '../../../../../../core/breadcrumbs/dso-name.service';
 import { APP_CONFIG, AppConfig } from '../../../../../../../config/app-config.interface';
 import { getFirstSucceededRemoteListPayload } from '../../../../../../core/shared/operators';
+import { differenceInDays, differenceInMilliseconds, parseISO} from 'date-fns';
 import { filter, map } from 'rxjs/operators';
 import { isNotEmpty } from '../../../../../empty.util';
+import { MetadataValueFilter } from '../../../../../../core/shared/metadata.models';
+import { PLACEHOLDER_VALUE } from '../../../../../../core/shared/metadata.utils';
 
 @listableObjectComponent('PublicationSearchResult', ViewMode.ListElement)
 @listableObjectComponent(ItemSearchResult, ViewMode.ListElement)
@@ -52,6 +55,11 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
   fullTextHighlights: string[];
 
   hasLoadedThirdPartyMetrics$: Observable<boolean>;
+
+  readonly placeholderFilter: MetadataValueFilter = {
+    negate: true,
+    value: PLACEHOLDER_VALUE
+  };
 
   private thirdPartyMetrics = environment.info.metricsConsents.filter(metric => metric.enabled).map(metric => metric.key);
 
@@ -98,6 +106,14 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
         })
       );
     }
+  }
+
+  getDateForItem(itemStartDate: string) {
+    const itemStartDateConverted: Date = parseISO(itemStartDate);
+    const days: number = Math.floor(differenceInDays(Date.now(), itemStartDateConverted));
+    const remainingMilliseconds: number = differenceInMilliseconds(Date.now(), itemStartDateConverted) - days * 24 * 60 * 60 * 1000;
+    const hours: number = Math.floor(remainingMilliseconds / (60 * 60 * 1000));
+    return `${days} d ${hours} h`;
   }
 
   /**

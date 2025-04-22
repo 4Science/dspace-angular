@@ -1,5 +1,5 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 
 import { Observable, Subscription } from 'rxjs';
 
@@ -27,6 +27,11 @@ export type VocabularyTreeItemType = FormFieldMetadataValueObject | VocabularyEn
   styleUrls: ['./vocabulary-treeview.component.scss']
 })
 export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges {
+
+  /**
+   * Implemented to manage focus on input
+   */
+  @ViewChild('searchInput') searchInput!: ElementRef;
 
   /**
    * The {@link VocabularyOptions} object
@@ -72,6 +77,11 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges
    * Whether the component is used as a relation component
    */
   @Input() isRelationComponent = false;
+
+  /**
+   * Whether to load all available nodes
+   */
+  @Input() loadAllNodes = false;
 
   /**
    * A map containing the current node showed by the tree
@@ -233,7 +243,7 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges
     this.loading = this.vocabularyTreeviewService.isLoading();
 
     const entryId: string = (this.selectedItems?.length > 0) ? this.getEntryId(this.selectedItems[0]) : null;
-    this.vocabularyTreeviewService.initialize(this.vocabularyOptions, new PageInfo(), this.getSelectedEntryIds(), entryId, this.publicModeOnly, this.isRelationComponent);
+    this.vocabularyTreeviewService.initialize(this.vocabularyOptions, new PageInfo(), this.getSelectedEntryIds(), entryId, this.publicModeOnly, this.isRelationComponent, this.loadAllNodes);
   }
 
   /**
@@ -257,7 +267,7 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges
    * @param node The TreeviewFlatNode for which to load children nodes
    */
   loadChildren(node: TreeviewFlatNode) {
-    this.vocabularyTreeviewService.loadMore(node.item, this.getSelectedEntryIds(), true);
+    this.vocabularyTreeviewService.loadMore(node.item, this.getSelectedEntryIds(), true, this.loadAllNodes);
   }
 
   /**
@@ -318,6 +328,9 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges
       this.storedNodeMap = new Map<string, TreeviewFlatNode>();
       this.vocabularyTreeviewService.restoreNodes();
     }
+    if (this.searchInput) {
+      this.searchInput.nativeElement.focus();
+    }
   }
 
   add() {
@@ -363,7 +376,7 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges
       this.selectedItems = [];
       this.searchText = '';
       this.vocabularyTreeviewService.cleanTree();
-      this.vocabularyTreeviewService.initialize(this.vocabularyOptions, new PageInfo(), this.getSelectedEntryIds(), null);
+      this.vocabularyTreeviewService.initialize(this.vocabularyOptions, new PageInfo(), this.getSelectedEntryIds(), null, null, this.isRelationComponent);
     }
   }
 }

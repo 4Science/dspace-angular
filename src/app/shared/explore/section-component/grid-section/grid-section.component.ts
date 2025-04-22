@@ -16,13 +16,14 @@ import { Site } from '../../../../core/shared/site.model';
 import { LocaleService } from '../../../../core/locale/locale.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject, from } from 'rxjs';
-import { filter, map, mergeMap, scan, switchMap, take } from 'rxjs/operators';
-import { Item } from '../../../../core/shared/item.model';
-import { Bitstream } from '../../../../core/shared/bitstream.model';
-import { BitstreamFormat } from '../../../../core/shared/bitstream-format.model';
-import {hasValue, isEmpty, isNotEmpty} from '../../../empty.util';
-import { BitstreamDataService } from '../../../../core/data/bitstream-data.service';
+import { BehaviorSubject, filter, from, map, mergeMap, scan, switchMap, take } from 'rxjs';
+import { BitstreamDataService } from 'src/app/core/data/bitstream-data.service';
+import { Item } from 'src/app/core/shared/item.model';
+import { Bitstream } from 'src/app/core/shared/bitstream.model';
+import { BitstreamFormat } from 'src/app/core/shared/bitstream-format.model';
+import { hasValue } from 'src/app/shared/empty.util';
+import { getItemPageRoute } from 'src/app/item-page/item-page-routing-paths';
+
 /**
  * Component representing the Grid component section.
  */
@@ -109,19 +110,11 @@ export class GridSectionComponent implements OnInit {
         {language: this.locale.getCurrentLanguageCode()});
 
     }
-
-    this.maincontentBadge = (hasValue(this.maincontentBadge) && isNotEmpty(this.maincontentBadge)) ?
-                            this.maincontentBadge : this.translateService.instant('grid.component.badge');
-    this.maincontentTitle = (hasValue(this.maincontentTitle) && isNotEmpty(this.maincontentTitle)) ?
-                            this.maincontentTitle : this.translateService.instant('grid.component.title');
-    this.maincontentSubtitle = (hasValue(this.maincontentSubtitle) && isNotEmpty(this.maincontentSubtitle)) ?
-                               this.maincontentSubtitle : this.translateService.instant('grid.component.subtitle');
-    this.maincontentAbstract = (hasValue(this.maincontentAbstract) && isNotEmpty(this.maincontentAbstract)) ?
-                               this.maincontentAbstract : this.translateService.instant('grid.component.abstract');
-
-    if (isEmpty(this.maincontentLink)) {
-      this.maincontentLink = this.gridSection.mainContentLink ?? this.translateService.instant('grid.component.link');
-    }
+    this.maincontentBadge = this.maincontentBadge ?? this.translateService.instant('grid.component.badge');
+    this.maincontentTitle = this.maincontentTitle ?? this.translateService.instant('grid.component.title');
+    this.maincontentSubtitle = this.maincontentSubtitle ?? this.translateService.instant('grid.component.subtitle');
+    this.maincontentAbstract = this.maincontentAbstract ?? this.translateService.instant('grid.component.abstract');
+    this.maincontentLink = this.maincontentLink ?? this.translateService.instant('grid.component.link');
   }
 
   private getSearchResults() {
@@ -169,6 +162,15 @@ export class GridSectionComponent implements OnInit {
 
   }
 
+
+  /**
+   * to get the route of the item
+   * @param item
+   * @returns route to the item as a string
+   */
+  getItemPageRoute(item: DSpaceObject) {
+    return getItemPageRoute(item as Item);
+  }
 
   goToMainContentLink() {
     this.router.navigateByUrl(this.maincontentLink);

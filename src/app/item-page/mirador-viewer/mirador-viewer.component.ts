@@ -3,19 +3,25 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Item } from '../../core/shared/item.model';
 import { environment } from '../../../environments/environment';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
-import { Observable, of } from 'rxjs';
+import { combineLatest, Observable, of, switchMap } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 import { MiradorViewerService } from './mirador-viewer.service';
 import { HostWindowService, WidthCategory } from '../../shared/host-window.service';
 import { BundleDataService } from '../../core/data/bundle-data.service';
+import { ConfigurationDataService } from '../../core/data/configuration-data.service';
+import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { MiradorMetadataDownloadValue } from '../../../config/mirador-config.interfaces';
+import { DspaceRestService } from '../../core/dspace-rest/dspace-rest.service';
+
 
 @Component({
   selector: 'ds-mirador-viewer',
   styleUrls: ['./mirador-viewer.component.scss'],
   templateUrl: './mirador-viewer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ MiradorViewerService ]
+  providers: [MiradorViewerService]
 })
 export class MiradorViewerComponent implements OnInit {
 
@@ -58,11 +64,16 @@ export class MiradorViewerComponent implements OnInit {
 
   viewerMessage = 'Sorry, the Mirador viewer is not currently available in development mode.';
 
+  private downloadConfigKey: string;
+
   constructor(private sanitizer: DomSanitizer,
               private viewerService: MiradorViewerService,
               private bitstreamDataService: BitstreamDataService,
               private bundleDataService: BundleDataService,
               private hostWindowService: HostWindowService,
+              private configurationDataService: ConfigurationDataService,
+              private restService: DspaceRestService,
+              @Inject(APP_CONFIG) private appConfig: AppConfig,
               @Inject(PLATFORM_ID) private platformId: any) {
   }
 
@@ -70,7 +81,7 @@ export class MiradorViewerComponent implements OnInit {
    * Creates the url for the Mirador iframe. Adds parameters for the displaying the search panel, query results,
    * or  multi-page thumbnail navigation.
    */
-  setURL() {
+  setURL(downloadEnabled = true) {
     // The path to the REST manifest endpoint.
     const manifestApiEndpoint = encodeURIComponent(environment.rest.baseUrl + '/iiif/'
       + this.object.id + '/manifest');
@@ -95,14 +106,19 @@ export class MiradorViewerComponent implements OnInit {
     if (this.canvasId) {
       viewerPath += `&canvasId=${this.canvasId}`;
     }
-    if (environment.mirador.enableDownloadPlugin) {
+    if (downloadEnabled && this.appConfig.mirador.enableDownloadPlugin) {
       viewerPath += '&enableDownloadPlugin=true';
+    }
+    if (environment.mirador.enableAnnotationServer) {
+      viewerPath += '&enableAnnotationServer=true';
+    }
+    if (environment.mirador.annotationServerUrl) {
+      viewerPath += '&annotationServerUrl=' + environment.mirador.annotationServerUrl;
     }
     if (this.canvasId) {
       viewerPath += `&canvasId=${this.canvasId}`;
     }
 
-    // TODO: Should the query term be trusted here?
     return this.sanitizer.bypassSecurityTrustResourceUrl(viewerPath);
   }
 
@@ -111,10 +127,9 @@ export class MiradorViewerComponent implements OnInit {
      * Initializes the iframe url observable.
      */
     if (isPlatformBrowser(this.platformId)) {
-
+      this.downloadConfigKey = this.appConfig.mirador.downloadMetadataConfig;
       // Viewer is not currently available in dev mode so hide it in that case.
       this.isViewerAvailable = this.viewerService.showEmbeddedViewer();
-
       // The notMobile property affects the thumbnail navigation
       // menu by hiding it for smaller viewports. This will not be
       // responsive to resizing.
@@ -131,9 +146,9 @@ export class MiradorViewerComponent implements OnInit {
       if (this.searchable) {
         this.multi = true;
         const observable = of('');
-        this.iframeViewerUrl = observable.pipe(
-          map((val) => {
-            return this.setURL();
+        this.iframeViewerUrl = this.isDownloadEnabled$().pipe(
+          map(( downloadEnabled) => {
+            return this.setURL(downloadEnabled);
           })
         );
       } else {
@@ -142,15 +157,51 @@ export class MiradorViewerComponent implements OnInit {
         this.iframeViewerUrl = this.viewerService.getImageCount(
           this.object,
           this.bitstreamDataService,
-          this.bundleDataService).pipe(
-          map(c => {
+          this.bundleDataService
+        ).pipe(
+          switchMap(c => combineLatest([of(c), this.isDownloadEnabled$()])),
+          map(([c, downloadEnabled]) => {
             if (c > 1) {
               this.multi = true;
             }
-            return this.setURL();
+            return this.setURL(downloadEnabled);
           })
         );
       }
     }
+
   }
+
+  /**
+   * Check whether to include download plugin
+   */
+  isDownloadEnabled$(): Observable<boolean> {
+    return combineLatest([
+      this.configurationDataService.findByPropertyName(this.appConfig.mirador.downloadRestConfig)
+        .pipe(
+          getFirstCompletedRemoteData()
+        ),
+      this.object.owningCollection
+        .pipe(getFirstCompletedRemoteData())
+    ]).pipe(
+      map(([restPropertyDownloadConfig, owningCollection]) =>
+        (this.object.firstMetadataValue(this.downloadConfigKey) ||
+          owningCollection?.payload?.firstMetadataValue(this.downloadConfigKey) ||
+          restPropertyDownloadConfig?.payload?.values[0]) as MiradorMetadataDownloadValue
+      ),
+      switchMap((downloadLevel) => {
+        return this.getIiifDownloadConfig().pipe(
+          map((downloadConfig) => downloadLevel && downloadConfig.includes(downloadLevel)),
+        );
+      })
+    );
+  }
+
+  getIiifDownloadConfig(): Observable<MiradorMetadataDownloadValue[]> {
+    const href = `${this.appConfig.rest.baseUrl}/iiif/${this.object.id}/download`;
+    return this.restService.get(href).pipe(
+      map(res => res.payload as MiradorMetadataDownloadValue[])
+    );
+  }
+
 }
