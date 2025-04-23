@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FieldRenderingType, MetadataBoxFieldRendering } from '../metadata-box.decorator';
 
 import { BitstreamRenderingModelComponent } from '../bitstream-rendering-model';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Bitstream } from '../../../../../../../core/shared/bitstream.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { getPaginatedListPayload } from '../../../../../../../core/shared/operators';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -20,22 +21,29 @@ export class ImageComponent extends BitstreamRenderingModelComponent implements 
 
   imageUrl$: Observable<string>;
 
+  platformId = inject(PLATFORM_ID);
+
+  isLoading = true;
+  isBrowser: boolean;
+
   ngOnInit(): void {
+    this.isBrowser = isPlatformBrowser(this.platformId);
     this.getBitstreamsByItem().pipe(
       getPaginatedListPayload(),
-      map((filteredBitstreams: Bitstream[]) => filteredBitstreams.length > 0 ? filteredBitstreams[0] : null)
+      map((filteredBitstreams: Bitstream[]) => filteredBitstreams.length > 0 ? filteredBitstreams[0] : null),
+      catchError(() => {
+        this.isLoading = false;
+        return of(null);
+      }),
     ).subscribe((image) => {
       this.bitstream.next(image);
+      this.isLoading = false;
     });
 
     this.imageUrl$ = this.bitstream.asObservable().pipe(
       map((bitstream) => bitstream?._links?.content?.href),
     );
 
-  }
-
-  backgroundImageUrl(url: string) {
-    return `url('${url}')`;
   }
 
 }

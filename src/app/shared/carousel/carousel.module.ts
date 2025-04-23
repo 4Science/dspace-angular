@@ -4,6 +4,7 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared.module';
 import { ThemedCarouselComponent } from './themed-carousel.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 const COMPONENTS = [
     ThemedCarouselComponent,
@@ -12,14 +13,15 @@ const COMPONENTS = [
 
 const MODULES = [
     NgbCarouselModule,
-    CommonModule
+    CommonModule,
+    NgxSkeletonLoaderModule
 ];
 const PROVIDERS = [];
 
 @NgModule({
     imports: [
         ...MODULES,
-        SharedModule
+        SharedModule,
     ],
   declarations: [
     ...COMPONENTS

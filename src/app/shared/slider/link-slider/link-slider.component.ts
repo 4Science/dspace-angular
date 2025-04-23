@@ -2,7 +2,7 @@ import { Item } from '../../../core/shared/item.model';
 import { NativeWindowRef, NativeWindowService } from '../../../core/services/window.service';
 import { SearchManager } from '../../../core/browse/search-manager';
 import { BitstreamDataService } from '../../../core/data/bitstream-data.service';
-import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { SliderComponent } from '../slider.component';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { BitstreamImagesService } from 'src/app/core/services/bitstream-images.service';
@@ -41,8 +41,9 @@ export class LinkSliderComponent extends SliderComponent implements OnInit, OnDe
     protected searchManager: SearchManager,
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
     protected breakpointObserver: BreakpointObserver,
+    @Inject(PLATFORM_ID) protected platformId: string,
   ) {
-    super(bitstreamDataService, bitstreamImagesService, cdr, searchManager, _window);
+    super(bitstreamDataService, bitstreamImagesService, cdr, searchManager, _window, platformId);
   }
 
   ngOnInit(): void {

@@ -6,13 +6,14 @@ import { DSpaceObjectType } from '../../core/shared/dspace-object-type.model';
 import { SortDirection, SortOptions } from '../../core/cache/models/sort-options.model';
 import { Item } from '../../core/shared/item.model';
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
-import { ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnInit, Output, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject, map, mergeMap, Observable, take } from 'rxjs';
 import { BitstreamImagesService } from '../../core/services/bitstream-images.service';
 import { SearchObjects } from '../search/models/search-objects.model';
 import { hasValue, isNotEmpty } from '../empty.util';
 import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   template: ''
@@ -129,16 +130,20 @@ export abstract class SliderComponent implements OnInit {
 
   readonly placeholderSrc = 'assets/images/replacement_image.svg';
 
+  isBrowser: boolean;
+
   constructor(
     protected bitstreamDataService: BitstreamDataService,
     protected bitstreamImagesService: BitstreamImagesService,
     protected cdr: ChangeDetectorRef,
     protected searchManager: SearchManager,
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
+    @Inject(PLATFORM_ID) protected platformId: string,
   ) {
   }
 
   ngOnInit() {
+    this.isBrowser = isPlatformBrowser(this.platformId);
     this.initLoading$.next(true);
     this.retrieveItems().pipe(
       mergeMap((searchResult: SearchObjects<Item>) => {

@@ -372,6 +372,7 @@ import {
   ThemedCardsBrowseElementsComponent
 } from './browse-most-elements/cards-browse-elements/themed-cards-browse-elements.component';
 import { BackgroundImageDirective } from './utils/background-image.directive';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 const MODULES = [
   CommonModule,
@@ -391,7 +392,8 @@ const MODULES = [
   MenuModule,
   NgxPaginationModule,
   MetricsModule,
-  NgbModule
+  NgbModule,
+  NgxSkeletonLoaderModule,
 ];
 
 const ROOT_MODULES = [

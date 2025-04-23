@@ -3,6 +3,7 @@ import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.com
 import { map, Observable, switchMap } from 'rxjs';
 import { BitstreamImagesService } from '../../../core/services/bitstream-images.service';
 import { Item } from '../../../core/shared/item.model';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'ds-images-browse-elements',
@@ -26,6 +27,7 @@ export class ImagesBrowseElementsComponent extends AbstractBrowseElementsCompone
   totalElements$: Observable<number>;
 
   ngOnInit() {
+    this.isBrowser = isPlatformBrowser(this.platformId);
     super.ngOnInit();
 
     this.itemToImageHrefMap$ = this.searchResultArray$.pipe(

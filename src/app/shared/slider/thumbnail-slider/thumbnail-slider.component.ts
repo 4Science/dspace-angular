@@ -17,6 +17,7 @@ import {
   OnChanges,
   OnInit,
   Output,
+  PLATFORM_ID,
   SimpleChanges,
   ViewChild,
   ViewChildren,
@@ -109,8 +110,9 @@ export class ThumbnailSliderComponent extends SliderComponent implements OnInit,
     protected searchManager: SearchManager,
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
     @Inject(SEARCH_CONFIG_SERVICE) private searchConfigService: SearchConfigurationService,
+    @Inject(PLATFORM_ID) protected platformId: string,
   ) {
-    super(bitstreamDataService, bitstreamImagesService, cdr, searchManager, _window);
+    super(bitstreamDataService, bitstreamImagesService, cdr, searchManager, _window, platformId);
   }
 
   /**
