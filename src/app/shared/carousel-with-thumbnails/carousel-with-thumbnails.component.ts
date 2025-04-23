@@ -30,7 +30,6 @@ import { Item } from '../../core/shared/item.model';
 import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
 import { CarouselOptions } from '../carousel/carousel-options.model';
 import { HostWindowService } from '../host-window.service';
-import { ThumbnailSliderComponent } from '../slider/thumbnail-slider/thumbnail-slider.component';
 
 @Component({
   selector: 'ds-base-carousel-with-thumbnails',

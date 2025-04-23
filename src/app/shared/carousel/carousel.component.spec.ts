@@ -23,7 +23,6 @@ import {
   TranslateModule,
 } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
-import { InternalLinkService } from 'src/app/core/services/internal-link.service';
 
 import { toRemoteData } from '../../browse-by/browse-by-metadata/browse-by-metadata.component.spec';
 import { SearchManager } from '../../core/browse/search-manager';
@@ -36,6 +35,7 @@ import { DSOChangeAnalyzer } from '../../core/data/dso-change-analyzer.service';
 import { FindListOptions } from '../../core/data/find-list-options.model';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { RemoteData } from '../../core/data/remote-data';
+import { InternalLinkService } from '../../core/services/internal-link.service';
 import {
   NativeWindowRef,
   NativeWindowService,
