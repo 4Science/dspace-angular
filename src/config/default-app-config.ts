@@ -875,6 +875,7 @@ export class DefaultAppConfig implements AppConfig {
     downloadMetadataConfig: 'viewer.mirador.download',
     downloadRestConfig: 'viewer.mirador.download.default',
     downloadSelectOptions: [ 'all', 'no', 'alternative', 'single-image'],
+    allowedOrigins: []
   };
 
   loader: LoaderConfig = {
