@@ -6,15 +6,11 @@
       </a>
     </div>
     <div class="navbar-buttons d-flex flex-grow-1 ml-auto justify-content-end align-items-center gapx-1">
-      <div class="nav-item" id="home-icon" *ngIf="mainSiteUrl">
-        <a [attr.aria-label]="'nav.mainSiteName' | translate"  target="_blank" [href]="'https://' + mainSiteUrl" [ngbTooltip]="'nav.mainSiteName' | translate">
-          <i class="fas fa-home fa-lg fa-fw"></i>
-        </a>
-      </div>
+      <ds-mobile-search-navbar></ds-mobile-search-navbar>
       <ds-themed-lang-switch></ds-themed-lang-switch>
       <ds-context-help-toggle></ds-context-help-toggle>
-      <ds-themed-auth-nav-menu></ds-themed-auth-nav-menu>
-      <div class="pl-2">
+      <!--      <ds-themed-auth-nav-menu></ds-themed-auth-nav-menu>-->
+      <div>
         <button class="navbar-toggler" type="button" (click)="toggleNavbar()"
                 aria-controls="collapsingNav"
                 aria-expanded="false" [attr.aria-label]="'nav.toggle' | translate">
