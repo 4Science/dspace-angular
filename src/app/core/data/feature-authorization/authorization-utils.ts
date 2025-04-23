@@ -111,5 +111,5 @@ export const getNormalizedUuid = (dso: DSpaceObject): string => {
  * Method to create an identifier for auth request based on params
  */
 export const getRequestIdFromParams = (type: string, uuidList: string[], featureIDs: FeatureID[]): string => {
-  return  type.concat(...uuidList).concat(...featureIDs);
+  return  type?.concat(...uuidList)?.concat(...featureIDs);
 };

@@ -57,7 +57,7 @@ describe('AuthorizationEffects success', () => {
         }
       });
 
-      const expected = cold('--b-', { b: new GetAuthorizationsSuccessAction({})});
+      const expected = cold('--b-', { b: new GetAuthorizationsSuccessAction({}, '')});
 
       expect(authorizationEffects.getAuthorizations$).toBeObservable(expected);
       done();
@@ -95,7 +95,7 @@ describe('AuthorizationEffects error', () => {
 
   describe('getAuthorizations$ when request fails', () => {
     it('should return a new GetAuthorizationsErrorAction', (done) => {
-      actions = of(new GetAuthorizationsAction([mockAuthSiteObject.uuid], mockAuthSiteObject.uniqueType, featureIDs ));
+      actions = of(new GetAuthorizationsAction([mockAuthSiteObject.uuid], mockAuthSiteObject.uniqueType, featureIDs, [mockAuthSiteObject._links.self.href] ));
 
       authorizationEffects.getAuthorizations$.subscribe(expected => {
         expect(expected).toEqual(new GetAuthorizationsErrorAction());

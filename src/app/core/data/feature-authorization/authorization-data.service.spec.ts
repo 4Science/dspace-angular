@@ -2,7 +2,7 @@ import { AuthorizationDataService } from './authorization-data.service';
 import { SiteDataService } from '../site-data.service';
 import { Site } from '../../shared/site.model';
 import { EPerson } from '../../eperson/models/eperson.model';
-import { combineLatest as observableCombineLatest, Observable, of as observableOf, of } from 'rxjs';
+import { combineLatest as observableCombineLatest, Observable, of as observableOf } from 'rxjs';
 import { FeatureID } from './feature-id';
 import { hasValue } from '../../../shared/empty.util';
 import { RequestParam } from '../../cache/models/request-param.model';
@@ -48,7 +48,8 @@ describe('AuthorizationDataService', () => {
       isLoading: observableOf(true),
       hasErrors: observableOf(false),
       getSiteAuthorization: observableOf([]),
-      getAuthorizationForObject: observableOf(false),
+      getAuthorizationForObject: observableOf(true),
+      isRequestLoading: observableOf(false),
       initStateForObjects: jasmine.createSpy('initStateForObjects')
     });
     objectCache = getMockObjectCacheService();
@@ -58,8 +59,8 @@ describe('AuthorizationDataService', () => {
   beforeEach(() => {
     init();
     spyOn(service, 'searchBy').and.returnValue(observableOf(undefined));
-    spyOn(authorizationService, 'hasErrors').and.returnValue(of(true));
   });
+
 
   describe('composition', () => {
     const initService = () => new AuthorizationDataService(null, null, null, null, null,null, null);
@@ -214,7 +215,7 @@ describe('AuthorizationDataService', () => {
     const validPayload = [
       Object.assign(new Authorization(), {
         feature: createSuccessfulRemoteDataObject$(Object.assign(new Feature(), {
-          id: 'invalid-feature'
+          id: 'valid-feature'
         }))
       }),
       Object.assign(new Authorization(), {
@@ -226,7 +227,7 @@ describe('AuthorizationDataService', () => {
     const invalidPayload = [
       Object.assign(new Authorization(), {
         feature: createSuccessfulRemoteDataObject$(Object.assign(new Feature(), {
-          id: 'invalid-feature'
+          id: 'valid-feature'
         }))
       }),
       Object.assign(new Authorization(), {
@@ -239,6 +240,7 @@ describe('AuthorizationDataService', () => {
 
     describe('when searchByObject returns a 401', () => {
       beforeEach(() => {
+        authorizationService.getAuthorizationForObject = () => observableOf(false);
         spyOn(service, 'searchByObject').and.returnValue(createFailedRemoteDataObject$('Unauthorized', 401));
       });
 
@@ -253,6 +255,7 @@ describe('AuthorizationDataService', () => {
     describe('when searchByObject returns an empty list', () => {
       beforeEach(() => {
         spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(emptyPayload)));
+        authorizationService.getAuthorizationForObject = () => observableOf(false);
       });
 
       it('should return false', (done) => {
@@ -265,10 +268,11 @@ describe('AuthorizationDataService', () => {
 
     describe('when searchByObject returns an invalid list', () => {
       beforeEach(() => {
+        authorizationService.getAuthorizationForObject = () => observableOf(false);
         spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(invalidPayload)));
       });
 
-      it('should return true', (done) => {
+      it('should return false', (done) => {
         service.isAuthorized(featureID).subscribe((result) => {
           expect(result).toEqual(false);
           done();
@@ -279,6 +283,7 @@ describe('AuthorizationDataService', () => {
     describe('when searchByObject returns a valid list', () => {
       beforeEach(() => {
         spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(validPayload)));
+        authorizationService.getAuthorizationForObject = () => observableOf(true);
       });
 
       it('should return true', (done) => {
@@ -292,9 +297,8 @@ describe('AuthorizationDataService', () => {
 
     describe('it should read value from state if present', () => {
       beforeEach(() => {
-        spyOn(authorizationService, 'getAuthorizationForObject').and.returnValue(of(true));
-        spyOn(authorizationService, 'hasErrors').and.returnValue(of(false));
-        spyOn(authorizationService, 'isLoading').and.returnValue(of(false));
+        spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(validPayload)));
+        authorizationService.getAuthorizationForObject = () => observableOf(true);
       });
 
       it('should return true for object', (done) => {
@@ -307,11 +311,13 @@ describe('AuthorizationDataService', () => {
 
     describe('it should init value in state if is not present', () => {
       beforeEach(() => {
-        spyOn(authorizationService, 'getAuthorizationForObject').and.returnValue(of(undefined));
-        spyOn(authorizationService, 'hasErrors').and.returnValue(of(false));
-        spyOn(authorizationService, 'isLoading').and.returnValue(of(false));
+        spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(validPayload)));
+        authorizationService.getAuthorizationForObject = jasmine.createSpy('getAuthorizationForObject')
+          .and.returnValues(
+            observableOf(undefined),
+            observableOf(true),
+          );
       });
-
       it('should call init method', (done) => {
         service.isAuthorized(featureID).subscribe((result) => {
           expect(authorizationService.initStateForObjects).toHaveBeenCalled();
