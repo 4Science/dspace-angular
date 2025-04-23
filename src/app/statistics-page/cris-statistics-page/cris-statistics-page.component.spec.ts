@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { of, of as observableOf } from 'rxjs';
+import { of as observableOf } from 'rxjs';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 import { CrisStatisticsPageComponent } from './cris-statistics-page.component';
@@ -150,9 +150,9 @@ describe('CrisStatisticsPageComponent', () => {
   it('should set selectedReportId to the first report id if no reportType query param is present', () => {
     const category = { id: 'category1' };
     const reports = [{ id: 'report1', reportType: 'type1' }, { id: 'report2', reportType: 'type2' }];
-    spyOn(component, 'getReports$').and.returnValue(of(reports as UsageReport[]));
-    spyOn(component, 'getReportId').and.returnValue(of(null));
-    spyOn(component, 'getCategoryId').and.returnValue(of(null));
+    spyOn(component, 'getReports$').and.returnValue(observableOf(reports as UsageReport[]));
+    spyOn(component, 'getReportId').and.returnValue(observableOf(null));
+    spyOn(component, 'getCategoryId').and.returnValue(observableOf(null));
     spyOn(component, 'setStatisticsState');
 
     component.getUserReports(category);
@@ -164,9 +164,9 @@ describe('CrisStatisticsPageComponent', () => {
   it('should set selectedReportId to the report id matching the reportType query param', () => {
     const category = { id: 'category1' };
     const reports = [{ id: 'report1', reportType: 'type1' }, { id: 'report2', reportType: 'type2' }];
-    spyOn(component, 'getReports$').and.returnValue(of(reports as UsageReport[]));
-    spyOn(component, 'getReportId').and.returnValue(of(null));
-    spyOn(component, 'getCategoryId').and.returnValue(of(null));
+    spyOn(component, 'getReports$').and.returnValue(observableOf(reports as UsageReport[]));
+    spyOn(component, 'getReportId').and.returnValue(observableOf(null));
+    spyOn(component, 'getCategoryId').and.returnValue(observableOf(null));
     spyOn(component, 'setStatisticsState');
 
     component.getUserReports(category, 'type2');
@@ -178,9 +178,9 @@ describe('CrisStatisticsPageComponent', () => {
   it('should set selectedReportId to the first report id if reportType query param does not match any report', () => {
     const category = { id: 'category1' };
     const reports = [{ id: 'report1', reportType: 'type1' }, { id: 'report2', reportType: 'type2' }];
-    spyOn(component, 'getReports$').and.returnValue(of(reports as UsageReport[]));
-    spyOn(component, 'getReportId').and.returnValue(of(null));
-    spyOn(component, 'getCategoryId').and.returnValue(of(null));
+    spyOn(component, 'getReports$').and.returnValue(observableOf(reports as UsageReport[]));
+    spyOn(component, 'getReportId').and.returnValue(observableOf(null));
+    spyOn(component, 'getCategoryId').and.returnValue(observableOf(null));
     spyOn(component, 'setStatisticsState');
 
     component.getUserReports(category, 'non_existing_type');
@@ -192,9 +192,9 @@ describe('CrisStatisticsPageComponent', () => {
   it('should set selectedReportId and categoryId from state if they exist', () => {
     const category = { id: 'category1' };
     const reports = [{ id: 'report1', reportType: 'type1' }, { id: 'report2', reportType: 'type2' }];
-    spyOn(component, 'getReports$').and.returnValue(of(reports as UsageReport[]));
-    spyOn(component, 'getReportId').and.returnValue(of('report1'));
-    spyOn(component, 'getCategoryId').and.returnValue(of('category1'));
+    spyOn(component, 'getReports$').and.returnValue(observableOf(reports as UsageReport[]));
+    spyOn(component, 'getReportId').and.returnValue(observableOf('report1'));
+    spyOn(component, 'getCategoryId').and.returnValue(observableOf('category1'));
     spyOn(component, 'setStatisticsState');
 
     component.getUserReports(category);
@@ -203,9 +203,9 @@ describe('CrisStatisticsPageComponent', () => {
   });
 
   it('should handle null category gracefully', () => {
-    spyOn(component, 'getReports$').and.returnValue(of([]));
-    spyOn(component, 'getReportId').and.returnValue(of(null));
-    spyOn(component, 'getCategoryId').and.returnValue(of(null));
+    spyOn(component, 'getReports$').and.returnValue(observableOf([]));
+    spyOn(component, 'getReportId').and.returnValue(observableOf(null));
+    spyOn(component, 'getCategoryId').and.returnValue(observableOf(null));
     spyOn(component, 'setStatisticsState');
 
     component.getUserReports(null);
