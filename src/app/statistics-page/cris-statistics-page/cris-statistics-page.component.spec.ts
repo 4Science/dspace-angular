@@ -23,6 +23,7 @@ import { TranslateLoaderMock } from '../../shared/mocks/translate-loader.mock';
 
 import { provideMockStore } from '@ngrx/store/testing';
 import { StatisticsState } from '../../core/statistics/statistics.reducer';
+import { UsageReport } from '../../core/statistics/models/usage-report.model';
 
 describe('CrisStatisticsPageComponent', () => {
 
@@ -144,6 +145,73 @@ describe('CrisStatisticsPageComponent', () => {
         component.selectedReportId = data[0].id;
       });
       fixture.detectChanges();
+  });
+
+  it('should set selectedReportId to the first report id if no reportType query param is present', () => {
+    const category = { id: 'category1' };
+    const reports = [{ id: 'report1', reportType: 'type1' }, { id: 'report2', reportType: 'type2' }];
+    spyOn(component, 'getReports$').and.returnValue(observableOf(reports as UsageReport[]));
+    spyOn(component, 'getReportId').and.returnValue(observableOf(null));
+    spyOn(component, 'getCategoryId').and.returnValue(observableOf(null));
+    spyOn(component, 'setStatisticsState');
+
+    component.getUserReports(category);
+
+    expect(component.setStatisticsState).toHaveBeenCalledWith('report1', 'category1');
+    expect(component.selectedReportId).toBe('report1');
+  });
+
+  it('should set selectedReportId to the report id matching the reportType query param', () => {
+    const category = { id: 'category1' };
+    const reports = [{ id: 'report1', reportType: 'type1' }, { id: 'report2', reportType: 'type2' }];
+    spyOn(component, 'getReports$').and.returnValue(observableOf(reports as UsageReport[]));
+    spyOn(component, 'getReportId').and.returnValue(observableOf(null));
+    spyOn(component, 'getCategoryId').and.returnValue(observableOf(null));
+    spyOn(component, 'setStatisticsState');
+
+    component.getUserReports(category, 'type2');
+
+    expect(component.setStatisticsState).toHaveBeenCalledWith('report2', 'category1');
+    expect(component.selectedReportId).toBe('report2');
+  });
+
+  it('should set selectedReportId to the first report id if reportType query param does not match any report', () => {
+    const category = { id: 'category1' };
+    const reports = [{ id: 'report1', reportType: 'type1' }, { id: 'report2', reportType: 'type2' }];
+    spyOn(component, 'getReports$').and.returnValue(observableOf(reports as UsageReport[]));
+    spyOn(component, 'getReportId').and.returnValue(observableOf(null));
+    spyOn(component, 'getCategoryId').and.returnValue(observableOf(null));
+    spyOn(component, 'setStatisticsState');
+
+    component.getUserReports(category, 'non_existing_type');
+
+    expect(component.setStatisticsState).toHaveBeenCalledWith('report1', 'category1');
+    expect(component.selectedReportId).toBe('report1');
+  });
+
+  it('should set selectedReportId and categoryId from state if they exist', () => {
+    const category = { id: 'category1' };
+    const reports = [{ id: 'report1', reportType: 'type1' }, { id: 'report2', reportType: 'type2' }];
+    spyOn(component, 'getReports$').and.returnValue(observableOf(reports as UsageReport[]));
+    spyOn(component, 'getReportId').and.returnValue(observableOf('report1'));
+    spyOn(component, 'getCategoryId').and.returnValue(observableOf('category1'));
+    spyOn(component, 'setStatisticsState');
+
+    component.getUserReports(category);
+
+    expect(component.setStatisticsState).toHaveBeenCalledWith('report1', 'category1');
+  });
+
+  it('should handle null category gracefully', () => {
+    spyOn(component, 'getReports$').and.returnValue(observableOf([]));
+    spyOn(component, 'getReportId').and.returnValue(observableOf(null));
+    spyOn(component, 'getCategoryId').and.returnValue(observableOf(null));
+    spyOn(component, 'setStatisticsState');
+
+    component.getUserReports(null);
+
+    expect(component.setStatisticsState).not.toHaveBeenCalled();
+    expect(component.selectedReportId).toBeUndefined();
   });
 
 });

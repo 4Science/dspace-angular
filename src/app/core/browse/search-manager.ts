@@ -45,7 +45,7 @@ export class SearchManager {
    * @returns {Observable<RemoteData<PaginatedList<Item>>>}
    */
   getBrowseItemsFor(filterValue: string, filterAuthority: string, options: BrowseEntrySearchOptions, ...linksToFollow: FollowLinkConfig<any>[]): Observable<RemoteData<PaginatedList<Item>>> {
-    const browseOptions = Object.assign({}, options, { projection: 'preventMetadataSecurity' });
+    const browseOptions = Object.assign({}, options, { projection: options.projection ?? 'preventMetadataSecurity' });
     return this.browseService.getBrowseItemsFor(filterValue, filterAuthority, browseOptions, ...linksToFollow)
       .pipe(this.completeWithExtraData());
   }
@@ -67,7 +67,8 @@ export class SearchManager {
     useCachedVersionIfAvailable = true,
     reRequestOnStale = true,
     ...linksToFollow: FollowLinkConfig<T>[]): Observable<RemoteData<SearchObjects<T>>> {
-    return this.searchService.search(searchOptions, responseMsToLive, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow)
+    const optionsWithDefaultProjection = Object.assign(new PaginatedSearchOptions({}), searchOptions, { projection: searchOptions.projection ?? 'preventMetadataSecurity' });
+    return this.searchService.search(optionsWithDefaultProjection, responseMsToLive, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow)
       .pipe(this.completeSearchObjectsWithExtraData());
   }
 
@@ -112,7 +113,8 @@ export class SearchManager {
       })
       .filter((item) => hasValue(item));
 
-    const uuidList = this.extractUUID(items, environment.followAuthorityMetadata);
+    const uuidList = this.extractUUID(items, environment.followAuthorityMetadata, environment.followAuthorityMaxItemLimit);
+
     return uuidList.length > 0 ? this.itemService.findAllById(uuidList).pipe(
       getFirstCompletedRemoteData(),
       map(data => {
@@ -125,26 +127,30 @@ export class SearchManager {
     ) : of(null);
   }
 
-  protected extractUUID(items: Item[], metadataToFollow: FollowAuthorityMetadata[]): string[] {
+  protected extractUUID(items: Item[], metadataToFollow: FollowAuthorityMetadata[], numberOfElementsToReturn?: number): string[] {
     const uuidMap = {};
 
     items.forEach((item) => {
       metadataToFollow.forEach((followMetadata: FollowAuthorityMetadata) => {
         if (item.entityType === followMetadata.type) {
           if (isArray(followMetadata.metadata)) {
-            followMetadata.metadata.forEach((metadata) => {
-              Metadata.all(item.metadata, metadata)
+              followMetadata.metadata.forEach((metadata) => {
+              Metadata.all(item.metadata, metadata, null, environment.followAuthorityMetadataValuesLimit)
                 .filter((metadataValue: MetadataValue) => Metadata.hasValidItemAuthority(metadataValue.authority))
                 .forEach((metadataValue: MetadataValue) => uuidMap[metadataValue.authority] = metadataValue);
             });
           } else {
-            Metadata.all(item.metadata, followMetadata.metadata)
+            Metadata.all(item.metadata, followMetadata.metadata, null, environment.followAuthorityMetadataValuesLimit)
               .filter((metadataValue: MetadataValue) => Metadata.hasValidItemAuthority(metadataValue.authority))
               .forEach((metadataValue: MetadataValue) => uuidMap[metadataValue.authority] = metadataValue);
           }
         }
       });
     });
+
+    if (hasValue(numberOfElementsToReturn) && numberOfElementsToReturn > 0) {
+      return Object.keys(uuidMap).slice(0, numberOfElementsToReturn);
+    }
 
     return Object.keys(uuidMap);
   }

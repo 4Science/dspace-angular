@@ -31,10 +31,9 @@ import { APP_CONFIG, AppConfig } from '../config/app-config.interface';
 import { StoreDevModules } from '../config/store/devtools';
 import { GooglemapsModule } from './shared/googlemaps/googlemaps.module';
 import { RootModule } from './root.module';
-import { NuMarkdownModule } from '@ng-util/markdown';
+import { DspaceRestInterceptor } from './core/dspace-rest/dspace-rest.interceptor';
 import { FooterModule } from './footer/footer.module';
 import { SocialModule } from './social/social.module';
-import { DspaceRestInterceptor } from './core/dspace-rest/dspace-rest.interceptor';
 import { DirectivesModule } from './directives/directives.module';
 
 export function getConfig() {
@@ -59,7 +58,6 @@ const IMPORTS = [
   HttpClientModule,
   AppRoutingModule,
   GooglemapsModule,
-  NuMarkdownModule.forRoot({}),
   CoreModule.forRoot(),
   ScrollToModule.forRoot(),
   NgbModule,
@@ -114,6 +112,7 @@ const PROVIDERS = [
     useClass: LogInterceptor,
     multi: true
   },
+  // register DspaceRestInterceptor as HttpInterceptor
   {
     provide: HTTP_INTERCEPTORS,
     useClass: DspaceRestInterceptor,

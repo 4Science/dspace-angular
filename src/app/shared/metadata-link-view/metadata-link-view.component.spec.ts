@@ -92,7 +92,7 @@ describe('MetadataLinkViewComponent', () => {
   const testMetadataName = ['dc.contributor.author'];
 
   itemService = jasmine.createSpyObj('ItemDataService', {
-    findById: jasmine.createSpy('findById')
+    findByIdWithProjections: jasmine.createSpy('findByIdWithProjections')
   });
 
   beforeEach(waitForAsync(() => {
@@ -112,7 +112,7 @@ describe('MetadataLinkViewComponent', () => {
   describe('Check metadata without authority', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(MetadataLinkViewComponent);
-      itemService.findById.and.returnValue(createSuccessfulRemoteDataObject$(testOrgunit));
+      itemService.findByIdWithProjections.and.returnValue(createSuccessfulRemoteDataObject$(testOrgunit));
       component = fixture.componentInstance;
       component.item = testPerson;
       component.metadata = testMetadataValueWithoutAuthority;
@@ -138,7 +138,7 @@ describe('MetadataLinkViewComponent', () => {
     describe('when item is found with orcid', () => {
       beforeEach(() => {
         fixture = TestBed.createComponent(MetadataLinkViewComponent);
-        itemService.findById.and.returnValue(createSuccessfulRemoteDataObject$(testPerson));
+        itemService.findByIdWithProjections.and.returnValue(createSuccessfulRemoteDataObject$(testPerson));
         component = fixture.componentInstance;
         component.item = testPerson;
         component.metadata = testMetadataValueWithAuthority;
@@ -166,7 +166,7 @@ describe('MetadataLinkViewComponent', () => {
     describe('when item is found without orcid', () => {
       beforeEach(() => {
         fixture = TestBed.createComponent(MetadataLinkViewComponent);
-        itemService.findById.and.returnValue(createSuccessfulRemoteDataObject$(testOrgunit));
+        itemService.findByIdWithProjections.and.returnValue(createSuccessfulRemoteDataObject$(testOrgunit));
         component = fixture.componentInstance;
         component.item = testPerson;
         component.metadata = testMetadataValueWithAuthority;
@@ -194,7 +194,7 @@ describe('MetadataLinkViewComponent', () => {
     describe('when item is not found', () => {
       beforeEach(() => {
         fixture = TestBed.createComponent(MetadataLinkViewComponent);
-        itemService.findById.and.returnValue(createFailedRemoteDataObject$());
+        itemService.findByIdWithProjections.and.returnValue(createFailedRemoteDataObject$());
         component = fixture.componentInstance;
         component.item = testPerson;
         component.metadata = testMetadataValueWithAuthority;

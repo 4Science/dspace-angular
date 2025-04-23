@@ -107,9 +107,6 @@ import { ComcolModule } from '../shared/comcol/comcol.module';
 import { SearchModule } from '../shared/search/search.module';
 import { HierarchyComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/hierarchy/hierarchy.component';
 import {
-  HtmlComponent
-} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/html/html.component';
-import {
   BrowseComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/browse/browse.component';
 import {
@@ -145,16 +142,27 @@ import {
   LinkAuthorityComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/link-authority/link-authority.component';
 import {
+  HtmlComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/html/html.component';
+import {
+  LonghtmlComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/longhtml/longhtml.component';
+import {
   CrisLayoutMediaBoxComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/media-box/cris-layout-media-box.component';
 import { MediaPlayerModule } from '../shared/media-player/media-player.module';
 import { CarouselModule } from '../shared/carousel/carousel.module';
 import { BackgroundComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/background/background.component';
-import { ImageComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/image/image.component';
 import { OpenStreetMapModule } from '../shared/open-street-map/open-street-map.module';
 import { OpenStreetMapRenderingComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/open-street-map/open-street-map-rendering.component';
 import { GooglemapsGroupComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/metadataGroup/googlemaps-group/googlemaps-group.component';
 import { OpenstreetmapGroupComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/metadataGroup/openstreetmap-group/openstreetmap-group.component';
+import {
+  LongmarkdownComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/longmarkdown/longmarkdown.component';
+import {
+  ImageComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/image/image.component';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -164,6 +172,7 @@ const ENTRY_COMPONENTS = [
   CrisLayoutCollectionBoxComponent,
   TextComponent,
   HtmlComponent,
+  LonghtmlComponent,
   HeadingComponent,
   CrisLayoutRelationBoxComponent,
   CrisLayoutIIIFViewerBoxComponent,
@@ -184,11 +193,15 @@ const ENTRY_COMPONENTS = [
   TagComponent,
   AdvancedAttachmentComponent,
   LinkAuthorityComponent,
+  HtmlComponent,
+  LonghtmlComponent,
+  LinkAuthorityComponent,
   GmapComponent,
   OpenStreetMapRenderingComponent,
   BrowseComponent,
   TagBrowseComponent,
   MarkdownComponent,
+  LongmarkdownComponent,
   SearchComponent,
   TagSearchComponent,
   AdvancedAttachmentComponent,
@@ -197,6 +210,7 @@ const ENTRY_COMPONENTS = [
   ImageComponent,
   GooglemapsGroupComponent,
   OpenstreetmapGroupComponent,
+  ImageComponent
 ];
 
 @NgModule({
@@ -221,10 +235,10 @@ const ENTRY_COMPONENTS = [
     RowComponent,
     MetadataContainerComponent,
     MetadataRenderComponent,
-    MarkdownComponent,
     BitstreamAttachmentComponent,
     AttachmentRenderComponent,
-    ImageComponent,
+    MarkdownComponent,
+    ImageComponent
   ],
   providers:[ LoadMoreService, NgbActiveModal ],
   imports: [

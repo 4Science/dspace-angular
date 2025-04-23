@@ -1,7 +1,6 @@
 import { MetadataRegistryComponent } from './metadata-registry.component';
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
-import { of, of as observableOf } from 'rxjs';
-import { buildPaginatedList } from '../../../core/data/paginated-list.model';
+import { of as observableOf } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { By } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
@@ -15,7 +14,6 @@ import { HostWindowService } from '../../../shared/host-window.service';
 import { ChangeDetectionStrategy, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NotificationsService } from '../../../shared/notifications/notifications.service';
 import { NotificationsServiceStub } from '../../../shared/testing/notifications-service.stub';
-import { RestResponse } from '../../../core/cache/response.models';
 import { MetadataSchema } from '../../../core/metadata/metadata-schema.model';
 import { createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
 import { PaginationService } from '../../../core/pagination/pagination.service';
@@ -23,7 +21,8 @@ import { PaginationServiceStub } from '../../../shared/testing/pagination-servic
 import {
   MetadataSchemaExportService
 } from '../../../shared/metadata-export/metadata-schema-export/metadata-schema-export.service';
-import { UUIDService } from '../../../core/shared/uuid.service';
+import { buildPaginatedList } from '../../../core/data/paginated-list.model';
+import { RestResponse } from '../../../core/cache/response.models';
 
 describe('MetadataRegistryComponent', () => {
   let comp: MetadataRegistryComponent;
@@ -84,10 +83,9 @@ describe('MetadataRegistryComponent', () => {
         {
           provide: MetadataSchemaExportService,
           useValue: jasmine.createSpyObj('metadataSchemaExportService', {
-            exportSchema: of(1),
+            exportSchema: observableOf(1),
           })
-        },
-        { provide: UUIDService, useClass: UUIDService },
+        }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(MetadataRegistryComponent, {
@@ -123,7 +121,7 @@ describe('MetadataRegistryComponent', () => {
 
     beforeEach(() => {
       spyOn(registryService, 'editMetadataSchema');
-      row = fixture.debugElement.query(By.css('.selectable-row'))?.nativeElement;
+      row = fixture.debugElement.query(By.css('.selectable-row')).nativeElement;
       row.click();
       fixture.detectChanges();
     });
@@ -135,7 +133,7 @@ describe('MetadataRegistryComponent', () => {
     }));
 
     it('should cancel editing the selected schema when clicked again', waitForAsync(() => {
-      spyOn(registryService, 'getActiveMetadataSchema').and.returnValue(observableOf(mockSchemasList[0] as MetadataSchema));
+      comp.activeMetadataSchema$ = observableOf(mockSchemasList[0] as MetadataSchema);
       spyOn(registryService, 'cancelEditMetadataSchema');
       row.click();
       fixture.detectChanges();
@@ -150,7 +148,7 @@ describe('MetadataRegistryComponent', () => {
 
     beforeEach(() => {
       spyOn(registryService, 'deleteMetadataSchema').and.callThrough();
-      spyOn(registryService, 'getSelectedMetadataSchemas').and.returnValue(observableOf(selectedSchemas as MetadataSchema[]));
+      comp.selectedMetadataSchemaIDs$ = observableOf(selectedSchemas.map((selectedSchema: MetadataSchema) => selectedSchema.id));
       comp.deleteSchemas();
       fixture.detectChanges();
     });

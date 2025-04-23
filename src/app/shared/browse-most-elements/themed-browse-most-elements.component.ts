@@ -1,4 +1,4 @@
-import { LayoutModeEnum, TopSection } from '../../core/layout/models/section.model';
+import { TopSection, LayoutModeEnum } from '../../core/layout/models/section.model';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ThemedComponent } from '../theme-support/themed.component';
 import { BrowseMostElementsComponent } from './browse-most-elements.component';
@@ -19,9 +19,7 @@ export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMos
 
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
-  @Input() topSection: TopSection;
-
-  @Input() projection = 'preventMetadataSecurity';
+  @Input() projection: string;
 
   @Input() mode: LayoutModeEnum;
 
@@ -33,6 +31,7 @@ export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMos
 
   @Input() showThumbnails: boolean;
 
+  @Input() topSection: TopSection;
 
   @Output() totalElements: EventEmitter<number> = new EventEmitter<number>();
 
