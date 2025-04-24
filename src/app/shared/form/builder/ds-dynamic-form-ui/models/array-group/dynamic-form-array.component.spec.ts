@@ -88,6 +88,7 @@ describe('DsDynamicFormArrayComponent', () => {
         relationshipConfig: undefined,
         submissionId: '1234',
         isDraggable: true,
+        openType: false,
         groupFactory: () => {
           return [
             new DynamicInputModel({ id: 'testFormRowArrayGroupInput' }),

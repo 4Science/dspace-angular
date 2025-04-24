@@ -118,7 +118,6 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
   public otherListEntry = '';
   public addButtonDisabled = false;
 
-
   /**
    * The text that is being searched
    */
@@ -256,7 +255,7 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
         const isLastPage = this.pageInfo.currentPage === this.pageInfo.totalPages;
         const modelValue: any = this.model.value;
         if (isLastPage && isNotEmpty(modelValue?.value)) {
-          const isCustomValue = isEmpty(this.optionsList.filter(element => element.value === modelValue.value));
+          const isCustomValue = isEmpty(this.optionsList.filter((element: VocabularyEntry) => element.value === modelValue.value));
           if (isCustomValue) {
             const object = this.createVocabularyObject(modelValue.display, modelValue.value, undefined);
             this.optionsList.push(object);
@@ -441,7 +440,7 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
     this.addButtonDisabled = true;
     if (this.otherListEntry.toString() !== '') {
       if (this.optionsList.length > 0) {
-        this.optionsList.forEach(element => {
+        this.optionsList.forEach((element: VocabularyEntry) => {
           if ((element.display.toLowerCase() === this.otherListEntry.toLowerCase()) ||
             (element.value?.toLowerCase() === this.otherListEntry.toLowerCase()) ||
             (this.otherListEntry.toLowerCase() === 'other')) {
