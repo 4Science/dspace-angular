@@ -84,6 +84,24 @@
               </legend>
               <div class="form-check">
                 <input class="form-check-input" type="radio"
+                       name="changesLimit" id="processBundles" value="bundles"
+                       [disabled]="!state.bitstream.toggleStatus"
+                       [(ngModel)]="state.bitstream.changesLimit">
+                <label class="form-check-label" for="processBundles">
+                  {{ state.bitstream.selectedBundles.length }}
+                  {{'access-control-bundles-selected' | translate}}
+                  <button
+                    *ngIf="itemRD"
+                    [attr.aria-label]="'access-control-bitstreams-bundles' | translate"
+                    [dsBtnDisabled]="!state.bitstream.toggleStatus || state.bitstream.changesLimit !== 'bundles'"
+                    (click)="openSelectBundlesModal(itemRD.payload)"
+                    class="btn btn-outline-dark border-0" type="button">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input mt-2" type="radio"
                        name="changesLimit" id="processAll" value="all"
                        [disabled]="!state.bitstream.toggleStatus"
                        [(ngModel)]="state.bitstream.changesLimit">

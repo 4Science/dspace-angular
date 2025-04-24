@@ -110,17 +110,28 @@ export const convertToBulkAccessControlFileModel = (payload: { state: AccessCont
 
   if (bitstreamEnabled) {
     const constraints = { uuid: [] };
-
-    if (bitstreamEnabled && payload.state.bitstream.changesLimit === 'selected') {
-      // @ts-ignore
-      constraints.uuid = payload.state.bitstream.selectedBitstreams.map((x) => x.id);
+    const areBundleSelected = payload.state.bitstream.changesLimit === 'bundles';
+    if (payload.state.bitstream.changesLimit === 'selected') {
+      constraints.uuid = payload.state.bitstream.selectedBitstreams.map((object) => (object as Bitstream).id);
+    } else if (areBundleSelected) {
+      constraints.uuid = payload.state.bitstream.selectedBundles.map((object) => ((object as Bundle).id));
     }
 
-    finalPayload.bitstream = {
-      constraints,
-      mode: payload.state.bitstream.accessMode,
-      accessConditions: payload.bitstreamAccess
-    };
+    if (areBundleSelected) {
+      finalPayload.bundle = {
+        constraints,
+        mode: payload.state.bitstream.accessMode,
+        accessConditions: payload.bitstreamAccess,
+      };
+    } else {
+      finalPayload.bitstream = {
+        constraints,
+        mode: payload.state.bitstream.accessMode,
+        accessConditions: payload.bitstreamAccess,
+      };
+    }
+
+
   }
 
   return finalPayload;
@@ -133,6 +144,11 @@ export interface BulkAccessControlFileModel {
     accessConditions: AccessCondition[];
   },
   bitstream?: {
+    constraints: { uuid: string[] };
+    mode: string;
+    accessConditions: AccessCondition[];
+  },
+  bundle?: {
     constraints: { uuid: string[] };
     mode: string;
     accessConditions: AccessCondition[];
