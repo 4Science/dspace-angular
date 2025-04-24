@@ -7,7 +7,8 @@ import {
 import { AdminNotifyMetricsRow } from '../app/admin/admin-notify-dashboard/admin-notify-metrics/admin-notify-metrics.model';
 import { HALDataService } from '../app/core/data/base/hal-data-service.interface';
 import { FieldRenderingType } from '../app/cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/field-rendering-type';
-import { MetadataBoxFieldRenderOptions } from '../app/cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/metadata-box-field-render-options';
+import { MetadataBoxFieldRenderOptions } from '../app/cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/rendering-type.model';
+import { LiveRegionConfig } from '../app/shared/live-region/live-region.config';
 import { ActuatorsConfig } from './actuators.config';
 import { AddToAnyPluginConfig } from './add-to-any-plugin-config';
 import { AdvancedAttachmentRenderingConfig } from './advanced-attachment-rendering.config';
@@ -54,6 +55,7 @@ import { SuggestionConfig } from './suggestion-config.interfaces';
 import { ThemeConfig } from './theme.config';
 import { UIServerConfig } from './ui-server-config.interface';
 
+
 interface AppConfig extends Config {
   ui: UIServerConfig;
   rest: ServerConfig;
@@ -84,6 +86,7 @@ interface AppConfig extends Config {
   qualityAssuranceConfig: QualityAssuranceConfig;
   search: SearchConfig;
   notifyMetrics: AdminNotifyMetricsRow[];
+  liveRegion: LiveRegionConfig;
   crisLayout: CrisLayoutConfig;
   layout: LayoutConfig;
   security: MetadataSecurityConfig;

@@ -116,6 +116,11 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
   sub: Subscription;
 
   /**
+   * The range currently selected by the slider
+   */
+  sliderRange: [number | undefined, number | undefined];
+
+  /**
    * Whether the sider is being controlled by the keyboard.
    * Supresses any changes until the key is released.
    */
@@ -167,6 +172,15 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
         { 'aria-label': this.maxLabel },
       ],
     };
+  }
+
+  /**
+   * Updates the sliderRange property with the current slider range.
+   * This method is called whenever the slider value changes, but it does not immediately apply the changes.
+   * @param range - The current range selected by the slider
+   */
+  onSliderChange(range: [number | undefined, number | undefined]): void {
+    this.sliderRange = range;
   }
 
   /**
