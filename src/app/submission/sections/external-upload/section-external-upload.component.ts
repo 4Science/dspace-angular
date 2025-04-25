@@ -22,6 +22,7 @@ import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder
 import { JsonPatchOperationsBuilder } from '../../../core/json-patch/builder/json-patch-operations-builder';
 import { AlertComponent } from '../../../shared/alert/alert.component';
 import { AlertType } from '../../../shared/alert/alert-type';
+import { BtnDisabledDirective } from '../../../shared/btn-disabled.directive';
 import { ThemedLoadingComponent } from '../../../shared/loading/themed-loading.component';
 import { SubmissionService } from '../../submission.service';
 import { SectionModelComponent } from '../models/section.model';
@@ -44,6 +45,7 @@ import { ExternalUploadService } from './external-upload.service';
     AsyncPipe,
     TranslateModule,
     ThemedLoadingComponent,
+    BtnDisabledDirective,
   ],
   standalone: true,
 })

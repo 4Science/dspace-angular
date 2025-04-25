@@ -45,6 +45,7 @@ import { Bitstream } from '../../core/shared/bitstream.model';
 import { BitstreamFormat } from '../../core/shared/bitstream-format.model';
 import { Item } from '../../core/shared/item.model';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { BtnDisabledDirective } from '../btn-disabled.directive';
 import {
   hasValue,
   isNotEmpty,
@@ -74,6 +75,7 @@ import { CarouselOptions } from './carousel-options.model';
     AsyncPipe,
     NgClass,
     TranslateModule,
+    BtnDisabledDirective,
   ],
   standalone: true,
 })

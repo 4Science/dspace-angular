@@ -1,6 +1,7 @@
 import { NgIf } from '@angular/common';
 import {
   Component,
+  DoCheck,
   EventEmitter,
   Input,
   Output,
@@ -29,7 +30,7 @@ import { DynamicMarkdownModel } from './dynamic-markdown.model';
  * Component displaying a markdown usable in dynamic forms
  * Extends from bootstrap's input component but displays a markdown instead
  */
-export class DsDynamicMarkdownComponent extends DynamicNGBootstrapInputComponent {
+export class DsDynamicMarkdownComponent extends DynamicNGBootstrapInputComponent implements DoCheck {
   /**
    * Use the model's ID for the input element
    */

@@ -68,6 +68,7 @@ import { PageInfo } from '../../../../../../core/shared/page-info.model';
 import { VocabularyEntry } from '../../../../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { VocabularyService } from '../../../../../../core/submission/vocabularies/vocabulary.service';
 import { SubmissionService } from '../../../../../../submission/submission.service';
+import { BtnDisabledDirective } from '../../../../../btn-disabled.directive';
 import {
   hasValue,
   isEmpty,
@@ -93,6 +94,7 @@ import { DynamicScrollableDropdownModel } from './dynamic-scrollable-dropdown.mo
     NgForOf,
     TranslateModule,
     FormsModule,
+    BtnDisabledDirective,
   ],
   standalone: true,
 })

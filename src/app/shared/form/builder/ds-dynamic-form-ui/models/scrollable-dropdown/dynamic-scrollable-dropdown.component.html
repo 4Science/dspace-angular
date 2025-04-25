@@ -66,7 +66,7 @@
         <label class="m-0">{{'form.other-option' | translate}}</label>
         <input data-test="otherOptionInput" type="text" class="form-control form-control-sm mx-2" [(ngModel)]="otherListEntry" (keyup.enter)="addListItem(sdRef)" />
         <button data-test="otherOptionBtn" class="btn btn-primary btn-sm" type="button"
-                (click)="addListItem(sdRef)" [disabled]="addButtonDisabled">
+                (click)="addListItem(sdRef)" [dsBtnDisabled]="addButtonDisabled">
           {{'form.other-option.add-button' | translate}}
         </button>
       </div>
