@@ -34,17 +34,13 @@ import { yearFromString } from 'src/app/shared/date.util';
 import { RemoteDataBuildService } from '../../../../../../core/cache/builders/remote-data-build.service';
 import { SearchService } from '../../../../../../core/shared/search/search.service';
 import { SearchConfigurationService } from '../../../../../../core/shared/search/search-configuration.service';
-import {
-  FILTER_CONFIG,
-  SearchFilterService,
-} from '../../../../../../core/shared/search/search-filter.service';
+import { SearchFilterService } from '../../../../../../core/shared/search/search-filter.service';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../../my-dspace-page/my-dspace-configuration.service';
 import {
   hasValue,
   isNotEmpty,
 } from '../../../../../empty.util';
 import { DebounceDirective } from '../../../../../utils/debounce.directive';
-import { SearchFilterConfig } from '../../../../models/search-filter-config.model';
 import {
   facetLoad,
   SearchFacetFilterComponent,
@@ -119,7 +115,6 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
     protected route: ActivatedRoute,
     @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
     @Inject(PLATFORM_ID) public platformId: any,
-    @Inject(FILTER_CONFIG) public filterConfig: SearchFilterConfig,
   ) {
     super(searchService, filterService, rdbs, router, searchConfigService);
   }
