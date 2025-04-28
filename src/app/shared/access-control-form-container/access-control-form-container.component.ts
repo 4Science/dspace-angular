@@ -165,8 +165,7 @@ export class AccessControlFormContainerComponent<T extends DSpaceObject> impleme
    */
   openSelectBundlesModal(item: Item) {
     const ref = this.modalService.open(
-
-
+      ItemAccessControlSelectBundlesModalComponent
     );
     ref.componentInstance.item = item;
 
