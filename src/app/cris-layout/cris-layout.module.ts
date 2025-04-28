@@ -161,6 +161,7 @@ import {
 import {
   ImageComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/image/image.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -236,25 +237,26 @@ const ENTRY_COMPONENTS = [
     ImageComponent
   ],
   providers:[ LoadMoreService, NgbActiveModal ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    SearchModule.withEntryComponents(),
-    GooglemapsModule,
-    OpenStreetMapModule,
-    MyDSpacePageModule,
-    ContextMenuModule.withEntryComponents(),
-    NgbAccordionModule,
-    ComcolModule,
-    MiradorViewerModule,
-    MarkdownViewerModule,
-    ItemSharedModule,
-    ViewersSharedModule,
-    MetricsModule,
-    AttachmentRenderingModule,
-    FormModule,
-    MediaPlayerModule,
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        SearchModule.withEntryComponents(),
+        GooglemapsModule,
+        OpenStreetMapModule,
+        MyDSpacePageModule,
+        ContextMenuModule.withEntryComponents(),
+        NgbAccordionModule,
+        ComcolModule,
+        MiradorViewerModule,
+        MarkdownViewerModule,
+        ItemSharedModule,
+        ViewersSharedModule,
+        MetricsModule,
+        AttachmentRenderingModule,
+        FormModule,
+        MediaPlayerModule,
+        NgxSkeletonLoaderModule,
+    ],
   exports: [
     CrisLayoutComponent,
     CrisrefComponent,

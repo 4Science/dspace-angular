@@ -1,7 +1,7 @@
 import { followLink } from '../utils/follow-link-config.model';
 import { CollectionElementLinkType } from '../object-collection/collection-element-link.type';
 import { Component, Input, OnChanges, OnInit, PLATFORM_ID, inject } from '@angular/core';
-import { isPlatformServer } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
@@ -21,6 +21,7 @@ import { Item } from '../../core/shared/item.model';
 import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
 import { LayoutModeEnum, TopSection } from '../../core/layout/models/section.model';
 import { SearchManager } from '../../core/browse/search-manager';
+import { tap } from 'rxjs/operators';
 
 @Component({
   template: ''
@@ -79,12 +80,17 @@ export abstract class AbstractBrowseElementsComponent implements OnInit, OnChang
 
   searchResultArray$: Observable<DSpaceObject[]>;
 
+  isLoading = true;
+  isBrowser: boolean;
+
   ngOnChanges() {
     this.paginatedSearchOptions$?.next(this.paginatedSearchOptions);
   }
 
   ngOnInit() {
-    if (isPlatformServer(this.platformId)) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+
+    if (!this.isBrowser) {
       return;
     }
     const followLinks = [];
@@ -112,6 +118,9 @@ export abstract class AbstractBrowseElementsComponent implements OnInit, OnChang
       toDSpaceObjectListRD(),
       getRemoteDataPayload(),
       getPaginatedListPayload(),
+      tap(() => {
+        this.isLoading = false;
+      }),
     );
   }
 

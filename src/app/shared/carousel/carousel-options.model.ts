@@ -64,23 +64,26 @@ export interface CarouselOptions {
   /**
    * The discovery configuration name for search results
    */
-  discoveryConfiguration: string;
+  discoveryConfiguration?: string;
   /**
    * The search sortOrder
    */
-  order: string;
+  order?: string;
   /**
    * The search sortField
    */
-  sortField: string;
+  sortField?: string;
 
   /**
    * The search sort direction
    */
-  sortDirection: SortDirection;
+  sortDirection?: SortDirection;
 
   /**
    * The number of items to be searched
    */
-  numberOfItems: number;
+  numberOfItems?: number;
+
+  showBlurryBackdrop: boolean;
+
 }

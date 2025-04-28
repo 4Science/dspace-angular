@@ -35,78 +35,73 @@ import { createPaginatedList } from '../testing/utils.test';
 import { ItemSearchResult } from '../object-collection/shared/item-search-result.model';
 import { BitstreamFormat } from '../../core/shared/bitstream-format.model';
 import { CarouselOptions } from './carousel-options.model';
-import { SortDirection } from '../../core/cache/models/sort-options.model';
 import { SearchManager } from '../../core/browse/search-manager';
 import { toRemoteData } from '../../browse-by/browse-by-metadata-page/browse-by-metadata-page.component.spec';
 import { InternalLinkService } from '../../core/services/internal-link.service';
 
 describe('CarouselComponent', () => {
-    let component: CarouselComponent;
-    let fixture: ComponentFixture<CarouselComponent>;
+  let component: CarouselComponent;
+  let fixture: ComponentFixture<CarouselComponent>;
 
-    let notificationService: NotificationsServiceStub;
+  let notificationService: NotificationsServiceStub;
 
-    const mockBitstreamDataService = jasmine.createSpyObj('bitstreamDataService', {
-        getThumbnailFor(item: Item): Observable<RemoteData<Bitstream>> {
-            return createSuccessfulRemoteDataObject$(new Bitstream());
-        },
-        showableByItem(item: Item, bundleName: string, options?: FindListOptions, ...linksToFollow: FollowLinkConfig<Bitstream>[]): Observable<RemoteData<PaginatedList<Bitstream>>> {
-            return createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream1]));
-        },
-    });
+  const mockBitstreamDataService = jasmine.createSpyObj('bitstreamDataService', {
+    getThumbnailFor(item: Item): Observable<RemoteData<Bitstream>> {
+      return createSuccessfulRemoteDataObject$(new Bitstream());
+    },
+    showableByItem(item: Item, bundleName: string, options?: FindListOptions, ...linksToFollow: FollowLinkConfig<Bitstream>[]): Observable<RemoteData<PaginatedList<Bitstream>>> {
+      return createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream1]));
+    },
+  });
 
-    const carouselOptions: CarouselOptions = {
-      title: 'dc.title',
-      link: '',
-      description: 'dc.description',
-      fitWidth: false,
-      fitHeight: true,
-      targetBlank: true,
-      keepAspectRatio: false,
-      carouselHeightPx: 50,
-      aspectRatio: 1,
-      captionStyle: '',
-      titleStyle: '',
-      bundle: 'ORIGINAL',
-      discoveryConfiguration: 'person',
-      sortField: 'testField',
-      sortDirection: SortDirection.DESC,
-      numberOfItems: 5,
-      order: 'testOrder'
-    };
+  const carouselOptions: CarouselOptions = {
+    title: 'dc.title',
+    link: '',
+    description: 'dc.description',
+    fitWidth: false,
+    fitHeight: true,
+    targetBlank: true,
+    keepAspectRatio: false,
+    carouselHeightPx: 50,
+    aspectRatio: 1,
+    captionStyle: '',
+    titleStyle: '',
+    bundle: 'ORIGINAL',
+    showBlurryBackdrop: false
+  };
 
-    const firstItemResult = Object.assign(new ItemSearchResult(), {
-        indexableObject: Object.assign(new DSpaceObject(), {
-            id: 'd317835d-7b06-4219-91e2-1191900cb897',
-            uuid: 'd317835d-7b06-4219-91e2-1191900cb897',
-            name: 'My first person',
-            metadata: {
-                'dc.title': [
-                    { value: 'Test' }
-                ],
-                'dc.description': [
-                    { value: 'Lorem Ipsum' }
-                ]
-            },
-            _links: {
-              content: { href: 'file-selflink' }
-            }
-        })
-    });
+  const firstItemResult = Object.assign(new ItemSearchResult(), {
+    indexableObject: Object.assign(new DSpaceObject(), {
+      id: 'd317835d-7b06-4219-91e2-1191900cb897',
+      uuid: 'd317835d-7b06-4219-91e2-1191900cb897',
+      name: 'My first person',
+      metadata: {
+        'dc.title': [
+          { value: 'Test' }
+        ],
+        'dc.description': [
+          { value: 'Lorem Ipsum' }
+        ]
+      },
+      _links: {
+        content: { href: 'file-selflink' }
+      }
+    })
+  });
 
-    const secondItemResult = Object.assign(new ItemSearchResult(), {
-        indexableObject: Object.assign(new DSpaceObject(), {
-            id: 'd317835d-7b06-4219-91e2-1191900cb897',
-            uuid: 'd317835d-7b06-4219-91e2-1191900cb897',
-            name: 'My first person',
-            metadata: {},
-            _links: {
-              content: { href: 'file-selflink' }
-            }
-        })
-    });
+  const secondItemResult = Object.assign(new ItemSearchResult(), {
+    indexableObject: Object.assign(new DSpaceObject(), {
+      id: 'd317835d-7b06-4219-91e2-1191900cb897',
+      uuid: 'd317835d-7b06-4219-91e2-1191900cb897',
+      name: 'My first person',
+      metadata: {},
+      _links: {
+        content: { href: 'file-selflink' }
+      }
+    })
+  });
 
-    const mockBitstream1: Bitstream = Object.assign(new Bitstream(),
+  const mockBitstream1: Bitstream = Object.assign(new Bitstream(),
     {
       sizeBytes: 10201,
       bundleName: 'ORIGINAL',
@@ -129,12 +124,12 @@ describe('CarouselComponent', () => {
         ]
       },
       format: createSuccessfulRemoteDataObject$(Object.assign(new BitstreamFormat(),
-      {
-        mimetype: 'image/jpeg'
-      }))
+        {
+          mimetype: 'image/jpeg'
+        }))
     });
 
-    const mockBitstream2: Bitstream = Object.assign(new Bitstream(),
+  const mockBitstream2: Bitstream = Object.assign(new Bitstream(),
     {
       sizeBytes: 10201,
       bundleName: 'ORIGINAL',
@@ -157,107 +152,107 @@ describe('CarouselComponent', () => {
         ]
       },
       format: createSuccessfulRemoteDataObject$(Object.assign(new BitstreamFormat(),
-      {
-        mimetype: 'application/pdf'
-      }))
+        {
+          mimetype: 'application/pdf'
+        }))
     });
 
-    const mockSearchManager = {
-      search: (options: any) => toRemoteData([firstItemResult])
-    };
+  const mockSearchManager = {
+    search: (options: any) => toRemoteData([firstItemResult])
+  };
 
-    beforeEach(waitForAsync(() => {
-        notificationService = new NotificationsServiceStub();
-        TestBed.configureTestingModule({
-            imports: [CommonModule, NgbModule, FormsModule, ReactiveFormsModule, BrowserModule, RouterTestingModule,
-                TranslateModule.forRoot({
-                    loader: {
-                        provide: TranslateLoader,
-                        useClass: TranslateLoaderMock
-                    }
-                }),
-            ],
-            declarations: [CarouselComponent],
-            providers: [
-                CarouselComponent,
-                { provide: ObjectCacheService, useValue: {} },
-                { provide: InternalLinkService, useValue: {} },
-                { provide: UUIDService, useValue: {} },
-                { provide: Store, useValue: {} },
-                { provide: RemoteDataBuildService, useValue: {} },
-                { provide: HALEndpointService, useValue: {} },
-                { provide: NotificationsService, useValue: notificationService },
-                { provide: HttpClient, useValue: {} },
-                { provide: DSOChangeAnalyzer, useValue: {} },
-                { provide: DefaultChangeAnalyzer, useValue: {} },
-                { provide: BitstreamDataService, useValue: mockBitstreamDataService },
-                { provide: NativeWindowService, useValue: new NativeWindowRef() },
-                { provide: SearchManager, useValue: mockSearchManager },
-            ],
-            schemas: [NO_ERRORS_SCHEMA]
-        }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    notificationService = new NotificationsServiceStub();
+    TestBed.configureTestingModule({
+      imports: [CommonModule, NgbModule, FormsModule, ReactiveFormsModule, BrowserModule, RouterTestingModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock
+          }
+        }),
+      ],
+      declarations: [CarouselComponent],
+      providers: [
+        CarouselComponent,
+        { provide: ObjectCacheService, useValue: {} },
+        { provide: InternalLinkService, useValue: {} },
+        { provide: UUIDService, useValue: {} },
+        { provide: Store, useValue: {} },
+        { provide: RemoteDataBuildService, useValue: {} },
+        { provide: HALEndpointService, useValue: {} },
+        { provide: NotificationsService, useValue: notificationService },
+        { provide: HttpClient, useValue: {} },
+        { provide: DSOChangeAnalyzer, useValue: {} },
+        { provide: DefaultChangeAnalyzer, useValue: {} },
+        { provide: BitstreamDataService, useValue: mockBitstreamDataService },
+        { provide: NativeWindowService, useValue: new NativeWindowRef() },
+        { provide: SearchManager, useValue: mockSearchManager },
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
 
-    }));
+  }));
 
+  beforeEach(() => {
+    fixture = TestBed.createComponent(CarouselComponent);
+    component = fixture.componentInstance;
+    mockBitstreamDataService.showableByItem.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream1])));
+    component.carouselOptions = carouselOptions;
+
+    fixture.detectChanges();
+  });
+
+  it('should create CarouselComponent', inject([CarouselComponent], (comp: CarouselComponent) => {
+    expect(comp).toBeDefined();
+  }));
+
+
+  it('should render title', (done) => {
+    const title = fixture.debugElement.queryAll(By.css('[data-test="carouselObjTitle"]'));
+    expect(title.length).toBe(1);
+    done();
+  });
+
+  it('should render description', (done) => {
+    const desc = fixture.debugElement.queryAll(By.css('[data-test="carouselObjDesc"]'));
+    expect(desc.length).toBe(1);
+    done();
+  });
+
+  it('should render image', (done) => {
+    const image = fixture.debugElement.queryAll(By.css('.picsum-img-wrapper'));
+    expect(image.length).toBe(1);
+    done();
+  });
+
+  describe('when no data', () => {
     beforeEach(() => {
-        fixture = TestBed.createComponent(CarouselComponent);
-        component = fixture.componentInstance;
-        mockBitstreamDataService.showableByItem.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream1])));
-        component.carouselOptions = carouselOptions;
+      fixture = TestBed.createComponent(CarouselComponent);
+      component = fixture.componentInstance;
+      mockBitstreamDataService.showableByItem.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream2])));
+      component.carouselOptions = carouselOptions;
 
-        fixture.detectChanges();
+      fixture.detectChanges();
     });
 
-    it('should create CarouselComponent', inject([CarouselComponent], (comp: CarouselComponent) => {
-        expect(comp).toBeDefined();
-    }));
-
-
-    it('should render title', (done) => {
-        const title = fixture.debugElement.queryAll(By.css('[data-test="carouselObjTitle"]'));
-        expect(title.length).toBe(1);
-        done();
+    it('should not render title', (done) => {
+      const title = fixture.debugElement.queryAll(By.css('#carouselObjTitle'));
+      expect(title.length).toBe(0);
+      done();
     });
 
-    it('should render description', (done) => {
-        const desc = fixture.debugElement.queryAll(By.css('[data-test="carouselObjDesc"]'));
-        expect(desc.length).toBe(1);
-        done();
+    it('should not render description', (done) => {
+      const desc = fixture.debugElement.queryAll(By.css('#carouselObjDesc'));
+      expect(desc.length).toBe(0);
+      done();
     });
 
-    it('should render image', (done) => {
-        const image = fixture.debugElement.queryAll(By.css('.picsum-img-wrapper'));
-        expect(image.length).toBe(1);
-        done();
+    it('should not render image', (done) => {
+      const image = fixture.debugElement.queryAll(By.css('.picsum-img-wrapper > img'));
+      expect(image.length).toBe(0);
+      done();
     });
-
-    describe('when no data', () => {
-        beforeEach(() => {
-            fixture = TestBed.createComponent(CarouselComponent);
-            component = fixture.componentInstance;
-            mockBitstreamDataService.showableByItem.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([mockBitstream2])));
-            component.carouselOptions = carouselOptions;
-
-            fixture.detectChanges();
-        });
-
-        it('should not render title', (done) => {
-            const title = fixture.debugElement.queryAll(By.css('#carouselObjTitle'));
-            expect(title.length).toBe(0);
-            done();
-        });
-
-        it('should not render description', (done) => {
-            const desc = fixture.debugElement.queryAll(By.css('#carouselObjDesc'));
-            expect(desc.length).toBe(0);
-            done();
-        });
-
-        it('should not render image', (done) => {
-            const image = fixture.debugElement.queryAll(By.css('.picsum-img-wrapper'));
-            expect(image.length).toBe(0);
-            done();
-        });
-    });
+  });
 
 });

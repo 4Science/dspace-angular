@@ -333,6 +333,7 @@ export const environment: BuildConfig = {
   ],
   bundle: {
     standardBundles: ['ORIGINAL', 'THUMBNAIL', 'LICENSE'],
+    previewBundle: 'BRANDED_PREVIEW'
   },
   mediaViewer: {
     image: true,

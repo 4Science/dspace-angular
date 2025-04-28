@@ -8,4 +8,10 @@ export interface BundleConfig extends Config {
    */
   standardBundles: string[];
 
+  /**
+   * The bundle name used for the preview
+   * Used by {@link CarouselWithThumbnailsComponent}.
+   */
+  previewBundle: string;
+
 }

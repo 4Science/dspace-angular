@@ -5,6 +5,7 @@ import { autoserialize, deserialize } from 'cerialize';
 import { HALLink } from '../../shared/hal-link.model';
 import { excludeFromEquals } from '../../utilities/equals.decorators';
 import { ResourceType } from '../../shared/resource-type';
+import { SortDirection } from '../../cache/models/sort-options.model';
 
 /**
  * Describes a type of Section.
@@ -71,8 +72,10 @@ export interface TopSection extends SectionComponent {
 }
 
 export interface GridSection extends SectionComponent {
+  order: SortDirection;
+  sortField: string;
   discoveryConfigurationName: string;
-  'main-content-link': string;
+  mainContentLink: string;
 }
 
 export interface SearchSection extends SectionComponent {
@@ -110,14 +113,6 @@ export interface TopSectionColumn {
   titleKey: string;
 }
 
-/**
- * Represents the type of template to use for the section
- */
-export enum TopSectionTemplateType {
-  DEFAULT = 'default', // CRIS default template
-  CARD = 'card', // Card template
-}
-
 export enum LayoutModeEnum {
   LIST = 'list',
   CARD = 'card'
@@ -142,4 +137,53 @@ export interface CarouselSection extends SectionComponent {
   captionStyle: string;
   titleStyle: string;
   bundle: string;
+  showBlurryBackdrop: boolean;
+}
+
+
+
+export interface SliderSection extends SectionComponent {
+  discoveryConfigurationName: string;
+  order: string;
+  sortField: string;
+  numberOfItems: number;
+  style: string;
+  title: string;
+  link: string;
+  description: string;
+  componentType: 'slider';
+  targetBlank: boolean ;
+  fitWidth: boolean;
+  fitHeight: boolean;
+  keepAspectRatio: boolean;
+  aspectRatio: number;
+  carouselHeightPx: number;
+  captionStyle: string;
+  titleStyle: string;
+  showBlurryBackdrop: boolean;
+}
+
+/**
+ * Represents an advanced top section in the layout.
+ */
+export interface AdvancedTopSection extends Omit<TopSection, 'discoveryConfigurationName'|'componentType'> {
+  /**
+   * The names of the discovery configurations.
+   */
+  discoveryConfigurationName: string[];
+
+  /**
+   * The component type, which is always 'advanced-top-component'.
+   */
+  componentType: 'advanced-top-component';
+}
+
+/*
+ * Represents the type of template to use for the section
+ */
+export enum TopSectionTemplateType {
+  DEFAULT = 'default',  // CRIS default template
+  IMAGES = 'images',
+  SLIDER = 'slider',
+  CARD = 'card',
 }

@@ -354,6 +354,10 @@ import {
 import { ItemCollectionComponent } from './object-collection/shared/mydspace-item-collection/item-collection.component';
 import { ThemedItemListPreviewComponent } from './object-list/my-dspace-result-list-element/item-list-preview/themed-item-list-preview.component';
 import { ItemListPreviewComponent } from './object-list/my-dspace-result-list-element/item-list-preview/item-list-preview.component';
+import { ImagesBrowseElementsComponent } from './browse-most-elements/images-browse-elements/images-browse-elements.component';
+import { ThemedSliderBrowseElementsComponent } from './browse-most-elements/slider-browse-elements/themed-slider-browse-elements.component';
+import { SliderBrowseElementsComponent } from './browse-most-elements/slider-browse-elements/slider-browse-elements.component';
+import { ThemedImagesBrowseElementsComponent } from './browse-most-elements/images-browse-elements/themed-images-browse-elements.component';
 import { MarkdownDirective } from './utils/markdown.directive';
 import { DefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/default-browse-elements.component';
 import { ThemedDefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/themed-default-browse-elements.component';
@@ -368,6 +372,7 @@ import {
   ThemedCardsBrowseElementsComponent
 } from './browse-most-elements/cards-browse-elements/themed-cards-browse-elements.component';
 import { BackgroundImageDirective } from './utils/background-image.directive';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 const MODULES = [
   CommonModule,
@@ -387,7 +392,8 @@ const MODULES = [
   MenuModule,
   NgxPaginationModule,
   MetricsModule,
-  NgbModule
+  NgbModule,
+  NgxSkeletonLoaderModule,
 ];
 
 const ROOT_MODULES = [
@@ -531,8 +537,10 @@ const COMPONENTS = [
   ItemCollectionComponent,
   DefaultBrowseElementsComponent,
   ThemedDefaultBrowseElementsComponent,
-  DefaultBrowseElementsComponent,
-  ThemedDefaultBrowseElementsComponent,
+  ImagesBrowseElementsComponent,
+  ThemedImagesBrowseElementsComponent,
+  SliderBrowseElementsComponent,
+  ThemedSliderBrowseElementsComponent,
   CardsBrowseElementsComponent,
   ThemedCardsBrowseElementsComponent,
 ];
@@ -613,6 +621,8 @@ const ENTRY_COMPONENTS = [
   RelationshipsListComponent,
   AdditionalMetadataComponent,
   ThemedDefaultBrowseElementsComponent,
+  ThemedImagesBrowseElementsComponent,
+  ThemedSliderBrowseElementsComponent,
   SwitchComponent,
   ThemedCardsBrowseElementsComponent,
 ];
@@ -640,6 +650,8 @@ const DIRECTIVES = [
   NgForTrackByIdDirective,
   MetadataFieldValidator,
   HoverClassDirective,
+  EntityIconDirective,
+  BackgroundImageDirective,
   ContextHelpDirective,
   BtnDisabledDirective,
   EntityIconDirective,

@@ -1,0 +1,87 @@
+<div class="d-flex flex-md-row flex-column align-items-stretch flex-wrapper flex-sm-row" [style.height]="carouselOptions.carouselHeightPx">
+  <div class="flex-fill">
+    <ng-container *ngIf="itemList?.length > 0">
+      <div>
+        <ngb-carousel #carousel [interval]="99999999" [showNavigationArrows]="false" (slide)="onSlide($event)" class="ds-carousel position-relative">
+          <ng-template ngbSlide *ngFor="let item of itemList; let i = index; let last = last" [attr.id]="'ngb-slide-' + i">
+            <div class="carousel-content-wrapper"
+                *ngIf="(itemToImageHrefMap$ | async)?.get(item.uuid); let href; else placeholderImage"
+                [ngStyle]="{
+                        'background-image': 'url(' + href || '' + ')',
+                        'height': carouselOptions.keepAspectRatio ? null : carouselOptions.carouselHeightPx + 'px',
+                        'aspect-ratio': carouselOptions.keepAspectRatio ? carouselOptions.aspectRatio : null
+                  }">
+              <div class="picsum-img-wrapper">
+                <img [src]="href" [alt]="item.metadata[title][0].value" class="img-fluid blurry-backdrop">
+              </div>
+            </div>
+            <ng-template #placeholderImage>
+              <div class="carousel-content-wrapper"
+                  [ngStyle]="{
+                        'height': carouselOptions.keepAspectRatio ? null : carouselOptions.carouselHeightPx + 'px',
+                        'aspect-ratio': carouselOptions.keepAspectRatio ? carouselOptions.aspectRatio : null
+                  }">
+                <div class="picsum-img-wrapper">
+                  <img [src]="placeholderSrc" [alt]="item.metadata[title][0].value" class="img-fluid blurry-backdrop"
+                      [ngClass]="{'w-100': carouselOptions.fitWidth, 'h-100': carouselOptions.fitHeight}">
+                </div>
+              </div>
+            </ng-template>
+          </ng-template>
+        </ngb-carousel>
+        <div class="carousel-arrows position-absolute d-flex justify-content-between align-items-center px-3"
+             *ngIf="itemList?.length > 1"
+             [ngStyle]="{
+          'top': '5%',
+          'width': (isSmallDevice$ | async) ? '100%' : 'calc(100% - ' + thumbnailWidthPx + 'px)',
+          'height': carouselOptions.carouselHeightPx + 'px'
+        }">
+          <button class="btn btn-link btn-sm arrow-btn" (click)="carousel.prev()"><i class="fas fa-3x fa-chevron-left"></i></button>
+          <button class="btn btn-link btn-sm arrow-btn" (click)="carousel.next()"><i class="fas fa-3x fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="d-flex flex-md-column flex-row align-items-stretch justify-content-center thumbnail-wrapper h-100" *ngIf="!(isSmallDevice$ | async)">
+        <ds-thumbnail-slider
+          [scope]="scope"
+          [heightThumbnailPx]="thumbnailHeightPx"
+          [widthThumbnailPx]="thumbnailWidthPx"
+          [activeItemIndexInOuterIndicator]="activeItemIndex"
+          [numberOfItems]="pageSize"
+          [isHorizontal]="(isSmallDevice$ | async)"
+          [sliderEventSource]="sliderEventSource"
+          [discoveryConfiguration]="discoveryConfiguration"
+          [bundle]="bundle"
+          (activeIndexChange)="activeIndexChange($event)"
+          (thumbnailSelected)="selectedThumbnail($event)"
+          (itemToImageHrefMap)="getItemMapValue($event)"
+          (itemsUpdated)="getUpdatedItemList($event)"
+        ></ds-thumbnail-slider>
+  </div>
+</div>
+<div class="d-flex flex-row flex-wrapper justify-content-center">
+  <div class="p-3">
+    <div class="text-center my-5">
+      <h2 class="font-weight-bold" [class]="carouselOptions.titleStyle"
+          *ngIf="activeItem?.metadata[title]">
+        {{activeItem?.metadata[title][0].value}}</h2>
+      <div [class]="carouselOptions.captionStyle"
+        *ngIf="activeItem?.metadata[description]; let descriptionObj"
+        [innerHTML]="descriptionObj[0].value">
+      </div>
+      <ng-container *ngIf="getItemLink(activeItem); let currentLink">
+        <a *ngIf="isLinkInternal(currentLink)" [routerLink]="currentLink">
+          <ng-container *ngTemplateOutlet="seeMoreButton"></ng-container>
+        </a>
+        <a *ngIf="!isLinkInternal(currentLink)" [href]="currentLink"
+          [target]="carouselOptions.targetBlank ? '_blank' : null">
+          <ng-container *ngTemplateOutlet="seeMoreButton"></ng-container>
+        </a>
+      </ng-container>
+      <ng-template #seeMoreButton>
+        <button type="button" class="btn btn-secondary mt-3">{{'carousel.button.see-more' | translate}}</button>
+      </ng-template>
+    </div>
+  </div>
+</div>

@@ -1,25 +1,27 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {NgbCarousel, NgbSlideEvent, NgbSlideEventSource} from '@ng-bootstrap/ng-bootstrap';
+import { ItemSearchResult } from '../object-collection/shared/item-search-result.model';
+import { Component, inject, Inject, Input, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, from, Observable } from 'rxjs';
+import { BitstreamDataService } from '../../core/data/bitstream-data.service';
+import { NativeWindowRef, NativeWindowService } from '../../core/services/window.service';
+import { CarouselOptions } from './carousel-options.model';
+import { Item } from '../../core/shared/item.model';
+import difference from 'lodash/difference';
 import { filter, map, mergeMap, reduce, switchMap, take } from 'rxjs/operators';
-import {PaginatedList} from '../../core/data/paginated-list.model';
-import {BitstreamFormat} from '../../core/shared/bitstream-format.model';
-import {Bitstream} from '../../core/shared/bitstream.model';
-import {BitstreamDataService} from '../../core/data/bitstream-data.service';
-import {getFirstCompletedRemoteData} from '../../core/shared/operators';
 import { hasValue, isNotEmpty } from '../empty.util';
-import {ItemSearchResult} from '../object-collection/shared/item-search-result.model';
-import {followLink} from '../utils/follow-link-config.model';
-import {RemoteData} from '../../core/data/remote-data';
-import {CarouselOptions} from './carousel-options.model';
-import {Item} from '../../core/shared/item.model';
+import { InternalLinkService } from '../../core/services/internal-link.service';
 import { SearchManager } from '../../core/browse/search-manager';
+import { followLink } from '../utils/follow-link-config.model';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { SearchObjects } from '../search/models/search-objects.model';
-import { SortOptions } from '../../core/cache/models/sort-options.model';
+import { RemoteData } from '../../core/data/remote-data';
+import { PaginatedList } from '../../core/data/paginated-list.model';
+import { Bitstream } from '../../core/shared/bitstream.model';
+import { BitstreamFormat } from '../../core/shared/bitstream-format.model';
 import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
-import { InternalLinkService } from '../../core/services/internal-link.service';
-import difference from 'lodash/difference';
+import { SortOptions } from '../../core/cache/models/sort-options.model';
+import { isPlatformBrowser } from '@angular/common';
 
 /**
  * Component representing the Carousel component section.
@@ -31,6 +33,11 @@ import difference from 'lodash/difference';
   providers: []
 })
 export class CarouselComponent implements OnInit {
+  /**
+   * Items to be used in carousel.
+   */
+  @Input()
+  items: ItemSearchResult[];
 
   /**
    * Carousel section configurations.
@@ -87,6 +94,7 @@ export class CarouselComponent implements OnInit {
    */
   pageToBitstreamsMap: Map<number,ItemSearchResult[]> = new Map();
 
+
   /**
    * The page number that drives the bitstreams preload
    */
@@ -97,19 +105,24 @@ export class CarouselComponent implements OnInit {
    */
   carouselItems$: BehaviorSubject<ItemSearchResult[]> = new BehaviorSubject<ItemSearchResult[]>([]);
 
+
+  private platformId = inject(PLATFORM_ID);
+
   private paginationOptionId: string;
 
   private pageSize = 5;
 
   private slideLoadingBuffer = 2;
 
-
+  isBrowser = isPlatformBrowser(this.platformId);
 
   constructor(
     protected bitstreamDataService: BitstreamDataService,
-    private searchManager: SearchManager,
-    public internalLinkService: InternalLinkService,
-  ) {}
+    protected searchManager: SearchManager,
+    protected internalLinkService: InternalLinkService,
+    @Inject(NativeWindowService) protected _window: NativeWindowRef,
+  ) {
+  }
 
   ngOnInit() {
     this.title = this.carouselOptions.title;
@@ -208,6 +221,10 @@ export class CarouselComponent implements OnInit {
 
   getItemLink(item: Item): string {
     return item.firstMetadataValue(this.link);
+  }
+
+  isLinkInternal(link: string) {
+    return link.startsWith('/');
   }
 
   /**
