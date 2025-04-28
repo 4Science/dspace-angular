@@ -13311,6 +13311,12 @@
   // "curation-task.task.ocrclean.label": "Remove all metadata bundles and uploaded ocr created by a previous upload to the ocr server",
   "curation-task.task.ocrclean.label": "Rimuovi tutti i metadata bundles and tutti gli OCR caricati in precedenza sul server OCR",
 
+  // "curation-task.task.reducedaudiouploader.label": "Process reduced audio resources",
+  "curation-task.task.reducedaudiouploader.label": "Processa le risorse audio creando delle copie ridotte",
+
+  // "curation-task.task.reducedvideouploader.label": "Process reduced video resources",
+  "curation-task.task.reducedvideouploader.label": "Processa le risorse video creando delle copie ridotte",
+
   // "vocabulary-treeview.header.fondsboxtree": "Archival Arrangement",
   "vocabulary-treeview.header.fondsboxtree": "Albero Archivistico",
 
