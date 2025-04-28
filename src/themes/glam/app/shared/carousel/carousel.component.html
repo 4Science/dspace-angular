@@ -1,4 +1,4 @@
-<ngb-carousel #carousel [interval]="carouselInterval" (slide)="onSlide($event)"
+<ngb-carousel *ngIf="!(isLoading$ | async)" #carousel [interval]="carouselInterval" (slide)="onSlide($event)"
               [pauseOnHover]="true" [pauseOnFocus]="false"
               [showNavigationArrows]="false"
               [showNavigationIndicators]="false">
@@ -66,3 +66,9 @@
     </ng-container>
   </ng-template>
 </ngb-carousel>
+<div
+  class="row no-gutters"
+  *ngIf="(isLoading$ | async)"
+>
+  <ngx-skeleton-loader class="image-column w-100" [theme]="{height: '100%', width: '100%'}"></ngx-skeleton-loader>
+</div>

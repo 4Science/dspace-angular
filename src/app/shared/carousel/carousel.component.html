@@ -1,10 +1,12 @@
 <ngb-carousel #carousel [interval]="2000" (slide)="onSlide($event)" class="ds-carousel" *ngIf="!(isLoading$ | async)">
   <ng-template ngbSlide *ngFor="let item of (carouselItems$ | async); let i = index; let last = last">
     <ng-container *ngIf="getItemLink(item.indexableObject); let currentLink; else carouselContent">
-      <a *ngIf="internalLinkService.isLinkInternal(currentLink)" [routerLink]="internalLinkService.getRelativePath(currentLink)">
+      <a *ngIf="internalLinkService.isLinkInternal(currentLink)"
+         [routerLink]="internalLinkService.getRelativePath(currentLink)">
         <ng-container *ngTemplateOutlet="carouselContent"></ng-container>
       </a>
-      <a *ngIf="!internalLinkService.isLinkInternal(currentLink)" [href]="currentLink" [target]="carouselOptions.targetBlank ? '_blank' : null">
+      <a *ngIf="!internalLinkService.isLinkInternal(currentLink)" [href]="currentLink"
+         [target]="carouselOptions.targetBlank ? '_blank' : null">
         <ng-container *ngTemplateOutlet="carouselContent"></ng-container>
       </a>
     </ng-container>
@@ -14,18 +16,26 @@
                 'height': carouselOptions.keepAspectRatio ? null : carouselOptions.carouselHeightPx + 'px',
                 'aspect-ratio': carouselOptions.keepAspectRatio ? carouselOptions.aspectRatio : null
            }">
-        <div class="picsum-img-wrapper" *ngIf="(itemToImageHrefMap$ | async).get(item.indexableObject.uuid); let href">
-          <img [src]="href" [alt]="item.indexableObject.metadata[title][0].value" class="img-fluid"
+        <div class="picsum-img-wrapper" *ngIf="isBrowser; else imageSkeleton">
+          <img
+               *ngIf="(itemToImageHrefMap$ | async).get(item.indexableObject.uuid); let href"
+               [src]="href"
+               [alt]="item.indexableObject.metadata[title][0].value" class="img-fluid"
                [ngClass]="{'w-100': carouselOptions.fitWidth, 'h-100': carouselOptions.fitHeight}">
         </div>
+        <ng-template #imageSkeleton>
+          <ngx-skeleton-loader style="width: 100%; height: 100%;"
+                               [theme]="{height: '100%', width: '100%'}"></ngx-skeleton-loader>
+        </ng-template>
         <div class="carousel-caption" *ngIf="item.indexableObject.metadata">
           <div class="carousel-caption-inner">
             <h1 data-test="carouselObjTitle" [class]="carouselOptions.titleStyle" class="h3"
                 *ngIf="item.indexableObject.metadata[title]">
-              {{item.indexableObject.metadata[title][0].value}}</h1>
-            <div data-test="carouselObjDesc" class="carousel-caption-text pr-3 pl-2" [class]="carouselOptions.captionStyle"
+              {{ item.indexableObject.metadata[title][0].value }}</h1>
+            <div data-test="carouselObjDesc" class="carousel-caption-text pr-3 pl-2"
+                 [class]="carouselOptions.captionStyle"
                  *ngIf="item.indexableObject.metadata[description]; let descriptionObj">
-              {{descriptionObj[0].value}}
+              {{ descriptionObj[0].value }}
             </div>
           </div>
         </div>
@@ -42,16 +52,12 @@
            }"
   *ngIf="(isLoading$ | async)"
 >
-  <div class="h-100 img-container-el">
-    <div class="picsum-img-wrapper flex-column">
-      <img class="img-fluid" src="assets/images/replacement_image.svg">
-      {{'loading.default' | translate}}
-    </div>
-  </div>
+  <ngx-skeleton-loader class="h-100 w-100" [theme]="{height: '100%', width: '100%'}"></ngx-skeleton-loader>
 </div>
 
 <div class="text-center play-pause-button">
-  <button [disabled]="isLoading$ | async" [attr.aria-label]="'carousel.play.pause' | translate" type="button" class="btn btn-sm toggle-paused" (click)="togglePaused()">
+  <button [disabled]="isLoading$ | async" [attr.aria-label]="'carousel.play.pause' | translate" type="button"
+          class="btn btn-sm toggle-paused" (click)="togglePaused()">
     <i class="fas fa-play" *ngIf="paused"></i>
     <i class="fas fa-pause" *ngIf="!paused"></i>
   </button>

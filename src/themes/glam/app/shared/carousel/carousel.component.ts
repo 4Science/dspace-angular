@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { CarouselComponent as BaseComponent} from '../../../../../app/shared/carousel/carousel.component';
 import { BitstreamDataService } from '../../../../../app/core/data/bitstream-data.service';
 import { NativeWindowRef, NativeWindowService } from '../../../../../app/core/services/window.service';
@@ -33,7 +33,6 @@ export class CarouselComponent extends BaseComponent implements OnInit {
     protected internalLinkService: InternalLinkService,
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
     @Inject(DOCUMENT) private _document: Document,
-    @Inject(PLATFORM_ID) protected platformId: Object,
   ) {
     super(bitstreamDataService, searchManager, internalLinkService, _window);
   }

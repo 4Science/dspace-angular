@@ -57,6 +57,10 @@
                                      [sectionId]="sectionId"
                                      [twitterSection]="$any(sectionComponent)"></ds-themed-twitter-section>
 
+          <ds-themed-advanced-top-section *ngSwitchCase="'advanced-top-component'"
+                                          [sectionId]="sectionId"
+                                          [advancedTopSection]="$any(sectionComponent)"></ds-themed-advanced-top-section>
+
         </div>
       </div>
     </div>

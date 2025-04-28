@@ -29,10 +29,13 @@ import { ThemedGridSectionComponent } from './section-component/grid-section/the
 import { TwitterSectionComponent } from './section-component/twitter-section/twitter-section.component';
 import { ThemedTwitterSectionComponent } from './section-component/twitter-section/themed-twitter-section.component';
 import { AdvancedTopSectionComponent } from './section-component/advanced-top-section/advanced-top-section.component';
-import { ThemedAdvancedTopSectionComponent } from './section-component/advanced-top-section/themed-advanced-top-section.component';
+import {
+  ThemedAdvancedTopSectionComponent
+} from './section-component/advanced-top-section/themed-advanced-top-section.component';
 import { SliderSectionComponent } from './section-component/slider-section/slider-section.component';
 import { ThemedSliderSectionComponent } from './section-component/slider-section/themed-slider-section.component';
 import { SliderModule } from '../slider/slider.module';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 const COMPONENTS = [
   BrowseSectionComponent,
@@ -71,6 +74,7 @@ const COMPONENTS = [
     CarouselModule,
     MarkdownViewerModule,
     SliderModule,
+    NgxSkeletonLoaderModule,
   ],
   exports: [
     ...COMPONENTS

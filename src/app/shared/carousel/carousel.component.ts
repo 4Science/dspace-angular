@@ -1,5 +1,5 @@
 import { ItemSearchResult } from '../object-collection/shared/item-search-result.model';
-import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, Inject, Input, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, from, Observable } from 'rxjs';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
@@ -21,6 +21,7 @@ import { BitstreamFormat } from '../../core/shared/bitstream-format.model';
 import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
 import { SortOptions } from '../../core/cache/models/sort-options.model';
+import { isPlatformBrowser } from '@angular/common';
 
 /**
  * Component representing the Carousel component section.
@@ -104,13 +105,16 @@ export class CarouselComponent implements OnInit {
    */
   carouselItems$: BehaviorSubject<ItemSearchResult[]> = new BehaviorSubject<ItemSearchResult[]>([]);
 
+
+  protected platformId = inject(PLATFORM_ID);
+
   private paginationOptionId: string;
 
   private pageSize = 5;
 
   private slideLoadingBuffer = 2;
 
-
+  isBrowser = isPlatformBrowser(this.platformId);
 
   constructor(
     protected bitstreamDataService: BitstreamDataService,
