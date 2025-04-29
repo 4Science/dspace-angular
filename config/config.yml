@@ -1,6 +1,6 @@
 rest:
   ssl: true
-  host: dspacecris-demo.staging.4science.cloud
+  host: dspacecris7.4science.cloud
   port: 443
   nameSpace: /server
 
