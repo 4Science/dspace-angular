@@ -31,6 +31,7 @@ import { authBlockingGuard } from './core/auth/auth-blocking.guard';
 import { authenticatedGuard } from './core/auth/authenticated.guard';
 import { notAuthenticatedGuard } from './core/auth/not-authenticated.guard';
 import { groupAdministratorGuard } from './core/data/feature-authorization/feature-authorization-guard/group-administrator.guard';
+import { siteAdministratorGuard } from './core/data/feature-authorization/feature-authorization-guard/site-administrator.guard';
 import { siteRegisterGuard } from './core/data/feature-authorization/feature-authorization-guard/site-register.guard';
 import { endUserAgreementCurrentUserGuard } from './core/end-user-agreement/end-user-agreement-current-user.guard';
 import { reloadGuard } from './core/reload/reload.guard';
@@ -290,7 +291,7 @@ export const APP_ROUTES: Route[] = [
       {
         path: 'auditlogs',
         loadChildren: () => import('./audit-page/audit-page-routes').then((m) => m.ROUTES),
-        canActivate: [authenticatedGuard, endUserAgreementCurrentUserGuard],
+        canActivate: [siteAdministratorGuard, endUserAgreementCurrentUserGuard],
       },
       {
         path: BULK_IMPORT_PATH,
