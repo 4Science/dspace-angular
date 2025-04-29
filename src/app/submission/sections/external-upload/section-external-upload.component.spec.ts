@@ -26,6 +26,7 @@ import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder
 import { JsonPatchOperationsBuilder } from '../../../core/json-patch/builder/json-patch-operations-builder';
 import { Collection } from '../../../core/shared/collection.model';
 import { License } from '../../../core/shared/license.model';
+import { BtnDisabledDirective } from '../../../shared/btn-disabled.directive';
 import {
   mockSubmissionCollectionId,
   mockSubmissionId,
@@ -109,6 +110,7 @@ describe('SectionExternalUploadComponent test suite', () => {
         TranslateModule.forRoot(),
         TestComponent,
         SectionExternalUploadComponent,
+        BtnDisabledDirective,
       ],
       providers: [
         { provide: CollectionDataService, useValue: getMockCollectionDataService() },
@@ -180,7 +182,7 @@ describe('SectionExternalUploadComponent test suite', () => {
       fixture.detectChanges();
 
       expect(comp.source).toBeFalsy();
-      expect(fixture.debugElement.query(By.css('button')).nativeElement.disabled).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('button')).nativeElement.classList.contains('disabled')).toBeTruthy();
     });
 
     it('Should execute upload if source is present', () => {
