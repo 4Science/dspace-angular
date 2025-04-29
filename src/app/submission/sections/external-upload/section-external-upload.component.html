@@ -10,7 +10,7 @@
         <input [(ngModel)]="source" class="form-control w-100" id="externalUploadSource" [placeholder]="'submission.sections.external-upload.placeholder' | translate" />
       </div>
       <div class="w-100 d-flex justify-content-center">
-        <button [dsBtnDisabled]="!source" (click)="submitUpload()" class="btn btn-success mt-4">{{'submission.sections.external-upload.import' | translate}}</button>
+        <button [disabled]="!source" (click)="submitUpload()" class="btn btn-success mt-4">{{'submission.sections.external-upload.import' | translate}}</button>
       </div>
     </div>
     <div *ngIf="loading$ | async">
