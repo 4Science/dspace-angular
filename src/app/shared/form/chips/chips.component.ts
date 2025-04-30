@@ -2,6 +2,7 @@ import {
   CdkDrag,
   CdkDragDrop,
   CdkDropList,
+  CdkDropListGroup,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
 import {
@@ -19,6 +20,7 @@ import {
   Inject,
   Input,
   OnChanges,
+  OnInit,
   Output,
   PLATFORM_ID,
   SimpleChanges,
@@ -66,12 +68,14 @@ const TOOLTIP_TEXT_LIMIT = 21;
     TranslateModule,
     CdkDrag,
     CdkDropList,
+    CdkDropListGroup,
     NgTemplateOutlet,
+    CdkDropListGroup,
     RouterLink,
   ],
   standalone: true,
 })
-export class ChipsComponent implements OnChanges {
+export class ChipsComponent implements OnChanges, OnInit {
   @Input() chips: Chips;
   @Input() wrapperClass: string;
   @Input() editable = false;

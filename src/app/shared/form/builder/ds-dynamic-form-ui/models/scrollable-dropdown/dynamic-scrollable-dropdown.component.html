@@ -47,18 +47,18 @@
          (scrolled)="onScroll()"
          [scrollWindow]="false">
 
-      <button class="dropdown-item disabled" *ngIf="optionsList && optionsList.length === 0">{{'form.no-results' | translate}}</button>
+      <button class="dropdown-item disabled" type="button" *ngIf="optionsList && optionsList.length === 0">{{'form.no-results' | translate}}</button>
       <button class="dropdown-item collection-item text-truncate"
               (click)="onSelect(undefined); sdRef.close()" (mousedown)="onSelect(undefined); sdRef.close()"
               title="{{ 'dropdown.clear.tooltip' | translate }}" role="option"
-      >
+              type="button">
         <i>{{ 'dropdown.clear' | translate }}</i>
       </button>
       <button class="dropdown-item collection-item text-truncate" *ngFor="let listEntry of optionsList; let i = index"
               [class.active]="i === selectedIndex"
               (keydown.enter)="onSelect(listEntry); sdRef.close()" (mousedown)="onSelect(listEntry); sdRef.close()"
-              title="{{ listEntry.display }}" role="option"
-              [attr.id]="listEntry.display === (currentValue|async) ? ('combobox_' + id + '_selected') : null">
+              title="{{ inputFormatter(listEntry) }}" role="option" type="button"
+              [attr.id]="inputFormatter(listEntry) === (currentValue|async) ? ('combobox_' + id + '_selected') : null">
         {{inputFormatter(listEntry)}}
       </button>
       <div class="d-flex align-items-center pl-4 pr-3 py-2" data-test="otherOption"
@@ -66,7 +66,7 @@
         <label class="m-0">{{'form.other-option' | translate}}</label>
         <input data-test="otherOptionInput" type="text" class="form-control form-control-sm mx-2" [(ngModel)]="otherListEntry" (keyup.enter)="addListItem(sdRef)" />
         <button data-test="otherOptionBtn" class="btn btn-primary btn-sm" type="button"
-                (click)="addListItem(sdRef)" [disabled]="addButtonDisabled">
+                (click)="addListItem(sdRef)" [dsBtnDisabled]="addButtonDisabled">
           {{'form.other-option.add-button' | translate}}
         </button>
       </div>

@@ -31,17 +31,13 @@ import {
 import { RemoteDataBuildService } from '../../../../../../../core/cache/builders/remote-data-build.service';
 import { SearchService } from '../../../../../../../core/shared/search/search.service';
 import { SearchConfigurationService } from '../../../../../../../core/shared/search/search-configuration.service';
-import {
-  FILTER_CONFIG,
-  SearchFilterService,
-} from '../../../../../../../core/shared/search/search-filter.service';
+import { SearchFilterService } from '../../../../../../../core/shared/search/search-filter.service';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../../../my-dspace-page/my-dspace-configuration.service';
 import { stringToNgbDateStruct } from '../../../../../../date.util';
 import {
   hasValue,
   isNotEmpty,
 } from '../../../../../../empty.util';
-import { SearchFilterConfig } from '../../../../../models/search-filter-config.model';
 import { SearchRangeFilterComponent } from '../search-range-filter.component';
 
 
@@ -117,9 +113,8 @@ export class SearchRangeDatepickerFilterComponent extends SearchRangeFilterCompo
     protected readonly route: ActivatedRoute,
     @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
     @Inject(PLATFORM_ID) public platformId: any,
-    @Inject(FILTER_CONFIG) public filterConfig: SearchFilterConfig,
   ) {
-    super(searchService, filterService, router, rdbs, route, searchConfigService, platformId, filterConfig);
+    super(searchService, filterService, router, rdbs, route, searchConfigService, platformId);
   }
 
   public override ngOnInit() {

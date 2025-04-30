@@ -6,10 +6,11 @@ import {
 import {
   Component,
   Inject,
-  Injector,
   OnDestroy,
   OnInit,
   PLATFORM_ID,
+  ViewChild,
+  ViewContainerRef,
 } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -18,12 +19,7 @@ import { RemoteDataBuildService } from '../../../../../core/cache/builders/remot
 import { GenericConstructor } from '../../../../../core/shared/generic-constructor';
 import { SearchService } from '../../../../../core/shared/search/search.service';
 import { SearchConfigurationService } from '../../../../../core/shared/search/search-configuration.service';
-import {
-  FILTER_CONFIG,
-  IN_PLACE_SEARCH,
-  REFRESH_FILTER,
-  SearchFilterService,
-} from '../../../../../core/shared/search/search-filter.service';
+import { SearchFilterService } from '../../../../../core/shared/search/search-filter.service';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../my-dspace-page/my-dspace-configuration.service';
 import { FilterType } from '../../../models/filter-type.model';
 import {
@@ -52,10 +48,11 @@ export class SearchRangeFilterWrapperComponent extends SearchFacetFilterComponen
    * The constructor of the search facet filter that should be rendered, based on the filter config's type
    */
   searchFilter: GenericConstructor<SearchFacetFilterComponent>;
+
   /**
    * Injector to inject a child component with the @Input parameters
    */
-  objectInjector: Injector;
+  @ViewChild('containerFilters', { read: ViewContainerRef }) vcr!: ViewContainerRef;
 
   constructor(
     protected searchService: SearchService,
@@ -63,7 +60,6 @@ export class SearchRangeFilterWrapperComponent extends SearchFacetFilterComponen
     protected rdbs: RemoteDataBuildService,
     protected router: Router,
     @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
-    private injector: Injector,
     @Inject(PLATFORM_ID) public platformId: any,
   ) {
     super(searchService, filterService, rdbs, router, searchConfigService);
@@ -71,17 +67,7 @@ export class SearchRangeFilterWrapperComponent extends SearchFacetFilterComponen
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.searchFilter = this.getRangeFilter();
-    this.objectInjector = Injector.create({
-      providers: [
-        { provide: SEARCH_CONFIG_SERVICE, useFactory: () => (this.searchConfigService), deps: [] },
-        { provide: IN_PLACE_SEARCH, useFactory: () => (this.inPlaceSearch), deps: [] },
-        { provide: FILTER_CONFIG, useFactory: () => (this.filterConfig), deps: [] },
-        { provide: PLATFORM_ID, useFactory: () => (this.platformId), deps: [] },
-        { provide: REFRESH_FILTER, useFactory: () => (this.refreshFilters), deps: [] },
-      ],
-      parent: this.injector,
-    });
+    this.createFilterComponent();
   }
 
   /**
@@ -89,6 +75,21 @@ export class SearchRangeFilterWrapperComponent extends SearchFacetFilterComponen
    */
   private getRangeFilter() {
     return renderFilterTypeEnvironment(FilterType.range, environment, this.filterConfig.name);
+  }
+
+  /**
+   * Initialize and add the filter config to the injector
+   */
+  private createFilterComponent() {
+    if (this.vcr) {
+      this.searchFilter = this.getRangeFilter();
+      this.vcr.clear();
+      const componentRef = this.vcr.createComponent(this.searchFilter);
+      componentRef.setInput('filterConfig', this.filterConfig);
+      componentRef.setInput('inPlaceSearch', this.inPlaceSearch);
+      componentRef.setInput('refreshFilters', this.refreshFilters);
+      componentRef.setInput('scope', this.scope);
+    }
   }
 
 }

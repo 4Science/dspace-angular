@@ -4,6 +4,7 @@ import {
   serializable,
 } from '@ng-dynamic-forms/core';
 
+import { ResourceType } from '../../../../../../core/shared/resource-type';
 import { VocabularyOptions } from '../../../../../../core/submission/vocabularies/models/vocabulary-options.model';
 import {
   DsDynamicInputModel,
@@ -13,9 +14,12 @@ import {
 export const DYNAMIC_FORM_CONTROL_TYPE_SCROLLABLE_DROPDOWN = 'SCROLLABLE_DROPDOWN';
 
 export interface DynamicScrollableDropdownModelConfig extends DsDynamicInputModelConfig {
-  vocabularyOptions: VocabularyOptions;
+  vocabularyOptions?: VocabularyOptions;
   maxOptions?: number;
   value?: any;
+  displayKey?: string;
+  formatFunction?: (value: any) => string;
+  resourceType?: ResourceType;
   openType?: boolean;
 }
 
@@ -24,6 +28,15 @@ export class DynamicScrollableDropdownModel extends DsDynamicInputModel {
   @serializable() maxOptions: number;
   @serializable() openType: boolean;
   @serializable() readonly type: string = DYNAMIC_FORM_CONTROL_TYPE_SCROLLABLE_DROPDOWN;
+  @serializable() displayKey: string;
+  /**
+   * Configurable function for display value formatting in input
+   */
+  formatFunction: (value: any) => string;
+  /**
+   * Resource type to match data service
+   */
+  resourceType: ResourceType;
 
   constructor(config: DynamicScrollableDropdownModelConfig, layout?: DynamicFormControlLayout) {
 
@@ -32,6 +45,9 @@ export class DynamicScrollableDropdownModel extends DsDynamicInputModel {
     this.autoComplete = AUTOCOMPLETE_OFF;
     this.vocabularyOptions = config.vocabularyOptions;
     this.maxOptions = config.maxOptions || 10;
+    this.displayKey = config.displayKey || 'display';
+    this.formatFunction = config.formatFunction;
+    this.resourceType = config.resourceType;
     this.openType = config.openType;
   }
 

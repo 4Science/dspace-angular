@@ -11,7 +11,6 @@ import { hasValue } from '../../../../../../shared/empty.util';
 import { Chips } from '../../../../../../shared/form/chips/models/chips.model';
 
 
-
 /**
  * This class defines the basic model to extends for create a new
  * field render component

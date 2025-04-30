@@ -23,7 +23,6 @@ import {
 import { RemoteDataBuildService } from '../../../../../../../core/cache/builders/remote-data-build.service';
 import { SearchService } from '../../../../../../../core/shared/search/search.service';
 import {
-  FILTER_CONFIG,
   IN_PLACE_SEARCH,
   REFRESH_FILTER,
   SCOPE,
@@ -48,7 +47,6 @@ describe('SearchRangeDatepickerFilterComponent', () => {
       providers: [
         { provide: SearchService, useValue: new SearchServiceStub() },
         { provide: Router, useValue: new RouterStub() },
-        { provide: FILTER_CONFIG, useValue: mockFilterConfig },
         { provide: RemoteDataBuildService, useValue: { aggregate: () => observableOf({}) } },
         { provide: ActivatedRoute, useValue: { queryParamMap: observableOf({ get: () => null }) } },
         { provide: SEARCH_CONFIG_SERVICE, useValue: new SearchConfigurationServiceStub() },
@@ -79,6 +77,7 @@ describe('SearchRangeDatepickerFilterComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SearchRangeDatepickerFilterComponent);
     component = fixture.componentInstance;
+    component.filterConfig = mockFilterConfig;
     fixture.detectChanges();
   });
 

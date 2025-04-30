@@ -2,7 +2,10 @@ import {
   AsyncPipe,
   NgIf,
 } from '@angular/common';
-import { Component } from '@angular/core';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 
 import { CollectionElementLinkType } from '../../object-collection/collection-element-link.type';
 import { ObjectGridComponent } from '../../object-grid/object-grid.component';
@@ -19,7 +22,7 @@ import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.com
     ObjectGridComponent,
   ],
 })
-export class CardsBrowseElementsComponent extends AbstractBrowseElementsComponent {
+export class CardsBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnInit {
 
   public collectionElementLinkTypeEnum = CollectionElementLinkType;
 

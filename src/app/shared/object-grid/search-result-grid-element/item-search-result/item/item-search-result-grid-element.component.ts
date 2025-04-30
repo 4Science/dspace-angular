@@ -4,7 +4,10 @@ import {
   NgFor,
   NgIf,
 } from '@angular/common';
-import { Component } from '@angular/core';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {
@@ -59,7 +62,7 @@ import { SearchResultGridElementComponent } from '../../search-result-grid-eleme
 /**
  * The component for displaying a grid element for an item search result of the type Publication
  */
-export class ItemSearchResultGridElementComponent extends SearchResultGridElementComponent<ItemSearchResult, Item> {
+export class ItemSearchResultGridElementComponent extends SearchResultGridElementComponent<ItemSearchResult, Item> implements OnInit {
   /**
    * Route to the item's page
    */

@@ -112,7 +112,7 @@ describe('EditRelationshipListComponent', () => {
     },
   };
 
-  function init(leftType: string, rightType: string): void {
+  function init(leftType: string, rightType: string, leftMaxCardinality?: number, rightMaxCardinality?: number): void {
     entityTypeLeft = Object.assign(new ItemType(), {
       id: leftType,
       uuid: leftType,
@@ -132,6 +132,8 @@ describe('EditRelationshipListComponent', () => {
       rightType: createSuccessfulRemoteDataObject$(entityTypeRight),
       leftwardType: `is${rightType}Of${leftType}`,
       rightwardType: `is${leftType}Of${rightType}`,
+      leftMaxCardinality: leftMaxCardinality,
+      rightMaxCardinality: rightMaxCardinality,
     });
 
     paginationOptions = Object.assign(new PaginationComponentOptions(), {
@@ -255,8 +257,6 @@ describe('EditRelationshipListComponent', () => {
         EditRelationshipListComponent,
         RouterModule.forRoot([]),
         TranslateModule.forRoot(),
-        // MockComponent(EditRelationshipComponent),
-        // MockComponent(PaginationComponent),
       ],
       providers: [
         provideMockStore({ initialState }),
@@ -403,7 +403,8 @@ describe('EditRelationshipListComponent', () => {
           comp.hasChanges = observableOf(true);
           fixture.detectChanges();
           const element = de.query(By.css('.btn-success'));
-          expect(element.nativeElement?.disabled).toBeTrue();
+          expect(element.nativeElement?.getAttribute('aria-disabled')).toBe('true');
+          expect(element.nativeElement?.classList.contains('disabled')).toBeTrue();
         });
       });
 
@@ -417,6 +418,33 @@ describe('EditRelationshipListComponent', () => {
       expect(comp.relatedEntityType$).toBeObservable(cold('(a|)', {
         a: entityTypeRight,
       }));
+    });
+  });
+
+  describe('Is repeatable relationship', () => {
+    beforeEach(waitForAsync(() => {
+      currentItemIsLeftItem$ =  new BehaviorSubject<boolean>(true);
+    }));
+    describe('when max cardinality is 1', () => {
+      beforeEach(waitForAsync(() => init('Publication', 'OrgUnit', 1, undefined)));
+      it('should return false', () => {
+        const result = (comp as any).isRepeatable();
+        expect(result).toBeFalse();
+      });
+    });
+    describe('when max cardinality is 2', () => {
+      beforeEach(waitForAsync(() => init('Publication', 'OrgUnit', 2, undefined)));
+      it('should return true', () => {
+        const result = (comp as any).isRepeatable();
+        expect(result).toBeTrue();
+      });
+    });
+    describe('when max cardinality is undefined', () => {
+      beforeEach(waitForAsync(() => init('Publication', 'OrgUnit', undefined, undefined)));
+      it('should return true', () => {
+        const result = (comp as any).isRepeatable();
+        expect(result).toBeTrue();
+      });
     });
   });
 });

@@ -34,7 +34,6 @@
               "ngx-export-as",
               "url-parse",
               "uuid",
-              "webfontloader",
               "xlsx",
               "zone.js"
             ],
@@ -73,7 +72,8 @@
               "./node_modules/leaflet/dist/leaflet.css",
               "./node_modules/quill/dist/quill.core.css",
               "./node_modules/quill/dist/quill.snow.css",
-              "./node_modules/quill/dist/quill.bubble.css"
+              "./node_modules/quill/dist/quill.bubble.css",
+              "./node_modules/quill-emoji/dist/quill-emoji.css"
             ],
             "scripts": [],
             "baseHref": "/"

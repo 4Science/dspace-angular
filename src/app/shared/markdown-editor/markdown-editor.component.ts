@@ -54,6 +54,7 @@ export class MarkdownEditorComponent  {
         [{ 'font': [] }],
         [{ 'align': [] }],
         ['clean'],
+        ['emoji'],
       ],
     },
     syntax: false,
