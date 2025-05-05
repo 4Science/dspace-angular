@@ -11,6 +11,7 @@ import { FeatureID } from './feature-id';
 import { hasValue } from '../../../shared/empty.util';
 import { GetAuthorizationsAction } from './authorization.actions';
 import { SiteDataService } from '../site-data.service';
+import { Site } from '../../shared/site.model';
 
 export const authorizationsSelector = createFeatureSelector<AuthorizationsState>('authorizationFeatures');
 
@@ -58,13 +59,13 @@ export class AuthorizationService {
   initStateForSite(featureIDs: FeatureID[]) {
     this.siteService.find().pipe(
       take(1)
-    ).subscribe(site => this.initStateForObjects([site.uuid], site.uniqueType, featureIDs, [site.self]));
+    ).subscribe((site: Site) => this.initStateForObjects([site.uuid], site.uniqueType, featureIDs, [site.self]));
   }
 
   initAnonymousStateForSite() {
     this.siteService.find().pipe(
       take(1)
-    ).subscribe(site => this.initStateForObjects([site.uuid], site.uniqueType, [], [site.self]));
+    ).subscribe((site: Site) => this.initStateForObjects([site.uuid], site.uniqueType, [], [site.self]));
   }
 
 

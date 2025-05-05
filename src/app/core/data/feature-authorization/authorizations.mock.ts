@@ -13,6 +13,9 @@ export const mockAuthSiteObject = {
     self: {
       href: 'host/server/api/core/sites/f92d103c-e4ad-4dfb-b59f-f90c7425407e'
     }
+  },
+  get self(): string {
+    return this._links.self.href;
   }
 } as DSpaceObject;
 

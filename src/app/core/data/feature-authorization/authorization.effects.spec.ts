@@ -11,6 +11,7 @@ import { AuthorizationActionTypes, GetAuthorizationsAction, GetAuthorizationsErr
 import { environment } from '../../../../environments/environment';
 import { AuthorizationDataService } from './authorization-data.service';
 import { AuthorizationDataServiceStub } from '../../../shared/testing/authorization-service.stub';
+import { getRequestIdFromParams } from './authorization-utils';
 
 
 let authorizationEffects: AuthorizationEffects;
@@ -53,11 +54,13 @@ describe('AuthorizationEffects success', () => {
       actions = hot('--a-', {
         a: {
           type: AuthorizationActionTypes.GET_AUTHORIZATIONS,
-          payload: { uuidList: [mockAuthSiteObject.uuid], type: mockAuthSiteObject.uniqueType, featureIDs: featureIDs }
+          payload: { uuidList: [mockAuthSiteObject.uuid], type: mockAuthSiteObject.uniqueType, featureIDs: featureIDs, hrefs: [mockAuthSiteObject.self] }
         }
       });
 
-      const expected = cold('--b-', { b: new GetAuthorizationsSuccessAction({}, '')});
+      const requestId = getRequestIdFromParams(mockAuthSiteObject.uniqueType, [mockAuthSiteObject.uuid], featureIDs);
+
+      const expected = cold('--b-', { b: new GetAuthorizationsSuccessAction({}, requestId)});
 
       expect(authorizationEffects.getAuthorizations$).toBeObservable(expected);
       done();
@@ -95,7 +98,7 @@ describe('AuthorizationEffects error', () => {
 
   describe('getAuthorizations$ when request fails', () => {
     it('should return a new GetAuthorizationsErrorAction', (done) => {
-      actions = of(new GetAuthorizationsAction([mockAuthSiteObject.uuid], mockAuthSiteObject.uniqueType, featureIDs, [mockAuthSiteObject._links.self.href] ));
+      actions = of(new GetAuthorizationsAction([mockAuthSiteObject.uuid], mockAuthSiteObject.uniqueType, featureIDs, [mockAuthSiteObject.self] ));
 
       authorizationEffects.getAuthorizations$.subscribe(expected => {
         expect(expected).toEqual(new GetAuthorizationsErrorAction());

@@ -31,7 +31,8 @@ describe('AuthorizationService', () => {
         }
       },
       loading: false,
-      hasError: false
+      hasError: false,
+      pendingRequests: []
     }
   };
 
@@ -90,7 +91,7 @@ describe('AuthorizationService', () => {
     tick(100);
 
     expect(siteService.find).toHaveBeenCalled();
-    expect(store.dispatch).toHaveBeenCalledWith(new GetAuthorizationsAction([mockAuthSiteObject.uuid], mockAuthSiteObject.uniqueType, environment.siteAuthorizationFeaturesConfig, [mockAuthSiteObject._links.self.href]));
+    expect(store.dispatch).toHaveBeenCalledWith(new GetAuthorizationsAction([mockAuthSiteObject.uuid], mockAuthSiteObject.uniqueType, environment.siteAuthorizationFeaturesConfig, [mockAuthSiteObject.self]));
   }));
 
   it('should return a boolean for the authorization of a single object', (done) => {
