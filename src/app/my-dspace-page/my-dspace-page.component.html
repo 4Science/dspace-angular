@@ -9,7 +9,7 @@
   [configurationList]="(configurationList$ | async)"
   [context]="context"
   [viewModeList]="viewModeList"
-  [showThumbnails]="false"
+  [showThumbnails]="true"
   [selectable]="(currentConfiguration$ | async) === workflowType"
   [selectionConfig]="{ repeatable: true, listId: listId }"
   (deselectObject)="onDeselectObject($event)"
