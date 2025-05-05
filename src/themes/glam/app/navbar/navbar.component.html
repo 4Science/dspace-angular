@@ -7,14 +7,14 @@
       </a>
       <div class="ml-auto right-container">
         <ul class="navbar-nav ml-auto ml-auto mb-auto mt-3 list-unstyled">
-          <li>
+          <li *ngIf="mainSiteUrl">
             <div class="nav-item" id="home-icon">
-              <a *ngIf="mainSiteUrl" [attr.aria-label]="'nav.mainSiteName' | translate" class="nav-link navbar-collapsed" target="_blank" [href]="'https://' + mainSiteUrl" [ngbTooltip]="'nav.mainSiteName' | translate">
+              <a [attr.aria-label]="'nav.mainSiteName' | translate" class="nav-link navbar-collapsed" target="_blank" [href]="'https://' + mainSiteUrl" [ngbTooltip]="'nav.mainSiteName' | translate">
                 <i class="fas fa-home fa-lg fa-fw"></i>
               </a>
-              <a *ngIf="!mainSiteUrl" [attr.aria-label]="'home.title' | translate" class="nav-link navbar-collapsed" [routerLink]="['/home']" [ngbTooltip]="'home.title' | translate">
+              <!--<a *ngIf="!mainSiteUrl" [attr.aria-label]="'home.title' | translate" class="nav-link navbar-collapsed" [routerLink]="['/home']" [ngbTooltip]="'home.title' | translate">
                 <i class="fas fa-home fa-lg fa-fw"></i>
-              </a>
+              </a>-->
             </div>
           </li>
           <li>
