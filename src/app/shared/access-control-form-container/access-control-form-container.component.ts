@@ -18,6 +18,10 @@ import { BulkAccessConditionOptions } from '../../core/config/models/bulk-access
 import { AlertType } from '../alert/alert-type';
 import { createAccessControlInitialFormState } from './access-control-form-container-intial-state';
 import { SwitchColor, SwitchOption } from '../switch/switch.component';
+import {
+  ITEM_ACCESS_CONTROL_SELECT_BUNDLES_LIST_ID,
+  ItemAccessControlSelectBundlesModalComponent
+} from './item-access-control-select-bundles-modal/item-access-control-select-bundles-modal.component';
 
 @Component({
   selector: 'ds-access-control-form-container',
@@ -82,11 +86,6 @@ export class AccessControlFormContainerComponent<T extends DSpaceObject> impleme
    * Will be used from a parent component to read the value of the form
    */
   getFormValue() {
-    console.log({
-      bitstream: this.bitstreamAccessCmp.getValue(),
-      item: this.itemAccessCmp.getValue(),
-      state: this.state
-    });
     return {
       bitstream: this.bitstreamAccessCmp.getValue(),
       item: this.itemAccessCmp.getValue(),
@@ -159,8 +158,29 @@ export class AccessControlFormContainerComponent<T extends DSpaceObject> impleme
     });
   }
 
+  /**
+   * Open the modal to select bundles for which to change the access control
+   * This will open the modal and pass the currently selected bundles
+   * @param item The item for which to change the access control
+   */
+  openSelectBundlesModal(item: Item) {
+    const ref = this.modalService.open(
+      ItemAccessControlSelectBundlesModalComponent
+    );
+    ref.componentInstance.item = item;
+
+    ref.closed.pipe(
+      concatMap(() => this.selectableListService.getSelectableList(ITEM_ACCESS_CONTROL_SELECT_BUNDLES_LIST_ID)),
+      take(1),
+    ).subscribe((list) => {
+      this.state.bitstream.selectedBundles = list?.selection || [];
+      this.cdr.detectChanges();
+    });
+  }
+
   ngOnDestroy(): void {
     this.selectableListService.deselectAll(ITEM_ACCESS_CONTROL_SELECT_BITSTREAMS_LIST_ID);
+    this.selectableListService.deselectAll(ITEM_ACCESS_CONTROL_SELECT_BUNDLES_LIST_ID);
   }
 
 }
