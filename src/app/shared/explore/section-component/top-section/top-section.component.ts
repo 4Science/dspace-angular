@@ -5,7 +5,7 @@ import { LayoutModeEnum, TopSection, TopSectionTemplateType } from './../../../.
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
 import { Context } from '../../../../core/shared/context.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 /**
  * Component representing the Top component section.
@@ -37,7 +37,10 @@ export class TopSectionComponent implements OnInit {
   /**
    * The paginated search options for the section
    */
-  paginatedSearchOptions = new BehaviorSubject<PaginatedSearchOptions>(null);
+  get paginatedSearchOptions$(): Observable<PaginatedSearchOptions> {
+    return this._paginatedSearchOptions$.asObservable();
+  }
+  protected _paginatedSearchOptions$ = new BehaviorSubject<PaginatedSearchOptions>(null);
 
   /**
    * The sort direction of the section.
@@ -70,7 +73,7 @@ export class TopSectionComponent implements OnInit {
       currentPage: 1,
     });
     this.layoutMode = this.topSection.defaultLayoutMode;
-    this.paginatedSearchOptions.next(new PaginatedSearchOptions({
+    this._paginatedSearchOptions$.next(new PaginatedSearchOptions({
       configuration: name,
       pagination: pagination,
       sort: this.sortOptions,
