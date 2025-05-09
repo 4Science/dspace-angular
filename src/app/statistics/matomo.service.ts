@@ -1,6 +1,8 @@
 import {
+  EnvironmentInjector,
   inject,
   Injectable,
+  runInInjectionContext,
 } from '@angular/core';
 import {
   MatomoInitializerService,
@@ -11,12 +13,10 @@ import {
   from as fromPromise,
   Observable,
   of,
-  switchMap,
 } from 'rxjs';
 import {
   map,
   take,
-  tap,
 } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
@@ -31,6 +31,12 @@ import { isNotEmpty } from '../shared/empty.util';
 export const MATOMO_TRACKER_URL = 'matomo.tracker.url';
 export const MATOMO_SITE_ID = 'matomo.request.siteid';
 
+export const MATOMO_ENABLED = 'matomo.enabled';
+
+/**
+ * Service to manage Matomo analytics integration.
+ * Handles initialization and consent management for Matomo tracking.
+ */
 @Injectable({
   providedIn: 'root',
 })
@@ -40,13 +46,20 @@ export const MATOMO_SITE_ID = 'matomo.request.siteid';
  */
 export class MatomoService {
 
-  matomoInitializer = inject(MatomoInitializerService);
-  matomoTracker = inject(MatomoTracker);
+  /** Injects the MatomoInitializerService to initialize the Matomo tracker. */
+  matomoInitializer: MatomoInitializerService;
+
+  /** Injects the MatomoTracker to manage Matomo tracking operations. */
+  matomoTracker: MatomoTracker;
   klaroService = inject(KlaroService);
   _window = inject(NativeWindowService);
 
   /** Injects the ConfigurationService. */
   configService = inject(ConfigurationDataService);
+
+  constructor(private injector: EnvironmentInjector) {
+
+  }
 
   /**
    * Initializes the Matomo tracker if in production environment.
@@ -61,24 +74,29 @@ export class MatomoService {
     if (environment.production) {
       const preferences$ = this.klaroService.getSavedPreferences();
 
-      preferences$
-        .pipe(
-          tap(preferences => this.changeMatomoConsent(preferences?.matomo)),
-          switchMap(_ => combineLatest([this.isMatomoEnabled$(), this.getSiteId$(), this.getTrackerUrl$()])),
-        )
-        .subscribe(([isMatomoEnabled, siteId, trackerUrl]) => {
+      combineLatest([preferences$, this.isMatomoEnabled$(), this.getSiteId$(), this.getTrackerUrl$()])
+        .subscribe(([preferences, isMatomoEnabled, siteId, trackerUrl]) => {
           if (isMatomoEnabled && siteId && trackerUrl) {
+            runInInjectionContext(this.injector, () => {
+              this.matomoTracker = inject(MatomoTracker);
+              this.matomoInitializer = inject(MatomoInitializerService);
+            });
             this.matomoInitializer.initializeTracker({ siteId, trackerUrl });
+            this.changeMatomoConsent(preferences?.matomo);
           }
         });
     }
   }
 
+  /**
+   * Changes the Matomo consent status based on the given consent value.
+   * @param consent - A boolean indicating whether consent is given for Matomo tracking.
+   */
   changeMatomoConsent = (consent: boolean) => {
     if (consent) {
-      this.matomoTracker.setConsentGiven();
+      this.matomoTracker?.setConsentGiven();
     } else {
-      this.matomoTracker.forgetConsentGiven();
+      this.matomoTracker?.forgetConsentGiven();
     }
   };
 
@@ -88,7 +106,7 @@ export class MatomoService {
    * @returns An Observable that emits the URL with the visitor ID appended.
    */
   appendVisitorId(url: string): Observable<string> {
-    return fromPromise(this.matomoTracker.getVisitorId())
+    return fromPromise(this.matomoTracker?.getVisitorId())
       .pipe(
         map(visitorId => this.appendTrackerId(url, visitorId)),
         take(1),
@@ -124,6 +142,21 @@ export class MatomoService {
         getFirstCompletedRemoteData(),
         map((res: RemoteData<ConfigurationProperty>) => {
           return res.hasSucceeded && res.payload && isNotEmpty(res.payload.values) && res.payload.values[0];
+        }),
+      );
+  }
+
+  /**
+   * Checks if Matomo tracking is enabled by retrieving the configuration property.
+   * @returns An Observable that emits a boolean indicating whether Matomo tracking is enabled.
+   */
+  isMatomoEnabled$(): Observable<boolean> {
+    return this.configService.findByPropertyName(MATOMO_ENABLED)
+      .pipe(
+        getFirstCompletedRemoteData(),
+        map((res: RemoteData<ConfigurationProperty>) => {
+          return res.hasSucceeded && res.payload && isNotEmpty(res.payload.values) &&
+            res.payload.values[0]?.toLowerCase() === 'true';
         }),
       );
   }
