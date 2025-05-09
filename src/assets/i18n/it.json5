@@ -3985,6 +3985,9 @@
   // TODO Source message changed - Revise the translation
   "dataset.listelement.badge": "Dataset",
 
+  // "dspaceitem.listelement.badge": "Item",
+  "dspaceitem.listelement.badge": "Item",
+
   // "equipment.listelement.badge": "Equipment",
   "equipment.listelement.badge": "Attrezzature",
 
