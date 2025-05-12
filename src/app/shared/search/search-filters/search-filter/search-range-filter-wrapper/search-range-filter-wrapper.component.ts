@@ -4,6 +4,7 @@ import {
   NgForOf,
 } from '@angular/common';
 import {
+  AfterViewInit,
   Component,
   Inject,
   OnDestroy,
@@ -42,7 +43,7 @@ import { renderFilterTypeEnvironment } from '../search-filter-type-environment-d
   ],
   standalone: true,
 })
-export class SearchRangeFilterWrapperComponent extends SearchFacetFilterComponent implements OnInit, OnDestroy {
+export class SearchRangeFilterWrapperComponent extends SearchFacetFilterComponent implements AfterViewInit, OnInit, OnDestroy {
 
   /**
    * The constructor of the search facet filter that should be rendered, based on the filter config's type
@@ -67,6 +68,9 @@ export class SearchRangeFilterWrapperComponent extends SearchFacetFilterComponen
 
   ngOnInit(): void {
     super.ngOnInit();
+  }
+
+  ngAfterViewInit(): void {
     this.createFilterComponent();
   }
 
