@@ -36,7 +36,7 @@ import { SearchFilterConfig } from '../../../../../models/search-filter-config.m
 import { SearchRangeFilterComponent } from '../search-range-filter.component';
 import { SearchRangeDatepickerFilterComponent } from './search-range-datepicker-filter.component';
 
-fdescribe('SearchRangeDatepickerFilterComponent', () => {
+describe('SearchRangeDatepickerFilterComponent', () => {
   let component: SearchRangeDatepickerFilterComponent;
   let fixture: ComponentFixture<SearchRangeDatepickerFilterComponent>;
   const mockFilterConfig: SearchFilterConfig = new SearchFilterConfig();
