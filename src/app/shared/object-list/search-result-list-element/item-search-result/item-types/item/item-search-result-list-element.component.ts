@@ -50,6 +50,7 @@ import { KlaroService } from '../../../../../cookies/klaro.service';
 import { isNotEmpty } from '../../../../../empty.util';
 import { MetadataLinkViewComponent } from '../../../../../metadata-link-view/metadata-link-view.component';
 import { ThemedBadgesComponent } from '../../../../../object-collection/shared/badges/themed-badges.component';
+import { InWorkflowStatisticsComponent } from '../../../../../object-collection/shared/in-workflow-statistics/in-workflow-statistics.component';
 import { ItemSearchResult } from '../../../../../object-collection/shared/item-search-result.model';
 import { listableObjectComponent } from '../../../../../object-collection/shared/listable-object/listable-object.decorator';
 import { TruncatableComponent } from '../../../../../truncatable/truncatable.component';
@@ -69,7 +70,7 @@ import { SearchResultListElementComponent } from '../../../search-result-list-el
   styleUrls: ['./item-search-result-list-element.component.scss'],
   templateUrl: './item-search-result-list-element.component.html',
   standalone: true,
-  imports: [NgIf, RouterLink, ThemedThumbnailComponent, NgClass, ThemedBadgesComponent, TruncatableComponent, TruncatablePartComponent, NgFor, AsyncPipe, TranslateModule, AdditionalMetadataComponent, MetadataLinkViewComponent, MetricBadgesComponent, MetricDonutsComponent, NgbTooltipModule, VarDirective],
+  imports: [NgIf, RouterLink, ThemedThumbnailComponent, NgClass, ThemedBadgesComponent, TruncatableComponent, TruncatablePartComponent, NgFor, AsyncPipe, TranslateModule, AdditionalMetadataComponent, MetadataLinkViewComponent, MetricBadgesComponent, MetricDonutsComponent, VarDirective, InWorkflowStatisticsComponent, NgbTooltipModule],
 })
 /**
  * The component for displaying a list element for an item search result of the type Publication
@@ -164,4 +165,5 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
   showSettings() {
     this.klaroService.showSettings();
   }
+
 }
