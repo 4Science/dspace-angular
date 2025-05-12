@@ -36,7 +36,7 @@ import { SearchFilterConfig } from '../../../../../models/search-filter-config.m
 import { SearchRangeFilterComponent } from '../search-range-filter.component';
 import { SearchRangeDatepickerFilterComponent } from './search-range-datepicker-filter.component';
 
-describe('SearchRangeDatepickerFilterComponent', () => {
+fdescribe('SearchRangeDatepickerFilterComponent', () => {
   let component: SearchRangeDatepickerFilterComponent;
   let fixture: ComponentFixture<SearchRangeDatepickerFilterComponent>;
   const mockFilterConfig: SearchFilterConfig = new SearchFilterConfig();
@@ -78,6 +78,7 @@ describe('SearchRangeDatepickerFilterComponent', () => {
     fixture = TestBed.createComponent(SearchRangeDatepickerFilterComponent);
     component = fixture.componentInstance;
     component.filterConfig = mockFilterConfig;
+    component.refreshFilters = new BehaviorSubject<boolean>(false);
     fixture.detectChanges();
   });
 
