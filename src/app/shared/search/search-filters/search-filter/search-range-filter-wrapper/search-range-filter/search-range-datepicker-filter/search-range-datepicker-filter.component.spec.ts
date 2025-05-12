@@ -78,6 +78,7 @@ describe('SearchRangeDatepickerFilterComponent', () => {
     fixture = TestBed.createComponent(SearchRangeDatepickerFilterComponent);
     component = fixture.componentInstance;
     component.filterConfig = mockFilterConfig;
+    component.refreshFilters = new BehaviorSubject<boolean>(false);
     fixture.detectChanges();
   });
 
