@@ -8,7 +8,7 @@ import { SearchService } from '../../../../core/shared/search/search.service';
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
 import { CarouselSection } from '../../../../core/layout/models/section.model';
-import {CarouselOptions} from '../../../carousel/carousel-options.model';
+import { CarouselOptions } from '../../../carousel/carousel-options.model';
 import { ItemSearchResult } from '../../../object-collection/shared/item-search-result.model';
 
 /**
@@ -93,12 +93,12 @@ export class CarouselSectionComponent implements OnInit {
       captionStyle: this.carouselSection.captionStyle,
       titleStyle: this.carouselSection.titleStyle,
       bundle: this.carouselSection.bundle,
-      showBlurryBackdrop: this.carouselSection.showBlurryBackdrop,
+      showBlurryBackdrop: this.carouselSection.showBlurryBackdrop ?? false,
       discoveryConfiguration: this.carouselSection.discoveryConfigurationName,
       order: this.carouselSection.order,
       sortField: this.carouselSection.sortField ?? this.DEFAULT_SORT_FIELD,
       sortDirection:  this.carouselSection.order && this.carouselSection.order.toUpperCase() === 'ASC' ? SortDirection.ASC : SortDirection.DESC,
-      numberOfItems: this.carouselSection.numberOfItems &&  this.carouselSection.numberOfItems  > 0 ? this.carouselSection.numberOfItems : 20,
+      numberOfItems: this.carouselSection.numberOfItems &&  this.carouselSection.numberOfItems  > 0 ? this.carouselSection.numberOfItems : 20
     };
 
     this.paginatedSearchOptions = new PaginatedSearchOptions({
