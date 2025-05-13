@@ -18,6 +18,7 @@ import { TextSelectionTooltipComponent } from './text-selection-tooltip/text-sel
 
 @Directive({
   selector: '[dsTextSelectTooltip]',
+  standalone: true,
 })
 export class TextSelectDirective implements OnInit, OnDestroy {
 
