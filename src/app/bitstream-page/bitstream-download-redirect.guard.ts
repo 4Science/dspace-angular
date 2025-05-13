@@ -65,10 +65,10 @@ export const bitstreamDownloadRedirectGuard: CanActivateFn = (
     }),
     map(([isAuthorized, isLoggedIn, bitstream, fileLink]: [boolean, boolean, Bitstream, string]) => {
       if (isAuthorized && isLoggedIn && isNotEmpty(fileLink)) {
-        hardRedirectService.redirect(fileLink);
+        hardRedirectService.redirect(fileLink, null, true);
         return false;
       } else if (isAuthorized && !isLoggedIn) {
-        hardRedirectService.redirect(bitstream._links.content.href);
+        hardRedirectService.redirect(bitstream._links.content.href, null, true);
         return false;
       } else if (!isAuthorized && isLoggedIn) {
         return router.createUrlTree([getForbiddenRoute()]);
