@@ -55,6 +55,7 @@ import {
   NativeWindowService,
 } from './core/services/window.service';
 import { distinctNext } from './core/shared/distinct-next';
+import { TextSelectDirective } from './directives/text-select/text-select.directive';
 import { ThemedRootComponent } from './root/themed-root.component';
 import { DatadogRumService } from './shared/datadog-rum/datadog-rum.service';
 import { HostWindowResizeAction } from './shared/host-window.actions';
@@ -76,6 +77,7 @@ import { SocialService } from './social/social.service';
     AsyncPipe,
     NgIf,
     SocialComponent,
+    TextSelectDirective,
   ],
 })
 export class AppComponent implements OnInit, AfterViewInit {
