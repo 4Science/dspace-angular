@@ -22,7 +22,7 @@
         </div>
       </div>
       <ds-themed-browse-most-elements [context]="context"
-                                      [paginatedSearchOptions]="paginatedSearchOptions"
+                                      [paginatedSearchOptions]="paginatedSearchOptions$ | async"
                                       [mode]="layoutMode"
                                       [showLabel]="true"
                                       [showMetrics]="true"
