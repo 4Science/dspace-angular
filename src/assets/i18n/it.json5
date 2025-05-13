@@ -13880,6 +13880,8 @@
   "layout.tab.header.Person.personexternallinks": "Link Esterni",
   // "layout.tab.header.Person.relations": "Relations",
   "layout.tab.header.Person.relations": "Relazioni",
+  // "layout.tab.header.Person.personannotations":"Annotations"
+  "layout.tab.header.Person.personannotations": "Annotazioni",
 
   // "layout.tab.header.OrgUnit.maininformation": "Information",
   "layout.tab.header.OrgUnit.maininformation": "Informazioni",
@@ -13999,6 +14001,8 @@
   "layout.tab.header.Picture.details": "Informazioni di Dettaglio",
   // "layout.tab.header.Picture.relations": "Relations",
   "layout.tab.header.Picture.relations": "Relazioni",
+  // "layout.tab.header.Picture.pictureannotations":"Annotations"
+  "layout.tab.header.Picture.pictureannotations": "Annotazioni",
 
   // "layout.tab.header.Publication.relations": "Relations",
   "layout.tab.header.Publication.relations": "Relazioni",
@@ -14010,12 +14014,18 @@
 
   // "layout.tab.header.ScientificMaterial.relations": "Relations",
   "layout.tab.header.ScientificMaterial.relations": "Relazioni",
+  // "layout.tab.header.ScientificMaterial.scientificmaterialannotations":"Annotations"
+  "layout.tab.header.ScientificMaterial.scientificmaterialannotations": "Annotazioni",
 
   // "layout.tab.header.Coin.relations": "Relations",
   "layout.tab.header.Coin.relations": "Relazioni",
+  // "layout.tab.header.Coin.coinannotations":"Annotations"
+  "layout.tab.header.Coin.coinannotations": "Annotazioni",
 
   // "layout.tab.header.Artwork.relations": "Relations",
   "layout.tab.header.Artwork.relations": "Relazioni",
+  // "layout.tab.header.Artwork.artworkannotations":"Annotations"
+  "layout.tab.header.Artwork.artworkannotations": "Annotazioni",
 
   // "layout.tab.header.MusicalLibrettos.relations": "Relations",
   "layout.tab.header.MusicalLibrettos.relations": "Relazioni",
@@ -14100,6 +14110,8 @@
   "layout.box.header.Event.relationaggregation": "Aggregazioni",
   // "layout.box.header.Event.relationpath": "Paths",
   "layout.box.header.Event.relationpath": "Percorsi",
+  // "layout.tab.header.Event.eventannotations":"Annotations"
+  "layout.tab.header.Event.eventannotations": "Annotazioni",
 
   // "layout.box.header.Publication.details": "Details",
   "layout.box.header.Publication.details": "Informazioni di Dettaglio",
@@ -14141,6 +14153,8 @@
   "layout.box.header.Place.relationaggregation": "Aggregazioni",
   // "layout.box.header.Place.relationpath": "Paths",
   "layout.box.header.Place.relationpath": "Percorsi",
+  // "layout.tab.header.Place.placeannotations":"Annotations"
+  "layout.tab.header.Place.placeannotations": "Annotazioni",
 
   // "layout.box.header.Family.familydescription": "Description",
   "layout.box.header.Family.familydescription": "Descrizione",
@@ -14152,6 +14166,8 @@
   "layout.box.header.Family.relationaggregation": "Aggregazioni",
   // "layout.box.header.Family.relationpath": "Paths",
   "layout.box.header.Family.relationpath": "Percorsi",
+  // "layout.tab.header.Family.familyannotations":"Annotations"
+  "layout.tab.header.Family.familyannotations": "Annotazioni",
 
   // "layout.box.header.JournalFonds.journalfondsdescription": "Description",
   "layout.box.header.JournalFonds.journalfondsdescription": "Descrizione",
@@ -14192,6 +14208,8 @@
   "layout.box.header.ArchivalMaterial.relationproject": "Progetti",
   // "layout.box.header.ArchivalMaterial.relationplace": "Places",
   "layout.box.header.ArchivalMaterial.relationplace": "Luoghi",
+  // "layout.tab.header.ArchivalMaterial.archivalmaterialannotations":"Annotations"
+  "layout.tab.header.ArchivalMaterial.archivalmaterialannotations": "Annotazioni",
 
   // "layout.box.header.WebAnnotation.relationsubject": "Subject",
   "layout.box.header.WebAnnotation.relationsubject": "Soggetto",
@@ -14286,6 +14304,8 @@
   "layout.box.header.Publication.relationispartofcontainer": "Fa parte di",
   // "layout.box.header.Publication.relationhaspart": "Contains",
   "layout.box.header.Publication.relationhaspart": "Contiene",
+  // "layout.tab.header.Publication.publicationannotations":"Annotations"
+  "layout.tab.header.Publication.publicationannotations": "Annotazioni",
 
   // "layout.box.header.AudioVideo.details": "Details",
   "layout.box.header.AudioVideo.details": "Informazioni di Dettaglio",
@@ -14375,6 +14395,8 @@
   "layout.box.header.AudioVideo.relationaudiovideo": "Related Documents",
   // "layout.box.header.AudioVideo.relationaggregation": "Aggregation",
   "layout.box.header.AudioVideo.relationaggregation": "Aggregazioni",
+  // "layout.tab.header.AudioVideo.audiovideoannotations":"Annotations"
+  "layout.tab.header.AudioVideo.audiovideoannotations": "Annotazioni",
   // "layout.box.header.Opera.relationotherlinks": "Other Links",
   // TODO New key - Add a translation
   "layout.box.header.Opera.relationotherlinks": "Other Links",
@@ -14458,6 +14480,8 @@
   "layout.box.header.MusicalLibrettos.relationperson": "Persone",
   // "layout.box.header.MusicalLibrettos.relationproject": "Project",
   "layout.box.header.MusicalLibrettos.relationproject": "Progetti",
+  // "layout.tab.header.MusicalLibrettos.musicallibrettosannotations":"Annotations"
+  "layout.tab.header.MusicalLibrettos.musicallibrettosannotations": "Annotazioni",
 
 
   // Layout - Autogenerated i18n keys: metadata

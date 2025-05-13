@@ -8870,6 +8870,7 @@
   "layout.tab.header.Person.fonds": "Fonds",
   "layout.tab.header.Person.personexternallinks": "External Links",
   "layout.tab.header.Person.relations": "Relations",
+  "layout.tab.header.Person.personannotations": "Annotations",
 
   "layout.tab.header.OrgUnit.maininformation": "Information",
   "layout.tab.header.OrgUnit.publications": "Publications",
@@ -8888,8 +8889,10 @@
   "layout.tab.header.Event.eventpeople": "People",
   "layout.tab.header.Event.eventexternallinks": "External Links",
   "layout.tab.header.Event.relations": "Relations",
+  "layout.tab.header.Event.eventannotations": "Annotations",
 
   "layout.tab.header.Publication.details": "Details",
+  "layout.tab.header.Publication.publicationannotations": "Annotations",
 
   "layout.tab.header.Fonds.details": "Fonds Details",
   "layout.tab.header.Fonds.fondscontext": "Explore the fond",
@@ -8906,10 +8909,12 @@
   "layout.tab.header.Place.placeevents": "Place Events",
   "layout.tab.header.Place.placeexternallinks": "External Links",
   "layout.tab.header.Place.relations": "Relations",
+  "layout.tab.header.Place.placeannotations": "Annotations",
 
   "layout.tab.header.Family.details": "Family details",
   "layout.tab.header.Family.familyeditors": "Family Editors",
   "layout.tab.header.Family.relations": "Relations",
+  "layout.tab.header.Family.familyannotations": "Annotations",
 
   "layout.tab.header.JournalFonds.details": "Journal Fonds Details",
   "layout.tab.header.JournalFonds.journalfondscontext": "Journal Fonds Context",
@@ -8923,6 +8928,7 @@
 
   "layout.tab.header.ArchivalMaterial.details": "Details",
   "layout.tab.header.ArchivalMaterial.relations": "Relations",
+  "layout.tab.header.ArchivalMaterial.archivalmaterialannotations": "Annotations",
 
   "layout.tab.header.Aggregation.details": "Aggregation Details",
   "layout.tab.header.Aggregation.aggregationcontext": "Aggregation Context",
@@ -8937,19 +8943,26 @@
 
   "layout.tab.header.Picture.details": "Details",
   "layout.tab.header.Picture.relations": "Relations",
+  "layout.tab.header.Picture.pictureannotations": "Annotations",
 
   "layout.tab.header.Publication.relations": "Relations",
 
   "layout.tab.header.AudioVideo.details": "Details",
+  "layout.tab.header.AudioVideo.audiovideoannotations": "Annotations",
+
   "layout.tab.header.Opera.details": "Details",
 
   "layout.tab.header.ScientificMaterial.relations": "Relations",
+  "layout.tab.header.ScientificMaterial.scientificmaterialannotations": "Annotations",
 
   "layout.tab.header.Coin.relations": "Relations",
+  "layout.tab.header.Coin.coinannotations": "Annotations",
 
   "layout.tab.header.Artwork.relations": "Relations",
+  "layout.tab.header.Artwork.artworkannotations": "Annotations",
 
   "layout.tab.header.MusicalLibrettos.relations": "Relations",
+  "layout.tab.header.MusicalLibrettos.musicallibrettosannotations": "Annotations",
 
   "layout.tab.header.Opera.relations": "Relations",
 
