@@ -359,6 +359,7 @@ import { ThemedSliderBrowseElementsComponent } from './browse-most-elements/slid
 import { SliderBrowseElementsComponent } from './browse-most-elements/slider-browse-elements/slider-browse-elements.component';
 import { ThemedImagesBrowseElementsComponent } from './browse-most-elements/images-browse-elements/themed-images-browse-elements.component';
 import { MarkdownDirective } from './utils/markdown.directive';
+import { InWorkflowStatisticsComponent } from './object-collection/shared/in-workflow-statistics/in-workflow-statistics.component';
 import { DefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/default-browse-elements.component';
 import { ThemedDefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/themed-default-browse-elements.component';
 import { MetadataLinkViewPopoverComponent } from './metadata-link-view/metadata-link-view-popover/metadata-link-view-popover.component';
@@ -536,6 +537,7 @@ const COMPONENTS = [
   SearchChartBarHorizontalComponent,
   ItemListPreviewComponent,
   ThemedItemListPreviewComponent,
+  InWorkflowStatisticsComponent,
   ItemCollectionComponent,
   DefaultBrowseElementsComponent,
   ThemedDefaultBrowseElementsComponent,

@@ -2575,6 +2575,8 @@
 
   "dataset.listelement.badge": "Dataset",
 
+  "dspaceitem.listelement.badge": "Item",
+
   "equipment.listelement.badge": "Equipment",
 
   "error.bitstream": "Error fetching bitstream",
