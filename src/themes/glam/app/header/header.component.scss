@@ -7,7 +7,7 @@
     background-image: url("/assets/images/dspace-glam-logo.svg");
     background-repeat: no-repeat;
 }
-
+  
 @media screen and (min-width: map-get($grid-breakpoints, md)) {
     nav.navbar {
         display: none;
@@ -16,7 +16,7 @@
         background-color: var(--ds-header-bg);
     }
 }
-
+  
 .navbar-brand img {
     @media screen and (max-width: map-get($grid-breakpoints, md)) {
         height: var(--ds-header-logo-height-xs);
@@ -26,7 +26,7 @@
     background-image: none !important;
     line-height: 1.5;
 }
-
+  
 .navbar-toggler {
     color: var(--ds-header-icon-color);
 
