@@ -3165,6 +3165,9 @@
   // "context-menu.actions.dso-page-edit.ITEM.btn": "Administer",
   "context-menu.actions.dso-page-edit.ITEM.btn": "Amministra",
 
+  // "context-menu.actions.edit-item-relationships.btn.annotations": "Manage Annotations",
+  "context-menu.actions.edit-item-relationships.btn.annotations": "Gestisci le annotazioni",
+
   // "context-menu.actions.edit-item-relationships.btn.fundings": "Manage Fundings",
   "context-menu.actions.edit-item-relationships.btn.fundings": "Gestisci i finanziamenti",
 
@@ -3352,6 +3355,9 @@
 
   // "RELATION.Aggregation.items.search.results.head": "Items",
   "RELATION.Aggregation.items.search.results.head": "Oggetti collegati",
+
+  // "RELATION.Publication.annotations.search.results.head": "Annotations",
+  "RELATION.Publication.annotations.search.results.head": "Annotazioni",
 
   // "datafile.listelement.badge": "Data File",
   "datafile.listelement.badge": "Data File",
@@ -14035,6 +14041,9 @@
 
   // "layout.tab.header.Opera.relations": "Relations",
   "layout.tab.header.Opera.relations": "Relazioni",
+
+  // "layout.tab.header.WebAnnotation.relations": "Relations",
+  "layout.tab.header.WebAnnotation.relations": "Relazioni",
 
 
 
