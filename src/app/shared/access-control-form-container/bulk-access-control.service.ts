@@ -14,8 +14,6 @@ import { Process } from '../../process-page/processes/process.model';
 import { isNotEmpty } from '../empty.util';
 import { getProcessDetailRoute } from '../../process-page/process-page-routing.paths';
 import { NotificationsService } from '../notifications/notifications.service';
-import { Bundle } from '../../core/shared/bundle.model';
-import { Bitstream } from '../../core/shared/bitstream.model';
 
 export interface BulkAccessPayload {
   state: AccessControlFormState;

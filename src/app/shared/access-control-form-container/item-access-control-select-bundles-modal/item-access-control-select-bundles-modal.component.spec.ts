@@ -1,4 +1,5 @@
 import {
+  EventEmitter,
   Pipe,
   PipeTransform,
 } from '@angular/core';
@@ -7,9 +8,10 @@ import {
   TestBed,
 } from '@angular/core/testing';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import {
   Observable,
+  of as observableOf,
 } from 'rxjs';
 
 import { BundleDataService } from '../../../core/data/bundle-data.service';
@@ -34,17 +36,20 @@ describe('ItemAccessControlSelectBundlesModalComponent', () => {
     },
   };
 
-
+  const translateServiceStub = {
+    get: () => observableOf('test-message'),
+    onLangChange: new EventEmitter(),
+    onTranslationChange: new EventEmitter(),
+    onDefaultLangChange: new EventEmitter(),
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ItemAccessControlSelectBundlesModalComponent, MockTranslatePipe],
-      imports: [
-        TranslateModule.forRoot(),
-      ],
+      imports: [ItemAccessControlSelectBundlesModalComponent],
       providers: [
         NgbActiveModal,
         { provide: BundleDataService, useValue: mockBundleDataService },
+        { provide: TranslateService, useValue: translateServiceStub },
       ],
     })
       .overrideComponent(ItemAccessControlSelectBundlesModalComponent, {
@@ -79,6 +84,7 @@ describe('ItemAccessControlSelectBundlesModalComponent', () => {
 @Pipe({
   // eslint-disable-next-line @angular-eslint/pipe-prefix
   name: 'translate',
+  standalone: true,
 })
 class MockTranslatePipe implements PipeTransform {
   transform(value: string): string {

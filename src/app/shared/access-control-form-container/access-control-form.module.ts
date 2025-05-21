@@ -11,9 +11,6 @@ import {
 import {AccessControlFormContainerComponent} from './access-control-form-container.component';
 import {NgbDatepickerModule} from '@ng-bootstrap/ng-bootstrap';
 import {ToDatePipe} from './access-control-array-form/to-date.pipe';
-import {
-  ItemAccessControlSelectBundlesModalComponent
-} from './item-access-control-select-bundles-modal/item-access-control-select-bundles-modal.component';
 
 @NgModule({
   imports: [
@@ -26,7 +23,6 @@ import {
     AccessControlFormContainerComponent,
     AccessControlArrayFormComponent,
     ItemAccessControlSelectBitstreamsModalComponent,
-    ItemAccessControlSelectBundlesModalComponent,
     ToDatePipe
   ],
   exports: [ AccessControlFormContainerComponent, AccessControlArrayFormComponent ],

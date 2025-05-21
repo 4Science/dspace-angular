@@ -18,7 +18,7 @@ import {
 import {AccessControlFormModule} from './access-control-form.module';
 import {
   ITEM_ACCESS_CONTROL_SELECT_BUNDLES_LIST_ID
-} from './item-access-control-select-bundles-modal/item-access-control-select-bundles-modal.component';
+} from "./item-access-control-select-bundles-modal/item-access-control-select-bundles-modal.component";
 
 
 describe('AccessControlFormContainerComponent', () => {
