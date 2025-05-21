@@ -43,6 +43,11 @@ export class MiradorViewerComponent implements OnInit {
   @Input() canvasId: string;
 
   /**
+   * Is used as canvas index of the element to show.
+   */
+  @Input() canvasIndex: string;
+
+  /**
    * Hides embedded viewer in dev mode.
    */
   isViewerAvailable = true;
@@ -105,6 +110,9 @@ export class MiradorViewerComponent implements OnInit {
     }
     if (this.canvasId) {
       viewerPath += `&canvasId=${this.canvasId}`;
+    }
+    if (this.canvasIndex) {
+      viewerPath += `&canvasIndex=${this.canvasIndex}`;
     }
     if (downloadEnabled && this.appConfig.mirador.enableDownloadPlugin) {
       viewerPath += '&enableDownloadPlugin=true';
