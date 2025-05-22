@@ -101,7 +101,7 @@ export class MiradorViewerComponent implements OnInit {
       viewerPath += `&canvasId=${this.canvasId}`;
     }
     if (this.canvasIndex) {
-      viewerPath += `&canvasIndex=${this.canvasIndex}`;
+      viewerPath += `&canvasIndex=${parseInt(this.canvasIndex, 10) - 1}`;
     }
     if (environment.mirador.enableDownloadPlugin) {
       viewerPath += '&enableDownloadPlugin=true';
