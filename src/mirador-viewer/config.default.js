@@ -32,6 +32,7 @@ const isDownloadPluginEnabled = (params.get('enableDownloadPlugin') === 'true');
 const isAnnotationServerEnabled = (params.get('enableAnnotationServer') === 'true');
 const annotationServerUrl = params.get('annotationServerUrl');
 const canvasId = params.get('canvasId');
+const canvasIndex = params.get('canvasIndex');
 
 let windowSettings = {};
 let sideBarPanel = 'info';
@@ -66,6 +67,8 @@ windowSettings.manifestId = manifest;
   if (canvasId != null && canvasId !== 'null') {
     windowSettings.canvasId =
       `${(manifest.replace(MANIFEST_URL_PART, ''))}/canvas/${canvasId}`;
+  } else if (canvasIndex) {
+    windowSettings.canvasIndex = parseInt(canvasIndex);
   }
 
   // Method to extract access token and return bearer header
