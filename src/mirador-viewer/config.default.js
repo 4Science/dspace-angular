@@ -14,6 +14,7 @@ import miradorShareDialogPlugin from 'mirador-share-plugin/es/MiradorShareDialog
 import miradorSharePlugin from 'mirador-share-plugin/es/miradorSharePlugin';
 import miradorDownloadPlugin from 'mirador-dl-plugin/es/miradorDownloadPlugin';
 import miradorDownloadDialog from 'mirador-dl-plugin/es/MiradorDownloadDialog';
+import myPlugin from './locationPlugin';
 import miradorAnnotationPlugins from 'mirador-annotations/es/index';
 import miradorImageToolsPlugin from 'mirador-image-tools/es/plugins/miradorImageToolsPlugin';
 import DspaceAnnotationServerAdapter from "./dspace-annotation-server-adapter";
@@ -238,6 +239,7 @@ let miradorPlugins = [
   miradorShareDialogPlugin,
   miradorSharePlugin,
   miradorDownloadDialog,
+  myPlugin,
   ...miradorImageToolsPlugin,
   ...miradorAnnotationPlugins,
 ];
