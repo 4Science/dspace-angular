@@ -13,6 +13,7 @@ import { of as observableOf } from 'rxjs';
 import { MiradorViewerService } from './mirador-viewer.service';
 import { HostWindowService } from '../../shared/host-window.service';
 import { BundleDataService } from '../../core/data/bundle-data.service';
+import { NativeWindowRef, NativeWindowService } from '../../core/services/window.service';
 
 
 function getItem(metadata: MetadataMap) {
@@ -48,7 +49,9 @@ describe('MiradorViewerComponent with search', () => {
       providers: [
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
-        { provide: HostWindowService, useValue: mockHostWindowService }
+        { provide: HostWindowService, useValue: mockHostWindowService },
+        { provide: NativeWindowService, useValue: new NativeWindowRef() },
+        { provide: Location, useValue: {} },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(MiradorViewerComponent, {
@@ -111,7 +114,9 @@ describe('MiradorViewerComponent with multiple images', () => {
       providers: [
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
-        { provide: HostWindowService, useValue: mockHostWindowService  }
+        { provide: HostWindowService, useValue: mockHostWindowService  },
+        { provide: NativeWindowService, useValue: new NativeWindowRef() },
+        { provide: Location, useValue: {} },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(MiradorViewerComponent, {
@@ -171,7 +176,9 @@ describe('MiradorViewerComponent with a single image', () => {
       providers: [
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
-        { provide: HostWindowService, useValue: mockHostWindowService }
+        { provide: HostWindowService, useValue: mockHostWindowService },
+        { provide: NativeWindowService, useValue: new NativeWindowRef() },
+        { provide: Location, useValue: {} },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(MiradorViewerComponent, {
@@ -222,7 +229,7 @@ describe('MiradorViewerComponent in development mode', () => {
       })],
       declarations: [MiradorViewerComponent],
       providers: [
-        { provide: BitstreamDataService, useValue: {} }
+        { provide: BitstreamDataService, useValue: {} },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(MiradorViewerComponent, {
@@ -230,7 +237,9 @@ describe('MiradorViewerComponent in development mode', () => {
         providers: [
           { provide: MiradorViewerService, useValue: viewerService },
           { provide: BundleDataService, useValue: {} },
-          { provide: HostWindowService, useValue: mockHostWindowService  }
+          { provide: HostWindowService, useValue: mockHostWindowService  },
+          { provide: NativeWindowService, useValue: new NativeWindowRef() },
+          { provide: Location, useValue: {} },
         ]
       }
     }).compileComponents();

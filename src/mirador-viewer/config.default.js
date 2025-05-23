@@ -16,7 +16,7 @@ import miradorShareDialogPlugin from 'mirador-share-plugin/es/MiradorShareDialog
 import miradorSharePlugin from 'mirador-share-plugin/es/miradorSharePlugin';
 import miradorDownloadPlugin from 'mirador-dl-plugin/es/miradorDownloadPlugin';
 import miradorDownloadDialog from 'mirador-dl-plugin/es/MiradorDownloadDialog';
-import myPlugin from './locationPlugin';
+import locationPlugin from './locationPlugin';
 
 const MANIFEST_URL_PART = /\/manifest$/;
 
@@ -186,7 +186,7 @@ let miradorPlugins = [
   miradorShareDialogPlugin,
   miradorSharePlugin,
   miradorDownloadDialog,
-  myPlugin
+  locationPlugin
 ];
 
 (() => {
@@ -197,14 +197,3 @@ let miradorPlugins = [
 })();
 
 Mirador.viewer(miradorConfiguration, miradorPlugins);
-/*miradorInstance?.store?.subscribe((store) => {
-  console.log(miradorInstance?.store, store);
-  const state = store?.getState();
-  const lastAction = state?.lastAction;
-  console.log(state, lastAction);
-
-  if (lastAction && lastAction.type === 'SELECT_CANVAS') {
-    const canvasId = lastAction.canvasId;
-    console.log('Canvas cliccato:', canvasId);
-  }
-});*/
