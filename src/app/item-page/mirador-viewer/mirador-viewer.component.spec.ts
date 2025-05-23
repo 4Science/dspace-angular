@@ -4,7 +4,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateLoaderMock } from '../../shared/mocks/translate-loader.mock';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { createRelationshipsObservable } from '../simple/item-types/shared/item.component.spec';
-import { NO_ERRORS_SCHEMA, PLATFORM_ID } from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MetadataMap, MetadataValue } from '../../core/shared/metadata.models';
 import { Item } from '../../core/shared/item.model';
 import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
@@ -260,12 +260,14 @@ describe('MiradorViewerComponent on browser in prod mode', () => {
       })],
       declarations: [MiradorViewerComponent],
       providers: [
+        { provide: DspaceRestService, useValue: restService },
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
         { provide: HostWindowService, useValue: mockHostWindowService },
         { provide: NativeWindowService, useValue: new NativeWindowRef() },
         { provide: Location, useValue: {} },
-        { provide: PLATFORM_ID, useValue: 'browser' },
+        { provide: ConfigurationDataService, useValue: configurationDataService },
+        { provide: APP_CONFIG, useValue: environment },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(MiradorViewerComponent, {
@@ -377,6 +379,8 @@ describe('MiradorViewerComponent download plugin config', () => {
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
         { provide: HostWindowService, useValue: mockHostWindowService  },
+        { provide: NativeWindowService, useValue: new NativeWindowRef() },
+        { provide: Location, useValue: {} },
         { provide: ConfigurationDataService, useValue: configurationDataService },
         { provide: APP_CONFIG, useValue: environment },
       ],
