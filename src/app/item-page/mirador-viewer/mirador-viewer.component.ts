@@ -1,20 +1,28 @@
-import { ChangeDetectionStrategy, Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, Input, OnInit, OnDestroy, PLATFORM_ID } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Item } from '../../core/shared/item.model';
 import { environment } from '../../../environments/environment';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { combineLatest, Observable, of, switchMap } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, Location } from '@angular/common';
 import { MiradorViewerService } from './mirador-viewer.service';
 import { HostWindowService, WidthCategory } from '../../shared/host-window.service';
 import { BundleDataService } from '../../core/data/bundle-data.service';
+import { NativeWindowRef, NativeWindowService } from '../../core/services/window.service';
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
 import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { MiradorMetadataDownloadValue } from '../../../config/mirador-config.interfaces';
 import { DspaceRestService } from '../../core/dspace-rest/dspace-rest.service';
 
+const IFRAME_UPDATE_URL_MESSAGE = 'update-url';
+
+interface IFrameMessageData {
+  canvasId: string;
+  type: string;
+  param: string;
+}
 
 @Component({
   selector: 'ds-mirador-viewer',
@@ -23,7 +31,7 @@ import { DspaceRestService } from '../../core/dspace-rest/dspace-rest.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [MiradorViewerService]
 })
-export class MiradorViewerComponent implements OnInit {
+export class MiradorViewerComponent implements OnInit, OnDestroy {
 
   @Input() object: Item;
 
@@ -71,15 +79,19 @@ export class MiradorViewerComponent implements OnInit {
 
   private downloadConfigKey: string;
 
-  constructor(private sanitizer: DomSanitizer,
-              private viewerService: MiradorViewerService,
-              private bitstreamDataService: BitstreamDataService,
-              private bundleDataService: BundleDataService,
-              private hostWindowService: HostWindowService,
-              private configurationDataService: ConfigurationDataService,
-              private restService: DspaceRestService,
-              @Inject(APP_CONFIG) private appConfig: AppConfig,
-              @Inject(PLATFORM_ID) private platformId: any) {
+  constructor(
+    private sanitizer: DomSanitizer,
+    private viewerService: MiradorViewerService,
+    private bitstreamDataService: BitstreamDataService,
+    private bundleDataService: BundleDataService,
+    private hostWindowService: HostWindowService,
+    private location: Location,
+    private configurationDataService: ConfigurationDataService,
+    private restService: DspaceRestService,
+    @Inject(APP_CONFIG) private appConfig: AppConfig,
+    @Inject(PLATFORM_ID) private platformId: any,
+    @Inject(NativeWindowService) protected _window: NativeWindowRef,
+  ) {
   }
 
   /**
@@ -135,6 +147,8 @@ export class MiradorViewerComponent implements OnInit {
      * Initializes the iframe url observable.
      */
     if (isPlatformBrowser(this.platformId)) {
+      this._window.nativeWindow.addEventListener('message', this.iframeMessageListener);
+
       this.downloadConfigKey = this.appConfig.mirador.downloadMetadataConfig;
       // Viewer is not currently available in dev mode so hide it in that case.
       this.isViewerAvailable = this.viewerService.showEmbeddedViewer();
@@ -212,4 +226,27 @@ export class MiradorViewerComponent implements OnInit {
     );
   }
 
+  ngOnDestroy(): void {
+    this._window.nativeWindow.removeEventListener('message', this.iframeMessageListener);
+  }
+
+
+  iframeMessageListener = (event: MessageEvent) => {
+    const data: IFrameMessageData = event.data;
+
+    if (data.type === IFRAME_UPDATE_URL_MESSAGE) {
+      const currentPath = this.location.path();
+      const canvasId = data.canvasId;
+      const param = data.param;
+      // Use URL API for easier query param manipulation
+      const url = new URL(window.location.origin + currentPath);
+      console.log(url);
+      // Set or update the query param
+      url.searchParams.set(param, canvasId);
+      const newPathWithQuery = url.pathname + url.search;
+      // Replace the current state (no reload, no new history entry)
+      console.log('newPathWithQuery', newPathWithQuery);
+      this.location.replaceState(newPathWithQuery);
+    }
+  };
 }
