@@ -1,22 +1,31 @@
 import { takeEvery, select } from 'redux-saga/effects';
 import ActionTypes from 'mirador/dist/es/src/state/actions/action-types';
-import {getCanvasIndex} from "mirador/dist/es/src/state/selectors";
+import { getCanvasIndex } from 'mirador/dist/es/src/state/selectors';
 
+/**
+ * Extract id from the url.
+ * URLs are in the format of "https://domain-name/server/iiif/392363fe-015f-41e6-8cdd-b5c754605787/canvas/03c322b7-0182-44fa-8dc3-5d2efcece237"
+ */
+const extractCanvasId = (canvasUrl) => canvasUrl.split('/').pop();
 
 /** This will be called every time the SET_CANVAS action is dispatched */
 const onCanvasChange = function* (action) {
   const { windowId, canvasId } = action;
   if (windowId && canvasId) {
     const canvasIndex = yield select(getCanvasIndex, { windowId });
-    // IDs are in the format of "https://dspaceglam7dev.4science.cloud/server/iiif/392363fe-015f-41e6-8cdd-b5c754605787/canvas/03c322b7-0182-44fa-8dc3-5d2efcece237"
-    const id = action.canvasId.split('/').pop();
+    const canvasId = extractCanvasId(action.canvasId);
+
     const message = {
       type: 'update-url',
       // index here starts from 0, whilst for setting the index it starts from 1.
       canvasIndex: canvasIndex + 1,
-      canvasId: id
+      canvasId: canvasId
     };
-    if (id && id !== 'undefined' && typeof window !== 'undefined') {
+
+    const isValidId = canvasId && canvasId !== 'undefined';
+    const isBrowserEnvironment = typeof window !== 'undefined';
+
+    if (isValidId && isBrowserEnvironment) {
       window.parent.postMessage(message, '*');
     }
   }
