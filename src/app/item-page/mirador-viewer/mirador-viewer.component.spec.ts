@@ -20,6 +20,8 @@ import { APP_CONFIG } from '../../../config/app-config.interface';
 import { environment } from '../../../environments/environment';
 import { Collection } from '../../core/shared/collection.model';
 import { DspaceRestService } from '../../core/dspace-rest/dspace-rest.service';
+import { VarDirective } from '../../shared/utils/var.directive';
+import { SafeUrlPipe } from '../../shared/utils/safe-url-pipe';
 
 
 function getItem(metadata: MetadataMap, collectionMetadata?: MetadataMap): Item {
@@ -65,7 +67,7 @@ describe('MiradorViewerComponent with search', () => {
           useClass: TranslateLoaderMock
         }
       })],
-      declarations: [MiradorViewerComponent],
+      declarations: [MiradorViewerComponent, VarDirective, SafeUrlPipe],
       providers: [
         { provide: DspaceRestService, useValue: restService },
         { provide: BitstreamDataService, useValue: {} },
@@ -91,6 +93,7 @@ describe('MiradorViewerComponent with search', () => {
       comp = fixture.componentInstance;
       comp.object = getItem(noMetadata);
       comp.searchable = true;
+      comp.iframeViewerUrl = observableOf('testUrl');
       comp.isDownloadEnabled$ = () => observableOf(true);
       fixture.detectChanges();
     }));
@@ -134,7 +137,7 @@ describe('MiradorViewerComponent with multiple images', () => {
           useClass: TranslateLoaderMock
         }
       })],
-      declarations: [MiradorViewerComponent],
+      declarations: [MiradorViewerComponent, VarDirective, SafeUrlPipe],
       providers: [
         { provide: DspaceRestService, useValue: restService },
         { provide: BitstreamDataService, useValue: {} },
@@ -161,6 +164,7 @@ describe('MiradorViewerComponent with multiple images', () => {
       comp = fixture.componentInstance;
       comp.object = getItem(noMetadata);
       comp.searchable = false;
+      comp.iframeViewerUrl = observableOf('testUrl');
       comp.isDownloadEnabled$ = () => observableOf(true);
       fixture.detectChanges();
     }));
@@ -200,7 +204,7 @@ describe('MiradorViewerComponent with a single image', () => {
           useClass: TranslateLoaderMock
         }
       })],
-      declarations: [MiradorViewerComponent],
+      declarations: [MiradorViewerComponent, VarDirective, SafeUrlPipe],
       providers: [
         { provide: DspaceRestService, useValue: restService },
         { provide: BitstreamDataService, useValue: {} },
@@ -226,6 +230,7 @@ describe('MiradorViewerComponent with a single image', () => {
       fixture = TestBed.createComponent(MiradorViewerComponent);
       comp = fixture.componentInstance;
       comp.object = getItem(noMetadata);
+      comp.iframeViewerUrl = observableOf('testUrl');
       comp.isDownloadEnabled$ = () => observableOf(true);
       fixture.detectChanges();
     }));
@@ -312,7 +317,7 @@ describe('MiradorViewerComponent in development mode', () => {
           useClass: TranslateLoaderMock
         }
       })],
-      declarations: [MiradorViewerComponent],
+      declarations: [MiradorViewerComponent, VarDirective, SafeUrlPipe],
       providers: [
         { provide: BitstreamDataService, useValue: {} },
       ],
@@ -338,6 +343,7 @@ describe('MiradorViewerComponent in development mode', () => {
       fixture = TestBed.createComponent(MiradorViewerComponent);
       comp = fixture.componentInstance;
       comp.object = getItem(noMetadata);
+      comp.iframeViewerUrl = observableOf('testUrl');
       comp.isDownloadEnabled$ = () => observableOf(true);
       fixture.detectChanges();
     }));
@@ -373,7 +379,7 @@ describe('MiradorViewerComponent download plugin config', () => {
           useClass: TranslateLoaderMock
         }
       })],
-      declarations: [MiradorViewerComponent],
+      declarations: [MiradorViewerComponent, VarDirective, SafeUrlPipe],
       providers: [
         { provide: DspaceRestService, useValue: restService },
         { provide: BitstreamDataService, useValue: {} },
@@ -405,6 +411,7 @@ describe('MiradorViewerComponent download plugin config', () => {
       metadataMap[environment.mirador.downloadMetadataConfig] = [metadata];
       comp.object = getItem(metadataMap);
       comp.searchable = false;
+      comp.iframeViewerUrl = observableOf('testUrl');
       comp.getIiifDownloadConfig = () => observableOf(['all', 'single-image']);
       configurationDataService.findByPropertyName.and.returnValue(createSuccessfulRemoteDataObject$([]));
       fixture.detectChanges();
