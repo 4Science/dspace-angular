@@ -19,9 +19,9 @@ import { DspaceRestService } from '../../core/dspace-rest/dspace-rest.service';
 const IFRAME_UPDATE_URL_MESSAGE = 'update-url';
 
 interface IFrameMessageData {
-  canvasId: string;
   type: string;
-  param: string;
+  canvasId: string;
+  canvasIndex: string;
 }
 
 @Component({
@@ -237,15 +237,14 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
     if (data.type === IFRAME_UPDATE_URL_MESSAGE) {
       const currentPath = this.location.path();
       const canvasId = data.canvasId;
-      const param = data.param;
+      const canvasIndex = data.canvasIndex;
       // Use URL API for easier query param manipulation
       const url = new URL(window.location.origin + currentPath);
-      console.log(url);
       // Set or update the query param
-      url.searchParams.set(param, canvasId);
+      url.searchParams.set('canvasId', canvasId);
+      url.searchParams.set('canvasIndex', canvasIndex);
       const newPathWithQuery = url.pathname + url.search;
       // Replace the current state (no reload, no new history entry)
-      console.log('newPathWithQuery', newPathWithQuery);
       this.location.replaceState(newPathWithQuery);
     }
   };
