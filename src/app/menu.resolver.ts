@@ -242,7 +242,7 @@ export class MenuResolver implements Resolve<boolean> {
             id: 'statistics',
             active: false,
             visible: true,
-            index: 1,
+            index: 2,
             model: {
               type: MenuItemType.TEXT,
               text: 'menu.section.statistics'
@@ -407,7 +407,7 @@ export class MenuResolver implements Resolve<boolean> {
           text: 'menu.section.new'
         } as TextMenuItemModel,
         icon: 'plus',
-        index: 0
+        index: 1
       };
       const editSubMenu = {
         id: 'edit',
@@ -418,7 +418,7 @@ export class MenuResolver implements Resolve<boolean> {
           text: 'menu.section.edit'
         } as TextMenuItemModel,
         icon: 'pencil-alt',
-        index: 1
+        index: 2
       };
 
       const menuList = [
@@ -478,7 +478,7 @@ export class MenuResolver implements Resolve<boolean> {
             text: 'menu.section.admin_search',
             link: '/admin/search'
           } as LinkMenuItemModel,
-          index: 5,
+          index: 6,
           icon: 'search',
         },
         /* Processes */
@@ -586,7 +586,7 @@ export class MenuResolver implements Resolve<boolean> {
           text: 'menu.section.export'
         } as TextMenuItemModel,
         icon: 'file-export',
-        index: 3,
+        index: 4,
         shouldPersistOnRouteChange: true
       });
       this.menuService.addSection(MenuID.ADMIN, {
@@ -719,7 +719,7 @@ export class MenuResolver implements Resolve<boolean> {
           text: 'menu.section.import'
         } as TextMenuItemModel,
         icon: 'file-import',
-        index: 2,
+        index: 3,
         shouldPersistOnRouteChange: true,
       });
       this.menuService.addSection(MenuID.ADMIN, {
@@ -794,7 +794,7 @@ export class MenuResolver implements Resolve<boolean> {
             text: 'menu.section.notifications'
           } as TextMenuItemModel,
           icon: 'bell',
-          index: 4
+          index: 5
         },
         {
           id: 'notifications_openair_broker',
@@ -828,7 +828,7 @@ export class MenuResolver implements Resolve<boolean> {
             text: 'menu.section.registries'
           } as TextMenuItemModel,
           icon: 'list',
-          index: 6
+          index: 7
         },
         {
           id: 'registries_metadata',
@@ -864,7 +864,7 @@ export class MenuResolver implements Resolve<boolean> {
             link: 'admin/curation-tasks'
           } as LinkMenuItemModel,
           icon: 'filter',
-          index: 7
+          index: 8
         },
 
         /* Workflow */
@@ -990,7 +990,7 @@ export class MenuResolver implements Resolve<boolean> {
             text: 'menu.section.access_control'
           } as TextMenuItemModel,
           icon: 'key',
-          index: 4
+          index: 5
         },
       ];
 
