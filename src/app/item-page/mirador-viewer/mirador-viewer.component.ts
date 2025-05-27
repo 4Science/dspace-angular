@@ -1,27 +1,61 @@
-import { ChangeDetectionStrategy, Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Item } from '../../core/shared/item.model';
+import {
+  AsyncPipe,
+  isPlatformBrowser,
+  NgIf,
+} from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
+import {
+  DomSanitizer,
+  SafeResourceUrl,
+} from '@angular/platform-browser';
+import { TranslateModule } from '@ngx-translate/core';
+import {
+  combineLatest,
+  Observable,
+  of,
+} from 'rxjs';
+import {
+  map,
+  switchMap,
+  take,
+} from 'rxjs/operators';
+
+import {
+  APP_CONFIG,
+  AppConfig,
+} from '../../../config/app-config.interface';
+import { MiradorMetadataDownloadValue } from '../../../config/mirador-config.interfaces';
 import { environment } from '../../../environments/environment';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
-import { combineLatest, Observable, of, switchMap } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { isPlatformBrowser } from '@angular/common';
-import { MiradorViewerService } from './mirador-viewer.service';
-import { HostWindowService, WidthCategory } from '../../shared/host-window.service';
 import { BundleDataService } from '../../core/data/bundle-data.service';
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
-import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
-import { getFirstCompletedRemoteData } from '../../core/shared/operators';
-import { MiradorMetadataDownloadValue } from '../../../config/mirador-config.interfaces';
 import { DspaceRestService } from '../../core/dspace-rest/dspace-rest.service';
-
+import { Item } from '../../core/shared/item.model';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import {
+  HostWindowService,
+  WidthCategory,
+} from '../../shared/host-window.service';
+import { MiradorViewerService } from './mirador-viewer.service';
 
 @Component({
   selector: 'ds-mirador-viewer',
   styleUrls: ['./mirador-viewer.component.scss'],
   templateUrl: './mirador-viewer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [MiradorViewerService]
+  imports: [
+    TranslateModule,
+    AsyncPipe,
+    NgIf,
+  ],
+  standalone: true,
 })
 export class MiradorViewerComponent implements OnInit {
 
@@ -134,10 +168,10 @@ export class MiradorViewerComponent implements OnInit {
       // menu by hiding it for smaller viewports. This will not be
       // responsive to resizing.
       this.hostWindowService.widthCategory
-          .pipe(take(1))
-          .subscribe((category: WidthCategory) => {
-            this.notMobile = !(category === WidthCategory.XS || category === WidthCategory.SM);
-          });
+        .pipe(take(1))
+        .subscribe((category: WidthCategory) => {
+          this.notMobile = !(category === WidthCategory.XS || category === WidthCategory.SM);
+        });
 
       // Set the multi property. The default mirador configuration adds a right
       // thumbnail navigation panel to the viewer when multi is 'true'.
@@ -149,7 +183,7 @@ export class MiradorViewerComponent implements OnInit {
         this.iframeViewerUrl = this.isDownloadEnabled$().pipe(
           map(( downloadEnabled) => {
             return this.setURL(downloadEnabled);
-          })
+          }),
         );
       } else {
         // Set the multi property based on the image count in IIIF-eligible bundles.
@@ -157,7 +191,7 @@ export class MiradorViewerComponent implements OnInit {
         this.iframeViewerUrl = this.viewerService.getImageCount(
           this.object,
           this.bitstreamDataService,
-          this.bundleDataService
+          this.bundleDataService,
         ).pipe(
           switchMap(c => combineLatest([of(c), this.isDownloadEnabled$()])),
           map(([c, downloadEnabled]) => {
@@ -165,7 +199,7 @@ export class MiradorViewerComponent implements OnInit {
               this.multi = true;
             }
             return this.setURL(downloadEnabled);
-          })
+          }),
         );
       }
     }
@@ -179,28 +213,28 @@ export class MiradorViewerComponent implements OnInit {
     return combineLatest([
       this.configurationDataService.findByPropertyName(this.appConfig.mirador.downloadRestConfig)
         .pipe(
-          getFirstCompletedRemoteData()
+          getFirstCompletedRemoteData(),
         ),
       this.object.owningCollection
-        .pipe(getFirstCompletedRemoteData())
+        .pipe(getFirstCompletedRemoteData()),
     ]).pipe(
       map(([restPropertyDownloadConfig, owningCollection]) =>
         (this.object.firstMetadataValue(this.downloadConfigKey) ||
           owningCollection?.payload?.firstMetadataValue(this.downloadConfigKey) ||
-          restPropertyDownloadConfig?.payload?.values[0]) as MiradorMetadataDownloadValue
+          restPropertyDownloadConfig?.payload?.values[0]) as MiradorMetadataDownloadValue,
       ),
       switchMap((downloadLevel) => {
         return this.getIiifDownloadConfig().pipe(
           map((downloadConfig) => downloadLevel && downloadConfig.includes(downloadLevel)),
         );
-      })
+      }),
     );
   }
 
   getIiifDownloadConfig(): Observable<MiradorMetadataDownloadValue[]> {
     const href = `${this.appConfig.rest.baseUrl}/iiif/${this.object.id}/download`;
     return this.restService.get(href).pipe(
-      map(res => res.payload as MiradorMetadataDownloadValue[])
+      map(res => res.payload as MiradorMetadataDownloadValue[]),
     );
   }
 

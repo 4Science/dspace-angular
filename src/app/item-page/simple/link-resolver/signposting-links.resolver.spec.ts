@@ -1,12 +1,16 @@
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { SignpostingDataService } from '../../../core/data/signposting-data.service';
-import { of } from 'rxjs';
 import { TestBed } from '@angular/core/testing';
-import { signpostingLinksResolver } from './signposting-links.resolver';
+import {
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+} from '@angular/router';
+import { of } from 'rxjs';
+import { createSuccessfulRemoteDataObject$ } from 'src/app/shared/remote-data.utils';
+
 import { ItemDataService } from '../../../core/data/item-data.service';
-import { createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
+import { SignpostingDataService } from '../../../core/data/signposting-data.service';
 import { Item } from '../../../core/shared/item.model';
 import { MetadataMap } from '../../../core/shared/metadata.models';
+import { signpostingLinksResolver } from './signposting-links.resolver';
 
 describe('signpostingLinksResolver', () => {
   let resolver: any;
@@ -18,12 +22,12 @@ describe('signpostingLinksResolver', () => {
   const mocklink = {
     href: 'http://test.org',
     rel: 'rel1',
-    type: 'type1'
+    type: 'type1',
   };
   const mocklink2 = {
     href: 'http://test2.org',
     rel: 'rel2',
-    type: undefined
+    type: undefined,
   };
   const resolvedLinks = `<${mocklink.href}> ; rel="${mocklink.rel}" ; type="${mocklink.type}" , <${mocklink2.href}> ; rel="${mocklink2.rel}" `;
   const mockTag2 = {
@@ -32,7 +36,7 @@ describe('signpostingLinksResolver', () => {
   };
   const mockItem = Object.assign(new Item(), {
     uuid: testUuid,
-    metadata: new MetadataMap()
+    metadata: new MetadataMap(),
   });
   function init() {
     route = Object.assign(new ActivatedRouteSnapshot(), {
@@ -41,7 +45,7 @@ describe('signpostingLinksResolver', () => {
       },
     });
     itemDataService = jasmine.createSpyObj('itemDataService', {
-      findById: createSuccessfulRemoteDataObject$(mockItem)
+      findById: createSuccessfulRemoteDataObject$(mockItem),
     });
     signpostingDataService = jasmine.createSpyObj('signpostingDataService', {
       getLinks: of([mocklink, mocklink2]),
@@ -52,11 +56,11 @@ describe('signpostingLinksResolver', () => {
   function initTestbed() {
     TestBed.configureTestingModule({
       providers: [
-        {provide: RouterStateSnapshot, useValue: state},
-        {provide: ActivatedRouteSnapshot, useValue: route},
-        {provide: ItemDataService, useValue: itemDataService},
-        {provide: SignpostingDataService, useValue: signpostingDataService},
-      ]
+        { provide: RouterStateSnapshot, useValue: state },
+        { provide: ActivatedRouteSnapshot, useValue: route },
+        { provide: ItemDataService, useValue: itemDataService },
+        { provide: SignpostingDataService, useValue: signpostingDataService },
+      ],
     });
   }
   describe('when an item page is loaded', () => {

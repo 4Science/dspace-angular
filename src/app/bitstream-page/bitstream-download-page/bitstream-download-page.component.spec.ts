@@ -1,19 +1,30 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { AuthService } from '../../core/auth/auth.service';
-import { FileService } from '../../core/shared/file.service';
-import { of as observableOf } from 'rxjs';
-import { Bitstream } from '../../core/shared/bitstream.model';
-import { BitstreamDownloadPageComponent } from './bitstream-download-page.component';
-import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
-import { HardRedirectService } from '../../core/services/hard-redirect.service';
-import { createSuccessfulRemoteDataObject } from '../../shared/remote-data.utils';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
-import { SignpostingDataService } from '../../core/data/signposting-data.service';
-import { ServerResponseService } from '../../core/services/server-response.service';
 import { PLATFORM_ID } from '@angular/core';
-import { NativeWindowRef, NativeWindowService } from '../../core/services/window.service';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { of as observableOf } from 'rxjs';
+
+import { AuthService } from '../../core/auth/auth.service';
+import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
+import { SignpostingDataService } from '../../core/data/signposting-data.service';
+import { HardRedirectService } from '../../core/services/hard-redirect.service';
+import { ServerResponseService } from '../../core/services/server-response.service';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../core/services/window.service';
+import { Bitstream } from '../../core/shared/bitstream.model';
+import { FileService } from '../../core/shared/file.service';
+import { createSuccessfulRemoteDataObject } from '../../shared/remote-data.utils';
+import { BitstreamDownloadPageComponent } from './bitstream-download-page.component';
 
 describe('BitstreamDownloadPageComponent', () => {
   let component: BitstreamDownloadPageComponent;
@@ -33,48 +44,48 @@ describe('BitstreamDownloadPageComponent', () => {
   const mocklink = {
     href: 'http://test.org',
     rel: 'test',
-    type: 'test'
+    type: 'test',
   };
 
   const mocklink2 = {
     href: 'http://test2.org',
     rel: 'test',
-    type: 'test'
+    type: 'test',
   };
 
   function init() {
     authService = jasmine.createSpyObj('authService', {
       isAuthenticated: observableOf(true),
-      setRedirectUrl: {}
+      setRedirectUrl: {},
     });
     authorizationService = jasmine.createSpyObj('authorizationSerivice', {
-      isAuthorized: observableOf(true)
+      isAuthorized: observableOf(true),
     });
 
     fileService = jasmine.createSpyObj('fileService', {
-      retrieveFileDownloadLink: observableOf('content-url-with-headers')
+      retrieveFileDownloadLink: observableOf('content-url-with-headers'),
     });
 
     hardRedirectService = jasmine.createSpyObj('fileService', {
-      redirect: {}
+      redirect: {},
     });
     bitstream = Object.assign(new Bitstream(), {
       uuid: 'bitstreamUuid',
       _links: {
         content: { href: 'bitstream-content-link' },
         self: { href: 'bitstream-self-link' },
-      }
+      },
     });
 
     activatedRoute = {
       data: observableOf({
         bitstream: createSuccessfulRemoteDataObject(
-          bitstream
-        )
+          bitstream,
+        ),
       }),
       params: observableOf({
-        id: 'testid'
-      })
+        id: 'testid',
+      }),
     };
 
     router = jasmine.createSpyObj('router', ['navigateByUrl']);
@@ -84,14 +95,13 @@ describe('BitstreamDownloadPageComponent', () => {
     });
 
     signpostingDataService = jasmine.createSpyObj('SignpostingDataService', {
-      getLinks: observableOf([mocklink, mocklink2])
+      getLinks: observableOf([mocklink, mocklink2]),
     });
   }
 
   function initTestbed() {
     TestBed.configureTestingModule({
-      imports: [CommonModule, TranslateModule.forRoot()],
-      declarations: [BitstreamDownloadPageComponent],
+      imports: [CommonModule, TranslateModule.forRoot(), BitstreamDownloadPageComponent],
       providers: [
         { provide: NativeWindowService, useValue: new NativeWindowRef() },
         { provide: ActivatedRoute, useValue: activatedRoute },
@@ -102,8 +112,8 @@ describe('BitstreamDownloadPageComponent', () => {
         { provide: HardRedirectService, useValue: hardRedirectService },
         { provide: ServerResponseService, useValue: serverResponseService },
         { provide: SignpostingDataService, useValue: signpostingDataService },
-        { provide: PLATFORM_ID, useValue: 'server' }
-      ]
+        { provide: PLATFORM_ID, useValue: 'server' },
+      ],
     })
       .compileComponents();
   }

@@ -1,19 +1,36 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { NgIf } from '@angular/common';
+import {
+  Component,
+  DoCheck,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import {
+  DynamicFormLayoutService,
+  DynamicFormValidationService,
+} from '@ng-dynamic-forms/core';
 import { DynamicNGBootstrapInputComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
-import { DynamicFormLayoutService, DynamicFormValidationService } from '@ng-dynamic-forms/core';
+
+import { MarkdownEditorComponent } from '../../../../../markdown-editor/markdown-editor.component';
 import { DynamicMarkdownModel } from './dynamic-markdown.model';
 
 @Component({
   selector: 'ds-dynamic-markdown',
   styleUrls: ['./dynamic-markdown.component.scss'],
   templateUrl: './dynamic-markdown.component.html',
+  standalone: true,
+  imports: [
+    MarkdownEditorComponent,
+    NgIf,
+  ],
 })
 /**
  * Component displaying a markdown usable in dynamic forms
  * Extends from bootstrap's input component but displays a markdown instead
  */
-export class DsDynamicMarkdownComponent extends DynamicNGBootstrapInputComponent {
+export class DsDynamicMarkdownComponent extends DynamicNGBootstrapInputComponent implements DoCheck {
   /**
    * Use the model's ID for the input element
    */

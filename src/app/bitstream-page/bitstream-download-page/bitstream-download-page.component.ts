@@ -1,25 +1,53 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { map, startWith, take } from 'rxjs/operators';
-import { ActivatedRoute, Router } from '@angular/router';
-import { isNotEmpty } from '../../shared/empty.util';
-import { getRemoteDataPayload } from '../../core/shared/operators';
-import { Bitstream } from '../../core/shared/bitstream.model';
-import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
-import { AuthService } from '../../core/auth/auth.service';
+import {
+  AsyncPipe,
+  isPlatformServer,
+  Location,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
-import { FileService } from '../../core/shared/file.service';
-import { HardRedirectService } from '../../core/services/hard-redirect.service';
-import { RemoteData } from '../../core/data/remote-data';
-import { isPlatformServer, Location } from '@angular/common';
+import {
+  map,
+  startWith,
+  take,
+} from 'rxjs/operators';
+
+import { AuthService } from '../../core/auth/auth.service';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
+import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
+import { RemoteData } from '../../core/data/remote-data';
 import { SignpostingDataService } from '../../core/data/signposting-data.service';
-import { ServerResponseService } from '../../core/services/server-response.service';
 import { SignpostingLink } from '../../core/data/signposting-links.model';
-import { NativeWindowRef, NativeWindowService } from '../../core/services/window.service';
+import { HardRedirectService } from '../../core/services/hard-redirect.service';
+import { ServerResponseService } from '../../core/services/server-response.service';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../core/services/window.service';
+import { Bitstream } from '../../core/shared/bitstream.model';
+import { FileService } from '../../core/shared/file.service';
+import { getRemoteDataPayload } from '../../core/shared/operators';
+import { isNotEmpty } from '../../shared/empty.util';
 
 @Component({
   selector: 'ds-bitstream-download-page',
-  templateUrl: './bitstream-download-page.component.html'
+  templateUrl: './bitstream-download-page.component.html',
+  imports: [
+    AsyncPipe,
+    TranslateModule,
+    NgIf,
+  ],
+  standalone: true,
 })
 /**
  * Page component for downloading a bitstream
@@ -45,7 +73,7 @@ export class BitstreamDownloadPageComponent implements OnInit {
     public dsoNameService: DSONameService,
     private signpostingDataService: SignpostingDataService,
     private responseService: ServerResponseService,
-    @Inject(PLATFORM_ID) protected platformId: string
+    @Inject(PLATFORM_ID) protected platformId: string,
   ) {
     this.initPageLinks();
   }
@@ -60,16 +88,16 @@ export class BitstreamDownloadPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.bitstreamRD$ = this.route.data.pipe(
-      map((data) => data.bitstream)
+      map((data) => data.bitstream),
     );
 
     this.bitstream$ = this.bitstreamRD$.pipe(
-      getRemoteDataPayload()
+      getRemoteDataPayload(),
     );
 
     this.fileName$ = this.bitstream$.pipe(
       map((bitstream: Bitstream) => this.dsoNameService.getName(bitstream)),
-      startWith('file')
+      startWith('file'),
     );
   }
 

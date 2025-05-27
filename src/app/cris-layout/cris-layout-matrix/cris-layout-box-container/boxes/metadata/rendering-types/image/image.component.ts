@@ -1,20 +1,37 @@
-import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { FieldRenderingType, MetadataBoxFieldRendering } from '../metadata-box.decorator';
+import {
+  AsyncPipe,
+  isPlatformBrowser,
+} from '@angular/common';
+import {
+  Component,
+  inject,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
+import {
+  BehaviorSubject,
+  Observable,
+  of,
+} from 'rxjs';
+import {
+  catchError,
+  map,
+} from 'rxjs/operators';
 
-import { BitstreamRenderingModelComponent } from '../bitstream-rendering-model';
-import { catchError, map } from 'rxjs/operators';
 import { Bitstream } from '../../../../../../../core/shared/bitstream.model';
-import { BehaviorSubject, Observable, of } from 'rxjs';
 import { getPaginatedListPayload } from '../../../../../../../core/shared/operators';
-import { isPlatformBrowser } from '@angular/common';
+import { BitstreamRenderingModelComponent } from '../bitstream-rendering-model';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'div[ds-image]',
   templateUrl: './image.component.html',
   styleUrls: ['./image.component.scss'],
+  standalone: true,
+  imports: [
+    AsyncPipe,
+  ],
 })
-@MetadataBoxFieldRendering(FieldRenderingType.IMAGE, true)
 export class ImageComponent extends BitstreamRenderingModelComponent implements OnInit {
 
   bitstream = new BehaviorSubject<Bitstream>(null);

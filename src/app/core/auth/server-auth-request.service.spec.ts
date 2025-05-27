@@ -1,16 +1,24 @@
-import { AuthRequestService } from './auth-request.service';
-import { RequestService } from '../data/request.service';
-import { ServerAuthRequestService } from './server-auth-request.service';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Observable, of as observableOf } from 'rxjs';
-import { HALEndpointService } from '../shared/hal-endpoint.service';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpResponse,
+} from '@angular/common/http';
+import {
+  BehaviorSubject,
+  Observable,
+  of as observableOf,
+} from 'rxjs';
+
 import { PostRequest } from '../data/request.models';
+import { RequestService } from '../data/request.service';
+import { HALEndpointService } from '../shared/hal-endpoint.service';
 import {
   XSRF_REQUEST_HEADER,
-  XSRF_RESPONSE_HEADER
+  XSRF_RESPONSE_HEADER,
 } from '../xsrf/xsrf.constants';
 import { XSRFService } from '../xsrf/xsrf.service';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { AuthRequestService } from './auth-request.service';
+import { ServerAuthRequestService } from './server-auth-request.service';
 
 describe(`ServerAuthRequestService`, () => {
   let href: string;
@@ -25,20 +33,20 @@ describe(`ServerAuthRequestService`, () => {
   beforeEach(() => {
     href = 'https://rest.api/auth/shortlivedtokens';
     requestService = jasmine.createSpyObj('requestService', {
-      'generateRequestId': '8bb0582d-5013-4337-af9c-763beb25aae2'
+      'generateRequestId': '8bb0582d-5013-4337-af9c-763beb25aae2',
     });
     let headers = new HttpHeaders();
     headers = headers.set(XSRF_RESPONSE_HEADER, mockToken);
     httpResponse = {
       body: { bar: false },
       headers: headers,
-      statusText: '200'
+      statusText: '200',
     } as HttpResponse<any>;
     httpClient = jasmine.createSpyObj('httpClient', {
       get: observableOf(httpResponse),
     });
     halService = jasmine.createSpyObj('halService', {
-      'getRootHref': '/api'
+      'getRootHref': '/api',
     });
     xsrfService = jasmine.createSpyObj('xsrfService', null, {
       'tokenInitialized$': new BehaviorSubject(false),

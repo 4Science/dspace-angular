@@ -1,15 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { OpenstreetmapGroupComponent } from './openstreetmap-group.component';
-import { Item } from '../../../../../../../../core/shared/item.model';
-import { of } from 'rxjs';
-import { LayoutField } from '../../../../../../../../core/layout/models/box.model';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateLoaderMock } from '../../../../../../../../shared/mocks/translate-loader.mock';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoadMoreService } from '../../../../../../../services/load-more.service';
-import { OpenStreetMapComponent } from '../../../../../../../../shared/open-street-map/open-street-map.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { LocationPlace, LocationService } from '../../../../../../../../core/services/location.service';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
+import { of } from 'rxjs';
+
+import { LayoutField } from '../../../../../../../../core/layout/models/box.model';
+import {
+  LocationPlace,
+  LocationService,
+} from '../../../../../../../../core/services/location.service';
+import { Item } from '../../../../../../../../core/shared/item.model';
+import { TranslateLoaderMock } from '../../../../../../../../shared/mocks/translate-loader.mock';
+import { OpenStreetMapComponent } from '../../../../../../../../shared/open-street-map/open-street-map.component';
+import { LoadMoreService } from '../../../../../../../services/load-more.service';
+import { OpenstreetmapGroupComponent } from './openstreetmap-group.component';
 
 describe('OpenstreetmapGroupComponent', () => {
   let component: OpenstreetmapGroupComponent;
@@ -32,7 +42,7 @@ describe('OpenstreetmapGroupComponent', () => {
       latitude: 52.520008,
       longitude: 13.404954,
     },
-    displayName: '10178 Berlin, Germania'
+    displayName: '10178 Berlin, Germania',
   };
 
   const testItem = Object.assign(new Item(), {
@@ -40,15 +50,15 @@ describe('OpenstreetmapGroupComponent', () => {
     metadata: {
       'dc.coverage.spatialgpdpy': [
         {
-          value: '45.4899793'
+          value: '45.4899793',
         },
       ],
       'dc.coverage.spatialgpdpx': [
         {
-          value: '9.138292'
+          value: '9.138292',
         },
-      ]
-    }
+      ],
+    },
   });
 
   const mockField = Object.assign({
@@ -70,7 +80,7 @@ describe('OpenstreetmapGroupComponent', () => {
           fieldType: 'METADATA',
           style: null,
           styleLabel: 'font-weight-bold col-0',
-          styleValue: 'col'
+          styleValue: 'col',
         },
         {
           metadata: 'dc.coverage.spatialgpdpx',
@@ -79,10 +89,10 @@ describe('OpenstreetmapGroupComponent', () => {
           fieldType: 'METADATA',
           style: null,
           styleLabel: 'font-weight-bold col-0',
-          styleValue: 'col'
-        }
-      ]
-    }
+          styleValue: 'col',
+        },
+      ],
+    },
   }) as LayoutField;
 
   beforeEach(async () => {
@@ -90,9 +100,10 @@ describe('OpenstreetmapGroupComponent', () => {
       imports: [TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
-          useClass: TranslateLoaderMock
-        }
-      }), BrowserAnimationsModule],
+          useClass: TranslateLoaderMock,
+        },
+      }), BrowserAnimationsModule, OpenstreetmapGroupComponent,
+      OpenStreetMapComponent],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
@@ -102,11 +113,8 @@ describe('OpenstreetmapGroupComponent', () => {
         LoadMoreService,
       ],
       schemas: [NO_ERRORS_SCHEMA],
-      declarations: [
-        OpenstreetmapGroupComponent,
-        OpenStreetMapComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(OpenstreetmapGroupComponent);
     component = fixture.componentInstance;

@@ -1,10 +1,11 @@
-import videojs from 'video.js';
 import 'videojs-hls-quality-selector';
 import 'videojs-contrib-quality-levels';
+
+import videojs from 'video.js';
 import Wavesurfer from 'videojs-wavesurfer/dist/videojs.wavesurfer.js';
 
-import { VideojsService } from './videojs.service';
 import { MediaViewerItem } from '../../../core/shared/media-viewer-item.model';
+import { VideojsService } from './videojs.service';
 
 export class BrowserVideojsService implements VideojsService {
 
@@ -30,8 +31,8 @@ export class BrowserVideojsService implements VideojsService {
         cursorColor: 'grey',
         hideScrollbar: true,
         barHeight: 0.00002,
-      }
-    }
+      },
+    },
   };
 
   /**
@@ -43,6 +44,8 @@ export class BrowserVideojsService implements VideojsService {
     bigPlayButton: true,
     autoplay: false,
     loop: false,
+    with: 600,
+    height: 480,
     responsive: true,
     fluid: true,
   };
@@ -55,7 +58,7 @@ export class BrowserVideojsService implements VideojsService {
       audioPlayer.src({
         src: mediaItem?.manifestUrl,
         type: 'application/dash+xml',
-        peaks: mediaItem?.bitstream?.firstMetadataValue('bitstream.audio.peaks')
+        peaks: mediaItem?.bitstream?.firstMetadataValue('bitstream.audio.peaks'),
       });
     });
 
@@ -68,7 +71,12 @@ export class BrowserVideojsService implements VideojsService {
   initVideoPlayer(element: HTMLElement, mediaItem: MediaViewerItem): any {
     const videoPlayer = videojs(element, this.configVideo, () => {
       videoPlayer.src({ src: mediaItem?.manifestUrl, type: 'application/dash+xml' });
-      (videoPlayer as any).hlsQualitySelector();
+    });
+
+    videoPlayer.ready(() => {
+      if ((videoPlayer as any).hlsQualitySelector) {
+        (videoPlayer as any).hlsQualitySelector();
+      }
     });
 
     return videoPlayer;

@@ -1,18 +1,27 @@
-import { Component, Input } from '@angular/core';
+import { NgForOf } from '@angular/common';
+import {
+  Component,
+  Input,
+} from '@angular/core';
+
 import { SectionComponent } from '../../../../core/layout/models/section.model';
 
 @Component({
-  selector: 'ds-twitter-section',
+  selector: 'ds-base-twitter-section',
   templateUrl: './twitter-section.component.html',
-  styleUrls: ['./twitter-section.component.scss']
+  styleUrls: ['./twitter-section.component.scss'],
+  imports: [
+    NgForOf,
+  ],
+  standalone: true,
 })
 export class TwitterSectionComponent {
 
   @Input()
-  sectionId: string;
+    sectionId: string;
 
   @Input()
-  twitterSection: TwitterSection;
+    twitterSection: TwitterSection;
 
 }
 

@@ -1,21 +1,49 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { RemoteData } from '../../../core/data/remote-data';
-import { DSpaceObject } from '../../../core/shared/dspace-object.model';
-import { fadeIn, fadeInOut } from '../../animations/fade';
-import { SearchResult } from '../models/search-result.model';
-import { PaginatedList } from '../../../core/data/paginated-list.model';
-import { hasNoValue, isNotEmpty } from '../../empty.util';
+import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import {
+  BehaviorSubject,
+  Observable,
+} from 'rxjs';
+
 import { SortOptions } from '../../../core/cache/models/sort-options.model';
-import { ListableObject } from '../../object-collection/shared/listable-object.model';
-import { CollectionElementLinkType } from '../../object-collection/collection-element-link.type';
-import { ViewMode } from '../../../core/shared/view-mode.model';
+import { PaginatedList } from '../../../core/data/paginated-list.model';
+import { RemoteData } from '../../../core/data/remote-data';
 import { Context } from '../../../core/shared/context.model';
+import { DSpaceObject } from '../../../core/shared/dspace-object.model';
+import { SearchService } from '../../../core/shared/search/search.service';
+import { SearchConfigurationService } from '../../../core/shared/search/search-configuration.service';
+import { ViewMode } from '../../../core/shared/view-mode.model';
+import { AlertComponent } from '../../alert/alert.component';
+import { AlertType } from '../../alert/alert-type';
+import {
+  fadeIn,
+  fadeInOut,
+} from '../../animations/fade';
+import {
+  hasNoValue,
+  isNotEmpty,
+} from '../../empty.util';
+import { ErrorComponent } from '../../error/error.component';
+import { CollectionElementLinkType } from '../../object-collection/collection-element-link.type';
+import { ObjectCollectionComponent } from '../../object-collection/object-collection.component';
+import { ListableObject } from '../../object-collection/shared/listable-object.model';
+import { AppliedFilter } from '../models/applied-filter.model';
 import { PaginatedSearchOptions } from '../models/paginated-search-options.model';
 import { SearchFilter } from '../models/search-filter.model';
-import { Observable } from 'rxjs';
-import { SearchConfigurationService } from '../../../core/shared/search/search-configuration.service';
-import { SearchService } from '../../../core/shared/search/search.service';
-import { AlertType } from '../../alert/alert-type';
+import { SearchResult } from '../models/search-result.model';
+import { SearchExportCsvComponent } from '../search-export-csv/search-export-csv.component';
+import { SearchResultsSkeletonComponent } from './search-results-skeleton/search-results-skeleton.component';
 
 export interface SelectionConfig {
   repeatable: boolean;
@@ -23,13 +51,26 @@ export interface SelectionConfig {
 }
 
 @Component({
-  selector: 'ds-search-results',
-  styleUrls: ['./search-results.component.scss'],
+  selector: 'ds-base-search-results',
   templateUrl: './search-results.component.html',
+  styleUrls: ['./search-results.component.scss'],
   animations: [
     fadeIn,
-    fadeInOut
-  ]
+    fadeInOut,
+  ],
+  standalone: true,
+  imports: [
+    AsyncPipe,
+    ErrorComponent,
+    NgIf,
+    NgxSkeletonLoaderModule,
+    ObjectCollectionComponent,
+    RouterLink,
+    SearchExportCsvComponent,
+    SearchResultsSkeletonComponent,
+    TranslateModule,
+    AlertComponent,
+  ],
 })
 
 /**
@@ -37,8 +78,15 @@ export interface SelectionConfig {
  */
 export class SearchResultsComponent {
   hasNoValue = hasNoValue;
+  /**
+   * Currently active filters in url
+   */
+  activeFilters$: Observable<SearchFilter[]>;
 
-  filters$: Observable<SearchFilter[]>;
+  /**
+   * Filter applied to show labels, once populated the activeFilters$ will be loaded
+   */
+  appliedFilters$: BehaviorSubject<AppliedFilter[]>;
 
   /**
    * The link type of the listed search results
@@ -161,13 +209,14 @@ export class SearchResultsComponent {
     protected searchConfigService: SearchConfigurationService,
     protected searchService: SearchService,
   ) {
-    this.filters$ = this.searchConfigService.getCurrentFilters();
+    this.activeFilters$ = this.searchConfigService.getCurrentFilters();
+    this.appliedFilters$ = this.searchService.appliedFilters$;
   }
 
   /**
    * Check if search results are loading
    */
-  isLoading() {
+  isLoading(): boolean {
     return !this.showError() && (hasNoValue(this.searchResults) || hasNoValue(this.searchResults.payload) || this.searchResults.isLoading);
   }
 

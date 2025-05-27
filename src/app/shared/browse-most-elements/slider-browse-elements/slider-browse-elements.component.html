@@ -1,7 +1,7 @@
 <div class="d-flex flex-row gapx-3 flex-nowrap justify-content-center align-items-center slider-wrapper" #sliderWrapper>
   <div *ngIf="(searchResultArray$ | async)?.length" class="arrow">
     <button [attr.aria-label]="'media-viewer.previous' | translate" class="btn btn-link btn-sm arrow-btn" (click)="prev()"
-            [disabled]="(firstItemBS.asObservable() | async) <= 0">
+            [dsBtnDisabled]="(firstItemBS.asObservable() | async) <= 0">
       <i class="fas fa-3x fa-chevron-left"></i>
     </button>
   </div>
@@ -43,7 +43,7 @@
   </div>
   <div *ngIf="(searchResultArray$ | async)?.length">
     <button [attr.aria-label]="'media-viewer.next' | translate" class="btn btn-link btn-sm arrow-btn" (click)="next()"
-            [disabled]="(firstItemBS.asObservable() | async) + (itemsPerPageBS.asObservable() | async) >= (totalItemsBS.asObservable() | async) ">
+            [dsBtnDisabled]="(firstItemBS.asObservable() | async) + (itemsPerPageBS.asObservable() | async) >= (totalItemsBS.asObservable() | async) ">
       <i class="fas fa-3x fa-chevron-right"></i>
     </button>
   </div>

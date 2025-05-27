@@ -1,9 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, combineLatest } from 'rxjs';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import {
+  BehaviorSubject,
+  combineLatest,
+} from 'rxjs';
+import { take } from 'rxjs/operators';
+
 import { SiteDataService } from '../../core/data/site-data.service';
 import { LocaleService } from '../../core/locale/locale.service';
-import { take } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
 import { hasValue } from '../../shared/empty.util';
 
 @Component({

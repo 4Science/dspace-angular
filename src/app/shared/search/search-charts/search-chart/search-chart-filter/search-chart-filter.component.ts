@@ -1,25 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ChartType } from '../../../../../charts/models/chart-type';
-import { SearchFacetFilterComponent } from '../../../search-filters/search-filter/search-facet-filter/search-facet-filter.component';
 import { ChartData } from '../../../../../charts/models/chart-data';
 import { ChartSeries } from '../../../../../charts/models/chart-series';
+import { ChartType } from '../../../../../charts/models/chart-type';
 import { FacetValue } from '../../../models/facet-value.model';
-import { RemoteData } from '../../../../../core/data/remote-data';
-import { PaginatedList } from '../../../../../core/data/paginated-list.model';
 import { FacetValues } from '../../../models/facet-values.model';
-import { getAllCompletedRemoteData } from '../../../../../core/shared/operators';
+import { SearchFacetFilterComponent } from '../../../search-filters/search-filter/search-facet-filter/search-facet-filter.component';
 
-@Component({
-  selector: 'ds-search-chart-filter',
-  template: ``,
-})
+
 /**
  * Component that represents a search chart filter
  */
+@Component({
+  selector: 'ds-search-chart-filter',
+  template: ``,
+  standalone: true,
+})
 export class SearchChartFilterComponent extends SearchFacetFilterComponent implements OnInit {
 
   /**
@@ -110,23 +111,22 @@ export class SearchChartFilterComponent extends SearchFacetFilterComponent imple
   }
 
   protected getInitData(): Observable<ChartSeries[] | ChartData[]> {
-    return this.filterValues$.pipe(
-      getAllCompletedRemoteData(),
-      map((facetValues: RemoteData<PaginatedList<FacetValue>[]>) => {
+    return this.facetValues$.pipe(
+      map((facetValues: FacetValues[]) => {
         const values = [];
-        facetValues.payload.forEach((facetValue: FacetValues) => {
+        facetValues.forEach((facetValue: FacetValues) => {
           this.xAxisLabel = this.xAxisLabel.replace(this.keyPlaceholder, facetValue.name);
           this.yAxisLabel = this.yAxisLabel.replace(this.keyPlaceholder, facetValue.name);
           if (this.isReverseChart) {
             values.push(
               ...facetValue.page.map(
                 (item: FacetValue) =>
-                ({
-                  name: item.count.toString(),
-                  value: Number(item.value),
-                  extra: item,
-                } as ChartSeries)
-              )
+                  ({
+                    name: item.count.toString(),
+                    value: Number(item.value),
+                    extra: item,
+                  } as ChartSeries),
+              ),
             );
           } else {
             values.push(
@@ -136,8 +136,8 @@ export class SearchChartFilterComponent extends SearchFacetFilterComponent imple
                     name: item.value,
                     value: item.count,
                     extra: item,
-                  } as ChartSeries)
-              )
+                  } as ChartSeries),
+              ),
             );
           }
         });

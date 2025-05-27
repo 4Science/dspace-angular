@@ -1,17 +1,36 @@
-import { AfterViewInit, Component, ElementRef, inject, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable, switchMap } from 'rxjs';
-import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
+import { isPlatformBrowser } from '@angular/common';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  inject,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import {
+  BehaviorSubject,
+  combineLatest,
+  Observable,
+  switchMap,
+} from 'rxjs';
+import {
+  map,
+  tap,
+} from 'rxjs/operators';
+import { Item } from 'src/app/core/shared/item.model';
+
 import { BitstreamImagesService } from '../../../core/services/bitstream-images.service';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
-import { map, tap } from 'rxjs/operators';
-import { Item } from 'src/app/core/shared/item.model';
 import { hasValue } from '../../empty.util';
-import { isPlatformBrowser } from '@angular/common';
+import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
 
 @Component({
-  selector: 'ds-slider-browse-elements',
+  selector: 'ds-base-slider-browse-elements',
   templateUrl: './slider-browse-elements.component.html',
   styleUrls: ['./slider-browse-elements.component.scss'],
+  standalone: true,
 })
 export class SliderBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 

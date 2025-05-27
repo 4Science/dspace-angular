@@ -1,20 +1,29 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
-import { RenderCrisLayoutBoxFor } from '../../../../decorators/cris-layout-box.decorator';
-import { LayoutBox } from '../../../../enums/layout-box.enum';
-import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-component.model';
-import { CrisLayoutBox, MediaBoxConfiguration, } from '../../../../../core/layout/models/box.model';
+import {
+  CrisLayoutBox,
+  MediaBoxConfiguration,
+} from '../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../core/shared/item.model';
+import { MediaPlayerComponent } from '../../../../../shared/media-player/media-player.component';
+import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-component.model';
 
 @Component({
   selector: 'ds-cris-layout-media-box',
   templateUrl: './cris-layout-media-box.component.html',
   styleUrls: ['./cris-layout-media-box.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MediaPlayerComponent,
+  ],
 })
-@RenderCrisLayoutBoxFor(LayoutBox.VIDEOVIEWER)
 export class CrisLayoutMediaBoxComponent extends CrisLayoutBoxModelComponent implements OnInit {
   configuration: string;
 

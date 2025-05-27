@@ -1,13 +1,19 @@
-import { ThemedComponent } from '../shared/theme-support/themed.component';
-import { Component, Input } from '@angular/core';
-import { ThumbnailComponent } from './thumbnail.component';
-import { Bitstream } from '../core/shared/bitstream.model';
+import {
+  Component,
+  Input,
+} from '@angular/core';
+
 import { RemoteData } from '../core/data/remote-data';
+import { Bitstream } from '../core/shared/bitstream.model';
+import { ThemedComponent } from '../shared/theme-support/themed.component';
+import { ThumbnailComponent } from './thumbnail.component';
 
 @Component({
-  selector: 'ds-themed-thumbnail',
+  selector: 'ds-thumbnail',
   styleUrls: [],
   templateUrl: '../shared/theme-support/themed.component.html',
+  standalone: true,
+  imports: [ThumbnailComponent],
 })
 export class ThemedThumbnailComponent extends ThemedComponent<ThumbnailComponent> {
 
@@ -20,6 +26,8 @@ export class ThemedThumbnailComponent extends ThemedComponent<ThumbnailComponent
   @Input() placeholder?: string;
 
   @Input() limitWidth?: boolean;
+
+  @Input() keepAspectRatio?: boolean;
 
   protected inAndOutputNames: (keyof ThumbnailComponent & keyof this)[] = [
     'thumbnail',

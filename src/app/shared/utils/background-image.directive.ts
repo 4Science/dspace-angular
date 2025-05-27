@@ -1,10 +1,20 @@
-import { Directive, ElementRef, Inject, Input, OnChanges, PLATFORM_ID, SimpleChanges } from '@angular/core';
-import { Bitstream } from '../../core/shared/bitstream.model';
-import { RemoteData } from '../../core/data/remote-data';
 import { isPlatformBrowser } from '@angular/common';
+import {
+  Directive,
+  ElementRef,
+  Inject,
+  Input,
+  OnChanges,
+  PLATFORM_ID,
+  SimpleChanges,
+} from '@angular/core';
+
+import { RemoteData } from '../../core/data/remote-data';
+import { Bitstream } from '../../core/shared/bitstream.model';
 
 @Directive({
-  selector: '[dsBackgroundImage]'
+  selector: '[dsBackgroundImage]',
+  standalone: true,
 })
 export class BackgroundImageDirective implements OnChanges {
 
@@ -15,7 +25,7 @@ export class BackgroundImageDirective implements OnChanges {
   constructor(
     private el: ElementRef,
     @Inject(PLATFORM_ID) private platformId: string,
-    ) {
+  ) {
   }
 
   ngOnChanges(changes: SimpleChanges) {

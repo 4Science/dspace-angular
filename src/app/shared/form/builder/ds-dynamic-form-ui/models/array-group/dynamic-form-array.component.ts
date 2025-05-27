@@ -1,6 +1,26 @@
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, Output, QueryList } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
+import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDragHandle,
+  CdkDropList,
+} from '@angular/cdk/drag-drop';
+import {
+  NgClass,
+  NgForOf,
+  NgTemplateOutlet,
+} from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+  QueryList,
+} from '@angular/core';
+import {
+  ReactiveFormsModule,
+  UntypedFormGroup,
+} from '@angular/forms';
 import {
   DynamicFormArrayComponent,
   DynamicFormControlCustomEvent,
@@ -10,18 +30,35 @@ import {
   DynamicFormLayout,
   DynamicFormLayoutService,
   DynamicFormValidationService,
-  DynamicTemplateDirective
+  DynamicTemplateDirective,
 } from '@ng-dynamic-forms/core';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+
 import { Relationship } from '../../../../../../core/shared/item-relationships/relationship.model';
 import { hasValue } from '../../../../../empty.util';
-import { DynamicRowArrayModel } from '../ds-dynamic-row-array-model';
 import { LiveRegionService } from '../../../../../live-region/live-region.service';
-import { TranslateService } from '@ngx-translate/core';
+import { DsDynamicFormControlContainerComponent } from '../../ds-dynamic-form-control-container.component';
+import { DynamicRowArrayModel } from '../ds-dynamic-row-array-model';
 
 @Component({
   selector: 'ds-dynamic-form-array',
   templateUrl: './dynamic-form-array.component.html',
-  styleUrls: ['./dynamic-form-array.component.scss']
+  styleUrls: ['./dynamic-form-array.component.scss'],
+  imports: [
+    ReactiveFormsModule,
+    CdkDropList,
+    NgClass,
+    NgForOf,
+    CdkDrag,
+    CdkDragHandle,
+    forwardRef(() => DsDynamicFormControlContainerComponent),
+    NgTemplateOutlet,
+    TranslateModule,
+  ],
+  standalone: true,
 })
 export class DsDynamicFormArrayComponent extends DynamicFormArrayComponent {
 
@@ -67,14 +104,14 @@ export class DsDynamicFormArrayComponent extends DynamicFormArrayComponent {
         index,
         arrayModel: this.model,
         model: this.model.groups[index].group[0],
-        control: (this.control as any).controls[index]
+        control: (this.control as any).controls[index],
       }, 'move');
     }
   }
 
   update(event: any, index: number) {
     const $event = Object.assign({}, event, {
-      context: { index: index - 1}
+      context: { index: index - 1 },
     });
 
     this.onChange($event);

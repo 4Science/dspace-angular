@@ -20,7 +20,7 @@ definitions:
 
 pipelines:
   branches:
-    'glam7':
+    'main-glam':
       - step: *unittest-code-checks
     'prod/**':
       - step: *unittest-code-checks

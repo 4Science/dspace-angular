@@ -1,15 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { BaseItemViewerComponent } from '../base-item-viewer.component';
+import { AsyncPipe } from '@angular/common';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  ParamMap,
+} from '@angular/router';
+import {
+  Observable,
+  OperatorFunction,
+} from 'rxjs';
+import {
+  filter,
+  map,
+  switchMap,
+} from 'rxjs/operators';
+
 import { RouteService } from '../../../../../core/services/route.service';
-import { filter, map, switchMap } from 'rxjs/operators';
-import { Observable, OperatorFunction } from 'rxjs';
+import { MiradorViewerComponent } from '../../../../mirador-viewer/mirador-viewer.component';
 import { isIiifSearchEnabled } from '../../../shared/viewer-provider.utils';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { BaseItemViewerComponent } from '../base-item-viewer.component';
 
 @Component({
   selector: 'ds-iiif-item-viewer',
   templateUrl: './iiif-item-viewer.component.html',
-  styleUrls: ['./iiif-item-viewer.component.scss']
+  styleUrls: ['./iiif-item-viewer.component.scss'],
+  imports: [
+    MiradorViewerComponent,
+    AsyncPipe,
+  ],
+  standalone: true,
 })
 export class IIIFItemViewerComponent extends BaseItemViewerComponent implements OnInit {
 
@@ -22,7 +43,7 @@ export class IIIFItemViewerComponent extends BaseItemViewerComponent implements 
 
   constructor(
     private readonly routeService: RouteService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
     super();
   }
@@ -32,14 +53,14 @@ export class IIIFItemViewerComponent extends BaseItemViewerComponent implements 
       filter(queryMap => queryMap != null),
     );
     this.canvasId$ = queryParams$.pipe(
-      this.extractParam(queryMap => queryMap.get(this.CANVAS_PARAM))
+      this.extractParam(queryMap => queryMap.get(this.CANVAS_PARAM)),
     );
     this.isSearchable$ = this.item$.pipe(
-      map((item) => isIiifSearchEnabled(item))
+      map((item) => isIiifSearchEnabled(item)),
     );
     this.query$ = this.isSearchable$.pipe(
       filter((isSearchable) => !!isSearchable),
-      switchMap(() => queryParams$.pipe(this.extractParam(queryMap => queryMap.get(this.QUERY_PARAM))))
+      switchMap(() => queryParams$.pipe(this.extractParam(queryMap => queryMap.get(this.QUERY_PARAM)))),
     );
   }
 

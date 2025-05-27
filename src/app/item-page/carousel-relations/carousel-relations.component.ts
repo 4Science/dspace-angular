@@ -1,4 +1,8 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+} from '@angular/core';
+
 import { CarouselOptions } from '../../shared/carousel/carousel-options.model';
 
 @Component({

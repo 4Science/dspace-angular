@@ -1,3 +1,11 @@
+import { trigger } from '@angular/animations';
+import {
+  AsyncPipe,
+  NgForOf,
+  NgIf,
+  NgTemplateOutlet,
+  TitleCasePipe,
+} from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -6,32 +14,84 @@ import {
   OnDestroy,
   OnInit,
   TemplateRef,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
-import { trigger } from '@angular/animations';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TranslateModule } from '@ngx-translate/core';
+import {
+  BehaviorSubject,
+  Observable,
+  of as observableOf,
+  Subscription,
+  timer,
+} from 'rxjs';
+import {
+  filter,
+  map,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs/operators';
+import { BtnDisabledDirective } from 'src/app/shared/btn-disabled.directive';
 
-import { BehaviorSubject, Observable, of as observableOf, Subscription, timer } from 'rxjs';
-import { filter, map, switchMap, take, tap } from 'rxjs/operators';
-
-import { NotificationsService } from '../notifications.service';
-import { scaleEnter, scaleInState, scaleLeave, scaleOutState } from '../../animations/scale';
-import { rotateEnter, rotateInState, rotateLeave, rotateOutState } from '../../animations/rotate';
-import { fromBottomEnter, fromBottomInState, fromBottomLeave, fromBottomOutState } from '../../animations/fromBottom';
-import { fromRightEnter, fromRightInState, fromRightLeave, fromRightOutState } from '../../animations/fromRight';
-import { fromLeftEnter, fromLeftInState, fromLeftLeave, fromLeftOutState } from '../../animations/fromLeft';
-import { fromTopEnter, fromTopInState, fromTopLeave, fromTopOutState } from '../../animations/fromTop';
-import { fadeInEnter, fadeInState, fadeOutLeave, fadeOutState } from '../../animations/fade';
-import { NotificationAnimationsStatus } from '../models/notification-animations-type';
-import { isNotEmpty } from '../../empty.util';
-import { IProcessNotification } from '../models/process-notification.model';
-import { ProcessDataService } from '../../../core/data/processes/process-data.service';
-import { Process } from '../../../process-page/processes/process.model';
-import { Bitstream } from '../../../core/shared/bitstream.model';
-import { getAllCompletedRemoteData, getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
-import { DSpaceObject } from '../../../core/shared/dspace-object.model';
+import { ProcessDataService } from '../../../core/data/processes/process-data.service';
 import { RemoteData } from '../../../core/data/remote-data';
+import { Bitstream } from '../../../core/shared/bitstream.model';
+import { DSpaceObject } from '../../../core/shared/dspace-object.model';
+import {
+  getAllCompletedRemoteData,
+  getFirstCompletedRemoteData,
+} from '../../../core/shared/operators';
+import { Process } from '../../../process-page/processes/process.model';
+import {
+  fadeInEnter,
+  fadeInState,
+  fadeOutLeave,
+  fadeOutState,
+} from '../../animations/fade';
+import {
+  fromBottomEnter,
+  fromBottomInState,
+  fromBottomLeave,
+  fromBottomOutState,
+} from '../../animations/fromBottom';
+import {
+  fromLeftEnter,
+  fromLeftInState,
+  fromLeftLeave,
+  fromLeftOutState,
+} from '../../animations/fromLeft';
+import {
+  fromRightEnter,
+  fromRightInState,
+  fromRightLeave,
+  fromRightOutState,
+} from '../../animations/fromRight';
+import {
+  fromTopEnter,
+  fromTopInState,
+  fromTopLeave,
+  fromTopOutState,
+} from '../../animations/fromTop';
+import {
+  rotateEnter,
+  rotateInState,
+  rotateLeave,
+  rotateOutState,
+} from '../../animations/rotate';
+import {
+  scaleEnter,
+  scaleInState,
+  scaleLeave,
+  scaleOutState,
+} from '../../animations/scale';
+import { isNotEmpty } from '../../empty.util';
+import { ThemedFileDownloadLinkComponent } from '../../file-download-link/themed-file-download-link.component';
+import { FileSizePipe } from '../../utils/file-size-pipe';
+import { NotificationAnimationsStatus } from '../models/notification-animations-type';
+import { IProcessNotification } from '../models/process-notification.model';
+import { NotificationsService } from '../notifications.service';
 
 @Component({
   selector: 'ds-process-notification',
@@ -44,12 +104,24 @@ import { RemoteData } from '../../../core/data/remote-data';
       fromLeftEnter, fromLeftInState, fromLeftLeave, fromLeftOutState,
       fromTopEnter, fromTopInState, fromTopLeave, fromTopOutState,
       rotateInState, rotateEnter, rotateOutState, rotateLeave,
-      scaleInState, scaleEnter, scaleOutState, scaleLeave
-    ])
+      scaleInState, scaleEnter, scaleOutState, scaleLeave,
+    ]),
   ],
   templateUrl: './process-notification.component.html',
   styleUrls: ['./process-notification.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    NgIf,
+    AsyncPipe,
+    NgTemplateOutlet,
+    TranslateModule,
+    ThemedFileDownloadLinkComponent,
+    FileSizePipe,
+    TitleCasePipe,
+    NgForOf,
+    BtnDisabledDirective,
+  ],
+  standalone: true,
 })
 
 export class ProcessNotificationComponent implements OnInit, OnDestroy {
@@ -162,7 +234,7 @@ export class ProcessNotificationComponent implements OnInit, OnDestroy {
     if (processRD.hasSucceeded && processRD.payload.processStatus.toString() === 'COMPLETED') {
       return this.processService.getFiles(processRD.payload.processId).pipe(
         getFirstCompletedRemoteData(),
-        map((response) => response.hasSucceeded ? response.payload.page : [])
+        map((response) => response.hasSucceeded ? response.payload.page : []),
       );
     } else {
       return observableOf([]);
@@ -181,7 +253,7 @@ export class ProcessNotificationComponent implements OnInit, OnDestroy {
    * On destroy stop timer.
    */
   ngOnDestroy(): void {
-    if (!!this.sub) {
+    if (this.sub) {
       this.sub.unsubscribe();
     }
   }
@@ -200,7 +272,7 @@ export class ProcessNotificationComponent implements OnInit, OnDestroy {
       this.notificationService.remove(this.notification);
     }
 
-    if (!!this.sub) {
+    if (this.sub) {
       this.sub.unsubscribe();
     }
   }

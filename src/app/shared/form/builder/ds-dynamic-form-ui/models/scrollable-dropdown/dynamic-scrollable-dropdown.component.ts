@@ -1,39 +1,83 @@
 import {
+  AsyncPipe,
+  NgForOf,
+  NgIf,
+} from '@angular/common';
+import {
   ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
+  Inject,
+  Injector,
   Input,
+  OnDestroy,
   OnInit,
   Output,
   ViewChild,
-  ElementRef,
-  OnDestroy
 } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
-
-import { Observable, of as observableOf, Subject, Subscription } from 'rxjs';
-import { catchError, debounceTime, distinctUntilChanged, map, tap } from 'rxjs/operators';
-import { NgbDropdown, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  FormsModule,
+  UntypedFormGroup,
+} from '@angular/forms';
+import {
+  NgbDropdown,
+  NgbDropdownModule,
+  NgbModal,
+} from '@ng-bootstrap/ng-bootstrap';
 import {
   DynamicFormControlCustomEvent,
   DynamicFormLayoutService,
-  DynamicFormValidationService
+  DynamicFormValidationService,
 } from '@ng-dynamic-forms/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
+import {
+  Observable,
+  of as observableOf,
+  of,
+  Subject,
+  Subscription,
+} from 'rxjs';
+import {
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  take,
+  tap,
+} from 'rxjs/operators';
+import {
+  APP_DATA_SERVICES_MAP,
+  LazyDataServicesMap,
+} from 'src/config/app-config.interface';
 
-import { DynamicScrollableDropdownModel } from './dynamic-scrollable-dropdown.model';
-import { PageInfo } from '../../../../../../core/shared/page-info.model';
-import { hasValue, isEmpty, isNotEmpty } from '../../../../../empty.util';
-import { VocabularyService } from '../../../../../../core/submission/vocabularies/vocabulary.service';
-import { getFirstSucceededRemoteDataPayload } from '../../../../../../core/shared/operators';
-import { buildPaginatedList, PaginatedList } from '../../../../../../core/data/paginated-list.model';
-import { DsDynamicVocabularyComponent } from '../dynamic-vocabulary.component';
-import { FormFieldMetadataValueObject } from '../../../models/form-field-metadata-value.model';
-import { FindAllData } from '../../../../../../core/data/base/find-all-data';
 import { CacheableObject } from '../../../../../../core/cache/cacheable-object.model';
-import { FormBuilderService } from '../../../form-builder.service';
-import { SubmissionService } from '../../../../../../submission/submission.service';
+import {
+  FindAllData,
+  FindAllDataImpl,
+} from '../../../../../../core/data/base/find-all-data';
+import {
+  buildPaginatedList,
+  PaginatedList,
+} from '../../../../../../core/data/paginated-list.model';
 import { RemoteData } from '../../../../../../core/data/remote-data';
+import { lazyDataService } from '../../../../../../core/lazy-data-service';
+import { getFirstSucceededRemoteDataPayload } from '../../../../../../core/shared/operators';
+import { PageInfo } from '../../../../../../core/shared/page-info.model';
 import { VocabularyEntry } from '../../../../../../core/submission/vocabularies/models/vocabulary-entry.model';
+import { VocabularyService } from '../../../../../../core/submission/vocabularies/vocabulary.service';
+import { SubmissionService } from '../../../../../../submission/submission.service';
+import { BtnDisabledDirective } from '../../../../../btn-disabled.directive';
+import {
+  hasValue,
+  isEmpty,
+  isNotEmpty,
+} from '../../../../../empty.util';
+import { FormBuilderService } from '../../../form-builder.service';
+import { FormFieldMetadataValueObject } from '../../../models/form-field-metadata-value.model';
+import { DsDynamicVocabularyComponent } from '../dynamic-vocabulary.component';
+import { DynamicScrollableDropdownModel } from './dynamic-scrollable-dropdown.model';
 
 /**
  * Component representing a dropdown input field
@@ -41,7 +85,18 @@ import { VocabularyEntry } from '../../../../../../core/submission/vocabularies/
 @Component({
   selector: 'ds-dynamic-scrollable-dropdown',
   styleUrls: ['./dynamic-scrollable-dropdown.component.scss'],
-  templateUrl: './dynamic-scrollable-dropdown.component.html'
+  templateUrl: './dynamic-scrollable-dropdown.component.html',
+  imports: [
+    NgbDropdownModule,
+    NgIf,
+    AsyncPipe,
+    InfiniteScrollDirective,
+    NgForOf,
+    TranslateModule,
+    FormsModule,
+    BtnDisabledDirective,
+  ],
+  standalone: true,
 })
 export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownMenu', { read: ElementRef }) dropdownMenu: ElementRef;
@@ -95,13 +150,16 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
    */
   private findAllService: FindAllData<CacheableObject>;
 
-  constructor(protected vocabularyService: VocabularyService,
-              protected cdr: ChangeDetectorRef,
-              protected layoutService: DynamicFormLayoutService,
-              protected validationService: DynamicFormValidationService,
-              protected formBuilderService: FormBuilderService,
-              protected modalService: NgbModal,
-              protected submissionService: SubmissionService
+  constructor(
+    protected vocabularyService: VocabularyService,
+    protected cdr: ChangeDetectorRef,
+    protected layoutService: DynamicFormLayoutService,
+    protected validationService: DynamicFormValidationService,
+    protected formBuilderService: FormBuilderService,
+    protected modalService: NgbModal,
+    protected submissionService: SubmissionService,
+    protected parentInjector: Injector,
+    @Inject(APP_DATA_SERVICES_MAP) private dataServiceMap: LazyDataServicesMap,
   ) {
     super(vocabularyService, layoutService, validationService, formBuilderService, modalService, submissionService);
   }
@@ -110,15 +168,19 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
    * Initialize the component, setting up the init form value
    */
   ngOnInit() {
-    this.findAllService = this.model?.findAllFactory();
-    this.useFindAllService = hasValue(this.findAllService?.findAll) && typeof this.findAllService.findAll === 'function';
+    const lazyProvider$: Observable<Cache> = hasValue(this.model.resourceType) ?
+      lazyDataService(this.dataServiceMap, this.model.resourceType.value, this.parentInjector) : of(null);
 
-    if (this.model.metadataValue) {
-      this.setCurrentValue(this.model.metadataValue, true);
-    }
+    lazyProvider$.pipe(take(1)).subscribe((dataService) => {
+      this.findAllService = dataService as unknown as FindAllDataImpl<CacheableObject>;
+      this.useFindAllService = hasValue(this.findAllService?.findAll) && typeof this.findAllService.findAll === 'function';
 
-    this.updatePageInfo(this.model.maxOptions, 1);
-    this.loadOptions(null, true);
+      if (this.model.metadataValue) {
+        this.setCurrentValue(this.model.metadataValue, true);
+      }
+      this.updatePageInfo(this.model.maxOptions, 1);
+      this.loadOptions(null, true);
+    });
 
     this.group.get(this.model.id).valueChanges.pipe(distinctUntilChanged())
       .subscribe((value) => {
@@ -158,39 +220,51 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
    */
   loadOptions(searchText = null, initModel = false, concatResults = false, isScrolling = false) {
     this.searchText = searchText;
-    this.getDataFromService(searchText, isScrolling).pipe(
+    let search$: Observable<RemoteData<PaginatedList<VocabularyEntry>>>;
+    if (searchText) {
+      const searchPageInfo = Object.assign(new PageInfo(), {
+        elementsPerPage: this.pageInfo.elementsPerPage,
+        currentPage: isScrolling ? this.pageInfo.currentPage : 1,
+        totalElements: this.pageInfo.totalElements,
+        totalPages: this.pageInfo.totalPages });
+      search$ = this.vocabularyService.getVocabularyEntriesByValue(this.searchText, false, this.model.vocabularyOptions,
+        searchPageInfo);
+    } else {
+      search$ = this.vocabularyService.getVocabularyEntries(this.model.vocabularyOptions, this.pageInfo);
+    }
+    search$.pipe(
       getFirstSucceededRemoteDataPayload(),
       catchError(() => observableOf(buildPaginatedList(
-          new PageInfo(),
-          []
-        ))
+        new PageInfo(),
+        [],
+      )),
       ),
-      tap(() => this.loading = false)
-    ).subscribe((list: PaginatedList<CacheableObject>) => {
-      this.optionsList = (concatResults) ? this.optionsList.concat(list.page) : list.page;
-      if (initModel && this.model.value) {
-        this.setCurrentValue(this.model.value, true);
-      }
-      this.updatePageInfo(
-        list.pageInfo.elementsPerPage,
-        list.pageInfo.currentPage,
-        list.pageInfo.totalElements,
-        list.pageInfo.totalPages
-      );
-      this.selectedIndex = 0;
-      // After all entries have been retrieved, if the component is an opendropdown then
-      // check if the current value is a custom value and add it to the list
-      const isLastPage = this.pageInfo.currentPage === this.pageInfo.totalPages;
-      const modelValue: any = this.model.value;
-      if (isLastPage && isNotEmpty(modelValue?.value)) {
-        const isCustomValue = isEmpty(this.optionsList.filter((element: VocabularyEntry) => element.value === modelValue.value));
-        if (isCustomValue) {
-          const object = this.createVocabularyObject(modelValue.display, modelValue.value, undefined);
-          this.optionsList.push(object);
+      tap(() => this.loading = false))
+      .subscribe((list: PaginatedList<VocabularyEntry>) => {
+        this.optionsList = (concatResults) ? this.optionsList.concat(list.page) : list.page;
+        if (initModel && this.model.value) {
+          this.setCurrentValue(this.model.value, true);
         }
-      }
-      this.cdr.detectChanges();
-    });
+        this.updatePageInfo(
+          list.pageInfo.elementsPerPage,
+          list.pageInfo.currentPage,
+          list.pageInfo.totalElements,
+          list.pageInfo.totalPages,
+        );
+        this.selectedIndex = 0;
+        // After all entries have been retrieved, if the component is an opendropdown then
+        // check if the current value is a custom value and add it to the list
+        const isLastPage = this.pageInfo.currentPage === this.pageInfo.totalPages;
+        const modelValue: any = this.model.value;
+        if (isLastPage && isNotEmpty(modelValue?.value)) {
+          const isCustomValue = isEmpty(this.optionsList.filter((element: VocabularyEntry) => element.value === modelValue.value));
+          if (isCustomValue) {
+            const object = this.createVocabularyObject(modelValue.display, modelValue.value, undefined);
+            this.optionsList.push(object);
+          }
+        }
+        this.cdr.detectChanges();
+      });
   }
 
   /**
@@ -199,7 +273,7 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
   initFilterSubscriber(): void {
     this.subSearch = this.filterTextChanged.pipe(
       debounceTime(700),
-      distinctUntilChanged()
+      distinctUntilChanged(),
     ).subscribe((searchText) => {
       this.loadOptions(searchText);
     });
@@ -316,7 +390,7 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
         this.pageInfo.elementsPerPage,
         this.pageInfo.currentPage + 1,
         this.pageInfo.totalElements,
-        this.pageInfo.totalPages
+        this.pageInfo.totalPages,
       );
       this.loadOptions(this.searchText, false, true, true);
     }
@@ -343,7 +417,7 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
 
     if (init && !this.useFindAllService) {
       result = this.getInitValueFromModel().pipe(
-        map((formValue: FormFieldMetadataValueObject) => formValue.display)
+        map((formValue: FormFieldMetadataValueObject) => formValue.display),
       );
     } else {
       if (isEmpty(value)) {
@@ -370,8 +444,8 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
       if (this.optionsList.length > 0) {
         this.optionsList.forEach((element: VocabularyEntry) => {
           if ((element.display.toLowerCase() === this.otherListEntry.toLowerCase()) ||
-              (element.value?.toLowerCase() === this.otherListEntry.toLowerCase()) ||
-              (this.otherListEntry.toLowerCase() === 'other')) {
+            (element.value?.toLowerCase() === this.otherListEntry.toLowerCase()) ||
+            (this.otherListEntry.toLowerCase() === 'other')) {
             entryCount++;
           }
         });
@@ -398,7 +472,7 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
       value: value,
       display: display,
       otherInformation: otherInformation,
-      type: 'vocabularyEntry'
+      type: 'vocabularyEntry',
     });
     return object;
   }

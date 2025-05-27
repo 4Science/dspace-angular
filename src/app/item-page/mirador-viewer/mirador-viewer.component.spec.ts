@@ -1,24 +1,35 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { MiradorViewerComponent } from './mirador-viewer.component';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateLoaderMock } from '../../shared/mocks/translate-loader.mock';
-import { BitstreamDataService } from '../../core/data/bitstream-data.service';
-import { createRelationshipsObservable } from '../simple/item-types/shared/item.component.spec';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MetadataMap, MetadataValue } from '../../core/shared/metadata.models';
-import { Item } from '../../core/shared/item.model';
-import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
-import { createPaginatedList } from '../../shared/testing/utils.test';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
 import { of as observableOf } from 'rxjs';
-import { MiradorViewerService } from './mirador-viewer.service';
-import { HostWindowService } from '../../shared/host-window.service';
-import { BundleDataService } from '../../core/data/bundle-data.service';
-import { ConfigurationProperty } from '../../core/shared/configuration-property.model';
-import { ConfigurationDataService } from '../../core/data/configuration-data.service';
+
 import { APP_CONFIG } from '../../../config/app-config.interface';
 import { environment } from '../../../environments/environment';
-import { Collection } from '../../core/shared/collection.model';
+import { BitstreamDataService } from '../../core/data/bitstream-data.service';
+import { BundleDataService } from '../../core/data/bundle-data.service';
+import { ConfigurationDataService } from '../../core/data/configuration-data.service';
 import { DspaceRestService } from '../../core/dspace-rest/dspace-rest.service';
+import { Collection } from '../../core/shared/collection.model';
+import { ConfigurationProperty } from '../../core/shared/configuration-property.model';
+import { Item } from '../../core/shared/item.model';
+import {
+  MetadataMap,
+  MetadataValue,
+} from '../../core/shared/metadata.models';
+import { HostWindowService } from '../../shared/host-window.service';
+import { TranslateLoaderMock } from '../../shared/mocks/translate-loader.mock';
+import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
+import { createPaginatedList } from '../../shared/testing/utils.test';
+import { createRelationshipsObservable } from '../simple/item-types/shared/item.component.spec';
+import { MiradorViewerComponent } from './mirador-viewer.component';
+import { MiradorViewerService } from './mirador-viewer.service';
 
 
 function getItem(metadata: MetadataMap, collectionMetadata?: MetadataMap): Item {
@@ -26,7 +37,7 @@ function getItem(metadata: MetadataMap, collectionMetadata?: MetadataMap): Item 
     bundles: createSuccessfulRemoteDataObject$(createPaginatedList([])),
     metadata: metadata,
     relationships: createRelationshipsObservable(),
-    owningCollection: createSuccessfulRemoteDataObject$(Object.assign(new Collection(), {metadata: collectionMetadata})),
+    owningCollection: createSuccessfulRemoteDataObject$(Object.assign(new Collection(), { metadata: collectionMetadata })),
   });
 }
 
@@ -39,15 +50,15 @@ const mockHostWindowService = {
 
 const defaultConfigProperty = Object.assign(new ConfigurationProperty(), {
   name: 'viewer.mirador.download.default',
-  values: ['all']
+  values: ['all'],
 });
 
 const configurationDataService = jasmine.createSpyObj('configurationDataService', {
-  findByPropertyName: createSuccessfulRemoteDataObject$(defaultConfigProperty)
+  findByPropertyName: createSuccessfulRemoteDataObject$(defaultConfigProperty),
 });
 
 const restService = Object.assign({}, {
-  get: () => observableOf({payload: { page: ['all', 'single-images'] }})
+  get: () => observableOf({ payload: { page: ['all', 'single-images'] } }),
 });
 
 describe('MiradorViewerComponent with search', () => {
@@ -61,10 +72,9 @@ describe('MiradorViewerComponent with search', () => {
       imports: [TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
-          useClass: TranslateLoaderMock
-        }
-      })],
-      declarations: [MiradorViewerComponent],
+          useClass: TranslateLoaderMock,
+        },
+      }), MiradorViewerComponent],
       providers: [
         { provide: DspaceRestService, useValue: restService },
         { provide: BitstreamDataService, useValue: {} },
@@ -73,13 +83,13 @@ describe('MiradorViewerComponent with search', () => {
         { provide: ConfigurationDataService, useValue: configurationDataService },
         { provide: APP_CONFIG, useValue: environment },
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(MiradorViewerComponent, {
       set: {
         providers: [
-          { provide: MiradorViewerService, useValue: viewerService }
-        ]
-      }
+          { provide: MiradorViewerService, useValue: viewerService },
+        ],
+      },
     }).compileComponents();
   }));
   describe('searchable item', () => {
@@ -128,10 +138,9 @@ describe('MiradorViewerComponent with multiple images', () => {
       imports: [TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
-          useClass: TranslateLoaderMock
-        }
-      })],
-      declarations: [MiradorViewerComponent],
+          useClass: TranslateLoaderMock,
+        },
+      }), MiradorViewerComponent],
       providers: [
         { provide: DspaceRestService, useValue: restService },
         { provide: BitstreamDataService, useValue: {} },
@@ -140,13 +149,13 @@ describe('MiradorViewerComponent with multiple images', () => {
         { provide: ConfigurationDataService, useValue: configurationDataService },
         { provide: APP_CONFIG, useValue: environment },
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(MiradorViewerComponent, {
       set: {
         providers: [
-          { provide: MiradorViewerService, useValue: viewerService }
-          ]
-      }
+          { provide: MiradorViewerService, useValue: viewerService },
+        ],
+      },
     }).compileComponents();
   }));
 
@@ -192,10 +201,9 @@ describe('MiradorViewerComponent with a single image', () => {
       imports: [TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
-          useClass: TranslateLoaderMock
-        }
-      })],
-      declarations: [MiradorViewerComponent],
+          useClass: TranslateLoaderMock,
+        },
+      }), MiradorViewerComponent],
       providers: [
         { provide: DspaceRestService, useValue: restService },
         { provide: BitstreamDataService, useValue: {} },
@@ -204,13 +212,13 @@ describe('MiradorViewerComponent with a single image', () => {
         { provide: ConfigurationDataService, useValue: configurationDataService },
         { provide: APP_CONFIG, useValue: environment },
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(MiradorViewerComponent, {
       set: {
         providers: [
-          { provide: MiradorViewerService, useValue: viewerService }
-        ]
-      }
+          { provide: MiradorViewerService, useValue: viewerService },
+        ],
+      },
     }).compileComponents();
   }));
 
@@ -249,14 +257,13 @@ describe('MiradorViewerComponent in development mode', () => {
       imports: [TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
-          useClass: TranslateLoaderMock
-        }
-      })],
-      declarations: [MiradorViewerComponent],
+          useClass: TranslateLoaderMock,
+        },
+      }), MiradorViewerComponent],
       providers: [
-        { provide: BitstreamDataService, useValue: {} }
+        { provide: BitstreamDataService, useValue: {} },
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(MiradorViewerComponent, {
       set: {
         providers: [
@@ -266,8 +273,8 @@ describe('MiradorViewerComponent in development mode', () => {
           { provide: HostWindowService, useValue: mockHostWindowService  },
           { provide: ConfigurationDataService, useValue: configurationDataService },
           { provide: APP_CONFIG, useValue: environment },
-        ]
-      }
+        ],
+      },
     }).compileComponents();
   }));
 
@@ -308,8 +315,8 @@ describe('MiradorViewerComponent download plugin config', () => {
       imports: [TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
-          useClass: TranslateLoaderMock
-        }
+          useClass: TranslateLoaderMock,
+        },
       })],
       declarations: [MiradorViewerComponent],
       providers: [
@@ -320,13 +327,13 @@ describe('MiradorViewerComponent download plugin config', () => {
         { provide: ConfigurationDataService, useValue: configurationDataService },
         { provide: APP_CONFIG, useValue: environment },
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(MiradorViewerComponent, {
       set: {
         providers: [
-          { provide: MiradorViewerService, useValue: viewerService }
-        ]
-      }
+          { provide: MiradorViewerService, useValue: viewerService },
+        ],
+      },
     }).compileComponents();
   }));
 

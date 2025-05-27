@@ -1,9 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { OpenStreetMapComponent } from './open-street-map.component';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { LocationErrorCodes, LocationPlace, LocationService } from '../../core/services/location.service';
-import { of, throwError } from 'rxjs';
+import {
+  of,
+  throwError,
+} from 'rxjs';
 
+import {
+  LocationErrorCodes,
+  LocationPlace,
+  LocationService,
+} from '../../core/services/location.service';
+import { OpenStreetMapComponent } from './open-street-map.component';
+//
 describe('OpenStreetMapComponent', () => {
   let component: OpenStreetMapComponent;
   let fixture: ComponentFixture<OpenStreetMapComponent>;
@@ -26,14 +37,14 @@ describe('OpenStreetMapComponent', () => {
       latitude: 52.520008,
       longitude: 13.404954,
     },
-    displayName: '10178 Berlin, Germania'
+    displayName: '10178 Berlin, Germania',
   };
 
   const errPlace: LocationPlace = {
     coordinates: {
       latitude: 52.520008,
       longitude: 13.404954,
-    }
+    },
   };
 
   const placeOnlyCoordinates: LocationPlace = {
@@ -43,18 +54,18 @@ describe('OpenStreetMapComponent', () => {
     },
   };
   const placeWithAddress: LocationPlace = {
-    displayName: '10178 Berlin, Germania'
+    displayName: '10178 Berlin, Germania',
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [OpenStreetMapComponent],
       imports: [
         TranslateModule.forRoot(),
+        OpenStreetMapComponent,
       ],
       providers: [
         { provide: LocationService, useValue: locationService },
-      ]
+      ],
     })
       .compileComponents();
   });

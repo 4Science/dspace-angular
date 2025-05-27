@@ -1,20 +1,30 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { map, take } from 'rxjs/operators';
+import {
+  map,
+  take,
+} from 'rxjs/operators';
 
-import { FieldRenderingType, MetadataBoxFieldRendering } from '../metadata-box.decorator';
-import { BitstreamRenderingModelComponent } from '../bitstream-rendering-model';
 import { BitstreamDataService } from '../../../../../../../core/data/bitstream-data.service';
-import { Bitstream } from '../../../../../../../core/shared/bitstream.model';
-import { Item } from '../../../../../../../core/shared/item.model';
-import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { FindListOptions } from '../../../../../../../core/data/find-list-options.model';
 import { PaginatedList } from '../../../../../../../core/data/paginated-list.model';
+import { LayoutField } from '../../../../../../../core/layout/models/box.model';
+import { Bitstream } from '../../../../../../../core/shared/bitstream.model';
+import { Item } from '../../../../../../../core/shared/item.model';
+import { BitstreamRenderingModelComponent } from '../bitstream-rendering-model';
+import {
+  FieldRenderingType,
+  MetadataBoxFieldRendering,
+} from '../metadata-box.decorator';
 
 @Component({
   selector: 'ds-background',
   templateUrl: './background.component.html',
-  styleUrls: ['./background.component.scss']
+  styleUrls: ['./background.component.scss'],
 })
 @MetadataBoxFieldRendering(FieldRenderingType.BACKGROUND, true)
 /**
@@ -34,7 +44,7 @@ export class BackgroundComponent extends BitstreamRenderingModelComponent implem
     @Inject('renderingSubTypeProvider') public renderingSubTypeProvider: string,
     @Inject('tabNameProvider') public tabNameProvider: string,
     protected bitstreamDataService: BitstreamDataService,
-    protected translateService: TranslateService
+    protected translateService: TranslateService,
   ) {
     super(fieldProvider, itemProvider, renderingSubTypeProvider, tabNameProvider, bitstreamDataService, translateService);
   }
@@ -55,7 +65,7 @@ export class BackgroundComponent extends BitstreamRenderingModelComponent implem
       map((bitstreamList: PaginatedList<Bitstream>) => {
         return bitstreamList.page;
       }),
-      take(1)
+      take(1),
     ).subscribe((bitstreams: Bitstream[]) => {
       const element: HTMLElement = document.getElementsByClassName('bitstream-background-container')[0] as HTMLElement;
       if (element) {
@@ -75,7 +85,7 @@ export class BackgroundComponent extends BitstreamRenderingModelComponent implem
   protected initPageOptions(): void {
     this.pageOptions = Object.assign(new FindListOptions(), {
       elementsPerPage: 1,
-      currentPage: 1
+      currentPage: 1,
     });
   }
 }

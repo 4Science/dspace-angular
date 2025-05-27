@@ -2,9 +2,10 @@
   <ng-container *ngIf="metadata">
     <ng-container *ngFor="let entry of getAllMetadataValue(fileTitleKey)">
       <ng-container *ngIf="entry.value !== ''">
-        <h5>
+        <h3>
           {{entry.value}}
-        </h5>
+          <span class="text-muted">({{fileData?.sizeBytes | dsFileSize}})</span>
+        </h3>
       </ng-container>
       <ng-container *ngIf="entry.value === ''">
         <h5 *ngIf="metadata[fileTitleKey].indexOf(entry) === 0">
@@ -38,7 +39,7 @@
                                                                                                                                         (click)="hint.toggle();$event.preventDefault();"></i> :</span><span> {{fileData.checkSum.value}} </span>
   </div>
   <span class="clearfix"></span>
-  <ds-submission-section-upload-access-conditions [accessConditions]="fileData.accessConditions"></ds-submission-section-upload-access-conditions>
+  <ds-submission-section-upload-access-conditions [accessConditions]="$any(fileData.accessConditions)"></ds-submission-section-upload-access-conditions>
 </div>
 
 <ng-template #tipContent>

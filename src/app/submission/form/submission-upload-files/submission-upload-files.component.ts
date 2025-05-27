@@ -1,34 +1,54 @@
-import { Component, Input, OnChanges } from '@angular/core';
-
+import { NgIf } from '@angular/common';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, of as observableOf, Subscription } from 'rxjs';
-import { first, take } from 'rxjs/operators';
+import {
+  Observable,
+  of as observableOf,
+  Subscription,
+} from 'rxjs';
+import {
+  first,
+  take,
+} from 'rxjs/operators';
 
-import { SectionsService } from '../../sections/sections.service';
-import { hasValue, isEmpty, isNotEmpty } from '../../../shared/empty.util';
-import { normalizeSectionData } from '../../../core/submission/submission-response-parsing.service';
-import { SubmissionService } from '../../submission.service';
-import { NotificationsService } from '../../../shared/notifications/notifications.service';
-import { UploaderOptions } from '../../../shared/upload/uploader/uploader-options.model';
-import parseSectionErrors from '../../utils/parseSectionErrors';
-import { SubmissionJsonPatchOperationsService } from '../../../core/submission/submission-json-patch-operations.service';
 import { WorkspaceItem } from '../../../core/submission/models/workspaceitem.model';
-import { SectionsType } from '../../sections/sections-type';
-import { SubmissionSectionError } from '../../objects/submission-section-error.model';
+import { WorkspaceitemSectionUploadFileObject } from '../../../core/submission/models/workspaceitem-section-upload-file.model';
+import { SubmissionJsonPatchOperationsService } from '../../../core/submission/submission-json-patch-operations.service';
+import { normalizeSectionData } from '../../../core/submission/submission-response-parsing.service';
+import {
+  hasValue,
+  isEmpty,
+  isNotEmpty,
+} from '../../../shared/empty.util';
+import { NotificationsService } from '../../../shared/notifications/notifications.service';
 import { isNumeric } from '../../../shared/numeric.util';
 import { difference } from '../../../shared/object.util';
-import {
-  WorkspaceitemSectionUploadFileObject
-} from '../../../core/submission/models/workspaceitem-section-upload-file.model';
+import { UploaderComponent } from '../../../shared/upload/uploader/uploader.component';
+import { UploaderOptions } from '../../../shared/upload/uploader/uploader-options.model';
+import { SubmissionSectionError } from '../../objects/submission-section-error.model';
+import { SectionsService } from '../../sections/sections.service';
+import { SectionsType } from '../../sections/sections-type';
+import { SubmissionService } from '../../submission.service';
+import parseSectionErrors from '../../utils/parseSectionErrors';
 
 /**
  * This component represents the drop zone that provides to add files to the submission.
  */
 @Component({
-  selector: 'ds-submission-upload-files',
+  selector: 'ds-base-submission-upload-files',
   templateUrl: './submission-upload-files.component.html',
+  imports: [
+    UploaderComponent,
+    NgIf,
+  ],
+  standalone: true,
 })
-export class SubmissionUploadFilesComponent implements OnChanges {
+export class SubmissionUploadFilesComponent implements OnChanges, OnDestroy {
 
   /**
    * The collection id this submission belonging to
@@ -133,7 +153,7 @@ export class SubmissionUploadFilesComponent implements OnChanges {
 
             const errorsList = parseSectionErrors(errors);
             if (sections && isNotEmpty(sections)) {
-              Object.keys(sections)
+              Object.keys(sections).filter(key=> hasValue(sections[key]))
                 .forEach((sectionId) => {
                   const sectionData = normalizeSectionData(sections[sectionId]);
                   const sectionWarning = hasValue(sectionData?.files) ? this.parseErrorsForWarning(sectionData.files, errorsList[sectionId]) : [];
@@ -141,27 +161,26 @@ export class SubmissionUploadFilesComponent implements OnChanges {
                   const sectionErrors = errorsList[sectionId];
 
                   this.sectionService.isSectionType(this.submissionId, sectionId, SectionsType.Upload)
-                      .pipe(take(1))
-                      .subscribe((isUpload) => {
-                        if (isUpload) {
-                          // Look for errors on upload
-                          if ((isEmpty(sectionErrors)) || !isEmpty(sectionWarning)) {
-                            this.notificationsService.success(null, this.translate.get('submission.sections.upload.upload-successful'));
-                          } else if (!isEmpty(errorsForErrorNotification)) {
-                            this.notificationsService.error(null, this.translate.get('submission.sections.upload.upload-failed'));
-                          }
-
-                          if (!(isEmpty(sectionWarning))) {
-                            this.notificationsService.warning(null, this.translate.get('submission.sections.upload.upload-warning'));
-                          }
+                    .pipe(take(1))
+                    .subscribe((isUpload) => {
+                      if (isUpload) {
+                        // Look for errors on upload
+                        if ((isEmpty(sectionErrors)) || !isEmpty(sectionWarning)) {
+                          this.notificationsService.success(null, this.translate.get('submission.sections.upload.upload-successful'));
+                        } else if (!isEmpty(errorsForErrorNotification)) {
+                          this.notificationsService.error(null, this.translate.get('submission.sections.upload.upload-failed'));
                         }
-                      });
+
+                        if (!(isEmpty(sectionWarning))) {
+                          this.notificationsService.warning(null, this.translate.get('submission.sections.upload.upload-warning'));
+                        }
+                      }
+                    });
                   this.sectionService.updateSectionData(this.submissionId, sectionId, sectionData, sectionErrors, sectionErrors);
                 });
             }
-
           }
-        })
+        }),
     );
   }
 

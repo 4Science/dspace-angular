@@ -9,11 +9,11 @@ describe(`DSONameService`, () => {
   let service: DSONameService;
   let mockPersonName: string;
   let mockPerson: DSpaceObject;
+  let mockPersonWithTitle: DSpaceObject;
   let mockEPersonNameFirst: string;
   let mockEPersonFirst: DSpaceObject;
   let mockEPersonName: string;
   let mockEPerson: DSpaceObject;
-  let mockPersonWithTitle: DSpaceObject;
   let mockOrgUnitName: string;
   let mockOrgUnit: DSpaceObject;
   let mockDSOName: string;
@@ -27,7 +27,7 @@ describe(`DSONameService`, () => {
       },
       getRenderTypes(): (string | GenericConstructor<ListableObject>)[] {
         return ['Person', Item, DSpaceObject];
-      }
+      },
     });
 
     mockPersonWithTitle = Object.assign(new DSpaceObject(), {
@@ -35,13 +35,13 @@ describe(`DSONameService`, () => {
         'dc.title': [
           {
             language: null,
-            value: 'User Test'
-          }
-        ]
+            value: 'User Test',
+          },
+        ],
       },
       getRenderTypes(): (string | GenericConstructor<ListableObject>)[] {
         return ['Person', Item, DSpaceObject];
-      }
+      },
     });
 
     mockEPersonName = 'John Doe';
@@ -71,7 +71,7 @@ describe(`DSONameService`, () => {
       },
       getRenderTypes(): (string | GenericConstructor<ListableObject>)[] {
         return ['OrgUnit', Item, DSpaceObject];
-      }
+      },
     });
 
     mockDSOName = 'Lorem Ipsum';
@@ -81,7 +81,7 @@ describe(`DSONameService`, () => {
       },
       getRenderTypes(): (string | GenericConstructor<ListableObject>)[] {
         return [DSpaceObject];
-      }
+      },
     });
 
     service = new DSONameService({ instant: (a) => a } as any);
@@ -182,6 +182,7 @@ describe(`DSONameService`, () => {
       });
     });
   });
+
 
   describe(`factories.Person without person metadata`, () => {
     beforeEach(() => {

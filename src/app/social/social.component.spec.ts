@@ -1,11 +1,18 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SocialComponent } from './social.component';
 import { DOCUMENT } from '@angular/common';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
+import { TranslateLoaderMock } from 'src/app/shared/mocks/translate-loader.mock';
+
+import { SocialComponent } from './social.component';
 import { SocialService } from './social.service';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateLoaderMock } from '../shared/mocks/translate-loader.mock';
 
 describe('SocialComponent', () => {
   let component: SocialComponent;
@@ -18,20 +25,20 @@ describe('SocialComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SocialComponent],
       imports: [
         StoreModule.forRoot({}),
+        SocialComponent,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
-            useClass: TranslateLoaderMock
-          }
-        })
+            useClass: TranslateLoaderMock,
+          },
+        }),
       ],
       providers: [
         { provide: ActivatedRoute, useValue: activatedRouteStub },
         { provide: SocialService, useValue: socialServiceStub },
-      ]
+      ],
     }).compileComponents();
     fixture = TestBed.createComponent(SocialComponent);
     component = fixture.componentInstance;

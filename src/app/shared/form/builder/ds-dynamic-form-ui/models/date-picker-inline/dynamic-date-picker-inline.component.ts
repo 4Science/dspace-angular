@@ -1,21 +1,52 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
-import { NgbDateParserFormatter, NgbDatepicker, NgbDatepickerConfig, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgClass,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import {
+  ReactiveFormsModule,
+  UntypedFormGroup,
+} from '@angular/forms';
+import {
+  NgbDateParserFormatter,
+  NgbDatepicker,
+  NgbDatepickerConfig,
+  NgbDatepickerModule,
+  NgbDateStruct,
+} from '@ng-bootstrap/ng-bootstrap';
 import {
   DynamicDatePickerModel,
   DynamicFormControlComponent,
   DynamicFormControlLayout,
   DynamicFormLayoutService,
-  DynamicFormValidationService
+  DynamicFormValidationService,
 } from '@ng-dynamic-forms/core';
-import { FormFieldMetadataValueObject } from '../../../models/form-field-metadata-value.model';
-import { hasValue } from '../../../../../empty.util';
 import { Subscription } from 'rxjs';
+
+import { BtnDisabledDirective } from '../../../../../btn-disabled.directive';
+import { hasValue } from '../../../../../empty.util';
+import { FormFieldMetadataValueObject } from '../../../models/form-field-metadata-value.model';
 
 @Component({
   selector: 'ds-dynamic-date-picker-inline',
   styleUrls: ['./dynamic-date-picker-inline.component.scss'],
-  templateUrl: './dynamic-date-picker-inline.component.html'
+  templateUrl: './dynamic-date-picker-inline.component.html',
+  imports: [
+    NgClass,
+    NgbDatepickerModule,
+    ReactiveFormsModule,
+    NgIf,
+    BtnDisabledDirective,
+  ],
+  standalone: true,
 })
 export class DsDatePickerInlineComponent extends DynamicFormControlComponent implements OnInit, OnDestroy{
 

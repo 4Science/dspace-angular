@@ -1,11 +1,10 @@
-import { FormFieldModel } from '../models/form-field.model';
-import { DateFieldParser } from './date-field-parser';
-import { DynamicDsDatePickerModel } from '../ds-dynamic-form-ui/models/date-picker/date-picker.model';
-import { FormFieldMetadataValueObject } from '../models/form-field-metadata-value.model';
-import { ParserOptions } from './parser-options';
 import { getMockTranslateService } from 'src/app/shared/mocks/translate.service.mock';
 
-
+import { DynamicDsDatePickerModel } from '../ds-dynamic-form-ui/models/date-picker/date-picker.model';
+import { FormFieldModel } from '../models/form-field.model';
+import { FormFieldMetadataValueObject } from '../models/form-field-metadata-value.model';
+import { DateFieldParser } from './date-field-parser';
+import { ParserOptions } from './parser-options';
 
 describe('DateFieldParser test suite', () => {
   let field: FormFieldModel;
@@ -18,13 +17,13 @@ describe('DateFieldParser test suite', () => {
     submissionScope: null,
     collectionUUID: null,
     typeField: 'dc_type',
-    isInnerForm: false
+    isInnerForm: false,
   };
 
   beforeEach(() => {
     field = {
       input: {
-        type: 'date'
+        type: 'date',
       },
       label: 'Date of Issue.',
       mandatory: 'true',
@@ -34,9 +33,9 @@ describe('DateFieldParser test suite', () => {
       selectableMetadata: [
         {
           metadata: 'date',
-        }
+        },
       ],
-      languageCodes: []
+      languageCodes: [],
     } as FormFieldModel;
 
   });

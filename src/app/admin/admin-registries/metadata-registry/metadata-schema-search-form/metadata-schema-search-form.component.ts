@@ -1,20 +1,34 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import {
   DynamicFormControlModel,
   DynamicFormGroupModel,
   DynamicFormLayout,
-  DynamicInputModel
+  DynamicInputModel,
 } from '@ng-dynamic-forms/core';
-import { FormGroup } from '@angular/forms';
-import { FormBuilderService } from '../../../../shared/form/builder/form-builder.service';
 import { TranslateService } from '@ngx-translate/core';
-import { combineLatest, Subject } from 'rxjs';
+import {
+  combineLatest,
+  Subject,
+} from 'rxjs';
+import {
+  debounceTime,
+  takeUntil,
+} from 'rxjs/operators';
+
+import { FormBuilderService } from '../../../../shared/form/builder/form-builder.service';
 import { SchemaFilter } from './schema-filter';
-import { debounceTime, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'ds-metadata-schema-search-form',
-  templateUrl: './metadata-schema-search-form.component.html'
+  templateUrl: './metadata-schema-search-form.component.html',
+  standalone: true,
 })
 export class MetadataSchemaSearchFormComponent implements OnInit, OnDestroy {
 
@@ -54,19 +68,19 @@ export class MetadataSchemaSearchFormComponent implements OnInit, OnDestroy {
   formLayout: DynamicFormLayout = {
     namespace: {
       grid: {
-        host: 'col col-sm-4 d-inline-block'
-      }
+        host: 'col col-sm-4 d-inline-block',
+      },
     },
     element: {
       grid: {
-        host: 'col col-sm-4 d-inline-block'
-      }
+        host: 'col col-sm-4 d-inline-block',
+      },
     },
     qualifier: {
       grid: {
-        host: 'col col-sm-4 d-inline-block'
-      }
-    }
+        host: 'col col-sm-4 d-inline-block',
+      },
+    },
   };
 
   /**
@@ -86,7 +100,7 @@ export class MetadataSchemaSearchFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private formBuilderService: FormBuilderService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
   ) {
   }
 
@@ -94,7 +108,7 @@ export class MetadataSchemaSearchFormComponent implements OnInit, OnDestroy {
     combineLatest(
       this.translateService.get(`${this.messagePrefix}.namespace`),
       this.translateService.get(`${this.messagePrefix}.element`),
-      this.translateService.get(`${this.messagePrefix}.qualifier`)
+      this.translateService.get(`${this.messagePrefix}.qualifier`),
     ).subscribe(([namespace, element, qualifier]) => {
       this.namespace = new DynamicInputModel({
         id: 'namespace',
@@ -118,27 +132,27 @@ export class MetadataSchemaSearchFormComponent implements OnInit, OnDestroy {
         new DynamicFormGroupModel(
           {
             id: 'metadatadataschemasearchgroup',
-            group: [this.namespace, this.element, this.qualifier]
-          })
+            group: [this.namespace, this.element, this.qualifier],
+          }),
       ];
       this.formGroup = this.formBuilderService.createFormGroup(this.formModel);
       this.formGroup.patchValue({
         metadatadataschemasearchgroup: {
           namespace: '',
           element: '',
-          qualifier: ''
-        } as SchemaFilter
+          qualifier: '',
+        } as SchemaFilter,
       });
       this.formGroup.valueChanges.pipe(
         debounceTime(1000),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       ).subscribe(() => this.onSubmit());
     });
   }
 
   ngOnDestroy(): void {
     this.destroy$.next(true);
-    this.destroy$.unsubscribe();
+    this.destroy$.complete();
   }
 
   private onSubmit(): void {
@@ -146,7 +160,7 @@ export class MetadataSchemaSearchFormComponent implements OnInit, OnDestroy {
       // we need to add ' ', otherwise '/' at the end of the row would be trimmed by the URLCombiner
       namespace: this.namespace.value + ' ',
       element: this.element.value,
-      qualifier: this.qualifier.value
+      qualifier: this.qualifier.value,
     } as SchemaFilter;
     this.submitForm.emit(filter);
   }

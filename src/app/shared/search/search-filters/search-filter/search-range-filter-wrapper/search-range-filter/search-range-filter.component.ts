@@ -1,25 +1,50 @@
-import { BehaviorSubject, from, Observable, of, Subscription, switchMap } from 'rxjs';
-import { map, take, withLatestFrom } from 'rxjs/operators';
-import { isPlatformBrowser } from '@angular/common';
-import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
-import { RemoteDataBuildService } from '../../../../../../core/cache/builders/remote-data-build.service';
-import { FilterType } from '../../../../models/filter-type.model';
-import { renderFacetForEnvironment } from '../../search-filter-type-decorator';
-import { facetLoad, SearchFacetFilterComponent } from '../../search-facet-filter/search-facet-filter.component';
-import { SearchFilterConfig } from '../../../../models/search-filter-config.model';
 import {
-  FILTER_CONFIG,
-  IN_PLACE_SEARCH,
-  REFRESH_FILTER,
-  SCOPE,
-  SearchFilterService
-} from '../../../../../../core/shared/search/search-filter.service';
-import { SearchService } from '../../../../../../core/shared/search/search.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { SEARCH_CONFIG_SERVICE } from '../../../../../../my-dspace-page/my-dspace-page.component';
-import { SearchConfigurationService } from '../../../../../../core/shared/search/search-configuration.service';
-import { hasValue, isNotEmpty } from '../../../../../empty.util';
+  isPlatformBrowser,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import {
+  ActivatedRoute,
+  Params,
+  Router,
+} from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { NouisliderComponent } from 'ng2-nouislider';
+import {
+  from,
+  Observable,
+  of,
+  Subscription,
+  switchMap,
+} from 'rxjs';
+import {
+  map,
+  take,
+  withLatestFrom,
+} from 'rxjs/operators';
 import { yearFromString } from 'src/app/shared/date.util';
+
+import { RemoteDataBuildService } from '../../../../../../core/cache/builders/remote-data-build.service';
+import { SearchService } from '../../../../../../core/shared/search/search.service';
+import { SearchConfigurationService } from '../../../../../../core/shared/search/search-configuration.service';
+import { SearchFilterService } from '../../../../../../core/shared/search/search-filter.service';
+import { SEARCH_CONFIG_SERVICE } from '../../../../../../my-dspace-page/my-dspace-configuration.service';
+import {
+  hasValue,
+  isNotEmpty,
+} from '../../../../../empty.util';
+import { DebounceDirective } from '../../../../../utils/debounce.directive';
+import {
+  facetLoad,
+  SearchFacetFilterComponent,
+} from '../../search-facet-filter/search-facet-filter.component';
 
 /**
  * The suffix for a range filters' minimum in the frontend URL
@@ -40,13 +65,20 @@ export const RANGE_FILTER_MAX_SUFFIX = '.max';
   selector: 'ds-search-range-filter',
   styleUrls: ['./search-range-filter.component.scss'],
   templateUrl: './search-range-filter.component.html',
-  animations: [facetLoad]
+  animations: [facetLoad],
+  imports: [
+    FormsModule,
+    TranslateModule,
+    NouisliderComponent,
+    DebounceDirective,
+    NgIf,
+  ],
+  standalone: true,
 })
 
 /**
  * Component that represents a range facet for a specific filter configuration
  */
-@renderFacetForEnvironment(FilterType.range)
 export class SearchRangeFilterComponent extends SearchFacetFilterComponent implements OnInit, OnDestroy {
 
   /**
@@ -82,13 +114,9 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
     protected rdbs: RemoteDataBuildService,
     protected route: ActivatedRoute,
     @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
-    @Inject(IN_PLACE_SEARCH) public inPlaceSearch: boolean,
-    @Inject(FILTER_CONFIG) public filterConfig: SearchFilterConfig,
-    @Inject(PLATFORM_ID) protected platformId: any,
-    @Inject(REFRESH_FILTER) public refreshFilters: BehaviorSubject<boolean>,
-    @Inject(SCOPE) public scope: string,
+    @Inject(PLATFORM_ID) public platformId: any,
   ) {
-    super(searchService, filterService, rdbs, router, searchConfigService, inPlaceSearch, filterConfig, refreshFilters, scope);
+    super(searchService, filterService, rdbs, router, searchConfigService);
   }
 
   /**
@@ -136,7 +164,7 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
       .pipe(
         map(paramMaps => [
           paramMaps.get(this.filterConfig.paramName + RANGE_FILTER_MIN_SUFFIX) ?? `${this.min}`,
-          paramMaps.get(this.filterConfig.paramName + RANGE_FILTER_MAX_SUFFIX) ?? `${this.max}`
+          paramMaps.get(this.filterConfig.paramName + RANGE_FILTER_MAX_SUFFIX) ?? `${this.max}`,
         ]),
       );
   }
@@ -170,18 +198,18 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
     of(
       {
         ...this.getFilterParam(minDate, RANGE_FILTER_MIN_SUFFIX),
-        ...this.getFilterParam(maxDate, RANGE_FILTER_MAX_SUFFIX)
-      }
+        ...this.getFilterParam(maxDate, RANGE_FILTER_MAX_SUFFIX),
+      },
     ).pipe(
       withLatestFrom(this.route.queryParams),
       map(([newParams, queryParams]) => Object.assign({}, queryParams, newParams)),
       map(params =>
         Object.keys(params)
           .filter((k) => hasValue(params[k]) && isNotEmpty(params[k]))
-          .reduce((a, k) => ({ ...a, [k]: params[k] }), {})
+          .reduce((a, k) => ({ ...a, [k]: params[k] }), {}),
       ),
       switchMap(queryParams => from(this.router.navigate(this.getSearchLinkParts(), { queryParams }))),
-      take(1)
+      take(1),
     ).subscribe(() => this.filter = '');
   }
 

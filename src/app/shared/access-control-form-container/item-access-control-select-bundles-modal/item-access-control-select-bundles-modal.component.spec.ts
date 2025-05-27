@@ -8,9 +8,7 @@ import {
 } from '@angular/core/testing';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  Observable,
-} from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { BundleDataService } from '../../../core/data/bundle-data.service';
 import { FindListOptions } from '../../../core/data/find-list-options.model';

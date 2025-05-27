@@ -1,14 +1,16 @@
-import { Component, Inject, OnInit } from '@angular/core';
-
+import {
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
-import { FieldRenderingType, MetadataBoxFieldRendering } from '../metadata-box.decorator';
+import { LayoutField } from '../../../../../../../core/layout/models/box.model';
+import { Item } from '../../../../../../../core/shared/item.model';
+import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
 import { hasValue } from '../../../../../../../shared/empty.util';
 import { MetadataLinkValue } from '../../../../../../models/cris-layout-metadata-link-value.model';
 import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
-import { Item } from '../../../../../../../core/shared/item.model';
-import { LayoutField } from '../../../../../../../core/layout/models/box.model';
-import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
 
 /**
  * Defines the list of subtypes for this rendering
@@ -26,9 +28,9 @@ enum TYPES {
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'span[ds-link]',
   templateUrl: './link.component.html',
-  styleUrls: ['./link.component.scss']
+  styleUrls: ['./link.component.scss'],
+  standalone: true,
 })
-@MetadataBoxFieldRendering(FieldRenderingType.LINK)
 export class LinkComponent extends RenderingTypeValueModelComponent implements OnInit {
 
   /**
@@ -44,7 +46,7 @@ export class LinkComponent extends RenderingTypeValueModelComponent implements O
     @Inject('metadataValueProvider') public metadataValueProvider: MetadataValue,
     @Inject('renderingSubTypeProvider') public renderingSubTypeProvider: string,
     @Inject('tabNameProvider') public tabNameProvider: string,
-    protected translateService: TranslateService
+    protected translateService: TranslateService,
   ) {
     super(fieldProvider, itemProvider, metadataValueProvider, renderingSubTypeProvider, tabNameProvider, translateService);
   }
@@ -62,11 +64,11 @@ export class LinkComponent extends RenderingTypeValueModelComponent implements O
     let metadataValue: string;
     const isMarkdownURLRegex = /^\[(?<label>.*)\]\((?<url>(?:http|ftp)s?:.*)\)$/;
 
-    if (hasValue(this.renderingSubType) && this.renderingSubType.toUpperCase() === TYPES.EMAIL) {
+    if (hasValue(this.renderingSubType) && this.renderingSubType.toUpperCase() === TYPES.EMAIL.toString()) {
       this.isEmail = true;
       metadataValue = 'mailto:' + this.metadataValue.value;
       linkText = (hasValue(this.renderingSubType) &&
-        this.renderingSubType.toUpperCase() === TYPES.EMAIL) ? this.metadataValue.value : this.translateService.instant(this.field.label);
+        this.renderingSubType.toUpperCase() === TYPES.EMAIL.toString()) ? this.metadataValue.value : this.translateService.instant(this.field.label);
     } else if (isMarkdownURLRegex.test(this.metadataValue.value)) {
       const execRegex = isMarkdownURLRegex.exec(this.metadataValue.value).groups;
       linkText = execRegex.label;
@@ -75,12 +77,12 @@ export class LinkComponent extends RenderingTypeValueModelComponent implements O
       const startsWithProtocol = [/^https?:\/\//, /^ftp:\/\//];
       metadataValue = startsWithProtocol.some(rx => rx.test(this.metadataValue.value)) ? this.metadataValue.value : 'http://' + this.metadataValue.value;
       linkText = (hasValue(this.renderingSubType) &&
-        this.renderingSubType?.toUpperCase() === TYPES.LABEL) ? this.translateService.instant(this.field.label) : this.metadataValue.value;
+        this.renderingSubType?.toUpperCase() === TYPES.LABEL.toString()) ? this.translateService.instant(this.field.label) : this.metadataValue.value;
     }
 
     return {
       href: metadataValue,
-      text: linkText
+      text: linkText,
     };
   }
 }

@@ -1,10 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
-import { CommonModule } from '@angular/common';
+
 import { SharedModule } from '../shared.module';
-import { ThemedCarouselWithThumbnailsComponent } from './themed-carousel-with-thumbnails.component';
-import { CarouselWithThumbnailsComponent } from './carousel-with-thumbnails.component';
 import { SliderModule } from '../slider/slider.module';
+import { CarouselWithThumbnailsComponent } from './carousel-with-thumbnails.component';
+import { ThemedCarouselWithThumbnailsComponent } from './themed-carousel-with-thumbnails.component';
 
 const COMPONENTS = [
   ThemedCarouselWithThumbnailsComponent,
@@ -12,26 +13,26 @@ const COMPONENTS = [
 ];
 
 const MODULES = [
-    NgbCarouselModule,
-    CommonModule,
-    SliderModule
+  NgbCarouselModule,
+  CommonModule,
+  SliderModule,
 ];
 const PROVIDERS = [];
 
 @NgModule({
-    imports: [
-        ...MODULES,
-        SharedModule
-    ],
+  imports: [
+    ...MODULES,
+    SharedModule,
+  ],
   declarations: [
-    ...COMPONENTS
+    ...COMPONENTS,
   ],
   providers: [
-    ...PROVIDERS
+    ...PROVIDERS,
   ],
   exports: [
-    ...COMPONENTS
-  ]
+    ...COMPONENTS,
+  ],
 })
 
 /**

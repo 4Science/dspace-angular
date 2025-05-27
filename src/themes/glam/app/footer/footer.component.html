@@ -1,7 +1,7 @@
 <div class="footer-section">
   <div *ngIf="showTopFooter" class="footer-top">
-    <ds-themed-text-section *ngIf="hasSiteFooterSections" [sectionId]="'site'" [site]="(site | async)"
-                            [textRowSection]=section></ds-themed-text-section>
+    <ds-text-section *ngIf="hasSiteFooterSections" [sectionId]="'site'" [site]="(site | async)"
+                            [textRowSection]=section></ds-text-section>
 
     <div *ngIf="!hasSiteFooterSections" class="container clip-borders">
       <div class="flex-wrapper">

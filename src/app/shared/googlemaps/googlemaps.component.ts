@@ -1,17 +1,36 @@
-import { DOCUMENT } from '@angular/common';
-import { ChangeDetectorRef, Component, Inject, Input, OnInit, Renderer2, ViewChild, } from '@angular/core';
+import {
+  DOCUMENT,
+  NgIf,
+} from '@angular/common';
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
-import { getFirstCompletedRemoteData } from '../../core/shared/operators';
-import { isNotEmpty } from '../empty.util';
 import { RemoteData } from '../../core/data/remote-data';
-import { ConfigurationProperty } from '../../core/shared/configuration-property.model';
 import { LocationService } from '../../core/services/location.service';
+import { ConfigurationProperty } from '../../core/shared/configuration-property.model';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { AlertComponent } from '../alert/alert.component';
+import { isNotEmpty } from '../empty.util';
 
 @Component({
   selector: 'ds-googlemaps',
   templateUrl: './googlemaps.component.html',
   styleUrls: ['./googlemaps.component.scss'],
+  imports: [
+    NgIf,
+    AlertComponent,
+    TranslateModule,
+  ],
+  standalone: true,
 })
 export class GooglemapsComponent implements OnInit {
   /**
@@ -119,7 +138,7 @@ export class GooglemapsComponent implements OnInit {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       center: new google.maps.LatLng(
         Number(this.latitude),
-        Number(this.longitude)
+        Number(this.longitude),
       ),
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -129,7 +148,7 @@ export class GooglemapsComponent implements OnInit {
     new google.maps.Marker({
       position: new google.maps.LatLng(
         Number(this.latitude),
-        Number(this.longitude)
+        Number(this.longitude),
       ),
       map: this.map,
     });

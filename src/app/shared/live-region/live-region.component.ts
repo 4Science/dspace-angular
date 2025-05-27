@@ -1,6 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { LiveRegionService } from './live-region.service';
+import {
+  AsyncPipe,
+  NgClass,
+  NgFor,
+} from '@angular/common';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 import { Observable } from 'rxjs';
+
+import { LiveRegionService } from './live-region.service';
 
 /**
  * The Live Region Component is an accessibility tool for screenreaders. When a change occurs on a page when the changed
@@ -12,6 +21,8 @@ import { Observable } from 'rxjs';
   selector: `ds-live-region`,
   templateUrl: './live-region.component.html',
   styleUrls: ['./live-region.component.scss'],
+  standalone: true,
+  imports: [NgClass, NgFor, AsyncPipe],
 })
 export class LiveRegionComponent implements OnInit {
 

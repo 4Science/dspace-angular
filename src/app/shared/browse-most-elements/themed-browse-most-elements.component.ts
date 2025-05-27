@@ -1,17 +1,28 @@
-import { TopSection, LayoutModeEnum } from '../../core/layout/models/section.model';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import { Context } from 'vm';
+
+import {
+  LayoutModeEnum,
+  TopSection,
+} from '../../core/layout/models/section.model';
+import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
 import { ThemedComponent } from '../theme-support/themed.component';
 import { BrowseMostElementsComponent } from './browse-most-elements.component';
-import { Context } from '../../core/shared/context.model';
-import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
 
 /**
  * Themed wrapper for BrowseMostElementsComponent
  */
 @Component({
-  selector: 'ds-themed-browse-most-elements',
+  selector: 'ds-browse-most-elements',
   styleUrls: [],
   templateUrl: '../theme-support/themed.component.html',
+  standalone: true,
+  imports: [BrowseMostElementsComponent],
 })
 export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMostElementsComponent> {
 
@@ -29,9 +40,9 @@ export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMos
 
   @Input() showMetrics: boolean;
 
-  @Input() showThumbnails: boolean;
-
   @Input() topSection: TopSection;
+
+  @Input() showThumbnails: boolean;
 
   @Output() totalElements: EventEmitter<number> = new EventEmitter<number>();
 

@@ -1,14 +1,17 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { MagImportPageComponent } from './mag-import-page.component';
-import { TranslateModule } from '@ngx-translate/core';
-import { NotificationsService } from '../../shared/notifications/notifications.service';
-import { ScriptDataService } from '../../core/data/processes/script-data.service';
-import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { NotificationsServiceStub } from '../../shared/testing/notifications-service.stub';
-import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { ScriptDataService } from '../../core/data/processes/script-data.service';
+import { NotificationsService } from '../../shared/notifications/notifications.service';
+import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
+import { NotificationsServiceStub } from '../../shared/testing/notifications-service.stub';
+import { MagImportPageComponent } from './mag-import-page.component';
 
 describe('AdminMagImportComponent', () => {
   let component: MagImportPageComponent;
@@ -23,14 +26,14 @@ describe('AdminMagImportComponent', () => {
     notificationService = new NotificationsServiceStub();
     scriptService = jasmine.createSpyObj('scriptService',
       {
-        invoke: createSuccessfulRemoteDataObject$({ processId: '46' })
-      }
+        invoke: createSuccessfulRemoteDataObject$({ processId: '46' }),
+      },
     );
     router = jasmine.createSpyObj('router', {
-      navigateByUrl: jasmine.createSpy('navigateByUrl')
+      navigateByUrl: jasmine.createSpy('navigateByUrl'),
     });
     locationStub = jasmine.createSpyObj('location', {
-      back: jasmine.createSpy('back')
+      back: jasmine.createSpy('back'),
     });
 
     await TestBed.configureTestingModule({
@@ -46,7 +49,7 @@ describe('AdminMagImportComponent', () => {
         { provide: Location, useValue: locationStub },
       ],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

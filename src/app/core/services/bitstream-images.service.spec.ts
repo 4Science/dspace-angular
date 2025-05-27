@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { BitstreamImagesService } from './bitstream-images.service';
-import { Item } from '../shared/item.model';
-import { Bitstream } from '../shared/bitstream.model';
+
 import { createSuccessfulRemoteDataObject } from '../../shared/remote-data.utils';
 import { createPaginatedList } from '../../shared/testing/utils.test';
 import { BitstreamDataService } from '../data/bitstream-data.service';
+import { Bitstream } from '../shared/bitstream.model';
+import { Item } from '../shared/item.model';
+import { BitstreamImagesService } from './bitstream-images.service';
 
 describe('BitstreamImagesService', () => {
   let service: BitstreamImagesService;
@@ -16,8 +17,8 @@ describe('BitstreamImagesService', () => {
     TestBed.configureTestingModule({
       providers: [
         BitstreamImagesService,
-        { provide: BitstreamDataService, useValue: spy }
-      ]
+        { provide: BitstreamDataService, useValue: spy },
+      ],
     });
     service = TestBed.inject(BitstreamImagesService);
     bitstreamDataService = TestBed.inject(BitstreamDataService) as jasmine.SpyObj<BitstreamDataService>;

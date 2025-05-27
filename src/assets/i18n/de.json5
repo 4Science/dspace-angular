@@ -20,6 +20,18 @@
   // TODO Source message changed - Revise the translation
   "403.forbidden": "verboten",
 
+  // "500.page-internal-server-error": "Service unavailable",
+  // TODO New key - Add a translation
+  "500.page-internal-server-error": "Service unavailable",
+
+  // "500.help": "The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.",
+  // TODO New key - Add a translation
+  "500.help": "The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.",
+
+  // "500.link.home-page": "Take me to the home page",
+  // TODO New key - Add a translation
+  "500.link.home-page": "Take me to the home page",
+
   // "404.help": "We can't find the page you're looking for. The page may have been moved or deleted. You can use the button below to get back to the home page. ",
   "404.help": "Die Seite konnte nicht gefunden werden. Eventuell wurde sie verschoben oder gelöscht. Über den Button unten auf der Seite gelangen Sie zurück zur Startseite.",
 
@@ -37,19 +49,6 @@
   // "410.link.home-page": "Take me to the home page",
   // TODO New key - Add a translation
   "410.link.home-page": "Take me to the home page",
-
-  // "500.page-internal-server-error": "Service unavailable",
-  "500.page-internal-server-error": "Dienst nicht verfügbar",
-
-  // "500.help": "The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.",
-  "500.help": "Der Dienst steht momentan nicht zur Verfügung. Bitte versuchen Sie es später noch einmal.",
-
-  // "500.link.home-page": "Take me to the home page",
-  "500.link.home-page": "Zur Startseite",
-
-
-  // "admin.access-control.epeople.breadcrumbs": "EPeople",
-  "admin.access-control.epeople.breadcrumbs": "Personen suchen",
 
   // "error-page.description.401": "Unauthorized",
   // TODO New key - Add a translation
@@ -5179,6 +5178,19 @@
   // "explore.title": "Explore section",
   // TODO New key - Add a translation
   "explore.title": "Explore section",
+
+  // "confirmation-modal.pending-changes.header": "Unsaved changes",
+  "confirmation-modal.pending-changes.header": "Nicht gespeicherte Änderungen",
+
+  // "confirmation-modal.pending-changes.info": "There are unsaved changes. Do you want to leave the page?",
+  "confirmation-modal.pending-changes.info": "Auf dieser Seite gibt es Änderungen, die noch nicht gespeichert wurden. Wollen Sie diese Seite wirklich verlassen?",
+
+  // "confirmation-modal.pending-changes.cancel": "Cancel",
+  "confirmation-modal.pending-changes.cancel": "Abbrechen",
+
+  // "confirmation-modal.pending-changes.confirm": "Leave",
+  "confirmation-modal.pending-changes.confirm": "Seite verlassen",
+
   // "export-schema.process.title": "Metadata Schema Export",
   // TODO New key - Add a translation
   "export-schema.process.title": "Metadata Schema Export",
@@ -5410,15 +5422,6 @@
 
   // "form.discard": "Discard",
   "form.discard": "Verwerfen",
-
-  // "form.date-picker.placeholder.year": "Year",
-  "form.date-picker.placeholder.year": "Jahr",
-
-  // "form.date-picker.placeholder.month": "Month",
-  "form.date-picker.placeholder.month": "Monat",
-
-  // "form.date-picker.placeholder.day": "Day",
-  "form.date-picker.placeholder.day": "Tag",
 
   // "form.drag": "Drag",
   // TODO New key - Add a translation
@@ -7787,7 +7790,7 @@
   "journalissue.listelement.badge": "Zeitschriftenheft",
 
   // "journalissue.page.description": "Description",
-  "journalissue.page.description": "Beschreibung",
+  "journalissue.page.description": "Beschreibeung",
 
   // "journalissue.page.edit": "Edit this item",
   "journalissue.page.edit": "Dieses Item bearbeiten",
@@ -12367,15 +12370,13 @@
   // "submission.sections.describe.relationship-lookup.external-source.import-button-title.Journal Volume": "Import remote journal volume",
   "submission.sections.describe.relationship-lookup.external-source.import-button-title.Journal Volume": "Zeitschriftenband importieren",
 
-  // "submission.sections.describe.relationship-lookup.external-source.import-button-title.none": "Import remote item",
-  "submission.sections.describe.relationship-lookup.external-source.import-button-title.none": "Item importieren",
-
-  // "submission.sections.describe.relationship-lookup.external-source.import-button-title.Publication": "Import remote publication",
-  "submission.sections.describe.relationship-lookup.external-source.import-button-title.Publication": "Metadaten der Publikation importieren",
-
   // "submission.sections.describe.relationship-lookup.external-source.import-button-title.isProjectOfPublication": "Project",
   // TODO New key - Add a translation
   "submission.sections.describe.relationship-lookup.external-source.import-button-title.isProjectOfPublication": "Project",
+
+  // "submission.sections.describe.relationship-lookup.external-source.import-button-title.none": "Import remote item",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.external-source.import-button-title.none": "Import remote item",
 
   // "submission.sections.describe.relationship-lookup.external-source.import-modal.isProjectOfPublication.added.new-entity": "New Entity Added!",
   // TODO New key - Add a translation
@@ -12707,6 +12708,9 @@
   // "submission.sections.describe.relationship-lookup.title.DataFile": "Data Files",
   "submission.sections.describe.relationship-lookup.title.DataFile": "Dateien",
 
+  // "submission.general.save-later.edit-item": "Save and return",
+  "submission.general.save-later.edit-item": "Speichern und Beenden",
+
   // "submission.sections.describe.relationship-lookup.title.Funding Agency": "Funding Agency",
   "submission.sections.describe.relationship-lookup.title.Funding Agency": "Fördereinrichtung",
 
@@ -12890,10 +12894,10 @@
   "submission.sections.general.invalid_state_error": "Cannot save current changes, mandatory fields are missing. Please resolve problems and save again later.",
 
   // "submission.sections.general.deposit_success_notice": "Submission deposited successfully.",
-  "submission.sections.general.deposit_success_notice": "Veröffentlichung erfolgreich eingereicht.",
+  "submission.sections.general.deposit_success_notice": "Veröffentlichung erfolgreich eingereicht",
 
   // "submission.sections.general.discard_error_notice": "There was an issue when discarding the item, please try again later.",
-  "submission.sections.general.discard_error_notice": "Beim Verwerfen der Einreichung ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal.",
+  "submission.sections.general.discard_error_notice": "Beim Verwerfen der Einreichung ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal",
 
   // "submission.sections.general.discard_success_notice": "Submission discarded successfully.",
   "submission.sections.general.discard_success_notice": "Einreichung erfolgreich verworfen.",
@@ -14035,7 +14039,7 @@
   "workflow-item.delete.notification.success.title": "Gelöscht",
 
   // "workflow-item.delete.notification.success.content": "This workflow item was successfully deleted",
-  "workflow-item.delete.notification.success.content": "Dieses Workflow-Item wurde erfolgreich gelöscht.",
+  "workflow-item.delete.notification.success.content": "Dieses Workflow-Item wurde gelöscht.",
 
   // "workflow-item.delete.notification.error.title": "Something went wrong",
   "workflow-item.delete.notification.error.title": "Das hat leider nicht funktioniert.",
@@ -14081,37 +14085,48 @@
   "workflow-item.send-back.button.confirm": "Zurücksenden",
 
   // "workflow-item.view.breadcrumbs": "Workflow View",
-  "workflow-item.view.breadcrumbs": "Workflow-Ansicht",
+  // TODO New key - Add a translation
+  "workflow-item.view.breadcrumbs": "Workflow View",
 
   // "workspace-item.view.breadcrumbs": "Workspace View",
-  "workspace-item.view.breadcrumbs": "Workspace-Ansicht",
+  // TODO New key - Add a translation
+  "workspace-item.view.breadcrumbs": "Workspace View",
 
   // "workspace-item.view.title": "Workspace View",
-  "workspace-item.view.title": "Workspace-Ansicht",
+  // TODO New key - Add a translation
+  "workspace-item.view.title": "Workspace View",
 
   // "workspace-item.delete.breadcrumbs": "Workspace Delete",
-  "workspace-item.delete.breadcrumbs": "Workspace-Item löschen",
+  // TODO New key - Add a translation
+  "workspace-item.delete.breadcrumbs": "Workspace Delete",
 
   // "workspace-item.delete.header": "Delete workspace item",
-  "workspace-item.delete.header": "Workspace-Item löschen",
+  // TODO New key - Add a translation
+  "workspace-item.delete.header": "Delete workspace item",
 
   // "workspace-item.delete.button.confirm": "Delete",
-  "workspace-item.delete.button.confirm": "Löschen",
+  // TODO New key - Add a translation
+  "workspace-item.delete.button.confirm": "Delete",
 
   // "workspace-item.delete.button.cancel": "Cancel",
-  "workspace-item.delete.button.cancel": "Abbrechen",
+  // TODO New key - Add a translation
+  "workspace-item.delete.button.cancel": "Cancel",
 
   // "workspace-item.delete.notification.success.title": "Deleted",
-  "workspace-item.delete.notification.success.title": "Gelöscht",
+  // TODO New key - Add a translation
+  "workspace-item.delete.notification.success.title": "Deleted",
 
   // "workspace-item.delete.title": "This workspace item was successfully deleted",
-  "workspace-item.delete.title": "Dieses Workspace-Item wurde erfolgreich gelöscht.",
+  // TODO New key - Add a translation
+  "workspace-item.delete.title": "This workspace item was successfully deleted",
 
   // "workspace-item.delete.notification.error.title": "Something went wrong",
-  "workspace-item.delete.notification.error.title": "Das hat leider nicht funktioniert.",
+  // TODO New key - Add a translation
+  "workspace-item.delete.notification.error.title": "Something went wrong",
 
   // "workspace-item.delete.notification.error.content": "The workspace item could not be deleted",
-  "workspace-item.delete.notification.error.content": "Das Workspace-Item konnte nicht gelöscht werden.",
+  // TODO New key - Add a translation
+  "workspace-item.delete.notification.error.content": "The workspace item could not be deleted",
 
   // "workflow-item.advanced.title": "Advanced workflow",
   // TODO New key - Add a translation

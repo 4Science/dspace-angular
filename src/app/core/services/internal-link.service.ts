@@ -1,12 +1,19 @@
-import { Inject, Injectable } from '@angular/core';
-import { NativeWindowRef, NativeWindowService } from './window.service';
+import {
+  Inject,
+  Injectable,
+} from '@angular/core';
+
 import { isEmpty } from '../../shared/empty.util';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from './window.service';
 
 /**
  * LinkService provides utility functions for working with links, such as checking if a link is internal
  * and transforming internal links based on the current URL.
  */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class InternalLinkService {
   currentURL = this._window.nativeWindow?.location?.origin;
 
@@ -72,15 +79,15 @@ export class InternalLinkService {
 
     const queryStringStartIndex = link.indexOf('?');
     if (queryStringStartIndex !== -1) {
-        const paramsString = link.substring(queryStringStartIndex + 1);
-        const paramsArray = paramsString.split('&');
+      const paramsString = link.substring(queryStringStartIndex + 1);
+      const paramsArray = paramsString.split('&');
 
-        paramsArray.forEach(param => {
-            const [key, value] = param.split('=');
-            if (key && value) {
-                queryParams[key] = decodeURIComponent(value.replace(/\+/g, ' '));
-            }
-        });
+      paramsArray.forEach(param => {
+        const [key, value] = param.split('=');
+        if (key && value) {
+          queryParams[key] = decodeURIComponent(value.replace(/\+/g, ' '));
+        }
+      });
     }
 
     return queryParams;

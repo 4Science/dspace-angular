@@ -1,14 +1,24 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
-import { map, Observable, switchMap } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
+import {
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
+import {
+  map,
+  Observable,
+  switchMap,
+} from 'rxjs';
+
 import { BitstreamImagesService } from '../../../core/services/bitstream-images.service';
 import { Item } from '../../../core/shared/item.model';
-import { isPlatformBrowser } from '@angular/common';
+import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
 
 @Component({
-  selector: 'ds-images-browse-elements',
+  selector: 'ds-base-images-browse-elements',
   templateUrl: './images-browse-elements.component.html',
   styleUrls: ['./images-browse-elements.component.scss'],
+  standalone: true,
 })
 export class ImagesBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnInit {
 
@@ -35,7 +45,7 @@ export class ImagesBrowseElementsComponent extends AbstractBrowseElementsCompone
     );
 
     this.totalElements$ = this.searchResults$.pipe(
-      map((searchResults) => searchResults?.payload?.pageInfo?.totalElements)
+      map((searchResults) => searchResults?.payload?.pageInfo?.totalElements),
     );
   }
 

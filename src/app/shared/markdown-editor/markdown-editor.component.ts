@@ -1,21 +1,32 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
-  AfterViewInit, ChangeDetectorRef,
+  AfterViewInit,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Inject,
   Input,
   Output,
   PLATFORM_ID,
-  SecurityContext
+  SecurityContext,
 } from '@angular/core';
-import { ContentChange, QuillModules } from 'ngx-quill';
+import { FormsModule } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { isPlatformBrowser } from '@angular/common';
+import {
+  ContentChange,
+  QuillEditorComponent,
+  QuillModules,
+} from 'ngx-quill';
 
 @Component({
   selector: 'ds-markdown-editor',
   templateUrl: './markdown-editor.component.html',
-  styleUrls: ['./markdown-editor.component.scss']
+  styleUrls: ['./markdown-editor.component.scss'],
+  standalone: true,
+  imports: [
+    FormsModule,
+    QuillEditorComponent,
+  ],
 })
 export class MarkdownEditorComponent implements AfterViewInit {
   /**
@@ -23,9 +34,10 @@ export class MarkdownEditorComponent implements AfterViewInit {
    */
   @Input() editValue = '';
   /**
-   * Whether the field is required
+   * Indicates whether the markdown editor is required.
    */
   @Input() required: boolean;
+
   /**
    * Markdown Editor String value Emitter
    */
@@ -35,13 +47,12 @@ export class MarkdownEditorComponent implements AfterViewInit {
    * Quill modules config
    */
   modules: QuillModules = {
-    'emoji-toolbar': true,
-    toolbar: {
+    'toolbar': {
       container:  [
         ['bold', 'italic', 'underline', 'strike'],
         [{ 'header': 1 }, { 'header': 2 }],
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        [{ 'indent': '-1'}, { 'indent': '+1' }],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'indent': '-1' }, { 'indent': '+1' }],
         [{ 'direction': 'rtl' }],
         [{ 'size': ['small', false, 'large', 'huge'] }],
         [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
@@ -51,7 +62,7 @@ export class MarkdownEditorComponent implements AfterViewInit {
         ['emoji'],
       ],
     },
-    syntax: false
+    syntax: false,
   };
 
   modulesLoaded = false;
@@ -59,14 +70,14 @@ export class MarkdownEditorComponent implements AfterViewInit {
   constructor(
     private sanitizer: DomSanitizer,
     private cdr: ChangeDetectorRef,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: string,
   ) {}
 
   async ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
       try {
         const quillImport = await import('quill');
-        const quill = quillImport.default || quillImport;
+        const quill: any = quillImport.default || quillImport;
 
         if (!quill || typeof quill.register !== 'function') {
           console.error('Quill not loaded correctly:', quill);

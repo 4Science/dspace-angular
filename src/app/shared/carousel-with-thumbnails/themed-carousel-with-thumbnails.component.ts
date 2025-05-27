@@ -1,14 +1,20 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+} from '@angular/core';
+
+import { CarouselOptions } from '../carousel/carousel-options.model';
 import { ThemedComponent } from '../theme-support/themed.component';
 import { CarouselWithThumbnailsComponent } from './carousel-with-thumbnails.component';
-import { CarouselOptions } from '../carousel/carousel-options.model';
 /**
  * Themed wrapper for CarouselWithThumbnailsComponent
  */
 @Component({
-  selector: 'ds-themed-carousel-with-thumbnails',
+  selector: 'ds-carousel-with-thumbnails',
   styleUrls: [],
   templateUrl: '../theme-support/themed.component.html',
+  standalone: true,
+  imports: [CarouselWithThumbnailsComponent],
 })
 export class ThemedCarouselWithThumbnailsComponent extends ThemedComponent<CarouselWithThumbnailsComponent> {
 

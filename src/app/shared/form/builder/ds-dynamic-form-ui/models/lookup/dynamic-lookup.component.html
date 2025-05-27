@@ -83,7 +83,7 @@
     <div *ngIf="(hasExternalSource() | async) && !model?.isModelOfInnerForm" class="col-auto text-center">
       <button class="btn btn-secondary"
               ngbTooltip="{{'form.external.source-help' | translate}}"
-              [disabled]="!model?.value || hasAuthorityValue()"
+              [dsBtnDisabled]="!model?.value || hasAuthorityValue()"
               (click)="createEntityFromMetadata()">
         <i class="far fa-share-square"></i>
       </button>
@@ -103,8 +103,9 @@
          [scrollWindow]="false">
 
       <button class="dropdown-item disabled" type="button"
-              *ngIf="optionsList && optionsList.length == 0"
-              (click)="$event.stopPropagation(); clearFields(); sdRef.close();">{{'form.no-results' | translate}}
+              *ngIf="optionsList && optionsList.length === 0"
+              (click)="$event.stopPropagation(); clearFields(); sdRef.close();">
+        {{ 'form.no-results' | translate }}
       </button>
       <button class="dropdown-item lookup-item" type="button"
               *ngFor="let listEntry of optionsList"

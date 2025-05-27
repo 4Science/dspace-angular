@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
-import { LinkSliderComponent } from './link-slider/link-slider.component';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+
 import { SharedModule } from '../shared.module';
+import { LinkSliderComponent } from './link-slider/link-slider.component';
 import { ThemedLinkSliderComponent } from './link-slider/themed-link-slider.component';
 import { ThumbnailSliderComponent } from './thumbnail-slider/thumbnail-slider.component';
 
@@ -16,7 +17,7 @@ const COMPONENTS = [
   declarations: [
     ...COMPONENTS,
   ],
-  exports: [...COMPONENTS]
+  exports: [...COMPONENTS],
 })
 /**
  * This module handles all components, providers and modules that are needed for the slider

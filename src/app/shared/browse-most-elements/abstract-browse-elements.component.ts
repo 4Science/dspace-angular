@@ -1,30 +1,44 @@
-import { followLink } from '../utils/follow-link-config.model';
-import { CollectionElementLinkType } from '../object-collection/collection-element-link.type';
-import { Component, Input, OnChanges, OnInit, PLATFORM_ID, inject } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformServer } from '@angular/common';
+import {
+  Component,
+  inject,
+  Input,
+  OnChanges,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
+import {
+  BehaviorSubject,
+  mergeMap,
+  Observable,
+} from 'rxjs';
+import { tap } from 'rxjs/operators';
 
-import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
-import { DSpaceObject } from '../../core/shared/dspace-object.model';
-import { SearchResult } from '../search/models/search-result.model';
-import { Context } from '../../core/shared/context.model';
-import { RemoteData } from '../../core/data/remote-data';
+import { APP_CONFIG } from '../../../config/app-config.interface';
+import { SearchManager } from '../../core/browse/search-manager';
 import { PaginatedList } from '../../core/data/paginated-list.model';
+import { RemoteData } from '../../core/data/remote-data';
+import {
+  LayoutModeEnum,
+  TopSection,
+} from '../../core/layout/models/section.model';
+import { Context } from '../../core/shared/context.model';
+import { DSpaceObject } from '../../core/shared/dspace-object.model';
+import { Item } from '../../core/shared/item.model';
 import {
   getAllCompletedRemoteData,
   getPaginatedListPayload,
   getRemoteDataPayload,
   toDSpaceObjectListRD,
 } from '../../core/shared/operators';
-import { APP_CONFIG } from '../../../config/app-config.interface';
-import { BehaviorSubject, Observable, mergeMap } from 'rxjs';
-import { Item } from '../../core/shared/item.model';
 import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
-import { LayoutModeEnum, TopSection } from '../../core/layout/models/section.model';
-import { SearchManager } from '../../core/browse/search-manager';
-import { tap } from 'rxjs/operators';
+import { CollectionElementLinkType } from '../object-collection/collection-element-link.type';
+import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
+import { SearchResult } from '../search/models/search-result.model';
+import { followLink } from '../utils/follow-link-config.model';
 
 @Component({
-  template: ''
+  template: '',
 })
 export abstract class AbstractBrowseElementsComponent implements OnInit, OnChanges {
 
@@ -85,16 +99,13 @@ export abstract class AbstractBrowseElementsComponent implements OnInit, OnChang
   public cardLayoutMode = LayoutModeEnum.CARD;
 
   isLoading = true;
-  isBrowser: boolean;
 
   ngOnChanges() {
     this.paginatedSearchOptions$?.next(this.paginatedSearchOptions);
   }
 
   ngOnInit() {
-    this.isBrowser = isPlatformBrowser(this.platformId);
-
-    if (!this.isBrowser) {
+    if (isPlatformServer(this.platformId)) {
       return;
     }
     const followLinks = [];
@@ -106,7 +117,7 @@ export abstract class AbstractBrowseElementsComponent implements OnInit, OnChang
     }
 
     this.paginatedSearchOptions = Object.assign(new PaginatedSearchOptions({}), this.paginatedSearchOptions, {
-      projection: this.projection
+      projection: this.projection,
     });
 
     this.paginatedSearchOptions$ = new BehaviorSubject<PaginatedSearchOptions>(this.paginatedSearchOptions);

@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
-import { HomePageComponent as BaseComponent } from '../../../../app/home-page/home-page.component';
-import { environment } from '../../../../environments/environment';
+
 import { SectionComponent } from '../../../../app/core/layout/models/section.model';
+import { HomePageComponent as BaseComponent } from '../../../../app/home-page/home-page.component';
 import { isEmpty } from '../../../../app/shared/empty.util';
+import { environment } from '../../../../environments/environment';
 
 @Component({
-  selector: 'ds-home-page',
+  selector: 'ds-themed-home-page',
   styleUrls: ['./home-page.component.scss'],
   templateUrl: './home-page.component.html',
+  standalone: true,
 })
 export class HomePageComponent extends BaseComponent {
 
@@ -74,7 +76,7 @@ export class HomePageComponent extends BaseComponent {
     const defaultCol = 'col-12';
     const colClassRegex = /\bcol((-\w+)?-\d+)?\b/; // test for Bootstrap's "col" classes
 
-    let classArray: string[] = [sectionComponent.style];
+    const classArray: string[] = [sectionComponent.style];
 
     // Add Bootstrap's "col"" class if missing
     if (isEmpty(sectionComponent.style) || !colClassRegex.test(sectionComponent.style)) {
@@ -88,7 +90,7 @@ export class HomePageComponent extends BaseComponent {
     const horizontalPaddingClass = 'default-horizontal-padding';
     const verticalPaddingClass = 'default-vertical-padding';
 
-    let classArray: string[] = [];
+    const classArray: string[] = [];
 
     if (!(input.length === 1 && input[0].componentType === 'carousel')) {
       classArray.push(horizontalPaddingClass);

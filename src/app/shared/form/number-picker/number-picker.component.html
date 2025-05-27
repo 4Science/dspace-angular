@@ -25,7 +25,7 @@
                 [dsBtnDisabled]="disabled"
                 (click)="toggleUp()">
             <span class="chevron"></span>
-            <span class="sr-only">{{'form.number-picker.increment' | translate: {field: name} }}</span>
+            <span class="sr-only">{{ 'form.number-picker.increment' | translate: {field: name} }}</span>
         </button>
         <button
                 class="btn btn-link-focus btn-date lp-button"
@@ -34,7 +34,7 @@
                 [dsBtnDisabled]="disabled"
                 (click)="toggleDown()">
             <span class="chevron bottom"></span>
-            <span class="sr-only">{{'form.number-picker.decrement' | translate: {field: name} }}</span>
+      <span class="sr-only">{{'form.number-picker.decrement' | translate: {field: name} }}</span>
         </button>
     </div>
 

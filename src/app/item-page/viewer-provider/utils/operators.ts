@@ -1,10 +1,18 @@
 import { Router } from '@angular/router';
+import {
+  Observable,
+  of,
+} from 'rxjs';
+import {
+  filter,
+  switchMap,
+  take,
+} from 'rxjs/operators';
+
 import { AuthService } from '../../../core/auth/auth.service';
-import { Observable, of } from 'rxjs';
 import { RemoteData } from '../../../core/data/remote-data';
-import { filter, switchMap, take } from 'rxjs/operators';
-import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
 import { redirectOn4xx } from '../../../core/shared/authorized.operators';
+import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
 
 export const fetchNonNull = <T>(router: Router, authService: AuthService) =>
   (source: Observable<RemoteData<T>>): Observable<T> =>
@@ -20,5 +28,5 @@ export const fetchNonNull = <T>(router: Router, authService: AuthService) =>
             filter(Object),
           );
       }),
-      take(1)
+      take(1),
     );

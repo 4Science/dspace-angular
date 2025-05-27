@@ -1,15 +1,28 @@
-import { IdentifierSubtypesConfig, IdentifierSubtypesIconPositionEnum } from './../../../../../../../../config/identifier-subtypes-config.interface';
-import { Component, Inject, OnInit } from '@angular/core';
-import { FieldRenderingType, MetadataBoxFieldRendering } from '../metadata-box.decorator';
-import { ResolverStrategyService } from '../../../../../../services/resolver-strategy.service';
-import { hasNoValue, hasValue, isNotEmpty } from '../../../../../../../shared/empty.util';
-import { MetadataLinkValue } from '../../../../../../models/cris-layout-metadata-link-value.model';
-import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
-import { Item } from '../../../../../../../core/shared/item.model';
+import { NgIf } from '@angular/common';
+import {
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import { LayoutField } from '../../../../../../../core/layout/models/box.model';
-import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
 import { environment } from 'src/environments/environment';
+
+import { LayoutField } from '../../../../../../../core/layout/models/box.model';
+import { Item } from '../../../../../../../core/shared/item.model';
+import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
+import {
+  hasNoValue,
+  hasValue,
+  isNotEmpty,
+} from '../../../../../../../shared/empty.util';
+import { MetadataLinkValue } from '../../../../../../models/cris-layout-metadata-link-value.model';
+import { ResolverStrategyService } from '../../../../../../services/resolver-strategy.service';
+import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
+import {
+  IdentifierSubtypesConfig,
+  IdentifierSubtypesIconPositionEnum,
+} from './../../../../../../../../config/identifier-subtypes-config.interface';
 
 /**
  * This component renders the identifier metadata fields.
@@ -17,9 +30,10 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'ds-identifier',
   templateUrl: './identifier.component.html',
-  styleUrls: ['./identifier.component.scss']
+  styleUrls: ['./identifier.component.scss'],
+  standalone: true,
+  imports: [NgIf, NgbTooltipModule],
 })
-@MetadataBoxFieldRendering(FieldRenderingType.IDENTIFIER)
 export class IdentifierComponent extends RenderingTypeValueModelComponent implements OnInit {
 
   /**
@@ -71,7 +85,7 @@ export class IdentifierComponent extends RenderingTypeValueModelComponent implem
     @Inject('renderingSubTypeProvider') public renderingSubTypeProvider: string,
     @Inject('tabNameProvider') public tabNameProvider: string,
     protected resolver: ResolverStrategyService,
-    protected translateService: TranslateService
+    protected translateService: TranslateService,
   ) {
     super(fieldProvider, itemProvider, metadataValueProvider, renderingSubTypeProvider, tabNameProvider, translateService);
   }
@@ -86,7 +100,7 @@ export class IdentifierComponent extends RenderingTypeValueModelComponent implem
       if (this.resolver.checkLink(this.metadataValue.value)) {
         identifier = {
           href: this.metadataValue.value,
-          text: this.metadataValue.value
+          text: this.metadataValue.value,
         };
       } else {
         for (const urn of this.resolver.managedUrn) {
@@ -98,7 +112,7 @@ export class IdentifierComponent extends RenderingTypeValueModelComponent implem
         if (!identifier) {
           identifier = {
             href: this.metadataValue.value,
-            text: this.metadataValue.value
+            text: this.metadataValue.value,
           };
         }
       }

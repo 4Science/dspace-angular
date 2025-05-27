@@ -1,35 +1,90 @@
-import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
-import {BehaviorSubject, mergeMap, Observable, of, Subject} from 'rxjs';
-import { RemoteData } from '../../core/data/remote-data';
+import {
+  AsyncPipe,
+  isPlatformServer,
+  NgForOf,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
+import {
+  Params,
+  Router,
+} from '@angular/router';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import {
+  BehaviorSubject,
+  mergeMap,
+  Observable,
+  of,
+  Subject,
+} from 'rxjs';
+import {
+  map,
+  switchMap,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
+
+import { getBitstreamDownloadRoute } from '../../app-routing-paths';
+import {
+  BitstreamDataService,
+  MetadataFilter,
+} from '../../core/data/bitstream-data.service';
 import { PaginatedList } from '../../core/data/paginated-list.model';
-import { SearchResult } from '../../shared/search/models/search-result.model';
+import { RemoteData } from '../../core/data/remote-data';
+import { HardRedirectService } from '../../core/services/hard-redirect.service';
+import { Bitstream } from '../../core/shared/bitstream.model';
+import { Context } from '../../core/shared/context.model';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
-import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
+import { Item } from '../../core/shared/item.model';
 import {
   getFirstCompletedRemoteData,
   getFirstSucceededRemoteData,
 } from '../../core/shared/operators';
-import { SearchFilter } from '../../shared/search/models/search-filter.model';
-import { LuckySearchService } from '../lucky-search.service';
-import { Params, Router } from '@angular/router';
-import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
-import { Context } from '../../core/shared/context.model';
 import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
-import { Item } from '../../core/shared/item.model';
-import { BitstreamDataService, MetadataFilter } from '../../core/data/bitstream-data.service';
-import { Bitstream } from '../../core/shared/bitstream.model';
-import { hasValue, isNotEmpty } from '../../shared/empty.util';
 import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
-import { getBitstreamDownloadRoute } from '../../app-routing-paths';
-import {HardRedirectService} from '../../core/services/hard-redirect.service';
-import {isPlatformServer} from '@angular/common';
-import {NotificationsService} from '../../shared/notifications/notifications.service';
-import {TranslateService} from '@ngx-translate/core';
+import {
+  hasValue,
+  isNotEmpty,
+} from '../../shared/empty.util';
+import { ThemedFileDownloadLinkComponent } from '../../shared/file-download-link/themed-file-download-link.component';
+import { NotificationsService } from '../../shared/notifications/notifications.service';
+import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
+import { SearchFilter } from '../../shared/search/models/search-filter.model';
+import { SearchResult } from '../../shared/search/models/search-result.model';
+import { ThemedSearchResultsComponent } from '../../shared/search/search-results/themed-search-results.component';
+import { ThemedSearchFormComponent } from '../../shared/search-form/themed-search-form.component';
+import { PageWithSidebarComponent } from '../../shared/sidebar/page-with-sidebar.component';
+import { TruncatableComponent } from '../../shared/truncatable/truncatable.component';
+import { TruncatablePartComponent } from '../../shared/truncatable/truncatable-part/truncatable-part.component';
+import { FileSizePipe } from '../../shared/utils/file-size-pipe';
+import { LuckySearchService } from '../lucky-search.service';
 
 @Component({
   selector: 'ds-lucky-search',
   templateUrl: './lucky-search.component.html',
-  styleUrls: ['./lucky-search.component.scss']
+  styleUrls: ['./lucky-search.component.scss'],
+  standalone: true,
+  imports: [
+    PageWithSidebarComponent,
+    ThemedSearchResultsComponent,
+    ThemedSearchFormComponent,
+    TranslateModule,
+    TruncatableComponent,
+    ThemedFileDownloadLinkComponent,
+    TruncatablePartComponent,
+    AsyncPipe,
+    FileSizePipe,
+    NgIf,
+    NgForOf,
+  ],
 })
 export class LuckySearchComponent implements OnInit {
   /**
@@ -73,7 +128,7 @@ export class LuckySearchComponent implements OnInit {
     private router: Router,
     private bitstreamDataService: BitstreamDataService,
     public searchConfigService: SearchConfigurationService,
-    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(PLATFORM_ID) private platformId: string,
     private hardRedirectService: HardRedirectService,
     private notificationService: NotificationsService,
     private translateService: TranslateService,
@@ -109,7 +164,7 @@ export class LuckySearchComponent implements OnInit {
   getSearchResults(){
     this.searchOptions$.pipe(
       switchMap((options: PaginatedSearchOptions) => this.getLuckySearchResults(options)),
-      switchMap(results => this.processSearchResults(results))
+      switchMap(results => this.processSearchResults(results)),
     ).subscribe(results => {
       this.resultsRD$.next(results);
     });
@@ -134,7 +189,7 @@ export class LuckySearchComponent implements OnInit {
             this.notificationService.info(null, this.translateService.get('lucky.search.bitstream.notfound'));
           }
         }),
-        map(() => results)
+        map(() => results),
       );
     } else if (!this.hasBitstreamFilters() && results?.payload?.totalElements === 1) {
       const item = results.payload.page[0].indexableObject as Item;
@@ -156,7 +211,7 @@ export class LuckySearchComponent implements OnInit {
     options.filters = [new SearchFilter('f.' + this.currentFilter.identifier, [this.currentFilter.value], 'equals')];
     return this.luckySearchService.sendRequest(options).pipe(
       tap((rd: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>) => {
-        if (rd && rd?.state === 'Error') {
+        if (rd && rd.hasFailed) {
           this.showEmptySearchSection$.next(true);
         }
       }),
@@ -203,7 +258,7 @@ export class LuckySearchComponent implements OnInit {
 
       return metadataNames.map((name, index) => ({
         metadataName: name,
-        metadataValue: metadataValues[index]
+        metadataValue: metadataValues[index],
       } as MetadataFilter));
     }
     return [];

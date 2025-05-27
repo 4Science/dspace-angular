@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
+
 import { FooterComponent as BaseComponent } from '../../../../app/footer/footer.component';
 import { environment } from '../../../../environments/environment';
 
 @Component({
-  selector: 'ds-footer',
+  selector: 'ds-themed-footer',
   styleUrls: ['footer.component.scss'],
-  templateUrl: 'footer.component.html'
+  templateUrl: 'footer.component.html',
+  standalone: true,
 })
 export class FooterComponent extends BaseComponent {
 

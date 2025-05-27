@@ -1,16 +1,22 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
 
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-
-import { SearchComponent } from './search.component';
+import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../core/shared/item.model';
+import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
 import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate-loader.mock';
 import { DsDatePipe } from '../../../../../../pipes/ds-date.pipe';
-import { LayoutField } from '../../../../../../../core/layout/models/box.model';
-import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
-import { RouterTestingModule } from '@angular/router/testing';
+import { SearchComponent } from './search.component';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;
@@ -21,17 +27,17 @@ describe('SearchComponent', () => {
     'language': null,
     'authority': null,
     'confidence': -1,
-    'place': 0
+    'place': 0,
   });
 
   const testItem = Object.assign(new Item(),
     {
       type: 'item',
       metadata: {
-        'dc.title': [metadataValue]
+        'dc.title': [metadataValue],
       },
       uuid: 'test-item-uuid',
-    }
+    },
   );
 
 
@@ -44,7 +50,7 @@ describe('SearchComponent', () => {
     'styleLabel': 'test-style-label',
     'styleValue': 'test-style-value',
     'labelAsHeading': false,
-    'valuesInline': true
+    'valuesInline': true,
   };
 
   beforeEach(waitForAsync(() => {
@@ -52,9 +58,9 @@ describe('SearchComponent', () => {
       imports: [TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
-          useClass: TranslateLoaderMock
-        }
-      }), BrowserAnimationsModule, RouterTestingModule],
+          useClass: TranslateLoaderMock,
+        },
+      }), BrowserAnimationsModule, RouterTestingModule, DsDatePipe, SearchComponent],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
@@ -62,7 +68,6 @@ describe('SearchComponent', () => {
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
       ],
-      declarations: [SearchComponent, DsDatePipe]
     })
       .compileComponents();
   }));

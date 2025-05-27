@@ -1,8 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TextSelectionTooltipComponent } from './text-selection-tooltip.component';
-import { ChangeDetectorRef, NgZone } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  NgZone,
+} from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
+
 import { NativeWindowService } from '../../../core/services/window.service';
+import { TextSelectionTooltipComponent } from './text-selection-tooltip.component';
 
 describe('TextSelectionTooltipComponent', () => {
   let component: TextSelectionTooltipComponent;
@@ -15,11 +22,11 @@ describe('TextSelectionTooltipComponent', () => {
     TestBed.configureTestingModule({
       imports: [ TextSelectionTooltipComponent ],
       providers: [
-        { provide: ChangeDetectorRef, useValue: {detectChanges: () => fixture.detectChanges()} },
+        { provide: ChangeDetectorRef, useValue: { detectChanges: () => fixture.detectChanges() } },
         { provide: NgZone, useValue: new NgZone({}) },
         { provide: TranslateService, useValue: { currentLang: 'en' } },
         { provide: NativeWindowService, useValue: { nativeWindow: window } },
-      ]
+      ],
     });
 
     fixture = TestBed.createComponent(TextSelectionTooltipComponent);
