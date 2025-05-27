@@ -13,6 +13,7 @@ import { of as observableOf } from 'rxjs';
 import { MiradorViewerService } from './mirador-viewer.service';
 import { HostWindowService } from '../../shared/host-window.service';
 import { BundleDataService } from '../../core/data/bundle-data.service';
+import { NativeWindowRef, NativeWindowService } from '../../core/services/window.service';
 import { ConfigurationProperty } from '../../core/shared/configuration-property.model';
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
 import { APP_CONFIG } from '../../../config/app-config.interface';
@@ -72,6 +73,8 @@ describe('MiradorViewerComponent with search', () => {
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
         { provide: HostWindowService, useValue: mockHostWindowService },
+        { provide: NativeWindowService, useValue: new NativeWindowRef() },
+        { provide: Location, useValue: {} },
         { provide: ConfigurationDataService, useValue: configurationDataService },
         { provide: APP_CONFIG, useValue: environment },
       ],
@@ -140,6 +143,8 @@ describe('MiradorViewerComponent with multiple images', () => {
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
         { provide: HostWindowService, useValue: mockHostWindowService  },
+        { provide: NativeWindowService, useValue: new NativeWindowRef() },
+        { provide: Location, useValue: {} },
         { provide: ConfigurationDataService, useValue: configurationDataService },
         { provide: APP_CONFIG, useValue: environment },
       ],
@@ -205,6 +210,8 @@ describe('MiradorViewerComponent with a single image', () => {
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
         { provide: HostWindowService, useValue: mockHostWindowService },
+        { provide: NativeWindowService, useValue: new NativeWindowRef() },
+        { provide: Location, useValue: {} },
         { provide: ConfigurationDataService, useValue: configurationDataService },
         { provide: APP_CONFIG, useValue: environment },
       ],
@@ -237,7 +244,60 @@ describe('MiradorViewerComponent with a single image', () => {
     it('should call mirador service image count', () => {
       expect(viewerService.getImageCount).toHaveBeenCalled();
     });
+  });
 
+});
+
+describe('MiradorViewerComponent on browser in prod mode', () => {
+  let comp: MiradorViewerComponent;
+  let fixture: ComponentFixture<MiradorViewerComponent>;
+  const viewerService = jasmine.createSpyObj('MiradorViewerService', ['showEmbeddedViewer', 'getImageCount']);
+
+  beforeEach(waitForAsync(() => {
+    viewerService.showEmbeddedViewer.and.returnValue(true);
+    viewerService.getImageCount.and.returnValue(observableOf(1));
+    TestBed.configureTestingModule({
+      imports: [TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useClass: TranslateLoaderMock
+        }
+      })],
+      declarations: [MiradorViewerComponent],
+      providers: [
+        { provide: DspaceRestService, useValue: restService },
+        { provide: BitstreamDataService, useValue: {} },
+        { provide: BundleDataService, useValue: {} },
+        { provide: HostWindowService, useValue: mockHostWindowService },
+        { provide: NativeWindowService, useValue: new NativeWindowRef() },
+        { provide: Location, useValue: {} },
+        { provide: ConfigurationDataService, useValue: configurationDataService },
+        { provide: APP_CONFIG, useValue: environment },
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).overrideComponent(MiradorViewerComponent, {
+      set: {
+        providers: [
+          { provide: MiradorViewerService, useValue: viewerService }
+        ]
+      }
+    }).compileComponents();
+  }));
+
+  describe('viewer init', () => {
+    beforeEach(waitForAsync(() => {
+      fixture = TestBed.createComponent(MiradorViewerComponent);
+      comp = fixture.componentInstance;
+      comp.object = getItem(noMetadata);
+      fixture.detectChanges();
+    }));
+
+    it('should set iframe listener', () => {
+      const compAsAny = comp as any;
+      spyOn(compAsAny._window.nativeWindow, 'addEventListener');
+      compAsAny.ngOnInit();
+      expect(compAsAny._window.nativeWindow.addEventListener).toHaveBeenCalled();
+    });
   });
 
 });
@@ -259,7 +319,7 @@ describe('MiradorViewerComponent in development mode', () => {
       })],
       declarations: [MiradorViewerComponent, VarDirective, SafeUrlPipe],
       providers: [
-        { provide: BitstreamDataService, useValue: {} }
+        { provide: BitstreamDataService, useValue: {} },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(MiradorViewerComponent, {
@@ -269,6 +329,8 @@ describe('MiradorViewerComponent in development mode', () => {
           { provide: MiradorViewerService, useValue: viewerService },
           { provide: BundleDataService, useValue: {} },
           { provide: HostWindowService, useValue: mockHostWindowService  },
+          { provide: NativeWindowService, useValue: new NativeWindowRef() },
+          { provide: Location, useValue: {} },
           { provide: ConfigurationDataService, useValue: configurationDataService },
           { provide: APP_CONFIG, useValue: environment },
         ]
@@ -323,6 +385,8 @@ describe('MiradorViewerComponent download plugin config', () => {
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
         { provide: HostWindowService, useValue: mockHostWindowService  },
+        { provide: NativeWindowService, useValue: new NativeWindowRef() },
+        { provide: Location, useValue: {} },
         { provide: ConfigurationDataService, useValue: configurationDataService },
         { provide: APP_CONFIG, useValue: environment },
       ],
