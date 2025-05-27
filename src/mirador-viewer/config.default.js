@@ -16,6 +16,7 @@ import miradorShareDialogPlugin from 'mirador-share-plugin/es/MiradorShareDialog
 import miradorSharePlugin from 'mirador-share-plugin/es/miradorSharePlugin';
 import miradorDownloadPlugin from 'mirador-dl-plugin/es/miradorDownloadPlugin';
 import miradorDownloadDialog from 'mirador-dl-plugin/es/MiradorDownloadDialog';
+import locationPlugin from './locationPlugin';
 
 const MANIFEST_URL_PART = /\/manifest$/;
 
@@ -28,6 +29,7 @@ const multi = params.get('multi');
 const notMobile = params.get('notMobile');
 const isDownloadPluginEnabled = (params.get('enableDownloadPlugin') === 'true');
 const canvasId = params.get('canvasId');
+const canvasIndex = params.get('canvasIndex');
 
 let windowSettings = {};
 let sideBarPanel = 'info';
@@ -62,6 +64,8 @@ windowSettings.manifestId = manifest;
   if (canvasId && canvasId !== 'null') {
     windowSettings.canvasId =
       `${(manifest.replace(MANIFEST_URL_PART, ''))}/canvas/${canvasId}`;
+  } else if (canvasIndex) {
+    windowSettings.canvasIndex = parseInt(canvasIndex);
   }
 })();
 
@@ -182,6 +186,7 @@ let miradorPlugins = [
   miradorShareDialogPlugin,
   miradorSharePlugin,
   miradorDownloadDialog,
+  locationPlugin
 ];
 
 (() => {
