@@ -289,6 +289,7 @@ describe('MiradorViewerComponent on browser in prod mode', () => {
       fixture = TestBed.createComponent(MiradorViewerComponent);
       comp = fixture.componentInstance;
       comp.object = getItem(noMetadata);
+      comp.getIiifDownloadConfig = () => observableOf(['all', 'single-image']);
       fixture.detectChanges();
     }));
 
