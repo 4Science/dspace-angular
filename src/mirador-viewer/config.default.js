@@ -6,14 +6,17 @@ import Mirador from 'mirador/dist/es/src/index';
 // your local Mirador instance. This allows you to keep local
 // Mirador configuration separate from this default distribution
 // copy.
+
 // For an example of all Mirador configuration options, see
 // https://github.com/ProjectMirador/mirador/blob/master/src/config/settings.js
+
 // You can add or remove plugins. When adding new plugins be sure to also
 // import them into the project via your package.json dependencies.
 import miradorShareDialogPlugin from 'mirador-share-plugin/es/MiradorShareDialog';
 import miradorSharePlugin from 'mirador-share-plugin/es/miradorSharePlugin';
 import miradorDownloadPlugin from 'mirador-dl-plugin/es/miradorDownloadPlugin';
 import miradorDownloadDialog from 'mirador-dl-plugin/es/MiradorDownloadDialog';
+import locationPlugin from './locationPlugin';
 import miradorAnnotationPlugins from 'mirador-annotations/es/index';
 import miradorImageToolsPlugin from 'mirador-image-tools/es/plugins/miradorImageToolsPlugin';
 import DspaceAnnotationServerAdapter from "./dspace-annotation-server-adapter";
@@ -32,6 +35,7 @@ const isDownloadPluginEnabled = (params.get('enableDownloadPlugin') === 'true');
 const isAnnotationServerEnabled = (params.get('enableAnnotationServer') === 'true');
 const annotationServerUrl = params.get('annotationServerUrl');
 const canvasId = params.get('canvasId');
+const canvasIndex = params.get('canvasIndex');
 
 let windowSettings = {};
 let sideBarPanel = 'info';
@@ -66,6 +70,8 @@ windowSettings.manifestId = manifest;
   if (canvasId != null && canvasId !== 'null') {
     windowSettings.canvasId =
       `${(manifest.replace(MANIFEST_URL_PART, ''))}/canvas/${canvasId}`;
+  } else if (canvasIndex) {
+    windowSettings.canvasIndex = parseInt(canvasIndex);
   }
 
   // Method to extract access token and return bearer header
@@ -235,6 +241,7 @@ let miradorPlugins = [
   miradorShareDialogPlugin,
   miradorSharePlugin,
   miradorDownloadDialog,
+  locationPlugin,
   ...miradorImageToolsPlugin,
   ...miradorAnnotationPlugins,
 ];

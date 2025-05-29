@@ -8,13 +8,11 @@ import {
   Component,
   Inject,
   Input,
+  OnDestroy,
   OnInit,
   PLATFORM_ID,
 } from '@angular/core';
-import {
-  DomSanitizer,
-  SafeResourceUrl,
-} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   combineLatest,
@@ -37,6 +35,10 @@ import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { BundleDataService } from '../../core/data/bundle-data.service';
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
 import { DspaceRestService } from '../../core/dspace-rest/dspace-rest.service';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../core/services/window.service';
 import { Item } from '../../core/shared/item.model';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import {
@@ -44,6 +46,15 @@ import {
   WidthCategory,
 } from '../../shared/host-window.service';
 import { MiradorViewerService } from './mirador-viewer.service';
+
+const IFRAME_UPDATE_URL_MESSAGE = 'update-url';
+
+interface IFrameMessageData {
+  type: string;
+  canvasId: string;
+  canvasIndex: string;
+}
+
 
 @Component({
   selector: 'ds-mirador-viewer',
@@ -57,7 +68,7 @@ import { MiradorViewerService } from './mirador-viewer.service';
   ],
   standalone: true,
 })
-export class MiradorViewerComponent implements OnInit {
+export class MiradorViewerComponent implements OnInit, OnDestroy {
 
   @Input() object: Item;
 
@@ -77,6 +88,11 @@ export class MiradorViewerComponent implements OnInit {
   @Input() canvasId: string;
 
   /**
+   * Is used as canvas index of the element to show.
+   */
+  @Input() canvasIndex: string;
+
+  /**
    * Hides embedded viewer in dev mode.
    */
   isViewerAvailable = true;
@@ -84,7 +100,7 @@ export class MiradorViewerComponent implements OnInit {
   /**
    * The url for the iframe.
    */
-  iframeViewerUrl: Observable<SafeResourceUrl>;
+  iframeViewerUrl: Observable<string>;
 
   /**
    * Sets the viewer to show or hide thumbnail side navigation menu.
@@ -100,22 +116,26 @@ export class MiradorViewerComponent implements OnInit {
 
   private downloadConfigKey: string;
 
-  constructor(private sanitizer: DomSanitizer,
-              private viewerService: MiradorViewerService,
-              private bitstreamDataService: BitstreamDataService,
-              private bundleDataService: BundleDataService,
-              private hostWindowService: HostWindowService,
-              private configurationDataService: ConfigurationDataService,
-              private restService: DspaceRestService,
-              @Inject(APP_CONFIG) private appConfig: AppConfig,
-              @Inject(PLATFORM_ID) private platformId: any) {
+  constructor(
+    private sanitizer: DomSanitizer,
+    private viewerService: MiradorViewerService,
+    private bitstreamDataService: BitstreamDataService,
+    private bundleDataService: BundleDataService,
+    private hostWindowService: HostWindowService,
+    private location: Location,
+    private configurationDataService: ConfigurationDataService,
+    private restService: DspaceRestService,
+    @Inject(APP_CONFIG) private appConfig: AppConfig,
+    @Inject(PLATFORM_ID) private platformId: any,
+    @Inject(NativeWindowService) protected _window: NativeWindowRef,
+  ) {
   }
 
   /**
    * Creates the url for the Mirador iframe. Adds parameters for the displaying the search panel, query results,
    * or  multi-page thumbnail navigation.
    */
-  setURL(downloadEnabled = true) {
+  getURL(downloadEnabled = true): string {
     // The path to the REST manifest endpoint.
     const manifestApiEndpoint = encodeURIComponent(environment.rest.baseUrl + '/iiif/'
       + this.object.id + '/manifest');
@@ -140,6 +160,9 @@ export class MiradorViewerComponent implements OnInit {
     if (this.canvasId) {
       viewerPath += `&canvasId=${this.canvasId}`;
     }
+    if (this.canvasIndex) {
+      viewerPath += `&canvasIndex=${parseInt(this.canvasIndex, 10) - 1}`;
+    }
     if (downloadEnabled && this.appConfig.mirador.enableDownloadPlugin) {
       viewerPath += '&enableDownloadPlugin=true';
     }
@@ -153,7 +176,7 @@ export class MiradorViewerComponent implements OnInit {
       viewerPath += `&canvasId=${this.canvasId}`;
     }
 
-    return this.sanitizer.bypassSecurityTrustResourceUrl(viewerPath);
+    return viewerPath;
   }
 
   ngOnInit(): void {
@@ -161,6 +184,8 @@ export class MiradorViewerComponent implements OnInit {
      * Initializes the iframe url observable.
      */
     if (isPlatformBrowser(this.platformId)) {
+      this._window.nativeWindow.addEventListener('message', this.iframeMessageListener);
+
       this.downloadConfigKey = this.appConfig.mirador.downloadMetadataConfig;
       // Viewer is not currently available in dev mode so hide it in that case.
       this.isViewerAvailable = this.viewerService.showEmbeddedViewer();
@@ -179,10 +204,9 @@ export class MiradorViewerComponent implements OnInit {
       // Set the multi property to 'true' if the item is searchable.
       if (this.searchable) {
         this.multi = true;
-        const observable = of('');
         this.iframeViewerUrl = this.isDownloadEnabled$().pipe(
           map(( downloadEnabled) => {
-            return this.setURL(downloadEnabled);
+            return this.getURL(downloadEnabled);
           }),
         );
       } else {
@@ -198,7 +222,7 @@ export class MiradorViewerComponent implements OnInit {
             if (c > 1) {
               this.multi = true;
             }
-            return this.setURL(downloadEnabled);
+            return this.getURL(downloadEnabled);
           }),
         );
       }
@@ -238,4 +262,26 @@ export class MiradorViewerComponent implements OnInit {
     );
   }
 
+  ngOnDestroy(): void {
+    this._window.nativeWindow.removeEventListener('message', this.iframeMessageListener);
+  }
+
+
+  iframeMessageListener = (event: MessageEvent) => {
+    const data: IFrameMessageData = event.data;
+
+    if (data.type === IFRAME_UPDATE_URL_MESSAGE) {
+      const currentPath = this.location.pathname;
+      const canvasId = data.canvasId;
+      const canvasIndex = data.canvasIndex;
+      // Use URL API for easier query param manipulation
+      const url = new URL(window.location.origin + currentPath);
+      // Set or update the query param
+      url.searchParams.set('canvasId', canvasId);
+      url.searchParams.set('canvasIndex', canvasIndex);
+      const newPathWithQuery = url.pathname + url.search;
+      // Replace the current state (no reload, no new history entry)
+      this.location.replace(newPathWithQuery);
+    }
+  };
 }

@@ -21,7 +21,6 @@ import { AccessControlFormContainerComponent } from './access-control-form-conta
 import { createAccessControlInitialFormState } from './access-control-form-container-intial-state';
 import { BulkAccessControlService } from './bulk-access-control.service';
 import { ITEM_ACCESS_CONTROL_SELECT_BITSTREAMS_LIST_ID } from './item-access-control-select-bitstreams-modal/item-access-control-select-bitstreams-modal.component';
-import { ITEM_ACCESS_CONTROL_SELECT_BUNDLES_LIST_ID } from './item-access-control-select-bundles-modal/item-access-control-select-bundles-modal.component';
 
 describe('AccessControlFormContainerComponent', () => {
   let component: AccessControlFormContainerComponent<any>;
@@ -149,20 +148,10 @@ describe('AccessControlFormContainerComponent', () => {
     expect(modalService.open).toHaveBeenCalled();
   });
 
-  it('should open the select bundles modal', () => {
-    const modalService = TestBed.inject(NgbModal);
-
-    component.openSelectBundlesModal(new Item());
-    expect(modalService.open).toHaveBeenCalled();
-  });
-
   it('should unsubscribe and deselect all on component destroy', () => {
     component.ngOnDestroy();
     expect(component.selectableListService.deselectAll).toHaveBeenCalledWith(
       ITEM_ACCESS_CONTROL_SELECT_BITSTREAMS_LIST_ID,
-    );
-    expect(component.selectableListService.deselectAll).toHaveBeenCalledWith(
-      ITEM_ACCESS_CONTROL_SELECT_BUNDLES_LIST_ID,
     );
   });
 });

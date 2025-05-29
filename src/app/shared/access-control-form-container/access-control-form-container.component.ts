@@ -182,29 +182,8 @@ export class AccessControlFormContainerComponent<T extends DSpaceObject> impleme
     });
   }
 
-  /**
-   * Open the modal to select bundles for which to change the access control
-   * This will open the modal and pass the currently selected bundles
-   * @param item The item for which to change the access control
-   */
-  openSelectBundlesModal(item: Item) {
-    const ref = this.modalService.open(
-      ItemAccessControlSelectBundlesModalComponent,
-    );
-    ref.componentInstance.item = item;
-
-    ref.closed.pipe(
-      concatMap(() => this.selectableListService.getSelectableList(ITEM_ACCESS_CONTROL_SELECT_BUNDLES_LIST_ID)),
-      take(1),
-    ).subscribe((list) => {
-      this.state.bitstream.selectedBundles = list?.selection || [];
-      this.cdr.detectChanges();
-    });
-  }
-
   ngOnDestroy(): void {
     this.selectableListService.deselectAll(ITEM_ACCESS_CONTROL_SELECT_BITSTREAMS_LIST_ID);
-    this.selectableListService.deselectAll(ITEM_ACCESS_CONTROL_SELECT_BUNDLES_LIST_ID);
   }
 
 }

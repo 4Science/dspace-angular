@@ -10,7 +10,6 @@ export const createAccessControlInitialFormState = (): AccessControlFormState =>
     accessMode: 'replace',
     changesLimit: 'all', // 'all' | 'selected'
     selectedBitstreams: [] as ListableObject[],
-    selectedBundles: [] as ListableObject[],
   },
 });
 
@@ -24,6 +23,5 @@ export interface AccessControlFormState {
     accessMode: 'add' | 'replace',
     changesLimit: string,
     selectedBitstreams: ListableObject[],
-    selectedBundles: ListableObject[],
   }
 }

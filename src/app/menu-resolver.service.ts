@@ -247,7 +247,7 @@ export class MenuResolverService  {
             id: 'statistics',
             active: false,
             visible: true,
-            index: 1,
+            index: 2,
             model: {
               type: MenuItemType.TEXT,
               text: 'menu.section.statistics',
@@ -425,7 +425,7 @@ export class MenuResolverService  {
           text: 'menu.section.new',
         } as TextMenuItemModel,
         icon: 'plus',
-        index: 0,
+        index: 1,
       };
       const editSubMenu = {
         id: 'edit',
@@ -436,7 +436,7 @@ export class MenuResolverService  {
           text: 'menu.section.edit',
         } as TextMenuItemModel,
         icon: 'pencil-alt',
-        index: 1,
+        index: 2,
       };
 
       const menuList = [
@@ -496,7 +496,7 @@ export class MenuResolverService  {
             text: 'menu.section.admin_search',
             link: '/admin/search',
           } as LinkMenuItemModel,
-          index: 5,
+          index: 6,
           icon: 'search',
         },
         /* Processes */
@@ -674,7 +674,7 @@ export class MenuResolverService  {
           text: 'menu.section.export',
         } as TextMenuItemModel,
         icon: 'file-export',
-        index: 3,
+        index: 4,
         shouldPersistOnRouteChange: true,
       });
       this.menuService.addSection(MenuID.ADMIN, {
@@ -807,7 +807,7 @@ export class MenuResolverService  {
           text: 'menu.section.import',
         } as TextMenuItemModel,
         icon: 'file-import',
-        index: 2,
+        index: 3,
         shouldPersistOnRouteChange: true,
       });
       this.menuService.addSection(MenuID.ADMIN, {
