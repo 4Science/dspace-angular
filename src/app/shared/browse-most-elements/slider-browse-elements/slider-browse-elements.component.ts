@@ -44,6 +44,7 @@ export class SliderBrowseElementsComponent extends AbstractBrowseElementsCompone
   ngOnInit() {
     super.ngOnInit();
 
+    if (isPlatformBrowser(this.platformId)) {
     this.itemToImageHrefMap$ = this.searchResultArray$.pipe(
       switchMap((res) => this.bitstreamImagesService.getItemToImageMap(res as Item[])),
     );
@@ -57,7 +58,6 @@ export class SliderBrowseElementsComponent extends AbstractBrowseElementsCompone
       map(([items, firstItem]) => items.slice(firstItem, firstItem + this.itemsPerPageBS.value)),
     );
 
-    if (isPlatformBrowser(this.platformId)) {
       this.resizeObserver = new ResizeObserver(entries => {
         entries.forEach(entry => {
           const containerWidth = entry.contentRect.width;
