@@ -1,4 +1,5 @@
 import {
+  AsyncPipe,
   NgClass,
   NgIf,
 } from '@angular/common';
@@ -43,6 +44,7 @@ import {
     FormsModule,
     NgbButtonsModule,
     NgClass,
+    AsyncPipe,
   ],
 })
 export class TopSectionComponent implements OnInit {

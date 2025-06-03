@@ -25,6 +25,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import difference from 'lodash/difference';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import {
   BehaviorSubject,
   from,
@@ -84,6 +85,7 @@ import { CarouselOptions } from './carousel-options.model';
     NgClass,
     TranslateModule,
     BtnDisabledDirective,
+    NgxSkeletonLoaderModule,
   ],
   standalone: true,
 })

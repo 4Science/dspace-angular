@@ -1,4 +1,10 @@
-import { isPlatformBrowser } from '@angular/common';
+import {
+  AsyncPipe,
+  isPlatformBrowser,
+  NgClass,
+  NgForOf,
+  NgIf,
+} from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -9,6 +15,10 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import {
   BehaviorSubject,
   combineLatest,
@@ -23,7 +33,11 @@ import { Item } from 'src/app/core/shared/item.model';
 
 import { BitstreamImagesService } from '../../../core/services/bitstream-images.service';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
+import { BtnDisabledDirective } from '../../btn-disabled.directive';
 import { hasValue } from '../../empty.util';
+import { ThemedTypeBadgeComponent } from '../../object-collection/shared/badges/type-badge/themed-type-badge.component';
+import { BackgroundImageDirective } from '../../utils/background-image.directive';
+import { VarDirective } from '../../utils/var.directive';
 import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
 
 @Component({
@@ -31,6 +45,20 @@ import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.com
   templateUrl: './slider-browse-elements.component.html',
   styleUrls: ['./slider-browse-elements.component.scss'],
   standalone: true,
+  imports: [
+    NgIf,
+    AsyncPipe,
+    BtnDisabledDirective,
+    NgForOf,
+    BackgroundImageDirective,
+    ThemedTypeBadgeComponent,
+    NgxSkeletonLoaderModule,
+    TranslateModule,
+    RouterLink,
+    NgClass,
+    NgbTooltipModule,
+    VarDirective,
+  ],
 })
 export class SliderBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 

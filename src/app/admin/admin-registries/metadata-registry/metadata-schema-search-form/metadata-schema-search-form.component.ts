@@ -12,7 +12,10 @@ import {
   DynamicFormLayout,
   DynamicInputModel,
 } from '@ng-dynamic-forms/core';
-import { TranslateService } from '@ngx-translate/core';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 import {
   combineLatest,
   Subject,
@@ -23,12 +26,17 @@ import {
 } from 'rxjs/operators';
 
 import { FormBuilderService } from '../../../../shared/form/builder/form-builder.service';
+import { FormComponent } from '../../../../shared/form/form.component';
 import { SchemaFilter } from './schema-filter';
 
 @Component({
   selector: 'ds-metadata-schema-search-form',
   templateUrl: './metadata-schema-search-form.component.html',
   standalone: true,
+  imports: [
+    FormComponent,
+    TranslateModule,
+  ],
 })
 export class MetadataSchemaSearchFormComponent implements OnInit, OnDestroy {
 

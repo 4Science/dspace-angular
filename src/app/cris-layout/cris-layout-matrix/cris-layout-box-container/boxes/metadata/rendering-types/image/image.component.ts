@@ -8,6 +8,7 @@ import {
   OnInit,
   PLATFORM_ID,
 } from '@angular/core';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import {
   BehaviorSubject,
   Observable,
@@ -30,6 +31,7 @@ import { BitstreamRenderingModelComponent } from '../bitstream-rendering-model';
   standalone: true,
   imports: [
     AsyncPipe,
+    NgxSkeletonLoaderModule,
   ],
 })
 export class ImageComponent extends BitstreamRenderingModelComponent implements OnInit {

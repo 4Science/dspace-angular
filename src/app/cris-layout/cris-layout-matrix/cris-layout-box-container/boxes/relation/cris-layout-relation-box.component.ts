@@ -26,6 +26,7 @@ import {
   RelationBoxConfiguration,
 } from '../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../core/shared/item.model';
+import { CarouselRelationsComponent } from '../../../../../item-page/carousel-relations/carousel-relations.component';
 import { ThemedConfigurationSearchPageComponent } from '../../../../../search-page/themed-configuration-search-page.component';
 import { isNotEmpty } from '../../../../../shared/empty.util';
 import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-component.model';
@@ -39,6 +40,7 @@ import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-
     NgIf,
     ThemedConfigurationSearchPageComponent,
     AsyncPipe,
+    CarouselRelationsComponent,
   ],
 })
 export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent implements OnInit {

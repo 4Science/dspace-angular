@@ -9,7 +9,10 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbAccordionModule,
+  NgbCollapseModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import {
   TranslateModule,
   TranslateService,
@@ -37,6 +40,7 @@ import { LayoutBox } from '../../enums/layout-box.enum';
     NgComponentOutlet,
     ThemedLoadingComponent,
     TranslateModule,
+    NgbCollapseModule,
   ],
 })
 export class CrisLayoutBoxContainerComponent implements OnInit {

@@ -12,6 +12,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { BrowseMostElementsComponent as BaseComponent } from '../../../../app/shared/browse-most-elements/browse-most-elements.component';
 import { ThemedCardsBrowseElementsComponent } from '../../../../app/shared/browse-most-elements/cards-browse-elements/themed-cards-browse-elements.component';
 import { ThemedDefaultBrowseElementsComponent } from '../../../../app/shared/browse-most-elements/default-browse-elements/themed-default-browse-elements.component';
+import { ThemedImagesBrowseElementsComponent } from '../../../../app/shared/browse-most-elements/images-browse-elements/themed-images-browse-elements.component';
+import { ThemedSliderBrowseElementsComponent } from '../../../../app/shared/browse-most-elements/slider-browse-elements/themed-slider-browse-elements.component';
 
 /**
  * Component representing the breadcrumbs of a page
@@ -33,6 +35,8 @@ import { ThemedDefaultBrowseElementsComponent } from '../../../../app/shared/bro
     ThemedCardsBrowseElementsComponent,
     NgSwitchCase,
     NgIf,
+    ThemedSliderBrowseElementsComponent,
+    ThemedImagesBrowseElementsComponent,
   ],
 })
 export class BrowseMostElementsComponent extends BaseComponent {

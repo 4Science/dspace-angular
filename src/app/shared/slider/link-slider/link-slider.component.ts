@@ -2,7 +2,11 @@ import {
   BreakpointObserver,
   Breakpoints,
 } from '@angular/cdk/layout';
-import { AsyncPipe } from '@angular/common';
+import {
+  AsyncPipe,
+  NgForOf,
+  NgIf,
+} from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -45,6 +49,8 @@ import { SliderComponent } from '../slider.component';
     AsyncPipe,
     NgxSkeletonLoaderModule,
     BtnDisabledDirective,
+    NgIf,
+    NgForOf,
   ],
 })
 export class LinkSliderComponent extends SliderComponent implements OnInit, OnDestroy {

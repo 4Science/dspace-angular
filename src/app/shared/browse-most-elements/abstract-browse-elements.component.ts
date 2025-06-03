@@ -1,4 +1,4 @@
-import { isPlatformServer } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import {
   Component,
   inject,
@@ -99,13 +99,16 @@ export abstract class AbstractBrowseElementsComponent implements OnInit, OnChang
   public cardLayoutMode = LayoutModeEnum.CARD;
 
   isLoading = true;
+  isBrowser: boolean;
 
   ngOnChanges() {
     this.paginatedSearchOptions$?.next(this.paginatedSearchOptions);
   }
 
   ngOnInit() {
-    if (isPlatformServer(this.platformId)) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+
+    if (!this.isBrowser) {
       return;
     }
     const followLinks = [];

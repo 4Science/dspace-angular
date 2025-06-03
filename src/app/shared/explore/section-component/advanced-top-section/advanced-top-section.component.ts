@@ -1,6 +1,8 @@
 import {
   AsyncPipe,
   NgClass,
+  NgForOf,
+  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -53,6 +55,8 @@ import { SearchObjects } from '../../../search/models/search-objects.model';
     ThemedBrowseMostElementsComponent,
     AsyncPipe,
     TranslateModule,
+    NgIf,
+    NgForOf,
   ],
 })
 export class AdvancedTopSectionComponent implements OnInit {

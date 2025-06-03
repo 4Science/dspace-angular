@@ -11,6 +11,7 @@ import { HomeCoarComponent } from '../../../../app/home-page/home-coar/home-coar
 import { ThemedHomeNewsComponent } from '../../../../app/home-page/home-news/themed-home-news.component';
 import { HomePageComponent as BaseComponent } from '../../../../app/home-page/home-page.component';
 import { SuggestionsPopupComponent } from '../../../../app/notifications/suggestions-popup/suggestions-popup.component';
+import { ThemedAdvancedTopSectionComponent } from '../../../../app/shared/explore/section-component/advanced-top-section/themed-advanced-top-section.component';
 import { ThemedBrowseSectionComponent } from '../../../../app/shared/explore/section-component/browse-section/themed-browse-section.component';
 import { ThemedCarouselSectionComponent } from '../../../../app/shared/explore/section-component/carousel-section/themed-carousel-section.component';
 import { ThemedCountersSectionComponent } from '../../../../app/shared/explore/section-component/counters-section/themed-counters-section.component';
@@ -48,6 +49,7 @@ import { ViewTrackerComponent } from '../../../../app/statistics/angulartics/dsp
     ThemedCarouselSectionComponent,
     ThemedGridSectionComponent,
     ThemedTwitterSectionComponent,
+    ThemedAdvancedTopSectionComponent,
   ],
 })
 export class HomePageComponent extends BaseComponent {

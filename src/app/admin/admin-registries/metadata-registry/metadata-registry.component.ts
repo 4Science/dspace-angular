@@ -40,6 +40,7 @@ import { PaginationComponent } from '../../../shared/pagination/pagination.compo
 import { toFindListOptions } from '../../../shared/pagination/pagination.utils';
 import { PaginationComponentOptions } from '../../../shared/pagination/pagination-component-options.model';
 import { MetadataSchemaFormComponent } from './metadata-schema-form/metadata-schema-form.component';
+import { MetadataSchemaSearchFormComponent } from './metadata-schema-search-form/metadata-schema-search-form.component';
 import { SchemaFilter } from './metadata-schema-search-form/schema-filter';
 
 @Component({
@@ -55,6 +56,7 @@ import { SchemaFilter } from './metadata-schema-search-form/schema-filter';
     NgForOf,
     NgClass,
     RouterLink,
+    MetadataSchemaSearchFormComponent,
   ],
   standalone: true,
 })

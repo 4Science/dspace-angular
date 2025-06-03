@@ -14,10 +14,9 @@ import {
   COAR_NOTIFY_SUPPORT,
   END_USER_AGREEMENT_PATH,
   FEEDBACK_PATH,
-  PRIVACY_PATH,
 } from './info-routing-paths';
 import { NotifyInfoComponent } from './notify-info/notify-info.component';
-import { ThemedPrivacyComponent } from './privacy/themed-privacy.component';
+
 
 
 export const ROUTES: Routes = [
@@ -33,12 +32,6 @@ export const ROUTES: Routes = [
     component: ThemedEndUserAgreementComponent,
     resolve: { breadcrumb: i18nBreadcrumbResolver },
     data: { title: 'info.end-user-agreement.title', breadcrumbKey: 'info.end-user-agreement' },
-  } : undefined,
-  environment.info.enablePrivacyStatement ? {
-    path: PRIVACY_PATH,
-    component: ThemedPrivacyComponent,
-    resolve: { breadcrumb: i18nBreadcrumbResolver },
-    data: { title: 'info.privacy.title', breadcrumbKey: 'info.privacy' },
   } : undefined,
   environment.info.enableCOARNotifySupport ? {
     path: COAR_NOTIFY_SUPPORT,

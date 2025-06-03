@@ -50,6 +50,7 @@ import {
   isEmpty,
   isNotEmpty,
 } from '../shared/empty.util';
+import { ThemedAdvancedTopSectionComponent } from '../shared/explore/section-component/advanced-top-section/themed-advanced-top-section.component';
 import { ThemedBrowseSectionComponent } from '../shared/explore/section-component/browse-section/themed-browse-section.component';
 import { ThemedCarouselSectionComponent } from '../shared/explore/section-component/carousel-section/themed-carousel-section.component';
 import { ThemedCountersSectionComponent } from '../shared/explore/section-component/counters-section/themed-counters-section.component';
@@ -87,6 +88,7 @@ import { ThemedHomeNewsComponent } from './home-news/themed-home-news.component'
     ThemedCarouselSectionComponent,
     ThemedGridSectionComponent,
     ThemedTwitterSectionComponent,
+    ThemedAdvancedTopSectionComponent,
   ],
 })
 export class HomePageComponent implements OnInit, OnDestroy {

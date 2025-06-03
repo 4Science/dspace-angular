@@ -2,6 +2,7 @@ import {
   AsyncPipe,
   isPlatformBrowser,
   NgForOf,
+  NgIf,
   SlicePipe,
 } from '@angular/common';
 import {
@@ -20,6 +21,7 @@ import {
   TranslateModule,
   TranslateService,
 } from '@ngx-translate/core';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import {
   BehaviorSubject,
   from,
@@ -80,6 +82,8 @@ import { PaginatedSearchOptions } from '../../../search/models/paginated-search-
     TranslateModule,
     BackgroundImageDirective,
     RouterLink,
+    NgxSkeletonLoaderModule,
+    NgIf,
   ],
   standalone: true,
 })

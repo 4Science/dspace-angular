@@ -1,4 +1,12 @@
 import {
+  AsyncPipe,
+  NgClass,
+  NgForOf,
+  NgIf,
+  NgStyle,
+  NgTemplateOutlet,
+} from '@angular/common';
+import {
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -14,6 +22,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { NgbSlideEvent } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import { SearchManager } from '../../../core/browse/search-manager';
 import { SortDirection } from '../../../core/cache/models/sort-options.model';
@@ -26,19 +35,31 @@ import {
 import { Item } from '../../../core/shared/item.model';
 import { SearchConfigurationService } from '../../../core/shared/search/search-configuration.service';
 import { SearchConfig } from '../../../core/shared/search/search-filters/search-config.model';
-import { SEARCH_CONFIG_SERVICE } from '../../../my-dspace-page/my-dspace-page.component';
+import { SEARCH_CONFIG_SERVICE } from '../../../my-dspace-page/my-dspace-configuration.service';
 import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
+import { BackgroundImageDirective } from '../../utils/background-image.directive';
 import { SliderComponent } from '../slider.component';
 
 @Component({
   selector: 'ds-thumbnail-slider',
   templateUrl: './thumbnail-slider.component.html',
   styleUrls: ['./thumbnail-slider.component.scss'],
+  standalone: true,
   providers: [
     {
       provide: SEARCH_CONFIG_SERVICE,
       useClass: SearchConfigurationService,
     },
+  ],
+  imports: [
+    NgClass,
+    BackgroundImageDirective,
+    NgxSkeletonLoaderModule,
+    AsyncPipe,
+    NgIf,
+    NgStyle,
+    NgTemplateOutlet,
+    NgForOf,
   ],
 })
 export class ThumbnailSliderComponent extends SliderComponent implements OnInit, OnChanges {
