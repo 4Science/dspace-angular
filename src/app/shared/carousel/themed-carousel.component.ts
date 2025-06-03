@@ -31,7 +31,7 @@ export class ThemedCarouselComponent extends ThemedComponent<CarouselComponent> 
   }
 
   protected importThemedComponent(themeName: string): Promise<any> {
-    return import(`../../../themes/${themeName}/app/carousel/carousel.component`);
+    return import(`../../../themes/${themeName}/app/shared/carousel/carousel.component`);
   }
 
   protected importUnthemedComponent(): Promise<any> {

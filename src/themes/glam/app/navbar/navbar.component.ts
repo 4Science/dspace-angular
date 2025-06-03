@@ -6,6 +6,7 @@ import {
   NgIf,
 } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -39,6 +40,7 @@ import { ThemedLangSwitchComponent } from '../../../../app/shared/lang-switch/th
     NgIf,
     NgForOf,
     NgComponentOutlet,
+    RouterLink,
   ],
 })
 export class NavbarComponent extends BaseComponent {

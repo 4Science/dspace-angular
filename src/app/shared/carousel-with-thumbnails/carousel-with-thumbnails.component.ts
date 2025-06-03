@@ -1,6 +1,7 @@
 import {
   AsyncPipe,
   NgClass,
+  NgForOf,
   NgIf,
   NgStyle,
   NgTemplateOutlet,
@@ -46,6 +47,7 @@ import { ThumbnailSliderComponent } from '../slider/thumbnail-slider/thumbnail-s
     NgTemplateOutlet,
     TranslateModule,
     ThumbnailSliderComponent,
+    NgForOf,
   ],
 })
 export class CarouselWithThumbnailsComponent implements OnInit {

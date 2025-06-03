@@ -3,8 +3,10 @@ import {
   DOCUMENT,
   isPlatformServer,
   NgClass,
+  NgForOf,
   NgIf,
   NgStyle,
+  NgTemplateOutlet,
 } from '@angular/common';
 import {
   Component,
@@ -24,6 +26,7 @@ import {
   NativeWindowRef,
   NativeWindowService,
 } from '../../../../../app/core/services/window.service';
+import { BtnDisabledDirective } from '../../../../../app/shared/btn-disabled.directive';
 import { CarouselComponent as BaseComponent } from '../../../../../app/shared/carousel/carousel.component';
 import { HostWindowService } from '../../../../../app/shared/host-window.service';
 import { VarDirective } from '../../../../../app/shared/utils/var.directive';
@@ -39,14 +42,17 @@ import { VarDirective } from '../../../../../app/shared/utils/var.directive';
   standalone: true,
   imports: [
     NgbCarouselModule,
-    AsyncPipe,
-    TranslateModule,
-    NgStyle,
-    VarDirective,
-    NgClass,
-    RouterLink,
-    NgxSkeletonLoaderModule,
     NgIf,
+    NgForOf,
+    NgTemplateOutlet,
+    NgStyle,
+    RouterLink,
+    AsyncPipe,
+    NgClass,
+    TranslateModule,
+    BtnDisabledDirective,
+    NgxSkeletonLoaderModule,
+    VarDirective,
   ],
 })
 export class CarouselComponent extends BaseComponent implements OnInit {

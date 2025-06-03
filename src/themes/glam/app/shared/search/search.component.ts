@@ -1,6 +1,7 @@
 import {
   AsyncPipe,
   NgIf,
+  NgTemplateOutlet,
 } from '@angular/common';
 import { Component } from '@angular/core';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
@@ -34,6 +35,7 @@ import { ViewModeSwitchComponent } from '../../../../../app/shared/view-mode-swi
     ThemedSearchFormComponent,
     ItemExportModalLauncherComponent,
     SearchLabelsComponent,
+    NgTemplateOutlet,
   ],
 })
 

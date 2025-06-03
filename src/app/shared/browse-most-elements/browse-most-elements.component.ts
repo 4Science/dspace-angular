@@ -101,7 +101,7 @@ export class BrowseMostElementsComponent implements OnInit, OnChanges {
 
   @Input() topSection: TopSection;
 
-  @Input() discoveryConfigurationsTotalElementsMap: Map<string, number>;
+  @Input() discoveryConfigurationsTotalElementsMap: Map<string, number> = new Map();
 
 
   searchResults: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>;
