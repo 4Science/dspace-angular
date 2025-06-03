@@ -16,7 +16,7 @@
   (next)="goNext()"
   >
     <div class="card-columns row" *ngIf="objects?.hasSucceeded">
-      <div class="card-column col col-sm-6 col-lg-4" *ngFor="let column of (columns$ | async)" @fadeIn>
+      <div class="card-column col-sm-6 col-lg-4" *ngFor="let column of (columns$ | async)" @fadeIn>
         <div class="card-element" *ngFor="let object of column" [attr.data-test]="'grid-object' | dsBrowserOnly">
           <ds-listable-object-component-loader [object]="object"
                                                [viewMode]="viewMode"
