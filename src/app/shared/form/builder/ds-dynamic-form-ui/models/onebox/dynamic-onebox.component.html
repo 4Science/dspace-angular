@@ -91,7 +91,7 @@
          [readonly]="true"
          [disabled]="model.readOnly"
          [type]="model.inputType"
-         [value]="currentValue?.display"
+         [value]="currentValue?.value || currentValue?.display"
          (focus)="onFocus($event)"
          (change)="onChange($event)"
          (click)="openTree($event)"
