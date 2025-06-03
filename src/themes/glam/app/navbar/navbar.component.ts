@@ -1,6 +1,9 @@
 import {
   AsyncPipe,
   NgClass,
+  NgComponentOutlet,
+  NgForOf,
+  NgIf,
 } from '@angular/common';
 import { Component } from '@angular/core';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
@@ -33,6 +36,9 @@ import { ThemedLangSwitchComponent } from '../../../../app/shared/lang-switch/th
     ThemedUserMenuComponent,
     ThemedSearchNavbarComponent,
     NgbTooltipModule,
+    NgIf,
+    NgForOf,
+    NgComponentOutlet,
   ],
 })
 export class NavbarComponent extends BaseComponent {

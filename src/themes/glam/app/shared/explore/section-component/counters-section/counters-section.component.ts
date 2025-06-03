@@ -2,6 +2,8 @@ import {
   AsyncPipe,
   DOCUMENT,
   isPlatformServer,
+  NgForOf,
+  NgIf,
   NgStyle,
 } from '@angular/common';
 import {
@@ -36,6 +38,8 @@ import { ThemedLoadingComponent } from '../../../../../../../app/shared/loading/
     AsyncPipe,
     ThemedLoadingComponent,
     TranslateModule,
+    NgIf,
+    NgForOf,
   ],
 })
 export class CountersSectionComponent extends BaseComponent implements  OnInit {

@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 
 import { SliderSection } from '../../../../core/layout/models/section.model';
+import { ThemedLinkSliderComponent } from '../../../slider/link-slider/themed-link-slider.component';
 
 /**
  * Component representing the Slider component section.
@@ -13,6 +14,9 @@ import { SliderSection } from '../../../../core/layout/models/section.model';
   templateUrl: './slider-section.component.html',
   styleUrls: ['./slider-section.component.scss'],
   standalone: true,
+  imports: [
+    ThemedLinkSliderComponent,
+  ],
 })
 export class SliderSectionComponent {
   /**

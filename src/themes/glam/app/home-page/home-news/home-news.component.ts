@@ -6,7 +6,6 @@ import { Component } from '@angular/core';
 
 import { HomeNewsComponent as BaseComponent } from '../../../../../app/home-page/home-news/home-news.component';
 import { ThemedTextSectionComponent } from '../../../../../app/shared/explore/section-component/text-section/themed-text-section.component';
-import {TextSectionComponent} from "../../shared/explore/section-component/text-section/text-section.component";
 
 @Component({
   selector: 'ds-themed-home-news',
@@ -17,7 +16,6 @@ import {TextSectionComponent} from "../../shared/explore/section-component/text-
     ThemedTextSectionComponent,
     AsyncPipe,
     NgIf,
-    TextSectionComponent,
   ],
 })
 
