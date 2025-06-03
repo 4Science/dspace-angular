@@ -22,6 +22,7 @@ import { CarouselOptions } from '../carousel/carousel-options.model';
 import { HostWindowService } from '../host-window.service';
 import { RouterMock } from '../mocks/router.mock';
 import { TranslateLoaderMock } from '../mocks/translate-loader.mock';
+import { ThumbnailSliderComponent } from '../slider/thumbnail-slider/thumbnail-slider.component';
 import { CarouselWithThumbnailsComponent } from './carousel-with-thumbnails.component';
 
 describe('CarouselWithThumbnailsComponent', () => {
@@ -49,8 +50,8 @@ describe('CarouselWithThumbnailsComponent', () => {
             useClass: TranslateLoaderMock,
           },
         }),
+        CarouselWithThumbnailsComponent,
       ],
-      declarations: [CarouselWithThumbnailsComponent],
       providers: [
         { provide: HostWindowService, useValue: hostWindowServicve },
         {
@@ -62,6 +63,9 @@ describe('CarouselWithThumbnailsComponent', () => {
         NO_ERRORS_SCHEMA,
       ],
     })
+      .overrideComponent(CarouselWithThumbnailsComponent, {
+        remove: { imports: [ThumbnailSliderComponent] },
+      })
       .compileComponents();
   }));
 

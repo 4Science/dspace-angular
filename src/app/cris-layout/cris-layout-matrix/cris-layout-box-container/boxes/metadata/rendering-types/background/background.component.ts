@@ -16,17 +16,14 @@ import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Bitstream } from '../../../../../../../core/shared/bitstream.model';
 import { Item } from '../../../../../../../core/shared/item.model';
 import { BitstreamRenderingModelComponent } from '../bitstream-rendering-model';
-import {
-  FieldRenderingType,
-  MetadataBoxFieldRendering,
-} from '../metadata-box.decorator';
+
 
 @Component({
   selector: 'ds-background',
   templateUrl: './background.component.html',
   styleUrls: ['./background.component.scss'],
+  standalone: true,
 })
-@MetadataBoxFieldRendering(FieldRenderingType.BACKGROUND, true)
 /**
  * The component for displaying a background image from the primary bitstream.
  * The element that should display the background must have the bitstream-background-container class.

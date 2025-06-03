@@ -19,7 +19,7 @@ import { getMockRemoteDataBuildService } from '../../../../../../../shared/mocks
 import { getMockUUIDService } from '../../../../../../../shared/mocks/uuid.service.mock';
 import { NotificationsService } from '../../../../../../../shared/notifications/notifications.service';
 import { HALEndpointServiceStub } from '../../../../../../../shared/testing/hal-endpoint-service.stub';
-import { FieldRenderingType } from '../metadata-box.decorator';
+import { FieldRenderingType } from '../field-rendering-type';
 import { BackgroundComponent } from './background.component';
 
 
@@ -69,7 +69,7 @@ describe('BackgroundComponent ', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [BackgroundComponent],
+      imports: [BackgroundComponent],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },

@@ -63,8 +63,9 @@ const configurationDataService = jasmine.createSpyObj('configurationDataService'
   findByPropertyName: createSuccessfulRemoteDataObject$(defaultConfigProperty),
 });
 
+
 const restService = Object.assign({}, {
-  get: () => observableOf({ payload: { page: ['all', 'single-images'] } }),
+  get: () => observableOf({ payload: ['all', 'single-images'] }),
 });
 
 describe('MiradorViewerComponent with search', () => {
@@ -283,13 +284,15 @@ describe('MiradorViewerComponent on browser in prod mode', () => {
     viewerService.showEmbeddedViewer.and.returnValue(true);
     viewerService.getImageCount.and.returnValue(observableOf(1));
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useClass: TranslateLoaderMock,
-        },
-      })],
-      declarations: [MiradorViewerComponent],
+      imports: [
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock,
+          },
+        }),
+        MiradorViewerComponent,
+      ],
       providers: [
         { provide: DspaceRestService, useValue: restService },
         { provide: BitstreamDataService, useValue: {} },
@@ -403,13 +406,17 @@ describe('MiradorViewerComponent download plugin config', () => {
     viewerService.showEmbeddedViewer.and.returnValue(true);
     viewerService.getImageCount.and.returnValue(observableOf(2));
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useClass: TranslateLoaderMock,
-        },
-      })],
-      declarations: [MiradorViewerComponent, VarDirective, SafeUrlPipe],
+      imports: [
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock,
+          },
+        }),
+        MiradorViewerComponent,
+        VarDirective,
+        SafeUrlPipe,
+      ],
       providers: [
         { provide: DspaceRestService, useValue: restService },
         { provide: BitstreamDataService, useValue: {} },

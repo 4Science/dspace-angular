@@ -14,10 +14,12 @@ import {
 } from '../../../../core/layout/models/section.model';
 import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
 import { SearchService } from '../../../../core/shared/search/search.service';
+import { ThemedBrowseMostElementsComponent } from '../../../browse-most-elements/themed-browse-most-elements.component';
 import {
   HostWindowService,
   WidthCategory,
 } from '../../../host-window.service';
+import { ThemedLoadingComponent } from '../../../loading/themed-loading.component';
 import { createSuccessfulRemoteDataObject$ } from '../../../remote-data.utils';
 import { AdvancedTopSectionComponent } from './advanced-top-section.component';
 
@@ -52,14 +54,19 @@ describe('AdvancedTopSectionComponent', () => {
   };
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot()],
-      declarations: [AdvancedTopSectionComponent],
+      imports: [
+        TranslateModule.forRoot(),
+        AdvancedTopSectionComponent,
+      ],
       providers: [
         { provide: HostWindowService, useValue: hostWindowServiceStub },
         { provide: SearchService, useValue: searchService },
         ChangeDetectorRef,
       ],
     })
+      .overrideComponent(AdvancedTopSectionComponent, {
+        remove: { imports: [ThemedLoadingComponent, ThemedBrowseMostElementsComponent] },
+      })
       .compileComponents();
   }));
 

@@ -3,6 +3,7 @@ import { LongmarkdownComponent } from 'src/app/cris-layout/cris-layout-matrix/cr
 
 import { AdvancedAttachmentComponent } from './advanced-attachment/advanced-attachment.component';
 import { AttachmentComponent } from './attachment/attachment.component';
+import { BackgroundComponent } from './background/background.component';
 import { BrowseComponent } from './browse/browse.component';
 import { CrisrefComponent } from './crisref/crisref.component';
 import { DateComponent } from './date/date.component';
@@ -121,6 +122,10 @@ export const layoutBoxesMap = new Map<FieldRenderingType, MetadataBoxFieldRender
   } as MetadataBoxFieldRenderOptions],
   [FieldRenderingType.IMAGE, {
     componentRef: ImageComponent,
+    structured: true,
+  } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.BACKGROUND, {
+    componentRef: BackgroundComponent,
     structured: true,
   } as MetadataBoxFieldRenderOptions],
 ]);

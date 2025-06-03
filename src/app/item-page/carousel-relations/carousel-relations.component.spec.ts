@@ -10,7 +10,10 @@ import {
 import { provideMockStore } from '@ngrx/store/testing';
 import { of as observableOf } from 'rxjs';
 
-import { APP_CONFIG } from '../../../config/app-config.interface';
+import {
+  APP_CONFIG,
+  APP_DATA_SERVICES_MAP,
+} from '../../../config/app-config.interface';
 import { environment } from '../../../environments/environment';
 import { BrowseService } from '../../core/browse/browse.service';
 import { RemoteDataBuildService } from '../../core/cache/builders/remote-data-build.service';
@@ -35,7 +38,7 @@ describe('CarouselRelationsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [CarouselRelationsComponent],
+      imports: [CarouselRelationsComponent],
       providers: [
         { provide: SearchService, useValue: getMockSearchService() },
         { provide: ObjectCacheService, useValue: getMockObjectCacheService() },
@@ -53,6 +56,7 @@ describe('CarouselRelationsComponent', () => {
         { provide: SidebarService, useValue: {} },
         { provide: HALEndpointService, useValue: {} },
         { provide: APP_CONFIG, useValue: environment },
+        { provide: APP_DATA_SERVICES_MAP, useValue: {} },
         provideMockStore({ core: { auth: { loading: false } } } as any),
       ],
     })

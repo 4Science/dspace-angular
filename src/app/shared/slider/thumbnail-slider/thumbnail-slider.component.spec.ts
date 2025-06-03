@@ -16,6 +16,11 @@ import {
 } from 'src/app/core/services/window.service';
 import { Item } from 'src/app/core/shared/item.model';
 
+import {
+  APP_CONFIG,
+  APP_DATA_SERVICES_MAP,
+} from '../../../../config/app-config.interface';
+import { environment } from '../../../../environments/environment';
 import { SearchManager } from './../../../core/browse/search-manager';
 import { RemoteDataBuildService } from './../../../core/cache/builders/remote-data-build.service';
 import { RequestService } from './../../../core/data/request.service';
@@ -40,7 +45,7 @@ describe('ThumbnailSliderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ThumbnailSliderComponent],
+      imports: [ThumbnailSliderComponent],
       providers: [
         { provide: BitstreamDataService, useValue: {} },
         { provide: BitstreamImagesService, useValue: {} },
@@ -58,6 +63,8 @@ describe('ThumbnailSliderComponent', () => {
         { provide: HALEndpointService, useValue: halService },
         { provide: RequestService, useValue: jasmine.createSpyObj('requestService', ['generateRequestId', 'send']) },
         { provide: RemoteDataBuildService, useValue: remoteDataBuildServiceStub },
+        { provide: APP_DATA_SERVICES_MAP, useValue: {} },
+        { provide: APP_CONFIG, useValue: environment },
       ],
     })
       .compileComponents();

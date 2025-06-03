@@ -27,6 +27,8 @@ import { DSOChangeAnalyzer } from '../../../../core/data/dso-change-analyzer.ser
 import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service';
 import { SearchService } from '../../../../core/shared/search/search.service';
 import { UUIDService } from '../../../../core/shared/uuid.service';
+import { ThemedCarouselComponent } from '../../../carousel/themed-carousel.component';
+import { ThemedLoadingComponent } from '../../../loading/themed-loading.component';
 import { TranslateLoaderMock } from '../../../mocks/translate-loader.mock';
 import { NotificationsService } from '../../../notifications/notifications.service';
 import { ItemSearchResult } from '../../../object-collection/shared/item-search-result.model';
@@ -87,7 +89,13 @@ describe('CarouselSectionComponent', () => {
         { provide: DefaultChangeAnalyzer, useValue: {} },
       ],
       schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
+    })
+      .overrideComponent(CarouselSectionComponent, {
+        remove: {
+          imports: [ThemedCarouselComponent, ThemedLoadingComponent],
+        },
+      })
+      .compileComponents();
 
   }));
 

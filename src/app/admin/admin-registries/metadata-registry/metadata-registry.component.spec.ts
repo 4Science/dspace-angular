@@ -13,6 +13,11 @@ import { By } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  DYNAMIC_FORM_CONTROL_MAP_FN,
+  DynamicFormValidationService,
+} from '@ng-dynamic-forms/core';
+import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   of as observableOf,
@@ -20,6 +25,11 @@ import {
 } from 'rxjs';
 import { FormBuilderService } from 'src/app/shared/form/builder/form-builder.service';
 
+import {
+  APP_CONFIG,
+  APP_DATA_SERVICES_MAP,
+} from '../../../../config/app-config.interface';
+import { environment } from '../../../../environments/environment';
 import { RestResponse } from '../../../core/cache/response.models';
 import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
 import { buildPaginatedList } from '../../../core/data/paginated-list.model';
@@ -29,6 +39,8 @@ import { PaginationService } from '../../../core/pagination/pagination.service';
 import { RegistryService } from '../../../core/registry/registry.service';
 import { ConfigurationProperty } from '../../../core/shared/configuration-property.model';
 import { SearchConfigurationService } from '../../../core/shared/search/search-configuration.service';
+import { SubmissionObjectDataService } from '../../../core/submission/submission-object-data.service';
+import { dsDynamicFormControlMapFn } from '../../../shared/form/builder/ds-dynamic-form-ui/ds-dynamic-form-control-map-fn';
 import { FormService } from '../../../shared/form/form.service';
 import { HostWindowService } from '../../../shared/host-window.service';
 import { MetadataSchemaExportService } from '../../../shared/metadata-export/metadata-schema-export/metadata-schema-export.service';
@@ -37,13 +49,16 @@ import { getMockFormService } from '../../../shared/mocks/form-service.mock';
 import { NotificationsService } from '../../../shared/notifications/notifications.service';
 import { PaginationComponent } from '../../../shared/pagination/pagination.component';
 import { createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
+import { mockDynamicFormValidationService } from '../../../shared/testing/dynamic-form-mock-services';
 import { HostWindowServiceStub } from '../../../shared/testing/host-window-service.stub';
 import { NotificationsServiceStub } from '../../../shared/testing/notifications-service.stub';
 import { PaginationServiceStub } from '../../../shared/testing/pagination-service.stub';
 import { SearchConfigurationServiceStub } from '../../../shared/testing/search-configuration-service.stub';
 import { EnumKeysPipe } from '../../../shared/utils/enum-keys-pipe';
+import { SubmissionService } from '../../../submission/submission.service';
 import { MetadataRegistryComponent } from './metadata-registry.component';
 import { MetadataSchemaFormComponent } from './metadata-schema-form/metadata-schema-form.component';
+import { MetadataSchemaSearchFormComponent } from './metadata-schema-search-form/metadata-schema-search-form.component';
 
 describe('MetadataRegistryComponent', () => {
   let comp: MetadataRegistryComponent;
@@ -143,18 +158,25 @@ describe('MetadataRegistryComponent', () => {
           useValue: new SearchConfigurationServiceStub(),
         },
         { provide: FormBuilderService, useValue: getMockFormBuilderService() },
+        { provide: APP_DATA_SERVICES_MAP, useValue: {} },
+        { provide: APP_CONFIG, useValue: environment },
+        { provide: SubmissionObjectDataService, useValue: {} },
+        { provide: SubmissionService, useValue: {} },
         {
           provide: MetadataSchemaExportService,
           useValue: jasmine.createSpyObj('metadataSchemaExportService', {
             exportSchema: of(1),
           }),
         },
+        { provide: DYNAMIC_FORM_CONTROL_MAP_FN, useValue: dsDynamicFormControlMapFn },
+        { provide: DynamicFormValidationService, useValue: mockDynamicFormValidationService },
+        provideMockStore({ }),
       ],
       schemas: [NO_ERRORS_SCHEMA],
     })
       .overrideComponent(MetadataRegistryComponent, {
         remove: {
-          imports: [MetadataSchemaFormComponent, RouterLink],
+          imports: [MetadataSchemaFormComponent, RouterLink, MetadataSchemaSearchFormComponent],
         },
         add: { changeDetection: ChangeDetectionStrategy.Default },
       })

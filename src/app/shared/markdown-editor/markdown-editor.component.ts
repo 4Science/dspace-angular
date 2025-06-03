@@ -1,4 +1,7 @@
-import { isPlatformBrowser } from '@angular/common';
+import {
+  isPlatformBrowser,
+  NgIf,
+} from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -26,6 +29,7 @@ import {
   imports: [
     FormsModule,
     QuillEditorComponent,
+    NgIf,
   ],
 })
 export class MarkdownEditorComponent implements AfterViewInit {
