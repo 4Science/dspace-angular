@@ -12,17 +12,17 @@ import { of as observableOf } from 'rxjs';
 
 import { AuthorizationDataService } from '../../../../../../../../../../../core/data/feature-authorization/authorization-data.service';
 import { buildPaginatedList } from '../../../../../../../../../../../core/data/paginated-list.model';
+import { Bitstream } from '../../../../../../../../../../../core/shared/bitstream.model';
 import { Item } from '../../../../../../../../../../../core/shared/item.model';
+import { MetadataValue } from '../../../../../../../../../../../core/shared/metadata.models';
 import { PageInfo } from '../../../../../../../../../../../core/shared/page-info.model';
 import { createRelationshipsObservable } from '../../../../../../../../../../../item-page/simple/item-types/shared/item.component.spec';
+import { MockBitstream1 } from '../../../../../../../../../../../shared/mocks/item.mock';
 import { NotificationsService } from '../../../../../../../../../../../shared/notifications/notifications.service';
 import { createSuccessfulRemoteDataObject$ } from '../../../../../../../../../../../shared/remote-data.utils';
 import { AuthorizationDataServiceStub } from '../../../../../../../../../../../shared/testing/authorization-service.stub';
 import { NotificationsServiceStub } from '../../../../../../../../../../../shared/testing/notifications-service.stub';
 import { IIIFToolbarComponent } from './iiif-toolbar.component';
-import { MockBitstream1 } from '../../../../../../../../../../../shared/mocks/item.mock';
-import { Bitstream } from '../../../../../../../../../../../core/shared/bitstream.model';
-import { MetadataValue } from '../../../../../../../../../../../core/shared/metadata.models';
 
 describe('IiifToolbarComponent', () => {
   let component: IIIFToolbarComponent;
@@ -100,7 +100,7 @@ describe('IiifToolbarComponent', () => {
             authority: 'someAuthority',
           }),
         ],
-      }
+      },
     });
     const expectedQueryParams = {
       canvasId: 'testCanvasId',

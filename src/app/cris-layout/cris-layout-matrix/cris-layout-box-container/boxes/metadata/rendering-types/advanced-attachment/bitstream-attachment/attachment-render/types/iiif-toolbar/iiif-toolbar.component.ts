@@ -118,9 +118,9 @@ export class IIIFToolbarComponent implements OnInit {
   }
 
   private getQueryParams() {
-    return this.MD_BITSTREAMS_MAP.map(({param,  metadata}) => {
+    return this.MD_BITSTREAMS_MAP.map(({ param,  metadata }) => {
       const metadataValue = this.bitstream?.firstMetadataValue(metadata);
-      return { [`${param}`]:  metadataValue ?? this.bitstream.uuid};
+      return { [`${param}`]:  metadataValue ?? this.bitstream.uuid };
     })[0];
   }
 
