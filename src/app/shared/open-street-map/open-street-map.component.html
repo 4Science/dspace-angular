@@ -10,5 +10,3 @@
 <div *ngIf="((coordinates$ | async) === null) && (invalidLocationErrorCode | async) as errorCode"
      class="text-danger">{{ 'location.error.' + errorCode | translate }}
 </div>
-<div *ngIf="showDisplayName" class="my-1 text-muted">{{ displayName$ | async }}</div>
-<div *ngIf="(invalidLocationErrorCode | async) as errorCode" class="text-danger">{{ 'location.error.' + errorCode | translate }}</div>
