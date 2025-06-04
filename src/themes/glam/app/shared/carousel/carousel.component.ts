@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { CarouselComponent as BaseComponent} from '../../../../../app/shared/carousel/carousel.component';
 import { BitstreamDataService } from '../../../../../app/core/data/bitstream-data.service';
 import { NativeWindowRef, NativeWindowService } from '../../../../../app/core/services/window.service';
-import { DOCUMENT, isPlatformServer } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser, isPlatformServer } from '@angular/common';
 import {HostWindowService} from '../../../../../app/shared/host-window.service';
 import {Observable} from 'rxjs';
 import { InternalLinkService } from '../../../../../app/core/services/internal-link.service';
@@ -59,7 +59,7 @@ export class CarouselComponent extends BaseComponent implements OnInit {
   }
 
   getBackgroundImage(href: string) {
-    return (isPlatformServer(this.platformId) && this.carouselOptions.showBlurryBackdrop && href) ? `url(${href})` : 'assets/images/replacement_image.svg';
+    return (isPlatformBrowser(this.platformId) && this.carouselOptions.showBlurryBackdrop && href) ? `url(${href})` : 'assets/images/replacement_image.svg';
   }
 
   isXsOrSm$(): Observable<boolean> {
