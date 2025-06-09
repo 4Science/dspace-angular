@@ -91,20 +91,20 @@ export class SliderBrowseElementsComponent extends AbstractBrowseElementsCompone
   ngOnInit() {
     super.ngOnInit();
 
-    this.itemToImageHrefMap$ = this.searchResultArray$.pipe(
-      switchMap((res) => this.bitstreamImagesService.getItemToImageMap(res as Item[])),
-    );
-
-    this.selectedSearchResultArray$ = combineLatest([
-      this.searchResultArray$, this.firstItemBS.asObservable(),
-    ]).pipe(
-      tap(([items, firstItem]) => {
-        this.totalItemsBS.next(items.length);
-      }),
-      map(([items, firstItem]) => items.slice(firstItem, firstItem + this.itemsPerPageBS.value)),
-    );
-
     if (isPlatformBrowser(this.platformId)) {
+      this.itemToImageHrefMap$ = this.searchResultArray$.pipe(
+        switchMap((res) => this.bitstreamImagesService.getItemToImageMap(res as Item[])),
+      );
+
+      this.selectedSearchResultArray$ = combineLatest([
+        this.searchResultArray$, this.firstItemBS.asObservable(),
+      ]).pipe(
+        tap(([items, firstItem]) => {
+          this.totalItemsBS.next(items.length);
+        }),
+        map(([items, firstItem]) => items.slice(firstItem, firstItem + this.itemsPerPageBS.value)),
+      );
+
       this.resizeObserver = new ResizeObserver(entries => {
         entries.forEach(entry => {
           const containerWidth = entry.contentRect.width;

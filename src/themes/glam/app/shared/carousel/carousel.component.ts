@@ -1,6 +1,7 @@
 import {
   AsyncPipe,
   DOCUMENT,
+  isPlatformBrowser,
   isPlatformServer,
   NgClass,
   NgForOf,
@@ -97,11 +98,11 @@ export class CarouselComponent extends BaseComponent implements OnInit {
   }
 
   getBackgroundImage(href: string) {
-    return this.carouselOptions.showBlurryBackdrop && href ? `url(${href})` : 'assets/images/replacement_image.svg';
+    return (isPlatformBrowser(this.platformId) && this.carouselOptions.showBlurryBackdrop && href) ? `url(${href})` : 'assets/images/replacement_image.svg';
   }
 
   isXsOrSm$(): Observable<boolean> {
-    return  this.hostWindowService.isXsOrSm();
+    return this.hostWindowService.isXsOrSm();
   }
 
 }

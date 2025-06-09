@@ -200,7 +200,7 @@ export class OpenStreetMapComponent implements OnInit {
         place.displayName = position;
         this.place.next(place);
       },
-      error: (err: unknown) => this.handleError(err, this.locationService.parseCoordinates(position)), // Specify type for err
+      error: (err: unknown) => this.handleError(err, null),
     });
   }
 
