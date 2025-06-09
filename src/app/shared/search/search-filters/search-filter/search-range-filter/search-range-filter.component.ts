@@ -1,27 +1,46 @@
-import { BehaviorSubject, combineLatest as observableCombineLatest, Subscription } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { isPlatformBrowser } from '@angular/common';
-import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { RemoteDataBuildService } from '../../../../../core/cache/builders/remote-data-build.service';
-import { FilterType } from '../../../models/filter-type.model';
-import { renderFacetFor } from '../search-filter-type-decorator';
-import { facetLoad, SearchFacetFilterComponent } from '../search-facet-filter/search-facet-filter.component';
-import { SearchFilterConfig } from '../../../models/search-filter-config.model';
 import {
-  FILTER_CONFIG,
-  SCOPE,
-  IN_PLACE_SEARCH,
-  REFRESH_FILTER,
-  SearchFilterService
-} from '../../../../../core/shared/search/search-filter.service';
-import { SearchService } from '../../../../../core/shared/search/search.service';
+  AsyncPipe,
+  isPlatformBrowser,
+  NgForOf,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SEARCH_CONFIG_SERVICE } from '../../../../../my-dspace-page/my-dspace-page.component';
-import { SearchConfigurationService } from '../../../../../core/shared/search/search-configuration.service';
-import { RouteService } from '../../../../../core/services/route.service';
-import { hasValue } from '../../../../empty.util';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import { NouisliderComponent } from 'ng2-nouislider';
+import {
+  combineLatest as observableCombineLatest,
+  Subscription,
+} from 'rxjs';
+import {
+  map,
+  startWith,
+} from 'rxjs/operators';
 import { yearFromString } from 'src/app/shared/date.util';
+
+import { RemoteDataBuildService } from '../../../../../core/cache/builders/remote-data-build.service';
+import { RouteService } from '../../../../../core/services/route.service';
+import { SearchService } from '../../../../../core/shared/search/search.service';
+import { SearchConfigurationService } from '../../../../../core/shared/search/search-configuration.service';
+import { SearchFilterService } from '../../../../../core/shared/search/search-filter.service';
+import { SEARCH_CONFIG_SERVICE } from '../../../../../my-dspace-page/my-dspace-configuration.service';
+import { hasValue } from '../../../../empty.util';
+import { DebounceDirective } from '../../../../utils/debounce.directive';
+import {
+  facetLoad,
+  SearchFacetFilterComponent,
+} from '../search-facet-filter/search-facet-filter.component';
+import { SearchFacetRangeOptionComponent } from '../search-facet-filter-options/search-facet-range-option/search-facet-range-option.component';
 
 /**
  * The suffix for a range filters' minimum in the frontend URL
@@ -42,13 +61,23 @@ export const RANGE_FILTER_MAX_SUFFIX = '.max';
   selector: 'ds-search-range-filter',
   styleUrls: ['./search-range-filter.component.scss'],
   templateUrl: './search-range-filter.component.html',
-  animations: [facetLoad]
+  animations: [facetLoad],
+  imports: [
+    FormsModule,
+    TranslateModule,
+    NgIf,
+    NouisliderComponent,
+    DebounceDirective,
+    SearchFacetRangeOptionComponent,
+    NgForOf,
+    AsyncPipe,
+  ],
+  standalone: true,
 })
 
 /**
  * Component that represents a range facet for a specific filter configuration
  */
-@renderFacetFor(FilterType.range)
 export class SearchRangeFilterComponent extends SearchFacetFilterComponent implements OnInit, OnDestroy {
   /**
    * Fallback minimum for the range
@@ -82,14 +111,14 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
   range;
 
   /**
-   * The range currently selected by the slider
-   */
-  sliderRange: [number | undefined, number | undefined];
-
-  /**
    * Subscription to unsubscribe from
    */
   sub: Subscription;
+
+  /**
+   * The range currently selected by the slider
+   */
+  sliderRange: [number | undefined, number | undefined];
 
   /**
    * Whether the sider is being controlled by the keyboard.
@@ -100,17 +129,19 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
   constructor(protected searchService: SearchService,
               protected filterService: SearchFilterService,
               protected router: Router,
+              protected route: RouteService,
               protected rdbs: RemoteDataBuildService,
               private translateService: TranslateService,
               @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
-              @Inject(IN_PLACE_SEARCH) public inPlaceSearch: boolean,
-              @Inject(FILTER_CONFIG) public filterConfig: SearchFilterConfig,
               @Inject(PLATFORM_ID) private platformId: any,
-              @Inject(REFRESH_FILTER) public refreshFilters: BehaviorSubject<boolean>,
-              @Inject(SCOPE) public scope: string,
-              private route: RouteService) {
-    super(searchService, filterService, rdbs, router, searchConfigService, inPlaceSearch, filterConfig, refreshFilters, scope);
-
+  ) {
+    super(
+      searchService,
+      filterService,
+      rdbs,
+      router,
+      searchConfigService,
+    );
   }
 
   /**
@@ -130,7 +161,7 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
         const minimum = hasValue(min) ? min : this.min;
         const maximum = hasValue(max) ? max : this.max;
         return [minimum, maximum];
-      })
+      }),
     ).subscribe((minmax) => this.range = minmax);
 
     // Default/base config for nouislider
@@ -166,9 +197,9 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
       queryParams:
         {
           [this.filterConfig.paramName + RANGE_FILTER_MIN_SUFFIX]: newMin,
-          [this.filterConfig.paramName + RANGE_FILTER_MAX_SUFFIX]: newMax
+          [this.filterConfig.paramName + RANGE_FILTER_MAX_SUFFIX]: newMax,
         },
-      queryParamsHandling: 'merge'
+      queryParamsHandling: 'merge',
     });
     this.filter = '';
   }

@@ -1,21 +1,60 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { CarouselComponent as BaseComponent} from '../../../../../app/shared/carousel/carousel.component';
-import { BitstreamDataService } from '../../../../../app/core/data/bitstream-data.service';
-import { NativeWindowRef, NativeWindowService } from '../../../../../app/core/services/window.service';
-import { DOCUMENT, isPlatformBrowser, isPlatformServer } from '@angular/common';
-import {HostWindowService} from '../../../../../app/shared/host-window.service';
-import {Observable} from 'rxjs';
-import { InternalLinkService } from '../../../../../app/core/services/internal-link.service';
+import {
+  AsyncPipe,
+  DOCUMENT,
+  isPlatformBrowser,
+  isPlatformServer,
+  NgClass,
+  NgForOf,
+  NgIf,
+  NgStyle,
+  NgTemplateOutlet,
+} from '@angular/common';
+import {
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { Observable } from 'rxjs';
+
 import { SearchManager } from '../../../../../app/core/browse/search-manager';
+import { BitstreamDataService } from '../../../../../app/core/data/bitstream-data.service';
+import { InternalLinkService } from '../../../../../app/core/services/internal-link.service';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../../../../app/core/services/window.service';
+import { BtnDisabledDirective } from '../../../../../app/shared/btn-disabled.directive';
+import { CarouselComponent as BaseComponent } from '../../../../../app/shared/carousel/carousel.component';
+import { HostWindowService } from '../../../../../app/shared/host-window.service';
+import { VarDirective } from '../../../../../app/shared/utils/var.directive';
 
 /**
  * Component representing the Carousel component section.
  */
 @Component({
-  selector: 'ds-carousel-themed',
+  selector: 'ds-themed-carousel',
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
-  providers: []
+  providers: [],
+  standalone: true,
+  imports: [
+    NgbCarouselModule,
+    NgIf,
+    NgForOf,
+    NgTemplateOutlet,
+    NgStyle,
+    RouterLink,
+    AsyncPipe,
+    NgClass,
+    TranslateModule,
+    BtnDisabledDirective,
+    NgxSkeletonLoaderModule,
+    VarDirective,
+  ],
 })
 export class CarouselComponent extends BaseComponent implements OnInit {
 

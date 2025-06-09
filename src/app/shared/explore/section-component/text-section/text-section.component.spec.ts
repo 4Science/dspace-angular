@@ -1,9 +1,15 @@
-import { SearchService } from '../../../../core/shared/search/search.service';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { TextSectionComponent } from './text-section.component';
-import { Site } from '../../../../core/shared/site.model';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
 import { LocaleService } from '../../../../core/locale/locale.service';
+import { SearchService } from '../../../../core/shared/search/search.service';
+import { Site } from '../../../../core/shared/site.model';
+import { MarkdownViewerComponent } from '../../../markdown-viewer/markdown-viewer.component';
+import { TextSectionComponent } from './text-section.component';
 
 describe('TextSectionComponent', () => {
   let component: TextSectionComponent;
@@ -12,18 +18,18 @@ describe('TextSectionComponent', () => {
   const localeServiceStub = {
     getCurrentLanguageCode(): string {
       return 'en';
-    }
+    },
   };
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ TextSectionComponent ],
+      imports: [TextSectionComponent],
       providers: [
         { provide: SearchService, useValue: {} },
-        { provide: LocaleService, useValue: localeServiceStub }
-      ]
+        { provide: LocaleService, useValue: localeServiceStub },
+      ],
     })
-      .compileComponents();
+      .overrideComponent(TextSectionComponent, { remove: { imports: [MarkdownViewerComponent] } }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -32,28 +38,28 @@ describe('TextSectionComponent', () => {
     component.site  = Object.assign(new Site(), {
       id: 'test-site',
       _links: {
-        self: { href: 'test-site-href' }
+        self: { href: 'test-site-href' },
       },
       metadata: {
         'cms.homepage.footer': [
           {
             language: 'en',
-            value: '1234'
-          }
+            value: '1234',
+          },
         ],
         'dc.description': [
           {
             language: 'en_US',
-            value: 'desc'
-          }
-        ]
-      }
+            value: 'desc',
+          },
+        ],
+      },
     });
     component.textRowSection = {
       content: 'cms.homepage.footer',
       contentType: 'text-metadata',
       componentType: 'text-row',
-      style: ''
+      style: '',
     };
     fixture.detectChanges();
   });

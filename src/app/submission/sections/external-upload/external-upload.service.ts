@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-
 import { Store } from '@ngrx/store';
 
-import { SubmissionState } from '../../submission.reducers';
 import { ExecuteExternalUploadAction } from '../../objects/submission-objects.actions';
+import { SubmissionState } from '../../submission.reducers';
 
 
 /**
  * A service that provides methods used in the external upload process.
  */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ExternalUploadService {
 
   /**

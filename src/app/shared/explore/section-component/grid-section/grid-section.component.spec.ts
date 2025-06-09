@@ -1,34 +1,48 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  ChangeDetectorRef,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
+import {
+  ComponentFixture,
+  inject,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-
-import { SearchService } from '../../../../core/shared/search/search.service';
-import { TranslateLoaderMock } from '../../../mocks/translate-loader.mock';
-import { GridSectionComponent } from './grid-section.component';
-import { SearchResult } from '../../../search/models/search-result.model';
-import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
-import { createSuccessfulRemoteDataObject$ } from '../../../remote-data.utils';
-import { LocaleService } from '../../../../core/locale/locale.service';
-import { Site } from '../../../../core/shared/site.model';
-import { of } from 'rxjs';
-import { ObjectCacheService } from '../../../../core/cache/object-cache.service';
-import { getMockObjectCacheService } from '../../../mocks/object-cache.service.mock';
-import { UUIDService } from '../../../../core/shared/uuid.service';
-import { getMockUUIDService } from '../../../mocks/uuid.service.mock';
 import { provideMockStore } from '@ngrx/store/testing';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
+import { of } from 'rxjs';
+
 import { RemoteDataBuildService } from '../../../../core/cache/builders/remote-data-build.service';
-import { getMockRemoteDataBuildService } from '../../../mocks/remote-data-build.service.mock';
-import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service';
-import { DSOChangeAnalyzer } from '../../../../core/data/dso-change-analyzer.service';
-import { BitstreamFormatDataService } from '../../../../core/data/bitstream-format-data.service';
-import { NotificationsService } from '../../../notifications/notifications.service';
 import { SortDirection } from '../../../../core/cache/models/sort-options.model';
+import { ObjectCacheService } from '../../../../core/cache/object-cache.service';
+import { BitstreamFormatDataService } from '../../../../core/data/bitstream-format-data.service';
+import { DSOChangeAnalyzer } from '../../../../core/data/dso-change-analyzer.service';
+import { LocaleService } from '../../../../core/locale/locale.service';
+import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
+import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service';
+import { SearchService } from '../../../../core/shared/search/search.service';
+import { Site } from '../../../../core/shared/site.model';
+import { UUIDService } from '../../../../core/shared/uuid.service';
+import { getMockObjectCacheService } from '../../../../shared/mocks/object-cache.service.mock';
+import { getMockRemoteDataBuildService } from '../../../../shared/mocks/remote-data-build.service.mock';
+import { getMockUUIDService } from '../../../../shared/mocks/uuid.service.mock';
+import { NotificationsService } from '../../../../shared/notifications/notifications.service';
+import { ThemedThumbnailComponent } from '../../../../thumbnail/themed-thumbnail.component';
+import { TranslateLoaderMock } from '../../../mocks/translate-loader.mock';
+import { createSuccessfulRemoteDataObject$ } from '../../../remote-data.utils';
+import { SearchResult } from '../../../search/models/search-result.model';
+import { GridSectionComponent } from './grid-section.component';
 
 describe('GridSectionComponent', () => {
   let component: GridSectionComponent;
@@ -40,40 +54,40 @@ describe('GridSectionComponent', () => {
 
   const mockLocaleService = jasmine.createSpyObj('LocaleService', {
     getCurrentLanguageCode: jasmine.createSpy('getCurrentLanguageCode'),
-    getLanguageCodeList: of(languageList)
+    getLanguageCodeList: of(languageList),
   });
 
   const firstSearchResult = Object.assign(new SearchResult(), {
-      indexableObject: Object.assign(new DSpaceObject(), {
-        id: 'd317835d-7b06-4219-91e2-1191900cb897',
-        uuid: 'd317835d-7b06-4219-91e2-1191900cb897',
-        name: 'My first publication',
-        metadata: {
-          'dspace.entity.type': [
-            { value: 'Publication' }
-          ]
-        },
-        firstMetadataValue(keyOrKeys: string | string[]): string {
-          return '';
-        },
-      })
+    indexableObject: Object.assign(new DSpaceObject(), {
+      id: 'd317835d-7b06-4219-91e2-1191900cb897',
+      uuid: 'd317835d-7b06-4219-91e2-1191900cb897',
+      name: 'My first publication',
+      metadata: {
+        'dspace.entity.type': [
+          { value: 'Publication' },
+        ],
+      },
+      firstMetadataValue(keyOrKeys: string | string[]): string {
+        return '';
+      },
+    }),
   });
 
   const secondSearchResult = Object.assign(new SearchResult(), {
-      indexableObject: Object.assign(new DSpaceObject(), {
-        id: '0c34d491-b5ed-4a78-8b29-83d0bad80e5a',
-        uuid: '0c34d491-b5ed-4a78-8b29-83d0bad80e5a',
-        name: 'This is a publication',
-        firstMetadataValue(keyOrKeys: string | string[]): string {
-          return '';
-        },
-      })
+    indexableObject: Object.assign(new DSpaceObject(), {
+      id: '0c34d491-b5ed-4a78-8b29-83d0bad80e5a',
+      uuid: '0c34d491-b5ed-4a78-8b29-83d0bad80e5a',
+      name: 'This is a publication',
+      firstMetadataValue(keyOrKeys: string | string[]): string {
+        return '';
+      },
+    }),
   });
 
   beforeEach(waitForAsync(() => {
     searchServiceStub = jasmine.createSpyObj('SearchService', {
       search: jasmine.createSpy('search'),
-      getSearchLink: jasmine.createSpy('getSearchLink')
+      getSearchLink: jasmine.createSpy('getSearchLink'),
     });
 
     TestBed.configureTestingModule({
@@ -81,11 +95,9 @@ describe('GridSectionComponent', () => {
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
-            useClass: TranslateLoaderMock
-          }
-        }),
-      ],
-      declarations: [GridSectionComponent],
+            useClass: TranslateLoaderMock,
+          },
+        }), GridSectionComponent],
       providers: [GridSectionComponent,
         { provide: SearchService, useValue: searchServiceStub },
         { provide: LocaleService, useValue: mockLocaleService },
@@ -98,13 +110,18 @@ describe('GridSectionComponent', () => {
         { provide: NotificationsService, useValue: {} },
         {
           provide: ChangeDetectorRef, useValue: {
-            detectChanges: () => fixture.detectChanges()
-          }
+            detectChanges: () => fixture.detectChanges(),
+          },
         },
         provideMockStore({ core: { auth: { loading: false } } } as any),
       ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+      schemas: [NO_ERRORS_SCHEMA],
+    }).overrideComponent(GridSectionComponent, {
+      remove: {
+        imports: [ThemedThumbnailComponent],
+      },
+    })
+      .compileComponents();
 
   }));
 
@@ -120,27 +137,27 @@ describe('GridSectionComponent', () => {
       style: 'col-md-6',
       mainContentLink: '',
       order: SortDirection.ASC,
-      sortField: ''
+      sortField: '',
     };
     component.site  = Object.assign(new Site(), {
       id: 'test-site',
       _links: {
-        self: { href: 'test-site-href' }
+        self: { href: 'test-site-href' },
       },
       metadata: {
         'cms.homepage.footer': [
           {
             language: 'en',
-            value: '1234'
-          }
+            value: '1234',
+          },
         ],
         'dc.description': [
           {
             language: 'en_US',
-            value: 'desc'
-          }
-        ]
-      }
+            value: 'desc',
+          },
+        ],
+      },
     });
 
     fixture.detectChanges();

@@ -1,13 +1,19 @@
-import { ThemedComponent } from '../../../theme-support/themed.component';
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+} from '@angular/core';
+
 import { AdvancedTopSection } from '../../../../core/layout/models/section.model';
 import { Context } from '../../../../core/shared/context.model';
+import { ThemedComponent } from '../../../theme-support/themed.component';
 import { AdvancedTopSectionComponent } from './advanced-top-section.component';
 
 @Component({
-  selector: 'ds-themed-advanced-top-section',
+  selector: 'ds-advanced-top-section',
   styleUrls: [],
   templateUrl: '../../../theme-support/themed.component.html',
+  standalone: true,
+  imports: [AdvancedTopSectionComponent],
 })
 export class ThemedAdvancedTopSectionComponent extends ThemedComponent<AdvancedTopSectionComponent> {
 

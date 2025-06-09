@@ -1,11 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
 
-import { CrisLayoutIIIFToolbarBoxComponent } from './cris-layout-iiif-toolbar-box.component';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateLoaderMock } from '../../../../../shared/mocks/translate-loader.mock';
 import { NotificationsService } from '../../../../../shared/notifications/notifications.service';
 import { NotificationsServiceStub } from '../../../../../shared/testing/notifications-service.stub';
+import { IIIFToolbarComponent } from '../metadata/rendering-types/advanced-attachment/bitstream-attachment/attachment-render/types/iiif-toolbar/iiif-toolbar.component';
+import { CrisLayoutIIIFToolbarBoxComponent } from './cris-layout-iiif-toolbar-box.component';
 
 describe('CrisLayoutIiifToolbarBoxComponent', () => {
   let component: CrisLayoutIIIFToolbarBoxComponent;
@@ -19,20 +29,25 @@ describe('CrisLayoutIiifToolbarBoxComponent', () => {
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
-            useClass: TranslateLoaderMock
-          }
-        })
+            useClass: TranslateLoaderMock,
+          },
+        }),
+        CrisLayoutIIIFToolbarBoxComponent,
       ],
-      declarations: [ CrisLayoutIIIFToolbarBoxComponent ],
       providers: [
         { provide: 'boxProvider', useValue: {} },
         { provide: 'itemProvider', useValue: {} },
         { provide: NotificationsService, useValue: notificationService },
         { provide: Router, useValue: {} },
         { provide: ActivatedRoute, useValue: {} },
-      ]
+      ],
     })
-    .compileComponents();
+      .overrideComponent(CrisLayoutIIIFToolbarBoxComponent, {
+        remove: {
+          imports: [IIIFToolbarComponent],
+        },
+      })
+      .compileComponents();
   });
 
   beforeEach(() => {

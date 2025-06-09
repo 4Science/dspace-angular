@@ -1,4 +1,4 @@
-<ngb-carousel #carousel [interval]="2000" (slide)="onSlide($event)" class="ds-carousel" *ngIf="!(isLoading$ | async)">
+<ngb-carousel #carousel [interval]="2000" (slide)="onSlide($event)" class="ds-carousel" *ngIf="(isLoading$ | async) === false">
   <ng-template ngbSlide *ngFor="let item of (carouselItems$ | async); let i = index; let last = last">
     <ng-container *ngIf="getItemLink(item.indexableObject); let currentLink; else carouselContent">
       <a *ngIf="internalLinkService.isLinkInternal(currentLink)"
@@ -56,8 +56,7 @@
 </div>
 
 <div class="text-center play-pause-button">
-  <button [disabled]="isLoading$ | async" [attr.aria-label]="'carousel.play.pause' | translate" type="button"
-          class="btn btn-sm toggle-paused" (click)="togglePaused()">
+  <button [dsBtnDisabled]="isLoading$ | async" [attr.aria-label]="'carousel.play.pause' | translate" type="button" class="btn btn-sm toggle-paused" (click)="togglePaused()">
     <i class="fas fa-play" *ngIf="paused"></i>
     <i class="fas fa-pause" *ngIf="!paused"></i>
   </button>

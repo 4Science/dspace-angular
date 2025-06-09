@@ -27,7 +27,7 @@
 
 <ng-template #searchContent>
   <div class="row">
-    <div class="col-12" *ngIf="!(isXsOrSm$ | async)">
+    <div class="col-12" *ngIf="(isXsOrSm$ | async) === false">
       <ng-template *ngTemplateOutlet="searchForm"></ng-template>
       <ng-content select="[additionalSearchOptions]"></ng-content>
     </div>
@@ -39,7 +39,7 @@
           <i class="fas fa-sliders"></i> {{"search.sidebar.open" | translate}}
         </button>
       </div>
-      <ds-themed-search-results [searchResults]="resultsRD$ | async"
+      <ds-search-results [searchResults]="resultsRD$ | async"
                                 [searchConfig]="searchOptions$ | async"
                                 [configuration]="(currentConfiguration$ | async)"
                                 [disableHeader]="!searchEnabled"
@@ -54,13 +54,13 @@
                                 (contentChange)="onContentChange($event)"
                                 (customEvent)="customEvent.emit($event)"
                                 (deselectObject)="deselectObject.emit($event)"
-                                (selectObject)="selectObject.emit($event)"></ds-themed-search-results>
+                                (selectObject)="selectObject.emit($event)"></ds-search-results>
     </div>
   </div>
 </ng-template>
 
 <ng-template #sidebarContent>
-  <ds-search-sidebar id="search-sidebar" *ngIf="!(isXsOrSm$ | async)"
+  <ds-search-sidebar id="search-sidebar" *ngIf="(isXsOrSm$ | async) === false"
                      [configurationList]="configurationList"
                      [configuration]="(currentConfiguration$ | async)"
                      [currentScope]="(currentScope$ | async)"
@@ -95,7 +95,7 @@
 
 <ng-template #searchForm>
   <div class="d-flex justify-content-between">
-    <div *ngIf="!(isXsOrSm$ | async) && showFilterToggle && showSidebar">
+    <div *ngIf="(isXsOrSm$ | async) === false && showFilterToggle && showSidebar">
       <button class="btn btn-outline-secondary mr-3"
               ngbTooltip="{{'search.sidebar.show.hide.filters.tooltip' | translate}}"
               (click)="toggleSidebar()">

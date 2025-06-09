@@ -1,25 +1,66 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  AsyncPipe,
+  NgIf,
+  NgTemplateOutlet,
+} from '@angular/common';
+import {
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { RouterLink } from '@angular/router';
+import {
+  NgbPopoverModule,
+  NgbTooltipModule,
+} from '@ng-bootstrap/ng-bootstrap';
+import {
+  Observable,
+  of as observableOf,
+} from 'rxjs';
+import {
+  map,
+  switchMap,
+  take,
+} from 'rxjs/operators';
+import { getItemPageRoute } from 'src/app/item-page/item-page-routing-paths';
 
-import { Observable, of as observableOf } from 'rxjs';
-import { map, switchMap, take } from 'rxjs/operators';
-
-import { isEmpty, isNotEmpty } from '../empty.util';
+import { environment } from '../../../environments/environment';
+import { ItemDataService } from '../../core/data/item-data.service';
+import { RemoteData } from '../../core/data/remote-data';
+import { DSpaceObject } from '../../core/shared/dspace-object.model';
 import { Item } from '../../core/shared/item.model';
 import { MetadataValue } from '../../core/shared/metadata.models';
-import { PLACEHOLDER_PARENT_METADATA } from '../form/builder/ds-dynamic-form-ui/ds-dynamic-form-constants';
-import { RemoteData } from '../../core/data/remote-data';
-import { ItemDataService } from '../../core/data/item-data.service';
-import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { Metadata } from '../../core/shared/metadata.utils';
-import { DSpaceObject } from '../../core/shared/dspace-object.model';
-import { environment } from '../../../environments/environment';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import {
+  isEmpty,
+  isNotEmpty,
+} from '../empty.util';
+import { EntityIconDirective } from '../entity-icon/entity-icon.directive';
+import { PLACEHOLDER_PARENT_METADATA } from '../form/builder/ds-dynamic-form-ui/ds-dynamic-form-constants';
 import { followLink } from '../utils/follow-link-config.model';
+import { VarDirective } from '../utils/var.directive';
+import { MetadataLinkViewPopoverComponent } from './metadata-link-view-popover/metadata-link-view-popover.component';
 import { MetadataView } from './metadata-view.model';
+import { StickyPopoverDirective } from './sticky-popover.directive';
 
 @Component({
   selector: 'ds-metadata-link-view',
   templateUrl: './metadata-link-view.component.html',
-  styleUrls: ['./metadata-link-view.component.scss']
+  styleUrls: ['./metadata-link-view.component.scss'],
+  imports: [
+    NgbPopoverModule,
+    RouterLink,
+    EntityIconDirective,
+    NgIf,
+    NgbTooltipModule,
+    MetadataLinkViewPopoverComponent,
+    VarDirective,
+    NgTemplateOutlet,
+    AsyncPipe,
+    StickyPopoverDirective,
+  ],
+  standalone: true,
 })
 export class MetadataLinkViewComponent implements OnInit {
 
@@ -69,6 +110,11 @@ export class MetadataLinkViewComponent implements OnInit {
   relatedItem: Item;
 
   /**
+   * Route of related item page
+   */
+  relatedDsoRoute: string;
+
+  /**
    * Map all entities with the icons specified in the environment configuration file
    */
   constructor(private itemService: ItemDataService) { }
@@ -82,14 +128,14 @@ export class MetadataLinkViewComponent implements OnInit {
       const currentMetadataName = this.findMetadataName(this.metadata.uuid, this.metadataName);
       const roleMetadataName = environment.searchResult?.authorRoleMetadataMap[currentMetadataName];
       const roleMetadataValues = this.item.allMetadata(roleMetadataName ?? []).filter(
-        mdRole => mdRole.place === this.metadata.place && !mdRole.value.includes(PLACEHOLDER_PARENT_METADATA)
+        mdRole => mdRole.place === this.metadata.place && !mdRole.value.includes(PLACEHOLDER_PARENT_METADATA),
       );
       this.role = roleMetadataValues.length > 0 ? roleMetadataValues[0].value : undefined;
     }
 
     this.metadataView$ = observableOf(this.metadata).pipe(
       switchMap((metadataValue: MetadataValue) => this.getMetadataView(metadataValue)),
-      take(1)
+      take(1),
     );
   }
 
@@ -108,7 +154,7 @@ export class MetadataLinkViewComponent implements OnInit {
     if (Metadata.hasValidAuthority(metadataValue.authority)) {
       return this.itemService.findByIdWithProjections(metadataValue.authority, ['preventMetadataSecurity'], true, false, ...linksToFollow).pipe(
         getFirstCompletedRemoteData(),
-        map((itemRD: RemoteData<Item>) => this.createMetadataView(itemRD, metadataValue))
+        map((itemRD: RemoteData<Item>) => this.createMetadataView(itemRD, metadataValue)),
       );
     } else {
       return observableOf({
@@ -116,7 +162,7 @@ export class MetadataLinkViewComponent implements OnInit {
         value: metadataValue.value,
         orcidAuthenticated: null,
         entityType: null,
-        entityStyle: null
+        entityStyle: null,
       });
     }
   }
@@ -130,13 +176,14 @@ export class MetadataLinkViewComponent implements OnInit {
   private createMetadataView(itemRD: RemoteData<Item>, metadataValue: MetadataValue): MetadataView {
     if (itemRD.hasSucceeded) {
       this.relatedItem = itemRD.payload;
+      this.relatedDsoRoute = this.getItemPageRoute(this.relatedItem);
       const entityStyleValue = this.getCrisRefMetadata(itemRD.payload?.entityType);
       return {
         authority: metadataValue.authority,
         value: metadataValue.value,
         orcidAuthenticated: this.getOrcid(itemRD.payload),
         entityType: itemRD.payload?.entityType,
-        entityStyle: itemRD.payload?.firstMetadataValue(entityStyleValue)
+        entityStyle: itemRD.payload?.firstMetadataValue(entityStyleValue),
       };
     } else {
       return {
@@ -144,7 +191,7 @@ export class MetadataLinkViewComponent implements OnInit {
         value: metadataValue.value,
         orcidAuthenticated: null,
         entityType: 'PRIVATE',
-        entityStyle: this.metadataName
+        entityStyle: this.metadataName,
       };
     }
   }
@@ -199,9 +246,13 @@ export class MetadataLinkViewComponent implements OnInit {
       const asLowercase = entity.toLowerCase();
       metadata = this.crisRefMetadata[Object.keys(this.crisRefMetadata)
         .find(k => k.toLowerCase() === asLowercase)
-        ];
+      ];
     }
     return metadata ?? this.crisRefMetadata?.default;
+  }
+
+  getItemPageRoute(item: Item): string {
+    return getItemPageRoute(item);
   }
 
 }

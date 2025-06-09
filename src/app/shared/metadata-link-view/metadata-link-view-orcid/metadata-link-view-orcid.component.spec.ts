@@ -1,20 +1,26 @@
-import { ConfigurationDataService } from './../../../core/data/configuration-data.service';
-import { Item } from 'src/app/core/shared/item.model';
-import { TranslateLoaderMock } from './../../testing/translate-loader.mock';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { MetadataLinkViewOrcidComponent } from './metadata-link-view-orcid.component';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
+import { Item } from 'src/app/core/shared/item.model';
 import { MetadataValue } from 'src/app/core/shared/metadata.models';
+
 import { createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
+import { ConfigurationDataService } from './../../../core/data/configuration-data.service';
+import { TranslateLoaderMock } from './../../testing/translate-loader.mock';
+import { MetadataLinkViewOrcidComponent } from './metadata-link-view-orcid.component';
 
 describe('MetadataLinkViewOrcidComponent', () => {
   let component: MetadataLinkViewOrcidComponent;
   let fixture: ComponentFixture<MetadataLinkViewOrcidComponent>;
 
   const configurationDataService = jasmine.createSpyObj('configurationDataService', {
-    findByPropertyName: createSuccessfulRemoteDataObject$({ values: ['https://sandbox.orcid.org'] })
+    findByPropertyName: createSuccessfulRemoteDataObject$({ values: ['https://sandbox.orcid.org'] }),
   });
 
 
@@ -23,7 +29,7 @@ describe('MetadataLinkViewOrcidComponent', () => {
     'language': 'en_US',
     'authority': null,
     'confidence': -1,
-    'place': 0
+    'place': 0,
   });
 
   const testItem = Object.assign(new Item(),
@@ -34,28 +40,27 @@ describe('MetadataLinkViewOrcidComponent', () => {
         'dspace.orcid.authenticated': [
           {
             language: null,
-            value: 'authenticated'
-          }
-        ]
+            value: 'authenticated',
+          },
+        ],
       },
       uuid: 'test-item-uuid',
-    }
+    },
   );
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MetadataLinkViewOrcidComponent ],
       imports: [TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
-          useClass: TranslateLoaderMock
-        }
-      }), BrowserAnimationsModule],
+          useClass: TranslateLoaderMock,
+        },
+      }), BrowserAnimationsModule, MetadataLinkViewOrcidComponent],
       providers: [
-        { provide: ConfigurationDataService, useValue: configurationDataService}
+        { provide: ConfigurationDataService, useValue: configurationDataService },
       ],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(MetadataLinkViewOrcidComponent);
     component = fixture.componentInstance;

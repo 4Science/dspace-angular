@@ -1,15 +1,28 @@
-import { RenderingTypeStructuredModelComponent } from '../rendering-type-structured.model';
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { BehaviorSubject } from 'rxjs';
+
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../core/shared/item.model';
-import { TranslateService } from '@ngx-translate/core';
-import { isNotEmpty } from '../../../../../../../shared/empty.util';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
-import { BehaviorSubject } from 'rxjs';
-import { LoadMoreService, NestedMetadataGroupEntry } from '../../../../../../services/load-more.service';
+import { isNotEmpty } from '../../../../../../../shared/empty.util';
+import { LoadMoreService } from '../../../../../../services/load-more.service';
+import { RenderingTypeStructuredModelComponent } from '../rendering-type-structured.model';
+
+
+export interface NestedMetadataGroupEntry {
+  field: LayoutField;
+  value: MetadataValue;
+}
 
 @Component({
-  template: ''
+  template: '',
+  standalone: true,
 })
 export abstract class MetadataGroupComponent extends RenderingTypeStructuredModelComponent implements OnInit, OnDestroy {
 
@@ -70,7 +83,7 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
     @Inject('renderingSubTypeProvider') public renderingSubTypeProvider: string,
     @Inject('tabNameProvider') public tabNameProvider: string,
     protected translateService: TranslateService,
-    protected loadMoreService: LoadMoreService
+    protected loadMoreService: LoadMoreService,
   ) {
     super(fieldProvider, itemProvider, renderingSubTypeProvider, tabNameProvider, translateService);
   }
@@ -79,14 +92,14 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
     this.field.metadataGroup.elements.forEach((entry: LayoutField) => {
       if (this.item.metadata[entry.metadata]) {
         const styleValue = !entry.styleValue ? this.field.styleValue : (entry.styleValue + this.field.styleValue);
-        this.metadataGroup.push(Object.assign({}, entry, {styleValue: styleValue}) );
+        this.metadataGroup.push(Object.assign({}, entry, { styleValue: styleValue }) );
       }
     });
     this.metadataValues.forEach((mdv, index) => {
       this.metadataGroup.forEach(mdg => {
         const entry = {
           field: mdg,
-          value: this.getMetadataValue(mdg, index)
+          value: this.getMetadataValue(mdg, index),
         } as NestedMetadataGroupEntry;
         if (this.componentsToBeRenderedMap.has(index)) {
           const newEntries = [...this.componentsToBeRenderedMap.get(index), entry];
@@ -104,8 +117,8 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
   /**
    * Set the limits of how many data loded from first and last
    */
-   setData(functionName: string) {
-    const {firstLimitedDataToBeRenderedMap, lastLimitedDataToBeRenderedMap, isConfigured, firstLimit, lastLimit} =
+  setData(functionName: string) {
+    const { firstLimitedDataToBeRenderedMap, lastLimitedDataToBeRenderedMap, isConfigured, firstLimit, lastLimit } =
       functionName === 'getComputedData' ?
         this.loadMoreService.getComputedData(this.componentsToBeRenderedMap,this.field.rendering) :
         this.loadMoreService.fillAllData(this.componentsToBeRenderedMap,this.field.rendering);
@@ -114,7 +127,7 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
     this.isConfigured = isConfigured;
     this.firstLimit = firstLimit;
     this.lastLimit = lastLimit;
-}
+  }
 
   getMetadataValue(field: LayoutField, index: number): MetadataValue {
     const metadataList = this.item.findMetadataSortedByPlace(field.metadata);

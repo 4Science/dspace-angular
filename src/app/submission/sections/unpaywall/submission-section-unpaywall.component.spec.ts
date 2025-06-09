@@ -1,68 +1,91 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { SubmissionSectionUnpaywallComponent } from './submission-section-unpaywall.component';
-import { SectionsService } from '../sections.service';
-import { FormService } from '../../../shared/form/form.service';
-import { FormBuilderService } from '../../../shared/form/builder/form-builder.service';
+import { HttpXsrfTokenExtractor } from '@angular/common/http';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { Store, StoreModule } from '@ngrx/store';
-import { NotificationsService } from '../../../shared/notifications/notifications.service';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-import { TranslateLoaderMock } from '../../../shared/mocks/translate-loader.mock';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import {
+  Store,
+  StoreModule,
+} from '@ngrx/store';
+import { provideMockStore } from '@ngrx/store/testing';
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 import { ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
-import { getMockScrollToService } from '../../../shared/mocks/scroll-to-service.mock';
-import { SubmissionService } from '../../submission.service';
-import { SubmissionRestService } from '../../../core/submission/submission-rest.service';
+import {
+  Angulartics2,
+  RouterlessTracking,
+} from 'angulartics2';
+import { of } from 'rxjs';
+
+import {
+  APP_CONFIG,
+  APP_DATA_SERVICES_MAP,
+} from '../../../../config/app-config.interface';
+import { environment } from '../../../../environments/environment.test';
+import { REQUEST } from '../../../../express.tokens';
+import { storeModuleConfig } from '../../../app.reducer';
+import { AuthService } from '../../../core/auth/auth.service';
+import { AuthRequestService } from '../../../core/auth/auth-request.service';
+import { AuthTokenInfo } from '../../../core/auth/models/auth-token-info.model';
 import { RemoteDataBuildService } from '../../../core/cache/builders/remote-data-build.service';
 import { ObjectCacheService } from '../../../core/cache/object-cache.service';
-import { UUIDService } from '../../../core/shared/uuid.service';
-import { HALEndpointService } from '../../../core/shared/hal-endpoint.service';
-import { RouterTestingModule } from '@angular/router/testing';
-import { SearchService } from '../../../core/shared/search/search.service';
+import { BitstreamFormatDataService } from '../../../core/data/bitstream-format-data.service';
 import { CommunityDataService } from '../../../core/data/community-data.service';
 import { DSOChangeAnalyzer } from '../../../core/data/dso-change-analyzer.service';
-import { BitstreamFormatDataService } from '../../../core/data/bitstream-format-data.service';
 import { DSpaceObjectDataService } from '../../../core/data/dspace-object-data.service';
-import { SearchConfigurationService } from '../../../core/shared/search/search-configuration.service';
-import { Angulartics2, RouterlessTracking } from 'angulartics2';
-import {
-  SubmissionJsonPatchOperationsService
-} from '../../../core/submission/submission-json-patch-operations.service';
-import { AuthService } from '../../../core/auth/auth.service';
 import { RequestService } from '../../../core/data/request.service';
-import { getMockRequestService } from '../../../shared/mocks/request.service.mock';
-import { REQUEST } from '@nguniversal/express-engine/tokens';
-import { NativeWindowRef, NativeWindowService } from '../../../core/services/window.service';
-import { AuthRequestService } from '../../../core/auth/auth-request.service';
-import { AuthRequestServiceStub } from '../../../shared/testing/auth-request-service.stub';
+import { DspaceRestService } from '../../../core/dspace-rest/dspace-rest.service';
+import { RawRestResponse } from '../../../core/dspace-rest/raw-rest-response.model';
 import { EPersonDataService } from '../../../core/eperson/eperson-data.service';
 import { CookieService } from '../../../core/services/cookie.service';
 import { HardRedirectService } from '../../../core/services/hard-redirect.service';
-import { storeModuleConfig } from '../../../app.reducer';
-import { HttpXsrfTokenExtractor } from '@angular/common/http';
-import { HttpXsrfTokenExtractorMock } from '../../../shared/mocks/http-xsrf-token-extractor.mock';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { DspaceRestService } from '../../../core/dspace-rest/dspace-rest.service';
-import { mockSubmissionCollectionId, mockSubmissionId } from '../../../shared/mocks/submission.mock';
 import {
-  WorkspaceitemSectionUnpaywallObject
-} from '../../../core/submission/models/workspaceitem-section-unpaywall-object';
-import { UnpaywallSectionStatus } from './models/unpaywall-section-status';
-import { of } from 'rxjs';
-import { AuthTokenInfo } from '../../../core/auth/models/auth-token-info.model';
-import { provideMockStore } from '@ngrx/store/testing';
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../../core/services/window.service';
+import { HALEndpointService } from '../../../core/shared/hal-endpoint.service';
+import { SearchService } from '../../../core/shared/search/search.service';
+import { SearchConfigurationService } from '../../../core/shared/search/search-configuration.service';
+import { UUIDService } from '../../../core/shared/uuid.service';
 import { SubmissionObject } from '../../../core/submission/models/submission-object.model';
-import { SectionsType } from '../sections-type';
+import { WorkspaceitemSectionUnpaywallObject } from '../../../core/submission/models/workspaceitem-section-unpaywall-object';
 import { WorkspaceitemSectionUploadObject } from '../../../core/submission/models/workspaceitem-section-upload.model';
-import {
-  WorkspaceitemSectionUploadFileObject
-} from '../../../core/submission/models/workspaceitem-section-upload-file.model';
-import { RawRestResponse } from '../../../core/dspace-rest/raw-rest-response.model';
-import { SubmissionState } from '../../submission.reducers';
-import { SectionUploadService } from '../upload/section-upload.service';
+import { WorkspaceitemSectionUploadFileObject } from '../../../core/submission/models/workspaceitem-section-upload-file.model';
+import { SubmissionJsonPatchOperationsService } from '../../../core/submission/submission-json-patch-operations.service';
+import { SubmissionRestService } from '../../../core/submission/submission-rest.service';
+import { AlertComponent } from '../../../shared/alert/alert.component';
+import { FormBuilderService } from '../../../shared/form/builder/form-builder.service';
+import { FormService } from '../../../shared/form/form.service';
+import { ThemedLoadingComponent } from '../../../shared/loading/themed-loading.component';
+import { HttpXsrfTokenExtractorMock } from '../../../shared/mocks/http-xsrf-token-extractor.mock';
+import { getMockRequestService } from '../../../shared/mocks/request.service.mock';
+import { getMockScrollToService } from '../../../shared/mocks/scroll-to-service.mock';
 import { getMockSectionUploadService } from '../../../shared/mocks/section-upload.service.mock';
+import {
+  mockSubmissionCollectionId,
+  mockSubmissionId,
+} from '../../../shared/mocks/submission.mock';
+import { TranslateLoaderMock } from '../../../shared/mocks/translate-loader.mock';
+import { NotificationsService } from '../../../shared/notifications/notifications.service';
+import { AuthRequestServiceStub } from '../../../shared/testing/auth-request-service.stub';
+import { SubmissionState } from '../../submission.reducers';
+import { SubmissionService } from '../../submission.service';
+import { SectionsService } from '../sections.service';
+import { SectionsType } from '../sections-type';
+import { SectionUploadService } from '../upload/section-upload.service';
+import { UnpaywallSectionStatus } from './models/unpaywall-section-status';
+import { SubmissionSectionUnpaywallComponent } from './submission-section-unpaywall.component';
 
-describe('SubmissionSectionUnpaywallComponentComponent', () => {
+describe('SubmissionSectionUnpaywallComponent', () => {
   let component: SubmissionSectionUnpaywallComponent;
   let fixture: ComponentFixture<SubmissionSectionUnpaywallComponent>;
   let httpMock: HttpTestingController;
@@ -74,7 +97,7 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
   let translate: TranslateService;
   let restApi: DspaceRestService;
   let store: Store<SubmissionState>;
-    let sectionUploadService: SectionUploadService;
+  let sectionUploadService: SectionUploadService;
   const xsrfToken = 'mock-token';
 
   const initialState = {
@@ -86,9 +109,9 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
         loading: false,
         authToken: new AuthTokenInfo('test_token'),
         userId: 'testid',
-        authMethods: []
-      }
-    }
+        authMethods: [],
+      },
+    },
   };
 
   beforeEach(async () => {
@@ -100,9 +123,10 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
-            useClass: TranslateLoaderMock
+            useClass: TranslateLoaderMock,
           },
         }),
+        SubmissionSectionUnpaywallComponent,
       ],
       providers: [
         SectionsService,
@@ -139,11 +163,20 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
         { provide: 'collectionIdProvider', useValue: mockSubmissionCollectionId },
         { provide: 'sectionDataProvider', useValue: {} },
         { provide: 'submissionIdProvider', useValue: mockSubmissionId },
-          { provide: SectionUploadService, useValue: getMockSectionUploadService() },
+        { provide: SectionUploadService, useValue: getMockSectionUploadService() },
+        { provide: APP_DATA_SERVICES_MAP, useValue: {} },
+        { provide: APP_CONFIG, useValue: environment },
       ],
-      declarations: [SubmissionSectionUnpaywallComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     })
+      .overrideComponent(SubmissionSectionUnpaywallComponent, {
+        remove: {
+          imports: [
+            AlertComponent,
+            ThemedLoadingComponent,
+          ],
+        },
+      })
       .compileComponents();
   });
 
@@ -158,7 +191,7 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
     translate = TestBed.inject(TranslateService);
     restApi = TestBed.inject(DspaceRestService);
     store = TestBed.inject(Store);
-      sectionUploadService = TestBed.inject(SectionUploadService);
+    sectionUploadService = TestBed.inject(SectionUploadService);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -176,14 +209,14 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
       const submissionObjectName = 'workspaceitems';
       const testEndpoint = 'http://test-endpoint';
       const successLabel = of('success-label');
-      const uploadSection: WorkspaceitemSectionUploadObject = { files: [] };
+      const uploadSection: WorkspaceitemSectionUploadObject = { files: [], primary: null };
       const successfulSection: WorkspaceitemSectionUnpaywallObject = {
         id: 1,
         status: UnpaywallSectionStatus.SUCCESSFUL,
         doi: 'test-doi',
         itemId: 'test-item-id',
         timestampCreated: new Date(),
-        timestampLastModified: new Date()
+        timestampLastModified: new Date(),
       };
       const importedResource = {
         sections: {
@@ -192,14 +225,14 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
             doi: 'test-doi',
             itemId: 'test-item-id',
             timestampCreated: new Date(),
-            timestampLastModified: new Date()
+            timestampLastModified: new Date(),
           } as WorkspaceitemSectionUnpaywallObject,
           [SectionsType.Upload]: {
             files: [{
-              uuid: 'uploaded-file-bitstream-uuid'
-            } as WorkspaceitemSectionUploadFileObject]
-          } as WorkspaceitemSectionUploadObject
-        }
+              uuid: 'uploaded-file-bitstream-uuid',
+            } as WorkspaceitemSectionUploadFileObject],
+          } as WorkspaceitemSectionUploadObject,
+        },
       } as unknown as SubmissionObject;
       component.unpaywallSection$.next(successfulSection);
       component.uploadSection$.next({ [SectionsType.Upload]: uploadSection });
@@ -241,9 +274,9 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
             doi: 'test-doi',
             itemId: 'test-item-id',
             timestampCreated: new Date(),
-            timestampLastModified: new Date()
-          } as WorkspaceitemSectionUnpaywallObject
-        }
+            timestampLastModified: new Date(),
+          } as WorkspaceitemSectionUnpaywallObject,
+        },
       } as unknown as SubmissionObject;
       const requestResponse = { payload: submissionObject } as unknown as RawRestResponse;
       jasmine.clock().install();
@@ -254,7 +287,7 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
       spyOn(component.loading$, 'next');
       spyOn(component.status$, 'next')
         .withArgs((submissionObject.sections[SectionsType.Unpaywall] as WorkspaceitemSectionUnpaywallObject).status);
-        spyOn(component.unpaywallSection$, 'next')
+      spyOn(component.unpaywallSection$, 'next')
         .withArgs(submissionObject.sections[SectionsType.Unpaywall] as WorkspaceitemSectionUnpaywallObject);
 
       component.refreshApiCheck();
@@ -262,7 +295,7 @@ describe('SubmissionSectionUnpaywallComponentComponent', () => {
 
       expect(component.loading$.next).toHaveBeenCalledWith(false);
       expect(component.status$.next).toHaveBeenCalledOnceWith((submissionObject.sections[SectionsType.Unpaywall] as WorkspaceitemSectionUnpaywallObject).status);
-        expect(component.unpaywallSection$.next).toHaveBeenCalledOnceWith(submissionObject.sections[SectionsType.Unpaywall] as WorkspaceitemSectionUnpaywallObject);
+      expect(component.unpaywallSection$.next).toHaveBeenCalledOnceWith(submissionObject.sections[SectionsType.Unpaywall] as WorkspaceitemSectionUnpaywallObject);
       jasmine.clock().uninstall();
     });
   });

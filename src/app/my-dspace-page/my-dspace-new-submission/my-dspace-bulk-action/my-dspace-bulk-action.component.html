@@ -3,9 +3,9 @@
     type="button"
     class="btn btn-info mr-2"
     ngbTooltip="{{'submission.workflow.tasks.pool.claim_selected_help' | translate}}"
-    [dsBtnDisabled]="(processing$ | async) || !(claimEnabled$ | async)"
+    [dsBtnDisabled]="(processing$ | async) || (claimEnabled$ | async) !== true"
     (click)="claimAllSelectedTask()"
-    [attr.data-test-disabled]="!(claimEnabled$ | async) ?? false"
+    [attr.data-test-disabled]="(claimEnabled$ | async) !== true"
   >
     <span>
       <i class="fas fa-hand-paper"></i>
@@ -17,9 +17,9 @@
     type="button"
     class="btn btn-success mr-2"
     ngbTooltip="{{'submission.workflow.tasks.claimed.approve_selected_help' | translate}}"
-    [dsBtnDisabled]="(processing$ | async) || !(claimedTaskActionsEnabled$ | async)"
+    [dsBtnDisabled]="(processing$ | async) || (claimedTaskActionsEnabled$ | async) !== true"
     (click)="submitAllSelectedTask()"
-    [attr.data-test-disabled]="!(claimedTaskActionsEnabled$ | async) ?? false"
+    [attr.data-test-disabled]="(claimedTaskActionsEnabled$ | async) !== true"
   >
     <span>
       <i class="fa fa-thumbs-up"></i>
@@ -30,9 +30,9 @@
   <button
     class="btn btn-danger mr-2"
     [ngbTooltip]="rejectTipContent"
-    [dsBtnDisabled]="!(claimedTaskActionsEnabled$ | async)"
+    [dsBtnDisabled]="(claimedTaskActionsEnabled$ | async) !== true"
     (click)="openRejectModal(rejectModal)"
-    [attr.data-test-disabled]="!(claimedTaskActionsEnabled$ | async) ?? false"
+    [attr.data-test-disabled]="(claimedTaskActionsEnabled$ | async) !== true"
   >
     <span>
       <i class="fa fa-trash"></i>
@@ -44,9 +44,9 @@
     type="button"
     class="btn btn-secondary"
     ngbTooltip="{{'submission.workflow.tasks.claimed.return_help' | translate}}"
-    [dsBtnDisabled]="!(claimedTaskActionsEnabled$ | async)"
+    [dsBtnDisabled]="(claimedTaskActionsEnabled$ | async) !== true"
     (click)="returnSelectedToPool()"
-    [attr.data-test-disabled]="!(claimedTaskActionsEnabled$ | async) ?? false"
+    [attr.data-test-disabled]="(claimedTaskActionsEnabled$ | async) !== true"
   >
     <span>
       <i class="fa fa-undo"></i>

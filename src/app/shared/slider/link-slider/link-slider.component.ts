@@ -1,21 +1,57 @@
-import { Item } from '../../../core/shared/item.model';
-import { NativeWindowRef, NativeWindowService } from '../../../core/services/window.service';
+import {
+  BreakpointObserver,
+  Breakpoints,
+} from '@angular/cdk/layout';
+import {
+  AsyncPipe,
+  NgForOf,
+  NgIf,
+} from '@angular/common';
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import {
+  Subject,
+  takeUntil,
+} from 'rxjs';
+import { BitstreamImagesService } from 'src/app/core/services/bitstream-images.service';
+import { getItemPageRoute } from 'src/app/item-page/item-page-routing-paths';
+
 import { SearchManager } from '../../../core/browse/search-manager';
 import { BitstreamDataService } from '../../../core/data/bitstream-data.service';
-import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../../core/services/window.service';
+import { Item } from '../../../core/shared/item.model';
+import { BtnDisabledDirective } from '../../btn-disabled.directive';
+import { ThemedLoadingComponent } from '../../loading/themed-loading.component';
 import { SliderComponent } from '../slider.component';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { BitstreamImagesService } from 'src/app/core/services/bitstream-images.service';
-import { Subject, takeUntil } from 'rxjs';
-import { getItemPageRoute } from 'src/app/item-page/item-page-routing-paths';
 
 /**
  * Component representing the Link Slider component section.
  */
 @Component({
-  selector: 'ds-link-slider',
+  selector: 'ds-base-link-slider',
   templateUrl: './link-slider.component.html',
   styleUrls: ['./link-slider.component.scss'],
+  standalone: true,
+  imports: [
+    ThemedLoadingComponent,
+    TranslateModule,
+    AsyncPipe,
+    NgxSkeletonLoaderModule,
+    BtnDisabledDirective,
+    NgIf,
+    NgForOf,
+  ],
 })
 export class LinkSliderComponent extends SliderComponent implements OnInit, OnDestroy {
 
@@ -95,7 +131,7 @@ export class LinkSliderComponent extends SliderComponent implements OnInit, OnDe
   }
 
   pages = () => {
-    return Array.from({length: Math.ceil(this.itemPlaceholderList.length / this.cardsPerPage)}, (_, i) => i + 1);
+    return Array.from({ length: Math.ceil(this.itemPlaceholderList.length / this.cardsPerPage) }, (_, i) => i + 1);
   };
 
   ngOnDestroy() {

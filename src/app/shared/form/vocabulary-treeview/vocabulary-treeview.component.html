@@ -6,27 +6,30 @@
              [attr.aria-label]="'vocabulary-treeview.search.form.search-placeholder' | translate"
              [placeholder]="'vocabulary-treeview.search.form.search-placeholder' | translate">
       <div class="input-group-append" id="button-addon4">
-        <button class="btn btn-outline-primary" type="button" (click)="search()" [dsBtnDisabled]="!isSearchEnabled()">
+        <button class="btn btn-primary" type="button" (click)="search()" [dsBtnDisabled]="!isSearchEnabled()"
+                [attr.aria-label]="'vocabulary-treeview.search.form.search' | translate">
           <span><i class="fas fa-search"></i> {{'vocabulary-treeview.search.form.search' | translate}}</span>
         </button>
       </div>
     </div>
-    <button class="btn btn-secondary ml-3 flex-shrink-0" type="button" (click)="reset()">
+    <button class="btn btn-secondary ml-3 flex-shrink-0" type="button" (click)="reset()"
+            [attr.aria-label]="'vocabulary-treeview.search.form.reset' | translate">
       <span><i class="fas fa-eraser"></i> {{'vocabulary-treeview.search.form.reset' | translate}}</span>
     </button>
-    <button *ngIf="showAdd && !this.vocabularyOptions.closed" class="btn btn-secondary ml-3 flex-shrink-0" type="button" (click)="add()">
+    <button *ngIf="showAdd && !this.vocabularyOptions.closed" class="btn btn-secondary ml-3 flex-shrink-0" type="button" (click)="add()"
+            [attr.aria-label]="'vocabulary-treeview.search.form.add' | translate">
         <span><i class="fas fa-plus"></i> {{'vocabulary-treeview.search.form.add' | translate}}</span>
     </button>
   </div>
 </div>
 <div class="treeview-container">
-  <ds-themed-loading *ngIf="loading | async" [showMessage]="false"></ds-themed-loading>
+  <ds-loading *ngIf="loading | async" [showMessage]="false"></ds-loading>
   <div aria-live="polite">
-    <h2 *ngIf="!(loading | async) && dataSource.data.length === 0" class="h4 text-center text-muted mt-4" >
+    <h2 *ngIf="(loading | async) !== true && dataSource.data.length === 0" class="h4 text-center text-muted mt-4" >
       <span>{{'vocabulary-treeview.search.no-result' | translate}}</span>
     </h2>
   </div>
-  <cdk-tree *ngIf="!(loading | async) && dataSource.data.length !== 0" [dataSource]="dataSource" [treeControl]="treeControl">
+  <cdk-tree *ngIf="((loading | async) !== true) && dataSource.data.length !== 0" [dataSource]="dataSource" [treeControl]="treeControl">
     <!-- Leaf node -->
     <cdk-tree-node *cdkTreeNodeDef="let node" cdkTreeNodePadding class="d-flex">
       <span aria-hidden="true" type="button" class="btn btn-default px-2 mr-1" cdkTreeNodeToggle>

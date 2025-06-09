@@ -1,15 +1,59 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
-import { LocationService, LocationDDCoordinates, LocationPlace, LocationErrorCodes } from '../../core/services/location.service';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
-import { TranslateService } from '@ngx-translate/core';
+import {
+  AsyncPipe,
+  NgIf,
+  NgStyle,
+} from '@angular/common';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import {
+  icon,
+  LatLng,
+  latLng,
+  Layer,
+  MapOptions,
+  marker,
+  tileLayer,
+} from 'leaflet';
+import {
+  BehaviorSubject,
+  Observable,
+} from 'rxjs';
+import {
+  filter,
+  map,
+  tap,
+} from 'rxjs/operators';
+
+import {
+  LocationDDCoordinates,
+  LocationErrorCodes,
+  LocationPlace,
+  LocationService,
+} from '../../core/services/location.service';
 import { isNotEmpty } from '../empty.util';
-import { icon, LatLng, latLng, Layer, MapOptions, marker, tileLayer } from 'leaflet';
+
 
 @Component({
   selector: 'ds-open-street-map',
   templateUrl: './open-street-map.component.html',
   styleUrls: ['./open-street-map.component.scss'],
+  imports: [
+    TranslateModule,
+    AsyncPipe,
+    NgIf,
+    LeafletModule,
+    NgStyle,
+  ],
+  standalone: true,
 })
 export class OpenStreetMapComponent implements OnInit {
 
@@ -61,7 +105,7 @@ export class OpenStreetMapComponent implements OnInit {
   /**
    * Contains error codes from the location service
    */
-  invalidLocationErrorCode = new BehaviorSubject<string>(undefined);
+  invalidLocationErrorCode: BehaviorSubject<string> = new BehaviorSubject(undefined);
 
   /**
    * The place to be shown in the map
@@ -71,7 +115,7 @@ export class OpenStreetMapComponent implements OnInit {
   /**
    * The styles that are being applied to the map container
    */
-  mapStyle: { [key: string]: string } = {};
+  mapStyle: {[key: string]: string} = {};
 
   /**
    * The center of the map
@@ -91,7 +135,11 @@ export class OpenStreetMapComponent implements OnInit {
   /**
    * The options for the map
    */
-  leafletOptions: MapOptions = { zoomControl: this.showControlsZoom };
+  leafletOptions: MapOptions = {
+    // attribution is still needed
+    // attributionControl: false,
+    zoomControl: this.showControlsZoom,
+  };
 
   constructor(
     protected translateService: TranslateService,
@@ -102,18 +150,18 @@ export class OpenStreetMapComponent implements OnInit {
   ngOnInit(): void {
     this.mapStyle = {
       width: this.width || '100%',
-      height: this.height || `${(+this.width || this.elementRef.nativeElement.parentElement.offsetWidth) / 2}px`
+      height: this.height || `${(+this.width || this.elementRef.nativeElement.parentElement.offsetWidth) / 2}px`,
     };
 
     this.coordinates$ = this.place.asObservable().pipe(
       filter(isNotEmpty),
       map(place => place.coordinates),
-      tap(coordinates => this.setCenterAndPointer(coordinates))
+      tap(coordinates => this.setCenterAndPointer(coordinates)),
     );
 
     this.displayName$ = this.place.asObservable().pipe(
       filter(isNotEmpty),
-      map(place => place.displayName)
+      map(place => place.displayName),
     );
 
     const position = this.coordinates;
@@ -132,7 +180,7 @@ export class OpenStreetMapComponent implements OnInit {
       const coordinates = this.locationService.parseCoordinates(position);
       this.locationService.searchByCoordinates(coordinates).subscribe({
         next: displayName => this.place.next({ coordinates, displayName }),
-        error: err => this.handleError(err, coordinates)
+        error: (err: unknown) => this.handleError(err, coordinates), // Specify type for err
       });
     } else {
       this.invalidLocationErrorCode.next(LocationErrorCodes.INVALID_COORDINATES);
@@ -142,7 +190,7 @@ export class OpenStreetMapComponent implements OnInit {
   private handleSexagesimalCoordinates(position: string) {
     this.locationService.findPlaceAndDecimalCoordinates(position).subscribe({
       next: place => this.place.next(place),
-      error: err => this.handleError(err, this.locationService.parseCoordinates(position))
+      error: (err: unknown) => this.handleError(err, this.locationService.parseCoordinates(position)), // Specify type for err
     });
   }
 
@@ -152,14 +200,16 @@ export class OpenStreetMapComponent implements OnInit {
         place.displayName = position;
         this.place.next(place);
       },
-      error: err => this.handleError(err, null)
+      error: (err: unknown) => this.handleError(err, null),
     });
   }
 
-  private handleError(err: any, coordinates: LocationDDCoordinates) {
-    this.invalidLocationErrorCode.next(err.message);
-    this.place.next({ coordinates });
-    console.error(err.message);
+  private handleError(error: unknown, coordinates: LocationDDCoordinates) {
+    if (error instanceof Error) {
+      this.invalidLocationErrorCode.next(error.message);
+      this.place.next({ coordinates });
+      console.error(error.message);
+    }
   }
 
   private setCenterAndPointer(coordinates: LocationDDCoordinates) {
@@ -167,8 +217,8 @@ export class OpenStreetMapComponent implements OnInit {
     this.leafletLayers = [
       tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: 'Leaflet' }),
       marker([+coordinates.latitude, +coordinates.longitude], {
-        icon: icon({ iconUrl: 'assets/images/marker-icon.png', shadowUrl: 'assets/images/marker-shadow.png' })
-      })
+        icon: icon({ iconUrl: 'assets/images/marker-icon.png', shadowUrl: 'assets/images/marker-shadow.png' }),
+      }),
     ];
   }
 }

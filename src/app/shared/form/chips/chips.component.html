@@ -7,7 +7,7 @@
   <div  *ngIf="isPlatformBrowser" role="list" class="nav nav-pills d-flex flex-column flex-sm-row" cdkDropListGroup>
     <ng-container *ngFor="let c of chips.getChips(); let i = index">
       <ng-template #tipContent>
-        <p class="text-left p-0 m-0" *ngFor="let tip of (tipText$ | async)">
+          <p class="text-left p-0 m-0" *ngFor="let tip of (tipText$ | async)">
           {{tip}}
         </p>
       </ng-template>
@@ -26,8 +26,8 @@
            (cdkDragStarted)="onDrag(i)"
            [routerLink]="c.hasHref() ? getHrefRoot(c.item.href) : null"
            [queryParams]="c.hasHref() ? getHrefQueryParams(c.item.href) : null"
-           [class.disabled]="!clickable || (editable && c.editMode) || dragged == i  "
-           [class.chip-selected]="(editable && c.editMode) || dragged == i"
+           [class.disabled]="!clickable || (editable && c.editMode) || dragged === i  "
+           [class.chip-selected]="(editable && c.editMode) || dragged === i"
            (click)="chipsSelected($event, i);">
           <span>
             <i *ngIf="showIcons && !c.isNestedItem()" dsAuthorityConfidenceState [authorityValue]="c.item" class="far fa-circle" aria-hidden="true">&nbsp;</i>

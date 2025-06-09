@@ -1,48 +1,75 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {
+  ChangeDetectionStrategy,
+  PLATFORM_ID,
+} from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import {
+  Router,
+  UrlTree,
+} from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { of as observableOf } from 'rxjs';
 
-import {LuckySearchComponent} from './lucky-search.component';
-import {LuckySearchService} from '../lucky-search.service';
-import {SearchConfigurationService} from '../../core/shared/search/search-configuration.service';
-import {Router, UrlTree} from '@angular/router';
-import {createSuccessfulRemoteDataObject, createSuccessfulRemoteDataObject$} from '../../shared/remote-data.utils';
-import {createPaginatedList} from '../../shared/testing/utils.test';
-import {Item} from '../../core/shared/item.model';
-import {of as observableOf} from 'rxjs';
-import {PaginatedSearchOptions} from '../../shared/search/models/paginated-search-options.model';
-import {PaginationComponentOptions} from '../../shared/pagination/pagination-component-options.model';
-import {SortDirection, SortOptions} from '../../core/cache/models/sort-options.model';
-import {TranslateModule} from '@ngx-translate/core';
-import {By} from '@angular/platform-browser';
-import {SearchResult} from '../../shared/search/models/search-result.model';
-import {DSpaceObject} from '../../core/shared/dspace-object.model';
-import {BitstreamDataService, MetadataFilter} from '../../core/data/bitstream-data.service';
-import {Bitstream} from '../../core/shared/bitstream.model';
-import {RouterMock} from '../../shared/mocks/router.mock';
-import {MetadataMap, MetadataValue} from '../../core/shared/metadata.models';
-import {FileSizePipe} from '../../shared/utils/file-size-pipe';
-import {HardRedirectService} from '../../core/services/hard-redirect.service';
-import {getBitstreamDownloadRoute} from '../../app-routing-paths';
-import {PLATFORM_ID} from '@angular/core';
-import {NotificationsService} from '../../shared/notifications/notifications.service';
-import {NotificationsServiceStub} from '../../shared/testing/notifications-service.stub';
+import { getBitstreamDownloadRoute } from '../../app-routing-paths';
+import {
+  SortDirection,
+  SortOptions,
+} from '../../core/cache/models/sort-options.model';
+import {
+  BitstreamDataService,
+  MetadataFilter,
+} from '../../core/data/bitstream-data.service';
+import { HardRedirectService } from '../../core/services/hard-redirect.service';
+import { Bitstream } from '../../core/shared/bitstream.model';
+import { DSpaceObject } from '../../core/shared/dspace-object.model';
+import { Item } from '../../core/shared/item.model';
+import {
+  MetadataMap,
+  MetadataValue,
+} from '../../core/shared/metadata.models';
+import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
+import { ThemedFileDownloadLinkComponent } from '../../shared/file-download-link/themed-file-download-link.component';
+import { RouterMock } from '../../shared/mocks/router.mock';
+import { NotificationsService } from '../../shared/notifications/notifications.service';
+import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
+import {
+  createSuccessfulRemoteDataObject,
+  createSuccessfulRemoteDataObject$,
+} from '../../shared/remote-data.utils';
+import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
+import { SearchResult } from '../../shared/search/models/search-result.model';
+import { ThemedSearchResultsComponent } from '../../shared/search/search-results/themed-search-results.component';
+import { ThemedSearchFormComponent } from '../../shared/search-form/themed-search-form.component';
+import { PageWithSidebarComponent } from '../../shared/sidebar/page-with-sidebar.component';
+import { NotificationsServiceStub } from '../../shared/testing/notifications-service.stub';
+import { createPaginatedList } from '../../shared/testing/utils.test';
+import { TruncatableComponent } from '../../shared/truncatable/truncatable.component';
+import { TruncatablePartComponent } from '../../shared/truncatable/truncatable-part/truncatable-part.component';
+import { FileSizePipe } from '../../shared/utils/file-size-pipe';
+import { LuckySearchService } from '../lucky-search.service';
+import { LuckySearchComponent } from './lucky-search.component';
 
 describe('LuckySearchComponent', () => {
   let fixture: ComponentFixture<LuckySearchComponent>;
   const defaultPagination: PaginatedSearchOptions = Object.assign({
     id: 'test-pg-id',
     pageSize: 10,
-    currentPage: 1
+    currentPage: 1,
   });
 
   const hardRedirectService = jasmine.createSpyObj('hardRedirectService', ['redirect']);
 
   const collection1 = Object.assign(new Item(), {
     uuid: 'item-uuid-1',
-    name: 'Test item 1'
+    name: 'Test item 1',
   });
   const collection2 = Object.assign(new Item(), {
     uuid: 'item-uuid-2',
-    name: 'Test item 2'
+    name: 'Test item 2',
   });
   const searchServiceStub = jasmine.createSpyObj('LuckySearchService', {
     getSearchLink: 'lucky-search',
@@ -50,60 +77,74 @@ describe('LuckySearchComponent', () => {
     sendRequest: createSuccessfulRemoteDataObject$(createPaginatedList([
       {
         indexableObject: collection1,
-        hitHighlights: {}
+        hitHighlights: {},
       }, {
         indexableObject: collection2,
-        hitHighlights: {}
-      }
-    ]))
+        hitHighlights: {},
+      },
+    ])),
   });
   const bitstreamDataService = jasmine.createSpyObj('bitstreamDataService', {
-    findByItem: jasmine.createSpy('findByItem')
+    findByItem: jasmine.createSpy('findByItem'),
   });
   const mockSearchOptions = observableOf(new PaginatedSearchOptions({
     pagination: Object.assign(new PaginationComponentOptions(), {
       id: 'search-page-configuration',
       pageSize: 10,
-      currentPage: 1
+      currentPage: 1,
     }),
-    sort: new SortOptions('dc.title', SortDirection.ASC)
+    sort: new SortOptions('dc.title', SortDirection.ASC),
   }));
   const searchConfigServiceStub = {
-    paginatedSearchOptions: mockSearchOptions
+    paginatedSearchOptions: mockSearchOptions,
   };
   let component: LuckySearchComponent;
 
   const urlTree = new UrlTree();
   urlTree.queryParams = {
     index: 'test',
-    'value': 'test'
+    'value': 'test',
   };
   let routerStub = new RouterMock();
 
   const bitstreamMetadata = {
-    'dc.title': [{value: 'test.pdf'} as MetadataValue],
-    'dc.description': [{value: 'TestDescription'} as MetadataValue]
+    'dc.title': [{ value: 'test.pdf' } as MetadataValue],
+    'dc.description': [{ value: 'TestDescription' } as MetadataValue],
   } as MetadataMap;
   const bitstream = Object.assign(
     new Bitstream(),
-    {_name: 'test.pdf', sizeBytes: 15, uuid: 'fa272dbf-e458-4ad2-868b-b4a27c6eac15', metadata: bitstreamMetadata}
+    { _name: 'test.pdf', sizeBytes: 15, uuid: 'fa272dbf-e458-4ad2-868b-b4a27c6eac15', metadata: bitstreamMetadata },
   ) as Bitstream;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LuckySearchComponent, FileSizePipe],
-      imports: [TranslateModule.forRoot()],
-      providers: [
-        {provide: Router, useValue: routerStub},
-        {provide: SearchConfigurationService, useValue: searchConfigServiceStub},
-        {provide: LuckySearchService, useValue: searchServiceStub},
-        {provide: BitstreamDataService, useValue: bitstreamDataService},
-        {provide: HardRedirectService, useValue: hardRedirectService},
-        {provide: PLATFORM_ID, useValue: 'browser'},
-        {provide: NotificationsService, useValue: new NotificationsServiceStub()},
+      imports: [
+        FileSizePipe,
+        LuckySearchComponent,
+        TranslateModule.forRoot(),
       ],
-    })
-      .compileComponents();
+      providers: [
+        { provide: Router, useValue: routerStub },
+        { provide: SearchConfigurationService, useValue: searchConfigServiceStub },
+        { provide: LuckySearchService, useValue: searchServiceStub },
+        { provide: BitstreamDataService, useValue: bitstreamDataService },
+        { provide: HardRedirectService, useValue: hardRedirectService },
+        { provide: PLATFORM_ID, useValue: 'browser' },
+        { provide: NotificationsService, useValue: new NotificationsServiceStub() },
+      ],
+    }).overrideComponent(LuckySearchComponent, {
+      remove: {
+        imports: [
+          PageWithSidebarComponent,
+          ThemedSearchResultsComponent,
+          ThemedSearchFormComponent,
+          TruncatableComponent,
+          ThemedFileDownloadLinkComponent,
+          TruncatablePartComponent,
+        ],
+      },
+      add: { changeDetection: ChangeDetectionStrategy.Default },
+    }).compileComponents();
   });
 
   afterEach(() => {
@@ -121,10 +162,10 @@ describe('LuckySearchComponent', () => {
           name: 'My first publication',
           metadata: {
             'dspace.entity.type': [
-              {value: 'Publication'}
-            ]
-          }
-        })
+              { value: 'Publication' },
+            ],
+          },
+        }),
       });
 
       const secondSearchResult = Object.assign(new SearchResult(), {
@@ -134,14 +175,14 @@ describe('LuckySearchComponent', () => {
           name: 'publication',
           metadata: {
             'dspace.entity.type': [
-              {value: 'Publication'}
-            ]
-          }
-        })
+              { value: 'Publication' },
+            ],
+          },
+        }),
       });
       routerStub.parseUrl.and.returnValue(urlTree);
       const data = createSuccessfulRemoteDataObject(createPaginatedList([
-        firstSearchResult, secondSearchResult
+        firstSearchResult, secondSearchResult,
       ]));
 
       component.resultsRD$.next(data);
@@ -159,7 +200,7 @@ describe('LuckySearchComponent', () => {
 
     it('should call router.navigateByUrl when platform is browser', () => {
       component.redirect('test-url');
-      expect(routerStub.navigateByUrl).toHaveBeenCalledWith('test-url', {replaceUrl: true});
+      expect(routerStub.navigateByUrl).toHaveBeenCalledWith('test-url', { replaceUrl: true });
     });
   });
 
@@ -174,7 +215,7 @@ describe('LuckySearchComponent', () => {
         index: 'testIndex',
         value: 'testValue',
         bitstreamMetadata: 'testMetadata',
-        bitstreamValue: 'testMetadataValue'
+        bitstreamValue: 'testMetadataValue',
       };
 
       const itemUUID = 'd317835d-7b06-4219-91e2-1191900cb897';
@@ -185,18 +226,18 @@ describe('LuckySearchComponent', () => {
           name: 'My first publication',
           metadata: {
             'dspace.entity.type': [
-              {value: 'Publication'}
-            ]
-          }
-        })
+              { value: 'Publication' },
+            ],
+          },
+        }),
       });
       const data = createSuccessfulRemoteDataObject(createPaginatedList([searchResult]));
-      const metadataFilters = [{metadataName: 'dc.title', metadataValue: 'title.pdf'}] as MetadataFilter[];
+      const metadataFilters = [{ metadataName: 'dc.title', metadataValue: 'title.pdf' }] as MetadataFilter[];
       component.bitstreamFilters$.next(metadataFilters);
       bitstreamDataService.findByItem.withArgs(itemUUID, 'ORIGINAL', metadataFilters, {})
         .and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([bitstream])));
 
-      component.currentFilter = {identifier: 'test', value: 'test', bitstreamValue: 'test'};
+      component.currentFilter = { identifier: 'test', value: 'test', bitstreamValue: 'test' };
       component.searchOptions$ = observableOf(defaultPagination);
 
       spyOn((component as any), 'getLuckySearchResults').and.returnValue(observableOf(data));
@@ -237,7 +278,7 @@ describe('LuckySearchComponent', () => {
         index: 'testIndex',
         value: 'testValue',
         bitstreamMetadata: 'testMetadata',
-        bitstreamValue: 'testMetadataValue'
+        bitstreamValue: 'testMetadataValue',
       };
 
       const itemUUID = 'd317835d-7b06-4219-91e2-1191900cb897';
@@ -248,18 +289,18 @@ describe('LuckySearchComponent', () => {
           name: 'My first publication',
           metadata: {
             'dspace.entity.type': [
-              {value: 'Publication'}
-            ]
-          }
-        })
+              { value: 'Publication' },
+            ],
+          },
+        }),
       });
       const data = createSuccessfulRemoteDataObject(createPaginatedList([firstSearchResult]));
-      const metadataFilters = [{metadataName: 'dc.title', metadataValue: 'test.pdf'}] as MetadataFilter[];
+      const metadataFilters = [{ metadataName: 'dc.title', metadataValue: 'test.pdf' }] as MetadataFilter[];
       component.bitstreamFilters$.next(metadataFilters);
       bitstreamDataService.findByItem.withArgs(itemUUID, 'ORIGINAL', metadataFilters, {})
         .and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([bitstream])));
 
-      component.currentFilter = {identifier: 'test', value: 'test', bitstreamValue: 'test'};
+      component.currentFilter = { identifier: 'test', value: 'test', bitstreamValue: 'test' };
       component.searchOptions$ = observableOf(defaultPagination);
 
       spyOn((component as any), 'getLuckySearchResults').and.returnValue(observableOf(data));
@@ -288,30 +329,30 @@ describe('LuckySearchComponent', () => {
       component = fixture.componentInstance;
     });
 
-  it('should not redirect when no bitstreams are found', () => {
-    const item = Object.assign(new Item(), {uuid: 'item-uuid-1', name: 'Test item 1'});
-    const data = createSuccessfulRemoteDataObject(createPaginatedList([
-      {indexableObject: item, hitHighlights: {}}
-    ])) as any;
-    component.resultsRD$.next(data);
-    component.bitstreamFilters$.next([{metadataName: 'dc.title', metadataValue: 'Non-existent bitstream'}]);
-    bitstreamDataService.findByItem.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([])));
-    spyOn(component, 'redirect');
-    fixture.detectChanges();
-    expect(component.redirect).not.toHaveBeenCalled();
-  });
-
-  it('should update showEmptySearchSection$ when no results are found', () => {
+    it('should not redirect when no bitstreams are found', () => {
+      const item = Object.assign(new Item(), { uuid: 'item-uuid-1', name: 'Test item 1' });
+      const data = createSuccessfulRemoteDataObject(createPaginatedList([
+        { indexableObject: item, hitHighlights: {} },
+      ])) as any;
+      component.resultsRD$.next(data);
+      component.bitstreamFilters$.next([{ metadataName: 'dc.title', metadataValue: 'Non-existent bitstream' }]);
+      bitstreamDataService.findByItem.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([])));
+      spyOn(component, 'redirect');
       fixture.detectChanges();
-    const emptyResults = createSuccessfulRemoteDataObject(createPaginatedList([]));
+      expect(component.redirect).not.toHaveBeenCalled();
+    });
 
-    spyOn(component as any, 'getLuckySearchResults').and.returnValue(observableOf(emptyResults));
-    spyOn(component as any, 'processSearchResults').and.returnValue(observableOf(emptyResults));
+    it('should update showEmptySearchSection$ when no results are found', () => {
+      fixture.detectChanges();
+      const emptyResults = createSuccessfulRemoteDataObject(createPaginatedList([]));
 
-    component.getSearchResults();
+      spyOn(component as any, 'getLuckySearchResults').and.returnValue(observableOf(emptyResults));
+      spyOn(component as any, 'processSearchResults').and.returnValue(observableOf(emptyResults));
 
-    expect(component.showEmptySearchSection$.getValue()).toBe(true);
-  });
+      component.getSearchResults();
+
+      expect(component.showEmptySearchSection$.getValue()).toBe(true);
+    });
 
   });
 });

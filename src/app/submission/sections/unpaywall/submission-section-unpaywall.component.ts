@@ -1,12 +1,31 @@
-import { Component, Inject, OnDestroy } from '@angular/core';
-import { renderSectionFor } from '../sections-decorator';
-import { SectionsType } from '../sections-type';
-import { SectionModelComponent } from '../models/section.model';
-import { SectionDataObject } from '../models/section-data.model';
-import { SectionsService } from '../sections.service';
-import { BehaviorSubject, mergeMap, Observable, of, race, scan, Subject, timer } from 'rxjs';
+import {
+  AsyncPipe,
+  NgIf,
+  NgSwitch,
+  NgSwitchCase,
+} from '@angular/common';
+import {
+  Component,
+  Inject,
+  OnDestroy,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
-import { SubmissionState } from '../../submission.reducers';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import { Operation } from 'fast-json-patch';
+import {
+  BehaviorSubject,
+  mergeMap,
+  MonoTypeOperatorFunction,
+  Observable,
+  of,
+  race,
+  scan,
+  Subject,
+  timer,
+} from 'rxjs';
 import {
   catchError,
   delay,
@@ -20,37 +39,42 @@ import {
   takeUntil,
   takeWhile,
   tap,
-  withLatestFrom
+  withLatestFrom,
 } from 'rxjs/operators';
-import { SubmissionObjectEntry } from '../../objects/submission-objects.reducer';
-import { UpdateSectionVisibilityAction } from '../../objects/submission-objects.actions';
-import {
-  WorkspaceitemSectionUnpaywallObject
-} from '../../../core/submission/models/workspaceitem-section-unpaywall-object';
-import { UnpaywallSectionStatus } from './models/unpaywall-section-status';
-import { HALEndpointService } from '../../../core/shared/hal-endpoint.service';
-import { SubmissionService } from '../../submission.service';
-import { hasNoValue, hasValue } from '../../../shared/empty.util';
-import { NotificationsService } from '../../../shared/notifications/notifications.service';
-import { TranslateService } from '@ngx-translate/core';
-import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder/json-patch-operation-path-combiner';
+
 import {
   SubmissionVisibilityType,
-  SubmissionVisibilityValue
+  SubmissionVisibilityValue,
 } from '../../../core/config/models/config-submission-section.model';
-import { SubmissionScopeType } from '../../../core/submission/submission-scope-type';
-import { submissionObjectFromIdSelector } from '../../selectors';
-import { DspaceRestService } from '../../../core/dspace-rest/dspace-rest.service';
+import { RequestError } from '../../../core/data/request-error.model';
 import { RestRequestMethod } from '../../../core/data/rest-request-method';
-import { Operation } from 'fast-json-patch';
-import { AlertType } from '../../../shared/alert/alert-type';
-import { MonoTypeOperatorFunction } from 'rxjs/internal/types';
-import { SectionUploadService } from '../upload/section-upload.service';
-import { WorkspaceitemSectionsObject } from '../../../core/submission/models/workspaceitem-sections.model';
+import { DspaceRestService } from '../../../core/dspace-rest/dspace-rest.service';
+import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder/json-patch-operation-path-combiner';
+import { HALEndpointService } from '../../../core/shared/hal-endpoint.service';
+import { WorkspaceitemSectionUnpaywallObject } from '../../../core/submission/models/workspaceitem-section-unpaywall-object';
 import { WorkspaceitemSectionUploadObject } from '../../../core/submission/models/workspaceitem-section-upload.model';
+import { WorkspaceitemSectionUploadFileObject } from '../../../core/submission/models/workspaceitem-section-upload-file.model';
+import { WorkspaceitemSectionsObject } from '../../../core/submission/models/workspaceitem-sections.model';
+import { SubmissionScopeType } from '../../../core/submission/submission-scope-type';
+import { AlertComponent } from '../../../shared/alert/alert.component';
+import { AlertType } from '../../../shared/alert/alert-type';
 import {
-  WorkspaceitemSectionUploadFileObject
-} from '../../../core/submission/models/workspaceitem-section-upload-file.model';
+  hasNoValue,
+  hasValue,
+} from '../../../shared/empty.util';
+import { ThemedLoadingComponent } from '../../../shared/loading/themed-loading.component';
+import { NotificationsService } from '../../../shared/notifications/notifications.service';
+import { UpdateSectionVisibilityAction } from '../../objects/submission-objects.actions';
+import { SubmissionObjectEntry } from '../../objects/submission-objects.reducer';
+import { submissionObjectFromIdSelector } from '../../selectors';
+import { SubmissionState } from '../../submission.reducers';
+import { SubmissionService } from '../../submission.service';
+import { SectionModelComponent } from '../models/section.model';
+import { SectionDataObject } from '../models/section-data.model';
+import { SectionsService } from '../sections.service';
+import { SectionsType } from '../sections-type';
+import { SectionUploadService } from '../upload/section-upload.service';
+import { UnpaywallSectionStatus } from './models/unpaywall-section-status';
 
 const DOI_METADATA = 'dc.identifier.doi';
 const API_CHECK_INTERVAL = 5000;
@@ -75,7 +99,7 @@ export function pollWhile<T>(
       scan(attempts => ++attempts, 0),
       tap(attemptsGuardFactory(maxAttempts)),
       switchMap(() => source$),
-      takeWhile(isPollingActive, true)
+      takeWhile(isPollingActive, true),
     );
 
     return emitOnlyLast ? poll$.pipe(last()) : poll$;
@@ -93,9 +117,18 @@ interface UploadSection {
 @Component({
   selector: 'ds-submission-section-unpaywall-component',
   templateUrl: './submission-section-unpaywall.component.html',
-  styleUrls: ['./submission-section-unpaywall.component.scss']
+  styleUrls: ['./submission-section-unpaywall.component.scss'],
+  imports: [
+    NgSwitch,
+    AlertComponent,
+    NgSwitchCase,
+    AsyncPipe,
+    NgIf,
+    TranslateModule,
+    ThemedLoadingComponent,
+  ],
+  standalone: true,
 })
-@renderSectionFor(SectionsType.Unpaywall)
 export class SubmissionSectionUnpaywallComponent extends SectionModelComponent implements OnDestroy {
 
   public readonly UnpaywallSectionStatus = UnpaywallSectionStatus;
@@ -122,7 +155,7 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
     private readonly sectionUploadService: SectionUploadService,
     @Inject('collectionIdProvider') public injectedCollectionId: string,
     @Inject('sectionDataProvider') public injectedSectionData: SectionDataObject,
-    @Inject('submissionIdProvider') public injectedSubmissionId: string
+    @Inject('submissionIdProvider') public injectedSubmissionId: string,
   ) {
     super(
       injectedCollectionId,
@@ -157,7 +190,7 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
         distinctUntilChanged(),
         takeUntil(this.unsubscribe$),
       )
-      .subscribe(doiValue => !!doiValue ? this.showCurrentSection() : this.hideCurrentSection());
+      .subscribe(doiValue => doiValue ? this.showCurrentSection() : this.hideCurrentSection());
   }
 
   protected initUnpaywallFetching() {
@@ -166,7 +199,7 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
         this.patchForRefresh(refreshRequired)
           .pipe(
             switchMap(sections => {
-              let unpaywall = this.extractUnpaywallSection(sections);
+              const unpaywall: WorkspaceitemSectionUnpaywallObject = this.extractUnpaywallSection(sections);
               if (unpaywall != null && unpaywall.status !== UnpaywallSectionStatus.PENDING) {
                 return of(unpaywall);
               } else {
@@ -177,27 +210,27 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
                       pollWhile(
                         API_CHECK_INTERVAL,
                         res => this.isStillPending(res),
-                        MAX_TRIES
+                        MAX_TRIES,
                       ),
-                      takeUntil(this.stopFetch$),
                       this.getUnpaywallSection(),
-                      catchError(err => {
+                      catchError((err: unknown) => {
                         this.stopFetch$.next();
-                        this.notificationsService.error(err?.message);
+                        this.notificationsService.error((err as  RequestError)?.message);
                         return of(Object.assign({}, {
                           ...this.unpaywallSection$.getValue(),
-                          status: UnpaywallSectionStatus.NOT_FOUND
+                          status: UnpaywallSectionStatus.NOT_FOUND,
                         }));
-                      })
-                    )
-                  )
+                      }),
+                      takeUntil(this.stopFetch$),
+                    ),
+                  ),
                 );
               }
-            })
-          )
+            }),
+          ),
       ),
       takeUntil(this.unsubscribe$),
-    ).subscribe(unpaywall => {
+    ).subscribe((unpaywall: WorkspaceitemSectionUnpaywallObject) => {
       this.updateUnpaywall(unpaywall);
 
       const isLoading = !unpaywall?.status || unpaywall?.status === UnpaywallSectionStatus.PENDING;
@@ -263,8 +296,8 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
             .pipe(
               filter(Boolean),
               map(() => ({ [sectionId]: sections[sectionId] }) as UploadSection),
-            )
-        )
+            ),
+        ),
     );
   }
 
@@ -285,24 +318,23 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
         filter(hasValue),
         take(1),
         this.getUnpaywallSection(),
-        catchError(err => {
-          this.notificationsService.error(err?.message);
+        catchError((err: unknown) => {
+          this.notificationsService.error((err as  RequestError)?.message);
           return of(Object.assign({}, {
             ...this.unpaywallSection$.getValue(),
-            status: UnpaywallSectionStatus.ERROR
+            status: UnpaywallSectionStatus.ERROR,
           }));
         }),
-      ).subscribe((unpaywall) => {
-      this.updateUnpaywall(unpaywall);
-      this.loading$.next(false);
-      this.stopFetch$.next();
-    });
+      ).subscribe((unpaywall: WorkspaceitemSectionUnpaywallObject) => {
+        this.updateUnpaywall(unpaywall);
+        this.loading$.next(false);
+        this.stopFetch$.next();
+      });
   }
 
   private listenToUploadSectionChanges() {
     this.uploadSection$.pipe(
       pairwise(),
-      takeUntil(this.stopFetch$),
       filter(([prev, curr]) => this.isAnyFieldChangedInLength(curr, prev)),
       map(([prev, curr]) => this.mapNewFilesByKey(curr, prev)),
       take(1),
@@ -340,12 +372,12 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
         mergeMap((endpoint: string) => this.restApi.request(RestRequestMethod.PATCH, endpoint, [operation])),
         map(response => response.payload?.sections as WorkspaceitemSectionsObject),
         tap(response => this.section$.next(response)),
-        take(1)
+        take(1),
       );
   }
 
   private getUnpaywallSection() {
-    return (source$: Observable<WorkspaceitemSectionsObject>) => source$.pipe(map(this.extractUnpaywallSection));
+    return (source$: Observable<WorkspaceitemSectionsObject>) => source$.pipe(map((sections) => this.extractUnpaywallSection(sections)));
   }
 
   private extractUnpaywallSection(sections: WorkspaceitemSectionsObject) {
@@ -363,7 +395,7 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
     this.store.dispatch(new UpdateSectionVisibilityAction(this.submissionId, this.injectedSectionData.id, {
       [SubmissionScopeType.WorkspaceItem]: SubmissionVisibilityValue.Hidden,
       [SubmissionScopeType.EditItem]: SubmissionVisibilityValue.Hidden,
-      [SubmissionScopeType.WorkflowItem]: SubmissionVisibilityValue.Hidden
+      [SubmissionScopeType.WorkflowItem]: SubmissionVisibilityValue.Hidden,
     } as SubmissionVisibilityType));
   }
 
@@ -375,7 +407,7 @@ export class SubmissionSectionUnpaywallComponent extends SectionModelComponent i
   private mapNewFilesByKey(curr: UploadSection, prev: UploadSection) {
     return Object.assign({},
       ...Object.keys(curr)
-        .map(key => ({ [key]: this.getNewFiles(curr, prev, key) }))
+        .map(key => ({ [key]: this.getNewFiles(curr, prev, key) })),
     );
   }
 

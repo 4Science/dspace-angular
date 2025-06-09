@@ -1,20 +1,32 @@
+import { ChangeDetectorRef } from '@angular/core';
+/* tslint:disable:no-unused-variable */
+import {
+  async,
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
+import { BitstreamDataService } from 'src/app/core/data/bitstream-data.service';
+import { BitstreamImagesService } from 'src/app/core/services/bitstream-images.service';
+import { RouteService } from 'src/app/core/services/route.service';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from 'src/app/core/services/window.service';
+import { Item } from 'src/app/core/shared/item.model';
+
+import {
+  APP_CONFIG,
+  APP_DATA_SERVICES_MAP,
+} from '../../../../config/app-config.interface';
+import { environment } from '../../../../environments/environment';
+import { SearchManager } from './../../../core/browse/search-manager';
 import { RemoteDataBuildService } from './../../../core/cache/builders/remote-data-build.service';
 import { RequestService } from './../../../core/data/request.service';
 import { HALEndpointService } from './../../../core/shared/hal-endpoint.service';
 import { SearchConfigurationService } from './../../../core/shared/search/search-configuration.service';
-import { NativeWindowRef, NativeWindowService } from 'src/app/core/services/window.service';
-import { SearchManager } from './../../../core/browse/search-manager';
-import { BitstreamImagesService } from 'src/app/core/services/bitstream-images.service';
-/* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChangeDetectorRef } from '@angular/core';
-
 import { ThumbnailSliderComponent } from './thumbnail-slider.component';
-import { BitstreamDataService } from 'src/app/core/data/bitstream-data.service';
-import { Item } from 'src/app/core/shared/item.model';
-import { of } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
-import { RouteService } from 'src/app/core/services/route.service';
 
 describe('ThumbnailSliderComponent', () => {
   let component: ThumbnailSliderComponent;
@@ -22,18 +34,18 @@ describe('ThumbnailSliderComponent', () => {
   let fixture: ComponentFixture<ThumbnailSliderComponent>;
 
   let halService = jasmine.createSpyObj('halService', {
-    getEndpoint: of('fake-url')
+    getEndpoint: of('fake-url'),
   });
 
   let remoteDataBuildServiceStub = jasmine.createSpyObj('RemoteDataBuildService', {
     buildSingle: of({}),
     buildList: of({}),
-    buildFromHref: of({})
+    buildFromHref: of({}),
   });
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ThumbnailSliderComponent],
+      imports: [ThumbnailSliderComponent],
       providers: [
         { provide: BitstreamDataService, useValue: {} },
         { provide: BitstreamImagesService, useValue: {} },
@@ -44,14 +56,16 @@ describe('ThumbnailSliderComponent', () => {
         { provide: SearchConfigurationService, useValue: { getConfigurationSearchConfig: () => of({ sortOptions: [] }) } },
         {
           provide: ActivatedRoute, useValue: {
-            queryParamMap: of({})
-          }
+            queryParamMap: of({}),
+          },
         },
         { provide: RouteService, useValue: {} },
         { provide: HALEndpointService, useValue: halService },
         { provide: RequestService, useValue: jasmine.createSpyObj('requestService', ['generateRequestId', 'send']) },
         { provide: RemoteDataBuildService, useValue: remoteDataBuildServiceStub },
-      ]
+        { provide: APP_DATA_SERVICES_MAP, useValue: {} },
+        { provide: APP_CONFIG, useValue: environment },
+      ],
     })
       .compileComponents();
   }));

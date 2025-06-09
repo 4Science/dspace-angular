@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -8,11 +9,14 @@ import {
   Input,
   NgZone,
   OnDestroy,
-  OnInit
+  OnInit,
 } from '@angular/core';
-import { NgIf } from '@angular/common';
-import { NativeWindowRef, NativeWindowService } from '../../../core/services/window.service';
 import { TranslateService } from '@ngx-translate/core';
+
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../../core/services/window.service';
 
 @Component({
   selector: 'ds-text-selection-tooltip',
@@ -20,9 +24,9 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./text-selection-tooltip.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    NgIf
+    NgIf,
   ],
-  standalone: true
+  standalone: true,
 })
 export class TextSelectionTooltipComponent implements OnInit, OnDestroy {
 

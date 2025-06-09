@@ -1,12 +1,25 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import {
+  AsyncPipe,
+  NgClass,
+  NgFor,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 
-import { TranslateService } from '@ngx-translate/core';
-
-import { FieldRenderingType, MetadataBoxFieldRendering } from '../../metadata-box.decorator';
-import { Item } from '../../../../../../../../core/shared/item.model';
 import { LayoutField } from '../../../../../../../../core/layout/models/box.model';
-import { MetadataGroupComponent } from '../metadata-group.component';
+import { Item } from '../../../../../../../../core/shared/item.model';
 import { LoadMoreService } from '../../../../../../../services/load-more.service';
+import { MetadataRenderComponent } from '../../../row/metadata-container/metadata-render/metadata-render.component';
+import { MetadataGroupComponent } from '../metadata-group.component';
 
 /**
  * This component renders the inline  metadata group fields
@@ -14,9 +27,18 @@ import { LoadMoreService } from '../../../../../../../services/load-more.service
 @Component({
   selector: 'ds-inline',
   templateUrl: './inline.component.html',
-  styleUrls: ['./inline.component.scss']
+  styleUrls: ['./inline.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    NgClass,
+    NgFor,
+    MetadataRenderComponent,
+    AsyncPipe,
+    NgbTooltipModule,
+    TranslateModule,
+  ],
 })
-@MetadataBoxFieldRendering(FieldRenderingType.INLINE, true)
 export class InlineComponent extends MetadataGroupComponent implements OnInit {
 
   constructor(

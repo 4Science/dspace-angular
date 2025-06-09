@@ -1,0 +1,76 @@
+import { BuildConfig } from '../../../../../config/build-config.interface';
+import {
+  hasNoValue,
+  isEmpty,
+} from '../../../empty.util';
+import { FilterType } from '../../models/filter-type.model';
+import { SearchRangeDatepickerFilterComponent } from './search-range-filter-wrapper/search-range-filter/search-range-datepicker-filter/search-range-datepicker-filter.component';
+import { SearchRangeFilterComponent } from './search-range-filter-wrapper/search-range-filter/search-range-filter.component';
+
+/**
+ * Contains the mapping between an {@link BuildConfig} path and a {@link FilterType}
+ */
+const filterTypeEnvironmentMap: Map<FilterType, { environment?: string, objectElement: any }[]> = new Map();
+filterTypeEnvironmentMap.set(FilterType.range, [{
+  environment: 'layout.search.filters.datepicker',
+  objectElement: SearchRangeDatepickerFilterComponent,
+}, {
+  objectElement: SearchRangeFilterComponent,
+}]);
+
+/**
+ * Sets the mapping for a facet component in relation to a filter type and an environment array property.
+ *
+ * @param {FilterType} type The type for which the matching component is mapped
+ * @param {string[]} environment property of the {@link BuildConfig} that will be matched
+ * @returns Decorator function that performs the actual mapping on initialization of the facet component
+ */
+export function renderFacetForEnvironment(type: FilterType, environment?: string) {
+  return function decorator(objectElement: any) {
+    if (!objectElement) {
+      return;
+    }
+    let renderTypesConfig: { environment?: string, objectElement: any }[] = filterTypeEnvironmentMap.get(type);
+    if (hasNoValue(renderTypesConfig)) {
+      renderTypesConfig = [];
+    }
+    if (isEmpty(environment)) {
+      renderTypesConfig =
+        renderTypesConfig.concat(
+          Object.assign({}, { objectElement }),
+        );
+    } else {
+      renderTypesConfig =
+        renderTypesConfig.concat(
+          Object.assign({}, { environment, objectElement }),
+        );
+    }
+    filterTypeEnvironmentMap.set(type, renderTypesConfig);
+  };
+}
+
+/**
+ * Finds the facet for the given {@param type} mapped value in {@link filterTypeEnvironmentMap} by evaluating it as
+ * an array props of {@param environment} and chooses the one that matches the {@param filterConfigName}.
+ *
+ * @param type {FilterType} of the mapped facet
+ * @param environment {BuildConfig} configuration of the current build
+ * @param filterConfigName simple name of the facet that needs to be matched in a target config path
+ */
+export function renderFilterTypeEnvironment(type: FilterType, environment: Partial<BuildConfig>, filterConfigName: string) {
+  let renderTypeFound = filterTypeEnvironmentMap.get(type).find(typeConfig => hasNoValue(typeConfig.environment));
+  const renderTypeConfigs = filterTypeEnvironmentMap.get(type) as { environment?: string, objectElement: any }[];
+  renderTypeConfigs
+    .some(renderConfig => {
+      if (hasNoValue(renderConfig.environment)) {
+        return false;
+      }
+      const environmentValue =
+        renderConfig.environment
+          .split('.')
+          .reduce((a, b) => a[b], environment) as string[];
+      return environmentValue != null &&
+        (environmentValue.some(confName => filterConfigName === confName && (renderTypeFound = renderConfig)));
+    });
+  return renderTypeFound.objectElement;
+}

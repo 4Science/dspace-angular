@@ -9,7 +9,7 @@
       <i class="fas fa-th-large" title="Cards"></i>
     </label>
   </div>
-  <ng-container *ngIf="topSection && layoutMode == cardLayoutMode; then gridLayout; else listLayout"></ng-container>
+  <ng-container *ngIf="topSection && layoutMode === cardLayoutMode; then gridLayout; else listLayout"></ng-container>
   <div *ngIf="(searchResults$ | async).hasFailed">
     {{ "remote.error" | translate }}
   </div>
@@ -48,6 +48,7 @@
                                            [listID]="paginatedSearchOptions.configuration"
                                            [object]="object"
                                            [showMetrics]="showMetrics"
+                                           [showLabel]="showLabel"
                                            [showThumbnails]="showThumbnails"
                                            [viewMode]="paginatedSearchOptions.view"></ds-listable-object-component-loader>
     </li>

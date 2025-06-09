@@ -1,23 +1,54 @@
-import { Inject, Injectable, InjectionToken } from '@angular/core';
-import { BehaviorSubject, combineLatest as observableCombineLatest, Observable, of as observableOf } from 'rxjs';
-import { AuthService } from '../../core/auth/auth.service';
+import {
+  Inject,
+  Injectable,
+  InjectionToken,
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { environment } from '../../../environments/environment';
-import { filter, map, switchMap, take } from 'rxjs/operators';
-import { EPerson } from '../../core/eperson/models/eperson.model';
-import { CookieConsents, KlaroService } from './klaro.service';
-import { hasValue, isEmpty, isNotEmpty } from '../empty.util';
-import { CookieService } from '../../core/services/cookie.service';
-import { EPersonDataService } from '../../core/eperson/eperson-data.service';
+import {
+  deepClone,
+  Operation,
+} from 'fast-json-patch';
 import cloneDeep from 'lodash/cloneDeep';
 import debounce from 'lodash/debounce';
-import { ANONYMOUS_STORAGE_NAME_KLARO, klaroConfiguration } from './klaro-configuration';
-import { deepClone, Operation } from 'fast-json-patch';
-import { getFirstCompletedRemoteData } from '../../core/shared/operators';
-import { ConfigurationDataService } from '../../core/data/configuration-data.service';
-import { CAPTCHA_NAME } from '../../core/google-recaptcha/google-recaptcha.service';
-import { NativeWindowRef, NativeWindowService, } from '../../core/services/window.service';
 import isEqual from 'lodash/isEqual';
+import {
+  BehaviorSubject,
+  combineLatest as observableCombineLatest,
+  Observable,
+  of as observableOf,
+} from 'rxjs';
+import {
+  filter,
+  map,
+  switchMap,
+  take,
+} from 'rxjs/operators';
+
+import { environment } from '../../../environments/environment';
+import { AuthService } from '../../core/auth/auth.service';
+import { ConfigurationDataService } from '../../core/data/configuration-data.service';
+import { EPersonDataService } from '../../core/eperson/eperson-data.service';
+import { EPerson } from '../../core/eperson/models/eperson.model';
+import { CAPTCHA_NAME } from '../../core/google-recaptcha/google-recaptcha.service';
+import { CookieService } from '../../core/services/cookie.service';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../core/services/window.service';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import {
+  hasValue,
+  isEmpty,
+  isNotEmpty,
+} from '../empty.util';
+import {
+  CookieConsents,
+  KlaroService,
+} from './klaro.service';
+import {
+  ANONYMOUS_STORAGE_NAME_KLARO,
+  klaroConfiguration,
+} from './klaro-configuration';
 
 /**
  * Metadata field to store a user's cookie consent preferences in
@@ -52,13 +83,13 @@ const LAZY_KLARO = new InjectionToken<Promise<any>>(
   {
     providedIn: 'root',
     factory: async () => (await import('klaro/dist/klaro-no-translations')),
-  }
+  },
 );
 
 /**
  * Browser implementation for the KlaroService, representing a service for handling Klaro consent preferences and UI
  */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class BrowserKlaroService extends KlaroService {
 
   private readonly GOOGLE_ANALYTICS_KEY = 'google.analytics.key';
@@ -123,7 +154,7 @@ export class BrowserKlaroService extends KlaroService {
               name: metric.key,
               purposes: ['thirdPartyJs'],
               required: false,
-            }
+            },
           );
         }
       });
@@ -136,7 +167,7 @@ export class BrowserKlaroService extends KlaroService {
           name: 'datadog',
           purposes: ['thirdPartyJs'],
           required: false,
-        }
+        },
       );
     }
 
@@ -148,13 +179,13 @@ export class BrowserKlaroService extends KlaroService {
     const hideRegistrationVerification$ = this.configService.findByPropertyName(this.REGISTRATION_VERIFICATION_ENABLED_KEY).pipe(
       getFirstCompletedRemoteData(),
       map((remoteData) =>
-        !remoteData.hasSucceeded || !remoteData.payload || isEmpty(remoteData.payload.values) || remoteData.payload.values[0].toLowerCase() !== 'true'
+        !remoteData.hasSucceeded || !remoteData.payload || isEmpty(remoteData.payload.values) || remoteData.payload.values[0].toLowerCase() !== 'true',
       ),
     );
 
     const servicesToHide$: Observable<string[]> = observableCombineLatest([hideGoogleAnalytics$, hideRegistrationVerification$]).pipe(
       map(([hideGoogleAnalytics, hideRegistrationVerification]) => {
-        let servicesToHideArray: string[] = [];
+        const servicesToHideArray: string[] = [];
         if (hideGoogleAnalytics) {
           servicesToHideArray.push(this.GOOGLE_ANALYTICS_SERVICE_NAME);
         }
@@ -162,7 +193,7 @@ export class BrowserKlaroService extends KlaroService {
           servicesToHideArray.push(CAPTCHA_NAME);
         }
         return servicesToHideArray;
-      })
+      }),
     );
 
     this.translateService.setDefaultLang(environment.defaultLanguage);
@@ -204,7 +235,7 @@ export class BrowserKlaroService extends KlaroService {
       });
 
     this.consentsUpdates$.pipe(
-      filter(() => this.initialized)
+      filter(() => this.initialized),
     ).subscribe((consents) => this.isKlaroManagerWatching = hasValue(consents));
   }
 
@@ -221,7 +252,7 @@ export class BrowserKlaroService extends KlaroService {
           storageName = this.getStorageName(user.uuid);
         }
         return this.cookieService.get(storageName);
-      })
+      }),
     );
   }
 
@@ -256,7 +287,7 @@ export class BrowserKlaroService extends KlaroService {
           }
           return observableOf(undefined);
         }),
-        take(1)
+        take(1),
       );
   }
 
@@ -288,7 +319,7 @@ export class BrowserKlaroService extends KlaroService {
    * Show the cookie consent form
    */
   showSettings() {
-    void this.lazyKlaro.then(({show}) => show(this.klaroConfig, true));
+    void this.lazyKlaro.then(({ show }) => show(this.klaroConfig, true));
   }
 
   /**
@@ -298,7 +329,7 @@ export class BrowserKlaroService extends KlaroService {
     this.klaroConfig.services.forEach((app) => {
       this.klaroConfig.translations.zy[app.name] = {
         title: this.getTitleTranslation(app.name),
-        description: this.getDescriptionTranslation(app.name)
+        description: this.getDescriptionTranslation(app.name),
       };
       app.purposes.forEach((purpose) => {
         this.klaroConfig.translations.zy.purposes[purpose] = this.getPurposeTranslation(purpose);
@@ -356,12 +387,12 @@ export class BrowserKlaroService extends KlaroService {
       .pipe(
         take(1),
         switchMap((operations: Operation[]) => {
-            if (isNotEmpty(operations)) {
-              return this.ePersonService.patch(user, operations);
-            }
-            return observableOf(undefined);
+          if (isNotEmpty(operations)) {
+            return this.ePersonService.patch(user, operations);
           }
-        )
+          return observableOf(undefined);
+        },
+        ),
       ).subscribe();
   }
 
@@ -394,7 +425,7 @@ export class BrowserKlaroService extends KlaroService {
       return;
     }
 
-    this.lazyKlaro.then(({getManager}) => {
+    this.lazyKlaro.then(({ getManager }) => {
       const manager = getManager(this.klaroConfig);
       const consentsSubject$ = this.consentsUpdates$;
       let lastCookiesConsents;
@@ -406,7 +437,7 @@ export class BrowserKlaroService extends KlaroService {
             lastCookiesConsents = deepClone(consents);
             consentsSubject$.next(consents);
           }
-        }
+        },
       });
     });
   }

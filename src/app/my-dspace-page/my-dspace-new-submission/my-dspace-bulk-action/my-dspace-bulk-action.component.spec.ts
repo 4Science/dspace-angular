@@ -1,24 +1,35 @@
+import { CommonModule } from '@angular/common';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import { UntypedFormBuilder } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+import {
+  provideRouter,
+  Router,
+} from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
 import { of } from 'rxjs';
-import { TranslateModule } from '@ngx-translate/core';
-import { MyDSpaceBulkActionComponent } from './my-dspace-bulk-action.component';
+
+import { RequestService } from '../../../core/data/request.service';
 import { SearchService } from '../../../core/shared/search/search.service';
-import { SelectableListService } from '../../../shared/object-list/selectable-list/selectable-list.service';
-import { PoolTaskDataService } from '../../../core/tasks/pool-task-data.service';
-import { ProcessTaskResponse } from '../../../core/tasks/models/process-task-response';
 import { ClaimedTaskDataService } from '../../../core/tasks/claimed-task-data.service';
+import { ProcessTaskResponse } from '../../../core/tasks/models/process-task-response';
+import { PoolTaskDataService } from '../../../core/tasks/pool-task-data.service';
+import { TranslateLoaderMock } from '../../../shared/mocks/translate-loader.mock';
 import { NotificationsService } from '../../../shared/notifications/notifications.service';
+import { SelectableListService } from '../../../shared/object-list/selectable-list/selectable-list.service';
 import { NotificationsServiceStub } from '../../../shared/testing/notifications-service.stub';
-import { Router } from '@angular/router';
 import { RouterStub } from '../../../shared/testing/router.stub';
 import { SearchServiceStub } from '../../../shared/testing/search-service.stub';
-import { UntypedFormBuilder } from '@angular/forms';
-import { RequestService } from '../../../core/data/request.service';
-import { By } from '@angular/platform-browser';
+import { MyDSpaceBulkActionComponent } from './my-dspace-bulk-action.component';
 
 describe('MyDSpaceBulkActionComponent test suite', () => {
   let comp: MyDSpaceBulkActionComponent;
@@ -27,20 +38,20 @@ describe('MyDSpaceBulkActionComponent test suite', () => {
   const testAction = {
     _embedded: {
       indexableObject: {
-        type: ''
-      }
-    }
+        type: '',
+      },
+    },
   };
 
   const selectableListService = jasmine.createSpyObj('selectableListService', {
-    getSelectableList: of({selection: []}),
-    deselectAll: jasmine.createSpy('deselectAll')
+    getSelectableList: of({ selection: [] }),
+    deselectAll: jasmine.createSpy('deselectAll'),
   });
 
   const poolTaskService = new PoolTaskDataService(null, null, null, null);
 
   const claimedTaskService = jasmine.createSpyObj('claimedTaskService', {
-    submitTask: of(new ProcessTaskResponse(true))
+    submitTask: of(new ProcessTaskResponse(true)),
   });
 
   const requestService = jasmine.createSpyObj('requestService', {
@@ -49,9 +60,18 @@ describe('MyDSpaceBulkActionComponent test suite', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([])],
-      declarations: [MyDSpaceBulkActionComponent],
+      imports: [
+        CommonModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock,
+          },
+        }),
+        MyDSpaceBulkActionComponent,
+      ],
       providers: [
+        provideRouter([]),
         { provide: SelectableListService, useValue: selectableListService },
         { provide: RequestService, useValue: requestService },
         { provide: PoolTaskDataService, useValue: poolTaskService },
@@ -62,12 +82,12 @@ describe('MyDSpaceBulkActionComponent test suite', () => {
         {
           provide: NgbModal, useValue: {
             /* eslint-disable no-empty,@typescript-eslint/no-empty-function */
-            open: () => {}
-          }
+            open: () => {},
+          },
         },
         { provide: UntypedFormBuilder, useValue: new UntypedFormBuilder() },
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 
@@ -79,7 +99,7 @@ describe('MyDSpaceBulkActionComponent test suite', () => {
     fixture = TestBed.createComponent(MyDSpaceBulkActionComponent);
     comp = fixture.componentInstance;
     comp.processing$.next(false);
-    selectableListService.getSelectableList.and.returnValue(of({ selection: []}));
+    selectableListService.getSelectableList.and.returnValue(of({ selection: [] }));
 
     fixture.detectChanges();
   });
@@ -96,7 +116,7 @@ describe('MyDSpaceBulkActionComponent test suite', () => {
   it('claim button should be enabled', () => {
     const mockAction = testAction;
     mockAction._embedded.indexableObject.type = 'claimaction';
-    selectableListService.getSelectableList.and.returnValue(of({ selection: [mockAction]}));
+    selectableListService.getSelectableList.and.returnValue(of({ selection: [mockAction] }));
     comp.claimEnabled$ = of(true);
     fixture.detectChanges();
 
@@ -109,7 +129,7 @@ describe('MyDSpaceBulkActionComponent test suite', () => {
   it('claimed task buttons should be enabled', () => {
     const mockAction = testAction;
     mockAction._embedded.indexableObject.type = 'claimedtask';
-    selectableListService.getSelectableList.and.returnValue(of({ selection: [mockAction]}));
+    selectableListService.getSelectableList.and.returnValue(of({ selection: [mockAction] }));
     comp.claimedTaskActionsEnabled$ = of(true);
     fixture.detectChanges();
 
@@ -128,7 +148,7 @@ describe('MyDSpaceBulkActionComponent test suite', () => {
     const mockAction2 = testAction;
     mockAction._embedded.indexableObject.type = 'claimaction';
     mockAction2._embedded.indexableObject.type = 'claimedtask';
-    selectableListService.getSelectableList.and.returnValue(of({ selection: [mockAction, mockAction2]}));
+    selectableListService.getSelectableList.and.returnValue(of({ selection: [mockAction, mockAction2] }));
     comp.claimEnabled$ = of(true);
     comp.claimedTaskActionsEnabled$ = of(true);
     fixture.detectChanges();

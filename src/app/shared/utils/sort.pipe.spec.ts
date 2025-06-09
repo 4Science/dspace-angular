@@ -39,12 +39,12 @@ describe('SortPipe', () => {
     const inputArray = [
       { label: 'banana' },
       { label: 'apple' },
-      { label: 'cherry' }
+      { label: 'cherry' },
     ];
     const sortedArray = [
       { label: 'apple' },
       { label: 'banana' },
-      { label: 'cherry' }
+      { label: 'cherry' },
     ];
     expect(pipe.transform(inputArray, 'label')).toEqual(sortedArray);
   });
@@ -53,12 +53,12 @@ describe('SortPipe', () => {
     const inputArray = [
       { label: 'banana' },
       { label: 'apple' },
-      { label: 'cherry' }
+      { label: 'cherry' },
     ];
     const sortedArray = [
       { label: 'cherry' },
       { label: 'banana' },
-      { label: 'apple' }
+      { label: 'apple' },
     ];
     expect(pipe.transform(inputArray, 'label', 'desc')).toEqual(sortedArray);
   });

@@ -1,4 +1,19 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  NgClass,
+  NgForOf,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+
 import { hasValue } from '../empty.util';
 
 export enum SwitchColor {
@@ -21,8 +36,21 @@ export interface SwitchOption {
   selector: 'ds-switch',
   templateUrl: './switch.component.html',
   styleUrls: ['./switch.component.scss'],
+  standalone: true,
+  imports: [
+    TranslateModule,
+    NgClass,
+    NgForOf,
+    NgIf,
+  ],
 })
 export class SwitchComponent implements OnInit, OnChanges {
+
+  /**
+   * the aria label
+   */
+  @Input() ariaLabel: string;
+
   /**
    * The options available for the switch
    */
@@ -43,6 +71,8 @@ export class SwitchComponent implements OnInit, OnChanges {
    */
 
   public backgroundClass: string;
+
+
 
   ngOnInit() {
     this.backgroundClass = this.getBackgroundColorClass();

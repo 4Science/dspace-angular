@@ -1,6 +1,6 @@
 import { RemoteData } from '../../core/data/remote-data';
-import { Item } from '../../core/shared/item.model';
 import { Bitstream } from '../../core/shared/bitstream.model';
+import { Item } from '../../core/shared/item.model';
 
 export interface ViewerProvider {
   new <T extends ViewerComponent>(...args: any[]);

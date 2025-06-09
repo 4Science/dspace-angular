@@ -1,16 +1,19 @@
-import { FieldParser } from './field-parser';
-import { FormFieldMetadataValueObject } from '../models/form-field-metadata-value.model';
-import { DynamicTagModel, DynamicTagModelConfig } from '../ds-dynamic-form-ui/models/tag/dynamic-tag.model';
-import {DynamicFormControlLayout} from '@ng-dynamic-forms/core';
+import { DynamicFormControlLayout } from '@ng-dynamic-forms/core';
+
 import { environment } from '../../../../../environments/environment';
+import {
+  DynamicTagModel,
+  DynamicTagModelConfig,
+} from '../ds-dynamic-form-ui/models/tag/dynamic-tag.model';
+import { FormFieldMetadataValueObject } from '../models/form-field-metadata-value.model';
+import { FieldParser } from './field-parser';
 
 export class TagFieldParser extends FieldParser {
-  public modelFactory(fieldValue?: FormFieldMetadataValueObject | any, label?: boolean): any {
-    let clsTag: DynamicFormControlLayout;
-    clsTag = {
+  public modelFactory(fieldValue?: FormFieldMetadataValueObject, label?: boolean): any {
+    const clsTag: DynamicFormControlLayout = {
       grid: {
         container: 'mb-3 mt-3',
-      }
+      },
     };
     const tagModelConfig: DynamicTagModelConfig = this.initModel(null, label);
     if (this.configData.selectableMetadata[0].controlledVocabulary

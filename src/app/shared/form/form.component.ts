@@ -1,8 +1,27 @@
-import { distinctUntilChanged, filter, map } from 'rxjs/operators';
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormArray, FormControl, UntypedFormArray, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-
-import { Observable, Subscription } from 'rxjs';
+import {
+  AsyncPipe,
+  NgClass,
+  NgIf,
+} from '@angular/common';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import {
+  AbstractControl,
+  FormArray,
+  FormControl,
+  ReactiveFormsModule,
+  UntypedFormArray,
+  UntypedFormControl,
+  UntypedFormGroup,
+} from '@angular/forms';
+import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import {
   DynamicFormArrayGroupModel,
   DynamicFormArrayModel,
@@ -10,26 +29,42 @@ import {
   DynamicFormControlModel,
   DynamicFormGroupModel,
   DynamicFormLayout,
+  DynamicFormsCoreModule,
 } from '@ng-dynamic-forms/core';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import findIndex from 'lodash/findIndex';
-
-import { FormBuilderService } from './builder/form-builder.service';
-import { hasValue, isNotEmpty, isNotNull, isNull } from '../empty.util';
-import { FormService } from './form.service';
-import { FormEntry, FormError } from './form.reducer';
-import { FormFieldMetadataValueObject } from './builder/models/form-field-metadata-value.model';
+import { TranslateModule } from '@ngx-translate/core';
 import cloneDeep from 'lodash/cloneDeep';
-import {
-  DynamicScrollableDropdownModel
-} from './builder/ds-dynamic-form-ui/models/scrollable-dropdown/dynamic-scrollable-dropdown.model';
+import findIndex from 'lodash/findIndex';
 import isEqual from 'lodash/isEqual';
-import { DynamicRowGroupModel } from './builder/ds-dynamic-form-ui/models/ds-dynamic-row-group-model';
 import {
-  DynamicRelationGroupModel
-} from './builder/ds-dynamic-form-ui/models/relation-group/dynamic-relation-group.model';
-import { DynamicLinkModel } from './builder/ds-dynamic-form-ui/models/ds-dynamic-link.model';
+  Observable,
+  Subscription,
+} from 'rxjs';
+import {
+  distinctUntilChanged,
+  filter,
+  map,
+} from 'rxjs/operators';
+
+import { BtnDisabledDirective } from '../btn-disabled.directive';
+import {
+  hasValue,
+  isNotEmpty,
+  isNotNull,
+  isNull,
+} from '../empty.util';
+import { DsDynamicFormComponent } from './builder/ds-dynamic-form-ui/ds-dynamic-form.component';
 import { DynamicConcatModel } from './builder/ds-dynamic-form-ui/models/ds-dynamic-concat.model';
+import { DynamicLinkModel } from './builder/ds-dynamic-form-ui/models/ds-dynamic-link.model';
+import { DynamicRowGroupModel } from './builder/ds-dynamic-form-ui/models/ds-dynamic-row-group-model';
+import { DynamicRelationGroupModel } from './builder/ds-dynamic-form-ui/models/relation-group/dynamic-relation-group.model';
+import { DynamicScrollableDropdownModel } from './builder/ds-dynamic-form-ui/models/scrollable-dropdown/dynamic-scrollable-dropdown.model';
+import { FormBuilderService } from './builder/form-builder.service';
+import { FormFieldMetadataValueObject } from './builder/models/form-field-metadata-value.model';
+import {
+  FormEntry,
+  FormError,
+} from './form.reducer';
+import { FormService } from './form.service';
 
 export interface MetadataFields {
   [key: string]: FormFieldMetadataValueObject[]
@@ -42,7 +77,18 @@ export interface MetadataFields {
   exportAs: 'formComponent',
   selector: 'ds-form',
   styleUrls: ['form.component.scss'],
-  templateUrl: 'form.component.html'
+  templateUrl: 'form.component.html',
+  imports: [
+    DsDynamicFormComponent,
+    ReactiveFormsModule,
+    TranslateModule,
+    DynamicFormsCoreModule,
+    NgIf,
+    AsyncPipe,
+    BtnDisabledDirective,
+    NgClass,
+  ],
+  standalone: true,
 })
 export class FormComponent implements OnDestroy, OnInit {
 
@@ -146,7 +192,7 @@ export class FormComponent implements OnDestroy, OnInit {
   }*/
 
   private getFormGroup(): UntypedFormGroup {
-    if (!!this.parentFormModel) {
+    if (this.parentFormModel) {
       return this.formGroup.parent as UntypedFormGroup;
     }
 
@@ -200,13 +246,13 @@ export class FormComponent implements OnDestroy, OnInit {
           errors
             .filter((error: FormError) => findIndex(this.formErrors, {
               fieldId: error.fieldId,
-              fieldIndex: error.fieldIndex
+              fieldIndex: error.fieldIndex,
             }) === -1)
             .forEach((error: FormError) => {
               const { fieldId } = error;
               const { fieldIndex } = error;
               let field: AbstractControl;
-              if (!!this.parentFormModel) {
+              if (this.parentFormModel) {
                 field = this.formBuilderService.getFormControlById(fieldId, formGroup.parent as UntypedFormGroup, formModel, fieldIndex);
               } else {
                 field = this.formBuilderService.getFormControlById(fieldId, formGroup, formModel, fieldIndex);
@@ -223,13 +269,13 @@ export class FormComponent implements OnDestroy, OnInit {
           this.formErrors
             .filter((error: FormError) => findIndex(errors, {
               fieldId: error.fieldId,
-              fieldIndex: error.fieldIndex
+              fieldIndex: error.fieldIndex,
             }) === -1)
             .forEach((error: FormError) => {
               const { fieldId } = error;
               const { fieldIndex } = error;
               let field: AbstractControl;
-              if (!!this.parentFormModel) {
+              if (this.parentFormModel) {
                 field = this.formBuilderService.getFormControlById(fieldId, formGroup.parent as UntypedFormGroup, formModel, fieldIndex);
               } else {
                 field = this.formBuilderService.getFormControlById(fieldId, formGroup, formModel, fieldIndex);
@@ -242,7 +288,7 @@ export class FormComponent implements OnDestroy, OnInit {
             });
           this.formErrors = errors;
           this.changeDetectorRef.detectChanges();
-        })
+        }),
     );
   }
 
@@ -442,7 +488,7 @@ export class FormComponent implements OnDestroy, OnInit {
 
         if (filteredKeys.length > 0) {
           filteredKeys.forEach((oldValueKey) => {
-            const newValue = {...oldValue};
+            const newValue = { ...oldValue };
             const formattedKey = (oldValueKey as any).replaceAll('.', '_');
             const patchValue = {};
 
@@ -454,6 +500,6 @@ export class FormComponent implements OnDestroy, OnInit {
             }
           });
         }
-    });
+      });
   }
 }

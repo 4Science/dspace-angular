@@ -1,16 +1,54 @@
-import { Item } from '../../core/shared/item.model';
-import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
-import { NgbCarousel, NgbSlideEvent } from '@ng-bootstrap/ng-bootstrap';
+import {
+  AsyncPipe,
+  NgClass,
+  NgForOf,
+  NgIf,
+  NgStyle,
+  NgTemplateOutlet,
+} from '@angular/common';
+import {
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { RouterLink } from '@angular/router';
+import {
+  NgbCarousel,
+  NgbCarouselModule,
+  NgbSlideEvent,
+} from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject } from 'rxjs';
-import { CarouselOptions } from '../carousel/carousel-options.model';
+
+import {
+  APP_CONFIG,
+  AppConfig,
+} from '../../../config/app-config.interface';
+import { Item } from '../../core/shared/item.model';
 import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
+import { CarouselOptions } from '../carousel/carousel-options.model';
 import { HostWindowService } from '../host-window.service';
-import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
+import { ThumbnailSliderComponent } from '../slider/thumbnail-slider/thumbnail-slider.component';
 
 @Component({
-  selector: 'ds-carousel-with-thumbnails',
+  selector: 'ds-base-carousel-with-thumbnails',
   templateUrl: './carousel-with-thumbnails.component.html',
   styleUrls: ['./carousel-with-thumbnails.component.scss'],
+  standalone: true,
+  imports: [
+    NgbCarouselModule,
+    NgStyle,
+    AsyncPipe,
+    NgIf,
+    NgClass,
+    RouterLink,
+    NgTemplateOutlet,
+    TranslateModule,
+    ThumbnailSliderComponent,
+    NgForOf,
+  ],
 })
 export class CarouselWithThumbnailsComponent implements OnInit {
 

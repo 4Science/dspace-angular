@@ -1,19 +1,27 @@
-import { Component, Inject, OnInit } from '@angular/core';
-
+import { NgIf } from '@angular/common';
+import {
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
-import { FieldRenderingType, MetadataBoxFieldRendering } from '../metadata-box.decorator';
-import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
+import { OpenStreetMapComponent } from '../../../../../../../shared/open-street-map/open-street-map.component';
+import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
 
 @Component({
   selector: 'ds-open-street-map-rendering',
   templateUrl: './open-street-map-rendering.component.html',
   styleUrls: ['./open-street-map-rendering.component.scss'],
+  standalone: true,
+  imports: [
+    OpenStreetMapComponent,
+    NgIf,
+  ],
 })
-@MetadataBoxFieldRendering(FieldRenderingType.OSMAP)
 export class OpenStreetMapRenderingComponent extends RenderingTypeValueModelComponent implements OnInit {
 
   /**

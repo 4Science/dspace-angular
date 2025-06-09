@@ -1,19 +1,28 @@
+import {
+  Component,
+  Input,
+} from '@angular/core';
+
 import { ThemedComponent } from '../../../theme-support/themed.component';
-import { Component, Input } from '@angular/core';
-import { TwitterSection, TwitterSectionComponent } from './twitter-section.component';
+import {
+  TwitterSection,
+  TwitterSectionComponent,
+} from './twitter-section.component';
 
 @Component({
-  selector: 'ds-themed-twitter-section',
+  selector: 'ds-twitter-section',
   styleUrls: [],
   templateUrl: '../../../theme-support/themed.component.html',
+  standalone: true,
+  imports: [TwitterSectionComponent],
 })
 export class ThemedTwitterSectionComponent extends ThemedComponent<TwitterSectionComponent> {
 
   @Input()
-  sectionId: string;
+    sectionId: string;
 
   @Input()
-  twitterSection: TwitterSection;
+    twitterSection: TwitterSection;
 
   protected inAndOutputNames: (keyof TwitterSectionComponent & keyof this)[] = ['sectionId', 'twitterSection'];
 

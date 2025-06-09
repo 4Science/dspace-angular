@@ -13,6 +13,6 @@
         </div>
     </div>
 </ng-container>
-<ds-themed-loading
-        *ngIf="!(derivedSearchResult$ | async)"
-        [showMessage]="false"></ds-themed-loading>
+<ds-loading
+        *ngIf="(derivedSearchResult$ | async) === undefined"
+        [showMessage]="false"></ds-loading>

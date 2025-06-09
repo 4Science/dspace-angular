@@ -1,6 +1,11 @@
-import { LiveRegionService } from './live-region.service';
-import { fakeAsync, tick, flush } from '@angular/core/testing';
+import {
+  fakeAsync,
+  flush,
+  tick,
+} from '@angular/core/testing';
+
 import { UUIDService } from '../../core/shared/uuid.service';
+import { LiveRegionService } from './live-region.service';
 
 describe('liveRegionService', () => {
   let service: LiveRegionService;

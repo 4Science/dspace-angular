@@ -1,16 +1,15 @@
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicDatePickerModel } from '@ng-dynamic-forms/core';
 
+import { getMockTranslateService } from '../../../mocks/translate.service.mock';
 import { FormFieldModel } from '../models/form-field.model';
 import { FormFieldMetadataValueObject } from '../models/form-field-metadata-value.model';
-import { ParserOptions } from './parser-options';
 import { CalendarFieldParser } from './calendar-field-parser';
-import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
-import { getMockTranslateService } from '../../../mocks/translate.service.mock';
+import { ParserOptions } from './parser-options';
 
 describe('CalendarFieldParser test suite', () => {
   let field: FormFieldModel;
   let initFormValues: any = {};
-  let translateService = getMockTranslateService();
 
   const submissionId = '1234';
   const parserOptions: ParserOptions = {
@@ -18,13 +17,15 @@ describe('CalendarFieldParser test suite', () => {
     submissionScope: null,
     collectionUUID: null,
     typeField: 'type',
-    isInnerForm: false
+    isInnerForm: false,
   };
+
+  const translateService = getMockTranslateService();
 
   beforeEach(() => {
     field = {
       input: {
-        type: 'calendar'
+        type: 'calendar',
       },
       label: 'Date of Issue.',
       mandatory: 'true',
@@ -34,9 +35,9 @@ describe('CalendarFieldParser test suite', () => {
       selectableMetadata: [
         {
           metadata: 'date',
-        }
+        },
       ],
-      languageCodes: []
+      languageCodes: [],
     } as FormFieldModel;
 
   });

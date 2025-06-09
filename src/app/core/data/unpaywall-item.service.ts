@@ -1,34 +1,37 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { RemoteData } from './remote-data';
-import { UnpaywallItemVersionRequest } from '../shared/unpaywall-item-version.request.model';
-import { BaseDataService } from './base/base-data.service';
-import { dataService } from './base/data-service.decorator';
-import { DefaultChangeAnalyzer } from './default-change-analyzer.service';
-import { IdentifierData } from '../../shared/object-list/identifier-data/identifier-data.model';
-import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { HttpClient } from '@angular/common/http';
-import { NotificationsService } from '../../shared/notifications/notifications.service';
-import { ObjectCacheService } from '../cache/object-cache.service';
-import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
-import { RequestService } from './request.service';
+import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import {
+  filter,
+  map,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
+
+import { NotificationsService } from '../../shared/notifications/notifications.service';
+import { IdentifierData } from '../../shared/object-list/identifier-data/identifier-data.model';
+import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
+import { ObjectCacheService } from '../cache/object-cache.service';
 import { CoreState } from '../core-state.model';
-import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { HttpOptions } from '../dspace-rest/dspace-rest.service';
-import { GetRequest } from './request.models';
-import { RestRequest } from './rest-request.model';
+import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { Item } from '../shared/item.model';
-import { UNPAYWALL_ITEM_VERSION_REQUEST } from '../shared/unpaywall-item-version-request.resource-type';
-import { RequestEntryState } from './request-entry-state.model';
+import { UnpaywallItemVersionRequest } from '../shared/unpaywall-item-version.request.model';
 import { UnpaywallItemVersionModel } from '../submission/models/unpaywall-item-version.model';
+import { IdentifiableDataService } from './base/identifiable-data.service';
+import { DefaultChangeAnalyzer } from './default-change-analyzer.service';
+import { RemoteData } from './remote-data';
+import { GetRequest } from './request.models';
+import { RequestService } from './request.service';
+import { RequestEntryState } from './request-entry-state.model';
+import { RestRequest } from './rest-request.model';
 
 /**
  * Service responsible for interacting with the Unpaywall API.
  */
 @Injectable()
-@dataService(UNPAYWALL_ITEM_VERSION_REQUEST)
-export class UnpaywallItemService extends BaseDataService<UnpaywallItemVersionRequest> {
+export class UnpaywallItemService extends IdentifiableDataService<UnpaywallItemVersionRequest> {
 
   constructor(
     protected comparator: DefaultChangeAnalyzer<IdentifierData>,
@@ -38,7 +41,7 @@ export class UnpaywallItemService extends BaseDataService<UnpaywallItemVersionRe
     protected objectCache: ObjectCacheService,
     protected rdbService: RemoteDataBuildService,
     protected requestService: RequestService,
-    protected store: Store<CoreState>
+    protected store: Store<CoreState>,
   ) {
     super('items', requestService, rdbService, objectCache, halService);
   }
@@ -60,7 +63,7 @@ export class UnpaywallItemService extends BaseDataService<UnpaywallItemVersionRe
       switchMap((request: RestRequest) => this.rdbService.buildFromRequestUUID(request.uuid) as Observable<RemoteData<UnpaywallItemVersionRequest>>),
       switchMap(() => this.requestService.getByUUID(requestId)),
       filter(remoteDate => remoteDate.state === RequestEntryState.Success),
-      map(remoteDate => remoteDate.response.unCacheableObject.versions)
+      map(remoteDate => remoteDate.response.unCacheableObject.versions),
     );
   }
 }

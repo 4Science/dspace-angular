@@ -1,8 +1,14 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ChangeDetectorRef, NO_ERRORS_SCHEMA, PLATFORM_ID } from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import {
+  By,
+  DomSanitizer,
+} from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-
-import { By, DomSanitizer } from '@angular/platform-browser';
 
 import { MarkdownEditorComponent } from './markdown-editor.component';
 
@@ -12,16 +18,12 @@ describe('MarkdownEditorComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [MarkdownEditorComponent],
       imports: [
         RouterTestingModule.withRoutes([]),
+        MarkdownEditorComponent,
       ],
-      providers: [
-        DomSanitizer,
-        ChangeDetectorRef,
-        {provide: PLATFORM_ID, useValue: 'browser'},
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      providers: [DomSanitizer],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 

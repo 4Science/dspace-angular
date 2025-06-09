@@ -10,7 +10,7 @@
   </div>
 
   <div *ngFor="let identifier of (identifiers$ | async)" class="w-100 pt-1">
-    <div *ngIf="(identifier.identifierType=='doi')">
+    <div *ngIf="(identifier.identifierType==='doi')">
       <div class="col-12 col-md-3 float-left status-label font-weight-bold">
         {{identifier.identifierType.toLocaleUpperCase()}}
       </div>

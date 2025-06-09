@@ -1,4 +1,10 @@
 import {
+  AsyncPipe,
+  NgClass,
+  NgFor,
+  NgIf,
+} from '@angular/common';
+import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -11,19 +17,44 @@ import {
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
+import {
+  NgbDropdownModule,
+  NgbPaginationModule,
+  NgbTooltipModule,
+} from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import {
+  Observable,
+  of as observableOf,
+  Subscription,
+} from 'rxjs';
+import {
+  map,
+  startWith,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs/operators';
 
-import { Observable, of as observableOf, Subscription, switchMap } from 'rxjs';
-
-import { HostWindowService } from '../host-window.service';
-import { PaginationComponentOptions } from './pagination-component-options.model';
-import { SortDirection, SortOptions } from '../../core/cache/models/sort-options.model';
-import { hasValue, hasValueOperator } from '../empty.util';
-import { PaginationService } from '../../core/pagination/pagination.service';
-import { map, take, tap, startWith } from 'rxjs/operators';
-import { RemoteData } from '../../core/data/remote-data';
+import {
+  SortDirection,
+  SortOptions,
+} from '../../core/cache/models/sort-options.model';
 import { PaginatedList } from '../../core/data/paginated-list.model';
-import { ListableObject } from '../object-collection/shared/listable-object.model';
+import { RemoteData } from '../../core/data/remote-data';
+import { PaginationService } from '../../core/pagination/pagination.service';
+import { PaginationRouteParams } from '../../core/pagination/pagination-route-params.interface';
 import { ViewMode } from '../../core/shared/view-mode.model';
+import { BtnDisabledDirective } from '../btn-disabled.directive';
+import {
+  hasValue,
+  hasValueOperator,
+} from '../empty.util';
+import { HostWindowService } from '../host-window.service';
+import { ListableObject } from '../object-collection/shared/listable-object.model';
+import { RSSComponent } from '../rss-feed/rss.component';
+import { EnumKeysPipe } from '../utils/enum-keys-pipe';
+import { PaginationComponentOptions } from './pagination-component-options.model';
 
 interface PaginationDetails {
   range: string;
@@ -39,7 +70,9 @@ interface PaginationDetails {
   styleUrls: ['pagination.component.scss'],
   templateUrl: 'pagination.component.html',
   changeDetection: ChangeDetectionStrategy.Default,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
+  standalone: true,
+  imports: [NgIf, NgbDropdownModule, NgFor, NgClass, RSSComponent, NgbPaginationModule, NgbTooltipModule, AsyncPipe, TranslateModule, EnumKeysPipe, BtnDisabledDirective],
 })
 export class PaginationComponent implements OnChanges, OnDestroy, OnInit {
   /**
@@ -241,10 +274,10 @@ export class PaginationComponent implements OnChanges, OnDestroy, OnInit {
     this.pageSizeOptions = this.paginationOptions.pageSizeOptions;
     this.currentPage$ = this.paginationService.getCurrentPagination(this.id, this.paginationOptions).pipe(
       tap((currentPagination) => this.pageChange.emit(currentPagination.currentPage)),
-      map((currentPagination) => currentPagination.currentPage)
+      map((currentPagination) => currentPagination.currentPage),
     );
     this.pageSize$ = this.paginationService.getCurrentPagination(this.id, this.paginationOptions).pipe(
-      map((currentPagination) => currentPagination.pageSize)
+      map((currentPagination) => currentPagination.pageSize),
     );
 
     let sortOptions: SortOptions;
@@ -253,12 +286,12 @@ export class PaginationComponent implements OnChanges, OnDestroy, OnInit {
     } else {
       sortOptions = new SortOptions(this.defaultSortField, this.defaultsortDirection);
     }
-      this.sortDirection$ = this.paginationService.getCurrentSort(this.id, sortOptions).pipe(
-        map((currentSort) => currentSort.direction)
-      );
-      this.sortField$ = this.paginationService.getCurrentSort(this.id, sortOptions).pipe(
-        map((currentSort) => currentSort.field)
-      );
+    this.sortDirection$ = this.paginationService.getCurrentSort(this.id, sortOptions).pipe(
+      map((currentSort) => currentSort.direction),
+    );
+    this.sortField$ = this.paginationService.getCurrentSort(this.id, sortOptions).pipe(
+      map((currentSort) => currentSort.field),
+    );
   }
 
   constructor(
@@ -275,7 +308,7 @@ export class PaginationComponent implements OnChanges, OnDestroy, OnInit {
    *    The page being navigated to.
    */
   public doPageChange(page: number) {
-    this.updateParams({page: page.toString()});
+    this.updateParams({ page: page });
     this.emitPaginationChange();
     this.pageChange.emit(page);
   }
@@ -313,7 +346,7 @@ export class PaginationComponent implements OnChanges, OnDestroy, OnInit {
    * Update the current query params and optionally update the route
    * @param params
    */
-  private updateParams(params: {}) {
+  private updateParams(params: PaginationRouteParams) {
     this.paginationService.updateRoute(this.id, params, {}, this.retainScrollPosition);
   }
 
@@ -325,11 +358,10 @@ export class PaginationComponent implements OnChanges, OnDestroy, OnInit {
       hasValueOperator(),
       switchMap(() => this.paginationService.getCurrentPagination(this.id, this.paginationOptions)),
       map((currentPaginationOptions) => {
-        let firstItem: number;
         let lastItem: number;
         const pageMax = currentPaginationOptions.pageSize * currentPaginationOptions.currentPage;
 
-        firstItem = currentPaginationOptions.pageSize * (currentPaginationOptions.currentPage - 1) + 1;
+        const firstItem: number = currentPaginationOptions.pageSize * (currentPaginationOptions.currentPage - 1) + 1;
         if (collectionSize > pageMax) {
           lastItem = pageMax;
         } else {
@@ -369,7 +401,7 @@ export class PaginationComponent implements OnChanges, OnDestroy, OnInit {
    */
   get hasMultiplePages(): Observable<boolean> {
     return this.paginationService.getCurrentPagination(this.id, this.paginationOptions).pipe(
-      map((currentPaginationOptions) =>  this.collectionSize > currentPaginationOptions.pageSize)
+      map((currentPaginationOptions) =>  this.collectionSize > currentPaginationOptions.pageSize),
     );
   }
 
@@ -379,14 +411,14 @@ export class PaginationComponent implements OnChanges, OnDestroy, OnInit {
    */
   get shouldShowBottomPager(): Observable<boolean> {
     return this.hasMultiplePages.pipe(
-      map((hasMultiplePages) => hasMultiplePages || !this.hidePagerWhenSinglePage)
+      map((hasMultiplePages) => hasMultiplePages || !this.hidePagerWhenSinglePage),
     );
   }
 
   /**
    * Go to the previous page
    */
-   goPrev() {
+  goPrev() {
     this.prev.emit(true);
     this.updatePagination(-1);
   }
@@ -405,7 +437,7 @@ export class PaginationComponent implements OnChanges, OnDestroy, OnInit {
    */
   updatePagination(value: number) {
     this.paginationService.getCurrentPagination(this.id, this.paginationOptions).pipe(take(1)).subscribe((currentPaginationOptions) => {
-      this.updateParams({page: (currentPaginationOptions.currentPage + value).toString()});
+      this.updateParams({ page: (currentPaginationOptions.currentPage + value) });
     });
   }
 

@@ -1,14 +1,17 @@
-import { Component, Inject, OnInit } from '@angular/core';
-
+import { NgClass } from '@angular/common';
+import {
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
-import { FieldRenderingType, MetadataBoxFieldRendering } from '../metadata-box.decorator';
-import { MetadataLinkValue } from '../../../../../../models/cris-layout-metadata-link-value.model';
-import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
-import { Item } from '../../../../../../../core/shared/item.model';
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
+import { Item } from '../../../../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
 import { isEmpty } from '../../../../../../../shared/empty.util';
+import { MetadataLinkValue } from '../../../../../../models/cris-layout-metadata-link-value.model';
+import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
 
 /**
  * This component renders the links metadata fields.
@@ -18,9 +21,10 @@ import { isEmpty } from '../../../../../../../shared/empty.util';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'span[ds-link-authority]',
   templateUrl: './link-authority.component.html',
-  styleUrls: ['./link-authority.component.scss']
+  styleUrls: ['./link-authority.component.scss'],
+  standalone: true,
+  imports: [NgClass],
 })
-@MetadataBoxFieldRendering(FieldRenderingType.AUTHORITYLINK)
 export class LinkAuthorityComponent extends RenderingTypeValueModelComponent implements OnInit {
 
   /**
@@ -36,7 +40,7 @@ export class LinkAuthorityComponent extends RenderingTypeValueModelComponent imp
     @Inject('metadataValueProvider') public metadataValueProvider: MetadataValue,
     @Inject('renderingSubTypeProvider') public renderingSubTypeProvider: string,
     @Inject('tabNameProvider') public tabNameProvider: string,
-    protected translateService: TranslateService
+    protected translateService: TranslateService,
   ) {
     super(fieldProvider, itemProvider, metadataValueProvider, renderingSubTypeProvider, tabNameProvider, translateService);
   }
@@ -52,7 +56,7 @@ export class LinkAuthorityComponent extends RenderingTypeValueModelComponent imp
   getLinkFromValue(): MetadataLinkValue {
     return {
       href: this.metadataValue.authority,
-      text: this.metadataValue.value
+      text: this.metadataValue.value,
     };
   }
 

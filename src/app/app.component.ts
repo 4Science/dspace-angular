@@ -1,5 +1,9 @@
-import { distinctUntilChanged, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import {
+  AsyncPipe,
+  DOCUMENT,
+  isPlatformBrowser,
+  NgIf,
+} from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -9,33 +13,72 @@ import {
   OnInit,
   PLATFORM_ID,
 } from '@angular/core';
-import { NavigationCancel, NavigationEnd, NavigationStart, Router, RouterEvent, } from '@angular/router';
-
-import { BehaviorSubject, Observable } from 'rxjs';
-import { select, Store } from '@ngrx/store';
-import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NavigationCancel,
+  NavigationEnd,
+  NavigationStart,
+  Router,
+} from '@angular/router';
+import {
+  NgbModal,
+  NgbModalConfig,
+} from '@ng-bootstrap/ng-bootstrap';
+import {
+  select,
+  Store,
+} from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { HostWindowResizeAction } from './shared/host-window.actions';
-import { HostWindowState } from './shared/search/host-window.reducer';
-import { NativeWindowRef, NativeWindowService } from './core/services/window.service';
-import { isAuthenticationBlocking } from './core/auth/selectors';
-import { AuthService } from './core/auth/auth.service';
-import { CSSVariableService } from './shared/sass-helper/css-variable.service';
+import {
+  BehaviorSubject,
+  Observable,
+} from 'rxjs';
+import {
+  delay,
+  distinctUntilChanged,
+  map,
+  switchMap,
+  take,
+  withLatestFrom,
+} from 'rxjs/operators';
+
 import { environment } from '../environments/environment';
-import { models } from './core/core.module';
-import { ThemeService } from './shared/theme-support/theme.service';
-import { IdleModalComponent } from './shared/idle-modal/idle-modal.component';
-import { distinctNext } from './core/shared/distinct-next';
+import {
+  getEditItemPageRoute,
+  getWorkflowItemModuleRoute,
+  getWorkspaceItemModuleRoute,
+} from './app-routing-paths';
+import { AuthService } from './core/auth/auth.service';
+import { isAuthenticationBlocking } from './core/auth/selectors';
 import { RouteService } from './core/services/route.service';
-import { getEditItemPageRoute, getWorkflowItemModuleRoute, getWorkspaceItemModuleRoute } from './app-routing-paths';
-import { SocialService } from './social/social.service';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from './core/services/window.service';
+import { distinctNext } from './core/shared/distinct-next';
+import { TextSelectDirective } from './directives/text-select/text-select.directive';
+import { ThemedRootComponent } from './root/themed-root.component';
 import { DatadogRumService } from './shared/datadog-rum/datadog-rum.service';
+import { HostWindowResizeAction } from './shared/host-window.actions';
+import { IdleModalComponent } from './shared/idle-modal/idle-modal.component';
+import { CSSVariableService } from './shared/sass-helper/css-variable.service';
+import { HostWindowState } from './shared/search/host-window.reducer';
+import { ThemeService } from './shared/theme-support/theme.service';
+import { SocialComponent } from './social/social.component';
+import { SocialService } from './social/social.service';
 
 @Component({
   selector: 'ds-app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    ThemedRootComponent,
+    AsyncPipe,
+    NgIf,
+    SocialComponent,
+    TextSelectDirective,
+  ],
 })
 export class AppComponent implements OnInit, AfterViewInit {
   notificationOptions;
@@ -81,13 +124,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     private modalService: NgbModal,
     private modalConfig: NgbModalConfig,
     private socialService: SocialService,
-    private datadogRumService: DatadogRumService
+    private datadogRumService: DatadogRumService,
   ) {
     this.notificationOptions = environment.notifications;
     this.browserPlatform = isPlatformBrowser(this.platformId);
-
-    /* Use models object so all decorators are actually called */
-    this.models = models;
 
     if (this.browserPlatform) {
       this.trackIdleModal();
@@ -113,7 +153,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     this.isAuthBlocking$ = this.store.pipe(
       select(isAuthenticationBlocking),
-      distinctUntilChanged()
+      distinctUntilChanged(),
     );
 
     this.dispatchWindowSize(this._window.nativeWindow.innerWidth, this._window.nativeWindow.innerHeight);
@@ -128,11 +168,13 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.router.events.pipe(
-      switchMap((event: RouterEvent) => this.routeService.getCurrentUrl().pipe(
+      // delay(0) to prevent "Expression has changed after it was checked" errors
+      delay(0),
+      switchMap((event) => this.routeService.getCurrentUrl().pipe(
         take(1),
-        map((currentUrl) => [currentUrl, event])
-      ))
-    ).subscribe(([currentUrl, event]: [string, RouterEvent]) => {
+        map((currentUrl) => [currentUrl, event]),
+      )),
+    ).subscribe(([currentUrl, event]: [string, any]) => {
       if (event instanceof NavigationStart) {
         if (!(currentUrl.startsWith('/entities' || getEditItemPageRoute()) || currentUrl.startsWith(getWorkspaceItemModuleRoute()) || currentUrl.startsWith(getWorkflowItemModuleRoute()))) {
           distinctNext(this.isRouteLoading$, true);
@@ -154,7 +196,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   private dispatchWindowSize(width, height): void {
     this.store.dispatch(
-      new HostWindowResizeAction(width, height)
+      new HostWindowResizeAction(width, height),
     );
   }
 

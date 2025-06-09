@@ -1,27 +1,34 @@
-import { TestBed, waitForAsync } from '@angular/core/testing';
-import { Router } from '@angular/router';
-import { of as observableOf } from 'rxjs';
-import { AuthService } from '../core/auth/auth.service';
-import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
-import { FileService } from '../core/shared/file.service';
-import { HardRedirectService } from '../core/services/hard-redirect.service';
-import { Bitstream } from '../core/shared/bitstream.model';
-import { getForbiddenRoute } from '../app-routing-paths';
-import { SignpostingDataService } from '../core/data/signposting-data.service';
-import { ServerResponseService } from '../core/services/server-response.service';
 import { PLATFORM_ID } from '@angular/core';
-import { NativeWindowRef, NativeWindowService } from '../core/services/window.service';
-import { bitstreamDownloadRedirectGuard } from './bitstream-download-redirect.guard';
-import { ObjectCacheService } from '../core/cache/object-cache.service';
-import { UUIDService } from '../core/shared/uuid.service';
+import {
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { of as observableOf } from 'rxjs';
+
+import { getForbiddenRoute } from '../app-routing-paths';
+import { AuthService } from '../core/auth/auth.service';
 import { RemoteDataBuildService } from '../core/cache/builders/remote-data-build.service';
-import { HALEndpointService } from '../core/shared/hal-endpoint.service';
-import { DSOChangeAnalyzer } from '../core/data/dso-change-analyzer.service';
-import { BitstreamFormatDataService } from '../core/data/bitstream-format-data.service';
-import { NotificationsService } from '../shared/notifications/notifications.service';
+import { ObjectCacheService } from '../core/cache/object-cache.service';
 import { BitstreamDataService } from '../core/data/bitstream-data.service';
+import { BitstreamFormatDataService } from '../core/data/bitstream-format-data.service';
+import { DSOChangeAnalyzer } from '../core/data/dso-change-analyzer.service';
+import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
+import { SignpostingDataService } from '../core/data/signposting-data.service';
+import { HardRedirectService } from '../core/services/hard-redirect.service';
+import { ServerResponseService } from '../core/services/server-response.service';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../core/services/window.service';
+import { Bitstream } from '../core/shared/bitstream.model';
+import { FileService } from '../core/shared/file.service';
+import { HALEndpointService } from '../core/shared/hal-endpoint.service';
+import { UUIDService } from '../core/shared/uuid.service';
+import { NotificationsService } from '../shared/notifications/notifications.service';
 import { createSuccessfulRemoteDataObject$ } from '../shared/remote-data.utils';
+import { bitstreamDownloadRedirectGuard } from './bitstream-download-redirect.guard';
 
 describe('BitstreamDownloadRedirectGuard', () => {
   let resolver: any;
@@ -43,64 +50,64 @@ describe('BitstreamDownloadRedirectGuard', () => {
 
   let route = {
     params: {},
-    queryParams: {}
+    queryParams: {},
   };
   let state = {};
 
   const mocklink = {
     href: 'http://test.org',
     rel: 'test',
-    type: 'test'
+    type: 'test',
   };
 
   const mocklink2 = {
     href: 'http://test2.org',
     rel: 'test',
-    type: 'test'
+    type: 'test',
   };
 
   function init() {
     authService = jasmine.createSpyObj('authService', {
       isAuthenticated: observableOf(true),
-      setRedirectUrl: {}
+      setRedirectUrl: {},
     });
     authorizationService = jasmine.createSpyObj('authorizationSerivice', {
-      isAuthorized: observableOf(true)
+      isAuthorized: observableOf(true),
     });
 
     fileService = jasmine.createSpyObj('fileService', {
-      retrieveFileDownloadLink: observableOf('content-url-with-headers')
+      retrieveFileDownloadLink: observableOf('content-url-with-headers'),
     });
 
     hardRedirectService = jasmine.createSpyObj('fileService', {
-      redirect: {}
+      redirect: {},
     });
 
     halEndpointService = jasmine.createSpyObj('halEndpointService', {
-      getEndpoint: observableOf('https://rest.api/core')
+      getEndpoint: observableOf('https://rest.api/core'),
     });
 
     remoteDataBuildService = jasmine.createSpyObj('remoteDataBuildService', {
-      buildSingle: observableOf(new Bitstream())
+      buildSingle: observableOf(new Bitstream()),
     });
 
     uuidService = jasmine.createSpyObj('uuidService', {
-      generate: 'test-id'
+      generate: 'test-id',
     });
 
     bitstream = Object.assign(new Bitstream(), {
       uuid: 'bitstreamUuid',
       _links: {
-        content: {href: 'bitstream-content-link'},
-        self: {href: 'bitstream-self-link'},
-      }
+        content: { href: 'bitstream-content-link' },
+        self: { href: 'bitstream-self-link' },
+      },
     });
 
     router = jasmine.createSpyObj('router', ['navigateByUrl', 'createUrlTree']);
 
     store = jasmine.createSpyObj('store', {
       dispatch: {},
-      pipe: observableOf(true)
+      pipe: observableOf(true),
     });
 
     serverResponseService = jasmine.createSpyObj('ServerResponseService', {
@@ -108,20 +115,20 @@ describe('BitstreamDownloadRedirectGuard', () => {
     });
 
     signpostingDataService = jasmine.createSpyObj('SignpostingDataService', {
-      getLinks: observableOf([mocklink, mocklink2])
+      getLinks: observableOf([mocklink, mocklink2]),
     });
 
     objectCacheService = jasmine.createSpyObj('objectCacheService', {
-      getByHref: observableOf(null)
+      getByHref: observableOf(null),
     });
 
     bitstreamDataService = jasmine.createSpyObj('bitstreamDataService', {
       findById: createSuccessfulRemoteDataObject$(Object.assign(new Bitstream(), {
         _links: {
-          content: {href: 'bitstream-content-link'},
-          self: {href: 'bitstream-self-link'},
+          content: { href: 'bitstream-content-link' },
+          self: { href: 'bitstream-self-link' },
         },
-      }))
+      })),
     });
 
     resolver = bitstreamDownloadRedirectGuard;
@@ -130,25 +137,25 @@ describe('BitstreamDownloadRedirectGuard', () => {
   function initTestbed() {
     TestBed.configureTestingModule({
       providers: [
-        {provide: NativeWindowService, useValue: new NativeWindowRef()},
-        {provide: Router, useValue: router},
-        {provide: AuthorizationDataService, useValue: authorizationService},
-        {provide: AuthService, useValue: authService},
-        {provide: FileService, useValue: fileService},
-        {provide: HardRedirectService, useValue: hardRedirectService},
-        {provide: ServerResponseService, useValue: serverResponseService},
-        {provide: SignpostingDataService, useValue: signpostingDataService},
-        {provide: ObjectCacheService, useValue: objectCacheService},
-        {provide: PLATFORM_ID, useValue: 'server'},
-        {provide: UUIDService, useValue: uuidService},
-        {provide: Store, useValue: store},
-        {provide: RemoteDataBuildService, useValue: remoteDataBuildService},
-        {provide: HALEndpointService, useValue: halEndpointService},
-        {provide: DSOChangeAnalyzer, useValue: {}},
-        {provide: BitstreamFormatDataService, useValue: {}},
-        {provide: NotificationsService, useValue: {}},
-        {provide: BitstreamDataService, useValue: bitstreamDataService},
-      ]
+        { provide: NativeWindowService, useValue: new NativeWindowRef() },
+        { provide: Router, useValue: router },
+        { provide: AuthorizationDataService, useValue: authorizationService },
+        { provide: AuthService, useValue: authService },
+        { provide: FileService, useValue: fileService },
+        { provide: HardRedirectService, useValue: hardRedirectService },
+        { provide: ServerResponseService, useValue: serverResponseService },
+        { provide: SignpostingDataService, useValue: signpostingDataService },
+        { provide: ObjectCacheService, useValue: objectCacheService },
+        { provide: PLATFORM_ID, useValue: 'server' },
+        { provide: UUIDService, useValue: uuidService },
+        { provide: Store, useValue: store },
+        { provide: RemoteDataBuildService, useValue: remoteDataBuildService },
+        { provide: HALEndpointService, useValue: halEndpointService },
+        { provide: DSOChangeAnalyzer, useValue: {} },
+        { provide: BitstreamFormatDataService, useValue: {} },
+        { provide: NotificationsService, useValue: {} },
+        { provide: BitstreamDataService, useValue: bitstreamDataService },
+      ],
     });
   }
 
