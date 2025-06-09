@@ -1,6 +1,7 @@
 import {
   AsyncPipe,
   isPlatformBrowser,
+  Location,
   NgIf,
 } from '@angular/common';
 import {
@@ -8,6 +9,7 @@ import {
   Component,
   Inject,
   Input,
+  OnDestroy,
   OnInit,
   PLATFORM_ID,
 } from '@angular/core';
@@ -15,12 +17,18 @@ import {
   DomSanitizer,
   SafeResourceUrl,
 } from '@angular/platform-browser';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   Observable,
   of,
+  Subscription,
 } from 'rxjs';
 import {
+  distinctUntilChanged,
   map,
   take,
 } from 'rxjs/operators';
@@ -28,13 +36,24 @@ import {
 import { environment } from '../../../environments/environment';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { BundleDataService } from '../../core/data/bundle-data.service';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../core/services/window.service';
 import { Item } from '../../core/shared/item.model';
 import {
   HostWindowService,
   WidthCategory,
 } from '../../shared/host-window.service';
 import { MiradorViewerService } from './mirador-viewer.service';
-import { ActivatedRoute, Router } from '@angular/router';
+
+const IFRAME_UPDATE_URL_MESSAGE = 'update-url';
+
+interface IFrameMessageData {
+  type: string;
+  canvasId: string;
+  canvasIndex: string;
+}
 
 @Component({
   selector: 'ds-mirador-viewer',
@@ -251,7 +270,7 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
           // Regenerate iframe URL
           this.iframeViewerUrl = of('').pipe(map(() => this.setURL()));
         }
-      })
+      }),
     );
   }
 }
