@@ -9,6 +9,7 @@ import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
+import { MockComponent } from 'ng-mocks';
 import { of } from 'rxjs';
 
 import { APP_CONFIG } from '../../../config/app-config.interface';
@@ -51,6 +52,7 @@ describe('CarouselWithThumbnailsComponent', () => {
           },
         }),
         CarouselWithThumbnailsComponent,
+        MockComponent(ThumbnailSliderComponent),
       ],
       providers: [
         { provide: HostWindowService, useValue: hostWindowServicve },
@@ -62,17 +64,13 @@ describe('CarouselWithThumbnailsComponent', () => {
       schemas: [
         NO_ERRORS_SCHEMA,
       ],
-    })
-      .overrideComponent(CarouselWithThumbnailsComponent, {
-        remove: { imports: [ThumbnailSliderComponent] },
-      })
-      .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CarouselWithThumbnailsComponent);
     component = fixture.componentInstance;
-    component.carouselOptions = { title: 'title', link: 'title' } as CarouselOptions;
+    component.carouselOptions = { title: 'dc.title', link: 'title' } as CarouselOptions;
     component.itemList = [Object.assign(new Item(), itemMock)];
     routerMock.parseUrl.and.returnValue({ root: { children: { primary: { segments: ['1'] } } } });
     hostWindowServicve.isXs.and.returnValue(of(false));

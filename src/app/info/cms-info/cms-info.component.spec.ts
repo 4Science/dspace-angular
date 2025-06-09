@@ -5,6 +5,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
+import { MockComponent } from 'ng-mocks';
 import {
   Observable,
   of as observableOf,
@@ -23,6 +24,7 @@ import {
 import { Site } from 'src/app/core/shared/site.model';
 import { CookieServiceMock } from 'src/app/shared/mocks/cookie.service.mock';
 
+import { MarkdownViewerComponent } from '../../shared/markdown-viewer/markdown-viewer.component';
 import { CmsInfoComponent } from './cms-info.component';
 
 describe('CmsInfoComponent', () => {
@@ -66,8 +68,11 @@ describe('CmsInfoComponent', () => {
       },
     };
     await TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot()],
-      declarations: [ CmsInfoComponent ],
+      imports: [
+        TranslateModule.forRoot(),
+        CmsInfoComponent,
+        MockComponent(MarkdownViewerComponent),
+      ],
       providers: [
         LocaleService,
         ObjectCacheService,

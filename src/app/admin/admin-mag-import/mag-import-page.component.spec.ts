@@ -6,11 +6,14 @@ import {
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { MockComponent } from 'ng-mocks';
 
 import { ScriptDataService } from '../../core/data/processes/script-data.service';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
+import { SwitchComponent } from '../../shared/switch/switch.component';
 import { NotificationsServiceStub } from '../../shared/testing/notifications-service.stub';
+import { FileDropzoneNoUploaderComponent } from '../../shared/upload/file-dropzone-no-uploader/file-dropzone-no-uploader.component';
 import { MagImportPageComponent } from './mag-import-page.component';
 
 describe('AdminMagImportComponent', () => {
@@ -37,10 +40,12 @@ describe('AdminMagImportComponent', () => {
     });
 
     await TestBed.configureTestingModule({
-      declarations: [ MagImportPageComponent ],
       imports: [
         FormsModule,
         TranslateModule.forRoot(),
+        MagImportPageComponent,
+        MockComponent(SwitchComponent),
+        MockComponent(FileDropzoneNoUploaderComponent),
       ],
       providers: [
         { provide: NotificationsService, useValue: notificationService },
