@@ -1064,6 +1064,10 @@
 
   "browse.metadata.title": "Title",
 
+  "browse.metadata.srsc": "Subject Category",
+
+  "browse.metadata.rsoTitle": "Research Outputs Title",
+
   "browse.metadata.author.breadcrumbs": "Browse by Author",
 
   "browse.metadata.dateissued.breadcrumbs": "Browse by Date",
@@ -2406,6 +2410,8 @@
 
   "explore.index.type": "Type",
 
+  "explore.index.rsoTitle": "Title",
+
   "explore.search-section.infrastructure.title": "Infrastructure",
 
   "explore.search-section.fundings.title": "Search Projects",
@@ -2439,6 +2445,8 @@
   "explore.researchoutputs.breadcrumbs": "Research Outputs",
 
   "explore.researcherprofiles.breadcrumbs": "People",
+
+  "browse.metadata.rsoTitle.breadcrumbs": "Browse by Title",
 
   "explore.title": "Explore section",
   "export-schema.process.title": "Metadata Schema Export",
@@ -4821,9 +4829,9 @@
 
   "profile.card.access-token.delete": "Revoke token",
 
-  "profile.card.access-token.no-token-generated": "You don't have personal access token. Generate a personal access token for quick access to the DSpace-CRIS API.",
+  "profile.card.access-token.no-token-generated": "You don't have personal access token.\n A personal access token will allow to use advanced DSpace-CRIS features ( API ) and it's related to your user.",
 
-  "profile.card.access-token.token-generated": "You have already generated a personal access token.",
+  "profile.card.access-token.token-generated": "You have already generated a personal access token.\n A personal access token will allow to use advanced DSpace-CRIS features ( API ) and it's related to your user.",
 
   "profile.card.identify": "Identify",
 

@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Inject, Input, OnInit, OnDestroy, PLATFORM_ID } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ChangeDetectionStrategy, Component, Inject, Input, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Item } from '../../core/shared/item.model';
 import { environment } from '../../../environments/environment';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
@@ -58,7 +58,7 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
   /**
    * The url for the iframe.
    */
-  iframeViewerUrl: Observable<SafeResourceUrl>;
+  iframeViewerUrl: Observable<string>;
 
   /**
    * Sets the viewer to show or hide thumbnail side navigation menu.
@@ -89,7 +89,7 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
    * Creates the url for the Mirador iframe. Adds parameters for the displaying the search panel, query results,
    * or  multi-page thumbnail navigation.
    */
-  setURL() {
+  getURL() {
     // The path to the REST manifest endpoint.
     const manifestApiEndpoint = encodeURIComponent(environment.rest.baseUrl + '/iiif/'
       + this.object.id + '/manifest');
@@ -121,8 +121,7 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
       viewerPath += '&enableDownloadPlugin=true';
     }
 
-    // TODO: Should the query term be trusted here?
-    return this.sanitizer.bypassSecurityTrustResourceUrl(viewerPath);
+    return viewerPath;
   }
 
   ngOnInit(): void {
@@ -153,7 +152,7 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
         const observable = of('');
         this.iframeViewerUrl = observable.pipe(
           map((val) => {
-            return this.setURL();
+            return this.getURL();
           })
         );
       } else {
@@ -167,7 +166,7 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
             if (c > 1) {
               this.multi = true;
             }
-            return this.setURL();
+            return this.getURL();
           })
         );
       }
