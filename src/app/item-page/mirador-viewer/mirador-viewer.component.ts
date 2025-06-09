@@ -1,6 +1,7 @@
 import {
   AsyncPipe,
   isPlatformBrowser,
+  Location,
   NgIf,
 } from '@angular/common';
 import {
@@ -275,7 +276,7 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
     const data: IFrameMessageData = event.data;
 
     if (data.type === IFRAME_UPDATE_URL_MESSAGE) {
-      const currentPath = this.location.pathname;
+      const currentPath = this.location.path();
       const canvasId = data.canvasId;
       const canvasIndex = data.canvasIndex;
       // Use URL API for easier query param manipulation
@@ -285,7 +286,7 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
       url.searchParams.set('canvasIndex', canvasIndex);
       const newPathWithQuery = url.pathname + url.search;
       // Replace the current state (no reload, no new history entry)
-      this.location.replace(newPathWithQuery);
+      this.location.replaceState(newPathWithQuery);
     }
   };
 }

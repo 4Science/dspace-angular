@@ -10,6 +10,7 @@ import { resourcePolicyTargetResolver } from '../../shared/resource-policies/res
 import { EditItemPageComponent } from './edit-item-page.component';
 import {
   ITEM_EDIT_AUTHORIZATIONS_PATH,
+  ITEM_EDIT_CURATE_PATH,
   ITEM_EDIT_DELETE_PATH,
   ITEM_EDIT_MOVE_PATH,
   ITEM_EDIT_PRIVATE_PATH,
@@ -158,6 +159,10 @@ export const ROUTES: Route[] = [
       {
         path: ITEM_EDIT_PUBLIC_PATH,
         component: ItemPublicComponent,
+      },
+      {
+        path: ITEM_EDIT_CURATE_PATH,
+        component: ItemCurateComponent,
       },
       {
         path: ITEM_EDIT_DELETE_PATH,

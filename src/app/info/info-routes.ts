@@ -8,16 +8,29 @@ import { i18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.reso
 import { notifyInfoGuard } from '../core/coar-notify/notify-info/notify-info.guard';
 import { feedbackGuard } from '../core/feedback/feedback.guard';
 import { hasValue } from '../shared/empty.util';
+import { CmsInfoComponent } from './cms-info/cms-info.component';
 import { ThemedEndUserAgreementComponent } from './end-user-agreement/themed-end-user-agreement.component';
 import { ThemedFeedbackComponent } from './feedback/themed-feedback.component';
 import {
   COAR_NOTIFY_SUPPORT,
   END_USER_AGREEMENT_PATH,
   FEEDBACK_PATH,
+  GENERAL_INFORMATION_PATH,
+  HISTORY_DIGITAL_LID_PATH,
+  OFFERED_SERVICES_PATH,
+  ORGANIZATIONAL_STRUCTURE_PATH,
+  PRIVACY_PATH,
 } from './info-routing-paths';
 import { NotifyInfoComponent } from './notify-info/notify-info.component';
 
-
+function cmsInfoRoute(qualifier: string, schema: string): Route {
+  return {
+    path: qualifier,
+    component: CmsInfoComponent,
+    resolve: { breadcrumb: i18nBreadcrumbResolver },
+    data: { title: `info.${qualifier}.title`, breadcrumbKey: `info.${qualifier}`, schema: schema, qualifier: qualifier },
+  };
+}
 
 export const ROUTES: Routes = [
   {
@@ -45,4 +58,9 @@ export const ROUTES: Routes = [
       breadcrumbKey: 'info.coar-notify-support',
     },
   } : undefined,
+  environment.info.enableGeneralInformation ? cmsInfoRoute(GENERAL_INFORMATION_PATH, 'glam') : undefined,
+  environment.info.enableOfferedServices ? cmsInfoRoute(OFFERED_SERVICES_PATH, 'glam') : undefined,
+  environment.info.enableHistoryDigital ? cmsInfoRoute(HISTORY_DIGITAL_LID_PATH, 'glam') : undefined,
+  environment.info.enableOrgStructure ? cmsInfoRoute(ORGANIZATIONAL_STRUCTURE_PATH, 'glam') : undefined,
+  environment.info.enablePrivacyStatement ? cmsInfoRoute(PRIVACY_PATH, 'glam') : undefined,
 ].filter((route: Route) => hasValue(route));

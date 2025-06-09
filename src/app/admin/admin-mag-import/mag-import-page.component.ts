@@ -1,8 +1,15 @@
-import { Location } from '@angular/common';
+import {
+  Location,
+  NgIf,
+} from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 import { take } from 'rxjs/operators';
 
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
@@ -24,13 +31,23 @@ import {
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import {
   SwitchColor,
+  SwitchComponent,
   SwitchOption,
 } from '../../shared/switch/switch.component';
+import { FileDropzoneNoUploaderComponent } from '../../shared/upload/file-dropzone-no-uploader/file-dropzone-no-uploader.component';
 
 @Component({
   selector: 'ds-admin-mag-import',
   templateUrl: './mag-import-page.component.html',
   styleUrls: ['./mag-import-page.component.scss'],
+  standalone: true,
+  imports: [
+    TranslateModule,
+    SwitchComponent,
+    NgIf,
+    FileDropzoneNoUploaderComponent,
+    FormsModule,
+  ],
 })
 export class MagImportPageComponent {
   /**

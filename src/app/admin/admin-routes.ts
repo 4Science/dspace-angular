@@ -7,6 +7,7 @@ import { AdminCurationTasksComponent } from './admin-curation-tasks/admin-curati
 import { AdminEditUserAgreementComponent } from './admin-edit-user-agreement/admin-edit-user-agreement.component';
 import { BatchImportPageComponent } from './admin-import-batch-page/batch-import-page.component';
 import { ThemedMetadataImportPageComponent } from './admin-import-metadata-page/themed-metadata-import-page.component';
+import { MagImportPageComponent } from './admin-mag-import/mag-import-page.component';
 import {
   LDN_PATH,
   NOTIFICATIONS_MODULE_PATH,
@@ -65,6 +66,12 @@ export const ROUTES: Route[] = [
     component: BatchImportPageComponent,
     data: { title: 'admin.batch-import.title', breadcrumbKey: 'admin.batch-import' },
     canActivate: [genericAdministratorGuard],
+  },
+  {
+    path: 'mag-import',
+    resolve: { breadcrumb: i18nBreadcrumbResolver },
+    component: MagImportPageComponent,
+    data: { title: 'admin.mag-import.title', breadcrumbKey: 'admin.mag-import' },
   },
   {
     path: 'system-wide-alert',
