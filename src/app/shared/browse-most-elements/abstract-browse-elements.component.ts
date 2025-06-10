@@ -1,4 +1,4 @@
-import { isPlatformServer } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import {
   Component,
   inject,
@@ -12,6 +12,7 @@ import {
   mergeMap,
   Observable,
 } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { APP_CONFIG } from '../../../config/app-config.interface';
 import { SearchManager } from '../../core/browse/search-manager';
@@ -93,12 +94,17 @@ export abstract class AbstractBrowseElementsComponent implements OnInit, OnChang
 
   searchResultArray$: Observable<DSpaceObject[]>;
 
+  isLoading = true;
+  isBrowser: boolean;
+
   ngOnChanges() {
     this.paginatedSearchOptions$?.next(this.paginatedSearchOptions);
   }
 
   ngOnInit() {
-    if (isPlatformServer(this.platformId)) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+
+    if (!this.isBrowser) {
       return;
     }
     const followLinks = [];
@@ -126,6 +132,9 @@ export abstract class AbstractBrowseElementsComponent implements OnInit, OnChang
       toDSpaceObjectListRD(),
       getRemoteDataPayload(),
       getPaginatedListPayload(),
+      tap(() => {
+        this.isLoading = false;
+      }),
     );
   }
 

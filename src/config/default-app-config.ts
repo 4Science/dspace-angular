@@ -561,6 +561,7 @@ export class DefaultAppConfig implements AppConfig {
   // added to the item yet.
   bundle: BundleConfig = {
     standardBundles: ['ORIGINAL', 'THUMBNAIL', 'LICENSE'],
+    previewBundle: 'BRANDED_PREVIEW',
   };
   // Whether to enable media viewer for image and/or video Bitstreams (i.e. Bitstreams whose MIME type starts with "image" or "video").
   // For images, this enables a gallery viewer where you can zoom or page through images.

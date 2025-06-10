@@ -1,13 +1,23 @@
-import { AsyncPipe } from '@angular/common';
+import {
+  AsyncPipe,
+  isPlatformBrowser,
+} from '@angular/common';
 import {
   Component,
+  inject,
   OnInit,
+  PLATFORM_ID,
 } from '@angular/core';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import {
   BehaviorSubject,
   Observable,
+  of,
 } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {
+  catchError,
+  map,
+} from 'rxjs/operators';
 
 import { Bitstream } from '../../../../../../../core/shared/bitstream.model';
 import { getPaginatedListPayload } from '../../../../../../../core/shared/operators';
@@ -21,6 +31,7 @@ import { BitstreamRenderingModelComponent } from '../bitstream-rendering-model';
   standalone: true,
   imports: [
     AsyncPipe,
+    NgxSkeletonLoaderModule,
   ],
 })
 export class ImageComponent extends BitstreamRenderingModelComponent implements OnInit {
@@ -29,22 +40,29 @@ export class ImageComponent extends BitstreamRenderingModelComponent implements 
 
   imageUrl$: Observable<string>;
 
+  platformId = inject(PLATFORM_ID);
+
+  isLoading = true;
+  isBrowser: boolean;
+
   ngOnInit(): void {
+    this.isBrowser = isPlatformBrowser(this.platformId);
     this.getBitstreamsByItem().pipe(
       getPaginatedListPayload(),
       map((filteredBitstreams: Bitstream[]) => filteredBitstreams.length > 0 ? filteredBitstreams[0] : null),
+      catchError(() => {
+        this.isLoading = false;
+        return of(null);
+      }),
     ).subscribe((image) => {
       this.bitstream.next(image);
+      this.isLoading = false;
     });
 
     this.imageUrl$ = this.bitstream.asObservable().pipe(
       map((bitstream) => bitstream?._links?.content?.href),
     );
 
-  }
-
-  backgroundImageUrl(url: string) {
-    return `url('${url}')`;
   }
 
 }

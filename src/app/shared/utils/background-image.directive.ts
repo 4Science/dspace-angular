@@ -1,8 +1,11 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
   Directive,
   ElementRef,
+  Inject,
   Input,
   OnChanges,
+  PLATFORM_ID,
   SimpleChanges,
 } from '@angular/core';
 
@@ -17,11 +20,18 @@ export class BackgroundImageDirective implements OnChanges {
 
   @Input() dsBackgroundImage: Bitstream | RemoteData<Bitstream> | string;
 
-  constructor(private el: ElementRef) {
+  isBrowser: boolean = isPlatformBrowser(this.platformId);
+
+  constructor(
+    private el: ElementRef,
+    @Inject(PLATFORM_ID) private platformId: string,
+  ) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.setBackground();
+    if (this.isBrowser) {
+      this.setBackground();
+    }
   }
 
   private setBackground() {

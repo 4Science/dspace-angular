@@ -1,4 +1,8 @@
 :host {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
   ::ng-deep {
     .carousel-control-prev-icon, .carousel-control-next-icon {
       width: 32px;

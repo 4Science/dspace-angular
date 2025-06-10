@@ -1,13 +1,17 @@
 import {
   AsyncPipe,
+  isPlatformBrowser,
   NgForOf,
+  NgIf,
   SlicePipe,
 } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
+  Inject,
   Input,
   OnInit,
+  PLATFORM_ID,
 } from '@angular/core';
 import {
   Router,
@@ -17,6 +21,7 @@ import {
   TranslateModule,
   TranslateService,
 } from '@ngx-translate/core';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import {
   BehaviorSubject,
   from,
@@ -46,7 +51,10 @@ import { BitstreamFormat } from '../../../../core/shared/bitstream-format.model'
 import { Context } from '../../../../core/shared/context.model';
 import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
 import { Item } from '../../../../core/shared/item.model';
-import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
+import {
+  getFirstCompletedRemoteData,
+  getFirstSucceededRemoteData,
+} from '../../../../core/shared/operators';
 import { SearchService } from '../../../../core/shared/search/search.service';
 import { Site } from '../../../../core/shared/site.model';
 import { hasValue } from '../../../../shared/empty.util';
@@ -71,6 +79,8 @@ import { PaginatedSearchOptions } from '../../../search/models/paginated-search-
     TranslateModule,
     BackgroundImageDirective,
     RouterLink,
+    NgxSkeletonLoaderModule,
+    NgIf,
   ],
   standalone: true,
 })
@@ -104,6 +114,10 @@ export class GridSectionComponent implements OnInit {
 
   itemToImageHrefMap$ = new BehaviorSubject<Map<string, string>>(new Map<string, string>());
 
+  isBrowser: boolean;
+
+  isLoading = true;
+
   constructor(
     private searchService: SearchService,
     private locale: LocaleService,
@@ -111,10 +125,13 @@ export class GridSectionComponent implements OnInit {
     private translateService: TranslateService,
     private bitstreamDataService: BitstreamDataService,
     private cdr: ChangeDetectorRef,
+    @Inject(PLATFORM_ID) private platformId: string,
   ) {
   }
 
   ngOnInit() {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+
     const pagination = Object.assign(new PaginationComponentOptions(), {
       id: 'search-object-pagination',
       pageSize: 8,
@@ -123,7 +140,7 @@ export class GridSectionComponent implements OnInit {
     this.paginatedSearchOptions = new PaginatedSearchOptions({
       configuration: this.gridSection.discoveryConfigurationName,
       pagination: pagination,
-      sort: new SortOptions('dc.title', SortDirection.ASC),
+      sort: new SortOptions('cris.priority', SortDirection.ASC),
     });
 
     this.getMainBoxResults();
@@ -159,7 +176,7 @@ export class GridSectionComponent implements OnInit {
   private getSearchResults() {
     this.searchService
       .search(this.paginatedSearchOptions, null, true, true, followLink('thumbnail'))
-      .pipe(getFirstCompletedRemoteData())
+      .pipe(getFirstSucceededRemoteData())
       .subscribe(
         (response: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>) => {
           this.searchResults = response.payload.page;
@@ -169,6 +186,7 @@ export class GridSectionComponent implements OnInit {
   }
 
   private getAllBitstreams() {
+    this.isLoading = true;
     from(this.searchResults).pipe(
       map((itemSR: any) => itemSR.indexableObject),
       mergeMap((item: Item) => this.bitstreamDataService.showableByItem(
@@ -196,6 +214,7 @@ export class GridSectionComponent implements OnInit {
       }, new Map<string, string>()),
     ).subscribe((res) => {
       this.itemToImageHrefMap$.next(res);
+      this.isLoading = false;
       this.cdr.detectChanges();
     });
 

@@ -115,11 +115,11 @@ describe('ThumbnailComponent', () => {
       });
 
       it('should show a loading animation while isLoading$ is true', () => {
-        expect(de.query(By.css('ds-loading'))).toBeTruthy();
+        expect(de.query(By.css('ngx-skeleton-loader'))).toBeTruthy();
 
         comp.isLoading = false;
         fixture.detectChanges();
-        expect(fixture.debugElement.query(By.css('ds-loading'))).toBeFalsy();
+        expect(fixture.debugElement.query(By.css('ngx-skeleton-loader'))).toBeFalsy();
       });
 
       describe('with a thumbnail image', () => {
@@ -418,7 +418,7 @@ describe('ThumbnailComponent', () => {
 
     it('should start out with isLoading$ true', () => {
       expect(comp.isLoading).toBeTrue();
-      expect(de.query(By.css('ds-loading'))).toBeTruthy();
+      expect(de.query(By.css('ngx-skeleton-loader'))).toBeTruthy();
     });
 
     it('should not call setSrc', () => {

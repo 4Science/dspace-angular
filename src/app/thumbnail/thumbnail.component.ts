@@ -11,6 +11,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { of as observableOf } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -38,7 +39,7 @@ import { VarDirective } from '../shared/utils/var.directive';
   styleUrls: ['./thumbnail.component.scss'],
   templateUrl: './thumbnail.component.html',
   standalone: true,
-  imports: [VarDirective, CommonModule, ThemedLoadingComponent, TranslateModule, SafeUrlPipe],
+  imports: [VarDirective, CommonModule, ThemedLoadingComponent, TranslateModule, SafeUrlPipe, NgxSkeletonLoaderModule],
 })
 export class ThumbnailComponent implements OnChanges {
   /**

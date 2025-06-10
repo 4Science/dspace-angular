@@ -84,6 +84,7 @@ describe('CarouselComponent', () => {
     captionStyle: '',
     titleStyle: '',
     bundle: 'ORIGINAL',
+    showBlurryBackdrop: false,
     discoveryConfiguration: 'person',
     sortField: 'testField',
     sortDirection: SortDirection.DESC,
@@ -268,7 +269,7 @@ describe('CarouselComponent', () => {
     });
 
     it('should not render image', (done) => {
-      const image = fixture.debugElement.queryAll(By.css('.picsum-img-wrapper'));
+      const image = fixture.debugElement.queryAll(By.css('.picsum-img-wrapper > img'));
       expect(image.length).toBe(0);
       done();
     });

@@ -24,6 +24,7 @@ import {
 import { of } from 'rxjs';
 
 import { RemoteDataBuildService } from '../../../../core/cache/builders/remote-data-build.service';
+import { SortDirection } from '../../../../core/cache/models/sort-options.model';
 import { ObjectCacheService } from '../../../../core/cache/object-cache.service';
 import { BitstreamFormatDataService } from '../../../../core/data/bitstream-format-data.service';
 import { DSOChangeAnalyzer } from '../../../../core/data/dso-change-analyzer.service';
@@ -134,7 +135,9 @@ describe('GridSectionComponent', () => {
       discoveryConfigurationName: 'publication',
       componentType: 'grid',
       style: 'col-md-6',
-      'main-content-link': '',
+      mainContentLink: '',
+      order: SortDirection.ASC,
+      sortField: '',
     };
     component.site  = Object.assign(new Site(), {
       id: 'test-site',
