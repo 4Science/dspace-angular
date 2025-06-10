@@ -56,7 +56,8 @@
 </div>
 
 <div class="text-center play-pause-button">
-  <button [dsBtnDisabled]="isLoading$ | async" [attr.aria-label]="'carousel.play.pause' | translate" type="button" class="btn btn-sm toggle-paused" (click)="togglePaused()">
+  <button [dsBtnDisabled]="isLoading$ | async" [attr.aria-label]="'carousel.play.pause' | translate" type="button"
+          class="btn btn-sm toggle-paused" (click)="togglePaused()">
     <i class="fas fa-play" *ngIf="paused"></i>
     <i class="fas fa-pause" *ngIf="!paused"></i>
   </button>

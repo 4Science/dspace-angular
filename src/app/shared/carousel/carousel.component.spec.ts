@@ -84,6 +84,7 @@ describe('CarouselComponent', () => {
     captionStyle: '',
     titleStyle: '',
     bundle: 'ORIGINAL',
+    showBlurryBackdrop: false,
     discoveryConfiguration: 'person',
     sortField: 'testField',
     sortDirection: SortDirection.DESC,

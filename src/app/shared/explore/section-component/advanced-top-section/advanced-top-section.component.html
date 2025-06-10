@@ -20,7 +20,7 @@
       <ds-loading *ngIf="(loading$ | async)"></ds-loading>
     </div>
     <ds-browse-most-elements
-      *ngIf="(loading$ | async) === false"
+      *ngIf="(loading$ | async) !== true"
       [context]="context"
       [discoveryConfigurationsTotalElementsMap]="discoveryConfigurationsTotalElementsMap"
       [paginatedSearchOptions]="paginatedSearchOptions.asObservable() | async"

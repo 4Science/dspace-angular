@@ -57,6 +57,10 @@ import { SearchObjects } from '../../../search/models/search-objects.model';
     TranslateModule,
     NgIf,
     NgForOf,
+    NgIf,
+    TranslateModule,
+    ThemedLoadingComponent,
+    ThemedBrowseMostElementsComponent,
   ],
 })
 export class AdvancedTopSectionComponent implements OnInit {

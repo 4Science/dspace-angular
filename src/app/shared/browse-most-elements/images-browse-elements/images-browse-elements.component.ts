@@ -36,6 +36,7 @@ import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.com
     NgxSkeletonLoaderModule,
     NgIf,
     NgForOf,
+    NgIf,
   ],
 })
 export class ImagesBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnInit {

@@ -1,12 +1,12 @@
 <div class="text-center" *ngIf="initLoading$ | async">
   <ds-loading message="{{'loading.default' | translate}}"></ds-loading>
 </div>
-<div *ngIf="(initLoading$ | async) === false" class="container mt-5">
+<div *ngIf="(initLoading$ | async) !== true" class="container mt-5">
   <div class="text-center mb-4">
     {{ ('label.title.slider.' + discoveryConfiguration) | translate }}
   </div>
 
-  <div *ngIf="(itemsImagesLoading$ | async) === false"
+  <div *ngIf="(itemsImagesLoading$ | async) !== true"
        style="display: grid; justify-content: space-between; place-items: center;"
        [style.grid-template-columns]="'repeat(' + cardsPerPage + ', 1fr)'"
   >

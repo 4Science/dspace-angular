@@ -68,8 +68,8 @@ interface IFrameMessageData {
     TranslateModule,
     AsyncPipe,
     NgIf,
-    VarDirective,
     SafeUrlPipe,
+    VarDirective,
   ],
   standalone: true,
 })

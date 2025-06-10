@@ -40,9 +40,9 @@ export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMos
 
   @Input() showMetrics: boolean;
 
-  @Input() topSection: TopSection;
-
   @Input() showThumbnails: boolean;
+
+  @Input() topSection: TopSection;
 
   @Output() totalElements: EventEmitter<number> = new EventEmitter<number>();
 

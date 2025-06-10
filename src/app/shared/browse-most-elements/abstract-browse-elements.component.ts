@@ -94,8 +94,6 @@ export abstract class AbstractBrowseElementsComponent implements OnInit, OnChang
 
   searchResultArray$: Observable<DSpaceObject[]>;
 
-  // searchResults: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>;
-
   public cardLayoutMode = LayoutModeEnum.CARD;
 
   isLoading = true;

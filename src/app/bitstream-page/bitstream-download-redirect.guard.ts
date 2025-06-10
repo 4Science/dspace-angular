@@ -87,7 +87,7 @@ export const bitstreamDownloadRedirectGuard: CanActivateFn = (
         // Either we have an access token, or we are logged in, or we are not logged in.
         // For now, the access token does not care if we are logged in or not.
         if (hasValue(accessToken)) {
-          hardRedirectService.redirect(bitstream._links.content.href + '?accessToken=' + accessToken);
+          hardRedirectService.redirect(bitstream._links.content.href + '?accessToken=' + accessToken, null, true);
           return false;
         } else if (isLoggedIn) {
           return router.createUrlTree([getForbiddenRoute()]);

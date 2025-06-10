@@ -47,6 +47,7 @@ import { SliderComponent } from '../slider.component';
     ThemedLoadingComponent,
     TranslateModule,
     AsyncPipe,
+    TranslateModule,
     NgxSkeletonLoaderModule,
     BtnDisabledDirective,
     NgIf,
