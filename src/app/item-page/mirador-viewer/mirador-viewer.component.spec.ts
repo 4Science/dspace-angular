@@ -1,7 +1,4 @@
-import {
-  NO_ERRORS_SCHEMA,
-  PLATFORM_ID,
-} from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import {
   ComponentFixture,
   TestBed,
@@ -12,8 +9,6 @@ import {
   TranslateModule,
 } from '@ngx-translate/core';
 import { of as observableOf } from 'rxjs';
-import { SafeUrlPipe } from 'src/app/shared/utils/safe-url-pipe';
-import { VarDirective } from 'src/app/shared/utils/var.directive';
 
 import { APP_CONFIG } from '../../../config/app-config.interface';
 import { environment } from '../../../environments/environment';

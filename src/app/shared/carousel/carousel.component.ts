@@ -163,7 +163,7 @@ export class CarouselComponent implements OnInit {
   carouselItems$: BehaviorSubject<ItemSearchResult[]> = new BehaviorSubject<ItemSearchResult[]>([]);
 
 
-  private platformId = inject(PLATFORM_ID);
+  protected platformId = inject(PLATFORM_ID);
 
   private paginationOptionId: string;
 

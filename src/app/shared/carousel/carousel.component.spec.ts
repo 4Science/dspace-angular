@@ -90,7 +90,6 @@ describe('CarouselComponent', () => {
     sortDirection: SortDirection.DESC,
     numberOfItems: 5,
     order: 'testOrder',
-    showBlurryBackdrop: false,
   };
 
   const firstItemResult = Object.assign(new ItemSearchResult(), {
