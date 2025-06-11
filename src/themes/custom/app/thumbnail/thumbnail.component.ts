@@ -7,6 +7,7 @@ import { ThemedLoadingComponent } from '../../../../app/shared/loading/themed-lo
 import { SafeUrlPipe } from '../../../../app/shared/utils/safe-url-pipe';
 import { VarDirective } from '../../../../app/shared/utils/var.directive';
 import { ThumbnailComponent as BaseComponent } from '../../../../app/thumbnail/thumbnail.component';
+import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
 
 @Component({
   selector: 'ds-themed-thumbnail',
