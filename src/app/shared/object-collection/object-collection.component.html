@@ -37,7 +37,7 @@
                   (contentChange)="contentChange.emit($event)"
                   (customEvent)="customEvent.emit($event)"
                   (prev)="goPrev()"
-                  (next)="goNext()"
+                  (next)="goNext()">
   </ds-object-list>
 }
 
@@ -58,7 +58,7 @@
                   (pageChange)="onPageChange($event)"
                   (pageSizeChange)="onPageSizeChange($event)"
                   (sortDirectionChange)="onSortDirectionChange($event)"
-                  (sortFieldChange)="onSortFieldChange($event)"
+                  (sortFieldChange)="onSortFieldChange($event)">
   </ds-object-grid>
 }
 
@@ -75,7 +75,7 @@
                   [showPaginator]="showPaginator"
                   [showThumbnails]="showThumbnails"
                   [showWorkflowStatistics]="showWorkflowStatistics"
-                  (contentChange)="contentChange.emit($event)"
+                  (contentChange)="contentChange.emit($event)">
 </ds-object-detail>
 }
 
@@ -93,6 +93,6 @@
                     (pageChange)="onPageChange($event)"
                     (pageSizeChange)="onPageSizeChange($event)"
                     (sortDirectionChange)="onSortDirectionChange($event)"
-                    (sortFieldChange)="onSortFieldChange($event)"
+                    (sortFieldChange)="onSortFieldChange($event)">
   </ds-object-table>
 }
