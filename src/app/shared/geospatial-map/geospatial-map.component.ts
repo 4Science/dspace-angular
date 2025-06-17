@@ -133,9 +133,7 @@ export class GeospatialMapComponent implements AfterViewInit, OnInit, OnDestroy 
    */
   private initMap(): void {
     // 'Import' leaflet packages in a browser-mode-only way to avoid issues with SSR
-    const L = require('leaflet'); require('leaflet.markercluster'); require('leaflet-providers');
-
-    console.log(`GeospatialMapComponent.initMap()`, L); // todo: remove this
+    const L = require('leaflet'); require('leaflet.markercluster'); require('leaflet-providers'); require('leaflet-draw');
 
     // Set better default icons
     L.Icon.Default.mergeOptions({
@@ -143,8 +141,6 @@ export class GeospatialMapComponent implements AfterViewInit, OnInit, OnDestroy 
       iconUrl: 'assets/images/marker-icon-2x.png',
       shadowUrl: 'assets/images/marker-shadow.png',
     });
-    // Define map object
-    this.map = L.map;
 
     // Get map by query selector - this is important NOT to use an id like 'map' because we might draw
     // many maps within a single page
@@ -154,6 +150,7 @@ export class GeospatialMapComponent implements AfterViewInit, OnInit, OnDestroy 
       center: this.DEFAULT_CENTRE_POINT,
       zoom: 11,
     });
+
     const tileProviders = environment.geospatialMapViewer.tileProviders;
     for (let i = 0; i < tileProviders.length; i++) {
       // Add tiles to the map
@@ -164,7 +161,32 @@ export class GeospatialMapComponent implements AfterViewInit, OnInit, OnDestroy 
       tiles.addTo(this.map);
     }
 
-    // Call add markers function as appropriate (metadata values, facet results, search results)
+    // Add Leaflet Draw controls
+    const drawControl = new L.Control.Draw({
+      draw: {
+        polygon: true,
+        circle: true,
+        rectangle: false,
+        polyline: false,
+        marker: false,
+        circlemarker: false,
+      },
+    });
+    this.map.addControl(drawControl);
+
+    // Handle draw:created event
+    this.map.on(L.Draw.Event.CREATED, (event: any) => {
+      const layer = event.layer;
+      this.map.addLayer(layer);
+
+      if (event.layerType === 'polygon') {
+        console.log('Polygon coordinates:', layer.getLatLngs());
+      } else if (event.layerType === 'circle') {
+        console.log('Circle center:', layer.getLatLng());
+        console.log('Circle radius:', layer.getRadius());
+      }
+    });
+
     if (hasValue(this.coordinates)) {
       this.drawSimpleValueMarkers(L);
     } else if (hasValue(this.facetValues)) {
@@ -175,7 +197,6 @@ export class GeospatialMapComponent implements AfterViewInit, OnInit, OnDestroy 
     } else if (hasValue(this.mapInfo)) {
       this.drawSearchResultMarkers(L);
     }
-
   }
 
   /**
