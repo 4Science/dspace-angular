@@ -23,7 +23,7 @@ import { GeospatialMapComponent } from '../geospatial-map/geospatial-map.compone
 import { GeospatialMapDetail } from '../geospatial-map/models/geospatial-map-detail.model';
 import { ItemSearchResult } from '../object-collection/shared/item-search-result.model';
 import { ListableObject } from '../object-collection/shared/listable-object.model';
-import { parseGeoJsonFromMetadataValue } from '../utils/geospatial.functions';
+import { parseGeoJsonFromWKTMetadataValue } from '../utils/geospatial.functions';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.Default,
@@ -62,7 +62,8 @@ export class ObjectGeospatialMapComponent {
    * Get current objects and extract geospatial metadata to use in the view
    */
   get mapInfo(): GeospatialMapDetail[] {
-    const geospatialFields = environment.geospatialMapViewer.spatialMetadataFields;
+    const geospatialFields = environment.geospatialMapViewer.spatialMetadataFields || [];
+    const latLongFields = environment.geospatialMapViewer.latLongMetadataFields || [];
     const mapInfo: GeospatialMapDetail[] = [];
     this.objects.payload.page.forEach(obj => {
       for (let i = 0; i < geospatialFields.length; i++) {
@@ -72,10 +73,23 @@ export class ObjectGeospatialMapComponent {
             const dso = (obj as ItemSearchResult).indexableObject as Item;
             const value = m[j].value;
             if (hasValue(value) && hasValue(dso)) {
-              const mapDetail = this.parseMapDetail(value, dso);
+              const mapDetail = this.isWKT(value) ? this.parseWKTMapDetail(value, dso) : this.parseCoordinatesMapDetail(value, dso);
               if (hasValue(mapDetail)) {
                 mapInfo.push(mapDetail);
               }
+            }
+          }
+        }
+      }
+      for (let i = 0; i < latLongFields.length; i++) {
+        const lat = (obj as ItemSearchResult).indexableObject.metadata[latLongFields[i].latitude];
+        const lng = (obj as ItemSearchResult).indexableObject.metadata[latLongFields[i].longitude];
+        for (let j = 0; j < lat?.length; j++) {
+          const dso = (obj as ItemSearchResult).indexableObject as Item;
+          if (hasValue(lat[j].value) && hasValue(lng[j].value) && hasValue(dso)) {
+            const mapDetail = this.parseLatLongMapDetail(lat[j].value, lng[j].value, dso);
+            if (hasValue(mapDetail)) {
+              mapInfo.push(mapDetail);
             }
           }
         }
@@ -91,13 +105,13 @@ export class ObjectGeospatialMapComponent {
    * @param dso
    * @private
    */
-  private parseMapDetail(value: string, dso: Item) {
+  private parseWKTMapDetail(value: string, dso: Item) {
     try {
       const geospatialMapDetail = new GeospatialMapDetail();
       geospatialMapDetail.route = getItemPageRoute(dso);
       geospatialMapDetail.title = dso.name;
       value = value.replace(/\+/g, '');
-      const point = parseGeoJsonFromMetadataValue(value);
+      const point = parseGeoJsonFromWKTMetadataValue(value);
       // Do some simple validation and log a console error if not valid
       if (!hasValue(point) || point.type !== 'Point'
         || !hasValue(point.coordinates)
@@ -117,6 +131,51 @@ export class ObjectGeospatialMapComponent {
       console.warn(`Could not parse point from WKT string: ${value}, error: ${(e as Error).message}`);
     }
     return null;
+  }
+
+  private parseCoordinatesMapDetail(value: string, dso: Item): GeospatialMapDetail {
+    const geospatialMapDetail = new GeospatialMapDetail();
+    geospatialMapDetail.route = getItemPageRoute(dso);
+    geospatialMapDetail.title = dso.name;
+    const coordinates = value.split(',').map(coord => parseFloat(coord.trim()));
+    if (coordinates.length === 2 && !isNaN(coordinates[0]) && !isNaN(coordinates[1])) {
+      geospatialMapDetail.points.push({
+        latitude: coordinates[0],
+        longitude: coordinates[1],
+        url: geospatialMapDetail.route,
+        title: geospatialMapDetail.title,
+      });
+      return geospatialMapDetail;
+    } else {
+      console.warn(`Invalid coordinates in value: ${value}`);
+      return null;
+    }
+  }
+
+  private parseLatLongMapDetail(lat: string, lng: string, dso: Item): GeospatialMapDetail {
+    const geospatialMapDetail = new GeospatialMapDetail();
+    geospatialMapDetail.route = getItemPageRoute(dso);
+    geospatialMapDetail.title = dso.name;
+    const latitude = parseFloat(lat.trim());
+    const longitude = parseFloat(lng.trim());
+    if (!isNaN(latitude) && !isNaN(longitude)) {
+      geospatialMapDetail.points.push({
+        latitude,
+        longitude,
+        url: geospatialMapDetail.route,
+        title: geospatialMapDetail.title,
+      });
+      return geospatialMapDetail;
+    } else {
+      console.warn(`Invalid latitude or longitude in value: ${lat}, ${lng}`);
+      return null;
+    }
+  }
+
+  private isWKT(value: string): boolean {
+    // A simple check to see if the value starts with a WKT type, e.g. "POINT", "LINESTRING", etc.
+    const wktTypes = ['POINT', 'LINESTRING', 'POLYGON', 'MULTIPOINT', 'MULTILINESTRING', 'MULTIPOLYGON'];
+    return wktTypes.some(type => value.trim().toUpperCase().startsWith(type));
   }
 
 }

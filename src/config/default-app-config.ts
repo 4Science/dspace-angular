@@ -1084,10 +1084,14 @@ export class DefaultAppConfig implements AppConfig {
     spatialMetadataFields: [
       'dcterms.spatial',
     ],
+    latLongMetadataFields: [{
+      latitude: 'dim.coordinateGeografiche.Latitudine',
+      longitude: 'dim.coordinateGeografiche.Longitudine2',
+    }],
     spatialFacetDiscoveryConfiguration: 'geospatial',
     spatialPointFilterName: 'point',
     enableItemPageFields: false,
-    enableSearchViewMode: false,
+    enableSearchViewMode: true,
     enableBrowseMap: false,
     tileProviders: [
       'OpenStreetMap.Mapnik',
