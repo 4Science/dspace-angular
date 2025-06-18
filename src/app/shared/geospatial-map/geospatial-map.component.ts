@@ -26,6 +26,7 @@ import {
 } from '../empty.util';
 import { FacetValue } from '../search/models/facet-value.model';
 import { FacetValues } from '../search/models/facet-values.model';
+import { addOperatorToFilterValue } from '../search/search.utils';
 import { GeospatialMapDetail } from './models/geospatial-map-detail.model';
 
 @Component({
@@ -208,8 +209,9 @@ export class GeospatialMapComponent implements AfterViewInit, OnInit, OnDestroy 
       polygons.push(polygon);
     });
     const parsedPolygons = JSON.stringify(polygons);
+    const polygonsFilter = addOperatorToFilterValue(parsedPolygons, 'polygon');
     this.router.navigate([], {
-      queryParams: { 'spc.page': 1, 'f.geo_p': parsedPolygons + ',polygon', 'scope': this.currentScope },
+      queryParams: { 'spc.page': 1, 'f.geo_p': polygonsFilter, 'scope': this.currentScope },
       queryParamsHandling: 'merge',
     });
   }
