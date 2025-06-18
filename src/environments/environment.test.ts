@@ -817,6 +817,10 @@ export const environment: BuildConfig = {
     spatialMetadataFields: [
       'dcterms.spatial',
     ],
+    latLongMetadataFields: [{
+      latitude: 'dim.coordinateGeografiche.Latitudine',
+      longitude: 'dim.coordinateGeografiche.Longitudine',
+    }],
     spatialFacetDiscoveryConfiguration: 'geospatial',
     spatialPointFilterName: 'point',
     enableItemPageFields: true,

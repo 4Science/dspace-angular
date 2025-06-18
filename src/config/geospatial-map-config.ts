@@ -5,12 +5,12 @@ export class GeospatialMapConfig implements Config {
   /**
    * The metadata fields which hold WKT points, to use when drawing a map
    */
-  public spatialMetadataFields: string[];
+  public spatialMetadataFields?: string[];
 
   /**
    * The metadata fields which hold plain latitude and longitude values, to use when drawing a map
    */
-  public latLongMetadataFields: { latitude: string, longitude: string }[];
+  public latLongMetadataFields?: { latitude: string, longitude: string }[];
 
   /**
    * Discovery search configuration which will return facets of geospatial points
