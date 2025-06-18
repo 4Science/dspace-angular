@@ -6238,6 +6238,10 @@
 
   "search.filters.remove": "Remove filter of type {{ type }} with value {{ value }}",
 
+  "search.filters.remove.polygon": "Remove map area filter",
+
+  "search.filters.applied.f.polygon": "Map area",
+
   "search.filters.applied.f.title": "Title",
 
   "search.filters.applied.f.author": "Author",
