@@ -8,12 +8,18 @@ import {
   waitForAsync,
 } from '@angular/core/testing';
 import {
+  provideRouter,
+  Router,
+} from '@angular/router';
+import {
   TranslateModule,
   TranslateService,
 } from '@ngx-translate/core';
+import { LatLng } from 'leaflet';
 import { of } from 'rxjs';
 
 import { getMockTranslateService } from '../mocks/translate.service.mock';
+import { addOperatorToFilterValue } from '../search/search.utils';
 import { GeospatialMapComponent } from './geospatial-map.component';
 
 let elRef: ElementRef;
@@ -22,10 +28,12 @@ describe('GeospatialMapComponent', () => {
   let component: GeospatialMapComponent;
   let fixture: ComponentFixture<GeospatialMapComponent>;
 
+  let router: Router;
+
   beforeEach( waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [GeospatialMapComponent, TranslateModule.forRoot()],
-      providers: [{ provide: TranslateService, useValue: getMockTranslateService() }],
+      providers: [{ provide: TranslateService, useValue: getMockTranslateService() }, provideRouter([])],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
       .compileComponents();
@@ -34,6 +42,7 @@ describe('GeospatialMapComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(GeospatialMapComponent);
     component = fixture.componentInstance;
+    router = TestBed.inject(Router);
     fixture.detectChanges();
   });
 
@@ -207,6 +216,38 @@ describe('GeospatialMapComponent', () => {
       waitForAsync(() => {
         expect(layerCount).toEqual(6);
       });
+    });
+
+    it('parseLayerLatLngsAndSendAsQueryParams should correctly parse and navigate with valid polygon data', () => {
+      const mockRouter = spyOn(router, 'navigate');
+      const layerLatLngs = [
+        [
+          { lat: 10, lng: 20 },
+          { lat: 15, lng: 25 },
+          { lat: 10, lng: 20 },
+        ],
+      ] as LatLng[][];
+
+      component.parseLayerLatLngsAndSendAsQueryParams(layerLatLngs);
+
+      const expectedPolygons = JSON.stringify([[[20, 10], [25, 15], [20, 10], [20, 10]]]);
+      expect(mockRouter).toHaveBeenCalledWith([], {
+        queryParams: {
+          'spc.page': 1,
+          'f.geo_p': addOperatorToFilterValue(expectedPolygons, 'polygon'),
+          'scope': component.currentScope,
+        },
+        queryParamsHandling: 'merge',
+      });
+    });
+
+    it('parseLayerLatLngsAndSendAsQueryParams should handle empty layerLatLngs gracefully', () => {
+      const mockRouter = spyOn(router, 'navigate');
+      const layerLatLngs = [];
+
+      component.parseLayerLatLngsAndSendAsQueryParams(layerLatLngs);
+
+      expect(mockRouter).not.toHaveBeenCalled();
     });
 
   });

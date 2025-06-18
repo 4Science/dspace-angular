@@ -210,12 +210,14 @@ export class GeospatialMapComponent implements AfterViewInit, OnInit, OnDestroy 
       polygon.push(polygon[0]); // Close the polygon by adding the first point at the end
       polygons.push(polygon);
     });
-    const parsedPolygons = JSON.stringify(polygons);
-    const polygonsFilter = addOperatorToFilterValue(parsedPolygons, 'polygon');
-    this.router.navigate([], {
-      queryParams: { 'spc.page': 1, 'f.geo_p': polygonsFilter, 'scope': this.currentScope },
-      queryParamsHandling: 'merge',
-    });
+    if (polygons.length) {
+      const parsedPolygons = JSON.stringify(polygons);
+      const polygonsFilter = addOperatorToFilterValue(parsedPolygons, 'polygon');
+      this.router.navigate([], {
+        queryParams: {'spc.page': 1, 'f.geo_p': polygonsFilter, 'scope': this.currentScope},
+        queryParamsHandling: 'merge',
+      });
+    }
   }
 
   /**
