@@ -2,6 +2,9 @@
   @defer {
     <ds-object-geospatial-map [objects]="objects">
     </ds-object-geospatial-map>
+  } @placeholder {
+    <ngx-skeleton-loader style="width: 100%; height: 100%;"
+                         [theme]="{height: '400px', width: '100%'}"></ngx-skeleton-loader>
   }
 }
 

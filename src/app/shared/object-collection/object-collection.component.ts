@@ -19,6 +19,7 @@ import {
   ActivatedRoute,
   Router,
 } from '@angular/router';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { Observable } from 'rxjs';
 import {
   distinctUntilChanged,
@@ -53,7 +54,7 @@ import { ListableObject } from './shared/listable-object.model';
   styleUrls: ['./object-collection.component.scss'],
   templateUrl: './object-collection.component.html',
   standalone: true,
-  imports: [NgIf, ThemedObjectListComponent, NgClass, ObjectGridComponent, ObjectDetailComponent, AsyncPipe, ObjectTableComponent, ObjectGeospatialMapComponent],
+  imports: [NgIf, ThemedObjectListComponent, NgClass, ObjectGridComponent, ObjectDetailComponent, AsyncPipe, ObjectTableComponent, ObjectGeospatialMapComponent, NgxSkeletonLoaderModule],
 })
 export class ObjectCollectionComponent implements OnInit {
   /**
