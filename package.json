@@ -140,6 +140,7 @@
     "klaro": "^0.7.21",
     "leaflet": "^1.9.4",
     "leaflet-draw": "^1.0.4",
+    "@geoman-io/leaflet-geoman-free": "^2.2.0",
     "leaflet-providers": "^2.0.0",
     "leaflet.markercluster": "^1.5.3",
     "lodash": "^4.17.21",

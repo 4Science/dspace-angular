@@ -12,6 +12,7 @@ import {
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { wktToGeoJSON } from '@terraformer/wkt';
+import { LatLng } from 'leaflet';
 import {
   Observable,
   Subscription,
@@ -133,7 +134,7 @@ export class GeospatialMapComponent implements AfterViewInit, OnInit, OnDestroy 
    */
   private initMap(): void {
     // 'Import' leaflet packages in a browser-mode-only way to avoid issues with SSR
-    const L = require('leaflet'); require('leaflet.markercluster'); require('leaflet-providers'); require('leaflet-draw');
+    const L = require('leaflet'); require('leaflet.markercluster'); require('leaflet-providers'); require('leaflet-draw'); require('@geoman-io/leaflet-geoman-free');
 
     // Set better default icons
     L.Icon.Default.mergeOptions({
@@ -180,20 +181,10 @@ export class GeospatialMapComponent implements AfterViewInit, OnInit, OnDestroy 
       this.map.addLayer(layer);
 
       if (event.layerType === 'polygon') {
-        const polygons = [];
-        layer.getLatLngs().forEach((polygonPoints: {lat: string, lng: string}[]) => {
-          const polygon = polygonPoints.map(latLng => [latLng.lng, latLng.lat]);
-          polygon.push(polygon[0]); // Close the polygon by adding the first point at the end
-          polygons.push(polygon);
-        });
-        const parsedPolygons = JSON.stringify(polygons);
-        this.router.navigate([], {
-          queryParams: { 'spc.page': 1, 'f.geo_p': parsedPolygons + ',polygon', 'scope': this.currentScope },
-          queryParamsHandling: 'merge',
-        });
+        this.parseLayerLatLngsAndSendAsQueryParams(layer.getLatLngs());
       } else if (event.layerType === 'circle') {
-        console.log('Circle center:', layer.getLatLng());
-        console.log('Circle radius:', layer.getRadius());
+        const polygonsLatLngs = L.PM.Utils.circleToPolygon(layer, 64).getLatLngs();
+        this.parseLayerLatLngsAndSendAsQueryParams(polygonsLatLngs);
       }
     });
 
@@ -207,6 +198,20 @@ export class GeospatialMapComponent implements AfterViewInit, OnInit, OnDestroy 
     } else if (hasValue(this.mapInfo)) {
       this.drawSearchResultMarkers(L);
     }
+  }
+
+  parseLayerLatLngsAndSendAsQueryParams(layerLatLngs: LatLng[][]) {
+    const polygons = [];
+    layerLatLngs.forEach((polygonPoints: LatLng[]) => {
+      const polygon = polygonPoints.map(latLng => [latLng.lng, latLng.lat]);
+      polygon.push(polygon[0]); // Close the polygon by adding the first point at the end
+      polygons.push(polygon);
+    });
+    const parsedPolygons = JSON.stringify(polygons);
+    this.router.navigate([], {
+      queryParams: { 'spc.page': 1, 'f.geo_p': parsedPolygons + ',polygon', 'scope': this.currentScope },
+      queryParamsHandling: 'merge',
+    });
   }
 
   /**
