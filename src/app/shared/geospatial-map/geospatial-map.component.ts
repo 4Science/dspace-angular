@@ -180,7 +180,17 @@ export class GeospatialMapComponent implements AfterViewInit, OnInit, OnDestroy 
       this.map.addLayer(layer);
 
       if (event.layerType === 'polygon') {
-        console.log('Polygon coordinates:', layer.getLatLngs());
+        const polygons = [];
+        layer.getLatLngs().forEach((polygonPoints: {lat: string, lng: string}[]) => {
+          const polygon = polygonPoints.map(latLng => [latLng.lng, latLng.lat]);
+          polygon.push(polygon[0]); // Close the polygon by adding the first point at the end
+          polygons.push(polygon);
+        });
+        const parsedPolygons = JSON.stringify(polygons);
+        this.router.navigate([], {
+          queryParams: { 'spc.page': 1, 'f.geo_p': parsedPolygons + ',polygon', 'scope': this.currentScope },
+          queryParamsHandling: 'merge',
+        });
       } else if (event.layerType === 'circle') {
         console.log('Circle center:', layer.getLatLng());
         console.log('Circle radius:', layer.getRadius());
