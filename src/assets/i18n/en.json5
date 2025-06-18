@@ -6238,9 +6238,9 @@
 
   "search.filters.remove": "Remove filter of type {{ type }} with value {{ value }}",
 
-  "search.filters.remove.polygon": "Remove map area filter",
+  "search.filters.remove.polygon": "Remove Coordinates: Polygon filter",
 
-  "search.filters.applied.f.polygon": "Map area",
+  "search.filters.applied.f.polygon": "Coordinates: Polygon",
 
   "search.filters.applied.f.title": "Title",
 
