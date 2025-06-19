@@ -96,4 +96,69 @@ describe('ObjectGeospatialMapComponent', () => {
     expect(component.mapInfo).toEqual([expected]);
   });
 
+  it('parses valid WKT string into GeospatialMapDetail with correct point data', () => {
+    const mockItem = new Item();
+    mockItem.name = 'Test Item';
+    const wktString = 'POINT (30 10)';
+    const result = (component as any).parseWKTMapDetail(wktString, mockItem);
+
+    expect(result).toBeTruthy();
+    expect(result.points.length).toBe(1);
+    expect(result.points[0].latitude).toBe(10);
+    expect(result.points[0].longitude).toBe(30);
+    expect(result.points[0].title).toBe('Test Item');
+  });
+
+  it('returns null for invalid WKT string', () => {
+    const mockItem = new Item();
+    const invalidWKT = 'INVALID (30 10)';
+    const result = (component as any).parseWKTMapDetail(invalidWKT, mockItem);
+
+    expect(result).toBeNull();
+  });
+
+  it('parses valid coordinate string into GeospatialMapDetail with correct point data', () => {
+    const mockItem = new Item();
+    mockItem.name = 'Test Item';
+    const coordinateString = '10, 20';
+    const result = (component as any).parseCoordinatesMapDetail(coordinateString, mockItem);
+
+    expect(result).toBeTruthy();
+    expect(result.points.length).toBe(1);
+    expect(result.points[0].latitude).toBe(10);
+    expect(result.points[0].longitude).toBe(20);
+    expect(result.points[0].title).toBe('Test Item');
+  });
+
+  it('returns null for invalid coordinate string', () => {
+    const mockItem = new Item();
+    const invalidCoordinates = 'invalid, data';
+    const result = (component as any).parseCoordinatesMapDetail(invalidCoordinates, mockItem);
+
+    expect(result).toBeNull();
+  });
+
+  it('parses valid latitude and longitude into GeospatialMapDetail with correct point data', () => {
+    const mockItem = new Item();
+    mockItem.name = 'Test Item';
+    const latitude = '15';
+    const longitude = '25';
+    const result = (component as any).parseLatLongMapDetail(latitude, longitude, mockItem);
+
+    expect(result).toBeTruthy();
+    expect(result.points.length).toBe(1);
+    expect(result.points[0].latitude).toBe(15);
+    expect(result.points[0].longitude).toBe(25);
+    expect(result.points[0].title).toBe('Test Item');
+  });
+
+  it('returns null for invalid latitude or longitude', () => {
+    const mockItem = new Item();
+    const invalidLatitude = 'invalid';
+    const longitude = '25';
+    const result = (component as any).parseLatLongMapDetail(invalidLatitude, longitude, mockItem);
+
+    expect(result).toBeNull();
+  });
+
 });
