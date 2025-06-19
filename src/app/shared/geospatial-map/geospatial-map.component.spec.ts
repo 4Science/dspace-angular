@@ -115,6 +115,38 @@ describe('GeospatialMapComponent', () => {
       expect(layerCount).toEqual(4);
     });
 
+    it('parseLayerLatLngsAndSendAsQueryParams should correctly parse and navigate with valid polygon data', () => {
+      const mockRouter = spyOn(router, 'navigate');
+      const layerLatLngs = [
+        [
+          { lat: 10, lng: 20 },
+          { lat: 15, lng: 25 },
+          { lat: 10, lng: 20 },
+        ],
+      ] as LatLng[][];
+
+      component.parseLayerLatLngsAndSendAsQueryParams(layerLatLngs);
+
+      const expectedPolygons = JSON.stringify([[[20, 10], [25, 15], [20, 10], [20, 10]]]);
+      expect(mockRouter).toHaveBeenCalledWith([], {
+        queryParams: {
+          'spc.page': 1,
+          'f.geo_p': addOperatorToFilterValue(expectedPolygons, 'polygon'),
+          'scope': component.currentScope,
+        },
+        queryParamsHandling: 'merge',
+      });
+    });
+
+    it('parseLayerLatLngsAndSendAsQueryParams should handle empty layerLatLngs gracefully', () => {
+      const mockRouter = spyOn(router, 'navigate');
+      const layerLatLngs = [];
+
+      component.parseLayerLatLngsAndSendAsQueryParams(layerLatLngs);
+
+      expect(mockRouter).not.toHaveBeenCalled();
+    });
+
   });
 
   describe('GeospatialMapComponent for search results', () => {
@@ -216,38 +248,6 @@ describe('GeospatialMapComponent', () => {
       waitForAsync(() => {
         expect(layerCount).toEqual(6);
       });
-    });
-
-    it('parseLayerLatLngsAndSendAsQueryParams should correctly parse and navigate with valid polygon data', () => {
-      const mockRouter = spyOn(router, 'navigate');
-      const layerLatLngs = [
-        [
-          { lat: 10, lng: 20 },
-          { lat: 15, lng: 25 },
-          { lat: 10, lng: 20 },
-        ],
-      ] as LatLng[][];
-
-      component.parseLayerLatLngsAndSendAsQueryParams(layerLatLngs);
-
-      const expectedPolygons = JSON.stringify([[[20, 10], [25, 15], [20, 10], [20, 10]]]);
-      expect(mockRouter).toHaveBeenCalledWith([], {
-        queryParams: {
-          'spc.page': 1,
-          'f.geo_p': addOperatorToFilterValue(expectedPolygons, 'polygon'),
-          'scope': component.currentScope,
-        },
-        queryParamsHandling: 'merge',
-      });
-    });
-
-    it('parseLayerLatLngsAndSendAsQueryParams should handle empty layerLatLngs gracefully', () => {
-      const mockRouter = spyOn(router, 'navigate');
-      const layerLatLngs = [];
-
-      component.parseLayerLatLngsAndSendAsQueryParams(layerLatLngs);
-
-      expect(mockRouter).not.toHaveBeenCalled();
     });
 
   });
