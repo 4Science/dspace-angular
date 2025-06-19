@@ -135,6 +135,13 @@ export class ObjectGeospatialMapComponent {
     return null;
   }
 
+  /**
+   * Parses a string containing latitude and longitude coordinates into a GeospatialMapDetail object.
+   *
+   * @param {string} value - A string containing latitude and longitude coordinates separated by a comma.
+   * @param {Item} dso - The item associated with the geospatial data.
+   * @returns {GeospatialMapDetail | null} - A GeospatialMapDetail object with parsed coordinates, or null if the input is invalid.
+   */
   private parseCoordinatesMapDetail(value: string, dso: Item): GeospatialMapDetail {
     const geospatialMapDetail = new GeospatialMapDetail();
     geospatialMapDetail.route = getItemPageRoute(dso);
@@ -154,6 +161,15 @@ export class ObjectGeospatialMapComponent {
     }
   }
 
+  /**
+   * Parses latitude and longitude strings into a GeospatialMapDetail object.
+   *
+   * @param {string} lat - The latitude value as a string.
+   * @param {string} lng - The longitude value as a string.
+   * @param {Item} dso - The item associated with the geospatial data.
+   * @returns {GeospatialMapDetail | null} - A GeospatialMapDetail object containing the parsed latitude and longitude,
+   *                                         or null if the input values are invalid.
+   */
   private parseLatLongMapDetail(lat: string, lng: string, dso: Item): GeospatialMapDetail {
     const geospatialMapDetail = new GeospatialMapDetail();
     geospatialMapDetail.route = getItemPageRoute(dso);
@@ -174,6 +190,13 @@ export class ObjectGeospatialMapComponent {
     }
   }
 
+  /**
+   * Check if the value is a WKT (Well-Known Text) representation of a geospatial point.
+   * This is a simple check based on the common WKT types.
+   *
+   * @param {string} value - The string to check.
+   * @returns {boolean} - True if the value is a WKT representation, false otherwise.
+   */
   private isWKT(value: string): boolean {
     // A simple check to see if the value starts with a WKT type, e.g. "POINT", "LINESTRING", etc.
     const wktTypes = ['POINT', 'LINESTRING', 'POLYGON', 'MULTIPOINT', 'MULTILINESTRING', 'MULTIPOLYGON'];

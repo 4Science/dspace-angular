@@ -203,6 +203,12 @@ export class GeospatialMapComponent implements AfterViewInit, OnInit, OnDestroy 
     }
   }
 
+  /**
+   * Parses the given layer latitude/longitude data into polygons, converts them to a query parameter format,
+   * and navigates to a new route with the generated query parameters.
+   *
+   * @param {LatLng[][]} layerLatLngs - An array of arrays containing latitude/longitude points for each polygon.
+   */
   parseLayerLatLngsAndSendAsQueryParams(layerLatLngs: LatLng[][]) {
     const polygons = [];
     layerLatLngs.forEach((polygonPoints: LatLng[]) => {
@@ -214,7 +220,7 @@ export class GeospatialMapComponent implements AfterViewInit, OnInit, OnDestroy 
       const parsedPolygons = JSON.stringify(polygons);
       const polygonsFilter = addOperatorToFilterValue(parsedPolygons, 'polygon');
       this.router.navigate([], {
-        queryParams: {'spc.page': 1, 'f.geo_p': polygonsFilter, 'scope': this.currentScope},
+        queryParams: { 'spc.page': 1, 'f.geo_p': polygonsFilter, 'scope': this.currentScope },
         queryParamsHandling: 'merge',
       });
     }
