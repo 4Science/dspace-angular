@@ -702,6 +702,11 @@ geospatialMapViewer:
   # and is set as an input when declaring the component)
   spatialMetadataFields:
     - 'dcterms.spatial'
+    # Which fields to use for parsing as geospatial points in search maps,
+    # found as a pair of latitude and longitude values in different metadata fields.
+  latLongMetadataFields:
+    - latitude: 'dcterms.spatial.latitude'
+      longitude: 'dcterms.spatial.longitude'
   # Which discovery configuration to use for 'geospatial search', used
   # in the browse map
   spatialFacetDiscoveryConfiguration: 'geospatial'
