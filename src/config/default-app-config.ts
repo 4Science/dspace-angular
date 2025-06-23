@@ -1084,10 +1084,20 @@ export class DefaultAppConfig implements AppConfig {
     spatialMetadataFields: [
       'dcterms.spatial',
     ],
-    latLongMetadataFields: [{
-      latitude: 'dim.coordinateGeografiche.Latitudine',
-      longitude: 'dim.coordinateGeografiche.Longitudine2',
-    }],
+    latLongMetadataFields: [
+      {
+        latitude: 'cris.virtual.latitude',
+        longitude: 'cris.virtual.longitude',
+      },
+      {
+        latitude: 'glamplace.latitude',
+        longitude: 'glamplace.longitude',
+      },
+      {
+        latitude: 'dc.coverage.spatialgdpy',
+        longitude: 'dc.coverage.spatialgdpx',
+      },
+    ],
     spatialFacetDiscoveryConfiguration: 'geospatial',
     spatialPointFilterName: 'point',
     enableItemPageFields: false,
