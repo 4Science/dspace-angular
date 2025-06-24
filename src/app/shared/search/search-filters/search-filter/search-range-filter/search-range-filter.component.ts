@@ -17,6 +17,7 @@ import {
 import { NouisliderComponent } from 'ng2-nouislider';
 import { combineLatest as observableCombineLatest } from 'rxjs';
 import {
+  distinctUntilChanged,
   map,
   startWith,
 } from 'rxjs/operators';
@@ -28,8 +29,12 @@ import { SearchService } from '../../../../../core/shared/search/search.service'
 import { SearchConfigurationService } from '../../../../../core/shared/search/search-configuration.service';
 import { SearchFilterService } from '../../../../../core/shared/search/search-filter.service';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../my-dspace-page/my-dspace-configuration.service';
-import { hasValue } from '../../../../empty.util';
+import {
+  hasValue,
+  isEmpty,
+} from '../../../../empty.util';
 import { DebounceDirective } from '../../../../utils/debounce.directive';
+import { FacetValues } from '../../../models/facet-values.model';
 import {
   facetLoad,
   SearchFacetFilterComponent,
@@ -137,10 +142,18 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
     this.maxLabel = this.translateService.instant('search.filters.filter.' + this.filterConfig.name + '.max.placeholder');
     const iniMin = this.route.getQueryParameterValue(this.filterConfig.paramName + RANGE_FILTER_MIN_SUFFIX).pipe(startWith(undefined));
     const iniMax = this.route.getQueryParameterValue(this.filterConfig.paramName + RANGE_FILTER_MAX_SUFFIX).pipe(startWith(undefined));
-    this.subs.push(observableCombineLatest([iniMin, iniMax]).pipe(
-      map(([min, max]: [string, string]) => {
-        const minimum = hasValue(min) ? Number(min) : this.min;
-        const maximum = hasValue(max) ? Number(max) : this.max;
+    const facetMinMax = this.facetValues$
+      .pipe(
+        map((facetValues: FacetValues[]) =>
+          isEmpty(facetValues) ?
+            [this.min, this.max] : [facetValues[0].minValue, facetValues[facetValues.length - 1].maxValue],
+        ),
+        distinctUntilChanged(),
+      );
+    this.subs.push(observableCombineLatest([iniMin, iniMax, facetMinMax]).pipe(
+      map(([min, max, [facetMin, facetMax]]: [string, string, string[] | number[]]) => {
+        const minimum = (hasValue(min) ? Number(min) : facetMin);
+        const maximum = (hasValue(max) ? Number(max) : facetMax);
         return [minimum, maximum];
       }),
     ).subscribe((minmax: [number, number]) => this.range = minmax));

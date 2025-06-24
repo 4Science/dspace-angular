@@ -44,6 +44,18 @@ export class FacetValues extends SearchQueryResponse<FacetValue> {
   facetLimit: number;
 
   /**
+   * Minimum value possible for this facet in the repository
+   */
+  @autoserialize
+  maxValue: string;
+
+  /**
+   * Maximum value possible for this facet in the repository
+   */
+  @autoserialize
+  minValue: string;
+
+  /**
    * The results for this query
    */
   @autoserializeAs(FacetValue, 'values')
