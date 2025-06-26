@@ -64,7 +64,8 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
     'showSearchResultNotice',
     'renderOnServerSide',
     'showLabel',
-    'showMetrics'
+    'showMetrics',
+    'initViewMode',
   ];
 
   @Input() configurationList: SearchConfigurationOption[];
@@ -86,6 +87,8 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
   @Input() collapseFilters: boolean;
 
   @Input() inPlaceSearch: boolean;
+
+  @Input() initViewMode: ViewMode;
 
   @Input() linkType: CollectionElementLinkType;
 

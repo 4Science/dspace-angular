@@ -22,7 +22,7 @@ import { AlertType } from '../../alert/alert-type';
   templateUrl: '../../theme-support/themed.component.html',
 })
 export class ThemedSearchResultsComponent extends ThemedComponent<SearchResultsComponent> {
-  protected inAndOutputNames: (keyof SearchResultsComponent & keyof this)[] = ['linkType', 'searchResults', 'searchConfig', 'showCsvExport', 'showLabel', 'showMetrics', 'showThumbnails', 'sortConfig', 'viewMode', 'configuration', 'disableHeader', 'selectable', 'context', 'hidePaginationDetail', 'selectionConfig', 'contentChange', 'deselectObject', 'selectObject', 'customData', 'customEvent', 'searchResultNotice', 'searchResultNoticeType', 'showSearchResultNotice', 'showCorrection', 'showWorkflowStatistics'];
+  protected inAndOutputNames: (keyof SearchResultsComponent & keyof this)[] = ['linkType', 'searchResults', 'searchConfig', 'showCsvExport', 'showLabel', 'showMetrics', 'showThumbnails', 'sortConfig', 'viewMode', 'configuration', 'disableHeader', 'selectable', 'context', 'hidePaginationDetail', 'selectionConfig', 'contentChange', 'deselectObject', 'selectObject', 'customData', 'customEvent', 'searchResultNotice', 'searchResultNoticeType', 'showSearchResultNotice', 'showCorrection', 'showWorkflowStatistics', 'initViewMode'];
   @Input() linkType: CollectionElementLinkType;
 
   @Input() searchResultNotice: string = null;
@@ -54,6 +54,8 @@ export class ThemedSearchResultsComponent extends ThemedComponent<SearchResultsC
   @Input() configuration: string;
 
   @Input() disableHeader: boolean;
+
+  @Input() initViewMode: ViewMode;
 
   @Input() selectable: boolean;
 

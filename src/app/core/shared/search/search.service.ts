@@ -348,12 +348,12 @@ export class SearchService implements OnDestroy {
    * Requests the current view mode based on the current URL
    * @returns {Observable<ViewMode>} The current view mode
    */
-  getViewMode(): Observable<ViewMode> {
+  getViewMode(defaultView: ViewMode = ViewMode.ListElement): Observable<ViewMode> {
     return this.routeService.getQueryParamMap().pipe(map((params) => {
       if (isNotEmpty(params.get('view')) && hasValue(params.get('view'))) {
         return params.get('view');
       } else {
-        return ViewMode.ListElement;
+        return defaultView;
       }
     }));
   }

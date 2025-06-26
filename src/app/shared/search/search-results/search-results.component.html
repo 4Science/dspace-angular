@@ -20,6 +20,7 @@
             [showCorrection]="showCorrection"
             [showWorkflowStatistics]="showWorkflowStatistics"
             [customData]="customData"
+            [initViewMode]="initViewMode"
             (contentChange)="contentChange.emit($event)"
             (customEvent)="emitCustomEvent($event)"
             (deselectObject)="deselectObject.emit($event)"
@@ -29,6 +30,7 @@
 
 <ds-search-results-skeleton
   *ngIf="isLoading()"
+  [initViewMode]="initViewMode"
   [showFallbackMessages]="true"
   [showThumbnails]="showThumbnails"
   [numberOfResults]="searchConfig.pagination.pageSize"

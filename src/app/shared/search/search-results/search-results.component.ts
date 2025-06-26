@@ -117,6 +117,12 @@ export class SearchResultsComponent {
   @Input() disableHeader = false;
 
   /**
+   * Represents the initial view mode.
+   * Determines how the content will be displayed when the component is first loaded.
+   */
+  @Input() initViewMode: ViewMode;
+
+  /**
    * A boolean representing if result entries are selectable
    */
   @Input() selectable = false;
