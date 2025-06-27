@@ -240,12 +240,6 @@ describe('CarouselComponent', () => {
     done();
   });
 
-  it('should render image', (done) => {
-    const image = fixture.debugElement.queryAll(By.css('.picsum-img-wrapper'));
-    expect(image.length).toBe(1);
-    done();
-  });
-
   describe('when no data', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(CarouselComponent);

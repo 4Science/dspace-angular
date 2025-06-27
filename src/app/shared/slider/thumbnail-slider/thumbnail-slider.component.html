@@ -23,17 +23,21 @@
   </div>
 </ng-container>
 <ng-template #thumbnailContainerTemplate let-item="$implicit" let-i="index">
-  <ng-container *ngIf="isBrowser && (itemsImagesLoading$ | async) === false; else imageSkeleton">
-    <div class="thumbnail-container"
-      [style.height.px]="heightThumbnailPx"
-      [style.width.px]="widthThumbnailPx"
-      [ngClass]="{'selected': activeIndex === i}"
-      (click)="onThumbnailClick(item, i)"
-      [dsBackgroundImage]="(itemToImageHrefMap$ | async)?.get(item.uuid) ?? placeholderSrc"
-      #thumbnails
-      >
-    </div>
-  </ng-container>
+  @defer {
+    @if ((itemsImagesLoading$ | async) === false) {
+      <div class="thumbnail-container"
+           [style.height.px]="heightThumbnailPx"
+           [style.width.px]="widthThumbnailPx"
+           [ngClass]="{'selected': activeIndex === i}"
+           (click)="onThumbnailClick(item, i)"
+           [dsBackgroundImage]="(itemToImageHrefMap$ | async)?.get(item.uuid) ?? placeholderSrc"
+           #thumbnails></div>
+        } @else {
+      <ng-container *ngTemplateOutlet="imageSkeleton"></ng-container>
+    }
+  } @placeholder {
+    <ng-container *ngTemplateOutlet="imageSkeleton"></ng-container>
+  }
   <ng-template #imageSkeleton>
     <ngx-skeleton-loader class="thumbnail-container" [theme]="{height: heightThumbnailPx + 'px', width: widthThumbnailPx + 'px'}"></ngx-skeleton-loader>
   </ng-template>

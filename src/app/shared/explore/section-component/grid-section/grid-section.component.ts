@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
-  isPlatformBrowser,
-  NgForOf,
-  NgIf,
+  NgTemplateOutlet,
   SlicePipe,
 } from '@angular/common';
 import {
@@ -69,14 +67,13 @@ import { PaginatedSearchOptions } from '../../../search/models/paginated-search-
   templateUrl: './grid-section.component.html',
   styleUrls: ['./grid-section.component.scss'],
   imports: [
-    NgForOf,
     SlicePipe,
     AsyncPipe,
     TranslateModule,
     BackgroundImageDirective,
     RouterLink,
     NgxSkeletonLoaderModule,
-    NgIf,
+    NgTemplateOutlet,
   ],
   standalone: true,
 })
@@ -110,8 +107,6 @@ export class GridSectionComponent implements OnInit {
 
   itemToImageHrefMap$ = new BehaviorSubject<Map<string, string>>(new Map<string, string>());
 
-  isBrowser: boolean;
-
   isLoading = true;
 
   constructor(
@@ -126,8 +121,6 @@ export class GridSectionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isBrowser = isPlatformBrowser(this.platformId);
-
     const pagination = Object.assign(new PaginationComponentOptions(), {
       id: 'search-object-pagination',
       pageSize: 8,
