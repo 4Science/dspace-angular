@@ -1,0 +1,4 @@
+<ds-associate-items-list-preview [item]="dso" [showThumbnails]="showThumbnails"
+                                     [customData]="customData"></ds-associate-items-list-preview>
+
+<ds-associate-items-actions [object]="dso" (processCompleted)="customEvent.emit($event)" [showThumbnails]="showThumbnails" [customData]="customData" ></ds-associate-items-actions>

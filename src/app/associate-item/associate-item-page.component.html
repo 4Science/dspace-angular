@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="button-row bottom mb-3">
+      <button class="btn btn-outline-secondary" id="backButton"
+              (click)="onReturn()"><i class="fas fa-arrow-left"></i> {{'associate.item.page.button.return' | translate}}</button>
+    </div>
+  <div class="row">
+    <div class="col-md-12 mb-4 pl-4">
+      <h3>{{'associate.item.' + mode.modename | translate}}</h3>
+    </div>
+    <div  class="col-md-12 mb-4 pl-4" *ngIf="description" [innerHTML]="description"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 mb-4 pl-4 btn-group">
+      <button class="btn btn-secondary p-1 btnsamesize" id="connectedButton"
+            (click)="onSearchConnected($event)">{{'associate.item.page.button.search.connected' | translate}}</button>
+      <button class="btn btn-secondary p-1 ml-4 btnsamesize" id="notconnectedButton"
+            (click)="onSearchnotConnected($event)">{{'associate.item.page.button.search.notconnected' | translate}}</button>
+      <button class="btn btn-secondary p-1 ml-4 btnsamesize" id="allButton"
+            (click)="onSearchAll($event)">{{'associate.item.page.button.search.all' | translate}}</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <ds-loading *ngIf="!isActive"></ds-loading>
+      <ds-configuration-search-page *ngIf="isActive"
+                                    [configuration]="configuration"
+                                    [context]="context"
+                                    [searchFormPlaceholder]="'associate.item.search.placeholder'"
+                                    [fixedFilterQuery]="searchFilter"
+                                    [collapseFilters]="true"
+                                    [showFilterToggle]="true"
+                                    [viewModeList]="viewModes"
+                                    [showViewModes]="false"
+                                    [showExport]="false"
+                                    [customData]="{updateStatusByItemId$: updateStatusByItemId$, metadatafield: metadatafield, targetid: item.id}"
+                                    [showScopeSelector]="false"
+                                    (customEvent)="manageAction($event)"></ds-configuration-search-page>
+    </div>
+  </div>
+</div>
