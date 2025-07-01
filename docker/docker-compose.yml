@@ -10,7 +10,11 @@
 # Requires also running a REST API backend (either locally or remotely),
 # for example via 'docker-compose-rest.yml'
 networks:
-  dspacenet:
+  # Default to using network named 'dspacenet' from docker-compose.yml.
+  # Its full name will be prepended with the project name (e.g. "-p d7" means it will be named "d7_dspacenet")
+  default:
+    name: ${COMPOSE_PROJECT_NAME}_dspacenet
+    external: true
 services:
   dspace-angular:
     container_name: dspace-angular
@@ -27,8 +31,6 @@ services:
     build:
       context: ..
       dockerfile: Dockerfile
-    networks:
-      dspacenet:
     ports:
     - published: 4000
       target: 4000
