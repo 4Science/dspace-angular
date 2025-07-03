@@ -870,7 +870,7 @@ export class MenuResolverService  {
             link: `/community-list`,
           } as LinkMenuItemModel,
           icon: 'list-alt',
-          index: 2,
+          index: 0,
         },
         /*  Admin Search */
         {
