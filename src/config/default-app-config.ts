@@ -1094,8 +1094,8 @@ export class DefaultAppConfig implements AppConfig {
         longitude: 'glamplace.longitude',
       },
       {
-        latitude: 'dc.coverage.spatialgdpy',
-        longitude: 'dc.coverage.spatialgdpx',
+        latitude: 'dc.coverage.spatialgpdpy',
+        longitude: 'dc.coverage.spatialgpdpx',
       },
     ],
     spatialFacetDiscoveryConfiguration: 'geospatial',
