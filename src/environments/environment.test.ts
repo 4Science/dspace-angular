@@ -811,4 +811,27 @@ export const environment: BuildConfig = {
       statusEndpoint: 'https://nominatim.openstreetmap.org/status',
     },
   },
+
+  // Leaflet tile providers and other configurable attributes
+  geospatialMapViewer: {
+    spatialMetadataFields: [
+      'dcterms.spatial',
+    ],
+    latLongMetadataFields: [{
+      latitude: 'dim.coordinateGeografiche.Latitudine',
+      longitude: 'dim.coordinateGeografiche.Longitudine',
+    }],
+    spatialFacetDiscoveryConfiguration: 'geospatial',
+    spatialPointFilterName: 'point',
+    enableItemPageFields: true,
+    enableSearchViewMode: true,
+    enableBrowseMap: true,
+    tileProviders: [
+      'OpenStreetMap.Mapnik',
+    ],
+    defaultCentrePoint: {
+      lat: 41.015137,
+      lng: 28.979530,
+    },
+  },
 };

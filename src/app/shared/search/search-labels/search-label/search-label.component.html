@@ -1,4 +1,15 @@
 <ng-container *ngVar="(filterLabel$ | async) as filterLabel">
+  @if (appliedFilter?.operator === 'polygon') {
+    <a class="badge badge-primary"
+       [attr.aria-label]="'search.filters.remove.polygon' | translate"
+       [routerLink]="searchLink"
+       [queryParams]="(removeParameters$ | async)">
+  <span class="d-flex">
+    <span class="flex-grow-1 text-left">{{ 'search.filters.applied.f.polygon' | translate }}</span>
+    <span class="pl-1" aria-hidden="true">×</span>
+  </span>
+    </a>
+  } @else {
   <a class="badge badge-primary"
      [attr.aria-label]="'search.filters.remove' | translate:{ type: ('search.filters.applied.f.' + appliedFilter.filter) | translate, value: filterLabel }"
      [routerLink]="searchLink"
@@ -8,4 +19,5 @@
     <span class="pl-1" aria-hidden="true">×</span>
   </span>
   </a>
+  }
 </ng-container>

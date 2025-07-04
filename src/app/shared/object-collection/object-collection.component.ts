@@ -19,6 +19,7 @@ import {
   ActivatedRoute,
   Router,
 } from '@angular/router';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { Observable } from 'rxjs';
 import {
   distinctUntilChanged,
@@ -36,6 +37,7 @@ import { PageInfo } from '../../core/shared/page-info.model';
 import { ViewMode } from '../../core/shared/view-mode.model';
 import { isEmpty } from '../empty.util';
 import { ObjectDetailComponent } from '../object-detail/object-detail.component';
+import { ObjectGeospatialMapComponent } from '../object-geospatial-map/object-geospatial-map.component';
 import { ObjectGridComponent } from '../object-grid/object-grid.component';
 import { ThemedObjectListComponent } from '../object-list/themed-object-list.component';
 import { ObjectTableComponent } from '../object-table/object-table.component';
@@ -52,7 +54,7 @@ import { ListableObject } from './shared/listable-object.model';
   styleUrls: ['./object-collection.component.scss'],
   templateUrl: './object-collection.component.html',
   standalone: true,
-  imports: [NgIf, ThemedObjectListComponent, NgClass, ObjectGridComponent, ObjectDetailComponent, AsyncPipe, ObjectTableComponent],
+  imports: [NgIf, ThemedObjectListComponent, NgClass, ObjectGridComponent, ObjectDetailComponent, AsyncPipe, ObjectTableComponent, ObjectGeospatialMapComponent, NgxSkeletonLoaderModule],
 })
 export class ObjectCollectionComponent implements OnInit {
   /**

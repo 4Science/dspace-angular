@@ -2233,6 +2233,12 @@
   // "browse.metadata.title.breadcrumbs": "Browse by Title",
   "browse.metadata.title.breadcrumbs": "Titel",
 
+  "browse.metadata.map": "Stöbern in Kartenansicht",
+
+  "browse.metadata.map.breadcrumbs": "Stöbern in Kartenansicht",
+
+  "browse.metadata.map.count.items": "Items",
+
   // "browse.metadata.titleF.breadcrumbs": "Browse by Title",
   // TODO New key - Add a translation
   "browse.metadata.titleF.breadcrumbs": "Browse by Title",
@@ -6818,6 +6824,9 @@
   // TODO New key - Add a translation
   "item.search.results.open-mirador": "Open results in Mirador",
 
+  //"item.page.dcterms.spatial": "Geospatial point",
+  "item.page.dcterms.spatial": "Geostandpunkt",
+
   // "item.truncatable-part.show-more": "Show more",
   // TODO New key - Add a translation
   "item.truncatable-part.show-more": "Show more",
@@ -8188,6 +8197,9 @@
   // "menu.section.communities_and_collections": "Communities & Collections",
   // TODO New key - Add a translation
   "menu.section.communities_and_collections": "Communities & Collections",
+
+  // "menu.section.browse_global_geospatial_map": "By Geolocation (Map)",
+  "menu.section.browse_global_geospatial_map": "Nach Ort (Kartenansicht)",
 
   // "menu.section.icon.communities_and_collections": "Communities & Collections",
   // TODO New key - Add a translation
@@ -11140,6 +11152,9 @@
 
   // "search.view-switch.show-list": "Show as list",
   "search.view-switch.show-list": "Als Liste anzeigen",
+
+  //"search.view-switch.show-geospatialMap": "Show as map"
+  "search.view-switch.show-geospatialMap": "Als Karte anzeigen",
 
   // "social.component.title": "Social Share",
   // TODO New key - Add a translation

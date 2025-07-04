@@ -14,6 +14,7 @@ import {
   RouterModule,
 } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { BehaviorSubject } from 'rxjs';
 
 import { DSONameService } from '../../../../core/breadcrumbs/dso-name.service';
 import { ItemDataService } from '../../../../core/data/item-data.service';
@@ -153,5 +154,26 @@ describe('SearchLabelComponent', () => {
 
     fixture.detectChanges();
     expect(comp.filterLabel$.value).toBe(label);
+  });
+
+  it('should render polygon-specific badge when operator is polygon', () => {
+    comp.appliedFilter = { operator: 'polygon' } as AppliedFilter;
+    fixture.detectChanges();
+
+    const badge = fixture.nativeElement.querySelector('a.badge-primary');
+    expect(badge).toBeTruthy();
+    expect(badge.getAttribute('aria-label')).toBe('search.filters.remove.polygon');
+    expect(badge.textContent.trim()).toContain('search.filters.applied.f.polygon');
+  });
+
+  it('should render default badge when operator is not polygon', () => {
+    comp.appliedFilter = { operator: 'equals', filter: 'name' } as AppliedFilter;
+    comp.filterLabel$ = new BehaviorSubject('Test Label');
+    fixture.detectChanges();
+
+    const badge = fixture.nativeElement.querySelector('a.badge-primary');
+    expect(badge).toBeTruthy();
+    expect(badge.getAttribute('aria-label')).toContain('search.filters.remove');
+    expect(badge.textContent.trim()).toContain('search.filters.applied.f.namesearch.filters.applied.operator.equals: search.filters.name.Test Label×');
   });
 });
