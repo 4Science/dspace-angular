@@ -84,7 +84,7 @@ export class BrowseMostElementsComponent implements OnInit, OnChanges {
 
   @Input() topSection: TopSection;
 
-  @Input() discoveryConfigurationsTotalElementsMap: Map<string, number>;
+  @Input() discoveryConfigurationsTotalElementsMap: Map<string, number> = new Map();
 
 
   paginatedSearchOptions$ = new BehaviorSubject<PaginatedSearchOptions>(null);
