@@ -46,4 +46,27 @@ describe('MarkdownEditorComponent', () => {
 
   });
 
+  describe('editValue setter', () => {
+    it('should set _editValue when value is provided and _editValue is empty', () => {
+      component.editValue = 'Initial Value';
+      expect(component.editValue).toBe('Initial Value');
+    });
+
+    it('should not overwrite _editValue if it is already set', () => {
+      component.editValue = 'Existing Value';
+      component.editValue = 'New Value';
+      expect(component.editValue).toBe('Existing Value');
+    });
+
+    it('should handle null value gracefully', () => {
+      component.editValue = null;
+      expect(component.editValue).toBe('');
+    });
+
+    it('should handle empty string value gracefully', () => {
+      component.editValue = '';
+      expect(component.editValue).toBe('');
+    });
+  });
+
 });
