@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
-  isPlatformBrowser,
-  NgForOf,
-  NgIf,
+  NgTemplateOutlet,
   SlicePipe,
 } from '@angular/common';
 import {
@@ -24,16 +22,14 @@ import {
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import {
   BehaviorSubject,
-  from,
-} from 'rxjs';
-import {
   filter,
+  from,
   map,
   mergeMap,
   scan,
   switchMap,
   take,
-} from 'rxjs/operators';
+} from 'rxjs';
 import { getItemPageRoute } from 'src/app/item-page/item-page-routing-paths';
 import { BackgroundImageDirective } from 'src/app/shared/utils/background-image.directive';
 
@@ -60,7 +56,6 @@ import { Site } from '../../../../core/shared/site.model';
 import { hasValue } from '../../../../shared/empty.util';
 import { SearchResult } from '../../../../shared/search/models/search-result.model';
 import { followLink } from '../../../../shared/utils/follow-link-config.model';
-import { ThemedThumbnailComponent } from '../../../../thumbnail/themed-thumbnail.component';
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
 
@@ -72,15 +67,13 @@ import { PaginatedSearchOptions } from '../../../search/models/paginated-search-
   templateUrl: './grid-section.component.html',
   styleUrls: ['./grid-section.component.scss'],
   imports: [
-    ThemedThumbnailComponent,
-    NgForOf,
     SlicePipe,
     AsyncPipe,
     TranslateModule,
     BackgroundImageDirective,
     RouterLink,
     NgxSkeletonLoaderModule,
-    NgIf,
+    NgTemplateOutlet,
   ],
   standalone: true,
 })
@@ -114,8 +107,6 @@ export class GridSectionComponent implements OnInit {
 
   itemToImageHrefMap$ = new BehaviorSubject<Map<string, string>>(new Map<string, string>());
 
-  isBrowser: boolean;
-
   isLoading = true;
 
   constructor(
@@ -130,8 +121,6 @@ export class GridSectionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isBrowser = isPlatformBrowser(this.platformId);
-
     const pagination = Object.assign(new PaginationComponentOptions(), {
       id: 'search-object-pagination',
       pageSize: 8,

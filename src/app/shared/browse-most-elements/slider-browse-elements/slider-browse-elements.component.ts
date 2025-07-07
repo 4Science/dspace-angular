@@ -4,6 +4,7 @@ import {
   NgClass,
   NgForOf,
   NgIf,
+  NgTemplateOutlet,
 } from '@angular/common';
 import {
   AfterViewInit,
@@ -37,6 +38,7 @@ import { BtnDisabledDirective } from '../../btn-disabled.directive';
 import { hasValue } from '../../empty.util';
 import { ThemedTypeBadgeComponent } from '../../object-collection/shared/badges/type-badge/themed-type-badge.component';
 import { BackgroundImageDirective } from '../../utils/background-image.directive';
+import { VarDirective } from '../../utils/var.directive';
 import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
 
 @Component({
@@ -56,6 +58,8 @@ import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.com
     RouterLink,
     NgbTooltipModule,
     NgClass,
+    NgTemplateOutlet,
+    VarDirective,
   ],
 })
 export class SliderBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {

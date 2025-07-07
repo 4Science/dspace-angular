@@ -39,13 +39,13 @@ import {
   switchMap,
   take,
 } from 'rxjs/operators';
-import { InternalLinkService } from 'src/app/core/services/internal-link.service';
 
 import { SearchManager } from '../../core/browse/search-manager';
 import { SortOptions } from '../../core/cache/models/sort-options.model';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { RemoteData } from '../../core/data/remote-data';
+import { InternalLinkService } from '../../core/services/internal-link.service';
 import {
   NativeWindowRef,
   NativeWindowService,
