@@ -8,11 +8,26 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './markdown-editor.component.html',
   styleUrls: ['./markdown-editor.component.scss']
 })
-export class MarkdownEditorComponent  {
+export class MarkdownEditorComponent {
   /**
    * Markdown Editor String value
    */
-  @Input() editValue = '';
+  @Input() set editValue(value: string) {
+    if (value && !this._editValue) {
+      this._editValue = value;
+    }
+  }
+
+  get editValue(): string {
+    return this._editValue;
+  }
+
+  private _editValue = '';
+  /**
+   * Indicates whether the markdown editor is required.
+   */
+  @Input() required: boolean;
+
   /**
    * Markdown Editor String value Emitter
    */
@@ -24,7 +39,7 @@ export class MarkdownEditorComponent  {
   modules: QuillModules = {
     'emoji-toolbar': true,
     toolbar: {
-      container:  [
+      container: [
         ['bold', 'italic', 'underline', 'strike'],
         [{ 'header': 1 }, { 'header': 2 }],
         [{ 'list': 'ordered'}, { 'list': 'bullet' }],
@@ -50,6 +65,7 @@ export class MarkdownEditorComponent  {
    */
   updateContent(content: ContentChange) {
     const sanitizedContent = this.sanitizer.sanitize(SecurityContext.HTML, content.html);
-    this.editValueChange.emit(sanitizedContent);
+    const normalizedContent = sanitizedContent?.replace(/&#160;/g, ' ');
+    this.editValueChange.emit(normalizedContent);
 }
 }
