@@ -33,7 +33,6 @@ import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.com
     ThemedTypeBadgeComponent,
     RouterLink,
     NgxSkeletonLoaderModule,
-    NgIf,
     NgForOf,
     NgTemplateOutlet,
   ],
