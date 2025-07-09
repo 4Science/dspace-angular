@@ -1,6 +1,6 @@
 import { testA11y } from 'cypress/support/utils';
 
-xdescribe('My DSpace page', () => {
+describe('My DSpace page', () => {
     it('should display recent submissions and pass accessibility tests', () => {
         cy.visit('/mydspace');
 
@@ -47,7 +47,7 @@ xdescribe('My DSpace page', () => {
         // Open the New Submission dropdown
         cy.get('button[data-test="submission-dropdown"]').click();
         // Click on the "Item" type in that dropdown
-        cy.get('#entityControlsDropdownMenu button[title="none"]').click();
+        cy.get('#myDSpaceEntityControlsDropdownMenu button[title="Equipment"]').click();
 
         // This should display the <ds-create-item-parent-selector> (popup window)
         cy.get('ds-create-item-parent-selector').should('be.visible');
@@ -119,7 +119,7 @@ xdescribe('My DSpace page', () => {
         // Open the New Import dropdown
         cy.get('button[data-test="import-dropdown"]').click();
         // Click on the "Item" type in that dropdown
-        cy.get('#importControlsDropdownMenu button[title="none"]').click();
+        cy.get('#importControlsDropdownMenu button[title="Equipment"]').click();
 
         // New URL should include /import-external, as we've moved to the import page
         cy.url().should('include', '/import-external');
