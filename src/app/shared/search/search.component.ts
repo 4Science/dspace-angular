@@ -453,7 +453,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
 
     this.currentScope$ = this.routeService.getQueryParameterValue('scope').pipe(
-      map((routeValue: string) => hasValue(routeValue) ? routeValue : this.scope),
+      map((routeValue: string) => hasValue(routeValue) ? routeValue : this.scope ?? ''),
     );
 
     this.isSidebarCollapsed$ = this.isSidebarCollapsed();
