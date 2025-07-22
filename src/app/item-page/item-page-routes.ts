@@ -6,6 +6,7 @@ import { i18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.reso
 import { itemBreadcrumbResolver } from '../core/breadcrumbs/item-breadcrumb.resolver';
 import { LinkMenuItemModel } from '../shared/menu/menu-item/models/link.model';
 import { MenuItemType } from '../shared/menu/menu-item-type.model';
+import { viewTrackerResolver } from '../statistics/angulartics/dspace/view-tracker.resolver';
 import { BitstreamRequestACopyPageComponent } from './bitstreams/request-a-copy/bitstream-request-a-copy-page.component';
 import { UploadBitstreamComponent } from './bitstreams/upload/upload-bitstream.component';
 import { crisItemPageTabResolver } from './cris-item-page-tab.resolver';
@@ -55,11 +56,15 @@ export const ROUTES: Route[] = [
         pathMatch: 'full',
         resolve: {
           tabs: crisItemPageTabResolver,
+          tracking: viewTrackerResolver,
         },
       },
       {
         path: 'full',
         component: ThemedFullItemPageComponent,
+        resolve: {
+          tracking: viewTrackerResolver,
+        },
       },
       {
         path: ITEM_EDIT_PATH,
