@@ -239,7 +239,7 @@ export class MetadataContainerComponent implements OnInit {
         metadataValue: this.field.bitstream.metadataValue,
       });
     }
-    return this.bitstreamDataService.findShowableBitstreamsByItem(this.item.uuid, this.field.bitstream.bundle, filters, false)
+    return this.bitstreamDataService.findShowableBitstreamsByItem(this.item.uuid, this.field.bitstream.bundle, filters, false, {}, false)
       .pipe(
         getFirstCompletedRemoteData(),
         map((response: RemoteData<PaginatedList<Bitstream>>) => {
