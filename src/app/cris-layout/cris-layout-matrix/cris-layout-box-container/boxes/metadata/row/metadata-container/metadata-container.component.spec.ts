@@ -93,32 +93,6 @@ describe('MetadataContainerComponent', () => {
     },
   );
 
-  const testItem2 =  Object.assign(new Item(),
-  {
-    type: 'item',
-    metadata: {
-      'dc.title': [metadataValue, metadataValue, metadataValue, metadataValue, metadataValue, metadataValue],
-      'dc.contributor.author': [
-        {
-          value: 'Donohue, Tim'
-        },
-        {
-          value: 'Surname, Name'
-        }
-      ],
-      'oairecerif.author.affiliation': [
-        {
-          value: 'Duraspace'
-        },
-        {
-          value: '4Science'
-        }
-      ]
-    },
-    uuid: 'test-item-uuid',
-  }
-);
-
   const fieldMock = {
     metadata: 'dc.title',
     label: 'Preferred name',
@@ -153,30 +127,6 @@ describe('MetadataContainerComponent', () => {
     styleValue: 'test-style-value',
     labelAsHeading: false,
     valuesInline: true,
-  };
-
-  const fieldMock1 = {
-    metadata: 'dc.title',
-    label: 'Preferred name',
-    rendering: 'text.more1.last2',
-    fieldType: 'METADATA',
-    style: null,
-    styleLabel: 'test-style-label',
-    styleValue: 'test-style-value',
-    labelAsHeading: false,
-    valuesInline: true
-  };
-
-  const fieldMock2 = {
-    metadata: 'dc.title',
-    label: 'Preferred name',
-    rendering: 'text',
-    fieldType: 'METADATA',
-    style: null,
-    styleLabel: 'test-style-label',
-    styleValue: 'test-style-value',
-    labelAsHeading: false,
-    valuesInline: true
   };
 
   const fieldMockWithoutLabel = {
@@ -376,129 +326,6 @@ describe('MetadataContainerComponent', () => {
     },
   ] as NestedMetadataGroupEntry[];
 
-  const mockEntry = [
-    {
-      'field':{
-          'metadata':'dc.identifier.doi',
-          'label':'DOI',
-          'rendering':null,
-          'fieldType':'METADATA',
-          'styleLabel':'font-weight-bold col-3',
-          'styleValue':null,
-          'labelAsHeading':false,
-          'valuesInline':false
-      },
-      'value':{
-          'uuid':'e0f17692-576f-4b2f-a5d5-17c461704b29',
-          'language':null,
-          'value':'10.1016/j.procs.2017.03.038',
-          'place':0,
-          'authority':null,
-          'confidence':-1
-      }
-    },
-    {
-      'field':{
-          'metadata':'dc.identifier.doi',
-          'label':'DOI',
-          'rendering':null,
-          'fieldType':'METADATA',
-          'styleLabel':'font-weight-bold col-3',
-          'styleValue':null,
-          'labelAsHeading':false,
-          'valuesInline':false
-      },
-      'value':{
-          'uuid':'36169931-7195-41c6-89b4-d6dc7b75ef69',
-          'language':null,
-          'value':'sas',
-          'place':1,
-          'authority':null,
-          'confidence':-1
-      }
-    },
-    {
-      'field':{
-          'metadata':'dc.identifier.doi',
-          'label':'DOI',
-          'rendering':null,
-          'fieldType':'METADATA',
-          'styleLabel':'font-weight-bold col-3',
-          'styleValue':null,
-          'labelAsHeading':false,
-          'valuesInline':false
-      },
-      'value':{
-          'uuid':'2a7a6a10-0600-4340-b128-eda4e08f852c',
-          'language':null,
-          'value':'sa67',
-          'place':2,
-          'authority':null,
-          'confidence':-1
-      }
-    },
-    {
-      'field':{
-          'metadata':'dc.identifier.doi',
-          'label':'DOI',
-          'rendering':null,
-          'fieldType':'METADATA',
-          'styleLabel':'font-weight-bold col-3',
-          'styleValue':null,
-          'labelAsHeading':false,
-          'valuesInline':false
-      },
-      'value':{
-          'uuid':'7a75bb92-9af6-4e90-85a4-1d69b2941b1d',
-          'language':null,
-          'value':'76',
-          'place':3,
-          'authority':null,
-          'confidence':-1
-      }
-    },
-    {
-      'field':{
-          'metadata':'dc.identifier.doi',
-          'label':'DOI',
-          'rendering':null,
-          'fieldType':'METADATA',
-          'styleLabel':'font-weight-bold col-3',
-          'styleValue':null,
-          'labelAsHeading':false,
-          'valuesInline':false
-      },
-      'value':{
-          'uuid':'74ca8dcb-594b-4f57-b54f-942ffeb18466',
-          'language':null,
-          'value':'899',
-          'place':4,
-          'authority':null,
-          'confidence':-1
-      }
-    },
-    {
-      'field':{
-          'metadata':'dc.identifier.doi',
-          'label':'DOI',
-          'rendering':null,
-          'fieldType':'METADATA',
-          'styleLabel':'font-weight-bold col-3',
-          'styleValue':null,
-          'labelAsHeading':false,
-          'valuesInline':false
-      },
-      'value':{
-          'uuid':'1d032b00-5e59-4352-9471-60ccc077142b',
-          'language':null,
-          'value':'Testing',
-          'place':5,
-          'authority':null,
-          'confidence':-1
-      }
-    }
-] as NestedMetadataGroupEntry[];
-
   const bitstream1 = Object.assign(new Bitstream(), {
     id: 'bitstream1',
     uuid: 'bitstream1',
@@ -506,10 +333,6 @@ describe('MetadataContainerComponent', () => {
 
   const mockBitstreamDataService = jasmine.createSpyObj('BitstreamDataService', {
     findShowableBitstreamsByItem: jasmine.createSpy('findShowableBitstreamsByItem'),
-  });
-
-  const mockLoadMoreService = jasmine.createSpyObj('LoadMoreService',{
-    getComputedData: jasmine.createSpy('getComputedData'),
   });
 
   const mockLoadMoreService = jasmine.createSpyObj('LoadMoreService',{
