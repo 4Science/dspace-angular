@@ -495,6 +495,8 @@ describe('MetadataContainerComponent', () => {
           testItem.uuid,
           bitstreamField.bitstream.bundle,
           [ { metadataName: 'metadataFieldTest', metadataValue: 'metadataValueTest' } ],
+          false,
+          {},
           false
         );
       });
@@ -511,7 +513,9 @@ describe('MetadataContainerComponent', () => {
           testItem.uuid,
           bitstreamField.bitstream.bundle,
           [], // <--- empty array of filters,
-          false // <--- filterNonRestricted
+          false, // <--- filterNonRestricted
+          {},
+          false
         );
       });
     });
