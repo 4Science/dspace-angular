@@ -35,11 +35,13 @@ import { BaseItemViewerComponent } from '../base-item-viewer.component';
 export class IIIFItemViewerComponent extends BaseItemViewerComponent implements OnInit {
 
   private readonly CANVAS_PARAM: string = 'canvasId';
+  private readonly CANVASIDX_PARAM: string = 'canvasIndex';
   private readonly QUERY_PARAM: string = 'query';
 
   isSearchable$: Observable<boolean>;
   query$: Observable<string>;
   canvasId$: Observable<string>;
+  canvasIndex$: Observable<string>;
 
   constructor(
     private readonly routeService: RouteService,
@@ -54,6 +56,9 @@ export class IIIFItemViewerComponent extends BaseItemViewerComponent implements 
     );
     this.canvasId$ = queryParams$.pipe(
       this.extractParam(queryMap => queryMap.get(this.CANVAS_PARAM)),
+    );
+    this.canvasIndex$ = queryParams$.pipe(
+      this.extractParam(queryMap => queryMap.get(this.CANVASIDX_PARAM)),
     );
     this.isSearchable$ = this.item$.pipe(
       map((item) => isIiifSearchEnabled(item)),

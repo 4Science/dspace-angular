@@ -1,4 +1,7 @@
 <div [class]="field.styleValue">
-  <img *ngIf="(imageUrl$ | async) as url" [src]="url">
+  <img *ngIf="isBrowser && !isLoading; else imageSkeleton" [src]="imageUrl$ | async">
+  <ng-template #imageSkeleton>
+    <ngx-skeleton-loader style="width: 100%; height: 100%;" [theme]="{height: '100%', width: '100%'}"></ngx-skeleton-loader>
+  </ng-template>
 </div>
 

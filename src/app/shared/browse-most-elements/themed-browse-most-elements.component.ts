@@ -1,6 +1,8 @@
 import {
   Component,
+  EventEmitter,
   Input,
+  Output,
 } from '@angular/core';
 import { Context } from 'vm';
 
@@ -32,15 +34,19 @@ export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMos
 
   @Input() mode: LayoutModeEnum;
 
+  @Input() discoveryConfigurationsTotalElementsMap: Map<string, number>;
+
   @Input() showLabel: boolean;
 
   @Input() showMetrics: boolean;
 
-  @Input() topSection: TopSection;
-
   @Input() showThumbnails: boolean;
 
-  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'projection', 'mode', 'showLabel', 'showMetrics', 'showThumbnails', 'topSection', 'mode'];
+  @Input() topSection: TopSection;
+
+  @Output() totalElements: EventEmitter<number> = new EventEmitter<number>();
+
+  protected inAndOutputNames: (keyof BrowseMostElementsComponent & keyof this)[] = ['context', 'paginatedSearchOptions', 'projection', 'mode', 'showLabel', 'showMetrics', 'showThumbnails', 'topSection', 'discoveryConfigurationsTotalElementsMap'];
 
   protected getComponentName(): string {
     return 'BrowseMostElementsComponent';

@@ -16,6 +16,8 @@ import {
   TranslateModule,
 } from '@ngx-translate/core';
 import { of as observableOf } from 'rxjs';
+import { SafeUrlPipe } from 'src/app/shared/utils/safe-url-pipe';
+import { VarDirective } from 'src/app/shared/utils/var.directive';
 
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { BundleDataService } from '../../core/data/bundle-data.service';
@@ -60,12 +62,17 @@ describe('MiradorViewerComponent with search', () => {
   beforeEach(waitForAsync(() => {
     viewerService.showEmbeddedViewer.and.returnValue(true);
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useClass: TranslateLoaderMock,
-        },
-      }), MiradorViewerComponent],
+      imports: [
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock,
+          },
+        }),
+        MiradorViewerComponent,
+        VarDirective,
+        SafeUrlPipe,
+      ],
       providers: [
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
@@ -90,6 +97,7 @@ describe('MiradorViewerComponent with search', () => {
       comp = fixture.componentInstance;
       comp.object = getItem(noMetadata);
       comp.searchable = true;
+      comp.iframeViewerUrl = observableOf('testUrl');
       fixture.detectChanges();
     }));
 
@@ -126,12 +134,17 @@ describe('MiradorViewerComponent with multiple images', () => {
     viewerService.showEmbeddedViewer.and.returnValue(true);
     viewerService.getImageCount.and.returnValue(observableOf(2));
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useClass: TranslateLoaderMock,
-        },
-      }), MiradorViewerComponent],
+      imports: [
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock,
+          },
+        }),
+        MiradorViewerComponent,
+        VarDirective,
+        SafeUrlPipe,
+      ],
       providers: [
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
@@ -157,6 +170,7 @@ describe('MiradorViewerComponent with multiple images', () => {
       comp = fixture.componentInstance;
       comp.object = getItem(noMetadata);
       comp.searchable = false;
+      comp.iframeViewerUrl = observableOf('testUrl');
       fixture.detectChanges();
     }));
 
@@ -189,12 +203,17 @@ describe('MiradorViewerComponent with a single image', () => {
     viewerService.showEmbeddedViewer.and.returnValue(true);
     viewerService.getImageCount.and.returnValue(observableOf(1));
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useClass: TranslateLoaderMock,
-        },
-      }), MiradorViewerComponent],
+      imports: [
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock,
+          },
+        }),
+        MiradorViewerComponent,
+        VarDirective,
+        SafeUrlPipe,
+      ],
       providers: [
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
@@ -219,6 +238,7 @@ describe('MiradorViewerComponent with a single image', () => {
       fixture = TestBed.createComponent(MiradorViewerComponent);
       comp = fixture.componentInstance;
       comp.object = getItem(noMetadata);
+      comp.iframeViewerUrl = observableOf('testUrl');
       fixture.detectChanges();
     }));
 
@@ -297,12 +317,17 @@ describe('MiradorViewerComponent in development mode', () => {
     viewerService.showEmbeddedViewer.and.returnValue(false);
     viewerService.getImageCount.and.returnValue(observableOf(1));
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useClass: TranslateLoaderMock,
-        },
-      }), MiradorViewerComponent],
+      imports: [
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock,
+          },
+        }),
+        MiradorViewerComponent,
+        VarDirective,
+        SafeUrlPipe,
+      ],
       providers: [
         { provide: BitstreamDataService, useValue: {} },
       ],
@@ -327,6 +352,7 @@ describe('MiradorViewerComponent in development mode', () => {
       fixture = TestBed.createComponent(MiradorViewerComponent);
       comp = fixture.componentInstance;
       comp.object = getItem(noMetadata);
+      comp.iframeViewerUrl = observableOf('testUrl');
       fixture.detectChanges();
     }));
 

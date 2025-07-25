@@ -1,0 +1,30 @@
+<div>
+  <h2 class="h1 font-weight-bold mb-4">
+    {{ 'home.advanced-top-section.' + advancedTopSection.sortField | translate }}
+  </h2>
+  <div class="d-flex justify-content-center mb-3" *ngIf="advancedTopSection.discoveryConfigurationName?.length > 1">
+    <div [ngClass]="(isXs() | async) ? 'btn-group-vertical' : 'btn-group'">
+      <ng-container *ngFor="let discoveryConfigurationName of advancedTopSection.discoveryConfigurationName">
+        <button class="btn text-capitalize select-discovery-btn"
+                *ngIf="discoveryConfigurationsTotalElementsMap.get(discoveryConfigurationName) > 0"
+                [ngClass]="(selectedDiscoverConfiguration.asObservable() | async) === discoveryConfigurationName ? 'btn-primary' : 'btn-outline-primary'"
+                (click)="selectDiscoveryConfiguration(discoveryConfigurationName)"
+        >
+          {{ 'home.advanced-top-section.discovery.' + discoveryConfigurationName | translate }}
+        </button>
+      </ng-container>
+    </div>
+  </div>
+  <div>
+    <div class="row justify-content-center">
+      <ds-loading *ngIf="(loading$ | async)"></ds-loading>
+    </div>
+    <ds-browse-most-elements
+      *ngIf="(loading$ | async) !== true"
+      [context]="context"
+      [discoveryConfigurationsTotalElementsMap]="discoveryConfigurationsTotalElementsMap"
+      [paginatedSearchOptions]="paginatedSearchOptions.asObservable() | async"
+      [topSection]="$any(advancedTopSection)"
+    ></ds-browse-most-elements>
+  </div>
+</div>

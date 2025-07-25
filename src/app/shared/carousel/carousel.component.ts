@@ -1,5 +1,6 @@
 import {
   AsyncPipe,
+  isPlatformBrowser,
   NgClass,
   NgForOf,
   NgIf,
@@ -8,8 +9,11 @@ import {
 } from '@angular/common';
 import {
   Component,
+  Inject,
+  inject,
   Input,
   OnInit,
+  PLATFORM_ID,
   ViewChild,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
@@ -21,6 +25,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import difference from 'lodash/difference';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import {
   BehaviorSubject,
   from,
@@ -34,13 +39,17 @@ import {
   switchMap,
   take,
 } from 'rxjs/operators';
-import { InternalLinkService } from 'src/app/core/services/internal-link.service';
 
 import { SearchManager } from '../../core/browse/search-manager';
 import { SortOptions } from '../../core/cache/models/sort-options.model';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { RemoteData } from '../../core/data/remote-data';
+import { InternalLinkService } from '../../core/services/internal-link.service';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../core/services/window.service';
 import { Bitstream } from '../../core/shared/bitstream.model';
 import { BitstreamFormat } from '../../core/shared/bitstream-format.model';
 import { Item } from '../../core/shared/item.model';
@@ -61,7 +70,7 @@ import { CarouselOptions } from './carousel-options.model';
  * Component representing the Carousel component section.
  */
 @Component({
-  selector: 'ds-carousel',
+  selector: 'ds-base-carousel',
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
   providers: [],
@@ -76,10 +85,16 @@ import { CarouselOptions } from './carousel-options.model';
     NgClass,
     TranslateModule,
     BtnDisabledDirective,
+    NgxSkeletonLoaderModule,
   ],
   standalone: true,
 })
 export class CarouselComponent implements OnInit {
+  /**
+   * Items to be used in carousel.
+   */
+  @Input()
+  items: ItemSearchResult[];
 
   /**
    * Carousel section configurations.
@@ -136,6 +151,7 @@ export class CarouselComponent implements OnInit {
    */
   pageToBitstreamsMap: Map<number, ItemSearchResult[]> = new Map();
 
+
   /**
    * The page number that drives the bitstreams preload
    */
@@ -146,18 +162,24 @@ export class CarouselComponent implements OnInit {
    */
   carouselItems$: BehaviorSubject<ItemSearchResult[]> = new BehaviorSubject<ItemSearchResult[]>([]);
 
+
+  private platformId = inject(PLATFORM_ID);
+
   private paginationOptionId: string;
 
   private pageSize = 5;
 
   private slideLoadingBuffer = 2;
 
+  isBrowser = isPlatformBrowser(this.platformId);
 
   constructor(
     protected bitstreamDataService: BitstreamDataService,
-    private searchManager: SearchManager,
-    public internalLinkService: InternalLinkService,
-  ) {}
+    protected searchManager: SearchManager,
+    protected internalLinkService: InternalLinkService,
+    @Inject(NativeWindowService) protected _window: NativeWindowRef,
+  ) {
+  }
 
   ngOnInit() {
     this.title = this.carouselOptions.title;
@@ -256,6 +278,10 @@ export class CarouselComponent implements OnInit {
 
   getItemLink(item: Item): string {
     return item.firstMetadataValue(this.link);
+  }
+
+  isLinkInternal(link: string) {
+    return link.startsWith('/');
   }
 
   /**

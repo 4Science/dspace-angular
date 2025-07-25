@@ -1,4 +1,8 @@
 :host {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
   ::ng-deep {
     .carousel-control-prev-icon, .carousel-control-next-icon {
       width: 32px;
@@ -99,6 +103,10 @@
   .prev {
     border-top-left-radius: 0.25rem;
     border-bottom-left-radius: 0.25rem;
+  }
+
+  .break-all {
+    word-break: break-all;
   }
 
 }

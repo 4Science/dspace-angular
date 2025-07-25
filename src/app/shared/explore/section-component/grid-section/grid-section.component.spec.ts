@@ -24,6 +24,7 @@ import {
 import { of } from 'rxjs';
 
 import { RemoteDataBuildService } from '../../../../core/cache/builders/remote-data-build.service';
+import { SortDirection } from '../../../../core/cache/models/sort-options.model';
 import { ObjectCacheService } from '../../../../core/cache/object-cache.service';
 import { BitstreamFormatDataService } from '../../../../core/data/bitstream-format-data.service';
 import { DSOChangeAnalyzer } from '../../../../core/data/dso-change-analyzer.service';
@@ -33,12 +34,12 @@ import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service
 import { SearchService } from '../../../../core/shared/search/search.service';
 import { Site } from '../../../../core/shared/site.model';
 import { UUIDService } from '../../../../core/shared/uuid.service';
-import { getMockObjectCacheService } from '../../../../shared/mocks/object-cache.service.mock';
-import { getMockRemoteDataBuildService } from '../../../../shared/mocks/remote-data-build.service.mock';
-import { getMockUUIDService } from '../../../../shared/mocks/uuid.service.mock';
-import { NotificationsService } from '../../../../shared/notifications/notifications.service';
 import { ThemedThumbnailComponent } from '../../../../thumbnail/themed-thumbnail.component';
+import { getMockObjectCacheService } from '../../../mocks/object-cache.service.mock';
+import { getMockRemoteDataBuildService } from '../../../mocks/remote-data-build.service.mock';
 import { TranslateLoaderMock } from '../../../mocks/translate-loader.mock';
+import { getMockUUIDService } from '../../../mocks/uuid.service.mock';
+import { NotificationsService } from '../../../notifications/notifications.service';
 import { createSuccessfulRemoteDataObject$ } from '../../../remote-data.utils';
 import { SearchResult } from '../../../search/models/search-result.model';
 import { GridSectionComponent } from './grid-section.component';
@@ -134,7 +135,9 @@ describe('GridSectionComponent', () => {
       discoveryConfigurationName: 'publication',
       componentType: 'grid',
       style: 'col-md-6',
-      'main-content-link': '',
+      mainContentLink: '',
+      order: SortDirection.ASC,
+      sortField: '',
     };
     component.site  = Object.assign(new Site(), {
       id: 'test-site',

@@ -1,0 +1,54 @@
+<ng-container *ngIf="itemList?.length>0">
+  <div class="thumbnail-grid-wrapper">
+    <ng-container *ngIf="!isHorizontal; else horizontalGrid">
+      <div class="thumbnail-grid" #thumbnailContainer [style.height.px]="numberOfItems*heightThumbnailPx">
+        <ng-container *ngFor="let item of itemList; index as i">
+          <ng-container *ngTemplateOutlet="thumbnailContainerTemplate; context: { $implicit: item, index: i }"></ng-container>
+        </ng-container>
+      </div>
+      <div class="y-btn-container">
+        <ng-container *ngTemplateOutlet="navigationButtons"></ng-container>
+      </div>
+    </ng-container>
+    <ng-template #horizontalGrid>
+      <div class="h-thumbnail-grid" #thumbnailContainer [style.width.px]="numberOfItems*widthThumbnailPx">
+        <ng-container *ngFor="let item of itemList; index as i">
+          <ng-container *ngTemplateOutlet="thumbnailContainerTemplate; context: { $implicit: item, index: i }"></ng-container>
+        </ng-container>
+        <div [ngStyle]="{'padding-top': (heightThumbnailPx/3 + 4) + 'px'}">
+          <ng-container *ngTemplateOutlet="navigationButtons"></ng-container>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</ng-container>
+<ng-template #thumbnailContainerTemplate let-item="$implicit" let-i="index">
+  @defer {
+    @if ((itemsImagesLoading$ | async) === false) {
+      <div class="thumbnail-container"
+           [style.height.px]="heightThumbnailPx"
+           [style.width.px]="widthThumbnailPx"
+           [ngClass]="{'selected': activeIndex === i}"
+           (click)="onThumbnailClick(item, i)"
+           [dsBackgroundImage]="(itemToImageHrefMap$ | async)?.get(item.uuid) ?? placeholderSrc"
+           #thumbnails></div>
+        } @else {
+      <ng-container *ngTemplateOutlet="imageSkeleton"></ng-container>
+    }
+  } @placeholder {
+    <ng-container *ngTemplateOutlet="imageSkeleton"></ng-container>
+  }
+  <ng-template #imageSkeleton>
+    <ngx-skeleton-loader class="thumbnail-container" [theme]="{height: heightThumbnailPx + 'px', width: widthThumbnailPx + 'px'}"></ngx-skeleton-loader>
+  </ng-template>
+</ng-template>
+
+<ng-template #navigationButtons>
+  <a id="previous-arrow" role="button" class="thumbnail-up-btn pt-3" (click)="getPrev()" *ngIf="!isFirstItem">
+    <span *ngIf="isHorizontal" aria-hidden="true" class="fas fa-3x fa-chevron-up thumbnail-left-icon"></span>
+    <span *ngIf="!isHorizontal" aria-hidden="true" class="fas fa-3x fa-chevron-up thumbnail-up-icon"></span>
+  </a>
+  <a id="next-arrow" role="button" class="thumbnail-down-btn pb-3" (click)="getNext()" *ngIf="!isLastItem">
+    <span aria-hidden="true" class="fas fa-3x fa-chevron-down thumbnail-down-icon"></span>
+  </a>
+</ng-template>

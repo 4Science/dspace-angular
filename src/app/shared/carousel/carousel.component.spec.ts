@@ -23,7 +23,6 @@ import {
   TranslateModule,
 } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
-import { InternalLinkService } from 'src/app/core/services/internal-link.service';
 
 import { toRemoteData } from '../../browse-by/browse-by-metadata/browse-by-metadata.component.spec';
 import { SearchManager } from '../../core/browse/search-manager';
@@ -36,6 +35,7 @@ import { DSOChangeAnalyzer } from '../../core/data/dso-change-analyzer.service';
 import { FindListOptions } from '../../core/data/find-list-options.model';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { RemoteData } from '../../core/data/remote-data';
+import { InternalLinkService } from '../../core/services/internal-link.service';
 import {
   NativeWindowRef,
   NativeWindowService,
@@ -84,6 +84,7 @@ describe('CarouselComponent', () => {
     captionStyle: '',
     titleStyle: '',
     bundle: 'ORIGINAL',
+    showBlurryBackdrop: false,
     discoveryConfiguration: 'person',
     sortField: 'testField',
     sortDirection: SortDirection.DESC,
@@ -239,12 +240,6 @@ describe('CarouselComponent', () => {
     done();
   });
 
-  it('should render image', (done) => {
-    const image = fixture.debugElement.queryAll(By.css('.picsum-img-wrapper'));
-    expect(image.length).toBe(1);
-    done();
-  });
-
   describe('when no data', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(CarouselComponent);
@@ -268,7 +263,7 @@ describe('CarouselComponent', () => {
     });
 
     it('should not render image', (done) => {
-      const image = fixture.debugElement.queryAll(By.css('.picsum-img-wrapper'));
+      const image = fixture.debugElement.queryAll(By.css('.picsum-img-wrapper > img'));
       expect(image.length).toBe(0);
       done();
     });

@@ -11,8 +11,8 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { SortDirection } from '../../../../core/cache/models/sort-options.model';
 import { CarouselSection } from '../../../../core/layout/models/section.model';
-import { CarouselComponent } from '../../../carousel/carousel.component';
 import { CarouselOptions } from '../../../carousel/carousel-options.model';
+import { ThemedCarouselComponent } from '../../../carousel/themed-carousel.component';
 import { ThemedLoadingComponent } from '../../../loading/themed-loading.component';
 
 /**
@@ -25,7 +25,7 @@ import { ThemedLoadingComponent } from '../../../loading/themed-loading.componen
   providers: [],
   standalone: true,
   imports: [
-    CarouselComponent,
+    ThemedCarouselComponent,
     AsyncPipe,
     TranslateModule,
     ThemedLoadingComponent,
@@ -84,6 +84,7 @@ export class CarouselSectionComponent implements OnInit {
       sortField: this.carouselSection.sortField ?? this.DEFAULT_SORT_FIELD,
       sortDirection:  this.carouselSection.order && this.carouselSection.order.toUpperCase() === 'ASC' ? SortDirection.ASC : SortDirection.DESC,
       numberOfItems: this.carouselSection.numberOfItems &&  this.carouselSection.numberOfItems  > 0 ? this.carouselSection.numberOfItems : 20,
+      showBlurryBackdrop: this.carouselSection.showBlurryBackdrop ?? false,
     };
   }
 
