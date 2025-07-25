@@ -13040,203 +13040,14 @@
   // TODO New key - Add a translation
   "statistics-page.export-map-as-image": "Export map",
 
-  // "crisref.metadata.view.first" : "View first",
-  // TODO New key - Add a translation
-  "crisref.metadata.view.first": "View first",
-
-  // "crisref.metadata.view.last" : "View last",
-  // TODO New key - Add a translation
-  "crisref.metadata.view.last": "View last",
-
-  // "cris-layout.rendering.more" : "more",
-  // TODO New key - Add a translation
-  "cris-layout.rendering.more": "more",
-
-  // "cris-layout.rendering.more.withlast" : "more",
-  // TODO New key - Add a translation
-  "cris-layout.rendering.more.withlast": "more",
-
-  // "cris-layout.rendering.more.tooltip" : "click to see all",
-  // TODO New key - Add a translation
-  "cris-layout.rendering.more.tooltip": "click to see all",
-
-  // "cris-layout.rendering.collapse" : "collapse",
-  // TODO New key - Add a translation
-  "cris-layout.rendering.collapse": "collapse",
-
-  // "family.listelement.badge": "Family",
-  // TODO New key - Add a translation
-  "family.listelement.badge": "Family",
-
-  // "place.listelement.badge": "Place",
-  // TODO New key - Add a translation
-  "place.listelement.badge": "Place",
-
-  // "archivalmaterials.listelement.badge": "Archival Materials",
-  // TODO New key - Add a translation
-  "archivalmaterials.listelement.badge": "Archival Materials",
-
-  // "fond.listelement.badge": "Fond",
-  // TODO New key - Add a translation
-  "fond.listelement.badge": "Fond",
-
-  // "journalfond.listelement.badge": "Journal Fond",
-  // TODO New key - Add a translation
-  "journalfond.listelement.badge": "Journal Fond",
-
-  // "aggregation.listelement.badge": "Aggregation",
-  // TODO New key - Add a translation
-  "aggregation.listelement.badge": "Aggregation",
-  // "news.listelement.badge": "News",
-  // TODO New key - Add a translation
-  "news.listelement.badge": "News",
-  // "staticpage.listelement.badge": "Page",
-  // TODO New key - Add a translation
-  "staticpage.listelement.badge": "Page",
-  // "path.listelement.badge": "Path",
-  // TODO New key - Add a translation
-  "path.listelement.badge": "Path",
-  // "opera.listelement.badge": "Opera",
-  // TODO New key - Add a translation
-  "opera.listelement.badge": "Opera",
-  // "coin.listelement.badge": "Coin",
-  // TODO New key - Add a translation
-  "coin.listelement.badge": "Coin",
-  // "scientificmaterial.listelement.badge": "Scientific Material",
-  // TODO New key - Add a translation
-  "scientificmaterial.listelement.badge": "Scientific Material",
-
-  // "picture.listelement.badge": "Picture",
-  // TODO New key - Add a translation
-  "picture.listelement.badge": "Picture",
-  // "menu.section.explore_sectionfonds" : "Fonds",
-  // TODO New key - Add a translation
-  "menu.section.explore_sectionfonds": "Fonds",
-  // "menu.section.explore_sectionjournalfonds" : "Journal Fonds",
-  // TODO New key - Add a translation
-  "menu.section.explore_sectionjournalfonds": "Journal Fonds",
-
-  // "menu.section.explore_sectionaggregations" : "Collections",
-  // TODO New key - Add a translation
-  "menu.section.explore_sectionaggregations": "Collections",
-  // "menu.section.explore_sectiondocuments" : "Documents & Other materials",
-  // TODO New key - Add a translation
-  "menu.section.explore_sectiondocuments": "Documents & Other materials",
-  // "explore.counters-section.fonds" : "Fonds",
-  // TODO New key - Add a translation
-  "explore.counters-section.fonds": "Fonds",
-  // "explore.counters-section.journalfonds" : "Journal Fonds",
-  // TODO New key - Add a translation
-  "explore.counters-section.journalfonds": "Journal Fonds",
-  // "explore.counters-section.aggregations" : "Collections",
-  // TODO New key - Add a translation
-  "explore.counters-section.aggregations": "Collections",
-  // "explore.counters-section.documents" : "Documents & Other materials",
-  // TODO New key - Add a translation
-  "explore.counters-section.documents": "Documents & Other materials",
-
-  // "explore.index.titleF" : "Title",
-  // TODO New key - Add a translation
-  "explore.index.titleF": "Title",
-  // "explore.index.typeF" : "Type",
-  // TODO New key - Add a translation
-  "explore.index.typeF": "Type",
-  // "explore.index.dateissuedF" : "Date",
-  // TODO New key - Add a translation
-  "explore.index.dateissuedF": "Date",
-  // "explore.index.subjectF" : "Subject",
-  // TODO New key - Add a translation
-  "explore.index.subjectF": "Subject",
-  // "explore.index.titleJF" : "Title",
-  // TODO New key - Add a translation
-  "explore.index.titleJF": "Title",
-  // "explore.index.typeJF" : "Type",
-  // TODO New key - Add a translation
-  "explore.index.typeJF": "Type",
-  // "explore.index.dateissuedJF" : "Date",
-  // TODO New key - Add a translation
-  "explore.index.dateissuedJF": "Date",
-  // "explore.index.subjectJF" : "Subject",
-  // TODO New key - Add a translation
-  "explore.index.subjectJF": "Subject",
-  // "explore.index.titleA" : "Title",
-  // TODO New key - Add a translation
-  "explore.index.titleA": "Title",
-  // "explore.index.typeA" : "Type",
-  // TODO New key - Add a translation
-  "explore.index.typeA": "Type",
-  // "explore.index.dateissuedA" : "Date",
-  // TODO New key - Add a translation
-  "explore.index.dateissuedA": "Date",
-  // "explore.index.subjectA" : "Subject",
-  // TODO New key - Add a translation
-  "explore.index.subjectA": "Subject",
-  // "explore.index.path" : "Path",
-  // TODO New key - Add a translation
-  "explore.index.path": "Path",
   // "explore.index.fond" : "Fond",
   // TODO New key - Add a translation
   "explore.index.fond": "Fond",
+
   // "explore.index.journalfond" : "Journal Fond",
   // TODO New key - Add a translation
   "explore.index.journalfond": "Journal Fond",
-  // "explore.index.aggregation" : "Collection",
-  // TODO New key - Add a translation
-  "explore.index.aggregation": "Collection",
 
-  // "explore.search-section.sectiondocuments.title" : "Search Documents & Other materials",
-  // TODO New key - Add a translation
-  "explore.search-section.sectiondocuments.title": "Search Documents & Other materials",
-
-  // "explore.search-section.sectionfonds.title" : "Search Fonds",
-  // TODO New key - Add a translation
-  "explore.search-section.sectionfonds.title": "Search Fonds",
-
-  // "explore.search-section.sectionjournalfonds.title" : "Search Journal fonds",
-  // TODO New key - Add a translation
-  "explore.search-section.sectionjournalfonds.title": "Search Journal fonds",
-
-  // "explore.search-section.sectionaggregations.title" : "Search Collections",
-  // TODO New key - Add a translation
-  "explore.search-section.sectionaggregations.title": "Search Collections",
-
-  // "explore.sectiondocuments.breadcrumbs": "Documents & Other materials",
-  // TODO New key - Add a translation
-  "explore.sectiondocuments.breadcrumbs": "Documents & Other materials",
-
-  // "explore.sectionfonds.breadcrumbs": "Fonds",
-  // TODO New key - Add a translation
-  "explore.sectionfonds.breadcrumbs": "Fonds",
-  // "explore.sectionjournalfonds.breadcrumbs": "Journal Fonds",
-  // TODO New key - Add a translation
-  "explore.sectionjournalfonds.breadcrumbs": "Journal Fonds",
-  // "explore.sectionaggregations.breadcrumbs": "Collections",
-  // TODO New key - Add a translation
-  "explore.sectionaggregations.breadcrumbs": "Collections",
-  // "documents.search.results.head": "Documents & Other materials Search Results",
-  // TODO New key - Add a translation
-  "documents.search.results.head": "Documents & Other materials Search Results",
-  // "fonds.search.results.head": "Fonds Search Results",
-  // TODO New key - Add a translation
-  "fonds.search.results.head": "Fonds Search Results",
-  // "journalfonds.search.results.head": "Journal Fonds Search Results",
-  // TODO New key - Add a translation
-  "journalfonds.search.results.head": "Journal Fonds Search Results",
-  // "aggregations.search.results.head": "Collections Search Results",
-  // TODO New key - Add a translation
-  "aggregations.search.results.head": "Collections Search Results",
-  // "search.filters.filter.path.head": "Path",
-  // TODO New key - Add a translation
-  "search.filters.filter.path.head": "Path",
-  // "search.filters.filter.path.placeholder": "Path name",
-  // TODO New key - Add a translation
-  "search.filters.filter.path.placeholder": "Path name",
-  // "search.filters.filter.path.label": "Search Path name",
-  // TODO New key - Add a translation
-  "search.filters.filter.path.label": "Search Path name",
-  // "search.filters.applied.f.path": "Path",
-  // TODO New key - Add a translation
-  "search.filters.applied.f.path": "Path",
   // "search.filters.filter.fond.head": "Fond",
   // TODO New key - Add a translation
   "search.filters.filter.fond.head": "Fond",
@@ -13261,18 +13072,6 @@
   // "search.filters.applied.f.journalfond": "Journal Fond",
   // TODO New key - Add a translation
   "search.filters.applied.f.journalfond": "Journal Fond",
-  // "search.filters.filter.aggregation.head": "Collection",
-  // TODO New key - Add a translation
-  "search.filters.filter.aggregation.head": "Collection",
-  // "search.filters.filter.aggregation.placeholder": "Collection name",
-  // TODO New key - Add a translation
-  "search.filters.filter.aggregation.placeholder": "Collection name",
-  // "search.filters.filter.aggregation.label": "Search Collection name",
-  // TODO New key - Add a translation
-  "search.filters.filter.aggregation.label": "Search Collection name",
-  // "search.filters.applied.f.aggregation": "Collection",
-  // TODO New key - Add a translation
-  "search.filters.applied.f.aggregation": "Collection",
   // "submission.sections.submit.progressbar.describe.archival_materials": "Archival Materials Basic Information",
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.archival_materials": "Archival Materials Basic Information",
@@ -13287,18 +13086,6 @@
   // "submission.sections.submit.progressbar.describe.fond": "Fond Details",
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.fond": "Fond Details",
-
-  // "submission.sections.submit.progressbar.describe.place": "Place Details",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.place": "Place Details",
-
-  // "submission.sections.submit.progressbar.describe.family": "Family Details",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.family": "Family Details",
-
-  // "submission.sections.submit.progressbar.describe.aggregation": "Aggregation Details",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.aggregation": "Aggregation Details",
 
   // "submission.sections.submit.progressbar.describe.journal_fond": "Journal Fond Details",
   // TODO New key - Add a translation
@@ -13316,65 +13103,10 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.journal_fond-glamjournalfond-relation-journalfond": "Journal Fond Relation",
 
-  // "submission.sections.submit.progressbar.describe.path": "Path Details",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.path": "Path Details",
-
-  // "submission.sections.submit.progressbar.describe.opera": "Opera Details",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.opera": "Opera Details",
-
-  // "submission.sections.submit.progressbar.describe.coin": "Coin Details",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.coin": "Coin Details",
-
-  // "submission.sections.submit.progressbar.describe.picture": "Picture Details",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.picture": "Picture Details",
-
-  // "submission.sections.submit.progressbar.describe.news": "News Details",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.news": "News Details",
-
-  // "submission.sections.submit.progressbar.describe.staticpage": "Page Details",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.staticpage": "Page Details",
-
-  // "submission.sections.submit.progressbar.describe.staticpage-url": "Page URL",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.staticpage-url": "Page URL",
-
-  // "submission.sections.submit.progressbar.describe.journal_materials": "Journal Issue Basic Information",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.journal_materials": "Journal Issue Basic Information",
-
-  // "submission.sections.submit.progressbar.describe.journal_materials_indexing": "Journal Issue Indexing Information",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.journal_materials_indexing": "Journal Issue Indexing Information",
-
-  // "submission.sections.submit.progressbar.describe.journal_materials_references": "Journal Issue Contextual References",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.journal_materials_references": "Journal Issue Contextual References",
-
-  // "submission.sections.submit.progressbar.describe.scientificmaterial": "Scientific Material Basic Information",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.scientificmaterial": "Scientific Material Basic Information",
-
-  // "submission.sections.submit.progressbar.describe.scientificmaterial_indexing": "Scientific Material Indexing Information",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.scientificmaterial_indexing": "Scientific Material Indexing Information",
-
-  // "submission.sections.submit.progressbar.describe.scientificmaterial_references": "Scientific Material Contextual References",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.scientificmaterial_references": "Scientific Material Contextual References",
 
   // "submission.sections.submit.progressbar.describe.journal_issue": "Journal Issue Details",
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.journal_issue": "Journal Issue Details",
-
-  // "map.coordinates-invalid": "Coordinates are not valid",
-  // TODO New key - Add a translation
-  "map.coordinates-invalid": "Coordinates are not valid",
 
   // "curation-task.task.hocr.label": "Extract text (HOCR) from images",
   "curation-task.task.hocr.label": "Estrarre testo (HOCR) dalle immagini",
