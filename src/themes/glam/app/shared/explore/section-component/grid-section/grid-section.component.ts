@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
-  NgForOf,
-  NgIf,
+  NgTemplateOutlet,
   SlicePipe,
 } from '@angular/common';
 import { Component } from '@angular/core';
@@ -20,14 +19,13 @@ import { BackgroundImageDirective } from '../../../../../../../app/shared/utils/
   templateUrl: './grid-section.component.html',
   standalone: true,
   imports: [
-    NgIf,
-    NgForOf,
     TranslateModule,
     SlicePipe,
     AsyncPipe,
     BackgroundImageDirective,
     RouterLink,
     NgxSkeletonLoaderModule,
+    NgTemplateOutlet,
   ],
 })
 export class GridSectionComponent extends BaseComponent {

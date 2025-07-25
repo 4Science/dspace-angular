@@ -54,11 +54,7 @@ describe('ThumbnailSliderComponent', () => {
         { provide: NativeWindowService, useValue: {} },
         { provide: NativeWindowRef, useValue: {} },
         { provide: SearchConfigurationService, useValue: { getConfigurationSearchConfig: () => of({ sortOptions: [] }) } },
-        {
-          provide: ActivatedRoute, useValue: {
-            queryParamMap: of({}),
-          },
-        },
+        { provide: ActivatedRoute, useValue: {} },
         { provide: RouteService, useValue: {} },
         { provide: HALEndpointService, useValue: halService },
         { provide: RequestService, useValue: jasmine.createSpyObj('requestService', ['generateRequestId', 'send']) },

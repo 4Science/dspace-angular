@@ -3,6 +3,7 @@ import { getInfoModulePath } from '../app-routing-paths';
 export const END_USER_AGREEMENT_PATH = 'end-user-agreement';
 export const FEEDBACK_PATH = 'feedback';
 export const COAR_NOTIFY_SUPPORT = 'coar-notify-support';
+export const ACCESSIBILITY_SETTINGS_PATH = 'accessibility';
 
 // The path of the information pages that use glam.cms.* metadata should correspond to the metadata qualifier
 export const GENERAL_INFORMATION_PATH = 'general-information';
@@ -41,6 +42,10 @@ export function getFeedbackPath() {
 
 export function getCOARNotifySupportPath(): string {
   return getSubPath(COAR_NOTIFY_SUPPORT);
+}
+
+export function getAccessibilitySettingsPath() {
+  return getSubPath(ACCESSIBILITY_SETTINGS_PATH);
 }
 
 function getSubPath(path: string) {

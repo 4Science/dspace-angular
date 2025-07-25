@@ -4,6 +4,7 @@ import {
   NgClass,
   NgForOf,
   NgIf,
+  NgTemplateOutlet,
 } from '@angular/common';
 import {
   AfterViewInit,
@@ -60,6 +61,7 @@ import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.com
     NgbTooltipModule,
     NgClass,
     NgbTooltipModule,
+    NgTemplateOutlet,
     VarDirective,
   ],
 })

@@ -60,7 +60,6 @@ import { ThemedSearchSectionComponent } from '../shared/explore/section-componen
 import { ThemedTextSectionComponent } from '../shared/explore/section-component/text-section/themed-text-section.component';
 import { ThemedTopSectionComponent } from '../shared/explore/section-component/top-section/themed-top-section.component';
 import { ThemedTwitterSectionComponent } from '../shared/explore/section-component/twitter-section/themed-twitter-section.component';
-import { ViewTrackerComponent } from '../statistics/angulartics/dspace/view-tracker.component';
 import { HomeCoarComponent } from './home-coar/home-coar.component';
 import { ThemedHomeNewsComponent } from './home-news/themed-home-news.component';
 
@@ -82,7 +81,6 @@ import { ThemedHomeNewsComponent } from './home-news/themed-home-news.component'
     ThemedSearchSectionComponent,
     ThemedFacetSectionComponent,
     ThemedCountersSectionComponent,
-    ViewTrackerComponent,
     SuggestionsPopupComponent,
     AsyncPipe,
     ThemedCarouselSectionComponent,

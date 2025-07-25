@@ -60,11 +60,14 @@
                                           [sectionId]="sectionId"
                                           [advancedTopSection]="$any(sectionComponent)"></ds-advanced-top-section>
 
+          <ds-advanced-top-section *ngSwitchCase="'advanced-top-component'"
+                                          [sectionId]="sectionId"
+                                          [advancedTopSection]="$any(sectionComponent)"></ds-advanced-top-section>
+
         </div>
       </div>
     </div>
   </div>
 </ng-container>
 
-<ds-view-tracker [object]="site$.value"></ds-view-tracker>
 <ds-suggestions-popup></ds-suggestions-popup>

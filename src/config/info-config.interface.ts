@@ -9,5 +9,6 @@ export interface InfoConfig extends Config {
   enableOfferedServices: boolean;
   enableHistoryDigital: boolean;
   enableOrgStructure: boolean;
+  enableCookieConsentPopup: boolean;
   metricsConsents: ThirdPartyMetric[];
 }

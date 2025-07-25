@@ -1,8 +1,7 @@
 import {
   AsyncPipe,
-  isPlatformBrowser,
   NgForOf,
-  NgIf,
+  NgTemplateOutlet,
 } from '@angular/common';
 import {
   Component,
@@ -34,9 +33,8 @@ import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.com
     ThemedTypeBadgeComponent,
     RouterLink,
     NgxSkeletonLoaderModule,
-    NgIf,
     NgForOf,
-    NgIf,
+    NgTemplateOutlet,
   ],
 })
 export class ImagesBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnInit {
@@ -56,7 +54,6 @@ export class ImagesBrowseElementsComponent extends AbstractBrowseElementsCompone
   totalElements$: Observable<number>;
 
   ngOnInit() {
-    this.isBrowser = isPlatformBrowser(this.platformId);
     super.ngOnInit();
 
     this.itemToImageHrefMap$ = this.searchResultArray$.pipe(

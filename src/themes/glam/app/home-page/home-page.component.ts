@@ -22,7 +22,6 @@ import { ThemedSliderSectionComponent } from '../../../../app/shared/explore/sec
 import { ThemedTextSectionComponent } from '../../../../app/shared/explore/section-component/text-section/themed-text-section.component';
 import { ThemedTopSectionComponent } from '../../../../app/shared/explore/section-component/top-section/themed-top-section.component';
 import { ThemedTwitterSectionComponent } from '../../../../app/shared/explore/section-component/twitter-section/themed-twitter-section.component';
-import { ViewTrackerComponent } from '../../../../app/statistics/angulartics/dspace/view-tracker.component';
 import { environment } from '../../../../environments/environment';
 
 @Component({
@@ -46,7 +45,6 @@ import { environment } from '../../../../environments/environment';
     ThemedGridSectionComponent,
     ThemedTwitterSectionComponent,
     ThemedAdvancedTopSectionComponent,
-    ViewTrackerComponent,
     SuggestionsPopupComponent,
     NgSwitchCase,
   ],

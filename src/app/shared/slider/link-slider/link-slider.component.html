@@ -14,15 +14,19 @@
        [href]="getItemLink(item)"
        target="_blank"
        class="img-container-el">
-      <ng-container *ngIf="isBrowser && (itemsImagesLoading$ | async) === false; else imageSkeleton">
-        <ng-container
-          *ngIf="(itemToImageHrefMap$ | async)?.get(item.uuid); let href; else defaultPreviewImage">
-          <img [src]="href" [alt]="item.metadata[title]?.[0].value">
-        </ng-container>
-        <ng-template #defaultPreviewImage>
-          <img [src]="placeholderSrc" [alt]="item.metadata[title]?.[0].value">
-        </ng-template>
-      </ng-container>
+      @defer {
+        @if ((itemsImagesLoading$ | async) === false) {
+          @if ((itemToImageHrefMap$ | async)?.get(item.uuid); as href) {
+            <img [src]="href" [alt]="item.metadata[title]?.[0].value">
+          } @else {
+            <img [src]="placeholderSrc" [alt]="item.metadata[title]?.[0].value">
+          }
+        } @else {
+          <ng-container *ngTemplateOutlet="imageSkeleton"></ng-container>
+        }
+      } @placeholder {
+        <ng-container *ngTemplateOutlet="imageSkeleton"></ng-container>
+      }
       <ng-template #imageSkeleton>
         <ngx-skeleton-loader class="h-100 w-100" [theme]="{height: '100%', width: '100%'}"></ngx-skeleton-loader>
       </ng-template>

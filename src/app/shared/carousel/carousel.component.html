@@ -16,20 +16,21 @@
                 'height': carouselOptions.keepAspectRatio ? null : carouselOptions.carouselHeightPx + 'px',
                 'aspect-ratio': carouselOptions.keepAspectRatio ? carouselOptions.aspectRatio : null
            }">
-        <div class="picsum-img-wrapper" *ngIf="isBrowser; else imageSkeleton">
-          <img
-               *ngIf="(itemToImageHrefMap$ | async).get(item.indexableObject.uuid); let href"
-               [src]="href"
-               [alt]="item.indexableObject.metadata[title][0].value" class="img-fluid"
-               [ngClass]="{'w-100': carouselOptions.fitWidth, 'h-100': carouselOptions.fitHeight}">
-        </div>
-        <ng-template #imageSkeleton>
+        @defer {
+          <div class="picsum-img-wrapper">
+            <img
+              *ngIf="(itemToImageHrefMap$ | async).get(item.indexableObject.uuid); let href"
+              [src]="href"
+              [alt]="item.indexableObject.metadata[title][0].value" class="img-fluid"
+              [ngClass]="{'w-100': carouselOptions.fitWidth, 'h-100': carouselOptions.fitHeight}">
+          </div>
+        } @placeholder {
           <ngx-skeleton-loader style="width: 100%; height: 100%;"
                                [theme]="{height: '100%', width: '100%'}"></ngx-skeleton-loader>
-        </ng-template>
+        }
         <div class="carousel-caption" *ngIf="item.indexableObject.metadata">
           <div class="carousel-caption-inner">
-            <h1 data-test="carouselObjTitle" [class]="carouselOptions.titleStyle" class="h3"
+            <h1 data-test="carouselObjTitle" [class]="carouselOptions.titleStyle" class="h3 break-all"
                 *ngIf="item.indexableObject.metadata[title]">
               {{ item.indexableObject.metadata[title][0].value }}</h1>
             <div data-test="carouselObjDesc" class="carousel-caption-text pr-3 pl-2"
