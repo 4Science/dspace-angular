@@ -43,6 +43,7 @@ import {
   HostWindowService,
   WidthCategory,
 } from '../../shared/host-window.service';
+import { VarDirective } from '../../shared/utils/var.directive';
 import { MiradorViewerService } from './mirador-viewer.service';
 
 const IFRAME_UPDATE_URL_MESSAGE = 'update-url';
@@ -63,6 +64,7 @@ interface IFrameMessageData {
     AsyncPipe,
     NgIf,
     SafeUrlPipe,
+    VarDirective,
   ],
   standalone: true,
 })

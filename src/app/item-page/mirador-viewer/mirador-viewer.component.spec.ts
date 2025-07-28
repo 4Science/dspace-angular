@@ -264,12 +264,17 @@ describe('MiradorViewerComponent on browser in prod mode', () => {
     viewerService.showEmbeddedViewer.and.returnValue(true);
     viewerService.getImageCount.and.returnValue(observableOf(1));
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useClass: TranslateLoaderMock,
-        },
-      }), MiradorViewerComponent],
+      imports: [
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock,
+          },
+        }),
+        MiradorViewerComponent,
+        SafeUrlPipe,
+        VarDirective,
+      ],
       providers: [
         { provide: BitstreamDataService, useValue: {} },
         { provide: BundleDataService, useValue: {} },
