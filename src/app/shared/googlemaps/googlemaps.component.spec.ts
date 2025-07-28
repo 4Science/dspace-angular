@@ -1,34 +1,52 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
+import { LocationService } from '../../core/services/location.service';
 import { createSuccessfulRemoteDataObject$ } from '../remote-data.utils';
 import { GooglemapsComponent } from './googlemaps.component';
 
 describe('GooglemapsComponent', () => {
 
   let component: GooglemapsComponent;
-
   let fixture: ComponentFixture<GooglemapsComponent>;
 
   const coordinates = '@41.3455,456.67';
 
   const configurationDataService = jasmine.createSpyObj('configurationDataService', {
-    findByPropertyName: jasmine.createSpy('findByPropertyName')
+    findByPropertyName: jasmine.createSpy('findByPropertyName'),
   });
 
   const confResponse$ = createSuccessfulRemoteDataObject$({ values: ['valid-googlemap-key'] });
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ GooglemapsComponent ],
-      providers: [
-      { provide: ConfigurationDataService, useValue: configurationDataService },
-      ]
-    })
-    .compileComponents();
+  const locationService = jasmine.createSpyObj('locationService', {
+    findPlaceCoordinates: jasmine.createSpy('findPlaceCoordinates'),
+    findPlaceAndDecimalCoordinates: jasmine.createSpy('findPlaceAndDecimalCoordinates'),
+    searchByCoordinates: jasmine.createSpy('searchByCoordinates'),
+    isValidDecimalCoordinatePair: jasmine.createSpy('isValidDecimalCoordinatePair'),
+    isDecimalCoordinateString: jasmine.createSpy('isDecimalCoordinateString'),
+    isSexagesimalCoordinateString: jasmine.createSpy('isSexagesimalCoordinateString'),
+    isValidCoordinateString: jasmine.createSpy('isValidCoordinateString'),
+    parseCoordinates: jasmine.createSpy('parseCoordinates'),
   });
 
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [
+        GooglemapsComponent,
+        HttpClientTestingModule,
+      ],
+      providers: [
+        { provide: ConfigurationDataService, useValue: configurationDataService },
+        { provide: LocationService, useValue: locationService },
+      ],
+    })
+      .compileComponents();
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GooglemapsComponent);
@@ -42,15 +60,24 @@ describe('GooglemapsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should rendered google map.',() => {
+  it('should render google map.',() => {
     const container = fixture.debugElement.query(By.css('.map-container'));
     expect(container).toBeTruthy();
   });
 
-  it('should not rendered google map.',() => {
+  it('should not render google map if coordinates are not valid.',() => {
     fixture = TestBed.createComponent(GooglemapsComponent);
     component = fixture.componentInstance;
     component.coordinates = '';
+    const container = fixture.debugElement.query(By.css('.map-container'));
+    expect(container).toBeFalsy();
+  });
+
+  it('should not render google map if the google maps api key is not present.',() => {
+    fixture = TestBed.createComponent(GooglemapsComponent);
+    component = fixture.componentInstance;
+    component.coordinates = coordinates;
+    component.noKeyConfigured = true;
     const container = fixture.debugElement.query(By.css('.map-container'));
     expect(container).toBeFalsy();
   });

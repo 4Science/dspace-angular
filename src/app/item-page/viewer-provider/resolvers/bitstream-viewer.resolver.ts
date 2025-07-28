@@ -1,14 +1,23 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
-import { RemoteData } from '../../../core/data/remote-data';
+import { inject } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  ResolveFn,
+  RouterStateSnapshot,
+} from '@angular/router';
 import { Store } from '@ngrx/store';
-import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
+import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+
+import { AppState } from '../../../app.reducer';
+import { BitstreamDataService } from '../../../core/data/bitstream-data.service';
+import { RemoteData } from '../../../core/data/remote-data';
 import { ResolvedAction } from '../../../core/resolving/resolver.actions';
 import { Bitstream } from '../../../core/shared/bitstream.model';
-import { BitstreamDataService } from '../../../core/data/bitstream-data.service';
-import { followLink, FollowLinkConfig } from '../../../shared/utils/follow-link-config.model';
+import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
+import {
+  followLink,
+  FollowLinkConfig,
+} from '../../../shared/utils/follow-link-config.model';
 
 export const BITSTREAM_VIEWER_LINKS_TO_FOLLOW: FollowLinkConfig<Bitstream>[] = [
   followLink('bundle'),
@@ -17,30 +26,18 @@ export const BITSTREAM_VIEWER_LINKS_TO_FOLLOW: FollowLinkConfig<Bitstream>[] = [
   //followLink('content'),
 ];
 
-@Injectable()
-export class BitstreamViewerResolver implements Resolve<RemoteData<Bitstream>> {
-  constructor(
-    protected bitstreamDataService: BitstreamDataService,
-    protected store: Store<any>,
-    protected router: Router
-  ) {
-  }
-
-  /**
-   * Method for resolving an item based on the parameters in the current route
-   * @param {ActivatedRouteSnapshot} route The current ActivatedRouteSnapshot
-   * @param {RouterStateSnapshot} state The current RouterStateSnapshot
-   * @returns Observable<<RemoteData<Item>> Emits the found item based on the parameters in the current route,
-   * or an error if something went wrong
-   */
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RemoteData<Bitstream>> {
-    return this.bitstreamDataService.findById(route.params.bitstream_id,
-      true,
-      false,
-      ...BITSTREAM_VIEWER_LINKS_TO_FOLLOW
-    ).pipe(
-      getFirstCompletedRemoteData(),
-      tap((bitstreamRD: RemoteData<Bitstream>) => this.store.dispatch(new ResolvedAction(state.url, bitstreamRD.payload)))
-    );
-  }
-}
+export const bitstreamViewerProviderResolver: ResolveFn<RemoteData<Bitstream>> =  (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot,
+  bitstreamService: BitstreamDataService = inject(BitstreamDataService),
+  store: Store<AppState> = inject(Store<AppState>),
+): Observable<RemoteData<Bitstream>> => {
+  return bitstreamService.findById(route.params.bitstream_id,
+    true,
+    false,
+    ...BITSTREAM_VIEWER_LINKS_TO_FOLLOW,
+  ).pipe(
+    getFirstCompletedRemoteData(),
+    tap((bitstreamRD: RemoteData<Bitstream>) => store.dispatch(new ResolvedAction(state.url, bitstreamRD.payload))),
+  );
+};

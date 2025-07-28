@@ -1,10 +1,19 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+} from '@angular/core';
+
 import { CarouselOptions } from '../../shared/carousel/carousel-options.model';
+import { ThemedCarouselWithThumbnailsComponent } from '../../shared/carousel-with-thumbnails/themed-carousel-with-thumbnails.component';
 
 @Component({
   selector: 'ds-carousel-relations',
   templateUrl: './carousel-relations.component.html',
   styleUrls: ['./carousel-relations.component.scss'],
+  standalone: true,
+  imports: [
+    ThemedCarouselWithThumbnailsComponent,
+  ],
 })
 export class CarouselRelationsComponent {
 

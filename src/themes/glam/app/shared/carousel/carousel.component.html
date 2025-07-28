@@ -1,4 +1,4 @@
-<ngb-carousel #carousel [interval]="carouselInterval" (slide)="onSlide($event)"
+<ngb-carousel *ngIf="(isLoading$ | async) === false" #carousel [interval]="carouselInterval" (slide)="onSlide($event)"
               [pauseOnHover]="true" [pauseOnFocus]="false"
               [showNavigationArrows]="false"
               [showNavigationIndicators]="false">
@@ -6,7 +6,7 @@
     <ng-container *ngIf="(itemToImageHrefMap$ | async) as itemToImageHrefMap">
       <div class="row no-gutters">
         <!-- Flexbox requires height to be applied to both columns separately, and to the central nested column of the right column -->
-        <ng-container *ngIf="itemToImageHrefMap.get(item.indexableObject.uuid) as href; else placeholderImage">
+        <ng-container *ngIf="(isBrowser && itemToImageHrefMap.get(item.indexableObject.uuid)) as href; else placeholderImage">
           <div class="col-lg-8 image-column"
                *ngVar="item.indexableObject.metadata[description] as description"
                role="img"
@@ -66,3 +66,6 @@
     </ng-container>
   </ng-template>
 </ngb-carousel>
+<div *ngIf="(isLoading$ | async)" class="row no-gutters" >
+  <ngx-skeleton-loader class="image-column w-100" [theme]="{height: '100%', width: '100%'}"></ngx-skeleton-loader>
+</div>

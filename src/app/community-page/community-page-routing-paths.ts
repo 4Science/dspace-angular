@@ -5,12 +5,18 @@ export const COMMUNITY_PARENT_PARAMETER = 'parent';
 
 export const COMMUNITY_MODULE_PATH = 'communities';
 
+export const SUB_COM_COLS_PATH = 'subcoms-cols';
+
 export function getCommunityModuleRoute() {
   return `/${COMMUNITY_MODULE_PATH}`;
 }
 
 export function getCommunityPageRoute(communityId: string) {
   return new URLCombiner(getCommunityModuleRoute(), communityId).toString();
+}
+
+export function getSubCommunitiesAndCollectionsPageRoute(communityId: string) {
+  return new URLCombiner(getCommunityModuleRoute(), communityId, SUB_COM_COLS_PATH).toString();
 }
 
 export function getCommunityEditRoute(id: string) {

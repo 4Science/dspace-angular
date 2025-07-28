@@ -1,13 +1,43 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
-import { map, Observable, switchMap } from 'rxjs';
+import {
+  AsyncPipe,
+  isPlatformBrowser,
+  NgForOf,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import {
+  map,
+  Observable,
+  switchMap,
+} from 'rxjs';
+
 import { BitstreamImagesService } from '../../../core/services/bitstream-images.service';
 import { Item } from '../../../core/shared/item.model';
+import { ThemedTypeBadgeComponent } from '../../object-collection/shared/badges/type-badge/themed-type-badge.component';
+import { BackgroundImageDirective } from '../../utils/background-image.directive';
+import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
 
 @Component({
-  selector: 'ds-images-browse-elements',
+  selector: 'ds-base-images-browse-elements',
   templateUrl: './images-browse-elements.component.html',
   styleUrls: ['./images-browse-elements.component.scss'],
+  standalone: true,
+  imports: [
+    BackgroundImageDirective,
+    AsyncPipe,
+    ThemedTypeBadgeComponent,
+    RouterLink,
+    NgxSkeletonLoaderModule,
+    NgIf,
+    NgForOf,
+    NgIf,
+  ],
 })
 export class ImagesBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnInit {
 
@@ -17,6 +47,7 @@ export class ImagesBrowseElementsComponent extends AbstractBrowseElementsCompone
   readonly maxSquareRatio = 1.3;
 
   protected followThumbnailLink = false; // not required as ORIGINAL bundle is used
+  protected followMetricsLink = false;
 
   private readonly bitstreamImagesService = inject(BitstreamImagesService);
 
@@ -25,6 +56,7 @@ export class ImagesBrowseElementsComponent extends AbstractBrowseElementsCompone
   totalElements$: Observable<number>;
 
   ngOnInit() {
+    this.isBrowser = isPlatformBrowser(this.platformId);
     super.ngOnInit();
 
     this.itemToImageHrefMap$ = this.searchResultArray$.pipe(
@@ -32,7 +64,7 @@ export class ImagesBrowseElementsComponent extends AbstractBrowseElementsCompone
     );
 
     this.totalElements$ = this.searchResults$.pipe(
-      map((searchResults) => searchResults?.payload?.pageInfo?.totalElements)
+      map((searchResults) => searchResults?.payload?.pageInfo?.totalElements),
     );
   }
 

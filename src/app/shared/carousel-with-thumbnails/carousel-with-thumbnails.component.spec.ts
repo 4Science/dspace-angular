@@ -1,16 +1,30 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { CarouselWithThumbnailsComponent } from './carousel-with-thumbnails.component';
-import { of } from 'rxjs';
-import { RouterMock } from '../mocks/router.mock';
-import { CarouselOptions } from '../carousel/carousel-options.model';
-import { Item } from '../../core/shared/item.model';
-import { MetadataMap, MetadataValue } from '../../core/shared/metadata.models';
 import { CommonModule } from '@angular/common';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateLoaderMock } from '../mocks/translate-loader.mock';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
+import { MockComponent } from 'ng-mocks';
+import { of } from 'rxjs';
+
+import { APP_CONFIG } from '../../../config/app-config.interface';
+import { environment } from '../../../environments/environment';
+import { Item } from '../../core/shared/item.model';
+import {
+  MetadataMap,
+  MetadataValue,
+} from '../../core/shared/metadata.models';
+import { CarouselOptions } from '../carousel/carousel-options.model';
 import { HostWindowService } from '../host-window.service';
+import { RouterMock } from '../mocks/router.mock';
+import { TranslateLoaderMock } from '../mocks/translate-loader.mock';
+import { ThumbnailSliderComponent } from '../slider/thumbnail-slider/thumbnail-slider.component';
+import { CarouselWithThumbnailsComponent } from './carousel-with-thumbnails.component';
 
 describe('CarouselWithThumbnailsComponent', () => {
   let component: CarouselWithThumbnailsComponent;
@@ -19,8 +33,8 @@ describe('CarouselWithThumbnailsComponent', () => {
 
   let itemMock = Object.assign(new Item(), {
     uuid: 'e1c51c69-896d-42dc-8221-1d5f2ad5516e', metadata: {
-      'dc.title': [{ value: 'title', } as MetadataValue]
-    } as MetadataMap
+      'dc.title': [{ value: 'title' } as MetadataValue],
+    } as MetadataMap,
   } as Item);
 
   let hostWindowServicve = jasmine.createSpyObj('HostWindowService', [
@@ -34,25 +48,29 @@ describe('CarouselWithThumbnailsComponent', () => {
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
-            useClass: TranslateLoaderMock
-          }
+            useClass: TranslateLoaderMock,
+          },
         }),
+        CarouselWithThumbnailsComponent,
+        MockComponent(ThumbnailSliderComponent),
       ],
-      declarations: [CarouselWithThumbnailsComponent],
       providers: [
         { provide: HostWindowService, useValue: hostWindowServicve },
+        {
+          provide: APP_CONFIG,
+          useValue: environment,
+        },
       ],
       schemas: [
-        NO_ERRORS_SCHEMA
-      ]
-    })
-      .compileComponents();
+        NO_ERRORS_SCHEMA,
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CarouselWithThumbnailsComponent);
     component = fixture.componentInstance;
-    component.carouselOptions = { title: 'title', link: 'title' } as CarouselOptions;
+    component.carouselOptions = { title: 'dc.title', link: 'title' } as CarouselOptions;
     component.itemList = [Object.assign(new Item(), itemMock)];
     routerMock.parseUrl.and.returnValue({ root: { children: { primary: { segments: ['1'] } } } });
     hostWindowServicve.isXs.and.returnValue(of(false));
@@ -84,7 +102,7 @@ describe('CarouselWithThumbnailsComponent', () => {
 
   it('should set active item on slide', () => {
     component.itemList = [new Item(), new Item(), new Item()];
-    component.onSlide({current: 'ngb-slide-1'} as any);
+    component.onSlide({ current: 'ngb-slide-1' } as any);
     expect(component.activeItem).toEqual(component.itemList[1]);
   });
 

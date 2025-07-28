@@ -4,28 +4,38 @@ import {
   Inject,
   InjectionToken,
   Input,
+  OnChanges,
   OnDestroy,
-  OnInit,
-  SecurityContext
+  SecurityContext,
+  SimpleChanges,
 } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import {
+  DomSanitizer,
+  SafeHtml,
+} from '@angular/platform-browser';
+import { Subject } from 'rxjs';
+import {
+  filter,
+  take,
+  takeUntil,
+} from 'rxjs/operators';
+
+import { environment } from '../../../environments/environment';
 import { MathService } from '../../core/shared/math.service';
 import { isEmpty } from '../empty.util';
-import { environment } from '../../../environments/environment';
-import { Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
 
 const markdownItLoader = async () => (await import('markdown-it')).default;
 type LazyMarkdownIt = ReturnType<typeof markdownItLoader>;
 const MARKDOWN_IT = new InjectionToken<LazyMarkdownIt>(
   'Lazily loaded MarkdownIt',
-  {providedIn: 'root', factory: markdownItLoader}
+  { providedIn: 'root', factory: markdownItLoader },
 );
 
 @Directive({
-  selector: '[dsMarkdown]'
+  selector: '[dsMarkdown]',
+  standalone: true,
 })
-export class MarkdownDirective implements OnInit, OnDestroy {
+export class MarkdownDirective implements OnChanges, OnDestroy {
 
   @Input() dsMarkdown: string;
   private alive$ = new Subject<boolean>();
@@ -33,44 +43,55 @@ export class MarkdownDirective implements OnInit, OnDestroy {
   el: HTMLElement;
 
   constructor(
-    protected sanitizer: DomSanitizer,
     @Inject(MARKDOWN_IT) private markdownIt: LazyMarkdownIt,
+    protected sanitizer: DomSanitizer,
     private mathService: MathService,
     private elementRef: ElementRef) {
     this.el = elementRef.nativeElement;
   }
 
-  ngOnInit() {
-    this.render(this.dsMarkdown);
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.dsMarkdown && changes.dsMarkdown.currentValue !== changes.dsMarkdown.previousValue) {
+      this.render(changes.dsMarkdown.currentValue);
+    }
   }
 
   async render(value: string, forcePreview = false): Promise<SafeHtml> {
     if (isEmpty(value) || (!environment.markdown.enabled && !forcePreview)) {
-      this.el.innerHTML = value;
+      this.el.innerHTML = this.sanitizer.sanitize(SecurityContext.HTML, value);
       return;
     } else {
-      const MarkdownIt = await this.markdownIt;
-      const md = new MarkdownIt({
-        html: true,
-        linkify: true,
-      });
-
-      const html = this.sanitizer.sanitize(SecurityContext.HTML, md.render(value));
-      this.el.innerHTML = html;
-
       if (environment.markdown.mathjax) {
-        this.renderMathjax();
+        this.renderMathjaxThenMarkdown(value);
+      } else {
+        this.renderMarkdown(value);
       }
     }
   }
 
-  private renderMathjax() {
+  private renderMathjaxThenMarkdown(value: string) {
+    const sanitized = this.sanitizer.sanitize(SecurityContext.HTML, value);
+    this.el.innerHTML = sanitized;
     this.mathService.ready().pipe(
+      filter((ready) => ready),
       take(1),
-      takeUntil(this.alive$)
+      takeUntil(this.alive$),
     ).subscribe(() => {
-      this.mathService.render(this.el);
+      this.mathService.render(this.el)?.then(_ => {
+        this.renderMarkdown(this.el.innerHTML, true);
+      });
     });
+  }
+
+  private async renderMarkdown(value: string, alreadySanitized = false) {
+    const MarkdownIt = await this.markdownIt;
+    const md = new MarkdownIt({
+      html: true,
+      linkify: true,
+    });
+
+    const html = alreadySanitized ? md.render(value) : this.sanitizer.sanitize(SecurityContext.HTML, md.render(value));
+    this.el.innerHTML = html;
   }
 
   ngOnDestroy() {

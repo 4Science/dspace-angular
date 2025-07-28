@@ -1,5 +1,5 @@
 <ng-container *ngIf="(searchResults$ | async); else loading">
-  <div class="btn-group btn-group-toggle mb-3" ngbRadioGroup name="radioBasic" [(ngModel)]="layoutMode" *ngIf="topSection.showLayoutSwitch">
+  <div class="btn-group btn-group-toggle mb-3" ngbRadioGroup name="radioBasic" [(ngModel)]="layoutMode" *ngIf="topSection?.showLayoutSwitch">
     <label ngbButtonLabel class="btn-outline-primary">
       <input ngbButton type="radio" [value]="'list'" />
       <i class="fa fa-list-ul" title="List"></i>
@@ -9,7 +9,7 @@
       <i class="fas fa-th-large" title="Cards"></i>
     </label>
   </div>
-  <ng-container *ngIf="topSection && layoutMode == cardLayoutMode; then gridLayout; else listLayout"></ng-container>
+  <ng-container *ngIf="topSection && layoutMode === cardLayoutMode; then gridLayout; else listLayout"></ng-container>
   <div *ngIf="(searchResults$ | async).hasFailed">
     {{ "remote.error" | translate }}
   </div>
@@ -48,6 +48,7 @@
                                            [listID]="paginatedSearchOptions.configuration"
                                            [object]="object"
                                            [showMetrics]="showMetrics"
+                                           [showLabel]="showLabel"
                                            [showThumbnails]="showThumbnails"
                                            [viewMode]="paginatedSearchOptions.view"></ds-listable-object-component-loader>
     </li>

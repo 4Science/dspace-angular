@@ -1,19 +1,58 @@
-import {Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, ViewChild} from '@angular/core';
-import {BitstreamDataService, MetadataFilter} from '../../../core/data/bitstream-data.service';
-import {FindListOptions} from '../../../core/data/find-list-options.model';
-import {BehaviorSubject, Observable, of} from 'rxjs';
-import {buildPaginatedList, PaginatedList} from '../../../core/data/paginated-list.model';
-import {Bitstream} from '../../../core/shared/bitstream.model';
-import {getFirstCompletedRemoteData} from '../../../core/shared/operators';
-import {map, mergeMap, toArray} from 'rxjs/operators';
-import {followLink} from '../../utils/follow-link-config.model';
-import {isNotEmpty} from '../../empty.util';
-import {MediaSelectionBarItem} from './media-selection-bar-item.model';
+import {
+  AsyncPipe,
+  DatePipe,
+  NgForOf,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnChanges,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
+import {
+  BehaviorSubject,
+  Observable,
+  of,
+} from 'rxjs';
+import {
+  map,
+  mergeMap,
+  toArray,
+} from 'rxjs/operators';
+
+import {
+  BitstreamDataService,
+  MetadataFilter,
+} from '../../../core/data/bitstream-data.service';
+import { FindListOptions } from '../../../core/data/find-list-options.model';
+import {
+  buildPaginatedList,
+  PaginatedList,
+} from '../../../core/data/paginated-list.model';
+import { Bitstream } from '../../../core/shared/bitstream.model';
+import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
+import { isNotEmpty } from '../../empty.util';
+import { followLink } from '../../utils/follow-link-config.model';
+import { MediaSelectionBarItem } from './media-selection-bar-item.model';
 
 @Component({
   selector: 'ds-media-selection-bar',
   templateUrl: './media-selection-bar.component.html',
-  styleUrls: ['./media-selection-bar.component.scss']
+  styleUrls: ['./media-selection-bar.component.scss'],
+  imports: [
+    InfiniteScrollDirective,
+    DatePipe,
+    AsyncPipe,
+    NgForOf,
+    NgIf,
+  ],
+  standalone: true,
 })
 export class MediaSelectionBarComponent implements OnChanges {
   /**
@@ -75,7 +114,7 @@ export class MediaSelectionBarComponent implements OnChanges {
   ngOnChanges(): void {
     this.pageOptions = {
       elementsPerPage: 5,
-      currentPage: 1
+      currentPage: 1,
     };
 
     this.selectedMediaItemUUID$.next(this.currentItem.bitstream?.id ? this.currentItem.bitstream?.id : this.startUUID);
@@ -121,18 +160,18 @@ export class MediaSelectionBarComponent implements OnChanges {
       true,
       true,
       followLink('thumbnail'),
-      followLink('format')
+      followLink('format'),
     ).pipe(
       getFirstCompletedRemoteData(),
       map((response) => {
         return response.hasSucceeded ? response.payload : buildPaginatedList(null, []);
       }),
       mergeMap((bitstreamList: PaginatedList<Bitstream>) => {
-          this.hasMoreElements = this.pageOptions.currentPage !== bitstreamList?.pageInfo?.totalPages;
-          return of(bitstreamList);
-        })
+        this.hasMoreElements = this.pageOptions.currentPage !== bitstreamList?.pageInfo?.totalPages;
+        return of(bitstreamList);
+      }),
     );
-   }
+  }
 
   /**
    * Generate a list of Selection items by retrieving the bitstream
@@ -146,7 +185,7 @@ export class MediaSelectionBarComponent implements OnChanges {
         return bitstreamList.page;
       }),
       mergeMap((bitstream: Bitstream) => this.createMediaSelectionItem(bitstream)),
-      toArray()
+      toArray(),
     );
   }
 

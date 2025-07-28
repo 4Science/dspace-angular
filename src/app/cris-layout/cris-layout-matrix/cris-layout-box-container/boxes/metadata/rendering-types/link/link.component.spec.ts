@@ -1,14 +1,21 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-
-import { LinkComponent } from './link.component';
-import { Item } from '../../../../../../../core/shared/item.model';
-import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate-loader.mock';
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
+import { Item } from '../../../../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
+import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate-loader.mock';
+import { LinkComponent } from './link.component';
 
 describe('LinkComponent', () => {
   let component: LinkComponent;
@@ -20,17 +27,17 @@ describe('LinkComponent', () => {
     'language': null,
     'authority': null,
     'confidence': -1,
-    'place': 0
+    'place': 0,
   });
 
   const testItem = Object.assign(new Item(),
     {
       type: 'item',
       metadata: {
-        'dc.link': [metadataValue]
+        'dc.link': [metadataValue],
       },
       uuid: 'test-item-uuid',
-    }
+    },
   );
 
   const mockField: LayoutField = {
@@ -42,7 +49,7 @@ describe('LinkComponent', () => {
     'styleLabel': 'test-style-label',
     'styleValue': 'test-style-value',
     'labelAsHeading': false,
-    'valuesInline': true
+    'valuesInline': true,
   };
 
   const i18nLabel = 'Default Label';
@@ -52,17 +59,16 @@ describe('LinkComponent', () => {
       imports: [TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
-          useClass: TranslateLoaderMock
-        }
-      }), BrowserAnimationsModule],
+          useClass: TranslateLoaderMock,
+        },
+      }), BrowserAnimationsModule, LinkComponent],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
         { provide: 'metadataValueProvider', useValue: metadataValue },
         { provide: 'renderingSubTypeProvider', useValue: '' },
-        {provide: 'tabNameProvider', useValue: '' },
+        { provide: 'tabNameProvider', useValue: '' },
       ],
-      declarations: [LinkComponent]
     })
       .compileComponents();
   }));
@@ -97,6 +103,41 @@ describe('LinkComponent', () => {
       const valueFound = fixture.debugElement.queryAll(By.css('.test-style-value'));
       expect(valueFound.length).toBe(1);
       done();
+    });
+  });
+
+  describe('with markdown link', () => {
+    beforeEach(() => {
+      component.metadataValue = { value: '[Example](http://example.com)' } as MetadataValue;
+      fixture.detectChanges();
+    });
+
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
+
+    it('check metadata rendering', (done) => {
+      const spanValueFound = fixture.debugElement.queryAll(By.css('span.link-value'));
+      expect(spanValueFound.length).toBe(1);
+
+      const valueFound = fixture.debugElement.queryAll(By.css('a'));
+      expect(valueFound.length).toBe(1);
+
+      expect(valueFound[0].nativeElement.textContent).toContain('Example');
+      expect(valueFound[0].nativeElement.href).toBe('http://example.com/');
+      done();
+    });
+
+    it('check value style', (done) => {
+      const valueFound = fixture.debugElement.queryAll(By.css('.test-style-value'));
+      expect(valueFound.length).toBe(1);
+      done();
+    });
+
+    it('should return markdown link when metadataValue is in markdown format', () => {
+      const result = component.getLinkFromValue();
+      expect(result.href).toBe('http://example.com');
+      expect(result.text).toBe('Example');
     });
   });
 

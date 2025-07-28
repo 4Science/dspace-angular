@@ -112,3 +112,16 @@ ds-metric-donuts a {
   background-color: var(--ds-cris-section-bg-color-dark);
 }
 
+// pad-3 class is added in the cris-layout-configuration file
+.padded-metadata-background-overlay > ds-metadata-container > div {
+  padding: 1rem;
+}
+
+ds-expandable-admin-sidebar-section {
+  ds-link-menu-item {
+    a {
+      padding: 0 !important;
+      margin-left: var(--ds-admin-sidebar-section-indent);
+    }
+  }
+}

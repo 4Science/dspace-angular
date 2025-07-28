@@ -1,17 +1,67 @@
-import { AfterViewInit, Component, ElementRef, inject, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable, switchMap } from 'rxjs';
-import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
+import {
+  AsyncPipe,
+  isPlatformBrowser,
+  NgClass,
+  NgForOf,
+  NgIf,
+} from '@angular/common';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  inject,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import {
+  BehaviorSubject,
+  combineLatest,
+  Observable,
+  switchMap,
+} from 'rxjs';
+import {
+  map,
+  tap,
+} from 'rxjs/operators';
+import { Item } from 'src/app/core/shared/item.model';
+
 import { BitstreamImagesService } from '../../../core/services/bitstream-images.service';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
-import { map, tap } from 'rxjs/operators';
-import { Item } from 'src/app/core/shared/item.model';
+import { BtnDisabledDirective } from '../../btn-disabled.directive';
 import { hasValue } from '../../empty.util';
-import { isPlatformBrowser } from '@angular/common';
+import { ThemedTypeBadgeComponent } from '../../object-collection/shared/badges/type-badge/themed-type-badge.component';
+import { BackgroundImageDirective } from '../../utils/background-image.directive';
+import { VarDirective } from '../../utils/var.directive';
+import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
 
 @Component({
-  selector: 'ds-slider-browse-elements',
+  selector: 'ds-base-slider-browse-elements',
   templateUrl: './slider-browse-elements.component.html',
   styleUrls: ['./slider-browse-elements.component.scss'],
+  standalone: true,
+  imports: [
+    BtnDisabledDirective,
+    NgIf,
+    AsyncPipe,
+    TranslateModule,
+    BackgroundImageDirective,
+    NgForOf,
+    BackgroundImageDirective,
+    ThemedTypeBadgeComponent,
+    NgxSkeletonLoaderModule,
+    TranslateModule,
+    RouterLink,
+    NgbTooltipModule,
+    NgClass,
+    NgbTooltipModule,
+    VarDirective,
+  ],
 })
 export class SliderBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
@@ -21,6 +71,7 @@ export class SliderBrowseElementsComponent extends AbstractBrowseElementsCompone
   readonly cardGap = 16; // corresponding to gapx-3
 
   protected followThumbnailLink = false; // not required as ORIGINAL bundle is used
+  protected followMetricsLink = false;
 
   private readonly bitstreamImagesService = inject(BitstreamImagesService);
 
@@ -43,20 +94,20 @@ export class SliderBrowseElementsComponent extends AbstractBrowseElementsCompone
   ngOnInit() {
     super.ngOnInit();
 
-    this.itemToImageHrefMap$ = this.searchResultArray$.pipe(
-      switchMap((res) => this.bitstreamImagesService.getItemToImageMap(res as Item[])),
-    );
-
-    this.selectedSearchResultArray$ = combineLatest([
-      this.searchResultArray$, this.firstItemBS.asObservable(),
-    ]).pipe(
-      tap(([items, firstItem]) => {
-        this.totalItemsBS.next(items.length);
-      }),
-      map(([items, firstItem]) => items.slice(firstItem, firstItem + this.itemsPerPageBS.value)),
-    );
-
     if (isPlatformBrowser(this.platformId)) {
+      this.itemToImageHrefMap$ = this.searchResultArray$.pipe(
+        switchMap((res) => this.bitstreamImagesService.getItemToImageMap(res as Item[])),
+      );
+
+      this.selectedSearchResultArray$ = combineLatest([
+        this.searchResultArray$, this.firstItemBS.asObservable(),
+      ]).pipe(
+        tap(([items, firstItem]) => {
+          this.totalItemsBS.next(items.length);
+        }),
+        map(([items, firstItem]) => items.slice(firstItem, firstItem + this.itemsPerPageBS.value)),
+      );
+
       this.resizeObserver = new ResizeObserver(entries => {
         entries.forEach(entry => {
           const containerWidth = entry.contentRect.width;

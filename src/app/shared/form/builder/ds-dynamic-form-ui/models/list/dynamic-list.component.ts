@@ -1,25 +1,51 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { UntypedFormGroup, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
-
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import {
+  NgClass,
+  NgForOf,
+  NgIf,
+  NgTemplateOutlet,
+} from '@angular/common';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import {
+  AbstractControl,
+  FormsModule,
+  ReactiveFormsModule,
+  UntypedFormGroup,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms';
+import { NgbButtonsModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   DynamicCheckboxModel,
   DynamicFormControlComponent,
   DynamicFormLayoutService,
   DynamicFormValidationService,
 } from '@ng-dynamic-forms/core';
+import { TranslateModule } from '@ngx-translate/core';
 import findKey from 'lodash/findKey';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
-import { hasValue, isNotEmpty } from '../../../../../empty.util';
-import { DynamicListCheckboxGroupModel } from './dynamic-list-checkbox-group.model';
-import { FormBuilderService } from '../../../form-builder.service';
-import { DynamicListRadioGroupModel } from './dynamic-list-radio-group.model';
-import { VocabularyService } from '../../../../../../core/submission/vocabularies/vocabulary.service';
-import { getFirstSucceededRemoteDataPayload } from '../../../../../../core/shared/operators';
 import { PaginatedList } from '../../../../../../core/data/paginated-list.model';
-import { VocabularyEntry } from '../../../../../../core/submission/vocabularies/models/vocabulary-entry.model';
+import { getFirstSucceededRemoteDataPayload } from '../../../../../../core/shared/operators';
 import { PageInfo } from '../../../../../../core/shared/page-info.model';
+import { VocabularyEntry } from '../../../../../../core/submission/vocabularies/models/vocabulary-entry.model';
+import { VocabularyService } from '../../../../../../core/submission/vocabularies/vocabulary.service';
+import { BtnDisabledDirective } from '../../../../../btn-disabled.directive';
+import {
+  hasValue,
+  isNotEmpty,
+} from '../../../../../empty.util';
+import { FormBuilderService } from '../../../form-builder.service';
+import { DynamicListCheckboxGroupModel } from './dynamic-list-checkbox-group.model';
+import { DynamicListRadioGroupModel } from './dynamic-list-radio-group.model';
 
 export interface ListItem {
   id: string;
@@ -34,7 +60,19 @@ export interface ListItem {
 @Component({
   selector: 'ds-dynamic-list',
   styleUrls: ['./dynamic-list.component.scss'],
-  templateUrl: './dynamic-list.component.html'
+  templateUrl: './dynamic-list.component.html',
+  imports: [
+    NgClass,
+    NgIf,
+    NgbButtonsModule,
+    NgForOf,
+    ReactiveFormsModule,
+    FormsModule,
+    TranslateModule,
+    NgTemplateOutlet,
+    BtnDisabledDirective,
+  ],
+  standalone: true,
 })
 export class DsDynamicListComponent extends DynamicFormControlComponent implements OnInit, OnDestroy {
 
@@ -72,7 +110,7 @@ export class DsDynamicListComponent extends DynamicFormControlComponent implemen
               private cdr: ChangeDetectorRef,
               private formBuilderService: FormBuilderService,
               protected layoutService: DynamicFormLayoutService,
-              protected validationService: DynamicFormValidationService
+              protected validationService: DynamicFormValidationService,
   ) {
     super(layoutService, validationService);
   }
@@ -86,7 +124,7 @@ export class DsDynamicListComponent extends DynamicFormControlComponent implemen
     }
     this.currentListValue = this.model.value;
     this.subscription = this.model.valueChanges.pipe(
-      filter((value) => this.currentListValue !== value)
+      filter((value) => this.currentListValue !== value),
     ).subscribe(() => {
       this.setOptionsFromVocabulary();
     });
@@ -145,10 +183,10 @@ export class DsDynamicListComponent extends DynamicFormControlComponent implemen
         listGroup.addValidators(this.hasAtLeastOneVocabularyEntry());
       }
       const pageInfo: PageInfo = new PageInfo({
-        elementsPerPage: 9999, currentPage: 1
+        elementsPerPage: 9999, currentPage: 1,
       } as PageInfo);
       this.vocabularyService.getVocabularyEntries(this.model.vocabularyOptions, pageInfo).pipe(
-        getFirstSucceededRemoteDataPayload()
+        getFirstSucceededRemoteDataPayload(),
       ).subscribe((entries: PaginatedList<VocabularyEntry>) => {
         this.optionsList = entries.page;
         // Make a list of available options (checkbox/radio) and split in groups of 'model.groupLength'
@@ -187,8 +225,8 @@ export class DsDynamicListComponent extends DynamicFormControlComponent implemen
       let checked: boolean;
       if (this.model.repeatable) {
         checked = isNotEmpty(findKey(
-        this.model.value,
-        (v) => v.value === option.value));
+          this.model.value,
+          (v) => v.value === option.value));
       } else {
         checked = this.model.value && option.value === this.model.value.value;
       }
@@ -197,14 +235,14 @@ export class DsDynamicListComponent extends DynamicFormControlComponent implemen
         id: `${this.model.id}_${value}`,
         label: option.display,
         value: checked,
-        index: key
+        index: key,
       };
       if (this.model.repeatable) {
         this.formBuilderService.addFormGroupControl(listGroup, (this.model as DynamicListCheckboxGroupModel), new DynamicCheckboxModel(item));
       } else {
         (this.model as DynamicListRadioGroupModel).options.push({
           label: item.label,
-          value: option
+          value: option,
         });
       }
       tempList.push(item);
@@ -224,12 +262,12 @@ export class DsDynamicListComponent extends DynamicFormControlComponent implemen
    * Add the Item to List.
    */
   addListItem() {
-    if (!!this.otherListEntry.toString()) {
+    if (this.otherListEntry.toString()) {
 
       const matchingEntry = this.optionsList.find((element) =>
         (element.display.toLowerCase() === this.otherListEntry.toLowerCase()) ||
         (element.value?.toLowerCase() === this.otherListEntry.toLowerCase()) ||
-        (this.otherListEntry.toLowerCase() === 'other')
+        (this.otherListEntry.toLowerCase() === 'other'),
       );
 
       this.isNewEntryDuplicate = !! matchingEntry;
@@ -255,7 +293,7 @@ export class DsDynamicListComponent extends DynamicFormControlComponent implemen
       display: display,
       value: value,
       otherInformation: otherInformation,
-      type: 'vocabularyEntry'
+      type: 'vocabularyEntry',
     });
   }
 

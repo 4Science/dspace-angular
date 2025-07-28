@@ -1,23 +1,55 @@
-import { RemoteData } from '../../core/data/remote-data';
-import { NativeWindowRef, NativeWindowService } from '../../core/services/window.service';
+import { isPlatformBrowser } from '@angular/common';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+  PLATFORM_ID,
+} from '@angular/core';
+import {
+  BehaviorSubject,
+  map,
+  mergeMap,
+  Observable,
+  take,
+} from 'rxjs';
+
 import { SearchManager } from '../../core/browse/search-manager';
+import {
+  SortDirection,
+  SortOptions,
+} from '../../core/cache/models/sort-options.model';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
-import { DSpaceObjectType } from '../../core/shared/dspace-object-type.model';
-import { SortDirection, SortOptions } from '../../core/cache/models/sort-options.model';
-import { Item } from '../../core/shared/item.model';
-import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
-import { ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
-import { BehaviorSubject, map, mergeMap, Observable, take } from 'rxjs';
+import { RemoteData } from '../../core/data/remote-data';
 import { BitstreamImagesService } from '../../core/services/bitstream-images.service';
-import { SearchObjects } from '../search/models/search-objects.model';
-import { isNotEmpty } from '../empty.util';
-import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../core/services/window.service';
+import { DSpaceObjectType } from '../../core/shared/dspace-object-type.model';
+import { Item } from '../../core/shared/item.model';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import {
+  hasValue,
+  isNotEmpty,
+} from '../empty.util';
+import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
+import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
+import { SearchObjects } from '../search/models/search-objects.model';
 
 @Component({
-  template: ''
+  template: '',
 })
 export abstract class SliderComponent implements OnInit {
+
+
+  /**
+   * The bundle to use to look for thumbnails
+   */
+  @Input() bundle: string;
 
   /**
    * The discovery configuration to retrieve the items
@@ -123,16 +155,20 @@ export abstract class SliderComponent implements OnInit {
 
   readonly placeholderSrc = 'assets/images/replacement_image.svg';
 
+  isBrowser: boolean;
+
   constructor(
     protected bitstreamDataService: BitstreamDataService,
     protected bitstreamImagesService: BitstreamImagesService,
     protected cdr: ChangeDetectorRef,
     protected searchManager: SearchManager,
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
+    @Inject(PLATFORM_ID) protected platformId: string,
   ) {
   }
 
   ngOnInit() {
+    this.isBrowser = isPlatformBrowser(this.platformId);
     this.initLoading$.next(true);
     this.retrieveItems().pipe(
       mergeMap((searchResult: SearchObjects<Item>) => {
@@ -146,12 +182,16 @@ export abstract class SliderComponent implements OnInit {
           this.hasMoreToLoad = this.itemList.length < searchResult.totalElements;
           this.initLoading$.next(false);
           this.itemsImagesLoading$.next(true);
-          return this.bitstreamImagesService.getItemToImageMap(items);
+          if (!hasValue(this.bundle) || this.bundle === 'ORIGINAL') {
+            return this.bitstreamImagesService.getItemToImageMap(items, undefined, { elementsPerPage: 1 });
+          } else {
+            return this.bitstreamImagesService.getPrimaryBitstreamInNonOriginalBundleItemToImageMap(items, this.bundle, { elementsPerPage: 1 });
+          }
         } else {
           return null;
         }
       }),
-      take(1)
+      take(1),
     ).subscribe((itemToImageHrefMap: Map<string,string>) => {
       if (isNotEmpty(itemToImageHrefMap)) {
         this.itemToImageHrefMap$.next(new Map([...Array.from(this.itemToImageHrefMap$.value.entries()), ...Array.from(itemToImageHrefMap.entries())]));
@@ -204,7 +244,7 @@ export abstract class SliderComponent implements OnInit {
           return null;
         }
       }),
-      take(1)
+      take(1),
     ).subscribe((itemToImageHrefMap: Map<string,string>) => {
       if (isNotEmpty(itemToImageHrefMap)) {
         this.itemToImageHrefMap$.next(new Map([...Array.from(this.itemToImageHrefMap$.value.entries()), ...Array.from(itemToImageHrefMap.entries())]));
@@ -224,7 +264,7 @@ export abstract class SliderComponent implements OnInit {
     const pagination: PaginationComponentOptions = Object.assign(new PaginationComponentOptions(), {
       id: 'sop',
       pageSize: this.numberOfItems,
-      currentPage: currentPage
+      currentPage: currentPage,
     });
     const sortDirection = this.sortOrder?.toUpperCase() === 'ASC' ? SortDirection.ASC : SortDirection.DESC;
     const searchOptions = this.paginatedSearchOptions ?? this.defaultPaginatedSearchOptions;
@@ -243,7 +283,7 @@ export abstract class SliderComponent implements OnInit {
         } else {
           return null;
         }
-      })
+      }),
     );
   }
 }

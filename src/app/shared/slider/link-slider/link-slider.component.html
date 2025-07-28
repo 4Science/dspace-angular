@@ -1,25 +1,30 @@
 <div class="text-center" *ngIf="initLoading$ | async">
   <ds-loading message="{{'loading.default' | translate}}"></ds-loading>
 </div>
-<div *ngIf="!(initLoading$ | async)" class="container mt-5">
+<div *ngIf="(initLoading$ | async) !== true" class="container mt-5">
   <div class="text-center mb-4">
     {{ ('label.title.slider.' + discoveryConfiguration) | translate }}
   </div>
 
-  <div *ngIf="!(itemsImagesLoading$ | async)"
-    style="display: grid; justify-content: space-between; place-items: center;"
-    [style.grid-template-columns]="'repeat(' + cardsPerPage + ', 1fr)'"
+  <div *ngIf="(itemsImagesLoading$ | async) !== true"
+       style="display: grid; justify-content: space-between; place-items: center;"
+       [style.grid-template-columns]="'repeat(' + cardsPerPage + ', 1fr)'"
   >
     <a *ngFor="let item of currentPageItems()"
        [href]="getItemLink(item)"
        target="_blank"
        class="img-container-el">
-      <ng-container
-        *ngIf="(itemToImageHrefMap$ | async)?.get(item.uuid); let href; else defaultPreviewImage">
-        <img [src]="href" [alt]="item.metadata[title]?.[0].value">
+      <ng-container *ngIf="isBrowser && (itemsImagesLoading$ | async) === false; else imageSkeleton">
+        <ng-container
+          *ngIf="(itemToImageHrefMap$ | async)?.get(item.uuid); let href; else defaultPreviewImage">
+          <img [src]="href" [alt]="item.metadata[title]?.[0].value">
+        </ng-container>
+        <ng-template #defaultPreviewImage>
+          <img [src]="placeholderSrc" [alt]="item.metadata[title]?.[0].value">
+        </ng-template>
       </ng-container>
-      <ng-template #defaultPreviewImage>
-        <img [src]="placeholderSrc" [alt]="item.metadata[title]?.[0].value">
+      <ng-template #imageSkeleton>
+        <ngx-skeleton-loader class="h-100 w-100" [theme]="{height: '100%', width: '100%'}"></ngx-skeleton-loader>
       </ng-template>
       <div class="description">
         {{ item.metadata[title]?.[0].value }}
@@ -38,13 +43,13 @@
       <img [src]="placeholderSrc">
 
       <div class="description">
-        {{'loading.default' | translate}}
+        {{ 'loading.default' | translate }}
       </div>
     </a>
   </div>
 
   <div class="pagination">
-    <button (click)="previousPage()" [disabled]="currentPage === 1" class="prev">
+    <button (click)="previousPage()" [dsBtnDisabled]="currentPage === 1" class="prev">
       <i class="fa fa-arrow-left"></i>
     </button>
     <button
@@ -55,7 +60,7 @@
       [style.color]="page === currentPage ? '#000000' : '#7c7c7c'">
       {{ page < 10 ? '0' + page : page }}
     </button>
-    <button (click)="nextPage()" [disabled]="currentPage === pages().length" class="next">
+    <button (click)="nextPage()" [dsBtnDisabled]="currentPage === pages().length" class="next">
       <i class="fa fa-arrow-right"></i>
     </button>
   </div>

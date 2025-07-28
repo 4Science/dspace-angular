@@ -1,26 +1,52 @@
-import { Component, Inject, Input, OnInit, SimpleChanges } from '@angular/core';
-
-import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
-import { filter, map, startWith, switchMap, take } from 'rxjs/operators';
+import { NgIf } from '@angular/common';
+import {
+  Component,
+  Inject,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import {
+  BehaviorSubject,
+  Observable,
+  of as observableOf,
+} from 'rxjs';
+import {
+  filter,
+  map,
+  startWith,
+  switchMap,
+  take,
+} from 'rxjs/operators';
 
-import { SEARCH_CONFIG_SERVICE } from '../../../../my-dspace-page/my-dspace-page.component';
+import { SearchService } from '../../../../core/shared/search/search.service';
 import { SearchConfigurationService } from '../../../../core/shared/search/search-configuration.service';
 import { SearchFilterService } from '../../../../core/shared/search/search-filter.service';
-import { SearchService } from '../../../../core/shared/search/search.service';
-import { isNotEmpty } from '../../../empty.util';
+import { SEARCH_CONFIG_SERVICE } from '../../../../my-dspace-page/my-dspace-configuration.service';
+import {
+  hasValue,
+  isNotEmpty,
+} from '../../../empty.util';
 import { SearchFilterConfig } from '../../models/search-filter-config.model';
+import { SearchChartFilterWrapperComponent } from './search-chart-wrapper/search-chart-wrapper.component';
 
 @Component({
   selector: 'ds-search-chart',
   styleUrls: ['./search-chart.component.scss'],
-  templateUrl: './search-chart.component.html'
+  templateUrl: './search-chart.component.html',
+  imports: [
+    NgIf,
+    SearchChartFilterWrapperComponent,
+  ],
+  standalone: true,
 })
 
 /**
  * Represents a part of the filter charts tabs for a single type of chart filter
  */
-export class SearchChartComponent implements OnInit {
+export class SearchChartComponent implements OnInit, OnChanges {
   /**
    * The filter config for this component
    */
@@ -35,6 +61,11 @@ export class SearchChartComponent implements OnInit {
    * Emits when the search filters values may be stale, and so they must be refreshed.
    */
   @Input() refreshFilters: BehaviorSubject<boolean>;
+
+  /**
+   * The scope of the search
+   */
+  @Input() scope: string;
 
   /**
    * Emits all currently selected values for this filter
@@ -117,15 +148,19 @@ export class SearchChartComponent implements OnInit {
         } else {
           return this.searchConfigService.searchOptions.pipe(
             switchMap((options) => {
-                return this.searchService.getFacetValuesFor(this.filter, 1, options).pipe(
-                  filter((RD) => !RD.isLoading),
-                  map((valuesRD) => {
-                    return valuesRD.payload.totalElements > 0;
-                  }));
+              if (hasValue(this.scope)) {
+                options.scope = this.scope;
               }
+              return this.searchService.getFacetValuesFor(this.filter, 1, options).pipe(
+                filter((RD) => !RD.isLoading),
+                map((valuesRD) => {
+                  return valuesRD.payload.totalElements > 0;
+                }));
+            },
             ));
         }
       }),
       startWith(true));
   }
+
 }

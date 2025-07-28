@@ -12,6 +12,7 @@
   --ds-navbar-link-color-hover: #{darken($glam-gray, 15%)};
   --ds-cris-layout-sidebar-menu-active-color: #{$glam-gray};
 
+
   --ds-cris-section-vertical-padding: 4rem;
   --ds-cris-section-horizontal-padding: 7%;
   --ds-cris-section-title-font-size: 40px;
@@ -37,5 +38,6 @@
   --ds-counters-column-gap: 1rem;
   --ds-counters-min-width: 220px;
   --ds-counters-border-bottom: solid 1px #{$body-color};
+  --ds-mobile-nav-link-hover-color: #{$link-hover-color};
 }
 

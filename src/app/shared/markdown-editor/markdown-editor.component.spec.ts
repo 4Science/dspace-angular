@@ -1,8 +1,14 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import {
+  By,
+  DomSanitizer,
+} from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-
-import { By } from '@angular/platform-browser';
 
 import { MarkdownEditorComponent } from './markdown-editor.component';
 
@@ -12,12 +18,12 @@ describe('MarkdownEditorComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [MarkdownEditorComponent],
       imports: [
         RouterTestingModule.withRoutes([]),
+        MarkdownEditorComponent,
       ],
-      providers: [],
-      schemas: [NO_ERRORS_SCHEMA]
+      providers: [DomSanitizer],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 
@@ -34,6 +40,8 @@ describe('MarkdownEditorComponent', () => {
   describe('when component loaded', () => {
 
     it('should display markdown editor', () => {
+      component.modulesLoaded = true;
+      fixture.detectChanges();
       const element = fixture.debugElement.query(By.css('.markdown-editor'));
       expect(element).not.toBeNull();
     });

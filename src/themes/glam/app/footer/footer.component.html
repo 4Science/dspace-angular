@@ -1,7 +1,7 @@
 <div class="footer-section">
   <div *ngIf="showTopFooter" class="footer-top">
-    <ds-themed-text-section *ngIf="hasSiteFooterSections" [sectionId]="'site'" [site]="(site | async)"
-                            [textRowSection]=section></ds-themed-text-section>
+    <ds-text-section *ngIf="hasSiteFooterSections" [sectionId]="'site'" [site]="(site | async)"
+                            [textRowSection]=section></ds-text-section>
 
     <div *ngIf="!hasSiteFooterSections" class="container clip-borders">
       <div class="flex-wrapper">
@@ -35,18 +35,18 @@
             <div class="d-flex flex-column align-items-center align-items-md-start">
               <h1 class="h6 title mb-3">{{ 'footer.information' | translate }}</h1>
               <ul class="list-unstyled mb-3 d-flex flex-column align-items-center align-items-md-start">
-                <li>
+                <li *ngIf="showGeneralInformation">
                   <a class="footer-link"
                      routerLink="info/general-information">{{ 'footer.general-information' | translate }}</a>
                 </li>
-                <li>
+                <li *ngIf="showOfferedServices">
                   <a class="footer-link" routerLink="info/offered-services">{{ 'footer.offer-service' | translate }}</a>
                 </li>
-                <li>
+                <li *ngIf="showHistoryDigitalLibrary">
                   <a class="footer-link"
                      routerLink="info/history-digital-lid">{{ 'footer.history-digital' | translate }}</a>
                 </li>
-                <li>
+                <li *ngIf="showOrgStructure">
                   <a class="footer-link"
                      routerLink="info/organizational-structure">{{ 'footer.org-structure' | translate }}</a>
                 </li>
@@ -61,10 +61,10 @@
                   <a class="footer-link" [href]="'footer.contact.href' | translate"
                      target="_blank">{{ 'footer.contact' | translate }}</a>
                 </li>
-                <li>
+                <li *ngIf="showEndUserAgreement">
                   <a class="footer-link" routerLink="info/end-user-agreement">{{ 'footer.terms' | translate }}</a>
                 </li>
-                <li>
+                <li *ngIf="showPrivacyPolicy">
                   <a class="footer-link" routerLink="info/privacy">{{ 'footer.link.privacy-policy' | translate }}</a>
                 </li>
               </ul>
