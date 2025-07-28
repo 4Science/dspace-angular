@@ -118,10 +118,10 @@ export class IIIFToolbarComponent implements OnInit {
   }
 
   private getQueryParams() {
-    return this.MD_BITSTREAMS_MAP
-      .filter(({ metadata }) => this.bitstream?.metadata[`${metadata}`]?.length > 0)
-      .map(({ param,  metadata }) => ({ [`${param}`]: this.bitstream?.metadata[`${metadata}`][0]?.value }))
-      .reduce((acc, curr) => ({ ...acc, ...curr }), {});
+    return this.MD_BITSTREAMS_MAP.map(({ param,  metadata }) => {
+      const metadataValue = this.bitstream?.firstMetadataValue(metadata);
+      return { [`${param}`]:  metadataValue ?? this.bitstream.uuid };
+    })[0];
   }
 
 }

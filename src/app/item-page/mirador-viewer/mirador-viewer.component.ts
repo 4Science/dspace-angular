@@ -14,17 +14,22 @@ import {
   PLATFORM_ID,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   Observable,
   of,
+  Subscription,
 } from 'rxjs';
 import {
+  distinctUntilChanged,
   map,
   take,
 } from 'rxjs/operators';
 import { SafeUrlPipe } from 'src/app/shared/utils/safe-url-pipe';
-import { VarDirective } from 'src/app/shared/utils/var.directive';
 
 import { environment } from '../../../environments/environment';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
@@ -38,6 +43,7 @@ import {
   HostWindowService,
   WidthCategory,
 } from '../../shared/host-window.service';
+import { VarDirective } from '../../shared/utils/var.directive';
 import { MiradorViewerService } from './mirador-viewer.service';
 
 const IFRAME_UPDATE_URL_MESSAGE = 'update-url';
@@ -108,6 +114,10 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
 
   viewerMessage = 'Sorry, the Mirador viewer is not currently available in development mode.';
 
+  private readonly isInItemPage = environment.advancedAttachmentRendering.showViewerOnSameItemPage;
+
+  private readonly subs: Subscription[] = [];
+
   constructor(
     private sanitizer: DomSanitizer,
     private viewerService: MiradorViewerService,
@@ -115,10 +125,11 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
     private bundleDataService: BundleDataService,
     private hostWindowService: HostWindowService,
     private location: Location,
+    private route: ActivatedRoute,
+    private router: Router,
     @Inject(PLATFORM_ID) private platformId: any,
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
   ) {
-
   }
 
   /**
@@ -206,13 +217,17 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
           }),
         );
       }
+
+      if (this.isInItemPage) {
+        this.reloadIframeOnUrlChange();
+      }
     }
   }
 
   ngOnDestroy(): void {
     this._window.nativeWindow.removeEventListener('message', this.iframeMessageListener);
+    this.subs.forEach((sub) => sub.unsubscribe());
   }
-
 
   iframeMessageListener = (event: MessageEvent) => {
     const data: IFrameMessageData = event.data;
@@ -231,4 +246,30 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
       this.location.replaceState(newPathWithQuery);
     }
   };
+
+  private reloadIframeOnUrlChange(): void {
+    this.subs.push(
+      this.route.queryParams.pipe(distinctUntilChanged()).subscribe(params => {
+        const canvasId = params.canvasId;
+        const canvasIndex = params.canvasIndex;
+
+        let shouldReload = false;
+
+        if (canvasId && canvasId !== this.canvasId) {
+          this.canvasId = canvasId;
+          shouldReload = true;
+        }
+
+        if (canvasIndex && canvasIndex !== this.canvasIndex) {
+          this.canvasIndex = canvasIndex;
+          shouldReload = true;
+        }
+
+        if (shouldReload) {
+          // Regenerate iframe URL
+          this.iframeViewerUrl = of('').pipe(map(() => this.getURL()));
+        }
+      }),
+    );
+  }
 }
