@@ -1,4 +1,10 @@
 import {
+  AsyncPipe,
+  NgForOf,
+  NgIf,
+  NgTemplateOutlet,
+} from '@angular/common';
+import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -49,7 +55,18 @@ import { RemoteData } from '../../../core/data/remote-data';
   ],
   templateUrl: './process-notification.component.html',
   styleUrls: ['./process-notification.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    NgIf,
+    AsyncPipe,
+    NgTemplateOutlet,
+    TranslateModule,
+    ThemedFileDownloadLinkComponent,
+    FileSizePipe,
+    NgForOf,
+    BtnDisabledDirective,
+  ],
+  standalone: true,
 })
 
 export class ProcessNotificationComponent implements OnInit, OnDestroy {

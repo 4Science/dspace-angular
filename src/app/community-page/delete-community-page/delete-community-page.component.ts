@@ -1,4 +1,16 @@
 import { Component } from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+
+import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
+import { CommunityDataService } from '../../core/data/community-data.service';
+import { ScriptDataService } from '../../core/data/processes/script-data.service';
 import { Community } from '../../core/shared/community.model';
 import { CommunityDataService } from '../../core/data/community-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -25,8 +37,9 @@ export class DeleteCommunityPageComponent extends DeleteComColPageComponent<Comm
     protected route: ActivatedRoute,
     protected notifications: NotificationsService,
     protected translate: TranslateService,
+    protected scriptDataService: ScriptDataService,
   ) {
-    super(dsoDataService, dsoNameService, router, route, notifications, translate);
+    super(dsoDataService, dsoNameService, router, route, notifications, translate, scriptDataService);
   }
 
 }

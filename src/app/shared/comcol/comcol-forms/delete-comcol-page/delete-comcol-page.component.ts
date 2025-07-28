@@ -8,9 +8,17 @@ import { TranslateService } from '@ngx-translate/core';
 import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
 import { NoContent } from '../../../../core/shared/NoContent.model';
 import { ComColDataService } from '../../../../core/data/comcol-data.service';
-import { Community } from '../../../../core/shared/community.model';
+import {
+  DSPACE_OBJECT_DELETION_SCRIPT_NAME,
+  ScriptDataService,
+} from '../../../../core/data/processes/script-data.service';
+import { RemoteData } from '../../../../core/data/remote-data';
 import { Collection } from '../../../../core/shared/collection.model';
-import { DSONameService } from '../../../../core/breadcrumbs/dso-name.service';
+import { Community } from '../../../../core/shared/community.model';
+import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
+import { Process } from '../../../../process-page/processes/process.model';
+import { ProcessParameter } from '../../../../process-page/processes/process-parameter.model';
+import { NotificationsService } from '../../../notifications/notifications.service';
 
 /**
  * Component representing the delete page for communities and collections
@@ -42,6 +50,7 @@ export class DeleteComColPageComponent<TDomain extends Community | Collection> i
     protected route: ActivatedRoute,
     protected notifications: NotificationsService,
     protected translate: TranslateService,
+    protected scriptDataService: ScriptDataService,
   ) {
   }
 
@@ -55,11 +64,14 @@ export class DeleteComColPageComponent<TDomain extends Community | Collection> i
    */
   onConfirm(dso: TDomain) {
     this.processing$.next(true);
-    this.dsoDataService.delete(dso.id)
+    const parameterValues = [ Object.assign(new ProcessParameter(), { name: '-i', value: dso.id }) ];
+    this.scriptDataService.invoke(DSPACE_OBJECT_DELETION_SCRIPT_NAME, parameterValues, [])
       .pipe(getFirstCompletedRemoteData())
-      .subscribe((response: RemoteData<NoContent>) => {
+      .subscribe((response: RemoteData<Process>) => {
         if (response.hasSucceeded) {
           const successMessage = this.translate.instant((dso as any).type + '.delete.notification.success');
+          const title = this.translate.get((dso as any).type + '-deletion.process.title');
+          this.notifications.process(response.payload.processId, 5000, title);
           this.notifications.success(successMessage);
         } else {
           const errorMessage = this.translate.instant((dso as any).type + '.delete.notification.fail');

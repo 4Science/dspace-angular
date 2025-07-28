@@ -3704,6 +3704,12 @@
 
   "item-export.process.title": "Bulk export item",
 
+  "item-deletion.process.title": "Item deletion!",
+
+  "community-deletion.process.title": "Community deletion!",
+
+  "collection-deletion.process.title": "Collection deletion!",
+
   "itemtemplate.edit.metadata.add-button": "Add",
 
   "itemtemplate.edit.metadata.discard-button": "Discard",
