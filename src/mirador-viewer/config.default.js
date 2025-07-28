@@ -1,4 +1,6 @@
 import Mirador from 'mirador/dist/es/src/index';
+import jwtDecode from "jwt-decode";
+
 
 // You can modify this default Mirador configuration file. However,
 // you should consider creating a copy of this file named
@@ -85,7 +87,11 @@ windowSettings.manifestId = manifest;
         const authCookie = decodeURIComponent(value);
         const parsedCookie = JSON.parse(authCookie);
         if (parsedCookie && parsedCookie[tokenName]) {
-          return `Bearer ${parsedCookie[tokenName]}`;
+          const decodedJwt = jwtDecode(parsedCookie[tokenName]);
+          const jwtExpDate = decodedJwt.exp * 1000;
+          const isExpired = jwtExpDate <= Date.now();
+          // if token is expired we don't use it as it would cause a 403
+          return isExpired ? null : `Bearer ${parsedCookie[tokenName]}`;
         }
       }
     }
