@@ -11,13 +11,11 @@ import {
   DSPACE_OBJECT_DELETION_SCRIPT_NAME,
   ScriptDataService,
 } from '../../../../core/data/processes/script-data.service';
-import { RemoteData } from '../../../../core/data/remote-data';
 import { Collection } from '../../../../core/shared/collection.model';
 import { Community } from '../../../../core/shared/community.model';
-import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
 import { Process } from '../../../../process-page/processes/process.model';
 import { ProcessParameter } from '../../../../process-page/processes/process-parameter.model';
-import { NotificationsService } from '../../../notifications/notifications.service';
+import { DSONameService } from '../../../../core/breadcrumbs/dso-name.service';
 
 /**
  * Component representing the delete page for communities and collections

@@ -13,15 +13,12 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
-import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
-import { CommunityDataService } from '../../core/data/community-data.service';
 import {
   DSPACE_OBJECT_DELETION_SCRIPT_NAME,
   ScriptDataService,
 } from '../../core/data/processes/script-data.service';
 import { Community } from '../../core/shared/community.model';
 import { ProcessParameter } from '../../process-page/processes/process-parameter.model';
-import { DSONameServiceMock } from '../../shared/mocks/dso-name.service.mock';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import {
   createFailedRemoteDataObject$,
@@ -31,6 +28,8 @@ import { NotificationsServiceStub } from '../../shared/testing/notifications-ser
 import { DeleteCommunityPageComponent } from './delete-community-page.component';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
 import { DSONameServiceMock } from '../../shared/mocks/dso-name.service.mock';
+import { SharedModule } from '../../shared/shared.module';
+import { CommunityDataService } from '../../core/data/community-data.service';
 
 describe('DeleteCommunityPageComponent', () => {
   let comp: DeleteCommunityPageComponent;

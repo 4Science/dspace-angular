@@ -2,9 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ItemType } from '../../../core/shared/item-relationships/item-type.model';
 import { Relationship } from '../../../core/shared/item-relationships/relationship.model';
 import { Item } from '../../../core/shared/item.model';
-import { RouterStub } from '../../../shared/testing/router.stub';
 import { of as observableOf, EMPTY } from 'rxjs';
-import { NotificationsServiceStub } from '../../../shared/testing/notifications-service.stub';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -12,12 +10,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ItemDataService } from '../../../core/data/item-data.service';
-import { NotificationsService } from '../../../shared/notifications/notifications.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ItemDeleteComponent } from './item-delete.component';
-import { createSuccessfulRemoteDataObject, createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
-import { VarDirective } from '../../../shared/utils/var.directive';
 import { ObjectUpdatesService } from '../../../core/data/object-updates/object-updates.service';
 import {
   DSPACE_OBJECT_DELETION_SCRIPT_NAME,
@@ -36,13 +31,13 @@ import {
 } from '../../../shared/remote-data.utils';
 import { NotificationsServiceStub } from '../../../shared/testing/notifications-service.stub';
 import { RouterStub } from '../../../shared/testing/router.stub';
-import { createPaginatedList } from '../../../shared/testing/utils.test';
 import { ThemeService } from '../../../shared/theme-support/theme.service';
 import { VarDirective } from '../../../shared/utils/var.directive';
 import { getItemEditRoute } from '../../item-page-routing-paths';
 import { createPaginatedList } from '../../../shared/testing/utils.test';
 import { RelationshipTypeDataService } from '../../../core/data/relationship-type-data.service';
 import { LinkService } from '../../../core/cache/builders/link.service';
+import { EntityTypeDataService } from '../../../core/data/entity-type-data.service';
 
 let comp: ItemDeleteComponent;
 let fixture: ComponentFixture<ItemDeleteComponent>;

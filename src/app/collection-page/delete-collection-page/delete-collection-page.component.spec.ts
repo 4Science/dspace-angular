@@ -6,7 +6,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { of as observableOf } from 'rxjs';
-import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { DeleteCollectionPageComponent } from './delete-collection-page.component';
 import { CollectionDataService } from '../../core/data/collection-data.service';
 import {
@@ -22,7 +21,7 @@ import {
   createSuccessfulRemoteDataObject$,
 } from '../../shared/remote-data.utils';
 import { NotificationsServiceStub } from '../../shared/testing/notifications-service.stub';
-import { DeleteCollectionPageComponent } from './delete-collection-page.component';
+import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
 
 describe('DeleteCollectionPageComponent', () => {
 

@@ -1,6 +1,5 @@
 // eslint-disable-next-line max-classes-per-file
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { defaultIfEmpty, filter, map, switchMap, take } from 'rxjs/operators';
 import {
   AbstractSimpleItemActionComponent
 } from '../simple-item-action/abstract-simple-item-action.component';
@@ -40,9 +39,6 @@ import {
   getFirstSucceededRemoteData,
   getFirstCompletedRemoteData
 } from '../../../core/shared/operators';
-import { hasValue, isNotEmpty } from '../../../shared/empty.util';
-import { Item } from '../../../core/shared/item.model';
-import { MetadataValue } from '../../../core/shared/metadata.models';
 import { ViewMode } from '../../../core/shared/view-mode.model';
 import { Process } from '../../../process-page/processes/process.model';
 import { ProcessParameter } from '../../../process-page/processes/process-parameter.model';
@@ -51,15 +47,9 @@ import {
   isNotEmpty,
 } from '../../../shared/empty.util';
 import { NotificationsService } from '../../../shared/notifications/notifications.service';
-import { ItemDataService } from '../../../core/data/item-data.service';
 import { TranslateService } from '@ngx-translate/core';
-import { ObjectUpdatesService } from '../../../core/data/object-updates/object-updates.service';
-import { RelationshipDataService } from '../../../core/data/relationship-data.service';
-import { EntityTypeDataService } from '../../../core/data/entity-type-data.service';
-import { LinkService } from '../../../core/cache/builders/link.service';
 import { followLink } from '../../../shared/utils/follow-link-config.model';
 import { getItemEditRoute } from '../../item-page-routing-paths';
-import { RemoteData } from '../../../core/data/remote-data';
 
 /**
  * Data Transfer Object used to prevent the HTML template to call function returning Observables

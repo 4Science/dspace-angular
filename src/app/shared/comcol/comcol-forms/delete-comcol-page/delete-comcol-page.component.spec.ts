@@ -14,8 +14,15 @@ import {
 } from '../../../remote-data.utils';
 import { NotificationsServiceStub } from '../../../testing/notifications-service.stub';
 import { getTestScheduler } from 'jasmine-marbles';
+import { of as observableOf } from 'rxjs';
 import { ComColDataService } from '../../../../core/data/comcol-data.service';
-import { createFailedRemoteDataObject$ } from '../../../remote-data.utils';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DeleteComColPageComponent } from './delete-comcol-page.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { SharedModule } from '../../../shared.module';
+import { CommonModule } from '@angular/common';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('DeleteComColPageComponent', () => {
   let router: Router;
