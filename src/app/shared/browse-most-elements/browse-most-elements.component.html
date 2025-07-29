@@ -40,10 +40,9 @@
     ></ds-default-browse-elements>
   </ng-container>
 
-  <div *ngIf="topSection.showAllResults && (discoveryConfigurationsTotalElementsMap === null || discoveryConfigurationsTotalElementsMap.get(paginatedSearchOptions.configuration) > 0)" class="d-flex justify-content-center">
-    <button type="button" class="btn btn-link" (click)="showAllResults()">
-      {{ "home.top-section.view-results" | translate }}
-    </button>
-  </div>
-
+</div>
+<div *ngIf="topSection?.showAllResults && (discoveryConfigurationsTotalElementsMap === null || discoveryConfigurationsTotalElementsMap.get(paginatedSearchOptions.configuration) > 0)" class="d-flex justify-content-center">
+  <button type="button" class="btn btn-link" (click)="showAllResults()">
+    {{ "home.top-section.view-results" | translate }}
+  </button>
 </div>

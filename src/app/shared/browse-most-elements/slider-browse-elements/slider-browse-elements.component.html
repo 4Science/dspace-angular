@@ -8,15 +8,21 @@
   <div class="flex-fill d-flex flex-row gapx-3 flex-nowrap card-element-wrapper justify-content-center">
     <ng-container *ngFor="let item of (selectedSearchResultArray$ | async); let i = index; let last = last">
       <div class="card">
-        <ng-container *ngIf="isBrowser && !isLoading; else imageSkeleton">
-          <img [src]="(itemToImageHrefMap$ | async)?.get(item.uuid)" alt="hidden-image" style="display: none" #image />
-          <div class="thumbnail-container h-50">
-            <div class="thumbnail-inner-container w-100 h-100 position-relative"
-                 [dsBackgroundImage]="(itemToImageHrefMap$ | async)?.get(item.uuid)">
-              <ds-type-badge class="pl-1" [object]="item"></ds-type-badge>
+        @defer {
+          @if (!isLoading) {
+            <img [src]="(itemToImageHrefMap$ | async)?.get(item.uuid)" alt="hidden-image" style="display: none" #image />
+            <div class="thumbnail-container h-50">
+              <div class="thumbnail-inner-container w-100 h-100 position-relative"
+                   [dsBackgroundImage]="(itemToImageHrefMap$ | async)?.get(item.uuid)">
+                <ds-type-badge class="pl-1" [object]="item"></ds-type-badge>
+              </div>
             </div>
-          </div>
-        </ng-container>
+          } @else {
+            <ng-container *ngTemplateOutlet="imageSkeleton"></ng-container>
+          }
+        } @placeholder {
+          <ng-container *ngTemplateOutlet="imageSkeleton"></ng-container>
+        }
         <ng-template #imageSkeleton>
           <ngx-skeleton-loader class="thumbnail-container h-50" [theme]="{height: '100%', width: '100%'}"></ngx-skeleton-loader>
         </ng-template>

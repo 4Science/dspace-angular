@@ -297,6 +297,7 @@ export class MenuResolverService  {
     this.createExportMenuSections();
     this.createImportMenuSections();
     this.createAccessControlMenuSections();
+    this.createReportMenuSections();
     this.createDLExporterMenuItem();
     return this.waitForMenu$(MenuID.ADMIN);
   }

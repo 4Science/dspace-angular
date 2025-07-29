@@ -6,6 +6,7 @@ import {
   AsyncPipe,
   NgForOf,
   NgIf,
+  NgTemplateOutlet,
 } from '@angular/common';
 import {
   ChangeDetectorRef,
@@ -52,6 +53,7 @@ import { SliderComponent } from '../slider.component';
     BtnDisabledDirective,
     NgIf,
     NgForOf,
+    NgTemplateOutlet,
   ],
 })
 export class LinkSliderComponent extends SliderComponent implements OnInit, OnDestroy {
