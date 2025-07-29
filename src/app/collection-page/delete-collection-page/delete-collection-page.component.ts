@@ -4,7 +4,6 @@ import {
   Router,
 } from '@angular/router';
 import {
-  TranslateModule,
   TranslateService,
 } from '@ngx-translate/core';
 
@@ -12,7 +11,6 @@ import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
 import { CollectionDataService } from '../../core/data/collection-data.service';
 import { ScriptDataService } from '../../core/data/processes/script-data.service';
 import { Collection } from '../../core/shared/collection.model';
-import { BtnDisabledDirective } from '../../shared/btn-disabled.directive';
 import { DeleteComColPageComponent } from '../../shared/comcol/comcol-forms/delete-comcol-page/delete-comcol-page.component';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { CollectionDataService } from '../../core/data/collection-data.service';

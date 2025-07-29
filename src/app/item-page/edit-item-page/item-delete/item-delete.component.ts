@@ -46,7 +46,6 @@ import { MetadataValue } from '../../../core/shared/metadata.models';
 import { ViewMode } from '../../../core/shared/view-mode.model';
 import { Process } from '../../../process-page/processes/process.model';
 import { ProcessParameter } from '../../../process-page/processes/process-parameter.model';
-import { BtnDisabledDirective } from '../../../shared/btn-disabled.directive';
 import {
   hasValue,
   isNotEmpty,
@@ -61,7 +60,6 @@ import { LinkService } from '../../../core/cache/builders/link.service';
 import { followLink } from '../../../shared/utils/follow-link-config.model';
 import { getItemEditRoute } from '../../item-page-routing-paths';
 import { RemoteData } from '../../../core/data/remote-data';
-import { NoContent } from '../../../core/shared/NoContent.model';
 
 /**
  * Data Transfer Object used to prevent the HTML template to call function returning Observables

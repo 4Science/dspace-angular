@@ -4,7 +4,6 @@ import {
   Router,
 } from '@angular/router';
 import {
-  TranslateModule,
   TranslateService,
 } from '@ngx-translate/core';
 

@@ -6,7 +6,6 @@ import { first, map } from 'rxjs/operators';
 import { NotificationsService } from '../../../notifications/notifications.service';
 import { TranslateService } from '@ngx-translate/core';
 import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
-import { NoContent } from '../../../../core/shared/NoContent.model';
 import { ComColDataService } from '../../../../core/data/comcol-data.service';
 import {
   DSPACE_OBJECT_DELETION_SCRIPT_NAME,

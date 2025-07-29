@@ -29,7 +29,6 @@ import {
 } from '../../shared/remote-data.utils';
 import { NotificationsServiceStub } from '../../shared/testing/notifications-service.stub';
 import { DeleteCommunityPageComponent } from './delete-community-page.component';
-import { RequestService } from '../../core/data/request.service';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
 import { DSONameServiceMock } from '../../shared/mocks/dso-name.service.mock';
 

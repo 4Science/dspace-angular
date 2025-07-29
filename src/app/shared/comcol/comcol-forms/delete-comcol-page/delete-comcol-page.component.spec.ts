@@ -15,7 +15,7 @@ import {
 import { NotificationsServiceStub } from '../../../testing/notifications-service.stub';
 import { getTestScheduler } from 'jasmine-marbles';
 import { ComColDataService } from '../../../../core/data/comcol-data.service';
-import { createFailedRemoteDataObject$, createNoContentRemoteDataObject$ } from '../../../remote-data.utils';
+import { createFailedRemoteDataObject$ } from '../../../remote-data.utils';
 
 describe('DeleteComColPageComponent', () => {
   let router: Router;
