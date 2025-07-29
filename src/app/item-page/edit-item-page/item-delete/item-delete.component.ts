@@ -50,6 +50,8 @@ import { NotificationsService } from '../../../shared/notifications/notification
 import { TranslateService } from '@ngx-translate/core';
 import { followLink } from '../../../shared/utils/follow-link-config.model';
 import { getItemEditRoute } from '../../item-page-routing-paths';
+import { VirtualMetadata } from '../virtual-metadata/virtual-metadata.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 /**
  * Data Transfer Object used to prevent the HTML template to call function returning Observables

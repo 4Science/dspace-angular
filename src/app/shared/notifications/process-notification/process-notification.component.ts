@@ -1,10 +1,4 @@
 import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-  NgTemplateOutlet,
-} from '@angular/common';
-import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -38,6 +32,10 @@ import { getAllCompletedRemoteData, getFirstCompletedRemoteData } from '../../..
 import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { RemoteData } from '../../../core/data/remote-data';
+import { TranslateModule } from '@ngx-translate/core';
+import { ThemedFileDownloadLinkComponent } from '../../file-download-link/themed-file-download-link.component';
+import { FileSizePipe } from '../../utils/file-size-pipe';
+import { BtnDisabledDirective } from '../../btn-disabled.directive';
 
 @Component({
   selector: 'ds-process-notification',
@@ -56,17 +54,6 @@ import { RemoteData } from '../../../core/data/remote-data';
   templateUrl: './process-notification.component.html',
   styleUrls: ['./process-notification.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    NgIf,
-    AsyncPipe,
-    NgTemplateOutlet,
-    TranslateModule,
-    ThemedFileDownloadLinkComponent,
-    FileSizePipe,
-    NgForOf,
-    BtnDisabledDirective,
-  ],
-  standalone: true,
 })
 
 export class ProcessNotificationComponent implements OnInit, OnDestroy {
