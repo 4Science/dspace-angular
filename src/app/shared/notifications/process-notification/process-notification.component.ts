@@ -32,10 +32,6 @@ import { getAllCompletedRemoteData, getFirstCompletedRemoteData } from '../../..
 import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { RemoteData } from '../../../core/data/remote-data';
-import { TranslateModule } from '@ngx-translate/core';
-import { ThemedFileDownloadLinkComponent } from '../../file-download-link/themed-file-download-link.component';
-import { FileSizePipe } from '../../utils/file-size-pipe';
-import { BtnDisabledDirective } from '../../btn-disabled.directive';
 
 @Component({
   selector: 'ds-process-notification',
