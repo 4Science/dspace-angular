@@ -1794,10 +1794,10 @@
   "browse.taxonomy.button": "Browse",
 
   // "browse.title": "Browsing {{ collection }} by {{ field }}{{ startsWith }} {{ value }}",
-  "browse.title": "Mostra il contenuto di {{ collection }} per {{ field }}{{ startsWith }} {{ value }}",
+  "browse.title": "Mostra il contenuto per {{ field }}{{ startsWith }} {{ value }}",
 
   // "browse.title.page": "Browsing {{ collection }} by {{ field }} {{ value }}",
-  "browse.title.page": "Mostra il contenuto di {{ collection }} per {{ field }} {{ value }}",
+  "browse.title.page": "Mostra il contenuto per {{ field }} {{ value }}",
 
 
   // "bulk-import.abort-on-error": "Abort on first error",
