@@ -2701,11 +2701,11 @@
 
   // "browse.title": "Browsing by {{ field }}{{ startsWith }} {{ value }}",
   // TODO Source message changed - Revise the translation
-  "browse.title": "Mostra il contenuto di {{ collection }} per {{ field }}{{ startsWith }} {{ value }}",
+  "browse.title": "Mostra il contenuto per {{ field }}{{ startsWith }} {{ value }}",
 
   // "browse.title.page": "Browsing by {{ field }} {{ value }}",
   // TODO Source message changed - Revise the translation
-  "browse.title.page": "Mostra il contenuto di {{ collection }} per {{ field }} {{ value }}",
+  "browse.title.page": "Mostra il contenuto per {{ field }} {{ value }}",
 
 
   // "bulk-import.abort-on-error": "Abort on first error",
