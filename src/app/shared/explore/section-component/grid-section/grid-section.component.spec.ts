@@ -34,12 +34,12 @@ import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service
 import { SearchService } from '../../../../core/shared/search/search.service';
 import { Site } from '../../../../core/shared/site.model';
 import { UUIDService } from '../../../../core/shared/uuid.service';
-import { getMockObjectCacheService } from '../../../../shared/mocks/object-cache.service.mock';
-import { getMockRemoteDataBuildService } from '../../../../shared/mocks/remote-data-build.service.mock';
-import { getMockUUIDService } from '../../../../shared/mocks/uuid.service.mock';
-import { NotificationsService } from '../../../../shared/notifications/notifications.service';
 import { ThemedThumbnailComponent } from '../../../../thumbnail/themed-thumbnail.component';
+import { getMockObjectCacheService } from '../../../mocks/object-cache.service.mock';
+import { getMockRemoteDataBuildService } from '../../../mocks/remote-data-build.service.mock';
 import { TranslateLoaderMock } from '../../../mocks/translate-loader.mock';
+import { getMockUUIDService } from '../../../mocks/uuid.service.mock';
+import { NotificationsService } from '../../../notifications/notifications.service';
 import { createSuccessfulRemoteDataObject$ } from '../../../remote-data.utils';
 import { SearchResult } from '../../../search/models/search-result.model';
 import { GridSectionComponent } from './grid-section.component';

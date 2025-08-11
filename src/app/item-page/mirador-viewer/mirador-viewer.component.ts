@@ -14,13 +14,19 @@ import {
   PLATFORM_ID,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   combineLatest,
   Observable,
   of,
+  Subscription,
 } from 'rxjs';
 import {
+  distinctUntilChanged,
   map,
   switchMap,
   take,
@@ -121,6 +127,10 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
 
   private downloadConfigKey: string;
 
+  private readonly isInItemPage = environment.advancedAttachmentRendering.showViewerOnSameItemPage;
+
+  private readonly subs: Subscription[] = [];
+
   constructor(
     private sanitizer: DomSanitizer,
     private viewerService: MiradorViewerService,
@@ -130,6 +140,8 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
     private location: Location,
     private configurationDataService: ConfigurationDataService,
     private restService: DspaceRestService,
+    private route: ActivatedRoute,
+    private router: Router,
     @Inject(APP_CONFIG) private appConfig: AppConfig,
     @Inject(PLATFORM_ID) private platformId: any,
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
@@ -231,6 +243,10 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
           }),
         );
       }
+
+      if (this.isInItemPage) {
+        this.reloadIframeOnUrlChange();
+      }
     }
 
   }
@@ -269,8 +285,8 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._window.nativeWindow.removeEventListener('message', this.iframeMessageListener);
+    this.subs.forEach((sub) => sub.unsubscribe());
   }
-
 
   iframeMessageListener = (event: MessageEvent) => {
     const data: IFrameMessageData = event.data;
@@ -289,4 +305,30 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
       this.location.replaceState(newPathWithQuery);
     }
   };
+
+  private reloadIframeOnUrlChange(): void {
+    this.subs.push(
+      this.route.queryParams.pipe(distinctUntilChanged()).subscribe(params => {
+        const canvasId = params.canvasId;
+        const canvasIndex = params.canvasIndex;
+
+        let shouldReload = false;
+
+        if (canvasId && canvasId !== this.canvasId) {
+          this.canvasId = canvasId;
+          shouldReload = true;
+        }
+
+        if (canvasIndex && canvasIndex !== this.canvasIndex) {
+          this.canvasIndex = canvasIndex;
+          shouldReload = true;
+        }
+
+        if (shouldReload) {
+          // Regenerate iframe URL
+          this.iframeViewerUrl = of('').pipe(map(() => this.getURL()));
+        }
+      }),
+    );
+  }
 }

@@ -3,6 +3,7 @@ import {
   NgIf,
 } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   EventEmitter,
@@ -104,7 +105,7 @@ import { ValidateGroupExists } from './validators/group-exists.validator';
 /**
  * A form used for creating and editing groups
  */
-export class GroupFormComponent implements OnInit, OnDestroy {
+export class GroupFormComponent implements OnInit, OnDestroy, AfterViewInit {
 
   messagePrefix = 'admin.access-control.groups.form';
 
@@ -230,6 +231,25 @@ export class GroupFormComponent implements OnInit, OnDestroy {
     this.initialisePage();
   }
 
+  ngAfterViewInit() {
+    this.subs.push(
+      observableCombineLatest([
+        this.activeGroup$,
+        this.canEdit$,
+      ]).subscribe(([activeGroup, canEdit]) => {
+        if (!activeGroup) {
+          return;
+        }
+
+        if (canEdit && !activeGroup.permanent) {
+          this.formGroup.enable();
+        } else {
+          this.formGroup.disable();
+        }
+      }),
+    );
+  }
+
   initialisePage() {
     const groupNameModel = new DynamicInputModel({
       id: 'groupName',
@@ -300,11 +320,6 @@ export class GroupFormComponent implements OnInit, OnDestroy {
               groupName: activeGroup.name,
               groupDescription: activeGroup.firstMetadataValue('dc.description'),
             });
-          }
-          if (!canEdit || activeGroup.permanent) {
-            this.formGroup.disable();
-          } else {
-            this.formGroup.enable();
           }
         }
       }),

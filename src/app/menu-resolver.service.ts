@@ -297,6 +297,7 @@ export class MenuResolverService  {
     this.createExportMenuSections();
     this.createImportMenuSections();
     this.createAccessControlMenuSections();
+    this.createReportMenuSections();
     this.createDLExporterMenuItem();
     return this.waitForMenu$(MenuID.ADMIN);
   }
@@ -888,7 +889,7 @@ export class MenuResolverService  {
             link: `/community-list`,
           } as LinkMenuItemModel,
           icon: 'list-alt',
-          index: 2,
+          index: 0,
         },
         /*  Admin Search */
         {

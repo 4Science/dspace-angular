@@ -1,9 +1,16 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  NO_ERRORS_SCHEMA,
+  PLATFORM_ID,
+} from '@angular/core';
 import {
   ComponentFixture,
   TestBed,
   waitForAsync,
 } from '@angular/core/testing';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 import {
   TranslateLoader,
   TranslateModule,
@@ -28,8 +35,10 @@ import {
   MetadataValue,
 } from '../../core/shared/metadata.models';
 import { HostWindowService } from '../../shared/host-window.service';
+import { MockActivatedRoute } from '../../shared/mocks/active-router.mock';
 import { TranslateLoaderMock } from '../../shared/mocks/translate-loader.mock';
 import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
+import { RouterStub } from '../../shared/testing/router.stub';
 import { createPaginatedList } from '../../shared/testing/utils.test';
 import { SafeUrlPipe } from '../../shared/utils/safe-url-pipe';
 import { VarDirective } from '../../shared/utils/var.directive';
@@ -84,8 +93,8 @@ describe('MiradorViewerComponent with search', () => {
           },
         }),
         MiradorViewerComponent,
-        SafeUrlPipe,
         VarDirective,
+        SafeUrlPipe,
       ],
       providers: [
         { provide: DspaceRestService, useValue: restService },
@@ -94,6 +103,8 @@ describe('MiradorViewerComponent with search', () => {
         { provide: HostWindowService, useValue: mockHostWindowService },
         { provide: NativeWindowService, useValue: new NativeWindowRef() },
         { provide: Location, useValue: {} },
+        { provide: Router, useClass: RouterStub },
+        { provide: ActivatedRoute, useValue: new MockActivatedRoute() },
         { provide: ConfigurationDataService, useValue: configurationDataService },
         { provide: APP_CONFIG, useValue: environment },
       ],
@@ -158,8 +169,8 @@ describe('MiradorViewerComponent with multiple images', () => {
           },
         }),
         MiradorViewerComponent,
-        SafeUrlPipe,
         VarDirective,
+        SafeUrlPipe,
       ],
       providers: [
         { provide: DspaceRestService, useValue: restService },
@@ -168,6 +179,8 @@ describe('MiradorViewerComponent with multiple images', () => {
         { provide: HostWindowService, useValue: mockHostWindowService  },
         { provide: NativeWindowService, useValue: new NativeWindowRef() },
         { provide: Location, useValue: {} },
+        { provide: Router, useClass: RouterStub },
+        { provide: ActivatedRoute, useValue: new MockActivatedRoute() },
         { provide: ConfigurationDataService, useValue: configurationDataService },
         { provide: APP_CONFIG, useValue: environment },
       ],
@@ -229,8 +242,8 @@ describe('MiradorViewerComponent with a single image', () => {
           },
         }),
         MiradorViewerComponent,
-        SafeUrlPipe,
         VarDirective,
+        SafeUrlPipe,
       ],
       providers: [
         { provide: DspaceRestService, useValue: restService },
@@ -239,6 +252,8 @@ describe('MiradorViewerComponent with a single image', () => {
         { provide: HostWindowService, useValue: mockHostWindowService },
         { provide: NativeWindowService, useValue: new NativeWindowRef() },
         { provide: Location, useValue: {} },
+        { provide: Router, useClass: RouterStub },
+        { provide: ActivatedRoute, useValue: new MockActivatedRoute() },
         { provide: ConfigurationDataService, useValue: configurationDataService },
         { provide: APP_CONFIG, useValue: environment },
       ],
@@ -292,6 +307,8 @@ describe('MiradorViewerComponent on browser in prod mode', () => {
           },
         }),
         MiradorViewerComponent,
+        SafeUrlPipe,
+        VarDirective,
       ],
       providers: [
         { provide: DspaceRestService, useValue: restService },
@@ -300,6 +317,9 @@ describe('MiradorViewerComponent on browser in prod mode', () => {
         { provide: HostWindowService, useValue: mockHostWindowService },
         { provide: NativeWindowService, useValue: new NativeWindowRef() },
         { provide: Location, useValue: {} },
+        { provide: Router, useClass: RouterStub },
+        { provide: ActivatedRoute, useValue: new MockActivatedRoute() },
+        { provide: PLATFORM_ID, useValue: 'browser' },
         { provide: ConfigurationDataService, useValue: configurationDataService },
         { provide: APP_CONFIG, useValue: environment },
       ],
@@ -349,8 +369,8 @@ describe('MiradorViewerComponent in development mode', () => {
           },
         }),
         MiradorViewerComponent,
-        SafeUrlPipe,
         VarDirective,
+        SafeUrlPipe,
       ],
       providers: [
         { provide: BitstreamDataService, useValue: {} },
@@ -365,6 +385,8 @@ describe('MiradorViewerComponent in development mode', () => {
           { provide: HostWindowService, useValue: mockHostWindowService  },
           { provide: NativeWindowService, useValue: new NativeWindowRef() },
           { provide: Location, useValue: {} },
+          { provide: Router, useClass: RouterStub },
+          { provide: ActivatedRoute, useValue: new MockActivatedRoute() },
           { provide: ConfigurationDataService, useValue: configurationDataService },
           { provide: APP_CONFIG, useValue: environment },
         ],
@@ -609,4 +631,3 @@ describe('MiradorViewerComponent download plugin config', () => {
     }));
   });
 });
-

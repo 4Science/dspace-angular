@@ -77,10 +77,14 @@
   <div class="footer-copyrights">
     <div class="container">
       <div class="d-flex flex-wrap gapx-3 my-3">
-        <a *ngIf="showSendFeedback$ | async" class="d-block"
-           routerLink="info/feedback">{{ 'footer.link.feedback' | translate }}</a>
-        <a class="d-block mr-auto" href="javascript:void(0);"
-           (click)="showCookieSettings()">{{ 'footer.link.cookies' | translate }}</a>
+        @if (showSendFeedback$ | async) {
+          <a *ngIf="showSendFeedback$ | async" class="d-block"
+             routerLink="info/feedback">{{ 'footer.link.feedback' | translate }}</a>
+        }
+        @if (showCookieSettings) {
+          <a class="d-block" href="javascript:void(0);"
+             (click)="openCookieSettings()">{{ 'footer.link.cookies' | translate }}</a>
+        }
         <div>
           {{ 'footer.built-with' | translate }}
           <a [href]="'footer.link.dspace-glam.href' | translate"

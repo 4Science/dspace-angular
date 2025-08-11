@@ -54,6 +54,7 @@ describe('CarouselWithThumbnailsComponent', () => {
         CarouselWithThumbnailsComponent,
         MockComponent(ThumbnailSliderComponent),
       ],
+      declarations: [CarouselWithThumbnailsComponent],
       providers: [
         { provide: HostWindowService, useValue: hostWindowServicve },
         {
