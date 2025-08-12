@@ -39,6 +39,8 @@ import { MetaTagsConfig } from './meta-tags.config';
 import { MetadataLinkViewPopoverDataConfig } from './metadata-link-view-popoverdata-config.interface';
 import { IdentifierSubtypesConfig } from './identifier-subtypes-config.interface';
 import { DatadogRumConfig } from './datadog-rum-config.interfaces';
+import { LocationConfig } from './location-config.interface';
+import {LuckySearchRedirectConfig} from './lucky-search-redirect-config';
 
 interface AppConfig extends Config {
   ui: UIServerConfig;
@@ -86,6 +88,12 @@ interface AppConfig extends Config {
   metadataLinkViewPopoverData: MetadataLinkViewPopoverDataConfig;
   identifierSubtypes: IdentifierSubtypesConfig[];
   datadogRum?: DatadogRumConfig;
+  location: LocationConfig;
+  epflUnpaywallMetadata: EpflUnpaywallMetadata;
+  loader: LoaderConfig;
+  permanentRedirectPaths?: string[];
+  luckySearchRedirects?: LuckySearchRedirectConfig;
+
 }
 
 /**
