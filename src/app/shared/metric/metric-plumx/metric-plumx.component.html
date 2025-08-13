@@ -18,6 +18,7 @@
       <a *ngIf="remark && (remark | dsListMetricProps: 'data-publication-badge-enabled':isListElement == true)"
          [href]="remark | dsListMetricProps: 'href':isListElement"
          class="plumx-plum-print-popup"
+         [attr.aria-label]="'item.page.metric.label.plumx' | translate"
          [attr.data-popup]="remark | dsListMetricProps: 'data-popup':isListElement"
          [attr.data-hide-when-empty]="visibleWithoutData ? false : (remark | dsListMetricProps: 'data-hide-when-empty':isListElement)"
          [attr.data-hide-usage]="remark | dsListMetricProps: 'data-hide-usage':isListElement"

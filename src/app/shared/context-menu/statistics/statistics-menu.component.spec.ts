@@ -14,6 +14,7 @@ import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { Item } from '../../../core/shared/item.model';
 import { NotificationsService } from '../../notifications/notifications.service';
+import { BrowserOnlyMockPipe } from '../../testing/browser-only-mock.pipe';
 import { NotificationsServiceStub } from '../../testing/notifications-service.stub';
 import { StatisticsMenuComponent } from './statistics-menu.component';
 
@@ -35,7 +36,7 @@ describe('StatisticsMenuComponent', () => {
       isAuthorized: observableOf(true),
     });
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([]), StatisticsMenuComponent],
+      imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([]), BrowserOnlyMockPipe],
       providers: [
         { provide: AuthorizationDataService, useValue: authorizationService },
         { provide: 'contextMenuObjectProvider', useValue: dso },
