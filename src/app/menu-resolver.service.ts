@@ -246,7 +246,7 @@ export class MenuResolverService  {
             id: 'statistics',
             active: false,
             visible: true,
-            index: 2,
+            index: 1,
             model: {
               type: MenuItemType.TEXT,
               text: 'menu.section.statistics',
@@ -321,7 +321,7 @@ export class MenuResolverService  {
         {
           id: `browse_global_communities_and_collections`,
           active: false,
-          visible: false,
+          visible: !environment.layout.navbar.showCommunityCollection && isCollectionAdmin,
           model: {
             type: MenuItemType.LINK,
             text: `menu.section.communities_and_collections`,
@@ -444,7 +444,7 @@ export class MenuResolverService  {
           text: 'menu.section.new',
         } as TextMenuItemModel,
         icon: 'plus',
-        index: 1,
+        index: 0,
       };
       const editSubMenu = {
         id: 'edit',
@@ -455,7 +455,7 @@ export class MenuResolverService  {
           text: 'menu.section.edit',
         } as TextMenuItemModel,
         icon: 'pencil-alt',
-        index: 2,
+        index: 1,
       };
 
       const menuList = [
@@ -515,7 +515,7 @@ export class MenuResolverService  {
             text: 'menu.section.admin_search',
             link: '/admin/search',
           } as LinkMenuItemModel,
-          index: 6,
+          index: 5,
           icon: 'search',
         },
         /* Processes */
@@ -693,7 +693,7 @@ export class MenuResolverService  {
           text: 'menu.section.export',
         } as TextMenuItemModel,
         icon: 'file-export',
-        index: 4,
+        index: 3,
         shouldPersistOnRouteChange: true,
       });
       this.menuService.addSection(MenuID.ADMIN, {
@@ -826,7 +826,7 @@ export class MenuResolverService  {
           text: 'menu.section.import',
         } as TextMenuItemModel,
         icon: 'file-import',
-        index: 3,
+        index: 2,
         shouldPersistOnRouteChange: true,
       });
       this.menuService.addSection(MenuID.ADMIN, {
@@ -880,7 +880,7 @@ export class MenuResolverService  {
       const menuList = [
         /* Communities & Collections */
         {
-          id: 'communities_and_collections',
+          id: 'browse_global_communities_and_collections',
           active: false,
           visible: !environment.layout.navbar.showCommunityCollection && (isCollectionAdmin || isCommunityAdmin || authorized),
           model: {
@@ -889,7 +889,7 @@ export class MenuResolverService  {
             link: `/community-list`,
           } as LinkMenuItemModel,
           icon: 'list-alt',
-          index: 0,
+          index: 2,
         },
         /*  Admin Search */
         {

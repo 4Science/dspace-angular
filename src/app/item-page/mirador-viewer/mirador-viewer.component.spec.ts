@@ -426,8 +426,8 @@ describe('MiradorViewerComponent download plugin config', () => {
   const viewerService = jasmine.createSpyObj('MiradorViewerService', ['showEmbeddedViewer', 'getImageCount']);
 
   beforeEach(waitForAsync(() => {
-    viewerService.showEmbeddedViewer.and.returnValue(true);
-    viewerService.getImageCount.and.returnValue(observableOf(2));
+    viewerService.showEmbeddedViewer.and.returnValue(false);
+    viewerService.getImageCount.and.returnValue(observableOf(1));
     TestBed.configureTestingModule({
       imports: [
         TranslateModule.forRoot({
@@ -441,20 +441,22 @@ describe('MiradorViewerComponent download plugin config', () => {
         SafeUrlPipe,
       ],
       providers: [
-        { provide: DspaceRestService, useValue: restService },
         { provide: BitstreamDataService, useValue: {} },
-        { provide: BundleDataService, useValue: {} },
-        { provide: HostWindowService, useValue: mockHostWindowService  },
-        { provide: NativeWindowService, useValue: new NativeWindowRef() },
-        { provide: Location, useValue: {} },
-        { provide: ConfigurationDataService, useValue: configurationDataService },
-        { provide: APP_CONFIG, useValue: environment },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(MiradorViewerComponent, {
       set: {
         providers: [
+          { provide: DspaceRestService, useValue: restService },
           { provide: MiradorViewerService, useValue: viewerService },
+          { provide: BundleDataService, useValue: {} },
+          { provide: HostWindowService, useValue: mockHostWindowService  },
+          { provide: NativeWindowService, useValue: new NativeWindowRef() },
+          { provide: Location, useValue: {} },
+          { provide: Router, useClass: RouterStub },
+          { provide: ActivatedRoute, useValue: new MockActivatedRoute() },
+          { provide: ConfigurationDataService, useValue: configurationDataService },
+          { provide: APP_CONFIG, useValue: environment },
         ],
       },
     }).compileComponents();
