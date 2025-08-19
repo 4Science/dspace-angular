@@ -182,7 +182,7 @@ describe('ScriptsSelectComponent', () => {
       target: {
         scrollTop: 50,
         clientHeight: 200,
-        scrollHeight: 300,
+        scrollHeight: 400,
       },
     };
 
