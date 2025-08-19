@@ -17,11 +17,11 @@
     </a>
   </li>
   <li *ngIf="(isAuthenticated$ | async) && (isMobile$ | async) === false && (showAuth$ | async)" class="nav-item">
-    <div ngbDropdown display="dynamic" placement="bottom-right" class="d-inline-block" @fadeInOut>
+    <div ngbDropdown #loggedInDrop="ngbDropdown" display="dynamic" placement="bottom-right" class="d-inline-block" @fadeInOut>
       <a href="javascript:void(0);" role="button" [attr.aria-label]="'nav.user-profile-menu-and-logout' |translate" (click)="$event.preventDefault()" [title]="'nav.user-profile-menu-and-logout' | translate" class="nav-link px-1" [attr.data-test]="'user-menu' | dsBrowserOnly" ngbDropdownToggle>
         <i class="fas fa-user-circle fa-lg fa-fw"></i></a>
       <div class="logoutDropdownMenu" ngbDropdownMenu [attr.aria-label]="'nav.user-profile-menu-and-logout' |translate">
-        <ds-user-menu></ds-user-menu>
+        <ds-user-menu [inExpandableNavbar]="false" (changedRoute)="loggedInDrop.close()"></ds-user-menu>
       </div>
     </div>
   </li>
