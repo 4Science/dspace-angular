@@ -11,14 +11,12 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import uniqueId from 'lodash/uniqueId';
 
-import {
-  SubmissionVisibilityType,
-  SubmissionVisibilityValue,
-} from '../../../../core/config/models/config-submission-section.model';
+import { SubmissionVisibilityType } from '../../../../core/config/models/config-submission-section.model';
 import { MetadataValue } from '../../../../core/shared/metadata.models';
 import { Metadata } from '../../../../core/shared/metadata.utils';
 import { SubmissionScopeType } from '../../../../core/submission/submission-scope-type';
 import { VocabularyOptions } from '../../../../core/submission/vocabularies/models/vocabulary-options.model';
+import { SubmissionVisibility } from '../../../../submission/utils/visibility.util';
 import { isNgbDateStruct } from '../../../date.util';
 import {
   hasValue,
@@ -372,8 +370,9 @@ export abstract class FieldParser {
   }
 
   /**
-   * Check if a field is read-only with the given scope
+   * Check if a field is read-only within the given scope
    * @param visibility
+   * @param fieldScope
    * @param submissionScope
    */
   private isFieldReadOnly(visibility: SubmissionVisibilityType, fieldScope: string, submissionScope: string) {
@@ -382,12 +381,12 @@ export abstract class FieldParser {
       && isNotEmpty(visibility)
       && ((
         submissionScope === SubmissionScopeType.WorkspaceItem.valueOf()
-          && visibility.main === SubmissionVisibilityValue.ReadOnly
+          && SubmissionVisibility.isReadOnly(visibility, SubmissionScopeType.WorkspaceItem)
       )
         ||
-          (visibility.other === SubmissionVisibilityValue.ReadOnly
-          && submissionScope === SubmissionScopeType.WorkflowItem.valueOf()
-          )
+        (submissionScope === SubmissionScopeType.WorkflowItem.valueOf()
+          && SubmissionVisibility.isReadOnly(visibility, SubmissionScopeType.WorkflowItem)
+        )
       );
   }
 
