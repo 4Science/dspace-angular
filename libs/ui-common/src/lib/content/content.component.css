@@ -1,0 +1,8 @@
+div {
+  margin: 1rem auto;
+  text-align: center;
+
+  h2 {
+    color: #007bff;
+  }
+}

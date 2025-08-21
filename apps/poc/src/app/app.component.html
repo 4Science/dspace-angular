@@ -1,9 +1,13 @@
-<nav>
-  <ul>
-    <li><a routerLink="/">Home</a></li>
-    <li><a routerLink="/lib">Library route</a></li>
-    <li><a routerLink="/featureA">FeatureA route</a></li>
-  </ul>
-</nav>
+<div class="container">
+  <nav class="nav navbar mb-5">
+    <ul>
+      <li class="nav-item"><a class="nav-link" routerLink="/">Home</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/featureA">FeatureA route</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/lib">FeatureB route</a></li>
+    </ul>
+  </nav>
+  <router-outlet></router-outlet>
+</div>
 
-<router-outlet></router-outlet>
+
+
