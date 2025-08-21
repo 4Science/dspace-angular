@@ -14,7 +14,6 @@ import uniqueId from 'lodash/uniqueId';
 import { SubmissionVisibilityType } from '../../../../core/config/models/config-submission-section.model';
 import { MetadataValue } from '../../../../core/shared/metadata.models';
 import { Metadata } from '../../../../core/shared/metadata.utils';
-import { SubmissionScopeType } from '../../../../core/submission/submission-scope-type';
 import { VocabularyOptions } from '../../../../core/submission/vocabularies/models/vocabulary-options.model';
 import { SubmissionVisibility } from '../../../../submission/utils/visibility.util';
 import { isNgbDateStruct } from '../../../date.util';
@@ -328,7 +327,7 @@ export abstract class FieldParser {
 
     // Set read only option
     controlModel.readOnly = this.parserOptions.readOnly
-      || this.isFieldReadOnly(this.configData.visibility, 'test', this.parserOptions.submissionScope);
+      || this.isFieldReadOnly(this.configData.visibility, this.parserOptions.submissionScope);
     controlModel.disabled = controlModel.readOnly;
     controlModel.isModelOfInnerForm = this.parserOptions.isInnerForm;
     if (hasValue(this.configData.selectableRelationship)) {
@@ -372,22 +371,10 @@ export abstract class FieldParser {
   /**
    * Check if a field is read-only within the given scope
    * @param visibility
-   * @param fieldScope
    * @param submissionScope
    */
-  private isFieldReadOnly(visibility: SubmissionVisibilityType, fieldScope: string, submissionScope: string) {
-    return isNotEmpty(submissionScope)
-      && isNotEmpty(fieldScope)
-      && isNotEmpty(visibility)
-      && ((
-        submissionScope === SubmissionScopeType.WorkspaceItem.valueOf()
-          && SubmissionVisibility.isReadOnly(visibility, SubmissionScopeType.WorkspaceItem)
-      )
-        ||
-        (submissionScope === SubmissionScopeType.WorkflowItem.valueOf()
-          && SubmissionVisibility.isReadOnly(visibility, SubmissionScopeType.WorkflowItem)
-        )
-      );
+  private isFieldReadOnly(visibility: SubmissionVisibilityType, submissionScope) {
+    return isNotEmpty(submissionScope) && SubmissionVisibility.isReadOnly(visibility, submissionScope);
   }
 
   /**
