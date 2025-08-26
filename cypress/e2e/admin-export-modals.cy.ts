@@ -16,10 +16,10 @@ describe('Admin Export Modals', () => {
     cy.get('#admin-menu-section-export-title').should('be.visible');
     cy.get('#admin-menu-section-export-title').click();
 
-    cy.get('a[data-test="menu.section.export_metadata"]').click();
+    cy.get('a[data-test="menu.section.export_metadata_csv"]').click();
 
-    // Analyze <ds-export-metadata-selector> for accessibility
-    testA11y('ds-export-metadata-selector');
+    // Analyze <ds-export-batch-csv-selector> for accessibility
+    testA11y('ds-export-metadata-csv-selector');
   });
 
   it('Export batch modal should pass accessibility tests', () => {
@@ -34,6 +34,6 @@ describe('Admin Export Modals', () => {
     cy.get('a[data-test="menu.section.export_batch"]').click();
 
     // Analyze <ds-export-batch-selector> for accessibility
-    testA11y('ds-export-batch-selector');
+    testA11y('ds-export-batch-csv-selector');
   });
 });
