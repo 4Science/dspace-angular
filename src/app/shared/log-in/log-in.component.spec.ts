@@ -177,7 +177,7 @@ describe('LogInComponent', () => {
       component.excludedAuthMethod = AuthMethodType.Ip;
       const result = component.filterAndSortAuthMethods(authMethods, isBackdoor);
       expect(result).toEqual([
-        { authMethodType: AuthMethodType.Shibboleth, position: 3 }
+        { authMethodType: AuthMethodType.Shibboleth, position: 3 },
       ]);
     });
 
@@ -190,7 +190,7 @@ describe('LogInComponent', () => {
       component.excludedAuthMethod = undefined;
       const result = component.filterAndSortAuthMethods(authMethods, isBackdoor);
       expect(result).toEqual([
-        { authMethodType: AuthMethodType.Shibboleth, position: 1 }
+        { authMethodType: AuthMethodType.Shibboleth, position: 1 },
       ]);
     });
   });
