@@ -1,11 +1,16 @@
 import {
-  AsyncPipe, isPlatformBrowser,
+  AsyncPipe,
+  isPlatformBrowser,
   NgClass,
   NgComponentOutlet,
   NgForOf,
   NgIf,
 } from '@angular/common';
-import { Component, inject, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  inject,
+  PLATFORM_ID,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
