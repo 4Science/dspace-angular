@@ -127,7 +127,7 @@ export class TruncatablePartComponent implements AfterViewChecked, OnInit, OnDes
       const entry = this.content.nativeElement;
       if (entry.scrollHeight > entry.offsetHeight) {
         if (entry.children.length > 0) {
-          if (entry.children[entry.children.length - 1].scrollHeight > entry.offsetHeight) {
+          if (entry.children[entry.children.length - 1].offsetHeight > entry.offsetHeight) {
             entry.classList.add('truncated');
             entry.classList.remove('removeFaded');
           } else {
