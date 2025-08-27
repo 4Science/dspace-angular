@@ -21,7 +21,9 @@
           </div>
         </ng-container>
         <ng-template #placeholderImage>
-          <div class="col-lg-8 image-column placeholder-image"></div>
+          <div class="col-lg-8 image-column" [class.placeholder-image]="isBrowser">
+            <ngx-skeleton-loader *ngIf="!isBrowser" [theme]="{height: '100%', width: '100%'}"></ngx-skeleton-loader>
+          </div>
         </ng-template>
         <div class="col-lg-4 caption-column px-2">
           <div class="d-flex flex-row align-items-stretch align-items-center">

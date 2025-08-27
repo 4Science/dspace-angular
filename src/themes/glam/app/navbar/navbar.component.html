@@ -1,6 +1,6 @@
-<nav [ngClass]="{'open': (menuCollapsed | async) === false}" [@slideMobileNav]="(windowService.isXsOrSm() | async) === false ? 'default' : ((menuCollapsed | async) ? 'collapsed' : 'expanded')"
+<nav [ngClass]="{'open': (menuCollapsed | async) === false}" [@slideMobileNav]="isBrowser ? ((windowService.isXsOrSm() | async) === false ? 'default' : ((menuCollapsed | async) ? 'collapsed' : 'expanded')) : 'void'"
   class="navbar navbar-expand-md navbar-light p-0 navbar-container" role="navigation" [attr.aria-label]="'nav.main.description' | translate">
-  <div class="navbar-inner-container" [class.container]="(isMobile$ | async) === false">
+  <div class="navbar-inner-container container-md">
     <div class="top-bar mb-3">
       <a [attr.aria-label]="'home.title' | translate" class="navbar-brand text-center" routerLink="/home">
         <div class="logo-circle mb-2"></div>
@@ -38,7 +38,7 @@
     </div>
   </div>
 </nav>
-<div class="search-navbar-wrapper" *ngIf="(isMobile$ | async) === false">
+<div class="search-navbar-wrapper d-none d-md-block">
   <div class="container-fluid">
     <ds-search-navbar class="navbar-collapsed"></ds-search-navbar>
   </div>

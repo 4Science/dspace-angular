@@ -1,11 +1,11 @@
 import {
-  AsyncPipe,
+  AsyncPipe, isPlatformBrowser,
   NgClass,
   NgComponentOutlet,
   NgForOf,
   NgIf,
 } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
@@ -44,4 +44,8 @@ import { ThemedLangSwitchComponent } from '../../../../app/shared/lang-switch/th
   ],
 })
 export class NavbarComponent extends BaseComponent {
+
+  protected platformId = inject(PLATFORM_ID);
+
+  isBrowser = isPlatformBrowser(this.platformId);
 }
