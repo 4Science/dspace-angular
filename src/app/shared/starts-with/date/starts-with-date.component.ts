@@ -1,6 +1,10 @@
-import { NgFor } from '@angular/common';
+import {
+  NgFor,
+  NgIf,
+} from '@angular/common';
 import {
   Component,
+  Input,
   OnInit,
 } from '@angular/core';
 import {
@@ -21,7 +25,7 @@ import { StartsWithAbstractComponent } from '../starts-with-abstract.component';
   styleUrls: ['./starts-with-date.component.scss'],
   templateUrl: './starts-with-date.component.html',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, NgFor, TranslateModule],
+  imports: [FormsModule, ReactiveFormsModule, NgFor, TranslateModule, NgIf],
 })
 export class StartsWithDateComponent extends StartsWithAbstractComponent implements OnInit {
 
@@ -39,6 +43,13 @@ export class StartsWithDateComponent extends StartsWithAbstractComponent impleme
    * Currently selected year
    */
   startsWithYear: number;
+
+  /**
+   * Enable or disable boxes for the month and year search
+   */
+  @Input() enableMonth = false;
+  @Input() enableYear = false;
+
 
   ngOnInit() {
     this.monthOptions = [

@@ -50,6 +50,8 @@ describe('StartsWithDateComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(StartsWithDateComponent);
     comp = fixture.componentInstance;
+    comp.enableMonth = true;
+    comp.enableYear = true;
     comp.paginationId = 'page-id';
     comp.startsWithOptions = options;
     fixture.detectChanges();
