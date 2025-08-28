@@ -1,23 +1,54 @@
-import { AfterViewChecked, Component, Inject, Input, OnDestroy, OnInit, ViewChildren } from '@angular/core';
-import { Router } from '@angular/router';
+import { AsyncPipe } from '@angular/common';
+import {
+  AfterViewChecked,
+  Component,
+  DestroyRef,
+  Inject,
+  inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChildren,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+  Router,
+  RouterLink,
+} from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import {
+  BehaviorSubject,
+  Observable,
+} from 'rxjs';
+import {
+  distinctUntilChanged,
+  filter,
+  map,
+  take,
+} from 'rxjs/operators';
 
-import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
-
-import { SearchService } from '../../../core/shared/search/search.service';
+import {
+  APP_CONFIG,
+  AppConfig,
+} from '../../../../config/app-config.interface';
 import { RemoteData } from '../../../core/data/remote-data';
-import { SearchFilterConfig } from '../models/search-filter-config.model';
+import { SearchService } from '../../../core/shared/search/search.service';
 import { SearchConfigurationService } from '../../../core/shared/search/search-configuration.service';
 import { SearchFilterService } from '../../../core/shared/search/search-filter.service';
-import { SEARCH_CONFIG_SERVICE } from '../../../my-dspace-page/my-dspace-page.component';
-import { currentPath } from '../../utils/route.utils';
+import { SEARCH_CONFIG_SERVICE } from '../../../my-dspace-page/my-dspace-configuration.service';
 import { hasValue } from '../../empty.util';
-import { APP_CONFIG, AppConfig } from '../../../../config/app-config.interface';
+import { currentPath } from '../../utils/route.utils';
+import { AppliedFilter } from '../models/applied-filter.model';
+import { SearchFilterConfig } from '../models/search-filter-config.model';
+import { SearchFilterComponent } from './search-filter/search-filter.component';
 
 @Component({
-  selector: 'ds-search-filters',
+  selector: 'ds-base-search-filters',
   styleUrls: ['./search-filters.component.scss'],
   templateUrl: './search-filters.component.html',
+  standalone: true,
+  imports: [SearchFilterComponent, RouterLink, AsyncPipe, TranslateModule, NgxSkeletonLoaderModule],
 })
 
 /**
@@ -63,7 +94,9 @@ export class SearchFiltersComponent implements OnInit, AfterViewChecked, OnDestr
   /**
    * counts for the active filters
    */
-  availableFilters = false;
+  availableFilters$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+
+  appliedFilters: Map<string, AppliedFilter[]> = new Map();
 
   /**
    * Link to the search page
@@ -82,35 +115,33 @@ export class SearchFiltersComponent implements OnInit, AfterViewChecked, OnDestr
    */
   private finalFiltersComputed = [];
 
+  private allFiltersComputed = false;
+
+  private destroyRef = inject(DestroyRef);
+
   subs = [];
+  filterLabel = 'search';
   defaultFilterCount: number;
 
-  /**
-   * Initialize instance variables
-   * @param {SearchService} searchService
-   * @param {SearchFilterService} filterService
-   * @param {Router} router
-   * @param {SearchConfigurationService} searchConfigService
-   * @param appConfig
-   */
   constructor(
-    private searchService: SearchService,
-    private filterService: SearchFilterService,
-    private router: Router,
-    @Inject(SEARCH_CONFIG_SERVICE) private searchConfigService: SearchConfigurationService,
+    protected searchService: SearchService,
+    protected searchFilterService: SearchFilterService,
+    protected router: Router,
+    @Inject(SEARCH_CONFIG_SERVICE) protected searchConfigService: SearchConfigurationService,
     @Inject(APP_CONFIG) protected appConfig: AppConfig,
   ) {
     this.defaultFilterCount = this.appConfig.search.filterPlaceholdersCount ?? 5;
   }
 
   ngOnInit(): void {
+    if (!this.inPlaceSearch) {
+      this.filterLabel = 'discover';
+    }
     this.router.events.subscribe(() => {
-      this.clearParams = this.searchConfigService.getCurrentFrontendFilters().pipe(
-        map((filters) => {
-          Object.keys(filters).forEach((f) => filters[f] = null);
-          return filters;
-        })
-      );
+      this.clearParams = this.searchConfigService.getCurrentFrontendFilters().pipe(map((filters) => {
+        Object.keys(filters).forEach((f) => filters[f] = null);
+        return filters;
+      }));
       this.searchLink = this.getSearchLink();
     });
   }
@@ -132,16 +163,10 @@ export class SearchFiltersComponent implements OnInit, AfterViewChecked, OnDestr
     return config ? config.name : undefined;
   }
 
-  ngAfterViewChecked() {
-    this.availableFilters = this.searchFilter._results.some(element => element.nativeElement?.children[0]?.children.length > 0);
-  }
-
-  ngOnDestroy() {
-    this.subs.forEach((sub) => {
-      if (hasValue(sub)) {
-        sub.unsubscribe();
-      }
-    });
+  minimizeFilters(): void {
+    if (this.searchService.appliedFilters$.value.length > 0) {
+      this.searchFilterService.minimizeAll();
+    }
   }
 
   countFiltersWithComputedVisibility(computed: boolean) {
@@ -165,7 +190,7 @@ export class SearchFiltersComponent implements OnInit, AfterViewChecked, OnDestr
             // We haven't reached the total yet, proceed with increment
             return {
               shouldIncrement: true,
-              totalFilters
+              totalFilters,
             };
           }
           return { shouldIncrement: false };
@@ -183,14 +208,14 @@ export class SearchFiltersComponent implements OnInit, AfterViewChecked, OnDestr
             // Create new counter entry
             this.currentFiltersComputed.push({
               configuration: this.currentConfiguration,
-              filtersComputed: 1
+              filtersComputed: 1,
             });
           }
 
           // Pass along the total and updated count
           return {
             totalFilters: result.totalFilters,
-            currentComputed: this.getCurrentFiltersComputed(this.currentConfiguration)
+            currentComputed: this.getCurrentFiltersComputed(this.currentConfiguration),
           };
         }),
         // Check if we've reached the total after incrementing
@@ -202,8 +227,13 @@ export class SearchFiltersComponent implements OnInit, AfterViewChecked, OnDestr
           return result;
         }),
         // Automatically complete the observable after one emission
-        take(1)
-      ).subscribe();
+        take(1),
+      ).subscribe((results) => {
+        if (results.totalFilters === results.currentComputed) {
+          this.allFiltersComputed = true;
+          this.availableFilters$.next(this.searchFilter?._results.some(element => element.nativeElement?.children[0]?.children.length > 0));
+        }
+      });
     }
   }
 
@@ -214,7 +244,7 @@ export class SearchFiltersComponent implements OnInit, AfterViewChecked, OnDestr
    */
   private findConfigInCurrentFilters(configuration: string) {
     return this.currentFiltersComputed.find(
-      (configFilter) => configFilter.configuration === configuration
+      (configFilter) => configFilter.configuration === configuration,
     );
   }
 
@@ -225,7 +255,7 @@ export class SearchFiltersComponent implements OnInit, AfterViewChecked, OnDestr
    */
   private findConfigInFinalFilters(configuration: string) {
     return this.finalFiltersComputed.find(
-      (configFilter) => configFilter.configuration === configuration
+      (configFilter) => configFilter.configuration === configuration,
     );
   }
 
@@ -242,7 +272,7 @@ export class SearchFiltersComponent implements OnInit, AfterViewChecked, OnDestr
     } else {
       this.finalFiltersComputed.push({
         configuration,
-        filtersComputed: count
+        filtersComputed: count,
       });
     }
   }
@@ -266,4 +296,25 @@ export class SearchFiltersComponent implements OnInit, AfterViewChecked, OnDestr
     const configFilter = this.findConfigInFinalFilters(configuration);
     return configFilter?.filtersComputed || 0;
   }
+
+  ngAfterViewChecked() {
+    this.searchFilter.changes.pipe(
+      filter(() => this.allFiltersComputed),
+      map((filters: any) => {
+        return filters?._results.some(element => element.nativeElement?.children[0]?.children.length > 0);
+      }),
+      distinctUntilChanged(),
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe(this.availableFilters$);
+  }
+
+  ngOnDestroy() {
+    this.subs.forEach((sub) => {
+      if (hasValue(sub)) {
+        sub.unsubscribe();
+      }
+    });
+  }
+
+
 }

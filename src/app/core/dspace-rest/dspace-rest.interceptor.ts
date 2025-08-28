@@ -46,7 +46,6 @@ export class DspaceRestInterceptor implements HttpInterceptor {
 
     // Different SSR Base URL specified so replace it in the current request url
     const url = request.url.replace(this.baseUrl, this.ssrBaseUrl);
-    const newRequest: HttpRequest<any> = request.clone({ url });
-    return next.handle(newRequest);
+    return next.handle(request.clone({ url }));
   }
 }

@@ -35,7 +35,7 @@
           <input type="text" class="form-control form-control-sm mx-2"
                  [ngModelOptions]="{standalone: true}" [(ngModel)]="otherListEntry" (keyup.enter)="addListItem()" />
           <button type="button" class="btn btn-primary btn-sm" (click)="addListItem()"
-                  id="otherOptionBtn" [disabled]="addButtonDisabled">
+                  id="otherOptionBtn" [dsBtnDisabled]="addButtonDisabled">
             {{'form.other-option.add-button' | translate}}
           </button>
         </div>
@@ -79,7 +79,7 @@
           <input type="text" class="form-control form-control-sm mx-2"
                  [ngModelOptions]="{standalone: true}" [(ngModel)]="otherListEntry" (keyup.enter)="addListItem()" />
           <button class="btn btn-primary btn-sm" type="button" id="otherOptionBtn"
-                  (click)="addListItem()" [disabled]="addButtonDisabled">
+                  (click)="addListItem()" [dsBtnDisabled]="addButtonDisabled">
             {{'form.other-option.add-button' | translate}}
           </button>
         </div>

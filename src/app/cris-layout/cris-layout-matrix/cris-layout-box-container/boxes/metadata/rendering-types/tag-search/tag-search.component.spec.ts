@@ -1,15 +1,22 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
 
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-
-import { TagSearchComponent } from './tag-search.component';
+import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../core/shared/item.model';
+import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
+import { ChipsComponent } from '../../../../../../../shared/form/chips/chips.component';
 import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate-loader.mock';
 import { DsDatePipe } from '../../../../../../pipes/ds-date.pipe';
-import { LayoutField } from '../../../../../../../core/layout/models/box.model';
-import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
+import { TagSearchComponent } from './tag-search.component';
 
 describe('TagSearchComponent', () => {
   let component: TagSearchComponent;
@@ -20,17 +27,17 @@ describe('TagSearchComponent', () => {
     'language': null,
     'authority': null,
     'confidence': -1,
-    'place': 0
+    'place': 0,
   });
 
   const testItem = Object.assign(new Item(),
     {
       type: 'item',
       metadata: {
-        'dc.title': [metadataValue]
+        'dc.title': [metadataValue],
       },
       uuid: 'test-item-uuid',
-    }
+    },
   );
 
 
@@ -43,7 +50,7 @@ describe('TagSearchComponent', () => {
     'styleLabel': 'test-style-label',
     'styleValue': 'test-style-value',
     'labelAsHeading': false,
-    'valuesInline': true
+    'valuesInline': true,
   };
 
   beforeEach(waitForAsync(() => {
@@ -51,9 +58,9 @@ describe('TagSearchComponent', () => {
       imports: [TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
-          useClass: TranslateLoaderMock
-        }
-      }), BrowserAnimationsModule],
+          useClass: TranslateLoaderMock,
+        },
+      }), BrowserAnimationsModule, DsDatePipe, TagSearchComponent],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
@@ -61,8 +68,10 @@ describe('TagSearchComponent', () => {
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
       ],
-      declarations: [TagSearchComponent, DsDatePipe]
     })
+      .overrideComponent(TagSearchComponent, {
+        remove: { imports: [ChipsComponent] },
+      })
       .compileComponents();
   }));
 

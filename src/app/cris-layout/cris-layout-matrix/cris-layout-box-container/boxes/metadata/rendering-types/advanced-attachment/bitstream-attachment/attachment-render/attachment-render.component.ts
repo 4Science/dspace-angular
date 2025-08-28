@@ -1,26 +1,29 @@
 import {
   Component,
-  ComponentFactory,
-  ComponentFactoryResolver,
   ComponentRef,
+  inject,
   Injector,
   Input,
   OnInit,
   ViewChild,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core';
+
+import { Bitstream } from '../../../../../../../../../core/shared/bitstream.model';
+import { GenericConstructor } from '../../../../../../../../../core/shared/generic-constructor';
+import { Item } from '../../../../../../../../../core/shared/item.model';
+import { CrisLayoutLoaderDirective } from '../../../../../../../../directives/cris-layout-loader.directive';
 import {
   AttachmentRenderingType,
-  getAttachmentTypeRendering
+  getAttachmentTypeRendering,
 } from '../attachment-type.decorator';
-import { Item } from '../../../../../../../../../core/shared/item.model';
-import { GenericConstructor } from '../../../../../../../../../core/shared/generic-constructor';
-import { Bitstream } from '../../../../../../../../../core/shared/bitstream.model';
 
 @Component({
   selector: 'ds-attachment-render',
   templateUrl: './attachment-render.component.html',
-  styleUrls: ['./attachment-render.component.scss']
+  styleUrls: ['./attachment-render.component.scss'],
+  standalone: true,
+  imports: [CrisLayoutLoaderDirective],
 })
 export class AttachmentRenderComponent implements OnInit {
 
@@ -46,15 +49,10 @@ export class AttachmentRenderComponent implements OnInit {
    */
   @ViewChild('attachmentValue', {
     static: true,
-    read: ViewContainerRef
+    read: ViewContainerRef,
   }) attachmentValueViewRef: ViewContainerRef;
 
-  constructor(
-    protected componentFactoryResolver: ComponentFactoryResolver,
-    private injector: Injector
-  ) {
-
-  }
+  private injector: Injector = inject(Injector);
 
   ngOnInit(): void {
     this.attachmentValueViewRef.clear();
@@ -64,26 +62,28 @@ export class AttachmentRenderComponent implements OnInit {
   /**
    * Generate ComponentFactory for attachment rendering
    */
-  computeComponentFactory(): ComponentFactory<any> {
+  computeComponentFactory(): GenericConstructor<Component> {
     const rendering = this.computeRendering();
     const attachmentTypeRenderOptions = getAttachmentTypeRendering(rendering);
-    const constructor: GenericConstructor<Component> = attachmentTypeRenderOptions?.componentRef;
-    return constructor ? this.componentFactoryResolver.resolveComponentFactory(constructor) : null;
+    return attachmentTypeRenderOptions?.componentRef || null;
   }
 
   /**
    * Generate ComponentRef for attachment rendering
    */
   generateComponentRef(): ComponentRef<any> {
-    let attachentComponentRef: ComponentRef<Component>;
-    const factory: ComponentFactory<any> = this.computeComponentFactory();
-    if (factory) {
-      attachentComponentRef = this.attachmentValueViewRef.createComponent(factory, 0, this.getComponentInjector());
-      (attachentComponentRef.instance as any).item = this.item;
-      (attachentComponentRef.instance as any).bitstream = this.bitstream;
-      (attachentComponentRef.instance as any).tabName = this.tabName;
+    let attachmentComponentRef: ComponentRef<Component>;
+    const component: GenericConstructor<Component> = this.computeComponentFactory();
+    if (component) {
+      attachmentComponentRef = this.attachmentValueViewRef.createComponent(component, {
+        index: 0,
+        injector: this.getComponentInjector(),
+      });
+      (attachmentComponentRef.instance as any).item = this.item;
+      (attachmentComponentRef.instance as any).bitstream = this.bitstream;
+      (attachmentComponentRef.instance as any).tabName = this.tabName;
     }
-    return attachentComponentRef;
+    return attachmentComponentRef;
   }
 
   /**
@@ -91,14 +91,14 @@ export class AttachmentRenderComponent implements OnInit {
    */
   getComponentInjector() {
     const providers = [
-      {provide: 'itemProvider', useValue: this.item, deps: []},
-      {provide: 'bitstreamProvider', useValue: this.bitstream, deps: []},
-      {provide: 'tabNameProvider', useValue: this.tabName, deps: []}
+      { provide: 'itemProvider', useValue: this.item, deps: [] },
+      { provide: 'bitstreamProvider', useValue: this.bitstream, deps: [] },
+      { provide: 'tabNameProvider', useValue: this.tabName, deps: [] },
     ];
 
     return Injector.create({
       providers: providers,
-      parent: this.injector
+      parent: this.injector,
     });
   }
 

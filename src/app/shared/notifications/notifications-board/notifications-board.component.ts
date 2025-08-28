@@ -1,35 +1,54 @@
 import {
+  NgClass,
+  NgFor,
+} from '@angular/common';
+import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   Input,
   OnDestroy,
   OnInit,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
-
-import { select, Store } from '@ngrx/store';
-import { BehaviorSubject, Subscription, of as observableOf } from 'rxjs';
-import difference from 'lodash/difference';
+import {
+  select,
+  Store,
+} from '@ngrx/store';
+import cloneDeep from 'lodash/cloneDeep';
+import differenceWith from 'lodash/differenceWith';
 import isEqual from 'lodash/isEqual';
+import {
+  BehaviorSubject,
+  of as observableOf,
+  Subscription,
+  take,
+} from 'rxjs';
 
-import { NotificationsService } from '../notifications.service';
-import { AppState } from '../../../app.reducer';
-import { notificationsStateSelector } from '../selectors';
-import { INotification } from '../models/notification.model';
-import { NotificationsState } from '../notifications.reducers';
 import { INotificationBoardOptions } from '../../../../config/notifications-config.interfaces';
+import { AccessibilitySettingsService } from '../../../accessibility/accessibility-settings.service';
+import { AppState } from '../../../app.reducer';
+import {
+  hasNoValue,
+  isNotEmptyOperator,
+} from '../../empty.util';
 import { LiveRegionService } from '../../live-region/live-region.service';
-import { hasNoValue, isNotEmptyOperator } from '../../empty.util';
-import { take } from 'rxjs/operators';
+import { INotification } from '../models/notification.model';
 import { IProcessNotification } from '../models/process-notification.model';
+import { NotificationComponent } from '../notification/notification.component';
+import { NotificationsState } from '../notifications.reducers';
+import { NotificationsService } from '../notifications.service';
+import { ProcessNotificationComponent } from '../process-notification/process-notification.component';
+import { notificationsStateSelector } from '../selectors';
 
 @Component({
   selector: 'ds-notifications-board',
   encapsulation: ViewEncapsulation.None,
   templateUrl: './notifications-board.component.html',
   styleUrls: ['./notifications-board.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgClass, NgFor, NotificationComponent, ProcessNotificationComponent],
 })
 export class NotificationsBoardComponent implements OnInit, OnDestroy {
 
@@ -56,10 +75,11 @@ export class NotificationsBoardComponent implements OnInit, OnDestroy {
   public isPaused$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
-    private service: NotificationsService,
-    private store: Store<AppState>,
-    private cdr: ChangeDetectorRef,
+    protected service: NotificationsService,
+    protected store: Store<AppState>,
+    protected cdr: ChangeDetectorRef,
     protected liveRegionService: LiveRegionService,
+    protected accessibilitySettingsService: AccessibilitySettingsService,
   ) {
   }
 
@@ -70,7 +90,7 @@ export class NotificationsBoardComponent implements OnInit, OnDestroy {
           this.notifications = [];
         } else if (state.length > this.notifications.length) {
           // Add
-          const newElem = difference(state, [...this.notifications,...this.processNotifications]);
+          const newElem = differenceWith(state, [...this.notifications,...this.processNotifications], this.byId);
           newElem.forEach((notification: IProcessNotification) => {
 
             if ('processId' in notification) {
@@ -82,7 +102,7 @@ export class NotificationsBoardComponent implements OnInit, OnDestroy {
           });
         } else {
           // Remove
-          const delElem = difference([...this.notifications,...this.processNotifications], state);
+          const delElem = differenceWith([...this.notifications,...this.processNotifications], state, this.byId);
           delElem.forEach((notification) => {
             this.notifications = this.notifications.filter((item: INotification) => item.id !== notification.id);
             this.processNotifications = this.processNotifications.filter((item: INotification) => item.id !== notification.id);
@@ -91,6 +111,9 @@ export class NotificationsBoardComponent implements OnInit, OnDestroy {
         this.cdr.detectChanges();
       });
   }
+
+  private byId = (notificationA: INotification, notificationB: INotification) =>
+    notificationA.id === notificationB.id;
 
   // Add the new process notification to the processNotifications array
   addProccess(item: IProcessNotification): void {
@@ -104,8 +127,23 @@ export class NotificationsBoardComponent implements OnInit, OnDestroy {
       if (this.notifications.length >= this.maxStack) {
         this.notifications.splice(this.notifications.length - 1, 1);
       }
-      this.notifications.splice(0, 0, item);
-      this.addContentToLiveRegion(item);
+
+      // It would be a bit better to handle the retrieval of configured settings in the NotificationsService.
+      // Due to circular dependencies this is difficult to implement.
+      this.accessibilitySettingsService.getAsNumber('notificationTimeOut', item.options.timeOut)
+        .pipe(take(1)).subscribe(timeOut => {
+          if (timeOut < 0) {
+            timeOut = 0;
+          }
+
+          // Deep clone because the unaltered item is read-only
+          const modifiedNotification = cloneDeep(item);
+          modifiedNotification.options.timeOut = timeOut;
+          this.notifications.splice(0, 0, modifiedNotification);
+          this.addContentToLiveRegion(modifiedNotification);
+          this.cdr.detectChanges();
+        });
+
     } else {
       // Remove the notification from the store
       // This notification was in the store, but not in this.notifications

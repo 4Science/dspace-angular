@@ -1,40 +1,60 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import { of } from 'rxjs';
+
 import { environment } from '../../../../../../../../../../../../environments/environment';
+import { AuthorizationDataService } from '../../../../../../../../../../../core/data/feature-authorization/authorization-data.service';
+import { FeatureID } from '../../../../../../../../../../../core/data/feature-authorization/feature-id';
+import { Bitstream } from '../../../../../../../../../../../core/shared/bitstream.model';
 import { Item } from '../../../../../../../../../../../core/shared/item.model';
-import { NotificationsService } from '../../../../../../../../../../../shared/notifications/notifications.service';
-import { TranslateService } from '@ngx-translate/core';
 import {
   getItemViewerDetailsPath,
-  getItemViewerPath
+  getItemViewerPath,
 } from '../../../../../../../../../../../item-page/item-page-routing-paths';
-import { AttachmentRenderingType, AttachmentTypeRendering } from '../../../attachment-type.decorator';
-import { FeatureID } from '../../../../../../../../../../../core/data/feature-authorization/feature-id';
 import { isNotEmpty } from '../../../../../../../../../../../shared/empty.util';
-import { AuthorizationDataService } from '../../../../../../../../../../../core/data/feature-authorization/authorization-data.service';
-import { of } from 'rxjs';
-import { Bitstream } from '../../../../../../../../../../../core/shared/bitstream.model';
+import { NotificationsService } from '../../../../../../../../../../../shared/notifications/notifications.service';
 
 
 @Component({
   selector: 'ds-iiif-toolbar',
   templateUrl: './iiif-toolbar.component.html',
-  styleUrls: ['./iiif-toolbar.component.scss']
+  styleUrls: ['./iiif-toolbar.component.scss'],
+  imports: [
+    NgbDropdownModule,
+    TranslateModule,
+    AsyncPipe,
+    NgIf,
+  ],
+  standalone: true,
 })
-
-@AttachmentTypeRendering(AttachmentRenderingType.IIIF, true)
 export class IIIFToolbarComponent implements OnInit {
   private readonly MD_CANVASID = 'bitstream.iiif.canvasid';
   private readonly MD_BITSTREAMS_MAP = [{
     param: 'canvasId',
-    metadata: this.MD_CANVASID
+    metadata: this.MD_CANVASID,
   }];
 
   @Input()
-  item: Item;
+    item: Item;
 
   @Input()
-  bitstream: Bitstream;
+    bitstream: Bitstream;
   /**
    * The tab name
    */
@@ -74,7 +94,7 @@ export class IIIFToolbarComponent implements OnInit {
     if (environment.advancedAttachmentRendering.showViewerOnSameItemPage) {
       await this.router.navigate([ getItemViewerDetailsPath(this.item, 'iiif', this.tabName) ], { fragment: 'viewer', queryParams: this.queryParams });
     } else {
-      await this.router.navigate([ getItemViewerPath(this.item, 'iiif') ], {queryParams: this.queryParams});
+      await this.router.navigate([ getItemViewerPath(this.item, 'iiif') ], { queryParams: this.queryParams });
     }
   }
 
@@ -100,10 +120,10 @@ export class IIIFToolbarComponent implements OnInit {
   }
 
   private getQueryParams() {
-    return this.MD_BITSTREAMS_MAP
-      .filter(({metadata}) => this.bitstream?.metadata[`${metadata}`]?.length > 0)
-      .map(({param,  metadata}) => ({ [`${param}`]: this.bitstream?.metadata[`${metadata}`][0]?.value }))
-      .reduce((acc, curr) => ({ ...acc, ...curr }), {});
+    return this.MD_BITSTREAMS_MAP.map(({ param,  metadata }) => {
+      const metadataValue = this.bitstream?.firstMetadataValue(metadata);
+      return { [`${param}`]:  metadataValue ?? this.bitstream.uuid };
+    })[0];
   }
 
 }

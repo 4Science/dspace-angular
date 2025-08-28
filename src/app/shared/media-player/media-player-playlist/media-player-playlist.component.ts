@@ -1,24 +1,62 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
-import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
-import { map, mergeMap, toArray } from 'rxjs/operators';
+import {
+  AsyncPipe,
+  NgForOf,
+} from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import findIndex from 'lodash/findIndex';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
+import {
+  BehaviorSubject,
+  combineLatest,
+  Observable,
+  of,
+} from 'rxjs';
+import {
+  map,
+  mergeMap,
+  toArray,
+} from 'rxjs/operators';
 
-import { BitstreamDataService, MetadataFilter } from '../../../core/data/bitstream-data.service';
+import {
+  BitstreamDataService,
+  MetadataFilter,
+} from '../../../core/data/bitstream-data.service';
 import { FindListOptions } from '../../../core/data/find-list-options.model';
-import { followLink } from '../../utils/follow-link-config.model';
-import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
+import {
+  buildPaginatedList,
+  PaginatedList,
+} from '../../../core/data/paginated-list.model';
 import { RemoteData } from '../../../core/data/remote-data';
-import { buildPaginatedList, PaginatedList } from '../../../core/data/paginated-list.model';
 import { Bitstream } from '../../../core/shared/bitstream.model';
 import { BitstreamFormat } from '../../../core/shared/bitstream-format.model';
 import { MediaViewerItem } from '../../../core/shared/media-viewer-item.model';
-import { isEmpty, isNotEmpty } from '../../empty.util';
+import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
+import { ThemedThumbnailComponent } from '../../../thumbnail/themed-thumbnail.component';
+import {
+  isEmpty,
+  isNotEmpty,
+} from '../../empty.util';
+import { FileSizePipe } from '../../utils/file-size-pipe';
+import { followLink } from '../../utils/follow-link-config.model';
 
 @Component({
   selector: 'ds-media-player-playlist',
   templateUrl: './media-player-playlist.component.html',
-  styleUrls: ['./media-player-playlist.component.scss']
+  styleUrls: ['./media-player-playlist.component.scss'],
+  imports: [
+    ThemedThumbnailComponent,
+    InfiniteScrollDirective,
+    NgForOf,
+    FileSizePipe,
+    AsyncPipe,
+  ],
+  standalone: true,
 })
 export class MediaPlayerPlaylistComponent implements OnInit {
 
@@ -68,7 +106,7 @@ export class MediaPlayerPlaylistComponent implements OnInit {
   ngOnInit(): void {
     this.pageOptions = {
       elementsPerPage: 10,
-      currentPage: 1
+      currentPage: 1,
     };
     this.buildPlaylist(isNotEmpty(this.startUUID)).subscribe((list: MediaViewerItem[]) => {
       if (isEmpty(this.selectedMediaItem) && isEmpty(this.startUUID)) {
@@ -100,7 +138,7 @@ export class MediaPlayerPlaylistComponent implements OnInit {
   private buildPlaylist(scrollToGivenUUID: boolean): Observable<MediaViewerItem[]> {
     const filters: MetadataFilter[] = [{
       metadataName: 'bitstream.category',
-      metadataValue: 'media'
+      metadataValue: 'media',
     }];
 
     return this.retrieveBitstreams(scrollToGivenUUID).pipe(
@@ -108,7 +146,7 @@ export class MediaPlayerPlaylistComponent implements OnInit {
         return bitstreamList.page;
       }),
       mergeMap((bitstream: Bitstream) => this.createMediaViewerItem(bitstream)),
-      toArray()
+      toArray(),
     );
   }
 
@@ -121,7 +159,7 @@ export class MediaPlayerPlaylistComponent implements OnInit {
   private retrieveBitstreams(scrollToGivenUUID: boolean): Observable<PaginatedList<Bitstream>> {
     const filters: MetadataFilter[] = [{
       metadataName: 'bitstream.category',
-      metadataValue: 'media'
+      metadataValue: 'media',
     }];
 
     return this.bitstreamDataService.findShowableBitstreamsByItem(
@@ -133,7 +171,7 @@ export class MediaPlayerPlaylistComponent implements OnInit {
       true,
       true,
       followLink('thumbnail'),
-      followLink('format')
+      followLink('format'),
     ).pipe(
       getFirstCompletedRemoteData(),
       map((response: RemoteData<PaginatedList<Bitstream>>) => {
@@ -149,14 +187,14 @@ export class MediaPlayerPlaylistComponent implements OnInit {
               map((mediaItem: MediaViewerItem) => {
                 this.selectedMediaItem = mediaItem;
                 return bitstreamList;
-              })
+              }),
             );
           } else if (this.hasMoreElements) {
             this.pageOptions.currentPage++;
             return this.retrieveBitstreams(scrollToGivenUUID).pipe(
               map((bitstreamListRec: PaginatedList<Bitstream>) => {
                 return buildPaginatedList(bitstreamListRec.pageInfo, [...bitstreamList.page, ...bitstreamListRec.page]);
-              })
+              }),
             );
           } else {
             return of(bitstreamList);
@@ -164,7 +202,7 @@ export class MediaPlayerPlaylistComponent implements OnInit {
         } else {
           return of(bitstreamList);
         }
-      })
+      }),
     );
   }
 
@@ -179,11 +217,11 @@ export class MediaPlayerPlaylistComponent implements OnInit {
 
     const format$: Observable<BitstreamFormat> = bitstream.format.pipe(
       getFirstCompletedRemoteData(),
-      map((formatRD: RemoteData<BitstreamFormat>) => formatRD.hasSucceeded ? formatRD.payload : null)
+      map((formatRD: RemoteData<BitstreamFormat>) => formatRD.hasSucceeded ? formatRD.payload : null),
     );
     const thumbnail$: Observable<Bitstream> = bitstream.thumbnail.pipe(
       getFirstCompletedRemoteData(),
-      map((thumbnailRD: RemoteData<Bitstream>) => thumbnailRD.hasSucceeded ? thumbnailRD.payload : null)
+      map((thumbnailRD: RemoteData<Bitstream>) => thumbnailRD.hasSucceeded ? thumbnailRD.payload : null),
     );
 
     return combineLatest([format$, thumbnail$]).pipe(

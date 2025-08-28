@@ -1,11 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
 
-import { HierarchyComponent } from './hierarchy.component';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateLoaderMock } from '../../../../../shared/mocks/translate-loader.mock';
 import { CrisLayoutBox } from '../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../core/shared/item.model';
+import { VocabularyTreeviewComponent } from '../../../../../shared/form/vocabulary-treeview/vocabulary-treeview.component';
+import { TranslateLoaderMock } from '../../../../../shared/mocks/translate-loader.mock';
+import { HierarchyComponent } from './hierarchy.component';
 
 describe('HierarchyComponent', () => {
   let component: HierarchyComponent;
@@ -20,7 +30,7 @@ describe('HierarchyComponent', () => {
         'language': null,
         'authority': null,
         'confidence': -1,
-        'place': 0
+        'place': 0,
       }],
       'dspace.iiif.enabled': [{
         'value': 'true',
@@ -29,7 +39,7 @@ describe('HierarchyComponent', () => {
         'confidence': 0,
         'place': 0,
         'securityLevel': 0,
-      }]
+      }],
     },
     uuid: 'test-item-uuid',
   });
@@ -49,10 +59,10 @@ describe('HierarchyComponent', () => {
       'type': 'boxhierarchyconfiguration',
       'vocabulary': 'orgunits',
       'metadata': 'person.affiliation.name',
-      'maxColumns': null
+      'maxColumns': null,
     },
     'metadataSecurityFields': [],
-    'container': false
+    'container': false,
   });
 
 
@@ -62,19 +72,22 @@ describe('HierarchyComponent', () => {
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
-            useClass: TranslateLoaderMock
-          }
-        })
+            useClass: TranslateLoaderMock,
+          },
+        }),
+        HierarchyComponent,
       ],
-      declarations: [ HierarchyComponent ],
       providers: [
         { provide: 'boxProvider', useValue: testBox },
         { provide: 'itemProvider', useValue: testItem },
         { provide: Router, useValue: {} },
         { provide: ActivatedRoute, useValue: {} },
-      ]
+      ],
     })
-    .compileComponents();
+      .overrideComponent(HierarchyComponent, {
+        remove: { imports: [VocabularyTreeviewComponent] },
+      })
+      .compileComponents();
   });
 
   beforeEach(() => {

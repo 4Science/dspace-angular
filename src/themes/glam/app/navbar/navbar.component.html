@@ -1,6 +1,6 @@
-<nav [ngClass]="{'open': !(menuCollapsed | async)}" [@slideMobileNav]="!(windowService.isXsOrSm() | async) ? 'default' : ((menuCollapsed | async) ? 'collapsed' : 'expanded')"
+<nav [ngClass]="{'open': (menuCollapsed | async) === false}" [@slideMobileNav]="(windowService.isXsOrSm() | async) === false ? 'default' : ((menuCollapsed | async) ? 'collapsed' : 'expanded')"
   class="navbar navbar-expand-md navbar-light p-0 navbar-container" role="navigation" [attr.aria-label]="'nav.main.description' | translate">
-  <div class="navbar-inner-container" [class.container]="!(isMobile$ | async)">
+  <div class="navbar-inner-container" [class.container]="(isMobile$ | async) === false">
     <div class="top-bar mb-3">
       <a [attr.aria-label]="'home.title' | translate" class="navbar-brand text-center" routerLink="/home">
         <div class="logo-circle mb-2"></div>
@@ -15,10 +15,10 @@
             </div>
           </li>
           <li>
-            <ds-themed-lang-switch class="navbar-collapsed"></ds-themed-lang-switch>
+            <ds-lang-switch class="navbar-collapsed"></ds-lang-switch>
           </li>
           <li>
-            <ds-themed-auth-nav-menu class="navbar-collapsed"></ds-themed-auth-nav-menu>
+            <ds-auth-nav-menu class="navbar-collapsed"></ds-auth-nav-menu>
           </li>
           <li>
             <ds-impersonate-navbar class="navbar-collapsed"></ds-impersonate-navbar>
@@ -38,8 +38,8 @@
     </div>
   </div>
 </nav>
-<div class="search-navbar-wrapper" *ngIf="!(isMobile$ | async)">
+<div class="search-navbar-wrapper" *ngIf="(isMobile$ | async) === false">
   <div class="container-fluid">
-    <ds-themed-search-navbar class="navbar-collapsed"></ds-themed-search-navbar>
+    <ds-search-navbar class="navbar-collapsed"></ds-search-navbar>
   </div>
 </div>

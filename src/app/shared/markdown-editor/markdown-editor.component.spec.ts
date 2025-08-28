@@ -1,8 +1,14 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ChangeDetectorRef, NO_ERRORS_SCHEMA, PLATFORM_ID } from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import {
+  By,
+  DomSanitizer,
+} from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-
-import { By, DomSanitizer } from '@angular/platform-browser';
 
 import { MarkdownEditorComponent } from './markdown-editor.component';
 
@@ -12,16 +18,12 @@ describe('MarkdownEditorComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [MarkdownEditorComponent],
       imports: [
         RouterTestingModule.withRoutes([]),
+        MarkdownEditorComponent,
       ],
-      providers: [
-        DomSanitizer,
-        ChangeDetectorRef,
-        {provide: PLATFORM_ID, useValue: 'browser'},
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      providers: [DomSanitizer],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 
@@ -44,6 +46,29 @@ describe('MarkdownEditorComponent', () => {
       expect(element).not.toBeNull();
     });
 
+  });
+
+  describe('editValue setter', () => {
+    it('should set _editValue when value is provided and _editValue is empty', () => {
+      component.editValue = 'Initial Value';
+      expect(component.editValue).toBe('Initial Value');
+    });
+
+    it('should not overwrite _editValue if it is already set', () => {
+      component.editValue = 'Existing Value';
+      component.editValue = 'New Value';
+      expect(component.editValue).toBe('Existing Value');
+    });
+
+    it('should handle null value gracefully', () => {
+      component.editValue = null;
+      expect(component.editValue).toBe('');
+    });
+
+    it('should handle empty string value gracefully', () => {
+      component.editValue = '';
+      expect(component.editValue).toBe('');
+    });
   });
 
 });

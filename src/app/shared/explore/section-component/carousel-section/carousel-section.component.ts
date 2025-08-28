@@ -1,37 +1,63 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import {
+  BehaviorSubject,
+  Observable,
+} from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { SortDirection, SortOptions } from '../../../../core/cache/models/sort-options.model';
+
+import {
+  SortDirection,
+  SortOptions,
+} from '../../../../core/cache/models/sort-options.model';
+import { CarouselSection } from '../../../../core/layout/models/section.model';
 import { DSpaceObjectType } from '../../../../core/shared/dspace-object-type.model';
 import { getFirstSucceededRemoteListPayload } from '../../../../core/shared/operators';
 import { SearchService } from '../../../../core/shared/search/search.service';
+import { CarouselOptions } from '../../../carousel/carousel-options.model';
+import { ThemedCarouselComponent } from '../../../carousel/themed-carousel.component';
+import { ThemedLoadingComponent } from '../../../loading/themed-loading.component';
+import { ItemSearchResult } from '../../../object-collection/shared/item-search-result.model';
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
-import { CarouselSection } from '../../../../core/layout/models/section.model';
-import { CarouselOptions } from '../../../carousel/carousel-options.model';
-import { ItemSearchResult } from '../../../object-collection/shared/item-search-result.model';
 
 /**
  * Component representing the Carousel component section.
  */
 @Component({
-    selector: 'ds-carousel-section',
-    templateUrl: './carousel-section.component.html',
-    styleUrls: ['./carousel-section.component.scss'],
-    providers: []
+  selector: 'ds-base-carousel-section',
+  templateUrl: './carousel-section.component.html',
+  styleUrls: ['./carousel-section.component.scss'],
+  providers: [],
+  standalone: true,
+  imports: [
+    ThemedCarouselComponent,
+    AsyncPipe,
+    TranslateModule,
+    ThemedLoadingComponent,
+    NgIf,
+  ],
 })
 export class CarouselSectionComponent implements OnInit {
   /**
    * The id of the current section.
    */
   @Input()
-  sectionId: string;
+    sectionId: string;
 
   /**
    * Carousel section configurations.
    */
   @Input()
-  carouselSection: CarouselSection;
+    carouselSection: CarouselSection;
 
   /**
    * Search results of provided carousel configurations.
@@ -65,7 +91,7 @@ export class CarouselSectionComponent implements OnInit {
 
   constructor (
     private searchService: SearchService,
-    ) {
+  ) {
   }
 
   ngOnInit() {
@@ -77,7 +103,7 @@ export class CarouselSectionComponent implements OnInit {
     const pagination: PaginationComponentOptions = Object.assign(new PaginationComponentOptions(), {
       id: 'carousel-object-pagination',
       pageSize: numberOfItems,
-      currentPage: 1
+      currentPage: 1,
     });
 
     this.carouselOptions = {
@@ -93,12 +119,12 @@ export class CarouselSectionComponent implements OnInit {
       captionStyle: this.carouselSection.captionStyle,
       titleStyle: this.carouselSection.titleStyle,
       bundle: this.carouselSection.bundle,
-      showBlurryBackdrop: this.carouselSection.showBlurryBackdrop ?? false,
       discoveryConfiguration: this.carouselSection.discoveryConfigurationName,
       order: this.carouselSection.order,
       sortField: this.carouselSection.sortField ?? this.DEFAULT_SORT_FIELD,
       sortDirection:  this.carouselSection.order && this.carouselSection.order.toUpperCase() === 'ASC' ? SortDirection.ASC : SortDirection.DESC,
-      numberOfItems: this.carouselSection.numberOfItems &&  this.carouselSection.numberOfItems  > 0 ? this.carouselSection.numberOfItems : 20
+      numberOfItems: this.carouselSection.numberOfItems &&  this.carouselSection.numberOfItems  > 0 ? this.carouselSection.numberOfItems : 20,
+      showBlurryBackdrop: this.carouselSection.showBlurryBackdrop ?? false,
     };
 
     this.paginatedSearchOptions = new PaginatedSearchOptions({
@@ -106,7 +132,7 @@ export class CarouselSectionComponent implements OnInit {
       pagination: pagination,
       sort: new SortOptions(sortField, sortDirection),
       dsoTypes: [DSpaceObjectType.ITEM],
-      projection: 'preventMetadataSecurity'
+      projection: 'preventMetadataSecurity',
     });
 
     this.searchResults$ = this.searchService.search(this.paginatedSearchOptions).pipe(

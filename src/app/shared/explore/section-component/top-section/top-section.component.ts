@@ -1,18 +1,51 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  AsyncPipe,
+  NgClass,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgbButtonsModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import {
+  BehaviorSubject,
+  Observable,
+} from 'rxjs';
 
-import { SortDirection, SortOptions } from '../../../../core/cache/models/sort-options.model';
-import { LayoutModeEnum, TopSection, TopSectionTemplateType } from './../../../../core/layout/models/section.model';
+import {
+  SortDirection,
+  SortOptions,
+} from '../../../../core/cache/models/sort-options.model';
+import { Context } from '../../../../core/shared/context.model';
+import { ThemedBrowseMostElementsComponent } from '../../../browse-most-elements/themed-browse-most-elements.component';
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
-import { Context } from '../../../../core/shared/context.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import {
+  LayoutModeEnum,
+  TopSection,
+  TopSectionTemplateType,
+} from './../../../../core/layout/models/section.model';
 
 /**
  * Component representing the Top component section.
  */
 @Component({
-  selector: 'ds-top-section',
-  templateUrl: './top-section.component.html'
+  selector: 'ds-base-top-section',
+  templateUrl: './top-section.component.html',
+  standalone: true,
+  imports: [
+    ThemedBrowseMostElementsComponent,
+    NgIf,
+    TranslateModule,
+    FormsModule,
+    NgbButtonsModule,
+    NgClass,
+    AsyncPipe,
+  ],
 })
 export class TopSectionComponent implements OnInit {
 
@@ -20,19 +53,19 @@ export class TopSectionComponent implements OnInit {
    * The identifier of the section.
    */
   @Input()
-  sectionId: string;
+    sectionId: string;
 
   /**
    * The section data
    */
   @Input()
-  topSection: TopSection;
+    topSection: TopSection;
 
   /**
    * The context in which the section is shown
    */
   @Input()
-  context: Context = Context.BrowseMostElements;
+    context: Context = Context.BrowseMostElements;
 
   /**
    * The paginated search options for the section
@@ -51,6 +84,8 @@ export class TopSectionComponent implements OnInit {
    * The template type for browse-most-elements
    */
   template: TopSectionTemplateType;
+
+  showThumbnails: boolean;
 
   layoutMode: LayoutModeEnum = LayoutModeEnum.CARD;
 

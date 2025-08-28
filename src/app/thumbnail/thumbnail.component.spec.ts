@@ -1,23 +1,38 @@
-import { DebugElement, Pipe, PipeTransform, PLATFORM_ID } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {
+  DebugElement,
+  Pipe,
+  PipeTransform,
+  PLATFORM_ID,
+} from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Bitstream } from '../core/shared/bitstream.model';
-import { SafeUrlPipe } from '../shared/utils/safe-url-pipe';
+import { TranslateModule } from '@ngx-translate/core';
 import { of as observableOf } from 'rxjs';
 
-import { ThumbnailComponent } from './thumbnail.component';
-import { RemoteData } from '../core/data/remote-data';
-import { createFailedRemoteDataObject, createSuccessfulRemoteDataObject } from '../shared/remote-data.utils';
 import { AuthService } from '../core/auth/auth.service';
-import { FileService } from '../core/shared/file.service';
-import { VarDirective } from '../shared/utils/var.directive';
 import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
-import { TranslateModule } from '@ngx-translate/core';
-import { ThemeService } from '../shared/theme-support/theme.service';
+import { RemoteData } from '../core/data/remote-data';
+import { Bitstream } from '../core/shared/bitstream.model';
+import { FileService } from '../core/shared/file.service';
 import { getMockThemeService } from '../shared/mocks/theme-service.mock';
+import {
+  createFailedRemoteDataObject,
+  createSuccessfulRemoteDataObject,
+} from '../shared/remote-data.utils';
+import { ThemeService } from '../shared/theme-support/theme.service';
+import { SafeUrlPipe } from '../shared/utils/safe-url-pipe';
+import { VarDirective } from '../shared/utils/var.directive';
+import { ThumbnailComponent } from './thumbnail.component';
 
-// eslint-disable-next-line @angular-eslint/pipe-prefix
-@Pipe({ name: 'translate' })
+@Pipe({
+  // eslint-disable-next-line @angular-eslint/pipe-prefix
+  name: 'translate',
+  standalone: true,
+})
 class MockTranslatePipe implements PipeTransform {
   transform(key: string): string {
     return 'TRANSLATED ' + key;
@@ -45,19 +60,31 @@ describe('ThumbnailComponent', () => {
         isAuthorized: observableOf(true),
       });
       fileService = jasmine.createSpyObj('FileService', {
-      retrieveFileDownloadLink: null
+        retrieveFileDownloadLink: null,
       });
       fileService.retrieveFileDownloadLink.and.callFake((url) => observableOf(`${url}?authentication-token=fake`));
 
       TestBed.configureTestingModule({
-      declarations: [ThumbnailComponent, SafeUrlPipe, MockTranslatePipe, VarDirective],
+        imports: [
+          TranslateModule.forRoot(),
+          ThumbnailComponent,
+          SafeUrlPipe,
+          MockTranslatePipe,
+          VarDirective,
+        ],
         providers: [
           { provide: AuthService, useValue: authService },
           { provide: AuthorizationDataService, useValue: authorizationService },
           { provide: FileService, useValue: fileService },
+          { provide: ThemeService, useValue: getMockThemeService() },
           { provide: PLATFORM_ID, useValue: 'browser' },
-      ]
-    }).compileComponents();
+        ],
+      }).overrideComponent(ThumbnailComponent, {
+        add: {
+          imports: [MockTranslatePipe],
+        },
+      })
+        .compileComponents();
     }));
 
     beforeEach(() => {
@@ -73,31 +100,31 @@ describe('ThumbnailComponent', () => {
 
     describe('loading', () => {
       it('should start out with isLoading$ true', () => {
-        expect(comp.isLoading).toBeTrue();
+        expect(comp.isLoading$.getValue()).toBeTrue();
       });
 
       it('should set isLoading$ to false once an image is successfully loaded', () => {
         comp.setSrc('http://bit.stream');
         fixture.debugElement.query(By.css('img.thumbnail-content')).triggerEventHandler('load', new Event('load'));
-        expect(comp.isLoading).toBeFalse();
+        expect(comp.isLoading$.getValue()).toBeFalse();
       });
 
       it('should set isLoading$ to false once the src is set to null', () => {
         comp.setSrc(null);
-        expect(comp.isLoading).toBeFalse();
+        expect(comp.isLoading$.getValue()).toBeFalse();
       });
 
       it('should show a loading animation while isLoading$ is true', () => {
-      expect(de.query(By.css('ngx-skeleton-loader'))).toBeTruthy();
+        expect(de.query(By.css('ngx-skeleton-loader'))).toBeTruthy();
 
-        comp.isLoading = false;
+        comp.isLoading$.next(false);
         fixture.detectChanges();
-      expect(fixture.debugElement.query(By.css('ngx-skeleton-loader'))).toBeFalsy();
+        expect(fixture.debugElement.query(By.css('ngx-skeleton-loader'))).toBeFalsy();
       });
 
       describe('with a thumbnail image', () => {
         beforeEach(() => {
-          comp.src = 'https://bit.stream';
+          comp.src$.next('https://bit.stream');
           fixture.detectChanges();
         });
 
@@ -106,7 +133,7 @@ describe('ThumbnailComponent', () => {
           expect(img).toBeTruthy();
           expect(img.classes['d-none']).toBeTrue();
 
-          comp.isLoading = false;
+          comp.isLoading$.next(false);
           fixture.detectChanges();
           img = fixture.debugElement.query(By.css('img.thumbnail-content'));
           expect(img).toBeTruthy();
@@ -117,14 +144,14 @@ describe('ThumbnailComponent', () => {
 
       describe('without a thumbnail image', () => {
         beforeEach(() => {
-          comp.src = null;
+          comp.src$.next(null);
           fixture.detectChanges();
         });
 
         it('should only show the HTML placeholder once done loading', () => {
           expect(fixture.debugElement.query(By.css('div.thumbnail-placeholder'))).toBeFalsy();
 
-          comp.isLoading = false;
+          comp.isLoading$.next(false);
           fixture.detectChanges();
           expect(fixture.debugElement.query(By.css('div.thumbnail-placeholder'))).toBeTruthy();
         });
@@ -220,14 +247,14 @@ describe('ThumbnailComponent', () => {
     describe('fallback', () => {
       describe('if there is a default image', () => {
         it('should display the default image', () => {
-          comp.src = 'http://bit.stream';
+          comp.src$.next('http://bit.stream');
           comp.defaultImage = 'http://default.img';
           comp.errorHandler();
-          expect(comp.src).toBe(comp.defaultImage);
+          expect(comp.src$.getValue()).toBe(comp.defaultImage);
         });
 
         it('should include the alt text', () => {
-          comp.src = 'http://bit.stream';
+          comp.src$.next('http://bit.stream');
           comp.defaultImage = 'http://default.img';
           comp.errorHandler();
 
@@ -239,10 +266,10 @@ describe('ThumbnailComponent', () => {
 
       describe('if there is no default image', () => {
         it('should display the HTML placeholder', () => {
-          comp.src = 'http://default.img';
+          comp.src$.next('http://default.img');
           comp.defaultImage = null;
           comp.errorHandler();
-          expect(comp.src).toBe(null);
+          expect(comp.src$.getValue()).toBe(null);
 
           fixture.detectChanges();
           const placeholder = fixture.debugElement.query(By.css('div.thumbnail-placeholder')).nativeElement;
@@ -296,7 +323,7 @@ describe('ThumbnailComponent', () => {
           bundle: { href: 'bundle.url' },
           format: { href: 'format.url' },
           content: { href: CONTENT },
-        thumbnail: undefined
+          thumbnail: undefined,
         };
       });
 
@@ -334,7 +361,7 @@ describe('ThumbnailComponent', () => {
         it('should show the default image', () => {
           comp.defaultImage = 'default/image.jpg';
           comp.ngOnChanges({});
-          expect(comp.src).toBe('default/image.jpg');
+          expect(comp.src$.getValue()).toBe('default/image.jpg');
         });
       });
     });
@@ -357,8 +384,11 @@ describe('ThumbnailComponent', () => {
       TestBed.configureTestingModule({
         imports: [
           TranslateModule.forRoot(),
+          ThumbnailComponent,
+          SafeUrlPipe,
+          MockTranslatePipe,
+          VarDirective,
         ],
-        declarations: [ThumbnailComponent, SafeUrlPipe, MockTranslatePipe, VarDirective],
         providers: [
           { provide: AuthService, useValue: authService },
           { provide: AuthorizationDataService, useValue: authorizationService },
@@ -366,7 +396,12 @@ describe('ThumbnailComponent', () => {
           { provide: ThemeService, useValue: getMockThemeService() },
           { provide: PLATFORM_ID, useValue: 'server' },
         ],
-      }).compileComponents();
+      }).overrideComponent(ThumbnailComponent, {
+        add: {
+          imports: [MockTranslatePipe],
+        },
+      })
+        .compileComponents();
     }));
 
     beforeEach(() => {
@@ -382,7 +417,7 @@ describe('ThumbnailComponent', () => {
     });
 
     it('should start out with isLoading$ true', () => {
-      expect(comp.isLoading).toBeTrue();
+      expect(comp.isLoading$.getValue()).toBeTrue();
       expect(de.query(By.css('ngx-skeleton-loader'))).toBeTruthy();
     });
 

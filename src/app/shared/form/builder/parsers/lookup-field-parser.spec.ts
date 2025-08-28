@@ -1,9 +1,10 @@
+import { getMockTranslateService } from 'src/app/shared/mocks/translate.service.mock';
+
+import { DynamicLookupModel } from '../ds-dynamic-form-ui/models/lookup/dynamic-lookup.model';
 import { FormFieldModel } from '../models/form-field.model';
 import { FormFieldMetadataValueObject } from '../models/form-field-metadata-value.model';
 import { LookupFieldParser } from './lookup-field-parser';
-import { DynamicLookupModel } from '../ds-dynamic-form-ui/models/lookup/dynamic-lookup.model';
 import { ParserOptions } from './parser-options';
-import { getMockTranslateService } from 'src/app/shared/mocks/translate.service.mock';
 
 describe('LookupFieldParser test suite', () => {
   let field: FormFieldModel;
@@ -16,13 +17,13 @@ describe('LookupFieldParser test suite', () => {
     submissionScope: 'testScopeUUID',
     collectionUUID: null,
     typeField: 'dc_type',
-    isInnerForm: false
+    isInnerForm: false,
   };
 
   beforeEach(() => {
     field = {
       input: {
-        type: 'lookup'
+        type: 'lookup',
       },
       label: 'Journal',
       mandatory: 'false',
@@ -32,10 +33,10 @@ describe('LookupFieldParser test suite', () => {
         {
           metadata: 'journal',
           controlledVocabulary: 'JOURNALAuthority',
-          closed: false
-        }
+          closed: false,
+        },
       ],
-      languageCodes: []
+      languageCodes: [],
     } as FormFieldModel;
 
   });

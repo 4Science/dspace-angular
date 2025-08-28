@@ -1,27 +1,58 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit } from '@angular/core';
-import { hasValue } from '../../../shared/empty.util';
-import { distinctUntilChanged, filter, map, switchMap, take, tap } from 'rxjs/operators';
-import { combineLatest, Observable, Subscription } from 'rxjs';
-import { PoolTaskSearchResult } from '../../../shared/object-collection/shared/pool-task-search-result.model';
-import { SelectableListService } from '../../../shared/object-list/selectable-list/selectable-list.service';
-import { PoolTaskDataService } from '../../../core/tasks/pool-task-data.service';
+import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import {
+  ReactiveFormsModule,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
+import {
+  NgbModal,
+  NgbModalRef,
+  NgbTooltipModule,
+} from '@ng-bootstrap/ng-bootstrap';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import {
+  combineLatest,
+  Observable,
+  Subscription,
+} from 'rxjs';
+import {
+  distinctUntilChanged,
+  filter,
+  map,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs/operators';
+import { BtnDisabledDirective } from 'src/app/shared/btn-disabled.directive';
+
+import { RequestService } from '../../../core/data/request.service';
+import { SearchService } from '../../../core/shared/search/search.service';
 import { ClaimedTaskDataService } from '../../../core/tasks/claimed-task-data.service';
 import { ProcessTaskResponse } from '../../../core/tasks/models/process-task-response';
-import { NotificationsService } from '../../../shared/notifications/notifications.service';
+import { PoolTaskDataService } from '../../../core/tasks/pool-task-data.service';
+import { hasValue } from '../../../shared/empty.util';
+import { WORKFLOW_TASK_OPTION_APPROVE } from '../../../shared/mydspace-actions/claimed-task/approve/claimed-task-actions-approve.component';
+import { WORKFLOW_TASK_OPTION_REJECT } from '../../../shared/mydspace-actions/claimed-task/reject/claimed-task-actions-reject.component';
 import { NotificationOptions } from '../../../shared/notifications/models/notification-options.model';
-import { TranslateService } from '@ngx-translate/core';
-import { Router } from '@angular/router';
-import { SearchService } from '../../../core/shared/search/search.service';
-import { RequestService } from '../../../core/data/request.service';
+import { NotificationsService } from '../../../shared/notifications/notifications.service';
 import { ClaimedTaskSearchResult } from '../../../shared/object-collection/shared/claimed-task-search-result.model';
-import {
-  WORKFLOW_TASK_OPTION_APPROVE
-} from '../../../shared/mydspace-actions/claimed-task/approve/claimed-task-actions-approve.component';
-import {
-  WORKFLOW_TASK_OPTION_REJECT
-} from '../../../shared/mydspace-actions/claimed-task/reject/claimed-task-actions-reject.component';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { PoolTaskSearchResult } from '../../../shared/object-collection/shared/pool-task-search-result.model';
+import { SelectableListService } from '../../../shared/object-list/selectable-list/selectable-list.service';
 
 
 
@@ -31,7 +62,16 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
  */
 @Component({
   selector: 'ds-my-dspace-bulk-action',
-  templateUrl: './my-dspace-bulk-action.component.html'
+  templateUrl: './my-dspace-bulk-action.component.html',
+  standalone: true,
+  imports: [
+    NgbTooltipModule,
+    TranslateModule,
+    AsyncPipe,
+    ReactiveFormsModule,
+    NgIf,
+    BtnDisabledDirective,
+  ],
 })
 export class MyDSpaceBulkActionComponent  implements OnInit, OnDestroy{
   /**
@@ -99,7 +139,7 @@ export class MyDSpaceBulkActionComponent  implements OnInit, OnDestroy{
    */
   ngOnInit() {
     this.rejectForm = this.formBuilder.group({
-      reason: ['', Validators.required]
+      reason: ['', Validators.required],
     });
     this.claimEnabled$ = this.getActionEnabled('claimaction');
     this.claimedTaskActionsEnabled$ = this.getActionEnabled('claimedtask');
@@ -124,17 +164,17 @@ export class MyDSpaceBulkActionComponent  implements OnInit, OnDestroy{
       this.getSelectedList().pipe(
         take(1),
         map(list => list.map(item =>
-            this.poolTaskDataService.getPoolTaskEndpointById(item.indexableObject.id)
-          )
+          this.poolTaskDataService.getPoolTaskEndpointById(item.indexableObject.id),
+        ),
         ),
         switchMap(endPoints => combineLatest(...endPoints)),
         map(tasksHref => tasksHref.filter(data => hasValue(data))
-          .map(href => this.claimItemByHref(href))
+          .map(href => this.claimItemByHref(href)),
         ),
-        switchMap(claims => combineLatest(...claims))
+        switchMap(claims => combineLatest(...claims)),
       ).subscribe(() => {
-          this.handlePageReload();
-      })
+        this.handlePageReload();
+      }),
     );
   }
 
@@ -156,10 +196,10 @@ export class MyDSpaceBulkActionComponent  implements OnInit, OnDestroy{
   getActionEnabled(actionType: string): Observable<boolean> {
     return this.getSelectedList().pipe(
       map(list => list.map(
-          item => (item._embedded.indexableObject.action || item._embedded.indexableObject.type) as any as string
-        ).some(
-          action => action === actionType
-        )
+        item => (item._embedded.indexableObject.action || item._embedded.indexableObject.type) as any as string,
+      ).some(
+        action => action === actionType,
+      ),
       ),
     );
   }
@@ -174,7 +214,7 @@ export class MyDSpaceBulkActionComponent  implements OnInit, OnDestroy{
       take(1),
       map(list => list.find(item => item.indexableObject.id.toString() === id)),
       switchMap(item => this.claimedTaskService.claimTask(item.indexableObject.id, href)),
-      map((response) => this.handleResponseStatus(response))
+      map((response) => this.handleResponseStatus(response)),
     );
   }
 
@@ -187,7 +227,7 @@ export class MyDSpaceBulkActionComponent  implements OnInit, OnDestroy{
   submitItem(id: string, options): Observable<ProcessTaskResponse> {
     return this.claimedTaskService.submitTask(id, options).pipe(
       take(1),
-      map((response) => this.handleResponseStatus(response))
+      map((response) => this.handleResponseStatus(response)),
     );
   }
 
@@ -200,12 +240,12 @@ export class MyDSpaceBulkActionComponent  implements OnInit, OnDestroy{
   notifyOperationStatus(succeeded: boolean, itemNumber: number) {
     if (succeeded) {
       this.notificationsService.success(null,
-        this.translate.get('submission.workflow.tasks.bulk.item.success', {itemNumber}),
-        new NotificationOptions(5000, false)
+        this.translate.get('submission.workflow.tasks.bulk.item.success', { itemNumber }),
+        new NotificationOptions(5000, false),
       );
     } else {
       this.notificationsService.error(null,
-        this.translate.get('submission.workflow.tasks.bulk.item.error', {itemNumber}),
+        this.translate.get('submission.workflow.tasks.bulk.item.error', { itemNumber }),
         new NotificationOptions(20000, true));
     }
   }
@@ -224,7 +264,7 @@ export class MyDSpaceBulkActionComponent  implements OnInit, OnDestroy{
     // See https://github.com/DSpace/dspace-angular/pull/468
     this.searchService.getEndpoint().pipe(
       take(1),
-      tap((cachedHref: string) => this.requestService.removeByHrefSubstring(cachedHref))
+      tap((cachedHref: string) => this.requestService.removeByHrefSubstring(cachedHref)),
     ).subscribe(() => this.router.navigateByUrl(url));
   }
 
@@ -256,12 +296,12 @@ export class MyDSpaceBulkActionComponent  implements OnInit, OnDestroy{
       this.getSelectedList().pipe(
         take(1),
         map(list => list.map(
-          item => this.submitItem(item.indexableObject.id, this.createBody(this.approveOption)))
+          item => this.submitItem(item.indexableObject.id, this.createBody(this.approveOption))),
         ),
-        switchMap(submissions => combineLatest(...submissions))
+        switchMap(submissions => combineLatest(...submissions)),
       ).subscribe(() => {
         this.handlePageReload();
-      })
+      }),
     );
   }
 
@@ -279,12 +319,12 @@ export class MyDSpaceBulkActionComponent  implements OnInit, OnDestroy{
       this.getSelectedList().pipe(
         take(1),
         map(list => list.map(
-          item => this.submitItem(item.indexableObject.id, body))
+          item => this.submitItem(item.indexableObject.id, body)),
         ),
-        switchMap(submissions => combineLatest(...submissions))
+        switchMap(submissions => combineLatest(...submissions)),
       ).subscribe(() => {
         this.handlePageReload();
-      })
+      }),
     );
   }
 
@@ -303,7 +343,7 @@ export class MyDSpaceBulkActionComponent  implements OnInit, OnDestroy{
    */
   createBody(option: string): any {
     return {
-      [option]: 'true'
+      [option]: 'true',
     };
   }
 
@@ -317,15 +357,15 @@ export class MyDSpaceBulkActionComponent  implements OnInit, OnDestroy{
       this.getSelectedList().pipe(
         take(1),
         map(list => list.map(
-            item => this.claimedTaskService.returnToPoolTask(item.indexableObject.id).pipe(
-              map((response) => this.handleResponseStatus(response))
-            )
-          )
+          item => this.claimedTaskService.returnToPoolTask(item.indexableObject.id).pipe(
+            map((response) => this.handleResponseStatus(response)),
+          ),
         ),
-        switchMap(submissions => combineLatest(...submissions))
+        ),
+        switchMap(submissions => combineLatest(...submissions)),
       ).subscribe(() => {
         this.handlePageReload();
-      })
+      }),
     );
   }
 

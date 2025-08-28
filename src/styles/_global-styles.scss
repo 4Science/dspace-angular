@@ -254,15 +254,31 @@ button.switch {
 }
 
 .thumb-font-2 {
-    .thumbnail-placeholder {
-        font-size: 0.9rem;
-        padding: 0.125rem;
+  .thumbnail-placeholder {
+    @media screen and (max-width: map-get($grid-breakpoints, sm)) {
+      font-size: 0.4rem;
+      padding: 0.1rem;
     }
+    @media screen and (min-width: map-get($grid-breakpoints, sm)) and (max-width: map-get($grid-breakpoints, lg)) {
+        font-size: 0.7rem;
+        padding: 0.1rem;
+    }
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
 }
 
 .thumb-font-3 {
     .thumbnail-placeholder {
-        font-size: 1.25rem;
+        @media screen and (max-width: map-get($grid-breakpoints, sm)) {
+          font-size: 0.4rem;
+          padding: 0.1rem;
+        }
+        @media screen and (min-width: map-get($grid-breakpoints, sm)) and (max-width: map-get($grid-breakpoints, lg)) {
+            font-size: 0.7rem;
+            padding: 0.1rem;
+        }
+        font-size: 1rem;
         padding: 0.5rem;
     }
 }
@@ -422,6 +438,16 @@ ngb-accordion {
     color: darken($danger, 22%);
 }
 
+// An element that is disabled should not have focus styles to avoid confusion
+// It however is still focusable for screen readers and keyboard navigation
+.disabled {
+    pointer-events: none;
+}
+
+.disabled:focus {
+    outline: none;
+    box-shadow: none;
+}
 
 // Margin utility classes based on DSpace content spacing
 .mt-cs { margin-top: var(--ds-content-spacing); }
@@ -437,17 +463,6 @@ ngb-accordion {
   color: darken($link-color, 5%);
   // We use underline to discern link from text as we can't make color lighter on a white bg
   text-decoration: underline;
-}
-
-// An element that is disabled should not have focus styles to avoid confusion
-// It however is still focusable for screen readers and keyboard navigation
-.disabled {
-    pointer-events: none;
-}
-
-.disabled:focus {
-    outline: none;
-    box-shadow: none;
 }
 
 

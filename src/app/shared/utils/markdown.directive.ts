@@ -7,7 +7,7 @@ import {
   OnChanges,
   OnDestroy,
   SecurityContext,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
 import {
   DomSanitizer,
@@ -28,11 +28,12 @@ const markdownItLoader = async () => (await import('markdown-it')).default;
 type LazyMarkdownIt = ReturnType<typeof markdownItLoader>;
 const MARKDOWN_IT = new InjectionToken<LazyMarkdownIt>(
   'Lazily loaded MarkdownIt',
-  {providedIn: 'root', factory: markdownItLoader}
+  { providedIn: 'root', factory: markdownItLoader },
 );
 
 @Directive({
-  selector: '[dsMarkdown]'
+  selector: '[dsMarkdown]',
+  standalone: true,
 })
 export class MarkdownDirective implements OnChanges, OnDestroy {
 
@@ -57,7 +58,7 @@ export class MarkdownDirective implements OnChanges, OnDestroy {
 
   async render(value: string, forcePreview = false): Promise<SafeHtml> {
     if (isEmpty(value) || (!environment.markdown.enabled && !forcePreview)) {
-      this.el.innerHTML = value;
+      this.el.innerHTML = this.sanitizer.sanitize(SecurityContext.HTML, value);
       return;
     } else {
       if (environment.markdown.mathjax) {
@@ -74,7 +75,7 @@ export class MarkdownDirective implements OnChanges, OnDestroy {
     this.mathService.ready().pipe(
       filter((ready) => ready),
       take(1),
-      takeUntil(this.alive$)
+      takeUntil(this.alive$),
     ).subscribe(() => {
       this.mathService.render(this.el)?.then(_ => {
         this.renderMarkdown(this.el.innerHTML, true);

@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 
-import { FieldRenderingType, MetadataBoxFieldRendering } from '../metadata-box.decorator';
+import { TruncatableComponent } from '../../../../../../../shared/truncatable/truncatable.component';
+import { TruncatablePartComponent } from '../../../../../../../shared/truncatable/truncatable-part/truncatable-part.component';
 import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
 
 /**
@@ -10,9 +14,13 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'span[ds-longhtml]',
   templateUrl: './longhtml.component.html',
-  styleUrls: ['./longhtml.component.scss']
+  styleUrls: ['./longhtml.component.scss'],
+  standalone: true,
+  imports: [
+    TruncatableComponent,
+    TruncatablePartComponent,
+  ],
 })
-@MetadataBoxFieldRendering(FieldRenderingType.LONGHTML)
 export class LonghtmlComponent extends RenderingTypeValueModelComponent implements OnInit {
 
   /**

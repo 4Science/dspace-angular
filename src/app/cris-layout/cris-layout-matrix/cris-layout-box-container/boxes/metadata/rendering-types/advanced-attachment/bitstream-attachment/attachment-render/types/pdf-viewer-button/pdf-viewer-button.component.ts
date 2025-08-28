@@ -1,27 +1,38 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+
+import { environment } from '../../../../../../../../../../../../environments/environment';
+import { AuthorizationDataService } from '../../../../../../../../../../../core/data/feature-authorization/authorization-data.service';
+import { FeatureID } from '../../../../../../../../../../../core/data/feature-authorization/feature-id';
+import { Bitstream } from '../../../../../../../../../../../core/shared/bitstream.model';
+import { Item } from '../../../../../../../../../../../core/shared/item.model';
 import {
   getBitstreamItemViewerDetailsPath,
-  getBitstreamItemViewerPath
+  getBitstreamItemViewerPath,
 } from '../../../../../../../../../../../item-page/item-page-routing-paths';
-import { Router } from '@angular/router';
-import { Item } from '../../../../../../../../../../../core/shared/item.model';
-import { Bitstream } from '../../../../../../../../../../../core/shared/bitstream.model';
-import { AttachmentRenderingType, AttachmentTypeRendering } from '../../../attachment-type.decorator';
-import { FeatureID } from '../../../../../../../../../../../core/data/feature-authorization/feature-id';
 import { isNotEmpty } from '../../../../../../../../../../../shared/empty.util';
-import { Observable } from 'rxjs';
-import {
-  AuthorizationDataService
-} from '../../../../../../../../../../../core/data/feature-authorization/authorization-data.service';
-import { environment } from '../../../../../../../../../../../../environments/environment';
 
 @Component({
   selector: 'ds-pdf-viewer-button',
   templateUrl: './pdf-viewer-button.component.html',
-  styleUrls: ['./pdf-viewer-button.component.scss']
+  styleUrls: ['./pdf-viewer-button.component.scss'],
+  imports: [
+    NgIf,
+    AsyncPipe,
+    TranslateModule,
+  ],
+  standalone: true,
 })
-
-@AttachmentTypeRendering(AttachmentRenderingType.PDF, true)
 export class PdfViewerButtonComponent implements OnInit {
 
   /**
@@ -39,7 +50,7 @@ export class PdfViewerButtonComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authorizationService: AuthorizationDataService
+    private authorizationService: AuthorizationDataService,
   ) {}
 
   canOpenPdf$: Observable<boolean>;

@@ -1,12 +1,11 @@
-import { Item } from '../../../core/shared/item.model';
-import { SearchConfigurationService } from '../../../core/shared/search/search-configuration.service';
-import { SEARCH_CONFIG_SERVICE } from '../../../my-dspace-page/my-dspace-page.component';
-import { NativeWindowRef, NativeWindowService } from '../../../core/services/window.service';
-import { SearchManager } from '../../../core/browse/search-manager';
-import { BitstreamDataService } from '../../../core/data/bitstream-data.service';
-import { SearchConfig } from '../../../core/shared/search/search-filters/search-config.model';
-import { SortDirection } from '../../../core/cache/models/sort-options.model';
-import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
+import {
+  AsyncPipe,
+  NgClass,
+  NgForOf,
+  NgIf,
+  NgStyle,
+  NgTemplateOutlet,
+} from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -22,20 +21,46 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { SliderComponent } from '../slider.component';
-import { BitstreamImagesService } from '../../../core/services/bitstream-images.service';
 import { NgbSlideEvent } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
+import { SearchManager } from '../../../core/browse/search-manager';
+import { SortDirection } from '../../../core/cache/models/sort-options.model';
+import { BitstreamDataService } from '../../../core/data/bitstream-data.service';
+import { BitstreamImagesService } from '../../../core/services/bitstream-images.service';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../../core/services/window.service';
+import { Item } from '../../../core/shared/item.model';
+import { SearchConfigurationService } from '../../../core/shared/search/search-configuration.service';
+import { SearchConfig } from '../../../core/shared/search/search-filters/search-config.model';
+import { SEARCH_CONFIG_SERVICE } from '../../../my-dspace-page/my-dspace-configuration.service';
+import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
+import { BackgroundImageDirective } from '../../utils/background-image.directive';
+import { SliderComponent } from '../slider.component';
 
 @Component({
   selector: 'ds-thumbnail-slider',
   templateUrl: './thumbnail-slider.component.html',
   styleUrls: ['./thumbnail-slider.component.scss'],
+  standalone: true,
   providers: [
     {
       provide: SEARCH_CONFIG_SERVICE,
-      useClass: SearchConfigurationService
-    }
-  ]
+      useClass: SearchConfigurationService,
+    },
+  ],
+  imports: [
+    NgClass,
+    BackgroundImageDirective,
+    NgxSkeletonLoaderModule,
+    AsyncPipe,
+    NgIf,
+    NgStyle,
+    NgTemplateOutlet,
+    NgForOf,
+  ],
 })
 export class ThumbnailSliderComponent extends SliderComponent implements OnInit, OnChanges {
 

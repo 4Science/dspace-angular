@@ -1,17 +1,26 @@
+import {
+  Component,
+  Input,
+} from '@angular/core';
+
+import {
+  LayoutModeEnum,
+  TopSection,
+} from '../../../core/layout/models/section.model';
 import { Context } from '../../../core/shared/context.model';
-import { ThemedComponent } from '../../theme-support/themed.component';
-import { LayoutModeEnum, TopSection } from '../../../core/layout/models/section.model';
 import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
+import { ThemedComponent } from '../../theme-support/themed.component';
 import { DefaultBrowseElementsComponent } from './default-browse-elements.component';
-import { Component, Input } from '@angular/core';
 
 /**
  * Themed component for the DefaultBrowseElementsComponent.
  */
 @Component({
-  selector: 'ds-themed-default-browse-elements',
+  selector: 'ds-default-browse-elements',
   styleUrls: [],
   templateUrl: './../../theme-support/themed.component.html',
+  standalone: true,
+  imports: [DefaultBrowseElementsComponent],
 })
 export class ThemedDefaultBrowseElementsComponent extends ThemedComponent<DefaultBrowseElementsComponent> {
 

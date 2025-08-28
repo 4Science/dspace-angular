@@ -1,30 +1,60 @@
-import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { DOCUMENT, Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  DOCUMENT,
+  Location,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import {
+  combineLatest,
+  Observable,
+  of,
+  Subscription,
+} from 'rxjs';
+import {
+  filter,
+  map,
+  switchMap,
+} from 'rxjs/operators';
+
+import { AuthService } from '../../core/auth/auth.service';
+import { BitstreamDataService } from '../../core/data/bitstream-data.service';
+import { Bitstream } from '../../core/shared/bitstream.model';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { ViewerProviderDirective } from './directives/viewer-provider.directive';
+import { BITSTREAM_VIEWER_LINKS_TO_FOLLOW } from './resolvers/bitstream-viewer.resolver';
+import { fetchNonNull } from './utils/operators';
 import {
   Viewer,
   ViewerInitialState,
   ViewerProvider,
-  ViewerProviderDsoInterface
+  ViewerProviderDsoInterface,
 } from './viewer-provider-dso.interface';
-import { combineLatest, Observable, of, Subscription } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
-import { ViewerProviderDirective } from './directives/viewer-provider.directive';
-import { AuthService } from '../../core/auth/auth.service';
-import { Bitstream } from '../../core/shared/bitstream.model';
-import { fetchNonNull } from './utils/operators';
-import { BitstreamDataService } from '../../core/data/bitstream-data.service';
-import { getFirstCompletedRemoteData } from '../../core/shared/operators';
-import { BITSTREAM_VIEWER_LINKS_TO_FOLLOW } from './resolvers/bitstream-viewer.resolver';
 
 @Component({
   selector: 'ds-viewer-provider',
   templateUrl: './viewer-provider.component.html',
-  styleUrls: ['./viewer-provider.component.scss']
+  styleUrls: ['./viewer-provider.component.scss'],
+  imports: [
+    NgIf,
+    TranslateModule,
+    ViewerProviderDirective,
+  ],
+  standalone: true,
 })
 export class ViewerProviderComponent implements OnInit, OnDestroy {
 
-  @ViewChild(ViewerProviderDirective, {static: true}) viewer!: ViewerProviderDirective;
+  @ViewChild(ViewerProviderDirective, { static: true }) viewer!: ViewerProviderDirective;
 
   private routeDSO$: Observable<ViewerProviderDsoInterface> = this.route.data;
   private bitstream$: Observable<Bitstream> = this.initBitstream$();
@@ -52,7 +82,7 @@ export class ViewerProviderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = combineLatest([this.viewer$, this.item$, this.bitstream$])
       .subscribe(([viewer, item, bitstream]) =>
-        this.initViewerComponent(viewer, {item, bitstream})
+        this.initViewerComponent(viewer, { item, bitstream }),
       );
   }
 
@@ -83,10 +113,10 @@ export class ViewerProviderComponent implements OnInit, OnDestroy {
         }
 
         return this.route.parent.parent.data.pipe(
-          map((x: ViewerProviderDsoInterface) => x.dso)
+          map((x: ViewerProviderDsoInterface) => x.dso),
         );
       }),
-      fetchNonNull(this.router, this.authService)
+      fetchNonNull(this.router, this.authService),
     );
   }
 
@@ -97,7 +127,7 @@ export class ViewerProviderComponent implements OnInit, OnDestroy {
 
     const bitstreamFromResolver$ = this.routeDSO$.pipe(
       map(data => data.bitstream),
-      fetchNonNull(this.router, this.authService)
+      fetchNonNull(this.router, this.authService),
     );
 
     // every time the bitstream id changes, we need to fetch the bitstream
@@ -112,12 +142,12 @@ export class ViewerProviderComponent implements OnInit, OnDestroy {
         return this.bitstreamDataService.findById(bitstreamId,
           true,
           false,
-          ...BITSTREAM_VIEWER_LINKS_TO_FOLLOW
+          ...BITSTREAM_VIEWER_LINKS_TO_FOLLOW,
         ).pipe(
           getFirstCompletedRemoteData(),
-          fetchNonNull(this.router, this.authService)
+          fetchNonNull(this.router, this.authService),
         );
-      })
+      }),
     );
   }
 

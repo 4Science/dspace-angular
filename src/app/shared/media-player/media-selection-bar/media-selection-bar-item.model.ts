@@ -1,4 +1,4 @@
-import {Bitstream} from '../../../core/shared/bitstream.model';
+import { Bitstream } from '../../../core/shared/bitstream.model';
 
 /**
  * Model representing a selection bar item

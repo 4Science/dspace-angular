@@ -1,14 +1,21 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
 
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-
-import { MarkdownComponent } from './markdown.component';
-import { Item } from '../../../../../../../core/shared/item.model';
-import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate-loader.mock';
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
+import { Item } from '../../../../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
+import { MarkdownViewerComponent } from '../../../../../../../shared/markdown-viewer/markdown-viewer.component';
+import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate-loader.mock';
+import { MarkdownComponent } from './markdown.component';
 
 describe('MarkdownComponent', () => {
   let component: MarkdownComponent;
@@ -19,17 +26,17 @@ describe('MarkdownComponent', () => {
     'language': null,
     'authority': null,
     'confidence': -1,
-    'place': 0
+    'place': 0,
   });
 
   const testItem = Object.assign(new Item(),
     {
       type: 'item',
       metadata: {
-        'dc.abstract': [metadataValue]
+        'dc.abstract': [metadataValue],
       },
       uuid: 'test-item-uuid',
-    }
+    },
   );
 
 
@@ -42,7 +49,7 @@ describe('MarkdownComponent', () => {
     'styleLabel': 'test-style-label',
     'styleValue': 'test-style-value',
     'labelAsHeading': false,
-    'valuesInline': true
+    'valuesInline': true,
   };
 
   beforeEach(waitForAsync(() => {
@@ -50,9 +57,9 @@ describe('MarkdownComponent', () => {
       imports: [TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
-          useClass: TranslateLoaderMock
-        }
-      }), BrowserAnimationsModule],
+          useClass: TranslateLoaderMock,
+        },
+      }), BrowserAnimationsModule, MarkdownComponent],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
@@ -60,9 +67,10 @@ describe('MarkdownComponent', () => {
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
       ],
-      declarations: [MarkdownComponent]
     })
-      .compileComponents();
+      .overrideComponent(MarkdownComponent, {
+        remove: { imports: [MarkdownViewerComponent] } },
+      ).compileComponents();
   }));
 
   beforeEach(() => {
@@ -71,7 +79,7 @@ describe('MarkdownComponent', () => {
     fixture.detectChanges();
   });
 
- it('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 

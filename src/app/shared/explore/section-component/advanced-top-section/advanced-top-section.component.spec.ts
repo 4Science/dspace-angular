@@ -1,15 +1,27 @@
-import { AdvancedTopSection, TopSectionTemplateType } from '../../../../core/layout/models/section.model';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { AdvancedTopSectionComponent } from './advanced-top-section.component';
-import { TranslateModule } from '@ngx-translate/core';
-import { By } from '@angular/platform-browser';
-import { HostWindowService, WidthCategory } from '../../../host-window.service';
 import { ChangeDetectorRef } from '@angular/core';
+import {
+  async,
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
-import {SearchService} from '../../../../core/shared/search/search.service';
-import {createSuccessfulRemoteDataObject$} from '../../../remote-data.utils';
-import {DSpaceObject} from '../../../../core/shared/dspace-object.model';
+
+import {
+  AdvancedTopSection,
+  TopSectionTemplateType,
+} from '../../../../core/layout/models/section.model';
+import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
+import { SearchService } from '../../../../core/shared/search/search.service';
+import { ThemedBrowseMostElementsComponent } from '../../../browse-most-elements/themed-browse-most-elements.component';
+import {
+  HostWindowService,
+  WidthCategory,
+} from '../../../host-window.service';
+import { ThemedLoadingComponent } from '../../../loading/themed-loading.component';
+import { createSuccessfulRemoteDataObject$ } from '../../../remote-data.utils';
+import { AdvancedTopSectionComponent } from './advanced-top-section.component';
 
 describe('AdvancedTopSectionComponent', () => {
   let component: AdvancedTopSectionComponent;
@@ -18,7 +30,7 @@ describe('AdvancedTopSectionComponent', () => {
   const dso = Object.assign(new DSpaceObject(), {});
   const hostWindowServiceStub = {
     isIn: (widthCatArray: [WidthCategory]) => of(true),
-    isXs: () => of(false)
+    isXs: () => of(false),
   };
 
   const searchService = jasmine.createSpyObj('searchService', {
@@ -35,21 +47,26 @@ describe('AdvancedTopSectionComponent', () => {
     discoveryConfigurationName: ['project', 'publication', 'author'],
     sortField: 'ASC',
     order: 'ASC',
-     style: '',
+    style: '',
     componentType: 'advanced-top-component',
     numberOfItems: 8,
-    template: TopSectionTemplateType.SLIDER
+    template: TopSectionTemplateType.SLIDER,
   };
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot()],
-      declarations: [AdvancedTopSectionComponent],
+      imports: [
+        TranslateModule.forRoot(),
+        AdvancedTopSectionComponent,
+      ],
       providers: [
         { provide: HostWindowService, useValue: hostWindowServiceStub },
         { provide: SearchService, useValue: searchService },
-        ChangeDetectorRef
-      ]
+        ChangeDetectorRef,
+      ],
     })
+      .overrideComponent(AdvancedTopSectionComponent, {
+        remove: { imports: [ThemedLoadingComponent, ThemedBrowseMostElementsComponent] },
+      })
       .compileComponents();
   }));
 

@@ -1,23 +1,40 @@
 import { Injectable } from '@angular/core';
-import { combineLatest as observableCombineLatest, EMPTY, expand, from, Observable, reduce } from 'rxjs';
-import { map, mergeMap, toArray } from 'rxjs/operators';
+import {
+  combineLatest as observableCombineLatest,
+  EMPTY,
+  from,
+  Observable,
+} from 'rxjs';
+import {
+  expand,
+  map,
+  mergeMap,
+  reduce,
+  toArray,
+} from 'rxjs/operators';
+
 import { hasValue } from '../../shared/empty.util';
-import { followLink, FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
+import {
+  followLink,
+  FollowLinkConfig,
+} from '../../shared/utils/follow-link-config.model';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
+import { RequestParam } from '../cache/models/request-param.model';
+import { ObjectCacheService } from '../cache/object-cache.service';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { ItemType } from '../shared/item-relationships/item-type.model';
 import { RelationshipType } from '../shared/item-relationships/relationship-type.model';
-import { RELATIONSHIP_TYPE } from '../shared/item-relationships/relationship-type.resource-type';
-import { getFirstCompletedRemoteData, getFirstSucceededRemoteData, getRemoteDataPayload } from '../shared/operators';
-import { PaginatedList } from './paginated-list.model';
-import { RemoteData } from './remote-data';
-import { RequestService } from './request.service';
+import {
+  getFirstCompletedRemoteData,
+  getFirstSucceededRemoteData,
+  getRemoteDataPayload,
+} from '../shared/operators';
 import { BaseDataService } from './base/base-data.service';
 import { FindAllDataImpl } from './base/find-all-data';
 import { SearchDataImpl } from './base/search-data';
-import { ObjectCacheService } from '../cache/object-cache.service';
-import { dataService } from './base/data-service.decorator';
-import { RequestParam } from '../cache/models/request-param.model';
+import { PaginatedList } from './paginated-list.model';
+import { RemoteData } from './remote-data';
+import { RequestService } from './request.service';
 
 /**
  * Check if one side of a RelationshipType is the ItemType with the given label
@@ -31,8 +48,7 @@ const checkSide = (typeRd: RemoteData<ItemType>, label: string): boolean =>
 /**
  * The service handling all relationship type requests
  */
-@Injectable()
-@dataService(RELATIONSHIP_TYPE)
+@Injectable({ providedIn: 'root' })
 export class RelationshipTypeDataService extends BaseDataService<RelationshipType> {
   private searchData: SearchDataImpl<RelationshipType>;
   private findAllData: FindAllDataImpl<RelationshipType>;
@@ -73,7 +89,7 @@ export class RelationshipTypeDataService extends BaseDataService<RelationshipTyp
           if (currentPage < totalPages) {
             const nextPageInfo = { currentPage: currentPage + 1, elementsPerPage: 20 };
             return this.findAllData.findAll(nextPageInfo, true, true, followLink('leftType'), followLink('rightType')).pipe(
-              getFirstSucceededRemoteData()
+              getFirstSucceededRemoteData(),
             );
           } else {
             return EMPTY;
@@ -119,7 +135,7 @@ export class RelationshipTypeDataService extends BaseDataService<RelationshipTyp
   private checkType(type: RelationshipType, leftItemType: string, rightItemType: string): Observable<RelationshipType> {
     return observableCombineLatest([
       type.leftType.pipe(getFirstCompletedRemoteData()),
-      type.rightType.pipe(getFirstCompletedRemoteData())
+      type.rightType.pipe(getFirstCompletedRemoteData()),
     ]).pipe(
       map(([leftTypeRD, rightTypeRD]: [RemoteData<ItemType>, RemoteData<ItemType>]) => {
         if (checkSide(leftTypeRD, leftItemType) && checkSide(rightTypeRD, rightItemType)
@@ -128,7 +144,7 @@ export class RelationshipTypeDataService extends BaseDataService<RelationshipTyp
         } else {
           return null;
         }
-      })
+      }),
     );
   }
 

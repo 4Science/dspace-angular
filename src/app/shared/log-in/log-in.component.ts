@@ -1,30 +1,66 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription, combineLatest } from 'rxjs';
-import { filter, map, shareReplay } from 'rxjs/operators';
-import { select, Store } from '@ngrx/store';
+import {
+  AsyncPipe,
+  NgFor,
+  NgIf,
+} from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  RouterLink,
+} from '@angular/router';
+import {
+  select,
+  Store,
+} from '@ngrx/store';
+import { TranslateModule } from '@ngx-translate/core';
 import uniqBy from 'lodash/uniqBy';
+import {
+  combineLatestWith,
+  map,
+  Observable,
+  Subscription,
+} from 'rxjs';
+import {
+  filter,
+  shareReplay,
+} from 'rxjs/operators';
 
+import { environment } from '../../../environments/environment';
+import {
+  getForgotPasswordRoute,
+  getRegisterRoute,
+} from '../../app-routing-paths';
+import { AuthService } from '../../core/auth/auth.service';
 import { AuthMethod } from '../../core/auth/models/auth.method';
+import { AuthMethodType } from '../../core/auth/models/auth.method-type';
 import {
   getAuthenticationError,
   getAuthenticationMethods,
   isAuthenticated,
-  isAuthenticationLoading
+  isAuthenticationLoading,
 } from '../../core/auth/selectors';
-import { getForgotPasswordRoute, getRegisterRoute } from '../../app-routing-paths';
-import { hasValue } from '../empty.util';
-import { AuthService } from '../../core/auth/auth.service';
 import { CoreState } from '../../core/core-state.model';
-import { rendersAuthMethodType } from './methods/log-in.methods-decorator';
-import { AuthMethodType } from '../../core/auth/models/auth.method-type';
-import { FeatureID } from '../../core/data/feature-authorization/feature-id';
 import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
+import { FeatureID } from '../../core/data/feature-authorization/feature-id';
+import { hasValue } from '../empty.util';
+import { ThemedLoadingComponent } from '../loading/themed-loading.component';
+import { BrowserOnlyPipe } from '../utils/browser-only.pipe';
+import { LogInContainerComponent } from './container/log-in-container.component';
+import { rendersAuthMethodType } from './methods/log-in.methods-decorator';
 
 @Component({
-  selector: 'ds-log-in',
+  selector: 'ds-base-log-in',
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgIf, ThemedLoadingComponent, NgFor, LogInContainerComponent, AsyncPipe, RouterLink, BrowserOnlyPipe, TranslateModule],
 })
 export class LogInComponent implements OnInit, OnDestroy {
 
@@ -84,21 +120,22 @@ export class LogInComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<CoreState>,
               private authService: AuthService,
-              protected authorizationService: AuthorizationDataService
+              private route: ActivatedRoute,
+              protected authorizationService: AuthorizationDataService,
   ) {
   }
 
   ngOnInit(): void {
     this.authMethods = this.store.pipe(
       select(getAuthenticationMethods),
-      map((methods: AuthMethod[]) => methods
-        // ignore the given auth method if it should be excluded
-        .filter((authMethod: AuthMethod) => authMethod.authMethodType !== this.excludedAuthMethod)
-        .filter((authMethod: AuthMethod) => rendersAuthMethodType(authMethod.authMethodType) !== undefined)
-        .sort((method1: AuthMethod, method2: AuthMethod) => method1.position - method2.position),
-      ),
+      combineLatestWith(
+        this.route.data.pipe(
+          filter(routeData => !!routeData),
+          map(data => data.isBackDoor),
+        )),
+      map(([methods, isBackdoor]) => this.filterAndSortAuthMethods(methods, isBackdoor, environment.auth.disableStandardLogin)),
       // ignore the ip authentication method when it's returned by the backend
-      map((authMethods: AuthMethod[]) => uniqBy(authMethods.filter(a => a.authMethodType !== AuthMethodType.Ip), 'authMethodType'))
+      map((authMethods: AuthMethod[]) => uniqBy(authMethods.filter(a => a.authMethodType !== AuthMethodType.Ip), 'authMethodType')),
     );
 
     // set loading
@@ -116,13 +153,31 @@ export class LogInComponent implements OnInit, OnDestroy {
 
     this.canRegister$ = this.authorizationService.isAuthorized(FeatureID.EPersonRegistration);
 
-    this.canForgot$ = this.authorizationService.isAuthorized(FeatureID.EPersonForgotPassword).pipe(shareReplay(1));
-    this.canShowDivider$ =
-        combineLatest([this.canRegister$, this.canForgot$])
-            .pipe(
-                map(([canRegister, canForgot]) => canRegister || canForgot),
-                filter(Boolean)
-            );
+    this.canForgot$ = this.authorizationService.isAuthorized(FeatureID.EPersonForgotPassword).pipe(shareReplay({ refCount: false, bufferSize: 1 }));
+    this.canShowDivider$ = this.canRegister$.pipe(
+      combineLatestWith(this.canForgot$),
+      map(([canRegister, canForgot]) => (canRegister || canForgot) && (!environment.auth.disableStandardLogin || this.isStandalonePage)),
+      filter(Boolean),
+    );
+  }
+
+  filterAndSortAuthMethods(authMethods: AuthMethod[], isBackdoor: boolean, isStandardLoginDisabled = false): AuthMethod[] {
+    return authMethods.filter((authMethod: AuthMethod) => {
+      const methodComparison = (authM) => {
+        if (isBackdoor) {
+          return authM.authMethodType === AuthMethodType.Password;
+        }
+        if (isStandardLoginDisabled) {
+          return authM.authMethodType !== AuthMethodType.Password;
+        }
+        return true;
+
+      };
+      return methodComparison(authMethod) &&
+          authMethod.authMethodType !== this.excludedAuthMethod &&
+          rendersAuthMethodType(authMethod.authMethodType) !== undefined;
+    },
+    ).sort((method1: AuthMethod, method2: AuthMethod) => method1.position - method2.position);
   }
 
   getRegisterRoute() {

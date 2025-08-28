@@ -1,7 +1,12 @@
-import { TextSelectDirective } from './text-select.directive';
-import { ApplicationRef, ElementRef, NgZone } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import { DOCUMENT } from '@angular/common';
+import {
+  ApplicationRef,
+  ElementRef,
+  NgZone,
+} from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+
+import { TextSelectDirective } from './text-select.directive';
 
 describe('TextSelectDirective', () => {
   let directive: TextSelectDirective;
@@ -17,7 +22,7 @@ describe('TextSelectDirective', () => {
         { provide: ApplicationRef, useValue: { attachView: () => ({ rootNodes: [{}] }) } },
         { provide: ElementRef, useValue: { nativeElement: document.createElement('div') } },
         { provide: NgZone, useValue: new NgZone({}) },
-      ]
+      ],
     });
 
     directive = TestBed.inject(TextSelectDirective);
@@ -51,7 +56,7 @@ describe('TextSelectDirective', () => {
     spyOn(document, 'getSelection').and.returnValue(selection as any);
     spyOn(directive, 'getRangeContainer').and.returnValue(elementRef.nativeElement);
     spyOn(elementRef.nativeElement, 'contains').and.returnValue(true);
-    spyOn(directive, 'createTooltipComponent').and.returnValue({ instance: {}, hostView: {rootNodes: []} } as any);
+    spyOn(directive, 'createTooltipComponent').and.returnValue({ instance: {}, hostView: { rootNodes: [] } } as any);
     spyOn(document.body, 'appendChild').and.returnValue({} as Node);
     spyOn(appRef, 'attachView').and.returnValue();
 

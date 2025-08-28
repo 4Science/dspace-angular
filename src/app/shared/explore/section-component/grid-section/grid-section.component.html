@@ -14,20 +14,27 @@
             class="btn btn-dark position-absolute m-5">{{ 'explore.grid-section.seeAll' | translate }}
     </button>
   </div>
-  <ng-container *ngIf="isBrowser && !isLoading; else skeletons">
-    <ng-container *ngFor="let item of searchResults | slice:0:8; index as i">
-      <div class="bg-light text-center position-relative border border-dark d-flex flex-column
-              justify-content-between align-items-center"
-           [dsBackgroundImage]="(itemToImageHrefMap$ | async).get(item.indexableObject?.uuid)">
-        <a [routerLink]="[getItemPageRoute(item.indexableObject)]" class="mw-100 p-3">
-          <p class="text-center m-0 text-truncate">{{ item.indexableObject?.firstMetadataValue('dc.title') }}</p>
-        </a>
-      </div>
-    </ng-container>
-  </ng-container>
+  @defer {
+    @if (!isLoading) {
+      @for (item of (searchResults | slice:0:8); track item.indexableObject?.uuid) {
+        <div class="cris-section-element-background text-center position-relative d-flex flex-column
+              justify-content-between align-items-center path-item"
+             [dsBackgroundImage]="(itemToImageHrefMap$ | async).get(item.indexableObject?.uuid)"
+        >
+          <a [routerLink]="[getItemPageRoute(item.indexableObject)]" class="mw-100 p-3">
+            <p class="text-center m-0 text-truncate">{{ item.indexableObject?.firstMetadataValue('dc.title') }}</p>
+          </a>
+        </div>
+      }
+    } @else {
+      <ng-container *ngTemplateOutlet="skeletons"></ng-container>
+    }
+  } @placeholder {
+      <ng-container *ngTemplateOutlet="skeletons"></ng-container>
+  }
   <ng-template #skeletons>
-    <ngx-skeleton-loader *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8]"
-                         class="w-100 h-100 aspect-ratio-1"
-                         [theme]="{height: '100%', width: '100%'}"></ngx-skeleton-loader>
+    @for (i of [1, 2, 3, 4, 5, 6, 7, 8]; track i) {
+      <ngx-skeleton-loader class="w-100 h-100 aspect-ratio-1" [theme]="{height: '100%', width: '100%'}"></ngx-skeleton-loader>
+    }
   </ng-template>
 </div>

@@ -1,15 +1,23 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
 
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-
-import { LonghtmlComponent } from './longhtml.component';
-import { Item } from '../../../../../../../core/shared/item.model';
-import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate-loader.mock';
-import { DsDatePipe } from '../../../../../../pipes/ds-date.pipe';
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
+import { Item } from '../../../../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
+import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate-loader.mock';
+import { TruncatableComponent } from '../../../../../../../shared/truncatable/truncatable.component';
+import { TruncatablePartComponent } from '../../../../../../../shared/truncatable/truncatable-part/truncatable-part.component';
+import { DsDatePipe } from '../../../../../../pipes/ds-date.pipe';
+import { LonghtmlComponent } from './longhtml.component';
 
 describe('LonghtmlComponent', () => {
   let component: LonghtmlComponent;
@@ -20,17 +28,17 @@ describe('LonghtmlComponent', () => {
     'language': null,
     'authority': null,
     'confidence': -1,
-    'place': 0
+    'place': 0,
   });
 
   const testItem = Object.assign(new Item(),
     {
       type: 'item',
       metadata: {
-        'dc.title': [metadataValue]
+        'dc.title': [metadataValue],
       },
       uuid: 'test-item-uuid',
-    }
+    },
   );
 
 
@@ -43,17 +51,22 @@ describe('LonghtmlComponent', () => {
     'styleLabel': 'test-style-label',
     'styleValue': 'test-style-value',
     'labelAsHeading': false,
-    'valuesInline': true
+    'valuesInline': true,
   };
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useClass: TranslateLoaderMock
-        }
-      }), BrowserAnimationsModule],
+      imports: [
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock,
+          },
+        }),
+        BrowserAnimationsModule,
+        LonghtmlComponent,
+        DsDatePipe,
+      ],
       providers: [
         { provide: 'fieldProvider', useValue: mockField },
         { provide: 'itemProvider', useValue: testItem },
@@ -61,8 +74,7 @@ describe('LonghtmlComponent', () => {
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
       ],
-      declarations: [LonghtmlComponent, DsDatePipe]
-    })
+    }).overrideComponent(LonghtmlComponent, { remove: { imports: [ TruncatableComponent, TruncatablePartComponent] } })
       .compileComponents();
   }));
 

@@ -1,9 +1,13 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
 
-import { CountersSectionComponent } from './counters-section.component';
-import { SearchService } from '../../../../../../../app/core/shared/search/search.service';
 import { NativeWindowService } from '../../../../../../../app/core/services/window.service';
+import { SearchService } from '../../../../../../../app/core/shared/search/search.service';
 import { NativeWindowMockFactory } from '../../../../../../../app/shared/mocks/mock-native-window-ref';
+import { CountersSectionComponent } from './counters-section.component';
 
 xdescribe('CountersSectionComponent', () => {
   let component: CountersSectionComponent;
@@ -15,9 +19,9 @@ xdescribe('CountersSectionComponent', () => {
       providers: [
         { provide: SearchService, useValue: {} },
         { provide: NativeWindowService, useFactory: NativeWindowMockFactory },
-      ]
+      ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

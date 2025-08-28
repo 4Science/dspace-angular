@@ -1,7 +1,11 @@
-import { Directive, ViewContainerRef } from '@angular/core';
+import {
+  Directive,
+  ViewContainerRef,
+} from '@angular/core';
 
 @Directive({
-  selector: '[dsViewerProvider]'
+  selector: '[dsViewerProvider]',
+  standalone: true,
 })
 export class ViewerProviderDirective {
 

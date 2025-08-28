@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
   ApplicationRef,
   ComponentRef,
@@ -10,13 +11,14 @@ import {
   Input,
   NgZone,
   OnDestroy,
-  OnInit
+  OnInit,
 } from '@angular/core';
+
 import { TextSelectionTooltipComponent } from './text-selection-tooltip/text-selection-tooltip.component';
-import { DOCUMENT } from '@angular/common';
 
 @Directive({
   selector: '[dsTextSelectTooltip]',
+  standalone: true,
 })
 export class TextSelectDirective implements OnInit, OnDestroy {
 
@@ -34,7 +36,7 @@ export class TextSelectDirective implements OnInit, OnDestroy {
     private elementRef: ElementRef,
     private zone: NgZone,
     private appRef: ApplicationRef,
-    private injector: EnvironmentInjector
+    private injector: EnvironmentInjector,
   ) {
   }
 
@@ -72,7 +74,7 @@ export class TextSelectDirective implements OnInit, OnDestroy {
   };
 
   createTooltipComponent(): ComponentRef<TextSelectionTooltipComponent> {
-    return createComponent(TextSelectionTooltipComponent, {environmentInjector: this.injector});
+    return createComponent(TextSelectionTooltipComponent, { environmentInjector: this.injector });
   }
 
   processSelection(): void {
@@ -94,12 +96,12 @@ export class TextSelectDirective implements OnInit, OnDestroy {
     if (!selection.rangeCount || !stringSelection || previousSelection === stringSelection) {
       return;
     }
-    let range = selection.getRangeAt(0);
-    let rangeContainer = this.getRangeContainer(range);
+    const range = selection.getRangeAt(0);
+    const rangeContainer = this.getRangeContainer(range);
     // check if the range container is inside the current element
     // (to avoid showing the tooltip when selecting text in other elements)
     if (this.elementRef.nativeElement.contains(rangeContainer)) {
-      let viewportRectangle = range.getBoundingClientRect();
+      const viewportRectangle = range.getBoundingClientRect();
       if (stringSelection) {
         this.zone.runGuarded(() => {
           this.hasSelection = true;

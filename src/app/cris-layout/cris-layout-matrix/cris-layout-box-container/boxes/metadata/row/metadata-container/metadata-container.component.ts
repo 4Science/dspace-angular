@@ -1,30 +1,74 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { Item } from '../../../../../../../core/shared/item.model';
-import { CrisLayoutBox, LayoutField, LayoutFieldType } from '../../../../../../../core/layout/models/box.model';
 import {
-  FieldRenderingType,
-  getMetadataBoxFieldRendering,
-  MetadataBoxFieldRenderOptions,
-} from '../../rendering-types/metadata-box.decorator';
-import { hasValue, isEmpty, isNotEmpty } from '../../../../../../../shared/empty.util';
-import { TranslateService } from '@ngx-translate/core';
-import { environment } from '../../../../../../../../environments/environment';
-import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
-import { Bitstream } from '../../../../../../../core/shared/bitstream.model';
-import { getFirstCompletedRemoteData } from '../../../../../../../core/shared/operators';
-import { map, take } from 'rxjs/operators';
-import { BitstreamDataService, MetadataFilter } from '../../../../../../../core/data/bitstream-data.service';
-import { RemoteData } from '../../../../../../../core/data/remote-data';
-import { PaginatedList } from '../../../../../../../core/data/paginated-list.model';
+  NgClass,
+  NgFor,
+  NgIf,
+} from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 import { Observable } from 'rxjs';
-import { inject } from '@angular/core';
-import { LoadMoreService, NestedMetadataGroupEntry } from '../../../../../../services/load-more.service';
+import {
+  map,
+  take,
+} from 'rxjs/operators';
+
+import { CRIS_FIELD_RENDERING_MAP } from '../../../../../../../../config/app-config.interface';
+import { environment } from '../../../../../../../../environments/environment';
+import {
+  BitstreamDataService,
+  MetadataFilter,
+} from '../../../../../../../core/data/bitstream-data.service';
+import { PaginatedList } from '../../../../../../../core/data/paginated-list.model';
+import { RemoteData } from '../../../../../../../core/data/remote-data';
+import {
+  CrisLayoutBox,
+  LayoutField,
+  LayoutFieldType,
+} from '../../../../../../../core/layout/models/box.model';
+import { Bitstream } from '../../../../../../../core/shared/bitstream.model';
+import { Item } from '../../../../../../../core/shared/item.model';
+import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
+import { getFirstCompletedRemoteData } from '../../../../../../../core/shared/operators';
+import {
+  hasValue,
+  isNotEmpty,
+} from '../../../../../../../shared/empty.util';
+import {
+  LoadMoreService,
+  NestedMetadataGroupEntry,
+} from '../../../../../../services/load-more.service';
+import { FieldRenderingType } from '../../rendering-types/field-rendering-type';
+import {
+  computeRenderingFn,
+  getMetadataBoxFieldRenderOptionsFn,
+} from '../../rendering-types/metadata-box.decorator';
+import { MetadataBoxFieldRenderOptions } from '../../rendering-types/metadata-box-field-render-options';
+import { MetadataRenderComponent } from './metadata-render/metadata-render.component';
 
 @Component({
   selector: 'ds-metadata-container',
   templateUrl: './metadata-container.component.html',
   styleUrls: ['./metadata-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    NgIf,
+    NgFor,
+    MetadataRenderComponent,
+    NgClass,
+    TranslateModule,
+    NgbTooltipModule,
+  ],
 })
 export class MetadataContainerComponent implements OnInit {
   /**
@@ -102,6 +146,7 @@ export class MetadataContainerComponent implements OnInit {
   protected readonly bitstreamDataService = inject(BitstreamDataService);
   protected readonly translateService = inject(TranslateService);
   protected readonly cd = inject(ChangeDetectorRef);
+  protected readonly layoutBoxesMap: Map<FieldRenderingType, MetadataBoxFieldRenderOptions> = inject(CRIS_FIELD_RENDERING_MAP);
   protected readonly loadMoreService = inject(LoadMoreService);
 
   /**
@@ -122,7 +167,7 @@ export class MetadataContainerComponent implements OnInit {
    * Returns a string representing the label of field if exists
    */
   getLabel(): string {
-    if (this.field.fieldType === LayoutFieldType.BITSTREAM) {
+    if (this.field.fieldType === LayoutFieldType.BITSTREAM.toString()) {
       return (hasValue(this.field.bitstream.metadataValue) ?
         this.getTranslationIfExists(`${this.fieldI18nPrefix}.${this.item.entityType}.BITSTREAM[${this.field.bitstream.metadataValue}]`) :
         this.getTranslationIfExists(`${this.fieldI18nPrefix}.${this.item.entityType}.BITSTREAM`)
@@ -161,8 +206,8 @@ export class MetadataContainerComponent implements OnInit {
   }
 
   ngOnInit() {
-    const rendering = this.computeRendering(this.field);
-    if (this.field.fieldType === LayoutFieldType.BITSTREAM
+    const rendering = computeRenderingFn(this.field?.rendering);
+    if (this.field.fieldType === LayoutFieldType.BITSTREAM.toString()
       && (rendering.toLocaleLowerCase() === FieldRenderingType.ATTACHMENT.toLocaleLowerCase()
         || rendering.toLocaleLowerCase() === FieldRenderingType.IMAGE.toLocaleLowerCase()
         || rendering.toLocaleLowerCase() === FieldRenderingType.ADVANCEDATTACHMENT.toLocaleLowerCase()
@@ -178,7 +223,7 @@ export class MetadataContainerComponent implements OnInit {
   }
 
   initRenderOptions(renderingType: string | FieldRenderingType): void {
-    this.metadataFieldRenderOptions = this.getMetadataBoxFieldRenderOptions(renderingType);
+    this.metadataFieldRenderOptions = getMetadataBoxFieldRenderOptionsFn(this.layoutBoxesMap, renderingType);
     this.isStructured = this.metadataFieldRenderOptions.structured;
     if (!this.isStructured && this.metadataValues.length > 1) {
       this.isLoadMore = true;
@@ -188,57 +233,38 @@ export class MetadataContainerComponent implements OnInit {
   }
 
   hasBitstream(): Observable<boolean> {
-    let filters: MetadataFilter[] = [];
+    const filters: MetadataFilter[] = [];
     if (isNotEmpty(this.field.bitstream.metadataValue)) {
       filters.push({
         metadataName: this.field.bitstream.metadataField,
-        metadataValue: this.field.bitstream.metadataValue
+        metadataValue: this.field.bitstream.metadataValue,
       });
     }
-    return this.bitstreamDataService.findShowableBitstreamsByItem(this.item.uuid, this.field.bitstream.bundle, filters, false)
+    return this.bitstreamDataService.findShowableBitstreamsByItem(this.item.uuid, this.field.bitstream.bundle, filters, false, {}, false)
       .pipe(
         getFirstCompletedRemoteData(),
         map((response: RemoteData<PaginatedList<Bitstream>>) => {
           return response.hasSucceeded && response.payload.page.length > 0;
-        })
+        }),
       );
   }
 
   hasFieldMetadataComponent(field: LayoutField) {
-    // if it is metadatagroup and none of the nested metadatas has values then dont generate the component
+    // if it is metadata-group and none of the nested metadata has values then don't generate the component
     let existOneMetadataWithValue = false;
-    if (field.fieldType === LayoutFieldType.METADATAGROUP) {
+    if (field.fieldType === LayoutFieldType.METADATAGROUP.toString()) {
       field.metadataGroup.elements.forEach(el => {
         if (this.item.metadata[el.metadata]) {
           existOneMetadataWithValue = true;
         }
       });
     }
-    return (this.field.fieldType === LayoutFieldType.BITSTREAM) ||
-      (field.fieldType === LayoutFieldType.METADATAGROUP && existOneMetadataWithValue) ||
-      (field.fieldType === LayoutFieldType.METADATA && this.item.firstMetadataValue(field.metadata));
+    return (this.field.fieldType === LayoutFieldType.BITSTREAM.toString()) ||
+      (field.fieldType === LayoutFieldType.METADATAGROUP.toString() && existOneMetadataWithValue) ||
+      (field.fieldType === LayoutFieldType.METADATA.toString() && this.item.firstMetadataValue(field.metadata));
   }
 
-  computeRendering(field: LayoutField): string | FieldRenderingType {
-    let rendering = hasValue(field.rendering) ? field.rendering : FieldRenderingType.TEXT;
-
-    if (rendering.indexOf('.') > -1) {
-      const values = rendering.split('.');
-      rendering = values[0];
-    }
-    return rendering;
-  }
-
-  getMetadataBoxFieldRenderOptions(fieldRenderingType: string): MetadataBoxFieldRenderOptions {
-    let renderOptions = getMetadataBoxFieldRendering(fieldRenderingType);
-    // If the rendering type not exists will use TEXT type rendering
-    if (isEmpty(renderOptions)) {
-      renderOptions = getMetadataBoxFieldRendering(FieldRenderingType.TEXT);
-    }
-    return renderOptions;
-  }
-
-  trackUpdate(index, value: string) {
+  trackUpdate(index: number, value: string) {
     return value;
   }
 
@@ -252,7 +278,7 @@ export class MetadataContainerComponent implements OnInit {
     this.metadataValues.forEach((metadataValue, index) => {
       const entry = {
         field: this.field,
-        value: this.getMetadataValue(this.field, index)
+        value: this.getMetadataValue(this.field, index),
       } as NestedMetadataGroupEntry;
       if (this.componentsToBeRenderedMap.has(index)) {
         const newEntries = [...this.componentsToBeRenderedMap.get(index), entry];
@@ -268,12 +294,12 @@ export class MetadataContainerComponent implements OnInit {
    * Set the limits of how many data loded from first and last
    */
   setData(functionName: string) {
-      const {firstLimitedDataToBeRenderedMap, lastLimitedDataToBeRenderedMap, isConfigured, firstLimit, lastLimit} =  functionName === 'getComputedData'  ? this.loadMoreService.getComputedData(this.componentsToBeRenderedMap,this.field.rendering) : this.loadMoreService.fillAllData(this.componentsToBeRenderedMap,this.field.rendering);
-      this.firstLimitedDataToBeRenderedMap = firstLimitedDataToBeRenderedMap;
-      this.lastLimitedDataToBeRenderedMap = lastLimitedDataToBeRenderedMap;
-      this.isConfigured = isConfigured;
-      this.firstLimit = firstLimit;
-      this.lastLimit = lastLimit;
+    const { firstLimitedDataToBeRenderedMap, lastLimitedDataToBeRenderedMap, isConfigured, firstLimit, lastLimit } =  functionName === 'getComputedData'  ? this.loadMoreService.getComputedData(this.componentsToBeRenderedMap,this.field.rendering) : this.loadMoreService.fillAllData(this.componentsToBeRenderedMap,this.field.rendering);
+    this.firstLimitedDataToBeRenderedMap = firstLimitedDataToBeRenderedMap;
+    this.lastLimitedDataToBeRenderedMap = lastLimitedDataToBeRenderedMap;
+    this.isConfigured = isConfigured;
+    this.firstLimit = firstLimit;
+    this.lastLimit = lastLimit;
   }
 
 }

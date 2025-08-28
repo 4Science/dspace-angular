@@ -1,64 +1,68 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { DsDynamicMarkdownComponent } from './dynamic-markdown.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+
+import { DsDynamicMarkdownComponent } from './dynamic-markdown.component';
 
 describe('DsDynamicMarkdownComponent', () => {
-    let component: DsDynamicMarkdownComponent;
-    let fixture: ComponentFixture<DsDynamicMarkdownComponent>;
+  let component: DsDynamicMarkdownComponent;
+  let fixture: ComponentFixture<DsDynamicMarkdownComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-        declarations: [DsDynamicMarkdownComponent],
-        imports: [],
-        providers: [],
-        schemas: [NO_ERRORS_SCHEMA]
-        }).compileComponents();
-    }));
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [DsDynamicMarkdownComponent],
+      providers: [],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
+  }));
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(DsDynamicMarkdownComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(DsDynamicMarkdownComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-    it('should initialize correctly', () => {
-        expect(component.bindId).toBe(true);
+  it('should initialize correctly', () => {
+    expect(component.bindId).toBe(true);
 
-        expect(component.blur).toBeDefined();
-        expect(component.change).toBeDefined();
-        expect(component.focus).toBeDefined();
+    expect(component.blur).toBeDefined();
+    expect(component.change).toBeDefined();
+    expect(component.focus).toBeDefined();
 
-        expect(component.onBlur).toBeDefined();
-        expect(component.onChange).toBeDefined();
-        expect(component.onFocus).toBeDefined();
-    });
+    expect(component.onBlur).toBeDefined();
+    expect(component.onChange).toBeDefined();
+    expect(component.onFocus).toBeDefined();
+  });
 
-    it('should emit blur event', () => {
-        spyOn(component.blur, 'emit');
+  it('should emit blur event', () => {
+    spyOn(component.blur, 'emit');
 
-        component.onBlur(null);
+    component.onBlur(null);
 
-        expect(component.blur.emit).toHaveBeenCalled();
-    });
+    expect(component.blur.emit).toHaveBeenCalled();
+  });
 
-    it('should emit change event', () => {
-        spyOn(component.change, 'emit');
+  it('should emit change event', () => {
+    spyOn(component.change, 'emit');
 
-        component.onChange(null);
+    component.onChange(null);
 
-        expect(component.change.emit).toHaveBeenCalled();
-    });
+    expect(component.change.emit).toHaveBeenCalled();
+  });
 
-    it('should emit focus event', () => {
-        spyOn(component.focus, 'emit');
+  it('should emit focus event', () => {
+    spyOn(component.focus, 'emit');
 
-        component.onFocus(null);
+    component.onFocus(null);
 
-        expect(component.focus.emit).toHaveBeenCalled();
-    });
+    expect(component.focus.emit).toHaveBeenCalled();
+  });
 
 });

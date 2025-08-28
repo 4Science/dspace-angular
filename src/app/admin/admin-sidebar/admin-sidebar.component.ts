@@ -1,32 +1,55 @@
-import { Component, HostListener, Injector, Input, OnInit } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, first, map, withLatestFrom } from 'rxjs/operators';
+import {
+  AsyncPipe,
+  NgClass,
+  NgComponentOutlet,
+  NgFor,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  HostListener,
+  Injector,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import {
+  BehaviorSubject,
+  combineLatest,
+  Observable,
+} from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  first,
+  map,
+  withLatestFrom,
+} from 'rxjs/operators';
+
 import { AuthService } from '../../core/auth/auth.service';
+import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 import { slideSidebar } from '../../shared/animations/slide';
 import { MenuComponent } from '../../shared/menu/menu.component';
 import { MenuService } from '../../shared/menu/menu.service';
-import { CSSVariableService } from '../../shared/sass-helper/css-variable.service';
-import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 import { MenuID } from '../../shared/menu/menu-id.model';
-import { ActivatedRoute } from '@angular/router';
 import { MenuSection } from '../../shared/menu/menu-section.model';
+import { CSSVariableService } from '../../shared/sass-helper/css-variable.service';
 import { ThemeService } from '../../shared/theme-support/theme.service';
 
 /**
  * Component representing the admin sidebar
  */
 @Component({
-  selector: 'ds-admin-sidebar',
+  selector: 'ds-base-admin-sidebar',
   templateUrl: './admin-sidebar.component.html',
   styleUrls: ['./admin-sidebar.component.scss'],
-  animations: [slideSidebar]
+  animations: [slideSidebar],
+  standalone: true,
+  imports: [NgIf, NgbDropdownModule, NgClass, NgFor, NgComponentOutlet, AsyncPipe, TranslateModule],
 })
 export class AdminSidebarComponent extends MenuComponent implements OnInit {
-  /**
-   * The menu ID of the Navbar is PUBLIC
-   * @type {MenuID.ADMIN}
-   */
-  menuID = MenuID.ADMIN;
 
   /**
    * Observable that emits the width of the sidebar when expanded
@@ -37,6 +60,17 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
    * Observable that emits the width of the sidebar when collapsed
    */
   @Input() collapsedSidebarWidth$: Observable<string>;
+
+  /**
+   * The menu ID of the Navbar is PUBLIC
+   * @type {MenuID.ADMIN}
+   */
+  menuID = MenuID.ADMIN;
+
+  /**
+   * Observable that emits the width of the collapsible menu sections
+   */
+  sidebarWidth: Observable<string>;
 
   /**
    * Is true when the sidebar is open, is false when the sidebar is animating or closed
@@ -70,7 +104,7 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
     private authService: AuthService,
     public authorizationService: AuthorizationDataService,
     public route: ActivatedRoute,
-    protected themeService: ThemeService
+    protected themeService: ThemeService,
   ) {
     super(menuService, injector, authorizationService, route, themeService);
     this.inFocus$ = new BehaviorSubject(false);
@@ -81,11 +115,12 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
    */
   ngOnInit(): void {
     super.ngOnInit();
+    this.sidebarWidth = this.variableService.getVariable('--ds-sidebar-items-width');
     combineLatest([
       this.authService.isAuthenticated(),
       this.menuService.getMenuTopSections(this.menuID).pipe(
-        map((topSections: MenuSection[]) => topSections.length > 0)
-      )
+        map((topSections: MenuSection[]) => topSections.length > 0),
+      ),
     ]).subscribe(([loggedIn, hasTopSections]: [boolean, boolean]) => {
       // admin sidebar menu hidden by default when no visible top sections are found
       if (loggedIn && hasTopSections) {
@@ -100,13 +135,13 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
       });
     this.sidebarExpanded = combineLatest([this.menuCollapsed, this.menuPreviewCollapsed])
       .pipe(
-        map(([collapsed, previewCollapsed]) => (!collapsed || !previewCollapsed))
+        map(([collapsed, previewCollapsed]) => (!collapsed || !previewCollapsed)),
       );
     this.inFocus$.pipe(
       debounceTime(50),
       distinctUntilChanged(),  // disregard focusout in situations like --(focusout)-(focusin)--
       withLatestFrom(
-        combineLatest([this.menuCollapsed, this.menuPreviewCollapsed])
+        combineLatest([this.menuCollapsed, this.menuPreviewCollapsed]),
       ),
     ).subscribe(([inFocus, [collapsed, previewCollapsed]]) => {
       if (collapsed) {

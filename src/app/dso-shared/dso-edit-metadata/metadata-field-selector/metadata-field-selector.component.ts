@@ -1,4 +1,10 @@
 import {
+  AsyncPipe,
+  NgClass,
+  NgFor,
+  NgIf,
+} from '@angular/common';
+import {
   AfterViewInit,
   Component,
   ElementRef,
@@ -7,15 +13,18 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
-import { debounceTime, map, startWith, switchMap, take, tap } from 'rxjs/operators';
-import { followLink } from '../../../shared/utils/follow-link-config.model';
 import {
-  getAllSucceededRemoteData,
-  getFirstCompletedRemoteData,
-  metadataFieldsToString
-} from '../../../core/shared/operators';
+  FormsModule,
+  ReactiveFormsModule,
+  UntypedFormControl,
+} from '@angular/forms';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import {
   BehaviorSubject,
   combineLatest as observableCombineLatest,
@@ -23,17 +32,38 @@ import {
   of,
   Subscription,
 } from 'rxjs';
+import {
+  debounceTime,
+  map,
+  startWith,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs/operators';
+
+import {
+  SortDirection,
+  SortOptions,
+} from '../../../core/cache/models/sort-options.model';
+import { FindListOptions } from '../../../core/data/find-list-options.model';
 import { RegistryService } from '../../../core/registry/registry.service';
-import { UntypedFormControl } from '@angular/forms';
+import {
+  getAllSucceededRemoteData,
+  getFirstCompletedRemoteData,
+  metadataFieldsToString,
+} from '../../../core/shared/operators';
 import { hasValue } from '../../../shared/empty.util';
+import { ThemedLoadingComponent } from '../../../shared/loading/themed-loading.component';
 import { NotificationsService } from '../../../shared/notifications/notifications.service';
-import { TranslateService } from '@ngx-translate/core';
-import { SortDirection, SortOptions } from '../../../core/cache/models/sort-options.model';
+import { ClickOutsideDirective } from '../../../shared/utils/click-outside.directive';
+import { followLink } from '../../../shared/utils/follow-link-config.model';
 
 @Component({
   selector: 'ds-metadata-field-selector',
   styleUrls: ['./metadata-field-selector.component.scss'],
   templateUrl: './metadata-field-selector.component.html',
+  standalone: true,
+  imports: [FormsModule, NgClass, ReactiveFormsModule, ClickOutsideDirective, NgIf, NgFor, AsyncPipe, TranslateModule, ThemedLoadingComponent, InfiniteScrollModule],
 })
 /**
  * Component displaying a searchable input for metadata-fields
@@ -99,6 +129,11 @@ export class MetadataFieldSelectorComponent implements OnInit, OnDestroy, AfterV
    * True when validate() is called and the mdField isn't present in the available metadata fields retrieved from the server
    */
   showInvalid = false;
+
+  searchOptions: FindListOptions = {
+    elementsPerPage: 10,
+    sort: new SortOptions('fieldName', SortDirection.ASC),
+  };
 
   /**
    * Subscriptions to unsubscribe from on destroy
@@ -182,7 +217,7 @@ export class MetadataFieldSelectorComponent implements OnInit, OnDestroy, AfterV
    * Upon subscribing to the returned observable, the showInvalid flag is updated accordingly to show the feedback under the input
    */
   validate(): Observable<boolean> {
-    return this.registryService.queryMetadataFields(this.mdField, null, true, false, followLink('schema')).pipe(
+    return this.registryService.queryMetadataFields(this.mdField, this.searchOptions, true, false, followLink('schema')).pipe(
       getFirstCompletedRemoteData(),
       switchMap((rd) => {
         if (rd.hasSucceeded) {

@@ -1,7 +1,13 @@
-import { Directive, Input, HostBinding, HostListener } from '@angular/core';
+import {
+  Directive,
+  HostBinding,
+  HostListener,
+  Input,
+} from '@angular/core';
 
 @Directive({
-    selector: '[dsBtnDisabled]'
+  selector: '[dsBtnDisabled]',
+  standalone: true,
 })
 
 /**
@@ -13,8 +19,8 @@ import { Directive, Input, HostBinding, HostListener } from '@angular/core';
 export class BtnDisabledDirective {
 
     @Input() set dsBtnDisabled(value: boolean) {
-        this.isDisabled = !!value;
-    }
+    this.isDisabled = !!value;
+  }
 
     /**
      * Binds the aria-disabled attribute to the directive's isDisabled property.
@@ -35,10 +41,10 @@ export class BtnDisabledDirective {
      */
     @HostListener('click', ['$event'])
     handleClick(event: Event) {
-        if (this.isDisabled) {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-        }
+      if (this.isDisabled) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
     }
 
     /**
@@ -48,10 +54,10 @@ export class BtnDisabledDirective {
      */
   @HostListener('keydown', ['$event'])
     handleKeydown(event: KeyboardEvent) {
-        if (this.isDisabled && (event.key === 'Enter' || event.key === 'Space')) {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-        }
+      if (this.isDisabled && (event.key === 'Enter' || event.key === 'Space')) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
     }
 }
 

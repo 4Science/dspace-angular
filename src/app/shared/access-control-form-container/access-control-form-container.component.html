@@ -17,6 +17,7 @@
                 {{ 'access-control-item-header-toggle' | translate }}
               </h2>
               <ds-switch
+                [ariaLabel]="(state.bitstream.toggleStatus ? 'access-control-item-toggle.disable' : 'access-control-item-toggle.enable') | translate"
                 [options]="switchOptions"
                 [(selectedValue)] = "state.item.toggleStatus"
                 (selectedValueChange) = "handleStatusChange('item', $event)">
@@ -71,6 +72,7 @@
                 {{'access-control-bitstream-header-toggle' | translate}}
               </h2>
               <ds-switch
+                [ariaLabel]="(state.bitstream.toggleStatus ? 'access-control-bitstream-toggle.disable' : 'access-control-bitstream-toggle.enable') | translate"
                 [options]="switchOptions"
                 [(selectedValue)] = "state.bitstream.toggleStatus"
                 (selectedValueChange) = "handleStatusChange('bitstream', $event)">

@@ -1,11 +1,17 @@
-import { ThemedComponent } from '../../../theme-support/themed.component';
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+} from '@angular/core';
+
 import { SliderSection } from '../../../../core/layout/models/section.model';
+import { ThemedComponent } from '../../../theme-support/themed.component';
 import { SliderSectionComponent } from './slider-section.component';
 
 @Component({
-  selector: 'ds-themed-slider-section',
+  selector: 'ds-slider-section',
   templateUrl: '../../../theme-support/themed.component.html',
+  standalone: true,
+  imports: [SliderSectionComponent],
 })
 export class ThemedSliderSectionComponent extends ThemedComponent<SliderSectionComponent> {
 

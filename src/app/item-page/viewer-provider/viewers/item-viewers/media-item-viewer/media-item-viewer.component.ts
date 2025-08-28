@@ -1,13 +1,27 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { NgIf } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Params,
+} from '@angular/router';
 
+import { MediaPlayerComponent } from '../../../../../shared/media-player/media-player.component';
 import { BaseItemViewerComponent } from '../base-item-viewer.component';
 
 @Component({
   selector: 'ds-media-item-viewer',
   templateUrl: './media-item-viewer.component.html',
   styleUrls: ['./media-item-viewer.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MediaPlayerComponent,
+    NgIf,
+  ],
 })
 export class MediaItemViewerComponent extends BaseItemViewerComponent implements OnInit {
 
@@ -17,7 +31,7 @@ export class MediaItemViewerComponent extends BaseItemViewerComponent implements
   bitstremUUID: string;
 
   constructor(
-    protected route: ActivatedRoute
+    protected route: ActivatedRoute,
   ) {
     super();
   }

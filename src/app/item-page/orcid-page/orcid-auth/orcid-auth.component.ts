@@ -1,22 +1,57 @@
-import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  AsyncPipe,
+  NgForOf,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import {
+  BehaviorSubject,
+  catchError,
+  Observable,
+} from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { NativeWindowRef, NativeWindowService } from '../../../core/services/window.service';
-import { Item } from '../../../core/shared/item.model';
-import { NotificationsService } from '../../../shared/notifications/notifications.service';
 import { RemoteData } from '../../../core/data/remote-data';
-import { ResearcherProfile } from '../../../core/profile/model/researcher-profile.model';
-import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { OrcidAuthService } from '../../../core/orcid/orcid-auth.service';
-import { createFailedRemoteDataObject } from '../../../shared/remote-data.utils';
-import { HttpErrorResponse } from '@angular/common/http';
+import { ResearcherProfile } from '../../../core/profile/model/researcher-profile.model';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../../core/services/window.service';
+import { Item } from '../../../core/shared/item.model';
+import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
+import { AlertComponent } from '../../../shared/alert/alert.component';
+import { AlertType } from '../../../shared/alert/alert-type';
+import { BtnDisabledDirective } from '../../../shared/btn-disabled.directive';
+import { NotificationsService } from '../../../shared/notifications/notifications.service';
+import { createFailedRemoteDataObjectFromError$ } from '../../../shared/remote-data.utils';
 
 @Component({
   selector: 'ds-orcid-auth',
   templateUrl: './orcid-auth.component.html',
-  styleUrls: ['./orcid-auth.component.scss']
+  styleUrls: ['./orcid-auth.component.scss'],
+  imports: [
+    TranslateModule,
+    AsyncPipe,
+    NgIf,
+    NgForOf,
+    AlertComponent,
+    BtnDisabledDirective,
+  ],
+  standalone: true,
 })
 export class OrcidAuthComponent implements OnInit, OnChanges {
 
@@ -28,12 +63,22 @@ export class OrcidAuthComponent implements OnInit, OnChanges {
   /**
    * The list of exposed orcid authorization scopes for the orcid profile
    */
-  profileAuthorizationScopes: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  profileAuthorizationScopes$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+
+  /**
+   * A boolean representing if user has authorizations
+   */
+  hasOrcidAuthorizations$: Observable<boolean>;
 
   /**
    * The list of all orcid authorization scopes missing in the orcid profile
    */
   missingAuthorizationScopes: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+
+  /**
+   * A boolean representing if user has missing authorizations
+   */
+  hasMissingOrcidAuthorizations$: Observable<boolean>;
 
   /**
    * The list of all orcid authorization scopes available
@@ -48,22 +93,25 @@ export class OrcidAuthComponent implements OnInit, OnChanges {
   /**
    * A boolean representing if orcid profile is linked
    */
-  private isOrcidLinked$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isOrcidLinked$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
    * A boolean representing if only admin can disconnect orcid profile
    */
-  private onlyAdminCanDisconnectProfileFromOrcid$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  onlyAdminCanDisconnectProfileFromOrcid$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
    * A boolean representing if owner can disconnect orcid profile
    */
-  private ownerCanDisconnectProfileFromOrcid$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  ownerCanDisconnectProfileFromOrcid$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  orcidNotLinkedMessage$: Observable<string>;
   /**
    * An event emitted when orcid profile is unliked successfully
    */
   @Output() unlink: EventEmitter<void> = new EventEmitter<void>();
+
+  readonly AlertType = AlertType;
 
   constructor(
     private orcidAuthService: OrcidAuthService,
@@ -78,6 +126,8 @@ export class OrcidAuthComponent implements OnInit, OnChanges {
       this.orcidAuthorizationScopes.next(scopes);
       this.initOrcidAuthSettings();
     });
+    this.hasOrcidAuthorizations$ = this.hasOrcidAuthorizations();
+    this.hasMissingOrcidAuthorizations$ = this.hasMissingOrcidAuthorizations();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -90,16 +140,9 @@ export class OrcidAuthComponent implements OnInit, OnChanges {
    * Check if the list of exposed orcid authorization scopes for the orcid profile has values
    */
   hasOrcidAuthorizations(): Observable<boolean> {
-    return this.profileAuthorizationScopes.asObservable().pipe(
-      map((scopes: string[]) => scopes.length > 0)
+    return this.profileAuthorizationScopes$.pipe(
+      map((scopes: string[]) => scopes.length > 0),
     );
-  }
-
-  /**
-   * Return the list of exposed orcid authorization scopes for the orcid profile
-   */
-  getOrcidAuthorizations(): Observable<string[]> {
-    return this.profileAuthorizationScopes.asObservable();
   }
 
   /**
@@ -107,22 +150,8 @@ export class OrcidAuthComponent implements OnInit, OnChanges {
    */
   hasMissingOrcidAuthorizations(): Observable<boolean> {
     return this.missingAuthorizationScopes.asObservable().pipe(
-      map((scopes: string[]) => scopes.length > 0)
+      map((scopes: string[]) => scopes.length > 0),
     );
-  }
-
-  /**
-   * Return the list of exposed orcid authorization scopes for the orcid profile
-   */
-  getMissingOrcidAuthorizations(): Observable<string[]> {
-    return this.profileAuthorizationScopes.asObservable();
-  }
-
-  /**
-   * Return a boolean representing if orcid profile is linked
-   */
-  isLinkedToOrcid(): Observable<boolean> {
-    return this.isOrcidLinked$.asObservable();
   }
 
   getOrcidNotLinkedMessage(): Observable<string> {
@@ -141,13 +170,6 @@ export class OrcidAuthComponent implements OnInit, OnChanges {
    */
   getAuthorizationDescription(scope: string) {
     return 'person.page.orcid.scope.' + scope.substring(1).replace('/', '-');
-  }
-
-  /**
-   * Return a boolean representing if only admin can disconnect orcid profile
-   */
-  onlyAdminCanDisconnectProfileFromOrcid(): Observable<boolean> {
-    return this.onlyAdminCanDisconnectProfileFromOrcid$.asObservable();
   }
 
   /**
@@ -173,7 +195,7 @@ export class OrcidAuthComponent implements OnInit, OnChanges {
     this.unlinkProcessing.next(true);
     this.orcidAuthService.unlinkOrcidByItem(this.item).pipe(
       getFirstCompletedRemoteData(),
-      catchError((err: HttpErrorResponse) => of(createFailedRemoteDataObject(err.message, err.status)))
+      catchError(createFailedRemoteDataObjectFromError$<ResearcherProfile>),
     ).subscribe((remoteData: RemoteData<ResearcherProfile>) => {
       this.unlinkProcessing.next(false);
       if (remoteData.hasFailed) {
@@ -204,6 +226,7 @@ export class OrcidAuthComponent implements OnInit, OnChanges {
     });
 
     this.isOrcidLinked$.next(this.orcidAuthService.isLinkedToOrcid(this.item));
+    this.orcidNotLinkedMessage$ = this.getOrcidNotLinkedMessage();
   }
 
   private setMissingOrcidAuthorizations(): void {
@@ -215,7 +238,7 @@ export class OrcidAuthComponent implements OnInit, OnChanges {
   }
 
   private setOrcidAuthorizationsFromItem(): void {
-    this.profileAuthorizationScopes.next(this.orcidAuthService.getOrcidAuthorizationScopesByItem(this.item));
+    this.profileAuthorizationScopes$.next(this.orcidAuthService.getOrcidAuthorizationScopesByItem(this.item));
   }
 
 }

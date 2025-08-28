@@ -16,6 +16,7 @@ import {
  */
 @Directive({
   selector: '[dsHoverOutside]',
+  standalone: true,
 })
 export class HoverOutsideDirective {
 

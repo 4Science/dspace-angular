@@ -1,20 +1,60 @@
-import {ChangeDetectionStrategy, Component, Inject, Input, OnDestroy, OnInit, PLATFORM_ID} from '@angular/core';
+import {
+  AsyncPipe,
+  isPlatformBrowser,
+  Location,
+  NgIf,
+} from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Item } from '../../core/shared/item.model';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import {
+  combineLatest,
+  Observable,
+  of,
+  Subscription,
+} from 'rxjs';
+import {
+  distinctUntilChanged,
+  map,
+  switchMap,
+  take,
+} from 'rxjs/operators';
+
+import {
+  APP_CONFIG,
+  AppConfig,
+} from '../../../config/app-config.interface';
+import { MiradorMetadataDownloadValue } from '../../../config/mirador-config.interfaces';
 import { environment } from '../../../environments/environment';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
-import { combineLatest, Observable, of, switchMap } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { isPlatformBrowser, Location } from '@angular/common';
-import { MiradorViewerService } from './mirador-viewer.service';
-import { HostWindowService, WidthCategory } from '../../shared/host-window.service';
 import { BundleDataService } from '../../core/data/bundle-data.service';
-import { NativeWindowRef, NativeWindowService } from '../../core/services/window.service';
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
-import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
-import { getFirstCompletedRemoteData } from '../../core/shared/operators';
-import { MiradorMetadataDownloadValue } from '../../../config/mirador-config.interfaces';
 import { DspaceRestService } from '../../core/dspace-rest/dspace-rest.service';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../core/services/window.service';
+import { Item } from '../../core/shared/item.model';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import {
+  HostWindowService,
+  WidthCategory,
+} from '../../shared/host-window.service';
+import { SafeUrlPipe } from '../../shared/utils/safe-url-pipe';
+import { VarDirective } from '../../shared/utils/var.directive';
+import { MiradorViewerService } from './mirador-viewer.service';
 
 const IFRAME_UPDATE_URL_MESSAGE = 'update-url';
 
@@ -24,12 +64,20 @@ interface IFrameMessageData {
   canvasIndex: string;
 }
 
+
 @Component({
   selector: 'ds-mirador-viewer',
   styleUrls: ['./mirador-viewer.component.scss'],
   templateUrl: './mirador-viewer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [MiradorViewerService]
+  imports: [
+    TranslateModule,
+    AsyncPipe,
+    NgIf,
+    SafeUrlPipe,
+    VarDirective,
+  ],
+  standalone: true,
 })
 export class MiradorViewerComponent implements OnInit, OnDestroy {
 
@@ -79,6 +127,10 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
 
   private downloadConfigKey: string;
 
+  private readonly isInItemPage = environment.advancedAttachmentRendering.showViewerOnSameItemPage;
+
+  private readonly subs: Subscription[] = [];
+
   constructor(
     private sanitizer: DomSanitizer,
     private viewerService: MiradorViewerService,
@@ -88,6 +140,8 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
     private location: Location,
     private configurationDataService: ConfigurationDataService,
     private restService: DspaceRestService,
+    private route: ActivatedRoute,
+    private router: Router,
     @Inject(APP_CONFIG) private appConfig: AppConfig,
     @Inject(PLATFORM_ID) private platformId: any,
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
@@ -156,10 +210,10 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
       // menu by hiding it for smaller viewports. This will not be
       // responsive to resizing.
       this.hostWindowService.widthCategory
-          .pipe(take(1))
-          .subscribe((category: WidthCategory) => {
-            this.notMobile = !(category === WidthCategory.XS || category === WidthCategory.SM);
-          });
+        .pipe(take(1))
+        .subscribe((category: WidthCategory) => {
+          this.notMobile = !(category === WidthCategory.XS || category === WidthCategory.SM);
+        });
 
       // Set the multi property. The default mirador configuration adds a right
       // thumbnail navigation panel to the viewer when multi is 'true'.
@@ -170,7 +224,7 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
         this.iframeViewerUrl = this.isDownloadEnabled$().pipe(
           map(( downloadEnabled) => {
             return this.getURL(downloadEnabled);
-          })
+          }),
         );
       } else {
         // Set the multi property based on the image count in IIIF-eligible bundles.
@@ -178,7 +232,7 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
         this.iframeViewerUrl = this.viewerService.getImageCount(
           this.object,
           this.bitstreamDataService,
-          this.bundleDataService
+          this.bundleDataService,
         ).pipe(
           switchMap(c => combineLatest([of(c), this.isDownloadEnabled$()])),
           map(([c, downloadEnabled]) => {
@@ -186,8 +240,12 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
               this.multi = true;
             }
             return this.getURL(downloadEnabled);
-          })
+          }),
         );
+      }
+
+      if (this.isInItemPage) {
+        this.reloadIframeOnUrlChange();
       }
     }
 
@@ -200,35 +258,35 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
     return combineLatest([
       this.configurationDataService.findByPropertyName(this.appConfig.mirador.downloadRestConfig)
         .pipe(
-          getFirstCompletedRemoteData()
+          getFirstCompletedRemoteData(),
         ),
       this.object.owningCollection
-        .pipe(getFirstCompletedRemoteData())
+        .pipe(getFirstCompletedRemoteData()),
     ]).pipe(
       map(([restPropertyDownloadConfig, owningCollection]) =>
         (this.object.firstMetadataValue(this.downloadConfigKey) ||
           owningCollection?.payload?.firstMetadataValue(this.downloadConfigKey) ||
-          restPropertyDownloadConfig?.payload?.values[0]) as MiradorMetadataDownloadValue
+          restPropertyDownloadConfig?.payload?.values[0]) as MiradorMetadataDownloadValue,
       ),
       switchMap((downloadLevel) => {
         return this.getIiifDownloadConfig().pipe(
           map((downloadConfig) => downloadLevel && downloadConfig.includes(downloadLevel)),
         );
-      })
+      }),
     );
   }
 
   getIiifDownloadConfig(): Observable<MiradorMetadataDownloadValue[]> {
     const href = `${this.appConfig.rest.baseUrl}/iiif/${this.object.id}/download`;
     return this.restService.get(href).pipe(
-      map(res => res.payload as MiradorMetadataDownloadValue[])
+      map(res => res.payload as MiradorMetadataDownloadValue[]),
     );
   }
 
   ngOnDestroy(): void {
     this._window.nativeWindow.removeEventListener('message', this.iframeMessageListener);
+    this.subs.forEach((sub) => sub.unsubscribe());
   }
-
 
   iframeMessageListener = (event: MessageEvent) => {
     const data: IFrameMessageData = event.data;
@@ -247,4 +305,30 @@ export class MiradorViewerComponent implements OnInit, OnDestroy {
       this.location.replaceState(newPathWithQuery);
     }
   };
+
+  private reloadIframeOnUrlChange(): void {
+    this.subs.push(
+      this.route.queryParams.pipe(distinctUntilChanged()).subscribe(params => {
+        const canvasId = params.canvasId;
+        const canvasIndex = params.canvasIndex;
+
+        let shouldReload = false;
+
+        if (canvasId && canvasId !== this.canvasId) {
+          this.canvasId = canvasId;
+          shouldReload = true;
+        }
+
+        if (canvasIndex && canvasIndex !== this.canvasIndex) {
+          this.canvasIndex = canvasIndex;
+          shouldReload = true;
+        }
+
+        if (shouldReload) {
+          // Regenerate iframe URL
+          this.iframeViewerUrl = of('').pipe(map(() => this.getURL()));
+        }
+      }),
+    );
+  }
 }

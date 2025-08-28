@@ -27,7 +27,7 @@
         <ds-alert *ngIf="groupBeingEdited?.permanent" [type]="AlertType.Warning"
                   [content]="messagePrefix + '.alert.permanent'"></ds-alert>
         <ng-container *ngIf="(activeGroupLinkedDSO$ | async) as activeGroupLinkedDSO">
-          <ds-alert *ngIf="!(canEdit$ | async)" [type]="AlertType.Warning"
+          <ds-alert *ngIf="(canEdit$ | async) !== true" [type]="AlertType.Warning"
                     [content]="(messagePrefix + '.alert.workflowGroup' | translate:{ name: dsoNameService.getName(activeGroupLinkedDSO), comcol: activeGroupLinkedDSO.type, comcolEditRolesRoute: (linkedEditRolesRoute$ | async) })">
           </ds-alert>
         </ng-container>
@@ -52,10 +52,10 @@
 
       <ng-container *ngIf="(activeGroup$ | async) as groupBeingEdited">
         <div class="mb-5">
-          <ds-members-list *ngIf="groupBeingEdited != null"
+          <ds-members-list *ngIf="groupBeingEdited !== undefined"
                            [messagePrefix]="messagePrefix + '.members-list'"></ds-members-list>
         </div>
-        <ds-subgroups-list *ngIf="groupBeingEdited != null"
+        <ds-subgroups-list *ngIf="groupBeingEdited !== undefined"
                            [messagePrefix]="messagePrefix + '.subgroups-list'"></ds-subgroups-list>
       </ng-container>
     </div>

@@ -1,28 +1,36 @@
+import { DOCUMENT } from '@angular/common';
 import {
-  ElementRef,
-  Directive,
-  Input,
-  TemplateRef,
-  Renderer2,
-  OnInit,
-  OnDestroy,
-  Injector,
-  ViewContainerRef,
-  NgZone,
+  ApplicationRef,
   ChangeDetectorRef,
-  ApplicationRef, Inject
+  Directive,
+  ElementRef,
+  Inject,
+  Injector,
+  Input,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  TemplateRef,
+  ViewContainerRef,
 } from '@angular/core';
-import {NgbPopover, NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
-import {DOCUMENT} from '@angular/common';
-import {NavigationStart, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
+import {
+  NavigationStart,
+  Router,
+} from '@angular/router';
+import {
+  NgbPopover,
+  NgbPopoverConfig,
+} from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 
 /**
  * Directive to create a sticky popover using NgbPopover.
  * The popover remains open when the mouse is over its content and closes when the mouse leaves.
  */
 @Directive({
-  selector: '[dsStickyPopover]'
+  selector: '[dsStickyPopover]',
+  standalone:true,
 })
 export class StickyPopoverDirective extends NgbPopover implements OnInit, OnDestroy {
   /** Template for the sticky popover content */
@@ -49,7 +57,7 @@ export class StickyPopoverDirective extends NgbPopover implements OnInit, OnDest
     @Inject(DOCUMENT) _document: Document,
     _changeDetector: ChangeDetectorRef,
     applicationRef: ApplicationRef,
-    private router: Router
+    private router: Router,
   ) {
     super(_elementRef, _renderer, injector, viewContainerRef, config, _ngZone, document, _changeDetector, applicationRef);
     this._elRef = _elementRef;
@@ -87,7 +95,7 @@ export class StickyPopoverDirective extends NgbPopover implements OnInit, OnDest
         if (event instanceof NavigationStart) {
           this.close();
         }
-      })
+      }),
     );
   }
 

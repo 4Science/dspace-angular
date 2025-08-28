@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
+import { MarkdownViewerComponent } from 'src/app/shared/markdown-viewer/markdown-viewer.component';
+import { TruncatableComponent } from 'src/app/shared/truncatable/truncatable.component';
+import { TruncatablePartComponent } from 'src/app/shared/truncatable/truncatable-part/truncatable-part.component';
 
-import { FieldRenderingType, MetadataBoxFieldRendering } from '../metadata-box.decorator';
 import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
 
 /**
@@ -10,9 +15,14 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'div[ds-longmarkdown]',
   templateUrl: './longmarkdown.component.html',
-  styleUrls: ['./longmarkdown.component.scss']
+  styleUrls: ['./longmarkdown.component.scss'],
+  standalone: true,
+  imports: [
+    MarkdownViewerComponent,
+    TruncatableComponent,
+    TruncatablePartComponent,
+  ],
 })
-@MetadataBoxFieldRendering(FieldRenderingType.LONGMARKDOWN)
 export class LongmarkdownComponent extends RenderingTypeValueModelComponent implements OnInit {
 
   /**

@@ -36,12 +36,12 @@
                   (click)="onReset()">{{'form.cancel' | translate}}</button>
           <button type="button"
                   class="btn btn-primary"
-                  [dsBtnDisabled]="!(isFormValid() | async) || (isProcessing | async)"
+                  [dsBtnDisabled]="(isFormValid() | async) !== true || (isProcessing | async)"
                   (click)="onSubmit()">
             <span *ngIf="(isProcessing | async)">
                   <i class='fas fa-circle-notch fa-spin'></i> {{'submission.workflow.tasks.generic.processing' | translate}}
                 </span>
-            <span *ngIf="!(isProcessing | async)">
+            <span *ngIf="(isProcessing | async) !== true">
                   {{'form.submit' | translate}}
                 </span>
           </button>

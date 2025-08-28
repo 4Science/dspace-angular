@@ -1,11 +1,11 @@
 <div *ngIf="activeMetadataSchema$ | async; then editheader; else createHeader"></div>
 
 <ng-template #createHeader>
-    <h2>{{messagePrefix + '.create' | translate}}</h2>
+    <h2>{{messagePrefix + '.create' | translate}}</h2>
 </ng-template>
 
 <ng-template #editheader>
-    <h2>{{messagePrefix + '.edit' | translate}}</h2>
+    <h2>{{messagePrefix + '.edit' | translate}}</h2>
 </ng-template>
 
 <ds-form [formId]="formId"

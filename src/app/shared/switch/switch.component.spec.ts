@@ -1,8 +1,19 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SwitchColor, SwitchComponent, SwitchOption } from './switch.component';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
+
 import { TranslateLoaderMock } from '../mocks/translate-loader.mock';
+import {
+  SwitchColor,
+  SwitchComponent,
+  SwitchOption,
+} from './switch.component';
 
 describe('SwitchComponent', () => {
   let component: SwitchComponent;
@@ -14,17 +25,16 @@ describe('SwitchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SwitchComponent ],
       imports: [
+        SwitchComponent,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
-            useClass: TranslateLoaderMock
-          }
-        })
+            useClass: TranslateLoaderMock,
+          },
+        }),
       ],
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SwitchComponent);
     component = fixture.componentInstance;

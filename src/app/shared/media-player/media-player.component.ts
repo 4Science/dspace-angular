@@ -1,4 +1,10 @@
 import {
+  AsyncPipe,
+  DOCUMENT,
+  isPlatformBrowser,
+  NgIf,
+} from '@angular/common';
+import {
   Component,
   HostListener,
   Inject,
@@ -7,21 +13,33 @@ import {
   OnInit,
   PLATFORM_ID,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-
-import { BehaviorSubject, Observable } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+} from 'rxjs';
 
 import { MediaViewerItem } from '../../core/shared/media-viewer-item.model';
-import { VideojsService } from './services/videojs.service';
 import { hasValue } from '../empty.util';
+import { ThemedLoadingComponent } from '../loading/themed-loading.component';
+import { MediaPlayerPlaylistComponent } from './media-player-playlist/media-player-playlist.component';
+import { MediaSelectionBarComponent } from './media-selection-bar/media-selection-bar.component';
+import { VideojsService } from './services/videojs.service';
 
 @Component({
   selector: 'ds-media-player',
   templateUrl: './media-player.component.html',
   styleUrls: ['./media-player.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    ThemedLoadingComponent,
+    AsyncPipe,
+    NgIf,
+    MediaSelectionBarComponent,
+    MediaPlayerPlaylistComponent,
+  ],
+  standalone: true,
 })
 export class MediaPlayerComponent implements OnInit, OnDestroy {
 
@@ -38,12 +56,12 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
   /**
    * A reference to the video player container
    */
-  @ViewChild('videoContainerRef', {static: false}) videoContainerRef;
+  @ViewChild('videoContainerRef', { static: false }) videoContainerRef;
 
   /**
    * A reference to the video playlist container
    */
-  @ViewChild('playlistContainerRef', {static: false}) playlistContainerRef;
+  @ViewChild('playlistContainerRef', { static: false }) playlistContainerRef;
 
 
   /**
@@ -144,8 +162,8 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
   setNewTimestamp(timestamp: number) {
     if (this.isVideoPlayerInitialized$.value) {
       this.videoPlayer.currentTime(timestamp);
-      }
     }
+  }
 
   /**
    * Listen to window resize to adapt playlist size based on video size
@@ -168,7 +186,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.videoPlayer = this.videojsService.initVideoPlayer(
           this._document.getElementById('video_player'),
-          this.currentItem$?.value
+          this.currentItem$?.value,
         );
         this.resizeMediaPlaylist();
       }, 100);
@@ -180,7 +198,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.audioPlayer = this.videojsService.initAudioPlayer(
           this._document.getElementById('audio_player'),
-          this.currentItem$?.value
+          this.currentItem$?.value,
         );
         this.resizeMediaPlaylist();
       }, 100);
@@ -212,7 +230,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
       this.audioPlayer.src({
         src: this.currentItem$?.value?.manifestUrl,
         type: 'application/dash+xml',
-        peaks: this.currentItem$?.value?.bitstream.allMetadata('bitstream.audio.peaks')[0].value
+        peaks: this.currentItem$?.value?.bitstream.allMetadata('bitstream.audio.peaks')[0].value,
       });
 
       this.isLoadingOnChange.next(true);

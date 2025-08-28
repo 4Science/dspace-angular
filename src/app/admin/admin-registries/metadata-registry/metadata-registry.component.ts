@@ -1,26 +1,64 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RegistryService } from '../../../core/registry/registry.service';
-import { BehaviorSubject, Observable, zip, Subscription } from 'rxjs';
-import { RemoteData } from '../../../core/data/remote-data';
+import {
+  AsyncPipe,
+  NgClass,
+  NgForOf,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { RouterLink } from '@angular/router';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import {
+  BehaviorSubject,
+  Observable,
+  Subscription,
+  zip,
+} from 'rxjs';
+import {
+  filter,
+  map,
+  switchMap,
+  take,
+} from 'rxjs/operators';
+
 import { PaginatedList } from '../../../core/data/paginated-list.model';
-import { PaginationComponentOptions } from '../../../shared/pagination/pagination-component-options.model';
-import { filter, map, switchMap, take } from 'rxjs/operators';
-import { NotificationsService } from '../../../shared/notifications/notifications.service';
-import { TranslateService } from '@ngx-translate/core';
+import { RemoteData } from '../../../core/data/remote-data';
 import { MetadataSchema } from '../../../core/metadata/metadata-schema.model';
-import { toFindListOptions } from '../../../shared/pagination/pagination.utils';
+import { PaginationService } from '../../../core/pagination/pagination.service';
+import { RegistryService } from '../../../core/registry/registry.service';
 import { NoContent } from '../../../core/shared/NoContent.model';
 import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
-import { PaginationService } from '../../../core/pagination/pagination.service';
-import {
-  MetadataSchemaExportService
-} from '../../../shared/metadata-export/metadata-schema-export/metadata-schema-export.service';
+import { MetadataSchemaExportService } from '../../../shared/metadata-export/metadata-schema-export/metadata-schema-export.service';
+import { NotificationsService } from '../../../shared/notifications/notifications.service';
+import { PaginationComponent } from '../../../shared/pagination/pagination.component';
+import { toFindListOptions } from '../../../shared/pagination/pagination.utils';
+import { PaginationComponentOptions } from '../../../shared/pagination/pagination-component-options.model';
+import { MetadataSchemaFormComponent } from './metadata-schema-form/metadata-schema-form.component';
+import { MetadataSchemaSearchFormComponent } from './metadata-schema-search-form/metadata-schema-search-form.component';
 import { SchemaFilter } from './metadata-schema-search-form/schema-filter';
 
 @Component({
   selector: 'ds-metadata-registry',
   templateUrl: './metadata-registry.component.html',
-  styleUrls: ['./metadata-registry.component.scss']
+  styleUrls: ['./metadata-registry.component.scss'],
+  imports: [
+    MetadataSchemaFormComponent,
+    TranslateModule,
+    AsyncPipe,
+    PaginationComponent,
+    NgIf,
+    NgForOf,
+    NgClass,
+    RouterLink,
+    MetadataSchemaSearchFormComponent,
+  ],
+  standalone: true,
 })
 /**
  * A component used for managing all existing metadata schemas within the repository.
@@ -48,7 +86,7 @@ export class MetadataRegistryComponent implements OnDestroy, OnInit {
    */
   config: PaginationComponentOptions = Object.assign(new PaginationComponentOptions(), {
     id: 'rm',
-    pageSize: 25
+    pageSize: 25,
   });
 
   filter$: BehaviorSubject<SchemaFilter> = new BehaviorSubject<SchemaFilter>({});
@@ -79,9 +117,9 @@ export class MetadataRegistryComponent implements OnDestroy, OnInit {
 
     this.metadataSchemas = this.filter$.pipe(
       switchMap((schemaFilter) => this.paginationService.getCurrentPagination(this.config.id, this.config)
-        .pipe(map(pagination => ({schemaFilter, pagination})))
+        .pipe(map(pagination => ({ schemaFilter, pagination }))),
       ),
-      switchMap(({schemaFilter, pagination}) => this.registryService.getMetadataSchemasByMetadata(schemaFilter, toFindListOptions(pagination)))
+      switchMap(({ schemaFilter, pagination }) => this.registryService.getMetadataSchemasByMetadata(schemaFilter, toFindListOptions(pagination))),
     );
   }
 
@@ -97,7 +135,7 @@ export class MetadataRegistryComponent implements OnDestroy, OnInit {
    * Force-update the list of schemas to use search filter.
    */
   public searchSchemas(schemaFilter: SchemaFilter) {
-    this.paginationService.updateRoute(this.config.id, {page: 0});
+    this.paginationService.updateRoute(this.config.id, { page: 0 });
     this.filter$.next(schemaFilter);
   }
 
@@ -121,7 +159,7 @@ export class MetadataRegistryComponent implements OnDestroy, OnInit {
    */
   isActive(schema: MetadataSchema): Observable<boolean> {
     return this.getActiveSchema().pipe(
-      map((activeSchema) => schema === activeSchema)
+      map((activeSchema) => schema === activeSchema),
     );
   }
 
@@ -149,7 +187,7 @@ export class MetadataRegistryComponent implements OnDestroy, OnInit {
    */
   isSelected(schema: MetadataSchema): Observable<boolean> {
     return this.registryService.getSelectedMetadataSchemas().pipe(
-      map((schemas) => schemas.find((selectedSchema) => selectedSchema === schema) != null)
+      map((schemas) => schemas.find((selectedSchema) => selectedSchema === schema) != null),
     );
   }
 
@@ -184,7 +222,7 @@ export class MetadataRegistryComponent implements OnDestroy, OnInit {
     const suffix = success ? 'success' : 'failure';
 
     const head: string = this.translateService.instant(success ? `${prefix}.${suffix}` : `${prefix}.${suffix}`);
-    const content: string = this.translateService.instant(`${prefix}.deleted.${suffix}`, {amount: amount});
+    const content: string = this.translateService.instant(`${prefix}.deleted.${suffix}`, { amount: amount });
 
     if (success) {
       this.notificationsService.success(head, content);
@@ -202,10 +240,10 @@ export class MetadataRegistryComponent implements OnDestroy, OnInit {
     this.metadataSchemaExportService.exportSchema(schema)
       .pipe(
         take(1),
-        filter(Object)
+        filter(Object),
       ).subscribe((processId: number) => {
-      const title = this.translateService.get('export-schema.process.title');
-      this.notificationsService.process(processId.toString(), 5000, title);
-    });
+        const title = this.translateService.get('export-schema.process.title');
+        this.notificationsService.process(processId.toString(), 5000, title);
+      });
   }
 }

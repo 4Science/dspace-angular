@@ -1,16 +1,54 @@
-import { LayoutModeEnum, TopSection, TopSectionTemplateType } from '../../core/layout/models/section.model';
-import { Component, inject, Input, OnChanges, OnInit } from '@angular/core';
-import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
-import { Context } from '../../core/shared/context.model';
-import { BehaviorSubject } from 'rxjs';
-import isEqual from 'lodash/isEqual';
-import { ViewMode } from '../../core/shared/view-mode.model';
+import {
+  AsyncPipe,
+  LowerCasePipe,
+  NgIf,
+  NgSwitch,
+  NgSwitchCase,
+  NgSwitchDefault,
+} from '@angular/common';
+import {
+  Component,
+  inject,
+  Input,
+  OnChanges,
+  OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import isEqual from 'lodash/isEqual';
+import { BehaviorSubject } from 'rxjs';
+
+import {
+  LayoutModeEnum,
+  TopSection,
+  TopSectionTemplateType,
+} from '../../core/layout/models/section.model';
+import { Context } from '../../core/shared/context.model';
+import { ViewMode } from '../../core/shared/view-mode.model';
+import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
+import { ThemedCardsBrowseElementsComponent } from './cards-browse-elements/themed-cards-browse-elements.component';
+import { ThemedDefaultBrowseElementsComponent } from './default-browse-elements/themed-default-browse-elements.component';
+import { ThemedImagesBrowseElementsComponent } from './images-browse-elements/themed-images-browse-elements.component';
+import { ThemedSliderBrowseElementsComponent } from './slider-browse-elements/themed-slider-browse-elements.component';
 
 @Component({
-  selector: 'ds-browse-most-elements',
+  selector: 'ds-base-browse-most-elements',
   styleUrls: ['./browse-most-elements.component.scss'],
-  templateUrl: './browse-most-elements.component.html'
+  templateUrl: './browse-most-elements.component.html',
+  standalone: true,
+  imports: [
+    ThemedDefaultBrowseElementsComponent,
+    AsyncPipe,
+    LowerCasePipe,
+    NgSwitch,
+    NgSwitchDefault,
+    TranslateModule,
+    ThemedCardsBrowseElementsComponent,
+    NgSwitchCase,
+    NgIf,
+    ThemedSliderBrowseElementsComponent,
+    ThemedImagesBrowseElementsComponent,
+  ],
 })
 
 export class BrowseMostElementsComponent implements OnInit, OnChanges {
@@ -48,12 +86,9 @@ export class BrowseMostElementsComponent implements OnInit, OnChanges {
    */
   @Input() showThumbnails: boolean;
 
-  /*
-   * The top section object
-   */
   @Input() topSection: TopSection;
 
-  @Input() discoveryConfigurationsTotalElementsMap: Map<string, number>;
+  @Input() discoveryConfigurationsTotalElementsMap: Map<string, number> = new Map();
 
 
   paginatedSearchOptions$ = new BehaviorSubject<PaginatedSearchOptions>(null);
@@ -64,7 +99,6 @@ export class BrowseMostElementsComponent implements OnInit, OnChanges {
    * The type of the template to render
    */
   templateTypeEnum = TopSectionTemplateType;
-
 
   ngOnInit(): void {
     this.sectionTemplateType = this.topSection?.template

@@ -6,7 +6,7 @@
 
     <div *ngIf="!isStructured" class="d-flex col flex-wrap" [class.flex-column]="!field.valuesInline">
       <!-- First metadata -->
-      <ng-container *ngFor="let index of firstLimitedDataToBeRenderedMap.keys(); let last = last;">
+      <ng-container *ngFor="let index of firstLimitedDataToBeRenderedMap?.keys(); let last = last;">
         <ng-container *ngFor="let mdg of firstLimitedDataToBeRenderedMap.get(index)">
           <ds-metadata-render [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
           </ds-metadata-render>
@@ -15,7 +15,7 @@
       </ng-container>
       <!-- Show More/collapse button -->
       <div *ngIf="isConfigured" [class.mx-3]="field.valuesInline">
-        <ng-container *ngIf="componentsToBeRenderedMap.size != lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size">
+        <ng-container *ngIf="componentsToBeRenderedMap.size !== lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size">
           <a (click)="setData('fillAllData')" id="a-more-icon" href="javascript:void(0);">
             <i class="fas" [ngClass]="field.valuesInline ? 'fa-chevron-right' : 'fa-chevron-down'"></i>
           </a>
@@ -24,7 +24,7 @@
             {{ (lastLimit === 0 ? "cris-layout.rendering.more" : "cris-layout.rendering.more.withlast") | translate}}
           </a>
         </ng-container>
-        <ng-container *ngIf="componentsToBeRenderedMap.size == lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size">
+        <ng-container *ngIf="componentsToBeRenderedMap.size === lastLimitedDataToBeRenderedMap.size + firstLimitedDataToBeRenderedMap.size">
           <a (click)="setData('getComputedData')" id="a-collapse-icon" href="javascript:void(0);">
             <i class="fas" [ngClass]="field.valuesInline ? 'fa-chevron-left' : 'fa-chevron-up'"></i>
           </a>
@@ -35,7 +35,7 @@
         </ng-container>
       </div>
       <!-- Show More/collapse link button END -->
-      <ng-container *ngFor="let index of lastLimitedDataToBeRenderedMap.keys(); let last = last;">
+      <ng-container *ngFor="let index of lastLimitedDataToBeRenderedMap?.keys(); let last = last;">
         <ng-container *ngFor="let mdg of lastLimitedDataToBeRenderedMap.get(index)">
           <ds-metadata-render [item]="item" [field]="mdg.field" [metadataValue]="mdg.value">
           </ds-metadata-render>

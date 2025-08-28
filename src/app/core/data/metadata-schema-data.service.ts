@@ -1,33 +1,46 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
+import { hasValue } from '../../shared/empty.util';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
+import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
+import { RequestParam } from '../cache/models/request-param.model';
 import { ObjectCacheService } from '../cache/object-cache.service';
 import { MetadataSchema } from '../metadata/metadata-schema.model';
-import { METADATA_SCHEMA } from '../metadata/metadata-schema.resource-type';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
-import { RequestService } from './request.service';
-import { Observable } from 'rxjs';
-import { hasValue } from '../../shared/empty.util';
-import { tap } from 'rxjs/operators';
-import { RemoteData } from './remote-data';
-import { PutData, PutDataImpl } from './base/put-data';
-import { CreateData, CreateDataImpl } from './base/create-data';
 import { NoContent } from '../shared/NoContent.model';
-import { FindAllData, FindAllDataImpl } from './base/find-all-data';
-import { FindListOptions } from './find-list-options.model';
-import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
-import { PaginatedList } from './paginated-list.model';
+import {
+  CreateData,
+  CreateDataImpl,
+} from './base/create-data';
+import {
+  DeleteData,
+  DeleteDataImpl,
+} from './base/delete-data';
+import {
+  FindAllData,
+  FindAllDataImpl,
+} from './base/find-all-data';
 import { IdentifiableDataService } from './base/identifiable-data.service';
-import { DeleteData, DeleteDataImpl } from './base/delete-data';
-import { dataService } from './base/data-service.decorator';
-import { RequestParam } from '../cache/models/request-param.model';
-import { SearchData, SearchDataImpl } from './base/search-data';
+import {
+  PutData,
+  PutDataImpl,
+} from './base/put-data';
+import {
+  SearchData,
+  SearchDataImpl,
+} from './base/search-data';
+import { FindListOptions } from './find-list-options.model';
+import { PaginatedList } from './paginated-list.model';
+import { RemoteData } from './remote-data';
+import { RequestService } from './request.service';
 
 /**
  * A service responsible for fetching/sending data from/to the REST API on the metadataschemas endpoint
  */
-@Injectable()
-@dataService(METADATA_SCHEMA)
+@Injectable({ providedIn: 'root' })
 export class MetadataSchemaDataService extends IdentifiableDataService<MetadataSchema> implements FindAllData<MetadataSchema>, DeleteData<MetadataSchema> {
   private createData: CreateData<MetadataSchema>;
   private findAllData: FindAllData<MetadataSchema>;
@@ -121,7 +134,7 @@ export class MetadataSchemaDataService extends IdentifiableDataService<MetadataS
       searchParams: [
         new RequestParam('namespace', hasValue(schemaNamespace) ? schemaNamespace : ''),
         new RequestParam('element', hasValue(element) ? element : ''),
-        new RequestParam('qualifier', hasValue(qualifier) ? qualifier : '')
+        new RequestParam('qualifier', hasValue(qualifier) ? qualifier : ''),
       ],
     });
     return this.searchBy(this.searchByMetadataLinkPath, optionsWithSchema, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);

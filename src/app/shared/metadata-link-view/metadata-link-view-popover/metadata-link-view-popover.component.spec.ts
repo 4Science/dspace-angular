@@ -1,14 +1,21 @@
-import { MetadataValueFilter } from 'src/app/core/shared/metadata.models';
-import { Item } from 'src/app/core/shared/item.model';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { MetadataLinkViewPopoverComponent } from './metadata-link-view-popover.component';
-import { environment } from 'src/environments/environment.test';
-import { TranslateModule } from '@ngx-translate/core';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  async,
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
+import { ActivatedRoute } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { Bitstream } from 'src/app/core/shared/bitstream.model';
+import { Item } from 'src/app/core/shared/item.model';
+import { MetadataValueFilter } from 'src/app/core/shared/metadata.models';
+import { environment } from 'src/environments/environment.test';
+
+import { createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
+import { MetadataLinkViewAvatarPopoverComponent } from '../metadata-link-view-avatar-popover/metadata-link-view-avatar-popover.component';
+import { MetadataLinkViewOrcidComponent } from '../metadata-link-view-orcid/metadata-link-view-orcid.component';
+import { MetadataLinkViewPopoverComponent } from './metadata-link-view-popover.component';
 
 describe('MetadataLinkViewPopoverComponent', () => {
   let component: MetadataLinkViewPopoverComponent;
@@ -17,6 +24,7 @@ describe('MetadataLinkViewPopoverComponent', () => {
 
   const itemMock = Object.assign(new Item(), {
     uuid: '1234-1234-1234-1234',
+    entityType: 'Publication',
 
     firstMetadataValue(keyOrKeys: string | string[], valueFilter?: MetadataValueFilter): string {
       return itemMock.metadata[keyOrKeys as string][0].value;
@@ -26,50 +34,52 @@ describe('MetadataLinkViewPopoverComponent', () => {
       'dc.title': [
         {
           value: 'file name',
-          language: null
-        }
+          language: null,
+        },
       ],
       'dc.identifier.uri': [
         {
           value: 'http://example.com',
-          language: null
-        }
+          language: null,
+        },
       ],
       'dc.description.abstract': [
         {
           value: 'Long text description',
-          language: null
-        }
+          language: null,
+        },
       ],
       'organization.identifier.ror': [
         {
           value: 'https://ror.org/1234',
-          language: null
-        }
+          language: null,
+        },
       ],
       'person.identifier.orcid': [
         {
           value: 'https://orcid.org/0000-0000-0000-0000',
-          language: null
-        }
+          language: null,
+        },
       ],
       'dspace.entity.type': [
         {
           value: 'Person',
-          language: null
-        }
-      ]
+          language: null,
+        },
+      ],
     },
-    thumbnail: createSuccessfulRemoteDataObject$(new Bitstream())
+    thumbnail: createSuccessfulRemoteDataObject$(new Bitstream()),
   });
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MetadataLinkViewPopoverComponent ],
-      imports: [TranslateModule.forRoot()],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [TranslateModule.forRoot(), MetadataLinkViewPopoverComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [
+        { provide: ActivatedRoute, useValue: { snapshot: { data: { dso: itemMock } } } },
+      ],
     })
-    .compileComponents();
+      .overrideComponent(MetadataLinkViewPopoverComponent, { remove: { imports: [MetadataLinkViewOrcidComponent, MetadataLinkViewAvatarPopoverComponent] } }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -77,12 +87,12 @@ describe('MetadataLinkViewPopoverComponent', () => {
     component = fixture.componentInstance;
     component.item = itemMock;
     itemMock.firstMetadataValue = jasmine.createSpy()
-                                         .withArgs('dspace.entity.type').and.returnValue('Person')
-                                         .withArgs('dc.title').and.returnValue('Test Title')
-                                         .withArgs('dc.identifier.uri').and.returnValue('http://example.com')
-                                         .withArgs('dc.description.abstract').and.returnValue('Long text description')
-                                         .withArgs('organization.identifier.ror').and.returnValue('https://ror.org/1234')
-                                         .withArgs('person.identifier.orcid').and.returnValue('https://orcid.org/0000-0000-0000-0000');
+      .withArgs('dspace.entity.type').and.returnValue('Person')
+      .withArgs('dc.title').and.returnValue('Test Title')
+      .withArgs('dc.identifier.uri').and.returnValue('http://example.com')
+      .withArgs('dc.description.abstract').and.returnValue('Long text description')
+      .withArgs('organization.identifier.ror').and.returnValue('https://ror.org/1234')
+      .withArgs('person.identifier.orcid').and.returnValue('https://orcid.org/0000-0000-0000-0000');
 
     fixture.detectChanges();
   });
@@ -121,7 +131,7 @@ describe('MetadataLinkViewPopoverComponent', () => {
     spyOn(component, 'getItemPageRoute').and.returnValue('/item/' + itemMock.uuid);
     fixture.detectChanges();
     const moreInfoLinkElement = fixture.debugElement.query(By.css('a[data-test="more-info-link"]'));
-    expect(moreInfoLinkElement.nativeElement.routerLink).toContain('/item/' + itemMock.uuid);
+    expect(moreInfoLinkElement.nativeElement.href).toContain('/item/' + itemMock.uuid);
   });
 
   it('should display the avatar popover when item has a thumbnail', () => {

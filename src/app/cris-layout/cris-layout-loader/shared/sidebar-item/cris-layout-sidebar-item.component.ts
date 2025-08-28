@@ -1,9 +1,24 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  NgClass,
+  NgFor,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 import { CrisLayoutTab } from '../../../../core/layout/models/tab.model';
-import { rotate, rotateNavbar } from '../../../../shared/animations/rotate';
+import {
+  rotate,
+  rotateNavbar,
+} from '../../../../shared/animations/rotate';
 import { slide } from '../../../../shared/animations/slide';
-import { TranslateService } from '@ngx-translate/core';
 
 /**
  * This component defines the default layout for all tabs of DSpace Items.
@@ -14,9 +29,16 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'ds-cris-layout-sidebar-item',
   templateUrl: './cris-layout-sidebar-item.component.html',
   styleUrls: ['./cris-layout-sidebar-item.component.scss'],
-  animations: [rotate, slide, rotateNavbar]
+  animations: [rotate, slide, rotateNavbar],
+  standalone: true,
+  imports: [
+    NgClass,
+    NgIf,
+    NgFor,
+    RouterLink,
+  ],
 })
-export class CrisLayoutSidebarItemComponent {
+export class CrisLayoutSidebarItemComponent implements OnInit {
   /**
    * Contains the items base url
    */

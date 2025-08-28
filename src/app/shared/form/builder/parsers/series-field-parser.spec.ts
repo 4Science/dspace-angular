@@ -1,9 +1,9 @@
-import {FormFieldModel} from '../models/form-field.model';
-import {DynamicConcatModel} from '../ds-dynamic-form-ui/models/ds-dynamic-concat.model';
-import {SeriesFieldParser} from './series-field-parser';
-import {FormFieldMetadataValueObject} from '../models/form-field-metadata-value.model';
-import {ParserOptions} from './parser-options';
-import { getMockTranslateService } from 'src/app/shared/mocks/translate.service.mock';
+import { getMockTranslateService } from '../../../mocks/translate.service.mock';
+import { DynamicConcatModel } from '../ds-dynamic-form-ui/models/ds-dynamic-concat.model';
+import { FormFieldModel } from '../models/form-field.model';
+import { FormFieldMetadataValueObject } from '../models/form-field-metadata-value.model';
+import { ParserOptions } from './parser-options';
+import { SeriesFieldParser } from './series-field-parser';
 
 describe('SeriesFieldParser test suite', () => {
   let field: FormFieldModel;
@@ -16,12 +16,12 @@ describe('SeriesFieldParser test suite', () => {
     submissionScope: 'testScopeUUID',
     collectionUUID: null,
     typeField: 'dc_type',
-    isInnerForm: false
+    isInnerForm: false,
   };
 
   beforeEach(() => {
     field = {
-      input: {type: 'series'},
+      input: { type: 'series' },
       label: 'Series/Report No.',
       mandatory: 'false',
       repeatable: false,
@@ -29,9 +29,9 @@ describe('SeriesFieldParser test suite', () => {
       selectableMetadata: [
         {
           metadata: 'series',
-        }
+        },
       ],
-      languageCodes: []
+      languageCodes: [],
     } as FormFieldModel;
 
   });

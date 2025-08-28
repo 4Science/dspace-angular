@@ -1,4 +1,10 @@
-import { autoserialize, deserialize, inheritSerialization } from 'cerialize';
+import {
+  autoserialize,
+  deserialize,
+  inheritSerialization,
+} from 'cerialize';
+
+import { SectionScope } from '../../../submission/objects/section-visibility.model';
 import { SectionsType } from '../../../submission/sections/sections-type';
 import { typedObject } from '../../cache/builders/build-decorators';
 import { HALLink } from '../../shared/hal-link.model';
@@ -41,7 +47,13 @@ export class SubmissionSectionModel extends ConfigObject {
    * A boolean representing if this submission section is opened or collapsed by default
    */
   @autoserialize
-  opened: boolean;
+    opened: boolean;
+
+  /**
+   * The submission scope for this section
+   */
+  @autoserialize
+  scope: SectionScope;
 
   /**
    * A string representing the kind of section object
@@ -53,7 +65,7 @@ export class SubmissionSectionModel extends ConfigObject {
    * The [SubmissionVisibilityType] object for this section
    */
   @autoserialize
-  visibility: SubmissionVisibilityType;
+    visibility: SubmissionVisibilityType;
 
   /**
    * The {@link HALLink}s for this SubmissionSectionModel
