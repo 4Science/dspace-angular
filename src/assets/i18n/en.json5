@@ -6386,6 +6386,24 @@
 
   "search.filters.applied.f.organization": "Organisation",
 
+  "search.filters.applied.f.corporate": "Organizational unit"
+
+  "search.filters.applied.f.project": "Project"
+
+  "search.filters.applied.f.family": "Family"
+
+  "search.filters.applied.f.jornalfoundperson": "Person"
+
+  "search.filters.applied.f.jornalfounddate": "Date"
+
+  "search.filters.applied.f.parent": "Parent"
+
+  "search.filters.applied.f.place": "Place"
+
+  "search.filters.applied.f.event": "Event"
+
+  "search.filters.applied.f.opera": "Opera"
+
   "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
 
   "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Date Issued",
