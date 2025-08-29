@@ -1756,17 +1756,17 @@
 
 
   // "artwork.listelement.badge": "Artworks",
-  "artwork.listelement.badge": "Materiale artistico",
+  "artwork.listelement.badge": "Opere d’Arte",
 
   // "artwork.page.titleprefix": "Artworks",
-  "artwork.page.titleprefix": "Materiale artistico",
+  "artwork.page.titleprefix": "Opere d’Arte",
 
 
   // "audiovideo.page.titleprefix": "Audio/Video",
-  "audiovideo.page.titleprefix": "Audio/Video",
+  "audiovideo.page.titleprefix": "Materiale Audiovisivo",
 
   // "audiovideo.listelement.badge": "Audio/Video",
-  "audiovideo.listelement.badge": "Audio/Video",
+  "audiovideo.listelement.badge": "Materiale Audiovisivo",
 
   // "audit.overview.title": "Audit Logs Overview",
   "audit.overview.title": "Panoramica dei log di revisione",
@@ -4669,7 +4669,7 @@
   "explore.facet-section.entityType.Person": "Persona",
 
   // "explore.facet-section.entityType.OrgUnit": "Organizational Unit",
-  "explore.facet-section.entityType.OrgUnit": "Unità organizzativa ",
+  "explore.facet-section.entityType.OrgUnit": "Organizzazione",
 
   // "explore.facet-section.entityType.Project": "Project",
   "explore.facet-section.entityType.Project": "Progetto",
@@ -4684,7 +4684,7 @@
   "explore.facet-section.entityType.Place": "Luogo",
 
   // "explore.facet-section.entityType.AudioVideo": "Audio Video",
-  "explore.facet-section.entityType.AudioVideo": "Audio Video",
+  "explore.facet-section.entityType.AudioVideo": "Materiale Audiovisivo",
 
   // "explore.facet-section.entityType.Family": "Family",
   "explore.facet-section.entityType.Family": "Famiglia",
@@ -4693,7 +4693,7 @@
   "explore.facet-section.entityType.Aggregation": "Aggregazione",
 
   // "explore.facet-section.entityType.News": "News",
-  "explore.facet-section.entityType.News": "News",
+  "explore.facet-section.entityType.News": "Immagine dello Slider",
 
   // "explore.facet-section.entityType.StaticPage": "Static Page",
   "explore.facet-section.entityType.StaticPage": "Static Page",
@@ -4702,10 +4702,10 @@
   "explore.facet-section.entityType.Path": "Percorso",
 
   // "explore.facet-section.entityType.JournalFile": "Journal File",
-  "explore.facet-section.entityType.JournalFile": "Fascicolo Periodico",
+  "explore.facet-section.entityType.JournalFile": "Fascicolo di Periodico",
 
   // "explore.facet-section.entityType.JournalFonds": "Journal Fonds",
-  "explore.facet-section.entityType.JournalFonds": "Testata Periodico",
+  "explore.facet-section.entityType.JournalFonds": "Periodico",
 
   // "explore.facet-section.entityType.Picture": "Picture",
   "explore.facet-section.entityType.Picture": "Fotografia",
@@ -9064,7 +9064,7 @@
   "suggestion.type.orcidWorks": "Publications",
 
   // "orgunit.listelement.badge": "Organizational Unit",
-  "orgunit.listelement.badge": "Unità organizzativa",
+  "orgunit.listelement.badge": "Organizzazione",
 
   // "orgunit.listelement.no-title": "Untitled",
   "orgunit.listelement.no-title": "Senza titolo",
@@ -9088,7 +9088,7 @@
   "orgunit.page.id": "ID",
 
   // "orgunit.page.titleprefix": "Organizational Unit: ",
-  "orgunit.page.titleprefix": "Unità Organizzativa: ",
+  "orgunit.page.titleprefix": "Organizzazione: ",
 
   // "orgunit.page.ror": "ROR Identifier",
   // TODO New key - Add a translation
@@ -9096,7 +9096,7 @@
 
   // "orgunit.search.results.head": "Organizational Unit Search Results",
   // TODO Source message changed - Revise the translation
-  "orgunit.search.results.head": "Risultati della ricerca: Strutture",
+  "orgunit.search.results.head": "Risultati della ricerca: Organizzazioni",
 
   // "pagination.options.description": "Pagination options",
   "pagination.options.description": "Opzioni di impaginazione",
@@ -9979,7 +9979,7 @@
   "relationships.isAuthorOf.Person": "Autori (persone)",
 
   // "relationships.isAuthorOf.OrgUnit": "Authors (organizational units)",
-  "relationships.isAuthorOf.OrgUnit": "Autori (struttura)",
+  "relationships.isAuthorOf.OrgUnit": "Autori (organizzazioni)",
 
   // "relationships.isIssueOf": "Journal Issues",
   "relationships.isIssueOf": "Fascicolo Periodico",
@@ -9999,7 +9999,7 @@
   "relationships.isJournalVolumeOf": "Journal Volume",
 
   // "relationships.isOrgUnitOf": "Organizational Units",
-  "relationships.isOrgUnitOf": "Strutture",
+  "relationships.isOrgUnitOf": "Organizzazioni",
 
   // "relationships.isPersonOf": "Authors",
   "relationships.isPersonOf": "Autori",
@@ -10030,7 +10030,7 @@
   "relationships.isContributorOf": "Collaboratori",
 
   // "relationships.isContributorOf.OrgUnit": "Contributor (Organizational Unit)",
-  "relationships.isContributorOf.OrgUnit": "Collaboratore (Struttura)",
+  "relationships.isContributorOf.OrgUnit": "Collaboratore (Organizzazione)",
 
   // "relationships.isContributorOf.Person": "Contributor",
   "relationships.isContributorOf.Person": "Collaboratore",
@@ -10969,7 +10969,7 @@
   "search.filters.entityType.JournalVolume": "Volume del Periodico",
 
   // "search.filters.entityType.OrgUnit": "Organizational Unit",
-  "search.filters.entityType.OrgUnit": "Struttura",
+  "search.filters.entityType.OrgUnit": "Organizzazione",
 
   // "search.filters.entityType.Publication": "Publication",
   "search.filters.entityType.Publication": "Publicazione",
@@ -10993,7 +10993,7 @@
   "search.filters.entityType.Place": "Luogo",
 
   // "search.filters.entityType.Audiovideo": "Audio Video",
-  "search.filters.entityType.Audiovideo": "Audio Video",
+  "search.filters.entityType.Audiovideo": "Materiale Audiovisivo",
 
   // "search.filters.entityType.Family": "Family",
   "search.filters.entityType.Family": "Famiglia",
@@ -11002,7 +11002,7 @@
   "search.filters.entityType.Aggregation": "Aggregazione",
 
   // "search.filters.entityType.News": "News",
-  "search.filters.entityType.News": "News",
+  "search.filters.entityType.News": "Immagini dello Slider",
 
   // "search.filters.entityType.StaticPage": "Static Page",
   "search.filters.entityType.StaticPage": "Static Page",
@@ -11011,16 +11011,16 @@
   "search.filters.entityType.Path": "Percorso",
 
   // "search.filters.entityType.JournalFile": "Journal File",
-  "search.filters.entityType.JournalFile": "Fascicolo Periodico",
+  "search.filters.entityType.JournalFile": "Fascicolo di Periodico",
 
   // "search.filters.entityType.JournalFonds": "Journal Fonds",
-  "search.filters.entityType.JournalFonds": "Testata Periodico",
+  "search.filters.entityType.JournalFonds": "Periodico",
 
   // "search.filters.entityType.Picture": "Picture",
   "search.filters.entityType.Picture": "Fotografia",
 
   // "search.filters.entityType.Artwork": "Artwork",
-  "search.filters.entityType.Artwork": "Materiale artistico",
+  "search.filters.entityType.Artwork": "Opera d’Arte",
 
   // "search.filters.entityType.BnmScheme": "Naturalistic-Mineralogical Heritage",
   "search.filters.entityType.BnmScheme": "Bene naturalistico-mineralogico",
@@ -11032,7 +11032,7 @@
   "search.filters.entityType.MusicalLibrettos": "Libretto musicale",
 
   // "search.filters.entityType.Coin": "Coin",
-  "search.filters.entityType.Coin": "Moneta",
+  "search.filters.entityType.Coin": "Bene Numismatico",
 
   // "search.filters.has_content_in_original_bundle.true": "Yes",
   "search.filters.has_content_in_original_bundle.true": "Si",
@@ -12203,7 +12203,7 @@
   "submission.import-external.preview.title.Journal": "Anteprima journal",
 
   // "submission.import-external.preview.title.OrgUnit": "Organizational Unit Preview",
-  "submission.import-external.preview.title.OrgUnit": "Anteprima struttura",
+  "submission.import-external.preview.title.OrgUnit": "Anteprima organizzazione",
 
   // "submission.import-external.preview.title.Person": "Person Preview",
   "submission.import-external.preview.title.Person": "Anteprima persona",
@@ -12563,7 +12563,7 @@
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.Person": "Autori locali ({{ count }})",
 
   // "submission.sections.describe.relationship-lookup.search-tab.tab-title.OrgUnit": "Local Organizational Units ({{ count }})",
-  "submission.sections.describe.relationship-lookup.search-tab.tab-title.OrgUnit": "Unità organizzative locali ({{ count }})",
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.OrgUnit": "Organizzazioni locali ({{ count }})",
 
   // "submission.sections.describe.relationship-lookup.search-tab.tab-title.DataPackage": "Local Data Packages ({{ count }})",
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.DataPackage": "Pacchetti di dati locali ({{ count }})",
@@ -12649,7 +12649,7 @@
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.isFundingOfPublication": "Cerca finanziamenti",
 
   // "submission.sections.describe.relationship-lookup.search-tab.tab-title.isChildOrgUnitOf": "Search for Organizational Units",
-  "submission.sections.describe.relationship-lookup.search-tab.tab-title.isChildOrgUnitOf": "Ricerca di unità organizzative",
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.isChildOrgUnitOf": "Ricerca di organizzazioni",
 
   // "submission.sections.describe.relationship-lookup.search-tab.tab-title.isProjectOfPublication": "Projects",
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.isProjectOfPublication": "Progetti",
@@ -12718,7 +12718,7 @@
   "submission.sections.describe.relationship-lookup.title.Person": "Autori",
 
   // "submission.sections.describe.relationship-lookup.title.OrgUnit": "Organizational Units",
-  "submission.sections.describe.relationship-lookup.title.OrgUnit": "Unità organizzative",
+  "submission.sections.describe.relationship-lookup.title.OrgUnit": "Organizzazioni",
 
   // "submission.sections.describe.relationship-lookup.title.DataPackage": "Data Packages",
   "submission.sections.describe.relationship-lookup.title.DataPackage": "Pacchetti di dati",
@@ -12733,7 +12733,7 @@
   "submission.sections.describe.relationship-lookup.title.isFundingOfPublication": "Finanziatore",
 
   // "submission.sections.describe.relationship-lookup.title.isChildOrgUnitOf": "Parent Organizational Unit",
-  "submission.sections.describe.relationship-lookup.title.isChildOrgUnitOf": "Unità organizzativa padre",
+  "submission.sections.describe.relationship-lookup.title.isChildOrgUnitOf": "Organizzazione padre",
 
   // "submission.sections.describe.relationship-lookup.title.isPublicationOfAuthor": "Publication",
   "submission.sections.describe.relationship-lookup.title.isPublicationOfAuthor": "Pubblicazioni",
@@ -12774,7 +12774,7 @@
   "submission.sections.describe.relationship-lookup.selection-tab.title.Person": "Autori selezionati",
 
   // "submission.sections.describe.relationship-lookup.selection-tab.title.OrgUnit": "Selected Organizational Units",
-  "submission.sections.describe.relationship-lookup.selection-tab.title.OrgUnit": "Unità organizzative selezionate",
+  "submission.sections.describe.relationship-lookup.selection-tab.title.OrgUnit": "Organizzazioni selezionate",
 
   // "submission.sections.describe.relationship-lookup.selection-tab.title.DataPackage": "Selected Data Packages",
   "submission.sections.describe.relationship-lookup.selection-tab.title.DataPackage": "Pacchetti di dati selezionati",
@@ -12801,7 +12801,7 @@
   "submission.sections.describe.relationship-lookup.selection-tab.title.JournalIssue": "Fascicolo selezionato",
 
   // "submission.sections.describe.relationship-lookup.selection-tab.title.isChildOrgUnitOf": "Selected Organizational Unit",
-  "submission.sections.describe.relationship-lookup.selection-tab.title.isChildOrgUnitOf": "Unità organizzativa selezionata",
+  "submission.sections.describe.relationship-lookup.selection-tab.title.isChildOrgUnitOf": "Organizzazione selezionata",
 
   // "submission.sections.describe.relationship-lookup.selection-tab.title.sherpaJournal": "Search Results",
   "submission.sections.describe.relationship-lookup.selection-tab.title.sherpaJournal": "Risultati della ricerca",
@@ -12994,10 +12994,10 @@
   "submission.sections.submit.progressbar.custom-url": "Custom url",
 
   // "submission.sections.submit.progressbar.describe.audiovideo": "Item Description",
-  "submission.sections.submit.progressbar.describe.audiovideo": "Informazioni sull'audiovideo",
+  "submission.sections.submit.progressbar.describe.audiovideo": "Informazioni sul Materiale Audiovisivo",
 
   // "submission.sections.submit.progressbar.describe.audiovideo-file": "File Description",
-  "submission.sections.submit.progressbar.describe.audiovideo-file": "Informazioni sul file dell'audiovideo",
+  "submission.sections.submit.progressbar.describe.audiovideo-file": "Informazioni sul file del Materiale Audiovisivo",
 
   // "submission.sections.submit.progressbar.describe.equipment": "Equipment basic information",
   "submission.sections.submit.progressbar.describe.equipment": "Informazioni di base sull'attrezzatura",
@@ -13969,7 +13969,7 @@
 
   // "orgunit.search.results.head": "Organizational Unit Search Results",
   // TODO Source message changed - Revise the translation
-  "orgunit.search.results.head": "Risultati della ricerca: Strutture",
+  "orgunit.search.results.head": "Risultati della ricerca: Organizzazioni",
 
   // "workflow-item.edit.breadcrumbs": "Edit workflowitem",
   "workflow-item.edit.breadcrumbs": "Modifica l'item del workflow",
@@ -14657,7 +14657,7 @@
   "fonds.listelement.badge": "Fondo",
 
   // "journalfonds.listelement.badge": "Journal Fonds",
-  "journalfonds.listelement.badge": "Testata",
+  "journalfonds.listelement.badge": "Periodico",
 
   // "archivalmaterials.listelement.badge": "Archival Materials",
   "archivalmaterials.listelement.badge": "Materiale Archivistico",
@@ -14668,7 +14668,7 @@
   "fond.listelement.badge": "Fondo",
 
   // "journalfond.listelement.badge": "Journal Fond",
-  "journalfond.listelement.badge": "Testata",
+  "journalfond.listelement.badge": "Periodico",
 
   // "aggregation.page.titleprefix": "Aggregation: ",
   "aggregation.page.titleprefix": "Aggregazione: ",
@@ -14679,13 +14679,13 @@
   // "fonds.page.titleprefix": "Fonds: ",
   "fonds.page.titleprefix": "Fondi: ",
   // "picture.page.titleprefix": "Picture: ",
-  "picture.page.titleprefix": "Immagine: ",
+  "picture.page.titleprefix": "Fotografia: ",
   // "journalfonds.page.titleprefix": "Journal Fonds: ",
-  "journalfonds.page.titleprefix": "Testate: ",
+  "journalfonds.page.titleprefix": "Periodico: ",
   // "journalfile.page.titleprefix": "Journal File: ",
-  "journalfile.page.titleprefix": "Periodici: ",
+  "journalfile.page.titleprefix": "Fascicolo di Periodico: ",
   // "news.page.titleprefix": "News: ",
-  "news.page.titleprefix": "News: ",
+  "news.page.titleprefix": "Immagine dello Slider: ",
   // "path.page.titleprefix": "Path: ",
   "path.page.titleprefix": "Percorso: ",
   // "place.page.titleprefix": "Place: ",
@@ -14695,7 +14695,7 @@
   // "opera.page.titleprefix": "Opera: ",
   "opera.page.titleprefix": "Opera: ",
   // "coin.page.titleprefix": "Coin: ",
-  "coin.page.titleprefix": "Moneta: ",
+  "coin.page.titleprefix": "Bene Numismatico: ",
   // "scientificmaterial.page.titleprefix": "Scientific Material: ",
   "scientificmaterial.page.titleprefix": "Materiale scientifico: ",
   // "musicallibrettos.page.titleprefix": "Musical Librettos: ",
@@ -14709,7 +14709,7 @@
   // "aggregation.listelement.badge": "Aggregation",
   "aggregation.listelement.badge": "Aggregazione",
   // "news.listelement.badge": "News",
-  "news.listelement.badge": "News",
+  "news.listelement.badge": "Immagini dello Slider",
   // "staticpage.listelement.badge": "Page",
   "staticpage.listelement.badge": "Pagina",
   // "path.listelement.badge": "Path",
@@ -14717,14 +14717,14 @@
   // "opera.listelement.badge": "Opera",
   "opera.listelement.badge": "Opera",
   // "coin.listelement.badge": "Coin",
-  "coin.listelement.badge": "Moneta",
+  "coin.listelement.badge": "Bene Numismatico",
   // "scientificmaterial.listelement.badge": "Scientific Material",
   "scientificmaterial.listelement.badge": "Materiale scientifico",
   // "musicallibrettos.listelement.badge": "Musical Librettos",
   "musicallibrettos.listelement.badge": "Libretti musicali",
 
   // "picture.listelement.badge": "Picture",
-  "picture.listelement.badge": "Immagine",
+  "picture.listelement.badge": "Fotografia",
   // "webannotation.listelement.badge": "Web Annotation",
   "webannotation.listelement.badge": "Annotazione",
   // "personalannotation.listelement.badge": "Personal Annotation",
@@ -14733,7 +14733,7 @@
   // "menu.section.explore_sectionfonds": "Fonds",
   "menu.section.explore_sectionfonds": "Fondi",
   // "menu.section.explore_sectionjournalfonds": "Journal Fonds",
-  "menu.section.explore_sectionjournalfonds": "Testate",
+  "menu.section.explore_sectionjournalfonds": "Periodici",
 
   // "menu.section.explore_sectionaggregations": "Aggregations",
   "menu.section.explore_sectionaggregations": "Aggregazioni",
@@ -14742,7 +14742,7 @@
   // "explore.counters-section.fonds": "Fonds",
   "explore.counters-section.fonds": "Fondi",
   // "explore.counters-section.journalfonds": "Journal Fonds",
-  "explore.counters-section.journalfonds": "Testate",
+  "explore.counters-section.journalfonds": "Periodici",
   // "explore.counters-section.aggregations": "Aggregations",
   "explore.counters-section.aggregations": "Aggregazioni",
   // "explore.counters-section.documents": "Documents & other materials",
@@ -14777,7 +14777,7 @@
   // "explore.index.fonds": "Fonds",
   "explore.index.fonds": "Fondi",
   // "explore.index.journalfonds": "Journal Fonds",
-  "explore.index.journalfonds": "Testata",
+  "explore.index.journalfonds": "Periodico",
   // "explore.index.aggregation": "Aggregation",
   "explore.index.aggregation": "Aggregazione",
   // "explore.index.parentA": "Parent",
@@ -14790,7 +14790,7 @@
   "explore.search-section.sectionfonds.title": "Fondi",
 
   // "explore.search-section.sectionjournalfonds.title": "Search Journal fonds",
-  "explore.search-section.sectionjournalfonds.title": "Testate",
+  "explore.search-section.sectionjournalfonds.title": "Periodici",
 
   // "explore.search-section.sectionaggregations.title": "Search Aggregations",
   "explore.search-section.sectionaggregations.title": "Aggregazioni",
@@ -14801,7 +14801,7 @@
   // "explore.sectionfonds.breadcrumbs": "Fonds",
   "explore.sectionfonds.breadcrumbs": "Fondi",
   // "explore.sectionjournalfonds.breadcrumbs": "Journal Fonds",
-  "explore.sectionjournalfonds.breadcrumbs": "Testate",
+  "explore.sectionjournalfonds.breadcrumbs": "Periodici",
   // "explore.sectionaggregations.breadcrumbs": "Aggregations",
   "explore.sectionaggregations.breadcrumbs": "Aggregazioni",
   // "documents.search.results.head": "Documents & other materials Search Results",
@@ -14839,13 +14839,13 @@
   // "search.filters.applied.f.fonds": "Fonds",
   "search.filters.applied.f.fonds": "Fondi",
   // "search.filters.filter.journalfonds.head": "Journal Fonds",
-  "search.filters.filter.journalfonds.head": "Testata",
+  "search.filters.filter.journalfonds.head": "Periodici",
   // "search.filters.filter.journalfonds.placeholder": "Journal Fonds name",
   "search.filters.filter.journalfonds.placeholder": "Nome",
   // "search.filters.filter.journalfonds.label": "Search Journal Fonds name",
   "search.filters.filter.journalfonds.label": "Ricerca per nome",
   // "search.filters.applied.f.journalfonds": "Journal Fonds",
-  "search.filters.applied.f.journalfonds": "Testata",
+  "search.filters.applied.f.journalfonds": "Periodico",
   // "search.filters.filter.aggregation.head": "Aggregation",
   "search.filters.filter.aggregation.head": "Aggregazione",
   // "search.filters.filter.aggregation.placeholder": "Aggregation name",
@@ -14932,13 +14932,13 @@
   "submission.sections.submit.progressbar.describe.books": "Informazioni di base",
 
   // "submission.sections.submit.progressbar.describe.coin-glam-bibliography": "Coin bibliographic details",
-  "submission.sections.submit.progressbar.describe.coin-glam-bibliography": "Dettagli bibliografici della Moneta",
+  "submission.sections.submit.progressbar.describe.coin-glam-bibliography": "Dettagli bibliografici del Bene Numismatico",
 
   // "submission.sections.submit.progressbar.describe.artworks": "Artwork basic information",
   "submission.sections.submit.progressbar.describe.artworks": "Informazioni di base",
 
   // "submission.sections.submit.progressbar.describe.artworks-glam-bibliography": "Artwork bibliographic details",
-  "submission.sections.submit.progressbar.describe.artworks-glam-bibliography": "Dettagli bibliografici dell'Opera",
+  "submission.sections.submit.progressbar.describe.artworks-glam-bibliography": "Dettagli bibliografici dell'Opera d'Arte",
 
   // "submission.sections.submit.progressbar.describe.artworks-dc-contributor-author": "Authors basic information",
   "submission.sections.submit.progressbar.describe.artworks-dc-contributor-author": "Informazioni di base dell'Autore",
@@ -15013,7 +15013,7 @@
   "vocabulary-treeview.header.fondsboxtree": "Albero Archivistico",
 
   // "vocabulary-treeview.header.journalfondsboxtree": "Journal Fonds Arrangement",
-  "vocabulary-treeview.header.journalfondsboxtree": "Albero della Testata",
+  "vocabulary-treeview.header.journalfondsboxtree": "Albero del Periodico",
 
   // "vocabulary-treeview.header.aggregationboxtree": "Aggregation Arrangement",
   "vocabulary-treeview.header.aggregationboxtree": "Albero Archivistico",
@@ -15073,7 +15073,7 @@
   "context-menu.actions.edit-item-relationships.btn.places": "Gestisci i luoghi",
 
   // "journalfile.listelement.badge": "Journal File",
-  "journalfile.listelement.badge": "Fascicolo Periodico",
+  "journalfile.listelement.badge": "Fascicolo di Periodico",
 
   // "listable-notification-object.default-message": "This object couldn't be retrieved",
   "listable-notification-object.default-message": "Questo oggetto non può essere recuperato",
@@ -17111,7 +17111,7 @@
   // "layout.tab.header.JournalFonds.details": "Journal Fonds Details",
   "layout.tab.header.JournalFonds.details": "Consultazione Analitica",
   // "layout.tab.header.JournalFonds.journalfondscontext": "Journal Fonds Context",
-  "layout.tab.header.JournalFonds.journalfondscontext": "Consulta la Testata",
+  "layout.tab.header.JournalFonds.journalfondscontext": "Consulta il Periodico",
   // "layout.tab.header.JournalFonds.children": "Journal Fonds Children",
   "layout.tab.header.JournalFonds.children": "Livello di descrizione inferiore",
   // "layout.tab.header.JournalFonds.relations": "Relations",
@@ -17327,15 +17327,15 @@
   // "layout.box.header.JournalFonds.journalfondsdescription": "Description",
   "layout.box.header.JournalFonds.journalfondsdescription": "Descrizione",
   // "layout.box.header.JournalFonds.journalfondsindex": "Journal Fonds Index",
-  "layout.box.header.JournalFonds.journalfondsindex": "Indice della Testata",
+  "layout.box.header.JournalFonds.journalfondsindex": "Indice del Periodico",
   // "layout.box.header.JournalFonds.children": "Journal Fonds Children",
   "layout.box.header.JournalFonds.children": "Livello di Descrizione Inferiore",
   // "layout.box.header.JournalFonds.relationjournalfonds": "Related Journal Fonds",
-  "layout.box.header.JournalFonds.relationjournalfonds": "Testata Correlata",
+  "layout.box.header.JournalFonds.relationjournalfonds": "Periodico Correlato",
   // "layout.box.header.JournalFonds.relationperson": "Related People",
   "layout.box.header.JournalFonds.relationperson": "Persone",
   // "layout.box.header.JournalFonds.relationparent": "Parent",
-  "layout.box.header.JournalFonds.relationparent": "Testata Radice",
+  "layout.box.header.JournalFonds.relationparent": "Periodico Radice",
 
   // "layout.box.header.News.newsdescription": "Description",
   "layout.box.header.News.newsdescription": "Descrizione",
@@ -17404,7 +17404,7 @@
   // "layout.box.header.JournalFile.details": "Description",
   "layout.box.header.JournalFile.details": "Descrizione",
   // "layout.box.header.JournalFile.relationjournalfonds": "Journal Fonds",
-  "layout.box.header.JournalFile.relationjournalfonds": "Testata",
+  "layout.box.header.JournalFile.relationjournalfonds": "Periodico",
   // "layout.box.header.JournalFile.relationaggregation": "Aggregations",
   "layout.box.header.JournalFile.relationaggregation": "Aggregazioni",
   // "layout.box.header.JournalFile.relationpath": "Paths",
@@ -17438,7 +17438,7 @@
   // "layout.box.header.Publication.relationperson": "Person",
   "layout.box.header.Publication.relationperson": "Persone",
   // "layout.box.header.Publication.relationjournalfonds": "Journal Fonds",
-  "layout.box.header.Publication.relationjournalfonds": "Testata",
+  "layout.box.header.Publication.relationjournalfonds": "Periodico",
   // "layout.box.header.Publication.relationaggregation": "Aggregations",
   "layout.box.header.Publication.relationaggregation": "Aggregazioni",
   // "layout.box.header.Publication.relationisreferencedby": "Related Documents",
@@ -17448,11 +17448,11 @@
   // "layout.box.header.Publication.relationevent": "Events",
   "layout.box.header.Publication.relationevent": "Evento",
   // "layout.box.header.Publication.glamjournalfondrelationjournalfond": "Related Journal Fonds",
-  "layout.box.header.Publication.glamjournalfondrelationjournalfond": "Testata Correlata",
+  "layout.box.header.Publication.glamjournalfondrelationjournalfond": "Periodico Correlato",
   // "layout.box.header.Publication.glamjournalfondrelationperson": "Related People",
   "layout.box.header.Publication.glamjournalfondrelationperson": "Persone",
   // "layout.box.header.Publication.glamjournalfondparent": "Parent",
-  "layout.box.header.Publication.glamjournalfondparent": "Testata Radice",
+  "layout.box.header.Publication.glamjournalfondparent": "Periodico Radice",
   // "layout.box.header.Publication.glamfondsparent": "Parent",
   "layout.box.header.Publication.glamfondsparent": "Fondo Radice",
   // "layout.box.header.Publication.relationispartofcontainer": "Is part of",
@@ -17602,8 +17602,7 @@
   // TODO New key - Add a translation
   "layout.box.header.JournalIssue.relationedition": "Edition",
   // "layout.box.header.JournalIssue.relationjournalfond": "Journal Fond",
-  // TODO New key - Add a translation
-  "layout.box.header.JournalIssue.relationjournalfond": "Journal Fond",
+  "layout.box.header.JournalIssue.relationjournalfond": Periodico",
   // "layout.box.header.JournalIssue.relationpath": "Path",
   "layout.box.header.JournalIssue.relationpath": "Percorsi",
   // "layout.box.header.JournalIssue.relationaggregation": "Aggregation",
@@ -17926,15 +17925,15 @@
   // TODO Source message changed - Revise the translation
   "layout.field.label.Publication.BITSTREAM": "File / Documentazione",
   // "layout.field.label.Publication.[dc.relation.journalfonds]": "Journal Fonds ",
-  "layout.field.label.Publication.[dc.relation.journalfonds]": "Testata Correlata",
+  "layout.field.label.Publication.[dc.relation.journalfonds]": "Periodico Correlato",
   // "layout.field.label.Publication.[dc.relation.event]": "Events",
   "layout.field.label.Publication.[dc.relation.event]": "Evento",
   // "layout.field.label.Publication.[glamjournalfonds.relation.journalfonds]": "Related Journal Fonds",
-  "layout.field.label.Publication.[glamjournalfonds.relation.journalfonds]": "Testata Correlata",
+  "layout.field.label.Publication.[glamjournalfonds.relation.journalfonds]": "Periodico Correlato",
   // "layout.field.label.Publication.[glamjournalfonds.relation.person]": "Related People",
   "layout.field.label.Publication.[glamjournalfonds.relation.person]": "Persona",
   // "layout.field.label.Publication.[glamjournalfonds.parent]": "Parent",
-  "layout.field.label.Publication.[glamjournalfonds.parent]": "Testata Radice",
+  "layout.field.label.Publication.[glamjournalfonds.parent]": "Periodico Radice",
   // "layout.field.label.Publication.[glamfonds.parent]": "Parent",
   "layout.field.label.Publication.[glamfonds.parent]": "Fondo Radice",
   // "layout.field.label.Publication.[dc.relation.ispartofcontainer]": "Is part of",
@@ -18078,7 +18077,7 @@
   // "layout.field.label.JournalFonds.[glamfonds.shelfmark]": "Shelfmark",
   "layout.field.label.JournalFonds.[glamfonds.shelfmark]": "Segnatura",
   // "layout.field.label.JournalFonds.[glamjournalfonds.relation.journalfonds]": "Related Journal Fonds",
-  "layout.field.label.JournalFonds.[glamjournalfonds.relation.journalfonds]": "Testata Correlata",
+  "layout.field.label.JournalFonds.[glamjournalfonds.relation.journalfonds]": "Periodico Correlato",
   // "layout.field.label.JournalFonds.[glamjournalfonds.ownedyears]": "Owned Years",
   "layout.field.label.JournalFonds.[glamjournalfonds.ownedyears]": "Periodo di Attività",
   // "layout.field.label.JournalFonds.[glamjournalfonds.relation.person]": "Related People",
@@ -18092,9 +18091,9 @@
   // "layout.field.label.JournalFonds.[dc.relation.person]": "Person",
   "layout.field.label.JournalFonds.[dc.relation.person]": "Persone",
   // "layout.field.label.JournalFonds.[glamjournalfonds.parent]": "Journal Fonds Parent",
-  "layout.field.label.JournalFonds.[glamjournalfonds.parent]": "Testata Radice",
+  "layout.field.label.JournalFonds.[glamjournalfonds.parent]": "Periodico Radice",
   // "layout.field.label.JournalFonds.[glamjournalfonds.history]": "Journal Fonds History",
-  "layout.field.label.JournalFonds.[glamjournalfonds.history]": "Storia della Testata",
+  "layout.field.label.JournalFonds.[glamjournalfonds.history]": "Storia del Periodico",
   // "layout.field.label.JournalFonds.[dc.relation.path]": "Path",
   "layout.field.label.JournalFonds.[dc.relation.path]": "Percorso",
   // "layout.field.label.JournalFonds.[dc.relation.aggregation]": "Aggregation",
@@ -18325,7 +18324,7 @@
   "layout.field.label.JournalFile.[dc.description.abstract]": "Abstract",
   // "layout.field.label.JournalFile.[dc.relation.journalfonds]": "Journal Fonds ",
   // TODO Source message changed - Revise the translation
-  "layout.field.label.JournalFile.[dc.relation.journalfonds]": "Testata",
+  "layout.field.label.JournalFile.[dc.relation.journalfonds]": "Periodico",
   // "layout.field.label.JournalFile.[dc.rights.license]": "License",
   "layout.field.label.JournalFile.[dc.rights.license]": "Licenza",
   // "layout.field.label.JournalFile.[dc.relation.path]": "Path",
@@ -18727,7 +18726,7 @@
   // "layout.field.label.JournalIssue.dc.description": "Description",
   "layout.field.label.JournalIssue.dc.description": "Descrizione",
   // "layout.field.label.JournalIssue.dc.relation.journalfond": "Journal Fond",
-  "layout.field.label.JournalIssue.dc.relation.journalfond": "Testata",
+  "layout.field.label.JournalIssue.dc.relation.journalfond": "Periodico",
   // "layout.field.label.JournalIssue.dc.identifier.archivalunit": "Archival Unit",
   "layout.field.label.JournalIssue.dc.identifier.archivalunit": "Numero di corda",
   // "layout.field.label.JournalIssue.dc.rights.license": "License",
