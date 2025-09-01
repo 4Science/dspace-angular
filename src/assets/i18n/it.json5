@@ -4986,7 +4986,7 @@
   "explore.index.corporate": "Soggetto Produttore/Organizzazione",
 
   // "explore.index.opera": "Opera",
-  "explore.index.opera": "Lirico",
+  "explore.index.opera": "Opera",
 
   // "explore.search-section.infrastructure.title": "Infrastructure",
   "explore.search-section.infrastructure.title": "Infrastruttura",
@@ -10954,13 +10954,13 @@
   "search.filters.filter.family.placeholder": "Famiglia",
 
   // "search.filters.filter.opera.head": "Opera",
-  "search.filters.filter.opera.head": "Lirico",
+  "search.filters.filter.opera.head": "Opera",
 
   // "search.filters.filter.opera.label": "Opera",
-  "search.filters.filter.opera.label": "Lirico",
+  "search.filters.filter.opera.label": "Opera",
 
   // "search.filters.filter.opera.placeholder": "Opera",
-  "search.filters.filter.opera.placeholder": "Lirico",
+  "search.filters.filter.opera.placeholder": "Opera",
 
   // "search.filters.entityType.JournalIssue": "Journal Issue",
   "search.filters.entityType.JournalIssue": "Fascicolo Periodico",
