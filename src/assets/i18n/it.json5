@@ -1490,7 +1490,7 @@
   "admin.search.item.edit": "Modifica",
 
   // "admin.search.item.make-private": "Make non-discoverable",
-  "admin.search.item.make-private": "Rendi privato",
+  "admin.search.item.make-private": "Rendi non ricercabile",
 
   // "admin.search.item.make-public": "Make discoverable",
   "admin.search.item.make-public": "Rendi pubblico",
@@ -5896,7 +5896,7 @@
   "info.coar-notify-support.breadcrumbs": "COAR Notify Support",
 
   // "item.alerts.private": "This item is non-discoverable",
-  "item.alerts.private": "Questo item è privato",
+  "item.alerts.private": "Questo item non è ricercabile",
 
   // "item.alerts.withdrawn": "This item has been withdrawn",
   "item.alerts.withdrawn": "Questo item è stato rimosso",
@@ -5920,7 +5920,7 @@
   "item.badge.status": "Item status:",
 
   // "item.badge.private": "Non-discoverable",
-  "item.badge.private": "Privato",
+  "item.badge.private": "Non ricercabile",
 
   // "item.badge.withdrawn": "Withdrawn",
   "item.badge.withdrawn": "Rimosso",
@@ -6421,19 +6421,19 @@
   "item.edit.private.cancel": "Annulla",
 
   // "item.edit.private.confirm": "Make it non-discoverable",
-  "item.edit.private.confirm": "Rendilo privato",
+  "item.edit.private.confirm": "Rendilo non ricercabile",
 
   // "item.edit.private.description": "Are you sure this item should be made non-discoverable in the archive?",
-  "item.edit.private.description": "Sei sicuro che questo item debba essere reso privato nell'archivio?",
+  "item.edit.private.description": "Sei sicuro che questo item debba essere reso non ricercabile nell'archivio?",
 
   // "item.edit.private.error": "An error occurred while making the item non-discoverable",
-  "item.edit.private.error": "Si è verificato un errore durante la modifica dell'item in privato",
+  "item.edit.private.error": "Si è verificato un errore durante la modifica dell'item in non ricercabile",
 
   // "item.edit.private.header": "Make item non-discoverable: {{ id }}",
-  "item.edit.private.header": "Rendi privato l'item: {{ id }}",
+  "item.edit.private.header": "Rendi non ricercabile l'item: {{ id }}",
 
   // "item.edit.private.success": "The item is now non-discoverable",
-  "item.edit.private.success": "L'item è ora privato",
+  "item.edit.private.success": "L'item è ora non ricercabile",
 
   // "item.edit.public.cancel": "Cancel",
   "item.edit.public.cancel": "Annulla",
@@ -6586,10 +6586,10 @@
   "item.edit.tabs.status.buttons.move.label": "Spostare l'item in un'altra collection",
 
   // "item.edit.tabs.status.buttons.private.button": "Make it non-discoverable...",
-  "item.edit.tabs.status.buttons.private.button": "Rendilo privato...",
+  "item.edit.tabs.status.buttons.private.button": "Rendilo non ricercabile...",
 
   // "item.edit.tabs.status.buttons.private.label": "Make item non-discoverable",
-  "item.edit.tabs.status.buttons.private.label": "Rendere l'item privato",
+  "item.edit.tabs.status.buttons.private.label": "Rendere l'item non ricercabile",
 
   // "item.edit.tabs.status.buttons.public.button": "Make it discoverable...",
   "item.edit.tabs.status.buttons.public.button": "Rendilo pubblico...",
@@ -10282,7 +10282,7 @@
   "search.filters.applied.f.dateSubmitted": "Data di invio",
 
   // "search.filters.applied.f.discoverable": "Non-discoverable",
-  "search.filters.applied.f.discoverable": "Privato",
+  "search.filters.applied.f.discoverable": "Non ricercabile",
 
   // "search.filters.applied.f.entityType": "Item Type",
   "search.filters.applied.f.entityType": "Tipo di item",
@@ -10613,7 +10613,7 @@
   "search.filters.filter.dateSubmitted.label": "Data di ricerca inviata",
 
   // "search.filters.filter.discoverable.head": "Non-discoverable",
-  "search.filters.filter.discoverable.head": "Privato",
+  "search.filters.filter.discoverable.head": "Non ricercabile",
 
   // "search.filters.filter.editor.head": "Editor",
   "search.filters.filter.editor.head": "Curatore",
