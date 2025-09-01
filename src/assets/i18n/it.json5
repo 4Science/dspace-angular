@@ -3063,8 +3063,8 @@
   // "context-menu.actions.audit-item.btn": "Audit",
   "context-menu.actions.audit-item.btn": "Revisione",
 
-  // "context-menu.actions.bulk-import.btn": "Import items into collection",
-  "context-menu.actions.bulk-import.btn": "Importa item nella collection",
+  // "context-menu.actions.bulk-import.btn": "Import into collection",
+  "context-menu.actions.bulk-import.btn": "Importa nella collection",
 
   // "context-menu.actions.claim.btn": "Claim this profile",
   "context-menu.actions.claim.btn": "Collega questo profilo",
