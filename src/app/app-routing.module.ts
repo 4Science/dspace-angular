@@ -184,7 +184,7 @@ import {
             data: {
               isBackDoor: true,
             },
-            canMatch: [() => environment.auth.disableStandardLogin],
+            canMatch: [() => !environment.auth.disableStandardLogin],
           },
           {
             path: 'login',
@@ -192,7 +192,6 @@ import {
             data: {
               isBackDoor: false,
             },
-            canMatch: [() => !environment.auth.disableStandardLogin],
           },
           {
             path: 'external-login/:token',

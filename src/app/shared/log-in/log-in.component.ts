@@ -132,7 +132,7 @@ export class LogInComponent implements OnInit, OnDestroy {
           if (isBackdoor) {
             return authM.authMethodType === AuthMethodType.Password;
           }
-          if (isStandardLoginDisabled) {
+          if (!isStandardLoginDisabled) {
             return authM.authMethodType !== AuthMethodType.Password;
           }
           return true;
