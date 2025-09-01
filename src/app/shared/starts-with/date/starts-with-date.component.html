@@ -3,7 +3,7 @@
     <span class="col-12 font-weight-bold mb-1">
       {{'browse.startsWith.jump' | translate}}
     </span>
-    <div class="col-6 col-md-2">
+    <div class="col-6 col-md-2" *ngIf="enableYear">
       <select id="year-select" class="form-control" (change)="setStartsWithYearEvent($event)" [attr.aria-label]="'browse.startsWith.choose_year.label' |translate">
         <option [value]="-1" [selected]="!startsWithYear">
           {{'browse.startsWith.choose_year' | translate}}
@@ -15,7 +15,7 @@
         </option>
       </select>
     </div>
-    <div class="col-6 col-md-2">
+    <div class="col-6 col-md-2" *ngIf="enableMonth">
       <select id="month-select" class="form-control" (change)="setStartsWithMonthEvent($event)" [attr.aria-label]="'browse.startsWith.months.none.label' |translate">
         <option *ngFor="let option of monthOptions"
                 [value]="option"
