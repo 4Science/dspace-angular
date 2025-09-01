@@ -5776,68 +5776,53 @@
   "info.end-user-agreement.hosting-country": "gli Stati Uniti",
 
   // "info.general-information.breadcrumbs": "General Information",
-  // TODO New key - Add a translation
-  "info.general-information.breadcrumbs": "General Information",
+  "info.general-information.breadcrumbs": "Informazioni generali",
 
   // "info.general-information.head": "General Information",
-  // TODO New key - Add a translation
-  "info.general-information.head": "General Information",
+  "info.general-information.head": "Informazioni generali",
 
   // "info.general-information.title": "General Information",
-  // TODO New key - Add a translation
-  "info.general-information.title": "General Information",
+  "info.general-information.title": "Informazioni generali",
 
   // "info.offered-services.breadcrumbs": "Offered Services",
-  // TODO New key - Add a translation
-  "info.offered-services.breadcrumbs": "Offered Services",
+  "info.offered-services.breadcrumbs": "Servizi Offerti",
 
   // "info.offered-services.head": "Offered Services",
-  // TODO New key - Add a translation
-  "info.offered-services.head": "Offered Services",
+  "info.offered-services.head": "Servizi Offerti",
 
   // "info.offered-services.title": "Offered Services",
-  // TODO New key - Add a translation
-  "info.offered-services.title": "Offered Services",
+  "info.offered-services.title": "Servizi Offerti",
 
   // "info.history-digital-lid.breadcrumbs": "History of the digital library",
-  // TODO New key - Add a translation
-  "info.history-digital-lid.breadcrumbs": "History of the digital library",
+  "info.history-digital-lid.breadcrumbs": "Cronistoria della Digital Library",
 
   // "info.history-digital-lid.head": "History of the digital library",
-  // TODO New key - Add a translation
-  "info.history-digital-lid.head": "History of the digital library",
+  "info.history-digital-lid.head": "Cronistoria della Digital Library",
 
   // "info.end-user-agreement.content.fallback": "Accept the user agreement.",
   // TODO New key - Add a translation
   "info.end-user-agreement.content.fallback": "Accept the user agreement.",
 
   // "info.privacy.breadcrumbs": "Privacy Statement",
-  // TODO New key - Add a translation
-  "info.privacy.breadcrumbs": "Privacy Statement",
+  "info.privacy.breadcrumbs": "Informativa sulla privacy",
 
   // "info.privacy.head": "Privacy Statement",
-  // TODO New key - Add a translation
-  "info.privacy.head": "Privacy Statement",
+  "info.privacy.head": "Informativa sulla privacy",
 
   // "info.privacy.title": "Privacy Statement",
-  // TODO New key - Add a translation
-  "info.privacy.title": "Privacy Statement",
+  "info.privacy.title": "Informativa sulla privacy",
 
   // "info.history-digital-lid.title": "History of the digital library",
-  // TODO New key - Add a translation
-  "info.history-digital-lid.title": "History of the digital library",
+  "info.history-digital-lid.title": "Cronistoria della Digital Library",
 
   // "info.organizational-structure.breadcrumbs": "Organizational structure",
-  // TODO New key - Add a translation
-  "info.organizational-structure.breadcrumbs": "Organizational structure",
+  "info.organizational-structure.breadcrumbs": "Struttura organizzativa",
 
   // "info.organizational-structure.head": "Organizational structure",
-  // TODO New key - Add a translation
-  "info.organizational-structure.head": "Organizational structure",
+  "info.organizational-structure.head": "Struttura organizzativa",
 
   // "info.organizational-structure.title": "Organizational structure",
-  // TODO New key - Add a translation
-  "info.organizational-structure.title": "Organizational structure",
+  "info.organizational-structure.title": "Struttura organizzativa",
 
   // "info.feedback.breadcrumbs": "Feedback",
   "info.feedback.breadcrumbs": "Feedback",
