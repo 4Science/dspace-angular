@@ -17602,7 +17602,7 @@
   // TODO New key - Add a translation
   "layout.box.header.JournalIssue.relationedition": "Edition",
   // "layout.box.header.JournalIssue.relationjournalfond": "Journal Fond",
-  "layout.box.header.JournalIssue.relationjournalfond": Periodico",
+  "layout.box.header.JournalIssue.relationjournalfond": "Periodico",
   // "layout.box.header.JournalIssue.relationpath": "Path",
   "layout.box.header.JournalIssue.relationpath": "Percorsi",
   // "layout.box.header.JournalIssue.relationaggregation": "Aggregation",
