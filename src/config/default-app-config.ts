@@ -147,7 +147,7 @@ export class DefaultAppConfig implements AppConfig {
       // This is independent from the idle warning.
       timeLeftBeforeTokenRefresh: 2 * 60 * 1000, // 2 minutes
     },
-    disableStandardLogin: false, // Enable the standard login form
+    disableStandardLogin: true, // Enable the standard login form
   };
 
   // Form settings
