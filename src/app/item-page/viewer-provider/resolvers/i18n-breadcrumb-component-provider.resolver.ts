@@ -8,6 +8,7 @@ import {
 import { BreadcrumbConfig } from '../../../breadcrumbs/breadcrumb/breadcrumb-config.model';
 import { i18nBreadcrumbResolver } from '../../../core/breadcrumbs/i18n-breadcrumb.resolver';
 import { I18nBreadcrumbsService } from '../../../core/breadcrumbs/i18n-breadcrumbs.service';
+import { currentPathFromSnapshot } from '../../../shared/utils/route.utils';
 
 /**
  * Function for resolving an I18n breadcrumb configuration object
@@ -30,5 +31,9 @@ export const i18nBreadcrumbComponentProviderResolver: ResolveFn<BreadcrumbConfig
       .reduce((acc, curr) => `${acc}.${curr}`, (resolver(snapshot, state) as BreadcrumbConfig<string>).key);
   };
 
-  return resolver(route, state) as BreadcrumbConfig<string>;
+  return {
+    provider: breadcrumbService,
+    key: getKey(route),
+    url: currentPathFromSnapshot(route),
+  };
 };
