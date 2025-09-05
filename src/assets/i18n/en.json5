@@ -4527,6 +4527,30 @@
 
   "item.preview.dspace.entity.type": "Entity Type:",
 
+  "item.preview.person.birthDate": "Birth date:",
+
+  "item.preview.glamperson.deathDate": "Death date:",
+
+  "item.preview.glamperson.birthYear": "Birth Year:",
+
+  "item.preview.glamperson.deathYear": "Deat Year:",
+
+  "item.preview.glamperson.gender": "Gender:",
+
+  "item.preview.glam.link.viaf": "Viaf link:",
+
+  "item.preview.person.identifier": "Viaf ID:",
+
+  "item.preview.person.nationality": "Nationality:",
+
+  "item.preview.glamperson.role": "Role:",
+
+  "item.preview.dc.subject.lcsh": "Occupation:",
+
+  "item.preview.glam.link.wikipedia": "Wikipedia:",
+
+  "item.preview.crisrp.name.variant": "Alternative Name:",
+
   "item.select.confirm": "Confirm selected",
 
   "item.select.empty": "No items to show",
@@ -7529,6 +7553,8 @@
   "submission.import-external.source.openaireTitle": "OpenAIRE by Title",
 
   "submission.import-external.source.rorOrgUnits": "Research Organization Registry (ROR)",
+
+  "submission.import-external.source.viaf": "Viaf",
 
   "submission.import-external.preview.title.Equipment": "Equipment Preview",
 

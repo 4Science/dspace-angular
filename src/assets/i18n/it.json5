@@ -7294,6 +7294,30 @@
   // TODO New key - Add a translation
   "item.preview.dspace.entity.type": "Entity Type:",
 
+  "item.preview.person.birthDate": "Data di nascita:",
+
+  "item.preview.glamperson.deathDate": "Data di morte:",
+
+  "item.preview.glamperson.birthYear": "Anno di nascita:",
+
+  "item.preview.glamperson.deathYear": "Anno di morte:",
+
+  "item.preview.glamperson.gender": "Genere:",
+
+  "item.preview.glam.link.viaf": "Viaf link:",
+
+  "item.preview.person.identifier": "Viaf ID:",
+
+  "item.preview.person.nationality": "Nazionalità:",
+
+  "item.preview.glamperson.role": "Ruolo:",
+
+  "item.preview.dc.subject.lcsh": "Occupazione:",
+
+  "item.preview.glam.link.wikipedia": "Wikipedia:",
+
+  "item.preview.crisrp.name.variant": "Nome alternativo:",
+
   // "item.select.confirm": "Confirm selected",
   "item.select.confirm": "Conferma la selezione",
 
