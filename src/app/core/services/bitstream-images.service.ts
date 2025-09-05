@@ -102,7 +102,7 @@ export class BitstreamImagesService {
 
     // filter bitstreams according to mime type
     return bitstreamPayload$.pipe(
-      switchMap((bitstream: Bitstream) => bitstream.format.pipe(
+      mergeMap((bitstream: Bitstream) => bitstream.format.pipe(
         getFirstCompletedRemoteData(),
         filter((bitstreamFormatRD: RemoteData<BitstreamFormat>) =>
           bitstreamFormatRD.hasSucceeded && hasValue(bitstreamFormatRD.payload) && hasValue(bitstream) &&
