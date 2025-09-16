@@ -9,6 +9,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { LangSwitchComponent } from './lang-switch.component';
 import { LangConfig } from '../../../config/lang-config.interface';
 import { LocaleService } from '../../core/locale/locale.service';
+import { BrowserOnlyDirective } from '../utils/browser-only.directive';
 
 // This test is completely independent from any message catalogs or keys in the codebase
 // The translation module is instantiated with these bogus messages that we aren't using anyway.
@@ -67,7 +68,9 @@ describe('LangSwitchComponent', () => {
       };
 
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule, TranslateModule.forRoot(
+        imports: [HttpClientTestingModule,
+          BrowserOnlyDirective,
+          TranslateModule.forRoot(
           {
             loader: { provide: TranslateLoader, useClass: CustomLoader }
           }
