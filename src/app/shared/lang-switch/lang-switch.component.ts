@@ -16,13 +16,14 @@ import {
 import { LangConfig } from '../../../config/lang-config.interface';
 import { environment } from '../../../environments/environment';
 import { LocaleService } from '../../core/locale/locale.service';
+import { BrowserOnlyDirective } from '../utils/browser-only.directive';
 
 @Component({
   selector: 'ds-base-lang-switch',
   styleUrls: ['lang-switch.component.scss'],
   templateUrl: 'lang-switch.component.html',
   standalone: true,
-  imports: [NgIf, NgbDropdownModule, NgFor, TranslateModule],
+  imports: [NgIf, NgbDropdownModule, NgFor, TranslateModule, BrowserOnlyDirective],
 })
 
 /**

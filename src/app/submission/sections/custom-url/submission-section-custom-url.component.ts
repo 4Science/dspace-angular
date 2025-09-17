@@ -194,6 +194,7 @@ export class SubmissionSectionCustomUrlComponent extends SectionModelComponent {
         id: 'url',
         name: 'url',
         value: sectionData.url,
+        placeholder: 'submission.sections.custom-url.url.placeholder',
       }),
     ];
     this.updateSectionData(sectionData);

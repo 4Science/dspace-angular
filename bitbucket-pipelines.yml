@@ -3,9 +3,78 @@ options:
 
 definitions:
   caches:
-    node-cris8: ./node_modules
+    cypress-2024-02-x: ~/.cache/Cypress
+    node-2024-02-x: ./node_modules
 
   steps:
+    - step: &preliminary-operation
+        name: Preliminary Operation
+        image: alpine/git:latest
+        script:
+          - export HASH_COMMIT=${BITBUCKET_COMMIT:0:8}
+          - export BRANCH_NAME=$(echo "$BITBUCKET_BRANCH" | awk -F'/' '{if(NF==1)val=$1; else if(NF==2)val=$1"--"$2; else if(NF==3)val=$2; else if(NF==4)val=$2"--"$3; print tolower(val)}')
+          - echo "Using commit hash $HASH_COMMIT"
+          - git config --global user.email "${BB_USER}"
+          - git config --global user.name "${BB_EMAIL}"
+          - git clone https://x-token-auth:${E2E_ACCESS_TOKEN}@${E2E_VALUES_REPO}
+          - cd e2erunners-values
+          - sed "s#HASH_COMMIT#${HASH_COMMIT}#g" TPL >> ${HASH_COMMIT}
+          - sed -i "s#BRANCH_NAME#${BRANCH_NAME}#g" TPL ${HASH_COMMIT}
+          - git add ${HASH_COMMIT}
+          - git commit -m "Add configuration for e2e-${HASH_COMMIT}"
+          - git push
+          - cd ..
+          - git clone https://x-token-auth:${HELM_CHARTS_ACCESS_TOKEN}@${HELM_CHARTS_REPO}
+          - cd helm-charts
+          - PATH_VALUE=" e2e-$HASH_COMMIT"
+          - printf "  - name:%s\n" "$PATH_VALUE" >> ${E2E_VALUES}
+          - git add e2e-ingress/values.yaml
+          - git commit -m "Add ${HASH_COMMIT} to e2e-ingress values"
+          - git push
+          - cd ..
+
+    - step: &preliminary-operation-backend
+        name: Preliminary Operation
+        image: alpine/git:latest
+        script:
+          - export HASH_COMMIT=${BITBUCKET_COMMIT:0:8}
+          - export BRANCH_NAME=$(echo "$BITBUCKET_BRANCH" | tr '[:upper:]' '[:lower:]' | sed 's|/|--|g')
+          - echo "Using commit hash $HASH_COMMIT"
+          - git config --global user.email "${BB_USER}"
+          - git config --global user.name "${BB_EMAIL}"
+          - git clone https://x-token-auth:${E2ERUNNERS_ACCESS_TOKEN}@${E2E_VALUES_REPO}
+          - cd e2erunners-values
+          - sed "s#HASH_COMMIT#${HASH_COMMIT}#g" TPL >> ${HASH_COMMIT}
+          - sed -i "s#BRANCH_NAME#${BRANCH_NAME}#g" TPL ${HASH_COMMIT}
+          - git add ${HASH_COMMIT}
+          - git commit -m "Add configuration for e2e-${HASH_COMMIT}"
+          - git push
+          - cd ..
+          - git clone https://x-token-auth:${HELM_CHARTS_ACCESS_TOKEN}@${HELM_CHARTS_REPO}
+          - cd helm-charts
+          - PATH_VALUE=" e2e-$HASH_COMMIT"
+          - printf "  - name:%s\n" "$PATH_VALUE" >> ${E2E_VALUES}
+          - git add e2e-ingress/values.yaml
+          - git commit -m "Add ${HASH_COMMIT} to e2e-ingress values"
+          - git push
+          - cd ..
+
+    - step: &angular-build
+        name: angular-build
+        image:
+          name: cypress/browsers:node-18.20.3-chrome-125.0.6422.141-1-ff-126.0.1-edge-125.0.2535.85-1
+          run-as-user: 1000
+        size: 4x
+        caches:
+          - node-2024-02-x
+        script:
+          - yarn install --frozen-lockfile
+          - yarn run build:prod:ci
+          - yarn run build:mirador
+        artifacts:
+          - node_modules/**
+          - dist/**
+
     - step: &unittest-code-checks
         name: test-code-checks
         image:
@@ -13,20 +82,137 @@ definitions:
           run-as-user: 1000
         size: 4x
         caches:
-          - node-cris8
+          - node-2024-02-x
         script:
-          - yarn install --frozen-lockfile
-          - yarn run lint --quiet
+          - yarn build:lint
+          - npm run ng-high-memory -- lint --quiet
           - yarn run check-circ-deps
-          - yarn run build:prod:ci
           - yarn run test:headless
+        artifacts:
+          - .next/**
+          - .cache/**
+          - ~/.cache/Cypress
+
+    - step: &run-e2e-tests
+        name: Run E2E test
+        image:
+          name: cypress/browsers:node-18.20.3-chrome-125.0.6422.141-1-ff-126.0.1-edge-125.0.2535.85-1
+          run-as-user: 0
+        size: 4x
+        services:
+          - docker
+        caches:
+          - node-2024-02-x
+          - cypress-2024-02-x
+        script:
+          - export HASH_COMMIT=${BITBUCKET_COMMIT:0:8}
+          - echo "Running tests for commit $HASH_COMMIT"
+          - export DSPACE_REST_HOST=${E2E_RUNNER_HOST}
+          - export DSPACE_REST_PORT=443
+          - export DSPACE_REST_NAMESPACE=/e2e-${HASH_COMMIT}/server
+          - echo "Configured REST endpoint at https://$DSPACE_REST_HOST$DSPACE_REST_NAMESPACE"
+          - export DSPACE_REST_SSL=true
+          - export DSPACE_UI_HOST=127.0.0.1
+          - export DSPACE_UI_PORT=4000
+          - export DSPACE_CACHE_SERVERSIDE_BOTCACHE_MAX=0
+          - export DSPACE_CACHE_SERVERSIDE_ANONYMOUSCACHE_MAX=0
+          - export CYPRESS_BASE_URL=http://127.0.0.1:4000
+          - export CYPRESS_CACHE_FOLDER=~/.cache/Cypress
+          - export CHROME_FLAGS="--no-sandbox --disable-dev-shm-usage --disable-gpu"
+          - export NODE_OPTIONS="--max-old-space-size=4096"
+          - npx cypress install
+          - yarn serve:ssr &
+          - echo "Waiting for server to start..."
+          - sleep 10
+          - echo "Running Cypress tests..."
+          - yarn cypress:run --env chromeFlags="$CHROME_FLAGS"
+          - echo "Test execution completed"
+        artifacts:
+          - cypress/screenshots/**
+          - cypress/videos/**
+
+    - step: &build-and-push
+        name: Build and Push Docker Image to ECR
+        size: 4x
+        image: atlassian/default-image:3
+        services:
+          - docker
+        script:
+          - echo "Copying dist to Docker context"
+          - mkdir -p build-context
+          - cp -r dist config build-context/
+          - cp Dockerfile.build build-context/Dockerfile
+          - cd build-context
+          - export HASH_COMMIT=${BITBUCKET_COMMIT:0:8}
+          - export BRANCH_NAME=$(echo "$BITBUCKET_BRANCH" | tr '[:upper:]' '[:lower:]' | sed 's|/|--|g')
+          - docker build -t dspace-angular:${BRANCH_NAME}-${HASH_COMMIT} -t dspace-angular:${BRANCH_NAME}-latest .
+          - pipe: atlassian/aws-ecr-push-image:2.5.0
+            variables:
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+              AWS_DEFAULT_REGION: $AWS_REGION
+              IMAGE_NAME: dspace-angular
+              TAGS: "${BRANCH_NAME}-${HASH_COMMIT} ${BRANCH_NAME}-latest"
+
+    - step: &deploy-on-dev
+        name: Deploy on Development environment
+        image: alpine/git:latest
+        script:
+          - export HASH_COMMIT=${BITBUCKET_COMMIT:0:8}
+          - export BRANCH_NAME=$(echo "$BITBUCKET_BRANCH" | tr '[:upper:]' '[:lower:]' | sed 's|/|--|g')
+          - export BRANCH_FILE=$(echo "$BITBUCKET_BRANCH" | awk -F'/' '{if(NF==1)val=$1;else if(NF==2)val=$2;else if(NF==3)val=$2;else val=$3;gsub(/_/, "-", val);print tolower(val)}')
+          - git clone https://x-token-auth:${DSPACE_VALUES_ACCESS_TOKEN}@${DSPACE_VALUES_REPO}
+          - cd dspace-values
+          - '[ -f "dev/${BRANCH_FILE}" ] && sed -i "/^angular:/,/^[^ ]/s/\(tag: \).*/\1${BRANCH_NAME}-${HASH_COMMIT}/" "dev/${BRANCH_FILE}"'
+          - git config --global user.email "ci@4science.com"
+          - git config --global user.name "CI Bot"
+          - git commit -am "Update TAG with ${BRANCH_NAME}-${HASH_COMMIT}"
+          - git push
+
+    - step: &deploy-on-staging
+        name: Deploy on Staging environment
+        image: alpine/git:latest
+        script:
+          - export HASH_COMMIT=${BITBUCKET_COMMIT:0:8}
+          - export BRANCH_NAME=$(echo "$BITBUCKET_BRANCH" | tr '[:upper:]' '[:lower:]' | sed 's|/|--|g')
+          - export BRANCH_FILE=$(echo "$BITBUCKET_BRANCH" | awk -F'/' '{if(NF==1)val=$1;else if(NF==2)val=$2;else if(NF==3)val=$2;else val=$3;gsub(/_/, "-", val);print tolower(val)}')
+          - git clone https://x-token-auth:${DSPACE_VALUES_ACCESS_TOKEN}@${DSPACE_VALUES_REPO}
+          - cd dspace-values
+          - '[ -f "staging/${BRANCH_FILE}" ] && sed -i "/^angular:/,/^[^ ]/s/\(tag: \).*/\1${BRANCH_NAME}-${HASH_COMMIT}/" "staging/${BRANCH_FILE}"'
+          - git config --global user.email "${BB_EMAIL}"
+          - git config --global user.name "${BB_USER}"
+          - git commit -am "Update TAG with ${BRANCH_NAME}-${HASH_COMMIT}"
+          - git push
 
 pipelines:
+  custom:
+    e2e-on-custom-backend:
+      - step: *preliminary-operation-backend
+      - step: *angular-build
+      - parallel: &parallel-run-tests
+          - step: *unittest-code-checks
+          - step: *run-e2e-tests
+    deploy-on-dev:
+      - step: *angular-build
+      - step: *build-and-push
+      - step: *deploy-on-dev
   branches:
     'ux-plus-cris-2024_02_x':
-      - step: *unittest-code-checks
+      - step: *preliminary-operation
+      - step: *angular-build
+      - parallel: *parallel-run-tests
+      - step: *build-and-push
+      - step: *deploy-on-dev
+      - step: *deploy-on-staging
     'prod/**':
-      - step: *unittest-code-checks
+      - step: *preliminary-operation
+      - step: *angular-build
+      - parallel: *parallel-run-tests
+      - step: *build-and-push
+      - step: *deploy-on-dev
+      - step: *deploy-on-staging
   pull-requests:
     '**':
-      - step: *unittest-code-checks
+      - step: *preliminary-operation
+      - step: *angular-build
+      - parallel: *parallel-run-tests
