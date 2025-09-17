@@ -7289,6 +7289,8 @@
 
   "submission.sections.custom-url.alert.info": "Define here a custom URL which will be used to reach the item instead of using an internal randomly generated UUID identifier. ",
 
+  "submission.sections.custom-url.url.placeholder": "Custom URL",
+
   "submission.sections.accesses.form.discoverable-description": "When checked, this item will be discoverable in search/browse. When unchecked, the item will only be available via a direct link and will never appear in search/browse.",
 
   "submission.sections.accesses.form.discoverable-label": "Discoverable",
