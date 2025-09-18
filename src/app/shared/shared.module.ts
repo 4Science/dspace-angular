@@ -364,6 +364,7 @@ import { MetadataLinkViewOrcidComponent } from './metadata-link-view/metadata-li
 import { SwitchComponent } from './switch/switch.component';
 import {StickyPopoverDirective} from './metadata-link-view/sticky-popover.directive';
 import { SortPipe } from './utils/sort.pipe';
+import { BrowserOnlyDirective } from './utils/browser-only.directive';
 
 const MODULES = [
   CommonModule,
@@ -640,10 +641,11 @@ const DIRECTIVES = [
 ];
 
 @NgModule({
-  imports: [
-    ...MODULES,
-    ...ROOT_MODULES,
-  ],
+    imports: [
+        ...MODULES,
+        ...ROOT_MODULES,
+        BrowserOnlyDirective,
+    ],
   declarations: [
     ...PIPES,
     ...COMPONENTS,
