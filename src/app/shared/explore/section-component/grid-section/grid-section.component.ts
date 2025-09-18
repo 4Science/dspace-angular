@@ -20,6 +20,7 @@ import {
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import {
   BehaviorSubject,
+  defaultIfEmpty,
   filter,
   from,
   map,
@@ -194,9 +195,10 @@ export class GridSectionComponent implements OnInit {
           ),
           map(() => bitstream),
         )),
+        defaultIfEmpty(null),
         take(1),
-        map((bitstream: Bitstream) => {
-          return [item.uuid, bitstream._links.content.href];
+        map((bitstream: Bitstream | null) => {
+          return [item.uuid, bitstream ? bitstream._links.content.href : null];
         }),
       ),
       ),
