@@ -16,7 +16,7 @@ definitions:
           - echo "Using commit hash $HASH_COMMIT"
           - git config --global user.email "${BB_USER}"
           - git config --global user.name "${BB_EMAIL}"
-          - git clone https://x-token-auth:${E2E_ACCESS_TOKEN}@${E2E_VALUES_REPO}
+          - git clone https://x-token-auth:${E2ERUNNERS_ACCESS_TOKEN}@${E2E_VALUES_REPO}
           - cd e2erunners-values
           - sed "s#HASH_COMMIT#${HASH_COMMIT}#g" TPL >> ${HASH_COMMIT}
           - sed -i "s#BRANCH_NAME#${BRANCH_NAME}#g" TPL ${HASH_COMMIT}
