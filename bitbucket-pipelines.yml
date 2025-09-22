@@ -16,7 +16,7 @@ definitions:
           - echo "Using commit hash $HASH_COMMIT"
           - git config --global user.email "${BB_USER}"
           - git config --global user.name "${BB_EMAIL}"
-          - git clone https://x-token-auth:${E2E_ACCESS_TOKEN}@${E2E_VALUES_REPO}
+          - git clone https://x-token-auth:${E2ERUNNERS_ACCESS_TOKEN}@${E2E_VALUES_REPO}
           - cd e2erunners-values
           - sed "s#HASH_COMMIT#${HASH_COMMIT}#g" TPL >> ${HASH_COMMIT}
           - sed -i "s#BRANCH_NAME#${BRANCH_NAME}#g" TPL ${HASH_COMMIT}
@@ -163,7 +163,7 @@ definitions:
           - export BRANCH_FILE=$(echo "$BITBUCKET_BRANCH" | awk -F'/' '{if(NF==1)val=$1;else if(NF==2)val=$2;else if(NF==3)val=$2;else val=$3;gsub(/_/, "-", val);print tolower(val)}')
           - git clone https://x-token-auth:${DSPACE_VALUES_ACCESS_TOKEN}@${DSPACE_VALUES_REPO}
           - cd dspace-values
-          - 'sed -i "/^angular:/,/^[^ ]/s/\\(tag: \\).*/\\1${BRANCH_NAME}-${HASH_COMMIT}/" dev/${BRANCH_FILE}'
+          - '[ -f "dev/${BRANCH_FILE}" ] && sed -i "/^angular:/,/^[^ ]/s/\(tag: \).*/\1${BRANCH_NAME}-${HASH_COMMIT}/" "dev/${BRANCH_FILE}"'
           - git config --global user.email "ci@4science.com"
           - git config --global user.name "CI Bot"
           - git commit -am "Update TAG with ${BRANCH_NAME}-${HASH_COMMIT}"
@@ -178,7 +178,7 @@ definitions:
           - export BRANCH_FILE=$(echo "$BITBUCKET_BRANCH" | awk -F'/' '{if(NF==1)val=$1;else if(NF==2)val=$2;else if(NF==3)val=$2;else val=$3;gsub(/_/, "-", val);print tolower(val)}')
           - git clone https://x-token-auth:${DSPACE_VALUES_ACCESS_TOKEN}@${DSPACE_VALUES_REPO}
           - cd dspace-values
-          - 'sed -i "/^angular:/,/^[^ ]/s/\\(tag: \\).*/\\1${BRANCH_NAME}-${HASH_COMMIT}/" staging/${BRANCH_FILE}'
+          - '[ -f "staging/${BRANCH_FILE}" ] && sed -i "/^angular:/,/^[^ ]/s/\(tag: \).*/\1${BRANCH_NAME}-${HASH_COMMIT}/" "staging/${BRANCH_FILE}"'
           - git config --global user.email "${BB_EMAIL}"
           - git config --global user.name "${BB_USER}"
           - git commit -am "Update TAG with ${BRANCH_NAME}-${HASH_COMMIT}"
