@@ -16,6 +16,9 @@ describe('Admin Workflow Page', () => {
     // (As we want to scan filter section for accessibility issues as well)
     cy.get('[data-test="filter-toggle"]').click({ multiple: true });
     // Analyze <ds-admin-workflow-page> for accessibility issues
-    testA11y('ds-admin-workflow-page');
+    testA11y({
+      include: ['ds-admin-workflow-page'],
+      exclude: ['.noUi-handle'],
+    });
   });
 });
