@@ -172,7 +172,7 @@ export const APP_ROUTES: Route[] = [
         path: ADMIN_MODULE_PATH,
         loadChildren: () => import('./admin/admin-routes')
           .then((m) => m.ROUTES),
-        canActivate: [siteAdministratorGuard, endUserAgreementCurrentUserGuard],
+        canActivate: [endUserAgreementCurrentUserGuard],
       },
       {
         path: NOTIFICATIONS_MODULE_PATH,
