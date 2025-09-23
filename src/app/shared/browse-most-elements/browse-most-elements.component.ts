@@ -8,15 +8,11 @@ import {
 } from '@angular/common';
 import {
   Component,
-  inject,
   Input,
   OnChanges,
   OnInit,
 } from '@angular/core';
-import {
-  Router,
-  RouterLink,
-} from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import isEqual from 'lodash/isEqual';
 import { BehaviorSubject } from 'rxjs';
