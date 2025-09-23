@@ -445,7 +445,6 @@ export class ItemDeleteComponent extends AbstractSimpleItemActionComponent imple
    */
   notify(rd: RemoteData<Process>) {
     if (rd.hasSucceeded) {
-      this.notificationsService.success(this.translateService.get('item.edit.' + this.messageKey + '.success'));
       const title = this.translateService.get('item-deletion.process.title');
       this.notificationsService.process(rd.payload.processId, 5000, title);
       void this.router.navigate(['']);

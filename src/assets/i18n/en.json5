@@ -4081,11 +4081,11 @@
 
   "item-export.process.title": "Bulk export item",
 
-  "item-deletion.process.title": "Item deletion!",
+  "item-deletion.process.title": "Deleting item",
 
-  "community-deletion.process.title": "Community deletion!",
+  "community-deletion.process.title": "Deleting community",
 
-  "collection-deletion.process.title": "Collection deletion!",
+  "collection-deletion.process.title": "Deleting collection",
 
   "itemtemplate.edit.metadata.add-button": "Add",
 
