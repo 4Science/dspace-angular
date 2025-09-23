@@ -203,7 +203,7 @@ export class SearchChartsComponent implements OnInit {
         switchMap((options) => {
           return this.searchService.getFacetValuesFor(filterConfig, 1, options).pipe(
             filter((RD) => !RD.isLoading),
-            map((valuesRD) => valuesRD.payload.totalElements > 0));
+            map((valuesRD) => valuesRD.payload?.totalElements > 0));
         },
         ));
     }

@@ -184,6 +184,8 @@ export class SearchFiltersComponent implements OnInit, AfterViewChecked, OnDestr
               if (!this.findConfigInFinalFilters(this.currentConfiguration)) {
                 this.updateFinalFiltersComputed(this.currentConfiguration, totalFilters);
               }
+              this.allFiltersComputed = true;
+              this.availableFilters$.next(this.searchFilter?._results.some(element => element.nativeElement?.children[0]?.children.length > 0));
               return { shouldIncrement: false };
             }
 
@@ -305,7 +307,7 @@ export class SearchFiltersComponent implements OnInit, AfterViewChecked, OnDestr
       }),
       distinctUntilChanged(),
       takeUntilDestroyed(this.destroyRef),
-    ).subscribe(this.availableFilters$);
+    ).subscribe(value => this.availableFilters$.next(value));
   }
 
   ngOnDestroy() {
