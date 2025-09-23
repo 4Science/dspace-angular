@@ -42,7 +42,9 @@
 
 </div>
 <div *ngIf="topSection?.showAllResults && (discoveryConfigurationsTotalElementsMap === null || discoveryConfigurationsTotalElementsMap.get(paginatedSearchOptions.configuration) > 0)" class="d-flex justify-content-center">
-  <button type="button" class="btn btn-link" (click)="showAllResults()">
-    {{ "home.top-section.view-results" | translate }}
-  </button>
+  <a routerLink="/search" [queryParams]="searchQueryParams" class="text-decoration-none">
+    <button type="button" class="btn btn-link">
+      {{ "home.top-section.view-results" | translate }}
+    </button>
+  </a>
 </div>

@@ -13,7 +13,10 @@ import {
   OnChanges,
   OnInit,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import {
+  Router,
+  RouterLink,
+} from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import isEqual from 'lodash/isEqual';
 import { BehaviorSubject } from 'rxjs';
@@ -48,11 +51,11 @@ import { ThemedSliderBrowseElementsComponent } from './slider-browse-elements/th
     NgIf,
     ThemedSliderBrowseElementsComponent,
     ThemedImagesBrowseElementsComponent,
+    RouterLink,
   ],
 })
 
 export class BrowseMostElementsComponent implements OnInit, OnChanges {
-  private readonly router = inject(Router);
 
   /**
    * The pagination options
@@ -100,25 +103,20 @@ export class BrowseMostElementsComponent implements OnInit, OnChanges {
    */
   templateTypeEnum = TopSectionTemplateType;
 
+  searchQueryParams = {};
+
   ngOnInit(): void {
     this.sectionTemplateType = this.topSection?.template
       ?? (this.mode === LayoutModeEnum.CARD ? TopSectionTemplateType.CARD : TopSectionTemplateType.DEFAULT);
+    this.searchQueryParams = {
+      configuration: this.paginatedSearchOptions?.configuration,
+      view: isEqual(this.topSection.defaultLayoutMode, LayoutModeEnum.LIST)
+        ? ViewMode.ListElement
+        : ViewMode.GridElement,
+    };
   }
 
   ngOnChanges() { // trigger change detection on child components
     this.paginatedSearchOptions$.next(this.paginatedSearchOptions);
-  }
-
-  async showAllResults() {
-    const view = isEqual(this.topSection.defaultLayoutMode, LayoutModeEnum.LIST)
-      ? ViewMode.ListElement
-      : ViewMode.GridElement;
-    await this.router.navigate(['/search'], {
-      queryParams: {
-        configuration: this.paginatedSearchOptions.configuration,
-        view: view,
-      },
-      replaceUrl: true,
-    });
   }
 }

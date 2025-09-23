@@ -7,6 +7,7 @@ import {
   NgSwitchDefault,
 } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { BrowseMostElementsComponent as BaseComponent } from '../../../../app/shared/browse-most-elements/browse-most-elements.component';
@@ -37,6 +38,7 @@ import { ThemedSliderBrowseElementsComponent } from '../../../../app/shared/brow
     NgIf,
     ThemedSliderBrowseElementsComponent,
     ThemedImagesBrowseElementsComponent,
+    RouterLink,
   ],
 })
 export class BrowseMostElementsComponent extends BaseComponent {
