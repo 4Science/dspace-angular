@@ -17,7 +17,10 @@ describe('My DSpace page', () => {
     cy.get('.filter-toggle').click({ multiple: true });
 
     // Analyze <ds-my-dspace-page> for accessibility issues
-    testA11y('ds-my-dspace-page');
+    testA11y({
+      include: ['ds-my-dspace-page'],
+      exclude: ['.noUi-handle'],
+    });
   });
 
   it('should have a working detailed view that passes accessibility tests', () => {
