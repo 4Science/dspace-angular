@@ -218,7 +218,7 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges
       node.item,
       level,
       node.hasChildren,
-      ((!node.isSearchNode && node.hasChildren) || (node.isSearchNode && node.hasChildren &&  isNotEmpty(node.children))),
+      (node.hasChildren && isNotEmpty(node.children)),
       node.pageInfo,
       node.loadMoreParentItem,
       node.isSearchNode,
