@@ -1,10 +1,14 @@
-import { autoserialize, deserialize } from 'cerialize';
+import {
+  autoserialize,
+  deserialize,
+} from 'cerialize';
 
-import { SEARCH_CONFIG } from './search-config.resource-type';
+import { FilterType } from '../../../../shared/search/models/filter-type.model';
 import { typedObject } from '../../../cache/builders/build-decorators';
+import { CacheableObject } from '../../../cache/cacheable-object.model';
 import { HALLink } from '../../hal-link.model';
 import { ResourceType } from '../../resource-type';
-import { CacheableObject } from '../../../cache/cacheable-object.model';
+import { SEARCH_CONFIG } from './search-config.resource-type';
 
 /**
  * The configuration for a search
@@ -63,7 +67,7 @@ export interface FilterConfig {
   operators: OperatorConfig[];
   openByDefault: boolean;
   pageSize: number;
-  type: string;
+  type: FilterType;
 }
 
 /**

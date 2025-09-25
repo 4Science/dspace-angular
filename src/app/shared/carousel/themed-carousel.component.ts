@@ -1,16 +1,22 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+} from '@angular/core';
+
+import { ItemSearchResult } from '../object-collection/shared/item-search-result.model';
 import { ThemedComponent } from '../theme-support/themed.component';
 import { CarouselComponent } from './carousel.component';
-import { ItemSearchResult } from '../object-collection/shared/item-search-result.model';
 import { CarouselOptions } from './carousel-options.model';
 
 /**
  * Themed wrapper for CarouselComponent
  */
 @Component({
-  selector: 'ds-themed-carousel',
+  selector: 'ds-carousel',
   styleUrls: [],
   templateUrl: '../theme-support/themed.component.html',
+  standalone: true,
+  imports: [CarouselComponent],
 })
 export class ThemedCarouselComponent extends ThemedComponent<CarouselComponent> {
 
@@ -25,7 +31,7 @@ export class ThemedCarouselComponent extends ThemedComponent<CarouselComponent> 
   }
 
   protected importThemedComponent(themeName: string): Promise<any> {
-    return import(`../../../themes/${themeName}/app/carousel/carousel.component`);
+    return import(`../../../themes/${themeName}/app/shared/carousel/carousel.component`);
   }
 
   protected importUnthemedComponent(): Promise<any> {

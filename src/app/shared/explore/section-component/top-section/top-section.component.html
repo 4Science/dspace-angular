@@ -1,25 +1,33 @@
 <div>
-  <ng-container *ngIf="topSection.showAsCard">
-    <!-- CARD VIEW -->
-    <div class="card">
-      <div *ngIf="topSection.titleKey" class="card-header">{{ 'explore.index.' + topSection.titleKey | translate }}</div>
-      <div *ngIf="!topSection.titleKey" class="card-header">{{ 'explore.index.' + topSection.sortField | translate }}</div>
-      <div class="card-body">
-        <ng-container *ngTemplateOutlet="content"></ng-container>
+  <div [ngClass]="{'card': topSection.showAsCard}">
+    <ng-container *ngIf="topSection.showAsCard; else listView">
+      <div class="card-header">{{ 'explore.index.' + (topSection.titleKey ? topSection.titleKey : topSection.sortField) | translate }}</div>
+    </ng-container>
+    <ng-template #listView>
+      <h1 class="h3 mx-2">{{ 'explore.index.' + (topSection.titleKey ? topSection.titleKey : topSection.sortField) | translate }}</h1>
+    </ng-template>
+    <div [ngClass]="{'card-body': topSection.showAsCard}">
+      <div class="row pl-2" *ngIf="topSection.showLayoutSwitch">
+        <div class="col">
+          <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="layoutMode">
+            <label ngbButtonLabel class="btn-outline-primary">
+              <input ngbButton type="radio" [value]="'list'" />
+              <i class="fa fa-list-ul" title="List"></i>
+            </label>
+            <label ngbButtonLabel class="btn-outline-primary">
+              <input ngbButton type="radio" [value]="'card'" />
+              <i class="fas fa-th-large" title="Cards"></i>
+            </label>
+          </div>
+        </div>
       </div>
+      <ds-browse-most-elements [context]="context"
+                                      [paginatedSearchOptions]="paginatedSearchOptions$ | async"
+                                      [mode]="layoutMode"
+                                      [showLabel]="true"
+                                      [showMetrics]="true"
+                                      [topSection]="topSection">
+      </ds-browse-most-elements>
     </div>
-  </ng-container>
-  <ng-container *ngIf="!topSection.showAsCard">
-    <!-- LIST VIEW -->
-    <ng-container *ngTemplateOutlet="content"></ng-container>
-  </ng-container>
+  </div>
 </div>
-
-<ng-template #content>
-        <h3 *ngIf="topSection.titleKey" class="mx-2">{{ 'explore.index.' + topSection.titleKey | translate }}</h3>
-        <h3 *ngIf="!topSection.titleKey" class="mx-2">{{ 'explore.index.' + topSection.sortField | translate }}</h3>
-  <ds-themed-browse-most-elements [context]="context"
-                                  [paginatedSearchOptions]="paginatedSearchOptions.asObservable() | async"
-                                  [topSection]="topSection">
-  </ds-themed-browse-most-elements>
-</ng-template>

@@ -1,36 +1,48 @@
-import { ThumbnailService } from '../../../../../../../shared/thumbnail/thumbnail.service';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import {
+  DebugElement,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
+import { of } from 'rxjs';
+
+import { BitstreamDataService } from '../../../../../../../core/data/bitstream-data.service';
 import { ConfigurationDataService } from '../../../../../../../core/data/configuration-data.service';
+import { AuthorizationDataService } from '../../../../../../../core/data/feature-authorization/authorization-data.service';
+import { Item } from '../../../../../../../core/shared/item.model';
 import {
   bitstreamOrignialWithMetadata,
   bitstreamWithoutThumbnail,
   bitstreamWithThumbnail,
   bitstreamWithThumbnailWithMetadata,
   mockThumbnail,
-  mockThumbnailWithType
+  mockThumbnailWithType,
 } from '../../../../../../../shared/mocks/bitstreams.mock';
-import { ComponentFixture, fakeAsync, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { ThumbnailComponent } from './thumbnail.component';
-import { BitstreamDataService } from '../../../../../../../core/data/bitstream-data.service';
-import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
-import { Item } from '../../../../../../../core/shared/item.model';
-import { of } from 'rxjs';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateLoaderMock } from '../../../../../../../shared/testing/translate-loader.mock';
-import { FieldRenderingType } from '../metadata-box.decorator';
-import {
-  AuthorizationDataService
-} from '../../../../../../../core/data/feature-authorization/authorization-data.service';
-import { By } from '@angular/platform-browser';
 import {
   createSuccessfulRemoteDataObject,
-  createSuccessfulRemoteDataObject$
+  createSuccessfulRemoteDataObject$,
 } from '../../../../../../../shared/remote-data.utils';
+import { TranslateLoaderMock } from '../../../../../../../shared/testing/translate-loader.mock';
 import { createPaginatedList } from '../../../../../../../shared/testing/utils.test';
+import { ThumbnailService } from '../../../../../../../shared/thumbnail/thumbnail.service';
+import { ThemedThumbnailComponent } from '../../../../../../../thumbnail/themed-thumbnail.component';
+import { FieldRenderingType } from '../field-rendering-type';
+import { ThumbnailRenderingComponent } from './thumbnail.component';
 
-describe('ThumbnailComponent', () => {
-  let component: ThumbnailComponent;
-  let fixture: ComponentFixture<ThumbnailComponent>;
+describe('', () => {
+  let component: ThumbnailRenderingComponent;
+  let fixture: ComponentFixture<ThumbnailRenderingComponent>;
   let de: DebugElement;
 
   const testItem = Object.assign(new Item(), {
@@ -38,11 +50,11 @@ describe('ThumbnailComponent', () => {
     metadata: {
       'dc.identifier.doi': [
         {
-          value: 'doi:10.1392/dironix'
-        }
-      ]
+          value: 'doi:10.1392/dironix',
+        },
+      ],
     },
-    entityType: 'Person'
+    entityType: 'Person',
   });
 
   const mockField = Object.assign({
@@ -57,8 +69,8 @@ describe('ThumbnailComponent', () => {
     bitstream: {
       bundle: 'ORIGINAL',
       metadataField: null,
-      metadataValue: null
-    }
+      metadataValue: null,
+    },
   });
 
   const mockField1 = Object.assign({
@@ -73,8 +85,8 @@ describe('ThumbnailComponent', () => {
     bitstream: {
       bundle: 'ORIGINAL',
       metadataField: 'dc.type',
-      metadataValue: 'personal picture'
-    }
+      metadataValue: 'personal picture',
+    },
   });
 
   const mockBitstreamDataService = jasmine.createSpyObj('BitstreamDataService', {
@@ -82,24 +94,25 @@ describe('ThumbnailComponent', () => {
   });
 
   const mockAuthorizedService = jasmine.createSpyObj('AuthorizationDataService', {
-    isAuthorized: jasmine.createSpy('isAuthorized')
+    isAuthorized: jasmine.createSpy('isAuthorized'),
   });
 
   const mockThumbnailService = jasmine.createSpyObj('ThumbnailService', {
-    getConfig: jasmine.createSpy('getConfig')
+    getConfig: jasmine.createSpy('getConfig'),
   });
 
   const getDefaultTestBedConf = (fieldProvider) => {
     return {
       imports: [
+        HttpClientTestingModule,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
-            useClass: TranslateLoaderMock
-          }
-        })
+            useClass: TranslateLoaderMock,
+          },
+        }),
+        ThumbnailRenderingComponent,
       ],
-      declarations: [ThumbnailComponent, ThumbnailComponent],
       providers: [
         { provide: 'fieldProvider', useValue: fieldProvider },
         { provide: 'itemProvider', useValue: testItem },
@@ -108,9 +121,10 @@ describe('ThumbnailComponent', () => {
         { provide: BitstreamDataService, useValue: mockBitstreamDataService },
         { provide: AuthorizationDataService, useValue: mockAuthorizedService },
         { provide: ConfigurationDataService, useValue: {} },
-        { provide: ThumbnailService, useValue: mockThumbnailService }
+        { provide: ThumbnailService, useValue: mockThumbnailService },
+        { provide: HttpClient, useValue: {} },
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     };
   };
 
@@ -118,11 +132,18 @@ describe('ThumbnailComponent', () => {
 
     // waitForAsync beforeEach
     beforeEach(waitForAsync(() => {
-      return TestBed.configureTestingModule(getDefaultTestBedConf(mockField));
+      return TestBed.configureTestingModule(getDefaultTestBedConf(mockField))
+        .overrideComponent(ThumbnailRenderingComponent, {
+          remove: {
+            imports: [
+              ThemedThumbnailComponent,
+            ],
+          },
+        });
     }));
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(ThumbnailComponent);
+      fixture = TestBed.createComponent(ThumbnailRenderingComponent);
       component = fixture.componentInstance;
       de = fixture.debugElement;
       mockBitstreamDataService.findByItem.and.returnValues(createSuccessfulRemoteDataObject$(createPaginatedList([])));
@@ -152,10 +173,12 @@ describe('ThumbnailComponent', () => {
         expect(thumbnail).toBeTruthy();
       }));
 
-      it('should show default thumbnail', () => {
-        expect(component.default).toBe('assets/images/file-placeholder.svg');
+      it('should show default thumbnail', (done) => {
+        component.default$.subscribe(image => {
+          expect(image).toBe('assets/images/file-placeholder.svg');
+          done();
+        });
       });
-
     });
 
     describe('When bitstreams are only original', () => {
@@ -172,10 +195,12 @@ describe('ThumbnailComponent', () => {
         expect(thumbnail).toBeTruthy();
       }));
 
-      it('should show default thumbnail', () => {
-        expect(component.default).toBe('assets/images/file-placeholder.svg');
+      it('should show default thumbnail', (done) => {
+        component.default$.subscribe(image => {
+          expect(image).toBe('assets/images/file-placeholder.svg');
+          done();
+        });
       });
-
     });
 
     describe('When bitstreams are only thumbnail', () => {
@@ -205,11 +230,18 @@ describe('ThumbnailComponent', () => {
 
     // waitForAsync beforeEach
     beforeEach(waitForAsync(() => {
-      return TestBed.configureTestingModule(getDefaultTestBedConf(mockField1));
+      return TestBed.configureTestingModule(getDefaultTestBedConf(mockField1))
+        .overrideComponent(ThumbnailRenderingComponent, {
+          remove: {
+            imports: [
+              ThemedThumbnailComponent,
+            ],
+          },
+        });
     }));
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(ThumbnailComponent);
+      fixture = TestBed.createComponent(ThumbnailRenderingComponent);
       component = fixture.componentInstance;
       de = fixture.debugElement;
       mockBitstreamDataService.findByItem.and.returnValue(of([]));
@@ -239,10 +271,12 @@ describe('ThumbnailComponent', () => {
         expect(thumbnail).toBeTruthy();
       });
 
-      it('should show default thumbnail', () => {
-        expect(component.default).toBe('assets/images/file-placeholder.svg');
+      it('should show default thumbnail', (done) => {
+        component.default$.subscribe(image => {
+          expect(image).toBe('assets/images/file-placeholder.svg');
+          done();
+        });
       });
-
     });
 
     describe('When bitstreams are only original without the right metadata information', () => {
@@ -254,8 +288,11 @@ describe('ThumbnailComponent', () => {
         fixture.detectChanges();
       });
 
-      it('should not show bitstream content image src but the default image', () => {
-        expect(component.default).toBe('assets/images/file-placeholder.svg');
+      it('should not show bitstream content image src but the default image', (done) => {
+        component.default$.subscribe(image => {
+          expect(image).toBe('assets/images/file-placeholder.svg');
+          done();
+        });
       });
 
     });
@@ -269,10 +306,12 @@ describe('ThumbnailComponent', () => {
         fixture.detectChanges();
       });
 
-      it('should not show thumbnail content image src but the default image', () => {
-        expect(component.default).toBe('assets/images/file-placeholder.svg');
+      it('should not show thumbnail content image src but the default image', (done) => {
+        component.default$.subscribe(image => {
+          expect(image).toBe('assets/images/file-placeholder.svg');
+          done();
+        });
       });
-
     });
 
     describe('When bitstreams are only original with the right metadata information', () => {
@@ -284,8 +323,11 @@ describe('ThumbnailComponent', () => {
         fixture.detectChanges();
       });
 
-      it('should not show thumbnail content image src but the default image', () => {
-        expect(component.default).toBe('assets/images/file-placeholder.svg');
+      it('should not show thumbnail content image src but the default image', (done) => {
+        component.default$.subscribe(image => {
+          expect(image).toBe('assets/images/file-placeholder.svg');
+          done();
+        });
       });
 
     });
@@ -300,7 +342,7 @@ describe('ThumbnailComponent', () => {
       });
 
       it('should show thumbnail content image src', () => {
-/*        expect(component.default).toBe('assets/images/person-placeholder.svg');
+        /*        expect(component.default).toBe('assets/images/file-placeholder.svg');
         const image = fixture.debugElement.query(By.css('img[src="http://localhost:8080/server/api/core/bitstreams/thumbnail-6df9-40ef-9009-b3c90a4e6d5b/content"]'));
         expect(image).toBeTruthy();*/
         expect(component.thumbnail$.value).toEqual(mockThumbnailWithType);

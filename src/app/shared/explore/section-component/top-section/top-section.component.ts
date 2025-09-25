@@ -1,17 +1,51 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { SortDirection, SortOptions } from '../../../../core/cache/models/sort-options.model';
-import { TopSection, TopSectionTemplateType } from '../../../../core/layout/models/section.model';
+import {
+  AsyncPipe,
+  NgClass,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgbButtonsModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import {
+  BehaviorSubject,
+  Observable,
+} from 'rxjs';
+
+import {
+  SortDirection,
+  SortOptions,
+} from '../../../../core/cache/models/sort-options.model';
+import { Context } from '../../../../core/shared/context.model';
+import { ThemedBrowseMostElementsComponent } from '../../../browse-most-elements/themed-browse-most-elements.component';
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
-import { Context } from '../../../../core/shared/context.model';
-import { BehaviorSubject } from 'rxjs';
+import {
+  LayoutModeEnum,
+  TopSection,
+  TopSectionTemplateType,
+} from './../../../../core/layout/models/section.model';
 
 /**
  * Component representing the Top component section.
  */
 @Component({
-  selector: 'ds-top-section',
+  selector: 'ds-base-top-section',
   templateUrl: './top-section.component.html',
+  standalone: true,
+  imports: [
+    ThemedBrowseMostElementsComponent,
+    NgIf,
+    TranslateModule,
+    FormsModule,
+    NgbButtonsModule,
+    NgClass,
+    AsyncPipe,
+  ],
 })
 export class TopSectionComponent implements OnInit {
 
@@ -19,24 +53,27 @@ export class TopSectionComponent implements OnInit {
    * The identifier of the section.
    */
   @Input()
-  sectionId: string;
+    sectionId: string;
 
   /**
    * The section data
    */
   @Input()
-  topSection: TopSection;
+    topSection: TopSection;
 
   /**
    * The context in which the section is shown
    */
   @Input()
-  context: Context = Context.BrowseMostElements;
+    context: Context = Context.BrowseMostElements;
 
   /**
    * The paginated search options for the section
    */
-  paginatedSearchOptions = new BehaviorSubject<PaginatedSearchOptions>(null);
+  get paginatedSearchOptions$(): Observable<PaginatedSearchOptions> {
+    return this._paginatedSearchOptions$.asObservable();
+  }
+  protected _paginatedSearchOptions$ = new BehaviorSubject<PaginatedSearchOptions>(null);
 
   /**
    * The sort direction of the section.
@@ -47,6 +84,10 @@ export class TopSectionComponent implements OnInit {
    * The template type for browse-most-elements
    */
   template: TopSectionTemplateType;
+
+  showThumbnails: boolean;
+
+  layoutMode: LayoutModeEnum = LayoutModeEnum.CARD;
 
   ngOnInit() {
     const sortDirection = SortDirection[this.topSection.order?.toUpperCase()] ?? SortDirection.ASC;
@@ -66,11 +107,11 @@ export class TopSectionComponent implements OnInit {
       pageSize: this.topSection.numberOfItems,
       currentPage: 1,
     });
-    this.paginatedSearchOptions.next(new PaginatedSearchOptions({
+    this.layoutMode = this.topSection.defaultLayoutMode;
+    this._paginatedSearchOptions$.next(new PaginatedSearchOptions({
       configuration: name,
       pagination: pagination,
       sort: this.sortOptions,
     }));
   }
-
 }

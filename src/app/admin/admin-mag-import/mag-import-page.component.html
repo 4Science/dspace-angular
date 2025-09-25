@@ -8,12 +8,11 @@
   <p>
     <button class="btn btn-primary" (click)="this.selectCollection();">{{'admin.metadata-import.page.button.select-collection' | translate}}</button>
   </p>
-
-  <ui-switch color="#ebebeb"
-             [checkedLabel]="'admin.mag-import.page.toggle.upload' | translate"
-             [uncheckedLabel]="'admin.mag-import.page.toggle.url' | translate"
-             [checked]="isUpload"
-             (change)="toggleUpload()" ></ui-switch>
+  <ds-switch
+    [options]="switchOptions"
+    [selectedValue]="isUpload ? 'upload' : 'url'"
+    (selectedValueChange)="toggleUpload()">
+  </ds-switch>
   <small class="form-text text-muted">
     {{'admin.mag-import.page.toggle.help' | translate}}
   </small>

@@ -116,3 +116,12 @@ ds-metric-donuts a {
 .padded-metadata-background-overlay > ds-metadata-container > div {
   padding: 1rem;
 }
+
+ds-expandable-admin-sidebar-section {
+  ds-link-menu-item {
+    a {
+      padding: 0 !important;
+      margin-left: var(--ds-admin-sidebar-section-indent);
+    }
+  }
+}

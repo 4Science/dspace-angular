@@ -1,12 +1,23 @@
-import { hasValue, isEmpty, isNotEmpty, isNotNull, isUndefined } from '../../shared/empty.util';
 import differenceWith from 'lodash/differenceWith';
 import findKey from 'lodash/findKey';
 import isEqual from 'lodash/isEqual';
 import uniqWith from 'lodash/uniqWith';
 
+import { MetadataSecurityConfiguration } from '../../core/submission/models/metadata-security-configuration';
+import { WorkspaceitemSectionDetectDuplicateObject } from '../../core/submission/models/workspaceitem-section-deduplication.model';
+import { WorkspaceitemSectionUploadObject } from '../../core/submission/models/workspaceitem-section-upload.model';
+import {
+  hasValue,
+  isEmpty,
+  isNotEmpty,
+  isNotNull,
+  isNull,
+  isUndefined,
+} from '../../shared/empty.util';
 import {
   ChangeSubmissionCollectionAction,
   CleanDetectDuplicateAction,
+  CleanDuplicateDetectionAction,
   CompleteInitSubmissionFormAction,
   DeleteSectionErrorsAction,
   DeleteUploadedFileAction,
@@ -17,7 +28,10 @@ import {
   DisableSectionErrorAction,
   DiscardSubmissionSuccessAction,
   EditFileDataAction,
+  EditFilePrimaryBitstreamAction,
   EnableSectionAction,
+  ExecuteExternalUploadAction,
+  ExecuteExternalUploadErrorAction,
   InertSectionErrorsAction,
   InitSectionAction,
   InitSubmissionFormAction,
@@ -44,14 +58,10 @@ import {
   SubmissionObjectActionTypes,
   UpdateSectionDataAction,
   UpdateSectionErrorsAction,
-  UpdateSectionVisibilityAction
+  UpdateSectionVisibilityAction,
 } from './submission-objects.actions';
-import { WorkspaceitemSectionUploadObject } from '../../core/submission/models/workspaceitem-section-upload.model';
-import {
-  WorkspaceitemSectionDetectDuplicateObject
-} from '../../core/submission/models/workspaceitem-section-deduplication.model';
+import { SubmissionSectionError } from './submission-section-error.model';
 import { SubmissionSectionObject } from './submission-section-object.model';
-import { MetadataSecurityConfiguration } from '../../core/submission/models/metadata-security-configuration';
 
 /**
  * An interface to represent SubmissionSectionObject entry
@@ -103,6 +113,11 @@ export interface SubmissionObjectEntry {
    * A boolean representing if a duplicate decision is pending
    */
   saveDecisionPending?: boolean;
+
+  /**
+   * A boolean representing if an external upload is pending
+   */
+  externalUploadPending?: boolean;
 
   /**
    * A boolean representing if a submission deposit operation is pending
@@ -245,6 +260,10 @@ export function submissionObjectReducer(state = initialState, action: Submission
       return newFile(state, action as NewUploadedFileAction);
     }
 
+    case SubmissionObjectActionTypes.EDIT_FILE_PRIMARY_BITSTREAM_DATA: {
+      return editPrimaryBitstream(state, action as EditFilePrimaryBitstreamAction);
+    }
+
     case SubmissionObjectActionTypes.EDIT_FILE_DATA: {
       return editFileData(state, action as EditFileDataAction);
     }
@@ -266,6 +285,10 @@ export function submissionObjectReducer(state = initialState, action: Submission
       return removeSectionErrors(state, action as RemoveSectionErrorsAction);
     }
 
+    case SubmissionObjectActionTypes.CLEAN_DUPLICATE_DETECTION: {
+      return cleanDuplicateDetectionSection(state, action as CleanDuplicateDetectionAction);
+    }
+
     // detect duplicate
     case SubmissionObjectActionTypes.SET_DUPLICATE_DECISION: {
       return startSaveDecision(state, action as SetDuplicateDecisionAction);
@@ -281,6 +304,19 @@ export function submissionObjectReducer(state = initialState, action: Submission
 
     case SubmissionObjectActionTypes.CLEAN_DETECT_DUPLICATE: {
       return cleanDetectDuplicateSection(state, action as CleanDetectDuplicateAction);
+    }
+
+    //external upload
+    case SubmissionObjectActionTypes.EXECUTE_EXTERNAL_UPLOAD: {
+      return startExternalUploadExecution(state, action as ExecuteExternalUploadAction);
+    }
+
+    case SubmissionObjectActionTypes.EXECUTE_EXTERNAL_UPLOAD_ERROR: {
+      return updateExternalUploadState(state, action.payload.submissionId, action.payload.sectionId, (action as ExecuteExternalUploadErrorAction).payload.errors);
+    }
+
+    case SubmissionObjectActionTypes.EXECUTE_EXTERNAL_UPLOAD_SUCCESS: {
+      return updateExternalUploadState(state, action.payload.submissionId, action.payload.sectionId, []);
     }
 
     default: {
@@ -308,10 +344,10 @@ const removeError = (state: SubmissionObjectState, action: DeleteSectionErrorsAc
       [ submissionId ]: Object.assign({}, state[ submissionId ], {
         sections: Object.assign({}, state[ submissionId ].sections, {
           [ sectionId ]: Object.assign({}, state[ submissionId ].sections [ sectionId ], {
-            errorsToShow: filteredErrors
-          })
-        })
-      })
+            errorsToShow: filteredErrors,
+          }),
+        }),
+      }),
     });
   } else {
     return state;
@@ -328,10 +364,10 @@ const addError = (state: SubmissionObjectState, action: InertSectionErrorsAction
       [ submissionId ]: Object.assign({}, state[ submissionId ], {
         activeSection: state[ action.payload.submissionId ].activeSection,        sections: Object.assign({}, state[ submissionId ].sections, {
           [ sectionId ]: Object.assign({}, state[ action.payload.submissionId ].sections [ action.payload.sectionId ], {
-            errorsToShow
-          })
+            errorsToShow,
+          }),
         }),
-      })
+      }),
     });
   } else {
     return state;
@@ -355,10 +391,10 @@ function removeSectionErrors(state: SubmissionObjectState, action: RemoveSection
       [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
         sections: Object.assign({}, state[ action.payload.submissionId ].sections, {
           [ action.payload.sectionId ]: Object.assign({}, state[ action.payload.submissionId ].sections [ action.payload.sectionId ], {
-            errorsToShow: []
-          })
-        })
-      })
+            errorsToShow: [],
+          }),
+        }),
+      }),
     });
   } else {
     return state;
@@ -389,9 +425,10 @@ function initSubmission(state: SubmissionObjectState, action: InitSubmissionForm
     isLoading: true,
     savePending: false,
     saveDecisionPending: false,
+    externalUploadPending: false,
     depositPending: false,
     metadataSecurityConfiguration: action.payload.metadataSecurityConfiguration,
-    isDiscarding: false
+    isDiscarding: false,
   };
   return newState;
 }
@@ -411,8 +448,8 @@ function resetSubmission(state: SubmissionObjectState, action: ResetSubmissionFo
     return Object.assign({}, state, {
       [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
         sections: Object.create(null),
-        isLoading: true
-      })
+        isLoading: true,
+      }),
     });
   } else {
     return state;
@@ -433,8 +470,8 @@ function completeInit(state: SubmissionObjectState, action: CompleteInitSubmissi
   if (hasValue(state[ action.payload.submissionId ])) {
     return Object.assign({}, state, {
       [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
-        isLoading: false
-      })
+        isLoading: false,
+      }),
     });
   } else {
     return state;
@@ -451,12 +488,12 @@ function completeInit(state: SubmissionObjectState, action: CompleteInitSubmissi
  * @return SubmissionObjectState
  *    the new state, with the discard success.
  */
- function discardSuccess(state: SubmissionObjectState, action: DiscardSubmissionSuccessAction): SubmissionObjectState {
+function discardSuccess(state: SubmissionObjectState, action: DiscardSubmissionSuccessAction): SubmissionObjectState {
   if (hasValue(state[ action.payload.submissionId ])) {
     return Object.assign({}, state, {
       [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
-        isDiscarding: true
-      })
+        isDiscarding: true,
+      }),
     });
   } else {
     return state;
@@ -475,7 +512,7 @@ function completeInit(state: SubmissionObjectState, action: CompleteInitSubmissi
  *    the new state, with the flag set to true.
  */
 function saveSubmission(state: SubmissionObjectState,
-                        action: SaveSubmissionFormAction
+  action: SaveSubmissionFormAction
                           | SaveSubmissionSectionFormAction
                           | SaveForLaterSubmissionFormAction
                           | SaveAndDepositSubmissionAction): SubmissionObjectState {
@@ -486,7 +523,7 @@ function saveSubmission(state: SubmissionObjectState,
         sections: state[ action.payload.submissionId ].sections,
         isLoading: state[ action.payload.submissionId ].isLoading,
         savePending: true,
-      })
+      }),
     });
   } else {
     return state;
@@ -506,7 +543,7 @@ function saveSubmission(state: SubmissionObjectState,
  *    the new state, with the flag set to false.
  */
 function completeSave(state: SubmissionObjectState,
-                      action: SaveSubmissionFormSuccessAction
+  action: SaveSubmissionFormSuccessAction
                         | SaveForLaterSubmissionFormSuccessAction
                         | SaveSubmissionSectionFormSuccessAction
                         | SaveSubmissionFormErrorAction
@@ -516,7 +553,7 @@ function completeSave(state: SubmissionObjectState,
     return Object.assign({}, state, {
       [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
         savePending: false,
-      })
+      }),
     });
   } else {
     return state;
@@ -539,7 +576,7 @@ function startDeposit(state: SubmissionObjectState, action: DepositSubmissionAct
       [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
         savePending: false,
         depositPending: true,
-      })
+      }),
     });
   } else {
     return state;
@@ -561,7 +598,7 @@ function endDeposit(state: SubmissionObjectState, action: DepositSubmissionSucce
     return Object.assign({}, state, {
       [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
         depositPending: false,
-      })
+      }),
     });
   } else {
     return state;
@@ -581,8 +618,8 @@ function endDeposit(state: SubmissionObjectState, action: DepositSubmissionSucce
 function changeCollection(state: SubmissionObjectState, action: ChangeSubmissionCollectionAction): SubmissionObjectState {
   return Object.assign({}, state, {
     [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
-      collection: action.payload.collectionId
-    })
+      collection: action.payload.collectionId,
+    }),
   });
 }
 
@@ -606,7 +643,7 @@ function setActiveSection(state: SubmissionObjectState, action: SetActiveSection
         sections: state[ action.payload.submissionId ].sections,
         isLoading: state[ action.payload.submissionId ].isLoading,
         savePending: state[ action.payload.submissionId ].savePending,
-      })
+      }),
     });
   } else {
     return state;
@@ -629,9 +666,9 @@ function setVisibility(state: SubmissionObjectState, action: UpdateSectionVisibi
       [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
         sections: Object.assign({}, state[ action.payload.submissionId ].sections, {
           [ action.payload.sectionId ]: Object.assign({}, state[ action.payload.submissionId ]
-            .sections[ action.payload.sectionId ], { visibility: action.payload.visibility })
-        })
-      })
+            .sections[ action.payload.sectionId ], { visibility: action.payload.visibility }),
+        }),
+      }),
     });
   } else {
     return state;
@@ -667,10 +704,10 @@ function initSection(state: SubmissionObjectState, action: InitSectionAction): S
             serverValidationErrors: action.payload.errors || [],
             isLoading: false,
             isValid: isEmpty(action.payload.errors),
-            removePending: false
-          }
-        })
-      })
+            removePending: false,
+          },
+        }),
+      }),
     });
   } else {
     return state;
@@ -694,10 +731,10 @@ function setSectionFormId(state: SubmissionObjectState, action: SetSectionFormId
         sections: Object.assign({}, state[ action.payload.submissionId ].sections, {
           [ action.payload.sectionId ]: {
             ...state[ action.payload.submissionId ].sections [action.payload.sectionId],
-            formId: action.payload.formId
-          }
-        })
-      })
+            formId: action.payload.formId,
+          },
+        }),
+      }),
     });
   } else {
     return state;
@@ -725,10 +762,10 @@ function updateSectionData(state: SubmissionObjectState, action: UpdateSectionDa
             data: action.payload.data,
             errorsToShow: action.payload.errorsToShow,
             serverValidationErrors: action.payload.serverValidationErrors,
-            metadata: reduceSectionMetadata(action.payload.metadata, state[ action.payload.submissionId ].sections [ action.payload.sectionId ].metadata)
-          })
-        })
-      })
+            metadata: reduceSectionMetadata(action.payload.metadata, state[ action.payload.submissionId ].sections [ action.payload.sectionId ].metadata),
+          }),
+        }),
+      }),
     });
   } else {
     return state;
@@ -755,10 +792,10 @@ function updateSectionErrors(state: SubmissionObjectState, action: UpdateSection
             enabled: true,
             errorsToShow: action.payload.errorsToShow,
             serverValidationErrors: action.payload.errorsToShow,
-          })
+          }),
         }),
         savePending: false,
-      })
+      }),
     });
   } else {
     return state;
@@ -804,10 +841,10 @@ function changeSectionState(state: SubmissionObjectState, action: EnableSectionA
           [ action.payload.sectionId ]: Object.assign({}, state[ action.payload.submissionId ].sections [ action.payload.sectionId ], {
             enabled,
             data: (enabled) ? state[ action.payload.submissionId ].sections [ action.payload.sectionId ] : {},
-            removePending: false
-          })
-        })
-      })
+            removePending: false,
+          }),
+        }),
+      }),
     });
   } else {
     return state;
@@ -833,10 +870,10 @@ function changeSectionRemoveState(state: SubmissionObjectState, action: DisableS
         // sections: deleteProperty(state[ action.payload.submissionId ].sections, action.payload.sectionId),
         sections: Object.assign({}, state[ action.payload.submissionId ].sections, {
           [ action.payload.sectionId ]: Object.assign({}, state[ action.payload.submissionId ].sections [ action.payload.sectionId ], {
-            removePending
-          })
-        })
-      })
+            removePending,
+          }),
+        }),
+      }),
     });
   } else {
     return state;
@@ -860,11 +897,11 @@ function setIsValid(state: SubmissionObjectState, action: SectionStatusChangeAct
         sections: Object.assign({}, state[ action.payload.submissionId ].sections,
           Object.assign({}, {
             [ action.payload.sectionId ]: Object.assign({}, state[ action.payload.submissionId ].sections [ action.payload.sectionId ], {
-              isValid: action.payload.status
-            })
-          })
-        )
-      })
+              isValid: action.payload.status,
+            }),
+          }),
+        ),
+      }),
     });
   } else {
     return state;
@@ -888,7 +925,7 @@ function newFile(state: SubmissionObjectState, action: NewUploadedFileAction): S
   let newData;
   if (isUndefined(filesData.files)) {
     newData = {
-      files: [action.payload.data]
+      files: [action.payload.data],
     };
   } else {
     newData = { ...filesData, files: [].concat(...filesData.files, action.payload.data) };
@@ -899,11 +936,51 @@ function newFile(state: SubmissionObjectState, action: NewUploadedFileAction): S
       sections: Object.assign({}, state[ action.payload.submissionId ].sections, {
         [ action.payload.sectionId ]: Object.assign({}, state[ action.payload.submissionId ].sections [ action.payload.sectionId ], {
           enabled: true,
-          data: newData
-        })
-      })
-    })
+          data: newData,
+        }),
+      }),
+    }),
   });
+}
+
+/**
+ * Edit primary bitstream.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an EditFilePrimaryBitstreamAction action
+ * @return SubmissionObjectState
+ *    the new state, with the edited file.
+ */
+function editPrimaryBitstream(state: SubmissionObjectState, action: EditFilePrimaryBitstreamAction): SubmissionObjectState {
+  const filesData = state[ action.payload.submissionId ].sections[ action.payload.sectionId ].data as WorkspaceitemSectionUploadObject;
+  const { submissionId, sectionId, fileId } = action.payload;
+
+  const fileIndex = findKey(filesData.files, { uuid: fileId });
+  if (isNull(fileIndex)) {
+    return state;
+  }
+
+  const submission = state[submissionId];
+  return {
+    ...state,
+    [submissionId]: {
+      ...submission,
+      sections: {
+        ...submission.sections,
+        [sectionId]: {
+          ...submission.sections[sectionId],
+          data: {
+            ...submission.sections[sectionId].data as WorkspaceitemSectionUploadObject,
+            primary: fileId,
+          },
+        },
+      },
+      isLoading: submission.isLoading,
+      savePending: submission.savePending,
+    },
+  };
 }
 
 /**
@@ -932,14 +1009,14 @@ function editFileData(state: SubmissionObjectState, action: EditFileDataAction):
             Object.assign({}, {
               [ action.payload.sectionId ]: Object.assign({}, state[ action.payload.submissionId ].sections [ action.payload.sectionId ], {
                 data: Object.assign({}, state[ action.payload.submissionId ].sections[ action.payload.sectionId ].data, {
-                  files: newData
-                })
-              })
-            })
+                  files: newData,
+                }),
+              }),
+            }),
           ),
           isLoading: state[ action.payload.submissionId ].isLoading,
           savePending: state[ action.payload.submissionId ].savePending,
-        })
+        }),
       });
     }
   }
@@ -958,12 +1035,20 @@ function editFileData(state: SubmissionObjectState, action: EditFileDataAction):
  */
 function deleteFile(state: SubmissionObjectState, action: DeleteUploadedFileAction): SubmissionObjectState {
   const filesData = state[ action.payload.submissionId ].sections[ action.payload.sectionId ].data as WorkspaceitemSectionUploadObject;
+  const filesErrorsToShow = state[ action.payload.submissionId ].sections[ action.payload.sectionId ].errorsToShow ?? [];
+  const filesSeverValidationErrors = state[ action.payload.submissionId ].sections[ action.payload.sectionId ].serverValidationErrors ?? [];
+
   if (hasValue(filesData.files)) {
     const fileIndex: any = findKey(
       filesData.files,
-      {uuid: action.payload.fileId});
+      { uuid: action.payload.fileId });
     if (isNotNull(fileIndex)) {
       const newData = Array.from(filesData.files);
+      const newErrorsToShow = filesData.files.length > 1  ? filesErrorsToShow
+        .filter(errorToShow => !errorToShow.path.includes(fileIndex)) : [];
+      const newServerErrorsToShow = filesData.files.length > 1  ? filesSeverValidationErrors
+        .filter(serverError => !serverError.path.includes(fileIndex)) : [];
+
       newData.splice(fileIndex, 1);
       return Object.assign({}, state, {
         [ action.payload.submissionId ]: Object.assign({}, state[action.payload.submissionId], {
@@ -971,16 +1056,35 @@ function deleteFile(state: SubmissionObjectState, action: DeleteUploadedFileActi
             Object.assign({}, {
               [ action.payload.sectionId ]: Object.assign({}, state[ action.payload.submissionId ].sections[ action.payload.sectionId ], {
                 data: Object.assign({}, state[ action.payload.submissionId ].sections[ action.payload.sectionId ].data, {
-                  files: newData
-                })
-              })
-            })
-          )
-        })
+                  files: newData,
+                }),
+                errorsToShow: newErrorsToShow,
+                serverValidationErrors: newServerErrorsToShow,
+              }),
+            }),
+          ),
+        }),
       });
     }
   }
   return state;
+}
+
+function cleanDuplicateDetectionSection(state: SubmissionObjectState, action: CleanDuplicateDetectionAction): SubmissionObjectState {
+  if (isNotEmpty(state[ action.payload.submissionId ]) && state[action.payload.submissionId].sections.hasOwnProperty('duplicates')) {
+    return Object.assign({}, state, {
+      [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
+        sections: Object.assign({}, state[ action.payload.submissionId ].sections, {
+          [ 'duplicates' ]: Object.assign({}, state[ action.payload.submissionId ].sections.duplicates, {
+            enabled: false,
+            data: { potentialDuplicates: [] },
+          }),
+        }),
+      }),
+    });
+  } else {
+    return state;
+  }
 }
 
 // ------ Detect duplicate functions ------ //
@@ -1000,7 +1104,7 @@ function startSaveDecision(state: SubmissionObjectState, action: SetDuplicateDec
     return Object.assign({}, state, {
       [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
         saveDecisionPending: true,
-      })
+      }),
     });
   } else {
     return state;
@@ -1010,7 +1114,7 @@ function startSaveDecision(state: SubmissionObjectState, action: SetDuplicateDec
 function setDuplicateMatches(state: SubmissionObjectState, action: SetDuplicateDecisionSuccessAction) {
   const index: any = findKey(
     action.payload.submissionObject,
-    {id: parseInt(action.payload.submissionId, 10) as any});
+    { id: parseInt(action.payload.submissionId, 10) as any });
   const sectionData = action.payload.submissionObject[index].sections[ action.payload.sectionId ] as WorkspaceitemSectionDetectDuplicateObject;
   const newData = (sectionData && sectionData.matches) ? sectionData : Object.create({});
 
@@ -1021,12 +1125,12 @@ function setDuplicateMatches(state: SubmissionObjectState, action: SetDuplicateD
           Object.assign({}, {
             [ action.payload.sectionId ]: Object.assign({}, state[ action.payload.submissionId ].sections [ action.payload.sectionId ], {
               enabled: true,
-              data: newData
-            })
-          })
+              data: newData,
+            }),
+          }),
         ),
-        saveDecisionPending: false
-      })
+        saveDecisionPending: false,
+      }),
     });
   } else {
     return state;
@@ -1048,7 +1152,7 @@ function endSaveDecision(state: SubmissionObjectState, action: SetDuplicateDecis
     return Object.assign({}, state, {
       [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
         saveDecisionPending: false,
-      })
+      }),
     });
   } else {
     return state;
@@ -1062,10 +1166,67 @@ function cleanDetectDuplicateSection(state: SubmissionObjectState, action: Clean
         sections: Object.assign({}, state[ action.payload.submissionId ].sections, {
           [ 'detect-duplicate' ]: Object.assign({}, state[ action.payload.submissionId ].sections [ 'detect-duplicate' ], {
             enabled: false,
-            data: {}
-          })
-        })
-      })
+            data: {},
+          }),
+        }),
+      }),
+    });
+  } else {
+    return state;
+  }
+}
+
+// ------ External upload functions ------ //
+/**
+ * Set external upload flag to true
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    a SetDuplicateDecisionAction
+ * @return SubmissionObjectState
+ *    the new state, with the decision flag changed.
+ */
+function startExternalUploadExecution(state: SubmissionObjectState, action: ExecuteExternalUploadAction): SubmissionObjectState {
+  if (hasValue(state[ action.payload.submissionId ])) {
+    return Object.assign({}, state, {
+      [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
+        externalUploadPending: true,
+      }),
+    });
+  } else {
+    return state;
+  }
+}
+
+/**
+ * Update external upload state
+ *
+ * @param state
+ *    the current state
+ * @param submissionId
+ *    the submission's ID
+ * @param sectionId
+ *    the section's ID
+ * @param errors
+ *    the section's ID
+ * @return SubmissionObjectState
+ *    the new state, with the decision flag changed.
+ */
+function updateExternalUploadState(state: SubmissionObjectState, submissionId: string, sectionId: string, errors: SubmissionSectionError[]): SubmissionObjectState {
+  if (isNotEmpty(state[ submissionId ])
+    && isNotEmpty(state[ submissionId ].sections[ sectionId])) {
+    return Object.assign({}, state, {
+      [ submissionId ]: Object.assign({}, state[ submissionId ], {
+        sections: Object.assign({}, state[ submissionId ].sections, {
+          [ sectionId ]: Object.assign({}, state[ submissionId ].sections [ sectionId ], {
+            enabled: true,
+            errorsToShow: errors,
+            serverValidationErrors: errors,
+          }),
+        }),
+        externalUploadPending: false,
+      }),
     });
   } else {
     return state;

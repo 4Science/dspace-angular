@@ -1,10 +1,14 @@
 import isObject from 'lodash/isObject';
 import uniqueId from 'lodash/uniqueId';
-import { hasValue, isNotEmpty } from '../../../empty.util';
-import { FormFieldMetadataValueObject } from '../../builder/models/form-field-metadata-value.model';
-import { ConfidenceType } from '../../../../core/shared/confidence-type';
-import { PLACEHOLDER_PARENT_METADATA } from '../../builder/ds-dynamic-form-ui/ds-dynamic-form-constants';
+
 import { environment } from '../../../../../environments/environment';
+import { ConfidenceType } from '../../../../core/shared/confidence-type';
+import {
+  hasValue,
+  isNotEmpty,
+} from '../../../empty.util';
+import { PLACEHOLDER_PARENT_METADATA } from '../../builder/ds-dynamic-form-ui/ds-dynamic-form-constants';
+import { FormFieldMetadataValueObject } from '../../builder/models/form-field-metadata-value.model';
 
 export interface ChipsItemIcon {
   metadata: string;
@@ -24,10 +28,10 @@ export class ChipsItem {
   private objToDisplay: string;
 
   constructor(item: any,
-              fieldToDisplay: string = 'display',
-              objToDisplay?: string,
-              icons?: ChipsItemIcon[],
-              editMode?: boolean) {
+    fieldToDisplay: string = 'display',
+    objToDisplay?: string,
+    icons?: ChipsItemIcon[],
+    editMode?: boolean) {
 
     this.id = uniqueId();
     this._item = item;
@@ -54,7 +58,7 @@ export class ChipsItem {
   }
 
   hasIcons(): boolean {
-     return isNotEmpty(this.icons);
+    return isNotEmpty(this.icons);
   }
 
   hasHref(): boolean {
@@ -69,7 +73,7 @@ export class ChipsItem {
       for (const icon of this.icons) {
         if (this._item.hasOwnProperty(icon.metadata)
           && (((typeof this._item[icon.metadata] === 'string') && hasValue(this._item[icon.metadata]))
-            || (this._item[icon.metadata] as FormFieldMetadataValueObject).hasValue())
+            || this._item[icon.metadata] && hasValue(this._item[icon.metadata].value))
           && !this.hasPlaceholder(this._item[icon.metadata])) {
           if ((icon.visibleWhenAuthorityEmpty
             || (this._item[icon.metadata] as FormFieldMetadataValueObject).confidence !== ConfidenceType.CF_UNSET

@@ -12,7 +12,7 @@
 
 /*** FONT FAMILIES ***/
 
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,200;1,300;1,400;1,600;1,700;1,800&display=swap');
+@import './../../../styles/_fonts.scss';
 
 $font-family-sans-serif: 'Ubuntu';
 
@@ -103,3 +103,6 @@ $ds-glam-carousel-controls-color: $gray-100;
 $ds-glam-carousel-height: 680px;
 $ds-glam-carousel-mobile-image-height: 360px;
 $ds-glam-carousel-mobile-caption-height: 360px;
+
+$navbar-light-color: rgba(black, .6) !default;
+$navbar-light-hover-color: rgba(black, .8) !default;

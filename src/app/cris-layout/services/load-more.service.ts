@@ -1,7 +1,9 @@
+import { Injectable } from '@angular/core';
+
 import { environment } from '../../../environments/environment';
-import { isEmpty } from '../../shared/empty.util';
 import { LayoutField } from '../../core/layout/models/box.model';
 import { MetadataValue } from '../../core/shared/metadata.models';
+import { isEmpty } from '../../shared/empty.util';
 
 export interface NestedMetadataGroupEntry {
   field: LayoutField;
@@ -16,7 +18,8 @@ interface ComputedData {
   lastLimit: number;
 }
 
-export class LoadMoreService  {
+@Injectable({ providedIn: 'root' })
+export class LoadMoreService {
 
   /**
    * returns the limits of how many data loaded from first and last
@@ -28,20 +31,20 @@ export class LoadMoreService  {
     const firstLimit = this.getLimitsFromRendering(rendering, 'first');
     const lastLimit = firstLimit > 0 ? this.getLimitsFromRendering(rendering, 'last') : 0;
     if ((componentsToBeRenderedMap.size  <= firstLimit + lastLimit) || (!firstLimit && !lastLimit)) {
-       isConfigured = false;
-       firstLimitedDataToBeRenderedMap = componentsToBeRenderedMap;
+      isConfigured = false;
+      firstLimitedDataToBeRenderedMap = componentsToBeRenderedMap;
     } else {
-       firstLimitedDataToBeRenderedMap = this.fillFirstLimitedData(componentsToBeRenderedMap,firstLimit);
-       lastLimitedDataToBeRenderedMap = this.fillLastLimitedData(componentsToBeRenderedMap,lastLimit);
+      firstLimitedDataToBeRenderedMap = this.fillFirstLimitedData(componentsToBeRenderedMap,firstLimit);
+      lastLimitedDataToBeRenderedMap = this.fillLastLimitedData(componentsToBeRenderedMap,lastLimit);
     }
     return {
-        firstLimitedDataToBeRenderedMap,
-        lastLimitedDataToBeRenderedMap,
-        isConfigured,
-        firstLimit,
-        lastLimit
+      firstLimitedDataToBeRenderedMap,
+      lastLimitedDataToBeRenderedMap,
+      isConfigured,
+      firstLimit,
+      lastLimit,
     };
-   };
+  };
 
   /**
    * Get the information about 'more' or 'last' limits from the rendering type.
@@ -79,7 +82,7 @@ export class LoadMoreService  {
       lastLimitedDataToBeRenderedMap,
       isConfigured,
       firstLimit,
-      lastLimit
+      lastLimit,
     };
   };
 
@@ -90,7 +93,7 @@ export class LoadMoreService  {
     const firstLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
     for (let i = 0; i < firstLimit ; i++) {
       if (firstLimitedDataToBeRenderedMap.size < componentsToBeRenderedMap.size) {
-            firstLimitedDataToBeRenderedMap.set(i,componentsToBeRenderedMap.get(i));
+        firstLimitedDataToBeRenderedMap.set(i,componentsToBeRenderedMap.get(i));
       }
     }
     return firstLimitedDataToBeRenderedMap;
@@ -102,8 +105,8 @@ export class LoadMoreService  {
   fillLastLimitedData = (componentsToBeRenderedMap: Map<number, NestedMetadataGroupEntry[]>, lastLimit: number): Map<number, NestedMetadataGroupEntry[]> => {
     const lastLimitedDataToBeRenderedMap = new Map<number, NestedMetadataGroupEntry[]>();
     for (let i = componentsToBeRenderedMap.size  - lastLimit; i < componentsToBeRenderedMap.size; i++) {
-            lastLimitedDataToBeRenderedMap.set(i,componentsToBeRenderedMap.get(i));
-      }
+      lastLimitedDataToBeRenderedMap.set(i,componentsToBeRenderedMap.get(i));
+    }
     return lastLimitedDataToBeRenderedMap;
   };
 }

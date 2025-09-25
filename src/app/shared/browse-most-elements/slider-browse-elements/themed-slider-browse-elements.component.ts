@@ -1,17 +1,23 @@
-import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
+import {
+  Component,
+  Input,
+} from '@angular/core';
+
+import { TopSection } from '../../../core/layout/models/section.model';
 import { Context } from '../../../core/shared/context.model';
-import { Component, Input } from '@angular/core';
+import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
 import { ThemedComponent } from '../../theme-support/themed.component';
 import { SliderBrowseElementsComponent } from './slider-browse-elements.component';
-import { TopSection } from '../../../core/layout/models/section.model';
 
 /**
  * Themed component for the SliderBrowseElementsComponent
  */
 @Component({
-  selector: 'ds-themed-slider-browse-elements',
+  selector: 'ds-slider-browse-elements',
   styleUrls: [],
   templateUrl: './../../theme-support/themed.component.html',
+  standalone: true,
+  imports: [SliderBrowseElementsComponent],
 })
 export class ThemedSliderBrowseElementsComponent extends ThemedComponent<SliderBrowseElementsComponent> {
 

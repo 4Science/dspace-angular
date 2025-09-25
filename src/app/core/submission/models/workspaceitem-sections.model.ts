@@ -1,13 +1,14 @@
 import { WorkspaceitemSectionAccessesObject } from './workspaceitem-section-accesses.model';
-import { WorkspaceitemSectionFormObject } from './workspaceitem-section-form.model';
-import { WorkspaceitemSectionLicenseObject } from './workspaceitem-section-license.model';
-import { WorkspaceitemSectionUploadObject } from './workspaceitem-section-upload.model';
 import { WorkspaceitemSectionCcLicenseObject } from './workspaceitem-section-cc-license.model';
-import { WorkspaceitemSectionIdentifiersObject } from './workspaceitem-section-identifiers.model';
-import { WorkspaceitemSectionSherpaPoliciesObject } from './workspaceitem-section-sherpa-policies.model';
-import { WorkspaceitemSectionDetectDuplicateObject } from './workspaceitem-section-deduplication.model';
 import { WorkspaceitemSectionCorrectionObject } from './workspaceitem-section-correction.model';
+import { WorkspaceitemSectionDetectDuplicateObject } from './workspaceitem-section-deduplication.model';
+import { WorkspaceitemSectionDuplicatesObject } from './workspaceitem-section-duplicates.model';
+import { WorkspaceitemSectionFormObject } from './workspaceitem-section-form.model';
+import { WorkspaceitemSectionIdentifiersObject } from './workspaceitem-section-identifiers.model';
+import { WorkspaceitemSectionLicenseObject } from './workspaceitem-section-license.model';
+import { WorkspaceitemSectionSherpaPoliciesObject } from './workspaceitem-section-sherpa-policies.model';
 import { WorkspaceitemSectionUnpaywallObject } from './workspaceitem-section-unpaywall-object';
+import { WorkspaceitemSectionUploadObject } from './workspaceitem-section-upload.model';
 
 /**
  * An interface to represent submission's section object.
@@ -28,7 +29,10 @@ export type WorkspaceitemSectionDataType
   | WorkspaceitemSectionAccessesObject
   | WorkspaceitemSectionSherpaPoliciesObject
   | WorkspaceitemSectionIdentifiersObject
+  | WorkspaceitemSectionDuplicatesObject
   | WorkspaceitemSectionDetectDuplicateObject
   | WorkspaceitemSectionCorrectionObject
   | WorkspaceitemSectionUnpaywallObject
   | string;
+
+

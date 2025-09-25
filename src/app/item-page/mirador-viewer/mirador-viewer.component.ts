@@ -1,23 +1,85 @@
-import { ChangeDetectionStrategy, Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Item } from '../../core/shared/item.model';
+import {
+  AsyncPipe,
+  isPlatformBrowser,
+  Location,
+  NgIf,
+} from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import {
+  combineLatest,
+  Observable,
+  of,
+  Subscription,
+} from 'rxjs';
+import {
+  distinctUntilChanged,
+  map,
+  switchMap,
+  take,
+} from 'rxjs/operators';
+
+import {
+  APP_CONFIG,
+  AppConfig,
+} from '../../../config/app-config.interface';
+import { MiradorMetadataDownloadValue } from '../../../config/mirador-config.interfaces';
 import { environment } from '../../../environments/environment';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
-import { Observable, of } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { isPlatformBrowser } from '@angular/common';
-import { MiradorViewerService } from './mirador-viewer.service';
-import { HostWindowService, WidthCategory } from '../../shared/host-window.service';
 import { BundleDataService } from '../../core/data/bundle-data.service';
+import { ConfigurationDataService } from '../../core/data/configuration-data.service';
+import { DspaceRestService } from '../../core/dspace-rest/dspace-rest.service';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../core/services/window.service';
+import { Item } from '../../core/shared/item.model';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import {
+  HostWindowService,
+  WidthCategory,
+} from '../../shared/host-window.service';
+import { SafeUrlPipe } from '../../shared/utils/safe-url-pipe';
+import { VarDirective } from '../../shared/utils/var.directive';
+import { MiradorViewerService } from './mirador-viewer.service';
+
+const IFRAME_UPDATE_URL_MESSAGE = 'update-url';
+
+interface IFrameMessageData {
+  type: string;
+  canvasId: string;
+  canvasIndex: string;
+}
+
 
 @Component({
   selector: 'ds-mirador-viewer',
   styleUrls: ['./mirador-viewer.component.scss'],
   templateUrl: './mirador-viewer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ MiradorViewerService ]
+  imports: [
+    TranslateModule,
+    AsyncPipe,
+    NgIf,
+    SafeUrlPipe,
+    VarDirective,
+  ],
+  standalone: true,
 })
-export class MiradorViewerComponent implements OnInit {
+export class MiradorViewerComponent implements OnInit, OnDestroy {
 
   @Input() object: Item;
 
@@ -37,6 +99,11 @@ export class MiradorViewerComponent implements OnInit {
   @Input() canvasId: string;
 
   /**
+   * Is used as canvas index of the element to show.
+   */
+  @Input() canvasIndex: string;
+
+  /**
    * Hides embedded viewer in dev mode.
    */
   isViewerAvailable = true;
@@ -44,7 +111,7 @@ export class MiradorViewerComponent implements OnInit {
   /**
    * The url for the iframe.
    */
-  iframeViewerUrl: Observable<SafeResourceUrl>;
+  iframeViewerUrl: Observable<string>;
 
   /**
    * Sets the viewer to show or hide thumbnail side navigation menu.
@@ -58,19 +125,34 @@ export class MiradorViewerComponent implements OnInit {
 
   viewerMessage = 'Sorry, the Mirador viewer is not currently available in development mode.';
 
-  constructor(private sanitizer: DomSanitizer,
-              private viewerService: MiradorViewerService,
-              private bitstreamDataService: BitstreamDataService,
-              private bundleDataService: BundleDataService,
-              private hostWindowService: HostWindowService,
-              @Inject(PLATFORM_ID) private platformId: any) {
+  private downloadConfigKey: string;
+
+  private readonly isInItemPage = environment.advancedAttachmentRendering.showViewerOnSameItemPage;
+
+  private readonly subs: Subscription[] = [];
+
+  constructor(
+    private sanitizer: DomSanitizer,
+    private viewerService: MiradorViewerService,
+    private bitstreamDataService: BitstreamDataService,
+    private bundleDataService: BundleDataService,
+    private hostWindowService: HostWindowService,
+    private location: Location,
+    private configurationDataService: ConfigurationDataService,
+    private restService: DspaceRestService,
+    private route: ActivatedRoute,
+    private router: Router,
+    @Inject(APP_CONFIG) private appConfig: AppConfig,
+    @Inject(PLATFORM_ID) private platformId: any,
+    @Inject(NativeWindowService) protected _window: NativeWindowRef,
+  ) {
   }
 
   /**
    * Creates the url for the Mirador iframe. Adds parameters for the displaying the search panel, query results,
    * or  multi-page thumbnail navigation.
    */
-  setURL() {
+  getURL(downloadEnabled = true): string {
     // The path to the REST manifest endpoint.
     const manifestApiEndpoint = encodeURIComponent(environment.rest.baseUrl + '/iiif/'
       + this.object.id + '/manifest');
@@ -95,12 +177,23 @@ export class MiradorViewerComponent implements OnInit {
     if (this.canvasId) {
       viewerPath += `&canvasId=${this.canvasId}`;
     }
-    if (environment.mirador.enableDownloadPlugin) {
+    if (this.canvasIndex) {
+      viewerPath += `&canvasIndex=${parseInt(this.canvasIndex, 10) - 1}`;
+    }
+    if (downloadEnabled && this.appConfig.mirador.enableDownloadPlugin) {
       viewerPath += '&enableDownloadPlugin=true';
     }
+    if (environment.mirador.enableAnnotationServer) {
+      viewerPath += '&enableAnnotationServer=true';
+    }
+    if (environment.mirador.annotationServerUrl) {
+      viewerPath += '&annotationServerUrl=' + environment.mirador.annotationServerUrl;
+    }
+    if (this.canvasId) {
+      viewerPath += `&canvasId=${this.canvasId}`;
+    }
 
-    // TODO: Should the query term be trusted here?
-    return this.sanitizer.bypassSecurityTrustResourceUrl(viewerPath);
+    return viewerPath;
   }
 
   ngOnInit(): void {
@@ -108,18 +201,19 @@ export class MiradorViewerComponent implements OnInit {
      * Initializes the iframe url observable.
      */
     if (isPlatformBrowser(this.platformId)) {
+      this._window.nativeWindow.addEventListener('message', this.iframeMessageListener);
 
+      this.downloadConfigKey = this.appConfig.mirador.downloadMetadataConfig;
       // Viewer is not currently available in dev mode so hide it in that case.
       this.isViewerAvailable = this.viewerService.showEmbeddedViewer();
-
       // The notMobile property affects the thumbnail navigation
       // menu by hiding it for smaller viewports. This will not be
       // responsive to resizing.
       this.hostWindowService.widthCategory
-          .pipe(take(1))
-          .subscribe((category: WidthCategory) => {
-            this.notMobile = !(category === WidthCategory.XS || category === WidthCategory.SM);
-          });
+        .pipe(take(1))
+        .subscribe((category: WidthCategory) => {
+          this.notMobile = !(category === WidthCategory.XS || category === WidthCategory.SM);
+        });
 
       // Set the multi property. The default mirador configuration adds a right
       // thumbnail navigation panel to the viewer when multi is 'true'.
@@ -127,11 +221,10 @@ export class MiradorViewerComponent implements OnInit {
       // Set the multi property to 'true' if the item is searchable.
       if (this.searchable) {
         this.multi = true;
-        const observable = of('');
-        this.iframeViewerUrl = observable.pipe(
-          map((val) => {
-            return this.setURL();
-          })
+        this.iframeViewerUrl = this.isDownloadEnabled$().pipe(
+          map(( downloadEnabled) => {
+            return this.getURL(downloadEnabled);
+          }),
         );
       } else {
         // Set the multi property based on the image count in IIIF-eligible bundles.
@@ -139,15 +232,103 @@ export class MiradorViewerComponent implements OnInit {
         this.iframeViewerUrl = this.viewerService.getImageCount(
           this.object,
           this.bitstreamDataService,
-          this.bundleDataService).pipe(
-          map(c => {
+          this.bundleDataService,
+        ).pipe(
+          switchMap(c => combineLatest([of(c), this.isDownloadEnabled$()])),
+          map(([c, downloadEnabled]) => {
             if (c > 1) {
               this.multi = true;
             }
-            return this.setURL();
-          })
+            return this.getURL(downloadEnabled);
+          }),
         );
       }
+
+      if (this.isInItemPage) {
+        this.reloadIframeOnUrlChange();
+      }
     }
+
+  }
+
+  /**
+   * Check whether to include download plugin
+   */
+  isDownloadEnabled$(): Observable<boolean> {
+    return combineLatest([
+      this.configurationDataService.findByPropertyName(this.appConfig.mirador.downloadRestConfig)
+        .pipe(
+          getFirstCompletedRemoteData(),
+        ),
+      this.object.owningCollection
+        .pipe(getFirstCompletedRemoteData()),
+    ]).pipe(
+      map(([restPropertyDownloadConfig, owningCollection]) =>
+        (this.object.firstMetadataValue(this.downloadConfigKey) ||
+          owningCollection?.payload?.firstMetadataValue(this.downloadConfigKey) ||
+          restPropertyDownloadConfig?.payload?.values[0]) as MiradorMetadataDownloadValue,
+      ),
+      switchMap((downloadLevel) => {
+        return this.getIiifDownloadConfig().pipe(
+          map((downloadConfig) => downloadLevel && downloadConfig.includes(downloadLevel)),
+        );
+      }),
+    );
+  }
+
+  getIiifDownloadConfig(): Observable<MiradorMetadataDownloadValue[]> {
+    const href = `${this.appConfig.rest.baseUrl}/iiif/${this.object.id}/download`;
+    return this.restService.get(href).pipe(
+      map(res => res.payload as MiradorMetadataDownloadValue[]),
+    );
+  }
+
+  ngOnDestroy(): void {
+    this._window.nativeWindow.removeEventListener('message', this.iframeMessageListener);
+    this.subs.forEach((sub) => sub.unsubscribe());
+  }
+
+  iframeMessageListener = (event: MessageEvent) => {
+    const data: IFrameMessageData = event.data;
+
+    if (data.type === IFRAME_UPDATE_URL_MESSAGE) {
+      const currentPath = this.location.path();
+      const canvasId = data.canvasId;
+      const canvasIndex = data.canvasIndex;
+      // Use URL API for easier query param manipulation
+      const url = new URL(window.location.origin + currentPath);
+      // Set or update the query param
+      url.searchParams.set('canvasId', canvasId);
+      url.searchParams.set('canvasIndex', canvasIndex);
+      const newPathWithQuery = url.pathname + url.search;
+      // Replace the current state (no reload, no new history entry)
+      this.location.replaceState(newPathWithQuery);
+    }
+  };
+
+  private reloadIframeOnUrlChange(): void {
+    this.subs.push(
+      this.route.queryParams.pipe(distinctUntilChanged()).subscribe(params => {
+        const canvasId = params.canvasId;
+        const canvasIndex = params.canvasIndex;
+
+        let shouldReload = false;
+
+        if (canvasId && canvasId !== this.canvasId) {
+          this.canvasId = canvasId;
+          shouldReload = true;
+        }
+
+        if (canvasIndex && canvasIndex !== this.canvasIndex) {
+          this.canvasIndex = canvasIndex;
+          shouldReload = true;
+        }
+
+        if (shouldReload) {
+          // Regenerate iframe URL
+          this.iframeViewerUrl = of('').pipe(map(() => this.getURL()));
+        }
+      }),
+    );
   }
 }

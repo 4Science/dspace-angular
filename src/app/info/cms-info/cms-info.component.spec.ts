@@ -1,19 +1,31 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CmsInfoComponent } from './cms-info.component';
-import { SiteDataService } from 'src/app/core/data/site-data.service';
-import { LocaleService } from 'src/app/core/locale/locale.service';
-import { ObjectCacheService } from 'src/app/core/cache/object-cache.service';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { NativeWindowRef, NativeWindowService } from 'src/app/core/services/window.service';
-import { CookieService } from 'src/app/core/services/cookie.service';
-import { CookieServiceMock } from 'src/app/shared/mocks/cookie.service.mock';
+import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
+import { MockComponent } from 'ng-mocks';
+import {
+  Observable,
+  of as observableOf,
+  of,
+} from 'rxjs';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { AuthTokenInfo } from 'src/app/core/auth/models/auth-token-info.model';
-import { Observable, of as observableOf, of } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { ObjectCacheService } from 'src/app/core/cache/object-cache.service';
+import { SiteDataService } from 'src/app/core/data/site-data.service';
+import { LocaleService } from 'src/app/core/locale/locale.service';
+import { CookieService } from 'src/app/core/services/cookie.service';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from 'src/app/core/services/window.service';
 import { Site } from 'src/app/core/shared/site.model';
+import { CookieServiceMock } from 'src/app/shared/mocks/cookie.service.mock';
+
+import { MarkdownViewerComponent } from '../../shared/markdown-viewer/markdown-viewer.component';
+import { CmsInfoComponent } from './cms-info.component';
 
 describe('CmsInfoComponent', () => {
   let component: CmsInfoComponent;
@@ -29,13 +41,13 @@ describe('CmsInfoComponent', () => {
     metadata: {
       'dc.rights' : [{
         value: 'English text',
-        language: 'en'
+        language: 'en',
       },
       {
         value: 'German text',
-        language: 'de'
-      }]
-    }
+        language: 'de',
+      }],
+    },
   });
 
   beforeEach(async () => {
@@ -43,21 +55,24 @@ describe('CmsInfoComponent', () => {
     token = new AuthTokenInfo('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9');
     authService = jasmine.createSpyObj('authService', {
       isAuthenticated: observableOf(true),
-      getToken: token
+      getToken: token,
     });
     store = jasmine.createSpyObj('store', ['dispatch']);
     activatedRouteStub = {
       data: observableOf({ schema: 'cris', qualifier: 'testQualifier' }),
-      queryParamMap: observableOf({})
+      queryParamMap: observableOf({}),
     };
     siteServiceStub = {
       find(): Observable<Site> {
         return of(site);
-      }
+      },
     };
     await TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot()],
-      declarations: [ CmsInfoComponent ],
+      imports: [
+        TranslateModule.forRoot(),
+        CmsInfoComponent,
+        MockComponent(MarkdownViewerComponent),
+      ],
       providers: [
         LocaleService,
         ObjectCacheService,
@@ -66,10 +81,10 @@ describe('CmsInfoComponent', () => {
         { provide: AuthService, useValue: authService },
         { provide: CookieService, useValue: new CookieServiceMock },
         { provide: NativeWindowService, useValue: new NativeWindowRef() },
-        { provide: ActivatedRoute, useValue: activatedRouteStub }
-      ]
+        { provide: ActivatedRoute, useValue: activatedRouteStub },
+      ],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(CmsInfoComponent);
     component = fixture.componentInstance;

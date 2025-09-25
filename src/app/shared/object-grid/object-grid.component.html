@@ -1,7 +1,6 @@
 <ng-container *ngIf="!noPagination;else withoutPagination">
   <ds-pagination
     [paginationOptions]="config"
-    [pageInfoState]="objects?.payload"
     [collectionSize]="objects?.payload?.totalElements"
     [sortOptions]="sortConfig"
     [hideGear]="hideGear"
@@ -18,26 +17,28 @@
     (next)="goNext()"
     >
       <div class="card-columns row" *ngIf="objects?.hasSucceeded">
-        <div class="card-column col mb-3 object-grid" [ngClass]="columnStyle" *ngFor="let object of (results$ | async)" @fadeIn [attr.data-test]="'grid-object' | dsBrowserOnly">
+        <div class="card-column mb-3 object-grid" [ngClass]="columnStyle" *ngFor="let object of (results$ | async)" @fadeIn [attr.data-test]="'grid-object' | dsBrowserOnly">
           <ds-listable-object-component-loader [configStyle]="configStyle"
                                                [object]="object"
                                                [viewMode]="viewMode"
                                                [context]="context"
+                                               [showLabel]="showLabel"
                                                [showMetrics]="showMetrics"
                                                [showThumbnails]="showThumbnails"
+                                               [showWorkflowStatistics]="showWorkflowStatistics"
                                                [linkType]="linkType"></ds-listable-object-component-loader>
         </div>
       </div>
     <ds-error *ngIf="objects.hasFailed" message="{{'error.objects' | translate}}"></ds-error>
-    <ds-themed-loading *ngIf="objects.isLoading" message="{{'loading.objects' | translate}}"></ds-themed-loading>
+  <ds-loading *ngIf="objects.isLoading" message="{{'loading.objects' | translate}}"></ds-loading>
   </ds-pagination>
 </ng-container>
 <ng-template #withoutPagination>
   <div class="card-columns row" *ngIf="objects?.hasSucceeded">
-    <div class="card-column col mb-3 object-grid" [ngClass]="columnStyle" *ngFor="let result of (results$ | async)" @fadeIn>
+    <div class="card-column mb-3 object-grid" [ngClass]="columnStyle" *ngFor="let result of (results$ | async)" @fadeIn>
       <ds-listable-object-component-loader [configStyle]="configStyle" [object]="result" [viewMode]="viewMode" [context]="context" [linkType]="linkType"></ds-listable-object-component-loader>
     </div>
   </div>
   <ds-error *ngIf="objects.hasFailed" message="{{'error.objects' | translate}}"></ds-error>
-  <ds-themed-loading *ngIf="objects.isLoading" message="{{'loading.objects' | translate}}"></ds-themed-loading>
+  <ds-loading *ngIf="objects.isLoading" message="{{'loading.objects' | translate}}"></ds-loading>
 </ng-template>

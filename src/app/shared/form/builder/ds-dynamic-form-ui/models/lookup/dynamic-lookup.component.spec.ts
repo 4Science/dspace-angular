@@ -1,43 +1,71 @@
 // Load the implementations that should be tested
-import { ChangeDetectorRef, Component, CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync, } from '@angular/core/testing';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  DebugElement,
+} from '@angular/core';
+import {
+  ComponentFixture,
+  fakeAsync,
+  inject,
+  TestBed,
+  tick,
+  waitForAsync,
+} from '@angular/core/testing';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  UntypedFormControl,
+  UntypedFormGroup,
+} from '@angular/forms';
 import { By } from '@angular/platform-browser';
-
-import { of as observableOf } from 'rxjs';
-import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbModal,
+  NgbModule,
+} from '@ng-bootstrap/ng-bootstrap';
+import {
+  DynamicFormLayoutService,
+  DynamicFormsCoreModule,
+  DynamicFormValidationService,
+} from '@ng-dynamic-forms/core';
+import { DynamicFormsNGBootstrapUIModule } from '@ng-dynamic-forms/ui-ng-bootstrap';
+import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { DynamicFormsNGBootstrapUIModule } from '@ng-dynamic-forms/ui-ng-bootstrap';
-import { DynamicFormLayoutService, DynamicFormsCoreModule, DynamicFormValidationService } from '@ng-dynamic-forms/core';
+import { of as observableOf } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
+import { APP_DATA_SERVICES_MAP } from '../../../../../../../config/app-config.interface';
+import { SubmissionScopeType } from '../../../../../../core/submission/submission-scope-type';
+import { Vocabulary } from '../../../../../../core/submission/vocabularies/models/vocabulary.model';
+import { VocabularyEntry } from '../../../../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { VocabularyOptions } from '../../../../../../core/submission/vocabularies/models/vocabulary-options.model';
 import { VocabularyService } from '../../../../../../core/submission/vocabularies/vocabulary.service';
-import { VocabularyServiceStub } from '../../../../../testing/vocabulary-service.stub';
-import { DsDynamicLookupComponent } from './dynamic-lookup.component';
-import { DynamicLookupModel, DynamicLookupModelConfig } from './dynamic-lookup.model';
-import { FormFieldMetadataValueObject } from '../../../models/form-field-metadata-value.model';
-import { VocabularyEntry } from '../../../../../../core/submission/vocabularies/models/vocabulary-entry.model';
-import { createTestComponent } from '../../../../../testing/utils.test';
-import { DynamicLookupNameModel } from './dynamic-lookup-name.model';
-import { AuthorityConfidenceStateDirective } from '../../../../directives/authority-confidence-state.directive';
-import { ObjNgFor } from '../../../../../utils/object-ngfor.pipe';
+import { SubmissionService } from '../../../../../../submission/submission.service';
+import { BtnDisabledDirective } from '../../../../../btn-disabled.directive';
+import { createSuccessfulRemoteDataObject$ } from '../../../../../remote-data.utils';
 import {
   mockDynamicFormLayoutService,
-  mockDynamicFormValidationService
+  mockDynamicFormValidationService,
 } from '../../../../../testing/dynamic-form-mock-services';
-import { FormBuilderService } from '../../../form-builder.service';
-import { SubmissionService } from '../../../../../../submission/submission.service';
 import { SubmissionServiceStub } from '../../../../../testing/submission-service.stub';
-import { createSuccessfulRemoteDataObject$ } from '../../../../../remote-data.utils';
-import { Vocabulary } from '../../../../../../core/submission/vocabularies/models/vocabulary.model';
-import { SubmissionScopeType } from '../../../../../../core/submission/submission-scope-type';
+import { createTestComponent } from '../../../../../testing/utils.test';
+import { VocabularyServiceStub } from '../../../../../testing/vocabulary-service.stub';
+import { ObjNgFor } from '../../../../../utils/object-ngfor.pipe';
+import { AuthorityConfidenceStateDirective } from '../../../../directives/authority-confidence-state.directive';
+import { FormBuilderService } from '../../../form-builder.service';
+import { FormFieldMetadataValueObject } from '../../../models/form-field-metadata-value.model';
+import { DsDynamicLookupComponent } from './dynamic-lookup.component';
+import {
+  DynamicLookupModel,
+  DynamicLookupModelConfig,
+} from './dynamic-lookup.model';
+import { DynamicLookupNameModel } from './dynamic-lookup-name.model';
 
 let LOOKUP_TEST_MODEL_CONFIG: DynamicLookupModelConfig = {
   vocabularyOptions: {
     name: 'RPAuthority',
-    closed: false
+    closed: false,
   } as VocabularyOptions,
   disabled: false,
   errorMessages: { required: 'Required field.' },
@@ -53,13 +81,13 @@ let LOOKUP_TEST_MODEL_CONFIG: DynamicLookupModelConfig = {
   value: undefined,
   metadataFields: [],
   submissionId: '1234',
-  hasSelectableMetadata: false
+  hasSelectableMetadata: false,
 };
 
 let LOOKUP_NAME_TEST_MODEL_CONFIG = {
   vocabularyOptions: {
     name: 'RPAuthority',
-    closed: false
+    closed: false,
   } as VocabularyOptions,
   disabled: false,
   errorMessages: { required: 'Required field.' },
@@ -75,12 +103,12 @@ let LOOKUP_NAME_TEST_MODEL_CONFIG = {
   value: undefined,
   metadataFields: [],
   submissionId: '1234',
-  hasSelectableMetadata: false
+  hasSelectableMetadata: false,
 };
 
 let LOOKUP_TEST_GROUP = new UntypedFormGroup({
   lookup: new UntypedFormControl(),
-  lookupName: new UntypedFormControl()
+  lookupName: new UntypedFormControl(),
 });
 const vocabulary = Object.assign(new Vocabulary(), {
   id: 'vocabulary',
@@ -91,12 +119,12 @@ const vocabulary = Object.assign(new Vocabulary(), {
   type: 'vocabulary',
   _links: {
     self: {
-      url: 'self'
+      url: 'self',
     },
     entries: {
-      url: 'entries'
-    }
-  }
+      url: 'entries',
+    },
+  },
 });
 const vocabularyExternal: any = Object.assign(new Vocabulary(), {
   id: 'author',
@@ -107,26 +135,27 @@ const vocabularyExternal: any = Object.assign(new Vocabulary(), {
   entity: 'test',
   externalSource: {
     lookup: 'authorExternalSource',
-    lookupName: 'authorExternalSource'
+    lookupName: 'authorExternalSource',
   },
   type: 'vocabulary',
   uuid: 'vocabulary-author',
   _links: {
     self: {
-      href: 'https://rest.api/rest/api/submission/vocabularies/types'
+      href: 'https://rest.api/rest/api/submission/vocabularies/types',
     },
     entries: {
-      href: 'https://rest.api/rest/api/submission/vocabularies/types/entries'
+      href: 'https://rest.api/rest/api/submission/vocabularies/types/entries',
     },
-  }
+  },
 });
 const validAuthority = uuidv4();
+
 describe('Dynamic Lookup component', () => {
   function init() {
     LOOKUP_TEST_MODEL_CONFIG = {
       vocabularyOptions: {
         name: 'RPAuthority',
-        closed: false
+        closed: false,
       } as VocabularyOptions,
       disabled: false,
       errorMessages: { required: 'Required field.' },
@@ -142,13 +171,13 @@ describe('Dynamic Lookup component', () => {
       value: undefined,
       metadataFields: [],
       submissionId: '1234',
-      hasSelectableMetadata: false
+      hasSelectableMetadata: false,
     };
 
     LOOKUP_NAME_TEST_MODEL_CONFIG = {
       vocabularyOptions: {
         name: 'RPAuthority',
-        closed: false
+        closed: false,
       } as VocabularyOptions,
       disabled: false,
       errorMessages: { required: 'Required field.' },
@@ -164,12 +193,12 @@ describe('Dynamic Lookup component', () => {
       value: undefined,
       metadataFields: [],
       submissionId: '1234',
-      hasSelectableMetadata: false
+      hasSelectableMetadata: false,
     };
 
     LOOKUP_TEST_GROUP = new UntypedFormGroup({
       lookup: new UntypedFormControl(),
-      lookupName: new UntypedFormControl()
+      lookupName: new UntypedFormControl(),
     });
 
   }
@@ -193,25 +222,24 @@ describe('Dynamic Lookup component', () => {
         InfiniteScrollModule,
         ReactiveFormsModule,
         NgbModule,
-        TranslateModule.forRoot()
-      ],
-      declarations: [
+        TranslateModule.forRoot(),
         DsDynamicLookupComponent,
         TestComponent,
         AuthorityConfidenceStateDirective,
-        ObjNgFor
-      ], // declare the test component
+        ObjNgFor,
+        BtnDisabledDirective,
+      ],
       providers: [
-        ChangeDetectorRef,
-        DsDynamicLookupComponent,
         { provide: VocabularyService, useValue: vocabularyServiceStub },
         { provide: DynamicFormLayoutService, useValue: mockDynamicFormLayoutService },
         { provide: DynamicFormValidationService, useValue: mockDynamicFormValidationService },
         { provide: FormBuilderService },
         { provide: SubmissionService, useClass: SubmissionServiceStub },
-        NgbModal
+        NgbModal,
+        provideMockStore(),
+        { provide: APP_DATA_SERVICES_MAP, useValue: {} },
       ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     });
   }));
 
@@ -240,9 +268,9 @@ describe('Dynamic Lookup component', () => {
         testFixture.destroy();
         testComp = null;
       });
-      it('should create DsDynamicLookupComponent', inject([DsDynamicLookupComponent], (app: DsDynamicLookupComponent) => {
-        expect(app).toBeDefined();
-      }));
+      it('should create DsDynamicLookupComponent', () => {
+        expect(testComp).toBeTruthy();
+      });
     });
 
     describe('when model is DynamicLookupModel', () => {
@@ -287,8 +315,10 @@ describe('Dynamic Lookup component', () => {
           const de = lookupFixture.debugElement.queryAll(By.css('button'));
           const searchBtnEl = de[0].nativeElement;
           const editBtnEl = de[1].nativeElement;
-          expect(searchBtnEl.disabled).toBe(true);
-          expect(editBtnEl.disabled).toBe(true);
+          expect(searchBtnEl.getAttribute('aria-disabled')).toBe('true');
+          expect(searchBtnEl.classList.contains('disabled')).toBeTrue();
+          expect(editBtnEl.getAttribute('aria-disabled')).toBe('true');
+          expect(editBtnEl.classList.contains('disabled')).toBeTrue();
           expect(editBtnEl.textContent.trim()).toBe('form.edit');
         });
 
@@ -313,7 +343,7 @@ describe('Dynamic Lookup component', () => {
           const selectedValue = Object.assign(new VocabularyEntry(), {
             authority: 1,
             display: 'one',
-            value: 1
+            value: 1,
           });
           spyOn(lookupComp.change, 'emit');
           lookupComp.firstInputValue = 'test';
@@ -361,7 +391,7 @@ describe('Dynamic Lookup component', () => {
           const entry = observableOf(Object.assign(new VocabularyEntry(), {
             authority: null,
             value: 'test',
-            display: 'testDisplay'
+            display: 'testDisplay',
           }));
           spyOn((lookupComp as any).vocabularyService, 'getVocabularyEntryByValue').and.returnValue(entry);
           (lookupComp.model as any).value = new FormFieldMetadataValueObject('test', null, null,null, 'testDisplay');
@@ -386,8 +416,10 @@ describe('Dynamic Lookup component', () => {
           const de = lookupFixture.debugElement.queryAll(By.css('button'));
           const searchBtnEl = de[0].nativeElement;
           const saveBtnEl = de[1].nativeElement;
-          expect(searchBtnEl.disabled).toBe(true);
-          expect(saveBtnEl.disabled).toBe(false);
+          expect(searchBtnEl.getAttribute('aria-disabled')).toBe('true');
+          expect(searchBtnEl.classList.contains('disabled')).toBeTrue();
+          expect(saveBtnEl.getAttribute('aria-disabled')).not.toBe('true');
+          expect(saveBtnEl.classList.contains('disabled')).toBeFalse();
           expect(saveBtnEl.textContent.trim()).toBe('form.save');
 
         });
@@ -402,7 +434,7 @@ describe('Dynamic Lookup component', () => {
           const entry = observableOf(Object.assign(new VocabularyEntry(), {
             authority: validAuthority,
             value: 'test',
-            display: 'testDisplay'
+            display: 'testDisplay',
           }));
           spyOn((lookupComp as any).vocabularyService, 'getVocabularyEntryByID').and.returnValue(entry);
           lookupComp.model.value = new FormFieldMetadataValueObject('test', null, null,validAuthority, 'testDisplay');
@@ -427,8 +459,10 @@ describe('Dynamic Lookup component', () => {
           const de = lookupFixture.debugElement.queryAll(By.css('button'));
           const searchBtnEl = de[0].nativeElement;
           const saveBtnEl = de[1].nativeElement;
-          expect(searchBtnEl.disabled).toBe(true);
-          expect(saveBtnEl.disabled).toBe(false);
+          expect(searchBtnEl.getAttribute('aria-disabled')).toBe('true');
+          expect(searchBtnEl.classList.contains('disabled')).toBeTrue();
+          expect(saveBtnEl.getAttribute('aria-disabled')).not.toBe('true');
+          expect(saveBtnEl.classList.contains('disabled')).toBeFalse();
           expect(saveBtnEl.textContent.trim()).toBe('form.save');
 
         });
@@ -499,8 +533,10 @@ describe('Dynamic Lookup component', () => {
           const editBtnEl = deBtn[1].nativeElement;
 
           expect(de.length).toBe(2);
-          expect(searchBtnEl.disabled).toBe(true);
-          expect(editBtnEl.disabled).toBe(true);
+          expect(searchBtnEl.getAttribute('aria-disabled')).toBe('true');
+          expect(searchBtnEl.classList.contains('disabled')).toBeTrue();
+          expect(editBtnEl.getAttribute('aria-disabled')).toBe('true');
+          expect(editBtnEl.classList.contains('disabled')).toBeTrue();
           expect(editBtnEl.textContent.trim()).toBe('form.edit');
         });
 
@@ -527,12 +563,12 @@ describe('Dynamic Lookup component', () => {
             Object.assign(new VocabularyEntry(), {
               authority: 1,
               display: 'Name, Lastname',
-              value: 1
+              value: 1,
             }),
             Object.assign(new VocabularyEntry(), {
               authority: 2,
               display: 'NameTwo, LastnameTwo',
-              value: 2
+              value: 2,
             }),
           ];
           let de = lookupFixture.debugElement.queryAll(By.css('button'));
@@ -540,7 +576,7 @@ describe('Dynamic Lookup component', () => {
           const selectedValue = Object.assign(new VocabularyEntry(), {
             authority: 1,
             display: 'Name, Lastname',
-            value: 1
+            value: 1,
           });
           spyOn(lookupComp.change, 'emit');
           vocabularyServiceStub.setNewPayload(payload);
@@ -571,7 +607,7 @@ describe('Dynamic Lookup component', () => {
           const entry = observableOf(Object.assign(new VocabularyEntry(), {
             authority: null,
             value: 'Name, Lastname',
-            display: 'Name, Lastname'
+            display: 'Name, Lastname',
           }));
           spyOn((lookupComp as any).vocabularyService, 'getVocabularyEntryByValue').and.returnValue(entry);
           (lookupComp.model as any).value = new FormFieldMetadataValueObject('Name, Lastname', null,null, null, 'Name, Lastname');
@@ -596,8 +632,10 @@ describe('Dynamic Lookup component', () => {
           const de = lookupFixture.debugElement.queryAll(By.css('button'));
           const searchBtnEl = de[0].nativeElement;
           const saveBtnEl = de[1].nativeElement;
-          expect(searchBtnEl.disabled).toBe(true);
-          expect(saveBtnEl.disabled).toBe(false);
+          expect(searchBtnEl.getAttribute('aria-disabled')).toBe('true');
+          expect(searchBtnEl.classList.contains('disabled')).toBeTrue();
+          expect(saveBtnEl.getAttribute('aria-disabled')).not.toBe('true');
+          expect(saveBtnEl.classList.contains('disabled')).toBeFalse();
           expect(saveBtnEl.textContent.trim()).toBe('form.save');
 
         });
@@ -614,7 +652,7 @@ describe('Dynamic Lookup component', () => {
           const entry = observableOf(Object.assign(new VocabularyEntry(), {
             authority: validAuthority,
             value: 'Name, Lastname',
-            display: 'Name, Lastname'
+            display: 'Name, Lastname',
           }));
           spyOn((lookupComp as any).vocabularyService, 'getVocabularyEntryByID').and.returnValue(entry);
           lookupComp.model.value = new FormFieldMetadataValueObject('Name, Lastname', null,null, validAuthority, 'Name, Lastname');
@@ -639,8 +677,10 @@ describe('Dynamic Lookup component', () => {
           const de = lookupFixture.debugElement.queryAll(By.css('button'));
           const searchBtnEl = de[0].nativeElement;
           const saveBtnEl = de[1].nativeElement;
-          expect(searchBtnEl.disabled).toBe(true);
-          expect(saveBtnEl.disabled).toBe(false);
+          expect(searchBtnEl.getAttribute('aria-disabled')).toBe('true');
+          expect(searchBtnEl.classList.contains('disabled')).toBeTrue();
+          expect(saveBtnEl.getAttribute('aria-disabled')).not.toBe('true');
+          expect(saveBtnEl.classList.contains('disabled')).toBeFalse();
           expect(saveBtnEl.textContent.trim()).toBe('form.save');
 
         });
@@ -692,7 +732,14 @@ describe('Dynamic Lookup component', () => {
 // declare a test component
 @Component({
   selector: 'ds-test-cmp',
-  template: ``
+  template: ``,
+  standalone: true,
+  imports: [DynamicFormsCoreModule,
+    DynamicFormsNGBootstrapUIModule,
+    FormsModule,
+    InfiniteScrollModule,
+    ReactiveFormsModule,
+    NgbModule],
 })
 class TestComponent {
 

@@ -4,9 +4,11 @@ import { ThirdPartyMetric } from './third-party-metric-config';
 export interface InfoConfig extends Config {
   enableEndUserAgreement: boolean;
   enablePrivacyStatement: boolean;
+  enableCOARNotifySupport: boolean;
   enableGeneralInformation: boolean;
   enableOfferedServices: boolean;
   enableHistoryDigital: boolean;
   enableOrgStructure: boolean;
+  enableCookieConsentPopup: boolean;
   metricsConsents: ThirdPartyMetric[];
 }

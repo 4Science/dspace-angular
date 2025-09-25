@@ -1,10 +1,29 @@
-import { ChangeDetectorRef, Component, NO_ERRORS_SCHEMA, SimpleChange } from '@angular/core';
-import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
-
+import {
+  ChangeDetectorRef,
+  Component,
+  SimpleChange,
+} from '@angular/core';
+import {
+  ComponentFixture,
+  inject,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
+import {
+  cold,
+  getTestScheduler,
+} from 'jasmine-marbles';
 import { of as observableOf } from 'rxjs';
-import { cold, getTestScheduler } from 'jasmine-marbles';
+import { TestScheduler } from 'rxjs/testing';
 
-import { SubmissionServiceStub } from '../../shared/testing/submission-service.stub';
+import { AuthService } from '../../core/auth/auth.service';
+import { SubmissionVisibilityValue } from '../../core/config/models/config-submission-section.model';
+import { HALEndpointService } from '../../core/shared/hal-endpoint.service';
+import { Item } from '../../core/shared/item.model';
+import { MetadataSecurityConfigurationService } from '../../core/submission/metadatasecurityconfig-data.service';
+import { SubmissionScopeType } from '../../core/submission/submission-scope-type';
+import { ThemedLoadingComponent } from '../../shared/loading/themed-loading.component';
 import {
   mockSectionsData,
   mockSectionsList,
@@ -15,24 +34,23 @@ import {
   mockSubmissionObject,
   mockSubmissionObjectNew,
   mockSubmissionSelfUrl,
-  mockSubmissionState
+  mockSubmissionState,
 } from '../../shared/mocks/submission.mock';
-import { SubmissionService } from '../submission.service';
-import { SubmissionFormComponent } from './submission-form.component';
-import { HALEndpointService } from '../../core/shared/hal-endpoint.service';
-import { AuthServiceStub } from '../../shared/testing/auth-service.stub';
-import { AuthService } from '../../core/auth/auth.service';
-import { HALEndpointServiceStub } from '../../shared/testing/hal-endpoint-service.stub';
-import { createTestComponent } from '../../shared/testing/utils.test';
-import { Item } from '../../core/shared/item.model';
-import { TestScheduler } from 'rxjs/testing';
-import { SectionsService } from '../sections/sections.service';
-import { SubmissionVisibilityValue } from '../../core/config/models/config-submission-section.model';
 import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
-import { MetadataSecurityConfigurationService } from '../../core/submission/metadatasecurityconfig-data.service';
-import { SubmissionScopeType } from '../../core/submission/submission-scope-type';
+import { AuthServiceStub } from '../../shared/testing/auth-service.stub';
+import { HALEndpointServiceStub } from '../../shared/testing/hal-endpoint-service.stub';
+import { SubmissionServiceStub } from '../../shared/testing/submission-service.stub';
+import { createTestComponent } from '../../shared/testing/utils.test';
+import { SubmissionSectionContainerComponent } from '../sections/container/section-container.component';
+import { SectionsService } from '../sections/sections.service';
+import { SubmissionService } from '../submission.service';
+import { SubmissionFormCollectionComponent } from './collection/submission-form-collection.component';
+import { SubmissionFormFooterComponent } from './footer/submission-form-footer.component';
+import { SubmissionFormSectionAddComponent } from './section-add/submission-form-section-add.component';
+import { SubmissionFormComponent } from './submission-form.component';
+import { ThemedSubmissionUploadFilesComponent } from './submission-upload-files/themed-submission-upload-files.component';
 
-describe('SubmissionFormComponent Component', () => {
+describe('SubmissionFormComponent', () => {
 
   let comp: SubmissionFormComponent;
   let compAsAny: any;
@@ -57,10 +75,10 @@ describe('SubmissionFormComponent Component', () => {
       findById: createSuccessfulRemoteDataObject$(submissionObject.metadataSecurityConfiguration),
     });
     TestBed.configureTestingModule({
-      imports: [],
-      declarations: [
+      imports: [
         SubmissionFormComponent,
-        TestComponent
+        TestComponent,
+        TranslateModule.forRoot(),
       ],
       providers: [
         { provide: AuthService, useClass: AuthServiceStub },
@@ -71,14 +89,25 @@ describe('SubmissionFormComponent Component', () => {
           {
             isSectionTypeAvailable: () => observableOf(true),
             isSectionReadOnlyByType: () => observableOf(true),
-            isSectionReadOnly: () => observableOf(false)
-          }
+            isSectionReadOnly: () => observableOf(false),
+          },
         },
         ChangeDetectorRef,
-        SubmissionFormComponent
+        SubmissionFormComponent,
       ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+    })
+      .overrideComponent(SubmissionFormComponent, {
+        remove: {
+          imports: [
+            ThemedLoadingComponent,
+            SubmissionSectionContainerComponent,
+            SubmissionFormFooterComponent,
+            ThemedSubmissionUploadFilesComponent,
+            SubmissionFormCollectionComponent,
+            SubmissionFormSectionAddComponent,
+          ] },
+      })
+      .compileComponents();
   }));
 
   describe('', () => {
@@ -135,7 +164,7 @@ describe('SubmissionFormComponent Component', () => {
       expect(compAsAny.submissionSections).toBeUndefined();
       expect(compAsAny.subs).toEqual([]);
       expect(submissionServiceStub.startAutoSave).not.toHaveBeenCalled();
-      expect(comp.loading).toBeObservable(cold('(a|)', { a: true }));
+      expect(comp.isLoading$).toBeObservable(cold('(a|)', { a: true }));
       done();
     });
 
@@ -155,7 +184,7 @@ describe('SubmissionFormComponent Component', () => {
       scheduler.schedule(() => {
         comp.ngOnChanges({
           collectionId: new SimpleChange(null, collectionId, true),
-          submissionId: new SimpleChange(null, submissionId, true)
+          submissionId: new SimpleChange(null, submissionId, true),
         });
         fixture.detectChanges();
       });
@@ -181,7 +210,7 @@ describe('SubmissionFormComponent Component', () => {
       fixture.detectChanges();
       const result = compAsAny.getCollectionVisibility();
       expect(result).toEqual({
-        workflow: SubmissionVisibilityValue.Hidden
+        workflow: SubmissionVisibilityValue.Hidden,
       });
     });
 
@@ -214,7 +243,6 @@ describe('SubmissionFormComponent Component', () => {
       });
       scheduler.flush();
 
-      expect(comp.collectionId).toEqual(submissionObjectNew.collection.id);
       expect(comp.submissionDefinition).toEqual(submissionObjectNew.submissionDefinition);
       expect(comp.definitionId).toEqual(submissionObjectNew.submissionDefinition.name);
       expect(comp.sections).toEqual(submissionObjectNew.sections);
@@ -226,7 +254,7 @@ describe('SubmissionFormComponent Component', () => {
         submissionObjectNew.submissionDefinition,
         submissionObjectNew.sections,
         comp.item,
-        submissionObject.metadataSecurityConfiguration
+        submissionObject.metadataSecurityConfiguration,
       );
       done();
     });
@@ -244,17 +272,16 @@ describe('SubmissionFormComponent Component', () => {
       scheduler.schedule(() => {
         comp.onCollectionChange({
           collection: {
-            id: '45f2f3f1-ba1f-4f36-908a-3f1ea9a557eb'
+            id: '45f2f3f1-ba1f-4f36-908a-3f1ea9a557eb',
           },
           submissionDefinition: {
-            name: 'traditional'
-          }
+            name: 'traditional',
+          },
         } as any);
         fixture.detectChanges();
       });
       scheduler.flush();
 
-      expect(comp.collectionId).toEqual('45f2f3f1-ba1f-4f36-908a-3f1ea9a557eb');
       expect(submissionServiceStub.resetSubmissionObject).not.toHaveBeenCalled();
       done();
     });
@@ -265,7 +292,8 @@ describe('SubmissionFormComponent Component', () => {
 // declare a test component
 @Component({
   selector: 'ds-test-cmp',
-  template: ``
+  template: ``,
+  standalone: true,
 })
 class TestComponent {
 

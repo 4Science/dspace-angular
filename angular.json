@@ -34,7 +34,6 @@
               "ngx-export-as",
               "url-parse",
               "uuid",
-              "webfontloader",
               "xlsx",
               "zone.js"
             ],
@@ -74,7 +73,15 @@
                 "input": "src/themes/glam/styles/theme.scss",
                 "inject": false,
                 "bundleName": "glam-theme"
-              }
+              },
+              "./node_modules/leaflet/dist/leaflet.css",
+              "./node_modules/leaflet-draw/dist/leaflet.draw.css",
+              "./node_modules/quill/dist/quill.core.css",
+              "./node_modules/quill/dist/quill.snow.css",
+              "./node_modules/quill/dist/quill.bubble.css",
+              "./node_modules/quill-emoji/dist/quill-emoji.css",
+              "./node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css",
+              "./node_modules/leaflet.markercluster/dist/MarkerCluster.css"
             ],
             "scripts": [],
             "baseHref": "/"
@@ -124,22 +131,22 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "dspace-angular:build",
+            "buildTarget": "dspace-angular:build",
             "port": 4000
           },
           "configurations": {
             "development": {
-              "browserTarget": "dspace-angular:build:development"
+              "buildTarget": "dspace-angular:build:development"
             },
             "production": {
-              "browserTarget": "dspace-angular:build:production"
+              "buildTarget": "dspace-angular:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "dspace-angular:build"
+            "buildTarget": "dspace-angular:build"
           }
         },
         "test": {
@@ -234,13 +241,13 @@
         "serve-ssr": {
           "builder": "@nguniversal/builders:ssr-dev-server",
           "options": {
-            "browserTarget": "dspace-angular:build",
+            "buildTarget": "dspace-angular:build",
             "serverTarget": "dspace-angular:server",
             "port": 4000
           },
           "configurations": {
             "production": {
-              "browserTarget": "dspace-angular:build:production",
+              "buildTarget": "dspace-angular:build:production",
               "serverTarget": "dspace-angular:server:production"
             }
           }
@@ -248,7 +255,7 @@
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
           "options": {
-            "browserTarget": "dspace-angular:build:production",
+            "buildTarget": "dspace-angular:build:production",
             "serverTarget": "dspace-angular:server:production",
             "routes": [
               "/"
@@ -281,6 +288,8 @@
           "options": {
             "lintFilePatterns": [
               "src/**/*.ts",
+              "cypress/**/*.ts",
+              "lint/**/*.ts",
               "src/**/*.html",
               "src/**/*.json5"
             ]

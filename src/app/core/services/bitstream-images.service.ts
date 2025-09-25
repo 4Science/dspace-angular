@@ -1,18 +1,34 @@
-import { inject, Injectable } from '@angular/core';
+import {
+  inject,
+  Injectable,
+} from '@angular/core';
+import {
+  from,
+  Observable,
+} from 'rxjs';
+import {
+  filter,
+  map,
+  mergeMap,
+  reduce,
+  switchMap,
+  take,
+} from 'rxjs/operators';
+import { FindListOptions } from 'src/app/core/data/find-list-options.model';
 
-import { from, Observable } from 'rxjs';
-import { filter, map, mergeMap, reduce, switchMap, take } from 'rxjs/operators';
-
+import { hasValue } from '../../shared/empty.util';
 import { followLink } from '../../shared/utils/follow-link-config.model';
-import { getFirstCompletedRemoteData } from '../shared/operators';
-import { RemoteData } from '../data/remote-data';
+import {
+  BitstreamDataService,
+  MetadataFilter,
+} from '../data/bitstream-data.service';
 import { PaginatedList } from '../data/paginated-list.model';
+import { RemoteData } from '../data/remote-data';
 import { Bitstream } from '../shared/bitstream.model';
 import { BitstreamFormat } from '../shared/bitstream-format.model';
-import { hasValue } from '../../shared/empty.util';
-import { BitstreamDataService } from '../data/bitstream-data.service';
-import { Item } from '../shared/item.model';
 import { DSpaceObject } from '../shared/dspace-object.model';
+import { Item } from '../shared/item.model';
+import { getFirstCompletedRemoteData } from '../shared/operators';
 
 interface ItemAndImage {
   itemUUID: string;
@@ -28,13 +44,14 @@ export class BitstreamImagesService {
    * Retrieve all items and their image bitstreams
    * @param items
    * @param bundleName
+   * @param options
    */
-  getItemToImageMap(items: Item[], bundleName = 'ORIGINAL'): Observable<Map<string, string>> {
+  getItemToImageMap(items: Item[], bundleName = 'ORIGINAL', options: FindListOptions = {}): Observable<Map<string, string>> {
     return from(items).pipe(
-      mergeMap((item) => this.findImageBitstreams(item, bundleName).pipe(
+      mergeMap((item) => this.findImageBitstreams(item, bundleName, [], options).pipe(
         take(1),
         map((bitstream: Bitstream) => <ItemAndImage>{
-          itemUUID: item.uuid, imageHref: bitstream._links.content.href
+          itemUUID: item.uuid, imageHref: bitstream._links.content.href,
         }),
       )),
       reduce((acc: Map<string, string>, value: ItemAndImage) => {
@@ -44,17 +61,40 @@ export class BitstreamImagesService {
     );
   }
 
+  getPrimaryBitstreamInNonOriginalBundleItemToImageMap(items: Item[], bundleName = 'BRANDED_PREVIEW', options: FindListOptions = {}): Observable<Map<string, string>> {
+    return from(items).pipe(
+      mergeMap(item => this.findImageBitstreams(item, undefined, undefined, options).pipe(
+        mergeMap(originalBitstream => {
+          const titleFilter: MetadataFilter = {
+            metadataName: 'dc.title',
+            metadataValue: `(${originalBitstream.name}.*)`,
+          };
+          return this.findImageBitstreams(item, bundleName, [titleFilter], options).pipe(
+            take(1),
+            map(bitstream => ({
+              itemUUID: item.uuid,
+              imageHref: bitstream._links.content.href,
+            })),
+          );
+        }),
+      )),
+      reduce((acc, value) => acc.set(value.itemUUID, value.imageHref), new Map()),
+    );
+  }
+
   /**
    * Find all image bitstreams for an item
    * @param item the item for which the images should be retrieved
    * @param bundleName the bundle name (ORIGINAL by default)
+   * @param metadataFilters the metadata filters (empty by default)
+   * @param options The {@link FindListOptions} for the request
    */
-  findImageBitstreams(item: Item | DSpaceObject, bundleName = 'ORIGINAL') {
+  findImageBitstreams(item: Item | DSpaceObject, bundleName = 'ORIGINAL', metadataFilters: MetadataFilter[] = [], options: FindListOptions = {}): Observable<Bitstream> {
     const isImageMimetypeRegex = /^image\//;
 
     // retrieve all bundle's bitstreams for the item
     const bitstreamPayload$: Observable<Bitstream> = this.bitstreamDataService.showableByItem(
-      item.uuid, bundleName, [], {}, true, true, followLink('format'),
+      item.uuid, bundleName, metadataFilters, options, true, true, followLink('format'),
     ).pipe(
       getFirstCompletedRemoteData(),
       switchMap((rd: RemoteData<PaginatedList<Bitstream>>) => rd.hasSucceeded ? rd.payload.page : new Array<Bitstream>()),
@@ -62,13 +102,13 @@ export class BitstreamImagesService {
 
     // filter bitstreams according to mime type
     return bitstreamPayload$.pipe(
-      switchMap((bitstream: Bitstream) => bitstream.format.pipe(
+      mergeMap((bitstream: Bitstream) => bitstream.format.pipe(
         getFirstCompletedRemoteData(),
         filter((bitstreamFormatRD: RemoteData<BitstreamFormat>) =>
           bitstreamFormatRD.hasSucceeded && hasValue(bitstreamFormatRD.payload) && hasValue(bitstream) &&
-          isImageMimetypeRegex.test(bitstreamFormatRD.payload.mimetype)
+          isImageMimetypeRegex.test(bitstreamFormatRD.payload.mimetype),
         ),
-        map(() => bitstream)
+        map(() => bitstream),
       )),
     );
   }

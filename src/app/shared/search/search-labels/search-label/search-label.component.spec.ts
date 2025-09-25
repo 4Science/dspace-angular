@@ -1,97 +1,179 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateModule } from '@ngx-translate/core';
-import { ChangeDetectionStrategy, NO_ERRORS_SCHEMA } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { Observable, of as observableOf } from 'rxjs';
-import { Params, Router } from '@angular/router';
-import { SearchLabelComponent } from './search-label.component';
-import { ObjectKeysPipe } from '../../../utils/object-keys-pipe';
-import { SEARCH_CONFIG_SERVICE } from '../../../../my-dspace-page/my-dspace-page.component';
-import { SearchServiceStub } from '../../../testing/search-service.stub';
-import { SearchConfigurationServiceStub } from '../../../testing/search-configuration-service.stub';
-import { SearchService } from '../../../../core/shared/search/search.service';
-import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  ActivatedRoute,
+  Params,
+  Router,
+  RouterLink,
+  RouterModule,
+} from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { BehaviorSubject } from 'rxjs';
+
+import { DSONameService } from '../../../../core/breadcrumbs/dso-name.service';
+import { ItemDataService } from '../../../../core/data/item-data.service';
 import { PaginationService } from '../../../../core/pagination/pagination.service';
+import { Item } from '../../../../core/shared/item.model';
+import { SearchService } from '../../../../core/shared/search/search.service';
 import { SearchConfigurationService } from '../../../../core/shared/search/search-configuration.service';
+import { SearchFilterService } from '../../../../core/shared/search/search-filter.service';
+import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
+import {
+  createFailedRemoteDataObject$,
+  createSuccessfulRemoteDataObject$,
+} from '../../../remote-data.utils';
+import { ActivatedRouteStub } from '../../../testing/active-router.stub';
 import { PaginationServiceStub } from '../../../testing/pagination-service.stub';
+import { SearchConfigurationServiceStub } from '../../../testing/search-configuration-service.stub';
+import { SearchFilterServiceStub } from '../../../testing/search-filter-service.stub';
+import { SearchServiceStub } from '../../../testing/search-service.stub';
+import { ObjectKeysPipe } from '../../../utils/object-keys-pipe';
+import { AppliedFilter } from '../../models/applied-filter.model';
+import { addOperatorToFilterValue } from '../../search.utils';
+import { SearchLabelComponent } from './search-label.component';
 
 describe('SearchLabelComponent', () => {
   let comp: SearchLabelComponent;
   let fixture: ComponentFixture<SearchLabelComponent>;
 
+  let route: ActivatedRouteStub;
+  let searchConfigurationService: SearchConfigurationServiceStub;
+  let searchFilterService: SearchFilterServiceStub;
+  let paginationService: PaginationServiceStub;
+
   const searchLink = '/search';
-  let searchService;
+  let appliedFilter: AppliedFilter;
+  let initialRouteParams: Params;
+  let pagination: PaginationComponentOptions;
+  let itemDataService: jasmine.SpyObj<ItemDataService>;
+  let dsoNameService: jasmine.SpyObj<DSONameService>;
 
-  const key1 = 'author';
-  const key2 = 'subject';
-  const value1 = 'Test, Author';
-  const normValue1 = 'Test, Author';
-  const value2 = 'TestSubject';
-  const value3 = 'Test, Authority,authority';
-  const normValue3 = 'Test, Authority';
-  const filter1 = [key1, value1];
-  const filter2 = [key2, value2];
-  const mockFilters = [
-    filter1,
-    filter2
-  ];
+  function init(): void {
+    appliedFilter = Object.assign(new AppliedFilter(), {
+      filter: 'author',
+      operator: 'authority',
+      value: '1282121b-5394-4689-ab93-78d537764052',
+      label: 'Odinson, Thor',
+    });
+    initialRouteParams = {
+      'query': '',
+      'spc.page': '1',
+      'f.author': addOperatorToFilterValue(appliedFilter.value, appliedFilter.operator),
+      'f.has_content_in_original_bundle': addOperatorToFilterValue('true', 'equals'),
+    };
+    pagination = Object.assign(new PaginationComponentOptions(), {
+      id: 'page-id',
+      currentPage: 1,
+      pageSize: 20,
+    });
+  }
 
-  const pagination = Object.assign(new PaginationComponentOptions(), { id: 'page-id', currentPage: 1, pageSize: 20 });
-  const paginationService = new PaginationServiceStub(pagination);
+  beforeEach(waitForAsync(async () => {
+    init();
+    route = new ActivatedRouteStub(initialRouteParams);
+    searchConfigurationService = new SearchConfigurationServiceStub();
+    searchFilterService = new SearchFilterServiceStub();
+    paginationService = new PaginationServiceStub(pagination);
+    itemDataService = jasmine.createSpyObj('ItemDataService', {
+      findById: createSuccessfulRemoteDataObject$({}),
+    });
+    dsoNameService = jasmine.createSpyObj('DSONameService', {
+      getName: 'Thor Odinson',
+    });
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), NoopAnimationsModule, FormsModule],
-      declarations: [SearchLabelComponent, ObjectKeysPipe],
-      providers: [
-        { provide: SearchService, useValue: new SearchServiceStub(searchLink) },
-        { provide: SEARCH_CONFIG_SERVICE, useValue: new SearchConfigurationServiceStub() },
-        { provide: SearchConfigurationService, useValue: new SearchConfigurationServiceStub() },
-        { provide: PaginationService, useValue: paginationService },
-        { provide: Router, useValue: {} }
-        // { provide: SearchConfigurationService, useValue: {getCurrentFrontendFilters : () =>  observableOf({})} }
+    await TestBed.configureTestingModule({
+      imports: [
+        RouterModule.forRoot([]),
+        NoopAnimationsModule,
+        FormsModule,
+        ObjectKeysPipe,
+        TranslateModule.forRoot(),
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      providers: [
+        { provide: PaginationService, useValue: paginationService },
+        { provide: SearchConfigurationService, useValue: searchConfigurationService },
+        { provide: SearchFilterService, useValue: searchFilterService },
+        { provide: SearchService, useValue: new SearchServiceStub(searchLink) },
+        { provide: ActivatedRoute, useValue: route },
+        { provide: Router, useValue: {} },
+        { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
+        { provide: ItemDataService, useValue: itemDataService },
+        { provide: DSONameService, useValue: dsoNameService },
+      ],
     }).overrideComponent(SearchLabelComponent, {
-      set: { changeDetection: ChangeDetectionStrategy.Default }
+      remove: {
+        imports: [RouterLink],
+      },
+      add: { changeDetection: ChangeDetectionStrategy.Default },
     }).compileComponents();
-  }));
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(SearchLabelComponent);
     comp = fixture.componentInstance;
-    searchService = (comp as any).searchService;
-    comp.key = key1;
-    comp.value = value1;
-    (comp as any).appliedFilters = observableOf(mockFilters);
+    comp.appliedFilter = appliedFilter;
     fixture.detectChanges();
+  }));
+
+  it('should set filter value to the name from dsoNameService when operator is authority and item is found', waitForAsync(() => {
+    const id = '1282121b-5394-4689-ab93-78d537764052';
+    const name = 'Thor Odinson';
+    const item = { id, name };
+
+    itemDataService.findById.and.returnValue(createSuccessfulRemoteDataObject$(item as Item));
+    dsoNameService.getName.and.returnValue(name);
+
+    comp.appliedFilter = { filter: 'author', operator: 'authority', value: id, label: 'Odinson, Thor' };
+    comp.setFilterValue();
+
+    fixture.detectChanges();
+    expect(comp.filterLabel$.value).toBe(name);
+  }));
+
+  it('should set filter value to the appliedFilter value when operator is authority and item is not found', waitForAsync(() => {
+    const id = '1282121b-5394-4689-ab93-78d537764052';
+
+    itemDataService.findById.and.returnValue(createFailedRemoteDataObject$());
+
+    comp.appliedFilter = { filter: 'author', operator: 'authority', value: id, label: 'Odinson, Thor' };
+    comp.setFilterValue();
+
+    fixture.detectChanges();
+    expect(comp.filterLabel$.value).toBe(id);
+  }));
+
+  it('should set filter value to the appliedFilter label when operator is not authority', () => {
+    const label = 'Odinson, Thor';
+
+    comp.appliedFilter = { filter: 'author', operator: 'equals', value: '1282121b-5394-4689-ab93-78d537764052', label };
+    comp.setFilterValue();
+
+    fixture.detectChanges();
+    expect(comp.filterLabel$.value).toBe(label);
   });
 
-  describe('when getRemoveParams is called', () => {
-    let obs: Observable<Params>;
+  it('should render polygon-specific badge when operator is polygon', () => {
+    comp.appliedFilter = { operator: 'polygon' } as AppliedFilter;
+    fixture.detectChanges();
 
-    beforeEach(() => {
-      obs = comp.getRemoveParams();
-    });
-
-    it('should return all params but the provided filter', () => {
-      obs.subscribe((params) => {
-        // Should contain only filter2 and page: length == 2
-        expect(Object.keys(params).length).toBe(2);
-      });
-    });
+    const badge = fixture.nativeElement.querySelector('a.badge-primary');
+    expect(badge).toBeTruthy();
+    expect(badge.getAttribute('aria-label')).toBe('search.filters.remove.polygon');
+    expect(badge.textContent.trim()).toContain('search.filters.applied.f.polygon');
   });
 
-  describe('when normalizeFilterValue is called', () => {
-    it('should return properly filter value', () => {
-      let result: string;
+  it('should render default badge when operator is not polygon', () => {
+    comp.appliedFilter = { operator: 'equals', filter: 'name' } as AppliedFilter;
+    comp.filterLabel$ = new BehaviorSubject('Test Label');
+    fixture.detectChanges();
 
-      result = comp.normalizeFilterValue(value1);
-      expect(result).toBe(normValue1);
-
-      result = comp.normalizeFilterValue(value3);
-      expect(result).toBe(normValue3);
-    });
+    const badge = fixture.nativeElement.querySelector('a.badge-primary');
+    expect(badge).toBeTruthy();
+    expect(badge.getAttribute('aria-label')).toContain('search.filters.remove');
+    expect(badge.textContent.trim()).toContain('search.filters.applied.f.namesearch.filters.applied.operator.equals: search.filters.name.Test Label×');
   });
 });

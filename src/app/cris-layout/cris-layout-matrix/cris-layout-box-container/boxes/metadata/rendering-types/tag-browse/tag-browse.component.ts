@@ -1,10 +1,15 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { NgIf } from '@angular/common';
+import {
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../core/shared/item.model';
+import { ChipsComponent } from '../../../../../../../shared/form/chips/chips.component';
 import { Chips } from '../../../../../../../shared/form/chips/models/chips.model';
-
-import { FieldRenderingType, MetadataBoxFieldRendering } from '../metadata-box.decorator';
 import { RenderingTypeStructuredModelComponent } from '../rendering-type-structured.model';
 
 /**
@@ -14,9 +19,13 @@ import { RenderingTypeStructuredModelComponent } from '../rendering-type-structu
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'div[ds-tag-browse]',
   templateUrl: './tag-browse.component.html',
-  styleUrls: ['./tag-browse.component.scss']
+  styleUrls: ['./tag-browse.component.scss'],
+  standalone: true,
+  imports: [
+    ChipsComponent,
+    NgIf,
+  ],
 })
-@MetadataBoxFieldRendering(FieldRenderingType.TAGBROWSE, true)
 export class TagBrowseComponent extends RenderingTypeStructuredModelComponent implements OnInit {
   /**
    * Type for rendering
@@ -33,13 +42,13 @@ export class TagBrowseComponent extends RenderingTypeStructuredModelComponent im
     @Inject('itemProvider') public itemProvider: Item,
     @Inject('renderingSubTypeProvider') public renderingSubTypeProvider: string,
     @Inject('tabNameProvider') public tabNameProvider: string,
-    protected translateService: TranslateService
+    protected translateService: TranslateService,
   ) {
     super(fieldProvider, itemProvider, renderingSubTypeProvider,tabNameProvider, translateService);
   }
 
   ngOnInit(): void {
-    let fieldArray = this.field.rendering.split('.');
+    const fieldArray = this.field.rendering.split('.');
     this.metadataType = fieldArray[fieldArray.length - 1];
     if ( this.indexToBeRendered > 0 ) {
       this.initChips([this.metadataValues[this.indexToBeRendered]]);

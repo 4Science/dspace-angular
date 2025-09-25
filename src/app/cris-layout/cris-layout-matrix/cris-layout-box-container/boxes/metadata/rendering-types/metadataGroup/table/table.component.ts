@@ -1,10 +1,23 @@
-import { Component, Inject } from '@angular/core';
-import { FieldRenderingType, MetadataBoxFieldRendering } from '../../metadata-box.decorator';
-import { MetadataGroupComponent } from '../metadata-group.component';
-import { TranslateService } from '@ngx-translate/core';
-import { LoadMoreService } from '../../../../../../../services/load-more.service';
-import { Item } from '../../../../../../../../core/shared/item.model';
+import {
+  AsyncPipe,
+  NgFor,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  Inject,
+} from '@angular/core';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+
 import { LayoutField } from '../../../../../../../../../app/core/layout/models/box.model';
+import { Item } from '../../../../../../../../core/shared/item.model';
+import { LoadMoreService } from '../../../../../../../services/load-more.service';
+import { MetadataRenderComponent } from '../../../row/metadata-container/metadata-render/metadata-render.component';
+import { MetadataGroupComponent } from '../metadata-group.component';
 
 /**
  * This component renders the table  metadata group fields
@@ -12,9 +25,17 @@ import { LayoutField } from '../../../../../../../../../app/core/layout/models/b
 @Component({
   selector: 'ds-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    NgFor,
+    MetadataRenderComponent,
+    AsyncPipe,
+    NgbTooltipModule,
+    TranslateModule,
+  ],
 })
-@MetadataBoxFieldRendering(FieldRenderingType.TABLE, true)
 export class TableComponent extends MetadataGroupComponent {
   constructor(
     @Inject('fieldProvider') public fieldProvider: LayoutField,
@@ -22,7 +43,7 @@ export class TableComponent extends MetadataGroupComponent {
     @Inject('renderingSubTypeProvider') public renderingSubTypeProvider: string,
     @Inject('tabNameProvider') public tabNameProvider: string,
     protected translateService: TranslateService,
-    public loadMoreService: LoadMoreService
+    public loadMoreService: LoadMoreService,
   ) {
     super(fieldProvider, itemProvider, renderingSubTypeProvider, tabNameProvider, translateService, loadMoreService);
   }

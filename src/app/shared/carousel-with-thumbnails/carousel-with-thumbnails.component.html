@@ -42,7 +42,7 @@
       </div>
     </ng-container>
   </div>
-  <div class="d-flex flex-md-column flex-row align-items-stretch justify-content-center thumbnail-wrapper h-100" *ngIf="!(isSmallDevice$ | async)">
+  <div class="d-flex flex-md-column flex-row align-items-stretch justify-content-center thumbnail-wrapper h-100" *ngIf="(isSmallDevice$ | async) !== true">
         <ds-thumbnail-slider
           [scope]="scope"
           [heightThumbnailPx]="thumbnailHeightPx"
@@ -66,10 +66,10 @@
       <h2 class="font-weight-bold" [class]="carouselOptions.titleStyle"
           *ngIf="activeItem?.metadata[title]">
         {{activeItem?.metadata[title][0].value}}</h2>
-      <p [class]="carouselOptions.captionStyle"
-        *ngIf="activeItem?.metadata[description]; let descriptionObj">
-        {{descriptionObj[0].value}}
-      </p>
+      <div [class]="carouselOptions.captionStyle"
+        *ngIf="activeItem?.metadata[description]; let descriptionObj"
+        [innerHTML]="descriptionObj[0].value">
+      </div>
       <ng-container *ngIf="getItemLink(activeItem); let currentLink">
         <a *ngIf="isLinkInternal(currentLink)" [routerLink]="currentLink">
           <ng-container *ngTemplateOutlet="seeMoreButton"></ng-container>

@@ -1,17 +1,23 @@
-import {Component, Input} from '@angular/core';
-import { ThemedComponent } from '../../theme-support/themed.component';
-import { ImagesBrowseElementsComponent } from './images-browse-elements.component';
+import {
+  Component,
+  Input,
+} from '@angular/core';
+
+import { TopSection } from '../../../core/layout/models/section.model';
 import { Context } from '../../../core/shared/context.model';
 import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
-import { TopSection } from '../../../core/layout/models/section.model';
+import { ThemedComponent } from '../../theme-support/themed.component';
+import { ImagesBrowseElementsComponent } from './images-browse-elements.component';
 
 /**
  * This component is a wrapper for the ImagesBrowseElementsComponent
  */
 @Component({
-  selector: 'ds-themed-images-browse-elements',
+  selector: 'ds-images-browse-elements',
   styleUrls: [],
   templateUrl: './../../theme-support/themed.component.html',
+  standalone: true,
+  imports: [ImagesBrowseElementsComponent],
 })
 export class ThemedImagesBrowseElementsComponent extends ThemedComponent<ImagesBrowseElementsComponent> {
 

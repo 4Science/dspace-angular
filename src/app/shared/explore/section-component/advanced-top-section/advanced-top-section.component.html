@@ -19,12 +19,12 @@
     <div class="row justify-content-center">
       <ds-loading *ngIf="(loading$ | async)"></ds-loading>
     </div>
-    <ds-themed-browse-most-elements
-      *ngIf="!(loading$ | async)"
+    <ds-browse-most-elements
+      *ngIf="(loading$ | async) !== true"
       [context]="context"
       [discoveryConfigurationsTotalElementsMap]="discoveryConfigurationsTotalElementsMap"
       [paginatedSearchOptions]="paginatedSearchOptions.asObservable() | async"
       [topSection]="$any(advancedTopSection)"
-    ></ds-themed-browse-most-elements>
+    ></ds-browse-most-elements>
   </div>
 </div>

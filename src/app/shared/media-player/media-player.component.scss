@@ -2,8 +2,8 @@
 @import 'videojs-wavesurfer/dist/css/videojs.wavesurfer.css';
 
 .media-container {
-  max-height: 480px;
-  margin-bottom: 140px;
+  //additional 32px to give some space under content bar
+  margin-bottom: calc(var(--ds-video-selection-bar-height) + 32px);
 }
 
 

@@ -1,47 +1,121 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  isPlatformBrowser,
+  NgIf,
+} from '@angular/common';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  Output,
+  PLATFORM_ID,
+  SecurityContext,
+} from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
+import {
+  ContentChange,
+  QuillEditorComponent,
+  QuillModules,
+} from 'ngx-quill';
 
 @Component({
   selector: 'ds-markdown-editor',
   templateUrl: './markdown-editor.component.html',
-  styleUrls: ['./markdown-editor.component.scss']
+  styleUrls: ['./markdown-editor.component.scss'],
+  standalone: true,
+  imports: [
+    FormsModule,
+    QuillEditorComponent,
+    NgIf,
+  ],
 })
-export class MarkdownEditorComponent implements OnInit {
-  // to allow multiple textarea on the same screen, need to set an uniqueId for the textarea
-  controlId: string;
+export class MarkdownEditorComponent implements AfterViewInit {
   /**
    * Markdown Editor String value
    */
-  @Input() editValue: string;
+  @Input() set editValue(value: string) {
+    if (value && !this._editValue) {
+      this._editValue = value;
+    }
+  }
+
+  get editValue(): string {
+    return this._editValue;
+  }
+
+  private _editValue = '';
+  /**
+   * Indicates whether the markdown editor is required.
+   */
+  @Input() required: boolean;
+
   /**
    * Markdown Editor String value Emitter
    */
   @Output() editValueChange = new EventEmitter();
+
   /**
-   * Nu markdown library options (default is chinese)
+   * Quill modules config
    */
-  options = {
-    minHeight: 200,
-    lang: 'en_US',
-    mode: 'ir',
-    preview: {
-      markdown: {
-        codeBlockPreview: false,
-      },
-      actions: [
-        'desktop', 'tablet', 'mobile'
-      ]
+  modules: QuillModules = {
+    'toolbar': {
+      container: [
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ 'header': 1 }, { 'header': 2 }],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'indent': '-1' }, { 'indent': '+1' }],
+        [{ 'direction': 'rtl' }],
+        [{ 'size': ['small', false, 'large', 'huge'] }],
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        [{ 'font': [] }],
+        [{ 'align': [] }],
+        ['clean'],
+        ['emoji'],
+      ],
     },
-    toolbar: [
-      'emoji', 'headings', 'bold', 'italic', 'strike', 'link', '|',
-      'list', 'ordered-list', 'check', 'outdent', 'indent', 'table', '|',
-      'quote', 'line', 'code', 'inline-code', 'insert-before', 'insert-after', '|',
-      'undo', 'redo', '|',
-      'fullscreen', 'preview'
-    ],
+    syntax: false,
   };
 
-  ngOnInit(): void {
-    this.controlId = `MarkdownEditor-${Math.floor(100000 * Math.random())}`;
+  modulesLoaded = false;
+
+  constructor(
+    private sanitizer: DomSanitizer,
+    private cdr: ChangeDetectorRef,
+    @Inject(PLATFORM_ID) private platformId: string,
+  ) {}
+
+  async ngAfterViewInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      try {
+        const quillImport = await import('quill');
+        const quill: any = quillImport.default || quillImport;
+
+        if (!quill || typeof quill.register !== 'function') {
+          console.error('Quill not loaded correctly:', quill);
+          return;
+        }
+        // Wait for the quill-emoji module
+        await import('quill-emoji');
+
+        this.modulesLoaded = true;
+        this.cdr.detectChanges();
+      } catch (error) {
+        console.error('Error during Quill initialization:', error);
+      }
+    }
   }
 
+
+  /**
+   * Emit content update after editing
+   * @param content
+   */
+  updateContent(content: ContentChange) {
+    const sanitizedContent = this.sanitizer.sanitize(SecurityContext.HTML, content.html);
+    const normalizedContent = sanitizedContent?.replace(/&#160;/g, ' ');
+    this.editValueChange.emit(normalizedContent);
+  }
 }

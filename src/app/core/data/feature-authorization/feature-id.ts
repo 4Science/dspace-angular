@@ -36,7 +36,11 @@ export enum FeatureID {
   CanEditItem = 'canEditItem',
   CanRegisterDOI = 'canRegisterDOI',
   CanSubscribe = 'canSubscribeDso',
+  CoarNotifyEnabled = 'coarNotifyEnabled',
+  CanSeeQA = 'canSeeQA',
+  EPersonForgotPassword = 'epersonForgotPassword',
   ShowClaimItem = 'showClaimItem',
   CanCorrectItem = 'canCorrectItem',
-  CanCurate = 'canCurateItem'
+  CanViewInWorkflowSinceStatistics = 'canViewInWorkflowSinceStatistics',
+  CanCurate = 'canCurateItem',
 }

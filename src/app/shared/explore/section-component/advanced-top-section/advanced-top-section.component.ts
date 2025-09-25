@@ -1,25 +1,67 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
-import { SortDirection, SortOptions } from '../../../../core/cache/models/sort-options.model';
-import { AdvancedTopSection, TopSectionTemplateType } from '../../../../core/layout/models/section.model';
+import {
+  AsyncPipe,
+  NgClass,
+  NgForOf,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  inject,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import {
+  BehaviorSubject,
+  forkJoin,
+  Observable,
+} from 'rxjs';
+import {
+  map,
+  take,
+} from 'rxjs/operators';
+
+import {
+  SortDirection,
+  SortOptions,
+} from '../../../../core/cache/models/sort-options.model';
+import { RemoteData } from '../../../../core/data/remote-data';
+import {
+  AdvancedTopSection,
+  TopSectionTemplateType,
+} from '../../../../core/layout/models/section.model';
+import { Context } from '../../../../core/shared/context.model';
+import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
+import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
+import { SearchService } from '../../../../core/shared/search/search.service';
+import { ThemedBrowseMostElementsComponent } from '../../../browse-most-elements/themed-browse-most-elements.component';
+import { HostWindowService } from '../../../host-window.service';
+import { ThemedLoadingComponent } from '../../../loading/themed-loading.component';
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../../search/models/paginated-search-options.model';
-import { Context } from '../../../../core/shared/context.model';
-import {BehaviorSubject, forkJoin, Observable} from 'rxjs';
-import { HostWindowService } from '../../../host-window.service';
-import {SearchService} from '../../../../core/shared/search/search.service';
-import { map, take } from 'rxjs/operators';
-import {RemoteData} from '../../../../core/data/remote-data';
-import {SearchObjects} from '../../../search/models/search-objects.model';
-import {DSpaceObject} from '../../../../core/shared/dspace-object.model';
-import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
+import { SearchObjects } from '../../../search/models/search-objects.model';
 
 /**
  * Component representing the Advanced-Top component section.
  */
 @Component({
-  selector: 'ds-advanced-top-section',
+  selector: 'ds-base-advanced-top-section',
   templateUrl: './advanced-top-section.component.html',
   styleUrls: ['./advanced-top-section.component.scss'],
+  standalone: true,
+  imports: [
+    NgClass,
+    ThemedLoadingComponent,
+    ThemedBrowseMostElementsComponent,
+    AsyncPipe,
+    TranslateModule,
+    NgIf,
+    NgForOf,
+    NgIf,
+    TranslateModule,
+    ThemedLoadingComponent,
+    ThemedBrowseMostElementsComponent,
+  ],
 })
 export class AdvancedTopSectionComponent implements OnInit {
 
@@ -120,15 +162,15 @@ export class AdvancedTopSectionComponent implements OnInit {
     return this.searchService.search(paginatedSearchOptions).pipe(
       getFirstCompletedRemoteData(),
       take(1),
-      map((searchResults: RemoteData<SearchObjects<DSpaceObject>>) => searchResults?.payload?.pageInfo?.totalElements ?? 0)
+      map((searchResults: RemoteData<SearchObjects<DSpaceObject>>) => searchResults?.payload?.pageInfo?.totalElements ?? 0),
     );
   }
 
   setDiscoveryConfigurationsTotalElementsMap() {
     const observables = this.advancedTopSection.discoveryConfigurationName.map((configName: string) =>
       this.getSearchResultTotalNumber(configName).pipe(
-        map((totalElements: number) => ({ configName, totalElements }))
-      )
+        map((totalElements: number) => ({ configName, totalElements })),
+      ),
     );
 
     forkJoin(observables).subscribe(results => {

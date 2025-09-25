@@ -1,28 +1,43 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+} from '@angular/core';
+import {
+  ComponentFixture,
+  inject,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { StoreModule } from '@ngrx/store';
-
-import { LogInComponent } from './log-in.component';
-import { authReducer } from '../../core/auth/auth.reducer';
-import { TranslateModule } from '@ngx-translate/core';
-
-import { AuthService } from '../../core/auth/auth.service';
-import { authMethodsMock, AuthServiceStub } from '../testing/auth-service.stub';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from '../shared.module';
-import { NativeWindowMockFactory } from '../mocks/mock-native-window-ref';
-import { ActivatedRouteStub } from '../testing/active-router.stub';
 import { ActivatedRoute } from '@angular/router';
-import { NativeWindowService } from '../../core/services/window.service';
-import { provideMockStore } from '@ngrx/store/testing';
-import { createTestComponent } from '../testing/utils.test';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HardRedirectService } from '../../core/services/hard-redirect.service';
-import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
+import { StoreModule } from '@ngrx/store';
+import { provideMockStore } from '@ngrx/store/testing';
+import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
-import { ThemeService } from '../theme-support/theme.service';
+import { AuthMethodType } from 'src/app/core/auth/models/auth.method-type';
+
+import { authReducer } from '../../core/auth/auth.reducer';
+import { AuthService } from '../../core/auth/auth.service';
+import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
+import { HardRedirectService } from '../../core/services/hard-redirect.service';
+import { NativeWindowService } from '../../core/services/window.service';
+import { ThemedLoadingComponent } from '../loading/themed-loading.component';
+import { NativeWindowMockFactory } from '../mocks/mock-native-window-ref';
 import { getMockThemeService } from '../mocks/theme-service.mock';
+import { ActivatedRouteStub } from '../testing/active-router.stub';
+import {
+  authMethodsMock,
+  AuthServiceStub,
+} from '../testing/auth-service.stub';
+import { createTestComponent } from '../testing/utils.test';
+import { ThemeService } from '../theme-support/theme.service';
+import { LogInContainerComponent } from './container/log-in-container.component';
+import { LogInComponent } from './log-in.component';
 
 describe('LogInComponent', () => {
 
@@ -34,9 +49,9 @@ describe('LogInComponent', () => {
         authenticated: false,
         loaded: false,
         loading: false,
-        authMethods: authMethodsMock
-      }
-    }
+        authMethods: authMethodsMock,
+      },
+    },
   };
   let hardRedirectService: HardRedirectService;
 
@@ -45,10 +60,10 @@ describe('LogInComponent', () => {
   beforeEach(waitForAsync(() => {
     hardRedirectService = jasmine.createSpyObj('hardRedirectService', {
       redirect: {},
-      getCurrentRoute: {}
+      getCurrentRoute: {},
     });
     authorizationService = jasmine.createSpyObj('authorizationService', {
-      isAuthorized: of(true)
+      isAuthorized: of(true),
     });
 
     // refine the test module by declaring the test component
@@ -59,15 +74,12 @@ describe('LogInComponent', () => {
         StoreModule.forRoot(authReducer, {
           runtimeChecks: {
             strictStateImmutability: false,
-            strictActionImmutability: false
-          }
+            strictActionImmutability: false,
+          },
         }),
         RouterTestingModule,
-        SharedModule,
-        TranslateModule.forRoot()
-      ],
-      declarations: [
-        TestComponent
+        TranslateModule.forRoot(),
+        TestComponent,
       ],
       providers: [
         { provide: AuthService, useClass: AuthServiceStub },
@@ -78,13 +90,13 @@ describe('LogInComponent', () => {
         { provide: AuthorizationDataService, useValue: authorizationService },
         provideMockStore({ initialState }),
         { provide: ThemeService, useValue: getMockThemeService() },
-        LogInComponent
+        LogInComponent,
       ],
       schemas: [
-        CUSTOM_ELEMENTS_SCHEMA
-      ]
+        CUSTOM_ELEMENTS_SCHEMA,
+      ],
     })
-      .compileComponents();
+      .overrideComponent(LogInComponent, { remove: { imports: [ThemedLoadingComponent, LogInContainerComponent] } }).compileComponents();
 
   }));
 
@@ -94,7 +106,7 @@ describe('LogInComponent', () => {
 
     // synchronous beforeEach
     beforeEach(() => {
-      const html = `<ds-themed-log-in [isStandalonePage]="isStandalonePage"> </ds-themed-log-in>`;
+      const html = `<ds-log-in [isStandalonePage]="isStandalonePage"> </ds-log-in>`;
 
       testFixture = createTestComponent(html, TestComponent) as ComponentFixture<TestComponent>;
       testComp = testFixture.componentInstance;
@@ -129,6 +141,59 @@ describe('LogInComponent', () => {
       expect(loginContainers.length).toBe(2);
 
     });
+
+    it('returns only password method when backdoor is enabled', () => {
+      const authMethods = [
+        { authMethodType: AuthMethodType.Password, position: 1 },
+        { authMethodType: AuthMethodType.Ip, position: 2 },
+        { authMethodType: AuthMethodType.Shibboleth, position: 3 },
+      ];
+      const isBackdoor = true;
+      component.excludedAuthMethod = undefined;
+      const result = component.filterAndSortAuthMethods(authMethods, isBackdoor);
+      expect(result).toEqual([{ authMethodType: AuthMethodType.Password, position: 1 }]);
+    });
+
+    it('excludes password method when standard login is disabled', () => {
+      const authMethods = [
+        { authMethodType: AuthMethodType.Password, position: 1 },
+        { authMethodType: AuthMethodType.Shibboleth, position: 2 },
+      ];
+      component.excludedAuthMethod = undefined;
+      const result = component.filterAndSortAuthMethods(authMethods, false, true);
+      expect(result).toEqual([
+        { authMethodType: AuthMethodType.Shibboleth, position: 2 },
+      ]);
+    });
+
+    it('excludes methods based on excludedAuthMethod input', () => {
+      const authMethods = [
+        { authMethodType: AuthMethodType.Password, position: 1 },
+        { authMethodType: AuthMethodType.Ip, position: 2 },
+        { authMethodType: AuthMethodType.Shibboleth, position: 3 },
+      ];
+      const isBackdoor = false;
+      component.excludedAuthMethod = AuthMethodType.Ip;
+      const result = component.filterAndSortAuthMethods(authMethods, isBackdoor);
+      expect(result).toEqual([
+        { authMethodType: AuthMethodType.Password, position: 1 },
+        { authMethodType: AuthMethodType.Shibboleth, position: 3 },
+      ]);
+    });
+
+    it('sorts methods by position', () => {
+      const authMethods = [
+        { authMethodType: AuthMethodType.Password, position: 2 },
+        { authMethodType: AuthMethodType.Shibboleth, position: 1 },
+      ];
+      const isBackdoor = false;
+      component.excludedAuthMethod = undefined;
+      const result = component.filterAndSortAuthMethods(authMethods, isBackdoor);
+      expect(result).toEqual([
+        { authMethodType: AuthMethodType.Shibboleth, position: 1 },
+        { authMethodType: AuthMethodType.Password, position: 2 },
+      ]);
+    });
   });
 
 });
@@ -136,7 +201,11 @@ describe('LogInComponent', () => {
 // declare a test component
 @Component({
   selector: 'ds-test-cmp',
-  template: ``
+  template: ``,
+  standalone: true,
+  imports: [FormsModule,
+    ReactiveFormsModule,
+    RouterTestingModule],
 })
 class TestComponent {
 

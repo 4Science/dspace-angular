@@ -1,19 +1,33 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { OpenStreetMapComponent } from './open-street-map.component';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { LocationErrorCodes, LocationPlace, LocationService } from '../../core/services/location.service';
-import { of, throwError } from 'rxjs';
+import {
+  of,
+  throwError,
+} from 'rxjs';
 
+import {
+  LocationErrorCodes,
+  LocationPlace,
+  LocationService,
+} from '../../core/services/location.service';
+import { OpenStreetMapComponent } from './open-street-map.component';
+//
 describe('OpenStreetMapComponent', () => {
   let component: OpenStreetMapComponent;
   let fixture: ComponentFixture<OpenStreetMapComponent>;
 
   const locationService = jasmine.createSpyObj('locationService', {
-    searchPlace: jasmine.createSpy('searchPlace'),
-    searchCoordinates: jasmine.createSpy('searchCoordinates'),
+    findPlaceCoordinates: jasmine.createSpy('findPlaceCoordinates'),
+    findPlaceAndDecimalCoordinates: jasmine.createSpy('findPlaceAndDecimalCoordinates'),
+    searchByCoordinates: jasmine.createSpy('searchByCoordinates'),
+    isValidDecimalCoordinatePair: jasmine.createSpy('isValidDecimalCoordinatePair'),
+    isDecimalCoordinateString: jasmine.createSpy('isDecimalCoordinateString'),
+    isSexagesimalCoordinateString: jasmine.createSpy('isSexagesimalCoordinateString'),
     isValidCoordinateString: jasmine.createSpy('isValidCoordinateString'),
     parseCoordinates: jasmine.createSpy('parseCoordinates'),
-    isCoordinateString: jasmine.createSpy('isCoordinateString'),
   });
 
   const coordinates = '52.520008,13.404954';
@@ -23,14 +37,14 @@ describe('OpenStreetMapComponent', () => {
       latitude: 52.520008,
       longitude: 13.404954,
     },
-    displayName: '10178 Berlin, Germania'
+    displayName: '10178 Berlin, Germania',
   };
 
   const errPlace: LocationPlace = {
     coordinates: {
       latitude: 52.520008,
       longitude: 13.404954,
-    }
+    },
   };
 
   const placeOnlyCoordinates: LocationPlace = {
@@ -40,18 +54,18 @@ describe('OpenStreetMapComponent', () => {
     },
   };
   const placeWithAddress: LocationPlace = {
-    displayName: '10178 Berlin, Germania'
+    displayName: '10178 Berlin, Germania',
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [OpenStreetMapComponent],
       imports: [
         TranslateModule.forRoot(),
+        OpenStreetMapComponent,
       ],
       providers: [
         { provide: LocationService, useValue: locationService },
-      ]
+      ],
     })
       .compileComponents();
   });
@@ -65,14 +79,14 @@ describe('OpenStreetMapComponent', () => {
   describe('when coordinates are given', () => {
     beforeEach(() => {
       component.coordinates = coordinates;
-      locationService.isCoordinateString.and.returnValue(true);
+      locationService.isDecimalCoordinateString.and.returnValue(true);
       locationService.isValidCoordinateString.and.returnValue(true);
       locationService.parseCoordinates.and.returnValue(place.coordinates);
     });
 
     describe('and they are found', () => {
       beforeEach(() => {
-        locationService.searchCoordinates.and.returnValue(of(place.displayName));
+        locationService.searchByCoordinates.and.returnValue(of(place.displayName));
         fixture.detectChanges();
       });
 
@@ -88,7 +102,7 @@ describe('OpenStreetMapComponent', () => {
     describe('and they are not found', () => {
       beforeEach(() => {
 
-        locationService.searchCoordinates.and.callFake(() => {
+        locationService.searchByCoordinates.and.callFake(() => {
           return throwError(() => new Error('Fake error'));
         });
         fixture.detectChanges();
@@ -107,12 +121,13 @@ describe('OpenStreetMapComponent', () => {
   describe('when address is given', () => {
     beforeEach(() => {
       component.coordinates = address;
-      locationService.isCoordinateString.and.returnValue(false);
+      locationService.isDecimalCoordinateString.and.returnValue(false);
     });
 
     describe('and exists', () => {
       beforeEach(() => {
-        locationService.searchPlace.and.returnValue(of(placeOnlyCoordinates));
+        locationService.findPlaceCoordinates.and.returnValue(of(placeOnlyCoordinates));
+        locationService.findPlaceAndDecimalCoordinates.and.returnValue(of(place));
         fixture.detectChanges();
       });
 
@@ -128,7 +143,10 @@ describe('OpenStreetMapComponent', () => {
     describe('and is not found', () => {
       beforeEach(() => {
 
-        locationService.searchPlace.and.callFake(() => {
+        locationService.findPlaceCoordinates.and.callFake(() => {
+          return throwError(() => new Error(LocationErrorCodes.API_ERROR));
+        });
+        locationService.findPlaceAndDecimalCoordinates.and.callFake(() => {
           return throwError(() => new Error(LocationErrorCodes.API_ERROR));
         });
         fixture.detectChanges();

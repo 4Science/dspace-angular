@@ -22,9 +22,11 @@
           <span *ngIf="item.hasMetadata(authorMetadata);"
                 class="item-list-authors">
             <span *ngIf="item.allMetadata(authorMetadata).length === 0">{{'mydspace.results.no-authors' | translate}}</span>
-            <span class="d-flex position-absolute w-100">
+            <span class="d-flex w-100">
               <span class="metadata-content" *ngFor="let author of item.allMetadata(authorMetadata); let i=index; let last=last;">
-                <ds-metadata-link-view [item]="item" [metadata]="author" [metadataName]="authorMetadata"></ds-metadata-link-view>
+                <ds-metadata-link-view [item]="item" [metadataName]="authorMetadata"
+                                       [metadata]="author"></ds-metadata-link-view><span
+                *ngIf="!last">; </span>
               </span>
 
             </span>
@@ -43,7 +45,7 @@
   <ds-item-submitter *ngIf="showSubmitter" [object]="item"></ds-item-submitter>
   <div *ngIf="viewConfig === 'relationship-sort-list'" class="d-flex justify-content-end mr-3">
     <button class="btn btn-danger btn-sm"
-            [disabled]="processing || pendingChanges"
+            [dsBtnDisabled]="processing || pendingChanges"
             (click)="dispatchDelete()">
       <span *ngIf="processing"><i class='fas fa-circle-notch fa-spin'></i> {{'loading.default' | translate}}</span>
       <span *ngIf="!processing"> {{"manage.relationships.unselect" | translate}}</span>

@@ -1,5 +1,6 @@
 <div class="grid-wrapper" [class.max-items-4]="(totalElements$ | async) < 4">
   <ng-container *ngFor="let item of (searchResultArray$ | async); let i = index; let last = last">
+    <ng-container *ngIf="isBrowser && !isLoading; else imageSkeleton">
     <img [src]="(itemToImageHrefMap$ | async)?.get(item.uuid)" alt="hidden-image" style="display: none" #image>
     <div class="thumbnail-container">
       <div class="thumbnail-inner-container w-100 h-100 position-relative" [dsBackgroundImage]="(itemToImageHrefMap$ | async)?.get(item.uuid)">
@@ -9,5 +10,9 @@
         </a>
       </div>
     </div>
+    </ng-container>
+    <ng-template #imageSkeleton>
+      <ngx-skeleton-loader class="thumbnail-container w-100 h-100" [theme]="{height: '100%', width: '100%'}"></ngx-skeleton-loader>
+    </ng-template>
   </ng-container>
 </div>

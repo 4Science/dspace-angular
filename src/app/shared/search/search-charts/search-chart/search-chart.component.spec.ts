@@ -1,21 +1,35 @@
-import { ChangeDetectionStrategy, NO_ERRORS_SCHEMA } from '@angular/core';
-
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { TranslateModule } from '@ngx-translate/core';
-import { Observable, of as observableOf } from 'rxjs';
+import {
+  ChangeDetectionStrategy,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { SearchFilterService } from '../../../../core/shared/search/search-filter.service';
+import { provideRouter } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { MockComponent } from 'ng-mocks';
+import {
+  BehaviorSubject,
+  Observable,
+  of,
+} from 'rxjs';
+
 import { SearchService } from '../../../../core/shared/search/search.service';
-import { SearchChartComponent } from './search-chart.component';
-import { SearchFilterConfig } from '../../models/search-filter-config.model';
-import { FilterType } from '../../models/filter-type.model';
+import { SearchFilterService } from '../../../../core/shared/search/search-filter.service';
+import { SEARCH_CONFIG_SERVICE } from '../../../../my-dspace-page/my-dspace-configuration.service';
+import { SearchChartFilterWrapperComponent } from '../../../../shared/search/search-charts/search-chart/search-chart-wrapper/search-chart-wrapper.component';
 import { SearchConfigurationServiceStub } from '../../../testing/search-configuration-service.stub';
-import { SEARCH_CONFIG_SERVICE } from '../../../../my-dspace-page/my-dspace-page.component';
+import { FilterType } from '../../models/filter-type.model';
+import { SearchFilterConfig } from '../../models/search-filter-config.model';
+import { SearchChartComponent } from './search-chart.component';
 
 describe('SearchChartComponent', () => {
   let comp: SearchChartComponent;
   let fixture: ComponentFixture<SearchChartComponent>;
+
   const filterName1 = 'test name';
   const filterName2 = 'test2';
   const filterName3 = 'another name3';
@@ -25,40 +39,36 @@ describe('SearchChartComponent', () => {
     name: filterName1,
     type: FilterType.text,
     hasFacets: false,
-    isOpenByDefault: false
+    isOpenByDefault: false,
   });
-  const mockFilterService = {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    expand: (filter) => {
-    },
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    initializeFilter: (filter) => {
-    },
-    getSelectedValuesForFilter: (filter) => {
-      return observableOf([filterName1, filterName2, filterName3]);
-    },
-    isFilterActive: (filter) => {
-      return observableOf([filterName1, filterName2, filterName3].indexOf(filter) >= 0);
-    }
-  };
-  let filterService;
-  const mockResults = observableOf(['test', 'data']);
-  const searchServiceStub = {
-    getFacetValuesFor: (filter) => mockResults
-  };
+  const mockFilterService = jasmine.createSpyObj('SearchFilterService', {
+    expand: jasmine.createSpy('expand'),
+    initializeFilter: jasmine.createSpy('initializeFilter'),
+    getSelectedValuesForFilter: jasmine.createSpy('getSelectedValuesForFilter'),
+    isFilterActive: jasmine.createSpy('isFilterActive'),
+  });
+  const mockResults = of(['test', 'data']);
+  const searchServiceStub = jasmine.createSpyObj('SearchService', {
+    getFacetValuesFor: jasmine.createSpy('getFacetValuesFor'),
+  });
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([]), NoopAnimationsModule],
-      declarations: [SearchChartComponent],
+      imports: [
+        TranslateModule.forRoot(),
+        NoopAnimationsModule,
+        SearchChartComponent,
+        MockComponent(SearchChartFilterWrapperComponent),
+      ],
       providers: [
+        provideRouter(([])),
         { provide: SearchService, useValue: searchServiceStub },
         { provide: SearchFilterService, useValue: mockFilterService },
-        { provide: SEARCH_CONFIG_SERVICE, useValue: new SearchConfigurationServiceStub() }
+        { provide: SEARCH_CONFIG_SERVICE, useValue: new SearchConfigurationServiceStub() },
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(SearchChartComponent, {
-      set: { changeDetection: ChangeDetectionStrategy.Default }
+      set: { changeDetection: ChangeDetectionStrategy.Default },
     }).compileComponents();
   }));
 
@@ -66,18 +76,20 @@ describe('SearchChartComponent', () => {
     fixture = TestBed.createComponent(SearchChartComponent);
     comp = fixture.componentInstance; // SearchPageComponent test instance
     comp.filter = mockFilterConfig;
+    comp.inPlaceSearch = false;
+    comp.refreshFilters = new BehaviorSubject<boolean>(false);
+    mockFilterService.getSelectedValuesForFilter.and.returnValue(of([filterName1, filterName2, filterName3]));
+    searchServiceStub.getFacetValuesFor.and.returnValue(mockResults);
     fixture.detectChanges();
-    filterService = (comp as any).filterService;
   });
 
   describe('when the initializeFilter method is triggered', () => {
     beforeEach(() => {
-      spyOn(filterService, 'initializeFilter');
       comp.initializeFilter();
     });
 
     it('should call initialCollapse with the correct filter configuration name', () => {
-      expect(filterService.initializeFilter).toHaveBeenCalledWith(mockFilterConfig);
+      expect(mockFilterService.initializeFilter).toHaveBeenCalledWith(mockFilterConfig);
     });
   });
 

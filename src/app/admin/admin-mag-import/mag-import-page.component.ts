@@ -1,30 +1,53 @@
+import {
+  Location,
+  NgIf,
+} from '@angular/common';
 import { Component } from '@angular/core';
-import { Location } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import { take } from 'rxjs/operators';
+
+import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
 import {
   PACKAGER_SCRIPT_NAME,
   ScriptDataService,
 } from '../../core/data/processes/script-data.service';
-import { ProcessParameter } from '../../process-page/processes/process-parameter.model';
-import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { RemoteData } from '../../core/data/remote-data';
-import { Process } from '../../process-page/processes/process.model';
-import { isEmpty, isNotEmpty } from '../../shared/empty.util';
-import { getProcessDetailRoute } from '../../process-page/process-page-routing.paths';
-import { TranslateService } from '@ngx-translate/core';
-import { NotificationsService } from '../../shared/notifications/notifications.service';
-import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
-import {
-  ImportBatchSelectorComponent
-} from '../../shared/dso-selector/modal-wrappers/import-batch-selector/import-batch-selector.component';
-import { take } from 'rxjs/operators';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { getProcessDetailRoute } from '../../process-page/process-page-routing.paths';
+import { Process } from '../../process-page/processes/process.model';
+import { ProcessParameter } from '../../process-page/processes/process-parameter.model';
+import { ImportBatchSelectorComponent } from '../../shared/dso-selector/modal-wrappers/import-batch-selector/import-batch-selector.component';
+import {
+  isEmpty,
+  isNotEmpty,
+} from '../../shared/empty.util';
+import { NotificationsService } from '../../shared/notifications/notifications.service';
+import {
+  SwitchColor,
+  SwitchComponent,
+  SwitchOption,
+} from '../../shared/switch/switch.component';
+import { FileDropzoneNoUploaderComponent } from '../../shared/upload/file-dropzone-no-uploader/file-dropzone-no-uploader.component';
 
 @Component({
   selector: 'ds-admin-mag-import',
   templateUrl: './mag-import-page.component.html',
-  styleUrls: ['./mag-import-page.component.scss']
+  styleUrls: ['./mag-import-page.component.scss'],
+  standalone: true,
+  imports: [
+    TranslateModule,
+    SwitchComponent,
+    NgIf,
+    FileDropzoneNoUploaderComponent,
+    FormsModule,
+  ],
 })
 export class MagImportPageComponent {
   /**
@@ -46,6 +69,12 @@ export class MagImportPageComponent {
    * File URL when flag is for url
    */
   fileURL: string;
+
+  switchOptions: SwitchOption[] = [
+    { value: 'upload', icon: 'fa fa-upload', label: 'admin.mag-import.page.toggle.upload', iconColor: SwitchColor.Primary },
+    { value: 'url', icon: 'fa fa-link', label: 'admin.mag-import.page.toggle.url', iconColor: SwitchColor.Primary },
+  ];
+
 
   public constructor(private location: Location,
                      protected translate: TranslateService,
@@ -91,8 +120,8 @@ export class MagImportPageComponent {
     } else {
       const parameterValues = new Array<ProcessParameter>();
 
-      parameterValues.push(Object.assign(new ProcessParameter(), {name: '--type', value: 'MAG'})); // hard coded
-      parameterValues.push(Object.assign(new ProcessParameter(), {name: '--parent', value: this.dso.uuid}));
+      parameterValues.push(Object.assign(new ProcessParameter(), { name: '--type', value: 'MAG' })); // hard coded
+      parameterValues.push(Object.assign(new ProcessParameter(), { name: '--parent', value: this.dso.uuid }));
 
       if (this.isUpload) {
         parameterValues.push(Object.assign(new ProcessParameter(), { name: '--zip', value: this.fileObject.name }));
@@ -101,23 +130,23 @@ export class MagImportPageComponent {
         parameterValues.push(Object.assign(new ProcessParameter(), { name: '--url', value: this.fileURL }));
       }
 
-    this.scriptDataService.invoke(PACKAGER_SCRIPT_NAME, parameterValues, [this.fileObject]).pipe(
-      getFirstCompletedRemoteData(),
-    ).subscribe((rd: RemoteData<Process>) => {
-      if (rd.hasSucceeded) {
-        const title = this.translate.get('process.new.notification.success.title');
-        const content = this.translate.get('process.new.notification.success.content');
-        this.notificationsService.success(title, content);
-        if (isNotEmpty(rd.payload)) {
-          this.router.navigateByUrl(getProcessDetailRoute(rd.payload.processId));
+      this.scriptDataService.invoke(PACKAGER_SCRIPT_NAME, parameterValues, [this.fileObject]).pipe(
+        getFirstCompletedRemoteData(),
+      ).subscribe((rd: RemoteData<Process>) => {
+        if (rd.hasSucceeded) {
+          const title = this.translate.get('process.new.notification.success.title');
+          const content = this.translate.get('process.new.notification.success.content');
+          this.notificationsService.success(title, content);
+          if (isNotEmpty(rd.payload)) {
+            this.router.navigateByUrl(getProcessDetailRoute(rd.payload.processId));
+          }
+        } else {
+          const title = this.translate.get('process.new.notification.error.title');
+          const content = this.translate.get('process.new.notification.error.content');
+          this.notificationsService.error(title, content);
         }
-      } else {
-        const title = this.translate.get('process.new.notification.error.title');
-        const content = this.translate.get('process.new.notification.error.content');
-        this.notificationsService.error(title, content);
-      }
-    });
-  }
+      });
+    }
   }
 
   /**

@@ -1,32 +1,42 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
-import { PaginatedList } from '../data/paginated-list.model';
-import { RemoteData } from '../data/remote-data';
-import { Item } from '../shared/item.model';
-import { getFirstSucceededRemoteData } from '../shared/operators';
-import { BrowseEntrySearchOptions } from './browse-entry-search-options.model';
-import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
-import { ItemDataService } from '../data/item-data.service';
-import { BrowseService } from './browse.service';
+import isArray from 'lodash/isArray';
+import {
+  Observable,
+  of,
+} from 'rxjs';
+import {
+  map,
+  switchMap,
+} from 'rxjs/operators';
+
+import { FollowAuthorityMetadata } from '../../../config/search-follow-metadata.interface';
 import { environment } from '../../../environments/environment';
-import { DSpaceObject } from '../shared/dspace-object.model';
+import {
+  hasValue,
+  isNotEmpty,
+} from '../../shared/empty.util';
 import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { SearchObjects } from '../../shared/search/models/search-objects.model';
-import { SearchService } from '../shared/search/search.service';
-import { hasValue, isNotEmpty } from '../../shared/empty.util';
-import { FollowAuthorityMetadata } from '../../../config/search-follow-metadata.interface';
+import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
+import { ItemDataService } from '../data/item-data.service';
+import { PaginatedList } from '../data/paginated-list.model';
+import { RemoteData } from '../data/remote-data';
+import { WORKFLOWITEM } from '../eperson/models/workflowitem.resource-type';
+import { WORKSPACEITEM } from '../eperson/models/workspaceitem.resource-type';
+import { DSpaceObject } from '../shared/dspace-object.model';
+import { Item } from '../shared/item.model';
+import { ITEM } from '../shared/item.resource-type';
 import { MetadataValue } from '../shared/metadata.models';
 import { Metadata } from '../shared/metadata.utils';
-import isArray from 'lodash/isArray';
-import { WORKSPACEITEM } from '../eperson/models/workspaceitem.resource-type';
-import { WORKFLOWITEM } from '../eperson/models/workflowitem.resource-type';
-import { ITEM } from '../shared/item.resource-type';
+import { getFirstCompletedRemoteData } from '../shared/operators';
+import { SearchService } from '../shared/search/search.service';
+import { BrowseService } from './browse.service';
+import { BrowseEntrySearchOptions } from './browse-entry-search-options.model';
 
 /**
  * The service aims to manage browse requests and subsequent extra fetch requests.
  */
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class SearchManager {
 
   constructor(
@@ -45,7 +55,7 @@ export class SearchManager {
    * @returns {Observable<RemoteData<PaginatedList<Item>>>}
    */
   getBrowseItemsFor(filterValue: string, filterAuthority: string, options: BrowseEntrySearchOptions, ...linksToFollow: FollowLinkConfig<any>[]): Observable<RemoteData<PaginatedList<Item>>> {
-    const browseOptions = Object.assign({}, options, { projection: 'preventMetadataSecurity' });
+    const browseOptions = Object.assign({}, options, { projection: options.projection ?? 'preventMetadataSecurity' });
     return this.browseService.getBrowseItemsFor(filterValue, filterAuthority, browseOptions, ...linksToFollow)
       .pipe(this.completeWithExtraData());
   }
@@ -67,7 +77,8 @@ export class SearchManager {
     useCachedVersionIfAvailable = true,
     reRequestOnStale = true,
     ...linksToFollow: FollowLinkConfig<T>[]): Observable<RemoteData<SearchObjects<T>>> {
-    return this.searchService.search(searchOptions, responseMsToLive, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow)
+    const optionsWithDefaultProjection = Object.assign(new PaginatedSearchOptions({}), searchOptions, { projection: searchOptions.projection ?? 'preventMetadataSecurity' });
+    return this.searchService.search(optionsWithDefaultProjection, responseMsToLive, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow)
       .pipe(this.completeSearchObjectsWithExtraData());
   }
 
@@ -112,12 +123,21 @@ export class SearchManager {
       })
       .filter((item) => hasValue(item));
 
-    const uuidList = this.extractUUID(items, environment.followAuthorityMetadata);
+    const uuidList = this.extractUUID(items, environment.followAuthorityMetadata, environment.followAuthorityMaxItemLimit);
 
-    return uuidList.length > 0 ? this.itemService.findAllById(uuidList).pipe(getFirstSucceededRemoteData()) : of(null);
+    return uuidList.length > 0 ? this.itemService.findAllById(uuidList).pipe(
+      getFirstCompletedRemoteData(),
+      map(data => {
+        if (data.hasSucceeded) {
+          return of(data);
+        } else {
+          of(null);
+        }
+      }),
+    ) : of(null);
   }
 
-  protected extractUUID(items: Item[], metadataToFollow: FollowAuthorityMetadata[]): string[] {
+  protected extractUUID(items: Item[], metadataToFollow: FollowAuthorityMetadata[], numberOfElementsToReturn?: number): string[] {
     const uuidMap = {};
 
     items.forEach((item) => {
@@ -125,18 +145,22 @@ export class SearchManager {
         if (item.entityType === followMetadata.type) {
           if (isArray(followMetadata.metadata)) {
             followMetadata.metadata.forEach((metadata) => {
-              Metadata.all(item.metadata, metadata)
+              Metadata.all(item.metadata, metadata, null, environment.followAuthorityMetadataValuesLimit)
                 .filter((metadataValue: MetadataValue) => Metadata.hasValidItemAuthority(metadataValue.authority))
                 .forEach((metadataValue: MetadataValue) => uuidMap[metadataValue.authority] = metadataValue);
             });
           } else {
-            Metadata.all(item.metadata, followMetadata.metadata)
+            Metadata.all(item.metadata, followMetadata.metadata, null, environment.followAuthorityMetadataValuesLimit)
               .filter((metadataValue: MetadataValue) => Metadata.hasValidItemAuthority(metadataValue.authority))
               .forEach((metadataValue: MetadataValue) => uuidMap[metadataValue.authority] = metadataValue);
           }
         }
       });
     });
+
+    if (hasValue(numberOfElementsToReturn) && numberOfElementsToReturn > 0) {
+      return Object.keys(uuidMap).slice(0, numberOfElementsToReturn);
+    }
 
     return Object.keys(uuidMap);
   }

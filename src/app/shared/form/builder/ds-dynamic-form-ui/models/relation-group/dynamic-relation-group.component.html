@@ -1,6 +1,6 @@
 <div class="pt-2">
   <div class="d-lg-flex">
-    <ds-themed-loading *ngIf="!chips" [showMessage]="false"></ds-themed-loading>
+    <ds-loading *ngIf="!chips" [showMessage]="false"></ds-loading>
     <ds-chips
       *ngIf="chips && chips.hasItems()"
       [chips]="chips"
@@ -9,7 +9,7 @@
       (selected)="onChipSelected($event)"></ds-chips>
     <button type="button" class="ds-form-add-more btn btn-link"
             [title]="'form.add' | translate"
-            [disabled]="model.readOnly"
+            [dsBtnDisabled]="model.readOnly"
             [attr.aria-label]="'form.add' | translate"
             (click)="openModal()">
       <span class="text-nowrap"><i class="fas fa-plus"></i> {{'form.add' | translate}}</span>

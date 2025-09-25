@@ -1,24 +1,33 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { IIIFItemViewerComponent } from './iiif-item-viewer.component';
-import { RouterTestingModule } from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
+
+import { MiradorViewerComponent } from '../../../../mirador-viewer/mirador-viewer.component';
+import { IIIFItemViewerComponent } from './iiif-item-viewer.component';
+
 describe('IiifItemViewerComponent', () => {
   let component: IIIFItemViewerComponent;
   let fixture: ComponentFixture<IIIFItemViewerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IIIFItemViewerComponent ],
-      imports: [ RouterTestingModule.withRoutes([]) ],
+      imports: [RouterTestingModule.withRoutes([]), IIIFItemViewerComponent],
       providers: [
-        {provide: Store, useValue: provideMockStore()}
+        { provide: Store, useValue: provideMockStore() },
       ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [NO_ERRORS_SCHEMA],
     })
-    .compileComponents();
+      .overrideComponent(IIIFItemViewerComponent, {
+        remove: {
+          imports: [MiradorViewerComponent],
+        },
+      })
+      .compileComponents();
   });
 
   beforeEach(() => {

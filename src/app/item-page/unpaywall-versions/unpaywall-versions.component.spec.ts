@@ -1,39 +1,52 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { UnpaywallVersionsComponent } from './unpaywall-versions.component';
-import { ActivatedRoute } from '@angular/router';
-import { CommonModule, Location } from '@angular/common';
-import { TranslateLoader, TranslateModule, TranslatePipe } from '@ngx-translate/core';
-import { UnpaywallItemService } from '../../core/data/unpaywall-item.service';
-import { DefaultChangeAnalyzer } from '../../core/data/default-change-analyzer.service';
+import {
+  CommonModule,
+  Location,
+} from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { HALEndpointService } from '../../core/shared/hal-endpoint.service';
-import { NotificationsService } from '../../shared/notifications/notifications.service';
-import { ObjectCacheService } from '../../core/cache/object-cache.service';
-import { RemoteDataBuildService } from '../../core/cache/builders/remote-data-build.service';
-import { RequestService } from '../../core/data/request.service';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
-import { requestReducer } from '../../core/data/request.reducer';
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslatePipe,
+} from '@ngx-translate/core';
+import {
+  of as observableOf,
+  of,
+} from 'rxjs';
+
 import { storeModuleConfig } from '../../app.reducer';
-import { UUIDService } from '../../core/shared/uuid.service';
-import { of, of as observableOf } from 'rxjs';
-import { createSuccessfulRemoteDataObject } from '../../shared/remote-data.utils';
+import { RemoteDataBuildService } from '../../core/cache/builders/remote-data-build.service';
+import { ObjectCacheService } from '../../core/cache/object-cache.service';
+import { DefaultChangeAnalyzer } from '../../core/data/default-change-analyzer.service';
+import { requestReducer } from '../../core/data/request.reducer';
+import { RequestService } from '../../core/data/request.service';
+import { UnpaywallItemService } from '../../core/data/unpaywall-item.service';
+import { HALEndpointService } from '../../core/shared/hal-endpoint.service';
 import { Item } from '../../core/shared/item.model';
 import { MetadataValue } from '../../core/shared/metadata.models';
-import { TranslateLoaderMock } from '../../shared/mocks/translate-loader.mock';
+import { UUIDService } from '../../core/shared/uuid.service';
 import { UnpaywallItemVersionModel } from '../../core/submission/models/unpaywall-item-version.model';
+import { TranslateLoaderMock } from '../../shared/mocks/translate-loader.mock';
+import { NotificationsService } from '../../shared/notifications/notifications.service';
+import { createSuccessfulRemoteDataObject } from '../../shared/remote-data.utils';
+import { UnpaywallVersionsComponent } from './unpaywall-versions.component';
 
 const requestId = '8a6e0804-2bd0-4672-b79d-d97027f9071a';
 const itemTitle = 'Item title';
 const item = Object.assign(new Item(), {
   id: requestId,
   metadata: {
-    'dc.title': [{ value: itemTitle } as MetadataValue]
+    'dc.title': [{ value: itemTitle } as MetadataValue],
   },
   _links: {
     irrelevant: {
       href: 'irrelevant link',
-    }
+    },
   },
 });
 const route = {
@@ -41,8 +54,8 @@ const route = {
     dso: createSuccessfulRemoteDataObject(item),
   }),
   queryParams: of({
-    autoForward: true
-  })
+    autoForward: true,
+  }),
 };
 
 describe('UnpaywallVersionsComponent', () => {
@@ -53,13 +66,13 @@ describe('UnpaywallVersionsComponent', () => {
 
   beforeEach(async () => {
     location = jasmine.createSpyObj({
-      back: jasmine.createSpy()
+      back: jasmine.createSpy(),
     });
     unpaywallItemService = jasmine.createSpyObj({
-      getItemVersions: jasmine.createSpy()
+      getItemVersions: jasmine.createSpy(),
     });
     await TestBed.configureTestingModule({
-      declarations: [UnpaywallVersionsComponent, TranslatePipe],
+      declarations: [TranslatePipe],
       imports: [
         HttpClientTestingModule,
         CommonModule,
@@ -67,9 +80,10 @@ describe('UnpaywallVersionsComponent', () => {
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
-            useValue: TranslateLoaderMock
-          }
-        })
+            useValue: TranslateLoaderMock,
+          },
+        }),
+        UnpaywallVersionsComponent,
       ],
       providers: [
         { provide: ActivatedRoute, useValue: route },
@@ -81,8 +95,8 @@ describe('UnpaywallVersionsComponent', () => {
         ObjectCacheService,
         RemoteDataBuildService,
         RequestService,
-        UUIDService
-      ]
+        UUIDService,
+      ],
     })
       .compileComponents();
   });
@@ -108,7 +122,7 @@ describe('UnpaywallVersionsComponent', () => {
   describe('isHostedInRepository', () => {
     it('should return true if version record is hosted in repository', () => {
       const versionRecord = {
-        hostType: 'repository'
+        hostType: 'repository',
       } as UnpaywallItemVersionModel;
 
       expect(component.isHostedInRepository(versionRecord)).toBeTrue();
@@ -116,7 +130,7 @@ describe('UnpaywallVersionsComponent', () => {
 
     it('should return false if version record is hosted by publisher', () => {
       const versionRecord = {
-        hostType: 'publisher'
+        hostType: 'publisher',
       } as UnpaywallItemVersionModel;
 
       expect(component.isHostedInRepository(versionRecord)).toBeFalse();
@@ -138,7 +152,7 @@ describe('UnpaywallVersionsComponent', () => {
       hostType: 'repository',
       landingPageUrl: 'http://test.com/landing-page',
       pdfUrl: 'http://test.com/pdf',
-      license: 'cc-by'
+      license: 'cc-by',
     } as UnpaywallItemVersionModel;
 
     beforeEach(() => {
@@ -168,7 +182,7 @@ describe('UnpaywallVersionsComponent', () => {
     beforeEach(() => {
       component.onDestroy$ = jasmine.createSpyObj({
         next: jasmine.createSpy(),
-        complete: jasmine.createSpy()
+        complete: jasmine.createSpy(),
       });
     });
 

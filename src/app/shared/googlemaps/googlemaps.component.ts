@@ -1,16 +1,36 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, Input, OnInit, Renderer2, ViewChild, } from '@angular/core';
+import {
+  DOCUMENT,
+  NgIf,
+} from '@angular/common';
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
-import { getFirstCompletedRemoteData } from '../../core/shared/operators';
-import { isNotEmpty } from '../empty.util';
 import { RemoteData } from '../../core/data/remote-data';
+import { LocationService } from '../../core/services/location.service';
 import { ConfigurationProperty } from '../../core/shared/configuration-property.model';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { AlertComponent } from '../alert/alert.component';
+import { isNotEmpty } from '../empty.util';
 
 @Component({
   selector: 'ds-googlemaps',
   templateUrl: './googlemaps.component.html',
   styleUrls: ['./googlemaps.component.scss'],
+  imports: [
+    NgIf,
+    AlertComponent,
+    TranslateModule,
+  ],
+  standalone: true,
 })
 export class GooglemapsComponent implements OnInit {
   /**
@@ -38,10 +58,17 @@ export class GooglemapsComponent implements OnInit {
    */
   longitude: string;
 
+  /**
+   * A flag that indicates if the google maps api key is not configured
+   */
+  noKeyConfigured = false;
+
   constructor(
     @Inject(DOCUMENT) private _document: Document,
     private renderer: Renderer2,
     private configService: ConfigurationDataService,
+    private cdr: ChangeDetectorRef,
+    private locationService: LocationService,
   ) {
   }
 
@@ -57,6 +84,9 @@ export class GooglemapsComponent implements OnInit {
           this.loadScript(this.buildMapUrl(res?.payload?.values[0])).then(() => {
             this.loadMap();
           });
+        } else if (res.hasSucceeded && !res?.payload?.values[0]) {
+          this.noKeyConfigured = true;
+          this.cdr.detectChanges();
         }
       });
     }
@@ -76,14 +106,26 @@ export class GooglemapsComponent implements OnInit {
    * Set latitude and longitude when metadata has an address
    */
   setLatAndLongFromAddress() {
-    return new Promise((reslove, reject) => {
+    return new Promise((resolve, reject) => {
       new google.maps.Geocoder().geocode({ 'address': this.coordinates }, (results, status) => {
         if (status === google.maps.GeocoderStatus.OK) {
           this.latitude = results[0].geometry.location.lat().toString();
           this.longitude = results[0].geometry.location.lng().toString();
-          reslove(1);
+          resolve(1);
         } else {
-          reject(1);
+          console.error('Error from Geocoder API: ', results, status);
+          try {
+            const coordinates = this.locationService.parseCoordinates(this.coordinates);
+            if (coordinates) {
+              this.latitude = coordinates.latitude.toString();
+              this.longitude = coordinates.longitude.toString();
+              resolve(1);
+            } else {
+              reject(1);
+            }
+          } catch (e) {
+            reject(1);
+          }
         }
       });
     });
@@ -96,7 +138,7 @@ export class GooglemapsComponent implements OnInit {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       center: new google.maps.LatLng(
         Number(this.latitude),
-        Number(this.longitude)
+        Number(this.longitude),
       ),
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -106,7 +148,7 @@ export class GooglemapsComponent implements OnInit {
     new google.maps.Marker({
       position: new google.maps.LatLng(
         Number(this.latitude),
-        Number(this.longitude)
+        Number(this.longitude),
       ),
       map: this.map,
     });

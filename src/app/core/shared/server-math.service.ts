@@ -1,30 +1,41 @@
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject, Subject } from 'rxjs';
-import { MathJaxConfig, MathService } from './math.service';
+import {
+  BehaviorSubject,
+  Observable,
+  Subject,
+} from 'rxjs';
+
+import {
+  MathJaxConfig,
+  MathService,
+} from './math.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
+/**
+ * Provide the MathService for SSR
+ */
 export class ServerMathService extends MathService {
 
-  protected signal: Subject<boolean>;
+  protected isReady$: Subject<boolean>;
 
   protected mathJaxOptions = {};
 
   protected mathJax: MathJaxConfig = {
     source: '',
-    id: ''
+    id: '',
   };
   protected mathJaxFallback: MathJaxConfig = {
     source: '',
-    id: ''
+    id: '',
   };
 
   constructor() {
     super();
 
-    this.signal = new ReplaySubject<boolean>();
-    this.signal.next(true);
+    this.isReady$ = new BehaviorSubject<boolean>(false);
+    this.isReady$.next(true);
   }
 
   protected async registerMathJaxAsync(config: MathJaxConfig): Promise<any> {
@@ -32,10 +43,10 @@ export class ServerMathService extends MathService {
   }
 
   ready(): Observable<boolean> {
-    return this.signal;
+    return this.isReady$;
   }
 
   render(element: HTMLElement) {
-    return;
+    return Promise.resolve();
   }
 }

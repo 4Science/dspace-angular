@@ -1,12 +1,26 @@
-import { Component, Input, Renderer2 } from '@angular/core';
+import {
+  NgFor,
+  NgIf,
+} from '@angular/common';
+import {
+  Component,
+  Input,
+} from '@angular/core';
 
 import { CrisLayoutTab } from '../../core/layout/models/tab.model';
 import { Item } from '../../core/shared/item.model';
+import { CrisLayoutBoxContainerComponent } from './cris-layout-box-container/cris-layout-box-container.component';
 
 @Component({
   selector: 'ds-cris-layout-matrix',
   templateUrl: './cris-layout-matrix.component.html',
-  styleUrls: ['./cris-layout-matrix.component.scss']
+  styleUrls: ['./cris-layout-matrix.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    NgFor,
+    CrisLayoutBoxContainerComponent,
+  ],
 })
 export class CrisLayoutMatrixComponent {
 
@@ -29,9 +43,6 @@ export class CrisLayoutMatrixComponent {
    * A boolean representing if to use an internal padding for the cells
    */
   @Input() showCellPadding = true;
-
-  constructor(private renderer: Renderer2) {
-  }
 
   /**
    * Check if style contains 'col' or 'col-x'

@@ -1,4 +1,8 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+} from '@angular/core';
+
 import { ThemedComponent } from '../../theme-support/themed.component';
 import { LinkSliderComponent } from './link-slider.component';
 
@@ -6,9 +10,11 @@ import { LinkSliderComponent } from './link-slider.component';
  * Themed wrapper for LinkSliderComponent
  */
 @Component({
-  selector: 'ds-themed-link-slider',
+  selector: 'ds-link-slider',
   styleUrls: [],
   templateUrl: './../../theme-support/themed.component.html',
+  standalone: true,
+  imports: [LinkSliderComponent],
 })
 export class ThemedLinkSliderComponent extends ThemedComponent<LinkSliderComponent> {
 
