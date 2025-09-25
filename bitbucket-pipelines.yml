@@ -164,8 +164,8 @@ definitions:
           - git clone https://x-token-auth:${DSPACE_VALUES_ACCESS_TOKEN}@${DSPACE_VALUES_REPO}
           - cd dspace-values
           - '[ -f "dev/${BRANCH_FILE}" ] && sed -i "/^angular:/,/^[^ ]/s/\(tag: \).*/\1${BRANCH_NAME}-${HASH_COMMIT}/" "dev/${BRANCH_FILE}"'
-          - git config --global user.email "ci@4science.com"
-          - git config --global user.name "CI Bot"
+          - git config --global user.email "${BB_EMAIL}"
+          - git config --global user.name "${BB_USER}"
           - git commit -am "Update TAG with ${BRANCH_NAME}-${HASH_COMMIT}"
           - git push
 
