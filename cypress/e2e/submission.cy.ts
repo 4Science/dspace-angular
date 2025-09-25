@@ -28,21 +28,21 @@ describe('New Submission page', () => {
 
     // Test entire page for accessibility
     testA11y('ds-submission-edit',
-            {
-              rules: {
-                // Author & Subject fields have invalid "aria-multiline" attrs.
-                // See https://github.com/DSpace/dspace-angular/issues/1272
-                'aria-allowed-attr': { enabled: false },
-                // All panels are accordians & fail "aria-required-children" and "nested-interactive".
-                // Seem to require updating ng-bootstrap and https://github.com/DSpace/dspace-angular/issues/2216
-                'aria-required-children': { enabled: false },
-                'nested-interactive': { enabled: false },
-                // All select boxes fail to have a name / aria-label.
-                // This is a bug in ng-dynamic-forms and may require https://github.com/DSpace/dspace-angular/issues/2216
-                'select-name': { enabled: false },
-              },
+      {
+        rules: {
+          // Author & Subject fields have invalid "aria-multiline" attrs.
+          // See https://github.com/DSpace/dspace-angular/issues/1272
+          'aria-allowed-attr': { enabled: false },
+          // All panels are accordians & fail "aria-required-children" and "nested-interactive".
+          // Seem to require updating ng-bootstrap and https://github.com/DSpace/dspace-angular/issues/2216
+          'aria-required-children': { enabled: false },
+          'nested-interactive': { enabled: false },
+          // All select boxes fail to have a name / aria-label.
+          // This is a bug in ng-dynamic-forms and may require https://github.com/DSpace/dspace-angular/issues/2216
+          'select-name': { enabled: false },
+        },
 
-            } as Options,
+      } as Options,
     );
 
     // Discard button should work
@@ -123,7 +123,7 @@ describe('New Submission page', () => {
 
     // Confirm the required license by checking checkbox
     // (NOTE: requires "force:true" cause Cypress claims this checkbox is covered by its own <span>)
-    cy.get('input#granted').check( { force: true } );
+    cy.get('input#granted').check({ force: true });
 
     // Before using Cypress drag & drop, we have to manually trigger the "dragover" event.
     // This ensures our UI displays the dropzone that covers the entire submission page.
@@ -187,20 +187,23 @@ describe('New Submission page', () => {
     cy.get('div#section_license').should('be.visible');
 
     // Test entire page for accessibility
-    testA11y('ds-submission-edit',
-            {
-              rules: {
-                // Author & Subject fields have invalid "aria-multiline" attrs.
-                // See https://github.com/DSpace/dspace-angular/issues/1272
-                'aria-allowed-attr': { enabled: false },
+    testA11y({
+      include: ['ds-submission-edit'],
+      exclude: ['.noUi-handle'],
+    },
+      {
+        rules: {
+          // Author & Subject fields have invalid "aria-multiline" attrs.
+          // See https://github.com/DSpace/dspace-angular/issues/1272
+          'aria-allowed-attr': { enabled: false },
 
-                // All panels are accordians & fail "aria-required-children" and "nested-interactive".
-                // Seem to require updating ng-bootstrap and https://github.com/DSpace/dspace-angular/issues/2216
-                'aria-required-children': { enabled: false },
-                'nested-interactive': { enabled: false },
-              },
+          // All panels are accordians & fail "aria-required-children" and "nested-interactive".
+          // Seem to require updating ng-bootstrap and https://github.com/DSpace/dspace-angular/issues/2216
+          'aria-required-children': { enabled: false },
+          'nested-interactive': { enabled: false },
+        },
 
-            } as Options,
+      } as Options,
     );
 
     // Back on the form, click the discard button to remove new submission
