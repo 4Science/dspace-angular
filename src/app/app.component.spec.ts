@@ -71,6 +71,7 @@ const initialState = {
 };
 
 const itemPageUrl = '/entities/publication/3b6ef8e8-15a1-4607-abf8-2a6fbd572346';
+const itemPageCustomUrl = '/entities/publication/aCustomUrl';
 
 export function getMockLocaleService(): LocaleService {
   return jasmine.createSpyObj('LocaleService', {
@@ -201,6 +202,14 @@ describe('App component', () => {
     it('should show loading for item page administrative edit', fakeAsync(() => {
       routeServiceMock.getCurrentUrl.and.returnValue(of(itemPageUrl));
       routerEventsObs.next(new NavigationStart(2, itemPageUrl + '/edit'));
+      fixture.detectChanges();
+      tick();
+      expect(comp.isRouteLoading$.value).toBeTrue();
+    }));
+
+    it('should show loading for item page administrative edit if custom url is used', fakeAsync(() => {
+      routeServiceMock.getCurrentUrl.and.returnValue(of(itemPageCustomUrl));
+      routerEventsObs.next(new NavigationStart(2, itemPageCustomUrl + '/edit'));
       fixture.detectChanges();
       tick();
       expect(comp.isRouteLoading$.value).toBeTrue();

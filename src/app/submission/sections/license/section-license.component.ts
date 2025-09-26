@@ -15,7 +15,10 @@ import {
   DynamicFormControlModel,
   DynamicFormLayout,
 } from '@ng-dynamic-forms/core';
-import { TranslateService } from '@ngx-translate/core';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 import {
   Observable,
   Subscription,
@@ -69,6 +72,7 @@ import {
     FormComponent,
     NgIf,
     AsyncPipe,
+    TranslateModule,
   ],
   standalone: true,
 })

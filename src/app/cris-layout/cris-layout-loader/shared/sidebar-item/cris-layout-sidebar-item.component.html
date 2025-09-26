@@ -1,4 +1,4 @@
-<li class="sidebar-section h-100" [ngClass]="{ 'active' : !!tab && !!activeTab && (tab.isActive || tab.id === activeTab.id), 'expanded': expanded, 'vertical': layout === 'vertical', 'horizontal': layout === 'horizontal' }">
+<div class="sidebar-section h-100" [ngClass]="{ 'active' : !!tab && !!activeTab && (tab.isActive || tab.id === activeTab.id), 'expanded': expanded, 'vertical': layout === 'vertical', 'horizontal': layout === 'horizontal' }">
     <div class="icon-wrapper" *ngIf="!tab.children || tab.children.length === 0 ">
         <a class="nav-item shortcut-icon"
            href="javascript:void(0);"
@@ -35,4 +35,4 @@
             </li>
         </ul>
     </div>
-</li>
+</div>
