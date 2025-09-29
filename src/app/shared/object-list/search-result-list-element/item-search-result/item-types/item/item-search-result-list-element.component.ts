@@ -166,4 +166,32 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
     this.klaroService.showSettings();
   }
 
+  /**
+   * Get the first part of a delimited metadata value (before '###')
+   * This provides better error handling and caching than template splitting
+   */
+  getDelimitedMetadataValue(metadataKey: string, delimiter: string = '###'): string | null {
+    const value = this.firstMetadataValue(metadataKey);
+    if (!value) {
+      return null;
+    }
+
+    const parts = value.split(delimiter);
+    return parts.length > 0 ? parts[0].trim() : null;
+  }
+
+  /**
+   * Get root fond metadata value (first part before ###)
+   */
+  get rootFondValue(): string | null {
+    return this.getDelimitedMetadataValue('cris.virtual.rootFond');
+  }
+
+  /**
+   * Get root journal fond metadata value (first part before ###)
+   */
+  get rootJournalFondValue(): string | null {
+    return this.getDelimitedMetadataValue('cris.virtual.rootJournalFond');
+  }
+
 }
