@@ -60,6 +60,18 @@
               <div [innerHTML]="firstMetadataValue('dc.description.abstract')"></div>
             </ds-truncatable-part>
           </div>
+          <div
+            *ngIf="rootFondValue"
+            class="d-flex flex-row item-list-rootfond"
+          >
+            <div [innerHTML]="rootFondValue"></div>
+          </div>
+          <div
+            *ngIf="rootJournalFondValue"
+            class="d-flex flex-row item-list-rootjournalfond"
+          >
+            <div [innerHTML]="rootJournalFondValue"></div>
+          </div>
           <ds-additional-metadata [object]="dso"></ds-additional-metadata>
         </ds-truncatable>
         <div *ngIf="fullTextHighlights.length" class="d-flex flex-row item-list-highlights p-3 border-bottom">
