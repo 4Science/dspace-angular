@@ -224,7 +224,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   private isAdministrativeEditItemPageRoute(nextUrl: string, currentUrl: string): boolean {
-    const editPageRegEx = /\/(entities\/[^\/]+|items)\/[0-9a-f-]{36}\/edit(?:\/.*)?$/;
+    const editPageRegEx = /\/(entities\/[^/]+|items)\/[^/]+\/edit(?:\/.*)?$/;
     return editPageRegEx.test(nextUrl) && !editPageRegEx.test(currentUrl);
   }
 
