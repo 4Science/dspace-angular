@@ -25,7 +25,7 @@ import {
 } from 'rxjs';
 import {
   catchError,
-  shareReplay,
+  share,
   switchMap,
   take,
 } from 'rxjs/operators';
@@ -107,7 +107,7 @@ export class RequestCorrectionMenuComponent extends ContextMenuEntryComponent im
   ngOnInit(): void {
     this.canCreateCorrection$ = this.notificationService.claimedProfile.pipe(
       switchMap(() => this.canCreateCorrection(false)),
-      shareReplay(1),
+      share(),
     );
   }
 
