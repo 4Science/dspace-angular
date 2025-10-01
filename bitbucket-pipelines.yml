@@ -218,9 +218,13 @@ definitions:
         name: Find and Invalidate CloudFront Cache
         image: amazon/aws-cli
         script:
-          - aws configure set aws_access_key_id $AWS_ACCESS_CF_KEY_ID
-          - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_CF_KEY
-          - aws configure set default.region us-east-1
+          #    - aws configure set aws_access_key_id $AWS_ACCESS_CF_KEY_ID
+          #    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_CF_KEY
+          #    - aws configure set default.region us-east-1
+          - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_CF_KEY_ID
+          - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_CF_KEY
+          - export AWS_DEFAULT_REGION=$AWS_REGION
+          - aws sts get-caller-identity
           - export CLOUDFRONT_NAME=$(echo "$BITBUCKET_BRANCH" | awk -F'/' '{if(NF==1)val=$1;else if(NF==2)val=$2;else if(NF==3)val=$2;else val=$3;gsub(/_/, "-", val);print tolower(val)}')
           - aws cloudfront list-distributions
           - export CLOUDFRONT_DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Comment=='dev--${CLOUDFRONT_NAME}'].Id" --output text)
