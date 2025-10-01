@@ -215,7 +215,7 @@ definitions:
           - git push
 
     - step: &find-and-invalidate-cloudfront-dev
-        name: Find and Invalidate CloudFront Cache
+        name: Invalidate CloudFront Dev Cache
         image: amazon/aws-cli
         script:
           - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_CF_KEY_ID
@@ -226,7 +226,7 @@ definitions:
           - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
 
     - step: &find-and-invalidate-cloudfront-staging
-        name: Find and Invalidate CloudFront Cache
+        name: Invalidate CloudFront Staging Cache
         image: amazon/aws-cli
         script:
           - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_CF_KEY_ID
