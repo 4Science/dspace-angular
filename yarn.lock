@@ -9431,6 +9431,13 @@ markdown-it@^13.0.2:
     mdurl "^1.0.1"
     uc.micro "^1.0.5"
 
+material-ui-image@^3.3.2:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/material-ui-image/-/material-ui-image-3.3.2.tgz#984b9cea9fcea85a29ab603213d3c825c0692357"
+  integrity sha512-WE5QE0Rjdx9jPKuI0LWI7s8VQ9cifPIXObu8AUCRcidXGV3NqPI9C8c9A/C0MofKpkZ3buG8+IT9N7GgSmxXeg==
+  dependencies:
+    prop-types "^15.5.8"
+
 math-intrinsics@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/math-intrinsics/-/math-intrinsics-1.1.0.tgz#a0dd74be81e2aa5c2f27e65ce283605ee4e2b7f9"
@@ -9697,6 +9704,13 @@ mirador-dl-plugin@^0.13.0:
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/mirador-dl-plugin/-/mirador-dl-plugin-0.13.0.tgz#9a6cb0fa3c566a2a1ebe1ad9caa1ff590ff22689"
   integrity sha512-I/6etIvpTtO1zgjxx2uEUFoyB9NxQ43JWg8CMkKmZqblW7AAeFqRn1/zUlQH7N8KFZft9Rah6D8qxtuNAo9jmA==
+
+mirador-imagecropper@^0.1.9:
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/mirador-imagecropper/-/mirador-imagecropper-0.1.9.tgz#02e5b63e1d72d13f387df7d240af9f00b36b06f8"
+  integrity sha512-+O72EDmKNLMrj280Mh5nDyMbV9ac/q7CZ1+0uBcC7rGE4jtC3piuYGtfSUTBHN7Nd4PWWjbPXueXaDgJObQfpg==
+  dependencies:
+    material-ui-image "^3.3.2"
 
 mirador-share-plugin@^0.16.0:
   version "0.16.0"
@@ -11036,7 +11050,7 @@ promise-retry@^2.0.1:
     err-code "^2.0.2"
     retry "^0.12.0"
 
-prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
