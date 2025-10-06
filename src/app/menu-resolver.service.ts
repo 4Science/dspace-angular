@@ -854,6 +854,18 @@ export class MenuResolverService  {
         shouldPersistOnRouteChange: true,
       });
       this.menuService.addSection(MenuID.ADMIN, {
+        id: 'import_marc_xml',
+        parentID: 'import',
+        active: false,
+        visible: true,
+        model: {
+          type: MenuItemType.LINK,
+          text: 'menu.section.import_marc_xml',
+          link: '/admin/marc-import',
+        } as LinkMenuItemModel,
+        shouldPersistOnRouteChange: true,
+      });
+      this.menuService.addSection(MenuID.ADMIN, {
         id: 'import_mag',
         parentID: 'import',
         active: false,

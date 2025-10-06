@@ -1,0 +1,25 @@
+<div class="container">
+  <h2 id="header">{{'admin.marc-import.page.header' | translate}}</h2>
+  <p>{{'admin.marc-import.page.help' | translate}}</p>
+  <p *ngIf="dso">
+    {{'admin.marc-import.page.selected' | translate}} <b>{{getDspaceObjectName()}}</b>&nbsp;
+    <a href="javascript:void(0)" (click)="removeDspaceObject()">{{'admin.marc-import.page.remove' | translate}}</a>
+  </p>
+  <p>
+    <button class="btn btn-primary" (click)="this.selectCollection();">{{'admin.metadata-import.page.button.select-collection' | translate}}</button>
+  </p>
+
+  <ds-file-dropzone-no-uploader
+    data-test="file-dropzone"
+    (onFileAdded)="setFile($event)"
+    [dropMessageLabel]="'admin.marc-import.page.dropMsg'"
+    [dropMessageLabelReplacement]="'admin.marc-import.page.dropMsgReplace'">
+  </ds-file-dropzone-no-uploader>
+
+  <div class="space-children-mr">
+    <button class="btn btn-secondary" id="backButton"
+            (click)="this.onReturn();">{{'admin.marc-import.page.button.return' | translate}}</button>
+    <button class="btn btn-primary" id="proceedButton"
+            (click)="this.import();">{{'admin.marc-import.page.button.proceed' | translate}}</button>
+  </div>
+</div>

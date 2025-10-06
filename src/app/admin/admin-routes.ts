@@ -18,6 +18,7 @@ import {
 import { ThemedAdminSearchPageComponent } from './admin-search-page/themed-admin-search-page.component';
 import { ThemedAdminWorkflowPageComponent } from './admin-workflow-page/themed-admin-workflow-page.component';
 import { EditCmsMetadataComponent } from './edit-cms-metadata/edit-cms-metadata.component';
+import { MarcImportPageComponent } from "./admin-marc-import/marc-import-page.component";
 
 export const ROUTES: Route[] = [
   {
@@ -72,6 +73,12 @@ export const ROUTES: Route[] = [
     resolve: { breadcrumb: i18nBreadcrumbResolver },
     component: MagImportPageComponent,
     data: { title: 'admin.mag-import.title', breadcrumbKey: 'admin.mag-import' },
+  },
+  {
+    path: 'marc-import',
+    resolve: { breadcrumb: i18nBreadcrumbResolver },
+    component: MarcImportPageComponent,
+    data: { title: 'admin.marc-import.title', breadcrumbKey: 'admin.marc-import' },
   },
   {
     path: 'system-wide-alert',
