@@ -8,6 +8,7 @@ import { AdminEditUserAgreementComponent } from './admin-edit-user-agreement/adm
 import { BatchImportPageComponent } from './admin-import-batch-page/batch-import-page.component';
 import { ThemedMetadataImportPageComponent } from './admin-import-metadata-page/themed-metadata-import-page.component';
 import { MagImportPageComponent } from './admin-mag-import/mag-import-page.component';
+import { MarcImportPageComponent } from './admin-marc-import/marc-import-page.component';
 import {
   LDN_PATH,
   NOTIFICATIONS_MODULE_PATH,
@@ -18,7 +19,6 @@ import {
 import { ThemedAdminSearchPageComponent } from './admin-search-page/themed-admin-search-page.component';
 import { ThemedAdminWorkflowPageComponent } from './admin-workflow-page/themed-admin-workflow-page.component';
 import { EditCmsMetadataComponent } from './edit-cms-metadata/edit-cms-metadata.component';
-import { MarcImportPageComponent } from "./admin-marc-import/marc-import-page.component";
 
 export const ROUTES: Route[] = [
   {

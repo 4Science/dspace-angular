@@ -24,9 +24,7 @@ import { getProcessDetailRoute } from '../../process-page/process-page-routing.p
 import { Process } from '../../process-page/processes/process.model';
 import { ProcessParameter } from '../../process-page/processes/process-parameter.model';
 import { ImportBatchSelectorComponent } from '../../shared/dso-selector/modal-wrappers/import-batch-selector/import-batch-selector.component';
-import {
-  isNotEmpty,
-} from '../../shared/empty.util';
+import { isNotEmpty } from '../../shared/empty.util';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import {
   SwitchColor,
@@ -98,7 +96,7 @@ export class MarcImportPageComponent {
    */
   public import() {
     if (this.fileObject == null) {
-        this.notificationsService.error(this.translate.get('admin.metadata-import.page.error.addFile'));
+      this.notificationsService.error(this.translate.get('admin.metadata-import.page.error.addFile'));
     } else {
       const parameterValues = new Array<ProcessParameter>();
       parameterValues.push(Object.assign(new ProcessParameter(), { name: '--collection-uuid', value: this.dso.uuid }));
