@@ -955,7 +955,11 @@
 
   "admin.mag-import.page.selected": "Selected Collection: ",
 
+  "admin.marc-import.page.selected": "Selected Collection: ",
+
   "admin.mag-import.page.remove": "Remove",
+
+  "admin.marc-import.page.remove": "Remove",
 
   "admin.mag-import.page.toggle.upload": "Upload",
 
@@ -968,6 +972,8 @@
   "admin.marc-import.page.dropMsg": "Drop a XML to import",
 
   "admin.mag-import.page.dropMsgReplace": "Drop to replace the batch ZIP to import",
+
+  "admin.marc-import.page.dropMsgReplace": "Drop to replace the MARC XML to import",
 
   "admin.mag-import.page.urlMsg": "Insert the batch ZIP url to import",
 
@@ -5150,7 +5156,7 @@
 
   "menu.section.import_mag": "MAG Import",
 
-  "menu.section.import_marc_xml": "MARC XML Import",
+  "menu.section.import_marc_xml": "MARC XML",
 
   "menu.section.import_metadata": "Metadata",
 
