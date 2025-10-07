@@ -79,7 +79,11 @@ export class MarkdownEditorComponent {
    */
   updateContent(content: ContentChange) {
     const sanitizedContent = this.sanitizer.sanitize(SecurityContext.HTML, content.html);
-    const normalizedContent = sanitizedContent?.replace(/&#160;/g, ' ');
+    let normalizedContent = sanitizedContent?.replace(/&#160;/g, ' ');
+    // Remove outer <p>...</p> if present as quill wraps around p by default
+    if (normalizedContent) {
+      normalizedContent = normalizedContent.replace(/^<p>([\s\S]*)<\/p>$/i, '$1');
+    }
     this.editValueChange.emit(normalizedContent);
   }
 }
