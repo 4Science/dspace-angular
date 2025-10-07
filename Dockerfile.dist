@@ -21,7 +21,7 @@ WORKDIR /app
 RUN yarn build:prod
 
 # ---- Production image ----
-FROM ${DOCKER_REGISTRY:-docker.io}/node:${NODE_VERSION-22}-alpine AS prod
+FROM docker.io/node:${NODE_VERSION-22}-alpine AS prod
 
 # Install pm2 globally and clean npm cache
 RUN npm install --global pm2 && npm cache clean --force
