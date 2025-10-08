@@ -56,6 +56,11 @@ export class MarcImportPageComponent {
    */
   dso: DSpaceObject = null;
 
+  /**
+   * The validate only flag
+   */
+  validateOnly = true;
+
   switchOptions: SwitchOption[] = [
     { value: 'upload', icon: 'fa fa-upload', label: 'admin.marc-import.page.toggle.upload', iconColor: SwitchColor.Primary },
   ];
@@ -99,6 +104,9 @@ export class MarcImportPageComponent {
       this.notificationsService.error(this.translate.get('admin.metadata-import.page.error.addFile'));
     } else {
       const parameterValues = new Array<ProcessParameter>();
+      if (this.validateOnly) {
+        parameterValues.push(Object.assign(new ProcessParameter(), { name: '--validate', value: true }));
+      }
       parameterValues.push(Object.assign(new ProcessParameter(), { name: '--collection-uuid', value: this.dso.uuid }));
       parameterValues.push(Object.assign(new ProcessParameter(), { name: '--file', value: this.fileObject.name }));
 

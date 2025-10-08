@@ -3,11 +3,19 @@
   <p>{{'admin.marc-import.page.help' | translate}}</p>
   <p *ngIf="dso">
     {{'admin.marc-import.page.selected' | translate}} <b>{{getDspaceObjectName()}}</b>&nbsp;
-    <a href="javascript:void(0)" (click)="removeDspaceObject()">{{'admin.marc-import.page.remove' | translate}}</a>
+    <button class="btn btn-outline-danger" (click)="this.removeDspaceObject();">
+      <i class="fas fa-trash"></i> {{'admin.marc-import.page.remove' | translate}}
+    </button>
   </p>
   <p>
     <button class="btn btn-primary" (click)="this.selectCollection();">{{'admin.metadata-import.page.button.select-collection' | translate}}</button>
   </p>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="validateOnly" [(ngModel)]="validateOnly">
+    <label class="form-check-label" for="validateOnly">
+      {{'admin.metadata-import.page.validateOnly' | translate}}
+    </label>
+  </div>
 
   <ds-file-dropzone-no-uploader
     data-test="file-dropzone"
