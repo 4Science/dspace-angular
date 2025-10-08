@@ -20,6 +20,25 @@ permissions:
   packages: write # to write images to GitHub Container Registry (GHCR)
 
 jobs:
+
+  ####################################################
+  # Build/Push the '4science/dspace-cris-dependencies' image.
+  # This image is used by all other DSpace build jobs.
+  ####################################################
+  dspace-cris-angular-dependencies:
+    # Ensure this job never runs on forked repos. It's only executed for '4science/dspace'
+    if: github.repository == '4science/dspace-angular'
+    # Use the reusable-docker-build.yml script from DSpace/DSpace repo to build our Docker image
+    uses: 4science/DSpace/.github/workflows/reusable-docker-build.yml@dspace-cris-2024_02_x
+    with:
+      build_id: dspace-cris-angular-dependencies
+      image_name: 4science/dspace-cris-angular-dependencies
+      dockerfile_path: ./Dockerfile.dependencies
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+
+
   #############################################################
   # Build/Push the '4science/dspace-cris-angular' image
   #############################################################
@@ -28,6 +47,7 @@ jobs:
     if: github.repository == '4science/dspace-angular'
     # Use the reusable-docker-build.yml script from DSpace/DSpace repo to build our Docker image
     uses: 4science/DSpace/.github/workflows/reusable-docker-build.yml@dspace-cris-2024_02_x
+    needs: dspace-cris-angular-dependencies
     with:
       build_id: dspace-cris-angular-dev
       image_name: 4science/dspace-cris-angular
@@ -44,6 +64,8 @@ jobs:
     if: github.repository == '4science/dspace-angular'
     # Use the reusable-docker-build.yml script from DSpace/DSpace repo to build our Docker image
     uses: 4science/DSpace/.github/workflows/reusable-docker-build.yml@dspace-cris-2024_02_x
+    # Must run after 'dspace-dependencies' job above
+    needs: dspace-cris-angular-dependencies
     with:
       build_id: dspace-cris-angular-dist
       image_name: 4science/dspace-cris-angular
