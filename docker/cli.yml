@@ -14,7 +14,7 @@
 # Therefore, it should be kept in sync with that file
 networks:
   # Default to using network named 'dspacenet' from docker-compose-rest.yml.
-  # Its full name will be prepended with the project name (e.g. "-p d8" means it will be named "d8_dspacenet")
+  # Its full name will be prepended with the project name (e.g. "-p dcris24" means it will be named "dcris24_dspacenet")
   # If COMPOSITE_PROJECT_NAME is missing, default value will be "docker" (name of folder this file is in)
   default:
     name: ${COMPOSE_PROJECT_NAME:-docker}_dspacenet

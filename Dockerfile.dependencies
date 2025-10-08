@@ -6,7 +6,7 @@ ARG NODE_VERSION=22
 ARG DSPACE_VERSION=dspace-cris-2024_02_x
 ARG DOCKER_REGISTRY=docker.io
 
-FROM ${DOCKER_REGISTRY:-docker.io}/node:${NODE_VERSION-22}-alpine AS dependencies
+FROM docker.io/node:${NODE_VERSION-22}-alpine AS dependencies
 
 # Install build dependencies
 RUN apk add --no-cache python3 make g++
