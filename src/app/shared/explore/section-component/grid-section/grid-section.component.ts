@@ -53,7 +53,10 @@ import {
 } from '../../../../core/shared/operators';
 import { SearchService } from '../../../../core/shared/search/search.service';
 import { Site } from '../../../../core/shared/site.model';
-import { hasValue } from '../../../../shared/empty.util';
+import {
+  hasValue,
+  isEmpty,
+} from '../../../../shared/empty.util';
 import { SearchResult } from '../../../../shared/search/models/search-result.model';
 import { followLink } from '../../../../shared/utils/follow-link-config.model';
 import { PaginationComponentOptions } from '../../../pagination/pagination-component-options.model';
@@ -159,7 +162,10 @@ export class GridSectionComponent implements OnInit {
     this.maincontentTitle = this.maincontentTitle ?? this.translateService.instant('grid.component.title');
     this.maincontentSubtitle = this.maincontentSubtitle ?? this.translateService.instant('grid.component.subtitle');
     this.maincontentAbstract = this.maincontentAbstract ?? this.translateService.instant('grid.component.abstract');
-    this.maincontentLink = this.maincontentLink ?? this.translateService.instant('grid.component.link');
+
+    if (isEmpty(this.maincontentLink)) {
+      this.maincontentLink = this.gridSection.mainContentLink ?? this.translateService.instant('grid.component.link');
+    }
   }
 
   private getSearchResults() {
