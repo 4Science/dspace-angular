@@ -2,6 +2,7 @@ import {
   AsyncPipe,
   NgForOf,
   NgIf,
+  SlicePipe,
 } from '@angular/common';
 import {
   ChangeDetectorRef,
@@ -81,6 +82,7 @@ export interface AccessConditionGroupsMapEntry {
     TranslateModule,
     NgForOf,
     AsyncPipe,
+    SlicePipe,
   ],
   standalone: true,
 })
@@ -129,6 +131,28 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
    * @type {number}
    */
   public collectionPolicyType: number;
+
+  /**
+   * Represents the current page number in the pagination file list.
+   */
+  public currentPage = 1;
+
+  /**
+   * The number of items to be loaded in a paginated list.
+   *
+   * Default value is 5.
+   */
+  public filesPerPage = 5;
+
+  /**
+   * The number of items to be displayed in a paginated list.
+   */
+  public shownFiles = this.currentPage * this.filesPerPage;
+
+  /**
+   * A boolean flag indicating whether the "Load More" functionality should be shown.
+   */
+  public showLoadMore = false;
 
   /**
    * The configuration for the bitstream's metadata form
@@ -201,7 +225,6 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
           map((remoteData: RemoteData<SubmissionFormsModel>) => remoteData.payload),
         ),
       ));
-
     this.subs.push(
       this.submissionService.getSubmissionObject(this.submissionId).pipe(
         filter((submissionObject: SubmissionObjectEntry) => isNotUndefined(submissionObject) && !submissionObject.isLoading),
@@ -248,6 +271,7 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
         this.primaryBitstreamUUID = primary;
         this.fileList = files;
         this.fileNames = Array.from(files, file => this.getFileName(configMetadataForm, file));
+        this.showLoadMore = (this.fileList.length > this.filesPerPage);
         this.changeDetectorRef.detectChanges();
       }),
     );
@@ -309,4 +333,11 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
       .forEach((subscription) => subscription.unsubscribe());
   }
 
+  /**
+   * Updates the current page by incrementing shown files.
+   */
+  updatePage() {
+    this.shownFiles = this.filesPerPage * ++this.currentPage;
+    this.showLoadMore = this.shownFiles < this.fileList.length;
+  }
 }

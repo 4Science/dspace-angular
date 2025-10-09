@@ -10,6 +10,7 @@ import {
   TestBed,
   waitForAsync,
 } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 import { cold } from 'jasmine-marbles';
 import { of as observableOf } from 'rxjs';
@@ -49,6 +50,7 @@ import { SubmissionService } from '../../submission.service';
 import { SectionDataObject } from '../models/section-data.model';
 import { SectionsService } from '../sections.service';
 import { SectionsType } from '../sections-type';
+import { ThemedSubmissionSectionUploadFileComponent } from './file/themed-section-upload-file.component';
 import { SubmissionSectionUploadComponent } from './section-upload.component';
 import { SectionUploadService } from './section-upload.service';
 
@@ -82,6 +84,7 @@ function getMockResourcePolicyService(): ResourcePolicyDataService {
 }
 
 let sectionObject: SectionDataObject;
+
 
 describe('SubmissionSectionUploadComponent test suite', () => {
 
@@ -183,6 +186,7 @@ describe('SubmissionSectionUploadComponent test suite', () => {
         TranslateModule.forRoot(),
         SubmissionSectionUploadComponent,
         TestComponent,
+        ThemedSubmissionSectionUploadFileComponent,
       ],
       providers: [
         { provide: CollectionDataService, useValue: collectionDataService },
@@ -203,7 +207,10 @@ describe('SubmissionSectionUploadComponent test suite', () => {
     })
       .overrideComponent(SubmissionSectionUploadComponent, {
         remove: {
-          imports: [AlertComponent],
+          imports: [
+            AlertComponent,
+            ThemedSubmissionSectionUploadFileComponent,
+          ],
         },
       })
       .compileComponents().then();
@@ -382,6 +389,62 @@ describe('SubmissionSectionUploadComponent test suite', () => {
         c: true,
         d: true,
       }));
+    });
+  });
+
+  describe('test pagination', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(SubmissionSectionUploadComponent);
+      comp = fixture.componentInstance;
+      compAsAny = comp;
+      sectionsServiceStub = TestBed.inject(SectionsService as any);
+
+      const files = [];
+      for (let i = 0; i < 20; i++) {
+        files.push(  mockUploadFiles[0]  );
+      }
+      const submissionStateWithFiles: any = Object.assign({}, mockSubmissionState[mockSubmissionId], {
+        sections: {
+          data: {
+            files: [...files],
+          },
+        },
+      }) as any;
+      submissionServiceStub.getSubmissionObject.and.returnValue(observableOf(submissionStateWithFiles));
+
+      collectionDataService.findById.and.returnValue(createSuccessfulRemoteDataObject$(mockCollection));
+
+      resourcePolicyService.findByHref.and.returnValue(createSuccessfulRemoteDataObject$(mockDefaultAccessCondition));
+
+      uploadsConfigService.findByHref.and.returnValue(createSuccessfulRemoteDataObject$(Object.assign(new SubmissionUploadsModel(), mockUploadConfigResponse)));
+
+      groupService.findById.and.returnValues(
+        createSuccessfulRemoteDataObject$(Object.assign(new Group(), mockGroup)),
+        createSuccessfulRemoteDataObject$(Object.assign(new Group(), mockGroup)),
+      );
+
+      bitstreamService.getUploadedFileList.and.returnValue(observableOf(files));
+      bitstreamService.getUploadedFilesData.and.returnValue(observableOf({ primary: null, files }));
+
+      fixture.detectChanges();
+    });
+
+    it('should show only 5 files and load more button', () => {
+      const btn = fixture.debugElement.query(By.css('[data-test="load-more-btn"]'));
+      const files = fixture.debugElement.queryAll(By.css('[data-test="file-section"]'));
+      expect(comp.showLoadMore).toBeTrue();
+      expect(btn).toBeTruthy();
+      expect(files.length).toBe(5);
+    });
+
+    it('should add more files when clicking on load more button', () => {
+      const btn = fixture.debugElement.query(By.css('[data-test="load-more-btn"]'));
+      btn.nativeElement.click();
+      fixture.detectChanges();
+      const files = fixture.debugElement.queryAll(By.css('[data-test="file-section"]'));
+      expect(comp.showLoadMore).toBeTrue();
+      expect(btn).toBeTruthy();
+      expect(files.length).toBe(10);
     });
   });
 });
