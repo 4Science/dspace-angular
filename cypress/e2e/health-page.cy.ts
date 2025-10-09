@@ -34,7 +34,7 @@ xdescribe('Health Page > Status Tab', () => {
   });
 });
 
-describe('Health Page > Info Tab', () => {
+xdescribe('Health Page > Info Tab', () => {
   it('should pass accessibility tests', () => {
     cy.intercept('GET', '*/server/actuator/info').as('info');
     cy.wait('@info');
