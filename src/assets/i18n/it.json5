@@ -13269,6 +13269,9 @@
   // "submission.sections.upload.no-entry": "No",
   "submission.sections.upload.no-entry": "No",
 
+  // "submission.sections.upload.load-more": "Load more files",
+  "submission.sections.upload.load-more": "Carica altri file",
+
   // "submission.sections.upload.no-file-uploaded": "No file uploaded yet.",
   "submission.sections.upload.no-file-uploaded": "Nessun file ancora caricato.",
 
