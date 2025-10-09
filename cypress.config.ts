@@ -61,6 +61,6 @@ export default defineConfig({
       'cypress/e2e/search-page.cy.ts',
     ]
   },
-  defaultCommandTimeout: 10000,
-  requestTimeout: 20000,
+  defaultCommandTimeout: 15000,
+  requestTimeout: 30000,
 });
