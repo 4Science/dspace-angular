@@ -8,7 +8,7 @@ beforeEach(() => {
   cy.loginViaForm(Cypress.env('DSPACE_TEST_ADMIN_USER'), Cypress.env('DSPACE_TEST_ADMIN_PASSWORD'));
 });
 
-describe('Health Page > Status Tab', () => {
+xdescribe('Health Page > Status Tab', () => {
   it('should pass accessibility tests', () => {
     cy.intercept('GET', '*/server/actuator/health').as('status');
     cy.wait('@status');

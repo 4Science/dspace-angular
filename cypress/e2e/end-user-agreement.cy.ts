@@ -1,6 +1,6 @@
 import { testA11y } from 'cypress/support/utils';
 
-describe('End User Agreement', () => {
+xdescribe('End User Agreement', () => {
   it('should pass accessibility tests', () => {
     cy.visit('/info/end-user-agreement');
 

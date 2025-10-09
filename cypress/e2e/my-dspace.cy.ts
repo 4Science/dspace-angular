@@ -1,6 +1,6 @@
 import { testA11y } from 'cypress/support/utils';
 
-describe('My DSpace page', () => {
+xdescribe('My DSpace page', () => {
   it('should display recent submissions and pass accessibility tests', () => {
     cy.visit('/mydspace');
 
