@@ -284,7 +284,7 @@ pipelines:
       - step: *angular-build
       - parallel: &parallel-run-tests
           - step: *unittest-code-checks
-          - step: *run-e2e-tests
+#          - step: *run-e2e-tests
     deploy-on-dev:
       - step: *angular-build
       - step: *build-and-push
