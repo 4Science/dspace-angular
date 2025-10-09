@@ -18,8 +18,8 @@ definitions:
           - git config --global user.name "${BB_EMAIL}"
           - git clone https://x-token-auth:${E2ERUNNERS_ACCESS_TOKEN}@${E2E_VALUES_REPO}
           - cd e2erunners-values
-          - sed "s#HASH_COMMIT#${HASH_COMMIT}#g" TPL-cris-2024 > ${HASH_COMMIT}
-          - sed -i "s#BRANCH_NAME#${BRANCH_NAME}#g" TPL-cris-2024 ${HASH_COMMIT}
+          - sed "s#HASH_COMMIT#${HASH_COMMIT}#g" TPL-uxp-2024 > ${HASH_COMMIT}
+          - sed -i "s#BRANCH_NAME#${BRANCH_NAME}#g" TPL-uxp-2024 ${HASH_COMMIT}
           - git add ${HASH_COMMIT}
           - git commit -m "Add configuration for e2e-${HASH_COMMIT}" || echo "No changes to commit"
           - git push
@@ -44,8 +44,8 @@ definitions:
           - git config --global user.name "${BB_EMAIL}"
           - git clone https://x-token-auth:${E2ERUNNERS_ACCESS_TOKEN}@${E2E_VALUES_REPO}
           - cd e2erunners-values
-          - sed "s#HASH_COMMIT#${HASH_COMMIT}#g" TPL-cris-2024 > ${HASH_COMMIT}
-          - sed -i "s#BRANCH_NAME#${BRANCH_NAME}#g" TPL-cris-2024 ${HASH_COMMIT}
+          - sed "s#HASH_COMMIT#${HASH_COMMIT}#g" TPL-uxp-2024 > ${HASH_COMMIT}
+          - sed -i "s#BRANCH_NAME#${BRANCH_NAME}#g" TPL-uxp-2024 ${HASH_COMMIT}
           - git add ${HASH_COMMIT}
           - git commit -m "Add configuration for e2e-${HASH_COMMIT}" || echo "No changes to commit"
           - git push
