@@ -257,7 +257,7 @@ jobs:
 
       # Get a specific funding in our test data and verify that the <meta name="title"> tag includes
       # the name of the funding. If it does, then SSR is working.
-      - name: Verify SSR on a Journal Volume page
+      - name: Verify SSR on a Funding page
         run: |
           result=$(wget -O- -q http://127.0.0.1:4000/entities/funding/640d35ba-6172-44c0-9e11-bf5da417cdc8)
           echo "$result"
