@@ -243,7 +243,7 @@ jobs:
       # the name of the orgunit. If it does, then SSR is working.
       - name: Verify SSR on an OrgUnit page
         run: |
-          result=$(wget -O- -q http://127.0.0.1:4000/entities/orgunit/6d4abaee-eedb-458d-a29b-35db82037dfaf)
+          result=$(wget -O- -q http://127.0.0.1:4000/entities/orgunit/6d4abaee-eedb-458d-a29b-35db82037dfa)
           echo "$result"
           echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "4Science"
 
