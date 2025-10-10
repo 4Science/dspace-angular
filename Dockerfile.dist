@@ -1,31 +1,41 @@
+# syntax=docker/dockerfile:1.7-labs
+
 # This image will be published as dspace/dspace-angular:$DSPACE_VERSION-dist
-# See https://github.com/DSpace/dspace-angular/tree/main/docker for usage details
+# See https://github.com/4science/dspace-angular/tree/main/docker for usage details
 
 # Test build:
-# docker build -f Dockerfile.dist -t dspace/dspace-angular:dspace-8_x-dist .
+# docker build -f Dockerfile.dist -t 4science/dspace-angular:dspace-cris-2024_02_x-dist .
 
-FROM docker.io/node:18-alpine AS build
+# Angular 17 + Node 22 optimized Dockerfile
+ARG NODE_VERSION=22
+ARG DSPACE_VERSION=dspace-cris-2024_02_x
+ARG DOCKER_REGISTRY=docker.io
 
-# Ensure Python and other build tools are available
-# These are needed to install some node modules, especially on linux/arm64
-RUN apk add --update python3 make g++ && rm -rf /var/cache/apk/*
+FROM ${DOCKER_REGISTRY:-docker.io}/4science/dspace-cris-angular-dependencies:${DSPACE_VERSION:-dspace-cris-2024_02_x} AS build
+
+COPY . /app/
 
 WORKDIR /app
-COPY package.json yarn.lock ./
-RUN yarn install --network-timeout 300000
 
-ADD . /app/
+# Build Angular app
 RUN yarn build:prod
+RUN yarn build:mirador
 
-FROM node:18-alpine
-RUN npm install --global pm2
+# ---- Production image ----
+FROM docker.io/node:${NODE_VERSION-22}-alpine AS prod
 
-COPY --chown=node:node --from=build /app/dist /app/dist
-COPY --chown=node:node config /app/config
-COPY --chown=node:node docker/dspace-ui.json /app/dspace-ui.json
+# Install pm2 globally and clean npm cache
+RUN npm install --global pm2 && npm cache clean --force
 
 WORKDIR /app
+
+# Only copy built files and config
+COPY --chown=node:node --from=build /app/dist /app/dist
+COPY --chown=node:node --from=build /app/config /app/config
+COPY --chown=node:node --from=build /app/docker/dspace-ui.json /app/dspace-ui.json
+
 USER node
 ENV NODE_ENV=production
 EXPOSE 4000
-CMD pm2-runtime start dspace-ui.json --json
+
+CMD ["pm2-runtime", "start", "dspace-ui.json", "--json"]

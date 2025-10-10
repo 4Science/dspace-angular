@@ -4,6 +4,9 @@ beforeEach(() => {
 });
 
 it('should show loading component while saving', () => {
+  cy.intercept('**/sites/**canSubmit**').as('canSubmit');
+  cy.wait('@canSubmit');
+
   const title = 'Test Community Title';
   cy.get('#title').type(title);
 
