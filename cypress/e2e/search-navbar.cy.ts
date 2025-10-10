@@ -20,7 +20,7 @@ describe('Search from Navigation Bar', () => {
   it('should go to search page with correct query if submitted (from home)', () => {
     cy.visit('/');
     // This is the GET command that will actually run the search
-    cy.intercept('GET', '*/server/api/discover/search/objects*').as('search-results');
+    cy.intercept('GET', '**/server/api/discover/search/objects*').as('search-results');
     // Run the search
     page.fillOutQueryInNavBar(query);
     page.submitQueryByPressingEnter();
@@ -35,7 +35,7 @@ describe('Search from Navigation Bar', () => {
   it('should go to search page with correct query if submitted (from search)', () => {
     cy.visit('/search');
     // This is the GET command that will actually run the search
-    cy.intercept('GET', '*/server/api/discover/search/objects*').as('search-results');
+    cy.intercept('GET', '**/server/api/discover/search/objects*').as('search-results');
     // Run the search
     page.fillOutQueryInNavBar(query);
     page.submitQueryByPressingEnter();
@@ -50,7 +50,7 @@ describe('Search from Navigation Bar', () => {
   it('should allow user to also submit query by clicking icon', () => {
     cy.visit('/');
     // This is the GET command that will actually run the search
-    cy.intercept('GET', '*/server/api/discover/search/objects*').as('search-results');
+    cy.intercept('GET', '**/server/api/discover/search/objects*').as('search-results');
     // Run the search
     page.fillOutQueryInNavBar(query);
     page.submitQueryByPressingIcon();
