@@ -213,7 +213,7 @@ jobs:
         run: |
           result=$(wget -O- -q http://127.0.0.1:4000/collections/caf04bfa-b2f6-40d3-90d2-aa0b86d92f8d)
           echo "$result"
-          echo "$result" | grep -oE "<h1 [^>]*>[^><]*</h1>" | grep Publications
+          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "Publications"
 
       # Get a specific publication in our test data and verify that the <meta name="title"> tag includes
       # the title of this publication. If it does, then SSR is working.
