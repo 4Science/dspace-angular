@@ -27,7 +27,7 @@
       </tr>
       <tr *ngFor="let index of lastLimitedDataToBeRenderedMap?.keys();">
         <td *ngFor="let mdg of lastLimitedDataToBeRenderedMap.get(index)">
-          <ds-metadata-render class="w-100"
+          <ds-metadata-render class="w-100 auto-phrase"
                               [item]="item"
                               [field]="mdg.field"
                               [metadataValue]="mdg.value"></ds-metadata-render>

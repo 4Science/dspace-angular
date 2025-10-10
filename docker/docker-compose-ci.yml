@@ -33,7 +33,7 @@ services:
       # This allows us to generate statistics in e2e tests so that statistics pages can be tested thoroughly.
       solr__D__statistics__P__autoCommit: 'false'
       LOGGING_CONFIG: /dspace/config/log4j2-container.xml
-    image: "${DOCKER_REGISTRY:-docker.io}/${DOCKER_OWNER:-dspace}/dspace:${DSPACE_VER:-dspace-8_x-test}"
+    image: "${DOCKER_REGISTRY:-docker.io}/${DOCKER_OWNER:-4science}/dspace-cris:${DSPACE_VER:-dspace-cris-2024_02_x}-test"
     depends_on:
     - dspacedb
     networks:
@@ -53,20 +53,21 @@ services:
     - /bin/bash
     - '-c'
     - |
-      while (!</dev/tcp/dspacedb/5432) > /dev/null 2>&1; do sleep 1; done;
+      /dspace/bin/dspace database repair
+      /dspace/bin/dspace database migrate
       /dspace/bin/dspace database migrate ignored
-      java -jar /dspace/webapps/server-boot.jar --dspace.dir=/dspace
+      java -XX:+UseParallelGC -XX:MaxRAMPercentage=75 org.springframework.boot.loader.launch.JarLauncher
   # DSpace database container
   # NOTE: This is customized to use our loadsql image, so that we are using a database with existing test data
   dspacedb:
     container_name: dspacedb
-    image: "${DOCKER_REGISTRY:-docker.io}/${DOCKER_OWNER:-dspace}/dspace-postgres-pgcrypto:${DSPACE_VER:-dspace-8_x}-loadsql"
+    image: "${DOCKER_REGISTRY:-docker.io}/${DOCKER_OWNER:-4science}/dspace-cris-postgres-pgcrypto:${DSPACE_VER:-dspace-cris-2024_02_x}-loadsql"
     environment:
       # This LOADSQL should be kept in sync with the LOADSQL in
       # https://github.com/DSpace/DSpace/blob/main/dspace/src/main/docker-compose/db.entities.yml
       # This SQL is available from https://github.com/DSpace-Labs/AIP-Files/releases/tag/demo-entities-data
       # NOTE: currently there is no dspace8 version
-      LOADSQL: https://github.com/DSpace-Labs/AIP-Files/releases/download/demo-entities-data/dspace7-entities-data.sql
+      LOADSQL: https://github.com/4Science/DSpace-CRIS-Files/releases/download/cris-2024.02.00/db-entities.sql
       PGDATA: /pgdata
       POSTGRES_PASSWORD: dspace
     networks:
@@ -82,7 +83,7 @@ services:
   # DSpace Solr container
   dspacesolr:
     container_name: dspacesolr
-    image: "${DOCKER_REGISTRY:-docker.io}/${DOCKER_OWNER:-dspace}/dspace-solr:${DSPACE_VER:-dspace-8_x}"
+    image: "${DOCKER_REGISTRY:-docker.io}/${DOCKER_OWNER:-4science}/dspace-cris-solr:${DSPACE_VER:-dspace-cris-2024_02_x}"
     networks:
       - dspacenet
     ports:
@@ -112,6 +113,10 @@ services:
       cp -r /opt/solr/server/solr/configsets/qaevent/* qaevent
       precreate-core suggestion /opt/solr/server/solr/configsets/suggestion
       cp -r /opt/solr/server/solr/configsets/suggestion/* suggestion
+      precreate-core dedup /opt/solr/server/solr/configsets/dedup
+      cp -r /opt/solr/server/solr/configsets/dedup/* dedup
+      precreate-core audit /opt/solr/server/solr/configsets/audit
+      cp -r /opt/solr/server/solr/configsets/audit/* audit
       exec solr -f
 volumes:
   assetstore:

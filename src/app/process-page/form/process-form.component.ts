@@ -136,7 +136,7 @@ export class ProcessFormComponent implements OnInit {
    * @param processParameter The parameter value to check
    */
   private checkValue(processParameter: ProcessParameter): string {
-    if (typeof processParameter.value === 'object') {
+    if (processParameter?.value != null && typeof processParameter.value === 'object') {
       this.files = [...this.files, processParameter.value];
       return processParameter.value.name;
     }

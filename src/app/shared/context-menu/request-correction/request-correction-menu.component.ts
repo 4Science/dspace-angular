@@ -6,6 +6,7 @@ import {
   Component,
   Inject,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import {
@@ -24,6 +25,7 @@ import {
 } from 'rxjs';
 import {
   catchError,
+  share,
   switchMap,
   take,
 } from 'rxjs/operators';
@@ -58,7 +60,7 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
     BtnDisabledDirective,
   ],
 })
-export class RequestCorrectionMenuComponent extends ContextMenuEntryComponent implements OnDestroy {
+export class RequestCorrectionMenuComponent extends ContextMenuEntryComponent implements OnInit,OnDestroy {
 
   canCreateCorrection$: Observable<boolean>;
   /**
@@ -101,6 +103,14 @@ export class RequestCorrectionMenuComponent extends ContextMenuEntryComponent im
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.RequestCorrection);
   }
 
+
+  ngOnInit(): void {
+    this.canCreateCorrection$ = this.notificationService.claimedProfile.pipe(
+      switchMap(() => this.canCreateCorrection(false)),
+      share(),
+    );
+  }
+
   /**
    * Open modal
    *
@@ -136,10 +146,6 @@ export class RequestCorrectionMenuComponent extends ContextMenuEntryComponent im
         this.router.navigate(['workspaceitems', response.id, 'edit']);
       }
     });
-
-    this.canCreateCorrection$ = this.notificationService.claimedProfile.pipe(
-      switchMap(() => this.canCreateCorrection(false)),
-    );
   }
 
   /**
