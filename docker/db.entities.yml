@@ -14,12 +14,12 @@
 # # Therefore, it should be kept in sync with that file
 services:
   dspacedb:
-    image: "${DOCKER_REGISTRY:-docker.io}/${DOCKER_OWNER:-dspace}/dspace-postgres-pgcrypto:${DSPACE_VER:-dspace-8_x}-loadsql"
+    image: "${DOCKER_REGISTRY:-docker.io}/${DOCKER_OWNER:-4science}/dspace-cris-postgres-pgcrypto:${DSPACE_VER:-dspace-cris-2024_02_x}-loadsql"
     environment:
-      # This LOADSQL should be kept in sync with the URL in DSpace/DSpace
-      # This SQL is available from https://github.com/DSpace-Labs/AIP-Files/releases/tag/demo-entities-data
+      # This LOADSQL should be kept in sync with the URL in 4Science/DSpace
+      # This SQL is available from https://github.com/4Science/DSpace-CRIS-Files/releases/download/cris-2024.02.00/db-entities.sql
       # NOTE: currently there is no dspace8 version
-      - LOADSQL=https://github.com/DSpace-Labs/AIP-Files/releases/download/demo-entities-data/dspace7-entities-data.sql
+      - LOADSQL=https://github.com/4Science/DSpace-CRIS-Files/releases/download/cris-2024.02.00/db-entities.sql
   dspace:
     ### OVERRIDE default 'entrypoint' in 'docker-compose-rest.yml' ####
     # Ensure that the database is ready BEFORE starting tomcat
@@ -35,4 +35,4 @@ services:
       - |
         while (!</dev/tcp/dspacedb/5432) > /dev/null 2>&1; do sleep 1; done;
         /dspace/bin/dspace database migrate ignored
-        java -jar /dspace/webapps/server-boot.jar --dspace.dir=/dspace
+        java -XX:+UseParallelGC -XX:MaxRAMPercentage=75 org.springframework.boot.loader.launch.JarLauncher

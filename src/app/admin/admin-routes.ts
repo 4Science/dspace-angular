@@ -57,7 +57,7 @@ export const ROUTES: Route[] = [
     resolve: { breadcrumb: i18nBreadcrumbResolver },
     component: ThemedMetadataImportPageComponent,
     data: { title: 'admin.metadata-import.title', breadcrumbKey: 'admin.metadata-import' },
-    canActivate: [siteAdministratorGuard],
+    canActivate: [genericAdministratorGuard],
   },
   {
     path: 'batch-import',
