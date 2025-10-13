@@ -25,7 +25,7 @@ const page = {
   },
   submitLogoutByPressingButton() {
     // This is the POST command that will actually log us out
-    cy.intercept('POST', '/server/api/authn/logout').as('logout');
+    cy.intercept('POST', '**/server/api/authn/logout').as('logout');
     // Click logout button
     cy.get('[data-test="logout-button"]').click();
     // Wait until above POST command responds before continuing

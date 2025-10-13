@@ -18,25 +18,25 @@ export default defineConfig({
     // (This is the data set used in our CI environment)
 
     // Admin account used for administrative tests
-    DSPACE_TEST_ADMIN_USER: 'dspacedemo+admin@gmail.com',
+    DSPACE_TEST_ADMIN_USER: 'admin@admin.com',
     DSPACE_TEST_ADMIN_USER_UUID: '335647b6-8a52-4ecb-a8c1-7ebabb199bda',
-    DSPACE_TEST_ADMIN_PASSWORD: 'dspace',
+    DSPACE_TEST_ADMIN_PASSWORD: 'admin',
     // Community/collection/publication used for view/edit tests
-    DSPACE_TEST_COMMUNITY: '0958c910-2037-42a9-81c7-dca80e3892b4',
-    DSPACE_TEST_COLLECTION: '282164f5-d325-4740-8dd1-fa4d6d3e7200',
-    DSPACE_TEST_ENTITY_PUBLICATION: '6160810f-1e53-40db-81ef-f6621a727398',
+    DSPACE_TEST_COMMUNITY: 'a30b75e4-1682-4b4d-85fd-a47fc78dbcf6',
+    DSPACE_TEST_COLLECTION: 'caf04bfa-b2f6-40d3-90d2-aa0b86d92f8d',
+    DSPACE_TEST_ENTITY_PUBLICATION: '9d1efbce-4d55-446c-ac70-0ba8998d04d2',
     // Search term (should return results) used in search tests
     DSPACE_TEST_SEARCH_TERM: 'test',
     // Main Collection used for submission tests. Should be able to accept normal Item objects
-    DSPACE_TEST_SUBMIT_COLLECTION_NAME: 'Sample Collection',
-    DSPACE_TEST_SUBMIT_COLLECTION_UUID: '9d8334e9-25d3-4a67-9cea-3dffdef80144',
+    DSPACE_TEST_SUBMIT_COLLECTION_NAME: 'Equipments',
+    DSPACE_TEST_SUBMIT_COLLECTION_UUID: 'c1da6a21-451f-430d-ad28-0f16e5b38fa0',
     // Collection used for Person entity submission tests. MUST be configured with EntityType=Person.
-    DSPACE_TEST_SUBMIT_PERSON_COLLECTION_NAME: 'People',
+    DSPACE_TEST_SUBMIT_PERSON_COLLECTION_NAME: 'Persons',
     // Account used to test basic submission process
-    DSPACE_TEST_SUBMIT_USER: 'dspacedemo+submit@gmail.com',
-    DSPACE_TEST_SUBMIT_USER_PASSWORD: 'dspace',
+    DSPACE_TEST_SUBMIT_USER: 'admin@admin.com',
+    DSPACE_TEST_SUBMIT_USER_PASSWORD: 'admin',
     // Administrator users group
-    DSPACE_ADMINISTRATOR_GROUP: 'e59f5659-bff9-451e-b28f-439e7bd467e4'
+    DSPACE_ADMINISTRATOR_GROUP: 'f8c90336-34c1-4ad6-ab63-ba4b9357f087'
   },
   e2e: {
     // Setup our plugins for e2e tests
@@ -61,5 +61,6 @@ export default defineConfig({
       'cypress/e2e/search-page.cy.ts',
     ]
   },
-  defaultCommandTimeout: 10000,
+  defaultCommandTimeout: 15000,
+  requestTimeout: 30000,
 });

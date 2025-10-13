@@ -16,6 +16,7 @@ import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { NotificationsService } from '../../notifications/notifications.service';
+import { BrowserOnlyPipe } from '../../utils/browser-only.pipe';
 import { ContextMenuEntryComponent } from '../context-menu-entry.component';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 
@@ -29,6 +30,7 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
     RouterLink,
     AsyncPipe,
     TranslateModule,
+    BrowserOnlyPipe,
   ],
 })
 /**

@@ -28,18 +28,19 @@
       <hr/>
     </div>
   </div>
-  <ng-container *ngFor="let fileEntry of fileList; let i = index;">
-    <ds-submission-upload-section-file [singleAccessCondition]="singleAccessCondition"
-                                              [isPrimary]="primaryBitstreamUUID ? primaryBitstreamUUID === fileEntry.uuid : null"
-                                              [availableAccessConditionOptions]="availableAccessConditionOptions"
-                                              [collectionId]="collectionId"
-                                              [collectionPolicyType]="collectionPolicyType"
-                                              [configMetadataForm]="(configMetadataForm$ | async)"
-                                              [fileId]="fileEntry.uuid"
-                                              [fileIndex]="i"
-                                              [fileName]="fileNames[i]"
-                                              [readOnly]="isReadOnly()"
-                                              [sectionId]="sectionData.id"
+  <ng-container *ngFor="let fileEntry of fileList | slice: 0: shownFiles; let i = index;">
+    <ds-submission-upload-section-file data-test="file-section"
+                                       [singleAccessCondition]="singleAccessCondition"
+                                       [isPrimary]="primaryBitstreamUUID ? primaryBitstreamUUID === fileEntry.uuid : null"
+                                       [availableAccessConditionOptions]="availableAccessConditionOptions"
+                                       [collectionId]="collectionId"
+                                       [collectionPolicyType]="collectionPolicyType"
+                                       [configMetadataForm]="(configMetadataForm$ | async)"
+                                       [fileId]="fileEntry.uuid"
+                                       [fileIndex]="i"
+                                       [fileName]="fileNames[i]"
+                                       [readOnly]="isReadOnly()"
+                                       [sectionId]="sectionData.id"
                                        [submissionId]="submissionId"></ds-submission-upload-section-file>
     <div class="row">
       <div class="col-md-12">
@@ -47,6 +48,11 @@
       </div>
     </div>
   </ng-container>
+  <div class="row justify-content-center" *ngIf="showLoadMore">
+    <button type="button" class="btn btn-link" (click)="updatePage()" data-test="load-more-btn">
+      {{ 'submission.sections.upload.load-more' | translate }}
+    </button>
+  </div>
 </ng-container>
 
 <ng-template #noFileUploaded>

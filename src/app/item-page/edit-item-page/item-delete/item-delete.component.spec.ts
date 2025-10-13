@@ -23,16 +23,23 @@ import { LinkService } from '../../../core/cache/builders/link.service';
 import { EntityTypeDataService } from '../../../core/data/entity-type-data.service';
 import { ItemDataService } from '../../../core/data/item-data.service';
 import { ObjectUpdatesService } from '../../../core/data/object-updates/object-updates.service';
+import {
+  DSPACE_OBJECT_DELETION_SCRIPT_NAME,
+  ScriptDataService,
+} from '../../../core/data/processes/script-data.service';
 import { RelationshipDataService } from '../../../core/data/relationship-data.service';
 import { RelationshipTypeDataService } from '../../../core/data/relationship-type-data.service';
 import { Item } from '../../../core/shared/item.model';
 import { ItemType } from '../../../core/shared/item-relationships/item-type.model';
 import { Relationship } from '../../../core/shared/item-relationships/relationship.model';
 import { RelationshipType } from '../../../core/shared/item-relationships/relationship-type.model';
+import { Process } from '../../../process-page/processes/process.model';
+import { ProcessParameter } from '../../../process-page/processes/process-parameter.model';
 import { getMockThemeService } from '../../../shared/mocks/theme-service.mock';
 import { NotificationsService } from '../../../shared/notifications/notifications.service';
 import { ListableObjectComponentLoaderComponent } from '../../../shared/object-collection/shared/listable-object/listable-object-component-loader.component';
 import {
+  createFailedRemoteDataObject,
   createSuccessfulRemoteDataObject,
   createSuccessfulRemoteDataObject$,
 } from '../../../shared/remote-data.utils';
@@ -64,10 +71,13 @@ let linkService;
 let entityTypeService;
 let notificationsServiceStub;
 let typesSelection;
+let scriptDataService;
 
 describe('ItemDeleteComponent', () => {
   beforeEach(waitForAsync(() => {
-
+    scriptDataService = {
+      invoke: jasmine.createSpy('invoke').and.returnValue(createSuccessfulRemoteDataObject$({ processId: '123' })),
+    };
     mockItem = Object.assign(new Item(), {
       id: 'fake-id',
       uuid: 'fake-uuid',
@@ -176,6 +186,7 @@ describe('ItemDeleteComponent', () => {
         { provide: RelationshipTypeDataService, useValue: {} },
         { provide: LinkService, useValue: linkService },
         { provide: ThemeService, useValue: getMockThemeService() },
+        { provide: ScriptDataService, useValue: scriptDataService },
       ], schemas: [
         CUSTOM_ELEMENTS_SCHEMA,
       ],
@@ -205,15 +216,17 @@ describe('ItemDeleteComponent', () => {
 
   describe('performAction', () => {
     describe(`when there are entitytypes`, () => {
-      it('should call delete function from the ItemDataService', () => {
+      it('should call delete function from the scriptDataService', () => {
         spyOn(comp, 'notify');
         comp.performAction();
-        expect(mockItemDataService.delete)
-          .toHaveBeenCalledWith(mockItem.id, types.filter((type) => typesSelection[type]).map((type) => type.id));
+        expect(scriptDataService.invoke)
+          .toHaveBeenCalledWith(DSPACE_OBJECT_DELETION_SCRIPT_NAME, [
+            Object.assign(new ProcessParameter(), { name: '-i', value: mockItem.uuid }),
+          ], []);
         expect(comp.notify).toHaveBeenCalled();
       });
 
-      it('should call delete function from the ItemDataService with empty types', () => {
+      it('should call delete function from the scriptDataService with empty types', () => {
 
         spyOn(comp, 'notify');
         jasmine.getEnv().allowRespy(true);
@@ -222,7 +235,10 @@ describe('ItemDeleteComponent', () => {
 
         comp.performAction();
 
-        expect(mockItemDataService.delete).toHaveBeenCalledWith(mockItem.id, []);
+        expect(scriptDataService.invoke)
+          .toHaveBeenCalledWith(DSPACE_OBJECT_DELETION_SCRIPT_NAME, [
+            Object.assign(new ProcessParameter(), { name: '-i', value: mockItem.uuid }),
+          ], []);
         expect(comp.notify).toHaveBeenCalled();
       });
     });
@@ -236,25 +252,27 @@ describe('ItemDeleteComponent', () => {
         );
       });
 
-      it('should call delete function from the ItemDataService', () => {
+      it('should call delete function from the scriptDataService', waitForAsync(() => {
         spyOn(comp, 'notify');
         comp.performAction();
-        expect(mockItemDataService.delete)
-          .toHaveBeenCalledWith(mockItem.id, types.filter((type) => typesSelection[type]).map((type) => type.id));
+        expect(scriptDataService.invoke).toHaveBeenCalledWith(DSPACE_OBJECT_DELETION_SCRIPT_NAME, [
+          Object.assign(new ProcessParameter(), { name: '-i', value: mockItem.uuid }),
+        ], []);
         expect(comp.notify).toHaveBeenCalled();
+      }));
+    });
+    describe('notify', () => {
+      it('should navigate to the homepage on successful deletion of the item', () => {
+        comp.notify(createSuccessfulRemoteDataObject(Object.assign(new Process(), { id: '123' })));
+        expect(routerStub.navigate).toHaveBeenCalledWith(['']);
       });
     });
-  });
-  describe('notify', () => {
-    it('should navigate to the homepage on successful deletion of the item', () => {
-      comp.notify(true);
-      expect(routerStub.navigate).toHaveBeenCalledWith(['']);
-    });
-  });
-  describe('notify', () => {
-    it('should navigate to the item edit page on failed deletion of the item', () => {
-      comp.notify(false);
-      expect(routerStub.navigate).toHaveBeenCalledWith([getItemEditRoute(mockItem)]);
+    describe('notify', () => {
+      it('should navigate to the item edit page on failed deletion of the item', () => {
+        comp.item = mockItem;
+        comp.notify(createFailedRemoteDataObject());
+        expect(routerStub.navigate).toHaveBeenCalledWith([getItemEditRoute(mockItem)]);
+      });
     });
   });
 });

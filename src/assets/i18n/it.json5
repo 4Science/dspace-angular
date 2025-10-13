@@ -3549,8 +3549,8 @@
   // "context-menu.actions.audit-item.btn": "Audit",
   "context-menu.actions.audit-item.btn": "Revisione",
 
-  // "context-menu.actions.bulk-import.btn": "Import items into collection",
-  "context-menu.actions.bulk-import.btn": "Importa item nella collection",
+  // "context-menu.actions.bulk-import.btn": "Import into collection",
+  "context-menu.actions.bulk-import.btn": "Importa nella collection",
 
   // "context-menu.actions.claim.btn": "Claim this profile",
   "context-menu.actions.claim.btn": "Collega questo profilo",
@@ -4273,7 +4273,7 @@
   "dso-selector.no-results": "Nessun {{ type }} trovato",
 
   // "dso-selector.placeholder": "Search for a {{ type }}",
-  "dso-selector.placeholder": "Cerca un {{ type }}",
+  "dso-selector.placeholder": "Cerca {{ type }}",
 
   // "dso-selector.export-item.item.head": "Export",
   "dso-selector.export-item.item.head": "Export",
@@ -7600,6 +7600,15 @@
 
   // "item-export.process.title": "Bulk export item",
   "item-export.process.title": "Bulk export dell'item",
+
+  // "item-deletion.process.title": "Deleting item",
+  "item-deletion.process.title": "Cancellazione dell'item",
+
+  // "community-deletion.process.title": "Deleting community",
+  "community-deletion.process.title": "Cancellazione della community",
+
+  // "collection-deletion.process.title": "Deleting collection",
+  "collection-deletion.process.title": "Cancellazione della collection",
 
   // "itemtemplate.edit.metadata.add-button": "Add",
   "itemtemplate.edit.metadata.add-button": "Aggiungi",
@@ -13259,6 +13268,9 @@
 
   // "submission.sections.upload.no-entry": "No",
   "submission.sections.upload.no-entry": "No",
+
+  // "submission.sections.upload.load-more": "Load more files",
+  "submission.sections.upload.load-more": "Carica altri file",
 
   // "submission.sections.upload.no-file-uploaded": "No file uploaded yet.",
   "submission.sections.upload.no-file-uploaded": "Nessun file ancora caricato.",
