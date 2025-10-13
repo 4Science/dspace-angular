@@ -203,79 +203,72 @@ jobs:
       # If it does, then SSR is working.
       - name: Verify SSR on a Community page
         run: |
-          result=$(wget -O- -q http://127.0.0.1:4000/communities/0958c910-2037-42a9-81c7-dca80e3892b4)
+          result=$(wget -O- -q http://127.0.0.1:4000/communities/a30b75e4-1682-4b4d-85fd-a47fc78dbcf6)
           echo "$result"
-          echo "$result" | grep -oE "<h1 [^>]*>[^><]*</h1>" | grep Publications
+          echo "$result" | grep -oE "<h1 [^>]*>[^><]*</h1>" | grep "CRIS Community"
 
-      # Get a specific collection in our test data and verify that the "<h1>" tag includes "Articles" (the collection name).
+      # Get a specific collection in our test data and verify that the "<h1>" tag includes "Publications" (the collection name).
       # If it does, then SSR is working.
       - name: Verify SSR on a Collection page
         run: |
-          result=$(wget -O- -q http://127.0.0.1:4000/collections/282164f5-d325-4740-8dd1-fa4d6d3e7200)
+          result=$(wget -O- -q http://127.0.0.1:4000/collections/caf04bfa-b2f6-40d3-90d2-aa0b86d92f8d)
           echo "$result"
-          echo "$result" | grep -oE "<h1 [^>]*>[^><]*</h1>" | grep Articles
+          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "Publications"
 
       # Get a specific publication in our test data and verify that the <meta name="title"> tag includes
       # the title of this publication. If it does, then SSR is working.
       - name: Verify SSR on a Publication page
         run: |
-          result=$(wget -O- -q http://127.0.0.1:4000/entities/publication/6160810f-1e53-40db-81ef-f6621a727398)
+          result=$(wget -O- -q http://127.0.0.1:4000/entities/publication/1df533fd-5385-4820-babd-b5fabdb82101)
           echo "$result"
-          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "An Economic Model of Mortality Salience"
+          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "test publication with pdf version 1"
 
       # Get a specific person in our test data and verify that the <meta name="title"> tag includes
       # the name of the person. If it does, then SSR is working.
       - name: Verify SSR on a Person page
         run: |
-          result=$(wget -O- -q http://127.0.0.1:4000/entities/person/b1b2c768-bda1-448a-a073-fc541e8b24d9)
+          result=$(wget -O- -q http://127.0.0.1:4000/entities/person/98cea993-d448-4200-99d5-f6fab8967bf8)
           echo "$result"
-          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "Simmons, Cameron"
+          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "Submitter Dspace"
 
       # Get a specific project in our test data and verify that the <meta name="title"> tag includes
       # the name of the project. If it does, then SSR is working.
       - name: Verify SSR on a Project page
         run: |
-          result=$(wget -O- -q http://127.0.0.1:4000/entities/project/46ccb608-a74c-4bf6-bc7a-e29cc7defea9)
+          result=$(wget -O- -q http://127.0.0.1:4000/entities/project/1e3451e4-60d7-46a8-962e-5b94b62c63ff)
           echo "$result"
-          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "University Research Fellowship"
+          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "Test DSC-1819"
 
       # Get a specific orgunit in our test data and verify that the <meta name="title"> tag includes
       # the name of the orgunit. If it does, then SSR is working.
       - name: Verify SSR on an OrgUnit page
         run: |
-          result=$(wget -O- -q http://127.0.0.1:4000/entities/orgunit/9851674d-bd9a-467b-8d84-068deb568ccf)
+          result=$(wget -O- -q http://127.0.0.1:4000/entities/orgunit/6d4abaee-eedb-458d-a29b-35db82037dfa)
           echo "$result"
-          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "Law and Development"
+          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "4Science"
 
       # Get a specific journal in our test data and verify that the <meta name="title"> tag includes
       # the name of the journal. If it does, then SSR is working.
       - name: Verify SSR on a Journal page
         run: |
-          result=$(wget -O- -q http://127.0.0.1:4000/entities/journal/d4af6c3e-53d0-4757-81eb-566f3b45d63a)
+          result=$(wget -O- -q http://127.0.0.1:4000/entities/journal/f05c4530-b1b8-4459-a048-ea1c60089a1e)
           echo "$result"
-          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "Environmental &amp; Architectural Phenomenology"
+          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "Journal 4S"
 
-      # Get a specific journal volume in our test data and verify that the <meta name="title"> tag includes
-      # the name of the volume. If it does, then SSR is working.
-      - name: Verify SSR on a Journal Volume page
+      # Get a specific funding in our test data and verify that the <meta name="title"> tag includes
+      # the name of the funding. If it does, then SSR is working.
+      - name: Verify SSR on a Funding page
         run: |
-          result=$(wget -O- -q http://127.0.0.1:4000/entities/journalvolume/07c6249f-4bf7-494d-9ce3-6ffdb2aed538)
+          result=$(wget -O- -q http://127.0.0.1:4000/entities/funding/640d35ba-6172-44c0-9e11-bf5da417cdc8)
           echo "$result"
-          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "Environmental &amp; Architectural Phenomenology Volume 28 (2017)"
+          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "test funding"
 
-      # Get a specific journal issue in our test data and verify that the <meta name="title"> tag includes
-      # the name of the issue. If it does, then SSR is working.
-      - name: Verify SSR on a Journal Issue page
-        run: |
-          result=$(wget -O- -q http://127.0.0.1:4000/entities/journalissue/44c29473-5de2-48fa-b005-e5029aa1a50b)
-          echo "$result"
-          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "Environmental &amp; Architectural Phenomenology Vol. 28, No. 1"
 
       # Verify 301 Handle redirect behavior
       # Note: /handle/123456789/260 is the same test Publication used by our e2e tests
       - name: Verify 301 redirect from '/handle' URLs
         run: |
-          result=$(wget --server-response --quiet http://127.0.0.1:4000/handle/123456789/260 2>&1 | head -1 | awk '{print $2}')
+          result=$(wget --server-response --quiet http://127.0.0.1:4000/handle/123456789/71 2>&1 | head -1 | awk '{print $2}')
           echo "$result"
           [[ "$result" -eq "301" ]]
 
