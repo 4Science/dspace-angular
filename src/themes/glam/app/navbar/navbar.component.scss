@@ -1,6 +1,6 @@
 .logo-circle {
-  width: 160px;
-  height: 160px;
+  width: var(--ds-header-logo-height);
+  height: var(--ds-header-logo-height);
   background-position: center;
   background-color: #ddd;
   border-radius: 100%;
@@ -88,5 +88,5 @@ a.navbar-brand img {
 }
 
 .search-navbar-wrapper {
-  padding: 3rem var(--ds-cris-section-horizontal-padding);
+  padding: 0 var(--ds-cris-section-horizontal-padding) 1rem;
 }
