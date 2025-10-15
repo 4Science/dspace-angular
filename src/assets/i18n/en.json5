@@ -933,6 +933,8 @@
 
   "admin.mag-import.breadcrumbs": "Import MAG",
 
+  "admin.marc-import.breadcrumbs": "Import MARC XML",
+
   "admin.metadata-import.title": "Import Metadata",
 
   "admin.batch-import.title": "Import Batch",
@@ -945,11 +947,19 @@
 
   "admin.mag-import.page.header": "Import MAG",
 
+  "admin.marc-import.page.header": "Import MARC XML",
+
   "admin.mag-import.page.help": "Select the Collection to import into. Then, drop or browse to a MAG zip file to import",
+
+  "admin.marc-import.page.help": "Select the Collection to import into. Then, drop or browse to a MARC xml file to import",
 
   "admin.mag-import.page.selected": "Selected Collection: ",
 
+  "admin.marc-import.page.selected": "Selected Collection: ",
+
   "admin.mag-import.page.remove": "Remove",
+
+  "admin.marc-import.page.remove": "Remove",
 
   "admin.mag-import.page.toggle.upload": "Upload",
 
@@ -959,7 +969,11 @@
 
   "admin.mag-import.page.dropMsg": "Drop a batch ZIP to import",
 
+  "admin.marc-import.page.dropMsg": "Drop a XML to import",
+
   "admin.mag-import.page.dropMsgReplace": "Drop to replace the batch ZIP to import",
+
+  "admin.marc-import.page.dropMsgReplace": "Drop to replace the MARC XML to import",
 
   "admin.mag-import.page.urlMsg": "Insert the batch ZIP url to import",
 
@@ -967,6 +981,9 @@
 
   "admin.mag-import.page.button.proceed": "Proceed",
 
+  "admin.marc-import.page.button.return": "Back",
+
+  "admin.marc-import.page.button.proceed": "Proceed",
 
   "admin.metadata-import.page.help": "You can drop or browse CSV files that contain batch metadata operations on files here",
 
@@ -5144,6 +5161,8 @@
   "menu.section.import_batch": "Batch Import (ZIP)",
 
   "menu.section.import_mag": "MAG Import",
+
+  "menu.section.import_marc_xml": "MARC XML",
 
   "menu.section.import_metadata": "Metadata",
 

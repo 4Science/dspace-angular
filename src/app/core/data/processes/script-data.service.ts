@@ -36,6 +36,7 @@ export const ITEM_EXPORT_SCRIPT_NAME = 'item-export';
 export const BULK_ITEM_EXPORT_SCRIPT_NAME = 'bulk-item-export';
 export const DSPACE_OBJECT_DELETION_SCRIPT_NAME = 'dspace-object-deletion';
 export const PACKAGER_SCRIPT_NAME = 'packager';
+export const MARC_XML_SCRIPT_NAME = 'import-xml-to-item';
 
 @Injectable({ providedIn: 'root' })
 export class ScriptDataService extends IdentifiableDataService<Script> implements FindAllData<Script> {

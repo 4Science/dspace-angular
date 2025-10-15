@@ -1,0 +1,33 @@
+<div class="container">
+  <h2 id="header">{{'admin.marc-import.page.header' | translate}}</h2>
+  <p>{{'admin.marc-import.page.help' | translate}}</p>
+  <p *ngIf="dso">
+    {{'admin.marc-import.page.selected' | translate}} <b>{{getDspaceObjectName()}}</b>&nbsp;
+    <button class="btn btn-outline-danger" (click)="this.removeDspaceObject();">
+      <i class="fas fa-trash"></i> {{'admin.marc-import.page.remove' | translate}}
+    </button>
+  </p>
+  <p>
+    <button class="btn btn-primary" (click)="this.selectCollection();">{{'admin.metadata-import.page.button.select-collection' | translate}}</button>
+  </p>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="validateOnly" [(ngModel)]="validateOnly">
+    <label class="form-check-label" for="validateOnly">
+      {{'admin.metadata-import.page.validateOnly' | translate}}
+    </label>
+  </div>
+
+  <ds-file-dropzone-no-uploader
+    data-test="file-dropzone"
+    (onFileAdded)="setFile($event)"
+    [dropMessageLabel]="'admin.marc-import.page.dropMsg'"
+    [dropMessageLabelReplacement]="'admin.marc-import.page.dropMsgReplace'">
+  </ds-file-dropzone-no-uploader>
+
+  <div class="space-children-mr">
+    <button class="btn btn-secondary" id="backButton"
+            (click)="this.onReturn();">{{'admin.marc-import.page.button.return' | translate}}</button>
+    <button class="btn btn-primary" id="proceedButton"
+            (click)="this.import();">{{'admin.marc-import.page.button.proceed' | translate}}</button>
+  </div>
+</div>

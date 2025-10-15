@@ -8,6 +8,7 @@ import { AdminEditUserAgreementComponent } from './admin-edit-user-agreement/adm
 import { BatchImportPageComponent } from './admin-import-batch-page/batch-import-page.component';
 import { ThemedMetadataImportPageComponent } from './admin-import-metadata-page/themed-metadata-import-page.component';
 import { MagImportPageComponent } from './admin-mag-import/mag-import-page.component';
+import { MarcImportPageComponent } from './admin-marc-import/marc-import-page.component';
 import {
   LDN_PATH,
   NOTIFICATIONS_MODULE_PATH,
@@ -72,6 +73,12 @@ export const ROUTES: Route[] = [
     resolve: { breadcrumb: i18nBreadcrumbResolver },
     component: MagImportPageComponent,
     data: { title: 'admin.mag-import.title', breadcrumbKey: 'admin.mag-import' },
+  },
+  {
+    path: 'marc-import',
+    resolve: { breadcrumb: i18nBreadcrumbResolver },
+    component: MarcImportPageComponent,
+    data: { title: 'admin.marc-import.title', breadcrumbKey: 'admin.marc-import' },
   },
   {
     path: 'system-wide-alert',
