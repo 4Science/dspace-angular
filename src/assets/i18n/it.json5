@@ -1562,6 +1562,8 @@
   // "admin.mag-import.page.remove": "Remove",
   "admin.mag-import.page.remove": "Elimina",
 
+  "admin.marc-import.page.remove": "Elimina",
+
   // "admin.mag-import.page.toggle.upload": "Upload",
   "admin.mag-import.page.toggle.upload": "Upload",
 
@@ -1585,6 +1587,18 @@
 
   // "admin.mag-import.page.button.proceed": "Proceed",
   "admin.mag-import.page.button.proceed": "Procedi",
+
+  "admin.marc-import.page.help": "Seleziona la Collezione in cui importare la risorsa. Trascina o ricerca un file MARC xml da importare.",
+
+  "admin.marc-import.page.selected": "Collezione selezionata: ",
+
+  "admin.marc-import.page.dropMsg": "Allega il file MARC xml per l'Import",
+
+  "admin.marc-import.page.dropMsgReplace": "Rilascia un nuovo file MARC xml per sostituire il file corrente da importare",
+
+  "admin.marc-import.page.button.return": "Indietro",
+
+  "admin.marc-import.page.button.proceed": "Procedi",
 
 
   // "admin.metadata-import.page.help": "You can drop or browse CSV files that contain batch metadata operations on files here",
