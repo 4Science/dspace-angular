@@ -68,6 +68,7 @@ export class NotificationsBoardComponent implements OnInit, OnDestroy {
       .subscribe((state: NotificationsState) => {
         if (state.length === 0) {
           this.notifications = [];
+          this.processNotifications = [];
         } else if (state.length > this.notifications.length) {
           // Add
           const newElem = difference(state, [...this.notifications,...this.processNotifications]);
