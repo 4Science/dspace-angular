@@ -97,7 +97,7 @@ export class EndUserAgreementComponent implements OnInit, OnDestroy {
           if (authorized) {
 
             if (!accepted && isPlatformBrowser(this.platformId) && !this.notifiedOnce) {
-              this.notificationsService.warning(this.translate.instant('info.end-user-agreement.accept.warning'), {});
+              this.notificationsService.warning(this.translate.instant('info.end-user-agreement.accept.warning'));
               this.notifiedOnce = true;
             }
             this.accepted = accepted;
