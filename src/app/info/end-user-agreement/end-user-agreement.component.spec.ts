@@ -1,4 +1,7 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  NO_ERRORS_SCHEMA,
+  PLATFORM_ID,
+} from '@angular/core';
 import {
   ComponentFixture,
   TestBed,
@@ -74,6 +77,7 @@ describe('EndUserAgreementComponent', () => {
         { provide: Store, useValue: store },
         { provide: Router, useValue: router },
         { provide: ActivatedRoute, useValue: route },
+        { provide: PLATFORM_ID, useValue: 'browser' },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     })
@@ -196,6 +200,39 @@ describe('EndUserAgreementComponent', () => {
       it('should navigate the user to the homepage', () => {
         expect(router.navigate).toHaveBeenCalledWith(['home']);
       });
+    });
+  });
+
+  describe('warning notification logic', () => {
+    beforeEach(() => {
+      (endUserAgreementService.hasCurrentUserOrCookieAcceptedAgreement as jasmine.Spy)
+        .and.returnValue(observableOf(false));
+      fixture.detectChanges();
+    });
+
+    it('should show warning once when not accepted and in browser', () => {
+      component.ngOnInit();
+      expect(notificationsService.warning).toHaveBeenCalledTimes(1);
+      component.initAccepted(); // call again
+      expect(notificationsService.warning).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not show warning when already accepted', () => {
+      component.ngOnInit();
+      (notificationsService.warning as jasmine.Spy).calls.reset();
+      (endUserAgreementService.hasCurrentUserOrCookieAcceptedAgreement as jasmine.Spy)
+        .and.returnValue(observableOf(true));
+      component.initAccepted();
+      expect(notificationsService.warning).not.toHaveBeenCalled();
+    });
+
+    it('should not show warning when not in browser', () => {
+      (component as any).platformId = 'server';
+      fixture.detectChanges();
+      (notificationsService.warning as jasmine.Spy).calls.reset();
+      component.ngOnInit();
+      component.initAccepted();
+      expect(notificationsService.warning).toHaveBeenCalledTimes(0);
     });
   });
 });
