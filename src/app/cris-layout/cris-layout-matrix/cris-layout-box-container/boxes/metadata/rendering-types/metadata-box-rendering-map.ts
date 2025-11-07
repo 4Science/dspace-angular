@@ -18,6 +18,8 @@ import { TagComponent } from './tag/tag.component';
 import { TextComponent } from './text/text.component';
 import { ThumbnailRenderingComponent } from './thumbnail/thumbnail.component';
 import { ValuepairComponent } from './valuepair/valuepair.component';
+import {CcLicenseLargeComponent} from "./cc-license-large/cc-license-large.component";
+import {CcLicenseSmallComponent} from "./cc-license-small/cc-license-small.component";
 
 export const layoutBoxesMap = new Map<FieldRenderingType, MetadataBoxFieldRenderOptions>([
   [FieldRenderingType.TEXT, { componentRef: TextComponent, structured: false } as MetadataBoxFieldRenderOptions],
@@ -63,6 +65,14 @@ export const layoutBoxesMap = new Map<FieldRenderingType, MetadataBoxFieldRender
   } as MetadataBoxFieldRenderOptions],
   [FieldRenderingType.LONGHTML, {
     componentRef: LonghtmlComponent,
+    structured: false,
+  } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.CCLICENSEFULL, {
+    componentRef: CcLicenseLargeComponent,
+    structured: false,
+  } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.CCLICENSESMALL, {
+    componentRef: CcLicenseSmallComponent,
     structured: false,
   } as MetadataBoxFieldRenderOptions],
 ]);
