@@ -12,16 +12,6 @@ import {RenderingTypeValueModelComponent} from "../rendering-type-value.model";
   styleUrl: './cc-license-small.component.scss'
 })
 export class CcLicenseSmallComponent extends RenderingTypeValueModelComponent {
-  /**
-   * 'full' variant shows image, a disclaimer (optional) and name (always), better for the item page content.
-   * 'small' variant shows image and name (optional), better for the item page sidebar
-   */
-  @Input() variant = 'small';
-
-  /**
-   * Shows the CC license name with the image. Always show if image fails to load
-   */
-  @Input() showName? = true;
 
   /**
    * Filed name containing the CC license name, as configured in the back-end, in the 'dspace.cfg' file, propertie
