@@ -144,7 +144,6 @@ export class DsDynamicRelationGroupModalComponent extends DynamicFormControlComp
       this.formModel.forEach((row) => {
         const modelRow = row as DynamicFormGroupModel;
         modelRow.group.forEach((model: DsDynamicInputModel) => {
-          console.log(model);
           const value = (this.item[model.name] === PLACEHOLDER_PARENT_METADATA
             || this.item[model.name].value === PLACEHOLDER_PARENT_METADATA)
             ? null
@@ -360,7 +359,6 @@ export class DsDynamicRelationGroupModalComponent extends DynamicFormControlComp
           );
       });
     });
-    console.log(item);
     return item;
   }
 
