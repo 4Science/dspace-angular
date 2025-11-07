@@ -1,5 +1,5 @@
 <div *ngIf="uri && name" class="item-page-field">
-  <ds-metadata-field-wrapper [label]="'item.page.cc.license.title' | translate">
+  <ds-metadata-field-wrapper [label]="showTitle && ('item.page.cc.license.title' | translate)">
     <div [ngClass]="{'row': variant === 'full', 'col': variant === 'small'}">
 
       <!-- 'img' tag is not rendered if any errors occurs when loading it -->
