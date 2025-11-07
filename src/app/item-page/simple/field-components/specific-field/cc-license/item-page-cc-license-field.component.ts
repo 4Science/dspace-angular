@@ -55,6 +55,11 @@ export class ItemPageCcLicenseFieldComponent implements OnInit {
    */
   @Input() showDisclaimer? = true;
 
+  /**
+   * Shows the title
+   */
+  @Input() showTitle? = false;
+
   uri: string;
   name: string;
   showImage = true;
