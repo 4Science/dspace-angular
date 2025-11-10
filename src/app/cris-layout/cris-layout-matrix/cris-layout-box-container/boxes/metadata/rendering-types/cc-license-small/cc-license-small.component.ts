@@ -1,9 +1,8 @@
 import {Component, Input} from '@angular/core';
-import {
-  ItemPageCcLicenseFieldComponent
-} from "../../../../../../../item-page/simple/field-components/specific-field/cc-license/item-page-cc-license-field.component";
-import {RenderingTypeValueModelComponent} from "../rendering-type-value.model";
-import {FieldRenderingType, MetadataBoxFieldRendering} from "../metadata-box.decorator";
+
+
+import {RenderingTypeValueModelComponent} from '../rendering-type-value.model';
+import {FieldRenderingType, MetadataBoxFieldRendering} from '../metadata-box.decorator';
 
 @Component({
   selector: 'ds-cc-license-small',

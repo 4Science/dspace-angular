@@ -11,7 +11,7 @@ describe('CcLicenseLargeComponent', () => {
       imports: [CcLicenseLargeComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(CcLicenseLargeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

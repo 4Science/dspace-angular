@@ -19,7 +19,7 @@ import {
 import { ItemAlertsComponent } from './alerts/item-alerts.component';
 import {
   ItemPageCcLicenseFieldComponent
-} from "./simple/field-components/specific-field/cc-license/item-page-cc-license-field.component";
+} from './simple/field-components/specific-field/cc-license/item-page-cc-license-field.component';
 
 const ENTRY_COMPONENTS = [
   ItemVersionsDeleteModalComponent,

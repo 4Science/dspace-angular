@@ -11,7 +11,7 @@ describe('CcLicenseSmallComponent', () => {
       imports: [CcLicenseSmallComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(CcLicenseSmallComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

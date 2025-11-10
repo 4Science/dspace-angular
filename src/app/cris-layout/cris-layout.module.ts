@@ -122,12 +122,11 @@ import {
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/longhtml/longhtml.component';
 import {
   CcLicenseLargeComponent
-} from "./cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/cc-license-large/cc-license-large.component";
-import {ItemPageModule} from "../item-page/item-page.module";
-import {ItemSharedModule} from "../item-page/item-shared.module";
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/cc-license-large/cc-license-large.component';
+import {ItemSharedModule} from '../item-page/item-shared.module';
 import {
   CcLicenseSmallComponent
-} from "./cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/cc-license-small/cc-license-small.component";
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/cc-license-small/cc-license-small.component';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
