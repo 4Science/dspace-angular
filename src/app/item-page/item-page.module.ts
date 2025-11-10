@@ -62,7 +62,7 @@ import {
   ThemedFullFileSectionComponent
 } from './full/field-components/file-section/themed-full-file-section.component';
 import { MarkdownViewerModule } from '../shared/markdown-viewer/markdown-viewer.module';
-
+import { ItemPageCcLicenseFieldComponent } from './simple/field-components/specific-field/cc-license/item-page-cc-license-field.component';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -104,6 +104,7 @@ const DECLARATIONS = [
   OrcidQueueComponent,
   ThemedItemAlertsComponent,
   BitstreamRequestACopyPageComponent,
+  ItemPageCcLicenseFieldComponent,
 ];
 
 @NgModule({
