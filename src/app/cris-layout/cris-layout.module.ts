@@ -120,6 +120,14 @@ import {
 import {
   LonghtmlComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/longhtml/longhtml.component';
+import {
+  CcLicenseLargeComponent
+} from "./cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/cc-license-large/cc-license-large.component";
+import {ItemPageModule} from "../item-page/item-page.module";
+import {ItemSharedModule} from "../item-page/item-shared.module";
+import {
+  CcLicenseSmallComponent
+} from "./cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/cc-license-small/cc-license-small.component";
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -136,6 +144,8 @@ const ENTRY_COMPONENTS = [
   LinkComponent,
   IdentifierComponent,
   CrisrefComponent,
+  CcLicenseLargeComponent,
+  CcLicenseSmallComponent,
   ThumbnailComponent,
   AttachmentComponent,
   CrisLayoutMetricsBoxComponent,
@@ -186,11 +196,14 @@ const ENTRY_COMPONENTS = [
     MiradorViewerModule,
     MetricsModule,
     AttachmentRenderingModule,
-    FormModule
+    FormModule,
+    ItemSharedModule
   ],
   exports: [
     CrisLayoutComponent,
     CrisrefComponent,
+    CcLicenseLargeComponent,
+    CcLicenseSmallComponent
   ]
 })
 export class CrisLayoutModule {
