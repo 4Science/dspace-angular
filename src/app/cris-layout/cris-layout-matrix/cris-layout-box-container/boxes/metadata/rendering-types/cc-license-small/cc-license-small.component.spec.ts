@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { CcLicenseSmallComponent } from './cc-license-small.component';
 
@@ -6,11 +7,40 @@ describe('CcLicenseSmallComponent', () => {
   let component: CcLicenseSmallComponent;
   let fixture: ComponentFixture<CcLicenseSmallComponent>;
 
+  const mockItem = {
+    firstMetadataValue: jasmine.createSpy('firstMetadataValue').and.returnValue(''),
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CcLicenseSmallComponent]
+      imports: [
+        TranslateModule.forRoot(),
+      ],
+      declarations: [CcLicenseSmallComponent],
+      providers: [
+        {
+          provide: 'fieldProvider',
+          useValue: {},
+        },
+        {
+          provide: 'itemProvider',
+          useValue: mockItem,
+        },
+        {
+          provide: 'metadataValueProvider',
+          useValue: {},
+        },
+        {
+          provide: 'renderingSubTypeProvider',
+          useValue: {},
+        },
+        {
+          provide: 'tabNameProvider',
+          useValue: {},
+        },
+      ],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(CcLicenseSmallComponent);
     component = fixture.componentInstance;
