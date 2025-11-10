@@ -8,7 +8,7 @@ describe('CcLicenseLargeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CcLicenseLargeComponent]
+      declarations: [CcLicenseLargeComponent]
     })
     .compileComponents();
 

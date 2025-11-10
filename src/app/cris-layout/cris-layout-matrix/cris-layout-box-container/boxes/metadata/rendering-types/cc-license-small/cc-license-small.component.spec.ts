@@ -8,7 +8,7 @@ describe('CcLicenseSmallComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CcLicenseSmallComponent]
+      declarations: [CcLicenseSmallComponent]
     })
     .compileComponents();
 

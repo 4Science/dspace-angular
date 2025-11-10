@@ -212,8 +212,8 @@ describe('ItemPageCcLicenseFieldComponent', () => {
             useClass: TranslateLoaderMock,
           },
         }),
-        ItemPageCcLicenseFieldComponent,
       ],
+      declarations: [ItemPageCcLicenseFieldComponent],
       providers: [{ provide: APP_CONFIG, useValue: environment }],
       schemas: [NO_ERRORS_SCHEMA],
     })
