@@ -1,15 +1,17 @@
-import { Component, Input } from '@angular/core';
 import {
-  ItemPageCcLicenseFieldComponent
-} from "../../../../../../../item-page/simple/field-components/specific-field/cc-license/item-page-cc-license-field.component";
-import {RenderingTypeValueModelComponent} from "../rendering-type-value.model";
+  Component,
+  Input,
+} from '@angular/core';
+
+import { ItemPageCcLicenseFieldComponent } from '../../../../../../../item-page/simple/field-components/specific-field/cc-license/item-page-cc-license-field.component';
+import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
 
 @Component({
   selector: 'ds-cc-license-large',
   standalone: true,
   imports: [ItemPageCcLicenseFieldComponent],
   templateUrl: './cc-license-large.component.html',
-  styleUrl: './cc-license-large.component.scss'
+  styleUrl: './cc-license-large.component.scss',
 })
 export class CcLicenseLargeComponent extends RenderingTypeValueModelComponent {
 

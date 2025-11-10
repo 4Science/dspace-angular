@@ -1,5 +1,7 @@
 import { AdvancedAttachmentComponent } from './advanced-attachment/advanced-attachment.component';
 import { AttachmentComponent } from './attachment/attachment.component';
+import { CcLicenseLargeComponent } from './cc-license-large/cc-license-large.component';
+import { CcLicenseSmallComponent } from './cc-license-small/cc-license-small.component';
 import { CrisrefComponent } from './crisref/crisref.component';
 import { DateComponent } from './date/date.component';
 import { FieldRenderingType } from './field-rendering-type';
@@ -18,8 +20,6 @@ import { TagComponent } from './tag/tag.component';
 import { TextComponent } from './text/text.component';
 import { ThumbnailRenderingComponent } from './thumbnail/thumbnail.component';
 import { ValuepairComponent } from './valuepair/valuepair.component';
-import {CcLicenseLargeComponent} from "./cc-license-large/cc-license-large.component";
-import {CcLicenseSmallComponent} from "./cc-license-small/cc-license-small.component";
 
 export const layoutBoxesMap = new Map<FieldRenderingType, MetadataBoxFieldRenderOptions>([
   [FieldRenderingType.TEXT, { componentRef: TextComponent, structured: false } as MetadataBoxFieldRenderOptions],

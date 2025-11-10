@@ -1,4 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 
 import { CcLicenseLargeComponent } from './cc-license-large.component';
 
@@ -8,10 +11,10 @@ describe('CcLicenseLargeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CcLicenseLargeComponent]
+      imports: [CcLicenseLargeComponent],
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(CcLicenseLargeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
