@@ -1,5 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
+
 import { CcLicenseSmallComponent } from './cc-license-small.component';
 
 describe('CcLicenseSmallComponent', () => {
