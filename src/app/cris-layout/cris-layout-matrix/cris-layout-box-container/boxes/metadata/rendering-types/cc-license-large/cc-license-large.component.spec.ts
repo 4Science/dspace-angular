@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { CcLicenseLargeComponent } from './cc-license-large.component';
 
-fdescribe('CcLicenseLargeComponent', () => {
+describe('CcLicenseLargeComponent', () => {
   let component: CcLicenseLargeComponent;
   let fixture: ComponentFixture<CcLicenseLargeComponent>;
 
