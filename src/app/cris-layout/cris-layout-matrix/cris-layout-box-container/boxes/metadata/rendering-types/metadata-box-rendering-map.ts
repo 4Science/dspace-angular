@@ -71,7 +71,7 @@ export const layoutBoxesMap = new Map<FieldRenderingType, MetadataBoxFieldRender
     componentRef: CcLicenseLargeComponent,
     structured: false,
   } as MetadataBoxFieldRenderOptions],
-  [FieldRenderingType.CCLICENSESMALL, {
+  [FieldRenderingType.CCLICENSE, {
     componentRef: CcLicenseSmallComponent,
     structured: false,
   } as MetadataBoxFieldRenderOptions],
