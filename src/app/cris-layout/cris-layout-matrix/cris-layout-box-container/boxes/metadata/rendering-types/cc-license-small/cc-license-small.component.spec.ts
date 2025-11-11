@@ -3,7 +3,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { CcLicenseSmallComponent } from './cc-license-small.component';
 
-fdescribe('CcLicenseSmallComponent', () => {
+describe('CcLicenseSmallComponent', () => {
   let component: CcLicenseSmallComponent;
   let fixture: ComponentFixture<CcLicenseSmallComponent>;
 
