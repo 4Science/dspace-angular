@@ -1,12 +1,9 @@
-import {Component, Inject, Input} from '@angular/core';
-
-
-import {RenderingTypeValueModelComponent} from '../rendering-type-value.model';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FieldRenderingType, MetadataBoxFieldRendering} from '../metadata-box.decorator';
-import {MetadataGroupComponent} from "../metadataGroup/metadata-group.component";
-import {LayoutField} from "../../../../../../../core/layout/models/box.model";
-import {Item} from "../../../../../../../core/shared/item.model";
-import {TranslateService} from "@ngx-translate/core";
+import {MetadataGroupComponent} from '../metadataGroup/metadata-group.component';
+import {LayoutField} from '../../../../../../../core/layout/models/box.model';
+import {Item} from '../../../../../../../core/shared/item.model';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'ds-cc-license-small',
@@ -14,7 +11,7 @@ import {TranslateService} from "@ngx-translate/core";
   styleUrls: ['./cc-license-small.component.scss']
 })
 @MetadataBoxFieldRendering(FieldRenderingType.CCLICENSE)
-export class CcLicenseSmallComponent extends MetadataGroupComponent {
+export class CcLicenseSmallComponent extends MetadataGroupComponent implements OnInit  {
 
 
   dcRights: any;
