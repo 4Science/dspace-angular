@@ -1,5 +1,5 @@
 <div *ngIf="uri && name" class="item-page-field">
-  <ds-metadata-field-wrapper [hideIfNoTextContent]="false" [label]="showTitle && ('item.page.cc.license.title' | translate)">
+  <ds-metadata-field-wrapper [hideIfNoTextContent]="false" [label]="showLabel && ('item.page.cc.license.title' | translate)">
     <div [ngClass]="{'row': variant === 'full', 'col': variant === 'small'}">
 
       <!-- 'img' tag is not rendered if any errors occurs when loading it -->
@@ -20,7 +20,7 @@
       <div [ngClass]="{ 'row': variant === 'small', 'col': variant === 'full' }">
         <span>
           {{ variant === 'full' && showDisclaimer ? ('item.page.cc.license.disclaimer' | translate) : '' }}
-          <a *ngIf="showName || !showImage" [href]="uri" target="_blank" id="cc-name">{{ name }}</a>
+          <a *ngIf="(showName || !showImage) && showUrl" [href]="uri" target="_blank" id="cc-name">{{ name }}</a>
         </span>
       </div>
     </div>

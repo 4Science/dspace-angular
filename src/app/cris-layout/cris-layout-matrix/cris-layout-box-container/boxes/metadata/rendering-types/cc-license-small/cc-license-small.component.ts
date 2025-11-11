@@ -1,21 +1,38 @@
-import {Component, Input} from '@angular/core';
+import {Component, Inject, Input} from '@angular/core';
 
 
 import {RenderingTypeValueModelComponent} from '../rendering-type-value.model';
 import {FieldRenderingType, MetadataBoxFieldRendering} from '../metadata-box.decorator';
+import {MetadataGroupComponent} from "../metadataGroup/metadata-group.component";
+import {LayoutField} from "../../../../../../../core/layout/models/box.model";
+import {Item} from "../../../../../../../core/shared/item.model";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'ds-cc-license-small',
   templateUrl: './cc-license-small.component.html',
   styleUrls: ['./cc-license-small.component.scss']
 })
-@MetadataBoxFieldRendering(FieldRenderingType.CCLICENSESMALL)
-export class CcLicenseSmallComponent extends RenderingTypeValueModelComponent {
+@MetadataBoxFieldRendering(FieldRenderingType.CCLICENSE)
+export class CcLicenseSmallComponent extends MetadataGroupComponent {
 
 
-  /**
-   * Filed name containing the CC license name, as configured in the back-end, in the 'dspace.cfg' file, propertie
-   * 'cc.license.name'
-   */
-  @Input() ccLicenseNameField? = 'dc.rights';
+  dcRights: any;
+  dcRightsUri: any;
+
+  constructor(
+  @Inject('fieldProvider') public fieldProvider: LayoutField,
+  @Inject('itemProvider') public itemProvider: Item,
+  @Inject('renderingSubTypeProvider') public renderingSubTypeProvider: string,
+  @Inject('tabNameProvider') public tabNameProvider: string,
+  protected translateService: TranslateService,
+) {
+  super(fieldProvider, itemProvider, renderingSubTypeProvider, tabNameProvider, translateService);
+}
+  ngOnInit(): void {
+    super.ngOnInit();
+    const ccLicenseEntryMetadata = this.componentsToBeRenderedMap.get(0);
+    [this.dcRights, this.dcRightsUri] = ccLicenseEntryMetadata.map((entryMeta) => entryMeta.field.metadata);
+
+  }
 }
