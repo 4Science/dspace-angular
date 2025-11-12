@@ -158,7 +158,7 @@ export class LogInComponent implements OnInit, OnDestroy {
     this.canShowDivider$ = combineLatest([
       this.canRegister$,
       this.canForgot$,
-      this.route.data
+      this.route.data,
     ]).pipe(
       map(([canRegister, canForgot, routeData]) => (canRegister || canForgot) && !routeData?.isBackDoor),
       filter(Boolean),
