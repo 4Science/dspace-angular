@@ -187,7 +187,7 @@ export const APP_ROUTES: Route[] = [
         data: {
           isBackDoor: true,
         },
-        canMatch: [() => environment.auth.enableAdminOnlyLogin],
+        canMatch: [() => environment.auth.isPasswordLoginEnabledForAdminsOnly],
       },
       {
         path: 'login',

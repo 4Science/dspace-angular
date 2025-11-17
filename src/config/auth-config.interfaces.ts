@@ -22,5 +22,5 @@ export interface AuthConfig extends Config {
   };
 
   // Whether the standard login form should be enabled.
-  enableAdminOnlyLogin?: boolean;
+  isPasswordLoginEnabledForAdminsOnly?: boolean;
 }
