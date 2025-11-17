@@ -105,6 +105,7 @@ definitions:
           - node-2024-02-x
           - cypress-2024-02-x
         script:
+          - apt-get update && apt-get install -y curl
           - export HASH_COMMIT=${BITBUCKET_COMMIT:0:8}
           - echo "Running tests for commit $HASH_COMMIT"
           - export DSPACE_REST_HOST=${E2E_RUNNER_HOST}
@@ -120,6 +121,27 @@ definitions:
           - export CYPRESS_CACHE_FOLDER=~/.cache/Cypress
           - export CHROME_FLAGS="--no-sandbox --disable-dev-shm-usage --disable-gpu"
           - export NODE_OPTIONS="--max-old-space-size=4096"
+          - |
+            MAX_RETRIES=10
+            RETRY_COUNT=0
+            SUCCESS=false
+            while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+              echo "Pinging REST endpoint... (Attempt $((RETRY_COUNT+1)))"
+              STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://$DSPACE_REST_HOST$DSPACE_REST_NAMESPACE")
+              if [ "$STATUS_CODE" -lt 400 ]; then
+                echo "REST endpoint is up! Status code: $STATUS_CODE"
+                SUCCESS=true
+                break
+              else
+                echo "REST endpoint not ready (Status code: $STATUS_CODE). Retrying in 60 seconds..."
+                RETRY_COUNT=$((RETRY_COUNT+1))
+                sleep 60
+              fi
+            done
+            if [ "$SUCCESS" = "false" ]; then
+              echo "REST endpoint did not become available after $MAX_RETRIES attempts. Failing the build."
+              exit 1
+            fi
           - npx cypress install
           - yarn serve:ssr &
           - echo "Waiting for server to start..."
