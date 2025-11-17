@@ -133,7 +133,7 @@ auth:
     # This is independent from the idle warning.
     timeLeftBeforeTokenRefresh: 120000 # 2 minutes
   # Standard login enabled
-  disableStandardLogin: false
+  isPasswordLoginEnabledForAdminsOnly: false
 
 # Form settings
 form:

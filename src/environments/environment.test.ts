@@ -97,7 +97,7 @@ export const environment: BuildConfig = {
       // This is independent from the idle warning.
       timeLeftBeforeTokenRefresh: 20000, // 20 sec
     },
-    enableAdminOnlyLogin: true,
+    isPasswordLoginEnabledForAdminsOnly: true,
   },
 
   // Form settings
