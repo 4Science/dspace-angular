@@ -14,6 +14,10 @@ import {
   Output,
   PLATFORM_ID,
 } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
+
+import { BehaviorSubject, combineLatest, Observable, Subscription, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
 import {
   NavigationStart,
   Router,
@@ -497,8 +501,12 @@ export class SearchComponent implements OnDestroy, OnInit {
 
     this.searchConfigService.setPaginationId(this.paginationId);
 
-    this.routeService.setParameter('configuration', this.configuration);
-    this.routeService.setParameter('fixedFilterQuery', this.fixedFilterQuery);
+    if (hasValue(this.configuration)) {
+      this.routeService.setParameter('configuration', this.configuration);
+    }
+    if (hasValue(this.fixedFilterQuery)) {
+      this.routeService.setParameter('fixedFilterQuery', this.fixedFilterQuery);
+    }
 
     this.currentScope$ = this.routeService.getQueryParameterValue('scope').pipe(
       map((routeValue: string) => hasValue(routeValue) ? routeValue : this.scope ?? ''),
@@ -508,9 +516,27 @@ export class SearchComponent implements OnDestroy, OnInit {
     this.searchLink = this.getSearchLink();
     this.currentContext$.next(this.context);
 
+    // Raw query param observable for configuration
+    const configurationParam$: Observable<string> =
+      this.routeService.getQueryParameterValue('configuration').pipe(distinctUntilChanged());
+
+
     // Determinate PaginatedSearchOptions and listen to any update on it
-    const configuration$: Observable<string> = this.searchConfigService
+    const configurationFromService$: Observable<string> = this.searchConfigService
       .getCurrentConfiguration(this.configuration).pipe(distinctUntilChanged());
+
+    // Effective configuration: param value OR input @Input() configuration OR 'default'
+    const configuration$: Observable<string> = combineLatest([
+      configurationParam$,
+      configurationFromService$,
+      of(this.configuration)
+    ]).pipe(
+      map(([paramValue, serviceValue, inputValue]) =>
+        hasValue(paramValue) ? paramValue : (hasValue(inputValue) ? inputValue : hasValue(serviceValue) ? serviceValue : 'default')
+      ),
+      distinctUntilChanged()
+    );
+
     const searchSortOptions$: Observable<SortOptions[]> = combineLatest([configuration$, this.currentScope$]).pipe(
       switchMap(([configuration, scope]: [string, string]) => this.searchConfigService.getConfigurationSearchConfig(configuration, scope)),
       map((searchConfig: SearchConfig) => this.searchConfigService.getConfigurationSortOptions(searchConfig)),
@@ -531,15 +557,14 @@ export class SearchComponent implements OnDestroy, OnInit {
         return searchOptions.pagination.id === this.paginationId;
       }),
       debounceTime(100),
-    ).subscribe(([configuration, searchSortOptions, searchOptions, sortOption, scope]: [string, SortOptions[], PaginatedSearchOptions, SortOptions, string]) => {
-      // Build the PaginatedSearchOptions object
-      const searchOptionsConfiguration = searchOptions.configuration || configuration;
-      const combinedOptions = Object.assign({}, searchOptions,
-        {
-          configuration: searchOptionsConfiguration,
-          sort: sortOption || searchOptions.sort,
-          forcedEmbeddedKeys: this.forcedEmbeddedKeys.get(searchOptionsConfiguration) || this.forcedEmbeddedKeys.get('default'),
-        });
+    ).subscribe(([configuration, searchSortOptions, searchOptions, sortOption, scope]:
+                 [string, SortOptions[], PaginatedSearchOptions, SortOptions, string]) => {
+      // Always apply the freshly resolved configuration (do NOT keep stale one)
+      const combinedOptions = Object.assign({}, searchOptions, {
+        configuration,
+        sort: sortOption || searchOptions.sort,
+        forcedEmbeddedKeys: this.forcedEmbeddedKeys.get(configuration) || this.forcedEmbeddedKeys.get('default'),
+      });
       if (combinedOptions.query === '') {
         combinedOptions.query = this.query;
       }
