@@ -497,12 +497,8 @@ export class SearchComponent implements OnDestroy, OnInit {
 
     this.searchConfigService.setPaginationId(this.paginationId);
 
-    if (hasValue(this.configuration)) {
-      this.routeService.setParameter('configuration', this.configuration);
-    }
-    if (hasValue(this.fixedFilterQuery)) {
-      this.routeService.setParameter('fixedFilterQuery', this.fixedFilterQuery);
-    }
+    this.routeService.setParameter('configuration', this.configuration);
+    this.routeService.setParameter('fixedFilterQuery', this.fixedFilterQuery);
 
     this.currentScope$ = this.routeService.getQueryParameterValue('scope').pipe(
       map((routeValue: string) => hasValue(routeValue) ? routeValue : this.scope ?? ''),
