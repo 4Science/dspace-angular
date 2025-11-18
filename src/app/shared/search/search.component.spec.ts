@@ -205,9 +205,7 @@ const routeServiceStub = {
   getQueryParamsWithPrefix: () => {
     return observableOf(null);
   },
-  setParameter: (key: any, value: any) => {
-    return;
-  },
+  setParameter: jasmine.createSpy('setParameter')
 };
 
 let searchConfigurationServiceStub;
@@ -318,6 +316,29 @@ describe('SearchComponent', () => {
   afterEach(() => {
     comp = null;
   });
+
+  it('should set the "configuration" and "fixedFilterQuery" parameters in the route service', () => {
+    spyOn(routeServiceStub, 'setParameter');
+    comp.configuration = 'test-configuration';
+    comp.fixedFilterQuery = 'test-fixed-filter-query';
+
+    fixture.detectChanges();
+
+    expect(routeServiceStub.setParameter).toHaveBeenCalledWith('configuration', 'test-configuration');
+    expect(routeServiceStub.setParameter).toHaveBeenCalledWith('fixedFilterQuery', 'test-fixed-filter-query');
+  });
+
+  it('should still set "configuration" and "fixedFilterQuery" parameters if they are undefined', () => {
+    spyOn(routeServiceStub, 'setParameter');
+    comp.configuration = undefined;
+    comp.fixedFilterQuery = undefined;
+
+    fixture.detectChanges();
+
+    expect(routeServiceStub.setParameter).toHaveBeenCalledWith('configuration', undefined);
+    expect(routeServiceStub.setParameter).toHaveBeenCalledWith('fixedFilterQuery', undefined);
+  });
+
 
   it('should init search parameters properly and call retrieveSearchResults', fakeAsync(() => {
     spyOn((comp as any), 'retrieveSearchResults').and.callThrough();

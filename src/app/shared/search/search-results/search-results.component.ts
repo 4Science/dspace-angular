@@ -205,10 +205,14 @@ export class SearchResultsComponent {
    */
   @Input() customData: any;
 
+  configuration$: Observable<string>;
+
   constructor(
     protected searchConfigService: SearchConfigurationService,
     protected searchService: SearchService,
   ) {
+    this.filters$ = this.searchConfigService.getCurrentFilters();
+    this.configuration$ = this.searchConfigService.getCurrentConfiguration(this.configuration);
     this.activeFilters$ = this.searchConfigService.getCurrentFilters();
     this.appliedFilters$ = this.searchService.appliedFilters$;
   }
