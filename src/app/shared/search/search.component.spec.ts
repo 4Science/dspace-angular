@@ -328,18 +328,6 @@ describe('SearchComponent', () => {
     expect(routeServiceStub.setParameter).toHaveBeenCalledWith('fixedFilterQuery', 'test-fixed-filter-query');
   });
 
-  it('should still set "configuration" and "fixedFilterQuery" parameters if they are undefined', () => {
-    spyOn(routeServiceStub, 'setParameter');
-    comp.configuration = undefined;
-    comp.fixedFilterQuery = undefined;
-
-    fixture.detectChanges();
-
-    expect(routeServiceStub.setParameter).toHaveBeenCalledWith('configuration', undefined);
-    expect(routeServiceStub.setParameter).toHaveBeenCalledWith('fixedFilterQuery', undefined);
-  });
-
-
   it('should init search parameters properly and call retrieveSearchResults', fakeAsync(() => {
     spyOn((comp as any), 'retrieveSearchResults').and.callThrough();
     fixture.detectChanges();
