@@ -324,7 +324,7 @@ pipelines:
       - step: *angular-build
       - parallel: *parallel-run-tests
       - step: *build-and-push
-    'dspace-cris-2024_02_x':
+    'dspace-cris-2025_02_x':
       - step: *preliminary-operation
       - step: *angular-build
       - parallel: *parallel-run-tests
