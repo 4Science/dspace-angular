@@ -1,6 +1,11 @@
 :host {
   a {
     font-weight: normal;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
   }
 
   footer {
