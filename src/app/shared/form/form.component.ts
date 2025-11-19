@@ -197,11 +197,10 @@ export class FormComponent implements OnDestroy, OnInit {
         distinctUntilChanged())
         .subscribe((errors: FormError[]) => {
           const { formGroup, formModel } = this;
+          const existingMessages = new Set(this.formErrors.map(e => e.message));
+
           errors
-            .filter((error: FormError) => findIndex(this.formErrors, {
-              fieldId: error.fieldId,
-              fieldIndex: error.fieldIndex
-            }) === -1)
+            .filter((error: FormError) => !existingMessages.has(error.message))
             .forEach((error: FormError) => {
               const { fieldId } = error;
               const { fieldIndex } = error;
