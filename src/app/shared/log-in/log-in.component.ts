@@ -134,7 +134,7 @@ export class LogInComponent implements OnInit, OnDestroy {
           filter(routeData => !!routeData),
           map(data => data.isBackDoor),
         )),
-      map(([methods, isBackdoor]) => this.filterAndSortAuthMethods(methods, isBackdoor, !environment.auth.isPasswordLoginEnabledForAdminsOnly)),
+      map(([methods, isBackdoor]) => this.filterAndSortAuthMethods(methods, isBackdoor, environment.auth.isPasswordLoginEnabledForAdminsOnly)),
       // ignore the ip authentication method when it's returned by the backend
       map((authMethods: AuthMethod[]) => uniqBy(authMethods.filter(a => a.authMethodType !== AuthMethodType.Ip), 'authMethodType')),
     );
@@ -171,7 +171,7 @@ export class LogInComponent implements OnInit, OnDestroy {
         if (isBackdoor) {
           return authM.authMethodType === AuthMethodType.Password;
         }
-        if (!isPasswordLoginEnabledForAdminsOnly) {
+        if (isPasswordLoginEnabledForAdminsOnly) {
           return authM.authMethodType !== AuthMethodType.Password;
         }
         return true;
