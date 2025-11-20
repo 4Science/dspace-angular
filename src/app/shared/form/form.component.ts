@@ -294,7 +294,6 @@ export class FormComponent implements OnDestroy, OnInit {
         // Remove errors for fields no longer present
         this.formErrors.forEach(prev => {
           const key = `${prev.fieldId}:${prev.fieldIndex}`;
-          console.log('checking removal of', key, prevMap.has(key));
           if (!nextMap.has(key) && prevMap.has(key)) {
             const control = getControl(prev);
             if (control) {
