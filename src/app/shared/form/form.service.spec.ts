@@ -10,7 +10,7 @@ import { AppState } from '../../app.reducer';
 import { formReducer } from './form.reducer';
 import { getMockFormBuilderService } from '../mocks/form-builder-service.mock';
 import { DynamicConcatModel } from './builder/ds-dynamic-form-ui/models/ds-dynamic-concat.model';
-import { getMockTranslateService } from "../mocks/translate.service.mock";
+import { getMockTranslateService } from '../mocks/translate.service.mock';
 
 describe('FormService test suite', () => {
   const config = {

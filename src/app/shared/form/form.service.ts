@@ -22,7 +22,7 @@ import {
 import { FormEntry, FormError, FormTouchedState } from './form.reducer';
 import { environment } from '../../../environments/environment';
 import { DynamicLinkModel } from './builder/ds-dynamic-form-ui/models/ds-dynamic-link.model';
-import { TranslateService } from "@ngx-translate/core";
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class FormService {
