@@ -14,6 +14,7 @@ import {
   select,
   Store,
 } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import uniqueId from 'lodash/uniqueId';
 import { Observable } from 'rxjs';
 import {
@@ -51,7 +52,8 @@ export class FormService {
 
   constructor(
     private formBuilderService: FormBuilderService,
-    private store: Store<AppState>) {
+    private store: Store<AppState>,
+    private trnslateService: TranslateService) {
   }
 
   /**
@@ -159,7 +161,12 @@ export class FormService {
     }
     const errors: string[] = Object.keys(field.errors)
       .filter((errorKey) => field.errors[errorKey] === true)
-      .map((errorKey) => `error.validation.${errorKey}`);
+      .map((errorKey) => {
+        const defaultErrorKey = `error.validation.${errorKey}`;
+        const customErrorKey = `error.validation.${formId}.${errorKey}`;
+        const hasDefaultLabel = this.trnslateService.instant(defaultErrorKey) !== defaultErrorKey;
+        return hasDefaultLabel ? defaultErrorKey : customErrorKey;
+      });
     errors.forEach((error) => this.addError(formId, fieldId, fieldIndex, error));
   }
 
@@ -167,7 +174,6 @@ export class FormService {
 
     const error = {}; // create the error object
     const errorKey = this.getValidatorNameFromMap(message);
-    let errorMsg = message;
 
     // if form control model has no errorMessages object, create it
     if (!model.errorMessages) {
@@ -178,11 +184,7 @@ export class FormService {
     if (isEmpty(model.errorMessages[errorKey])) {
       // put the error message in the form control model
       model.errorMessages[errorKey] = message;
-    } else {
-      // Use correct error messages from the model
-      errorMsg = model.errorMessages[errorKey];
     }
-
     if (!field.hasError(errorKey)) {
       error[errorKey] = true;
       // add the error in the form control
@@ -205,11 +207,11 @@ export class FormService {
   public removeErrorFromField(field: AbstractControl, model: DynamicFormControlModel, messageKey: string) {
     const error = {};
     const errorKey = this.getValidatorNameFromMap(messageKey);
-
     if (field.hasError(errorKey)) {
       error[errorKey] = null;
-      field.setErrors(error);
-      field.clearValidators();
+      const updatedError = { ...field.errors, ...error };
+      field.setErrors(updatedError);
+      field.setValidators(() => updatedError);
       field.updateValueAndValidity();
     }
 
@@ -222,7 +224,12 @@ export class FormService {
       });
     }
 
-    field.markAsUntouched();
+    const hasDifferentErrors = Object.keys(field.errors).filter((key) => field.errors[key]).length > 0;
+
+    if (isEmpty(field.errors) || !hasDifferentErrors) {
+      field.markAsUntouched();
+    }
+
   }
 
   public resetForm(formGroup: UntypedFormGroup, groupModel: DynamicFormControlModel[], formId: string) {
