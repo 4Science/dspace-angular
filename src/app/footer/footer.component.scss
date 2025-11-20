@@ -28,6 +28,15 @@
       background-color: var(--ds-top-footer-bg);
       padding: var(--ds-footer-padding);
       margin: calc(var(--ds-footer-padding) * -1);
+
+      p a {
+        text-decoration: underline;
+
+        &:hover,
+        &:focus {
+          text-decoration: underline;
+        }
+      }
     }
 
     .bottom-footer {
