@@ -5191,6 +5191,8 @@
   "search.filters.applied.f.graphpubldatetrl": "Public date RTL",
 
   "search.filters.applied.f.organization": "Organisation",
+  
+  "search.filters.applied.f.knowslanguage": "Language",
 
   "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
 
