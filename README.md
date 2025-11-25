@@ -3,11 +3,13 @@
 dspace-angular
 ==============
 
-> The DSpace-CRIS 7 User Interface built on [Angular](https://angular.io/), written in [TypeScript](https://www.typescriptlang.org/) and using [Angular Universal](https://angular.io/guide/universal).
+> The DSpace-GLAM User Interface built on [Angular](https://angular.io/), written in [TypeScript](https://www.typescriptlang.org/) and using [Angular Universal](https://angular.io/guide/universal).
 
-This project is an extension of the DSpace 7 UI. For more information on the DSpace 7 release see the [DSpace 7.0 Release Status wiki page](https://wiki.lyrasis.org/display/DSPACE/DSpace+Release+7.0+Status)
+This project is a tailored configuration of the DSpace-CRIS UI. For more information on the DSpace-CRIS release see the [DSpace-CRIS wiki](https://wiki.lyrasis.org/display/DSPACECRIS/DSpace-CRIS+Home)
 
-You can find additional information on the DSpace 7 Angular UI on the [wiki](https://wiki.lyrasis.org/display/DSPACE/DSpace+7+-+Angular+UI+Development).
+You can find additional information on the Angular UI on the [wiki](https://wiki.lyrasis.org/display/DSPACE/DSpace+7+-+Angular+UI+Development).
+
+> As DSpace-GLAM is a tailored configuration of DSpace-CRIS, any references to DSpace-CRIS in the code or documentation also apply to DSpace-GLAM.
 
 
 Quick start
