@@ -44,6 +44,7 @@ import { ThemedPageErrorComponent } from './page-error/themed-page-error.compone
 import { ThemedPageInternalServerErrorComponent } from './page-internal-server-error/themed-page-internal-server-error.component';
 import { ThemedPageNotFoundComponent } from './pagenotfound/themed-pagenotfound.component';
 import { PROCESS_MODULE_PATH } from './process-page/process-page-routing.paths';
+import { RedirectService } from './redirect/redirect.service';
 import { viewTrackerResolver } from './statistics/angulartics/dspace/view-tracker.resolver';
 import { provideSubmissionState } from './submission/provide-submission-state';
 import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-routing-paths';
@@ -181,12 +182,12 @@ export const APP_ROUTES: Route[] = [
         canActivate: [authenticatedGuard, endUserAgreementCurrentUserGuard],
       },
       {
-        path: 'standard-login',
+        path: 'admin-only-login',
         loadChildren: () => import('./login-page/login-page-routes').then((m) => m.ROUTES),
         data: {
           isBackDoor: true,
         },
-        canMatch: [() => !environment.auth.disableStandardLogin],
+        canMatch: [() => environment.auth.isPasswordLoginEnabledForAdminsOnly],
       },
       {
         path: 'login',
@@ -333,7 +334,7 @@ export const APP_ROUTES: Route[] = [
           .then((m) => m.ROUTES),
         canActivate: [authenticatedGuard],
       },
-      { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent, data: { title: PAGE_NOT_FOUND_PATH }  },
+      { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent, data: { title: PAGE_NOT_FOUND_PATH }, canActivate: [RedirectService]  },
     ],
   },
 ];
