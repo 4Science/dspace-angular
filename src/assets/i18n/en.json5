@@ -3297,6 +3297,10 @@
 
   "item.page.author": "Authors",
 
+  "item.page.cc.license.title": "Creative Commons license",
+
+  "item.page.cc.license.disclaimer": "Except where otherwised noted, this item's license is described as",
+
   "item.page.citation": "Citation",
 
   "item.page.collections": "Collections",
