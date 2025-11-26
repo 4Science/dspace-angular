@@ -1,12 +1,14 @@
 import { REGEX_MATCH_NON_EMPTY_TEXT } from 'cypress/support/e2e';
 import { testA11y } from 'cypress/support/utils';
 
-xdescribe('Item Statistics Page', () => {
+describe('Item Statistics Page', () => {
     const ITEMSTATISTICSPAGE = '/statistics/items/'.concat(Cypress.env('DSPACE_TEST_ENTITY_PUBLICATION'));
+
+    const TOTALVISITSPERMONTHITEMSTATISTICSPAGE = ITEMSTATISTICSPAGE.concat('?reportType=TotalVisitsPerMonth');
 
     it('should load if you click on "Statistics" from an Item/Entity page', () => {
         cy.visit('/entities/publication/'.concat(Cypress.env('DSPACE_TEST_ENTITY_PUBLICATION')));
-        cy.get('a[data-test="link-menu-item.menu.section.statistics"]').click();
+        cy.get('button[data-test="statisticsButton"]').click();
         cy.location('pathname').should('eq', ITEMSTATISTICSPAGE);
     });
 
@@ -19,11 +21,6 @@ xdescribe('Item Statistics Page', () => {
     it('should contain a "Total visits" section', () => {
         cy.visit(ITEMSTATISTICSPAGE);
         cy.get('table[data-test="TotalVisits"]').should('be.visible');
-    });
-
-    it('should contain a "Total visits per month" section', () => {
-        cy.visit(ITEMSTATISTICSPAGE);
-        cy.get('table[data-test="TotalVisitsPerMonth"]').should('be.visible');
     });
 
     it('should pass accessibility tests', () => {

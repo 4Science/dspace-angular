@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { filter, map, shareReplay } from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { AuthMethod } from '../../core/auth/models/auth.method';
 import {
@@ -98,7 +99,7 @@ export class LogInComponent implements OnInit, OnDestroy {
           filter(routeData => !!routeData),
           map(data => data.isBackDoor),
         )),
-      map(([methods, isBackdoor]) => this.filterAndSortAuthMethods(methods, isBackdoor, environment.auth.disableStandardLogin)),
+      map(([methods, isBackdoor]) => this.filterAndSortAuthMethods(methods, isBackdoor, environment.auth.isPasswordLoginEnabledForAdminsOnly)),
       // ignore the ip authentication method when it's returned by the backend
       map((authMethods: AuthMethod[]) => uniqBy(authMethods.filter(a => a.authMethodType !== AuthMethodType.Ip), 'authMethodType'))
     );
@@ -118,21 +119,24 @@ export class LogInComponent implements OnInit, OnDestroy {
 
     this.canRegister$ = this.authorizationService.isAuthorized(FeatureID.EPersonRegistration);
 
-    this.canForgot$ = this.authorizationService.isAuthorized(FeatureID.EPersonForgotPassword).pipe(shareReplay(1));
-    this.canShowDivider$ = this.canRegister$.pipe(
-      combineLatestWith(this.canForgot$),
-      map(([canRegister, canForgot]) => (canRegister || canForgot) && (!environment.auth.disableStandardLogin || this.isStandalonePage)),
-      filter(Boolean)
+    this.canForgot$ = this.authorizationService.isAuthorized(FeatureID.EPersonForgotPassword).pipe(shareReplay({ refCount: false, bufferSize: 1 }));
+    this.canShowDivider$ = combineLatest([
+      this.canRegister$,
+      this.canForgot$,
+      this.route.data
+    ]).pipe(
+      map(([canRegister, canForgot, routeData]) => (canRegister || canForgot) && !routeData?.isBackDoor),
+      filter(Boolean),
     );
   }
 
-  filterAndSortAuthMethods(authMethods: AuthMethod[], isBackdoor: boolean, isStandardLoginDisabled = false): AuthMethod[] {
+  filterAndSortAuthMethods(authMethods: AuthMethod[], isBackdoor: boolean, isPasswordLoginEnabledForAdminsOnly = false): AuthMethod[] {
     return authMethods.filter((authMethod: AuthMethod) => {
         const methodComparison = (authM) => {
           if (isBackdoor) {
             return authM.authMethodType === AuthMethodType.Password;
           }
-          if (isStandardLoginDisabled) {
+          if (isPasswordLoginEnabledForAdminsOnly) {
             return authM.authMethodType !== AuthMethodType.Password;
           }
           return true;

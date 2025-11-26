@@ -127,7 +127,7 @@ describe('LogInComponent', () => {
 
     it('should render a log-in container component for each auth method available', () => {
       const loginContainers = fixture.debugElement.queryAll(By.css('ds-log-in-container'));
-      expect(loginContainers.length).toBe(2);
+      expect(loginContainers.length).toBe(1);
 
     });
 
@@ -143,14 +143,15 @@ describe('LogInComponent', () => {
       expect(result).toEqual([{ authMethodType: AuthMethodType.Password, position: 1 }]);
     });
 
-    it('excludes password method when standard login is disabled', () => {
+    it('does not exclude password method when isPasswordLoginEnabledForAdminsOnly is disabled', () => {
       const authMethods = [
         { authMethodType: AuthMethodType.Password, position: 1 },
         { authMethodType: AuthMethodType.Shibboleth, position: 2 },
       ];
       component.excludedAuthMethod = undefined;
-      const result = component.filterAndSortAuthMethods(authMethods, false, true);
+      const result = component.filterAndSortAuthMethods(authMethods, false, false);
       expect(result).toEqual([
+        { authMethodType: AuthMethodType.Password, position: 1 },
         { authMethodType: AuthMethodType.Shibboleth, position: 2 },
       ]);
     });
@@ -163,10 +164,10 @@ describe('LogInComponent', () => {
       ];
       const isBackdoor = false;
       component.excludedAuthMethod = AuthMethodType.Ip;
-      const result = component.filterAndSortAuthMethods(authMethods, isBackdoor);
+      const result = component.filterAndSortAuthMethods(authMethods, isBackdoor, false);
       expect(result).toEqual([
         { authMethodType: AuthMethodType.Password, position: 1 },
-        { authMethodType: AuthMethodType.Shibboleth, position: 3 },
+        { authMethodType: AuthMethodType.Shibboleth, position: 3 }
       ]);
     });
 
@@ -177,10 +178,10 @@ describe('LogInComponent', () => {
       ];
       const isBackdoor = false;
       component.excludedAuthMethod = undefined;
-      const result = component.filterAndSortAuthMethods(authMethods, isBackdoor);
+      const result = component.filterAndSortAuthMethods(authMethods, isBackdoor, false);
       expect(result).toEqual([
         { authMethodType: AuthMethodType.Shibboleth, position: 1 },
-        { authMethodType: AuthMethodType.Password, position: 2 },
+        { authMethodType: AuthMethodType.Password, position: 2 }
       ]);
     });
   });

@@ -1674,7 +1674,7 @@
 
   "context-menu.actions.audit-item.btn": "Audit",
 
-  "context-menu.actions.bulk-import.btn": "Import items into collection",
+  "context-menu.actions.bulk-import.btn": "Import into collection",
 
   "context-menu.actions.claim.btn": "Claim this profile",
 
@@ -3703,6 +3703,12 @@
   "item-export.modal.title": "Item Export Process Launcher",
 
   "item-export.process.title": "Bulk export item",
+
+  "item-deletion.process.title": "Deleting item",
+
+  "community-deletion.process.title": "Deleting community",
+
+  "collection-deletion.process.title": "Deleting collection",
 
   "itemtemplate.edit.metadata.add-button": "Add",
 
@@ -6660,6 +6666,8 @@
   "submission.sections.custom-url.label.previous-urls": "Previous Urls",
 
   "submission.sections.custom-url.alert.info": "Define here a custom URL which will be used to reach the item instead of using an internal randomly generated UUID identifier. ",
+
+  "submission.sections.custom-url.url.placeholder": "Custom URL",
 
   "submission.sections.accesses.form.discoverable-description": "When checked, this item will be discoverable in search/browse. When unchecked, the item will only be available via a direct link and will never appear in search/browse.",
 

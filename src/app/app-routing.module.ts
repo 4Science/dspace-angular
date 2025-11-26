@@ -179,12 +179,12 @@ import {
             canActivate: [GenericAdministratorGuard, EndUserAgreementCurrentUserGuard]
           },
           {
-            path: 'standard-login',
+            path: 'admin-only-login',
             loadChildren: () => import('./login-page/login-page.module').then((m) => m.LoginPageModule),
             data: {
               isBackDoor: true,
             },
-            canMatch: [() => environment.auth.disableStandardLogin],
+            canMatch: [() => environment.auth.isPasswordLoginEnabledForAdminsOnly],
           },
           {
             path: 'login',
@@ -192,7 +192,6 @@ import {
             data: {
               isBackDoor: false,
             },
-            canMatch: [() => !environment.auth.disableStandardLogin],
           },
           {
             path: 'external-login/:token',

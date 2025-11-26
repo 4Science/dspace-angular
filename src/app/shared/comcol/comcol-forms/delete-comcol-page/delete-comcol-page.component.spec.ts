@@ -1,35 +1,43 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommunityDataService } from '../../../../core/data/community-data.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import {
+  DSPACE_OBJECT_DELETION_SCRIPT_NAME,
+  ScriptDataService,
+} from '../../../../core/data/processes/script-data.service';
 import { Community } from '../../../../core/shared/community.model';
+import { ProcessParameter } from '../../../../process-page/processes/process-parameter.model';
+import { getMockTranslateService } from '../../../mocks/translate.service.mock';
+import { NotificationsService } from '../../../notifications/notifications.service';
+import {
+  createFailedRemoteDataObject$,
+  createSuccessfulRemoteDataObject$,
+} from '../../../remote-data.utils';
+import { NotificationsServiceStub } from '../../../testing/notifications-service.stub';
+import { getTestScheduler } from 'jasmine-marbles';
+import { of as observableOf } from 'rxjs';
+import { ComColDataService } from '../../../../core/data/comcol-data.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DeleteComColPageComponent } from './delete-comcol-page.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SharedModule } from '../../../shared.module';
 import { CommonModule } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { DeleteComColPageComponent } from './delete-comcol-page.component';
-import { NotificationsService } from '../../../notifications/notifications.service';
-import { NotificationsServiceStub } from '../../../testing/notifications-service.stub';
-import { getTestScheduler } from 'jasmine-marbles';
-import { ComColDataService } from '../../../../core/data/comcol-data.service';
-import { createFailedRemoteDataObject$, createNoContentRemoteDataObject$ } from '../../../remote-data.utils';
 
 describe('DeleteComColPageComponent', () => {
-  let comp: DeleteComColPageComponent<any>;
-  let fixture: ComponentFixture<DeleteComColPageComponent<any>>;
-  let dsoDataService: CommunityDataService;
   let router: Router;
+  let comp: DeleteComColPageComponent<any>;
+  let dsoDataService: CommunityDataService;
+  let notificationService: NotificationsServiceStub;
+  let fixture: ComponentFixture<DeleteComColPageComponent<any>>;
 
   let community;
   let newCommunity;
   let parentCommunity;
   let routerStub;
   let routeStub;
-  let notificationsService;
   let translateServiceStub;
-  let requestServiceStub;
-
+  let scriptService;
   let scheduler;
 
   const validUUID = 'valid-uuid';
@@ -62,13 +70,6 @@ describe('DeleteComColPageComponent', () => {
       }]
     });
 
-    dsoDataService = jasmine.createSpyObj(
-      'dsoDataService',
-      {
-        delete: createNoContentRemoteDataObject$(),
-        findByHref: jasmine.createSpy('findByHref'),
-      });
-
     routerStub = {
       navigate: (commands) => commands
     };
@@ -77,22 +78,23 @@ describe('DeleteComColPageComponent', () => {
       data: observableOf(community)
     };
 
-    translateServiceStub = jasmine.createSpyObj('TranslateService', {
-      instant: jasmine.createSpy('instant')
+    scriptService = jasmine.createSpyObj('scriptService', {
+      invoke: createSuccessfulRemoteDataObject$({ processId: '123' }),
     });
-
   }
 
   beforeEach(waitForAsync(() => {
     initializeVars();
+    notificationService = new NotificationsServiceStub();
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot(), SharedModule, CommonModule, RouterTestingModule],
       providers: [
         { provide: ComColDataService, useValue: dsoDataService },
         { provide: Router, useValue: routerStub },
         { provide: ActivatedRoute, useValue: routeStub },
-        { provide: NotificationsService, useValue: new NotificationsServiceStub() },
-        { provide: TranslateService, useValue: translateServiceStub },
+        { provide: ScriptDataService, useValue: scriptService },
+        { provide: NotificationsService, useValue: notificationService },
+        { provide: TranslateService, useValue: getMockTranslateService() },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
@@ -102,7 +104,6 @@ describe('DeleteComColPageComponent', () => {
     fixture = TestBed.createComponent(DeleteComColPageComponent);
     comp = fixture.componentInstance;
     fixture.detectChanges();
-    notificationsService = (comp as any).notifications;
     (comp as any).frontendURL = frontendURL;
     router = (comp as any).router;
     scheduler = getTestScheduler();
@@ -115,6 +116,8 @@ describe('DeleteComColPageComponent', () => {
       data1 = {
         dso: Object.assign(new Community(), {
           uuid: validUUID,
+          id: validUUID,
+          type: 'community',
           metadata: [{
             key: 'dc.title',
             value: 'test'
@@ -126,6 +129,7 @@ describe('DeleteComColPageComponent', () => {
       data2 = {
         dso: Object.assign(new Community(), {
           uuid: invalidUUID,
+          type: 'community',
           metadata: [{
             key: 'dc.title',
             value: 'test'
@@ -146,28 +150,33 @@ describe('DeleteComColPageComponent', () => {
     });
 
     it('should show an error notification on failure', () => {
-      (dsoDataService.delete as any).and.returnValue(createFailedRemoteDataObject$('Error', 500));
-      spyOn(router, 'navigate');
+      (scriptService.invoke as any).and.returnValue(createFailedRemoteDataObject$('Error', 500));
       scheduler.schedule(() => comp.onConfirm(data2));
       scheduler.flush();
       fixture.detectChanges();
-      expect(notificationsService.error).toHaveBeenCalled();
-      expect(router.navigate).toHaveBeenCalled();
+      expect(notificationService.error).toHaveBeenCalled();
     });
 
-    it('should show a success notification on success and navigate', () => {
+    it('should show a process notification, a success notification and navigate to home on success', waitForAsync(() => {
+      const parameterValues: ProcessParameter[] = [
+        Object.assign(new ProcessParameter(), { name: '-i', value: data1.dso.uuid }),
+      ];
+      (scriptService.invoke as jasmine.Spy).and.returnValue(createSuccessfulRemoteDataObject$({ processId: '123' }));
       spyOn(router, 'navigate');
-      scheduler.schedule(() => comp.onConfirm(data1));
-      scheduler.flush();
-      fixture.detectChanges();
-      expect(notificationsService.success).toHaveBeenCalled();
-      expect(router.navigate).toHaveBeenCalled();
-    });
+      comp.onConfirm(data1.dso);
+      expect(scriptService.invoke).toHaveBeenCalledWith(DSPACE_OBJECT_DELETION_SCRIPT_NAME, parameterValues, []);
+      expect(notificationService.process).toHaveBeenCalledWith('123', 5000, jasmine.anything());
+      expect(notificationService.success).toHaveBeenCalled();
+      expect(router.navigate).toHaveBeenCalledWith(['/']);
+    }));
 
-    it('should call delete on the data service', () => {
+    it('should call script service invoke', () => {
+      const parameterValues: ProcessParameter[] = [
+        Object.assign(new ProcessParameter(), { name: '-i', value: data1.uuid }),
+      ];
       comp.onConfirm(data1);
       fixture.detectChanges();
-      expect(dsoDataService.delete).toHaveBeenCalledWith(data1.id);
+      expect(scriptService.invoke).toHaveBeenCalledWith(DSPACE_OBJECT_DELETION_SCRIPT_NAME, parameterValues, []);
     });
   });
 
