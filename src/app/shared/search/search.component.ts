@@ -24,7 +24,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NavigationStart, Router } from '@angular/router';
 
 import { BehaviorSubject, combineLatest, Observable, Subscription, of } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
 import uniqueId from 'lodash/uniqueId';
 import {
   BehaviorSubject,
@@ -553,15 +553,16 @@ export class SearchComponent implements OnDestroy, OnInit {
       distinctUntilChanged(),
     );
     const searchOptions$: Observable<PaginatedSearchOptions> = this.getSearchOptions().pipe(distinctUntilChanged());
+    const queryFromQueryParam$: Observable<string> = this.routeService.getQueryParameterValue('query').pipe(distinctUntilChanged());
 
-    this.subs.push(combineLatest([configuration$, searchSortOptions$, searchOptions$, sortOption$, this.currentScope$]).pipe(
-      filter(([configuration, searchSortOptions, searchOptions, sortOption, scope]: [string, SortOptions[], PaginatedSearchOptions, SortOptions, string]) => {
+    this.subs.push(combineLatest([configuration$, searchSortOptions$, searchOptions$, sortOption$, this.currentScope$, queryFromQueryParam$]).pipe(
+      filter(([configuration, searchSortOptions, searchOptions, sortOption, scope, queryFromQueryParam]: [string, SortOptions[], PaginatedSearchOptions, SortOptions, string, string]) => {
         // filter for search options related to instanced paginated id
         return searchOptions.pagination.id === this.paginationId;
       }),
-      debounceTime(100),
-    ).subscribe(([configuration, searchSortOptions, searchOptions, sortOption, scope]:
-                 [string, SortOptions[], PaginatedSearchOptions, SortOptions, string]) => {
+      // debounceTime(100),
+    ).subscribe(([configuration, searchSortOptions, searchOptions, sortOption, scope, queryFromQueryParam]:
+                 [string, SortOptions[], PaginatedSearchOptions, SortOptions, string, string]) => {
       // Always apply the freshly resolved configuration (do NOT keep stale one)
       const combinedOptions = Object.assign({}, searchOptions, {
         configuration,
@@ -570,6 +571,14 @@ export class SearchComponent implements OnDestroy, OnInit {
       });
       if (combinedOptions.query === '') {
         combinedOptions.query = this.query;
+      }
+      if (this.searchOptions$.value) {
+        const currentOptions = this.searchOptions$.value;
+        const query = currentOptions.query;
+        if (isNotEmpty(query) && (isEmpty(combinedOptions.query) || isEmpty(queryFromQueryParam))) {
+          combinedOptions.query = '';
+          this.query = '';
+        }
       }
       if (isEmpty(combinedOptions.scope)) {
         combinedOptions.scope = scope;
