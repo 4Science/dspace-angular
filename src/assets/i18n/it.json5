@@ -5596,6 +5596,10 @@
   // TODO New key - Add a translation
   "item.preview.organization.address.addressCountry": "Country",
 
+  // "item.preview.organization.address.addressLocality": "City",
+  // TODO New key - Add a translation
+  "item.preview.organization.address.addressLocality": "City",
+
   // "item.preview.organization.foundingDate": "Founding Date",
   // TODO New key - Add a translation
   "item.preview.organization.foundingDate": "Founding Date",
