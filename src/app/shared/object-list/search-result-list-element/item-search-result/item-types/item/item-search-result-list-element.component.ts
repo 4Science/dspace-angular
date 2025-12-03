@@ -107,6 +107,10 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
   ngOnInit(): void {
     super.ngOnInit();
     this.itemPageRoute = getItemPageRoute(this.dso);
+    // Escape < and > in dsoTitle if it exists
+    if (this.dsoTitle) {
+      this.dsoTitle = this.dsoTitle.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
   }
 
   /**
