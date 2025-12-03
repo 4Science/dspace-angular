@@ -3552,6 +3552,8 @@
 
   "item.preview.organization.address.addressCountry": "Country",
 
+  "item.preview.organization.address.addressLocality": "City",
+
   "item.preview.organization.foundingDate": "Founding Date",
 
   "item.preview.organization.identifier.crossrefid": "CrossRef ID",
