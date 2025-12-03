@@ -18,8 +18,8 @@ import { ItemListPreviewComponent as BaseComponent } from '../../../../../../../
 import { AdditionalMetadataComponent } from '../../../../../../../app/shared/object-list/search-result-list-element/additional-metadata/additional-metadata.component';
 import { TruncatableComponent } from '../../../../../../../app/shared/truncatable/truncatable.component';
 import { TruncatablePartComponent } from '../../../../../../../app/shared/truncatable/truncatable-part/truncatable-part.component';
+import { EscapeHtmlPipe } from '../../../../../../../app/shared/utils/escape-html.pipe';
 import { ThemedThumbnailComponent } from '../../../../../../../app/thumbnail/themed-thumbnail.component';
-import {EscapeHtmlPipe} from "../../../../../../../app/shared/utils/escape-html.pipe";
 
 @Component({
   selector: 'ds-themed-item-list-preview',

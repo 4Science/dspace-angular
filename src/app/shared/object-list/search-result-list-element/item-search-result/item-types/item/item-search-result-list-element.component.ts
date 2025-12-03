@@ -52,12 +52,12 @@ import { listableObjectComponent } from '../../../../../object-collection/shared
 import { TruncatableComponent } from '../../../../../truncatable/truncatable.component';
 import { TruncatableService } from '../../../../../truncatable/truncatable.service';
 import { TruncatablePartComponent } from '../../../../../truncatable/truncatable-part/truncatable-part.component';
+import { EscapeHtmlPipe } from '../../../../../utils/escape-html.pipe';
 import { VarDirective } from '../../../../../utils/var.directive';
 import { MetricBadgesComponent } from '../../../../metric-badges/metric-badges.component';
 import { MetricDonutsComponent } from '../../../../metric-donuts/metric-donuts.component';
 import { AdditionalMetadataComponent } from '../../../additional-metadata/additional-metadata.component';
 import { SearchResultListElementComponent } from '../../../search-result-list-element.component';
-import {EscapeHtmlPipe} from "../../../../../utils/escape-html.pipe";
 
 @listableObjectComponent('PublicationSearchResult', ViewMode.ListElement)
 @listableObjectComponent(ItemSearchResult, ViewMode.ListElement)
