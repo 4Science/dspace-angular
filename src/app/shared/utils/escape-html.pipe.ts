@@ -10,17 +10,10 @@ import {
 export class EscapeHtmlPipe implements PipeTransform {
   /**
    * Escape HTML special characters and convert newlines to <br>
-   * @param value - The string to escape
-   * @returns The escaped string safe for innerHTML rendering
+   * @param text
    */
-  transform(value: string): string {
-    if (!value) {
-      return value;
-    }
+  transform(text: string): string {
     const newlineRegex = /\n/g;
-    return value
-      .replace(/>/g, '&gt;')
-      .replace(/</g, '&lt;')
-      .replace(newlineRegex, '<br>');
+    return text.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(newlineRegex, '<br>');
   }
 }

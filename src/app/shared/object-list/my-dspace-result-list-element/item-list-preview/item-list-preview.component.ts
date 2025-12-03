@@ -36,6 +36,7 @@ import { TruncatableComponent } from '../../../truncatable/truncatable.component
 import { TruncatableService } from '../../../truncatable/truncatable.service';
 import { TruncatablePartComponent } from '../../../truncatable/truncatable-part/truncatable-part.component';
 import { AdditionalMetadataComponent } from '../../search-result-list-element/additional-metadata/additional-metadata.component';
+import {EscapeHtmlPipe} from "../../../utils/escape-html.pipe";
 
 /**
  * This component show metadata for the given item object in the list view.
@@ -62,6 +63,7 @@ import { AdditionalMetadataComponent } from '../../search-result-list-element/ad
     AdditionalMetadataComponent,
     ItemCorrectionComponent,
     InWorkflowStatisticsComponent,
+    EscapeHtmlPipe,
   ],
 })
 export class ItemListPreviewComponent implements OnInit {

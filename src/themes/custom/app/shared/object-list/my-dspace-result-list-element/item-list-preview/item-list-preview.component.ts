@@ -19,6 +19,7 @@ import { AdditionalMetadataComponent } from '../../../../../../../app/shared/obj
 import { TruncatableComponent } from '../../../../../../../app/shared/truncatable/truncatable.component';
 import { TruncatablePartComponent } from '../../../../../../../app/shared/truncatable/truncatable-part/truncatable-part.component';
 import { ThemedThumbnailComponent } from '../../../../../../../app/thumbnail/themed-thumbnail.component';
+import {EscapeHtmlPipe} from "../../../../../../../app/shared/utils/escape-html.pipe";
 
 @Component({
   selector: 'ds-themed-item-list-preview',
@@ -44,6 +45,7 @@ import { ThemedThumbnailComponent } from '../../../../../../../app/thumbnail/the
     AdditionalMetadataComponent,
     ItemCorrectionComponent,
     InWorkflowStatisticsComponent,
+    EscapeHtmlPipe,
   ],
 })
 export class ItemListPreviewComponent extends BaseComponent {
