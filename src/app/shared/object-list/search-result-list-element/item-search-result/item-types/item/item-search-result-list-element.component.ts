@@ -57,6 +57,7 @@ import { MetricBadgesComponent } from '../../../../metric-badges/metric-badges.c
 import { MetricDonutsComponent } from '../../../../metric-donuts/metric-donuts.component';
 import { AdditionalMetadataComponent } from '../../../additional-metadata/additional-metadata.component';
 import { SearchResultListElementComponent } from '../../../search-result-list-element.component';
+import {EscapeHtmlPipe} from "../../../../../utils/escape-html.pipe";
 
 @listableObjectComponent('PublicationSearchResult', ViewMode.ListElement)
 @listableObjectComponent(ItemSearchResult, ViewMode.ListElement)
@@ -66,7 +67,7 @@ import { SearchResultListElementComponent } from '../../../search-result-list-el
   styleUrls: ['./item-search-result-list-element.component.scss'],
   templateUrl: './item-search-result-list-element.component.html',
   standalone: true,
-  imports: [NgIf, RouterLink, ThemedThumbnailComponent, NgClass, ThemedBadgesComponent, TruncatableComponent, TruncatablePartComponent, NgFor, AsyncPipe, TranslateModule, AdditionalMetadataComponent, MetadataLinkViewComponent, MetricBadgesComponent, MetricDonutsComponent, VarDirective, InWorkflowStatisticsComponent],
+  imports: [NgIf, RouterLink, ThemedThumbnailComponent, NgClass, ThemedBadgesComponent, TruncatableComponent, TruncatablePartComponent, NgFor, AsyncPipe, TranslateModule, AdditionalMetadataComponent, MetadataLinkViewComponent, MetricBadgesComponent, MetricDonutsComponent, VarDirective, InWorkflowStatisticsComponent, EscapeHtmlPipe],
 })
 /**
  * The component for displaying a list element for an item search result of the type Publication
@@ -107,10 +108,6 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
   ngOnInit(): void {
     super.ngOnInit();
     this.itemPageRoute = getItemPageRoute(this.dso);
-    // Escape < and > in dsoTitle if it exists
-    if (this.dsoTitle) {
-      this.dsoTitle = this.dsoTitle.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    }
   }
 
   /**
