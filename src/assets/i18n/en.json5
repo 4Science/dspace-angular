@@ -3297,6 +3297,10 @@
 
   "item.page.author": "Authors",
 
+  "item.page.cc.license.title": "Creative Commons license",
+
+  "item.page.cc.license.disclaimer": "Except where otherwised noted, this item's license is described as",
+
   "item.page.citation": "Citation",
 
   "item.page.collections": "Collections",
@@ -5193,6 +5197,8 @@
   "search.filters.applied.f.graphpubldatetrl": "Public date RTL",
 
   "search.filters.applied.f.organization": "Organisation",
+
+  "search.filters.applied.f.knowslanguage": "Language",
 
   "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
 
