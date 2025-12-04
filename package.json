@@ -1,6 +1,6 @@
 {
   "name": "dspace-angular",
-  "version": "2024.02.03-SNAPSHOT",
+  "version": "2024.02.04-SNAPSHOT",
   "scripts": {
     "ng": "ng",
     "config:watch": "nodemon",
@@ -138,6 +138,7 @@
     "markdown-it": "^13.0.1",
     "mirador": "^3.4.3",
     "mirador-dl-plugin": "^0.13.0",
+    "mirador-imagecropper": "^0.1.9",
     "mirador-share-plugin": "^0.16.0",
     "morgan": "^1.10.0",
     "ng2-file-upload": "5.0.0",

@@ -97,7 +97,7 @@ describe('New Submission page', () => {
       cy.get('[data-dismiss="alert"]').click({ multiple: true });
 
       // This is the GET command that will actually run the search
-      cy.intercept('GET', '*/server/api/discover/search/objects*').as('search-results');
+      cy.intercept('GET', '**/server/api/discover/search/objects*').as('search-results');
       // On MyDSpace, find the submission we just saved via its ID
       cy.get('[data-test="search-box"]').type(id);
       cy.get('[data-test="search-button"]').click();
@@ -131,7 +131,7 @@ describe('New Submission page', () => {
     cy.get('ds-uploader').trigger('dragover');
 
     // This is the POST command that will upload the file
-    cy.intercept('POST', '*/server/api/submission/workspaceitems/*').as('upload');
+    cy.intercept('POST', '**/server/api/submission/workspaceitems/*').as('upload');
 
     // Upload our DSpace logo via drag & drop onto submission form
     // cy.get('div#section_upload')
