@@ -12,6 +12,7 @@ import { FieldRenderingType } from '../../metadata-box.decorator';
 import { MetadataRenderComponent } from '../../../row/metadata-container/metadata-render/metadata-render.component';
 import { DsDatePipe } from '../../../../../../../pipes/ds-date.pipe';
 import { TextComponent } from '../../text/text.component';
+import {EscapeHtmlPipe} from "../../../../../../../../shared/utils/escape-html.pipe";
 
 describe('TableComponent', () => {
   let component: TableComponent;
@@ -95,7 +96,8 @@ describe('TableComponent', () => {
         DsDatePipe,
         MetadataRenderComponent,
         TableComponent,
-        TextComponent
+        TextComponent,
+        EscapeHtmlPipe,
       ]
     }).overrideComponent(TableComponent, {
       set: { changeDetection: ChangeDetectionStrategy.OnPush }

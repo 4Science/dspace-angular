@@ -13,6 +13,7 @@ import { LayoutField } from '../../../../../../../../core/layout/models/box.mode
 import { TextComponent } from '../../text/text.component';
 import { DsDatePipe } from '../../../../../../../pipes/ds-date.pipe';
 import { MetadataRenderComponent } from '../../../row/metadata-container/metadata-render/metadata-render.component';
+import {EscapeHtmlPipe} from "../../../../../../../../shared/utils/escape-html.pipe";
 
 describe('InlineComponent', () => {
   let component: InlineComponent;
@@ -90,7 +91,8 @@ describe('InlineComponent', () => {
         DsDatePipe,
         MetadataRenderComponent,
         InlineComponent,
-        TextComponent
+        TextComponent,
+        EscapeHtmlPipe,
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(InlineComponent, {

@@ -12,6 +12,7 @@ import { DSONameServiceMock, UNDEFINED_NAME } from '../../../../../mocks/dso-nam
 import { VarDirective } from '../../../../../utils/var.directive';
 import { APP_CONFIG } from '../../../../../../../config/app-config.interface';
 import { TranslateModule } from '@ngx-translate/core';
+import { EscapeHtmlPipe } from '../../../../../utils/escape-html.pipe';
 
 let publicationListElementComponent: ItemSearchResultListElementComponent;
 let fixture: ComponentFixture<ItemSearchResultListElementComponent>;
@@ -194,7 +195,7 @@ describe('ItemSearchResultListElementComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot()],
-      declarations: [ItemSearchResultListElementComponent, TruncatePipe, VarDirective],
+      declarations: [ItemSearchResultListElementComponent, TruncatePipe, VarDirective, EscapeHtmlPipe],
       providers: [
         { provide: TruncatableService, useValue: truncatableServiceStub },
         { provide: DSONameService, useClass: DSONameServiceMock },
@@ -403,7 +404,7 @@ describe('ItemSearchResultListElementComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot()],
-      declarations: [ItemSearchResultListElementComponent, TruncatePipe],
+      declarations: [ItemSearchResultListElementComponent, TruncatePipe, EscapeHtmlPipe],
       providers: [
         {provide: TruncatableService, useValue: truncatableServiceStub},
         {provide: DSONameService, useClass: DSONameServiceMock},
