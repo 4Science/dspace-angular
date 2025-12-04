@@ -1,8 +1,8 @@
-<div class="mb-2">
+<div class="mb-2" [attr.lang]="metadataValue.language">
    <div class="{{field.styleValue}}">
     <ds-truncatable [id]="truncableId">
       <ds-truncatable-part [id]="truncableId" [minLines]="3">
-        <div [innerHTML]="formatText(metadataValue.value)" data-test="formatted-text"></div>
+        <span [innerHTML]="formatText(metadataValue.value)" data-test="formatted-text"></span>
       </ds-truncatable-part>
     </ds-truncatable>
   </div>

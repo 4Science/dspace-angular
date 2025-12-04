@@ -2,10 +2,10 @@
 # See https://github.com/DSpace/dspace-angular/tree/main/docker for usage details
 
 ARG NODE_VERSION=22
-ARG DSPACE_VERSION=2024_02_x
+ARG DSPACE_VERSION=dspace-cris-2024_02_x
 ARG DOCKER_REGISTRY=docker.io
 
-FROM ${DOCKER_REGISTRY:-docker.io}/4science/dspace-cris-angular-dependencies:${DSPACE_VERSION:-2024_02_x} AS dev
+FROM ${DOCKER_REGISTRY:-docker.io}/4science/dspace-cris-angular-dependencies:${DSPACE_VERSION:-dspace-cris-2024_02_x} AS dev
 
 WORKDIR /app
 ADD . /app/

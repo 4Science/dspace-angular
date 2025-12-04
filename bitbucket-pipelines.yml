@@ -18,8 +18,8 @@ definitions:
           - git config --global user.name "${BB_EMAIL}"
           - git clone https://x-token-auth:${E2ERUNNERS_ACCESS_TOKEN}@${E2E_VALUES_REPO}
           - cd e2erunners-values
-          - sed "s#HASH_COMMIT#${HASH_COMMIT}#g" TPL > ${HASH_COMMIT}
-          - sed -i "s#BRANCH_NAME#${BRANCH_NAME}#g" TPL ${HASH_COMMIT}
+          - sed "s#HASH_COMMIT#${HASH_COMMIT}#g" TPL-cris-2025 > ${HASH_COMMIT}
+          - sed -i "s#BRANCH_NAME#${BRANCH_NAME}#g" TPL-cris-2025 ${HASH_COMMIT}
           - git add ${HASH_COMMIT}
           - git commit -m "Add configuration for e2e-${HASH_COMMIT}" || echo "No changes to commit"
           - git push
@@ -44,8 +44,8 @@ definitions:
           - git config --global user.name "${BB_EMAIL}"
           - git clone https://x-token-auth:${E2ERUNNERS_ACCESS_TOKEN}@${E2E_VALUES_REPO}
           - cd e2erunners-values
-          - sed "s#HASH_COMMIT#${HASH_COMMIT}#g" TPL > ${HASH_COMMIT}
-          - sed -i "s#BRANCH_NAME#${BRANCH_NAME}#g" TPL ${HASH_COMMIT}
+          - sed "s#HASH_COMMIT#${HASH_COMMIT}#g" TPL-cris-2025 > ${HASH_COMMIT}
+          - sed -i "s#BRANCH_NAME#${BRANCH_NAME}#g" TPL-cris-2025 ${HASH_COMMIT}
           - git add ${HASH_COMMIT}
           - git commit -m "Add configuration for e2e-${HASH_COMMIT}" || echo "No changes to commit"
           - git push
@@ -105,6 +105,7 @@ definitions:
           - node-2024-02-x
           - cypress-2024-02-x
         script:
+          - apt-get update && apt-get install -y curl
           - export HASH_COMMIT=${BITBUCKET_COMMIT:0:8}
           - echo "Running tests for commit $HASH_COMMIT"
           - export DSPACE_REST_HOST=${E2E_RUNNER_HOST}
@@ -120,6 +121,27 @@ definitions:
           - export CYPRESS_CACHE_FOLDER=~/.cache/Cypress
           - export CHROME_FLAGS="--no-sandbox --disable-dev-shm-usage --disable-gpu"
           - export NODE_OPTIONS="--max-old-space-size=4096"
+          - |
+            MAX_RETRIES=10
+            RETRY_COUNT=0
+            SUCCESS=false
+            while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+              echo "Pinging REST endpoint... (Attempt $((RETRY_COUNT+1)))"
+              STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://$DSPACE_REST_HOST$DSPACE_REST_NAMESPACE")
+              if [ "$STATUS_CODE" -lt 400 ]; then
+                echo "REST endpoint is up! Status code: $STATUS_CODE"
+                SUCCESS=true
+                break
+              else
+                echo "REST endpoint not ready (Status code: $STATUS_CODE). Retrying in 60 seconds..."
+                RETRY_COUNT=$((RETRY_COUNT+1))
+                sleep 60
+              fi
+            done
+            if [ "$SUCCESS" = "false" ]; then
+              echo "REST endpoint did not become available after $MAX_RETRIES attempts. Failing the build."
+              exit 1
+            fi
           - npx cypress install
           - yarn serve:ssr &
           - echo "Waiting for server to start..."
@@ -184,6 +206,21 @@ definitions:
           - git commit -am "Update TAG with ${BRANCH_NAME}-${HASH_COMMIT}" || echo "No changes to commit"
           - git push
 
+    - step: &deploy-on-test
+        name: Deploy on Test environment
+        image: alpine/git:latest
+        script:
+          - export HASH_COMMIT=${BITBUCKET_COMMIT:0:8}
+          - export BRANCH_NAME=$(echo "$BITBUCKET_BRANCH" | tr '[:upper:]' '[:lower:]' | sed 's|/|--|g')
+          - export BRANCH_FILE=$(echo "$BITBUCKET_BRANCH" | awk -F'/' '{if(NF==1)val=$1;else if(NF==2)val=$2;else if(NF==3)val=$2;else val=$3;gsub(/_/, "-", val);print tolower(val)}')
+          - git clone https://x-token-auth:${DSPACE_VALUES_ACCESS_TOKEN}@${DSPACE_VALUES_REPO}
+          - cd dspace-values
+          - '[ -f "test/${BRANCH_FILE}" ] && sed -i "/^angular:/,/^[^ ]/s/\(tag: \).*/\1${BRANCH_NAME}-${HASH_COMMIT}/" "test/${BRANCH_FILE}" && sed -i "s/^\([[:space:]]*replicaCount:\) 0/\1 1/" "test/${BRANCH_FILE}"'
+          - git config --global user.email "${BB_EMAIL}"
+          - git config --global user.name "${BB_USER}"
+          - git commit -am "Update TAG with ${BRANCH_NAME}-${HASH_COMMIT}" || echo "No changes to commit"
+          - git push
+
     - step: &turn-on-dev
         name: Turn On Dev environment
         image: alpine/git:latest
@@ -214,6 +251,21 @@ definitions:
           - git commit -am "Enable staging environment for ${BRANCH_NAME}" || echo "No changes to commit"
           - git push
 
+    - step: &turn-on-test
+        name: Turn On Test environment
+        image: alpine/git:latest
+        script:
+          - export HASH_COMMIT=${BITBUCKET_COMMIT:0:8}
+          - export BRANCH_NAME=$(echo "$BITBUCKET_BRANCH" | tr '[:upper:]' '[:lower:]' | sed 's|/|--|g')
+          - export BRANCH_FILE=$(echo "$BITBUCKET_BRANCH" | awk -F'/' '{if(NF==1)val=$1;else if(NF==2)val=$2;else if(NF==3)val=$2;else val=$3;gsub(/_/, "-", val);print tolower(val)}')
+          - git clone https://x-token-auth:${DSPACE_VALUES_ACCESS_TOKEN}@${DSPACE_VALUES_REPO}
+          - cd dspace-values
+          - '[ -f "test/${BRANCH_FILE}" ] && sed -i "s/^\([[:space:]]*replicaCount:\) 0/\1 1/" "staging/${BRANCH_FILE}"'
+          - git config --global user.email "${BB_USER}"
+          - git config --global user.name "${BB_EMAIL}"
+          - git commit -am "Enable test environment for ${BRANCH_NAME}" || echo "No changes to commit"
+          - git push
+
     - step: &find-and-invalidate-cloudfront-dev
         name: Invalidate CloudFront Dev Cache
         image: amazon/aws-cli
@@ -223,7 +275,7 @@ definitions:
           - export AWS_DEFAULT_REGION=$AWS_REGION
           - export CLOUDFRONT_NAME=$(echo "$BITBUCKET_BRANCH" | awk -F'/' '{if(NF==1)val=$1;else if(NF==2)val=$2;else if(NF==3)val=$2;else val=$3;gsub(/_/, "-", val);print tolower(val)}')
           - export CLOUDFRONT_DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Comment=='dev--${CLOUDFRONT_NAME}'].Id" --output text)
-          - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+          - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*" || echo "CloudFront distribution $CLOUDFRONT_DISTRIBUTION_ID not found — skipping invalidation."
 
     - step: &find-and-invalidate-cloudfront-staging
         name: Invalidate CloudFront Staging Cache
@@ -234,7 +286,18 @@ definitions:
           - export AWS_DEFAULT_REGION=$AWS_REGION
           - export CLOUDFRONT_NAME=$(echo "$BITBUCKET_BRANCH" | awk -F'/' '{if(NF==1)val=$1;else if(NF==2)val=$2;else if(NF==3)val=$2;else val=$3;gsub(/_/, "-", val);print tolower(val)}')
           - export CLOUDFRONT_DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Comment=='staging--${CLOUDFRONT_NAME}'].Id" --output text)
-          - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+          - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*" || echo "CloudFront distribution $CLOUDFRONT_DISTRIBUTION_ID not found — skipping invalidation."
+
+    - step: &find-and-invalidate-cloudfront-test
+        name: Invalidate CloudFront Test Cache
+        image: amazon/aws-cli
+        script:
+          - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_CF_KEY_ID
+          - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_CF_KEY
+          - export AWS_DEFAULT_REGION=$AWS_REGION
+          - export CLOUDFRONT_NAME=$(echo "$BITBUCKET_BRANCH" | awk -F'/' '{if(NF==1)val=$1;else if(NF==2)val=$2;else if(NF==3)val=$2;else val=$3;gsub(/_/, "-", val);print tolower(val)}')
+          - export CLOUDFRONT_DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Comment=='test--${CLOUDFRONT_NAME}'].Id" --output text)
+          - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*" || echo "CloudFront distribution $CLOUDFRONT_DISTRIBUTION_ID not found — skipping invalidation."
 
 pipelines:
   custom:
@@ -253,6 +316,8 @@ pipelines:
       - step: *turn-on-dev
     turn-on-staging:
       - step: *turn-on-staging
+    turn-on-test:
+      - step: *turn-on-test
   branches:
     'main-cris':
       - step: *preliminary-operation
@@ -277,6 +342,14 @@ pipelines:
       - step: *find-and-invalidate-cloudfront-dev
       - step: *deploy-on-staging
       - step: *find-and-invalidate-cloudfront-staging
+    'test/**':
+      - step: *preliminary-operation
+      - step: *angular-build
+      - parallel: *parallel-run-tests
+      - step: *build-and-push
+      - step: *deploy-on-test
+      - step: *find-and-invalidate-cloudfront-test
+
   pull-requests:
     '**':
       - step: *preliminary-operation
