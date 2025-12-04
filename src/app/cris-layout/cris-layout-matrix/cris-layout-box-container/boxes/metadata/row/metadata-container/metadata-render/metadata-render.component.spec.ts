@@ -13,7 +13,7 @@ import { FieldRenderingType } from '../../../rendering-types/metadata-box.decora
 import { LayoutField } from '../../../../../../../../core/layout/models/box.model';
 import { TableComponent } from '../../../rendering-types/metadataGroup/table/table.component';
 import { PLACEHOLDER_PARENT_METADATA } from '../../../../../../../../shared/form/builder/ds-dynamic-form-ui/ds-dynamic-form-constants';
-import {EscapeHtmlPipe} from "../../../../../../../../shared/utils/escape-html.pipe";
+import {EscapeHtmlPipe} from '../../../../../../../../shared/utils/escape-html.pipe';
 
 describe('MetadataRenderComponent', () => {
   let component: MetadataRenderComponent;

@@ -9,7 +9,7 @@ import { Item } from '../../../../../../../core/shared/item.model';
 import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate-loader.mock';
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
-import {EscapeHtmlPipe} from "../../../../../../../shared/utils/escape-html.pipe";
+import {EscapeHtmlPipe} from '../../../../../../../shared/utils/escape-html.pipe';
 
 describe('LongtextComponent', () => {
   let component: LongtextComponent;
