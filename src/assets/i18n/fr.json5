@@ -2218,8 +2218,7 @@
   "browse.startsWith.type_date.label": "Ou saisir une date (année-mois) puis cliquer sur le bouton « Parcourir »",
 
   // "browse.startsWith.type_text": "Filter results by typing the first few letters",
-  // TODO Source message changed - Revise the translation
-  "browse.startsWith.type_text": "Ou saisir les premières lettres puis cliquer sur le bouton « Parcourir »",
+  "browse.startsWith.type_text": "Filtrer les résultats en saisissant les premières lettres et en cliquant sur Valider",
 
   // "browse.startsWith.input": "Filter",
   // TODO New key - Add a translation
