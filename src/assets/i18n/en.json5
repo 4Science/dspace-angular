@@ -1344,7 +1344,7 @@
 
   "browse.startsWith.type_date.label": "Or type in a date (year-month) and click on the Browse button",
 
-  "browse.startsWith.type_text": "Filter results by typing the first few letters",
+  "browse.startsWith.type_text": "Filter results by typing the first letters and clicking on Browse",
 
   "browse.startsWith.input": "Filter",
 
