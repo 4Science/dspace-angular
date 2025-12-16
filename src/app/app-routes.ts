@@ -324,7 +324,7 @@ export const APP_ROUTES: Route[] = [
           .then((m) => m.ROUTES),
       },
       {
-        path: 'luck-search',
+        path: 'lucky-search',
         loadChildren: () => import('./lucky-search/lucky-search-routes')
           .then((m) => m.ROUTES),
       },
