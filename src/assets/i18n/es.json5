@@ -1847,7 +1847,7 @@
   "browse.startsWith.type_date.label": "O escriba una fecha (año-mes) y haga clic en el botón Examinar",
 
   // "browse.startsWith.type_text": "Filter results by typing the first few letters",
-  "browse.startsWith.type_text": "Seleccione resultados tecleando las primeras letras",
+  "browse.startsWith.type_text": "Filtre los resultados escribiendo las primeras letras y haciendo clic en Examinar",
 
   // "browse.startsWith.input": "Filter",
   "browse.startsWith.input": "Filtrar",
