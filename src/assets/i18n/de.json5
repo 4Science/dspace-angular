@@ -2138,7 +2138,7 @@
   "browse.startsWith.type_date.label": "Oder geben Sie ein Datum ein (Jahr-Monat) und klicken Sie auf die Schaltfläche Durchsuchen",
 
   // "browse.startsWith.type_text": "Filter results by typing the first few letters",
-  "browse.startsWith.type_text": "Ergebnisse durch Eingabe der ersten Buchstaben filtern",
+  "browse.startsWith.type_text": "Ergebnisse filtern, indem Sie die ersten Buchstaben eingeben und auf Durchsuchen klicken",
 
   // "browse.startsWith.input": "Filter",
   "browse.startsWith.input": "Filter",
