@@ -182,12 +182,12 @@ export const APP_ROUTES: Route[] = [
         canActivate: [authenticatedGuard, endUserAgreementCurrentUserGuard],
       },
       {
-        path: 'standard-login',
+        path: 'admin-only-login',
         loadChildren: () => import('./login-page/login-page-routes').then((m) => m.ROUTES),
         data: {
           isBackDoor: true,
         },
-        canMatch: [() => !environment.auth.disableStandardLogin],
+        canMatch: [() => environment.auth.isPasswordLoginEnabledForAdminsOnly],
       },
       {
         path: 'login',
