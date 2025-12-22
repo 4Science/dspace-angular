@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { Item } from '../../shared/item.model';
 import { getSchemaJsonLDProviderByEntity, getSchemaJsonLDProviderByType } from './schema-types/schema-type-decorator';
@@ -7,11 +8,14 @@ import { GenericConstructor } from '../../shared/generic-constructor';
 import { SchemaType } from './schema-types/schema-type';
 import { isEmpty, isNotEmpty } from '../../../shared/empty.util';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SchemaJsonLDService {
   static scriptType = 'application/ld+json';
 
-  constructor(@Inject(DOCUMENT) private _document: Document) {}
+  constructor(
+    @Inject(DOCUMENT) private _document: Document,
+    protected sanitizer: DomSanitizer,
+  ) {}
 
   removeStructuredData(): void {
     const els = [];
@@ -57,7 +61,7 @@ export class SchemaJsonLDService {
     }
 
     if (isNotEmpty(constructor)) {
-      const provider: SchemaType = new constructor();
+      const provider: SchemaType = new constructor(this.sanitizer);
       return provider.getSchema(item);
     } else {
       return null;
