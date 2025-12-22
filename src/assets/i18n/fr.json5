@@ -9637,6 +9637,9 @@
   // TODO New key - Add a translation
   "search.filters.applied.f.organization": "Organisation",
 
+  // "search.filters.applied.f.knowslanguage": "Language",
+  "search.filters.applied.f.knowslanguage": "Langue",
+
   // "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
   // TODO New key - Add a translation
   "search.filters.applied.charts.defaultConfiguration.title": "Search Output",

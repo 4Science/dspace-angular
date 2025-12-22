@@ -23,6 +23,7 @@ describe('Config Util', () => {
         'dcterms.dateSubmitted',
         'dc.identifier.applicationnumber',
         'dc.type',
+        'dc.identifier.issn',
       ]);
       expect(appConfig.submission.duplicateDetection.alwaysShowSection).toEqual(false);
 
