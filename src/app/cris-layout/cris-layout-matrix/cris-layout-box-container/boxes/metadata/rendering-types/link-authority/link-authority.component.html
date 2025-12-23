@@ -1,8 +1,10 @@
 <div [class]="field.styleValue" [attr.lang]="metadataValue.language">
     <span>
         <a class="metadata-text" href="{{link.href}}" rel="noopener noreferrer" target="_blank">
+          @if (iconStyle) {
             <i class="mr-2 fa-xl" [ngClass]="iconStyle"></i>
-            {{ link.text }}
+          }
+          {{ link.text }}
         </a>
     </span>
 </div>
