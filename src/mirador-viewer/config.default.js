@@ -16,6 +16,7 @@ import miradorShareDialogPlugin from 'mirador-share-plugin/es/MiradorShareDialog
 import miradorSharePlugin from 'mirador-share-plugin/es/miradorSharePlugin';
 import miradorDownloadPlugin from 'mirador-dl-plugin/es/miradorDownloadPlugin';
 import miradorDownloadDialog from 'mirador-dl-plugin/es/MiradorDownloadDialog';
+import imageCropperPlugin from 'mirador-imagecropper/es';
 
 const MANIFEST_URL_PART = /\/manifest$/;
 
@@ -185,6 +186,7 @@ let miradorPlugins = [
   miradorShareDialogPlugin,
   miradorSharePlugin,
   miradorDownloadDialog,
+  ...imageCropperPlugin
 ];
 
 (() => {

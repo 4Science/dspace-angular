@@ -1135,7 +1135,7 @@
 
   "browse.startsWith.type_date.label": "Or type in a date (year-month) and click on the Browse button",
 
-  "browse.startsWith.type_text": "Filter results by typing the first few letters",
+  "browse.startsWith.type_text": "Filter results by typing the first letters and clicking on Browse",
 
   "browse.startsWith.input": "Filter",
 
@@ -1674,7 +1674,7 @@
 
   "context-menu.actions.audit-item.btn": "Audit",
 
-  "context-menu.actions.bulk-import.btn": "Import items into collection",
+  "context-menu.actions.bulk-import.btn": "Import into collection",
 
   "context-menu.actions.claim.btn": "Claim this profile",
 
@@ -2660,13 +2660,21 @@
 
   "health-page.section.geoIp.title": "GeoIp",
 
+  "health-page.section.solrAudit.title": "Solr: audit core",
+
   "health-page.section.solrAuthorityCore.title": "Solr: authority core",
 
+  "health-page.section.solrDedup.title": "Solr: dedup core",
+
   "health-page.section.solrOaiCore.title": "Solr: oai core",
+
+  "health-page.section.solrQAEvent.title": "Solr: qaevent core",
 
   "health-page.section.solrSearchCore.title": "Solr: search core",
 
   "health-page.section.solrStatisticsCore.title": "Solr: statistics core",
+
+  "health-page.section.solrSuggestion.title": "Solr: suggestion core",
 
   "health-page.section-info.app.title": "Application Backend",
 
@@ -3289,6 +3297,10 @@
 
   "item.page.author": "Authors",
 
+  "item.page.cc.license.title": "Creative Commons license",
+
+  "item.page.cc.license.disclaimer": "Except where otherwised noted, this item's license is described as",
+
   "item.page.citation": "Citation",
 
   "item.page.collections": "Collections",
@@ -3540,6 +3552,8 @@
 
   "item.preview.organization.address.addressCountry": "Country",
 
+  "item.preview.organization.address.addressLocality": "City",
+
   "item.preview.organization.foundingDate": "Founding Date",
 
   "item.preview.organization.identifier.crossrefid": "CrossRef ID",
@@ -3695,6 +3709,12 @@
   "item-export.modal.title": "Item Export Process Launcher",
 
   "item-export.process.title": "Bulk export item",
+
+  "item-deletion.process.title": "Deleting item",
+
+  "community-deletion.process.title": "Deleting community",
+
+  "collection-deletion.process.title": "Deleting collection",
 
   "itemtemplate.edit.metadata.add-button": "Add",
 
@@ -5178,6 +5198,8 @@
 
   "search.filters.applied.f.organization": "Organisation",
 
+  "search.filters.applied.f.knowslanguage": "Language",
+
   "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
 
   "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Date Issued",
@@ -6652,6 +6674,8 @@
   "submission.sections.custom-url.label.previous-urls": "Previous Urls",
 
   "submission.sections.custom-url.alert.info": "Define here a custom URL which will be used to reach the item instead of using an internal randomly generated UUID identifier. ",
+
+  "submission.sections.custom-url.url.placeholder": "Custom URL",
 
   "submission.sections.accesses.form.discoverable-description": "When checked, this item will be discoverable in search/browse. When unchecked, the item will only be available via a direct link and will never appear in search/browse.",
 

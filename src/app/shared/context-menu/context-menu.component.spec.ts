@@ -28,6 +28,7 @@ import { AuthService } from '../../core/auth/auth.service';
 import { EPersonMock } from '../testing/eperson.mock';
 import { ItemExportFormConfiguration, ItemExportService } from '../search/item-export/item-export.service';
 import { BrowserOnlyDirective } from '../utils/browser-only.directive';
+import { BrowserOnlyMockPipe } from '../testing/browser-only-mock.pipe';
 
 describe('ContextMenuComponent', () => {
   let component: ContextMenuComponent;
@@ -100,9 +101,9 @@ describe('ContextMenuComponent', () => {
           }
         }),
         NgbDropdownModule,
-        BrowserOnlyDirective
+        BrowserOnlyDirective,
       ],
-      declarations: [ContextMenuComponent, TestComponent, ExportItemMenuComponent, StatisticsMenuComponent, SubscriptionMenuComponent],
+      declarations: [ContextMenuComponent, TestComponent, ExportItemMenuComponent, StatisticsMenuComponent, SubscriptionMenuComponent, BrowserOnlyMockPipe],
       providers: [
         provideMockStore({ initialState }),
         { provide: ItemExportService, useValue: itemExportService },
