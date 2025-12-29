@@ -1,9 +1,12 @@
 import {
   Component,
+  EventEmitter,
   Input,
+  Output,
 } from '@angular/core';
 import { ThemedComponent } from 'src/app/shared/theme-support/themed.component';
 
+import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
 import { CreateItemParentSelectorComponent } from './create-item-parent-selector.component';
 
 /**
@@ -19,8 +22,11 @@ import { CreateItemParentSelectorComponent } from './create-item-parent-selector
 export class ThemedCreateItemParentSelectorComponent
   extends ThemedComponent<CreateItemParentSelectorComponent> {
     @Input() entityType: string;
+    @Input() emitOnly: boolean;
 
-    protected inAndOutputNames: (keyof CreateItemParentSelectorComponent & keyof this)[] = ['entityType'];
+    @Output() select: EventEmitter<DSpaceObject> = new EventEmitter<DSpaceObject>();
+
+    protected inAndOutputNames: (keyof CreateItemParentSelectorComponent & keyof this)[] = ['entityType', 'select', 'emitOnly'];
 
     protected getComponentName(): string {
       return 'CreateItemParentSelectorComponent';
