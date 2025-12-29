@@ -40,6 +40,8 @@ import { PaginationService } from 'src/app/core/pagination/pagination.service';
 
 import { AuthService } from '../../../core/auth/auth.service';
 import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
+import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
+import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { FindListOptions } from '../../../core/data/find-list-options.model';
 import { PaginatedList } from '../../../core/data/paginated-list.model';
 import { RemoteData } from '../../../core/data/remote-data';
@@ -166,11 +168,13 @@ export class ProcessOverviewTableComponent implements OnInit, OnDestroy {
               protected router: Router,
               protected auth: AuthService,
               private translateService: TranslateService,
+              protected authorizationService: AuthorizationDataService,
               @Inject(PLATFORM_ID) protected platformId: object,
   ) {
   }
 
   ngOnInit() {
+    const isAdmin$ = this.isCurrentUserAdmin();
     // Only auto refresh on browsers
     if (!isPlatformBrowser(this.platformId)) {
       this.useAutoRefreshingSearchBy = false;
@@ -216,8 +220,16 @@ export class ProcessOverviewTableComponent implements OnInit, OnDestroy {
           this.processOverviewService.getFindListOptions(paginationOptions, this.sortField)),
         // Use the findListOptions to retrieve the relevant processes every interval
         switchMap((findListOptions: FindListOptions) =>
-          this.processOverviewService.getProcessesByProcessStatus(
-            this.processStatus, findListOptions, this.useAutoRefreshingSearchBy ? this.autoRefreshInterval : null),
+          isAdmin$.pipe(
+            switchMap((isAdmin: boolean) => {
+              const autoRefreshInterval = this.useAutoRefreshingSearchBy ? this.autoRefreshInterval : null;
+              if (isAdmin) {
+                return this.processOverviewService.getProcessesByProcessStatus(this.processStatus, findListOptions, autoRefreshInterval);
+              } else {
+                return this.processOverviewService.getOwnProcessesByProcessStatus(this.processStatus, findListOptions, autoRefreshInterval);
+              }
+            }),
+          ),
         ),
         // Redirect the user when he is logged out
         redirectOn4xx(this.router, this.auth),
@@ -308,6 +320,10 @@ export class ProcessOverviewTableComponent implements OnInit, OnDestroy {
       .filter((sub) => hasValue(sub))
       .forEach((sub) => sub.unsubscribe());
     this.processOverviewService.stopAutoRefreshing(this.processStatus);
+  }
+
+  isCurrentUserAdmin(): Observable<boolean> {
+    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf, undefined, undefined);
   }
 
 }

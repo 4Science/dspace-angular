@@ -1,3 +1,4 @@
+import { AccessibilitySettingsConfig } from '../app/accessibility/accessibility-settings.config';
 import { AdminNotifyMetricsRow } from '../app/admin/admin-notify-dashboard/admin-notify-metrics/admin-notify-metrics.model';
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
 import { LiveRegionConfig } from '../app/shared/live-region/live-region.config';
@@ -146,6 +147,7 @@ export class DefaultAppConfig implements AppConfig {
       // This is independent from the idle warning.
       timeLeftBeforeTokenRefresh: 2 * 60 * 1000, // 2 minutes
     },
+    isPasswordLoginEnabledForAdminsOnly: false, // Enable the standard login form
   };
 
   // Form settings
@@ -174,7 +176,7 @@ export class DefaultAppConfig implements AppConfig {
   submission: SubmissionConfig = {
     autosave: {
       // NOTE: which metadata trigger an autosave
-      metadata: ['dc.title', 'dc.identifier.doi', 'dc.identifier.pmid', 'dc.identifier.arxiv', 'dc.identifier.patentno', 'dc.identifier.scopus', 'dc.identifier.isi', 'dcterms.dateSubmitted', 'dc.identifier.applicationnumber', 'dc.type'],
+      metadata: ['dc.title', 'dc.identifier.doi', 'dc.identifier.pmid', 'dc.identifier.arxiv', 'dc.identifier.patentno', 'dc.identifier.scopus', 'dc.identifier.isi', 'dcterms.dateSubmitted', 'dc.identifier.applicationnumber', 'dc.type', 'dc.identifier.issn'],
       /**
        * NOTE: after how many time (milliseconds) submission is saved automatically
        * eg. timer: 5 * (1000 * 60); // 5 minutes
@@ -416,6 +418,7 @@ export class DefaultAppConfig implements AppConfig {
 
   // Community Page Config
   community: CommunityPageConfig = {
+    defaultBrowseTab: 'search',
     searchSection: {
       showSidebar: true,
     },
@@ -447,6 +450,7 @@ export class DefaultAppConfig implements AppConfig {
 
   // Collection Page Config
   collection: CollectionPageConfig = {
+    defaultBrowseTab: 'search',
     searchSection: {
       showSidebar: true,
     },
@@ -583,6 +587,7 @@ export class DefaultAppConfig implements AppConfig {
     enableEndUserAgreement: true,
     enablePrivacyStatement: true,
     enableCOARNotifySupport: true,
+    enableCookieConsentPopup: true,
     //Configuration for third-party metrics in Klaro
     metricsConsents: [
       {
@@ -718,6 +723,11 @@ export class DefaultAppConfig implements AppConfig {
   liveRegion: LiveRegionConfig = {
     messageTimeOutDurationMs: 30000,
     isVisible: false,
+  };
+
+  // Accessibility settings configuration, used by the AccessibilitySettingsService
+  accessibility: AccessibilitySettingsConfig = {
+    cookieExpirationDuration: 7,
   };
 
   crisLayout: CrisLayoutConfig = {

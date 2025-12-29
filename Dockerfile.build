@@ -1,0 +1,17 @@
+FROM node:20-alpine AS runtime
+
+ENV NODE_ENV=production \
+NODE_OPTIONS="--max_old_space_size=4096"
+RUN apk add --update python3 make g++ && rm -rf /var/cache/apk/*
+RUN mkdir -p /app/source/config
+
+WORKDIR /app/source
+COPY dist/ ./dist
+RUN ln -s /data/config.prod.yml /app/source/config/config.prod.yml || true
+
+RUN adduser -D -h /home/dspace -s /bin/bash dspace
+RUN chown -R dspace:dspace /app/source/
+
+USER dspace
+
+CMD ["node", "dist/server/main"]

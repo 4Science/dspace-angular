@@ -4,6 +4,7 @@ import {
   RouterConfigOptions,
 } from '@angular/router';
 
+import { environment } from '../environments/environment';
 import { NOTIFICATIONS_MODULE_PATH } from './admin/admin-routing-paths';
 import {
   ACCESS_CONTROL_MODULE_PATH,
@@ -29,13 +30,13 @@ import { COMMUNITY_MODULE_PATH } from './community-page/community-page-routing-p
 import { authBlockingGuard } from './core/auth/auth-blocking.guard';
 import { authenticatedGuard } from './core/auth/authenticated.guard';
 import { groupAdministratorGuard } from './core/data/feature-authorization/feature-authorization-guard/group-administrator.guard';
-import { siteAdministratorGuard } from './core/data/feature-authorization/feature-authorization-guard/site-administrator.guard';
 import { siteRegisterGuard } from './core/data/feature-authorization/feature-authorization-guard/site-register.guard';
 import { endUserAgreementCurrentUserGuard } from './core/end-user-agreement/end-user-agreement-current-user.guard';
 import { reloadGuard } from './core/reload/reload.guard';
 import { forgotPasswordCheckGuard } from './core/rest-property/forgot-password-check-guard.guard';
 import { ServerCheckGuard } from './core/server-check/server-check.guard';
 import { ThemedForbiddenComponent } from './forbidden/themed-forbidden.component';
+import { homePageResolver } from './home-page/home-page.resolver';
 import { ITEM_MODULE_PATH } from './item-page/item-page-routing-paths';
 import { menuResolver } from './menuResolver';
 import { provideSuggestionNotificationsState } from './notifications/provide-suggestion-notifications-state';
@@ -43,6 +44,8 @@ import { ThemedPageErrorComponent } from './page-error/themed-page-error.compone
 import { ThemedPageInternalServerErrorComponent } from './page-internal-server-error/themed-page-internal-server-error.component';
 import { ThemedPageNotFoundComponent } from './pagenotfound/themed-pagenotfound.component';
 import { PROCESS_MODULE_PATH } from './process-page/process-page-routing.paths';
+import { RedirectService } from './redirect/redirect.service';
+import { viewTrackerResolver } from './statistics/angulartics/dspace/view-tracker.resolver';
 import { provideSubmissionState } from './submission/provide-submission-state';
 import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-routing-paths';
 
@@ -69,9 +72,16 @@ export const APP_ROUTES: Route[] = [
         path: 'home',
         loadChildren: () => import('./home-page/home-page-routes')
           .then((m) => m.ROUTES),
-        data: { showBreadcrumbs: false },
+        data: {
+          showBreadcrumbs: false,
+          dsoPath: 'site',
+        },
         providers: [provideSuggestionNotificationsState()],
         canActivate: [endUserAgreementCurrentUserGuard],
+        resolve: {
+          site: homePageResolver,
+          tracking: viewTrackerResolver,
+        },
       },
       {
         path: 'community-list',
@@ -162,7 +172,7 @@ export const APP_ROUTES: Route[] = [
         path: ADMIN_MODULE_PATH,
         loadChildren: () => import('./admin/admin-routes')
           .then((m) => m.ROUTES),
-        canActivate: [siteAdministratorGuard, endUserAgreementCurrentUserGuard],
+        canActivate: [authenticatedGuard, endUserAgreementCurrentUserGuard],
       },
       {
         path: NOTIFICATIONS_MODULE_PATH,
@@ -172,9 +182,19 @@ export const APP_ROUTES: Route[] = [
         canActivate: [authenticatedGuard, endUserAgreementCurrentUserGuard],
       },
       {
+        path: 'admin-only-login',
+        loadChildren: () => import('./login-page/login-page-routes').then((m) => m.ROUTES),
+        data: {
+          isBackDoor: true,
+        },
+        canMatch: [() => environment.auth.isPasswordLoginEnabledForAdminsOnly],
+      },
+      {
         path: 'login',
-        loadChildren: () => import('./login-page/login-page-routes')
-          .then((m) => m.ROUTES),
+        loadChildren: () => import('./login-page/login-page-routes').then((m) => m.ROUTES),
+        data: {
+          isBackDoor: false,
+        },
       },
       {
         path: 'logout',
@@ -304,7 +324,7 @@ export const APP_ROUTES: Route[] = [
           .then((m) => m.ROUTES),
       },
       {
-        path: 'luck-search',
+        path: 'lucky-search',
         loadChildren: () => import('./lucky-search/lucky-search-routes')
           .then((m) => m.ROUTES),
       },
@@ -314,7 +334,7 @@ export const APP_ROUTES: Route[] = [
           .then((m) => m.ROUTES),
         canActivate: [authenticatedGuard],
       },
-      { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent, data: { title: PAGE_NOT_FOUND_PATH }  },
+      { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent, data: { title: PAGE_NOT_FOUND_PATH }, canActivate: [RedirectService]  },
     ],
   },
 ];

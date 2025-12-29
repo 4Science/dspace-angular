@@ -7,7 +7,6 @@ import {
   EventEmitter,
   Input,
   OnChanges,
-  OnInit,
   Optional,
   Output,
   SimpleChanges,
@@ -40,7 +39,7 @@ import { ParameterSelectComponent } from './parameter-select/parameter-select.co
   standalone: true,
   imports: [NgIf, NgFor, ParameterSelectComponent, TranslateModule],
 })
-export class ProcessParametersComponent implements OnChanges, OnInit {
+export class ProcessParametersComponent implements OnChanges {
   /**
    * The currently selected script
    */
@@ -60,12 +59,6 @@ export class ProcessParametersComponent implements OnChanges, OnInit {
    */
   parameterValues: ProcessParameter[];
 
-  ngOnInit(): void {
-    if (hasValue(this.initialParams)) {
-      this.parameterValues = this.initialParams;
-    }
-  }
-
   /**
    * Makes sure the parameters are reset when the script changes
    * @param changes
@@ -82,7 +75,8 @@ export class ProcessParametersComponent implements OnChanges, OnInit {
    */
   initParameters() {
     if (hasValue(this.initialParams)) {
-      this.parameterValues = this.initialParams;
+      this.parameterValues = [...this.initialParams];
+      this.addParameter();
     } else {
       this.parameterValues = [];
       this.initializeParameter();

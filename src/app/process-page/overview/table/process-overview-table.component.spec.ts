@@ -11,10 +11,14 @@ import {
   TranslateModule,
   TranslateService,
 } from '@ngx-translate/core';
-import { BehaviorSubject } from 'rxjs';
+import {
+  BehaviorSubject,
+  of,
+} from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { AuthService } from '../../../core/auth/auth.service';
+import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { ProcessDataService } from '../../../core/data/processes/process-data.service';
 import { EPersonDataService } from '../../../core/eperson/eperson-data.service';
 import { EPerson } from '../../../core/eperson/models/eperson.model';
@@ -51,6 +55,10 @@ describe('ProcessOverviewTableComponent', () => {
   let ePerson: EPerson;
 
   let translateServiceSpy: jasmine.SpyObj<TranslateService>;
+
+  const authorizationService = jasmine.createSpyObj('authorizationService', {
+    isAuthorized: of(true),
+  });
 
   function init() {
     processes = [
@@ -104,6 +112,7 @@ describe('ProcessOverviewTableComponent', () => {
         sort: 'creationTime',
       },
       getProcessesByProcessStatus: createSuccessfulRemoteDataObject$(createPaginatedList(processes)).pipe(take(1)),
+      getOwnProcessesByProcessStatus: createSuccessfulRemoteDataObject$(createPaginatedList(processes)).pipe(take(1)),
     });
     processService = jasmine.createSpyObj('processService', {
       searchBy: createSuccessfulRemoteDataObject$(createPaginatedList(processes)).pipe(take(1)),
@@ -153,6 +162,7 @@ describe('ProcessOverviewTableComponent', () => {
         { provide: NgbModal, useValue: modalService },
         { provide: AuthService, useValue: authService },
         { provide: RouteService, useValue: routeService },
+        { provide: AuthorizationDataService, useValue: authorizationService },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(ProcessOverviewTableComponent, {
@@ -227,6 +237,7 @@ describe('ProcessOverviewTableComponent', () => {
   });
 
   describe('getEPersonName function', () => {
+
     it('should return unknown user when id is null', (done: DoneFn) => {
       const id = null;
       const expectedTranslation = 'process.overview.unknown.user';
@@ -264,4 +275,16 @@ describe('ProcessOverviewTableComponent', () => {
       expect(translateServiceSpy.get).not.toHaveBeenCalled();
     });
   });
+
+  describe('when user is not admin', () => {
+    beforeAll(waitForAsync(() => {
+      authorizationService.isAuthorized.and.callFake(() => of(false));
+    }));
+
+    it ('should call getOwnProcessesByProcessStatus', () => {
+      expect(processOverviewService.getOwnProcessesByProcessStatus).toHaveBeenCalled();
+    });
+
+  });
+
 });

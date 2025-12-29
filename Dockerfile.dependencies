@@ -1,0 +1,18 @@
+# Test build:
+# docker build -f Dockerfile.dependencies -t 4science/dspace-cris-angular-dependencies:dspace-cris-2024_02_x .
+
+# Angular 17 + Node 22 optimized Dockerfile
+ARG NODE_VERSION=22
+ARG DSPACE_VERSION=dspace-cris-2024_02_x
+ARG DOCKER_REGISTRY=docker.io
+
+FROM docker.io/node:${NODE_VERSION-22}-alpine AS dependencies
+
+# Install build dependencies
+RUN apk add --no-cache python3 make g++
+
+WORKDIR /app
+
+# Install dependencies (use npm ci if you have package-lock.json)
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile --network-timeout 300000

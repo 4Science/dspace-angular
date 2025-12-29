@@ -1,6 +1,5 @@
 import {
   AsyncPipe,
-  NgClass,
   NgFor,
   NgIf,
 } from '@angular/common';
@@ -88,7 +87,6 @@ import { ValidateEmailNotTaken } from './validators/email-taken.validator';
     NgFor,
     AsyncPipe,
     TranslateModule,
-    NgClass,
     ThemedLoadingComponent,
     PaginationComponent,
     RouterLink,
@@ -309,7 +307,7 @@ export class EPersonFormComponent implements OnInit, OnDestroy {
       name: 'email',
       validators: {
         required: null,
-        pattern: '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$',
+        pattern: '^\\s*[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}\\s*$',
       },
       required: true,
       errorMessages: {
@@ -428,7 +426,7 @@ export class EPersonFormComponent implements OnInit, OnDestroy {
               },
             ],
           },
-          email: this.email.value,
+          email: (this.email.value as string)?.trim(),
           canLogIn: this.canLogIn.value,
           requireCertificate: this.requireCertificate.value,
         };

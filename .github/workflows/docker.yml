@@ -9,10 +9,10 @@ name: Docker images
 on:
   push:
     branches:
-      - main
-      - 'dspace-**'
+      - main-cris
+      - 'dspace-cris-*_02_x'
     tags:
-      - 'dspace-**'
+      - 'dspace-cris-**'
   pull_request:
 
 permissions:
@@ -20,33 +20,55 @@ permissions:
   packages: write # to write images to GitHub Container Registry (GHCR)
 
 jobs:
+
+  ####################################################
+  # Build/Push the '4science/dspace-cris-dependencies' image.
+  # This image is used by all other DSpace build jobs.
+  ####################################################
+  dspace-cris-angular-dependencies:
+    # Ensure this job never runs on forked repos. It's only executed for '4science/dspace'
+    if: github.repository == '4science/dspace-angular'
+    # Use the reusable-docker-build.yml script from DSpace/DSpace repo to build our Docker image
+    uses: 4science/DSpace/.github/workflows/reusable-docker-build.yml@dspace-cris-2024_02_x
+    with:
+      build_id: dspace-cris-angular-dependencies
+      image_name: 4science/dspace-cris-angular-dependencies
+      dockerfile_path: ./Dockerfile.dependencies
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+
+
   #############################################################
-  # Build/Push the 'dspace/dspace-angular' image
+  # Build/Push the '4science/dspace-cris-angular' image
   #############################################################
   dspace-angular:
     # Ensure this job never runs on forked repos. It's only executed for 'dspace/dspace-angular'
-    if: github.repository == 'dspace/dspace-angular'
+    if: github.repository == '4science/dspace-angular'
     # Use the reusable-docker-build.yml script from DSpace/DSpace repo to build our Docker image
-    uses: DSpace/DSpace/.github/workflows/reusable-docker-build.yml@main
+    uses: 4science/DSpace/.github/workflows/reusable-docker-build.yml@dspace-cris-2024_02_x
+    needs: dspace-cris-angular-dependencies
     with:
-      build_id: dspace-angular-dev
-      image_name: dspace/dspace-angular
+      build_id: dspace-cris-angular-dev
+      image_name: 4science/dspace-cris-angular
       dockerfile_path: ./Dockerfile
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
   #############################################################
-  # Build/Push the 'dspace/dspace-angular' image ('-dist' tag)
+  # Build/Push the '4science/dspace-cris-angular' image ('-dist' tag)
   #############################################################
   dspace-angular-dist:
     # Ensure this job never runs on forked repos. It's only executed for 'dspace/dspace-angular'
-    if: github.repository == 'dspace/dspace-angular'
+    if: github.repository == '4science/dspace-angular'
     # Use the reusable-docker-build.yml script from DSpace/DSpace repo to build our Docker image
-    uses: DSpace/DSpace/.github/workflows/reusable-docker-build.yml@main
+    uses: 4science/DSpace/.github/workflows/reusable-docker-build.yml@dspace-cris-2024_02_x
+    # Must run after 'dspace-dependencies' job above
+    needs: dspace-cris-angular-dependencies
     with:
-      build_id: dspace-angular-dist
-      image_name: dspace/dspace-angular
+      build_id: dspace-cris-angular-dist
+      image_name: 4science/dspace-cris-angular
       dockerfile_path: ./Dockerfile.dist
       # As this is a "dist" image, its tags are all suffixed with "-dist". Otherwise, it uses the same
       # tagging logic as the primary 'dspace/dspace-angular' image above.

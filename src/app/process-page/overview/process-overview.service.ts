@@ -98,4 +98,26 @@ export class ProcessOverviewService {
     );
   }
 
+  /**
+   * Retrieve processes by their owner and status
+   * @param processStatus              The status for which to retrieve processes
+   * @param findListOptions            The FindListOptions object
+   * @param autoRefreshingIntervalInMs Optional: The interval by which to automatically refresh the retrieved processes.
+   * Leave empty or set to null to only retrieve the processes once.
+   */
+  getOwnProcessesByProcessStatus(processStatus: ProcessStatus, findListOptions?: FindListOptions, autoRefreshingIntervalInMs: number = null) {
+    const requestParam = new RequestParam('processStatus', processStatus);
+    const options: FindListOptions = Object.assign(new FindListOptions(), {
+      searchParams: [requestParam],
+      elementsPerPage: 5,
+    }, findListOptions);
+
+    if (hasValue(autoRefreshingIntervalInMs) && autoRefreshingIntervalInMs > 0) {
+      this.processDataService.stopAutoRefreshing(processStatus);
+      return this.processDataService.autoRefreshingSearchBy(processStatus, 'own', options, autoRefreshingIntervalInMs);
+    } else {
+      return this.processDataService.searchBy('own', options);
+    }
+  }
+
 }

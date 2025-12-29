@@ -39,6 +39,7 @@ import {
   ItemExportFormConfiguration,
   ItemExportService,
 } from '../search/item-export/item-export.service';
+import { BrowserOnlyMockPipe } from '../testing/browser-only-mock.pipe';
 import { EPersonMock } from '../testing/eperson.mock';
 import { NotificationsServiceStub } from '../testing/notifications-service.stub';
 import { BrowserOnlyDirective } from '../utils/browser-only.directive';
@@ -125,6 +126,8 @@ describe('ContextMenuComponent', () => {
         StatisticsMenuComponent,
         SubscriptionMenuComponent,
         BrowserOnlyDirective,
+        SubscriptionMenuComponent,
+        BrowserOnlyMockPipe,
       ],
       providers: [
         provideMockStore({ initialState }),

@@ -29,6 +29,8 @@ jobs:
       DSPACE_CACHE_SERVERSIDE_ANONYMOUSCACHE_MAX: 0
       # Tell Cypress to run e2e tests using the same UI URL
       CYPRESS_BASE_URL: http://127.0.0.1:4000
+      # Disable the cookie consent banner in e2e tests to avoid errors because of elements hidden by it
+      DSPACE_INFO_ENABLECOOKIECONSENTPOPUP: false
       # When Chrome version is specified, we pin to a specific version of Chrome
       # Comment this out to use the latest release
       #CHROME_VERSION: "116.0.5845.187-1"
@@ -191,11 +193,107 @@ jobs:
       # If it does, then SSR is working, as this tag is created by our MetadataService.
       # This step also prints entire HTML of homepage for easier debugging if grep fails.
       # TODO: enable this step once we have a CRIS back end to test against
-      # - name: Verify SSR (server-side rendering)
-      #   run: |
-      #     result=$(wget -O- -q http://127.0.0.1:4000/home)
-      #     echo "$result"
-      #     echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep DSpace
+      # - name: Verify SSR (server-side rendering) on Homepage
+      #  run: |
+      #    result=$(wget -O- -q http://127.0.0.1:4000/home)
+      #    echo "$result"
+      #    echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep DSpace
+
+      # Get a specific community in our test data and verify that the "<h1>" tag includes "Publications" (the community name).
+      # If it does, then SSR is working.
+      - name: Verify SSR on a Community page
+        run: |
+          result=$(wget -O- -q http://127.0.0.1:4000/communities/a30b75e4-1682-4b4d-85fd-a47fc78dbcf6)
+          echo "$result"
+          echo "$result" | grep -oE "<h1 [^>]*>[^><]*</h1>" | grep "CRIS Community"
+
+      # Get a specific collection in our test data and verify that the "<h1>" tag includes "Publications" (the collection name).
+      # If it does, then SSR is working.
+      - name: Verify SSR on a Collection page
+        run: |
+          result=$(wget -O- -q http://127.0.0.1:4000/collections/caf04bfa-b2f6-40d3-90d2-aa0b86d92f8d)
+          echo "$result"
+          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "Publications"
+
+      # Get a specific publication in our test data and verify that the <meta name="title"> tag includes
+      # the title of this publication. If it does, then SSR is working.
+      - name: Verify SSR on a Publication page
+        run: |
+          result=$(wget -O- -q http://127.0.0.1:4000/entities/publication/1df533fd-5385-4820-babd-b5fabdb82101)
+          echo "$result"
+          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "test publication with pdf version 1"
+
+      # Get a specific person in our test data and verify that the <meta name="title"> tag includes
+      # the name of the person. If it does, then SSR is working.
+      - name: Verify SSR on a Person page
+        run: |
+          result=$(wget -O- -q http://127.0.0.1:4000/entities/person/98cea993-d448-4200-99d5-f6fab8967bf8)
+          echo "$result"
+          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "Submitter Dspace"
+
+      # Get a specific project in our test data and verify that the <meta name="title"> tag includes
+      # the name of the project. If it does, then SSR is working.
+      - name: Verify SSR on a Project page
+        run: |
+          result=$(wget -O- -q http://127.0.0.1:4000/entities/project/1e3451e4-60d7-46a8-962e-5b94b62c63ff)
+          echo "$result"
+          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "Test DSC-1819"
+
+      # Get a specific orgunit in our test data and verify that the <meta name="title"> tag includes
+      # the name of the orgunit. If it does, then SSR is working.
+      - name: Verify SSR on an OrgUnit page
+        run: |
+          result=$(wget -O- -q http://127.0.0.1:4000/entities/orgunit/6d4abaee-eedb-458d-a29b-35db82037dfa)
+          echo "$result"
+          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "4Science"
+
+      # Get a specific journal in our test data and verify that the <meta name="title"> tag includes
+      # the name of the journal. If it does, then SSR is working.
+      - name: Verify SSR on a Journal page
+        run: |
+          result=$(wget -O- -q http://127.0.0.1:4000/entities/journal/f05c4530-b1b8-4459-a048-ea1c60089a1e)
+          echo "$result"
+          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "Journal 4S"
+
+      # Get a specific funding in our test data and verify that the <meta name="title"> tag includes
+      # the name of the funding. If it does, then SSR is working.
+      - name: Verify SSR on a Funding page
+        run: |
+          result=$(wget -O- -q http://127.0.0.1:4000/entities/funding/640d35ba-6172-44c0-9e11-bf5da417cdc8)
+          echo "$result"
+          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "test funding"
+
+
+      # Verify 301 Handle redirect behavior
+      # Note: /handle/123456789/260 is the same test Publication used by our e2e tests
+      - name: Verify 301 redirect from '/handle' URLs
+        run: |
+          result=$(wget --server-response --quiet http://127.0.0.1:4000/handle/123456789/71 2>&1 | head -1 | awk '{print $2}')
+          echo "$result"
+          [[ "$result" -eq "301" ]]
+
+      # Verify 403 error code behavior
+      - name: Verify 403 error code from '/403'
+        run: |
+          result=$(wget --server-response --quiet http://127.0.0.1:4000/403 2>&1 | head -1 | awk '{print $2}')
+          echo "$result"
+          [[ "$result" -eq "403" ]]
+
+      # Verify 404 error code behavior
+      - name: Verify 404 error code from '/404' and on invalid pages
+        run: |
+          result=$(wget --server-response --quiet http://127.0.0.1:4000/404 2>&1 | head -1 | awk '{print $2}')
+          echo "$result"
+          result2=$(wget --server-response --quiet http://127.0.0.1:4000/invalidurl 2>&1 | head -1 | awk '{print $2}')
+          echo "$result2"
+          [[ "$result" -eq "404" && "$result2" -eq "404" ]]
+
+      # Verify 500 error code behavior
+      - name: Verify 500 error code from '/500'
+        run: |
+          result=$(wget --server-response --quiet http://127.0.0.1:4000/500 2>&1 | head -1 | awk '{print $2}')
+          echo "$result"
+          [[ "$result" -eq "500" ]]
 
       - name: Stop running app
         run: kill -9 $(lsof -t -i:4000)

@@ -4,7 +4,6 @@ import {
   NgForOf,
   NgIf,
   NgTemplateOutlet,
-  TitleCasePipe,
 } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -117,7 +116,6 @@ import { NotificationsService } from '../notifications.service';
     TranslateModule,
     ThemedFileDownloadLinkComponent,
     FileSizePipe,
-    TitleCasePipe,
     NgForOf,
     BtnDisabledDirective,
   ],

@@ -39,10 +39,12 @@
               class="fas fa-chevron-up fa-fw"></span>
             <span *ngIf="!sectionRef.isOpen()" class="fas fa-chevron-down fa-fw"></span>
           </a>
-          <a href="javascript:void(0);" class="close mr-3" *ngIf="!sectionRef.isMandatory() && (sectionRef.isReadOnly() | async) !== true"
-            (click)="removeSection($event)">
-            <i *ngIf="(isRemoving | async) !== true" class="far fa-trash-alt" aria-hidden="true" tabindex="0"></i>
-            <i *ngIf="(isRemoving | async) === true" class="fas fa-circle-notch fa-spin" aria-hidden="true"></i>
+          <a href="javascript:void(0);" class="close mr-3"
+             *ngIf="!sectionRef.isMandatory() && (sectionRef.isReadOnly() | async) !== true"
+             aria-hidden="true" tabindex="-1"
+             (click)="removeSection($event)">
+            <i *ngIf="(isRemoving | async) !== true" class="far fa-trash-alt" aria-hidden="true" tabindex="-1"></i>
+            <i *ngIf="(isRemoving | async) === true" class="fas fa-circle-notch fa-spin" aria-hidden="true" tabindex="-1"></i>
           </a>
         </div>
       </ng-template>
