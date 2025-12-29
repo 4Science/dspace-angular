@@ -1135,7 +1135,7 @@
 
   "browse.startsWith.type_date.label": "Or type in a date (year-month) and click on the Browse button",
 
-  "browse.startsWith.type_text": "Filter results by typing the first few letters",
+  "browse.startsWith.type_text": "Filter results by typing the first letters and clicking on Browse",
 
   "browse.startsWith.input": "Filter",
 
@@ -3297,6 +3297,10 @@
 
   "item.page.author": "Authors",
 
+  "item.page.cc.license.title": "Creative Commons license",
+
+  "item.page.cc.license.disclaimer": "Except where otherwised noted, this item's license is described as",
+
   "item.page.citation": "Citation",
 
   "item.page.collections": "Collections",
@@ -3547,6 +3551,8 @@
   "item.preview.oairecerif.identifier.url": "URL",
 
   "item.preview.organization.address.addressCountry": "Country",
+
+  "item.preview.organization.address.addressLocality": "City",
 
   "item.preview.organization.foundingDate": "Founding Date",
 
@@ -5191,6 +5197,8 @@
   "search.filters.applied.f.graphpubldatetrl": "Public date RTL",
 
   "search.filters.applied.f.organization": "Organisation",
+
+  "search.filters.applied.f.knowslanguage": "Language",
 
   "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
 

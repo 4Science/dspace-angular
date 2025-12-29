@@ -1948,8 +1948,7 @@
   "browse.startsWith.type_date.label": "Or type in a date (year-month) and click on the Browse button",
 
   // "browse.startsWith.type_text": "Filter results by typing the first few letters",
-  // TODO Source message changed - Revise the translation
-  "browse.startsWith.type_text": "Oder geben Sie die ersten Buchstaben ein:",
+  "browse.startsWith.type_text": "Ergebnisse filtern, indem Sie die ersten Buchstaben eingeben und auf Durchsuchen klicken",
 
   // "browse.startsWith.input": "Filter",
   // TODO New key - Add a translation
@@ -8991,6 +8990,9 @@
   // "search.filters.applied.f.organization": "Organisation",
   // TODO New key - Add a translation
   "search.filters.applied.f.organization": "Organisation",
+
+  // "search.filters.applied.f.knowslanguage": "Language",
+  "search.filters.applied.f.knowslanguage": "Sprache",
 
   // "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
   // TODO New key - Add a translation
