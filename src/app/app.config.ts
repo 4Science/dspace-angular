@@ -57,6 +57,7 @@ import { AuthInterceptor } from './core/auth/auth.interceptor';
 import { DspaceRestInterceptor } from './core/dspace-rest/dspace-rest.interceptor';
 import { LocaleInterceptor } from './core/locale/locale.interceptor';
 import { LogInterceptor } from './core/log/log.interceptor';
+import { schemaModels } from './core/metadata/schema-json-ld/schema-types/provide-schema';
 import {
   models,
   provideCore,
@@ -169,3 +170,4 @@ const metadataRepresentations = METADATA_REPRESENTATION_COMPONENT_DECORATOR_MAP;
 const startsWithDecoratorMap = STARTS_WITH_DECORATOR_MAP;
 const browseByDecoratorMap = BROWSE_BY_DECORATOR_MAP;
 const authMethodForDecoratorMap = AUTH_METHOD_FOR_DECORATOR_MAP;
+const schemaModelList = schemaModels;

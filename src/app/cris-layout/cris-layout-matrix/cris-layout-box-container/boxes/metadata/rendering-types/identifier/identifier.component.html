@@ -1,4 +1,4 @@
-<div [class]="field.styleValue">
+<div [class]="field.styleValue" [attr.lang]="metadataValue.language">
   <div class="d-flex align-items-center identifier-container-{{iconPosition}}">
     <a href="{{iconLink}}" [ngbTooltip]="iconLink" target="_blank" *ngIf="subTypeIcon && iconPosition !== iconPositionEnum.NONE">
       <img class="source-icon" [src]="subTypeIcon" alt="source-icon" >

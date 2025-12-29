@@ -1,5 +1,7 @@
 import { AdvancedAttachmentComponent } from './advanced-attachment/advanced-attachment.component';
 import { AttachmentComponent } from './attachment/attachment.component';
+import { CcLicenseLargeComponent } from './cc-license-large/cc-license-large.component';
+import { CcLicenseSmallComponent } from './cc-license-small/cc-license-small.component';
 import { CrisrefComponent } from './crisref/crisref.component';
 import { DateComponent } from './date/date.component';
 import { FieldRenderingType } from './field-rendering-type';
@@ -63,6 +65,14 @@ export const layoutBoxesMap = new Map<FieldRenderingType, MetadataBoxFieldRender
   } as MetadataBoxFieldRenderOptions],
   [FieldRenderingType.LONGHTML, {
     componentRef: LonghtmlComponent,
+    structured: false,
+  } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.CCLICENSEFULL, {
+    componentRef: CcLicenseLargeComponent,
+    structured: false,
+  } as MetadataBoxFieldRenderOptions],
+  [FieldRenderingType.CCLICENSE, {
+    componentRef: CcLicenseSmallComponent,
     structured: false,
   } as MetadataBoxFieldRenderOptions],
 ]);

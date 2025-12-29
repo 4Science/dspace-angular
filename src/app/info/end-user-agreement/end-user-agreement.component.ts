@@ -1,8 +1,13 @@
-import { NgIf } from '@angular/common';
+import {
+  isPlatformBrowser,
+  NgIf,
+} from '@angular/common';
 import {
   Component,
+  Inject,
   OnDestroy,
   OnInit,
+  PLATFORM_ID,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
@@ -59,6 +64,7 @@ export class EndUserAgreementComponent implements OnInit, OnDestroy {
   alreadyAccepted = false;
 
   private subscription: Subscription = new Subscription();
+  private notifiedOnce = false;
 
   constructor(protected endUserAgreementService: EndUserAgreementService,
               protected notificationsService: NotificationsService,
@@ -66,7 +72,8 @@ export class EndUserAgreementComponent implements OnInit, OnDestroy {
               protected authService: AuthService,
               protected store: Store<AppState>,
               protected router: Router,
-              protected route: ActivatedRoute) {
+              protected route: ActivatedRoute,
+              @Inject(PLATFORM_ID) private platformId: string) {
   }
 
   /**
@@ -89,8 +96,9 @@ export class EndUserAgreementComponent implements OnInit, OnDestroy {
         .subscribe(([accepted, authorized]) => {
           if (authorized) {
 
-            if (!accepted) {
-              this.notificationsService.warning(this.translate.instant('info.end-user-agreement.accept.warning'), {});
+            if (!accepted && isPlatformBrowser(this.platformId) && !this.notifiedOnce) {
+              this.notificationsService.warning(this.translate.instant('info.end-user-agreement.accept.warning'));
+              this.notifiedOnce = true;
             }
             this.accepted = accepted;
             this.alreadyAccepted = accepted;

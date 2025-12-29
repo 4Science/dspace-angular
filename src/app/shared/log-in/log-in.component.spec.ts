@@ -154,13 +154,13 @@ describe('LogInComponent', () => {
       expect(result).toEqual([{ authMethodType: AuthMethodType.Password, position: 1 }]);
     });
 
-    it('does not exclude password method when standard login is disabled', () => {
+    it('does not exclude password method when isPasswordLoginEnabledForAdminsOnly is disabled', () => {
       const authMethods = [
         { authMethodType: AuthMethodType.Password, position: 1 },
         { authMethodType: AuthMethodType.Shibboleth, position: 2 },
       ];
       component.excludedAuthMethod = undefined;
-      const result = component.filterAndSortAuthMethods(authMethods, false, true);
+      const result = component.filterAndSortAuthMethods(authMethods, false, false);
       expect(result).toEqual([
         { authMethodType: AuthMethodType.Password, position: 1 },
         { authMethodType: AuthMethodType.Shibboleth, position: 2 },
@@ -175,8 +175,9 @@ describe('LogInComponent', () => {
       ];
       const isBackdoor = false;
       component.excludedAuthMethod = AuthMethodType.Ip;
-      const result = component.filterAndSortAuthMethods(authMethods, isBackdoor);
+      const result = component.filterAndSortAuthMethods(authMethods, isBackdoor, false);
       expect(result).toEqual([
+        { authMethodType: AuthMethodType.Password, position: 1 },
         { authMethodType: AuthMethodType.Shibboleth, position: 3 },
       ]);
     });
@@ -188,9 +189,10 @@ describe('LogInComponent', () => {
       ];
       const isBackdoor = false;
       component.excludedAuthMethod = undefined;
-      const result = component.filterAndSortAuthMethods(authMethods, isBackdoor);
+      const result = component.filterAndSortAuthMethods(authMethods, isBackdoor, false);
       expect(result).toEqual([
         { authMethodType: AuthMethodType.Shibboleth, position: 1 },
+        { authMethodType: AuthMethodType.Password, position: 2 },
       ]);
     });
   });

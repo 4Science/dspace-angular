@@ -2202,7 +2202,7 @@
   "browse.startsWith.type_date.label": "Oppure digita una data (anno-mese) e clicca sul pulsante Sfoglia",
 
   // "browse.startsWith.type_text": "Filter results by typing the first few letters",
-  "browse.startsWith.type_text": "Per filtrare i risultati inizia a digitare le prime lettere",
+  "browse.startsWith.type_text": "Filtra i risultati digitando le prime lettere e facendo clic su Sfoglia",
 
   // "browse.startsWith.input": "Filter",
   // TODO New key - Add a translation
@@ -6368,6 +6368,10 @@
   // TODO New key - Add a translation
   "item.preview.organization.address.addressCountry": "Country",
 
+  // "item.preview.organization.address.addressLocality": "City",
+  // TODO New key - Add a translation
+  "item.preview.organization.address.addressLocality": "City",
+
   // "item.preview.organization.foundingDate": "Founding Date",
   // TODO New key - Add a translation
   "item.preview.organization.foundingDate": "Founding Date",
@@ -9286,6 +9290,9 @@
 
   // "search.filters.applied.f.organization": "Organisation",
   "search.filters.applied.f.organization": "Struttura",
+
+  // "search.filters.applied.f.knowslanguage": "Language",
+  "search.filters.applied.f.knowslanguage": "Lingua",
 
   // "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
   "search.filters.applied.charts.defaultConfiguration.title": "Output di ricerca",

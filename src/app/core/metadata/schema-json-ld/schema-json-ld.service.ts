@@ -3,6 +3,7 @@ import {
   Inject,
   Injectable,
 } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import {
   isEmpty,
@@ -20,7 +21,10 @@ import {
 export class SchemaJsonLDService {
   static scriptType = 'application/ld+json';
 
-  constructor(@Inject(DOCUMENT) private _document: Document) {}
+  constructor(
+    @Inject(DOCUMENT) private _document: Document,
+    protected sanitizer: DomSanitizer,
+  ) {}
 
   removeStructuredData(): void {
     const els = [];
@@ -66,7 +70,7 @@ export class SchemaJsonLDService {
     }
 
     if (isNotEmpty(constructor)) {
-      const provider: SchemaType = new constructor();
+      const provider: SchemaType = new constructor(this.sanitizer);
       return provider.getSchema(item);
     } else {
       return null;

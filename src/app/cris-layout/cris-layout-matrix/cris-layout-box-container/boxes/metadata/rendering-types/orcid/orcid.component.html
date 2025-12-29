@@ -1,4 +1,4 @@
-<div [class]="field.styleValue">
+<div [class]="field.styleValue" [attr.lang]="metadataValue.language">
     <span class="d-flex align-items-center txt-value">
 
       <a *ngIf="(orcidUrl$ | async); else noOrcidUrl" href="{{(orcidUrl$ | async)}}/{{metadataValue.value}}" target="_blank">
