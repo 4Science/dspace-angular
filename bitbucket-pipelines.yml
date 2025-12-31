@@ -299,6 +299,18 @@ definitions:
           - export CLOUDFRONT_DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Comment=='test--${CLOUDFRONT_NAME}'].Id" --output text)
           - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*" || echo "CloudFront distribution $CLOUDFRONT_DISTRIBUTION_ID not found — skipping invalidation."
 
+    - step: &check-branch-name-allowed
+        name: Check allowed branch name
+        image: alpine:latest
+        script:
+          - |
+            if [ "$BITBUCKET_BRANCH" = "main-cris" ] || "$BITBUCKET_BRANCH" = "dspace-cris-20*_02_x" ] || [[ "$BITBUCKET_BRANCH" == prod/* ]] || [[ "$BITBUCKET_BRANCH" == test/* ]]; then
+              echo "Branch $BITBUCKET_BRANCH is allowed."
+            else
+              echo "This pipeline can only run on main-cris, dspace-cris-20*_02_x, prod/**, or test/**"
+              exit 1
+            fi
+
 pipelines:
   custom:
     e2e-on-custom-backend:
@@ -312,6 +324,12 @@ pipelines:
       - step: *build-and-push
       - step: *deploy-on-dev
       - step: *find-and-invalidate-cloudfront-dev
+    deploy-on-staging:
+      - step: *check-branch-name-allowed
+      - step: *angular-build
+      - step: *build-and-push
+      - step: *deploy-on-staging
+      - step: *find-and-invalidate-cloudfront-staging
     turn-on-dev:
       - step: *turn-on-dev
     turn-on-staging:
@@ -319,7 +337,8 @@ pipelines:
     turn-on-test:
       - step: *turn-on-test
   branches:
-    'dspace-cris-2024_02_x':
+    'dspace-cris-20*_02_x':
+      - step: *check-branch-name-allowed
       - step: *preliminary-operation
       - step: *angular-build
       - parallel: *parallel-run-tests
@@ -329,6 +348,7 @@ pipelines:
       - step: *deploy-on-staging
       - step: *find-and-invalidate-cloudfront-staging
     'prod/**':
+      - step: *check-branch-name-allowed
       - step: *preliminary-operation
       - step: *angular-build
       - parallel: *parallel-run-tests
@@ -338,6 +358,7 @@ pipelines:
       - step: *deploy-on-staging
       - step: *find-and-invalidate-cloudfront-staging
     'test/**':
+      - step: *check-branch-name-allowed
       - step: *preliminary-operation
       - step: *angular-build
       - parallel: *parallel-run-tests
