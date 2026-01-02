@@ -41,17 +41,17 @@
     <cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
       <!-- Leaf node -->
       <cdk-tree-node *cdkTreeNodeDef="let node" cdkTreeNodePadding class="d-flex">
-        <span aria-hidden="true" type="button" class="btn btn-default px-2 mr-1" cdkTreeNodeToggle>
+      <span aria-hidden="true" type="button" class="btn btn-default px-2 me-1 btn-transparent" cdkTreeNodeToggle>
           <i class="fas fa-fw fa-angle-right invisible"></i>
         </span>
         @if (multiSelect) {
-          <label class="d-flex align-items-center m-0 p-0 form-check"
+        <label class="form-label d-flex align-items-center m-0 p-0 form-check"
             [class.text-success]="node.isSelected"
             [ngbTooltip]="node.item?.otherInformation?.note"
             [openDelay]="500"
             container="body"
             >
-            <input class="mr-2" type="checkbox"
+            <input class="me-2" type="checkbox"
               [disabled]="!node.item?.selectable"
               [(ngModel)]="node.isSelected"
               [checked]="node.isSelected"
@@ -63,7 +63,7 @@
           </label>
         }
         @if (!multiSelect) {
-          <button class="btn btn-outline-link btn-sm text-left"
+          <button class="btn btn-outline-link btn-sm text-start"
             [class.text-success]="node.isSelected"
             [dsBtnDisabled]="!node.item?.selectable"
             [ngbTooltip]="node.item?.otherInformation?.note"
@@ -88,12 +88,12 @@
           <i class="fas fa-fw {{treeControl.isExpanded(node) ? 'fa-angle-down' : 'fa-angle-right'}}"></i>
         </button>
         @if (multiSelect) {
-          <label class="d-flex align-items-center m-0 p-0 form-check"
+          <label class="form-label d-flex align-items-center m-0 p-0 form-check"
             [class.text-success]="node.isSelected"
             [ngbTooltip]="node.item?.otherInformation?.note"
             [openDelay]="500"
             container="body">
-            <input class="mr-2" type="checkbox"
+          <input class="me-2" type="checkbox"
               [disabled]="!node.item?.selectable"
               [(ngModel)]="node.isSelected"
               [checked]="node.isSelected"
@@ -105,7 +105,7 @@
           </label>
         }
         @if (!multiSelect) {
-          <button class="btn btn-outline-link btn-sm text-left"
+          <button class="btn btn-outline-link btn-sm text-start"
             [class.text-success]="node.isSelected"
             [dsBtnDisabled]="!node.item?.selectable"
             [ngbTooltip]="node.item?.otherInformation?.note"
