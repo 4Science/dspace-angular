@@ -23,14 +23,14 @@ the Docker compose scripts in this 'docker' folder.
 This Dockerfile is used to build a *development* DSpace-CRIS Angular UI image, published as '4science/dspace-cris-angular'
 
 ```
-docker build -t 4science/dspace-cris-angular:dspace-cris-2024_02_x .
+docker build -t 4science/dspace-cris-angular:dspace-cris-2025_02_x .
 ```
 
 This image is built *automatically* after each commit is made to the `main` branch.
 
 Admins to our DockerHub repo can manually publish with the following command.
 ```
-docker push 4science/dspace-cris-angular:dspace-cris-2024_02_x
+docker push 4science/dspace-cris-angular:dspace-cris-2025_02_x
 ```
 
 ### Dockerfile.dist
@@ -39,7 +39,7 @@ The `Dockerfile.dist` is used to generate a *production* build and runtime envir
 
 ```bash
 # build the latest image
-docker build -f Dockerfile.dist -t 4science/dspace-cris-angular:dspace-cris-2024_02_x-dist .
+docker build -f Dockerfile.dist -t 4science/dspace-cris-angular:dspace-cris-2025_02_x-dist .
 ```
 
 A default/demo version of this image is built *automatically*.
