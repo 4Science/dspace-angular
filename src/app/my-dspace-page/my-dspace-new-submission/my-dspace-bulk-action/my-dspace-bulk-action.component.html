@@ -6,7 +6,7 @@
     [dsBtnDisabled]="(processing$ | async) || (claimEnabled$ | async) !== true"
     (click)="claimAllSelectedTask()"
     [attr.data-test-disabled]="(claimEnabled$ | async) !== true"
-  >
+    >
     <span>
       <i class="fas fa-hand-paper"></i>
       {{'submission.workflow.tasks.pool.claim.selected' | translate}}
@@ -20,7 +20,7 @@
     [dsBtnDisabled]="(processing$ | async) || (claimedTaskActionsEnabled$ | async) !== true"
     (click)="submitAllSelectedTask()"
     [attr.data-test-disabled]="(claimedTaskActionsEnabled$ | async) !== true"
-  >
+    >
     <span>
       <i class="fa fa-thumbs-up"></i>
       {{'submission.workflow.tasks.claimed.approve.selected' | translate}}
@@ -33,7 +33,7 @@
     [dsBtnDisabled]="(claimedTaskActionsEnabled$ | async) !== true"
     (click)="openRejectModal(rejectModal)"
     [attr.data-test-disabled]="(claimedTaskActionsEnabled$ | async) !== true"
-  >
+    >
     <span>
       <i class="fa fa-trash"></i>
       {{'submission.workflow.tasks.claimed.reject.selected.submit' | translate}}
@@ -47,17 +47,19 @@
     [dsBtnDisabled]="(claimedTaskActionsEnabled$ | async) !== true"
     (click)="returnSelectedToPool()"
     [attr.data-test-disabled]="(claimedTaskActionsEnabled$ | async) !== true"
-  >
+    >
     <span>
       <i class="fa fa-undo"></i>
       {{'submission.workflow.tasks.claimed.return.selected' | translate}}
     </span>
   </button>
 
-  <span *ngIf="(processing$ | async)">
-    <i class='fas fa-circle-notch fa-spin'></i>
-    {{'submission.workflow.tasks.generic.processing' | translate}}
-  </span>
+  @if ((processing$ | async)) {
+    <span>
+      <i class='fas fa-circle-notch fa-spin'></i>
+      {{'submission.workflow.tasks.generic.processing' | translate}}
+    </span>
+  }
 </div>
 
 <ng-template #rejectTipContent><p [innerHTML]="'submission.workflow.tasks.claimed.reject_help' | translate"></p></ng-template>
@@ -69,7 +71,7 @@
       class="close"
       aria-label="Close"
       (click)="d('Cross click')"
-    >
+      >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -89,7 +91,7 @@
         class="btn btn-danger btn-lg btn-block mt-3"
         [dsBtnDisabled]="!rejectForm.valid"
         type="submit"
-      >
+        >
         <span>{{'submission.workflow.tasks.claimed.reject.reason.submit' | translate}}</span>
       </button>
     </form>

@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -44,7 +41,6 @@ import { ModifyItemOverviewComponent } from '../modify-item-overview/modify-item
     AlertComponent,
     AsyncPipe,
     ModifyItemOverviewComponent,
-    NgIf,
     RouterLink,
     TranslateModule,
   ],

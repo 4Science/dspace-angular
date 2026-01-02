@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -59,7 +56,6 @@ import { DuplicateMatchMetadataDetailConfig } from '../models/duplicate-detail-m
     AsyncPipe,
     BtnDisabledDirective,
     NgbTooltipModule,
-    NgIf,
     ReactiveFormsModule,
     RouterLink,
     ThemedItemListPreviewComponent,

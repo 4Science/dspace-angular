@@ -1,8 +1,5 @@
 import {
   AsyncPipe,
-  NgIf,
-  NgSwitch,
-  NgSwitchCase,
   TitleCasePipe,
 } from '@angular/common';
 import {
@@ -32,9 +29,6 @@ import { ListMetricPropsPipe } from '../pipes/list-metric-props/list-metric-prop
   imports: [
     AsyncPipe,
     ListMetricPropsPipe,
-    NgIf,
-    NgSwitch,
-    NgSwitchCase,
     TitleCasePipe,
     TranslateModule,
   ],

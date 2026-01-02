@@ -1,11 +1,13 @@
 <div class="row d-flex align-items-center m-2">
   <a [dsRedirect]="href">
     <div class="row">
-      <div class="col-1 text-left" *ngIf="metric && metric.icon">
-        <span class="icon-size">
-          <i [class]="metric.icon"></i>
-        </span>
-      </div>
+      @if (metric && metric.icon) {
+        <div class="col-1 text-left">
+          <span class="icon-size">
+            <i [class]="metric.icon"></i>
+          </span>
+        </div>
+      }
       <div class="col">
         <div class="d-flex justify-content-center">
           <div class="font-weight-bold">

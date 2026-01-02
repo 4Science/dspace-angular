@@ -2,8 +2,6 @@ import {
   AsyncPipe,
   isPlatformBrowser,
   NgClass,
-  NgForOf,
-  NgIf,
 } from '@angular/common';
 import {
   ChangeDetectorRef,
@@ -54,8 +52,6 @@ import { SearchChartComponent } from './search-chart/search-chart.component';
     AsyncPipe,
     NgbTooltipModule,
     NgClass,
-    NgForOf,
-    NgIf,
     SearchChartComponent,
     TranslateModule,
     VarDirective,

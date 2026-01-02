@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -20,7 +17,6 @@ import { FileDownloadLinkComponent } from '../../../../../../../../../../../shar
   imports: [
     AsyncPipe,
     BtnDisabledDirective,
-    NgIf,
     RouterLink,
     TranslateModule,
   ],

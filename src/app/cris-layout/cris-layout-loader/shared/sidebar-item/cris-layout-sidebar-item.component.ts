@@ -1,8 +1,4 @@
-import {
-  NgClass,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -33,8 +29,6 @@ import { slide } from '../../../../shared/animations/slide';
   standalone: true,
   imports: [
     NgClass,
-    NgFor,
-    NgIf,
     RouterLink,
   ],
 })

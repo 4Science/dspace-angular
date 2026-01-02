@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -35,7 +32,6 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   imports: [
     AsyncPipe,
     NgbTooltipModule,
-    NgIf,
     TranslateModule,
   ],
 })

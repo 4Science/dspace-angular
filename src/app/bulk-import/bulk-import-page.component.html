@@ -15,12 +15,16 @@
     </div>
 
     <button type="submit" class="btn btn-primary float-right" [dsBtnDisabled]="form.invalid || (isProcessingImport() | async)" >
-      <span *ngIf="(isProcessingImport() | async) === true">
-        <i class='fas fa-circle-notch fa-spin'></i> {{'bulk-import.processing' | translate}}
-      </span>
-      <span *ngIf="(isProcessingImport() | async) === false">
+      @if ((isProcessingImport() | async) === true) {
+        <span>
+          <i class='fas fa-circle-notch fa-spin'></i> {{'bulk-import.processing' | translate}}
+        </span>
+      }
+      @if ((isProcessingImport() | async) === false) {
+        <span>
           {{'bulk-import.submit' | translate}}
-      </span>
+        </span>
+      }
     </button>
     <button type="button" class="btn btn-outline-secondary float-right mr-2" (click)="goBack()">
       {{'bulk-import.back' | translate}}

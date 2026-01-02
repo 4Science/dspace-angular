@@ -1,3 +1,5 @@
-<button *ngIf="(isCollectionAdmin$ | async)" class="dropdown-item"
-        [routerLink]="getBulkImportPageRouterLink()" [innerHTML]="'context-menu.actions.bulk-import.btn' | translate">
-</button>
+@if ((isCollectionAdmin$ | async)) {
+  <button class="dropdown-item"
+    [routerLink]="getBulkImportPageRouterLink()" [innerHTML]="'context-menu.actions.bulk-import.btn' | translate">
+  </button>
+}

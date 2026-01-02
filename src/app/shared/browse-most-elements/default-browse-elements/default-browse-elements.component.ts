@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnChanges,
@@ -22,8 +18,6 @@ import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.com
   imports: [
     AsyncPipe,
     ListableObjectComponentLoaderComponent,
-    NgForOf,
-    NgIf,
     ThemedLoadingComponent,
     TranslateModule,
   ],

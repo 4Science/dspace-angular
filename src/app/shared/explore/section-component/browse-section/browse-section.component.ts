@@ -1,4 +1,4 @@
-import { NgForOf } from '@angular/common';
+
 import {
   Component,
   Input,
@@ -16,7 +16,6 @@ import { BrowseSection } from '../../../../core/layout/models/section.model';
   templateUrl: './browse-section.component.html',
   standalone: true,
   imports: [
-    NgForOf,
     RouterLink,
     TranslateModule,
   ],

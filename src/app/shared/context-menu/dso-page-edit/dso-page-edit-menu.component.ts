@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -25,7 +22,6 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   standalone: true,
   imports: [
     AsyncPipe,
-    NgIf,
     RouterLink,
     TranslateModule,
   ],

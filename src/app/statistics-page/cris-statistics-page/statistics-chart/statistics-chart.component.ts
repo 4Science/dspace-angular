@@ -1,8 +1,6 @@
 import {
   Location,
   NgClass,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -33,8 +31,6 @@ import { StatisticsChartWrapperComponent } from './statistics-chart-wrapper/stat
   imports: [
     FilterMapPipe,
     NgClass,
-    NgFor,
-    NgIf,
     RouterLink,
     StatisticsChartWrapperComponent,
     ThemedLoadingComponent,

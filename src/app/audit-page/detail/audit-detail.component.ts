@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   DatePipe,
-  NgIf,
 } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -35,7 +34,6 @@ import { VarDirective } from '../../shared/utils/var.directive';
   imports: [
     AsyncPipe,
     DatePipe,
-    NgIf,
     RouterLink,
     TranslateModule,
     VarDirective,

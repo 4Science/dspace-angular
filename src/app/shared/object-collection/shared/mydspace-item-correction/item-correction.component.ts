@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -32,7 +29,6 @@ import { getFirstSucceededRemoteListPayload } from '../../../../core/shared/oper
   templateUrl: './item-correction.component.html',
   imports: [
     AsyncPipe,
-    NgIf,
     TranslateModule,
   ],
   standalone: true,

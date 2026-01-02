@@ -1,7 +1,5 @@
 import {
   AsyncPipe,
-  NgForOf,
-  NgIf,
   NgOptimizedImage,
 } from '@angular/common';
 import {
@@ -36,8 +34,6 @@ import { Item } from './../../../core/shared/item.model';
     MetadataLinkViewAvatarPopoverComponent,
     MetadataLinkViewOrcidComponent,
     NgbTooltipModule,
-    NgForOf,
-    NgIf,
     NgOptimizedImage,
     RouterLink,
     TranslateModule,

@@ -1,7 +1,4 @@
-import {
-  NgFor,
-  NgIf,
-} from '@angular/common';
+
 import {
   Component,
   Input,
@@ -18,8 +15,6 @@ import { CrisLayoutBoxContainerComponent } from './cris-layout-box-container/cri
   standalone: true,
   imports: [
     CrisLayoutBoxContainerComponent,
-    NgFor,
-    NgIf,
   ],
 })
 export class CrisLayoutMatrixComponent {

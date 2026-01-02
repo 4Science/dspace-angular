@@ -47,14 +47,16 @@
                 }
               </span>
             }
-            </ds-truncatable-part>
-          </span>
-        </ds-truncatable>
-        <ds-metric-badges *ngIf="showMetrics" class="d-block clearfix" [item]="dso"></ds-metric-badges>
-      </div>
-      <div class="align-self-center">
-        <ds-metric-donuts [item]="dso"></ds-metric-donuts>
-      </div>
+          </ds-truncatable-part>
+        </span>
+      </ds-truncatable>
+      @if (showMetrics) {
+        <ds-metric-badges class="d-block clearfix" [item]="dso"></ds-metric-badges>
+      }
+    </div>
+    <div class="align-self-center">
+      <ds-metric-donuts [item]="dso"></ds-metric-donuts>
     </div>
   </div>
+</div>
 </div>

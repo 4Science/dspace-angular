@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -45,7 +42,6 @@ import { SearchOptions } from '../../../models/search-options.model';
   imports: [
     AsyncPipe,
     ErrorComponent,
-    NgIf,
     ObjectCollectionComponent,
     ThemedLoadingComponent,
     TranslateModule,

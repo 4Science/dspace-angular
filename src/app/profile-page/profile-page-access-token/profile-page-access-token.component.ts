@@ -1,8 +1,5 @@
 import { Clipboard } from '@angular/cdk/clipboard';
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -32,7 +29,6 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
   imports: [
     AlertComponent,
     AsyncPipe,
-    NgIf,
     TranslateModule,
   ],
   standalone: true,

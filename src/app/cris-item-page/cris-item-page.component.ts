@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -32,7 +29,6 @@ import { ThemedLoadingComponent } from '../shared/loading/themed-loading.compone
   imports: [
     AsyncPipe,
     CrisLayoutComponent,
-    NgIf,
     ThemedItemAlertsComponent,
     ThemedLoadingComponent,
     TranslateModule,

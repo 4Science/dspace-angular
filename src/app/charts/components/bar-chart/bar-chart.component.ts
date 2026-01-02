@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -30,7 +29,6 @@ import { AbstractChartComponent } from '../abstract-chart/abstract-chart.compone
     BarChartModule,
     BtnDisabledDirective,
     NgClass,
-    NgIf,
     TranslateModule,
   ],
 })

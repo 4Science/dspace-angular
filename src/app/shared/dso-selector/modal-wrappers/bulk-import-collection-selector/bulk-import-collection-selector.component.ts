@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Input,
@@ -26,7 +26,6 @@ import {
   templateUrl: './bulk-import-collection-selector.component.html',
   imports: [
     AdministeredCollectionSelectorComponent,
-    NgIf,
     TranslateModule,
   ],
   standalone: true,

@@ -64,13 +64,15 @@
                 </ds-alert>
               </div>
               <div class="form-group">
-                <div *ngFor="let option of syncProductOptions" class="row form-check">
-                  <input type="radio" [(ngModel)]="currentSyncProduct"
-                         name="syncProducts" id="productOption_{{option.value}}" [value]="option.value"
-                         required>
-                  <label for="productOption_{{option.value}}"
-                         class="ml-2">{{option.label | translate}}</label>
-                </div>
+                @for (option of syncProductOptions; track option) {
+                  <div class="row form-check">
+                    <input type="radio" [(ngModel)]="currentSyncProduct"
+                      name="syncProducts" id="productOption_{{option.value}}" [value]="option.value"
+                      required>
+                    <label for="productOption_{{option.value}}"
+                    class="ml-2">{{option.label | translate}}</label>
+                  </div>
+                }
               </div>
             </div>
           </div>
@@ -111,12 +113,14 @@
                 </ds-alert>
               </div>
               <div class="form-group">
-                <div *ngFor="let option of syncPatentOptions" class="row form-check">
-                  <input type="radio" [(ngModel)]="currentSyncPatent"
-                         name="syncPatents" id="patentOption_{{option.value}}" [value]="option.value"
-                         required>
-                  <label for="patentOption_{{option.value}}" class="ml-2">{{option.label | translate}}</label>
-                </div>
+                @for (option of syncPatentOptions; track option) {
+                  <div class="row form-check">
+                    <input type="radio" [(ngModel)]="currentSyncPatent"
+                      name="syncPatents" id="patentOption_{{option.value}}" [value]="option.value"
+                      required>
+                    <label for="patentOption_{{option.value}}" class="ml-2">{{option.label | translate}}</label>
+                  </div>
+                }
               </div>
             </div>
           </div>

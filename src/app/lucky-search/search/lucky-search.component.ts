@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   isPlatformServer,
-  NgForOf,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -75,8 +73,6 @@ import { LuckySearchService } from '../lucky-search.service';
   imports: [
     AsyncPipe,
     FileSizePipe,
-    NgForOf,
-    NgIf,
     PageWithSidebarComponent,
     ThemedFileDownloadLinkComponent,
     ThemedSearchFormComponent,

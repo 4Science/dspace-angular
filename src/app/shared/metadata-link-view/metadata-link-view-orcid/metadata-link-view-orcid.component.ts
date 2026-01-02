@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -26,7 +23,6 @@ import { getFirstSucceededRemoteDataPayload } from './../../../core/shared/opera
   imports: [
     AsyncPipe,
     NgbTooltipModule,
-    NgIf,
     TranslateModule,
   ],
   standalone: true,

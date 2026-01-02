@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -67,7 +64,6 @@ import { RelationshipsSortListComponent } from './relationships-sort-list/relati
   styleUrls: ['./edit-item-relationships.component.scss'],
   imports: [
     AsyncPipe,
-    NgIf,
     RelationshipsSortListComponent,
     ThemedConfigurationSearchPageComponent,
     ThemedLoadingComponent,

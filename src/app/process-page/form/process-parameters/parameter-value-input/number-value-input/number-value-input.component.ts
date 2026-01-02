@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Input,
@@ -30,7 +30,6 @@ import { ValueInputComponent } from '../value-input.component';
   standalone: true,
   imports: [
     FormsModule,
-    NgIf,
     TranslateModule,
   ],
 })

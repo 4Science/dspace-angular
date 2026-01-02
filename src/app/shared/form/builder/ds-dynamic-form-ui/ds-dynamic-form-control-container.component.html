@@ -1,5 +1,5 @@
 <div [class.mb-2]="hasLabel || model.type === 'DATE' || (model.type !== 'GROUP' && asBootstrapFormGroup) || getClass('element', 'container').includes('mb-2')"
-     [class.d-none]="model.hidden"
+  [class.d-none]="model.hidden"
   [formGroup]="group"
   [ngClass]="[getClass('element', 'container'), getClass('grid', 'container')]">
   @if (!isCheckbox && hasLabel) {
@@ -34,9 +34,11 @@
                 || (model.type==='TAG')) && (!showErrorMessages || errorMessages.length === 0)) {
               <small class="text-muted ds-hint" [innerHTML]="model.hint | translate" [ngClass]="getClass('element', 'hint')"></small>
             }
-            <small class="text-muted mt-2" *ngIf="formBuilderService.isScrollableDropdown(model) && enabledDropdownHints[model?.metadataFields[0]] && (model.value?.value) !== null">
+            @if (formBuilderService.isScrollableDropdown(model) && enabledDropdownHints[model?.metadataFields[0]] && (model.value?.value) !== null) {
+<small class="text-muted mt-2">
               <i class="fas fa-info-circle mr-2"></i>{{'submission.dropdown.hint.' + model.value?.value | translate}}
             </small>
+}
           </div>
           <!-- In case of repeatable fields show empty space for all elements except the first -->
           <!-- In case of not repeatable field with multiple values show empty space for all elements except the last -->
@@ -108,7 +110,7 @@
           [listId]="listId"
           [metadataFields]="model.metadataFields"
           [submissionId]="model.submissionId"
-        [relationshipOptions]="model.relationship">
+          [relationshipOptions]="model.relationship">
         </ds-existing-relation-list-element>
       }
       @if (hasHint && (model.repeatable === false || context?.index === context?.context?.groups?.length - 1) && (!showErrorMessages || errorMessages.length === 0)) {

@@ -1,18 +1,21 @@
-<ng-container *ngIf="componentLoader">
-
-  <ng-container *ngIf="box.container && !componentLoader.hasOwnContainer">
+@if (componentLoader) {
+  @if (box.container && !componentLoader.hasOwnContainer) {
     <ngb-accordion #accordionRef [activeIds]="activeIds">
       <ngb-panel id="{{box.shortname}}">
         <ng-template ngbPanelTitle>
           <span class="float-left" [innerHTML]="getBoxHeader()" tabindex="0"></span>
           <div class="d-inline-block float-right">
             <a class="close"
-               tabindex="0"
-               role="button"
-               [attr.aria-label]="(accordionRef.isExpanded(box.shortname) ? 'cris-layout.toggle.aria.close' : 'cris-layout.toggle.aria.open') | translate: {sectionHeader: getBoxHeader()}"
-               [title]="(accordionRef.isExpanded(box.shortname) ? 'cris-layout.toggle.close' : 'cris-layout.toggle.open') | translate">
-              <span *ngIf="accordionRef.isExpanded(box.shortname)" class="fas fa-chevron-up fa-fw"></span>
-              <span *ngIf="!accordionRef.isExpanded(box.shortname)" class="fas fa-chevron-down fa-fw"></span>
+              tabindex="0"
+              role="button"
+              [attr.aria-label]="(accordionRef.isExpanded(box.shortname) ? 'cris-layout.toggle.aria.close' : 'cris-layout.toggle.aria.open') | translate: {sectionHeader: getBoxHeader()}"
+              [title]="(accordionRef.isExpanded(box.shortname) ? 'cris-layout.toggle.close' : 'cris-layout.toggle.open') | translate">
+              @if (accordionRef.isExpanded(box.shortname)) {
+                <span class="fas fa-chevron-up fa-fw"></span>
+              }
+              @if (!accordionRef.isExpanded(box.shortname)) {
+                <span class="fas fa-chevron-down fa-fw"></span>
+              }
             </a>
           </div>
         </ng-template>
@@ -21,10 +24,13 @@
         </ng-template>
       </ngb-panel>
     </ngb-accordion>
-  </ng-container>
-
-  <div class="mx-n3" *ngIf="!box.container || componentLoader.hasOwnContainer">
-    <ng-container *ngComponentOutlet="getComponentRef(); injector: objectInjector;"></ng-container>
-  </div>
-</ng-container>
-<ds-loading *ngIf="!componentLoader"></ds-loading>
+  }
+  @if (!box.container || componentLoader.hasOwnContainer) {
+    <div class="mx-n3">
+      <ng-container *ngComponentOutlet="getComponentRef(); injector: objectInjector;"></ng-container>
+    </div>
+  }
+}
+@if (!componentLoader) {
+  <ds-loading></ds-loading>
+}

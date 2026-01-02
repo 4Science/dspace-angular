@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   LowerCasePipe,
-  NgSwitch,
-  NgSwitchDefault,
 } from '@angular/common';
 import {
   Component,
@@ -28,8 +26,6 @@ import { ThemedDefaultBrowseElementsComponent } from './default-browse-elements/
   imports: [
     AsyncPipe,
     LowerCasePipe,
-    NgSwitch,
-    NgSwitchDefault,
     ThemedDefaultBrowseElementsComponent,
   ],
 })

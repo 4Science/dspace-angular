@@ -1,7 +1,4 @@
-import {
-  NgComponentOutlet,
-  NgIf,
-} from '@angular/common';
+import { NgComponentOutlet } from '@angular/common';
 import {
   Component,
   ComponentFactoryResolver,
@@ -34,7 +31,6 @@ import { LayoutBox } from '../../enums/layout-box.enum';
   imports: [
     NgbAccordionModule,
     NgComponentOutlet,
-    NgIf,
     ThemedLoadingComponent,
     TranslateModule,
   ],

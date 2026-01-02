@@ -198,9 +198,7 @@ describe('MyDSpaceNewBulkImportComponent test', () => {
   selector: 'ds-test-cmp',
   template: ``,
   standalone: true,
-  imports: [
-    CommonModule,
-  ],
+  imports: [],
 })
 class TestComponent {
   reload = (event) => {

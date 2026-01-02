@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Input,
@@ -17,7 +17,6 @@ import { CrisLayoutMatrixComponent } from '../cris-layout-matrix/cris-layout-mat
   imports: [
     ContextMenuComponent,
     CrisLayoutMatrixComponent,
-    NgIf,
   ],
 })
 export class CrisLayoutLeadingComponent {

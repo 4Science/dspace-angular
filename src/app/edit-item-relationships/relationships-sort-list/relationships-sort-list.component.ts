@@ -5,11 +5,7 @@ import {
   CdkDropListGroup,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -37,8 +33,6 @@ import { RelationshipsItemsListPreviewComponent } from '../../shared/object-list
     CdkDrag,
     CdkDropList,
     CdkDropListGroup,
-    NgForOf,
-    NgIf,
     RelationshipsItemsListPreviewComponent,
     ThemedLoadingComponent,
     TranslateModule,

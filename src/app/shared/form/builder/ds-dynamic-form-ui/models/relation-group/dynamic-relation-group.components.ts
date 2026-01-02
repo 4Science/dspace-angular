@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgIf,
 } from '@angular/common';
 import {
   ChangeDetectorRef,
@@ -83,7 +82,6 @@ import { DsDynamicRelationGroupModalComponent } from './modal/dynamic-relation-g
     forwardRef(() => FormComponent),
     NgbTooltipModule,
     NgClass,
-    NgIf,
     ThemedLoadingComponent,
     TranslateModule,
   ],

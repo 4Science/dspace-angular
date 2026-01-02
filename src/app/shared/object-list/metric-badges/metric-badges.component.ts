@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -29,7 +26,6 @@ import { followLink } from '../../utils/follow-link-config.model';
   standalone: true,
   imports: [
     AsyncPipe,
-    NgFor,
     TranslateModule,
   ],
 })

@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -31,8 +27,6 @@ import { SearchChartComponent } from '../../../search/search-charts/search-chart
   standalone: true,
   imports: [
     AsyncPipe,
-    NgForOf,
-    NgIf,
     RouterLink,
     SearchChartComponent,
     TranslateModule,

@@ -2,8 +2,6 @@ import {
   AsyncPipe,
   isPlatformServer,
   NgClass,
-  NgForOf,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -40,8 +38,6 @@ import { SearchObjects } from '../../../search/models/search-objects.model';
   imports: [
     AsyncPipe,
     NgClass,
-    NgForOf,
-    NgIf,
     NgTemplateOutlet,
     RouterLink,
     ThemedLoadingComponent,

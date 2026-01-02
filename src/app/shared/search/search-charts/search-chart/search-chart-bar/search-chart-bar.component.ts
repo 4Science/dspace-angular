@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -32,7 +29,6 @@ import { SearchChartFilterComponent } from '../search-chart-filter/search-chart-
   imports: [
     AsyncPipe,
     ChartComponent,
-    NgIf,
     TranslateModule,
   ],
   standalone: true,

@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -40,7 +37,6 @@ import { DSOSelectorModalWrapperComponent } from '../dso-selector-modal-wrapper.
     AsyncPipe,
     BtnDisabledDirective,
     ListableObjectComponentLoaderComponent,
-    NgForOf,
     TranslateModule,
   ],
   standalone: true,

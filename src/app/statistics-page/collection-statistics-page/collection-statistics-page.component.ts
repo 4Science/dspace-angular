@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -18,7 +18,6 @@ import { StatisticsTableComponent } from '../statistics-table/statistics-table.c
   styleUrls: ['./collection-statistics-page.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
     CrisStatisticsPageComponent,
     StatisticsTableComponent,
     ThemedLoadingComponent,

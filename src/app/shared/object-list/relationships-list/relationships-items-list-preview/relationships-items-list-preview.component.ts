@@ -1,8 +1,4 @@
-import {
-  NgClass,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -35,8 +31,6 @@ import { TruncatablePartComponent } from '../../../truncatable/truncatable-part/
     ItemSubmitterComponent,
     MetadataLinkViewComponent,
     NgClass,
-    NgForOf,
-    NgIf,
     ThemedTypeBadgeComponent,
     TranslateModule,
     TruncatableComponent,

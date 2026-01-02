@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Inject,
@@ -37,7 +37,6 @@ import { SearchChartFilterWrapperComponent } from './search-chart-wrapper/search
   styleUrls: ['./search-chart.component.scss'],
   templateUrl: './search-chart.component.html',
   imports: [
-    NgIf,
     SearchChartFilterWrapperComponent,
   ],
   standalone: true,

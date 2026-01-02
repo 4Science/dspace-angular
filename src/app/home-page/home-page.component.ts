@@ -1,10 +1,6 @@
 import {
   AsyncPipe,
   isPlatformServer,
-  NgForOf,
-  NgIf,
-  NgSwitch,
-  NgSwitchCase,
 } from '@angular/common';
 import {
   Component,
@@ -67,10 +63,6 @@ import { ThemedHomeNewsComponent } from './home-news/themed-home-news.component'
   imports: [
     AsyncPipe,
     HomeCoarComponent,
-    NgForOf,
-    NgIf,
-    NgSwitch,
-    NgSwitchCase,
     SuggestionsPopupComponent,
     ThemedBrowseSectionComponent,
     ThemedCountersSectionComponent,

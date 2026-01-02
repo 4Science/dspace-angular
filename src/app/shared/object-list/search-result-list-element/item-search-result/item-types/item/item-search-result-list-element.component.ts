@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgForOf,
-  NgIf,
 } from '@angular/common';
 import {
   AfterViewInit,
@@ -74,8 +72,6 @@ import { SearchResultListElementComponent } from '../../../search-result-list-el
     MetricBadgesComponent,
     MetricDonutsComponent,
     NgClass,
-    NgForOf,
-    NgIf,
     RouterLink,
     ThemedBadgesComponent,
     ThemedThumbnailComponent,

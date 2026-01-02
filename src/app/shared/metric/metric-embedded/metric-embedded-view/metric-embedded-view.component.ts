@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Renderer2,
@@ -14,7 +14,6 @@ import { BaseEmbeddedHtmlMetricComponent } from '../base-embedded-html-metric.co
   styleUrls: ['./metric-embedded-view.component.scss', '../../metric-loader/base-metric.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     RedirectWithHrefDirective,
     TranslateModule,
   ],

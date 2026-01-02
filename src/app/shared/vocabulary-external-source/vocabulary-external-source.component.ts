@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -59,8 +55,6 @@ import { followLink } from '../utils/follow-link-config.model';
   imports: [
     AlertComponent,
     AsyncPipe,
-    NgForOf,
-    NgIf,
     ThemedLoadingComponent,
     TranslateModule,
   ],

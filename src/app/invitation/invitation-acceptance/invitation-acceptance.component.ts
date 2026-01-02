@@ -1,4 +1,4 @@
-import { NgForOf } from '@angular/common';
+
 import {
   Component,
   OnInit,
@@ -30,7 +30,6 @@ import { Registration } from '../../core/shared/registration.model';
   styleUrls: ['./invitation-acceptance.component.scss'],
   standalone: true,
   imports: [
-    NgForOf,
     TranslateModule,
   ],
 })

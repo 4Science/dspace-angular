@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -38,8 +34,6 @@ import { SectionsService } from '../sections.service';
   imports: [
     AlertComponent,
     AsyncPipe,
-    NgForOf,
-    NgIf,
     TranslateModule,
   ],
   standalone: true,

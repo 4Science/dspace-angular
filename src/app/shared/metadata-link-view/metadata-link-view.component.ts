@@ -1,6 +1,5 @@
 import {
   AsyncPipe,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -54,7 +53,6 @@ import { StickyPopoverDirective } from './sticky-popover.directive';
     MetadataLinkViewPopoverComponent,
     NgbPopoverModule,
     NgbTooltipModule,
-    NgIf,
     NgTemplateOutlet,
     RouterLink,
     StickyPopoverDirective,

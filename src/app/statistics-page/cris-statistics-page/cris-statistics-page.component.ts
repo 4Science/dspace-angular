@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -78,8 +74,6 @@ import { FilterMapPipe } from './statistics-pipes/filter-map.pipe';
     FormsModule,
     NgbDatepickerModule,
     NgbNavModule,
-    NgFor,
-    NgIf,
     StatisticsChartComponent,
     StatisticsMapComponent,
     ThemedLoadingComponent,

@@ -1,7 +1,5 @@
 import {
   AsyncPipe,
-  NgFor,
-  NgIf,
   TitleCasePipe,
 } from '@angular/common';
 import {
@@ -40,8 +38,6 @@ import { BitstreamAttachmentRenderingModelComponent } from './bitstream-attachme
   imports: [
     AsyncPipe,
     FileSizePipe,
-    NgFor,
-    NgIf,
     ThemedFileDownloadLinkComponent,
     TitleCasePipe,
     TranslateModule,

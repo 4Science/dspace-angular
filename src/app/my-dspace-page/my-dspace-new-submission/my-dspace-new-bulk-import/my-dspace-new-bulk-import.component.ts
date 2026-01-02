@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -45,7 +42,6 @@ import { EntityDropdownComponent } from '../../../shared/entity-dropdown/entity-
     BtnDisabledDirective,
     EntityDropdownComponent,
     NgbDropdownModule,
-    NgIf,
     TranslateModule,
   ],
   standalone: true,

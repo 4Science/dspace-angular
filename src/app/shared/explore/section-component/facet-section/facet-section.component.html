@@ -1,21 +1,25 @@
 <div>
   <h2>{{ 'explore.facet-section.title' | translate }}</h2>
   <div class="row">
-    <div *ngFor="let facet of (facets$ | async)" [class]="getFacetsBoxCol(facet)" class="mb-4" data-test="facet-column">
-      <h5>{{'explore.index.' + facet.name | translate}}</h5>
-      <div *ngIf="facet.filterType.includes('chart'); else notChartFacet">
-        <ds-search-chart [filter]="facet" [inPlaceSearch]="false"> </ds-search-chart>
+    @for (facet of (facets$ | async); track facet) {
+      <div [class]="getFacetsBoxCol(facet)" class="mb-4" data-test="facet-column">
+        <h5>{{'explore.index.' + facet.name | translate}}</h5>
+        @if (facet.filterType.includes('chart')) {
+          <div>
+            <ds-search-chart [filter]="facet" [inPlaceSearch]="false"> </ds-search-chart>
+          </div>
+        } @else {
+          @for (facetValue of facet._embedded.values; track facetValue) {
+            <div class="border p-3">
+              <a [routerLink]="getSearchLink()"
+                [queryParams]="getSearchQueryParams(facet, facetValue)">
+                {{facetValue.label}}
+              </a>
+              <span class="badge badge-secondary float-right">{{facetValue.count}}</span>
+            </div>
+          }
+        }
       </div>
-      <ng-template #notChartFacet>
-        <div *ngFor="let facetValue of facet._embedded.values" class="border p-3">
-          <a [routerLink]="getSearchLink()"
-             [queryParams]="getSearchQueryParams(facet, facetValue)">
-            {{facetValue.label}}
-          </a>
-          <span class="badge badge-secondary float-right">{{facetValue.count}}</span>
-        </div>
-      </ng-template>
-
-    </div>
+    }
   </div>
 </div>

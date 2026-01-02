@@ -303,7 +303,6 @@ describe('SubmissionSectionDetectDuplicateComponent test suite', () => {
   template: ``,
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     NgxPaginationModule,
     ReactiveFormsModule,

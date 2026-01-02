@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -20,8 +16,6 @@ import { SocialService } from './social.service';
   standalone: true,
   imports: [
     AsyncPipe,
-    NgFor,
-    NgIf,
   ],
 })
 /**

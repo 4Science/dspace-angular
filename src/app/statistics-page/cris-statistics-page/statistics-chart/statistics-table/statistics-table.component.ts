@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgFor,
-  NgIf,
   SlicePipe,
 } from '@angular/common';
 import {
@@ -32,8 +30,6 @@ import { StatisticsChartDataComponent } from '../statistics-chart-data/statistic
     BtnDisabledDirective,
     CreateLinkPipe,
     NgClass,
-    NgFor,
-    NgIf,
     SlicePipe,
     TranslateModule,
   ],

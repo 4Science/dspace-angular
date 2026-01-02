@@ -1,7 +1,5 @@
 import {
   AsyncPipe,
-  NgForOf,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -34,8 +32,6 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
     AsyncPipe,
     BtnDisabledDirective,
     FormsModule,
-    NgForOf,
-    NgIf,
     NgTemplateOutlet,
     TranslateModule,
   ],

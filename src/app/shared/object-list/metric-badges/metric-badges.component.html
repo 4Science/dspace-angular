@@ -1,3 +1,5 @@
-<span class="badge badge-info badge-metric mr-1 {{metric.metricType}}" *ngFor="let metric of (metrics$ | async)"
+@for (metric of (metrics$ | async); track metric) {
+  <span class="badge badge-info badge-metric mr-1 {{metric.metricType}}"
     [innerHTML]="('metric-badges.' + metric.metricType | translate) + ' ' + metric.metricCount">
-</span>
+  </span>
+}

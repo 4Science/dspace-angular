@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -57,7 +54,6 @@ import { FileValidator } from '../shared/utils/require-file.validator';
     AsyncPipe,
     BtnDisabledDirective,
     FileValidator,
-    NgIf,
     ReactiveFormsModule,
     TranslateModule,
   ],

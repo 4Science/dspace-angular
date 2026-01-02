@@ -1,15 +1,15 @@
-<ng-container *ngIf="!!tab">
+@if (!!tab) {
   <div class="container">
-    <ng-container *ngFor="let row of tab.rows">
+    @for (row of tab.rows; track row) {
       <div [class]="row.style" [class.row]="!hasRowClass(row.style)">
-        <ng-container *ngFor="let cell of row.cells">
+        @for (cell of row.cells; track cell) {
           <div class="cell" [class]="cell.style" [class.col]="!hasColClass(cell.style)" [class.px-0]="!showCellPadding">
-            <ng-container *ngFor="let box of cell.boxes">
+            @for (box of cell.boxes; track box) {
               <ds-cris-layout-box-container [box]="box" [item]="item" [tabName]="tab.shortname"></ds-cris-layout-box-container>
-            </ng-container>
+            }
           </div>
-        </ng-container>
+        }
       </div>
-    </ng-container>
+    }
   </div>
-</ng-container>
+}

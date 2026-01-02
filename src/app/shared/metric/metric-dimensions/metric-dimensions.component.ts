@@ -1,6 +1,5 @@
 import {
   AsyncPipe,
-  NgIf,
   TitleCasePipe,
 } from '@angular/common';
 import {
@@ -27,7 +26,6 @@ declare let __dimensions_embed: any;
   imports: [
     AsyncPipe,
     ListMetricPropsPipe,
-    NgIf,
     TitleCasePipe,
     TranslateModule,
   ],

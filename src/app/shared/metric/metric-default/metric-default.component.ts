@@ -1,7 +1,6 @@
 import {
   DatePipe,
   NgClass,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -23,7 +22,6 @@ import { BaseMetricComponent } from '../metric-loader/base-metric.component';
     DatePipe,
     NgbTooltipModule,
     NgClass,
-    NgIf,
     RedirectWithHrefDirective,
     TranslateModule,
   ],

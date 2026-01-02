@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -49,8 +45,6 @@ import { DuplicateMatchComponent } from './duplicate-match/duplicate-match.compo
     AlertComponent,
     AsyncPipe,
     DuplicateMatchComponent,
-    NgForOf,
-    NgIf,
     NgxPaginationModule,
     ObjNgFor,
     PaginationComponent,

@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -85,8 +81,6 @@ export enum ExportSelectionMode {
     FormsModule,
     ItemExportAlertComponent,
     ItemExportListComponent,
-    NgForOf,
-    NgIf,
     ReactiveFormsModule,
     ThemedLoadingComponent,
     TranslateModule,

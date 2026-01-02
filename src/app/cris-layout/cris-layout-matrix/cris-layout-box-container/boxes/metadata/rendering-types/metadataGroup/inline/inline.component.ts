@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -28,8 +26,6 @@ import { MetadataGroupComponent } from '../metadata-group.component';
     AsyncPipe,
     MetadataRenderComponent,
     NgClass,
-    NgFor,
-    NgIf,
   ],
 })
 export class InlineComponent extends MetadataGroupComponent implements OnInit {

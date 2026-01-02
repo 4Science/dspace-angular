@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 
 import { MetadataRenderComponent } from '../../../row/metadata-container/metadata-render/metadata-render.component';
@@ -19,8 +15,6 @@ import { MetadataGroupComponent } from '../metadata-group.component';
   imports: [
     AsyncPipe,
     MetadataRenderComponent,
-    NgFor,
-    NgIf,
   ],
 })
 export class TableComponent extends MetadataGroupComponent {

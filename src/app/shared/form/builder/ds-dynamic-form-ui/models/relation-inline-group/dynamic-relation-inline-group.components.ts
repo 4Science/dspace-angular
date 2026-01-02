@@ -1,7 +1,4 @@
-import {
-  NgClass,
-  NgIf,
-} from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -59,7 +56,6 @@ import { DynamicRelationGroupModel } from '../relation-group/dynamic-relation-gr
   imports: [
     FormComponent,
     NgClass,
-    NgIf,
   ],
   standalone: true,
 })

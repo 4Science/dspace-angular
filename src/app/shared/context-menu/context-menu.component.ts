@@ -3,8 +3,6 @@ import {
   DOCUMENT,
   NgClass,
   NgComponentOutlet,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   AfterViewChecked,
@@ -59,8 +57,6 @@ import { ContextMenuEntryType } from './context-menu-entry-type';
     NgbDropdownModule,
     NgClass,
     NgComponentOutlet,
-    NgFor,
-    NgIf,
     TranslateModule,
   ],
 })

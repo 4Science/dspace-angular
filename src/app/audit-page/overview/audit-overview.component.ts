@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   DatePipe,
-  NgForOf,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -38,8 +36,6 @@ import { VarDirective } from '../../shared/utils/var.directive';
   imports: [
     AsyncPipe,
     DatePipe,
-    NgForOf,
-    NgIf,
     PaginationComponent,
     RouterLink,
     TranslateModule,

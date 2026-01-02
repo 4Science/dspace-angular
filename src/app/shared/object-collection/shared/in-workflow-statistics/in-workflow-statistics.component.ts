@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -37,7 +34,6 @@ import { hasValue } from '../../../empty.util';
   styleUrls: ['./in-workflow-statistics.component.scss'],
   imports: [
     AsyncPipe,
-    NgIf,
     TranslateModule,
   ],
 })

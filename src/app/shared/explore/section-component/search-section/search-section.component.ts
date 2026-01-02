@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -37,8 +33,6 @@ import { ThemedSearchFormComponent } from '../../../search-form/themed-search-fo
   imports: [
     AsyncPipe,
     FormsModule,
-    NgForOf,
-    NgIf,
     ReactiveFormsModule,
     ThemedSearchFormComponent,
     TranslateModule,

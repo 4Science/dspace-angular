@@ -1,7 +1,7 @@
 <div class="test"></div>
 <ng-container *ngVar="(categories$ | async) as categories">
 
-  <ng-container *ngIf="!categories">
+  @if (!categories) {
     <div class="container">
       <div class="row">
         <div class="col-md-12 mb-40">
@@ -9,15 +9,14 @@
         </div>
       </div>
     </div>
-  </ng-container>
+  }
 
-  <ng-container *ngIf="categories">
+  @if (categories) {
     <div class="container">
       <div class="row">
         <div class="col-md-12 mb-40">
           <h2>{{'statistics.categories.title' | translate}}</h2>
-
-          <ng-container *ngIf="categories">
+          @if (categories) {
             <div class="datepicker-container">
               <div class="form-group">
                 <div class="input-group">
@@ -34,7 +33,6 @@
                 <div class="input-group ml-2">
                   <input class="form-control date-input" placeholder="End Date" name="dp" [(ngModel)]="dateTo" (ngModelChange)="endDateChanged()"
                     ngbDatepicker #dt="ngbDatepicker">
-
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" title="End Date" (click)="dt.toggle()" type="button">
                       <i class="far fa-calendar-alt"></i>
@@ -43,48 +41,44 @@
                 </div>
               </div>
             </div>
-          </ng-container>
-
-
-          <ng-container *ngIf="!!categories && categories.length > 1">
+          }
+          @if (!!categories && categories.length > 1) {
             <ul ngbNav [(activeId)]="selectedCategory.id" class="nav-tabs" id="categories-tabs"
-                (navChange)="changeCategoryType($event)" [destroyOnHide]="true">
-              <li [ngbNavItem]="category.id" *ngFor="let category of categories" [id]="category.id" role="tab">
-                <a ngbNavLink>{{ 'statistics.categories.' + category.categoryType + '.tab' | translate }}</a>
-                <ng-template ngbNavContent>
-                </ng-template>
-              </li>
+              (navChange)="changeCategoryType($event)" [destroyOnHide]="true">
+              @for (category of categories; track category) {
+                <li [ngbNavItem]="category.id" [id]="category.id" role="tab">
+                  <a ngbNavLink>{{ 'statistics.categories.' + category.categoryType + '.tab' | translate }}</a>
+                  <ng-template ngbNavContent>
+                  </ng-template>
+                </li>
+              }
             </ul>
-          </ng-container>
-
+          }
           <ng-container *ngVar="(reports$ | async) as reports">
-
-            <ng-container *ngIf="!reports">
+            @if (!reports) {
               <ds-loading></ds-loading>
-            </ng-container>
-
-            <ng-container *ngIf="reports">
-
+            }
+            @if (reports) {
               <ng-container>
-                <ds-statistics-map *ngFor="let report of (reports | dsFilterMap : true)" [report]="report"></ds-statistics-map>
+                @for (report of (reports | dsFilterMap : true); track report) {
+                  <ds-statistics-map [report]="report"></ds-statistics-map>
+                }
               </ng-container>
-
               <div>
-                <ds-statistics-chart *ngIf="!!selectedCategory"
-                (changeReportEvent)="changeReport($event)"
-                [categoryType]="categoryType"
-                [category]="selectedCategory"
-                [reports]="reports"
-                [selectedReportId]="selectedReportId"></ds-statistics-chart>
+                @if (!!selectedCategory) {
+                  <ds-statistics-chart
+                    (changeReportEvent)="changeReport($event)"
+                    [categoryType]="categoryType"
+                    [category]="selectedCategory"
+                    [reports]="reports"
+                  [selectedReportId]="selectedReportId"></ds-statistics-chart>
+                }
               </div>
-
-            </ng-container>
-
+            }
           </ng-container>
-
         </div>
       </div>
     </div>
-  </ng-container>
+  }
 
 </ng-container>

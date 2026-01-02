@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Inject,
@@ -23,7 +23,6 @@ import { RenderingTypeStructuredModelComponent } from '../rendering-type-structu
   standalone: true,
   imports: [
     ChipsComponent,
-    NgIf,
   ],
 })
 export class TagComponent extends RenderingTypeStructuredModelComponent implements OnInit {

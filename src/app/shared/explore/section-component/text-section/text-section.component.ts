@@ -1,8 +1,4 @@
-import {
-  NgSwitch,
-  NgSwitchCase,
-  NgTemplateOutlet,
-} from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   Input,
@@ -22,8 +18,6 @@ import { MarkdownViewerComponent } from '../../../markdown-viewer/markdown-viewe
   standalone: true,
   imports: [
     MarkdownViewerComponent,
-    NgSwitch,
-    NgSwitchCase,
     NgTemplateOutlet,
     TranslateModule,
   ],

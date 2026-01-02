@@ -1,7 +1,4 @@
-import {
-  NgFor,
-  NgIf,
-} from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -54,8 +51,6 @@ import { MetadataRenderComponent } from './metadata-render/metadata-render.compo
   standalone: true,
   imports: [
     MetadataRenderComponent,
-    NgFor,
-    NgIf,
   ],
 })
 export class MetadataContainerComponent implements OnInit {

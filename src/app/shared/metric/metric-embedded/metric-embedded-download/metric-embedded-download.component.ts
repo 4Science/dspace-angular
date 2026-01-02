@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   OnInit,
@@ -16,7 +16,6 @@ export const METRIC_TYPE_DOWNLOAD = 'TotalDownloads';
   styleUrls: ['./metric-embedded-download.component.scss', '../../metric-loader/base-metric.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     RedirectWithHrefDirective,
     TranslateModule,
   ],

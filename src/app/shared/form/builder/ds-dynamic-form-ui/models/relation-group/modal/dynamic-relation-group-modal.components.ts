@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgIf,
 } from '@angular/common';
 import {
   ChangeDetectorRef,
@@ -79,7 +78,6 @@ import { DynamicRelationGroupModel } from '../dynamic-relation-group.model';
     FormComponent,
     NgbTooltipModule,
     NgClass,
-    NgIf,
     TranslateModule,
   ],
   standalone: true,

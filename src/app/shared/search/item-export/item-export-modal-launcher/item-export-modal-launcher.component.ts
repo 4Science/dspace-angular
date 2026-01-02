@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Input,
@@ -45,7 +45,6 @@ export const BULK_EXPORT_LIMIT_NOTLOGGEDIN = 'bulk-export.limit.notLoggedIn';
   imports: [
     EntityDropdownComponent,
     NgbDropdownModule,
-    NgIf,
     TranslateModule,
   ],
   standalone: true,

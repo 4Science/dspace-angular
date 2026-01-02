@@ -1,3 +1,5 @@
-<div *ngIf="isCorrectionOfItem$ | async">
+@if (isCorrectionOfItem$ | async) {
+  <div>
     <span class="badge badge-light">{{'mydspace.results.is-correction' | translate}}</span>
-</div>
+  </div>
+}

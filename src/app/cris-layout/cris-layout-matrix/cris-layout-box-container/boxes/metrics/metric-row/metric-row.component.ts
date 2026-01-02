@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -24,8 +20,6 @@ import { MetricLoaderComponent } from '../../../../../../shared/metric/metric-lo
   imports: [
     AsyncPipe,
     MetricLoaderComponent,
-    NgFor,
-    NgIf,
   ],
 })
 export class MetricRowComponent {

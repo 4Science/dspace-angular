@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -37,7 +34,6 @@ import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-
   standalone: true,
   imports: [
     AsyncPipe,
-    NgIf,
     ThemedConfigurationSearchPageComponent,
   ],
 })

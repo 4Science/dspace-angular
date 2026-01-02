@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   isPlatformBrowser,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -41,8 +39,6 @@ import { MetricRowComponent } from './metric-row/metric-row.component';
   imports: [
     AsyncPipe,
     MetricRowComponent,
-    NgFor,
-    NgIf,
   ],
 })
 /**

@@ -7,15 +7,15 @@
     <div class="pt-2" [ngClass]="{'border border-danger': showErrorMessages}">
       <div class="d-flex justify-content-between w-100">
         <ds-form  #formRef="formComponent"
-                  class="flex-grow-1"
-                  [formId]="formId"
-                  [formModel]="formModel"
-                  [displaySubmit]="false"
-                  [displayReset]="false"
-                  [emitChange]="false"
-                  (dfBlur)="onBlur($event)"
-                  (ngbEvent)="changeSecurity($event)"
-                  (dfFocus)="onFocus($event)"></ds-form>
+          class="flex-grow-1"
+          [formId]="formId"
+          [formModel]="formModel"
+          [displaySubmit]="false"
+          [displayReset]="false"
+          [emitChange]="false"
+          (dfBlur)="onBlur($event)"
+          (ngbEvent)="changeSecurity($event)"
+        (dfFocus)="onFocus($event)"></ds-form>
 
       </div>
     </div>
@@ -24,26 +24,34 @@
   <div class="modal-footer">
     <div class="text-right space-children-mr">
       <button type="button"
-              class="btn btn-outline-secondary"
-              (click)="closeModal()">
+        class="btn btn-outline-secondary"
+        (click)="closeModal()">
         <span><i class="fa fa-times"></i> {{'form.group.close' | translate}}</span>
       </button>
-      <button *ngIf="(canShowExternalSourceButton() | async)"
-              type="button"
-              class="btn btn-secondary"
-              ngbTooltip="{{'form.external.source.group-help' | translate}}"
-              [dsBtnDisabled]="!canImport()"
-              (click)="createEntityFromMetadata()">
-        <span><i class="far fa-share-square"></i> {{'form.external.source.group.btn' | translate}}</span>
-      </button>
-      <button *ngIf="!model.readOnly"
-              type="button"
-              class="btn btn-primary mr-2"
-              [dsBtnDisabled]="isMandatoryFieldEmpty()"
-              (click)="save()">
-        <span *ngIf="item"><i class="fas fa-save"></i> {{'form.group.set' | translate}}</span>
-        <span *ngIf="!item"><i class="fas fa-save"></i> {{'form.group.add' | translate}}</span>
-      </button>
+      @if ((canShowExternalSourceButton() | async)) {
+        <button
+          type="button"
+          class="btn btn-secondary"
+          ngbTooltip="{{'form.external.source.group-help' | translate}}"
+          [dsBtnDisabled]="!canImport()"
+          (click)="createEntityFromMetadata()">
+          <span><i class="far fa-share-square"></i> {{'form.external.source.group.btn' | translate}}</span>
+        </button>
+      }
+      @if (!model.readOnly) {
+        <button
+          type="button"
+          class="btn btn-primary mr-2"
+          [dsBtnDisabled]="isMandatoryFieldEmpty()"
+          (click)="save()">
+          @if (item) {
+            <span><i class="fas fa-save"></i> {{'form.group.set' | translate}}</span>
+          }
+          @if (!item) {
+            <span><i class="fas fa-save"></i> {{'form.group.add' | translate}}</span>
+          }
+        </button>
+      }
     </div>
   </div>
 </div>

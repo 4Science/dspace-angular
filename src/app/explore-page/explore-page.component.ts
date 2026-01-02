@@ -1,9 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgForOf,
-  NgSwitch,
-  NgSwitchCase,
 } from '@angular/common';
 import {
   Component,
@@ -36,9 +33,6 @@ import { ThemedTopSectionComponent } from '../shared/explore/section-component/t
   imports: [
     AsyncPipe,
     NgClass,
-    NgForOf,
-    NgSwitch,
-    NgSwitchCase,
     ThemedBrowseSectionComponent,
     ThemedCountersSectionComponent,
     ThemedFacetSectionComponent,

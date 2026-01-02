@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+
 import {
   ChangeDetectorRef,
   Component,
@@ -27,7 +27,6 @@ import { RowComponent } from './row/row.component';
   styleUrls: ['./cris-layout-metadata-box.component.scss'],
   standalone: true,
   imports: [
-    NgFor,
     RowComponent,
   ],
 })

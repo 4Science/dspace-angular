@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+
 import {
   Component,
   Input,
@@ -24,7 +24,6 @@ import { MetadataContainerComponent } from './metadata-container/metadata-contai
   standalone: true,
   imports: [
     MetadataContainerComponent,
-    NgFor,
   ],
 })
 export class RowComponent {

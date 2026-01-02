@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Inject,
@@ -34,7 +34,6 @@ import {
   standalone: true,
   imports: [
     NgbTooltipModule,
-    NgIf,
   ],
 })
 export class IdentifierComponent extends RenderingTypeValueModelComponent implements OnInit {

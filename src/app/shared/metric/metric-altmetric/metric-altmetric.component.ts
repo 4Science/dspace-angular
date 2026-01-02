@@ -1,6 +1,5 @@
 import {
   AsyncPipe,
-  NgIf,
   TitleCasePipe,
 } from '@angular/common';
 import {
@@ -28,7 +27,6 @@ declare let _altmetric_embed_init: any;
   imports: [
     AsyncPipe,
     ListMetricPropsPipe,
-    NgIf,
     TitleCasePipe,
     TranslateModule,
   ],

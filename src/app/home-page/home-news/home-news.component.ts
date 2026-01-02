@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -28,7 +25,6 @@ import { ThemedTextSectionComponent } from '../../shared/explore/section-compone
   standalone: true,
   imports: [
     AsyncPipe,
-    NgIf,
     ThemedTextSectionComponent,
   ],
 })

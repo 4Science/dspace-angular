@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -49,8 +47,6 @@ import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-
   imports: [
     AsyncPipe,
     NgClass,
-    NgFor,
-    NgIf,
     RouterLink,
     TranslateModule,
   ],

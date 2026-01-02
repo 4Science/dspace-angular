@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -39,8 +35,6 @@ import { BitstreamAttachmentComponent } from './bitstream-attachment/bitstream-a
   imports: [
     AsyncPipe,
     BitstreamAttachmentComponent,
-    NgFor,
-    NgIf,
     TranslateModule,
   ],
 })

@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Input,
@@ -24,7 +24,6 @@ import { PaginatedSearchOptions } from '../../../search/models/paginated-search-
   templateUrl: './top-section.component.html',
   standalone: true,
   imports: [
-    NgIf,
     ThemedBrowseMostElementsComponent,
     TranslateModule,
   ],

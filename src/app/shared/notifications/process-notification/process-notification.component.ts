@@ -1,8 +1,6 @@
 import { trigger } from '@angular/animations';
 import {
   AsyncPipe,
-  NgForOf,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -113,8 +111,6 @@ import { NotificationsService } from '../notifications.service';
     AsyncPipe,
     BtnDisabledDirective,
     FileSizePipe,
-    NgForOf,
-    NgIf,
     NgTemplateOutlet,
     ThemedFileDownloadLinkComponent,
     TranslateModule,

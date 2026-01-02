@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -58,8 +54,6 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   imports: [
     AsyncPipe,
     NgbDropdownModule,
-    NgFor,
-    NgIf,
     RouterLink,
     TranslateModule,
   ],

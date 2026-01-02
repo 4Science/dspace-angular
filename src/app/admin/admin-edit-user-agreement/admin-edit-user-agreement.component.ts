@@ -1,7 +1,4 @@
-import {
-  KeyValuePipe,
-  NgForOf,
-} from '@angular/common';
+import { KeyValuePipe } from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -34,7 +31,6 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
     AlertComponent,
     FormsModule,
     KeyValuePipe,
-    NgForOf,
     TranslateModule,
   ],
   standalone: true,

@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   isPlatformBrowser,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -39,8 +37,6 @@ import { UsageReport } from '../../../core/statistics/models/usage-report.model'
     BtnDisabledDirective,
     Ng2GoogleChartsModule,
     NgbDropdownModule,
-    NgFor,
-    NgIf,
     TranslateModule,
   ],
 })

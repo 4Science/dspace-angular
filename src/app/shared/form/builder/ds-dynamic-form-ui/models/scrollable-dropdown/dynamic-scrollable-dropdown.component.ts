@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -84,7 +81,6 @@ import { DynamicScrollableDropdownModel } from './dynamic-scrollable-dropdown.mo
     BtnDisabledDirective,
     InfiniteScrollDirective,
     NgbDropdownModule,
-    NgIf,
     TranslateModule,
   ],
   standalone: true,

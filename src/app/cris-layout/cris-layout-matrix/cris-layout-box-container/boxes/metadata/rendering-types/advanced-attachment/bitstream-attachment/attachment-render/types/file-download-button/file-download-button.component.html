@@ -1,20 +1,18 @@
-<ng-container *ngIf="!hasNoDownload">
-  <ng-container *ngIf="bitstreamPath$ | async as bitstreamLink">
-    <ng-container *ngIf="canDownload$ | async; then downloadButtonTpl; else requestACopyTpl"></ng-container>
-    <ng-template #downloadButtonTpl>
+@if (!hasNoDownload) {
+  @if (bitstreamPath$ | async; as bitstreamLink) {
+    @if (canDownload$ | async) {
       <button [routerLink]="bitstreamLink?.routerLink" [queryParams]="bitstreamLink?.queryParams" class="btn btn-outline-primary"
-              data-test="download">
+        data-test="download">
         <i class="fas fa-download"></i> {{ 'cris-layout.advanced-attachment.download' | translate }}
       </button>
-    </ng-template>
-    <ng-template #requestACopyTpl>
+    } @else {
       <button [routerLink]="bitstreamLink?.routerLink"
-              [queryParams]="bitstreamLink?.queryParams"
-              [dsBtnDisabled]="(canRequestItemCopy$ | async) !== true"
-              class="btn btn-outline-primary"
-              data-test="requestACopy">
+        [queryParams]="bitstreamLink?.queryParams"
+        [dsBtnDisabled]="(canRequestItemCopy$ | async) !== true"
+        class="btn btn-outline-primary"
+        data-test="requestACopy">
         {{ 'cris-layout.advanced-attachment.requestACopy' | translate }}
       </button>
-    </ng-template>
-  </ng-container>
-</ng-container>
+    }
+  }
+}
