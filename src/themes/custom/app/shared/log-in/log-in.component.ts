@@ -1,5 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { ThemedLoadingComponent } from '../../../../../app/shared/loading/themed-loading.component';
 import { LogInContainerComponent } from '../../../../../app/shared/log-in/container/log-in-container.component';
@@ -17,7 +19,9 @@ import { BrowserOnlyPipe } from '../../../../../app/shared/utils/browser-only.pi
     AsyncPipe,
     BrowserOnlyPipe,
     LogInContainerComponent,
+    RouterLink,
     ThemedLoadingComponent,
+    TranslatePipe,
   ],
 })
 export class LogInComponent extends BaseComponent {

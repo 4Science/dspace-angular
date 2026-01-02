@@ -54,8 +54,8 @@ import {
     AsyncPipe,
     BtnDisabledDirective,
     FormsModule,
+    SwitchComponent,
     TranslateModule,
-    UiSwitchModule,
   ],
 })
 export class AccessControlFormContainerComponent<T extends DSpaceObject> implements OnDestroy {

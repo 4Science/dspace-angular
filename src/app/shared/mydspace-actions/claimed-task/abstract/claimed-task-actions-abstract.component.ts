@@ -33,7 +33,6 @@ import { MyDSpaceReloadableActionsComponent } from '../../mydspace-reloadable-ac
   selector: 'ds-claimed-task-action-abstract',
   standalone: true,
   template: '',
-  standalone: true,
 })
 export abstract class ClaimedTaskActionsAbstractComponent extends MyDSpaceReloadableActionsComponent<ClaimedTask, ClaimedTaskDataService> implements OnDestroy {
 

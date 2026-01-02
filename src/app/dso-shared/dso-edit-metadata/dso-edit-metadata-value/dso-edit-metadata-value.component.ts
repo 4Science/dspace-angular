@@ -27,7 +27,12 @@ import {
   Observable,
   Subscription,
 } from 'rxjs';
-import { distinctUntilChanged, map, shareReplay } from 'rxjs/operators';
+import {
+  distinctUntilChanged,
+  map,
+  shareReplay,
+} from 'rxjs/operators';
+import { EditMetadataSecurityComponent } from 'src/app/item-page/edit-item-page/edit-metadata-security/edit-metadata-security.component';
 
 import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
 import { RelationshipDataService } from '../../../core/data/relationship-data.service';
@@ -69,6 +74,7 @@ import { DsoEditMetadataValueFieldLoaderComponent } from '../dso-edit-metadata-v
     CdkDragHandle,
     DebounceDirective,
     DsoEditMetadataValueFieldLoaderComponent,
+    EditMetadataSecurityComponent,
     FormsModule,
     NgbTooltipModule,
     NgClass,

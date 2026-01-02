@@ -1,8 +1,4 @@
-import {
-  NgClass,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -12,7 +8,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { hasValue } from '../empty.util';
 
@@ -38,10 +34,8 @@ export interface SwitchOption {
   styleUrls: ['./switch.component.scss'],
   standalone: true,
   imports: [
-    TranslateModule,
     NgClass,
-    NgForOf,
-    NgIf,
+    TranslatePipe,
   ],
 })
 export class SwitchComponent implements OnInit, OnChanges {

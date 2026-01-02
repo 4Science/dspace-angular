@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -21,12 +20,11 @@ import { SafeUrlPipe } from '../../utils/safe-url-pipe';
   templateUrl: './metadata-link-view-avatar-popover.component.html',
   styleUrls: ['./metadata-link-view-avatar-popover.component.scss'],
   imports: [
-    ThemedLoadingComponent,
-    NgIf,
-    SafeUrlPipe,
-    TranslateModule,
-    NgClass,
     AsyncPipe,
+    NgClass,
+    SafeUrlPipe,
+    ThemedLoadingComponent,
+    TranslateModule,
   ],
   standalone: true,
 })

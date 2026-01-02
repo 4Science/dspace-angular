@@ -1,7 +1,7 @@
 import {
   AsyncPipe,
   NgClass,
-  NgFor,
+  NgForOf,
   NgIf,
 } from '@angular/common';
 import {
@@ -13,7 +13,7 @@ import {
   Optional,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import {
   differenceInDays,
   differenceInMilliseconds,
@@ -27,6 +27,7 @@ import {
   filter,
   map,
 } from 'rxjs/operators';
+import { OrejimeService } from 'src/app/shared/cookies/orejime.service';
 
 import {
   APP_CONFIG,
@@ -42,7 +43,6 @@ import { getFirstSucceededRemoteListPayload } from '../../../../../../core/share
 import { ViewMode } from '../../../../../../core/shared/view-mode.model';
 import { getItemPageRoute } from '../../../../../../item-page/item-page-routing-paths';
 import { ThemedThumbnailComponent } from '../../../../../../thumbnail/themed-thumbnail.component';
-import { KlaroService } from '../../../../../cookies/klaro.service';
 import { isNotEmpty } from '../../../../../empty.util';
 import { MetadataLinkViewComponent } from '../../../../../metadata-link-view/metadata-link-view.component';
 import { ThemedBadgesComponent } from '../../../../../object-collection/shared/badges/themed-badges.component';
@@ -74,9 +74,12 @@ import { SearchResultListElementComponent } from '../../../search-result-list-el
     MetricBadgesComponent,
     MetricDonutsComponent,
     NgClass,
+    NgForOf,
+    NgIf,
     RouterLink,
     ThemedBadgesComponent,
     ThemedThumbnailComponent,
+    TranslatePipe,
     TruncatableComponent,
     TruncatablePartComponent,
     VarDirective,
@@ -113,7 +116,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
     protected truncatableService: TruncatableService,
     public dsoNameService: DSONameService,
     @Inject(APP_CONFIG) protected appConfig?: AppConfig,
-    @Optional() private klaroService?: KlaroService,
+    @Optional() private orejimeService?: OrejimeService,
   ) {
     super(truncatableService, dsoNameService);
   }
@@ -127,11 +130,11 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
    * Check if item has Third-party metrics blocked by consents
    */
   ngAfterViewInit() {
-    if (this.showMetrics && this.klaroService) {
-      this.klaroService.watchConsentUpdates();
+    if (this.showMetrics && this.orejimeService) {
+      this.orejimeService.watchConsentUpdates();
 
       this.hasLoadedThirdPartyMetrics$ = combineLatest([
-        this.klaroService.consentsUpdates$.pipe(
+        this.orejimeService.consentsUpdates$.pipe(
           filter(consents => isNotEmpty(consents)),
         ),
         this.dso.metrics?.pipe(
@@ -141,7 +144,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
           }),
         ),
       ]).pipe(
-        map(([consents, metrics]) => {
+        map(([consents, metrics = []]) => {
           return metrics.reduce((previous, current) => {
             return consents[current.metricType] && previous;
           }, true);
@@ -162,7 +165,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
    * Prompt user for consents settings
    */
   showSettings() {
-    this.klaroService.showSettings();
+    this.orejimeService.showSettings();
   }
 
 }

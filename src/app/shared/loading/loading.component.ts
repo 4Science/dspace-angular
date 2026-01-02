@@ -33,7 +33,12 @@ export enum MessageType {
   styleUrls: ['./loading.component.scss'],
   templateUrl: './loading.component.html',
   standalone: true,
-  imports: [NgIf, NgSwitchCase, NgSwitch, AlertComponent],
+  imports: [
+    AlertComponent,
+    NgIf,
+    NgSwitch,
+    NgSwitchCase,
+  ],
 })
 export class LoadingComponent implements OnDestroy, OnInit {
 

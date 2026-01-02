@@ -36,7 +36,6 @@ import { MyDSpaceActionsComponent } from './mydspace-actions';
   selector: 'ds-mydspace-reloadable-actions',
   standalone: true,
   template: '',
-  standalone: true,
 })
 export abstract class MyDSpaceReloadableActionsComponent<T extends DSpaceObject, TService extends IdentifiableDataService<T>>
   extends MyDSpaceActionsComponent<T, TService> implements OnInit {

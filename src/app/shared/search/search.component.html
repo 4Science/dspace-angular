@@ -146,7 +146,9 @@
                         [searchPlaceholder]="searchFormPlaceholder | translate">
         </ds-search-form>
         <ng-content select="[additionalSearchFormOptions]"></ng-content>
-        <ds-item-export-modal-launcher [searchOptions$]="searchOptions$" *ngIf="showExport"></ds-item-export-modal-launcher>
+      @if (showExport) {
+        <ds-item-export-modal-launcher [searchOptions$]="searchOptions$"></ds-item-export-modal-launcher>
+      }
     </div>
     <div class="row my-3 my-md-1">
     <div class="labels col-12">

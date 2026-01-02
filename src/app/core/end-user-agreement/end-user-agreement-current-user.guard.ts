@@ -23,7 +23,7 @@ export const endUserAgreementCurrentUserGuard: CanActivateFn =
 
       return endUserAgreementService.isUserAgreementEnabled().pipe(
         switchMap((isUserAgreementEnabled) => isUserAgreementEnabled ?
-          endUserAgreementService.hasCurrentUserAcceptedAgreement(true) : observableOf(true),
+          endUserAgreementService.hasCurrentUserAcceptedAgreement(true) : of(true),
         ),
       );
     },

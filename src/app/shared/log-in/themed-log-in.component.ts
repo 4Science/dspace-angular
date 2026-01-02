@@ -15,18 +15,12 @@ import { LogInComponent } from './log-in.component';
   styleUrls: [],
   templateUrl: './../theme-support/themed.component.html',
   standalone: true,
-  imports: [
-    LogInComponent,
-  ],
+  imports: [LogInComponent],
 })
 export class ThemedLogInComponent extends ThemedComponent<LogInComponent> {
 
   @Input() isStandalonePage: boolean;
   @Input() excludedAuthMethod: AuthMethodType;
-  @Input() showRegisterLink = true;
-
-  @Input() excludedAuthMethod: AuthMethodType;
-
   @Input() showRegisterLink: boolean;
 
   protected inAndOutputNames: (keyof LogInComponent & keyof this)[] = [

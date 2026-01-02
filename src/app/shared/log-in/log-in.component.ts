@@ -14,7 +14,7 @@ import {
   select,
   Store,
 } from '@ngrx/store';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import uniqBy from 'lodash/uniqBy';
 import {
   combineLatestWith,
@@ -48,7 +48,10 @@ import { hasValue } from '../empty.util';
 import { ThemedLoadingComponent } from '../loading/themed-loading.component';
 import { BrowserOnlyPipe } from '../utils/browser-only.pipe';
 import { LogInContainerComponent } from './container/log-in-container.component';
-import { AUTH_METHOD_FOR_DECORATOR_MAP, rendersAuthMethodType } from './methods/log-in.methods-decorator';
+import {
+  AUTH_METHOD_FOR_DECORATOR_MAP,
+  rendersAuthMethodType,
+} from './methods/log-in.methods-decorator';
 
 @Component({
   selector: 'ds-base-log-in',
@@ -56,7 +59,14 @@ import { AUTH_METHOD_FOR_DECORATOR_MAP, rendersAuthMethodType } from './methods/
   styleUrls: ['./log-in.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NgIf, ThemedLoadingComponent, NgFor, LogInContainerComponent, AsyncPipe, RouterLink, BrowserOnlyPipe, TranslateModule],
+  imports: [
+    AsyncPipe,
+    BrowserOnlyPipe,
+    LogInContainerComponent,
+    RouterLink,
+    ThemedLoadingComponent,
+    TranslatePipe,
+  ],
 })
 export class LogInComponent implements OnInit, OnDestroy {
 

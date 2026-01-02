@@ -33,6 +33,8 @@ import { AlertType } from './alert-type';
   standalone: true,
   imports: [
     TranslateModule,
+    TruncatableComponent,
+    TruncatablePartComponent,
   ],
 })
 export class AlertComponent implements OnInit {

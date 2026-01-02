@@ -32,7 +32,6 @@ import { ObjectSelectService } from '../object-select.service';
   selector: 'ds-object-select-abstract',
   standalone: true,
   template: '',
-  standalone: true,
 })
 export abstract class ObjectSelectComponent<TDomain extends DSpaceObject> implements OnInit, OnDestroy {
 

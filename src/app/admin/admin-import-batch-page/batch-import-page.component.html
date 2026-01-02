@@ -23,8 +23,6 @@
   </div>
 
   <ds-switch
-    [checkedLabel]="'admin.metadata-import.page.toggle.upload' | translate"
-    [uncheckedLabel]="'admin.metadata-import.page.toggle.url' | translate"
     [options]="switchOptions"
     [selectedValue]="isUpload ? 'upload' : 'url'"
     (selectedValueChange)="toggleUpload()">

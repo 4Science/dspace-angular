@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   NgComponentOutlet,
-  NgIf,
 } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -47,16 +46,15 @@ import { ProvideEmailComponent } from '../email-confirmation/provide-email/provi
   templateUrl: './external-log-in.component.html',
   styleUrls: ['./external-log-in.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
-    TranslateModule,
-    NgComponentOutlet,
     AlertComponent,
     AsyncPipe,
     ConfirmEmailComponent,
     NgComponentOutlet,
+    NgComponentOutlet,
     ProvideEmailComponent,
     ThemedLogInComponent,
+    TranslateModule,
     TranslateModule,
   ],
   standalone: true,

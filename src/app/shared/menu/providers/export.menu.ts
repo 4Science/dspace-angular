@@ -22,7 +22,8 @@ import {
   ScriptDataService,
 } from '../../../core/data/processes/script-data.service';
 import { ExportBatchSelectorComponent } from '../../dso-selector/modal-wrappers/export-batch-selector/export-batch-selector.component';
-import { ExportMetadataSelectorComponent } from '../../dso-selector/modal-wrappers/export-metadata-selector/export-metadata-selector.component';
+import { ExportMetadataCsvSelectorComponent } from '../../dso-selector/modal-wrappers/export-metadata-csv-selector/export-metadata-csv-selector.component';
+import { ExportMetadataXlsSelectorComponent } from '../../dso-selector/modal-wrappers/export-metadata-xls-selector/export-metadata-xls-selector.component';
 import { MenuItemType } from '../menu-item-type.model';
 import { PartialMenuSection } from '../menu-provider.model';
 import { AbstractExpandableMenuProvider } from './helper-providers/expandable-menu-provider';
@@ -65,9 +66,19 @@ export class ExportMenuProvider extends AbstractExpandableMenuProvider {
             visible: authorized && metadataExportScriptExists,
             model: {
               type: MenuItemType.ONCLICK,
-              text: 'menu.section.export_metadata',
+              text: 'menu.section.export_metadata_csv',
               function: () => {
-                this.modalService.open(ExportMetadataSelectorComponent);
+                this.modalService.open(ExportMetadataCsvSelectorComponent);
+              },
+            },
+          },
+          {
+            visible: authorized && metadataExportScriptExists,
+            model: {
+              type: MenuItemType.ONCLICK,
+              text: 'menu.section.export_metadata_xls',
+              function: () => {
+                this.modalService.open(ExportMetadataXlsSelectorComponent);
               },
             },
           },

@@ -282,56 +282,6 @@ export class OrcidSyncSettingsComponent implements OnInit, OnDestroy {
       map(i => this.getCurrentPreference(i, 'dspace.orcid.sync-fundings', ['DISABLED', 'ALL'], 'DISABLED')),
       takeUntil(this.#destroy$),
     ).subscribe(val => this.currentSyncFunding = val);
-  }
-
-  /**
-   * Handles subscription to populate the {@link syncProfileOptions} field
-   *
-   * @param item observable that emits update on item changes
-   * @private
-   */
-  private updateSyncProfileOptions(item: Observable<Item>) {
-    item.pipe(
-      filter(hasValue),
-      map(i => i.allMetadataValues('dspace.orcid.sync-profile')),
-      map(metadata =>
-        ['BIOGRAPHICAL', 'IDENTIFIERS']
-          .map((value) => {
-            return {
-              label: this.messagePrefix + '.sync-profile.' + value.toLowerCase(),
-              value: value,
-              checked: metadata.includes(value),
-            };
-          }),
-      ),
-      takeUntil(this.#destroy$),
-    )
-      .subscribe(value => this.syncProfileOptions = value);
-  }
-
-  /**
-   *
-   * Handles subscriptions to populate sync preferences
-   *
-   * @param item observable that emits update on item changes
-   * @private
-   */
-  private updateSyncPreferences(item: Observable<Item>) {
-    item.pipe(
-      filter(hasValue),
-      map(i => this.getCurrentPreference(i, 'dspace.orcid.sync-mode', ['BATCH', 'MANUAL'], 'MANUAL')),
-      takeUntil(this.#destroy$),
-    ).subscribe(val => this.currentSyncMode = val);
-    item.pipe(
-      filter(hasValue),
-      map(i => this.getCurrentPreference(i, 'dspace.orcid.sync-publications', ['DISABLED', 'ALL'], 'DISABLED')),
-      takeUntil(this.#destroy$),
-    ).subscribe(val => this.currentSyncPublications = val);
-    item.pipe(
-      filter(hasValue),
-      map(i => this.getCurrentPreference(i, 'dspace.orcid.sync-fundings', ['DISABLED', 'ALL'], 'DISABLED')),
-      takeUntil(this.#destroy$),
-    ).subscribe(val => this.currentSyncFunding = val);
     item.pipe(
       filter(hasValue),
       map(i => this.getCurrentPreference(i, 'dspace.orcid.sync-patents', ['DISABLED', 'ALL'], 'DISABLED')),

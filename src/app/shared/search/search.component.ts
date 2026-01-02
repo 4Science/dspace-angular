@@ -97,6 +97,7 @@ import { SearchConfigurationOption } from './search-switch-configuration/search-
   imports: [
     AsyncPipe,
     ItemExportModalLauncherComponent,
+    NgbTooltipModule,
     NgTemplateOutlet,
     PageWithSidebarComponent,
     SearchChartsComponent,

@@ -21,11 +21,11 @@ import { MarkdownViewerComponent } from '../../../markdown-viewer/markdown-viewe
   styleUrls: ['./text-section.component.scss'],
   standalone: true,
   imports: [
+    MarkdownViewerComponent,
     NgSwitch,
     NgSwitchCase,
     NgTemplateOutlet,
     TranslateModule,
-    MarkdownViewerComponent,
   ],
 })
 export class TextSectionComponent {

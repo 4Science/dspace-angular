@@ -28,7 +28,7 @@ import {
   DynamicFormValidationService,
 } from '@ng-dynamic-forms/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import {
   of,
   Subscription,
@@ -69,10 +69,11 @@ import { DynamicLookupNameModel } from './dynamic-lookup-name.model';
   styleUrls: ['./dynamic-lookup.component.scss'],
   templateUrl: './dynamic-lookup.component.html',
   imports: [
+    AsyncPipe,
     AuthorityConfidenceStateDirective,
     BtnDisabledDirective,
     FormsModule,
-    InfiniteScrollModule,
+    InfiniteScrollDirective,
     NgbDropdownModule,
     NgbTooltipModule,
     NgClass,

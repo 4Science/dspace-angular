@@ -50,7 +50,6 @@ import { DsDynamicInputModel } from './ds-dynamic-input.model';
   selector: 'ds-dynamic-vocabulary',
   standalone: true,
   template: '',
-  standalone: true,
 })
 export abstract class DsDynamicVocabularyComponent extends DynamicFormControlComponent {
 
@@ -65,7 +64,7 @@ export abstract class DsDynamicVocabularyComponent extends DynamicFormControlCom
   /**
    * The vocabulary entry
    */
-  public vocabulary$: Observable<Vocabulary> = observableOf(null);
+  public vocabulary$: Observable<Vocabulary> = of(null);
 
   /**
    * The PageInfo object

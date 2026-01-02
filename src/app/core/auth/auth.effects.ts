@@ -314,7 +314,7 @@ export class AuthEffects {
           .pipe(
             take(1),
             map((token: AuthTokenInfo) => new RefreshTokenAndRedirectSuccessAction(token, action.payload.redirectUrl)),
-            catchError(() => observableOf(new RefreshTokenAndRedirectErrorAction())),
+            catchError(() => of(new RefreshTokenAndRedirectErrorAction())),
           );
       })),
   );
@@ -327,7 +327,7 @@ export class AuthEffects {
         this.authService.retrieveAuthenticatedUserById(id).pipe(
           take(1),
           map(user => new RefreshEpersonAndTokenRedirectSuccessAction(user, token, redirectUrl)),
-          catchError(() => observableOf(new RefreshEpersonAndTokenRedirectErrorAction())),
+          catchError(() => of(new RefreshEpersonAndTokenRedirectErrorAction())),
         ),
       ),
     ),

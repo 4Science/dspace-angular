@@ -45,7 +45,7 @@ import {
 import { ServerResponseService } from '../core/services/server-response.service';
 import { getFirstSucceededRemoteDataPayload } from '../core/shared/operators';
 import { Site } from '../core/shared/site.model';
-import { SuggestionsPopupComponent } from '../notifications/suggestions-popup/suggestions-popup.component';
+import { SuggestionsPopupComponent } from '../notifications/suggestions/popup/suggestions-popup.component';
 import {
   isEmpty,
   isNotEmpty,
@@ -65,20 +65,20 @@ import { ThemedHomeNewsComponent } from './home-news/themed-home-news.component'
   templateUrl: './home-page.component.html',
   standalone: true,
   imports: [
-    ThemedTextSectionComponent,
+    AsyncPipe,
     HomeCoarComponent,
-    ThemedHomeNewsComponent,
-    NgSwitch,
     NgForOf,
     NgIf,
-    ThemedTopSectionComponent,
+    NgSwitch,
     NgSwitchCase,
-    ThemedBrowseSectionComponent,
-    ThemedSearchSectionComponent,
-    ThemedFacetSectionComponent,
-    ThemedCountersSectionComponent,
     SuggestionsPopupComponent,
-    AsyncPipe,
+    ThemedBrowseSectionComponent,
+    ThemedCountersSectionComponent,
+    ThemedFacetSectionComponent,
+    ThemedHomeNewsComponent,
+    ThemedSearchSectionComponent,
+    ThemedTextSectionComponent,
+    ThemedTopSectionComponent,
   ],
 })
 export class HomePageComponent implements OnInit, OnDestroy {

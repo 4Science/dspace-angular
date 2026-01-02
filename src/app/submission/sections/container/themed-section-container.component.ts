@@ -18,10 +18,11 @@ import { SubmissionSectionContainerComponent } from './section-container.compone
 })
 export class ThemedSubmissionSectionContainerComponent extends ThemedComponent<SubmissionSectionContainerComponent> {
   @Input() collectionId: string;
+  @Input() entityType: string;
   @Input() sectionData: SectionDataObject;
   @Input() submissionId: string;
 
-  protected inAndOutputNames: (keyof SubmissionSectionContainerComponent & keyof this)[] = ['collectionId', 'sectionData', 'submissionId'];
+  protected inAndOutputNames: (keyof SubmissionSectionContainerComponent & keyof this)[] = ['collectionId', 'entityType', 'sectionData', 'submissionId'];
 
   protected getComponentName(): string {
     return 'SubmissionSectionContainerComponent';

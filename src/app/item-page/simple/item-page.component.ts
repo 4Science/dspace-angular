@@ -82,6 +82,7 @@ import { QaEventNotificationComponent } from './qa-event-notification/qa-event-n
     ItemVersionsComponent,
     ItemVersionsNoticeComponent,
     ListableObjectComponentLoaderComponent,
+    NgClass,
     NotifyRequestsStatusComponent,
     QaEventNotificationComponent,
     ThemedItemAlertsComponent,

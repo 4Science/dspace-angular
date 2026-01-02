@@ -30,7 +30,7 @@ export const validTokenGuard: CanActivateFn = (
 
   if (route.params.registrationToken) {
     return epersonRegistrationService
-      .searchRegistrationByToken(route.params.registrationToken)
+      .searchByTokenAndHandleError(route.params.registrationToken)
       .pipe(
         getFirstCompletedRemoteData(),
         map((data: RemoteData<Registration>) => data.hasSucceeded && hasValue('groupNames') && data.payload.groupNames.length > 0),

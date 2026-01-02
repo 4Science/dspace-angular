@@ -126,6 +126,18 @@ export class ItemBitstreamsComponent extends AbstractItemUpdateComponent impleme
    */
   isProcessingMoveRequest: Observable<boolean>;
 
+  /**
+   * The flag indicating to show the load more link
+   */
+  showLoadMoreLink$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+
+  /**
+   * The list of bundles for the current item as an observable
+   */
+  get bundles$(): Observable<Bundle[]> {
+    return this.bundlesSubject.asObservable();
+  }
+
   constructor(
     public itemService: ItemDataService,
     public objectUpdatesService: ObjectUpdatesService,

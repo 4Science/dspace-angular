@@ -55,12 +55,11 @@ export class SubmissionSectionContainerComponent implements OnInit {
    * @type {string}
    */
   @Input() collectionId: string;
+
   /**
    * The entity type, needed in order to search for metadata level security
    */
-
   @Input() entityType: string;
-
 
   /**
    * The section data

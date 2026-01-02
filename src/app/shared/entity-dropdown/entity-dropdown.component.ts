@@ -28,6 +28,7 @@ import {
   take,
   tap,
 } from 'rxjs/operators';
+import { SortPipe } from 'src/app/shared/utils/sort.pipe';
 
 import { EntityTypeDataService } from '../../core/data/entity-type-data.service';
 import { FindListOptions } from '../../core/data/find-list-options.model';
@@ -48,7 +49,6 @@ import {
 } from '../empty.util';
 import { ThemedLoadingComponent } from '../loading/themed-loading.component';
 import { createSuccessfulRemoteDataObject } from '../remote-data.utils';
-import { SortPipe } from '../utils/sort.pipe';
 
 @Component({
   selector: 'ds-entity-dropdown',
@@ -58,6 +58,7 @@ import { SortPipe } from '../utils/sort.pipe';
   imports: [
     AsyncPipe,
     InfiniteScrollDirective,
+    SortPipe,
     ThemedLoadingComponent,
     TranslateModule,
   ],

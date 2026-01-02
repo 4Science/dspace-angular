@@ -120,11 +120,13 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
    * @type {string}
    */
   @Input() submissionId: string;
+
   /**
    * The metadata security config based on the entity type
    * @type {MetadataSecurityConfiguration}
    */
   @Input() metadataSecurityConfiguration: MetadataSecurityConfiguration;
+
   /**
    * The entity type input used to create a new submission
    * @type {string}

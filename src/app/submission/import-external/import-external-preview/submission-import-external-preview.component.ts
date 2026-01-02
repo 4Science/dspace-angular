@@ -32,9 +32,8 @@ import { SubmissionImportExternalCollectionComponent } from '../import-external-
   templateUrl: './submission-import-external-preview.component.html',
   imports: [
     TranslateModule,
-    TruncatablePartComponent,
     TruncatableComponent,
-    NgIf,
+    TruncatablePartComponent,
   ],
   standalone: true,
 })

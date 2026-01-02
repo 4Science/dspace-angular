@@ -24,8 +24,8 @@ import { SidebarService } from './sidebar.service';
   standalone: true,
   imports: [
     AsyncPipe,
-    NgTemplateOutlet,
     NgClass,
+    NgTemplateOutlet,
   ],
 })
 /**
@@ -42,6 +42,7 @@ export class PageWithSidebarComponent implements OnInit {
   @Input() collapseSidebar = false;
 
   @Input() id: string;
+
   @Input() sidebarContent: TemplateRef<any>;
 
   /**
@@ -60,6 +61,11 @@ export class PageWithSidebarComponent implements OnInit {
   @Input()
   sideBarWidth = 3;
 
+  /**
+   * Observable for whether or not the sidebar is currently collapsed
+   */
+  isSidebarCollapsed$: Observable<boolean>;
+
   sidebarClasses$: Observable<string>;
 
   constructor(protected sidebarService: SidebarService,
@@ -69,6 +75,7 @@ export class PageWithSidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.isXsOrSm$ = this.windowService.isXsOrSm();
+    this.isSidebarCollapsed$ = this.isSidebarCollapsed();
     this.isXsOrSm$.subscribe( isMobile => {
       if (!isMobile && !this.collapseSidebar) {
         this.openSidebar();

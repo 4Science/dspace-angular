@@ -39,6 +39,7 @@ import { VarDirective } from '../../../../../app/shared/utils/var.directive';
     ItemVersionsComponent,
     ItemVersionsNoticeComponent,
     ListableObjectComponentLoaderComponent,
+    NgClass,
     NotifyRequestsStatusComponent,
     QaEventNotificationComponent,
     ThemedItemAlertsComponent,

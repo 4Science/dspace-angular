@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { ThemedLoadingComponent } from 'src/app/shared/loading/themed-loading.component';
 import { ThemedLogInComponent } from 'src/app/shared/log-in/themed-log-in.component';
 
 import { LoginPageComponent as BaseComponent } from '../../../../app/login-page/login-page.component';
@@ -12,6 +13,7 @@ import { LoginPageComponent as BaseComponent } from '../../../../app/login-page/
   templateUrl: '../../../../app/login-page/login-page.component.html',
   standalone: true,
   imports: [
+    ThemedLoadingComponent,
     ThemedLogInComponent,
     TranslateModule,
   ],

@@ -9,6 +9,7 @@ import { WorkspaceitemSectionsObject } from '../../core/submission/models/worksp
 import { ThemedComponent } from '../../shared/theme-support/themed.component';
 import { SubmissionError } from '../objects/submission-error.model';
 import { SubmissionFormComponent } from './submission-form.component';
+import { MetadataSecurityConfiguration } from 'src/app/core/submission/models/metadata-security-configuration';
 
 @Component({
   selector: 'ds-submission-form',
@@ -22,9 +23,13 @@ import { SubmissionFormComponent } from './submission-form.component';
 export class ThemedSubmissionFormComponent extends ThemedComponent<SubmissionFormComponent> {
   @Input() collectionId: string;
 
+  @Input() entityType: string;
+
   @Input() item: Item;
 
   @Input() collectionModifiable: boolean | null;
+
+  @Input() metadataSecurityConfiguration: MetadataSecurityConfiguration;
 
   @Input() sections: WorkspaceitemSectionsObject;
 
@@ -36,7 +41,7 @@ export class ThemedSubmissionFormComponent extends ThemedComponent<SubmissionFor
 
   @Input() submissionId: string;
 
-  protected inAndOutputNames: (keyof SubmissionFormComponent & keyof this)[] = ['collectionId', 'item', 'collectionModifiable', 'sections', 'submissionErrors', 'selfUrl', 'submissionDefinition', 'submissionId'];
+  protected inAndOutputNames: (keyof SubmissionFormComponent & keyof this)[] = ['collectionId', 'entityType', 'item', 'collectionModifiable', 'metadataSecurityConfiguration', 'sections', 'submissionErrors', 'selfUrl', 'submissionDefinition', 'submissionId'];
 
   protected getComponentName(): string {
     return 'SubmissionFormComponent';
