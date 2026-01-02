@@ -200,7 +200,4 @@ export class MetadataContainerComponent implements OnInit {
       (field.fieldType === LayoutFieldType.METADATA.toString() && this.item.firstMetadataValue(field.metadata));
   }
 
-  trackUpdate(index: number, value: string) {
-    return value;
-  }
 }

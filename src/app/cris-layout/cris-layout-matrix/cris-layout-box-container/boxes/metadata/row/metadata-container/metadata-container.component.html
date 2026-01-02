@@ -8,7 +8,7 @@
       }
       @if (!isStructured) {
         <div class="d-flex col flex-wrap" [class.flex-column]="!field.valuesInline">
-          @for (metadataValue of metadataValues ; track trackUpdate($index, metadataValue); let last = $last) {
+          @for (metadataValue of metadataValues ; track metadataValue; let last = $last) {
             <ds-metadata-render [field]="field"
               [item]="item"
               [box]="box"
