@@ -1,7 +1,6 @@
 {
   "name": "dspace-angular",
   "version": "2025.02.01-SNAPSHOT",
-  "version": "9.1.0",
   "scripts": {
     "ng": "ng",
     "config:watch": "nodemon",
@@ -52,7 +51,7 @@
     "env:yaml": "ts-node --project ./tsconfig.ts-node.json scripts/env-to-yaml.ts",
     "base-href": "ts-node --project ./tsconfig.ts-node.json scripts/base-href.ts",
     "check-circ-deps": "npx madge --exclude '(bitstream|bundle|collection|config-submission-form|eperson|item|version)\\.model\\.ts$' --circular --extensions ts ./",
-    "postinstall": "npm run build:lint || echo 'Skipped DSpace ESLint plugins.'"
+    "postinstall": "npm run build:lint || echo 'Skipped DSpace ESLint plugins.'",
     "deploy": "pm2 start dist/server/main.js",
     "predeploy": "npm run build:prod",
     "preundeploy": "pm2 stop dist/server/main.js",
@@ -256,7 +255,7 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "karma-mocha-reporter": "2.2.5",
     "ng-mocks": "^14.13.5",
-    "ngx-export-as": "~1.15.1",
+    "ngx-export-as": "~1.18.0",
     "ngx-mask": "14.2.4",
     "nodemon": "^2.0.22",
     "postcss": "^8.5",
