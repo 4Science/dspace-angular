@@ -49,16 +49,21 @@ describe('ExternalLoginPageComponent', () => {
       ],
       imports: [
         CommonModule,
+        ExternalLoginPageComponent,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
             useClass: TranslateLoaderMock,
           },
         }),
-        ExternalLoginPageComponent,
       ],
     })
-      .overrideComponent(ExternalLoginPageComponent, { remove: { imports: [AlertComponent, ExternalLogInComponent] } }).compileComponents();
+      .overrideComponent(ExternalLoginPageComponent, {
+        remove: {
+          imports: [ExternalLogInComponent],
+        },
+      })
+      .compileComponents();
   });
 
   beforeEach(() => {

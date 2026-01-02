@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -202,11 +202,13 @@ describe('FormComponent test suite', () => {
     // synchronous beforeEach
     beforeEach(() => {
       html = `
-        <ds-form *ngIf="formModel" #formRef="formComponent"
+        @if('formModel') {
+            <ds-form #formRef="formComponent"
                  [formId]="formId"
                  [formModel]="formModel"
                  [displaySubmit]="displaySubmit"
-                 [displayReset]="displayCancel"></ds-form>`;
+                 [displayReset]="displayCancel"></ds-form>
+        }`;
 
       testFixture = createTestComponent(html, TestComponent) as ComponentFixture<TestComponent>;
       testComp = testFixture.componentInstance;
@@ -640,13 +642,13 @@ describe('FormComponent test suite', () => {
   template: ``,
   standalone: true,
   imports: [
-    CommonModule,
-    FormComponent,
+    NgClass,
     DsDynamicFormComponent,
-    FormsModule,
-    ReactiveFormsModule,
-    NgbModule,
     DynamicFormsCoreModule,
+    FormComponent,
+    FormsModule,
+    NgbModule,
+    ReactiveFormsModule,
   ],
 })
 class TestComponent {

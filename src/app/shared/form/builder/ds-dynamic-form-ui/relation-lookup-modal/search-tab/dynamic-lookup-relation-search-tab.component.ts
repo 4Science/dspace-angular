@@ -57,11 +57,10 @@ import { RelationshipOptions } from '../../../models/relationship-options.model'
   ],
   imports: [
     AsyncPipe,
-    VarDirective,
-    TranslateModule,
     NgbDropdownModule,
-    NgIf,
     ThemedSearchComponent,
+    TranslateModule,
+    VarDirective,
   ],
   standalone: true,
 })

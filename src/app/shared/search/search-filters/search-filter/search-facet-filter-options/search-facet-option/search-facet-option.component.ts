@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -37,7 +34,13 @@ import { getFacetValueForType } from '../../../../search.utils';
   styleUrls: ['./search-facet-option.component.scss'],
   templateUrl: './search-facet-option.component.html',
   standalone: true,
-  imports: [NgIf, RouterLink, AsyncPipe, TranslateModule, ShortNumberPipe, CapitalizePipe],
+  imports: [
+    AsyncPipe,
+    CapitalizePipe,
+    RouterLink,
+    ShortNumberPipe,
+    TranslateModule,
+  ],
 })
 
 /**

@@ -54,7 +54,8 @@ import { SubmissionConfig } from './submission-config.interface';
 import { SuggestionConfig } from './suggestion-config.interfaces';
 import { ThemeConfig } from './theme.config';
 import { UIServerConfig } from './ui-server-config.interface';
-
+import { MatomoConfig } from './matomo-config.interface';
+import { GeospatialMapConfig } from './geospatial-map-config';
 
 interface AppConfig extends Config {
   ui: UIServerConfig;
@@ -87,6 +88,8 @@ interface AppConfig extends Config {
   search: SearchConfig;
   notifyMetrics: AdminNotifyMetricsRow[];
   liveRegion: LiveRegionConfig;
+  matomo?: MatomoConfig;
+  geospatialMapViewer: GeospatialMapConfig;
   accessibility: AccessibilitySettingsConfig;
   crisLayout: CrisLayoutConfig;
   layout: LayoutConfig;
@@ -119,7 +122,6 @@ const APP_CONFIG_STATE = makeStateKey<AppConfig>('APP_CONFIG_STATE');
 export type LazyDataServicesMap = Map<string, () => Promise<Type<HALDataService<any>> | { default: HALDataService<any> }>>;
 
 export const APP_DATA_SERVICES_MAP: InjectionToken<LazyDataServicesMap> = new InjectionToken<LazyDataServicesMap>('APP_DATA_SERVICES_MAP');
-
 
 export const CRIS_FIELD_RENDERING_MAP: InjectionToken<Map<FieldRenderingType, MetadataBoxFieldRenderOptions>> = new InjectionToken<Map<FieldRenderingType, MetadataBoxFieldRenderOptions>>('CRIS_FIELD_RENDERING_MAP');
 

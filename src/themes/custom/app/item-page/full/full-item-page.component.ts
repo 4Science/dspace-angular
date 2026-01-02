@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   KeyValuePipe,
-  NgForOf,
-  NgIf,
   SlicePipe,
 } from '@angular/common';
 import {
@@ -26,11 +24,6 @@ import { ErrorComponent } from '../../../../../app/shared/error/error.component'
 import { ThemedLoadingComponent } from '../../../../../app/shared/loading/themed-loading.component';
 import { VarDirective } from '../../../../../app/shared/utils/var.directive';
 
-/**
- * This component renders a full item page.
- * The route parameter 'id' is used to request the item it represents.
- */
-
 @Component({
   selector: 'ds-themed-full-item-page',
   // styleUrls: ['./full-item-page.component.scss'],
@@ -41,24 +34,21 @@ import { VarDirective } from '../../../../../app/shared/utils/var.directive';
   animations: [fadeInOut],
   standalone: true,
   imports: [
-    ErrorComponent,
-    ThemedLoadingComponent,
-    TranslateModule,
-    ThemedFullFileSectionComponent,
-    CollectionsComponent,
-    ItemVersionsComponent,
-    NgIf,
-    NgForOf,
     AsyncPipe,
+    CollectionsComponent,
+    ContextMenuComponent,
+    ErrorComponent,
+    ItemVersionsComponent,
+    ItemVersionsNoticeComponent,
     KeyValuePipe,
     RouterLink,
-    ThemedItemPageTitleFieldComponent,
-    DsoEditMenuComponent,
-    ItemVersionsNoticeComponent,
-    ThemedItemAlertsComponent,
-    VarDirective,
-    ContextMenuComponent,
     SlicePipe,
+    ThemedFullFileSectionComponent,
+    ThemedItemAlertsComponent,
+    ThemedItemPageTitleFieldComponent,
+    ThemedLoadingComponent,
+    TranslateModule,
+    VarDirective,
   ],
 })
 export class FullItemPageComponent extends BaseComponent {

@@ -80,6 +80,7 @@ describe('ConfirmEmailComponent', () => {
       ],
       imports: [
         CommonModule,
+        ConfirmEmailComponent,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,

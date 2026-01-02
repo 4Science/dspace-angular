@@ -8,7 +8,7 @@ import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 import { SafeUrlPipe } from 'src/app/shared/utils/safe-url-pipe';
 import { VarDirective } from 'src/app/shared/utils/var.directive';
 
@@ -37,7 +37,7 @@ const noMetadata = new MetadataMap();
 
 const mockHostWindowService = {
   // This isn't really testing mobile status, the return observable just allows the test to run.
-  widthCategory: observableOf(true),
+  widthCategory: of(true),
 };
 
 describe('MiradorViewerComponent with search', () => {
@@ -114,7 +114,7 @@ describe('MiradorViewerComponent with multiple images', () => {
 
   beforeEach(waitForAsync(() => {
     viewerService.showEmbeddedViewer.and.returnValue(true);
-    viewerService.getImageCount.and.returnValue(observableOf(2));
+    viewerService.getImageCount.and.returnValue(of(2));
     TestBed.configureTestingModule({
       imports: [
         TranslateModule.forRoot({
@@ -179,7 +179,7 @@ describe('MiradorViewerComponent with a single image', () => {
 
   beforeEach(waitForAsync(() => {
     viewerService.showEmbeddedViewer.and.returnValue(true);
-    viewerService.getImageCount.and.returnValue(observableOf(1));
+    viewerService.getImageCount.and.returnValue(of(1));
     TestBed.configureTestingModule({
       imports: [
         TranslateModule.forRoot({
@@ -237,7 +237,7 @@ describe('MiradorViewerComponent in development mode', () => {
 
   beforeEach(waitForAsync(() => {
     viewerService.showEmbeddedViewer.and.returnValue(false);
-    viewerService.getImageCount.and.returnValue(observableOf(1));
+    viewerService.getImageCount.and.returnValue(of(1));
     TestBed.configureTestingModule({
       imports: [
         TranslateModule.forRoot({

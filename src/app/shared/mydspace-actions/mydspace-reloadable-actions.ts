@@ -34,6 +34,7 @@ import { MyDSpaceActionsComponent } from './mydspace-actions';
  */
 @Component({
   selector: 'ds-mydspace-reloadable-actions',
+  standalone: true,
   template: '',
   standalone: true,
 })

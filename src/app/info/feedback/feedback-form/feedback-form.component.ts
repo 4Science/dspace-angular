@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Inject,
@@ -39,7 +39,13 @@ import { NotificationsService } from '../../../shared/notifications/notification
   templateUrl: './feedback-form.component.html',
   styleUrls: ['./feedback-form.component.scss'],
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, NgIf, ErrorComponent, TranslateModule, BtnDisabledDirective],
+  imports: [
+    BtnDisabledDirective,
+    ErrorComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TranslateModule,
+  ],
 })
 /**
  * Component displaying the contents of the Feedback Statement

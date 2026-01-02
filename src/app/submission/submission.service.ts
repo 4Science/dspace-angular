@@ -17,7 +17,7 @@ import {
 } from '@nicky-lenaers/ngx-scroll-to';
 import {
   Observable,
-  of as observableOf,
+  of,
   Subscription,
   timer as observableTimer,
 } from 'rxjs';
@@ -216,7 +216,7 @@ export class SubmissionService {
 
     return this.restService.postToEndpoint(this.workspaceLinkPath, {}, null, options).pipe(
       map((workspaceitem: SubmissionObject[]) => workspaceitem[0] as SubmissionObject),
-      catchError(() => observableOf({} as SubmissionObject)));
+      catchError(() => of({} as SubmissionObject)));
   }
 
   /**

@@ -14,7 +14,6 @@ import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   Observable,
-  of as observableOf,
   of,
 } from 'rxjs';
 import { HALEndpointServiceStub } from 'src/app/shared/testing/hal-endpoint-service.stub';
@@ -237,7 +236,7 @@ export function getEntityGridElementTestComponent(component, searchResultWithMet
     let fixture;
 
     const truncatableServiceStub: any = {
-      isCollapsed: (id: number) => observableOf(true),
+      isCollapsed: (id: number) => of(true),
     };
 
     const mockBitstreamDataService = {

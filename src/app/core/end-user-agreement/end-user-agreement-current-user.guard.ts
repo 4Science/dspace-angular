@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn } from '@angular/router';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
@@ -18,7 +18,7 @@ export const endUserAgreementCurrentUserGuard: CanActivateFn =
     () => {
       const endUserAgreementService = inject(EndUserAgreementService);
       if (!environment.info.enableEndUserAgreement) {
-        return observableOf(true);
+        return of(true);
       }
 
       return endUserAgreementService.isUserAgreementEnabled().pipe(

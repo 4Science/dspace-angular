@@ -5,7 +5,7 @@ import {
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { HostWindowService } from '../host-window.service';
 import { SidebarServiceStub } from '../testing/sidebar-service.stub';
@@ -28,9 +28,9 @@ describe('PageWithSidebarComponent', () => {
           },
           {
             provide: HostWindowService, useValue: jasmine.createSpyObj('hostWindowService', {
-              isXs: observableOf(true),
-              isSm: observableOf(false),
-              isXsOrSm: observableOf(true),
+            isXs: of(true),
+            isSm: of(false),
+            isXsOrSm: of(true),
             }),
           },
         ],
@@ -47,7 +47,7 @@ describe('PageWithSidebarComponent', () => {
 
       beforeEach(() => {
         menu = fixture.debugElement.query(By.css('#mock-id-sidebar-content')).nativeElement;
-        (comp as any).sidebarService.isCollapsed = observableOf(true);
+      (comp as any).sidebarService.isCollapsed = of(true);
         comp.ngOnInit();
         fixture.detectChanges();
       });
@@ -63,7 +63,7 @@ describe('PageWithSidebarComponent', () => {
 
       beforeEach(() => {
         menu = fixture.debugElement.query(By.css('#mock-id-sidebar-content')).nativeElement;
-        (comp as any).sidebarService.isCollapsed = observableOf(false);
+      (comp as any).sidebarService.isCollapsed = of(false);
         comp.ngOnInit();
         fixture.detectChanges();
       });

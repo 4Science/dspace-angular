@@ -1,7 +1,4 @@
-import {
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+
 import {
   Component,
   Input,
@@ -29,13 +26,11 @@ import { SubmissionSectionUploadAccessConditionsComponent } from '../../accessCo
   styleUrls: ['section-upload-file-view.component.scss'],
   templateUrl: './section-upload-file-view.component.html',
   imports: [
+    FileSizePipe,
+    NgbTooltipModule,
     SubmissionSectionUploadAccessConditionsComponent,
     TranslateModule,
     TruncatePipe,
-    NgIf,
-    NgForOf,
-    FileSizePipe,
-    NgbTooltipModule,
   ],
   standalone: true,
 })

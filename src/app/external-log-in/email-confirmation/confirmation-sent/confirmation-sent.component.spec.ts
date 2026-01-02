@@ -37,13 +37,13 @@ describe('ConfirmationSentComponent', () => {
       ],
       imports: [
         CommonModule,
+        ConfirmationSentComponent,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
             useClass: TranslateLoaderMock,
           },
         }),
-        ConfirmationSentComponent,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })

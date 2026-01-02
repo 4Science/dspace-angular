@@ -8,7 +8,9 @@ import { ThemedConfigurationSearchPageComponent } from '../../search-page/themed
   templateUrl: './admin-workflow-page.component.html',
   styleUrls: ['./admin-workflow-page.component.scss'],
   standalone: true,
-  imports: [ThemedConfigurationSearchPageComponent],
+  imports: [
+    ThemedConfigurationSearchPageComponent,
+  ],
 })
 
 /**

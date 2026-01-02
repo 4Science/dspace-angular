@@ -66,7 +66,21 @@ import { SearchResultListElementComponent } from '../../../search-result-list-el
   styleUrls: ['./item-search-result-list-element.component.scss'],
   templateUrl: './item-search-result-list-element.component.html',
   standalone: true,
-  imports: [NgIf, RouterLink, ThemedThumbnailComponent, NgClass, ThemedBadgesComponent, TruncatableComponent, TruncatablePartComponent, NgFor, AsyncPipe, TranslateModule, AdditionalMetadataComponent, MetadataLinkViewComponent, MetricBadgesComponent, MetricDonutsComponent, VarDirective, InWorkflowStatisticsComponent],
+  imports: [
+    AdditionalMetadataComponent,
+    AsyncPipe,
+    InWorkflowStatisticsComponent,
+    MetadataLinkViewComponent,
+    MetricBadgesComponent,
+    MetricDonutsComponent,
+    NgClass,
+    RouterLink,
+    ThemedBadgesComponent,
+    ThemedThumbnailComponent,
+    TruncatableComponent,
+    TruncatablePartComponent,
+    VarDirective,
+  ],
 })
 /**
  * The component for displaying a list element for an item search result of the type Publication

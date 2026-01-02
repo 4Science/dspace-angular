@@ -1,5 +1,4 @@
 import { trigger } from '@angular/animations';
-import { NgIf } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -32,7 +31,9 @@ import { AlertType } from './alert-type';
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
   standalone: true,
-  imports: [NgIf, TranslateModule, TruncatableComponent, TruncatablePartComponent],
+  imports: [
+    TranslateModule,
+  ],
 })
 export class AlertComponent implements OnInit {
 

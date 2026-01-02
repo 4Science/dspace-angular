@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Inject,
@@ -83,7 +83,6 @@ import { SectionAccessesService } from './section-accesses.service';
   styleUrls: ['./section-accesses.component.scss'],
   imports: [
     FormComponent,
-    NgIf,
   ],
   standalone: true,
 })

@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   ActivatedRoute,
@@ -29,11 +26,10 @@ import { VarDirective } from '../../shared/utils/var.directive';
   styleUrls: ['./delete-collection-page.component.scss'],
   templateUrl: './delete-collection-page.component.html',
   imports: [
-    TranslateModule,
     AsyncPipe,
-    NgIf,
-    VarDirective,
     BtnDisabledDirective,
+    TranslateModule,
+    VarDirective,
   ],
   standalone: true,
 })

@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   DatePipe,
-  NgIf,
 } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
@@ -17,7 +16,13 @@ import { ThemedTextSectionComponent } from '../../../../app/shared/explore/secti
   // templateUrl: './footer.component.html'
   templateUrl: '../../../../app/footer/footer.component.html',
   standalone: true,
-  imports: [NgIf, RouterLink, AsyncPipe, DatePipe, TranslateModule, ThemedTextSectionComponent],
+  imports: [
+    AsyncPipe,
+    DatePipe,
+    RouterLink,
+    ThemedTextSectionComponent,
+    TranslateModule,
+  ],
 })
 export class FooterComponent extends BaseComponent {
 }

@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -35,11 +31,11 @@ import {
   switchMap,
   take,
 } from 'rxjs/operators';
+
 import {
   APP_CONFIG,
   AppConfig,
-} from 'src/config/app-config.interface';
-
+} from '../../../../config/app-config.interface';
 import { getCollectionPageRoute } from '../../../collection-page/collection-page-routing-paths';
 import { getCommunityPageRoute } from '../../../community-page/community-page-routing-paths';
 import { CollectionDataService } from '../../../core/data/collection-data.service';
@@ -69,12 +65,10 @@ export interface ComColPageNavOption {
   styleUrls: ['./comcol-page-browse-by.component.scss'],
   templateUrl: './comcol-page-browse-by.component.html',
   imports: [
+    AsyncPipe,
     FormsModule,
-    NgForOf,
     RouterLink,
     TranslateModule,
-    AsyncPipe,
-    NgIf,
   ],
   standalone: true,
 })

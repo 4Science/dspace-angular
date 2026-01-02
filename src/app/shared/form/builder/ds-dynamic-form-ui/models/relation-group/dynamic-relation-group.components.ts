@@ -30,7 +30,7 @@ import isObject from 'lodash/isObject';
 import {
   combineLatest,
   Observable,
-  of as observableOf,
+  of,
   Subscription,
 } from 'rxjs';
 import {
@@ -79,13 +79,13 @@ import { DsDynamicRelationGroupModalComponent } from './modal/dynamic-relation-g
   imports: [
     NgIf,
     AsyncPipe,
-    NgbTooltipModule,
-    TranslateModule,
-    NgClass,
-    ThemedLoadingComponent,
+    BtnDisabledDirective,
     ChipsComponent,
     forwardRef(() => FormComponent),
-    BtnDisabledDirective,
+    NgbTooltipModule,
+    NgClass,
+    ThemedLoadingComponent,
+    TranslateModule,
   ],
   standalone: true,
 })
@@ -205,7 +205,7 @@ export class DsDynamicRelationGroupComponent extends DynamicFormControlComponent
     if (this.model.isEmpty()) {
       this.initChips([]);
     } else {
-      initChipsValue$ = observableOf(this.model.getGroupValue() as any[]);
+      initChipsValue$ = of(this.model.getGroupValue() as any[]);
       // If authority
       this.subs.push(initChipsValue$.pipe(
         mergeMap((valueModel) => {
@@ -217,7 +217,7 @@ export class DsDynamicRelationGroupComponent extends DynamicFormControlComponent
               if (isObject(valueObj[fieldName]) && this.hasValidAuthority(valueObj[fieldName]) && valueObj[fieldName].otherInformation === null) {
                 return$ = this.getVocabulary(valueObj, fieldName);
               } else {
-                return$ = observableOf(valueObj[fieldName]);
+                return$ = of(valueObj[fieldName]);
               }
               return return$.pipe(map((entry) => ({ [fieldName]: entry })));
             });
@@ -306,7 +306,7 @@ export class DsDynamicRelationGroupComponent extends DynamicFormControlComponent
           }),
         ));
     } else {
-      return observableOf(valueObj[fieldName]);
+      return of(valueObj[fieldName]);
     }
   }
 

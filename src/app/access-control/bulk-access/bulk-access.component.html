@@ -7,8 +7,8 @@
   <hr>
 
   <div class="d-flex justify-content-end">
-    <button routerLink="/home" class="btn btn-outline-primary mr-3" data-test="back-btn">
-            <i class="fas fa-arrow-left mr-1"></i>
+    <button routerLink="/home" class="btn btn-outline-primary me-3" data-test="back-btn">
+            <i class="fas fa-arrow-left me-1"></i>
       {{ 'access-control-back' | translate }}
     </button>
     <button class="btn btn-primary" [dsBtnDisabled]="!canExport()" (click)="submit()">

@@ -11,7 +11,7 @@ import {
 import {
   combineLatest as observableCombineLatest,
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import {
   distinctUntilChanged,
@@ -677,7 +677,7 @@ export class RelationshipDataService extends IdentifiableDataService<Relationshi
           ),
         ));
     } else {
-      return observableOf(Object.assign(new MetadatumRepresentation(itemType), metadatum));
+      return of(Object.assign(new MetadatumRepresentation(itemType), metadatum));
     }
   }
 }

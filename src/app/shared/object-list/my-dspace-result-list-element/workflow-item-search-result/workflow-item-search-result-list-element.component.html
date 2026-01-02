@@ -1,18 +1,19 @@
-<ng-container *ngIf="derivedSearchResult$ | async">
-    <ds-listable-object-component-loader
-            [viewMode]="ViewModes.ListElement"
-            [object]="derivedSearchResult$ | async" [linkType]="LinkTypes.None"
-            [context]="badgeContext"
-            [showMetrics]="false"
-            [showThumbnails]="showThumbnails"
-            [showWorkflowStatistics]="showWorkflowStatistics"></ds-listable-object-component-loader>
-    <div class="row">
-        <div [ngClass]="showThumbnails ? 'offset-3 offset-xl-2  pl-3' : 'ml-3'">
-            <ds-workflowitem-actions [object]="dso" (processCompleted)="reloadedObject.emit($event.reloadedObject)"></ds-workflowitem-actions>
-        </div>
+@if (derivedSearchResult$ | async) {
+  <ds-listable-object-component-loader
+    [viewMode]="ViewModes.ListElement"
+    [object]="derivedSearchResult$ | async" [linkType]="LinkTypes.None"
+    [context]="badgeContext"
+    [showMetrics]="false"
+    [showThumbnails]="showThumbnails"
+    [showWorkflowStatistics]="showWorkflowStatistics"></ds-listable-object-component-loader>
+  <div class="row">
+    <div [ngClass]="showThumbnails ? 'offset-3 offset-xl-2  col-9 col-md-10 ps-3' : 'ms-3'">
+      <ds-workflowitem-actions [object]="dso" (processCompleted)="reloadedObject.emit($event.reloadedObject)"></ds-workflowitem-actions>
     </div>
-</ng-container>
+  </div>
+}
 
-<ds-loading
-        *ngIf="(derivedSearchResult$ | async) === undefined"
-        [showMessage]="false"></ds-loading>
+@if ((derivedSearchResult$ | async) === undefined) {
+  <ds-loading
+  [showMessage]="false"></ds-loading>
+}

@@ -29,6 +29,7 @@ export interface SectionDataModel {
  */
 @Component({
   selector: 'ds-section-model',
+  standalone: true,
   template: '',
   standalone: true,
 })

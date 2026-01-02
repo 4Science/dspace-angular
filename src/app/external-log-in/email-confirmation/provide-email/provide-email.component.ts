@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -22,13 +21,15 @@ import { ExternalLoginService } from '../../services/external-login.service';
   templateUrl: './provide-email.component.html',
   styleUrls: ['./provide-email.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
-    TranslateModule,
     ReactiveFormsModule,
-    NgIf,
+    TranslateModule,
   ],
+  standalone: true,
 })
+/**
+ * This component provides a proper field to submit the email that will be updated for its registration token
+ */
 export class ProvideEmailComponent implements OnDestroy {
   /**
    * The form group for the email input

@@ -1,7 +1,5 @@
 import {
   AsyncPipe,
-  NgForOf,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -60,15 +58,13 @@ import { EditRelationshipListWrapperComponent } from './edit-relationship-list-w
   imports: [
     AlertComponent,
     AsyncPipe,
+    BtnDisabledDirective,
     EditRelationshipListComponent,
-    NgForOf,
-    NgIf,
+    EditRelationshipListWrapperComponent,
     NgTemplateOutlet,
     ThemedLoadingComponent,
     TranslateModule,
     VarDirective,
-    EditRelationshipListWrapperComponent,
-    BtnDisabledDirective,
   ],
   standalone: true,
 })

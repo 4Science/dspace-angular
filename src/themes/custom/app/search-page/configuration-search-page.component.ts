@@ -1,6 +1,5 @@
 import {
   AsyncPipe,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -40,23 +39,18 @@ import { ViewModeSwitchComponent } from '../../../../app/shared/view-mode-switch
   standalone: true,
   imports: [
     AsyncPipe,
-    NgIf,
+    ItemExportModalLauncherComponent,
     NgTemplateOutlet,
+    NgbTooltipModule,
     PageWithSidebarComponent,
+    SearchChartsComponent,
+    SearchLabelsComponent,
     ThemedSearchFormComponent,
     ThemedSearchResultsComponent,
     ThemedSearchSidebarComponent,
     TranslateModule,
-    SearchLabelsComponent,
     ViewModeSwitchComponent,
-    NgbTooltipModule,
-    ItemExportModalLauncherComponent,
-    SearchChartsComponent,
   ],
 })
-
-/**
- * This component renders a search page using a configuration as input.
- */
-export class ConfigurationSearchPageComponent extends BaseComponent {}
-
+export class ConfigurationSearchPageComponent extends BaseComponent {
+}

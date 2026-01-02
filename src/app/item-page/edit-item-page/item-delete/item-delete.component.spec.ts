@@ -16,7 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   EMPTY,
-  of as observableOf,
+  of,
 } from 'rxjs';
 
 import { LinkService } from '../../../core/cache/builders/link.service';
@@ -135,7 +135,7 @@ describe('ItemDeleteComponent', () => {
     });
 
     routeStub = {
-      data: observableOf({
+      data: of({
         dso: createSuccessfulRemoteDataObject(mockItem),
       }),
     };
@@ -156,12 +156,12 @@ describe('ItemDeleteComponent', () => {
       initialize: () => {
         // do nothing
       },
-      isSelectedVirtualMetadata: (type) => observableOf(typesSelection[type]),
+      isSelectedVirtualMetadata: (type) => of(typesSelection[type]),
     };
 
     relationshipService = jasmine.createSpyObj('relationshipService',
       {
-        getItemRelationshipsArray: observableOf(relationships),
+        getItemRelationshipsArray: of(relationships),
       },
     );
 

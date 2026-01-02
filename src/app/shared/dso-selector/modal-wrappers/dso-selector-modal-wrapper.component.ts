@@ -37,6 +37,7 @@ export enum SelectorActionType {
  */
 @Component({
   selector: 'ds-dso-selector-modal',
+  standalone: true,
   template: '',
   standalone: true,
 })

@@ -121,7 +121,7 @@ describe('MetadataFieldSelectorComponent', () => {
 
       component.validate();
 
-      expect(registryService.queryMetadataFields).toHaveBeenCalledWith('dc.relation', { elementsPerPage: 10, sort: new SortOptions('fieldName', SortDirection.ASC) }, true, false, followLink('schema'));
+      expect(registryService.queryMetadataFields).toHaveBeenCalledWith('dc.relation', { elementsPerPage: 20, sort: new SortOptions('fieldName', SortDirection.ASC), currentPage: 1 }, true, false, followLink('schema'));
     });
 
     describe('when querying the metadata fields returns an error response', () => {

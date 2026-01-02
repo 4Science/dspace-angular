@@ -1,4 +1,4 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ChangeDetectionStrategy, NO_ERRORS_SCHEMA } from '@angular/core';
 import {
   ComponentFixture,
   TestBed,
@@ -8,8 +8,7 @@ import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
-import { ItemSearchResultListElementComponent } from 'src/app/shared/object-list/search-result-list-element/item-search-result/item-types/item/item-search-result-list-element.component';
+import { of } from 'rxjs';
 import { TestDataService } from 'src/app/shared/testing/test-data-service.mock';
 
 import {
@@ -36,7 +35,7 @@ import { TruncatePipe } from '../../../../utils/truncate.pipe';
 import { ItemListElementComponent } from './item-list-element.component';
 
 const mockItem: Item = Object.assign(new Item(), {
-  bundles: observableOf({}),
+  bundles: of({}),
   entityType: 'Publication',
   metadata: {
     'dc.title': [
@@ -115,12 +114,9 @@ describe('ItemListElementComponent', () => {
       schemas: [
         NO_ERRORS_SCHEMA,
       ],
-    }).overrideComponent(ItemSearchResultListElementComponent, {
-      set: {
-        template: '<div>Mock Item Search Result List Element</div>',
-      },
-    })
-      .compileComponents();
+    }).overrideComponent(ItemListElementComponent, {
+      set: { changeDetection: ChangeDetectionStrategy.Default },
+    }).compileComponents();
   }));
 
   beforeEach(waitForAsync(() => {

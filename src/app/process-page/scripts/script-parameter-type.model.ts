@@ -3,6 +3,7 @@
  */
 export enum ScriptParameterType {
   STRING = 'String',
+  INTEGER = 'Integer',
   DATE = 'date',
   NUMBER = 'Integer',
   BOOLEAN = 'boolean',

@@ -20,7 +20,6 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import {
   EMPTY,
-  of as observableOf,
   of,
 } from 'rxjs';
 
@@ -214,7 +213,7 @@ describe('SubmissionSectionUploadFileComponent test suite', () => {
     });
 
     it('should init file data properly', () => {
-      uploadService.getFileData.and.returnValue(observableOf(fileData));
+      uploadService.getFileData.and.returnValue(of(fileData));
 
       comp.ngOnChanges({});
 
@@ -256,7 +255,7 @@ describe('SubmissionSectionUploadFileComponent test suite', () => {
     it('should delete primary if file we delete is primary', () => {
       compAsAny.isPrimary = true;
       compAsAny.pathCombiner = pathCombiner;
-      operationsService.jsonPatchByResourceID.and.returnValue(observableOf({}));
+      operationsService.jsonPatchByResourceID.and.returnValue(of({}));
       compAsAny.deleteFile();
       expect(operationsBuilder.remove).toHaveBeenCalledWith(pathCombiner.getPath('primary'));
       expect(uploadService.updateFilePrimaryBitstream).toHaveBeenCalledWith(submissionId, sectionId, null);
@@ -265,14 +264,14 @@ describe('SubmissionSectionUploadFileComponent test suite', () => {
     it('should NOT delete primary if file we delete is NOT primary', () => {
       compAsAny.isPrimary = false;
       compAsAny.pathCombiner = pathCombiner;
-      operationsService.jsonPatchByResourceID.and.returnValue(observableOf({}));
+      operationsService.jsonPatchByResourceID.and.returnValue(of({}));
       compAsAny.deleteFile();
       expect(uploadService.updateFilePrimaryBitstream).not.toHaveBeenCalledTimes(1);
     });
 
     it('should delete file properly', () => {
       compAsAny.pathCombiner = pathCombiner;
-      operationsService.jsonPatchByResourceID.and.returnValue(observableOf({}));
+      operationsService.jsonPatchByResourceID.and.returnValue(of({}));
       submissionServiceStub.getSubmissionObjectLinkName.and.returnValue('workspaceitems');
 
       compAsAny.deleteFile();
@@ -332,10 +331,10 @@ describe('SubmissionSectionUploadFileComponent test suite', () => {
   template: ``,
   standalone: true,
   imports: [
-    ThemedSubmissionSectionUploadFileComponent,
-    CommonModule,
     AsyncPipe,
-    NgbModule],
+    NgbModule,
+    ThemedSubmissionSectionUploadFileComponent,
+  ],
 })
 class TestComponent {
 

@@ -28,7 +28,7 @@ describe('ExternalLoginEmailConfirmationPageComponent', () => {
         ConfirmationSentComponent,
       ],
     })
-      .overrideComponent(ExternalLoginEmailConfirmationPageComponent, { remove: { imports: [ConfirmationSentComponent] } }).compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

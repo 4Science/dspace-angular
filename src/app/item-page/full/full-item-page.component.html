@@ -1,52 +1,70 @@
 <div class="container" *ngVar="(itemRD$ | async) as itemRD">
-  <div class="item-page" *ngIf="itemRD?.hasSucceeded" @fadeInOut>
-    <div *ngIf="itemRD?.payload as item">
-      <ds-item-alerts [item]="item"></ds-item-alerts>
-      <ds-item-versions-notice [item]="item"></ds-item-versions-notice>
-      <div *ngIf="!item.isWithdrawn || (isAdmin$|async)" class="full-item-info">
-        <div class="d-flex flex-row">
-          <ds-item-page-title-field class="mr-auto" [item]="item"></ds-item-page-title-field>
-          <div class="pl-2">
-            <ds-context-menu [contextMenuObject]="item" [contextMenuObjectType]="$any('ITEM')"></ds-context-menu>
-          </div>
-        </div>
-        <div class="simple-view-link my-3" *ngIf="!fromSubmissionObject">
-          <a class="btn btn-outline-primary" [routerLink]="[(itemPageRoute$ | async)]" role="button" tabindex="0">
-            {{"item.page.link.simple" | translate}}
-          </a>
-        </div>
-        <div class="table-responsive">
-          <table class="table  table-striped">
-            <tbody>
-            <ng-container *ngFor="let mdEntry of (metadata$ | async) | keyvalue">
-              <tr *ngFor="let mdValue of mdEntry.value | slice:0:(metadataMapLimit$ | async).get(mdEntry.key)">
-                <td>{{mdEntry.key}}</td>
-                <td>{{mdValue.value}}</td>
-                <td>{{mdValue.language}}</td>
-              </tr>
-              <tr *ngIf="mdEntry.value.length > (metadataMapLimit$ | async).get(mdEntry.key)">
-                <td class="text-center" colspan="3">
-                  <button class="btn btn-link" (click)="increaseLimit(mdEntry.key)" data-test="btn-more">
-                    {{'item.truncatable-part.show-more' | translate}}
-                  </button>
-                </td>
-              </tr>
-            </ng-container>
-            </tbody>
-          </table>
-        </div>
-        <ds-item-page-full-file-section [item]="item"></ds-item-page-full-file-section>
-        <ds-item-page-collections [item]="item"></ds-item-page-collections>
-        <ds-item-versions class="mt-2" [item]="item"></ds-item-versions>
-        <div class="button-row bottom" *ngIf="fromSubmissionObject">
-          <div class="text-right">
-            <button class="btn btn-outline-secondary mr-1" (click)="back()"><i
+  @if (itemRD?.hasSucceeded) {
+    <div class="item-page" @fadeInOut>
+      @if (itemRD?.payload; as item) {
+        <div>
+          <ds-item-alerts [item]="item"></ds-item-alerts>
+          <ds-item-versions-notice [item]="item"></ds-item-versions-notice>
+          @if (!item.isWithdrawn || (isAdmin$|async)) {
+            <div class="full-item-info">
+              <div class="d-flex flex-row">
+                <ds-item-page-title-field class="me-auto" [item]="item"></ds-item-page-title-field>
+                <div class="pl-2">
+                  <ds-context-menu [contextMenuObject]="item" [contextMenuObjectType]="$any('ITEM')"></ds-context-menu>
+                </div>
+              </div>
+              @if (!fromSubmissionObject) {
+                <div class="simple-view-link my-3">
+                  <a class="btn btn-outline-primary" [routerLink]="[(itemPageRoute$ | async)]">
+                    {{"item.page.link.simple" | translate}}
+                  </a>
+                </div>
+              }
+              <div class="table-responsive">
+                <table class="table  table-striped">
+                  <tbody>
+                    @for (mdEntry of (metadata$ | async) | keyvalue; track mdEntry) {
+                      @for (mdValue of mdEntry.value | slice:0:(metadataMapLimit$ | async).get(mdEntry.key); track mdValue) {
+                        <tr>
+                          <td>{{mdEntry.key}}</td>
+                          <td>{{mdValue.value}}</td>
+                          <td>{{mdValue.language}}</td>
+                        </tr>
+                        @if (mdEntry.value.length > (metadataMapLimit$ | async).get(mdEntry.key)) {
+                          <tr>
+                            <td class="text-center" colspan="3">
+                              <button class="btn btn-link" (click)="increaseLimit(mdEntry.key)" data-test="btn-more">
+                                {{'item.truncatable-part.show-more' | translate}}
+                              </button>
+                            </td>
+                          </tr>
+                        }
+                      }
+                    }
+                  </tbody>
+                </table>
+              </div>
+              <ds-item-page-full-file-section [item]="item"></ds-item-page-full-file-section>
+              <ds-item-page-collections [item]="item"></ds-item-page-collections>
+              <ds-item-versions class="mt-2" [item]="item"></ds-item-versions>
+              @if (fromSubmissionObject) {
+                <div class="button-row bottom">
+                  <div class="text-end">
+                    <button class="btn btn-outline-secondary me-1" (click)="back()"><i
                     class="fas fa-arrow-left"></i> {{'item.page.return' | translate}}</button>
-          </div>
+                  </div>
+                </div>
+              }
+            </div>
+          }
         </div>
-      </div>
+      }
     </div>
-  </div>
-  <ds-error *ngIf="itemRD?.hasFailed" message="{{'error.item' | translate}}"></ds-error>
-  <ds-loading *ngIf="itemRD?.isLoading" message="{{'loading.item' | translate}}"></ds-loading>
+  }
+  @if (itemRD?.hasFailed) {
+    <ds-error message="{{'error.item' | translate}}"></ds-error>
+  }
+  @if (itemRD?.isLoading) {
+    <ds-loading message="{{'loading.item' | translate}}"></ds-loading>
+  }
 </div>

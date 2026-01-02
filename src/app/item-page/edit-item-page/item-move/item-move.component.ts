@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -50,14 +47,13 @@ import {
   selector: 'ds-item-move',
   templateUrl: './item-move.component.html',
   imports: [
-    TranslateModule,
-    NgbModule,
-    FormsModule,
-    RouterLink,
     AsyncPipe,
     AuthorizedCollectionSelectorComponent,
-    NgIf,
     BtnDisabledDirective,
+    FormsModule,
+    NgbModule,
+    RouterLink,
+    TranslateModule,
   ],
   standalone: true,
 })

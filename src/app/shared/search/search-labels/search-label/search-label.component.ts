@@ -36,7 +36,11 @@ import { AppliedFilter } from '../../models/applied-filter.model';
   templateUrl: './search-label.component.html',
   styleUrls: ['./search-label.component.scss'],
   standalone: true,
-  imports: [RouterLink, AsyncPipe, TranslateModule, VarDirective],
+  imports: [
+    AsyncPipe,
+    RouterLink,
+    TranslateModule,
+  ],
 })
 export class SearchLabelComponent implements OnInit {
   @Input() inPlaceSearch: boolean;

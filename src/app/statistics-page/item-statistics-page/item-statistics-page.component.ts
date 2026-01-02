@@ -17,7 +17,14 @@ import { StatisticsTableComponent } from '../statistics-table/statistics-table.c
   templateUrl: '../statistics-page/statistics-page.component.html',
   styleUrls: ['./item-statistics-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, VarDirective, ThemedLoadingComponent, StatisticsTableComponent, TranslateModule, CrisStatisticsPageComponent, CrisStatisticsPageComponent],
+  imports: [
+    CommonModule,
+    CrisStatisticsPageComponent,
+    StatisticsTableComponent,
+    ThemedLoadingComponent,
+    TranslateModule,
+    VarDirective,
+  ],
 })
 export class ItemStatisticsPageComponent extends StatisticsPageDirective<Item> {
 

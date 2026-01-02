@@ -281,12 +281,14 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
   selector: 'ds-test-cmp',
   template: ``,
   standalone: true,
-  imports: [DynamicFormsCoreModule,
+  imports: [
+    DynamicFormsCoreModule,
     DynamicFormsNGBootstrapUIModule,
     FormsModule,
     InfiniteScrollModule,
+    NgbModule,
     ReactiveFormsModule,
-    NgbModule],
+  ],
 })
 class TestComponent {
 

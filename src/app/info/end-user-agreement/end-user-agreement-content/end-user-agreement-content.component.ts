@@ -26,7 +26,12 @@ import { MarkdownViewerComponent } from '../../../shared/markdown-viewer/markdow
   templateUrl: './end-user-agreement-content.component.html',
   styleUrls: ['./end-user-agreement-content.component.scss'],
   standalone: true,
-  imports: [RouterLink, TranslateModule, AsyncPipe, MarkdownViewerComponent],
+  imports: [
+    AsyncPipe,
+    MarkdownViewerComponent,
+    RouterLink,
+    TranslateModule,
+  ],
 })
 /**
  * Component displaying the contents of the End User Agreement

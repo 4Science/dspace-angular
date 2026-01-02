@@ -128,7 +128,7 @@ export class ConcatFieldParser extends FieldParser {
 
     const clsGroup: DynamicFormControlLayout = {
       element: {
-        control: 'form-row',
+        control: 'row',
       },
     };
     this.initSecurityValue(concatGroup, fieldValue as any);

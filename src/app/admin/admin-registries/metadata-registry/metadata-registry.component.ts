@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgForOf,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -46,14 +44,12 @@ import { MetadataSchemaFormComponent } from './metadata-schema-form/metadata-sch
   templateUrl: './metadata-registry.component.html',
   styleUrls: ['./metadata-registry.component.scss'],
   imports: [
-    MetadataSchemaFormComponent,
-    TranslateModule,
     AsyncPipe,
-    PaginationComponent,
-    NgIf,
-    NgForOf,
+    MetadataSchemaFormComponent,
     NgClass,
+    PaginationComponent,
     RouterLink,
+    TranslateModule,
   ],
   standalone: true,
 })

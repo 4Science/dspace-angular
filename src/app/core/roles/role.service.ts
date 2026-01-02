@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -33,7 +33,7 @@ export class RoleService {
   isSubmitter(): Observable<boolean> {
     // By applying switchMap, we address the cache problem typically associated with observables
     // the switchMap operator cancels the previous inner observable and subscribes to the new one, effectively initiating a fresh request
-    return observableOf(true).pipe(
+    return of(true).pipe(
       switchMap(() => this.collectionService.hasAuthorizedCollection()),
     );
   }
@@ -43,7 +43,7 @@ export class RoleService {
    */
   isController(): Observable<boolean> {
     // TODO find a way to check if user is a controller
-    return observableOf(true);
+    return of(true);
   }
 
   /**

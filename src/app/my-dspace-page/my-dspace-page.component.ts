@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -24,7 +21,7 @@ import { Context } from '../core/shared/context.model';
 import { DSpaceObject } from '../core/shared/dspace-object.model';
 import { SearchService } from '../core/shared/search/search.service';
 import { ViewMode } from '../core/shared/view-mode.model';
-import { SuggestionsNotificationComponent } from '../notifications/suggestions-notification/suggestions-notification.component';
+import { SuggestionsNotificationComponent } from '../notifications/suggestions/notification/suggestions-notification.component';
 import { ClaimedTaskSearchResult } from '../shared/object-collection/shared/claimed-task-search-result.model';
 import { PoolTaskSearchResult } from '../shared/object-collection/shared/pool-task-search-result.model';
 import { SelectableListService } from '../shared/object-list/selectable-list/selectable-list.service';
@@ -57,15 +54,14 @@ import { MyDspaceQaEventsNotificationsComponent } from './my-dspace-qa-events-no
     },
   ],
   imports: [
-    ThemedSearchComponent,
-    MyDSpaceNewSubmissionComponent,
     AsyncPipe,
-    RoleDirective,
-    NgIf,
-    SuggestionsNotificationComponent,
-    MyDspaceQaEventsNotificationsComponent,
-    MyDSpaceNewBulkImportComponent,
     MyDSpaceBulkActionComponent,
+    MyDSpaceNewSubmissionComponent,
+    MyDSpaceNewBulkImportComponent,
+    MyDspaceQaEventsNotificationsComponent,
+    RoleDirective,
+    SuggestionsNotificationComponent,
+    ThemedSearchComponent,
   ],
   standalone: true,
 })

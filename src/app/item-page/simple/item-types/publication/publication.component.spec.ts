@@ -21,7 +21,6 @@ import {
   Observable,
   of,
 } from 'rxjs';
-import { HALEndpointServiceStub } from 'src/app/shared/testing/hal-endpoint-service.stub';
 
 import {
   APP_CONFIG,
@@ -86,6 +85,7 @@ import {
   mockRouteService,
 } from '../shared/item.component.spec';
 import { PublicationComponent } from './publication.component';
+import { HALEndpointServiceStub } from '../../../../shared/testing/hal-endpoint-service.stub';
 
 const noMetadata = new MetadataMap();
 

@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Injector,
@@ -14,7 +11,7 @@ import {
 } from '@ngx-translate/core';
 import {
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import { RemoteData } from 'src/app/core/data/remote-data';
 
@@ -33,7 +30,12 @@ export const WORKFLOW_TASK_OPTION_DECLINE_TASK = 'submit_decline_task';
   templateUrl: './claimed-task-actions-decline-task.component.html',
   styleUrls: ['./claimed-task-actions-decline-task.component.scss'],
   standalone: true,
-  imports: [NgbTooltipModule, NgIf, AsyncPipe, TranslateModule, BtnDisabledDirective],
+  imports: [
+    AsyncPipe,
+    BtnDisabledDirective,
+    NgbTooltipModule,
+    TranslateModule,
+  ],
 })
 /**
  * Component for displaying and processing the decline task action on a workflow task item
@@ -50,7 +52,7 @@ export class ClaimedTaskActionsDeclineTaskComponent extends ClaimedTaskActionsAb
   }
 
   reloadObjectExecution(): Observable<RemoteData<DSpaceObject> | DSpaceObject> {
-    return observableOf(this.object);
+    return of(this.object);
   }
 
   convertReloadedObject(dso: DSpaceObject): DSpaceObject {

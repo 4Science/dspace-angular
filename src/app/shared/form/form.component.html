@@ -1,113 +1,95 @@
 <div class="container-fluid">
   <form class="form-horizontal" [formGroup]="formGroup">
+
     <ds-dynamic-form
       [formId]="formId"
       [formGroup]="formGroup"
       [formModel]="formModel"
       [formLayout]="formLayout"
-      [entityType]="entityType"
       (change)="$event.stopPropagation();"
       (dfBlur)="onBlur($event)"
       (dfChange)="onChange($event)"
       (dfFocus)="onFocus($event)"
-       (ngbEvent)="onCustomEvent($event)">
-
-      <ng-template modelType="SCROLLABLE_DROPDOWN" let-model="model">
-        <div *ngIf="!isTheOnlyFieldInArrayGroup(model)"
-             class="col-xs-2 d-flex flex-column justify-content-start align-items-end dropdown-remove"
-             [class]="arrayButtonsStyle">
-          <button type="button" class="btn btn-secondary" role="button"
-                  title="{{'form.remove' | translate}}"
-                  attr.aria-label="{{'form.remove' | translate}}"
-                  (click)="clearScrollableDropdown($event, model)"
-                  [dsBtnDisabled]="!model.value || model.readOnly">
-            <span><i class="fas fa-trash" aria-hidden="false"></i></span>
-          </button>
-        </div>
-      </ng-template>
-
+      (ngbEvent)="onCustomEvent($event)">
       <ng-template modelType="ARRAY" let-group let-index="index" let-context="context">
         <!--Array with repeatable items-->
-        <div *ngIf="(!context.notRepeatable) && !isVirtual(context, index)"
-             [class.isInlineGroupForm-delete]="isInlineGroupForm"
-             class="col-xs-2 d-flex flex-column justify-content-sm-start align-items-end"
-             [class]="arrayButtonsStyle" [ngClass]="{'justify-content-sm-end' : isInlineGroupForm }">
-          <button type="button" class="btn btn-secondary" role="button"
-                  title="{{'form.remove' | translate}}"
-                  [attr.aria-label]="'form.remove' | translate"
-                  (click)="removeItem($event, context, index)"
-                  [dsBtnDisabled]="isArrayGroupEmpty(group) || isItemReadOnly(context, index)">
-            <span><i class="fas fa-trash" aria-hidden="true"></i></span>
-          </button>
-          <div *ngIf="isInlineGroupForm" class="clearfix w-100 mb-2"></div>
-        </div>
-
-        <div *ngIf="(!context.notRepeatable) && isInlineGroupForm" class="clearfix pl-4 w-100">
-          <div class="btn-group" role="group" aria-label="remove button">
-            <button type="button" role="button" class="ds-form-add-more btn btn-link"
-                    title="{{'form.copy' | translate}}"
-                    attr.aria-label="{{'form.copy' | translate}}"
-                    [dsBtnDisabled]="isItemReadOnly(context, index)"
-                    (click)="copyItem($event, group.context, index)">
-              <span><i class="fas fa-copy"></i> {{'form.copy' | translate}}</span>
+        @if ((!context.notRepeatable) && !isVirtual(context, index) && group.context.groups.length !== 1 && !isItemReadOnly(context, index)) {
+          <div
+            class="col-xs-2 d-flex flex-column justify-content-sm-start align-items-end"
+            [class.isInlineGroupForm-delete]="isInlineGroupForm"
+            [class]="arrayButtonsStyle" [ngClass]="{'justify-content-sm-end' : isInlineGroupForm }">
+            <button type="button" class="btn btn-secondary" role="button"
+                    title="{{'form.remove' | translate}}"
+                    [attr.aria-label]="'form.remove' | translate"
+                    [dsBtnDisabled]="isArrayGroupEmpty(group) || isItemReadOnly(context, index)"
+                    (click)="removeItem($event, context, index)">
+              <span><i class="fas fa-trash" aria-hidden="true"></i></span>
             </button>
           </div>
-        </div>
-
-        <div *ngIf="(!context.notRepeatable) && (index === (group.context.groups.length - 1) )" class="clearfix w-100"
-             [class.pl-4]="!isInlineGroupForm"
-             [class.white-background]="isInlineGroupForm">
-          <div class="btn-group" role="group" aria-label="remove button">
-            <button type="button" role="button" class="ds-form-add-more btn btn-link"
+        }
+        @if ((!context.notRepeatable) && index === (group.context.groups.length - 1) && !isItemReadOnly(context, index)) {
+          <div class="clearfix w-100"
+               [class.ps-4]="!isInlineGroupForm"
+               [class.white-background]="isInlineGroupForm">
+            <div class="btn-group" role="group" aria-label="remove button">
+              <button type="button" role="button" class="ds-form-add-more btn btn-link"
                 title="{{'form.add' | translate}}"
                 attr.aria-label="{{'form.add' | translate}}"
-                [class.pl-0]="isInlineGroupForm"
-                [dsBtnDisabled]="isItemReadOnly(context, index)"
                 (click)="insertItem($event, group.context, group.context.groups.length)">
-              <span><i class="fas fa-plus"></i> {{'form.add' | translate}}</span>
-            </button>
+                <span><i class="fas fa-plus"></i> {{'form.add' | translate}}</span>
+              </button>
+            </div>
           </div>
-        </div>
+        }
 
         <!--Array with non repeatable items - Only discard button-->
-        <div *ngIf="context.notRepeatable && context.showButtons && group.context.groups.length > 1"
-             class="col-xs-2 d-flex flex-column justify-content-sm-start align-items-end"
-             [class]="arrayButtonsStyle">
-          <div class="btn-group" role="button">
-            <button type="button" class="btn btn-secondary"
-                    title="{{'form.discard' | translate}}"
-                    attr.aria-label="{{'form.discard' | translate}}"
-                    (click)="removeItem($event, context, index)"
-                    [dsBtnDisabled]="group.context.groups.length === 1 || isItemReadOnly(context, index)">
-              <span>{{'form.discard' | translate}}</span>
-            </button>
-            <div *ngIf="isInlineGroupForm" class="clearfix w-100 mb-2"></div>
+        @if (context.notRepeatable && context.showButtons && group.context.groups.length > 1) {
+          <div
+            class="col-xs-2 d-flex flex-column justify-content-sm-start align-items-end"
+            [class]="arrayButtonsStyle">
+            <div class="btn-group" role="button">
+              <button type="button" class="btn btn-secondary"
+                title="{{'form.discard' | translate}}"
+                attr.aria-label="{{'form.discard' | translate}}"
+                (click)="removeItem($event, context, index)"
+                [dsBtnDisabled]="group.context.groups.length === 1 || isItemReadOnly(context, index)">
+                <span>{{'form.discard' | translate}}</span>
+              </button>
+            </div>
           </div>
-        </div>
+        }
       </ng-template>
 
     </ds-dynamic-form>
-        <ng-content select="[additional]"></ng-content>
-    <ng-content *ngIf="!displaySubmit && !displayReset"></ng-content>
+    <ng-content select="[additional]"></ng-content>
+    @if (!displaySubmit && !displayReset) {
+      <ng-content></ng-content>
+    }
 
-    <div *ngIf="displaySubmit || displayReset">
-      <hr>
-      <div class="form-group row">
-        <div class="col text-right space-children-mr">
-          <ng-content select="[before]"></ng-content>
-            <button *ngIf="displayReset" type="reset" class="btn btn-outline-secondary" (click)="reset()">
-              <i class="fas fa-undo-alt mr-1" aria-hidden="true"></i>{{resetLabel | translate}}
-            </button>
-            <ng-content select="[between]"></ng-content>
-            <button *ngIf="displaySubmit" type="submit" class="btn btn-primary" (click)="onSubmit()"
-                    [dsBtnDisabled]="(isValid() | async) !== true">
-              <i class="fas fa-save mr-1" aria-hidden="true"></i> {{submitLabel | translate}}
-            </button>
-            <ng-content select="[after]"></ng-content>
+    @if (displaySubmit || displayReset) {
+      <div>
+        <hr>
+          <div class="mb-3 row">
+            <div class="col text-end space-children-mr">
+              <ng-content select="[before]"></ng-content>
+              @if (displayReset) {
+                <button type="reset" class="btn btn-outline-secondary" (click)="reset()">
+                  <i class="fas fa-undo-alt mr-1" aria-hidden="true"></i>{{resetLabel | translate}}
+                </button>
+              }
+              <ng-content select="[between]"></ng-content>
+              @if (displaySubmit) {
+                <button type="submit" class="btn btn-primary" (click)="onSubmit()"
+                  [dsBtnDisabled]="(isValid() | async) !== true">
+                  <i class="fas fa-save mr-1" aria-hidden="true"></i> {{submitLabel | translate}}
+                </button>
+              }
+              <ng-content select="[after]"></ng-content>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      }
 
-  </form>
+    </form>
 
-</div>
+  </div>

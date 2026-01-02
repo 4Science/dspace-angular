@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
   Component,
   DebugElement,
@@ -149,7 +148,7 @@ describe('DSOSelectorModalWrapperComponent', () => {
   describe('when the click method emits on close button', () => {
     beforeEach(() => {
       spyOn(component, 'close');
-      debugElement.query(By.css('button.close')).triggerEventHandler('click', {});
+      debugElement.query(By.css('button.btn-close')).triggerEventHandler('click', {});
       fixture.detectChanges();
     });
     it('should call the close method on the component', () => {
@@ -176,7 +175,6 @@ describe('DSOSelectorModalWrapperComponent', () => {
   templateUrl: './dso-selector-modal-wrapper.component.html',
   imports: [
     DSOSelectorComponent,
-    NgIf,
     TranslateModule,
   ],
   standalone: true,

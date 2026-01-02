@@ -11,7 +11,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { cold } from 'jasmine-marbles';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { RoleService } from '../core/roles/role.service';
 import { Context } from '../core/shared/context.model';
@@ -68,7 +68,7 @@ describe('MyDSpacePageComponent', () => {
   ];
 
   const getRequestEntry$ = (successful: boolean) => {
-    return observableOf({
+    return of({
       response: { isSuccessful: successful, payload: {} } as any,
     } as RequestEntry);
   };
@@ -80,7 +80,7 @@ describe('MyDSpacePageComponent', () => {
 
   beforeEach(waitForAsync(() => {
     roleService = jasmine.createSpyObj('roleService', {
-      checkRole: ()=> observableOf(true),
+      checkRole: ()=> of(true),
     });
     TestBed.configureTestingModule({
       imports: [
@@ -135,8 +135,9 @@ describe('MyDSpacePageComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MyDSpacePageComponent);
     comp = fixture.componentInstance; // SearchPageComponent test instance
-    myDSpaceConfigurationServiceStub.getAvailableConfigurationOptions.and.returnValue(observableOf(configurationList));
-    myDSpaceConfigurationServiceStub.getCurrentConfiguration.and.returnValue(observableOf('test'));
+    myDSpaceConfigurationServiceStub.getAvailableConfigurationOptions.and.returnValue(
+      of(configurationList),
+    );
 
     fixture.detectChanges();
   });

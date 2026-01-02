@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,7 +11,7 @@ import {
 } from '@ngx-translate/core';
 import {
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 
 import { WorkspaceitemSectionIdentifiersObject } from '../../../core/submission/models/workspaceitem-section-identifiers.model';
@@ -37,10 +33,8 @@ import { SectionsService } from '../sections.service';
   templateUrl: './section-identifiers.component.html',
   changeDetection: ChangeDetectionStrategy.Default,
   imports: [
-    TranslateModule,
-    NgForOf,
-    NgIf,
     AsyncPipe,
+    TranslateModule,
     VarDirective,
   ],
   standalone: true,
@@ -103,7 +97,7 @@ export class SubmissionSectionIdentifiersComponent extends SectionModelComponent
    *     the section status
    */
   public getSectionStatus(): Observable<boolean> {
-    return observableOf(!this.isLoading);
+    return of(!this.isLoading);
   }
 
   /**

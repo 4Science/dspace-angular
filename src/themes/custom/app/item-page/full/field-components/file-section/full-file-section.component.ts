@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -23,17 +19,15 @@ import { ThemedThumbnailComponent } from '../../../../../../../app/thumbnail/the
   templateUrl: '../../../../../../../app/item-page/full/field-components/file-section/full-file-section.component.html',
   standalone: true,
   imports: [
-    PaginationComponent,
-    NgIf,
-    TranslateModule,
     AsyncPipe,
-    VarDirective,
-    ThemedThumbnailComponent,
-    NgForOf,
-    ThemedFileDownloadLinkComponent,
+    CanDownloadFilePipe,
     FileSizePipe,
     MetadataFieldWrapperComponent,
-    CanDownloadFilePipe,
+    PaginationComponent,
+    ThemedFileDownloadLinkComponent,
+    ThemedThumbnailComponent,
+    TranslateModule,
+    VarDirective,
   ],
 })
 export class FullFileSectionComponent extends BaseComponent {

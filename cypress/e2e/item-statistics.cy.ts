@@ -23,6 +23,12 @@ describe('Item Statistics Page', () => {
     cy.get('table[data-test="TotalVisits"]').should('be.visible');
   });
 
+  it('should contain a "Total visits per month" section', () => {
+    cy.visit(ITEMSTATISTICSPAGE);
+    // Check just for existence because this table is empty in CI environment as it's historical data
+    cy.get('.'.concat(Cypress.env('DSPACE_TEST_ENTITY_PUBLICATION')).concat('_TotalVisitsPerMonth')).should('exist');
+  });
+
   it('should pass accessibility tests', () => {
     cy.visit(ITEMSTATISTICSPAGE);
 

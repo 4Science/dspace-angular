@@ -33,8 +33,8 @@ import { ImageField } from './image-field';
 @Component({
   templateUrl: './item-page-field.component.html',
   imports: [
-    MetadataValuesComponent,
     AsyncPipe,
+    MetadataValuesComponent,
   ],
   standalone: true,
 })

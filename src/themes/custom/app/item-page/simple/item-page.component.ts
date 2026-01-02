@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgIf,
 } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -11,6 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { CrisItemPageComponent } from '../../../../../app/cris-item-page/cris-item-page.component';
 import { ThemedItemAlertsComponent } from '../../../../../app/item-page/alerts/themed-item-alerts.component';
+import { AccessByTokenNotificationComponent } from '../../../../../app/item-page/simple/access-by-token-notification/access-by-token-notification.component';
 import { ItemPageComponent as BaseComponent } from '../../../../../app/item-page/simple/item-page.component';
 import { NotifyRequestsStatusComponent } from '../../../../../app/item-page/simple/notify-requests-status/notify-requests-status-component/notify-requests-status.component';
 import { QaEventNotificationComponent } from '../../../../../app/item-page/simple/qa-event-notification/qa-event-notification.component';
@@ -22,11 +22,6 @@ import { ThemedLoadingComponent } from '../../../../../app/shared/loading/themed
 import { ListableObjectComponentLoaderComponent } from '../../../../../app/shared/object-collection/shared/listable-object/listable-object-component-loader.component';
 import { VarDirective } from '../../../../../app/shared/utils/var.directive';
 
-/**
- * This component renders a simple item page.
- * The route parameter 'id' is used to request the item it represents.
- * All fields of the item that should be displayed, are defined in its template.
- */
 @Component({
   selector: 'ds-themed-item-page',
   // styleUrls: ['./item-page.component.scss'],
@@ -37,22 +32,20 @@ import { VarDirective } from '../../../../../app/shared/utils/var.directive';
   animations: [fadeInOut],
   standalone: true,
   imports: [
-    VarDirective,
-    ThemedItemAlertsComponent,
+    AccessByTokenNotificationComponent,
+    AsyncPipe,
+    CrisItemPageComponent,
+    ErrorComponent,
+    ItemVersionsComponent,
     ItemVersionsNoticeComponent,
     ListableObjectComponentLoaderComponent,
-    ItemVersionsComponent,
-    ErrorComponent,
-    ThemedLoadingComponent,
-    TranslateModule,
-    AsyncPipe,
-    NgIf,
     NotifyRequestsStatusComponent,
     QaEventNotificationComponent,
-    NgClass,
-    CrisItemPageComponent,
+    ThemedItemAlertsComponent,
+    ThemedLoadingComponent,
+    TranslateModule,
+    VarDirective,
   ],
 })
 export class ItemPageComponent extends BaseComponent {
-
 }

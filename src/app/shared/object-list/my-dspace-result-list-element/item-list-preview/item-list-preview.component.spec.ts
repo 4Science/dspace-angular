@@ -13,7 +13,7 @@ import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { APP_CONFIG } from '../../../../../config/app-config.interface';
 import { Item } from '../../../../core/shared/item.model';
@@ -35,7 +35,7 @@ let component: ItemListPreviewComponent;
 let fixture: ComponentFixture<ItemListPreviewComponent>;
 
 const mockItemWithAuthorAndDate: Item = Object.assign(new Item(), {
-  bundles: observableOf({}),
+  bundles: of({}),
   metadata: {
     'dc.contributor.author': [
       {
@@ -52,7 +52,7 @@ const mockItemWithAuthorAndDate: Item = Object.assign(new Item(), {
   },
 });
 const mockItemWithoutAuthorAndDate: Item = Object.assign(new Item(), {
-  bundles: observableOf({}),
+  bundles: of({}),
   metadata: {
     'dc.title': [
       {
@@ -69,7 +69,7 @@ const mockItemWithoutAuthorAndDate: Item = Object.assign(new Item(), {
   },
 });
 const mockItemWithEntityType: Item = Object.assign(new Item(), {
-  bundles: observableOf({}),
+  bundles: of({}),
   metadata: {
     'dc.title': [
       {

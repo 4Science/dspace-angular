@@ -1,8 +1,4 @@
 import {
-  NgFor,
-  NgIf,
-} from '@angular/common';
-import {
   Component,
   Input,
   OnInit,
@@ -35,7 +31,6 @@ import { SubmissionImportExternalCollectionComponent } from '../import-external-
   styleUrls: ['./submission-import-external-preview.component.scss'],
   templateUrl: './submission-import-external-preview.component.html',
   imports: [
-    NgFor,
     TranslateModule,
     TruncatablePartComponent,
     TruncatableComponent,

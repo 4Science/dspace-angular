@@ -9,9 +9,6 @@ import {
   AsyncPipe,
   isPlatformBrowser,
   NgClass,
-  NgForOf,
-  NgIf,
-  NgTemplateOutlet,
 } from '@angular/common';
 import {
   ChangeDetectorRef,
@@ -55,18 +52,14 @@ const TOOLTIP_TEXT_LIMIT = 21;
   styleUrls: ['./chips.component.scss'],
   templateUrl: './chips.component.html',
   imports: [
-    NgbTooltipModule,
-    NgClass,
-    NgForOf,
     AsyncPipe,
     AuthorityConfidenceStateDirective,
-    NgIf,
-    TranslateModule,
     CdkDrag,
     CdkDropList,
     CdkDropListGroup,
-    NgTemplateOutlet,
-    CdkDropListGroup,
+    NgbTooltipModule,
+    NgClass,
+    TranslateModule,
   ],
   standalone: true,
 })

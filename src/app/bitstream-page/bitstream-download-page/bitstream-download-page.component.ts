@@ -6,28 +6,30 @@ import {
 import {
   Component,
   Inject,
+  inject,
   OnInit,
   PLATFORM_ID,
 } from '@angular/core';
 import {
   ActivatedRoute,
+  Params,
   Router,
 } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
+import {
+  Observable,
+  of,
+} from 'rxjs';
 import {
   map,
   startWith,
   take,
 } from 'rxjs/operators';
 
-import { AuthService } from '../../core/auth/auth.service';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
-import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 import { RemoteData } from '../../core/data/remote-data';
 import { SignpostingDataService } from '../../core/data/signposting-data.service';
 import { SignpostingLink } from '../../core/data/signposting-links.model';
-import { HardRedirectService } from '../../core/services/hard-redirect.service';
 import { ServerResponseService } from '../../core/services/server-response.service';
 import {
   NativeWindowRef,
@@ -63,10 +65,6 @@ export class BitstreamDownloadPageComponent implements OnInit {
     @Inject(NativeWindowService) private _window: NativeWindowRef,
     private route: ActivatedRoute,
     protected router: Router,
-    private authorizationService: AuthorizationDataService,
-    private auth: AuthService,
-    private fileService: FileService,
-    private hardRedirectService: HardRedirectService,
     private location: Location,
     public dsoNameService: DSONameService,
     private signpostingDataService: SignpostingDataService,

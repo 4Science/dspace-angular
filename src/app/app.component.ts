@@ -72,10 +72,9 @@ import { SocialService } from './social/social.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    ThemedRootComponent,
     AsyncPipe,
-    NgIf,
     SocialComponent,
+    ThemedRootComponent,
   ],
 })
 export class AppComponent implements OnInit, AfterViewInit {

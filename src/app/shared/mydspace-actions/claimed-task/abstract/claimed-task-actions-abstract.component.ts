@@ -31,6 +31,7 @@ import { MyDSpaceReloadableActionsComponent } from '../../mydspace-reloadable-ac
  */
 @Component({
   selector: 'ds-claimed-task-action-abstract',
+  standalone: true,
   template: '',
   standalone: true,
 })

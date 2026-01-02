@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -24,14 +21,16 @@ import { ReviewAccountInfoComponent } from './review-account-info/review-account
 @Component({
   templateUrl: './external-login-review-account-info-page.component.html',
   styleUrls: ['./external-login-review-account-info-page.component.scss'],
-  standalone: true,
   imports: [
-    ReviewAccountInfoComponent,
     AlertComponent,
     AsyncPipe,
-    NgIf,
+    ReviewAccountInfoComponent,
   ],
+  standalone: true,
 })
+/**
+ * This component is a wrapper for review-account-info component responsible to provide RegistrationData.
+ */
 export class ExternalLoginReviewAccountInfoPageComponent implements OnInit {
   /**
    * The token used to get the registration data

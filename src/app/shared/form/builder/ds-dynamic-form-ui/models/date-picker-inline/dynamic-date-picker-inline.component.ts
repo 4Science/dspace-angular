@@ -1,7 +1,4 @@
-import {
-  NgClass,
-  NgIf,
-} from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -40,11 +37,10 @@ import { FormFieldMetadataValueObject } from '../../../models/form-field-metadat
   styleUrls: ['./dynamic-date-picker-inline.component.scss'],
   templateUrl: './dynamic-date-picker-inline.component.html',
   imports: [
-    NgClass,
-    NgbDatepickerModule,
-    ReactiveFormsModule,
-    NgIf,
     BtnDisabledDirective,
+    NgbDatepickerModule,
+    NgClass,
+    ReactiveFormsModule,
   ],
   standalone: true,
 })

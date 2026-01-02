@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
-  CommonModule,
-  NgForOf,
-  NgIf,
+  NgClass,
 } from '@angular/common';
 import {
   ChangeDetectorRef,
@@ -71,17 +69,15 @@ import { ItemEditBitstreamBundleComponent } from './item-edit-bitstream-bundle/i
   styleUrls: ['./item-bitstreams.component.scss'],
   templateUrl: './item-bitstreams.component.html',
   imports: [
-    CommonModule,
-    AsyncPipe,
-    TranslateModule,
-    ItemEditBitstreamBundleComponent,
-    RouterLink,
-    NgIf,
-    VarDirective,
-    NgForOf,
-    ThemedLoadingComponent,
     AlertComponent,
+    AsyncPipe,
     BtnDisabledDirective,
+    ItemEditBitstreamBundleComponent,
+    NgClass,
+    RouterLink,
+    ThemedLoadingComponent,
+    TranslateModule,
+    VarDirective,
   ],
   providers: [ObjectValuesPipe],
   standalone: true,
@@ -129,18 +125,6 @@ export class ItemBitstreamsComponent extends AbstractItemUpdateComponent impleme
    * An observable which emits a boolean which represents whether the service is currently handling a 'move' request
    */
   isProcessingMoveRequest: Observable<boolean>;
-
-  /**
-   * The flag indicating to show the load more link
-   */
-  showLoadMoreLink$: BehaviorSubject<boolean> = new BehaviorSubject(true);
-
-  /**
-   * The list of bundles for the current item as an observable
-   */
-  get bundles$(): Observable<Bundle[]> {
-    return this.bundlesSubject.asObservable();
-  }
 
   constructor(
     public itemService: ItemDataService,

@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgComponentOutlet,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   AfterViewChecked,
@@ -15,9 +13,13 @@ import {
 } from '@angular/core';
 import { RouterLinkActive } from '@angular/router';
 import { Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
+import {
+  first,
+  map,
+} from 'rxjs/operators';
 
 import { slide } from '../../shared/animations/slide';
+import { isNotEmpty } from '../../shared/empty.util';
 import { HostWindowService } from '../../shared/host-window.service';
 import { MenuService } from '../../shared/menu/menu.service';
 import { MenuID } from '../../shared/menu/menu-id.model';
@@ -40,8 +42,6 @@ import { NavbarSectionComponent } from '../navbar-section/navbar-section.compone
     AsyncPipe,
     HoverOutsideDirective,
     NgComponentOutlet,
-    NgFor,
-    NgIf,
     RouterLinkActive,
   ],
 })
@@ -84,6 +84,11 @@ export class ExpandableNavbarSectionComponent extends NavbarSectionComponent imp
    */
   private dropdownItems: NodeListOf<HTMLElement>;
 
+  /**
+   * Emits true when the top section has subsections, else emits false
+   */
+  hasSubSections$: Observable<boolean>;
+
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.isMobile$.pipe(
@@ -110,6 +115,9 @@ export class ExpandableNavbarSectionComponent extends NavbarSectionComponent imp
 
   ngOnInit() {
     super.ngOnInit();
+    this.hasSubSections$ = this.subSections$.pipe(
+      map((subSections) => isNotEmpty(subSections)),
+    );
     this.subs.push(this.active$.subscribe((active: boolean) => {
       if (active === true) {
         this.addArrowEventListeners = true;

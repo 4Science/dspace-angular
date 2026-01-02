@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -61,7 +57,13 @@ import { GroupSearchBoxComponent } from './group-search-box/group-search-box.com
     fadeInOut,
   ],
   standalone: true,
-  imports: [NgIf, EpersonSearchBoxComponent, GroupSearchBoxComponent, PaginationComponent, NgFor, AsyncPipe, TranslateModule],
+  imports: [
+    AsyncPipe,
+    EpersonSearchBoxComponent,
+    GroupSearchBoxComponent,
+    PaginationComponent,
+    TranslateModule,
+  ],
 })
 /**
  * Component that shows a list of eperson or group

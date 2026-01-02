@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -39,7 +37,18 @@ import { ObjectSelectComponent } from '../object-select/object-select.component'
   selector: 'ds-item-select',
   templateUrl: './item-select.component.html',
   standalone: true,
-  imports: [VarDirective, NgIf, PaginationComponent, NgFor, FormsModule, RouterLink, ErrorComponent, ThemedLoadingComponent, NgClass, AsyncPipe, TranslateModule, BtnDisabledDirective],
+  imports: [
+    AsyncPipe,
+    BtnDisabledDirective,
+    ErrorComponent,
+    FormsModule,
+    NgClass,
+    PaginationComponent,
+    RouterLink,
+    ThemedLoadingComponent,
+    TranslateModule,
+    VarDirective,
+  ],
 })
 
 /**
@@ -55,7 +64,7 @@ export class ItemSelectComponent extends ObjectSelectComponent<Item> implements 
 
   /**
    * Collection of all the data that is used to display the {@link Item} in the HTML.
-   * By collecting this data here it doesn't need to be recalculated on evey change detection.
+   * By collecting this data here it doesn't need to be recalculated on every change detection.
    */
   selectItems$: Observable<DSpaceObjectSelect<Item>[]>;
 

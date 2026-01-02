@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -26,7 +25,6 @@ import { SidebarService } from './sidebar.service';
   imports: [
     AsyncPipe,
     NgTemplateOutlet,
-    NgIf,
     NgClass,
   ],
 })
@@ -50,6 +48,11 @@ export class PageWithSidebarComponent implements OnInit {
    * Emits true if were on a small screen
    */
   isXsOrSm$: Observable<boolean>;
+
+  /**
+   * Emits true if sidebar is collapsed on XL screen
+   */
+  isSidebarCollapsedXL$: Observable<boolean>;
 
   /**
    * The width of the sidebar (bootstrap columns)
@@ -77,6 +80,8 @@ export class PageWithSidebarComponent implements OnInit {
     this.sidebarClasses$ = this.isSidebarCollapsed().pipe(
       map((isCollapsed) => isCollapsed ? '' : 'active'),
     );
+
+    this.isSidebarCollapsedXL$ = this.isSidebarCollapsedXL();
   }
 
   /**

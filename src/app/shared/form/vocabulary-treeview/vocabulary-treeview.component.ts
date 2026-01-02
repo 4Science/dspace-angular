@@ -2,10 +2,7 @@ import {
   CdkTreeModule,
   FlatTreeControl,
 } from '@angular/cdk/tree';
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -30,9 +27,9 @@ import {
   switchMap,
   tap,
 } from 'rxjs/operators';
+import { getFirstCompletedRemoteData } from 'src/app/core/shared/operators';
 
 import { RemoteData } from '../../../core/data/remote-data';
-import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { PageInfo } from '../../../core/shared/page-info.model';
 import { Vocabulary } from '../../../core/submission/vocabularies/models/vocabulary.model';
 import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
@@ -69,15 +66,14 @@ export type VocabularyTreeItemType = FormFieldMetadataValueObject | VocabularyEn
   templateUrl: './vocabulary-treeview.component.html',
   styleUrls: ['./vocabulary-treeview.component.scss'],
   imports: [
+    AlertComponent,
+    AsyncPipe,
+    BtnDisabledDirective,
+    CdkTreeModule,
     FormsModule,
     NgbTooltipModule,
-    NgIf,
-    CdkTreeModule,
-    TranslateModule,
-    AsyncPipe,
     ThemedLoadingComponent,
-    AlertComponent,
-    BtnDisabledDirective,
+    TranslateModule,
   ],
   standalone: true,
 })
@@ -214,6 +210,7 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges
     if (existingNode && existingNode.item.id !== LOAD_MORE && existingNode.item.id !== LOAD_MORE_ROOT) {
       return existingNode;
     }
+
     const newNode: TreeviewFlatNode = new TreeviewFlatNode(
       node.item,
       level,

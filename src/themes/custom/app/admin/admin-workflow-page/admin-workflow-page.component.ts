@@ -10,7 +10,9 @@ import { ThemedConfigurationSearchPageComponent } from '../../../../../app/searc
   // templateUrl: './admin-workflow-page.component.html',
   templateUrl: '../../../../../app/admin/admin-workflow-page/admin-workflow-page.component.html',
   standalone: true,
-  imports: [ThemedConfigurationSearchPageComponent],
+  imports: [
+    ThemedConfigurationSearchPageComponent,
+  ],
 })
 export class AdminWorkflowPageComponent extends BaseComponent {
 }

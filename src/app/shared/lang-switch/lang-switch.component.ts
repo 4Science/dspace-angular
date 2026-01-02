@@ -1,7 +1,4 @@
-import {
-  NgFor,
-  NgIf,
-} from '@angular/common';
+
 import {
   Component,
   ElementRef,
@@ -23,7 +20,11 @@ import { BrowserOnlyDirective } from '../utils/browser-only.directive';
   styleUrls: ['lang-switch.component.scss'],
   templateUrl: 'lang-switch.component.html',
   standalone: true,
-  imports: [NgIf, NgbDropdownModule, NgFor, TranslateModule, BrowserOnlyDirective],
+  imports: [
+    BrowserOnlyDirective,
+    NgbDropdownModule,
+    TranslateModule,
+  ],
 })
 
 /**

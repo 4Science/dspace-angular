@@ -18,7 +18,7 @@ import {
 } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { AuthenticateAction } from '../../core/auth/auth.actions';
 import { AuthService } from '../../core/auth/auth.service';
@@ -56,7 +56,7 @@ describe('ForgotPasswordFormComponent', () => {
 
   beforeEach(waitForAsync(() => {
 
-    route = { data: observableOf({ registration: createSuccessfulRemoteDataObject(registration) }) };
+    route = { data: of({ registration: createSuccessfulRemoteDataObject(registration) }) };
     router = new RouterStub();
     notificationsService = new NotificationsServiceStub();
 

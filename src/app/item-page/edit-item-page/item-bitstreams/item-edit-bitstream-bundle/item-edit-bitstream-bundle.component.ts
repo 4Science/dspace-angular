@@ -3,10 +3,7 @@ import {
   CdkDragDrop,
   CdkDropList,
 } from '@angular/cdk/drag-drop';
-import {
-  AsyncPipe,
-  CommonModule,
-} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   Component,
   Input,
@@ -78,17 +75,16 @@ import {
   styleUrls: ['../item-bitstreams.component.scss', './item-edit-bitstream-bundle.component.scss'],
   templateUrl: './item-edit-bitstream-bundle.component.html',
   imports: [
-    CommonModule,
-    TranslateModule,
-    RouterLink,
-    AsyncPipe,
-    PaginationComponent,
-    NgbTooltipModule,
-    CdkDropList,
-    NgbDropdownModule,
-    CdkDrag,
     BrowserOnlyPipe,
     BtnDisabledDirective,
+    CdkDrag,
+    CdkDropList,
+    CommonModule,
+    NgbDropdownModule,
+    NgbTooltipModule,
+    PaginationComponent,
+    RouterLink,
+    TranslateModule,
   ],
   standalone: true,
 })

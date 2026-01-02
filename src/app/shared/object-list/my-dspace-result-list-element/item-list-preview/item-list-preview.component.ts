@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -51,8 +49,6 @@ import { AdditionalMetadataComponent } from '../../search-result-list-element/ad
     ItemCollectionComponent,
     ItemSubmitterComponent,
     NgClass,
-    NgFor,
-    NgIf,
     ThemedBadgesComponent,
     ThemedThumbnailComponent,
     TranslateModule,

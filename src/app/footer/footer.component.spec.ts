@@ -101,7 +101,7 @@ describe('Footer component', () => {
     expect(comp.showEndUserAgreement).toBe(environment.info.enableEndUserAgreement);
   });
 
-  describe('showCookieSettings', () => {
+  describe('openCookieSettings', () => {
     it('should call cookies.showSettings() if cookies is defined', () => {
       const cookies = jasmine.createSpyObj('cookies', ['showSettings']);
       comp.cookies = cookies;

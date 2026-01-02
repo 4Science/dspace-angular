@@ -12,7 +12,7 @@ import {
 } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { cold } from 'jasmine-marbles';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { APP_DATA_SERVICES_MAP } from '../../../../config/app-config.interface';
 import { SubmissionUploadsModel } from '../../../core/config/models/config-submission-uploads.model';
@@ -156,7 +156,7 @@ describe('SubmissionSectionUploadComponent test suite', () => {
     uploadsConfigService = getMockSubmissionUploadsConfigService();
 
     prepareComp = () => {
-      submissionServiceStub.getSubmissionObject.and.returnValue(observableOf(submissionState));
+      submissionServiceStub.getSubmissionObject.and.returnValue(of(submissionState));
 
       collectionDataService.findById.and.returnValue(createSuccessfulRemoteDataObject$(Object.assign(new Collection(), mockCollection, {
         defaultAccessConditions: createSuccessfulRemoteDataObject$(mockDefaultAccessCondition),
@@ -173,8 +173,8 @@ describe('SubmissionSectionUploadComponent test suite', () => {
         createSuccessfulRemoteDataObject$(Object.assign(new Group(), mockGroup)),
       );
 
-      bitstreamService.getUploadedFileList.and.returnValue(observableOf([]));
-      bitstreamService.getUploadedFilesData.and.returnValue(observableOf({ primary: null, files: [] }));
+      bitstreamService.getUploadedFileList.and.returnValue(of([]));
+      bitstreamService.getUploadedFilesData.and.returnValue(of({ primary: null, files: [] }));
     };
 
     TestBed.configureTestingModule({
@@ -250,8 +250,8 @@ describe('SubmissionSectionUploadComponent test suite', () => {
     });
 
     it('should init component properly', () => {
-      bitstreamService.getUploadedFilesData.and.returnValue(observableOf({ primary: null, files: [] }));
-      submissionServiceStub.getSubmissionObject.and.returnValue(observableOf(submissionState));
+      bitstreamService.getUploadedFilesData.and.returnValue(of({ primary: null, files: [] }));
+      submissionServiceStub.getSubmissionObject.and.returnValue(of(submissionState));
 
       collectionDataService.findById.and.returnValue(createSuccessfulRemoteDataObject$(Object.assign(new Collection(), mockCollection, {
         defaultAccessConditions: createSuccessfulRemoteDataObject$(mockDefaultAccessCondition),
@@ -281,9 +281,9 @@ describe('SubmissionSectionUploadComponent test suite', () => {
     });
 
     it('should init file list properly', () => {
-      bitstreamService.getUploadedFilesData.and.returnValue(observableOf({ primary: null, files: [] }));
+      bitstreamService.getUploadedFilesData.and.returnValue(of({ primary: null, files: [] }));
 
-      submissionServiceStub.getSubmissionObject.and.returnValue(observableOf(submissionState));
+      submissionServiceStub.getSubmissionObject.and.returnValue(of(submissionState));
 
       collectionDataService.findById.and.returnValue(createSuccessfulRemoteDataObject$(mockCollection));
 
@@ -296,7 +296,7 @@ describe('SubmissionSectionUploadComponent test suite', () => {
         createSuccessfulRemoteDataObject$(Object.assign(new Group(), mockGroup)),
       );
 
-      bitstreamService.getUploadedFilesData.and.returnValue(observableOf(mockUploadFilesData));
+      bitstreamService.getUploadedFilesData.and.returnValue(of(mockUploadFilesData));
 
       comp.onSectionInit();
 
@@ -319,11 +319,11 @@ describe('SubmissionSectionUploadComponent test suite', () => {
     });
 
     it('should properly read the section status when required is true', () => {
-      bitstreamService.getUploadedFilesData.and.returnValue(observableOf({ primary: null, files: [] }));
+      bitstreamService.getUploadedFilesData.and.returnValue(of({ primary: null, files: [] }));
 
-      submissionServiceStub.getSubmissionObject.and.returnValue(observableOf(submissionState));
+      submissionServiceStub.getSubmissionObject.and.returnValue(of(submissionState));
 
-      sectionsServiceStub.getSectionErrors.and.returnValue(observableOf([]));
+      sectionsServiceStub.getSectionErrors.and.returnValue(of([]));
 
       collectionDataService.findById.and.returnValue(createSuccessfulRemoteDataObject$(mockCollection));
 
@@ -352,11 +352,11 @@ describe('SubmissionSectionUploadComponent test suite', () => {
     });
 
     it('should properly read the section status when required is false', () => {
-      submissionServiceStub.getSubmissionObject.and.returnValue(observableOf(submissionState));
+      submissionServiceStub.getSubmissionObject.and.returnValue(of(submissionState));
 
-      bitstreamService.getUploadedFilesData.and.returnValue(observableOf({ primary: null, files: [] }));
+      bitstreamService.getUploadedFilesData.and.returnValue(of({ primary: null, files: [] }));
 
-      sectionsServiceStub.getSectionErrors.and.returnValue(observableOf([]));
+      sectionsServiceStub.getSectionErrors.and.returnValue(of([]));
 
       collectionDataService.findById.and.returnValue(createSuccessfulRemoteDataObject$(mockCollection));
 
@@ -391,8 +391,7 @@ describe('SubmissionSectionUploadComponent test suite', () => {
   selector: 'ds-test-cmp',
   template: ``,
   standalone: true,
-  imports: [
-    CommonModule],
+  imports: [],
 })
 class TestComponent {
 

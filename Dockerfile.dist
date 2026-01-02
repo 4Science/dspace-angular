@@ -18,8 +18,8 @@ COPY . /app/
 WORKDIR /app
 
 # Build Angular app
-RUN yarn build:prod
-RUN yarn build:mirador
+RUN npm run build:prod
+RUN npm run build:mirador
 
 # ---- Production image ----
 FROM docker.io/node:${NODE_VERSION-22}-alpine AS prod

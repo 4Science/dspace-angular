@@ -26,7 +26,7 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import {
   BehaviorSubject,
-  of as observableOf,
+  of,
 } from 'rxjs';
 
 import {
@@ -43,6 +43,7 @@ import { MenuComponent } from './menu.component';
 import { MenuService } from './menu.service';
 import { MenuID } from './menu-id.model';
 import { LinkMenuItemModel } from './menu-item/models/link.model';
+import { TextMenuItemModel } from './menu-item/models/text.model';
 import { MenuItemType } from './menu-item-type.model';
 import { rendersSectionForMenu } from './menu-section.decorator';
 import { MenuSection } from './menu-section.model';
@@ -63,6 +64,7 @@ class TestExpandableMenuComponent {
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: '',
   template: '',
+  standalone: true,
 })
 @rendersSectionForMenu(mockMenuID, false)
 class TestMenuComponent {
@@ -73,6 +75,17 @@ describe('MenuComponent', () => {
   let fixture: ComponentFixture<MenuComponent>;
   let menuService: MenuService;
   let store: MockStore;
+  let router: any;
+
+  const menuSection: MenuSection =       {
+    id: 'browse',
+    model: {
+      type: MenuItemType.TEXT,
+      text: 'menu.section.browse_global',
+    } as TextMenuItemModel,
+    icon: 'globe',
+    visible: true,
+  };
 
   let authorizationService: AuthorizationDataService;
 
@@ -89,7 +102,7 @@ describe('MenuComponent', () => {
   });
 
   const routeStub = {
-    data: observableOf({
+    data: of({
       dso: createSuccessfulRemoteDataObject(mockItem),
     }),
     children: [],
@@ -109,6 +122,7 @@ describe('MenuComponent', () => {
             id: 'section1',
             active: false,
             visible: true,
+            alwaysRenderExpandable: false,
             model: {
               type: MenuItemType.LINK,
               text: 'test',
@@ -124,11 +138,11 @@ describe('MenuComponent', () => {
   beforeEach(waitForAsync(() => {
 
     authorizationService = jasmine.createSpyObj('authorizationService', {
-      isAuthorized: observableOf(false),
+      isAuthorized: of(false),
     });
 
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), NoopAnimationsModule, RouterTestingModule, MenuComponent, StoreModule.forRoot(authReducer, storeModuleConfig)],
+      imports: [TranslateModule.forRoot(), NoopAnimationsModule, RouterTestingModule, MenuComponent, StoreModule.forRoot(authReducer, storeModuleConfig), TestExpandableMenuComponent, TestMenuComponent],
       providers: [
         Injector,
         { provide: ThemeService, useValue: getMockThemeService() },
@@ -136,8 +150,6 @@ describe('MenuComponent', () => {
         provideMockStore({ initialState }),
         { provide: AuthorizationDataService, useValue: authorizationService },
         { provide: ActivatedRoute, useValue: routeStub },
-        TestExpandableMenuComponent,
-        TestMenuComponent,
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(MenuComponent, {
@@ -151,7 +163,7 @@ describe('MenuComponent', () => {
     comp.menuID = mockMenuID;
     menuService = TestBed.inject(MenuService);
     store = TestBed.inject(Store) as MockStore<AppState>;
-    spyOn(comp as any, 'getSectionDataInjector').and.returnValue(MenuSection);
+    spyOn(comp as any, 'getSectionDataInjector').and.returnValue(menuSection);
     fixture.detectChanges();
   });
 
@@ -176,6 +188,7 @@ describe('MenuComponent', () => {
                 id: 'section1',
                 active: false,
                 visible: true,
+                alwaysRenderExpandable: false,
                 model: {
                   type: MenuItemType.LINK,
                   text: 'test',
@@ -187,6 +200,7 @@ describe('MenuComponent', () => {
                 parentID: 'section1',
                 active: false,
                 visible: true,
+                alwaysRenderExpandable: false,
                 model: {
                   type: MenuItemType.LINK,
                   text: 'test',

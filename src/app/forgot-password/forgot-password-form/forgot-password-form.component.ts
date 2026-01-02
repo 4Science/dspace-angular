@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -39,12 +36,11 @@ import { BrowserOnlyPipe } from '../../shared/utils/browser-only.pipe';
   styleUrls: ['./forgot-password-form.component.scss'],
   templateUrl: './forgot-password-form.component.html',
   imports: [
-    TranslateModule,
-    BrowserOnlyPipe,
-    ProfilePageSecurityFormComponent,
     AsyncPipe,
-    NgIf,
+    BrowserOnlyPipe,
     BtnDisabledDirective,
+    ProfilePageSecurityFormComponent,
+    TranslateModule,
   ],
   standalone: true,
 })

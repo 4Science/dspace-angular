@@ -23,11 +23,12 @@ import { DatadogRumConfig } from './datadog-rum-config.interfaces';
 import { DiscoverySortConfig } from './discovery-sort.config';
 import { FilterVocabularyConfig } from './filter-vocabulary-config';
 import { FormConfig } from './form-config.interfaces';
-import { HomeConfig } from './homepage-config.interface';
 import {
   IdentifierSubtypesConfig,
   IdentifierSubtypesIconPositionEnum,
 } from './identifier-subtypes-config.interface';
+import { GeospatialMapConfig } from './geospatial-map-config';
+import { HomeConfig } from './homepage-config.interface';
 import { InfoConfig } from './info-config.interface';
 import { ItemConfig } from './item-config.interface';
 import { LangConfig } from './lang-config.interface';
@@ -38,6 +39,7 @@ import {
 } from './layout-config.interfaces';
 import { LoaderConfig } from './loader-config.interfaces';
 import { MarkdownConfig } from './markdown-config.interface';
+import { MatomoConfig } from './matomo-config.interface';
 import { MediaViewerConfig } from './media-viewer-config.interface';
 import { MetaTagsConfig } from './meta-tags.config';
 import { MetadataLinkViewPopoverDataConfig } from './metadata-link-view-popoverdata-config.interface';
@@ -342,15 +344,18 @@ export class DefaultAppConfig implements AppConfig {
     { code: 'fi', label: 'Suomi', active: false },
     { code: 'fr', label: 'Français', active: true },
     { code: 'gd', label: 'Gàidhlig', active: false },
+    { code: 'gu', label: 'ગુજરાતી', active: false },
     { code: 'hi', label: 'हिंदी', active: false },
     { code: 'hu', label: 'Magyar', active: false },
     { code: 'it', label: 'Italiano', active: false },
     { code: 'kk', label: 'Қазақ', active: false },
     { code: 'lv', label: 'Latviešu', active: false },
+    { code: 'mr', label: 'मराठी', active: false },
     { code: 'nl', label: 'Nederlands', active: false },
     { code: 'pl', label: 'Polski', active: false },
     { code: 'pt-PT', label: 'Português', active: false },
     { code: 'pt-BR', label: 'Português do Brasil', active: false },
+    { code: 'ru', label: 'Русский', active: false },
     { code: 'sr-lat', label: 'Srpski (lat)', active: false },
     { code: 'sr-cyr', label: 'Српски', active: false },
     { code: 'sv', label: 'Svenska', active: false },
@@ -408,6 +413,8 @@ export class DefaultAppConfig implements AppConfig {
       // Rounded to the nearest size in the list of selectable sizes on the
       // settings menu.  See pageSizeOptions in 'pagination-component-options.model.ts'.
       pageSize: 5,
+      // Show the bitstream access status label
+      showAccessStatuses: false,
     },
     // The maximum number of metadata values to add to the metatag list of the item page
     metatagLimit: 20,
@@ -723,6 +730,29 @@ export class DefaultAppConfig implements AppConfig {
   liveRegion: LiveRegionConfig = {
     messageTimeOutDurationMs: 30000,
     isVisible: false,
+  };
+
+  matomo: MatomoConfig = {};
+
+  // Leaflet tile providers and other configurable attributes
+  geospatialMapViewer: GeospatialMapConfig = {
+    spatialMetadataFields: [
+      'dcterms.spatial',
+    ],
+    spatialFacetDiscoveryConfiguration: 'geospatial',
+    spatialPointFilterName: 'point',
+    enableItemPageFields: false,
+    enableSearchViewMode: false,
+    enableBrowseMap: false,
+    tileProviders: [
+      'OpenStreetMap.Mapnik',
+    ],
+    // Starting centre point for maps (before drawing and zooming to markers)
+    // Defaults to Istanbul
+    defaultCentrePoint: {
+      lat: 41.015137,
+      lng: 28.979530,
+    },
   };
 
   // Accessibility settings configuration, used by the AccessibilitySettingsService

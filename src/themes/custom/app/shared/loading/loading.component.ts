@@ -18,5 +18,4 @@ import { LoadingComponent as BaseComponent } from '../../../../../app/shared/loa
   imports: [NgIf, NgSwitchCase, NgSwitch, AlertComponent],
 })
 export class LoadingComponent extends BaseComponent {
-
 }

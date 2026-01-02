@@ -75,7 +75,10 @@ describe('UploaderComponent test', () => {
   selector: 'ds-test-cmp',
   template: ``,
   standalone: true,
-  imports: [FileUploadModule, UploaderComponent],
+  imports: [
+    FileUploadModule,
+    UploaderComponent,
+  ],
 })
 class TestComponent {
   public uploadFilesOptions: UploaderOptions = Object.assign(new UploaderOptions(), {

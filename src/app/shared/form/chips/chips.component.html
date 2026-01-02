@@ -3,74 +3,88 @@
   <ng-content></ng-content>
 </ng-template>
 
-<div [className]="'float-left w-100 ' + wrapperClass">
-  <div  *ngIf="isPlatformBrowser" role="list" class="nav nav-pills d-flex flex-column flex-sm-row" cdkDropListGroup>
-    <ng-container *ngFor="let c of chips.getChips(); let i = index">
-      <ng-template #tipContent>
-          <p class="text-left p-0 m-0" *ngFor="let tip of (tipText$ | async)">
-          {{tip}}
-        </p>
-      </ng-template>
-      <div role="listitem" class="nav-item mr-2 mb-1 d-flex flex-row"
-           #t="ngbTooltip"
-           triggers="manual"
-           cdkDropList
-           [cdkDropListData]="{ index: i }"
-           cdkDropListOrientation="horizontal"
-           (cdkDropListDropped)="onDrop($event)"
-           [ngbTooltip]="tipContent"
-           (mouseover)="showTooltip(t, i)"
-           (mouseout)="t.close()">
-        <a class="flex-sm-fill text-sm-center nav-link active bg-info"
-           cdkDrag
-           (cdkDragStarted)="onDrag(i)"
-           href="#"
-           [class.disabled]="!clickable || (editable && c.editMode) || dragged === i  "
-           [class.chip-selected]="(editable && c.editMode) || dragged === i"
-           (click)="chipsSelected($event, i);">
-          <span>
-            <i *ngIf="showIcons && !c.isNestedItem()" dsAuthorityConfidenceState [authorityValue]="c.item" class="far fa-circle" aria-hidden="true">&nbsp;</i>
-            <ng-container *ngIf="showIcons && c.hasVisibleIcons()">
-              <span *ngFor="let icon of c.icons; let l = last" class="chip-stacked-icons">
-                <i [ngbTooltip]="tipContent"
-                   placement="right"
-                   triggers="manual"
-                   #t="ngbTooltip"
-                   class="{{icon.style}}"
-                   [class.mr-1]="!l"
-                   [class.mr-2]="l"
-                   dsAuthorityConfidenceState
-                   [authorityValue]="c.item[icon.metadata] || c.item"
-                   [visibleWhenAuthorityEmpty]="icon.visibleWhenAuthorityEmpty"
-                   [showTooltip]="false"
-                   aria-hidden="true"
-                   (mouseover)="showTooltip(t, i, icon.metadata)"
-                   (mouseout)="t.close()"></i>
-                <i *ngIf="hasWillBeGenerated(c, icon.metadata)"
-                   dsAuthorityConfidenceState
-                   [authorityValue]="c.item[icon.metadata] || c.item"
-                   [visibleWhenAuthorityEmpty]="icon.visibleWhenAuthorityEmpty"
-                   class="fas fa-plus fa-stack-1x chip-stacked-icon"></i>
-                <i *ngIf="hasWillBeReferenced(c, icon.metadata)"
-                   dsAuthorityConfidenceState
-                   [authorityValue]="c.item[icon.metadata] || c.item"
-                   [visibleWhenAuthorityEmpty]="icon.visibleWhenAuthorityEmpty"
-                   class="fas fa-search fa-stack-1x chip-stacked-icon"></i>
-              </span>
+<div [className]="'float-start w-100 ' + wrapperClass">
+  @if (isPlatformBrowser) {
+    <div role="list" class="nav nav-pills d-flex flex-column flex-sm-row" cdkDropListGroup>
+      @for (c of chips.getChips(); track c; let i = $index) {
+        <ng-container>
+          <ng-template #tipContent>
+            @for (tip of (tipText$ | async); track tip) {
+              <p class="text-start p-0 m-0">
+                {{tip}}
+              </p>
+            }
+          </ng-template>
+          <div role="listitem" class="nav-item me-2 mb-1 d-flex flex-row"
+               #t="ngbTooltip"
+               triggers="manual"
+               cdkDropList
+               [cdkDropListData]="{ index: i }"
+               cdkDropListOrientation="horizontal"
+               (cdkDropListDropped)="onDrop($event)"
+               [ngbTooltip]="tipContent"
+               (mouseover)="showTooltip(t, i)"
+               (mouseout)="t.close()">
+            <a class="flex-sm-fill text-sm-center nav-link active bg-info"
+               cdkDrag
+               (cdkDragStarted)="onDrag(i)"
+               href="#"
+               [class.disabled]="!clickable || (editable && c.editMode) || dragged === i  "
+               [class.chip-selected]="(editable && c.editMode) || dragged === i"
+               (click)="chipsSelected($event, i);">
+              <span>
+                @if (showIcons && !c.isNestedItem()) {
+                  <i dsAuthorityConfidenceState [authorityValue]="c.item" class="far fa-circle" aria-hidden="true">&nbsp;</i>
+                }
+                @if (showIcons && c.hasVisibleIcons()) {
+                  <ng-container>
+                    @for (icon of c.icons; track icon; let l = $last) {
+                      <span class="chip-stacked-icons">
+                        <i [ngbTooltip]="tipContent"
+                           placement="right"
+                           triggers="manual"
+                           #t="ngbTooltip"
+                           class="{{icon.style}}"
+                           [class.me-1]="!l"
+                           [class.me-2]="l"
+                           dsAuthorityConfidenceState
+                           [authorityValue]="c.item[icon.metadata] || c.item"
+                           [visibleWhenAuthorityEmpty]="icon.visibleWhenAuthorityEmpty"
+                           [showTooltip]="false"
+                           aria-hidden="true"
+                           (mouseover)="showTooltip(t, i, icon.metadata)"
+                           (mouseout)="t.close()"></i>
+                        @if (hasWillBeGenerated(c, icon.metadata)) {
+                          <i dsAuthorityConfidenceState
+                             [authorityValue]="c.item[icon.metadata] || c.item"
+                             [visibleWhenAuthorityEmpty]="icon.visibleWhenAuthorityEmpty"
+                             class="fas fa-plus fa-stack-1x chip-stacked-icon"></i>
+                        }
+                        @if (hasWillBeReferenced(c, icon.metadata)) {
+                          <i dsAuthorityConfidenceState
+                             [authorityValue]="c.item[icon.metadata] || c.item"
+                             [visibleWhenAuthorityEmpty]="icon.visibleWhenAuthorityEmpty"
+                             class="fas fa-search fa-stack-1x chip-stacked-icon"></i>
+                        }
+                      </span>
+                    }
 
-            </ng-container>
-           <p class="d-table-cell">{{textTruncate(c.display)}}</p>
-            <i *ngIf="editable" class="fas fa-times ml-2"
-               (click)="removeChips($event, i)"
-               [title]="'chips.remove' | translate"></i>
-          </span>
-        </a>
+                  </ng-container>
+                }
+               <p class="d-table-cell">{{textTruncate(c.display)}}</p>
+                <i *ngIf="editable" class="fas fa-times ms-2"
+                   (click)="removeChips($event, i)"
+                   [title]="'chips.remove' | translate"></i>
+              </span>
+            </a>
+          </div>
+        </ng-container>
+      }
+      <div [class.chips-sort-ignore]="(isDragging | async)" class="flex-grow-1">
+        <ng-container *ngTemplateOutlet="inputContent"></ng-container>
       </div>
-    </ng-container>
-    <div [class.chips-sort-ignore]="(isDragging | async)" class="flex-grow-1">
-      <ng-container *ngTemplateOutlet="inputContent"></ng-container>
     </div>
-  </div>
+  }
 
   <div *ngIf="!isPlatformBrowser" role="list" class="nav nav-pills d-flex flex-column flex-sm-row">
     <ng-container *ngFor="let c of chips.getChips(); let i = index">
@@ -80,7 +94,7 @@
         </p>
       </ng-template>
 
-      <div role="listitem" class="nav-item mr-2 mb-1">
+      <div role="listitem" class="nav-item me-2 mb-1">
         <a class="flex-sm-fill text-sm-center nav-link active bg-info"
            href="javascript:void(0);">
           <span>
@@ -88,8 +102,8 @@
             <ng-container *ngIf="showIcons && c.hasVisibleIcons()">
               <span *ngFor="let icon of c.icons; let l = last" class="chip-stacked-icons">
                 <i class="{{icon.style}}"
-                   [class.mr-1]="!l"
-                   [class.mr-2]="l"
+                   [class.me-1]="!l"
+                   [class.me-2]="l"
                    dsAuthorityConfidenceState
                    [authorityValue]="c.item[icon.metadata] || c.item"
                    [visibleWhenAuthorityEmpty]="icon.visibleWhenAuthorityEmpty"
@@ -109,7 +123,7 @@
 
             </ng-container>
            <p class="d-table-cell">{{textTruncate(c.display)}}</p>
-            <i *ngIf="editable" class="fas fa-times ml-2"
+            <i *ngIf="editable" class="fas fa-times ms-2"
                (click)="removeChips($event, i)"
                [title]="'chips.remove' | translate"></i>
           </span>
