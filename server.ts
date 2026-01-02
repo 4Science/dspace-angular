@@ -256,6 +256,11 @@ export function app() {
   server.get('/app/client/health', clientHealthCheck);
 
   /**
+   * Redirecting old manifest
+   */
+  server.get('/json/iiif/**/manifest', redirectManifest);
+
+  /**
    * Default sending all incoming requests to ngApp() function, after first checking for a cached
    * copy of the page (see cacheCheck())
    */
@@ -721,6 +726,39 @@ function healthCheck(req, res) {
     });
 }
 
+/*
+ * The callback function to redirect old manifest
+ */
+function redirectManifest(req, res) {
+  console.info('Redirecting old manifest');
+  const url = req.url;
+  const regex = /json\/iiif\/([^\/]+\/[^\/]+)(?:\/([^\/]+))?\/manifest/;
+  const match = url.match(regex);
+  let handle;
+  let id;
+
+  if (match) {
+    handle = match[1];
+    const baseUrl = `${environment.rest.baseUrl}/api/pid/find?id=${handle}`;
+    axios.get(baseUrl)
+      .then((response) => {
+        if (response.status === 200) {
+          const newUrl = `${environment.rest.baseUrl}/iiif/${response.data.id}/manifest`;
+          console.info('Manifest found, redirect to ', newUrl);
+          res.redirect(newUrl);
+        }
+      })
+      .catch((error) => {
+        res.status(error.response.status).send({
+          error: error.message
+        });
+      });
+  } else {
+    res.status(422).send({
+      error: 'Wrong handle'
+    });
+  }
+}
 
 // Webpack will replace 'require' with '__webpack_require__'
 // '__non_webpack_require__' is a proxy to Node 'require'

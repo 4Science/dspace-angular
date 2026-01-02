@@ -141,7 +141,7 @@ export class DsDynamicRelationGroupModalComponent extends DynamicFormControlComp
     if (this.item) {
       this.formModel.forEach((row) => {
         const modelRow = row as DynamicFormGroupModel;
-        modelRow.group.forEach((model: DynamicInputModel) => {
+        modelRow.group.forEach((model: DsDynamicInputModel) => {
           const value = (this.item[model.name] === PLACEHOLDER_PARENT_METADATA
             || this.item[model.name].value === PLACEHOLDER_PARENT_METADATA)
             ? null
@@ -150,6 +150,9 @@ export class DsDynamicRelationGroupModalComponent extends DynamicFormControlComp
             value.value : value;
           if (isNotEmpty(nextValue)) {
             model.value = nextValue;
+            if (isNotEmpty(nextValue?.language)) {
+              model.language = nextValue.language;
+            }
           }
 
           this.initSecurityLevelConfig(model, modelRow);
@@ -256,6 +259,7 @@ export class DsDynamicRelationGroupModalComponent extends DynamicFormControlComp
     const model = this.getMandatoryFieldModel();
     const currentValue: string = (model.value instanceof FormFieldMetadataValueObject
       || model.value instanceof VocabularyEntry) ? model.value.value : model.value;
+    const currentLang: string = (model.value instanceof FormFieldMetadataValueObject) ? model.value.language : model.language;
     let security = null;
     if (this.model.value instanceof VocabularyEntry) {
       security = this.model.value.securityLevel;
@@ -264,7 +268,7 @@ export class DsDynamicRelationGroupModalComponent extends DynamicFormControlComp
         security = this.model.metadataValue.securityLevel;
       }
     }
-    const valueWithAuthority: any = new FormFieldMetadataValueObject(currentValue, null, security, authority);
+    const valueWithAuthority: any = new FormFieldMetadataValueObject(currentValue, currentLang, security, authority);
     model.value = valueWithAuthority;
     this.modifyChip();
     setTimeout(() => {
@@ -344,7 +348,8 @@ export class DsDynamicRelationGroupModalComponent extends DynamicFormControlComp
 
         item[control.name] =
           new FormFieldMetadataValueObject(
-            controlValue, (control as any)?.language,
+            controlValue,
+            mainModel?.language,
             controlValue === PLACEHOLDER_PARENT_METADATA ? null : mainModel.securityLevel,
             controlAuthority,
             null, 0, null,

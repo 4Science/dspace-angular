@@ -2,9 +2,12 @@
   <div
     [ngClass]="{'container': (itemRD?.hasSucceeded && !itemRD?.hasNoContent) && tabsRD?.payload?.pageInfo?.totalElements < 1}"
     *ngVar="(itemRD$ | async) as itemRD">
-    <div [ngClass]="{'container': (itemRD?.hasSucceeded && !itemRD?.hasNoContent) && tabsRD?.payload?.pageInfo?.totalElements > 0}">
-      <ds-item-versions-notice [item]="itemRD?.payload" ></ds-item-versions-notice>
-    </div>
+    @let isCrisItemPage = (itemRD?.hasSucceeded && !itemRD?.hasNoContent) && tabsRD?.payload?.pageInfo?.totalElements > 0;
+    @if (isCrisItemPage) {
+      <div [ngClass]="{'container': (itemRD?.hasSucceeded && !itemRD?.hasNoContent) && tabsRD?.payload?.pageInfo?.totalElements > 0}">
+        <ds-item-versions-notice [item]="itemRD?.payload" ></ds-item-versions-notice>
+      </div>
+    }
     @if ((itemRD?.hasSucceeded && !itemRD?.hasNoContent) && tabsRD?.payload?.pageInfo?.totalElements < 1) {
       <div class="item-page" @fadeInOut>
         @if (itemRD?.payload; as item) {
@@ -22,7 +25,7 @@
         }
       </div>
     }
-    @if ((itemRD?.hasSucceeded && !itemRD?.hasNoContent) && tabsRD?.payload?.pageInfo?.totalElements > 0) {
+    @if (isCrisItemPage) {
       <ds-cris-item-page></ds-cris-item-page>
     }
     @if (itemRD?.hasFailed) {

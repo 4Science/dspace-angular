@@ -4,6 +4,10 @@
 
 img {
   max-width: 100%;
+  // Apply Chrome SVG fallback for non-explicitly sized containers in Firefox
+  &[src$=".svg"] {
+    width: 300px !important;
+  }
 }
 
 .outer {  // .outer/.inner generated ~ https://ratiobuddy.com/

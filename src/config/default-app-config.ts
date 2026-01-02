@@ -149,7 +149,7 @@ export class DefaultAppConfig implements AppConfig {
       // This is independent from the idle warning.
       timeLeftBeforeTokenRefresh: 2 * 60 * 1000, // 2 minutes
     },
-    disableStandardLogin: true, // Enable the standard login form
+    isPasswordLoginEnabledForAdminsOnly: false, // Enable the standard login form
   };
 
   // Form settings
@@ -178,7 +178,7 @@ export class DefaultAppConfig implements AppConfig {
   submission: SubmissionConfig = {
     autosave: {
       // NOTE: which metadata trigger an autosave
-      metadata: ['dc.title', 'dc.identifier.doi', 'dc.identifier.pmid', 'dc.identifier.arxiv', 'dc.identifier.patentno', 'dc.identifier.scopus', 'dc.identifier.isi', 'dcterms.dateSubmitted', 'dc.identifier.applicationnumber', 'dc.type'],
+      metadata: ['dc.title', 'dc.identifier.doi', 'dc.identifier.pmid', 'dc.identifier.arxiv', 'dc.identifier.patentno', 'dc.identifier.scopus', 'dc.identifier.isi', 'dcterms.dateSubmitted', 'dc.identifier.applicationnumber', 'dc.type', 'dc.identifier.issn'],
       /**
        * NOTE: after how many time (milliseconds) submission is saved automatically
        * eg. timer: 5 * (1000 * 60); // 5 minutes

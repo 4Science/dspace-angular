@@ -1730,8 +1730,7 @@
   "browse.startsWith.type_date.label": "Ou saisir une date (année-mois) puis cliquer sur le bouton « Parcourir »",
 
   // "browse.startsWith.type_text": "Filter results by typing the first few letters",
-  // TODO Source message changed - Revise the translation
-  "browse.startsWith.type_text": "Ou saisir les premières lettres puis cliquer sur le bouton « Parcourir »",
+  "browse.startsWith.type_text": "Filtrer les résultats en saisissant les premières lettres et en cliquant sur Valider",
 
   // "browse.startsWith.input": "Filter",
   "browse.startsWith.input": "Filtrer",
@@ -7356,6 +7355,92 @@
 
   // "search.filters.applied.f.withdrawn": "Withdrawn",
   "search.filters.applied.f.withdrawn": "Retiré",
+
+  // "search.filters.applied.f.graphitemtype": "Item type",
+  // TODO New key - Add a translation
+  "search.filters.applied.f.graphitemtype": "Item type",
+
+  // "search.filters.applied.f.graphpubldate": "Public date",
+  // TODO New key - Add a translation
+  "search.filters.applied.f.graphpubldate": "Public date",
+
+  // "search.filters.applied.f.graphpubldateltr": "Public date LTR",
+  // TODO New key - Add a translation
+  "search.filters.applied.f.graphpubldateltr": "Public date LTR",
+
+  // "search.filters.applied.f.graphpubldatetrl": "Public date RTL",
+  // TODO New key - Add a translation
+  "search.filters.applied.f.graphpubldatetrl": "Public date RTL",
+
+  // "search.filters.applied.f.organization": "Organisation",
+  // TODO New key - Add a translation
+  "search.filters.applied.f.organization": "Organisation",
+
+  // "search.filters.applied.f.knowslanguage": "Language",
+  "search.filters.applied.f.knowslanguage": "Langue",
+
+  // "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
+
+  // "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Date Issued",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Date Issued",
+
+  // "search.filters.applied.charts.chart.pie.more-value": "More",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.chart.pie.more-value": "More",
+
+  // "search.filters.applied.charts.chart.pie.itemtype_filter.tab": "Item Type",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.chart.pie.itemtype_filter.tab": "Item Type",
+
+  // "search.filters.applied.charts.graphitemtype.tab": "Visualization by Type",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.graphitemtype.tab": "Visualization by Type",
+
+  // "search.filters.applied.charts.graphpubldate.tab": "Visualization by Date",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.graphpubldate.tab": "Visualization by Date",
+
+  // "search.filters.applied.charts.graphpubldateltr.tab": "Visualization Demo LTR",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.graphpubldateltr.tab": "Visualization Demo LTR",
+
+  // "search.filters.applied.charts.graphpubldatetrl.tab": "Visualization Demo RTL",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.graphpubldatetrl.tab": "Visualization Demo RTL",
+
+  // "search.filters.applied.charts.default.title": "Search Output",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.default.title": "Search Output",
+
+  // "search.filters.applied.charts.site.title": "Search Output",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.site.title": "Search Output",
+
+  // "search.filters.applied.charts.RELATION.Person.researchoutputs.title": "Research Output",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.Person.researchoutputs.title": "Research Output",
+
+  // "search.filters.applied.charts.RELATION.Project.fundings.title": "Fundings",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.Project.fundings.title": "Fundings",
+
+  // "search.filters.applied.charts.RELATION.Project.researchoutputs.title": "Research Output",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.Project.researchoutputs.title": "Research Output",
+
+  // "search.filters.applied.charts.no.data.found": "No data found",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.no.data.found": "No data found",
+
+  // "search.filters.applied.charts.show.hide": "Show/Hide",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.show.hide": "Show/Hide",
+
+
+
 
   // "search.filters.applied.operator.equals": "",
   "search.filters.applied.operator.equals": "est égal à",

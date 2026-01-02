@@ -212,6 +212,7 @@ export class DsDynamicRelationInlineGroupComponent extends DynamicFormControlCom
       }
 
       model.securityLevel = mainSecurityLevel;
+      model.language = (mainRow as any).language ?? null;
 
       modelGroup.group.forEach((item: any) => {
         if (item.name !== this.model.name) {
@@ -232,12 +233,13 @@ export class DsDynamicRelationInlineGroupComponent extends DynamicFormControlCom
 
   private getRowValue(formGroup: DynamicFormGroupModel, securityLevel?: number) {
     let mainSecurityLevel;
+    const mainRow = formGroup.group.find(itemModel => itemModel.name === this.model.name);
     if (isNotEmpty(securityLevel)) {
       mainSecurityLevel = securityLevel;
     } else {
-      const mainRow = formGroup.group.find(itemModel => itemModel.name === this.model.name);
       mainSecurityLevel = (mainRow as any).securityLevel;
     }
+    const mainLanguage = (mainRow as any).language ?? null;
     const groupValue = Object.create({});
     formGroup.group.forEach((model: any) => {
       if (model.name !== this.model.mandatoryField) {
@@ -245,16 +247,16 @@ export class DsDynamicRelationInlineGroupComponent extends DynamicFormControlCom
           groupValue[model.name] = PLACEHOLDER_PARENT_METADATA;
         } else {
           if (typeof model.value === 'string') {
-            groupValue[model.name] = new FormFieldMetadataValueObject(model.value, null, mainSecurityLevel);
+            groupValue[model.name] = new FormFieldMetadataValueObject(model.value, mainLanguage, mainSecurityLevel);
           } else {
-            groupValue[model.name] = Object.assign(new FormFieldMetadataValueObject(), model.value, { securityLevel: mainSecurityLevel || null });
+            groupValue[model.name] = Object.assign(new FormFieldMetadataValueObject(), model.value, { language: mainLanguage, securityLevel: mainSecurityLevel || null });
           }
         }
       } else {
         if (typeof model.value === 'string') {
-          groupValue[model.name] = new FormFieldMetadataValueObject(model.value, null, mainSecurityLevel);
+          groupValue[model.name] = new FormFieldMetadataValueObject(model.value, mainLanguage, mainSecurityLevel);
         } else {
-          groupValue[model.name] = Object.assign(new FormFieldMetadataValueObject(), model.value, { securityLevel: mainSecurityLevel || null });
+          groupValue[model.name] = Object.assign(new FormFieldMetadataValueObject(), model.value, { language: mainLanguage, securityLevel: mainSecurityLevel || null });
         }
       }
     });
