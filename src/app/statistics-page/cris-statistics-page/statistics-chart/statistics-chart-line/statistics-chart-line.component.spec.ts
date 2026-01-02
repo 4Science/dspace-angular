@@ -11,7 +11,7 @@ import {
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { BrowserExportService } from '../../../../core/export-service/browser-export.service';
 import { REPORT_DATA } from '../../../../core/statistics/data-report.service';
@@ -188,7 +188,7 @@ describe('StatisticsChartLineComponent', () => {
     },
   ];
 
-  const page = observableOf(0);
+  const page = of(0);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

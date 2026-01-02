@@ -2,7 +2,6 @@ import {
   AsyncPipe,
   DOCUMENT,
   isPlatformBrowser,
-  NgIf,
 } from '@angular/common';
 import {
   AfterViewInit,

@@ -12,7 +12,6 @@ import { of } from 'rxjs';
 
 import { Registration } from '../core/shared/registration.model';
 import { ExternalLogInComponent } from '../external-log-in/external-log-in/external-log-in.component';
-import { AlertComponent } from '../shared/alert/alert.component';
 import { TranslateLoaderMock } from '../shared/mocks/translate-loader.mock';
 import { ExternalLoginPageComponent } from './external-login-page.component';
 

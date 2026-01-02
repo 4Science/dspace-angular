@@ -30,9 +30,9 @@ import { SearchChartFilterComponent } from '../search-chart-filter/search-chart-
   templateUrl: './search-chart-bar.component.html',
   animations: [facetLoad],
   imports: [
-    NgIf,
     AsyncPipe,
     ChartComponent,
+    NgIf,
     TranslateModule,
   ],
   standalone: true,

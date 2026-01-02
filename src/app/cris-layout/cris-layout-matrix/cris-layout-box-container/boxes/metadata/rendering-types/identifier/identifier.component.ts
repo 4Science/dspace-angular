@@ -32,7 +32,10 @@ import {
   templateUrl: './identifier.component.html',
   styleUrls: ['./identifier.component.scss'],
   standalone: true,
-  imports: [NgIf, NgbTooltipModule],
+  imports: [
+    NgbTooltipModule,
+    NgIf,
+  ],
 })
 export class IdentifierComponent extends RenderingTypeValueModelComponent implements OnInit {
 

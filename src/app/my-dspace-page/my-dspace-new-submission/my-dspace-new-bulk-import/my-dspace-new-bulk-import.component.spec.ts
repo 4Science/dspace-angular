@@ -12,7 +12,7 @@ import {
 import { By } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { EntityTypeDataService } from '../../../core/data/entity-type-data.service';
 import { ItemExportFormatService } from '../../../core/itemexportformat/item-export-format.service';
@@ -52,7 +52,7 @@ export function getMockEntityTypeService(): EntityTypeDataService {
   const rd$ = createSuccessfulRemoteDataObject$(createPaginatedList([type1, type2, type3]));
   return jasmine.createSpyObj('entityTypeService', {
     getAllAuthorizedRelationshipType: rd$,
-    hasMoreThanOneAuthorized: observableOf(true),
+    hasMoreThanOneAuthorized: of(true),
   });
 }
 
@@ -68,7 +68,7 @@ export function getMockEmptyEntityTypeService(): EntityTypeDataService {
   const rd$ = createSuccessfulRemoteDataObject$(createPaginatedList([type1]));
   return jasmine.createSpyObj('entityTypeService', {
     getAllAuthorizedRelationshipType: rd$,
-    hasMoreThanOneAuthorized: observableOf(false),
+    hasMoreThanOneAuthorized: of(false),
   });
 }
 
@@ -198,7 +198,9 @@ describe('MyDSpaceNewBulkImportComponent test', () => {
   selector: 'ds-test-cmp',
   template: ``,
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+  ],
 })
 class TestComponent {
   reload = (event) => {

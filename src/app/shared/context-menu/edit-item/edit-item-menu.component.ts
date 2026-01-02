@@ -50,11 +50,11 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   templateUrl: './edit-item-menu.component.html',
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
-    NgbDropdownModule,
-    RouterLink,
     AsyncPipe,
+    NgbDropdownModule,
+    NgFor,
+    NgIf,
+    RouterLink,
     TranslateModule,
   ],
 })

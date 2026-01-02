@@ -13,7 +13,9 @@ import { TextSectionComponent } from './text-section.component';
   styleUrls: [],
   templateUrl: '../../../theme-support/themed.component.html',
   standalone: true,
-  imports: [TextSectionComponent],
+  imports: [
+    TextSectionComponent,
+  ],
 })
 export class ThemedTextSectionComponent extends ThemedComponent<TextSectionComponent> {
 

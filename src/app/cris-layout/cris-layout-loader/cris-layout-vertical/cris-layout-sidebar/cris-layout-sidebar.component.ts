@@ -28,11 +28,11 @@ import { CrisLayoutSidebarItemComponent } from '../../shared/sidebar-item/cris-l
   styleUrls: ['./cris-layout-sidebar.component.scss'],
   standalone: true,
   imports: [
-    NgClass,
-    NgIf,
-    NgFor,
-    CrisLayoutSidebarItemComponent,
     AsyncPipe,
+    CrisLayoutSidebarItemComponent,
+    NgClass,
+    NgFor,
+    NgIf,
   ],
 })
 export class CrisLayoutSidebarComponent extends CrisLayoutTabsComponent implements OnInit {

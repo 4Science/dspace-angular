@@ -23,11 +23,11 @@ import {
 import { NotifyInfoService } from '../core/coar-notify/notify-info/notify-info.service';
 import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../core/data/feature-authorization/feature-id';
-import { OrejimeService } from '../shared/cookies/orejime.service';
 import { SiteDataService } from '../core/data/site-data.service';
 import { TextRowSection } from '../core/layout/models/section.model';
 import { LocaleService } from '../core/locale/locale.service';
 import { Site } from '../core/shared/site.model';
+import { OrejimeService } from '../shared/cookies/orejime.service';
 import {
   hasValue,
   isEmpty,

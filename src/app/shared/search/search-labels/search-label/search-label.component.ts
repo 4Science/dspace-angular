@@ -25,7 +25,6 @@ import { SearchConfigurationService } from '../../../../core/shared/search/searc
 import { SearchFilterService } from '../../../../core/shared/search/search-filter.service';
 import { isNotEmpty } from '../../../empty.util';
 import { currentPath } from '../../../utils/route.utils';
-import { VarDirective } from '../../../utils/var.directive';
 import { AppliedFilter } from '../../models/applied-filter.model';
 
 /**

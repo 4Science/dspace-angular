@@ -14,10 +14,7 @@ import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
-import {
-  of as observableOf,
-  of,
-} from 'rxjs';
+import { of } from 'rxjs';
 
 import { AuthService } from '../../core/auth/auth.service';
 import { SiteDataService } from '../../core/data/site-data.service';
@@ -46,7 +43,7 @@ describe('CrisStatisticsPageComponent', () => {
 
   const authServiceStub = new AuthServiceStub();
   const activatedRouteStub = Object.assign(new ActivatedRouteStub(), {
-    data: observableOf({
+    data: of({
       scope: Object.assign(new DSpaceObject(), {
         '_name': 'CRIS',
         'id': '0aa1fe0c-e173-4a36-a526-5c157dedfc07',

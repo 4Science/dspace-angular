@@ -28,8 +28,8 @@ import { followLink } from '../../utils/follow-link-config.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    NgFor,
     AsyncPipe,
+    NgFor,
     TranslateModule,
   ],
 })

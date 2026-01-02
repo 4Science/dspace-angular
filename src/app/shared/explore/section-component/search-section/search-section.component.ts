@@ -35,13 +35,13 @@ import { ThemedSearchFormComponent } from '../../../search-form/themed-search-fo
   templateUrl: './search-section.component.html',
   standalone: true,
   imports: [
-    ThemedSearchFormComponent,
-    TranslateModule,
-    NgIf,
+    AsyncPipe,
     FormsModule,
     NgForOf,
+    NgIf,
     ReactiveFormsModule,
-    AsyncPipe,
+    ThemedSearchFormComponent,
+    TranslateModule,
   ],
 })
 export class SearchSectionComponent implements OnInit {

@@ -12,7 +12,9 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   templateUrl: './crisref.component.html',
   styleUrls: ['./crisref.component.scss'],
   standalone: true,
-  imports: [MetadataLinkViewComponent],
+  imports: [
+    MetadataLinkViewComponent,
+  ],
 })
 export class CrisrefComponent extends RenderingTypeValueModelComponent {
 

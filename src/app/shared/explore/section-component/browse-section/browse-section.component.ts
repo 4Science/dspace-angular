@@ -16,9 +16,9 @@ import { BrowseSection } from '../../../../core/layout/models/section.model';
   templateUrl: './browse-section.component.html',
   standalone: true,
   imports: [
+    NgForOf,
     RouterLink,
     TranslateModule,
-    NgForOf,
   ],
 })
 export class BrowseSectionComponent {

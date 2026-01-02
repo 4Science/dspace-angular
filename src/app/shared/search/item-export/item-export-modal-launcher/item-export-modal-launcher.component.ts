@@ -43,10 +43,10 @@ export const BULK_EXPORT_LIMIT_NOTLOGGEDIN = 'bulk-export.limit.notLoggedIn';
   styleUrls: ['./item-export-modal-launcher.component.scss'],
   templateUrl: './item-export-modal-launcher.component.html',
   imports: [
-    NgIf,
-    NgbDropdownModule,
-    TranslateModule,
     EntityDropdownComponent,
+    NgbDropdownModule,
+    NgIf,
+    TranslateModule,
   ],
   standalone: true,
 })

@@ -6,7 +6,7 @@ import {
   Router,
 } from '@angular/router';
 import { cold } from 'jasmine-marbles';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 import { AuthRegistrationType } from 'src/app/core/auth/models/auth.registration-type';
 
 import { EpersonRegistrationService } from '../../core/data/eperson-registration.service';
@@ -40,7 +40,7 @@ describe('registrationTokenGuard', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            queryParamMap: observableOf(convertToParamMap(paramObject)),
+            queryParamMap: of(convertToParamMap(paramObject)),
           },
         },
         { provide: EpersonRegistrationService, useValue: epersonRegistrationService },

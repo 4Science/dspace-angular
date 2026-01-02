@@ -25,11 +25,11 @@ import { MetadataGroupComponent } from '../metadata-group.component';
   styleUrls: ['./inline.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
+    AsyncPipe,
+    MetadataRenderComponent,
     NgClass,
     NgFor,
-    MetadataRenderComponent,
-    AsyncPipe,
+    NgIf,
   ],
 })
 export class InlineComponent extends MetadataGroupComponent implements OnInit {

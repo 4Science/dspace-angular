@@ -53,9 +53,9 @@ import { MetadataRenderComponent } from './metadata-render/metadata-render.compo
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
     MetadataRenderComponent,
+    NgFor,
+    NgIf,
   ],
 })
 export class MetadataContainerComponent implements OnInit {

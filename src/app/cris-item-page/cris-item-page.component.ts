@@ -30,11 +30,11 @@ import { ThemedLoadingComponent } from '../shared/loading/themed-loading.compone
   animations: [fadeInOut],
   standalone: true,
   imports: [
-    NgIf,
-    ThemedLoadingComponent,
-    ThemedItemAlertsComponent,
-    CrisLayoutComponent,
     AsyncPipe,
+    CrisLayoutComponent,
+    NgIf,
+    ThemedItemAlertsComponent,
+    ThemedLoadingComponent,
     TranslateModule,
   ],
 })

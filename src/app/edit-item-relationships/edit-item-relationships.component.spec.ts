@@ -14,7 +14,7 @@ import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { EntityTypeDataService } from '../core/data/entity-type-data.service';
 import { RelationshipDataService } from '../core/data/relationship-data.service';
@@ -44,7 +44,7 @@ describe('EditItemRelationshipsComponent', () => {
 
   const activatedRouteStub = Object.assign(new ActivatedRouteStub(), {
     // ItemInfo
-    data: observableOf({
+    data: of({
       info: {},
     }),
   });
@@ -60,16 +60,16 @@ describe('EditItemRelationshipsComponent', () => {
 
   const routeServiceStub = {
     isSubmitter: () => {
-      return observableOf(true);
+      return of(true);
     },
     getRouteParameterValue: () => {
-      return observableOf('');
+      return of('');
     },
     getQueryParameterValue: () => {
-      return observableOf('');
+      return of('');
     },
     getQueryParamsWithPrefix: () => {
-      return observableOf('');
+      return of('');
     },
   };
 
@@ -98,9 +98,9 @@ describe('EditItemRelationshipsComponent', () => {
         { provide: Store, useValue: store },
         {
           provide: HostWindowService, useValue: jasmine.createSpyObj('hostWindowService', {
-            isXs: observableOf(true),
-            isSm: observableOf(false),
-            isXsOrSm: observableOf(true),
+            isXs: of(true),
+            isSm: of(false),
+            isXsOrSm: of(true),
           }),
         },
         {

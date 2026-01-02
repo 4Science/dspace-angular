@@ -39,10 +39,10 @@ export const allowedDonuts = ['altmetric', 'dimensions', 'plumX'];
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
-    MetricLoaderComponent,
     AsyncPipe,
+    MetricLoaderComponent,
+    NgFor,
+    NgIf,
   ],
 })
 /**

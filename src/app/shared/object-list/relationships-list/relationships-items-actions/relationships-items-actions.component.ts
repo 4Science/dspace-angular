@@ -41,11 +41,11 @@ import { hasValue } from '../../../empty.util';
   templateUrl: './relationships-items-actions.component.html',
   styleUrls: ['./relationships-items-actions.component.scss'],
   imports: [
-    NgIf,
     AsyncPipe,
-    NgbTooltipModule,
-    TranslateModule,
     BtnDisabledDirective,
+    NgbTooltipModule,
+    NgIf,
+    TranslateModule,
   ],
   standalone: true,
 })

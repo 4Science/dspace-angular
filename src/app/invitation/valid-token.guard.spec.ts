@@ -7,7 +7,7 @@ import {
 } from '@angular/router';
 import {
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 
 import { EpersonRegistrationService } from '../core/data/eperson-registration.service';
@@ -32,7 +32,7 @@ describe('validTokenGuard', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            queryParamMap: observableOf(convertToParamMap(paramObject)),
+            queryParamMap: of(convertToParamMap(paramObject)),
           },
         },
         { provide: EpersonRegistrationService, useValue: epersonRegistrationService },

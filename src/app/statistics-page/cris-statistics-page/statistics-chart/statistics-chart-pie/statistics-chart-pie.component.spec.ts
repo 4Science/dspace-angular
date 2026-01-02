@@ -10,7 +10,7 @@ import {
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { BrowserExportService } from '../../../../core/export-service/browser-export.service';
 import { REPORT_DATA } from '../../../../core/statistics/data-report.service';
@@ -63,7 +63,7 @@ describe('StatisticsChartPieComponent', () => {
     },
   ];
 
-  const page = observableOf(0);
+  const page = of(0);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

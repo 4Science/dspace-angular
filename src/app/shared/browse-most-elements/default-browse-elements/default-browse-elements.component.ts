@@ -20,12 +20,12 @@ import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.com
   styleUrls: ['./default-browse-elements.component.scss'],
   standalone: true,
   imports: [
-    ListableObjectComponentLoaderComponent,
-    TranslateModule,
-    ThemedLoadingComponent,
     AsyncPipe,
-    NgIf,
+    ListableObjectComponentLoaderComponent,
     NgForOf,
+    NgIf,
+    ThemedLoadingComponent,
+    TranslateModule,
   ],
 })
 export class DefaultBrowseElementsComponent extends AbstractBrowseElementsComponent implements OnInit, OnChanges {

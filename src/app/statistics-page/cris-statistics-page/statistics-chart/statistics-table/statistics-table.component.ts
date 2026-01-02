@@ -27,15 +27,15 @@ import { StatisticsChartDataComponent } from '../statistics-chart-data/statistic
   styleUrls: ['./statistics-table.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
-    NgClass,
     AlertComponent,
     AsyncPipe,
-    SlicePipe,
-    CreateLinkPipe,
-    TranslateModule,
     BtnDisabledDirective,
+    CreateLinkPipe,
+    NgClass,
+    NgFor,
+    NgIf,
+    SlicePipe,
+    TranslateModule,
   ],
 })
 /**

@@ -26,11 +26,11 @@ declare let _altmetric_embed_init: any;
   styleUrls: ['./metric-altmetric.component.scss', '../metric-loader/base-metric.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     AsyncPipe,
+    ListMetricPropsPipe,
+    NgIf,
     TitleCasePipe,
     TranslateModule,
-    ListMetricPropsPipe,
   ],
 })
 export class MetricAltmetricComponent extends BaseEmbeddedMetricComponent implements OnInit, AfterViewChecked, AfterViewInit {

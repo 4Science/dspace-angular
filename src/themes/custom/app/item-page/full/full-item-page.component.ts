@@ -19,7 +19,6 @@ import { ItemVersionsComponent } from '../../../../../app/item-page/versions/ite
 import { ItemVersionsNoticeComponent } from '../../../../../app/item-page/versions/notice/item-versions-notice.component';
 import { fadeInOut } from '../../../../../app/shared/animations/fade';
 import { ContextMenuComponent } from '../../../../../app/shared/context-menu/context-menu.component';
-import { DsoEditMenuComponent } from '../../../../../app/shared/dso-page/dso-edit-menu/dso-edit-menu.component';
 import { ErrorComponent } from '../../../../../app/shared/error/error.component';
 import { ThemedLoadingComponent } from '../../../../../app/shared/loading/themed-loading.component';
 import { VarDirective } from '../../../../../app/shared/utils/var.directive';

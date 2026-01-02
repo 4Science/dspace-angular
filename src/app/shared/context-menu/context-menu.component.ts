@@ -54,14 +54,14 @@ import { ContextMenuEntryType } from './context-menu-entry-type';
   templateUrl: './context-menu.component.html',
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
-    NgComponentOutlet,
+    AsyncPipe,
+    BrowserOnlyDirective,
     NgbDropdownModule,
     NgClass,
-    AsyncPipe,
+    NgComponentOutlet,
+    NgFor,
+    NgIf,
     TranslateModule,
-    BrowserOnlyDirective,
   ],
 })
 export class ContextMenuComponent implements OnInit, AfterViewChecked {

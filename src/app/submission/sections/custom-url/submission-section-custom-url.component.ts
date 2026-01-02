@@ -54,9 +54,9 @@ import { SectionsType } from '../sections-type';
   styleUrls: ['./submission-section-custom-url.component.scss'],
   imports: [
     FormComponent,
+    NgForOf,
     NgIf,
     TranslateModule,
-    NgForOf,
   ],
   standalone: true,
 })

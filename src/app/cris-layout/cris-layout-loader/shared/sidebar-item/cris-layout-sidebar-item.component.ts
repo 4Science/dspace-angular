@@ -33,8 +33,8 @@ import { slide } from '../../../../shared/animations/slide';
   standalone: true,
   imports: [
     NgClass,
-    NgIf,
     NgFor,
+    NgIf,
     RouterLink,
   ],
 })

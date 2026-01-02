@@ -32,9 +32,9 @@ import { LayoutBox } from '../../enums/layout-box.enum';
   styleUrls: ['./cris-layout-box-container.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     NgbAccordionModule,
     NgComponentOutlet,
+    NgIf,
     ThemedLoadingComponent,
     TranslateModule,
   ],

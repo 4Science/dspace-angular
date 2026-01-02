@@ -65,12 +65,12 @@ import { SelectableListService } from '../../../shared/object-list/selectable-li
   templateUrl: './my-dspace-bulk-action.component.html',
   standalone: true,
   imports: [
-    NgbTooltipModule,
-    TranslateModule,
     AsyncPipe,
-    ReactiveFormsModule,
-    NgIf,
     BtnDisabledDirective,
+    NgbTooltipModule,
+    NgIf,
+    ReactiveFormsModule,
+    TranslateModule,
   ],
 })
 export class MyDSpaceBulkActionComponent  implements OnInit, OnDestroy{

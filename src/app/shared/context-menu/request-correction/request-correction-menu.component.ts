@@ -20,7 +20,7 @@ import {
 import {
   BehaviorSubject,
   Observable,
-  of as observableOf,
+  of,
   Subscription,
 } from 'rxjs';
 import {
@@ -54,10 +54,10 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   templateUrl: './request-correction-menu.component.html',
   standalone: true,
   imports: [
-    NgIf,
     AsyncPipe,
-    TranslateModule,
     BtnDisabledDirective,
+    NgIf,
+    TranslateModule,
   ],
 })
 export class RequestCorrectionMenuComponent extends ContextMenuEntryComponent implements OnInit,OnDestroy {
@@ -130,7 +130,7 @@ export class RequestCorrectionMenuComponent extends ContextMenuEntryComponent im
       catchError((error: unknown) => {
         if (error instanceof ErrorResponse) {
           this.handleErrorResponse(error.statusCode);
-          return observableOf({});
+          return of({});
         }
       }),
     ).subscribe((response: SubmissionObject) => {

@@ -36,12 +36,12 @@ import { StatisticsChartDataComponent } from '../statistics-chart-data/statistic
   templateUrl: './statistics-chart-line.component.html',
   standalone: true,
   imports: [
-    NgIf,
-    ChartComponent,
     AlertComponent,
     AsyncPipe,
-    TranslateModule,
     BtnDisabledDirective,
+    ChartComponent,
+    NgIf,
+    TranslateModule,
   ],
 })
 /**

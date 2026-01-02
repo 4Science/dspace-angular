@@ -27,6 +27,7 @@ import { Collection } from '../../../../core/shared/collection.model';
 import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service';
 import { UUIDService } from '../../../../core/shared/uuid.service';
 import { XSRFService } from '../../../../core/xsrf/xsrf.service';
+import { HALEndpointServiceStub } from '../../../../shared/testing/hal-endpoint-service.stub';
 import { NotificationsService } from '../../../notifications/notifications.service';
 import { CollectionSearchResult } from '../../../object-collection/shared/collection-search-result.model';
 import { ActivatedRouteStub } from '../../../testing/active-router.stub';
@@ -34,7 +35,6 @@ import { AuthServiceStub } from '../../../testing/auth-service.stub';
 import { TruncatableService } from '../../../truncatable/truncatable.service';
 import { TruncatePipe } from '../../../utils/truncate.pipe';
 import { CollectionSearchResultGridElementComponent } from './collection-search-result-grid-element.component';
-import { HALEndpointServiceStub } from '../../../../shared/testing/hal-endpoint-service.stub';
 
 let collectionSearchResultGridElementComponent: CollectionSearchResultGridElementComponent;
 let fixture: ComponentFixture<CollectionSearchResultGridElementComponent>;

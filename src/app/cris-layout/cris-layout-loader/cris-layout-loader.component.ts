@@ -25,7 +25,9 @@ import { LayoutPage } from '../enums/layout-page.enum';
   templateUrl: './cris-layout-loader.component.html',
   styleUrls: ['./cris-layout-loader.component.scss'],
   standalone: true,
-  imports: [CrisLayoutLoaderDirective],
+  imports: [
+    CrisLayoutLoaderDirective,
+  ],
 })
 export class CrisLayoutLoaderComponent implements OnInit, OnDestroy {
 

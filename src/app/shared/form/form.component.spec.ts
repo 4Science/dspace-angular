@@ -1,4 +1,7 @@
-import { CommonModule, NgClass } from '@angular/common';
+import {
+  CommonModule,
+  NgClass,
+} from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -642,12 +645,12 @@ describe('FormComponent test suite', () => {
   template: ``,
   standalone: true,
   imports: [
-    NgClass,
     DsDynamicFormComponent,
     DynamicFormsCoreModule,
     FormComponent,
     FormsModule,
     NgbModule,
+    NgClass,
     ReactiveFormsModule,
   ],
 })

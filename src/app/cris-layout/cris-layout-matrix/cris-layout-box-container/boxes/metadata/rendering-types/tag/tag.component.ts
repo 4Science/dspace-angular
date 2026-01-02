@@ -21,7 +21,10 @@ import { RenderingTypeStructuredModelComponent } from '../rendering-type-structu
   templateUrl: './tag.component.html',
   styleUrls: ['./tag.component.scss'],
   standalone: true,
-  imports: [NgIf, ChipsComponent],
+  imports: [
+    ChipsComponent,
+    NgIf,
+  ],
 })
 export class TagComponent extends RenderingTypeStructuredModelComponent implements OnInit {
 

@@ -19,10 +19,10 @@ import { ThemedDefaultBrowseElementsComponent } from '../../../../app/shared/bro
   styleUrls: ['../../../../app/shared/browse-most-elements/browse-most-elements.component.scss'],
   standalone: true,
   imports: [
-    ThemedDefaultBrowseElementsComponent,
     AsyncPipe,
     LowerCasePipe,
     NgSwitch,
+    ThemedDefaultBrowseElementsComponent,
   ],
 })
 export class BrowseMostElementsComponent extends BaseComponent {

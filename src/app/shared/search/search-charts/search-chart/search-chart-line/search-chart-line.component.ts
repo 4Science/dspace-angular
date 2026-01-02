@@ -35,9 +35,9 @@ import { SearchChartFilterComponent } from '../search-chart-filter/search-chart-
   templateUrl: './search-chart-line.component.html',
   animations: [facetLoad],
   imports: [
+    AsyncPipe,
     ChartComponent,
     NgIf,
-    AsyncPipe,
     TranslateModule,
   ],
   standalone: true,

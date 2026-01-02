@@ -24,10 +24,10 @@ import { getFirstSucceededRemoteDataPayload } from './../../../core/shared/opera
   templateUrl: './metadata-link-view-orcid.component.html',
   styleUrls: ['./metadata-link-view-orcid.component.scss'],
   imports: [
-    NgbTooltipModule,
-    TranslateModule,
     AsyncPipe,
+    NgbTooltipModule,
     NgIf,
+    TranslateModule,
   ],
   standalone: true,
 })

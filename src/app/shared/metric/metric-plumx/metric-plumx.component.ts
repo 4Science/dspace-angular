@@ -30,13 +30,13 @@ import { ListMetricPropsPipe } from '../pipes/list-metric-props/list-metric-prop
   styleUrls: ['./metric-plumx.component.scss'],
   standalone: true,
   imports: [
+    AsyncPipe,
+    ListMetricPropsPipe,
     NgIf,
     NgSwitch,
     NgSwitchCase,
-    AsyncPipe,
     TitleCasePipe,
     TranslateModule,
-    ListMetricPropsPipe,
   ],
 })
 export class MetricPlumxComponent extends BaseMetricComponent implements OnInit, OnDestroy {

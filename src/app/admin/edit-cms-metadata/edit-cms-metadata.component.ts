@@ -31,13 +31,13 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
   templateUrl: './edit-cms-metadata.component.html',
   styleUrls: ['./edit-cms-metadata.component.scss'],
   imports: [
+    AsyncPipe,
+    BtnDisabledDirective,
     FormsModule,
     NgForOf,
-    TranslateModule,
-    AsyncPipe,
     NgIf,
     NgTemplateOutlet,
-    BtnDisabledDirective,
+    TranslateModule,
   ],
   standalone: true,
 })

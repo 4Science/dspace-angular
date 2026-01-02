@@ -36,9 +36,9 @@ import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-
   styleUrls: ['./cris-layout-relation-box.component.scss'],
   standalone: true,
   imports: [
+    AsyncPipe,
     NgIf,
     ThemedConfigurationSearchPageComponent,
-    AsyncPipe,
   ],
 })
 export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent implements OnInit {

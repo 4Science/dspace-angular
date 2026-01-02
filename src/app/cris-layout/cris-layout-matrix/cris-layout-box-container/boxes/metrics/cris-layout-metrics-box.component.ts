@@ -39,10 +39,10 @@ import { MetricRowComponent } from './metric-row/metric-row.component';
   styleUrls: ['./cris-layout-metrics-box.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
-    MetricRowComponent,
     AsyncPipe,
+    MetricRowComponent,
+    NgFor,
+    NgIf,
   ],
 })
 /**

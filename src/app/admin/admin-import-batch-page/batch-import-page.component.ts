@@ -39,8 +39,8 @@ import { FileDropzoneNoUploaderComponent } from '../../shared/upload/file-dropzo
   imports: [
     FileDropzoneNoUploaderComponent,
     FormsModule,
-    TranslateModule,
     SwitchComponent,
+    TranslateModule,
   ],
   standalone: true,
 })

@@ -45,7 +45,18 @@ import { StatisticsTableComponent } from '../statistics-table/statistics-table.c
   templateUrl: './workflow-statistics-page.component.html',
   styleUrls: ['./workflow-statistics-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, VarDirective, ThemedLoadingComponent, StatisticsTableComponent, TranslateModule, CrisStatisticsPageComponent, AlertComponent, FormsModule, NgbDatepickerModule, BtnDisabledDirective],
+  imports: [
+    AlertComponent,
+    BtnDisabledDirective,
+    CommonModule,
+    CrisStatisticsPageComponent,
+    FormsModule,
+    NgbDatepickerModule,
+    StatisticsTableComponent,
+    ThemedLoadingComponent,
+    TranslateModule,
+    VarDirective,
+  ],
 })
 export class WorkflowStatisticsPageComponent implements OnInit {
 

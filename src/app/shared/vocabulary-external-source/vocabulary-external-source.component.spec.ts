@@ -14,7 +14,7 @@ import {
   TranslateService,
 } from '@ngx-translate/core';
 import { getTestScheduler } from 'jasmine-marbles';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 
 import { ExternalSourceDataService } from '../../core/data/external-source-data.service';
@@ -173,7 +173,7 @@ describe('VocabularyExternalSourceComponent', () => {
       spyOn(componentAsAny, 'createEntityFromExternalSource');
       componentAsAny.externalSourceEntry = externalEntry;
       ngbModal.open.and.returnValue({
-        componentInstance: { select: observableOf(emittedEvent) },
+        componentInstance: { select: of(emittedEvent) },
         close: () => {
           return;
         },

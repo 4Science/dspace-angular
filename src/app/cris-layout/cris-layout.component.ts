@@ -42,10 +42,10 @@ import { CrisLayoutLoaderComponent } from './cris-layout-loader/cris-layout-load
   styleUrls: ['./cris-layout.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
+    AsyncPipe,
     CrisLayoutLeadingComponent,
     CrisLayoutLoaderComponent,
-    AsyncPipe,
+    NgIf,
     VarDirective,
   ],
 })

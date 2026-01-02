@@ -10,7 +10,7 @@ import {
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { ChartType } from '../../models/chart-type';
 import { AbstractChartComponent } from '../abstract-chart/abstract-chart.component';
@@ -21,7 +21,7 @@ xdescribe('BarChartComponent', () => {
   let fixture: ComponentFixture<BarChartComponent>;
 
   const view = [];
-  const results = observableOf([
+  const results = of([
     {
       name: 'Germany',
       value: 8940000,
@@ -43,8 +43,8 @@ xdescribe('BarChartComponent', () => {
   const loadMore: EventEmitter<string> = new EventEmitter();
   const enableScrollToLeft = false;
   const enableScrollToRight = false;
-  const isLastPage = observableOf(false);
-  const currentPage = observableOf(1);
+  const isLastPage = of(false);
+  const currentPage = of(1);
   const type: ChartType.BAR | ChartType.BAR_HORIZONTAL = ChartType.BAR;
 
   beforeEach(waitForAsync(() => {

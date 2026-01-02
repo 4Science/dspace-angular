@@ -6,20 +6,15 @@ import {
 import {
   Component,
   Inject,
-  inject,
   OnInit,
   PLATFORM_ID,
 } from '@angular/core';
 import {
   ActivatedRoute,
-  Params,
   Router,
 } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  Observable,
-  of,
-} from 'rxjs';
+import { Observable } from 'rxjs';
 import {
   map,
   startWith,
@@ -36,7 +31,6 @@ import {
   NativeWindowService,
 } from '../../core/services/window.service';
 import { Bitstream } from '../../core/shared/bitstream.model';
-import { FileService } from '../../core/shared/file.service';
 import { getRemoteDataPayload } from '../../core/shared/operators';
 import { isNotEmpty } from '../../shared/empty.util';
 

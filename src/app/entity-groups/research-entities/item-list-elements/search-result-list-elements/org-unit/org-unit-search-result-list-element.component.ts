@@ -26,8 +26,8 @@ import { ThemedThumbnailComponent } from '../../../../../thumbnail/themed-thumbn
   imports: [
     AdditionalMetadataComponent,
     AsyncPipe,
-    MetricDonutsComponent,
     MetricBadgesComponent,
+    MetricDonutsComponent,
     NgClass,
     RouterLink,
     ThemedBadgesComponent,

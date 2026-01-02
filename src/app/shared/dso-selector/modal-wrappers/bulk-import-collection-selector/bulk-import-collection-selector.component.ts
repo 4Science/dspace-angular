@@ -25,9 +25,9 @@ import {
   selector: 'ds-bulk-import-collection-selector',
   templateUrl: './bulk-import-collection-selector.component.html',
   imports: [
-    TranslateModule,
-    NgIf,
     AdministeredCollectionSelectorComponent,
+    NgIf,
+    TranslateModule,
   ],
   standalone: true,
 })

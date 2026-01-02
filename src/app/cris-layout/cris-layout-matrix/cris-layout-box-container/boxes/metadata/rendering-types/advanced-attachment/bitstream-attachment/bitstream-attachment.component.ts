@@ -46,14 +46,14 @@ import { AttachmentRenderingType } from './attachment-type.decorator';
   styleUrls: ['./bitstream-attachment.component.scss'],
   standalone: true,
   imports: [
-    ThemedThumbnailComponent,
-    AttachmentRenderComponent,
-    TruncatableComponent,
-    TruncatablePartComponent,
     AsyncPipe,
+    AttachmentRenderComponent,
+    FileSizePipe,
+    ThemedThumbnailComponent,
     TitleCasePipe,
     TranslateModule,
-    FileSizePipe,
+    TruncatableComponent,
+    TruncatablePartComponent,
   ],
 })
 export class BitstreamAttachmentComponent extends BitstreamRenderingModelComponent implements OnInit {

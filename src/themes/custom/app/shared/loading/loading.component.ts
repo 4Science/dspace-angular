@@ -15,7 +15,12 @@ import { LoadingComponent as BaseComponent } from '../../../../../app/shared/loa
   templateUrl: '../../../../../app/shared/loading/loading.component.html',
   // templateUrl: './loading.component.html'
   standalone: true,
-  imports: [NgIf, NgSwitchCase, NgSwitch, AlertComponent],
+  imports: [
+    AlertComponent,
+    NgIf,
+    NgSwitch,
+    NgSwitchCase,
+  ],
 })
 export class LoadingComponent extends BaseComponent {
 }

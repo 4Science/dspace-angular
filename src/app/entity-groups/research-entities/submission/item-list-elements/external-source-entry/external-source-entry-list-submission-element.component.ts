@@ -37,7 +37,18 @@ import { DuplicateMatchMetadataDetailConfig } from '../../../../../submission/se
   styleUrls: ['./external-source-entry-list-submission-element.component.scss'],
   templateUrl: './external-source-entry-list-submission-element.component.html',
   standalone: true,
-  imports: [TruncatableComponent, TruncatablePartComponent, DatePipe, NgbCollapseModule, ThemedItemListPreviewComponent, SlicePipe, NgbTooltipModule, RouterLink, TranslateModule, NgbPaginationModule],
+  imports: [
+    DatePipe,
+    NgbCollapseModule,
+    NgbPaginationModule,
+    NgbTooltipModule,
+    RouterLink,
+    SlicePipe,
+    ThemedItemListPreviewComponent,
+    TranslateModule,
+    TruncatableComponent,
+    TruncatablePartComponent,
+  ],
 })
 /**
  * The component for displaying a list element of an external source entry

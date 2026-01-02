@@ -11,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import {
   BehaviorSubject,
   Observable,
-  of as observableOf,
+  of,
   Subscription,
 } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -36,11 +36,11 @@ import { SectionsService } from '../sections.service';
   selector: 'ds-submission-correction',
   templateUrl: './section-correction.component.html',
   imports: [
-    NgIf,
     AlertComponent,
     AsyncPipe,
-    TranslateModule,
     NgForOf,
+    NgIf,
+    TranslateModule,
   ],
   standalone: true,
 })
@@ -73,7 +73,7 @@ export class SubmissionSectionCorrectionComponent extends SectionModelComponent 
   }
 
   protected getSectionStatus(): Observable<boolean> {
-    return observableOf(true);
+    return of(true);
   }
 
   /**

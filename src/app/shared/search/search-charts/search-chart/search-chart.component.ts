@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import {
   BehaviorSubject,
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import {
   filter,
@@ -144,7 +144,7 @@ export class SearchChartComponent implements OnInit, OnChanges {
     return this.selectedValues$.pipe(
       switchMap((isActive) => {
         if (isNotEmpty(isActive)) {
-          return observableOf(true);
+          return of(true);
         } else {
           return this.searchConfigService.searchOptions.pipe(
             switchMap((options) => {

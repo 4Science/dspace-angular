@@ -24,9 +24,9 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   styleUrls: ['./dso-page-edit-menu.component.scss'],
   standalone: true,
   imports: [
+    AsyncPipe,
     NgIf,
     RouterLink,
-    AsyncPipe,
     TranslateModule,
   ],
 })

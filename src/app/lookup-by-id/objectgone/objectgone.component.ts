@@ -16,8 +16,8 @@ import { AlertType } from '../../shared/alert/alert-type';
   standalone: true,
   imports: [
     AlertComponent,
-    TranslateModule,
     RouterLink,
+    TranslateModule,
   ],
 })
 export class ObjectGoneComponent {

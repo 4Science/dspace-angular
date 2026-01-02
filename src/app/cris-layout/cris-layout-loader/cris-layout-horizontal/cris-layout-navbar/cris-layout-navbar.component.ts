@@ -29,11 +29,11 @@ import { CrisLayoutSidebarItemComponent } from '../../shared/sidebar-item/cris-l
   animations: [slideMobileNav],
   standalone: true,
   imports: [
-    NgIf,
+    AsyncPipe,
+    CrisLayoutSidebarItemComponent,
     NgClass,
     NgFor,
-    CrisLayoutSidebarItemComponent,
-    AsyncPipe,
+    NgIf,
     TranslateModule,
   ],
 })

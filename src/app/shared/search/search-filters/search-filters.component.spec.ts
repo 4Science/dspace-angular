@@ -11,7 +11,7 @@ import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { APP_CONFIG } from '../../../../config/app-config.interface';
 import { environment } from '../../../../environments/environment';
@@ -30,7 +30,7 @@ describe('SearchFiltersComponent', () => {
   const searchServiceStub = {
     /* eslint-disable no-empty,@typescript-eslint/no-empty-function */
     getConfig: () =>
-      observableOf({ hasSucceeded: true, payload: [] }),
+      of({ hasSucceeded: true, payload: [] }),
     getClearFiltersQueryParams: () => {
     },
     getSearchLink: () => {

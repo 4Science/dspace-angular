@@ -59,9 +59,9 @@ import {
 } from '../../shared/testing/eperson.mock';
 import { NotificationsServiceStub } from '../../shared/testing/notifications-service.stub';
 import { PaginationServiceStub } from '../../shared/testing/pagination-service.stub';
+import { TranslateLoaderMock } from '../../shared/testing/translate-loader.mock';
 import { EPeopleRegistryComponent } from './epeople-registry.component';
 import { EPersonFormComponent } from './eperson-form/eperson-form.component';
-import { TranslateLoaderMock } from '../../shared/testing/translate-loader.mock';
 
 describe('EPeopleRegistryComponent', () => {
   let component: EPeopleRegistryComponent;

@@ -26,11 +26,11 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   styleUrls: ['./statistics-menu.component.scss'],
   standalone: true,
   imports: [
+    AsyncPipe,
+    BrowserOnlyPipe,
     NgIf,
     RouterLink,
-    AsyncPipe,
     TranslateModule,
-    BrowserOnlyPipe,
   ],
 })
 /**

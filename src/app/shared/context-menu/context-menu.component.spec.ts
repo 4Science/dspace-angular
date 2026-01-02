@@ -302,7 +302,9 @@ describe('ContextMenuComponent', () => {
   template: `
     <button class="dropdown-item">test menu item</button>`,
   standalone: true,
-  imports: [NgbDropdownModule],
+  imports: [
+    NgbDropdownModule,
+  ],
 })
 @rendersContextMenuEntriesForType(DSpaceObjectType.COLLECTION)
 class TestComponent {

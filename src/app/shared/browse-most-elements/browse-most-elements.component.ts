@@ -26,11 +26,11 @@ import { ThemedDefaultBrowseElementsComponent } from './default-browse-elements/
   templateUrl: './browse-most-elements.component.html',
   standalone: true,
   imports: [
-    ThemedDefaultBrowseElementsComponent,
     AsyncPipe,
     LowerCasePipe,
     NgSwitch,
     NgSwitchDefault,
+    ThemedDefaultBrowseElementsComponent,
   ],
 })
 

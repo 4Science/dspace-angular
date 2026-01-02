@@ -20,11 +20,11 @@ import { CrisLayoutNavbarComponent } from './cris-layout-navbar/cris-layout-navb
   styleUrls: ['./cris-layout-horizontal.component.scss'],
   standalone: true,
   imports: [
-    CrisLayoutNavbarComponent,
-    NgIf,
+    AsyncPipe,
     ContextMenuComponent,
     CrisLayoutMatrixComponent,
-    AsyncPipe,
+    CrisLayoutNavbarComponent,
+    NgIf,
   ],
 })
 export class CrisLayoutHorizontalComponent {

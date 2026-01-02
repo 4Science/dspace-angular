@@ -19,7 +19,9 @@ import { StatisticsChartDataComponent } from '../statistics-chart-data/statistic
   selector: 'ds-statistics-chart-wrapper',
   templateUrl: './statistics-chart-wrapper.component.html',
   standalone: true,
-  imports: [NgComponentOutlet],
+  imports: [
+    NgComponentOutlet,
+  ],
 })
 
 /**

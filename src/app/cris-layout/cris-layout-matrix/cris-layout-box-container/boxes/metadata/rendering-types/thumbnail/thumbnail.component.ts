@@ -12,7 +12,7 @@ import {
   BehaviorSubject,
   combineLatest,
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import {
   map,
@@ -40,9 +40,9 @@ import { BitstreamRenderingModelComponent } from '../bitstream-rendering-model';
   styleUrls: ['./thumbnail.component.scss'],
   standalone: true,
   imports: [
-    ThemedThumbnailComponent,
     AsyncPipe,
     NgIf,
+    ThemedThumbnailComponent,
   ],
 })
 /**
@@ -96,7 +96,7 @@ export class ThumbnailRenderingComponent extends BitstreamRenderingModelComponen
       switchMap((filteredBitstreams: Bitstream[]) => {
         if (filteredBitstreams.length > 0) {
           if (isEmpty(filteredBitstreams[0].thumbnail)) {
-            return observableOf(null);
+            return of(null);
           } else {
             return filteredBitstreams[0].thumbnail.pipe(
               getFirstCompletedRemoteData(),
@@ -110,7 +110,7 @@ export class ThumbnailRenderingComponent extends BitstreamRenderingModelComponen
             );
           }
         } else {
-          return observableOf(null);
+          return of(null);
         }
       }),
     ).subscribe((thumbnail: Bitstream) => {

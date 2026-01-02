@@ -8,7 +8,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
 import { mockRegistrationDataModel } from '../external-log-in/models/registration-data.mock.model';
-import { AlertComponent } from '../shared/alert/alert.component';
 import { ExternalLoginReviewAccountInfoPageComponent } from './external-login-review-account-info-page.component';
 import { ReviewAccountInfoComponent } from './review-account-info/review-account-info.component';
 

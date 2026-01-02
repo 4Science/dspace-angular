@@ -32,10 +32,10 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
   templateUrl: './admin-edit-user-agreement.component.html',
   imports: [
     AlertComponent,
-    TranslateModule,
-    KeyValuePipe,
     FormsModule,
+    KeyValuePipe,
     NgForOf,
+    TranslateModule,
   ],
   standalone: true,
 })

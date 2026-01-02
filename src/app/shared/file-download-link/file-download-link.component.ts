@@ -21,7 +21,11 @@ import {
   Observable,
   of,
 } from 'rxjs';
-import { catchError, map, shareReplay } from 'rxjs/operators';
+import {
+  catchError,
+  map,
+  shareReplay,
+} from 'rxjs/operators';
 
 import {
   getBitstreamDownloadRoute,
@@ -37,11 +41,14 @@ import { ConfigurationProperty } from '../../core/shared/configuration-property.
 import { Item } from '../../core/shared/item.model';
 import { ItemRequest } from '../../core/shared/item-request.model';
 import {
+  getFirstCompletedRemoteData,
+  getRemoteDataPayload,
+} from '../../core/shared/operators';
+import {
   hasValue,
   isNotEmpty,
 } from '../empty.util';
 import { ThemedAccessStatusBadgeComponent } from '../object-collection/shared/badges/access-status-badge/themed-access-status-badge.component';
-import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../../core/shared/operators';
 
 @Component({
   selector: 'ds-base-file-download-link',

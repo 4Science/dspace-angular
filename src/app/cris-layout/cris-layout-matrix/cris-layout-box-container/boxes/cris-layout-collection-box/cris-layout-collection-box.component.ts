@@ -47,11 +47,11 @@ import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-
   styleUrls: ['./cris-layout-collection-box.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
-    RouterLink,
+    AsyncPipe,
     NgClass,
     NgFor,
-    AsyncPipe,
+    NgIf,
+    RouterLink,
     TranslateModule,
   ],
 })

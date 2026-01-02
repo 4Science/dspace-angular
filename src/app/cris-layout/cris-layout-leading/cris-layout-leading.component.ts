@@ -15,9 +15,9 @@ import { CrisLayoutMatrixComponent } from '../cris-layout-matrix/cris-layout-mat
   styleUrls: ['./cris-layout-leading.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     ContextMenuComponent,
     CrisLayoutMatrixComponent,
+    NgIf,
   ],
 })
 export class CrisLayoutLeadingComponent {

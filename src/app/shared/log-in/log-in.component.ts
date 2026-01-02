@@ -14,7 +14,7 @@ import {
   select,
   Store,
 } from '@ngrx/store';
-import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import uniqBy from 'lodash/uniqBy';
 import {
   combineLatestWith,

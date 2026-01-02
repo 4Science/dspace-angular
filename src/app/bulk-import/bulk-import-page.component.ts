@@ -54,12 +54,12 @@ import { FileValidator } from '../shared/utils/require-file.validator';
   templateUrl: './bulk-import-page.component.html',
   standalone: true,
   imports: [
+    AsyncPipe,
+    BtnDisabledDirective,
+    FileValidator,
+    NgIf,
     ReactiveFormsModule,
     TranslateModule,
-    FileValidator,
-    AsyncPipe,
-    NgIf,
-    BtnDisabledDirective,
   ],
 })
 export class BulkImportPageComponent implements OnInit, OnDestroy {

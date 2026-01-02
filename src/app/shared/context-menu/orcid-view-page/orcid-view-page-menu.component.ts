@@ -25,9 +25,9 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   styleUrls: ['./orcid-view-page-menu.component.scss'],
   standalone: true,
   imports: [
+    AsyncPipe,
     NgIf,
     RouterLink,
-    AsyncPipe,
     TranslateModule,
   ],
 })

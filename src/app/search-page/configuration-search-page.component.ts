@@ -52,8 +52,8 @@ import { ViewModeSwitchComponent } from '../shared/view-mode-switch/view-mode-sw
   imports: [
     AsyncPipe,
     ItemExportModalLauncherComponent,
-    NgTemplateOutlet,
     NgbTooltipModule,
+    NgTemplateOutlet,
     PageWithSidebarComponent,
     SearchChartsComponent,
     SearchLabelsComponent,

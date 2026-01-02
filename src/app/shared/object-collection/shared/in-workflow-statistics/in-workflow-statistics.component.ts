@@ -36,9 +36,9 @@ import { hasValue } from '../../../empty.util';
   standalone: true,
   styleUrls: ['./in-workflow-statistics.component.scss'],
   imports: [
-    TranslateModule,
     AsyncPipe,
     NgIf,
+    TranslateModule,
   ],
 })
 export class InWorkflowStatisticsComponent implements OnInit {

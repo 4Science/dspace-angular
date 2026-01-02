@@ -1,9 +1,9 @@
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 export class UsageReportServiceStub {
 
   searchStatistics(uri: string, page: number, size: number, categoryId?: string, startDate?: string, endDate?: string) {
-    return observableOf(
+    return of(
       [
         {
           'id': '1911e8a4-6939-490c-b58b-a5d70f8d91fb_TotalVisits',

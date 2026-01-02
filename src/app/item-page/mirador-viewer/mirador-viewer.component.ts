@@ -21,7 +21,6 @@ import {
   take,
 } from 'rxjs/operators';
 import { SafeUrlPipe } from 'src/app/shared/utils/safe-url-pipe';
-import { VarDirective } from 'src/app/shared/utils/var.directive';
 
 import { environment } from '../../../environments/environment';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';

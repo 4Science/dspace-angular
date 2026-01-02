@@ -11,7 +11,9 @@ import { ObjectGoneComponent } from './objectgone.component';
   styleUrls: [],
   templateUrl: '../../shared/theme-support/themed.component.html',
   standalone: true,
-  imports: [ObjectGoneComponent],
+  imports: [
+    ObjectGoneComponent,
+  ],
 })
 export class ThemedObjectGoneComponent extends ThemedComponent<ObjectGoneComponent> {
   protected getComponentName(): string {

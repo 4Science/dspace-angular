@@ -45,19 +45,19 @@ import { AdditionalMetadataComponent } from '../../search-result-list-element/ad
   animations: [fadeInOut],
   standalone: true,
   imports: [
+    AdditionalMetadataComponent,
     AsyncPipe,
+    InWorkflowStatisticsComponent,
     ItemCollectionComponent,
+    ItemCorrectionComponent,
     ItemSubmitterComponent,
+    MetadataLinkViewComponent,
     NgClass,
     ThemedBadgesComponent,
     ThemedThumbnailComponent,
     TranslateModule,
     TruncatableComponent,
     TruncatablePartComponent,
-    MetadataLinkViewComponent,
-    AdditionalMetadataComponent,
-    ItemCorrectionComponent,
-    InWorkflowStatisticsComponent,
   ],
 })
 export class ItemListPreviewComponent implements OnInit {

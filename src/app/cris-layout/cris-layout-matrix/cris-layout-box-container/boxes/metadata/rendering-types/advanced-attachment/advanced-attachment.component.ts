@@ -37,10 +37,10 @@ import { BitstreamAttachmentComponent } from './bitstream-attachment/bitstream-a
   styleUrls: ['./advanced-attachment.component.scss'],
   standalone: true,
   imports: [
-    NgFor,
-    BitstreamAttachmentComponent,
-    NgIf,
     AsyncPipe,
+    BitstreamAttachmentComponent,
+    NgFor,
+    NgIf,
     TranslateModule,
   ],
 })

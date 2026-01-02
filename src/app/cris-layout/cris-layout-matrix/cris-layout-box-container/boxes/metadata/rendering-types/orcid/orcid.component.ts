@@ -33,9 +33,9 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   styleUrls: ['./orcid.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
-    NgbTooltipModule,
     AsyncPipe,
+    NgbTooltipModule,
+    NgIf,
     TranslateModule,
   ],
 })

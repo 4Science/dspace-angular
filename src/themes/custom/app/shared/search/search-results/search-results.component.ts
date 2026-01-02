@@ -26,6 +26,7 @@ import { SearchResultsSkeletonComponent } from '../../../../../../app/shared/sea
   ],
   standalone: true,
   imports: [
+    AlertComponent,
     AsyncPipe,
     ErrorComponent,
     NgxSkeletonLoaderModule,
@@ -34,7 +35,6 @@ import { SearchResultsSkeletonComponent } from '../../../../../../app/shared/sea
     SearchExportCsvComponent,
     SearchResultsSkeletonComponent,
     TranslateModule,
-    AlertComponent,
   ],
 })
 export class SearchResultsComponent extends BaseComponent {

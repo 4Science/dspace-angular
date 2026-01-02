@@ -39,8 +39,8 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   templateUrl: './claim-item-menu.component.html',
   standalone: true,
   imports: [
-    NgIf,
     AsyncPipe,
+    NgIf,
     TranslateModule,
   ],
 })

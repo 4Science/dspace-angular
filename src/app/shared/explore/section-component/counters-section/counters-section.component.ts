@@ -38,14 +38,14 @@ import { SearchObjects } from '../../../search/models/search-objects.model';
   templateUrl: './counters-section.component.html',
   standalone: true,
   imports: [
+    AsyncPipe,
     NgClass,
-    ThemedLoadingComponent,
+    NgForOf,
     NgIf,
     NgTemplateOutlet,
-    TranslateModule,
-    AsyncPipe,
     RouterLink,
-    NgForOf,
+    ThemedLoadingComponent,
+    TranslateModule,
   ],
 })
 export class CountersSectionComponent implements OnInit {

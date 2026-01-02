@@ -14,7 +14,7 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import {
   Observable,
-  of as observableOf,
+  of,
   Subscription,
 } from 'rxjs';
 import {
@@ -42,11 +42,11 @@ import { EntityDropdownComponent } from '../../../shared/entity-dropdown/entity-
   templateUrl: './my-dspace-new-bulk-import.component.html',
   imports: [
     AsyncPipe,
+    BtnDisabledDirective,
+    EntityDropdownComponent,
+    NgbDropdownModule,
     NgIf,
     TranslateModule,
-    NgbDropdownModule,
-    EntityDropdownComponent,
-    BtnDisabledDirective,
   ],
   standalone: true,
 })
@@ -85,7 +85,7 @@ export class MyDSpaceNewBulkImportComponent implements OnInit, OnDestroy {
    * Initialize entity type list
    */
   ngOnInit() {
-    this.initialized$ = observableOf(false);
+    this.initialized$ = of(false);
     this.moreThanOne$ = this.entityTypeService.hasMoreThanOneAuthorized();
     this.singleEntity$ = this.moreThanOne$.pipe(
       mergeMap((response: boolean) => {
@@ -96,14 +96,14 @@ export class MyDSpaceNewBulkImportComponent implements OnInit, OnDestroy {
           };
           return this.entityTypeService.getAllAuthorizedRelationshipType(findListOptions).pipe(
             map((entities: RemoteData<PaginatedList<ItemType>>) => {
-              this.initialized$ = observableOf(true);
+              this.initialized$ = of(true);
               return entities.payload.page[0];
             }),
             take(1),
           );
         } else {
-          this.initialized$ = observableOf(true);
-          return observableOf(null);
+          this.initialized$ = of(true);
+          return of(null);
         }
       }),
       take(1),

@@ -15,7 +15,9 @@ import { LogInComponent } from './log-in.component';
   styleUrls: [],
   templateUrl: './../theme-support/themed.component.html',
   standalone: true,
-  imports: [LogInComponent],
+  imports: [
+    LogInComponent,
+  ],
 })
 export class ThemedLogInComponent extends ThemedComponent<LogInComponent> {
 

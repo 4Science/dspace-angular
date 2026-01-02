@@ -13,7 +13,10 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   templateUrl: './longtext.component.html',
   styleUrls: ['./longtext.component.scss'],
   standalone: true,
-  imports: [TruncatableComponent, TruncatablePartComponent],
+  imports: [
+    TruncatableComponent,
+    TruncatablePartComponent,
+  ],
 })
 export class LongtextComponent extends RenderingTypeValueModelComponent {
 

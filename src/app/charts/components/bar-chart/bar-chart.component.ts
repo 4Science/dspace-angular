@@ -26,12 +26,12 @@ import { AbstractChartComponent } from '../abstract-chart/abstract-chart.compone
   animations: [fadeIn],
   standalone: true,
   imports: [
-    NgIf,
-    BarChartModule,
-    NgClass,
     AsyncPipe,
-    TranslateModule,
+    BarChartModule,
     BtnDisabledDirective,
+    NgClass,
+    NgIf,
+    TranslateModule,
   ],
 })
 export class BarChartComponent extends AbstractChartComponent implements OnInit {

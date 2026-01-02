@@ -27,6 +27,7 @@ import { DatadogRumConfig } from './datadog-rum-config.interfaces';
 import { DiscoverySortConfig } from './discovery-sort.config';
 import { FilterVocabularyConfig } from './filter-vocabulary-config';
 import { FormConfig } from './form-config.interfaces';
+import { GeospatialMapConfig } from './geospatial-map-config';
 import { HomeConfig } from './homepage-config.interface';
 import { IdentifierSubtypesConfig } from './identifier-subtypes-config.interface';
 import { InfoConfig } from './info-config.interface';
@@ -38,6 +39,7 @@ import {
 } from './layout-config.interfaces';
 import { LoaderConfig } from './loader-config.interfaces';
 import { MarkdownConfig } from './markdown-config.interface';
+import { MatomoConfig } from './matomo-config.interface';
 import { MediaViewerConfig } from './media-viewer-config.interface';
 import { MetaTagsConfig } from './meta-tags.config';
 import { MetadataLinkViewPopoverDataConfig } from './metadata-link-view-popoverdata-config.interface';
@@ -54,8 +56,6 @@ import { SubmissionConfig } from './submission-config.interface';
 import { SuggestionConfig } from './suggestion-config.interfaces';
 import { ThemeConfig } from './theme.config';
 import { UIServerConfig } from './ui-server-config.interface';
-import { MatomoConfig } from './matomo-config.interface';
-import { GeospatialMapConfig } from './geospatial-map-config';
 
 interface AppConfig extends Config {
   ui: UIServerConfig;

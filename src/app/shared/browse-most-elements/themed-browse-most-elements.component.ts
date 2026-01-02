@@ -17,7 +17,9 @@ import { BrowseMostElementsComponent } from './browse-most-elements.component';
   styleUrls: [],
   templateUrl: '../theme-support/themed.component.html',
   standalone: true,
-  imports: [BrowseMostElementsComponent],
+  imports: [
+    BrowseMostElementsComponent,
+  ],
 })
 export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMostElementsComponent> {
 

@@ -23,7 +23,7 @@ import {
 import {
   combineLatest,
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {
@@ -162,7 +162,7 @@ export class CollectionFormComponent extends ComColFormComponent<Collection> imp
     const definitions$: Observable<ConfigObject[]> = this.submissionDefinitionService
       .findAll({ elementsPerPage: 100, currentPage: 1 }).pipe(
         getFirstSucceededRemoteListPayload(),
-        catchError(() => observableOf([])),
+        catchError(() => of([])),
       );
 
     // retrieve all entity types and submission definitions to populate the dropdowns selection

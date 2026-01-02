@@ -32,7 +32,9 @@ import { MetadataBoxFieldRenderOptions } from '../../../rendering-types/renderin
   templateUrl: './metadata-render.component.html',
   styleUrls: ['./metadata-render.component.scss'],
   standalone: true,
-  imports: [CrisLayoutLoaderDirective],
+  imports: [
+    CrisLayoutLoaderDirective,
+  ],
 })
 export class MetadataRenderComponent implements OnInit {
 

@@ -35,7 +35,16 @@ import { StatisticsTableComponent } from '../statistics-table/statistics-table.c
   templateUrl: './login-statistics-page.component.html',
   styleUrls: ['./login-statistics-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, VarDirective, ThemedLoadingComponent, StatisticsTableComponent, TranslateModule, FormsModule, NgbDatepickerModule, AlertComponent],
+  imports: [
+    AlertComponent,
+    CommonModule,
+    FormsModule,
+    NgbDatepickerModule,
+    StatisticsTableComponent,
+    ThemedLoadingComponent,
+    TranslateModule,
+    VarDirective,
+  ],
 })
 export class LoginStatisticsPageComponent implements OnInit {
 

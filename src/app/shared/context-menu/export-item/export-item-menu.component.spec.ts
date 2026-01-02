@@ -11,7 +11,7 @@ import {
   TranslateModule,
 } from '@ngx-translate/core';
 import { getTestScheduler } from 'jasmine-marbles';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
@@ -40,7 +40,7 @@ describe('ExportItemMenuComponent', () => {
   });
 
   beforeEach(async(() => {
-    itemExportService.initialItemExportFormConfiguration.and.returnValue(observableOf(configuration));
+    itemExportService.initialItemExportFormConfiguration.and.returnValue(of(configuration));
     dso = Object.assign(new Item(), {
       id: 'test-item',
       _links: {

@@ -15,7 +15,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import {
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import {
   map,
@@ -49,16 +49,16 @@ import { StickyPopoverDirective } from './sticky-popover.directive';
   templateUrl: './metadata-link-view.component.html',
   styleUrls: ['./metadata-link-view.component.scss'],
   imports: [
-    NgbPopoverModule,
-    RouterLink,
-    EntityIconDirective,
-    NgIf,
-    NgbTooltipModule,
-    MetadataLinkViewPopoverComponent,
-    VarDirective,
-    NgTemplateOutlet,
     AsyncPipe,
+    EntityIconDirective,
+    MetadataLinkViewPopoverComponent,
+    NgbPopoverModule,
+    NgbTooltipModule,
+    NgIf,
+    NgTemplateOutlet,
+    RouterLink,
     StickyPopoverDirective,
+    VarDirective,
   ],
   standalone: true,
 })
@@ -112,7 +112,7 @@ export class MetadataLinkViewComponent implements OnInit {
    * On init process metadata to get the information and form MetadataOrcid model
    */
   ngOnInit(): void {
-    this.metadataView$ = observableOf(this.metadata).pipe(
+    this.metadataView$ = of(this.metadata).pipe(
       switchMap((metadataValue: MetadataValue) => this.getMetadataView(metadataValue)),
       take(1),
     );
@@ -136,7 +136,7 @@ export class MetadataLinkViewComponent implements OnInit {
         map((itemRD: RemoteData<Item>) => this.createMetadataView(itemRD, metadataValue)),
       );
     } else {
-      return observableOf({
+      return of({
         authority: null,
         value: metadataValue.value,
         orcidAuthenticated: null,

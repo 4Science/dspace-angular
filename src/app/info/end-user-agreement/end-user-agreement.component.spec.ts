@@ -123,7 +123,7 @@ describe('EndUserAgreementComponent', () => {
       describe('submit', () => {
         describe('when accepting the agreement was successful', () => {
           beforeEach(() => {
-          (endUserAgreementService.setUserAcceptedAgreement as jasmine.Spy).and.returnValue(of(true));
+            (endUserAgreementService.setUserAcceptedAgreement as jasmine.Spy).and.returnValue(of(true));
             component.submit();
           });
 
@@ -138,7 +138,7 @@ describe('EndUserAgreementComponent', () => {
 
         describe('when accepting the agreement was unsuccessful', () => {
           beforeEach(() => {
-          (endUserAgreementService.setUserAcceptedAgreement as jasmine.Spy).and.returnValue(of(false));
+            (endUserAgreementService.setUserAcceptedAgreement as jasmine.Spy).and.returnValue(of(false));
             component.submit();
           });
 

@@ -30,12 +30,12 @@ import { SearchChartComponent } from '../../../search/search-charts/search-chart
   templateUrl: './facet-section.component.html',
   standalone: true,
   imports: [
-    SearchChartComponent,
-    RouterLink,
+    AsyncPipe,
     NgForOf,
     NgIf,
+    RouterLink,
+    SearchChartComponent,
     TranslateModule,
-    AsyncPipe,
   ],
 })
 export class FacetSectionComponent implements OnInit {

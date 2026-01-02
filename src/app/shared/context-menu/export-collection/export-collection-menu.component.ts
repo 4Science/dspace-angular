@@ -40,8 +40,8 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   templateUrl: './export-collection-menu.component.html',
   standalone: true,
   imports: [
-    NgIf,
     AsyncPipe,
+    NgIf,
     TranslateModule,
   ],
 })

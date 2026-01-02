@@ -11,7 +11,9 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   templateUrl: './heading.component.html',
   styleUrls: ['./heading.component.scss'],
   standalone: true,
-  imports: [ComcolPageHeaderComponent],
+  imports: [
+    ComcolPageHeaderComponent,
+  ],
 })
 export class HeadingComponent extends RenderingTypeValueModelComponent {
 

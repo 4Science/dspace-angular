@@ -30,7 +30,7 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import {
   Observable,
-  of as observableOf,
+  of,
   Subscription,
 } from 'rxjs';
 import {
@@ -74,13 +74,13 @@ import { DynamicRelationGroupModel } from '../dynamic-relation-group.model';
   templateUrl: './dynamic-relation-group-modal.component.html',
   animations: [shrinkInOut],
   imports: [
-    FormComponent,
-    NgClass,
-    NgIf,
-    NgbTooltipModule,
-    TranslateModule,
     AsyncPipe,
     BtnDisabledDirective,
+    FormComponent,
+    NgbTooltipModule,
+    NgClass,
+    NgIf,
+    TranslateModule,
   ],
   standalone: true,
 })
@@ -214,7 +214,7 @@ export class DsDynamicRelationGroupModalComponent extends DynamicFormControlComp
         map((vocabulary: Vocabulary) => isNotEmpty(vocabulary.entity) && isNotEmpty(vocabulary.getExternalSourceByMetadata(this.model.mandatoryField))),
       );
     } else {
-      return observableOf(false);
+      return of(false);
     }
   }
 

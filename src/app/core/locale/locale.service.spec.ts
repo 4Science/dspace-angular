@@ -7,7 +7,7 @@ import {
   TranslateModule,
   TranslateService,
 } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { CookieServiceMock } from '../../shared/mocks/cookie.service.mock';
 import { TranslateLoaderMock } from '../../shared/mocks/translate-loader.mock';
@@ -159,7 +159,7 @@ describe('LocaleService test suite', () => {
         });
         describe('whith correct lang query param ', () => {
           beforeEach(() => {
-            spyOnGetLanguage.and.returnValue(observableOf('en'));
+            spyOnGetLanguage.and.returnValue(of('en'));
             service.initDefaults();
           });
           it('should set correct lang', () => {
@@ -168,7 +168,7 @@ describe('LocaleService test suite', () => {
         });
         describe('whith wrong lang query param ', () => {
           beforeEach(() => {
-            spyOnGetLanguage.and.returnValue(observableOf('abcd'));
+            spyOnGetLanguage.and.returnValue(of('abcd'));
             service.initDefaults();
           });
           it('should not set lang', () => {

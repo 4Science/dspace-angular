@@ -32,7 +32,9 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   templateUrl: './valuepair.component.html',
   styleUrls: ['./valuepair.component.scss'],
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [
+    AsyncPipe,
+  ],
 })
 export class ValuepairComponent extends RenderingTypeValueModelComponent implements OnInit {
 

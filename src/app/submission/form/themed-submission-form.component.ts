@@ -2,6 +2,7 @@ import {
   Component,
   Input,
 } from '@angular/core';
+import { MetadataSecurityConfiguration } from 'src/app/core/submission/models/metadata-security-configuration';
 
 import { SubmissionDefinitionsModel } from '../../core/config/models/config-submission-definitions.model';
 import { Item } from '../../core/shared/item.model';
@@ -9,7 +10,6 @@ import { WorkspaceitemSectionsObject } from '../../core/submission/models/worksp
 import { ThemedComponent } from '../../shared/theme-support/themed.component';
 import { SubmissionError } from '../objects/submission-error.model';
 import { SubmissionFormComponent } from './submission-form.component';
-import { MetadataSecurityConfiguration } from 'src/app/core/submission/models/metadata-security-configuration';
 
 @Component({
   selector: 'ds-submission-form',

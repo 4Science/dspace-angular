@@ -30,9 +30,9 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   templateUrl: './audit-item-menu.component.html',
   standalone: true,
   imports: [
+    AsyncPipe,
     NgIf,
     RouterLink,
-    AsyncPipe,
     TranslateModule,
   ],
 })

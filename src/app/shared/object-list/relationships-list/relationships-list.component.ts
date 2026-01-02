@@ -20,8 +20,8 @@ import { RelationshipsItemsListPreviewComponent } from './relationships-items-li
   templateUrl: './relationships-list.component.html',
   styleUrls: ['./relationships-list.component.scss'],
   imports: [
-    RelationshipsItemsListPreviewComponent,
     RelationshipsItemsActionsComponent,
+    RelationshipsItemsListPreviewComponent,
   ],
   standalone: true,
 })

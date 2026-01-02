@@ -36,9 +36,9 @@ import { CrisLayoutComponent } from '../cris-layout/cris-layout.component';
   templateUrl: './item-detail-page-modal.component.html',
   styleUrls: ['./item-detail-page-modal.component.scss'],
   imports: [
+    AsyncPipe,
     CrisLayoutComponent,
     TranslateModule,
-    AsyncPipe,
   ],
   standalone: true,
 })

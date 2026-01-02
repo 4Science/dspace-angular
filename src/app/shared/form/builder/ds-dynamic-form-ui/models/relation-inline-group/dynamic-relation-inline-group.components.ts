@@ -27,7 +27,7 @@ import {
   DynamicFormValidationService,
   DynamicInputModel,
 } from '@ng-dynamic-forms/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { SubmissionFormsModel } from '../../../../../../core/config/models/config-submission-forms.model';
@@ -73,7 +73,7 @@ export class DsDynamicRelationInlineGroupComponent extends DynamicFormControlCom
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
   @Output() focus: EventEmitter<any> = new EventEmitter<any>();
 
-  public formCollapsed = observableOf(false);
+  public formCollapsed = of(false);
   public formGroup: FormGroup;
   public formModel: DynamicFormControlModel[];
 

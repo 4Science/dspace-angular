@@ -19,9 +19,9 @@ import { SocialService } from './social.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
+    AsyncPipe,
     NgFor,
     NgIf,
-    AsyncPipe,
   ],
 })
 /**

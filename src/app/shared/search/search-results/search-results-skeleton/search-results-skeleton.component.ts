@@ -30,8 +30,8 @@ import { hasValue } from '../../../empty.util';
   selector: 'ds-search-results-skeleton',
   standalone: true,
   imports: [
-    AsyncPipe,
     AlertComponent,
+    AsyncPipe,
     NgxSkeletonLoaderModule,
   ],
   templateUrl: './search-results-skeleton.component.html',

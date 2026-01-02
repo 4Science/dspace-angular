@@ -363,7 +363,7 @@ describe('ThumbnailComponent', () => {
         it('should show the default image', () => {
           comp.defaultImage = 'default/image.jpg';
           comp.ngOnChanges({});
-        expect(comp.src()).toBe('default/image.jpg');
+          expect(comp.src()).toBe('default/image.jpg');
         });
       });
     });

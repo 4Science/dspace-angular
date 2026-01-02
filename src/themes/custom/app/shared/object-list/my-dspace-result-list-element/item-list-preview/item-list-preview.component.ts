@@ -27,19 +27,19 @@ import { ThemedThumbnailComponent } from '../../../../../../../app/thumbnail/the
   animations: [fadeInOut],
   standalone: true,
   imports: [
+    AdditionalMetadataComponent,
     AsyncPipe,
+    InWorkflowStatisticsComponent,
     ItemCollectionComponent,
+    ItemCorrectionComponent,
     ItemSubmitterComponent,
+    MetadataLinkViewComponent,
     NgClass,
     ThemedBadgesComponent,
     ThemedThumbnailComponent,
     TranslateModule,
     TruncatableComponent,
     TruncatablePartComponent,
-    MetadataLinkViewComponent,
-    AdditionalMetadataComponent,
-    ItemCorrectionComponent,
-    InWorkflowStatisticsComponent,
   ],
 })
 export class ItemListPreviewComponent extends BaseComponent {

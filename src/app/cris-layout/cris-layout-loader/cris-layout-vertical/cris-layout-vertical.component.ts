@@ -25,12 +25,12 @@ import { CrisLayoutSidebarComponent } from './cris-layout-sidebar/cris-layout-si
   styleUrls: ['./cris-layout-vertical.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
-    CrisLayoutSidebarComponent,
+    AsyncPipe,
     ContextMenuComponent,
     CrisLayoutMatrixComponent,
     CrisLayoutNavbarComponent,
-    AsyncPipe,
+    CrisLayoutSidebarComponent,
+    NgIf,
   ],
 })
 export class CrisLayoutVerticalComponent {

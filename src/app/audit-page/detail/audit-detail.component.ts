@@ -33,12 +33,12 @@ import { VarDirective } from '../../shared/utils/var.directive';
   templateUrl: './audit-detail.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    NgIf,
     AsyncPipe,
+    DatePipe,
+    NgIf,
+    RouterLink,
     TranslateModule,
     VarDirective,
-    DatePipe,
-    RouterLink,
   ],
   standalone: true,
 })

@@ -17,9 +17,9 @@ import { CrisLayoutBoxContainerComponent } from './cris-layout-box-container/cri
   styleUrls: ['./cris-layout-matrix.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
     CrisLayoutBoxContainerComponent,
+    NgFor,
+    NgIf,
   ],
 })
 export class CrisLayoutMatrixComponent {

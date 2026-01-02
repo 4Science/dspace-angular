@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   KeyValuePipe,
-  Location,
   SlicePipe,
 } from '@angular/common';
 import {
@@ -43,7 +42,6 @@ import { Item } from '../../core/shared/item.model';
 import { MetadataMap } from '../../core/shared/metadata.models';
 import { fadeInOut } from '../../shared/animations/fade';
 import { ContextMenuComponent } from '../../shared/context-menu/context-menu.component';
-import { DsoEditMenuComponent } from '../../shared/dso-page/dso-edit-menu/dso-edit-menu.component';
 import { hasValue } from '../../shared/empty.util';
 import { ErrorComponent } from '../../shared/error/error.component';
 import { ThemedLoadingComponent } from '../../shared/loading/themed-loading.component';

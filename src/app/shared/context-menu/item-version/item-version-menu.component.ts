@@ -32,8 +32,8 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   styleUrls: ['./item-version-menu.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     AsyncPipe,
+    NgIf,
     TranslateModule,
   ],
 })

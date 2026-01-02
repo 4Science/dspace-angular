@@ -35,13 +35,13 @@ import { UsageReport } from '../../../core/statistics/models/usage-report.model'
   styleUrls: ['./statistics-map.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
+    AsyncPipe,
+    BtnDisabledDirective,
+    Ng2GoogleChartsModule,
     NgbDropdownModule,
     NgFor,
-    Ng2GoogleChartsModule,
-    AsyncPipe,
+    NgIf,
     TranslateModule,
-    BtnDisabledDirective,
   ],
 })
 // @renderChartFor(StatisticsType['map'])

@@ -22,7 +22,10 @@ import { MetadataContainerComponent } from './metadata-container/metadata-contai
   templateUrl: './row.component.html',
   styleUrls: ['./row.component.scss'],
   standalone: true,
-  imports: [NgFor, MetadataContainerComponent],
+  imports: [
+    MetadataContainerComponent,
+    NgFor,
+  ],
 })
 export class RowComponent {
 

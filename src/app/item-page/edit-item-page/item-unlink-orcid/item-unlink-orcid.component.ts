@@ -42,11 +42,11 @@ import { ModifyItemOverviewComponent } from '../modify-item-overview/modify-item
   standalone: true,
   imports: [
     AlertComponent,
-    TranslateModule,
+    AsyncPipe,
     ModifyItemOverviewComponent,
     NgIf,
     RouterLink,
-    AsyncPipe,
+    TranslateModule,
   ],
 })
 export class ItemUnlinkOrcidComponent implements OnInit {

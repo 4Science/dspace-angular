@@ -57,6 +57,7 @@ export interface SelectionConfig {
   ],
   standalone: true,
   imports: [
+    AlertComponent,
     AsyncPipe,
     ErrorComponent,
     NgxSkeletonLoaderModule,
@@ -65,7 +66,6 @@ export interface SelectionConfig {
     SearchExportCsvComponent,
     SearchResultsSkeletonComponent,
     TranslateModule,
-    AlertComponent,
   ],
 })
 

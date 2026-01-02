@@ -26,7 +26,10 @@ import { RowComponent } from './row/row.component';
   templateUrl: './cris-layout-metadata-box.component.html',
   styleUrls: ['./cris-layout-metadata-box.component.scss'],
   standalone: true,
-  imports: [NgFor, RowComponent],
+  imports: [
+    NgFor,
+    RowComponent,
+  ],
 })
 /**
  * For overwrite this component create a new one that extends CrisLayoutBoxObj and

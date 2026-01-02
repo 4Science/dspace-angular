@@ -11,7 +11,10 @@ import { AbstractChartComponent } from '../abstract-chart/abstract-chart.compone
   templateUrl: './pie-chart.component.html',
   animations: [fadeIn],
   standalone: true,
-  imports: [PieChartModule, AsyncPipe],
+  imports: [
+    AsyncPipe,
+    PieChartModule,
+  ],
 })
 export class PieChartComponent extends AbstractChartComponent {
   /**

@@ -28,9 +28,9 @@ import { SearchChartFilterComponent } from '../search-chart-filter/search-chart-
   templateUrl: './search-chart-bar-to-right.component.html',
   animations: [facetLoad],
   imports: [
+    AsyncPipe,
     ChartComponent,
     NgIf,
-    AsyncPipe,
     TranslateModule,
   ],
   standalone: true,

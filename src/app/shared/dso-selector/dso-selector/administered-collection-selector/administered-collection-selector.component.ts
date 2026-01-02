@@ -45,7 +45,19 @@ import { DSOSelectorComponent } from '../dso-selector.component';
   styleUrls: ['../dso-selector.component.scss'],
   templateUrl: '../dso-selector.component.html',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, InfiniteScrollModule, NgIf, NgFor, HoverClassDirective, NgClass, ListableObjectComponentLoaderComponent, ThemedLoadingComponent, AsyncPipe, TranslateModule],
+  imports: [
+    AsyncPipe,
+    FormsModule,
+    HoverClassDirective,
+    InfiniteScrollModule,
+    ListableObjectComponentLoaderComponent,
+    NgClass,
+    NgFor,
+    NgIf,
+    ReactiveFormsModule,
+    ThemedLoadingComponent,
+    TranslateModule,
+  ],
 })
 /**
  * Component rendering a list of collections to select from

@@ -30,8 +30,8 @@ import { ValueInputComponent } from '../value-input.component';
   standalone: true,
   imports: [
     FormsModule,
-    TranslateModule,
     NgIf,
+    TranslateModule,
   ],
 })
 export class NumberValueInputComponent extends ValueInputComponent<string> implements OnInit {

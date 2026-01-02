@@ -6,10 +6,7 @@ import {
   waitForAsync,
 } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
-import {
-  of as observableOf,
-  of,
-} from 'rxjs';
+import { of } from 'rxjs';
 
 import { AuthService } from '../../../core/auth/auth.service';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
@@ -27,10 +24,10 @@ describe('MetadataLinkViewAvatarPopoverComponent', () => {
 
   beforeEach(waitForAsync(() => {
     authService = jasmine.createSpyObj('AuthService', {
-      isAuthenticated: observableOf(true),
+      isAuthenticated: of(true),
     });
     authorizationService = jasmine.createSpyObj('AuthorizationService', {
-      isAuthorized: observableOf(true),
+      isAuthorized: of(true),
     });
     fileService = jasmine.createSpyObj('FileService', {
       retrieveFileDownloadLink: null,

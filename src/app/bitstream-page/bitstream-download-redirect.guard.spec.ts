@@ -5,7 +5,7 @@ import {
 } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { getForbiddenRoute } from '../app-routing-paths';
 import { AuthService } from '../core/auth/auth.service';
@@ -68,15 +68,15 @@ describe('BitstreamDownloadRedirectGuard', () => {
 
   function init() {
     authService = jasmine.createSpyObj('authService', {
-      isAuthenticated: observableOf(true),
+      isAuthenticated: of(true),
       setRedirectUrl: {},
     });
     authorizationService = jasmine.createSpyObj('authorizationSerivice', {
-      isAuthorized: observableOf(true),
+      isAuthorized: of(true),
     });
 
     fileService = jasmine.createSpyObj('fileService', {
-      retrieveFileDownloadLink: observableOf('content-url-with-headers'),
+      retrieveFileDownloadLink: of('content-url-with-headers'),
     });
 
     hardRedirectService = jasmine.createSpyObj('fileService', {
@@ -84,11 +84,11 @@ describe('BitstreamDownloadRedirectGuard', () => {
     });
 
     halEndpointService = jasmine.createSpyObj('halEndpointService', {
-      getEndpoint: observableOf('https://rest.api/core'),
+      getEndpoint: of('https://rest.api/core'),
     });
 
     remoteDataBuildService = jasmine.createSpyObj('remoteDataBuildService', {
-      buildSingle: observableOf(new Bitstream()),
+      buildSingle: of(new Bitstream()),
     });
 
     uuidService = jasmine.createSpyObj('uuidService', {
@@ -107,7 +107,7 @@ describe('BitstreamDownloadRedirectGuard', () => {
 
     store = jasmine.createSpyObj('store', {
       dispatch: {},
-      pipe: observableOf(true),
+      pipe: of(true),
     });
 
     serverResponseService = jasmine.createSpyObj('ServerResponseService', {
@@ -115,11 +115,11 @@ describe('BitstreamDownloadRedirectGuard', () => {
     });
 
     signpostingDataService = jasmine.createSpyObj('SignpostingDataService', {
-      getLinks: observableOf([mocklink, mocklink2]),
+      getLinks: of([mocklink, mocklink2]),
     });
 
     objectCacheService = jasmine.createSpyObj('objectCacheService', {
-      getByHref: observableOf(null),
+      getByHref: of(null),
     });
 
     bitstreamDataService = jasmine.createSpyObj('bitstreamDataService', {
@@ -163,7 +163,7 @@ describe('BitstreamDownloadRedirectGuard', () => {
     describe('when the user is authorized and not logged in', () => {
       beforeEach(() => {
         init();
-        (authService.isAuthenticated as jasmine.Spy).and.returnValue(observableOf(false));
+        (authService.isAuthenticated as jasmine.Spy).and.returnValue(of(false));
         initTestbed();
       });
       it('should redirect to the content link', waitForAsync(() => {
@@ -191,7 +191,7 @@ describe('BitstreamDownloadRedirectGuard', () => {
     describe('when the user is not authorized and logged in', () => {
       beforeEach(() => {
         init();
-        (authorizationService.isAuthorized as jasmine.Spy).and.returnValue(observableOf(false));
+        (authorizationService.isAuthorized as jasmine.Spy).and.returnValue(of(false));
         initTestbed();
       });
       it('should navigate to the forbidden route', waitForAsync(() => {
@@ -205,8 +205,8 @@ describe('BitstreamDownloadRedirectGuard', () => {
     describe('when the user is not authorized and not logged in', () => {
       beforeEach(() => {
         init();
-        (authService.isAuthenticated as jasmine.Spy).and.returnValue(observableOf(false));
-        (authorizationService.isAuthorized as jasmine.Spy).and.returnValue(observableOf(false));
+        (authService.isAuthenticated as jasmine.Spy).and.returnValue(of(false));
+        (authorizationService.isAuthorized as jasmine.Spy).and.returnValue(of(false));
         initTestbed();
       });
       it('should navigate to the login page', waitForAsync(() => {

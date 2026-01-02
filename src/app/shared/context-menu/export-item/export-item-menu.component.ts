@@ -31,7 +31,11 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   selector: 'ds-context-menu-export-item',
   templateUrl: './export-item-menu.component.html',
   standalone: true,
-  imports: [NgIf, TranslateModule, AsyncPipe],
+  imports: [
+    AsyncPipe,
+    NgIf,
+    TranslateModule,
+  ],
 })
 export class ExportItemMenuComponent extends ContextMenuEntryComponent implements OnInit {
 

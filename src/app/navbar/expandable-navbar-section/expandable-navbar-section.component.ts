@@ -38,11 +38,11 @@ import { NavbarSectionComponent } from '../navbar-section/navbar-section.compone
   animations: [slide],
   standalone: true,
   imports: [
-    VarDirective,
     AsyncPipe,
     HoverOutsideDirective,
     NgComponentOutlet,
     RouterLinkActive,
+    VarDirective,
   ],
 })
 export class ExpandableNavbarSectionComponent extends NavbarSectionComponent implements AfterViewChecked, OnInit, OnDestroy {

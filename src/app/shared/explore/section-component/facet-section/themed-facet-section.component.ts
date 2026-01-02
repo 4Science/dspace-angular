@@ -12,7 +12,9 @@ import { FacetSectionComponent } from './facet-section.component';
   styleUrls: [],
   templateUrl: '../../../theme-support/themed.component.html',
   standalone: true,
-  imports: [FacetSectionComponent],
+  imports: [
+    FacetSectionComponent,
+  ],
 })
 export class ThemedFacetSectionComponent extends ThemedComponent<FacetSectionComponent> {
 

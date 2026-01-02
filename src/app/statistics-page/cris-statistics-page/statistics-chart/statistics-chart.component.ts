@@ -31,14 +31,14 @@ import { StatisticsChartWrapperComponent } from './statistics-chart-wrapper/stat
   templateUrl: './statistics-chart.component.html',
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
-    NgClass,
-    StatisticsChartWrapperComponent,
     FilterMapPipe,
-    TranslateModule,
-    ThemedLoadingComponent,
+    NgClass,
+    NgFor,
+    NgIf,
     RouterLink,
+    StatisticsChartWrapperComponent,
+    ThemedLoadingComponent,
+    TranslateModule,
   ],
 })
 

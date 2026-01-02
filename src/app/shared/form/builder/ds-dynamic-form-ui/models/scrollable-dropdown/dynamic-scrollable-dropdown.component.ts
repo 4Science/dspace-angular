@@ -1,6 +1,5 @@
 import {
   AsyncPipe,
-  NgForOf,
   NgIf,
 } from '@angular/common';
 import {
@@ -81,11 +80,11 @@ import { DynamicScrollableDropdownModel } from './dynamic-scrollable-dropdown.mo
   styleUrls: ['./dynamic-scrollable-dropdown.component.scss'],
   templateUrl: './dynamic-scrollable-dropdown.component.html',
   imports: [
-    NgIf,
     AsyncPipe,
     BtnDisabledDirective,
     InfiniteScrollDirective,
     NgbDropdownModule,
+    NgIf,
     TranslateModule,
   ],
   standalone: true,

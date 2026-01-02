@@ -18,11 +18,11 @@ import { FileDownloadLinkComponent } from '../../../../../../../../../../../shar
   styleUrls: ['./file-download-button.component.scss'],
   standalone: true,
   imports: [
+    AsyncPipe,
+    BtnDisabledDirective,
     NgIf,
     RouterLink,
-    AsyncPipe,
     TranslateModule,
-    BtnDisabledDirective,
   ],
 })
 /**

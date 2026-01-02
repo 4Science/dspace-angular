@@ -17,7 +17,7 @@ import {
 } from '@ngx-translate/core';
 import {
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 
 import { AuthService } from '../../core/auth/auth.service';
@@ -57,7 +57,7 @@ describe('InvitationAcceptanceComponent', () => {
   const paramObject: Params = {};
   paramObject.registrationToken = '1234';
   const authService = {
-    getAuthenticatedUserFromStore: () => observableOf(ePerson),
+    getAuthenticatedUserFromStore: () => of(ePerson),
   } as AuthService;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -74,7 +74,7 @@ describe('InvitationAcceptanceComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            paramMap: observableOf(convertToParamMap(paramObject)),
+            paramMap: of(convertToParamMap(paramObject)),
           },
         },
         { provide: EpersonRegistrationService, useValue: epersonRegistrationService },

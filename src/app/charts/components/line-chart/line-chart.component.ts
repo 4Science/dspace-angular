@@ -13,8 +13,8 @@ import { AbstractChartComponent } from '../abstract-chart/abstract-chart.compone
   animations: [fadeIn],
   standalone: true,
   imports: [
-    LineChartModule,
     AsyncPipe,
+    LineChartModule,
     TranslateModule,
   ],
 })

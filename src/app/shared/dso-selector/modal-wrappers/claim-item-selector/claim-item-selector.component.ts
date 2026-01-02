@@ -37,11 +37,11 @@ import { DSOSelectorModalWrapperComponent } from '../dso-selector-modal-wrapper.
   selector: 'ds-claim-item-selector',
   templateUrl: './claim-item-selector.component.html',
   imports: [
+    AsyncPipe,
+    BtnDisabledDirective,
     ListableObjectComponentLoaderComponent,
     NgForOf,
     TranslateModule,
-    AsyncPipe,
-    BtnDisabledDirective,
   ],
   standalone: true,
 })

@@ -31,7 +31,11 @@ import { ContextHelpDirective } from '../../shared/context-help.directive';
 import { OrejimeService } from '../../shared/cookies/orejime.service';
 import { isEmpty } from '../../shared/empty.util';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
-import { SwitchColor, SwitchComponent, SwitchOption } from '../../shared/switch/switch.component';
+import {
+  SwitchColor,
+  SwitchComponent,
+  SwitchOption,
+} from '../../shared/switch/switch.component';
 
 /**
  * Component providing the form where users can update accessibility settings.

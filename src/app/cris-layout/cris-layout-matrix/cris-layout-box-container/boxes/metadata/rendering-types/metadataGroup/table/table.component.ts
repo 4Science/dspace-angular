@@ -17,10 +17,10 @@ import { MetadataGroupComponent } from '../metadata-group.component';
   styleUrls: ['./table.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
-    MetadataRenderComponent,
     AsyncPipe,
+    MetadataRenderComponent,
+    NgFor,
+    NgIf,
   ],
 })
 export class TableComponent extends MetadataGroupComponent {

@@ -25,11 +25,11 @@ declare let __dimensions_embed: any;
   styleUrls: ['./metric-dimensions.component.scss', '../metric-loader/base-metric.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     AsyncPipe,
+    ListMetricPropsPipe,
+    NgIf,
     TitleCasePipe,
     TranslateModule,
-    ListMetricPropsPipe,
   ],
 })
 export class MetricDimensionsComponent extends BaseEmbeddedMetricComponent implements OnInit, OnDestroy {

@@ -56,8 +56,8 @@ import { MyDspaceQaEventsNotificationsComponent } from './my-dspace-qa-events-no
   imports: [
     AsyncPipe,
     MyDSpaceBulkActionComponent,
-    MyDSpaceNewSubmissionComponent,
     MyDSpaceNewBulkImportComponent,
+    MyDSpaceNewSubmissionComponent,
     MyDspaceQaEventsNotificationsComponent,
     RoleDirective,
     SuggestionsNotificationComponent,

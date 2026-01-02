@@ -38,15 +38,15 @@ import { BitstreamAttachmentRenderingModelComponent } from './bitstream-attachme
   styleUrls: ['./attachment.component.scss'],
   standalone: true,
   imports: [
-    NgFor,
-    TruncatableComponent,
-    ThemedFileDownloadLinkComponent,
-    NgIf,
-    TruncatablePartComponent,
     AsyncPipe,
+    FileSizePipe,
+    NgFor,
+    NgIf,
+    ThemedFileDownloadLinkComponent,
     TitleCasePipe,
     TranslateModule,
-    FileSizePipe,
+    TruncatableComponent,
+    TruncatablePartComponent,
   ],
 })
 /**

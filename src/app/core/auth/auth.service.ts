@@ -55,7 +55,6 @@ import { NoContent } from '../shared/NoContent.model';
 import {
   getAllSucceededRemoteDataPayload,
   getFirstCompletedRemoteData,
-  getFirstSucceededRemoteDataPayload,
 } from '../shared/operators';
 import { PageInfo } from '../shared/page-info.model';
 import { URLCombiner } from '../url-combiner/url-combiner';

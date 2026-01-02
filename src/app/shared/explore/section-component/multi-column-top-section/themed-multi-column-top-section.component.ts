@@ -12,7 +12,9 @@ import { MultiColumnTopSectionComponent } from './multi-column-top-section.compo
   styleUrls: [],
   templateUrl: '../../../theme-support/themed.component.html',
   standalone: true,
-  imports: [MultiColumnTopSectionComponent],
+  imports: [
+    MultiColumnTopSectionComponent,
+  ],
 })
 export class ThemedMultiColumnTopSectionComponent extends ThemedComponent<MultiColumnTopSectionComponent> {
 

@@ -23,7 +23,9 @@ import {
   templateUrl: './attachment-render.component.html',
   styleUrls: ['./attachment-render.component.scss'],
   standalone: true,
-  imports: [CrisLayoutLoaderDirective],
+  imports: [
+    CrisLayoutLoaderDirective,
+  ],
 })
 export class AttachmentRenderComponent implements OnInit {
 

@@ -38,7 +38,6 @@ import { PaginationService } from '../core/pagination/pagination.service';
 import { ConfigurationProperty } from '../core/shared/configuration-property.model';
 import {
   getAllCompletedRemoteData,
-  getAllSucceededRemoteData,
   getFirstCompletedRemoteData,
   getRemoteDataPayload,
 } from '../core/shared/operators';

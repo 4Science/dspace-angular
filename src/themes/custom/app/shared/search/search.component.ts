@@ -31,17 +31,17 @@ import { ViewModeSwitchComponent } from '../../../../../app/shared/view-mode-swi
   standalone: true,
   imports: [
     AsyncPipe,
+    ItemExportModalLauncherComponent,
+    NgbTooltipModule,
     NgTemplateOutlet,
     PageWithSidebarComponent,
+    SearchChartsComponent,
     SearchLabelsComponent,
     ThemedSearchFormComponent,
     ThemedSearchResultsComponent,
     ThemedSearchSidebarComponent,
     TranslateModule,
     ViewModeSwitchComponent,
-    NgbTooltipModule,
-    ItemExportModalLauncherComponent,
-    SearchChartsComponent,
   ],
 })
 export class SearchComponent extends BaseComponent {
