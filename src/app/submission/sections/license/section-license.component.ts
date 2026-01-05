@@ -70,7 +70,6 @@ import {
     FormComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class SubmissionSectionLicenseComponent   extends SectionModelComponent implements AfterViewChecked {
 

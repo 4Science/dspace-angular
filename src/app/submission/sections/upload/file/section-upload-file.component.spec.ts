@@ -5,7 +5,7 @@ import {
 import {
   ChangeDetectorRef,
   Component,
-  NO_ERRORS_SCHEMA,
+  CUSTOM_ELEMENTS_SCHEMA,
 } from '@angular/core';
 import {
   ComponentFixture,
@@ -23,7 +23,6 @@ import {
   of,
 } from 'rxjs';
 
-import { APP_DATA_SERVICES_MAP } from '../../../../../config/app-config.interface';
 import { JsonPatchOperationPathCombiner } from '../../../../core/json-patch/builder/json-patch-operation-path-combiner';
 import { JsonPatchOperationsBuilder } from '../../../../core/json-patch/builder/json-patch-operations-builder';
 import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service';
@@ -54,7 +53,6 @@ import { SectionUploadService } from '../section-upload.service';
 import { POLICY_DEFAULT_WITH_LIST } from '../section-upload-constants';
 import { SubmissionSectionUploadFileEditComponent } from './edit/section-upload-file-edit.component';
 import { SubmissionSectionUploadFileComponent } from './section-upload-file.component';
-import { ThemedSubmissionSectionUploadFileComponent } from './themed-section-upload-file.component';
 import { SubmissionSectionUploadFileViewComponent } from './view/section-upload-file-view.component';
 
 const configMetadataFormMock = {
@@ -68,7 +66,7 @@ const configMetadataFormMock = {
   }],
 };
 
-describe('SubmissionSectionUploadFileComponent test suite', () => {
+describe('SubmissionSectionUploadFileComponent', () => {
 
   let comp: SubmissionSectionUploadFileComponent;
   let compAsAny: any;
@@ -124,7 +122,6 @@ describe('SubmissionSectionUploadFileComponent test suite', () => {
         { provide: SubmissionService, useClass: SubmissionServiceStub },
         { provide: SectionUploadService, useValue: getMockSectionUploadService() },
         { provide: ThemeService, useValue: getMockThemeService() },
-        { provide: APP_DATA_SERVICES_MAP, useValue: {} },
         ChangeDetectorRef,
         NgbModal,
         SubmissionSectionUploadFileComponent,
@@ -132,15 +129,17 @@ describe('SubmissionSectionUploadFileComponent test suite', () => {
         FormBuilderService,
         { provide: VocabularyService, useValue: vocabularyServiceSpy },
       ],
-      schemas: [NO_ERRORS_SCHEMA],
     })
       .overrideComponent(SubmissionSectionUploadFileComponent, {
+        add: {
+          schemas: [CUSTOM_ELEMENTS_SCHEMA],
+        },
         remove: { imports: [
           SubmissionSectionUploadFileViewComponent,
           ThemedFileDownloadLinkComponent,
         ] },
       })
-      .compileComponents().then();
+      .compileComponents();
   }));
 
   describe('', () => {
@@ -328,16 +327,15 @@ describe('SubmissionSectionUploadFileComponent test suite', () => {
 // declare a test component
 @Component({
   selector: 'ds-test-cmp',
-  template: ``,
-  standalone: true,
+  template: '{{ obs | async }}',
   imports: [
     AsyncPipe,
     NgbModule,
-    ThemedSubmissionSectionUploadFileComponent,
   ],
 })
 class TestComponent {
 
+  obs = of();
   availableGroups;
   availableAccessConditionOptions;
   collectionId = mockSubmissionCollectionId;

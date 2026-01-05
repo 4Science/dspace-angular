@@ -43,7 +43,6 @@ import { AdditionalMetadataComponent } from '../../search-result-list-element/ad
   styleUrls: ['item-list-preview.component.scss'],
   templateUrl: 'item-list-preview.component.html',
   animations: [fadeInOut],
-  standalone: true,
   imports: [
     AdditionalMetadataComponent,
     AsyncPipe,
@@ -134,7 +133,7 @@ export class ItemListPreviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.showThumbnails = this.showThumbnails ?? this.appConfig.browseBy.showThumbnails;
-    this.dsoTitle = this.dsoNameService.getHitHighlights(this.object, this.item);
+    this.dsoTitle = this.dsoNameService.getHitHighlights(this.object, this.item, true);
     this.isCollapsed$ = this.truncateService.isCollapsed(this.item.uuid);
   }
 

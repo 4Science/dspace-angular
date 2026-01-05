@@ -41,7 +41,6 @@ import { AbstractSimpleItemActionComponent } from './abstract-simple-item-action
 @Component({
   selector: 'ds-simple-action',
   templateUrl: './abstract-simple-item-action.component.html',
-  standalone: true,
   imports: [
     CommonModule,
     FormsModule,

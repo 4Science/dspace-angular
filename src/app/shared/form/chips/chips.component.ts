@@ -61,7 +61,6 @@ const TOOLTIP_TEXT_LIMIT = 21;
     NgClass,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class ChipsComponent implements OnChanges, OnInit {
   @Input() chips: Chips;

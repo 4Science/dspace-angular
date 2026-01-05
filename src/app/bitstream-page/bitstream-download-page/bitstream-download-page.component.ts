@@ -41,7 +41,6 @@ import { isNotEmpty } from '../../shared/empty.util';
     AsyncPipe,
     TranslateModule,
   ],
-  standalone: true,
 })
 /**
  * Page component for downloading a bitstream

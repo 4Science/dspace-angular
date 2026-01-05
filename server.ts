@@ -25,9 +25,7 @@ import * as ejs from 'ejs';
 import * as compression from 'compression';
 import expressStaticGzip from 'express-static-gzip';
 import * as domino from 'domino-ext';
-/* eslint-enable import/no-namespace */
-import axios from 'axios';
-import LRU from 'lru-cache';
+import { LRUCache } from 'lru-cache';
 import { isbot } from 'isbot';
 import { createCertificate } from 'pem';
 import { createServer } from 'https';
@@ -53,7 +51,7 @@ import {
 import { extendEnvironmentWithAppConfig } from './src/config/config.util';
 import { logStartupMessage } from './startup-message';
 import { TOKENITEM } from './src/app/core/auth/models/auth-token-info.model';
-import { CommonEngine } from '@angular/ssr';
+import { CommonEngine } from '@angular/ssr/node';
 import { APP_BASE_HREF } from '@angular/common';
 import {
   REQUEST,
@@ -77,10 +75,10 @@ const cookieParser = require('cookie-parser');
 const appConfig: AppConfig = buildAppConfig(join(DIST_FOLDER, 'assets/config.json'));
 
 // cache of SSR pages for known bots, only enabled in production mode
-let botCache: LRU<string, any>;
+let botCache: LRUCache<string, any>;
 
 // cache of SSR pages for anonymous users. Disabled by default, and only available in production mode
-let anonymousCache: LRU<string, any>;
+let anonymousCache: LRUCache<string, any>;
 
 // extend environment with app config for server
 extendEnvironmentWithAppConfig(environment, appConfig);
@@ -322,6 +320,8 @@ function serverSideRender(req, res, next, sendToUser: boolean = true) {
       ],
     })
     .then((html) => {
+      // If headers were already sent, then do nothing else, it is probably a
+      // redirect response
       if (res.writableEnded || res.headersSent || res.finished) {
         return;
       }
@@ -361,13 +361,24 @@ function serverSideRender(req, res, next, sendToUser: boolean = true) {
     });
 }
 
-/**
- * Send back response to user to trigger direct client-side rendering (CSR)
- * @param req current request
- * @param res current response
- */
+// Read file once at startup
+const indexHtmlContent = readFileSync(indexHtml, 'utf8');
+
 function clientSideRender(req, res) {
-  res.sendFile(indexHtml);
+  const namespace = environment.ui.nameSpace || '/';
+  let html = indexHtmlContent;
+  // Replace base href dynamically
+  html = html.replace(
+    /<base href="[^"]*">/,
+    `<base href="${namespace.endsWith('/') ? namespace : namespace + '/'}">`
+  );
+
+  // Replace REST URL with UI URL
+  if (environment.ssr.replaceRestUrl && REST_BASE_URL !== environment.rest.baseUrl) {
+    html = html.replace(new RegExp(REST_BASE_URL, 'g'), environment.rest.baseUrl);
+  }
+
+  res.send(html);
 }
 
 
@@ -390,7 +401,7 @@ function initCache() {
     // Initialize a new "least-recently-used" item cache (where least recently used pages are removed first)
     // See https://www.npmjs.com/package/lru-cache
     // When enabled, each page defaults to expiring after 1 day (defined in default-app-config.ts)
-    botCache = new LRU( {
+    botCache = new LRUCache( {
       max: environment.cache.serverSide.botCache.max,
       ttl: environment.cache.serverSide.botCache.timeToLive,
       allowStale: environment.cache.serverSide.botCache.allowStale,
@@ -402,7 +413,7 @@ function initCache() {
     // may expire pages more frequently.
     // When enabled, each page defaults to expiring after 10 seconds (defined in default-app-config.ts)
     // to minimize anonymous users seeing out-of-date content
-    anonymousCache = new LRU( {
+    anonymousCache = new LRUCache( {
       max: environment.cache.serverSide.anonymousCache.max,
       ttl: environment.cache.serverSide.anonymousCache.timeToLive,
       allowStale: environment.cache.serverSide.anonymousCache.allowStale,
@@ -479,7 +490,7 @@ function cacheCheck(req, res, next) {
  * @param next the next function
  * @returns cached copy (if found) or undefined (if not found)
  */
-function checkCacheForRequest(cacheName: string, cache: LRU<string, any>, req, res, next): any {
+function checkCacheForRequest(cacheName: string, cache: LRUCache<string, any>, req, res, next): any {
   // Get the cache key for this request
   const key = getCacheKey(req);
 
@@ -618,8 +629,8 @@ function createHttpsServer(keys) {
  * Create an HTTP server with the configured port and host.
  */
 function run() {
-  const port = environment.ui.port || 4000;
-  const host = environment.ui.host || '/';
+  const port = environment.ui.port;
+  const host = environment.ui.host;
 
   // Start up the Node server
   const server = app();
@@ -715,9 +726,9 @@ function isExcludedFromSsr(path: string, excludePathPattern: SsrExcludePatterns[
  */
 function healthCheck(req, res) {
   const baseUrl = `${REST_BASE_URL}${environment.actuators.endpointPath}`;
-  axios.get(baseUrl)
+  fetch(baseUrl)
     .then((response) => {
-      res.status(response.status).send(response.data);
+      res.status(response.status).send(response);
     })
     .catch((error) => {
       res.status(error.response.status).send({

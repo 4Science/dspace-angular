@@ -99,7 +99,6 @@ import { ThemedThumbnailComponent } from '../../thumbnail/themed-thumbnail.compo
     TranslateModule,
     VarDirective,
   ],
-  standalone: true,
 })
 /**
  * Page component for editing a bitstream

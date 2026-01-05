@@ -14,7 +14,7 @@
           }
         </div>
         <ds-truncatable [id]="item.id">
-          <h2 [innerHTML]="dsoTitle" [ngClass]="{'lead': true,'text-muted': !item.firstMetadataValue('dc.title')}"></h2>
+          <h2 [innerHTML]="dsoTitle" [ngClass]="{'lead': true,'text-muted': !item.hasMetadata('dc.title')}"></h2>
           @if (showWorkflowStatistics) {
             <ds-in-workflow-statistics [item]="item" ></ds-in-workflow-statistics>
           }
@@ -23,9 +23,9 @@
               <ds-truncatable-part [id]="item.id" [minLines]="1">
                 (@if (item.hasMetadata('dc.publisher')) {
                 <span class="item-list-publisher"
-                [innerHTML]="item.firstMetadataValue('dc.publisher') + ', '"></span>
+                [innerHTML]="item.firstMetadataValue('dc.publisher', undefined, true) + ', '"></span>
               }
-              <span class="item-list-date" [innerHTML]="item.firstMetadataValue('dc.date.issued') || ('mydspace.results.no-date' | translate)"></span>)
+              <span class="item-list-date" [innerHTML]="item.firstMetadataValue('dc.date.issued', undefined, true) || ('mydspace.results.no-date' | translate)"></span>)
               @if (item.hasMetadata(authorMetadata);) {
                 <span class="item-list-authors">
                   @if (item.allMetadataValues(authorMetadata).length === 0) {
@@ -33,14 +33,14 @@
                   }
                   @if ((isCollapsed$ | async) !== true) {
                     <span>
-                      @for (author of item.allMetadata(authorMetadata); track author; let i = $index; let last = $last) {
+                      @for (author of item.allMetadata(authorMetadata, undefined, true); track author; let i = $index; let last = $last) {
                         <span>
                           @if (!!item && !!author) {
-                            <ds-metadata-link-view [item]="item" [metadataName]="authorMetadata"
-                            [metadata]="author"></ds-metadata-link-view>
-                            }@if (!last) {
-                            <span
-                            >; </span>
+                            <ds-metadata-link-view [item]="item"
+                                                   [metadataName]="authorMetadata"
+                                                   [metadata]="author"></ds-metadata-link-view>
+                          } @if (!last) {
+                            <span>; </span>
                           }
                         </span>
                       }
@@ -48,14 +48,14 @@
                   }
                   @if (isCollapsed$ | async) {
                     <span>
-                      @for (author of item.limitedMetadata(authorMetadata, authorMetadataLimit); track author; let i = $index; let last = $last) {
+                      @for (author of item.limitedMetadata(authorMetadata, authorMetadataLimit, undefined, true); track author; let i = $index; let last = $last) {
                         <span>
                           @if (!!item && !!author) {
-                            <ds-metadata-link-view [item]="item" [metadataName]="authorMetadata"
-                            [metadata]="author"></ds-metadata-link-view>
-                            }@if (!last) {
-                            <span
-                            >; </span>
+                            <ds-metadata-link-view [item]="item"
+                                                   [metadataName]="authorMetadata"
+                                                   [metadata]="author"></ds-metadata-link-view>
+                          } @if (!last) {
+                            <span>; </span>
                           }
                         </span>
                       }
@@ -66,8 +66,8 @@
             </ds-truncatable-part>
           </span>
           <ds-truncatable-part [id]="item.id" [minLines]="1" class="item-list-abstract">
-            <span [ngClass]="{'text-muted': !item.firstMetadataValue('dc.description.abstract')}"
-            [innerHTML]="(item.firstMetadataValue('dc.description.abstract')) || ('mydspace.results.no-abstract' | translate)"></span>
+            <span [ngClass]="{'text-muted': !item.hasMetadata('dc.description.abstract')}"
+            [innerHTML]="(item.firstMetadataValue('dc.description.abstract', undefined, true)) || ('mydspace.results.no-abstract' | translate)"></span>
           </ds-truncatable-part>
           <ds-additional-metadata [object]="item"></ds-additional-metadata>
         </div>

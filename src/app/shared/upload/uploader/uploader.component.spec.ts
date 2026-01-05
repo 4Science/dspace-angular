@@ -1,4 +1,3 @@
-// Load the implementations that should be tested
 import { HttpXsrfTokenExtractor } from '@angular/common/http';
 import {
   ChangeDetectorRef,
@@ -73,8 +72,7 @@ describe('UploaderComponent test', () => {
 // declare a test component
 @Component({
   selector: 'ds-test-cmp',
-  template: ``,
-  standalone: true,
+  template: `<ds-uploader></ds-uploader>`,
   imports: [
     FileUploadModule,
     UploaderComponent,

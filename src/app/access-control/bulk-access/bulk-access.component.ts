@@ -33,7 +33,6 @@ import { BulkAccessSettingsComponent } from './settings/bulk-access-settings.com
     RouterLink,
     TranslateModule,
   ],
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BulkAccessComponent implements OnInit {

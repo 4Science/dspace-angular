@@ -31,7 +31,6 @@ import { GeospatialMapDetail } from './models/geospatial-map-detail.model';
   selector: 'ds-geospatial-map',
   templateUrl: './geospatial-map.component.html',
   styleUrls: ['./geospatial-map.component.scss'],
-  standalone: true,
 })
 /**
  * Component to draw points and polygons on a tiled map using leaflet.js
@@ -135,6 +134,7 @@ export class GeospatialMapComponent implements AfterViewInit, OnInit, OnDestroy 
    */
   private initMap(): void {
     // 'Import' leaflet packages in a browser-mode-only way to avoid issues with SSR
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const L = require('leaflet'); require('leaflet.markercluster'); require('leaflet-providers');
 
     // Set better default icons
@@ -153,13 +153,19 @@ export class GeospatialMapComponent implements AfterViewInit, OnInit, OnDestroy 
     this.map = L.map(el, {
       center: this.DEFAULT_CENTRE_POINT,
       zoom: 11,
+      worldCopyJump: true,
+      maxBoundsViscosity: 1.0,
+      maxBounds: [
+        [-85, -Infinity],
+        [85, Infinity],
+      ],
     });
     const tileProviders = environment.geospatialMapViewer.tileProviders;
     for (let i = 0; i < tileProviders.length; i++) {
       // Add tiles to the map
       const tiles = L.tileLayer.provider(tileProviders[i], {
         maxZoom: 18,
-        minZoom: 3,
+        minZoom: 1,
       });
       tiles.addTo(this.map);
     }

@@ -69,6 +69,8 @@ services:
       # NOTE: currently there is no dspace8 version
       LOADSQL: https://github.com/4Science/DSpace-CRIS-Files/releases/download/cris-2024.02.00/db-entities.sql
       PGDATA: /pgdata
+      POSTGRES_DB: dspace
+      POSTGRES_USER: dspace
       POSTGRES_PASSWORD: dspace
     networks:
       - dspacenet

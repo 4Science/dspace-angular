@@ -45,7 +45,6 @@ import { BrowserOnlyPipe } from '../../shared/utils/browser-only.pipe';
   templateUrl: './admin-sidebar.component.html',
   styleUrls: ['./admin-sidebar.component.scss'],
   animations: [slideSidebar],
-  standalone: true,
   imports: [
     AsyncPipe,
     BrowserOnlyPipe,

@@ -55,7 +55,6 @@ export interface SelectionConfig {
     fadeIn,
     fadeInOut,
   ],
-  standalone: true,
   imports: [
     AlertComponent,
     AsyncPipe,

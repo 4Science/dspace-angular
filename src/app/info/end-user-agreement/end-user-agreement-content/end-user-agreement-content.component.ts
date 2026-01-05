@@ -25,7 +25,6 @@ import { MarkdownViewerComponent } from '../../../shared/markdown-viewer/markdow
   selector: 'ds-end-user-agreement-content',
   templateUrl: './end-user-agreement-content.component.html',
   styleUrls: ['./end-user-agreement-content.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     MarkdownViewerComponent,

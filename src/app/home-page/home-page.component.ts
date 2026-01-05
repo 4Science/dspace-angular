@@ -1,6 +1,7 @@
 import {
   AsyncPipe,
   isPlatformServer,
+  NgTemplateOutlet,
 } from '@angular/common';
 import {
   Component,
@@ -59,9 +60,7 @@ import { ThemedHomeNewsComponent } from './home-news/themed-home-news.component'
   selector: 'ds-base-home-page',
   styleUrls: ['./home-page.component.scss'],
   templateUrl: './home-page.component.html',
-  standalone: true,
   imports: [
-    AsyncPipe,
     HomeCoarComponent,
     SuggestionsPopupComponent,
     ThemedBrowseSectionComponent,

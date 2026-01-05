@@ -67,10 +67,12 @@ services:
   # DSpace database container
   dspacedb:
     container_name: dspacedb
-    # Uses a custom Postgres image with pgcrypto installed
-    image: "${DOCKER_REGISTRY:-docker.io}/${DOCKER_OWNER:-4science}/dspace-cris-postgres-pgcrypto:${DSPACE_VER:-dspace-cris-2025_02_x}"
+    # Uses the base PostgreSQL image
+    image: "docker.io/postgres:${POSTGRES_VERSION:-15}"
     environment:
       PGDATA: /pgdata
+      POSTGRES_DB: dspace
+      POSTGRES_USER: dspace
       POSTGRES_PASSWORD: dspace
     networks:
       - dspacenet

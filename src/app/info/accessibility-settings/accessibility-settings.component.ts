@@ -51,7 +51,6 @@ import {
     SwitchComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class AccessibilitySettingsComponent implements OnInit, OnDestroy {
   // Redeclared for use in template

@@ -216,6 +216,8 @@ export class HeadTagService {
   protected setDSOMetaTags(): void {
     const openGraphType = this.getOpenGraphType();
 
+    this.setNoIndexTag();
+
     this.setTitleTags();
     this.setDescriptionTags();
 
@@ -262,6 +264,15 @@ export class HeadTagService {
 
     if (this.isTechReport()) {
       this.setCitationTechnicalReportNumberTag();
+    }
+  }
+
+  /**
+   * Add <meta name="robots" content="noindex">  to the <head> if non-discoverable item
+   */
+  protected setNoIndexTag(): void {
+    if (this.currentObject.value instanceof Item && this.currentObject.value.isDiscoverable === false) {
+      this.addMetaTag('robots', 'noindex');
     }
   }
 

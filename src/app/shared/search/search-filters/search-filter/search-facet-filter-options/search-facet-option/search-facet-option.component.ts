@@ -33,7 +33,6 @@ import { getFacetValueForType } from '../../../../search.utils';
   selector: 'ds-search-facet-option',
   styleUrls: ['./search-facet-option.component.scss'],
   templateUrl: './search-facet-option.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     CapitalizePipe,

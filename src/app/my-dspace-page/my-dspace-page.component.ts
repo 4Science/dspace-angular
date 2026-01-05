@@ -63,7 +63,6 @@ import { MyDspaceQaEventsNotificationsComponent } from './my-dspace-qa-events-no
     SuggestionsNotificationComponent,
     ThemedSearchComponent,
   ],
-  standalone: true,
 })
 export class MyDSpacePageComponent implements OnInit {
 

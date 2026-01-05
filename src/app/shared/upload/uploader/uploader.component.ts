@@ -45,7 +45,6 @@ import { UploaderProperties } from './uploader-properties.model';
   styleUrls: ['uploader.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default,
   encapsulation: ViewEncapsulation.Emulated,
-  standalone: true,
   imports: [
     BtnDisabledDirective,
     CommonModule,

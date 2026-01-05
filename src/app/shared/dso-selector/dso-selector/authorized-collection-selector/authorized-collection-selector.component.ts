@@ -44,7 +44,6 @@ import { DSOSelectorComponent } from '../dso-selector.component';
   selector: 'ds-authorized-collection-selector',
   styleUrls: ['../dso-selector.component.scss'],
   templateUrl: '../dso-selector.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     FormsModule,
@@ -65,6 +64,12 @@ export class AuthorizedCollectionSelectorComponent extends DSOSelectorComponent 
    * If present this value is used to filter collection list by entity type
    */
   @Input() entityType: string;
+
+  /**
+   * Search endpoint to use for finding authorized collections.
+   * Defaults to 'findSubmitAuthorized', but can be overridden (e.g. to 'findAdminAuthorized')
+   */
+  @Input() searchHref = 'findSubmitAuthorized';
 
   constructor(
     protected searchService: SearchService,
@@ -104,7 +109,7 @@ export class AuthorizedCollectionSelectorComponent extends DSOSelectorComponent 
           findOptions);
     } else {
       searchListService$ = this.collectionDataService
-        .getAuthorizedCollection(query, findOptions, useCache, false, followLink('parentCommunity'));
+        .getAuthorizedCollection(query, findOptions, useCache, false, this.searchHref, followLink('parentCommunity'));
     }
     return searchListService$.pipe(
       getFirstCompletedRemoteData(),

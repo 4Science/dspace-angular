@@ -57,7 +57,6 @@ import { ProvideEmailComponent } from '../email-confirmation/provide-email/provi
     TranslateModule,
     TranslateModule,
   ],
-  standalone: true,
 })
 /**
  * This component is responsible to handle the external-login depending on the RegistrationData details provided

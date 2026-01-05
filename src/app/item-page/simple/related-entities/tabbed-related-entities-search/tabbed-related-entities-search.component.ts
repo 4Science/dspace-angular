@@ -20,7 +20,6 @@ import { RelatedEntitiesSearchComponent } from '../related-entities-search/relat
 @Component({
   selector: 'ds-tabbed-related-entities-search',
   templateUrl: './tabbed-related-entities-search.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     NgbNavModule,
@@ -89,8 +88,10 @@ export class TabbedRelatedEntitiesSearchComponent implements OnInit {
       relativeTo: this.route,
       queryParams: {
         tab: event.nextId,
+        query: this.route.snapshot.queryParams.query,
+        scope: this.route.snapshot.queryParams.scope,
+        'spc.page': 1,
       },
-      queryParamsHandling: 'merge',
     });
   }
 

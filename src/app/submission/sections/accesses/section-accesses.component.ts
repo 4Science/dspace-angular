@@ -1,4 +1,3 @@
-
 import {
   Component,
   Inject,
@@ -9,9 +8,11 @@ import {
   DYNAMIC_FORM_CONTROL_TYPE_CHECKBOX,
   DYNAMIC_FORM_CONTROL_TYPE_DATEPICKER,
   DynamicCheckboxModel,
+  DynamicDateControlValue,
   DynamicDatePickerModel,
   DynamicDatePickerModelConfig,
   DynamicFormArrayModel,
+  DynamicFormControlCondition,
   DynamicFormControlEvent,
   DynamicFormControlModel,
   DynamicFormGroupModel,
@@ -20,8 +21,6 @@ import {
   MATCH_ENABLED,
   OR_OPERATOR,
 } from '@ng-dynamic-forms/core';
-import { DynamicDateControlValue } from '@ng-dynamic-forms/core/lib/model/dynamic-date-control.model';
-import { DynamicFormControlCondition } from '@ng-dynamic-forms/core/lib/model/misc/dynamic-form-control-relation.model';
 import { TranslateService } from '@ngx-translate/core';
 import {
   BehaviorSubject,
@@ -84,7 +83,6 @@ import { SectionAccessesService } from './section-accesses.service';
   imports: [
     FormComponent,
   ],
-  standalone: true,
 })
 export class SubmissionSectionAccessesComponent extends SectionModelComponent {
 

@@ -13,7 +13,6 @@ import { ThemedTextSectionComponent } from '../../../../../app/shared/explore/se
   styleUrls: ['../../../../../app/home-page/home-news/home-news.component.scss'],
   // templateUrl: './home-news.component.html'
   templateUrl: '../../../../../app/home-page/home-news/home-news.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     NgIf,

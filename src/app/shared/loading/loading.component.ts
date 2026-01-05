@@ -32,7 +32,6 @@ export enum MessageType {
   selector: 'ds-base-loading',
   styleUrls: ['./loading.component.scss'],
   templateUrl: './loading.component.html',
-  standalone: true,
   imports: [
     AlertComponent,
     NgIf,

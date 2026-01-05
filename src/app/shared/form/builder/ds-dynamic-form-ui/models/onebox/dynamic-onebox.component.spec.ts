@@ -637,7 +637,6 @@ describe('DsDynamicOneboxComponent test suite', () => {
 @Component({
   selector: 'ds-test-cmp',
   template: ``,
-  standalone: true,
   imports: [
     CdkTreeModule,
     DynamicFormsCoreModule,

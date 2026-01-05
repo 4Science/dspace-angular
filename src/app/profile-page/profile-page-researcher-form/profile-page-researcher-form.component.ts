@@ -53,7 +53,6 @@ import { ProfileClaimItemModalComponent } from '../profile-claim-item-modal/prof
     TranslateModule,
     VarDirective,
   ],
-  standalone: true,
 })
 /**
  * Component for a user to create/delete or change their researcher profile.

@@ -63,7 +63,6 @@ import { getCommunityPageRoute } from './community-page-routing-paths';
     TranslateModule,
     VarDirective,
   ],
-  standalone: true,
 })
 /**
  * This component represents a detail page for a single community

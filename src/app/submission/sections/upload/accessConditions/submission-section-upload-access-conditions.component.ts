@@ -23,7 +23,6 @@ import {
   selector: 'ds-submission-section-upload-access-conditions',
   templateUrl: './submission-section-upload-access-conditions.component.html',
   imports: [],
-  standalone: true,
 })
 export class SubmissionSectionUploadAccessConditionsComponent implements OnInit {
 

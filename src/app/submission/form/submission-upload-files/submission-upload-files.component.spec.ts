@@ -218,7 +218,6 @@ describe('SubmissionUploadFilesComponent Component', () => {
 @Component({
   selector: 'ds-test-cmp',
   template: ``,
-  standalone: true,
 })
 class TestComponent {
 

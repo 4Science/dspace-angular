@@ -76,7 +76,6 @@ export interface AccessConditionGroupsMapEntry {
     ThemedSubmissionSectionUploadFileComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class SubmissionSectionUploadComponent extends SectionModelComponent {
 

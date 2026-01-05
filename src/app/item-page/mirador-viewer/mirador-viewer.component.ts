@@ -42,7 +42,6 @@ import { MiradorViewerService } from './mirador-viewer.service';
     SafeUrlPipe,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class MiradorViewerComponent implements OnInit {
 

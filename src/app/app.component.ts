@@ -1,12 +1,12 @@
 import {
   AsyncPipe,
-  DOCUMENT,
   isPlatformBrowser,
 } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  DOCUMENT,
   HostListener,
   Inject,
   OnInit,
@@ -69,7 +69,6 @@ import { SocialService } from './social/social.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     AsyncPipe,
     SocialComponent,

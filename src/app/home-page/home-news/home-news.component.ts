@@ -22,7 +22,6 @@ import { ThemedTextSectionComponent } from '../../shared/explore/section-compone
   selector: 'ds-base-home-news',
   styleUrls: ['./home-news.component.scss'],
   templateUrl: './home-news.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     ThemedTextSectionComponent,

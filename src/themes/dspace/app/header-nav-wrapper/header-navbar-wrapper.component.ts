@@ -17,7 +17,6 @@ import { slideMobileNav } from '../../../../app/shared/animations/slide';
   selector: 'ds-themed-header-navbar-wrapper',
   styleUrls: ['header-navbar-wrapper.component.scss'],
   templateUrl: 'header-navbar-wrapper.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     NgClass,

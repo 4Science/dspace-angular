@@ -86,7 +86,6 @@ export interface MetadataFields {
     ReactiveFormsModule,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class FormComponent implements OnDestroy, OnInit {
 

@@ -2761,7 +2761,7 @@
 
   // "cookies.consent.content-notice.description": "We collect and process your personal information for the following purposes: {purposes}",
   // TODO Source message changed - Revise the translation
-  "cookies.consent.content-notice.description": "Vi samlar in och hanterar dina persondata för följande syften: <strong>Autenticering, inställningar, godkännanden och statistik</strong>. <br/> För mer information, läs {privacyPolicy}.",
+  "cookies.consent.content-notice.description": "Vi samlar in och hanterar dina persondata för följande syften: Autenticering, inställningar, godkännanden och statistik. För mer information, läs {privacyPolicy}.",
 
   // "cookies.consent.content-notice.learnMore": "Customize",
   "cookies.consent.content-notice.learnMore": "Anpassa",
@@ -12850,6 +12850,18 @@
   // "file-download-link.request-copy": "Request a copy of ",
   // TODO New key - Add a translation
   "file-download-link.request-copy": "Request a copy of ",
+
+  // "item.preview.organization.url": "URL",
+  // TODO New key - Add a translation
+  "item.preview.organization.url": "URL",
+
+  // "item.preview.organization.address.addressLocality": "City",
+  // TODO New key - Add a translation
+  "item.preview.organization.address.addressLocality": "City",
+
+  // "item.preview.organization.alternateName": "Alternative name",
+  // TODO New key - Add a translation
+  "item.preview.organization.alternateName": "Alternative name",
 
 
 }

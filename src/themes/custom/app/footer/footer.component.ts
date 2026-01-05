@@ -15,7 +15,6 @@ import { ThemedTextSectionComponent } from '../../../../app/shared/explore/secti
   styleUrls: ['../../../../app/footer/footer.component.scss'],
   // templateUrl: './footer.component.html'
   templateUrl: '../../../../app/footer/footer.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     DatePipe,

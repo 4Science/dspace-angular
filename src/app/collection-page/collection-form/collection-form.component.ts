@@ -65,7 +65,6 @@ import {
   selector: 'ds-collection-form',
   styleUrls: ['../../shared/comcol/comcol-forms/comcol-form/comcol-form.component.scss'],
   templateUrl: '../../shared/comcol/comcol-forms/comcol-form/comcol-form.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     ComcolPageLogoComponent,

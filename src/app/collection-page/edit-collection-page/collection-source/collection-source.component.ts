@@ -86,7 +86,6 @@ import { CollectionSourceControlsComponent } from './collection-source-controls/
     ThemedLoadingComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class CollectionSourceComponent extends AbstractTrackableComponent implements OnInit, OnDestroy {
   /**

@@ -65,7 +65,6 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
     RouterLink,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class CreateProfileComponent implements OnInit {
   registration$: Observable<Registration>;

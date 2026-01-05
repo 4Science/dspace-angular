@@ -64,7 +64,6 @@ interface BundleBitstreamsMapEntry {
     ResourcePoliciesComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 /**
  * Component that handles the item Authorizations

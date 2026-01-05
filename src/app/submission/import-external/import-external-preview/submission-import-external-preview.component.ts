@@ -35,7 +35,6 @@ import { SubmissionImportExternalCollectionComponent } from '../import-external-
     TruncatableComponent,
     TruncatablePartComponent,
   ],
-  standalone: true,
 })
 export class SubmissionImportExternalPreviewComponent implements OnInit {
   /**

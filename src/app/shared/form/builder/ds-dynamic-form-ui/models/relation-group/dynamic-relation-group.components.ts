@@ -85,7 +85,6 @@ import { DsDynamicRelationGroupModalComponent } from './modal/dynamic-relation-g
     ThemedLoadingComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class DsDynamicRelationGroupComponent extends DynamicFormControlComponent implements OnDestroy, OnInit {
 
@@ -212,7 +211,7 @@ export class DsDynamicRelationGroupComponent extends DynamicFormControlComponent
 
             const returnObj = Object.keys(valueObj).map((fieldName) => {
               let return$: Observable<any>;
-              if (isObject(valueObj[fieldName]) && this.hasValidAuthority(valueObj[fieldName]) && valueObj[fieldName].otherInformation === null) {
+              if (isObject(valueObj[fieldName]) && this.hasValidAuthority(valueObj[fieldName] as any) && (valueObj[fieldName] as any).otherInformation === null) {
                 return$ = this.getVocabulary(valueObj, fieldName);
               } else {
                 return$ = of(valueObj[fieldName]);

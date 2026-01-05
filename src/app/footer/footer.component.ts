@@ -38,7 +38,6 @@ import { ThemedTextSectionComponent } from '../shared/explore/section-component/
   selector: 'ds-base-footer',
   styleUrls: ['footer.component.scss'],
   templateUrl: 'footer.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     DatePipe,

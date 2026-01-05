@@ -42,7 +42,6 @@ import { FormFieldMetadataValueObject } from '../../../models/form-field-metadat
     NgClass,
     ReactiveFormsModule,
   ],
-  standalone: true,
 })
 export class DsDatePickerInlineComponent extends DynamicFormControlComponent implements OnInit, OnDestroy{
 

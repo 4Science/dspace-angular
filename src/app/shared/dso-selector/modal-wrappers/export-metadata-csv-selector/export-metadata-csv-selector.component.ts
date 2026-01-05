@@ -56,7 +56,6 @@ import {
 @Component({
   selector: 'ds-export-metadata-csv-selector',
   templateUrl: '../dso-selector-modal-wrapper.component.html',
-  standalone: true,
   imports: [
     DSOSelectorComponent,
     TranslateModule,

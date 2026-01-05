@@ -4,6 +4,7 @@ import {
   NgIf,
   NgSwitch,
   NgSwitchCase,
+  NgTemplateOutlet,
 } from '@angular/common';
 import { Component } from '@angular/core';
 
@@ -24,9 +25,7 @@ import { ThemedTopSectionComponent } from '../../../../app/shared/explore/sectio
   styleUrls: ['../../../../app/home-page/home-page.component.scss'],
   // templateUrl: './home-page.component.html'
   templateUrl: '../../../../app/home-page/home-page.component.html',
-  standalone: true,
   imports: [
-    AsyncPipe,
     HomeCoarComponent,
     NgForOf,
     NgIf,

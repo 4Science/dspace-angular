@@ -33,7 +33,6 @@ import { VarDirective } from '../../../../app/shared/utils/var.directive';
     fadeIn,
     fadeInOut,
   ],
-  standalone: true,
   imports: [
     AsyncPipe,
     ComcolPageHeaderComponent,

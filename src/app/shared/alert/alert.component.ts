@@ -30,7 +30,6 @@ import { AlertType } from './alert-type';
   ],
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
-  standalone: true,
   imports: [
     TranslateModule,
     TruncatableComponent,

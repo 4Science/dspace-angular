@@ -35,7 +35,6 @@ import { APP_DATA_SERVICES_MAP } from '../../../../config/app-config.interface';
 
 @Component({
   template: '',
-  standalone: true,
   imports: [],
 })
 class DummyComponent {

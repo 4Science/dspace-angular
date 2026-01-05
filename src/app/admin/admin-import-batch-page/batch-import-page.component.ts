@@ -42,7 +42,6 @@ import { FileDropzoneNoUploaderComponent } from '../../shared/upload/file-dropzo
     SwitchComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class BatchImportPageComponent {
   /**

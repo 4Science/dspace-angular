@@ -8,8 +8,10 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap/modal/modal-config';
+import {
+  NgbModal,
+  NgbModalOptions,
+} from '@ng-bootstrap/ng-bootstrap';
 import { DynamicFormControlModel } from '@ng-dynamic-forms/core';
 import { TranslateModule } from '@ngx-translate/core';
 import uniqBy from 'lodash/uniqBy';
@@ -69,7 +71,6 @@ import { SubmissionSectionUploadFileViewComponent } from './view/section-upload-
     ThemedFileDownloadLinkComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit, OnDestroy {
   /**

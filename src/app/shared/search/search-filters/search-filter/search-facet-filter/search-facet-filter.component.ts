@@ -71,7 +71,6 @@ export const FACET_OPERATORS: string[] = [
 @Component({
   selector: 'ds-search-facet-filter',
   template: ``,
-  standalone: true,
 })
 
 /**

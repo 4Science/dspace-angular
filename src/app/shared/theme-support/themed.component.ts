@@ -39,7 +39,6 @@ import { ThemeService } from './theme.service';
 
 @Component({
   selector: 'ds-themed',
-  standalone: true,
   styleUrls: ['./themed.component.scss'],
   templateUrl: './themed.component.html',
 })

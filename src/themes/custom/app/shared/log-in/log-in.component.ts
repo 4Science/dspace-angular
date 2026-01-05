@@ -14,7 +14,6 @@ import { BrowserOnlyPipe } from '../../../../../app/shared/utils/browser-only.pi
   templateUrl: '../../../../../app/shared/log-in/log-in.component.html',
   // styleUrls: ['./log-in.component.scss'],
   styleUrls: ['../../../../../app/shared/log-in/log-in.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     BrowserOnlyPipe,

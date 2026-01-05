@@ -9292,6 +9292,12 @@
 
   "file-download-link.request-copy": "Request a copy of ",
 
+  "item.preview.organization.url": "URL",
+
+  "item.preview.organization.address.addressLocality": "City",
+
+  "item.preview.organization.alternateName": "Alternative name",
+
   "third-party-metrics-cookies.message": "{{ metricType }} badge is blocked by your ",
 
   "third-party-metrics-cookies.consent-settings": "consent settings",

@@ -45,7 +45,6 @@ import parseSectionErrors from '../../utils/parseSectionErrors';
   imports: [
     UploaderComponent,
   ],
-  standalone: true,
 })
 export class SubmissionUploadFilesComponent implements OnChanges, OnDestroy {
 

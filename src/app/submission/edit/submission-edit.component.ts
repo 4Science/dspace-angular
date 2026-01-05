@@ -60,7 +60,6 @@ import { SubmissionEditCanDeactivateService } from './submission-edit-can-deacti
   selector: 'ds-base-submission-edit',
   styleUrls: ['./submission-edit.component.scss'],
   templateUrl: './submission-edit.component.html',
-  standalone: true,
   imports: [
     ThemedSubmissionFormComponent,
   ],

@@ -30,7 +30,6 @@ import { VarDirective } from '../../../../app/shared/utils/var.directive';
   styleUrls: ['../../../../app/community-page/community-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInOut],
-  standalone: true,
   imports: [
     AsyncPipe,
     ComcolPageHeaderComponent,

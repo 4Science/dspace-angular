@@ -11,7 +11,6 @@ import { ThemedTextSectionComponent } from '../../../../../app/shared/explore/se
   selector: 'ds-themed-home-news',
   styleUrls: ['./home-news.component.scss'],
   templateUrl: './home-news.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     NgIf,

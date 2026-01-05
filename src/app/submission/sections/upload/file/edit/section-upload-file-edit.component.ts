@@ -1,4 +1,3 @@
-
 import {
   ChangeDetectorRef,
   Component,
@@ -10,9 +9,11 @@ import { UntypedFormControl } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   DYNAMIC_FORM_CONTROL_TYPE_DATEPICKER,
+  DynamicDateControlValue,
   DynamicDatePickerModel,
   DynamicDatePickerModelConfig,
   DynamicFormArrayModel,
+  DynamicFormControlCondition,
   DynamicFormControlEvent,
   DynamicFormControlModel,
   DynamicFormGroupModel,
@@ -23,10 +24,7 @@ import {
 import { DynamicDateControlValue } from '@ng-dynamic-forms/core/lib/model/dynamic-date-control.model';
 import { DynamicFormControlCondition } from '@ng-dynamic-forms/core/lib/model/misc/dynamic-form-control-relation.model';
 import { DynamicSelectModelConfig } from '@ng-dynamic-forms/core/lib/model/select/dynamic-select.model';
-import {
-  TranslateModule,
-  TranslateService,
-} from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import {
   filter,
@@ -91,7 +89,6 @@ import {
     FormComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class SubmissionSectionUploadFileEditComponent implements OnInit, OnDestroy {
 

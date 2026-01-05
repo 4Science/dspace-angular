@@ -73,7 +73,6 @@ import { ThemedSubmissionUploadFilesComponent } from './submission-upload-files/
     ThemedSubmissionUploadFilesComponent,
     TranslatePipe,
   ],
-  standalone: true,
 })
 export class SubmissionFormComponent implements OnChanges, OnDestroy {
 

@@ -327,8 +327,8 @@ export class DefaultAppConfig implements AppConfig {
     minChars: 3,
   };
 
-  // Default Language in which the UI will be rendered if the user's browser language is not an active language
-  defaultLanguage = 'en';
+  // Fallback language in which the UI will be rendered if the user's browser language is not an active language
+  fallbackLanguage = 'en';
 
   // Languages. DSpace Angular holds a message catalog for each of the following languages.
   // When set to active, users will be able to switch to the use of this language in the user interface.
@@ -341,6 +341,7 @@ export class DefaultAppConfig implements AppConfig {
     { code: 'de', label: 'Deutsch', active: true },
     { code: 'el', label: 'Ελληνικά', active: false },
     { code: 'es', label: 'Español', active: true },
+    { code: 'fa', label: 'فارسی', active: false },
     { code: 'fi', label: 'Suomi', active: false },
     { code: 'fr', label: 'Français', active: true },
     { code: 'gd', label: 'Gàidhlig', active: false },
@@ -359,6 +360,7 @@ export class DefaultAppConfig implements AppConfig {
     { code: 'sr-lat', label: 'Srpski (lat)', active: false },
     { code: 'sr-cyr', label: 'Српски', active: false },
     { code: 'sv', label: 'Svenska', active: false },
+    { code: 'ta', label: 'தமிழ்', active: false },
     { code: 'tr', label: 'Türkçe', active: false },
     { code: 'uk', label: 'Yкраї́нська', active: false },
     { code: 'vi', label: 'Tiếng Việt', active: false },

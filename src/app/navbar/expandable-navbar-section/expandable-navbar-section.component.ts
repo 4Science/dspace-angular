@@ -36,7 +36,6 @@ import { NavbarSectionComponent } from '../navbar-section/navbar-section.compone
   templateUrl: './expandable-navbar-section.component.html',
   styleUrls: ['./expandable-navbar-section.component.scss'],
   animations: [slide],
-  standalone: true,
   imports: [
     AsyncPipe,
     HoverOutsideDirective,

@@ -54,7 +54,6 @@ import { createSuccessfulRemoteDataObject } from '../remote-data.utils';
   selector: 'ds-entity-dropdown',
   templateUrl: './entity-dropdown.component.html',
   styleUrls: ['./entity-dropdown.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     InfiniteScrollDirective,

@@ -36,7 +36,6 @@ import { ViewModeSwitchComponent } from '../../../../app/shared/view-mode-switch
       useClass: SearchConfigurationService,
     },
   ],
-  standalone: true,
   imports: [
     AsyncPipe,
     ItemExportModalLauncherComponent,

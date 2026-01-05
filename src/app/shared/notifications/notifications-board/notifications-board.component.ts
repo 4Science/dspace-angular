@@ -44,7 +44,6 @@ import { notificationsStateSelector } from '../selectors';
   templateUrl: './notifications-board.component.html',
   styleUrls: ['./notifications-board.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     NgClass,
     NotificationComponent,
