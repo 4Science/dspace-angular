@@ -35,6 +35,20 @@ describe('LocaleService', () => {
   let authService;
   let routeService;
   let document;
+  let spyOnGetLanguage;
+
+
+  const translateServiceStub: any = {
+    getLangs: () => {
+      return langList;
+    },
+    getBrowserLang: () => {
+      return langList;
+    },
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    use: (param: string) => {
+    },
+  };
 
   authService = jasmine.createSpyObj('AuthService', {
     isAuthenticated: jasmine.createSpy('isAuthenticated'),
@@ -43,6 +57,8 @@ describe('LocaleService', () => {
   });
 
   const langList = ['en', 'xx', 'de'];
+
+  describe('with valid language', () => {
 
   beforeEach(waitForAsync(() => {
     return TestBed.configureTestingModule({
@@ -58,6 +74,7 @@ describe('LocaleService', () => {
         { provide: CookieService, useValue: new CookieServiceMock() },
         { provide: AuthService, userValue: authService },
         { provide: RouteService, useValue: routeServiceStub },
+        { provide: TranslateService, useValue: translateServiceStub },
         { provide: Document, useValue: document },
       ],
     });
@@ -73,6 +90,7 @@ describe('LocaleService', () => {
     serviceAsAny = service;
     spyOnGet = spyOn(cookieService, 'get');
     spyOnSet = spyOn(cookieService, 'set');
+      spyOnGetLanguage = spyOn(routeService, 'getQueryParameterValue').withArgs('lang');
   });
 
   describe('getCurrentLanguageCode', () => {
@@ -151,6 +169,22 @@ describe('LocaleService', () => {
         expectObservable(service.getLanguageCodeList()).toBe('(a|)', { a: ['fr;q=0.5', 'en-US;q=1', 'en;q=0.9'] });
       });
     });
+
+    describe('', () => {
+      beforeEach(() => {
+        spyOn(translateService, 'getLangs').and.returnValue(langList);
+      });
+
+      it('should return language from browser setting', () => {
+        spyOn(translateService, 'getBrowserLang').and.returnValue('xx');
+        expect(service.getCurrentLanguageCode()).toBe(of('xx'));
+      });
+
+      it('should return default language from config', () => {
+        spyOn(translateService, 'getBrowserLang').and.returnValue('fr');
+        expect(service.getCurrentLanguageCode()).toBe(of('en'));
+      });
+    });
   });
 
   describe('getLanguageCodeFromCookie', () => {
@@ -175,15 +209,16 @@ describe('LocaleService', () => {
     });
 
     it('should set the given language', () => {
-      service.setCurrentLanguageCode('xx');
-      expect(translateService.use).toHaveBeenCalledWith('xx');
-      expect(service.saveLanguageCodeToCookie).toHaveBeenCalledWith('xx');
+        service.setCurrentLanguageCode('it');
+        expect(translateService.use).toHaveBeenCalledWith('it');
+        expect(service.saveLanguageCodeToCookie).toHaveBeenCalledWith('it');
     });
 
     it('should set the current language', () => {
       spyOn(service, 'getCurrentLanguageCode').and.returnValue(of('es'));
       service.setCurrentLanguageCode();
       expect(translateService.use).toHaveBeenCalledWith('es');
+        expect(service.saveLanguageCodeToCookie).toHaveBeenCalledWith('es');
     });
 
     it('should set the current language on the html tag', () => {
@@ -191,11 +226,36 @@ describe('LocaleService', () => {
       service.setCurrentLanguageCode();
       expect((service as any).document.documentElement.lang).toEqual('es');
     });
+
+      describe('should set language on init', () => {
+        beforeEach(() => {
+          spyOn(translateService, 'getLangs').and.returnValue(langList);
+          spyOn(service, 'setCurrentLanguageCode');
+        });
+        describe('whith correct lang query param ', () => {
+          beforeEach(() => {
+            spyOnGetLanguage.and.returnValue(of('en'));
+            service.initDefaults();
+          });
+          it('should set correct lang', () => {
+            expect(service.setCurrentLanguageCode).toHaveBeenCalledWith('en');
+          });
+        });
+        describe('whith wrong lang query param ', () => {
+          beforeEach(() => {
+            spyOnGetLanguage.and.returnValue(of('abcd'));
+            service.initDefaults();
+          });
+          it('should not set lang', () => {
+            expect(service.setCurrentLanguageCode).not.toHaveBeenCalled();
+          });
+        });
+      });
   });
 
   describe('', () => {
     it('should set quality to current language list', () => {
-      const langListWithQuality = ['en;q=1', 'xx;q=0.9', 'de;q=0.8'];
+        const langListWithQuality = ['en;q=1', 'it;q=0.9', 'de;q=0.8'];
       spyOn(service, 'setQuality').and.returnValue(langListWithQuality);
       service.setQuality(langList, LANG_ORIGIN.BROWSER, false);
       expect(service.setQuality).toHaveBeenCalledWith(langList, LANG_ORIGIN.BROWSER, false);
@@ -207,4 +267,5 @@ describe('LocaleService', () => {
       expect(service.getLanguageCodeList).toHaveBeenCalled();
     });
   });
+});
 });
