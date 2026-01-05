@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   isPlatformServer,
-  NgTemplateOutlet,
 } from '@angular/common';
 import {
   Component,
@@ -13,6 +12,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import {
   BehaviorSubject,
+  combineLatest,
   Observable,
   of,
 } from 'rxjs';
@@ -61,6 +61,7 @@ import { ThemedHomeNewsComponent } from './home-news/themed-home-news.component'
   styleUrls: ['./home-page.component.scss'],
   templateUrl: './home-page.component.html',
   imports: [
+    AsyncPipe,
     HomeCoarComponent,
     SuggestionsPopupComponent,
     ThemedBrowseSectionComponent,
@@ -140,10 +141,10 @@ export class HomePageComponent implements OnInit, OnDestroy {
       map((section) => section.componentRows),
     );
 
-    this.siteService.find().pipe(take(1)).subscribe(
-      (site: Site) => {
+    combineLatest([this.siteService.find().pipe(take(1)), this.locale.getCurrentLanguageCode()]).subscribe(
+      ([site, language]: [Site, string]) => {
         this.hasHomeHeaderMetadata = !isEmpty(site?.firstMetadataValue('cris.cms.home-header',
-          { language: this.locale.getCurrentLanguageCode() }));
+          { language }));
       },
     );
   }

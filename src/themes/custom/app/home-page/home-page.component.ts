@@ -1,11 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-  NgSwitch,
-  NgSwitchCase,
-  NgTemplateOutlet,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 
 import { HomeCoarComponent } from '../../../../app/home-page/home-coar/home-coar.component';
@@ -26,11 +19,8 @@ import { ThemedTopSectionComponent } from '../../../../app/shared/explore/sectio
   // templateUrl: './home-page.component.html'
   templateUrl: '../../../../app/home-page/home-page.component.html',
   imports: [
+    AsyncPipe,
     HomeCoarComponent,
-    NgForOf,
-    NgIf,
-    NgSwitch,
-    NgSwitchCase,
     SuggestionsPopupComponent,
     ThemedBrowseSectionComponent,
     ThemedCountersSectionComponent,

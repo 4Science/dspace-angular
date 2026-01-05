@@ -8,7 +8,9 @@ import {
 import {
   AsyncPipe,
   isPlatformBrowser,
-  NgClass,
+  NgForOf,
+  NgIf,
+  NgTemplateOutlet,
 } from '@angular/common';
 import {
   ChangeDetectorRef,
@@ -58,7 +60,9 @@ const TOOLTIP_TEXT_LIMIT = 21;
     CdkDropList,
     CdkDropListGroup,
     NgbTooltipModule,
-    NgClass,
+    NgForOf,
+    NgIf,
+    NgTemplateOutlet,
     TranslateModule,
   ],
 })
@@ -145,10 +149,10 @@ export class ChipsComponent implements OnChanges, OnInit {
     if (!chipsItem.editMode && this.dragged === -1) {
       if (field) {
         if (isObject(chipsItem.item[field])) {
-          textToDisplay.push(chipsItem.item[field].display);
+          textToDisplay.push((chipsItem.item[field] as any).display);
           let otherInformationKeys: string[] = null;
           if (
-            chipsItem.item[field].hasOtherInformation() &&
+            (chipsItem.item[field] as any).hasOtherInformation() &&
             isNotEmpty(otherInformationKeys = this.getDisplayableOtherInformationKeys(chipsItem, field))
           ) {
             forkJoin(

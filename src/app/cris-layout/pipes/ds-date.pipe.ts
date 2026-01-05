@@ -5,6 +5,8 @@ import {
   Pipe,
   PipeTransform,
 } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { LocaleService } from '../../core/locale/locale.service';
 import {
@@ -29,9 +31,10 @@ export class DsDatePipe implements PipeTransform, OnDestroy {
     this.asyncPipe = new AsyncPipe(cdr);
   }
 
-  transform(value: string, ...params: any[]): string {
-    const locale = this.localeService.getCurrentLanguageCode();
-    return isValidDate(value) ? localeDate(value, locale) : value;
+  transform(value: string, ...params: any[]): Observable<string> {
+    return this.localeService.getCurrentLanguageCode().pipe(
+      map((locale: string) => isValidDate(value) ? localeDate(value, locale) : value),
+    );
   }
 
   ngOnDestroy() {

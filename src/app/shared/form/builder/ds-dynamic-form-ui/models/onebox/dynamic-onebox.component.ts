@@ -47,6 +47,7 @@ import {
   take,
   tap,
 } from 'rxjs/operators';
+import { BtnDisabledDirective } from 'src/app/shared/btn-disabled.directive';
 
 import { environment } from '../../../../../../../environments/environment';
 import {
@@ -85,6 +86,7 @@ import { DynamicOneboxModel } from './dynamic-onebox.model';
   imports: [
     AsyncPipe,
     AuthorityConfidenceStateDirective,
+    BtnDisabledDirective,
     FormsModule,
     NgbTooltipModule,
     NgbTypeaheadModule,

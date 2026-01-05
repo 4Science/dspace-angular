@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 
 import { HomeNewsComponent as BaseComponent } from '../../../../../app/home-page/home-news/home-news.component';
@@ -13,7 +10,6 @@ import { ThemedTextSectionComponent } from '../../../../../app/shared/explore/se
   templateUrl: './home-news.component.html',
   imports: [
     AsyncPipe,
-    NgIf,
     ThemedTextSectionComponent,
   ],
 })

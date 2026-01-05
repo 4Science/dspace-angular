@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  DatePipe,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -11,6 +8,7 @@ import {
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {
+  combineLatest,
   Observable,
   of,
 } from 'rxjs';
@@ -40,7 +38,6 @@ import { ThemedTextSectionComponent } from '../shared/explore/section-component/
   templateUrl: 'footer.component.html',
   imports: [
     AsyncPipe,
-    DatePipe,
     RouterLink,
     ThemedTextSectionComponent,
     TranslateModule,
@@ -98,10 +95,10 @@ export class FooterComponent implements OnInit {
       style: '',
     };
     this.site = this.siteService.find().pipe(take(1));
-    this.siteService.find().pipe(take(1)).subscribe(
-      (site: Site) => {
+    combineLatest([this.site, this.locale.getCurrentLanguageCode()]).subscribe(
+      ([site, language]: [Site, string]) => {
         this.hasSiteFooterSections = !isEmpty(site?.firstMetadataValue('cris.cms.footer',
-          { language: this.locale.getCurrentLanguageCode() }));
+          { language }));
       },
     );
   }

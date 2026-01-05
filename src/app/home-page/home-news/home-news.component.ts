@@ -4,7 +4,10 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import {
+  combineLatest,
+  Observable,
+} from 'rxjs';
 import {
   map,
   take,
@@ -56,10 +59,11 @@ export class HomeNewsComponent implements OnInit {
     this.site$ = this.route.data.pipe(
       map((data) => data.site as Site),
     );
-    this.siteService.find().pipe(take(1)).subscribe(
-      (site: Site) => {
+    const site$ = this.siteService.find().pipe(take(1));
+    combineLatest([site$, this.locale.getCurrentLanguageCode()]).subscribe(
+      ([site, language]: [Site, string]) => {
         this.hasHomeNewsMetadata = !isEmpty(site?.firstMetadataValue('cris.cms.home-news',
-          { language: this.locale.getCurrentLanguageCode() }));
+          { language }));
       },
     );
   }

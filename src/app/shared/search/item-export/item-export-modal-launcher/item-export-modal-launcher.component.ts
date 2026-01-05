@@ -1,4 +1,3 @@
-
 import {
   Component,
   Input,
@@ -9,8 +8,8 @@ import {
 import {
   NgbDropdownModule,
   NgbModal,
+  NgbModalOptions,
 } from '@ng-bootstrap/ng-bootstrap';
-import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap/modal/modal-config';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   combineLatest,
@@ -47,7 +46,6 @@ export const BULK_EXPORT_LIMIT_NOTLOGGEDIN = 'bulk-export.limit.notLoggedIn';
     NgbDropdownModule,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class ItemExportModalLauncherComponent implements OnInit {
 

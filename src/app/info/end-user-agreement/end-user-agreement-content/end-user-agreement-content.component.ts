@@ -4,15 +4,16 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import {
   TranslateModule,
   TranslateService,
 } from '@ngx-translate/core';
 import {
   BehaviorSubject,
+  combineLatest,
   Subscription,
 } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { SiteDataService } from '../../../core/data/site-data.service';
 import { LocaleService } from '../../../core/locale/locale.service';
@@ -28,7 +29,6 @@ import { MarkdownViewerComponent } from '../../../shared/markdown-viewer/markdow
   imports: [
     AsyncPipe,
     MarkdownViewerComponent,
-    RouterLink,
     TranslateModule,
   ],
 })
@@ -56,8 +56,8 @@ export class EndUserAgreementContentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subs.push(this.siteService.find().subscribe((site) => {
-      const langCode = this.localeService.getCurrentLanguageCode();
+    const site$ = this.siteService.find().pipe(take(1));
+    this.subs.push(combineLatest([site$, this.localeService.getCurrentLanguageCode()]).subscribe(([site, langCode]) => {
       const fallbackLangCode = 'en';
 
       const textArray = site?.metadataAsList.filter((metadata) => this.filterMetadata(metadata, langCode));

@@ -1,6 +1,5 @@
 import {
   AsyncPipe,
-  NgClass,
 } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
@@ -19,7 +18,6 @@ import { slideMobileNav } from '../../../../app/shared/animations/slide';
   templateUrl: 'header-navbar-wrapper.component.html',
   imports: [
     AsyncPipe,
-    NgClass,
     ThemedHeaderComponent,
     ThemedNavbarComponent,
     TranslateModule,
