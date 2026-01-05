@@ -13,6 +13,7 @@ import { FieldRenderingType } from '../../../rendering-types/metadata-box.decora
 import { LayoutField } from '../../../../../../../../core/layout/models/box.model';
 import { TableComponent } from '../../../rendering-types/metadataGroup/table/table.component';
 import { PLACEHOLDER_PARENT_METADATA } from '../../../../../../../../shared/form/builder/ds-dynamic-form-ui/ds-dynamic-form-constants';
+import {EscapeHtmlPipe} from '../../../../../../../../shared/utils/escape-html.pipe';
 
 describe('MetadataRenderComponent', () => {
   let component: MetadataRenderComponent;
@@ -128,7 +129,8 @@ describe('MetadataRenderComponent', () => {
         DsDatePipe,
         MetadataRenderComponent,
         TableComponent,
-        TextComponent
+        TextComponent,
+        EscapeHtmlPipe,
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(TableComponent, {
@@ -147,6 +149,11 @@ describe('MetadataRenderComponent', () => {
   describe('When field rendering type is not structured', () => {
     beforeEach(() => {
       component.field = fieldMock;
+    });
+
+    it('Should apply word-break style to host element', () => {
+      const hostElement = fixture.nativeElement;
+      expect(getComputedStyle(hostElement).wordBreak).toBe('break-word');
     });
 
     describe('When field rendering type is not structured', () => {

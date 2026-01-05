@@ -1847,7 +1847,7 @@
   "browse.startsWith.type_date.label": "O escriba una fecha (año-mes) y haga clic en el botón Examinar",
 
   // "browse.startsWith.type_text": "Filter results by typing the first few letters",
-  "browse.startsWith.type_text": "Seleccione resultados tecleando las primeras letras",
+  "browse.startsWith.type_text": "Filtre los resultados escribiendo las primeras letras y haciendo clic en Examinar",
 
   // "browse.startsWith.input": "Filter",
   "browse.startsWith.input": "Filtrar",
@@ -8460,6 +8460,9 @@
   // TODO New key - Add a translation
   "search.filters.applied.f.organization": "Organisation",
 
+  // "search.filters.applied.f.knowslanguage": "Language",
+  "search.filters.applied.f.knowslanguage": "Idioma",
+
   // "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
   // TODO New key - Add a translation
   "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
@@ -12457,6 +12460,11 @@
   // "browse.search-form.placeholder": "Search the repository",
   "browse.search-form.placeholder": "Buscar en el repositorio",
 
+  // "file-download-link.download": "Download ",
+  "file-download-link.download": "Descargar ",
+
+  // "register-page.registration.aria.label": "Enter your e-mail address",
+  "register-page.registration.aria.label": "Introduzca su dirección de correo electrónico",
   // "external-login.form.email": "Enter the email",
   // TODO New key - Add a translation
   "external-login.form.email": "Enter the email",
@@ -12628,6 +12636,12 @@
   // "metadata-link-view.popover.label.Person.person.email": "Email",
   // TODO New key - Add a translation
   "metadata-link-view.popover.label.Person.person.email": "Email",
+
+  // "forgot-email.form.aria.label": "Enter your e-mail address",
+  "forgot-email.form.aria.label": "Introduzca su dirección de correo electrónico",
+
+  // "search-facet-option.update.announcement": "The page will be reloaded. Filter {{ filter }} is selected.",
+  "search-facet-option.update.announcement": "La página será recargada. Filtro {{ filter }} seleccionado.",
 
   // "metadata-link-view.popover.label.Person.person.identifier.orcid": "ORCID",
   // TODO New key - Add a translation

@@ -14,7 +14,7 @@ import { validate as uuidValidate } from 'uuid';
 
 export const AUTHORITY_GENERATE = 'will be generated::';
 export const AUTHORITY_REFERENCE = 'will be referenced::';
-
+export const PLACEHOLDER_VALUE = '#PLACEHOLDER_PARENT_METADATA_VALUE#';
 /**
  * Utility class for working with DSpace object metadata.
  *
@@ -37,10 +37,11 @@ export class Metadata {
    * checked in order, and only values from the first with at least one match will be returned.
    * @param {string|string[]} keyOrKeys The metadata key(s) in scope. Wildcards are supported; see above.
    * @param {MetadataValueFilter} filter The value filter to use. If unspecified, no filtering will be done.
+   * @param {number} limit The maximum number of values to return. If unspecified, all matching values will be returned.
    * @returns {MetadataValue[]} the matching values or an empty array.
    */
   public static all(mapOrMaps: MetadataMapInterface | MetadataMapInterface[], keyOrKeys: string | string[],
-                    filter?: MetadataValueFilter): MetadataValue[] {
+                    filter?: MetadataValueFilter, limit?: number): MetadataValue[] {
     const mdMaps: MetadataMapInterface[] = mapOrMaps instanceof Array ? mapOrMaps : [mapOrMaps];
     const matches: MetadataValue[] = [];
     for (const mdMap of mdMaps) {
@@ -50,6 +51,9 @@ export class Metadata {
           for (const candidate of candidates) {
             if (Metadata.valueMatches(candidate as MetadataValue, filter)) {
               matches.push(candidate as MetadataValue);
+              if (hasValue(limit) && matches.length >= limit) {
+                return  matches;
+              }
             }
           }
         }
@@ -174,15 +178,19 @@ export class Metadata {
     } else if (filter.value) {
       let fValue = filter.value;
       let mValue = mdValue.value;
+
       if (filter.ignoreCase) {
         fValue = filter.value.toLowerCase();
         mValue = mdValue.value.toLowerCase();
       }
+      let result;
+
       if (filter.substring) {
-        return mValue.includes(fValue);
+        result = mValue.includes(fValue);
       } else {
-        return mValue === fValue;
+        result = mValue === fValue;
       }
+      return filter.negate ? !result : result;
     }
     return true;
   }
@@ -198,7 +206,7 @@ export class Metadata {
     const outputKeys: string[] = [];
     for (const inputKey of inputKeys) {
       if (inputKey.includes('*')) {
-        const inputKeyRegex = new RegExp('^' + inputKey.replace(/\./g, '\\.').replace(/\*/g, '.*') + '$');
+        const inputKeyRegex = new RegExp('^' + inputKey.replace(/\\/g, '\\\\').replace(/\./g, '\\.').replace(/\*/g, '.*') + '$');
         for (const mapKey of Object.keys(mdMap)) {
           if (!outputKeys.includes(mapKey) && inputKeyRegex.test(mapKey)) {
             outputKeys.push(mapKey);

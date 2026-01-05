@@ -1638,6 +1638,9 @@
   // "browse.metadata.title": "Title",
   "browse.metadata.title": "Titolo",
 
+  // "browse.metadata.title": "Title",
+  "browse.metadata.rsoTitle": "Titolo Pubblicazioni",
+
   // "browse.metadata.author.breadcrumbs": "Browse by Author",
   "browse.metadata.author.breadcrumbs": "Sfoglia per Autore",
 
@@ -1677,6 +1680,10 @@
   // "browse.metadata.srsc.breadcrumbs": "Browse by Subject Category",
   // TODO New key - Add a translation
   "browse.metadata.srsc.breadcrumbs": "Browse by Subject Category",
+
+  // "browse.metadata.rsoTitle.breadcrumbs": "Browse by Title",
+  // TODO New key - Add a translation
+  "browse.metadata.rsoTitle.breadcrumbs": "Sfoglia per Titolo",
 
   // "browse.metadata.srsc.tree.descrption": "Select a subject to add as search filter",
   // TODO New key - Add a translation
@@ -1772,7 +1779,7 @@
   "browse.startsWith.type_date.label": "Oppure digita una data (anno-mese) e clicca sul pulsante Sfoglia",
 
   // "browse.startsWith.type_text": "Filter results by typing the first few letters",
-  "browse.startsWith.type_text": "Per filtrare i risultati inizia a digitare le prime lettere",
+  "browse.startsWith.type_text": "Filtra i risultati digitando le prime lettere e facendo clic su Sfoglia",
 
   // "browse.startsWith.input": "Filter",
   // TODO New key - Add a translation
@@ -1787,10 +1794,10 @@
   "browse.taxonomy.button": "Browse",
 
   // "browse.title": "Browsing {{ collection }} by {{ field }}{{ startsWith }} {{ value }}",
-  "browse.title": "Mostra il contenuto di {{ collection }} per {{ field }}{{ startsWith }} {{ value }}",
+  "browse.title": "Mostra il contenuto per {{ field }}{{ startsWith }} {{ value }}",
 
   // "browse.title.page": "Browsing {{ collection }} by {{ field }} {{ value }}",
-  "browse.title.page": "Mostra il contenuto di {{ collection }} per {{ field }} {{ value }}",
+  "browse.title.page": "Mostra il contenuto per {{ field }} {{ value }}",
 
 
   // "bulk-import.abort-on-error": "Abort on first error",
@@ -2610,8 +2617,8 @@
   // "context-menu.actions.audit-item.btn": "Audit",
   "context-menu.actions.audit-item.btn": "Revisione",
 
-  // "context-menu.actions.bulk-import.btn": "Import items into collection",
-  "context-menu.actions.bulk-import.btn": "Importa item nella collection",
+  // "context-menu.actions.bulk-import.btn": "Import into collection",
+  "context-menu.actions.bulk-import.btn": "Importa nella collection",
 
   // "context-menu.actions.claim.btn": "Claim this profile",
   "context-menu.actions.claim.btn": "Collega questo profilo",
@@ -3756,6 +3763,9 @@
   // "explore.index.type": "Type",
   // TODO Source message changed - Revise the translation
   "explore.index.type": "Tipologia",
+
+  // "explore.index.rsoTitle": "Title",
+  "explore.index.rsoTitle": "Titolo",
 
   // "explore.search-section.infrastructure.title": "Infrastructure",
   "explore.search-section.infrastructure.title": "Infrastruttura",
@@ -5586,6 +5596,10 @@
   // TODO New key - Add a translation
   "item.preview.organization.address.addressCountry": "Country",
 
+  // "item.preview.organization.address.addressLocality": "City",
+  // TODO New key - Add a translation
+  "item.preview.organization.address.addressLocality": "City",
+
   // "item.preview.organization.foundingDate": "Founding Date",
   // TODO New key - Add a translation
   "item.preview.organization.foundingDate": "Founding Date",
@@ -5834,6 +5848,15 @@
 
   // "item-export.process.title": "Bulk export item",
   "item-export.process.title": "Bulk export dell'item",
+
+  // "item-deletion.process.title": "Deleting item",
+  "item-deletion.process.title": "Cancellazione dell'item",
+
+  // "community-deletion.process.title": "Deleting community",
+  "community-deletion.process.title": "Cancellazione della community",
+
+  // "collection-deletion.process.title": "Deleting collection",
+  "collection-deletion.process.title": "Cancellazione della collection",
 
   // "itemtemplate.edit.metadata.add-button": "Add",
   "itemtemplate.edit.metadata.add-button": "Aggiungi",
@@ -7444,10 +7467,10 @@
   "profile.card.access-token.delete": "Revoca il token",
 
   // "profile.card.access-token.no-token-generated": "You don't have personal access token. Generate a personal access token for quick access to the DSpace-CRIS API.",
-  "profile.card.access-token.no-token-generated": "Non si dispone di un token di accesso personale. Generare un token di accesso personale per accedere rapidamente all'API DSpace-CRIS.",
+  "profile.card.access-token.no-token-generated": "Non si dispone di un token di accesso personale.\nIl token di accesso personale permette di accedere alle funzionalità avanzate di DSpace ( API ) ed è legato al proprio utente.",
 
   // "profile.card.access-token.token-generated": "You have already generated a personal access token.",
-  "profile.card.access-token.token-generated": "Avete già generato un token di accesso personale.",
+  "profile.card.access-token.token-generated": "Avete già generato un token di accesso personale.\nIl token di accesso personale permette di accedere alle funzionalità avanzate di DSpace ( API ) ed è legato al proprio utente.",
 
   // "profile.card.identify": "Identify",
   "profile.card.identify": "Identificare",
@@ -8123,6 +8146,9 @@
 
   // "search.filters.applied.f.organization": "Organisation",
   "search.filters.applied.f.organization": "Struttura",
+
+  // "search.filters.applied.f.knowslanguage": "Language",
+  "search.filters.applied.f.knowslanguage": "Lingua",
 
   // "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
   "search.filters.applied.charts.defaultConfiguration.title": "Output di ricerca",

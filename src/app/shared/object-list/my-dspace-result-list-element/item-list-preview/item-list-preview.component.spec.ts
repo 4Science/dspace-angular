@@ -12,6 +12,8 @@ import { TranslateLoaderMock } from '../../../mocks/translate-loader.mock';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { VarDirective } from '../../../utils/var.directive';
 import { APP_CONFIG } from '../../../../../config/app-config.interface';
+import { TruncatableService } from '../../../truncatable/truncatable.service';
+import {EscapeHtmlPipe} from '../../../utils/escape-html.pipe';
 
 let component: ItemListPreviewComponent;
 let fixture: ComponentFixture<ItemListPreviewComponent>;
@@ -80,6 +82,10 @@ const enviromentNoThumbs = {
   }
 };
 
+const truncatableServiceStub: any = {
+  isCollapsed: (id: number) => observableOf(true),
+};
+
 describe('ItemListPreviewComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -92,10 +98,11 @@ describe('ItemListPreviewComponent', () => {
         }),
         NoopAnimationsModule
       ],
-      declarations: [ItemListPreviewComponent, TruncatePipe, VarDirective],
+      declarations: [ItemListPreviewComponent, TruncatePipe, VarDirective, EscapeHtmlPipe],
       providers: [
         { provide: 'objectElementProvider', useValue: { mockItemWithAuthorAndDate }},
-        { provide: APP_CONFIG, useValue: environmentUseThumbs }
+        { provide: APP_CONFIG, useValue: environmentUseThumbs },
+        { provide: TruncatableService, useValue: truncatableServiceStub },
       ],
 
       schemas: [NO_ERRORS_SCHEMA]
@@ -198,6 +205,33 @@ describe('ItemListPreviewComponent', () => {
       expect(entityField).toBeNull();
     });
   });
+
+
+  describe('When truncatable section is collapsed', () => {
+    beforeEach(() => {
+      component.isCollapsed$ = observableOf(true);
+      component.item = mockItemWithAuthorAndDate;
+      fixture.detectChanges();
+    });
+
+    it('should show limitedMetadata', () => {
+      const authorElements = fixture.debugElement.queryAll(By.css('span.item-list-authors ds-metadata-link-view'));
+      expect(authorElements.length).toBe(mockItemWithAuthorAndDate.limitedMetadata(component.authorMetadata, component.authorMetadataLimit).length);
+    });
+  });
+
+  describe('When truncatable section is expanded', () => {
+    beforeEach(() => {
+      component.isCollapsed$ = observableOf(false);
+      component.item = mockItemWithAuthorAndDate;
+      fixture.detectChanges();
+    });
+
+    it('should show allMetadata', () => {
+      const authorElements = fixture.debugElement.queryAll(By.css('span.item-list-authors ds-metadata-link-view'));
+      expect(authorElements.length).toBe(mockItemWithAuthorAndDate.allMetadata(component.authorMetadata).length);
+    });
+  });
 });
 
 describe('ItemListPreviewComponent', () => {
@@ -212,10 +246,11 @@ describe('ItemListPreviewComponent', () => {
         }),
         NoopAnimationsModule
       ],
-      declarations: [ItemListPreviewComponent, TruncatePipe],
+      declarations: [ItemListPreviewComponent, TruncatePipe, EscapeHtmlPipe],
       providers: [
         {provide: 'objectElementProvider', useValue: {mockItemWithAuthorAndDate}},
-        {provide: APP_CONFIG, useValue: enviromentNoThumbs}
+        {provide: APP_CONFIG, useValue: enviromentNoThumbs},
+        { provide: TruncatableService, useValue: truncatableServiceStub },
       ],
 
       schemas: [NO_ERRORS_SCHEMA]

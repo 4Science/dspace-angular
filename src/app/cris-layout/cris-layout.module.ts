@@ -114,6 +114,19 @@ import { CrisLayoutCollectionBoxComponent } from './cris-layout-matrix/cris-layo
 import {
   LinkAuthorityComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/link-authority/link-authority.component';
+import {
+  HtmlComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/html/html.component';
+import {
+  LonghtmlComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/longhtml/longhtml.component';
+import {
+  CcLicenseLargeComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/cc-license-large/cc-license-large.component';
+import {ItemSharedModule} from '../item-page/item-shared.module';
+import {
+  CcLicenseSmallComponent
+} from './cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/cc-license-small/cc-license-small.component';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -130,6 +143,8 @@ const ENTRY_COMPONENTS = [
   LinkComponent,
   IdentifierComponent,
   CrisrefComponent,
+  CcLicenseLargeComponent,
+  CcLicenseSmallComponent,
   ThumbnailComponent,
   AttachmentComponent,
   CrisLayoutMetricsBoxComponent,
@@ -139,7 +154,9 @@ const ENTRY_COMPONENTS = [
   ValuepairComponent,
   TagComponent,
   AdvancedAttachmentComponent,
-  LinkAuthorityComponent
+  LinkAuthorityComponent,
+  HtmlComponent,
+  LonghtmlComponent,
 ];
 
 @NgModule({
@@ -178,11 +195,14 @@ const ENTRY_COMPONENTS = [
     MiradorViewerModule,
     MetricsModule,
     AttachmentRenderingModule,
-    FormModule
+    FormModule,
+    ItemSharedModule
   ],
   exports: [
     CrisLayoutComponent,
     CrisrefComponent,
+    CcLicenseLargeComponent,
+    CcLicenseSmallComponent
   ]
 })
 export class CrisLayoutModule {

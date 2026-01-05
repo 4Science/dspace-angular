@@ -7,6 +7,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SearchResultsComponent } from './search-results.component';
 import { QueryParamsDirectiveStub } from '../../testing/query-params-directive.stub';
 import { createFailedRemoteDataObject } from '../../remote-data.utils';
+import { SearchResultsSkeletonComponent } from './search-results-skeleton/search-results-skeleton.component';
+import { SearchConfigurationService } from '../../../core/shared/search/search-configuration.service';
+import { SearchConfigurationServiceStub } from '../../testing/search-configuration-service.stub';
+import { SearchService } from '../../../core/shared/search/search.service';
+import { SearchServiceStub } from '../../testing/search-service.stub';
+import { APP_CONFIG } from '../../../../config/app-config.interface';
+import { environment } from '../../../../environments/environment';
 
 describe('SearchResultsComponent', () => {
   let comp: SearchResultsComponent;
@@ -19,7 +26,14 @@ describe('SearchResultsComponent', () => {
       imports: [TranslateModule.forRoot(), NoopAnimationsModule],
       declarations: [
         SearchResultsComponent,
-        QueryParamsDirectiveStub],
+        SearchResultsSkeletonComponent,
+        QueryParamsDirectiveStub
+      ],
+      providers: [
+        { provide: SearchConfigurationService, useValue: new SearchConfigurationServiceStub() },
+        { provide: SearchService, useValue: new SearchServiceStub() },
+        { provide: APP_CONFIG, useValue: environment },
+      ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
@@ -63,7 +77,7 @@ describe('SearchResultsComponent', () => {
 
   it('should display link with new search where query is quoted if search return a error 400', () => {
     (comp as any).searchResults = createFailedRemoteDataObject('Error', 400);
-    (comp as any).searchConfig = { query: 'foobar' };
+    (comp as any).searchConfig = { query: 'foobar', pagination: { pageSize: 10 } };
     fixture.detectChanges();
 
     const linkDes = fixture.debugElement.queryAll(By.directive(QueryParamsDirectiveStub));

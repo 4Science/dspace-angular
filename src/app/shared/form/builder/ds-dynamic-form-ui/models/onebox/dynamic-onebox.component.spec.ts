@@ -81,7 +81,7 @@ describe('DsDynamicOneboxComponent test suite', () => {
 
   let scheduler: TestScheduler;
   let testComp: TestComponent;
-  let oneboxComponent: DsDynamicOneboxComponent;
+  let oneboxComponent: DsDynamicOneboxComponent|any;
   let testFixture: ComponentFixture<TestComponent>;
   let debugElement: DebugElement;
   let oneboxCompFixture: ComponentFixture<DsDynamicOneboxComponent>;
@@ -175,12 +175,12 @@ describe('DsDynamicOneboxComponent test suite', () => {
       providers: [
         ChangeDetectorRef,
         DsDynamicOneboxComponent,
-        { provide: VocabularyService, useValue: vocabularyServiceStub },
-        { provide: DynamicFormLayoutService, useValue: mockDynamicFormLayoutService },
-        { provide: DynamicFormValidationService, useValue: mockDynamicFormValidationService },
-        { provide: NgbModal, useValue: modal },
-        { provide: FormBuilderService },
-        { provide: SubmissionService, useClass: SubmissionServiceStub }
+        {provide: VocabularyService, useValue: vocabularyServiceStub},
+        {provide: DynamicFormLayoutService, useValue: mockDynamicFormLayoutService},
+        {provide: DynamicFormValidationService, useValue: mockDynamicFormValidationService},
+        {provide: NgbModal, useValue: modal},
+        {provide: FormBuilderService},
+        {provide: SubmissionService, useClass: SubmissionServiceStub}
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
@@ -348,7 +348,7 @@ describe('DsDynamicOneboxComponent test suite', () => {
         }));
         spyOn((oneboxComponent as any).vocabularyService, 'getVocabularyEntryByValue').and.returnValue(entry);
         spyOn((oneboxComponent as any).vocabularyService, 'getVocabularyEntryByID').and.returnValue(entry);
-        (oneboxComponent.model as any).value = new FormFieldMetadataValueObject('test', null, null,null, 'testDisplay');
+        (oneboxComponent.model as any).value = new FormFieldMetadataValueObject('test', null, null, null, 'testDisplay');
         oneboxCompFixture.detectChanges();
       });
 
@@ -359,7 +359,7 @@ describe('DsDynamicOneboxComponent test suite', () => {
 
       it('should init component properly', fakeAsync(() => {
         tick();
-        expect(oneboxComponent.currentValue).toEqual(new FormFieldMetadataValueObject('test', null, null,null, 'testDisplay'));
+        expect(oneboxComponent.currentValue).toEqual(new FormFieldMetadataValueObject('test', null, null, null, 'testDisplay'));
         expect((oneboxComponent as any).vocabularyService.getVocabularyEntryByValue).not.toHaveBeenCalled();
       }));
 
@@ -396,7 +396,7 @@ describe('DsDynamicOneboxComponent test suite', () => {
 
       it('should init component properly', fakeAsync(() => {
         tick();
-        expect(oneboxComponent.currentValue).toEqual(new FormFieldMetadataValueObject('test', null, null,validAuthority, 'test'));
+        expect(oneboxComponent.currentValue).toEqual(new FormFieldMetadataValueObject('test', null, null, validAuthority, 'test'));
         expect((oneboxComponent as any).vocabularyService.getVocabularyEntryByID).not.toHaveBeenCalled();
       }));
 
@@ -457,7 +457,7 @@ describe('DsDynamicOneboxComponent test suite', () => {
         }));
         spyOn((oneboxComponent as any).vocabularyService, 'getVocabularyEntryByValue').and.returnValue(entry);
         spyOn((oneboxComponent as any).vocabularyService, 'getVocabularyEntryByID').and.returnValue(entry);
-        (oneboxComponent.model as any).value = new FormFieldMetadataValueObject('test', null, null,  null, 'testDisplay');
+        (oneboxComponent.model as any).value = new FormFieldMetadataValueObject('test', null, null, null, 'testDisplay');
         oneboxCompFixture.detectChanges();
       });
 
@@ -468,7 +468,7 @@ describe('DsDynamicOneboxComponent test suite', () => {
 
       it('should init component properly', fakeAsync(() => {
         tick();
-        expect(oneboxComponent.currentValue).toEqual(new FormFieldMetadataValueObject('test', null, null,null, 'testDisplay'));
+        expect(oneboxComponent.currentValue).toEqual(new FormFieldMetadataValueObject('test', null, null, null, 'testDisplay'));
         expect((oneboxComponent as any).vocabularyService.getVocabularyEntryByValue).toHaveBeenCalled();
       }));
 
@@ -517,6 +517,98 @@ describe('DsDynamicOneboxComponent test suite', () => {
       }));
     });
 
+  describe('selectAlternativeInformation', () => {
+    beforeEach(() => {
+      oneboxCompFixture = TestBed.createComponent(DsDynamicOneboxComponent);
+      debugElement = oneboxCompFixture.debugElement;
+      oneboxComponent = oneboxCompFixture.componentInstance;
+      oneboxComponent.currentValue = new FormFieldMetadataValueObject('test', null, null, null, 'testDisplay');
+      oneboxComponent.model = new DynamicOneboxModel(ONEBOX_TEST_MODEL_CONFIG);
+
+      spyOn(oneboxComponent, 'onSelectItem').and.returnValue(undefined);
+      spyOn(oneboxComponent, 'toggleOtherInfoSelection').and.returnValue(undefined);
+    });
+
+    it('sets authority when unformattedOtherInfoValue contains "::"', () => {
+      const info = 'testInfo';
+      const unformattedItem = 'testInfo::authorityValue';
+      oneboxComponent.otherInfoValuesUnformatted = [unformattedItem];
+
+      oneboxComponent.selectAlternativeInfo(info);
+
+      expect(oneboxComponent.currentValue.authority).toBe('authorityValue');
+    });
+
+    it('sets authority to undefined when unformattedOtherInfoValue does not contain "::"', () => {
+      const info = 'testInfo';
+      const unformattedItem = 'testInfo';
+      oneboxComponent.otherInfoValuesUnformatted = [unformattedItem];
+
+      oneboxComponent.selectAlternativeInfo(info);
+
+      expect(oneboxComponent.currentValue.authority).toBeUndefined();
+    });
+  });
+
+  describe('test metadata enrichment', () => {
+    beforeEach(() => {
+      oneboxCompFixture = TestBed.createComponent(DsDynamicOneboxComponent);
+      debugElement = oneboxCompFixture.debugElement;
+      oneboxComponent = oneboxCompFixture.componentInstance;
+      oneboxComponent.currentValue = new FormFieldMetadataValueObject('test', null, null, null, 'testDisplay');
+      oneboxComponent.model = new DynamicOneboxModel(ONEBOX_TEST_MODEL_CONFIG);
+
+      spyOn(oneboxComponent, 'onSelectItem').and.returnValue(undefined);
+      spyOn(oneboxComponent, 'toggleOtherInfoSelection').and.returnValue(undefined);
+    });
+
+
+    it('should return null if value is empty', () => {
+      expect(oneboxComponent.getOtherInformationValue('', 'some-key')).toBeNull();
+    });
+
+    it('should return null if key is "alternative-names"', () => {
+      expect(oneboxComponent.getOtherInformationValue('some-value', 'alternative-names')).toBeNull();
+    });
+
+    it('should return single FormFieldMetadataValueObject if no "|||" in value', () => {
+      const result = oneboxComponent.getOtherInformationValue('value::authority', 'some-key');
+      expect(result.length).toBe(1);
+      expect(result[0]).toEqual(jasmine.any(FormFieldMetadataValueObject));
+      expect(result[0].value).toBe('value');
+      expect(result[0].authority).toBe('authority');
+    });
+
+    it('should handle multiple values with multiValueOnGenerator true', () => {
+      oneboxComponent.multiValueOnGenerator = true;
+      oneboxComponent.otherInfoValue = 'someValue';
+      const result = oneboxComponent.getOtherInformationValue('val1::auth1|||val2::auth2', 'some-key');
+      expect(result.length).toBe(2);
+      expect(result[0].value).toBe('val1');
+      expect(result[0].authority).toBe('auth1');
+      expect(result[1].value).toBe('val2');
+      expect(result[1].authority).toBe('auth2');
+    });
+
+    it('should handle multiple values with multiValueOnGenerator false', () => {
+      oneboxComponent.multiValueOnGenerator = false;
+      oneboxComponent.otherInfoValue = 'val1';
+      oneboxComponent.otherInfoValuesUnformatted = ['val1::auth1'];
+      const result = oneboxComponent.getOtherInformationValue('val1::auth1|||val2::auth2', 'data-key');
+      expect(result.length).toBe(1);
+      expect(result[0].value).toBe('val1');
+      expect(result[0].authority).toBe('auth1');
+      expect(result[0].otherInformation['data-key']).toBe('val1::auth1|||val2::auth2');
+    });
+
+    it('should handle value without "::"', () => {
+      const result = oneboxComponent.getOtherInformationValue('simpleValue', 'some-key');
+      expect(result.length).toBe(1);
+      expect(result[0].value).toBe('simpleValue');
+      expect(result[0].authority).toBeNull();
+    });
+
+  });
   });
 });
 

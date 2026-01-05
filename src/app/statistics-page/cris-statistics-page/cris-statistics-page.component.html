@@ -24,7 +24,7 @@
                   <input class="form-control date-input" placeholder="Start Date" name="dp" [(ngModel)]="dateFrom" (ngModelChange)="startDateChanged()"
                     ngbDatepicker #df="ngbDatepicker">
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" (click)="df.toggle()" type="button">
+                    <button class="btn btn-outline-secondary" title="Start Date" (click)="df.toggle()" type="button">
                       <i class="far fa-calendar-alt"></i>
                     </button>
                   </div>
@@ -36,7 +36,7 @@
                     ngbDatepicker #dt="ngbDatepicker">
 
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" (click)="dt.toggle()" type="button">
+                    <button class="btn btn-outline-secondary" title="End Date" (click)="dt.toggle()" type="button">
                       <i class="far fa-calendar-alt"></i>
                     </button>
                   </div>
@@ -47,9 +47,10 @@
 
 
           <ng-container *ngIf="!!categories && categories.length > 1">
-            <ul ngbNav [(activeId)]="selectedCategory.id" class="nav-tabs" id="categories-tabs" (navChange)="changeCategoryType($event)" [destroyOnHide]="true">
-              <li [ngbNavItem]="category.id" *ngFor="let category of categories" [id]="category.id">
-                <a ngbNavLink >{{'statistics.categories.' + category.categoryType + '.tab' | translate}}</a>
+            <ul ngbNav [(activeId)]="selectedCategory.id" class="nav-tabs" id="categories-tabs"
+                (navChange)="changeCategoryType($event)" [destroyOnHide]="true">
+              <li [ngbNavItem]="category.id" *ngFor="let category of categories" [id]="category.id" role="tab">
+                <a ngbNavLink>{{ 'statistics.categories.' + category.categoryType + '.tab' | translate }}</a>
                 <ng-template ngbNavContent>
                 </ng-template>
               </li>

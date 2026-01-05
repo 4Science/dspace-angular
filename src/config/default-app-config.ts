@@ -22,6 +22,8 @@ import { HomeConfig } from './homepage-config.interface';
 import { MarkdownConfig } from './markdown-config.interface';
 import { FilterVocabularyConfig } from './filter-vocabulary-config';
 import { DiscoverySortConfig } from './discovery-sort.config';
+import { LiveRegionConfig } from '../app/shared/live-region/live-region.config';
+import { SearchConfig } from './search-page-config.interface';
 import { AddToAnyPluginConfig } from './add-to-any-plugin-config';
 import { CmsMetadata } from './cms-metadata';
 import { CrisLayoutConfig, LayoutConfig, SuggestionConfig } from './layout-config.interfaces';
@@ -133,7 +135,8 @@ export class DefaultAppConfig implements AppConfig {
       // If the rest token expires in less than this amount of time, it will be refreshed automatically.
       // This is independent from the idle warning.
       timeLeftBeforeTokenRefresh: 2 * 60 * 1000 // 2 minutes
-    }
+    },
+    isPasswordLoginEnabledForAdminsOnly: false, // Enable the standard login form
   };
 
   // Form settings
@@ -162,7 +165,7 @@ export class DefaultAppConfig implements AppConfig {
   submission: SubmissionConfig = {
     autosave: {
       // NOTE: which metadata trigger an autosave
-      metadata: ['dc.title', 'dc.identifier.doi', 'dc.identifier.pmid', 'dc.identifier.arxiv', 'dc.identifier.patentno', 'dc.identifier.scopus', 'dc.identifier.isi', 'dcterms.dateSubmitted', 'dc.identifier.applicationnumber', 'dc.type'],
+      metadata: ['dc.title', 'dc.identifier.doi', 'dc.identifier.pmid', 'dc.identifier.arxiv', 'dc.identifier.patentno', 'dc.identifier.scopus', 'dc.identifier.isi', 'dcterms.dateSubmitted', 'dc.identifier.applicationnumber', 'dc.type', 'dc.identifier.issn'],
       /**
        * NOTE: after how many time (milliseconds) submission is saved automatically
        * eg. timer: 5 * (1000 * 60); // 5 minutes
@@ -293,7 +296,9 @@ export class DefaultAppConfig implements AppConfig {
     dropdownHintEnabled: {
       // NOTE: list of metadata fields for which the dropdown hint is enabled
       // eg. 'dc.access.rights': true,
-    }
+    },
+    // Minimum number of characters required before performing a lookup.
+    minChars: 3,
   };
 
   // Default Language in which the UI will be rendered if the user's browser language is not an active language
@@ -404,6 +409,12 @@ export class DefaultAppConfig implements AppConfig {
     }
   ];
 
+  // The maximum number of item to process when following authority metadata values.
+  followAuthorityMaxItemLimit = 100;
+  // The maximum number of metadata values to process for each metadata key
+  // when following authority metadata values.
+  followAuthorityMetadataValuesLimit = 5;
+
   // Collection Page Config
   collection: CollectionPageConfig = {
     edit: {
@@ -497,15 +508,7 @@ export class DefaultAppConfig implements AppConfig {
             'rel': 'manifest',
             'href': 'assets/dspace/images/favicons/manifest.webmanifest',
           }
-        },
-        {
-          // Insert   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> into the <head> of the page.
-          tagName: 'link',
-          attributes: {
-            'rel': 'stylesheet',
-            'href': 'https://fonts.googleapis.com/icon?family=Material+Icons',
-          }
-        },
+        }
       ]
     },
   ];
@@ -571,6 +574,16 @@ export class DefaultAppConfig implements AppConfig {
   comcolSelectionSort: DiscoverySortConfig = {
     sortField:'dc.title',
     sortDirection:'ASC',
+  };
+
+  // Live Region configuration, used by the LiveRegionService
+  liveRegion: LiveRegionConfig = {
+    messageTimeOutDurationMs: 30000,
+    isVisible: false,
+  };
+
+  search: SearchConfig = {
+    filterPlaceholdersCount: 5
   };
 
   crisLayout: CrisLayoutConfig = {

@@ -11,6 +11,10 @@ import { CollectionElementLinkType } from '../../object-collection/collection-el
 import { ViewMode } from '../../../core/shared/view-mode.model';
 import { Context } from '../../../core/shared/context.model';
 import { PaginatedSearchOptions } from '../models/paginated-search-options.model';
+import { SearchFilter } from '../models/search-filter.model';
+import { Observable } from 'rxjs';
+import { SearchConfigurationService } from '../../../core/shared/search/search-configuration.service';
+import { SearchService } from '../../../core/shared/search/search.service';
 import { AlertType } from '../../alert/alert-type';
 
 export interface SelectionConfig {
@@ -20,6 +24,7 @@ export interface SelectionConfig {
 
 @Component({
   selector: 'ds-search-results',
+  styleUrls: ['./search-results.component.scss'],
   templateUrl: './search-results.component.html',
   animations: [
     fadeIn,
@@ -32,6 +37,8 @@ export interface SelectionConfig {
  */
 export class SearchResultsComponent {
   hasNoValue = hasNoValue;
+
+  filters$: Observable<SearchFilter[]>;
 
   /**
    * The link type of the listed search results
@@ -82,6 +89,11 @@ export class SearchResultsComponent {
    * Whether to show if the item is a correction
    */
   @Input() showCorrection = false;
+
+  /**
+   * A boolean representing if to show workflow statistics
+   */
+  @Input() showWorkflowStatistics: boolean;
 
   /**
    * The current sorting configuration of the search
@@ -144,6 +156,13 @@ export class SearchResultsComponent {
    * Pass custom data to the component for custom utilization
    */
   @Input() customData: any;
+
+  constructor(
+    protected searchConfigService: SearchConfigurationService,
+    protected searchService: SearchService,
+  ) {
+    this.filters$ = this.searchConfigService.getCurrentFilters();
+  }
 
   /**
    * Check if search results are loading

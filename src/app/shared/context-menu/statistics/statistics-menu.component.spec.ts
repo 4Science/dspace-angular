@@ -11,6 +11,7 @@ import { By } from '@angular/platform-browser';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { NotificationsService } from '../../notifications/notifications.service';
 import { NotificationsServiceStub } from '../../testing/notifications-service.stub';
+import { BrowserOnlyMockPipe } from '../../testing/browser-only-mock.pipe';
 
 describe('StatisticsMenuComponent', () => {
   let component: StatisticsMenuComponent;
@@ -30,7 +31,7 @@ describe('StatisticsMenuComponent', () => {
       isAuthorized: observableOf(true)
     });
     TestBed.configureTestingModule({
-      declarations: [ StatisticsMenuComponent ],
+      declarations: [ StatisticsMenuComponent, BrowserOnlyMockPipe ],
       imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([])],
       providers: [
         { provide: AuthorizationDataService, useValue: authorizationService },

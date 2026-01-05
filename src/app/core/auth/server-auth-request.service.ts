@@ -16,6 +16,8 @@ import {
 } from '../xsrf/xsrf.constants';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { XSRFService } from '../xsrf/xsrf.service';
+import { RESTURLCombiner } from '../url-combiner/rest-url-combiner';
 
 /**
  * Server side version of the service to send authentication requests
@@ -28,6 +30,7 @@ export class ServerAuthRequestService extends AuthRequestService {
     requestService: RequestService,
     rdbService: RemoteDataBuildService,
     protected httpClient: HttpClient,
+    protected xsrfService: XSRFService
   ) {
     super(halService, requestService, rdbService);
   }
@@ -39,10 +42,17 @@ export class ServerAuthRequestService extends AuthRequestService {
    * @protected
    */
   protected createShortLivedTokenRequest(href: string): Observable<PostRequest> {
-    // First do a call to the root endpoint in order to get an XSRF token
-    return this.httpClient.get(this.halService.getRootHref(), { observe: 'response' }).pipe(
+    // First do a call to the csrf endpoint in order to get an XSRF token
+    return this.httpClient.get(new RESTURLCombiner('/security/csrf').toString(), { observe: 'response' }).pipe(
       // retrieve the XSRF token from the response header
       map((response: HttpResponse<any>) => response.headers.get(XSRF_RESPONSE_HEADER)),
+      map((xsrfToken: string) => {
+        if (!xsrfToken) {
+          throw new Error('Failed to initialize XSRF token');
+        }
+        this.xsrfService.tokenInitialized$.next(true);
+        return xsrfToken;
+      }),
       // Use that token to create an HttpHeaders object
       map((xsrfToken: string) => new HttpHeaders()
           .set('Content-Type', 'application/json; charset=utf-8')

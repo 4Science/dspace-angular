@@ -29,7 +29,7 @@ import * as domino from 'domino';
 /* eslint-enable import/no-namespace */
 import axios from 'axios';
 import LRU from 'lru-cache';
-import isbot from 'isbot';
+import { isbot } from 'isbot';
 import { createCertificate } from 'pem';
 import { createServer } from 'https';
 import { json } from 'body-parser';
@@ -65,6 +65,8 @@ const DIST_FOLDER = join(process.cwd(), 'dist/browser');
 // Set path fir IIIF viewer.
 const IIIF_VIEWER = join(process.cwd(), 'dist/iiif');
 
+const miradorHtml = join(IIIF_VIEWER, '/mirador/index.html');
+
 const indexHtml = join(DIST_FOLDER, 'index.html');
 
 const cookieParser = require('cookie-parser');
@@ -86,8 +88,10 @@ const _window = domino.createWindow(indexHtml);
 // The REST server base URL
 const REST_BASE_URL = environment.rest.ssrBaseUrl || environment.rest.baseUrl;
 
+const IIIF_ALLOWED_ORIGINS = environment.rest.allowedOrigins || [];
+
 // Assign the DOM window and document objects to the global object
-(_window as any).screen = {deviceXDPI: 0, logicalXDPI: 0};
+(_window as any).screen = { deviceXDPI: 0, logicalXDPI: 0 };
 (global as any).window = _window;
 (global as any).document = _window.document;
 (global as any).navigator = _window.navigator;
@@ -231,6 +235,35 @@ export function app() {
   */
   router.use('/iiif', express.static(IIIF_VIEWER, { index: false }));
 
+  /*
+  * Adapt headers to allow embedding of IIIF viewer in authorized pages
+  */
+  server.get('/iiif/mirador/index.html', (req, res) => {
+    const referer = req.headers.referer;
+
+    if (referer && !referer.startsWith('/')) {
+      try {
+        const origin =  new URL(referer).origin;
+        if (IIIF_ALLOWED_ORIGINS.includes(origin)) {
+          console.info('Found allowed origin, setting headers for IIIF viewer');
+          // CORS header
+          res.setHeader('Access-Control-Allow-Origin', origin);
+          // CSP for iframe embedding
+          res.setHeader('Content-Security-Policy', `frame-ancestors ${origin};`);
+          console.info('Headers have been set ', res.getHeader('Access-Control-Allow-Origin'), res.getHeader('Content-Security-Policy'));
+        }
+      } catch (error) {
+        console.error('An error occurred setting security headers in response:', error.message);
+      }
+    }
+
+    res.sendFile(miradorHtml, (err) => {
+      if (err) {
+        res.status(500).send('Internal Server Error');
+      }
+    });
+  });
+
   /**
    * Checking server status
    */
@@ -240,6 +273,11 @@ export function app() {
    * Checking client status
    */
   server.get('/app/client/health', clientHealthCheck);
+
+  /**
+   * Redirecting old manifest
+   */
+  server.get('/json/iiif/**/manifest', redirectManifest);
 
   /**
    * Default sending all incoming requests to ngApp() function, after first checking for a cached
@@ -256,7 +294,7 @@ export function app() {
  * The callback function to serve server side angular
  */
 function ngApp(req, res) {
-  if (environment.universal.preboot) {
+  if (environment.universal.preboot && req.method === 'GET' && (req.path === '/' || environment.universal.paths.some(pathPrefix => req.path.startsWith(pathPrefix)))) {
     // Render the page to user via SSR (server side rendering)
     serverSideRender(req, res);
   } else {
@@ -286,7 +324,17 @@ function serverSideRender(req, res, sendToUser: boolean = true) {
     originUrl: environment.ui.baseUrl,
     requestUrl: req.originalUrl,
   }, (err, data) => {
+
+    if (res.writableEnded || res.headersSent || res.finished) {
+      return;
+    }
+
     if (hasNoValue(err) && hasValue(data)) {
+      // Replace REST URL with UI URL
+        if (environment.universal.replaceRestUrl && REST_BASE_URL !== environment.rest.baseUrl) {
+          data = data.replace(new RegExp(REST_BASE_URL, 'g'), environment.rest.baseUrl);
+      }
+
       // save server side rendered page to cache (if any are enabled)
       saveToCache(req, data);
       if (sendToUser) {
@@ -639,10 +687,10 @@ function start() {
  * The callback function to serve client health check requests
  */
 function clientHealthCheck(req, res) {
-    const isServerHealthy = true;
-    if (isServerHealthy) {
-      res.status(200).json({ status: 'UP' });
-    }
+  const isServerHealthy = true;
+  if (isServerHealthy) {
+    res.status(200).json({ status: 'UP' });
+  }
 }
 
 /*
@@ -660,6 +708,41 @@ function healthCheck(req, res) {
       });
     });
 }
+
+/*
+ * The callback function to redirect old manifest
+ */
+function redirectManifest(req, res) {
+  console.info('Redirecting old manifest');
+  const url = req.url;
+  const regex = /json\/iiif\/([^\/]+\/[^\/]+)(?:\/([^\/]+))?\/manifest/;
+  const match = url.match(regex);
+  let handle;
+  let id;
+
+  if (match) {
+    handle = match[1];
+    const baseUrl = `${environment.rest.baseUrl}/api/pid/find?id=${handle}`;
+    axios.get(baseUrl)
+      .then((response) => {
+        if (response.status === 200) {
+          const newUrl = `${environment.rest.baseUrl}/iiif/${response.data.id}/manifest`;
+          console.info('Manifest found, redirect to ', newUrl);
+          res.redirect(newUrl);
+        }
+      })
+      .catch((error) => {
+        res.status(error.response.status).send({
+          error: error.message
+        });
+      });
+  } else {
+    res.status(422).send({
+      error: 'Wrong handle'
+    });
+  }
+}
+
 // Webpack will replace 'require' with '__webpack_require__'
 // '__non_webpack_require__' is a proxy to Node 'require'
 // The below code is to ensure that the server is run only when not requiring the bundle.

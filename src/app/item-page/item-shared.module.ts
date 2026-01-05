@@ -17,6 +17,9 @@ import {
   ThemedMetadataRepresentationListComponent
 } from './simple/metadata-representation-list/themed-metadata-representation-list.component';
 import { ItemAlertsComponent } from './alerts/item-alerts.component';
+import {
+  ItemPageCcLicenseFieldComponent
+} from './simple/field-components/specific-field/cc-license/item-page-cc-license-field.component';
 
 const ENTRY_COMPONENTS = [
   ItemVersionsDeleteModalComponent,
@@ -33,7 +36,8 @@ const COMPONENTS = [
   MetadataRepresentationListComponent,
   ThemedMetadataRepresentationListComponent,
   RelatedItemsComponent,
-  ItemAlertsComponent
+  ItemAlertsComponent,
+  ItemPageCcLicenseFieldComponent
 ];
 
 @NgModule({
