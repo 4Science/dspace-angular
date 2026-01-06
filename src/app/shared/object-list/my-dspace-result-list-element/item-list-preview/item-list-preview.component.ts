@@ -35,6 +35,7 @@ import { SearchResult } from '../../../search/models/search-result.model';
 import { TruncatableComponent } from '../../../truncatable/truncatable.component';
 import { TruncatableService } from '../../../truncatable/truncatable.service';
 import { TruncatablePartComponent } from '../../../truncatable/truncatable-part/truncatable-part.component';
+import { EscapeHtmlPipe } from '../../../utils/escape-html.pipe';
 import { AdditionalMetadataComponent } from '../../search-result-list-element/additional-metadata/additional-metadata.component';
 
 /**
@@ -62,6 +63,7 @@ import { AdditionalMetadataComponent } from '../../search-result-list-element/ad
     AdditionalMetadataComponent,
     ItemCorrectionComponent,
     InWorkflowStatisticsComponent,
+    EscapeHtmlPipe,
   ],
 })
 export class ItemListPreviewComponent implements OnInit {

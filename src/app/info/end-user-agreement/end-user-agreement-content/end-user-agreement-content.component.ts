@@ -1,4 +1,7 @@
-import { AsyncPipe } from '@angular/common';
+import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -26,7 +29,7 @@ import { MarkdownViewerComponent } from '../../../shared/markdown-viewer/markdow
   templateUrl: './end-user-agreement-content.component.html',
   styleUrls: ['./end-user-agreement-content.component.scss'],
   standalone: true,
-  imports: [RouterLink, TranslateModule, AsyncPipe, MarkdownViewerComponent],
+  imports: [RouterLink, TranslateModule, AsyncPipe, MarkdownViewerComponent, NgIf],
 })
 /**
  * Component displaying the contents of the End User Agreement
@@ -37,7 +40,7 @@ export class EndUserAgreementContentComponent implements OnInit, OnDestroy {
 
   subs: Subscription[] = [];
 
-  userAgreementText$: BehaviorSubject<string> = new BehaviorSubject('');
+  userAgreementText$: BehaviorSubject<string | null> = new BehaviorSubject(null);
 
   fallbackText = 'info.end-user-agreement.content.fallback';
 
@@ -52,16 +55,22 @@ export class EndUserAgreementContentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subs.push(this.siteService.find().subscribe((site) => {
-      const langCode = this.localeService.getCurrentLanguageCode();
-      const fallbackLangCode = 'en';
+    this.subs.push(
+      this.siteService.find().subscribe((site) => {
+        const langCode = this.localeService.getCurrentLanguageCode();
+        const fallbackLangCode = 'en';
 
-      const textArray = site?.metadataAsList.filter((metadata) => this.filterMetadata(metadata, langCode));
-      const fallbackTextArray = site?.metadataAsList.filter((metadata) => this.filterMetadata(metadata, fallbackLangCode));
-      const defaultFallbackText = this.translateService.instant(this.fallbackText);
+        const textArray = site?.metadataAsList.filter((metadata) =>
+          this.filterMetadata(metadata, langCode),
+        );
+        const fallbackTextArray = site?.metadataAsList.filter((metadata) =>
+          this.filterMetadata(metadata, fallbackLangCode),
+        );
 
-      this.userAgreementText$.next(textArray[0]?.value || fallbackTextArray[0]?.value || defaultFallbackText);
-    }));
+        const value = textArray[0]?.value || fallbackTextArray[0]?.value || '';
+        this.userAgreementText$.next(value);
+      }),
+    );
   }
 
   ngOnDestroy(): void {

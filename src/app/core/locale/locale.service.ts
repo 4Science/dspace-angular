@@ -1,7 +1,11 @@
-import { DOCUMENT } from '@angular/common';
+import {
+  DOCUMENT,
+  isPlatformBrowser,
+} from '@angular/common';
 import {
   Inject,
   Injectable,
+  PLATFORM_ID,
 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import {
@@ -58,6 +62,7 @@ export class LocaleService {
     protected authService: AuthService,
     protected routeService: RouteService,
     @Inject(DOCUMENT) protected document: any,
+    @Inject(PLATFORM_ID) protected platformId: string,
   ) {
     this.initDefaults();
   }
@@ -69,7 +74,9 @@ export class LocaleService {
     this.routeService.getQueryParameterValue('lang').subscribe(lang => {
       if (lang && this.translate.getLangs().includes(lang)) {
         this.setCurrentLanguageCode(lang);
-        this.routeService.removeQueryParam('lang');
+        if (isPlatformBrowser(this.platformId)) {
+          this.routeService.removeQueryParam('lang');
+        }
       }
     });
   }
