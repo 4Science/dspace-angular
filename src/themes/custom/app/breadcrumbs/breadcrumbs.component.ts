@@ -8,6 +8,7 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { BreadcrumbsComponent as BaseComponent } from '../../../../app/breadcrumbs/breadcrumbs.component';
+import { EscapeHtmlPipe } from '../../../../app/shared/utils/escape-html.pipe';
 import { VarDirective } from '../../../../app/shared/utils/var.directive';
 
 @Component({
@@ -18,6 +19,7 @@ import { VarDirective } from '../../../../app/shared/utils/var.directive';
   styleUrls: ['../../../../app/breadcrumbs/breadcrumbs.component.scss'],
   imports: [
     AsyncPipe,
+    EscapeHtmlPipe,
     NgbTooltipModule,
     NgTemplateOutlet,
     RouterLink,

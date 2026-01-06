@@ -21,6 +21,7 @@ import { AdditionalMetadataComponent } from '../../../../../../../../../app/shar
 import { ItemSearchResultListElementComponent as BaseComponent } from '../../../../../../../../../app/shared/object-list/search-result-list-element/item-search-result/item-types/item/item-search-result-list-element.component';
 import { TruncatableComponent } from '../../../../../../../../../app/shared/truncatable/truncatable.component';
 import { TruncatablePartComponent } from '../../../../../../../../../app/shared/truncatable/truncatable-part/truncatable-part.component';
+import { EscapeHtmlPipe } from '../../../../../../../../../app/shared/utils/escape-html.pipe';
 import { ThemedThumbnailComponent } from '../../../../../../../../../app/thumbnail/themed-thumbnail.component';
 
 @listableObjectComponent('PublicationSearchResult', ViewMode.ListElement, Context.Any, 'custom')
@@ -34,6 +35,7 @@ import { ThemedThumbnailComponent } from '../../../../../../../../../app/thumbna
   imports: [
     AdditionalMetadataComponent,
     AsyncPipe,
+    EscapeHtmlPipe,
     InWorkflowStatisticsComponent,
     MetadataLinkViewComponent,
     MetricBadgesComponent,

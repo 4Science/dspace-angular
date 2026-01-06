@@ -1,4 +1,7 @@
-import { AsyncPipe } from '@angular/common';
+import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -41,7 +44,7 @@ export class EndUserAgreementContentComponent implements OnInit, OnDestroy {
 
   subs: Subscription[] = [];
 
-  userAgreementText$: BehaviorSubject<string> = new BehaviorSubject('');
+  userAgreementText$: BehaviorSubject<string | null> = new BehaviorSubject(null);
 
   fallbackText = 'info.end-user-agreement.content.fallback';
 
@@ -57,15 +60,21 @@ export class EndUserAgreementContentComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const site$ = this.siteService.find().pipe(take(1));
-    this.subs.push(combineLatest([site$, this.localeService.getCurrentLanguageCode()]).subscribe(([site, langCode]) => {
-      const fallbackLangCode = 'en';
+    this.subs.push(
+      combineLatest([site$, this.localeService.getCurrentLanguageCode()]).subscribe(([site, langCode]) => {
+        const fallbackLangCode = 'en';
 
-      const textArray = site?.metadataAsList.filter((metadata) => this.filterMetadata(metadata, langCode));
-      const fallbackTextArray = site?.metadataAsList.filter((metadata) => this.filterMetadata(metadata, fallbackLangCode));
-      const defaultFallbackText = this.translateService.instant(this.fallbackText);
+        const textArray = site?.metadataAsList.filter((metadata) =>
+          this.filterMetadata(metadata, langCode),
+        );
+        const fallbackTextArray = site?.metadataAsList.filter((metadata) =>
+          this.filterMetadata(metadata, fallbackLangCode),
+        );
 
-      this.userAgreementText$.next(textArray[0]?.value || fallbackTextArray[0]?.value || defaultFallbackText);
-    }));
+        const value = textArray[0]?.value || fallbackTextArray[0]?.value || '';
+        this.userAgreementText$.next(value);
+      }),
+    );
   }
 
   ngOnDestroy(): void {

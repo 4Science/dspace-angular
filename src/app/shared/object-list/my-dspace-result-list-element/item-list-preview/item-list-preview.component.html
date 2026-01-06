@@ -14,7 +14,7 @@
           }
         </div>
         <ds-truncatable [id]="item.id">
-          <h2 [innerHTML]="dsoTitle" [ngClass]="{'lead': true,'text-muted': !item.hasMetadata('dc.title')}"></h2>
+          <h2 [innerHTML]="dsoTitle | dsEscapeHtml" [ngClass]="{'lead': true,'text-muted': !item.hasMetadata('dc.title')}"></h2>
           @if (showWorkflowStatistics) {
             <ds-in-workflow-statistics [item]="item" ></ds-in-workflow-statistics>
           }

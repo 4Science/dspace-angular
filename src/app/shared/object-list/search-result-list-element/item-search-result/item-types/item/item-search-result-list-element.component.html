@@ -35,11 +35,11 @@
             @if (linkType !== linkTypes.None) {
               <a [target]="(linkType === linkTypes.ExternalLink) ? '_blank' : '_self'" [attr.rel]="(linkType === linkTypes.ExternalLink) ? 'noopener noreferrer' : null"
                 [routerLink]="[itemPageRoute]" class="lead item-list-title dont-break-out"
-              [innerHTML]="dsoTitle" role="link" tabindex="0"></a>
+              [innerHTML]="dsoTitle | dsEscapeHtml" role="link" tabindex="0"></a>
             }
             @if (linkType === linkTypes.None) {
               <span class="lead item-list-title dont-break-out"
-              [innerHTML]="dsoTitle"></span>
+              [innerHTML]="dsoTitle | dsEscapeHtml"></span>
             }
             @if (showWorkflowStatistics) {
               <ds-in-workflow-statistics  [item]="dso"></ds-in-workflow-statistics>

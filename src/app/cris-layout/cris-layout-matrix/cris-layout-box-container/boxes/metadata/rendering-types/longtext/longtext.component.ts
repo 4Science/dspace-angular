@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { TruncatableComponent } from '../../../../../../../shared/truncatable/truncatable.component';
 import { TruncatablePartComponent } from '../../../../../../../shared/truncatable/truncatable-part/truncatable-part.component';
+import { EscapeHtmlPipe } from '../../../../../../../shared/utils/escape-html.pipe';
 import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
 
 /**
@@ -14,6 +15,7 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   styleUrls: ['./longtext.component.scss'],
   standalone: true,
   imports: [
+    EscapeHtmlPipe,
     TruncatableComponent,
     TruncatablePartComponent,
   ],
