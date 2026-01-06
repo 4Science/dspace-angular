@@ -337,6 +337,11 @@ pipelines:
     turn-on-test:
       - step: *turn-on-test
   branches:
+    'main-cris':
+      - step: *check-branch-name-allowed
+      - step: *preliminary-operation
+      - step: *angular-build
+      - parallel: *parallel-run-tests
     'dspace-cris-20*_02_x':
       - step: *check-branch-name-allowed
       - step: *preliminary-operation
