@@ -41,7 +41,6 @@ import { NavbarSectionComponent } from '../navbar-section/navbar-section.compone
     HoverOutsideDirective,
     NgComponentOutlet,
     RouterLinkActive,
-    VarDirective,
   ],
 })
 export class ExpandableNavbarSectionComponent extends NavbarSectionComponent implements AfterViewChecked, OnInit, OnDestroy {

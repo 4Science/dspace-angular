@@ -58,7 +58,6 @@ import { BrowserOnlyPipe } from '../../../utils/browser-only.pipe';
     BtnDisabledDirective,
     FormsModule,
     ReactiveFormsModule,
-    RouterLink,
     TranslateModule,
   ],
 })

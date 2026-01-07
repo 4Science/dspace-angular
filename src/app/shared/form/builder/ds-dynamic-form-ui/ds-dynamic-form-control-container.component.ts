@@ -136,7 +136,6 @@ import { DsDynamicLookupRelationModalComponent } from './relation-lookup-modal/d
   changeDetection: ChangeDetectionStrategy.Default,
   imports: [
     AsyncPipe,
-    EditMetadataSecurityComponent,
     ExistingMetadataListElementComponent,
     ExistingRelationListElementComponent,
     FormsModule,

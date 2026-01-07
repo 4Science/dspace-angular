@@ -57,7 +57,6 @@ import {
   standalone: true,
   imports: [
     DSOSelectorComponent,
-    NgIf,
     TranslateModule,
   ],
 })

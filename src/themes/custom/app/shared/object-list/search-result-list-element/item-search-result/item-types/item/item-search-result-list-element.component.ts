@@ -41,8 +41,6 @@ import { ThemedThumbnailComponent } from '../../../../../../../../../app/thumbna
     MetricBadgesComponent,
     MetricDonutsComponent,
     NgClass,
-    NgFor,
-    NgIf,
     RouterLink,
     ThemedBadgesComponent,
     ThemedThumbnailComponent,

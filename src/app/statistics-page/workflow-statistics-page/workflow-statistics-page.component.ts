@@ -49,13 +49,9 @@ import { StatisticsTableComponent } from '../statistics-table/statistics-table.c
     AlertComponent,
     BtnDisabledDirective,
     CommonModule,
-    CrisStatisticsPageComponent,
     FormsModule,
     NgbDatepickerModule,
-    StatisticsTableComponent,
-    ThemedLoadingComponent,
     TranslateModule,
-    VarDirective,
   ],
 })
 export class WorkflowStatisticsPageComponent implements OnInit {

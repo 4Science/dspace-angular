@@ -19,10 +19,7 @@ import { StatisticsTableComponent } from '../statistics-table/statistics-table.c
   imports: [
     CommonModule,
     CrisStatisticsPageComponent,
-    StatisticsTableComponent,
-    ThemedLoadingComponent,
     TranslateModule,
-    VarDirective,
   ],
 })
 export class ItemStatisticsPageComponent extends StatisticsPageDirective<Item> {

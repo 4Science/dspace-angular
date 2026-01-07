@@ -52,8 +52,6 @@ import { DSOSelectorComponent } from '../dso-selector.component';
     InfiniteScrollModule,
     ListableObjectComponentLoaderComponent,
     NgClass,
-    NgFor,
-    NgIf,
     ReactiveFormsModule,
     ThemedLoadingComponent,
     TranslateModule,

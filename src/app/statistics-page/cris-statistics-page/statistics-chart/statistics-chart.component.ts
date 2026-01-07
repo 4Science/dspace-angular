@@ -31,7 +31,6 @@ import { StatisticsChartWrapperComponent } from './statistics-chart-wrapper/stat
   imports: [
     FilterMapPipe,
     NgClass,
-    RouterLink,
     StatisticsChartWrapperComponent,
     ThemedLoadingComponent,
     TranslateModule,

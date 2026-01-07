@@ -19,9 +19,6 @@ import { renderChartFilterType } from '../../chart-search-result-element-decorat
 @Component({
   selector: 'ds-search-chart-wrapper',
   templateUrl: './search-chart-wrapper.component.html',
-  imports: [
-    NgComponentOutlet,
-  ],
   standalone: true,
 })
 

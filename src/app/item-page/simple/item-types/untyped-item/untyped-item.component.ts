@@ -42,7 +42,6 @@ import { ItemComponent } from '../shared/item.component';
     AsyncPipe,
     CollectionsComponent,
     ContextMenuComponent,
-    DsoEditMenuComponent,
     GenericItemPageFieldComponent,
     GeospatialItemPageFieldComponent,
     ItemPageAbstractFieldComponent,

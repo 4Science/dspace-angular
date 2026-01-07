@@ -21,7 +21,6 @@ import { ThemedDefaultBrowseElementsComponent } from '../../../../app/shared/bro
   imports: [
     AsyncPipe,
     LowerCasePipe,
-    NgSwitch,
     ThemedDefaultBrowseElementsComponent,
   ],
 })

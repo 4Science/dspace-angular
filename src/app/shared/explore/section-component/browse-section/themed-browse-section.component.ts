@@ -12,9 +12,6 @@ import { BrowseSectionComponent } from './browse-section.component';
   styleUrls: [],
   templateUrl: '../../../theme-support/themed.component.html',
   standalone: true,
-  imports: [
-    BrowseSectionComponent,
-  ],
 })
 export class ThemedBrowseSectionComponent extends ThemedComponent<BrowseSectionComponent> {
 

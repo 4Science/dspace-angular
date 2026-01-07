@@ -17,7 +17,6 @@ import { ThemedTextSectionComponent } from '../../../../app/shared/explore/secti
   templateUrl: '../../../../app/footer/footer.component.html',
   imports: [
     AsyncPipe,
-    DatePipe,
     RouterLink,
     ThemedTextSectionComponent,
     TranslateModule,

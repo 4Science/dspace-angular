@@ -84,7 +84,6 @@ interface VersionDTO {
     FormsModule,
     ItemVersionsRowElementVersionComponent,
     PaginationComponent,
-    RouterLink,
     TranslateModule,
   ],
 })

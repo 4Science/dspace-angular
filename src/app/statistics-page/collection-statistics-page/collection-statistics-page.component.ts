@@ -18,10 +18,7 @@ import { StatisticsTableComponent } from '../statistics-table/statistics-table.c
   styleUrls: ['./collection-statistics-page.component.scss'],
   imports: [
     CrisStatisticsPageComponent,
-    StatisticsTableComponent,
-    ThemedLoadingComponent,
     TranslateModule,
-    VarDirective,
   ],
 })
 export class CollectionStatisticsPageComponent extends StatisticsPageDirective<Collection> {

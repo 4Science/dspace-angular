@@ -72,7 +72,6 @@ import { getCollectionPageRoute } from './collection-page-routing-paths';
     ComcolPageHeaderComponent,
     ComcolPageLogoComponent,
     ContextMenuComponent,
-    DsoEditMenuComponent,
     ErrorComponent,
     RouterOutlet,
     ThemedComcolPageBrowseByComponent,

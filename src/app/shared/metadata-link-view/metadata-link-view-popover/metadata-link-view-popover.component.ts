@@ -34,7 +34,6 @@ import { Item } from './../../../core/shared/item.model';
     MetadataLinkViewAvatarPopoverComponent,
     MetadataLinkViewOrcidComponent,
     NgbTooltipModule,
-    NgOptimizedImage,
     RouterLink,
     TranslateModule,
     VarDirective,

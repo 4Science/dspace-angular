@@ -52,7 +52,6 @@ import { getCommunityPageRoute } from './community-page-routing-paths';
     ComcolPageHeaderComponent,
     ComcolPageLogoComponent,
     ContextMenuComponent,
-    DsoEditMenuComponent,
     ErrorComponent,
     RouterModule,
     RouterOutlet,

@@ -40,10 +40,8 @@ import { StatisticsTableComponent } from '../statistics-table/statistics-table.c
     CommonModule,
     FormsModule,
     NgbDatepickerModule,
-    StatisticsTableComponent,
     ThemedLoadingComponent,
     TranslateModule,
-    VarDirective,
   ],
 })
 export class LoginStatisticsPageComponent implements OnInit {

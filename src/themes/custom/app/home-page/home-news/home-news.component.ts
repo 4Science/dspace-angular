@@ -15,7 +15,6 @@ import { ThemedTextSectionComponent } from '../../../../../app/shared/explore/se
   templateUrl: '../../../../../app/home-page/home-news/home-news.component.html',
   imports: [
     AsyncPipe,
-    NgIf,
     ThemedTextSectionComponent,
   ],
 })

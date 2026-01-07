@@ -17,10 +17,7 @@ import { StatisticsTableComponent } from '../../../../../app/statistics-page/sta
   imports: [
     CommonModule,
     CrisStatisticsPageComponent,
-    StatisticsTableComponent,
-    ThemedLoadingComponent,
     TranslateModule,
-    VarDirective,
   ],
 })
 export class CollectionStatisticsPageComponent extends BaseComponent {

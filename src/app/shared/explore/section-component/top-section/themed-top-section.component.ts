@@ -13,9 +13,6 @@ import { TopSectionComponent } from './top-section.component';
   styleUrls: [],
   templateUrl: '../../../theme-support/themed.component.html',
   standalone: true,
-  imports: [
-    TopSectionComponent,
-  ],
 })
 export class ThemedTopSectionComponent extends ThemedComponent<TopSectionComponent> {
 

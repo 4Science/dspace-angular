@@ -76,12 +76,9 @@ import { DsDynamicRelationGroupModalComponent } from './modal/dynamic-relation-g
   templateUrl: './dynamic-relation-group.component.html',
   animations: [shrinkInOut],
   imports: [
-    AsyncPipe,
     BtnDisabledDirective,
     ChipsComponent,
-    forwardRef(() => FormComponent),
     NgbTooltipModule,
-    NgClass,
     ThemedLoadingComponent,
     TranslateModule,
   ],

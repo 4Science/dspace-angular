@@ -18,7 +18,6 @@ import { MetricLoaderComponent } from '../../../../../../shared/metric/metric-lo
   styleUrls: ['./metric-row.component.scss'],
   standalone: true,
   imports: [
-    AsyncPipe,
     MetricLoaderComponent,
   ],
 })

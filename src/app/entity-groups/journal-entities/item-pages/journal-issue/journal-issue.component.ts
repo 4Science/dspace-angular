@@ -23,7 +23,6 @@ import { ThemedThumbnailComponent } from '../../../../thumbnail/themed-thumbnail
   imports: [
     AsyncPipe,
     ContextMenuComponent,
-    DsoEditMenuComponent,
     GenericItemPageFieldComponent,
     MetadataFieldWrapperComponent,
     RelatedItemsComponent,

@@ -38,7 +38,6 @@ import { VarDirective } from '../../../../app/shared/utils/var.directive';
     ComcolPageHeaderComponent,
     ComcolPageLogoComponent,
     ContextMenuComponent,
-    DsoEditMenuComponent,
     ErrorComponent,
     RouterOutlet,
     ThemedComcolPageBrowseByComponent,
