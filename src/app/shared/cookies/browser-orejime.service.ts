@@ -155,7 +155,7 @@ export class BrowserOrejimeService extends OrejimeService {
     if (hasValue(environment.info.metricsConsents)) {
       environment.info.metricsConsents.forEach((metric) => {
         if (metric.enabled) {
-          this.orejimeConfig.services.push(
+          this.orejimeConfig.apps.push(
             {
               name: metric.key,
               purposes: ['thirdPartyJs'],
@@ -168,7 +168,7 @@ export class BrowserOrejimeService extends OrejimeService {
 
     if (environment.datadogRum?.clientToken && environment.datadogRum?.applicationId &&
       environment.datadogRum?.service && environment.datadogRum?.env) {
-      this.orejimeConfig.services.push(
+      this.orejimeConfig.apps.push(
         {
           name: 'datadog',
           purposes: ['thirdPartyJs'],
