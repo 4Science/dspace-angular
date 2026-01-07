@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import {
+    BehaviorSubject,
   Observable,
   of,
 } from 'rxjs';
 
-import { OrejimeService } from './orejime.service';
+import { CookieConsents, OrejimeService } from './orejime.service';
 
 
 /**
@@ -12,6 +13,9 @@ import { OrejimeService } from './orejime.service';
  */
 @Injectable()
 export class ServerOrejimeService extends OrejimeService {
+
+  consentsUpdates$: BehaviorSubject<CookieConsents>;
+  initialized$: BehaviorSubject<boolean>;
 
   /**
    * Initializes the service:
@@ -34,6 +38,9 @@ export class ServerOrejimeService extends OrejimeService {
    * Show the cookie consent form
    */
   showSettings() {
+  }
+
+  watchConsentUpdates(): void {
   }
 
 }
