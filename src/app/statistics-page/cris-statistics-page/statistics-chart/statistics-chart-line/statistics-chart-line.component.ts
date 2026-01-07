@@ -31,7 +31,6 @@ import { StatisticsChartDataComponent } from '../statistics-chart-data/statistic
   selector: 'ds-statistics-chart-line',
   styleUrls: ['./statistics-chart-line.component.scss'],
   templateUrl: './statistics-chart-line.component.html',
-  standalone: true,
   imports: [
     AlertComponent,
     AsyncPipe,

@@ -24,7 +24,6 @@ import { SearchChartComponent } from '../../../search/search-charts/search-chart
 @Component({
   selector: 'ds-base-facet-section',
   templateUrl: './facet-section.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     RouterLink,

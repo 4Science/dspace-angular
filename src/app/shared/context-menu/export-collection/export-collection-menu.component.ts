@@ -35,7 +35,6 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
 @Component({
   selector: 'ds-context-menu-export-item',
   templateUrl: './export-collection-menu.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     TranslateModule,

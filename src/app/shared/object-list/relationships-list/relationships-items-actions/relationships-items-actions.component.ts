@@ -43,7 +43,6 @@ import { hasValue } from '../../../empty.util';
     NgbTooltipModule,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class RelationshipsItemsActionsComponent implements OnInit, OnDestroy {
 

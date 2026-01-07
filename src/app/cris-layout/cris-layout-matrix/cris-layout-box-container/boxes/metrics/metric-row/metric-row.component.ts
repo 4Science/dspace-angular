@@ -16,7 +16,6 @@ import { MetricLoaderComponent } from '../../../../../../shared/metric/metric-lo
   selector: '[ds-metric-row]',
   templateUrl: './metric-row.component.html',
   styleUrls: ['./metric-row.component.scss'],
-  standalone: true,
   imports: [
     MetricLoaderComponent,
   ],

@@ -16,7 +16,6 @@ import {
 
 @Pipe({
   name: 'dsDate',
-  standalone: true,
 })
 export class DsDatePipe implements PipeTransform, OnDestroy {
 

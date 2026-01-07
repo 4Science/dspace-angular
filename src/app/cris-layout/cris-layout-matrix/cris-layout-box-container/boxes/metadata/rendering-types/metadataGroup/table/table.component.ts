@@ -11,7 +11,6 @@ import { MetadataGroupComponent } from '../metadata-group.component';
   selector: 'ds-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     MetadataRenderComponent,

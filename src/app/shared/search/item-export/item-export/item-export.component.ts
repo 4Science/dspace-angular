@@ -85,7 +85,6 @@ export enum ExportSelectionMode {
     ThemedLoadingComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class ItemExportComponent implements OnInit, OnDestroy {
 

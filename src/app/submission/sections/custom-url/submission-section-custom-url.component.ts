@@ -53,7 +53,6 @@ import { SectionsType } from '../sections-type';
     FormComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class SubmissionSectionCustomUrlComponent extends SectionModelComponent {
 

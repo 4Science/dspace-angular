@@ -35,7 +35,6 @@ export const allowedDonuts = ['altmetric', 'dimensions', 'plumX'];
   templateUrl: './metric-donuts.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [
     AsyncPipe,
     MetricLoaderComponent,

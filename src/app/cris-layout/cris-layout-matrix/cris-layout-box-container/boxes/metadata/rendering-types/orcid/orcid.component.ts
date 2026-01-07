@@ -28,7 +28,6 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   selector: 'span[ds-orcid]',
   templateUrl: './orcid.component.html',
   styleUrls: ['./orcid.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     NgbTooltipModule,

@@ -13,7 +13,6 @@ import { CrisLayoutMatrixComponent } from '../cris-layout-matrix/cris-layout-mat
   selector: 'ds-cris-layout-leading',
   templateUrl: './cris-layout-leading.component.html',
   styleUrls: ['./cris-layout-leading.component.scss'],
-  standalone: true,
   imports: [
     ContextMenuComponent,
     CrisLayoutMatrixComponent,

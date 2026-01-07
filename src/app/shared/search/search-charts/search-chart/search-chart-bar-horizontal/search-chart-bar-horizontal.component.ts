@@ -31,7 +31,6 @@ import { SearchChartFilterComponent } from '../search-chart-filter/search-chart-
     ChartComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 /**
  * Component that represents a search horizontal/reverse-horizontal bar chart filter

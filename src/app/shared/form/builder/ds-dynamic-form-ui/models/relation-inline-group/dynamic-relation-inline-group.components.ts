@@ -57,7 +57,6 @@ import { DynamicRelationGroupModel } from '../relation-group/dynamic-relation-gr
     FormComponent,
     NgClass,
   ],
-  standalone: true,
 })
 export class DsDynamicRelationInlineGroupComponent extends DynamicFormControlComponent implements OnInit, OnDestroy {
 

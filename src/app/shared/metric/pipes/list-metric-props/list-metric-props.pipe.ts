@@ -5,7 +5,6 @@ import {
 
 @Pipe({
   name: 'dsListMetricProps',
-  standalone: true,
 })
 export class ListMetricPropsPipe implements PipeTransform {
   transform(remark: JSON, property: string, isListElement: boolean): any {

@@ -48,7 +48,6 @@ import { MetadataRenderComponent } from './metadata-render/metadata-render.compo
   templateUrl: './metadata-container.component.html',
   styleUrls: ['./metadata-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     MetadataRenderComponent,
   ],

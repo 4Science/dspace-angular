@@ -52,7 +52,6 @@ import { DuplicateMatchComponent } from './duplicate-match/duplicate-match.compo
     TranslateModule,
     VarDirective,
   ],
-  standalone: true,
 })
 
 export class SubmissionSectionDetectDuplicateComponent extends SectionModelComponent {

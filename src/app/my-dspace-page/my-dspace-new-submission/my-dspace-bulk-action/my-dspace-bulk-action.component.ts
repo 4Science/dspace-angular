@@ -60,7 +60,6 @@ import { SelectableListService } from '../../../shared/object-list/selectable-li
 @Component({
   selector: 'ds-my-dspace-bulk-action',
   templateUrl: './my-dspace-bulk-action.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     BtnDisabledDirective,

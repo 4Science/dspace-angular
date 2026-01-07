@@ -35,7 +35,6 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
     NgTemplateOutlet,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class EditCmsMetadataComponent implements OnInit {
   /**

@@ -12,7 +12,6 @@ import { TextSectionComponent } from './text-section.component';
   selector: 'ds-text-section',
   styleUrls: [],
   templateUrl: '../../../theme-support/themed.component.html',
-  standalone: true,
 })
 export class ThemedTextSectionComponent extends ThemedComponent<TextSectionComponent> {
 

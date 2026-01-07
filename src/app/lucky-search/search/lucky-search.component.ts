@@ -69,7 +69,6 @@ import { LuckySearchService } from '../lucky-search.service';
   selector: 'ds-lucky-search',
   templateUrl: './lucky-search.component.html',
   styleUrls: ['./lucky-search.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     FileSizePipe,

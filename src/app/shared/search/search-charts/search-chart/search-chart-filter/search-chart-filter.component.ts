@@ -15,7 +15,6 @@ import { SearchFacetFilterComponent } from '../../../search-filters/search-filte
 @Component({
   selector: 'ds-search-chart-filter',
   template: ``,
-  standalone: true,
 })
 /**
  * Component that represents a search chart filter

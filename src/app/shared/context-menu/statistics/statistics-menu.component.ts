@@ -21,7 +21,6 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   selector: 'ds-statistics-menu',
   templateUrl: './statistics-menu.component.html',
   styleUrls: ['./statistics-menu.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     BrowserOnlyPipe,

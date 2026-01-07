@@ -32,7 +32,6 @@ import { MetricLoaderService } from './metric-loader.service';
   selector: 'ds-metric-loader',
   templateUrl: './metric-loader.component.html',
   styleUrls: ['./metric-loader.component.scss'],
-  standalone: true,
   imports: [
     MetricStyleConfigPipe,
     NgClass,

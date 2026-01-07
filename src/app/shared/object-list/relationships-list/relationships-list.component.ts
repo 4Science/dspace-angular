@@ -23,7 +23,6 @@ import { RelationshipsItemsListPreviewComponent } from './relationships-items-li
     RelationshipsItemsActionsComponent,
     RelationshipsItemsListPreviewComponent,
   ],
-  standalone: true,
 })
 
 @listableObjectComponent(ItemSearchResult, ViewMode.ListElement, Context.RelationshipItem)

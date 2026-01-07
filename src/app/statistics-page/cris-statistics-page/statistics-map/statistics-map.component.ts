@@ -31,7 +31,6 @@ import { UsageReport } from '../../../core/statistics/models/usage-report.model'
   selector: 'ds-statistics-map',
   templateUrl: './statistics-map.component.html',
   styleUrls: ['./statistics-map.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     BtnDisabledDirective,

@@ -31,7 +31,6 @@ import { StatisticsChartDataComponent } from '../statistics-chart-data/statistic
   selector: 'ds-statistics-chart-pie',
   styleUrls: ['./statistics-chart-pie.component.scss'],
   templateUrl: './statistics-chart-pie.component.html',
-  standalone: true,
   imports: [
     AlertComponent,
     AsyncPipe,

@@ -27,7 +27,6 @@ import { LayoutBox } from '../../enums/layout-box.enum';
   selector: 'ds-cris-layout-box-container',
   templateUrl: './cris-layout-box-container.component.html',
   styleUrls: ['./cris-layout-box-container.component.scss'],
-  standalone: true,
   imports: [
     NgbAccordionModule,
     NgComponentOutlet,

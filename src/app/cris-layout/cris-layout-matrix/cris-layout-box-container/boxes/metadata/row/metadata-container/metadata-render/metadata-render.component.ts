@@ -31,7 +31,6 @@ import { MetadataBoxFieldRenderOptions } from '../../../rendering-types/renderin
   selector: 'ds-metadata-render',
   templateUrl: './metadata-render.component.html',
   styleUrls: ['./metadata-render.component.scss'],
-  standalone: true,
   imports: [
     CrisLayoutLoaderDirective,
   ],

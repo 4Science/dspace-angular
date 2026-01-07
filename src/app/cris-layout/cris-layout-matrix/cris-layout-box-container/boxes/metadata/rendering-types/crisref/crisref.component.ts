@@ -11,7 +11,6 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   selector: 'span[ds-crisref]',
   templateUrl: './crisref.component.html',
   styleUrls: ['./crisref.component.scss'],
-  standalone: true,
   imports: [
     MetadataLinkViewComponent,
   ],

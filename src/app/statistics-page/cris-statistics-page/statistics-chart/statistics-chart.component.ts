@@ -27,7 +27,6 @@ import { StatisticsChartWrapperComponent } from './statistics-chart-wrapper/stat
   selector: 'ds-statistics-chart',
   styleUrls: ['./statistics-chart.component.scss'],
   templateUrl: './statistics-chart.component.html',
-  standalone: true,
   imports: [
     FilterMapPipe,
     NgClass,

@@ -16,7 +16,6 @@ import { BrowseMostElementsComponent } from './browse-most-elements.component';
   selector: 'ds-browse-most-elements',
   styleUrls: [],
   templateUrl: '../theme-support/themed.component.html',
-  standalone: true,
 })
 export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMostElementsComponent> {
 

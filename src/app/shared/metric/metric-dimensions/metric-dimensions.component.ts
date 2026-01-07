@@ -22,7 +22,6 @@ declare let __dimensions_embed: any;
   selector: 'ds-metric-dimensions',
   templateUrl: './metric-dimensions.component.html',
   styleUrls: ['./metric-dimensions.component.scss', '../metric-loader/base-metric.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     ListMetricPropsPipe,

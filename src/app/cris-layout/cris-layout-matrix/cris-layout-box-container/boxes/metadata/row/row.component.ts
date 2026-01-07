@@ -21,7 +21,6 @@ import { MetadataContainerComponent } from './metadata-container/metadata-contai
   selector: '[ds-row]',
   templateUrl: './row.component.html',
   styleUrls: ['./row.component.scss'],
-  standalone: true,
   imports: [
     MetadataContainerComponent,
   ],

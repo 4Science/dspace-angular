@@ -26,7 +26,6 @@ import { slide } from '../../../../shared/animations/slide';
   templateUrl: './cris-layout-sidebar-item.component.html',
   styleUrls: ['./cris-layout-sidebar-item.component.scss'],
   animations: [rotate, slide, rotateNavbar],
-  standalone: true,
   imports: [
     NgClass,
     RouterLink,

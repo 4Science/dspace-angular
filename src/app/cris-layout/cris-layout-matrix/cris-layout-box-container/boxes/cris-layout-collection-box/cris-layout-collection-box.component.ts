@@ -43,7 +43,6 @@ import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-
   selector: 'ds-cris-layout-collection-box',
   templateUrl: './cris-layout-collection-box.component.html',
   styleUrls: ['./cris-layout-collection-box.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     NgClass,

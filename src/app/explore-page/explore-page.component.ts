@@ -29,7 +29,6 @@ import { ThemedTopSectionComponent } from '../shared/explore/section-component/t
 @Component({
   selector: 'ds-explore',
   templateUrl: './explore-page.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     NgClass,

@@ -49,7 +49,6 @@ import { FileValidator } from '../shared/utils/require-file.validator';
 @Component({
   selector: 'ds-bulk-import-page',
   templateUrl: './bulk-import-page.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     BtnDisabledDirective,

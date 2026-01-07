@@ -88,7 +88,6 @@ describe('BaseEmbeddedMetricComponent', () => {
 @Component({
   selector: 'ds-test-cmp',
   template: ``,
-  standalone: true,
 })
 class TestEmbeddedMetricComponent extends BaseEmbeddedMetricComponent {
 

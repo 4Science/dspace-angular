@@ -38,7 +38,6 @@ import { SearchChartFilterComponent } from '../search-chart-filter/search-chart-
     ChartComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 /**
  * Component that represents a search pie chart filter

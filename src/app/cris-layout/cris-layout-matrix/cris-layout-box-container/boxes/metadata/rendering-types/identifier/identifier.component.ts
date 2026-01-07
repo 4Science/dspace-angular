@@ -31,7 +31,6 @@ import {
   selector: 'ds-identifier',
   templateUrl: './identifier.component.html',
   styleUrls: ['./identifier.component.scss'],
-  standalone: true,
   imports: [
     NgbTooltipModule,
   ],

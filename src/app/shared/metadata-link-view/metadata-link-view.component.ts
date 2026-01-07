@@ -58,7 +58,6 @@ import { StickyPopoverDirective } from './sticky-popover.directive';
     StickyPopoverDirective,
     VarDirective,
   ],
-  standalone: true,
 })
 export class MetadataLinkViewComponent implements OnInit {
 

@@ -301,7 +301,6 @@ describe('ContextMenuComponent', () => {
   selector: 'ds-test-menu-entry',
   template: `
     <button class="dropdown-item">test menu item</button>`,
-  standalone: true,
   imports: [
     NgbDropdownModule,
   ],

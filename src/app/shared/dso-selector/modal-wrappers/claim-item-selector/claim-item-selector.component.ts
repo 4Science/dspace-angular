@@ -39,7 +39,6 @@ import { DSOSelectorModalWrapperComponent } from '../dso-selector-modal-wrapper.
     ListableObjectComponentLoaderComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class ClaimItemSelectorComponent extends DSOSelectorModalWrapperComponent implements OnInit {
 

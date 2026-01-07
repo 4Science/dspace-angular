@@ -13,7 +13,6 @@ import { FileDownloadLinkComponent } from '../../../../../../../../../../../shar
   selector: 'ds-file-download-button',
   templateUrl: './file-download-button.component.html',
   styleUrls: ['./file-download-button.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     BtnDisabledDirective,

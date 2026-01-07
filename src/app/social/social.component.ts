@@ -13,7 +13,6 @@ import { SocialService } from './social.service';
   templateUrl: './social.component.html',
   styleUrls: ['./social.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     AsyncPipe,
   ],

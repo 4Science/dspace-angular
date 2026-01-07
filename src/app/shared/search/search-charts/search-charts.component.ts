@@ -56,7 +56,6 @@ import { SearchChartComponent } from './search-chart/search-chart.component';
     TranslateModule,
     VarDirective,
   ],
-  standalone: true,
 })
 
 /**

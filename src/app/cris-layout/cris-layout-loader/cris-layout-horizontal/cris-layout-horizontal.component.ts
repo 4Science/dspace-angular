@@ -15,7 +15,6 @@ import { CrisLayoutNavbarComponent } from './cris-layout-navbar/cris-layout-navb
   selector: 'ds-cris-layout-horizontal',
   templateUrl: './cris-layout-horizontal.component.html',
   styleUrls: ['./cris-layout-horizontal.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     ContextMenuComponent,

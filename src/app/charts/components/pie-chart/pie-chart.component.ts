@@ -10,7 +10,6 @@ import { AbstractChartComponent } from '../abstract-chart/abstract-chart.compone
   styleUrls: ['./pie-chart.component.scss'],
   templateUrl: './pie-chart.component.html',
   animations: [fadeIn],
-  standalone: true,
   imports: [
     AsyncPipe,
     PieChartModule,

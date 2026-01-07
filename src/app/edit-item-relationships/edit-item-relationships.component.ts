@@ -70,7 +70,6 @@ import { RelationshipsSortListComponent } from './relationships-sort-list/relati
     TranslateModule,
     VarDirective,
   ],
-  standalone: true,
 })
 export class EditItemRelationshipsComponent implements OnInit, OnDestroy {
 

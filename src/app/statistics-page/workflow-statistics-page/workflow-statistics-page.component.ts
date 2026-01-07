@@ -44,7 +44,6 @@ import { StatisticsTableComponent } from '../statistics-table/statistics-table.c
   selector: 'ds-workflow-statistics',
   templateUrl: './workflow-statistics-page.component.html',
   styleUrls: ['./workflow-statistics-page.component.scss'],
-  standalone: true,
   imports: [
     AlertComponent,
     BtnDisabledDirective,

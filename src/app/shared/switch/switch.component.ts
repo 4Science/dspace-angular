@@ -32,7 +32,6 @@ export interface SwitchOption {
   selector: 'ds-switch',
   templateUrl: './switch.component.html',
   styleUrls: ['./switch.component.scss'],
-  standalone: true,
   imports: [
     NgClass,
     TranslatePipe,

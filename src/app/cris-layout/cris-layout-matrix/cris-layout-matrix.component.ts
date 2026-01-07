@@ -12,7 +12,6 @@ import { CrisLayoutBoxContainerComponent } from './cris-layout-box-container/cri
   selector: 'ds-cris-layout-matrix',
   templateUrl: './cris-layout-matrix.component.html',
   styleUrls: ['./cris-layout-matrix.component.scss'],
-  standalone: true,
   imports: [
     CrisLayoutBoxContainerComponent,
   ],

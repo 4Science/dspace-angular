@@ -20,7 +20,6 @@ import { RenderingTypeStructuredModelComponent } from '../rendering-type-structu
   selector: 'span[ds-tag]',
   templateUrl: './tag.component.html',
   styleUrls: ['./tag.component.scss'],
-  standalone: true,
   imports: [
     ChipsComponent,
   ],

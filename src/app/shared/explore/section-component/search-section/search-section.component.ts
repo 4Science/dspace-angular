@@ -29,7 +29,6 @@ import { ThemedSearchFormComponent } from '../../../search-form/themed-search-fo
 @Component({
   selector: 'ds-base-search-section',
   templateUrl: './search-section.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     FormsModule,

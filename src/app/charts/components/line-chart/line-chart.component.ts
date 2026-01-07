@@ -11,7 +11,6 @@ import { AbstractChartComponent } from '../abstract-chart/abstract-chart.compone
   styleUrls: ['./line-chart.component.scss'],
   templateUrl: './line-chart.component.html',
   animations: [fadeIn],
-  standalone: true,
   imports: [
     AsyncPipe,
     LineChartModule,

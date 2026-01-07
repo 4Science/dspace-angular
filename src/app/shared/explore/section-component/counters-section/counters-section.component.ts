@@ -34,7 +34,6 @@ import { SearchObjects } from '../../../search/models/search-objects.model';
   selector: 'ds-base-counters-section',
   styleUrls: ['./counters-section.component.scss'],
   templateUrl: './counters-section.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     NgClass,

@@ -16,7 +16,6 @@ import { AlertComponent } from '../../../alert/alert.component';
     AlertComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class ItemExportAlertComponent {
 

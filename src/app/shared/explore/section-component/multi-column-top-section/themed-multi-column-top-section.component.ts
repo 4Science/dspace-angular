@@ -11,7 +11,6 @@ import { MultiColumnTopSectionComponent } from './multi-column-top-section.compo
   selector: 'ds-multi-column-top-section',
   styleUrls: [],
   templateUrl: '../../../theme-support/themed.component.html',
-  standalone: true,
 })
 export class ThemedMultiColumnTopSectionComponent extends ThemedComponent<MultiColumnTopSectionComponent> {
 

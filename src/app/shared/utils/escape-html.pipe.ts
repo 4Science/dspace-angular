@@ -5,7 +5,6 @@ import {
 
 @Pipe({
   name: 'dsEscapeHtml',
-  standalone: true,
 })
 export class EscapeHtmlPipe implements PipeTransform {
   /**

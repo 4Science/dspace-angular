@@ -28,7 +28,6 @@ import { Registration } from '../../core/shared/registration.model';
   selector: 'ds-invitation-acceptance',
   templateUrl: './invitation-acceptance.component.html',
   styleUrls: ['./invitation-acceptance.component.scss'],
-  standalone: true,
   imports: [
     TranslateModule,
   ],

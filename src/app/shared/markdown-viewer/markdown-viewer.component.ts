@@ -9,7 +9,6 @@ import { MarkdownDirective } from '../utils/markdown.directive';
   selector: 'ds-markdown-viewer',
   templateUrl: './markdown-viewer.component.html',
   styleUrls: ['./markdown-viewer.component.scss'],
-  standalone: true,
   imports: [
     MarkdownDirective,
   ],

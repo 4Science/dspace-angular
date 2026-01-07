@@ -10,7 +10,6 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   selector: 'ds-heading-row',
   templateUrl: './heading.component.html',
   styleUrls: ['./heading.component.scss'],
-  standalone: true,
   imports: [
     ComcolPageHeaderComponent,
   ],

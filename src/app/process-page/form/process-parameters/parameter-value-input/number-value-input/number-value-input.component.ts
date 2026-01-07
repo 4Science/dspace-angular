@@ -27,7 +27,6 @@ import { ValueInputComponent } from '../value-input.component';
     useFactory: controlContainerFactory,
     deps: [[new Optional(), NgForm]],
   }],
-  standalone: true,
   imports: [
     FormsModule,
     TranslateModule,

@@ -34,7 +34,6 @@ import { BitstreamAttachmentRenderingModelComponent } from './bitstream-attachme
   selector: 'ds-attachment',
   templateUrl: './attachment.component.html',
   styleUrls: ['./attachment.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     FileSizePipe,

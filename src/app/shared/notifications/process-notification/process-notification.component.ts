@@ -115,7 +115,6 @@ import { NotificationsService } from '../notifications.service';
     ThemedFileDownloadLinkComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 
 export class ProcessNotificationComponent implements OnInit, OnDestroy {

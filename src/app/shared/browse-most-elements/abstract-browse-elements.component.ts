@@ -34,7 +34,7 @@ import { SearchResult } from '../search/models/search-result.model';
 import { followLink } from '../utils/follow-link-config.model';
 
 @Component({
-  standalone: true,template: '',
+  template: '',
 })
 export abstract class AbstractBrowseElementsComponent implements OnInit, OnChanges {
 

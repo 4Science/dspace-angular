@@ -34,7 +34,6 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
 @Component({
   selector: 'ds-context-menu-claim-item',
   templateUrl: './claim-item-menu.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     TranslateModule,

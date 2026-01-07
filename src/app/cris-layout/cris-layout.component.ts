@@ -37,7 +37,6 @@ import { CrisLayoutLoaderComponent } from './cris-layout-loader/cris-layout-load
   selector: 'ds-cris-layout',
   templateUrl: './cris-layout.component.html',
   styleUrls: ['./cris-layout.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     CrisLayoutLeadingComponent,

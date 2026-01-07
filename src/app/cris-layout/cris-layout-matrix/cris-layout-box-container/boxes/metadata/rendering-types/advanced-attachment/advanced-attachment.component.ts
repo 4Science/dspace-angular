@@ -31,7 +31,6 @@ import { BitstreamAttachmentComponent } from './bitstream-attachment/bitstream-a
   selector: 'ds-advanced-attachment',
   templateUrl: './advanced-attachment.component.html',
   styleUrls: ['./advanced-attachment.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     BitstreamAttachmentComponent,

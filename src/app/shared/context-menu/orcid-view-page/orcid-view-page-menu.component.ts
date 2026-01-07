@@ -20,7 +20,6 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   selector: 'ds-orcid-view-page',
   templateUrl: './orcid-view-page-menu.component.html',
   styleUrls: ['./orcid-view-page-menu.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     RouterLink,

@@ -26,7 +26,6 @@ import { SafeUrlPipe } from '../../utils/safe-url-pipe';
     ThemedLoadingComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class MetadataLinkViewAvatarPopoverComponent extends ThumbnailComponent implements OnInit {
 

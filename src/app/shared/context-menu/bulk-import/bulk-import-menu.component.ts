@@ -25,7 +25,6 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
 @Component({
   selector: 'ds-context-menu-audit-item',
   templateUrl: './bulk-import-menu.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     RouterLink,

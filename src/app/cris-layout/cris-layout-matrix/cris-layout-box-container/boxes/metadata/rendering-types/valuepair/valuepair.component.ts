@@ -31,7 +31,6 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   selector: 'span[ds-valuepair]',
   templateUrl: './valuepair.component.html',
   styleUrls: ['./valuepair.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
   ],

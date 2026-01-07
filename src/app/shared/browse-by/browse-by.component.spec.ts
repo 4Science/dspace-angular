@@ -59,7 +59,6 @@ import { BrowseByComponent } from './browse-by.component';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'ds-browse-entry-list-element',
   template: '',
-  standalone: true,
 })
 class MockThemedBrowseEntryListElementComponent {
 }

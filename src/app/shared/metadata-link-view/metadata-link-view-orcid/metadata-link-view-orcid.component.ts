@@ -25,7 +25,6 @@ import { getFirstSucceededRemoteDataPayload } from './../../../core/shared/opera
     NgbTooltipModule,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class MetadataLinkViewOrcidComponent implements OnInit {
   /**

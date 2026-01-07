@@ -27,7 +27,6 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   selector: 'ds-item-version-menu',
   templateUrl: './item-version-menu.component.html',
   styleUrls: ['./item-version-menu.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     TranslateModule,

@@ -35,7 +35,6 @@ import { BitstreamRenderingModelComponent } from '../bitstream-rendering-model';
   selector: 'span[ds-thumbnail].float-left',
   templateUrl: './thumbnail.component.html',
   styleUrls: ['./thumbnail.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     ThemedThumbnailComponent,

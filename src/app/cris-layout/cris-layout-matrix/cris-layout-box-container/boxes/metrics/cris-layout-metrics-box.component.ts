@@ -35,7 +35,6 @@ import { MetricRowComponent } from './metric-row/metric-row.component';
   selector: 'ds-cris-layout-metrics-box',
   templateUrl: './cris-layout-metrics-box.component.html',
   styleUrls: ['./cris-layout-metrics-box.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     MetricRowComponent,

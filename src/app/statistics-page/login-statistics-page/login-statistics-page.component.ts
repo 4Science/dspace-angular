@@ -34,7 +34,6 @@ import { StatisticsTableComponent } from '../statistics-table/statistics-table.c
   selector: 'ds-login-statistics',
   templateUrl: './login-statistics-page.component.html',
   styleUrls: ['./login-statistics-page.component.scss'],
-  standalone: true,
   imports: [
     AlertComponent,
     CommonModule,

@@ -31,7 +31,6 @@ import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-
   selector: 'ds-cris-layout-search-box',
   templateUrl: './cris-layout-relation-box.component.html',
   styleUrls: ['./cris-layout-relation-box.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     ThemedConfigurationSearchPageComponent,

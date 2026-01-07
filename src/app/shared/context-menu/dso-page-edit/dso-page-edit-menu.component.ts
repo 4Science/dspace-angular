@@ -19,7 +19,6 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   selector: 'ds-dso-page-edit-menu',
   templateUrl: './dso-page-edit-menu.component.html',
   styleUrls: ['./dso-page-edit-menu.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     RouterLink,

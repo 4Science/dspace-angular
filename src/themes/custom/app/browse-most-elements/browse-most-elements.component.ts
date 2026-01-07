@@ -17,7 +17,6 @@ import { ThemedDefaultBrowseElementsComponent } from '../../../../app/shared/bro
   templateUrl: '../../../../app/shared/browse-most-elements/browse-most-elements.component.html',
   // styleUrls: ['./breadcrumbs.component.scss']
   styleUrls: ['../../../../app/shared/browse-most-elements/browse-most-elements.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     LowerCasePipe,

@@ -67,7 +67,6 @@ interface LinkData {
     TranslateModule,
     VarDirective,
   ],
-  standalone: true,
 })
 export class AdditionalMetadataComponent implements OnInit {
 

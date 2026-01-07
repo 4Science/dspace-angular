@@ -26,7 +26,6 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   selector: 'ds-subscription-menu',
   templateUrl: './subscription-menu.component.html',
   styleUrls: ['./subscription-menu.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     TranslateModule,

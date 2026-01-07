@@ -21,7 +21,6 @@ import { MetadataGroupComponent } from '../metadata-group.component';
   selector: 'ds-inline',
   templateUrl: './inline.component.html',
   styleUrls: ['./inline.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     MetadataRenderComponent,

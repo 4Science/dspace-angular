@@ -22,7 +22,6 @@ import { ThemedDefaultBrowseElementsComponent } from './default-browse-elements/
   selector: 'ds-base-browse-most-elements',
   styleUrls: ['./browse-most-elements.component.scss'],
   templateUrl: './browse-most-elements.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     LowerCasePipe,

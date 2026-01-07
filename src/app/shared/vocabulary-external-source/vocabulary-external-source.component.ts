@@ -58,7 +58,6 @@ import { followLink } from '../utils/follow-link-config.model';
     ThemedLoadingComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class VocabularyExternalSourceComponent implements OnInit {
 

@@ -38,7 +38,6 @@ import { Item } from './../../../core/shared/item.model';
     TranslateModule,
     VarDirective,
   ],
-  standalone: true,
 })
 export class MetadataLinkViewPopoverComponent implements OnInit {
 

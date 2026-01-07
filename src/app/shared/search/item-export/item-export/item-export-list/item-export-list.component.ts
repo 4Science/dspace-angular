@@ -47,7 +47,6 @@ import { SearchOptions } from '../../../models/search-options.model';
     TranslateModule,
     VarDirective,
   ],
-  standalone: true,
 })
 export class ItemExportListComponent implements OnInit {
 

@@ -49,7 +49,6 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
 @Component({
   selector: 'ds-context-menu-request-correction',
   templateUrl: './request-correction-menu.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     BtnDisabledDirective,

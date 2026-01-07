@@ -36,7 +36,6 @@ import { TruncatablePartComponent } from '../../../truncatable/truncatable-part/
     TruncatableComponent,
     TruncatablePartComponent,
   ],
-  standalone: true,
 })
 export class RelationshipsItemsListPreviewComponent {
 

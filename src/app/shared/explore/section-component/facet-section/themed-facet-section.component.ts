@@ -11,7 +11,6 @@ import { FacetSectionComponent } from './facet-section.component';
   selector: 'ds-facet-section',
   styleUrls: [],
   templateUrl: '../../../theme-support/themed.component.html',
-  standalone: true,
 })
 export class ThemedFacetSectionComponent extends ThemedComponent<FacetSectionComponent> {
 

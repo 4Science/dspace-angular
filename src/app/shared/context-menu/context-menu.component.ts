@@ -50,7 +50,6 @@ import { ContextMenuEntryType } from './context-menu-entry-type';
   selector: 'ds-context-menu',
   styleUrls: ['./context-menu.component.scss'],
   templateUrl: './context-menu.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     BrowserOnlyDirective,

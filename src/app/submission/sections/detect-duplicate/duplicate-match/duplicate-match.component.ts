@@ -61,7 +61,6 @@ import { DuplicateMatchMetadataDetailConfig } from '../models/duplicate-detail-m
     ThemedItemListPreviewComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 
 export class DuplicateMatchComponent implements OnInit {

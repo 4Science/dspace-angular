@@ -44,7 +44,6 @@ import { AttachmentRenderingType } from './attachment-type.decorator';
   selector: 'ds-bitstream-attachment',
   templateUrl: './bitstream-attachment.component.html',
   styleUrls: ['./bitstream-attachment.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     AttachmentRenderComponent,

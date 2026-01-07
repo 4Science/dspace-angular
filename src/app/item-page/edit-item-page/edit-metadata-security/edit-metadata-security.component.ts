@@ -23,7 +23,6 @@ import {
     BtnDisabledDirective,
     NgStyle,
   ],
-  standalone: true,
 })
 export class EditMetadataSecurityComponent implements OnInit {
 

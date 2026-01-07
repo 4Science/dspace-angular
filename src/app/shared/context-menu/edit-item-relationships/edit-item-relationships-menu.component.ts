@@ -50,7 +50,6 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
 @Component({
   selector: 'ds-context-menu-edit-item-relationships',
   templateUrl: './edit-item-relationships-menu.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     NgbDropdownModule,

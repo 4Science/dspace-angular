@@ -197,7 +197,6 @@ describe('MyDSpaceNewBulkImportComponent test', () => {
 @Component({
   selector: 'ds-test-cmp',
   template: ``,
-  standalone: true,
   imports: [],
 })
 class TestComponent {

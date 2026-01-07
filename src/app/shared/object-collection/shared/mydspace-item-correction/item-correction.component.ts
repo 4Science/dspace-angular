@@ -31,7 +31,6 @@ import { getFirstSucceededRemoteListPayload } from '../../../../core/shared/oper
     AsyncPipe,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class ItemCorrectionComponent implements OnInit {
 

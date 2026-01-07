@@ -11,7 +11,6 @@ import { BrowseSectionComponent } from './browse-section.component';
   selector: 'ds-browse-section',
   styleUrls: [],
   templateUrl: '../../../theme-support/themed.component.html',
-  standalone: true,
 })
 export class ThemedBrowseSectionComponent extends ThemedComponent<BrowseSectionComponent> {
 

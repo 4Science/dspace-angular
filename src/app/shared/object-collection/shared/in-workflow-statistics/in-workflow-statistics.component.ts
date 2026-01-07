@@ -30,7 +30,6 @@ import { hasValue } from '../../../empty.util';
 @Component({
   selector: 'ds-in-workflow-statistics',
   templateUrl: './in-workflow-statistics.component.html',
-  standalone: true,
   styleUrls: ['./in-workflow-statistics.component.scss'],
   imports: [
     AsyncPipe,

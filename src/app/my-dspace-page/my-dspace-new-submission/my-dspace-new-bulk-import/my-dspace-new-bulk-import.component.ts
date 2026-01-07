@@ -44,7 +44,6 @@ import { EntityDropdownComponent } from '../../../shared/entity-dropdown/entity-
     NgbDropdownModule,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class MyDSpaceNewBulkImportComponent implements OnInit, OnDestroy {
 

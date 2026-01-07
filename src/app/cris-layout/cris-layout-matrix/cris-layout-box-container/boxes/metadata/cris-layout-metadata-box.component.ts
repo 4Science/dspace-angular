@@ -25,7 +25,6 @@ import { RowComponent } from './row/row.component';
   selector: 'ds-cris-layout-metadata-box',
   templateUrl: './cris-layout-metadata-box.component.html',
   styleUrls: ['./cris-layout-metadata-box.component.scss'],
-  standalone: true,
   imports: [
     RowComponent,
   ],

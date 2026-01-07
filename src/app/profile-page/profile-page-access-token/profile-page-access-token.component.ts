@@ -31,7 +31,6 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
     AsyncPipe,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class ProfilePageAccessTokenComponent implements OnInit {
 

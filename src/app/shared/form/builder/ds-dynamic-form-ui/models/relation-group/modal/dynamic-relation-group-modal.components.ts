@@ -80,7 +80,6 @@ import { DynamicRelationGroupModel } from '../dynamic-relation-group.model';
     NgClass,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class DsDynamicRelationGroupModalComponent extends DynamicFormControlComponent implements OnDestroy, OnInit {
 

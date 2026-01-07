@@ -25,7 +25,6 @@ import { ListMetricPropsPipe } from '../pipes/list-metric-props/list-metric-prop
   selector: 'ds-metric-plumx',
   templateUrl: './metric-plumx.component.html',
   styleUrls: ['./metric-plumx.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     ListMetricPropsPipe,

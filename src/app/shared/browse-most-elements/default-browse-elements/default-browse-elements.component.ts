@@ -14,7 +14,6 @@ import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.com
   selector: 'ds-base-default-browse-elements',
   templateUrl: './default-browse-elements.component.html',
   styleUrls: ['./default-browse-elements.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     ListableObjectComponentLoaderComponent,

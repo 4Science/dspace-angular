@@ -37,7 +37,6 @@ import { RelationshipsItemsListPreviewComponent } from '../../shared/object-list
     ThemedLoadingComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class RelationshipsSortListComponent implements OnChanges {
 

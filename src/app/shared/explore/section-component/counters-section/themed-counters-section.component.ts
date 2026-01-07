@@ -13,7 +13,6 @@ import {
   selector: 'ds-counters-section',
   styleUrls: [],
   templateUrl: '../../../theme-support/themed.component.html',
-  standalone: true,
 })
 export class ThemedCountersSectionComponent extends ThemedComponent<CountersSectionComponent> {
 

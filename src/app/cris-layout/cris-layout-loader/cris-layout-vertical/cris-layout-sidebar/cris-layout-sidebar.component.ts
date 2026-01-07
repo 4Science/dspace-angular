@@ -24,7 +24,6 @@ import { CrisLayoutSidebarItemComponent } from '../../shared/sidebar-item/cris-l
   selector: 'ds-cris-layout-sidebar',
   templateUrl: './cris-layout-sidebar.component.html',
   styleUrls: ['./cris-layout-sidebar.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     CrisLayoutSidebarItemComponent,

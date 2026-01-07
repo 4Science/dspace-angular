@@ -36,7 +36,6 @@ import { ModifyItemOverviewComponent } from '../modify-item-overview/modify-item
 @Component({
   selector: 'ds-item-unlink-orcid',
   templateUrl: './item-unlink-orcid.component.html',
-  standalone: true,
   imports: [
     AlertComponent,
     AsyncPipe,

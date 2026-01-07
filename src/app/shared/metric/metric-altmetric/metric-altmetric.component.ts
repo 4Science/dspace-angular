@@ -23,7 +23,6 @@ declare let _altmetric_embed_init: any;
   selector: 'ds-metric-altmetric',
   templateUrl: './metric-altmetric.component.html',
   styleUrls: ['./metric-altmetric.component.scss', '../metric-loader/base-metric.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     ListMetricPropsPipe,

@@ -23,7 +23,6 @@ import { followLink } from '../../utils/follow-link-config.model';
   selector: 'ds-metric-badges',
   templateUrl: './metric-badges.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     AsyncPipe,
     TranslateModule,

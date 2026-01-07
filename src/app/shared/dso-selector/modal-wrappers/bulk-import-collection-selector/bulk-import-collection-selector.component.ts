@@ -28,7 +28,6 @@ import {
     AdministeredCollectionSelectorComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class BulkImportSelectorComponent extends DSOSelectorModalWrapperComponent implements OnInit {
   objectType = DSpaceObjectType.ITEM;

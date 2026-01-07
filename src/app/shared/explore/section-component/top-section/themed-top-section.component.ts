@@ -12,7 +12,6 @@ import { TopSectionComponent } from './top-section.component';
   selector: 'ds-top-section',
   styleUrls: [],
   templateUrl: '../../../theme-support/themed.component.html',
-  standalone: true,
 })
 export class ThemedTopSectionComponent extends ThemedComponent<TopSectionComponent> {
 

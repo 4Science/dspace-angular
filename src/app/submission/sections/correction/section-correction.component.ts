@@ -36,7 +36,6 @@ import { SectionsService } from '../sections.service';
     AsyncPipe,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class SubmissionSectionCorrectionComponent extends SectionModelComponent {
 

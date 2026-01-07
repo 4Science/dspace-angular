@@ -25,7 +25,6 @@ import { ThemedLoadingComponent } from '../shared/loading/themed-loading.compone
   templateUrl: './cris-item-page.component.html',
   styleUrls: ['./cris-item-page.component.scss'],
   animations: [fadeInOut],
-  standalone: true,
   imports: [
     AsyncPipe,
     CrisLayoutComponent,

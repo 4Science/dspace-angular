@@ -33,7 +33,6 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
     KeyValuePipe,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class AdminEditUserAgreementComponent implements OnInit, OnDestroy {
 

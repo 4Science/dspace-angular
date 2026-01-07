@@ -40,7 +40,6 @@ import { CrisLayoutComponent } from '../cris-layout/cris-layout.component';
     CrisLayoutComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class ItemDetailPageModalComponent implements OnInit {
 

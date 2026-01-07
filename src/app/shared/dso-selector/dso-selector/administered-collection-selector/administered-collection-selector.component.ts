@@ -44,7 +44,6 @@ import { DSOSelectorComponent } from '../dso-selector.component';
   selector: 'ds-administered-collection-selector',
   styleUrls: ['../dso-selector.component.scss'],
   templateUrl: '../dso-selector.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
     FormsModule,

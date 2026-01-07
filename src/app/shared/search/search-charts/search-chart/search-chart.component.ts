@@ -39,7 +39,6 @@ import { SearchChartFilterWrapperComponent } from './search-chart-wrapper/search
   imports: [
     SearchChartFilterWrapperComponent,
   ],
-  standalone: true,
 })
 
 /**

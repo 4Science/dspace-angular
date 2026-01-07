@@ -16,7 +16,6 @@ import { DefaultBrowseElementsComponent } from './default-browse-elements.compon
   selector: 'ds-default-browse-elements',
   styleUrls: [],
   templateUrl: './../../theme-support/themed.component.html',
-  standalone: true,
 })
 export class ThemedDefaultBrowseElementsComponent extends ThemedComponent<DefaultBrowseElementsComponent> {
 

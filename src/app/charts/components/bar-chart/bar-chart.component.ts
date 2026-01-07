@@ -23,7 +23,6 @@ import { AbstractChartComponent } from '../abstract-chart/abstract-chart.compone
   styleUrls: ['./bar-chart.component.scss'],
   templateUrl: './bar-chart.component.html',
   animations: [fadeIn],
-  standalone: true,
   imports: [
     AsyncPipe,
     BarChartModule,

@@ -17,7 +17,6 @@ import { BaseMetricComponent } from '../metric-loader/base-metric.component';
   selector: 'ds-metric-default',
   templateUrl: './metric-default.component.html',
   styleUrls: ['./metric-default.component.scss', '../metric-loader/base-metric.component.scss'],
-  standalone: true,
   imports: [
     DatePipe,
     NgbTooltipModule,
