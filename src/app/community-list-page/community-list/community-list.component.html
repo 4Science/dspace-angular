@@ -27,7 +27,6 @@
       <button *ngIf="hasChild(null, node) | async" type="button" class="btn btn-default" cdkTreeNodeToggle
               [attr.aria-label]="(node.isExpanded ? 'communityList.collapse' : 'communityList.expand') | translate:{ name: dsoNameService.getName(node.payload) }"
               (click)="toggleExpanded(node)"
-              data-test="expand-button"
               (keyup.enter)="toggleExpanded(node)"
               (keyup.space)="toggleExpanded(node)"
               data-test="expand-button"
