@@ -22,7 +22,7 @@ export class ThemedTopSectionComponent extends ThemedComponent<TopSectionCompone
     topSection: TopSection;
 
   @Input()
-    context: Context = Context.BrowseMostElements;
+    context: Context;
 
   protected inAndOutputNames: (keyof TopSectionComponent & keyof this)[] = ['sectionId', 'topSection', 'context'];
 

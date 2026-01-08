@@ -4,11 +4,8 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { SiteDataService } from '../../core/data/site-data.service';
 import { Site } from '../../core/shared/site.model';
-import { ThemedLoadingComponent } from '../../shared/loading/themed-loading.component';
-import { VarDirective } from '../../shared/utils/var.directive';
 import { CrisStatisticsPageComponent } from '../cris-statistics-page/cris-statistics-page.component';
 import { StatisticsPageDirective } from '../statistics-page/statistics-page.directive';
-import { StatisticsTableComponent } from '../statistics-table/statistics-table.component';
 
 /**
  * Component representing the site-wide statistics page.

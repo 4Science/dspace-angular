@@ -113,7 +113,7 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
 
   @Input() selectionConfig: SelectionConfig;
 
-  @Input() showCharts = false;
+  @Input() showCharts: boolean;
 
   @Input() showCsvExport: boolean;
 
@@ -149,7 +149,7 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
 
   @Input() hideScopeInUrl: boolean;
 
-  @Input() renderOnServerSide = false;
+  @Input() renderOnServerSide: boolean;
 
   @Input() scope: string;
 

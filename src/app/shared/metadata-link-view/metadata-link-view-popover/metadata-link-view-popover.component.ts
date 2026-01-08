@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgOptimizedImage,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,

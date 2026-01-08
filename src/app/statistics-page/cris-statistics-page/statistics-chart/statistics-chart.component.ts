@@ -13,7 +13,6 @@ import {
 import {
   ActivatedRoute,
   Router,
-  RouterLink,
 } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 

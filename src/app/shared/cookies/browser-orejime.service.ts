@@ -530,7 +530,7 @@ export class BrowserOrejimeService extends OrejimeService {
 
       consentsSubject$.next(manager.consents);
       manager.watch({
-        update(_, eventName, consents) {
+        update(__, eventName, consents) {
           if (eventName === 'consents' && !isEqual(consents, lastCookiesConsents)) {
             lastCookiesConsents = deepClone(consents);
             consentsSubject$.next(consents);

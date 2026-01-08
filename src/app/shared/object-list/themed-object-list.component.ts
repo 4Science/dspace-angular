@@ -96,7 +96,7 @@ export class ThemedObjectListComponent extends ThemedComponent<ObjectListCompone
   /**
    * Whether to show the metrics badges
    */
-  @Input() showMetrics = true;
+  @Input() showMetrics: boolean;
 
   /**
    * Whether or not the pagination should be rendered as simple previous and next buttons instead of the normal pagination
@@ -111,7 +111,7 @@ export class ThemedObjectListComponent extends ThemedComponent<ObjectListCompone
   /**
    * Whether to show if the item is a correction
    */
-  @Input() showCorrection = false;
+  @Input() showCorrection: boolean;
 
   @Input() showWorkflowStatistics: boolean;
 

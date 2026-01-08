@@ -1,8 +1,9 @@
+import { Context } from 'node:vm';
+
 import {
   Component,
   Input,
 } from '@angular/core';
-import { Context } from 'vm';
 
 import { TopSection } from '../../core/layout/models/section.model';
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';

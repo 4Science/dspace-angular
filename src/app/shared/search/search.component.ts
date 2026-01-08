@@ -330,7 +330,7 @@ export class SearchComponent implements OnDestroy, OnInit {
   /**
    * Defines whether to fetch search results during SSR execution
    */
-  @Input() renderOnServerSide: boolean;
+  @Input() renderOnServerSide = true;
 
   /**
    * For chart regular expression

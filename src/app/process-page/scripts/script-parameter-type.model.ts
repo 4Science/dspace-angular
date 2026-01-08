@@ -5,7 +5,7 @@ export enum ScriptParameterType {
   STRING = 'String',
   INTEGER = 'Integer',
   DATE = 'date',
-  NUMBER = 'Integer',
+  NUMBER = ScriptParameterType.INTEGER,
   BOOLEAN = 'boolean',
   FILE = 'InputStream',
   OUTPUT = 'OutputStream'

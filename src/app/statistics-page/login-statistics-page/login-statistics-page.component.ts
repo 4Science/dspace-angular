@@ -27,8 +27,6 @@ import { LoginStatistics } from '../../core/statistics/models/login-statistics.m
 import { AlertComponent } from '../../shared/alert/alert.component';
 import { AlertType } from '../../shared/alert/alert-type';
 import { ThemedLoadingComponent } from '../../shared/loading/themed-loading.component';
-import { VarDirective } from '../../shared/utils/var.directive';
-import { StatisticsTableComponent } from '../statistics-table/statistics-table.component';
 
 @Component({
   selector: 'ds-login-statistics',

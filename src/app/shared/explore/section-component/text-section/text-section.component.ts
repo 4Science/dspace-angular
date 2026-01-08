@@ -1,4 +1,7 @@
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import {
+  AsyncPipe,
+  NgTemplateOutlet,
+} from '@angular/common';
 import {
   Component,
   Input,
@@ -18,10 +21,10 @@ import { MarkdownViewerComponent } from '../../../markdown-viewer/markdown-viewe
   templateUrl: './text-section.component.html',
   styleUrls: ['./text-section.component.scss'],
   imports: [
+    AsyncPipe,
     MarkdownViewerComponent,
     NgTemplateOutlet,
     TranslateModule,
-    AsyncPipe,
   ],
 })
 export class TextSectionComponent {

@@ -41,7 +41,7 @@ export class ThemedItemListPreviewComponent extends ThemedComponent<ItemListPrev
 
   @Input() workflowItem: WorkflowItem;
 
-  @Input() metadataList: DuplicateMatchMetadataDetailConfig[] = [];
+  @Input() metadataList: DuplicateMatchMetadataDetailConfig[];
 
   protected getComponentName(): string {
     return 'ItemListPreviewComponent';

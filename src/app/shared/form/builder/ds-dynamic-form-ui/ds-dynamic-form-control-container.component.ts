@@ -100,7 +100,6 @@ import {
 import { SubmissionObject } from '../../../../core/submission/models/submission-object.model';
 import { SUBMISSION_LINKS_TO_FOLLOW } from '../../../../core/submission/resolver/submission-links-to-follow';
 import { SubmissionObjectDataService } from '../../../../core/submission/submission-object-data.service';
-import { EditMetadataSecurityComponent } from '../../../../item-page/edit-item-page/edit-metadata-security/edit-metadata-security.component';
 import { paginatedRelationsToItems } from '../../../../item-page/simple/item-types/shared/item-relationships-utils';
 import { SubmissionService } from '../../../../submission/submission.service';
 import {

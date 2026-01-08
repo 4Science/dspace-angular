@@ -783,8 +783,11 @@ export class HeadTagService {
     if (content) {
       const tag = isProperty ? { name, property: name, content } as MetaDefinition
         : { name, content } as MetaDefinition;
-      isMultiple ? this.meta.addTag(tag) : this.meta.updateTag(tag);
-      this.storeTag(name);
+      if (isMultiple) {
+        this.meta.addTag(tag);
+      } else {
+        this.meta.updateTag(tag);
+      } this.storeTag(name);
     }
   }
 

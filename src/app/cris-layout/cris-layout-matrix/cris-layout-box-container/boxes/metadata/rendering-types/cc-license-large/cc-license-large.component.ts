@@ -12,7 +12,9 @@ import { MetadataGroupComponent } from '../metadataGroup/metadata-group.componen
 
 @Component({
   selector: 'ds-cc-license-large',
-  imports: [ItemPageCcLicenseFieldComponent],
+  imports: [
+    ItemPageCcLicenseFieldComponent,
+  ],
   templateUrl: './cc-license-large.component.html',
   styleUrl: './cc-license-large.component.scss',
 })

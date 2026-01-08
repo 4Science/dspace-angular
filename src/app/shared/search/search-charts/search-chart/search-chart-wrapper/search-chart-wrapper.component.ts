@@ -1,4 +1,3 @@
-import { NgComponentOutlet } from '@angular/common';
 import {
   AfterViewInit,
   Component,

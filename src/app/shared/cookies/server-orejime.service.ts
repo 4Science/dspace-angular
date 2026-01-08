@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import {
-    BehaviorSubject,
+  BehaviorSubject,
   Observable,
   of,
 } from 'rxjs';
 
-import { CookieConsents, OrejimeService } from './orejime.service';
+import {
+  CookieConsents,
+  OrejimeService,
+} from './orejime.service';
 
 
 /**

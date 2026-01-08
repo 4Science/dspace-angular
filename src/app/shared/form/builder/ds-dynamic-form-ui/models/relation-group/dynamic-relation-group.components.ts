@@ -1,12 +1,7 @@
 import {
-  AsyncPipe,
-  NgClass,
-} from '@angular/common';
-import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
-  forwardRef,
   Input,
   OnDestroy,
   OnInit,
@@ -60,7 +55,6 @@ import { ThemedLoadingComponent } from '../../../../../loading/themed-loading.co
 import { ChipsComponent } from '../../../../chips/chips.component';
 import { Chips } from '../../../../chips/models/chips.model';
 import { ChipsItem } from '../../../../chips/models/chips-item.model';
-import { FormComponent } from '../../../../form.component';
 import { FormService } from '../../../../form.service';
 import { FormBuilderService } from '../../../form-builder.service';
 import { FormFieldMetadataValueObject } from '../../../models/form-field-metadata-value.model';

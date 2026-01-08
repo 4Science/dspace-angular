@@ -1,12 +1,10 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   TranslateModule,
   TranslateService,
@@ -23,7 +21,6 @@ import { LocaleService } from '../../../core/locale/locale.service';
 import { MetadatumViewModel } from '../../../core/shared/metadata.models';
 import { isNotEmpty } from '../../../shared/empty.util';
 import { MarkdownViewerComponent } from '../../../shared/markdown-viewer/markdown-viewer.component';
-import { RouterLink } from '@angular/router';
 
 
 @Component({
@@ -33,8 +30,8 @@ import { RouterLink } from '@angular/router';
   imports: [
     AsyncPipe,
     MarkdownViewerComponent,
-    TranslateModule,
     RouterLink,
+    TranslateModule,
   ],
 })
 /**
