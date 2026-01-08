@@ -150,7 +150,7 @@ export class MetadataLinkViewComponent implements OnInit {
    * @returns The created MetadataView object.
    */
   private createMetadataView(itemRD: RemoteData<Item>, metadataValue: MetadataValue): MetadataView {
-    if (itemRD.hasSucceeded) {
+    if (itemRD.hasSucceeded && itemRD.payload) {
       this.relatedItem = itemRD.payload;
       this.relatedDsoRoute = this.getItemPageRoute(this.relatedItem);
       const entityStyleValue = this.getCrisRefMetadata(itemRD.payload?.entityType);

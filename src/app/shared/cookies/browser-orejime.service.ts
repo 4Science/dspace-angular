@@ -252,12 +252,16 @@ export class BrowserOrejimeService extends OrejimeService {
         this.applyUpdateSettingsCallbackToApps(user);
         this.lazyOrejime.then(({ init }) => {
           this.orejimeInstance = init(this.orejimeConfig);
+          this.initialized = true;
+          this.initialized$.next(true);
         });
       });
 
     this.consentsUpdates$.pipe(
       filter(() => this.initialized),
-    ).subscribe((consents) => this.isKlaroManagerWatching = hasValue(consents));
+    ).subscribe((consents) => {
+      this.isKlaroManagerWatching = hasValue(consents);
+    });
   }
 
   /**
@@ -519,8 +523,8 @@ export class BrowserOrejimeService extends OrejimeService {
       return;
     }
 
-    this.lazyOrejime.then(({ getManager }) => {
-      const manager = getManager(this.orejimeConfig);
+    this.lazyOrejime.then(_ => {
+      const manager = this.orejimeInstance.internals.manager;
       const consentsSubject$ = this.consentsUpdates$;
       let lastCookiesConsents;
 
