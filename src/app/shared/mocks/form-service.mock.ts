@@ -9,7 +9,7 @@ export function getMockFormService(
   id$: string = 'random_id',
 ): FormService {
   return jasmine.createSpyObj('FormService', {
-    getFormData: observableOf({}),
+    getFormData: of({}),
     initForm: jasmine.createSpy('initForm'),
     removeForm: jasmine.createSpy('removeForm'),
     getForm: of({}),

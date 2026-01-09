@@ -60,6 +60,6 @@ export class VocabularyServiceStub {
   }
 
   findEntryDetailById(id: string, name: string, ...linksToFollow: FollowLinkConfig<VocabularyEntryDetail>[]): Observable<VocabularyEntry> {
-    return observableOf(Object.assign(new VocabularyEntry(), { authority: 1, display: 'one', value: 1 }));
+    return of(Object.assign(new VocabularyEntry(), { authority: 1, display: 'one', value: 1 }));
   }
 }

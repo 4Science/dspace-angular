@@ -324,6 +324,7 @@ export const environment: BuildConfig = {
       // Rounded to the nearest size in the list of selectable sizes on the
       // settings menu.  See pageSizeOptions in 'pagination-component-options.model.ts'.
       pageSize: 5,
+      showAccessStatuses: false,
     },
     // The maximum number of metadata values to add to the metatag list of the item page
     metatagLimit: 20,
@@ -383,7 +384,7 @@ export const environment: BuildConfig = {
     enablePrivacyStatement: true,
     enableCOARNotifySupport: true,
     enableCookieConsentPopup: true,
-    //Configuration for third-party metrics in Klaro
+    //Configuration for third-party metrics in Orejime
     metricsConsents: [
       {
         key: 'plumX',

@@ -1225,7 +1225,7 @@ describe('SubmissionObjectEffects test suite', () => {
         },
       });
 
-      submissionJsonPatchOperationsServiceStub.jsonPatchByResourceID.and.returnValue(observableOf(mockSubmissionRestResponse));
+      submissionJsonPatchOperationsServiceStub.jsonPatchByResourceID.and.returnValue(of(mockSubmissionRestResponse));
       const expected = cold('--b-', {
         b: new SetDuplicateDecisionSuccessAction(
           submissionId,

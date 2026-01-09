@@ -43,7 +43,6 @@ import {
   NativeWindowService,
 } from './core/services/window.service';
 import { ThemedRootComponent } from './root/themed-root.component';
-import { KlaroService } from './shared/cookies/klaro.service';
 import { DatadogRumService } from './shared/datadog-rum/datadog-rum.service';
 import { HostWindowResizeAction } from './shared/host-window.actions';
 import { HostWindowService } from './shared/host-window.service';
@@ -62,6 +61,7 @@ import { MenuServiceStub } from './shared/testing/menu-service.stub';
 import { ThemeService } from './shared/theme-support/theme.service';
 import { SocialComponent } from './social/social.component';
 import { Angulartics2DSpace } from './statistics/angulartics/dspace-provider';
+import { OrejimeService } from './shared/cookies/orejime.service';
 
 let comp: AppComponent;
 let fixture: ComponentFixture<AppComponent>;
@@ -83,7 +83,7 @@ describe('App component', () => {
 
   let breadcrumbsServiceSpy;
   let routeServiceMock;
-  let klaroServiceSpy: jasmine.SpyObj<KlaroService>;
+  let orejimeServiceSpy: jasmine.SpyObj<OrejimeService>;
   let datadogRumServiceSpy: jasmine.SpyObj<DatadogRumService>;
   let routerEventsObs: Subject<any>;
   let routerMock: Router;
@@ -99,7 +99,7 @@ describe('App component', () => {
       events: routerEventsObs,
     });
 
-    klaroServiceSpy = jasmine.createSpyObj('KlaroService', {
+    orejimeServiceSpy = jasmine.createSpyObj('OrejimeService', {
       getSavedPreferences: jasmine.createSpy('getSavedPreferences'),
       watchConsentUpdates: jasmine.createSpy('watchConsentUpdates').and.returnValue(null),
     },{
@@ -137,7 +137,7 @@ describe('App component', () => {
         { provide: BreadcrumbsService, useValue: breadcrumbsServiceSpy },
         { provide: RouteService, useValue: routeServiceMock },
         { provide: APP_CONFIG, useValue: environment },
-        { provide: KlaroService, useValue: klaroServiceSpy },
+        { provide: OrejimeService, useValue: orejimeServiceSpy },
         { provide: DatadogRumService, useValue: datadogRumServiceSpy },
         provideMockStore({ initialState }),
         AppComponent,

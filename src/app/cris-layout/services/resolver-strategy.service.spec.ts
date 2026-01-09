@@ -13,7 +13,7 @@ describe('ResolverStrategyService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.get(ResolverStrategyService);
+    service = new ResolverStrategyService();
   });
 
   it('should be created', () => {

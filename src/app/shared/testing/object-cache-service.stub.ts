@@ -33,7 +33,7 @@ export class ObjectCacheServiceStub {
   }
 
   getRequestUUIDBySelfLink(_self: string): Observable<string> {
-    return observableOf('');
+    return of('');
   }
 
 }

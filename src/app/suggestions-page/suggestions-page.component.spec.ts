@@ -22,12 +22,6 @@ import { TestScheduler } from 'rxjs/testing';
 import { AuthService } from '../core/auth/auth.service';
 import { PaginationService } from '../core/pagination/pagination.service';
 import { WorkspaceitemDataService } from '../core/submission/workspaceitem-data.service';
-import { SuggestionActionsComponent } from '../notifications/suggestion-actions/suggestion-actions.component';
-import { SuggestionApproveAndImport } from '../notifications/suggestion-list-element/suggestion-approve-and-import';
-import { SuggestionEvidencesComponent } from '../notifications/suggestion-list-element/suggestion-evidences/suggestion-evidences.component';
-import { SuggestionListElementComponent } from '../notifications/suggestion-list-element/suggestion-list-element.component';
-import { SuggestionTargetsStateService } from '../notifications/suggestion-targets/suggestion-targets.state.service';
-import { SuggestionsService } from '../notifications/suggestions.service';
 import { AlertComponent } from '../shared/alert/alert.component';
 import { ThemedLoadingComponent } from '../shared/loading/themed-loading.component';
 import {
@@ -49,6 +43,16 @@ import { RouterStub } from '../shared/testing/router.stub';
 import { ObjectKeysPipe } from '../shared/utils/object-keys-pipe';
 import { VarDirective } from '../shared/utils/var.directive';
 import { SuggestionsPageComponent } from './suggestions-page.component';
+import {
+  SuggestionListElementComponent
+} from '../notifications/suggestions/list-element/suggestion-list-element.component';
+import {
+  SuggestionEvidencesComponent
+} from '../notifications/suggestions/list-element/suggestion-evidences/suggestion-evidences.component';
+import { SuggestionsService } from '../notifications/suggestions/suggestions.service';
+import { SuggestionTargetsStateService } from '../notifications/suggestions/targets/suggestion-targets.state.service';
+import { SuggestionActionsComponent } from '../notifications/suggestions/actions/suggestion-actions.component';
+import { SuggestionApproveAndImport } from '../notifications/suggestions/list-element/suggestion-approve-and-import';
 
 describe('SuggestionPageComponent', () => {
   let component: SuggestionsPageComponent;

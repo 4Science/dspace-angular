@@ -192,7 +192,7 @@ describe('ItemPageComponent', () => {
   describe('when the item is loading', () => {
     beforeEach(() => {
       comp.itemRD$ = createPendingRemoteDataObject$();
-      // comp.itemRD$ = observableOf(new RemoteData(true, true, true, null, undefined));
+      // comp.itemRD$ = of(new RemoteData(true, true, true, null, undefined));
       fixture.detectChanges();
     });
 

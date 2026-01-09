@@ -800,7 +800,7 @@ describe('EditBitstreamPageComponent', () => {
           {
             provide: ActivatedRoute,
             useValue: {
-              data: observableOf({ bitstream: createSuccessfulRemoteDataObject(bitstream) }),
+              data: of({ bitstream: createSuccessfulRemoteDataObject(bitstream) }),
               snapshot: { queryParams: {} },
             },
           },
@@ -930,7 +930,7 @@ describe('EditBitstreamPageComponent', () => {
           {
             provide: ActivatedRoute,
             useValue: {
-              data: observableOf({ bitstream: createSuccessfulRemoteDataObject(bitstream) }),
+              data: of({ bitstream: createSuccessfulRemoteDataObject(bitstream) }),
               snapshot: { queryParams: {} },
             },
           },

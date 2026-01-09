@@ -171,7 +171,7 @@ describe('ItemVersionsComponent', () => {
   });
 
   const routeStub = {
-    data: observableOf({
+    data: of({
       dso: createSuccessfulRemoteDataObject(mockItem),
     }),
     children: [],

@@ -597,7 +597,7 @@ export class DefaultAppConfig implements AppConfig {
     enablePrivacyStatement: true,
     enableCOARNotifySupport: true,
     enableCookieConsentPopup: true,
-    //Configuration for third-party metrics in Klaro
+    //Configuration for third-party metrics in Orejime
     metricsConsents: [
       {
         key: 'plumX',

@@ -24,11 +24,10 @@ import {
   DynamicFormArrayModel,
   DynamicFormControlEvent,
   DynamicFormControlModel,
-  DynamicFormGroupModel,
+  DynamicFormGroupModel, DynamicFormGroupModelConfig,
   DynamicFormsCoreModule,
   DynamicInputModel,
 } from '@ng-dynamic-forms/core';
-import { DynamicFormGroupModelConfig } from '@ng-dynamic-forms/core/lib/model/form-group/dynamic-form-group.model';
 import {
   Store,
   StoreModule,

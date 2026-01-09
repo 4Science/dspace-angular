@@ -137,7 +137,7 @@ const mockSearchResults: SearchObjects<DSpaceObject> = Object.assign(new SearchO
   page: [mockDso, mockDso2],
 });
 const mockResultsRD: RemoteData<SearchObjects<DSpaceObject>> = createSuccessfulRemoteDataObject(mockSearchResults);
-const mockResultsRD$: Observable<RemoteData<SearchObjects<DSpaceObject>>> = observableOf(mockResultsRD);
+const mockResultsRD$: Observable<RemoteData<SearchObjects<DSpaceObject>>> = of(mockResultsRD);
 
 const mockFilterConfig: SearchFilterConfig = Object.assign(new SearchFilterConfig(), {
   name: 'test1',

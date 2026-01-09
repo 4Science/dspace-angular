@@ -360,7 +360,7 @@ export function getEntityGridElementTestComponent(component, searchResultWithMet
 }
 
 const truncatableServiceStub: any = {
-  isCollapsed: (id: number) => observableOf(true),
+  isCollapsed: (id: number) => of(true),
 };
 
 const mockBitstreamDataService = jasmine.createSpyObj('BitstreamDataService', {

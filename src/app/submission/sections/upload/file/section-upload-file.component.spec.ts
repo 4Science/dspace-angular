@@ -222,7 +222,7 @@ describe('SubmissionSectionUploadFileComponent', () => {
     it('should not show any buttons when ready-only is true', () => {
       comp.fileData = fileData;
       comp.readOnly = true;
-      submissionServiceStub.getSubmissionObject.and.returnValue(observableOf({}));
+      submissionServiceStub.getSubmissionObject.and.returnValue(of({}));
 
       fixture.detectChanges();
 
@@ -233,7 +233,7 @@ describe('SubmissionSectionUploadFileComponent', () => {
 
     it('should call deleteFile on delete confirmation', async () => {
       spyOn(compAsAny, 'deleteFile');
-      submissionServiceStub.getSubmissionObject.and.returnValue(observableOf({}));
+      submissionServiceStub.getSubmissionObject.and.returnValue(of({}));
       comp.fileData = fileData;
 
       fixture.detectChanges();
@@ -287,7 +287,7 @@ describe('SubmissionSectionUploadFileComponent', () => {
 
     it('should open edit modal when edit button is clicked', () => {
       spyOn(compAsAny, 'editBitstreamData').and.callThrough();
-      submissionServiceStub.getSubmissionObject.and.returnValue(observableOf({}));
+      submissionServiceStub.getSubmissionObject.and.returnValue(of({}));
       comp.fileData = fileData;
 
       fixture.detectChanges();
@@ -309,7 +309,7 @@ describe('SubmissionSectionUploadFileComponent', () => {
         },
       ];
 
-      submissionServiceStub.getSubmissionObject.and.returnValue(observableOf(mockSubmission));
+      submissionServiceStub.getSubmissionObject.and.returnValue(of(mockSubmission));
       comp.fileData = fileData;
 
       fixture.detectChanges();

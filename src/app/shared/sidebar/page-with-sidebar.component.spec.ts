@@ -80,7 +80,7 @@ describe('PageWithSidebarComponent', () => {
       beforeEach(() => {
         menu = fixture.debugElement.query(By.css('#mock-id-sidebar-content')).nativeElement;
         secMenu = fixture.debugElement.query(By.css('#mock-id-sidebar-content-xl')).nativeElement;
-        (comp as any).sidebarService.isCollapsedInXL = observableOf(true);
+        (comp as any).sidebarService.isCollapsedInXL = of(true);
         comp.ngOnInit();
         fixture.detectChanges();
       });
@@ -99,7 +99,7 @@ describe('PageWithSidebarComponent', () => {
       beforeEach(() => {
         menu = fixture.debugElement.query(By.css('#mock-id-sidebar-content')).nativeElement;
         secMenu = fixture.debugElement.query(By.css('#mock-id-sidebar-content-xl')).nativeElement;
-        (comp as any).sidebarService.isCollapsedInXL = observableOf(false);
+        (comp as any).sidebarService.isCollapsedInXL = of(false);
         comp.ngOnInit();
         fixture.detectChanges();
       });
@@ -122,9 +122,9 @@ describe('PageWithSidebarComponent', () => {
           },
           {
             provide: HostWindowService, useValue: jasmine.createSpyObj('hostWindowService', {
-              isXs: observableOf(false),
-              isSm: observableOf(false),
-              isXsOrSm: observableOf(false),
+              isXs: of(false),
+              isSm: of(false),
+              isXsOrSm: of(false),
             }),
           },
         ],
@@ -142,8 +142,8 @@ describe('PageWithSidebarComponent', () => {
 
       beforeEach(() => {
         comp.collapseSidebar = false;
-        spyOn(comp as any, 'isSidebarCollapsed').and.returnValue(observableOf(false));
-        spyOn(comp as any, 'isSidebarCollapsedXL').and.returnValue(observableOf(false));
+        spyOn(comp as any, 'isSidebarCollapsed').and.returnValue(of(false));
+        spyOn(comp as any, 'isSidebarCollapsedXL').and.returnValue(of(false));
         fixture.detectChanges();
       });
 
@@ -161,8 +161,8 @@ describe('PageWithSidebarComponent', () => {
 
       beforeEach(() => {
         comp.collapseSidebar = true;
-        spyOn(comp as any, 'isSidebarCollapsed').and.returnValue(observableOf(true));
-        spyOn(comp as any, 'isSidebarCollapsedXL').and.returnValue(observableOf(true));
+        spyOn(comp as any, 'isSidebarCollapsed').and.returnValue(of(true));
+        spyOn(comp as any, 'isSidebarCollapsedXL').and.returnValue(of(true));
         fixture.detectChanges();
       });
 

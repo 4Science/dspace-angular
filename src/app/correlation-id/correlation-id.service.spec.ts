@@ -4,7 +4,7 @@ import {
   StoreModule,
 } from '@ngrx/store';
 import { MockStore } from '@ngrx/store/testing';
-import { of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 
 import {
   appReducers,
@@ -40,6 +40,9 @@ describe('CorrelationIdService', () => {
       getSavedPreferences: () => of({ CORRELATION_ID_OREJIME_KEY: true }),
       initialize: jasmine.createSpy('initialize'),
       showSettings: jasmine.createSpy('showSettings'),
+      watchConsentUpdates: () => of(),
+      consentsUpdates$: new BehaviorSubject({ CORRELATION_ID_OREJIME_KEY: true }),
+      initialized$: new BehaviorSubject(true),
     };
 
     service = new CorrelationIdService(cookieService, uuidService, store, mockOrejimeService, { nativeWindow: undefined });

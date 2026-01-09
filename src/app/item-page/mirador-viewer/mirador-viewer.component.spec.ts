@@ -79,7 +79,7 @@ describe('MiradorViewerComponent with search', () => {
       comp = fixture.componentInstance;
       comp.object = getItem(noMetadata);
       comp.searchable = true;
-      comp.iframeViewerUrl = observableOf('testUrl');
+      comp.iframeViewerUrl = of('testUrl');
       fixture.detectChanges();
     }));
 
@@ -148,7 +148,7 @@ describe('MiradorViewerComponent with multiple images', () => {
       comp = fixture.componentInstance;
       comp.object = getItem(noMetadata);
       comp.searchable = false;
-      comp.iframeViewerUrl = observableOf('testUrl');
+      comp.iframeViewerUrl = of('testUrl');
       fixture.detectChanges();
     }));
 
@@ -212,7 +212,7 @@ describe('MiradorViewerComponent with a single image', () => {
       fixture = TestBed.createComponent(MiradorViewerComponent);
       comp = fixture.componentInstance;
       comp.object = getItem(noMetadata);
-      comp.iframeViewerUrl = observableOf('testUrl');
+      comp.iframeViewerUrl = of('testUrl');
       fixture.detectChanges();
     }));
 
@@ -270,7 +270,7 @@ describe('MiradorViewerComponent in development mode', () => {
       fixture = TestBed.createComponent(MiradorViewerComponent);
       comp = fixture.componentInstance;
       comp.object = getItem(noMetadata);
-      comp.iframeViewerUrl = observableOf('testUrl');
+      comp.iframeViewerUrl = of('testUrl');
       fixture.detectChanges();
     }));
 

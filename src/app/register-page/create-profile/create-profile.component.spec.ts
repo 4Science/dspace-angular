@@ -66,9 +66,9 @@ describe('CreateProfileComponent', () => {
 
   beforeEach(waitForAsync(() => {
     authService = jasmine.createSpyObj('authService', {
-      isAuthenticated: observableOf(true),
+      isAuthenticated: of(true),
       setRedirectUrl: {},
-      getAuthenticatedUserFromStore: observableOf(ePerson),
+      getAuthenticatedUserFromStore: of(ePerson),
     });
     values = {
       metadata: {

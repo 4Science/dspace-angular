@@ -497,7 +497,7 @@ describe('AuthEffects', () => {
       it('should return a REFRESH_STATE_TOKEN_AND_REDIRECT_SUCCESS action in response to a REFRESH_STATE_TOKEN_AND_REDIRECT action', (done) => {
 
         store.overrideSelector(getAuthenticatedUser, { id: EPersonMock.id } as EPerson);
-        spyOn((authEffects as any).authService, 'retrieveAuthenticatedUserById').and.returnValue(observableOf(EPersonMock));
+        spyOn((authEffects as any).authService, 'retrieveAuthenticatedUserById').and.returnValue(of(EPersonMock));
 
         actions = hot('--a-', {
           a: {

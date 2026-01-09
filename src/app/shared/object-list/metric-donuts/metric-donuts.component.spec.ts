@@ -31,18 +31,6 @@ const mockItem = Object.assign(new Item(), {
   },
 });
 
-// const mockItemWithoutEntityType = Object.assign(new Item(), {
-//   bundles: observableOf({}),
-//   metadata: {
-//     'dc.title': [
-//       {
-//         language: 'en_US',
-//         value: 'This is just another title'
-//       }
-//     ]
-//   }
-// });
-
 describe('MetricDonutsComponent', () => {
 
   linkService = getMockLinkService();

@@ -122,7 +122,7 @@ export class BrowserOrejimeService extends OrejimeService {
    * Boolean to check if a new watch method from the manager needs to be fired
    * @private
    */
-  private isKlaroManagerWatching = false;
+  private isOrejimeManagerWatching = false;
   /**
    * Boolean to check if service has been initialized
    * @private
@@ -260,7 +260,7 @@ export class BrowserOrejimeService extends OrejimeService {
     this.consentsUpdates$.pipe(
       filter(() => this.initialized),
     ).subscribe((consents) => {
-      this.isKlaroManagerWatching = hasValue(consents);
+      this.isOrejimeManagerWatching = hasValue(consents);
     });
   }
 
@@ -519,7 +519,7 @@ export class BrowserOrejimeService extends OrejimeService {
   }
 
   watchConsentUpdates(): void {
-    if (this.isKlaroManagerWatching || !this.initialized) {
+    if (this.isOrejimeManagerWatching || !this.initialized) {
       return;
     }
 

@@ -66,6 +66,12 @@ describe('DsoEditMetadataAuthorityFieldComponent', () => {
         href: 'entries',
       },
     },
+    entity: '',
+    externalSource: undefined,
+    multiValueOnGenerator: false,
+    getExternalSourceByMetadata(metadata): string {
+      return '';
+    },
   };
 
   const mockVocabularyHierarchical: Vocabulary = {
@@ -83,6 +89,12 @@ describe('DsoEditMetadataAuthorityFieldComponent', () => {
         href: 'entries',
       },
     },
+    entity: '',
+    externalSource: undefined,
+    multiValueOnGenerator: false,
+    getExternalSourceByMetadata(metadata): string {
+      return '';
+    },
   };
 
   const mockVocabularySuggester: Vocabulary = {
@@ -99,6 +111,12 @@ describe('DsoEditMetadataAuthorityFieldComponent', () => {
       entries: {
         href: 'entries',
       },
+    },
+    entity: '',
+    externalSource: undefined,
+    multiValueOnGenerator: false,
+    getExternalSourceByMetadata(metadata): string {
+      return '';
     },
   };
 

@@ -99,7 +99,7 @@ const enviromentNoThumbs = {
 };
 
 const truncatableServiceStub: any = {
-  isCollapsed: (id: number) => observableOf(true),
+  isCollapsed: (id: number) => of(true),
 };
 
 describe('ItemListPreviewComponent', () => {
@@ -237,7 +237,7 @@ describe('ItemListPreviewComponent', () => {
 
   describe('When truncatable section is collapsed', () => {
     beforeEach(() => {
-      component.isCollapsed$ = observableOf(true);
+      component.isCollapsed$ = of(true);
       component.item = mockItemWithAuthorAndDate;
       fixture.detectChanges();
     });
@@ -250,7 +250,7 @@ describe('ItemListPreviewComponent', () => {
 
   describe('When truncatable section is expanded', () => {
     beforeEach(() => {
-      component.isCollapsed$ = observableOf(false);
+      component.isCollapsed$ = of(false);
       component.item = mockItemWithAuthorAndDate;
       fixture.detectChanges();
     });

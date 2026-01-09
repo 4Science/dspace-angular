@@ -159,7 +159,7 @@ describe('EndUserAgreementComponent', () => {
   describe('when the user has already accepted the agreement', () => {
 
     beforeEach(() => {
-      (endUserAgreementService.hasCurrentUserOrCookieAcceptedAgreement as jasmine.Spy).and.returnValue(observableOf(true));
+      (endUserAgreementService.hasCurrentUserOrCookieAcceptedAgreement as jasmine.Spy).and.returnValue(of(true));
       component.ngOnInit();
       fixture.detectChanges();
     });
@@ -206,7 +206,7 @@ describe('EndUserAgreementComponent', () => {
   describe('warning notification logic', () => {
     beforeEach(() => {
       (endUserAgreementService.hasCurrentUserOrCookieAcceptedAgreement as jasmine.Spy)
-        .and.returnValue(observableOf(false));
+        .and.returnValue(of(false));
       fixture.detectChanges();
     });
 
@@ -221,7 +221,7 @@ describe('EndUserAgreementComponent', () => {
       component.ngOnInit();
       (notificationsService.warning as jasmine.Spy).calls.reset();
       (endUserAgreementService.hasCurrentUserOrCookieAcceptedAgreement as jasmine.Spy)
-        .and.returnValue(observableOf(true));
+        .and.returnValue(of(true));
       component.initAccepted();
       expect(notificationsService.warning).not.toHaveBeenCalled();
     });

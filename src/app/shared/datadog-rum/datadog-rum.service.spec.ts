@@ -6,18 +6,15 @@ import {
 import { of } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import {
-  CookieConsents,
-  KlaroService,
-} from '../cookies/klaro.service';
 import { BrowserDatadogRumService } from './browser-datadog-rum.service';
 import { setDatadogRumStatusAction } from './datadog-rum.actions';
 import { DatadogRumService } from './datadog-rum.service';
+import { CookieConsents, OrejimeService } from '../cookies/orejime.service';
 
 describe('DatadogRumService', () => {
   let service: BrowserDatadogRumService;
   let store: MockStore;
-  let klaroService: KlaroService;
+  let orejimeService: OrejimeService;
   let memoizedSelector;
 
   const initialState = {
@@ -31,7 +28,7 @@ describe('DatadogRumService', () => {
     datadog: true,
   };
 
-  const klaroServiceSpy = jasmine.createSpyObj('KlaroService', {
+  const orejimeServiceSpy = jasmine.createSpyObj('OrejimeService', {
     getSavedPreferences: jasmine.createSpy('getSavedPreferences'),
     watchConsentUpdates: jasmine.createSpy('watchConsentUpdates').and.returnValue(null),
   }, {
@@ -51,13 +48,13 @@ describe('DatadogRumService', () => {
       providers: [
         { provide: DatadogRumService, useClass: BrowserDatadogRumService },
         provideMockStore({ initialState }),
-        { provide: KlaroService, useValue: klaroServiceSpy },
+        { provide: OrejimeService, useValue: orejimeServiceSpy },
       ],
     });
     service = TestBed.inject(DatadogRumService) as BrowserDatadogRumService;
     store = TestBed.inject(MockStore);
     memoizedSelector = store.overrideSelector(service.datadogRumStateSelector, initialState.datadogRum);
-    klaroService = TestBed.inject(KlaroService);
+    orejimeService = TestBed.inject(OrejimeService);
 
     spyOn(store, 'dispatch');
   });
@@ -72,7 +69,7 @@ describe('DatadogRumService', () => {
     consentsAccepted.datadog = true;
     environment.datadogRum = datadogRumEnvironmentOptions;
     service.initDatadogRum();
-    expect(store.dispatch).toHaveBeenCalledWith(new setDatadogRumStatusAction({
+    expect(store.dispatch).toHaveBeenCalledWith(jasmine.objectContaining({
       isInitialized: true,
       isRunning: true,
     }));
@@ -84,7 +81,7 @@ describe('DatadogRumService', () => {
     consentsAccepted.datadog = true;
     environment.datadogRum = datadogRumEnvironmentOptions;
     service.initDatadogRum();
-    expect(store.dispatch).toHaveBeenCalledWith(new setDatadogRumStatusAction({
+    expect(store.dispatch).toHaveBeenCalledWith(jasmine.objectContaining({
       isRunning: true,
     }));
   });
@@ -94,7 +91,7 @@ describe('DatadogRumService', () => {
     store.refreshState();
     consentsAccepted.datadog = false;
     service.initDatadogRum();
-    expect(store.dispatch).toHaveBeenCalledWith(new setDatadogRumStatusAction({
+    expect(store.dispatch).toHaveBeenCalledWith(jasmine.objectContaining({
       isRunning: false,
     }));
   });

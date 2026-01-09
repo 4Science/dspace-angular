@@ -16,11 +16,8 @@ import { MetricStyleConfigPipe } from '../pipes/metric-style-config/metric-style
 import { MetricLoaderComponent } from './metric-loader.component';
 import { MetricLoaderService } from './metric-loader.service';
 import SpyObj = jasmine.SpyObj;
-import {
-  CookieConsents,
-  KlaroService,
-} from '../../cookies/klaro.service';
 import { BaseMetricComponent } from './base-metric.component';
+import { CookieConsents, OrejimeService } from '../../cookies/orejime.service';
 
 
 
@@ -28,7 +25,7 @@ describe('MetricLoaderComponent', () => {
   let component: MetricLoaderComponent;
   let fixture: ComponentFixture<MetricLoaderComponent>;
   let metricLoaderService: SpyObj<MetricLoaderService>;
-  let klaroServiceSpy: jasmine.SpyObj<KlaroService>;
+  let orejimeServiceSpy: jasmine.SpyObj<OrejimeService>;
 
 
   const consentsAccepted: CookieConsents = {
@@ -46,21 +43,21 @@ describe('MetricLoaderComponent', () => {
     });
     metricLoaderService.loadMetricTypeComponent.and.returnValue(of(TestComponent).toPromise());
 
-    klaroServiceSpy = jasmine.createSpyObj('KlaroService', {
+    orejimeServiceSpy = jasmine.createSpyObj('OrejimeService', {
       getSavedPreferences: jasmine.createSpy('getSavedPreferences'),
       watchConsentUpdates: jasmine.createSpy('watchConsentUpdates').and.returnValue(null),
     },{
       consentsUpdates$: of(consentsAccepted),
     });
 
-    klaroServiceSpy.getSavedPreferences.and.returnValue(of(consentsAccepted));
+    orejimeServiceSpy.getSavedPreferences.and.returnValue(of(consentsAccepted));
 
 
     TestBed.configureTestingModule({
       imports: [MetricLoaderComponent, MetricStyleConfigPipe],
       providers: [
         { provide: MetricLoaderService, useValue: metricLoaderService },
-        { provide: KlaroService, useValue: klaroServiceSpy },
+        { provide: OrejimeService, useValue: orejimeServiceSpy },
       ],
     })
       .compileComponents();
@@ -101,7 +98,7 @@ describe('MetricLoaderComponent', () => {
   describe('Script handling', () => {
 
     beforeEach(() => {
-      klaroServiceSpy.getSavedPreferences.and.returnValue(of(consentsAccepted));
+      orejimeServiceSpy.getSavedPreferences.and.returnValue(of(consentsAccepted));
     });
 
     it('should instantiate the component without loading the script', fakeAsync(() => {

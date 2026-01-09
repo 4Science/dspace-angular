@@ -1,4 +1,5 @@
 import { DsDatePipe } from './ds-date.pipe';
+import { waitForAsync } from '@angular/core/testing';
 
 describe('DsDatePipe', () => {
 
@@ -24,28 +25,33 @@ describe('DsDatePipe', () => {
     expect(pipe).toBeTruthy();
   });
 
-  it('Should transform the given date and time', () => {
-    const value = pipe.transform(`${date}T11:22:33Z`);
-    expect(value).toEqual(parsedDate);
-  });
+  it('Should transform the given date and time', waitForAsync(() => {
+    pipe.transform(`${date}T11:22:33Z`).subscribe(value => {
+      expect(value).toEqual(parsedDate);
+    });
+  }));
 
-  it('Should transform the given date (YYYY-MM-DD)', () => {
-    const value = pipe.transform(date);
-    expect(value).toEqual(parsedDate);
-  });
+  it('Should transform the given date (YYYY-MM-DD)', waitForAsync(() => {
+    pipe.transform(date).subscribe(value => {
+      expect(value).toEqual(parsedDate);
+    });
+  }));
 
-  it('Should transform the given date (YYYY-MM)', () => {
-    const value = pipe.transform('2020-08');
-    expect(value).toEqual('August 2020');
-  });
+  it('Should transform the given date (YYYY-MM)', waitForAsync(() => {
+    pipe.transform('2020-08').subscribe(value => {
+      expect(value).toEqual('August 2020');
+    });
+  }));
 
-  it('Should transform the given date (YYYY)', () => {
-    const value = pipe.transform('2020');
-    expect(value).toEqual('2020');
-  });
+  it('Should transform the given date (YYYY)', waitForAsync(() => {
+    pipe.transform('2020').subscribe(value => {
+      expect(value).toEqual('2020');
+    });
+  }));
 
-  it('Should not transform invalid dates', () => {
-    const value = pipe.transform('ABCDE');
-    expect(value).toEqual('ABCDE');
-  });
+  it('Should not transform invalid dates', waitForAsync(() => {
+    pipe.transform('ABCDE').subscribe(value => {
+      expect(value).toEqual('ABCDE');
+    });
+  }));
 });

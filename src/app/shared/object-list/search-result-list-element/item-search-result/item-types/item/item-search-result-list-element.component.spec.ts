@@ -296,7 +296,7 @@ describe('ItemSearchResultListElementComponent', () => {
 
   describe('When the item has authors and isCollapsed is true', () => {
     beforeEach(() => {
-      spyOn(publicationListElementComponent, 'isCollapsed').and.returnValue(observableOf(true));
+      spyOn(publicationListElementComponent, 'isCollapsed').and.returnValue(of(true));
       publicationListElementComponent.object = mockItemWithMetadata;
       fixture.detectChanges();
     });
@@ -309,7 +309,7 @@ describe('ItemSearchResultListElementComponent', () => {
 
   describe('When the item has authors and isCollapsed is false', () => {
     beforeEach(() => {
-      spyOn(publicationListElementComponent, 'isCollapsed').and.returnValue(observableOf(false));
+      spyOn(publicationListElementComponent, 'isCollapsed').and.returnValue(of(false));
       publicationListElementComponent.object = mockItemWithMetadata;
       fixture.detectChanges();
     });
