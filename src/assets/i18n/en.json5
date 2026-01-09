@@ -5316,6 +5316,8 @@
 
   "suggestion.source.openaire": "OpenAIRE Graph",
 
+  "suggestion.source.orcidWorks": "ORCID Integration",
+
   "suggestion.from.source": "from the ",
 
   "suggestion.count.missing": "You have no publication claims left",
@@ -5323,6 +5325,8 @@
   "suggestion.totalScore": "Total Score",
 
   "suggestion.type.openaire": "OpenAIRE",
+
+  "suggestion.type.orcidWorks": "Publication",
 
   "register-email.title": "New user registration",
 
