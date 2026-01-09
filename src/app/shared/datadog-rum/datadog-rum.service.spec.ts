@@ -6,10 +6,12 @@ import {
 import { of } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
+import {
+  CookieConsents,
+  OrejimeService,
+} from '../cookies/orejime.service';
 import { BrowserDatadogRumService } from './browser-datadog-rum.service';
-import { setDatadogRumStatusAction } from './datadog-rum.actions';
 import { DatadogRumService } from './datadog-rum.service';
-import { CookieConsents, OrejimeService } from '../cookies/orejime.service';
 
 describe('DatadogRumService', () => {
   let service: BrowserDatadogRumService;

@@ -43,6 +43,7 @@ import {
   NativeWindowService,
 } from './core/services/window.service';
 import { ThemedRootComponent } from './root/themed-root.component';
+import { OrejimeService } from './shared/cookies/orejime.service';
 import { DatadogRumService } from './shared/datadog-rum/datadog-rum.service';
 import { HostWindowResizeAction } from './shared/host-window.actions';
 import { HostWindowService } from './shared/host-window.service';
@@ -61,7 +62,6 @@ import { MenuServiceStub } from './shared/testing/menu-service.stub';
 import { ThemeService } from './shared/theme-support/theme.service';
 import { SocialComponent } from './social/social.component';
 import { Angulartics2DSpace } from './statistics/angulartics/dspace-provider';
-import { OrejimeService } from './shared/cookies/orejime.service';
 
 let comp: AppComponent;
 let fixture: ComponentFixture<AppComponent>;

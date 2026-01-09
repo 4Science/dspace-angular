@@ -4,7 +4,10 @@ import {
   StoreModule,
 } from '@ngrx/store';
 import { MockStore } from '@ngrx/store/testing';
-import { BehaviorSubject, of } from 'rxjs';
+import {
+  BehaviorSubject,
+  of,
+} from 'rxjs';
 
 import {
   appReducers,

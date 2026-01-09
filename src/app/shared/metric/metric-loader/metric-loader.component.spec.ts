@@ -16,8 +16,11 @@ import { MetricStyleConfigPipe } from '../pipes/metric-style-config/metric-style
 import { MetricLoaderComponent } from './metric-loader.component';
 import { MetricLoaderService } from './metric-loader.service';
 import SpyObj = jasmine.SpyObj;
+import {
+  CookieConsents,
+  OrejimeService,
+} from '../../cookies/orejime.service';
 import { BaseMetricComponent } from './base-metric.component';
-import { CookieConsents, OrejimeService } from '../../cookies/orejime.service';
 
 
 

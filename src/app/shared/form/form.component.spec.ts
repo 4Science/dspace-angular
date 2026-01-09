@@ -24,7 +24,8 @@ import {
   DynamicFormArrayModel,
   DynamicFormControlEvent,
   DynamicFormControlModel,
-  DynamicFormGroupModel, DynamicFormGroupModelConfig,
+  DynamicFormGroupModel,
+  DynamicFormGroupModelConfig,
   DynamicFormsCoreModule,
   DynamicInputModel,
 } from '@ng-dynamic-forms/core';

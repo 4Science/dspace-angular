@@ -1,5 +1,6 @@
-import { DsDatePipe } from './ds-date.pipe';
 import { waitForAsync } from '@angular/core/testing';
+
+import { DsDatePipe } from './ds-date.pipe';
 
 describe('DsDatePipe', () => {
 
