@@ -1,7 +1,7 @@
 import {
-  async,
   ComponentFixture,
   TestBed,
+  waitForAsync,
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -39,7 +39,7 @@ describe('ExportItemMenuComponent', () => {
     submitForm: jasmine.createSpy('submitForm'),
   });
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     itemExportService.initialItemExportFormConfiguration.and.returnValue(of(configuration));
     dso = Object.assign(new Item(), {
       id: 'test-item',

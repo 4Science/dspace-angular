@@ -550,7 +550,7 @@ describe('EPersonFormComponent', () => {
 
   describe('findListByHref functionality', () => {
     it('retrieves groups and object on page change', fakeAsync(() => {
-      component.activeEPerson$ = observableOf({ _links: { groups: { href: 'groups' } } } as EPerson);
+      component.activeEPerson$ = of({ _links: { groups: { href: 'groups' } } } as EPerson);
 
       const options = { currentPage: 1, elementsPerPage: 5 };
       component.onPageChange(options.currentPage);

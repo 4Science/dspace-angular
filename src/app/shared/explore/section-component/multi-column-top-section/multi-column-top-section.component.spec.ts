@@ -1,7 +1,7 @@
 import {
-  async,
   ComponentFixture,
   TestBed,
+  waitForAsync,
 } from '@angular/core/testing';
 
 import { MultiColumnTopSectionComponent } from './multi-column-top-section.component';
@@ -10,7 +10,7 @@ xdescribe('MultiColumnTopSectionComponent', () => {
   let component: MultiColumnTopSectionComponent;
   let fixture: ComponentFixture<MultiColumnTopSectionComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [MultiColumnTopSectionComponent],
     })

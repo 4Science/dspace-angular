@@ -1,7 +1,7 @@
 import {
-  async,
   ComponentFixture,
   TestBed,
+  waitForAsync,
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -81,7 +81,7 @@ describe('RequestCorrectionMenuComponent', () => {
     item: createSuccessfulRemoteDataObject$(mockItem),
   });
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     dso = Object.assign(new Item(), {
       id: 'test-item',
       _links: {

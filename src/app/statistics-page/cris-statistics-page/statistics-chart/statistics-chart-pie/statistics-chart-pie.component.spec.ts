@@ -4,9 +4,9 @@ import {
   NO_ERRORS_SCHEMA,
 } from '@angular/core';
 import {
-  async,
   ComponentFixture,
   TestBed,
+  waitForAsync,
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
@@ -65,7 +65,7 @@ describe('StatisticsChartPieComponent', () => {
 
   const page = of(0);
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot(), StatisticsChartPieComponent],
       providers: [

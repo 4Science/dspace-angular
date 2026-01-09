@@ -3,9 +3,9 @@ import {
   NO_ERRORS_SCHEMA,
 } from '@angular/core';
 import {
-  async,
   ComponentFixture,
   TestBed,
+  waitForAsync,
 } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -97,7 +97,7 @@ xdescribe('SearchChartBarComponent', () => {
   const mockValues = createSuccessfulRemoteDataObject$(
     buildPaginatedList(new PageInfo(), values),
   );
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot(), NoopAnimationsModule, FormsModule, SearchChartBarComponent],
       providers: [

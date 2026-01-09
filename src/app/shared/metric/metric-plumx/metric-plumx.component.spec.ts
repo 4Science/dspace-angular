@@ -1,8 +1,8 @@
 import { Injector } from '@angular/core';
 import {
-  async,
   ComponentFixture,
   TestBed,
+  waitForAsync,
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import {
@@ -69,7 +69,7 @@ describe('MetricPlumxComponent', () => {
     type: null,
     _links: null,
   };
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot({
         loader: {

@@ -4,9 +4,9 @@ import {
   NO_ERRORS_SCHEMA,
 } from '@angular/core';
 import {
-  async,
   ComponentFixture,
   TestBed,
+  waitForAsync,
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -190,7 +190,7 @@ describe('StatisticsChartLineComponent', () => {
 
   const page = of(0);
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot(), StatisticsChartLineComponent, NoopAnimationsModule],
       providers: [

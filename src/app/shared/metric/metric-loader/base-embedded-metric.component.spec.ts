@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import {
-  async,
   ComponentFixture,
   fakeAsync,
   TestBed,
   tick,
+  waitForAsync,
 } from '@angular/core/testing';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -15,7 +15,7 @@ describe('BaseEmbeddedMetricComponent', () => {
   let component: TestEmbeddedMetricComponent;
   let fixture: ComponentFixture<TestEmbeddedMetricComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
 
     TestBed.configureTestingModule({
       imports: [TestEmbeddedMetricComponent],
