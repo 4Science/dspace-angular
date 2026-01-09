@@ -8741,6 +8741,10 @@
   // TODO New key - Add a translation
   "suggestion.source.openaire": "OpenAIRE Graph",
 
+  //  "suggestion.source.orcidWorks": "ORCID",
+  // TODO New key - Add a translation
+  "suggestion.source.orcidWorks": "ORCID",
+
   // "suggestion.from.source": "from the ",
   // TODO New key - Add a translation
   "suggestion.from.source": "from the ",
@@ -8756,6 +8760,10 @@
   // "suggestion.type.openaire": "OpenAIRE",
   // TODO New key - Add a translation
   "suggestion.type.openaire": "OpenAIRE",
+
+  // "suggestion.type.orcidWorks": "Publication",
+  // TODO New key - Add a translation
+  "suggestion.type.orcidWorks": "Publication",
 
   // "register-email.title": "New user registration",
   "register-email.title": "Registrazione nuovo utente",
