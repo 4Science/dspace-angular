@@ -5,7 +5,7 @@
         <ng-container *ngComponentOutlet="entry; injector: objectInjector;"></ng-container>
       }
       <div ngbDropdown #itemOptions="ngbDropdown" placement="bottom-right"
-        class="float-right ml-1" [ngClass]="optionCount === 0 ? 'd-none' : 'd-inline-block'">
+        class="float-end ms-1" [ngClass]="optionCount === 0 ? 'd-none' : 'd-inline-block'">
         <button class="btn btn-outline-primary" id="context-menu" ngbDropdownToggle>
           <i class="fas fa-ellipsis-h" aria-hidden="true"></i>
         </button>

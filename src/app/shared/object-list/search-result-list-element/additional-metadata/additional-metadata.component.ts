@@ -2,10 +2,6 @@ import {
   AsyncPipe,
   DatePipe,
   NgClass,
-  NgForOf,
-  NgIf,
-  NgSwitch,
-  NgSwitchCase,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -43,7 +39,6 @@ import {
   isNotEmpty,
 } from '../../../empty.util';
 import { MetadataLinkViewComponent } from '../../../metadata-link-view/metadata-link-view.component';
-import { VarDirective } from '../../../utils/var.directive';
 
 interface LinkData {
   href: string,
@@ -59,13 +54,8 @@ interface LinkData {
     DatePipe,
     MetadataLinkViewComponent,
     NgClass,
-    NgForOf,
-    NgIf,
-    NgSwitch,
-    NgSwitchCase,
     NgTemplateOutlet,
     TranslateModule,
-    VarDirective,
   ],
 })
 export class AdditionalMetadataComponent implements OnInit {

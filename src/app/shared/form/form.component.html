@@ -74,14 +74,14 @@
               <ng-content select="[before]"></ng-content>
               @if (displayReset) {
                 <button type="reset" class="btn btn-outline-secondary" (click)="reset()">
-                  <i class="fas fa-undo-alt mr-1" aria-hidden="true"></i>{{resetLabel | translate}}
+                  <i class="fas fa-undo-alt me-1" aria-hidden="true"></i>{{resetLabel | translate}}
                 </button>
               }
               <ng-content select="[between]"></ng-content>
               @if (displaySubmit) {
                 <button type="submit" class="btn btn-primary" (click)="onSubmit()"
                   [dsBtnDisabled]="(isValid() | async) !== true">
-                  <i class="fas fa-save mr-1" aria-hidden="true"></i> {{submitLabel | translate}}
+                  <i class="fas fa-save me-1" aria-hidden="true"></i> {{submitLabel | translate}}
                 </button>
               }
               <ng-content select="[after]"></ng-content>

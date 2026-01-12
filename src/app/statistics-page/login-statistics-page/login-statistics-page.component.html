@@ -8,34 +8,30 @@
         <input class="form-control filter-input" placeholder="{{ 'statistics.login.page.startDate' | translate }}"
           name="dp" [(ngModel)]="dateFrom" (ngModelChange)="onSearchFilterChange()" ngbDatepicker
           #df="ngbDatepicker" />
-        <div class="input-group-append">
           <button class="btn btn-outline-secondary" (click)="df.toggle()" type="button">
             <i class="far fa-calendar-alt"></i>
           </button>
-        </div>
       </div>
     </div>
     <div class="form-group">
-      <div class="input-group ml-2">
+      <div class="input-group ms-2">
         <input class="form-control filter-input" placeholder="{{ 'statistics.login.page.endDate' | translate }}"
           name="dp" [(ngModel)]="dateTo" (ngModelChange)="onSearchFilterChange()" ngbDatepicker
           #dt="ngbDatepicker" />
 
-        <div class="input-group-append">
           <button class="btn btn-outline-secondary" (click)="dt.toggle()" type="button">
             <i class="far fa-calendar-alt"></i>
           </button>
-        </div>
       </div>
     </div>
     <div class="form-group">
-      <div class="input-group ml-2 mr-2">
+      <div class="input-group ms-2 me-2">
         <input type="number" min="1" class="form-control filter-input" placeholder="{{ 'statistics.login.page.max' | translate }}"
           name="max" [(ngModel)]="max" (ngModelChange)="onSearchFilterChange()" />
       </div>
     </div>
     <div class="form-group">
-      <div class="input-group ml-2">
+      <div class="input-group ms-2">
         <button class="btn btn-secondary" (click)="resetFilters()" type="button">
           <i class="fas fa-eraser"></i> {{ 'statistics.login.page.reset' | translate }}
         </button>
@@ -61,7 +57,7 @@
         <tbody>
           @for (login of (logins$ | async); track login; let i = $index) {
             <tr>
-              <td class="align-middle text-center font-weight-bold">{{ i + 1 }}</td>
+              <td class="align-middle text-center fw-bold">{{ i + 1 }}</td>
               <td class="align-middle text-center">{{login.name}}</td>
               <td class="align-middle text-center">{{login.email}}</td>
               <td class="align-middle text-center">{{login.count}}</td>

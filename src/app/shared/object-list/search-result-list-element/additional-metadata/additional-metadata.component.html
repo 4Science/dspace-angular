@@ -1,10 +1,10 @@
 @if (additionalMetadataFields) {
   @for (metadataFieldConfiguration of (additionalMetadataFields ?? []); track $index) {
     @for (metadataItem of (metadataFieldConfiguration ?? []); track $index) {
-      <div [ngClass]="{'d-inline-block mr-1': metadataFieldConfiguration.length > 1}">
+      <div [ngClass]="{'d-inline-block me-1': metadataFieldConfiguration.length > 1}">
 
         <ng-template #label>
-          <span class="font-weight-bold mr-1 text-muted">{{metadataItem.label | translate}}:</span>
+          <span class="fw-bold me-1 text-muted">{{metadataItem.label | translate}}:</span>
         </ng-template>
 
         @for (

@@ -4,6 +4,7 @@ import {
 } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { ItemPageCcLicenseFieldComponent } from '../../../../../../../item-page/simple/field-components/specific-field/cc-license/item-page-cc-license-field.component';
 import { CcLicenseLargeComponent } from './cc-license-large.component';
 
 describe('CcLicenseLargeComponent', () => {
@@ -34,7 +35,12 @@ describe('CcLicenseLargeComponent', () => {
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
       ],
-    }).compileComponents();
+    }).overrideComponent(CcLicenseLargeComponent, {
+      remove: {
+        imports: [ItemPageCcLicenseFieldComponent],
+      },
+    })
+      .compileComponents();
 
     fixture = TestBed.createComponent(CcLicenseLargeComponent);
     component = fixture.componentInstance;

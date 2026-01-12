@@ -96,7 +96,7 @@ export class ResourcePolicyEntryComponent implements OnInit {
   }
 
   /**
-   * Returns a date in simplified format (YYYY-MM-DD).
+   * Returns a date in simplified format (yyyy-MM-DD).
    *
    * @param date
    * @return a string with formatted date

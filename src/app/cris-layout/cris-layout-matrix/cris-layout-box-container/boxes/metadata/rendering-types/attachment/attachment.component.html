@@ -5,7 +5,7 @@
         <ds-file-download-link [bitstream]="attachment" [enableRequestACopy]="true" [item]="item" [showIcon]="true">
           @if (fileName(attachment)) {
             <span data-test="title">@if (getType(attachment)) {
-              <span data-test="type" class="font-weight-bold">{{getType(attachment) | titlecase}}: </span>
+              <span data-test="type" class="fw-bold">{{getType(attachment) | titlecase}}: </span>
             }{{fileName(attachment)}} ({{getSize(attachment) | dsFileSize}})</span>
           }
         </ds-file-download-link>

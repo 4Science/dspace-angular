@@ -153,7 +153,7 @@ describe('PersonSearchResultListElementComponent', () => {
     });
 
     it('should show the job title span', () => {
-      const jobTitleField = fixture.debugElement.query(By.css('div.item-list-job-title'));
+      const jobTitleField = fixture.debugElement.query(By.css('span.item-list-job-title'));
       expect(jobTitleField).not.toBeNull();
     });
   });

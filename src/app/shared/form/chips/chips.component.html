@@ -91,7 +91,7 @@
     @for (c of chips.getChips(); track c; let i = $index) {
       <ng-template #tipContent>
         @for (tip of (tipText$ | async); track tip) {
-          <p class="text-left p-0 m-0">
+          <p class="text-start p-0 m-0">
             {{tip}}
           </p>
         }

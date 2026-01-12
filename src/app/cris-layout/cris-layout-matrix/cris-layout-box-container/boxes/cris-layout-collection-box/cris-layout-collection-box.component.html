@@ -31,9 +31,9 @@
           @if ((isLoading$ | async) !== true && (hasMore$ | async) === true) {
             <a
               (click)="$event.preventDefault(); handleLoadMore()"
-              class="d-block" [class.ml-3]="isInline"
+              class="d-block" [class.ms-3]="isInline"
               role="button" href="javascript:void(0);">
-              <i class="mr-2"
+              <i class="me-2"
               [ngClass]="isInline ? 'fa fa-chevron-right' : 'fa fa-chevron-down'"></i>{{'cris-layout.rendering.collections.load-more' | translate}}
             </a>
           }

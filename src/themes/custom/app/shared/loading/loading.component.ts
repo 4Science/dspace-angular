@@ -1,8 +1,3 @@
-import {
-  NgIf,
-  NgSwitch,
-  NgSwitchCase,
-} from '@angular/common';
 import { Component } from '@angular/core';
 
 import { AlertComponent } from '../../../../../app/shared/alert/alert.component';
@@ -16,9 +11,6 @@ import { LoadingComponent as BaseComponent } from '../../../../../app/shared/loa
   // templateUrl: './loading.component.html'
   imports: [
     AlertComponent,
-    NgIf,
-    NgSwitch,
-    NgSwitchCase,
   ],
 })
 export class LoadingComponent extends BaseComponent {

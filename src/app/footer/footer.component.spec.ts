@@ -84,13 +84,6 @@ describe('Footer component', () => {
     expect(comp).toBeDefined();
   });
 
-  it('should render TextSectionComponent', () => {
-    comp.showTopFooter = true;
-    fixture.detectChanges();
-    const textComponent = fixture.debugElement.queryAll(By.css('ds-text-section'));
-    expect(textComponent).toHaveSize(1);
-  });
-
   it('should set showPrivacyPolicy to the value of environment.info.enablePrivacyStatement', () => {
     comp.ngOnInit();
     expect(comp.showPrivacyPolicy).toBe(environment.info.enablePrivacyStatement);

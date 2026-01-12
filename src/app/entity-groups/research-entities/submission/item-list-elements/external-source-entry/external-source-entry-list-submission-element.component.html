@@ -6,7 +6,7 @@
   @if (issued || contributors?.length) {
     <div data-test="issued-contributor" class="d-flex align-items-center text-muted">
       @if (issued) {
-        <span data-test="issued" class="item-list-date">({{issued.value | date: 'YYYY-MM-dd'}})&nbsp;</span>
+        <span data-test="issued" class="item-list-date">({{issued.value | date: 'yyyy-MM-dd'}})&nbsp;</span>
       }
       @if (contributors?.length) {
         <ds-truncatable [id]="object.id">
@@ -51,7 +51,7 @@
   <div>
     <p>
       <button type="button" class="btn btn-link p-0" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed">
-        <span class="badge badge-secondary">
+        <span class="badge bg-secondary">
           {{ object.matchObjects.length }}
         </span>
         {{'submission.sections.external-source.duplicate-matches.header' | translate}}

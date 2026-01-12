@@ -2,7 +2,7 @@
   <a [dsRedirect]="href">
     <div class="row">
       @if (metric && metric.icon) {
-        <div class="col-1 text-left">
+        <div class="col-1 text-start">
           <span class="icon-size">
             <i [class]="metric.icon"></i>
           </span>
@@ -10,7 +10,7 @@
       }
       <div class="col">
         <div class="d-flex justify-content-center">
-          <div class="font-weight-bold">
+          <div class="fw-bold">
             {{ "item.page.metric.label.download" | translate }}
           </div>
         </div>

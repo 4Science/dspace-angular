@@ -842,7 +842,7 @@ export class DefaultAppConfig implements AppConfig {
       defaultMetadataValueColStyle: 'col-9',
     },
     collectionsBox: {
-      defaultCollectionsLabelColStyle: 'col-3 font-weight-bold',
+      defaultCollectionsLabelColStyle: 'col-3 fw-bold',
       defaultCollectionsValueColStyle: 'col-9',
       isInline: true,
     },

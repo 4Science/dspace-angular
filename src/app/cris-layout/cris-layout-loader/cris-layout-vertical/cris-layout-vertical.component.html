@@ -3,7 +3,7 @@
     <div class="vertical-layout">
       <ds-cris-layout-sidebar (selectedTabChange)="selectedTabChanged($event)" [showNav]="tabs.length > 1" [tabs]="tabs" [item]="item">
         @if (showContextMenu) {
-          <div class="container text-right mb-3" [class.px-0]="tabs?.length > 1">
+          <div class="container text-end mb-3" [class.px-0]="tabs?.length > 1">
             <ds-context-menu [contextMenuObject]="item" [contextMenuObjectType]="'ITEM'"></ds-context-menu>
           </div>
         }

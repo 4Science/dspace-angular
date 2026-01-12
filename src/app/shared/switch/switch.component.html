@@ -11,7 +11,7 @@
   @for (option of options; track option) {
     @if (selectedValue === option.value) {
       <span [class]="selectedValue === option.value ? 'text-' + option.labelColor : ''"
-            class="visibility-label ml-2 font-weight-bold">
+            class="visibility-label ms-2 fw-bold">
         {{ option.label | translate }}
       </span>
     }

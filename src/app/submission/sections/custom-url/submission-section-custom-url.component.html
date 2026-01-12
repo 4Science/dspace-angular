@@ -20,7 +20,7 @@
       <ul class="list-group">
         @for (redirectedUrl of redirectedUrls; track redirectedUrl; let i = $index) {
           <li class="list-item mb-2">
-            <div class="list-group-item mr-2">
+            <div class="list-group-item me-2">
               <span>{{frontendUrl+'/'+redirectedUrl}}</span>
             </div>
             <button type="button" class="btn btn-secondary" role="button" title="{{'submission.sections.custom-url.label.remove' | translate}}"

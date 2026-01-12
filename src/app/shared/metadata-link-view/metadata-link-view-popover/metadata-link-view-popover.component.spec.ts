@@ -102,7 +102,7 @@ describe('MetadataLinkViewPopoverComponent', () => {
   });
 
   it('should display the item title', () => {
-    const titleElement = fixture.debugElement.query(By.css('.font-weight-bold.h4'));
+    const titleElement = fixture.debugElement.query(By.css('.fw-bold.h4'));
     expect(titleElement.nativeElement.textContent).toContain('Test Title');
   });
 

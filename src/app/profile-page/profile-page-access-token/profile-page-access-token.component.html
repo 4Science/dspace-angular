@@ -12,11 +12,11 @@
     }
     <div class="space-children-mr">
       @if ((tokenAlreadyExists | async)) {
-        <button class="btn btn-danger float-right" data-test="revokeBtn" (click)="revokeToken()">
+        <button class="btn btn-danger float-end" data-test="revokeBtn" (click)="revokeToken()">
           <i class="fas fa-trash-alt"></i> {{'profile.card.access-token.delete' | translate}}
         </button>
       }
-      <button class="btn btn-primary float-right mr-2" (click)="generateToken()" data-test="createBtn">
+      <button class="btn btn-primary float-end me-2" (click)="generateToken()" data-test="createBtn">
         <i class="fas fa-key"></i> {{'profile.card.access-token.create' | translate}}
       </button>
     </div>
@@ -28,15 +28,11 @@
     <ds-alert [type]="'alert-info'"
     [content]="'profile.card.access-token.copy-info'"></ds-alert>
     <div class="input-group mb-3" data-test="tokenGroup">
-      <div class="input-group-prepend">
-        <span class="input-group-text"><i class="fas fa-check text-success"></i></span>
-      </div>
+      <span class="input-group-text"><i class="fas fa-check text-success"></i></span>
       <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" value="{{generatedToken | async}}" readonly data-test="tokenInput">
-      <div class="input-group-append">
         <button class="input-group-text btn btn-link btn-sm" (click)="copyTokenToClipboard()" title="{{'profile.card.access-token.copy' | translate}}">
           <i class="far fa-copy"></i>
         </button>
-      </div>
     </div>
   </div>
 }

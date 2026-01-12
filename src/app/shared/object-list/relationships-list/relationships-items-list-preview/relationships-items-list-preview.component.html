@@ -1,8 +1,8 @@
 @if (item) {
-  <div class="item-details-preview" @fadeInOut [ngClass]="{ 'mt-3 mb-3 pl-3' : viewConfig === 'relationship-sort-list'}">
+  <div class="item-details-preview" @fadeInOut [ngClass]="{ 'mt-3 mb-3 ps-3' : viewConfig === 'relationship-sort-list'}">
     @if (viewConfig === 'relationship-sort-list') {
       <div class="top-header">
-        <div class="drag-handle text-muted float-left pr-1" [class.invisible]="pendingChanges">
+        <div class="drag-handle text-muted float-start pe-1" [class.invisible]="pendingChanges">
           <i class="fas fa-grip-vertical fa-fw"></i>
         </div>
         <ds-type-badge [object]="item"></ds-type-badge>
@@ -51,7 +51,7 @@
   <ds-item-submitter [object]="item"></ds-item-submitter>
 }
 @if (viewConfig === 'relationship-sort-list') {
-  <div class="d-flex justify-content-end mr-3">
+  <div class="d-flex justify-content-end me-3">
     <button class="btn btn-danger btn-sm"
       [dsBtnDisabled]="processing || pendingChanges"
       (click)="dispatchDelete()">

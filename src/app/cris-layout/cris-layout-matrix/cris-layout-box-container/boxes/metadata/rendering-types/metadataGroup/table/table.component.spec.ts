@@ -57,7 +57,7 @@ describe('TableComponent', () => {
     label: 'Author(s)',
     rendering: FieldRenderingType.TABLE,
     style: 'container row',
-    styleLabel: 'font-weight-bold col-4',
+    styleLabel: 'fw-bold col-4',
     styleValue: 'col',
     metadataGroup: {
       leading: 'dc.contributor.author',
@@ -68,7 +68,7 @@ describe('TableComponent', () => {
           rendering: 'TEXT',
           fieldType: 'METADATA',
           style: null,
-          styleLabel: 'font-weight-bold col-0',
+          styleLabel: 'fw-bold col-0',
           styleValue: 'col',
         },
         {
@@ -77,7 +77,7 @@ describe('TableComponent', () => {
           rendering: 'TEXT',
           fieldType: 'METADATA',
           style: null,
-          styleLabel: 'font-weight-bold col-0',
+          styleLabel: 'fw-bold col-0',
           styleValue: 'col',
         },
       ],

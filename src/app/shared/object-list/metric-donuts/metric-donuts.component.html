@@ -1,8 +1,8 @@
 @if ((metrics$ | async).length) {
-  <div class="d-flex flex-column ml-3 gapy-1">
+  <div class="d-flex flex-column ms-3 gapy-1">
     @for (metric of (metrics$ | async); track identify($index, metric)) {
       <ds-metric-loader
-        class="d-inline-block mr-1"
+        class="d-inline-block me-1"
         [metric]="metric"
         [isListElement]="true"
         [hideLabel]="true"

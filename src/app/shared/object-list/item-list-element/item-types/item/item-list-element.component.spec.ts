@@ -21,12 +21,16 @@ import {
 import { environment } from '../../../../../../environments/environment.test';
 import { AuthService } from '../../../../../core/auth/auth.service';
 import { DSONameService } from '../../../../../core/breadcrumbs/dso-name.service';
+import { LinkService } from '../../../../../core/cache/builders/link.service';
 import { AuthorizationDataService } from '../../../../../core/data/feature-authorization/authorization-data.service';
 import { Item } from '../../../../../core/shared/item.model';
 import { ITEM } from '../../../../../core/shared/item.resource-type';
 import { METRIC } from '../../../../../core/shared/metric.resource-type';
 import { XSRFService } from '../../../../../core/xsrf/xsrf.service';
+import { OrejimeService } from '../../../../cookies/orejime.service';
+import { OrejimeServiceStub } from '../../../../cookies/orejime.service.stub';
 import { DSONameServiceMock } from '../../../../mocks/dso-name.service.mock';
+import { getMockLinkService } from '../../../../mocks/link-service.mock';
 import { getMockThemeService } from '../../../../mocks/theme-service.mock';
 import { ActivatedRouteStub } from '../../../../testing/active-router.stub';
 import { AuthServiceStub } from '../../../../testing/auth-service.stub';
@@ -111,6 +115,8 @@ describe('ItemListElementComponent', () => {
         { provide: TruncatableService, useValue: truncatableService },
         { provide: XSRFService, useValue: {} },
         { provide: APP_DATA_SERVICES_MAP, useValue: mockDataServiceMap },
+        { provide: LinkService, useValue: getMockLinkService() },
+        { provide: OrejimeService, useValue: new OrejimeServiceStub() },
         provideMockStore(),
         TestDataService,
       ],

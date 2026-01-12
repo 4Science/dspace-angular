@@ -8,8 +8,6 @@ import {
 import {
   AsyncPipe,
   isPlatformBrowser,
-  NgForOf,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -60,8 +58,6 @@ const TOOLTIP_TEXT_LIMIT = 21;
     CdkDropList,
     CdkDropListGroup,
     NgbTooltipModule,
-    NgForOf,
-    NgIf,
     NgTemplateOutlet,
     TranslateModule,
   ],

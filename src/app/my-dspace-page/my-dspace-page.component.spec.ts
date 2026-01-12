@@ -138,6 +138,10 @@ describe('MyDSpacePageComponent', () => {
     myDSpaceConfigurationServiceStub.getAvailableConfigurationOptions.and.returnValue(
       of(configurationList),
     );
+    // Ensure currentConfiguration$ is an Observable for AsyncPipe usage in the template
+    myDSpaceConfigurationServiceStub.getCurrentConfiguration.and.returnValue(
+      of(MyDSpaceConfigurationValueType.Workspace),
+    );
 
     fixture.detectChanges();
   });

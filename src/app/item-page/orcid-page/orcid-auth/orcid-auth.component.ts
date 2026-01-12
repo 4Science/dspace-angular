@@ -150,9 +150,9 @@ export class OrcidAuthComponent implements OnInit, OnChanges {
   getOrcidNotLinkedMessage(): Observable<string> {
     const orcid = this.item.firstMetadataValue('person.identifier.orcid');
     if (orcid) {
-      return this.translateService.instant('person.page.orcid.orcid-not-linked-message', { 'orcid': orcid });
+      return this.translateService.get('person.page.orcid.orcid-not-linked-message', { 'orcid': orcid });
     } else {
-      return this.translateService.instant('person.page.orcid.no-orcid-message');
+      return this.translateService.get('person.page.orcid.no-orcid-message');
     }
   }
 

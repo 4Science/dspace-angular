@@ -9,7 +9,7 @@
         <h2>{{'statistics.reports.title' | translate}}</h2>
         <ul class="nav nav-pills mb-2">
           @for (report of (reports | dsFilterMap : false); track report) {
-            <li class="nav-item mr-3">
+            <li class="nav-item me-3">
               <a class="nav-link" [ngClass]="{'active' : !!selectedReport && selectedReport.id === report.id}"
                 href="#"
                 (click)="$event.preventDefault();$event.stopPropagation();changeReport(report)">

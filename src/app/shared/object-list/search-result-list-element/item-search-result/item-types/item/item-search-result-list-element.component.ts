@@ -127,7 +127,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
    * Check if item has Third-party metrics blocked by consents
    */
   ngAfterViewInit() {
-    if (this.showMetrics && this.orejimeService) {
+    if (this.showMetrics && this.orejimeService && this.orejimeService.watchConsentUpdates instanceof Function) {
       this.orejimeService.watchConsentUpdates();
 
       this.hasLoadedThirdPartyMetrics$ = combineLatest([

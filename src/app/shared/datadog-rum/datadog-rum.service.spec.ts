@@ -50,7 +50,9 @@ describe('DatadogRumService', () => {
       providers: [
         { provide: DatadogRumService, useClass: BrowserDatadogRumService },
         provideMockStore({ initialState }),
-        { provide: OrejimeService, useValue: orejimeServiceSpy },
+        {
+          provide: OrejimeService, useValue: orejimeServiceSpy,
+        },
       ],
     });
     service = TestBed.inject(DatadogRumService) as BrowserDatadogRumService;
@@ -72,8 +74,10 @@ describe('DatadogRumService', () => {
     environment.datadogRum = datadogRumEnvironmentOptions;
     service.initDatadogRum();
     expect(store.dispatch).toHaveBeenCalledWith(jasmine.objectContaining({
-      isInitialized: true,
-      isRunning: true,
+      payload: {
+        isInitialized: true,
+        isRunning: true,
+      },
     }));
   });
 
@@ -84,7 +88,9 @@ describe('DatadogRumService', () => {
     environment.datadogRum = datadogRumEnvironmentOptions;
     service.initDatadogRum();
     expect(store.dispatch).toHaveBeenCalledWith(jasmine.objectContaining({
-      isRunning: true,
+      payload: {
+        isRunning: true,
+      },
     }));
   });
 
@@ -94,7 +100,9 @@ describe('DatadogRumService', () => {
     consentsAccepted.datadog = false;
     service.initDatadogRum();
     expect(store.dispatch).toHaveBeenCalledWith(jasmine.objectContaining({
-      isRunning: false,
+      payload: {
+        isRunning: false,
+      },
     }));
   });
 

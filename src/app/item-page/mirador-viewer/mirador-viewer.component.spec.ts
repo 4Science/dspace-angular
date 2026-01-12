@@ -271,14 +271,19 @@ describe('MiradorViewerComponent in development mode', () => {
       comp = fixture.componentInstance;
       comp.object = getItem(noMetadata);
       comp.iframeViewerUrl = of('testUrl');
+      viewerService.showEmbeddedViewer.and.returnValue(false);
+      comp.getURL = () => null;
+      comp.searchable = false;
+      comp.ngOnInit();
       fixture.detectChanges();
     }));
 
-    it('should not embed the viewer', (() => {
+    it('should not embed the viewer', (waitForAsync(() => {
+      fixture.detectChanges();
       const value = fixture.debugElement
         .nativeElement.querySelector('#mirador-viewer');
       expect(value).toBeNull();
-    }));
+    })));
 
     it('should show message', (() => {
       const value = fixture.debugElement

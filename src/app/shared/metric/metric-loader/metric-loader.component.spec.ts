@@ -20,6 +20,7 @@ import {
   CookieConsents,
   OrejimeService,
 } from '../../cookies/orejime.service';
+import { OrejimeServiceStub } from '../../cookies/orejime.service.stub';
 import { BaseMetricComponent } from './base-metric.component';
 
 
@@ -60,7 +61,7 @@ describe('MetricLoaderComponent', () => {
       imports: [MetricLoaderComponent, MetricStyleConfigPipe],
       providers: [
         { provide: MetricLoaderService, useValue: metricLoaderService },
-        { provide: OrejimeService, useValue: orejimeServiceSpy },
+        { provide: OrejimeService, useValue: new OrejimeServiceStub() },
       ],
     })
       .compileComponents();

@@ -75,7 +75,7 @@
   <div class="modal-header">
     <h4 class="modal-title">{{'submission.workflow.tasks.claimed.reject.reason.title' | translate}}</h4>
     <button type="button"
-      class="close"
+      class="btn-close"
       aria-label="Close"
       (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
@@ -90,17 +90,19 @@
         formControlName="reason"
         rows="4"
       placeholder="{{'submission.sections.detect-duplicate.note-placeholder' | translate}}"></textarea>
-      <button id="btn-chat"
-        class="btn btn-danger btn-lg btn-block mt-3"
-        [dsBtnDisabled]="!rejectForm.valid"
-        type="submit">
-        @if ((processingReject | async) === true) {
-          <span><i class='fas fa-circle-notch fa-spin'></i> {{'submission.workflow.tasks.generic.processing' | translate}}</span>
-        }
-        @if ((processingReject | async) !== true) {
-          <span>{{'submission.sections.detect-duplicate.duplicate' | translate}}</span>
-        }
-      </button>
+      <div class="d-grid">
+        <button id="btn-chat"
+                class="btn btn-danger btn-lg mt-3"
+                [dsBtnDisabled]="!rejectForm.valid"
+                type="submit">
+          @if ((processingReject | async) === true) {
+            <span><i class='fas fa-circle-notch fa-spin'></i> {{'submission.workflow.tasks.generic.processing' | translate}}</span>
+          }
+          @if ((processingReject | async) !== true) {
+            <span>{{'submission.sections.detect-duplicate.duplicate' | translate}}</span>
+          }
+        </button>
+      </div>
     </form>
   </div>
 </ng-template>

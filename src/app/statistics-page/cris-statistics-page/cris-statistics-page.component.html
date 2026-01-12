@@ -22,22 +22,18 @@
                 <div class="input-group">
                   <input class="form-control date-input" placeholder="Start Date" name="dp" [(ngModel)]="dateFrom" (ngModelChange)="startDateChanged()"
                     ngbDatepicker #df="ngbDatepicker">
-                  <div class="input-group-append">
                     <button class="btn btn-outline-secondary" title="Start Date" (click)="df.toggle()" type="button">
                       <i class="far fa-calendar-alt"></i>
                     </button>
-                  </div>
                 </div>
               </div>
               <div class="form-group">
-                <div class="input-group ml-2">
+                <div class="input-group ms-2">
                   <input class="form-control date-input" placeholder="End Date" name="dp" [(ngModel)]="dateTo" (ngModelChange)="endDateChanged()"
                     ngbDatepicker #dt="ngbDatepicker">
-                  <div class="input-group-append">
                     <button class="btn btn-outline-secondary" title="End Date" (click)="dt.toggle()" type="button">
                       <i class="far fa-calendar-alt"></i>
                     </button>
-                  </div>
                 </div>
               </div>
             </div>

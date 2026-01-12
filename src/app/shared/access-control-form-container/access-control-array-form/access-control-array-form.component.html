@@ -47,13 +47,11 @@
                 placement="top-start top-end bottom-start bottom-end"
                 #d="ngbDatepicker"
                 />
-              <div class="input-group-append">
                 <button
                   class="btn btn-outline-secondary fas fa-calendar"
                   [dsBtnDisabled]="ngForm.disabled"
                   (click)="d.toggle()" type="button">
                 </button>
-              </div>
             </div>
             <small class="form-text text-muted">
               {{'access-control-option-start-date-note' | translate}}
@@ -77,13 +75,11 @@
                 placement="top-start top-end bottom-start bottom-end"
                 #d1="ngbDatepicker"
                 />
-              <div class="input-group-append">
                 <button
                   type="button" class="btn btn-outline-secondary fas fa-calendar"
                   [dsBtnDisabled]="ngForm.disabled"
                   (click)="d1.toggle()">
                 </button>
-              </div>
             </div>
             <small class="form-text text-muted">
               {{'access-control-option-end-date-note' | translate}}

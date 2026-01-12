@@ -383,7 +383,7 @@ export const environment: BuildConfig = {
     enableEndUserAgreement: true,
     enablePrivacyStatement: true,
     enableCOARNotifySupport: true,
-    enableCookieConsentPopup: true,
+    enableCookieConsentPopup: false,
     //Configuration for third-party metrics in Orejime
     metricsConsents: [
       {
@@ -611,7 +611,7 @@ export const environment: BuildConfig = {
       defaultMetadataValueColStyle: 'col-9',
     },
     collectionsBox: {
-      defaultCollectionsLabelColStyle: 'col-3 font-weight-bold',
+      defaultCollectionsLabelColStyle: 'col-3 fw-bold',
       defaultCollectionsValueColStyle: 'col-9',
       isInline: true,
     },

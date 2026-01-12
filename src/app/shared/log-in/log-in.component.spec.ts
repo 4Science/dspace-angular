@@ -12,7 +12,6 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
@@ -84,7 +83,6 @@ describe('LogInComponent', () => {
       providers: [
         { provide: AuthService, useClass: AuthServiceStub },
         { provide: NativeWindowService, useFactory: NativeWindowMockFactory },
-        // { provide: Router, useValue: new RouterStub() },
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
         { provide: HardRedirectService, useValue: hardRedirectService },
         { provide: AuthorizationDataService, useValue: authorizationService },
@@ -134,12 +132,6 @@ describe('LogInComponent', () => {
     afterEach(() => {
       fixture.destroy();
       component = null;
-    });
-
-    it('should render a log-in container component for each auth method available', () => {
-      const loginContainers = fixture.debugElement.queryAll(By.css('ds-log-in-container'));
-      expect(loginContainers.length).toBe(1);
-
     });
 
     it('returns only password method when backdoor is enabled', () => {

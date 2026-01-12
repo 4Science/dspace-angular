@@ -7,19 +7,17 @@
       <input #searchInput type="text" class="form-control" [(ngModel)]="searchText" (keyup.enter)="search()"
         [attr.aria-label]="'vocabulary-treeview.search.form.search-placeholder' | translate"
         [placeholder]="'vocabulary-treeview.search.form.search-placeholder' | translate">
-      <div class="input-group-append" id="button-addon4">
         <button class="btn btn-outline-primary" type="button" (click)="search()" [dsBtnDisabled]="!isSearchEnabled()"
           [attr.aria-label]="'vocabulary-treeview.search.form.search' | translate" role="button" tabindex="0">
           <span><i class="fas fa-search"></i> {{'vocabulary-treeview.search.form.search' | translate}}</span>
         </button>
-      </div>
     </div>
-    <button class="btn btn-outline-secondary ml-3 flex-shrink-0" type="button" (click)="reset()"
+    <button class="btn btn-outline-secondary ms-3 flex-shrink-0" type="button" (click)="reset()"
       [attr.aria-label]="'vocabulary-treeview.search.form.reset' | translate" role="button" tabindex="0">
       <span><i class="fas fa-eraser"></i> {{'vocabulary-treeview.search.form.reset' | translate}}</span>
     </button>
     @if (showAdd && !this.vocabularyOptions.closed) {
-      <button class="btn btn-outline-secondary ml-3 flex-shrink-0" type="button" (click)="add()"
+      <button class="btn btn-outline-secondary ms-3 flex-shrink-0" type="button" (click)="add()"
         [attr.aria-label]="'vocabulary-treeview.search.form.add' | translate" role="button" tabindex="0">
         <span><i class="fas fa-plus"></i> {{'vocabulary-treeview.search.form.add' | translate}}</span>
       </button>

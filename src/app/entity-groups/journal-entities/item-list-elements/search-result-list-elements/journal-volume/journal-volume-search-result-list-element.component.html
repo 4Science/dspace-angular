@@ -1,6 +1,6 @@
 <div class="row">
   @if (showThumbnails) {
-    <div class="col-3 col-xl-2 pr-sm-0">
+    <div class="col-3 col-xl-2 pe-sm-0">
       @if (linkType !== linkTypes.None) {
         <a [target]="(linkType === linkTypes.ExternalLink) ? '_blank' : '_self'"
           [attr.rel]="(linkType === linkTypes.ExternalLink) ? 'noopener noreferrer' : null"

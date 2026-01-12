@@ -36,7 +36,7 @@
                 [routerLink]="itemBaseUrl + subTab.shortname"
                 (click)="$event.stopPropagation();$event.preventDefault();selectTab(subTab)">
                 <span id="sidebarName-{{subTab.id}}"
-                  class="pl-3 section-header-text"
+                  class="ps-3 section-header-text"
                 [innerHTML]="getTabHeader(subTab)"></span>
               </a>
             </li>

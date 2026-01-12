@@ -2,8 +2,9 @@
   <div class="container">
     <div class="background-image">
       <div class="container">
-        <div class="jumbotron jumbotron-fluid">
-          @if (hasHomeNewsMetadata) {
+        <div class="bg-light p-5 mb-4 rounded-3">
+          <div class="container-fluid py-5">
+            @if (hasHomeNewsMetadata) {
             <ds-text-section [sectionId]="'site'"
                              [textRowSection]="homeNewsSection"
                              [site]="(site$ | async)">
@@ -26,6 +27,7 @@
                                                      target="_blank" role="link" tabindex="0">leading institutions using DSpace</a>.
             </p>
           }
+          </div>
         </div>
       </div>
       <small class="credits">Photo by

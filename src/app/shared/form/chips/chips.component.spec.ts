@@ -113,9 +113,15 @@ describe('ChipsComponent test suite', () => {
 
     it('should update chips item order when drag and drop end', fakeAsync(() => {
       spyOn(chipsComp.chips, 'updateOrder');
-      const de = chipsFixture.debugElement.query(By.css('div[role="list"]'));
+      const listItems = chipsFixture.debugElement.queryAll(By.css('div[role="listitem"]'));
 
-      de.triggerEventHandler('cdkDropListDropped', { previousIndex: 0, currentIndex: 1 });
+      const dropEvent = {
+        previousContainer: { data: { index: 0 } },
+        container: { data: { index: 1 } },
+        currentIndex: 0,
+      } as any;
+
+      listItems[1].triggerEventHandler('cdkDropListDropped', dropEvent);
 
       expect(chipsComp.dragged).toBe(-1);
       expect(chipsComp.chips.updateOrder).toHaveBeenCalled();

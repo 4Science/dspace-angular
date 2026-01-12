@@ -1,9 +1,6 @@
 import {
   isPlatformBrowser,
   Location,
-  NgIf,
-  NgSwitch,
-  NgSwitchCase,
 } from '@angular/common';
 import {
   ChangeDetectorRef,
@@ -34,9 +31,6 @@ export enum MessageType {
   templateUrl: './loading.component.html',
   imports: [
     AlertComponent,
-    NgIf,
-    NgSwitch,
-    NgSwitchCase,
   ],
 })
 export class LoadingComponent implements OnDestroy, OnInit {

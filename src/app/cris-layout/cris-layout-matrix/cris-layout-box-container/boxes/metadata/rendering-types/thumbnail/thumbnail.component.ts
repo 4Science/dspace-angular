@@ -32,7 +32,7 @@ import { BitstreamRenderingModelComponent } from '../bitstream-rendering-model';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector, dspace-angular-ts/themed-component-selectors
-  selector: 'span[ds-thumbnail].float-left',
+  selector: 'span[ds-thumbnail].float-start',
   templateUrl: './thumbnail.component.html',
   styleUrls: ['./thumbnail.component.scss'],
   imports: [

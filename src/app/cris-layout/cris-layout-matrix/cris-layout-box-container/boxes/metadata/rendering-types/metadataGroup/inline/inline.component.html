@@ -3,7 +3,7 @@
     @for (index of componentsToBeRenderedMap.keys(); track index) {
       <div class="d-flex metadata-group-entry">
         @for (mdg of componentsToBeRenderedMap.get(index); track mdg; let first = $first) {
-          <span class="metadata-group-entry-value" [class.ml-3]="!first">
+          <span class="metadata-group-entry-value" [class.ms-3]="!first">
             <ds-metadata-render class="w-100"
               [item]="item"
               [field]="mdg.field"

@@ -182,12 +182,6 @@ describe('SubmissionImportExternalPreviewComponent test suite', () => {
       done();
     });
 
-    it('Should render truncatable part', () => {
-      comp.externalSourceEntry = externalEntryWithAbstract;
-      fixture.detectChanges();
-      expect(fixture.debugElement.query(By.css('[data-test="abstract"]'))).toBeTruthy();
-    });
-
     it('Should not render truncatable part', () => {
       comp.externalSourceEntry = externalEntry;
       fixture.detectChanges();

@@ -6,7 +6,10 @@ import {
 import { By } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { RemoteDataBuildService } from '../../../../core/cache/builders/remote-data-build.service';
+import { ObjectCacheService } from '../../../../core/cache/object-cache.service';
 import { ItemDataService } from '../../../../core/data/item-data.service';
+import { RequestService } from '../../../../core/data/request.service';
 import { MetadataField } from '../../../../core/metadata/metadata-field.model';
 import { MetadataSchema } from '../../../../core/metadata/metadata-schema.model';
 import { RegistryService } from '../../../../core/registry/registry.service';
@@ -17,9 +20,13 @@ import { Item } from '../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../core/shared/metadata.models';
 import { Vocabulary } from '../../../../core/submission/vocabularies/models/vocabulary.model';
 import { VocabularyService } from '../../../../core/submission/vocabularies/vocabulary.service';
+import { DsDynamicOneboxComponent } from '../../../../shared/form/builder/ds-dynamic-form-ui/models/onebox/dynamic-onebox.component';
 import { DynamicOneboxModel } from '../../../../shared/form/builder/ds-dynamic-form-ui/models/onebox/dynamic-onebox.model';
 import { DsDynamicScrollableDropdownComponent } from '../../../../shared/form/builder/ds-dynamic-form-ui/models/scrollable-dropdown/dynamic-scrollable-dropdown.component';
 import { DynamicScrollableDropdownModel } from '../../../../shared/form/builder/ds-dynamic-form-ui/models/scrollable-dropdown/dynamic-scrollable-dropdown.model';
+import { getMockObjectCacheService } from '../../../../shared/mocks/object-cache.service.mock';
+import { getMockRemoteDataBuildService } from '../../../../shared/mocks/remote-data-build.service.mock';
+import { getMockRequestService } from '../../../../shared/mocks/request.service.mock';
 import { NotificationsService } from '../../../../shared/notifications/notifications.service';
 import { createSuccessfulRemoteDataObject$ } from '../../../../shared/remote-data.utils';
 import { createPaginatedList } from '../../../../shared/testing/utils.test';
@@ -171,10 +178,14 @@ describe('DsoEditMetadataAuthorityFieldComponent', () => {
         { provide: ItemDataService, useValue: itemService },
         { provide: RegistryService, useValue: registryService },
         { provide: NotificationsService, useValue: notificationsService },
+        { provide: RemoteDataBuildService, useValue: getMockRemoteDataBuildService() },
+        { provide: ObjectCacheService, useValue: getMockObjectCacheService() },
+        { provide: RequestService, useValue: getMockRequestService() },
       ],
     }).overrideComponent(DsoEditMetadataAuthorityFieldComponent, {
       remove: {
         imports: [
+          DsDynamicOneboxComponent,
           DsDynamicScrollableDropdownComponent,
         ],
       },

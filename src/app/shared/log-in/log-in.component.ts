@@ -133,7 +133,7 @@ export class LogInComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.authMethodsService.getAuthMethods(AUTH_METHOD_FOR_DECORATOR_MAP, this.excludedAuthMethod).pipe(
+    this.authMethods = this.authMethodsService.getAuthMethods(AUTH_METHOD_FOR_DECORATOR_MAP, this.excludedAuthMethod).pipe(
       combineLatestWith(
         this.route.data.pipe(
           filter(routeData => !!routeData),

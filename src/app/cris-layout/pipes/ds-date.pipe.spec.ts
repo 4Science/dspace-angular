@@ -1,16 +1,22 @@
-import { waitForAsync } from '@angular/core/testing';
+import {
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import { of } from 'rxjs';
 
 import { DsDatePipe } from './ds-date.pipe';
 
 describe('DsDatePipe', () => {
 
   const cdrInstance = Object.assign({
-    detectChanges: () => { /***/ },
-    markForCheck: () => { /***/ },
+    detectChanges: () => { /***/
+    },
+    markForCheck: () => { /***/
+    },
   });
 
   const localeServiceInstance = Object.assign({
-    getCurrentLanguageCode: () => 'en',
+    getCurrentLanguageCode: () => of('en'),
   });
 
   const date = '2020-08-24';
@@ -19,7 +25,10 @@ describe('DsDatePipe', () => {
   let pipe: DsDatePipe;
 
   beforeEach(() => {
-    pipe = new DsDatePipe(cdrInstance, localeServiceInstance);
+    TestBed.configureTestingModule({});
+    TestBed.runInInjectionContext(() => {
+      pipe = new DsDatePipe(cdrInstance as any, localeServiceInstance as any);
+    });
   });
 
   it('create an instance', () => {
@@ -27,32 +36,22 @@ describe('DsDatePipe', () => {
   });
 
   it('Should transform the given date and time', waitForAsync(() => {
-    pipe.transform(`${date}T11:22:33Z`).subscribe(value => {
-      expect(value).toEqual(parsedDate);
-    });
+    expect(pipe.transform(`${date}T11:22:33Z`)).toEqual(parsedDate);
   }));
 
-  it('Should transform the given date (YYYY-MM-DD)', waitForAsync(() => {
-    pipe.transform(date).subscribe(value => {
-      expect(value).toEqual(parsedDate);
-    });
+  it('Should transform the given date (yyyy-MM-DD)', waitForAsync(() => {
+    expect(pipe.transform(date)).toEqual(parsedDate);
   }));
 
-  it('Should transform the given date (YYYY-MM)', waitForAsync(() => {
-    pipe.transform('2020-08').subscribe(value => {
-      expect(value).toEqual('August 2020');
-    });
+  it('Should transform the given date (yyyy-MM)', waitForAsync(() => {
+    expect(pipe.transform('2020-08')).toEqual('August 2020');
   }));
 
   it('Should transform the given date (YYYY)', waitForAsync(() => {
-    pipe.transform('2020').subscribe(value => {
-      expect(value).toEqual('2020');
-    });
+    expect(pipe.transform('2020')).toEqual('2020');
   }));
 
   it('Should not transform invalid dates', waitForAsync(() => {
-    pipe.transform('ABCDE').subscribe(value => {
-      expect(value).toEqual('ABCDE');
-    });
+    expect(pipe.transform('ABCDE')).toEqual('ABCDE');
   }));
 });

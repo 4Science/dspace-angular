@@ -59,6 +59,7 @@ describe('ClaimItemMenuComponent', () => {
       onTranslationChange: new EventEmitter(),
       onLangChange: new EventEmitter(),
       onDefaultLangChange: new EventEmitter(),
+      onFallbackLangChange: new EventEmitter(),
     };
 
     TestBed.configureTestingModule({

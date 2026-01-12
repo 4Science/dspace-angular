@@ -455,6 +455,7 @@ describe('SearchComponent', () => {
     describe('when rendered in SSR', () => {
       beforeEach(() => {
         comp.platformId = 'server';
+        comp.renderOnServerSide = false;
       });
 
       it('should not call search method on init', (done) => {

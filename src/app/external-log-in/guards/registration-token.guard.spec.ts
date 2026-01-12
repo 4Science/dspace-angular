@@ -25,6 +25,7 @@ describe('registrationTokenGuard', () => {
   });
   const epersonRegistrationService = jasmine.createSpyObj('epersonRegistrationService', {
     searchRegistrationByToken: createSuccessfulRemoteDataObject$(registrationWithGroups),
+    searchByTokenAndHandleError: createSuccessfulRemoteDataObject$(registrationWithGroups),
   });
   const ePerson = Object.assign(new EPerson(), {
     id: 'test-eperson',

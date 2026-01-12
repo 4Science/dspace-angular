@@ -22,7 +22,7 @@
 
   </div>
   <div class="modal-footer">
-    <div class="text-right space-children-mr">
+    <div class="text-end space-children-mr">
       <button type="button"
         class="btn btn-outline-secondary"
         (click)="closeModal()">
@@ -41,7 +41,7 @@
       @if (!model.readOnly) {
         <button
           type="button"
-          class="btn btn-primary mr-2"
+          class="btn btn-primary me-2"
           [dsBtnDisabled]="isMandatoryFieldEmpty()"
           (click)="save()">
           @if (item) {

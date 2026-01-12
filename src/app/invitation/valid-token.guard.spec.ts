@@ -22,6 +22,7 @@ describe('validTokenGuard', () => {
 
   const epersonRegistrationService = createSpyObj('epersonRegistrationService', {
     searchRegistrationByToken: jasmine.createSpy('searchRegistrationByToken'),
+    searchByTokenAndHandleError: createSuccessfulRemoteDataObject$(null),
   });
 
   beforeEach(() => {
@@ -56,6 +57,7 @@ describe('validTokenGuard', () => {
         });
       const registrationWithGroupsRD$ = createSuccessfulRemoteDataObject$(registrationWithGroups);
       epersonRegistrationService.searchRegistrationByToken.and.returnValue(registrationWithGroupsRD$);
+      epersonRegistrationService.searchByTokenAndHandleError.and.returnValue(registrationWithGroupsRD$);
 
       const obs = TestBed.runInInjectionContext(() => {
         return validTokenGuard({ params: { registrationToken: '123456789' } } as any, {} as any);
@@ -75,6 +77,7 @@ describe('validTokenGuard', () => {
         });
       const registrationWithoutGroupsRD$ = createSuccessfulRemoteDataObject$(registrationWithoutGroups);
       epersonRegistrationService.searchRegistrationByToken.and.returnValue(registrationWithoutGroupsRD$);
+      epersonRegistrationService.searchByTokenAndHandleError.and.returnValue(registrationWithoutGroupsRD$);
 
       const obs = TestBed.runInInjectionContext(() => {
         return validTokenGuard({ params: { registrationToken: '123456789' } } as any, {} as any);

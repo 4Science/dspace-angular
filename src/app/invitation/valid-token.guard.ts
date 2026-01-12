@@ -33,7 +33,7 @@ export const validTokenGuard: CanActivateFn = (
       .searchByTokenAndHandleError(route.params.registrationToken)
       .pipe(
         getFirstCompletedRemoteData(),
-        map((data: RemoteData<Registration>) => data.hasSucceeded && hasValue('groupNames') && data.payload.groupNames.length > 0),
+        map((data: RemoteData<Registration>) => data.hasSucceeded && hasValue(data.payload?.groupNames) && data.payload.groupNames.length > 0),
         tap((isValid: boolean) => {
           if (!isValid) {
             router.navigate(['/404']);

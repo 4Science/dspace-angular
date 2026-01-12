@@ -18,6 +18,8 @@ import { DSONameService } from '../../../../../../core/breadcrumbs/dso-name.serv
 import { AuthorizationDataService } from '../../../../../../core/data/feature-authorization/authorization-data.service';
 import { Item } from '../../../../../../core/shared/item.model';
 import { ThemedThumbnailComponent } from '../../../../../../thumbnail/themed-thumbnail.component';
+import { OrejimeService } from '../../../../../cookies/orejime.service';
+import { OrejimeServiceStub } from '../../../../../cookies/orejime.service.stub';
 import { MetadataLinkViewComponent } from '../../../../../metadata-link-view/metadata-link-view.component';
 import {
   DSONameServiceMock,
@@ -226,6 +228,7 @@ describe('ItemSearchResultListElementComponent', () => {
         { provide: ThemeService, useValue: getMockThemeService() },
         { provide: AuthService, useValue: new AuthServiceStub() },
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
+        { provide: OrejimeService, useValue: new OrejimeServiceStub() },
         {
           provide: AuthorizationDataService,
           useValue: jasmine.createSpyObj('AuthorizationDataService', [
@@ -452,6 +455,7 @@ describe('ItemSearchResultListElementComponent', () => {
         { provide: APP_CONFIG, useValue: enviromentNoThumbs },
         { provide: ThemeService, useValue: getMockThemeService() },
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
+        { provide: OrejimeService, useValue: new OrejimeServiceStub() },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(ItemSearchResultListElementComponent, {

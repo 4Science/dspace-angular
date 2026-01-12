@@ -34,7 +34,7 @@
                 title="{{'submission.sections.status.info.title' | translate}}" role="img"
               [attr.aria-label]="'submission.sections.status.info.aria' | translate"></i>
             }
-            <a class="close" tabindex="0" role="button"
+            <a class="btn-close" tabindex="0" role="button"
               [attr.aria-label]="(sectionRef.isOpen() ? 'submission.sections.toggle.aria.close' : 'submission.sections.toggle.aria.open') | translate: {sectionHeader: ('submission.sections.'+sectionData.header | translate)}"
               [title]="(sectionRef.isOpen() ? 'submission.sections.toggle.close' : 'submission.sections.toggle.open') | translate">
               @if (sectionRef.isOpen()) {

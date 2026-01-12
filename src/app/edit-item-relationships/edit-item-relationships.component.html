@@ -1,14 +1,14 @@
 <div class="container">
 
   <!-- <div class="row">
-  <div class="col-md-12 mb-4 pl-4">
+  <div class="col-md-12 mb-4 ps-4">
     <button class="btn btn-primary" id="backButton"
     (click)="onReturn()">{{'admin.metadata-import.page.button.return' | translate}}</button>
   </div>
 </div> -->
 
 <div class="row">
-  <div class="col-md-{{ (isSideBarHidden() | async) ? '12' : '8' }} pl-0">
+  <div class="col-md-{{ (isSideBarHidden() | async) ? '12' : '8' }} ps-0">
     @if (!isActive) {
       <ds-loading></ds-loading>
     }

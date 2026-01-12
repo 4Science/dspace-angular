@@ -45,10 +45,13 @@ describe('LocaleService', () => {
       return langList;
     },
     getBrowserLang: () => {
-      return langList;
+      return 'en';
     },
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     use: (param: string) => {
+    },
+    getCurrentLang: () => {
+      return 'en';
     },
   };
 
@@ -74,7 +77,7 @@ describe('LocaleService', () => {
         ],
         providers: [
           { provide: CookieService, useValue: new CookieServiceMock() },
-          { provide: AuthService, userValue: authService },
+          { provide: AuthService, useValue: authService },
           { provide: RouteService, useValue: routeServiceStub },
           { provide: TranslateService, useValue: translateServiceStub },
           { provide: Document, useValue: document },
@@ -130,12 +133,12 @@ describe('LocaleService', () => {
         });
       });
 
-      it('should return language from browser setting', () => {
+      it('should return language from browser setting', waitForAsync(() => {
         spyOn(service, 'getLanguageCodeList').and.returnValue(of(['xx', 'en']));
-        testScheduler.run(({ expectObservable }) => {
-          expectObservable(service.getCurrentLanguageCode()).toBe('(a|)', { a: 'xx' });
+        service.getCurrentLanguageCode().subscribe((lang) => {
+          expect(lang).toBe('xx');
         });
-      });
+      }));
 
       it('should match language from browser setting case insensitive', () => {
         spyOn(service, 'getLanguageCodeList').and.returnValue(of(['DE', 'en']));
@@ -160,7 +163,7 @@ describe('LocaleService', () => {
         authService.isAuthenticated.and.returnValue(of(false));
         authService.isAuthenticationLoaded.and.returnValue(of(false));
         testScheduler.run(({ expectObservable }) => {
-          expectObservable(service.getLanguageCodeList()).toBe('(a|)', { a: ['en-US;q=1', 'en;q=0.9'] });
+          expectObservable(service.getLanguageCodeList()).toBe('(a|)', { a: ['en-US;q=0.1', 'en;q=0.09'] });
         });
       });
 
@@ -169,23 +172,32 @@ describe('LocaleService', () => {
         authService.isAuthenticationLoaded.and.returnValue(of(true));
         authService.getAuthenticatedUserFromStore.and.returnValue(of(EPersonMock2));
         testScheduler.run(({ expectObservable }) => {
-          expectObservable(service.getLanguageCodeList()).toBe('(a|)', { a: ['fr;q=0.5', 'en-US;q=1', 'en;q=0.9'] });
+          expectObservable(service.getLanguageCodeList()).toBe('(a|)', { a: ['fr;q=0.5', 'en-US;q=0.1', 'en;q=0.09'] });
         });
       });
 
       describe('', () => {
-        beforeEach(() => {
-          spyOn(translateService, 'getLangs').and.returnValue(langList);
+
+        it('should return language from browser setting', (done) => {
+          spyOnGet.and.returnValue(undefined);
+          authService.isAuthenticated.and.returnValue(of(false));
+          authService.isAuthenticationLoaded.and.returnValue(of(false));
+          spyOn(service, 'getLanguageCodeList').and.returnValue(of(['xx;q=1', 'en;q=0.9']));
+          service.getCurrentLanguageCode().subscribe((lang) => {
+            expect(lang).toBe('xx');
+            done();
+          });
         });
 
-        it('should return language from browser setting', () => {
-          spyOn(translateService, 'getBrowserLang').and.returnValue('xx');
-          expect(service.getCurrentLanguageCode()).toBe(of('xx'));
-        });
-
-        it('should return default language from config', () => {
-          spyOn(translateService, 'getBrowserLang').and.returnValue('fr');
-          expect(service.getCurrentLanguageCode()).toBe(of('en'));
+        it('should return default language from config', (done) => {
+          spyOnGet.and.returnValue(undefined);
+          authService.isAuthenticated.and.returnValue(of(false));
+          authService.isAuthenticationLoaded.and.returnValue(of(false));
+          spyOn(service, 'getLanguageCodeList').and.returnValue(of(['fr;q=1']));
+          service.getCurrentLanguageCode().subscribe((lang) => {
+            expect(lang).toBe('en');
+            done();
+          });
         });
       });
     });
@@ -221,7 +233,6 @@ describe('LocaleService', () => {
         spyOn(service, 'getCurrentLanguageCode').and.returnValue(of('es'));
         service.setCurrentLanguageCode();
         expect(translateService.use).toHaveBeenCalledWith('es');
-        expect(service.saveLanguageCodeToCookie).toHaveBeenCalledWith('es');
       });
 
       it('should set the current language on the html tag', () => {

@@ -112,13 +112,38 @@ describe('DsoEditMetadataValueComponent', () => {
   });
 
   it('should call initSecurityLevel on init', () => {
-    expect(fixture.debugElement.query(By.css('ds-type-badge'))).toBeNull();
-    expect(component.initSecurityLevel).toHaveBeenCalled();
-    expect(component.mdSecurityConfigLevel$.value).toEqual([0, 1]);
+    const freshFixture = TestBed.createComponent(DsoEditMetadataValueComponent);
+    const freshComponent = freshFixture.componentInstance;
+    freshComponent.mdValue = new DsoEditMetadataValue(Object.assign(new MetadataValue(), {
+      value: 'Regular Name',
+      language: 'en',
+      place: 0,
+      authority: undefined,
+    }));
+    freshComponent.saving$ = of(false);
+
+    freshComponent.metadataSecurityConfiguration = {
+      metadataSecurityDefault: [0, 1],
+      metadataCustomSecurity: {},
+    } as any;
+
+    spyOn(freshComponent, 'initSecurityLevel').and.callThrough();
+
+    freshFixture.detectChanges();
+
+    expect(freshFixture.debugElement.query(By.css('ds-type-badge'))).toBeNull();
+    expect(freshComponent.initSecurityLevel).toHaveBeenCalled();
+    expect(freshComponent.mdSecurityConfigLevel$.value).toEqual([0, 1]);
   });
 
   it('should call initSecurityLevel when field changes', () => {
+    component.metadataSecurityConfiguration = {
+      metadataSecurityDefault: [0, 1],
+      metadataCustomSecurity: { test: [0, 1, 2] },
+    } as any;
+    spyOn(component, 'initSecurityLevel').and.callThrough();
     component.mdField = 'test';
+    fixture.detectChanges();
     expect(component.initSecurityLevel).toHaveBeenCalled();
     expect(component.mdSecurityConfigLevel$.value).toEqual([0, 1, 2]);
   });

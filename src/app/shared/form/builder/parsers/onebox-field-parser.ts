@@ -37,7 +37,7 @@ export class OneboxFieldParser extends FieldParser {
 
       const clsSelect = {
         element: {
-          control: 'ds-form-input-addon custom-select',
+          control: 'ds-form-input-addon form-select',
         },
         grid: {
           host: 'col-sm-4 pe-0',

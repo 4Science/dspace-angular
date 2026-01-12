@@ -1,7 +1,7 @@
 <div class="m-1">
   @if (hasData) {
     <div class="export-buttons-container mb-2">
-      <button class="btn btn-secondary mr-2" [dsBtnDisabled]="(isLoading | async) || (isSecondLoading | async)" (click)="exportExcel()">
+      <button class="btn btn-secondary me-2" [dsBtnDisabled]="(isLoading | async) || (isSecondLoading | async)" (click)="exportExcel()">
         @if ((isLoading | async) === true) {
           <span><i class="fas fa-circle-notch fa-spin"></i> {{'loading.default' | translate}}</span>
         }
@@ -9,7 +9,7 @@
           <span><i class="fas fa-file-export fa-fw"></i> {{'statistics.export.excel' | translate}}</span>
         }
       </button>
-      <button class="btn btn-secondary mr-2" [dsBtnDisabled]="(isLoading | async) || (isSecondLoading | async)" (click)="exportCsv()">
+      <button class="btn btn-secondary me-2" [dsBtnDisabled]="(isLoading | async) || (isSecondLoading | async)" (click)="exportCsv()">
         @if ((isSecondLoading | async) === true) {
           <span><i class="fas fa-circle-notch fa-spin"></i> {{'loading.default' | translate}}</span>
         }
@@ -25,7 +25,7 @@
       <tbody>
         <tr>
           @for (header of headers; track header) {
-            <th scope="col" [ngClass]="{'text-right': header === 'views' || header === 'downloads'}" class="{{header}}-header">
+            <th scope="col" [ngClass]="{'text-end': header === 'views' || header === 'downloads'}" class="{{header}}-header">
               {{ 'statistics.table.' + categoryType + '.header.' + header | translate }}
             </th>
           }
@@ -43,7 +43,7 @@
             </th>
             @for (header of headers | slice:1; track header) {
               <td
-                [ngClass]="{'text-right': header === 'views' || header === 'downloads'}" class="{{point.id}}-{{header}}-data">
+                [ngClass]="{'text-end': header === 'views' || header === 'downloads'}" class="{{point.id}}-{{header}}-data">
                 {{ point.values[header] }}
               </td>
             }

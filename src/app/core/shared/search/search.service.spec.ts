@@ -30,8 +30,15 @@ import { SearchConfigurationService } from './search-configuration.service';
 import anything = jasmine.anything;
 import SpyObj = jasmine.SpyObj;
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { provideMockStore } from '@ngrx/store/testing';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
 
 import { APP_DATA_SERVICES_MAP } from '../../../../config/app-config.interface';
+import { TranslateLoaderMock } from '../../../shared/mocks/translate-loader.mock';
 
 @Component({
   template: '',
@@ -71,6 +78,12 @@ describe('SearchService', () => {
       imports: [
         CommonModule,
         RouterModule.forRoot([]),
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock,
+          },
+        }),
       ],
       providers: [
         { provide: RouteService, useValue: routeServiceStub },
@@ -82,6 +95,7 @@ describe('SearchService', () => {
         { provide: SearchConfigurationService, useValue: searchConfigService },
         { provide: Angulartics2, useValue: {} },
         { provide: APP_DATA_SERVICES_MAP, useValue: {} },
+        { provide: Store, useValue: provideMockStore() },
         SearchService,
       ],
     });

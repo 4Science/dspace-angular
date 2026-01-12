@@ -17,6 +17,8 @@ import {
   NgbModal,
   NgbModule,
 } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
+import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   EMPTY,
@@ -28,6 +30,7 @@ import { JsonPatchOperationsBuilder } from '../../../../core/json-patch/builder/
 import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service';
 import { SubmissionJsonPatchOperationsService } from '../../../../core/submission/submission-json-patch-operations.service';
 import { VocabularyService } from '../../../../core/submission/vocabularies/vocabulary.service';
+import { AlertComponent } from '../../../../shared/alert/alert.component';
 import { ThemedFileDownloadLinkComponent } from '../../../../shared/file-download-link/themed-file-download-link.component';
 import { FormBuilderService } from '../../../../shared/form/builder/form-builder.service';
 import { FormService } from '../../../../shared/form/form.service';
@@ -42,6 +45,7 @@ import {
 } from '../../../../shared/mocks/submission.mock';
 import { getMockThemeService } from '../../../../shared/mocks/theme-service.mock';
 import { HALEndpointServiceStub } from '../../../../shared/testing/hal-endpoint-service.stub';
+import { SectionsServiceStub } from '../../../../shared/testing/sections-service.stub';
 import { SubmissionJsonPatchOperationsServiceStub } from '../../../../shared/testing/submission-json-patch-operations-service.stub';
 import { SubmissionServiceStub } from '../../../../shared/testing/submission-service.stub';
 import { createTestComponent } from '../../../../shared/testing/utils.test';
@@ -49,6 +53,7 @@ import { ThemeService } from '../../../../shared/theme-support/theme.service';
 import { FileSizePipe } from '../../../../shared/utils/file-size-pipe';
 import { VarDirective } from '../../../../shared/utils/var.directive';
 import { SubmissionService } from '../../../submission.service';
+import { SectionsService } from '../../sections.service';
 import { SectionUploadService } from '../section-upload.service';
 import { POLICY_DEFAULT_WITH_LIST } from '../section-upload-constants';
 import { SubmissionSectionUploadFileEditComponent } from './edit/section-upload-file-edit.component';
@@ -122,6 +127,8 @@ describe('SubmissionSectionUploadFileComponent', () => {
         { provide: SubmissionService, useClass: SubmissionServiceStub },
         { provide: SectionUploadService, useValue: getMockSectionUploadService() },
         { provide: ThemeService, useValue: getMockThemeService() },
+        { provide: Store, useValue: provideMockStore() },
+        { provide: SectionsService, useValue: new SectionsServiceStub() },
         ChangeDetectorRef,
         NgbModal,
         SubmissionSectionUploadFileComponent,
@@ -135,6 +142,7 @@ describe('SubmissionSectionUploadFileComponent', () => {
           schemas: [CUSTOM_ELEMENTS_SCHEMA],
         },
         remove: { imports: [
+          AlertComponent,
           SubmissionSectionUploadFileViewComponent,
           ThemedFileDownloadLinkComponent,
         ] },

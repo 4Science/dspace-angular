@@ -96,7 +96,6 @@ describe('FileDownloadLinkComponent', () => {
         { provide: Store, useValue: storeMock },
         { provide: APP_DATA_SERVICES_MAP, useValue: {} },
         { provide: ConfigurationDataService, useValue: configurationDataService },
-        { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
       ],
     })
       .overrideComponent(FileDownloadLinkComponent, {

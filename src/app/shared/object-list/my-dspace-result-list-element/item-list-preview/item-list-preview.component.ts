@@ -8,7 +8,10 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import {
+  TranslateModule,
+  TranslatePipe,
+} from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { Context } from 'src/app/core/shared/context.model';
 import { WorkflowItem } from 'src/app/core/submission/models/workflowitem.model';
@@ -57,6 +60,7 @@ import { AdditionalMetadataComponent } from '../../search-result-list-element/ad
     ThemedBadgesComponent,
     ThemedThumbnailComponent,
     TranslateModule,
+    TranslatePipe,
     TruncatableComponent,
     TruncatablePartComponent,
   ],

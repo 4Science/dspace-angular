@@ -1,7 +1,7 @@
 <div class="w-100 d-flex mt-1 mb-3 align-items-start">
   <button
     type="button"
-    class="btn btn-info mr-2"
+    class="btn btn-info me-2"
     ngbTooltip="{{'submission.workflow.tasks.pool.claim_selected_help' | translate}}"
     [dsBtnDisabled]="(processing$ | async) || (claimEnabled$ | async) !== true"
     (click)="claimAllSelectedTask()"
@@ -15,7 +15,7 @@
 
   <button
     type="button"
-    class="btn btn-success mr-2"
+    class="btn btn-success me-2"
     ngbTooltip="{{'submission.workflow.tasks.claimed.approve_selected_help' | translate}}"
     [dsBtnDisabled]="(processing$ | async) || (claimedTaskActionsEnabled$ | async) !== true"
     (click)="submitAllSelectedTask()"
@@ -28,7 +28,7 @@
   </button>
 
   <button
-    class="btn btn-danger mr-2"
+    class="btn btn-danger me-2"
     [ngbTooltip]="rejectTipContent"
     [dsBtnDisabled]="(claimedTaskActionsEnabled$ | async) !== true"
     (click)="openRejectModal(rejectModal)"
@@ -68,7 +68,7 @@
     <h4 class="modal-title">{{'submission.workflow.tasks.claimed.reject.reason.title' | translate}}</h4>
     <button
       type="button"
-      class="close"
+      class="btn-close"
       aria-label="Close"
       (click)="d('Cross click')"
       >
@@ -86,14 +86,16 @@
         rows="4"
         placeholder="{{'submission.workflow.tasks.claimed.reject.reason.placeholder' | translate}}"
       ></textarea>
-      <button
-        id="btn-chat"
-        class="btn btn-danger btn-lg btn-block mt-3"
-        [dsBtnDisabled]="!rejectForm.valid"
-        type="submit"
+      <div class="d-grid">
+        <button
+          id="btn-chat"
+          class="btn btn-danger btn-lg mt-3"
+          [dsBtnDisabled]="!rejectForm.valid"
+          type="submit"
         >
-        <span>{{'submission.workflow.tasks.claimed.reject.reason.submit' | translate}}</span>
-      </button>
+          <span>{{'submission.workflow.tasks.claimed.reject.reason.submit' | translate}}</span>
+        </button>
+      </div>
     </form>
   </div>
 </ng-template>

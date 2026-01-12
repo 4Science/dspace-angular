@@ -1,6 +1,6 @@
 @if ((results | async) && !!report.points && report.points.length > 0) {
   <div class="export-buttons-container mb-2">
-    <button class="btn btn-secondary mr-2" [dsBtnDisabled]="(isLoading | async) || (isSecondLoading | async)" (click)="downloadPng()">
+    <button class="btn btn-secondary me-2" [dsBtnDisabled]="(isLoading | async) || (isSecondLoading | async)" (click)="downloadPng()">
       @if ((isLoading | async) === true) {
         <span><i class='fas fa-circle-notch fa-spin'></i> {{'loading.default' | translate}}</span>
       }
@@ -8,7 +8,7 @@
         <span><i class="fas fa-file-export fa-fw"></i> {{'statistics.export.png' | translate}}</span>
       }
     </button>
-    <button class="btn btn-secondary mr-2" [dsBtnDisabled]="(isLoading | async) || (isSecondLoading | async)" (click)="downloadJpeg()">
+    <button class="btn btn-secondary me-2" [dsBtnDisabled]="(isLoading | async) || (isSecondLoading | async)" (click)="downloadJpeg()">
       @if ((isSecondLoading | async) === true) {
         <span><i class='fas fa-circle-notch fa-spin'></i> {{'loading.default' | translate}}</span>
       }

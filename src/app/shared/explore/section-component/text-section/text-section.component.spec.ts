@@ -4,6 +4,7 @@ import {
   waitForAsync,
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { of } from 'rxjs';
 
 import { LocaleService } from '../../../../core/locale/locale.service';
 import { SearchService } from '../../../../core/shared/search/search.service';
@@ -15,18 +16,12 @@ describe('TextSectionComponent', () => {
   let component: TextSectionComponent;
   let fixture: ComponentFixture<TextSectionComponent>;
 
-  const localeServiceStub = {
-    getCurrentLanguageCode(): string {
-      return 'en';
-    },
-  };
-
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [TextSectionComponent],
       providers: [
         { provide: SearchService, useValue: {} },
-        { provide: LocaleService, useValue: localeServiceStub },
+        { provide: LocaleService, useValue: { getCurrentLanguageCode: () => of('en') } },
       ],
     })
       .overrideComponent(TextSectionComponent, { remove: { imports: [MarkdownViewerComponent] } }).compileComponents();

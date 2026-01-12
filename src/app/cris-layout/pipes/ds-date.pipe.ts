@@ -16,27 +16,27 @@ import {
 
 @Pipe({
   name: 'dsDate',
+  pure: true,
 })
 export class DsDatePipe implements PipeTransform, OnDestroy {
 
   private asyncPipe: AsyncPipe;
 
-  months: Map<number, string>;
-
   constructor(
-    private cdr: ChangeDetectorRef,
+    cdr: ChangeDetectorRef,
     private localeService: LocaleService,
   ) {
     this.asyncPipe = new AsyncPipe(cdr);
   }
 
-  transform(value: string, ...params: any[]): Observable<string> {
-    return this.localeService.getCurrentLanguageCode().pipe(
-      map((locale: string) => isValidDate(value) ? localeDate(value, locale) : value),
+  transform(value: string): string | null {
+    const formatted$: Observable<string> = this.localeService.getCurrentLanguageCode().pipe(
+      map((locale: string) => (isValidDate(value) ? localeDate(value, locale) : value)),
     );
+    return this.asyncPipe.transform(formatted$) as string | null;
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.asyncPipe.ngOnDestroy();
   }
 }

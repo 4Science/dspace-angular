@@ -73,7 +73,9 @@ export class SubscriptionMenuComponent extends ContextMenuEntryComponent impleme
    */
   public openSubscription() {
     this.modalRef = this.modalService.open(SubscriptionModalComponent);
-    this.modalRef.componentInstance.dso = this.contextMenuObject;
+    if (this.modalRef.componentInstance) {
+      this.modalRef.componentInstance.dso = this.contextMenuObject;
+    }
   }
 
 }

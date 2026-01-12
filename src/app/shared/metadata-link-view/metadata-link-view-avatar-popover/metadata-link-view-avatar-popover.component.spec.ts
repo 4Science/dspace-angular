@@ -37,6 +37,7 @@ describe('MetadataLinkViewAvatarPopoverComponent', () => {
       onLangChange: new EventEmitter(),
       onTranslationChange: new EventEmitter(),
       onDefaultLangChange: new EventEmitter(),
+      onFallbackLangChange: new EventEmitter(),
     };
     TestBed.configureTestingModule({
       imports: [MetadataLinkViewAvatarPopoverComponent],

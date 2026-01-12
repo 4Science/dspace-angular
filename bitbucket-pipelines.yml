@@ -3,8 +3,8 @@ options:
 
 definitions:
   caches:
-    cypress-2024-02-x: ~/.cache/Cypress
-    node-2024-02-x: ./node_modules
+    cypress-2025-02-x: ~/.cache/Cypress
+    node-2025-02-x: ./node_modules
 
   steps:
     - step: &preliminary-operation
@@ -62,15 +62,15 @@ definitions:
     - step: &angular-build
         name: angular-build
         image:
-          name: cypress/browsers:node-18.20.3-chrome-125.0.6422.141-1-ff-126.0.1-edge-125.0.2535.85-1
+          name: cypress/browsers:node-22.21.0-chrome-141.0.7390.107-1-ff-144.0-edge-141.0.3537.92-1
           run-as-user: 1000
         size: 4x
         caches:
-          - node-2024-02-x
+          - node-2025-02-x
         script:
-          - yarn install --frozen-lockfile
-          - yarn run build:prod:ci
-          - yarn run build:mirador
+          - npm ci
+          - npm run build:prod:ci
+          - npm run build:mirador
         artifacts:
           - node_modules/**
           - dist/**
@@ -78,16 +78,16 @@ definitions:
     - step: &unittest-code-checks
         name: test-code-checks
         image:
-          name: cypress/browsers:node-18.20.3-chrome-125.0.6422.141-1-ff-126.0.1-edge-125.0.2535.85-1
+          name: cypress/browsers:node-22.21.0-chrome-141.0.7390.107-1-ff-144.0-edge-141.0.3537.92-1
           run-as-user: 1000
         size: 4x
         caches:
-          - node-2024-02-x
+          - node-2025-02-x
         script:
-          - yarn build:lint
+          - npm run build:lint
           - npm run ng-high-memory -- lint --quiet
-          - yarn run check-circ-deps
-          - yarn run test:headless
+          - npm run check-circ-deps
+          - npm run test:headless
         artifacts:
           - .next/**
           - .cache/**
@@ -96,14 +96,14 @@ definitions:
     - step: &run-e2e-tests
         name: Run E2E test
         image:
-          name: cypress/browsers:node-18.20.3-chrome-125.0.6422.141-1-ff-126.0.1-edge-125.0.2535.85-1
+          name: cypress/browsers:node-22.21.0-chrome-141.0.7390.107-1-ff-144.0-edge-141.0.3537.92-1
           run-as-user: 0
         size: 4x
         services:
           - docker
         caches:
-          - node-2024-02-x
-          - cypress-2024-02-x
+          - node-2025-02-x
+          - cypress-2025-02-x
         script:
           - apt-get update && apt-get install -y curl
           - export HASH_COMMIT=${BITBUCKET_COMMIT:0:8}
@@ -143,11 +143,11 @@ definitions:
               exit 1
             fi
           - npx cypress install
-          - yarn serve:ssr &
+          - npm run serve:ssr &
           - echo "Waiting for server to start..."
-          - sleep 10
+          - sleep 60
           - echo "Running Cypress tests..."
-          - yarn cypress:run --env chromeFlags="$CHROME_FLAGS"
+          - npm run cypress:run --env chromeFlags="$CHROME_FLAGS"
           - echo "Test execution completed"
         artifacts:
           - cypress/screenshots/**

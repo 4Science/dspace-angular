@@ -17,7 +17,7 @@
   <div class="container">
     <h3 class="mb-4">{{'menu.section.cms.edit.metadata.head' | translate}}</h3>
     <div class="input-group">
-      <select class="form-control col-md-4 mr-3 mb-2" aria-label="Select metadata" [(ngModel)]="selectedMetadata">
+      <select class="form-control col-md-4 me-3 mb-2" aria-label="Select metadata" [(ngModel)]="selectedMetadata">
         <option [ngValue]="undefined" disabled selected>{{'admin.edit-cms-metadata.select-metadata' | translate}}</option>
         @for (md of metadataList; track md) {
           <option [value]="md">{{md}}</option>
@@ -25,7 +25,7 @@
       </select>
       <span class="input-group-btn">
         <button id="edit-metadata-btn" class="btn btn-primary" (click)="editSelectedMetadata()" [dsBtnDisabled]="!selectedMetadata">
-          <i class="fas fa-edit mr-1"></i>
+          <i class="fas fa-edit me-1"></i>
           {{'admin.edit-cms-metadata.edit-button' | translate}}
         </button>
       </span>
@@ -40,15 +40,15 @@
 <ng-template #editMetadataButtonsTemplate>
   <div class="row">
     <div class="col-md">
-      <button id="save-metadata-btn" class="btn btn-primary float-right m-2" (click)="saveMetadata()">
+      <button id="save-metadata-btn" class="btn btn-primary float-end m-2" (click)="saveMetadata()">
         <span>
-          <i class="fas fa-save mr-1"></i>
+          <i class="fas fa-save me-1"></i>
           {{ 'admin.edit-cms-metadata.save-button' | translate }}
         </span>
       </button>
-      <button id="back-metadata-btn" class="btn btn-outline-secondary float-right m-2" (click)="back()">
+      <button id="back-metadata-btn" class="btn btn-outline-secondary float-end m-2" (click)="back()">
         <span>
-          <i class="fas fa-arrow-left mr-1"></i>
+          <i class="fas fa-arrow-left me-1"></i>
           {{ 'admin.edit-cms-metadata.back-button' | translate }}
         </span>
       </button>

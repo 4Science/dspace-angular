@@ -7,14 +7,14 @@
         [entityType]="item.entityType"
       ></ds-metadata-link-view-avatar-popover>
     }
-    <span class="font-weight-bold h4"> {{item.firstMetadataValue('dc.title')}} </span>
+    <span class="fw-bold h4"> {{item.firstMetadataValue('dc.title')}} </span>
   </div>
 
   @for (metadata of entityMetdataFields; track metadata) {
     @if (item.hasMetadata(metadata)) {
       <div class="row">
         <div class="col-4">
-          <span class="font-weight-bold">{{ "metadata-link-view.popover.label." +  (isOtherEntityType ? "other" : item.entityType) + "." +  metadata | translate }}</span>
+          <span class="fw-bold">{{ "metadata-link-view.popover.label." +  (isOtherEntityType ? "other" : item.entityType) + "." +  metadata | translate }}</span>
         </div>
         <div class="col-8">
           @if (longTextMetadataList.includes(metadata)) {
@@ -67,7 +67,7 @@
 
   <div class="d-flex">
     <a
-      class="font-weight-bold"
+      class="fw-bold"
       [routerLink]="[getItemPageRoute()]"
       data-test="more-info-link"
       >

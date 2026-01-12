@@ -9,6 +9,8 @@ import {
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { metricAltmetricMock } from '../../../cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/metrics/cris-layout-metrics-box.component.spec';
+import { OrejimeService } from '../../cookies/orejime.service';
+import { OrejimeServiceStub } from '../../cookies/orejime.service.stub';
 import { BaseEmbeddedMetricComponent } from './base-embedded-metric.component';
 
 describe('BaseEmbeddedMetricComponent', () => {
@@ -19,6 +21,9 @@ describe('BaseEmbeddedMetricComponent', () => {
 
     TestBed.configureTestingModule({
       imports: [TestEmbeddedMetricComponent],
+      providers: [
+        { provide: OrejimeService, useValue: new OrejimeServiceStub() },
+      ],
     })
       .compileComponents();
   }));

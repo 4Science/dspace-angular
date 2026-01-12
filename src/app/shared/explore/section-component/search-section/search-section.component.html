@@ -8,14 +8,14 @@
         <div formArrayName="queryArray">
           <div [formGroupName]="i" class="row mb-3 mb-md-0" data-test="form-row">
             <div class="col-md-4 pb-3">
-              <select name="filter" id="filter" formControlName="filter" class="form-control mr-2">
+              <select name="filter" id="filter" formControlName="filter" class="form-control me-2">
                 @for (filter of (filters | async); track filter) {
                   <option [value]="filter">{{'explore.index.' + filter | translate}}</option>
                 }
               </select>
             </div>
             <div class="col-md-5 col-xl-6 pb-3">
-              <input type="text" name="query" id="query" formControlName="query" class="form-control mr-2"/>
+              <input type="text" name="query" id="query" formControlName="query" class="form-control me-2"/>
             </div>
             <div class="col-md-3 col-xl-2 pb-3">
               @if (!isLast) {
@@ -33,12 +33,12 @@
         </div>
       }
       <div class="d-flex justify-content-end" style="gap: 20px;">
-        <button type="button" id="resetButton" class="btn btn-outline-primary float-right" (click)="onReset()">
-          <i class="fas fa-redo mr-1"></i>
+        <button type="button" id="resetButton" class="btn btn-outline-primary float-end" (click)="onReset()">
+          <i class="fas fa-redo me-1"></i>
           {{'explore.search-section.reset-button' | translate}}
         </button>
-        <button type="submit" id="searchButton" class="btn btn-primary float-right">
-          <i class="fas fa-search mr-1"></i>
+        <button type="submit" id="searchButton" class="btn btn-primary float-end">
+          <i class="fas fa-search me-1"></i>
           {{'explore.search-section.search-button' | translate}}
         </button>
       </div>

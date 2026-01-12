@@ -21,7 +21,7 @@ describe('registrationDataResolver', () => {
   });
 
   beforeEach(() => {
-    const spy = jasmine.createSpyObj('EpersonRegistrationService', ['searchRegistrationByToken']);
+    const spy = jasmine.createSpyObj('EpersonRegistrationService', ['searchRegistrationByToken', 'searchByTokenAndHandleError']);
 
     TestBed.configureTestingModule({
       providers: [

@@ -40,7 +40,7 @@ describe('AccessibilitySettingsComponent', () => {
         { provide: AuthService, useValue: authService },
         { provide: AccessibilitySettingsService, useValue: settingsService },
         { provide: NotificationsService, useValue: notificationsService },
-        { provide: OrejimeService, useValue: orejimeService },
+        { provide: OrejimeService, useValue: new OrejimeServiceStub() },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(AccessibilitySettingsComponent, {
