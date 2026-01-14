@@ -165,5 +165,78 @@ describe('LinkComponent', () => {
       done();
     });
   });
-});
 
+  describe('URL validation and conditional rendering', () => {
+
+    describe('valid URLs', () => {
+      it('should render link for URL with http protocol', () => {
+        component.metadataValue = { value: 'http://test.com' } as MetadataValue;
+        component.ngOnInit();
+        fixture.detectChanges();
+
+        expect(component.isLink).toBe(true);
+        const linkElement = fixture.debugElement.query(By.css('span.link-value a'));
+        expect(linkElement).toBeTruthy();
+        expect(linkElement.nativeElement.href).toBe('http://test.com/');
+      });
+
+      it('should render link for URL with https protocol', () => {
+        component.metadataValue = { value: 'https://test.com' } as MetadataValue;
+        component.ngOnInit();
+        fixture.detectChanges();
+
+        expect(component.isLink).toBe(true);
+        const linkElement = fixture.debugElement.query(By.css('span.link-value a'));
+        expect(linkElement).toBeTruthy();
+      });
+
+      it('should render link for URL with www prefix', () => {
+        component.metadataValue = { value: 'www.test.com' } as MetadataValue;
+        component.ngOnInit();
+        fixture.detectChanges();
+
+        expect(component.isLink).toBe(true);
+        const linkElement = fixture.debugElement.query(By.css('span.link-value a'));
+        expect(linkElement).toBeTruthy();
+        expect(linkElement.nativeElement.href).toBe('http://www.test.com/');
+      });
+
+      it('should render link for URL with path', () => {
+        component.metadataValue = { value: 'https://test.com/path/to/page' } as MetadataValue;
+        component.ngOnInit();
+        fixture.detectChanges();
+
+        expect(component.isLink).toBe(true);
+        const linkElement = fixture.debugElement.query(By.css('span.link-value a'));
+        expect(linkElement).toBeTruthy();
+      });
+
+      it('should render link for FTP URL', () => {
+        component.metadataValue = { value: 'ftp://files.test.com' } as MetadataValue;
+        component.ngOnInit();
+        fixture.detectChanges();
+
+        expect(component.isLink).toBe(true);
+        const linkElement = fixture.debugElement.query(By.css('span.link-value a'));
+        expect(linkElement).toBeTruthy();
+        expect(linkElement.nativeElement.href).toBe('ftp://files.test.com/');
+      });
+    });
+
+    describe('invalid URLs - plain text rendering', () => {
+      it('should render plain text for random text without URL pattern', () => {
+        component.metadataValue = { value: 'just some text' } as MetadataValue;
+        component.ngOnInit();
+        fixture.detectChanges();
+
+        expect(component.isLink).toBe(false);
+        const plainText = fixture.debugElement.query(By.css('span.plain-text-value'));
+        const link = fixture.debugElement.query(By.css('span.link-value a'));
+
+        expect(plainText).toBeTruthy();
+        expect(link).toBeFalsy();
+        expect(plainText.nativeElement.textContent).toContain('just some text');
+      });
+    });
+  });
+});
