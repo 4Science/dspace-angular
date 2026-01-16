@@ -21,6 +21,19 @@ import {
 import { NotifyInfoComponent } from './notify-info/notify-info.component';
 import { ThemedPrivacyComponent } from './privacy/themed-privacy.component';
 
+function cmsInfoRoute(qualifier: string, schema: string): Route {
+  return {
+    path: qualifier,
+    component: CmsInfoComponent,
+    resolve: { breadcrumb: i18nBreadcrumbResolver },
+    data: {
+      title: `info.${qualifier}.title`,
+      breadcrumbKey: `info.${qualifier}`,
+      schema: schema,
+      qualifier: qualifier,
+    },
+  };
+}
 
 export const ROUTES: Routes = [
   {
