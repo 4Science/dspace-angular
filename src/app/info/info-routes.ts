@@ -18,6 +18,7 @@ import {
   END_USER_AGREEMENT_PATH,
   FEEDBACK_PATH,
   PRIVACY_PATH,
+  PRIVACY_POLICY,
 } from './info-routing-paths';
 import { NotifyInfoComponent } from './notify-info/notify-info.component';
 import { ThemedPrivacyComponent } from './privacy/themed-privacy.component';
@@ -74,4 +75,5 @@ export const ROUTES: Routes = [
       breadcrumbKey: 'info.coar-notify-support',
     },
   } : undefined,
+  cmsInfoRoute(PRIVACY_POLICY, 'cris'),
 ].filter((route: Route) => hasValue(route));
