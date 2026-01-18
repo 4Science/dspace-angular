@@ -5,7 +5,7 @@ export const PRIVACY_PATH = 'privacy';
 export const FEEDBACK_PATH = 'feedback';
 export const COAR_NOTIFY_SUPPORT = 'coar-notify-support';
 export const ACCESSIBILITY_SETTINGS_PATH = 'accessibility';
-export const PRIVACY_POLICY = 'privacy-policy';
+export const PRIVACY_POLICY = 'privacy';
 
 export function getEndUserAgreementPath() {
   return getSubPath(END_USER_AGREEMENT_PATH);
