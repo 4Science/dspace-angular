@@ -1,8 +1,6 @@
 import { trigger } from '@angular/animations';
 import {
   AsyncPipe,
-  NgForOf,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -20,7 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import {
   BehaviorSubject,
   Observable,
-  of as observableOf,
+  of,
   Subscription,
   timer,
 } from 'rxjs';
@@ -110,16 +108,13 @@ import { NotificationsService } from '../notifications.service';
   styleUrls: ['./process-notification.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    NgIf,
     AsyncPipe,
-    NgTemplateOutlet,
-    TranslateModule,
-    ThemedFileDownloadLinkComponent,
-    FileSizePipe,
-    NgForOf,
     BtnDisabledDirective,
+    FileSizePipe,
+    NgTemplateOutlet,
+    ThemedFileDownloadLinkComponent,
+    TranslateModule,
   ],
-  standalone: true,
 })
 
 export class ProcessNotificationComponent implements OnInit, OnDestroy {
@@ -235,7 +230,7 @@ export class ProcessNotificationComponent implements OnInit, OnDestroy {
         map((response) => response.hasSucceeded ? response.payload.page : []),
       );
     } else {
-      return observableOf([]);
+      return of([]);
     }
   }
 
@@ -287,14 +282,14 @@ export class ProcessNotificationComponent implements OnInit, OnDestroy {
       let value = null;
       if (isNotEmpty(item)) {
         if (typeof item === 'string') {
-          value = observableOf(item);
+          value = of(item);
         } else if (item instanceof Observable) {
           value = item;
         } else if (typeof item === 'object' && isNotEmpty(item.value)) {
           // when notifications state is transferred from SSR to CSR,
           // Observables Object loses the instance type and become simply object,
           // so converts it again to Observable
-          value = observableOf(item.value);
+          value = of(item.value);
         }
       }
       this[key] = value;

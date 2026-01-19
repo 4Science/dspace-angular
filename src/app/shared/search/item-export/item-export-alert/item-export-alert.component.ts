@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Input,
@@ -14,10 +14,8 @@ import { AlertComponent } from '../../../alert/alert.component';
   templateUrl: './item-export-alert.component.html',
   imports: [
     AlertComponent,
-    NgIf,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class ItemExportAlertComponent {
 

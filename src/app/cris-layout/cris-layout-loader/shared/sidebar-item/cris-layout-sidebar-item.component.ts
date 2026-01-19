@@ -1,8 +1,4 @@
-import {
-  NgClass,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -30,11 +26,8 @@ import { slide } from '../../../../shared/animations/slide';
   templateUrl: './cris-layout-sidebar-item.component.html',
   styleUrls: ['./cris-layout-sidebar-item.component.scss'],
   animations: [rotate, slide, rotateNavbar],
-  standalone: true,
   imports: [
     NgClass,
-    NgIf,
-    NgFor,
     RouterLink,
   ],
 })

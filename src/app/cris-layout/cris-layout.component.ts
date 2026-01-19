@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -40,12 +37,10 @@ import { CrisLayoutLoaderComponent } from './cris-layout-loader/cris-layout-load
   selector: 'ds-cris-layout',
   templateUrl: './cris-layout.component.html',
   styleUrls: ['./cris-layout.component.scss'],
-  standalone: true,
   imports: [
-    NgIf,
+    AsyncPipe,
     CrisLayoutLeadingComponent,
     CrisLayoutLoaderComponent,
-    AsyncPipe,
     VarDirective,
   ],
 })

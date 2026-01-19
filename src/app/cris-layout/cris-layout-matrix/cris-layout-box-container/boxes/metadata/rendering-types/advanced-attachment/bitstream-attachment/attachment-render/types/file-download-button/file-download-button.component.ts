@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -16,13 +13,11 @@ import { FileDownloadLinkComponent } from '../../../../../../../../../../../shar
   selector: 'ds-file-download-button',
   templateUrl: './file-download-button.component.html',
   styleUrls: ['./file-download-button.component.scss'],
-  standalone: true,
   imports: [
-    NgIf,
-    RouterLink,
     AsyncPipe,
-    TranslateModule,
     BtnDisabledDirective,
+    RouterLink,
+    TranslateModule,
   ],
 })
 /**

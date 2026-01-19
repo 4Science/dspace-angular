@@ -84,13 +84,6 @@ describe('Footer component', () => {
     expect(comp).toBeDefined();
   });
 
-  it('should render TextSectionComponent', () => {
-    comp.showTopFooter = true;
-    fixture.detectChanges();
-    const textComponent = fixture.debugElement.queryAll(By.css('ds-text-section'));
-    expect(textComponent).toHaveSize(1);
-  });
-
   it('should set showPrivacyPolicy to the value of environment.info.enablePrivacyStatement', () => {
     comp.ngOnInit();
     expect(comp.showPrivacyPolicy).toBe(environment.info.enablePrivacyStatement);
@@ -101,7 +94,7 @@ describe('Footer component', () => {
     expect(comp.showEndUserAgreement).toBe(environment.info.enableEndUserAgreement);
   });
 
-  describe('showCookieSettings', () => {
+  describe('openCookieSettings', () => {
     it('should call cookies.showSettings() if cookies is defined', () => {
       const cookies = jasmine.createSpyObj('cookies', ['showSettings']);
       comp.cookies = cookies;

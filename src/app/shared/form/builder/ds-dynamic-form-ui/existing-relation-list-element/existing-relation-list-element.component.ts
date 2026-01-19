@@ -1,8 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -80,12 +77,10 @@ export abstract class Reorderable {
   templateUrl: './existing-relation-list-element.component.html',
   styleUrls: ['./existing-relation-list-element.component.scss'],
   imports: [
-    ThemedLoadingComponent,
     AsyncPipe,
     ListableObjectComponentLoaderComponent,
-    NgIf,
+    ThemedLoadingComponent,
   ],
-  standalone: true,
 })
 export class ExistingRelationListElementComponent implements OnInit, OnChanges, OnDestroy {
   @Input() listId: string;

@@ -18,7 +18,7 @@ import {
 } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { AuthenticateAction } from '../../core/auth/auth.actions';
 import { AuthService } from '../../core/auth/auth.service';
@@ -56,7 +56,7 @@ describe('ForgotPasswordFormComponent', () => {
 
   beforeEach(waitForAsync(() => {
 
-    route = { data: observableOf({ registration: createSuccessfulRemoteDataObject(registration) }) };
+    route = { data: of({ registration: createSuccessfulRemoteDataObject(registration) }) };
     router = new RouterStub();
     notificationsService = new NotificationsServiceStub();
 
@@ -117,7 +117,8 @@ describe('ForgotPasswordFormComponent', () => {
       comp.submit();
 
       expect(ePersonDataService.patchPasswordWithToken).toHaveBeenCalledWith('test-uuid', 'test-token', 'password');
-      expect(store.dispatch).toHaveBeenCalledWith(new AuthenticateAction('test@email.org', 'password'));
+      expect(store.dispatch as jasmine.Spy).toHaveBeenCalledWith(new AuthenticateAction('test@email.org', 'password'));
+      expect(authService.setRedirectUrlIfNotSet).toHaveBeenCalledWith('/home');
       expect(notificationsService.success).toHaveBeenCalled();
     });
 

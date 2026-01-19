@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -33,8 +30,13 @@ import { SearchResultGridElementComponent } from '../search-result-grid-element.
     'community-search-result-grid-element.component.scss',
   ],
   templateUrl: 'community-search-result-grid-element.component.html',
-  standalone: true,
-  imports: [NgIf, RouterLink, ThemedThumbnailComponent, ThemedBadgesComponent, AsyncPipe, TranslateModule],
+  imports: [
+    AsyncPipe,
+    RouterLink,
+    ThemedBadgesComponent,
+    ThemedThumbnailComponent,
+    TranslateModule,
+  ],
 })
 /**
  * Component representing a grid element for a community search result

@@ -1,6 +1,6 @@
 import {
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 
 import {
@@ -40,11 +40,11 @@ export class VocabularyServiceStub {
   }
 
   getVocabularyEntryByValue(value: string, vocabularyOptions: VocabularyOptions): Observable<VocabularyEntry> {
-    return observableOf(Object.assign(new VocabularyEntry(), { authority: 1, display: 'one', value: 1 }));
+    return of(Object.assign(new VocabularyEntry(), { authority: 1, display: 'one', value: 1 }));
   }
 
   getVocabularyEntryByID(id: string, vocabularyOptions: VocabularyOptions): Observable<VocabularyEntry> {
-    return observableOf(Object.assign(new VocabularyEntry(), { authority: 1, display: 'one', value: 1 }));
+    return of(Object.assign(new VocabularyEntry(), { authority: 1, display: 'one', value: 1 }));
   }
 
   findVocabularyById(id: string): Observable<RemoteData<Vocabulary>> {
@@ -60,6 +60,6 @@ export class VocabularyServiceStub {
   }
 
   findEntryDetailById(id: string, name: string, ...linksToFollow: FollowLinkConfig<VocabularyEntryDetail>[]): Observable<VocabularyEntry> {
-    return observableOf(Object.assign(new VocabularyEntry(), { authority: 1, display: 'one', value: 1 }));
+    return of(Object.assign(new VocabularyEntry(), { authority: 1, display: 'one', value: 1 }));
   }
 }

@@ -9,10 +9,7 @@ import {
 /**
  * The notification state.
  */
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface NotificationsState extends Array<INotification|IProcessNotification> {
-
-}
+export type NotificationsState = Array<INotification|IProcessNotification>;
 
 /**
  * The initial state.

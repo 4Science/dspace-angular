@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   isPlatformServer,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -94,21 +93,19 @@ import { SearchConfigurationOption } from './search-switch-configuration/search-
   templateUrl: './search.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [pushInOut],
-  standalone: true,
   imports: [
     AsyncPipe,
-    NgIf,
+    ItemExportModalLauncherComponent,
+    NgbTooltipModule,
     NgTemplateOutlet,
     PageWithSidebarComponent,
+    SearchChartsComponent,
+    SearchLabelsComponent,
     ThemedSearchFormComponent,
     ThemedSearchResultsComponent,
     ThemedSearchSidebarComponent,
     TranslateModule,
-    SearchLabelsComponent,
     ViewModeSwitchComponent,
-    NgbTooltipModule,
-    ItemExportModalLauncherComponent,
-    SearchChartsComponent,
   ],
 })
 
@@ -333,7 +330,7 @@ export class SearchComponent implements OnDestroy, OnInit {
   /**
    * Defines whether to fetch search results during SSR execution
    */
-  @Input() renderOnServerSide: boolean;
+  @Input() renderOnServerSide = true;
 
   /**
    * For chart regular expression

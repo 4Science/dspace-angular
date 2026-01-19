@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -54,17 +52,14 @@ import { LdnService } from '../ldn-services-model/ldn-services.model';
   styleUrls: ['./ldn-services-directory.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default,
   imports: [
-    NgIf,
-    NgFor,
-    TranslateModule,
     AsyncPipe,
+    NgClass,
     PaginationComponent,
+    RouterLink,
+    TranslateModule,
     TruncatableComponent,
     TruncatablePartComponent,
-    NgClass,
-    RouterLink,
   ],
-  standalone: true,
 })
 export class LdnServicesOverviewComponent implements OnInit, OnDestroy {
 

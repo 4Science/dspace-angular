@@ -1,7 +1,7 @@
 import {
-  async,
   ComponentFixture,
   TestBed,
+  waitForAsync,
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -11,7 +11,7 @@ import {
   TranslateModule,
 } from '@ngx-translate/core';
 import { getTestScheduler } from 'jasmine-marbles';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
@@ -39,8 +39,8 @@ describe('ExportItemMenuComponent', () => {
     submitForm: jasmine.createSpy('submitForm'),
   });
 
-  beforeEach(async(() => {
-    itemExportService.initialItemExportFormConfiguration.and.returnValue(observableOf(configuration));
+  beforeEach(waitForAsync(() => {
+    itemExportService.initialItemExportFormConfiguration.and.returnValue(of(configuration));
     dso = Object.assign(new Item(), {
       id: 'test-item',
       _links: {

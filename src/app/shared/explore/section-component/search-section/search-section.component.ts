@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -33,15 +29,12 @@ import { ThemedSearchFormComponent } from '../../../search-form/themed-search-fo
 @Component({
   selector: 'ds-base-search-section',
   templateUrl: './search-section.component.html',
-  standalone: true,
   imports: [
+    AsyncPipe,
+    FormsModule,
+    ReactiveFormsModule,
     ThemedSearchFormComponent,
     TranslateModule,
-    NgIf,
-    FormsModule,
-    NgForOf,
-    ReactiveFormsModule,
-    AsyncPipe,
   ],
 })
 export class SearchSectionComponent implements OnInit {

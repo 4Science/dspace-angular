@@ -1,7 +1,4 @@
-import {
-  isPlatformBrowser,
-  NgIf,
-} from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import {
   Component,
   Inject,
@@ -20,6 +17,7 @@ import {
   filter,
   take,
 } from 'rxjs/operators';
+import { ThemedLoadingComponent } from 'src/app/shared/loading/themed-loading.component';
 
 import { AppState } from '../app.reducer';
 import {
@@ -34,7 +32,6 @@ import {
   hasValue,
   isNotEmpty,
 } from '../shared/empty.util';
-import { ThemedLoadingComponent } from '../shared/loading/themed-loading.component';
 import { ThemedLogInComponent } from '../shared/log-in/themed-log-in.component';
 
 /**
@@ -45,8 +42,11 @@ import { ThemedLogInComponent } from '../shared/log-in/themed-log-in.component';
   selector: 'ds-base-login-page',
   styleUrls: ['./login-page.component.scss'],
   templateUrl: './login-page.component.html',
-  standalone: true,
-  imports: [ThemedLoadingComponent, ThemedLogInComponent, TranslateModule, NgIf],
+  imports: [
+    ThemedLoadingComponent,
+    ThemedLogInComponent,
+    TranslateModule,
+  ],
 })
 export class LoginPageComponent implements OnDestroy, OnInit {
 

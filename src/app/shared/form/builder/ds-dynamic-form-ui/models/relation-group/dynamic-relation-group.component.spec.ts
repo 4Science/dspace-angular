@@ -1,9 +1,3 @@
-// Load the implementations that should be tested
-import {
-  AsyncPipe,
-  NgClass,
-  NgIf,
-} from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -32,7 +26,7 @@ import { DYNAMIC_FORM_CONTROL_MAP_FN } from '@ng-dynamic-forms/core';
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { MockComponent } from 'ng-mocks';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 import {
   APP_CONFIG,
   APP_DATA_SERVICES_MAP,
@@ -320,7 +314,7 @@ describe('DsDynamicRelationGroupComponent test suite', () => {
       }));
 
       it('should save a new chips item', () => {
-        submissionServiceStub.getSubmissionSecurityConfiguration.and.returnValue(observableOf(metadataSecurityConfiguration));
+        submissionServiceStub.getSubmissionSecurityConfiguration.and.returnValue(of(metadataSecurityConfiguration));
         modelValue = [{
           'dc.contributor.author': new FormFieldMetadataValueObject('test author'),
           'local.contributor.affiliation': new FormFieldMetadataValueObject('test affiliation'),
@@ -365,7 +359,7 @@ describe('DsDynamicRelationGroupComponent test suite', () => {
       }));
 
       it('should modify existing chips item', inject([FormBuilderService], (service: FormBuilderService) => {
-        submissionServiceStub.getSubmissionSecurityConfiguration.and.returnValue(observableOf(metadataSecurityConfiguration));
+        submissionServiceStub.getSubmissionSecurityConfiguration.and.returnValue(of(metadataSecurityConfiguration));
         const modalRef = groupComp.onChipSelected(0);
         groupFixture.detectChanges();
 
@@ -396,14 +390,9 @@ describe('DsDynamicRelationGroupComponent test suite', () => {
 @Component({
   selector: 'ds-test-cmp',
   template: ``,
-  standalone: true,
   imports: [
-    DsDynamicRelationGroupComponent,
-    NgIf,
-    AsyncPipe,
     NgbTooltipModule,
     TranslateModule,
-    NgClass,
   ],
 })
 class TestComponent {

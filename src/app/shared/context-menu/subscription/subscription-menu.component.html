@@ -1,4 +1,6 @@
-<button *ngIf="isAuthorized$ | async" class="btn btn-primary"
-        [innerHTML]="'context-menu.actions.subscribe.btn' | translate"
-        (click)="$event.preventDefault();openSubscription();">
-</button>
+@if (isAuthorized$ | async) {
+  <button class="btn btn-primary"
+    [innerHTML]="'context-menu.actions.subscribe.btn' | translate"
+    (click)="$event.preventDefault();openSubscription();">
+  </button>
+}

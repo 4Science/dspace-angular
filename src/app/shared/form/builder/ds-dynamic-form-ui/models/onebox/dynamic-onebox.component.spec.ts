@@ -34,7 +34,7 @@ import { DynamicFormsNGBootstrapUIModule } from '@ng-dynamic-forms/ui-ng-bootstr
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { getTestScheduler } from 'jasmine-marbles';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -263,7 +263,7 @@ describe('DsDynamicOneboxComponent test suite', () => {
 
         spyOn((oneboxComponent as any).vocabularyService, 'getVocabularyEntriesByValue').and.callThrough();
 
-        oneboxComponent.search(observableOf('test')).subscribe();
+        oneboxComponent.search(of('test')).subscribe();
 
         tick(300);
         oneboxCompFixture.detectChanges();
@@ -362,7 +362,7 @@ describe('DsDynamicOneboxComponent test suite', () => {
         oneboxComponent = oneboxCompFixture.componentInstance; // FormComponent test instance
         oneboxComponent.group = ONEBOX_TEST_GROUP;
         oneboxComponent.model = new DynamicOneboxModel(ONEBOX_TEST_MODEL_CONFIG);
-        const entry = observableOf(Object.assign(new VocabularyEntry(), {
+        const entry = of(Object.assign(new VocabularyEntry(), {
           authority: null,
           value: 'test',
           display: 'testDisplay',
@@ -399,7 +399,7 @@ describe('DsDynamicOneboxComponent test suite', () => {
         oneboxComponent = oneboxCompFixture.componentInstance; // FormComponent test instance
         oneboxComponent.group = ONEBOX_TEST_GROUP;
         oneboxComponent.model = new DynamicOneboxModel(ONEBOX_TEST_MODEL_CONFIG);
-        const entry = observableOf(Object.assign(new VocabularyEntry(), {
+        const entry = of(Object.assign(new VocabularyEntry(), {
           authority: validAuthority,
           value: 'test',
           display: 'test',
@@ -471,7 +471,7 @@ describe('DsDynamicOneboxComponent test suite', () => {
       beforeEach(() => {
         oneboxComponent.group = ONEBOX_TEST_GROUP;
         oneboxComponent.model = new DynamicOneboxModel(ONEBOX_TEST_MODEL_CONFIG);
-        const entry = observableOf(Object.assign(new VocabularyEntry(), {
+        const entry = of(Object.assign(new VocabularyEntry(), {
           authority: null,
           value: 'test',
           display: 'testDisplay',
@@ -637,13 +637,14 @@ describe('DsDynamicOneboxComponent test suite', () => {
 @Component({
   selector: 'ds-test-cmp',
   template: ``,
-  standalone: true,
-  imports: [DynamicFormsCoreModule,
+  imports: [
+    CdkTreeModule,
+    DynamicFormsCoreModule,
     DynamicFormsNGBootstrapUIModule,
     FormsModule,
     NgbModule,
     ReactiveFormsModule,
-    CdkTreeModule],
+  ],
 })
 class TestComponent {
 

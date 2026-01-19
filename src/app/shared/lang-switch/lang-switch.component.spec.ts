@@ -1,6 +1,10 @@
 import {
-  HttpClientTestingModule,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import {
   HttpTestingController,
+  provideHttpClientTesting,
 } from '@angular/common/http/testing';
 import {
   DebugElement,
@@ -29,10 +33,6 @@ import { LangSwitchComponent } from './lang-switch.component';
 // This test is completely independent from any message catalogs or keys in the codebase
 // The translation module is instantiated with these bogus messages that we aren't using anyway.
 
-// Double quotes are mandatory in JSON, so de-activating the tslint rule checking for single quotes here.
-/* eslint-disable @typescript-eslint/quotes */
-// JSON for the language files has double quotes around all literals
-/* eslint-disable quote-props */
 class CustomLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<any> {
     return of({
@@ -44,9 +44,6 @@ class CustomLoader implements TranslateLoader {
     });
   }
 }
-
-/* eslint-enable @typescript-eslint/quotes */
-/* eslint-enable quote-props */
 
 let localService: any;
 
@@ -83,19 +80,21 @@ describe('LangSwitchComponent', () => {
       };
 
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule, TranslateModule.forRoot({
+        schemas: [NO_ERRORS_SCHEMA],
+        imports: [TranslateModule.forRoot({
           loader: { provide: TranslateLoader, useClass: CustomLoader },
         }), LangSwitchComponent],
-        schemas: [NO_ERRORS_SCHEMA],
         providers: [
           TranslateService,
           { provide: LocaleService, useValue: getMockLocaleService() },
+          provideHttpClient(withInterceptorsFromDi()),
+          provideHttpClientTesting(),
         ],
       }).compileComponents()
         .then(() => {
           translate = TestBed.inject(TranslateService);
           translate.addLangs(mockConfig.languages.filter((langConfig: LangConfig) => langConfig.active === true).map((a) => a.code));
-          translate.setDefaultLang('en');
+          translate.setFallbackLang('en');
           translate.use('en');
           http = TestBed.inject(HttpTestingController);
           fixture = TestBed.createComponent(LangSwitchComponent);
@@ -141,7 +140,7 @@ describe('LangSwitchComponent', () => {
     });
   });
 
-  describe('with English as the only active and also default language', () => {
+  describe('with English as the only active and also fallback language', () => {
 
     let component: LangSwitchComponent;
     let fixture: ComponentFixture<LangSwitchComponent>;
@@ -166,18 +165,20 @@ describe('LangSwitchComponent', () => {
       };
 
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule, TranslateModule.forRoot({
+        schemas: [NO_ERRORS_SCHEMA],
+        imports: [TranslateModule.forRoot({
           loader: { provide: TranslateLoader, useClass: CustomLoader },
         }), LangSwitchComponent],
-        schemas: [NO_ERRORS_SCHEMA],
         providers: [
           TranslateService,
           { provide: LocaleService, useValue: getMockLocaleService() },
+          provideHttpClient(withInterceptorsFromDi()),
+          provideHttpClientTesting(),
         ],
       }).compileComponents();
       translate = TestBed.inject(TranslateService);
       translate.addLangs(mockConfig.languages.filter((MyLangConfig) => MyLangConfig.active === true).map((a) => a.code));
-      translate.setDefaultLang('en');
+      translate.setFallbackLang('en');
       translate.use('en');
       http = TestBed.inject(HttpTestingController);
     }));

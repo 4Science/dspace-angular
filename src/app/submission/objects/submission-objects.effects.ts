@@ -12,7 +12,7 @@ import union from 'lodash/union';
 import {
   from as observableFrom,
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import {
   catchError,
@@ -328,7 +328,7 @@ export class SubmissionObjectEffects {
         'sections',
         action.payload.sectionId).pipe(
         map(() => new DisableSectionSuccessAction(action.payload.submissionId, action.payload.sectionId)),
-        catchError(() => observableOf(new DisableSectionErrorAction(action.payload.submissionId, action.payload.sectionId))));
+        catchError(() => of(new DisableSectionErrorAction(action.payload.submissionId, action.payload.sectionId))));
     })),
   );
 
@@ -345,7 +345,7 @@ export class SubmissionObjectEffects {
           action.payload.sectionId,
           response),
         ),
-        catchError(() => observableOf(new SetDuplicateDecisionErrorAction(action.payload.submissionId))));
+        catchError(() => of(new SetDuplicateDecisionErrorAction(action.payload.submissionId))));
     })),
   );
 
@@ -364,7 +364,7 @@ export class SubmissionObjectEffects {
     switchMap(([action, state]: [DepositSubmissionAction, any]) => {
       return this.submissionService.depositSubmission(state.submission.objects[action.payload.submissionId].selfUrl).pipe(
         map(() => new DepositSubmissionSuccessAction(action.payload.submissionId)),
-        catchError((error: unknown) => observableOf(new DepositSubmissionErrorAction(action.payload.submissionId))));
+        catchError((error: unknown) => of(new DepositSubmissionErrorAction(action.payload.submissionId))));
     })));
 
   /**
@@ -406,7 +406,7 @@ export class SubmissionObjectEffects {
     switchMap((action: DepositSubmissionAction) => {
       return this.submissionService.discardSubmission(action.payload.submissionId).pipe(
         map(() => new DiscardSubmissionSuccessAction(action.payload.submissionId)),
-        catchError(() => observableOf(new DiscardSubmissionErrorAction(action.payload.submissionId))));
+        catchError(() => of(new DiscardSubmissionErrorAction(action.payload.submissionId))));
     })));
 
   /**
@@ -437,7 +437,7 @@ export class SubmissionObjectEffects {
           map((metadata: any) => new UpdateSectionDataAction(action.payload.submissionId, action.payload.sectionId, metadata, action.payload.errorsToShow, action.payload.serverValidationErrors, action.payload.metadata)),
         );
       } else {
-        return observableOf(new UpdateSectionDataSuccessAction());
+        return of(new UpdateSectionDataSuccessAction());
       }
     }),
   ));

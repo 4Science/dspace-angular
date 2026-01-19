@@ -20,7 +20,7 @@ import {
 } from 'jasmine-marbles';
 import {
   Observable,
-  of as observableOf,
+  of,
   throwError as observableThrow,
 } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -262,7 +262,7 @@ describe('AuthEffects', () => {
     describe('when check token succeeded', () => {
       it('should return a RETRIEVE_TOKEN action in response to a CHECK_AUTHENTICATION_TOKEN_COOKIE action when authenticated is true', (done) => {
         spyOn((authEffects as any).authService, 'checkAuthenticationCookie').and.returnValue(
-          observableOf(
+          of(
             {
               authenticated: true,
             }),
@@ -283,7 +283,7 @@ describe('AuthEffects', () => {
 
       it('should return a RETRIEVE_AUTH_METHODS action in response to a CHECK_AUTHENTICATION_TOKEN_COOKIE action when authenticated is false', () => {
         spyOn((authEffects as any).authService, 'checkAuthenticationCookie').and.returnValue(
-          observableOf(
+          of(
             { authenticated: false }),
         );
         actions = hot('--a-', { a: { type: AuthActionTypes.CHECK_AUTHENTICATION_TOKEN_COOKIE } });
@@ -464,7 +464,7 @@ describe('AuthEffects', () => {
     describe('when auth loaded is false', () => {
       it('should not call removeToken method', fakeAsync(() => {
         store.overrideSelector(isAuthenticatedLoaded, false);
-        actions = observableOf({ type: StoreActionTypes.REHYDRATE });
+        actions = of({ type: StoreActionTypes.REHYDRATE });
         spyOn(authServiceStub, 'removeToken');
 
         authEffects.clearInvalidTokenOnRehydrate$.subscribe(() => {
@@ -480,7 +480,7 @@ describe('AuthEffects', () => {
         spyOn(console, 'log').and.callThrough();
 
         store.overrideSelector(isAuthenticatedLoaded, true);
-        actions = observableOf({ type: StoreActionTypes.REHYDRATE });
+        actions = of({ type: StoreActionTypes.REHYDRATE });
         spyOn(authServiceStub, 'removeToken');
 
         authEffects.clearInvalidTokenOnRehydrate$.subscribe(() => {
@@ -497,7 +497,7 @@ describe('AuthEffects', () => {
       it('should return a REFRESH_STATE_TOKEN_AND_REDIRECT_SUCCESS action in response to a REFRESH_STATE_TOKEN_AND_REDIRECT action', (done) => {
 
         store.overrideSelector(getAuthenticatedUser, { id: EPersonMock.id } as EPerson);
-        spyOn((authEffects as any).authService, 'retrieveAuthenticatedUserById').and.returnValue(observableOf(EPersonMock));
+        spyOn((authEffects as any).authService, 'retrieveAuthenticatedUserById').and.returnValue(of(EPersonMock));
 
         actions = hot('--a-', {
           a: {
@@ -608,7 +608,7 @@ describe('AuthEffects', () => {
 
   describe('invalidateAuthorizationsRequestCache$', () => {
     it('should call invalidateAuthorizationsRequestCache method in response to a REHYDRATE action', (done) => {
-      actions = observableOf({ type: StoreActionTypes.REHYDRATE });
+      actions = of({ type: StoreActionTypes.REHYDRATE });
 
       authEffects.invalidateAuthorizationsRequestCache$.subscribe(() => {
         expect((authEffects as  any).authorizationsService.invalidateAuthorizationsRequestCache).toHaveBeenCalled();

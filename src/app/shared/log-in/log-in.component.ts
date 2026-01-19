@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -18,7 +14,7 @@ import {
   select,
   Store,
 } from '@ngrx/store';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import uniqBy from 'lodash/uniqBy';
 import {
   combineLatest,
@@ -38,11 +34,11 @@ import {
   getRegisterRoute,
 } from '../../app-routing-paths';
 import { AuthService } from '../../core/auth/auth.service';
+import { AuthMethodsService } from '../../core/auth/auth-methods.service';
 import { AuthMethod } from '../../core/auth/models/auth.method';
 import { AuthMethodType } from '../../core/auth/models/auth.method-type';
 import {
   getAuthenticationError,
-  getAuthenticationMethods,
   isAuthenticated,
   isAuthenticationLoading,
 } from '../../core/auth/selectors';
@@ -53,15 +49,24 @@ import { hasValue } from '../empty.util';
 import { ThemedLoadingComponent } from '../loading/themed-loading.component';
 import { BrowserOnlyPipe } from '../utils/browser-only.pipe';
 import { LogInContainerComponent } from './container/log-in-container.component';
-import { rendersAuthMethodType } from './methods/log-in.methods-decorator';
+import {
+  AUTH_METHOD_FOR_DECORATOR_MAP,
+  rendersAuthMethodType,
+} from './methods/log-in.methods-decorator';
 
 @Component({
   selector: 'ds-base-log-in',
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [NgIf, ThemedLoadingComponent, NgFor, LogInContainerComponent, AsyncPipe, RouterLink, BrowserOnlyPipe, TranslateModule],
+  imports: [
+    AsyncPipe,
+    BrowserOnlyPipe,
+    LogInContainerComponent,
+    RouterLink,
+    ThemedLoadingComponent,
+    TranslatePipe,
+  ],
 })
 export class LogInComponent implements OnInit, OnDestroy {
 
@@ -123,12 +128,12 @@ export class LogInComponent implements OnInit, OnDestroy {
               private authService: AuthService,
               private route: ActivatedRoute,
               protected authorizationService: AuthorizationDataService,
+              private authMethodsService: AuthMethodsService,
   ) {
   }
 
   ngOnInit(): void {
-    this.authMethods = this.store.pipe(
-      select(getAuthenticationMethods),
+    this.authMethods = this.authMethodsService.getAuthMethods(AUTH_METHOD_FOR_DECORATOR_MAP, this.excludedAuthMethod).pipe(
       combineLatestWith(
         this.route.data.pipe(
           filter(routeData => !!routeData),

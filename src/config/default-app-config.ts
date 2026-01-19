@@ -23,6 +23,7 @@ import { DatadogRumConfig } from './datadog-rum-config.interfaces';
 import { DiscoverySortConfig } from './discovery-sort.config';
 import { FilterVocabularyConfig } from './filter-vocabulary-config';
 import { FormConfig } from './form-config.interfaces';
+import { GeospatialMapConfig } from './geospatial-map-config';
 import { HomeConfig } from './homepage-config.interface';
 import {
   IdentifierSubtypesConfig,
@@ -38,6 +39,7 @@ import {
 } from './layout-config.interfaces';
 import { LoaderConfig } from './loader-config.interfaces';
 import { MarkdownConfig } from './markdown-config.interface';
+import { MatomoConfig } from './matomo-config.interface';
 import { MediaViewerConfig } from './media-viewer-config.interface';
 import { MetaTagsConfig } from './meta-tags.config';
 import { MetadataLinkViewPopoverDataConfig } from './metadata-link-view-popoverdata-config.interface';
@@ -325,8 +327,8 @@ export class DefaultAppConfig implements AppConfig {
     minChars: 3,
   };
 
-  // Default Language in which the UI will be rendered if the user's browser language is not an active language
-  defaultLanguage = 'en';
+  // Fallback language in which the UI will be rendered if the user's browser language is not an active language
+  fallbackLanguage = 'en';
 
   // Languages. DSpace Angular holds a message catalog for each of the following languages.
   // When set to active, users will be able to switch to the use of this language in the user interface.
@@ -339,21 +341,26 @@ export class DefaultAppConfig implements AppConfig {
     { code: 'de', label: 'Deutsch', active: true },
     { code: 'el', label: 'Ελληνικά', active: false },
     { code: 'es', label: 'Español', active: true },
+    { code: 'fa', label: 'فارسی', active: false },
     { code: 'fi', label: 'Suomi', active: false },
     { code: 'fr', label: 'Français', active: true },
     { code: 'gd', label: 'Gàidhlig', active: false },
+    { code: 'gu', label: 'ગુજરાતી', active: false },
     { code: 'hi', label: 'हिंदी', active: false },
     { code: 'hu', label: 'Magyar', active: false },
     { code: 'it', label: 'Italiano', active: false },
     { code: 'kk', label: 'Қазақ', active: false },
     { code: 'lv', label: 'Latviešu', active: false },
+    { code: 'mr', label: 'मराठी', active: false },
     { code: 'nl', label: 'Nederlands', active: false },
     { code: 'pl', label: 'Polski', active: false },
     { code: 'pt-PT', label: 'Português', active: false },
     { code: 'pt-BR', label: 'Português do Brasil', active: false },
+    { code: 'ru', label: 'Русский', active: false },
     { code: 'sr-lat', label: 'Srpski (lat)', active: false },
     { code: 'sr-cyr', label: 'Српски', active: false },
     { code: 'sv', label: 'Svenska', active: false },
+    { code: 'ta', label: 'தமிழ்', active: false },
     { code: 'tr', label: 'Türkçe', active: false },
     { code: 'uk', label: 'Yкраї́нська', active: false },
     { code: 'vi', label: 'Tiếng Việt', active: false },
@@ -408,6 +415,8 @@ export class DefaultAppConfig implements AppConfig {
       // Rounded to the nearest size in the list of selectable sizes on the
       // settings menu.  See pageSizeOptions in 'pagination-component-options.model.ts'.
       pageSize: 5,
+      // Show the bitstream access status label
+      showAccessStatuses: false,
     },
     // The maximum number of metadata values to add to the metatag list of the item page
     metatagLimit: 20,
@@ -588,7 +597,7 @@ export class DefaultAppConfig implements AppConfig {
     enablePrivacyStatement: true,
     enableCOARNotifySupport: true,
     enableCookieConsentPopup: true,
-    //Configuration for third-party metrics in Klaro
+    //Configuration for third-party metrics in Orejime
     metricsConsents: [
       {
         key: 'plumX',
@@ -725,6 +734,29 @@ export class DefaultAppConfig implements AppConfig {
     isVisible: false,
   };
 
+  matomo: MatomoConfig = {};
+
+  // Leaflet tile providers and other configurable attributes
+  geospatialMapViewer: GeospatialMapConfig = {
+    spatialMetadataFields: [
+      'dcterms.spatial',
+    ],
+    spatialFacetDiscoveryConfiguration: 'geospatial',
+    spatialPointFilterName: 'point',
+    enableItemPageFields: false,
+    enableSearchViewMode: false,
+    enableBrowseMap: false,
+    tileProviders: [
+      'OpenStreetMap.Mapnik',
+    ],
+    // Starting centre point for maps (before drawing and zooming to markers)
+    // Defaults to Istanbul
+    defaultCentrePoint: {
+      lat: 41.015137,
+      lng: 28.979530,
+    },
+  };
+
   // Accessibility settings configuration, used by the AccessibilitySettingsService
   accessibility: AccessibilitySettingsConfig = {
     cookieExpirationDuration: 7,
@@ -810,7 +842,7 @@ export class DefaultAppConfig implements AppConfig {
       defaultMetadataValueColStyle: 'col-9',
     },
     collectionsBox: {
-      defaultCollectionsLabelColStyle: 'col-3 font-weight-bold',
+      defaultCollectionsLabelColStyle: 'col-3 fw-bold',
       defaultCollectionsValueColStyle: 'col-9',
       isInline: true,
     },

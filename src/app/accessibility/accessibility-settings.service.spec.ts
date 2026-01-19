@@ -9,7 +9,7 @@ import { AuthService } from '../core/auth/auth.service';
 import { EPersonDataService } from '../core/eperson/eperson-data.service';
 import { EPerson } from '../core/eperson/models/eperson.model';
 import { CookieService } from '../core/services/cookie.service';
-import { KlaroServiceStub } from '../shared/cookies/klaro.service.stub';
+import { OrejimeServiceStub } from '../shared/cookies/orejime.service.stub';
 import { CookieServiceMock } from '../shared/mocks/cookie.service.mock';
 import {
   createFailedRemoteDataObject$,
@@ -31,16 +31,16 @@ describe('accessibilitySettingsService', () => {
   let cookieService: CookieServiceMock;
   let authService: AuthServiceStub;
   let ePersonService: EPersonDataService;
-  let klaroService: any;
+  let orejimeService: OrejimeServiceStub;
   let appConfig: AppConfig;
 
   beforeEach(() => {
     cookieService = new CookieServiceMock();
     authService = new AuthServiceStub();
-    klaroService = new KlaroServiceStub();
+    orejimeService = new OrejimeServiceStub();
     appConfig = { accessibility: { cookieExpirationDuration: 10 } } as AppConfig;
 
-    klaroService.getSavedPreferences.and.returnValue(of({ accessibility: true }));
+    orejimeService.getSavedPreferences.and.returnValue(of({ accessibility: true }));
 
     ePersonService = jasmine.createSpyObj('ePersonService', {
       createPatchFromCache: of([{
@@ -54,7 +54,7 @@ describe('accessibilitySettingsService', () => {
       cookieService as unknown as CookieService,
       authService as unknown as AuthService,
       ePersonService,
-      klaroService,
+      orejimeService,
       appConfig,
     );
   });
@@ -364,7 +364,7 @@ describe('accessibilitySettingsService', () => {
     });
 
     it('should fail to store settings in the cookie when the user has not accepted the cookie', fakeAsync(() => {
-      klaroService.getSavedPreferences.and.returnValue(of({ accessibility: false }));
+      orejimeService.getSavedPreferences.and.returnValue(of({ accessibility: false }));
 
       service.setSettingsInCookie({ ['liveRegionTimeOut']: '500' }).subscribe(value => {
         expect(value).toEqual('failed');

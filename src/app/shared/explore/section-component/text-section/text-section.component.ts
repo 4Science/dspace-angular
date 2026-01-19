@@ -1,6 +1,5 @@
 import {
-  NgSwitch,
-  NgSwitchCase,
+  AsyncPipe,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -8,6 +7,8 @@ import {
   Input,
 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { TextRowSection } from '../../../../core/layout/models/section.model';
 import { LocaleService } from '../../../../core/locale/locale.service';
@@ -19,13 +20,11 @@ import { MarkdownViewerComponent } from '../../../markdown-viewer/markdown-viewe
   selector: 'ds-base-text-section',
   templateUrl: './text-section.component.html',
   styleUrls: ['./text-section.component.scss'],
-  standalone: true,
   imports: [
-    NgSwitch,
-    NgSwitchCase,
+    AsyncPipe,
+    MarkdownViewerComponent,
     NgTemplateOutlet,
     TranslateModule,
-    MarkdownViewerComponent,
   ],
 })
 export class TextSectionComponent {
@@ -44,7 +43,9 @@ export class TextSectionComponent {
   ) {
   }
 
-  metadataValue(content: string) {
-    return this.site?.firstMetadataValue(content, { language: this.locale.getCurrentLanguageCode() }) ?? '';
+  metadataValue(content: string): Observable<string> {
+    return this.locale.getCurrentLanguageCode().pipe(
+      map(language => this.site?.firstMetadataValue(content, { language }) ?? ''),
+    );
   }
 }

@@ -1,12 +1,17 @@
-import { TestBed } from '@angular/core/testing';
+import {
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import {
   ActivatedRoute,
   convertToParamMap,
   Params,
   Router,
+  RouterStateSnapshot,
 } from '@angular/router';
 import {
-  of as observableOf,
+  Observable,
   of,
 } from 'rxjs';
 
@@ -19,35 +24,40 @@ import {
   createFailedRemoteDataObject$,
   createSuccessfulRemoteDataObject$,
 } from '../../shared/remote-data.utils';
-import { reviewAccountGuard } from './review-account.guard';
+import { ReviewAccountGuard } from './review-account.guard';
 
-describe('reviewAccountGuard', () => {
+describe('ReviewAccountGuard', () => {
   let epersonRegistrationService: any;
   let authService: any;
+  let router: any;
 
-  const route = new RouterMock();
-  const registrationMock = Object.assign(new Registration(),
-    {
-      email: 'test@email.org',
-      registrationType: AuthRegistrationType.Validation,
-    });
+  const registrationMock = Object.assign(new Registration(), {
+    email: 'test@email.org',
+    registrationType: AuthRegistrationType.Validation,
+  });
 
   beforeEach(() => {
-    const paramObject: Params = {};
-    paramObject.token = '1234';
+    const paramObject: Params = { token: '1234' };
     epersonRegistrationService = jasmine.createSpyObj('epersonRegistrationService', {
-      searchRegistrationByToken: createSuccessfulRemoteDataObject$(registrationMock),
+      searchByTokenAndHandleError: createSuccessfulRemoteDataObject$(registrationMock),
     });
     authService = {
-      isAuthenticated: () => observableOf(true),
+      isAuthenticated: () => of(true),
     } as any;
+    router = new RouterMock();
+
     TestBed.configureTestingModule({
       providers: [
-        { provide: Router, useValue: route },
+        { provide: Router, useValue: router },
         {
           provide: ActivatedRoute,
           useValue: {
-            queryParamMap: observableOf(convertToParamMap(paramObject)),
+            queryParamMap: of(convertToParamMap(paramObject)),
+            snapshot: {
+              params: {
+                token: '1234',
+              },
+            },
           },
         },
         { provide: EpersonRegistrationService, useValue: epersonRegistrationService },
@@ -56,39 +66,55 @@ describe('reviewAccountGuard', () => {
     });
   });
 
-  it('should be created', () => {
-    expect(reviewAccountGuard).toBeTruthy();
-  });
 
-  it('can activate must return true when registration type is validation', () => {
-    TestBed.runInInjectionContext(() => {
-      (reviewAccountGuard({ params: { token: 'valid token' } } as any, {} as any) as any)
-        .subscribe(
-          (canActivate) => {
-            expect(canActivate).toEqual(true);
-          },
-        );
+  it('should return true when registration type is validation', fakeAsync(() => {
+    const state = {} as RouterStateSnapshot;
+    const activatedRoute = TestBed.inject(ActivatedRoute);
+
+    const result$ = TestBed.runInInjectionContext(()=> {
+      return ReviewAccountGuard(activatedRoute.snapshot, state) as Observable<boolean>;
     });
-  });
 
-  it('should navigate to 404 if the registration search fails', () => {
-    epersonRegistrationService.searchRegistrationByToken.and.returnValue(createFailedRemoteDataObject$());
-    TestBed.runInInjectionContext(() => {
-      (reviewAccountGuard({ params: { token: 'invalid-token' } } as any, {} as any) as any).subscribe((result) => {
-        expect(result).toBeFalse();
-        expect(route.navigate).toHaveBeenCalledWith(['/404']);
-      });
+    let output = null;
+    result$.subscribe((result) => (output = result));
+    tick(100);
+    expect(output).toBeTrue();
+  }));
+
+
+  it('should navigate to 404 if the registration search fails', fakeAsync(() => {
+    const state = {} as RouterStateSnapshot;
+    const activatedRoute = TestBed.inject(ActivatedRoute);
+    epersonRegistrationService.searchByTokenAndHandleError.and.returnValue(createFailedRemoteDataObject$());
+
+    const result$ = TestBed.runInInjectionContext(() => {
+      return ReviewAccountGuard(activatedRoute.snapshot, state) as Observable<boolean>;
     });
-  });
 
-  it('should navigate to 404 if the registration type is not validation and the user is not authenticated', () => {
+    let output = null;
+    result$.subscribe((result) => (output = result));
+    tick(100);
+    expect(output).toBeFalse();
+    expect(router.navigate).toHaveBeenCalledWith(['/404']);
+  }));
+
+
+
+  it('should navigate to 404 if the registration type is not validation and the user is not authenticated', fakeAsync(() => {
     registrationMock.registrationType = AuthRegistrationType.Orcid;
-    epersonRegistrationService.searchRegistrationByToken.and.returnValue(createSuccessfulRemoteDataObject$(registrationMock));
+    epersonRegistrationService.searchByTokenAndHandleError.and.returnValue(createSuccessfulRemoteDataObject$(registrationMock));
     spyOn(authService, 'isAuthenticated').and.returnValue(of(false));
-    TestBed.runInInjectionContext(() => {
-      (reviewAccountGuard({ params: { token: 'invalid-token' } } as any, {} as any) as any).subscribe((result) => {
-        expect(route.navigate).toHaveBeenCalledWith(['/404']);
-      });
+    const activatedRoute = TestBed.inject(ActivatedRoute);
+
+    const result$ = TestBed.runInInjectionContext(() => {
+      return ReviewAccountGuard(activatedRoute.snapshot, {} as RouterStateSnapshot) as Observable<boolean>;
     });
-  });
+
+    let output = null;
+    result$.subscribe((result) => (output = result));
+    tick(100);
+    expect(output).toBeFalse();
+    expect(router.navigate).toHaveBeenCalledWith(['/404']);
+  }));
 });
+

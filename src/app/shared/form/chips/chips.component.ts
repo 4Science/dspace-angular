@@ -8,9 +8,6 @@ import {
 import {
   AsyncPipe,
   isPlatformBrowser,
-  NgClass,
-  NgForOf,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -55,20 +52,15 @@ const TOOLTIP_TEXT_LIMIT = 21;
   styleUrls: ['./chips.component.scss'],
   templateUrl: './chips.component.html',
   imports: [
-    NgbTooltipModule,
-    NgClass,
-    NgForOf,
     AsyncPipe,
     AuthorityConfidenceStateDirective,
-    NgIf,
-    TranslateModule,
     CdkDrag,
     CdkDropList,
     CdkDropListGroup,
+    NgbTooltipModule,
     NgTemplateOutlet,
-    CdkDropListGroup,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class ChipsComponent implements OnChanges, OnInit {
   @Input() chips: Chips;
@@ -153,10 +145,10 @@ export class ChipsComponent implements OnChanges, OnInit {
     if (!chipsItem.editMode && this.dragged === -1) {
       if (field) {
         if (isObject(chipsItem.item[field])) {
-          textToDisplay.push(chipsItem.item[field].display);
+          textToDisplay.push((chipsItem.item[field] as any).display);
           let otherInformationKeys: string[] = null;
           if (
-            chipsItem.item[field].hasOtherInformation() &&
+            (chipsItem.item[field] as any).hasOtherInformation() &&
             isNotEmpty(otherInformationKeys = this.getDisplayableOtherInformationKeys(chipsItem, field))
           ) {
             forkJoin(

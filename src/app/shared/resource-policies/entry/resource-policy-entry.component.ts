@@ -5,10 +5,7 @@
  *
  * http://www.dspace.org/license/
  */
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -58,12 +55,10 @@ export interface ResourcePolicyCheckboxEntry {
   templateUrl: './resource-policy-entry.component.html',
   imports: [
     AsyncPipe,
-    TranslateModule,
     FormsModule,
-    NgIf,
     HasValuePipe,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class ResourcePolicyEntryComponent implements OnInit {
   @Input()
@@ -101,7 +96,7 @@ export class ResourcePolicyEntryComponent implements OnInit {
   }
 
   /**
-   * Returns a date in simplified format (YYYY-MM-DD).
+   * Returns a date in simplified format (yyyy-MM-DD).
    *
    * @param date
    * @return a string with formatted date

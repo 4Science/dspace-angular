@@ -6,6 +6,7 @@ import {
   TestBed,
   tick,
 } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
@@ -54,7 +55,7 @@ describe('ReviewAccountInfoComponent', () => {
     get: () => of('test-message'),
     onLangChange: new EventEmitter(),
     onTranslationChange: new EventEmitter(),
-    onDefaultLangChange: new EventEmitter(),
+    onFallbackLangChange: new EventEmitter(),
   };
   const mockEPerson = EPersonMock;
   const modalStub = {
@@ -111,6 +112,8 @@ describe('ReviewAccountInfoComponent', () => {
         { provide: HardRedirectService, useValue: hardRedirectService },
       ],
       imports: [
+        CommonModule,
+        BrowserAnimationsModule,
         ReviewAccountInfoComponent,
         CompareValuesPipe,
         CommonModule,

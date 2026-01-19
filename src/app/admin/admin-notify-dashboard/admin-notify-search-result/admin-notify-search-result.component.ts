@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   DatePipe,
-  NgForOf,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -39,16 +37,13 @@ import { AdminNotifyMessagesService } from '../services/admin-notify-messages.se
       useClass: SearchConfigurationService,
     },
   ],
-  standalone: true,
   imports: [
-    TranslateModule,
-    NgForOf,
-    NgIf,
-    DatePipe,
     AsyncPipe,
+    DatePipe,
+    RouterLink,
+    TranslateModule,
     TruncatableComponent,
     TruncatablePartComponent,
-    RouterLink,
   ],
 })
 /**
@@ -104,7 +99,7 @@ export class AdminNotifySearchResultComponent extends TabulatableResultListEleme
    * The format for the date values
    * @private
    */
-  private dateFormat = 'YYYY/MM/d hh:mm:ss';
+  private dateFormat = 'yyyy/MM/d hh:mm:ss';
 
   constructor(private modalService: NgbModal,
                 private adminNotifyMessagesService: AdminNotifyMessagesService,

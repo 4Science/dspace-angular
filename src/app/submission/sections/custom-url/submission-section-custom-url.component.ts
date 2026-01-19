@@ -1,7 +1,4 @@
-import {
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+
 import {
   Component,
   Inject,
@@ -54,11 +51,8 @@ import { SectionsType } from '../sections-type';
   styleUrls: ['./submission-section-custom-url.component.scss'],
   imports: [
     FormComponent,
-    NgIf,
     TranslateModule,
-    NgForOf,
   ],
-  standalone: true,
 })
 export class SubmissionSectionCustomUrlComponent extends SectionModelComponent {
 

@@ -49,7 +49,7 @@ describe('ConfirmEmailComponent', () => {
     get: () => of(''),
     onLangChange: new EventEmitter(),
     onTranslationChange: new EventEmitter(),
-    onDefaultLangChange: new EventEmitter(),
+    onFallbackLangChange: new EventEmitter(),
   };
 
   beforeEach(async () => {
@@ -80,6 +80,7 @@ describe('ConfirmEmailComponent', () => {
       ],
       imports: [
         CommonModule,
+        ConfirmEmailComponent,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,

@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   FormsModule,
@@ -16,8 +15,13 @@ import { ErrorComponent } from '../../../../../../app/shared/error/error.compone
   templateUrl: '../../../../../../app/info/feedback/feedback-form/feedback-form.component.html',
   // styleUrls: ['./feedback-form.component.scss'],
   styleUrls: ['../../../../../../app/info/feedback/feedback-form/feedback-form.component.scss'],
-  standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, NgIf, ErrorComponent, TranslateModule, BtnDisabledDirective],
+  imports: [
+    BtnDisabledDirective,
+    ErrorComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TranslateModule,
+  ],
 })
 export class FeedbackFormComponent extends BaseComponent {
 }

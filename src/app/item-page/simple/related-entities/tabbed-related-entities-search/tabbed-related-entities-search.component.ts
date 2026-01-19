@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -24,8 +20,13 @@ import { RelatedEntitiesSearchComponent } from '../related-entities-search/relat
 @Component({
   selector: 'ds-tabbed-related-entities-search',
   templateUrl: './tabbed-related-entities-search.component.html',
-  standalone: true,
-  imports: [NgIf, NgbNavModule, NgFor, RelatedEntitiesSearchComponent, VarDirective, AsyncPipe, TranslateModule],
+  imports: [
+    AsyncPipe,
+    NgbNavModule,
+    RelatedEntitiesSearchComponent,
+    TranslateModule,
+    VarDirective,
+  ],
 })
 /**
  * A component to show related items as search results, split into tabs by relationship-type
@@ -87,8 +88,10 @@ export class TabbedRelatedEntitiesSearchComponent implements OnInit {
       relativeTo: this.route,
       queryParams: {
         tab: event.nextId,
+        query: this.route.snapshot.queryParams.query,
+        scope: this.route.snapshot.queryParams.scope,
+        'spc.page': 1,
       },
-      queryParamsHandling: 'merge',
     });
   }
 

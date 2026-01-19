@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -61,14 +60,12 @@ import { ItemVersionsSummaryModalComponent } from '../item-versions-summary-moda
 
 @Component({
   selector: 'ds-item-versions-row-element-version',
-  standalone: true,
   imports: [
     AsyncPipe,
+    BtnDisabledDirective,
+    NgClass,
     RouterLink,
     TranslateModule,
-    NgClass,
-    NgIf,
-    BtnDisabledDirective,
   ],
   templateUrl: './item-versions-row-element-version.component.html',
   styleUrl: './item-versions-row-element-version.component.scss',

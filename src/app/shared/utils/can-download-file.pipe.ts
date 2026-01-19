@@ -9,7 +9,6 @@ import { FeatureID } from '../../core/data/feature-authorization/feature-id';
 
 @Pipe({
   name: 'dsCanDownloadFile',
-  standalone: true,
 })
 export class CanDownloadFilePipe implements PipeTransform {
   constructor(private authorizationServcie: AuthorizationDataService) {

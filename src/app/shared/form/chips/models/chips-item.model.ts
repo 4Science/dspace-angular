@@ -46,7 +46,7 @@ export class ChipsItem {
     this._item = item;
   }
 
-  public get item() {
+  public get item(): any {
     return this._item;
   }
 

@@ -1,8 +1,8 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import {
-  async,
   ComponentFixture,
   TestBed,
+  waitForAsync,
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -71,7 +71,7 @@ describe('MetadataLinkViewPopoverComponent', () => {
     thumbnail: createSuccessfulRemoteDataObject$(new Bitstream()),
   });
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot(), MetadataLinkViewPopoverComponent],
       schemas: [NO_ERRORS_SCHEMA],
@@ -102,7 +102,7 @@ describe('MetadataLinkViewPopoverComponent', () => {
   });
 
   it('should display the item title', () => {
-    const titleElement = fixture.debugElement.query(By.css('.font-weight-bold.h4'));
+    const titleElement = fixture.debugElement.query(By.css('.fw-bold.h4'));
     expect(titleElement.nativeElement.textContent).toContain('Test Title');
   });
 

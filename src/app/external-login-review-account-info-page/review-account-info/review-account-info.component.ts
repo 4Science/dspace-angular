@@ -1,8 +1,4 @@
-import {
-  NgForOf,
-  NgIf,
-  TitleCasePipe,
-} from '@angular/common';
+import { TitleCasePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -42,6 +38,7 @@ import {
 import { Registration } from '../../core/shared/registration.model';
 import { ExternalLoginService } from '../../external-log-in/services/external-login.service';
 import { AlertComponent } from '../../shared/alert/alert.component';
+import { AlertType } from '../../shared/alert/alert-type';
 import { ConfirmationModalComponent } from '../../shared/confirmation-modal/confirmation-modal.component';
 import { hasValue } from '../../shared/empty.util';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
@@ -64,19 +61,25 @@ export interface ReviewAccountInfoData {
   selector: 'ds-review-account-info',
   templateUrl: './review-account-info.component.html',
   styleUrls: ['./review-account-info.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     AlertComponent,
-    TranslateModule,
-    TitleCasePipe,
-    NgForOf,
     CompareValuesPipe,
-    NgIf,
     SwitchComponent,
+    TitleCasePipe,
+    TranslateModule,
   ],
-  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
+/**
+ * This component shows up the difference between the current account details and the one provided by the
+ * Registration data.
+ */
 export class ReviewAccountInfoComponent implements OnInit, OnDestroy {
+  /**
+   * The AlertType enumeration for access in the component's template
+   * @type {AlertType}
+   */
+  public AlertTypeEnum = AlertType;
   /**
    * The registration token sent from validation link
    */

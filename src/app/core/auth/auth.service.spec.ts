@@ -16,7 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { cold } from 'jasmine-marbles';
 import {
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 
 import { REQUEST } from '../../../express.tokens';
@@ -97,7 +97,7 @@ describe('AuthService test', () => {
   function init() {
     mockStore = jasmine.createSpyObj('store', {
       dispatch: {},
-      pipe: observableOf(true),
+      pipe: of(true),
     });
     window = new NativeWindowRef();
     routerStub = new RouterStub();
@@ -133,7 +133,7 @@ describe('AuthService test', () => {
       resolveLinks: {},
     };
     hardRedirectService = jasmine.createSpyObj('hardRedirectService', ['redirect']);
-    spyOn(linkService, 'resolveLinks').and.returnValue({ authenticated: true, eperson: observableOf({ payload: {} }) });
+    spyOn(linkService, 'resolveLinks').and.returnValue({ authenticated: true, eperson: of({ payload: {} }) });
 
   }
 
@@ -242,7 +242,7 @@ describe('AuthService test', () => {
       });
 
       it('store should dispatch SetUserAsIdleAction', () => {
-        expect(mockStore.dispatch).toHaveBeenCalledWith(new SetUserAsIdleAction());
+        expect(mockStore.dispatch as jasmine.Spy).toHaveBeenCalledWith(new SetUserAsIdleAction());
       });
     });
 
@@ -252,7 +252,7 @@ describe('AuthService test', () => {
       });
 
       it('store should dispatch UnsetUserAsIdleAction', () => {
-        expect(mockStore.dispatch).toHaveBeenCalledWith(new UnsetUserAsIdleAction());
+        expect(mockStore.dispatch as jasmine.Spy).toHaveBeenCalledWith(new UnsetUserAsIdleAction());
       });
     });
   });

@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   ViewChild,
@@ -14,12 +14,10 @@ import { AccessControlFormContainerComponent } from '../../../shared/access-cont
   styleUrls: ['./bulk-access-settings.component.scss'],
   exportAs: 'dsBulkSettings',
   imports: [
+    AccessControlFormContainerComponent,
     NgbAccordionModule,
     TranslateModule,
-    NgIf,
-    AccessControlFormContainerComponent,
   ],
-  standalone: true,
 })
 export class BulkAccessSettingsComponent {
 

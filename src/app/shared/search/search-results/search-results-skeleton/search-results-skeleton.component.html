@@ -1,12 +1,11 @@
 @if (showFallbackMessages) {
-  <ng-container *ngVar="(delayTimer$ | async) as timer">
-    @defer (when timer >= errorMessageDelay) {
-      <ds-alert [type]="AlertTypeEnum.Error" [content]="errorMessage"></ds-alert>
-    }
-    @defer (when timer >= warningMessageDelay && timer < errorMessageDelay) {
-      <label aria-live="polite">{{ warningMessage }}</label>
-    }
-  </ng-container>
+  @let timer = delayTimer$ | async;
+  @defer (when timer >= errorMessageDelay) {
+    <ds-alert [type]="AlertTypeEnum.Error" [content]="errorMessage"></ds-alert>
+  }
+  @defer (when timer >= warningMessageDelay && timer < errorMessageDelay) {
+    <label aria-live="polite">{{ warningMessage }}</label>
+  }
 }
 
 @if (!showFallbackMessages || ((delayTimer$ | async) < errorMessageDelay)) {

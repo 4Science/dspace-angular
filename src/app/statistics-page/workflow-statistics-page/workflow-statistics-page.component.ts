@@ -32,10 +32,6 @@ import { WorkflowStepStatisticsDataService } from '../../core/statistics/workflo
 import { CollectionSelectorComponent } from '../../my-dspace-page/collection-selector/collection-selector.component';
 import { AlertComponent } from '../../shared/alert/alert.component';
 import { AlertType } from '../../shared/alert/alert-type';
-import { ThemedLoadingComponent } from '../../shared/loading/themed-loading.component';
-import { VarDirective } from '../../shared/utils/var.directive';
-import { CrisStatisticsPageComponent } from '../cris-statistics-page/cris-statistics-page.component';
-import { StatisticsTableComponent } from '../statistics-table/statistics-table.component';
 
 /**
  * Component related to the WORKFLOW statistics page.
@@ -44,8 +40,14 @@ import { StatisticsTableComponent } from '../statistics-table/statistics-table.c
   selector: 'ds-workflow-statistics',
   templateUrl: './workflow-statistics-page.component.html',
   styleUrls: ['./workflow-statistics-page.component.scss'],
-  standalone: true,
-  imports: [CommonModule, VarDirective, ThemedLoadingComponent, StatisticsTableComponent, TranslateModule, CrisStatisticsPageComponent, AlertComponent, FormsModule, NgbDatepickerModule, BtnDisabledDirective],
+  imports: [
+    AlertComponent,
+    BtnDisabledDirective,
+    CommonModule,
+    FormsModule,
+    NgbDatepickerModule,
+    TranslateModule,
+  ],
 })
 export class WorkflowStatisticsPageComponent implements OnInit {
 

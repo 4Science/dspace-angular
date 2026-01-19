@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   isPlatformBrowser,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -33,15 +31,12 @@ import { UsageReport } from '../../../core/statistics/models/usage-report.model'
   selector: 'ds-statistics-map',
   templateUrl: './statistics-map.component.html',
   styleUrls: ['./statistics-map.component.scss'],
-  standalone: true,
   imports: [
-    NgIf,
-    NgbDropdownModule,
-    NgFor,
-    Ng2GoogleChartsModule,
     AsyncPipe,
-    TranslateModule,
     BtnDisabledDirective,
+    Ng2GoogleChartsModule,
+    NgbDropdownModule,
+    TranslateModule,
   ],
 })
 // @renderChartFor(StatisticsType['map'])

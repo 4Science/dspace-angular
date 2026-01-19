@@ -1,9 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgForOf,
-  NgSwitch,
-  NgSwitchCase,
 } from '@angular/common';
 import {
   Component,
@@ -32,19 +29,15 @@ import { ThemedTopSectionComponent } from '../shared/explore/section-component/t
 @Component({
   selector: 'ds-explore',
   templateUrl: './explore-page.component.html',
-  standalone: true,
   imports: [
-    NgForOf,
-    NgClass,
-    ThemedTopSectionComponent,
-    ThemedBrowseSectionComponent,
-    ThemedSearchSectionComponent,
-    ThemedFacetSectionComponent,
-    ThemedTextSectionComponent,
-    ThemedCountersSectionComponent,
-    NgSwitchCase,
-    NgSwitch,
     AsyncPipe,
+    NgClass,
+    ThemedBrowseSectionComponent,
+    ThemedCountersSectionComponent,
+    ThemedFacetSectionComponent,
+    ThemedSearchSectionComponent,
+    ThemedTextSectionComponent,
+    ThemedTopSectionComponent,
   ],
 })
 export class ExplorePageComponent implements OnInit {

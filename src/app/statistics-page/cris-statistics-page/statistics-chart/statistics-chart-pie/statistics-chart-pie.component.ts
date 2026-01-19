@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -34,14 +31,12 @@ import { StatisticsChartDataComponent } from '../statistics-chart-data/statistic
   selector: 'ds-statistics-chart-pie',
   styleUrls: ['./statistics-chart-pie.component.scss'],
   templateUrl: './statistics-chart-pie.component.html',
-  standalone: true,
   imports: [
-    NgIf,
-    ChartComponent,
     AlertComponent,
     AsyncPipe,
-    TranslateModule,
     BtnDisabledDirective,
+    ChartComponent,
+    TranslateModule,
   ],
 })
 

@@ -13,11 +13,10 @@ import { AlertType } from '../../shared/alert/alert-type';
   templateUrl: './objectgone.component.html',
   styleUrls: ['./objectgone.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default,
-  standalone: true,
   imports: [
     AlertComponent,
-    TranslateModule,
     RouterLink,
+    TranslateModule,
   ],
 })
 export class ObjectGoneComponent {

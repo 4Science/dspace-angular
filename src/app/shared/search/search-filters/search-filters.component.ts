@@ -47,8 +47,13 @@ import { SearchFilterComponent } from './search-filter/search-filter.component';
   selector: 'ds-base-search-filters',
   styleUrls: ['./search-filters.component.scss'],
   templateUrl: './search-filters.component.html',
-  standalone: true,
-  imports: [SearchFilterComponent, RouterLink, AsyncPipe, TranslateModule, NgxSkeletonLoaderModule],
+  imports: [
+    AsyncPipe,
+    NgxSkeletonLoaderModule,
+    RouterLink,
+    SearchFilterComponent,
+    TranslateModule,
+  ],
 })
 
 /**

@@ -24,7 +24,6 @@ import { StartsWithType } from './starts-with-type';
 @Component({
   selector: 'ds-start-with-abstract',
   template: '',
-  standalone: true,
 })
 export abstract class StartsWithAbstractComponent implements OnInit, OnDestroy {
 
@@ -92,11 +91,10 @@ export abstract class StartsWithAbstractComponent implements OnInit, OnDestroy {
       this.startsWith = undefined;
     }
     if (resetPage) {
-      this.paginationService.updateRoute(this.paginationId, { page: 1 }, { startsWith: this.startsWith });
+      this.paginationService.updateRoute(this.paginationId, { page: 1 }, { startsWith: this.startsWith }, undefined, { queryParamsHandling: '' });
     } else {
       void this.router.navigate([], {
         queryParams: Object.assign({ startsWith: this.startsWith }),
-        queryParamsHandling: 'merge',
       });
     }
   }

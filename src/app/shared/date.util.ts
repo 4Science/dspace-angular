@@ -19,7 +19,7 @@ export function isNgbDateStruct(value: object): boolean {
 }
 
 /**
- * Returns a date in simplified extended ISO format (YYYY-MM-DDTHH:mm:ssZ).
+ * Returns a date in simplified extended ISO format (yyyy-MM-DDTHH:mm:ssZ).
  * The timezone is always zero UTC offset, as denoted by the suffix "Z"
  *
  * @param date
@@ -79,7 +79,7 @@ export function dateToNgbDateStruct(date?: Date): NgbDateStruct {
 }
 
 /**
- * Returns a date in simplified format (YYYY-MM-DD).
+ * Returns a date in simplified format (yyyy-MM-DD).
  *
  * @param date
  *    The date to format

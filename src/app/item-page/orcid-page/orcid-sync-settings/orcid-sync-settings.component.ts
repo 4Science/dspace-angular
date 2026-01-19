@@ -1,4 +1,4 @@
-import { NgForOf } from '@angular/common';
+
 import {
   Component,
   EventEmitter,
@@ -51,9 +51,7 @@ import { createFailedRemoteDataObjectFromError$ } from '../../../shared/remote-d
     AlertComponent,
     FormsModule,
     TranslateModule,
-    NgForOf,
   ],
-  standalone: true,
 })
 export class OrcidSyncSettingsComponent implements OnInit, OnDestroy {
   protected readonly AlertType = AlertType;
@@ -251,12 +249,11 @@ export class OrcidSyncSettingsComponent implements OnInit, OnDestroy {
         take(1),
       )
       .subscribe((remoteData: RemoteData<ResearcherProfile>) => {
-        // hasSucceeded is true if the response is success or successStale
-        if (remoteData.hasSucceeded) {
+        if (remoteData.hasFailed) {
+          this.notificationsService.error(this.translateService.get(this.messagePrefix + '.synchronization-settings-update.error'));
+        } else {
           this.notificationsService.success(this.translateService.get(this.messagePrefix + '.synchronization-settings-update.success'));
           this.settingsUpdated.emit();
-        } else {
-          this.notificationsService.error(this.translateService.get(this.messagePrefix + '.synchronization-settings-update.error'));
         }
       });
   }

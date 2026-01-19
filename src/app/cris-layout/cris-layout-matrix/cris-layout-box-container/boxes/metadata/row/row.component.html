@@ -1,6 +1,10 @@
-<div class="d-flex flex-column w-100 col metadata-cell" [class]="cell.style" *ngFor="let cell of row.cells">
-  <ds-metadata-container *ngFor="let field of cell.fields; trackBy: trackUpdate" class="w-100"
-                         [box]="box"
-                         [item]="item"
-                         [field]="field"></ds-metadata-container>
-</div>
+@for (cell of row.cells; track cell) {
+  <div class="d-flex flex-column w-100 col metadata-cell" [class]="cell.style">
+    @for (field of cell.fields; track trackUpdate($index, field)) {
+      <ds-metadata-container class="w-100"
+        [box]="box"
+        [item]="item"
+      [field]="field"></ds-metadata-container>
+    }
+  </div>
+}

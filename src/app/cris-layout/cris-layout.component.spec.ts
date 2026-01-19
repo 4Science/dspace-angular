@@ -16,7 +16,7 @@ import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { TabDataService } from '../core/layout/tab-data.service';
 import { Item } from '../core/shared/item.model';
@@ -53,10 +53,10 @@ const mockItem = Object.assign(new Item(), {
 });
 
 const tabDataServiceMock: any = jasmine.createSpyObj('TabDataService', {
-  findByItem: observableOf(leadingTabs),
+  findByItem: of(leadingTabs),
 });
 const route = {
-  data: observableOf({ tabs: createSuccessfulRemoteDataObject(createPaginatedList(leadingTabs)) }),
+  data: of({ tabs: createSuccessfulRemoteDataObject(createPaginatedList(leadingTabs)) }),
 };
 
 describe('CrisLayoutComponent', () => {
@@ -84,11 +84,11 @@ describe('CrisLayoutComponent', () => {
     fixture = TestBed.createComponent(CrisLayoutComponent);
     component = fixture.componentInstance;
     component.item = mockItem;
-    tabDataServiceMock.findByItem.and.returnValue(observableOf(leadingTabs));
+    tabDataServiceMock.findByItem.and.returnValue(of(leadingTabs));
 
-    component.tabs$ = observableOf(leadingTabs);
-    component.leadingTabs$ = observableOf(leadingTabs);
-    component.loaderTabs$ = observableOf([]);
+    component.tabs$ = of(leadingTabs);
+    component.leadingTabs$ = of(leadingTabs);
+    component.loaderTabs$ = of([]);
 
     component.hasLeadingTab$.next(true);
     fixture.detectChanges();
@@ -97,9 +97,9 @@ describe('CrisLayoutComponent', () => {
   describe('When the component is rendered', () => {
 
     it('it should show only ds-cris-layout-leading when only leading tabs', fakeAsync(() => {
-      component.tabs$ = observableOf(leadingTabs);
-      component.leadingTabs$ = observableOf(leadingTabs);
-      component.loaderTabs$ = observableOf([]);
+      component.tabs$ = of(leadingTabs);
+      component.leadingTabs$ = of(leadingTabs);
+      component.loaderTabs$ = of([]);
       fixture.detectChanges();
       tick(); // Simulate the passage of time to ensure the DOM is updated
       fixture.detectChanges();
@@ -108,9 +108,9 @@ describe('CrisLayoutComponent', () => {
     }));
 
     it('it should show only ds-cris-layout-loader when only loader tabs', fakeAsync(() => {
-      component.tabs$ = observableOf(loaderTabs);
-      component.leadingTabs$ = observableOf([]);
-      component.loaderTabs$ = observableOf(loaderTabs);
+      component.tabs$ = of(loaderTabs);
+      component.leadingTabs$ = of([]);
+      component.loaderTabs$ = of(loaderTabs);
       fixture.detectChanges();
       tick(); // Simulate the passage of time to ensure the DOM is updated
       fixture.detectChanges();
@@ -119,9 +119,9 @@ describe('CrisLayoutComponent', () => {
     }));
 
     it('it should show both when both types of tabs', fakeAsync(() => {
-      component.tabs$ = observableOf(bothTabs);
-      component.leadingTabs$ = observableOf(leadingTabs);
-      component.loaderTabs$ = observableOf(loaderTabs);
+      component.tabs$ = of(bothTabs);
+      component.leadingTabs$ = of(leadingTabs);
+      component.loaderTabs$ = of(loaderTabs);
       fixture.detectChanges();
       tick(); // Simulate the passage of time to ensure the DOM is updated
       fixture.detectChanges();

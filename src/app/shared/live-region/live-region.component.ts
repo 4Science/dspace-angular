@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgFor,
 } from '@angular/common';
 import {
   Component,
@@ -21,8 +20,10 @@ import { LiveRegionService } from './live-region.service';
   selector: `ds-live-region`,
   templateUrl: './live-region.component.html',
   styleUrls: ['./live-region.component.scss'],
-  standalone: true,
-  imports: [NgClass, NgFor, AsyncPipe],
+  imports: [
+    AsyncPipe,
+    NgClass,
+  ],
 })
 export class LiveRegionComponent implements OnInit {
 

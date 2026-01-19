@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -48,8 +44,15 @@ import { VarDirective } from '../shared/utils/var.directive';
   selector: 'ds-subscriptions-page',
   templateUrl: './subscriptions-page.component.html',
   styleUrls: ['./subscriptions-page.component.scss'],
-  standalone: true,
-  imports: [NgIf, ThemedLoadingComponent, VarDirective, PaginationComponent, NgFor, SubscriptionViewComponent, AlertComponent, AsyncPipe, TranslateModule],
+  imports: [
+    AlertComponent,
+    AsyncPipe,
+    PaginationComponent,
+    SubscriptionViewComponent,
+    ThemedLoadingComponent,
+    TranslateModule,
+    VarDirective,
+  ],
 })
 /**
  * List and allow to manage all the active subscription for the current user
@@ -102,7 +105,10 @@ export class SubscriptionsPageComponent implements OnInit, OnDestroy {
     this.ePersonId$ = this.authService.getAuthenticatedUserFromStore().pipe(
       take(1),
       map((ePerson: EPerson) => ePerson.id),
-      shareReplay({ refCount: false }),
+      shareReplay({
+        bufferSize: 1,
+        refCount: false,
+      }),
     );
     this.retrieveSubscriptions();
   }

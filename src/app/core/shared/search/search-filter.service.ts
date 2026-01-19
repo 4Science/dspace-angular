@@ -10,7 +10,7 @@ import {
   combineLatest,
   combineLatest as observableCombineLatest,
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import {
   distinctUntilChanged,
@@ -176,7 +176,7 @@ export class SearchFilterService {
         })),
       );
     } else {
-      return observableOf([]);
+      return of([]);
     }
   }
 

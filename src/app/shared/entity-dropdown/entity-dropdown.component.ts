@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -32,6 +28,7 @@ import {
   take,
   tap,
 } from 'rxjs/operators';
+import { SortPipe } from 'src/app/shared/utils/sort.pipe';
 
 import { EntityTypeDataService } from '../../core/data/entity-type-data.service';
 import { FindListOptions } from '../../core/data/find-list-options.model';
@@ -52,14 +49,18 @@ import {
 } from '../empty.util';
 import { ThemedLoadingComponent } from '../loading/themed-loading.component';
 import { createSuccessfulRemoteDataObject } from '../remote-data.utils';
-import { SortPipe } from '../utils/sort.pipe';
 
 @Component({
   selector: 'ds-entity-dropdown',
   templateUrl: './entity-dropdown.component.html',
   styleUrls: ['./entity-dropdown.component.scss'],
-  standalone: true,
-  imports: [InfiniteScrollDirective, NgIf, NgFor, ThemedLoadingComponent, AsyncPipe, TranslateModule, SortPipe],
+  imports: [
+    AsyncPipe,
+    InfiniteScrollDirective,
+    SortPipe,
+    ThemedLoadingComponent,
+    TranslateModule,
+  ],
 })
 export class EntityDropdownComponent implements OnInit, OnDestroy {
   /**
@@ -168,7 +169,7 @@ export class EntityDropdownComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Method used from infitity scroll for retrive more data on scroll down
+   * Method used from infitity scroll for retrieve more data on scroll down
    */
   public onScrollDown() {
     if ( this.hasNextPage ) {

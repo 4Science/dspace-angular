@@ -5,7 +5,7 @@ import {
   waitForAsync,
 } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { LinkService } from '../../../core/cache/builders/link.service';
 import { Item } from '../../../core/shared/item.model';
@@ -20,7 +20,7 @@ let linkService: LinkService;
 const type = 'authorOfPublication';
 
 const mockItem = Object.assign(new Item(), {
-  bundles: observableOf({}),
+  bundles: of({}),
   metadata: {
     'dspace.entity.type': [
       {
@@ -30,18 +30,6 @@ const mockItem = Object.assign(new Item(), {
     ],
   },
 });
-
-// const mockItemWithoutEntityType = Object.assign(new Item(), {
-//   bundles: observableOf({}),
-//   metadata: {
-//     'dc.title': [
-//       {
-//         language: 'en_US',
-//         value: 'This is just another title'
-//       }
-//     ]
-//   }
-// });
 
 describe('MetricDonutsComponent', () => {
 

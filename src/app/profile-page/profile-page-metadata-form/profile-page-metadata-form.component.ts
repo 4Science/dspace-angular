@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Input,
@@ -35,9 +35,7 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
   templateUrl: './profile-page-metadata-form.component.html',
   imports: [
     FormComponent,
-    NgIf,
   ],
-  standalone: true,
 })
 /**
  * Component for a user to edit their metadata

@@ -62,7 +62,7 @@ export const environment: BuildConfig = {
     port: 443,
     // NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
     nameSpace: '/api',
-    baseUrl: 'https://rest.com/api',
+    baseUrl: 'https://rest.com/server',
   },
 
   actuators: {
@@ -225,8 +225,8 @@ export const environment: BuildConfig = {
   // NOTE: will log all redux actions and transfers in console
   debug: false,
 
-  // Default Language in which the UI will be rendered if the user's browser language is not an active language
-  defaultLanguage: 'en',
+  // Fallback language in which the UI will be rendered if the user's browser language is not an active language
+  fallbackLanguage: 'en',
 
   // Languages. DSpace Angular holds a message catalog for each of the following languages.
   // When set to active, users will be able to switch to the use of this language in the user interface.
@@ -324,6 +324,7 @@ export const environment: BuildConfig = {
       // Rounded to the nearest size in the list of selectable sizes on the
       // settings menu.  See pageSizeOptions in 'pagination-component-options.model.ts'.
       pageSize: 5,
+      showAccessStatuses: false,
     },
     // The maximum number of metadata values to add to the metatag list of the item page
     metatagLimit: 20,
@@ -382,8 +383,8 @@ export const environment: BuildConfig = {
     enableEndUserAgreement: true,
     enablePrivacyStatement: true,
     enableCOARNotifySupport: true,
-    enableCookieConsentPopup: true,
-    //Configuration for third-party metrics in Klaro
+    enableCookieConsentPopup: false,
+    //Configuration for third-party metrics in Orejime
     metricsConsents: [
       {
         key: 'plumX',
@@ -511,6 +512,25 @@ export const environment: BuildConfig = {
     isVisible: false,
   },
 
+  // Leaflet tile providers and other configurable attributes
+  geospatialMapViewer: {
+    spatialMetadataFields: [
+      'dcterms.spatial',
+    ],
+    spatialFacetDiscoveryConfiguration: 'geospatial',
+    spatialPointFilterName: 'point',
+    enableItemPageFields: true,
+    enableSearchViewMode: true,
+    enableBrowseMap: true,
+    tileProviders: [
+      'OpenStreetMap.Mapnik',
+    ],
+    defaultCentrePoint: {
+      lat: 41.015137,
+      lng: 28.979530,
+    },
+  },
+
   accessibility: {
     cookieExpirationDuration: 7,
   },
@@ -591,7 +611,7 @@ export const environment: BuildConfig = {
       defaultMetadataValueColStyle: 'col-9',
     },
     collectionsBox: {
-      defaultCollectionsLabelColStyle: 'col-3 font-weight-bold',
+      defaultCollectionsLabelColStyle: 'col-3 fw-bold',
       defaultCollectionsValueColStyle: 'col-9',
       isInline: true,
     },

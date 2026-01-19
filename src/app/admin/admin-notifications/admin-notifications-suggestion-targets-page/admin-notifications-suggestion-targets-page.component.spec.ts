@@ -1,20 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import {
-  async,
   ComponentFixture,
   TestBed,
+  waitForAsync,
 } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { PublicationClaimComponent } from '../../../notifications/suggestion-targets/publication-claim/publication-claim.component';
+import { PublicationClaimComponent } from '../../../notifications/suggestions/targets/publication-claim/publication-claim.component';
 import { AdminNotificationsSuggestionTargetsPageComponent } from './admin-notifications-suggestion-targets-page.component';
 
 describe('AdminNotificationsSuggestionTargetsPageComponent', () => {
   let component: AdminNotificationsSuggestionTargetsPageComponent;
   let fixture: ComponentFixture<AdminNotificationsSuggestionTargetsPageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         CommonModule,

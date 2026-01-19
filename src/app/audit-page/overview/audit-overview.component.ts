@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   DatePipe,
-  NgForOf,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -36,16 +34,13 @@ import { VarDirective } from '../../shared/utils/var.directive';
   selector: 'ds-audit-overview',
   templateUrl: './audit-overview.component.html',
   imports: [
-    PaginationComponent,
-    NgIf,
     AsyncPipe,
-    TranslateModule,
-    RouterLink,
-    NgForOf,
-    VarDirective,
     DatePipe,
+    PaginationComponent,
+    RouterLink,
+    TranslateModule,
+    VarDirective,
   ],
-  standalone: true,
 })
 export class AuditOverviewComponent implements OnInit {
 

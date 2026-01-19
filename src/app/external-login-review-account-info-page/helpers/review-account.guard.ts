@@ -22,30 +22,37 @@ import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { Registration } from '../../core/shared/registration.model';
 import { hasValue } from '../../shared/empty.util';
 
-export const reviewAccountGuard: CanActivateFn = (
+/**
+ * Determines if a user can activate a route based on the registration token.z
+ * @param route - The activated route snapshot.
+ * @param state - The router state snapshot.
+ * @returns A value indicating if the user can activate the route.
+ */
+export const ReviewAccountGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
 ): Observable<boolean | UrlTree> => {
+  const authService = inject(AuthService);
   const router = inject(Router);
   const epersonRegistrationService = inject(EpersonRegistrationService);
-  const authService = inject(AuthService);
-
   if (route.params.token) {
     return epersonRegistrationService
-      .searchRegistrationByToken(route.params.token)
+      .searchByTokenAndHandleError(route.params.token)
       .pipe(
         getFirstCompletedRemoteData(),
-        mergeMap((data: RemoteData<Registration>) => {
-          if (data.hasSucceeded && hasValue(data.payload)) {
-            // is the registration type validation (account valid)
-            if (hasValue(data.payload.registrationType) && data.payload.registrationType.includes(AuthRegistrationType.Validation)) {
-              return of(true);
-            } else {
-              return authService.isAuthenticated();
+        mergeMap(
+          (data: RemoteData<Registration>) => {
+            if (data.hasSucceeded && hasValue(data.payload)) {
+              // is the registration type validation (account valid)
+              if (hasValue(data.payload.registrationType) && data.payload.registrationType.includes(AuthRegistrationType.Validation)) {
+                return of(true);
+              } else {
+                return authService.isAuthenticated();
+              }
             }
-          }
-          return of(false);
-        }),
+            return of(false);
+          },
+        ),
         tap((isValid: boolean) => {
           if (!isValid) {
             router.navigate(['/404']);

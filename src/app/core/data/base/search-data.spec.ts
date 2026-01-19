@@ -5,10 +5,7 @@
  *
  * http://www.dspace.org/license/
  */
-import {
-  of as observableOf,
-  of,
-} from 'rxjs';
+import { of } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 
 import { getMockRemoteDataBuildService } from '../../../shared/mocks/remote-data-build.service.mock';
@@ -84,7 +81,7 @@ describe('SearchDataImpl', () => {
   function initTestService(): SearchDataImpl<any> {
     requestService = getMockRequestService();
     halService = jasmine.createSpyObj('halService', {
-      getEndpoint: observableOf(endpoint),
+      getEndpoint: of(endpoint),
     });
     rdbService = getMockRemoteDataBuildService();
     linksToFollow = [

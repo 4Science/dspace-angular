@@ -1,33 +1,32 @@
-<ng-container *ngIf="!reports">
+@if (!reports) {
   <ds-loading></ds-loading>
-</ng-container>
+}
 
-<ng-container *ngIf="reports">
+@if (reports) {
   <div class="container">
     <div class="row">
       <div class="col-md-12 mb-40">
         <h2>{{'statistics.reports.title' | translate}}</h2>
         <ul class="nav nav-pills mb-2">
-          <li class="nav-item mr-3" *ngFor="let report of (reports | dsFilterMap : false)">
-            <a class="nav-link" [ngClass]="{'active' : !!selectedReport && selectedReport.id === report.id}"
-               href="#"
-               (click)="$event.preventDefault();$event.stopPropagation();changeReport(report)">
-              {{'statistics.table.' + categoryType + '.title.' + report.reportType | translate}}
-            </a>
-          </li>
+          @for (report of (reports | dsFilterMap : false); track report) {
+            <li class="nav-item me-3">
+              <a class="nav-link" [ngClass]="{'active' : !!selectedReport && selectedReport.id === report.id}"
+                href="#"
+                (click)="$event.preventDefault();$event.stopPropagation();changeReport(report)">
+                {{'statistics.table.' + categoryType + '.title.' + report.reportType | translate}}
+              </a>
+            </li>
+          }
         </ul>
-
-        <ng-container *ngIf="!selectedReport">
+        @if (!selectedReport) {
           <ds-loading></ds-loading>
-        </ng-container>
-
-        <ng-container *ngIf="selectedReport">
+        }
+        @if (selectedReport) {
           <ds-statistics-chart-wrapper [type]="selectedReport.viewMode"
-                                       [categoryType]="categoryType"
-                                       [report]="selectedReport"></ds-statistics-chart-wrapper>
-        </ng-container>
-
+            [categoryType]="categoryType"
+          [report]="selectedReport"></ds-statistics-chart-wrapper>
+        }
       </div>
     </div>
   </div>
-</ng-container>
+}

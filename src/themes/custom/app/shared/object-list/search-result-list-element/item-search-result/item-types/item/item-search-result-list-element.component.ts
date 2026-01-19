@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
@@ -32,8 +30,22 @@ import { ThemedThumbnailComponent } from '../../../../../../../../../app/thumbna
   styleUrls: ['../../../../../../../../../app/shared/object-list/search-result-list-element/item-search-result/item-types/item/item-search-result-list-element.component.scss'],
   // templateUrl: './item-search-result-list-element.component.html',
   templateUrl: '../../../../../../../../../app/shared/object-list/search-result-list-element/item-search-result/item-types/item/item-search-result-list-element.component.html',
-  standalone: true,
-  imports: [NgIf, RouterLink, ThemedThumbnailComponent, NgClass, ThemedBadgesComponent, TruncatableComponent, TruncatablePartComponent, NgFor, AsyncPipe, TranslateModule, AdditionalMetadataComponent, MetadataLinkViewComponent, MetricBadgesComponent, MetricDonutsComponent, InWorkflowStatisticsComponent, EscapeHtmlPipe],
+  imports: [
+    AdditionalMetadataComponent,
+    AsyncPipe,
+    EscapeHtmlPipe,
+    InWorkflowStatisticsComponent,
+    MetadataLinkViewComponent,
+    MetricBadgesComponent,
+    MetricDonutsComponent,
+    NgClass,
+    RouterLink,
+    ThemedBadgesComponent,
+    ThemedThumbnailComponent,
+    TranslateModule,
+    TruncatableComponent,
+    TruncatablePartComponent,
+  ],
 
 })
 export class ItemSearchResultListElementComponent extends BaseComponent {

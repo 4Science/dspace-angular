@@ -1,8 +1,8 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import {
-  async,
   ComponentFixture,
   TestBed,
+  waitForAsync,
 } from '@angular/core/testing';
 import {
   TranslateLoader,
@@ -17,7 +17,7 @@ describe('MetricDspacecrisComponent', () => {
   let component: MetricDefaultComponent;
   let fixture: ComponentFixture<MetricDefaultComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         TranslateModule.forRoot({

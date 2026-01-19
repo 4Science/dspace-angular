@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   KeyValuePipe,
-  NgForOf,
-  NgIf,
   SlicePipe,
 } from '@angular/common';
 import {
@@ -21,15 +19,9 @@ import { ItemVersionsComponent } from '../../../../../app/item-page/versions/ite
 import { ItemVersionsNoticeComponent } from '../../../../../app/item-page/versions/notice/item-versions-notice.component';
 import { fadeInOut } from '../../../../../app/shared/animations/fade';
 import { ContextMenuComponent } from '../../../../../app/shared/context-menu/context-menu.component';
-import { DsoEditMenuComponent } from '../../../../../app/shared/dso-page/dso-edit-menu/dso-edit-menu.component';
 import { ErrorComponent } from '../../../../../app/shared/error/error.component';
 import { ThemedLoadingComponent } from '../../../../../app/shared/loading/themed-loading.component';
 import { VarDirective } from '../../../../../app/shared/utils/var.directive';
-
-/**
- * This component renders a full item page.
- * The route parameter 'id' is used to request the item it represents.
- */
 
 @Component({
   selector: 'ds-themed-full-item-page',
@@ -39,26 +31,22 @@ import { VarDirective } from '../../../../../app/shared/utils/var.directive';
   templateUrl: '../../../../../app/item-page/full/full-item-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInOut],
-  standalone: true,
   imports: [
-    ErrorComponent,
-    ThemedLoadingComponent,
-    TranslateModule,
-    ThemedFullFileSectionComponent,
-    CollectionsComponent,
-    ItemVersionsComponent,
-    NgIf,
-    NgForOf,
     AsyncPipe,
+    CollectionsComponent,
+    ContextMenuComponent,
+    ErrorComponent,
+    ItemVersionsComponent,
+    ItemVersionsNoticeComponent,
     KeyValuePipe,
     RouterLink,
-    ThemedItemPageTitleFieldComponent,
-    DsoEditMenuComponent,
-    ItemVersionsNoticeComponent,
-    ThemedItemAlertsComponent,
-    VarDirective,
-    ContextMenuComponent,
     SlicePipe,
+    ThemedFullFileSectionComponent,
+    ThemedItemAlertsComponent,
+    ThemedItemPageTitleFieldComponent,
+    ThemedLoadingComponent,
+    TranslateModule,
+    VarDirective,
   ],
 })
 export class FullItemPageComponent extends BaseComponent {

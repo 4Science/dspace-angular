@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   AfterViewInit,
@@ -13,7 +11,7 @@ import {
   Optional,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import {
   differenceInDays,
   differenceInMilliseconds,
@@ -27,6 +25,7 @@ import {
   filter,
   map,
 } from 'rxjs/operators';
+import { OrejimeService } from 'src/app/shared/cookies/orejime.service';
 
 import {
   APP_CONFIG,
@@ -42,7 +41,6 @@ import { getFirstSucceededRemoteListPayload } from '../../../../../../core/share
 import { ViewMode } from '../../../../../../core/shared/view-mode.model';
 import { getItemPageRoute } from '../../../../../../item-page/item-page-routing-paths';
 import { ThemedThumbnailComponent } from '../../../../../../thumbnail/themed-thumbnail.component';
-import { KlaroService } from '../../../../../cookies/klaro.service';
 import { isNotEmpty } from '../../../../../empty.util';
 import { MetadataLinkViewComponent } from '../../../../../metadata-link-view/metadata-link-view.component';
 import { ThemedBadgesComponent } from '../../../../../object-collection/shared/badges/themed-badges.component';
@@ -66,8 +64,23 @@ import { SearchResultListElementComponent } from '../../../search-result-list-el
   selector: 'ds-item-search-result-list-element',
   styleUrls: ['./item-search-result-list-element.component.scss'],
   templateUrl: './item-search-result-list-element.component.html',
-  standalone: true,
-  imports: [NgIf, RouterLink, ThemedThumbnailComponent, NgClass, ThemedBadgesComponent, TruncatableComponent, TruncatablePartComponent, NgFor, AsyncPipe, TranslateModule, AdditionalMetadataComponent, MetadataLinkViewComponent, MetricBadgesComponent, MetricDonutsComponent, VarDirective, InWorkflowStatisticsComponent, EscapeHtmlPipe],
+  imports: [
+    AdditionalMetadataComponent,
+    AsyncPipe,
+    EscapeHtmlPipe,
+    InWorkflowStatisticsComponent,
+    MetadataLinkViewComponent,
+    MetricBadgesComponent,
+    MetricDonutsComponent,
+    NgClass,
+    RouterLink,
+    ThemedBadgesComponent,
+    ThemedThumbnailComponent,
+    TranslatePipe,
+    TruncatableComponent,
+    TruncatablePartComponent,
+    VarDirective,
+  ],
 })
 /**
  * The component for displaying a list element for an item search result of the type Publication
@@ -100,7 +113,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
     protected truncatableService: TruncatableService,
     public dsoNameService: DSONameService,
     @Inject(APP_CONFIG) protected appConfig?: AppConfig,
-    @Optional() private klaroService?: KlaroService,
+    @Optional() private orejimeService?: OrejimeService,
   ) {
     super(truncatableService, dsoNameService);
   }
@@ -114,11 +127,11 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
    * Check if item has Third-party metrics blocked by consents
    */
   ngAfterViewInit() {
-    if (this.showMetrics && this.klaroService) {
-      this.klaroService.watchConsentUpdates();
+    if (this.showMetrics && this.orejimeService && this.orejimeService.watchConsentUpdates instanceof Function) {
+      this.orejimeService.watchConsentUpdates();
 
       this.hasLoadedThirdPartyMetrics$ = combineLatest([
-        this.klaroService.consentsUpdates$.pipe(
+        this.orejimeService.consentsUpdates$.pipe(
           filter(consents => isNotEmpty(consents)),
         ),
         this.dso.metrics?.pipe(
@@ -128,7 +141,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
           }),
         ),
       ]).pipe(
-        map(([consents, metrics]) => {
+        map(([consents, metrics = []]) => {
           return metrics.reduce((previous, current) => {
             return consents[current.metricType] && previous;
           }, true);
@@ -149,7 +162,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
    * Prompt user for consents settings
    */
   showSettings() {
-    this.klaroService.showSettings();
+    this.orejimeService.showSettings();
   }
 
 }

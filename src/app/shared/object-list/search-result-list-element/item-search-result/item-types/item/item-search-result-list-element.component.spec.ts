@@ -10,7 +10,7 @@ import {
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { APP_CONFIG } from '../../../../../../../config/app-config.interface';
 import { AuthService } from '../../../../../../core/auth/auth.service';
@@ -18,6 +18,8 @@ import { DSONameService } from '../../../../../../core/breadcrumbs/dso-name.serv
 import { AuthorizationDataService } from '../../../../../../core/data/feature-authorization/authorization-data.service';
 import { Item } from '../../../../../../core/shared/item.model';
 import { ThemedThumbnailComponent } from '../../../../../../thumbnail/themed-thumbnail.component';
+import { OrejimeService } from '../../../../../cookies/orejime.service';
+import { OrejimeServiceStub } from '../../../../../cookies/orejime.service.stub';
 import { MetadataLinkViewComponent } from '../../../../../metadata-link-view/metadata-link-view.component';
 import {
   DSONameServiceMock,
@@ -49,7 +51,7 @@ const mockItemWithMetadata: ItemSearchResult = Object.assign(new ItemSearchResul
   },
   indexableObject:
     Object.assign(new Item(), {
-      bundles: observableOf({}),
+      bundles: of({}),
       metadata: {
         'dc.title': [
           {
@@ -87,7 +89,7 @@ const mockItemWithMetadata: ItemSearchResult = Object.assign(new ItemSearchResul
 const mockItemWithoutMetadata: ItemSearchResult = Object.assign(new ItemSearchResult(), {
   indexableObject:
     Object.assign(new Item(), {
-      bundles: observableOf({}),
+      bundles: of({}),
       metadata: {},
     }),
 });
@@ -99,7 +101,7 @@ const mockPerson: ItemSearchResult = Object.assign(new ItemSearchResult(), {
   },
   indexableObject:
     Object.assign(new Item(), {
-      bundles: observableOf({}),
+      bundles: of({}),
       entityType: 'Person',
       metadata: {
         'dc.title': [
@@ -153,7 +155,7 @@ const mockOrgUnit: ItemSearchResult = Object.assign(new ItemSearchResult(), {
   },
   indexableObject:
     Object.assign(new Item(), {
-      bundles: observableOf({}),
+      bundles: of({}),
       entityType: 'OrgUnit',
       metadata: {
         'dc.title': [
@@ -226,6 +228,7 @@ describe('ItemSearchResultListElementComponent', () => {
         { provide: ThemeService, useValue: getMockThemeService() },
         { provide: AuthService, useValue: new AuthServiceStub() },
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
+        { provide: OrejimeService, useValue: new OrejimeServiceStub() },
         {
           provide: AuthorizationDataService,
           useValue: jasmine.createSpyObj('AuthorizationDataService', [
@@ -296,7 +299,7 @@ describe('ItemSearchResultListElementComponent', () => {
 
   describe('When the item has authors and isCollapsed is true', () => {
     beforeEach(() => {
-      spyOn(publicationListElementComponent, 'isCollapsed').and.returnValue(observableOf(true));
+      spyOn(publicationListElementComponent, 'isCollapsed').and.returnValue(of(true));
       publicationListElementComponent.object = mockItemWithMetadata;
       fixture.detectChanges();
     });
@@ -309,7 +312,7 @@ describe('ItemSearchResultListElementComponent', () => {
 
   describe('When the item has authors and isCollapsed is false', () => {
     beforeEach(() => {
-      spyOn(publicationListElementComponent, 'isCollapsed').and.returnValue(observableOf(false));
+      spyOn(publicationListElementComponent, 'isCollapsed').and.returnValue(of(false));
       publicationListElementComponent.object = mockItemWithMetadata;
       fixture.detectChanges();
     });
@@ -452,6 +455,7 @@ describe('ItemSearchResultListElementComponent', () => {
         { provide: APP_CONFIG, useValue: enviromentNoThumbs },
         { provide: ThemeService, useValue: getMockThemeService() },
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
+        { provide: OrejimeService, useValue: new OrejimeServiceStub() },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(ItemSearchResultListElementComponent, {

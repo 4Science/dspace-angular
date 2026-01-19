@@ -1,7 +1,5 @@
 import {
   AsyncPipe,
-  NgFor,
-  NgIf,
   TitleCasePipe,
 } from '@angular/common';
 import {
@@ -36,17 +34,14 @@ import { BitstreamAttachmentRenderingModelComponent } from './bitstream-attachme
   selector: 'ds-attachment',
   templateUrl: './attachment.component.html',
   styleUrls: ['./attachment.component.scss'],
-  standalone: true,
   imports: [
-    NgFor,
-    TruncatableComponent,
-    ThemedFileDownloadLinkComponent,
-    NgIf,
-    TruncatablePartComponent,
     AsyncPipe,
+    FileSizePipe,
+    ThemedFileDownloadLinkComponent,
     TitleCasePipe,
     TranslateModule,
-    FileSizePipe,
+    TruncatableComponent,
+    TruncatablePartComponent,
   ],
 })
 /**

@@ -25,7 +25,7 @@ import { EPersonDataService } from '../core/eperson/eperson-data.service';
 import { EPerson } from '../core/eperson/models/eperson.model';
 import { CookieService } from '../core/services/cookie.service';
 import { getFirstCompletedRemoteData } from '../core/shared/operators';
-import { KlaroService } from '../shared/cookies/klaro.service';
+import { OrejimeService } from '../shared/cookies/orejime.service';
 import {
   hasNoValue,
   hasValue,
@@ -89,7 +89,7 @@ export class AccessibilitySettingsService {
     protected cookieService: CookieService,
     protected authService: AuthService,
     protected ePersonService: EPersonDataService,
-    @Optional() protected klaroService: KlaroService,
+    @Optional() protected orejimeService: OrejimeService,
     @Inject(APP_CONFIG) protected appConfig: AppConfig,
   ) {
   }
@@ -243,11 +243,11 @@ export class AccessibilitySettingsService {
    * Emits 'failed' when setting in a cookie failed due to the cookie not being accepted, 'cookie' when it succeeded.
    */
   setSettingsInCookie(settings: AccessibilitySettings): Observable<'cookie' | 'failed'> {
-    if (hasNoValue(this.klaroService)) {
+    if (hasNoValue(this.orejimeService)) {
       return of('failed');
     }
 
-    return this.klaroService.getSavedPreferences().pipe(
+    return this.orejimeService.getSavedPreferences().pipe(
       map(preferences => preferences.accessibility),
       map((accessibilityCookieAccepted: boolean) => {
         if (accessibilityCookieAccepted) {

@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   LowerCasePipe,
-  NgSwitch,
 } from '@angular/common';
 import { Component } from '@angular/core';
 
@@ -17,12 +16,10 @@ import { ThemedDefaultBrowseElementsComponent } from '../../../../app/shared/bro
   templateUrl: '../../../../app/shared/browse-most-elements/browse-most-elements.component.html',
   // styleUrls: ['./breadcrumbs.component.scss']
   styleUrls: ['../../../../app/shared/browse-most-elements/browse-most-elements.component.scss'],
-  standalone: true,
   imports: [
-    ThemedDefaultBrowseElementsComponent,
     AsyncPipe,
     LowerCasePipe,
-    NgSwitch,
+    ThemedDefaultBrowseElementsComponent,
   ],
 })
 export class BrowseMostElementsComponent extends BaseComponent {

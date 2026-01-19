@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -30,9 +27,7 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   selector: 'ds-item-version-menu',
   templateUrl: './item-version-menu.component.html',
   styleUrls: ['./item-version-menu.component.scss'],
-  standalone: true,
   imports: [
-    NgIf,
     AsyncPipe,
     TranslateModule,
   ],

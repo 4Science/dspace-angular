@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -29,7 +27,7 @@ import {
   BehaviorSubject,
   combineLatest as observableCombineLatest,
   Observable,
-  of as observableOf,
+  of,
   Subscription,
 } from 'rxjs';
 import {
@@ -78,8 +76,17 @@ import { SearchResult } from '../../search/models/search-result.model';
   selector: 'ds-dso-selector',
   styleUrls: ['./dso-selector.component.scss'],
   templateUrl: './dso-selector.component.html',
-  standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, InfiniteScrollModule, NgIf, NgFor, HoverClassDirective, NgClass, ListableObjectComponentLoaderComponent, ThemedLoadingComponent, AsyncPipe, TranslateModule],
+  imports: [
+    AsyncPipe,
+    FormsModule,
+    HoverClassDirective,
+    InfiniteScrollModule,
+    ListableObjectComponentLoaderComponent,
+    NgClass,
+    ReactiveFormsModule,
+    ThemedLoadingComponent,
+    TranslateModule,
+  ],
 })
 
 /**
@@ -96,6 +103,12 @@ export class DSOSelectorComponent implements OnInit, OnDestroy {
    * The configuration.
    */
   @Input() configuration = 'default';
+
+
+  /**
+   * The current context
+   */
+  @Input() context: Context;
 
   /**
    * The initially selected DSO's uuid
@@ -203,7 +216,7 @@ export class DSOSelectorComponent implements OnInit, OnDestroy {
     if (isNotEmpty(this.currentDSOId)) {
       currentDSOResult$ = this.search(this.getCurrentDSOQuery(), 1).pipe(getFirstSucceededRemoteDataPayload());
     } else {
-      currentDSOResult$ = observableOf(buildPaginatedList(undefined, []));
+      currentDSOResult$ = of(buildPaginatedList(undefined, []));
     }
 
     // Combine current DSO, query and page
@@ -314,7 +327,14 @@ export class DSOSelectorComponent implements OnInit, OnDestroy {
   /**
    * Get the context for element with the given id
    */
-  getContext(id: string) {
+  getContext(id: string): Context {
+    if (this.context === Context.ScopeSelectorModal) {
+      if (id === this.currentDSOId) {
+        return Context.ScopeSelectorModalCurrent;
+      } else {
+        return Context.ScopeSelectorModal;
+      }
+    }
     if (id === this.currentDSOId) {
       return Context.SideBarSearchModalCurrent;
     } else {

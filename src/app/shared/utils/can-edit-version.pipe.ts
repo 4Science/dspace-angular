@@ -9,7 +9,6 @@ import { FeatureID } from '../../core/data/feature-authorization/feature-id';
 
 @Pipe({
   name: 'dsCanEditVersion',
-  standalone: true,
 })
 export class CanEditVersionPipe implements PipeTransform {
   constructor(private authorizationServcie: AuthorizationDataService) {

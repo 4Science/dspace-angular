@@ -1,8 +1,9 @@
+import { Context } from 'node:vm';
+
 import {
   Component,
   Input,
 } from '@angular/core';
-import { Context } from 'vm';
 
 import { TopSection } from '../../core/layout/models/section.model';
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
@@ -16,8 +17,6 @@ import { BrowseMostElementsComponent } from './browse-most-elements.component';
   selector: 'ds-browse-most-elements',
   styleUrls: [],
   templateUrl: '../theme-support/themed.component.html',
-  standalone: true,
-  imports: [BrowseMostElementsComponent],
 })
 export class ThemedBrowseMostElementsComponent extends ThemedComponent<BrowseMostElementsComponent> {
 

@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -32,8 +28,14 @@ import { AbstractIncrementalListComponent } from '../abstract-incremental-list/a
 @Component({
   selector: 'ds-base-metadata-representation-list',
   templateUrl: './metadata-representation-list.component.html',
-  standalone: true,
-  imports: [MetadataFieldWrapperComponent, NgFor, VarDirective, MetadataRepresentationLoaderComponent, NgIf, ThemedLoadingComponent, AsyncPipe, TranslateModule],
+  imports: [
+    AsyncPipe,
+    MetadataFieldWrapperComponent,
+    MetadataRepresentationLoaderComponent,
+    ThemedLoadingComponent,
+    TranslateModule,
+    VarDirective,
+  ],
 })
 /**
  * This component is used for displaying metadata

@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Inject,
@@ -31,8 +31,9 @@ import {
   selector: 'ds-identifier',
   templateUrl: './identifier.component.html',
   styleUrls: ['./identifier.component.scss'],
-  standalone: true,
-  imports: [NgIf, NgbTooltipModule],
+  imports: [
+    NgbTooltipModule,
+  ],
 })
 export class IdentifierComponent extends RenderingTypeValueModelComponent implements OnInit {
 

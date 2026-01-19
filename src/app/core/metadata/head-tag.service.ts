@@ -216,6 +216,8 @@ export class HeadTagService {
   protected setDSOMetaTags(): void {
     const openGraphType = this.getOpenGraphType();
 
+    this.setNoIndexTag();
+
     this.setTitleTags();
     this.setDescriptionTags();
 
@@ -262,6 +264,15 @@ export class HeadTagService {
 
     if (this.isTechReport()) {
       this.setCitationTechnicalReportNumberTag();
+    }
+  }
+
+  /**
+   * Add <meta name="robots" content="noindex">  to the <head> if non-discoverable item
+   */
+  protected setNoIndexTag(): void {
+    if (this.currentObject.value instanceof Item && this.currentObject.value.isDiscoverable === false) {
+      this.addMetaTag('robots', 'noindex');
     }
   }
 
@@ -772,8 +783,11 @@ export class HeadTagService {
     if (content) {
       const tag = isProperty ? { name, property: name, content } as MetaDefinition
         : { name, content } as MetaDefinition;
-      isMultiple ? this.meta.addTag(tag) : this.meta.updateTag(tag);
-      this.storeTag(name);
+      if (isMultiple) {
+        this.meta.addTag(tag);
+      } else {
+        this.meta.updateTag(tag);
+      } this.storeTag(name);
     }
   }
 

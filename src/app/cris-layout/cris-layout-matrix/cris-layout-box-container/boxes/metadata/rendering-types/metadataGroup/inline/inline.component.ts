@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -23,13 +21,10 @@ import { MetadataGroupComponent } from '../metadata-group.component';
   selector: 'ds-inline',
   templateUrl: './inline.component.html',
   styleUrls: ['./inline.component.scss'],
-  standalone: true,
   imports: [
-    NgIf,
-    NgClass,
-    NgFor,
-    MetadataRenderComponent,
     AsyncPipe,
+    MetadataRenderComponent,
+    NgClass,
   ],
 })
 export class InlineComponent extends MetadataGroupComponent implements OnInit {

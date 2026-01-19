@@ -30,7 +30,6 @@ import { Subscription } from 'rxjs';
  */
 @Directive({
   selector: '[dsStickyPopover]',
-  standalone:true,
 })
 export class StickyPopoverDirective extends NgbPopover implements OnInit, OnDestroy {
   /** Template for the sticky popover content */
