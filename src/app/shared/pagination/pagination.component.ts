@@ -312,11 +312,14 @@ export class PaginationComponent implements OnChanges, OnDestroy, OnInit {
    *
    * @param page
    *    The page being navigated to.
+   * @param pageSize
    */
   public doPageChange(page: number) {
-    this.updateParams({ page: page });
-    this.emitPaginationChange();
-    this.pageChange.emit(page);
+    this.pageSize$.pipe(take(1)).subscribe((pageSize) => {
+      this.updateParams({ page, pageSize: pageSize });
+      this.emitPaginationChange();
+      this.pageChange.emit(page);
+    });
   }
 
   /**
