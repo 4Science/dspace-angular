@@ -59,7 +59,7 @@ export class AdminSidebarSectionComponent extends AbstractMenuSectionComponent i
 
   ngOnInit(): void {
     // todo: should support all menu entries?
-    this.isDisabled = this.itemModel?.disabled || isEmpty(this.itemModel?.link);
+    this.isDisabled = this.itemModel?.disabled || (isEmpty(this.itemModel?.link) && isEmpty(this.itemModel?.href));
     super.ngOnInit();
   }
 
