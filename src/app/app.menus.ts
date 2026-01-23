@@ -33,6 +33,9 @@ import { StatisticsMenuProvider } from './shared/menu/providers/statistics.menu'
 import { SystemWideAlertMenuProvider } from './shared/menu/providers/system-wide-alert.menu';
 import { WithdrawnReinstateItemMenuProvider } from './shared/menu/providers/withdrawn-reinstate-item.menu';
 import { WorkflowMenuProvider } from './shared/menu/providers/workflow.menu';
+import { ExploreMenuProvider } from './shared/menu/providers/explore.menu';
+import { UserAgreementMenuProvider } from './shared/menu/providers/user-agreement.menu';
+import { MetadataCmsMenuProvider } from './shared/menu/providers/metadata-cms.menu';
 
 /**
  * Represents and builds the menu structure for the three available menus (public navbar, admin sidebar and the dso edit
@@ -53,7 +56,7 @@ import { WorkflowMenuProvider } from './shared/menu/providers/workflow.menu';
 export const MENUS = buildMenuStructure({
   [MenuID.PUBLIC]: [
     CommunityListMenuProvider,
-    BrowseMenuProvider,
+    ExploreMenuProvider,
     StatisticsMenuProvider,
   ],
   [MenuID.ADMIN]: [
@@ -72,6 +75,8 @@ export const MENUS = buildMenuStructure({
     HealthMenuProvider,
     SystemWideAlertMenuProvider,
     CoarNotifyMenuProvider,
+    UserAgreementMenuProvider,
+    MetadataCmsMenuProvider,
   ],
   [MenuID.DSO_EDIT]: [
     DsoOptionMenuProvider.withSubs([

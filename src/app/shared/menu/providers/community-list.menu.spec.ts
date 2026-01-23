@@ -18,7 +18,7 @@ describe('CommunityListMenuProvider', () => {
       visible: true,
       model: {
         type: MenuItemType.LINK,
-        text: `menu.section.browse_global_communities_and_collections`,
+        text: `menu.section.communities_and_collections`,
         link: `/community-list`,
       },
       icon: 'diagram-project',
