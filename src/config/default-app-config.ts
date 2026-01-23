@@ -848,6 +848,7 @@ export class DefaultAppConfig implements AppConfig {
       'cris.cms.home-header',
       'cris.cms.home-news',
       'cris.cms.footer',
+      'cris.cms.privacy-policy',
     ],
   };
 
