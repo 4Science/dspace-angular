@@ -55,6 +55,7 @@ import { SubmissionFormCollectionComponent } from './collection/submission-form-
 import { ThemedSubmissionFormFooterComponent } from './footer/themed-submission-form-footer.component';
 import { SubmissionFormSectionAddComponent } from './section-add/submission-form-section-add.component';
 import { ThemedSubmissionUploadFilesComponent } from './submission-upload-files/themed-submission-upload-files.component';
+import { environment } from '../../../environments/environment';
 
 /**
  * This component represents the submission form.
@@ -335,6 +336,16 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
     });
   }
 
+  /**
+   * Check if submission legend should be shown
+   */
+  get shouldShowLegend(): boolean {
+    return !environment.submission.hideLegend;
+  }
+
+  /**
+   * Check if submission form is loading
+   */
   protected getSectionsList(): Observable<any> {
     return this.submissionService.getSubmissionSections(this.submissionId).pipe(
       filter((sections: SectionDataObject[]) => isNotEmpty(sections)),
