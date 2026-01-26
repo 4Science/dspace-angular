@@ -6,7 +6,8 @@
                                         [uploadFilesOptions]="uploadFilesOptions"></ds-submission-upload-files>
             <div class="clearfix"></div>
         </div>
-
+      <ds-submission-legend *ngIf="showSubmissionLegend" class="submission-form-header-legend">
+      </ds-submission-legend>
         <div class="submission-form-header-item mb-3 mb-sm-0 flex-sm-grow-1 flex-md-grow-0">
           <ng-container *ngIf="!isSectionHidden">
             <ds-submission-form-collection [currentCollectionId]="collectionId"
