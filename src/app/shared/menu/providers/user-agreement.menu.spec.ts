@@ -7,10 +7,11 @@
  */
 
 import { TestBed } from '@angular/core/testing';
-import { UserAgreementMenuProvider } from './user-agreement.menu';
-import { AuthorizationDataServiceStub } from '../../testing/authorization-service.stub';
 import { of } from 'rxjs';
+
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
+import { AuthorizationDataServiceStub } from '../../testing/authorization-service.stub';
+import { UserAgreementMenuProvider } from './user-agreement.menu';
 
 describe('UserAgreementMenuProvider', () => {
 

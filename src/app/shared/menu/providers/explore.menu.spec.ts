@@ -9,18 +9,18 @@
 import { TestBed } from '@angular/core/testing';
 
 import { APP_CONFIG } from '../../../../config/app-config.interface';
+import { environment } from '../../../../environments/environment';
+import { SectionDataService } from '../../../core/layout/section-data.service';
 import { createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
 import { createPaginatedList } from '../../testing/utils.test';
 import { ExploreMenuProvider } from './explore.menu';
-import { environment } from '../../../../environments/environment';
-import { SectionDataService } from '../../../core/layout/section-data.service';
 
 describe('ExploreMenuProvider', () => {
 
   let provider: ExploreMenuProvider;
   let sectionDataServiceStub = {
     findVisibleSections: () => createSuccessfulRemoteDataObject$(createPaginatedList([])),
-  }
+  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({

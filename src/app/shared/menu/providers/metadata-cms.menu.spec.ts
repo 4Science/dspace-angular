@@ -7,10 +7,11 @@
  */
 
 import { TestBed } from '@angular/core/testing';
-import { MetadataCmsMenuProvider } from './metadata-cms.menu';
-import { AuthorizationDataServiceStub } from '../../testing/authorization-service.stub';
 import { of } from 'rxjs';
+
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
+import { AuthorizationDataServiceStub } from '../../testing/authorization-service.stub';
+import { MetadataCmsMenuProvider } from './metadata-cms.menu';
 
 describe('MetadataCmsMenuProvider', () => {
 

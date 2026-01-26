@@ -12,11 +12,14 @@ import { map } from 'rxjs/operators';
 
 import { PaginatedList } from '../../../core/data/paginated-list.model';
 import { RemoteData } from '../../../core/data/remote-data';
+import { Section } from '../../../core/layout/models/section.model';
+import { SectionDataService } from '../../../core/layout/section-data.service';
 import { getFirstSucceededRemoteData } from '../../../core/shared/operators';
 import { MenuItemType } from '../menu-item-type.model';
-import { AbstractMenuProvider, PartialMenuSection } from '../menu-provider.model';
-import { SectionDataService } from '../../../core/layout/section-data.service';
-import { Section } from '../../../core/layout/models/section.model';
+import {
+  AbstractMenuProvider,
+  PartialMenuSection,
+} from '../menu-provider.model';
 
 /**
  * Menu provider to create the explore menu sections in the public navbar
