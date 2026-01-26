@@ -55,6 +55,7 @@ import { SubmissionFormCollectionComponent } from './collection/submission-form-
 import { SubmissionFormFooterComponent } from './footer/submission-form-footer.component';
 import { SubmissionFormSectionAddComponent } from './section-add/submission-form-section-add.component';
 import { ThemedSubmissionUploadFilesComponent } from './submission-upload-files/themed-submission-upload-files.component';
+import { environment } from '../../../environments/environment';
 
 /**
  * This component represents the submission form.
@@ -332,6 +333,13 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
         this.changeDetectorRef.detectChanges();
       }
     });
+  }
+
+  /**
+   * Check if submission legend should be shown
+   */
+  get shouldShowLegend(): boolean {
+    return !environment.submission.hideLegend;
   }
 
   /**
