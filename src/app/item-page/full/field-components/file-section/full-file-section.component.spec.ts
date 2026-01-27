@@ -11,7 +11,7 @@ import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 import { APP_CONFIG } from 'src/config/app-config.interface';
 import { environment } from 'src/environments/environment';
 
@@ -44,7 +44,7 @@ describe('FullFileSectionComponent', () => {
     {
       sizeBytes: 10201,
       content: 'https://dspace7.4science.it/dspace-spring-rest/api/core/bitstreams/cf9b0c8e-a1eb-4b65-afd0-567366448713/content',
-      format: observableOf(MockBitstreamFormat1),
+      format: of(MockBitstreamFormat1),
       bundleName: 'ORIGINAL',
       _links: {
         self: {
@@ -72,7 +72,7 @@ describe('FullFileSectionComponent', () => {
   });
 
   const authorizedDataService = jasmine.createSpyObj('authorizedDataService',{
-    isAuthorized: observableOf(false),
+    isAuthorized: of(false),
   });
 
   const paginationService = new PaginationServiceStub();
@@ -129,12 +129,12 @@ describe('FullFileSectionComponent', () => {
     });
 
     it('canDownload should return an observable with false value, if user is not authorized to download bitstream', waitForAsync(() => {
-      authorizedDataService.isAuthorized.and.returnValue(observableOf(false));
+      authorizedDataService.isAuthorized.and.returnValue(of(false));
       comp.canDownload(mockBitstream).subscribe(canDownload => expect(canDownload).toBeFalse());
     }));
 
     it('canDownload should return an observable with true value, if user is authorized to download bitstream', waitForAsync(() => {
-      authorizedDataService.isAuthorized.and.returnValue(observableOf(true));
+      authorizedDataService.isAuthorized.and.returnValue(of(true));
       comp.canDownload(mockBitstream).subscribe(canDownload => expect(canDownload).toBeTrue());
     }));
   });

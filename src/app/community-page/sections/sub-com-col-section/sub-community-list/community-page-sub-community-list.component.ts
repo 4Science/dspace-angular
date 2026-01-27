@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -40,15 +37,13 @@ import { VarDirective } from '../../../../shared/utils/var.directive';
   templateUrl: './community-page-sub-community-list.component.html',
   animations: [fadeIn],
   imports: [
-    ErrorComponent,
-    ThemedLoadingComponent,
-    VarDirective,
-    NgIf,
-    ObjectCollectionComponent,
     AsyncPipe,
+    ErrorComponent,
+    ObjectCollectionComponent,
+    ThemedLoadingComponent,
     TranslateModule,
+    VarDirective,
   ],
-  standalone: true,
 })
 /**
  * Component to render the sub-communities of a Community

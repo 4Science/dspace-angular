@@ -1,8 +1,11 @@
-<pre class="d-flex license-text mb-4 px-3" [innerHTML]="licenseText$ | async" tabindex="0" [attr.aria-label]="'collection.form.license' | translate"></pre>
-<ds-form *ngIf="formModel" #formRef="formComponent"
-         [formId]="formId"
-         [formModel]="formModel"
-         [formLayout]="formLayout"
-         [displaySubmit]="displaySubmit"
-         [displayReset]="false"
-         (dfChange)="onChange($event)"></ds-form>
+<span class="mb-5 preserve-line-breaks" [innerHTML]="licenseText$ | async"></span>
+<br> <br>
+@if (formModel) {
+  <ds-form #formRef="formComponent"
+           [formId]="formId"
+           [formModel]="formModel"
+           [formLayout]="formLayout"
+           [displaySubmit]="displaySubmit"
+           [displayReset]="false"
+           (dfChange)="onChange($event)"></ds-form>
+}

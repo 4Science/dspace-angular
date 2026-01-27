@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   isPlatformServer,
-  NgIf,
 } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -48,14 +47,12 @@ import { ThemedComcolPageHandleComponent } from '../shared/comcol/comcol-page-ha
 import { ComcolPageHeaderComponent } from '../shared/comcol/comcol-page-header/comcol-page-header.component';
 import { ComcolPageLogoComponent } from '../shared/comcol/comcol-page-logo/comcol-page-logo.component';
 import { ContextMenuComponent } from '../shared/context-menu/context-menu.component';
-import { DsoEditMenuComponent } from '../shared/dso-page/dso-edit-menu/dso-edit-menu.component';
 import {
   hasValue,
   isNotEmpty,
 } from '../shared/empty.util';
 import { ErrorComponent } from '../shared/error/error.component';
 import { ThemedLoadingComponent } from '../shared/loading/themed-loading.component';
-import { ObjectCollectionComponent } from '../shared/object-collection/object-collection.component';
 import { PaginationComponentOptions } from '../shared/pagination/pagination-component-options.model';
 import { VarDirective } from '../shared/utils/var.directive';
 import { getCollectionPageRoute } from './collection-page-routing-paths';
@@ -70,23 +67,19 @@ import { getCollectionPageRoute } from './collection-page-routing-paths';
     fadeInOut,
   ],
   imports: [
-    ThemedComcolPageContentComponent,
-    ErrorComponent,
-    NgIf,
-    ThemedLoadingComponent,
-    TranslateModule,
-    VarDirective,
     AsyncPipe,
     ComcolPageHeaderComponent,
     ComcolPageLogoComponent,
-    ThemedComcolPageHandleComponent,
-    DsoEditMenuComponent,
-    ThemedComcolPageBrowseByComponent,
-    ObjectCollectionComponent,
-    RouterOutlet,
     ContextMenuComponent,
+    ErrorComponent,
+    RouterOutlet,
+    ThemedComcolPageBrowseByComponent,
+    ThemedComcolPageContentComponent,
+    ThemedComcolPageHandleComponent,
+    ThemedLoadingComponent,
+    TranslateModule,
+    VarDirective,
   ],
-  standalone: true,
 })
 export class CollectionPageComponent implements OnInit {
   collectionRD$: Observable<RemoteData<Collection>>;

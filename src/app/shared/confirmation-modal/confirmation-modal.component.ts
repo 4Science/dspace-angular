@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   EventEmitter,
@@ -11,8 +11,10 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'ds-confirmation-modal',
   templateUrl: 'confirmation-modal.component.html',
-  standalone: true,
-  imports: [NgIf, TranslateModule],
+  styleUrls: ['confirmation-modal.component.scss'],
+  imports: [
+    TranslateModule,
+  ],
 })
 export class ConfirmationModalComponent {
   @Input() headerLabel: string;

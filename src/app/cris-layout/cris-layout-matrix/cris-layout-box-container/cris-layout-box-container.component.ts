@@ -1,7 +1,4 @@
-import {
-  NgComponentOutlet,
-  NgIf,
-} from '@angular/common';
+import { NgComponentOutlet } from '@angular/common';
 import {
   Component,
   ComponentFactoryResolver,
@@ -30,9 +27,7 @@ import { LayoutBox } from '../../enums/layout-box.enum';
   selector: 'ds-cris-layout-box-container',
   templateUrl: './cris-layout-box-container.component.html',
   styleUrls: ['./cris-layout-box-container.component.scss'],
-  standalone: true,
   imports: [
-    NgIf,
     NgbAccordionModule,
     NgComponentOutlet,
     ThemedLoadingComponent,

@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -24,13 +21,11 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   selector: 'ds-statistics-menu',
   templateUrl: './statistics-menu.component.html',
   styleUrls: ['./statistics-menu.component.scss'],
-  standalone: true,
   imports: [
-    NgIf,
-    RouterLink,
     AsyncPipe,
-    TranslateModule,
     BrowserOnlyPipe,
+    RouterLink,
+    TranslateModule,
   ],
 })
 /**

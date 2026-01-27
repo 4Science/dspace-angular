@@ -1,11 +1,11 @@
 import {
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 
 export class SiteDataServiceStub {
   find(): Observable<any> {
-    return observableOf({});
+    return of({});
   }
 }
 

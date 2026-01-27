@@ -1,7 +1,8 @@
-<ng-container *ngIf="(isEditAvailable$ | async)">
-  <button ngbDropdownItem
-          *ngFor="let editMode of (editModes$ | async)"
-          [routerLink]="[getEditItemRoute(), contextMenuObject.id + ':' + editMode.name]"
-          [innerHTML]="editMode.label ? (editMode.label | translate) : ('context-menu.actions.edit-item.btn.' + editMode.name | translate)">
-  </button>
-</ng-container>
+@if ((isEditAvailable$ | async)) {
+  @for (editMode of (editModes$ | async); track editMode) {
+    <button ngbDropdownItem
+      [routerLink]="[getEditItemRoute(), contextMenuObject.id + ':' + editMode.name]"
+      [innerHTML]="editMode.label ? (editMode.label | translate) : ('context-menu.actions.edit-item.btn.' + editMode.name | translate)">
+    </button>
+  }
+}

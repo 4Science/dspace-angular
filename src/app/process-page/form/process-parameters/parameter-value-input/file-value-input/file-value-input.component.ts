@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Optional,
@@ -25,8 +25,12 @@ import { ValueInputComponent } from '../value-input.component';
   viewProviders: [{ provide: ControlContainer,
     useFactory: controlContainerFactory,
     deps: [[new Optional(), NgForm]] }],
-  standalone: true,
-  imports: [FileValueAccessorDirective, FormsModule, FileValidator, NgIf, TranslateModule],
+  imports: [
+    FileValidator,
+    FileValueAccessorDirective,
+    FormsModule,
+    TranslateModule,
+  ],
 })
 export class FileValueInputComponent extends ValueInputComponent<File> {
   /**

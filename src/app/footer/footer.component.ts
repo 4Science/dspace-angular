@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  DatePipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -12,8 +8,9 @@ import {
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {
+  combineLatest,
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import { take } from 'rxjs/operators';
 
@@ -28,7 +25,7 @@ import { SiteDataService } from '../core/data/site-data.service';
 import { TextRowSection } from '../core/layout/models/section.model';
 import { LocaleService } from '../core/locale/locale.service';
 import { Site } from '../core/shared/site.model';
-import { KlaroService } from '../shared/cookies/klaro.service';
+import { OrejimeService } from '../shared/cookies/orejime.service';
 import {
   hasValue,
   isEmpty,
@@ -39,8 +36,12 @@ import { ThemedTextSectionComponent } from '../shared/explore/section-component/
   selector: 'ds-base-footer',
   styleUrls: ['footer.component.scss'],
   templateUrl: 'footer.component.html',
-  standalone: true,
-  imports: [NgIf, RouterLink, AsyncPipe, DatePipe, TranslateModule, ThemedTextSectionComponent],
+  imports: [
+    AsyncPipe,
+    RouterLink,
+    ThemedTextSectionComponent,
+    TranslateModule,
+  ],
 })
 export class FooterComponent implements OnInit {
   dateObj: number = Date.now();
@@ -52,6 +53,9 @@ export class FooterComponent implements OnInit {
    * A boolean representing if to show or not the top footer container
    */
   showTopFooter = true;
+
+  showCookieSettings = false;
+
   /**
    * Represents the site to show the footer metadata
    */
@@ -61,14 +65,14 @@ export class FooterComponent implements OnInit {
    */
   section: TextRowSection;
 
-  showCookieSettings = false;
+
   showPrivacyPolicy: boolean;
   showEndUserAgreement: boolean;
   showSendFeedback$: Observable<boolean>;
   coarLdnEnabled$: Observable<boolean>;
 
   constructor(
-    @Optional() public cookies: KlaroService,
+    @Optional() public cookies: OrejimeService,
     protected authorizationService: AuthorizationDataService,
     protected notifyInfoService: NotifyInfoService,
     private locale: LocaleService,
@@ -81,7 +85,7 @@ export class FooterComponent implements OnInit {
     this.showCookieSettings = this.appConfig.info.enableCookieConsentPopup;
     this.showPrivacyPolicy = this.appConfig.info.enablePrivacyStatement;
     this.showEndUserAgreement = this.appConfig.info.enableEndUserAgreement;
-    this.coarLdnEnabled$ = this.appConfig.info.enableCOARNotifySupport ? this.notifyInfoService.isCoarConfigEnabled() : observableOf(false);
+    this.coarLdnEnabled$ = this.appConfig.info.enableCOARNotifySupport ? this.notifyInfoService.isCoarConfigEnabled() : of(false);
     this.showSendFeedback$ = this.authorizationService.isAuthorized(FeatureID.CanSendFeedback);
 
     this.section = {
@@ -91,16 +95,16 @@ export class FooterComponent implements OnInit {
       style: '',
     };
     this.site = this.siteService.find().pipe(take(1));
-    this.siteService.find().pipe(take(1)).subscribe(
-      (site: Site) => {
+    combineLatest([this.site, this.locale.getCurrentLanguageCode()]).subscribe(
+      ([site, language]: [Site, string]) => {
         this.hasSiteFooterSections = !isEmpty(site?.firstMetadataValue('cris.cms.footer',
-          { language: this.locale.getCurrentLanguageCode() }));
+          { language }));
       },
     );
   }
 
   openCookieSettings() {
-    if (hasValue(this.cookies)) {
+    if (hasValue(this.cookies) && this.cookies.showSettings instanceof Function) {
       this.cookies.showSettings();
     }
     return false;

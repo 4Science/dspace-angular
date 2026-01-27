@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgIf,
 } from '@angular/common';
 import {
   ChangeDetectorRef,
@@ -79,16 +78,14 @@ export interface MetadataFields {
   styleUrls: ['form.component.scss'],
   templateUrl: 'form.component.html',
   imports: [
-    DsDynamicFormComponent,
-    ReactiveFormsModule,
-    TranslateModule,
-    DynamicFormsCoreModule,
-    NgIf,
     AsyncPipe,
     BtnDisabledDirective,
+    DsDynamicFormComponent,
+    DynamicFormsCoreModule,
     NgClass,
+    ReactiveFormsModule,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class FormComponent implements OnDestroy, OnInit {
 

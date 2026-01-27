@@ -2,8 +2,6 @@ import {
   AsyncPipe,
   NgClass,
   NgComponentOutlet,
-  NgForOf,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -36,21 +34,18 @@ import { rendersSectionType } from '../sections-decorator';
  * This component represents a section that contains the submission license form.
  */
 @Component({
-  selector: 'ds-submission-section-container',
+  selector: 'ds-base-submission-section-container',
   templateUrl: './section-container.component.html',
   styleUrls: ['./section-container.component.scss'],
   imports: [
     AlertComponent,
-    NgForOf,
-    NgbAccordionModule,
-    NgComponentOutlet,
-    TranslateModule,
-    NgClass,
-    NgIf,
     AsyncPipe,
+    NgbAccordionModule,
+    NgClass,
+    NgComponentOutlet,
     SectionsDirective,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class SubmissionSectionContainerComponent implements OnInit {
 
@@ -59,12 +54,11 @@ export class SubmissionSectionContainerComponent implements OnInit {
    * @type {string}
    */
   @Input() collectionId: string;
+
   /**
    * The entity type, needed in order to search for metadata level security
    */
-
   @Input() entityType: string;
-
 
   /**
    * The section data

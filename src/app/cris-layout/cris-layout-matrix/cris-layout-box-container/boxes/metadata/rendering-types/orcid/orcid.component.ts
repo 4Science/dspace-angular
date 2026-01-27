@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -31,11 +28,9 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   selector: 'span[ds-orcid]',
   templateUrl: './orcid.component.html',
   styleUrls: ['./orcid.component.scss'],
-  standalone: true,
   imports: [
-    NgIf,
-    NgbTooltipModule,
     AsyncPipe,
+    NgbTooltipModule,
     TranslateModule,
   ],
 })

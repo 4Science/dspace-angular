@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
   Component,
   Input,
@@ -9,8 +8,8 @@ import {
 import {
   NgbDropdownModule,
   NgbModal,
+  NgbModalOptions,
 } from '@ng-bootstrap/ng-bootstrap';
-import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap/modal/modal-config';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   combineLatest,
@@ -43,12 +42,10 @@ export const BULK_EXPORT_LIMIT_NOTLOGGEDIN = 'bulk-export.limit.notLoggedIn';
   styleUrls: ['./item-export-modal-launcher.component.scss'],
   templateUrl: './item-export-modal-launcher.component.html',
   imports: [
-    NgIf,
+    EntityDropdownComponent,
     NgbDropdownModule,
     TranslateModule,
-    EntityDropdownComponent,
   ],
-  standalone: true,
 })
 export class ItemExportModalLauncherComponent implements OnInit {
 

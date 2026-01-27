@@ -1,7 +1,4 @@
-import {
-  NgIf,
-  NgStyle,
-} from '@angular/common';
+import { NgStyle } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -21,12 +18,10 @@ import { listableObjectComponent } from '../object-collection/shared/listable-ob
   selector: 'ds-notification-box',
   templateUrl: './notification-box.component.html',
   styleUrls: ['./notification-box.component.scss'],
-  standalone: true,
   imports: [
-    NgStyle,
     HoverClassDirective,
+    NgStyle,
     TranslateModule,
-    NgIf,
   ],
 })
 /**

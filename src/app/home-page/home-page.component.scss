@@ -4,7 +4,7 @@
   }
 }
 
-@include media-breakpoint-down(md) {
+@include media-breakpoint-down(lg) {
   ds-themed-configuration-search-page + .container {
     width: 100%;
     max-width: none;

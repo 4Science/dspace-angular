@@ -11,7 +11,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 
 import { SearchService } from '../../../core/shared/search/search.service';
@@ -76,7 +76,7 @@ describe('SearchChartsComponent', () => {
     fixture = TestBed.createComponent(SearchChartsComponent);
     comp = fixture.componentInstance; // SearchChartsComponent test instance
     comp.filters = mockChartFilters$;
-    spyOn(comp, 'hasFacetValues').and.returnValue(observableOf(true));
+    spyOn(comp, 'hasFacetValues').and.returnValue(of(true));
     fixture.detectChanges();
   });
 

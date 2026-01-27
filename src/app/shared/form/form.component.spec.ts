@@ -1,4 +1,7 @@
-import { CommonModule } from '@angular/common';
+import {
+  CommonModule,
+  NgClass,
+} from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -22,11 +25,10 @@ import {
   DynamicFormControlEvent,
   DynamicFormControlModel,
   DynamicFormGroupModel,
+  DynamicFormGroupModelConfig,
   DynamicFormsCoreModule,
-  DynamicFormValidationService,
   DynamicInputModel,
 } from '@ng-dynamic-forms/core';
-import { DynamicFormGroupModelConfig } from '@ng-dynamic-forms/core/lib/model/form-group/dynamic-form-group.model';
 import {
   Store,
   StoreModule,
@@ -34,9 +36,7 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { APP_DATA_SERVICES_MAP } from '../../../config/app-config.interface';
 import { storeModuleConfig } from '../../app.reducer';
-import { XSRFService } from '../../core/xsrf/xsrf.service';
 import { StoreMock } from '../testing/store.mock';
 import { createTestComponent } from '../testing/utils.test';
 import { DsDynamicFormComponent } from './builder/ds-dynamic-form-ui/ds-dynamic-form.component';
@@ -58,7 +58,6 @@ let TEST_FORM_MODEL;
 
 let TEST_FORM_MODEL_WITH_ARRAY;
 
-let config;
 let formState: FormState;
 let html;
 let store: StoreMock<FormState>;
@@ -129,14 +128,6 @@ function init() {
       },
     }),
   ];
-  config = {
-    form: {
-      validatorMap: {
-        required: 'required',
-        regex: 'pattern',
-      },
-    },
-  } as any;
 
   formState = {
     testForm: {
@@ -155,7 +146,7 @@ function init() {
 
 }
 
-describe('FormComponent test suite', () => {
+describe('FormComponent', () => {
   let testComp: TestComponent;
   let formComp: FormComponent;
   let testFixture: ComponentFixture<TestComponent>;
@@ -177,16 +168,11 @@ describe('FormComponent test suite', () => {
         TestComponent,
       ],
       providers: [
-        { provide: APP_DATA_SERVICES_MAP, useValue: {} },
         ChangeDetectorRef,
-        DynamicFormValidationService,
         FormBuilderService,
         FormComponent,
         FormService,
-        { provide: Store, useClass: StoreMock },
-        { provide: XSRFService, useValue: {} },
       ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
       .overrideComponent(FormComponent, {
         remove: {
@@ -194,6 +180,7 @@ describe('FormComponent test suite', () => {
         },
         add: {
           changeDetection: ChangeDetectionStrategy.Default,
+          schemas: [CUSTOM_ELEMENTS_SCHEMA],
         },
       });
   }));
@@ -202,11 +189,13 @@ describe('FormComponent test suite', () => {
     // synchronous beforeEach
     beforeEach(() => {
       html = `
-        <ds-form *ngIf="formModel" #formRef="formComponent"
+        @if('formModel') {
+            <ds-form #formRef="formComponent"
                  [formId]="formId"
                  [formModel]="formModel"
                  [displaySubmit]="displaySubmit"
-                 [displayReset]="displayCancel"></ds-form>`;
+                 [displayReset]="displayCancel"></ds-form>
+        }`;
 
       testFixture = createTestComponent(html, TestComponent) as ComponentFixture<TestComponent>;
       testComp = testFixture.componentInstance;
@@ -250,7 +239,7 @@ describe('FormComponent test suite', () => {
     it('should dispatch a FormStatusChangeAction when Form group status changes', () => {
       const control = formComp.formGroup.get(['dc_title']);
       control.setValue('Test Title');
-      expect(store.dispatch).toHaveBeenCalledWith(new FormStatusChangeAction('testForm', formComp.formGroup.valid));
+      expect(store.dispatch as jasmine.Spy).toHaveBeenCalledWith(new FormStatusChangeAction('testForm', formComp.formGroup.valid));
     });
 
     it('should display form errors when errors are added to the state', () => {
@@ -296,7 +285,7 @@ describe('FormComponent test suite', () => {
 
       formComp.onChange(event);
 
-      expect(store.dispatch).toHaveBeenCalledWith(new FormChangeAction('testForm', service.getValueFromModel(formComp.formModel)));
+      expect(store.dispatch as jasmine.Spy).toHaveBeenCalledWith(new FormChangeAction('testForm', service.getValueFromModel(formComp.formModel)));
       expect(formComp.change.emit).toHaveBeenCalled();
     }));
 
@@ -452,7 +441,7 @@ describe('FormComponent test suite', () => {
     it('should dispatch FormChangeAction when an item has been added to an array', inject([FormBuilderService], (service: FormBuilderService) => {
       formComp.insertItem(new Event('click'), formComp.formModel[0] as DynamicFormArrayModel, 0);
 
-      expect(store.dispatch).toHaveBeenCalledWith(new FormChangeAction('testFormArray', service.getValueFromModel(formComp.formModel)));
+      expect(store.dispatch as jasmine.Spy).toHaveBeenCalledWith(new FormChangeAction('testFormArray', service.getValueFromModel(formComp.formModel)));
     }));
 
     it('should emit addArrayItem Event when an item has been added to an array', inject([FormBuilderService], (service: FormBuilderService) => {
@@ -466,7 +455,7 @@ describe('FormComponent test suite', () => {
     it('should dispatch FormChangeAction when an item has been removed from an array', inject([FormBuilderService], (service: FormBuilderService) => {
       formComp.removeItem(new Event('click'), formComp.formModel[0] as DynamicFormArrayModel, 0);
 
-      expect(store.dispatch).toHaveBeenCalledWith(new FormChangeAction('testFormArray', service.getValueFromModel(formComp.formModel)));
+      expect(store.dispatch as jasmine.Spy).toHaveBeenCalledWith(new FormChangeAction('testFormArray', service.getValueFromModel(formComp.formModel)));
     }));
 
     it('should emit removeArrayItem Event when an item has been removed from an array', inject([FormBuilderService], (service: FormBuilderService) => {
@@ -637,16 +626,18 @@ describe('FormComponent test suite', () => {
 @Component({
   exportAs: 'formComponent',
   selector: 'ds-test-cmp',
-  template: ``,
-  standalone: true,
+  template: `
+    <ds-dynamic-form></ds-dynamic-form>
+    <ds-form></ds-form>
+  `,
   imports: [
-    CommonModule,
-    FormComponent,
     DsDynamicFormComponent,
-    FormsModule,
-    ReactiveFormsModule,
-    NgbModule,
     DynamicFormsCoreModule,
+    FormComponent,
+    FormsModule,
+    NgbModule,
+    NgClass,
+    ReactiveFormsModule,
   ],
 })
 class TestComponent {

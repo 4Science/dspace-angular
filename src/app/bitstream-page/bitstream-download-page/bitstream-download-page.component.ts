@@ -21,20 +21,16 @@ import {
   take,
 } from 'rxjs/operators';
 
-import { AuthService } from '../../core/auth/auth.service';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
-import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 import { RemoteData } from '../../core/data/remote-data';
 import { SignpostingDataService } from '../../core/data/signposting-data.service';
 import { SignpostingLink } from '../../core/data/signposting-links.model';
-import { HardRedirectService } from '../../core/services/hard-redirect.service';
 import { ServerResponseService } from '../../core/services/server-response.service';
 import {
   NativeWindowRef,
   NativeWindowService,
 } from '../../core/services/window.service';
 import { Bitstream } from '../../core/shared/bitstream.model';
-import { FileService } from '../../core/shared/file.service';
 import { getRemoteDataPayload } from '../../core/shared/operators';
 import { isNotEmpty } from '../../shared/empty.util';
 
@@ -45,7 +41,6 @@ import { isNotEmpty } from '../../shared/empty.util';
     AsyncPipe,
     TranslateModule,
   ],
-  standalone: true,
 })
 /**
  * Page component for downloading a bitstream
@@ -63,10 +58,6 @@ export class BitstreamDownloadPageComponent implements OnInit {
     @Inject(NativeWindowService) private _window: NativeWindowRef,
     private route: ActivatedRoute,
     protected router: Router,
-    private authorizationService: AuthorizationDataService,
-    private auth: AuthService,
-    private fileService: FileService,
-    private hardRedirectService: HardRedirectService,
     private location: Location,
     public dsoNameService: DSONameService,
     private signpostingDataService: SignpostingDataService,

@@ -12,7 +12,7 @@ import {
   TranslateService,
 } from '@ngx-translate/core';
 import { getTestScheduler } from 'jasmine-marbles';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 
 import { AuthService } from '../../../core/auth/auth.service';
@@ -55,10 +55,11 @@ describe('ClaimItemMenuComponent', () => {
     });
     authService = new AuthServiceStub();
     translateService = {
-      get: () => observableOf('test'),
+      get: () => of('test'),
       onTranslationChange: new EventEmitter(),
       onLangChange: new EventEmitter(),
       onDefaultLangChange: new EventEmitter(),
+      onFallbackLangChange: new EventEmitter(),
     };
 
     TestBed.configureTestingModule({
@@ -99,7 +100,7 @@ describe('ClaimItemMenuComponent', () => {
 
   describe('when the user can claim the item', () => {
     beforeEach(() => {
-      authorizationService.isAuthorized.and.returnValue(observableOf(true));
+      authorizationService.isAuthorized.and.returnValue(of(true));
       fixture.detectChanges();
     });
 
@@ -112,7 +113,7 @@ describe('ClaimItemMenuComponent', () => {
 
   describe('when the user cannot claim the item', () => {
     beforeEach(() => {
-      authorizationService.isAuthorized.and.returnValue(observableOf(false));
+      authorizationService.isAuthorized.and.returnValue(of(false));
       fixture.detectChanges();
     });
 

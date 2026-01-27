@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -14,15 +11,12 @@ import { ThemedSearchResultsComponent } from '../../../../../../../../../../app/
   styleUrls: ['../../../../../../../../../../app/shared/form/builder/ds-dynamic-form-ui/relation-lookup-modal/external-source-tab/external-source-entry-import-modal/external-source-entry-import-modal.component.scss'],
   // styleUrls: ['./external-source-entry-import-modal.component.scss'],
   templateUrl: '../../../../../../../../../../app/shared/form/builder/ds-dynamic-form-ui/relation-lookup-modal/external-source-tab/external-source-entry-import-modal/external-source-entry-import-modal.component.html',
-  standalone: true,
   imports: [
-    TranslateModule,
-    ThemedSearchResultsComponent,
-    NgIf,
     AsyncPipe,
     BtnDisabledDirective,
+    ThemedSearchResultsComponent,
+    TranslateModule,
   ],
 })
 export class ExternalSourceEntryImportModalComponent extends BaseComponent {
-
 }

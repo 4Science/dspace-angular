@@ -28,7 +28,7 @@ export const registrationTokenGuard: CanActivateFn = (
 
   if (route.params.token) {
     return epersonRegistrationService
-      .searchRegistrationByToken(route.params.token)
+      .searchByTokenAndHandleError(route.params.token)
       .pipe(
         getFirstCompletedRemoteData(),
         map((data: RemoteData<Registration>) => {

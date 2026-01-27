@@ -1,8 +1,6 @@
 import {
   Location,
   NgClass,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -15,7 +13,6 @@ import {
 import {
   ActivatedRoute,
   Router,
-  RouterLink,
 } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -29,16 +26,12 @@ import { StatisticsChartWrapperComponent } from './statistics-chart-wrapper/stat
   selector: 'ds-statistics-chart',
   styleUrls: ['./statistics-chart.component.scss'],
   templateUrl: './statistics-chart.component.html',
-  standalone: true,
   imports: [
-    NgIf,
-    NgFor,
+    FilterMapPipe,
     NgClass,
     StatisticsChartWrapperComponent,
-    FilterMapPipe,
-    TranslateModule,
     ThemedLoadingComponent,
-    RouterLink,
+    TranslateModule,
   ],
 })
 

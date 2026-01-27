@@ -27,15 +27,19 @@ import { LoginStatistics } from '../../core/statistics/models/login-statistics.m
 import { AlertComponent } from '../../shared/alert/alert.component';
 import { AlertType } from '../../shared/alert/alert-type';
 import { ThemedLoadingComponent } from '../../shared/loading/themed-loading.component';
-import { VarDirective } from '../../shared/utils/var.directive';
-import { StatisticsTableComponent } from '../statistics-table/statistics-table.component';
 
 @Component({
   selector: 'ds-login-statistics',
   templateUrl: './login-statistics-page.component.html',
   styleUrls: ['./login-statistics-page.component.scss'],
-  standalone: true,
-  imports: [CommonModule, VarDirective, ThemedLoadingComponent, StatisticsTableComponent, TranslateModule, FormsModule, NgbDatepickerModule, AlertComponent],
+  imports: [
+    AlertComponent,
+    CommonModule,
+    FormsModule,
+    NgbDatepickerModule,
+    ThemedLoadingComponent,
+    TranslateModule,
+  ],
 })
 export class LoginStatisticsPageComponent implements OnInit {
 

@@ -10,7 +10,6 @@ import { Metric } from '../../../../core/shared/metric.model';
 
 @Pipe({
   name: 'dsMetricStyleConfig',
-  standalone: true,
 })
 export class MetricStyleConfigPipe implements PipeTransform {
   /**

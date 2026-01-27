@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -34,11 +31,9 @@ import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-
   selector: 'ds-cris-layout-search-box',
   templateUrl: './cris-layout-relation-box.component.html',
   styleUrls: ['./cris-layout-relation-box.component.scss'],
-  standalone: true,
   imports: [
-    NgIf,
-    ThemedConfigurationSearchPageComponent,
     AsyncPipe,
+    ThemedConfigurationSearchPageComponent,
   ],
 })
 export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent implements OnInit {

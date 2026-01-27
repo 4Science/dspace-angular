@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -69,17 +66,15 @@ import {
   templateUrl: './submission-import-external.component.html',
   animations: [fadeIn],
   imports: [
-    ObjectCollectionComponent,
-    ThemedLoadingComponent,
     AlertComponent,
-    NgIf,
     AsyncPipe,
+    ObjectCollectionComponent,
+    RouterLink,
     SubmissionImportExternalSearchbarComponent,
+    ThemedLoadingComponent,
     TranslateModule,
     VarDirective,
-    RouterLink,
   ],
-  standalone: true,
 })
 export class SubmissionImportExternalComponent implements OnInit, OnDestroy {
 

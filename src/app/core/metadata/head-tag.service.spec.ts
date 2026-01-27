@@ -16,7 +16,6 @@ import { createMockStore } from '@ngrx/store/testing';
 import { TranslateService } from '@ngx-translate/core';
 import {
   Observable,
-  of as observableOf,
   of,
 } from 'rxjs';
 
@@ -26,6 +25,7 @@ import {
   MockBitstream1,
   MockBitstream2,
   MockBitstream3,
+  NonDiscoverableItemMock,
 } from '../../shared/mocks/item.mock';
 import { getMockTranslateService } from '../../shared/mocks/translate.service.mock';
 import {
@@ -122,7 +122,7 @@ describe('HeadTagService', () => {
       getCurrentOrigin: 'https://request.org',
     });
     authorizationService = jasmine.createSpyObj('authorizationService', {
-      isAuthorized: observableOf(true),
+      isAuthorized: of(true),
     });
 
     store = createMockStore({ initialState });
@@ -159,6 +159,37 @@ describe('HeadTagService', () => {
       platformId,
       _document,
     );
+  });
+
+  describe(`robots tag`, () => {
+    it(`should be set to noindex for non-discoverable items`, fakeAsync(() => {
+      (headTagService as any).processRouteChange({
+        data: {
+          value: {
+            dso: createSuccessfulRemoteDataObject(NonDiscoverableItemMock),
+          },
+        },
+      });
+      tick();
+      expect(meta.updateTag).toHaveBeenCalledWith({
+        name: 'robots',
+        content: 'noindex',
+      });
+    }));
+    it(`should not be set for discoverable items`, fakeAsync(() => {
+      (headTagService as any).processRouteChange({
+        data: {
+          value: {
+            dso: createSuccessfulRemoteDataObject(ItemMock),
+          },
+        },
+      });
+      tick();
+      expect(meta.updateTag).not.toHaveBeenCalledWith({
+        name: 'robots',
+        content: 'noindex',
+      });
+    }));
   });
 
   it('items page should set meta tags', fakeAsync(() => {
@@ -413,7 +444,7 @@ describe('HeadTagService', () => {
     describe('bitstream not download allowed', () => {
       it('should not have citation_pdf_url', fakeAsync(() => {
         (bundleDataService.findByItemAndName as jasmine.Spy).and.returnValue(mockBundleRD$([MockBitstream3]));
-        (authorizationService.isAuthorized as jasmine.Spy).and.returnValue(observableOf(false));
+        (authorizationService.isAuthorized as jasmine.Spy).and.returnValue(of(false));
 
         (headTagService as any).processRouteChange({
           data: {

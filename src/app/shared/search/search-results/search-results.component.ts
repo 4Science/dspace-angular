@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -58,18 +55,16 @@ export interface SelectionConfig {
     fadeIn,
     fadeInOut,
   ],
-  standalone: true,
   imports: [
+    AlertComponent,
     AsyncPipe,
     ErrorComponent,
-    NgIf,
     NgxSkeletonLoaderModule,
     ObjectCollectionComponent,
     RouterLink,
     SearchExportCsvComponent,
     SearchResultsSkeletonComponent,
     TranslateModule,
-    AlertComponent,
   ],
 })
 

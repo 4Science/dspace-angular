@@ -8,108 +8,130 @@
 <ng-template #hasInfo let-entry="entry">
   <ul class="list-unstyled mb-0">
     <li class="list-item d-flex align-items-center">
-      <img *ngIf="entry.source" class="mr-2" #imgTag [src]="getAuthoritySourceIcon(entry.source, imgTag)" [attr.alt]="('form.entry.source.' + entry.source) | translate" />
-      <div class="text-truncate text-primary font-weight-bold">{{entry.value}}</div>
-      <div *ngIf="entry.source" class="ml-2 text-truncate text-secondary">{{ ('form.entry.source.' + entry.source) | translate}}</div>
+      @if (entry.source) {
+        <img class="me-2" #imgTag [src]="getAuthoritySourceIcon(entry.source, imgTag)" [attr.alt]="('form.entry.source.' + entry.source) | translate" />
+      }
+      <div class="text-truncate text-primary fw-bold">{{entry.value}}</div>
+      @if (entry.source) {
+        <div class="ms-2 text-truncate text-secondary">{{ ('form.entry.source.' + entry.source) | translate}}</div>
+      }
     </li>
-    <ng-container *ngFor="let item of entry.otherInformation | dsObjNgFor">
-      <li *ngIf="!item.key.startsWith('data-')" class="list-item text-truncate text-secondary"  >
-        {{ 'form.other-information.' + item.key | translate }} : {{item.value !== '' ? getOtherInfoValue(item.value, item.key) : ('form.other-information.not-available' | translate)}}
-      </li>
-    </ng-container>
+    @for (item of entry.otherInformation | dsObjNgFor; track item) {
+      @if (!item.key.startsWith('data-')) {
+        <li class="list-item text-truncate text-secondary" >
+          {{ 'form.other-information.' + item.key | translate }} : {{item.value !== '' ? getOtherInfoValue(item.value, item.key) : ('form.other-information.not-available' | translate)}}
+        </li>
+      }
+    }
   </ul>
 </ng-template>
 
 <ng-template #noInfo let-entry="entry">
   <ul class="list-unstyled mb-0">
     <li class="list-item d-flex align-items-center">
-      <img  *ngIf="entry.source" class="mr-2" #imgTag [src]="getAuthoritySourceIcon(entry.source, imgTag)" [attr.alt]="('form.entry.source.' + entry.source) | translate" />
-      <div class="text-truncate text-primary font-weight-bold">{{entry.value}}</div>
-      <div *ngIf="entry.source" class="ml-2 text-truncate text-secondary">{{ ('form.entry.source.' + entry.source) | translate}}</div>
+      @if (entry.source) {
+        <img class="me-2" #imgTag [src]="getAuthoritySourceIcon(entry.source, imgTag)" [attr.alt]="('form.entry.source.' + entry.source) | translate" />
+      }
+      <div class="text-truncate text-primary fw-bold">{{entry.value}}</div>
+      @if (entry.source) {
+        <div class="ms-2 text-truncate text-secondary">{{ ('form.entry.source.' + entry.source) | translate}}</div>
+      }
     </li>
   </ul>
 </ng-template>
 
-<div *ngIf="(isHierarchicalVocabulary() | async) !== true" class="form-row position-relative align-items-center">
-  <div class="col right-addon">
-    <i *ngIf="searching || loadingInitialValue" class="fas fa-circle-notch fa-spin fa-2x fa-fw text-primary position-absolute mt-1 p-0" aria-hidden="true"></i>
-    <i *ngIf="!searching && !loadingInitialValue"
-       dsAuthorityConfidenceState
-       class="far fa-circle fa-2x fa-fw position-absolute mt-1 p-0 pr-2"
-       aria-hidden="true"
-       [authorityValue]="currentValue"
-       (whenClickOnConfidenceNotAccepted)="whenClickOnConfidenceNotAccepted($event)"></i>
-    <i  *ngIf="otherInfoValues.length > 0 && (model.id === otherInfoKey || otherInfoKey === alternativeNamesKey || 'data-' + model.id === otherInfoKey)"
-        class="fa-solid fa-angle-down fa-fw fa-2x fa-fw position-absolute mt-1 p-0 additional-items-icon"
-        (click)="toggleOtherInfoSelection()"
-    ></i>
+@if ((isHierarchicalVocabulary() | async) !== true) {
+  <div class="form-row position-relative align-items-center">
+    <div class="col right-addon">
+      @if (searching || loadingInitialValue) {
+        <i class="fas fa-circle-notch fa-spin fa-2x fa-fw text-primary my-auto p-0" aria-hidden="true"></i>
+      }
+      @if (!searching && !loadingInitialValue) {
+        <i
+          dsAuthorityConfidenceState
+          class="far fa-circle fa-2x fa-fw my-auto p-0"
+          aria-hidden="true"
+          [authorityValue]="currentValue"
+        (whenClickOnConfidenceNotAccepted)="whenClickOnConfidenceNotAccepted($event)"></i>
+      }
+      @if (otherInfoValues.length > 0 && (model.id === otherInfoKey || otherInfoKey === alternativeNamesKey || 'data-' + model.id === otherInfoKey)) {
+        <i class="fa-solid fa-angle-down fa-fw fa-2x fa-fw position-absolute mt-1 p-0 additional-items-icon"
+        (click)="toggleOtherInfoSelection()"></i>
+      }
 
-    <input #instance="ngbTypeahead"
-           class="form-control"
-           [attr.aria-labelledby]="'label_' + model.id"
-           [attr.autoComplete]="model.autoComplete"
-           [attr.aria-label]="model.label | translate"
-           [class.is-invalid]="showErrorMessages"
-           [id]="model.id"
-           [inputFormatter]="formatter"
-           [name]="model.name"
-           [ngbTypeahead]="search"
-           [placeholder]="model.placeholder"
-           [readonly]="model.readOnly"
-           [disabled]="model.readOnly"
-           [resultTemplate]="rt"
-           [type]="model.inputType"
-           [(ngModel)]="currentValue"
-           (blur)="onBlur($event)"
-           (focus)="onFocus($event)"
-           (change)="onChange($event)"
-           (input)="onInput($event)"
-           (selectItem)="onSelectItem($event)">
+      <input #instance="ngbTypeahead"
+        class="form-control"
+        [attr.aria-labelledby]="'label_' + model.id"
+        [attr.autoComplete]="model.autoComplete"
+        [attr.aria-label]="model.label | translate"
+        [class.is-invalid]="showErrorMessages"
+        [id]="model.id"
+        [inputFormatter]="formatter"
+        [name]="model.name"
+        [ngbTypeahead]="search"
+        [placeholder]="model.placeholder"
+        [readonly]="model.readOnly"
+        [disabled]="model.readOnly"
+        [resultTemplate]="rt"
+        [type]="model.inputType"
+        [(ngModel)]="currentValue"
+        (blur)="onBlur($event)"
+        (focus)="onFocus($event)"
+        (change)="onChange($event)"
+        (input)="onInput($event)"
+        (selectItem)="onSelectItem($event)">
 
-    <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
+      @if (searchFailed) {
+        <div class="invalid-feedback">Sorry, suggestions could not be loaded.</div>
+      }
+    </div>
+    @if ((hasExternalSource() | async) && !model?.isModelOfInnerForm) {
+      <div class="col-auto text-center">
+        <button class="btn btn-secondary"
+          ngbTooltip="{{'form.external.source-help' | translate}}"
+          [dsBtnDisabled]="!model?.value || hasAuthorityValue()"
+          (click)="createEntityFromMetadata()">
+          <i class="far fa-share-square"></i>
+        </button>
+      </div>
+    }
   </div>
-  <div *ngIf="(hasExternalSource() | async) && !model?.isModelOfInnerForm" class="col-auto text-center">
-    <button class="btn btn-secondary"
-            ngbTooltip="{{'form.external.source-help' | translate}}"
-            [dsBtnDisabled]="!model?.value || hasAuthorityValue()"
-            (click)="createEntityFromMetadata()">
-      <i class="far fa-share-square"></i>
-    </button>
+}
+@if ((isHierarchicalVocabulary() | async)) {
+  <div class="position-relative right-addon">
+    <i class="dropdown-toggle position-absolute tree-toggle" (click)="openTree($event)"
+    aria-hidden="true"></i>
+    <input class="form-control"
+      [attr.aria-labelledby]="'label_' + model.id"
+      [attr.autoComplete]="model.autoComplete"
+      [attr.aria-label]="model.label | translate"
+      [class.is-invalid]="showErrorMessages"
+      [class.tree-input]="!model.readOnly"
+      [id]="id"
+      [name]="model.name"
+      [placeholder]="model.placeholder"
+      [readonly]="true"
+      [disabled]="model.readOnly"
+      [type]="model.inputType"
+      [value]="currentValue?.display"
+      (focus)="onFocus($event)"
+      (change)="onChange($event)"
+      (click)="openTree($event)"
+      (keydown)="$event.preventDefault()"
+      (keypress)="$event.preventDefault()"
+      (keyup)="$event.preventDefault()">
   </div>
-</div>
+}
 
-<div *ngIf="(isHierarchicalVocabulary() | async)" class="position-relative right-addon">
-  <i class="dropdown-toggle position-absolute tree-toggle" (click)="openTree($event)"
-     aria-hidden="true"></i>
-  <input class="form-control"
-         [attr.aria-labelledby]="'label_' + model.id"
-         [attr.autoComplete]="model.autoComplete"
-         [attr.aria-label]="model.label | translate"
-         [class.is-invalid]="showErrorMessages"
-         [class.tree-input]="!model.readOnly"
-         [id]="id"
-         [name]="model.name"
-         [placeholder]="model.placeholder"
-         [readonly]="true"
-         [disabled]="model.readOnly"
-         [type]="model.inputType"
-         [value]="currentValue?.display"
-         (focus)="onFocus($event)"
-         (change)="onChange($event)"
-         (click)="openTree($event)"
-         (keydown)="$event.preventDefault()"
-         (keypress)="$event.preventDefault()"
-         (keyup)="$event.preventDefault()">
-</div>
-
-
-<div *ngIf="additionalInfoSelectIsOpen" class="bg-white border border-primary position-absolute additional-info-selection">
-  <span class="m-2 text-muted">{{'form.other-information.selection.' + otherInfoKey | translate}}</span>
-  <ul class="list-unstyled mb-0">
-    <ng-container *ngFor="let info of otherInfoValues">
-      <li [class.font-weight-bold]="(info === otherInfoValue && otherInfoKey !== alternativeNamesKey)  || (info === otherName && otherInfoKey === alternativeNamesKey) || (model.value && info === model.value['display'] && !otherInfoValue && !otherName)" class="list-item d-flex align-items-center p-2" (click)="selectAlternativeInfo(info)">
-        {{info}}
-      </li>
-    </ng-container>
-  </ul>
-</div>
+@if (additionalInfoSelectIsOpen) {
+  <div class="bg-white border border-primary position-absolute additional-info-selection">
+    <span class="m-2 text-muted">{{'form.other-information.selection.' + otherInfoKey | translate}}</span>
+    <ul class="list-unstyled mb-0">
+      @for (info of otherInfoValues; track info) {
+        <li [class.fw-bold]="(info === otherInfoValue && otherInfoKey !== alternativeNamesKey)  || (info === otherName && otherInfoKey === alternativeNamesKey) || (model.value && info === model.value['display'] && !otherInfoValue && !otherName)" class="list-item d-flex align-items-center p-2" (click)="selectAlternativeInfo(info)">
+          {{info}}
+        </li>
+      }
+    </ul>
+  </div>
+}

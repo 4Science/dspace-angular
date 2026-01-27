@@ -21,7 +21,7 @@ describe('registrationDataResolver', () => {
   });
 
   beforeEach(() => {
-    const spy = jasmine.createSpyObj('EpersonRegistrationService', ['searchRegistrationByToken']);
+    const spy = jasmine.createSpyObj('EpersonRegistrationService', ['searchRegistrationByToken', 'searchByTokenAndHandleError']);
 
     TestBed.configureTestingModule({
       providers: [
@@ -34,7 +34,7 @@ describe('registrationDataResolver', () => {
   it('should resolve registration data based on a token', () => {
     const token = 'abc123';
     const registrationRD$ = createSuccessfulRemoteDataObject$(registrationMock);
-    epersonRegistrationServiceSpy.searchRegistrationByToken.and.returnValue(registrationRD$);
+    epersonRegistrationServiceSpy.searchByTokenAndHandleError.and.returnValue(registrationRD$);
     const route = new ActivatedRouteSnapshot();
     route.params = { token: token };
     const state = {} as RouterStateSnapshot;
@@ -46,6 +46,6 @@ describe('registrationDataResolver', () => {
     obs.subscribe((data) => {
       expect(data).toEqual(createSuccessfulRemoteDataObject(registrationMock));
     });
-    expect(epersonRegistrationServiceSpy.searchRegistrationByToken).toHaveBeenCalledWith(token);
+    expect(epersonRegistrationServiceSpy.searchByTokenAndHandleError).toHaveBeenCalledWith(token);
   });
 });

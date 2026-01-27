@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -20,7 +17,7 @@ import {
 import {
   BehaviorSubject,
   Observable,
-  of as observableOf,
+  of,
   Subscription,
 } from 'rxjs';
 import {
@@ -52,12 +49,10 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
 @Component({
   selector: 'ds-context-menu-request-correction',
   templateUrl: './request-correction-menu.component.html',
-  standalone: true,
   imports: [
-    NgIf,
     AsyncPipe,
-    TranslateModule,
     BtnDisabledDirective,
+    TranslateModule,
   ],
 })
 export class RequestCorrectionMenuComponent extends ContextMenuEntryComponent implements OnInit,OnDestroy {
@@ -130,7 +125,7 @@ export class RequestCorrectionMenuComponent extends ContextMenuEntryComponent im
       catchError((error: unknown) => {
         if (error instanceof ErrorResponse) {
           this.handleErrorResponse(error.statusCode);
-          return observableOf({});
+          return of({});
         }
       }),
     ).subscribe((response: SubmissionObject) => {

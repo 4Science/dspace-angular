@@ -27,10 +27,7 @@ import {
  */
 @Component({
   selector: 'ds-search-results',
-  styleUrls: [],
   templateUrl: '../../theme-support/themed.component.html',
-  standalone: true,
-  imports: [SearchResultsComponent],
 })
 export class ThemedSearchResultsComponent extends ThemedComponent<SearchResultsComponent> {
 
@@ -38,9 +35,9 @@ export class ThemedSearchResultsComponent extends ThemedComponent<SearchResultsC
 
   @Input() linkType: CollectionElementLinkType;
 
-  @Input() searchResultNotice: string = null;
+  @Input() searchResultNotice: string;
 
-  @Input() searchResultNoticeType: AlertType = AlertType.Info;
+  @Input() searchResultNoticeType: AlertType;
 
   @Input() searchResults: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>;
 
@@ -56,9 +53,9 @@ export class ThemedSearchResultsComponent extends ThemedComponent<SearchResultsC
 
   @Input() showWorkflowStatistics: boolean;
 
-  @Input() showSearchResultNotice = false;
+  @Input() showSearchResultNotice: boolean;
 
-  @Input() showCorrection = false;
+  @Input() showCorrection: boolean;
 
   @Input() sortConfig: SortOptions;
 

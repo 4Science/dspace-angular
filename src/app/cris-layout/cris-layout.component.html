@@ -1,20 +1,24 @@
 <div class="cris-layout">
-	<ng-container *ngIf="!!tabs$">
-		<ng-container *ngVar="(leadingTabs$ | async) as leadingTabs">
-			<ds-cris-layout-leading *ngIf="(hasLeadingTab$ | async) && !!leadingTabs && leadingTabs.length > 0"
-                              [item]="item"
-                              [showContextMenu]="showContextMenu"
-                              [tab]="leadingTabs[0]"></ds-cris-layout-leading>
-		</ng-container>
-	</ng-container>
+  @if (!!tabs$) {
+    <ng-container *ngVar="(leadingTabs$ | async) as leadingTabs">
+      @if ((hasLeadingTab$ | async) && !!leadingTabs && leadingTabs.length > 0) {
+        <ds-cris-layout-leading
+          [item]="item"
+          [showContextMenu]="showContextMenu"
+        [tab]="leadingTabs[0]"></ds-cris-layout-leading>
+      }
+    </ng-container>
+  }
 
-	<ng-container *ngIf="!!tabs$">
-		<ng-container *ngVar="(loaderTabs$ | async) as loaderTabs">
-			<ds-cris-layout-loader *ngIf="!!loaderTabs && loaderTabs.length > 0"
-                             [leadingTabs]="(leadingTabs$ | async)"
-                             [item]="item"
-                             [showContextMenu]="(hasLeadingTab$ | async) !== true && showContextMenu"
-                             [tabs]="loaderTabs"></ds-cris-layout-loader>
-		</ng-container>
-	</ng-container>
+  @if (!!tabs$) {
+    <ng-container *ngVar="(loaderTabs$ | async) as loaderTabs">
+      @if (!!loaderTabs && loaderTabs.length > 0) {
+        <ds-cris-layout-loader
+          [leadingTabs]="(leadingTabs$ | async)"
+          [item]="item"
+          [showContextMenu]="(hasLeadingTab$ | async) !== true && showContextMenu"
+        [tabs]="loaderTabs"></ds-cris-layout-loader>
+      }
+    </ng-container>
+  }
 </div>

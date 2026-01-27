@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import {
-  async,
   ComponentFixture,
   inject,
   TestBed,
+  waitForAsync,
 } from '@angular/core/testing';
 import {
   FormsModule,
@@ -53,7 +53,7 @@ describe('AdminEditUserAgreementComponent', () => {
     },
   });
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
 
     scriptDataService = {};
     notificationService = new NotificationsServiceStub();
@@ -89,7 +89,7 @@ describe('AdminEditUserAgreementComponent', () => {
     expect(comp).toBeDefined();
   }));
 
-  it('should fill the text areas with the dc.rights values', async(() => {
+  it('should fill the text areas with the dc.rights values', waitForAsync(() => {
     expect(component.userAgreementTexts.get('en').text).toEqual('This is the End User Agreement text for this test');
     expect(component.userAgreementTexts.get('de').text).toEqual('Dies ist der Text der Endbenutzervereinbarung für diesen Test');
   }));

@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -14,7 +11,6 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import {
   select,
   Store,
@@ -55,8 +51,14 @@ import { BrowserOnlyPipe } from '../../../utils/browser-only.pipe';
   templateUrl: './log-in-password.component.html',
   styleUrls: ['./log-in-password.component.scss'],
   animations: [fadeOut],
-  standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, NgIf, RouterLink, AsyncPipe, TranslateModule, BrowserOnlyPipe, BtnDisabledDirective],
+  imports: [
+    AsyncPipe,
+    BrowserOnlyPipe,
+    BtnDisabledDirective,
+    FormsModule,
+    ReactiveFormsModule,
+    TranslateModule,
+  ],
 })
 export class LogInPasswordComponent implements OnInit {
 

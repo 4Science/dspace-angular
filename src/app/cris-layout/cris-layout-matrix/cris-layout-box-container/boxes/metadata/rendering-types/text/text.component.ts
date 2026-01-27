@@ -11,7 +11,6 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   selector: 'span[ds-text]',
   templateUrl: './text.component.html',
   styleUrls: ['./text.component.scss'],
-  standalone: true,
   imports: [
     EscapeHtmlPipe,
   ],

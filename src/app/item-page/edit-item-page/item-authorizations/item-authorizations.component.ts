@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -15,7 +11,7 @@ import isEqual from 'lodash/isEqual';
 import {
   BehaviorSubject,
   Observable,
-  of as observableOf,
+  of,
   Subscription,
 } from 'rxjs';
 import {
@@ -62,15 +58,12 @@ interface BundleBitstreamsMapEntry {
   templateUrl: './item-authorizations.component.html',
   styleUrls: ['./item-authorizations.component.scss'],
   imports: [
-    ResourcePoliciesComponent,
-    NgbCollapseModule,
-    TranslateModule,
-    NgForOf,
-    AsyncPipe,
-    NgIf,
     AlertComponent,
+    AsyncPipe,
+    NgbCollapseModule,
+    ResourcePoliciesComponent,
+    TranslateModule,
   ],
-  standalone: true,
 })
 /**
  * Component that handles the item Authorizations
@@ -194,7 +187,7 @@ export class ItemAuthorizationsComponent implements OnInit, OnDestroy {
       getFirstSucceededRemoteDataWithNotEmptyPayload(),
       catchError((error: unknown) => {
         console.error(error);
-        return observableOf(buildPaginatedList(null, []));
+        return of(buildPaginatedList(null, []));
       }),
     );
 
@@ -243,7 +236,7 @@ export class ItemAuthorizationsComponent implements OnInit, OnDestroy {
       getFirstSucceededRemoteDataPayload(),
       catchError((error: unknown) => {
         console.error(error);
-        return observableOf(buildPaginatedList(null, []));
+        return of(buildPaginatedList(null, []));
       }),
     );
   }

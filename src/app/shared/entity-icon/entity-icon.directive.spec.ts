@@ -112,7 +112,6 @@ describe('EntityIconDirective', () => {
                     [entityType]="metadata.entityType"
                     [entityStyle]="metadata.entityStyle"
                     [fallbackOnDefault]="fallbackOnDefault">{{ metadata.value }}</span></div>`,
-  standalone: true,
   imports: [
     EntityIconDirective,
   ],

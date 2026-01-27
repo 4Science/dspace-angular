@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -14,7 +11,7 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import {
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
@@ -29,9 +26,7 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   selector: 'ds-subscription-menu',
   templateUrl: './subscription-menu.component.html',
   styleUrls: ['./subscription-menu.component.scss'],
-  standalone: true,
   imports: [
-    NgIf,
     AsyncPipe,
     TranslateModule,
   ],
@@ -44,7 +39,7 @@ export class SubscriptionMenuComponent extends ContextMenuEntryComponent impleme
   /**
    * Whether or not the current user is authorized to subscribe the DSpaceObject
    */
-  isAuthorized$: Observable<boolean> = observableOf(false);
+  isAuthorized$: Observable<boolean> = of(false);
 
 
   /**
@@ -78,7 +73,9 @@ export class SubscriptionMenuComponent extends ContextMenuEntryComponent impleme
    */
   public openSubscription() {
     this.modalRef = this.modalService.open(SubscriptionModalComponent);
-    this.modalRef.componentInstance.dso = this.contextMenuObject;
+    if (this.modalRef.componentInstance) {
+      this.modalRef.componentInstance.dso = this.contextMenuObject;
+    }
   }
 
 }

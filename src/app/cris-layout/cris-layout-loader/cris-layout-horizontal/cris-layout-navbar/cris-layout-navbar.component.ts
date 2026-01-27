@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -27,13 +25,10 @@ import { CrisLayoutSidebarItemComponent } from '../../shared/sidebar-item/cris-l
   templateUrl: './cris-layout-navbar.component.html',
   styleUrls: ['./cris-layout-navbar.component.scss'],
   animations: [slideMobileNav],
-  standalone: true,
   imports: [
-    NgIf,
-    NgClass,
-    NgFor,
-    CrisLayoutSidebarItemComponent,
     AsyncPipe,
+    CrisLayoutSidebarItemComponent,
+    NgClass,
     TranslateModule,
   ],
 })

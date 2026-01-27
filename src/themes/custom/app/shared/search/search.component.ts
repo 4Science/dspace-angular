@@ -1,6 +1,5 @@
 import {
   AsyncPipe,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -29,21 +28,19 @@ import { ViewModeSwitchComponent } from '../../../../../app/shared/view-mode-swi
   templateUrl: '../../../../../app/shared/search/search.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [pushInOut],
-  standalone: true,
   imports: [
     AsyncPipe,
-    NgIf,
+    ItemExportModalLauncherComponent,
+    NgbTooltipModule,
     NgTemplateOutlet,
     PageWithSidebarComponent,
+    SearchChartsComponent,
+    SearchLabelsComponent,
     ThemedSearchFormComponent,
     ThemedSearchResultsComponent,
     ThemedSearchSidebarComponent,
     TranslateModule,
-    SearchLabelsComponent,
     ViewModeSwitchComponent,
-    NgbTooltipModule,
-    ItemExportModalLauncherComponent,
-    SearchChartsComponent,
   ],
 })
 export class SearchComponent extends BaseComponent {

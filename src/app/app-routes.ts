@@ -29,6 +29,7 @@ import { COLLECTION_MODULE_PATH } from './collection-page/collection-page-routin
 import { COMMUNITY_MODULE_PATH } from './community-page/community-page-routing-paths';
 import { authBlockingGuard } from './core/auth/auth-blocking.guard';
 import { authenticatedGuard } from './core/auth/authenticated.guard';
+import { notAuthenticatedGuard } from './core/auth/not-authenticated.guard';
 import { groupAdministratorGuard } from './core/data/feature-authorization/feature-authorization-guard/group-administrator.guard';
 import { siteRegisterGuard } from './core/data/feature-authorization/feature-authorization-guard/site-register.guard';
 import { endUserAgreementCurrentUserGuard } from './core/end-user-agreement/end-user-agreement-current-user.guard';
@@ -38,7 +39,6 @@ import { ServerCheckGuard } from './core/server-check/server-check.guard';
 import { ThemedForbiddenComponent } from './forbidden/themed-forbidden.component';
 import { homePageResolver } from './home-page/home-page.resolver';
 import { ITEM_MODULE_PATH } from './item-page/item-page-routing-paths';
-import { menuResolver } from './menuResolver';
 import { provideSuggestionNotificationsState } from './notifications/provide-suggestion-notifications-state';
 import { ThemedPageErrorComponent } from './page-error/themed-page-error.component';
 import { ThemedPageInternalServerErrorComponent } from './page-internal-server-error/themed-page-internal-server-error.component';
@@ -56,7 +56,6 @@ export const APP_ROUTES: Route[] = [
     path: '',
     canActivate: [authBlockingGuard],
     canActivateChild: [ServerCheckGuard],
-    resolve: [menuResolver],
     children: [
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       {
@@ -74,6 +73,7 @@ export const APP_ROUTES: Route[] = [
           .then((m) => m.ROUTES),
         data: {
           showBreadcrumbs: false,
+          enableRSS: true,
           dsoPath: 'site',
         },
         providers: [provideSuggestionNotificationsState()],
@@ -105,13 +105,13 @@ export const APP_ROUTES: Route[] = [
         path: REGISTER_PATH,
         loadChildren: () => import('./register-page/register-page-routes')
           .then((m) => m.ROUTES),
-        canActivate: [siteRegisterGuard],
+        canActivate: [notAuthenticatedGuard, siteRegisterGuard],
       },
       {
         path: FORGOT_PASSWORD_PATH,
         loadChildren: () => import('./forgot-password/forgot-password-routes')
           .then((m) => m.ROUTES),
-        canActivate: [endUserAgreementCurrentUserGuard, forgotPasswordCheckGuard],
+        canActivate: [notAuthenticatedGuard, endUserAgreementCurrentUserGuard, forgotPasswordCheckGuard],
       },
       {
         path: COMMUNITY_MODULE_PATH,
@@ -153,6 +153,7 @@ export const APP_ROUTES: Route[] = [
         path: 'mydspace',
         loadChildren: () => import('./my-dspace-page/my-dspace-page-routes')
           .then((m) => m.ROUTES),
+        data: { enableRSS: true },
         providers: [provideSuggestionNotificationsState()],
         canActivate: [authenticatedGuard, endUserAgreementCurrentUserGuard],
       },
@@ -160,6 +161,7 @@ export const APP_ROUTES: Route[] = [
         path: 'search',
         loadChildren: () => import('./search-page/search-page-routes')
           .then((m) => m.ROUTES),
+        data: { enableRSS: true },
         canActivate: [endUserAgreementCurrentUserGuard],
       },
       {
@@ -172,6 +174,7 @@ export const APP_ROUTES: Route[] = [
         path: ADMIN_MODULE_PATH,
         loadChildren: () => import('./admin/admin-routes')
           .then((m) => m.ROUTES),
+        data: { enableRSS: true },
         canActivate: [authenticatedGuard, endUserAgreementCurrentUserGuard],
       },
       {
@@ -191,7 +194,9 @@ export const APP_ROUTES: Route[] = [
       },
       {
         path: 'login',
-        loadChildren: () => import('./login-page/login-page-routes').then((m) => m.ROUTES),
+        loadChildren: () => import('./login-page/login-page-routes')
+          .then((m) => m.ROUTES),
+        canActivate: [notAuthenticatedGuard],
         data: {
           isBackDoor: false,
         },
@@ -200,6 +205,7 @@ export const APP_ROUTES: Route[] = [
         path: 'logout',
         loadChildren: () => import('./logout-page/logout-page-routes')
           .then((m) => m.ROUTES),
+        canActivate: [authenticatedGuard],
       },
       {
         path: 'submit',
@@ -226,6 +232,7 @@ export const APP_ROUTES: Route[] = [
         providers: [provideSubmissionState()],
         loadChildren: () => import('./workflowitems-edit-page/workflowitems-edit-page-routes')
           .then((m) => m.ROUTES),
+        data: { enableRSS: true },
         canActivate: [endUserAgreementCurrentUserGuard],
       },
       {
@@ -333,6 +340,22 @@ export const APP_ROUTES: Route[] = [
         loadChildren: () => import('./subscriptions-page/subscriptions-page-routes')
           .then((m) => m.ROUTES),
         canActivate: [authenticatedGuard],
+      },
+      {
+        path: 'external-login/:token',
+        loadChildren: () => import('./external-login-page/external-login-routes').then((m) => m.ROUTES),
+        canActivate: [notAuthenticatedGuard],
+      },
+      {
+        path: 'review-account/:token',
+        loadChildren: () => import('./external-login-review-account-info-page/external-login-review-account-info-page-routes')
+          .then((m) => m.ROUTES),
+      },
+      {
+        path: 'email-confirmation',
+        loadChildren: () => import('./external-login-email-confirmation-page/external-login-email-confirmation-page-routes')
+          .then((m) => m.ROUTES),
+        canActivate: [notAuthenticatedGuard],
       },
       { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent, data: { title: PAGE_NOT_FOUND_PATH }, canActivate: [RedirectService]  },
     ],

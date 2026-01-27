@@ -1,4 +1,4 @@
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { StatisticsCategory } from '../../core/statistics/models/statistics-category.model';
 import { STATISTICS_CATEGORY } from '../../core/statistics/models/statistics-category.resource-type';
@@ -6,7 +6,7 @@ import { STATISTICS_CATEGORY } from '../../core/statistics/models/statistics-cat
 export class StatisticsCategoriesServiceStub {
 
   searchStatistics(uri: string, page: number, size: number, categoryId?: string, startDate?: string, endDate?: string) {
-    return observableOf([
+    return of([
         {
           id: 'mainReports',
           type: STATISTICS_CATEGORY,

@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -24,7 +21,7 @@ import {
 } from '@ngx-translate/core';
 import {
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import {
   filter,
@@ -56,16 +53,14 @@ import { DuplicateMatchMetadataDetailConfig } from '../models/duplicate-detail-m
   selector: 'ds-duplicate-match',
   templateUrl: 'duplicate-match.component.html',
   imports: [
-    ThemedItemListPreviewComponent,
     AsyncPipe,
-    TranslateModule,
-    NgIf,
-    NgbTooltipModule,
-    RouterLink,
-    ReactiveFormsModule,
     BtnDisabledDirective,
+    NgbTooltipModule,
+    ReactiveFormsModule,
+    RouterLink,
+    ThemedItemListPreviewComponent,
+    TranslateModule,
   ],
-  standalone: true,
 })
 
 export class DuplicateMatchComponent implements OnInit {
@@ -186,13 +181,13 @@ export class DuplicateMatchComponent implements OnInit {
    * Use to change the Verify button label during the saving process.
    * @type {Observable<boolean>}
    */
-  public processingVerify: Observable<boolean> = observableOf(false);
+  public processingVerify: Observable<boolean> = of(false);
 
   /**
    * Use to change the Reject button label during the saving process.
    * @type {Observable<boolean>}
    */
-  public processingReject: Observable<boolean> = observableOf(false);
+  public processingReject: Observable<boolean> = of(false);
 
   /**
    * Contains the CSS class for the submitter decision text.
@@ -284,7 +279,7 @@ export class DuplicateMatchComponent implements OnInit {
    * Save the 'It is a duplication' decision.
    */
   setAsDuplicate() {
-    this.processingVerify = observableOf(true);
+    this.processingVerify = of(true);
     const decision = new DuplicateDecision(
       DuplicateDecisionValue.Verify,
       this.decisionType,
@@ -298,7 +293,7 @@ export class DuplicateMatchComponent implements OnInit {
    * Save the 'It is not a duplication' decision.
    */
   setAsNotDuplicate() {
-    this.processingReject = observableOf(true);
+    this.processingReject = of(true);
     const decision = new DuplicateDecision(
       DuplicateDecisionValue.Reject,
       this.decisionType);

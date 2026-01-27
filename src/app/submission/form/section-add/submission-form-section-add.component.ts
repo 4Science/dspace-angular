@@ -22,8 +22,12 @@ import { SubmissionService } from '../../submission.service';
   selector: 'ds-submission-form-section-add',
   styleUrls: ['./submission-form-section-add.component.scss'],
   templateUrl: './submission-form-section-add.component.html',
-  standalone: true,
-  imports: [CommonModule, TranslateModule, NgbDropdownModule, BtnDisabledDirective],
+  imports: [
+    BtnDisabledDirective,
+    CommonModule,
+    NgbDropdownModule,
+    TranslateModule,
+  ],
 })
 export class SubmissionFormSectionAddComponent implements OnInit {
 

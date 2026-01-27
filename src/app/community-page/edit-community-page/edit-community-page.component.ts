@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgForOf,
-  NgIf,
 } from '@angular/common';
 import { Component } from '@angular/core';
 import {
@@ -23,15 +21,12 @@ import { getCommunityPageRoute } from '../community-page-routing-paths';
 @Component({
   selector: 'ds-edit-community',
   templateUrl: '../../shared/comcol/comcol-forms/edit-comcol-page/edit-comcol-page.component.html',
-  standalone: true,
   imports: [
-    RouterLink,
-    TranslateModule,
-    NgClass,
-    NgForOf,
-    RouterOutlet,
-    NgIf,
     AsyncPipe,
+    NgClass,
+    RouterLink,
+    RouterOutlet,
+    TranslateModule,
   ],
 })
 export class EditCommunityPageComponent extends EditComColPageComponent<Community> {

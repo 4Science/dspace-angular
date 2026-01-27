@@ -12,7 +12,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { getBitstreamDownloadRoute } from '../../app-routing-paths';
 import {
@@ -87,7 +87,7 @@ describe('LuckySearchComponent', () => {
   const bitstreamDataService = jasmine.createSpyObj('bitstreamDataService', {
     findByItem: jasmine.createSpy('findByItem'),
   });
-  const mockSearchOptions = observableOf(new PaginatedSearchOptions({
+  const mockSearchOptions = of(new PaginatedSearchOptions({
     pagination: Object.assign(new PaginationComponentOptions(), {
       id: 'search-page-configuration',
       pageSize: 10,
@@ -238,10 +238,10 @@ describe('LuckySearchComponent', () => {
         .and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([bitstream])));
 
       component.currentFilter = { identifier: 'test', value: 'test', bitstreamValue: 'test' };
-      component.searchOptions$ = observableOf(defaultPagination);
+      component.searchOptions$ = of(defaultPagination);
 
-      spyOn((component as any), 'getLuckySearchResults').and.returnValue(observableOf(data));
-      spyOn((component as any), 'loadBitstreamsAndRedirectIfNeeded').and.returnValue(observableOf([bitstream]));
+      spyOn((component as any), 'getLuckySearchResults').and.returnValue(of(data));
+      spyOn((component as any), 'loadBitstreamsAndRedirectIfNeeded').and.returnValue(of([bitstream]));
       spyOn((component as any), 'hasBitstreamFilters').and.returnValue(true);
       spyOn(component, 'redirect');
       routerStub.parseUrl.and.returnValue(bitstreamSearchTree).and.callThrough();
@@ -301,10 +301,10 @@ describe('LuckySearchComponent', () => {
         .and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([bitstream])));
 
       component.currentFilter = { identifier: 'test', value: 'test', bitstreamValue: 'test' };
-      component.searchOptions$ = observableOf(defaultPagination);
+      component.searchOptions$ = of(defaultPagination);
 
-      spyOn((component as any), 'getLuckySearchResults').and.returnValue(observableOf(data));
-      spyOn((component as any), 'loadBitstreamsAndRedirectIfNeeded').and.returnValue(observableOf([bitstream]));
+      spyOn((component as any), 'getLuckySearchResults').and.returnValue(of(data));
+      spyOn((component as any), 'loadBitstreamsAndRedirectIfNeeded').and.returnValue(of([bitstream]));
       spyOn((component as any), 'hasBitstreamFilters').and.returnValue(true);
       spyOn(component, 'redirect');
       routerStub.parseUrl.and.returnValue(bitstreamSearchTree);
@@ -346,8 +346,8 @@ describe('LuckySearchComponent', () => {
       fixture.detectChanges();
       const emptyResults = createSuccessfulRemoteDataObject(createPaginatedList([]));
 
-      spyOn(component as any, 'getLuckySearchResults').and.returnValue(observableOf(emptyResults));
-      spyOn(component as any, 'processSearchResults').and.returnValue(observableOf(emptyResults));
+      spyOn(component as any, 'getLuckySearchResults').and.returnValue(of(emptyResults));
+      spyOn(component as any, 'processSearchResults').and.returnValue(of(emptyResults));
 
       component.getSearchResults();
 

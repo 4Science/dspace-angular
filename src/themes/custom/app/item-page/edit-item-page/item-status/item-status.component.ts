@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgForOf,
-  NgIf,
 } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -27,15 +25,12 @@ import {
     fadeIn,
     fadeInOut,
   ],
-  standalone: true,
   imports: [
-    TranslateModule,
-    NgForOf,
     AsyncPipe,
-    NgIf,
-    RouterLink,
     ItemOperationComponent,
     NgClass,
+    RouterLink,
+    TranslateModule,
   ],
 })
 export class ItemStatusComponent extends BaseComponent {

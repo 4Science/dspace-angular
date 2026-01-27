@@ -22,7 +22,6 @@ export interface MetadataBoxFieldRenderOptions {
  */
 @Component({
   template: '',
-  standalone: true,
 })
 export abstract class RenderingTypeModelComponent {
 

@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -49,13 +48,14 @@ import { ExternalLoginService } from '../../services/external-login.service';
   templateUrl: './confirm-email.component.html',
   styleUrls: ['./confirm-email.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
-    TranslateModule,
     ReactiveFormsModule,
-    NgIf,
+    TranslateModule,
   ],
 })
+/**
+ * Email confirmation component that will check for user email confirmation after account creation.
+ */
 export class ConfirmEmailComponent implements OnInit, OnDestroy {
   /**
    * The form containing the email input
@@ -94,6 +94,7 @@ export class ConfirmEmailComponent implements OnInit, OnDestroy {
       email: [this.registrationData.email, [Validators.required, Validators.email]],
     });
   }
+
 
   /**
    * Submits the email form and performs appropriate actions based on the form's validity and user input.

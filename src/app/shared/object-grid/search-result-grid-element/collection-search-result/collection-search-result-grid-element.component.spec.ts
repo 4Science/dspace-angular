@@ -12,8 +12,7 @@ import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
-import { HALEndpointServiceStub } from 'src/app/shared/testing/hal-endpoint-service.stub';
+import { of } from 'rxjs';
 
 import { AuthService } from '../../../../core/auth/auth.service';
 import { LinkService } from '../../../../core/cache/builders/link.service';
@@ -28,6 +27,7 @@ import { Collection } from '../../../../core/shared/collection.model';
 import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service';
 import { UUIDService } from '../../../../core/shared/uuid.service';
 import { XSRFService } from '../../../../core/xsrf/xsrf.service';
+import { HALEndpointServiceStub } from '../../../../shared/testing/hal-endpoint-service.stub';
 import { NotificationsService } from '../../../notifications/notifications.service';
 import { CollectionSearchResult } from '../../../object-collection/shared/collection-search-result.model';
 import { ActivatedRouteStub } from '../../../testing/active-router.stub';
@@ -40,7 +40,7 @@ let collectionSearchResultGridElementComponent: CollectionSearchResultGridElemen
 let fixture: ComponentFixture<CollectionSearchResultGridElementComponent>;
 
 const truncatableServiceStub: any = {
-  isCollapsed: (id: number) => observableOf(true),
+  isCollapsed: (id: number) => of(true),
 };
 
 const mockCollectionWithAbstract: CollectionSearchResult = new CollectionSearchResult();

@@ -21,7 +21,6 @@ import {
   Observable,
   of,
 } from 'rxjs';
-import { HALEndpointServiceStub } from 'src/app/shared/testing/hal-endpoint-service.stub';
 
 import {
   APP_CONFIG,
@@ -62,6 +61,7 @@ import { createSuccessfulRemoteDataObject$ } from '../../../../shared/remote-dat
 import { ThemedResultsBackButtonComponent } from '../../../../shared/results-back-button/themed-results-back-button.component';
 import { ItemExportService } from '../../../../shared/search/item-export/item-export.service';
 import { BrowseDefinitionDataServiceStub } from '../../../../shared/testing/browse-definition-data-service.stub';
+import { HALEndpointServiceStub } from '../../../../shared/testing/hal-endpoint-service.stub';
 import { NotificationsServiceStub } from '../../../../shared/testing/notifications-service.stub';
 import { StoreMock } from '../../../../shared/testing/store.mock';
 import { createPaginatedList } from '../../../../shared/testing/utils.test';

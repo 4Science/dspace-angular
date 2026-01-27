@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -37,13 +34,11 @@ import { DSOSelectorModalWrapperComponent } from '../dso-selector-modal-wrapper.
   selector: 'ds-claim-item-selector',
   templateUrl: './claim-item-selector.component.html',
   imports: [
-    ListableObjectComponentLoaderComponent,
-    NgForOf,
-    TranslateModule,
     AsyncPipe,
     BtnDisabledDirective,
+    ListableObjectComponentLoaderComponent,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class ClaimItemSelectorComponent extends DSOSelectorModalWrapperComponent implements OnInit {
 

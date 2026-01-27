@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgForOf,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -63,24 +61,19 @@ import {
   getEPersonEditRoute,
   getEPersonsRoute,
 } from '../access-control-routing-paths';
-import { EPersonFormComponent } from './eperson-form/eperson-form.component';
 
 @Component({
   selector: 'ds-epeople-registry',
   templateUrl: './epeople-registry.component.html',
   imports: [
-    TranslateModule,
-    RouterModule,
     AsyncPipe,
-    NgIf,
-    EPersonFormComponent,
-    ReactiveFormsModule,
-    ThemedLoadingComponent,
-    PaginationComponent,
     NgClass,
-    NgForOf,
+    PaginationComponent,
+    ReactiveFormsModule,
+    RouterModule,
+    ThemedLoadingComponent,
+    TranslateModule,
   ],
-  standalone: true,
 })
 /**
  * A component used for managing all existing epeople within the repository.

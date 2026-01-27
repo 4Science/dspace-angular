@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   OnInit,
@@ -13,10 +13,8 @@ import { BaseMetricComponent } from '../metric-loader/base-metric.component';
   selector: 'ds-metric-googlescholar',
   templateUrl: './metric-googlescholar.component.html',
   styleUrls: ['./metric-googlescholar.component.scss'],
-  standalone: true,
   imports: [
     RedirectWithHrefDirective,
-    NgIf,
     TranslateModule,
   ],
 })

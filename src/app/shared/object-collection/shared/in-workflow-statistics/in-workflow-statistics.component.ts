@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -33,12 +30,10 @@ import { hasValue } from '../../../empty.util';
 @Component({
   selector: 'ds-in-workflow-statistics',
   templateUrl: './in-workflow-statistics.component.html',
-  standalone: true,
   styleUrls: ['./in-workflow-statistics.component.scss'],
   imports: [
-    TranslateModule,
     AsyncPipe,
-    NgIf,
+    TranslateModule,
   ],
 })
 export class InWorkflowStatisticsComponent implements OnInit {

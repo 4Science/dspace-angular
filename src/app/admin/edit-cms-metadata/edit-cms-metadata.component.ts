@@ -1,7 +1,5 @@
 import {
   AsyncPipe,
-  NgForOf,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -31,15 +29,12 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
   templateUrl: './edit-cms-metadata.component.html',
   styleUrls: ['./edit-cms-metadata.component.scss'],
   imports: [
-    FormsModule,
-    NgForOf,
-    TranslateModule,
     AsyncPipe,
-    NgIf,
-    NgTemplateOutlet,
     BtnDisabledDirective,
+    FormsModule,
+    NgTemplateOutlet,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class EditCmsMetadataComponent implements OnInit {
   /**

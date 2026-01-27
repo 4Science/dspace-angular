@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -66,15 +63,13 @@ import { RelationshipsSortListComponent } from './relationships-sort-list/relati
   templateUrl: './edit-item-relationships.component.html',
   styleUrls: ['./edit-item-relationships.component.scss'],
   imports: [
-    ThemedLoadingComponent,
     AsyncPipe,
-    ThemedConfigurationSearchPageComponent,
-    TranslateModule,
-    NgIf,
     RelationshipsSortListComponent,
+    ThemedConfigurationSearchPageComponent,
+    ThemedLoadingComponent,
+    TranslateModule,
     VarDirective,
   ],
-  standalone: true,
 })
 export class EditItemRelationshipsComponent implements OnInit, OnDestroy {
 

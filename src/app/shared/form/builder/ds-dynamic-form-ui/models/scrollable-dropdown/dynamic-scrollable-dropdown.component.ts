@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -31,7 +27,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import {
   Observable,
-  of as observableOf,
   of,
   Subject,
   Subscription,
@@ -81,14 +76,11 @@ import { DynamicScrollableDropdownModel } from './dynamic-scrollable-dropdown.mo
   styleUrls: ['./dynamic-scrollable-dropdown.component.scss'],
   templateUrl: './dynamic-scrollable-dropdown.component.html',
   imports: [
-    NgbDropdownModule,
-    NgIf,
     AsyncPipe,
     InfiniteScrollDirective,
-    NgForOf,
+    NgbDropdownModule,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownMenu', { read: ElementRef }) dropdownMenu: ElementRef;
@@ -212,7 +204,7 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
     this.searchText = searchText;
     this.getDataFromService(searchText, isScrolling).pipe(
       getFirstSucceededRemoteDataPayload(),
-      catchError(() => observableOf(buildPaginatedList(
+      catchError(() => of(buildPaginatedList(
         new PageInfo(),
         [],
       )),
@@ -387,13 +379,13 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
       );
     } else {
       if (isEmpty(value)) {
-        result = observableOf('');
+        result = of('');
       } else if (typeof value === 'string') {
-        result = observableOf(value);
+        result = of(value);
       } else if (this.useFindAllService) {
-        result = observableOf(value[this.model.displayKey]);
+        result = of(value[this.model.displayKey]);
       } else {
-        result = observableOf(value.display);
+        result = of(value.display);
       }
     }
 

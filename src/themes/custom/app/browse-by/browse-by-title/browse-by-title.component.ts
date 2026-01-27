@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -15,13 +12,11 @@ import { ThemedLoadingComponent } from '../../../../../app/shared/loading/themed
   styleUrls: ['../../../../../app/browse-by/browse-by-metadata/browse-by-metadata.component.scss'],
   // templateUrl: './browse-by-title.component.html',
   templateUrl: '../../../../../app/browse-by/browse-by-metadata/browse-by-metadata.component.html',
-  standalone: true,
   imports: [
     AsyncPipe,
-    NgIf,
-    TranslateModule,
-    ThemedLoadingComponent,
     ThemedBrowseByComponent,
+    ThemedLoadingComponent,
+    TranslateModule,
   ],
 })
 export class BrowseByTitleComponent extends BaseComponent {

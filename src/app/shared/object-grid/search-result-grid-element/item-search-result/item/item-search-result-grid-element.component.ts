@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -55,8 +51,15 @@ import { SearchResultGridElementComponent } from '../../search-result-grid-eleme
   styleUrls: ['./item-search-result-grid-element.component.scss'],
   templateUrl: './item-search-result-grid-element.component.html',
   animations: [focusShadow],
-  standalone: true,
-  imports: [NgIf, RouterLink, ThemedThumbnailComponent, ThemedBadgesComponent, TruncatableComponent, TruncatablePartComponent, NgFor, AsyncPipe, TranslateModule],
+  imports: [
+    AsyncPipe,
+    RouterLink,
+    ThemedBadgesComponent,
+    ThemedThumbnailComponent,
+    TranslateModule,
+    TruncatableComponent,
+    TruncatablePartComponent,
+  ],
 })
 /**
  * The component for displaying a grid element for an item search result of the type Publication
@@ -88,7 +91,7 @@ export class ItemSearchResultGridElementComponent extends SearchResultGridElemen
   ngOnInit(): void {
     super.ngOnInit();
     this.itemPageRoute = getItemPageRoute(this.dso);
-    this.dsoTitle = this.dsoNameService.getHitHighlights(this.object, this.dso);
+    this.dsoTitle = this.dsoNameService.getHitHighlights(this.object, this.dso, true);
     this.thumbnail$ = this.getThumbnail();
   }
 

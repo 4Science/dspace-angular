@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -35,12 +31,9 @@ import { BitstreamAttachmentComponent } from './bitstream-attachment/bitstream-a
   selector: 'ds-advanced-attachment',
   templateUrl: './advanced-attachment.component.html',
   styleUrls: ['./advanced-attachment.component.scss'],
-  standalone: true,
   imports: [
-    NgFor,
-    BitstreamAttachmentComponent,
-    NgIf,
     AsyncPipe,
+    BitstreamAttachmentComponent,
     TranslateModule,
   ],
 })

@@ -29,7 +29,6 @@ enum TYPES {
   selector: 'span[ds-link]',
   templateUrl: './link.component.html',
   styleUrls: ['./link.component.scss'],
-  standalone: true,
 })
 export class LinkComponent extends RenderingTypeValueModelComponent implements OnInit {
 

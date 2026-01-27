@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -46,19 +42,16 @@ import { DuplicateMatchComponent } from './duplicate-match/duplicate-match.compo
   templateUrl: './section-detect-duplicate.component.html',
   changeDetection: ChangeDetectionStrategy.Default,
   imports: [
-    ThemedLoadingComponent,
-    NgIf,
     AlertComponent,
-    PaginationComponent,
     AsyncPipe,
-    TranslateModule,
-    ObjNgFor,
-    VarDirective,
     DuplicateMatchComponent,
     NgxPaginationModule,
-    NgForOf,
+    ObjNgFor,
+    PaginationComponent,
+    ThemedLoadingComponent,
+    TranslateModule,
+    VarDirective,
   ],
-  standalone: true,
 })
 
 export class SubmissionSectionDetectDuplicateComponent extends SectionModelComponent {

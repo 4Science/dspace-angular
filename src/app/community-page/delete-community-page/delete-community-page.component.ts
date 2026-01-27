@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   ActivatedRoute,
@@ -29,13 +26,11 @@ import { VarDirective } from '../../shared/utils/var.directive';
   styleUrls: ['./delete-community-page.component.scss'],
   templateUrl: './delete-community-page.component.html',
   imports: [
-    TranslateModule,
     AsyncPipe,
-    VarDirective,
-    NgIf,
     BtnDisabledDirective,
+    TranslateModule,
+    VarDirective,
   ],
-  standalone: true,
 })
 export class DeleteCommunityPageComponent extends DeleteComColPageComponent<Community> {
   protected frontendURL = '/communities/';

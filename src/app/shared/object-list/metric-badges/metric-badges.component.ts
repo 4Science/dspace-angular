@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -26,9 +23,7 @@ import { followLink } from '../../utils/follow-link-config.model';
   selector: 'ds-metric-badges',
   templateUrl: './metric-badges.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
-    NgFor,
     AsyncPipe,
     TranslateModule,
   ],

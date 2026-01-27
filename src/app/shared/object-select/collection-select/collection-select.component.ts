@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -36,8 +34,18 @@ import { ObjectSelectComponent } from '../object-select/object-select.component'
   selector: 'ds-collection-select',
   templateUrl: './collection-select.component.html',
   styleUrls: ['./collection-select.component.scss'],
-  standalone: true,
-  imports: [VarDirective, NgIf, PaginationComponent, NgFor, FormsModule, RouterLink, ErrorComponent, ThemedLoadingComponent, NgClass, AsyncPipe, TranslateModule, BtnDisabledDirective],
+  imports: [
+    AsyncPipe,
+    BtnDisabledDirective,
+    ErrorComponent,
+    FormsModule,
+    NgClass,
+    PaginationComponent,
+    RouterLink,
+    ThemedLoadingComponent,
+    TranslateModule,
+    VarDirective,
+  ],
 })
 
 /**
@@ -47,7 +55,7 @@ export class CollectionSelectComponent extends ObjectSelectComponent<Collection>
 
   /**
    * Collection of all the data that is used to display the {@link Collection} in the HTML.
-   * By collecting this data here it doesn't need to be recalculated on evey change detection.
+   * By collecting this data here it doesn't need to be recalculated on every change detection.
    */
   selectCollections$: Observable<DSpaceObjectSelect<Collection>[]>;
 

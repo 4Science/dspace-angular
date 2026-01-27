@@ -48,7 +48,7 @@ export class RedirectService implements CanActivate {
       try {
         resolve(!!this.window.open(url, target));
       } catch (e) {
-        reject(e);
+        reject(e as Error);
       }
     });
   }

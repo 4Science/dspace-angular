@@ -190,7 +190,6 @@ export const models =
     ResearcherProfile,
     OrcidQueue,
     OrcidHistory,
-    AccessStatusObject,
     IdentifierData,
     Subscription,
     ItemRequest,

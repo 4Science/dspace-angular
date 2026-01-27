@@ -1,7 +1,4 @@
-import {
-  KeyValuePipe,
-  NgForOf,
-} from '@angular/common';
+import { KeyValuePipe } from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -32,12 +29,10 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
   templateUrl: './admin-edit-user-agreement.component.html',
   imports: [
     AlertComponent,
-    TranslateModule,
-    KeyValuePipe,
     FormsModule,
-    NgForOf,
+    KeyValuePipe,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class AdminEditUserAgreementComponent implements OnInit, OnDestroy {
 

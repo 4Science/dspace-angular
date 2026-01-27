@@ -1,7 +1,5 @@
 import {
   AsyncPipe,
-  NgForOf,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -34,7 +32,7 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import {
   Observable,
-  of as observableOf,
+  of,
   Subject,
   Subscription,
 } from 'rxjs';
@@ -49,6 +47,7 @@ import {
   take,
   tap,
 } from 'rxjs/operators';
+import { BtnDisabledDirective } from 'src/app/shared/btn-disabled.directive';
 
 import { environment } from '../../../../../../../environments/environment';
 import {
@@ -62,7 +61,6 @@ import { Vocabulary } from '../../../../../../core/submission/vocabularies/model
 import { VocabularyEntry } from '../../../../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { VocabularyService } from '../../../../../../core/submission/vocabularies/vocabulary.service';
 import { SubmissionService } from '../../../../../../submission/submission.service';
-import { BtnDisabledDirective } from '../../../../../btn-disabled.directive';
 import {
   hasValue,
   isEmpty,
@@ -86,19 +84,16 @@ import { DynamicOneboxModel } from './dynamic-onebox.model';
   styleUrls: ['./dynamic-onebox.component.scss'],
   templateUrl: './dynamic-onebox.component.html',
   imports: [
-    NgbTypeaheadModule,
-    NgIf,
     AsyncPipe,
     AuthorityConfidenceStateDirective,
-    NgTemplateOutlet,
-    TranslateModule,
-    ObjNgFor,
-    NgForOf,
-    FormsModule,
     BtnDisabledDirective,
+    FormsModule,
     NgbTooltipModule,
+    NgbTypeaheadModule,
+    NgTemplateOutlet,
+    ObjNgFor,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent implements OnDestroy, OnInit {
 
@@ -161,7 +156,7 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
       tap(() => this.changeSearchingStatus(true)),
       switchMap((term) => {
         if (term === '' || term.length < this.model.minChars) {
-          return observableOf({ list: [] });
+          return of({ list: [] });
         } else {
           return this.vocabularyService.getVocabularyEntriesByValue(
             term,
@@ -172,7 +167,7 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
             tap(() => this.searchFailed = false),
             catchError(() => {
               this.searchFailed = true;
-              return observableOf(buildPaginatedList(
+              return of(buildPaginatedList(
                 new PageInfo(),
                 [],
               ));

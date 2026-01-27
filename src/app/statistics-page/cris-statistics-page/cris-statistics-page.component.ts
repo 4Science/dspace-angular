@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -71,20 +67,17 @@ import { FilterMapPipe } from './statistics-pipes/filter-map.pipe';
   selector: 'ds-cris-statistics-page',
   templateUrl: './cris-statistics-page.component.html',
   styleUrls: ['./cris-statistics-page.component.scss'],
-  standalone: true,
   imports: [
-    VarDirective,
-    NgIf,
-    ThemedLoadingComponent,
-    NgbDatepickerModule,
-    FormsModule,
-    NgbNavModule,
-    NgFor,
-    StatisticsMapComponent,
-    StatisticsChartComponent,
     AsyncPipe,
     FilterMapPipe,
+    FormsModule,
+    NgbDatepickerModule,
+    NgbNavModule,
+    StatisticsChartComponent,
+    StatisticsMapComponent,
+    ThemedLoadingComponent,
     TranslateModule,
+    VarDirective,
   ],
 })
 export class CrisStatisticsPageComponent implements OnInit, OnDestroy {

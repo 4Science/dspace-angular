@@ -11,10 +11,7 @@ import {
   TranslateModule,
 } from '@ngx-translate/core';
 import { cold } from 'jasmine-marbles';
-import {
-  of as observableOf,
-  of,
-} from 'rxjs';
+import { of } from 'rxjs';
 
 import { AuthService } from '../../../../../core/auth/auth.service';
 import { EPerson } from '../../../../../core/eperson/models/eperson.model';
@@ -74,7 +71,7 @@ describe('CrisLayoutRelationBoxComponent', () => {
   });
 
   const authService = jasmine.createSpyObj('authService', {
-    getAuthenticatedUserFromStore: observableOf(null),
+    getAuthenticatedUserFromStore: of(null),
   });
 
   beforeEach(waitForAsync(() => {
@@ -137,7 +134,7 @@ describe('CrisLayoutRelationBoxComponent', () => {
 
       describe('Whenever the personItem is the researcher profile of the logged user', () => {
         beforeEach(() => {
-          (authService.getAuthenticatedUserFromStore as jasmine.Spy).and.returnValue(observableOf({ id: EPersonMock.id } as EPerson));
+          (authService.getAuthenticatedUserFromStore as jasmine.Spy).and.returnValue(of({ id: EPersonMock.id } as EPerson));
           component.item = ownerItem;
           fixture.detectChanges();
         });
@@ -151,7 +148,7 @@ describe('CrisLayoutRelationBoxComponent', () => {
 
       describe('Whenever the personItem is not the researcher profile of the logged user', () => {
         beforeEach(() => {
-          (authService.getAuthenticatedUserFromStore as jasmine.Spy).and.returnValue(observableOf({ id: 'fake-uuid' } as EPerson));
+          (authService.getAuthenticatedUserFromStore as jasmine.Spy).and.returnValue(of({ id: 'fake-uuid' } as EPerson));
           component.item = personItem;
           fixture.detectChanges();
         });
@@ -165,7 +162,7 @@ describe('CrisLayoutRelationBoxComponent', () => {
 
       describe('no one is logged', () => {
         beforeEach(() => {
-          (authService.getAuthenticatedUserFromStore as jasmine.Spy).and.returnValue(observableOf(null as EPerson));
+          (authService.getAuthenticatedUserFromStore as jasmine.Spy).and.returnValue(of(null as EPerson));
           fixture.detectChanges();
         });
         it('info message has no value', fakeAsync(() => {

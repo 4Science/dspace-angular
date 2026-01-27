@@ -1,9 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-  NgOptimizedImage,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -32,18 +27,14 @@ import { Item } from './../../../core/shared/item.model';
   templateUrl: './metadata-link-view-popover.component.html',
   styleUrls: ['./metadata-link-view-popover.component.scss'],
   imports: [
-    NgIf,
     AsyncPipe,
+    MetadataLinkViewAvatarPopoverComponent,
+    MetadataLinkViewOrcidComponent,
     NgbTooltipModule,
-    NgOptimizedImage,
     RouterLink,
     TranslateModule,
-    MetadataLinkViewOrcidComponent,
-    MetadataLinkViewAvatarPopoverComponent,
-    NgForOf,
     VarDirective,
   ],
-  standalone: true,
 })
 export class MetadataLinkViewPopoverComponent implements OnInit {
 

@@ -2,7 +2,6 @@ import {
   AsyncPipe,
   isPlatformServer,
   NgClass,
-  NgIf,
 } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -42,11 +41,15 @@ import {
 } from '../../core/services/link-head.service';
 import { ServerResponseService } from '../../core/services/server-response.service';
 import { Item } from '../../core/shared/item.model';
+import { ItemRequest } from '../../core/shared/item-request.model';
 import { getAllSucceededRemoteDataPayload } from '../../core/shared/operators';
 import { ViewMode } from '../../core/shared/view-mode.model';
 import { CrisItemPageComponent } from '../../cris-item-page/cris-item-page.component';
 import { fadeInOut } from '../../shared/animations/fade';
-import { isNotEmpty } from '../../shared/empty.util';
+import {
+  hasValue,
+  isNotEmpty,
+} from '../../shared/empty.util';
 import { ErrorComponent } from '../../shared/error/error.component';
 import { ThemedLoadingComponent } from '../../shared/loading/themed-loading.component';
 import { ListableObjectComponentLoaderComponent } from '../../shared/object-collection/shared/listable-object/listable-object-component-loader.component';
@@ -55,6 +58,7 @@ import { ThemedItemAlertsComponent } from '../alerts/themed-item-alerts.componen
 import { getItemPageRoute } from '../item-page-routing-paths';
 import { ItemVersionsComponent } from '../versions/item-versions.component';
 import { ItemVersionsNoticeComponent } from '../versions/notice/item-versions-notice.component';
+import { AccessByTokenNotificationComponent } from './access-by-token-notification/access-by-token-notification.component';
 import { NotifyRequestsStatusComponent } from './notify-requests-status/notify-requests-status-component/notify-requests-status.component';
 import { QaEventNotificationComponent } from './qa-event-notification/qa-event-notification.component';
 
@@ -69,22 +73,21 @@ import { QaEventNotificationComponent } from './qa-event-notification/qa-event-n
   templateUrl: './item-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInOut],
-  standalone: true,
   imports: [
-    VarDirective,
-    ThemedItemAlertsComponent,
+    AccessByTokenNotificationComponent,
+    AsyncPipe,
+    CrisItemPageComponent,
+    ErrorComponent,
+    ItemVersionsComponent,
     ItemVersionsNoticeComponent,
     ListableObjectComponentLoaderComponent,
-    ItemVersionsComponent,
-    ErrorComponent,
-    ThemedLoadingComponent,
-    TranslateModule,
-    AsyncPipe,
-    NgIf,
+    NgClass,
     NotifyRequestsStatusComponent,
     QaEventNotificationComponent,
-    NgClass,
-    CrisItemPageComponent,
+    ThemedItemAlertsComponent,
+    ThemedLoadingComponent,
+    TranslateModule,
+    VarDirective,
   ],
 })
 export class ItemPageComponent implements OnInit, OnDestroy {
@@ -98,6 +101,11 @@ export class ItemPageComponent implements OnInit, OnDestroy {
    * The item wrapped in a remote-data object
    */
   itemRD$: Observable<RemoteData<Item>>;
+
+  /**
+   * The request item wrapped in a remote-data object, obtained from the route data
+   */
+  itemRequest$: Observable<ItemRequest>;
 
   /**
    * The view-mode we're currently on
@@ -132,6 +140,8 @@ export class ItemPageComponent implements OnInit, OnDestroy {
    * The configured tabs for layout of current item
    */
   tabsRD$: Observable<RemoteData<PaginatedList<CrisLayoutTab>>>;
+
+  protected readonly hasValue = hasValue;
 
   constructor(
     protected route: ActivatedRoute,
@@ -254,4 +264,17 @@ export class ItemPageComponent implements OnInit, OnDestroy {
       this.linkHeadService.removeTag(`href='${link.href}'`);
     });
   }
+
+  /**
+   * Calculate and return end period access date for a request-a-copy link for alert display
+   */
+  getAccessPeriodEndDate(accessPeriod: number, decisionDate: string | number | Date): Date {
+    // Set expiry, if not 0
+    if (hasValue(accessPeriod) && accessPeriod > 0 && hasValue(decisionDate)) {
+      const date = new Date(decisionDate);
+      date.setUTCSeconds(date.getUTCSeconds() + accessPeriod);
+      return date;
+    }
+  }
+
 }

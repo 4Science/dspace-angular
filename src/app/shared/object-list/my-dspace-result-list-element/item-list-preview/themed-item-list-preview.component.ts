@@ -16,10 +16,7 @@ import { ItemListPreviewComponent } from './item-list-preview.component';
  */
 @Component({
   selector: 'ds-item-list-preview',
-  styleUrls: [],
   templateUrl: '../../../theme-support/themed.component.html',
-  standalone: true,
-  imports: [ItemListPreviewComponent],
 })
 export class ThemedItemListPreviewComponent extends ThemedComponent<ItemListPreviewComponent> {
   protected inAndOutputNames: (keyof ItemListPreviewComponent & keyof this)[] = ['item', 'object', 'badgeContext', 'showLabel', 'showMetrics', 'showSubmitter', 'showThumbnails', 'showCorrection', 'workflowItem', 'metadataList', 'showWorkflowStatistics'];
@@ -44,7 +41,7 @@ export class ThemedItemListPreviewComponent extends ThemedComponent<ItemListPrev
 
   @Input() workflowItem: WorkflowItem;
 
-  @Input() metadataList: DuplicateMatchMetadataDetailConfig[] = [];
+  @Input() metadataList: DuplicateMatchMetadataDetailConfig[];
 
   protected getComponentName(): string {
     return 'ItemListPreviewComponent';

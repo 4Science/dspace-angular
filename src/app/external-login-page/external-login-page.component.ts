@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -15,25 +12,29 @@ import {
   tap,
 } from 'rxjs';
 
+import { AuthMethodType } from '../core/auth/models/auth.method-type';
 import { RemoteData } from '../core/data/remote-data';
 import { Registration } from '../core/shared/registration.model';
 import { ExternalLogInComponent } from '../external-log-in/external-log-in/external-log-in.component';
 import { AlertComponent } from '../shared/alert/alert.component';
 import { AlertType } from '../shared/alert/alert-type';
 import { hasNoValue } from '../shared/empty.util';
+import { AuthMethodTypeComponent } from '../shared/log-in/methods/auth-methods.type';
+import { AUTH_METHOD_FOR_DECORATOR_MAP } from '../shared/log-in/methods/log-in.methods-decorator';
 
 @Component({
   templateUrl: './external-login-page.component.html',
   styleUrls: ['./external-login-page.component.scss'],
-  standalone: true,
   imports: [
     AlertComponent,
-    ExternalLogInComponent,
     AsyncPipe,
-    NgIf,
+    ExternalLogInComponent,
     TranslateModule,
   ],
 })
+/**
+ * This component is a wrapper of the external-login component that loads up the RegistrationData.
+ */
 export class ExternalLoginPageComponent implements OnInit {
   /**
    * The token used to get the registration data,
@@ -54,17 +55,22 @@ export class ExternalLoginPageComponent implements OnInit {
    */
   public hasErrors = false;
 
+  public authMethods: Map<AuthMethodType, AuthMethodTypeComponent>;
+
   constructor(
     private arouter: ActivatedRoute,
   ) {
     this.token = this.arouter.snapshot.params.token;
     this.hasErrors = hasNoValue(this.arouter.snapshot.params.token);
+    this.authMethods = AUTH_METHOD_FOR_DECORATOR_MAP;
   }
 
   ngOnInit(): void {
-    this.registrationData$ = this.arouter.data.pipe(
-      first(),
-      tap((data) => this.hasErrors = (data.registrationData as RemoteData<Registration>).hasFailed),
-      map((data) => (data.registrationData as RemoteData<Registration>).payload));
+    this.registrationData$ =
+      this.arouter.data.pipe(
+        first(),
+        tap((data) => this.hasErrors = (data.registrationData as RemoteData<Registration>).hasFailed),
+        map((data) => (data.registrationData as RemoteData<Registration>).payload),
+      );
   }
 }

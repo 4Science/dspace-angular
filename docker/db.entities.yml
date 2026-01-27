@@ -14,7 +14,7 @@
 # # Therefore, it should be kept in sync with that file
 services:
   dspacedb:
-    image: "${DOCKER_REGISTRY:-docker.io}/${DOCKER_OWNER:-4science}/dspace-cris-postgres-pgcrypto:${DSPACE_VER:-dspace-cris-2024_02_x}-loadsql"
+    image: "${DOCKER_REGISTRY:-docker.io}/${DOCKER_OWNER:-4science}/dspace-cris-postgres-pgcrypto:${DSPACE_VER:-dspace-cris-2025_02_x}-loadsql"
     environment:
       # This LOADSQL should be kept in sync with the URL in 4Science/DSpace
       # This SQL is available from https://github.com/4Science/DSpace-CRIS-Files/releases/download/cris-2024.02.00/db-entities.sql

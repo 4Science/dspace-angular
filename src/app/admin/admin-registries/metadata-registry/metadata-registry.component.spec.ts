@@ -14,10 +14,7 @@ import { RouterLink } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  of as observableOf,
-  of,
-} from 'rxjs';
+import { of } from 'rxjs';
 import { FormBuilderService } from 'src/app/shared/form/builder/form-builder.service';
 
 import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
@@ -188,7 +185,7 @@ describe('MetadataRegistryComponent', () => {
     }));
 
     it('should cancel editing the selected schema when clicked again', waitForAsync(() => {
-      comp.activeMetadataSchema$ = observableOf(mockSchemasList[0] as MetadataSchema);
+      comp.activeMetadataSchema$ = of(mockSchemasList[0] as MetadataSchema);
       spyOn(registryService, 'cancelEditMetadataSchema');
       row.click();
       fixture.detectChanges();
@@ -203,7 +200,7 @@ describe('MetadataRegistryComponent', () => {
 
     beforeEach(() => {
       spyOn(registryService, 'deleteMetadataSchema').and.callThrough();
-      comp.selectedMetadataSchemaIDs$ = observableOf(selectedSchemas.map((selectedSchema: MetadataSchema) => selectedSchema.id));
+      comp.selectedMetadataSchemaIDs$ = of(selectedSchemas.map((selectedSchema: MetadataSchema) => selectedSchema.id));
       comp.deleteSchemas();
       fixture.detectChanges();
     });

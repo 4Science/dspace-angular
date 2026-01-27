@@ -22,6 +22,8 @@ import { ListableModule } from '../../../../core/shared/listable.module';
 import { ViewMode } from '../../../../core/shared/view-mode.model';
 import { XSRFService } from '../../../../core/xsrf/xsrf.service';
 import { DynamicComponentLoaderDirective } from '../../../abstract-component-loader/dynamic-component-loader.directive';
+import { OrejimeService } from '../../../cookies/orejime.service';
+import { OrejimeServiceStub } from '../../../cookies/orejime.service.stub';
 import { DSONameServiceMock } from '../../../mocks/dso-name.service.mock';
 import { getMockThemeService } from '../../../mocks/theme-service.mock';
 import { ItemListElementComponent } from '../../../object-list/item-list-element/item-types/item/item-list-element.component';
@@ -89,6 +91,7 @@ describe('ListableObjectComponentLoaderComponent', () => {
         { provide: ThemeService, useValue: themeService },
         { provide: TruncatableService, useValue: truncatableService },
         { provide: XSRFService, useValue: {} },
+        { provide: OrejimeService, useValue: new OrejimeServiceStub() },
       ],
     }).overrideComponent(ListableObjectComponentLoaderComponent, {
       set: {

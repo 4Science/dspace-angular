@@ -185,4 +185,5 @@ export abstract class AuthRequestService {
       switchMap((request: RestRequest) => this.rdbService.buildFromRequestUUID<MachineToken>(request.uuid)),
     );
   }
+
 }

@@ -3,6 +3,7 @@ import {
   ComponentFixture,
   TestBed,
 } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 import {
   TranslateLoader,
   TranslateModule,
@@ -13,6 +14,7 @@ import { ConfigurationDataService } from '../../../../../../../../../core/data/c
 import { AuthorizationDataService } from '../../../../../../../../../core/data/feature-authorization/authorization-data.service';
 import { ConfigurationProperty } from '../../../../../../../../../core/shared/configuration-property.model';
 import { createSuccessfulRemoteDataObject$ } from '../../../../../../../../../shared/remote-data.utils';
+import { ActivatedRouteStub } from '../../../../../../../../../shared/testing/active-router.stub';
 import { AuthorizationDataServiceStub } from '../../../../../../../../../shared/testing/authorization-service.stub';
 import { AttachmentRenderComponent } from './attachment-render.component';
 
@@ -42,6 +44,7 @@ describe('AttachmentRenderComponent', () => {
       providers: [
         { provide: AuthorizationDataService, useClass: AuthorizationDataServiceStub },
         { provide: ConfigurationDataService, useValue: configurationDataService },
+        { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     })

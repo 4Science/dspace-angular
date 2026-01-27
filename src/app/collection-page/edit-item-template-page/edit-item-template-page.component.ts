@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -35,16 +32,14 @@ import { getCollectionEditRoute } from '../collection-page-routing-paths';
   selector: 'ds-base-edit-item-template-page',
   templateUrl: './edit-item-template-page.component.html',
   imports: [
-    ThemedDsoEditMetadataComponent,
-    RouterLink,
-    AsyncPipe,
-    VarDirective,
-    NgIf,
-    TranslateModule,
-    ThemedLoadingComponent,
     AlertComponent,
+    AsyncPipe,
+    RouterLink,
+    ThemedDsoEditMetadataComponent,
+    ThemedLoadingComponent,
+    TranslateModule,
+    VarDirective,
   ],
-  standalone: true,
 })
 /**
  * Component for editing the item template of a collection

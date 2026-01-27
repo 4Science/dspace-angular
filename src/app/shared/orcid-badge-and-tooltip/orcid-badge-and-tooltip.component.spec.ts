@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import {
   ComponentFixture,
   TestBed,
@@ -20,9 +21,13 @@ describe('OrcidBadgeAndTooltipComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        TranslateModule.forRoot(),
         OrcidBadgeAndTooltipComponent,
         NgbTooltipModule,
+        NgClass,
+        TranslateModule.forRoot(),
+      ],
+      providers: [
+        { provide: TranslateService, useValue: { instant: (key: string) => key } },
       ],
     }).compileComponents();
 

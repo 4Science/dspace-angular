@@ -4,7 +4,7 @@ import {
 } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { getTestScheduler } from 'jasmine-marbles';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { getDSORoute } from '../../app-routing-paths';
 import { Breadcrumb } from '../../breadcrumbs/breadcrumb/breadcrumb.model';
@@ -67,7 +67,7 @@ describe('DsoContextBreadcrumbService', () => {
           'dc.title': [{ value: 'community' }],
         },
         uuid: communityUUID,
-        parentCommunity: observableOf(Object.assign(createSuccessfulRemoteDataObject(undefined), { statusCode: 204 })),
+        parentCommunity: of(Object.assign(createSuccessfulRemoteDataObject(undefined), { statusCode: 204 })),
 
         _links: {
           parentCommunity: 'site',
