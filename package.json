@@ -1,6 +1,6 @@
 {
   "name": "dspace-angular",
-  "version": "2025.02.00-SNAPSHOT",
+  "version": "2026.01.00-SNAPSHOT",
   "scripts": {
     "ng": "ng",
     "test:rest": "ts-node --project ./tsconfig.ts-node.json scripts/test-rest.ts",
