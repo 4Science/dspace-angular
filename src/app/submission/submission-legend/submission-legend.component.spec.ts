@@ -1,4 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { SubmissionLegendComponent } from './submission-legend.component';
@@ -9,12 +12,9 @@ describe('SubmissionLegendComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        TranslateModule.forRoot()
-      ],
-      declarations: [ SubmissionLegendComponent ]
+      imports: [ SubmissionLegendComponent, TranslateModule.forRoot() ],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SubmissionLegendComponent);
     component = fixture.componentInstance;
