@@ -9,6 +9,7 @@ import { SubmissionFormSectionAddComponent } from '../../../../../app/submission
 import { SubmissionFormComponent as BaseComponent } from '../../../../../app/submission/form/submission-form.component';
 import { ThemedSubmissionUploadFilesComponent } from '../../../../../app/submission/form/submission-upload-files/themed-submission-upload-files.component';
 import { ThemedSubmissionSectionContainerComponent } from '../../../../../app/submission/sections/container/themed-section-container.component';
+import { SubmissionLegendComponent } from '../../../../../app/submission/submission-legend/submission-legend.component';
 
 @Component({
   selector: 'ds-themed-submission-form',
@@ -25,6 +26,7 @@ import { ThemedSubmissionSectionContainerComponent } from '../../../../../app/su
     ThemedSubmissionSectionContainerComponent,
     ThemedSubmissionUploadFilesComponent,
     TranslatePipe,
+    SubmissionLegendComponent,
   ],
 })
 export class SubmissionFormComponent extends BaseComponent {

@@ -56,6 +56,7 @@ import { ThemedSubmissionFormFooterComponent } from './footer/themed-submission-
 import { SubmissionFormSectionAddComponent } from './section-add/submission-form-section-add.component';
 import { ThemedSubmissionUploadFilesComponent } from './submission-upload-files/themed-submission-upload-files.component';
 import { environment } from '../../../environments/environment';
+import {SubmissionLegendComponent} from "../submission-legend/submission-legend.component";
 
 /**
  * This component represents the submission form.
@@ -73,6 +74,7 @@ import { environment } from '../../../environments/environment';
     ThemedSubmissionSectionContainerComponent,
     ThemedSubmissionUploadFilesComponent,
     TranslatePipe,
+    SubmissionLegendComponent,
   ],
 })
 export class SubmissionFormComponent implements OnChanges, OnDestroy {
