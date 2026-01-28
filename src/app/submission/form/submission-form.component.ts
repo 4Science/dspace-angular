@@ -22,6 +22,7 @@ import {
   switchMap,
 } from 'rxjs/operators';
 
+import { environment } from '../../../environments/environment';
 import { AuthService } from '../../core/auth/auth.service';
 import { SubmissionDefinitionsModel } from '../../core/config/models/config-submission-definitions.model';
 import { Collection } from '../../core/shared/collection.model';
@@ -46,6 +47,7 @@ import { SectionDataObject } from '../sections/models/section-data.model';
 import { SectionsService } from '../sections/sections.service';
 import { SectionsType } from '../sections/sections-type';
 import { SubmissionService } from '../submission.service';
+import { SubmissionLegendComponent } from '../submission-legend/submission-legend.component';
 import { SubmissionVisibility } from '../utils/visibility.util';
 import {
   SubmissionSectionModel,
@@ -55,8 +57,6 @@ import { SubmissionFormCollectionComponent } from './collection/submission-form-
 import { ThemedSubmissionFormFooterComponent } from './footer/themed-submission-form-footer.component';
 import { SubmissionFormSectionAddComponent } from './section-add/submission-form-section-add.component';
 import { ThemedSubmissionUploadFilesComponent } from './submission-upload-files/themed-submission-upload-files.component';
-import { environment } from '../../../environments/environment';
-import { SubmissionLegendComponent } from '../submission-legend/submission-legend.component';
 
 /**
  * This component represents the submission form.

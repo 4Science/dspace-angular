@@ -5,7 +5,9 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'ds-submission-legend',
   templateUrl: './submission-legend.component.html',
   styleUrls: ['./submission-legend.component.scss'],
-  imports: [TranslateModule],
+  imports: [
+    TranslateModule,
+  ],
 })
 export class SubmissionLegendComponent {
   legendText = 'submission.sections.general.legend';
