@@ -21,12 +21,12 @@ import { SubmissionLegendComponent } from '../../../../../app/submission/submiss
     CommonModule,
     SubmissionFormCollectionComponent,
     SubmissionFormSectionAddComponent,
+    SubmissionLegendComponent,
     ThemedLoadingComponent,
     ThemedSubmissionFormFooterComponent,
     ThemedSubmissionSectionContainerComponent,
     ThemedSubmissionUploadFilesComponent,
     TranslatePipe,
-    SubmissionLegendComponent,
   ],
 })
 export class SubmissionFormComponent extends BaseComponent {

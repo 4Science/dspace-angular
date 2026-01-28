@@ -9,8 +9,10 @@
           <div class="clearfix"></div>
         </div>
       }
-      <ds-submission-legend *ngIf="shouldShowLegend" class="submission-form-header-legend">
-      </ds-submission-legend>
+      @if (shouldShowLegend) {
+        <ds-submission-legend class="submission-form-header-legend">
+        </ds-submission-legend>
+      }
       <div class="submission-form-header-item mb-3 mb-sm-0 flex-sm-grow-1 flex-md-grow-0">
         @if (!isSectionHidden) {
           <ds-submission-form-collection

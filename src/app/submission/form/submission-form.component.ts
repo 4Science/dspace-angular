@@ -56,7 +56,7 @@ import { ThemedSubmissionFormFooterComponent } from './footer/themed-submission-
 import { SubmissionFormSectionAddComponent } from './section-add/submission-form-section-add.component';
 import { ThemedSubmissionUploadFilesComponent } from './submission-upload-files/themed-submission-upload-files.component';
 import { environment } from '../../../environments/environment';
-import {SubmissionLegendComponent} from "../submission-legend/submission-legend.component";
+import { SubmissionLegendComponent } from '../submission-legend/submission-legend.component';
 
 /**
  * This component represents the submission form.
@@ -69,12 +69,12 @@ import {SubmissionLegendComponent} from "../submission-legend/submission-legend.
     CommonModule,
     SubmissionFormCollectionComponent,
     SubmissionFormSectionAddComponent,
+    SubmissionLegendComponent,
     ThemedLoadingComponent,
     ThemedSubmissionFormFooterComponent,
     ThemedSubmissionSectionContainerComponent,
     ThemedSubmissionUploadFilesComponent,
     TranslatePipe,
-    SubmissionLegendComponent,
   ],
 })
 export class SubmissionFormComponent implements OnChanges, OnDestroy {
@@ -342,7 +342,7 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
    * Check if submission legend should be shown
    */
   get shouldShowLegend(): boolean {
-    return !environment.submission.hideLegend;
+    return environment.submission.showLegend;
   }
 
   /**
