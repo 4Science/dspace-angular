@@ -299,7 +299,6 @@ export class DefaultAppConfig implements AppConfig {
     },
     // Minimum number of characters required before performing a lookup.
     minChars: 3,
-    hidePlaceholderForBasicFields: true,
     hideLegend: false
   };
 
