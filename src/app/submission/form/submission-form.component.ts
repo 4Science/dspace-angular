@@ -341,7 +341,7 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
    * Check if submission legend should be shown
    */
   get shouldShowLegend(): boolean {
-    return !environment.submission.hideLegend;
+    return environment.submission.showLegend;
   }
 
   /**
