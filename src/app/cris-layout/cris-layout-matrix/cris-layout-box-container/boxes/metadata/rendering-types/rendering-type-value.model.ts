@@ -45,6 +45,9 @@ export abstract class RenderingTypeValueModelComponent extends RenderingTypeMode
    * @param text
    */
   formatText(text: string): string {
+    if (!text) {
+      return text;
+    }
     const newlineRegex = /\n/g;
     return text.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(newlineRegex, '<br>');
   }
