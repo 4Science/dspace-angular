@@ -5485,6 +5485,8 @@
 
   "suggestion.source.openaire": "OpenAIRE Graph",
 
+  "suggestion.source.orcidWorks": "ORCID Integration",
+
   "suggestion.source.openalex": "OpenAlex",
 
   "suggestion.from.source": "from the ",
@@ -5494,6 +5496,8 @@
   "suggestion.totalScore": "Total Score",
 
   "suggestion.type.openaire": "OpenAIRE",
+
+  "suggestion.type.orcidWorks": "Publication",
 
   "register-email.title": "New user registration",
 
