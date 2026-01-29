@@ -42,5 +42,6 @@ export enum Context {
   Bitstream = 'bitstream',
 
   RelationshipItem = 'relationshipItem',
-  BrowseMostElements = 'browseMostElements'
+  BrowseMostElements = 'browseMostElements',
+  AssociateItem = 'associateitem',
 }

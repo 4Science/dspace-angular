@@ -877,7 +877,23 @@
 
   "auth.messages.token-refresh-failed": "Refreshing your session token failed. Please log in again.",
 
-  "bitstream.download.page": "Now downloading {{bitstream}}...",
+  "associate.item": "Connect Item",
+
+  "associate.item.PROJECTPUBLICATION": "Manage Publications",
+
+  "associate.item.PROJECTPUBLICATION.description": "You can first search for the relevant publications and connect one entry to the project with the button \"Connect\" <i class=\"fa fa-link\"></i>. To connect further publications, this process must be repeated.\nVia the search you can also display entries that are already connected with the project. The \"Remove\" <i class=\"fa fa-unlink\"></i> button can be used to remove the connection.",
+
+  "associate.item.search.placeholder": "Search for Items to connect....",
+
+  "associate.item.page.button.return": "Return",
+
+  "associate.item.page.button.search.all": "Show all items",
+
+  "associate.item.page.button.search.connected": "Show already connected items",
+
+  "associate.item.page.button.search.notconnected": "Show not connected items",
+
+  "bitstream.download.page": "Now downloading {{bitstream}}..." ,
 
   "bitstream.download.page.back": "Back",
 
@@ -1671,6 +1687,10 @@
 
 
   "context-menu.actions": "Actions",
+
+  "context-menu.actions.associate-item.btn.action": "Connect",
+
+  "context-menu.actions.associate-item.btn.PROJECTPUBLICATION": "Connect Publications",
 
   "context-menu.actions.audit-item.btn": "Audit",
 
@@ -3918,6 +3938,22 @@
 
   "logout.title": "Logout",
 
+  "manage.associateitem.disassociate": "Remove",
+
+  "manage.associateitem.disassociate.tooltip": "Click here to remove the connection",
+
+  "manage.associateitem.associate": "Connect",
+
+  "manage.associateitem.associate.tooltip": "Click here to establish the connectioon",
+
+  "manage.associateitem.error.disassociate": "An unexpected error occurs while removing the connection.",
+
+  "manage.associateitem.error.associate": "An unexpected error occurs while establishing the connection.",
+
+  "manage.associateitem.success.disassociate": "Connection removed.",
+
+  "manage.associateitem.success.associate": "Connection established.",
+
 
   "manage.relationships.select": "Select",
 
@@ -4835,6 +4871,8 @@
   "project.search.results.head": "Project Search Results",
 
   "project-relationships.search.results.head": "Project Search Results",
+
+  "PROJECTPUBLICATION.search.results.head": "Connect Publication",
 
   "publication.listelement.badge": "Publication",
 

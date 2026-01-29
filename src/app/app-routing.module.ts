@@ -244,6 +244,11 @@ import {
             canActivate: [EndUserAgreementCurrentUserGuard]
           },
           {
+            path: 'associate-item',
+            loadChildren: () => import('./associate-item/associate-item.module')
+              .then((m) => m.AssociateItemModule),
+          },
+          {
             path: PROFILE_MODULE_PATH,
             loadChildren: () => import('./profile-page/profile-page.module')
               .then((m) => m.ProfilePageModule),
