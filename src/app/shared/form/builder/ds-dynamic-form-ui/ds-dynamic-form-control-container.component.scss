@@ -14,6 +14,12 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  background-image: none !important;
+}
+
+// Hide Bootstrap's form-select background image arrow for ng-bootstrap components
+:host ::ng-deep dynamic-ng-bootstrap-select .form-select {
+  background-image: none !important;
 }
 
 :host ::ng-deep .btn-group-toggle > .btn input[type="radio"] {
