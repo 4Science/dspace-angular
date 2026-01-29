@@ -34,7 +34,7 @@ export class ProcessesMenuProvider extends AbstractMenuProvider {
 
   public getSections(): Observable<PartialMenuSection[]> {
     return combineLatest([
-      this.authorizationService.isAuthorized(FeatureID.AdministratorOf),
+      this.authorizationService.isAuthorized(FeatureID.IsComColAdmin),
     ]).pipe(
       map(([isSiteAdmin]) => {
         return [
