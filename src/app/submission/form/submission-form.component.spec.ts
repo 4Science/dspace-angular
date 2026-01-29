@@ -286,6 +286,45 @@ describe('SubmissionFormComponent', () => {
       done();
     });
 
+    describe('submission legend', () => {
+      beforeEach(() => {
+        comp.collectionId = collectionId;
+        comp.submissionId = submissionId;
+        comp.submissionDefinition = submissionDefinition;
+        comp.selfUrl = selfUrl;
+        comp.sections = sectionsData;
+        comp.item = new Item();
+        comp.entityType = 'publication';
+        submissionServiceStub.getSubmissionObject.and.returnValue(observableOf(submissionState));
+        submissionServiceStub.getSubmissionSections.and.returnValue(observableOf(sectionsList));
+
+        // Mock isLoading$ to return false so the template renders
+        comp.isLoading$ = observableOf(false);
+
+        // Mock uploadEnabled$ to ensure template renders properly
+        comp.uploadEnabled$ = observableOf(false);
+      });
+
+      it('should display submission legend when shouldShowLegend is true', () => {
+        spyOnProperty(comp, 'shouldShowLegend', 'get').and.returnValue(true);
+
+        fixture.detectChanges();
+
+        const legendElement = fixture.debugElement.nativeElement.querySelector('ds-submission-legend');
+        expect(legendElement).toBeTruthy();
+        expect(legendElement.classList.contains('submission-form-header-legend')).toBe(true);
+      });
+
+      it('should not display submission legend when shouldShowLegend is false', () => {
+        spyOnProperty(comp, 'shouldShowLegend', 'get').and.returnValue(false);
+
+        fixture.detectChanges();
+
+        const legendElement = fixture.debugElement.nativeElement.querySelector('ds-submission-legend');
+        expect(legendElement).toBeNull();
+      });
+    });
+
   });
 });
 
