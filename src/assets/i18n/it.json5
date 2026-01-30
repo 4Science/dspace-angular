@@ -2270,6 +2270,9 @@
   // "chart.load-more": "Load more results",
   "chart.load-more": "Carica più risultati",
 
+  //"chart.no-data.title": "No Data Available",
+  "chart.no-data.title": "Data Non Disponibile",
+
   // "claimed-approved-search-result-list-element.title": "Approved",
   "claimed-approved-search-result-list-element.title": "Approvato",
 
