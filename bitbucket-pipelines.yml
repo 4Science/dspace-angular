@@ -396,7 +396,8 @@ pipelines:
       - parallel: *parallel-run-tests
       - step: *build-and-push
       - step: *deploy-on-test
-      - step: *find-and-invalidate-cloudfront-test
+      - step: *find-cloudfront-test
+      - step: *invalidate-cloudfront
 
   pull-requests:
     '**':
