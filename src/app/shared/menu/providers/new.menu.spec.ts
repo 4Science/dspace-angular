@@ -28,62 +28,11 @@ describe('NewMenuProvider', () => {
     icon: 'plus',
   };
 
-  const expectedSubSections: PartialMenuSection[] = [
-    {
-      visible: true,
-      model: {
-        type: MenuItemType.ONCLICK,
-        text: 'menu.section.new_community',
-        function: jasmine.any(Function) as any,
-      },
-    },
-    {
-      visible: false,
-      model: {
-        type: MenuItemType.ONCLICK,
-        text: 'menu.section.new_collection',
-        function: jasmine.any(Function) as any,
-      },
-    },
-    {
-      visible: true,
-      model: {
-        type: MenuItemType.ONCLICK,
-        text: 'menu.section.new_item',
-        function: jasmine.any(Function) as any,
-      },
-    },
-    {
-      visible: true,
-      model: {
-        type: MenuItemType.LINK,
-        text: 'menu.section.new_process',
-        link: '/processes/new',
-      },
-    },
-    {
-      visible: true,
-      model: {
-        type: MenuItemType.LINK,
-        text: 'menu.section.services_new',
-        link: '/admin/ldn/services/new',
-      } as LinkMenuItemModel,
-      icon: '',
-    },
-  ];
 
   let provider: NewMenuProvider;
   let authorizationServiceStub = new AuthorizationDataServiceStub();
 
   beforeEach(() => {
-    spyOn(authorizationServiceStub, 'isAuthorized').and.callFake((id: FeatureID) => {
-      if (id === FeatureID.IsCollectionAdmin) {
-        return of(false);
-      } else {
-        return of(true);
-      }
-    });
-
     TestBed.configureTestingModule({
       providers: [
         NewMenuProvider,
@@ -104,9 +53,348 @@ describe('NewMenuProvider', () => {
     });
   });
 
-  it('getSubSections should return expected menu sections', (done) => {
+  it('getSubSections should show new_community and new_collection when CommunityAdmin is authorized', (done) => {
+    spyOn(authorizationServiceStub, 'isAuthorized').and.callFake((id: FeatureID) => {
+      return of(true); // All features authorized
+    });
+
+    const expectedSections: PartialMenuSection[] = [
+      {
+        visible: true,
+        model: {
+          type: MenuItemType.ONCLICK,
+          text: 'menu.section.new_community',
+          function: jasmine.any(Function) as any,
+        },
+      },
+      {
+        visible: true,
+        model: {
+          type: MenuItemType.ONCLICK,
+          text: 'menu.section.new_collection',
+          function: jasmine.any(Function) as any,
+        },
+      },
+      {
+        visible: true,
+        model: {
+          type: MenuItemType.ONCLICK,
+          text: 'menu.section.new_item',
+          function: jasmine.any(Function) as any,
+        },
+      },
+      {
+        visible: true,
+        model: {
+          type: MenuItemType.LINK,
+          text: 'menu.section.new_process',
+          link: '/processes/new',
+        },
+      },
+      {
+        visible: true,
+        model: {
+          type: MenuItemType.LINK,
+          text: 'menu.section.services_new',
+          link: '/admin/ldn/services/new',
+        } as LinkMenuItemModel,
+        icon: '',
+      },
+    ];
+
     provider.getSubSections().subscribe((sections) => {
-      expect(sections).toEqual(expectedSubSections);
+      expect(sections).toEqual(expectedSections);
+      done();
+    });
+  });
+
+  it('getSubSections should hide new_community and new_collection when CommunityAdmin is not authorized', (done) => {
+    spyOn(authorizationServiceStub, 'isAuthorized').and.callFake((id: FeatureID) => {
+      if (id === FeatureID.IsCommunityAdmin) {
+        return of(false);
+      } else {
+        return of(true);
+      }
+    });
+
+    const expectedSections: PartialMenuSection[] = [
+      {
+        visible: false,
+        model: {
+          type: MenuItemType.ONCLICK,
+          text: 'menu.section.new_community',
+          function: jasmine.any(Function) as any,
+        },
+      },
+      {
+        visible: false,
+        model: {
+          type: MenuItemType.ONCLICK,
+          text: 'menu.section.new_collection',
+          function: jasmine.any(Function) as any,
+        },
+      },
+      {
+        visible: true,
+        model: {
+          type: MenuItemType.ONCLICK,
+          text: 'menu.section.new_item',
+          function: jasmine.any(Function) as any,
+        },
+      },
+      {
+        visible: true,
+        model: {
+          type: MenuItemType.LINK,
+          text: 'menu.section.new_process',
+          link: '/processes/new',
+        },
+      },
+      {
+        visible: true,
+        model: {
+          type: MenuItemType.LINK,
+          text: 'menu.section.services_new',
+          link: '/admin/ldn/services/new',
+        } as LinkMenuItemModel,
+        icon: '',
+      },
+    ];
+
+    provider.getSubSections().subscribe((sections) => {
+      expect(sections).toEqual(expectedSections);
+      done();
+    });
+  });
+
+  it('getSubSections should hide new_item when CanSubmit is not authorized', (done) => {
+    spyOn(authorizationServiceStub, 'isAuthorized').and.callFake((id: FeatureID) => {
+      if (id === FeatureID.CanSubmit) {
+        return of(false);
+      } else {
+        return of(true);
+      }
+    });
+
+    const expectedSections: PartialMenuSection[] = [
+      {
+        visible: true,
+        model: {
+          type: MenuItemType.ONCLICK,
+          text: 'menu.section.new_community',
+          function: jasmine.any(Function) as any,
+        },
+      },
+      {
+        visible: true,
+        model: {
+          type: MenuItemType.ONCLICK,
+          text: 'menu.section.new_collection',
+          function: jasmine.any(Function) as any,
+        },
+      },
+      {
+        visible: false,
+        model: {
+          type: MenuItemType.ONCLICK,
+          text: 'menu.section.new_item',
+          function: jasmine.any(Function) as any,
+        },
+      },
+      {
+        visible: true,
+        model: {
+          type: MenuItemType.LINK,
+          text: 'menu.section.new_process',
+          link: '/processes/new',
+        },
+      },
+      {
+        visible: true,
+        model: {
+          type: MenuItemType.LINK,
+          text: 'menu.section.services_new',
+          link: '/admin/ldn/services/new',
+        } as LinkMenuItemModel,
+        icon: '',
+      },
+    ];
+
+    provider.getSubSections().subscribe((sections) => {
+      expect(sections).toEqual(expectedSections);
+      done();
+    });
+  });
+
+  it('getSubSections should hide new_process when SiteAdmin is not authorized', (done) => {
+    spyOn(authorizationServiceStub, 'isAuthorized').and.callFake((id: FeatureID) => {
+      if (id === FeatureID.AdministratorOf) {
+        return of(false);
+      } else {
+        return of(true);
+      }
+    });
+
+    const expectedSections: PartialMenuSection[] = [
+      {
+        visible: true,
+        model: {
+          type: MenuItemType.ONCLICK,
+          text: 'menu.section.new_community',
+          function: jasmine.any(Function) as any,
+        },
+      },
+      {
+        visible: true,
+        model: {
+          type: MenuItemType.ONCLICK,
+          text: 'menu.section.new_collection',
+          function: jasmine.any(Function) as any,
+        },
+      },
+      {
+        visible: true,
+        model: {
+          type: MenuItemType.ONCLICK,
+          text: 'menu.section.new_item',
+          function: jasmine.any(Function) as any,
+        },
+      },
+      {
+        visible: false,
+        model: {
+          type: MenuItemType.LINK,
+          text: 'menu.section.new_process',
+          link: '/processes/new',
+        },
+      },
+      {
+        visible: false,
+        model: {
+          type: MenuItemType.LINK,
+          text: 'menu.section.services_new',
+          link: '/admin/ldn/services/new',
+        } as LinkMenuItemModel,
+        icon: '',
+      },
+    ];
+
+    provider.getSubSections().subscribe((sections) => {
+      expect(sections).toEqual(expectedSections);
+      done();
+    });
+  });
+
+  it('getSubSections should hide services_new when CoarNotifyEnabled is not authorized', (done) => {
+    spyOn(authorizationServiceStub, 'isAuthorized').and.callFake((id: FeatureID) => {
+      if (id === FeatureID.CoarNotifyEnabled) {
+        return of(false);
+      } else {
+        return of(true);
+      }
+    });
+
+    const expectedSections: PartialMenuSection[] = [
+      {
+        visible: true,
+        model: {
+          type: MenuItemType.ONCLICK,
+          text: 'menu.section.new_community',
+          function: jasmine.any(Function) as any,
+        },
+      },
+      {
+        visible: true,
+        model: {
+          type: MenuItemType.ONCLICK,
+          text: 'menu.section.new_collection',
+          function: jasmine.any(Function) as any,
+        },
+      },
+      {
+        visible: true,
+        model: {
+          type: MenuItemType.ONCLICK,
+          text: 'menu.section.new_item',
+          function: jasmine.any(Function) as any,
+        },
+      },
+      {
+        visible: true,
+        model: {
+          type: MenuItemType.LINK,
+          text: 'menu.section.new_process',
+          link: '/processes/new',
+        },
+      },
+      {
+        visible: false,
+        model: {
+          type: MenuItemType.LINK,
+          text: 'menu.section.services_new',
+          link: '/admin/ldn/services/new',
+        } as LinkMenuItemModel,
+        icon: '',
+      },
+    ];
+
+    provider.getSubSections().subscribe((sections) => {
+      expect(sections).toEqual(expectedSections);
+      done();
+    });
+  });
+
+  it('getSubSections should hide all subsections when no features are authorized', (done) => {
+    spyOn(authorizationServiceStub, 'isAuthorized').and.callFake((id: FeatureID) => {
+      return of(false); // No features authorized
+    });
+
+    const expectedSections: PartialMenuSection[] = [
+      {
+        visible: false,
+        model: {
+          type: MenuItemType.ONCLICK,
+          text: 'menu.section.new_community',
+          function: jasmine.any(Function) as any,
+        },
+      },
+      {
+        visible: false,
+        model: {
+          type: MenuItemType.ONCLICK,
+          text: 'menu.section.new_collection',
+          function: jasmine.any(Function) as any,
+        },
+      },
+      {
+        visible: false,
+        model: {
+          type: MenuItemType.ONCLICK,
+          text: 'menu.section.new_item',
+          function: jasmine.any(Function) as any,
+        },
+      },
+      {
+        visible: false,
+        model: {
+          type: MenuItemType.LINK,
+          text: 'menu.section.new_process',
+          link: '/processes/new',
+        },
+      },
+      {
+        visible: false,
+        model: {
+          type: MenuItemType.LINK,
+          text: 'menu.section.services_new',
+          link: '/admin/ldn/services/new',
+        } as LinkMenuItemModel,
+        icon: '',
+      },
+    ];
+
+    provider.getSubSections().subscribe((sections) => {
+      expect(sections).toEqual(expectedSections);
       done();
     });
   });
