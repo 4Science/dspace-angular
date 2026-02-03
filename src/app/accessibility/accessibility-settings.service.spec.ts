@@ -286,6 +286,7 @@ describe('accessibilitySettingsService', () => {
 
     it('should store settings in metadata when the user is authenticated', fakeAsync(() => {
       const user = new EPerson();
+      user._links = { self: { href: 'https://rest.api/eperson/123' }, groups: { href: 'https://rest.api/eperson/123/groups' } };
       authService.getAuthenticatedUserFromStoreIfAuthenticated = jasmine.createSpy().and.returnValue(of(user));
 
       service.setSettingsInAuthenticatedUserMetadata({}).subscribe();
