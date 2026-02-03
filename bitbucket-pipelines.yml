@@ -370,6 +370,13 @@ pipelines:
       - step: *deploy-on-staging
       - step: *find-cloudfront-staging
       - step: *invalidate-cloudfront
+    deploy-on-test:
+      - step: *check-branch-name-allowed
+      - step: *angular-build
+      - step: *build-and-push
+      - step: *deploy-on-test
+      - step: *find-cloudfront-test
+      - step: *invalidate-cloudfront
     turn-on-dev:
       - step: *turn-on-dev
     turn-on-staging:
