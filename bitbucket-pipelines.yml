@@ -302,8 +302,8 @@ definitions:
           - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_CF_KEY
           - export AWS_DEFAULT_REGION=$AWS_REGION
           - |
-            if ! aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"; then
-              echo "CloudFront invalidation failed for distribution ID: $CLOUDFRONT_DISTRIBUTION_ID"
+            if ! aws cloudfront create-invalidation --distribution-id $cloudfront_distribution --paths "/*"; then
+              echo "CloudFront invalidation failed for distribution ID: $cloudfront_distribution"
               exit 1
             fi
 
