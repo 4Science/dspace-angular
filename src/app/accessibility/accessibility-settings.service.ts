@@ -32,6 +32,12 @@ import {
   isNotEmpty,
 } from '../shared/empty.util';
 import { createSuccessfulRemoteDataObject$ } from '../shared/remote-data.utils';
+import { Store } from '@ngrx/store';
+import { RetrieveAuthenticatedEpersonSuccessAction } from '../core/auth/auth.actions';
+import { AppState } from '../app.reducer';
+import { select } from '@ngrx/store';
+import { filter } from 'rxjs/operators';
+import { getAuthenticatedUser } from '../core/auth/selectors';
 
 /**
  * Name of the cookie used to store the settings locally
@@ -91,6 +97,7 @@ export class AccessibilitySettingsService {
     protected ePersonService: EPersonDataService,
     @Optional() protected orejimeService: OrejimeService,
     @Inject(APP_CONFIG) protected appConfig: AppConfig,
+    private store: Store<AppState>,
   ) {
   }
 
@@ -234,7 +241,19 @@ export class AccessibilitySettingsService {
       switchMap(operations =>
         isNotEmpty(operations) ? this.ePersonService.patch(user, operations) : createSuccessfulRemoteDataObject$({})),
       getFirstCompletedRemoteData(),
-      switchMap(rd => rd.hasSucceeded ? ofMetadata() : ofFailed()),
+      switchMap(rd => {
+        if (rd.hasSucceeded) {
+          this.store.dispatch(new RetrieveAuthenticatedEpersonSuccessAction(user));
+          return this.store.pipe(
+            select(getAuthenticatedUser),
+            filter((u) => !!u && u.id === user.id && u.firstMetadataValue(ACCESSIBILITY_SETTINGS_METADATA_KEY) === user.firstMetadataValue(ACCESSIBILITY_SETTINGS_METADATA_KEY)),
+            take(1),
+            switchMap(() => ofMetadata()),
+          );
+        } else {
+          return ofFailed();
+        }
+      }),
     );
   }
 
