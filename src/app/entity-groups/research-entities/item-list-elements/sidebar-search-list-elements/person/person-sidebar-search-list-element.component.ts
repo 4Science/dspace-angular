@@ -27,6 +27,7 @@ import { SidebarSearchListElementComponent } from '../../../../../shared/object-
 import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
 import { TruncatablePartComponent } from '../../../../../shared/truncatable/truncatable-part/truncatable-part.component';
 import { EscapeHtmlPipe } from '../../../../../shared/utils/escape-html.pipe';
+import { EscapeHtmlPipe } from '../../../../../shared/utils/escape-html.pipe';
 
 @listableObjectComponent('PersonSearchResult', ViewMode.ListElement, Context.SideBarSearchModal)
 @listableObjectComponent('PersonSearchResult', ViewMode.ListElement, Context.SideBarSearchModalCurrent)

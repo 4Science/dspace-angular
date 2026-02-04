@@ -9,6 +9,7 @@ import {
 
 @Pipe({
   name: 'dsEscapeHtml',
+  standalone: true,
 })
 export class EscapeHtmlPipe implements PipeTransform {
   /**
@@ -17,7 +18,8 @@ export class EscapeHtmlPipe implements PipeTransform {
    */
   private readonly allowedTags: string[] = ['em', 'strong'];
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer) {
+  }
 
   /**
    * Escape HTML special characters and convert newlines to <br>
@@ -30,7 +32,7 @@ export class EscapeHtmlPipe implements PipeTransform {
    */
   transform(text: string): SafeHtml {
     if (text == null) {
-      return '';
+      return this.sanitizer.bypassSecurityTrustHtml('');
     }
 
     let processed = text;

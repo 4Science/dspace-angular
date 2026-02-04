@@ -23,6 +23,10 @@ import {
 } from '../../../../config/app-config.interface';
 import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
 import { LinkService } from '../../../core/cache/builders/link.service';
+import { find, map } from 'rxjs/operators';
+import { ChildHALResource } from '../../../core/shared/child-hal-resource.model';
+import { EscapeHtmlPipe } from '../../utils/escape-html.pipe';
+import { followLink } from '../../utils/follow-link-config.model';
 import { RemoteData } from '../../../core/data/remote-data';
 import { ChildHALResource } from '../../../core/shared/child-hal-resource.model';
 import { Context } from '../../../core/shared/context.model';

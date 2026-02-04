@@ -13,6 +13,11 @@ import { listableObjectComponent } from '../../../object-collection/shared/lista
 import { TruncatablePartComponent } from '../../../truncatable/truncatable-part/truncatable-part.component';
 import { EscapeHtmlPipe } from '../../../utils/escape-html.pipe';
 import { SidebarSearchListElementComponent } from '../sidebar-search-list-element.component';
+import { CommunitySearchResult } from '../../../object-collection/shared/community-search-result.model';
+import { listableObjectComponent } from '../../../object-collection/shared/listable-object/listable-object.decorator';
+import { TruncatablePartComponent } from '../../../truncatable/truncatable-part/truncatable-part.component';
+import { EscapeHtmlPipe } from '../../../utils/escape-html.pipe';
+import { SidebarSearchListElementComponent } from '../sidebar-search-list-element.component';
 
 @listableObjectComponent(CommunitySearchResult, ViewMode.ListElement, Context.SideBarSearchModal)
 @listableObjectComponent(CommunitySearchResult, ViewMode.ListElement, Context.SideBarSearchModalCurrent)

@@ -13,6 +13,7 @@ import { listableObjectComponent } from '../../../../../shared/object-collection
 import { SidebarSearchListElementComponent } from '../../../../../shared/object-list/sidebar-search-list-element/sidebar-search-list-element.component';
 import { TruncatablePartComponent } from '../../../../../shared/truncatable/truncatable-part/truncatable-part.component';
 import { EscapeHtmlPipe } from '../../../../../shared/utils/escape-html.pipe';
+import { EscapeHtmlPipe } from '../../../../../shared/utils/escape-html.pipe';
 
 @listableObjectComponent('ProjectSearchResult', ViewMode.ListElement, Context.SideBarSearchModal)
 @listableObjectComponent('ProjectSearchResult', ViewMode.ListElement, Context.SideBarSearchModalCurrent)
