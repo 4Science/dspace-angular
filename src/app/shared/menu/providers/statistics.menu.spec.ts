@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
-import { StatisticsMenuProvider } from './statistics.menu';
-import { ActivatedRoute } from '@angular/router';
 import { ActivatedRouteStub } from '../../testing/active-router.stub';
+import { StatisticsMenuProvider } from './statistics.menu';
 
 describe('StatisticsMenuProvider', () => {
   let provider: StatisticsMenuProvider;

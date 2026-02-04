@@ -9,6 +9,7 @@ import { buildMenuStructure } from './shared/menu/menu.structure';
 import { MenuID } from './shared/menu/menu-id.model';
 import { MenuRoute } from './shared/menu/menu-route.model';
 import { AccessControlMenuProvider } from './shared/menu/providers/access-control.menu';
+import { AdminCommunityListMenuProvider } from './shared/menu/providers/admin-community-list.menu';
 import { AdminSearchMenuProvider } from './shared/menu/providers/admin-search.menu';
 import { CoarNotifyMenuProvider } from './shared/menu/providers/coar-notify.menu';
 import { SubscribeMenuProvider } from './shared/menu/providers/comcol-subscribe.menu';
@@ -35,7 +36,6 @@ import { SystemWideAlertMenuProvider } from './shared/menu/providers/system-wide
 import { UserAgreementMenuProvider } from './shared/menu/providers/user-agreement.menu';
 import { WithdrawnReinstateItemMenuProvider } from './shared/menu/providers/withdrawn-reinstate-item.menu';
 import { WorkflowMenuProvider } from './shared/menu/providers/workflow.menu';
-import { AdminCommunityListMenuProvider } from './shared/menu/providers/admin-community-list.menu';
 
 /**
  * Represents and builds the menu structure for the three available menus (public navbar, admin sidebar and the dso edit

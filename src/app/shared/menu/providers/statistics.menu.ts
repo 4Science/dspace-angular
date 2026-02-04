@@ -7,22 +7,23 @@
  */
 
 import { Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {
   combineLatest,
   map,
   Observable,
 } from 'rxjs';
+import {
+  switchMap,
+  take,
+} from 'rxjs/operators';
 
-import { getDSORoute } from '../../../app-routing-paths';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
-import { hasValue } from '../../empty.util';
 import { MenuItemType } from '../menu-item-type.model';
 import { PartialMenuSection } from '../menu-provider.model';
 import { DSpaceObjectPageMenuProvider } from './helper-providers/dso.menu';
-import { switchMap, take } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
 
 /**
  * Menu provider to create the "Statistics" menu section in the public navbar. The menu depends on the page it is on.
@@ -35,7 +36,7 @@ export class StatisticsMenuProvider extends DSpaceObjectPageMenuProvider {
 
   constructor(
     protected authorizationService: AuthorizationDataService,
-    protected route: ActivatedRoute
+    protected route: ActivatedRoute,
   ) {
     super();
   }
@@ -109,67 +110,67 @@ export class StatisticsMenuProvider extends DSpaceObjectPageMenuProvider {
       canViewWorkflow: this.getAuthorizedWorkflowStatistics(),
     }).pipe(
       take(1),
-      map(({canViewUsage, canViewLogin, canViewWorkflow}) => {
-      const menuList = [];
-      if (canViewUsage || canViewLogin || canViewWorkflow) {
-        if (canViewUsage) {
-          menuList.push({
-            id: 'statistics_site',
-            parentID: 'statistics',
-            active: false,
-            visible: true,
-            model: {
-              type: MenuItemType.LINK,
-              text: 'menu.section.statistics.site',
-              link: '/statistics',
-            },
-          });
-        }
+      map(({ canViewUsage, canViewLogin, canViewWorkflow }) => {
+        const menuList = [];
+        if (canViewUsage || canViewLogin || canViewWorkflow) {
+          if (canViewUsage) {
+            menuList.push({
+              id: 'statistics_site',
+              parentID: 'statistics',
+              active: false,
+              visible: true,
+              model: {
+                type: MenuItemType.LINK,
+                text: 'menu.section.statistics.site',
+                link: '/statistics',
+              },
+            });
+          }
 
-        if (canViewLogin) {
-          menuList.push({
-            id: 'statistics_login',
-            parentID: 'statistics',
-            active: false,
-            visible: true,
-            model: {
-              type: MenuItemType.LINK,
-              text: 'menu.section.statistics.login',
-              link: '/statistics/login',
-            },
-          });
-        }
+          if (canViewLogin) {
+            menuList.push({
+              id: 'statistics_login',
+              parentID: 'statistics',
+              active: false,
+              visible: true,
+              model: {
+                type: MenuItemType.LINK,
+                text: 'menu.section.statistics.login',
+                link: '/statistics/login',
+              },
+            });
+          }
 
-        if (canViewWorkflow) {
-          menuList.push({
-            id: 'statistics_workflow',
-            parentID: 'statistics',
-            active: false,
-            visible: true,
-            model: {
-              type: MenuItemType.LINK,
-              text: 'menu.section.statistics.workflow',
-              link: '/statistics/workflow',
-            },
-          });
-        }
+          if (canViewWorkflow) {
+            menuList.push({
+              id: 'statistics_workflow',
+              parentID: 'statistics',
+              active: false,
+              visible: true,
+              model: {
+                type: MenuItemType.LINK,
+                text: 'menu.section.statistics.workflow',
+                link: '/statistics/workflow',
+              },
+            });
+          }
 
-        // the parent menu should be added after the children
-        menuList.push(
-          {
-            id: 'statistics',
-            active: false,
-            visible: true,
-            index: 1,
-            model: {
-              type: MenuItemType.TEXT,
-              text: 'menu.section.statistics',
+          // the parent menu should be added after the children
+          menuList.push(
+            {
+              id: 'statistics',
+              active: false,
+              visible: true,
+              index: 1,
+              model: {
+                type: MenuItemType.TEXT,
+                text: 'menu.section.statistics',
+              },
             },
-          },
-        );
-      }
-      return menuList;
-    }));
+          );
+        }
+        return menuList;
+      }));
   }
 
   protected isApplicable(dso: DSpaceObject): boolean {

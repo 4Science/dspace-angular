@@ -7,14 +7,14 @@
  */
 
 import { TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 
+import { APP_CONFIG } from '../../../../config/app-config.interface';
+import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
+import { AuthorizationDataServiceStub } from '../../testing/authorization-service.stub';
 import { MenuItemType } from '../menu-item-type.model';
 import { PartialMenuSection } from '../menu-provider.model';
 import { AdminCommunityListMenuProvider } from './admin-community-list.menu';
-import { APP_CONFIG } from '../../../../config/app-config.interface';
-import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
-import { of } from 'rxjs';
-import { AuthorizationDataServiceStub } from '../../testing/authorization-service.stub';
 
 describe('AdminCommunityListMenuProvider', () => {
   const expectedSections: PartialMenuSection[] = [
@@ -41,7 +41,7 @@ describe('AdminCommunityListMenuProvider', () => {
       providers: [
         AdminCommunityListMenuProvider,
         { provide: APP_CONFIG, useValue: { layout: { navbar: { showCommunityCollection: false } } } },
-        { provide: AuthorizationDataService, useValue: authorizationServiceStub }, ],
+        { provide: AuthorizationDataService, useValue: authorizationServiceStub } ],
     });
     provider = TestBed.inject(AdminCommunityListMenuProvider);
   });

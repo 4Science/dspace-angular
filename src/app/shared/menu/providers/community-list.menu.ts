@@ -6,18 +6,21 @@
  * http://www.dspace.org/license/
  */
 
-import { inject, Injectable } from '@angular/core';
+import {
+  inject,
+  Injectable,
+} from '@angular/core';
 import {
   Observable,
   of,
 } from 'rxjs';
 
+import { APP_CONFIG } from '../../../../config/app-config.interface';
 import { MenuItemType } from '../menu-item-type.model';
 import {
   AbstractMenuProvider,
   PartialMenuSection,
 } from '../menu-provider.model';
-import { APP_CONFIG } from '../../../../config/app-config.interface';
 
 /**
  * Menu provider to create the "Communities & Collections" menu section in the public navbar

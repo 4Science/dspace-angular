@@ -6,21 +6,24 @@
  * http://www.dspace.org/license/
  */
 
-import { inject, Injectable } from '@angular/core';
+import {
+  inject,
+  Injectable,
+} from '@angular/core';
 import {
   map,
   Observable,
   of,
 } from 'rxjs';
 
+import { APP_CONFIG } from '../../../../config/app-config.interface';
+import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
+import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { MenuItemType } from '../menu-item-type.model';
 import {
   AbstractMenuProvider,
   PartialMenuSection,
 } from '../menu-provider.model';
-import { APP_CONFIG } from '../../../../config/app-config.interface';
-import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
-import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 
 /**
  * Menu provider to create the "Communities & Collections" menu section in the admin navbar
