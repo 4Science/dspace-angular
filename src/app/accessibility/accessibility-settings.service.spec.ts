@@ -2,8 +2,10 @@ import {
   fakeAsync,
   flush,
 } from '@angular/core/testing';
+import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 
+import { AppState } from '../app.reducer';
 import { AppConfig } from '../../config/app-config.interface';
 import { AuthService } from '../core/auth/auth.service';
 import { EPersonDataService } from '../core/eperson/eperson-data.service';
@@ -32,12 +34,14 @@ describe('accessibilitySettingsService', () => {
   let authService: AuthServiceStub;
   let ePersonService: EPersonDataService;
   let orejimeService: OrejimeServiceStub;
+  let store: Store<AppState>;
   let appConfig: AppConfig;
 
   beforeEach(() => {
     cookieService = new CookieServiceMock();
     authService = new AuthServiceStub();
     orejimeService = new OrejimeServiceStub();
+    store = jasmine.createSpyObj('store', ['dispatch', 'pipe']);
     appConfig = { accessibility: { cookieExpirationDuration: 10 } } as AppConfig;
 
     orejimeService.getSavedPreferences.and.returnValue(of({ accessibility: true }));
@@ -56,6 +60,7 @@ describe('accessibilitySettingsService', () => {
       ePersonService,
       orejimeService,
       appConfig,
+      store,
     );
   });
 
@@ -336,6 +341,7 @@ describe('accessibilitySettingsService', () => {
 
     it('should emit "metadata" when the update succeeded', fakeAsync(() => {
       ePersonService.patch = jasmine.createSpy().and.returnValue(createSuccessfulRemoteDataObject$({}));
+      store.pipe = jasmine.createSpy().and.returnValue(of('metadata'));
 
       service.setSettingsInMetadata(ePerson, { ['liveRegionTimeOut']: '500' })
         .subscribe(value => {
