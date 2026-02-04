@@ -5,8 +5,8 @@ import {
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 
-import { AppState } from '../app.reducer';
 import { AppConfig } from '../../config/app-config.interface';
+import { AppState } from '../app.reducer';
 import { AuthService } from '../core/auth/auth.service';
 import { EPersonDataService } from '../core/eperson/eperson-data.service';
 import { EPerson } from '../core/eperson/models/eperson.model';
