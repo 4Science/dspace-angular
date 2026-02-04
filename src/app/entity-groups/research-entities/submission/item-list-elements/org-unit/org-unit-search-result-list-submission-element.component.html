@@ -9,7 +9,7 @@
   }
 
   @if (!useNameVariants) {
-    <div class="lead" [innerHTML]="dsoTitle"></div>
+    <div class="lead" [innerHTML]="dsoTitle | dsEscapeHtml"></div>
   }
 
   <span class="text-muted">

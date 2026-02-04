@@ -5,7 +5,7 @@
 <ds-truncatable-part [maxLines]="1" [background]="isCurrent() ? 'primary' : 'default'" [showToggle]="false">
   <div class="fw-bold"
     [ngClass]="isCurrent() ? 'text-light' : 'text-primary'"
-  [innerHTML]="dsoTitle"></div>
+  [innerHTML]="dsoTitle | dsEscapeHtml"></div>
 </ds-truncatable-part>
 @if (description) {
   <ds-truncatable-part [maxLines]="1" [background]="isCurrent() ? 'primary' : 'default'" [showToggle]="false">

@@ -27,6 +27,7 @@ import { listableObjectComponent } from '../../../../../shared/object-collection
 import { SearchResultListElementComponent } from '../../../../../shared/object-list/search-result-list-element/search-result-list-element.component';
 import { SelectableListService } from '../../../../../shared/object-list/selectable-list/selectable-list.service';
 import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
+import { EscapeHtmlPipe } from '../../../../../shared/utils/escape-html.pipe';
 import { NameVariantModalComponent } from '../../name-variant-modal/name-variant-modal.component';
 import { OrgUnitInputSuggestionsComponent } from './org-unit-suggestions/org-unit-input-suggestions.component';
 
@@ -37,6 +38,7 @@ import { OrgUnitInputSuggestionsComponent } from './org-unit-suggestions/org-uni
   styleUrls: ['./org-unit-search-result-list-submission-element.component.scss'],
   templateUrl: './org-unit-search-result-list-submission-element.component.html',
   imports: [
+    EscapeHtmlPipe,
     FormsModule,
     OrgUnitInputSuggestionsComponent,
   ],

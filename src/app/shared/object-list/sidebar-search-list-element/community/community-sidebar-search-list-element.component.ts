@@ -11,6 +11,7 @@ import { ViewMode } from '../../../../core/shared/view-mode.model';
 import { CommunitySearchResult } from '../../../object-collection/shared/community-search-result.model';
 import { listableObjectComponent } from '../../../object-collection/shared/listable-object/listable-object.decorator';
 import { TruncatablePartComponent } from '../../../truncatable/truncatable-part/truncatable-part.component';
+import { EscapeHtmlPipe } from '../../../utils/escape-html.pipe';
 import { SidebarSearchListElementComponent } from '../sidebar-search-list-element.component';
 
 @listableObjectComponent(CommunitySearchResult, ViewMode.ListElement, Context.SideBarSearchModal)
@@ -22,6 +23,7 @@ import { SidebarSearchListElementComponent } from '../sidebar-search-list-elemen
   templateUrl: '../sidebar-search-list-element.component.html',
   imports: [
     AsyncPipe,
+    EscapeHtmlPipe,
     NgClass,
     TranslateModule,
     TruncatablePartComponent,
