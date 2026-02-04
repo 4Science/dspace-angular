@@ -20,7 +20,8 @@
 }
 
 @if ((results | async) && (results | async).length > 0) {
-  @if (hasNonZeroValues((results | async))) {
+  @let res = results | async;
+  @if (hasNonZeroValues(res)) {
     <div #chartRef id="chart" class="d-flex w-100 search-chart-container">
       <ds-chart [results]="results" [view]="view" [type]='chartType.PIE' [animations]="true"></ds-chart>
     </div>
