@@ -74,4 +74,14 @@ export class StatisticsChartPieComponent extends StatisticsChartDataComponent {
     ));
   }
 
+  /**
+   * Check if the data has any non-zero values
+   */
+  public hasNonZeroValues(data: any[]): boolean {
+    if (!data || data.length === 0) {
+      return false;
+    }
+    return data.some(item => item && item.value && item.value > 0);
+  }
+
 }
