@@ -11,6 +11,10 @@ import { TestBed } from '@angular/core/testing';
 import { MenuItemType } from '../menu-item-type.model';
 import { PartialMenuSection } from '../menu-provider.model';
 import { AdminCommunityListMenuProvider } from './admin-community-list.menu';
+import { APP_CONFIG } from '../../../../config/app-config.interface';
+import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
+import { of } from 'rxjs';
+import { AuthorizationDataServiceStub } from '../../testing/authorization-service.stub';
 
 describe('AdminCommunityListMenuProvider', () => {
   const expectedSections: PartialMenuSection[] = [
@@ -21,17 +25,23 @@ describe('AdminCommunityListMenuProvider', () => {
         text: `menu.section.communities_and_collections`,
         link: `/community-list`,
       },
-      icon: 'diagram-project',
+      icon: 'users',
     },
   ];
 
   let provider: AdminCommunityListMenuProvider;
+  let authorizationServiceStub = new AuthorizationDataServiceStub();
 
   beforeEach(() => {
+    spyOn(authorizationServiceStub, 'isAuthorized').and.returnValue(
+      of(true),
+    );
+
     TestBed.configureTestingModule({
       providers: [
         AdminCommunityListMenuProvider,
-      ],
+        { provide: APP_CONFIG, useValue: { layout: { navbar: { showCommunityCollection: false } } } },
+        { provide: AuthorizationDataService, useValue: authorizationServiceStub }, ],
     });
     provider = TestBed.inject(AdminCommunityListMenuProvider);
   });

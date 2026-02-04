@@ -11,6 +11,7 @@ import { TestBed } from '@angular/core/testing';
 import { MenuItemType } from '../menu-item-type.model';
 import { PartialMenuSection } from '../menu-provider.model';
 import { CommunityListMenuProvider } from './community-list.menu';
+import { APP_CONFIG } from '../../../../config/app-config.interface';
 
 describe('CommunityListMenuProvider', () => {
   const expectedSections: PartialMenuSection[] = [
@@ -31,6 +32,7 @@ describe('CommunityListMenuProvider', () => {
     TestBed.configureTestingModule({
       providers: [
         CommunityListMenuProvider,
+        { provide: APP_CONFIG, useValue: { layout: { navbar: { showCommunityCollection: true } } } },
       ],
     });
     provider = TestBed.inject(CommunityListMenuProvider);

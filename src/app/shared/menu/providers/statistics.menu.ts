@@ -52,7 +52,7 @@ export class StatisticsMenuProvider extends DSpaceObjectPageMenuProvider {
    *  Get activated route of the deepest activated route
    */
   getActivatedRoute(route) {
-    if (route.children.length > 0) {
+    if (route.children?.length > 0) {
       return this.getActivatedRoute(route.firstChild);
     } else {
       return route;
@@ -170,36 +170,6 @@ export class StatisticsMenuProvider extends DSpaceObjectPageMenuProvider {
       }
       return menuList;
     }));
-  }
-
-  public getSectionsForContext2(dso: DSpaceObject): Observable<PartialMenuSection[]> {
-    return combineLatest([
-      this.authorizationService.isAuthorized(FeatureID.CanViewUsageStatistics, dso?._links.self.href),
-    ]).pipe(
-      map(([authorized]) => {
-        let link = `statistics`;
-
-        let dsoRoute;
-        if (hasValue(dso)) {
-          dsoRoute = getDSORoute(dso);
-          if (hasValue(dsoRoute)) {
-            link = `statistics${dsoRoute}`;
-          }
-        }
-
-        return [
-          {
-            visible: authorized,
-            model: {
-              type: MenuItemType.LINK,
-              text: 'menu.section.statistics',
-              link,
-            },
-            icon: 'chart-line',
-          },
-        ];
-      }),
-    );
   }
 
   protected isApplicable(dso: DSpaceObject): boolean {
