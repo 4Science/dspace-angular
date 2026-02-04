@@ -17,12 +17,14 @@
   <div class="container">
     <h3 class="mb-4">{{'menu.section.cms.edit.metadata.head' | translate}}</h3>
     <div class="input-group">
-      <select class="form-control col-md-4 me-3 mb-2" aria-label="Select metadata" [(ngModel)]="selectedMetadata">
-        <option [ngValue]="undefined" disabled selected>{{'admin.edit-cms-metadata.select-metadata' | translate}}</option>
-        @for (md of metadataList; track md) {
-          <option [value]="md">{{md}}</option>
-        }
-      </select>
+      <div class="col-md-4 me-3 mb-2">
+        <select class="form-select" aria-label="Select metadata" [(ngModel)]="selectedMetadata">
+          <option [ngValue]="undefined" disabled selected>{{'admin.edit-cms-metadata.select-metadata' | translate}}</option>
+          @for (md of metadataList; track md) {
+            <option [value]="md">{{md}}</option>
+          }
+        </select>
+      </div>
       <span class="input-group-btn">
         <button id="edit-metadata-btn" class="btn btn-primary" (click)="editSelectedMetadata()" [dsBtnDisabled]="!selectedMetadata">
           <i class="fas fa-edit me-1"></i>
