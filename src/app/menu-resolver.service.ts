@@ -303,7 +303,7 @@ export class MenuResolverService  {
         {
           id: `browse_global_communities_and_collections`,
           active: false,
-          visible: !environment.layout.navbar.showCommunityCollection && isCollectionAdmin,
+          visible: !environment.layout.navbar.showCommunityCollection && (isCollectionAdmin || isCommunityAdmin || isSiteAdmin),
           model: {
             type: MenuItemType.LINK,
             text: `menu.section.communities_and_collections`,
@@ -845,19 +845,6 @@ export class MenuResolverService  {
     this.authorizationService.isAuthorized(FeatureID.AdministratorOf)
       .subscribe((authorized) => {
         const menuList = [
-          /* Communities & Collections */
-          {
-            id: 'browse_global_communities_and_collections',
-            active: false,
-            visible: authorized && !environment.layout.navbar.showCommunityCollection,
-            model: {
-              type: MenuItemType.LINK,
-              text: `menu.section.communities_and_collections`,
-              link: `/community-list`,
-            } as LinkMenuItemModel,
-            icon: 'list-alt',
-            index: 2,
-          },
           /*  Admin Search */
           {
             id: 'admin_search',
