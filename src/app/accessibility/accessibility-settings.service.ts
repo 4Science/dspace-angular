@@ -3,6 +3,10 @@ import {
   Injectable,
   Optional,
 } from '@angular/core';
+import {
+  select,
+  Store,
+} from '@ngrx/store';
 import cloneDeep from 'lodash/cloneDeep';
 import {
   combineLatest,
@@ -11,6 +15,7 @@ import {
   switchMap,
 } from 'rxjs';
 import {
+  filter,
   map,
   take,
 } from 'rxjs/operators';
@@ -20,7 +25,10 @@ import {
   AppConfig,
 } from '../../config/app-config.interface';
 import { environment } from '../../environments/environment';
+import { AppState } from '../app.reducer';
+import { RetrieveAuthenticatedEpersonSuccessAction } from '../core/auth/auth.actions';
 import { AuthService } from '../core/auth/auth.service';
+import { getAuthenticatedUser } from '../core/auth/selectors';
 import { EPersonDataService } from '../core/eperson/eperson-data.service';
 import { EPerson } from '../core/eperson/models/eperson.model';
 import { CookieService } from '../core/services/cookie.service';
@@ -91,6 +99,7 @@ export class AccessibilitySettingsService {
     protected ePersonService: EPersonDataService,
     @Optional() protected orejimeService: OrejimeService,
     @Inject(APP_CONFIG) protected appConfig: AppConfig,
+    private store: Store<AppState>,
   ) {
   }
 
@@ -234,7 +243,19 @@ export class AccessibilitySettingsService {
       switchMap(operations =>
         isNotEmpty(operations) ? this.ePersonService.patch(user, operations) : createSuccessfulRemoteDataObject$({})),
       getFirstCompletedRemoteData(),
-      switchMap(rd => rd.hasSucceeded ? ofMetadata() : ofFailed()),
+      switchMap(rd => {
+        if (rd.hasSucceeded) {
+          this.store.dispatch(new RetrieveAuthenticatedEpersonSuccessAction(user));
+          return this.store.pipe(
+            select(getAuthenticatedUser),
+            filter((u) => !!u && u.id === user.id && u.firstMetadataValue(ACCESSIBILITY_SETTINGS_METADATA_KEY) === user.firstMetadataValue(ACCESSIBILITY_SETTINGS_METADATA_KEY)),
+            take(1),
+            switchMap(() => ofMetadata()),
+          );
+        } else {
+          return ofFailed();
+        }
+      }),
     );
   }
 
