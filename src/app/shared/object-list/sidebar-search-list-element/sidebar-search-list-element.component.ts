@@ -34,6 +34,7 @@ import {
 import { SearchResult } from '../../search/models/search-result.model';
 import { TruncatableService } from '../../truncatable/truncatable.service';
 import { TruncatablePartComponent } from '../../truncatable/truncatable-part/truncatable-part.component';
+import { EscapeHtmlPipe } from '../../utils/escape-html.pipe';
 import { followLink } from '../../utils/follow-link-config.model';
 import { SearchResultListElementComponent } from '../search-result-list-element/search-result-list-element.component';
 
@@ -42,6 +43,7 @@ import { SearchResultListElementComponent } from '../search-result-list-element/
   templateUrl: './sidebar-search-list-element.component.html',
   imports: [
     AsyncPipe,
+    EscapeHtmlPipe,
     NgClass,
     TranslateModule,
     TruncatablePartComponent,
