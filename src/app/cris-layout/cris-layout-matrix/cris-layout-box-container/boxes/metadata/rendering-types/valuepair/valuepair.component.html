@@ -1,5 +1,13 @@
 <div [class]="field.styleValue" [attr.lang]="metadataValue.language">
+  <ng-container *ngIf="isMetadataLink !== true; else linkTemplate">
     <span class="text-value">
       {{ value$ | async }}
     </span>
+  </ng-container>
 </div>
+
+<ng-template #linkTemplate>
+    <a [href]="metadataValue.value" class="text-value">
+      {{ value$ | async }}
+    </a>
+</ng-template>

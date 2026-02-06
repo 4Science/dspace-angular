@@ -84,21 +84,51 @@ export class LinkComponent extends RenderingTypeValueModelComponent implements O
     let linkText: string;
     let metadataValue: string;
 
-    if (hasValue(this.renderingSubType) && this.renderingSubType.toUpperCase() === TYPES.EMAIL.toString()) {
-      this.isEmail = true;
-      metadataValue = 'mailto:' + this.metadataValue.value;
-      linkText = (hasValue(this.renderingSubType) &&
-        this.renderingSubType.toUpperCase() === TYPES.EMAIL.toString()) ? this.metadataValue.value : this.translateService.instant(this.field.label);
+    if (hasValue(this.renderingSubType) && this.renderingSubType.toUpperCase() === TYPES.EMAIL) {
+        this.isEmail = true;
+        metadataValue = 'mailto:' + this.metadataValue.value;
+        linkText = (hasValue(this.renderingSubType) &&
+        this.renderingSubType.toUpperCase() === TYPES.EMAIL) ? this.metadataValue.value : this.translateService.instant(this.field.label);
+    } else if ((hasValue(this.renderingSubType) && this.renderingSubType.toUpperCase() === TYPES.LABEL)) {
+        // Parse value in format [Label](URL)
+        const parsedValue = this.parseLabelValue(this.metadataValue.value);
+
+        metadataValue = this.getLinkWithProtocol(parsedValue.value);
+        linkText = parsedValue.label;
     } else {
-      const startsWithProtocol = [/^https?:\/\//, /^ftp:\/\//];
-      metadataValue = startsWithProtocol.some(rx => rx.test(this.metadataValue.value)) ? this.metadataValue.value : 'http://' + this.metadataValue.value;
-      linkText = (hasValue(this.renderingSubType) &&
-        this.renderingSubType.toUpperCase() === TYPES.LABEL.toString()) ? this.translateService.instant(this.field.label) : this.metadataValue.value;
+        // Use same value for link and label, correcting the protocol for link if needed
+        metadataValue = this.getLinkWithProtocol(this.metadataValue.value);
+        linkText = this.metadataValue.value;
     }
 
     return {
       href: metadataValue,
       text: linkText,
     };
+  }
+
+  /**
+   * Exctract label and values for TYPES.LABEL
+   * @param value
+   */
+  parseLabelValue(input: string): { label: string; value: string } {
+    const match = input.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+
+    if (!match) {
+      return {
+        label: input,
+        value: input
+      };
+    }
+
+    return {
+      label: match[1],
+      value: match[2],
+    };
+  }
+
+  getLinkWithProtocol(link: string): string {
+    const startsWithProtocol = [/^https?:\/\//, /^ftp:\/\//];
+    return  startsWithProtocol.some(rx => rx.test(link)) ? link : 'http://' + link;
   }
 }

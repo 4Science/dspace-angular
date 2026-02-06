@@ -194,4 +194,69 @@ describe('ValuepairComponent', () => {
 
   });
 
+  describe('when the metadata value is a link', () => {
+
+    const linkValue = 'https://example.com';
+    const testFieldLink: LayoutField = {
+      metadata: 'dc.identifier',
+      label: 'Identifier',
+      rendering: 'valuepair.' + VOCABULARY_NAME_2,
+      fieldType: 'METADATA',
+      metadataGroup: null,
+      labelAsHeading: false,
+      valuesInline: false
+    };
+
+    const testItemLink = Object.assign(new Item(), {
+      allMetadata: () => [{ value: linkValue, authority: null }],
+    });
+
+    beforeEach(waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          TranslateModule.forRoot({
+            loader: {
+              provide: TranslateLoader,
+              useClass: TranslateLoaderMock
+            }
+          }),
+        ],
+        declarations: [ValuepairComponent, DsDatePipe],
+        providers: [
+          { provide: VocabularyService, useValue: vocabularyServiceSpy },
+          { provide: AuthService, useValue: authService },
+          { provide: 'fieldProvider', useValue: testFieldLink },
+          { provide: 'itemProvider', useValue: testItemLink },
+          { provide: 'metadataValueProvider', useValue: { value: linkValue, authority: null } },
+          { provide: 'renderingSubTypeProvider', useValue: '' }, // leave empty
+          { provide: 'tabNameProvider', useValue: '' },
+        ],
+      }).compileComponents();
+    }));
+
+    beforeEach(() => {
+      fixture = TestBed.createComponent(ValuepairComponent);
+      component = fixture.componentInstance;
+
+      // Manually emit the value since vocabulary service won't emit
+      component.value$.next(linkValue);
+
+      fixture.detectChanges();
+    });
+
+    it('should detect that the value is a link', () => {
+      expect(component.isMetadataLink).toBeTrue();
+    });
+
+    it('should render the value as an <a> tag', () => {
+      const compiled = fixture.nativeElement as HTMLElement;
+      const linkEl = compiled.querySelector('a.text-value') as HTMLAnchorElement;
+
+      expect(linkEl).toBeTruthy();
+      expect(linkEl.href).toBe(linkValue + '/'); // Browser adds trailing slash
+      expect(linkEl.textContent.trim()).toBe(linkValue);
+    });
+  });
+
+
 });
