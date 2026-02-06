@@ -1,7 +1,6 @@
 import { testA11y } from 'cypress/support/utils';
 
-// TODO: Enable these tests and fix them before the release
-xdescribe('Admin Workflow Page', () => {
+describe('Admin Workflow Page', () => {
   beforeEach(() => {
     // Must login as an Admin to see the page
     cy.visit('/admin/workflow');

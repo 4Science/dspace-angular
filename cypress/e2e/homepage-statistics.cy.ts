@@ -3,8 +3,7 @@ import '../support/commands';
 import { REGEX_MATCH_NON_EMPTY_TEXT } from 'cypress/support/e2e';
 import { testA11y } from 'cypress/support/utils';
 
-// TODO: Enable these tests and fix them before the release
-xdescribe('Site Statistics Page', () => {
+describe('Site Statistics Page', () => {
   it('should load if you click on "Statistics" from homepage', () => {
     cy.visit('/');
     cy.get('#expandable-navbar-section-statistics > [data-test="navbar-section-toggler"]').trigger('keyup', { key: 'Enter' });

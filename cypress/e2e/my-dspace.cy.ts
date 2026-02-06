@@ -1,7 +1,6 @@
 import { testA11y } from 'cypress/support/utils';
 
-// TODO: Enable these tests and fix them before the release
-xdescribe('My DSpace page', () => {
+describe('My DSpace page', () => {
   it('should display recent submissions and pass accessibility tests', () => {
     cy.visit('/mydspace');
 

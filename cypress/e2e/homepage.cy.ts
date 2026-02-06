@@ -2,7 +2,7 @@ import { testA11y } from 'cypress/support/utils';
 import { Options } from 'cypress-axe';
 
 // TODO: Enable these tests and fix them before the release
-xdescribe('Homepage', () => {
+describe('Homepage', () => {
   beforeEach(() => {
     // All tests start with visiting homepage
     cy.visit('/');
