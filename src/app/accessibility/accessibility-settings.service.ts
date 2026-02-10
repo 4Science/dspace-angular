@@ -213,7 +213,7 @@ export class AccessibilitySettingsService {
     return this.authService.getAuthenticatedUserFromStoreIfAuthenticated().pipe(
       take(1),
       switchMap(user => {
-        if (hasValue(user)) {
+        if (hasValue(user) && hasValue(user._links?.self)) {
           // EPerson has to be cloned, otherwise the EPerson's metadata can't be modified
           const clonedUser = cloneDeep(user);
           return this.setSettingsInMetadata(clonedUser, settings);
