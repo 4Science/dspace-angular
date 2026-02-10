@@ -10,11 +10,6 @@
   height: fit-content;
 }
 
-:host ::ng-deep .form-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
 
 :host ::ng-deep .btn-group-toggle > .btn input[type="radio"] {
   position: absolute;

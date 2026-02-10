@@ -108,3 +108,7 @@
   --bs-btn-focus-box-shadow: none;
   --bs-btn-active-border-color: transparent;
 }
+
+.form-select {
+  --bs-form-select-bg-img: #{$form-select-bg-img};
+}
