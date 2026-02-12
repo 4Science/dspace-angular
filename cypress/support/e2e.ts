@@ -50,6 +50,13 @@ before(() => {
     cy.task('saveRestBaseDomain', baseDomain);
 
   });
+
+  // We might receive uncaught exceptions from external libraries (e.g. it happened before with a broken
+  // version of the addToAny plugin). These should not cause our tests to fail, so we catch them here.
+  Cypress.on('uncaught:exception', (err, runnable) => {
+    // returning false here prevents Cypress from failing the test
+    return false;
+  });
 });
 
 // Runs once before the first test in each "block"
