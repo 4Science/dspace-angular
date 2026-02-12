@@ -36,6 +36,7 @@
             }
             @if (!sectionRef.isMandatory()) {
               <a href="javascript:void(0);" class="me-3"
+                [attr.aria-label]="'Remove'" role="button"
                 (click)="removeSection($event)">
                 @if ((isRemoving | async) !== true) {
                   <i class="far fa-trash-alt" aria-hidden="true" tabindex="-1"></i>
