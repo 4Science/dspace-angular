@@ -152,11 +152,10 @@ describe('ItemListPreviewComponent', () => {
     component.object = { hitHighlights: {} } as any;
   });
 
-  // TODO: Investigate why this test is failing with ExpressionChangedAfterItHasBeenCheckedError
-  xdescribe('When showThumbnails is true', () => {
+  describe('When showThumbnails is true', () => {
     beforeEach(() => {
       component.item = mockItemWithAuthorAndDate;
-      fixture.detectChanges();
+      fixture.detectChanges(false);
     });
     it('should add the thumbnail element', () => {
       const thumbnail = fixture.debugElement.query(By.css('ds-thumbnail'));
@@ -164,11 +163,10 @@ describe('ItemListPreviewComponent', () => {
     });
   });
 
-  // TODO: Investigate why this test is failing with ExpressionChangedAfterItHasBeenCheckedError
-  xdescribe('When the item has an author', () => {
+  describe('When the item has an author', () => {
     beforeEach(() => {
       component.item = mockItemWithAuthorAndDate;
-      fixture.detectChanges();
+      fixture.detectChanges(false);
     });
 
     it('should show the author paragraph', () => {
@@ -180,7 +178,7 @@ describe('ItemListPreviewComponent', () => {
   describe('When the item has no author', () => {
     beforeEach(() => {
       component.item = mockItemWithoutAuthorAndDate;
-      fixture.detectChanges();
+      fixture.detectChanges(false);
     });
 
     it('should not show the author paragraph', () => {
@@ -189,11 +187,10 @@ describe('ItemListPreviewComponent', () => {
     });
   });
 
-  // TODO: Investigate why this test is failing with ExpressionChangedAfterItHasBeenCheckedError
-  xdescribe('When the item has an issuedate', () => {
+  describe('When the item has an issuedate', () => {
     beforeEach(() => {
       component.item = mockItemWithAuthorAndDate;
-      fixture.detectChanges();
+      fixture.detectChanges(false);
     });
 
     it('should show the issuedate span', () => {
@@ -205,7 +202,7 @@ describe('ItemListPreviewComponent', () => {
   describe('When the item has no issuedate', () => {
     beforeEach(() => {
       component.item = mockItemWithoutAuthorAndDate;
-      fixture.detectChanges();
+      fixture.detectChanges(false);
     });
 
     it('should show the issuedate empty placeholder', () => {
@@ -218,7 +215,7 @@ describe('ItemListPreviewComponent', () => {
     beforeEach(() => {
       component.item = mockItemWithEntityType;
       component.showLabel = true;
-      fixture.detectChanges();
+      fixture.detectChanges(false);
     });
 
     it('should show the badges', () => {
@@ -231,7 +228,7 @@ describe('ItemListPreviewComponent', () => {
     beforeEach(() => {
       component.item = mockItemWithEntityType;
       component.showLabel = false;
-      fixture.detectChanges();
+      fixture.detectChanges(false);
     });
 
     it('should not show the badges', () => {
@@ -241,12 +238,11 @@ describe('ItemListPreviewComponent', () => {
   });
 
 
-  // TODO: Investigate why this test is failing with ExpressionChangedAfterItHasBeenCheckedError
-  xdescribe('When truncatable section is collapsed', () => {
+  describe('When truncatable section is collapsed', () => {
     beforeEach(() => {
       component.isCollapsed$ = of(true);
       component.item = mockItemWithAuthorAndDate;
-      fixture.detectChanges();
+      fixture.detectChanges(false);
     });
 
     it('should show limitedMetadata', () => {
@@ -255,12 +251,11 @@ describe('ItemListPreviewComponent', () => {
     });
   });
 
-  // TODO: Investigate why this test is failing with ExpressionChangedAfterItHasBeenCheckedError
-  xdescribe('When truncatable section is expanded', () => {
+  describe('When truncatable section is expanded', () => {
     beforeEach(() => {
       component.isCollapsed$ = of(false);
       component.item = mockItemWithAuthorAndDate;
-      fixture.detectChanges();
+      fixture.detectChanges(false);
     });
 
     it('should show allMetadata', () => {
@@ -318,11 +313,10 @@ describe('ItemListPreviewComponent', () => {
     component.object = { hitHighlights: {} } as any;
   });
 
-  // TODO: Investigate why this test is failing with ExpressionChangedAfterItHasBeenCheckedError
-  xdescribe('When showThumbnails is true', () => {
+  describe('When showThumbnails is true', () => {
     beforeEach(() => {
       component.item = mockItemWithAuthorAndDate;
-      fixture.detectChanges();
+      fixture.detectChanges(false);
     });
     it('should add the thumbnail element', () => {
       const thumbnail = fixture.debugElement.query(By.css('ds-thumbnail'));
@@ -330,12 +324,11 @@ describe('ItemListPreviewComponent', () => {
     });
   });
 
-  // TODO: Investigate why this test is failing with ExpressionChangedAfterItHasBeenCheckedError
-  xdescribe('When showCorrection is false', () => {
+  describe('When showCorrection is false', () => {
     beforeEach(() => {
       component.item = mockItemWithAuthorAndDate;
       component.showCorrection = false;
-      fixture.detectChanges();
+      fixture.detectChanges(false);
     });
 
     it('should not show the correction badge', () => {

@@ -30,7 +30,7 @@ export class EscapeHtmlPipe implements PipeTransform {
    */
   transform(text: string): SafeHtml {
     if (text == null) {
-      return this.sanitizer.bypassSecurityTrustHtml('');
+      return '';
     }
 
     let processed = text;
