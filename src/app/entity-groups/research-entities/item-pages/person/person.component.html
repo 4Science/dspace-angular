@@ -61,7 +61,7 @@
     @if (areAuthorityRelationsEnabled) {
       <ds-authority-related-entities-search
         [item]="object"
-        [configuration]="'RELATION.Person.publication'"
+        [configurations]="['RELATION.Person.researchoutputs', 'RELATION.Person.projects']"
       ></ds-authority-related-entities-search>
     } @else {
       <ds-tabbed-related-entities-search  [item]="object"

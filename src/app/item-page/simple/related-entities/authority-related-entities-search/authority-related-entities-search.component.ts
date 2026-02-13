@@ -1,42 +1,52 @@
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
   OnInit,
 } from '@angular/core';
-import { Item } from '@dspace/core/shared/item.model';
+import {
+  NgbNav,
+  NgbNavContent,
+  NgbNavItem,
+  NgbNavLink,
+  NgbNavOutlet,
+} from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ThemedConfigurationSearchPageComponent } from '../../../../search-page/themed-configuration-search-page.component';
+import { TabbedRelatedEntitiesSearchComponent } from '../tabbed-related-entities-search/tabbed-related-entities-search.component';
 
 @Component({
   selector: 'ds-authority-related-entities-search',
   templateUrl: './authority-related-entities-search.component.html',
   imports: [
+    AsyncPipe,
+    NgbNav,
+    NgbNavContent,
+    NgbNavItem,
+    NgbNavLink,
+    NgbNavOutlet,
     ThemedConfigurationSearchPageComponent,
+    TranslateModule,
   ],
 })
 /**
  * A component to show related items as search results, based on authority value
  */
-export class AuthorityRelatedEntitiesSearchComponent implements OnInit {
+export class AuthorityRelatedEntitiesSearchComponent extends TabbedRelatedEntitiesSearchComponent implements OnInit {
   /**
    * Filter used for set scope in discovery invocation
    */
   searchFilter: string;
   /**
-   * Name of configuration for this box
+   * Discovery configurations for search page
    */
-  @Input() configuration: string;
-  /**
-   * flag for enable/disable search bar
-   */
-  @Input() searchEnabled = true;
+  @Input() configurations: string[] = [];
 
-
-  @Input() item: Item;
 
 
   ngOnInit() {
+    super.ngOnInit();
     this.searchFilter = `scope=${this.item.id}`;
   }
-
 }

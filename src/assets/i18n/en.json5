@@ -3005,6 +3005,10 @@
 
   "item.page.relationships.isOrgUnitOfProject": "Research Projects",
 
+  "item.page.relationships.RELATION.Person.researchoutputs": "Publications",
+
+  "item.page.relationships.RELATION.Person.projects": "Projects",
+
   "item.page.subject": "Keywords",
 
   "item.page.uri": "URI",
@@ -4620,6 +4624,10 @@
   "resource-policies.table.headers.title.for.community": "Policies for Community",
 
   "resource-policies.table.headers.title.for.collection": "Policies for Collection",
+
+  "RELATION.Person.researchoutputs.search.results.head": "Research Output",
+
+  "RELATION.Person.projects.search.results.head": "Projects",
 
   "root.skip-to-content": "Skip to main content",
 
