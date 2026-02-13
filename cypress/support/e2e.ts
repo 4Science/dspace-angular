@@ -21,6 +21,13 @@ import 'cypress-axe';
 
 import { DSPACE_XSRF_COOKIE } from 'src/app/core/xsrf/xsrf.constants';
 
+// We might receive uncaught exceptions from external libraries (e.g. it happened before with a broken
+// version of the addToAny plugin). These should not cause our tests to fail, so we catch them here.
+Cypress.on('uncaught:exception', (err, runnable) => {
+  // returning false here prevents Cypress from failing the test
+  return false;
+});
+
 // Runs once before all tests
 before(() => {
   // Cypress doesn't have access to the running application in Node.js.
@@ -49,13 +56,6 @@ before(() => {
     }
     cy.task('saveRestBaseDomain', baseDomain);
 
-  });
-
-  // We might receive uncaught exceptions from external libraries (e.g. it happened before with a broken
-  // version of the addToAny plugin). These should not cause our tests to fail, so we catch them here.
-  Cypress.on('uncaught:exception', (err, runnable) => {
-    // returning false here prevents Cypress from failing the test
-    return false;
   });
 });
 
