@@ -2965,7 +2965,15 @@
 
   "item.page.date": "Date",
 
-  "item.page.edit": "Edit this item",
+  "item.page.edit": "Administer",
+
+  "item.page.edit.FULL": "Edit all the details",
+
+  "item.page.edit.OWNER": "Edit",
+
+  "item.page.edit.DIRECTOR": "Edit",
+
+  "item.page.edit.INVESTIGATOR": "Edit",
 
   "item.page.files": "Files",
 
@@ -3343,7 +3351,7 @@
 
   "journal.page.description": "Description",
 
-  "journal.page.edit": "Edit this item",
+  "journal.page.edit": "Administer",
 
   "journal.page.editor": "Editor-in-Chief",
 
@@ -3365,7 +3373,7 @@
 
   "journalissue.page.description": "Description",
 
-  "journalissue.page.edit": "Edit this item",
+  "journalissue.page.edit": "Administer",
 
   "journalissue.page.issuedate": "Issue Date",
 
@@ -3387,7 +3395,7 @@
 
   "journalvolume.page.description": "Description",
 
-  "journalvolume.page.edit": "Edit this item",
+  "journalvolume.page.edit": "Administer",
 
   "journalvolume.page.issuedate": "Issue Date",
 
@@ -3953,7 +3961,7 @@
 
   "orgunit.page.description": "Description",
 
-  "orgunit.page.edit": "Edit this item",
+  "orgunit.page.edit": "Administer",
 
   "orgunit.page.id": "ID",
 
@@ -3981,7 +3989,7 @@
 
   "person.page.birthdate": "Birth Date",
 
-  "person.page.edit": "Edit this item",
+  "person.page.edit": "Administer",
 
   "person.page.email": "Email Address",
 
@@ -4237,7 +4245,7 @@
 
   "project.page.description": "Description",
 
-  "project.page.edit": "Edit this item",
+  "project.page.edit": "Administer",
 
   "project.page.expectedcompletion": "Expected Completion",
 
@@ -4261,7 +4269,7 @@
 
   "publication.page.description": "Description",
 
-  "publication.page.edit": "Edit this item",
+  "publication.page.edit": "Administer",
 
   "publication.page.journal-issn": "Journal ISSN",
 
