@@ -4,6 +4,8 @@ import {
   Input,
 } from '@angular/core';
 
+import { EscapeHtmlPipe } from '../../utils/escape-html.pipe';
+
 @Component({
   selector: 'ds-comcol-page-header',
   styleUrls: ['./comcol-page-header.component.scss'],
