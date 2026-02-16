@@ -21,4 +21,6 @@ ENV NODE_OPTIONS="--max_old_space_size=4096"
 # NOTE: At this time it is only possible to run Docker container in Production mode
 # if you have a public URL. See https://github.com/DSpace/dspace-angular/issues/1485
 ENV NODE_ENV=development
+ENV CI=true
+ENV NO_COLOR=1
 CMD npm run serve -- --host 0.0.0.0
