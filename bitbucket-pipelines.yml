@@ -105,6 +105,7 @@ definitions:
           - node-2024-02-x
           - cypress-2024-02-x
         script:
+          - wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | tee /etc/apt/trusted.gpg.d/google.asc >/dev/null
           - apt-get update && apt-get install -y curl
           - export HASH_COMMIT=${BITBUCKET_COMMIT:0:8}
           - echo "Running tests for commit $HASH_COMMIT"
