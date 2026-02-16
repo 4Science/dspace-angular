@@ -145,7 +145,7 @@ definitions:
           - npx cypress install
           - yarn serve:ssr &
           - echo "Waiting for server to start..."
-          - sleep 10
+          - sleep 60
           - echo "Running Cypress tests..."
           - yarn cypress:run --env chromeFlags="$CHROME_FLAGS"
           - echo "Test execution completed"
