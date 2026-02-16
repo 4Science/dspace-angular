@@ -6621,6 +6621,8 @@
 
   "submission.import-external.source.pubmed": "Pubmed",
 
+  "submission.import-external.source.core": "CORE",
+
   "submission.import-external.source.pubmedeu": "Pubmed Europe",
 
   "submission.import-external.source.lcname": "Library of Congress Names",
