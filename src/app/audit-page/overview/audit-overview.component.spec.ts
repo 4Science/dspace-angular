@@ -1,21 +1,35 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, waitForAsync, } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
+import { createPaginatedList } from '@shared/testing/utils.test';
 import { of } from 'rxjs';
 
-import { AuditDataService, AuditDetails } from '../../core/audit/audit-data.service';
+import {
+  AuditDataService,
+  AuditDetails,
+} from '../../core/audit/audit-data.service';
 import { Audit } from '../../core/audit/model/audit.model';
 import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 import { PaginationService } from '../../core/pagination/pagination.service';
 import { PaginationComponent } from '../../shared/pagination/pagination.component';
-import { createSuccessfulRemoteDataObject, createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
-import { AuditDetailsMock, AuditMock } from '../../shared/testing/audit.mock';
+import {
+  createSuccessfulRemoteDataObject,
+  createSuccessfulRemoteDataObject$,
+} from '../../shared/remote-data.utils';
+import {
+  AuditDetailsMock,
+  AuditMock,
+} from '../../shared/testing/audit.mock';
 import { PaginationServiceStub } from '../../shared/testing/pagination-service.stub';
 import { VarDirective } from '../../shared/utils/var.directive';
 import { AuditOverviewComponent } from './audit-overview.component';
-import { createPaginatedList } from '@shared/testing/utils.test';
 
 fdescribe('AuditOverviewComponent', () => {
   let component: AuditOverviewComponent;

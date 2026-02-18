@@ -1,7 +1,8 @@
-import { Audit } from '../../core/audit/model/audit.model';
-import { EPerson } from '../../core/eperson/models/eperson.model';
 import { AuditDetails } from '@core/audit/audit-data.service';
 import { of } from 'rxjs';
+
+import { Audit } from '../../core/audit/model/audit.model';
+import { EPerson } from '../../core/eperson/models/eperson.model';
 
 export const AuditEPersonMock: EPerson = Object.assign(new EPerson(), {
   handle: null,
