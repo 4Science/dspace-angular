@@ -45,7 +45,7 @@ export type AuditDetails = Audit & {
 
 
 @Injectable({ providedIn: 'root' })
-export class AuditDataService extends IdentifiableDataService<Audit>{
+export class AuditDataService extends IdentifiableDataService<Audit> {
 
   private searchData: SearchDataImpl<Audit>;
   private findAllData: FindAllData<Audit>;
