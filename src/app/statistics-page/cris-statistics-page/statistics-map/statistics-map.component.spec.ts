@@ -9,6 +9,7 @@ import { GoogleChartInterface } from 'ng2-google-charts';
 import { ExportService } from '../../../core/export-service/export.service';
 import { UsageReport } from '../../../core/statistics/models/usage-report.model';
 import { USAGE_REPORT } from '../../../core/statistics/models/usage-report.resource-type';
+import { UsageReportDataService } from '../../../core/statistics/usage-report-data.service';
 import { StatisticsType } from '../statistics-type.model';
 import { StatisticsMapComponent } from './statistics-map.component';
 
@@ -65,10 +66,8 @@ describe('StatisticsMapComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot(), StatisticsMapComponent],
-      providers: [
-        // { provide: ExportService, useValue: exportServiceMock }
-      ],
     })
+      .overrideProvider(UsageReportDataService, { useValue: { findById: jasmine.createSpy('findById') } })
       .compileComponents();
   });
 
