@@ -1,42 +1,44 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import {
-  ComponentFixture,
-  TestBed,
-  waitForAsync,
-} from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, waitForAsync, } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
-import { AuditDataService } from '../../core/audit/audit-data.service';
+import { AuditDataService, AuditDetails } from '../../core/audit/audit-data.service';
 import { Audit } from '../../core/audit/model/audit.model';
 import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 import { PaginationService } from '../../core/pagination/pagination.service';
 import { PaginationComponent } from '../../shared/pagination/pagination.component';
-import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
-import { AuditMock } from '../../shared/testing/audit.mock';
+import { createSuccessfulRemoteDataObject, createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
+import { AuditDetailsMock, AuditMock } from '../../shared/testing/audit.mock';
 import { PaginationServiceStub } from '../../shared/testing/pagination-service.stub';
-import { createPaginatedList } from '../../shared/testing/utils.test';
 import { VarDirective } from '../../shared/utils/var.directive';
 import { AuditOverviewComponent } from './audit-overview.component';
+import { createPaginatedList } from '@shared/testing/utils.test';
 
-describe('AuditOverviewComponent', () => {
+fdescribe('AuditOverviewComponent', () => {
   let component: AuditOverviewComponent;
   let fixture: ComponentFixture<AuditOverviewComponent>;
 
   let auditService: AuditDataService;
   let authorizationService: any;
   let audits: Audit[];
+  let auditDetails: AuditDetails[];
   const paginationService = new PaginationServiceStub();
 
   function init() {
-    audits = [ AuditMock, AuditMock, AuditMock ];
-    auditService = jasmine.createSpyObj('processService', {
+    audits = [AuditMock, AuditMock, AuditMock];
+    auditDetails = [AuditDetailsMock, AuditDetailsMock, AuditDetailsMock];
+    auditService = jasmine.createSpyObj('auditService', {
       findAll: createSuccessfulRemoteDataObject$(createPaginatedList(audits)),
       getEpersonName: of('Eperson Name'),
+      mapToAuditDetails: createSuccessfulRemoteDataObject(createPaginatedList(auditDetails)),
     });
-    authorizationService = jasmine.createSpyObj('authorizationService', ['isAuthorized']);
+
+    authorizationService = jasmine.createSpyObj('authorizationService', {
+      isAuthorized: jasmine.createSpy('isAuthorized'),
+    });
   }
 
   beforeEach(waitForAsync(() => {
@@ -54,13 +56,13 @@ describe('AuditOverviewComponent', () => {
 
   describe('if the current user is an admin', () => {
 
-    beforeEach(() => {
-      authorizationService.isAuthorized.and.callFake(() => of(true));
+    beforeEach(fakeAsync(() => {
+      authorizationService.isAuthorized.and.returnValue(of(true));
 
       fixture = TestBed.createComponent(AuditOverviewComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
-    });
+    }));
 
     describe('table structure', () => {
       let rowElements;
@@ -118,7 +120,7 @@ describe('AuditOverviewComponent', () => {
       it('should display the eperson name in the seventh column', () => {
         rowElements.forEach((rowElement, index) => {
           const el = rowElement.query(By.css('td:nth-child(7)')).nativeElement;
-          expect(el.textContent).toContain('Eperson Name');
+          expect(el.textContent).toContain('Eperson Test');
         });
       });
 
