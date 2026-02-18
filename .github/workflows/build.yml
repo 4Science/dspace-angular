@@ -235,7 +235,7 @@ jobs:
       # the name of the project. If it does, then SSR is working.
       - name: Verify SSR on a Project page
         run: |
-          result=$(wget -O- -q http://127.0.0.1:4000/entities/project/1e3451e4-60d7-46a8-962e-5b94b62c63ff)
+          result=$(wget -O- -q http://127.0.0.1:4000/entities/project/28f8f49a-1aaf-4acc-93a9-203f3cf7ba62)
           echo "$result"
           echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "Test DSC-1819"
 
