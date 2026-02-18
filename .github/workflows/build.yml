@@ -237,7 +237,7 @@ jobs:
         run: |
           result=$(wget -O- -q http://127.0.0.1:4000/entities/project/28f8f49a-1aaf-4acc-93a9-203f3cf7ba62)
           echo "$result"
-          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "Test DSC-1819"
+          echo "$result" | grep -oE "<meta name=\"title\" [^>]*>" | grep "TEST PROJECT"
 
       # Get a specific orgunit in our test data and verify that the <meta name="title"> tag includes
       # the name of the orgunit. If it does, then SSR is working.
