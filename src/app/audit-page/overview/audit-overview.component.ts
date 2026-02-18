@@ -9,15 +9,21 @@ import {
   OnInit,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { getFirstCompletedRemoteData } from '@core/shared/operators';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   combineLatest,
   Observable,
 } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import {
+  map,
+  mergeMap,
+} from 'rxjs/operators';
 
-import { AuditDataService } from '../../core/audit/audit-data.service';
-import { Audit } from '../../core/audit/model/audit.model';
+import {
+  AuditDataService,
+  AuditDetails,
+} from '../../core/audit/audit-data.service';
 import { SortDirection } from '../../core/cache/models/sort-options.model';
 import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../core/data/feature-authorization/feature-id';
@@ -27,7 +33,6 @@ import { RemoteData } from '../../core/data/remote-data';
 import { PaginationService } from '../../core/pagination/pagination.service';
 import { PaginationComponent } from '../../shared/pagination/pagination.component';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
-import { VarDirective } from '../../shared/utils/var.directive';
 
 /**
  * Component displaying a list of all audit in a paginated table
@@ -42,7 +47,6 @@ import { VarDirective } from '../../shared/utils/var.directive';
     TranslateModule,
     RouterLink,
     NgForOf,
-    VarDirective,
     DatePipe,
   ],
   standalone: true,
@@ -52,7 +56,7 @@ export class AuditOverviewComponent implements OnInit {
   /**
    * List of all audits
    */
-  auditsRD$: Observable<RemoteData<PaginatedList<Audit>>>;
+  auditsRD$: Observable<RemoteData<PaginatedList<AuditDetails>>>;
 
   /**
    * Whether user is admin
@@ -106,22 +110,25 @@ export class AuditOverviewComponent implements OnInit {
     this.auditsRD$ = combineLatest([this.isAdmin$, config$]).pipe(
       mergeMap(([isAdmin, config]) => {
         if (isAdmin) {
-          return this.auditService.findAll(config);
+          return this.auditService.findAll(config)
+            .pipe(
+              getFirstCompletedRemoteData(),
+              map(data => this.auditService.mapToAuditDetails(data)),
+            );
         }
       }),
     );
   }
 
-  isCurrentUserAdmin(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf, undefined, undefined);
+  /**
+   * Method to prevent unnecessary for loop re-rendering
+   */
+  trackById(index: number, audit: AuditDetails): string {
+    return audit.id;
   }
 
-  /**
-   * Get the name of an EPerson by ID
-   * @param audit  Audit object
-   */
-  getEpersonName(audit: Audit): Observable<string> {
-    return this.auditService.getEpersonName(audit);
+  isCurrentUserAdmin(): Observable<boolean> {
+    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf, undefined, undefined);
   }
 
 }

@@ -1,28 +1,16 @@
 import { Injectable } from '@angular/core';
-import {
-  Observable,
-  of,
-} from 'rxjs';
-import {
-  map,
-  startWith,
-} from 'rxjs/operators';
+import { Observable, of, } from 'rxjs';
+import { map, startWith, } from 'rxjs/operators';
 
 import { hasValue } from '../../shared/empty.util';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
-import {
-  followLink,
-  FollowLinkConfig,
-} from '../../shared/utils/follow-link-config.model';
+import { followLink, FollowLinkConfig, } from '../../shared/utils/follow-link-config.model';
 import { DSONameService } from '../breadcrumbs/dso-name.service';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { RequestParam } from '../cache/models/request-param.model';
 import { ObjectCacheService } from '../cache/object-cache.service';
 import { DeleteDataImpl } from '../data/base/delete-data';
-import {
-  FindAllData,
-  FindAllDataImpl,
-} from '../data/base/find-all-data';
+import { FindAllData, FindAllDataImpl, } from '../data/base/find-all-data';
 import { IdentifiableDataService } from '../data/base/identifiable-data.service';
 import { SearchDataImpl } from '../data/base/search-data';
 import { FindListOptions } from '../data/find-list-options.model';
@@ -31,15 +19,18 @@ import { RemoteData } from '../data/remote-data';
 import { RequestService } from '../data/request.service';
 import { EPerson } from '../eperson/models/eperson.model';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
-import {
-  getFirstSucceededRemoteDataPayload,
-  getFirstSucceededRemoteDataWithNotEmptyPayload,
-} from '../shared/operators';
+import { getFirstSucceededRemoteDataPayload, } from '../shared/operators';
 import { Audit } from './model/audit.model';
 
 export const AUDIT_PERSON_NOT_AVAILABLE = 'n/a';
 
 export const AUDIT_FIND_BY_OBJECT_SEARCH_METHOD = 'findByObject';
+
+export type AuditDetails = Audit & {
+  epersonName: Observable<string>,
+  subject: Observable<any>
+};
+
 
 @Injectable({ providedIn: 'root' })
 export class AuditDataService extends IdentifiableDataService<Audit>{
@@ -120,7 +111,7 @@ export class AuditDataService extends IdentifiableDataService<Audit>{
 
     // TODO to be reviewed when https://github.com/DSpace/dspace-angular/issues/644 will be resolved
     return audit.eperson.pipe(
-      getFirstSucceededRemoteDataWithNotEmptyPayload(),
+      getFirstSucceededRemoteDataPayload(),
       map((eperson: EPerson) => this.dsoNameService.getName(eperson)),
       startWith(AUDIT_PERSON_NOT_AVAILABLE));
   }
@@ -154,6 +145,26 @@ export class AuditDataService extends IdentifiableDataService<Audit>{
     } else {
       return null;
     }
+  }
+
+  mapToAuditDetails(rdAudit: RemoteData<PaginatedList<Audit>>): RemoteData<PaginatedList<AuditDetails>> {
+    return Object.assign(
+      rdAudit,
+      {
+        payload: Object.assign(rdAudit?.payload, {
+            page: (rdAudit?.payload?.page || [])?.map(
+              (audit) => {
+                return Object.assign(
+                  audit, {
+                    epersonName: this.getEpersonName(audit),
+                    subject: this.getOtherObject(audit, audit.objectUUID)
+                  });
+              }
+            )
+          }
+        )
+      }
+    );
   }
 
 }
