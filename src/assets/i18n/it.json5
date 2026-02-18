@@ -8769,7 +8769,7 @@
   "suggestion.type.orcidWorks": "Publication",
 
   // "suggestion.type.openalex" : "OpenAlex"
-  "suggestion.type.openalex" : "OpenAlex",
+  "suggestion.type.openalex": "OpenAlex",
 
   // "register-email.title": "New user registration",
   "register-email.title": "Registrazione nuovo utente",
@@ -15187,7 +15187,7 @@
   "item.preview.organization.alternateName": "Alternative name",
 
   // "item.preview.dc.identifier.openalex" : "OpenAlex ID"
-  "item.preview.dc.identifier.openalex" : "OpenAlex ID",
+  "item.preview.dc.identifier.openalex": "OpenAlex ID",
 
 
 
