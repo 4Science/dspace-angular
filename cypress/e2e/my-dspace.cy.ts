@@ -119,7 +119,7 @@ describe('My DSpace page', () => {
     // Open the New Import dropdown
     cy.get('button[data-test="import-dropdown"]').click();
     // Click on the "Item" type in that dropdown
-    cy.get('#importControlsDropdownMenu button[title="Equipment"]').click();
+    cy.get('#importControlsDropdownMenu button[title="Funding"]').click();
 
     // New URL should include /import-external, as we've moved to the import page
     cy.url().should('include', '/import-external');
