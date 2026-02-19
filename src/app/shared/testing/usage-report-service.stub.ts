@@ -1,4 +1,4 @@
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { createSuccessfulRemoteDataObject$ } from '../remote-data.utils';
 
@@ -11,7 +11,7 @@ export class UsageReportServiceStub {
   }
 
   searchStatistics(uri: string, page: number, size: number, categoryId?: string, startDate?: string, endDate?: string) {
-    return observableOf(this._getReports());
+    return of(this._getReports());
   }
 
   _getReports() {

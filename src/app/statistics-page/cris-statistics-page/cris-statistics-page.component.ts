@@ -67,9 +67,9 @@ import { FilterMapPipe } from './statistics-pipes/filter-map.pipe';
 
 @Component({
   selector: 'ds-cris-statistics-page',
-  standalone: true,
   templateUrl: './cris-statistics-page.component.html',
   styleUrls: ['./cris-statistics-page.component.scss'],
+  standalone: true,
   imports: [
     AsyncPipe,
     FilterMapPipe,
