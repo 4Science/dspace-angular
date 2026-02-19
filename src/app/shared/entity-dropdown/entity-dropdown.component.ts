@@ -25,7 +25,6 @@ import {
   reduce,
   startWith,
   switchMap,
-  take,
   tap,
 } from 'rxjs/operators';
 import { SortPipe } from 'src/app/shared/utils/sort.pipe';
@@ -37,14 +36,12 @@ import {
   PaginatedList,
 } from '../../core/data/paginated-list.model';
 import { RemoteData } from '../../core/data/remote-data';
-import {
-  ItemExportFormatMolteplicity,
-  ItemExportFormatService,
-} from '../../core/itemexportformat/item-export-format.service';
+import { ItemExportFormatService } from '../../core/itemexportformat/item-export-format.service';
 import { ItemType } from '../../core/shared/item-relationships/item-type.model';
 import { getFirstSucceededRemoteWithNotEmptyData } from '../../core/shared/operators';
 import {
   hasValue,
+  isEmpty,
   isNotNull,
 } from '../empty.util';
 import { ThemedLoadingComponent } from '../loading/themed-loading.component';
@@ -87,7 +84,8 @@ export class EntityDropdownComponent implements OnInit, OnDestroy {
   public searchListEntity: ItemType[] = [];
 
   /**
-   * TRUE if the parent operation is a 'new submission' operation, FALSE otherwise (eg.: is an 'Import metadata from an external source' operation).
+   * TRUE if the parent operation is a 'new submission' operation, FALSE otherwise (eg.: is an 'Import metadata from an external source'
+   * operation).
    */
   @Input() isSubmission: boolean;
 
@@ -129,8 +127,6 @@ export class EntityDropdownComponent implements OnInit, OnDestroy {
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private entityTypeService: EntityTypeDataService,
-    private itemExportFormatService: ItemExportFormatService,
-    private el: ElementRef,
     private translate: TranslateService,
   ) { }
 
@@ -193,41 +189,24 @@ export class EntityDropdownComponent implements OnInit, OnDestroy {
    */
   public populateEntityList(page: number) {
     this.isLoadingList.next(true);
-    let searchListEntity$;
+    let searchListEntity$: Observable<RemoteData<PaginatedList<ItemType>>>;
+    // Set the pagination info
+    const findOptions: FindListOptions = {
+      elementsPerPage: 10,
+      currentPage: page,
+    };
     if (this.isSubmission) {
-      // Set the pagination info
-      const findOptions: FindListOptions = {
-        elementsPerPage: 10,
-        currentPage: page,
-      };
       searchListEntity$ =
-        this.entityTypeService.getAllAuthorizedRelationshipType(findOptions)
-          .pipe(
-            getFirstSucceededRemoteWithNotEmptyData(),
-            tap(entityType => {
-              if ((this.searchListEntity.length + findOptions.elementsPerPage) >= entityType.payload.totalElements) {
-                this.hasNextPage = false;
-              }
-            }),
-          );
+        this.entityTypeService.getAllAuthorizedRelationshipType(findOptions);
     } else {
       searchListEntity$ =
-        this.itemExportFormatService.byEntityTypeAndMolteplicity(null, ItemExportFormatMolteplicity.MULTIPLE)
-          .pipe(
-            take(1),
-            map((formatTypes: any) => {
-              const entityList: ItemType[] = Object.keys(formatTypes)
-                .filter((entityType: string) => isNotNull(entityType) && entityType !== 'null')
-                .map((entityType: string) => ({
-                  id: entityType,
-                  label: entityType,
-                } as any));
-              return createSuccessfulRemoteDataObject(buildPaginatedList(null, entityList));
-            }),
-            tap(() => this.hasNextPage = false),
-          );
+        this.entityTypeService.getAllAuthorizedRelationshipTypeImport(findOptions);
     }
+
     this.searchListEntity$ = searchListEntity$.pipe(
+      getFirstSucceededRemoteWithNotEmptyData(),
+      map((formatTypes: RemoteData<PaginatedList<ItemType>>) =>this.parseItemTypesResponse(formatTypes)),
+      tap((entityTypes) => this.hasNextPages(findOptions, entityTypes)),
       switchMap((entityType: RemoteData<PaginatedList<ItemType>>) => entityType.payload.page),
       map((item: ItemType) => {
         return {
@@ -239,6 +218,7 @@ export class EntityDropdownComponent implements OnInit, OnDestroy {
       reduce((acc: any, value: any) => [...acc, value], []),
       startWith([]),
     );
+
     this.subs.push(
       this.searchListEntity$.subscribe({
         next: (result: ItemType[]) => {
@@ -247,6 +227,26 @@ export class EntityDropdownComponent implements OnInit, OnDestroy {
         complete: () => { this.hideShowLoader(false); this.changeDetectorRef.detectChanges(); },
       }),
     );
+  }
+
+  private parseItemTypesResponse(formatTypes: RemoteData<PaginatedList<ItemType>>) {
+    if (formatTypes.statusCode !== 200) {
+      return createSuccessfulRemoteDataObject(buildPaginatedList(null, []));
+    }
+    const entityList: ItemType[] = (formatTypes?.payload?.page || [])
+      .filter(itemType => isNotNull(itemType?.id));
+    return createSuccessfulRemoteDataObject(buildPaginatedList(null, entityList));
+  }
+
+  private hasNextPages<A>(findOptions: FindListOptions, entityType: RemoteData<PaginatedList<A>>) {
+    if (
+      findOptions.elementsPerPage > 0 &&
+      (isEmpty(entityType?.payload?.totalElements) || entityType.payload.totalElements < findOptions.elementsPerPage)
+    ) {
+      this.hasNextPage = false;
+    } else {
+      this.hasNextPage = true;
+    }
   }
 
   /**
