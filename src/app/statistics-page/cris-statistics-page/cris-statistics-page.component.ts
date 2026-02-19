@@ -23,6 +23,7 @@ import {
 } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import {
+  BehaviorSubject,
   combineLatest,
   Observable,
   of,
@@ -47,6 +48,7 @@ import {
   getRemoteDataPayload,
 } from '../../core/shared/operators';
 import { StatisticsCategory } from '../../core/statistics/models/statistics-category.model';
+import { UsageReport } from '../../core/statistics/models/usage-report.model';
 import {
   CleanCategoryReportAction,
   SetCategoryReportAction,
@@ -65,6 +67,7 @@ import { FilterMapPipe } from './statistics-pipes/filter-map.pipe';
 
 @Component({
   selector: 'ds-cris-statistics-page',
+  standalone: true,
   templateUrl: './cris-statistics-page.component.html',
   styleUrls: ['./cris-statistics-page.component.scss'],
   imports: [
@@ -131,6 +134,11 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
    * This property holds a selected report id
    */
   selectedReportId: string;
+
+  /**
+   * The fully loaded report (with points) for the currently selected chart report.
+   */
+  selectedFullReport$ = new BehaviorSubject<UsageReport>(null);
 
   constructor(
     protected route: ActivatedRoute,
@@ -256,6 +264,7 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
       } else {
         this.setStatisticsState(reportId, categoryId);
       }
+      this.loadFullReport(this.selectedReportId || reportId || report[0]?.id);
     });
   }
 
@@ -266,7 +275,7 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
   getReports$(categoryId) {
     return this.scope$.pipe(
       switchMap((scope) => {
-        return this.usageReportService.searchStatistics(scope._links.self.href,0,50,categoryId,this.parseDate(this.dateFrom),this.parseDate(this.dateTo));
+        return this.usageReportService.searchStatistics(scope._links.self.href, 0, 50, categoryId, this.parseDate(this.dateFrom), this.parseDate(this.dateTo), true);
       }),
     );
   }
@@ -318,6 +327,25 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
     this.getCategoryId().subscribe((categoryId) => {
       this.setStatisticsState(reportId, categoryId);
       this.selectedReportId = reportId;
+      this.loadFullReport(reportId);
+    });
+  }
+
+  /**
+   * Load the full report (with points) for the given report id via findOne.
+   * @param reportId the composite id (uuid_reportKey)
+   */
+  loadFullReport(reportId: string) {
+    if (!reportId) {
+      return;
+    }
+    this.selectedFullReport$.next(null);
+    this.usageReportService.findById(reportId, false, true).pipe(
+      getFirstSucceededRemoteData(),
+      getRemoteDataPayload(),
+      take(1),
+    ).subscribe((fullReport: UsageReport) => {
+      this.selectedFullReport$.next(fullReport);
     });
   }
 
