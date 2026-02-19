@@ -17,9 +17,11 @@ import {
 } from '@ngx-translate/core';
 import { getTestScheduler } from 'jasmine-marbles';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
+import { of } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 
 import { EntityTypeDataService } from '../../core/data/entity-type-data.service';
+import { ItemExportFormatService } from '../../core/itemexportformat/item-export-format.service';
 import {
   ItemExportFormat,
   ItemExportFormatMap,
@@ -108,6 +110,10 @@ describe('EntityDropdownComponent', () => {
     getAllAuthorizedRelationshipTypeImport: jasmine.createSpy('getAllAuthorizedRelationshipTypeImport'),
   });
 
+  const itemExportFormatServiceMock: any = jasmine.createSpyObj('ItemExportFormatService', {
+    byEntityTypeAndMolteplicity: jasmine.createSpy('byEntityTypeAndMolteplicity'),
+  });
+
   const translateServiceMock: any = {
     instant(name) {
       return 'Statistics';
@@ -130,6 +136,7 @@ describe('EntityDropdownComponent', () => {
       ],
       providers: [
         { provide: EntityTypeDataService, useValue: entityTypeServiceMock },
+        { provide: ItemExportFormatService, useValue: itemExportFormatServiceMock },
         { provide: TranslateService, useValue: translateServiceMock },
         ChangeDetectorRef,
       ],
@@ -145,6 +152,7 @@ describe('EntityDropdownComponent', () => {
     componentAsAny = fixture.componentInstance;
     componentAsAny.entityTypeService.getAllAuthorizedRelationshipType.and.returnValue(paginatedEntitiesRD$);
     componentAsAny.entityTypeService.getAllAuthorizedRelationshipTypeImport.and.returnValue(paginatedEntitiesRD$);
+    componentAsAny.itemExportFormatService.byEntityTypeAndMolteplicity.and.returnValue(of(entityFormatList));
     component.isSubmission = true;
   });
 
@@ -162,6 +170,24 @@ describe('EntityDropdownComponent', () => {
     expect(component.resetPagination).toHaveBeenCalled();
     expect(component.populateEntityList).toHaveBeenCalled();
     expect((component as any).entityTypeService.getAllAuthorizedRelationshipType).toHaveBeenCalled();
+  });
+
+  it('should init component with entities list when isImportFromExternalSource is true', () => {
+    component.isSubmission = false;
+    component.isImportFromExternalSource = true;
+    spyOn(component.subs, 'push');
+    spyOn(component, 'resetPagination');
+    spyOn(component, 'populateEntityList').and.callThrough();
+
+    scheduler.schedule(() => fixture.detectChanges());
+    scheduler.flush();
+    const elements = fixture.debugElement.queryAll(By.css('.entity-item'));
+
+    expect(elements.length).toEqual(5);
+    expect(component.subs.push).toHaveBeenCalled();
+    expect(component.resetPagination).toHaveBeenCalled();
+    expect(component.populateEntityList).toHaveBeenCalled();
+    expect((component as any).entityTypeService.getAllAuthorizedRelationshipTypeImport).toHaveBeenCalled();
   });
 
   it('should trigger onSelect method when select a new entity from list', () => {
@@ -202,4 +228,12 @@ describe('EntityDropdownComponent', () => {
     expect(component.searchListEntity).toEqual([]);
   });
 
+  it('should invoke the method byEntityTypeAndMolteplicity of EntityTypeService when isSubmission is false', () => {
+    component.isSubmission = false;
+
+    scheduler.schedule(() => fixture.detectChanges());
+    scheduler.flush();
+
+    expect((component as any).itemExportFormatService.byEntityTypeAndMolteplicity).toHaveBeenCalled();
+  });
 });
