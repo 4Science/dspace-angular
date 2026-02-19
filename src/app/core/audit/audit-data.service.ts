@@ -30,6 +30,7 @@ import { PaginatedList } from '../data/paginated-list.model';
 import { RemoteData } from '../data/remote-data';
 import { RequestService } from '../data/request.service';
 import { EPerson } from '../eperson/models/eperson.model';
+import { DSpaceObject } from '../shared/dspace-object.model';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { getFirstSucceededRemoteDataPayload } from '../shared/operators';
 import { Audit } from './model/audit.model';
@@ -40,7 +41,7 @@ export const AUDIT_FIND_BY_OBJECT_SEARCH_METHOD = 'findByObject';
 
 export type AuditDetails = Audit & {
   epersonName: Observable<string>,
-  subject: Observable<any>
+  subject: Observable<DSpaceObject>
 };
 
 
@@ -163,13 +164,13 @@ export class AuditDataService extends IdentifiableDataService<Audit> {
     return Object.assign(
       rdAudit,
       {
-        payload: Object.assign(rdAudit?.payload, {
+        payload: Object.assign(rdAudit?.payload || {}, {
           page: (rdAudit?.payload?.page || [])?.map(
             (audit) => {
               return Object.assign(
                 audit, {
                   epersonName: this.getEpersonName(audit),
-                  subject: this.getOtherObject(audit, audit.objectUUID),
+                  subject: this.getOtherObject(audit, audit.objectUUID) as Observable<DSpaceObject>,
                 });
             },
           ),

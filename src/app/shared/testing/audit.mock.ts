@@ -1,6 +1,6 @@
-import { AuditDetails } from '@core/audit/audit-data.service';
 import { of } from 'rxjs';
 
+import { AuditDetails } from '../../core/audit/audit-data.service';
 import { Audit } from '../../core/audit/model/audit.model';
 import { EPerson } from '../../core/eperson/models/eperson.model';
 

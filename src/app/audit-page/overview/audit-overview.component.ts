@@ -7,7 +7,6 @@ import {
   OnInit,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { getFirstCompletedRemoteData } from '@core/shared/operators';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   combineLatest,
@@ -29,6 +28,7 @@ import { FindListOptions } from '../../core/data/find-list-options.model';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { RemoteData } from '../../core/data/remote-data';
 import { PaginationService } from '../../core/pagination/pagination.service';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { PaginationComponent } from '../../shared/pagination/pagination.component';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 

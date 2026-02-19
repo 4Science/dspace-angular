@@ -5,7 +5,8 @@
 
   @if (object) {
     <h4 class="mt-4 mb-4">{{ object.name }} (<em>{{object.type}}</em>)</h4>
-    @let audits = (auditsRD$ | async)?.payload;
+    @let auditRD = (auditsRD$ | async);
+    @let audits = auditRD?.payload;
     @if (audits) {
       @if (audits.totalElements === 0) {
         <div>
@@ -30,7 +31,7 @@
                 </tr>
               </thead>
               <tbody>
-                @for (audit of audits.page; track audit) {
+                @for (audit of audits.page; track audit.id) {
                   <tr>
                     <!-- <td><a [routerLink]="['/auditlogs/', audit.id]">{{audit.id}}</a></td> -->
                     <td>{{ audit.eventType }}</td>
@@ -45,13 +46,10 @@
                     <td>{{ audit.timeStamp | date:dateFormat}}</td>
                     <td>
                       @if (object.id === audit.objectUUID) {
-                        <span>
-                          <!-- object.id === audit.objectUUID -->
-                          @let subject = (audit.subject | async);
-                          @if (subject) {
-                            {{ subject.name }} <em>({{ subject.type }})</em>
-                          }
-                        </span>
+                        @let subject =  $any(audit.subject | async);
+                        @if (subject) {
+                          <span>{{ subject?.name }} <em>({{ subject?.type }})</em></span>
+                        }
                       }
                       @if (object.id === audit.subjectUUID) {
                         <span>
@@ -69,7 +67,7 @@
       <a class="btn btn-light mt-3" [routerLink]="['/items', object.id]"><i class="fas fa-arrow-left"></i> Back to Item</a>
       <!-- <a class="btn btn-light mt-3" [routerLink]="'/auditlogs'">{{'audit.detail.back' | translate}}</a> -->
     }
-    @if (audits?.statusCode === 404) {
+    @if (auditRD?.statusCode === 404) {
       <h4 class="mt-4 mb-4">{{'audit.object.overview.disabled.message' | translate}}</h4>
     }
   }
