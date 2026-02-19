@@ -8,7 +8,6 @@ import {
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { createPaginatedList } from '@shared/testing/utils.test';
 import { of } from 'rxjs';
 
 import {
@@ -28,6 +27,7 @@ import {
   AuditMock,
 } from '../../shared/testing/audit.mock';
 import { PaginationServiceStub } from '../../shared/testing/pagination-service.stub';
+import { createPaginatedList } from '../../shared/testing/utils.test';
 import { VarDirective } from '../../shared/utils/var.directive';
 import { AuditOverviewComponent } from './audit-overview.component';
 
