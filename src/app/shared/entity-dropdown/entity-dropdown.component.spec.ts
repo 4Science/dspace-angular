@@ -172,6 +172,24 @@ describe('EntityDropdownComponent', () => {
     expect((component as any).entityTypeService.getAllAuthorizedRelationshipType).toHaveBeenCalled();
   });
 
+  it('should init component with entities list when isImportFromExternalSource is true', () => {
+    component.isSubmission = false;
+    component.isImportFromExternalSource = true;
+    spyOn(component.subs, 'push');
+    spyOn(component, 'resetPagination');
+    spyOn(component, 'populateEntityList').and.callThrough();
+
+    scheduler.schedule(() => fixture.detectChanges());
+    scheduler.flush();
+    const elements = fixture.debugElement.queryAll(By.css('.entity-item'));
+
+    expect(elements.length).toEqual(5);
+    expect(component.subs.push).toHaveBeenCalled();
+    expect(component.resetPagination).toHaveBeenCalled();
+    expect(component.populateEntityList).toHaveBeenCalled();
+    expect((component as any).entityTypeService.getAllAuthorizedRelationshipTypeImport).toHaveBeenCalled();
+  });
+
   it('should trigger onSelect method when select a new entity from list', () => {
     scheduler.schedule(() => fixture.detectChanges());
     scheduler.flush();

@@ -1,9 +1,11 @@
 import {
   AsyncPipe,
+  isPlatformBrowser,
   NgClass,
 } from '@angular/common';
 import {
   Component,
+  HostBinding,
   Inject,
   Input,
   OnInit,
@@ -70,6 +72,8 @@ import { SystemWideAlertBannerComponent } from '../system-wide-alert/alert-banne
   ],
 })
 export class RootComponent implements OnInit {
+  @HostBinding('attr.data-test') dataTestAttribute: string | null = null;
+
   theme: Observable<ThemeConfig> = of({} as any);
   isSidebarVisible$: Observable<boolean>;
   slideSidebarOver$: Observable<boolean>;
@@ -99,6 +103,7 @@ export class RootComponent implements OnInit {
     @Inject(NativeWindowService) private _window: NativeWindowRef,
   ) {
     this.notificationOptions = environment.notifications;
+    this.dataTestAttribute = isPlatformBrowser(platformId) ? 'ds-hydrated' : null;
   }
 
   ngOnInit() {

@@ -1,4 +1,5 @@
-@if ((moreThanOne$ | async) !== true) {
+@let moreThanOne = moreThanOne$ | async;
+@if (moreThanOne !== true) {
   <div class="add">
     <button class="btn btn-lg btn-outline-primary mt-1 ms-2"
       [attr.aria-label]="'mydspace.new-submission-external' | translate" [dsBtnDisabled]="(initialized$ | async) !== true"
@@ -8,7 +9,7 @@
     </button>
   </div>
 }
-@if ((moreThanOne$ | async)) {
+@if (moreThanOne === true) {
   <div class="add w-100" display="dynamic" placement="bottom-right"
     ngbDropdown
     >
@@ -24,7 +25,7 @@
       class="dropdown-menu p-0"
       id="importControlsDropdownMenu"
       aria-labelledby="dropdownImport">
-      <ds-entity-dropdown [isSubmission]="false" (selectionChange)="openPage($event)"></ds-entity-dropdown>
+      <ds-entity-dropdown [isSubmission]="false" [isImportFromExternalSource]="true" (selectionChange)="openPage($event)"></ds-entity-dropdown>
     </div>
   </div>
 }

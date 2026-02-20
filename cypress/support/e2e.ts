@@ -21,6 +21,12 @@ import 'cypress-axe';
 
 import { DSPACE_XSRF_COOKIE } from 'src/app/core/xsrf/xsrf.constants';
 
+Cypress.Commands.overwrite('visit', (originalFn, url, options) => {
+  return originalFn(url, options).then(() => {
+    cy.get('[data-test="ds-hydrated"]');
+  });
+});
+
 // We might receive uncaught exceptions from external libraries (e.g. it happened before with a broken
 // version of the addToAny plugin). These should not cause our tests to fail, so we catch them here.
 Cypress.on('uncaught:exception', (err, runnable) => {
