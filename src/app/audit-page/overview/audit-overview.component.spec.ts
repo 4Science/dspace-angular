@@ -31,7 +31,7 @@ import { createPaginatedList } from '../../shared/testing/utils.test';
 import { VarDirective } from '../../shared/utils/var.directive';
 import { AuditOverviewComponent } from './audit-overview.component';
 
-fdescribe('AuditOverviewComponent', () => {
+describe('AuditOverviewComponent', () => {
   let component: AuditOverviewComponent;
   let fixture: ComponentFixture<AuditOverviewComponent>;
 
