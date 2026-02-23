@@ -28,8 +28,10 @@ import {
 } from 'rxjs/operators';
 
 import { COLLECTION_PAGE_LINKS_TO_FOLLOW } from '../../collection-page/collection-page.resolver';
-import { AuditDataService } from '../../core/audit/audit-data.service';
-import { Audit } from '../../core/audit/model/audit.model';
+import {
+  AuditDataService,
+  AuditDetails,
+} from '../../core/audit/audit-data.service';
 import { AuthService } from '../../core/auth/auth.service';
 import { SortDirection } from '../../core/cache/models/sort-options.model';
 import { CollectionDataService } from '../../core/data/collection-data.service';
@@ -46,7 +48,6 @@ import { Item } from '../../core/shared/item.model';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { PaginationComponent } from '../../shared/pagination/pagination.component';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
-import { VarDirective } from '../../shared/utils/var.directive';
 
 /**
  * Component displaying a list of all audit about a object in a paginated table
@@ -60,7 +61,6 @@ import { VarDirective } from '../../shared/utils/var.directive';
     AsyncPipe,
     TranslateModule,
     NgForOf,
-    VarDirective,
     RouterLink,
     DatePipe,
   ],
@@ -76,7 +76,7 @@ export class ObjectAuditOverviewComponent implements OnInit {
   /**
    * List of all audits
    */
-  auditsRD$: Observable<RemoteData<PaginatedList<Audit>>>;
+  auditsRD$: Observable<RemoteData<PaginatedList<AuditDetails>>>;
 
   /**
    * The current pagination configuration for the page used by the FindAll method
@@ -112,7 +112,8 @@ export class ObjectAuditOverviewComponent implements OnInit {
               protected authorizationService: AuthorizationDataService,
               protected paginationService: PaginationService,
               protected collectionDataService: CollectionDataService,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.pipe(
@@ -148,15 +149,20 @@ export class ObjectAuditOverviewComponent implements OnInit {
 
 
     this.auditsRD$ = combineLatest([isAdmin$, config$, this.owningCollection$, parentCommunity$]).pipe(
-      mergeMap(([isAdmin, config,  owningCollection, parentCommunity]) => {
+      mergeMap(([isAdmin, config, owningCollection, parentCommunity]) => {
         if (isAdmin) {
-          return this.auditService.findByObject(this.object.id, config, owningCollection.id, parentCommunity.id);
+          return this.auditService.findByObject(this.object.id, config, owningCollection.id, parentCommunity.id)
+            .pipe(
+              getFirstCompletedRemoteData(),
+              map(data => this.auditService.mapToAuditDetails(data)),
+            );
         }
 
         return of(null);
       }),
     );
   }
+
 
   isCurrentUserAdmin(): Observable<boolean> {
     return combineLatest([
@@ -172,15 +178,11 @@ export class ObjectAuditOverviewComponent implements OnInit {
   }
 
   /**
-   * Get the name of an EPerson by ID
-   * @param audit  Audit object
+   * Method to prevent unnecessary for loop re-rendering
    */
-  getEpersonName(audit: Audit): Observable<string> {
-    return this.auditService.getEpersonName(audit);
+  trackById(index: number, audit: AuditDetails): string {
+    return audit.id;
   }
 
-  getOtherObject(audit: Audit, contextObjectId: string): Observable<any> {
-    return this.auditService.getOtherObject(audit, contextObjectId);
-  }
 
 }

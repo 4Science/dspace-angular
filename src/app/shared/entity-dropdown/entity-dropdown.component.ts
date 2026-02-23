@@ -91,6 +91,12 @@ export class EntityDropdownComponent implements OnInit, OnDestroy {
   @Input() isSubmission: boolean;
 
   /**
+   * TRUE if the main operation is "Import metadata from an external source", FALSE otherwise.
+   * Used to determine which list type to populate.
+   */
+  @Input() isImportFromExternalSource: boolean;
+
+  /**
    * The entity to output to the parent component
    */
   @Output() selectionChange = new EventEmitter<ItemType>();
@@ -192,23 +198,26 @@ export class EntityDropdownComponent implements OnInit, OnDestroy {
    */
   public populateEntityList(page: number) {
     this.isLoadingList.next(true);
-    let searchListEntity$;
-    if (this.isSubmission) {
+    let searchListEntity$: Observable<RemoteData<PaginatedList<ItemType>>>;
+    if (this.isSubmission || this.isImportFromExternalSource) {
       // Set the pagination info
       const findOptions: FindListOptions = {
         elementsPerPage: 10,
         currentPage: page,
       };
-      searchListEntity$ =
-        this.entityTypeService.getAllAuthorizedRelationshipType(findOptions)
-          .pipe(
-            getFirstSucceededRemoteWithNotEmptyData(),
-            tap(entityType => {
-              if ((this.searchListEntity.length + findOptions.elementsPerPage) >= entityType.payload.totalElements) {
-                this.hasNextPage = false;
-              }
-            }),
-          );
+
+      searchListEntity$ = this.isSubmission ?
+        this.entityTypeService.getAllAuthorizedRelationshipType(findOptions) :
+        this.entityTypeService.getAllAuthorizedRelationshipTypeImport(findOptions);
+
+      searchListEntity$ = searchListEntity$.pipe(
+        getFirstSucceededRemoteWithNotEmptyData(),
+        tap(entityType => {
+          if ((this.searchListEntity.length + findOptions.elementsPerPage) >= entityType.payload.totalElements) {
+            this.hasNextPage = false;
+          }
+        }),
+      );
     } else {
       searchListEntity$ =
         this.itemExportFormatService.byEntityTypeAndMolteplicity(null, ItemExportFormatMolteplicity.MULTIPLE)
