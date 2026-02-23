@@ -13,6 +13,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
 import { APP_CONFIG } from '../../../../../../config/app-config.interface';
+import { of as observableOf } from 'rxjs';
+import { ItemSearchResult } from '../../../../../shared/object-collection/shared/item-search-result.model';
+import { JournalIssueSearchResultListElementComponent } from './journal-issue-search-result-list-element.component';
+import { Item } from '../../../../../core/shared/item.model';
+import { TruncatePipe } from '../../../../../shared/utils/truncate.pipe';
+import { EscapeHtmlPipe } from '../../../../../shared/utils/escape-html.pipe';
+import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
 import { DSONameService } from '../../../../../core/breadcrumbs/dso-name.service';
 import { Item } from '../../../../../core/shared/item.model';
 import { OrejimeService } from '../../../../../shared/cookies/orejime.service';

@@ -54,6 +54,7 @@ import { TruncatableService } from '../../../../truncatable/truncatable.service'
 import { TruncatablePartComponent } from '../../../../truncatable/truncatable-part/truncatable-part.component';
 import { FollowLinkConfig } from '../../../../utils/follow-link-config.model';
 import { TruncatePipe } from '../../../../utils/truncate.pipe';
+import { EscapeHtmlPipe } from '../../../../utils/escape-html.pipe';
 import { ItemSearchResultGridElementComponent } from './item-search-result-grid-element.component';
 
 const mockItemWithMetadata: ItemSearchResult = new ItemSearchResult();

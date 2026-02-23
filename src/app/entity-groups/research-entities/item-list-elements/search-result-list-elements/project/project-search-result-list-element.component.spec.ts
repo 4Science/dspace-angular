@@ -7,6 +7,17 @@ import {
   TestBed,
   waitForAsync,
 } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ChangeDetectionStrategy, NO_ERRORS_SCHEMA } from '@angular/core';
+import { of as observableOf } from 'rxjs';
+import { ItemSearchResult } from '../../../../../shared/object-collection/shared/item-search-result.model';
+import { ProjectSearchResultListElementComponent } from './project-search-result-list-element.component';
+import { Item } from '../../../../../core/shared/item.model';
+import { TruncatePipe } from '../../../../../shared/utils/truncate.pipe';
+import { EscapeHtmlPipe } from '../../../../../shared/utils/escape-html.pipe';
+import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
+import { DSONameService } from '../../../../../core/breadcrumbs/dso-name.service';
+import { DSONameServiceMock } from '../../../../../shared/mocks/dso-name.service.mock';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';

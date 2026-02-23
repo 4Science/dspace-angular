@@ -18,6 +18,13 @@ import {
   APP_CONFIG,
   APP_DATA_SERVICES_MAP,
 } from '../../../../../../config/app-config.interface';
+import { of as observableOf } from 'rxjs';
+import { JournalSearchResultListElementComponent } from './journal-search-result-list-element.component';
+import { Item } from '../../../../../core/shared/item.model';
+import { TruncatePipe } from '../../../../../shared/utils/truncate.pipe';
+import { EscapeHtmlPipe } from '../../../../../shared/utils/escape-html.pipe';
+import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
+import { ItemSearchResult } from '../../../../../shared/object-collection/shared/item-search-result.model';
 import { DSONameService } from '../../../../../core/breadcrumbs/dso-name.service';
 import { Item } from '../../../../../core/shared/item.model';
 import { DSONameServiceMock } from '../../../../../shared/mocks/dso-name.service.mock';
