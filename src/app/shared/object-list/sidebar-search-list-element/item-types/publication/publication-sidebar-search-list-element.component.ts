@@ -12,6 +12,7 @@ import { ViewMode } from '../../../../../core/shared/view-mode.model';
 import { ItemSearchResult } from '../../../../object-collection/shared/item-search-result.model';
 import { listableObjectComponent } from '../../../../object-collection/shared/listable-object/listable-object.decorator';
 import { TruncatablePartComponent } from '../../../../truncatable/truncatable-part/truncatable-part.component';
+import { EscapeHtmlPipe } from '../../../../utils/escape-html.pipe';
 import { SidebarSearchListElementComponent } from '../../sidebar-search-list-element.component';
 
 @listableObjectComponent('PublicationSearchResult', ViewMode.ListElement, Context.SideBarSearchModal)
@@ -22,7 +23,7 @@ import { SidebarSearchListElementComponent } from '../../sidebar-search-list-ele
   selector: 'ds-publication-sidebar-search-list-element',
   templateUrl: '../../sidebar-search-list-element.component.html',
   standalone: true,
-  imports: [TruncatablePartComponent, NgClass, NgIf, AsyncPipe, TranslateModule],
+  imports: [EscapeHtmlPipe, TruncatablePartComponent, NgClass, NgIf, AsyncPipe, TranslateModule],
 })
 /**
  * Component displaying a list element for a {@link ItemSearchResult} of type "Publication" within the context of

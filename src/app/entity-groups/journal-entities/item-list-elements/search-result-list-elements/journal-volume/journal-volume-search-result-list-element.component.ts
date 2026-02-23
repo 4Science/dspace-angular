@@ -13,6 +13,7 @@ import { listableObjectComponent } from '../../../../../shared/object-collection
 import { ItemSearchResultListElementComponent } from '../../../../../shared/object-list/search-result-list-element/item-search-result/item-types/item/item-search-result-list-element.component';
 import { TruncatableComponent } from '../../../../../shared/truncatable/truncatable.component';
 import { TruncatablePartComponent } from '../../../../../shared/truncatable/truncatable-part/truncatable-part.component';
+import { EscapeHtmlPipe } from '../../../../../shared/utils/escape-html.pipe';
 import { ThemedThumbnailComponent } from '../../../../../thumbnail/themed-thumbnail.component';
 
 @listableObjectComponent('JournalVolumeSearchResult', ViewMode.ListElement)
@@ -21,7 +22,7 @@ import { ThemedThumbnailComponent } from '../../../../../thumbnail/themed-thumbn
   styleUrls: ['./journal-volume-search-result-list-element.component.scss'],
   templateUrl: './journal-volume-search-result-list-element.component.html',
   standalone: true,
-  imports: [NgIf, RouterLink, ThemedThumbnailComponent, NgClass, ThemedBadgesComponent, TruncatableComponent, TruncatablePartComponent, NgFor, AsyncPipe],
+  imports: [EscapeHtmlPipe, NgIf, RouterLink, ThemedThumbnailComponent, NgClass, ThemedBadgesComponent, TruncatableComponent, TruncatablePartComponent, NgFor, AsyncPipe],
 })
 /**
  * The component for displaying a list element for an item search result of the type Journal Volume
