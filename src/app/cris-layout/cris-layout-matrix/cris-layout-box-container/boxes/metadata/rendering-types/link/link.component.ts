@@ -38,6 +38,11 @@ export class LinkComponent extends RenderingTypeValueModelComponent implements O
    */
   link: MetadataLinkValue;
 
+  /**
+   * Flag to determine if the value is a valid URL
+   */
+  isLink = false;
+
   isEmail = false;
 
   constructor(
@@ -52,7 +57,23 @@ export class LinkComponent extends RenderingTypeValueModelComponent implements O
   }
 
   ngOnInit(): void {
+    this.isLink = this.isValidUrl();
     this.link = this.getLinkFromValue();
+  }
+
+  /**
+   * Check if the metadata value is a valid URL
+   */
+  isValidUrl(): boolean {
+    const value = this.metadataValue.value.trim();
+
+    // Comprehensive URL regex that matches:
+    // - URLs with protocols (http, https, ftp, mailto, etc.)
+    // - URLs without protocols (www.example.com, example.com)
+    // - URLs with paths, query strings, and fragments
+    const urlRegex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+
+    return urlRegex.test(value);
   }
 
   /**
