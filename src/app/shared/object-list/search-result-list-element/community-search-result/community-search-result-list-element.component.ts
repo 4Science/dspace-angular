@@ -13,6 +13,7 @@ import { ViewMode } from '../../../../core/shared/view-mode.model';
 import { ThemedBadgesComponent } from '../../../object-collection/shared/badges/themed-badges.component';
 import { CommunitySearchResult } from '../../../object-collection/shared/community-search-result.model';
 import { listableObjectComponent } from '../../../object-collection/shared/listable-object/listable-object.decorator';
+import { EscapeHtmlPipe } from '../../../utils/escape-html.pipe';
 import { SearchResultListElementComponent } from '../search-result-list-element.component';
 
 @Component({
@@ -20,7 +21,7 @@ import { SearchResultListElementComponent } from '../search-result-list-element.
   styleUrls: ['../search-result-list-element.component.scss', 'community-search-result-list-element.component.scss'],
   templateUrl: 'community-search-result-list-element.component.html',
   standalone: true,
-  imports: [NgIf, NgClass, ThemedBadgesComponent, RouterLink],
+  imports: [EscapeHtmlPipe, NgIf, NgClass, ThemedBadgesComponent, RouterLink],
 })
 /**
  * Component representing a community search result in list view
