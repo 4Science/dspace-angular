@@ -9,10 +9,12 @@ ARG DOCKER_REGISTRY=docker.io
 FROM docker.io/node:${NODE_VERSION-22}-alpine AS dependencies
 
 # Install build dependencies
-RUN apk add --no-cache python3 make g++
+# RUN apk add --no-cache python3 make g++
 
 WORKDIR /app
 
 # Install dependencies (use npm ci if you have package-lock.json)
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile --network-timeout 300000
+COPY package*.json ./
+
+RUN --mount=type=cache,target=/root/.npm \
+  npm ci

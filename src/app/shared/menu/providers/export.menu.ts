@@ -57,7 +57,7 @@ export class ExportMenuProvider extends AbstractExpandableMenuProvider {
 
   public getSubSections(): Observable<PartialMenuSection[]> {
     return observableCombineLatest([
-      this.authorizationService.isAuthorized(FeatureID.AdministratorOf),
+      this.authorizationService.isAuthorized(FeatureID.IsComColAdmin),
       this.scriptDataService.scriptWithNameExistsAndCanExecute(METADATA_EXPORT_SCRIPT_NAME),
     ]).pipe(
       map(([authorized, metadataExportScriptExists]: [boolean, boolean]) => {

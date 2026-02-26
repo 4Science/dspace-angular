@@ -26,6 +26,7 @@ import { listableObjectComponent } from '../../../../../shared/object-collection
 import { SidebarSearchListElementComponent } from '../../../../../shared/object-list/sidebar-search-list-element/sidebar-search-list-element.component';
 import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
 import { TruncatablePartComponent } from '../../../../../shared/truncatable/truncatable-part/truncatable-part.component';
+import { EscapeHtmlPipe } from '../../../../../shared/utils/escape-html.pipe';
 
 @listableObjectComponent('PersonSearchResult', ViewMode.ListElement, Context.SideBarSearchModal)
 @listableObjectComponent('PersonSearchResult', ViewMode.ListElement, Context.SideBarSearchModalCurrent)
@@ -36,6 +37,7 @@ import { TruncatablePartComponent } from '../../../../../shared/truncatable/trun
   templateUrl: '../../../../../shared/object-list/sidebar-search-list-element/sidebar-search-list-element.component.html',
   imports: [
     AsyncPipe,
+    EscapeHtmlPipe,
     NgClass,
     TranslateModule,
     TruncatablePartComponent,

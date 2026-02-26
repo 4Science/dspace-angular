@@ -8,9 +8,10 @@
 
 import { Injectable } from '@angular/core';
 import {
-  map,
+  combineLatest,
   Observable,
 } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
@@ -21,30 +22,37 @@ import {
 } from '../menu-provider.model';
 
 /**
- * Menu provider to create the "Admin Search" menu in the admin sidebar
+ * Menu provider to create the user agreement menu sections in the public navbar
  */
 @Injectable()
-export class AdminSearchMenuProvider extends AbstractMenuProvider {
+export class UserAgreementMenuProvider extends AbstractMenuProvider {
   constructor(
     protected authorizationService: AuthorizationDataService,
   ) {
     super();
   }
 
-  public getSections(): Observable<PartialMenuSection[]> {
-    return this.authorizationService.isAuthorized(FeatureID.IsComColAdmin).pipe(
-      map((isSiteAdmin) => {
+  /**
+   * Retrieves subsections by fetching the browse definitions from the backend and mapping them to partial menu sections.
+   */
+  getSections(): Observable<PartialMenuSection[]> {
+    return combineLatest([
+      this.authorizationService.isAuthorized(FeatureID.AdministratorOf),
+    ]).pipe(
+      map(([isSiteAdmin]) => {
         return [
           {
+            id: 'user_agreement_edit',
+            active: false,
             visible: isSiteAdmin,
             model: {
               type: MenuItemType.LINK,
-              text: 'menu.section.admin_search',
-              link: '/admin/search',
+              text: 'menu.section.edit_user_agreement',
+              link: '/admin/edit-user-agreement',
             },
-            icon: 'search',
+            icon: 'list-alt',
           },
-        ];
+        ] as PartialMenuSection[];
       }),
     );
   }

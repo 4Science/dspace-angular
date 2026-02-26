@@ -1409,6 +1409,8 @@
 
   "chart.load-more": "Load more results",
 
+  "chart.no-data.title": "No Data Available",
+
   "claimed-approved-search-result-list-element.title": "Approved",
 
   "claimed-declined-search-result-list-element.title": "Rejected, sent back to submitter",
@@ -5485,6 +5487,8 @@
 
   "suggestion.source.openaire": "OpenAIRE Graph",
 
+  "suggestion.source.orcidWorks": "ORCID Integration",
+
   "suggestion.source.openalex": "OpenAlex",
 
   "suggestion.from.source": "from the ",
@@ -5494,6 +5498,10 @@
   "suggestion.totalScore": "Total Score",
 
   "suggestion.type.openaire": "OpenAIRE",
+
+  "suggestion.type.orcidWorks": "Publication",
+
+  "suggestion.type.openalex": "OpenAlex",
 
   "register-email.title": "New user registration",
 
@@ -7434,6 +7442,8 @@
 
   "submission.sections.submit.progressbar.duplicates": "Potential duplicates",
 
+  "submission.sections.submit.progressbar.detect-duplicate": "Potential duplicates",
+
   "submission.sections.submit.progressbar.identifiers": "Identifiers",
 
   "submission.sections.submit.progressbar.license": "Deposit license",
@@ -9297,6 +9307,8 @@
   "item.preview.organization.address.addressLocality": "City",
 
   "item.preview.organization.alternateName": "Alternative name",
+
+  "item.preview.dc.identifier.openalex": "OpenAlex ID",
 
   "third-party-metrics-cookies.message": "{{ metricType }} badge is blocked by your ",
 

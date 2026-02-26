@@ -3,16 +3,18 @@
     <h2 class="flex-grow-1">{{'audit.overview.title' | translate}}</h2>
   </div>
 
-  @if (isAdmin$ | async) {
-    @if ((auditsRD$ | async)?.payload?.totalElements === 0) {
+  @let isAdmin = (isAdmin$ | async);
+  @if (isAdmin) {
+    @let audits = (auditsRD$ | async)?.payload;
+    @if (audits?.totalElements === 0) {
       <div>
         No audits found.
       </div>
     }
-    @if ((auditsRD$ | async)?.payload?.totalElements > 0) {
+    @if (audits?.totalElements > 0) {
       <ds-pagination
         [paginationOptions]="pageConfig"
-        [collectionSize]="(auditsRD$ | async)?.payload?.totalElements"
+        [collectionSize]="audits?.totalElements"
         [hideGear]="true"
         [hidePagerWhenSinglePage]="true">
         <div class="table-responsive">
@@ -30,7 +32,8 @@
               </tr>
             </thead>
             <tbody>
-              @for (audit of (auditsRD$ | async)?.payload?.page; track audit) {
+              @for (audit of audits?.page; track audit.id) {
+                @let epersonName = (audit.epersonName | async);
                 <tr>
                   <td><a [routerLink]="['/auditlogs/', audit.id]">{{audit.id}}</a></td>
                   <td>{{ audit.eventType }}</td>
@@ -40,7 +43,13 @@
                   <td>{{ audit.objectType }}</td>
                   <td>{{ audit.subjectUUID }}</td>
                   <td>{{ audit.subjectType }}</td>
-                  <td *ngVar="(getEpersonName(audit) | async) as ePersonName">{{ePersonName}}</td>
+                  <td>
+                    @if (epersonName) {
+                      <span>{{epersonName}}</span>
+                    } @else {
+                      <span><em>{{ 'audit.overview.table.eperson.anonymous' | translate }}</em></span>
+                    }
+                  </td>
                   <td>{{ audit.timeStamp | date:dateFormat}}</td>
                 </tr>
               }

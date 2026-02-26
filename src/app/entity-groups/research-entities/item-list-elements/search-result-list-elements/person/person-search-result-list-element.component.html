@@ -1,6 +1,6 @@
 <div class="row">
   @if (showThumbnails) {
-    <div class="col-3 col-xl-2 pe-sm-0">
+    <div class="col-3 col-md-2 pe-sm-0">
       @if (linkType !== linkTypes.None) {
         <a [target]="(linkType === linkTypes.ExternalLink) ? '_blank' : '_self'"
           [attr.rel]="(linkType === linkTypes.ExternalLink) ? 'noopener noreferrer' : null"
@@ -34,12 +34,12 @@
             <a [target]="(linkType === linkTypes.ExternalLink) ? '_blank' : '_self'"
               [attr.rel]="(linkType === linkTypes.ExternalLink) ? 'noopener noreferrer' : null"
               [routerLink]="[itemPageRoute]" class="lead"
-            [innerHTML]="dsoTitle || ('person.listelement.no-title' | translate)" role="link" tabindex="0"></a>
+            [innerHTML]="(dsoTitle | dsEscapeHtml) || ('person.listelement.no-title' | translate)" role="link" tabindex="0"></a>
           }
           @if (linkType === linkTypes.None) {
             <span
               class="lead"
-            [innerHTML]="dsoTitle || ('person.listelement.no-title' | translate)"></span>
+            [innerHTML]="(dsoTitle | dsEscapeHtml) || ('person.listelement.no-title' | translate)"></span>
           }
           <span class="text-muted">
             <ds-truncatable-part [id]="dso.id" [minLines]="1">

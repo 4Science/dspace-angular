@@ -403,7 +403,7 @@ describe('ItemSearchResultListElementComponent', () => {
 
     it('should show highlighted title', () => {
       const titleField = fixture.debugElement.query(By.css('.item-list-title'));
-      expect(titleField.nativeNode.innerHTML).toEqual('This is just another &lt;em&gt;title&lt;/em&gt;');
+      expect(titleField.nativeNode.innerHTML).toEqual('This is just another <em>title</em>');
     });
   });
 
@@ -415,7 +415,7 @@ describe('ItemSearchResultListElementComponent', () => {
 
     it('should show highlighted title', () => {
       const titleField = fixture.debugElement.query(By.css('.item-list-title'));
-      expect(titleField.nativeNode.innerHTML).toEqual('&lt;em&gt;Michel&lt;/em&gt;');
+      expect(titleField.nativeNode.innerHTML).toEqual('<em>Michel</em>');
     });
   });
 
@@ -427,7 +427,7 @@ describe('ItemSearchResultListElementComponent', () => {
 
     it('should show highlighted title', () => {
       const titleField = fixture.debugElement.query(By.css('.item-list-title'));
-      expect(titleField.nativeNode.innerHTML).toEqual('&lt;em&gt;Science&lt;/em&gt;');
+      expect(titleField.nativeNode.innerHTML).toEqual('<em>Science</em>');
     });
   });
 

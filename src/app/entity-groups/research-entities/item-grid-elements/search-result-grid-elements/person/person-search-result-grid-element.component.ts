@@ -10,6 +10,7 @@ import { listableObjectComponent } from '../../../../../shared/object-collection
 import { ItemSearchResultGridElementComponent } from '../../../../../shared/object-grid/search-result-grid-element/item-search-result/item/item-search-result-grid-element.component';
 import { TruncatableComponent } from '../../../../../shared/truncatable/truncatable.component';
 import { TruncatablePartComponent } from '../../../../../shared/truncatable/truncatable-part/truncatable-part.component';
+import { EscapeHtmlPipe } from '../../../../../shared/utils/escape-html.pipe';
 import { ThemedThumbnailComponent } from '../../../../../thumbnail/themed-thumbnail.component';
 
 @listableObjectComponent('PersonSearchResult', ViewMode.GridElement)
@@ -20,6 +21,7 @@ import { ThemedThumbnailComponent } from '../../../../../thumbnail/themed-thumbn
   animations: [focusShadow],
   imports: [
     AsyncPipe,
+    EscapeHtmlPipe,
     RouterLink,
     ThemedBadgesComponent,
     ThemedThumbnailComponent,

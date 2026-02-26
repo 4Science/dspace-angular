@@ -16,10 +16,10 @@ services:
   dspace-cli:
     environment:
       # This assetstore zip is available from https://github.com/DSpace-Labs/AIP-Files/releases/tag/demo-entities-data
-      - LOADASSETS=https://github.com/4Science/DSpace-CRIS-Files/releases/download/cris-2024.02.00/assetstore.tar.gz
+      - LOADASSETS=https://github.com/4Science/DSpace-CRIS-Files/releases/download/cris-2025.02.00/assetstore.tar.gz
     entrypoint:
       - /bin/bash
-      - '-c'
+      - "-c"
       - |
         if [ ! -z $${LOADASSETS} ]
         then

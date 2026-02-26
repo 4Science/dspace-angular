@@ -1,8 +1,7 @@
 import { testA11y } from 'cypress/support/utils';
 import { Options } from 'cypress-axe';
 
-// TODO: Enable these tests and fix them before the release
-xdescribe('Bulk Access', () => {
+describe('Bulk Access', () => {
   beforeEach(() => {
     // Must login as an Admin to see the page
     cy.visit('/access-control/bulk-access');

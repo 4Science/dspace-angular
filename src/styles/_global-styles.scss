@@ -605,3 +605,10 @@ ngb-tooltip-window {
     @include ellipsis-y($i);
   }
 }
+
+.form-select {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+

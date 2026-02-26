@@ -11,6 +11,7 @@ import { ItemSearchResult } from '../../../../../../../../app/shared/object-coll
 import { listableObjectComponent } from '../../../../../../../../app/shared/object-collection/shared/listable-object/listable-object.decorator';
 import { PublicationSidebarSearchListElementComponent as BaseComponent } from '../../../../../../../../app/shared/object-list/sidebar-search-list-element/item-types/publication/publication-sidebar-search-list-element.component';
 import { TruncatablePartComponent } from '../../../../../../../../app/shared/truncatable/truncatable-part/truncatable-part.component';
+import { EscapeHtmlPipe } from '../../../../../../../../app/shared/utils/escape-html.pipe';
 
 @listableObjectComponent('PublicationSearchResult', ViewMode.ListElement, Context.SideBarSearchModal, 'custom')
 @listableObjectComponent('PublicationSearchResult', ViewMode.ListElement, Context.SideBarSearchModalCurrent, 'custom')
@@ -22,6 +23,7 @@ import { TruncatablePartComponent } from '../../../../../../../../app/shared/tru
   templateUrl: '../../../../../../../../app/shared/object-list/sidebar-search-list-element/sidebar-search-list-element.component.html',
   imports: [
     AsyncPipe,
+    EscapeHtmlPipe,
     NgClass,
     TranslateModule,
     TruncatablePartComponent,
