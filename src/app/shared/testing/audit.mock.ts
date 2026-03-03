@@ -1,3 +1,6 @@
+import { of } from 'rxjs';
+
+import { AuditDetails } from '../../core/audit/audit-data.service';
 import { Audit } from '../../core/audit/model/audit.model';
 import { EPerson } from '../../core/eperson/models/eperson.model';
 
@@ -56,6 +59,41 @@ export const AuditMock: Audit = Object.assign(new Audit(), {
   objectUUID: 'objectUUID',
   subjectType: 'ITEM',
   subjectUUID: '3a74fe2c-d353-4e33-9887-d50184662dd4',
+  timeStamp: '2020-11-13T10:41:06.223+0000',
+  type: 'auditevent',
+  _embedded: {
+    eperson: AuditEPersonMock,
+  },
+  self: {
+    _links: {
+      eperson: {
+        href: 'https://dspace.4science.it/dspace-spring-rest/api/system/auditevents/6fcd7329-8439-4492-bb72-0a4240b52da8/eperson',
+      },
+      object: {
+        href: 'https://dspace.4science.it/dspace-spring-rest/api/system/auditevents/6fcd7329-8439-4492-bb72-0a4240b52da8/object',
+      },
+      self: {
+        href: 'https://dspace.4science.it/dspace-spring-rest/api/system/auditevents/6fcd7329-8439-4492-bb72-0a4240b52da8',
+      },
+      subject: {
+        href: 'https://dspace.4science.it/dspace-spring-rest/api/system/auditevents/6fcd7329-8439-4492-bb72-0a4240b52da8/subject',
+      },
+    },
+  },
+});
+
+
+export const AuditDetailsMock: AuditDetails = Object.assign(new Audit(), {
+  detail: null,
+  epersonUUID: '4eebf0fa-cb9a-463e-8d4c-8a63122c7658',
+  epersonName: of('Eperson Test'),
+  eventType: 'MODIFY',
+  id: '6fcd7329-8439-4492-bb72-0a4240b52da8',
+  objectType: 'ITEM',
+  objectUUID: 'objectUUID',
+  subjectType: 'ITEM',
+  subjectUUID: '3a74fe2c-d353-4e33-9887-d50184662dd4',
+  subject: of(null),
   timeStamp: '2020-11-13T10:41:06.223+0000',
   type: 'auditevent',
   _embedded: {
