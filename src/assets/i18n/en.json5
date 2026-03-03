@@ -5501,6 +5501,8 @@
 
   "suggestion.type.orcidWorks": "Publication",
 
+  "suggestion.type.openalex": "OpenAlex",
+
   "register-email.title": "New user registration",
 
   "register-page.create-profile.header": "Create Profile",
@@ -9307,6 +9309,8 @@
   "item.preview.organization.address.addressLocality": "City",
 
   "item.preview.organization.alternateName": "Alternative name",
+
+  "item.preview.dc.identifier.openalex": "OpenAlex ID",
 
   "third-party-metrics-cookies.message": "{{ metricType }} badge is blocked by your ",
 
