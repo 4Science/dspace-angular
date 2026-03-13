@@ -73,6 +73,7 @@ import { SectionFormOperationsService } from './sections/form/section-form-opera
 import { SubmissionSectionIdentifiersComponent } from './sections/identifiers/section-identifiers.component';
 import { SubmissionSectionCorrectionComponent } from './sections/correction/section-correction.component';
 import { MyDspaceSearchModule } from '../my-dspace-page/my-dspace-search.module';
+import {SubmissionLegendComponent} from './submission-legend/submission-legend.component';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -115,7 +116,8 @@ const DECLARATIONS = [
   PublicationInformationComponent,
   MetadataInformationComponent,
   ThemedSubmissionSectionUploadFileComponent,
-  DuplicateMatchComponent
+  DuplicateMatchComponent,
+  SubmissionLegendComponent
 ];
 
 @NgModule({

@@ -10169,6 +10169,9 @@
   // "submission.sections.general.sections_not_valid": "There are incomplete sections.",
   "submission.sections.general.sections_not_valid": "Ci sono sezioni incomplete.",
 
+  // "submission.sections.general.legend": "<h3><b>Mandatory Fields</b></h3><p>Fields marked with an asterisk (*) must be completed before the submission can be finalized.</p>",
+  "submission.sections.general.legend": "<h3><b>Campi Obbligatori</b></h3><p>I campi contrassegnati con un asterisco (*) devono essere compilati prima che la submission possa essere finalizzata.</p>",
+
   // "submission.sections.identifiers.info": "The following identifiers will be created for your item:",
   "submission.sections.identifiers.info": "Per questo item saranno generati i seguenti identificativi:",
 
