@@ -31,18 +31,21 @@ import { RemoteData } from '../data/remote-data';
 import { RequestService } from '../data/request.service';
 import { EPerson } from '../eperson/models/eperson.model';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
-import {
-  getFirstSucceededRemoteDataPayload,
-  getFirstSucceededRemoteDataWithNotEmptyPayload,
-} from '../shared/operators';
+import { getFirstSucceededRemoteDataPayload } from '../shared/operators';
 import { Audit } from './model/audit.model';
 
 export const AUDIT_PERSON_NOT_AVAILABLE = 'n/a';
 
 export const AUDIT_FIND_BY_OBJECT_SEARCH_METHOD = 'findByObject';
 
+export type AuditDetails = Audit & {
+  epersonName: Observable<string>,
+  subject: Observable<any>
+};
+
+
 @Injectable({ providedIn: 'root' })
-export class AuditDataService extends IdentifiableDataService<Audit>{
+export class AuditDataService extends IdentifiableDataService<Audit> {
 
   private searchData: SearchDataImpl<Audit>;
   private findAllData: FindAllData<Audit>;
@@ -120,7 +123,7 @@ export class AuditDataService extends IdentifiableDataService<Audit>{
 
     // TODO to be reviewed when https://github.com/DSpace/dspace-angular/issues/644 will be resolved
     return audit.eperson.pipe(
-      getFirstSucceededRemoteDataWithNotEmptyPayload(),
+      getFirstSucceededRemoteDataPayload(),
       map((eperson: EPerson) => this.dsoNameService.getName(eperson)),
       startWith(AUDIT_PERSON_NOT_AVAILABLE));
   }
@@ -154,6 +157,26 @@ export class AuditDataService extends IdentifiableDataService<Audit>{
     } else {
       return null;
     }
+  }
+
+  mapToAuditDetails(rdAudit: RemoteData<PaginatedList<Audit>>): RemoteData<PaginatedList<AuditDetails>> {
+    return Object.assign(
+      rdAudit,
+      {
+        payload: Object.assign(rdAudit?.payload, {
+          page: (rdAudit?.payload?.page || [])?.map(
+            (audit) => {
+              return Object.assign(
+                audit, {
+                  epersonName: this.getEpersonName(audit),
+                  subject: this.getOtherObject(audit, audit.objectUUID),
+                });
+            },
+          ),
+        },
+        ),
+      },
+    );
   }
 
 }
