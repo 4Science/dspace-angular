@@ -22,6 +22,7 @@ import {
   switchMap,
 } from 'rxjs/operators';
 
+import { environment } from '../../../environments/environment';
 import { AuthService } from '../../core/auth/auth.service';
 import { SubmissionDefinitionsModel } from '../../core/config/models/config-submission-definitions.model';
 import { Collection } from '../../core/shared/collection.model';
@@ -46,6 +47,7 @@ import { SectionDataObject } from '../sections/models/section-data.model';
 import { SectionsService } from '../sections/sections.service';
 import { SectionsType } from '../sections/sections-type';
 import { SubmissionService } from '../submission.service';
+import { SubmissionLegendComponent } from '../submission-legend/submission-legend.component';
 import { SubmissionVisibility } from '../utils/visibility.util';
 import {
   SubmissionSectionModel,
@@ -67,6 +69,7 @@ import { ThemedSubmissionUploadFilesComponent } from './submission-upload-files/
     CommonModule,
     SubmissionFormCollectionComponent,
     SubmissionFormSectionAddComponent,
+    SubmissionLegendComponent,
     ThemedLoadingComponent,
     ThemedSubmissionFormFooterComponent,
     ThemedSubmissionSectionContainerComponent,
@@ -335,6 +338,16 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
     });
   }
 
+  /**
+   * Check if submission legend should be shown
+   */
+  get shouldShowLegend(): boolean {
+    return environment.submission.showLegend;
+  }
+
+  /**
+   * Check if submission form is loading
+   */
   protected getSectionsList(): Observable<any> {
     return this.submissionService.getSubmissionSections(this.submissionId).pipe(
       filter((sections: SectionDataObject[]) => isNotEmpty(sections)),

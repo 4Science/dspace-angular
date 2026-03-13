@@ -9,12 +9,16 @@
           <div class="clearfix"></div>
         </div>
       }
+      @if (shouldShowLegend) {
+        <ds-submission-legend class="submission-form-header-legend">
+        </ds-submission-legend>
+      }
       <div class="submission-form-header-item mb-3 mb-sm-0 flex-sm-grow-1 flex-md-grow-0">
         @if (!isSectionHidden) {
           <ds-submission-form-collection
             [currentCollectionId]="collectionId"
             [currentDefinition]="definitionId"
-                                           [entityType]="entityType"
+            [entityType]="entityType"
             [submissionId]="submissionId"
             [collectionModifiable]="collectionModifiable"
             [isReadonly]="isSectionReadonly"
