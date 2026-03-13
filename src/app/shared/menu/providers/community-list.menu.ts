@@ -6,12 +6,16 @@
  * http://www.dspace.org/license/
  */
 
-import { Injectable } from '@angular/core';
+import {
+  inject,
+  Injectable,
+} from '@angular/core';
 import {
   Observable,
   of,
 } from 'rxjs';
 
+import { APP_CONFIG } from '../../../../config/app-config.interface';
 import { MenuItemType } from '../menu-item-type.model';
 import {
   AbstractMenuProvider,
@@ -23,7 +27,13 @@ import {
  */
 @Injectable()
 export class CommunityListMenuProvider extends AbstractMenuProvider {
+
+  protected appConfig = inject(APP_CONFIG);
   public getSections(): Observable<PartialMenuSection[]> {
+    if (!this.appConfig.layout.navbar.showCommunityCollection) {
+      return of([]);
+    }
+
     return of([
       {
         visible: true,

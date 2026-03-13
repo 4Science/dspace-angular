@@ -32,7 +32,7 @@ export class AdminSearchMenuProvider extends AbstractMenuProvider {
   }
 
   public getSections(): Observable<PartialMenuSection[]> {
-    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(
+    return this.authorizationService.isAuthorized(FeatureID.IsComColAdmin).pipe(
       map((isSiteAdmin) => {
         return [
           {

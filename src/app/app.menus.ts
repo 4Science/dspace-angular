@@ -9,6 +9,7 @@ import { buildMenuStructure } from './shared/menu/menu.structure';
 import { MenuID } from './shared/menu/menu-id.model';
 import { MenuRoute } from './shared/menu/menu-route.model';
 import { AccessControlMenuProvider } from './shared/menu/providers/access-control.menu';
+import { AdminCommunityListMenuProvider } from './shared/menu/providers/admin-community-list.menu';
 import { AdminSearchMenuProvider } from './shared/menu/providers/admin-search.menu';
 import { CoarNotifyMenuProvider } from './shared/menu/providers/coar-notify.menu';
 import { SubscribeMenuProvider } from './shared/menu/providers/comcol-subscribe.menu';
@@ -59,6 +60,7 @@ export const MENUS = buildMenuStructure({
     StatisticsMenuProvider,
   ],
   [MenuID.ADMIN]: [
+    AdminCommunityListMenuProvider,
     NewMenuProvider,
     EditMenuProvider,
     ImportMenuProvider,

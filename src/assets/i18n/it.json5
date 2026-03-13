@@ -2270,6 +2270,9 @@
   // "chart.load-more": "Load more results",
   "chart.load-more": "Carica più risultati",
 
+  //"chart.no-data.title": "No Data Available",
+  "chart.no-data.title": "Data Non Disponibile",
+
   // "claimed-approved-search-result-list-element.title": "Approved",
   "claimed-approved-search-result-list-element.title": "Approvato",
 
@@ -8765,6 +8768,9 @@
   // TODO New key - Add a translation
   "suggestion.type.orcidWorks": "Publication",
 
+  // "suggestion.type.openalex" : "OpenAlex"
+  "suggestion.type.openalex": "OpenAlex",
+
   // "register-email.title": "New user registration",
   "register-email.title": "Registrazione nuovo utente",
 
@@ -15183,7 +15189,8 @@
   // TODO New key - Add a translation
   "item.preview.organization.alternateName": "Alternative name",
 
-
+  // "item.preview.dc.identifier.openalex" : "OpenAlex ID"
+  "item.preview.dc.identifier.openalex": "OpenAlex ID",
 
 
 

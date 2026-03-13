@@ -1,7 +1,6 @@
 import { testA11y } from 'cypress/support/utils';
 
-// TODO: Enable these tests and fix them before the release
-xdescribe('My DSpace page', () => {
+describe('My DSpace page', () => {
   it('should display recent submissions and pass accessibility tests', () => {
     cy.visit('/mydspace');
 
@@ -120,7 +119,7 @@ xdescribe('My DSpace page', () => {
     // Open the New Import dropdown
     cy.get('button[data-test="import-dropdown"]').click();
     // Click on the "Item" type in that dropdown
-    cy.get('#importControlsDropdownMenu button[title="Equipment"]').click();
+    cy.get('#importControlsDropdownMenu button[title="Funding"]').click();
 
     // New URL should include /import-external, as we've moved to the import page
     cy.url().should('include', '/import-external');

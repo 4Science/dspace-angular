@@ -64,7 +64,7 @@ export class Metadata {
             if (Metadata.valueMatches(candidate as MetadataValue, filter)) {
               matches.push(candidate as MetadataValue);
               if (hasValue(limit) && matches.length >= limit) {
-                return  matches;
+                return matches;
               }
             }
           }
@@ -89,7 +89,7 @@ export class Metadata {
         }
       }
     }
-    return matches;
+    return matches.slice(0, hasValue(limit) ? limit : matches.length);
   }
 
   /**
