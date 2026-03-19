@@ -204,7 +204,7 @@ const routeServiceStub = {
   getQueryParamsWithPrefix: () => {
     return of(null);
   },
-  setParameter: jasmine.createSpy('setParameter')
+  setParameter: jasmine.createSpy('setParameter'),
 };
 
 let searchConfigurationServiceStub;

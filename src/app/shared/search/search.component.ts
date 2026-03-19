@@ -14,10 +14,6 @@ import {
   Output,
   PLATFORM_ID,
 } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
-
-import { BehaviorSubject, combineLatest, Observable, Subscription, of } from 'rxjs';
-import { distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
 import {
   NavigationStart,
   Router,
@@ -29,10 +25,10 @@ import {
   BehaviorSubject,
   combineLatest,
   Observable,
+  of,
   Subscription,
 } from 'rxjs';
 import {
-  debounceTime,
   distinctUntilChanged,
   filter,
   map,
@@ -529,12 +525,12 @@ export class SearchComponent implements OnDestroy, OnInit {
     const configuration$: Observable<string> = combineLatest([
       configurationParam$,
       configurationFromService$,
-      of(this.configuration)
+      of(this.configuration),
     ]).pipe(
       map(([paramValue, serviceValue, inputValue]) =>
-        hasValue(paramValue) ? paramValue : (hasValue(inputValue) ? inputValue : hasValue(serviceValue) ? serviceValue : 'default')
+        hasValue(paramValue) ? paramValue : (hasValue(inputValue) ? inputValue : hasValue(serviceValue) ? serviceValue : 'default'),
       ),
-      distinctUntilChanged()
+      distinctUntilChanged(),
     );
 
     const searchSortOptions$: Observable<SortOptions[]> = combineLatest([configuration$, this.currentScope$]).pipe(
