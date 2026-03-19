@@ -83,6 +83,8 @@ export class SearchResultsComponent {
    */
   activeFilters$: Observable<SearchFilter[]>;
 
+  filters$: Observable<SearchFilter[]>;
+
   /**
    * Filter applied to show labels, once populated the activeFilters$ will be loaded
    */
