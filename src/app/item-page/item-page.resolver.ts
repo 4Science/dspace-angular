@@ -25,9 +25,7 @@ import {
 } from '../core/shared/authorized.operators';
 import { Item } from '../core/shared/item.model';
 import { getFirstCompletedRemoteData } from '../core/shared/operators';
-import {
-  hasValue,
-} from '../shared/empty.util';
+import { hasValue } from '../shared/empty.util';
 import { getItemPageLinksToFollow } from './item.resolver';
 import { getItemPageRoute } from './item-page-routing-paths';
 
