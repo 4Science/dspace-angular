@@ -205,9 +205,7 @@ const routeServiceStub = {
   getQueryParamsWithPrefix: () => {
     return observableOf(null);
   },
-  setParameter: (key: any, value: any) => {
-    return;
-  },
+  setParameter: jasmine.createSpy('setParameter'),
 };
 
 let searchConfigurationServiceStub;
@@ -317,6 +315,17 @@ describe('SearchComponent', () => {
 
   afterEach(() => {
     comp = null;
+  });
+
+  it('should set the "configuration" and "fixedFilterQuery" parameters in the route service', () => {
+    spyOn(routeServiceStub, 'setParameter');
+    comp.configuration = 'test-configuration';
+    comp.fixedFilterQuery = 'test-fixed-filter-query';
+
+    fixture.detectChanges();
+
+    expect(routeServiceStub.setParameter).toHaveBeenCalledWith('configuration', 'test-configuration');
+    expect(routeServiceStub.setParameter).toHaveBeenCalledWith('fixedFilterQuery', 'test-fixed-filter-query');
   });
 
   it('should init search parameters properly and call retrieveSearchResults', fakeAsync(() => {
