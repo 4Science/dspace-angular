@@ -12,7 +12,7 @@
 
 <div class="d-flex justify-content-between">
   @if (!disableHeader) {
-    <h1>{{ (configuration ? configuration + '.search.results.head' : 'search.results.head') | translate }}</h1>
+    <h1>{{ ((configuration$ | async) ? (configuration$ | async) + '.search.results.head' : 'search.results.head') | translate }}</h1>
   }
   @if (showCsvExport) {
     <ds-search-export-csv [searchConfig]="searchConfig" [total]="searchResults?.payload?.totalElements"></ds-search-export-csv>
