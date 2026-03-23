@@ -152,6 +152,9 @@
   // "admin.edit-cms-metadata.back-button": "Back",
   "admin.edit-cms-metadata.back-button": "Indietro",
 
+  // "admin.edit-cms-metadata.markdown": "CMS Metadata values support <a href=\"https://www.markdownguide.org/basic-syntax/\" target=\"_blank\">Markdown</a> language.",
+  "admin.edit-cms-metadata.markdown": "I valori dei metadati CMS supportano il formato <a href=\"https://www.markdownguide.org/basic-syntax/\" target=\"_blank\">Markdown</a>.",
+
   // "admin.edit-cms-metadata.success": "Metadata successfully updated",
   "admin.edit-cms-metadata.success": "Metadati aggiornati correttamente",
 
