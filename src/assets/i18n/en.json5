@@ -93,6 +93,8 @@
 
   "admin.edit-cms-metadata.back-button": "Back",
 
+  "admin.edit-cms-metadata.markdown": "CMS Metadata values support <a href=\"https://www.markdownguide.org/basic-syntax/\" target=\"_blank\">Markdown</a> language.",
+
   "admin.edit-cms-metadata.success": "Metadata successfully updated",
 
   "admin.edit-cms-metadata.error": "An error occurred while updating the metadata",

@@ -611,6 +611,7 @@ export class DefaultAppConfig implements AppConfig {
   markdown: MarkdownConfig = {
     enabled: true,
     mathjax: true,
+    showInfoOnCMSMetadataEditPages: true,
   };
 
   // Which vocabularies should be used for which search filters
