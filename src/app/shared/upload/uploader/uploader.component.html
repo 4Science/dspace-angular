@@ -55,10 +55,12 @@
                 }
               </div>
               <div class="ds-base-drop-zone-progress clearfix mt-2">
-                <div class="progress" style="height: 5px;">
+                <div class="progress"
+                     [ngStyle]="{ 'width': (uploader.options.autoUpload ? 100 : (uploader.progress ?? 0)) + '%' }"
+                     style="height: 5px;">
                   <div role="progressbar"
-                    [ngStyle]="{ 'width': uploader.progress + '%' }"
-                  [ngClass]="{'progress-bar': true, 'bg-success progress-bar-striped progress-bar-animated': uploader.progress === 100}"></div>
+                       [ngStyle]="{ 'width': (uploader.options.autoUpload ? uploader.progress : (uploader.progress ?? 0)) + '%' }"
+                       [ngClass]="{'progress-bar': true, 'bg-success progress-bar-striped progress-bar-animated': uploader.progress === 100}"></div>
                 </div>
               </div>
             </div>
