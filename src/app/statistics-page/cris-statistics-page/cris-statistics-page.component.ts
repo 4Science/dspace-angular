@@ -23,13 +23,15 @@ import {
 } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import {
-  BehaviorSubject,
   combineLatest,
   Observable,
   of,
+  Subject,
 } from 'rxjs';
 import {
+  finalize,
   map,
+  shareReplay,
   switchMap,
   take,
   tap,
@@ -84,6 +86,10 @@ import { FilterMapPipe } from './statistics-pipes/filter-map.pipe';
 })
 export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
 
+  private currentReportId: string | null = null;
+  private fullReportCache = new Map<string, UsageReport>();
+  private inFlightRequests = new Map<string, Observable<UsageReport>>();
+
   /**
    * The scope dso for this statistics page, as an Observable.
    */
@@ -137,7 +143,8 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
   /**
    * The fully loaded report (with points) for the currently selected chart report.
    */
-  selectedFullReport$ = new BehaviorSubject<UsageReport>(null);
+  private selectedFullReportSubject = new Subject<UsageReport | null>();
+  selectedFullReport$ = this.selectedFullReportSubject.asObservable();
 
   constructor(
     protected route: ActivatedRoute,
@@ -284,6 +291,7 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
    */
   startDateChanged() {
     if (typeof this.dateFrom === 'object' || this.dateFrom === null || this.dateFrom === undefined) {
+      this.clearFullReportCache();
       this.categories$ = this.getCategories$();
     }
   }
@@ -293,6 +301,7 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
    */
   endDateChanged() {
     if (typeof this.dateTo === 'object' || this.dateTo === null || this.dateTo === undefined) {
+      this.clearFullReportCache();
       this.categories$ = this.getCategories$();
     }
   }
@@ -336,16 +345,45 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
    */
   loadFullReport(reportId: string) {
     if (!reportId) {
+      this.currentReportId = null;
+      this.selectedFullReportSubject.next(null);
       return;
     }
-    this.selectedFullReport$.next(null);
-    this.usageReportService.findById(reportId, false, true).pipe(
-      getFirstSucceededRemoteData(),
-      getRemoteDataPayload(),
-      take(1),
-    ).subscribe((fullReport: UsageReport) => {
-      this.selectedFullReport$.next(fullReport);
+    this.currentReportId = reportId;
+    const cachedReport = this.fullReportCache.get(reportId);
+    if (cachedReport) {
+      this.selectedFullReportSubject.next(cachedReport);
+      return;
+    }
+    this.selectedFullReportSubject.next(null);
+    let request$ = this.inFlightRequests.get(reportId);
+    if (!request$) {
+      request$ = this.usageReportService.findById(reportId, false, true).pipe(
+        getFirstSucceededRemoteData(),
+        getRemoteDataPayload(),
+        take(1),
+        shareReplay({ bufferSize: 1, refCount: true }),
+        finalize(() => {
+          this.inFlightRequests.delete(reportId);
+        }),
+      );
+      this.inFlightRequests.set(reportId, request$);
+    }
+    request$.subscribe((fullReport: UsageReport) => {
+      if (fullReport) {
+        this.fullReportCache.set(reportId, fullReport);
+      }
+      if (reportId === this.currentReportId) {
+        this.selectedFullReportSubject.next(fullReport);
+      }
     });
+  }
+
+  private clearFullReportCache() {
+    this.fullReportCache.clear();
+    this.inFlightRequests.clear();
+    this.currentReportId = null;
+    this.selectedFullReportSubject.next(null);
   }
 
   /**
