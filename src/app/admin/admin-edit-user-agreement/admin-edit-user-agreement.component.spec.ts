@@ -22,6 +22,7 @@ import {
   of,
 } from 'rxjs';
 
+import { APP_CONFIG } from '../../../config/app-config.interface';
 import { ScriptDataService } from '../../core/data/processes/script-data.service';
 import { SiteDataService } from '../../core/data/site-data.service';
 import { Site } from '../../core/shared/site.model';
@@ -39,6 +40,7 @@ describe('AdminEditUserAgreementComponent', () => {
   let notificationService: NotificationsServiceStub;
   let siteService: any;
   let scriptDataService: any;
+  let mockAppConfig: any;
 
   const site: Site = Object.assign(new Site(), {
     metadata: {
@@ -62,6 +64,11 @@ describe('AdminEditUserAgreementComponent', () => {
         return of(site);
       },
     };
+    mockAppConfig = {
+      markdown: {
+        showInfoOnCMSMetadataEditPages: true,
+      },
+    };
 
     TestBed.configureTestingModule({
       imports: [CommonModule, NgbModule, FormsModule, ReactiveFormsModule, BrowserModule, RouterTestingModule,
@@ -74,7 +81,8 @@ describe('AdminEditUserAgreementComponent', () => {
       providers: [AdminEditUserAgreementComponent,
         { provide: NotificationsService, useValue: notificationService },
         { provide: SiteDataService, useValue: siteService },
-        { provide: ScriptDataService, useValue: scriptDataService }],
+        { provide: ScriptDataService, useValue: scriptDataService },
+        { provide: APP_CONFIG, useValue: mockAppConfig }],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(AdminEditUserAgreementComponent, { remove: { imports: [AlertComponent] } }).compileComponents();
   }));
@@ -93,5 +101,26 @@ describe('AdminEditUserAgreementComponent', () => {
     expect(component.userAgreementTexts.get('en').text).toEqual('This is the End User Agreement text for this test');
     expect(component.userAgreementTexts.get('de').text).toEqual('Dies ist der Text der Endbenutzervereinbarung für diesen Test');
   }));
+
+  describe('showMarkdownInfo property', () => {
+    it('should initialize showMarkdownInfo from appConfig.markdown.showInfoOnCMSMetadataEditPages', () => {
+      expect(component.showMarkdownInfo).toBe(true);
+    });
+
+    it('should show markdown info alert box when showMarkdownInfo is true', () => {
+      component.showMarkdownInfo = true;
+      fixture.detectChanges();
+      const alertElement = fixture.debugElement.query((el) => el.name === 'ds-alert');
+      expect(alertElement).toBeTruthy();
+    });
+
+    it('should hide markdown info alert box when showMarkdownInfo is false', () => {
+      mockAppConfig.markdown.showInfoOnCMSMetadataEditPages = false;
+      component.showMarkdownInfo = false;
+      fixture.detectChanges();
+      const alertElement = fixture.debugElement.query((el) => el.name === 'ds-alert');
+      expect(alertElement).toBeFalsy();
+    });
+  });
 
 });

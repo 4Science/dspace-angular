@@ -317,7 +317,7 @@ describe('SearchComponent', () => {
   });
 
   it('should set the "configuration" and "fixedFilterQuery" parameters in the route service', () => {
-    spyOn(routeServiceStub, 'setParameter');
+    routeServiceStub.setParameter.calls.reset();
     comp.configuration = 'test-configuration';
     comp.fixedFilterQuery = 'test-fixed-filter-query';
 

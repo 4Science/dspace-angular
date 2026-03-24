@@ -1,4 +1,3 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import {
   ComponentFixture,
   TestBed,
@@ -6,15 +5,18 @@ import {
 } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
+import { APP_CONFIG } from '../../../config/app-config.interface';
 import { environment } from '../../../environments/environment.test';
 import { SiteDataService } from '../../core/data/site-data.service';
 import { Site } from '../../core/shared/site.model';
+import { AlertComponent } from '../../shared/alert/alert.component';
 import { TranslateLoaderMock } from '../../shared/mocks/translate-loader.mock';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { NotificationsServiceStub } from '../../shared/testing/notifications-service.stub';
@@ -33,6 +35,12 @@ describe('EditCmsMetadataComponent', () => {
     patch: jasmine.createSpy('patch'),
   });
 
+  let mockAppConfig = {
+    markdown: {
+      showInfoOnCMSMetadataEditPages: true,
+    },
+  };
+
   const metadataValueMap = new Map([
     ['en', ''],
     ['de', ''],
@@ -45,6 +53,11 @@ describe('EditCmsMetadataComponent', () => {
     ['el', ''],
   ]);
   beforeEach(waitForAsync(() => {
+    mockAppConfig = {
+      markdown: {
+        showInfoOnCMSMetadataEditPages: true,
+      },
+    };
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
@@ -55,12 +68,14 @@ describe('EditCmsMetadataComponent', () => {
           },
         }),
         EditCmsMetadataComponent,
+        AlertComponent,
       ],
       providers: [
+        provideNoopAnimations(),
         { provide: NotificationsService, useValue: NotificationsServiceStub },
         { provide: SiteDataService, useValue: siteServiceStub },
+        { provide: APP_CONFIG, useValue: mockAppConfig },
       ],
-      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 
@@ -155,6 +170,32 @@ describe('EditCmsMetadataComponent', () => {
         expect(siteServiceStub.patch).toHaveBeenCalledWith(site, operations);
       });
 
+    });
+  });
+
+  describe('showMarkdownInfo property', () => {
+    beforeEach(() => {
+      fixture.detectChanges();
+    });
+
+    it('should initialize showMarkdownInfo from appConfig.markdown.showInfoOnCMSMetadataEditPages', () => {
+      expect(component.showMarkdownInfo).toBe(true);
+    });
+
+    it('should show markdown info alert box when showMarkdownInfo is true', () => {
+      component.editMode.next(true);
+      component.showMarkdownInfo = true;
+      fixture.detectChanges();
+      const alertElement = fixture.debugElement.query(By.directive(AlertComponent));
+      expect(alertElement).toBeTruthy();
+    });
+
+    it('should hide markdown info alert box when showMarkdownInfo is false', () => {
+      component.editMode.next(true);
+      component.showMarkdownInfo = false;
+      fixture.detectChanges();
+      const alertElement = fixture.debugElement.query(By.directive(AlertComponent));
+      expect(alertElement).toBeFalsy();
     });
   });
 });

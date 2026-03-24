@@ -1,6 +1,8 @@
 <div class="container">
   <h2>{{'admin.edit-user-agreement.header' | translate}}</h2>
-  <ds-alert [type]="'alert-info'" [dismissible]="true" [content]="'admin.edit-user-agreement.markdown' | translate"></ds-alert>
+  @if (showMarkdownInfo) {
+    <ds-alert [type]="'alert-info'" [dismissible]="true" [content]="'admin.edit-user-agreement.markdown' | translate"></ds-alert>
+  }
   @for (userAgreementText of (userAgreementTexts | keyvalue); track userAgreementText) {
     <div class="form-group">
       <label>{{userAgreementText.value.languageLabel}}</label>
