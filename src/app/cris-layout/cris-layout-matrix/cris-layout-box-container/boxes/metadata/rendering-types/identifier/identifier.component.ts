@@ -198,7 +198,8 @@ export class IdentifierComponent extends RenderingTypeValueModelComponent implem
    */
   private validateLink(link: string): boolean {
     const urlRegex = /^(http|https):\/\/[^ "]+$/;
-    return urlRegex.test(link);
+    const subtypeValue = this.getIdentifierSubtypeValue();
+    return urlRegex.test(link) || (hasValue(subtypeValue) && link.startsWith(subtypeValue.link));
   }
 }
 
