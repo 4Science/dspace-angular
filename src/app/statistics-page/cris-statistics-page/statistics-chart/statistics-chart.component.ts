@@ -61,6 +61,11 @@ export class StatisticsChartComponent implements OnInit {
   @Input() selectedReportId: string;
 
   /**
+   * The fully loaded report (with points) for the currently selected report.
+   */
+  @Input() selectedFullReport: UsageReport;
+
+  /**
    * Emits all currently selected values for this chart
    */
   selectedReport: UsageReport;
