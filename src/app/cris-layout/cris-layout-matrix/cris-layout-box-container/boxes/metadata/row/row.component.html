@@ -1,5 +1,5 @@
 @for (cell of row.cells; track cell) {
-  <div class="d-flex flex-column w-100 col metadata-cell" [class]="cell.style">
+  <div class="d-flex flex-column col metadata-cell" [class]="cell.style">
     @for (field of cell.fields; track trackUpdate($index, field)) {
       <ds-metadata-container class="w-100"
         [box]="box"
