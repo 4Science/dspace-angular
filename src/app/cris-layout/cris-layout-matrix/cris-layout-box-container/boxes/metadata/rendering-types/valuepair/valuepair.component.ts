@@ -1,4 +1,7 @@
-import { AsyncPipe } from '@angular/common';
+import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
 import {
   Component,
   Inject,
@@ -32,7 +35,7 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   templateUrl: './valuepair.component.html',
   styleUrls: ['./valuepair.component.scss'],
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, NgIf],
 })
 export class ValuepairComponent extends RenderingTypeValueModelComponent implements OnInit {
 

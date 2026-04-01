@@ -109,6 +109,10 @@ describe('LinkComponent', () => {
   describe('with sub-type label', () => {
     beforeEach(() => {
       component.renderingSubType = 'LABEL';
+      component.metadataValueProvider = Object.assign(new MetadataValue(), metadataValue, {
+        value: '[Default Label](http://rest.api/item/link/id)',
+      });
+      component.metadataValue = component.metadataValueProvider;
       spyOn(translateService, 'instant').and.returnValue(i18nLabel);
       fixture.detectChanges();
     });
@@ -252,7 +256,7 @@ describe('LinkComponent', () => {
 
       expect(result).toEqual({
         label: 'My Label',
-        value: 'https://example.com/path'
+        value: 'https://example.com/path',
       });
     });
 
@@ -262,7 +266,7 @@ describe('LinkComponent', () => {
 
       expect(result).toEqual({
         label: input,
-        value: input
+        value: input,
       });
     });
 
@@ -272,7 +276,7 @@ describe('LinkComponent', () => {
 
       expect(result).toEqual({
         label: '',
-        value: ''
+        value: '',
       });
     });
 

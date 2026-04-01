@@ -15,6 +15,7 @@ import {
 import { AuthService } from '../../../../../../../core/auth/auth.service';
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../core/shared/item.model';
+import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
 import { VocabularyService } from '../../../../../../../core/submission/vocabularies/vocabulary.service';
 import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate-loader.mock';
 import { AuthServiceStub } from '../../../../../../../shared/testing/auth-service.stub';
@@ -195,7 +196,6 @@ describe('ValuepairComponent', () => {
   });
 
   describe('when the metadata value is a link', () => {
-
     const linkValue = 'https://example.com';
     const testFieldLink: LayoutField = {
       metadata: 'dc.identifier',
@@ -204,7 +204,7 @@ describe('ValuepairComponent', () => {
       fieldType: 'METADATA',
       metadataGroup: null,
       labelAsHeading: false,
-      valuesInline: false
+      valuesInline: false,
     };
 
     const testItemLink = Object.assign(new Item(), {
@@ -217,11 +217,12 @@ describe('ValuepairComponent', () => {
           TranslateModule.forRoot({
             loader: {
               provide: TranslateLoader,
-              useClass: TranslateLoaderMock
-            }
+              useClass: TranslateLoaderMock,
+            },
           }),
+          ValuepairComponent,
+          DsDatePipe,
         ],
-        declarations: [ValuepairComponent, DsDatePipe],
         providers: [
           { provide: VocabularyService, useValue: vocabularyServiceSpy },
           { provide: AuthService, useValue: authService },
@@ -237,8 +238,9 @@ describe('ValuepairComponent', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(ValuepairComponent);
       component = fixture.componentInstance;
-
-      // Manually emit the value since vocabulary service won't emit
+      component.metadataValue = Object.assign(new MetadataValue(), {
+        value: linkValue,
+      });
       component.value$.next(linkValue);
 
       fixture.detectChanges();
@@ -253,7 +255,7 @@ describe('ValuepairComponent', () => {
       const linkEl = compiled.querySelector('a.text-value') as HTMLAnchorElement;
 
       expect(linkEl).toBeTruthy();
-      expect(linkEl.href).toBe(linkValue + '/'); // Browser adds trailing slash
+      expect(linkEl.href).toBe(linkValue + '/');
       expect(linkEl.textContent.trim()).toBe(linkValue);
     });
   });
