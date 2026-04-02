@@ -17,7 +17,9 @@ import { LogInComponent } from './log-in.component';
 export class ThemedLogInComponent extends ThemedComponent<LogInComponent> {
 
   @Input() isStandalonePage: boolean;
+
   @Input() excludedAuthMethod: AuthMethodType;
+
   @Input() showRegisterLink: boolean;
 
   protected inAndOutputNames: (keyof LogInComponent & keyof this)[] = [
