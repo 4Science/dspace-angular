@@ -418,6 +418,8 @@ export class DefaultAppConfig implements AppConfig {
       pageSize: 5,
       // Show the bitstream access status label
       showAccessStatuses: false,
+      // Open bitstream download links in a new browser tab by default
+      openDownloadLinksInNewTab: true,
     },
     // The maximum number of metadata values to add to the metatag list of the item page
     metatagLimit: 20,

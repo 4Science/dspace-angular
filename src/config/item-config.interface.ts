@@ -14,6 +14,8 @@ export interface ItemConfig extends Config {
     pageSize: number;
     // Show the bitstream access status label
     showAccessStatuses: boolean;
+    // Open bitstream download links in a new browser tab by default
+    openDownloadLinksInNewTab?: boolean;
   }
 
   // The maximum number of metadata values to add to the metatag list of the item page
