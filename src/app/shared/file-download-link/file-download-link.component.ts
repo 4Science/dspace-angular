@@ -6,8 +6,10 @@ import {
 } from '@angular/common';
 import {
   Component,
+  Inject,
   Input,
   OnInit,
+  Optional,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -26,6 +28,10 @@ import {
   getRemoteDataPayload,
 } from 'src/app/core/shared/operators';
 
+import {
+  APP_CONFIG,
+  AppConfig,
+} from '../../../config/app-config.interface';
 import {
   getBitstreamDownloadRoute,
   getBitstreamRequestACopyRoute,
@@ -71,7 +77,7 @@ export class FileDownloadLinkComponent implements OnInit {
   /**
    * A boolean representing if link is shown in same tab or in a new one.
    */
-  @Input() isBlank = false;
+  @Input() isBlank: boolean;
 
   @Input() enableRequestACopy = true;
 
@@ -95,10 +101,13 @@ export class FileDownloadLinkComponent implements OnInit {
     private authorizationService: AuthorizationDataService,
     private configurationService: ConfigurationDataService,
     public dsoNameService: DSONameService,
+    @Optional() @Inject(APP_CONFIG) private appConfig?: AppConfig,
   ) {
   }
 
   ngOnInit() {
+    this.isBlank = this.isBlank ?? this.appConfig?.item?.bitstream?.openDownloadLinksInNewTab ?? true;
+
     if (this.enableRequestACopy) {
       this.canDownload$ = this.authorizationService.isAuthorized(FeatureID.CanDownload, isNotEmpty(this.bitstream) ? this.bitstream.self : undefined);
       const canRequestACopy$ = this.authorizationService.isAuthorized(FeatureID.CanRequestACopy, isNotEmpty(this.bitstream) ? this.bitstream.self : undefined);

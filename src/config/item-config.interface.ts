@@ -12,6 +12,8 @@ export interface ItemConfig extends Config {
     // Rounded to the nearest size in the list of selectable sizes on the
     // settings menu.  See pageSizeOptions in 'pagination-component-options.model.ts'.
     pageSize: number;
+    // Open bitstream download links in a new browser tab by default
+    openDownloadLinksInNewTab?: boolean;
   };
 
   // The maximum number of metadata values to add to the metatag list of the item page
