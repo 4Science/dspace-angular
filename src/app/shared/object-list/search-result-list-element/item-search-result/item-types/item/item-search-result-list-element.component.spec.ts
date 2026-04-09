@@ -27,6 +27,8 @@ import {
 } from '../../../../../mocks/dso-name.service.mock';
 import { mockTruncatableService } from '../../../../../mocks/mock-trucatable.service';
 import { getMockThemeService } from '../../../../../mocks/theme-service.mock';
+import { ThemedBadgesComponent } from '../../../../../object-collection/shared/badges/themed-badges.component';
+import { InWorkflowStatisticsComponent } from '../../../../../object-collection/shared/in-workflow-statistics/in-workflow-statistics.component';
 import { ItemSearchResult } from '../../../../../object-collection/shared/item-search-result.model';
 import { ActivatedRouteStub } from '../../../../../testing/active-router.stub';
 import { AuthServiceStub } from '../../../../../testing/auth-service.stub';
@@ -242,12 +244,14 @@ describe('ItemSearchResultListElementComponent', () => {
     }).overrideComponent(ItemSearchResultListElementComponent, {
       remove: { imports: [
         ThemedThumbnailComponent,
+        ThemedBadgesComponent,
         TruncatableComponent,
         TruncatablePartComponent,
         AdditionalMetadataComponent,
         MetadataLinkViewComponent,
         MetricBadgesComponent,
         MetricDonutsComponent,
+        InWorkflowStatisticsComponent,
       ] },
     }).compileComponents();
   }));
@@ -463,12 +467,14 @@ describe('ItemSearchResultListElementComponent', () => {
     }).overrideComponent(ItemSearchResultListElementComponent, {
       remove: { imports: [
         ThemedThumbnailComponent,
+        ThemedBadgesComponent,
         TruncatableComponent,
         TruncatablePartComponent,
         AdditionalMetadataComponent,
         MetadataLinkViewComponent,
         MetricBadgesComponent,
         MetricDonutsComponent,
+        InWorkflowStatisticsComponent,
       ] },
     }).compileComponents();
   }));
