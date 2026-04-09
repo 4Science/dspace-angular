@@ -44,7 +44,7 @@ describe('MatomoService', () => {
   beforeEach(() => {
     matomoTracker = jasmine.createSpyObj('MatomoTracker', ['setConsentGiven', 'forgetConsentGiven', 'getVisitorId']);
     matomoInitializer = jasmine.createSpyObj('MatomoInitializerService', ['initializeTracker']);
-    klaroService = jasmine.createSpyObj('KlaroService', ['getSavedPreferences']);
+    klaroService = jasmine.createSpyObj('KlaroService', ['getSavedPreferences', 'watchConsentUpdates']);
     nativeWindowService = jasmine.createSpyObj('NativeWindowService', [], { nativeWindow: {} });
     configService = jasmine.createSpyObj('ConfigurationDataService', ['findByPropertyName']);
     configService.findByPropertyName.and.returnValue(createFailedRemoteDataObject$());

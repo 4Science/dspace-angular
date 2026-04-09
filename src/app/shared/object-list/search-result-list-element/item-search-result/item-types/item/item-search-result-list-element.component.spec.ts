@@ -18,6 +18,8 @@ import { DSONameService } from '../../../../../../core/breadcrumbs/dso-name.serv
 import { AuthorizationDataService } from '../../../../../../core/data/feature-authorization/authorization-data.service';
 import { Item } from '../../../../../../core/shared/item.model';
 import { ThemedThumbnailComponent } from '../../../../../../thumbnail/themed-thumbnail.component';
+import { KlaroService } from '../../../../../cookies/klaro.service';
+import { KlaroServiceStub } from '../../../../../cookies/klaro.service.stub';
 import { MetadataLinkViewComponent } from '../../../../../metadata-link-view/metadata-link-view.component';
 import {
   DSONameServiceMock,
@@ -226,6 +228,7 @@ describe('ItemSearchResultListElementComponent', () => {
         { provide: ThemeService, useValue: getMockThemeService() },
         { provide: AuthService, useValue: new AuthServiceStub() },
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
+        { provide: KlaroService, useValue: new KlaroServiceStub() },
         {
           provide: AuthorizationDataService,
           useValue: jasmine.createSpyObj('AuthorizationDataService', [
@@ -452,6 +455,7 @@ describe('ItemSearchResultListElementComponent', () => {
         { provide: APP_CONFIG, useValue: enviromentNoThumbs },
         { provide: ThemeService, useValue: getMockThemeService() },
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
+        { provide: KlaroService, useValue: new KlaroServiceStub() },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(ItemSearchResultListElementComponent, {
