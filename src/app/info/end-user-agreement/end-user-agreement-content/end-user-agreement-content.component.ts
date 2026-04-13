@@ -14,12 +14,17 @@ import {
 } from '@ngx-translate/core';
 import {
   BehaviorSubject,
+  Observable,
   Subscription,
 } from 'rxjs';
+import { map } from 'rxjs/operators';
 
+import { Root } from '../../../core/data/root.model';
+import { RootDataService } from '../../../core/data/root-data.service';
 import { SiteDataService } from '../../../core/data/site-data.service';
 import { LocaleService } from '../../../core/locale/locale.service';
 import { MetadatumViewModel } from '../../../core/shared/metadata.models';
+import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
 import { isNotEmpty } from '../../../shared/empty.util';
 import { MarkdownViewerComponent } from '../../../shared/markdown-viewer/markdown-viewer.component';
 
@@ -42,11 +47,14 @@ export class EndUserAgreementContentComponent implements OnInit, OnDestroy {
 
   userAgreementText$: BehaviorSubject<string | null> = new BehaviorSubject(null);
 
+  repositoryName$: Observable<string>;
+
   fallbackText = 'info.end-user-agreement.content.fallback';
 
   constructor(private siteService: SiteDataService,
               private localeService: LocaleService,
               private translateService: TranslateService,
+              private rootService: RootDataService,
   ) {
   }
 
@@ -55,6 +63,11 @@ export class EndUserAgreementContentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.repositoryName$ = this.rootService.findRoot(true).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      map((payload: Root) => payload.dspaceName),
+    );
+
     this.subs.push(
       this.siteService.find().subscribe((site) => {
         const langCode = this.localeService.getCurrentLanguageCode();
