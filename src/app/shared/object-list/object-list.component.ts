@@ -119,7 +119,7 @@ export class ObjectListComponent {
   /**
    * Whether to show the metrics badges
    */
-  @Input() showMetrics = true;
+  @Input() showMetrics: boolean;
 
   /**
    * Whether or not the pagination should be rendered as simple previous and next buttons instead of the normal pagination
