@@ -114,7 +114,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
    * Check if item has Third-party metrics blocked by consents
    */
   ngAfterViewInit() {
-    if (this.showMetrics && this.klaroService) {
+    if (this.showMetrics && this.klaroService && this.klaroService.watchConsentUpdates instanceof Function) {
       this.klaroService.watchConsentUpdates();
 
       this.hasLoadedThirdPartyMetrics$ = combineLatest([
@@ -128,7 +128,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
           }),
         ),
       ]).pipe(
-        map(([consents, metrics]) => {
+        map(([consents, metrics = []]) => {
           return metrics.reduce((previous, current) => {
             return consents[current.metricType] && previous;
           }, true);
