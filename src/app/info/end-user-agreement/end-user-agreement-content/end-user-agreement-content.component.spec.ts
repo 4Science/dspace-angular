@@ -12,10 +12,13 @@ import {
   of,
 } from 'rxjs';
 
+import { Root } from '../../../core/data/root.model';
+import { RootDataService } from '../../../core/data/root-data.service';
 import { SiteDataService } from '../../../core/data/site-data.service';
 import { LocaleService } from '../../../core/locale/locale.service';
 import { MathService } from '../../../core/shared/math.service';
 import { Site } from '../../../core/shared/site.model';
+import { createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
 import { EndUserAgreementContentComponent } from './end-user-agreement-content.component';
 
 describe('EndUserAgreementContentComponent', () => {
@@ -24,6 +27,7 @@ describe('EndUserAgreementContentComponent', () => {
 
   let siteServiceStub: any;
   let localeServiceStub: any;
+  let rootServiceStub: any;
 
   const site: Site = Object.assign(new Site(), {
     metadata: {
@@ -38,6 +42,10 @@ describe('EndUserAgreementContentComponent', () => {
     },
   });
 
+  const root: Root = Object.assign(new Root(), {
+    dspaceName: 'Test Repository',
+  });
+
   beforeEach(waitForAsync(() => {
 
     localeServiceStub = {
@@ -50,11 +58,15 @@ describe('EndUserAgreementContentComponent', () => {
         return of(site);
       },
     };
+    rootServiceStub = {
+      findRoot: jasmine.createSpy('findRoot').and.returnValue(createSuccessfulRemoteDataObject$(root)),
+    };
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot(), EndUserAgreementContentComponent],
       providers: [{ provide: SiteDataService, useValue: siteServiceStub },
         { provide: LocaleService, useValue: localeServiceStub },
         { provide: MathService, useValue: {} },
+        { provide: RootDataService, useValue: rootServiceStub },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     })
