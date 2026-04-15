@@ -1,7 +1,7 @@
 import {
-  async,
   ComponentFixture,
   TestBed,
+  waitForAsync,
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -16,7 +16,7 @@ import {
 } from '@ngx-translate/core';
 import { getTestScheduler } from 'jasmine-marbles';
 import {
-  of as observableOf,
+  of,
   throwError,
 } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
@@ -81,7 +81,7 @@ describe('RequestCorrectionMenuComponent', () => {
     item: createSuccessfulRemoteDataObject$(mockItem),
   });
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     dso = Object.assign(new Item(), {
       id: 'test-item',
       _links: {
@@ -136,7 +136,7 @@ describe('RequestCorrectionMenuComponent', () => {
 
   describe('when the user can create correction', () => {
     beforeEach(() => {
-      authorizationService.isAuthorized.and.returnValue(observableOf(false));
+      authorizationService.isAuthorized.and.returnValue(of(false));
       fixture.detectChanges();
     });
 
@@ -150,7 +150,7 @@ describe('RequestCorrectionMenuComponent', () => {
     });
 
     it('should redirect to workspaceitem edit page when correction is created successfully ', () => {
-      componentAsAny.submissionService.createSubmissionByItem.and.returnValue(observableOf(submissionObject));
+      componentAsAny.submissionService.createSubmissionByItem.and.returnValue(of(submissionObject));
       component.modalRef = {
         close: () => {
           return;
@@ -186,7 +186,7 @@ describe('RequestCorrectionMenuComponent', () => {
 
   describe('when the user cannot create correction', () => {
     beforeEach(() => {
-      authorizationService.isAuthorized.and.returnValue(observableOf(false));
+      authorizationService.isAuthorized.and.returnValue(of(false));
       fixture.detectChanges();
     });
 

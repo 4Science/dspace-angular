@@ -56,7 +56,7 @@ describe('InlineComponent', () => {
     label: 'Author(s)',
     rendering: 'inline',
     style: 'container row',
-    styleLabel: 'font-weight-bold col-4',
+    styleLabel: 'fw-bold col-4',
     styleValue: 'col',
     metadataGroup: {
       leading: 'dc.contributor.author',
@@ -67,7 +67,7 @@ describe('InlineComponent', () => {
           rendering: 'TEXT',
           fieldType: 'METADATA',
           style: null,
-          styleLabel: 'font-weight-bold col-0',
+          styleLabel: 'fw-bold col-0',
           styleValue: 'col',
         },
         {
@@ -76,7 +76,7 @@ describe('InlineComponent', () => {
           rendering: 'TEXT',
           fieldType: 'METADATA',
           style: null,
-          styleLabel: 'font-weight-bold col-0',
+          styleLabel: 'fw-bold col-0',
           styleValue: 'col',
         },
       ],

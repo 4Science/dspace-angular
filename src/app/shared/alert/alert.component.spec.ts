@@ -93,7 +93,7 @@ describe('AlertComponent test suite', () => {
 
     it('should dismiss alert when click on close icon', () => {
       spyOn(comp, 'dismiss');
-      const btn = fixture.debugElement.query(By.css('.close'));
+      const btn = fixture.debugElement.query(By.css('.btn-close'));
 
       btn.nativeElement.click();
 
@@ -112,8 +112,7 @@ describe('AlertComponent test suite', () => {
 @Component({
   selector: 'ds-test-cmp',
   template: ``,
-  standalone: true,
-  imports: [CommonModule],
+  imports: [],
 })
 class TestComponent {
 

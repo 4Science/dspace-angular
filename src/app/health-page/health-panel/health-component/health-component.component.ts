@@ -1,8 +1,4 @@
-import {
-  NgFor,
-  NgIf,
-  TitleCasePipe,
-} from '@angular/common';
+import { TitleCasePipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -26,8 +22,12 @@ import { HealthComponent } from '../../models/health-component.model';
   selector: 'ds-health-component',
   templateUrl: './health-component.component.html',
   styleUrls: ['./health-component.component.scss'],
-  standalone: true,
-  imports: [NgIf, NgFor, NgbCollapseModule, AlertComponent, TitleCasePipe, ObjNgFor],
+  imports: [
+    AlertComponent,
+    NgbCollapseModule,
+    ObjNgFor,
+    TitleCasePipe,
+  ],
 })
 export class HealthComponentComponent {
 

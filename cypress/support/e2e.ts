@@ -21,6 +21,19 @@ import 'cypress-axe';
 
 import { DSPACE_XSRF_COOKIE } from 'src/app/core/xsrf/xsrf.constants';
 
+Cypress.Commands.overwrite('visit', (originalFn, url, options) => {
+  return originalFn(url, options).then(() => {
+    cy.get('[data-test="ds-hydrated"]');
+  });
+});
+
+// We might receive uncaught exceptions from external libraries (e.g. it happened before with a broken
+// version of the addToAny plugin). These should not cause our tests to fail, so we catch them here.
+Cypress.on('uncaught:exception', (err, runnable) => {
+  // returning false here prevents Cypress from failing the test
+  return false;
+});
+
 // Runs once before all tests
 before(() => {
   // Cypress doesn't have access to the running application in Node.js.
@@ -54,9 +67,9 @@ before(() => {
 
 // Runs once before the first test in each "block"
 beforeEach(() => {
-  // Pre-agree to all Klaro cookies by setting the klaro-anonymous cookie
+  // Pre-agree to all Orejime cookies by setting the orejime-anonymous cookie
   // This just ensures it doesn't get in the way of matching other objects in the page.
-  cy.setCookie('klaro-anonymous', '{%22authentication%22:true%2C%22preferences%22:true%2C%22acknowledgement%22:true%2C%22google-analytics%22:true%2C%22google-recaptcha%22:true%2C%22plumX%22:true%2C%22altmetric%22:true%2C%22dimensions%22:true}');
+  cy.setCookie('orejime-anonymous', '{"authentication":true,"preferences":true,"acknowledgement":true,"google-analytics":true,"correlation-id":true,"accessibility":true,"google-recaptcha":true,"plumX":true,"altmetric":true,"dimensions":true}');
 
   // Remove any CSRF cookies saved from prior tests
   cy.clearCookie(DSPACE_XSRF_COOKIE);

@@ -27,7 +27,7 @@ services:
       DSPACE_REST_HOST: localhost
       DSPACE_REST_PORT: 8080
       DSPACE_REST_NAMESPACE: /server
-    image: "${DOCKER_REGISTRY:-docker.io}/${DOCKER_OWNER:-4science}/dspace-cris-angular:${DSPACE_VER:-dspace-cris-2024_02_x}"
+    image: "${DOCKER_REGISTRY:-docker.io}/${DOCKER_OWNER:-4science}/dspace-cris-angular:${DSPACE_VER:-dspace-cris-2025_02_x}"
     build:
       context: ..
       dockerfile: Dockerfile

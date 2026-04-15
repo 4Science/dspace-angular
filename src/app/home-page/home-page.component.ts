@@ -1,10 +1,6 @@
 import {
   AsyncPipe,
   isPlatformServer,
-  NgForOf,
-  NgIf,
-  NgSwitch,
-  NgSwitchCase,
 } from '@angular/common';
 import {
   Component,
@@ -16,6 +12,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import {
   BehaviorSubject,
+  combineLatest,
   Observable,
   of,
 } from 'rxjs';
@@ -45,7 +42,7 @@ import {
 import { ServerResponseService } from '../core/services/server-response.service';
 import { getFirstSucceededRemoteDataPayload } from '../core/shared/operators';
 import { Site } from '../core/shared/site.model';
-import { SuggestionsPopupComponent } from '../notifications/suggestions-popup/suggestions-popup.component';
+import { SuggestionsPopupComponent } from '../notifications/suggestions/popup/suggestions-popup.component';
 import {
   isEmpty,
   isNotEmpty,
@@ -63,22 +60,17 @@ import { ThemedHomeNewsComponent } from './home-news/themed-home-news.component'
   selector: 'ds-base-home-page',
   styleUrls: ['./home-page.component.scss'],
   templateUrl: './home-page.component.html',
-  standalone: true,
   imports: [
-    ThemedTextSectionComponent,
-    HomeCoarComponent,
-    ThemedHomeNewsComponent,
-    NgSwitch,
-    NgForOf,
-    NgIf,
-    ThemedTopSectionComponent,
-    NgSwitchCase,
-    ThemedBrowseSectionComponent,
-    ThemedSearchSectionComponent,
-    ThemedFacetSectionComponent,
-    ThemedCountersSectionComponent,
-    SuggestionsPopupComponent,
     AsyncPipe,
+    HomeCoarComponent,
+    SuggestionsPopupComponent,
+    ThemedBrowseSectionComponent,
+    ThemedCountersSectionComponent,
+    ThemedFacetSectionComponent,
+    ThemedHomeNewsComponent,
+    ThemedSearchSectionComponent,
+    ThemedTextSectionComponent,
+    ThemedTopSectionComponent,
   ],
 })
 export class HomePageComponent implements OnInit, OnDestroy {
@@ -149,10 +141,10 @@ export class HomePageComponent implements OnInit, OnDestroy {
       map((section) => section.componentRows),
     );
 
-    this.siteService.find().pipe(take(1)).subscribe(
-      (site: Site) => {
+    combineLatest([this.siteService.find().pipe(take(1)), this.locale.getCurrentLanguageCode()]).subscribe(
+      ([site, language]: [Site, string]) => {
         this.hasHomeHeaderMetadata = !isEmpty(site?.firstMetadataValue('cris.cms.home-header',
-          { language: this.locale.getCurrentLanguageCode() }));
+          { language }));
       },
     );
   }

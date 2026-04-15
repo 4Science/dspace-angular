@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   isPlatformBrowser,
-  NgIf,
 } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -22,7 +21,6 @@ import {
   take,
 } from 'rxjs/operators';
 import { SafeUrlPipe } from 'src/app/shared/utils/safe-url-pipe';
-import { VarDirective } from 'src/app/shared/utils/var.directive';
 
 import { environment } from '../../../environments/environment';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
@@ -40,13 +38,10 @@ import { MiradorViewerService } from './mirador-viewer.service';
   templateUrl: './mirador-viewer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    TranslateModule,
     AsyncPipe,
-    NgIf,
     SafeUrlPipe,
-    VarDirective,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class MiradorViewerComponent implements OnInit {
 

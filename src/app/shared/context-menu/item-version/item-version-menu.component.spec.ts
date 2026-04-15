@@ -11,7 +11,7 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
@@ -70,13 +70,13 @@ describe('ItemVersionMenuComponent', () => {
 
   describe('when the user is authorized', () => {
     beforeEach(() => {
-      authorizationServiceStub.isAuthorized.and.returnValue(observableOf(true));
+      authorizationServiceStub.isAuthorized.and.returnValue(of(true));
 
     });
 
     describe('and the button should not be disabled', () => {
       beforeEach(() => {
-        versioningModalService.isNewVersionButtonDisabled.and.returnValue(observableOf(false));
+        versioningModalService.isNewVersionButtonDisabled.and.returnValue(of(false));
         fixture.detectChanges();
       });
 
@@ -88,7 +88,7 @@ describe('ItemVersionMenuComponent', () => {
 
     describe('and the button should be disabled', () => {
       beforeEach(() => {
-        versioningModalService.isNewVersionButtonDisabled.and.returnValue(observableOf(true));
+        versioningModalService.isNewVersionButtonDisabled.and.returnValue(of(true));
         fixture.detectChanges();
       });
 
@@ -102,8 +102,8 @@ describe('ItemVersionMenuComponent', () => {
 
   describe('when the user is not authorized', () => {
     beforeEach(() => {
-      versioningModalService.isNewVersionButtonDisabled.and.returnValue(observableOf(false));
-      authorizationServiceStub.isAuthorized.and.returnValue(observableOf(false));
+      versioningModalService.isNewVersionButtonDisabled.and.returnValue(of(false));
+      authorizationServiceStub.isAuthorized.and.returnValue(of(false));
       fixture.detectChanges();
     });
 

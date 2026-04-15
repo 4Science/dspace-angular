@@ -22,8 +22,9 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   selector: 'span[ds-link-authority]',
   templateUrl: './link-authority.component.html',
   styleUrls: ['./link-authority.component.scss'],
-  standalone: true,
-  imports: [NgClass],
+  imports: [
+    NgClass,
+  ],
 })
 export class LinkAuthorityComponent extends RenderingTypeValueModelComponent implements OnInit {
 

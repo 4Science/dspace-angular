@@ -1,7 +1,7 @@
-<span *ngIf="typeMessage">
-  <span class="badge badge-info">
-    <span class="sr-only">{{ 'listelement.badge.dso-type' | translate}}</span>
-    {{ typeMessage | translate }}
+@if (typeMessage) {
+  <span>
+    <span class="sr-only">{{ 'listelement.badge.dso-type' | translate }}</span>
+    <span class="badge bg-info">{{ typeMessage | translate }}</span>
     <span class="sr-only">, </span>
   </span>
-</span>
+}

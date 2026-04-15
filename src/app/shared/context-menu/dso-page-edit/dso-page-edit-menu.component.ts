@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -22,11 +19,9 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   selector: 'ds-dso-page-edit-menu',
   templateUrl: './dso-page-edit-menu.component.html',
   styleUrls: ['./dso-page-edit-menu.component.scss'],
-  standalone: true,
   imports: [
-    NgIf,
-    RouterLink,
     AsyncPipe,
+    RouterLink,
     TranslateModule,
   ],
 })

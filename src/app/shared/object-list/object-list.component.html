@@ -1,43 +1,50 @@
 <ds-pagination
-        [paginationOptions]="config"
-        [collectionSize]="objects?.payload?.totalElements"
-        [objects]="objects"
-        [sortOptions]="sortConfig"
-        [hideGear]="hideGear"
-        [hidePagerWhenSinglePage]="hidePagerWhenSinglePage"
-        [hidePaginationDetail]="hidePaginationDetail"
-        [showPaginator]="showPaginator"
-        (pageChange)="onPageChange($event)"
-        (pageSizeChange)="onPageSizeChange($event)"
-        (sortDirectionChange)="onSortDirectionChange($event)"
-        (sortFieldChange)="onSortFieldChange($event)"
-        (paginationChange)="onPaginationChange($event)"
-        (prev)="goPrev()"
-        (next)="goNext()">
-    <ul *ngIf="objects?.hasSucceeded" class="list-unstyled" [ngClass]="{'ml-4': selectable}" data-test="objects">
-        <li *ngFor="let object of objects?.payload?.page; let i = index; let last = last" class="mt-4 mb-4 d-flex" [class.border-bottom]="hasBorder && !last" [attr.data-test]="'list-object' | dsBrowserOnly">
-          <ds-selectable-list-item-control *ngIf="selectable" [index]="i"
-                                           [object]="object"
-                                           [selectionConfig]="selectionConfig"
-                                           (deselectObject)="deselectObject.emit($event)"
-                                           (selectObject)="selectObject.emit($event)"></ds-selectable-list-item-control>
-
+  [paginationOptions]="config"
+  [collectionSize]="objects?.payload?.totalElements"
+  [objects]="objects"
+  [sortOptions]="sortConfig"
+  [hideGear]="hideGear"
+  [showRSS]="showRSS"
+  [hidePagerWhenSinglePage]="hidePagerWhenSinglePage"
+  [hidePaginationDetail]="hidePaginationDetail"
+  [showPaginator]="showPaginator"
+  (pageChange)="onPageChange($event)"
+  (pageSizeChange)="onPageSizeChange($event)"
+  (sortDirectionChange)="onSortDirectionChange($event)"
+  (sortFieldChange)="onSortFieldChange($event)"
+  (paginationChange)="onPaginationChange($event)"
+  (prev)="goPrev()"
+  (next)="goNext()">
+  @if (objects?.hasSucceeded) {
+    <ul class="list-unstyled" [ngClass]="{'ms-4': selectable}" data-test="objects">
+      @for (object of objects?.payload?.page; track object; let i = $index; let last = $last) {
+        <li class="mt-4 mb-4 d-flex" [class.border-bottom]="hasBorder && !last" [attr.data-test]="'list-object' | dsBrowserOnly">
+          @if (selectable) {
+            <ds-selectable-list-item-control [index]="i"
+              [object]="object"
+              [selectionConfig]="selectionConfig"
+              (deselectObject)="deselectObject.emit($event)"
+            (selectObject)="selectObject.emit($event)"></ds-selectable-list-item-control>
+          }
           <div class="d-flex flex-column align-items-center">
-            <ds-importable-list-item-control *ngIf="importable" [object]="object"
-                                            [importConfig]="importConfig"
-                                            (importObject)="importObject.emit($event)"></ds-importable-list-item-control>
-
-            <div *ngIf="object?.matchObjects?.length > 0" class="pt-1">
-              <i class="fa-solid fa-file-circle-exclamation fa-lg text-warning"></i>
-            </div>
+            @if (importable) {
+              <ds-importable-list-item-control [object]="object"
+                                               [importConfig]="importConfig"
+                                               (importObject)="importObject.emit($event)"></ds-importable-list-item-control>
+            }
+            @if (object?.matchObjects?.length > 0) {
+              <div class="pt-1">
+                <i class="fa-solid fa-file-circle-exclamation fa-lg text-warning"></i>
+              </div>
+            }
           </div>
 
           <ds-listable-object-component-loader [object]="object"
-                                               [viewMode]="viewMode"
-                                               [index]="i"
-                                               [context]="context"
-                                               [linkType]="linkType"
-                                               [listID]="selectionConfig?.listId"
+            [viewMode]="viewMode"
+            [index]="i"
+            [context]="context"
+            [linkType]="linkType"
+            [listID]="selectionConfig?.listId"
                                                [customData]="customData"
                                                [showLabel]="showLabel"
                                                [showMetrics]="showMetrics"
@@ -45,7 +52,9 @@
                                                [showCorrection]="showCorrection"
                                                [showWorkflowStatistics]="showWorkflowStatistics"
                                                (customEvent)="customEvent.emit($event)"
-                                               (contentChange)="contentChange.emit($event)"></ds-listable-object-component-loader>
+          (contentChange)="contentChange.emit($event)"></ds-listable-object-component-loader>
         </li>
+      }
     </ul>
+  }
 </ds-pagination>

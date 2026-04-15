@@ -12,15 +12,17 @@ import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
+import { Registration } from 'src/app/core/shared/registration.model';
 
+import { TranslateLoaderMock } from '../../../shared/mocks/translate-loader.mock';
+import { BrowserOnlyMockPipe } from '../../../shared/testing/browser-only-mock.pipe';
 import { mockRegistrationDataModel } from '../../models/registration-data.mock.model';
-import { TranslateLoaderMock } from './../../../shared/mocks/translate-loader.mock';
-import { BrowserOnlyMockPipe } from './../../../shared/testing/browser-only-mock.pipe';
 import { OrcidConfirmationComponent } from './orcid-confirmation.component';
 
 describe('OrcidConfirmationComponent', () => {
   let component: OrcidConfirmationComponent;
   let fixture: ComponentFixture<OrcidConfirmationComponent>;
+  let model: Registration;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -31,6 +33,7 @@ describe('OrcidConfirmationComponent', () => {
       imports: [
         CommonModule,
         OrcidConfirmationComponent,
+        CommonModule,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
@@ -64,7 +67,7 @@ describe('OrcidConfirmationComponent', () => {
 
 
   it('should initialize the form with null email as an empty string', () => {
-    component.registratioData.email = null;
+    component.registrationData.email = null;
     component.ngOnInit();
     fixture.detectChanges();
     const emailFormControl = component.form.get('email');

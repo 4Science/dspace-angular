@@ -20,8 +20,8 @@ import { startWith } from 'rxjs/operators';
 import { Metric } from '../../../core/shared/metric.model';
 import {
   CookieConsents,
-  KlaroService,
-} from '../../cookies/klaro.service';
+  OrejimeService,
+} from '../../../shared/cookies/orejime.service';
 import { hasValue } from '../../empty.util';
 import { MetricStyleConfigPipe } from '../pipes/metric-style-config/metric-style-config.pipe';
 import { BaseMetricComponent } from './base-metric.component';
@@ -32,8 +32,10 @@ import { MetricLoaderService } from './metric-loader.service';
   selector: 'ds-metric-loader',
   templateUrl: './metric-loader.component.html',
   styleUrls: ['./metric-loader.component.scss'],
-  standalone: true,
-  imports: [NgClass, MetricStyleConfigPipe],
+  imports: [
+    MetricStyleConfigPipe,
+    NgClass,
+  ],
 })
 export class MetricLoaderComponent implements OnInit, OnDestroy {
 
@@ -66,14 +68,14 @@ export class MetricLoaderComponent implements OnInit, OnDestroy {
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private metricLoaderService: MetricLoaderService,
-    private klaroService: KlaroService,
+    private orejimeService?: OrejimeService,
   ) {
-    this.klaroService.watchConsentUpdates();
-    this.consentUpdates$ = this.klaroService.consentsUpdates$;
+    this.orejimeService.watchConsentUpdates();
+    this.consentUpdates$ = this.orejimeService.consentsUpdates$;
   }
 
   ngOnInit() {
-    this.cookiesSubscription = this.klaroService.getSavedPreferences().subscribe((consents) => {
+    this.cookiesSubscription = this.orejimeService.getSavedPreferences().subscribe((consents) => {
       this.loadComponent(this.metric, this.getCanLoadScript(consents));
     });
   }
@@ -150,7 +152,7 @@ export class MetricLoaderComponent implements OnInit, OnDestroy {
       canLoadScript = this.getCanLoadScript(consents);
 
       if (request && !canLoadScript) {
-        this.klaroService.showSettings();
+        this.orejimeService.showSettings();
       }
 
       if (canLoadScript && !this.hasLoadedScript) {

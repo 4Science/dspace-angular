@@ -5,11 +5,7 @@ import {
   CdkDropListGroup,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -32,18 +28,15 @@ import { RelationshipsItemsListPreviewComponent } from '../../shared/object-list
   templateUrl: './relationships-sort-list.component.html',
   styleUrls: ['./relationships-sort-list.component.scss'],
   imports: [
-    CdkDropListGroup,
-    ThemedLoadingComponent,
-    NgIf,
-    CdkDropList,
-    AsyncPipe,
-    TranslateModule,
-    RelationshipsItemsListPreviewComponent,
-    CdkDrag,
     AlertComponent,
-    NgForOf,
+    AsyncPipe,
+    CdkDrag,
+    CdkDropList,
+    CdkDropListGroup,
+    RelationshipsItemsListPreviewComponent,
+    ThemedLoadingComponent,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class RelationshipsSortListComponent implements OnChanges {
 

@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -52,14 +49,12 @@ import { FileValidator } from '../shared/utils/require-file.validator';
 @Component({
   selector: 'ds-bulk-import-page',
   templateUrl: './bulk-import-page.component.html',
-  standalone: true,
   imports: [
+    AsyncPipe,
+    BtnDisabledDirective,
+    FileValidator,
     ReactiveFormsModule,
     TranslateModule,
-    FileValidator,
-    AsyncPipe,
-    NgIf,
-    BtnDisabledDirective,
   ],
 })
 export class BulkImportPageComponent implements OnInit, OnDestroy {

@@ -1,7 +1,4 @@
-import {
-  NgClass,
-  NgIf,
-} from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -27,7 +24,7 @@ import {
   DynamicFormValidationService,
   DynamicInputModel,
 } from '@ng-dynamic-forms/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { SubmissionFormsModel } from '../../../../../../core/config/models/config-submission-forms.model';
@@ -59,9 +56,7 @@ import { DynamicRelationGroupModel } from '../relation-group/dynamic-relation-gr
   imports: [
     FormComponent,
     NgClass,
-    NgIf,
   ],
-  standalone: true,
 })
 export class DsDynamicRelationInlineGroupComponent extends DynamicFormControlComponent implements OnInit, OnDestroy {
 
@@ -73,7 +68,7 @@ export class DsDynamicRelationInlineGroupComponent extends DynamicFormControlCom
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
   @Output() focus: EventEmitter<any> = new EventEmitter<any>();
 
-  public formCollapsed = observableOf(false);
+  public formCollapsed = of(false);
   public formGroup: FormGroup;
   public formModel: DynamicFormControlModel[];
 

@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -59,14 +55,11 @@ import {
   styleUrls: ['./resource-policies.component.scss'],
   templateUrl: './resource-policies.component.html',
   imports: [
+    AsyncPipe,
+    BtnDisabledDirective,
     ResourcePolicyEntryComponent,
     TranslateModule,
-    NgIf,
-    AsyncPipe,
-    NgForOf,
-    BtnDisabledDirective,
   ],
-  standalone: true,
 })
 /**
  * Component that shows the policies for given resource

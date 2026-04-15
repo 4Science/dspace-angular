@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -19,7 +16,7 @@ import {
 } from '@ngx-translate/core';
 import {
   Observable,
-  of as observableOf,
+  of,
   Subscription,
 } from 'rxjs';
 import {
@@ -59,15 +56,13 @@ import { getEntityEditRoute } from '../../item-page-routing-paths';
   selector: 'ds-upload-bitstream',
   templateUrl: './upload-bitstream.component.html',
   imports: [
-    TranslateModule,
     AsyncPipe,
-    VarDirective,
-    NgIf,
     DsoInputSuggestionsComponent,
     FormsModule,
+    TranslateModule,
     UploaderComponent,
+    VarDirective,
   ],
-  standalone: true,
 })
 /**
  * Page component for uploading a bitstream to an item
@@ -183,7 +178,7 @@ export class UploadBitstreamComponent implements OnInit, OnDestroy {
             }),
             );
           }
-          return observableOf(remoteData.payload.page);
+          return of(remoteData.payload.page);
         }
       }));
     this.selectedBundleId = this.route.snapshot.queryParams.bundle;

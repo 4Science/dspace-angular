@@ -15,7 +15,7 @@ import {
 } from '@ng-dynamic-forms/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { MockComponent } from 'ng-mocks';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { JsonPatchOperationsBuilder } from '../../../core/json-patch/builder/json-patch-operations-builder';
 import { WorkspaceitemSectionCustomUrlObject } from '../../../core/submission/models/workspaceitem-section-custom-url.model';
@@ -53,12 +53,12 @@ describe('SubmissionSectionCustomUrlComponent', () => {
   let formService: any;
 
   const sectionService = jasmine.createSpyObj('sectionService', {
-    getSectionState: observableOf({ data: customUrlData }),
+    getSectionState: of({ data: customUrlData }),
     setSectionStatus: () => undefined,
     updateSectionData: (submissionId, sectionId, updatedData) => {
       component.sectionData.data = updatedData;
     },
-    getSectionServerErrors: observableOf([]),
+    getSectionServerErrors: of([]),
     checkSectionErrors: () => undefined,
   });
 
@@ -148,8 +148,8 @@ describe('SubmissionSectionCustomUrlComponent', () => {
 
     formService = TestBed.inject(FormService);
     formService.validateAllFormFields.and.callFake(() => null);
-    formService.isValid.and.returnValue(observableOf(true));
-    formService.getFormData.and.returnValue(observableOf({}));
+    formService.isValid.and.returnValue(of(true));
+    formService.getFormData.and.returnValue(of({}));
 
     de = fixture.debugElement;
     fixture.detectChanges();

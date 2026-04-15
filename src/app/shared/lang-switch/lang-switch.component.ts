@@ -1,7 +1,4 @@
-import {
-  NgFor,
-  NgIf,
-} from '@angular/common';
+
 import {
   Component,
   ElementRef,
@@ -22,8 +19,11 @@ import { BrowserOnlyDirective } from '../utils/browser-only.directive';
   selector: 'ds-base-lang-switch',
   styleUrls: ['lang-switch.component.scss'],
   templateUrl: 'lang-switch.component.html',
-  standalone: true,
-  imports: [NgIf, NgbDropdownModule, NgFor, TranslateModule, BrowserOnlyDirective],
+  imports: [
+    BrowserOnlyDirective,
+    NgbDropdownModule,
+    TranslateModule,
+  ],
 })
 
 /**
@@ -57,7 +57,7 @@ export class LangSwitchComponent implements OnInit {
    * Returns the label for the current language
    */
   currentLangLabel(): string {
-    return this.activeLangs.find((MyLangConfig) => MyLangConfig.code === this.translate.currentLang).label;
+    return this.activeLangs.find((MyLangConfig) => MyLangConfig.code === this.translate.getCurrentLang()).label;
   }
 
   /**

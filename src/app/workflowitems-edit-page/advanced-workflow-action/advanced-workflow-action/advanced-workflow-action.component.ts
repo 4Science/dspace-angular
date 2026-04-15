@@ -31,7 +31,6 @@ import { WorkflowItemActionPageDirective } from '../../workflow-item-action-page
 @Component({
   selector: 'ds-advanced-workflow-action',
   template: '',
-  standalone: true,
 })
 export abstract class AdvancedWorkflowActionComponent extends WorkflowItemActionPageDirective implements OnInit {
 

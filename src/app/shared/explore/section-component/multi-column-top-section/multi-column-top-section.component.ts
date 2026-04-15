@@ -28,7 +28,6 @@ import { SearchResult } from '../../../search/models/search-result.model';
 @Component({
   selector: 'ds-base-multi-column-top-section',
   templateUrl: './multi-column-top-section.component.html',
-  standalone: true,
 })
 export class MultiColumnTopSectionComponent implements OnInit {
 

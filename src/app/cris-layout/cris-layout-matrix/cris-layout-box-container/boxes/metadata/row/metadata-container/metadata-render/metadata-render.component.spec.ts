@@ -115,7 +115,7 @@ describe('MetadataRenderComponent', () => {
           rendering: 'TEXT',
           fieldType: 'METADATA',
           style: null,
-          styleLabel: 'font-weight-bold col-0',
+          styleLabel: 'fw-bold col-0',
           styleValue: 'col',
         },
       ],

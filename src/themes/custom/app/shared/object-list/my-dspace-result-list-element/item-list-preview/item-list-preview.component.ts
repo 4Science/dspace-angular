@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
@@ -28,24 +26,21 @@ import { ThemedThumbnailComponent } from '../../../../../../../app/thumbnail/the
   // templateUrl: './item-list-preview.component.html',
   templateUrl: '../../../../../../../app/shared/object-list/my-dspace-result-list-element/item-list-preview/item-list-preview.component.html',
   animations: [fadeInOut],
-  standalone: true,
   imports: [
+    AdditionalMetadataComponent,
     AsyncPipe,
+    EscapeHtmlPipe,
+    InWorkflowStatisticsComponent,
     ItemCollectionComponent,
+    ItemCorrectionComponent,
     ItemSubmitterComponent,
+    MetadataLinkViewComponent,
     NgClass,
-    NgFor,
-    NgIf,
     ThemedBadgesComponent,
     ThemedThumbnailComponent,
     TranslateModule,
     TruncatableComponent,
     TruncatablePartComponent,
-    MetadataLinkViewComponent,
-    AdditionalMetadataComponent,
-    ItemCorrectionComponent,
-    InWorkflowStatisticsComponent,
-    EscapeHtmlPipe,
   ],
 })
 export class ItemListPreviewComponent extends BaseComponent {

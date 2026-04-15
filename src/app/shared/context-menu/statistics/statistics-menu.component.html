@@ -1,5 +1,7 @@
-<button *ngIf="isAuthorized$ | async" class="btn btn-primary"
-        [attr.data-test]="'statisticsButton' | dsBrowserOnly"
-        [innerHTML]="'context-menu.actions.statistics.btn' | translate"
-        [routerLink]="['/statistics/' + getPageRoutePrefix(), contextMenuObject.id]">
-</button>
+@if (isAuthorized$ | async) {
+  <button class="btn btn-primary"
+    [attr.data-test]="'statisticsButton' | dsBrowserOnly"
+    [innerHTML]="'context-menu.actions.statistics.btn' | translate"
+    [routerLink]="['/statistics/' + getPageRoutePrefix(), contextMenuObject.id]">
+  </button>
+}

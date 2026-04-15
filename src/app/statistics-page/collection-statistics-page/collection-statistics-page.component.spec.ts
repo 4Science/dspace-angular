@@ -10,7 +10,7 @@ import {
   Router,
 } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { AuthService } from '../../core/auth/auth.service';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
@@ -33,7 +33,7 @@ describe('CollectionStatisticsPageComponent', () => {
   beforeEach(waitForAsync(() => {
 
     const activatedRoute = {
-      data: observableOf({
+      data: of({
         scope: createSuccessfulRemoteDataObject(
           Object.assign(new Collection(), {
             id: 'collection_id',
@@ -50,7 +50,7 @@ describe('CollectionStatisticsPageComponent', () => {
     };
 
     spyOn(usageReportService, 'getStatistic').and.callFake(
-      (scope, type) => observableOf(
+      (scope, type) => of(
         Object.assign(
           new UsageReport(), {
             id: `${scope}-${type}-report`,
@@ -61,11 +61,11 @@ describe('CollectionStatisticsPageComponent', () => {
     );
 
     const nameService = {
-      getName: () => observableOf('test dso name'),
+      getName: () => of('test dso name'),
     };
 
     const authService = jasmine.createSpyObj('authService', {
-      isAuthenticated: observableOf(true),
+      isAuthenticated: of(true),
       setRedirectUrl: {},
     });
 

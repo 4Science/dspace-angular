@@ -1,8 +1,5 @@
 import { Clipboard } from '@angular/cdk/clipboard';
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -31,11 +28,9 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
   styleUrls: ['./profile-page-access-token.component.scss'],
   imports: [
     AlertComponent,
-    NgIf,
     AsyncPipe,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class ProfilePageAccessTokenComponent implements OnInit {
 

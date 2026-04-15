@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,27 +6,19 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import {
-  ActivatedRoute,
-  RouterLink,
-} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import {
   select,
   Store,
 } from '@ngrx/store';
-import { TranslateModule } from '@ngx-translate/core';
 import uniqBy from 'lodash/uniqBy';
 import {
-  combineLatest,
   combineLatestWith,
   map,
   Observable,
   Subscription,
 } from 'rxjs';
-import {
-  filter,
-  shareReplay,
-} from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import {
@@ -38,30 +26,34 @@ import {
   getRegisterRoute,
 } from '../../app-routing-paths';
 import { AuthService } from '../../core/auth/auth.service';
+import { AuthMethodsService } from '../../core/auth/auth-methods.service';
 import { AuthMethod } from '../../core/auth/models/auth.method';
 import { AuthMethodType } from '../../core/auth/models/auth.method-type';
 import {
   getAuthenticationError,
-  getAuthenticationMethods,
   isAuthenticated,
   isAuthenticationLoading,
 } from '../../core/auth/selectors';
 import { CoreState } from '../../core/core-state.model';
 import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
-import { FeatureID } from '../../core/data/feature-authorization/feature-id';
 import { hasValue } from '../empty.util';
 import { ThemedLoadingComponent } from '../loading/themed-loading.component';
-import { BrowserOnlyPipe } from '../utils/browser-only.pipe';
 import { LogInContainerComponent } from './container/log-in-container.component';
-import { rendersAuthMethodType } from './methods/log-in.methods-decorator';
+import {
+  AUTH_METHOD_FOR_DECORATOR_MAP,
+  rendersAuthMethodType,
+} from './methods/log-in.methods-decorator';
 
 @Component({
   selector: 'ds-base-log-in',
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [NgIf, ThemedLoadingComponent, NgFor, LogInContainerComponent, AsyncPipe, RouterLink, BrowserOnlyPipe, TranslateModule],
+  imports: [
+    AsyncPipe,
+    LogInContainerComponent,
+    ThemedLoadingComponent,
+  ],
 })
 export class LogInComponent implements OnInit, OnDestroy {
 
@@ -99,21 +91,6 @@ export class LogInComponent implements OnInit, OnDestroy {
   public loading: Observable<boolean>;
 
   /**
-   * Whether or not the current user (or anonymous) is authorized to register an account
-   */
-  canRegister$: Observable<boolean>;
-
-  /**
-   * Whether or not the current user (or anonymous) is authorized to register an account
-   */
-  canForgot$: Observable<boolean>;
-
-  /**
-   * Shows the divider only if contains at least one link to show
-   */
-  canShowDivider$: Observable<boolean>;
-
-  /**
    * Track subscription to unsubscribe on destroy
    * @private
    */
@@ -123,12 +100,12 @@ export class LogInComponent implements OnInit, OnDestroy {
               private authService: AuthService,
               private route: ActivatedRoute,
               protected authorizationService: AuthorizationDataService,
+              private authMethodsService: AuthMethodsService,
   ) {
   }
 
   ngOnInit(): void {
-    this.authMethods = this.store.pipe(
-      select(getAuthenticationMethods),
+    this.authMethods = this.authMethodsService.getAuthMethods(AUTH_METHOD_FOR_DECORATOR_MAP, this.excludedAuthMethod).pipe(
       combineLatestWith(
         this.route.data.pipe(
           filter(routeData => !!routeData),
@@ -151,18 +128,6 @@ export class LogInComponent implements OnInit, OnDestroy {
         this.authService.clearRedirectUrl();
       }
     });
-
-    this.canRegister$ = this.authorizationService.isAuthorized(FeatureID.EPersonRegistration);
-
-    this.canForgot$ = this.authorizationService.isAuthorized(FeatureID.EPersonForgotPassword).pipe(shareReplay({ refCount: false, bufferSize: 1 }));
-    this.canShowDivider$ = combineLatest([
-      this.canRegister$,
-      this.canForgot$,
-      this.route.data,
-    ]).pipe(
-      map(([canRegister, canForgot, routeData]) => (canRegister || canForgot) && !routeData?.isBackDoor),
-      filter(Boolean),
-    );
   }
 
   filterAndSortAuthMethods(authMethods: AuthMethod[], isBackdoor: boolean, isPasswordLoginEnabledForAdminsOnly = false): AuthMethod[] {

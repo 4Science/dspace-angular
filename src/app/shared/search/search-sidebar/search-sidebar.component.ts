@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -45,8 +42,15 @@ import { SearchSwitchConfigurationComponent } from '../search-switch-configurati
   selector: 'ds-base-search-sidebar',
   styleUrls: ['./search-sidebar.component.scss'],
   templateUrl: './search-sidebar.component.html',
-  standalone: true,
-  imports: [NgIf, ViewModeSwitchComponent, SearchSwitchConfigurationComponent, ThemedSearchFiltersComponent, ThemedSearchSettingsComponent, TranslateModule, AdvancedSearchComponent, AsyncPipe],
+  imports: [
+    AdvancedSearchComponent,
+    AsyncPipe,
+    SearchSwitchConfigurationComponent,
+    ThemedSearchFiltersComponent,
+    ThemedSearchSettingsComponent,
+    TranslateModule,
+    ViewModeSwitchComponent,
+  ],
 })
 
 /**

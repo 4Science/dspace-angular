@@ -8,7 +8,7 @@ import {
 import { Operation } from 'fast-json-patch';
 import {
   Observable,
-  of as observableOf,
+  of,
   zip as observableZip,
 } from 'rxjs';
 import {
@@ -122,7 +122,7 @@ export class GroupDataService extends IdentifiableDataService<Group> implements 
     return this.findByHref(this.searchData.getSearchByHref(searchHref, options)).pipe(
       getRemoteDataPayload(),
       map((group: Group) => isNotEmpty(group)),
-      catchError(() => observableOf(false)),
+      catchError(() => of(false)),
     );
   }
 

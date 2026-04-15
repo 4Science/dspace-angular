@@ -14,7 +14,7 @@ import {
 } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { RequestService } from '../../../core/data/request.service';
 import { WorkflowActionDataService } from '../../../core/data/workflow-action-data.service';
@@ -78,7 +78,7 @@ describe('AdvancedWorkflowActionRatingComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            data: observableOf({
+            data: of({
               id: workflowId,
               wfi: createSuccessfulRemoteDataObject(workflowItem),
             }),
@@ -131,7 +131,7 @@ describe('AdvancedWorkflowActionRatingComponent', () => {
       });
 
       it('should call the claimedTaskDataService with the rating and the required description when it has been rated and return to the mydspace page', () => {
-        spyOn(claimedTaskDataService, 'submitTask').and.returnValue(observableOf(new ProcessTaskResponse(true)));
+        spyOn(claimedTaskDataService, 'submitTask').and.returnValue(of(new ProcessTaskResponse(true)));
         component.ratingForm.setValue({
           review: 'Good job!',
           rating: 4,
@@ -149,7 +149,7 @@ describe('AdvancedWorkflowActionRatingComponent', () => {
       });
 
       it('should not call the claimedTaskDataService when the required description is empty', () => {
-        spyOn(claimedTaskDataService, 'submitTask').and.returnValue(observableOf(new ProcessTaskResponse(true)));
+        spyOn(claimedTaskDataService, 'submitTask').and.returnValue(of(new ProcessTaskResponse(true)));
         component.ratingForm.setValue({
           review: '',
           rating: 4,
@@ -170,7 +170,7 @@ describe('AdvancedWorkflowActionRatingComponent', () => {
       });
 
       it('should call the claimedTaskDataService with the optional review when provided and return to the mydspace page', () => {
-        spyOn(claimedTaskDataService, 'submitTask').and.returnValue(observableOf(new ProcessTaskResponse(true)));
+        spyOn(claimedTaskDataService, 'submitTask').and.returnValue(of(new ProcessTaskResponse(true)));
         component.ratingForm.setValue({
           review: 'Good job!',
           rating: 4,
@@ -188,7 +188,7 @@ describe('AdvancedWorkflowActionRatingComponent', () => {
       });
 
       it('should call the claimedTaskDataService when the optional description is empty and return to the mydspace page', () => {
-        spyOn(claimedTaskDataService, 'submitTask').and.returnValue(observableOf(new ProcessTaskResponse(true)));
+        spyOn(claimedTaskDataService, 'submitTask').and.returnValue(of(new ProcessTaskResponse(true)));
         component.ratingForm.setValue({
           review: '',
           rating: 4,

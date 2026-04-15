@@ -41,9 +41,8 @@
 
     .bottom-footer {
       .notify-enabled {
-        position: absolute;
-        bottom: 4px;
-        right: 0;
+        position: relative;
+        margin-top: 4px;
 
         .coar-notify-support-route {
           padding: 0 calc(var(--bs-spacer) / 2);
@@ -55,7 +54,11 @@
           margin-bottom: 8.5px;
         }
 
-        margin-top: 20px;
+        @media screen and (min-width: map-get($grid-breakpoints, md))  {
+          position: absolute;
+          bottom: 4px;
+          right: 0;
+        }
       }
       ul {
         li {
@@ -85,6 +88,10 @@
           }
         }
       }
+    }
+
+    .btn {
+      box-shadow: none;
     }
   }
 }

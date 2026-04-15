@@ -15,7 +15,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { cold } from 'jasmine-marbles';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { JsonPatchOperationsBuilder } from '../../../../core/json-patch/builder/json-patch-operations-builder';
 import { DetectDuplicateMatch } from '../../../../core/submission/models/workspaceitem-section-deduplication.model';
@@ -357,7 +357,7 @@ describe('DuplicateMatchComponent test suite', () => {
       modalService = TestBed.inject(NgbModal);
       formBuilder = TestBed.inject(FormBuilder);
       operationsBuilder = TestBed.inject(JsonPatchOperationsBuilder);
-      compAsAny.sectionService.isSectionActive.and.returnValue(observableOf(true));
+      compAsAny.sectionService.isSectionActive.and.returnValue(of(true));
       spyOn(modalService, 'open').and.returnValue({ dismiss: () => true });
       spyOn(operationsBuilder, 'add');
       de = fixture.debugElement;
@@ -485,9 +485,7 @@ describe('DuplicateMatchComponent test suite', () => {
 @Component({
   selector: 'ds-test-cmp',
   template: ``,
-  standalone: true,
-  imports: [
-    CommonModule],
+  imports: [],
 })
 class TestComponent {
   match = matchWorkflowMock;

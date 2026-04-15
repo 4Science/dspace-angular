@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   FormsModule,
@@ -18,8 +15,15 @@ import { BtnDisabledDirective } from '../../../../app/shared/btn-disabled.direct
   selector: 'ds-themed-register-email-form',
   // templateUrl: './register-email-form.component.html',
   templateUrl: '../../../../app/register-email-form/register-email-form.component.html',
-  standalone: true,
-  imports: [NgIf, FormsModule, ReactiveFormsModule, AlertComponent, GoogleRecaptchaComponent, AsyncPipe, TranslateModule, BtnDisabledDirective],
+  imports: [
+    AlertComponent,
+    AsyncPipe,
+    BtnDisabledDirective,
+    FormsModule,
+    GoogleRecaptchaComponent,
+    ReactiveFormsModule,
+    TranslateModule,
+  ],
 })
 export class RegisterEmailFormComponent extends BaseComponent {
 }

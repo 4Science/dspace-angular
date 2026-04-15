@@ -12,7 +12,9 @@ export interface ItemConfig extends Config {
     // Rounded to the nearest size in the list of selectable sizes on the
     // settings menu.  See pageSizeOptions in 'pagination-component-options.model.ts'.
     pageSize: number;
-  };
+    // Show the bitstream access status label
+    showAccessStatuses: boolean;
+  }
 
   // The maximum number of metadata values to add to the metatag list of the item page
   metatagLimit: number;

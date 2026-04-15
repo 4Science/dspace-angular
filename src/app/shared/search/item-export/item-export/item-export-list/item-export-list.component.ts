@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -43,15 +40,13 @@ import { SearchOptions } from '../../../models/search-options.model';
   ],
   animations: [fadeIn],
   imports: [
+    AsyncPipe,
+    ErrorComponent,
     ObjectCollectionComponent,
     ThemedLoadingComponent,
-    ErrorComponent,
     TranslateModule,
-    AsyncPipe,
-    NgIf,
     VarDirective,
   ],
-  standalone: true,
 })
 export class ItemExportListComponent implements OnInit {
 

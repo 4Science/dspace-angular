@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   isPlatformServer,
-  NgForOf,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -71,19 +69,16 @@ import { LuckySearchService } from '../lucky-search.service';
   selector: 'ds-lucky-search',
   templateUrl: './lucky-search.component.html',
   styleUrls: ['./lucky-search.component.scss'],
-  standalone: true,
   imports: [
-    PageWithSidebarComponent,
-    ThemedSearchResultsComponent,
-    ThemedSearchFormComponent,
-    TranslateModule,
-    TruncatableComponent,
-    ThemedFileDownloadLinkComponent,
-    TruncatablePartComponent,
     AsyncPipe,
     FileSizePipe,
-    NgIf,
-    NgForOf,
+    PageWithSidebarComponent,
+    ThemedFileDownloadLinkComponent,
+    ThemedSearchFormComponent,
+    ThemedSearchResultsComponent,
+    TranslateModule,
+    TruncatableComponent,
+    TruncatablePartComponent,
   ],
 })
 export class LuckySearchComponent implements OnInit {

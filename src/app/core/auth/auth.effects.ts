@@ -20,7 +20,7 @@ import {
   asyncScheduler,
   combineLatest as observableCombineLatest,
   Observable,
-  of as observableOf,
+  of,
   queueScheduler,
   timer,
 } from 'rxjs';
@@ -99,12 +99,12 @@ const IDLE_TIMER_IGNORE_TYPES: string[]
 
 export function errorToAuthAction$<T extends AuthErrorActionsWithErrorPayload>(actionType: Type<T>, error: unknown): Observable<T> {
   if (error instanceof Error) {
-    return observableOf(new actionType(error));
+    return of(new actionType(error));
   }
 
   // If we caught something that's not an Error: complain & drop type safety
   console.warn('AuthEffects caught non-Error object:', error);
-  return observableOf(new actionType(error as any));
+  return of(new actionType(error as any));
 }
 
 @Injectable()
@@ -192,7 +192,7 @@ export class AuthEffects {
     switchMap(() => {
       return this.authService.hasValidAuthenticationToken().pipe(
         map((token: AuthTokenInfo) => new AuthenticatedAction(token)),
-        catchError((error: unknown) => observableOf(new CheckAuthenticationTokenCookieAction())),
+        catchError((error: unknown) => of(new CheckAuthenticationTokenCookieAction())),
       );
     }),
   ));
@@ -231,7 +231,7 @@ export class AuthEffects {
       return this.authService.refreshAuthenticationToken(action.payload).pipe(
         take(1),
         map((token: AuthTokenInfo) => new RefreshTokenSuccessAction(token)),
-        catchError(() => observableOf(new RefreshTokenErrorAction())),
+        catchError((error: unknown) => of(new RefreshTokenErrorAction())),
       );
     }),
   ));
@@ -302,7 +302,7 @@ export class AuthEffects {
         return this.authService.retrieveAuthMethodsFromAuthStatus(action.payload)
           .pipe(
             map((authMethodModels: AuthMethod[]) => new RetrieveAuthMethodsSuccessAction(authMethodModels)),
-            catchError(() => observableOf(new RetrieveAuthMethodsErrorAction())),
+            catchError(() => of(new RetrieveAuthMethodsErrorAction())),
           );
       }),
     ));
@@ -314,7 +314,7 @@ export class AuthEffects {
           .pipe(
             take(1),
             map((token: AuthTokenInfo) => new RefreshTokenAndRedirectSuccessAction(token, action.payload.redirectUrl)),
-            catchError(() => observableOf(new RefreshTokenAndRedirectErrorAction())),
+            catchError(() => of(new RefreshTokenAndRedirectErrorAction())),
           );
       })),
   );
@@ -327,7 +327,7 @@ export class AuthEffects {
         this.authService.retrieveAuthenticatedUserById(id).pipe(
           take(1),
           map(user => new RefreshEpersonAndTokenRedirectSuccessAction(user, token, redirectUrl)),
-          catchError(() => observableOf(new RefreshEpersonAndTokenRedirectErrorAction())),
+          catchError(() => of(new RefreshEpersonAndTokenRedirectErrorAction())),
         ),
       ),
     ),

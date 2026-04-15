@@ -1,9 +1,4 @@
-import {
-  NgFor,
-  NgSwitch,
-  NgSwitchCase,
-  NgTemplateOutlet,
-} from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   Input,
@@ -20,8 +15,10 @@ import { ScriptParameterType } from '../../scripts/script-parameter-type.model';
   selector: 'ds-script-help',
   templateUrl: './script-help.component.html',
   styleUrls: ['./script-help.component.scss'],
-  standalone: true,
-  imports: [NgFor, NgTemplateOutlet, NgSwitch, NgSwitchCase, TranslateModule],
+  imports: [
+    NgTemplateOutlet,
+    TranslateModule,
+  ],
 })
 export class ScriptHelpComponent {
   /**

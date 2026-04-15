@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { RemoteDataBuildService } from '../../../../../core/cache/builders/remote-data-build.service';
 import { SearchService } from '../../../../../core/shared/search/search.service';
@@ -86,7 +86,7 @@ xdescribe('SearchChartFilterComponent', () => {
   let filterService;
   let searchService;
   let router;
-  const page = observableOf(0);
+  const page = of(0);
 
   const mockValues = createSuccessfulRemoteDataObject$(createPaginatedList(values));
   beforeEach(waitForAsync(() => {
@@ -95,11 +95,11 @@ xdescribe('SearchChartFilterComponent', () => {
       providers: [
         { provide: SearchService, useValue: new SearchServiceStub(searchLink) },
         { provide: Router, useValue: new RouterStub() },
-        { provide: RemoteDataBuildService, useValue: { aggregate: () => observableOf({}) } },
+        { provide: RemoteDataBuildService, useValue: { aggregate: () => of({}) } },
         { provide: SEARCH_CONFIG_SERVICE, useValue: new SearchConfigurationServiceStub() },
         {
           provide: SearchFilterService, useValue: {
-            getSelectedValuesForFilter: () => observableOf(selectedValues),
+            getSelectedValuesForFilter: () => of(selectedValues),
             isFilterActiveWithValue: (paramName: string, filterValue: string) => true,
             getPage: (paramName: string) => page,
             // eslint-disable-next-line @typescript-eslint/no-empty-function

@@ -1,4 +1,4 @@
-import { NgForOf } from '@angular/common';
+
 import {
   Component,
   Input,
@@ -13,11 +13,9 @@ import { AdminNotifyMetricsRow } from './admin-notify-metrics.model';
 @Component({
   selector: 'ds-admin-notify-metrics',
   templateUrl: './admin-notify-metrics.component.html',
-  standalone: true,
   imports: [
     NotificationBoxComponent,
     TranslateModule,
-    NgForOf,
   ],
 })
 /**

@@ -6,7 +6,7 @@ import {
 import {
   BehaviorSubject,
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 
 import { PostRequest } from '../data/request.models';
@@ -43,7 +43,7 @@ describe(`ServerAuthRequestService`, () => {
       statusText: '200',
     } as HttpResponse<any>;
     httpClient = jasmine.createSpyObj('httpClient', {
-      get: observableOf(httpResponse),
+      get: of(httpResponse),
     });
     halService = jasmine.createSpyObj('halService', {
       'getRootHref': '/api',

@@ -27,13 +27,12 @@ import { BulkAccessSettingsComponent } from './settings/bulk-access-settings.com
   templateUrl: './bulk-access.component.html',
   styleUrls: ['./bulk-access.component.scss'],
   imports: [
-    TranslateModule,
-    BulkAccessSettingsComponent,
-    BulkAccessBrowseComponent,
     BtnDisabledDirective,
+    BulkAccessBrowseComponent,
+    BulkAccessSettingsComponent,
     RouterLink,
+    TranslateModule,
   ],
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BulkAccessComponent implements OnInit {

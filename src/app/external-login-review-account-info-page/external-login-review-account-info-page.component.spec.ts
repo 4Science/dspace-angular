@@ -2,11 +2,12 @@ import {
   ComponentFixture,
   TestBed,
 } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
 import { mockRegistrationDataModel } from '../external-log-in/models/registration-data.mock.model';
-import { AlertComponent } from '../shared/alert/alert.component';
 import { ExternalLoginReviewAccountInfoPageComponent } from './external-login-review-account-info-page.component';
 import { ReviewAccountInfoComponent } from './review-account-info/review-account-info.component';
 
@@ -27,12 +28,21 @@ describe('ExternalLoginReviewAccountInfoPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExternalLoginReviewAccountInfoPageComponent],
       providers: [
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
       ],
+      imports: [
+        ExternalLoginReviewAccountInfoPageComponent,
+        BrowserAnimationsModule,
+        TranslateModule.forRoot({}),
+      ],
     })
-      .overrideComponent(ExternalLoginReviewAccountInfoPageComponent, { remove: { imports: [ReviewAccountInfoComponent, AlertComponent] } }).compileComponents();
+      .overrideComponent(ExternalLoginReviewAccountInfoPageComponent, {
+        remove: {
+          imports: [ReviewAccountInfoComponent],
+        },
+      })
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -19,8 +19,6 @@ import { ConfigurationSearchPageComponent } from './configuration-search-page.co
 @Component({
   selector: 'ds-configuration-search-page',
   templateUrl: '../shared/theme-support/themed.component.html',
-  standalone: true,
-  imports: [ConfigurationSearchPageComponent],
 })
 export class ThemedConfigurationSearchPageComponent extends ThemedComponent<ConfigurationSearchPageComponent> {
   /**
@@ -150,37 +148,37 @@ export class ThemedConfigurationSearchPageComponent extends ThemedComponent<Conf
   /**
    * Defines whether to show the toggle button to Show/Hide filter
    */
-  @Input() renderOnServerSide = true;
+  @Input() renderOnServerSide: boolean;
 
   /**
    * A boolean representing if show search charts
    */
-  @Input() showCharts = false;
+  @Input() showCharts: boolean;
 
   /**
    * A boolean representing if show search result notice
    */
-  @Input() showSearchResultNotice = false;
+  @Input() showSearchResultNotice: boolean;
 
   /**
    * Contains a notice to show before result list if any
    */
-  @Input() searchResultNotice: string = null;
+  @Input() searchResultNotice: string;
 
   /**
    * Defines whether to start as showing the filter sidebar collapsed
    */
-  @Input() collapseFilters = false;
+  @Input() collapseFilters: boolean;
 
   /**
    * Defines whether to show the toggle button to Show/Hide filter
    */
-  @Input() showFilterToggle = false;
+  @Input() showFilterToggle: boolean;
 
   /**
    * A boolean representing if show export button
    */
-  @Input() showExport = true;
+  @Input() showExport: boolean;
 
   /**
    * Pass custom data to the component for custom utilization
@@ -190,12 +188,12 @@ export class ThemedConfigurationSearchPageComponent extends ThemedComponent<Conf
   /**
    * Defines whether to start as showing the charts collapsed
    */
-  @Input() collapseCharts = false;
+  @Input() collapseCharts: boolean;
 
   /**
    * Defines whether to show the toggle button to Show/Hide chart
    */
-  @Input() showChartsToggle = false;
+  @Input() showChartsToggle: boolean;
 
 
   /**

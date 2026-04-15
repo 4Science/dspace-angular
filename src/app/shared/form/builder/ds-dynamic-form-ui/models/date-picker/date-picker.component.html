@@ -1,61 +1,63 @@
 <div>
   <fieldset class="d-flex flex-wrap justify-content-start">
-    <legend *ngIf="model.legend"
-            [id]="'legend_' + model.id"
-            [ngClass]="[getClass('element', 'label'), getClass('grid', 'label')]">
-      {{model.placeholder}} <span *ngIf="model.required">*</span>
+    @if (model.legend) {
+      <legend [id]="'legend_' + model.id" [ngClass]="[getClass('element', 'label'), getClass('grid', 'label')]">
+        {{model.placeholder}} @if (model.required) {
+        <span>*</span>
+      }
     </legend>
-    <ds-number-picker
-      tabindex="0"
-      [id]="model.id + '_year'"
-      [disabled]="model.disabled"
-      [min]="minYear"
-      [max]="maxYear"
-      [name]="'year'"
-      [size]="4"
-      [(ngModel)]="initialYear"
-      [value]="year"
-      [invalid]="showErrorMessages"
-      [placeholder]="'form.date-picker.placeholder.year' | translate"
+  }
+  <ds-number-picker
+    tabindex="0"
+    [id]="model.id + '_year'"
+    [disabled]="model.disabled"
+    [min]="minYear"
+    [max]="maxYear"
+    [name]="'year'"
+    [size]="4"
+    [(ngModel)]="initialYear"
+    [value]="year"
+    [invalid]="showErrorMessages"
+    [placeholder]="'form.date-picker.placeholder.year' | translate"
       [widthClass]="'four-digits'"
-      (blur)="onBlur($event)"
-      (change)="onChange($event)"
-      (focus)="onFocus($event)"
-    ></ds-number-picker>
+    (blur)="onBlur($event)"
+    (change)="onChange($event)"
+    (focus)="onFocus($event)"
+  ></ds-number-picker>
 
   <ds-number-picker class="date-month"
-      tabindex="0"
-      [id]="model.id + '_month'"
-      [min]="minMonth"
-      [max]="maxMonth"
-      [name]="'month'"
+    tabindex="0"
+    [id]="model.id + '_month'"
+    [min]="minMonth"
+    [max]="maxMonth"
+    [name]="'month'"
       [size]="2"
-      [(ngModel)]="initialMonth"
-      [value]="month"
-      [placeholder]="'form.date-picker.placeholder.month' | translate"
-      [disabled]="!year || model.disabled"
+    [(ngModel)]="initialMonth"
+    [value]="month"
+    [placeholder]="'form.date-picker.placeholder.month' | translate"
+    [disabled]="!year || model.disabled"
       [widthClass]="'two-digits'"
-      (blur)="onBlur($event)"
-      (change)="onChange($event)"
-      (focus)="onFocus($event)"
-    ></ds-number-picker>
+    (blur)="onBlur($event)"
+    (change)="onChange($event)"
+    (focus)="onFocus($event)"
+  ></ds-number-picker>
 
   <ds-number-picker class="date-day"
-      tabindex="0"
-      [id]="model.id + '_day'"
-      [min]="minDay"
-      [max]="maxDay"
-      [name]="'day'"
-      [size]="2"
-      [(ngModel)]="initialDay"
-      [value]="day"
-      [placeholder]="'form.date-picker.placeholder.day' | translate"
-      [disabled]="!month || model.disabled"
+    tabindex="0"
+    [id]="model.id + '_day'"
+    [min]="minDay"
+    [max]="maxDay"
+    [name]="'day'"
+    [size]="2"
+    [(ngModel)]="initialDay"
+    [value]="day"
+    [placeholder]="'form.date-picker.placeholder.day' | translate"
+    [disabled]="!month || model.disabled"
       [widthClass]="'two-digits'"
-      (blur)="onBlur($event)"
-      (change)="onChange($event)"
-      (focus)="onFocus($event)"
-    ></ds-number-picker>
-  </fieldset>
+    (blur)="onBlur($event)"
+    (change)="onChange($event)"
+    (focus)="onFocus($event)"
+  ></ds-number-picker>
+</fieldset>
 </div>
 <div class="clearfix"></div>

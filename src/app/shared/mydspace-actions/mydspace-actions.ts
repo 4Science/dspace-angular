@@ -38,7 +38,6 @@ export interface MyDSpaceActionsResult {
 @Component({
   selector: 'ds-mydspace-actions-abstract',
   template: '',
-  standalone: true,
 })
 export abstract class MyDSpaceActionsComponent<T extends DSpaceObject, TService extends IdentifiableDataService<T>> {
 

@@ -3,7 +3,6 @@ import {
   Component,
   OnDestroy,
   OnInit,
-  Optional,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
@@ -19,6 +18,7 @@ import {
   distinctUntilChanged,
   map,
 } from 'rxjs/operators';
+import { AlertType } from 'src/app/shared/alert/alert-type';
 
 import {
   AccessibilitySetting,
@@ -27,13 +27,9 @@ import {
 } from '../../accessibility/accessibility-settings.service';
 import { AuthService } from '../../core/auth/auth.service';
 import { AlertComponent } from '../../shared/alert/alert.component';
-import { AlertType } from '../../shared/alert/alert-type';
 import { ContextHelpDirective } from '../../shared/context-help.directive';
-import { KlaroService } from '../../shared/cookies/klaro.service';
-import {
-  hasValue,
-  isEmpty,
-} from '../../shared/empty.util';
+import { OrejimeService } from '../../shared/cookies/orejime.service';
+import { isEmpty } from '../../shared/empty.util';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import {
   SwitchColor,
@@ -48,14 +44,13 @@ import {
   selector: 'ds-accessibility-settings',
   templateUrl: './accessibility-settings.component.html',
   imports: [
-    CommonModule,
-    TranslateModule,
-    FormsModule,
-    ContextHelpDirective,
     AlertComponent,
+    CommonModule,
+    ContextHelpDirective,
+    FormsModule,
     SwitchComponent,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class AccessibilitySettingsComponent implements OnInit, OnDestroy {
   // Redeclared for use in template
@@ -82,7 +77,7 @@ export class AccessibilitySettingsComponent implements OnInit, OnDestroy {
     protected settingsService: AccessibilitySettingsService,
     protected notificationsService: NotificationsService,
     protected translateService: TranslateService,
-    @Optional() protected klaroService: KlaroService,
+    protected orejimeService: OrejimeService,
   ) {
   }
 
@@ -92,19 +87,11 @@ export class AccessibilitySettingsComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.authService.isAuthenticated().pipe(distinctUntilChanged())
         .subscribe(val => this.isAuthenticated.next(val)),
+      this.orejimeService.getSavedPreferences().pipe(
+        map(preferences => preferences?.accessibility === true),
+        distinctUntilChanged(),
+      ).subscribe(val => this.cookieIsAccepted.next(val)),
     );
-
-    if (hasValue(this.klaroService)) {
-      this.subscriptions.push(
-        this.klaroService.getSavedPreferences().pipe(
-          map(preferences => preferences?.accessibility === true),
-          distinctUntilChanged(),
-        ).subscribe(val => this.cookieIsAccepted.next(val)),
-      );
-    } else {
-      this.cookieIsAccepted.next(false);
-    }
-
   }
 
   ngOnDestroy() {

@@ -14,7 +14,7 @@ import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import {
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import { HALEndpointServiceStub } from 'src/app/shared/testing/hal-endpoint-service.stub';
 
@@ -100,7 +100,7 @@ function init() {
 
   nameVariant = 'Doe J.';
   mockRelationshipService = {
-    getNameVariant: () => observableOf(nameVariant),
+    getNameVariant: () => of(nameVariant),
   };
 }
 

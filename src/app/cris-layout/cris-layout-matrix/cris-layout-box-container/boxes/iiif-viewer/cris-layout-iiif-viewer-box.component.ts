@@ -19,8 +19,10 @@ import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-
   selector: 'ds-cris-layout-iiif-viewer-box',
   templateUrl: './cris-layout-iiif-viewer-box.component.html',
   styleUrls: ['./cris-layout-iiif-viewer-box.component.scss'],
-  standalone: true,
-  imports: [MiradorViewerComponent, AsyncPipe],
+  imports: [
+    AsyncPipe,
+    MiradorViewerComponent,
+  ],
 })
 export class CrisLayoutIIIFViewerBoxComponent extends CrisLayoutBoxModelComponent implements OnInit {
 

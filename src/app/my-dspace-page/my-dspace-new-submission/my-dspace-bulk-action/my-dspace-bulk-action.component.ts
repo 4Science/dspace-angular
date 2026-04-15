@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -63,14 +60,12 @@ import { SelectableListService } from '../../../shared/object-list/selectable-li
 @Component({
   selector: 'ds-my-dspace-bulk-action',
   templateUrl: './my-dspace-bulk-action.component.html',
-  standalone: true,
   imports: [
-    NgbTooltipModule,
-    TranslateModule,
     AsyncPipe,
-    ReactiveFormsModule,
-    NgIf,
     BtnDisabledDirective,
+    NgbTooltipModule,
+    ReactiveFormsModule,
+    TranslateModule,
   ],
 })
 export class MyDSpaceBulkActionComponent  implements OnInit, OnDestroy{

@@ -21,6 +21,8 @@ import {
   Observable,
   of,
 } from 'rxjs';
+import { ConfigurationDataService } from 'src/app/core/data/configuration-data.service';
+import { ConfigurationDataServiceStub } from 'src/app/shared/testing/configuration-data.service.stub';
 
 import { APP_CONFIG } from '../../../../../config/app-config.interface';
 import { environment } from '../../../../../environments/environment.test';
@@ -45,6 +47,7 @@ import { SearchService } from '../../../../core/shared/search/search.service';
 import { UUIDService } from '../../../../core/shared/uuid.service';
 import { WorkspaceitemDataService } from '../../../../core/submission/workspaceitem-data.service';
 import { ContextMenuComponent } from '../../../../shared/context-menu/context-menu.component';
+import { DsoEditMenuComponent } from '../../../../shared/dso-page/dso-edit-menu/dso-edit-menu.component';
 import { MetadataFieldWrapperComponent } from '../../../../shared/metadata-field-wrapper/metadata-field-wrapper.component';
 import { mockTruncatableService } from '../../../../shared/mocks/mock-trucatable.service';
 import { TranslateLoaderMock } from '../../../../shared/mocks/translate-loader.mock';
@@ -64,7 +67,6 @@ import { MiradorViewerComponent } from '../../../mirador-viewer/mirador-viewer.c
 import { ItemVersionsSharedService } from '../../../versions/item-versions-shared.service';
 import { ThemedFileSectionComponent } from '../../field-components/file-section/themed-file-section.component';
 import { ItemPageAbstractFieldComponent } from '../../field-components/specific-field/abstract/item-page-abstract-field.component';
-import { ItemPageCcLicenseFieldComponent } from '../../field-components/specific-field/cc-license/item-page-cc-license-field.component';
 import { ItemPageDateFieldComponent } from '../../field-components/specific-field/date/item-page-date-field.component';
 import { GenericItemPageFieldComponent } from '../../field-components/specific-field/generic/generic-item-page-field.component';
 import { ThemedItemPageTitleFieldComponent } from '../../field-components/specific-field/title/themed-item-page-field.component';
@@ -91,6 +93,7 @@ function getItem(metadata: MetadataMap) {
 describe('UntypedItemComponent', () => {
   let comp: UntypedItemComponent;
   let fixture: ComponentFixture<UntypedItemComponent>;
+  let configurationDataService = new ConfigurationDataServiceStub();
 
   beforeEach(waitForAsync(() => {
     const mockBitstreamDataService = {
@@ -133,6 +136,7 @@ describe('UntypedItemComponent', () => {
         { provide: ItemVersionsSharedService, useValue: {} },
         { provide: RouteService, useValue: mockRouteService },
         { provide: BrowseDefinitionDataService, useValue: BrowseDefinitionDataServiceStub },
+        { provide: ConfigurationDataService, useValue: configurationDataService },
         { provide: APP_CONFIG, useValue: environment },
       ],
       schemas: [NO_ERRORS_SCHEMA],
@@ -143,6 +147,8 @@ describe('UntypedItemComponent', () => {
           ThemedResultsBackButtonComponent,
           MiradorViewerComponent,
           ThemedItemPageTitleFieldComponent,
+          ContextMenuComponent,
+          DsoEditMenuComponent,
           MetadataFieldWrapperComponent,
           ThemedThumbnailComponent,
           ThemedMediaViewerComponent,
@@ -153,8 +159,6 @@ describe('UntypedItemComponent', () => {
           ItemPageAbstractFieldComponent,
           ItemPageUriFieldComponent,
           CollectionsComponent,
-          ItemPageCcLicenseFieldComponent,
-          ContextMenuComponent,
         ],
       },
     });

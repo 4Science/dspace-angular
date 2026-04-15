@@ -17,7 +17,7 @@ import {
   TranslateModule,
   TranslateService,
 } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { CollectionDataService } from '../../core/data/collection-data.service';
 import { ItemDataService } from '../../core/data/item-data.service';
@@ -86,7 +86,7 @@ describe('SubmissionSubmitComponent Component', () => {
 
   it('should redirect to mydspace when an empty SubmissionObject has been retrieved', fakeAsync(() => {
 
-    submissionServiceStub.createSubmission.and.returnValue(observableOf({}));
+    submissionServiceStub.createSubmission.and.returnValue(of({}));
 
     fixture.detectChanges();
 
@@ -96,7 +96,7 @@ describe('SubmissionSubmitComponent Component', () => {
 
   it('should redirect to workspaceitem edit when a not empty SubmissionObject has been retrieved',fakeAsync(() => {
 
-    submissionServiceStub.createSubmission.and.returnValue(observableOf({ id: '1234' }));
+    submissionServiceStub.createSubmission.and.returnValue(of({ id: '1234' }));
 
     fixture.detectChanges();
 
@@ -106,7 +106,7 @@ describe('SubmissionSubmitComponent Component', () => {
 
   it('should not has effects when an invalid SubmissionObject has been retrieved', fakeAsync(() => {
 
-    submissionServiceStub.createSubmission.and.returnValue(observableOf(null));
+    submissionServiceStub.createSubmission.and.returnValue(of(null));
 
     fixture.detectChanges();
 

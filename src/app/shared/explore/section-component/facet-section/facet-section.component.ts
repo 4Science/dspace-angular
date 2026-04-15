@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -28,14 +24,11 @@ import { SearchChartComponent } from '../../../search/search-charts/search-chart
 @Component({
   selector: 'ds-base-facet-section',
   templateUrl: './facet-section.component.html',
-  standalone: true,
   imports: [
-    SearchChartComponent,
-    RouterLink,
-    NgForOf,
-    NgIf,
-    TranslateModule,
     AsyncPipe,
+    RouterLink,
+    SearchChartComponent,
+    TranslateModule,
   ],
 })
 export class FacetSectionComponent implements OnInit {

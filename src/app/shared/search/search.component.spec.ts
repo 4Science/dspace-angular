@@ -21,7 +21,6 @@ import { cold } from 'jasmine-marbles';
 import {
   BehaviorSubject,
   Observable,
-  of as observableOf,
   of,
 } from 'rxjs';
 
@@ -80,7 +79,7 @@ const store: Store<SearchComponent> = jasmine.createSpyObj('store', {
   /* eslint-disable no-empty,@typescript-eslint/no-empty-function */
   dispatch: {},
   /* eslint-enable no-empty, @typescript-eslint/no-empty-function */
-  select: observableOf(true),
+  select: of(true),
 });
 const authorizationDataService = jasmine.createSpyObj('authorizationDataService', {
   isAuthorized: of(true),
@@ -138,7 +137,7 @@ const mockSearchResults: SearchObjects<DSpaceObject> = Object.assign(new SearchO
   page: [mockDso, mockDso2],
 });
 const mockResultsRD: RemoteData<SearchObjects<DSpaceObject>> = createSuccessfulRemoteDataObject(mockSearchResults);
-const mockResultsRD$: Observable<RemoteData<SearchObjects<DSpaceObject>>> = observableOf(mockResultsRD);
+const mockResultsRD$: Observable<RemoteData<SearchObjects<DSpaceObject>>> = of(mockResultsRD);
 
 const mockFilterConfig: SearchFilterConfig = Object.assign(new SearchFilterConfig(), {
   name: 'test1',
@@ -164,11 +163,11 @@ const mockChartFilterConfig: SearchFilterConfig = Object.assign(new SearchFilter
 
 const filtersConfigRD = createSuccessfulRemoteDataObject([mockFilterConfig, mockFilterConfig2, mockChartFilterConfig]);
 const resultFiltersConfigRD = createSuccessfulRemoteDataObject([mockFilterConfig, mockFilterConfig2]);
-const filtersConfigRD$ = observableOf(filtersConfigRD);
+const filtersConfigRD$ = of(filtersConfigRD);
 
 const searchServiceStub = jasmine.createSpyObj('SearchService', {
   getSearchLink: '/search',
-  getScopes: observableOf(['test-scope']),
+  getScopes: of(['test-scope']),
   getSearchConfigurationFor: createSuccessfulRemoteDataObject$(searchConfig),
   getConfig: filtersConfigRD$,
   trackSearch: {},
@@ -192,7 +191,7 @@ const activatedRouteStub = {
       ['scope', scopeParam],
     ]),
   },
-  queryParams: observableOf({
+  queryParams: of({
     query: queryParam,
     scope: scopeParam,
   }),
@@ -200,14 +199,12 @@ const activatedRouteStub = {
 
 const routeServiceStub = {
   getQueryParameterValue: () => {
-    return observableOf(null);
+    return of(null);
   },
   getQueryParamsWithPrefix: () => {
-    return observableOf(null);
+    return of(null);
   },
-  setParameter: (key: any, value: any) => {
-    return;
-  },
+  setParameter: jasmine.createSpy('setParameter'),
 };
 
 let searchConfigurationServiceStub;
@@ -216,10 +213,10 @@ export function configureSearchComponentTestingModule(compType, additionalDeclar
   searchConfigurationServiceStub = jasmine.createSpyObj('SearchConfigurationService', {
     getConfigurationSortOptions: sortOptionsList,
     getConfig: filtersConfigRD$,
-    getConfigurationSearchConfig: observableOf(searchConfig),
-    getCurrentConfiguration: observableOf('default'),
-    getCurrentScope: observableOf('test-id'),
-    getCurrentSort: observableOf(sortOptionsList[0]),
+    getConfigurationSearchConfig: of(searchConfig),
+    getCurrentConfiguration: of('default'),
+    getCurrentScope: of('test-id'),
+    getCurrentSort: of(sortOptionsList[0]),
     updateFixedFilter: jasmine.createSpy('updateFixedFilter'),
     setPaginationId: jasmine.createSpy('setPaginationId'),
   });
@@ -249,9 +246,9 @@ export function configureSearchComponentTestingModule(compType, additionalDeclar
       },
       {
         provide: HostWindowService, useValue: jasmine.createSpyObj('hostWindowService', {
-          isXs: observableOf(true),
-          isSm: observableOf(false),
-          isXsOrSm: observableOf(true),
+          isXs: of(true),
+          isSm: of(false),
+          isXsOrSm: of(true),
         }),
       },
       {
@@ -317,6 +314,17 @@ describe('SearchComponent', () => {
 
   afterEach(() => {
     comp = null;
+  });
+
+  it('should set the "configuration" and "fixedFilterQuery" parameters in the route service', () => {
+    routeServiceStub.setParameter.calls.reset();
+    comp.configuration = 'test-configuration';
+    comp.fixedFilterQuery = 'test-fixed-filter-query';
+
+    fixture.detectChanges();
+
+    expect(routeServiceStub.setParameter).toHaveBeenCalledWith('configuration', 'test-configuration');
+    expect(routeServiceStub.setParameter).toHaveBeenCalledWith('fixedFilterQuery', 'test-fixed-filter-query');
   });
 
   it('should init search parameters properly and call retrieveSearchResults', fakeAsync(() => {
@@ -456,6 +464,7 @@ describe('SearchComponent', () => {
     describe('when rendered in SSR', () => {
       beforeEach(() => {
         comp.platformId = 'server';
+        comp.renderOnServerSide = false;
       });
 
       it('should not call search method on init', (done) => {

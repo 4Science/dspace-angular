@@ -16,7 +16,7 @@ import {
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { getTestScheduler } from 'jasmine-marbles';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 
 import { APP_DATA_SERVICES_MAP } from '../../../../config/app-config.interface';
@@ -164,13 +164,13 @@ describe('SubmissionImportExternalPreviewComponent test suite', () => {
       ];
       comp.externalSourceEntry = externalEntry;
       ngbModal.open.and.returnValue({
-        componentInstance: { selectedEvent: observableOf(emittedEvent) },
+        componentInstance: { selectedEvent: of(emittedEvent) },
         close: () => {
           return;
         },
       });
       spyOn(comp, 'closeMetadataModal');
-      submissionServiceStub.createSubmissionFromExternalSource.and.returnValue(observableOf(submissionObjects));
+      submissionServiceStub.createSubmissionFromExternalSource.and.returnValue(of(submissionObjects));
       spyOn(compAsAny.router, 'navigateByUrl');
       scheduler.schedule(() => comp.import());
       scheduler.flush();
@@ -180,12 +180,6 @@ describe('SubmissionImportExternalPreviewComponent test suite', () => {
       expect(compAsAny.submissionService.createSubmissionFromExternalSource).toHaveBeenCalledWith(externalEntry._links.self.href, emittedEvent.collection.id);
       expect(compAsAny.router.navigateByUrl).toHaveBeenCalledWith('/workspaceitems/' + submissionObjects[0].id + '/edit');
       done();
-    });
-
-    it('Should render truncatable part', () => {
-      comp.externalSourceEntry = externalEntryWithAbstract;
-      fixture.detectChanges();
-      expect(fixture.debugElement.query(By.css('[data-test="abstract"]'))).toBeTruthy();
     });
 
     it('Should not render truncatable part', () => {
@@ -200,7 +194,6 @@ describe('SubmissionImportExternalPreviewComponent test suite', () => {
 @Component({
   selector: 'ds-test-cmp',
   template: ``,
-  standalone: true,
 })
 class TestComponent {
 

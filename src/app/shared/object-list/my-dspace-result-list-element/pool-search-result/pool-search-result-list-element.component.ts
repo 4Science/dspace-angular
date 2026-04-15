@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -61,8 +60,14 @@ import { ThemedItemListPreviewComponent } from '../item-list-preview/themed-item
   selector: 'ds-pool-search-result-list-element',
   styleUrls: ['../../search-result-list-element/search-result-list-element.component.scss'],
   templateUrl: './pool-search-result-list-element.component.html',
-  standalone: true,
-  imports: [NgIf, ThemedItemListPreviewComponent, NgClass, PoolTaskActionsComponent, AsyncPipe, TranslateModule, VarDirective],
+  imports: [
+    AsyncPipe,
+    NgClass,
+    PoolTaskActionsComponent,
+    ThemedItemListPreviewComponent,
+    TranslateModule,
+    VarDirective,
+  ],
 })
 
 @listableObjectComponent(PoolTaskSearchResult, ViewMode.ListElement)

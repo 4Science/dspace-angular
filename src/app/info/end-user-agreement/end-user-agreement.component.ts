@@ -1,7 +1,4 @@
-import {
-  isPlatformBrowser,
-  NgIf,
-} from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import {
   Component,
   Inject,
@@ -21,7 +18,7 @@ import {
 } from '@ngx-translate/core';
 import {
   combineLatest,
-  of as observableOf,
+  of,
   Subscription,
 } from 'rxjs';
 import {
@@ -46,8 +43,12 @@ import { EndUserAgreementContentComponent } from './end-user-agreement-content/e
   selector: 'ds-base-end-user-agreement',
   templateUrl: './end-user-agreement.component.html',
   styleUrls: ['./end-user-agreement.component.scss'],
-  standalone: true,
-  imports: [EndUserAgreementContentComponent, FormsModule, TranslateModule, NgIf, BtnDisabledDirective],
+  imports: [
+    BtnDisabledDirective,
+    EndUserAgreementContentComponent,
+    FormsModule,
+    TranslateModule,
+  ],
 })
 /**
  * Component displaying the End User Agreement and an option to accept it
@@ -122,7 +123,7 @@ export class EndUserAgreementComponent implements OnInit, OnDestroy {
           return this.route.queryParams.pipe(map((params) => params.redirect));
         } else {
           this.notificationsService.error(this.translate.instant('info.end-user-agreement.accept.error'));
-          return observableOf(undefined);
+          return of(undefined);
         }
       }),
       take(1),

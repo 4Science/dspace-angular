@@ -12,8 +12,6 @@ import { TopSectionComponent } from './top-section.component';
   selector: 'ds-top-section',
   styleUrls: [],
   templateUrl: '../../../theme-support/themed.component.html',
-  standalone: true,
-  imports: [TopSectionComponent],
 })
 export class ThemedTopSectionComponent extends ThemedComponent<TopSectionComponent> {
 
@@ -24,7 +22,7 @@ export class ThemedTopSectionComponent extends ThemedComponent<TopSectionCompone
     topSection: TopSection;
 
   @Input()
-    context: Context = Context.BrowseMostElements;
+    context: Context;
 
   protected inAndOutputNames: (keyof TopSectionComponent & keyof this)[] = ['sectionId', 'topSection', 'context'];
 

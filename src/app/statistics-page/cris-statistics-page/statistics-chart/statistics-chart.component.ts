@@ -1,8 +1,6 @@
 import {
   Location,
   NgClass,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -15,7 +13,6 @@ import {
 import {
   ActivatedRoute,
   Router,
-  RouterLink,
 } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -29,16 +26,12 @@ import { StatisticsChartWrapperComponent } from './statistics-chart-wrapper/stat
   selector: 'ds-statistics-chart',
   styleUrls: ['./statistics-chart.component.scss'],
   templateUrl: './statistics-chart.component.html',
-  standalone: true,
   imports: [
-    NgIf,
-    NgFor,
+    FilterMapPipe,
     NgClass,
     StatisticsChartWrapperComponent,
-    FilterMapPipe,
-    TranslateModule,
     ThemedLoadingComponent,
-    RouterLink,
+    TranslateModule,
   ],
 })
 
@@ -66,6 +59,11 @@ export class StatisticsChartComponent implements OnInit {
    * Represents selected report id
    */
   @Input() selectedReportId: string;
+
+  /**
+   * The fully loaded report (with points) for the currently selected report.
+   */
+  @Input() selectedFullReport: UsageReport;
 
   /**
    * Emits all currently selected values for this chart

@@ -1,8 +1,4 @@
-import {
-  NgClass,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -31,18 +27,15 @@ import { TruncatablePartComponent } from '../../../truncatable/truncatable-part/
   styleUrls: ['./relationships-items-list-preview.component.scss'],
   animations: [fadeInOut],
   imports: [
+    BtnDisabledDirective,
+    ItemSubmitterComponent,
+    MetadataLinkViewComponent,
+    NgClass,
     ThemedTypeBadgeComponent,
+    TranslateModule,
     TruncatableComponent,
     TruncatablePartComponent,
-    NgIf,
-    NgClass,
-    TranslateModule,
-    MetadataLinkViewComponent,
-    NgForOf,
-    ItemSubmitterComponent,
-    BtnDisabledDirective,
   ],
-  standalone: true,
 })
 export class RelationshipsItemsListPreviewComponent {
 

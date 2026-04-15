@@ -31,8 +31,9 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   selector: 'span[ds-valuepair]',
   templateUrl: './valuepair.component.html',
   styleUrls: ['./valuepair.component.scss'],
-  standalone: true,
-  imports: [AsyncPipe],
+  imports: [
+    AsyncPipe,
+  ],
 })
 export class ValuepairComponent extends RenderingTypeValueModelComponent implements OnInit {
 
@@ -40,6 +41,12 @@ export class ValuepairComponent extends RenderingTypeValueModelComponent impleme
    * list of values
    */
   value$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+
+  /**
+   * Whether the value is a link
+   */
+
+  isMetadataLink: boolean;
 
   constructor(
     @Inject('fieldProvider') public fieldProvider: LayoutField,
@@ -73,6 +80,13 @@ export class ValuepairComponent extends RenderingTypeValueModelComponent impleme
       take(1),
     ).subscribe(value => this.value$.next(value));
 
+    this.isMetadataLink = this.isLink(this.metadataValue.value);
+  }
+
+
+  isLink(input: string): boolean {
+    // check only values with protocol, if missing fix value in value-pair list
+    return input && (input.startsWith('http://') || input.startsWith('https://'));
   }
 
 }

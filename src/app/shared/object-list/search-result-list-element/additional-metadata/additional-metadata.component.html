@@ -1,77 +1,79 @@
-<div *ngIf="additionalMetadataFields">
-  <ng-container *ngFor="let metadataFieldConfiguration of additionalMetadataFields">
-    <div *ngFor="let metadataItem of metadataFieldConfiguration"
-         [ngClass]="{'d-inline-block mr-1': metadataFieldConfiguration.length > 1}">
+@if (additionalMetadataFields) {
+  @for (metadataFieldConfiguration of (additionalMetadataFields ?? []); track $index) {
+    @for (metadataItem of (metadataFieldConfiguration ?? []); track $index) {
+      <div [ngClass]="{'d-inline-block me-1': metadataFieldConfiguration.length > 1}">
 
-      <ng-template #label>
-        <span class="font-weight-bold mr-1 text-muted">{{metadataItem.label | translate}}:</span>
-      </ng-template>
+        <ng-template #label>
+          <span class="fw-bold me-1 text-muted">{{metadataItem.label | translate}}:</span>
+        </ng-template>
 
-      <span
-        *ngFor="let metadataValue of (metadataItem.startFromLast ? object.allMetadata(metadataItem.name).reverse() : object.allMetadata(metadataItem.name)); let c = count; let f = first; let l = last; let i = index">
+        @for (
+          metadataValue of (metadataItem.startFromLast
+            ? object.allMetadata(metadataItem.name).reverse()
+            : object.allMetadata(metadataItem.name) ?? []);
+          let f = $first; let l = $last; let i = $index; track $index
+        ) {
+          @if (!metadataItem.limitTo || (i < metadataItem.limitTo)) {
 
-        <ng-container [ngSwitch]="metadataRenderingType(metadataItem)"
-                      *ngIf="!metadataItem.limitTo || (i < metadataItem.limitTo)">
+            @if (metadataItem.label && metadataRenderingType(metadataItem) !== 'currentRole' && metadataRenderingType(metadataItem) !== 'lastRole') {
+              <ng-container [ngTemplateOutlet]="label"></ng-container>
+            }
 
-          <span *ngIf="metadataItem.label && metadataRenderingType(metadataItem) !== 'currentRole' && metadataRenderingType(metadataItem) !== 'lastRole'">
-            <ng-container *ngTemplateOutlet="label"></ng-container>
-          </span>
-        <ng-container *ngIf="metadataItem.prefix">{{ metadataItem.prefix }}</ng-container>
+            @if (metadataItem.prefix) { {{ metadataItem.prefix }} }
 
-          <ng-container *ngSwitchCase="'crisref'">
-            <ds-metadata-link-view [item]="object" [metadata]="metadataValue"></ds-metadata-link-view>
-          </ng-container>
+            @switch (metadataRenderingType(metadataItem)) {
+              @case ('crisref') {
+                <ds-metadata-link-view [item]="object" [metadata]="metadataValue"></ds-metadata-link-view>
+              }
 
-          <ng-container *ngSwitchCase="'link'">
-            <ng-container *ngVar="linkData(metadataItem, metadataValue) as linkData">
-              <a href="{{linkData.href}}" target="_blank" [innerHTML]="linkData.text"></a>
-            </ng-container>
-          </ng-container>
+              @case ('link') {
+                @let linkInfo = linkData(metadataItem, metadataValue);
+                <a href="{{linkInfo.href}}" target="_blank" [innerHTML]="linkInfo.text"></a>
+              }
 
-          <ng-container *ngSwitchCase="'identifier'">
-            <ng-container *ngVar="identifierData(metadataItem, metadataValue) as identifierData">
-              <a href="{{identifierData.href}}" target="_blank" [innerHTML]="identifierData.text"></a>
-            </ng-container>
-          </ng-container>
+              @case ('identifier') {
+                @let identifierInfo = identifierData(metadataItem, metadataValue);
+                <a href="{{identifierInfo.href}}" target="_blank" [innerHTML]="identifierInfo.text"></a>
+              }
 
-          <ng-container *ngSwitchCase="'valuepair'">
-            {{ valuepairData(metadataValue, metadataRenderingSubtype(metadataItem)) | async }}
-          </ng-container>
+              @case ('valuepair') {
+                {{ valuepairData(metadataValue, metadataRenderingSubtype(metadataItem)) | async }}
+              }
 
-          <ng-container *ngSwitchCase="'currentRole'">
-            <ng-container *ngVar="currentRoleData(object) as currentRole">
-              <ng-container *ngIf="f && currentRole">
-                <ng-container *ngTemplateOutlet="label"></ng-container>
-                {{ currentRole }}
-              </ng-container>
-            </ng-container>
-          </ng-container>
+              @case ('currentRole') {
+                @let currentRole = currentRoleData(object);
+                @if (f && currentRole) {
+                  <ng-container [ngTemplateOutlet]="label"></ng-container>
+                  {{ currentRole }}
+                }
+              }
 
-          <ng-container *ngSwitchCase="'lastRole'">
-            <ng-container *ngVar="lastRoleData(object) as lastRole">
-              <ng-container *ngIf="f && lastRole">
-                <ng-container *ngTemplateOutlet="label"></ng-container>
-                {{ lastRole }}
-              </ng-container>
-            </ng-container>
-          </ng-container>
+              @case ('lastRole') {
+                @let lastRole = lastRoleData(object);
+                @if (f && lastRole) {
+                  <ng-container [ngTemplateOutlet]="label"></ng-container>
+                  {{ lastRole }}
+                }
+              }
 
-          <ng-container *ngSwitchCase="'date'">
-            <span class="metadata">{{ metadataValue.value | date:dateFormat }}</span>
-          </ng-container>
+              @case ('date') {
+                <span class="metadata">{{ metadataValue.value | date:dateFormat }}</span>
+              }
 
-          <ng-container *ngSwitchDefault>
-            <span class="metadata" [innerHTML]="metadataValue.value"></span>
-          </ng-container>
+              @default {
+                <span class="metadata" [innerHTML]="metadataValue.value"></span>
+              }
+            }
 
-          <ng-container *ngIf="metadataItem.suffix">{{ metadataItem.suffix }}</ng-container>
+            @if (metadataItem.suffix) { {{ metadataItem.suffix }} }
 
-          <ng-container *ngIf="!l && (!metadataItem.limitTo || (i !== metadataItem.limitTo - 1))">;&nbsp;</ng-container>
+            @if (!l && (!metadataItem.limitTo || (i !== metadataItem.limitTo - 1))) {
+              <ng-container>;&nbsp;</ng-container>
+            }
 
-        </ng-container>
-
-      </span>
-    </div>
-  </ng-container>
-
-</div>
+          }
+        }
+      </div>
+    }
+  }
+}

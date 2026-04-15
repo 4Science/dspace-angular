@@ -10,7 +10,7 @@ import {
   TranslateModule,
 } from '@ngx-translate/core';
 import { getTestScheduler } from 'jasmine-marbles';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
@@ -72,7 +72,7 @@ describe('AuditItemMenuComponent', () => {
 
   describe('when the user is authorized', () => {
     beforeEach(() => {
-      (authorizationDataServiceStub.isAuthorized as jasmine.Spy).and.returnValue(observableOf(true));
+      (authorizationDataServiceStub.isAuthorized as jasmine.Spy).and.returnValue(of(true));
       fixture.detectChanges();
     });
     it('should render a button', () => {
@@ -84,7 +84,7 @@ describe('AuditItemMenuComponent', () => {
 
   describe('when the user is not authorized', () => {
     beforeEach(() => {
-      (authorizationDataServiceStub.isAuthorized as jasmine.Spy).and.returnValue(observableOf(false));
+      (authorizationDataServiceStub.isAuthorized as jasmine.Spy).and.returnValue(of(false));
       fixture.detectChanges();
     });
     it('should not render a button', () => {

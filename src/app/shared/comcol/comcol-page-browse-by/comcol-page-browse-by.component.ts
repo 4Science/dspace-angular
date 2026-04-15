@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -35,11 +31,11 @@ import {
   switchMap,
   take,
 } from 'rxjs/operators';
+
 import {
   APP_CONFIG,
   AppConfig,
-} from 'src/config/app-config.interface';
-
+} from '../../../../config/app-config.interface';
 import { getCollectionPageRoute } from '../../../collection-page/collection-page-routing-paths';
 import { getCommunityPageRoute } from '../../../community-page/community-page-routing-paths';
 import { CollectionDataService } from '../../../core/data/collection-data.service';
@@ -69,14 +65,11 @@ export interface ComColPageNavOption {
   styleUrls: ['./comcol-page-browse-by.component.scss'],
   templateUrl: './comcol-page-browse-by.component.html',
   imports: [
+    AsyncPipe,
     FormsModule,
-    NgForOf,
     RouterLink,
     TranslateModule,
-    AsyncPipe,
-    NgIf,
   ],
-  standalone: true,
 })
 export class ComcolPageBrowseByComponent implements OnDestroy, OnInit {
   /**
@@ -103,12 +96,12 @@ export class ComcolPageBrowseByComponent implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     this.allOptions$ = this.calculateBrowseProperty().pipe(
-      switchMap ( (browseProperty) => this.configurationService.findByPropertyName( browseProperty) ),
+      switchMap((browseProperty) => this.configurationService.findByPropertyName(browseProperty)),
       getFinishedRemoteData(),
-      switchMap( (remoteData) => this.searchForBaseBrowseCollectionPropertyIfDataNotFound(remoteData)),
+      switchMap((remoteData) => this.searchForBaseBrowseCollectionPropertyIfDataNotFound(remoteData)),
       getFinishedRemoteData(),
       getRemoteDataPayload(),
-      map ( (configProperty) => {
+      map((configProperty) => {
         const comColRoute = (this.contentType === 'collection') ? getCollectionPageRoute(this.id) : getCommunityPageRoute(this.id);
         let options = this.initOptionsByContentType(comColRoute);
         if (configProperty) {
@@ -139,14 +132,14 @@ export class ComcolPageBrowseByComponent implements OnDestroy, OnInit {
       this.allOptions$,
       this.router.events.pipe(
         startWith(this.router),
-        filter((next: Router|Scroll) => (isNotEmpty((next as Router)?.url) || (next as Scroll)?.type === EventType.Scroll)),
-        map((next: Router|Scroll) => (next as Router)?.url || ((next as Scroll).routerEvent as NavigationEnd).urlAfterRedirects),
+        filter((next: Router | Scroll) => (isNotEmpty((next as Router)?.url) || (next as Scroll)?.type === EventType.Scroll)),
+        map((next: Router | Scroll) => (next as Router)?.url || ((next as Scroll).routerEvent as NavigationEnd).urlAfterRedirects),
         distinctUntilChanged(),
       ),
     ]).subscribe(([navOptions, url]: [ComColPageNavOption[], string]) => {
       for (const option of navOptions) {
         if (url?.split('?')[0] === comColRoute && option.id === this.appConfig[this.contentType].defaultBrowseTab) {
-          void this.router.navigate([option.routerLink], { queryParams: option.params });
+          void this.router.navigate([option.routerLink], { queryParams: option.params, replaceUrl: true });
           break;
         } else if (option.routerLink === url?.split('?')[0]) {
           this.currentOptionId$.next(option.id);
@@ -161,7 +154,7 @@ export class ComcolPageBrowseByComponent implements OnDestroy, OnInit {
       ).subscribe((allOptions: ComColPageNavOption[]) => {
         for (const option of allOptions) {
           if (option.id === this.appConfig[this.contentType].defaultBrowseTab) {
-            this.currentOptionId$.next(option[0].id);
+            this.currentOptionId$.next(option.id);
             void this.router.navigate([option.routerLink], { queryParams: option.params });
             break;
           }
@@ -188,8 +181,8 @@ export class ComcolPageBrowseByComponent implements OnDestroy, OnInit {
     if (this.contentType === 'collection') {
       return this.collectionService.findById(this.id).pipe(
         getFirstSucceededRemoteDataPayload(),
-        map( (collection) => collection.firstMetadataValue('dspace.entity.type') ),
-        map ( (entityType) => entityType ? 'browse.collection.' + entityType : 'browse.collection' ),
+        map((collection) => collection.firstMetadataValue('dspace.entity.type')),
+        map((entityType) => entityType ? 'browse.collection.' + entityType : 'browse.collection'),
       );
     }
     return of('browse.' + this.contentType);

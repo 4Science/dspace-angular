@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import uniqueId from 'lodash/uniqueId';
 import {
   BehaviorSubject,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import { first } from 'rxjs/operators';
 
@@ -38,8 +38,8 @@ export class NotificationsService {
     this.store.dispatch(notificationAction);
   }
 
-  success(title: any = observableOf(''),
-    content: any = observableOf(''),
+  success(title: any = of(''),
+    content: any = of(''),
     options: Partial<NotificationOptions> = {},
     html: boolean = false): INotification {
     const notificationOptions = { ...this.getDefaultOptions(), ...options };
@@ -48,8 +48,8 @@ export class NotificationsService {
     return notification;
   }
 
-  error(title: any = observableOf(''),
-    content: any = observableOf(''),
+  error(title: any = of(''),
+    content: any = of(''),
     options: Partial<NotificationOptions> = {},
     html: boolean = false): INotification {
     const notificationOptions = { ...this.getDefaultOptions(), ...options };
@@ -58,8 +58,8 @@ export class NotificationsService {
     return notification;
   }
 
-  info(title: any = observableOf(''),
-    content: any = observableOf(''),
+  info(title: any = of(''),
+    content: any = of(''),
     options: Partial<NotificationOptions> = {},
     html: boolean = false): INotification {
     const notificationOptions = { ...this.getDefaultOptions(), ...options };
@@ -68,8 +68,8 @@ export class NotificationsService {
     return notification;
   }
 
-  warning(title: any = observableOf(''),
-    content: any = observableOf(''),
+  warning(title: any = of(''),
+    content: any = of(''),
     options: NotificationOptions = this.getDefaultOptions(),
     html: boolean = false): INotification {
     const notificationOptions = { ...this.getDefaultOptions(), ...options };
@@ -80,7 +80,7 @@ export class NotificationsService {
 
   process(processId: string,
     checkTime: number,
-    title: any = observableOf(''),
+    title: any = of(''),
     options: NotificationOptions = this.getDefaultOptions(),
     html: boolean = false): IProcessNotification {
     const notificationOptions = { ...this.getDefaultOptions(), ...options };

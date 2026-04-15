@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgFor,
-  NgIf,
   SlicePipe,
 } from '@angular/common';
 import {
@@ -25,17 +23,14 @@ import { StatisticsChartDataComponent } from '../statistics-chart-data/statistic
   selector: 'ds-statistics-table',
   templateUrl: './statistics-table.component.html',
   styleUrls: ['./statistics-table.component.scss'],
-  standalone: true,
   imports: [
-    NgIf,
-    NgFor,
-    NgClass,
     AlertComponent,
     AsyncPipe,
-    SlicePipe,
-    CreateLinkPipe,
-    TranslateModule,
     BtnDisabledDirective,
+    CreateLinkPipe,
+    NgClass,
+    SlicePipe,
+    TranslateModule,
   ],
 })
 /**

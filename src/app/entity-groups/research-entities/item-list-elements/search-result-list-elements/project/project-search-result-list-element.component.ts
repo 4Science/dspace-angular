@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgIf,
 } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
@@ -14,6 +13,7 @@ import { MetricDonutsComponent } from '../../../../../shared/object-list/metric-
 import { AdditionalMetadataComponent } from '../../../../../shared/object-list/search-result-list-element/additional-metadata/additional-metadata.component';
 import { ItemSearchResultListElementComponent } from '../../../../../shared/object-list/search-result-list-element/item-search-result/item-types/item/item-search-result-list-element.component';
 import { TruncatableComponent } from '../../../../../shared/truncatable/truncatable.component';
+import { EscapeHtmlPipe } from '../../../../../shared/utils/escape-html.pipe';
 import { ThemedThumbnailComponent } from '../../../../../thumbnail/themed-thumbnail.component';
 
 @listableObjectComponent('ProjectSearchResult', ViewMode.ListElement)
@@ -21,8 +21,18 @@ import { ThemedThumbnailComponent } from '../../../../../thumbnail/themed-thumbn
   selector: 'ds-project-search-result-list-element',
   styleUrls: ['./project-search-result-list-element.component.scss'],
   templateUrl: './project-search-result-list-element.component.html',
-  standalone: true,
-  imports: [NgIf, RouterLink, ThemedThumbnailComponent, NgClass, TruncatableComponent, ThemedBadgesComponent, AsyncPipe, AdditionalMetadataComponent, MetricBadgesComponent, MetricDonutsComponent],
+  imports: [
+    AdditionalMetadataComponent,
+    AsyncPipe,
+    EscapeHtmlPipe,
+    MetricBadgesComponent,
+    MetricDonutsComponent,
+    NgClass,
+    RouterLink,
+    ThemedBadgesComponent,
+    ThemedThumbnailComponent,
+    TruncatableComponent,
+  ],
 })
 /**
  * The component for displaying a list element for an item search result of the type Project

@@ -13,7 +13,6 @@ import {
 
 @Directive({
   selector: '[dsRenderOnlyForBrowser]',
-  standalone: true,
 })
 /**
  * Structural Directive for rendering a template reference on client side only

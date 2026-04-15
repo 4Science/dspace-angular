@@ -9,6 +9,10 @@
   flex-grow: 1;
 }
 
+.submission-form-header-legend {
+  width: 100%;
+}
+
 .submission-form-footer {
   border-radius: var(--bs-card-border-radius);
   bottom: 0;
@@ -22,7 +26,7 @@
   font-weight: $font-weight-normal;
   color: $link-color;
   text-decoration: $link-decoration;
-  @include hover {
+  &:hover {
     color: $link-hover-color;
     text-decoration: $link-hover-decoration;
   }

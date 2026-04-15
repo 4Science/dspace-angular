@@ -2,8 +2,6 @@ import {
   AsyncPipe,
   isPlatformServer,
   NgClass,
-  NgForOf,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -36,16 +34,13 @@ import { SearchObjects } from '../../../search/models/search-objects.model';
   selector: 'ds-base-counters-section',
   styleUrls: ['./counters-section.component.scss'],
   templateUrl: './counters-section.component.html',
-  standalone: true,
   imports: [
-    NgClass,
-    ThemedLoadingComponent,
-    NgIf,
-    NgTemplateOutlet,
-    TranslateModule,
     AsyncPipe,
+    NgClass,
+    NgTemplateOutlet,
     RouterLink,
-    NgForOf,
+    ThemedLoadingComponent,
+    TranslateModule,
   ],
 })
 export class CountersSectionComponent implements OnInit {

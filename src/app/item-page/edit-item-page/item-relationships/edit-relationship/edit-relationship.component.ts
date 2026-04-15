@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -50,14 +47,12 @@ import { VirtualMetadataComponent } from '../../virtual-metadata/virtual-metadat
   styleUrls: ['./edit-relationship.component.scss'],
   templateUrl: './edit-relationship.component.html',
   imports: [
-    ListableObjectComponentLoaderComponent,
     AsyncPipe,
-    NgIf,
+    BtnDisabledDirective,
+    ListableObjectComponentLoaderComponent,
     TranslateModule,
     VirtualMetadataComponent,
-    BtnDisabledDirective,
   ],
-  standalone: true,
 })
 export class EditRelationshipComponent implements OnChanges {
   /**

@@ -3,9 +3,9 @@ import {
   tick,
 } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { AccessibilitySettingsService } from 'src/app/accessibility/accessibility-settings.service';
-import { getAccessibilitySettingsServiceStub } from 'src/app/accessibility/accessibility-settings.service.stub';
 
+import { AccessibilitySettingsService } from '../../accessibility/accessibility-settings.service';
+import { getAccessibilitySettingsServiceStub } from '../../accessibility/accessibility-settings.service.stub';
 import { UUIDService } from '../../core/shared/uuid.service';
 import { LiveRegionService } from './live-region.service';
 

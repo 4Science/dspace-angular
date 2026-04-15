@@ -1,8 +1,5 @@
 import {
   AsyncPipe,
-  NgIf,
-  NgSwitch,
-  NgSwitchCase,
   TitleCasePipe,
 } from '@angular/common';
 import {
@@ -28,15 +25,11 @@ import { ListMetricPropsPipe } from '../pipes/list-metric-props/list-metric-prop
   selector: 'ds-metric-plumx',
   templateUrl: './metric-plumx.component.html',
   styleUrls: ['./metric-plumx.component.scss'],
-  standalone: true,
   imports: [
-    NgIf,
-    NgSwitch,
-    NgSwitchCase,
     AsyncPipe,
+    ListMetricPropsPipe,
     TitleCasePipe,
     TranslateModule,
-    ListMetricPropsPipe,
   ],
 })
 export class MetricPlumxComponent extends BaseMetricComponent implements OnInit, OnDestroy {

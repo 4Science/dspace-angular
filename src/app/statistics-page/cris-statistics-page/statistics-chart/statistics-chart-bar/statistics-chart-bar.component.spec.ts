@@ -4,15 +4,15 @@ import {
   NO_ERRORS_SCHEMA,
 } from '@angular/core';
 import {
-  async,
   ComponentFixture,
   TestBed,
+  waitForAsync,
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { ChartComponent } from '@swimlane/ngx-charts';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { BrowserExportService } from '../../../../core/export-service/browser-export.service';
 import { REPORT_DATA } from '../../../../core/statistics/data-report.service';
@@ -66,10 +66,10 @@ describe('StatisticsChartBarComponent', () => {
     },
   ];
 
-  const page = observableOf(0);
+  const page = of(0);
   const exportServiceStub = new ExportServiceStub();
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot(), CommonModule, StatisticsChartBarComponent, NoopAnimationsModule],
       providers: [

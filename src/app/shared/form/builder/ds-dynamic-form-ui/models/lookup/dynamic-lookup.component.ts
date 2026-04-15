@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgForOf,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -30,9 +28,9 @@ import {
   DynamicFormValidationService,
 } from '@ng-dynamic-forms/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import {
-  of as observableOf,
+  of,
   Subscription,
 } from 'rxjs';
 import {
@@ -71,21 +69,18 @@ import { DynamicLookupNameModel } from './dynamic-lookup-name.model';
   styleUrls: ['./dynamic-lookup.component.scss'],
   templateUrl: './dynamic-lookup.component.html',
   imports: [
-    TranslateModule,
-    NgbTooltipModule,
-    NgbDropdownModule,
+    AsyncPipe,
     AuthorityConfidenceStateDirective,
+    BtnDisabledDirective,
     FormsModule,
-    NgIf,
+    InfiniteScrollDirective,
+    NgbDropdownModule,
+    NgbTooltipModule,
     NgClass,
-    InfiniteScrollModule,
-    NgForOf,
     NgTemplateOutlet,
     ObjNgFor,
-    BtnDisabledDirective,
-    AsyncPipe,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class DsDynamicLookupComponent extends DsDynamicVocabularyComponent implements OnDestroy, OnInit {
 
@@ -290,7 +285,7 @@ export class DsDynamicLookupComponent extends DsDynamicVocabularyComponent imple
     ).pipe(
       getFirstSucceededRemoteDataPayload(),
       catchError(() =>
-        observableOf(buildPaginatedList(
+        of(buildPaginatedList(
           new PageInfo(),
           [],
         )),

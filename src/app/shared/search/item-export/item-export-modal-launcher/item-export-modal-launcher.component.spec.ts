@@ -13,10 +13,7 @@ import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
-import {
-  of as observableOf,
-  of,
-} from 'rxjs';
+import { of } from 'rxjs';
 
 import { AuthService } from '../../../../core/auth/auth.service';
 import { ConfigurationDataService } from '../../../../core/data/configuration-data.service';
@@ -38,7 +35,7 @@ describe('ItemExportModalWrapperComponent', () => {
 
   let authorizationService: AuthorizationDataService;
   authorizationService = jasmine.createSpyObj('authorizationService', {
-    isAuthorized: observableOf(true),
+    isAuthorized: of(true),
   });
 
   const configurationDataService = jasmine.createSpyObj('configurationDataService', {
@@ -94,7 +91,7 @@ describe('ItemExportModalWrapperComponent', () => {
 
   describe('when export limit is 0', () => {
     beforeEach(() => {
-      authServiceMock.isAuthenticated.and.returnValue(observableOf(false));
+      authServiceMock.isAuthenticated.and.returnValue(of(false));
       configurationDataService.findByPropertyName.and.returnValues(confResponseDisabled$);
     });
 
@@ -112,7 +109,7 @@ describe('ItemExportModalWrapperComponent', () => {
     let btnDebugElement;
 
     beforeEach(() => {
-      authServiceMock.isAuthenticated.and.returnValue(observableOf(true));
+      authServiceMock.isAuthenticated.and.returnValue(of(true));
       configurationDataService.findByPropertyName.and.returnValues(confResponseEnabled$);
       fixture.detectChanges();
       btnDebugElement = fixture.debugElement.query(By.css('.btn'));

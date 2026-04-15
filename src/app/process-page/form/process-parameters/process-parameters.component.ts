@@ -1,7 +1,4 @@
-import {
-  NgFor,
-  NgIf,
-} from '@angular/common';
+
 import {
   Component,
   EventEmitter,
@@ -36,8 +33,10 @@ import { ParameterSelectComponent } from './parameter-select/parameter-select.co
     useFactory: controlContainerFactory,
     deps: [[new Optional(), NgForm]],
   }],
-  standalone: true,
-  imports: [NgIf, NgFor, ParameterSelectComponent, TranslateModule],
+  imports: [
+    ParameterSelectComponent,
+    TranslateModule,
+  ],
 })
 export class ProcessParametersComponent implements OnChanges {
   /**

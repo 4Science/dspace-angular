@@ -1,9 +1,7 @@
-import {
-  KeyValuePipe,
-  NgForOf,
-} from '@angular/common';
+import { KeyValuePipe } from '@angular/common';
 import {
   Component,
+  Inject,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -16,6 +14,10 @@ import {
 import { Operation } from 'fast-json-patch';
 import { Subscription } from 'rxjs';
 
+import {
+  APP_CONFIG,
+  AppConfig,
+} from '../../../config/app-config.interface';
 import { environment } from '../../../environments/environment';
 import { ScriptDataService } from '../../core/data/processes/script-data.service';
 import { SiteDataService } from '../../core/data/site-data.service';
@@ -32,12 +34,10 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
   templateUrl: './admin-edit-user-agreement.component.html',
   imports: [
     AlertComponent,
-    TranslateModule,
-    KeyValuePipe,
     FormsModule,
-    NgForOf,
+    KeyValuePipe,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class AdminEditUserAgreementComponent implements OnInit, OnDestroy {
 
@@ -50,12 +50,18 @@ export class AdminEditUserAgreementComponent implements OnInit, OnDestroy {
 
   USER_AGREEMENT_METADATA = 'dspace.agreements.end-user';
 
+  /**
+   * show markdown info alert box
+   */
+  showMarkdownInfo = this.appConfig.markdown.showInfoOnCMSMetadataEditPages;
+
   constructor(private siteService: SiteDataService,
               private modalService: NgbModal,
               private translateService: TranslateService,
               private notificationsService: NotificationsService,
-              private scriptDataService: ScriptDataService ) {
-
+              private scriptDataService: ScriptDataService,
+              @Inject(APP_CONFIG) protected appConfig: AppConfig,
+  ) {
   }
 
   ngOnInit(): void {

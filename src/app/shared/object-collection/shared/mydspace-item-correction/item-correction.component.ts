@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -10,7 +7,7 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import {
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import {
   catchError,
@@ -31,11 +28,9 @@ import { getFirstSucceededRemoteListPayload } from '../../../../core/shared/oper
   styleUrls: ['./item-correction.component.scss'],
   templateUrl: './item-correction.component.html',
   imports: [
-    NgIf,
     AsyncPipe,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class ItemCorrectionComponent implements OnInit {
 
@@ -62,7 +57,7 @@ export class ItemCorrectionComponent implements OnInit {
       getFirstSucceededRemoteListPayload(),
       map((list: Relationship[]) => list.length > 0),
       startWith(false),
-      catchError(() => observableOf(false)),
+      catchError(() => of(false)),
     );
   }
 }

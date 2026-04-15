@@ -29,13 +29,13 @@ describe('ProvideEmailComponent', () => {
       ],
       imports: [
         CommonModule,
+        ProvideEmailComponent,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
             useClass: TranslateLoaderMock,
           },
         }),
-        ProvideEmailComponent,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
@@ -53,16 +53,16 @@ describe('ProvideEmailComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should call externalLoginService.patchUpdateRegistration when form is submitted with valid email', () => {
-  //   const email = 'test@example.com';
-  //   component.emailForm.setValue({ email });
-  //   component.registrationId = '123';
-  //   component.token = '456';
-  //   fixture.detectChanges();
+  it('should call externalLoginService.patchUpdateRegistration when form is submitted with valid email', () => {
+    const email = 'test@example.com';
+    component.emailForm.setValue({ email });
+    component.registrationId = '123';
+    component.token = '456';
+    fixture.detectChanges();
 
-  //   const button = fixture.nativeElement.querySelector('button[type="submit"]');
-  //   button.click();
+    const button = fixture.nativeElement.querySelector('button[type="submit"]');
+    button.click();
 
-  //   expect(externalLoginServiceSpy.patchUpdateRegistration).toHaveBeenCalledWith([email], 'email', component.registrationId, component.token, 'add');
-  // });
+    expect(externalLoginServiceSpy.patchUpdateRegistration).toHaveBeenCalledWith([email], 'email', component.registrationId, component.token, 'add');
+  });
 });

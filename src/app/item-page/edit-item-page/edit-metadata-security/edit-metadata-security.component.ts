@@ -1,8 +1,4 @@
-import {
-  NgForOf,
-  NgIf,
-  NgStyle,
-} from '@angular/common';
+import { NgStyle } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -24,12 +20,9 @@ import {
   templateUrl: './edit-metadata-security.component.html',
   styleUrls: ['./edit-metadata-security.component.scss'],
   imports: [
-    NgStyle,
-    NgForOf,
-    NgIf,
     BtnDisabledDirective,
+    NgStyle,
   ],
-  standalone: true,
 })
 export class EditMetadataSecurityComponent implements OnInit {
 

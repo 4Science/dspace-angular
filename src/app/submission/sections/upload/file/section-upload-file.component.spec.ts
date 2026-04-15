@@ -5,7 +5,7 @@ import {
 import {
   ChangeDetectorRef,
   Component,
-  NO_ERRORS_SCHEMA,
+  CUSTOM_ELEMENTS_SCHEMA,
 } from '@angular/core';
 import {
   ComponentFixture,
@@ -17,19 +17,20 @@ import {
   NgbModal,
   NgbModule,
 } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
+import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   EMPTY,
-  of as observableOf,
   of,
 } from 'rxjs';
 
-import { APP_DATA_SERVICES_MAP } from '../../../../../config/app-config.interface';
 import { JsonPatchOperationPathCombiner } from '../../../../core/json-patch/builder/json-patch-operation-path-combiner';
 import { JsonPatchOperationsBuilder } from '../../../../core/json-patch/builder/json-patch-operations-builder';
 import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service';
 import { SubmissionJsonPatchOperationsService } from '../../../../core/submission/submission-json-patch-operations.service';
 import { VocabularyService } from '../../../../core/submission/vocabularies/vocabulary.service';
+import { AlertComponent } from '../../../../shared/alert/alert.component';
 import { ThemedFileDownloadLinkComponent } from '../../../../shared/file-download-link/themed-file-download-link.component';
 import { FormBuilderService } from '../../../../shared/form/builder/form-builder.service';
 import { FormService } from '../../../../shared/form/form.service';
@@ -44,6 +45,7 @@ import {
 } from '../../../../shared/mocks/submission.mock';
 import { getMockThemeService } from '../../../../shared/mocks/theme-service.mock';
 import { HALEndpointServiceStub } from '../../../../shared/testing/hal-endpoint-service.stub';
+import { SectionsServiceStub } from '../../../../shared/testing/sections-service.stub';
 import { SubmissionJsonPatchOperationsServiceStub } from '../../../../shared/testing/submission-json-patch-operations-service.stub';
 import { SubmissionServiceStub } from '../../../../shared/testing/submission-service.stub';
 import { createTestComponent } from '../../../../shared/testing/utils.test';
@@ -51,11 +53,11 @@ import { ThemeService } from '../../../../shared/theme-support/theme.service';
 import { FileSizePipe } from '../../../../shared/utils/file-size-pipe';
 import { VarDirective } from '../../../../shared/utils/var.directive';
 import { SubmissionService } from '../../../submission.service';
+import { SectionsService } from '../../sections.service';
 import { SectionUploadService } from '../section-upload.service';
 import { POLICY_DEFAULT_WITH_LIST } from '../section-upload-constants';
 import { SubmissionSectionUploadFileEditComponent } from './edit/section-upload-file-edit.component';
 import { SubmissionSectionUploadFileComponent } from './section-upload-file.component';
-import { ThemedSubmissionSectionUploadFileComponent } from './themed-section-upload-file.component';
 import { SubmissionSectionUploadFileViewComponent } from './view/section-upload-file-view.component';
 
 const configMetadataFormMock = {
@@ -69,7 +71,7 @@ const configMetadataFormMock = {
   }],
 };
 
-describe('SubmissionSectionUploadFileComponent test suite', () => {
+describe('SubmissionSectionUploadFileComponent', () => {
 
   let comp: SubmissionSectionUploadFileComponent;
   let compAsAny: any;
@@ -125,7 +127,8 @@ describe('SubmissionSectionUploadFileComponent test suite', () => {
         { provide: SubmissionService, useClass: SubmissionServiceStub },
         { provide: SectionUploadService, useValue: getMockSectionUploadService() },
         { provide: ThemeService, useValue: getMockThemeService() },
-        { provide: APP_DATA_SERVICES_MAP, useValue: {} },
+        { provide: Store, useValue: provideMockStore() },
+        { provide: SectionsService, useValue: new SectionsServiceStub() },
         ChangeDetectorRef,
         NgbModal,
         SubmissionSectionUploadFileComponent,
@@ -133,15 +136,18 @@ describe('SubmissionSectionUploadFileComponent test suite', () => {
         FormBuilderService,
         { provide: VocabularyService, useValue: vocabularyServiceSpy },
       ],
-      schemas: [NO_ERRORS_SCHEMA],
     })
       .overrideComponent(SubmissionSectionUploadFileComponent, {
+        add: {
+          schemas: [CUSTOM_ELEMENTS_SCHEMA],
+        },
         remove: { imports: [
+          AlertComponent,
           SubmissionSectionUploadFileViewComponent,
           ThemedFileDownloadLinkComponent,
         ] },
       })
-      .compileComponents().then();
+      .compileComponents();
   }));
 
   describe('', () => {
@@ -214,7 +220,7 @@ describe('SubmissionSectionUploadFileComponent test suite', () => {
     });
 
     it('should init file data properly', () => {
-      uploadService.getFileData.and.returnValue(observableOf(fileData));
+      uploadService.getFileData.and.returnValue(of(fileData));
 
       comp.ngOnChanges({});
 
@@ -224,7 +230,7 @@ describe('SubmissionSectionUploadFileComponent test suite', () => {
     it('should not show any buttons when ready-only is true', () => {
       comp.fileData = fileData;
       comp.readOnly = true;
-      submissionServiceStub.getSubmissionObject.and.returnValue(observableOf({}));
+      submissionServiceStub.getSubmissionObject.and.returnValue(of({}));
 
       fixture.detectChanges();
 
@@ -235,7 +241,7 @@ describe('SubmissionSectionUploadFileComponent test suite', () => {
 
     it('should call deleteFile on delete confirmation', async () => {
       spyOn(compAsAny, 'deleteFile');
-      submissionServiceStub.getSubmissionObject.and.returnValue(observableOf({}));
+      submissionServiceStub.getSubmissionObject.and.returnValue(of({}));
       comp.fileData = fileData;
 
       fixture.detectChanges();
@@ -256,7 +262,7 @@ describe('SubmissionSectionUploadFileComponent test suite', () => {
     it('should delete primary if file we delete is primary', () => {
       compAsAny.isPrimary = true;
       compAsAny.pathCombiner = pathCombiner;
-      operationsService.jsonPatchByResourceID.and.returnValue(observableOf({}));
+      operationsService.jsonPatchByResourceID.and.returnValue(of({}));
       compAsAny.deleteFile();
       expect(operationsBuilder.remove).toHaveBeenCalledWith(pathCombiner.getPath('primary'));
       expect(uploadService.updateFilePrimaryBitstream).toHaveBeenCalledWith(submissionId, sectionId, null);
@@ -265,14 +271,14 @@ describe('SubmissionSectionUploadFileComponent test suite', () => {
     it('should NOT delete primary if file we delete is NOT primary', () => {
       compAsAny.isPrimary = false;
       compAsAny.pathCombiner = pathCombiner;
-      operationsService.jsonPatchByResourceID.and.returnValue(observableOf({}));
+      operationsService.jsonPatchByResourceID.and.returnValue(of({}));
       compAsAny.deleteFile();
       expect(uploadService.updateFilePrimaryBitstream).not.toHaveBeenCalledTimes(1);
     });
 
     it('should delete file properly', () => {
       compAsAny.pathCombiner = pathCombiner;
-      operationsService.jsonPatchByResourceID.and.returnValue(observableOf({}));
+      operationsService.jsonPatchByResourceID.and.returnValue(of({}));
       submissionServiceStub.getSubmissionObjectLinkName.and.returnValue('workspaceitems');
 
       compAsAny.deleteFile();
@@ -289,7 +295,7 @@ describe('SubmissionSectionUploadFileComponent test suite', () => {
 
     it('should open edit modal when edit button is clicked', () => {
       spyOn(compAsAny, 'editBitstreamData').and.callThrough();
-      submissionServiceStub.getSubmissionObject.and.returnValue(observableOf({}));
+      submissionServiceStub.getSubmissionObject.and.returnValue(of({}));
       comp.fileData = fileData;
 
       fixture.detectChanges();
@@ -311,7 +317,7 @@ describe('SubmissionSectionUploadFileComponent test suite', () => {
         },
       ];
 
-      submissionServiceStub.getSubmissionObject.and.returnValue(observableOf(mockSubmission));
+      submissionServiceStub.getSubmissionObject.and.returnValue(of(mockSubmission));
       comp.fileData = fileData;
 
       fixture.detectChanges();
@@ -329,16 +335,15 @@ describe('SubmissionSectionUploadFileComponent test suite', () => {
 // declare a test component
 @Component({
   selector: 'ds-test-cmp',
-  template: ``,
-  standalone: true,
+  template: '{{ obs | async }}',
   imports: [
-    ThemedSubmissionSectionUploadFileComponent,
-    CommonModule,
     AsyncPipe,
-    NgbModule],
+    NgbModule,
+  ],
 })
 class TestComponent {
 
+  obs = of();
   availableGroups;
   availableAccessConditionOptions;
   collectionId = mockSubmissionCollectionId;

@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Inject,
@@ -20,8 +20,9 @@ import { RenderingTypeStructuredModelComponent } from '../rendering-type-structu
   selector: 'span[ds-tag]',
   templateUrl: './tag.component.html',
   styleUrls: ['./tag.component.scss'],
-  standalone: true,
-  imports: [NgIf, ChipsComponent],
+  imports: [
+    ChipsComponent,
+  ],
 })
 export class TagComponent extends RenderingTypeStructuredModelComponent implements OnInit {
 

@@ -1,4 +1,7 @@
-import { CommonModule } from '@angular/common';
+import {
+  CommonModule,
+  Location,
+} from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import {
   ComponentFixture,
@@ -10,9 +13,11 @@ import {
   Router,
 } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { AuthService } from '../../core/auth/auth.service';
+import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
+import { ConfigurationDataService } from '../../core/data/configuration-data.service';
 import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 import { SignpostingDataService } from '../../core/data/signposting-data.service';
 import { HardRedirectService } from '../../core/services/hard-redirect.service';
@@ -24,6 +29,7 @@ import {
 import { Bitstream } from '../../core/shared/bitstream.model';
 import { FileService } from '../../core/shared/file.service';
 import { createSuccessfulRemoteDataObject } from '../../shared/remote-data.utils';
+import { MatomoService } from '../../statistics/matomo.service';
 import { BitstreamDownloadPageComponent } from './bitstream-download-page.component';
 
 describe('BitstreamDownloadPageComponent', () => {
@@ -36,10 +42,13 @@ describe('BitstreamDownloadPageComponent', () => {
   let hardRedirectService: HardRedirectService;
   let activatedRoute;
   let router;
+  let location: Location;
+  let dsoNameService: DSONameService;
 
   let bitstream: Bitstream;
   let serverResponseService: jasmine.SpyObj<ServerResponseService>;
   let signpostingDataService: jasmine.SpyObj<SignpostingDataService>;
+  let matomoService: jasmine.SpyObj<MatomoService>;
 
   const mocklink = {
     href: 'http://test.org',
@@ -55,20 +64,30 @@ describe('BitstreamDownloadPageComponent', () => {
 
   function init() {
     authService = jasmine.createSpyObj('authService', {
-      isAuthenticated: observableOf(true),
+      isAuthenticated: of(true),
       setRedirectUrl: {},
+      getShortlivedToken: of('token'),
     });
     authorizationService = jasmine.createSpyObj('authorizationSerivice', {
-      isAuthorized: observableOf(true),
+      isAuthorized: of(true),
     });
 
     fileService = jasmine.createSpyObj('fileService', {
-      retrieveFileDownloadLink: observableOf('content-url-with-headers'),
+      retrieveFileDownloadLink: of('content-url-with-headers'),
     });
 
-    hardRedirectService = jasmine.createSpyObj('fileService', {
+    hardRedirectService = jasmine.createSpyObj('hardRedirectService', {
       redirect: {},
     });
+
+    location = jasmine.createSpyObj('location', {
+      back: {},
+    });
+
+    dsoNameService = jasmine.createSpyObj('dsoNameService', {
+      getName: 'Test Bitstream',
+    });
+
     bitstream = Object.assign(new Bitstream(), {
       uuid: 'bitstreamUuid',
       _links: {
@@ -76,15 +95,15 @@ describe('BitstreamDownloadPageComponent', () => {
         self: { href: 'bitstream-self-link' },
       },
     });
-
     activatedRoute = {
-      data: observableOf({
-        bitstream: createSuccessfulRemoteDataObject(
-          bitstream,
-        ),
+      data: of({
+        bitstream: createSuccessfulRemoteDataObject(bitstream),
       }),
-      params: observableOf({
+      params: of({
         id: 'testid',
+      }),
+      queryParams: of({
+        accessToken: undefined,
       }),
     };
 
@@ -95,8 +114,13 @@ describe('BitstreamDownloadPageComponent', () => {
     });
 
     signpostingDataService = jasmine.createSpyObj('SignpostingDataService', {
-      getLinks: observableOf([mocklink, mocklink2]),
+      getLinks: of([mocklink, mocklink2]),
     });
+    matomoService = jasmine.createSpyObj('MatomoService', {
+      appendVisitorId: of(''),
+      isMatomoEnabled$: of(true),
+    });
+    matomoService.appendVisitorId.and.callFake((link) => of(link));
   }
 
   function initTestbed() {
@@ -112,7 +136,11 @@ describe('BitstreamDownloadPageComponent', () => {
         { provide: HardRedirectService, useValue: hardRedirectService },
         { provide: ServerResponseService, useValue: serverResponseService },
         { provide: SignpostingDataService, useValue: signpostingDataService },
+        { provide: MatomoService, useValue: matomoService },
         { provide: PLATFORM_ID, useValue: 'server' },
+        { provide: Location, useValue: location },
+        { provide: DSONameService, useValue: dsoNameService },
+        { provide: ConfigurationDataService, useValue: {} },
       ],
     })
       .compileComponents();

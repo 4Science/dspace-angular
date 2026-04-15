@@ -1,12 +1,9 @@
 <h2 class="mb-3">{{ 'info.end-user-agreement.head' | translate }}</h2>
 
-<ng-container *ngIf="(userAgreementText$ | async) !== null">
-  <ds-markdown-viewer
-    *ngIf="(userAgreementText$ | async)?.length; else defaultContent"
-    [value]="(userAgreementText$ | async)">
-  </ds-markdown-viewer>
-
-  <ng-template #defaultContent>
+@if ((userAgreementText$ | async) !== null) {
+  @if ((userAgreementText$ | async)?.length > 0) {
+    <ds-markdown-viewer [value]="(userAgreementText$ | async)"></ds-markdown-viewer>
+  } @else {
     <div class="default-agreement-content">
       <h1>{{ 'info.end-user-agreement.head' | translate }}</h1>
       <p><em>Last updated May 4, 2023</em></p>
@@ -104,5 +101,5 @@
 
       <p><a [routerLink]="'.'" fragment="ref-a" id="comment-a">[a]</a>&nbsp;The DSpace software used to run this site is open source. Options for reuse and reproduction of the DSpace software is governed by its open source license: <a href="https://github.com/DSpace/DSpace/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">https://github.com/DSpace/DSpace/blob/main/LICENSE</a></p>
     </div>
-  </ng-template>
-</ng-container>
+  }
+}

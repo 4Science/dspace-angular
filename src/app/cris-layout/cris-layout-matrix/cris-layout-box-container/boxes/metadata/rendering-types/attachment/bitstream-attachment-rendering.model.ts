@@ -27,7 +27,6 @@ import { BitstreamRenderingModelComponent } from '../bitstream-rendering-model';
  */
 @Component({
   template: '',
-  standalone: true,
 })
 export abstract class BitstreamAttachmentRenderingModelComponent extends BitstreamRenderingModelComponent {
   constructor(

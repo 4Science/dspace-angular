@@ -3,8 +3,6 @@ import {
   DOCUMENT,
   NgClass,
   NgComponentOutlet,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   AfterViewChecked,
@@ -52,16 +50,13 @@ import { ContextMenuEntryType } from './context-menu-entry-type';
   selector: 'ds-context-menu',
   styleUrls: ['./context-menu.component.scss'],
   templateUrl: './context-menu.component.html',
-  standalone: true,
   imports: [
-    NgIf,
-    NgFor,
-    NgComponentOutlet,
+    AsyncPipe,
+    BrowserOnlyDirective,
     NgbDropdownModule,
     NgClass,
-    AsyncPipe,
+    NgComponentOutlet,
     TranslateModule,
-    BrowserOnlyDirective,
   ],
 })
 export class ContextMenuComponent implements OnInit, AfterViewChecked {

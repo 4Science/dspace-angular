@@ -62,7 +62,7 @@ describe('', () => {
     rendering: FieldRenderingType.THUMBNAIL,
     fieldType: 'BITSTREAM',
     style: null,
-    styleLabel: 'font-weight-bold col-3',
+    styleLabel: 'fw-bold col-3',
     styleValue: null,
     bitstream: {
       bundle: 'ORIGINAL',
@@ -78,7 +78,7 @@ describe('', () => {
     rendering: FieldRenderingType.THUMBNAIL,
     fieldType: 'BITSTREAM',
     style: null,
-    styleLabel: 'font-weight-bold col-3',
+    styleLabel: 'fw-bold col-3',
     styleValue: null,
     bitstream: {
       bundle: 'ORIGINAL',

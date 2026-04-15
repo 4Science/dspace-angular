@@ -1,4 +1,6 @@
-<button *ngIf="isAuthorized | async" class="dropdown-item"
-        [routerLink]="['/items', contextMenuObject.id, 'orcid']"
-        [innerHTML]="'context-menu.actions.orcid-view' | translate">
-</button>
+@if (isAuthorized | async) {
+  <button class="dropdown-item"
+    [routerLink]="['/items', contextMenuObject.id, 'orcid']"
+    [innerHTML]="'context-menu.actions.orcid-view' | translate">
+  </button>
+}

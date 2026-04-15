@@ -1,21 +1,27 @@
-<button *ngIf="(isXsOrSm$ | async) && showNav" class="navbar-toggler pl-2 float-right" type="button" (click)="toggleNavbar()"
+@if ((isXsOrSm$ | async) && showNav) {
+  <button class="navbar-toggler ps-2 float-end" type="button" (click)="toggleNavbar()"
     aria-controls="collapsingNav" aria-expanded="false" [attr.aria-label]="'nav.toggle' | translate">
     <span class="navbar-toggler-icon fas fa-bars fa-fw" aria-hidden="true"></span>
-</button>
+  </button>
+}
 
 <!-- [@slideMobileNav]="!(windowService.isXsOrSm() | async) ? 'default' : (menuCollapsed ? 'collapsed' : 'expanded')" -->
-<nav [ngClass]="{'open': !menuCollapsed}" *ngIf="showNav" class="navbar navbar-light navbar-expand-md p-md-0 navbar-container cris-layout-navbar {{menuCollapsed ? 'collapsed' : 'expanded'}}"
+@if (showNav) {
+  <nav [ngClass]="{'open': !menuCollapsed}" class="navbar navbar-light navbar-expand-md p-md-0 navbar-container cris-layout-navbar {{menuCollapsed ? 'collapsed' : 'expanded'}}"
     role="navigation" [attr.aria-label]="'nav.main.description' | translate">
     <div class="container">
-        <div class="reset-padding-md w-100">
-            <div id="collapsingNav">
-                <span class="navbar-nav mr-auto shadow-none">
-                    <ng-container *ngIf="!!(activeTab$ |async)">
-                        <ds-cris-layout-sidebar-item *ngFor="let tab of tabs;" [itemBaseUrl]="itemBaseUrl" [tab]="tab" [layout]="'horizontal'" [activeTab]="(activeTab$ |async)"
-                            (tabSelectedChange)="navigateToTab($event)"></ds-cris-layout-sidebar-item>
-                    </ng-container>
-                </span>
-            </div>
+      <div class="reset-padding-md w-100">
+        <div id="collapsingNav">
+          <span class="navbar-nav me-auto shadow-none">
+            @if (!!(activeTab$ |async)) {
+              @for (tab of tabs; track tab) {
+                <ds-cris-layout-sidebar-item [itemBaseUrl]="itemBaseUrl" [tab]="tab" [layout]="'horizontal'" [activeTab]="(activeTab$ |async)"
+                (tabSelectedChange)="navigateToTab($event)"></ds-cris-layout-sidebar-item>
+              }
+            }
+          </span>
         </div>
+      </div>
     </div>
-</nav>
+  </nav>
+}

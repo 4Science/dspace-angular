@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Input,
@@ -25,11 +25,9 @@ import {
   selector: 'ds-bulk-import-collection-selector',
   templateUrl: './bulk-import-collection-selector.component.html',
   imports: [
-    TranslateModule,
-    NgIf,
     AdministeredCollectionSelectorComponent,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class BulkImportSelectorComponent extends DSOSelectorModalWrapperComponent implements OnInit {
   objectType = DSpaceObjectType.ITEM;

@@ -1,24 +1,26 @@
 <div class="container border rounded" >
-  <h2 class="font-weight-bold py-3">{{'invitation.group.msg' | translate}}
+  <h2 class="fw-bold py-3">{{'invitation.group.msg' | translate}}
   </h2>
   <hr>
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <ul>
-          <li *ngFor="let group of registrationData.groupNames">
-            {{group}}
-          </li>
-        </ul>
-      </div>
-      <div class="col-12">
-        <button type="button" (click)="navigateToHome()" class="btn btn-warning">
-          <i class="fas fa-times"></i> {{'invitation.ignore-btn' | translate}}
-        </button>
-        <button class="btn btn-primary save float-right" (click)="accept()">
-          <i class="fas fa-check"></i> {{'invitation.accept-btn'| translate}}
-        </button>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <ul>
+            @for (group of registrationData.groupNames; track group) {
+              <li>
+                {{group}}
+              </li>
+            }
+          </ul>
+        </div>
+        <div class="col-12">
+          <button type="button" (click)="navigateToHome()" class="btn btn-warning">
+            <i class="fas fa-times"></i> {{'invitation.ignore-btn' | translate}}
+          </button>
+          <button class="btn btn-primary save float-end" (click)="accept()">
+            <i class="fas fa-check"></i> {{'invitation.accept-btn'| translate}}
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>

@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   FormsModule,
@@ -20,9 +16,14 @@ import { ThemedLoadingComponent } from '../../../../../app/shared/loading/themed
   // templateUrl: './collection-dropdown.component.html',
   styleUrls: ['../../../../../app/shared/collection-dropdown/collection-dropdown.component.scss'],
   // styleUrls: ['./collection-dropdown.component.scss']
-  standalone: true,
-  imports: [NgIf, FormsModule, ReactiveFormsModule, InfiniteScrollModule, NgFor, ThemedLoadingComponent, AsyncPipe, TranslateModule],
+  imports: [
+    AsyncPipe,
+    FormsModule,
+    InfiniteScrollModule,
+    ReactiveFormsModule,
+    ThemedLoadingComponent,
+    TranslateModule,
+  ],
 })
 export class CollectionDropdownComponent extends BaseComponent {
-
 }

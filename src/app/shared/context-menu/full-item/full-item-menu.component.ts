@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Inject,
@@ -22,9 +22,7 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
 @Component({
   selector: 'ds-context-menu-full-item',
   templateUrl: './full-item-menu.component.html',
-  standalone: true,
   imports: [
-    NgIf,
     RouterLink,
     TranslateModule,
   ],

@@ -15,7 +15,7 @@ import {
 } from '@ng-dynamic-forms/core';
 import {
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import {
   distinctUntilChanged,
@@ -49,7 +49,6 @@ import { DsDynamicInputModel } from './ds-dynamic-input.model';
 @Component({
   selector: 'ds-dynamic-vocabulary',
   template: '',
-  standalone: true,
 })
 export abstract class DsDynamicVocabularyComponent extends DynamicFormControlComponent {
 
@@ -64,7 +63,7 @@ export abstract class DsDynamicVocabularyComponent extends DynamicFormControlCom
   /**
    * The vocabulary entry
    */
-  public vocabulary$: Observable<Vocabulary> = observableOf(null);
+  public vocabulary$: Observable<Vocabulary> = of(null);
 
   /**
    * The PageInfo object
@@ -132,7 +131,7 @@ export abstract class DsDynamicVocabularyComponent extends DynamicFormControlCom
         }
       }));
     } else if (isNotEmpty(this.model.value) && (this.model.value instanceof VocabularyEntry)) {
-      initValue$ = observableOf(
+      initValue$ = of(
         new FormFieldMetadataValueObject(
           this.model.value.value,
           null,
@@ -145,7 +144,7 @@ export abstract class DsDynamicVocabularyComponent extends DynamicFormControlCom
         ),
       );
     } else {
-      initValue$ = observableOf(new FormFieldMetadataValueObject(this.model.value));
+      initValue$ = of(new FormFieldMetadataValueObject(this.model.value));
     }
     return initValue$;
   }

@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   ChangeDetectorRef,
   Component,
@@ -38,9 +38,7 @@ import { MyDSpaceNewSubmissionDropdownComponent } from './my-dspace-new-submissi
     MyDSpaceNewExternalDropdownComponent,
     MyDSpaceNewSubmissionDropdownComponent,
     UploaderComponent,
-    NgIf,
   ],
-  standalone: true,
 })
 export class MyDSpaceNewSubmissionComponent implements OnDestroy, OnInit {
   /**
@@ -140,7 +138,7 @@ export class MyDSpaceNewSubmissionComponent implements OnDestroy, OnInit {
     } else {
       const modalRef = this.modalService.open(CollectionSelectorComponent);
       // When the dialog are closes its takes the collection selected and
-      // uploads choosed file after adds owningCollection parameter
+      // uploads chosen file after adds owningCollection parameter
       modalRef.result.then( (result) => {
         uploader.onBuildItemForm = (fileItem: any, form: any) => {
           form.append('owningCollection', result.uuid);

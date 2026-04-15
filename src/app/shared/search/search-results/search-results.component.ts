@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -58,18 +55,16 @@ export interface SelectionConfig {
     fadeIn,
     fadeInOut,
   ],
-  standalone: true,
   imports: [
+    AlertComponent,
     AsyncPipe,
     ErrorComponent,
-    NgIf,
     NgxSkeletonLoaderModule,
     ObjectCollectionComponent,
     RouterLink,
     SearchExportCsvComponent,
     SearchResultsSkeletonComponent,
     TranslateModule,
-    AlertComponent,
   ],
 })
 
@@ -82,6 +77,8 @@ export class SearchResultsComponent {
    * Currently active filters in url
    */
   activeFilters$: Observable<SearchFilter[]>;
+
+  filters$: Observable<SearchFilter[]>;
 
   /**
    * Filter applied to show labels, once populated the activeFilters$ will be loaded
@@ -205,12 +202,16 @@ export class SearchResultsComponent {
    */
   @Input() customData: any;
 
+  configuration$: Observable<string>;
+
   constructor(
     protected searchConfigService: SearchConfigurationService,
     protected searchService: SearchService,
   ) {
     this.activeFilters$ = this.searchConfigService.getCurrentFilters();
     this.appliedFilters$ = this.searchService.appliedFilters$;
+    this.filters$ = this.searchConfigService.getCurrentFilters();
+    this.configuration$ = this.searchConfigService.getCurrentConfiguration(this.configuration);
   }
 
   /**

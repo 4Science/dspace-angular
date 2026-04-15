@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -24,12 +21,10 @@ import { getFirstSucceededRemoteDataPayload } from './../../../core/shared/opera
   templateUrl: './metadata-link-view-orcid.component.html',
   styleUrls: ['./metadata-link-view-orcid.component.scss'],
   imports: [
+    AsyncPipe,
     NgbTooltipModule,
     TranslateModule,
-    AsyncPipe,
-    NgIf,
   ],
-  standalone: true,
 })
 export class MetadataLinkViewOrcidComponent implements OnInit {
   /**

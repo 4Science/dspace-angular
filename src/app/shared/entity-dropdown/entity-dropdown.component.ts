@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -32,6 +28,7 @@ import {
   take,
   tap,
 } from 'rxjs/operators';
+import { SortPipe } from 'src/app/shared/utils/sort.pipe';
 
 import { EntityTypeDataService } from '../../core/data/entity-type-data.service';
 import { FindListOptions } from '../../core/data/find-list-options.model';
@@ -52,14 +49,18 @@ import {
 } from '../empty.util';
 import { ThemedLoadingComponent } from '../loading/themed-loading.component';
 import { createSuccessfulRemoteDataObject } from '../remote-data.utils';
-import { SortPipe } from '../utils/sort.pipe';
 
 @Component({
   selector: 'ds-entity-dropdown',
   templateUrl: './entity-dropdown.component.html',
   styleUrls: ['./entity-dropdown.component.scss'],
-  standalone: true,
-  imports: [InfiniteScrollDirective, NgIf, NgFor, ThemedLoadingComponent, AsyncPipe, TranslateModule, SortPipe],
+  imports: [
+    AsyncPipe,
+    InfiniteScrollDirective,
+    SortPipe,
+    ThemedLoadingComponent,
+    TranslateModule,
+  ],
 })
 export class EntityDropdownComponent implements OnInit, OnDestroy {
   /**
@@ -89,6 +90,12 @@ export class EntityDropdownComponent implements OnInit, OnDestroy {
    * TRUE if the parent operation is a 'new submission' operation, FALSE otherwise (eg.: is an 'Import metadata from an external source' operation).
    */
   @Input() isSubmission: boolean;
+
+  /**
+   * TRUE if the main operation is "Import metadata from an external source", FALSE otherwise.
+   * Used to determine which list type to populate.
+   */
+  @Input() isImportFromExternalSource: boolean;
 
   /**
    * The entity to output to the parent component
@@ -168,7 +175,7 @@ export class EntityDropdownComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Method used from infitity scroll for retrive more data on scroll down
+   * Method used from infitity scroll for retrieve more data on scroll down
    */
   public onScrollDown() {
     if ( this.hasNextPage ) {
@@ -192,23 +199,26 @@ export class EntityDropdownComponent implements OnInit, OnDestroy {
    */
   public populateEntityList(page: number) {
     this.isLoadingList.next(true);
-    let searchListEntity$;
-    if (this.isSubmission) {
+    let searchListEntity$: Observable<RemoteData<PaginatedList<ItemType>>>;
+    if (this.isSubmission || this.isImportFromExternalSource) {
       // Set the pagination info
       const findOptions: FindListOptions = {
         elementsPerPage: 10,
         currentPage: page,
       };
-      searchListEntity$ =
-        this.entityTypeService.getAllAuthorizedRelationshipType(findOptions)
-          .pipe(
-            getFirstSucceededRemoteWithNotEmptyData(),
-            tap(entityType => {
-              if ((this.searchListEntity.length + findOptions.elementsPerPage) >= entityType.payload.totalElements) {
-                this.hasNextPage = false;
-              }
-            }),
-          );
+
+      searchListEntity$ = this.isSubmission ?
+        this.entityTypeService.getAllAuthorizedRelationshipType(findOptions) :
+        this.entityTypeService.getAllAuthorizedRelationshipTypeImport(findOptions);
+
+      searchListEntity$ = searchListEntity$.pipe(
+        getFirstSucceededRemoteWithNotEmptyData(),
+        tap(entityType => {
+          if ((this.searchListEntity.length + findOptions.elementsPerPage) >= entityType.payload.totalElements) {
+            this.hasNextPage = false;
+          }
+        }),
+      );
     } else {
       searchListEntity$ =
         this.itemExportFormatService.byEntityTypeAndMolteplicity(null, ItemExportFormatMolteplicity.MULTIPLE)
@@ -226,6 +236,7 @@ export class EntityDropdownComponent implements OnInit, OnDestroy {
             tap(() => this.hasNextPage = false),
           );
     }
+
     this.searchListEntity$ = searchListEntity$.pipe(
       switchMap((entityType: RemoteData<PaginatedList<ItemType>>) => entityType.payload.page),
       map((item: ItemType) => {
@@ -238,6 +249,7 @@ export class EntityDropdownComponent implements OnInit, OnDestroy {
       reduce((acc: any, value: any) => [...acc, value], []),
       startWith([]),
     );
+
     this.subs.push(
       this.searchListEntity$.subscribe({
         next: (result: ItemType[]) => {

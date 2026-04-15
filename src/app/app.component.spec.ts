@@ -43,7 +43,8 @@ import {
   NativeWindowService,
 } from './core/services/window.service';
 import { ThemedRootComponent } from './root/themed-root.component';
-import { KlaroService } from './shared/cookies/klaro.service';
+import { OrejimeService } from './shared/cookies/orejime.service';
+import { OrejimeServiceStub } from './shared/cookies/orejime.service.stub';
 import { DatadogRumService } from './shared/datadog-rum/datadog-rum.service';
 import { HostWindowResizeAction } from './shared/host-window.actions';
 import { HostWindowService } from './shared/host-window.service';
@@ -76,6 +77,7 @@ const itemPageCustomUrl = '/entities/publication/aCustomUrl';
 export function getMockLocaleService(): LocaleService {
   return jasmine.createSpyObj('LocaleService', {
     setCurrentLanguageCode: jasmine.createSpy('setCurrentLanguageCode'),
+    getCurrentLanguageCode: jasmine.createSpy('getCurrentLanguageCode'),
   });
 }
 
@@ -83,7 +85,7 @@ describe('App component', () => {
 
   let breadcrumbsServiceSpy;
   let routeServiceMock;
-  let klaroServiceSpy: jasmine.SpyObj<KlaroService>;
+  let orejimeServiceSpy: jasmine.SpyObj<OrejimeService>;
   let datadogRumServiceSpy: jasmine.SpyObj<DatadogRumService>;
   let routerEventsObs: Subject<any>;
   let routerMock: Router;
@@ -99,7 +101,7 @@ describe('App component', () => {
       events: routerEventsObs,
     });
 
-    klaroServiceSpy = jasmine.createSpyObj('KlaroService', {
+    orejimeServiceSpy = jasmine.createSpyObj('OrejimeService', {
       getSavedPreferences: jasmine.createSpy('getSavedPreferences'),
       watchConsentUpdates: jasmine.createSpy('watchConsentUpdates').and.returnValue(null),
     },{
@@ -137,7 +139,7 @@ describe('App component', () => {
         { provide: BreadcrumbsService, useValue: breadcrumbsServiceSpy },
         { provide: RouteService, useValue: routeServiceMock },
         { provide: APP_CONFIG, useValue: environment },
-        { provide: KlaroService, useValue: klaroServiceSpy },
+        { provide: OrejimeService, useValue: new OrejimeServiceStub() },
         { provide: DatadogRumService, useValue: datadogRumServiceSpy },
         provideMockStore({ initialState }),
         AppComponent,
@@ -184,7 +186,7 @@ describe('App component', () => {
     });
 
     it('should dispatch a HostWindowResizeAction with the width and height of the window as its payload', () => {
-      expect(store.dispatch).toHaveBeenCalledWith(new HostWindowResizeAction(width, height));
+      expect(store.dispatch as jasmine.Spy).toHaveBeenCalledWith(new HostWindowResizeAction(width, height));
     });
 
   });

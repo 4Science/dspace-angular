@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -30,12 +27,10 @@ import { SearchChartFilterComponent } from '../search-chart-filter/search-chart-
   templateUrl: './search-chart-bar.component.html',
   animations: [facetLoad],
   imports: [
-    NgIf,
     AsyncPipe,
     ChartComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 /**
  * Component that represents a search bar/reverse-bar chart filter

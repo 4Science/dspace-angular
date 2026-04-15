@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgClass,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -27,7 +23,7 @@ import {
 import {
   combineLatest,
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {
@@ -69,15 +65,12 @@ import {
   selector: 'ds-collection-form',
   styleUrls: ['../../shared/comcol/comcol-forms/comcol-form/comcol-form.component.scss'],
   templateUrl: '../../shared/comcol/comcol-forms/comcol-form/comcol-form.component.html',
-  standalone: true,
   imports: [
+    AsyncPipe,
+    ComcolPageLogoComponent,
     FormComponent,
     TranslateModule,
     UploaderComponent,
-    AsyncPipe,
-    ComcolPageLogoComponent,
-    NgIf,
-    NgClass,
     VarDirective,
   ],
 })
@@ -168,7 +161,7 @@ export class CollectionFormComponent extends ComColFormComponent<Collection> imp
     const definitions$: Observable<ConfigObject[]> = this.submissionDefinitionService
       .findAll({ elementsPerPage: 100, currentPage: 1 }).pipe(
         getFirstSucceededRemoteListPayload(),
-        catchError(() => observableOf([])),
+        catchError(() => of([])),
       );
 
     // retrieve all entity types and submission definitions to populate the dropdowns selection

@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -39,13 +36,11 @@ import { ProfileClaimService } from '../profile-claim/profile-claim.service';
   selector: 'ds-profile-claim-item-modal',
   templateUrl: './profile-claim-item-modal.component.html',
   imports: [
-    ListableObjectComponentLoaderComponent,
     AsyncPipe,
-    TranslateModule,
-    NgForOf,
     BtnDisabledDirective,
+    ListableObjectComponentLoaderComponent,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class ProfileClaimItemModalComponent extends DSOSelectorModalWrapperComponent implements OnInit {
 

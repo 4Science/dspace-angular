@@ -1,4 +1,3 @@
-import { NgComponentOutlet } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -19,10 +18,6 @@ import { renderChartFilterType } from '../../chart-search-result-element-decorat
 @Component({
   selector: 'ds-search-chart-wrapper',
   templateUrl: './search-chart-wrapper.component.html',
-  imports: [
-    NgComponentOutlet,
-  ],
-  standalone: true,
 })
 
 /**

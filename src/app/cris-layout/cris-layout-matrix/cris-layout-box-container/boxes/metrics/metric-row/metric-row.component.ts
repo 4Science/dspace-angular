@@ -1,9 +1,4 @@
 import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
-import {
   Component,
   Input,
 } from '@angular/core';
@@ -20,12 +15,8 @@ import { MetricLoaderComponent } from '../../../../../../shared/metric/metric-lo
   selector: '[ds-metric-row]',
   templateUrl: './metric-row.component.html',
   styleUrls: ['./metric-row.component.scss'],
-  standalone: true,
   imports: [
-    NgFor,
-    NgIf,
     MetricLoaderComponent,
-    AsyncPipe,
   ],
 })
 export class MetricRowComponent {

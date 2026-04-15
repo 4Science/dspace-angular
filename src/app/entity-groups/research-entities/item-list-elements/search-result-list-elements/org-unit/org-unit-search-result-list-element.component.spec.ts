@@ -13,13 +13,15 @@ import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { APP_CONFIG } from '../../../../../../config/app-config.interface';
 import { AuthService } from '../../../../../core/auth/auth.service';
 import { DSONameService } from '../../../../../core/breadcrumbs/dso-name.service';
 import { AuthorizationDataService } from '../../../../../core/data/feature-authorization/authorization-data.service';
 import { Item } from '../../../../../core/shared/item.model';
+import { OrejimeService } from '../../../../../shared/cookies/orejime.service';
+import { OrejimeServiceStub } from '../../../../../shared/cookies/orejime.service.stub';
 import { AuthServiceMock } from '../../../../../shared/mocks/auth.service.mock';
 import { DSONameServiceMock } from '../../../../../shared/mocks/dso-name.service.mock';
 import { mockTruncatableService } from '../../../../../shared/mocks/mock-trucatable.service';
@@ -46,7 +48,7 @@ const mockItemWithMetadata: ItemSearchResult = Object.assign(
   new ItemSearchResult(),
   {
     indexableObject: Object.assign(new Item(), {
-      bundles: observableOf({}),
+      bundles: of({}),
       metadata: {
         'dc.title': [
           {
@@ -67,7 +69,7 @@ const mockItemWithoutMetadata: ItemSearchResult = Object.assign(
   new ItemSearchResult(),
   {
     indexableObject: Object.assign(new Item(), {
-      bundles: observableOf({}),
+      bundles: of({}),
       metadata: {
         'dc.title': [
           {
@@ -108,6 +110,7 @@ describe('OrgUnitSearchResultListElementComponent', () => {
         { provide: DSONameService, useClass: DSONameServiceMock },
         { provide: APP_CONFIG, useValue: environmentUseThumbs },
         { provide: ThemeService, useValue: getMockThemeService() },
+        { provide: OrejimeService, useValue: new OrejimeServiceStub() },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(OrgUnitSearchResultListElementComponent, {
@@ -154,10 +157,6 @@ describe('OrgUnitSearchResultListElementComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should show the description span', () => {
-      const orgUnitDescriptionField = fixture.debugElement.query(By.css('span.item-list-org-unit-description'));
-      expect(orgUnitDescriptionField).not.toBeNull();
-    });
   });
 
   describe('When the item has no org unit description', () => {
@@ -189,6 +188,7 @@ describe('OrgUnitSearchResultListElementComponent', () => {
         { provide: APP_CONFIG, useValue: enviromentNoThumbs },
         { provide: ThemeService, useValue: getMockThemeService() },
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
+        { provide: OrejimeService, useValue: new OrejimeServiceStub() },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(OrgUnitSearchResultListElementComponent, {

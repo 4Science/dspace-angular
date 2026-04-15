@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgForOf,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -46,16 +44,13 @@ import { MetadataSchemaFormComponent } from './metadata-schema-form/metadata-sch
   templateUrl: './metadata-registry.component.html',
   styleUrls: ['./metadata-registry.component.scss'],
   imports: [
-    MetadataSchemaFormComponent,
-    TranslateModule,
     AsyncPipe,
-    PaginationComponent,
-    NgIf,
-    NgForOf,
+    MetadataSchemaFormComponent,
     NgClass,
+    PaginationComponent,
     RouterLink,
+    TranslateModule,
   ],
-  standalone: true,
 })
 /**
  * A component used for managing all existing metadata schemas within the repository.
@@ -150,9 +145,11 @@ export class MetadataRegistryComponent implements OnDestroy, OnInit {
    * @param event
    */
   selectMetadataSchema(schema: MetadataSchema, event) {
-    event.target.checked ?
-      this.registryService.selectMetadataSchema(schema) :
+    if (event.target.checked) {
+      this.registryService.selectMetadataSchema(schema);
+    } else {
       this.registryService.deselectMetadataSchema(schema);
+    }
   }
 
   /**

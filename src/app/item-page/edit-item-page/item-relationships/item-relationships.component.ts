@@ -1,7 +1,5 @@
 import {
   AsyncPipe,
-  NgForOf,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -46,11 +44,9 @@ import { BtnDisabledDirective } from '../../../shared/btn-disabled.directive';
 import { ThemedLoadingComponent } from '../../../shared/loading/themed-loading.component';
 import { NotificationsService } from '../../../shared/notifications/notifications.service';
 import { followLink } from '../../../shared/utils/follow-link-config.model';
-import { VarDirective } from '../../../shared/utils/var.directive';
 import { compareArraysUsingIds } from '../../simple/item-types/shared/item-relationships-utils';
 import { AbstractItemUpdateComponent } from '../abstract-item-update/abstract-item-update.component';
 import { EditItemRelationshipsService } from './edit-item-relationships.service';
-import { EditRelationshipListComponent } from './edit-relationship-list/edit-relationship-list.component';
 import { EditRelationshipListWrapperComponent } from './edit-relationship-list-wrapper/edit-relationship-list-wrapper.component';
 
 @Component({
@@ -60,17 +56,12 @@ import { EditRelationshipListWrapperComponent } from './edit-relationship-list-w
   imports: [
     AlertComponent,
     AsyncPipe,
-    EditRelationshipListComponent,
-    NgForOf,
-    NgIf,
+    BtnDisabledDirective,
+    EditRelationshipListWrapperComponent,
     NgTemplateOutlet,
     ThemedLoadingComponent,
     TranslateModule,
-    VarDirective,
-    EditRelationshipListWrapperComponent,
-    BtnDisabledDirective,
   ],
-  standalone: true,
 })
 /**
  * Component for displaying an item's relationships edit page

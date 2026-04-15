@@ -1,8 +1,5 @@
 // Load the implementations that should be tested
-import {
-  CommonModule,
-  NgIf,
-} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -62,11 +59,12 @@ describe('ChipsComponent test suite', () => {
     // synchronous beforeEach
     beforeEach(() => {
       html = `
-      <ds-chips
-        *ngIf="chips.hasItems()"
-        [chips]="chips"
-        [editable]="editable"
-        (selected)="onChipSelected($event)"></ds-chips>`;
+        @if(chips.hasItems()) {
+          <ds-chips
+            [chips]="chips"
+            [editable]="editable"
+            (selected)="onChipSelected($event)"></ds-chips>
+        }`;
 
       testFixture = createTestComponent(html, TestComponent) as ComponentFixture<TestComponent>;
       testComp = testFixture.componentInstance;
@@ -115,9 +113,15 @@ describe('ChipsComponent test suite', () => {
 
     it('should update chips item order when drag and drop end', fakeAsync(() => {
       spyOn(chipsComp.chips, 'updateOrder');
-      const de = chipsFixture.debugElement.query(By.css('div[role="listitem"]'));
+      const listItems = chipsFixture.debugElement.queryAll(By.css('div[role="listitem"]'));
 
-      de.triggerEventHandler('cdkDropListDropped', { previousIndex: 0, currentIndex: 1, previousContainer: { data: { index: 0 } }, container: { data: { index: 1 } } });
+      const dropEvent = {
+        previousContainer: { data: { index: 0 } },
+        container: { data: { index: 1 } },
+        currentIndex: 0,
+      } as any;
+
+      listItems[1].triggerEventHandler('cdkDropListDropped', dropEvent);
 
       expect(chipsComp.dragged).toBe(-1);
       expect(chipsComp.chips.updateOrder).toHaveBeenCalled();
@@ -281,8 +285,9 @@ describe('ChipsComponent test suite', () => {
 @Component({
   selector: 'ds-test-cmp',
   template: ``,
-  standalone: true,
-  imports: [NgbModule, NgIf],
+  imports: [
+    NgbModule,
+  ],
 })
 class TestComponent {
 

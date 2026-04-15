@@ -11,8 +11,9 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   selector: 'span[ds-date]',
   templateUrl: './date.component.html',
   styleUrls: ['./date.component.scss'],
-  standalone: true,
-  imports: [DsDatePipe],
+  imports: [
+    DsDatePipe,
+  ],
 })
 export class DateComponent extends RenderingTypeValueModelComponent {
 

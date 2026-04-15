@@ -1,6 +1,6 @@
 import {
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 
 import { CacheableObject } from '../../core/cache/cacheable-object.model';
@@ -19,11 +19,11 @@ export class ObjectCacheServiceStub {
   }
 
   getByHref(_href: string): Observable<ObjectCacheEntry> {
-    return observableOf(undefined);
+    return of(undefined);
   }
 
   hasByHref$(_href: string): Observable<boolean> {
-    return observableOf(false);
+    return of(false);
   }
 
   addDependency(_href$: string | Observable<string>, _dependsOnHref$: string | Observable<string>): void {
@@ -33,7 +33,7 @@ export class ObjectCacheServiceStub {
   }
 
   getRequestUUIDBySelfLink(_self: string): Observable<string> {
-    return observableOf('');
+    return of('');
   }
 
 }

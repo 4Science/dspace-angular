@@ -10,7 +10,7 @@ import {
   TranslateModule,
 } from '@ngx-translate/core';
 import { getTestScheduler } from 'jasmine-marbles';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
@@ -94,7 +94,7 @@ describe('ExportCollectionMenuComponent', () => {
 
   describe('when the user is collection admin', () => {
     beforeEach(() => {
-      authorizationService.isAuthorized.and.returnValue(observableOf(true));
+      authorizationService.isAuthorized.and.returnValue(of(true));
       fixture.detectChanges();
     });
 
@@ -122,7 +122,7 @@ describe('ExportCollectionMenuComponent', () => {
 
   describe('when the user is not collection admin', () => {
     beforeEach(() => {
-      authorizationService.isAuthorized.and.returnValue(observableOf(false));
+      authorizationService.isAuthorized.and.returnValue(of(false));
       fixture.detectChanges();
     });
 

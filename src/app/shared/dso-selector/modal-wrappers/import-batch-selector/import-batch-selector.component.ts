@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -29,8 +28,10 @@ import {
 @Component({
   selector: 'ds-import-batch-selector',
   templateUrl: '../dso-selector-modal-wrapper.component.html',
-  standalone: true,
-  imports: [NgIf, DSOSelectorComponent, TranslateModule],
+  imports: [
+    DSOSelectorComponent,
+    TranslateModule,
+  ],
 })
 export class ImportBatchSelectorComponent extends DSOSelectorModalWrapperComponent implements OnInit {
   configuration = 'communityOrCollection';

@@ -11,8 +11,8 @@ import { ContextHelpDirective } from 'src/app/shared/context-help.directive';
 import { AccessibilitySettingsService } from '../../accessibility/accessibility-settings.service';
 import { getAccessibilitySettingsServiceStub } from '../../accessibility/accessibility-settings.service.stub';
 import { AuthService } from '../../core/auth/auth.service';
-import { KlaroService } from '../../shared/cookies/klaro.service';
-import { KlaroServiceStub } from '../../shared/cookies/klaro.service.stub';
+import { OrejimeService } from '../../shared/cookies/orejime.service';
+import { OrejimeServiceStub } from '../../shared/cookies/orejime.service.stub';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { AuthServiceStub } from '../../shared/testing/auth-service.stub';
 import { NotificationsServiceStub } from '../../shared/testing/notifications-service.stub';
@@ -26,13 +26,13 @@ describe('AccessibilitySettingsComponent', () => {
   let authService: AuthServiceStub;
   let settingsService: AccessibilitySettingsService;
   let notificationsService: NotificationsServiceStub;
-  let klaroService: KlaroServiceStub;
+  let orejimeService: OrejimeServiceStub;
 
   beforeEach(waitForAsync(() => {
     authService = new AuthServiceStub();
     settingsService = getAccessibilitySettingsServiceStub();
     notificationsService = new NotificationsServiceStub();
-    klaroService = new KlaroServiceStub();
+    orejimeService = new OrejimeServiceStub();
 
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot()],
@@ -40,7 +40,7 @@ describe('AccessibilitySettingsComponent', () => {
         { provide: AuthService, useValue: authService },
         { provide: AccessibilitySettingsService, useValue: settingsService },
         { provide: NotificationsService, useValue: notificationsService },
-        { provide: KlaroService, useValue: klaroService },
+        { provide: OrejimeService, useValue: new OrejimeServiceStub() },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(AccessibilitySettingsComponent, {

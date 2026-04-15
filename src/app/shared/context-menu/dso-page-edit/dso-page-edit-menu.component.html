@@ -1,4 +1,6 @@
-<button *ngIf="isAuthorized$ | async" class="dropdown-item"
-        [routerLink]="['/' + getPageRoutePrefix(), contextMenuObject.id, 'edit']"
-        [innerHTML]="'context-menu.actions.dso-page-edit.'+ contextMenuObjectType +'.btn' | translate">
-</button>
+@if (isAuthorized$ | async) {
+  <button class="dropdown-item"
+    [routerLink]="['/' + getPageRoutePrefix(), contextMenuObject.id, 'edit']"
+    [innerHTML]="'context-menu.actions.dso-page-edit.'+ contextMenuObjectType +'.btn' | translate">
+  </button>
+}

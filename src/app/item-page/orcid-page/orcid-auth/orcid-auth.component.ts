@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -44,14 +40,11 @@ import { createFailedRemoteDataObjectFromError$ } from '../../../shared/remote-d
   templateUrl: './orcid-auth.component.html',
   styleUrls: ['./orcid-auth.component.scss'],
   imports: [
-    TranslateModule,
-    AsyncPipe,
-    NgIf,
-    NgForOf,
     AlertComponent,
+    AsyncPipe,
     BtnDisabledDirective,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class OrcidAuthComponent implements OnInit, OnChanges {
 
@@ -73,7 +66,7 @@ export class OrcidAuthComponent implements OnInit, OnChanges {
   /**
    * The list of all orcid authorization scopes missing in the orcid profile
    */
-  missingAuthorizationScopes: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  missingAuthorizationScopes: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
   /**
    * A boolean representing if user has missing authorizations
@@ -83,12 +76,12 @@ export class OrcidAuthComponent implements OnInit, OnChanges {
   /**
    * The list of all orcid authorization scopes available
    */
-  orcidAuthorizationScopes: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  orcidAuthorizationScopes: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
   /**
    * A boolean representing if unlink operation is processing
    */
-  unlinkProcessing: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  unlinkProcessing: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   /**
    * A boolean representing if orcid profile is linked

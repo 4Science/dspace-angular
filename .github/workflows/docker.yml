@@ -29,7 +29,7 @@ jobs:
     # Ensure this job never runs on forked repos. It's only executed for '4science/dspace'
     if: github.repository == '4science/dspace-angular'
     # Use the reusable-docker-build.yml script from DSpace/DSpace repo to build our Docker image
-    uses: 4science/DSpace/.github/workflows/reusable-docker-build.yml@dspace-cris-2024_02_x
+    uses: 4science/DSpace/.github/workflows/reusable-docker-build.yml@dspace-cris-2025_02_x
     with:
       build_id: dspace-cris-angular-dependencies
       image_name: 4science/dspace-cris-angular-dependencies
@@ -46,7 +46,7 @@ jobs:
     # Ensure this job never runs on forked repos. It's only executed for 'dspace/dspace-angular'
     if: github.repository == '4science/dspace-angular'
     # Use the reusable-docker-build.yml script from DSpace/DSpace repo to build our Docker image
-    uses: 4science/DSpace/.github/workflows/reusable-docker-build.yml@dspace-cris-2024_02_x
+    uses: 4science/DSpace/.github/workflows/reusable-docker-build.yml@dspace-cris-2025_02_x
     needs: dspace-cris-angular-dependencies
     with:
       build_id: dspace-cris-angular-dev
@@ -63,7 +63,7 @@ jobs:
     # Ensure this job never runs on forked repos. It's only executed for 'dspace/dspace-angular'
     if: github.repository == '4science/dspace-angular'
     # Use the reusable-docker-build.yml script from DSpace/DSpace repo to build our Docker image
-    uses: 4science/DSpace/.github/workflows/reusable-docker-build.yml@dspace-cris-2024_02_x
+    uses: 4science/DSpace/.github/workflows/reusable-docker-build.yml@dspace-cris-2025_02_x
     # Must run after 'dspace-dependencies' job above
     needs: dspace-cris-angular-dependencies
     with:

@@ -13,7 +13,7 @@ import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { ItemDataService } from '../core/data/item-data.service';
 import { TabDataService } from '../core/layout/tab-data.service';
@@ -47,7 +47,7 @@ describe('ItemDetailPageModalComponent', () => {
   );
 
   const tabDataServiceMock: any = jasmine.createSpyObj('TabDataService', {
-    findByItem: observableOf(leadingTabs),
+    findByItem: of(leadingTabs),
   });
 
   describe('when empty subscriptions', () => {

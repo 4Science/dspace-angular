@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -41,13 +38,11 @@ import { hasValue } from '../../../empty.util';
   templateUrl: './relationships-items-actions.component.html',
   styleUrls: ['./relationships-items-actions.component.scss'],
   imports: [
-    NgIf,
     AsyncPipe,
+    BtnDisabledDirective,
     NgbTooltipModule,
     TranslateModule,
-    BtnDisabledDirective,
   ],
-  standalone: true,
 })
 export class RelationshipsItemsActionsComponent implements OnInit, OnDestroy {
 

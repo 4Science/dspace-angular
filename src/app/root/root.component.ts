@@ -1,10 +1,11 @@
 import {
   AsyncPipe,
+  isPlatformBrowser,
   NgClass,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
+  HostBinding,
   Inject,
   Input,
   OnInit,
@@ -55,24 +56,24 @@ import { SystemWideAlertBannerComponent } from '../system-wide-alert/alert-banne
   templateUrl: './root.component.html',
   styleUrls: ['./root.component.scss'],
   animations: [slideSidebarPadding],
-  standalone: true,
   imports: [
-    TranslateModule,
-    ThemedAdminSidebarComponent,
-    SystemWideAlertBannerComponent,
-    ThemedHeaderNavbarWrapperComponent,
-    ThemedBreadcrumbsComponent,
-    NgIf,
-    NgClass,
-    ThemedLoadingComponent,
-    RouterOutlet,
-    ThemedFooterComponent,
-    NotificationsBoardComponent,
     AsyncPipe,
     LiveRegionComponent,
+    NgClass,
+    NotificationsBoardComponent,
+    RouterOutlet,
+    SystemWideAlertBannerComponent,
+    ThemedAdminSidebarComponent,
+    ThemedBreadcrumbsComponent,
+    ThemedFooterComponent,
+    ThemedHeaderNavbarWrapperComponent,
+    ThemedLoadingComponent,
+    TranslateModule,
   ],
 })
 export class RootComponent implements OnInit {
+  @HostBinding('attr.data-test') dataTestAttribute: string | null = null;
+
   theme: Observable<ThemeConfig> = of({} as any);
   isSidebarVisible$: Observable<boolean>;
   slideSidebarOver$: Observable<boolean>;
@@ -102,6 +103,7 @@ export class RootComponent implements OnInit {
     @Inject(NativeWindowService) private _window: NativeWindowRef,
   ) {
     this.notificationOptions = environment.notifications;
+    this.dataTestAttribute = isPlatformBrowser(platformId) ? 'ds-hydrated' : null;
   }
 
   ngOnInit() {

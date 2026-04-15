@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import {
   ComponentFixture,
-  fakeAsync,
   inject,
   TestBed,
   waitForAsync,
@@ -61,7 +60,7 @@ describe('BrowseSectionComponent', () => {
     expect(comp).toBeDefined();
   }));
 
-  it('should show one link foreach browse names', fakeAsync(() => {
+  it('should show one link foreach browse names', waitForAsync(() => {
     fixture.whenStable().then(() => {
       const browseLinks = fixture.debugElement.queryAll(By.css('a.lead'));
       expect(browseLinks.length).toEqual(4);

@@ -1,7 +1,5 @@
 import {
   AsyncPipe,
-  NgFor,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import { Component } from '@angular/core';
@@ -13,17 +11,21 @@ import { BreadcrumbsComponent as BaseComponent } from '../../../../app/breadcrum
 import { EscapeHtmlPipe } from '../../../../app/shared/utils/escape-html.pipe';
 import { VarDirective } from '../../../../app/shared/utils/var.directive';
 
-/**
- * Component representing the breadcrumbs of a page
- */
 @Component({
   selector: 'ds-themed-breadcrumbs',
   // templateUrl: './breadcrumbs.component.html',
   templateUrl: '../../../../app/breadcrumbs/breadcrumbs.component.html',
   // styleUrls: ['./breadcrumbs.component.scss']
   styleUrls: ['../../../../app/breadcrumbs/breadcrumbs.component.scss'],
-  standalone: true,
-  imports: [VarDirective, NgIf, NgTemplateOutlet, NgFor, RouterLink, NgbTooltipModule, AsyncPipe, TranslateModule, EscapeHtmlPipe],
+  imports: [
+    AsyncPipe,
+    EscapeHtmlPipe,
+    NgbTooltipModule,
+    NgTemplateOutlet,
+    RouterLink,
+    TranslateModule,
+    VarDirective,
+  ],
 })
 export class BreadcrumbsComponent extends BaseComponent {
 }

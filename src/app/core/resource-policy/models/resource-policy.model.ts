@@ -61,13 +61,13 @@ export class ResourcePolicy implements CacheableObject {
   action: ActionType;
 
   /**
-   * The first day of validity of the policy (format YYYY-MM-DD)
+   * The first day of validity of the policy (format yyyy-MM-DD)
    */
   @autoserialize
   startDate: string;
 
   /**
-   * The last day of validity of the policy (format YYYY-MM-DD)
+   * The last day of validity of the policy (format yyyy-MM-DD)
    */
   @autoserialize
   endDate: string;

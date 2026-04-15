@@ -10,7 +10,6 @@ import { BaseMetricComponent } from '../metric-loader/base-metric.component';
 
 @Component({
   template: '',
-  standalone: true,
 })
 export abstract class BaseEmbeddedHtmlMetricComponent extends BaseMetricComponent implements OnInit {
 

@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { RemoteDataBuildService } from '../../../../../core/cache/builders/remote-data-build.service';
 import { buildPaginatedList } from '../../../../../core/data/paginated-list.model';
@@ -92,7 +92,7 @@ xdescribe('SearchChartPieComponent', () => {
   let filterService;
   let searchService;
   let router;
-  const page = observableOf(0);
+  const page = of(0);
 
   const mockValues = createSuccessfulRemoteDataObject$(buildPaginatedList(new PageInfo(), values));
   beforeEach(waitForAsync(() => {
@@ -103,7 +103,7 @@ xdescribe('SearchChartPieComponent', () => {
         { provide: Router, useValue: new RouterStub() },
         {
           provide: RemoteDataBuildService,
-          useValue: { aggregate: () => observableOf({}) },
+          useValue: { aggregate: () => of({}) },
         },
         {
           provide: SEARCH_CONFIG_SERVICE,
@@ -112,7 +112,7 @@ xdescribe('SearchChartPieComponent', () => {
         {
           provide: SearchFilterService,
           useValue: {
-            getSelectedValuesForFilter: () => observableOf(selectedValues),
+            getSelectedValuesForFilter: () => of(selectedValues),
             isFilterActiveWithValue: (paramName: string, filterValue: string) => true,
             getPage: (paramName: string) => page,
             // eslint-disable-next-line @typescript-eslint/no-empty-function

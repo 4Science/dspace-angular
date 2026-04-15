@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -22,12 +21,10 @@ import { SidebarService } from './sidebar.service';
   styleUrls: ['./page-with-sidebar.component.scss'],
   templateUrl: './page-with-sidebar.component.html',
   animations: [pushInOut],
-  standalone: true,
   imports: [
     AsyncPipe,
-    NgTemplateOutlet,
-    NgIf,
     NgClass,
+    NgTemplateOutlet,
   ],
 })
 /**
@@ -44,6 +41,7 @@ export class PageWithSidebarComponent implements OnInit {
   @Input() collapseSidebar = false;
 
   @Input() id: string;
+
   @Input() sidebarContent: TemplateRef<any>;
 
   /**
@@ -52,10 +50,20 @@ export class PageWithSidebarComponent implements OnInit {
   isXsOrSm$: Observable<boolean>;
 
   /**
+   * Emits true if sidebar is collapsed on XL screen
+   */
+  isSidebarCollapsedXL$: Observable<boolean>;
+
+  /**
    * The width of the sidebar (bootstrap columns)
    */
   @Input()
   sideBarWidth = 3;
+
+  /**
+   * Observable for whether or not the sidebar is currently collapsed
+   */
+  isSidebarCollapsed$: Observable<boolean>;
 
   sidebarClasses$: Observable<string>;
 
@@ -66,6 +74,7 @@ export class PageWithSidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.isXsOrSm$ = this.windowService.isXsOrSm();
+    this.isSidebarCollapsed$ = this.isSidebarCollapsed();
     this.isXsOrSm$.subscribe( isMobile => {
       if (!isMobile && !this.collapseSidebar) {
         this.openSidebar();
@@ -77,6 +86,8 @@ export class PageWithSidebarComponent implements OnInit {
     this.sidebarClasses$ = this.isSidebarCollapsed().pipe(
       map((isCollapsed) => isCollapsed ? '' : 'active'),
     );
+
+    this.isSidebarCollapsedXL$ = this.isSidebarCollapsedXL();
   }
 
   /**

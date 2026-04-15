@@ -1,7 +1,4 @@
-import {
-  NgFor,
-  NgIf,
-} from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -39,8 +36,13 @@ import { PaginationComponentOptions } from '../pagination/pagination-component-o
   styleUrls: ['./object-detail.component.scss'],
   templateUrl: './object-detail.component.html',
   animations: [fadeIn],
-  standalone: true,
-  imports: [PaginationComponent, NgIf, NgFor, ListableObjectComponentLoaderComponent, ErrorComponent, ThemedLoadingComponent, TranslateModule],
+  imports: [
+    ErrorComponent,
+    ListableObjectComponentLoaderComponent,
+    PaginationComponent,
+    ThemedLoadingComponent,
+    TranslateModule,
+  ],
 })
 export class ObjectDetailComponent {
   /**
@@ -102,6 +104,11 @@ export class ObjectDetailComponent {
    * A boolean representing if to show workflow statistics
    */
   @Input() showWorkflowStatistics: boolean;
+
+  /**
+   * Whether to show the RSS syndication link. Either false, or valid SortOptions object
+   */
+  @Input() showRSS: SortOptions | boolean = false;
 
   /**
    * Emit when one of the listed object has changed.

@@ -21,7 +21,7 @@ import {
   DynamicFormService,
 } from '@ng-dynamic-forms/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
@@ -250,7 +250,7 @@ describe('EditBitstreamPageComponent', () => {
           {
             provide: ActivatedRoute,
             useValue: {
-              data: observableOf({ bitstream: createSuccessfulRemoteDataObject(bitstream) }),
+              data: of({ bitstream: createSuccessfulRemoteDataObject(bitstream) }),
               snapshot: { queryParams: {} },
             },
           },
@@ -557,7 +557,7 @@ describe('EditBitstreamPageComponent', () => {
           {
             provide: ActivatedRoute,
             useValue: {
-              data: observableOf({ bitstream: createSuccessfulRemoteDataObject(bitstream) }),
+              data: of({ bitstream: createSuccessfulRemoteDataObject(bitstream) }),
               snapshot: { queryParams: {} },
             },
           },
@@ -688,7 +688,7 @@ describe('EditBitstreamPageComponent', () => {
           { provide: DynamicFormService, useValue: formService },
           { provide: ActivatedRoute,
             useValue: {
-              data: observableOf({ bitstream: createSuccessfulRemoteDataObject(bitstream) }),
+              data: of({ bitstream: createSuccessfulRemoteDataObject(bitstream) }),
               snapshot: { queryParams: {} },
             },
           },
@@ -800,7 +800,7 @@ describe('EditBitstreamPageComponent', () => {
           {
             provide: ActivatedRoute,
             useValue: {
-              data: observableOf({ bitstream: createSuccessfulRemoteDataObject(bitstream) }),
+              data: of({ bitstream: createSuccessfulRemoteDataObject(bitstream) }),
               snapshot: { queryParams: {} },
             },
           },
@@ -930,7 +930,7 @@ describe('EditBitstreamPageComponent', () => {
           {
             provide: ActivatedRoute,
             useValue: {
-              data: observableOf({ bitstream: createSuccessfulRemoteDataObject(bitstream) }),
+              data: of({ bitstream: createSuccessfulRemoteDataObject(bitstream) }),
               snapshot: { queryParams: {} },
             },
           },

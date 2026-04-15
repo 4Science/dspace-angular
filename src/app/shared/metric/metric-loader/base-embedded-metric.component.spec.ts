@@ -1,24 +1,29 @@
 import { Component } from '@angular/core';
 import {
-  async,
   ComponentFixture,
   fakeAsync,
   TestBed,
   tick,
+  waitForAsync,
 } from '@angular/core/testing';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { metricAltmetricMock } from '../../../cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/metrics/cris-layout-metrics-box.component.spec';
+import { OrejimeService } from '../../cookies/orejime.service';
+import { OrejimeServiceStub } from '../../cookies/orejime.service.stub';
 import { BaseEmbeddedMetricComponent } from './base-embedded-metric.component';
 
 describe('BaseEmbeddedMetricComponent', () => {
   let component: TestEmbeddedMetricComponent;
   let fixture: ComponentFixture<TestEmbeddedMetricComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
 
     TestBed.configureTestingModule({
       imports: [TestEmbeddedMetricComponent],
+      providers: [
+        { provide: OrejimeService, useValue: new OrejimeServiceStub() },
+      ],
     })
       .compileComponents();
   }));
@@ -88,7 +93,6 @@ describe('BaseEmbeddedMetricComponent', () => {
 @Component({
   selector: 'ds-test-cmp',
   template: ``,
-  standalone: true,
 })
 class TestEmbeddedMetricComponent extends BaseEmbeddedMetricComponent {
 

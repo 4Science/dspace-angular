@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -17,7 +16,7 @@ import {
 } from '@ngx-translate/core';
 import {
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import {
   map,
@@ -54,8 +53,10 @@ import {
 @Component({
   selector: 'ds-export-metadata-xls-selector',
   templateUrl: '../dso-selector-modal-wrapper.component.html',
-  standalone: true,
-  imports: [NgIf, DSOSelectorComponent, TranslateModule],
+  imports: [
+    DSOSelectorComponent,
+    TranslateModule,
+  ],
 })
 export class ExportMetadataXlsSelectorComponent extends DSOSelectorModalWrapperComponent implements OnInit {
   configuration = 'communityOrCollection';
@@ -89,7 +90,7 @@ export class ExportMetadataXlsSelectorComponent extends DSOSelectorModalWrapperC
           const startScriptSucceeded$ = this.startScriptNotifyAndRedirect(dso);
           return startScriptSucceeded$.pipe(
             switchMap((r: boolean) => {
-              return observableOf(r);
+              return of(r);
             }),
           );
         } else {
@@ -100,7 +101,7 @@ export class ExportMetadataXlsSelectorComponent extends DSOSelectorModalWrapperC
       resp$.subscribe();
       return resp$;
     } else {
-      return observableOf(false);
+      return of(false);
     }
   }
 

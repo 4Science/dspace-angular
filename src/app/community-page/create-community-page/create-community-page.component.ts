@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import {
@@ -28,14 +25,12 @@ import { CommunityFormComponent } from '../community-form/community-form.compone
   styleUrls: ['./create-community-page.component.scss'],
   templateUrl: './create-community-page.component.html',
   imports: [
+    AsyncPipe,
     CommunityFormComponent,
+    ThemedLoadingComponent,
     TranslateModule,
     VarDirective,
-    NgIf,
-    AsyncPipe,
-    ThemedLoadingComponent,
   ],
-  standalone: true,
 })
 export class CreateCommunityPageComponent extends CreateComColPageComponent<Community> {
   protected frontendURL = '/communities/';

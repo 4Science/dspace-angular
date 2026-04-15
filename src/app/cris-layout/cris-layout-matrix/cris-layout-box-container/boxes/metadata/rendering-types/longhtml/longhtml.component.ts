@@ -15,7 +15,6 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   selector: 'span[ds-longhtml]',
   templateUrl: './longhtml.component.html',
   styleUrls: ['./longhtml.component.scss'],
-  standalone: true,
   imports: [
     TruncatableComponent,
     TruncatablePartComponent,

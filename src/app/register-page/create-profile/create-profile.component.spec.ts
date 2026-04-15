@@ -20,10 +20,7 @@ import {
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  of as observableOf,
-  of,
-} from 'rxjs';
+import { of } from 'rxjs';
 
 import { AuthenticateAction } from '../../core/auth/auth.actions';
 import { CoreState } from '../../core/core-state.model';
@@ -69,9 +66,9 @@ describe('CreateProfileComponent', () => {
 
   beforeEach(waitForAsync(() => {
     authService = jasmine.createSpyObj('authService', {
-      isAuthenticated: observableOf(true),
+      isAuthenticated: of(true),
       setRedirectUrl: {},
-      getAuthenticatedUserFromStore: observableOf(ePerson),
+      getAuthenticatedUserFromStore: of(ePerson),
     });
     values = {
       metadata: {
@@ -137,7 +134,7 @@ describe('CreateProfileComponent', () => {
     };
     epersonWithAgreement = Object.assign(new EPerson(), valuesWithAgreement);
 
-    route = { data: observableOf({ registration: createSuccessfulRemoteDataObject(registration) }) };
+    route = { data: of({ registration: createSuccessfulRemoteDataObject(registration) }) };
     router = new RouterStub();
     notificationsService = new NotificationsServiceStub();
 
@@ -213,7 +210,7 @@ describe('CreateProfileComponent', () => {
         comp.submitEperson();
 
         expect(ePersonDataService.createEPersonForToken).toHaveBeenCalledWith(epersonWithAgreement, 'test-token');
-        expect(store.dispatch).toHaveBeenCalledWith(new AuthenticateAction('test@email.org', 'password'));
+        expect(store.dispatch as jasmine.Spy).toHaveBeenCalledWith(new AuthenticateAction('test@email.org', 'password'));
         expect(router.navigate).toHaveBeenCalledWith(['/home']);
         expect(notificationsService.success).toHaveBeenCalled();
       });
@@ -235,7 +232,7 @@ describe('CreateProfileComponent', () => {
           comp.submitEperson();
 
           expect(ePersonDataService.createEPersonForToken).toHaveBeenCalledWith(epersonWithAgreement, 'test-token');
-          expect(store.dispatch).toHaveBeenCalledWith(new AuthenticateAction('test@email.org', 'password'));
+          expect(store.dispatch as jasmine.Spy).toHaveBeenCalledWith(new AuthenticateAction('test@email.org', 'password'));
           expect(router.navigate).toHaveBeenCalledWith(['/home']);
           expect(notificationsService.success).toHaveBeenCalled();
         });

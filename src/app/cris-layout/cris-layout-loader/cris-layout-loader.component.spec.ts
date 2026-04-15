@@ -12,12 +12,16 @@ import {
   ActivatedRoute,
   provideRouter,
 } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
 import { of } from 'rxjs';
 
 import { APP_CONFIG } from '../../../config/app-config.interface';
 import { Item } from '../../core/shared/item.model';
 import { HostWindowService } from '../../shared/host-window.service';
+import { TranslateLoaderMock } from '../../shared/mocks/translate-loader.mock';
 import { HostWindowServiceStub } from '../../shared/testing/host-window-service.stub';
 import { loaderTabs } from '../../shared/testing/layout-tab.mocks';
 import { CrisLayoutLoaderDirective } from '../directives/cris-layout-loader.directive';
@@ -61,6 +65,9 @@ describe('CrisLayoutLoaderComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         CommonModule,
+        TranslateModule.forRoot({
+          loader: { provide: TranslateLoader, useClass: TranslateLoaderMock },
+        }),
         CrisLayoutLoaderComponent,
         CrisLayoutLoaderDirective,
         CrisLayoutVerticalComponent,
@@ -78,7 +85,6 @@ describe('CrisLayoutLoaderComponent', () => {
             },
           },
         } } },
-        { provide: TranslateService, useValue: translateServiceStub },
         { provide: HostWindowService, useValue: windowServiceStub },
         { provide: APP_CONFIG, useValue: {
           crisLayout: {

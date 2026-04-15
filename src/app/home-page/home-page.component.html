@@ -1,53 +1,62 @@
-<ng-container *ngIf="(site$.value && hasHomeHeaderMetadata); then dsHomeHeader; else dsHomeNews"></ng-container>
-<ng-template #dsHomeHeader>
+@if ((site$.value && hasHomeHeaderMetadata)) {
   <div id="home-header-wrapper">
     <ds-text-section [sectionId]="'site'"
-                            [textRowSection]="homeHeaderSection"
-                            [site]="site$.value"></ds-text-section>
+      [textRowSection]="homeHeaderSection"
+    [site]="site$.value"></ds-text-section>
   </div>
-</ng-template>
-
-<ng-template #dsHomeNews>
+} @else {
   <ds-home-coar></ds-home-coar>
   <ds-home-news></ds-home-news>
-</ng-template>
+}
 
-<ng-container *ngIf="site$.value">
-  <div *ngFor="let sectionComponentRow of ( sectionComponents | async )">
-    <div class="container">
-      <div class="row">
-        <div *ngFor="let sectionComponent of sectionComponentRow" [class]="componentClass(sectionComponent)"
-             [ngSwitch]="sectionComponent.componentType">
 
-          <ds-top-section *ngSwitchCase="'top'"
-                                 [sectionId]="sectionId"
-                                 [topSection]="$any(sectionComponent)"></ds-top-section>
-
-          <ds-browse-section *ngSwitchCase="'browse'"
-                                    [sectionId]="sectionId"
-                                    [browseSection]="$any(sectionComponent)"></ds-browse-section>
-
-          <ds-search-section *ngSwitchCase="'search'"
-                                    [sectionId]="sectionId"
-                                    [searchSection]="$any(sectionComponent)"></ds-search-section>
-
-          <ds-facet-section *ngSwitchCase="'facet'"
-                                   [sectionId]="sectionId"
-                                   [facetSection]="$any(sectionComponent)"></ds-facet-section>
-
-          <ds-counters-section *ngSwitchCase="'counters'"
-                                      [sectionId]="sectionId"
-                                      [countersSection]="$any(sectionComponent)"></ds-counters-section>
-
-          <ds-text-section *ngSwitchCase="'text-row'"
-                                  [sectionId]="sectionId"
-                                  [textRowSection]="$any(sectionComponent)"
-                                  [site]="$any(sectionComponent).contentType === 'text-metadata' ? site$.value : null"></ds-text-section>
-
+@if (site$.value) {
+  @for (sectionComponentRow of ( sectionComponents | async ); track sectionComponentRow) {
+    <div>
+      <div class="container">
+        <div class="row">
+          @for (sectionComponent of sectionComponentRow; track sectionComponent) {
+            <div [class]="componentClass(sectionComponent)"
+              >
+              @switch (sectionComponent.componentType) {
+                @case ('top') {
+                  <ds-top-section
+                    [sectionId]="sectionId"
+                  [topSection]="$any(sectionComponent)"></ds-top-section>
+                }
+                @case ('browse') {
+                  <ds-browse-section
+                    [sectionId]="sectionId"
+                  [browseSection]="$any(sectionComponent)"></ds-browse-section>
+                }
+                @case ('search') {
+                  <ds-search-section
+                    [sectionId]="sectionId"
+                  [searchSection]="$any(sectionComponent)"></ds-search-section>
+                }
+                @case ('facet') {
+                  <ds-facet-section
+                    [sectionId]="sectionId"
+                  [facetSection]="$any(sectionComponent)"></ds-facet-section>
+                }
+                @case ('counters') {
+                  <ds-counters-section
+                    [sectionId]="sectionId"
+                  [countersSection]="$any(sectionComponent)"></ds-counters-section>
+                }
+                @case ('text-row') {
+                  <ds-text-section
+                    [sectionId]="sectionId"
+                    [textRowSection]="$any(sectionComponent)"
+                  [site]="$any(sectionComponent).contentType === 'text-metadata' ? site$.value : null"></ds-text-section>
+                }
+              }
+            </div>
+          }
         </div>
       </div>
     </div>
-  </div>
-</ng-container>
+  }
+}
 
 <ds-suggestions-popup></ds-suggestions-popup>

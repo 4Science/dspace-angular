@@ -1,12 +1,12 @@
 import {
-  async,
   ComponentFixture,
   TestBed,
+  waitForAsync,
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
@@ -25,7 +25,7 @@ describe('StatisticsMenuComponent', () => {
   let authorizationService: AuthorizationDataService;
   let dso: DSpaceObject;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     dso = Object.assign(new Item(), {
       id: 'test-item',
       _links: {
@@ -33,7 +33,7 @@ describe('StatisticsMenuComponent', () => {
       },
     });
     authorizationService = jasmine.createSpyObj('authorizationService', {
-      isAuthorized: observableOf(true),
+      isAuthorized: of(true),
     });
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([]), BrowserOnlyMockPipe],
@@ -59,7 +59,7 @@ describe('StatisticsMenuComponent', () => {
 
   describe('when the user is authorized', () => {
     beforeEach(() => {
-      (authorizationService.isAuthorized as jasmine.Spy).and.returnValue(observableOf(true));
+      (authorizationService.isAuthorized as jasmine.Spy).and.returnValue(of(true));
       component.ngOnInit();
       fixture.detectChanges();
     });
@@ -72,7 +72,7 @@ describe('StatisticsMenuComponent', () => {
 
   describe('when the user is not authorized', () => {
     beforeEach(() => {
-      (authorizationService.isAuthorized as jasmine.Spy).and.returnValue(observableOf(false));
+      (authorizationService.isAuthorized as jasmine.Spy).and.returnValue(of(false));
       component.ngOnInit();
       fixture.detectChanges();
     });

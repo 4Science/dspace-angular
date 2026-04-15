@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -12,7 +9,7 @@ import {
   BehaviorSubject,
   combineLatest,
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import {
   map,
@@ -35,14 +32,12 @@ import { BitstreamRenderingModelComponent } from '../bitstream-rendering-model';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector, dspace-angular-ts/themed-component-selectors
-  selector: 'span[ds-thumbnail].float-left',
+  selector: 'span[ds-thumbnail].float-start',
   templateUrl: './thumbnail.component.html',
   styleUrls: ['./thumbnail.component.scss'],
-  standalone: true,
   imports: [
-    ThemedThumbnailComponent,
     AsyncPipe,
-    NgIf,
+    ThemedThumbnailComponent,
   ],
 })
 /**
@@ -96,7 +91,7 @@ export class ThumbnailRenderingComponent extends BitstreamRenderingModelComponen
       switchMap((filteredBitstreams: Bitstream[]) => {
         if (filteredBitstreams.length > 0) {
           if (isEmpty(filteredBitstreams[0].thumbnail)) {
-            return observableOf(null);
+            return of(null);
           } else {
             return filteredBitstreams[0].thumbnail.pipe(
               getFirstCompletedRemoteData(),
@@ -110,7 +105,7 @@ export class ThumbnailRenderingComponent extends BitstreamRenderingModelComponen
             );
           }
         } else {
-          return observableOf(null);
+          return of(null);
         }
       }),
     ).subscribe((thumbnail: Bitstream) => {

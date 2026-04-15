@@ -1,10 +1,7 @@
-import {
-  DOCUMENT,
-  NgClass,
-  NgIf,
-} from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   Component,
+  DOCUMENT,
   EventEmitter,
   HostListener,
   Inject,
@@ -38,13 +35,11 @@ export const DS_DATE_PICKER_SEPARATOR = '-';
   styleUrls: ['./date-picker.component.scss'],
   templateUrl: './date-picker.component.html',
   imports: [
-    NgClass,
-    NgIf,
-    NumberPickerComponent,
     FormsModule,
+    NgClass,
+    NumberPickerComponent,
     TranslateModule,
   ],
-  standalone: true,
 })
 
 export class DsDatePickerComponent extends DynamicFormControlComponent implements OnInit {

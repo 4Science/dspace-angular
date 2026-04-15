@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -20,20 +17,17 @@ import { ItemPageAbstractFieldComponent } from '../../../../../../../app/item-pa
 import { ItemPageCcLicenseFieldComponent } from '../../../../../../../app/item-page/simple/field-components/specific-field/cc-license/item-page-cc-license-field.component';
 import { ItemPageDateFieldComponent } from '../../../../../../../app/item-page/simple/field-components/specific-field/date/item-page-date-field.component';
 import { GenericItemPageFieldComponent } from '../../../../../../../app/item-page/simple/field-components/specific-field/generic/generic-item-page-field.component';
+import { GeospatialItemPageFieldComponent } from '../../../../../../../app/item-page/simple/field-components/specific-field/geospatial/geospatial-item-page-field.component';
 import { ThemedItemPageTitleFieldComponent } from '../../../../../../../app/item-page/simple/field-components/specific-field/title/themed-item-page-field.component';
 import { ItemPageUriFieldComponent } from '../../../../../../../app/item-page/simple/field-components/specific-field/uri/item-page-uri-field.component';
 import { UntypedItemComponent as BaseComponent } from '../../../../../../../app/item-page/simple/item-types/untyped-item/untyped-item.component';
 import { ThemedMetadataRepresentationListComponent } from '../../../../../../../app/item-page/simple/metadata-representation-list/themed-metadata-representation-list.component';
 import { ContextMenuComponent } from '../../../../../../../app/shared/context-menu/context-menu.component';
-import { DsoEditMenuComponent } from '../../../../../../../app/shared/dso-page/dso-edit-menu/dso-edit-menu.component';
 import { MetadataFieldWrapperComponent } from '../../../../../../../app/shared/metadata-field-wrapper/metadata-field-wrapper.component';
 import { listableObjectComponent } from '../../../../../../../app/shared/object-collection/shared/listable-object/listable-object.decorator';
 import { ThemedResultsBackButtonComponent } from '../../../../../../../app/shared/results-back-button/themed-results-back-button.component';
 import { ThemedThumbnailComponent } from '../../../../../../../app/thumbnail/themed-thumbnail.component';
 
-/**
- * Component that represents an untyped Item page
- */
 @listableObjectComponent(Item, ViewMode.StandalonePage, Context.Any, 'custom')
 @Component({
   selector: 'ds-untyped-item',
@@ -42,31 +36,29 @@ import { ThemedThumbnailComponent } from '../../../../../../../app/thumbnail/the
     '../../../../../../../app/item-page/simple/item-types/untyped-item/untyped-item.component.scss',
   ],
   // templateUrl: './untyped-item.component.html',
-  templateUrl:
-    '../../../../../../../app/item-page/simple/item-types/untyped-item/untyped-item.component.html',
+  templateUrl: '../../../../../../../app/item-page/simple/item-types/untyped-item/untyped-item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
-    NgIf,
-    ThemedResultsBackButtonComponent,
-    MiradorViewerComponent,
-    ThemedItemPageTitleFieldComponent,
-    DsoEditMenuComponent,
-    MetadataFieldWrapperComponent,
-    ThemedThumbnailComponent,
-    ThemedMediaViewerComponent,
-    ThemedFileSectionComponent,
-    ItemPageDateFieldComponent,
-    ThemedMetadataRepresentationListComponent,
-    GenericItemPageFieldComponent,
-    ItemPageAbstractFieldComponent,
-    ItemPageUriFieldComponent,
-    CollectionsComponent,
-    RouterLink,
     AsyncPipe,
-    TranslateModule,
-    ItemPageCcLicenseFieldComponent,
+    CollectionsComponent,
     ContextMenuComponent,
+    GenericItemPageFieldComponent,
+    GeospatialItemPageFieldComponent,
+    ItemPageAbstractFieldComponent,
+    ItemPageCcLicenseFieldComponent,
+    ItemPageDateFieldComponent,
+    ItemPageUriFieldComponent,
+    MetadataFieldWrapperComponent,
+    MiradorViewerComponent,
+    RouterLink,
+    ThemedFileSectionComponent,
+    ThemedItemPageTitleFieldComponent,
+    ThemedMediaViewerComponent,
+    ThemedMetadataRepresentationListComponent,
+    ThemedResultsBackButtonComponent,
+    ThemedThumbnailComponent,
+    TranslateModule,
   ],
 })
-export class UntypedItemComponent extends BaseComponent {}
+export class UntypedItemComponent extends BaseComponent {
+}

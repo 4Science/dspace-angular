@@ -10,7 +10,6 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   selector: 'span[ds-html]',
   templateUrl: './html.component.html',
   styleUrls: ['./html.component.scss'],
-  standalone: true,
 })
 export class HtmlComponent extends RenderingTypeValueModelComponent {
 

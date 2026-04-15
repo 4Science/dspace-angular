@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Inject,
@@ -31,8 +31,9 @@ import {
   selector: 'ds-identifier',
   templateUrl: './identifier.component.html',
   styleUrls: ['./identifier.component.scss'],
-  standalone: true,
-  imports: [NgIf, NgbTooltipModule],
+  imports: [
+    NgbTooltipModule,
+  ],
 })
 export class IdentifierComponent extends RenderingTypeValueModelComponent implements OnInit {
 
@@ -197,7 +198,8 @@ export class IdentifierComponent extends RenderingTypeValueModelComponent implem
    */
   private validateLink(link: string): boolean {
     const urlRegex = /^(http|https):\/\/[^ "]+$/;
-    return urlRegex.test(link);
+    const subtypeValue = this.getIdentifierSubtypeValue();
+    return urlRegex.test(link) || (hasValue(subtypeValue) && link.startsWith(subtypeValue.link));
   }
 }
 

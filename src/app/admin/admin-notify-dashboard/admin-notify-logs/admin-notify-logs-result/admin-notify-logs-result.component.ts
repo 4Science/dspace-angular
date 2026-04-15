@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -33,13 +30,11 @@ import { ThemedSearchComponent } from '../../../../shared/search/themed-search.c
       useClass: SearchConfigurationService,
     },
   ],
-  standalone: true,
   imports: [
+    AsyncPipe,
     SearchLabelsComponent,
     ThemedSearchComponent,
-    AsyncPipe,
     TranslateModule,
-    NgIf,
   ],
 })
 

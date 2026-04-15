@@ -10,7 +10,6 @@ import { Item } from '../../core/shared/item.model';
  */
 @Component({
   template: '',
-  standalone: true,
 })
 export abstract class CrisLayoutPageModelComponent {
   /**

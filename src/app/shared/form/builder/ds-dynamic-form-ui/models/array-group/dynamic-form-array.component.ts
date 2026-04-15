@@ -6,7 +6,6 @@ import {
 } from '@angular/cdk/drag-drop';
 import {
   NgClass,
-  NgForOf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -48,17 +47,15 @@ import { DynamicRowArrayModel } from '../ds-dynamic-row-array-model';
   templateUrl: './dynamic-form-array.component.html',
   styleUrls: ['./dynamic-form-array.component.scss'],
   imports: [
-    ReactiveFormsModule,
-    CdkDropList,
-    NgClass,
-    NgForOf,
     CdkDrag,
     CdkDragHandle,
+    CdkDropList,
     forwardRef(() => DsDynamicFormControlContainerComponent),
+    NgClass,
     NgTemplateOutlet,
+    ReactiveFormsModule,
     TranslateModule,
   ],
-  standalone: true,
 })
 export class DsDynamicFormArrayComponent extends DynamicFormArrayComponent {
 

@@ -6,7 +6,7 @@
     --ds-header-logo-height: 40px;
     --ds-header-height: 80px;
   }
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(md) {
     --ds-header-logo-height: 50px;
     --ds-header-height: 90px;
   }

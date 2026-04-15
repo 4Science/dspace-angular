@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -37,9 +34,7 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
 @Component({
   selector: 'ds-context-menu-claim-item',
   templateUrl: './claim-item-menu.component.html',
-  standalone: true,
   imports: [
-    NgIf,
     AsyncPipe,
     TranslateModule,
   ],

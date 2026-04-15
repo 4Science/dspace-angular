@@ -1,7 +1,4 @@
-import {
-  NgFor,
-  NgIf,
-} from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -51,10 +48,7 @@ import { MetadataRenderComponent } from './metadata-render/metadata-render.compo
   templateUrl: './metadata-container.component.html',
   styleUrls: ['./metadata-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
-    NgIf,
-    NgFor,
     MetadataRenderComponent,
   ],
 })
@@ -205,7 +199,4 @@ export class MetadataContainerComponent implements OnInit {
       (field.fieldType === LayoutFieldType.METADATA.toString() && this.item.firstMetadataValue(field.metadata));
   }
 
-  trackUpdate(index: number, value: string) {
-    return value;
-  }
 }

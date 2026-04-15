@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -42,13 +39,11 @@ import {
       useClass: SearchConfigurationService,
     },
   ],
-  standalone: true,
   imports: [
     AdminNotifyMetricsComponent,
-    RouterLink,
-    NgIf,
-    TranslateModule,
     AsyncPipe,
+    RouterLink,
+    TranslateModule,
   ],
 })
 

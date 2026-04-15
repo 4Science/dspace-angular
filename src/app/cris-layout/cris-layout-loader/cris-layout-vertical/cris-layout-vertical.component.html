@@ -1,18 +1,24 @@
 <div id="cris-layout-loader">
-  <div *ngIf="(isXsOrSm$ | async) !== true" class="vertical-layout">
-    <ds-cris-layout-sidebar (selectedTabChange)="selectedTabChanged($event)" [showNav]="tabs.length > 1" [tabs]="tabs" [item]="item">
-      <div *ngIf="showContextMenu" class="container text-right mb-3" [class.px-0]="tabs?.length > 1">
-        <ds-context-menu [contextMenuObject]="item" [contextMenuObjectType]="'ITEM'"></ds-context-menu>
-      </div>
-      <ds-cris-layout-matrix [showCellPadding]="tabs?.length <= 1" [tab]="(selectedTab$ | async)" [item]="item"></ds-cris-layout-matrix>
-    </ds-cris-layout-sidebar>
-  </div>
-
-  <div *ngIf="(isXsOrSm$ | async)" class="horizontal-layout">
-    <ds-cris-layout-navbar [showNav]="(tabs.length - leadingTabs.length) > 1" (selectedTabChange)="selectedTabChanged($event)"
-      [tabs]="tabs" [item]="item"></ds-cris-layout-navbar>
-    <div class="container pt-4">
-      <ds-cris-layout-matrix [tab]="(selectedTab$ | async)" [item]="item"></ds-cris-layout-matrix>
+  @if ((isXsOrSm$ | async) !== true) {
+    <div class="vertical-layout">
+      <ds-cris-layout-sidebar (selectedTabChange)="selectedTabChanged($event)" [showNav]="tabs.length > 1" [tabs]="tabs" [item]="item">
+        @if (showContextMenu) {
+          <div class="container text-end mb-3" [class.px-0]="tabs?.length > 1">
+            <ds-context-menu [contextMenuObject]="item" [contextMenuObjectType]="'ITEM'"></ds-context-menu>
+          </div>
+        }
+        <ds-cris-layout-matrix [showCellPadding]="tabs?.length <= 1" [tab]="(selectedTab$ | async)" [item]="item"></ds-cris-layout-matrix>
+      </ds-cris-layout-sidebar>
     </div>
-  </div>
+  }
+
+  @if ((isXsOrSm$ | async)) {
+    <div class="horizontal-layout">
+      <ds-cris-layout-navbar [showNav]="(tabs.length - leadingTabs.length) > 1" (selectedTabChange)="selectedTabChanged($event)"
+      [tabs]="tabs" [item]="item"></ds-cris-layout-navbar>
+      <div class="container pt-4">
+        <ds-cris-layout-matrix [tab]="(selectedTab$ | async)" [item]="item"></ds-cris-layout-matrix>
+      </div>
+    </div>
+  }
 </div>

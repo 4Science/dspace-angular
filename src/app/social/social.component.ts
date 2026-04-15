@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -17,10 +13,7 @@ import { SocialService } from './social.service';
   templateUrl: './social.component.html',
   styleUrls: ['./social.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
-    NgFor,
-    NgIf,
     AsyncPipe,
   ],
 })

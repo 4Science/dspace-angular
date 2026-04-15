@@ -1,7 +1,6 @@
 import {
   AsyncPipe,
   isPlatformServer,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -26,10 +25,10 @@ import {
   BehaviorSubject,
   combineLatest,
   Observable,
+  of,
   Subscription,
 } from 'rxjs';
 import {
-  debounceTime,
   distinctUntilChanged,
   filter,
   map,
@@ -94,21 +93,19 @@ import { SearchConfigurationOption } from './search-switch-configuration/search-
   templateUrl: './search.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [pushInOut],
-  standalone: true,
   imports: [
     AsyncPipe,
-    NgIf,
+    ItemExportModalLauncherComponent,
+    NgbTooltipModule,
     NgTemplateOutlet,
     PageWithSidebarComponent,
+    SearchChartsComponent,
+    SearchLabelsComponent,
     ThemedSearchFormComponent,
     ThemedSearchResultsComponent,
     ThemedSearchSidebarComponent,
     TranslateModule,
-    SearchLabelsComponent,
     ViewModeSwitchComponent,
-    NgbTooltipModule,
-    ItemExportModalLauncherComponent,
-    SearchChartsComponent,
   ],
 })
 
@@ -333,7 +330,7 @@ export class SearchComponent implements OnDestroy, OnInit {
   /**
    * Defines whether to fetch search results during SSR execution
    */
-  @Input() renderOnServerSide: boolean;
+  @Input() renderOnServerSide = true;
 
   /**
    * For chart regular expression
@@ -515,9 +512,27 @@ export class SearchComponent implements OnDestroy, OnInit {
     this.searchLink = this.getSearchLink();
     this.currentContext$.next(this.context);
 
+    // Raw query param observable for configuration
+    const configurationParam$: Observable<string> =
+      this.routeService.getQueryParameterValue('configuration').pipe(distinctUntilChanged());
+
+
     // Determinate PaginatedSearchOptions and listen to any update on it
-    const configuration$: Observable<string> = this.searchConfigService
+    const configurationFromService$: Observable<string> = this.searchConfigService
       .getCurrentConfiguration(this.configuration).pipe(distinctUntilChanged());
+
+    // Effective configuration: param value OR input @Input() configuration OR 'default'
+    const configuration$: Observable<string> = combineLatest([
+      configurationParam$,
+      configurationFromService$,
+      of(this.configuration),
+    ]).pipe(
+      map(([paramValue, serviceValue, inputValue]) =>
+        hasValue(paramValue) ? paramValue : (hasValue(inputValue) ? inputValue : hasValue(serviceValue) ? serviceValue : 'default'),
+      ),
+      distinctUntilChanged(),
+    );
+
     const searchSortOptions$: Observable<SortOptions[]> = combineLatest([configuration$, this.currentScope$]).pipe(
       switchMap(([configuration, scope]: [string, string]) => this.searchConfigService.getConfigurationSearchConfig(configuration, scope)),
       map((searchConfig: SearchConfig) => this.searchConfigService.getConfigurationSortOptions(searchConfig)),
@@ -531,24 +546,32 @@ export class SearchComponent implements OnDestroy, OnInit {
       distinctUntilChanged(),
     );
     const searchOptions$: Observable<PaginatedSearchOptions> = this.getSearchOptions().pipe(distinctUntilChanged());
+    const queryFromQueryParam$: Observable<string> = this.routeService.getQueryParameterValue('query').pipe(distinctUntilChanged());
 
-    this.subs.push(combineLatest([configuration$, searchSortOptions$, searchOptions$, sortOption$, this.currentScope$]).pipe(
-      filter(([configuration, searchSortOptions, searchOptions, sortOption, scope]: [string, SortOptions[], PaginatedSearchOptions, SortOptions, string]) => {
+    this.subs.push(combineLatest([configuration$, searchSortOptions$, searchOptions$, sortOption$, this.currentScope$, queryFromQueryParam$]).pipe(
+      filter(([configuration, searchSortOptions, searchOptions, sortOption, scope, queryFromQueryParam]: [string, SortOptions[], PaginatedSearchOptions, SortOptions, string, string]) => {
         // filter for search options related to instanced paginated id
         return searchOptions.pagination.id === this.paginationId;
       }),
-      debounceTime(100),
-    ).subscribe(([configuration, searchSortOptions, searchOptions, sortOption, scope]: [string, SortOptions[], PaginatedSearchOptions, SortOptions, string]) => {
-      // Build the PaginatedSearchOptions object
-      const searchOptionsConfiguration = searchOptions.configuration || configuration;
-      const combinedOptions = Object.assign({}, searchOptions,
-        {
-          configuration: searchOptionsConfiguration,
-          sort: sortOption || searchOptions.sort,
-          forcedEmbeddedKeys: this.forcedEmbeddedKeys.get(searchOptionsConfiguration) || this.forcedEmbeddedKeys.get('default'),
-        });
+      // debounceTime(100),
+    ).subscribe(([configuration, searchSortOptions, searchOptions, sortOption, scope, queryFromQueryParam]:
+                 [string, SortOptions[], PaginatedSearchOptions, SortOptions, string, string]) => {
+      // Always apply the freshly resolved configuration (do NOT keep stale one)
+      const combinedOptions = Object.assign({}, searchOptions, {
+        configuration,
+        sort: sortOption || searchOptions.sort,
+        forcedEmbeddedKeys: this.forcedEmbeddedKeys.get(configuration) || this.forcedEmbeddedKeys.get('default'),
+      });
       if (combinedOptions.query === '') {
         combinedOptions.query = this.query;
+      }
+      if (this.searchOptions$.value) {
+        const currentOptions = this.searchOptions$.value;
+        const query = currentOptions.query;
+        if (isNotEmpty(query) && (isEmpty(combinedOptions.query) || isEmpty(queryFromQueryParam))) {
+          combinedOptions.query = '';
+          this.query = '';
+        }
       }
       if (isEmpty(combinedOptions.scope)) {
         combinedOptions.scope = scope;

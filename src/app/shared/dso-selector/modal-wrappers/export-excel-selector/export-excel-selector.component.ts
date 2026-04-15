@@ -37,7 +37,6 @@ import {
 @Component({
   selector: 'ds-export-excel-selector',
   templateUrl: './export-excel-selector.component.html',
-  standalone: true,
   imports: [
     AdministeredCollectionSelectorComponent,
     TranslateModule,

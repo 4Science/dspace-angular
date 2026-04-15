@@ -1,23 +1,28 @@
 <div class="pt-2">
   <div class="d-flex">
-    <ds-loading *ngIf="!chips" [showMessage]="false"></ds-loading>
-    <div *ngIf="chips && !chips.hasItems()">
-      <input type="text"
-             class="border-0 form-control-plaintext tag-input mt-1 mb-1 pl-2 text-muted"
-             readonly
-             tabindex="-1"
-             value="{{'form.no-value' | translate}}">
-    </div>
-    <ds-chips
-      *ngIf="chips && chips.hasItems()"
-      [chips]="chips"
-      [editable]="!model.readOnly"
-      [showIcons]="true"
+    @if (!chips) {
+      <ds-loading [showMessage]="false"></ds-loading>
+    }
+    @if (chips && !chips.hasItems()) {
+      <div>
+        <input type="text"
+          class="border-0 form-control-plaintext tag-input mt-1 mb-1 ps-2 text-muted"
+          readonly
+          tabindex="-1"
+          value="{{'form.no-value' | translate}}">
+      </div>
+    }
+    @if (chips && chips.hasItems()) {
+      <ds-chips
+        [chips]="chips"
+        [editable]="!model.readOnly"
+        [showIcons]="true"
       (selected)="onChipSelected($event)"></ds-chips>
+    }
     <button type="button" class="ds-form-add-more btn btn-link"
-            title="{{'form.add' | translate}}"
-            [dsBtnDisabled]="model.readOnly"
-            (click)="openModal()">
+      title="{{'form.add' | translate}}"
+      [dsBtnDisabled]="model.readOnly"
+      (click)="openModal()">
       <span attr.aria-label="{{'form.add' | translate}}"><i class="fas fa-plus"></i> {{'form.add' | translate}}</span>
     </button>
   </div>

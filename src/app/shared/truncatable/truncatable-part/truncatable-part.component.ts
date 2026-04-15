@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   AfterViewChecked,
   Component,
@@ -18,8 +18,10 @@ import { TruncatableService } from '../truncatable.service';
   selector: 'ds-truncatable-part',
   templateUrl: './truncatable-part.component.html',
   styleUrls: ['./truncatable-part.component.scss'],
-  standalone: true,
-  imports: [DragClickDirective, NgIf, TranslateModule],
+  imports: [
+    DragClickDirective,
+    TranslateModule,
+  ],
 })
 
 /**

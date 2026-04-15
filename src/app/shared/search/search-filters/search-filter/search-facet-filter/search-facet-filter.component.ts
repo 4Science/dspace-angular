@@ -21,7 +21,7 @@ import {
   combineLatest,
   from,
   Observable,
-  of as observableOf,
+  of,
   Subscription,
 } from 'rxjs';
 import {
@@ -71,7 +71,6 @@ export const FACET_OPERATORS: string[] = [
 @Component({
   selector: 'ds-search-facet-filter',
   template: ``,
-  standalone: true,
 })
 
 /**
@@ -131,7 +130,7 @@ export class SearchFacetFilterComponent implements OnInit, OnDestroy {
   /**
    * Emits the result values for this filter found by the current filter query
    */
-  filterSearchResults$: Observable<InputSuggestion[]> = observableOf([]);
+  filterSearchResults$: Observable<InputSuggestion[]> = of([]);
 
   /**
    * Emits the active values for this filter
@@ -312,7 +311,7 @@ export class SearchFacetFilterComponent implements OnInit, OnDestroy {
           queryParams: params,
         });
         this.filter = '';
-        this.filterSearchResults$ = observableOf([]);
+        this.filterSearchResults$ = of([]);
       }));
     }
   }

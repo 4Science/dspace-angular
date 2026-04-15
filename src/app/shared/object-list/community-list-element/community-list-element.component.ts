@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
@@ -12,8 +12,9 @@ import { AbstractListableElementComponent } from '../../object-collection/shared
   selector: 'ds-community-list-element',
   styleUrls: ['./community-list-element.component.scss'],
   templateUrl: './community-list-element.component.html',
-  standalone: true,
-  imports: [NgIf, RouterLink],
+  imports: [
+    RouterLink,
+  ],
 })
 /**
  * Component representing a list element for a community

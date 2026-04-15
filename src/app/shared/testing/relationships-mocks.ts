@@ -1,4 +1,4 @@
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { Item } from '../../core/shared/item.model';
 
@@ -87,7 +87,7 @@ export const RelationshipsData: any = [
     'rightPlace': 0,
     'leftwardValue': 'isResearchoutputsHiddenFor',
     'rightwardValue': 'notDisplayingResearchoutputs',
-    'leftItem': observableOf({
+    'leftItem': of({
       'timeCompleted': 1619374035878,
       'msToLive': 10000,
       'lastUpdated': 1619374035878,
@@ -115,7 +115,7 @@ export const RelationshipsData: any = [
     'rightPlace': 0,
     'leftwardValue': 'isResearchoutputsSelectedFor',
     'rightwardValue': 'hasSelectedResearchoutputs',
-    'leftItem': observableOf({
+    'leftItem': of({
       'timeCompleted': 1619374035878,
       'msToLive': 10000,
       'lastUpdated': 1619374035878,
@@ -143,7 +143,7 @@ export const RelationshipsData: any = [
     'rightPlace': 1,
     'leftwardValue': 'isResearchoutputsSelectedFor',
     'rightwardValue': 'hasSelectedResearchoutputs',
-    'leftItem': observableOf({
+    'leftItem': of({
       'timeCompleted': 1619374035878,
       'msToLive': 10000,
       'lastUpdated': 1619374035878,
@@ -171,7 +171,7 @@ export const RelationshipsData: any = [
     'rightPlace': 2,
     'leftwardValue': 'isResearchoutputsSelectedFor',
     'rightwardValue': 'hasSelectedResearchoutputs',
-    'leftItem': observableOf({
+    'leftItem': of({
       'timeCompleted': 1619374035878,
       'msToLive': 10000,
       'lastUpdated': 1619374035878,

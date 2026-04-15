@@ -36,7 +36,7 @@ export class UsageReport extends HALResource {
     viewMode: StatisticsType;
 
   @autoserializeAs('report-type')
-    reportType: string;
+  reportType: string;
 
   @autoserialize
   points: Point[];

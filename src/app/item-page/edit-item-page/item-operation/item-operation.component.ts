@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Input,
@@ -14,13 +14,11 @@ import { ItemOperation } from './itemOperation.model';
   selector: 'ds-item-operation',
   templateUrl: './item-operation.component.html',
   imports: [
-    TranslateModule,
-    RouterLink,
-    NgbTooltipModule,
-    NgIf,
     BtnDisabledDirective,
+    NgbTooltipModule,
+    RouterLink,
+    TranslateModule,
   ],
-  standalone: true,
 })
 /**
  * Operation that can be performed on an item

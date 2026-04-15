@@ -3,15 +3,15 @@ import {
   NO_ERRORS_SCHEMA,
 } from '@angular/core';
 import {
-  async,
   ComponentFixture,
   TestBed,
+  waitForAsync,
 } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { RemoteDataBuildService } from '../../../../../core/cache/builders/remote-data-build.service';
 import { buildPaginatedList } from '../../../../../core/data/paginated-list.model';
@@ -92,12 +92,12 @@ xdescribe('SearchChartBarComponent', () => {
   let filterService;
   let searchService;
   let router;
-  const page = observableOf(0);
+  const page = of(0);
 
   const mockValues = createSuccessfulRemoteDataObject$(
     buildPaginatedList(new PageInfo(), values),
   );
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot(), NoopAnimationsModule, FormsModule, SearchChartBarComponent],
       providers: [
@@ -105,7 +105,7 @@ xdescribe('SearchChartBarComponent', () => {
         { provide: Router, useValue: new RouterStub() },
         {
           provide: RemoteDataBuildService,
-          useValue: { aggregate: () => observableOf({}) },
+          useValue: { aggregate: () => of({}) },
         },
         {
           provide: SEARCH_CONFIG_SERVICE,
@@ -114,7 +114,7 @@ xdescribe('SearchChartBarComponent', () => {
         {
           provide: SearchFilterService,
           useValue: {
-            getSelectedValuesForFilter: () => observableOf(selectedValues),
+            getSelectedValuesForFilter: () => of(selectedValues),
             isFilterActiveWithValue: (paramName: string, filterValue: string) => true,
             getPage: (paramName: string) => page,
             // eslint-disable-next-line @typescript-eslint/no-empty-function

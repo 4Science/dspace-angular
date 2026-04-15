@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -78,20 +74,17 @@ export enum ExportSelectionMode {
   selector: 'ds-item-export',
   templateUrl: './item-export.component.html',
   imports: [
-    ThemedLoadingComponent,
-    NgIf,
-    FormsModule,
-    NgForOf,
-    TranslateModule,
-    ReactiveFormsModule,
-    AsyncPipe,
-    ItemExportListComponent,
-    ItemExportAlertComponent,
     AdministeredCollectionSelectorComponent,
     AlertComponent,
+    AsyncPipe,
     BtnDisabledDirective,
+    FormsModule,
+    ItemExportAlertComponent,
+    ItemExportListComponent,
+    ReactiveFormsModule,
+    ThemedLoadingComponent,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class ItemExportComponent implements OnInit, OnDestroy {
 

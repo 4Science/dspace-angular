@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -46,6 +42,7 @@ import { ThumbnailService } from '../../../../thumbnail/thumbnail.service';
 import { TruncatableComponent } from '../../../../truncatable/truncatable.component';
 import { TruncatableService } from '../../../../truncatable/truncatable.service';
 import { TruncatablePartComponent } from '../../../../truncatable/truncatable-part/truncatable-part.component';
+import { EscapeHtmlPipe } from '../../../../utils/escape-html.pipe';
 import { SearchResultGridElementComponent } from '../../search-result-grid-element.component';
 
 @listableObjectComponent('PublicationSearchResult', ViewMode.GridElement)
@@ -55,8 +52,16 @@ import { SearchResultGridElementComponent } from '../../search-result-grid-eleme
   styleUrls: ['./item-search-result-grid-element.component.scss'],
   templateUrl: './item-search-result-grid-element.component.html',
   animations: [focusShadow],
-  standalone: true,
-  imports: [NgIf, RouterLink, ThemedThumbnailComponent, ThemedBadgesComponent, TruncatableComponent, TruncatablePartComponent, NgFor, AsyncPipe, TranslateModule],
+  imports: [
+    AsyncPipe,
+    EscapeHtmlPipe,
+    RouterLink,
+    ThemedBadgesComponent,
+    ThemedThumbnailComponent,
+    TranslateModule,
+    TruncatableComponent,
+    TruncatablePartComponent,
+  ],
 })
 /**
  * The component for displaying a grid element for an item search result of the type Publication
@@ -88,7 +93,7 @@ export class ItemSearchResultGridElementComponent extends SearchResultGridElemen
   ngOnInit(): void {
     super.ngOnInit();
     this.itemPageRoute = getItemPageRoute(this.dso);
-    this.dsoTitle = this.dsoNameService.getHitHighlights(this.object, this.dso);
+    this.dsoTitle = this.dsoNameService.getHitHighlights(this.object, this.dso, true);
     this.thumbnail$ = this.getThumbnail();
   }
 

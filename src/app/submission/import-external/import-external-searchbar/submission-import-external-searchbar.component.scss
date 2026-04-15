@@ -1,9 +1,9 @@
-.input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle) {
+.btn:last-child:not(:last-child):not(.dropdown-toggle) {
   margin-left: -1px;
   border-radius: 0 0.25rem 0.25rem 0;
 }
 
-.input-group-append .dropdown-toggle {
+.dropdown-toggle {
   border-radius: 0;
 }
 

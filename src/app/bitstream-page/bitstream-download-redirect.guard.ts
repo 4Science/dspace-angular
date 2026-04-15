@@ -9,7 +9,7 @@ import {
 import {
   combineLatest,
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import {
   filter,
@@ -57,9 +57,9 @@ export const bitstreamDownloadRedirectGuard: CanActivateFn = (
         const bitstream = rd.payload;
         const isAuthorized$ = authorizationService.isAuthorized(FeatureID.CanDownload, bitstream.self);
         const isLoggedIn$ = auth.isAuthenticated();
-        return combineLatest([isAuthorized$, isLoggedIn$, observableOf(bitstream)]);
+        return combineLatest([isAuthorized$, isLoggedIn$, of(bitstream)]);
       } else {
-        return observableOf([false, false, null]);
+        return of([false, false, null]);
       }
     }),
     filter(([isAuthorized, isLoggedIn, bitstream]: [boolean, boolean, Bitstream]) => hasValue(isAuthorized) && hasValue(isLoggedIn)),
@@ -73,7 +73,7 @@ export const bitstreamDownloadRedirectGuard: CanActivateFn = (
             return [isAuthorized, isLoggedIn, bitstream, fileLink];
           }));
       } else {
-        return observableOf([isAuthorized, isLoggedIn, bitstream, '']);
+        return of([isAuthorized, isLoggedIn, bitstream, '']);
       }
     }),
     map(([isAuthorized, isLoggedIn, bitstream, fileLink]: [boolean, boolean, Bitstream, string]) => {

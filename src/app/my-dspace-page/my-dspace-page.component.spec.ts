@@ -11,7 +11,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { cold } from 'jasmine-marbles';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { RoleService } from '../core/roles/role.service';
 import { Context } from '../core/shared/context.model';
@@ -30,7 +30,7 @@ import { MyDSpacePageComponent } from './my-dspace-page.component';
 import SpyObj = jasmine.SpyObj;
 import { RequestService } from '../core/data/request.service';
 import { RequestEntry } from '../core/data/request-entry.model';
-import { SuggestionsNotificationComponent } from '../notifications/suggestions-notification/suggestions-notification.component';
+import { SuggestionsNotificationComponent } from '../notifications/suggestions/notification/suggestions-notification.component';
 import { getMockRequestService } from '../shared/mocks/request.service.mock';
 import { SelectableListService } from '../shared/object-list/selectable-list/selectable-list.service';
 import { MyDSpaceBulkActionComponent } from './my-dspace-new-submission/my-dspace-bulk-action/my-dspace-bulk-action.component';
@@ -68,7 +68,7 @@ describe('MyDSpacePageComponent', () => {
   ];
 
   const getRequestEntry$ = (successful: boolean) => {
-    return observableOf({
+    return of({
       response: { isSuccessful: successful, payload: {} } as any,
     } as RequestEntry);
   };
@@ -80,7 +80,7 @@ describe('MyDSpacePageComponent', () => {
 
   beforeEach(waitForAsync(() => {
     roleService = jasmine.createSpyObj('roleService', {
-      checkRole: ()=> observableOf(true),
+      checkRole: ()=> of(true),
     });
     TestBed.configureTestingModule({
       imports: [
@@ -135,8 +135,13 @@ describe('MyDSpacePageComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MyDSpacePageComponent);
     comp = fixture.componentInstance; // SearchPageComponent test instance
-    myDSpaceConfigurationServiceStub.getAvailableConfigurationOptions.and.returnValue(observableOf(configurationList));
-    myDSpaceConfigurationServiceStub.getCurrentConfiguration.and.returnValue(observableOf('test'));
+    myDSpaceConfigurationServiceStub.getAvailableConfigurationOptions.and.returnValue(
+      of(configurationList),
+    );
+    // Ensure currentConfiguration$ is an Observable for AsyncPipe usage in the template
+    myDSpaceConfigurationServiceStub.getCurrentConfiguration.and.returnValue(
+      of(MyDSpaceConfigurationValueType.Workspace),
+    );
 
     fixture.detectChanges();
   });

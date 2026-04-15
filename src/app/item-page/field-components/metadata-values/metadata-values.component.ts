@@ -1,9 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-  NgTemplateOutlet,
-} from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   Inject,
@@ -35,8 +30,13 @@ import { ImageField } from '../../simple/field-components/specific-field/image-f
   selector: 'ds-metadata-values',
   styleUrls: ['./metadata-values.component.scss'],
   templateUrl: './metadata-values.component.html',
-  standalone: true,
-  imports: [MetadataFieldWrapperComponent, NgFor, NgTemplateOutlet, NgIf, RouterLink, AsyncPipe, TranslateModule, MarkdownDirective],
+  imports: [
+    MarkdownDirective,
+    MetadataFieldWrapperComponent,
+    NgTemplateOutlet,
+    RouterLink,
+    TranslateModule,
+  ],
 })
 export class MetadataValuesComponent implements OnChanges {
 
@@ -51,7 +51,7 @@ export class MetadataValuesComponent implements OnChanges {
   @Input() mdValues: MetadataValue[];
 
   /**
-   * The seperator used to split the metadata values (can contain HTML)
+   * The separator used to split the metadata values (can contain HTML)
    */
   @Input() separator: string;
 
@@ -124,6 +124,7 @@ export class MetadataValuesComponent implements OnChanges {
     }
     return queryParams;
   }
+
 
   /**
    * Checks if the given link value is an internal link.

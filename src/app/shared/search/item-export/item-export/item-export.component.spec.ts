@@ -21,10 +21,7 @@ import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
-import {
-  of as observableOf,
-  of,
-} from 'rxjs';
+import { of } from 'rxjs';
 
 import { SearchManager } from '../../../../core/browse/search-manager';
 import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
@@ -220,7 +217,7 @@ describe('ItemExportComponent', () => {
       configuration = { format: 'format', entityType: 'entityType', entityTypes: ['entityType'] } as any;
 
       // spies
-      itemExportService.initialItemExportFormConfiguration.and.returnValue(observableOf(configuration));
+      itemExportService.initialItemExportFormConfiguration.and.returnValue(of(configuration));
       mockSearchManager.search.and.returnValue(createSuccessfulRemoteDataObject$(mockSearchResults));
 
     });
@@ -388,7 +385,7 @@ describe('ItemExportComponent', () => {
         const selection = {
           selection: [],
         };
-        selectService.getSelectableList.and.returnValue(observableOf(selection));
+        selectService.getSelectableList.and.returnValue(of(selection));
       });
 
       it('should call the submitForm and then route to process number and close modal', () => {
@@ -407,7 +404,7 @@ describe('ItemExportComponent', () => {
         const selection = {
           selection: [firstSearchResult],
         };
-        selectService.getSelectableList.and.returnValue(observableOf(selection));
+        selectService.getSelectableList.and.returnValue(of(selection));
       });
 
       it('should call the submitForm and then route to process number and close modal', () => {

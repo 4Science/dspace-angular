@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -28,13 +25,11 @@ import { ThemedLoadingComponent } from '../shared/loading/themed-loading.compone
   templateUrl: './cris-item-page.component.html',
   styleUrls: ['./cris-item-page.component.scss'],
   animations: [fadeInOut],
-  standalone: true,
   imports: [
-    NgIf,
-    ThemedLoadingComponent,
-    ThemedItemAlertsComponent,
-    CrisLayoutComponent,
     AsyncPipe,
+    CrisLayoutComponent,
+    ThemedItemAlertsComponent,
+    ThemedLoadingComponent,
     TranslateModule,
   ],
 })

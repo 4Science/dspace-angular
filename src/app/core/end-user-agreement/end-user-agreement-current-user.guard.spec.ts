@@ -5,7 +5,7 @@ import {
 } from '@angular/router';
 import {
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 
 import { environment } from '../../../environments/environment.test';
@@ -18,8 +18,8 @@ describe('endUserAgreementGuard', () => {
 
   beforeEach(() => {
     endUserAgreementService = jasmine.createSpyObj('endUserAgreementService', {
-      hasCurrentUserAcceptedAgreement: observableOf(true),
-      isUserAgreementEnabled: observableOf(true),
+      hasCurrentUserAcceptedAgreement: of(true),
+      isUserAgreementEnabled: of(true),
     });
 
     router = jasmine.createSpyObj('router', {
@@ -53,7 +53,7 @@ describe('endUserAgreementGuard', () => {
 
     describe('when the user hasn\'t accepted the agreement', () => {
       beforeEach(() => {
-        (endUserAgreementService.hasCurrentUserAcceptedAgreement as jasmine.Spy).and.returnValue(observableOf(false));
+        (endUserAgreementService.hasCurrentUserAcceptedAgreement as jasmine.Spy).and.returnValue(of(false));
       });
 
       it('should return a UrlTree', (done) => {

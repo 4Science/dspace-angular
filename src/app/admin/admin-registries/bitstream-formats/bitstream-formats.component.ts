@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -41,14 +37,11 @@ import { PaginationComponentOptions } from '../../../shared/pagination/paginatio
   selector: 'ds-bitstream-formats',
   templateUrl: './bitstream-formats.component.html',
   imports: [
-    NgIf,
     AsyncPipe,
+    PaginationComponent,
     RouterLink,
     TranslateModule,
-    PaginationComponent,
-    NgForOf,
   ],
-  standalone: true,
 })
 export class BitstreamFormatsComponent implements OnInit, OnDestroy {
 
@@ -120,7 +113,7 @@ export class BitstreamFormatsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Deselects all selecetd bitstream formats
+   * Deselects all selected bitstream formats
    */
   deselectAll() {
     this.bitstreamFormatService.deselectAllBitstreamFormats();
@@ -141,9 +134,11 @@ export class BitstreamFormatsComponent implements OnInit, OnDestroy {
    * @param event
    */
   selectBitStreamFormat(bitstreamFormat: BitstreamFormat, event) {
-    event.target.checked ?
-      this.bitstreamFormatService.selectBitstreamFormat(bitstreamFormat) :
+    if (event.target.checked) {
+      this.bitstreamFormatService.selectBitstreamFormat(bitstreamFormat);
+    } else {
       this.bitstreamFormatService.deselectBitstreamFormat(bitstreamFormat);
+    }
   }
 
   /**

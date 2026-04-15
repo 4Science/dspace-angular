@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -29,8 +26,12 @@ import { followLink } from '../../utils/follow-link-config.model';
   selector: 'ds-collection-grid-element',
   styleUrls: ['./collection-grid-element.component.scss'],
   templateUrl: './collection-grid-element.component.html',
-  standalone: true,
-  imports: [NgIf, RouterLink, ThemedThumbnailComponent, AsyncPipe, TranslateModule],
+  imports: [
+    AsyncPipe,
+    RouterLink,
+    ThemedThumbnailComponent,
+    TranslateModule,
+  ],
 })
 @listableObjectComponent(Collection, ViewMode.GridElement)
 export class CollectionGridElementComponent extends AbstractListableElementComponent<

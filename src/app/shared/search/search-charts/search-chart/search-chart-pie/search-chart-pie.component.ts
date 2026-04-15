@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -38,11 +35,9 @@ import { SearchChartFilterComponent } from '../search-chart-filter/search-chart-
   animations: [facetLoad],
   imports: [
     AsyncPipe,
-    TranslateModule,
-    NgIf,
     ChartComponent,
+    TranslateModule,
   ],
-  standalone: true,
 })
 /**
  * Component that represents a search pie chart filter

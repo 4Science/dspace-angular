@@ -1,4 +1,4 @@
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { QualityAssuranceEventDataService } from '../../core/notifications/qa/events/quality-assurance-event-data.service';
 import { QualityAssuranceEventObject } from '../../core/notifications/qa/models/quality-assurance-event.model';
@@ -1489,8 +1489,8 @@ export const qualityAssuranceEventObjectMissingPid: QualityAssuranceEventObject 
       href: 'https://rest.api/rest/api/integration/qaevents/123e4567-e89b-12d3-a456-426614174001/related',
     },
   },
-  target: observableOf(createSuccessfulRemoteDataObject(ItemMockPid1)),
-  related: observableOf(createSuccessfulRemoteDataObject(ItemMockPid10)),
+  target: of(createSuccessfulRemoteDataObject(ItemMockPid1)),
+  related: of(createSuccessfulRemoteDataObject(ItemMockPid10)),
 };
 
 export const qualityAssuranceEventObjectMissingPid2: QualityAssuranceEventObject = {
@@ -1527,8 +1527,8 @@ export const qualityAssuranceEventObjectMissingPid2: QualityAssuranceEventObject
       href: 'https://rest.api/rest/api/integration/qaevents/123e4567-e89b-12d3-a456-426614174004/related',
     },
   },
-  target: observableOf(createSuccessfulRemoteDataObject(ItemMockPid2)),
-  related: observableOf(createSuccessfulRemoteDataObject(ItemMockPid10)),
+  target: of(createSuccessfulRemoteDataObject(ItemMockPid2)),
+  related: of(createSuccessfulRemoteDataObject(ItemMockPid10)),
 };
 
 export const qualityAssuranceEventObjectMissingPid3: QualityAssuranceEventObject = {
@@ -1565,8 +1565,8 @@ export const qualityAssuranceEventObjectMissingPid3: QualityAssuranceEventObject
       href: 'https://rest.api/rest/api/integration/qaevents/123e4567-e89b-12d3-a456-426614174005/related',
     },
   },
-  target: observableOf(createSuccessfulRemoteDataObject(ItemMockPid3)),
-  related: observableOf(createSuccessfulRemoteDataObject(ItemMockPid10)),
+  target: of(createSuccessfulRemoteDataObject(ItemMockPid3)),
+  related: of(createSuccessfulRemoteDataObject(ItemMockPid10)),
 };
 
 export const qualityAssuranceEventObjectMissingPid4: QualityAssuranceEventObject = {
@@ -1603,8 +1603,8 @@ export const qualityAssuranceEventObjectMissingPid4: QualityAssuranceEventObject
       href: 'https://rest.api/rest/api/integration/qaevents/123e4567-e89b-12d3-a456-426614174006/related',
     },
   },
-  target: observableOf(createSuccessfulRemoteDataObject(ItemMockPid4)),
-  related: observableOf(createSuccessfulRemoteDataObject(ItemMockPid10)),
+  target: of(createSuccessfulRemoteDataObject(ItemMockPid4)),
+  related: of(createSuccessfulRemoteDataObject(ItemMockPid10)),
 };
 
 export const qualityAssuranceEventObjectMissingPid5: QualityAssuranceEventObject = {
@@ -1641,8 +1641,8 @@ export const qualityAssuranceEventObjectMissingPid5: QualityAssuranceEventObject
       href: 'https://rest.api/rest/api/integration/qaevents/123e4567-e89b-12d3-a456-426614174007/related',
     },
   },
-  target: observableOf(createSuccessfulRemoteDataObject(ItemMockPid5)),
-  related: observableOf(createSuccessfulRemoteDataObject(ItemMockPid10)),
+  target: of(createSuccessfulRemoteDataObject(ItemMockPid5)),
+  related: of(createSuccessfulRemoteDataObject(ItemMockPid10)),
 };
 
 export const qualityAssuranceEventObjectMissingPid6: QualityAssuranceEventObject = {
@@ -1679,8 +1679,8 @@ export const qualityAssuranceEventObjectMissingPid6: QualityAssuranceEventObject
       href: 'https://rest.api/rest/api/integration/qaevents/123e4567-e89b-12d3-a456-426614174008/related',
     },
   },
-  target: observableOf(createSuccessfulRemoteDataObject(ItemMockPid6)),
-  related: observableOf(createSuccessfulRemoteDataObject(ItemMockPid10)),
+  target: of(createSuccessfulRemoteDataObject(ItemMockPid6)),
+  related: of(createSuccessfulRemoteDataObject(ItemMockPid10)),
 };
 
 export const qualityAssuranceEventObjectMissingAbstract: QualityAssuranceEventObject = {
@@ -1717,8 +1717,8 @@ export const qualityAssuranceEventObjectMissingAbstract: QualityAssuranceEventOb
       href: 'https://rest.api/rest/api/integration/qaevents/123e4567-e89b-12d3-a456-426614174009/related',
     },
   },
-  target: observableOf(createSuccessfulRemoteDataObject(ItemMockPid7)),
-  related: observableOf(createSuccessfulRemoteDataObject(ItemMockPid10)),
+  target: of(createSuccessfulRemoteDataObject(ItemMockPid7)),
+  related: of(createSuccessfulRemoteDataObject(ItemMockPid10)),
 };
 
 export const qualityAssuranceEventObjectMissingProjectFound: QualityAssuranceEventObject = {

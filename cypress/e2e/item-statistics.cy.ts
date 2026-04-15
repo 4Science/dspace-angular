@@ -23,6 +23,13 @@ describe('Item Statistics Page', () => {
     cy.get('table[data-test="TotalVisits"]').should('be.visible');
   });
 
+  it('should contain a "Total visits per month" section', () => {
+    cy.visit(ITEMSTATISTICSPAGE);
+    // Check just for existence because this table is empty in CI environment as it's historical data
+    cy.get('ul.nav > li.nav-item:nth-child(2) > a.nav-link:nth-child(1)').click();
+    cy.get('ds-statistics-chart-wrapper').should('exist');
+  });
+
   it('should pass accessibility tests', () => {
     cy.visit(ITEMSTATISTICSPAGE);
 

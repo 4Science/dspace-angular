@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+
 import {
   ChangeDetectorRef,
   Component,
@@ -25,8 +25,9 @@ import { RowComponent } from './row/row.component';
   selector: 'ds-cris-layout-metadata-box',
   templateUrl: './cris-layout-metadata-box.component.html',
   styleUrls: ['./cris-layout-metadata-box.component.scss'],
-  standalone: true,
-  imports: [NgFor, RowComponent],
+  imports: [
+    RowComponent,
+  ],
 })
 /**
  * For overwrite this component create a new one that extends CrisLayoutBoxObj and

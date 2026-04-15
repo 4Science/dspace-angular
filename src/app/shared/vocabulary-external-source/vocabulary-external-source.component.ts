@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -22,7 +18,7 @@ import {
 import {
   BehaviorSubject,
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import {
   catchError,
@@ -58,13 +54,10 @@ import { followLink } from '../utils/follow-link-config.model';
   styleUrls: ['./vocabulary-external-source.component.scss'],
   imports: [
     AlertComponent,
-    NgIf,
     AsyncPipe,
-    TranslateModule,
-    NgForOf,
     ThemedLoadingComponent,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class VocabularyExternalSourceComponent implements OnInit {
 
@@ -123,7 +116,7 @@ export class VocabularyExternalSourceComponent implements OnInit {
       getFinishedRemoteData(),
       catchError((err: unknown) => {
         console.error(err);
-        return observableOf(createFailedRemoteDataObject(null));
+        return of(createFailedRemoteDataObject(null));
       }),
     ).subscribe((externalSourceRD: RemoteData<ExternalSourceEntry>) => {
       if (externalSourceRD.hasSucceeded) {

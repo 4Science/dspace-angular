@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -26,13 +24,10 @@ import { CrisLayoutSidebarItemComponent } from '../../shared/sidebar-item/cris-l
   selector: 'ds-cris-layout-sidebar',
   templateUrl: './cris-layout-sidebar.component.html',
   styleUrls: ['./cris-layout-sidebar.component.scss'],
-  standalone: true,
   imports: [
-    NgClass,
-    NgIf,
-    NgFor,
-    CrisLayoutSidebarItemComponent,
     AsyncPipe,
+    CrisLayoutSidebarItemComponent,
+    NgClass,
   ],
 })
 export class CrisLayoutSidebarComponent extends CrisLayoutTabsComponent implements OnInit {

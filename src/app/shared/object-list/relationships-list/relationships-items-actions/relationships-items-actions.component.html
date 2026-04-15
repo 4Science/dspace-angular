@@ -1,37 +1,54 @@
 <div class="space-children-mr">
-  <button class="action-buttons btn btn-success mt-1 mb-3"
-          *ngIf="((isSelected | async) === undefined || (isSelected | async) === null) && !!object"
-          ngbTooltip="{{'manage.relationships.select' | translate}}"
-          (click)="emitAction('select')"
-          [dsBtnDisabled]="pendingChanges$ | async">
-    <span *ngIf="(isProcessingSelect | async)"><i class='fas fa-circle-notch fa-spin'></i> {{'loading.default' | translate}}</span>
-    <span *ngIf="(isProcessingSelect | async) !== true"> {{"manage.relationships.select" | translate}}</span>
-
-  </button>
-  <button class="action-buttons btn btn-primary mt-1 mb-3"
-          *ngIf="(isSelected | async) && !!object"
-          ngbTooltip="{{'manage.relationships.unselect' | translate}}"
-          (click)="emitAction('unselect')"
-          [dsBtnDisabled]="pendingChanges$ | async">
-    <span *ngIf="(isProcessingUnselect | async)"><i class='fas fa-circle-notch fa-spin'></i> {{'loading.default' | translate}}</span>
-    <span *ngIf="(isProcessingUnselect | async) !== true"> {{"manage.relationships.unselect" | translate}}</span>
-
-  </button>
-  <button class="action-buttons btn btn-danger mt-1 mb-3"
-          *ngIf="((isHidden | async) === null || (isHidden | async) === undefined) && !!object"
-          ngbTooltip="{{'manage.relationships.hide' | translate}}"
-          (click)="emitAction('hide')"
-          [dsBtnDisabled]="pendingChanges$ | async">
-    <span *ngIf="(isProcessingHide | async)"><i class='fas fa-circle-notch fa-spin'></i> {{'loading.default' | translate}}</span>
-    <span *ngIf="(isProcessingHide | async) !== true"> {{"manage.relationships.hide" | translate}}</span>
-  </button>
-  <button class="action-buttons btn btn-warning mt-1 mb-3"
-          *ngIf="(isHidden | async) && !!object"
-          ngbTooltip="{{'manage.relationships.unhide' | translate}}"
-          (click)="emitAction('unhide')"
-          [dsBtnDisabled]="pendingChanges$ | async">
-    <span *ngIf="(isProcessingUnhide | async)"><i class='fas fa-circle-notch fa-spin'></i> {{'loading.default' | translate}}</span>
-    <span *ngIf="(isProcessingUnhide | async) !== true"> {{"manage.relationships.unhide" | translate}}</span>
-
-  </button>
+  @if (((isSelected | async) === undefined || (isSelected | async) === null) && !!object) {
+    <button class="action-buttons btn btn-success mt-1 mb-3"
+      ngbTooltip="{{'manage.relationships.select' | translate}}"
+      (click)="emitAction('select')"
+      [dsBtnDisabled]="pendingChanges$ | async">
+      @if ((isProcessingSelect | async)) {
+        <span><i class='fas fa-circle-notch fa-spin'></i> {{'loading.default' | translate}}</span>
+      }
+      @if ((isProcessingSelect | async) !== true) {
+        <span> {{"manage.relationships.select" | translate}}</span>
+      }
+    </button>
+  }
+  @if ((isSelected | async) && !!object) {
+    <button class="action-buttons btn btn-primary mt-1 mb-3"
+      ngbTooltip="{{'manage.relationships.unselect' | translate}}"
+      (click)="emitAction('unselect')"
+      [dsBtnDisabled]="pendingChanges$ | async">
+      @if ((isProcessingUnselect | async)) {
+        <span><i class='fas fa-circle-notch fa-spin'></i> {{'loading.default' | translate}}</span>
+      }
+      @if ((isProcessingUnselect | async) !== true) {
+        <span> {{"manage.relationships.unselect" | translate}}</span>
+      }
+    </button>
+  }
+  @if (((isHidden | async) === null || (isHidden | async) === undefined) && !!object) {
+    <button class="action-buttons btn btn-danger mt-1 mb-3"
+      ngbTooltip="{{'manage.relationships.hide' | translate}}"
+      (click)="emitAction('hide')"
+      [dsBtnDisabled]="pendingChanges$ | async">
+      @if ((isProcessingHide | async)) {
+        <span><i class='fas fa-circle-notch fa-spin'></i> {{'loading.default' | translate}}</span>
+      }
+      @if ((isProcessingHide | async) !== true) {
+        <span> {{"manage.relationships.hide" | translate}}</span>
+      }
+    </button>
+  }
+  @if ((isHidden | async) && !!object) {
+    <button class="action-buttons btn btn-warning mt-1 mb-3"
+      ngbTooltip="{{'manage.relationships.unhide' | translate}}"
+      (click)="emitAction('unhide')"
+      [dsBtnDisabled]="pendingChanges$ | async">
+      @if ((isProcessingUnhide | async)) {
+        <span><i class='fas fa-circle-notch fa-spin'></i> {{'loading.default' | translate}}</span>
+      }
+      @if ((isProcessingUnhide | async) !== true) {
+        <span> {{"manage.relationships.unhide" | translate}}</span>
+      }
+    </button>
+  }
 </div>

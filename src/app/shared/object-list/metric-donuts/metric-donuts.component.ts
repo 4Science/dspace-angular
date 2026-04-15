@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   isPlatformBrowser,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -37,12 +35,9 @@ export const allowedDonuts = ['altmetric', 'dimensions', 'plumX'];
   templateUrl: './metric-donuts.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [
-    NgIf,
-    NgFor,
-    MetricLoaderComponent,
     AsyncPipe,
+    MetricLoaderComponent,
   ],
 })
 /**

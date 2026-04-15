@@ -1,13 +1,7 @@
 import {
-  AsyncPipe,
-  NgClass,
-  NgIf,
-} from '@angular/common';
-import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
-  forwardRef,
   Input,
   OnDestroy,
   OnInit,
@@ -30,7 +24,7 @@ import isObject from 'lodash/isObject';
 import {
   combineLatest,
   Observable,
-  of as observableOf,
+  of,
   Subscription,
 } from 'rxjs';
 import {
@@ -61,7 +55,6 @@ import { ThemedLoadingComponent } from '../../../../../loading/themed-loading.co
 import { ChipsComponent } from '../../../../chips/chips.component';
 import { Chips } from '../../../../chips/models/chips.model';
 import { ChipsItem } from '../../../../chips/models/chips-item.model';
-import { FormComponent } from '../../../../form.component';
 import { FormService } from '../../../../form.service';
 import { FormBuilderService } from '../../../form-builder.service';
 import { FormFieldMetadataValueObject } from '../../../models/form-field-metadata-value.model';
@@ -77,17 +70,12 @@ import { DsDynamicRelationGroupModalComponent } from './modal/dynamic-relation-g
   templateUrl: './dynamic-relation-group.component.html',
   animations: [shrinkInOut],
   imports: [
-    NgIf,
-    AsyncPipe,
-    NgbTooltipModule,
-    TranslateModule,
-    NgClass,
-    ThemedLoadingComponent,
-    ChipsComponent,
-    forwardRef(() => FormComponent),
     BtnDisabledDirective,
+    ChipsComponent,
+    NgbTooltipModule,
+    ThemedLoadingComponent,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class DsDynamicRelationGroupComponent extends DynamicFormControlComponent implements OnDestroy, OnInit {
 
@@ -205,7 +193,7 @@ export class DsDynamicRelationGroupComponent extends DynamicFormControlComponent
     if (this.model.isEmpty()) {
       this.initChips([]);
     } else {
-      initChipsValue$ = observableOf(this.model.getGroupValue() as any[]);
+      initChipsValue$ = of(this.model.getGroupValue() as any[]);
       // If authority
       this.subs.push(initChipsValue$.pipe(
         mergeMap((valueModel) => {
@@ -214,10 +202,10 @@ export class DsDynamicRelationGroupComponent extends DynamicFormControlComponent
 
             const returnObj = Object.keys(valueObj).map((fieldName) => {
               let return$: Observable<any>;
-              if (isObject(valueObj[fieldName]) && this.hasValidAuthority(valueObj[fieldName]) && valueObj[fieldName].otherInformation === null) {
+              if (isObject(valueObj[fieldName]) && this.hasValidAuthority(valueObj[fieldName] as any) && (valueObj[fieldName] as any).otherInformation === null) {
                 return$ = this.getVocabulary(valueObj, fieldName);
               } else {
-                return$ = observableOf(valueObj[fieldName]);
+                return$ = of(valueObj[fieldName]);
               }
               return return$.pipe(map((entry) => ({ [fieldName]: entry })));
             });
@@ -306,7 +294,7 @@ export class DsDynamicRelationGroupComponent extends DynamicFormControlComponent
           }),
         ));
     } else {
-      return observableOf(valueObj[fieldName]);
+      return of(valueObj[fieldName]);
     }
   }
 

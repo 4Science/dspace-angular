@@ -26,7 +26,6 @@ export const METRIC_SCRIPT_MAX_RETRY = 1;
  */
 @Component({
   template: '',
-  standalone: true,
 })
 export abstract class BaseEmbeddedMetricComponent extends BaseMetricComponent implements OnInit, AfterViewInit {
 

@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -14,8 +11,10 @@ import {
 } from '@ngx-translate/core';
 import {
   BehaviorSubject,
+  combineLatest,
   Subscription,
 } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { SiteDataService } from '../../../core/data/site-data.service';
 import { LocaleService } from '../../../core/locale/locale.service';
@@ -28,8 +27,12 @@ import { MarkdownViewerComponent } from '../../../shared/markdown-viewer/markdow
   selector: 'ds-end-user-agreement-content',
   templateUrl: './end-user-agreement-content.component.html',
   styleUrls: ['./end-user-agreement-content.component.scss'],
-  standalone: true,
-  imports: [RouterLink, TranslateModule, AsyncPipe, MarkdownViewerComponent, NgIf],
+  imports: [
+    AsyncPipe,
+    MarkdownViewerComponent,
+    RouterLink,
+    TranslateModule,
+  ],
 })
 /**
  * Component displaying the contents of the End User Agreement
@@ -55,9 +58,9 @@ export class EndUserAgreementContentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    const site$ = this.siteService.find().pipe(take(1));
     this.subs.push(
-      this.siteService.find().subscribe((site) => {
-        const langCode = this.localeService.getCurrentLanguageCode();
+      combineLatest([site$, this.localeService.getCurrentLanguageCode()]).subscribe(([site, langCode]) => {
         const fallbackLangCode = 'en';
 
         const textArray = site?.metadataAsList.filter((metadata) =>

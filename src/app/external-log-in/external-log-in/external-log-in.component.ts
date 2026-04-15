@@ -1,6 +1,6 @@
 import {
+  AsyncPipe,
   NgComponentOutlet,
-  NgIf,
 } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -18,18 +18,26 @@ import {
   TranslateModule,
   TranslateService,
 } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { AuthService } from '../../core/auth/auth.service';
+import { AuthMethodsService } from '../../core/auth/auth-methods.service';
 import { AuthMethodType } from '../../core/auth/models/auth.method-type';
 import { AuthRegistrationType } from '../../core/auth/models/auth.registration-type';
 import { Registration } from '../../core/shared/registration.model';
 import { AlertComponent } from '../../shared/alert/alert.component';
+import { AlertType } from '../../shared/alert/alert-type';
 import {
   hasValue,
   isEmpty,
 } from '../../shared/empty.util';
+import { AuthMethodTypeComponent } from '../../shared/log-in/methods/auth-methods.type';
 import { ThemedLogInComponent } from '../../shared/log-in/themed-log-in.component';
-import { getExternalLoginConfirmationType } from '../decorators/external-log-in.methods-decorator';
+import {
+  ExternalLoginTypeComponent,
+  getExternalLoginConfirmationType,
+} from '../decorators/external-log-in.methods-decorator';
 import { ConfirmEmailComponent } from '../email-confirmation/confirm-email/confirm-email.component';
 import { ProvideEmailComponent } from '../email-confirmation/provide-email/provide-email.component';
 
@@ -38,19 +46,32 @@ import { ProvideEmailComponent } from '../email-confirmation/provide-email/provi
   templateUrl: './external-log-in.component.html',
   styleUrls: ['./external-log-in.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
-    TranslateModule,
-    NgComponentOutlet,
     AlertComponent,
-    NgIf,
-    ThemedLogInComponent,
+    AsyncPipe,
     ConfirmEmailComponent,
+    NgComponentOutlet,
+    NgComponentOutlet,
     ProvideEmailComponent,
+    ThemedLogInComponent,
+    TranslateModule,
+    TranslateModule,
   ],
 })
+/**
+ * This component is responsible to handle the external-login depending on the RegistrationData details provided
+ */
 export class ExternalLogInComponent implements OnInit, OnDestroy {
+  /**
+   * The AlertType enumeration for access in the component's template
+   * @type {AlertType}
+   */
+  public AlertTypeEnum = AlertType;
 
+  /**
+   * The type of registration type to be confirmed
+   */
+  registrationType: AuthRegistrationType;
   /**
    * The registration data object
    */
@@ -60,6 +81,11 @@ export class ExternalLogInComponent implements OnInit, OnDestroy {
    * @memberof ExternalLogInComponent
    */
   @Input() token: string;
+  /**
+   * The authMethods taken from the configuration
+   * @memberof ExternalLogInComponent
+   */
+  @Input() authMethods: Map<AuthMethodType, AuthMethodTypeComponent>;
   /**
    * The information text to be displayed,
    * depending on the registration type and the presence of an email
@@ -83,16 +109,18 @@ export class ExternalLogInComponent implements OnInit, OnDestroy {
   relatedAuthMethod: AuthMethodType;
 
   /**
-   * The type of registration type to be confirmed
+   * The observable to check if any auth method type is configured
    */
-  registrationType: AuthRegistrationType;
+  hasAuthMethodTypes: Observable<boolean>;
 
   constructor(
     private injector: Injector,
     private translate: TranslateService,
     private modalService: NgbModal,
     private authService: AuthService,
-  ) { }
+    private authMethodsService: AuthMethodsService,
+  ) {
+  }
 
   /**
    * Provide the registration data object to the objectInjector.
@@ -110,10 +138,45 @@ export class ExternalLogInComponent implements OnInit, OnDestroy {
       parent: this.injector,
     });
     this.registrationType = this.registrationData?.registrationType ?? null;
-    this.relatedAuthMethod = isEmpty(this.registrationType) ? null : this.registrationType.replace('VALIDATION_', '').toLocaleLowerCase() as AuthMethodType;
+    this.relatedAuthMethod = isEmpty(this.registrationType) ? null :
+      this.registrationType.replace('VALIDATION_', '').toLocaleLowerCase() as AuthMethodType;
     this.informationText = hasValue(this.registrationData?.email)
       ? this.generateInformationTextWhenEmail(this.registrationType)
       : this.generateInformationTextWhenNOEmail(this.registrationType);
+    this.hasAuthMethodTypes =
+      this.authMethodsService.getAuthMethods(this.authMethods, this.relatedAuthMethod)
+        .pipe(map(methods => methods.length > 0));
+  }
+
+  /**
+   * Get the registration type to be rendered
+   */
+  getExternalLoginConfirmationType(): ExternalLoginTypeComponent {
+    return getExternalLoginConfirmationType(this.registrationType);
+  }
+
+  /**
+   * Opens the login modal and sets the redirect URL to '/review-account'.
+   * On modal dismissed/closed, the redirect URL is cleared.
+   * @param content - The content to be displayed in the modal.
+   */
+  openLoginModal(content: any) {
+    this.modalRef = this.modalService.open(content);
+    this.authService.setRedirectUrl(`/review-account/${this.token}`);
+    this.modalRef.dismissed.subscribe(() => {
+      this.clearRedirectUrl();
+    });
+  }
+
+  /**
+   * Clears the redirect URL stored in the authentication service.
+   */
+  clearRedirectUrl() {
+    this.authService.clearRedirectUrl();
+  }
+
+  ngOnDestroy(): void {
+    this.modalRef?.close();
   }
 
   /**
@@ -141,39 +204,5 @@ export class ExternalLogInComponent implements OnInit, OnDestroy {
         { authMethod: authMethodUppercase },
       );
     }
-  }
-
-  /**
-   * Get the registration type to be rendered
-   */
-  getExternalLoginConfirmationType() {
-    return getExternalLoginConfirmationType(this.registrationType);
-  }
-
-  /**
-   * Opens the login modal and sets the redirect URL to '/review-account'.
-   * On modal dismissed/closed, the redirect URL is cleared.
-   * @param content - The content to be displayed in the modal.
-   */
-  openLoginModal(content: any) {
-    setTimeout(() => {
-      this.authService.setRedirectUrl(`/review-account/${this.token}`);
-    }, 100);
-    this.modalRef = this.modalService.open(content);
-
-    this.modalRef.dismissed.subscribe(() => {
-      this.clearRedirectUrl();
-    });
-  }
-
-  /**
-   * Clears the redirect URL stored in the authentication service.
-   */
-  clearRedirectUrl() {
-    this.authService.clearRedirectUrl();
-  }
-
-  ngOnDestroy(): void {
-    this.modalRef?.close();
   }
 }

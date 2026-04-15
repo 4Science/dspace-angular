@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { TypeBadgeComponent as BaseComponent } from 'src/app/shared/object-collection/shared/badges/type-badge/type-badge.component';
@@ -8,8 +7,9 @@ import { TypeBadgeComponent as BaseComponent } from 'src/app/shared/object-colle
   // styleUrls: ['./type-badge.component.scss'],
   // templateUrl: './type-badge.component.html',
   templateUrl: '../../../../../../../../app/shared/object-collection/shared/badges/type-badge/type-badge.component.html',
-  standalone: true,
-  imports: [NgIf, TranslateModule],
+  imports: [
+    TranslateModule,
+  ],
 })
 export class TypeBadgeComponent extends BaseComponent {
 }

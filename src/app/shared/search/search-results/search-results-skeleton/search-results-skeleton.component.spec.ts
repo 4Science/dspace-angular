@@ -18,7 +18,6 @@ import { SearchService } from '../../../../core/shared/search/search.service';
 import { AlertComponent } from '../../../alert/alert.component';
 import { TranslateLoaderMock } from '../../../mocks/translate-loader.mock';
 import { SearchServiceStub } from '../../../testing/search-service.stub';
-import { VarDirective } from '../../../utils/var.directive';
 import { SearchResultsSkeletonComponent } from './search-results-skeleton.component';
 
 describe('SearchResultsSkeletonComponent', () => {
@@ -31,7 +30,6 @@ describe('SearchResultsSkeletonComponent', () => {
         SearchResultsSkeletonComponent,
         AlertComponent,
         NgxSkeletonLoaderModule,
-        VarDirective,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,

@@ -17,7 +17,7 @@ import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { cold } from 'jasmine-marbles';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { APP_DATA_SERVICES_MAP } from '../../../../config/app-config.interface';
 import { SubmissionFormsConfigDataService } from '../../../core/config/submission-forms-config-data.service';
@@ -203,7 +203,7 @@ describe('SubmissionSectionDetectDuplicateComponent test suite', () => {
 
     // synchronous beforeEach
     beforeEach(() => {
-      mockDetectDuplicateService.getDuplicateMatchesByScope.and.returnValue(observableOf(sectionData));
+      mockDetectDuplicateService.getDuplicateMatchesByScope.and.returnValue(of(sectionData));
       const html = `
         <ds-submission-section-detect-duplicate></ds-submission-section-detect-duplicate>`;
       testFixture = createTestComponent(html, TestComponent) as ComponentFixture<TestComponent>;
@@ -241,11 +241,11 @@ describe('SubmissionSectionDetectDuplicateComponent test suite', () => {
 
     it('Should init section properly - with workflow', () => {
       collectionDataService.findById.and.returnValue(createSuccessfulRemoteDataObject$(mockCollection));
-      sectionsServiceStub.getSectionErrors.and.returnValue(observableOf([]));
-      sectionsServiceStub.isSectionReadOnly.and.returnValue(observableOf(false));
-      mockDetectDuplicateService.getDuplicateMatchesByScope.and.returnValue(observableOf(sectionData));
+      sectionsServiceStub.getSectionErrors.and.returnValue(of([]));
+      sectionsServiceStub.isSectionReadOnly.and.returnValue(of(false));
+      mockDetectDuplicateService.getDuplicateMatchesByScope.and.returnValue(of(sectionData));
       compAsAny.submissionService.getSubmissionScope.and.returnValue(SubmissionScopeType.WorkflowItem);
-      spyOn(compAsAny, 'getSectionStatus').and.returnValue(observableOf(true));
+      spyOn(compAsAny, 'getSectionStatus').and.returnValue(of(true));
 
       comp.onSectionInit();
       fixture.detectChanges();
@@ -258,11 +258,11 @@ describe('SubmissionSectionDetectDuplicateComponent test suite', () => {
 
     it('Should init section properly - with workspace', () => {
       collectionDataService.findById.and.returnValue(createSuccessfulRemoteDataObject$(mockCollection));
-      sectionsServiceStub.getSectionErrors.and.returnValue(observableOf([]));
-      sectionsServiceStub.isSectionReadOnly.and.returnValue(observableOf(false));
-      mockDetectDuplicateService.getDuplicateMatchesByScope.and.returnValue(observableOf(sectionData));
+      sectionsServiceStub.getSectionErrors.and.returnValue(of([]));
+      sectionsServiceStub.isSectionReadOnly.and.returnValue(of(false));
+      mockDetectDuplicateService.getDuplicateMatchesByScope.and.returnValue(of(sectionData));
       compAsAny.submissionService.getSubmissionScope.and.returnValue(SubmissionScopeType.WorkspaceItem);
-      spyOn(compAsAny, 'getSectionStatus').and.returnValue(observableOf(true));
+      spyOn(compAsAny, 'getSectionStatus').and.returnValue(of(true));
 
       comp.onSectionInit();
       fixture.detectChanges();
@@ -274,21 +274,21 @@ describe('SubmissionSectionDetectDuplicateComponent test suite', () => {
     });
 
     it('Should return TRUE if the sectionData is empty', () => {
-      compAsAny.sectionData$ = observableOf({ matches: { } });
+      compAsAny.sectionData$ = of({ matches: { } });
       expect(compAsAny.getSectionStatus()).toBeObservable(cold('(a|)', {
         a: true,
       }));
     });
 
     it('Should return FALSE if the sectionData is not empty', () => {
-      compAsAny.sectionData$ = observableOf(sectionData);
+      compAsAny.sectionData$ = of(sectionData);
       expect(compAsAny.getSectionStatus()).toBeObservable(cold('(a|)', {
         a: false,
       }));
     });
 
     it('Should return the length of the sectionData$', () => {
-      compAsAny.sectionData$ = observableOf({ matches: [{ dummy: 1 }, { dummy: 2 }] });
+      compAsAny.sectionData$ = of({ matches: [{ dummy: 1 }, { dummy: 2 }] });
       expect(compAsAny.getTotalMatches()).toBeObservable(cold('(a|)', {
         a: 2,
       }));
@@ -301,12 +301,10 @@ describe('SubmissionSectionDetectDuplicateComponent test suite', () => {
 @Component({
   selector: 'ds-test-cmp',
   template: ``,
-  standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     NgxPaginationModule,
+    ReactiveFormsModule,
   ],
 })
 class TestComponent {

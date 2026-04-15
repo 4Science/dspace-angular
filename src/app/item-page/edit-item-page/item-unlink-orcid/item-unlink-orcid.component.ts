@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -39,14 +36,12 @@ import { ModifyItemOverviewComponent } from '../modify-item-overview/modify-item
 @Component({
   selector: 'ds-item-unlink-orcid',
   templateUrl: './item-unlink-orcid.component.html',
-  standalone: true,
   imports: [
     AlertComponent,
-    TranslateModule,
-    ModifyItemOverviewComponent,
-    NgIf,
-    RouterLink,
     AsyncPipe,
+    ModifyItemOverviewComponent,
+    RouterLink,
+    TranslateModule,
   ],
 })
 export class ItemUnlinkOrcidComponent implements OnInit {

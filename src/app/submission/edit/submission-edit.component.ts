@@ -47,7 +47,7 @@ import {
 } from '../../shared/empty.util';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { createFailedRemoteDataObject$ } from '../../shared/remote-data.utils';
-import { SubmissionFormComponent } from '../form/submission-form.component';
+import { ThemedSubmissionFormComponent } from '../form/themed-submission-form.component';
 import { SubmissionError } from '../objects/submission-error.model';
 import { SubmissionService } from '../submission.service';
 import parseSectionErrors from '../utils/parseSectionErrors';
@@ -60,9 +60,8 @@ import { SubmissionEditCanDeactivateService } from './submission-edit-can-deacti
   selector: 'ds-base-submission-edit',
   styleUrls: ['./submission-edit.component.scss'],
   templateUrl: './submission-edit.component.html',
-  standalone: true,
   imports: [
-    SubmissionFormComponent,
+    ThemedSubmissionFormComponent,
   ],
 })
 export class SubmissionEditComponent implements OnDestroy, OnInit {

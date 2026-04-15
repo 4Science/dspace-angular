@@ -286,11 +286,11 @@ describe('Pagination component', () => {
 
       changePage(testFixture, 3);
       tick();
-      expect(paginationService.updateRoute).toHaveBeenCalledWith('test', Object.assign({ page: 3 }), {},  false);
+      expect(paginationService.updateRoute).toHaveBeenCalledWith('test', Object.assign({ page: 3, pageSize: 10 }), {},  false);
 
       changePage(testFixture, 0);
       tick();
-      expect(paginationService.updateRoute).toHaveBeenCalledWith('test', Object.assign({ page: 2 }), {},  false);
+      expect(paginationService.updateRoute).toHaveBeenCalledWith('test', Object.assign({ page: 2, pageSize: 10 }), {},  false);
     }));
 
     it('should set correct pageSize route parameters', fakeAsync(() => {
@@ -389,18 +389,48 @@ describe('Pagination component', () => {
         expect(next).toBeTruthy();
       });
     });
+
+    it('emits pageChange event with the correct page number', fakeAsync(() => {
+      spyOn(testComp, 'pageChanged');
+      const paginationComponent: PaginationComponent = testFixture.debugElement.query(By.css('ds-pagination')).references.p;
+
+      paginationComponent.doPageChange(2);
+      tick();
+
+      expect(testComp.pageChanged).toHaveBeenCalledWith(2);
+    }));
+
+    it('updates query params with the correct page and pageSize', fakeAsync(() => {
+      const paginationComponent: PaginationComponent = testFixture.debugElement.query(By.css('ds-pagination')).references.p;
+
+      paginationComponent.doPageChange(3);
+      tick();
+
+      expect(paginationService.updateRoute).toHaveBeenCalledWith('test', { page: 3, pageSize: 10 }, {}, false);
+    }));
+
+    it('handles undefined pageSize gracefully', fakeAsync(() => {
+      const paginationComponent: PaginationComponent = testFixture.debugElement.query(By.css('ds-pagination')).references.p;
+
+      currentPagination.next(Object.assign(new PaginationComponentOptions(), pagination, { pageSize: undefined }));
+      paginationComponent.doPageChange(1);
+      tick();
+
+      expect(paginationService.updateRoute).toHaveBeenCalledWith('test', { page: 1, pageSize: undefined }, {}, false);
+    }));
   });
 
 });
 
 // declare a test component
 @Component({
-  selector: 'ds-test-cmp', template: '',
-  standalone: true,
-  imports: [CommonModule,
+  selector: 'ds-test-cmp',
+  template: '<ds-pagination></ds-pagination>',
+  imports: [
+    NgbModule,
     NgxPaginationModule,
     PaginationComponent,
-    NgbModule],
+  ],
 })
 class TestComponent {
 

@@ -1,8 +1,4 @@
-import {
-  AsyncPipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -57,8 +53,15 @@ import { BrowserOnlyPipe } from '../utils/browser-only.pipe';
   styleUrls: ['./object-grid.component.scss'],
   templateUrl: './object-grid.component.html',
   animations: [fadeIn],
-  standalone: true,
-  imports: [PaginationComponent, NgIf, NgFor, ListableObjectComponentLoaderComponent, ErrorComponent, ThemedLoadingComponent, AsyncPipe, TranslateModule, BrowserOnlyPipe],
+  imports: [
+    AsyncPipe,
+    BrowserOnlyPipe,
+    ErrorComponent,
+    ListableObjectComponentLoaderComponent,
+    PaginationComponent,
+    ThemedLoadingComponent,
+    TranslateModule,
+  ],
 })
 
 export class ObjectGridComponent implements OnInit {
@@ -199,7 +202,7 @@ export class ObjectGridComponent implements OnInit {
   @Output() next = new EventEmitter<boolean>();
 
   data: any = {};
-  columns$: Observable<ListableObject[]>;
+  columns$: Observable<ListableObject[][]>;
 
   constructor(private hostWindow: HostWindowService) {
     this._objects$ = new BehaviorSubject(undefined);

@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   Inject,
@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import {
   BehaviorSubject,
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import {
   filter,
@@ -37,10 +37,8 @@ import { SearchChartFilterWrapperComponent } from './search-chart-wrapper/search
   styleUrls: ['./search-chart.component.scss'],
   templateUrl: './search-chart.component.html',
   imports: [
-    NgIf,
     SearchChartFilterWrapperComponent,
   ],
-  standalone: true,
 })
 
 /**
@@ -144,7 +142,7 @@ export class SearchChartComponent implements OnInit, OnChanges {
     return this.selectedValues$.pipe(
       switchMap((isActive) => {
         if (isNotEmpty(isActive)) {
-          return observableOf(true);
+          return of(true);
         } else {
           return this.searchConfigService.searchOptions.pipe(
             switchMap((options) => {

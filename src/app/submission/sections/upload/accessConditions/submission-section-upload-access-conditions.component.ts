@@ -1,7 +1,4 @@
-import {
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+
 import {
   Component,
   Input,
@@ -25,11 +22,7 @@ import {
 @Component({
   selector: 'ds-submission-section-upload-access-conditions',
   templateUrl: './submission-section-upload-access-conditions.component.html',
-  imports: [
-    NgForOf,
-    NgIf,
-  ],
-  standalone: true,
+  imports: [],
 })
 export class SubmissionSectionUploadAccessConditionsComponent implements OnInit {
 

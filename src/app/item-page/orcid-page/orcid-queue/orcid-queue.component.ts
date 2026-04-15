@@ -48,14 +48,13 @@ import { PaginationComponentOptions } from '../../../shared/pagination/paginatio
   templateUrl: './orcid-queue.component.html',
   styleUrls: ['./orcid-queue.component.scss'],
   imports: [
+    AlertComponent,
     CommonModule,
     NgbTooltipModule,
-    TranslateModule,
-    ThemedLoadingComponent,
-    AlertComponent,
     PaginationComponent,
+    ThemedLoadingComponent,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class OrcidQueueComponent implements OnInit, OnDestroy, OnChanges {
 

@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -15,13 +12,11 @@ import { AlertComponent } from '../../../../../app/shared/alert/alert.component'
   templateUrl: '../../../../../app/item-page/alerts/item-alerts.component.html',
   // styleUrls: ['./item-alerts.component.scss'],
   styleUrls: ['../../../../../app/item-page/alerts/item-alerts.component.scss'],
-  standalone: true,
   imports: [
     AlertComponent,
-    NgIf,
-    TranslateModule,
-    RouterLink,
     AsyncPipe,
+    RouterLink,
+    TranslateModule,
   ],
 })
 export class ItemAlertsComponent extends BaseComponent {

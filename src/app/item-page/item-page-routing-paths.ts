@@ -8,6 +8,8 @@ export function getItemModuleRoute() {
   return `/${ITEM_MODULE_PATH}`;
 }
 
+export const ENTITY_MODULE_PATH = 'entities';
+
 /**
  * Get the route to an item's page
  * Depending on the item's entity type and custom url, the route will either start /entities
@@ -63,3 +65,5 @@ export const ITEM_VERSION_PATH = 'version';
 export const UPLOAD_BITSTREAM_PATH = 'bitstreams/new';
 export const ORCID_PATH = 'orcid';
 export const ITEM_FULL_PATH = 'full';
+
+export const ITEM_ACCESS_BY_TOKEN_PATH = 'access-by-token';

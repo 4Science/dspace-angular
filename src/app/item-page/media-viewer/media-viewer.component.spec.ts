@@ -9,11 +9,12 @@ import {
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ActivatedRoute } from '@angular/router';
 import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { AuthService } from '../../core/auth/auth.service';
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
@@ -28,6 +29,7 @@ import { MockBitstreamFormat1 } from '../../shared/mocks/item.mock';
 import { getMockThemeService } from '../../shared/mocks/theme-service.mock';
 import { TranslateLoaderMock } from '../../shared/mocks/translate-loader.mock';
 import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
+import { ActivatedRouteStub } from '../../shared/testing/active-router.stub';
 import { createPaginatedList } from '../../shared/testing/utils.test';
 import { ThemeService } from '../../shared/theme-support/theme.service';
 import { FileSizePipe } from '../../shared/utils/file-size-pipe';
@@ -48,7 +50,7 @@ describe('MediaViewerComponent', () => {
     sizeBytes: 10201,
     content:
       'https://dspace7.4science.it/dspace-spring-rest/api/core/bitstreams/cf9b0c8e-a1eb-4b65-afd0-567366448713/content',
-    format: observableOf(MockBitstreamFormat1),
+    format: of(MockBitstreamFormat1),
     bundleName: 'ORIGINAL',
     _links: {
       self: {
@@ -86,10 +88,10 @@ describe('MediaViewerComponent', () => {
 
   beforeEach(waitForAsync(() => {
     authService = jasmine.createSpyObj('AuthService', {
-      isAuthenticated: observableOf(true),
+      isAuthenticated: of(true),
     });
     authorizationService = jasmine.createSpyObj('AuthorizationService', {
-      isAuthorized: observableOf(true),
+      isAuthorized: of(true),
     });
     fileService = jasmine.createSpyObj('FileService', {
       retrieveFileDownloadLink: null,
@@ -116,6 +118,7 @@ describe('MediaViewerComponent', () => {
         { provide: BitstreamDataService, useValue: bitstreamDataService },
         { provide: ThemeService, useValue: getMockThemeService() },
         { provide: AuthService, useValue: new AuthServiceMock() },
+        { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(MediaViewerComponent, { remove: { imports: [ThemedMediaViewerImageComponent, ThemedThumbnailComponent, ThemedMediaViewerVideoComponent, ThemedLoadingComponent] } }).compileComponents();

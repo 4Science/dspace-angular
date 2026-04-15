@@ -5,7 +5,7 @@ import {
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { CollectionDataService } from '../../../../../core/data/collection-data.service';
 import {
@@ -103,7 +103,7 @@ describe('CrisLayoutCollectionBoxComponent', () => {
 
   describe('without collections', () => {
     beforeEach(() => {
-      component.owningCollection$ = observableOf(null);
+      component.owningCollection$ = of(null);
       fixture.detectChanges();
     });
 
@@ -114,7 +114,7 @@ describe('CrisLayoutCollectionBoxComponent', () => {
 
   describe('without owning collections', () => {
     beforeEach(() => {
-      component.owningCollection$ = observableOf(null);
+      component.owningCollection$ = of(null);
       fixture.detectChanges();
     });
 
@@ -125,7 +125,7 @@ describe('CrisLayoutCollectionBoxComponent', () => {
 
   describe('with owning collections', () => {
     beforeEach(() => {
-      component.owningCollection$ = observableOf(mockCollection1);
+      component.owningCollection$ = of(mockCollection1);
       fixture.detectChanges();
     });
 
@@ -136,7 +136,7 @@ describe('CrisLayoutCollectionBoxComponent', () => {
 
   describe('without mapped collections', () => {
     beforeEach(() => {
-      component.mappedCollections$ = observableOf([]);
+      component.mappedCollections$ = of([]);
       fixture.detectChanges();
     });
 
@@ -147,7 +147,7 @@ describe('CrisLayoutCollectionBoxComponent', () => {
 
   describe('with mapped collections', () => {
     beforeEach(() => {
-      component.mappedCollections$ = observableOf([mockCollection1]);
+      component.mappedCollections$ = of([mockCollection1]);
       fixture.detectChanges();
     });
 

@@ -1,8 +1,8 @@
-import { Route } from '@angular/router';
+import { Routes } from '@angular/router';
 
 import { ExternalLoginEmailConfirmationPageComponent } from './external-login-email-confirmation-page.component';
 
-export const ROUTES: Route[] = [
+export const ROUTES: Routes = [
   {
     path: '',
     pathMatch: 'full',

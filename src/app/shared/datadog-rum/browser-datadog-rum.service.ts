@@ -21,8 +21,8 @@ import { coreSelector } from '../../core/core.selectors';
 import { CoreState } from '../../core/core-state.model';
 import {
   CookieConsents,
-  KlaroService,
-} from '../cookies/klaro.service';
+  OrejimeService,
+} from '../../shared/cookies/orejime.service';
 import { setDatadogRumStatusAction } from './datadog-rum.actions';
 import { DatadogRumState } from './datadog-rum.reducer';
 import { DatadogRumService } from './datadog-rum.service';
@@ -34,19 +34,19 @@ export class BrowserDatadogRumService extends DatadogRumService {
   datadogRumStateSelector = createSelector(coreSelector, (state: CoreState) => state.datadogRum);
 
   constructor(
-    private klaroService: KlaroService,
+    private orejimeService: OrejimeService,
     private store: Store,
   ) {
     super();
-    this.consentsUpdates$ = this.klaroService.consentsUpdates$;
+    this.consentsUpdates$ = this.orejimeService.consentsUpdates$;
   }
 
   initDatadogRum() {
-    this.klaroService.initialized$.pipe(
+    this.orejimeService.initialized$.pipe(
       filter(initalized => initalized),
       take(1),
       tap(() => {
-        this.klaroService.watchConsentUpdates();
+        this.orejimeService.watchConsentUpdates();
       }),
       switchMap(() => this.consentsUpdates$),
     ).subscribe(savedPreferences => {

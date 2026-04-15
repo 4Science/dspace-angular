@@ -23,6 +23,10 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
 @Injectable({
   providedIn: 'root',
 })
+/**
+ * This service is responsible to communicate with the epersonRegistrationService to update the RegistrationData
+ * provided by the user.
+ */
 export class ExternalLoginService {
 
   constructor(
@@ -67,7 +71,7 @@ export class ExternalLoginService {
     return this.store.pipe(
       select(getAuthenticationMethods),
       filter((methods: AuthMethod[]) => methods.length > 0),
-      map((methods: AuthMethod[]) => methods.find(m => m.authMethodType?.toString() === registrationType.toLocaleLowerCase()).location),
+      map((methods: AuthMethod[]) => methods.find((m: AuthMethod) => m.authMethodType?.toString() === registrationType.toLocaleLowerCase()).location),
     );
   }
 }

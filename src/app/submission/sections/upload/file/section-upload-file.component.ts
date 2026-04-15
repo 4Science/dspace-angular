@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -11,8 +8,10 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap/modal/modal-config';
+import {
+  NgbModal,
+  NgbModalOptions,
+} from '@ng-bootstrap/ng-bootstrap';
 import { DynamicFormControlModel } from '@ng-dynamic-forms/core';
 import { TranslateModule } from '@ngx-translate/core';
 import uniqBy from 'lodash/uniqBy';
@@ -52,7 +51,6 @@ import {
 import { ThemedFileDownloadLinkComponent } from '../../../../shared/file-download-link/themed-file-download-link.component';
 import { FormService } from '../../../../shared/form/form.service';
 import { isNumeric } from '../../../../shared/numeric.util';
-import { FileSizePipe } from '../../../../shared/utils/file-size-pipe';
 import { SubmissionService } from '../../../submission.service';
 import { SectionUploadService } from '../section-upload.service';
 import { SubmissionSectionUploadFileEditComponent } from './edit/section-upload-file-edit.component';
@@ -66,16 +64,13 @@ import { SubmissionSectionUploadFileViewComponent } from './view/section-upload-
   styleUrls: ['./section-upload-file.component.scss'],
   templateUrl: './section-upload-file.component.html',
   imports: [
-    TranslateModule,
-    SubmissionSectionUploadFileViewComponent,
-    NgIf,
-    AsyncPipe,
-    ThemedFileDownloadLinkComponent,
-    FileSizePipe,
-    BtnDisabledDirective,
     AlertComponent,
+    AsyncPipe,
+    BtnDisabledDirective,
+    SubmissionSectionUploadFileViewComponent,
+    ThemedFileDownloadLinkComponent,
+    TranslateModule,
   ],
-  standalone: true,
 })
 export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit, OnDestroy {
   /**

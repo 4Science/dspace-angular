@@ -1,4 +1,4 @@
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import { CookieServiceMock } from '../../shared/mocks/cookie.service.mock';
 import {
@@ -42,8 +42,8 @@ describe('EndUserAgreementService', () => {
 
     cookie = new CookieServiceMock();
     authService = jasmine.createSpyObj('authService', {
-      isAuthenticated: observableOf(true),
-      getAuthenticatedUserFromStore: observableOf(userWithMetadata),
+      isAuthenticated: of(true),
+      getAuthenticatedUserFromStore: of(userWithMetadata),
     });
     ePersonService = jasmine.createSpyObj('ePersonService', {
       update: createSuccessfulRemoteDataObject$(userWithMetadata),
@@ -81,12 +81,12 @@ describe('EndUserAgreementService', () => {
   describe('when the cookie isn\'t set', () => {
     describe('and the user is authenticated', () => {
       beforeEach(() => {
-        (authService.isAuthenticated as jasmine.Spy).and.returnValue(observableOf(true));
+        (authService.isAuthenticated as jasmine.Spy).and.returnValue(of(true));
       });
 
       describe('and the user contains agreement metadata', () => {
         beforeEach(() => {
-          (authService.getAuthenticatedUserFromStore as jasmine.Spy).and.returnValue(observableOf(userWithMetadata));
+          (authService.getAuthenticatedUserFromStore as jasmine.Spy).and.returnValue(of(userWithMetadata));
         });
 
         it('hasCurrentUserOrCookieAcceptedAgreement should return true', (done) => {
@@ -99,7 +99,7 @@ describe('EndUserAgreementService', () => {
 
       describe('and the user doesn\'t contain agreement metadata', () => {
         beforeEach(() => {
-          (authService.getAuthenticatedUserFromStore as jasmine.Spy).and.returnValue(observableOf(userWithoutMetadata));
+          (authService.getAuthenticatedUserFromStore as jasmine.Spy).and.returnValue(of(userWithoutMetadata));
         });
 
         it('hasCurrentUserOrCookieAcceptedAgreement should return false', (done) => {
@@ -120,7 +120,7 @@ describe('EndUserAgreementService', () => {
 
     describe('and the user is not authenticated', () => {
       beforeEach(() => {
-        (authService.isAuthenticated as jasmine.Spy).and.returnValue(observableOf(false));
+        (authService.isAuthenticated as jasmine.Spy).and.returnValue(of(false));
       });
 
       it('hasCurrentUserOrCookieAcceptedAgreement should return false', (done) => {

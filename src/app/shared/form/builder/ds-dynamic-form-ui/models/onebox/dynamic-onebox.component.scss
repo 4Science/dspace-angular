@@ -32,6 +32,12 @@
   background-color: #fff;
 }
 
+.authority-icons {
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%)
+}
+
 .tree-toggle {
   padding:  0.70rem 0.70rem 0 0.70rem ;
 }

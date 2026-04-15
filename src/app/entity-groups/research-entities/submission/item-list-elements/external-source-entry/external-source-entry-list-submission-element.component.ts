@@ -1,7 +1,5 @@
 import {
   DatePipe,
-  NgForOf,
-  NgIf,
   SlicePipe,
 } from '@angular/common';
 import {
@@ -38,8 +36,18 @@ import { DuplicateMatchMetadataDetailConfig } from '../../../../../submission/se
   selector: 'ds-external-source-entry-list-submission-element',
   styleUrls: ['./external-source-entry-list-submission-element.component.scss'],
   templateUrl: './external-source-entry-list-submission-element.component.html',
-  standalone: true,
-  imports: [NgIf, TruncatableComponent, TruncatablePartComponent, DatePipe, NgbCollapseModule, ThemedItemListPreviewComponent, SlicePipe, NgbTooltipModule, RouterLink, TranslateModule, NgbPaginationModule, NgForOf],
+  imports: [
+    DatePipe,
+    NgbCollapseModule,
+    NgbPaginationModule,
+    NgbTooltipModule,
+    RouterLink,
+    SlicePipe,
+    ThemedItemListPreviewComponent,
+    TranslateModule,
+    TruncatableComponent,
+    TruncatablePartComponent,
+  ],
 })
 /**
  * The component for displaying a list element of an external source entry

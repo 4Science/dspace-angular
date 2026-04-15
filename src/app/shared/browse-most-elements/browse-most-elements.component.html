@@ -1,14 +1,14 @@
-<div [ngSwitch]="(sectionTemplateType | lowercase)">
-
-  <ng-container *ngSwitchDefault>
-    <ds-default-browse-elements
-      [showMetrics]="showMetrics"
-      [showThumbnails]="topSection.showThumbnails"
-      [topSection]="topSection"
-      [showLabel]="showLabel"
-      [paginatedSearchOptions]="paginatedSearchOptions$.asObservable() | async"
-      [context]="context"
-    ></ds-default-browse-elements>
-  </ng-container>
-
+<div>
+  @switch ((sectionTemplateType | lowercase)) {
+    @default {
+      <ds-default-browse-elements
+        [showMetrics]="showMetrics"
+        [showThumbnails]="topSection.showThumbnails"
+        [topSection]="topSection"
+        [showLabel]="showLabel"
+        [paginatedSearchOptions]="paginatedSearchOptions$.asObservable() | async"
+        [context]="context"
+      ></ds-default-browse-elements>
+    }
+  }
 </div>

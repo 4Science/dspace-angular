@@ -11,8 +11,6 @@ import { SearchSectionComponent } from './search-section.component';
   selector: 'ds-search-section',
   styleUrls: [],
   templateUrl: '../../../theme-support/themed.component.html',
-  standalone: true,
-  imports: [SearchSectionComponent],
 })
 export class ThemedSearchSectionComponent extends ThemedComponent<SearchSectionComponent> {
 

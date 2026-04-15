@@ -71,7 +71,7 @@ import { SearchConfigurationService } from './search-configuration.service';
  * - Overrides {@link BaseDataService.addEmbedParams} in order to make it public
  *
  * Doesn't use any of the service's dependencies, they are initialized as undefined
- * Therefore, equest/response handling methods won't work even though they're defined
+ * Therefore, request/response handling methods won't work even though they're defined
  */
 class SearchDataService extends BaseDataService<any> {
   constructor() {
@@ -111,14 +111,14 @@ export class SearchService implements OnDestroy {
   private request: GenericConstructor<RestRequest> = GetRequest;
 
   /**
-   * Subscription to unsubscribe from
-   */
-  private sub;
-
-  /**
    * Instance of SearchDataService to forward data service methods to
    */
   private searchDataService: SearchDataService;
+
+  /**
+   * Subscription to unsubscribe from
+   */
+  private sub;
 
   public appliedFilters$: BehaviorSubject<AppliedFilter[]> = new BehaviorSubject([]);
 
@@ -432,7 +432,7 @@ export class SearchService implements OnDestroy {
   }
 
   /**
-   * Send search event to rest api using angularitics
+   * Send search event to rest api using angulartics2
    * @param config              Paginated search options used
    * @param searchQueryResponse The response objects of the performed search
    * @param clickedObject       Optional UUID of an object a search was performed and clicked for
@@ -444,7 +444,7 @@ export class SearchService implements OnDestroy {
       const appliedFilter = appliedFilters[i];
       filters.push(appliedFilter);
     }
-    this.angulartics2.eventTrack.next({
+    const searchTrackObject = {
       action: 'search',
       properties: {
         searchOptions: config,
@@ -461,7 +461,9 @@ export class SearchService implements OnDestroy {
         filters: filters,
         clickedObject,
       },
-    });
+    };
+
+    this.angulartics2.eventTrack.next(searchTrackObject);
   }
 
   /**

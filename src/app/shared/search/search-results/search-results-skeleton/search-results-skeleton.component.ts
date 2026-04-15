@@ -25,16 +25,13 @@ import { ViewMode } from '../../../../core/shared/view-mode.model';
 import { AlertComponent } from '../../../alert/alert.component';
 import { AlertType } from '../../../alert/alert-type';
 import { hasValue } from '../../../empty.util';
-import { VarDirective } from '../../../utils/var.directive';
 
 @Component({
   selector: 'ds-search-results-skeleton',
-  standalone: true,
   imports: [
-    NgxSkeletonLoaderModule,
-    AsyncPipe,
     AlertComponent,
-    VarDirective,
+    AsyncPipe,
+    NgxSkeletonLoaderModule,
   ],
   templateUrl: './search-results-skeleton.component.html',
   styleUrl: './search-results-skeleton.component.scss',

@@ -26,7 +26,7 @@ import {
   hot,
 } from 'jasmine-marbles';
 import {
-  of as observableOf,
+  of,
   throwError as observableThrowError,
 } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
@@ -904,7 +904,7 @@ describe('SubmissionService test suite', () => {
   describe('hasUnsavedModification', () => {
     it('should call jsonPatchOperationService hasPendingOperation observable', () => {
       (service as any).jsonPatchOperationService.hasPendingOperations = jasmine.createSpy('hasPendingOperations')
-        .and.returnValue(observableOf(true));
+        .and.returnValue(of(true));
 
       scheduler = getTestScheduler();
       scheduler.schedule(() => service.hasUnsavedModification());
@@ -955,7 +955,7 @@ describe('SubmissionService test suite', () => {
 
   describe('isSubmissionLoading', () => {
     it('should return true/false when section is loading/not loading', () => {
-      const spy = spyOn(service, 'getSubmissionObject').and.returnValue(observableOf({ isLoading: true }));
+      const spy = spyOn(service, 'getSubmissionObject').and.returnValue(of({ isLoading: true }));
 
       let expected = cold('(b|)', {
         b: true,
@@ -963,7 +963,7 @@ describe('SubmissionService test suite', () => {
 
       expect(service.isSubmissionLoading(submissionId)).toBeObservable(expected);
 
-      spy.and.returnValue(observableOf({ isLoading: false }));
+      spy.and.returnValue(of({ isLoading: false }));
 
       expected = cold('(b|)', {
         b: false,
@@ -975,7 +975,7 @@ describe('SubmissionService test suite', () => {
 
   describe('notifyNewSection', () => {
     it('should use the correct message when the sectionId is not equal to \'detect-duplicte\'', fakeAsync(() => {
-      spyOn((service as any).translate, 'get').and.returnValue(observableOf('test'));
+      spyOn((service as any).translate, 'get').and.returnValue(of('test'));
       spyOn((service as any).notificationsService, 'info');
 
       service.notifyNewSection(submissionId, sectionId);
@@ -985,7 +985,7 @@ describe('SubmissionService test suite', () => {
     }));
     it('should use the correct message when the sectionId is equal to \'detect-duplicte\'', fakeAsync(() => {
       const dtSetctionId = 'detect-duplicate';
-      spyOn((service as any).translate, 'get').and.returnValue(observableOf(dtSetctionId));
+      spyOn((service as any).translate, 'get').and.returnValue(of(dtSetctionId));
       spyOn((service as any).notificationsService, 'warning');
 
       service.notifyNewSection(submissionId, dtSetctionId);
@@ -1000,19 +1000,19 @@ describe('SubmissionService test suite', () => {
       scheduler = getTestScheduler();
       const spy = spyOn((service as any).routeService, 'getPreviousUrl');
 
-      spy.and.returnValue(observableOf('/mydspace?configuration=workflow'));
+      spy.and.returnValue(of('/mydspace?configuration=workflow'));
       scheduler.schedule(() => service.redirectToMyDSpace());
       scheduler.flush();
 
       expect((service as any).router.navigateByUrl).toHaveBeenCalledWith('/mydspace?configuration=workflow');
 
-      spy.and.returnValue(observableOf(''));
+      spy.and.returnValue(of(''));
       scheduler.schedule(() => service.redirectToMyDSpace());
       scheduler.flush();
 
       expect((service as any).router.navigate).toHaveBeenCalledWith(['/mydspace']);
 
-      spy.and.returnValue(observableOf('/home'));
+      spy.and.returnValue(of('/home'));
       scheduler.schedule(() => service.redirectToMyDSpace());
       scheduler.flush();
 

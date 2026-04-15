@@ -7,12 +7,12 @@ import {
   OnDestroy,
   SimpleChanges,
 } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import isEqual from 'lodash/isEqual';
 import {
   combineLatest,
   Observable,
-  of as observableOf,
+  of,
   Subscription,
 } from 'rxjs';
 import {
@@ -22,6 +22,7 @@ import {
   switchMap,
 } from 'rxjs/operators';
 
+import { environment } from '../../../environments/environment';
 import { AuthService } from '../../core/auth/auth.service';
 import { SubmissionDefinitionsModel } from '../../core/config/models/config-submission-definitions.model';
 import { Collection } from '../../core/shared/collection.model';
@@ -41,18 +42,19 @@ import { ThemedLoadingComponent } from '../../shared/loading/themed-loading.comp
 import { UploaderOptions } from '../../shared/upload/uploader/uploader-options.model';
 import { SubmissionError } from '../objects/submission-error.model';
 import { SubmissionObjectEntry } from '../objects/submission-objects.reducer';
-import { SubmissionSectionContainerComponent } from '../sections/container/section-container.component';
+import { ThemedSubmissionSectionContainerComponent } from '../sections/container/themed-section-container.component';
 import { SectionDataObject } from '../sections/models/section-data.model';
 import { SectionsService } from '../sections/sections.service';
 import { SectionsType } from '../sections/sections-type';
 import { SubmissionService } from '../submission.service';
+import { SubmissionLegendComponent } from '../submission-legend/submission-legend.component';
 import { SubmissionVisibility } from '../utils/visibility.util';
 import {
   SubmissionSectionModel,
   SubmissionVisibilityType,
 } from './../../core/config/models/config-submission-section.model';
 import { SubmissionFormCollectionComponent } from './collection/submission-form-collection.component';
-import { SubmissionFormFooterComponent } from './footer/submission-form-footer.component';
+import { ThemedSubmissionFormFooterComponent } from './footer/themed-submission-form-footer.component';
 import { SubmissionFormSectionAddComponent } from './section-add/submission-form-section-add.component';
 import { ThemedSubmissionUploadFilesComponent } from './submission-upload-files/themed-submission-upload-files.component';
 
@@ -60,20 +62,20 @@ import { ThemedSubmissionUploadFilesComponent } from './submission-upload-files/
  * This component represents the submission form.
  */
 @Component({
-  selector: 'ds-submission-form',
+  selector: 'ds-base-submission-form',
   styleUrls: ['./submission-form.component.scss'],
   templateUrl: './submission-form.component.html',
   imports: [
     CommonModule,
-    ThemedLoadingComponent,
-    SubmissionSectionContainerComponent,
-    SubmissionFormFooterComponent,
-    ThemedSubmissionUploadFilesComponent,
     SubmissionFormCollectionComponent,
     SubmissionFormSectionAddComponent,
-    TranslateModule,
+    SubmissionLegendComponent,
+    ThemedLoadingComponent,
+    ThemedSubmissionFormFooterComponent,
+    ThemedSubmissionSectionContainerComponent,
+    ThemedSubmissionUploadFilesComponent,
+    TranslatePipe,
   ],
-  standalone: true,
 })
 export class SubmissionFormComponent implements OnChanges, OnDestroy {
 
@@ -120,11 +122,13 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
    * @type {string}
    */
   @Input() submissionId: string;
+
   /**
    * The metadata security config based on the entity type
    * @type {MetadataSecurityConfiguration}
    */
   @Input() metadataSecurityConfiguration: MetadataSecurityConfiguration;
+
   /**
    * The entity type input used to create a new submission
    * @type {string}
@@ -141,7 +145,7 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
    * A boolean representing if a submission form is pending
    * @type {Observable<boolean>}
    */
-  public isLoading$: Observable<boolean> = observableOf(true);
+  public isLoading$: Observable<boolean> = of(true);
 
   /**
    * Emits true when the submission config has bitstream uploading enabled in submission
@@ -209,7 +213,7 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
           if (!isLoading) {
             return this.getSectionsList();
           } else {
-            return observableOf([]);
+            return of([]);
           }
         }));
       const isAvailable$ = this.sectionsService.isSectionTypeAvailable(this.submissionId, SectionsType.Upload);
@@ -332,6 +336,13 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
         this.changeDetectorRef.detectChanges();
       }
     });
+  }
+
+  /**
+   * Check if submission legend should be shown
+   */
+  get shouldShowLegend(): boolean {
+    return environment.submission.showLegend;
   }
 
   /**

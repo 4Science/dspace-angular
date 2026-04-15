@@ -25,7 +25,6 @@ import { SearchConfigurationService } from '../../../../core/shared/search/searc
 import { SearchFilterService } from '../../../../core/shared/search/search-filter.service';
 import { isNotEmpty } from '../../../empty.util';
 import { currentPath } from '../../../utils/route.utils';
-import { VarDirective } from '../../../utils/var.directive';
 import { AppliedFilter } from '../../models/applied-filter.model';
 
 /**
@@ -35,8 +34,11 @@ import { AppliedFilter } from '../../models/applied-filter.model';
   selector: 'ds-search-label',
   templateUrl: './search-label.component.html',
   styleUrls: ['./search-label.component.scss'],
-  standalone: true,
-  imports: [RouterLink, AsyncPipe, TranslateModule, VarDirective],
+  imports: [
+    AsyncPipe,
+    RouterLink,
+    TranslateModule,
+  ],
 })
 export class SearchLabelComponent implements OnInit {
   @Input() inPlaceSearch: boolean;

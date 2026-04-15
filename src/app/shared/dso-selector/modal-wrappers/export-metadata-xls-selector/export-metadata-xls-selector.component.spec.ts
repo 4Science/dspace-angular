@@ -22,7 +22,7 @@ import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 
 import {
   COLLECTION_EXPORT_SCRIPT_NAME,
@@ -135,7 +135,7 @@ describe('ExportMetadataXlsSelectorComponent', () => {
     debugElement = fixture.debugElement;
     const modalService = TestBed.inject(NgbModal);
     modalRef = modalService.open(ConfirmationModalComponent);
-    modalRef.componentInstance.response = observableOf(true);
+    modalRef.componentInstance.response = of(true);
     fixture.detectChanges();
   });
 

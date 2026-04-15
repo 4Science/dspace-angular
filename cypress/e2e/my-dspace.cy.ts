@@ -84,7 +84,7 @@ describe('My DSpace page', () => {
       cy.url().should('include', '/mydspace');
 
       // Close any open notifications, to make sure they don't get in the way of next steps
-      cy.get('[data-dismiss="alert"]').click({ multiple: true });
+      cy.get('[data-bs-dismiss="alert"]').click({ multiple: true });
 
       // This is the GET command that will actually run the search
       cy.intercept('GET', '**/server/api/discover/search/objects*').as('search-results');
@@ -119,7 +119,7 @@ describe('My DSpace page', () => {
     // Open the New Import dropdown
     cy.get('button[data-test="import-dropdown"]').click();
     // Click on the "Item" type in that dropdown
-    cy.get('#importControlsDropdownMenu button[title="Equipment"]').click();
+    cy.get('#importControlsDropdownMenu button[title="Funding"]').click();
 
     // New URL should include /import-external, as we've moved to the import page
     cy.url().should('include', '/import-external');

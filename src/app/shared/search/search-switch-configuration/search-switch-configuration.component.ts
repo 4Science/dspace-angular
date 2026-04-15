@@ -1,7 +1,4 @@
-import {
-  NgFor,
-  NgIf,
-} from '@angular/common';
+
 import {
   Component,
   EventEmitter,
@@ -32,8 +29,10 @@ import { SearchConfigurationOption } from './search-configuration-option.model';
   selector: 'ds-search-switch-configuration',
   styleUrls: ['./search-switch-configuration.component.scss'],
   templateUrl: './search-switch-configuration.component.html',
-  standalone: true,
-  imports: [NgIf, FormsModule, NgFor, TranslateModule],
+  imports: [
+    FormsModule,
+    TranslateModule,
+  ],
 })
 /**
  * Represents a select that allow to switch over available search configurations

@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -23,14 +20,12 @@ import { CrisLayoutSidebarComponent } from './cris-layout-sidebar/cris-layout-si
   selector: 'ds-cris-layout-vertical',
   templateUrl: './cris-layout-vertical.component.html',
   styleUrls: ['./cris-layout-vertical.component.scss'],
-  standalone: true,
   imports: [
-    NgIf,
-    CrisLayoutSidebarComponent,
+    AsyncPipe,
     ContextMenuComponent,
     CrisLayoutMatrixComponent,
     CrisLayoutNavbarComponent,
-    AsyncPipe,
+    CrisLayoutSidebarComponent,
   ],
 })
 export class CrisLayoutVerticalComponent {

@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
-  CommonModule,
-  NgForOf,
-  NgIf,
+  NgClass,
 } from '@angular/common';
 import {
   ChangeDetectorRef,
@@ -71,20 +69,17 @@ import { ItemEditBitstreamBundleComponent } from './item-edit-bitstream-bundle/i
   styleUrls: ['./item-bitstreams.component.scss'],
   templateUrl: './item-bitstreams.component.html',
   imports: [
-    CommonModule,
-    AsyncPipe,
-    TranslateModule,
-    ItemEditBitstreamBundleComponent,
-    RouterLink,
-    NgIf,
-    VarDirective,
-    NgForOf,
-    ThemedLoadingComponent,
     AlertComponent,
+    AsyncPipe,
     BtnDisabledDirective,
+    ItemEditBitstreamBundleComponent,
+    NgClass,
+    RouterLink,
+    ThemedLoadingComponent,
+    TranslateModule,
+    VarDirective,
   ],
   providers: [ObjectValuesPipe],
-  standalone: true,
 })
 /**
  * Component for displaying an item's bitstreams edit page

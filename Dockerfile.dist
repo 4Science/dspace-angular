@@ -4,28 +4,31 @@
 # See https://github.com/4science/dspace-angular/tree/main/docker for usage details
 
 # Test build:
-# docker build -f Dockerfile.dist -t 4science/dspace-angular:dspace-cris-2024_02_x-dist .
+# docker build -f Dockerfile.dist -t 4science/dspace-angular:dspace-cris-2025_02_x-dist .
 
-# Angular 17 + Node 22 optimized Dockerfile
+# Angular 20 + Node 22 optimized Dockerfile
 ARG NODE_VERSION=22
-ARG DSPACE_VERSION=dspace-cris-2024_02_x
+ARG DSPACE_VERSION=dspace-cris-2025_02_x
 ARG DOCKER_REGISTRY=docker.io
 
-FROM ${DOCKER_REGISTRY:-docker.io}/4science/dspace-cris-angular-dependencies:${DSPACE_VERSION:-dspace-cris-2024_02_x} AS build
+FROM ${DOCKER_REGISTRY:-docker.io}/4science/dspace-cris-angular-dependencies:${DSPACE_VERSION:-dspace-cris-2025_02_x} AS build
 
 COPY . /app/
 
 WORKDIR /app
 
 # Build Angular app
-RUN yarn build:prod
-RUN yarn build:mirador
+RUN --mount=type=cache,target=/root/.npm \
+  npm run build:prod
+RUN --mount=type=cache,target=/root/.npm \
+  npm run build:mirador
 
 # ---- Production image ----
 FROM docker.io/node:${NODE_VERSION-22}-alpine AS prod
 
 # Install pm2 globally and clean npm cache
-RUN npm install --global pm2 && npm cache clean --force
+RUN --mount=type=cache,target=/root/.npm \
+  npm install --global pm2 && npm cache clean --force
 
 WORKDIR /app
 

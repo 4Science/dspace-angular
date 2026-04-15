@@ -145,12 +145,12 @@ export class SearchManager {
         if (item.entityType === followMetadata.type) {
           if (isArray(followMetadata.metadata)) {
             followMetadata.metadata.forEach((metadata) => {
-              Metadata.all(item.metadata, metadata, null, environment.followAuthorityMetadataValuesLimit)
+              Metadata.all(item.metadata, metadata, null, null, false, environment.followAuthorityMetadataValuesLimit)
                 .filter((metadataValue: MetadataValue) => Metadata.hasValidItemAuthority(metadataValue.authority))
                 .forEach((metadataValue: MetadataValue) => uuidMap[metadataValue.authority] = metadataValue);
             });
           } else {
-            Metadata.all(item.metadata, followMetadata.metadata, null, environment.followAuthorityMetadataValuesLimit)
+            Metadata.all(item.metadata, followMetadata.metadata, null, null, false, environment.followAuthorityMetadataValuesLimit)
               .filter((metadataValue: MetadataValue) => Metadata.hasValidItemAuthority(metadataValue.authority))
               .forEach((metadataValue: MetadataValue) => uuidMap[metadataValue.authority] = metadataValue);
           }

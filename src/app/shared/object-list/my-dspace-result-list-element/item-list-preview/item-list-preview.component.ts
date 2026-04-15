@@ -1,8 +1,6 @@
 import {
   AsyncPipe,
   NgClass,
-  NgFor,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -10,7 +8,10 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import {
+  TranslateModule,
+  TranslatePipe,
+} from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { Context } from 'src/app/core/shared/context.model';
 import { WorkflowItem } from 'src/app/core/submission/models/workflowitem.model';
@@ -46,24 +47,22 @@ import { AdditionalMetadataComponent } from '../../search-result-list-element/ad
   styleUrls: ['item-list-preview.component.scss'],
   templateUrl: 'item-list-preview.component.html',
   animations: [fadeInOut],
-  standalone: true,
   imports: [
+    AdditionalMetadataComponent,
     AsyncPipe,
+    EscapeHtmlPipe,
+    InWorkflowStatisticsComponent,
     ItemCollectionComponent,
+    ItemCorrectionComponent,
     ItemSubmitterComponent,
+    MetadataLinkViewComponent,
     NgClass,
-    NgFor,
-    NgIf,
     ThemedBadgesComponent,
     ThemedThumbnailComponent,
     TranslateModule,
+    TranslatePipe,
     TruncatableComponent,
     TruncatablePartComponent,
-    MetadataLinkViewComponent,
-    AdditionalMetadataComponent,
-    ItemCorrectionComponent,
-    InWorkflowStatisticsComponent,
-    EscapeHtmlPipe,
   ],
 })
 export class ItemListPreviewComponent implements OnInit {
@@ -140,7 +139,7 @@ export class ItemListPreviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.showThumbnails = this.showThumbnails ?? this.appConfig.browseBy.showThumbnails;
-    this.dsoTitle = this.dsoNameService.getHitHighlights(this.object, this.item);
+    this.dsoTitle = this.dsoNameService.getHitHighlights(this.object, this.item, true);
     this.isCollapsed$ = this.truncateService.isCollapsed(this.item.uuid);
   }
 
