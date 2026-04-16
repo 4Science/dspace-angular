@@ -8,7 +8,7 @@ import { AppState } from '../../app.reducer';
 import { formObjectFromIdSelector } from './selectors';
 import { FormBuilderService } from './builder/form-builder.service';
 import { DynamicFormControlEvent, DynamicFormControlModel, DynamicFormGroupModel } from '@ng-dynamic-forms/core';
-import { isEmpty, isNotUndefined } from '../empty.util';
+import { hasValue, isEmpty, isNotUndefined } from '../empty.util';
 import uniqueId from 'lodash/uniqueId';
 import {
   FormAddError,
@@ -30,7 +30,7 @@ export class FormService {
   constructor(
     private formBuilderService: FormBuilderService,
     private store: Store<AppState>,
-    private trnslateService: TranslateService) {
+    private translateService: TranslateService) {
   }
 
   /**
@@ -141,7 +141,7 @@ export class FormService {
       .map((errorKey) => {
         const defaultErrorKey = `error.validation.${errorKey}`;
         const customErrorKey = `error.validation.${formId}.${errorKey}`;
-        const hasDefaultLabel = this.trnslateService.instant(defaultErrorKey) !== defaultErrorKey;
+        const hasDefaultLabel = this.translateService.instant(defaultErrorKey) !== defaultErrorKey;
         return hasDefaultLabel ? defaultErrorKey : customErrorKey;
       });
     errors.forEach((error) => this.addError(formId, fieldId, fieldIndex, error));
@@ -188,7 +188,7 @@ export class FormService {
       error[errorKey] = null;
       const updatedError = { ...field.errors, ...error };
       field.setErrors(updatedError);
-      field.setValidators(() => updatedError);
+      field.clearValidators();
       field.updateValueAndValidity();
     }
 
@@ -201,9 +201,10 @@ export class FormService {
       });
     }
 
-    const hasDifferentErrors = Object.keys(field.errors).filter((key) => field.errors[key]).length > 0;
+    const currentErrors = field.errors;
+    const hasDifferentErrors = hasValue(currentErrors) && Object.keys(currentErrors).filter((key) => currentErrors[key]).length > 0;
 
-    if (isEmpty(field.errors) || !hasDifferentErrors) {
+    if (!hasDifferentErrors) {
       field.markAsUntouched();
     }
 
