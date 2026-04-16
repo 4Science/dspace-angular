@@ -1,4 +1,7 @@
-import { AsyncPipe, DOCUMENT } from '@angular/common';
+import {
+  AsyncPipe,
+  DOCUMENT,
+} from '@angular/common';
 import {
   Component,
   Inject,
