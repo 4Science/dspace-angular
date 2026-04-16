@@ -365,6 +365,7 @@ import { SwitchComponent } from './switch/switch.component';
 import {StickyPopoverDirective} from './metadata-link-view/sticky-popover.directive';
 import { SortPipe } from './utils/sort.pipe';
 import { BrowserOnlyDirective } from './utils/browser-only.directive';
+import {EscapeHtmlPipe} from './utils/escape-html.pipe';
 
 const MODULES = [
   CommonModule,
@@ -413,6 +414,7 @@ const PIPES = [
   BrowserOnlyPipe,
   ShortNumberPipe,
   SortPipe,
+  EscapeHtmlPipe,
 ];
 
 const COMPONENTS = [
