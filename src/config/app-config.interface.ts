@@ -39,6 +39,7 @@ import {
 import { LoaderConfig } from './loader-config.interfaces';
 import { LuckySearchRedirectConfig } from './lucky-search-redirect-config';
 import { MarkdownConfig } from './markdown-config.interface';
+import { MatomoConfig } from './matomo-config.interface';
 import { MediaViewerConfig } from './media-viewer-config.interface';
 import { MetaTagsConfig } from './meta-tags.config';
 import { MetadataLinkViewPopoverDataConfig } from './metadata-link-view-popoverdata-config.interface';
@@ -107,6 +108,7 @@ interface AppConfig extends Config {
   metadataLinkViewPopoverData: MetadataLinkViewPopoverDataConfig;
   identifierSubtypes: IdentifierSubtypesConfig[];
   datadogRum?: DatadogRumConfig;
+  matomo?: MatomoConfig;
   permanentRedirectPaths?: string[];
   luckySearchRedirects?: LuckySearchRedirectConfig;
 }

@@ -24,6 +24,8 @@ import { Item } from '../../../../../core/shared/item.model';
 import { ITEM } from '../../../../../core/shared/item.resource-type';
 import { METRIC } from '../../../../../core/shared/metric.resource-type';
 import { XSRFService } from '../../../../../core/xsrf/xsrf.service';
+import { KlaroService } from '../../../../cookies/klaro.service';
+import { KlaroServiceStub } from '../../../../cookies/klaro.service.stub';
 import { DSONameServiceMock } from '../../../../mocks/dso-name.service.mock';
 import { getMockThemeService } from '../../../../mocks/theme-service.mock';
 import { ActivatedRouteStub } from '../../../../testing/active-router.stub';
@@ -109,6 +111,7 @@ describe('ItemListElementComponent', () => {
         { provide: TruncatableService, useValue: truncatableService },
         { provide: XSRFService, useValue: {} },
         { provide: APP_DATA_SERVICES_MAP, useValue: mockDataServiceMap },
+        { provide: KlaroService, useValue: new KlaroServiceStub() },
         provideMockStore(),
         TestDataService,
       ],

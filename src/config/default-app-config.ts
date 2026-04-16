@@ -39,6 +39,7 @@ import {
 import { LoaderConfig } from './loader-config.interfaces';
 import { LuckySearchRedirectConfig } from './lucky-search-redirect-config';
 import { MarkdownConfig } from './markdown-config.interface';
+import { MatomoConfig } from './matomo-config.interface';
 import { MediaViewerConfig } from './media-viewer-config.interface';
 import { MetaTagsConfig } from './meta-tags.config';
 import { MetadataLinkViewPopoverDataConfig } from './metadata-link-view-popoverdata-config.interface';
@@ -1024,6 +1025,8 @@ export class DefaultAppConfig implements AppConfig {
     trackLongTasks: true,
     defaultPrivacyLevel: 'mask-user-input',
   };
+
+  matomo: MatomoConfig = {};
 
   luckySearchRedirects: LuckySearchRedirectConfig = {
     'legacy-id': 301,

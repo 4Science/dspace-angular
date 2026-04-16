@@ -28,6 +28,7 @@ import {
   Angulartics2GoogleAnalytics,
   Angulartics2GoogleGlobalSiteTag,
 } from 'angulartics2';
+import { MatomoTracker } from 'ngx-matomo-client';
 
 import { commonAppConfig } from '../../app/app.config';
 import { storeModuleConfig } from '../../app/app.reducer';
@@ -57,6 +58,7 @@ import { ServerDatadogRumService } from '../../app/shared/datadog-rum/server-dat
 import { AngularticsProviderMock } from '../../app/shared/mocks/angulartics-provider.service.mock';
 import { Angulartics2Mock } from '../../app/shared/mocks/angulartics2.service.mock';
 import { Angulartics2DSpace } from '../../app/statistics/angulartics/dspace-provider';
+import { MockMatomoTracker } from '../../app/statistics/mock-matomo-tracker';
 import { ServerSubmissionService } from '../../app/submission/server-submission.service';
 import { SubmissionService } from '../../app/submission/submission.service';
 import { TranslateServerLoader } from '../../ngx-translate-loaders/translate-server.loader';
@@ -145,6 +147,10 @@ export const serverAppConfig: ApplicationConfig = mergeApplicationConfig({
     {
       provide: MathService,
       useClass: ServerMathService,
+    },
+    {
+      provide: MatomoTracker,
+      useClass: MockMatomoTracker,
     },
     {
       provide: DatadogRumService,
