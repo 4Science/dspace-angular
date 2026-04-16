@@ -1,4 +1,7 @@
-import { AsyncPipe } from '@angular/common';
+import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -11,12 +14,17 @@ import {
 } from '@ngx-translate/core';
 import {
   BehaviorSubject,
+  Observable,
   Subscription,
 } from 'rxjs';
+import { map } from 'rxjs/operators';
 
+import { Root } from '../../../core/data/root.model';
+import { RootDataService } from '../../../core/data/root-data.service';
 import { SiteDataService } from '../../../core/data/site-data.service';
 import { LocaleService } from '../../../core/locale/locale.service';
 import { MetadatumViewModel } from '../../../core/shared/metadata.models';
+import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
 import { isNotEmpty } from '../../../shared/empty.util';
 import { MarkdownViewerComponent } from '../../../shared/markdown-viewer/markdown-viewer.component';
 
@@ -26,7 +34,7 @@ import { MarkdownViewerComponent } from '../../../shared/markdown-viewer/markdow
   templateUrl: './end-user-agreement-content.component.html',
   styleUrls: ['./end-user-agreement-content.component.scss'],
   standalone: true,
-  imports: [RouterLink, TranslateModule, AsyncPipe, MarkdownViewerComponent],
+  imports: [RouterLink, TranslateModule, AsyncPipe, MarkdownViewerComponent, NgIf],
 })
 /**
  * Component displaying the contents of the End User Agreement
@@ -37,13 +45,16 @@ export class EndUserAgreementContentComponent implements OnInit, OnDestroy {
 
   subs: Subscription[] = [];
 
-  userAgreementText$: BehaviorSubject<string> = new BehaviorSubject('');
+  userAgreementText$: BehaviorSubject<string | null> = new BehaviorSubject(null);
+
+  repositoryName$: Observable<string>;
 
   fallbackText = 'info.end-user-agreement.content.fallback';
 
   constructor(private siteService: SiteDataService,
               private localeService: LocaleService,
               private translateService: TranslateService,
+              private rootService: RootDataService,
   ) {
   }
 
@@ -52,16 +63,27 @@ export class EndUserAgreementContentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subs.push(this.siteService.find().subscribe((site) => {
-      const langCode = this.localeService.getCurrentLanguageCode();
-      const fallbackLangCode = 'en';
+    this.repositoryName$ = this.rootService.findRoot(true).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      map((payload: Root) => payload.dspaceName),
+    );
 
-      const textArray = site?.metadataAsList.filter((metadata) => this.filterMetadata(metadata, langCode));
-      const fallbackTextArray = site?.metadataAsList.filter((metadata) => this.filterMetadata(metadata, fallbackLangCode));
-      const defaultFallbackText = this.translateService.instant(this.fallbackText);
+    this.subs.push(
+      this.siteService.find().subscribe((site) => {
+        const langCode = this.localeService.getCurrentLanguageCode();
+        const fallbackLangCode = 'en';
 
-      this.userAgreementText$.next(textArray[0]?.value || fallbackTextArray[0]?.value || defaultFallbackText);
-    }));
+        const textArray = site?.metadataAsList.filter((metadata) =>
+          this.filterMetadata(metadata, langCode),
+        );
+        const fallbackTextArray = site?.metadataAsList.filter((metadata) =>
+          this.filterMetadata(metadata, fallbackLangCode),
+        );
+
+        const value = textArray[0]?.value || fallbackTextArray[0]?.value || '';
+        this.userAgreementText$.next(value);
+      }),
+    );
   }
 
   ngOnDestroy(): void {

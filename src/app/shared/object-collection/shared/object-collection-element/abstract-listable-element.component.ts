@@ -52,7 +52,7 @@ export class AbstractListableElementComponent<T extends ListableObject> {
   /**
    * Whether to show the metrics badges
    */
-  @Input() showMetrics = true;
+  @Input() showMetrics: boolean;
 
   /**
    * Whether to show if the item is a correction

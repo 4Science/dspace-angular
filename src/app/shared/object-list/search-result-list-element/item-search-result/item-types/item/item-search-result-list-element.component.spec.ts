@@ -18,6 +18,8 @@ import { DSONameService } from '../../../../../../core/breadcrumbs/dso-name.serv
 import { AuthorizationDataService } from '../../../../../../core/data/feature-authorization/authorization-data.service';
 import { Item } from '../../../../../../core/shared/item.model';
 import { ThemedThumbnailComponent } from '../../../../../../thumbnail/themed-thumbnail.component';
+import { KlaroService } from '../../../../../cookies/klaro.service';
+import { KlaroServiceStub } from '../../../../../cookies/klaro.service.stub';
 import { MetadataLinkViewComponent } from '../../../../../metadata-link-view/metadata-link-view.component';
 import {
   DSONameServiceMock,
@@ -25,6 +27,8 @@ import {
 } from '../../../../../mocks/dso-name.service.mock';
 import { mockTruncatableService } from '../../../../../mocks/mock-trucatable.service';
 import { getMockThemeService } from '../../../../../mocks/theme-service.mock';
+import { ThemedBadgesComponent } from '../../../../../object-collection/shared/badges/themed-badges.component';
+import { InWorkflowStatisticsComponent } from '../../../../../object-collection/shared/in-workflow-statistics/in-workflow-statistics.component';
 import { ItemSearchResult } from '../../../../../object-collection/shared/item-search-result.model';
 import { ActivatedRouteStub } from '../../../../../testing/active-router.stub';
 import { AuthServiceStub } from '../../../../../testing/auth-service.stub';
@@ -226,6 +230,7 @@ describe('ItemSearchResultListElementComponent', () => {
         { provide: ThemeService, useValue: getMockThemeService() },
         { provide: AuthService, useValue: new AuthServiceStub() },
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
+        { provide: KlaroService, useValue: new KlaroServiceStub() },
         {
           provide: AuthorizationDataService,
           useValue: jasmine.createSpyObj('AuthorizationDataService', [
@@ -239,12 +244,14 @@ describe('ItemSearchResultListElementComponent', () => {
     }).overrideComponent(ItemSearchResultListElementComponent, {
       remove: { imports: [
         ThemedThumbnailComponent,
+        ThemedBadgesComponent,
         TruncatableComponent,
         TruncatablePartComponent,
         AdditionalMetadataComponent,
         MetadataLinkViewComponent,
         MetricBadgesComponent,
         MetricDonutsComponent,
+        InWorkflowStatisticsComponent,
       ] },
     }).compileComponents();
   }));
@@ -400,7 +407,7 @@ describe('ItemSearchResultListElementComponent', () => {
 
     it('should show highlighted title', () => {
       const titleField = fixture.debugElement.query(By.css('.item-list-title'));
-      expect(titleField.nativeNode.innerHTML).toEqual(dcTitle);
+      expect(titleField.nativeNode.innerHTML).toEqual('This is just another <em>title</em>');
     });
   });
 
@@ -452,6 +459,7 @@ describe('ItemSearchResultListElementComponent', () => {
         { provide: APP_CONFIG, useValue: enviromentNoThumbs },
         { provide: ThemeService, useValue: getMockThemeService() },
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
+        { provide: KlaroService, useValue: new KlaroServiceStub() },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(ItemSearchResultListElementComponent, {
@@ -459,12 +467,14 @@ describe('ItemSearchResultListElementComponent', () => {
     }).overrideComponent(ItemSearchResultListElementComponent, {
       remove: { imports: [
         ThemedThumbnailComponent,
+        ThemedBadgesComponent,
         TruncatableComponent,
         TruncatablePartComponent,
         AdditionalMetadataComponent,
         MetadataLinkViewComponent,
         MetricBadgesComponent,
         MetricDonutsComponent,
+        InWorkflowStatisticsComponent,
       ] },
     }).compileComponents();
   }));

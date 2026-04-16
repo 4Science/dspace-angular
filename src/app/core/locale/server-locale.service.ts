@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import {
   Inject,
   Injectable,
+  PLATFORM_ID,
 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import {
@@ -44,8 +45,9 @@ export class ServerLocaleService extends LocaleService {
     protected authService: AuthService,
     protected routeService: RouteService,
     @Inject(DOCUMENT) protected document: any,
+    @Inject(PLATFORM_ID) protected platformId: string,
   ) {
-    super(_window, cookie, translate, authService, routeService, document);
+    super(_window, cookie, translate, authService, routeService, document, platformId);
   }
 
   /**

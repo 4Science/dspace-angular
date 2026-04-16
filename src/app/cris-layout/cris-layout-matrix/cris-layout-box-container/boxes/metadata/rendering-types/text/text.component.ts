@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { EscapeHtmlPipe } from '../../../../../../../shared/utils/escape-html.pipe';
 import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
 
 /**
@@ -11,6 +12,9 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   templateUrl: './text.component.html',
   styleUrls: ['./text.component.scss'],
   standalone: true,
+  imports: [
+    EscapeHtmlPipe,
+  ],
 })
 export class TextComponent extends RenderingTypeValueModelComponent {
 

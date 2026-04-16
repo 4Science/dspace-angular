@@ -18,4 +18,9 @@ export interface MarkdownConfig extends Config {
    * Requires {@link enabled} to also be true before MathJax will display.
    */
   mathjax: boolean;
+
+  /**
+   * Shows an info message on the CMS metadata edit pages to inform users that they can use markdown syntax in the metadata values if this is enabled.
+   */
+  showInfoOnCMSMetadataEditPages?: boolean;
 }

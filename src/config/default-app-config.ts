@@ -38,6 +38,7 @@ import {
 } from './layout-config.interfaces';
 import { LoaderConfig } from './loader-config.interfaces';
 import { MarkdownConfig } from './markdown-config.interface';
+import { MatomoConfig } from './matomo-config.interface';
 import { MediaViewerConfig } from './media-viewer-config.interface';
 import { MetaTagsConfig } from './meta-tags.config';
 import { MetadataLinkViewPopoverDataConfig } from './metadata-link-view-popoverdata-config.interface';
@@ -323,6 +324,7 @@ export class DefaultAppConfig implements AppConfig {
     },
     // Minimum number of characters required before performing a lookup.
     minChars: 3,
+    showLegend: true,
   };
 
   // Default Language in which the UI will be rendered if the user's browser language is not an active language
@@ -368,7 +370,7 @@ export class DefaultAppConfig implements AppConfig {
     // The absolute lowest year to display in the dropdown (only used when no lowest date can be found for all items)
     defaultLowerLimit: 1900,
     // Whether to add item badges to BOTH browse and search result lists.
-    showLabels: true,
+    showLabels: false,
     // Whether to add item thumbnail images to BOTH browse and search result lists.
     showThumbnails: true,
     // Whether to add item thumbnail images to BOTH browse and search result lists.
@@ -610,6 +612,7 @@ export class DefaultAppConfig implements AppConfig {
   markdown: MarkdownConfig = {
     enabled: true,
     mathjax: true,
+    showInfoOnCMSMetadataEditPages: true,
   };
 
   // Which vocabularies should be used for which search filters
@@ -848,6 +851,7 @@ export class DefaultAppConfig implements AppConfig {
       'cris.cms.home-header',
       'cris.cms.home-news',
       'cris.cms.footer',
+      'cris.cms.privacy-policy',
     ],
   };
 
@@ -1020,4 +1024,6 @@ export class DefaultAppConfig implements AppConfig {
     trackLongTasks: true,
     defaultPrivacyLevel: 'mask-user-input',
   };
+
+  matomo: MatomoConfig = {};
 }

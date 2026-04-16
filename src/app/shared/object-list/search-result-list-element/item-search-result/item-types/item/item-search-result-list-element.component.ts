@@ -52,6 +52,7 @@ import { listableObjectComponent } from '../../../../../object-collection/shared
 import { TruncatableComponent } from '../../../../../truncatable/truncatable.component';
 import { TruncatableService } from '../../../../../truncatable/truncatable.service';
 import { TruncatablePartComponent } from '../../../../../truncatable/truncatable-part/truncatable-part.component';
+import { EscapeHtmlPipe } from '../../../../../utils/escape-html.pipe';
 import { VarDirective } from '../../../../../utils/var.directive';
 import { MetricBadgesComponent } from '../../../../metric-badges/metric-badges.component';
 import { MetricDonutsComponent } from '../../../../metric-donuts/metric-donuts.component';
@@ -66,7 +67,7 @@ import { SearchResultListElementComponent } from '../../../search-result-list-el
   styleUrls: ['./item-search-result-list-element.component.scss'],
   templateUrl: './item-search-result-list-element.component.html',
   standalone: true,
-  imports: [NgIf, RouterLink, ThemedThumbnailComponent, NgClass, ThemedBadgesComponent, TruncatableComponent, TruncatablePartComponent, NgFor, AsyncPipe, TranslateModule, AdditionalMetadataComponent, MetadataLinkViewComponent, MetricBadgesComponent, MetricDonutsComponent, VarDirective, InWorkflowStatisticsComponent],
+  imports: [NgIf, RouterLink, ThemedThumbnailComponent, NgClass, ThemedBadgesComponent, TruncatableComponent, TruncatablePartComponent, NgFor, AsyncPipe, TranslateModule, AdditionalMetadataComponent, MetadataLinkViewComponent, MetricBadgesComponent, MetricDonutsComponent, VarDirective, InWorkflowStatisticsComponent, EscapeHtmlPipe],
 })
 /**
  * The component for displaying a list element for an item search result of the type Publication
@@ -76,7 +77,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
   /**
    * Whether to show the metrics badges
    */
-  @Input() showMetrics = true;
+  @Input() showMetrics: boolean;
 
   /**
    * Route to the item's page
@@ -113,7 +114,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
    * Check if item has Third-party metrics blocked by consents
    */
   ngAfterViewInit() {
-    if (this.showMetrics && this.klaroService) {
+    if (this.showMetrics && this.klaroService && this.klaroService.watchConsentUpdates instanceof Function) {
       this.klaroService.watchConsentUpdates();
 
       this.hasLoadedThirdPartyMetrics$ = combineLatest([
@@ -127,7 +128,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
           }),
         ),
       ]).pipe(
-        map(([consents, metrics]) => {
+        map(([consents, metrics = []]) => {
           return metrics.reduce((previous, current) => {
             return consents[current.metricType] && previous;
           }, true);

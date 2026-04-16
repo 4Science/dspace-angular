@@ -6,7 +6,7 @@
         <ds-org-unit-input-suggestions *ngIf="useNameVariants" [suggestions]="allSuggestions" [(ngModel)]="selectedName" (clickSuggestion)="select($event)"
                                        (submitSuggestion)="selectCustom($event)"></ds-org-unit-input-suggestions>
 
-      <div *ngIf="!useNameVariants" class="lead" [innerHTML]="dsoTitle"></div>
+      <div *ngIf="!useNameVariants" class="lead" [innerHTML]="dsoTitle | dsEscapeHtml"></div>
 
         <span class="text-muted">
         <span *ngIf="dso.allMetadata('organization.address.addressLocality').length > 0"

@@ -17,14 +17,14 @@
           </li>
         </ul>
 
-        <ng-container *ngIf="!selectedReport">
+        <ng-container *ngIf="!selectedReport || !selectedFullReport">
           <ds-loading></ds-loading>
         </ng-container>
 
-        <ng-container *ngIf="selectedReport">
+        <ng-container *ngIf="selectedReport && selectedFullReport">
           <ds-statistics-chart-wrapper [type]="selectedReport.viewMode"
                                        [categoryType]="categoryType"
-                                       [report]="selectedReport"></ds-statistics-chart-wrapper>
+                                       [report]="selectedFullReport"></ds-statistics-chart-wrapper>
         </ng-container>
 
       </div>

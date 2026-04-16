@@ -12,6 +12,7 @@ import { ItemSearchResult } from '../../../../../../../../app/shared/object-coll
 import { listableObjectComponent } from '../../../../../../../../app/shared/object-collection/shared/listable-object/listable-object.decorator';
 import { PublicationSidebarSearchListElementComponent as BaseComponent } from '../../../../../../../../app/shared/object-list/sidebar-search-list-element/item-types/publication/publication-sidebar-search-list-element.component';
 import { TruncatablePartComponent } from '../../../../../../../../app/shared/truncatable/truncatable-part/truncatable-part.component';
+import { EscapeHtmlPipe } from '../../../../../../../../app/shared/utils/escape-html.pipe';
 
 @listableObjectComponent('PublicationSearchResult', ViewMode.ListElement, Context.SideBarSearchModal, 'custom')
 @listableObjectComponent('PublicationSearchResult', ViewMode.ListElement, Context.SideBarSearchModalCurrent, 'custom')
@@ -22,7 +23,7 @@ import { TruncatablePartComponent } from '../../../../../../../../app/shared/tru
   // templateUrl: './publication-sidebar-search-list-element.component.html',
   templateUrl: '../../../../../../../../app/shared/object-list/sidebar-search-list-element/sidebar-search-list-element.component.html',
   standalone: true,
-  imports: [TruncatablePartComponent, NgClass, NgIf, AsyncPipe, TranslateModule],
+  imports: [EscapeHtmlPipe, TruncatablePartComponent, NgClass, NgIf, AsyncPipe, TranslateModule],
 })
 export class PublicationSidebarSearchListElementComponent extends BaseComponent {
 }

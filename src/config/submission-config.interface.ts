@@ -56,4 +56,5 @@ export interface SubmissionConfig extends Config {
   detectDuplicate: DetectDuplicateConfig;
   dropdownHintEnabled?: SubmissionDropdownHintEnabled;
   minChars?: number;
+  showLegend?: boolean;
 }

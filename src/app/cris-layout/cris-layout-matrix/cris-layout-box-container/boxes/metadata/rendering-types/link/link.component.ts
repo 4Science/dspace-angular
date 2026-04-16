@@ -38,6 +38,11 @@ export class LinkComponent extends RenderingTypeValueModelComponent implements O
    */
   link: MetadataLinkValue;
 
+  /**
+   * Flag to determine if the value is a valid URL
+   */
+  isLink = false;
+
   isEmail = false;
 
   constructor(
@@ -52,7 +57,29 @@ export class LinkComponent extends RenderingTypeValueModelComponent implements O
   }
 
   ngOnInit(): void {
+    this.isLink = this.isValidUrl();
     this.link = this.getLinkFromValue();
+  }
+
+  /**
+   * Check if the metadata value is a valid URL
+   */
+  isValidUrl(): boolean {
+    let value = this.metadataValue.value.trim();
+
+    // If the subtype is LABEL, the value is in [Label](URL) format — extract the URL part
+    if (hasValue(this.renderingSubType) && this.renderingSubType.toUpperCase() === TYPES.LABEL.toString()) {
+      const parsed = this.parseLabelValue(value);
+      value = parsed.value;
+    }
+
+    // Comprehensive URL regex that matches:
+    // - URLs with protocols (http, https, ftp, mailto, etc.)
+    // - URLs without protocols (www.example.com, example.com)
+    // - URLs with paths, query strings, and fragments
+    const urlRegex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+
+    return urlRegex.test(value);
   }
 
   /**
@@ -68,16 +95,46 @@ export class LinkComponent extends RenderingTypeValueModelComponent implements O
       metadataValue = 'mailto:' + this.metadataValue.value;
       linkText = (hasValue(this.renderingSubType) &&
         this.renderingSubType.toUpperCase() === TYPES.EMAIL.toString()) ? this.metadataValue.value : this.translateService.instant(this.field.label);
+    } else if ((hasValue(this.renderingSubType) && this.renderingSubType.toUpperCase() === TYPES.LABEL.toString())) {
+      // Parse value in format [Label](URL)
+      const parsedValue = this.parseLabelValue(this.metadataValue.value);
+
+      metadataValue = this.getLinkWithProtocol(parsedValue.value);
+      linkText = parsedValue.label;
     } else {
-      const startsWithProtocol = [/^https?:\/\//, /^ftp:\/\//];
-      metadataValue = startsWithProtocol.some(rx => rx.test(this.metadataValue.value)) ? this.metadataValue.value : 'http://' + this.metadataValue.value;
-      linkText = (hasValue(this.renderingSubType) &&
-        this.renderingSubType.toUpperCase() === TYPES.LABEL.toString()) ? this.translateService.instant(this.field.label) : this.metadataValue.value;
+      // Use same value for link and label, correcting the protocol for link if needed
+      metadataValue = this.getLinkWithProtocol(this.metadataValue.value);
+      linkText = this.metadataValue.value;
     }
 
     return {
       href: metadataValue,
       text: linkText,
     };
+  }
+
+  /**
+   * Exctract label and values for TYPES.LABEL
+   * @param value
+   */
+  parseLabelValue(input: string): { label: string; value: string } {
+    const match = input.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+
+    if (!match) {
+      return {
+        label: input,
+        value: input,
+      };
+    }
+
+    return {
+      label: match[1],
+      value: match[2],
+    };
+  }
+
+  getLinkWithProtocol(link: string): string {
+    const startsWithProtocol = [/^https?:\/\//, /^ftp:\/\//];
+    return  startsWithProtocol.some(rx => rx.test(link)) ? link : 'http://' + link;
   }
 }

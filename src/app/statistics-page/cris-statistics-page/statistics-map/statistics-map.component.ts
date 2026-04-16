@@ -20,14 +20,22 @@ import {
   GoogleChartType,
   Ng2GoogleChartsModule,
 } from 'ng2-google-charts';
-import { BehaviorSubject } from 'rxjs';
+import {
+  BehaviorSubject,
+  take,
+} from 'rxjs';
 import { BtnDisabledDirective } from 'src/app/shared/btn-disabled.directive';
 
 import {
   ExportImageType,
   ExportService,
 } from '../../../core/export-service/export.service';
+import {
+  getFirstSucceededRemoteData,
+  getRemoteDataPayload,
+} from '../../../core/shared/operators';
 import { UsageReport } from '../../../core/statistics/models/usage-report.model';
+import { UsageReportDataService } from '../../../core/statistics/usage-report-data.service';
 
 @Component({
   selector: 'ds-statistics-map',
@@ -89,6 +97,7 @@ export class StatisticsMapComponent implements OnInit {
 
   constructor(
     @Inject(PLATFORM_ID) protected platformId: any,
+    private usageReportService: UsageReportDataService,
   ) {
     if (isPlatformBrowser(this.platformId)) {
       import('../../../core/export-service/browser-export.service').then((s) => {
@@ -102,8 +111,22 @@ export class StatisticsMapComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if ( !!this.report && !!this.report.points && this.report.points.length > 0 ) {
+    if (!this.report) {
+      return;
+    }
+    if (this.report.points?.length > 0) {
       this.getData();
+    } else {
+      this.usageReportService.findById(this.report.id, false, true).pipe(
+        getFirstSucceededRemoteData(),
+        getRemoteDataPayload(),
+        take(1),
+      ).subscribe((fullReport: UsageReport) => {
+        this.report = fullReport;
+        if (this.report?.points?.length > 0) {
+          this.getData();
+        }
+      });
     }
   }
 

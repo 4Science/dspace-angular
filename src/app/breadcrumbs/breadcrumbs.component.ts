@@ -10,6 +10,7 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 
+import { EscapeHtmlPipe } from '../shared/utils/escape-html.pipe';
 import { VarDirective } from '../shared/utils/var.directive';
 import { Breadcrumb } from './breadcrumb/breadcrumb.model';
 import { BreadcrumbsService } from './breadcrumbs.service';
@@ -22,7 +23,7 @@ import { BreadcrumbsService } from './breadcrumbs.service';
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.scss'],
   standalone: true,
-  imports: [VarDirective, NgIf, NgTemplateOutlet, NgFor, RouterLink, NgbTooltipModule, AsyncPipe, TranslateModule],
+  imports: [VarDirective, NgIf, NgTemplateOutlet, NgFor, RouterLink, NgbTooltipModule, AsyncPipe, TranslateModule, EscapeHtmlPipe],
 })
 export class BreadcrumbsComponent {
 

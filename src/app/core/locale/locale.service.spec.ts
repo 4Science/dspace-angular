@@ -1,3 +1,4 @@
+import { PLATFORM_ID } from '@angular/core';
 import {
   TestBed,
   waitForAsync,
@@ -34,6 +35,7 @@ describe('LocaleService test suite', () => {
   let routeService;
   let document;
   let spyOnGetLanguage;
+  const platformId = 'browser';
 
 
   const translateServiceStub: any = {
@@ -72,6 +74,7 @@ describe('LocaleService test suite', () => {
           { provide: RouteService, useValue: routeServiceStub },
           { provide: TranslateService, useValue: translateServiceStub },
           { provide: Document, useValue: document },
+          { provide: PLATFORM_ID, useValue: platformId },
         ],
       });
     }));
@@ -82,7 +85,7 @@ describe('LocaleService test suite', () => {
       routeService = TestBed.inject(RouteService);
       window = new NativeWindowRef();
       document = { documentElement: { lang: 'en' } };
-      service = new LocaleService(window, cookieService, translateService, authService, routeService, document);
+      service = new LocaleService(window, cookieService, translateService, authService, routeService, document, platformId);
       serviceAsAny = service;
       spyOnGet = spyOn(cookieService, 'get');
       spyOnSet = spyOn(cookieService, 'set');
