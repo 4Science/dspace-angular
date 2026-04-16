@@ -370,7 +370,7 @@ export class DefaultAppConfig implements AppConfig {
     // The absolute lowest year to display in the dropdown (only used when no lowest date can be found for all items)
     defaultLowerLimit: 1900,
     // Whether to add item badges to BOTH browse and search result lists.
-    showLabels: true,
+    showLabels: false,
     // Whether to add item thumbnail images to BOTH browse and search result lists.
     showThumbnails: true,
     // Whether to add item thumbnail images to BOTH browse and search result lists.
