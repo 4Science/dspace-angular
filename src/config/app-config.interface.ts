@@ -38,6 +38,7 @@ import {
   LayoutConfig,
 } from './layout-config.interfaces';
 import { LoaderConfig } from './loader-config.interfaces';
+import { LuckySearchRedirectConfig } from './lucky-search-redirect-config';
 import { MarkdownConfig } from './markdown-config.interface';
 import { MatomoConfig } from './matomo-config.interface';
 import { MediaViewerConfig } from './media-viewer-config.interface';
@@ -56,7 +57,6 @@ import { SubmissionConfig } from './submission-config.interface';
 import { SuggestionConfig } from './suggestion-config.interfaces';
 import { ThemeConfig } from './theme.config';
 import { UIServerConfig } from './ui-server-config.interface';
-import {LuckySearchRedirectConfig} from './lucky-search-redirect-config';
 
 interface AppConfig extends Config {
   ui: UIServerConfig;
@@ -110,9 +110,6 @@ interface AppConfig extends Config {
   metadataLinkViewPopoverData: MetadataLinkViewPopoverDataConfig;
   identifierSubtypes: IdentifierSubtypesConfig[];
   datadogRum?: DatadogRumConfig;
-  location: LocationConfig;
-  epflUnpaywallMetadata: EpflUnpaywallMetadata;
-  loader: LoaderConfig;
   permanentRedirectPaths?: string[];
   luckySearchRedirects?: LuckySearchRedirectConfig;
 }

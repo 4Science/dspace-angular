@@ -14,6 +14,7 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
+import { APP_CONFIG } from '../../../config/app-config.interface';
 import { getBitstreamDownloadRoute } from '../../app-routing-paths';
 import {
   SortDirection,
@@ -52,34 +53,6 @@ import { TruncatablePartComponent } from '../../shared/truncatable/truncatable-p
 import { FileSizePipe } from '../../shared/utils/file-size-pipe';
 import { LuckySearchService } from '../lucky-search.service';
 import { LuckySearchComponent } from './lucky-search.component';
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {LuckySearchComponent} from './lucky-search.component';
-import {LuckySearchService} from '../lucky-search.service';
-import {SearchConfigurationService} from '../../core/shared/search/search-configuration.service';
-import {Router, UrlTree} from '@angular/router';
-import {createSuccessfulRemoteDataObject, createSuccessfulRemoteDataObject$} from '../../shared/remote-data.utils';
-import {createPaginatedList} from '../../shared/testing/utils.test';
-import {Item} from '../../core/shared/item.model';
-import {of as observableOf} from 'rxjs';
-import {PaginatedSearchOptions} from '../../shared/search/models/paginated-search-options.model';
-import {PaginationComponentOptions} from '../../shared/pagination/pagination-component-options.model';
-import {SortDirection, SortOptions} from '../../core/cache/models/sort-options.model';
-import {TranslateModule} from '@ngx-translate/core';
-import {By} from '@angular/platform-browser';
-import {SearchResult} from '../../shared/search/models/search-result.model';
-import {DSpaceObject} from '../../core/shared/dspace-object.model';
-import {BitstreamDataService, MetadataFilter} from '../../core/data/bitstream-data.service';
-import {Bitstream} from '../../core/shared/bitstream.model';
-import {RouterMock} from '../../shared/mocks/router.mock';
-import {MetadataMap, MetadataValue} from '../../core/shared/metadata.models';
-import {FileSizePipe} from '../../shared/utils/file-size-pipe';
-import {HardRedirectService} from '../../core/services/hard-redirect.service';
-import {getBitstreamDownloadRoute} from '../../app-routing-paths';
-import {PLATFORM_ID} from '@angular/core';
-import {NotificationsService} from '../../shared/notifications/notifications.service';
-import {NotificationsServiceStub} from '../../shared/testing/notifications-service.stub';
-import {APP_CONFIG} from '../../../config/app-config.interface';
 
 describe('LuckySearchComponent', () => {
   let fixture: ComponentFixture<LuckySearchComponent>;
@@ -159,7 +132,7 @@ describe('LuckySearchComponent', () => {
         { provide: HardRedirectService, useValue: hardRedirectService },
         { provide: PLATFORM_ID, useValue: 'browser' },
         { provide: NotificationsService, useValue: new NotificationsServiceStub() },
-        {provide: APP_CONFIG, useValue: {}},
+        { provide: APP_CONFIG, useValue: {} },
       ],
     }).overrideComponent(LuckySearchComponent, {
       remove: {
@@ -395,11 +368,11 @@ describe('LuckySearchComponent', () => {
       // @ts-ignore: Accessing private method for testing
       component.appConfig = {
         luckySearchRedirects: {
-          default: 301
-        }
+          default: 301,
+        },
       } as any;
       // @ts-ignore: Accessing private method for testing
-      component.currentFilter = {identifier: 'unknown'};
+      component.currentFilter = { identifier: 'unknown' };
 
       // @ts-ignore: Accessing private method for testing
       const result = component.getRedirectCode();
@@ -410,10 +383,10 @@ describe('LuckySearchComponent', () => {
     it('should return 302 when default is not set and identifier is not found', () => {
       // @ts-ignore: Accessing private method for testing
       component.appConfig = {
-        luckySearchRedirects: {}
+        luckySearchRedirects: {},
       } as any;
       // @ts-ignore: Accessing private method for testing
-      component.currentFilter = {identifier: 'unknown'};
+      component.currentFilter = { identifier: 'unknown' };
 
       // @ts-ignore: Accessing private method for testing
       const result = component.getRedirectCode();
@@ -425,11 +398,11 @@ describe('LuckySearchComponent', () => {
       component.appConfig = {
         luckySearchRedirects: {
           default: 302,
-          'legacy-id': 301
-        }
+          'legacy-id': 301,
+        },
       };
       // @ts-ignore: Accessing private method for testing
-      component.currentFilter = {identifier: 'legacy-id'};
+      component.currentFilter = { identifier: 'legacy-id' };
 
       // @ts-ignore: Accessing private method for testing
       const result = component.getRedirectCode();

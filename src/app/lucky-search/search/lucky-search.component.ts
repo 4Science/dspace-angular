@@ -30,6 +30,10 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 
+import {
+  APP_CONFIG,
+  AppConfig,
+} from '../../../config/app-config.interface';
 import { getBitstreamDownloadRoute } from '../../app-routing-paths';
 import {
   BitstreamDataService,
@@ -64,7 +68,6 @@ import { TruncatableComponent } from '../../shared/truncatable/truncatable.compo
 import { TruncatablePartComponent } from '../../shared/truncatable/truncatable-part/truncatable-part.component';
 import { FileSizePipe } from '../../shared/utils/file-size-pipe';
 import { LuckySearchService } from '../lucky-search.service';
-import {APP_CONFIG, AppConfig} from '../../../config/app-config.interface';
 
 @Component({
   selector: 'ds-lucky-search',
