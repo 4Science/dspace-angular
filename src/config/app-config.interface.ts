@@ -37,6 +37,7 @@ import {
   LayoutConfig,
 } from './layout-config.interfaces';
 import { LoaderConfig } from './loader-config.interfaces';
+import { LuckySearchRedirectConfig } from './lucky-search-redirect-config';
 import { MarkdownConfig } from './markdown-config.interface';
 import { MediaViewerConfig } from './media-viewer-config.interface';
 import { MetaTagsConfig } from './meta-tags.config';
@@ -49,16 +50,6 @@ import { QualityAssuranceConfig } from './quality-assurance.config';
 import { FollowAuthorityMetadata } from './search-follow-metadata.interface';
 import { SearchConfig } from './search-page-config.interface';
 import { SearchResultConfig } from './search-result-config.interface';
-import {VirtualCollectionConfig} from './virtual-collection-config.interface';
-import {EpflUnpaywallMetadata} from './epfl-unpaywall-metadata';
-import { MiradorConfig } from './mirador-config.interfaces';
-import { LoaderConfig } from './loader-config.interfaces';
-import { MetaTagsConfig } from './meta-tags.config';
-import { MetadataLinkViewPopoverDataConfig } from './metadata-link-view-popoverdata-config.interface';
-import { IdentifierSubtypesConfig } from './identifier-subtypes-config.interface';
-import { DatadogRumConfig } from './datadog-rum-config.interfaces';
-import { LocationConfig } from './location-config.interface';
-import {LuckySearchRedirectConfig} from './lucky-search-redirect-config';
 import { ServerConfig } from './server-config.interface';
 import { SubmissionConfig } from './submission-config.interface';
 import { SuggestionConfig } from './suggestion-config.interfaces';
@@ -116,9 +107,6 @@ interface AppConfig extends Config {
   metadataLinkViewPopoverData: MetadataLinkViewPopoverDataConfig;
   identifierSubtypes: IdentifierSubtypesConfig[];
   datadogRum?: DatadogRumConfig;
-  location: LocationConfig;
-  epflUnpaywallMetadata: EpflUnpaywallMetadata;
-  loader: LoaderConfig;
   permanentRedirectPaths?: string[];
   luckySearchRedirects?: LuckySearchRedirectConfig;
 }

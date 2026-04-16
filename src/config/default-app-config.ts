@@ -37,6 +37,7 @@ import {
   SuggestionConfig,
 } from './layout-config.interfaces';
 import { LoaderConfig } from './loader-config.interfaces';
+import { LuckySearchRedirectConfig } from './lucky-search-redirect-config';
 import { MarkdownConfig } from './markdown-config.interface';
 import { MediaViewerConfig } from './media-viewer-config.interface';
 import { MetaTagsConfig } from './meta-tags.config';
@@ -53,36 +54,6 @@ import { ServerConfig } from './server-config.interface';
 import { SubmissionConfig } from './submission-config.interface';
 import { ThemeConfig } from './theme.config';
 import { UIServerConfig } from './ui-server-config.interface';
-import { BundleConfig } from './bundle-config.interface';
-import { ActuatorsConfig } from './actuators.config';
-import { InfoConfig } from './info-config.interface';
-import { CommunityListConfig } from './community-list-config.interface';
-import { HomeConfig } from './homepage-config.interface';
-import { MarkdownConfig } from './markdown-config.interface';
-import { FilterVocabularyConfig } from './filter-vocabulary-config';
-import { DiscoverySortConfig } from './discovery-sort.config';
-import { AddToAnyPluginConfig } from './add-to-any-plugin-config';
-import { CmsMetadata } from './cms-metadata';
-import { CrisLayoutConfig, LayoutConfig, SuggestionConfig } from './layout-config.interfaces';
-import { MetadataSecurityConfig } from './metadata-security-config';
-import { FollowAuthorityMetadata } from './search-follow-metadata.interface';
-import { MetricVisualizationConfig } from './metric-visualization-config.interfaces';
-import {
-  AdvancedAttachmentElementType,
-  AdvancedAttachmentRenderingConfig
-} from './advanced-attachment-rendering.config';
-import { AttachmentRenderingConfig } from './attachment-rendering.config';
-import { SearchResultConfig } from './search-result-config.interface';
-import { VirtualCollectionConfig } from './virtual-collection-config.interface';
-import { EpflUnpaywallMetadata } from './epfl-unpaywall-metadata';
-import { MiradorConfig } from './mirador-config.interfaces';
-import { LoaderConfig } from './loader-config.interfaces';
-import { MetaTagsConfig } from './meta-tags.config';
-import { MetadataLinkViewPopoverDataConfig } from './metadata-link-view-popoverdata-config.interface';
-import { IdentifierSubtypesConfig, IdentifierSubtypesIconPositionEnum } from './identifier-subtypes-config.interface';
-import { DatadogRumConfig } from './datadog-rum-config.interfaces';
-import { LocationConfig } from './location-config.interface';
-import {LuckySearchRedirectConfig} from './lucky-search-redirect-config';
 
 export class DefaultAppConfig implements AppConfig {
   production = false;
@@ -1054,16 +1025,8 @@ export class DefaultAppConfig implements AppConfig {
     defaultPrivacyLevel: 'mask-user-input',
   };
 
-  location: LocationConfig = {
-    nominatimApi: {
-      searchEndpoint: 'https://nominatim.openstreetmap.org/search',
-      reverseSearchEndpoint: 'https://nominatim.openstreetmap.org/reverse',
-      statusEndpoint: 'https://nominatim.openstreetmap.org/status',
-    }
-  };
-
   luckySearchRedirects: LuckySearchRedirectConfig = {
     'legacy-id': 301,
-    default: 302
+    default: 302,
   };
 }
