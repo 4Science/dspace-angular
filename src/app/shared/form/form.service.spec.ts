@@ -278,7 +278,7 @@ describe('FormService test suite', () => {
 
     service.removeErrorFromField(control, model, 'error.required');
 
-    expect(control.errors).toEqual({ required: null });
+    expect(control.errors).toEqual(null);
   });
 
   it('should remove errors from fields of concat group', () => {
@@ -300,7 +300,7 @@ describe('FormService test suite', () => {
 
     // the group's inputs should no longer have an error
     Object.values(control.controls).forEach((subControl: AbstractControl) => {
-      expect(control.errors).toEqual({ [messageKey]: null });
+      expect(control.errors).toEqual(null);
     });
   });
 
