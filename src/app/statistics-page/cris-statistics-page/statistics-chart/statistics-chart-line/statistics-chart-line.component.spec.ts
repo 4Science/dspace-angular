@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   DebugElement,
@@ -12,6 +13,10 @@ import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { of as observableOf } from 'rxjs';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from 'src/app/core/services/window.service';
 
 import { BrowserExportService } from '../../../../core/export-service/browser-export.service';
 import { REPORT_DATA } from '../../../../core/statistics/data-report.service';
@@ -197,6 +202,8 @@ describe('StatisticsChartLineComponent', () => {
         { provide: REPORT_DATA, useValue: selectedReport },
         { provide: BrowserExportService, useValue: ExportServiceStub },
         { provide: 'categoryType', useValue: 'mainReports' },
+        { provide: NativeWindowService, useValue: new NativeWindowRef() },
+        { provide: DOCUMENT, useValue: document },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(StatisticsChartLineComponent, {
