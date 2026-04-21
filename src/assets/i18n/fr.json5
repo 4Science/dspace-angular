@@ -6,8 +6,7 @@
   "401.link.home-page": "Retour à la page d'accueil",
 
   // "401.unauthorized": "Unauthorized",
-  // TODO Source message changed - Revise the translation
-  "401.unauthorized": "Accès non autorisé",
+  "401.unauthorized": "Non autorisé",
 
   // "403.help": "You don't have permission to access this page. You can use the button below to get back to the home page.",
   "403.help": "Vous n'avez pas les permissions requises pour accéder à cette page. Vous pouvez utiliser le bouton ci-dessous pour revenir à la page d'accueil.",
@@ -16,11 +15,9 @@
   "403.link.home-page": "Retour à la page d'accueil",
 
   // "403.forbidden": "Forbidden",
-  // TODO Source message changed - Revise the translation
-  "403.forbidden": "Accès interdit",
+  "403.forbidden": "Interdit",
 
   // "500.page-internal-server-error": "Service unavailable",
-  // TODO Source message changed - Revise the translation
   "500.page-internal-server-error": "Service indisponible",
 
   // "500.help": "The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.",
@@ -36,7 +33,6 @@
   "404.link.home-page": "Retour à la page d'accueil",
 
   // "404.page-not-found": "Page not found",
-  // TODO Source message changed - Revise the translation
   "404.page-not-found": "Page introuvable",
 
   // "error-page.description.401": "Unauthorized",
@@ -94,8 +90,7 @@
   "admin.registries.bitstream-formats.create.failure.head": "Erreur",
 
   // "admin.registries.bitstream-formats.create.head": "Create bitstream format",
-  // TODO Source message changed - Revise the translation
-  "admin.registries.bitstream-formats.create.head": "Créer un format Bistream",
+  "admin.registries.bitstream-formats.create.head": "Créer un format de bitstream",
 
   // "admin.registries.bitstream-formats.create.new": "Add a new bitstream format",
   "admin.registries.bitstream-formats.create.new": "Ajouter un nouveau format Bitstream",
@@ -431,8 +426,7 @@
   "admin.access-control.epeople.search.scope.metadata": "Métadonnées",
 
   // "admin.access-control.epeople.search.scope.email": "Email (exact)",
-  // TODO Source message changed - Revise the translation
-  "admin.access-control.epeople.search.scope.email": "Adresse électronique (exacte)",
+  "admin.access-control.epeople.search.scope.email": "E-mail (exact)",
 
   // "admin.access-control.epeople.search.button": "Search",
   "admin.access-control.epeople.search.button": "Rechercher",
@@ -450,8 +444,7 @@
   "admin.access-control.epeople.table.name": "Nom",
 
   // "admin.access-control.epeople.table.email": "Email (exact)",
-  // TODO Source message changed - Revise the translation
-  "admin.access-control.epeople.table.email": "Adresse électronique (exacte)",
+  "admin.access-control.epeople.table.email": "E-mail (exact)",
 
   // "admin.access-control.epeople.table.edit": "Edit",
   "admin.access-control.epeople.table.edit": "Éditer",
@@ -493,12 +486,10 @@
   "admin.access-control.epeople.form.lastName": "Nom de famille",
 
   // "admin.access-control.epeople.form.email": "Email",
-  // TODO Source message changed - Revise the translation
-  "admin.access-control.epeople.form.email": "Adresse électronique",
+  "admin.access-control.epeople.form.email": "E-mail",
 
   // "admin.access-control.epeople.form.emailHint": "Must be a valid email address",
-  // TODO Source message changed - Revise the translation
-  "admin.access-control.epeople.form.emailHint": "Il doit s'agir d'une adresse électronique valide",
+  "admin.access-control.epeople.form.emailHint": "oit être une adresse e-mail valide",
 
   // "admin.access-control.epeople.form.canLogIn": "Can log in",
   "admin.access-control.epeople.form.canLogIn": "Peut se connecter",
@@ -672,8 +663,7 @@
   "admin.access-control.groups.form.delete-group.modal.header": "Supprimer le groupe \"{{ dsoName }}\"",
 
   // "admin.access-control.groups.form.delete-group.modal.info": "Are you sure you want to delete Group \"{{ dsoName }}\" and all its associated policies?",
-  // TODO Source message changed - Revise the translation
-  "admin.access-control.groups.form.delete-group.modal.info": "Êtes-vous certain(e) de vouloir supprimer le groupe \"{{ dsoName }}\"",
+  "admin.access-control.groups.form.delete-group.modal.info": "Êtes-vous certain(e) de vouloir supprimer le groupe \"{{ dsoName }}\" et toutes les règles d’accès associées ?",
 
   // "admin.access-control.groups.form.delete-group.modal.cancel": "Cancel",
   "admin.access-control.groups.form.delete-group.modal.cancel": "Annuler",
@@ -892,8 +882,7 @@
   "admin.reports.items.limit": "Limite",
 
   // "admin.reports.items.offset": "Offset",
-  // TODO Source message changed - Revise the translation
-  "admin.reports.items.offset": "À partir de",
+  "admin.reports.items.offset": "Décalage",
 
   // "admin.reports.items.wholeRepo": "Whole Repository",
   "admin.reports.items.wholeRepo": "Tout le dépôt",
@@ -968,8 +957,7 @@
   "admin.reports.items.preset.hasXmlEntityInMetadata": "A des entités XML dans les métadonnées",
 
   // "admin.reports.items.preset.hasNonAsciiCharInMetadata": "Has non-ascii character in metadata",
-  // TODO Source message changed - Revise the translation
-  "admin.reports.items.preset.hasNonAsciiCharInMetadata": "A des caractères non ASCII dans les métadonnées",
+  "admin.reports.items.preset.hasNonAsciiCharInMetadata": "Contient des caractères non ASCII dans les métadonnées",
 
   // "admin.reports.items.number": "No.",
   "admin.reports.items.number": "Nº",
@@ -1122,8 +1110,7 @@
   "admin.reports.commons.filters.permission.has_restricted_original": "L'élément a un Bitstream original à accès restreint",
 
   // "admin.reports.commons.filters.permission.has_restricted_original.tooltip": "Item has at least one original bitstream that is not accessible to Anonymous user",
-  // TODO Source message changed - Revise the translation
-  "admin.reports.commons.filters.permission.has_restricted_original.tooltip": "L'élément a au moins un Bitstream original non accessible aux utilisateurs anonymes",
+  "admin.reports.commons.filters.permission.has_restricted_original.tooltip": "L’élément contient au moins un bitstream original non accessible à l’utilisateur anonyme",
 
   // "admin.reports.commons.filters.permission.has_restricted_thumbnail": "Item has Restricted Thumbnail",
   "admin.reports.commons.filters.permission.has_restricted_thumbnail": "L'élément a une vignette à accès restreint",
@@ -1153,12 +1140,10 @@
   "admin.search.item.edit": "Éditer",
 
   // "admin.search.item.make-private": "Make non-discoverable",
-  // TODO Source message changed - Revise the translation
-  "admin.search.item.make-private": "Rendre privé",
+  "admin.search.item.make-private": "Rendre non découvrable",
 
   // "admin.search.item.make-public": "Make discoverable",
-  // TODO Source message changed - Revise the translation
-  "admin.search.item.make-public": "Rendre public",
+  "admin.search.item.make-public": "Rendre découvrable",
 
   // "admin.search.item.move": "Move",
   "admin.search.item.move": "Déplacer",
@@ -1374,11 +1359,9 @@
   "auth.messages.token-refresh-failed": "Le rafraîchissement de votre jeton de session a échoué. Veuillez vous reconnecter.",
 
   // "bitstream.download.page": "Now downloading {{bitstream}}...",
-  // TODO Source message changed - Revise the translation
   "bitstream.download.page": "Téléchargement de {{bitstream}} en cours...",
 
   // "bitstream.download.page.back": "Back",
-  // TODO Source message changed - Revise the translation
   "bitstream.download.page.back": "Retour",
 
   // "bitstream.edit.authorizations.link": "Edit bitstream's Policies",
@@ -1418,8 +1401,7 @@
   "bitstream.edit.form.newFormat.hint": "L'application utilisée pour créer le fichier et le numéro de version (par exemple, \"<i>ACMESoft SuperApp version 1.5</i>\").",
 
   // "bitstream.edit.form.primaryBitstream.label": "Primary File",
-  // TODO Source message changed - Revise the translation
-  "bitstream.edit.form.primaryBitstream.label": "Bitstream principal",
+  "bitstream.edit.form.primaryBitstream.label": "Fichier principal",
 
   // "bitstream.edit.form.selectedFormat.hint": "If the format is not in the above list, <b>select \"format not in list\" above</b> and describe it under \"Describe new format\".",
   "bitstream.edit.form.selectedFormat.hint": "Si le format souhaité ne se trouve pas dans la liste ci-dessus, <b>sélectionner \"Format non disponible dans la liste\" ci-dessus</b> et le décrire via \"Décrire un nouveau format\".",
@@ -1494,7 +1476,6 @@
   "bitstream-request-a-copy.name.error": "Le nom est obligatoire",
 
   // "bitstream-request-a-copy.email.label": "Your email address *",
-  // TODO Source message changed - Revise the translation
   "bitstream-request-a-copy.email.label": "Votre adresse électronique *",
 
   // "bitstream-request-a-copy.email.hint": "This email address is used for sending the file.",
@@ -1645,8 +1626,7 @@
   "browse.startsWith.choose_year.label": "Choisir l'année de publication",
 
   // "browse.startsWith.jump": "Filter results by year or month",
-  // TODO Source message changed - Revise the translation
-  "browse.startsWith.jump": "Aller directement à une entrée de l'index:",
+  "browse.startsWith.jump": "Filtrer les résultats par année ou par mois",
 
   // "browse.startsWith.months.april": "April",
   "browse.startsWith.months.april": "Avril",
@@ -1694,8 +1674,7 @@
   "browse.startsWith.submit": "Valider",
 
   // "browse.startsWith.type_date": "Filter results by date",
-  // TODO Source message changed - Revise the translation
-  "browse.startsWith.type_date": "Ou saisir une date (année-mois) puis cliquer sur « Parcourir par »",
+  "browse.startsWith.type_date": "Filtrer les résultats par date",
 
   // "browse.startsWith.type_date.label": "Or type in a date (year-month) and click on the Browse button",
   "browse.startsWith.type_date.label": "Ou saisir une date (année-mois) puis cliquer sur le bouton « Parcourir »",
@@ -1947,8 +1926,7 @@
   "collection.edit.tabs.source.notifications.discarded.content": "Vos changements ont été annulés. Pour restaurer vos changements, veuillez cliquer sur le bouton « Annuler »",
 
   // "collection.edit.tabs.source.notifications.discarded.title": "Changes discarded",
-  // TODO Source message changed - Revise the translation
-  "collection.edit.tabs.source.notifications.discarded.title": "Changements annulés",
+  "collection.edit.tabs.source.notifications.discarded.title": "Les modifications ont été annulées",
 
   // "collection.edit.tabs.source.notifications.invalid.content": "Your changes were not saved. Please make sure all fields are valid before you save.",
   "collection.edit.tabs.source.notifications.invalid.content": "Vos changements n'ont pas été sauvegardés. Veuillez vérifier que tous les champs sont valides avant de sauvegarder.",
@@ -2236,11 +2214,9 @@
   "community.edit.logo.label": "Logo de la communauté",
 
   // "community.edit.logo.notifications.add.error": "Uploading community logo failed. Please verify the content before retrying.",
-  // TODO Source message changed - Revise the translation
   "community.edit.logo.notifications.add.error": "Erreur lors du chargement du logo de la communauté. Veuillez vérifier le contenu et réessayer.",
 
   // "community.edit.logo.notifications.add.success": "Upload community logo successful.",
-  // TODO Source message changed - Revise the translation
   "community.edit.logo.notifications.add.success": "Logo de la communauté chargé avec succès.",
 
   // "community.edit.logo.notifications.delete.success.title": "Logo deleted",
@@ -2253,8 +2229,7 @@
   "community.edit.logo.notifications.delete.error.title": "Erreur lors de la suppression du logo de la communauté.",
 
   // "community.edit.logo.upload": "Drop a community logo to upload",
-  // TODO Source message changed - Revise the translation
-  "community.edit.logo.upload": "Glisser-Déposer un logo à charger pour la communauté",
+  "community.edit.logo.upload": "Déposer un logo de la communauté pour le téléverser",
 
   // "community.edit.notifications.success": "Successfully edited the community",
   "community.edit.notifications.success": "Communauté mise à jour avec succès",
@@ -2263,8 +2238,7 @@
   "community.edit.notifications.unauthorized": "Vous n'avez pas les autorisations requises pour réaliser ce changement",
 
   // "community.edit.notifications.error": "An error occurred while editing the community",
-  // TODO Source message changed - Revise the translation
-  "community.edit.notifications.error": "Une erreur s'est produite lors de l'édition de la communauté",
+  "community.edit.notifications.error": "Une erreur s'est produite lors de la modification de la communauté",
 
   // "community.edit.return": "Back",
   "community.edit.return": "Retour",
@@ -2366,8 +2340,7 @@
   "comcol-role.edit.bitstream_read.name": "Droits de lecture par défaut des Bitstreams",
 
   // "comcol-role.edit.bitstream_read.description": "E-People and Groups that can read new bitstreams submitted to this collection. Changes to this role are not retroactive. Existing bitstreams in the system will still be viewable by those who had read access at the time of their addition.",
-  // TODO Source message changed - Revise the translation
-  "comcol-role.edit.bitstream_read.description": "Les administrateurs de communauté peuvent créer des sous-communautés ou collections et gérer ou assigner la gestion de ces sous-communautés ou collections. De plus, ils peuvent déterminer qui peut déposer des Items dans toutes les collections de la communauté, éditer les métadonnées (après dépôt) et ajouter (associer) les Items existants dans d'autres collections (en fonction des autorisations appropriées).",
+  "comcol-role.edit.bitstream_read.description": "E‑People et groupes autorisés à lire les nouveaux bitstreams déposés dans cette collection. Les modifications apportées à ce rôle ne sont pas rétroactives. Les bitstreams existants dans le système resteront accessibles aux utilisateurs disposant d’un droit de lecture au moment de leur ajout.",
 
   // "comcol-role.edit.bitstream_read.anonymous-group": "Default read for incoming bitstreams is currently set to Anonymous.",
   "comcol-role.edit.bitstream_read.anonymous-group": "Les droits de lecture par défaut sur les nouveaux Bitstreams sont actuellement octroyés au groupe Anonymous.",
@@ -2439,12 +2412,10 @@
   "community.search.results.head": "Résultats de recherche",
 
   // "community.sub-collection-list.head": "Collections in this community",
-  // TODO Source message changed - Revise the translation
-  "community.sub-collection-list.head": "Collections au sein de cette communauté",
+  "community.sub-collection-list.head": "Collections de cette communauté",
 
   // "community.sub-community-list.head": "Communities in this Community",
-  // TODO Source message changed - Revise the translation
-  "community.sub-community-list.head": "Sous-communautés au sein de cette communauté",
+  "community.sub-community-list.head": "Sous-communautés de cette communauté",
 
   // "cookies.consent.accept-all": "Accept all",
   "cookies.consent.accept-all": "Accepter tout",
@@ -2486,8 +2457,7 @@
   "cookies.consent.save": "Sauvegarder",
 
   // "cookies.consent.content-notice.description": "We collect and process your personal information for the following purposes: {purposes}",
-  // TODO Source message changed - Revise the translation
-  "cookies.consent.content-notice.description": "Vos données personnelles sont récupérées et utilisées dans les contextes suivants : authentification, préférences, consentement et statistiques. Pour plus d'informations, veuillez vous référer à la {privacyPolicy}.",
+  "cookies.consent.content-notice.description": "Nous collectons et traitons vos données personnelles aux fins suivantes : {purposes}",
 
   // "cookies.consent.content-notice.learnMore": "Customize",
   "cookies.consent.content-notice.learnMore": "Personnaliser",
@@ -2571,7 +2541,6 @@
   "curation-task.task.citationpage.label": "Générer la page de citation",
 
   // "curation-task.task.checklinks.label": "Check Links in Metadata",
-  // TODO Source message changed - Revise the translation
   "curation-task.task.checklinks.label": "Vérification des liens dans les métadonnées",
 
   // "curation-task.task.noop.label": "NOOP",
@@ -2932,12 +2901,10 @@
   "error.validation.required": "Ce champ est obligatoire",
 
   // "error.validation.NotValidEmail": "This is not a valid email",
-  // TODO Source message changed - Revise the translation
-  "error.validation.NotValidEmail": "Cette adresse électronique n'est pas une adresse valide",
+  "error.validation.NotValidEmail": "Cette adresse e-mail n’est pas valide",
 
   // "error.validation.emailTaken": "This email is already taken",
-  // TODO Source message changed - Revise the translation
-  "error.validation.emailTaken": "Cette adresse électronique est déjà attribuée",
+  "error.validation.emailTaken": "Cette adresse e-mail est déjà utilisée",
 
   // "error.validation.groupExists": "This group already exists",
   "error.validation.groupExists": "Ce groupe existe déjà",
@@ -2994,12 +2961,10 @@
   "footer.link.privacy-policy": "Politique de protection de la vie privée",
 
   // "footer.link.end-user-agreement": "End User Agreement",
-  // TODO Source message changed - Revise the translation
-  "footer.link.end-user-agreement": "Licence de l'utilisateur final",
+  "footer.link.end-user-agreement": "Contrat de l’utilisateur final",
 
   // "footer.link.feedback": "Send Feedback",
-  // TODO Source message changed - Revise the translation
-  "footer.link.feedback": "Envoyer un commentaire",
+  "footer.link.feedback": "Envoyer un retour",
 
   // "footer.link.coar-notify-support": "COAR Notify",
   "footer.link.coar-notify-support": "COAR Notify",
@@ -3008,8 +2973,7 @@
   "forgot-email.form.header": "Mot de passe oublié",
 
   // "forgot-email.form.info": "Enter the email address associated with the account.",
-  // TODO Source message changed - Revise the translation
-  "forgot-email.form.info": "Créer un compte pour vous abonner à des collections afin de recevoir des mises à jour via courrier électronique ainsi que pour déposer de nouveaux Items dans DSpace.",
+  "forgot-email.form.info": "Saisissez l’adresse e-mail associée au compte.",
 
   // "forgot-email.form.email": "Email Address *",
   "forgot-email.form.email": "Adresse électronique *",
@@ -3020,17 +2984,14 @@
   // "forgot-email.form.email.error.not-email-form": "Please fill in a valid email address",
   "forgot-email.form.email.error.not-email-form": "S'il vous plaît, utiliser une adresse courriel valide",
 
-  // "forgot-email.form.email.hint": "An email will be sent to this address with a further instructions.",
-  // TODO Source message changed - Revise the translation
-  "forgot-email.form.email.hint": "Cette adresse sera vérifiée et utilisée en tant qu'identifiant de connexion.",
+  // "forgot-email.form.email.hint": "An email will be sent to this address with a further instructions."
+  "forgot-email.form.email.hint": "Un e-mail contenant des instructions supplémentaires sera envoyé à cette adresse.",
 
-  // "forgot-email.form.submit": "Reset password",
-  // TODO Source message changed - Revise the translation
-  "forgot-email.form.submit": "Sauvegarder",
+  // "forgot-email.form.submit": "Reset password"
+  "forgot-email.form.submit": "Réinitialiser le mot de passe",
 
-  // "forgot-email.form.success.head": "Password reset email sent",
-  // TODO Source message changed - Revise the translation
-  "forgot-email.form.success.head": "Courrier électronique de vérification envoyé",
+  // "forgot-email.form.success.head": "Password reset email sent"
+  "forgot-email.form.success.head": "E-mail de réinitialisation du mot de passe envoyé",
 
   // "forgot-email.form.success.content": "An email has been sent to {{ email }} containing a special URL and further instructions.",
   "forgot-email.form.success.content": "Un courrier électronique a été envoyé à {{ email }} avec une URL d'activation et de plus amples instructions.",
@@ -3047,9 +3008,8 @@
   // "forgot-password.form.head": "Forgot Password",
   "forgot-password.form.head": "Mot de passe oublié",
 
-  // "forgot-password.form.info": "Enter a new password in the box below, and confirm it by typing it again into the second box.",
-  // TODO Source message changed - Revise the translation
-  "forgot-password.form.info": "Entrer un nouveau mot de passe dans la case ci-dessous et le confirmer en l'entrant à nouveau dans la seconde case. Le mot de passe doit comporter au moins six caractères.",
+  // "forgot-password.form.info":"Enter a new password in the box below, and confirm it by typing it again into the second box."
+  "forgot-password.form.info": "Saisissez un nouveau mot de passe dans le champ ci-dessous, puis confirmez-le en le saisissant à nouveau dans le second champ.",
 
   // "forgot-password.form.card.security": "Security",
   "forgot-password.form.card.security": "Sécurité",
@@ -3067,8 +3027,7 @@
   "forgot-password.form.label.passwordrepeat": "Entrer à nouveau pour confirmer",
 
   // "forgot-password.form.error.empty-password": "Please enter a password in the boxes above.",
-  // TODO Source message changed - Revise the translation
-  "forgot-password.form.error.empty-password": "Veuillez entrer un mot de passe dans la case ci-dessous.",
+  "forgot-password.form.error.empty-password": "Veuillez saisir un mot de passe dans les champs ci-dessus.",
 
   // "forgot-password.form.error.matching-passwords": "The passwords do not match.",
   "forgot-password.form.error.matching-passwords": "Les mots de passe ne correspondent pas.",
@@ -3194,8 +3153,7 @@
   "form.repeatable.sort.tip": "Déposer l'objet dans la nouvelle position",
 
   // "grant-deny-request-copy.deny": "Deny access request",
-  // TODO Source message changed - Revise the translation
-  "grant-deny-request-copy.deny": "Ne pas envoyer de copie ",
+  "grant-deny-request-copy.deny": "Refuser la demande d’accès",
 
   // "grant-deny-request-copy.revoke": "Revoke access",
   "grant-deny-request-copy.revoke": "Résilier l'accès",
@@ -3204,8 +3162,7 @@
   "grant-deny-request-copy.email.back": "Retour",
 
   // "grant-deny-request-copy.email.message": "Optional additional message",
-  // TODO Source message changed - Revise the translation
-  "grant-deny-request-copy.email.message": "Message",
+  "grant-deny-request-copy.email.message": "Message additionnel (facultatif)",
 
   // "grant-deny-request-copy.email.message.empty": "Please enter a message",
   "grant-deny-request-copy.email.message.empty": "Veuillez entrer un message",
@@ -3226,8 +3183,7 @@
   "grant-deny-request-copy.email.subject.empty": "Veuillez entrer un sujet",
 
   // "grant-deny-request-copy.grant": "Grant access request",
-  // TODO Source message changed - Revise the translation
-  "grant-deny-request-copy.grant": "Envoyer une copie",
+  "grant-deny-request-copy.grant": "Approuver la demande d’accès",
 
   // "grant-deny-request-copy.header": "Document copy request",
   "grant-deny-request-copy.header": "Demande de copie de document",
@@ -3503,8 +3459,7 @@
   "info.coar-notify-support.breadcrumbs": "Soutien COAR Notify",
 
   // "item.alerts.private": "This item is non-discoverable",
-  // TODO Source message changed - Revise the translation
-  "item.alerts.private": "Cet Item est privé",
+  "item.alerts.private": "Cet élément n’est pas découvrable",
 
   // "item.alerts.withdrawn": "This item has been withdrawn",
   "item.alerts.withdrawn": "Cet Item a été retiré",
@@ -3525,8 +3480,7 @@
   "item.badge.status": "Statut de l'Item :",
 
   // "item.badge.private": "Non-discoverable",
-  // TODO Source message changed - Revise the translation
-  "item.badge.private": "Privé",
+  "item.badge.private": "Non découvrable",
 
   // "item.badge.withdrawn": "Withdrawn",
   "item.badge.withdrawn": "Retiré",
@@ -3535,8 +3489,7 @@
   "item.bitstreams.upload.bundle": "Bundle",
 
   // "item.bitstreams.upload.bundle.placeholder": "Select a bundle or input new bundle name",
-  // TODO Source message changed - Revise the translation
-  "item.bitstreams.upload.bundle.placeholder": "Selectionner un Bundle",
+  "item.bitstreams.upload.bundle.placeholder": "Sélectionnez un bundle ou saisissez un nouveau nom de bundle",
 
   // "item.bitstreams.upload.bundle.new": "Create bundle",
   "item.bitstreams.upload.bundle.new": "Créer un Bundle",
@@ -3902,8 +3855,7 @@
   "item.edit.metadata.notifications.discarded.content": "Vos modifications ont été annulées. Pour rétablir vos modifications, cliquer sur le bouton « Rétablir »",
 
   // "item.edit.metadata.notifications.discarded.title": "Changes discarded",
-  // TODO Source message changed - Revise the translation
-  "item.edit.metadata.notifications.discarded.title": "Modifications annulées",
+  "item.edit.metadata.notifications.discarded.title": "Les modifications ont été annulées",
 
   // "item.edit.metadata.notifications.error.title": "An error occurred",
   "item.edit.metadata.notifications.error.title": "Une erreur s'est produite",
@@ -3918,8 +3870,7 @@
   "item.edit.metadata.notifications.outdated.content": "L'Item sur lequel vous êtes en train de travailler a été édité par un autre utilisateur. Vos modifications en cours sont ignorées pour éviter des conflits",
 
   // "item.edit.metadata.notifications.outdated.title": "Changes outdated",
-  // TODO Source message changed - Revise the translation
-  "item.edit.metadata.notifications.outdated.title": "Modifications obsolètes",
+  "item.edit.metadata.notifications.outdated.title": "es modifications sont obsolètes",
 
   // "item.edit.metadata.notifications.saved.content": "Your changes to this item's metadata were saved.",
   "item.edit.metadata.notifications.saved.content": "Vos modifications aux métadonnées de cet Item ont été sauvegardées.",
@@ -4000,45 +3951,37 @@
   "item.edit.private.cancel": "Annuler",
 
   // "item.edit.private.confirm": "Make it non-discoverable",
-  // TODO Source message changed - Revise the translation
-  "item.edit.private.confirm": "Définir comme privé",
+  "item.edit.private.confirm": "Rendre non découvrable",
 
   // "item.edit.private.description": "Are you sure this item should be made non-discoverable in the archive?",
-  // TODO Source message changed - Revise the translation
-  "item.edit.private.description": "Êtes-vous certain(e) de vouloir définir cet Item comme privé?",
+  "item.edit.private.description": "Êtes-vous certain(e) de vouloir rendre cet élément non découvrable dans l’archive?",
 
   // "item.edit.private.error": "An error occurred while making the item non-discoverable",
-  // TODO Source message changed - Revise the translation
-  "item.edit.private.error": "Une erreur s'est produite lors de la privatisation de l'Item",
+  "item.edit.private.error": "Une erreur s’est produite lors du rendu non découvrable de l’élément",
 
   // "item.edit.private.header": "Make item non-discoverable: {{ id }}",
   "item.edit.private.header": "Rendre l'item {{ id }} non découvrable.",
 
   // "item.edit.private.success": "The item is now non-discoverable",
-  // TODO Source message changed - Revise the translation
-  "item.edit.private.success": "L'Item est désormais privé",
+  "item.edit.private.success": "L’élément n’est désormais plus découvrable",
 
   // "item.edit.public.cancel": "Cancel",
   "item.edit.public.cancel": "Annuler",
 
-  // "item.edit.public.confirm": "Make it discoverable",
-  // TODO Source message changed - Revise the translation
-  "item.edit.public.confirm": "Définir comme public",
+  // "item.edit.public.confirm": "Make it discoverable"
+  "item.edit.public.confirm": "Rendre découvrable",
 
-  // "item.edit.public.description": "Are you sure this item should be made discoverable in the archive?",
-  // TODO Source message changed - Revise the translation
-  "item.edit.public.description": "Êtes-vous certain(e) de vouloir définir cet Item comme public?",
+  // "item.edit.public.description": "Are you sure this item should be made discoverable in the archive?"
+  "item.edit.public.description": "Êtes-vous certain(e) de vouloir rendre cet élément découvrable dans l’archive ?",
 
-  // "item.edit.public.error": "An error occurred while making the item discoverable",
-  // TODO Source message changed - Revise the translation
-  "item.edit.public.error": "Une erreur s'est produite lors de la définition de l'Item en tant qu'Item public",
+  // "item.edit.public.error": "An error occurred while making the item discoverable"
+  "item.edit.public.error": "Une erreur s’est produite lors du rendu découvrable de l’élément",
 
   // "item.edit.public.header": "Make item discoverable: {{ id }}",
   "item.edit.public.header": "Rendre l'item {{ id }} découvrable.",
 
-  // "item.edit.public.success": "The item is now discoverable",
-  // TODO Source message changed - Revise the translation
-  "item.edit.public.success": "L'Item est désormais public",
+  // "item.edit.public.success": "The item is now discoverable"
+  "item.edit.public.success": "L’élément est désormais découvrable",
 
   // "item.edit.reinstate.cancel": "Cancel",
   "item.edit.reinstate.cancel": "Annuler",
@@ -4163,21 +4106,17 @@
   // "item.edit.tabs.status.buttons.move.label": "Move item to another collection",
   "item.edit.tabs.status.buttons.move.label": "Déplacer l'Item dans une autre collection",
 
-  // "item.edit.tabs.status.buttons.private.button": "Make it non-discoverable...",
-  // TODO Source message changed - Revise the translation
-  "item.edit.tabs.status.buttons.private.button": "Définir comme privé...",
+  // "item.edit.tabs.status.buttons.private.button": "Make it non-discoverable..."
+  "item.edit.tabs.status.buttons.private.button": "Rendre non découvrable...",
 
-  // "item.edit.tabs.status.buttons.private.label": "Make item non-discoverable",
-  // TODO Source message changed - Revise the translation
-  "item.edit.tabs.status.buttons.private.label": "Définir l'Item en tant que document privé",
+  // "item.edit.tabs.status.buttons.private.label": "Make item non-discoverable"
+  "item.edit.tabs.status.buttons.private.label": "Rendre l’élément non découvrable",
 
-  // "item.edit.tabs.status.buttons.public.button": "Make it discoverable...",
-  // TODO Source message changed - Revise the translation
-  "item.edit.tabs.status.buttons.public.button": "Définir comme public...",
+  // "item.edit.tabs.status.buttons.public.button": "Make it discoverable..."
+  "item.edit.tabs.status.buttons.public.button": "Rendre découvrable...",
 
-  // "item.edit.tabs.status.buttons.public.label": "Make item discoverable",
-  // TODO Source message changed - Revise the translation
-  "item.edit.tabs.status.buttons.public.label": "Définir l'Item en tant que document public",
+  // "item.edit.tabs.status.buttons.public.label": "Make item discoverable"
+  "item.edit.tabs.status.buttons.public.label": "Rendre l’élément découvrable",
 
   // "item.edit.tabs.status.buttons.reinstate.button": "Reinstate...",
   "item.edit.tabs.status.buttons.reinstate.button": "Réintégrer...",
@@ -4579,8 +4518,7 @@
   "item.preview.dc.rights": "Droits",
 
   // "item.preview.dc.identifier.other": "Other Identifier",
-  // TODO Source message changed - Revise the translation
-  "item.preview.dc.identifier.other": "Autre identifiant :",
+  "item.preview.dc.identifier.other": "Autre identifiant",
 
   // "item.preview.dc.relation.issn": "ISSN",
   "item.preview.dc.relation.issn": "ISSN",
@@ -4670,8 +4608,7 @@
   "item.preview.dc.identifier.openalex": "Identifiant OpenAlex",
 
   // "item.preview.dc.description": "Description",
-  // TODO Source message changed - Revise the translation
-  "item.preview.dc.description": "Description :",
+  "item.preview.dc.description": "Description",
 
   // "item.select.confirm": "Confirm selected",
   "item.select.confirm": "Confirmer la sélection",
@@ -5541,15 +5478,13 @@
   "mydspace.results.no-uri": "Aucune URI",
 
   // "mydspace.search-form.placeholder": "Search in MyDSpace...",
-  // TODO Source message changed - Revise the translation
-  "mydspace.search-form.placeholder": "Rechercher dans mon compte DSpace...",
+  "mydspace.search-form.placeholder": "Rechercher dans MyDSpace...",
 
   // "mydspace.show.workflow": "Workflow tasks",
   "mydspace.show.workflow": "Tableau de suivi",
 
   // "mydspace.show.workspace": "Your submissions",
-  // TODO Source message changed - Revise the translation
-  "mydspace.show.workspace": "Vos dépôts",
+  "mydspace.show.workspace": "Mes dépôts",
 
   // "mydspace.show.supervisedWorkspace": "Supervised items",
   "mydspace.show.supervisedWorkspace": "Items supervisés",
@@ -5621,7 +5556,6 @@
   "nav.user-profile-menu-and-logout": "Profil utilisateur et déconnexion",
 
   // "nav.logout": "Log Out",
-  // TODO Source message changed - Revise the translation
   "nav.logout": "Se déconnecter",
 
   // "nav.main.description": "Main navigation bar",
@@ -5646,7 +5580,6 @@
   "nav.stop-impersonating": "Retour à votre propre EPerson",
 
   // "nav.subscriptions": "Subscriptions",
-  // TODO Source message changed - Revise the translation
   "nav.subscriptions": "Abonnements",
 
   // "nav.toggle": "Toggle navigation",
@@ -6277,8 +6210,7 @@
   "profile.security.form.error.matching-passwords": "Les mots de passe ne correspondent pas.",
 
   // "profile.security.form.info": "Optionally, you can enter a new password in the box below, and confirm it by typing it again into the second box.",
-  // TODO Source message changed - Revise the translation
-  "profile.security.form.info": "Optionnellement, un nouveau mot de passe peut être entré dans la case ci-dessous. Le doit comporter au moins six caractères.",
+  "profile.security.form.info": "Vous pouvez, en option, saisir un nouveau mot de passe dans le champ ci-dessous et le confirmer en le saisissant à nouveau dans le second champ.",
 
   // "profile.security.form.label.password": "Password",
   "profile.security.form.label.password": "Mot de passe",
@@ -6533,8 +6465,7 @@
   "register-page.create-profile.security.header": "Sécurité",
 
   // "register-page.create-profile.security.info": "Please enter a password in the box below, and confirm it by typing it again into the second box.",
-  // TODO Source message changed - Revise the translation
-  "register-page.create-profile.security.info": "Veuillez entrer un mot de passe dans la case ci-dessous et confirmer en l'entrant à nouveau dans la seconde case. Le mot de passe doit comporter au moins six caractères.",
+  "register-page.create-profile.security.info": "Veuillez saisir un mot de passe dans le champ ci-dessous et le confirmer en le saisissant à nouveau dans le second champ.",
 
   // "register-page.create-profile.security.label.password": "Password *",
   "register-page.create-profile.security.label.password": "Mot de passe *",
@@ -6663,8 +6594,7 @@
   "relationships.Person.isOrgUnitOfPerson.OrgUnit": "Structures organisationnelles",
 
   // "relationships.Person.isPublicationOfContributor.Publication": "Publications (contributor to)",
-  // TODO Source message changed - Revise the translation
-  "relationships.Person.isPublicationOfContributor.Publication": "Publications",
+  "relationships.Person.isPublicationOfContributor.Publication": "Publications (en tant que contributeur)",
 
   // "relationships.Project.isPublicationOfProject.Publication": "Publications",
   "relationships.Project.isPublicationOfProject.Publication": "Publications",
@@ -6691,12 +6621,10 @@
   "relationships.OrgUnit.isPublicationOfAuthor.Publication": "Publications rédigées",
 
   // "relationships.OrgUnit.isPublicationOfContributor.Publication": "Publications (contributor to)",
-  // TODO Source message changed - Revise the translation
-  "relationships.OrgUnit.isPublicationOfContributor.Publication": "Publications",
+  "relationships.OrgUnit.isPublicationOfContributor.Publication": "Publications (en tant que contributeur)",
 
   // "relationships.OrgUnit.isProjectOfFundingAgency.Project": "Research Projects (funder of)",
-  // TODO Source message changed - Revise the translation
-  "relationships.OrgUnit.isProjectOfFundingAgency.Project": "Projets de recherche",
+  "relationships.OrgUnit.isProjectOfFundingAgency.Project": "Projets de recherche (en tant qu’organisme financeur)",
 
   // "relationships.JournalIssue.isJournalVolumeOfIssue.JournalVolume": "Journal Volume",
   "relationships.JournalIssue.isJournalVolumeOfIssue.JournalVolume": "Volume de revue",
@@ -6945,8 +6873,7 @@
   "search.filters.applied.f.dateSubmitted": "Date de dépôt",
 
   // "search.filters.applied.f.discoverable": "Non-discoverable",
-  // TODO Source message changed - Revise the translation
-  "search.filters.applied.f.discoverable": "Privé",
+  "search.filters.applied.f.discoverable": "Non découvrable",
 
   // "search.filters.applied.f.entityType": "Item Type",
   "search.filters.applied.f.entityType": "Type d'Item",
@@ -6989,91 +6916,69 @@
   // "search.filters.applied.f.withdrawn": "Withdrawn",
   "search.filters.applied.f.withdrawn": "Retiré",
 
-  // "search.filters.applied.f.graphitemtype": "Item type",
-  // TODO New key - Add a translation
-  "search.filters.applied.f.graphitemtype": "Item type",
+  // "search.filters.applied.f.graphitemtype": "Item type"
+  "search.filters.applied.f.graphitemtype": "Type d’élément",
 
-  // "search.filters.applied.f.graphpubldate": "Public date",
-  // TODO New key - Add a translation
-  "search.filters.applied.f.graphpubldate": "Public date",
+  // "search.filters.applied.f.graphpubldate": "Public date"
+  "search.filters.applied.f.graphpubldate": "Date de publication publique",
 
-  // "search.filters.applied.f.graphpubldateltr": "Public date LTR",
-  // TODO New key - Add a translation
-  "search.filters.applied.f.graphpubldateltr": "Public date LTR",
+  // "search.filters.applied.f.graphpubldateltr": "Public date LTR"
+  "search.filters.applied.f.graphpubldateltr": "Date de publication publique G→D",
 
-  // "search.filters.applied.f.graphpubldatetrl": "Public date RTL",
-  // TODO New key - Add a translation
-  "search.filters.applied.f.graphpubldatetrl": "Public date RTL",
+  // "search.filters.applied.f.graphpubldatetrl": "Public date RTL"
+  "search.filters.applied.f.graphpubldatetrl": "Date de publication publique D→G",
 
-  // "search.filters.applied.f.organization": "Organisation",
-  // TODO New key - Add a translation
+  // "search.filters.applied.f.organization": "Organisation"
   "search.filters.applied.f.organization": "Organisation",
 
   // "search.filters.applied.f.knowslanguage": "Language",
   "search.filters.applied.f.knowslanguage": "Langue",
 
-  // "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
+  // "search.filters.applied.charts.defaultConfiguration.title": "Search Output"
+  "search.filters.applied.charts.defaultConfiguration.title": "Résultats de recherche",
 
-  // "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Date Issued",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Date Issued",
+  // "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Date Issued"
+  "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Date de publication",
 
-  // "search.filters.applied.charts.chart.pie.more-value": "More",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.chart.pie.more-value": "More",
+  // "search.filters.applied.charts.chart.pie.more-value": "More"
+  "search.filters.applied.charts.chart.pie.more-value": "Plus",
 
-  // "search.filters.applied.charts.chart.pie.itemtype_filter.tab": "Item Type",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.chart.pie.itemtype_filter.tab": "Item Type",
+  // "search.filters.applied.charts.chart.pie.itemtype_filter.tab": "Item Type"
+  "search.filters.applied.charts.chart.pie.itemtype_filter.tab": "Type d’élément",
 
-  // "search.filters.applied.charts.graphitemtype.tab": "Visualization by Type",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.graphitemtype.tab": "Visualization by Type",
+  // "search.filters.applied.charts.graphitemtype.tab": "Visualization by Type"
+  "search.filters.applied.charts.graphitemtype.tab": "Visualisation par type",
 
-  // "search.filters.applied.charts.graphpubldate.tab": "Visualization by Date",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.graphpubldate.tab": "Visualization by Date",
+  // "search.filters.applied.charts.graphpubldate.tab": "Visualization by Date"
+  "search.filters.applied.charts.graphpubldate.tab": "Visualisation par date",
 
-  // "search.filters.applied.charts.graphpubldateltr.tab": "Visualization Demo LTR",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.graphpubldateltr.tab": "Visualization Demo LTR",
+  // "search.filters.applied.charts.graphpubldateltr.tab": "Visualization Demo LTR"
+  "search.filters.applied.charts.graphpubldateltr.tab": "Démonstration de visualisation G→D",
 
-  // "search.filters.applied.charts.graphpubldatetrl.tab": "Visualization Demo RTL",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.graphpubldatetrl.tab": "Visualization Demo RTL",
+  // "search.filters.applied.charts.graphpubldatetrl.tab": "Visualization Demo RTL"
+  "search.filters.applied.charts.graphpubldatetrl.tab": "Démonstration de visualisation D→G",
 
-  // "search.filters.applied.charts.default.title": "Search Output",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.default.title": "Search Output",
+  // "search.filters.applied.charts.default.title": "Search Output"
+  "search.filters.applied.charts.default.title": "Résultats de recherche",
 
-  // "search.filters.applied.charts.site.title": "Search Output",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.site.title": "Search Output",
+  // "search.filters.applied.charts.site.title": "Search Output"
+  "search.filters.applied.charts.site.title": "Résultats de recherche",
 
-  // "search.filters.applied.charts.RELATION.Person.researchoutputs.title": "Research Output",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.RELATION.Person.researchoutputs.title": "Research Output",
+  // "search.filters.applied.charts.RELATION.Person.researchoutputs.title": "Research Output"
+  "search.filters.applied.charts.RELATION.Person.researchoutputs.title": "Résultats de recherche",
 
-  // "search.filters.applied.charts.RELATION.Project.fundings.title": "Fundings",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.RELATION.Project.fundings.title": "Fundings",
+  // "search.filters.applied.charts.RELATION.Project.fundings.title": "Fundings"
+  "search.filters.applied.charts.RELATION.Project.fundings.title": "Financements",
 
-  // "search.filters.applied.charts.RELATION.Project.researchoutputs.title": "Research Output",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.RELATION.Project.researchoutputs.title": "Research Output",
+  // "search.filters.applied.charts.RELATION.Project.researchoutputs.title": "Research Output"
+  "search.filters.applied.charts.RELATION.Project.researchoutputs.title": "Résultats de recherche",
 
-  // "search.filters.applied.charts.no.data.found": "No data found",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.no.data.found": "No data found",
+  // "search.filters.applied.charts.no.data.found": "No data found"
+  "search.filters.applied.charts.no.data.found": "Aucune donnée trouvée",
 
-  // "search.filters.applied.charts.show.hide": "Show/Hide",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.show.hide": "Show/Hide",
-
-
-
+  // "search.filters.applied.charts.show.hide": "Show/Hide"
+  "search.filters.applied.charts.show.hide": "Afficher / Masquer",
+  
 
   // "search.filters.applied.operator.equals": "",
   "search.filters.applied.operator.equals": "est égal à",
@@ -7196,8 +7101,7 @@
   "search.filters.filter.dateSubmitted.label": "Recherche d'une date de dépôt",
 
   // "search.filters.filter.discoverable.head": "Non-discoverable",
-  // TODO Source message changed - Revise the translation
-  "search.filters.filter.discoverable.head": "Privé",
+  "search.filters.filter.discoverable.head": "Non découvrable",
 
   // "search.filters.filter.withdrawn.head": "Withdrawn",
   "search.filters.filter.withdrawn.head": "Retiré",
@@ -7653,7 +7557,6 @@
   "submission.general.cancel": "Annuler",
 
   // "submission.general.cannot_submit": "You don't have permission to make a new submission.",
-  // TODO Source message changed - Revise the translation
   "submission.general.cannot_submit": "Vous n'avez pas les droits requis pour faire une nouvelle soumission.",
 
   // "submission.general.deposit": "Deposit",
@@ -8707,7 +8610,6 @@
   "submission.sections.license.required": "Vous devez accepter la licence",
 
   // "submission.sections.license.notgranted": "You must accept the license",
-  // TODO Source message changed - Revise the translation
   "submission.sections.license.notgranted": "Vous devez accepter la licence",
 
   // "submission.sections.sherpa.publication.information": "Publication information",
@@ -8798,8 +8700,7 @@
   "submission.workflow.generic.delete": "Supprimer",
 
   // "submission.workflow.generic.delete-help": "Select this option to discard this item. You will then be asked to confirm it.",
-  // TODO Source message changed - Revise the translation
-  "submission.workflow.generic.delete-help": "Si vous souhaitez supprimer cet Item, cliquer sur « Supprimer ». Une confirmation vous sera alors demandée.",
+  "submission.workflow.generic.delete-help": "Sélectionnez cette option pour abandonner cet élément. Une confirmation vous sera ensuite demandée.",
 
   // "submission.workflow.generic.edit": "Edit",
   "submission.workflow.generic.edit": "Éditer",
@@ -9078,8 +8979,7 @@
   "uploader.or": ", ou ",
 
   // "uploader.processing": "Processing uploaded file(s)... (it's now safe to close this page)",
-  // TODO Source message changed - Revise the translation
-  "uploader.processing": "En cours de traitement",
+  "uploader.processing": "Traitement des fichiers téléchargés en cours… (vous pouvez désormais fermer cette page en toute sécurité)",
 
   // "uploader.queue-length": "Queue length",
   "uploader.queue-length": "Longueur de la file d'attente",
@@ -9751,8 +9651,7 @@
   "access-control-replace-all": "Remplacer les conditions d'accès",
 
   // "access-control-add-to-existing": "Add to existing ones",
-  // TODO Source message changed - Revise the translation
-  "access-control-add-to-existing": "Ajouter aux conditions d'accès existantes",
+  "access-control-add-to-existing": "Ajouter aux éléments existants",
 
   // "access-control-limit-to-specific": "Limit the changes to specific bitstreams",
   "access-control-limit-to-specific": "Limiter les modifications à des Bitstreams spécifiques",
@@ -10540,7 +10439,6 @@
   "search.filters.applied.f.queue_status": "Statut de la file d'attente",
 
   // "search.filters.queue_status.0,authority": "Untrusted Ip",
-  // TODO Source message changed - Revise the translation
   "search.filters.queue_status.0,authority": "IP non fiable",
 
   // "search.filters.queue_status.1,authority": "Queued",
@@ -11027,7 +10925,6 @@
   "metadata-export-filtered-items.columns.warning": "L'exportation CSV inclut automatiquement tous les champs pertinents, sans égard au contenu sélectionné de cette liste.",
 
   // "embargo.listelement.badge": "Embargo until {{ date }}",
-  // TODO Source message changed - Revise the translation
   "embargo.listelement.badge": "Embargo jusqu'à {{ date }}",
 
   // "metadata-export-search.submit.error.limit-exceeded": "Only the first {{limit}} items will be exported",
@@ -11037,16 +10934,13 @@
   "file-download-link.request-copy": "Demander une copie de ",
 
   // "item.preview.organization.url": "URL",
-  // TODO New key - Add a translation
   "item.preview.organization.url": "URL",
 
   // "item.preview.organization.address.addressLocality": "City",
-  // TODO New key - Add a translation
-  "item.preview.organization.address.addressLocality": "City",
+  "item.preview.organization.address.addressLocality": "Ville",
 
   // "item.preview.organization.alternateName": "Alternative name",
-  // TODO New key - Add a translation
-  "item.preview.organization.alternateName": "Alternative name",
+  "item.preview.organization.alternateName": "Nom alternatif",
 
 
 }
