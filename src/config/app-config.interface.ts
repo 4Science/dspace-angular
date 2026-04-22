@@ -37,6 +37,7 @@ import {
   LayoutConfig,
 } from './layout-config.interfaces';
 import { LoaderConfig } from './loader-config.interfaces';
+import { LuckySearchRedirectConfig } from './lucky-search-redirect-config';
 import { MarkdownConfig } from './markdown-config.interface';
 import { MatomoConfig } from './matomo-config.interface';
 import { MediaViewerConfig } from './media-viewer-config.interface';
@@ -108,6 +109,8 @@ interface AppConfig extends Config {
   identifierSubtypes: IdentifierSubtypesConfig[];
   datadogRum?: DatadogRumConfig;
   matomo?: MatomoConfig;
+  permanentRedirectPaths?: string[];
+  luckySearchRedirects?: LuckySearchRedirectConfig;
 }
 
 /**
