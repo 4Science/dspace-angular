@@ -6540,6 +6540,10 @@
 
   "form.other-information.dc.identifier.issn": "ISSN",
 
+  "form.other-information.dc_publisher": "Publisher",
+
+  "form.other-information.dc_relation_issn": "ISSN",
+
   "statistics.table.downloadReports.title.TotalVisits": "Most downloaded",
 
   "statistics.table.downloadReports.title.TopItems": "Most downloaded",
