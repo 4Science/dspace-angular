@@ -16,7 +16,7 @@ definitions:
           - echo "Using commit hash $HASH_COMMIT"
           - git config --global user.email "${BB_USER}"
           - git config --global user.name "${BB_EMAIL}"
-          - git clone https://x-token-auth:${E2ERUNNERS_ACCESS_TOKEN}@${E2E_VALUES_REPO}
+          - git clone https://${BB_USER}:${BB_USER_TOKEN}@${E2E_VALUES_REPO}
           - cd e2erunners-values
           - sed "s#HASH_COMMIT#${HASH_COMMIT}#g" TPL-cris-2025 > ${HASH_COMMIT}
           - sed -i "s#BRANCH_NAME#${BRANCH_NAME}#g" TPL-cris-2025 ${HASH_COMMIT}
@@ -24,7 +24,7 @@ definitions:
           - git commit -m "Add configuration for e2e-${HASH_COMMIT}" || echo "No changes to commit"
           - git push
           - cd ..
-          - git clone https://x-token-auth:${HELM_CHARTS_ACCESS_TOKEN}@${HELM_CHARTS_REPO}
+          - git clone https://${BB_USER}:${BB_USER_TOKEN}@${HELM_CHARTS_REPO}
           - cd helm-charts
           - PATH_VALUE=" e2e-$HASH_COMMIT"
           - printf "  - name:%s\n" "$PATH_VALUE" >> ${E2E_VALUES}
@@ -42,7 +42,7 @@ definitions:
           - echo "Using commit hash $HASH_COMMIT"
           - git config --global user.email "${BB_USER}"
           - git config --global user.name "${BB_EMAIL}"
-          - git clone https://x-token-auth:${E2ERUNNERS_ACCESS_TOKEN}@${E2E_VALUES_REPO}
+          - git clone https://${BB_USER}:${BB_USER_TOKEN}@${E2E_VALUES_REPO}
           - cd e2erunners-values
           - sed "s#HASH_COMMIT#${HASH_COMMIT}#g" TPL-cris-2025 > ${HASH_COMMIT}
           - sed -i "s#BRANCH_NAME#${BRANCH_NAME}#g" TPL-cris-2025 ${HASH_COMMIT}
@@ -50,7 +50,7 @@ definitions:
           - git commit -m "Add configuration for e2e-${HASH_COMMIT}" || echo "No changes to commit"
           - git push
           - cd ..
-          - git clone https://x-token-auth:${HELM_CHARTS_ACCESS_TOKEN}@${HELM_CHARTS_REPO}
+          - git clone https://${BB_USER}:${BB_USER_TOKEN}@${HELM_CHARTS_REPO}
           - cd helm-charts
           - PATH_VALUE=" e2e-$HASH_COMMIT"
           - printf "  - name:%s\n" "$PATH_VALUE" >> ${E2E_VALUES}
@@ -183,7 +183,7 @@ definitions:
           - export HASH_COMMIT=${BITBUCKET_COMMIT:0:8}
           - export BRANCH_NAME=$(echo "$BITBUCKET_BRANCH" | tr '[:upper:]' '[:lower:]' | sed 's|/|--|g')
           - export BRANCH_FILE=$(echo "$BITBUCKET_BRANCH" | awk -F'/' '{if(NF==1)val=$1;else if(NF==2)val=$2;else if(NF==3)val=$2;else val=$3;gsub(/_/, "-", val);print tolower(val)}')
-          - git clone https://x-token-auth:${DSPACE_VALUES_ACCESS_TOKEN}@${DSPACE_VALUES_REPO}
+          - git clone https://${BB_USER}:${BB_USER_TOKEN}@${DSPACE_VALUES_REPO}
           - cd dspace-values
           - '[ -f "dev/${BRANCH_FILE}" ] && sed -i "/^angular:/,/^[^ ]/s/\(tag: \).*/\1${BRANCH_NAME}-${HASH_COMMIT}/" "dev/${BRANCH_FILE}" && sed -i "s/^\([[:space:]]*replicaCount:\) 0/\1 1/" "dev/${BRANCH_FILE}"'
           - git config --global user.email "${BB_EMAIL}"
@@ -198,7 +198,7 @@ definitions:
           - export HASH_COMMIT=${BITBUCKET_COMMIT:0:8}
           - export BRANCH_NAME=$(echo "$BITBUCKET_BRANCH" | tr '[:upper:]' '[:lower:]' | sed 's|/|--|g')
           - export BRANCH_FILE=$(echo "$BITBUCKET_BRANCH" | awk -F'/' '{if(NF==1)val=$1;else if(NF==2)val=$2;else if(NF==3)val=$2;else val=$3;gsub(/_/, "-", val);print tolower(val)}')
-          - git clone https://x-token-auth:${DSPACE_VALUES_ACCESS_TOKEN}@${DSPACE_VALUES_REPO}
+          - git clone https://${BB_USER}:${BB_USER_TOKEN}@${DSPACE_VALUES_REPO}
           - cd dspace-values
           - '[ -f "staging/${BRANCH_FILE}" ] && sed -i "/^angular:/,/^[^ ]/s/\(tag: \).*/\1${BRANCH_NAME}-${HASH_COMMIT}/" "staging/${BRANCH_FILE}" && sed -i "s/^\([[:space:]]*replicaCount:\) 0/\1 1/" "staging/${BRANCH_FILE}"'
           - git config --global user.email "${BB_EMAIL}"
@@ -213,7 +213,7 @@ definitions:
           - export HASH_COMMIT=${BITBUCKET_COMMIT:0:8}
           - export BRANCH_NAME=$(echo "$BITBUCKET_BRANCH" | tr '[:upper:]' '[:lower:]' | sed 's|/|--|g')
           - export BRANCH_FILE=$(echo "$BITBUCKET_BRANCH" | awk -F'/' '{if(NF==1)val=$1;else if(NF==2)val=$2;else if(NF==3)val=$2;else val=$3;gsub(/_/, "-", val);print tolower(val)}')
-          - git clone https://x-token-auth:${DSPACE_VALUES_ACCESS_TOKEN}@${DSPACE_VALUES_REPO}
+          - git clone https://${BB_USER}:${BB_USER_TOKEN}@${DSPACE_VALUES_REPO}
           - cd dspace-values
           - '[ -f */test/"${BRANCH_FILE}" ] && sed -i "/^angular:/,/^[^ ]/s/\(tag: \).*/\1${BRANCH_NAME}-${HASH_COMMIT}/" */test/"${BRANCH_FILE}" && sed -i "s/^\([[:space:]]*replicaCount:\) 0/\1 1/" */test/"${BRANCH_FILE}"'
           - git config --global user.email "${BB_EMAIL}"
@@ -228,7 +228,7 @@ definitions:
           - export HASH_COMMIT=${BITBUCKET_COMMIT:0:8}
           - export BRANCH_NAME=$(echo "$BITBUCKET_BRANCH" | tr '[:upper:]' '[:lower:]' | sed 's|/|--|g')
           - export BRANCH_FILE=$(echo "$BITBUCKET_BRANCH" | awk -F'/' '{if(NF==1)val=$1;else if(NF==2)val=$2;else if(NF==3)val=$2;else val=$3;gsub(/_/, "-", val);print tolower(val)}')
-          - git clone https://x-token-auth:${DSPACE_VALUES_ACCESS_TOKEN}@${DSPACE_VALUES_REPO}
+          - git clone https://${BB_USER}:${BB_USER_TOKEN}@${DSPACE_VALUES_REPO}
           - cd dspace-values
           - '[ -f "dev/${BRANCH_FILE}" ] && sed -i "s/^\([[:space:]]*replicaCount:\) 0/\1 1/" "dev/${BRANCH_FILE}"'
           - git config --global user.email "${BB_USER}"
@@ -243,7 +243,7 @@ definitions:
           - export HASH_COMMIT=${BITBUCKET_COMMIT:0:8}
           - export BRANCH_NAME=$(echo "$BITBUCKET_BRANCH" | tr '[:upper:]' '[:lower:]' | sed 's|/|--|g')
           - export BRANCH_FILE=$(echo "$BITBUCKET_BRANCH" | awk -F'/' '{if(NF==1)val=$1;else if(NF==2)val=$2;else if(NF==3)val=$2;else val=$3;gsub(/_/, "-", val);print tolower(val)}')
-          - git clone https://x-token-auth:${DSPACE_VALUES_ACCESS_TOKEN}@${DSPACE_VALUES_REPO}
+          - git clone https://${BB_USER}:${BB_USER_TOKEN}@${DSPACE_VALUES_REPO}
           - cd dspace-values
           - '[ -f "staging/${BRANCH_FILE}" ] && sed -i "s/^\([[:space:]]*replicaCount:\) 0/\1 1/" "staging/${BRANCH_FILE}"'
           - git config --global user.email "${BB_USER}"
@@ -258,7 +258,7 @@ definitions:
           - export HASH_COMMIT=${BITBUCKET_COMMIT:0:8}
           - export BRANCH_NAME=$(echo "$BITBUCKET_BRANCH" | tr '[:upper:]' '[:lower:]' | sed 's|/|--|g')
           - export BRANCH_FILE=$(echo "$BITBUCKET_BRANCH" | awk -F'/' '{if(NF==1)val=$1;else if(NF==2)val=$2;else if(NF==3)val=$2;else val=$3;gsub(/_/, "-", val);print tolower(val)}')
-          - git clone https://x-token-auth:${DSPACE_VALUES_ACCESS_TOKEN}@${DSPACE_VALUES_REPO}
+          - git clone https://${BB_USER}:${BB_USER_TOKEN}@${DSPACE_VALUES_REPO}
           - cd dspace-values
           - '[ -f */test/"${BRANCH_FILE}" ] && sed -i "s/^\([[:space:]]*replicaCount:\) 0/\1 1/" "staging/${BRANCH_FILE}"'
           - git config --global user.email "${BB_USER}"
