@@ -5,9 +5,7 @@ import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 
 import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder/json-patch-operation-path-combiner';
 import { JsonPatchOperationsBuilder } from '../../../core/json-patch/builder/json-patch-operations-builder';
-import {
-  WorkspaceitemSectionSherpaPoliciesObject
-} from '../../../core/submission/models/workspaceitem-section-sherpa-policies.model';
+import { WorkspaceitemSectionJiscOpfPoliciesObject } from '../../../core/submission/models/workspaceitem-section-opf-policies.model';
 import { renderSectionFor } from '../sections-decorator';
 import { SectionsType } from '../sections-type';
 import { SectionDataObject } from '../models/section-data.model';
@@ -17,21 +15,21 @@ import { SubmissionService } from '../../submission.service';
 import { hasValue, isEmpty } from '../../../shared/empty.util';
 
 /**
- * This component represents a section for the sherpa policy informations structure.
+ * This component represents a section for the Jisc Open Policy Finder policy informations structure.
  */
 @Component({
-  selector: 'ds-section-sherpa-policies',
-  templateUrl: './section-sherpa-policies.component.html',
-  styleUrls: ['./section-sherpa-policies.component.scss']
+  selector: 'ds-section-opf-policies',
+  templateUrl: './section-opf-policies.component.html',
+  styleUrls: ['./section-opf-policies.component.scss']
 })
-@renderSectionFor(SectionsType.SherpaPolicies)
-export class SubmissionSectionSherpaPoliciesComponent extends SectionModelComponent {
+@renderSectionFor(SectionsType.OpfPolicies)
+export class SubmissionSectionJiscOpfPoliciesComponent extends SectionModelComponent {
 
   /**
    * The accesses section data
    * @type {WorkspaceitemSectionAccessesObject}
    */
-  public sherpaPoliciesData$: BehaviorSubject<WorkspaceitemSectionSherpaPoliciesObject> = new BehaviorSubject<WorkspaceitemSectionSherpaPoliciesObject>(null);
+  public jiscOpfPoliciesData$: BehaviorSubject<WorkspaceitemSectionJiscOpfPoliciesObject> = new BehaviorSubject<WorkspaceitemSectionJiscOpfPoliciesObject>(null);
 
   /**
    * The [[JsonPatchOperationPathCombiner]] object
@@ -93,8 +91,8 @@ export class SubmissionSectionSherpaPoliciesComponent extends SectionModelCompon
     this.pathCombiner = new JsonPatchOperationPathCombiner('sections', this.sectionData.id);
     this.subs.push(
       this.sectionService.getSectionData(this.submissionId, this.sectionData.id, this.sectionData.sectionType)
-        .subscribe((sherpaPolicies: WorkspaceitemSectionSherpaPoliciesObject) => {
-          this.sherpaPoliciesData$.next(sherpaPolicies);
+        .subscribe((opfPolicies: WorkspaceitemSectionJiscOpfPoliciesObject) => {
+          this.jiscOpfPoliciesData$.next(opfPolicies);
         })
     );
   }
@@ -113,11 +111,11 @@ export class SubmissionSectionSherpaPoliciesComponent extends SectionModelCompon
    * Check if section has no data
    */
   hasNoData(): boolean {
-    return isEmpty(this.sherpaPoliciesData$.value);
+    return isEmpty(this.jiscOpfPoliciesData$.value);
   }
 
   /**
-   * Refresh sherpa information
+   * Refresh Jisc Open Policy Finder information
    */
   refresh() {
     this.operationsBuilder.remove(this.pathCombiner.getPath('retrievalTime'));
