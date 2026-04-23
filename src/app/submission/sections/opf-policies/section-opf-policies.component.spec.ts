@@ -1,27 +1,27 @@
-import { SharedModule } from '../../../shared/shared.module';
-import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
-import { SubmissionServiceStub } from '../../../shared/testing/submission-service.stub';
-import { SherpaDataResponse } from '../../../shared/mocks/section-sherpa-policies.service.mock';
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
-
-import { SectionsService } from '../sections.service';
-import { SectionsServiceStub } from '../../../shared/testing/sections-service.stub';
-import { JsonPatchOperationsBuilder } from '../../../core/json-patch/builder/json-patch-operations-builder';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { BrowserModule, By } from '@angular/platform-browser';
-
-import { Store } from '@ngrx/store';
-import { AppState } from '../../../app.reducer';
-import { SubmissionSectionSherpaPoliciesComponent } from './section-sherpa-policies.component';
-import { SubmissionService } from '../../submission.service';
-import { DebugElement } from '@angular/core';
-import { TranslateLoaderMock } from '../../../shared/mocks/translate-loader.mock';
-import { of as observableOf } from 'rxjs';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-describe('SubmissionSectionSherpaPoliciesComponent', () => {
-  let component: SubmissionSectionSherpaPoliciesComponent;
-  let fixture: ComponentFixture<SubmissionSectionSherpaPoliciesComponent>;
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { of as observableOf } from 'rxjs';
+
+import { AppState } from '../../../app.reducer';
+import { JsonPatchOperationsBuilder } from '../../../core/json-patch/builder/json-patch-operations-builder';
+import { OpfDataResponse } from '../../../shared/mocks/section-opf-policies.service.mock';
+import { TranslateLoaderMock } from '../../../shared/mocks/translate-loader.mock';
+import { SharedModule } from '../../../shared/shared.module';
+import { SectionsServiceStub } from '../../../shared/testing/sections-service.stub';
+import { SubmissionServiceStub } from '../../../shared/testing/submission-service.stub';
+import { SubmissionService } from '../../submission.service';
+import { SectionsService } from '../sections.service';
+import { SubmissionSectionJiscOpfPoliciesComponent } from './section-opf-policies.component';
+
+describe('SubmissionSectionJiscOpfPoliciesComponent', () => {
+  let component: SubmissionSectionJiscOpfPoliciesComponent;
+  let fixture: ComponentFixture<SubmissionSectionJiscOpfPoliciesComponent>;
   let de: DebugElement;
 
   const sectionsServiceStub = new SectionsServiceStub();
@@ -35,20 +35,21 @@ describe('SubmissionSectionSherpaPoliciesComponent', () => {
   const storeStub = jasmine.createSpyObj('store', ['dispatch']);
 
   const sectionData = {
-    header: 'submit.progressbar.sherpaPolicies',
-    config: 'http://localhost:8080/server/api/config/submissionaccessoptions/SherpaPoliciesDefaultConfiguration',
+    id: 'opfPolicies',
+    header: 'submit.progressbar.opfPolicies',
+    config: 'http://localhost:8080/server/api/config/submissionaccessoptions/OpfPoliciesDefaultConfiguration',
     mandatory: true,
-    sectionType: 'sherpaPolicies',
+    sectionType: 'opfPolicies',
     collapsed: false,
     enabled: true,
-    data: SherpaDataResponse,
+    data: OpfDataResponse,
     errorsToShow: [],
     serverValidationErrors: [],
     isLoading: false,
-    isValid: true
+    isValid: true,
   };
 
-  describe('SubmissionSectionSherpaPoliciesComponent', () => {
+  describe('SubmissionSectionJiscOpfPoliciesComponent', () => {
 
     beforeEach(async () => {
       await TestBed.configureTestingModule({
@@ -58,30 +59,31 @@ describe('SubmissionSectionSherpaPoliciesComponent', () => {
           TranslateModule.forRoot({
             loader: {
               provide: TranslateLoader,
-              useClass: TranslateLoaderMock
-            }
+              useClass: TranslateLoaderMock,
+            },
           }),
           NgbCollapseModule,
-          SharedModule
+          SharedModule,
         ],
-        declarations: [SubmissionSectionSherpaPoliciesComponent],
+        declarations: [SubmissionSectionJiscOpfPoliciesComponent],
         providers: [
           { provide: SectionsService, useValue: sectionsServiceStub },
           { provide: JsonPatchOperationsBuilder, useValue: operationsBuilder },
-          { provide: SubmissionService, useValue: SubmissionServiceStub },
+          { provide: SubmissionService, useValue: new SubmissionServiceStub() },
           { provide: Store, useValue: storeStub },
           { provide: 'sectionDataProvider', useValue: sectionData },
           { provide: 'submissionIdProvider', useValue: '1508' },
-        ]
+        ],
+        schemas: [NO_ERRORS_SCHEMA],
       })
         .compileComponents();
     });
 
     beforeEach(inject([Store], (store: Store<AppState>) => {
-      fixture = TestBed.createComponent(SubmissionSectionSherpaPoliciesComponent);
+      fixture = TestBed.createComponent(SubmissionSectionJiscOpfPoliciesComponent);
       component = fixture.componentInstance;
       de = fixture.debugElement;
-      sectionsServiceStub.getSectionData.and.returnValue(observableOf(SherpaDataResponse));
+      sectionsServiceStub.getSectionData.and.returnValue(observableOf(OpfDataResponse));
       fixture.detectChanges();
     }));
 
