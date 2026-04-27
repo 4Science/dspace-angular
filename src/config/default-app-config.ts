@@ -53,10 +53,10 @@ import { FollowAuthorityMetadata } from './search-follow-metadata.interface';
 import { SearchConfig } from './search-page-config.interface';
 import { SearchResultConfig } from './search-result-config.interface';
 import { ServerConfig } from './server-config.interface';
+import { SSRConfig } from './ssr-config.interface';
 import { SubmissionConfig } from './submission-config.interface';
 import { ThemeConfig } from './theme.config';
 import { UIServerConfig } from './ui-server-config.interface';
-import { SSRConfig } from './ssr-config.interface';
 
 export class DefaultAppConfig implements AppConfig {
   production = false;
