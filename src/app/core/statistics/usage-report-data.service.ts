@@ -47,7 +47,7 @@ export class UsageReportDataService extends IdentifiableDataService<UsageReport>
     );
   }
 
-  searchStatistics(uri: string, page: number, size: number, categoryId?: string, startDate?: string, endDate?: string): Observable<UsageReport[]> {
+  searchStatistics(uri: string, page: number, size: number, categoryId?: string, startDate?: string, endDate?: string, excludePoints = false): Observable<UsageReport[]> {
     const params = [
       new RequestParam('uri', uri),
       new RequestParam('category', categoryId),
@@ -63,6 +63,10 @@ export class UsageReportDataService extends IdentifiableDataService<UsageReport>
       params.push(
         new RequestParam('endDate', endDate),
       );
+    }
+
+    if (excludePoints) {
+      params.push(new RequestParam('projection', 'usageReportPoints'));
     }
 
     return this.searchBy('object', {

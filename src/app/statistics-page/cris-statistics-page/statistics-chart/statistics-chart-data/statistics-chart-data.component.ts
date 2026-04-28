@@ -1,4 +1,7 @@
-import { isPlatformBrowser } from '@angular/common';
+import {
+  DOCUMENT,
+  isPlatformBrowser,
+} from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -20,6 +23,10 @@ import {
   ExportImageType,
   ExportService,
 } from '../../../../core/export-service/export.service';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../../../core/services/window.service';
 import { REPORT_DATA } from '../../../../core/statistics/data-report.service';
 import {
   Point,
@@ -66,6 +73,8 @@ export abstract class StatisticsChartDataComponent implements OnInit {
     @Inject(REPORT_DATA) public report: UsageReport,
     @Inject('categoryType') public categoryType: string,
     @Inject(PLATFORM_ID) protected platformId: any,
+    @Inject(NativeWindowService) protected _window: NativeWindowRef,
+    @Inject(DOCUMENT) protected document: any,
   ) {
 
     /* IMPORTANT
@@ -73,7 +82,7 @@ export abstract class StatisticsChartDataComponent implements OnInit {
        So we need to instantiate the class directly based on current the platform */
     if (isPlatformBrowser(this.platformId)) {
       import('../../../../core/export-service/browser-export.service').then((s) => {
-        this.exportService = new s.BrowserExportService(this.platformId);
+        this.exportService = new s.BrowserExportService(this.platformId, this._window, this.document);
       });
     } else {
       import('../../../../core/export-service/server-export.service').then((s) => {

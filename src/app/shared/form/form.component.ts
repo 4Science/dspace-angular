@@ -237,55 +237,74 @@ export class FormComponent implements OnDestroy, OnInit {
       this.formService.getForm(this.formId).pipe(
         filter((formState: FormEntry) => !!formState && (isNotEmpty(formState.errors) || isNotEmpty(this.formErrors))),
         map((formState) => formState.errors),
-        distinctUntilChanged())
-        .subscribe((errors: FormError[]) => {
-          const { formGroup, formModel } = this;
-          errors
-            .filter((error: FormError) => findIndex(this.formErrors, {
-              fieldId: error.fieldId,
-              fieldIndex: error.fieldIndex,
-            }) === -1)
-            .forEach((error: FormError) => {
-              const { fieldId } = error;
-              const { fieldIndex } = error;
-              let field: AbstractControl;
-              if (this.parentFormModel) {
-                field = this.formBuilderService.getFormControlById(fieldId, formGroup.parent as UntypedFormGroup, formModel, fieldIndex);
-              } else {
-                field = this.formBuilderService.getFormControlById(fieldId, formGroup, formModel, fieldIndex);
-              }
+        distinctUntilChanged(),
+      ).subscribe((errors: FormError[]) => {
+        const { formGroup, formModel } = this;
 
-              if (field) {
-                const modelArrayIndex = fieldIndex > 0 ? fieldIndex : null;
-                const model: DynamicFormControlModel = this.formBuilderService.findById(fieldId, formModel, modelArrayIndex);
-                this.formService.addErrorToField(field, model, error.message);
-                this.changeDetectorRef.detectChanges();
-              }
-            });
+        const prevMap = new Map<string, FormError>(
+          this.formErrors.map(e => [`${e.fieldId}:${e.fieldIndex}`, e]),
+        );
+        const nextMap = new Map<string, FormError>(
+          errors.map(e => [`${e.fieldId}:${e.fieldIndex}`, e]),
+        );
 
-          this.formErrors
-            .filter((error: FormError) => findIndex(errors, {
-              fieldId: error.fieldId,
-              fieldIndex: error.fieldIndex,
-            }) === -1)
-            .forEach((error: FormError) => {
-              const { fieldId } = error;
-              const { fieldIndex } = error;
-              let field: AbstractControl;
-              if (this.parentFormModel) {
-                field = this.formBuilderService.getFormControlById(fieldId, formGroup.parent as UntypedFormGroup, formModel, fieldIndex);
-              } else {
-                field = this.formBuilderService.getFormControlById(fieldId, formGroup, formModel, fieldIndex);
-              }
+        if (isEqual(prevMap, nextMap)) {
+          return;
+        }
 
-              if (field) {
-                const model: DynamicFormControlModel = this.formBuilderService.findById(fieldId, formModel, fieldIndex);
-                this.formService.removeErrorFromField(field, model, error.message);
+        const getControl = (err: FormError): AbstractControl | null => {
+          return this.parentFormModel
+            ? this.formBuilderService.getFormControlById(err.fieldId, formGroup.parent as UntypedFormGroup, formModel, err.fieldIndex)
+            : this.formBuilderService.getFormControlById(err.fieldId, formGroup, formModel, err.fieldIndex);
+        };
+
+        const getModel = (err: FormError): DynamicFormControlModel => {
+          const modelArrayIndex = err.fieldIndex > 0 ? err.fieldIndex : null;
+          return this.formBuilderService.findById(err.fieldId, formModel, modelArrayIndex);
+        };
+        // Add or change (including revert) errors
+        errors.forEach(next => {
+          const key = `${next.fieldId}:${next.fieldIndex}`;
+          const prev = prevMap.get(key);
+          if (!prev || prev.message !== next.message) {
+            // Remove old message if changed
+            if (prev) {
+              const prevControl = getControl(prev);
+              if (prevControl) {
+                const prevModel = getModel(prev);
+                this.formService.removeErrorFromField(prevControl, prevModel, prev.message);
+                this.formService.removeError(this.formId, prev.fieldId, prev.fieldIndex);
+                this.formErrors.splice(findIndex(this.formErrors, prev), 1);
               }
-            });
-          this.formErrors = errors;
-          this.changeDetectorRef.detectChanges();
-        }),
+            }
+            // Add new message
+            const control = getControl(next);
+            if (control) {
+              const model = getModel(next);
+              this.formService.addErrorToField(control, model, next.message);
+              this.formErrors.push(next);
+            }
+          }
+        });
+
+        const removedErrors: FormError[] = [];
+        // Remove errors for fields no longer present
+        this.formErrors.forEach(prev => {
+          const key = `${prev.fieldId}:${prev.fieldIndex}`;
+          if (!nextMap.has(key) && prevMap.has(key)) {
+            const control = getControl(prev);
+            if (control) {
+              const model = getModel(prev);
+              this.formService.removeErrorFromField(control, model, prev.message);
+              this.formService.removeError(this.formId, prev.fieldId, prev.fieldIndex);
+              removedErrors.push(prev);
+            }
+          }
+        });
+
+        this.formErrors = this.formErrors.filter(error => !removedErrors.includes(error));
+        this.changeDetectorRef.detectChanges();
+      }),
     );
   }
 

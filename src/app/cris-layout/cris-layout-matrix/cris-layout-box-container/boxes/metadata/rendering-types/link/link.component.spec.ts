@@ -109,6 +109,10 @@ describe('LinkComponent', () => {
   describe('with sub-type label', () => {
     beforeEach(() => {
       component.renderingSubType = 'LABEL';
+      component.metadataValueProvider = Object.assign(new MetadataValue(), metadataValue, {
+        value: '[Default Label](http://rest.api/item/link/id)',
+      });
+      component.metadataValue = component.metadataValueProvider;
       spyOn(translateService, 'instant').and.returnValue(i18nLabel);
       fixture.detectChanges();
     });
@@ -238,5 +242,43 @@ describe('LinkComponent', () => {
         expect(plainText.nativeElement.textContent).toContain('just some text');
       });
     });
+  });
+
+  describe('parseLabelValue', () => {
+
+    beforeEach(() => {
+      fixture.detectChanges();
+    });
+
+    it('should correctly extract label and URL from [Label](URL) format', () => {
+      const input = '[My Label](https://example.com/path)';
+      const result = component.parseLabelValue(input);
+
+      expect(result).toEqual({
+        label: 'My Label',
+        value: 'https://example.com/path',
+      });
+    });
+
+    it('should return the same value if input does not match [Label](URL) format', () => {
+      const input = 'Just a plain URL';
+      const result = component.parseLabelValue(input);
+
+      expect(result).toEqual({
+        label: input,
+        value: input,
+      });
+    });
+
+    it('should handle empty string gracefully', () => {
+      const input = '';
+      const result = component.parseLabelValue(input);
+
+      expect(result).toEqual({
+        label: '',
+        value: '',
+      });
+    });
+
   });
 });

@@ -26,9 +26,12 @@ import {
   combineLatest,
   Observable,
   of,
+  Subject,
 } from 'rxjs';
 import {
+  finalize,
   map,
+  shareReplay,
   switchMap,
   take,
   tap,
@@ -47,6 +50,7 @@ import {
   getRemoteDataPayload,
 } from '../../core/shared/operators';
 import { StatisticsCategory } from '../../core/statistics/models/statistics-category.model';
+import { UsageReport } from '../../core/statistics/models/usage-report.model';
 import {
   CleanCategoryReportAction,
   SetCategoryReportAction,
@@ -81,6 +85,10 @@ import { FilterMapPipe } from './statistics-pipes/filter-map.pipe';
   ],
 })
 export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
+
+  private currentReportId: string | null = null;
+  private fullReportCache = new Map<string, UsageReport>();
+  private inFlightRequests = new Map<string, Observable<UsageReport>>();
 
   /**
    * The scope dso for this statistics page, as an Observable.
@@ -131,6 +139,12 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
    * This property holds a selected report id
    */
   selectedReportId: string;
+
+  /**
+   * The fully loaded report (with points) for the currently selected chart report.
+   */
+  private selectedFullReportSubject = new Subject<UsageReport | null>();
+  selectedFullReport$ = this.selectedFullReportSubject.asObservable();
 
   constructor(
     protected route: ActivatedRoute,
@@ -256,6 +270,7 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
       } else {
         this.setStatisticsState(reportId, categoryId);
       }
+      this.loadFullReport(this.selectedReportId || reportId || report[0]?.id);
     });
   }
 
@@ -266,7 +281,7 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
   getReports$(categoryId) {
     return this.scope$.pipe(
       switchMap((scope) => {
-        return this.usageReportService.searchStatistics(scope._links.self.href,0,50,categoryId,this.parseDate(this.dateFrom),this.parseDate(this.dateTo));
+        return this.usageReportService.searchStatistics(scope._links.self.href, 0, 50, categoryId, this.parseDate(this.dateFrom), this.parseDate(this.dateTo), true);
       }),
     );
   }
@@ -276,6 +291,7 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
    */
   startDateChanged() {
     if (typeof this.dateFrom === 'object' || this.dateFrom === null || this.dateFrom === undefined) {
+      this.clearFullReportCache();
       this.categories$ = this.getCategories$();
     }
   }
@@ -285,6 +301,7 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
    */
   endDateChanged() {
     if (typeof this.dateTo === 'object' || this.dateTo === null || this.dateTo === undefined) {
+      this.clearFullReportCache();
       this.categories$ = this.getCategories$();
     }
   }
@@ -318,7 +335,55 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
     this.getCategoryId().subscribe((categoryId) => {
       this.setStatisticsState(reportId, categoryId);
       this.selectedReportId = reportId;
+      this.loadFullReport(reportId);
     });
+  }
+
+  /**
+   * Load the full report (with points) for the given report id via findOne.
+   * @param reportId the composite id (uuid_reportKey)
+   */
+  loadFullReport(reportId: string) {
+    if (!reportId) {
+      this.currentReportId = null;
+      this.selectedFullReportSubject.next(null);
+      return;
+    }
+    this.currentReportId = reportId;
+    const cachedReport = this.fullReportCache.get(reportId);
+    if (cachedReport) {
+      this.selectedFullReportSubject.next(cachedReport);
+      return;
+    }
+    this.selectedFullReportSubject.next(null);
+    let request$ = this.inFlightRequests.get(reportId);
+    if (!request$) {
+      request$ = this.usageReportService.findById(reportId, false, true).pipe(
+        getFirstSucceededRemoteData(),
+        getRemoteDataPayload(),
+        take(1),
+        shareReplay({ bufferSize: 1, refCount: true }),
+        finalize(() => {
+          this.inFlightRequests.delete(reportId);
+        }),
+      );
+      this.inFlightRequests.set(reportId, request$);
+    }
+    request$.subscribe((fullReport: UsageReport) => {
+      if (fullReport) {
+        this.fullReportCache.set(reportId, fullReport);
+      }
+      if (reportId === this.currentReportId) {
+        this.selectedFullReportSubject.next(fullReport);
+      }
+    });
+  }
+
+  private clearFullReportCache() {
+    this.fullReportCache.clear();
+    this.inFlightRequests.clear();
+    this.currentReportId = null;
+    this.selectedFullReportSubject.next(null);
   }
 
   /**

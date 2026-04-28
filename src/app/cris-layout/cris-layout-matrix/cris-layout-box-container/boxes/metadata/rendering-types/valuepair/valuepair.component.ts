@@ -42,6 +42,12 @@ export class ValuepairComponent extends RenderingTypeValueModelComponent impleme
    */
   value$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
+  /**
+   * Whether the value is a link
+   */
+
+  isMetadataLink: boolean;
+
   constructor(
     @Inject('fieldProvider') public fieldProvider: LayoutField,
     @Inject('itemProvider') public itemProvider: Item,
@@ -74,6 +80,13 @@ export class ValuepairComponent extends RenderingTypeValueModelComponent impleme
       take(1),
     ).subscribe(value => this.value$.next(value));
 
+    this.isMetadataLink = this.isLink(this.metadataValue.value);
+  }
+
+
+  isLink(input: string): boolean {
+    // check only values with protocol, if missing fix value in value-pair list
+    return input && (input.startsWith('http://') || input.startsWith('https://'));
   }
 
 }

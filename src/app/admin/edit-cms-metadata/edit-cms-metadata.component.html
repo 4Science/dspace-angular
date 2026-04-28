@@ -1,6 +1,9 @@
 @if ((editMode | async)) {
   <div class="container">
     <h2 class=" mb-5">{{'admin.edit-cms-metadata.title' | translate}} '{{selectedMetadata}}'</h2>
+    @if (showMarkdownInfo) {
+      <ds-alert [type]="'alert-info'" [dismissible]="true" [content]="'admin.edit-cms-metadata.markdown' | translate"></ds-alert>
+    }
     <div class="row">
       <div class="col-md">
         @for (lang of languageList; track lang) {

@@ -25,10 +25,7 @@ import {
 } from '../core/shared/authorized.operators';
 import { Item } from '../core/shared/item.model';
 import { getFirstCompletedRemoteData } from '../core/shared/operators';
-import {
-  hasValue,
-  isNotEmpty,
-} from '../shared/empty.util';
+import { hasValue } from '../shared/empty.util';
 import { getItemPageLinksToFollow } from './item.resolver';
 import { getItemPageRoute } from './item-page-routing-paths';
 
@@ -55,7 +52,6 @@ export const itemPageResolver: ResolveFn<RemoteData<Item>> = (
   platformId: any = inject(PLATFORM_ID),
   hardRedirectService: HardRedirectService = inject(HardRedirectService),
 ): Observable<RemoteData<Item>> => {
-
   const itemRD$ = itemService.findById(
     route.params.id,
     false,
@@ -73,23 +69,32 @@ export const itemPageResolver: ResolveFn<RemoteData<Item>> = (
 
   return itemRD$.pipe(
     map((rd: RemoteData<Item>) => {
-      store.dispatch(new ResolvedAction(state.url, rd.payload));
       if (rd.hasSucceeded && hasValue(rd.payload)) {
-        const isItemEditPage = state.url.includes('/edit');
-        const itemRoute = isItemEditPage ? state.url : router.parseUrl(getItemPageRoute(rd.payload)).toString();
-        // Check if custom url not empty and if the current id parameter is different from the custom url redirect to custom url
-        if (hasValue(rd.payload.metadata) && isNotEmpty(rd.payload.metadata['cris.customurl'])) {
-          if (route.params.id !== rd.payload.metadata['cris.customurl'][0].value) {
-            const newUrl = itemRoute.replace(route.params.id, rd.payload.metadata['cris.customurl'][0].value);
+        let itemRoute;
+        if (hasValue(rd.payload.metadata) && rd.payload.hasMetadata('cris.customurl')) {
+          const customUrl = rd.payload.firstMetadataValue('cris.customurl');
+          const isSubPath = !(state.url.endsWith(customUrl) || state.url.endsWith(rd.payload.id) || state.url.endsWith('/full'));
+          itemRoute = isSubPath ? state.url : router.parseUrl(getItemPageRoute(rd.payload)).toString();
+          let newUrl: string;
+          if (route.params.id !== customUrl && !isSubPath) {
+            newUrl = itemRoute.replace(route.params.id,rd.payload.firstMetadataValue('cris.customurl'));
+          } else if (isSubPath && route.params.id === customUrl) {
+            // In case of a sub path, we need to ensure we navigate to the edit page of the item ID, not the custom URL
+            const itemId = rd.payload.uuid;
+            newUrl = itemRoute.replace(rd.payload.firstMetadataValue('cris.customurl'), itemId);
+          }
+
+          if (hasValue(newUrl)) {
             router.navigateByUrl(newUrl);
           }
-        } else {
+        } else  {
           const thisRoute = state.url;
 
           // Angular uses a custom function for encodeURIComponent, (e.g. it doesn't encode commas
           // or semicolons) and thisRoute has been encoded with that function. If we want to compare
           // it with itemRoute, we have to run itemRoute through Angular's version as well to ensure
           // the same characters are encoded the same way.
+          itemRoute = router.parseUrl(getItemPageRoute(rd.payload)).toString();
 
           if (!thisRoute.startsWith(itemRoute)) {
             const itemId = rd.payload.uuid;
