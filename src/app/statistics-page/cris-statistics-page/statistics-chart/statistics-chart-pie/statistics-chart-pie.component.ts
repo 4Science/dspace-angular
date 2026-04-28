@@ -1,5 +1,6 @@
 import {
   AsyncPipe,
+  DOCUMENT,
   NgIf,
 } from '@angular/common';
 import {
@@ -16,6 +17,10 @@ import {
 import { ChartComponent } from '../../../../charts/components/chart/chart.component';
 import { ChartData } from '../../../../charts/models/chart-data';
 import { ChartSeries } from '../../../../charts/models/chart-series';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../../../core/services/window.service';
 import { REPORT_DATA } from '../../../../core/statistics/data-report.service';
 import {
   Point,
@@ -54,8 +59,10 @@ export class StatisticsChartPieComponent extends StatisticsChartDataComponent {
     @Inject(REPORT_DATA) public report: UsageReport,
     @Inject('categoryType') public categoryType: string,
     @Inject(PLATFORM_ID) protected platformId: any,
+    @Inject(NativeWindowService) protected _window: NativeWindowRef,
+    @Inject(DOCUMENT) protected document: any,
   ) {
-    super(report, categoryType, platformId);
+    super(report, categoryType, platformId, _window, document);
   }
 
   /**

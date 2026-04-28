@@ -83,6 +83,8 @@ export class SearchResultsComponent {
    */
   activeFilters$: Observable<SearchFilter[]>;
 
+  filters$: Observable<SearchFilter[]>;
+
   /**
    * Filter applied to show labels, once populated the activeFilters$ will be loaded
    */
@@ -126,7 +128,7 @@ export class SearchResultsComponent {
   /**
    * Whether to show the metrics badges
    */
-  @Input() showMetrics = true;
+  @Input() showMetrics: boolean;
 
   /**
    * Whether to show the thumbnail preview
@@ -205,10 +207,14 @@ export class SearchResultsComponent {
    */
   @Input() customData: any;
 
+  configuration$: Observable<string>;
+
   constructor(
     protected searchConfigService: SearchConfigurationService,
     protected searchService: SearchService,
   ) {
+    this.filters$ = this.searchConfigService.getCurrentFilters();
+    this.configuration$ = this.searchConfigService.getCurrentConfiguration(this.configuration);
     this.activeFilters$ = this.searchConfigService.getCurrentFilters();
     this.appliedFilters$ = this.searchService.appliedFilters$;
   }

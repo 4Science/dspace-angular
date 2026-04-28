@@ -14,6 +14,7 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import { of as observableOf } from 'rxjs';
 
+import { APP_CONFIG } from '../../../config/app-config.interface';
 import { getBitstreamDownloadRoute } from '../../app-routing-paths';
 import {
   SortDirection,
@@ -131,6 +132,7 @@ describe('LuckySearchComponent', () => {
         { provide: HardRedirectService, useValue: hardRedirectService },
         { provide: PLATFORM_ID, useValue: 'browser' },
         { provide: NotificationsService, useValue: new NotificationsServiceStub() },
+        { provide: APP_CONFIG, useValue: {} },
       ],
     }).overrideComponent(LuckySearchComponent, {
       remove: {
@@ -352,6 +354,59 @@ describe('LuckySearchComponent', () => {
       component.getSearchResults();
 
       expect(component.showEmptySearchSection$.getValue()).toBe(true);
+    });
+
+  });
+
+  describe('', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(LuckySearchComponent);
+      component = fixture.componentInstance;
+    });
+
+    it('should return default code when no specific identifier is found', () => {
+      // @ts-ignore: Accessing private method for testing
+      component.appConfig = {
+        luckySearchRedirects: {
+          default: 301,
+        },
+      } as any;
+      // @ts-ignore: Accessing private method for testing
+      component.currentFilter = { identifier: 'unknown' };
+
+      // @ts-ignore: Accessing private method for testing
+      const result = component.getRedirectCode();
+
+      expect(result).toBe(301);
+    });
+
+    it('should return 302 when default is not set and identifier is not found', () => {
+      // @ts-ignore: Accessing private method for testing
+      component.appConfig = {
+        luckySearchRedirects: {},
+      } as any;
+      // @ts-ignore: Accessing private method for testing
+      component.currentFilter = { identifier: 'unknown' };
+
+      // @ts-ignore: Accessing private method for testing
+      const result = component.getRedirectCode();
+      expect(result).toBe(302);
+    });
+
+    it('should return specific code for known identifier', () => {
+      // @ts-ignore: Accessing private method for testing
+      component.appConfig = {
+        luckySearchRedirects: {
+          default: 302,
+          'legacy-id': 301,
+        },
+      };
+      // @ts-ignore: Accessing private method for testing
+      component.currentFilter = { identifier: 'legacy-id' };
+
+      // @ts-ignore: Accessing private method for testing
+      const result = component.getRedirectCode();
+      expect(result).toBe(301);
     });
 
   });
