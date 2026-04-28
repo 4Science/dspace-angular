@@ -59,20 +59,21 @@ import { NgbAccordionModule, NgbCollapseModule, NgbModalModule } from '@ng-boots
 import { SubmissionSectionAccessesComponent } from './sections/accesses/section-accesses.component';
 import { SubmissionAccessesConfigDataService } from '../core/config/submission-accesses-config-data.service';
 import { SectionAccessesService } from './sections/accesses/section-accesses.service';
-import { SubmissionSectionSherpaPoliciesComponent } from './sections/sherpa-policies/section-sherpa-policies.component';
-import { ContentAccordionComponent } from './sections/sherpa-policies/content-accordion/content-accordion.component';
-import { PublisherPolicyComponent } from './sections/sherpa-policies/publisher-policy/publisher-policy.component';
+import { SubmissionSectionJiscOpfPoliciesComponent } from './sections/opf-policies/section-opf-policies.component';
+import { ContentAccordionComponent } from './sections/opf-policies/content-accordion/content-accordion.component';
+import { PublisherPolicyComponent } from './sections/opf-policies/publisher-policy/publisher-policy.component';
 import {
   PublicationInformationComponent
-} from './sections/sherpa-policies/publication-information/publication-information.component';
+} from './sections/opf-policies/publication-information/publication-information.component';
 import { UploadModule } from '../shared/upload/upload.module';
 import {
   MetadataInformationComponent
-} from './sections/sherpa-policies/metadata-information/metadata-information.component';
+} from './sections/opf-policies/metadata-information/metadata-information.component';
 import { SectionFormOperationsService } from './sections/form/section-form-operations.service';
 import { SubmissionSectionIdentifiersComponent } from './sections/identifiers/section-identifiers.component';
 import { SubmissionSectionCorrectionComponent } from './sections/correction/section-correction.component';
 import { MyDspaceSearchModule } from '../my-dspace-page/my-dspace-search.module';
+import {SubmissionLegendComponent} from './submission-legend/submission-legend.component';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -81,7 +82,7 @@ const ENTRY_COMPONENTS = [
   SubmissionSectionLicenseComponent,
   SubmissionSectionCcLicensesComponent,
   SubmissionSectionAccessesComponent,
-  SubmissionSectionSherpaPoliciesComponent,
+  SubmissionSectionJiscOpfPoliciesComponent,
   SubmissionSectionDetectDuplicateComponent,
   SubmissionSectionCustomUrlComponent,
   SubmissionSectionCorrectionComponent
@@ -115,7 +116,8 @@ const DECLARATIONS = [
   PublicationInformationComponent,
   MetadataInformationComponent,
   ThemedSubmissionSectionUploadFileComponent,
-  DuplicateMatchComponent
+  DuplicateMatchComponent,
+  SubmissionLegendComponent
 ];
 
 @NgModule({

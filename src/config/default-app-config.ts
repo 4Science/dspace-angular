@@ -42,6 +42,7 @@ import { MetaTagsConfig } from './meta-tags.config';
 import { MetadataLinkViewPopoverDataConfig } from './metadata-link-view-popoverdata-config.interface';
 import { IdentifierSubtypesConfig, IdentifierSubtypesIconPositionEnum } from './identifier-subtypes-config.interface';
 import { DatadogRumConfig } from './datadog-rum-config.interfaces';
+import {LuckySearchRedirectConfig} from './lucky-search-redirect-config';
 
 export class DefaultAppConfig implements AppConfig {
   production = false;
@@ -299,6 +300,7 @@ export class DefaultAppConfig implements AppConfig {
     },
     // Minimum number of characters required before performing a lookup.
     minChars: 3,
+    showLegend: true
   };
 
   // Default Language in which the UI will be rendered if the user's browser language is not an active language
@@ -883,5 +885,10 @@ export class DefaultAppConfig implements AppConfig {
     trackResources: true,
     trackLongTasks: true,
     defaultPrivacyLevel: 'mask-user-input',
+  };
+
+  luckySearchRedirects: LuckySearchRedirectConfig = {
+    'legacy-id': 301,
+    default: 302
   };
 }

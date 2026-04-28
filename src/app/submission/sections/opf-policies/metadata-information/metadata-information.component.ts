@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Metadata } from '../../../../core/submission/models/sherpa-policies-details.model';
+import { Metadata } from '../../../../core/submission/models/opf-policies-details.model';
 
 /**
  * This component represents a section that contains the matadata informations.
