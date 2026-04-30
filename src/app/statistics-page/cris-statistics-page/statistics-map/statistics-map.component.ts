@@ -6,6 +6,7 @@ import {
   NgIf,
 } from '@angular/common';
 import {
+  ChangeDetectorRef,
   Component,
   Inject,
   Input,
@@ -105,6 +106,7 @@ export class StatisticsMapComponent implements OnInit {
     private usageReportService: UsageReportDataService,
     @Inject(NativeWindowService) private _window: NativeWindowRef,
     @Inject(DOCUMENT) private document: any,
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     if (isPlatformBrowser(this.platformId)) {
       import('../../../core/export-service/browser-export.service').then((s) => {
@@ -161,6 +163,7 @@ export class StatisticsMapComponent implements OnInit {
       ],
       options: { 'title': this.report.reportType },
     };
+    this.changeDetectorRef.detectChanges();
   }
 
   /**
