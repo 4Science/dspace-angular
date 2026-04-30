@@ -58,18 +58,25 @@ export class StatisticsChartWrapperComponent implements OnInit, OnChanges {
    */
   ngOnInit(): void {
     this.chartData = this.getStatistics();
-    this.objectInjector = Injector.create({
+    this.objectInjector = this.createInjector();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.chartData = this.getStatistics();
+    this.objectInjector = this.createInjector();
+  }
+
+  private createInjector(): Injector {
+    const report = this.report;
+    return Injector.create({
       providers: [
-        { provide: REPORT_DATA, useFactory: () => (this.report), deps: [] },
+        { provide: REPORT_DATA, useFactory: () => report, deps: [] },
         { provide: 'categoryType', useValue: this.categoryType },
       ],
       parent: this.injector,
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.ngOnInit();
-  }
 
   /**
    * Find the correct component based on the filter config's type
