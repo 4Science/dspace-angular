@@ -52,7 +52,6 @@ import { FollowAuthorityMetadata } from './search-follow-metadata.interface';
 import { SearchConfig } from './search-page-config.interface';
 import { SearchResultConfig } from './search-result-config.interface';
 import { ServerConfig } from './server-config.interface';
-import { SSRConfig } from './ssr-config.interface';
 import { SubmissionConfig } from './submission-config.interface';
 import { ThemeConfig } from './theme.config';
 import { UIServerConfig } from './ui-server-config.interface';
@@ -62,35 +61,6 @@ export class DefaultAppConfig implements AppConfig {
 
   // NOTE: will log all redux actions and transfers in console
   debug = false;
-
-  ssr: SSRConfig = {
-    enabled: true,
-    enablePerformanceProfiler: false,
-    inlineCriticalCss: false,
-    transferState: false,
-    replaceRestUrl: true,
-    excludePathPatterns: [
-      {
-        pattern: '^/communities/[a-f0-9-]{36}/browse(/.*)?$',
-        flag: 'i',
-      },
-      {
-        pattern: '^/collections/[a-f0-9-]{36}/browse(/.*)?$',
-        flag: 'i',
-      },
-      { pattern: '^/browse/' },
-      { pattern: '^/search' },
-      { pattern: '^/community-list$' },
-      { pattern: '^/statistics/?' },
-      { pattern: '^/admin/' },
-      { pattern: '^/processes/?' },
-      { pattern: '^/notifications/' },
-      { pattern: '^/access-control/' },
-      { pattern: '^/health$' },
-    ],
-    enableSearchComponent: false,
-    enableBrowseComponent: false,
-  };
 
   // Angular express server settings
   // NOTE: these must be 'synced' with the 'dspace.ui.url' setting in your backend's local.cfg.
