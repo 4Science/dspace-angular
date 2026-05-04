@@ -16,32 +16,4 @@ export const environment = {
     // NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
     nameSpace: '/server',
   },
-  ssr: {
-    enabled: false,
-    enablePerformanceProfiler: false,
-    inlineCriticalCss: false,
-    transferState: false,
-    replaceRestUrl: false,
-    excludePathPatterns: [
-      {
-        pattern: '^/communities/[a-f0-9-]{36}/browse(/.*)?$',
-        flag: 'i',
-      },
-      {
-        pattern: '^/collections/[a-f0-9-]{36}/browse(/.*)?$',
-        flag: 'i',
-      },
-      { pattern: '^/browse/' },
-      { pattern: '^/search' },
-      { pattern: '^/community-list$' },
-      { pattern: '^/statistics/?' },
-      { pattern: '^/admin/' },
-      { pattern: '^/processes/?' },
-      { pattern: '^/notifications/' },
-      { pattern: '^/access-control/' },
-      { pattern: '^/health$' },
-    ],
-    enableSearchComponent: false,
-    enableBrowseComponent: false,
-  },
 };
