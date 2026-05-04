@@ -43,25 +43,12 @@ import { MetadataLinkViewPopoverDataConfig } from './metadata-link-view-popoverd
 import { IdentifierSubtypesConfig, IdentifierSubtypesIconPositionEnum } from './identifier-subtypes-config.interface';
 import { DatadogRumConfig } from './datadog-rum-config.interfaces';
 import {LuckySearchRedirectConfig} from './lucky-search-redirect-config';
-import { UniversalConfig } from './universal-config.interface';
 
 export class DefaultAppConfig implements AppConfig {
   production = false;
 
   // NOTE: will log all redux actions and transfers in console
   debug = false;
-
-  universal: UniversalConfig = {
-    preboot: true,
-    async: true,
-    time: false,
-    inlineCriticalCss: false,
-    transferState: false,
-    replaceRestUrl: true,
-    paths: ['/home', '/items/', '/entities/', '/collections/', '/communities/', '/bitstream/', '/bitstreams/', '/handle/', '/reload/', '/lucky-search'],
-    enableSearchComponent: false,
-    enableBrowseComponent: false,
-  };
 
   // Angular Universal server settings
   // NOTE: these must be 'synced' with the 'dspace.ui.url' setting in your backend's local.cfg.

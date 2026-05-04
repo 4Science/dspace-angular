@@ -14,7 +14,7 @@ export const environment: Partial<BuildConfig> = {
     async: true,
     time: false,
     inlineCriticalCss: false,
-    transferState: true,
+    transferState: false,
     replaceRestUrl: false,
     paths: [ '/home', '/items/', '/entities/', '/collections/', '/communities/', '/bitstream/', '/bitstreams/', '/handle/', '/reload/', '/lucky-search' ],
     enableSearchComponent: false,
