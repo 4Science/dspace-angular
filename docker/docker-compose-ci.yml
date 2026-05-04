@@ -35,7 +35,10 @@ services:
       LOGGING_CONFIG: /dspace/config/log4j2-container.xml
     image: "${DOCKER_REGISTRY:-docker.io}/${DOCKER_OWNER:-4science}/dspace-cris:${DSPACE_VER:-dspace-cris-2024_02_x}-test"
     depends_on:
-    - dspacedb
+      dspacedb:
+        condition: service_healthy
+      dspacesolr:
+        condition: service_healthy
     networks:
       - dspacenet
     ports:
@@ -45,18 +48,37 @@ services:
     tty: true
     volumes:
     - assetstore:/dspace/assetstore
-    # Ensure that the database is ready BEFORE starting tomcat
-    # 1. While a TCP connection to dspacedb port 5432 is not available, continue to sleep
-    # 2. Then, run database migration to init database tables (including any out-of-order ignored migrations, if any)
-    # 3. Finally, start DSpace
+    # Ensure that the database and Solr are ready BEFORE starting tomcat
+    # 1. Wait for Solr HTTP endpoint to respond
+    # 2. While a TCP connection to dspacedb port 5432 is not available, continue to sleep
+    # 3. Then, run database migration to init database tables (including any out-of-order ignored migrations, if any)
+    # 4. Finally, start DSpace
     entrypoint:
     - /bin/bash
     - '-c'
     - |
+      # Wait for the database to be reachable and healthy
+      echo "Waiting for database..."
+      until (echo > /dev/tcp/dspacedb/5432) >/dev/null 2>&1; do
+        sleep 2
+      done
+      echo "Database is reachable"
+      # Wait for Solr to be ready
+      echo "Waiting for Solr..."
+      until curl -s http://dspacesolr:8983/solr/ > /dev/null 2>&1; do
+        sleep 2
+      done
+      echo "Solr is ready"
       /dspace/bin/dspace database repair
       /dspace/bin/dspace database migrate
       /dspace/bin/dspace database migrate ignored
       java -XX:+UseParallelGC -XX:MaxRAMPercentage=75 org.springframework.boot.loader.launch.JarLauncher
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/server/actuator/health/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
   # DSpace database container
   # NOTE: This is customized to use our loadsql image, so that we are using a database with existing test data
   dspacedb:
@@ -80,6 +102,12 @@ services:
     volumes:
      # Keep Postgres data directory between reboots
     - pgdata:/pgdata
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dspace"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
   # DSpace Solr container
   dspacesolr:
     container_name: dspacesolr
@@ -118,6 +146,12 @@ services:
       precreate-core audit /opt/solr/server/solr/configsets/audit
       cp -r /opt/solr/server/solr/configsets/audit/* audit
       exec solr -f
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8983/solr/"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
 volumes:
   assetstore:
   pgdata:
