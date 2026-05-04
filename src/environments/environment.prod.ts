@@ -15,16 +15,5 @@ rest: {
     port: 8080,
     // NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
     nameSpace: '/server'
-},
-  universal: {
-    preboot: false,
-    async: true,
-    time: false,
-    inlineCriticalCss: false,
-    transferState: false,
-    replaceRestUrl: false,
-    paths: [ '/home', '/items/', '/entities/', '/collections/', '/communities/', '/bitstream/', '/bitstreams/', '/handle/', '/reload/', '/lucky-search' ],
-    enableSearchComponent: false,
-    enableBrowseComponent: false,
-  },
+}
 };
