@@ -381,6 +381,10 @@ item:
     # Rounded to the nearest size in the list of selectable sizes on the
     # settings menu.  See pageSizeOptions in 'pagination-component-options.model.ts'.
     pageSize: 5
+    # Show the bitstream access status label on the item page
+    showAccessStatuses: false
+    # Open bitstream download links in a new browser tab by default
+    openDownloadLinksInNewTab: true
   # The maximum number of metadata values to add to the metatag list of the item page
   metatagLimit: 20
   # The maximum number of values for repeatable metadata to show in the full item

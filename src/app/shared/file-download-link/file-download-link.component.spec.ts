@@ -8,11 +8,16 @@ import {
   ActivatedRoute,
   RouterLink,
 } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   cold,
   getTestScheduler,
 } from 'jasmine-marbles';
+import {
+  APP_CONFIG,
+  APP_DATA_SERVICES_MAP,
+} from 'src/config/app-config.interface';
 
 import { getBitstreamModuleRoute } from '../../app-routing-paths';
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
@@ -21,6 +26,7 @@ import { FeatureID } from '../../core/data/feature-authorization/feature-id';
 import { Bitstream } from '../../core/shared/bitstream.model';
 import { ConfigurationProperty } from '../../core/shared/configuration-property.model';
 import { Item } from '../../core/shared/item.model';
+import { ItemRequest } from '../../core/shared/item-request.model';
 import { URLCombiner } from '../../core/url-combiner/url-combiner';
 import { getItemModuleRoute } from '../../item-page/item-page-routing-paths';
 import { createSuccessfulRemoteDataObject$ } from '../remote-data.utils';
@@ -38,6 +44,24 @@ describe('FileDownloadLinkComponent', () => {
   let bitstream: Bitstream;
   let item: Item;
   let configurationDataService: ConfigurationDataService;
+  let storeMock: any;
+
+  const mockAppConfig = {
+    item: {
+      bitstream: {
+        openDownloadLinksInNewTab: true,
+      },
+    },
+  };
+
+  const itemRequestStub = Object.assign(new ItemRequest(), {
+    token: 'item-request-token',
+    requestName: 'requester name',
+    accessToken: 'abc123',
+    acceptRequest: true,
+    accessExpired: false,
+    allfiles: true,
+  });
 
   function init() {
     authorizationService = jasmine.createSpyObj('authorizationService', {
@@ -72,6 +96,9 @@ describe('FileDownloadLinkComponent', () => {
       providers: [
         RouterLinkDirectiveStub,
         { provide: AuthorizationDataService, useValue: authorizationService },
+        { provide: Store, useValue: storeMock },
+        { provide: APP_DATA_SERVICES_MAP, useValue: {} },
+        { provide: APP_CONFIG, useValue: mockAppConfig },
         { provide: ConfigurationDataService, useValue: configurationDataService },
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
       ],
@@ -110,8 +137,18 @@ describe('FileDownloadLinkComponent', () => {
           fixture.detectChanges();
           const link = fixture.debugElement.query(By.css('a'));
           expect(link.injector.get(RouterLinkDirectiveStub).routerLink).toContain(new URLCombiner(getBitstreamModuleRoute(), bitstream.uuid, 'download').toString());
+          expect(link.nativeElement.getAttribute('target')).toBe('_blank');
           const lock = fixture.debugElement.query(By.css('.fa-lock'));
           expect(lock).toBeNull();
+        });
+
+        it('should keep an explicit isBlank input over the config default', () => {
+          component.isBlank = false;
+          component.ngOnInit();
+          scheduler.flush();
+          fixture.detectChanges();
+          const link = fixture.debugElement.query(By.css('a'));
+          expect(link.nativeElement.getAttribute('target')).toBe('_self');
         });
       });
       describe('when the user has no download rights but has the right to request a copy', () => {
