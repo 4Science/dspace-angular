@@ -299,8 +299,8 @@ export class DefaultAppConfig implements AppConfig {
             path: 'assets/images/ror.logo.icon.svg',
           },
           {
-            source: 'sherpa',
-            path: 'assets/images/sherpa.logo.icon.svg',
+            source: 'opf',
+            path: 'assets/images/opf.logo.icon.svg',
           },
           {
             source: 'zdb',
