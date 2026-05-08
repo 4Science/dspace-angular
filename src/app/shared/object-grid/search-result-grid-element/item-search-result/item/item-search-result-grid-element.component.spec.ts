@@ -38,6 +38,8 @@ import { Item } from '../../../../../core/shared/item.model';
 import { PageInfo } from '../../../../../core/shared/page-info.model';
 import { UUIDService } from '../../../../../core/shared/uuid.service';
 import { ThemedThumbnailComponent } from '../../../../../thumbnail/themed-thumbnail.component';
+import { KlaroService } from '../../../../cookies/klaro.service';
+import { KlaroServiceStub } from '../../../../cookies/klaro.service.stub';
 import { NotificationsService } from '../../../../notifications/notifications.service';
 import { ThemedBadgesComponent } from '../../../../object-collection/shared/badges/themed-badges.component';
 import { ItemSearchResult } from '../../../../object-collection/shared/item-search-result.model';
@@ -277,6 +279,7 @@ export function getEntityGridElementTestComponent(component, searchResultWithMet
           { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
           { provide: ConfigurationDataService, useValue: {} },
           { provide: ThumbnailService, useValue: defaultThumbnailService },
+          { provide: KlaroService, useValue: new KlaroServiceStub() },
         ],
         schemas: [NO_ERRORS_SCHEMA],
       }).overrideComponent(component, {
@@ -395,6 +398,7 @@ export const getGridElementTestBet = (component) => {
       { provide: ConfigurationDataService, useValue: {} },
       { provide: ThumbnailService, useValue: defaultThumbnailService },
       { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
+      { provide: KlaroService, useValue: new KlaroServiceStub() },
     ],
     schemas: [NO_ERRORS_SCHEMA],
   };

@@ -8,7 +8,7 @@ export const environment: Partial<BuildConfig> = {
     enabled: true,
     enablePerformanceProfiler: false,
     inlineCriticalCss: false,
-    transferState: true,
+    transferState: false,
     replaceRestUrl: true,
     excludePathPatterns: [
       {

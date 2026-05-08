@@ -4,6 +4,10 @@
   .PlumX-Popup > div.ppp-container.ppp-large {
     height: 4em !important;
     width: 4em !important;
+    div.plx-print {
+      height: unset !important;
+      width: unset !important;
+    }
   }
 
   .person-type-plumX {

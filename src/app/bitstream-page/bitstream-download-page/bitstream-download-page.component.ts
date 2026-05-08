@@ -37,6 +37,7 @@ import { Bitstream } from '../../core/shared/bitstream.model';
 import { FileService } from '../../core/shared/file.service';
 import { getRemoteDataPayload } from '../../core/shared/operators';
 import { isNotEmpty } from '../../shared/empty.util';
+import { MatomoService } from '../../statistics/matomo.service';
 
 @Component({
   selector: 'ds-bitstream-download-page',
@@ -71,6 +72,7 @@ export class BitstreamDownloadPageComponent implements OnInit {
     public dsoNameService: DSONameService,
     private signpostingDataService: SignpostingDataService,
     private responseService: ServerResponseService,
+    private matomoService: MatomoService,
     @Inject(PLATFORM_ID) protected platformId: string,
   ) {
     this.initPageLinks();

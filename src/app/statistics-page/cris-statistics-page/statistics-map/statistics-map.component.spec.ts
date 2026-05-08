@@ -1,10 +1,14 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import {
   ComponentFixture,
   TestBed,
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
-import { GoogleChartInterface } from 'ng2-google-charts';
+import {
+  GoogleChartInterface,
+  Ng2GoogleChartsModule,
+} from 'ng2-google-charts';
 
 import { ExportService } from '../../../core/export-service/export.service';
 import { UsageReport } from '../../../core/statistics/models/usage-report.model';
@@ -71,7 +75,11 @@ describe('StatisticsMapComponent', () => {
       providers: [
         { provide: UsageReportDataService, useValue: usageReportServiceStub },
       ],
+      schemas: [NO_ERRORS_SCHEMA],
     })
+      .overrideComponent(StatisticsMapComponent, {
+        remove: { imports: [Ng2GoogleChartsModule] },
+      })
       .compileComponents();
   });
 

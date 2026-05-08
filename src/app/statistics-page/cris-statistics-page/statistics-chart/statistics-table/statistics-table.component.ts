@@ -1,5 +1,6 @@
 import {
   AsyncPipe,
+  DOCUMENT,
   NgClass,
   NgFor,
   NgIf,
@@ -13,6 +14,10 @@ import {
 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../../../core/services/window.service';
 import { REPORT_DATA } from '../../../../core/statistics/data-report.service';
 import { UsageReport } from '../../../../core/statistics/models/usage-report.model';
 import { EntityTypeEnum } from '../../../../cris-layout/enums/entity-type.enum';
@@ -68,8 +73,10 @@ export class StatisticsTableComponent extends StatisticsChartDataComponent imple
     @Inject(REPORT_DATA) public report: UsageReport,
     @Inject('categoryType') public categoryType: string,
     @Inject(PLATFORM_ID) protected platformId: any,
+    @Inject(NativeWindowService) protected _window: NativeWindowRef,
+    @Inject(DOCUMENT) protected document: any,
   ) {
-    super(report, categoryType, platformId);
+    super(report, categoryType, platformId, _window, document);
   }
 
   /**

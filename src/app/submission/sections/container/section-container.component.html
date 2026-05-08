@@ -13,7 +13,7 @@
                  [destroyOnHide]="false">
     <ngb-panel id="{{ sectionData.id }}" [type]="sectionRef.isInfo() ? 'info' : ''">
       <ng-template ngbPanelTitle>
-        <span [ngClass]="{ 'text-white' : sectionRef.isInfo()}" class="float-left section-title" tabindex="0">{{
+        <span [ngClass]="{ 'text-black' : sectionRef.isInfo()}" class="float-left section-title" tabindex="0">{{
           'submission.sections.'+sectionData.header | translate
           }}</span>
         <div class="d-inline-block float-right">

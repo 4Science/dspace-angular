@@ -20,6 +20,8 @@ import {
 } from '../../../../../../config/app-config.interface';
 import { DSONameService } from '../../../../../core/breadcrumbs/dso-name.service';
 import { Item } from '../../../../../core/shared/item.model';
+import { KlaroService } from '../../../../../shared/cookies/klaro.service';
+import { KlaroServiceStub } from '../../../../../shared/cookies/klaro.service.stub';
 import { DSONameServiceMock } from '../../../../../shared/mocks/dso-name.service.mock';
 import { mockTruncatableService } from '../../../../../shared/mocks/mock-trucatable.service';
 import { getMockThemeService } from '../../../../../shared/mocks/theme-service.mock';
@@ -99,6 +101,7 @@ describe('JournalSearchResultListElementComponent', () => {
         { provide: ThemeService, useValue: getMockThemeService() },
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
         { provide: APP_DATA_SERVICES_MAP, useValue: {} },
+        { provide: KlaroService, useValue: new KlaroServiceStub() },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(JournalSearchResultListElementComponent, {
@@ -173,6 +176,7 @@ describe('JournalSearchResultListElementComponent', () => {
         { provide: ThemeService, useValue: getMockThemeService() },
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
         { provide: APP_DATA_SERVICES_MAP, useValue: {} },
+        { provide: KlaroService, useValue: new KlaroServiceStub() },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(JournalSearchResultListElementComponent, {

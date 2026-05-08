@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
   Inject,
   PLATFORM_ID,
@@ -16,6 +17,10 @@ import { BehaviorSubject } from 'rxjs';
 
 import { hasValue } from '../../shared/empty.util';
 import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../services/window.service';
+import {
   ExportImageType,
   ExportService,
 } from './export.service';
@@ -33,7 +38,9 @@ export class BrowserExportService implements ExportService {
    */
   exportAsConfig: ExportAsConfig;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any) {
+  constructor(@Inject(PLATFORM_ID) private platformId: any,
+              @Inject(NativeWindowService) private _window: NativeWindowRef,
+              @Inject(DOCUMENT) private document: any) {
   }
 
   /**
@@ -66,24 +73,58 @@ export class BrowserExportService implements ExportService {
    * @param isLoading A boolean representing the exporting process status.
    */
   exportAsImage(domNode: HTMLElement, type: ExportImageType, fileName: string, isLoading: BehaviorSubject<boolean>): void {
+    // html-to-image internally iterates ALL document.styleSheets to inline fonts.
+    // Cross-origin sheets (e.g. Google Charts CSS from gstatic.com) throw a DOMException
+    // in Firefox when .cssRules is accessed (Same-Origin Policy).
+    const fontEmbedCSS = this.collectSameOriginFontCSS();
 
-    const options: Options = { backgroundColor: '#ffffff' };
+    const options: Options = {
+      backgroundColor: '#ffffff',
+      fontEmbedCSS,
+    };
 
-    if (type === ExportImageType.png) {
-      toPng(domNode, options)
-        .then((dataUrl) => {
-          saveAs(dataUrl, fileName + '.' + type);
-          isLoading.next(false);
-        });
-    } else {
-      toJpeg(domNode, options)
-        .then((dataUrl) => {
-          saveAs(dataUrl, fileName + '.' + type);
-          isLoading.next(false);
-        });
+    const export$ = type === ExportImageType.png
+      ? toPng(domNode, options)
+      : toJpeg(domNode, options);
+
+    export$.then((dataUrl) => {
+      saveAs(dataUrl, fileName + '.' + type);
+      isLoading.next(false);
+    }).catch((err) => {
+      console.error('Image export failed', err);
+      isLoading.next(false);
+    });
+  }
+
+  /**
+   * Collects all @font-face CSS rules from same-origin stylesheets only.
+   * Cross-origin sheets are silently skipped so they never trigger a
+   * DOMException when cssRules is accessed in Firefox.
+   */
+  collectSameOriginFontCSS(): string {
+    const fontRules: string[] = [];
+    const sheets = Array.from((this.document as Document).styleSheets);
+
+    for (const sheet of sheets) {
+      // Skip cross-origin sheets — accessing cssRules on them throws in Firefox
+      if (sheet.href && new URL(sheet.href).origin !== this._window.nativeWindow.location.origin) {
+        continue;
+      }
+      try {
+        const rules = Array.from(sheet.cssRules ?? []);
+        for (const rule of rules) {
+          if (rule.constructor.name === 'CSSFontFaceRule') {
+            fontRules.push(rule.cssText);
+          }
+        }
+      } catch {
+        console.error('Error appending sheet to export: ', sheet.href);
+      }
     }
 
+    return fontRules.join('\n');
   }
+
 
   /**
    * Creates an image from the given base64 string.

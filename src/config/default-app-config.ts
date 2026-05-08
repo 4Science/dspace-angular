@@ -37,7 +37,9 @@ import {
   SuggestionConfig,
 } from './layout-config.interfaces';
 import { LoaderConfig } from './loader-config.interfaces';
+import { LuckySearchRedirectConfig } from './lucky-search-redirect-config';
 import { MarkdownConfig } from './markdown-config.interface';
+import { MatomoConfig } from './matomo-config.interface';
 import { MediaViewerConfig } from './media-viewer-config.interface';
 import { MetaTagsConfig } from './meta-tags.config';
 import { MetadataLinkViewPopoverDataConfig } from './metadata-link-view-popoverdata-config.interface';
@@ -296,8 +298,8 @@ export class DefaultAppConfig implements AppConfig {
             path: 'assets/images/ror.logo.icon.svg',
           },
           {
-            source: 'sherpa',
-            path: 'assets/images/sherpa.logo.icon.svg',
+            source: 'opf',
+            path: 'assets/images/opf.logo.icon.svg',
           },
           {
             source: 'zdb',
@@ -369,7 +371,7 @@ export class DefaultAppConfig implements AppConfig {
     // The absolute lowest year to display in the dropdown (only used when no lowest date can be found for all items)
     defaultLowerLimit: 1900,
     // Whether to add item badges to BOTH browse and search result lists.
-    showLabels: true,
+    showLabels: false,
     // Whether to add item thumbnail images to BOTH browse and search result lists.
     showThumbnails: true,
     // Whether to add item thumbnail images to BOTH browse and search result lists.
@@ -1024,5 +1026,12 @@ export class DefaultAppConfig implements AppConfig {
     trackResources: true,
     trackLongTasks: true,
     defaultPrivacyLevel: 'mask-user-input',
+  };
+
+  matomo: MatomoConfig = {};
+
+  luckySearchRedirects: LuckySearchRedirectConfig = {
+    'legacy-id': 301,
+    default: 302,
   };
 }
