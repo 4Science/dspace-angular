@@ -100,14 +100,9 @@ export class InWorkflowStatisticsComponent implements OnInit {
 
   initWorkflowDates(): void {
     if (this.item) {
-      if (this.item.isArchived) {
-        if (this.item.hasMetadata('dspace.workflow.startDateTime') && this.item.hasMetadata('dc.date.accessioned')) {
-          this.canViewInWorkflowForDate$.next(true);
-          this.inWorkflowFor$.next(
-            this.getDateForArchivedItem(this.item.firstMetadataValue('dspace.workflow.startDateTime'), this.item.firstMetadataValue('dc.date.accessioned')),
-          );
-        }
-      } else if (this.item.hasMetadata('dspace.workflow.startDateTime')) {
+      if (this.item.isArchived) {return;}
+
+      if ( this.item.hasMetadata('dspace.workflow.startDateTime')) {
         this.canViewInWorkflowSinceDate$.next(true);
         this.inWorkflowSince$.next(
           this.getDateForItem(this.item.firstMetadataValue('dspace.workflow.startDateTime')),
