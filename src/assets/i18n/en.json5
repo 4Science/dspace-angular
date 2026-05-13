@@ -5486,7 +5486,7 @@
 
   "repository.title": "{{ repositoryName }}",
 
-  "repository.title.prefix": "{{ repositoryName }} Angular :: ",
+  "repository.title.prefix": "{{ repositoryName }} :: ",
 
   "resource-policies.add.button": "Add",
 
