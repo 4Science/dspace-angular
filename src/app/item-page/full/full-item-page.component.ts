@@ -1,9 +1,9 @@
 import {
   AsyncPipe,
   KeyValuePipe,
+  Location,
   NgForOf,
   NgIf,
-  Location,
   SlicePipe,
 } from '@angular/common';
 import {
