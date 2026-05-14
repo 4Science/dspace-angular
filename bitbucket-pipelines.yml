@@ -118,6 +118,7 @@ definitions:
           - export DSPACE_UI_PORT=4000
           - export DSPACE_CACHE_SERVERSIDE_BOTCACHE_MAX=0
           - export DSPACE_CACHE_SERVERSIDE_ANONYMOUSCACHE_MAX=0
+          - export DSPACE_INFO_ENABLECOOKIECONSENTPOPUP=false
           - export CYPRESS_BASE_URL=http://127.0.0.1:4000
           - export CYPRESS_CACHE_FOLDER=~/.cache/Cypress
           - export CHROME_FLAGS="--no-sandbox --disable-dev-shm-usage --disable-gpu"
