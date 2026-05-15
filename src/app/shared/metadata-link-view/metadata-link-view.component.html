@@ -3,21 +3,26 @@
                   [ngTemplateOutletContext]="{metadataView: metadataView}"></ng-container>
 </div>
 <ng-template class="d-flex" #linkToAuthority let-metadataView="metadataView">
-  <span [dsStickyPopover]="popContent"
+  <span>
+    <a rel="noopener noreferrer"
+       data-test="linkToAuthority"
+       [routerLink]="[relatedDsoRoute]">
+      <span>{{metadataView.value}}</span>
+    </a>
+    <button [dsStickyPopover]="popContent"
+            [stickyPopoverClickable]="true"
         [openDelay]="100"
+            [closeDelay]="300"
         [animation]="true"
+            [placement]="popoverPlacement ?? 'auto'"
         [autoClose]="true"
-        container="body"
-        triggers="mouseenter">
-    <a rel="noopener noreferrer" data-test="linkToAuthority"
-      [routerLink]="[relatedDsoRoute]">
+            class="btn p-0"
+            [attr.aria-label]="'metadata.link.view.popover-toggle' | translate">
       <span dsEntityIcon
             [iconPosition]="iconPosition"
             [entityType]="metadataView.entityType"
-            [entityStyle]="metadataView.entityStyle">
-                {{metadataView.value}}
-        </span>
-    </a>
+            [entityStyle]="metadataView.entityStyle"></span>
+    </button>
   </span>
   <img *ngIf="metadataView.orcidAuthenticated"
        placement="top"

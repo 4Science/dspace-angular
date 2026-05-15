@@ -8,4 +8,7 @@
   max-width: 400px !important;
   width: 100%;
   min-width: 300px !important;
+  .popover-body {
+    overflow: hidden !important;
+  }
 }

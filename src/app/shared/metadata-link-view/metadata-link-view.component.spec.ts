@@ -20,6 +20,8 @@ import {
 import { VarDirective } from '../utils/var.directive';
 import { MetadataLinkViewComponent } from './metadata-link-view.component';
 import SpyObj = jasmine.SpyObj;
+import { TranslateModule } from '@ngx-translate/core';
+
 import { MetadataLinkViewPopoverComponent } from './metadata-link-view-popover/metadata-link-view-popover.component';
 
 describe('MetadataLinkViewComponent', () => {
@@ -103,9 +105,12 @@ describe('MetadataLinkViewComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
+        TranslateModule.forRoot({}),
         NgbTooltipModule,
         RouterTestingModule,
-        MetadataLinkViewComponent, EntityIconDirective, VarDirective,
+        MetadataLinkViewComponent,
+        EntityIconDirective,
+        VarDirective,
       ],
       providers: [
         { provide: ItemDataService, useValue: itemService },
