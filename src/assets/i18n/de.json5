@@ -1508,20 +1508,20 @@
   // "bitstream-request-a-copy.submit.error": "Something went wrong with submitting the item request.",
   "bitstream-request-a-copy.submit.error": "Bei der Übermittlung der Item-Anfrage ist etwas schief gelaufen.",
 
-// "bitstream-request-a-copy.access-by-token.warning": "You are viewing this item with the secure access link provided to you by the author or repository staff. It is important not to share this link to unauthorised users."
-"bitstream-request-a-copy.access-by-token.warning": "Sie betrachten dieses Element über einen sicheren Zugriffslink, der Ihnen vom Autor oder vom Repository‑Personal zur Verfügung gestellt wurde. Bitte geben Sie diesen Link nicht an unbefugte Personen weiter.",
+  // "bitstream-request-a-copy.access-by-token.warning": "You are viewing this item with the secure access link provided to you by the author or repository staff. It is important not to share this link to unauthorised users."
+  "bitstream-request-a-copy.access-by-token.warning": "Sie betrachten dieses Element über einen sicheren Zugriffslink, der Ihnen vom Autor oder vom Repository‑Personal zur Verfügung gestellt wurde. Bitte geben Sie diesen Link nicht an unbefugte Personen weiter.",
 
-// "bitstream-request-a-copy.access-by-token.expiry-label": "Access provided by this link will expire on"
-"bitstream-request-a-copy.access-by-token.expiry-label": "Der über diesen Link gewährte Zugriff endet am",
+  // "bitstream-request-a-copy.access-by-token.expiry-label": "Access provided by this link will expire on"
+  "bitstream-request-a-copy.access-by-token.expiry-label": "Der über diesen Link gewährte Zugriff endet am",
 
-// "bitstream-request-a-copy.access-by-token.expired": "Access provided by this link is no longer possible. Access expired on"
-"bitstream-request-a-copy.access-by-token.expired": "Der über diesen Link gewährte Zugriff ist nicht mehr möglich. Der Zugriff ist abgelaufen am",
+  // "bitstream-request-a-copy.access-by-token.expired": "Access provided by this link is no longer possible. Access expired on"
+  "bitstream-request-a-copy.access-by-token.expired": "Der über diesen Link gewährte Zugriff ist nicht mehr möglich. Der Zugriff ist abgelaufen am",
 
-// "bitstream-request-a-copy.access-by-token.not-granted": "Access provided by this link is not possible. Access has either not been granted, or has been revoked."
-"bitstream-request-a-copy.access-by-token.not-granted": "Der über diesen Link gewährte Zugriff ist nicht möglich. Der Zugriff wurde entweder nicht gewährt oder wurde widerrufen.",
+  // "bitstream-request-a-copy.access-by-token.not-granted": "Access provided by this link is not possible. Access has either not been granted, or has been revoked."
+  "bitstream-request-a-copy.access-by-token.not-granted": "Der über diesen Link gewährte Zugriff ist nicht möglich. Der Zugriff wurde entweder nicht gewährt oder wurde widerrufen.",
 
-// "bitstream-request-a-copy.access-by-token.re-request": "Follow restricted download links to submit a new request for access."
-"bitstream-request-a-copy.access-by-token.re-request": "Verwenden Sie eingeschränkte Download-Links, um eine neue Zugriffsanfrage zu stellen.",
+  // "bitstream-request-a-copy.access-by-token.re-request": "Follow restricted download links to submit a new request for access."
+  "bitstream-request-a-copy.access-by-token.re-request": "Verwenden Sie eingeschränkte Download-Links, um eine neue Zugriffsanfrage zu stellen.",
 
   // "bitstream-request-a-copy.access-by-token.alt-text": "Access to this item is provided by a secure token"
   "bitstream-request-a-copy.access-by-token.alt-text": "Der Zugriff auf dieses Element erfolgt über ein sicheres Zugriffstoken",
@@ -3321,61 +3321,61 @@
   "home.top-level-communities.help": "Wählen Sie einen Bereich, um dessen Inhalt anzusehen.",
 
   // "info.accessibility-settings.breadcrumbs": "Accessibility settings"
-"info.accessibility-settings.breadcrumbs": "Einstellungen zur Barrierefreiheit",
+  "info.accessibility-settings.breadcrumbs": "Einstellungen zur Barrierefreiheit",
 
-// "info.accessibility-settings.cookie-warning": "Saving the accessibility settings is currently not possible. Either log in to save the settings in user data, or accept the 'Accessibility Settings' cookie using the 'Cookie Settings' menu at the bottom of the page. Once the cookie has been accepted, you can reload the page to remove this message."
-"info.accessibility-settings.cookie-warning": "Das Speichern der Barrierefreiheitseinstellungen ist derzeit nicht möglich. Melden Sie sich entweder an, um die Einstellungen in Ihren Benutzerdaten zu speichern, oder akzeptieren Sie das Cookie „Einstellungen zur Barrierefreiheit“ über das Menü „Cookie-Einstellungen“ am unteren Rand der Seite. Sobald das Cookie akzeptiert wurde, können Sie die Seite neu laden, um diese Meldung zu entfernen.",
+  // "info.accessibility-settings.cookie-warning": "Saving the accessibility settings is currently not possible. Either log in to save the settings in user data, or accept the 'Accessibility Settings' cookie using the 'Cookie Settings' menu at the bottom of the page. Once the cookie has been accepted, you can reload the page to remove this message."
+  "info.accessibility-settings.cookie-warning": "Das Speichern der Barrierefreiheitseinstellungen ist derzeit nicht möglich. Melden Sie sich entweder an, um die Einstellungen in Ihren Benutzerdaten zu speichern, oder akzeptieren Sie das Cookie „Einstellungen zur Barrierefreiheit“ über das Menü „Cookie-Einstellungen“ am unteren Rand der Seite. Sobald das Cookie akzeptiert wurde, können Sie die Seite neu laden, um diese Meldung zu entfernen.",
 
-// "info.accessibility-settings.disableNotificationTimeOut.label": "Automatically close notifications after time out"
-"info.accessibility-settings.disableNotificationTimeOut.label": "Benachrichtigungen nach Ablauf automatisch schließen",
+  // "info.accessibility-settings.disableNotificationTimeOut.label": "Automatically close notifications after time out"
+  "info.accessibility-settings.disableNotificationTimeOut.label": "Benachrichtigungen nach Ablauf automatisch schließen",
 
-// "info.accessibility-settings.disableNotificationTimeOut.hint": "When this toggle is activated, notifications will close automatically after the time out passes. When deactivated, notifications will remain open untill manually closed."
-"info.accessibility-settings.disableNotificationTimeOut.hint": "Wenn diese Option aktiviert ist, werden Benachrichtigungen nach Ablauf automatisch geschlossen. Ist sie deaktiviert, bleiben Benachrichtigungen geöffnet, bis sie manuell geschlossen werden.",
+  // "info.accessibility-settings.disableNotificationTimeOut.hint": "When this toggle is activated, notifications will close automatically after the time out passes. When deactivated, notifications will remain open untill manually closed."
+  "info.accessibility-settings.disableNotificationTimeOut.hint": "Wenn diese Option aktiviert ist, werden Benachrichtigungen nach Ablauf automatisch geschlossen. Ist sie deaktiviert, bleiben Benachrichtigungen geöffnet, bis sie manuell geschlossen werden.",
 
-// "info.accessibility-settings.failed-notification": "Failed to save accessibility settings"
-"info.accessibility-settings.failed-notification": "Die Barrierefreiheitseinstellungen konnten nicht gespeichert werden",
+  // "info.accessibility-settings.failed-notification": "Failed to save accessibility settings"
+  "info.accessibility-settings.failed-notification": "Die Barrierefreiheitseinstellungen konnten nicht gespeichert werden",
 
-// "info.accessibility-settings.invalid-form-notification": "Did not save. The form contains invalid values."
-"info.accessibility-settings.invalid-form-notification": "Nicht gespeichert. Das Formular enthält ungültige Werte.",
+  // "info.accessibility-settings.invalid-form-notification": "Did not save. The form contains invalid values."
+  "info.accessibility-settings.invalid-form-notification": "Nicht gespeichert. Das Formular enthält ungültige Werte.",
 
-// "info.accessibility-settings.liveRegionTimeOut.label": "ARIA Live region time out (in seconds)"
-"info.accessibility-settings.liveRegionTimeOut.label": "Dauer der ARIA-Live-Region (in Sekunden)",
+  // "info.accessibility-settings.liveRegionTimeOut.label": "ARIA Live region time out (in seconds)"
+  "info.accessibility-settings.liveRegionTimeOut.label": "Dauer der ARIA-Live-Region (in Sekunden)",
 
-// "info.accessibility-settings.liveRegionTimeOut.hint": "The duration after which a message in the ARIA live region disappears. ARIA live regions are not visible on the page, but provide announcements of notifications (or other actions) to screen readers."
-"info.accessibility-settings.liveRegionTimeOut.hint": "Die Zeitspanne, nach der eine Nachricht in der ARIA-Live-Region ausgeblendet wird. ARIA-Live-Regionen sind auf der Seite nicht sichtbar, liefern jedoch Benachrichtigungen (oder andere Aktionen) für Screenreader.",
+  // "info.accessibility-settings.liveRegionTimeOut.hint": "The duration after which a message in the ARIA live region disappears. ARIA live regions are not visible on the page, but provide announcements of notifications (or other actions) to screen readers."
+  "info.accessibility-settings.liveRegionTimeOut.hint": "Die Zeitspanne, nach der eine Nachricht in der ARIA-Live-Region ausgeblendet wird. ARIA-Live-Regionen sind auf der Seite nicht sichtbar, liefern jedoch Benachrichtigungen (oder andere Aktionen) für Screenreader.",
 
-// "info.accessibility-settings.liveRegionTimeOut.invalid": "Live region time out must be greater than 0"
-"info.accessibility-settings.liveRegionTimeOut.invalid": "Die Dauer der ARIA-Live-Region muss größer als 0 sein",
+  // "info.accessibility-settings.liveRegionTimeOut.invalid": "Live region time out must be greater than 0"
+  "info.accessibility-settings.liveRegionTimeOut.invalid": "Die Dauer der ARIA-Live-Region muss größer als 0 sein",
 
-// "info.accessibility-settings.notificationTimeOut.label": "Notification time out (in seconds)"
-"info.accessibility-settings.notificationTimeOut.label": "Dauer der Benachrichtigungen (in Sekunden)",
+  // "info.accessibility-settings.notificationTimeOut.label": "Notification time out (in seconds)"
+  "info.accessibility-settings.notificationTimeOut.label": "Dauer der Benachrichtigungen (in Sekunden)",
 
-// "info.accessibility-settings.notificationTimeOut.hint": "The duration after which a notification disappears."
-"info.accessibility-settings.notificationTimeOut.hint": "Die Zeitspanne, nach der eine Benachrichtigung ausgeblendet wird.",
+  // "info.accessibility-settings.notificationTimeOut.hint": "The duration after which a notification disappears."
+  "info.accessibility-settings.notificationTimeOut.hint": "Die Zeitspanne, nach der eine Benachrichtigung ausgeblendet wird.",
 
-// "info.accessibility-settings.notificationTimeOut.invalid": "Notification time out must be greater than 0"
-"info.accessibility-settings.notificationTimeOut.invalid": "Die Dauer der Benachrichtigung muss größer als 0 sein",
+  // "info.accessibility-settings.notificationTimeOut.invalid": "Notification time out must be greater than 0"
+  "info.accessibility-settings.notificationTimeOut.invalid": "Die Dauer der Benachrichtigung muss größer als 0 sein",
 
-// "info.accessibility-settings.save-notification.cookie": "Successfully saved settings locally."
-"info.accessibility-settings.save-notification.cookie": "Die Einstellungen wurden erfolgreich lokal gespeichert.",
+  // "info.accessibility-settings.save-notification.cookie": "Successfully saved settings locally."
+  "info.accessibility-settings.save-notification.cookie": "Die Einstellungen wurden erfolgreich lokal gespeichert.",
 
-// "info.accessibility-settings.save-notification.metadata": "Successfully saved settings on the user profile."
-"info.accessibility-settings.save-notification.metadata": "Die Einstellungen wurden erfolgreich im Benutzerprofil gespeichert.",
+  // "info.accessibility-settings.save-notification.metadata": "Successfully saved settings on the user profile."
+  "info.accessibility-settings.save-notification.metadata": "Die Einstellungen wurden erfolgreich im Benutzerprofil gespeichert.",
 
-// "info.accessibility-settings.reset-failed": "Failed to reset. Either log in or accept the 'Accessibility Settings' cookie."
-"info.accessibility-settings.reset-failed": "Zurücksetzen fehlgeschlagen. Melden Sie sich an oder akzeptieren Sie das Cookie „Einstellungen zur Barrierefreiheit“.",
+  // "info.accessibility-settings.reset-failed": "Failed to reset. Either log in or accept the 'Accessibility Settings' cookie."
+  "info.accessibility-settings.reset-failed": "Zurücksetzen fehlgeschlagen. Melden Sie sich an oder akzeptieren Sie das Cookie „Einstellungen zur Barrierefreiheit“.",
 
-// "info.accessibility-settings.reset-notification": "Successfully reset settings."
-"info.accessibility-settings.reset-notification": "Die Einstellungen wurden erfolgreich zurückgesetzt.",
+  // "info.accessibility-settings.reset-notification": "Successfully reset settings."
+  "info.accessibility-settings.reset-notification": "Die Einstellungen wurden erfolgreich zurückgesetzt.",
 
-// "info.accessibility-settings.reset": "Reset accessibility settings"
-"info.accessibility-settings.reset": "Barrierefreiheitseinstellungen zurücksetzen",
+  // "info.accessibility-settings.reset": "Reset accessibility settings"
+  "info.accessibility-settings.reset": "Barrierefreiheitseinstellungen zurücksetzen",
 
-// "info.accessibility-settings.submit": "Save accessibility settings"
-"info.accessibility-settings.submit": "Barrierefreiheitseinstellungen speichern",
+  // "info.accessibility-settings.submit": "Save accessibility settings"
+  "info.accessibility-settings.submit": "Barrierefreiheitseinstellungen speichern",
 
-// "info.accessibility-settings.title": "Accessibility settings"
-"info.accessibility-settings.title": "Einstellungen zur Barrierefreiheit",
+  // "info.accessibility-settings.title": "Accessibility settings"
+  "info.accessibility-settings.title": "Einstellungen zur Barrierefreiheit",
 
   // "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
   "info.end-user-agreement.accept": "Ich habe die Endnutzer-Vereinbarung gelesen und stimme ihr zu.",
@@ -3558,19 +3558,19 @@
   "item.edit.bitstreams.edit.buttons.undo": "Änderungen rückgängig machen",
 
   // "item.edit.bitstreams.edit.live.cancel": "{{ bitstream }} was returned to position {{ toIndex }} and is no longer selected."
-"item.edit.bitstreams.edit.live.cancel": "{{ bitstream }} wurde an Position {{ toIndex }} zurückgesetzt und ist nicht mehr ausgewählt.",
+  "item.edit.bitstreams.edit.live.cancel": "{{ bitstream }} wurde an Position {{ toIndex }} zurückgesetzt und ist nicht mehr ausgewählt.",
 
-// "item.edit.bitstreams.edit.live.clear": "{{ bitstream }} is no longer selected."
-"item.edit.bitstreams.edit.live.clear": "{{ bitstream }} ist nicht mehr ausgewählt.",
+  // "item.edit.bitstreams.edit.live.clear": "{{ bitstream }} is no longer selected."
+  "item.edit.bitstreams.edit.live.clear": "{{ bitstream }} ist nicht mehr ausgewählt.",
 
-// "item.edit.bitstreams.edit.live.loading": "Waiting for move to complete."
-"item.edit.bitstreams.edit.live.loading": "Warten auf Abschluss der Verschiebung.",
+  // "item.edit.bitstreams.edit.live.loading": "Waiting for move to complete."
+  "item.edit.bitstreams.edit.live.loading": "Warten auf Abschluss der Verschiebung.",
 
-// "item.edit.bitstreams.edit.live.select": "{{ bitstream }} is selected."
-"item.edit.bitstreams.edit.live.select": "{{ bitstream }} ist ausgewählt.",
+  // "item.edit.bitstreams.edit.live.select": "{{ bitstream }} is selected."
+  "item.edit.bitstreams.edit.live.select": "{{ bitstream }} ist ausgewählt.",
 
-// "item.edit.bitstreams.edit.live.move": "{{ bitstream }} is now in position {{ toIndex }}."
-"item.edit.bitstreams.edit.live.move": "{{ bitstream }} befindet sich jetzt an Position {{ toIndex }}.",
+  // "item.edit.bitstreams.edit.live.move": "{{ bitstream }} is now in position {{ toIndex }}."
+  "item.edit.bitstreams.edit.live.move": "{{ bitstream }} befindet sich jetzt an Position {{ toIndex }}.",
 
   // "item.edit.bitstreams.empty": "This item doesn't contain any bitstreams. Click the upload button to create one.",
   "item.edit.bitstreams.empty": "Dieses Item enthält keine Dateien. Klicken Sie auf das Feld \"Hochladen\", um eine Datei hinzuzufügen.",
@@ -4482,25 +4482,25 @@
   "item.preview.oaire.citation.volume": "Band/Jahrgang",
 
   // "item.preview.oaire.citation.title": "Citation container"
-"item.preview.oaire.citation.title": "Zitationsquelle",
+  "item.preview.oaire.citation.title": "Zitationsquelle",
 
-// "item.preview.oaire.citation.startPage": "Citation start page"
-"item.preview.oaire.citation.startPage": "Zitationsanfangsseite",
+  // "item.preview.oaire.citation.startPage": "Citation start page"
+  "item.preview.oaire.citation.startPage": "Zitationsanfangsseite",
 
-// "item.preview.oaire.citation.endPage": "Citation end page"
-"item.preview.oaire.citation.endPage": "Zitationsendseite",
+  // "item.preview.oaire.citation.endPage": "Citation end page"
+  "item.preview.oaire.citation.endPage": "Zitationsendseite",
 
-// "item.preview.dc.relation.hasversion": "Has version"
-"item.preview.dc.relation.hasversion": "Hat Version",
+  // "item.preview.dc.relation.hasversion": "Has version"
+  "item.preview.dc.relation.hasversion": "Hat Version",
 
-// "item.preview.dc.relation.ispartofseries": "Is part of series"
-"item.preview.dc.relation.ispartofseries": "Ist Teil einer Reihe",
+  // "item.preview.dc.relation.ispartofseries": "Is part of series"
+  "item.preview.dc.relation.ispartofseries": "Ist Teil einer Reihe",
 
-// "item.preview.dc.rights": "Rights"
-"item.preview.dc.rights": "Rechte",
+  // "item.preview.dc.rights": "Rights"
+  "item.preview.dc.rights": "Rechte",
 
-// "item.preview.dc.identifier.other": "Other Identifier"
-"item.preview.dc.identifier.other": "Weiterer Identifikator",
+  // "item.preview.dc.identifier.other": "Other Identifier"
+  "item.preview.dc.identifier.other": "Weiterer Identifikator",
 
   // "item.preview.dc.relation.issn": "ISSN",
   "item.preview.dc.relation.issn": "ISSN",
@@ -6900,67 +6900,67 @@
   "search.filters.applied.f.withdrawn": "Zurückgezogen",
 
   // "search.filters.applied.f.graphitemtype": "Item type"
-"search.filters.applied.f.graphitemtype": "Item-Typ",
+  "search.filters.applied.f.graphitemtype": "Item-Typ",
 
-// "search.filters.applied.f.graphpubldate": "Public date"
-"search.filters.applied.f.graphpubldate": "Öffentliches Datum",
+  // "search.filters.applied.f.graphpubldate": "Public date"
+  "search.filters.applied.f.graphpubldate": "Öffentliches Datum",
 
-// "search.filters.applied.f.graphpubldateltr": "Public date LTR"
-"search.filters.applied.f.graphpubldateltr": "Öffentliches Datum (LTR)",
+  // "search.filters.applied.f.graphpubldateltr": "Public date LTR"
+  "search.filters.applied.f.graphpubldateltr": "Öffentliches Datum (LTR)",
 
-// "search.filters.applied.f.graphpubldatetrl": "Public date RTL"
-"search.filters.applied.f.graphpubldatetrl": "Öffentliches Datum (RTL)",
+  // "search.filters.applied.f.graphpubldatetrl": "Public date RTL"
+  "search.filters.applied.f.graphpubldatetrl": "Öffentliches Datum (RTL)",
 
-// "search.filters.applied.f.organization": "Organisation"
-"search.filters.applied.f.organization": "Organisation",
+  // "search.filters.applied.f.organization": "Organisation"
+  "search.filters.applied.f.organization": "Organisation",
 
   // "search.filters.applied.f.knowslanguage": "Language",
   "search.filters.applied.f.knowslanguage": "Sprache",
 
   // "search.filters.applied.charts.defaultConfiguration.title": "Search Output"
-"search.filters.applied.charts.defaultConfiguration.title": "Suchergebnisse",
+  "search.filters.applied.charts.defaultConfiguration.title": "Suchergebnisse",
 
-// "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Date Issued"
-"search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Erscheinungsdatum",
+  // "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Date Issued"
+  "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Erscheinungsdatum",
 
-// "search.filters.applied.charts.chart.pie.more-value": "More"
-"search.filters.applied.charts.chart.pie.more-value": "Mehr",
+  // "search.filters.applied.charts.chart.pie.more-value": "More"
+  "search.filters.applied.charts.chart.pie.more-value": "Mehr",
 
-// "search.filters.applied.charts.chart.pie.itemtype_filter.tab": "Item Type"
-"search.filters.applied.charts.chart.pie.itemtype_filter.tab": "Item-Typ",
+  // "search.filters.applied.charts.chart.pie.itemtype_filter.tab": "Item Type"
+  "search.filters.applied.charts.chart.pie.itemtype_filter.tab": "Item-Typ",
 
-// "search.filters.applied.charts.graphitemtype.tab": "Visualization by Type"
-"search.filters.applied.charts.graphitemtype.tab": "Visualisierung nach Typ",
+  // "search.filters.applied.charts.graphitemtype.tab": "Visualization by Type"
+  "search.filters.applied.charts.graphitemtype.tab": "Visualisierung nach Typ",
 
-// "search.filters.applied.charts.graphpubldate.tab": "Visualization by Date"
-"search.filters.applied.charts.graphpubldate.tab": "Visualisierung nach Datum",
+  // "search.filters.applied.charts.graphpubldate.tab": "Visualization by Date"
+  "search.filters.applied.charts.graphpubldate.tab": "Visualisierung nach Datum",
 
-// "search.filters.applied.charts.graphpubldateltr.tab": "Visualization Demo LTR"
-"search.filters.applied.charts.graphpubldateltr.tab": "Visualisierungsdemo (LTR)",
+  // "search.filters.applied.charts.graphpubldateltr.tab": "Visualization Demo LTR"
+  "search.filters.applied.charts.graphpubldateltr.tab": "Visualisierungsdemo (LTR)",
 
-// "search.filters.applied.charts.graphpubldatetrl.tab": "Visualization Demo RTL"
-"search.filters.applied.charts.graphpubldatetrl.tab": "Visualisierungsdemo (RTL)",
+  // "search.filters.applied.charts.graphpubldatetrl.tab": "Visualization Demo RTL"
+  "search.filters.applied.charts.graphpubldatetrl.tab": "Visualisierungsdemo (RTL)",
 
-// "search.filters.applied.charts.default.title": "Search Output"
-"search.filters.applied.charts.default.title": "Suchergebnisse",
+  // "search.filters.applied.charts.default.title": "Search Output"
+  "search.filters.applied.charts.default.title": "Suchergebnisse",
 
-// "search.filters.applied.charts.site.title": "Search Output"
-"search.filters.applied.charts.site.title": "Suchergebnisse",
+  // "search.filters.applied.charts.site.title": "Search Output"
+  "search.filters.applied.charts.site.title": "Suchergebnisse",
 
-// "search.filters.applied.charts.RELATION.Person.researchoutputs.title": "Research Output"
-"search.filters.applied.charts.RELATION.Person.researchoutputs.title": "Forschungsergebnisse",
+  // "search.filters.applied.charts.RELATION.Person.researchoutputs.title": "Research Output"
+  "search.filters.applied.charts.RELATION.Person.researchoutputs.title": "Forschungsergebnisse",
 
-// "search.filters.applied.charts.RELATION.Project.fundings.title": "Fundings"
-"search.filters.applied.charts.RELATION.Project.fundings.title": "Fördermittel",
+  // "search.filters.applied.charts.RELATION.Project.fundings.title": "Fundings"
+  "search.filters.applied.charts.RELATION.Project.fundings.title": "Fördermittel",
 
-// "search.filters.applied.charts.RELATION.Project.researchoutputs.title": "Research Output"
-"search.filters.applied.charts.RELATION.Project.researchoutputs.title": "Forschungsergebnisse",
+  // "search.filters.applied.charts.RELATION.Project.researchoutputs.title": "Research Output"
+  "search.filters.applied.charts.RELATION.Project.researchoutputs.title": "Forschungsergebnisse",
 
-// "search.filters.applied.charts.no.data.found": "No data found"
-"search.filters.applied.charts.no.data.found": "Keine Daten gefunden",
+  // "search.filters.applied.charts.no.data.found": "No data found"
+  "search.filters.applied.charts.no.data.found": "Keine Daten gefunden",
 
-// "search.filters.applied.charts.show.hide": "Show/Hide"
-"search.filters.applied.charts.show.hide": "Ein-/Ausblenden",
+  // "search.filters.applied.charts.show.hide": "Show/Hide"
+  "search.filters.applied.charts.show.hide": "Ein-/Ausblenden",
 
 
 
@@ -7698,28 +7698,28 @@
   "submission.import-external.source.ror": "Research Organization Registry (ROR)",
 
   // "submission.import-external.source.openalexPublication": "OpenAlex Search by Title"
-"submission.import-external.source.openalexPublication": "OpenAlex-Suche nach Titel",
+  "submission.import-external.source.openalexPublication": "OpenAlex-Suche nach Titel",
 
-// "submission.import-external.source.openalexPublicationByAuthorId": "OpenAlex Search by Author ID"
-"submission.import-external.source.openalexPublicationByAuthorId": "OpenAlex-Suche nach Autor-ID",
+  // "submission.import-external.source.openalexPublicationByAuthorId": "OpenAlex Search by Author ID"
+  "submission.import-external.source.openalexPublicationByAuthorId": "OpenAlex-Suche nach Autor-ID",
 
-// "submission.import-external.source.openalexPublicationByDOI": "OpenAlex Search by DOI"
-"submission.import-external.source.openalexPublicationByDOI": "OpenAlex-Suche nach DOI",
+  // "submission.import-external.source.openalexPublicationByDOI": "OpenAlex Search by DOI"
+  "submission.import-external.source.openalexPublicationByDOI": "OpenAlex-Suche nach DOI",
 
-// "submission.import-external.source.openalexPerson": "OpenAlex Search by name"
-"submission.import-external.source.openalexPerson": "OpenAlex-Suche nach Name",
+  // "submission.import-external.source.openalexPerson": "OpenAlex Search by name"
+  "submission.import-external.source.openalexPerson": "OpenAlex-Suche nach Name",
 
-// "submission.import-external.source.openalexJournal": "OpenAlex Journals"
-"submission.import-external.source.openalexJournal": "OpenAlex-Zeitschriften",
+  // "submission.import-external.source.openalexJournal": "OpenAlex Journals"
+  "submission.import-external.source.openalexJournal": "OpenAlex-Zeitschriften",
 
-// "submission.import-external.source.openalexInstitution": "OpenAlex Institutions"
-"submission.import-external.source.openalexInstitution": "OpenAlex-Institutionen",
+  // "submission.import-external.source.openalexInstitution": "OpenAlex Institutions"
+  "submission.import-external.source.openalexInstitution": "OpenAlex-Institutionen",
 
-// "submission.import-external.source.openalexPublisher": "OpenAlex Publishers"
-"submission.import-external.source.openalexPublisher": "OpenAlex-Verlage",
+  // "submission.import-external.source.openalexPublisher": "OpenAlex Publishers"
+  "submission.import-external.source.openalexPublisher": "OpenAlex-Verlage",
 
-// "submission.import-external.source.openalexFunder": "OpenAlex Funders"
-"submission.import-external.source.openalexFunder": "OpenAlex-Förderorganisationen",
+  // "submission.import-external.source.openalexFunder": "OpenAlex Funders"
+  "submission.import-external.source.openalexFunder": "OpenAlex-Förderorganisationen",
 
   // "submission.import-external.preview.title": "Item Preview",
   "submission.import-external.preview.title": "Item-Vorschau",
@@ -8022,19 +8022,19 @@
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.sherpaJournalIssn": "Sherpa-Zeitschriften nach ISSN ({{ count }})",
 
   // "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPerson": "OpenAlex ({{ count }})"
-"submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPerson": "OpenAlex ({{ count }})",
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPerson": "OpenAlex ({{ count }})",
 
-// "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexInstitution": "OpenAlex Search by Institution ({{ count }})"
-"submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexInstitution": "OpenAlex-Suche nach Institution ({{ count }})",
+  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexInstitution": "OpenAlex Search by Institution ({{ count }})"
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexInstitution": "OpenAlex-Suche nach Institution ({{ count }})",
 
-// "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPublisher": "OpenAlex Search by Publisher ({{ count }})"
-"submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPublisher": "OpenAlex-Suche nach Verlag ({{ count }})",
+  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPublisher": "OpenAlex Search by Publisher ({{ count }})"
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPublisher": "OpenAlex-Suche nach Verlag ({{ count }})",
 
-// "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexFunder": "OpenAlex Search by Funder ({{ count }})"
-"submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexFunder": "OpenAlex-Suche nach Förderorganisation ({{ count }})",
+  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexFunder": "OpenAlex Search by Funder ({{ count }})"
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexFunder": "OpenAlex-Suche nach Förderorganisation ({{ count }})",
 
-// "submission.sections.describe.relationship-lookup.search-tab.tab-title.dataciteProject": "DataCite Search by Project ({{ count }})"
-"submission.sections.describe.relationship-lookup.search-tab.tab-title.dataciteProject": "DataCite-Suche nach Projekt ({{ count }})",
+  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.dataciteProject": "DataCite Search by Project ({{ count }})"
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.dataciteProject": "DataCite-Suche nach Projekt ({{ count }})",
 
   // "submission.sections.describe.relationship-lookup.search-tab.tab-title.isFundingAgencyOfPublication": "Search for Funding Agencies",
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.isFundingAgencyOfPublication": "Suche nach Fördereinrichtungen",
@@ -10729,197 +10729,197 @@
   // "browse.search-form.placeholder": "Search the repository",
   "browse.search-form.placeholder": "Suche im Repositorium",
 
-// "file-download-link.download": "Download "
-"file-download-link.download": "Download ",
+  // "file-download-link.download": "Download "
+  "file-download-link.download": "Download ",
 
-// "register-page.registration.aria.label": "Enter your e-mail address"
-"register-page.registration.aria.label": "Geben Sie Ihre E-Mail-Adresse ein",
+  // "register-page.registration.aria.label": "Enter your e-mail address"
+  "register-page.registration.aria.label": "Geben Sie Ihre E-Mail-Adresse ein",
 
-// "forgot-email.form.aria.label": "Enter your e-mail address"
-"forgot-email.form.aria.label": "Geben Sie Ihre E-Mail-Adresse ein",
+  // "forgot-email.form.aria.label": "Enter your e-mail address"
+  "forgot-email.form.aria.label": "Geben Sie Ihre E-Mail-Adresse ein",
 
-// "search-facet-option.update.announcement": "The page will be reloaded. Filter {{ filter }} is selected."
-"search-facet-option.update.announcement": "Die Seite wird neu geladen. Der Filter {{ filter }} ist ausgewählt.",
+  // "search-facet-option.update.announcement": "The page will be reloaded. Filter {{ filter }} is selected."
+  "search-facet-option.update.announcement": "Die Seite wird neu geladen. Der Filter {{ filter }} ist ausgewählt.",
 
-// "live-region.ordering.instructions": "Press spacebar to reorder {{ itemName }}."
-"live-region.ordering.instructions": "Drücken Sie die Leertaste, um {{ itemName }} neu anzuordnen.",
+  // "live-region.ordering.instructions": "Press spacebar to reorder {{ itemName }}."
+  "live-region.ordering.instructions": "Drücken Sie die Leertaste, um {{ itemName }} neu anzuordnen.",
 
-// "live-region.ordering.status": "{{ itemName }}, grabbed. Current position in list: {{ index }} of  {{ length }}. Press up and down arrow keys to change position, SpaceBar to drop, Escape to cancel."
-"live-region.ordering.status": "{{ itemName }} aufgenommen. Aktuelle Position in der Liste: {{ index }} von {{ length }}. Verwenden Sie die Pfeiltasten nach oben und unten, um die Position zu ändern, die Leertaste zum Ablegen oder Escape zum Abbrechen.",
+  // "live-region.ordering.status": "{{ itemName }}, grabbed. Current position in list: {{ index }} of  {{ length }}. Press up and down arrow keys to change position, SpaceBar to drop, Escape to cancel."
+  "live-region.ordering.status": "{{ itemName }} aufgenommen. Aktuelle Position in der Liste: {{ index }} von {{ length }}. Verwenden Sie die Pfeiltasten nach oben und unten, um die Position zu ändern, die Leertaste zum Ablegen oder Escape zum Abbrechen.",
 
-// "live-region.ordering.moved": "{{ itemName }}, moved to position {{ index }} of {{ length }}. Press up and down arrow keys to change position, SpaceBar to drop, Escape to cancel."
-"live-region.ordering.moved": "{{ itemName }} wurde an Position {{ index }} von {{ length }} verschoben. Verwenden Sie die Pfeiltasten nach oben und unten, um die Position zu ändern, die Leertaste zum Ablegen oder Escape zum Abbrechen.",
+  // "live-region.ordering.moved": "{{ itemName }}, moved to position {{ index }} of {{ length }}. Press up and down arrow keys to change position, SpaceBar to drop, Escape to cancel."
+  "live-region.ordering.moved": "{{ itemName }} wurde an Position {{ index }} von {{ length }} verschoben. Verwenden Sie die Pfeiltasten nach oben und unten, um die Position zu ändern, die Leertaste zum Ablegen oder Escape zum Abbrechen.",
 
-// "live-region.ordering.dropped": "{{ itemName }}, dropped at position {{ index }} of {{ length }}."
-"live-region.ordering.dropped": "{{ itemName }} wurde an Position {{ index }} von {{ length }} abgelegt.",
+  // "live-region.ordering.dropped": "{{ itemName }}, dropped at position {{ index }} of {{ length }}."
+  "live-region.ordering.dropped": "{{ itemName }} wurde an Position {{ index }} von {{ length }} abgelegt.",
 
-// "dynamic-form-array.sortable-list.label": "Sortable list"
-"dynamic-form-array.sortable-list.label": "Sortierbare Liste",
+  // "dynamic-form-array.sortable-list.label": "Sortable list"
+  "dynamic-form-array.sortable-list.label": "Sortierbare Liste",
 
-// "external-login.component.or": "or"
-"external-login.component.or": "oder",
+  // "external-login.component.or": "or"
+  "external-login.component.or": "oder",
 
-// "external-login.confirmation.header": "Information needed to complete the login process"
-"external-login.confirmation.header": "Informationen zum Abschluss des Anmeldevorgangs erforderlich",
+  // "external-login.confirmation.header": "Information needed to complete the login process"
+  "external-login.confirmation.header": "Informationen zum Abschluss des Anmeldevorgangs erforderlich",
 
-// "external-login.noEmail.informationText": "The information received from {{authMethod}} are not sufficient..."
-"external-login.noEmail.informationText": "Die von {{authMethod}} erhaltenen Informationen sind nicht ausreichend, um den Anmeldevorgang abzuschließen. Bitte geben Sie unten die fehlenden Informationen ein oder melden Sie sich über eine andere Methode an, um {{authMethod}} mit einem bestehenden Konto zu verknüpfen.",
+  // "external-login.noEmail.informationText": "The information received from {{authMethod}} are not sufficient..."
+  "external-login.noEmail.informationText": "Die von {{authMethod}} erhaltenen Informationen sind nicht ausreichend, um den Anmeldevorgang abzuschließen. Bitte geben Sie unten die fehlenden Informationen ein oder melden Sie sich über eine andere Methode an, um {{authMethod}} mit einem bestehenden Konto zu verknüpfen.",
 
-// "external-login.haveEmail.informationText": "It seems that you have not yet an account..."
-"external-login.haveEmail.informationText": "Es scheint, dass Sie noch kein Konto in diesem System haben. In diesem Fall bestätigen Sie bitte die von {{authMethod}} erhaltenen Daten, und es wird ein neues Konto für Sie erstellt. Falls Sie bereits ein Konto haben, aktualisieren Sie bitte die E-Mail-Adresse, sodass sie mit der im System verwendeten übereinstimmt, oder melden Sie sich über eine andere Methode an, um {{authMethod}} mit Ihrem bestehenden Konto zu verknüpfen.",
+  // "external-login.haveEmail.informationText": "It seems that you have not yet an account..."
+  "external-login.haveEmail.informationText": "Es scheint, dass Sie noch kein Konto in diesem System haben. In diesem Fall bestätigen Sie bitte die von {{authMethod}} erhaltenen Daten, und es wird ein neues Konto für Sie erstellt. Falls Sie bereits ein Konto haben, aktualisieren Sie bitte die E-Mail-Adresse, sodass sie mit der im System verwendeten übereinstimmt, oder melden Sie sich über eine andere Methode an, um {{authMethod}} mit Ihrem bestehenden Konto zu verknüpfen.",
 
-// "external-login.confirm-email.header": "Confirm or update email"
-"external-login.confirm-email.header": "E-Mail-Adresse bestätigen oder aktualisieren",
+  // "external-login.confirm-email.header": "Confirm or update email"
+  "external-login.confirm-email.header": "E-Mail-Adresse bestätigen oder aktualisieren",
 
-// "external-login.confirmation.email-required": "Email is required."
-"external-login.confirmation.email-required": "E-Mail-Adresse ist erforderlich.",
+  // "external-login.confirmation.email-required": "Email is required."
+  "external-login.confirmation.email-required": "E-Mail-Adresse ist erforderlich.",
 
-// "external-login.confirmation.email-label": "User Email"
-"external-login.confirmation.email-label": "E-Mail-Adresse des Benutzers",
+  // "external-login.confirmation.email-label": "User Email"
+  "external-login.confirmation.email-label": "E-Mail-Adresse des Benutzers",
 
-// "external-login.confirmation.email-invalid": "Invalid email format."
-"external-login.confirmation.email-invalid": "Ungültiges E-Mail-Format.",
+  // "external-login.confirmation.email-invalid": "Invalid email format."
+  "external-login.confirmation.email-invalid": "Ungültiges E-Mail-Format.",
 
-// "external-login.confirm.button.label": "Confirm this email"
-"external-login.confirm.button.label": "Diese E-Mail-Adresse bestätigen",
+  // "external-login.confirm.button.label": "Confirm this email"
+  "external-login.confirm.button.label": "Diese E-Mail-Adresse bestätigen",
 
-// "external-login.confirm-email-sent.header": "Confirmation email sent"
-"external-login.confirm-email-sent.header": "Bestätigungs-E-Mail gesendet",
+  // "external-login.confirm-email-sent.header": "Confirmation email sent"
+  "external-login.confirm-email-sent.header": "Bestätigungs-E-Mail gesendet",
 
-// "external-login.confirm-email-sent.info": " We have sent an email to the provided address..."
-"external-login.confirm-email-sent.info": "Wir haben eine E-Mail an die angegebene Adresse gesendet, um Ihre Eingabe zu bestätigen.<br>Bitte folgen Sie den Anweisungen in der E-Mail, um den Anmeldevorgang abzuschließen.",
+  // "external-login.confirm-email-sent.info": " We have sent an email to the provided address..."
+  "external-login.confirm-email-sent.info": "Wir haben eine E-Mail an die angegebene Adresse gesendet, um Ihre Eingabe zu bestätigen.<br>Bitte folgen Sie den Anweisungen in der E-Mail, um den Anmeldevorgang abzuschließen.",
 
-// "external-login.provide-email.header": "Provide email"
-"external-login.provide-email.header": "E-Mail-Adresse angeben",
+  // "external-login.provide-email.header": "Provide email"
+  "external-login.provide-email.header": "E-Mail-Adresse angeben",
 
-// "external-login.provide-email.button.label": "Send Verification link"
-"external-login.provide-email.button.label": "Bestätigungslink senden",
+  // "external-login.provide-email.button.label": "Send Verification link"
+  "external-login.provide-email.button.label": "Bestätigungslink senden",
 
-// "external-login-validation.review-account-info.header": "Review your account information"
-"external-login-validation.review-account-info.header": "Kontoinformationen überprüfen",
+  // "external-login-validation.review-account-info.header": "Review your account information"
+  "external-login-validation.review-account-info.header": "Kontoinformationen überprüfen",
 
-// "external-login-validation.review-account-info.info": "The information received from ORCID differs..."
-"external-login-validation.review-account-info.info": "Die von ORCID erhaltenen Informationen unterscheiden sich von denen in Ihrem Profil.<br>Bitte überprüfen Sie diese und entscheiden Sie, ob Sie Änderungen vornehmen möchten. Nach dem Speichern werden Sie zu Ihrer Profilseite weitergeleitet.",
+  // "external-login-validation.review-account-info.info": "The information received from ORCID differs..."
+  "external-login-validation.review-account-info.info": "Die von ORCID erhaltenen Informationen unterscheiden sich von denen in Ihrem Profil.<br>Bitte überprüfen Sie diese und entscheiden Sie, ob Sie Änderungen vornehmen möchten. Nach dem Speichern werden Sie zu Ihrer Profilseite weitergeleitet.",
 
-// "external-login-validation.review-account-info.table.header.information": "Information"
-"external-login-validation.review-account-info.table.header.information": "Information",
+  // "external-login-validation.review-account-info.table.header.information": "Information"
+  "external-login-validation.review-account-info.table.header.information": "Information",
 
-// "external-login-validation.review-account-info.table.header.received-value": "Received value"
-"external-login-validation.review-account-info.table.header.received-value": "Erhaltener Wert",
+  // "external-login-validation.review-account-info.table.header.received-value": "Received value"
+  "external-login-validation.review-account-info.table.header.received-value": "Erhaltener Wert",
 
-// "external-login-validation.review-account-info.table.header.current-value": "Current value"
-"external-login-validation.review-account-info.table.header.current-value": "Aktueller Wert",
+  // "external-login-validation.review-account-info.table.header.current-value": "Current value"
+  "external-login-validation.review-account-info.table.header.current-value": "Aktueller Wert",
 
-// "external-login-validation.review-account-info.table.header.action": "Override"
-"external-login-validation.review-account-info.table.header.action": "Überschreiben",
+  // "external-login-validation.review-account-info.table.header.action": "Override"
+  "external-login-validation.review-account-info.table.header.action": "Überschreiben",
 
-// "external-login-validation.review-account-info.table.row.not-applicable": "N/A"
-"external-login-validation.review-account-info.table.row.not-applicable": "k. A.",
+  // "external-login-validation.review-account-info.table.row.not-applicable": "N/A"
+  "external-login-validation.review-account-info.table.row.not-applicable": "k. A.",
 
-// "on-label": "ON"
-"on-label": "EIN",
+  // "on-label": "ON"
+  "on-label": "EIN",
 
-// "off-label": "OFF"
-"off-label": "AUS",
+  // "off-label": "OFF"
+  "off-label": "AUS",
 
-// "review-account-info.merge-data.notification.success": "Your account information has been updated successfully"
-"review-account-info.merge-data.notification.success": "Ihre Kontoinformationen wurden erfolgreich aktualisiert.",
+  // "review-account-info.merge-data.notification.success": "Your account information has been updated successfully"
+  "review-account-info.merge-data.notification.success": "Ihre Kontoinformationen wurden erfolgreich aktualisiert.",
 
-// "review-account-info.merge-data.notification.error": "Something went wrong while updating your account information"
-"review-account-info.merge-data.notification.error": "Beim Aktualisieren Ihrer Kontoinformationen ist ein Fehler aufgetreten.",
+  // "review-account-info.merge-data.notification.error": "Something went wrong while updating your account information"
+  "review-account-info.merge-data.notification.error": "Beim Aktualisieren Ihrer Kontoinformationen ist ein Fehler aufgetreten.",
 
-// "review-account-info.alert.error.content": "Something went wrong. Please try again later."
-"review-account-info.alert.error.content": "Etwas ist schiefgelaufen. Bitte versuchen Sie es später erneut.",
+  // "review-account-info.alert.error.content": "Something went wrong. Please try again later."
+  "review-account-info.alert.error.content": "Etwas ist schiefgelaufen. Bitte versuchen Sie es später erneut.",
 
-// "external-login-page.provide-email.notifications.error": "Something went wrong.Email address was omitted or the operation is not valid."
-"external-login-page.provide-email.notifications.error": "Etwas ist schiefgelaufen. Die E-Mail-Adresse fehlt oder der Vorgang ist ungültig.",
+  // "external-login-page.provide-email.notifications.error": "Something went wrong.Email address was omitted or the operation is not valid."
+  "external-login-page.provide-email.notifications.error": "Etwas ist schiefgelaufen. Die E-Mail-Adresse fehlt oder der Vorgang ist ungültig.",
 
-// "external-login.error.notification": "There was an error while processing your request. Please try again later."
-"external-login.error.notification": "Bei der Verarbeitung Ihrer Anfrage ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.",
+  // "external-login.error.notification": "There was an error while processing your request. Please try again later."
+  "external-login.error.notification": "Bei der Verarbeitung Ihrer Anfrage ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.",
 
-// "external-login.connect-to-existing-account.label": "Connect to an existing user"
-"external-login.connect-to-existing-account.label": "Mit bestehendem Benutzerkonto verbinden",
+  // "external-login.connect-to-existing-account.label": "Connect to an existing user"
+  "external-login.connect-to-existing-account.label": "Mit bestehendem Benutzerkonto verbinden",
 
-// "external-login.modal.label.close": "Close"
-"external-login.modal.label.close": "Schließen",
+  // "external-login.modal.label.close": "Close"
+  "external-login.modal.label.close": "Schließen",
 
-// "external-login-page.provide-email.create-account.notifications.error.header": "Something went wrong"
-"external-login-page.provide-email.create-account.notifications.error.header": "Etwas ist schiefgelaufen",
+  // "external-login-page.provide-email.create-account.notifications.error.header": "Something went wrong"
+  "external-login-page.provide-email.create-account.notifications.error.header": "Etwas ist schiefgelaufen",
 
-// "external-login-page.provide-email.create-account.notifications.error.content": "Please check again your email address and try again."
-"external-login-page.provide-email.create-account.notifications.error.content": "Bitte überprüfen Sie Ihre E-Mail-Adresse und versuchen Sie es erneut.",
+  // "external-login-page.provide-email.create-account.notifications.error.content": "Please check again your email address and try again."
+  "external-login-page.provide-email.create-account.notifications.error.content": "Bitte überprüfen Sie Ihre E-Mail-Adresse und versuchen Sie es erneut.",
 
-// "external-login-page.confirm-email.create-account.notifications.error.no-netId": "Something went wrong with this email account..."
-"external-login-page.confirm-email.create-account.notifications.error.no-netId": "Mit diesem E-Mail-Konto ist ein Fehler aufgetreten. Versuchen Sie es erneut oder verwenden Sie eine andere Anmeldemethode.",
+  // "external-login-page.confirm-email.create-account.notifications.error.no-netId": "Something went wrong with this email account..."
+  "external-login-page.confirm-email.create-account.notifications.error.no-netId": "Mit diesem E-Mail-Konto ist ein Fehler aufgetreten. Versuchen Sie es erneut oder verwenden Sie eine andere Anmeldemethode.",
 
-// "external-login-page.orcid-confirmation.firstname": "First name"
-"external-login-page.orcid-confirmation.firstname": "Vorname",
+  // "external-login-page.orcid-confirmation.firstname": "First name"
+  "external-login-page.orcid-confirmation.firstname": "Vorname",
 
-// "external-login-page.orcid-confirmation.firstname.label": "First name"
-"external-login-page.orcid-confirmation.firstname.label": "Vorname",
+  // "external-login-page.orcid-confirmation.firstname.label": "First name"
+  "external-login-page.orcid-confirmation.firstname.label": "Vorname",
 
-// "external-login-page.orcid-confirmation.lastname": "Last name"
-"external-login-page.orcid-confirmation.lastname": "Nachname",
+  // "external-login-page.orcid-confirmation.lastname": "Last name"
+  "external-login-page.orcid-confirmation.lastname": "Nachname",
 
-// "external-login-page.orcid-confirmation.lastname.label": "Last name"
-"external-login-page.orcid-confirmation.lastname.label": "Nachname",
+  // "external-login-page.orcid-confirmation.lastname.label": "Last name"
+  "external-login-page.orcid-confirmation.lastname.label": "Nachname",
 
-// "external-login-page.orcid-confirmation.netid": "Account Identifier"
-"external-login-page.orcid-confirmation.netid": "Kontokennung",
+  // "external-login-page.orcid-confirmation.netid": "Account Identifier"
+  "external-login-page.orcid-confirmation.netid": "Kontokennung",
 
-// "external-login-page.orcid-confirmation.netid.placeholder": "xxxx-xxxx-xxxx-xxxx"
-"external-login-page.orcid-confirmation.netid.placeholder": "xxxx-xxxx-xxxx-xxxx",
+  // "external-login-page.orcid-confirmation.netid.placeholder": "xxxx-xxxx-xxxx-xxxx"
+  "external-login-page.orcid-confirmation.netid.placeholder": "xxxx-xxxx-xxxx-xxxx",
 
-// "external-login-page.orcid-confirmation.email": "Email"
-"external-login-page.orcid-confirmation.email": "E-Mail",
+  // "external-login-page.orcid-confirmation.email": "Email"
+  "external-login-page.orcid-confirmation.email": "E-Mail",
 
-// "external-login-page.orcid-confirmation.email.label": "Email"
-"external-login-page.orcid-confirmation.email.label": "E-Mail",
+  // "external-login-page.orcid-confirmation.email.label": "Email"
+  "external-login-page.orcid-confirmation.email.label": "E-Mail",
 
-// "search.filters.access_status.open.access": "Open access"
-"search.filters.access_status.open.access": "Offener Zugang",
+  // "search.filters.access_status.open.access": "Open access"
+  "search.filters.access_status.open.access": "Offener Zugang",
 
-// "search.filters.access_status.restricted": "Restricted access"
-"search.filters.access_status.restricted": "Eingeschränkter Zugang",
+  // "search.filters.access_status.restricted": "Restricted access"
+  "search.filters.access_status.restricted": "Eingeschränkter Zugang",
 
-// "search.filters.access_status.embargo": "Embargoed access"
-"search.filters.access_status.embargo": "Zugang unter Embargo",
+  // "search.filters.access_status.embargo": "Embargoed access"
+  "search.filters.access_status.embargo": "Zugang unter Embargo",
 
-// "search.filters.access_status.metadata.only": "Metadata only"
-"search.filters.access_status.metadata.only": "Nur Metadaten",
+  // "search.filters.access_status.metadata.only": "Metadata only"
+  "search.filters.access_status.metadata.only": "Nur Metadaten",
 
-// "search.filters.access_status.unknown": "Unknown"
-"search.filters.access_status.unknown": "Unbekannt",
+  // "search.filters.access_status.unknown": "Unknown"
+  "search.filters.access_status.unknown": "Unbekannt",
 
-// "metadata-export-filtered-items.tooltip": "Export report output as CSV"
-"metadata-export-filtered-items.tooltip": "Berichtsausgabe als CSV exportieren",
+  // "metadata-export-filtered-items.tooltip": "Export report output as CSV"
+  "metadata-export-filtered-items.tooltip": "Berichtsausgabe als CSV exportieren",
 
-// "metadata-export-filtered-items.submit.success": "CSV export succeeded."
-"metadata-export-filtered-items.submit.success": "CSV-Export erfolgreich.",
+  // "metadata-export-filtered-items.submit.success": "CSV export succeeded."
+  "metadata-export-filtered-items.submit.success": "CSV-Export erfolgreich.",
 
-// "metadata-export-filtered-items.submit.error": "CSV export failed."
-"metadata-export-filtered-items.submit.error": "CSV-Export fehlgeschlagen.",
+  // "metadata-export-filtered-items.submit.error": "CSV export failed."
+  "metadata-export-filtered-items.submit.error": "CSV-Export fehlgeschlagen.",
 
-// "metadata-export-filtered-items.columns.warning": "CSV export automatically includes all relevant fields..."
-"metadata-export-filtered-items.columns.warning": "Der CSV-Export enthält automatisch alle relevanten Felder; Auswahländerungen in dieser Liste werden daher nicht berücksichtigt.",
+  // "metadata-export-filtered-items.columns.warning": "CSV export automatically includes all relevant fields..."
+  "metadata-export-filtered-items.columns.warning": "Der CSV-Export enthält automatisch alle relevanten Felder; Auswahländerungen in dieser Liste werden daher nicht berücksichtigt.",
 
-// "embargo.listelement.badge": "Embargo until {{ date }}"
-"embargo.listelement.badge": "Embargo bis {{ date }}",
+  // "embargo.listelement.badge": "Embargo until {{ date }}"
+  "embargo.listelement.badge": "Embargo bis {{ date }}",
 
-// "metadata-export-search.submit.error.limit-exceeded": "Only the first {{limit}} items will be exported"
-"metadata-export-search.submit.error.limit-exceeded": "Es werden nur die ersten {{limit}} Items exportiert",
+  // "metadata-export-search.submit.error.limit-exceeded": "Only the first {{limit}} items will be exported"
+  "metadata-export-search.submit.error.limit-exceeded": "Es werden nur die ersten {{limit}} Items exportiert",
 
-// "file-download-link.request-copy": "Request a copy of "
-"file-download-link.request-copy": "Kopie anfordern von ",
+  // "file-download-link.request-copy": "Request a copy of "
+  "file-download-link.request-copy": "Kopie anfordern von ",
 
-// "item.preview.organization.url": "URL"
-"item.preview.organization.url": "URL",
+  // "item.preview.organization.url": "URL"
+  "item.preview.organization.url": "URL",
 
-// "item.preview.organization.address.addressLocality": "City"
-"item.preview.organization.address.addressLocality": "Stadt",
+  // "item.preview.organization.address.addressLocality": "City"
+  "item.preview.organization.address.addressLocality": "Stadt",
 
-// "item.preview.organization.alternateName": "Alternative name"
-"item.preview.organization.alternateName": "Alternativer Name",
+  // "item.preview.organization.alternateName": "Alternative name"
+  "item.preview.organization.alternateName": "Alternativer Name",
 
 
 }

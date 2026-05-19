@@ -6590,82 +6590,82 @@
   "relationships.add.error.title": "No se puede agregar una relación",
 
   // "relationships.Publication.isAuthorOfPublication.Person": "Authors (persons)",
-"relationships.Publication.isAuthorOfPublication.Person": "Autores (personas)",
+  "relationships.Publication.isAuthorOfPublication.Person": "Autores (personas)",
 
-// "relationships.Publication.isProjectOfPublication.Project": "Research Projects",
-"relationships.Publication.isProjectOfPublication.Project": "Proyectos de investigación",
+  // "relationships.Publication.isProjectOfPublication.Project": "Research Projects",
+  "relationships.Publication.isProjectOfPublication.Project": "Proyectos de investigación",
 
-// "relationships.Publication.isOrgUnitOfPublication.OrgUnit": "Organizational Units",
-"relationships.Publication.isOrgUnitOfPublication.OrgUnit": "Organizaciones",
+  // "relationships.Publication.isOrgUnitOfPublication.OrgUnit": "Organizational Units",
+  "relationships.Publication.isOrgUnitOfPublication.OrgUnit": "Organizaciones",
 
-// "relationships.Publication.isAuthorOfPublication.OrgUnit": "Authors (organizational units)",
-"relationships.Publication.isAuthorOfPublication.OrgUnit": "Autores (organizaciones)",
+  // "relationships.Publication.isAuthorOfPublication.OrgUnit": "Authors (organizational units)",
+  "relationships.Publication.isAuthorOfPublication.OrgUnit": "Autores (organizaciones)",
 
-// "relationships.Publication.isJournalIssueOfPublication.JournalIssue": "Journal Issue",
-"relationships.Publication.isJournalIssueOfPublication.JournalIssue": "Número de la revista",
+  // "relationships.Publication.isJournalIssueOfPublication.JournalIssue": "Journal Issue",
+  "relationships.Publication.isJournalIssueOfPublication.JournalIssue": "Número de la revista",
 
-// "relationships.Publication.isContributorOfPublication.Person": "Contributor",
-"relationships.Publication.isContributorOfPublication.Person": "Colaborador",
+  // "relationships.Publication.isContributorOfPublication.Person": "Contributor",
+  "relationships.Publication.isContributorOfPublication.Person": "Colaborador",
 
-// "relationships.Publication.isContributorOfPublication.OrgUnit": "Contributor (organizational units)",
-"relationships.Publication.isContributorOfPublication.OrgUnit": "Colaborador (organizaciones)",
+  // "relationships.Publication.isContributorOfPublication.OrgUnit": "Contributor (organizational units)",
+  "relationships.Publication.isContributorOfPublication.OrgUnit": "Colaborador (organizaciones)",
 
-// "relationships.Person.isPublicationOfAuthor.Publication": "Publications",
-"relationships.Person.isPublicationOfAuthor.Publication": "Publicaciones",
+  // "relationships.Person.isPublicationOfAuthor.Publication": "Publications",
+  "relationships.Person.isPublicationOfAuthor.Publication": "Publicaciones",
 
-// "relationships.Person.isProjectOfPerson.Project": "Research Projects",
-"relationships.Person.isProjectOfPerson.Project": "Proyectos de investigación",
+  // "relationships.Person.isProjectOfPerson.Project": "Research Projects",
+  "relationships.Person.isProjectOfPerson.Project": "Proyectos de investigación",
 
-// "relationships.Person.isOrgUnitOfPerson.OrgUnit": "Organizational Units",
-"relationships.Person.isOrgUnitOfPerson.OrgUnit": "Organizaciones",
+  // "relationships.Person.isOrgUnitOfPerson.OrgUnit": "Organizational Units",
+  "relationships.Person.isOrgUnitOfPerson.OrgUnit": "Organizaciones",
 
-// "relationships.Person.isPublicationOfContributor.Publication": "Publications (contributor to)",
-"relationships.Person.isPublicationOfContributor.Publication": "Publicaciones (como colaborador)",
+  // "relationships.Person.isPublicationOfContributor.Publication": "Publications (contributor to)",
+  "relationships.Person.isPublicationOfContributor.Publication": "Publicaciones (como colaborador)",
 
-// "relationships.Project.isPublicationOfProject.Publication": "Publications",
-"relationships.Project.isPublicationOfProject.Publication": "Publicaciones",
+  // "relationships.Project.isPublicationOfProject.Publication": "Publications",
+  "relationships.Project.isPublicationOfProject.Publication": "Publicaciones",
 
-// "relationships.Project.isPersonOfProject.Person": "Authors",
-"relationships.Project.isPersonOfProject.Person": "Autores",
+  // "relationships.Project.isPersonOfProject.Person": "Authors",
+  "relationships.Project.isPersonOfProject.Person": "Autores",
 
-// "relationships.Project.isOrgUnitOfProject.OrgUnit": "Organizational Units",
-"relationships.Project.isOrgUnitOfProject.OrgUnit": "Organizaciones",
+  // "relationships.Project.isOrgUnitOfProject.OrgUnit": "Organizational Units",
+  "relationships.Project.isOrgUnitOfProject.OrgUnit": "Organizaciones",
 
-// "relationships.Project.isFundingAgencyOfProject.OrgUnit": "Funder",
-"relationships.Project.isFundingAgencyOfProject.OrgUnit": "Entidad financiadora",
+  // "relationships.Project.isFundingAgencyOfProject.OrgUnit": "Funder",
+  "relationships.Project.isFundingAgencyOfProject.OrgUnit": "Entidad financiadora",
 
-// "relationships.OrgUnit.isPublicationOfOrgUnit.Publication": "Organisation Publications",
-"relationships.OrgUnit.isPublicationOfOrgUnit.Publication": "Publicaciones de la organización",
+  // "relationships.OrgUnit.isPublicationOfOrgUnit.Publication": "Organisation Publications",
+  "relationships.OrgUnit.isPublicationOfOrgUnit.Publication": "Publicaciones de la organización",
 
-// "relationships.OrgUnit.isPersonOfOrgUnit.Person": "Authors",
-"relationships.OrgUnit.isPersonOfOrgUnit.Person": "Autores",
+  // "relationships.OrgUnit.isPersonOfOrgUnit.Person": "Authors",
+  "relationships.OrgUnit.isPersonOfOrgUnit.Person": "Autores",
 
-// "relationships.OrgUnit.isProjectOfOrgUnit.Project": "Research Projects",
-"relationships.OrgUnit.isProjectOfOrgUnit.Project": "Proyectos de investigación",
+  // "relationships.OrgUnit.isProjectOfOrgUnit.Project": "Research Projects",
+  "relationships.OrgUnit.isProjectOfOrgUnit.Project": "Proyectos de investigación",
 
-// "relationships.OrgUnit.isPublicationOfAuthor.Publication": "Authored Publications",
-"relationships.OrgUnit.isPublicationOfAuthor.Publication": "Publicaciones como autor",
+  // "relationships.OrgUnit.isPublicationOfAuthor.Publication": "Authored Publications",
+  "relationships.OrgUnit.isPublicationOfAuthor.Publication": "Publicaciones como autor",
 
-// "relationships.OrgUnit.isPublicationOfContributor.Publication": "Publications (contributor to)",
-"relationships.OrgUnit.isPublicationOfContributor.Publication": "Publicaciones (como colaborador)",
+  // "relationships.OrgUnit.isPublicationOfContributor.Publication": "Publications (contributor to)",
+  "relationships.OrgUnit.isPublicationOfContributor.Publication": "Publicaciones (como colaborador)",
 
-// "relationships.OrgUnit.isProjectOfFundingAgency.Project": "Research Projects (funder of)",
-"relationships.OrgUnit.isProjectOfFundingAgency.Project": "Proyectos de investigación (financiador)",
+  // "relationships.OrgUnit.isProjectOfFundingAgency.Project": "Research Projects (funder of)",
+  "relationships.OrgUnit.isProjectOfFundingAgency.Project": "Proyectos de investigación (financiador)",
 
-// "relationships.JournalIssue.isJournalVolumeOfIssue.JournalVolume": "Journal Volume",
-"relationships.JournalIssue.isJournalVolumeOfIssue.JournalVolume": "Volumen de la revista",
+  // "relationships.JournalIssue.isJournalVolumeOfIssue.JournalVolume": "Journal Volume",
+  "relationships.JournalIssue.isJournalVolumeOfIssue.JournalVolume": "Volumen de la revista",
 
-// "relationships.JournalIssue.isPublicationOfJournalIssue.Publication": "Publications",
-"relationships.JournalIssue.isPublicationOfJournalIssue.Publication": "Publicaciones",
+  // "relationships.JournalIssue.isPublicationOfJournalIssue.Publication": "Publications",
+  "relationships.JournalIssue.isPublicationOfJournalIssue.Publication": "Publicaciones",
 
-// "relationships.JournalVolume.isJournalOfVolume.Journal": "Journals",
-"relationships.JournalVolume.isJournalOfVolume.Journal": "Revistas",
+  // "relationships.JournalVolume.isJournalOfVolume.Journal": "Journals",
+  "relationships.JournalVolume.isJournalOfVolume.Journal": "Revistas",
 
-// "relationships.JournalVolume.isIssueOfJournalVolume.JournalIssue": "Journal Issue",
-"relationships.JournalVolume.isIssueOfJournalVolume.JournalIssue": "Número de la revista",
+  // "relationships.JournalVolume.isIssueOfJournalVolume.JournalIssue": "Journal Issue",
+  "relationships.JournalVolume.isIssueOfJournalVolume.JournalIssue": "Número de la revista",
 
-// "relationships.Journal.isVolumeOfJournal.JournalVolume": "Journal Volume",
-"relationships.Journal.isVolumeOfJournal.JournalVolume": "Volumen de la revista",
+  // "relationships.Journal.isVolumeOfJournal.JournalVolume": "Journal Volume",
+  "relationships.Journal.isVolumeOfJournal.JournalVolume": "Volumen de la revista",
 
   // "repository.image.logo": "Repository logo",
   "repository.image.logo": "Logotipo del repositorio",
@@ -7071,11 +7071,11 @@
   // "search.filters.filter.creativeDatePublished.label": "Search date published",
   "search.filters.filter.creativeDatePublished.label": "Buscar por fecha de publicación",
 
- // "search.filters.filter.creativeDatePublished.min.label": "Start"
-"search.filters.filter.creativeDatePublished.min.label": "Desde",
+  // "search.filters.filter.creativeDatePublished.min.label": "Start"
+  "search.filters.filter.creativeDatePublished.min.label": "Desde",
 
-// "search.filters.filter.creativeDatePublished.max.label": "End"
-"search.filters.filter.creativeDatePublished.max.label": "Hasta",
+  // "search.filters.filter.creativeDatePublished.max.label": "End"
+  "search.filters.filter.creativeDatePublished.max.label": "Hasta",
 
   // "search.filters.filter.creativeWorkEditor.head": "Editor",
   "search.filters.filter.creativeWorkEditor.head": "Editor",
@@ -8070,19 +8070,19 @@
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.sherpaJournalIssn": "Revistas Sherpa por ISSN ({{ count }})",
 
   // "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPerson": "OpenAlex ({{ count }})"
-"submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPerson": "OpenAlex ({{ count }})",
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPerson": "OpenAlex ({{ count }})",
 
-// "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexInstitution": "OpenAlex Search by Institution ({{ count }})"
-"submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexInstitution": "Búsqueda en OpenAlex por institución ({{ count }})",
+  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexInstitution": "OpenAlex Search by Institution ({{ count }})"
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexInstitution": "Búsqueda en OpenAlex por institución ({{ count }})",
 
-// "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPublisher": "OpenAlex Search by Publisher ({{ count }})"
-"submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPublisher": "Búsqueda en OpenAlex por editor ({{ count }})",
+  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPublisher": "OpenAlex Search by Publisher ({{ count }})"
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPublisher": "Búsqueda en OpenAlex por editor ({{ count }})",
 
-// "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexFunder": "OpenAlex Search by Funder ({{ count }})"
-"submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexFunder": "Búsqueda en OpenAlex por financiador ({{ count }})",
+  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexFunder": "OpenAlex Search by Funder ({{ count }})"
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexFunder": "Búsqueda en OpenAlex por financiador ({{ count }})",
 
-// "submission.sections.describe.relationship-lookup.search-tab.tab-title.dataciteProject": "DataCite Search by Project ({{ count }})"
-"submission.sections.describe.relationship-lookup.search-tab.tab-title.dataciteProject": "Búsqueda en DataCite por proyecto ({{ count }})",
+  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.dataciteProject": "DataCite Search by Project ({{ count }})"
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.dataciteProject": "Búsqueda en DataCite por proyecto ({{ count }})",
 
   // "submission.sections.describe.relationship-lookup.search-tab.tab-title.isFundingAgencyOfPublication": "Search for Funding Agencies",
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.isFundingAgencyOfPublication": "Búsqueda de agencias de financiación",
@@ -8292,19 +8292,19 @@
   "submission.sections.describe.relationship-lookup.selection-tab.title.ror": "Resultados de la búsqueda",
 
   // "submission.sections.describe.relationship-lookup.selection-tab.title.openalexPerson": "Search Results"
-"submission.sections.describe.relationship-lookup.selection-tab.title.openalexPerson": "Resultados de búsqueda",
+  "submission.sections.describe.relationship-lookup.selection-tab.title.openalexPerson": "Resultados de búsqueda",
 
-// "submission.sections.describe.relationship-lookup.selection-tab.title.openalexInstitution": "Search Results"
-"submission.sections.describe.relationship-lookup.selection-tab.title.openalexInstitution": "Resultados de búsqueda",
+  // "submission.sections.describe.relationship-lookup.selection-tab.title.openalexInstitution": "Search Results"
+  "submission.sections.describe.relationship-lookup.selection-tab.title.openalexInstitution": "Resultados de búsqueda",
 
-// "submission.sections.describe.relationship-lookup.selection-tab.title.openalexPublisher": "Search Results"
-"submission.sections.describe.relationship-lookup.selection-tab.title.openalexPublisher": "Resultados de búsqueda",
+  // "submission.sections.describe.relationship-lookup.selection-tab.title.openalexPublisher": "Search Results"
+  "submission.sections.describe.relationship-lookup.selection-tab.title.openalexPublisher": "Resultados de búsqueda",
 
-// "submission.sections.describe.relationship-lookup.selection-tab.title.openalexFunder": "Search Results"
-"submission.sections.describe.relationship-lookup.selection-tab.title.openalexFunder": "Resultados de búsqueda",
+  // "submission.sections.describe.relationship-lookup.selection-tab.title.openalexFunder": "Search Results"
+  "submission.sections.describe.relationship-lookup.selection-tab.title.openalexFunder": "Resultados de búsqueda",
 
-// "submission.sections.describe.relationship-lookup.selection-tab.title.dataciteProject": "Search Results"
-"submission.sections.describe.relationship-lookup.selection-tab.title.dataciteProject": "Resultados de búsqueda",
+  // "submission.sections.describe.relationship-lookup.selection-tab.title.dataciteProject": "Search Results"
+  "submission.sections.describe.relationship-lookup.selection-tab.title.dataciteProject": "Resultados de búsqueda",
 
   // "submission.sections.describe.relationship-lookup.selection-tab.title": "Search Results",
   "submission.sections.describe.relationship-lookup.selection-tab.title": "Resultados de la búsqueda",
@@ -10960,17 +10960,17 @@
   // "metadata-export-search.submit.error.limit-exceeded": "Only the first {{limit}} items will be exported"
   "metadata-export-search.submit.error.limit-exceeded": "Solo se exportarán los primeros {{limit}} ítems",
 
-// "file-download-link.request-copy": "Request a copy of "
-"file-download-link.request-copy": "Solicitar una copia de ",
+  // "file-download-link.request-copy": "Request a copy of "
+  "file-download-link.request-copy": "Solicitar una copia de ",
 
-// "item.preview.organization.url": "URL"
-"item.preview.organization.url": "URL",
+  // "item.preview.organization.url": "URL"
+  "item.preview.organization.url": "URL",
 
-// "item.preview.organization.address.addressLocality": "City"
-"item.preview.organization.address.addressLocality": "Ciudad",
+  // "item.preview.organization.address.addressLocality": "City"
+  "item.preview.organization.address.addressLocality": "Ciudad",
 
-// "item.preview.organization.alternateName": "Alternative name"
-"item.preview.organization.alternateName": "Nombre alternativo",
+  // "item.preview.organization.alternateName": "Alternative name"
+  "item.preview.organization.alternateName": "Nombre alternativo",
 
 
 }
