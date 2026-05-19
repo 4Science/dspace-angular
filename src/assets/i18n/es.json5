@@ -51,8 +51,7 @@
   "error-page.orcid.generic-error": "Hubo un error en el inicio de sesión vía ORCID. Asegúrese que ha compartido el correo electrónico de su cuenta ORCID con Dspace. Si continuase el error, contacte con el administrador",
 
   // "listelement.badge.access-status": "Access status:",
-  // TODO New key - Add a translation
-  "listelement.badge.access-status": "Access status:",
+  "listelement.badge.access-status": "Estado de acceso:",
 
   // "access-status.embargo.listelement.badge": "Embargo",
   "access-status.embargo.listelement.badge": "Embargo",
@@ -460,20 +459,16 @@
   "admin.access-control.epeople.table.edit.buttons.remove": "Eliminar \"{{ name }}\"",
 
   // "admin.access-control.epeople.table.edit.buttons.remove.modal.header": "Delete Group \"{{ dsoName }}\"",
-  // TODO New key - Add a translation
-  "admin.access-control.epeople.table.edit.buttons.remove.modal.header": "Delete Group \"{{ dsoName }}\"",
+  "admin.access-control.epeople.table.edit.buttons.remove.modal.header": "Eliminar el grupo \"{{ dsoName }}\"",
 
   // "admin.access-control.epeople.table.edit.buttons.remove.modal.info": "Are you sure you want to delete Group \"{{ dsoName }}\" and all its associated policies?",
-  // TODO New key - Add a translation
-  "admin.access-control.epeople.table.edit.buttons.remove.modal.info": "Are you sure you want to delete Group \"{{ dsoName }}\" and all its associated policies?",
+  "admin.access-control.epeople.table.edit.buttons.remove.modal.info": "¿Eliminar el grupo \"{{ dsoName }}\" y  sus autorizaciones asociadas?",
 
   // "admin.access-control.epeople.table.edit.buttons.remove.modal.cancel": "Cancel",
-  // TODO New key - Add a translation
-  "admin.access-control.epeople.table.edit.buttons.remove.modal.cancel": "Cancel",
+  "admin.access-control.epeople.table.edit.buttons.remove.modal.cancel": "Cancelar",
 
   // "admin.access-control.epeople.table.edit.buttons.remove.modal.confirm": "Delete",
-  // TODO New key - Add a translation
-  "admin.access-control.epeople.table.edit.buttons.remove.modal.confirm": "Delete",
+  "admin.access-control.epeople.table.edit.buttons.remove.modal.confirm": "Eliminar",
 
   // "admin.access-control.epeople.no-items": "No EPeople to show.",
   "admin.access-control.epeople.no-items": "No hay usuarios para mostrar.",
@@ -668,7 +663,6 @@
   "admin.access-control.groups.form.delete-group.modal.header": "Eliminar grupo \"{{ dsoName }}\"",
 
   // "admin.access-control.groups.form.delete-group.modal.info": "Are you sure you want to delete Group \"{{ dsoName }}\" and all its associated policies?",
-  // TODO Source message changed - Revise the translation
   "admin.access-control.groups.form.delete-group.modal.info": "¿Está seguro de que desea eliminar el grupo \"{{ dsoName }}\"?",
 
   // "admin.access-control.groups.form.delete-group.modal.cancel": "Cancel",
@@ -2304,20 +2298,16 @@
   "comcol-role.edit.delete.error.title": "Error al borrar el grupo del rol '{{ role }}'",
 
   // "comcol-role.edit.delete.modal.header": "Delete Group \"{{ dsoName }}\"",
-  // TODO New key - Add a translation
   "comcol-role.edit.delete.modal.header": "Delete Group \"{{ dsoName }}\"",
 
   // "comcol-role.edit.delete.modal.info": "Are you sure you want to delete Group \"{{ dsoName }}\" and all its associated policies?",
-  // TODO New key - Add a translation
-  "comcol-role.edit.delete.modal.info": "Are you sure you want to delete Group \"{{ dsoName }}\" and all its associated policies?",
+  "comcol-role.edit.delete.modal.info": "Eliminar el grupo \"{{ dsoName }}\" y sus autorizaciones asociadas?",
 
   // "comcol-role.edit.delete.modal.cancel": "Cancel",
-  // TODO New key - Add a translation
-  "comcol-role.edit.delete.modal.cancel": "Cancel",
+  "comcol-role.edit.delete.modal.cancel": "Cancelar",
 
   // "comcol-role.edit.delete.modal.confirm": "Delete",
-  // TODO New key - Add a translation
-  "comcol-role.edit.delete.modal.confirm": "Delete",
+  "comcol-role.edit.delete.modal.confirm": "Eliminar",
 
   // "comcol-role.edit.community-admin.name": "Administrators",
   "comcol-role.edit.community-admin.name": "Administradores",
@@ -2488,12 +2478,10 @@
   "cookies.consent.content-modal.title": "Información que recopilamos",
 
   // "cookies.consent.app.title.accessibility": "Accessibility Settings",
-  // TODO New key - Add a translation
-  "cookies.consent.app.title.accessibility": "Accessibility Settings",
+  "cookies.consent.app.title.accessibility": "Configuración de accesibilidad",
 
   // "cookies.consent.app.description.accessibility": "Required for saving your accessibility settings locally",
-  // TODO New key - Add a translation
-  "cookies.consent.app.description.accessibility": "Required for saving your accessibility settings locally",
+  "cookies.consent.app.description.accessibility": "Necesario para guardar localmente la configuración de accesibilidad",
 
   // "cookies.consent.app.title.authentication": "Authentication",
   "cookies.consent.app.title.authentication": "Autenticación",
@@ -2502,12 +2490,10 @@
   "cookies.consent.app.description.authentication": "Requerido para iniciar sesión",
 
   // "cookies.consent.app.title.correlation-id": "Correlation ID",
-  // TODO New key - Add a translation
-  "cookies.consent.app.title.correlation-id": "Correlation ID",
+  "cookies.consent.app.title.correlation-id": "ID de correlación",
 
   // "cookies.consent.app.description.correlation-id": "Allow us to track your session in backend logs for support/debugging purposes",
-  // TODO New key - Add a translation
-  "cookies.consent.app.description.correlation-id": "Allow us to track your session in backend logs for support/debugging purposes",
+  "cookies.consent.app.description.correlation-id": "Permite rastrear su sesión en los registros del backend con fines de soporte y depuración",
 
   // "cookies.consent.app.title.preferences": "Preferences",
   "cookies.consent.app.title.preferences": "Preferencias",
@@ -2960,8 +2946,7 @@
   "footer.copyright": "copyright © 2002-{{ year }}",
 
   // "footer.link.accessibility": "Accessibility settings",
-  // TODO New key - Add a translation
-  "footer.link.accessibility": "Accessibility settings",
+  "footer.link.accessibility": "Configuración de accesibilidad",
 
   // "footer.link.dspace": "DSpace software",
   "footer.link.dspace": "Software DSpace",
@@ -3336,80 +3321,61 @@
   "home.top-level-communities.help": "Seleccione una comunidad para explorar sus colecciones.",
 
   // "info.accessibility-settings.breadcrumbs": "Accessibility settings",
-  // TODO New key - Add a translation
-  "info.accessibility-settings.breadcrumbs": "Accessibility settings",
+  "info.accessibility-settings.breadcrumbs": "Configuración de accesibilidad",
 
   // "info.accessibility-settings.cookie-warning": "Saving the accessibility settings is currently not possible. Either log in to save the settings in user data, or accept the 'Accessibility Settings' cookie using the 'Cookie Settings' menu at the bottom of the page. Once the cookie has been accepted, you can reload the page to remove this message.",
-  // TODO New key - Add a translation
-  "info.accessibility-settings.cookie-warning": "Saving the accessibility settings is currently not possible. Either log in to save the settings in user data, or accept the 'Accessibility Settings' cookie using the 'Cookie Settings' menu at the bottom of the page. Once the cookie has been accepted, you can reload the page to remove this message.",
+  "info.accessibility-settings.cookie-warning": "Actualmente no es posible guardar la configuración de accesibilidad. Inicie sesión para guardar la configuración en los datos de usuario o acepte la cookie de \"Configuración de accesibilidad\" mediante el menú \"Configuración de cookies\" en la parte inferior de la página. Una vez aceptada la cookie, puede recargar la página para eliminar este mensaje.",
 
   // "info.accessibility-settings.disableNotificationTimeOut.label": "Automatically close notifications after time out",
-  // TODO New key - Add a translation
-  "info.accessibility-settings.disableNotificationTimeOut.label": "Automatically close notifications after time out",
+  "info.accessibility-settings.disableNotificationTimeOut.label": "Cerrar automáticamente las notificaciones tras su duración",
 
   // "info.accessibility-settings.disableNotificationTimeOut.hint": "When this toggle is activated, notifications will close automatically after the time out passes. When deactivated, notifications will remain open untill manually closed.",
-  // TODO New key - Add a translation
-  "info.accessibility-settings.disableNotificationTimeOut.hint": "When this toggle is activated, notifications will close automatically after the time out passes. When deactivated, notifications will remain open untill manually closed.",
+  "info.accessibility-settings.disableNotificationTimeOut.hint": "Cuando esta opción está activada, las notificaciones se cerrarán automáticamente una vez transcurrida su duración. Cuando está desactivada, las notificaciones permanecerán abiertas hasta que se cierren manualmente.",
 
   // "info.accessibility-settings.failed-notification": "Failed to save accessibility settings",
-  // TODO New key - Add a translation
-  "info.accessibility-settings.failed-notification": "Failed to save accessibility settings",
+  "info.accessibility-settings.failed-notification": "No se pudo guardar la configuración de accesibilidad",
 
   // "info.accessibility-settings.invalid-form-notification": "Did not save. The form contains invalid values.",
-  // TODO New key - Add a translation
-  "info.accessibility-settings.invalid-form-notification": "Did not save. The form contains invalid values.",
+  "info.accessibility-settings.invalid-form-notification": "No se guardó. El formulario contiene valores no válidos.",
 
   // "info.accessibility-settings.liveRegionTimeOut.label": "ARIA Live region time out (in seconds)",
-  // TODO New key - Add a translation
-  "info.accessibility-settings.liveRegionTimeOut.label": "ARIA Live region time out (in seconds)",
+  "info.accessibility-settings.liveRegionTimeOut.label": "Duración de la región ARIA Live (en segundos)",
 
   // "info.accessibility-settings.liveRegionTimeOut.hint": "The duration after which a message in the ARIA live region disappears. ARIA live regions are not visible on the page, but provide announcements of notifications (or other actions) to screen readers.",
-  // TODO New key - Add a translation
-  "info.accessibility-settings.liveRegionTimeOut.hint": "The duration after which a message in the ARIA live region disappears. ARIA live regions are not visible on the page, but provide announcements of notifications (or other actions) to screen readers.",
+  "info.accessibility-settings.liveRegionTimeOut.hint": "La duración tras la cual un mensaje en la región ARIA Live desaparece. Las regiones ARIA Live no son visibles en la página, pero proporcionan anuncios de notificaciones (u otras acciones) a los lectores de pantalla.",
 
   // "info.accessibility-settings.liveRegionTimeOut.invalid": "Live region time out must be greater than 0",
-  // TODO New key - Add a translation
-  "info.accessibility-settings.liveRegionTimeOut.invalid": "Live region time out must be greater than 0",
+  "info.accessibility-settings.liveRegionTimeOut.invalid": "La duración de la región ARIA Live debe ser mayor que 0",
 
   // "info.accessibility-settings.notificationTimeOut.label": "Notification time out (in seconds)",
-  // TODO New key - Add a translation
-  "info.accessibility-settings.notificationTimeOut.label": "Notification time out (in seconds)",
+  "info.accessibility-settings.notificationTimeOut.label": "Duración de las notificaciones (en segundos)",
 
   // "info.accessibility-settings.notificationTimeOut.hint": "The duration after which a notification disappears.",
-  // TODO New key - Add a translation
-  "info.accessibility-settings.notificationTimeOut.hint": "The duration after which a notification disappears.",
+  "info.accessibility-settings.notificationTimeOut.hint": "La duración tras la cual una notificación desaparece.",
 
   // "info.accessibility-settings.notificationTimeOut.invalid": "Notification time out must be greater than 0",
-  // TODO New key - Add a translation
-  "info.accessibility-settings.notificationTimeOut.invalid": "Notification time out must be greater than 0",
+  "info.accessibility-settings.notificationTimeOut.invalid": "La duración de la notificación debe ser mayor que 0",
 
   // "info.accessibility-settings.save-notification.cookie": "Successfully saved settings locally.",
-  // TODO New key - Add a translation
-  "info.accessibility-settings.save-notification.cookie": "Successfully saved settings locally.",
+  "info.accessibility-settings.save-notification.cookie": "La configuración se ha guardado correctamente de forma local.",
 
   // "info.accessibility-settings.save-notification.metadata": "Successfully saved settings on the user profile.",
-  // TODO New key - Add a translation
-  "info.accessibility-settings.save-notification.metadata": "Successfully saved settings on the user profile.",
+  "info.accessibility-settings.save-notification.metadata": "La configuración se ha guardado correctamente en el perfil del usuario.",
 
   // "info.accessibility-settings.reset-failed": "Failed to reset. Either log in or accept the 'Accessibility Settings' cookie.",
-  // TODO New key - Add a translation
-  "info.accessibility-settings.reset-failed": "Failed to reset. Either log in or accept the 'Accessibility Settings' cookie.",
+  "info.accessibility-settings.reset-failed": "No se pudo restablecer. Inicie sesión o acepte la cookie de \"Configuración de accesibilidad\".",
 
   // "info.accessibility-settings.reset-notification": "Successfully reset settings.",
-  // TODO New key - Add a translation
-  "info.accessibility-settings.reset-notification": "Successfully reset settings.",
+  "info.accessibility-settings.reset-notification": "La configuración se ha restablecido correctamente.",
 
   // "info.accessibility-settings.reset": "Reset accessibility settings",
-  // TODO New key - Add a translation
-  "info.accessibility-settings.reset": "Reset accessibility settings",
+  "info.accessibility-settings.reset": "Restablecer la configuración de accesibilidad",
 
   // "info.accessibility-settings.submit": "Save accessibility settings",
-  // TODO New key - Add a translation
-  "info.accessibility-settings.submit": "Save accessibility settings",
+  "info.accessibility-settings.submit": "Guardar la configuración de accesibilidad",
 
   // "info.accessibility-settings.title": "Accessibility settings",
-  // TODO New key - Add a translation
-  "info.accessibility-settings.title": "Accessibility settings",
+  "info.accessibility-settings.title": "Configuración de accesibilidad",
 
   // "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
   "info.end-user-agreement.accept": "He leído y acepto el Acuerdo de usuario final.",
@@ -3511,8 +3477,7 @@
   "item.edit.authorizations.title": "Editar las políticas del ítem",
 
   // "item.badge.status": "Item status:",
-  // TODO New key - Add a translation
-  "item.badge.status": "Item status:",
+  "item.badge.status": "Estado del ítem:",
 
   // "item.badge.private": "Non-discoverable",
   "item.badge.private": "Privado",
@@ -6625,108 +6590,82 @@
   "relationships.add.error.title": "No se puede agregar una relación",
 
   // "relationships.Publication.isAuthorOfPublication.Person": "Authors (persons)",
-  // TODO New key - Add a translation
-  "relationships.Publication.isAuthorOfPublication.Person": "Authors (persons)",
+  "relationships.Publication.isAuthorOfPublication.Person": "Autores (personas)",
 
   // "relationships.Publication.isProjectOfPublication.Project": "Research Projects",
-  // TODO New key - Add a translation
-  "relationships.Publication.isProjectOfPublication.Project": "Research Projects",
+  "relationships.Publication.isProjectOfPublication.Project": "Proyectos de investigación",
 
   // "relationships.Publication.isOrgUnitOfPublication.OrgUnit": "Organizational Units",
-  // TODO New key - Add a translation
-  "relationships.Publication.isOrgUnitOfPublication.OrgUnit": "Organizational Units",
+  "relationships.Publication.isOrgUnitOfPublication.OrgUnit": "Organizaciones",
 
   // "relationships.Publication.isAuthorOfPublication.OrgUnit": "Authors (organizational units)",
-  // TODO New key - Add a translation
-  "relationships.Publication.isAuthorOfPublication.OrgUnit": "Authors (organizational units)",
+  "relationships.Publication.isAuthorOfPublication.OrgUnit": "Autores (organizaciones)",
 
   // "relationships.Publication.isJournalIssueOfPublication.JournalIssue": "Journal Issue",
-  // TODO New key - Add a translation
-  "relationships.Publication.isJournalIssueOfPublication.JournalIssue": "Journal Issue",
+  "relationships.Publication.isJournalIssueOfPublication.JournalIssue": "Número de la revista",
 
   // "relationships.Publication.isContributorOfPublication.Person": "Contributor",
-  // TODO New key - Add a translation
-  "relationships.Publication.isContributorOfPublication.Person": "Contributor",
+  "relationships.Publication.isContributorOfPublication.Person": "Colaborador",
 
   // "relationships.Publication.isContributorOfPublication.OrgUnit": "Contributor (organizational units)",
-  // TODO New key - Add a translation
-  "relationships.Publication.isContributorOfPublication.OrgUnit": "Contributor (organizational units)",
+  "relationships.Publication.isContributorOfPublication.OrgUnit": "Colaborador (organizaciones)",
 
   // "relationships.Person.isPublicationOfAuthor.Publication": "Publications",
-  // TODO New key - Add a translation
-  "relationships.Person.isPublicationOfAuthor.Publication": "Publications",
+  "relationships.Person.isPublicationOfAuthor.Publication": "Publicaciones",
 
   // "relationships.Person.isProjectOfPerson.Project": "Research Projects",
-  // TODO New key - Add a translation
-  "relationships.Person.isProjectOfPerson.Project": "Research Projects",
+  "relationships.Person.isProjectOfPerson.Project": "Proyectos de investigación",
 
   // "relationships.Person.isOrgUnitOfPerson.OrgUnit": "Organizational Units",
-  // TODO New key - Add a translation
-  "relationships.Person.isOrgUnitOfPerson.OrgUnit": "Organizational Units",
+  "relationships.Person.isOrgUnitOfPerson.OrgUnit": "Organizaciones",
 
   // "relationships.Person.isPublicationOfContributor.Publication": "Publications (contributor to)",
-  // TODO New key - Add a translation
-  "relationships.Person.isPublicationOfContributor.Publication": "Publications (contributor to)",
+  "relationships.Person.isPublicationOfContributor.Publication": "Publicaciones (como colaborador)",
 
   // "relationships.Project.isPublicationOfProject.Publication": "Publications",
-  // TODO New key - Add a translation
-  "relationships.Project.isPublicationOfProject.Publication": "Publications",
+  "relationships.Project.isPublicationOfProject.Publication": "Publicaciones",
 
   // "relationships.Project.isPersonOfProject.Person": "Authors",
-  // TODO New key - Add a translation
-  "relationships.Project.isPersonOfProject.Person": "Authors",
+  "relationships.Project.isPersonOfProject.Person": "Autores",
 
   // "relationships.Project.isOrgUnitOfProject.OrgUnit": "Organizational Units",
-  // TODO New key - Add a translation
-  "relationships.Project.isOrgUnitOfProject.OrgUnit": "Organizational Units",
+  "relationships.Project.isOrgUnitOfProject.OrgUnit": "Organizaciones",
 
   // "relationships.Project.isFundingAgencyOfProject.OrgUnit": "Funder",
-  // TODO New key - Add a translation
-  "relationships.Project.isFundingAgencyOfProject.OrgUnit": "Funder",
+  "relationships.Project.isFundingAgencyOfProject.OrgUnit": "Entidad financiadora",
 
   // "relationships.OrgUnit.isPublicationOfOrgUnit.Publication": "Organisation Publications",
-  // TODO New key - Add a translation
-  "relationships.OrgUnit.isPublicationOfOrgUnit.Publication": "Organisation Publications",
+  "relationships.OrgUnit.isPublicationOfOrgUnit.Publication": "Publicaciones de la organización",
 
   // "relationships.OrgUnit.isPersonOfOrgUnit.Person": "Authors",
-  // TODO New key - Add a translation
-  "relationships.OrgUnit.isPersonOfOrgUnit.Person": "Authors",
+  "relationships.OrgUnit.isPersonOfOrgUnit.Person": "Autores",
 
   // "relationships.OrgUnit.isProjectOfOrgUnit.Project": "Research Projects",
-  // TODO New key - Add a translation
-  "relationships.OrgUnit.isProjectOfOrgUnit.Project": "Research Projects",
+  "relationships.OrgUnit.isProjectOfOrgUnit.Project": "Proyectos de investigación",
 
   // "relationships.OrgUnit.isPublicationOfAuthor.Publication": "Authored Publications",
-  // TODO New key - Add a translation
-  "relationships.OrgUnit.isPublicationOfAuthor.Publication": "Authored Publications",
+  "relationships.OrgUnit.isPublicationOfAuthor.Publication": "Publicaciones como autor",
 
   // "relationships.OrgUnit.isPublicationOfContributor.Publication": "Publications (contributor to)",
-  // TODO New key - Add a translation
-  "relationships.OrgUnit.isPublicationOfContributor.Publication": "Publications (contributor to)",
+  "relationships.OrgUnit.isPublicationOfContributor.Publication": "Publicaciones (como colaborador)",
 
   // "relationships.OrgUnit.isProjectOfFundingAgency.Project": "Research Projects (funder of)",
-  // TODO New key - Add a translation
-  "relationships.OrgUnit.isProjectOfFundingAgency.Project": "Research Projects (funder of)",
+  "relationships.OrgUnit.isProjectOfFundingAgency.Project": "Proyectos de investigación (financiador)",
 
   // "relationships.JournalIssue.isJournalVolumeOfIssue.JournalVolume": "Journal Volume",
-  // TODO New key - Add a translation
-  "relationships.JournalIssue.isJournalVolumeOfIssue.JournalVolume": "Journal Volume",
+  "relationships.JournalIssue.isJournalVolumeOfIssue.JournalVolume": "Volumen de la revista",
 
   // "relationships.JournalIssue.isPublicationOfJournalIssue.Publication": "Publications",
-  // TODO New key - Add a translation
-  "relationships.JournalIssue.isPublicationOfJournalIssue.Publication": "Publications",
+  "relationships.JournalIssue.isPublicationOfJournalIssue.Publication": "Publicaciones",
 
   // "relationships.JournalVolume.isJournalOfVolume.Journal": "Journals",
-  // TODO New key - Add a translation
-  "relationships.JournalVolume.isJournalOfVolume.Journal": "Journals",
+  "relationships.JournalVolume.isJournalOfVolume.Journal": "Revistas",
 
   // "relationships.JournalVolume.isIssueOfJournalVolume.JournalIssue": "Journal Issue",
-  // TODO New key - Add a translation
-  "relationships.JournalVolume.isIssueOfJournalVolume.JournalIssue": "Journal Issue",
+  "relationships.JournalVolume.isIssueOfJournalVolume.JournalIssue": "Número de la revista",
 
   // "relationships.Journal.isVolumeOfJournal.JournalVolume": "Journal Volume",
-  // TODO New key - Add a translation
-  "relationships.Journal.isVolumeOfJournal.JournalVolume": "Journal Volume",
+  "relationships.Journal.isVolumeOfJournal.JournalVolume": "Volumen de la revista",
 
   // "repository.image.logo": "Repository logo",
   "repository.image.logo": "Logotipo del repositorio",
@@ -7004,87 +6943,67 @@
   "search.filters.applied.f.withdrawn": "Retirado",
 
   // "search.filters.applied.f.graphitemtype": "Item type",
-  // TODO New key - Add a translation
-  "search.filters.applied.f.graphitemtype": "Item type",
+  "search.filters.applied.f.graphitemtype": "Tipo de ítem",
 
   // "search.filters.applied.f.graphpubldate": "Public date",
-  // TODO New key - Add a translation
-  "search.filters.applied.f.graphpubldate": "Public date",
+  "search.filters.applied.f.graphpubldate": "Fecha pública",
 
   // "search.filters.applied.f.graphpubldateltr": "Public date LTR",
-  // TODO New key - Add a translation
-  "search.filters.applied.f.graphpubldateltr": "Public date LTR",
+  "search.filters.applied.f.graphpubldateltr": "Fecha pública LTR",
 
   // "search.filters.applied.f.graphpubldatetrl": "Public date RTL",
-  // TODO New key - Add a translation
-  "search.filters.applied.f.graphpubldatetrl": "Public date RTL",
+  "search.filters.applied.f.graphpubldatetrl": "Fecha pública RTL",
 
   // "search.filters.applied.f.organization": "Organisation",
-  // TODO New key - Add a translation
-  "search.filters.applied.f.organization": "Organisation",
+  "search.filters.applied.f.organization": "Organización",
 
   // "search.filters.applied.f.knowslanguage": "Language",
   "search.filters.applied.f.knowslanguage": "Idioma",
 
   // "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
+  "search.filters.applied.charts.defaultConfiguration.title": "Resultados de la búsqueda",
 
   // "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Date Issued",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Date Issued",
+  "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Fecha de publicación",
 
   // "search.filters.applied.charts.chart.pie.more-value": "More",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.chart.pie.more-value": "More",
+  "search.filters.applied.charts.chart.pie.more-value": "Más",
 
   // "search.filters.applied.charts.chart.pie.itemtype_filter.tab": "Item Type",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.chart.pie.itemtype_filter.tab": "Item Type",
+  "search.filters.applied.charts.chart.pie.itemtype_filter.tab": "Tipo de ítem",
 
   // "search.filters.applied.charts.graphitemtype.tab": "Visualization by Type",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.graphitemtype.tab": "Visualization by Type",
+  "search.filters.applied.charts.graphitemtype.tab": "Visualización por tipo",
 
   // "search.filters.applied.charts.graphpubldate.tab": "Visualization by Date",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.graphpubldate.tab": "Visualization by Date",
+  "search.filters.applied.charts.graphpubldate.tab": "Visualización por fecha",
 
   // "search.filters.applied.charts.graphpubldateltr.tab": "Visualization Demo LTR",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.graphpubldateltr.tab": "Visualization Demo LTR",
+  "search.filters.applied.charts.graphpubldateltr.tab": "Demostración de visualización LTR",
 
   // "search.filters.applied.charts.graphpubldatetrl.tab": "Visualization Demo RTL",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.graphpubldatetrl.tab": "Visualization Demo RTL",
+  "search.filters.applied.charts.graphpubldatetrl.tab": "Demostración de visualización RTL",
 
   // "search.filters.applied.charts.default.title": "Search Output",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.default.title": "Search Output",
+  "search.filters.applied.charts.default.title": "Resultados de la búsqueda",
 
   // "search.filters.applied.charts.site.title": "Search Output",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.site.title": "Search Output",
+  "search.filters.applied.charts.site.title": "Resultados de la búsqueda",
 
   // "search.filters.applied.charts.RELATION.Person.researchoutputs.title": "Research Output",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.RELATION.Person.researchoutputs.title": "Research Output",
+  "search.filters.applied.charts.RELATION.Person.researchoutputs.title": "Publicaciones",
 
   // "search.filters.applied.charts.RELATION.Project.fundings.title": "Fundings",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.RELATION.Project.fundings.title": "Fundings",
+  "search.filters.applied.charts.RELATION.Project.fundings.title": "Financiaciones",
 
   // "search.filters.applied.charts.RELATION.Project.researchoutputs.title": "Research Output",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.RELATION.Project.researchoutputs.title": "Research Output",
+  "search.filters.applied.charts.RELATION.Project.researchoutputs.title": "Publicaciones",
 
   // "search.filters.applied.charts.no.data.found": "No data found",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.no.data.found": "No data found",
+  "search.filters.applied.charts.no.data.found": "No se encontraron datos",
 
   // "search.filters.applied.charts.show.hide": "Show/Hide",
-  // TODO New key - Add a translation
-  "search.filters.applied.charts.show.hide": "Show/Hide",
+  "search.filters.applied.charts.show.hide": "Mostrar/Ocultar",
 
 
 
@@ -7152,13 +7071,11 @@
   // "search.filters.filter.creativeDatePublished.label": "Search date published",
   "search.filters.filter.creativeDatePublished.label": "Buscar por fecha de publicación",
 
-  // "search.filters.filter.creativeDatePublished.min.label": "Start",
-  // TODO New key - Add a translation
-  "search.filters.filter.creativeDatePublished.min.label": "Start",
+  // "search.filters.filter.creativeDatePublished.min.label": "Start"
+  "search.filters.filter.creativeDatePublished.min.label": "Desde",
 
-  // "search.filters.filter.creativeDatePublished.max.label": "End",
-  // TODO New key - Add a translation
-  "search.filters.filter.creativeDatePublished.max.label": "End",
+  // "search.filters.filter.creativeDatePublished.max.label": "End"
+  "search.filters.filter.creativeDatePublished.max.label": "Hasta",
 
   // "search.filters.filter.creativeWorkEditor.head": "Editor",
   "search.filters.filter.creativeWorkEditor.head": "Editor",
@@ -8102,8 +8019,7 @@
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.JournalIssue": "Números de revista locales  ({{ count }})",
 
   // "submission.sections.describe.relationship-lookup.search-tab.tab-title.isJournalVolumeOfIssue": "Local Journal Volumes ({{ count }})",
-  // TODO New key - Add a translation
-  "submission.sections.describe.relationship-lookup.search-tab.tab-title.isJournalVolumeOfIssue": "Local Journal Volumes ({{ count }})",
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.isJournalVolumeOfIssue": "Volúmenes locales de la revista ({{ count }})",
 
   // "submission.sections.describe.relationship-lookup.search-tab.tab-title.isJournalVolumeOfPublication": "Local Journal Volumes ({{ count }})",
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.isJournalVolumeOfPublication": "Volúmenes de revista locales ({{ count }})",
@@ -8153,25 +8069,20 @@
   // "submission.sections.describe.relationship-lookup.search-tab.tab-title.sherpaJournalIssn": "Sherpa Journals by ISSN ({{ count }})",
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.sherpaJournalIssn": "Revistas Sherpa por ISSN ({{ count }})",
 
-  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPerson": "OpenAlex ({{ count }})",
-  // TODO New key - Add a translation
+  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPerson": "OpenAlex ({{ count }})"
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPerson": "OpenAlex ({{ count }})",
 
-  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexInstitution": "OpenAlex Search by Institution ({{ count }})",
-  // TODO New key - Add a translation
-  "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexInstitution": "OpenAlex Search by Institution ({{ count }})",
+  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexInstitution": "OpenAlex Search by Institution ({{ count }})"
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexInstitution": "Búsqueda en OpenAlex por institución ({{ count }})",
 
-  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPublisher": "OpenAlex Search by Publisher ({{ count }})",
-  // TODO New key - Add a translation
-  "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPublisher": "OpenAlex Search by Publisher ({{ count }})",
+  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPublisher": "OpenAlex Search by Publisher ({{ count }})"
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPublisher": "Búsqueda en OpenAlex por editor ({{ count }})",
 
-  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexFunder": "OpenAlex Search by Funder ({{ count }})",
-  // TODO New key - Add a translation
-  "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexFunder": "OpenAlex Search by Funder ({{ count }})",
+  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexFunder": "OpenAlex Search by Funder ({{ count }})"
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexFunder": "Búsqueda en OpenAlex por financiador ({{ count }})",
 
-  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.dataciteProject": "DataCite Search by Project ({{ count }})",
-  // TODO New key - Add a translation
-  "submission.sections.describe.relationship-lookup.search-tab.tab-title.dataciteProject": "DataCite Search by Project ({{ count }})",
+  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.dataciteProject": "DataCite Search by Project ({{ count }})"
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.dataciteProject": "Búsqueda en DataCite por proyecto ({{ count }})",
 
   // "submission.sections.describe.relationship-lookup.search-tab.tab-title.isFundingAgencyOfPublication": "Search for Funding Agencies",
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.isFundingAgencyOfPublication": "Búsqueda de agencias de financiación",
@@ -8203,9 +8114,8 @@
   // "submission.sections.describe.relationship-lookup.title.isFundingAgencyOfProject": "Funder of the Project",
   "submission.sections.describe.relationship-lookup.title.isFundingAgencyOfProject": "Financiador del Proyecto",
 
-  // "submission.sections.describe.relationship-lookup.title.isPersonOfProject": "Person of the Project",
-  // TODO New key - Add a translation
-  "submission.sections.describe.relationship-lookup.title.isPersonOfProject": "Person of the Project",
+  // "submission.sections.describe.relationship-lookup.title.isPersonOfProject": "Person of the Project"
+  "submission.sections.describe.relationship-lookup.title.isPersonOfProject": "Personas del proyecto",
 
   // "submission.sections.describe.relationship-lookup.selection-tab.search-form.placeholder": "Search...",
   "submission.sections.describe.relationship-lookup.selection-tab.search-form.placeholder": "Buscar...",
@@ -8222,9 +8132,8 @@
   // "submission.sections.describe.relationship-lookup.title.JournalIssue": "Journal Issues",
   "submission.sections.describe.relationship-lookup.title.JournalIssue": "Números de revista",
 
-  // "submission.sections.describe.relationship-lookup.title.isJournalVolumeOfIssue": "Journal Volumes",
-  // TODO New key - Add a translation
-  "submission.sections.describe.relationship-lookup.title.isJournalVolumeOfIssue": "Journal Volumes",
+  // "submission.sections.describe.relationship-lookup.title.isJournalVolumeOfIssue": "Journal Volumes"
+  "submission.sections.describe.relationship-lookup.title.isJournalVolumeOfIssue": "Volúmenes de la revista",
 
   // "submission.sections.describe.relationship-lookup.title.isJournalVolumeOfPublication": "Journal Volumes",
   "submission.sections.describe.relationship-lookup.title.isJournalVolumeOfPublication": "Volúmenes de la revista",
@@ -8290,8 +8199,7 @@
   "submission.sections.describe.relationship-lookup.selection-tab.title.isJournalOfPublication": "Revistas seleccionadas",
 
   // "submission.sections.describe.relationship-lookup.selection-tab.title.isJournalVolumeOfIssue": "Selected Journal Volume",
-  // TODO New key - Add a translation
-  "submission.sections.describe.relationship-lookup.selection-tab.title.isJournalVolumeOfIssue": "Selected Journal Volume",
+  "submission.sections.describe.relationship-lookup.selection-tab.title.isJournalVolumeOfIssue": "Volumen de la revista seleccionado",
 
   // "submission.sections.describe.relationship-lookup.selection-tab.title.isJournalVolumeOfPublication": "Selected Journal Volume",
   "submission.sections.describe.relationship-lookup.selection-tab.title.isJournalVolumeOfPublication": "Volumen de revista seleccionada",
@@ -8383,25 +8291,20 @@
   // "submission.sections.describe.relationship-lookup.selection-tab.title.ror": "Search Results",
   "submission.sections.describe.relationship-lookup.selection-tab.title.ror": "Resultados de la búsqueda",
 
-  // "submission.sections.describe.relationship-lookup.selection-tab.title.openalexPerson": "Search Results",
-  // TODO New key - Add a translation
-  "submission.sections.describe.relationship-lookup.selection-tab.title.openalexPerson": "Search Results",
+  // "submission.sections.describe.relationship-lookup.selection-tab.title.openalexPerson": "Search Results"
+  "submission.sections.describe.relationship-lookup.selection-tab.title.openalexPerson": "Resultados de búsqueda",
 
-  // "submission.sections.describe.relationship-lookup.selection-tab.title.openalexInstitution": "Search Results",
-  // TODO New key - Add a translation
-  "submission.sections.describe.relationship-lookup.selection-tab.title.openalexInstitution": "Search Results",
+  // "submission.sections.describe.relationship-lookup.selection-tab.title.openalexInstitution": "Search Results"
+  "submission.sections.describe.relationship-lookup.selection-tab.title.openalexInstitution": "Resultados de búsqueda",
 
-  // "submission.sections.describe.relationship-lookup.selection-tab.title.openalexPublisher": "Search Results",
-  // TODO New key - Add a translation
-  "submission.sections.describe.relationship-lookup.selection-tab.title.openalexPublisher": "Search Results",
+  // "submission.sections.describe.relationship-lookup.selection-tab.title.openalexPublisher": "Search Results"
+  "submission.sections.describe.relationship-lookup.selection-tab.title.openalexPublisher": "Resultados de búsqueda",
 
-  // "submission.sections.describe.relationship-lookup.selection-tab.title.openalexFunder": "Search Results",
-  // TODO New key - Add a translation
-  "submission.sections.describe.relationship-lookup.selection-tab.title.openalexFunder": "Search Results",
+  // "submission.sections.describe.relationship-lookup.selection-tab.title.openalexFunder": "Search Results"
+  "submission.sections.describe.relationship-lookup.selection-tab.title.openalexFunder": "Resultados de búsqueda",
 
-  // "submission.sections.describe.relationship-lookup.selection-tab.title.dataciteProject": "Search Results",
-  // TODO New key - Add a translation
-  "submission.sections.describe.relationship-lookup.selection-tab.title.dataciteProject": "Search Results",
+  // "submission.sections.describe.relationship-lookup.selection-tab.title.dataciteProject": "Search Results"
+  "submission.sections.describe.relationship-lookup.selection-tab.title.dataciteProject": "Resultados de búsqueda",
 
   // "submission.sections.describe.relationship-lookup.selection-tab.title": "Search Results",
   "submission.sections.describe.relationship-lookup.selection-tab.title": "Resultados de la búsqueda",
@@ -8961,9 +8864,8 @@
   // "subscriptions.tooltip": "Subscribe",
   "subscriptions.tooltip": "Suscribir",
 
-  // "subscriptions.unsubscribe": "Unsubscribe",
-  // TODO New key - Add a translation
-  "subscriptions.unsubscribe": "Unsubscribe",
+  // "subscriptions.unsubscribe": "Unsubscribe"
+  "subscriptions.unsubscribe": "Cancelar suscripción",
 
   // "subscriptions.modal.title": "Subscriptions",
   "subscriptions.modal.title": "Suscripciones",
@@ -11055,25 +10957,20 @@
   // "embargo.listelement.badge": "Embargo until {{ date }}",
   "embargo.listelement.badge": "Embargo hasta {{ date }}",
 
-  // "metadata-export-search.submit.error.limit-exceeded": "Only the first {{limit}} items will be exported",
-  // TODO New key - Add a translation
-  "metadata-export-search.submit.error.limit-exceeded": "Only the first {{limit}} items will be exported",
+  // "metadata-export-search.submit.error.limit-exceeded": "Only the first {{limit}} items will be exported"
+  "metadata-export-search.submit.error.limit-exceeded": "Solo se exportarán los primeros {{limit}} ítems",
 
-  // "file-download-link.request-copy": "Request a copy of ",
-  // TODO New key - Add a translation
-  "file-download-link.request-copy": "Request a copy of ",
+  // "file-download-link.request-copy": "Request a copy of "
+  "file-download-link.request-copy": "Solicitar una copia de ",
 
-  // "item.preview.organization.url": "URL",
-  // TODO New key - Add a translation
+  // "item.preview.organization.url": "URL"
   "item.preview.organization.url": "URL",
 
-  // "item.preview.organization.address.addressLocality": "City",
-  // TODO New key - Add a translation
-  "item.preview.organization.address.addressLocality": "City",
+  // "item.preview.organization.address.addressLocality": "City"
+  "item.preview.organization.address.addressLocality": "Ciudad",
 
-  // "item.preview.organization.alternateName": "Alternative name",
-  // TODO New key - Add a translation
-  "item.preview.organization.alternateName": "Alternative name",
+  // "item.preview.organization.alternateName": "Alternative name"
+  "item.preview.organization.alternateName": "Nombre alternativo",
 
 
 }
