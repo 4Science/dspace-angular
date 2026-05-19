@@ -127,7 +127,7 @@ export class ItemVersionsNoticeComponent implements OnInit {
         startWith(false),
       );
     }
-    this.destinationPage$ = this.latestVersion$.pipe(
+    this.destinationPage$ = this.latestVersion$?.pipe(
       switchMap(version => version.item),
       map(item => this.getItemPage(item.payload)),
     );
