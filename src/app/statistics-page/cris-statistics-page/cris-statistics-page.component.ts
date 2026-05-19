@@ -23,10 +23,10 @@ import {
 } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import {
+  BehaviorSubject,
   combineLatest,
   Observable,
   of,
-  Subject,
 } from 'rxjs';
 import {
   finalize,
@@ -143,7 +143,7 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
   /**
    * The fully loaded report (with points) for the currently selected chart report.
    */
-  private selectedFullReportSubject = new Subject<UsageReport | null>();
+  private selectedFullReportSubject = new BehaviorSubject<UsageReport | null>(null);
   selectedFullReport$ = this.selectedFullReportSubject.asObservable();
 
   constructor(

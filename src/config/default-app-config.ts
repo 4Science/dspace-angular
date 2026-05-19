@@ -38,6 +38,7 @@ import {
   SuggestionConfig,
 } from './layout-config.interfaces';
 import { LoaderConfig } from './loader-config.interfaces';
+import { LuckySearchRedirectConfig } from './lucky-search-redirect-config';
 import { MarkdownConfig } from './markdown-config.interface';
 import { MatomoConfig } from './matomo-config.interface';
 import { MediaViewerConfig } from './media-viewer-config.interface';
@@ -298,8 +299,8 @@ export class DefaultAppConfig implements AppConfig {
             path: 'assets/images/ror.logo.icon.svg',
           },
           {
-            source: 'sherpa',
-            path: 'assets/images/sherpa.logo.icon.svg',
+            source: 'opf',
+            path: 'assets/images/opf.logo.icon.svg',
           },
           {
             source: 'zdb',
@@ -418,6 +419,8 @@ export class DefaultAppConfig implements AppConfig {
       pageSize: 5,
       // Show the bitstream access status label
       showAccessStatuses: false,
+      // Open bitstream download links in a new browser tab by default
+      openDownloadLinksInNewTab: true,
     },
     // The maximum number of metadata values to add to the metatag list of the item page
     metatagLimit: 20,
@@ -1053,5 +1056,10 @@ export class DefaultAppConfig implements AppConfig {
     trackResources: true,
     trackLongTasks: true,
     defaultPrivacyLevel: 'mask-user-input',
+  };
+
+  luckySearchRedirects: LuckySearchRedirectConfig = {
+    'legacy-id': 301,
+    default: 302,
   };
 }

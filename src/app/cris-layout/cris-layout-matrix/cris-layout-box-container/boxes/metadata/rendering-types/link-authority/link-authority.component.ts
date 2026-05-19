@@ -34,6 +34,8 @@ export class LinkAuthorityComponent extends RenderingTypeValueModelComponent imp
   link: MetadataLinkValue;
   iconStyle: string;
 
+  defaultIcon = 'fa fa-external-link-square';
+
 
   constructor(
     @Inject('fieldProvider') public fieldProvider: LayoutField,

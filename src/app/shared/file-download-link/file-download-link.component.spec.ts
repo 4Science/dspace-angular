@@ -15,7 +15,10 @@ import {
   getTestScheduler,
 } from 'jasmine-marbles';
 import { of } from 'rxjs';
-import { APP_DATA_SERVICES_MAP } from 'src/config/app-config.interface';
+import {
+  APP_CONFIG,
+  APP_DATA_SERVICES_MAP,
+} from 'src/config/app-config.interface';
 
 import { getBitstreamModuleRoute } from '../../app-routing-paths';
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
@@ -43,6 +46,14 @@ describe('FileDownloadLinkComponent', () => {
   let item: Item;
   let configurationDataService: ConfigurationDataService;
   let storeMock: any;
+
+  const mockAppConfig = {
+    item: {
+      bitstream: {
+        openDownloadLinksInNewTab: true,
+      },
+    },
+  };
 
   const itemRequestStub = Object.assign(new ItemRequest(), {
     token: 'item-request-token',
@@ -95,6 +106,7 @@ describe('FileDownloadLinkComponent', () => {
         { provide: ActivatedRoute, useValue: activatedRoute },
         { provide: Store, useValue: storeMock },
         { provide: APP_DATA_SERVICES_MAP, useValue: {} },
+        { provide: APP_CONFIG, useValue: mockAppConfig },
         { provide: ConfigurationDataService, useValue: configurationDataService },
       ],
     })
@@ -135,8 +147,18 @@ describe('FileDownloadLinkComponent', () => {
           fixture.detectChanges();
           const link = fixture.debugElement.query(By.css('a'));
           expect(link.injector.get(RouterLinkDirectiveStub).routerLink).toContain(new URLCombiner(getBitstreamModuleRoute(), bitstream.uuid, 'download').toString());
+          expect(link.nativeElement.getAttribute('target')).toBe('_blank');
           const lock = fixture.debugElement.query(By.css('.fa-lock'));
           expect(lock).toBeNull();
+        });
+
+        it('should keep an explicit isBlank input over the config default', () => {
+          component.isBlank = false;
+          component.ngOnInit();
+          scheduler.flush();
+          fixture.detectChanges();
+          const link = fixture.debugElement.query(By.css('a'));
+          expect(link.nativeElement.getAttribute('target')).toBe('_self');
         });
       });
 

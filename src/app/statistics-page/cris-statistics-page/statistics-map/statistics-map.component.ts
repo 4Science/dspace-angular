@@ -1,8 +1,10 @@
 import {
   AsyncPipe,
+  DOCUMENT,
   isPlatformBrowser,
 } from '@angular/common';
 import {
+  ChangeDetectorRef,
   Component,
   Inject,
   Input,
@@ -28,6 +30,10 @@ import {
   ExportImageType,
   ExportService,
 } from '../../../core/export-service/export.service';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../../core/services/window.service';
 import {
   getFirstSucceededRemoteData,
   getRemoteDataPayload,
@@ -93,10 +99,13 @@ export class StatisticsMapComponent implements OnInit {
   constructor(
     @Inject(PLATFORM_ID) protected platformId: any,
     private usageReportService: UsageReportDataService,
+    @Inject(NativeWindowService) private _window: NativeWindowRef,
+    @Inject(DOCUMENT) private document: any,
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     if (isPlatformBrowser(this.platformId)) {
       import('../../../core/export-service/browser-export.service').then((s) => {
-        this.exportService = new s.BrowserExportService(this.platformId);
+        this.exportService = new s.BrowserExportService(this.platformId, this._window, this.document);
       });
     } else {
       import('../../../core/export-service/server-export.service').then((s) => {
@@ -149,6 +158,7 @@ export class StatisticsMapComponent implements OnInit {
       ],
       options: { 'title': this.report.reportType },
     };
+    this.changeDetectorRef.detectChanges();
   }
 
   /**
