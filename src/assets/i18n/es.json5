@@ -3339,7 +3339,7 @@
   "info.accessibility-settings.invalid-form-notification": "No se guardó. El formulario contiene valores no válidos.",
 
   // "info.accessibility-settings.liveRegionTimeOut.label": "ARIA Live region time out (in seconds)",
-  "info.accessibility-settings.liveRegionTimeOut.label": "Duración de la región ARIA Live (en segundos)",",
+  "info.accessibility-settings.liveRegionTimeOut.label": "Duración de la región ARIA Live (en segundos)",
 
   // "info.accessibility-settings.liveRegionTimeOut.hint": "The duration after which a message in the ARIA live region disappears. ARIA live regions are not visible on the page, but provide announcements of notifications (or other actions) to screen readers.",
   "info.accessibility-settings.liveRegionTimeOut.hint": "La duración tras la cual un mensaje en la región ARIA Live desaparece. Las regiones ARIA Live no son visibles en la página, pero proporcionan anuncios de notificaciones (u otras acciones) a los lectores de pantalla.",
