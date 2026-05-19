@@ -1,6 +1,7 @@
 import {
   AsyncPipe,
   KeyValuePipe,
+  Location,
   NgForOf,
   NgIf,
   SlicePipe,
@@ -117,6 +118,7 @@ export class FullItemPageComponent extends ItemPageComponent implements OnInit, 
     protected notifyInfoService: NotifyInfoService,
     @Inject(PLATFORM_ID) protected platformId: string,
     @Inject(APP_CONFIG) private appConfig: AppConfig,
+    private location: Location,
   ) {
     super(route, router, items, authorizationService, responseService, linkHeadService, notifyInfoService, platformId);
   }
@@ -141,7 +143,7 @@ export class FullItemPageComponent extends ItemPageComponent implements OnInit, 
    * Navigate back in browser history.
    */
   back() {
-    this.router.navigate(['../'], { relativeTo: this.route });
+    this.location.back();
   }
 
   ngOnDestroy() {
