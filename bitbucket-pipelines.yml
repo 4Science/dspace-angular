@@ -150,6 +150,23 @@ definitions:
           - echo "Running Cypress tests..."
           - npm run cypress:run --env chromeFlags="$CHROME_FLAGS"
           - echo "Test execution completed"
+          - echo "Cleaning up e2e runner configuration for commit $HASH_COMMIT"
+          - git config --global user.email "${BB_USER}"
+          - git config --global user.name "${BB_EMAIL}"
+          - git clone https://${BB_USER}:${BB_USER_TOKEN}@${E2E_VALUES_REPO}
+          - cd e2erunners-values
+          - rm -f ${HASH_COMMIT}
+          - git add -A
+          - git commit -m "Remove configuration for e2e-${HASH_COMMIT}" || echo "No changes to commit"
+          - git push
+          - cd ..
+          - git clone https://${BB_USER}:${BB_USER_TOKEN}@${HELM_CHARTS_REPO}
+          - cd helm-charts
+          - 'sed -i "/^  - name: e2e-${HASH_COMMIT}$/d" ${E2E_VALUES}'
+          - git add e2e-ingress/values.yaml
+          - git commit -m "Remove ${HASH_COMMIT} from e2e-ingress values" || echo "No changes to commit"
+          - git push
+          - cd ..
         artifacts:
           - cypress/screenshots/**
           - cypress/videos/**
