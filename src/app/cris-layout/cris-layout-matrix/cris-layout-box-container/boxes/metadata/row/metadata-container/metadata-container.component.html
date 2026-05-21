@@ -1,6 +1,6 @@
 @if (metadataFieldRenderOptions) {
   <div class="{{containerStyle}}">
-    <div class="d-flex" [class.flex-column]="field.labelAsHeading">
+    <div class="d-flex row" [class.flex-column]="field.labelAsHeading">
       @if (hasLabel) {
         <span
           class="{{labelStyle}}" [innerHTML]="getLabel()">
