@@ -4671,6 +4671,8 @@
 
   "menu.section.statistics": "Statistics",
 
+  "menu.section.statistics.item": "Item Statistics",
+
   "menu.section.statistics.workflow": "Workflow",
 
   "menu.section.statistics.login": "Login",
