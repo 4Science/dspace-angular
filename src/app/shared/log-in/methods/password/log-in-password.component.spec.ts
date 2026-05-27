@@ -1,153 +1,226 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import {
   ComponentFixture,
   TestBed,
   waitForAsync,
 } from '@angular/core/testing';
-import {
-  FormsModule,
-  ReactiveFormsModule,
-  UntypedFormGroup,
-} from '@angular/forms';
-import { By } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import {
-  Store,
-  StoreModule,
-} from '@ngrx/store';
-import { provideMockStore } from '@ngrx/store/testing';
+import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
+import {
+  BehaviorSubject,
+  of,
+} from 'rxjs';
 
-import { storeModuleConfig } from '../../../../app.reducer';
-import { authReducer } from '../../../../core/auth/auth.reducer';
 import { AuthService } from '../../../../core/auth/auth.service';
 import { AuthMethod } from '../../../../core/auth/models/auth.method';
 import { AuthMethodType } from '../../../../core/auth/models/auth.method-type';
 import { AuthorizationDataService } from '../../../../core/data/feature-authorization/authorization-data.service';
+import { FeatureID } from '../../../../core/data/feature-authorization/feature-id';
 import { HardRedirectService } from '../../../../core/services/hard-redirect.service';
-import { getMockThemeService } from '../../../mocks/theme-service.mock';
-import { ActivatedRouteStub } from '../../../testing/active-router.stub';
-import { AuthServiceStub } from '../../../testing/auth-service.stub';
-import { AuthorizationDataServiceStub } from '../../../testing/authorization-service.stub';
-import { ThemeService } from '../../../theme-support/theme.service';
 import { LogInPasswordComponent } from './log-in-password.component';
 
 describe('LogInPasswordComponent', () => {
-
   let component: LogInPasswordComponent;
   let fixture: ComponentFixture<LogInPasswordComponent>;
-  let page: Page;
-  let initialState: any;
-  let hardRedirectService: HardRedirectService;
-  let themeService = getMockThemeService();
+  let authService: jasmine.SpyObj<AuthService>;
+  let hardRedirectService: jasmine.SpyObj<HardRedirectService>;
+  let store: jasmine.SpyObj<Store>;
+  let authorizationService: jasmine.SpyObj<AuthorizationDataService>;
+  let activatedRoute: any;
 
-  beforeEach(() => {
-    hardRedirectService = jasmine.createSpyObj('hardRedirectService', {
-      getCurrentRoute: {},
-    });
+  const mockAuthMethod: AuthMethod = {
+    authMethodType: AuthMethodType.Password,
+    position: 1,
+    location: 'http://localhost:8080/server/api/authn/password',
+  };
 
-    initialState = {
-      core: {
-        auth: {
-          authenticated: false,
-          loaded: false,
-          blocking: false,
-          loading: false,
-          authMethods: [],
-        },
-      },
-    };
-  });
+  const errorSubject = new BehaviorSubject<string>(null);
+  const messageSubject = new BehaviorSubject<string>(null);
 
   beforeEach(waitForAsync(() => {
-    // refine the test module by declaring the test component
-    void TestBed.configureTestingModule({
+    authService = jasmine.createSpyObj('AuthService', ['setRedirectUrl', 'setRedirectUrlIfNotSet']);
+    hardRedirectService = jasmine.createSpyObj('HardRedirectService', ['getCurrentRoute']);
+    store = jasmine.createSpyObj('Store', ['dispatch', 'pipe', 'select']);
+    authorizationService = jasmine.createSpyObj('AuthorizationDataService', ['isAuthorized']);
+
+    activatedRoute = {
+      data: of({ isBackDoor: false }),
+    };
+
+    hardRedirectService.getCurrentRoute.and.returnValue('/test-route');
+    store.pipe.and.returnValue(of(null));
+    store.select = jasmine.createSpy('select').and.callFake((selector) => {
+      if (selector.toString().includes('getAuthenticationError')) {
+        return errorSubject.asObservable();
+      }
+      if (selector.toString().includes('getAuthenticationInfo')) {
+        return messageSubject.asObservable();
+      }
+      return of(null);
+    });
+
+    authorizationService.isAuthorized.and.returnValue(of(true));
+
+    TestBed.configureTestingModule({
       imports: [
-        FormsModule,
         ReactiveFormsModule,
-        StoreModule.forRoot({ auth: authReducer }, storeModuleConfig),
         TranslateModule.forRoot(),
         LogInPasswordComponent,
       ],
       providers: [
-        { provide: AuthService, useClass: AuthServiceStub },
-        { provide: AuthorizationDataService, useClass: AuthorizationDataServiceStub },
-        { provide: 'authMethodProvider', useValue: new AuthMethod(AuthMethodType.Password, 0) },
-        { provide: 'isStandalonePage', useValue: true },
+        { provide: 'authMethodProvider', useValue: mockAuthMethod },
+        { provide: 'isStandalonePage', useValue: false },
+        { provide: AuthService, useValue: authService },
         { provide: HardRedirectService, useValue: hardRedirectService },
-        { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
-        { provide: ThemeService, useValue: themeService },
-        provideMockStore({ initialState }),
+        { provide: Store, useValue: store },
+        { provide: AuthorizationDataService, useValue: authorizationService },
+        { provide: ActivatedRoute, useValue: activatedRoute },
       ],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA,
-      ],
-    })
-      .compileComponents();
-
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
-  beforeEach(async () => {
-    // create component and test fixture
+  beforeEach(() => {
     fixture = TestBed.createComponent(LogInPasswordComponent);
-
-    // get test component from the fixture
     component = fixture.componentInstance;
-
-    // create page
-    page = new Page(component, fixture);
-
-    // verify the fixture is stable (no pending tasks)
-    await fixture.whenStable();
-    page.addPageElements();
-  });
-
-  it('should create a FormGroup comprised of FormControls', () => {
+    errorSubject.next(null);
+    messageSubject.next(null);
     fixture.detectChanges();
-    expect(component.form instanceof UntypedFormGroup).toBe(true);
   });
 
-  it('should authenticate', () => {
-    fixture.detectChanges();
-
-    // set FormControl values
-    component.form.controls.email.setValue('user');
-    component.form.controls.password.setValue('password');
-
-    // submit form
-    component.submit();
-
-    // verify Store.dispatch() is invoked
-    expect(page.navigateSpy.calls.any()).toBe(true, 'Store.dispatch not invoked');
+  afterEach(() => {
+    errorSubject.next(null);
+    messageSubject.next(null);
   });
 
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  describe('ngOnInit', () => {
+    it('should initialize the form with email and password controls', () => {
+      expect(component.form).toBeDefined();
+      expect(component.form.get('email')).toBeDefined();
+      expect(component.form.get('password')).toBeDefined();
+    });
+
+    it('should set email and password as required fields', () => {
+      const emailControl = component.form.get('email');
+      const passwordControl = component.form.get('password');
+
+      emailControl.setValue('');
+      passwordControl.setValue('');
+
+      expect(emailControl.valid).toBeFalsy();
+      expect(passwordControl.valid).toBeFalsy();
+      expect(emailControl.hasError('required')).toBeTruthy();
+      expect(passwordControl.hasError('required')).toBeTruthy();
+    });
+
+    it('should check registration authorization', (done) => {
+      component.canRegister$.subscribe((canRegister) => {
+        expect(authorizationService.isAuthorized).toHaveBeenCalledWith(FeatureID.EPersonRegistration);
+        expect(canRegister).toBeTrue();
+        done();
+      });
+    });
+
+    it('should check forgot password authorization', (done) => {
+      component.canForgot$.subscribe((canForgot) => {
+        expect(authorizationService.isAuthorized).toHaveBeenCalledWith(FeatureID.EPersonForgotPassword);
+        expect(canForgot).toBeTrue();
+        done();
+      });
+    });
+
+    it('should show divider when user can register or reset password', (done) => {
+      authorizationService.isAuthorized.and.returnValue(of(true));
+      component.ngOnInit();
+
+      component.canShowDivider$.subscribe((canShow) => {
+        expect(canShow).toBeTrue();
+        done();
+      });
+    });
+
+    it('should not show divider when isBackDoor is true', (done) => {
+      activatedRoute.data = of({ isBackDoor: true });
+      authorizationService.isAuthorized.and.returnValue(of(true));
+      component.ngOnInit();
+
+      // canShowDivider$ filters out false values, so it won't emit
+      let emitted = false;
+      component.canShowDivider$.subscribe(() => {
+        emitted = true;
+      });
+
+      setTimeout(() => {
+        expect(emitted).toBeFalse();
+        done();
+      }, 100);
+    });
+  });
+
+  describe('getRegisterRoute', () => {
+    it('should return the register route', () => {
+      const route = component.getRegisterRoute();
+      expect(route).toBe('/register');
+    });
+  });
+
+  describe('getForgotRoute', () => {
+    it('should return the forgot password route', () => {
+      const route = component.getForgotRoute();
+      expect(route).toBe('/forgot');
+    });
+  });
+
+  describe('authorization scenarios', () => {
+    it('should handle when user cannot register or forgot password', (done) => {
+      authorizationService.isAuthorized.and.returnValue(of(false));
+      component.ngOnInit();
+
+      let emitted = false;
+      component.canShowDivider$.subscribe(() => {
+        emitted = true;
+      });
+
+      setTimeout(() => {
+        expect(emitted).toBeFalse();
+        done();
+      }, 100);
+    });
+
+    it('should show divider when user can only register', (done) => {
+      authorizationService.isAuthorized.and.callFake((featureId) => {
+        if (featureId === FeatureID.EPersonRegistration) {
+          return of(true);
+        }
+        return of(false);
+      });
+      component.ngOnInit();
+
+      component.canShowDivider$.subscribe((canShow) => {
+        expect(canShow).toBeTrue();
+        done();
+      });
+    });
+
+    it('should show divider when user can only forgot password', (done) => {
+      authorizationService.isAuthorized.and.callFake((featureId) => {
+        if (featureId === FeatureID.EPersonForgotPassword) {
+          return of(true);
+        }
+        return of(false);
+      });
+      component.ngOnInit();
+
+      component.canShowDivider$.subscribe((canShow) => {
+        expect(canShow).toBeTrue();
+        done();
+      });
+    });
+  });
 });
-
-/**
- * I represent the DOM elements and attach spies.
- *
- * @class Page
- */
-class Page {
-
-  public emailInput: HTMLInputElement;
-  public navigateSpy: jasmine.Spy;
-  public passwordInput: HTMLInputElement;
-
-  constructor(private component: LogInPasswordComponent, private fixture: ComponentFixture<LogInPasswordComponent>) {
-    // use injector to get services
-    const injector = fixture.debugElement.injector;
-    const store = injector.get(Store);
-
-    // add spies
-    this.navigateSpy = spyOn(store, 'dispatch');
-  }
-
-  public addPageElements() {
-    const emailInputSelector = 'input[formcontrolname=\'email\']';
-    this.emailInput = this.fixture.debugElement.query(By.css(emailInputSelector)).nativeElement;
-
-    const passwordInputSelector = 'input[formcontrolname=\'password\']';
-    this.passwordInput = this.fixture.debugElement.query(By.css(passwordInputSelector)).nativeElement;
-  }
-}

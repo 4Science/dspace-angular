@@ -5,8 +5,10 @@ import {
 } from '@angular/common';
 import {
   Component,
+  Inject,
   Input,
   OnInit,
+  Optional,
 } from '@angular/core';
 import {
   ActivatedRoute,
@@ -27,6 +29,10 @@ import {
   shareReplay,
 } from 'rxjs/operators';
 
+import {
+  APP_CONFIG,
+  AppConfig,
+} from '../../../config/app-config.interface';
 import {
   getBitstreamDownloadRoute,
   getBitstreamDownloadWithAccessTokenRoute,
@@ -85,7 +91,7 @@ export class FileDownloadLinkComponent implements OnInit {
   /**
    * A boolean representing if link is shown in same tab or in a new one.
    */
-  @Input() isBlank = false;
+  @Input() isBlank: boolean;
 
   @Input() enableRequestACopy = true;
 
@@ -122,10 +128,13 @@ export class FileDownloadLinkComponent implements OnInit {
     public dsoNameService: DSONameService,
     private route: ActivatedRoute,
     private translateService: TranslateService,
+    @Optional() @Inject(APP_CONFIG) private appConfig?: AppConfig,
   ) {
   }
 
   ngOnInit() {
+    this.isBlank = this.isBlank ?? this.appConfig?.item?.bitstream?.openDownloadLinksInNewTab ?? true;
+
     if (this.enableRequestACopy) {
       // Obtain item request data from the route snapshot
       this.itemRequest = this.route.snapshot.data.itemRequest;

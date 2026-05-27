@@ -1,4 +1,7 @@
-import { CommonModule } from '@angular/common';
+import {
+  CommonModule,
+  DOCUMENT,
+} from '@angular/common';
 import {
   DebugElement,
   NO_ERRORS_SCHEMA,
@@ -13,6 +16,10 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { ChartComponent } from '@swimlane/ngx-charts';
 import { of } from 'rxjs';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from 'src/app/core/services/window.service';
 
 import { BrowserExportService } from '../../../../core/export-service/browser-export.service';
 import { REPORT_DATA } from '../../../../core/statistics/data-report.service';
@@ -76,6 +83,8 @@ describe('StatisticsChartBarComponent', () => {
         { provide: REPORT_DATA, useValue: selectedReport },
         { provide: BrowserExportService, useValue: exportServiceStub },
         { provide: 'categoryType', useValue: 'mainReports' },
+        { provide: NativeWindowService, useValue: new NativeWindowRef() },
+        { provide: DOCUMENT, useValue: document },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(StatisticsChartBarComponent, { remove: { imports: [ChartComponent, AlertComponent] } }).compileComponents();

@@ -15,6 +15,7 @@ import {
 import { AuthService } from '../../../../../../../core/auth/auth.service';
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../core/shared/item.model';
+import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
 import { VocabularyService } from '../../../../../../../core/submission/vocabularies/vocabulary.service';
 import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate-loader.mock';
 import { AuthServiceStub } from '../../../../../../../shared/testing/auth-service.stub';
@@ -193,5 +194,71 @@ describe('ValuepairComponent', () => {
 
 
   });
+
+  describe('when the metadata value is a link', () => {
+    const linkValue = 'https://example.com';
+    const testFieldLink: LayoutField = {
+      metadata: 'dc.identifier',
+      label: 'Identifier',
+      rendering: 'valuepair.' + VOCABULARY_NAME_2,
+      fieldType: 'METADATA',
+      metadataGroup: null,
+      labelAsHeading: false,
+      valuesInline: false,
+    };
+
+    const testItemLink = Object.assign(new Item(), {
+      allMetadata: () => [{ value: linkValue, authority: null }],
+    });
+
+    beforeEach(waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          TranslateModule.forRoot({
+            loader: {
+              provide: TranslateLoader,
+              useClass: TranslateLoaderMock,
+            },
+          }),
+          ValuepairComponent,
+          DsDatePipe,
+        ],
+        providers: [
+          { provide: VocabularyService, useValue: vocabularyServiceSpy },
+          { provide: AuthService, useValue: authService },
+          { provide: 'fieldProvider', useValue: testFieldLink },
+          { provide: 'itemProvider', useValue: testItemLink },
+          { provide: 'metadataValueProvider', useValue: { value: linkValue, authority: null } },
+          { provide: 'renderingSubTypeProvider', useValue: '' }, // leave empty
+          { provide: 'tabNameProvider', useValue: '' },
+        ],
+      }).compileComponents();
+    }));
+
+    beforeEach(() => {
+      fixture = TestBed.createComponent(ValuepairComponent);
+      component = fixture.componentInstance;
+      component.metadataValue = Object.assign(new MetadataValue(), {
+        value: linkValue,
+      });
+      component.value$.next(linkValue);
+
+      fixture.detectChanges();
+    });
+
+    it('should detect that the value is a link', () => {
+      expect(component.isMetadataLink).toBeTrue();
+    });
+
+    it('should render the value as an <a> tag', () => {
+      const compiled = fixture.nativeElement as HTMLElement;
+      const linkEl = compiled.querySelector('a.text-value') as HTMLAnchorElement;
+
+      expect(linkEl).toBeTruthy();
+      expect(linkEl.href).toBe(linkValue + '/');
+      expect(linkEl.textContent.trim()).toBe(linkValue);
+    });
+  });
+
 
 });

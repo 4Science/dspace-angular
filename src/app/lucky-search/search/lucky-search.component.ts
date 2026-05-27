@@ -30,6 +30,10 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 
+import {
+  APP_CONFIG,
+  AppConfig,
+} from '../../../config/app-config.interface';
 import { getBitstreamDownloadRoute } from '../../app-routing-paths';
 import {
   BitstreamDataService,
@@ -127,6 +131,7 @@ export class LuckySearchComponent implements OnInit {
     private hardRedirectService: HardRedirectService,
     private notificationService: NotificationsService,
     private translateService: TranslateService,
+    @Inject(APP_CONFIG) private appConfig: AppConfig,
   ) {}
 
   ngOnInit(): void {
@@ -236,10 +241,19 @@ export class LuckySearchComponent implements OnInit {
 
   public redirect(url: string): void {
     if (isPlatformServer(this.platformId)) {
-      this.hardRedirectService.redirect(url, 302);
+      this.hardRedirectService.redirect(url, this.getRedirectCode());
     } else {
       this.router.navigateByUrl(url, { replaceUrl: true });
     }
+  }
+
+  private getRedirectCode(): number {
+    let code: number = this.appConfig?.luckySearchRedirects?.default || 302;
+    if (Object.keys(this.appConfig?.luckySearchRedirects).includes(this.currentFilter.identifier)) {
+      code = this.appConfig.luckySearchRedirects[this.currentFilter.identifier];
+    }
+
+    return code;
   }
 
   private parseBitstreamFilters(queryParams: Params): MetadataFilter[] {

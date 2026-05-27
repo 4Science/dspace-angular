@@ -18,13 +18,14 @@
             </li>
           }
         </ul>
-        @if (!selectedReport) {
+        @if (!selectedReport || !selectedFullReport) {
           <ds-loading></ds-loading>
         }
-        @if (selectedReport) {
+        @if (selectedReport && selectedFullReport) {
           <ds-statistics-chart-wrapper [type]="selectedReport.viewMode"
-            [categoryType]="categoryType"
-          [report]="selectedReport"></ds-statistics-chart-wrapper>
+                                       [categoryType]="categoryType"
+                                       [report]="selectedFullReport">
+          </ds-statistics-chart-wrapper>
         }
       </div>
     </div>

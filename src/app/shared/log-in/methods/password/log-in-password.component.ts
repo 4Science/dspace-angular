@@ -12,12 +12,23 @@ import {
   Validators,
 } from '@angular/forms';
 import {
+  ActivatedRoute,
+  RouterLink,
+} from '@angular/router';
+import {
   select,
   Store,
 } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {
+  combineLatest,
+  Observable,
+  shareReplay,
+} from 'rxjs';
+import {
+  filter,
+  map,
+} from 'rxjs/operators';
 
 import {
   getForgotPasswordRoute,
@@ -57,6 +68,7 @@ import { BrowserOnlyPipe } from '../../../utils/browser-only.pipe';
     BtnDisabledDirective,
     FormsModule,
     ReactiveFormsModule,
+    RouterLink,
     TranslateModule,
   ],
 })
@@ -103,6 +115,16 @@ export class LogInPasswordComponent implements OnInit {
    */
   public canRegister$: Observable<boolean>;
 
+  /**
+   * Whether or not the current user (or anonymous) is authorized to register an account
+   */
+  canForgot$: Observable<boolean>;
+
+  /**
+   * Shows the divider only if contains at least one link to show
+   */
+  canShowDivider$: Observable<boolean>;
+
 
   constructor(
     @Inject('authMethodProvider') public injectedAuthMethodModel: AuthMethod,
@@ -110,6 +132,7 @@ export class LogInPasswordComponent implements OnInit {
     private authService: AuthService,
     private hardRedirectService: HardRedirectService,
     private formBuilder: UntypedFormBuilder,
+    private route: ActivatedRoute,
     protected store: Store<CoreState>,
     protected authorizationService: AuthorizationDataService,
   ) {
@@ -146,7 +169,21 @@ export class LogInPasswordComponent implements OnInit {
       }),
     );
 
-    this.canRegister$ = this.authorizationService.isAuthorized(FeatureID.EPersonRegistration);
+    this.canRegister$ = this.authorizationService.isAuthorized(FeatureID.EPersonRegistration).pipe(
+      shareReplay({ refCount: false, bufferSize: 1 }),
+    );
+    this.canForgot$ = this.authorizationService.isAuthorized(FeatureID.EPersonForgotPassword).pipe(
+      shareReplay({ refCount: false, bufferSize: 1 }),
+    );
+
+    this.canShowDivider$ = combineLatest([
+      this.canRegister$,
+      this.canForgot$,
+      this.route.data,
+    ]).pipe(
+      map(([canRegister, canForgot, routeData]) => (canRegister || canForgot) && !routeData?.isBackDoor),
+      filter(Boolean),
+    );
   }
 
   getRegisterRoute() {

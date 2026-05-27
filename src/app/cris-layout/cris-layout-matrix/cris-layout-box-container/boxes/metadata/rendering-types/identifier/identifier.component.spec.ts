@@ -245,4 +245,89 @@ describe('IdentifierComponent', () => {
     });
   });
 
+  describe('validateLink method', () => {
+    describe('with http/https URLs', () => {
+      it('should validate http URL', () => {
+        const link = 'http://example.com';
+        // Access private method through component instance (for testing purposes)
+        expect((component as any).validateLink(link)).toBe(true);
+      });
+
+      it('should validate https URL', () => {
+        const link = 'https://example.com';
+        expect((component as any).validateLink(link)).toBe(true);
+      });
+
+      it('should validate https URL with path', () => {
+        const link = 'https://example.com/path/to/resource';
+        expect((component as any).validateLink(link)).toBe(true);
+      });
+
+      it('should reject invalid URL with spaces', () => {
+        const link = 'https://example.com/path with spaces';
+        expect((component as any).validateLink(link)).toBe(false);
+      });
+
+      it('should reject invalid URL with quotes', () => {
+        const link = 'https://example.com/path"quoted"';
+        expect((component as any).validateLink(link)).toBe(false);
+      });
+    });
+
+    describe('with subtypeValue.link prefix', () => {
+      beforeEach(() => {
+        component.renderingSubType = 'ror';
+        fixture.detectChanges();
+      });
+
+      it('should validate link that already starts with subtypeValue.link', () => {
+        const link = 'https://ror.org/123abc';
+        expect((component as any).validateLink(link)).toBe(true);
+      });
+
+      it('should validate link that is exactly subtypeValue.link', () => {
+        const link = 'https://ror.org';
+        expect((component as any).validateLink(link)).toBe(true);
+      });
+
+      it('should reject link that does not start with subtypeValue.link', () => {
+        const link = '123abc';
+        expect((component as any).validateLink(link)).toBe(false);
+      });
+
+      it('should not validate partial match of subtypeValue.link', () => {
+        const link = 'ror.example.com';
+        expect((component as any).validateLink(link)).toBe(false);
+      });
+    });
+
+    describe('composeLink with validateLink', () => {
+      beforeEach(() => {
+        component.renderingSubType = 'ror';
+        fixture.detectChanges();
+      });
+
+      it('should not prepend subtypeValue.link if link already has it', () => {
+        const link = 'https://ror.org/123abc';
+        const result = component.composeLink(link, 'ror');
+        expect(result.href).toBe('https://ror.org/123abc');
+        expect(result.text).toBe('https://ror.org/123abc');
+      });
+
+      it('should prepend subtypeValue.link if link does not have it', () => {
+        const link = '123abc';
+        const result = component.composeLink(link, 'ror');
+        expect(result.href).toBe('https://ror.org/123abc');
+        expect(result.text).toBe('123abc');
+      });
+
+      it('should handle complete URLs with different domain', () => {
+        const link = 'https://example.com/123abc';
+        const result = component.composeLink(link, 'ror');
+        expect(result.href).toBe('https://example.com/123abc');
+        expect(result.text).toBe('https://example.com/123abc');
+      });
+    });
+  });
+
 });

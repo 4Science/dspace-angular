@@ -69,7 +69,7 @@ export class PaginationService {
       map(([page, size]) => {
         return Object.assign(new PaginationComponentOptions(), defaultPagination, {
           currentPage: this.convertToNumeric(page, defaultPagination.currentPage),
-          pageSize: this.getBestMatchPageSize(size, defaultPagination),
+          pageSize: size || this.getBestMatchPageSize(size, defaultPagination),
         });
       }),
     );

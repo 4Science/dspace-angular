@@ -6,27 +6,19 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import {
-  ActivatedRoute,
-  RouterLink,
-} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import {
   select,
   Store,
 } from '@ngrx/store';
-import { TranslatePipe } from '@ngx-translate/core';
 import uniqBy from 'lodash/uniqBy';
 import {
-  combineLatest,
   combineLatestWith,
   map,
   Observable,
   Subscription,
 } from 'rxjs';
-import {
-  filter,
-  shareReplay,
-} from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import {
@@ -44,10 +36,8 @@ import {
 } from '../../core/auth/selectors';
 import { CoreState } from '../../core/core-state.model';
 import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
-import { FeatureID } from '../../core/data/feature-authorization/feature-id';
 import { hasValue } from '../empty.util';
 import { ThemedLoadingComponent } from '../loading/themed-loading.component';
-import { BrowserOnlyPipe } from '../utils/browser-only.pipe';
 import { LogInContainerComponent } from './container/log-in-container.component';
 import {
   AUTH_METHOD_FOR_DECORATOR_MAP,
@@ -61,11 +51,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     AsyncPipe,
-    BrowserOnlyPipe,
     LogInContainerComponent,
-    RouterLink,
     ThemedLoadingComponent,
-    TranslatePipe,
   ],
 })
 export class LogInComponent implements OnInit, OnDestroy {
@@ -102,21 +89,6 @@ export class LogInComponent implements OnInit, OnDestroy {
    * @type {boolean}
    */
   public loading: Observable<boolean>;
-
-  /**
-   * Whether or not the current user (or anonymous) is authorized to register an account
-   */
-  canRegister$: Observable<boolean>;
-
-  /**
-   * Whether or not the current user (or anonymous) is authorized to register an account
-   */
-  canForgot$: Observable<boolean>;
-
-  /**
-   * Shows the divider only if contains at least one link to show
-   */
-  canShowDivider$: Observable<boolean>;
 
   /**
    * Track subscription to unsubscribe on destroy
@@ -156,18 +128,6 @@ export class LogInComponent implements OnInit, OnDestroy {
         this.authService.clearRedirectUrl();
       }
     });
-
-    this.canRegister$ = this.authorizationService.isAuthorized(FeatureID.EPersonRegistration);
-
-    this.canForgot$ = this.authorizationService.isAuthorized(FeatureID.EPersonForgotPassword).pipe(shareReplay({ refCount: false, bufferSize: 1 }));
-    this.canShowDivider$ = combineLatest([
-      this.canRegister$,
-      this.canForgot$,
-      this.route.data,
-    ]).pipe(
-      map(([canRegister, canForgot, routeData]) => (canRegister || canForgot) && !routeData?.isBackDoor),
-      filter(Boolean),
-    );
   }
 
   filterAndSortAuthMethods(authMethods: AuthMethod[], isBackdoor: boolean, isPasswordLoginEnabledForAdminsOnly = false): AuthMethod[] {

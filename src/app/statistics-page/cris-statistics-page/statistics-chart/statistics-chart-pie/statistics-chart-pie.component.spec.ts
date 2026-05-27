@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   DebugElement,
@@ -11,6 +12,10 @@ import {
 import { By } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from 'src/app/core/services/window.service';
 
 import { BrowserExportService } from '../../../../core/export-service/browser-export.service';
 import { REPORT_DATA } from '../../../../core/statistics/data-report.service';
@@ -72,6 +77,8 @@ describe('StatisticsChartPieComponent', () => {
         { provide: REPORT_DATA, useValue: selectedReport },
         { provide: BrowserExportService, useValue: ExportServiceStub },
         { provide: 'categoryType', useValue: 'mainReports' },
+        { provide: NativeWindowService, useValue: new NativeWindowRef() },
+        { provide: DOCUMENT, useValue: document },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(StatisticsChartPieComponent, {
