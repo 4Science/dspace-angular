@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import {
-  async,
   ComponentFixture,
   inject,
   TestBed,
+  waitForAsync,
 } from '@angular/core/testing';
 import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {
@@ -22,6 +22,7 @@ import {
   of,
 } from 'rxjs';
 
+import { APP_CONFIG } from '../../../config/app-config.interface';
 import { ScriptDataService } from '../../core/data/processes/script-data.service';
 import { SiteDataService } from '../../core/data/site-data.service';
 import { Site } from '../../core/shared/site.model';
@@ -39,6 +40,7 @@ describe('AdminEditUserAgreementComponent', () => {
   let notificationService: NotificationsServiceStub;
   let siteService: any;
   let scriptDataService: any;
+  let mockAppConfig: any;
 
   const site: Site = Object.assign(new Site(), {
     metadata: {
@@ -53,7 +55,7 @@ describe('AdminEditUserAgreementComponent', () => {
     },
   });
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
 
     scriptDataService = {};
     notificationService = new NotificationsServiceStub();
@@ -62,21 +64,38 @@ describe('AdminEditUserAgreementComponent', () => {
         return of(site);
       },
     };
+    mockAppConfig = {
+      markdown: {
+        showInfoOnCMSMetadataEditPages: true,
+      },
+    };
 
     TestBed.configureTestingModule({
-      imports: [CommonModule, NgbModule, FormsModule, ReactiveFormsModule, BrowserModule, RouterTestingModule,
+      imports: [
+        CommonModule,
+        NgbModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserModule,
+        NoopAnimationsModule,
+        RouterTestingModule,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
             useClass: TranslateLoaderMock,
           },
-        }), AdminEditUserAgreementComponent],
-      providers: [AdminEditUserAgreementComponent,
+        }),
+        AdminEditUserAgreementComponent,
+        AlertComponent,
+      ],
+      providers: [
+        AdminEditUserAgreementComponent,
         { provide: NotificationsService, useValue: notificationService },
         { provide: SiteDataService, useValue: siteService },
-        { provide: ScriptDataService, useValue: scriptDataService }],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).overrideComponent(AdminEditUserAgreementComponent, { remove: { imports: [AlertComponent] } }).compileComponents();
+        { provide: ScriptDataService, useValue: scriptDataService },
+        { provide: APP_CONFIG, useValue: mockAppConfig },
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -89,7 +108,7 @@ describe('AdminEditUserAgreementComponent', () => {
     expect(comp).toBeDefined();
   }));
 
-  it('should fill the text areas with the dc.rights values', async(() => {
+  it('should fill the text areas with the dc.rights values', waitForAsync(() => {
     expect(component.userAgreementTexts.get('en').text).toEqual('This is the End User Agreement text for this test');
     expect(component.userAgreementTexts.get('de').text).toEqual('Dies ist der Text der Endbenutzervereinbarung für diesen Test');
   }));

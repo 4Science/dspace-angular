@@ -4,6 +4,7 @@ import {
 } from '@angular/common';
 import {
   Component,
+  Inject,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -16,6 +17,10 @@ import {
 import { Operation } from 'fast-json-patch';
 import { Subscription } from 'rxjs';
 
+import {
+  APP_CONFIG,
+  AppConfig,
+} from '../../../config/app-config.interface';
 import { environment } from '../../../environments/environment';
 import { ScriptDataService } from '../../core/data/processes/script-data.service';
 import { SiteDataService } from '../../core/data/site-data.service';
@@ -50,12 +55,18 @@ export class AdminEditUserAgreementComponent implements OnInit, OnDestroy {
 
   USER_AGREEMENT_METADATA = 'dspace.agreements.end-user';
 
+  /**
+   * show markdown info alert box
+   */
+  showMarkdownInfo = this.appConfig.markdown.showInfoOnCMSMetadataEditPages;
+
   constructor(private siteService: SiteDataService,
               private modalService: NgbModal,
               private translateService: TranslateService,
               private notificationsService: NotificationsService,
-              private scriptDataService: ScriptDataService ) {
-
+              private scriptDataService: ScriptDataService,
+              @Inject(APP_CONFIG) protected appConfig: AppConfig,
+  ) {
   }
 
   ngOnInit(): void {

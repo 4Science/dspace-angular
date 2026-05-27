@@ -18,6 +18,8 @@ import { ThemeService } from 'src/app/shared/theme-support/theme.service';
 import { APP_CONFIG } from '../../../../../../config/app-config.interface';
 import { DSONameService } from '../../../../../core/breadcrumbs/dso-name.service';
 import { Item } from '../../../../../core/shared/item.model';
+import { KlaroService } from '../../../../../shared/cookies/klaro.service';
+import { KlaroServiceStub } from '../../../../../shared/cookies/klaro.service.stub';
 import { DSONameServiceMock } from '../../../../../shared/mocks/dso-name.service.mock';
 import { mockTruncatableService } from '../../../../../shared/mocks/mock-trucatable.service';
 import { ThemedBadgesComponent } from '../../../../../shared/object-collection/shared/badges/themed-badges.component';
@@ -97,6 +99,7 @@ describe('JournalVolumeSearchResultListElementComponent', () => {
         { provide: APP_CONFIG, useValue: environmentUseThumbs },
         { provide: ThemeService, useValue: getMockThemeService() },
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
+        { provide: KlaroService, useValue: new KlaroServiceStub() },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(JournalVolumeSearchResultListElementComponent, {
@@ -190,6 +193,7 @@ describe('JournalVolumeSearchResultListElementComponent', () => {
         { provide: APP_CONFIG, useValue: enviromentNoThumbs },
         { provide: ThemeService, useValue: getMockThemeService() },
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
+        { provide: KlaroService, useValue: new KlaroServiceStub() },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(JournalVolumeSearchResultListElementComponent, {

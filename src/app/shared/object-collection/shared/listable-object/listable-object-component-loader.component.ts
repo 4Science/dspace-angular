@@ -68,7 +68,7 @@ export class ListableObjectComponentLoaderComponent extends AbstractComponentLoa
   /**
    * Whether to show the metrics badges
    */
-  @Input() showMetrics = true;
+  @Input() showMetrics: boolean;
 
   /**
    * Whether to show the thumbnail preview

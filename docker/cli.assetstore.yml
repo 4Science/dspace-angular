@@ -31,3 +31,8 @@ services:
         /dspace/bin/dspace index-discovery -b
         /dspace/bin/dspace oai import
         /dspace/bin/dspace oai clean-cache
+    networks:
+      - dspacenet
+    depends_on:
+      dspace:
+          condition: service_healthy

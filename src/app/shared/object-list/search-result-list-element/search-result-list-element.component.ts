@@ -47,6 +47,7 @@ export class SearchResultListElementComponent<T extends SearchResult<K>, K exten
     this.additionalMetadataLimit = this.appConfig.followAuthorityMetadataValuesLimit;
     this.showLabel = this.showLabel ?? this.appConfig.browseBy.showLabels;
     this.showThumbnails = this.showThumbnails ?? this.appConfig.browseBy.showThumbnails;
+    this.showMetrics = this.showMetrics ?? this.appConfig.browseBy.showMetrics;
     if (hasValue(this.object)) {
       this.dso = this.object.indexableObject;
       this.dsoTitle = this.dsoNameService.getHitHighlights(this.object, this.dso);

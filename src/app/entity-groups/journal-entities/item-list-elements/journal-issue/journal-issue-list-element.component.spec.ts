@@ -17,6 +17,8 @@ import { AuthService } from '../../../../core/auth/auth.service';
 import { DSONameService } from '../../../../core/breadcrumbs/dso-name.service';
 import { AuthorizationDataService } from '../../../../core/data/feature-authorization/authorization-data.service';
 import { Item } from '../../../../core/shared/item.model';
+import { KlaroService } from '../../../../shared/cookies/klaro.service';
+import { KlaroServiceStub } from '../../../../shared/cookies/klaro.service.stub';
 import { AuthServiceMock } from '../../../../shared/mocks/auth.service.mock';
 import { DSONameServiceMock } from '../../../../shared/mocks/dso-name.service.mock';
 import { mockTruncatableService } from '../../../../shared/mocks/mock-trucatable.service';
@@ -66,6 +68,7 @@ describe('JournalIssueListElementComponent', () => {
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
         { provide: AuthService, useValue: new AuthServiceMock() },
         { provide: AuthorizationDataService, useValue: {} },
+        { provide: KlaroService, useValue: new KlaroServiceStub() },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(JournalIssueListElementComponent, {

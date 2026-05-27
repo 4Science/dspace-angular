@@ -6,6 +6,7 @@ import {
 } from '@angular/common';
 import {
   Component,
+  Inject,
   OnInit,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -17,10 +18,15 @@ import { Operation } from 'fast-json-patch';
 import { BehaviorSubject } from 'rxjs';
 import { BtnDisabledDirective } from 'src/app/shared/btn-disabled.directive';
 
+import {
+  APP_CONFIG,
+  AppConfig,
+} from '../../../config/app-config.interface';
 import { environment } from '../../../environments/environment';
 import { SiteDataService } from '../../core/data/site-data.service';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { Site } from '../../core/shared/site.model';
+import { AlertComponent } from '../../shared/alert/alert.component';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 
 /**
@@ -31,6 +37,9 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
   templateUrl: './edit-cms-metadata.component.html',
   styleUrls: ['./edit-cms-metadata.component.scss'],
   imports: [
+    AlertComponent,
+    AsyncPipe,
+    BtnDisabledDirective,
     FormsModule,
     NgForOf,
     TranslateModule,
@@ -70,11 +79,16 @@ export class EditCmsMetadataComponent implements OnInit {
    * list of the metadata to be edited by the user
    */
   metadataList: string[] = [];
+  /**
+   * show markdown info alert box
+   */
+  showMarkdownInfo = this.appConfig.markdown.showInfoOnCMSMetadataEditPages;
 
   constructor(
     private siteService: SiteDataService,
     private notificationsService: NotificationsService,
     private translateService: TranslateService,
+    @Inject(APP_CONFIG) protected appConfig: AppConfig,
   ) {
   }
 

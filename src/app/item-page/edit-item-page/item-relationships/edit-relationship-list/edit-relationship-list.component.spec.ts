@@ -42,7 +42,10 @@ import { Relationship } from '../../../../core/shared/item-relationships/relatio
 import { RelationshipType } from '../../../../core/shared/item-relationships/relationship-type.model';
 import { SearchConfigurationService } from '../../../../core/shared/search/search-configuration.service';
 import { XSRFService } from '../../../../core/xsrf/xsrf.service';
+import { KlaroService } from '../../../../shared/cookies/klaro.service';
+import { KlaroServiceStub } from '../../../../shared/cookies/klaro.service.stub';
 import { HostWindowService } from '../../../../shared/host-window.service';
+import { ThemedLoadingComponent } from '../../../../shared/loading/themed-loading.component';
 import { SelectableListService } from '../../../../shared/object-list/selectable-list/selectable-list.service';
 import { PaginationComponent } from '../../../../shared/pagination/pagination.component';
 import { PaginationComponentOptions } from '../../../../shared/pagination/pagination-component-options.model';
@@ -55,6 +58,7 @@ import { PaginationServiceStub } from '../../../../shared/testing/pagination-ser
 import { SearchConfigurationServiceStub } from '../../../../shared/testing/search-configuration-service.stub';
 import { createPaginatedList } from '../../../../shared/testing/utils.test';
 import { EditItemRelationshipsService } from '../edit-item-relationships.service';
+import { EditRelationshipComponent } from '../edit-relationship/edit-relationship.component';
 import { EditRelationshipListComponent } from './edit-relationship-list.component';
 
 describe('EditRelationshipListComponent', () => {
@@ -275,11 +279,21 @@ describe('EditRelationshipListComponent', () => {
         { provide: XSRFService, useValue: {} },
         { provide: APP_CONFIG, useValue: environment },
         { provide: REQUEST, useValue: {} },
+        { provide: KlaroService, useValue: new KlaroServiceStub() },
         CookieService,
       ], schemas: [
         NO_ERRORS_SCHEMA,
       ],
-    }).compileComponents();
+    }).overrideComponent(EditRelationshipListComponent, {
+      remove: {
+        imports: [
+          EditRelationshipComponent,
+          // PaginationComponent,
+          ThemedLoadingComponent,
+        ],
+      },
+    })
+      .compileComponents();
 
     resetComponent();
   }
