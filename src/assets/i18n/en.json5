@@ -3144,6 +3144,12 @@
 
   "info.feedback.page_help": "The page related to your feedback",
 
+  "info.feedback.google-recaptcha.must-accept-cookies": "In order to send your feedback you must accept the <b>Feedback</b> (Google reCaptcha) cookies.",
+  "info.feedback.google-recaptcha.open-cookie-settings": "Open cookie settings",
+  "info.feedback.google-recaptcha.notification.title": "Google reCaptcha",
+  "info.feedback.google-recaptcha.notification.message.error": "An error occurred during reCaptcha verification",
+  "info.feedback.google-recaptcha.notification.message.expired": "Verification expired. Please verify again.",
+
   "info.coar-notify-support.title": "COAR Notify Support",
 
   "info.coar-notify-support.breadcrumbs": "COAR Notify Support",
