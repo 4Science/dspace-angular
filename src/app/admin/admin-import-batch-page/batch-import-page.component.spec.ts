@@ -17,6 +17,7 @@ import {
   ScriptDataService,
 } from '../../core/data/processes/script-data.service';
 import { ProcessParameter } from '../../process-page/processes/process-parameter.model';
+import { BtnDisabledDirective } from '../../shared/btn-disabled.directive';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import {
   createFailedRemoteDataObject$,
@@ -85,6 +86,40 @@ describe('BatchImportPageComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('processing state', () => {
+    beforeEach(() => {
+      component.fileURL = 'http://example.com/file.zip';
+    });
+
+    it('should disable proceed button when processing', () => {
+      component.isProcessing = true;
+      fixture.detectChanges();
+      const button = fixture.debugElement.query(By.css('#proceedButton')).nativeElement;
+      expect(button.getAttribute('aria-disabled')).toBe('true');
+    });
+
+    it('should show spinner icon when processing', () => {
+      component.isProcessing = true;
+      fixture.detectChanges();
+      const spinner = fixture.debugElement.query(By.css('#proceedButton .fa-spinner'));
+      expect(spinner).toBeTruthy();
+    });
+
+    it('should show arrow icon when not processing', () => {
+      component.isProcessing = false;
+      fixture.detectChanges();
+      const arrow = fixture.debugElement.query(By.css('#proceedButton .fa-arrow-right'));
+      expect(arrow).toBeTruthy();
+    });
+
+    it('should not invoke script if already processing', () => {
+      component.isProcessing = true;
+      const proceed = fixture.debugElement.query(By.css('#proceedButton')).nativeElement;
+      proceed.click();
+      expect(scriptService.invoke).not.toHaveBeenCalled();
+    });
   });
 
   describe('if back button is pressed', () => {
