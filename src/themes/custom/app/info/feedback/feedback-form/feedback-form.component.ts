@@ -1,5 +1,7 @@
-import { NgIf } from '@angular/common';
-import { AsyncPipe } from '@angular/common';
+import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
 import { Component } from '@angular/core';
 import {
   FormsModule,

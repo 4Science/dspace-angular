@@ -1,5 +1,7 @@
-import { NgIf } from '@angular/common';
-import { AsyncPipe } from '@angular/common';
+import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
 import {
   Component,
   Inject,
@@ -29,6 +31,7 @@ import {
   take,
 } from 'rxjs/operators';
 import { ConfigurationProperty } from 'src/app/core/shared/configuration-property.model';
+import { KlaroService } from 'src/app/shared/cookies/klaro.service';
 
 import { getHomePageRoute } from '../../../app-routing-paths';
 import { AuthService } from '../../../core/auth/auth.service';
@@ -56,7 +59,6 @@ import { BtnDisabledDirective } from '../../../shared/btn-disabled.directive';
 import { ErrorComponent } from '../../../shared/error/error.component';
 import { GoogleRecaptchaComponent } from '../../../shared/google-recaptcha/google-recaptcha.component';
 import { NotificationsService } from '../../../shared/notifications/notifications.service';
-import { KlaroService } from 'src/app/shared/cookies/klaro.service';
 
 @Component({
   selector: 'ds-base-feedback-form',
