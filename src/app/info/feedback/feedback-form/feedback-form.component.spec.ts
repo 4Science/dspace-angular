@@ -29,11 +29,11 @@ import { CookieServiceMock } from '../../../shared/mocks/cookie.service.mock';
 import { NativeWindowMockFactory } from '../../../shared/mocks/mock-native-window-ref';
 import { RouterMock } from '../../../shared/mocks/router.mock';
 import { NotificationsService } from '../../../shared/notifications/notifications.service';
+import { createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
 import { AuthServiceStub } from '../../../shared/testing/auth-service.stub';
 import { EPersonMock } from '../../../shared/testing/eperson.mock';
 import { NotificationsServiceStub } from '../../../shared/testing/notifications-service.stub';
 import { routeServiceStub } from '../../../shared/testing/route-service.stub';
-import { createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
 import { FeedbackFormComponent } from './feedback-form.component';
 
 

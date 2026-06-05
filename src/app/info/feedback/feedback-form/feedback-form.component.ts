@@ -28,14 +28,17 @@ import {
   switchMap,
   take,
 } from 'rxjs/operators';
+import { ConfigurationProperty } from 'src/app/core/shared/configuration-property.model';
 
 import { getHomePageRoute } from '../../../app-routing-paths';
 import { AuthService } from '../../../core/auth/auth.service';
+import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
 import { RemoteData } from '../../../core/data/remote-data';
 import { EPerson } from '../../../core/eperson/models/eperson.model';
 import { FeedbackDataService } from '../../../core/feedback/feedback-data.service';
-import { GoogleRecaptchaBaseComponent } from '../../../core/google-recaptcha/google-recaptcha-base.component';
 import { GoogleRecaptchaService } from '../../../core/google-recaptcha/google-recaptcha.service';
+import { GoogleRecaptchaBaseComponent } from '../../../core/google-recaptcha/google-recaptcha-base.component';
+import { CookieService } from '../../../core/services/cookie.service';
 import { RouteService } from '../../../core/services/route.service';
 import {
   NativeWindowRef,
@@ -47,9 +50,10 @@ import {
   getFirstSucceededRemoteDataPayload,
 } from '../../../core/shared/operators';
 import { URLCombiner } from '../../../core/url-combiner/url-combiner';
-import { BtnDisabledDirective } from '../../../shared/btn-disabled.directive';
 import { AlertComponent } from '../../../shared/alert/alert.component';
 import { AlertType } from '../../../shared/alert/alert-type';
+import { BtnDisabledDirective } from '../../../shared/btn-disabled.directive';
+import { OrejimeService } from '../../../shared/cookies/orejime.service';
 import { ErrorComponent } from '../../../shared/error/error.component';
 import { GoogleRecaptchaComponent } from '../../../shared/google-recaptcha/google-recaptcha.component';
 import { NotificationsService } from '../../../shared/notifications/notifications.service';

@@ -1,29 +1,42 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, map } from 'rxjs';
+import {
+  map,
+  Observable,
+} from 'rxjs';
+import {
+  distinctUntilChanged,
+  take,
+  takeWhile,
+} from 'rxjs/operators';
 
+import {
+  hasValue,
+  isNotEmptyOperator,
+} from '../../shared/empty.util';
+import { NotificationOptions } from '../../shared/notifications/models/notification-options.model';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
+import { getClassForType } from '../cache/builders/build-decorators';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { RequestParam } from '../cache/models/request-param.model';
 import { ObjectCacheService } from '../cache/object-cache.service';
-import { CreateData, CreateDataImpl } from '../data/base/create-data';
+import {
+  CreateData,
+  CreateDataImpl,
+} from '../data/base/create-data';
 import { IdentifiableDataService } from '../data/base/identifiable-data.service';
 import { RemoteData } from '../data/remote-data';
+import { CreateRequest } from '../data/request.models';
 import { RequestService } from '../data/request.service';
+import { DSpaceSerializer } from '../dspace-rest/dspace.serializer';
+import { HttpOptions } from '../dspace-rest/dspace-rest.service';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import {
   getFirstSucceededRemoteData,
   getRemoteDataPayload,
 } from '../shared/operators';
 import { Feedback } from './models/feedback.model';
-import { HttpHeaders } from '@angular/common/http';
-import { distinctUntilChanged, take, takeWhile } from 'rxjs/operators';
-import { hasValue, isNotEmptyOperator } from '../../shared/empty.util';
-import { NotificationOptions } from '../../shared/notifications/models/notification-options.model';
-import { getClassForType } from '../cache/builders/build-decorators';
-import { CreateRequest } from '../data/request.models';
-import { DSpaceSerializer } from '../dspace-rest/dspace.serializer';
-import { HttpOptions } from '../dspace-rest/dspace-rest.service';
 
 /**
  * Service for checking and managing the feedback
@@ -31,8 +44,7 @@ import { HttpOptions } from '../dspace-rest/dspace-rest.service';
 @Injectable({ providedIn: 'root' })
 export class FeedbackDataService
   extends IdentifiableDataService<Feedback>
-  implements CreateData<Feedback>
-{
+  implements CreateData<Feedback> {
   private createData: CreateDataImpl<Feedback>;
 
   constructor(
