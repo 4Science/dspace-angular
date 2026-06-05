@@ -17,7 +17,6 @@ import {
   ScriptDataService,
 } from '../../core/data/processes/script-data.service';
 import { ProcessParameter } from '../../process-page/processes/process-parameter.model';
-import { BtnDisabledDirective } from '../../shared/btn-disabled.directive';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import {
   createFailedRemoteDataObject$,
