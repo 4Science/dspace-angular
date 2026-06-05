@@ -44,6 +44,7 @@ describe('FeedbackFormComponent', () => {
   const notificationService = new NotificationsServiceStub();
   const feedbackDataServiceStub = jasmine.createSpyObj('feedbackDataService', {
     create: of(new Feedback()),
+    createWithCaptcha: of(new Feedback()),
   });
   const authService: AuthServiceStub = Object.assign(new AuthServiceStub(), {
     getAuthenticatedUserFromStore: () => {
@@ -115,10 +116,10 @@ describe('FeedbackFormComponent', () => {
       expect(de.query(By.css('button')).nativeElement.classList.contains('disabled')).toBeFalse();
     });
 
-    it('on submit should call createFeedback of feedbackDataServiceStub service', () => {
+    it('on submit should call createWithCaptcha of feedbackDataServiceStub service', () => {
       component.createFeedback();
       fixture.detectChanges();
-      expect(feedbackDataServiceStub.create).toHaveBeenCalled();
+      expect(feedbackDataServiceStub.createWithCaptcha).toHaveBeenCalled();
     });
   });
 
