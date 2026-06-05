@@ -53,15 +53,10 @@ import { URLCombiner } from '../../../core/url-combiner/url-combiner';
 import { AlertComponent } from '../../../shared/alert/alert.component';
 import { AlertType } from '../../../shared/alert/alert-type';
 import { BtnDisabledDirective } from '../../../shared/btn-disabled.directive';
-import { OrejimeService } from '../../../shared/cookies/orejime.service';
 import { ErrorComponent } from '../../../shared/error/error.component';
 import { GoogleRecaptchaComponent } from '../../../shared/google-recaptcha/google-recaptcha.component';
 import { NotificationsService } from '../../../shared/notifications/notifications.service';
-import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
-import { CookieService } from '../../../core/services/cookie.service';
-import { isNotEmpty } from '../../../shared/empty.util';
 import { KlaroService } from 'src/app/shared/cookies/klaro.service';
-import { ConfigurationProperty } from 'src/app/core/shared/configuration-property.model';
 
 @Component({
   selector: 'ds-base-feedback-form',
@@ -114,7 +109,7 @@ export class FeedbackFormComponent extends GoogleRecaptchaBaseComponent implemen
     private router: Router,
     public googleRecaptchaService: GoogleRecaptchaService,
     private configService: ConfigurationDataService,
-    private cookieService: CookieService,
+    public cookieService: CookieService,
     @Optional() public klaroService: KlaroService,
   ) {
     super(googleRecaptchaService, cookieService, notificationsService, translate);
