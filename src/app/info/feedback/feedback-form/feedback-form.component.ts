@@ -1,4 +1,5 @@
 
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -18,15 +19,12 @@ import {
   TranslateService,
 } from '@ngx-translate/core';
 import {
-  BehaviorSubject,
   combineLatest,
-  Observable,
   of,
   Subscription,
 } from 'rxjs';
 import {
   map,
-  startWith,
   switchMap,
   take,
 } from 'rxjs/operators';
@@ -36,10 +34,8 @@ import { AuthService } from '../../../core/auth/auth.service';
 import { RemoteData } from '../../../core/data/remote-data';
 import { EPerson } from '../../../core/eperson/models/eperson.model';
 import { FeedbackDataService } from '../../../core/feedback/feedback-data.service';
-import {
-  CAPTCHA_NAME,
-  GoogleRecaptchaService,
-} from '../../../core/google-recaptcha/google-recaptcha.service';
+import { GoogleRecaptchaBaseComponent } from '../../../core/google-recaptcha/google-recaptcha-base.component';
+import { GoogleRecaptchaService } from '../../../core/google-recaptcha/google-recaptcha.service';
 import { RouteService } from '../../../core/services/route.service';
 import {
   NativeWindowRef,
@@ -60,8 +56,6 @@ import { NotificationsService } from '../../../shared/notifications/notification
 import { OrejimeService } from '../../../shared/cookies/orejime.service';
 import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
 import { CookieService } from '../../../core/services/cookie.service';
-import { isNotEmpty } from '../../../shared/empty.util';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'ds-base-feedback-form',
@@ -81,7 +75,7 @@ import { AsyncPipe } from '@angular/common';
 /**
  * Component displaying the contents of the Feedback Statement
  */
-export class FeedbackFormComponent implements OnInit, OnDestroy {
+export class FeedbackFormComponent extends GoogleRecaptchaBaseComponent implements OnInit, OnDestroy {
 
   /**
    * Form builder created used from the feedback from
@@ -93,20 +87,14 @@ export class FeedbackFormComponent implements OnInit, OnDestroy {
   });
 
   /**
-   * Return true if the user completed the reCaptcha verification (checkbox mode)
+   * The message prefix for translation keys
    */
-  checkboxCheckedSubject$ = new BehaviorSubject<boolean>(false);
-
-  disableUntilChecked = true;
-
-  captchaVersion$: Observable<string>;
-
-  captchaMode$: Observable<string>;
+  MESSAGE_PREFIX = 'info.feedback';
 
   /**
    * Whether reCAPTCHA verification is enabled for feedback
    */
-  feedbackRecaptchaEnabled = false;
+  submissionVerification = false;
 
   /**
    * AlertType enumeration
@@ -121,25 +109,23 @@ export class FeedbackFormComponent implements OnInit, OnDestroy {
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
     public routeService: RouteService,
     private fb: UntypedFormBuilder,
-    protected notificationsService: NotificationsService,
-    protected translate: TranslateService,
+    public notificationsService: NotificationsService,
+    public translate: TranslateService,
     private feedbackDataService: FeedbackDataService,
     private authService: AuthService,
     private router: Router,
     public googleRecaptchaService: GoogleRecaptchaService,
     private configService: ConfigurationDataService,
-    private cookieService: CookieService,
+    public cookieService: CookieService,
     @Optional() public orejimeService: OrejimeService,
   ) {
+    super(googleRecaptchaService, cookieService, notificationsService, translate);
   }
 
   /**
    * On init check if user is logged in and use its email if so
    */
   ngOnInit() {
-    this.captchaVersion$ = this.googleRecaptchaService.captchaVersion();
-    this.captchaMode$ = this.googleRecaptchaService.captchaMode();
-
     this.authService.getAuthenticatedUserFromStore().pipe(take(1)).subscribe((user: EPerson) => {
       if (user) {
         this.feedbackForm.patchValue({ email: user.email });
@@ -159,7 +145,7 @@ export class FeedbackFormComponent implements OnInit, OnDestroy {
       map((res) => res?.values[0].toLowerCase() === 'true'),
       take(1),
     ).subscribe((enabled: boolean) => {
-      this.feedbackRecaptchaEnabled = enabled;
+      this.submissionVerification = enabled;
       if (enabled) {
         this.refreshRecaptchaScript();
         this.subscriptions.push(this.disableUntilCheckedFcn().subscribe((res) => {
@@ -188,43 +174,8 @@ export class FeedbackFormComponent implements OnInit, OnDestroy {
    * Function to create the feedback from form values
    */
   createFeedback(captchaToken?: string): void {
-    if (this.feedbackRecaptchaEnabled) {
-      combineLatest([this.captchaVersion$, this.captchaMode$]).pipe(
-        switchMap(([captchaVersion, captchaMode]) => {
-          if (captchaVersion === 'v3') {
-            return this.googleRecaptchaService.getRecaptchaToken('feedback');
-          } else if (captchaVersion === 'v2' && captchaMode === 'checkbox') {
-            return of(this.googleRecaptchaService.getRecaptchaTokenResponse());
-          } else if (captchaVersion === 'v2' && captchaMode === 'invisible') {
-            return of(captchaToken);
-          } else {
-            this.showNotification('error');
-            return of(null);
-          }
-        }),
-        take(1),
-      ).subscribe((token) => {
-        if (isNotEmpty(token)) {
-          this.submitFeedback(token);
-        } else {
-          this.showNotification('error');
-        }
-      });
-    } else {
-      this.submitFeedback();
-    }
-  }
-
-  /**
-   * Send the feedback with the captcha token
-   */
-  private submitFeedback(captcha?: string): void {
-    const url = this.feedbackForm.value.page.replace(this._window.nativeWindow.origin, '');
-    const feedback = { ...this.feedbackForm.value };
-    if (isNotEmpty(captcha)) {
-      feedback.captcha = captcha;
-    }
-    this.feedbackDataService.create(feedback).pipe(
+    const url = '/home';
+    this.feedbackDataService.createWithCaptcha(this.feedbackForm.value, captchaToken).pipe(
       getFirstCompletedRemoteData(),
     ).subscribe((response: RemoteData<NoContent>) => {
       if (response.isSuccess) {
@@ -235,36 +186,36 @@ export class FeedbackFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  /**
-   * Return true if the user has accepted the required cookies for reCaptcha
-   */
-  isRecaptchaCookieAccepted(): boolean {
-    const orejimeAnonymousCookie = this.cookieService.get('orejime-anonymous');
-    return isNotEmpty(orejimeAnonymousCookie) ? orejimeAnonymousCookie[CAPTCHA_NAME] : false;
-  }
-
-  /**
-   * Return true if the user has not completed the reCaptcha verification (checkbox mode)
-   */
-  disableUntilCheckedFcn(): Observable<boolean> {
-    const checked$ = this.checkboxCheckedSubject$.asObservable();
-    return combineLatest([this.captchaVersion$, this.captchaMode$, checked$]).pipe(
-      switchMap(([captchaVersion, captchaMode, checked]) =>
-        captchaVersion === 'v2' && captchaMode === 'checkbox' ? of(!checked) : of(false),
-      ),
-      startWith(true),
-    );
-  }
-
-  onCheckboxChecked(checked: boolean) {
-    this.checkboxCheckedSubject$.next(checked);
-  }
-
-  /**
-   * execute the captcha function for v2 invisible
-   */
-  executeRecaptcha() {
-    this.googleRecaptchaService.executeRecaptcha();
+  submitFeedback(tokenV2?): void {
+    if (!this.feedbackForm.invalid) {
+      if (this.submissionVerification) {
+        this.subscriptions.push(combineLatest([this.captchaVersion(), this.captchaMode()]).pipe(
+          switchMap(([captchaVersion, captchaMode]) => {
+            if (captchaVersion === 'v3') {
+              return this.googleRecaptchaService.getRecaptchaToken('feedback_submission');
+            } else if (captchaVersion === 'v2' && captchaMode === 'checkbox') {
+              return of(this.googleRecaptchaService.getRecaptchaTokenResponse());
+            } else if (captchaVersion === 'v2' && captchaMode === 'invisible') {
+              return of(tokenV2);
+            } else {
+              console.error(`Invalid reCaptcha configuration: version = ${captchaVersion}, mode = ${captchaMode}`);
+              this.showNotification('error');
+            }
+          }),
+          take(1),
+        ).subscribe((token) => {
+          if (token) {
+            this.createFeedback(token);
+          } else {
+            console.error('reCaptcha error');
+            this.showNotification('error');
+          }
+        },
+        ));
+      } else {
+        this.createFeedback();
+      }
+    }
   }
 
   /**
@@ -273,25 +224,6 @@ export class FeedbackFormComponent implements OnInit, OnDestroy {
   openCookieSettings(): void {
     if (this.orejimeService) {
       this.orejimeService.showSettings();
-    }
-  }
-
-  /**
-   * Show a notification to the user
-   */
-  showNotification(key: string) {
-    const notificationTitle = this.translate.instant('info.feedback.google-recaptcha.notification.title');
-    const notificationErrorMsg = this.translate.instant('info.feedback.google-recaptcha.notification.message.error');
-    const notificationExpiredMsg = this.translate.instant('info.feedback.google-recaptcha.notification.message.expired');
-    switch (key) {
-      case 'expired':
-        this.notificationsService.warning(notificationTitle, notificationExpiredMsg);
-        break;
-      case 'error':
-        this.notificationsService.error(notificationTitle, notificationErrorMsg);
-        break;
-      default:
-        console.warn(`Unimplemented notification '${key}' from reCaptcha service`);
     }
   }
 }
