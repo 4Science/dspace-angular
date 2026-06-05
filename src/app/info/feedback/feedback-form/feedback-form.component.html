@@ -2,7 +2,7 @@
   <div class="col-xs-12 col-sm-12 col-md-9">
     <h1>{{ 'info.feedback.head' | translate }}</h1>
     <p>{{ 'info.feedback.info' | translate }}</p>
-    <form [formGroup]="feedbackForm" (ngSubmit)="createFeedback()" class="col p-0">
+    <form [formGroup]="feedbackForm" class="col p-0">
       <div class="row mt-3">
         <div class="control-group col-sm-12">
           <label class="control-label" for="email">{{ 'info.feedback.email-label' | translate }}&nbsp;</label>
@@ -39,9 +39,28 @@
         </div>
       </div>
 
+      @if (feedbackRecaptchaEnabled && !isRecaptchaCookieAccepted()) {
+        <ds-alert [type]="AlertTypeEnum.Warning">
+          <p class="m-0" [innerHTML]="'info.feedback.google-recaptcha.must-accept-cookies' | translate"></p>
+          <p class="m-0"><a href="javascript:void(0);" (click)="openCookieSettings()">{{ 'info.feedback.google-recaptcha.open-cookie-settings' | translate }}</a></p>
+        </ds-alert>
+      }
+
+      @if (isRecaptchaCookieAccepted() && (captchaVersion$ | async) === 'v2') {
+        <div class="my-3">
+          <ds-google-recaptcha [captchaMode]="(captchaMode$ | async)"
+            (executeRecaptcha)="createFeedback($event)" (checkboxChecked)="onCheckboxChecked($event)"
+          (showNotification)="showNotification($event)"></ds-google-recaptcha>
+        </div>
+      }
+
       <div class="row mt-3">
-        <div class="control-group col-sm-12 text-right">
-          <button [dsBtnDisabled]="!feedbackForm.valid" class="btn btn-primary" name="submit" type="submit">{{ 'info.feedback.send' | translate }}</button>
+        <div class="control-group col-sm-12 text-end">
+          @if (!feedbackRecaptchaEnabled || (captchaVersion$ | async) !== 'v2') {
+            <button [dsBtnDisabled]="!feedbackForm.valid || feedbackRecaptchaEnabled && !isRecaptchaCookieAccepted()" class="btn btn-primary" name="submit" type="button" (click)="createFeedback()">{{ 'info.feedback.send' | translate }}</button>
+          } @else {
+            <button [dsBtnDisabled]="!feedbackForm.valid || disableUntilChecked" class="btn btn-primary" name="submit" type="button" (click)="executeRecaptcha()">{{ 'info.feedback.send' | translate }}</button>
+          }
         </div>
       </div>
     </form>

@@ -96,6 +96,7 @@ export class BrowserKlaroService extends KlaroService {
   private readonly GOOGLE_ANALYTICS_KEY = 'google.analytics.key';
 
   private readonly REGISTRATION_VERIFICATION_ENABLED_KEY = 'registration.verification.enabled';
+  private readonly FEEDBACK_VERIFICATION_ENABLED_KEY = 'feedback.verification.enabled';
 
   private readonly GOOGLE_ANALYTICS_SERVICE_NAME = 'google-analytics';
 
@@ -187,6 +188,13 @@ export class BrowserKlaroService extends KlaroService {
       ),
     );
 
+    const hideFeedbackVerification$ = this.configService.findByPropertyName(this.FEEDBACK_VERIFICATION_ENABLED_KEY).pipe(
+      getFirstCompletedRemoteData(),
+      map((remoteData) =>
+        !remoteData.hasSucceeded || !remoteData.payload || isEmpty(remoteData.payload.values) || remoteData.payload.values[0].toLowerCase() !== 'true',
+      ),
+    );
+
     const hideMatomo$ =
       this.configService.findByPropertyName(this.MATOMO_ENABLED).pipe(
         getFirstCompletedRemoteData(),
@@ -195,13 +203,13 @@ export class BrowserKlaroService extends KlaroService {
         ),
       );
 
-    const servicesToHide$: Observable<string[]> = observableCombineLatest([hideGoogleAnalytics$, hideRegistrationVerification$, hideMatomo$]).pipe(
-      map(([hideGoogleAnalytics, hideRegistrationVerification, hideMatomo]) => {
+    const servicesToHide$: Observable<string[]> = observableCombineLatest([hideGoogleAnalytics$, hideRegistrationVerification$, hideFeedbackVerification$, hideMatomo$]).pipe(
+      map(([hideGoogleAnalytics, hideRegistrationVerification, hideFeedbackVerification, hideMatomo]) => {
         const servicesToHideArray: string[] = [];
         if (hideGoogleAnalytics) {
           servicesToHideArray.push(this.GOOGLE_ANALYTICS_SERVICE_NAME);
         }
-        if (hideRegistrationVerification) {
+        if (hideRegistrationVerification && hideFeedbackVerification) {
           servicesToHideArray.push(CAPTCHA_NAME);
         }
         if (hideMatomo) {
