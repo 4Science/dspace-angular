@@ -7,7 +7,10 @@ import {
   TranslateModule,
   TranslateService,
 } from '@ngx-translate/core';
-import { take } from 'rxjs/operators';
+import {
+  finalize,
+  take,
+} from 'rxjs/operators';
 
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
 import {
@@ -20,6 +23,7 @@ import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { getProcessDetailRoute } from '../../process-page/process-page-routing.paths';
 import { Process } from '../../process-page/processes/process.model';
 import { ProcessParameter } from '../../process-page/processes/process-parameter.model';
+import { BtnDisabledDirective } from '../../shared/btn-disabled.directive';
 import { ImportBatchSelectorComponent } from '../../shared/dso-selector/modal-wrappers/import-batch-selector/import-batch-selector.component';
 import {
   isEmpty,
@@ -37,6 +41,7 @@ import { FileDropzoneNoUploaderComponent } from '../../shared/upload/file-dropzo
   selector: 'ds-batch-import-page',
   templateUrl: './batch-import-page.component.html',
   imports: [
+    BtnDisabledDirective,
     FileDropzoneNoUploaderComponent,
     FormsModule,
     SwitchComponent,
@@ -53,6 +58,11 @@ export class BatchImportPageComponent {
    * The validate only flag
    */
   validateOnly = true;
+
+  /**
+   * Whether a batch import is currently being processed
+   */
+  isProcessing = false;
 
   /**
    * dso object for community or collection
@@ -112,6 +122,9 @@ export class BatchImportPageComponent {
    * Starts import-metadata script with --zip fileName (and the selected file)
    */
   public importMetadata() {
+    if (this.isProcessing) {
+      return;
+    }
     if (this.fileObject == null && isEmpty(this.fileURL)) {
       if (this.isUpload) {
         this.notificationsService.error(this.translate.get('admin.metadata-import.page.error.addFile'));
@@ -135,8 +148,10 @@ export class BatchImportPageComponent {
         parameterValues.push(Object.assign(new ProcessParameter(), { name: '-v', value: true }));
       }
 
+      this.isProcessing = true;
       this.scriptDataService.invoke(BATCH_IMPORT_SCRIPT_NAME, parameterValues, [this.fileObject]).pipe(
         getFirstCompletedRemoteData(),
+        finalize(() => this.isProcessing = false),
       ).subscribe((rd: RemoteData<Process>) => {
         if (rd.hasSucceeded) {
           const title = this.translate.get('process.new.notification.success.title');
