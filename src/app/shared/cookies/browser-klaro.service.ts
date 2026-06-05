@@ -29,7 +29,7 @@ import { AuthService } from '../../core/auth/auth.service';
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
 import { EPersonDataService } from '../../core/eperson/eperson-data.service';
 import { EPerson } from '../../core/eperson/models/eperson.model';
-import { CAPTCHA_NAME } from '../../core/google-recaptcha/google-recaptcha.service';
+import { CAPTCHA_FEEDBACK_NAME } from '../../core/google-recaptcha/google-recaptcha.service';
 import { CookieService } from '../../core/services/cookie.service';
 import {
   NativeWindowRef,
@@ -210,7 +210,7 @@ export class BrowserKlaroService extends KlaroService {
           servicesToHideArray.push(this.GOOGLE_ANALYTICS_SERVICE_NAME);
         }
         if (hideRegistrationVerification && hideFeedbackVerification) {
-          servicesToHideArray.push(CAPTCHA_NAME);
+          servicesToHideArray.push(CAPTCHA_FEEDBACK_NAME);
         }
         if (hideMatomo) {
           servicesToHideArray.push(MATOMO_KLARO_KEY);

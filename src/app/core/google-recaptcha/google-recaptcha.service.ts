@@ -33,7 +33,7 @@ import { getFirstCompletedRemoteData } from '../shared/operators';
 export const CAPTCHA_COOKIE = '_GRECAPTCHA';
 export const CAPTCHA_REGISTRATION_NAME = 'google-recaptcha-registration';
 
-export const CAPTCHA_NAME = 'google-recaptcha';
+export const CAPTCHA_FEEDBACK_NAME = 'google-recaptcha';
 
 /**
  * A GoogleRecaptchaService used to send action and get a token from REST
@@ -109,7 +109,7 @@ export class GoogleRecaptchaService {
         if (
           this.cookieService.get('klaro-anonymous') && (
             this.cookieService.get('klaro-anonymous')[CAPTCHA_REGISTRATION_NAME] ||
-          this.cookieService.get('klaro-anonymous')[CAPTCHA_NAME]
+          this.cookieService.get('klaro-anonymous')[CAPTCHA_FEEDBACK_NAME]
           ) &&
           recaptchaKeyRD.hasSucceeded && recaptchaVersionRD.hasSucceeded &&
           isNotEmpty(recaptchaVersionRD.payload?.values) && isNotEmpty(recaptchaKeyRD.payload?.values)

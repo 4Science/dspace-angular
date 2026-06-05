@@ -59,14 +59,14 @@
         }
       </fieldset>
 
-      @if (submissionVerification && !isRecaptchaCookieAccepted()) {
+      @let captchaCookieAccepted = isRecaptchaCookieAccepted();
+      @if (submissionVerification && !captchaCookieAccepted) {
         <ds-alert [type]="AlertTypeEnum.Warning">
           <p class="m-0" [innerHTML]="MESSAGE_PREFIX + '.google-recaptcha.must-accept-cookies' | translate"></p>
           <p class="m-0"><a href="javascript:void(0);" (click)="openCookieSettings()">{{ MESSAGE_PREFIX + '.google-recaptcha.open-cookie-settings' | translate }}</a></p>
         </ds-alert>
       }
-
-      @if (isRecaptchaCookieAccepted() && (captchaVersion() | async) === 'v2') {
+      @if (captchaCookieAccepted && (googleRecaptchaService.captchaVersion() | async) === 'v2') {
         <div class="my-3">
           <ds-google-recaptcha [captchaMode]="(captchaMode() | async)"
             (executeRecaptcha)="submitFeedback($event)" (checkboxChecked)="onCheckboxChecked($event)"
@@ -79,7 +79,7 @@
           <div class="control-group col-sm-12 text-end">
             @if (!((captchaVersion() | async) === 'v2' && (captchaMode() | async) === 'invisible')) {
               <button class="btn btn-primary"
-                [dsBtnDisabled]="feedbackForm.invalid || submissionVerification && !isRecaptchaCookieAccepted() || disableUntilChecked"
+                [dsBtnDisabled]="feedbackForm.invalid || submissionVerification && !captchaCookieAccepted || disableUntilChecked"
                 (click)="submitFeedback()">
                 {{ 'info.feedback.send' | translate }}
               </button>

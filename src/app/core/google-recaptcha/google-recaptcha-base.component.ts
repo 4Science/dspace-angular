@@ -15,7 +15,7 @@ import { CookieService } from '../services/cookie.service';
 import { isNotEmpty } from './../../shared/empty.util';
 import { NotificationsService } from './../../shared/notifications/notifications.service';
 import {
-  CAPTCHA_NAME,
+  CAPTCHA_FEEDBACK_NAME,
   GoogleRecaptchaService,
 } from './google-recaptcha.service';
 
@@ -81,7 +81,7 @@ export abstract class GoogleRecaptchaBaseComponent {
   isRecaptchaCookieAccepted(): boolean {
     const orejimeAnonymousCookie = this.cookieService.get('orejime-anonymous');
     return isNotEmpty(orejimeAnonymousCookie)
-      ? orejimeAnonymousCookie[CAPTCHA_NAME]
+      ? orejimeAnonymousCookie[CAPTCHA_FEEDBACK_NAME]
       : false;
   }
 

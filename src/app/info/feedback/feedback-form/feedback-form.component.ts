@@ -57,6 +57,7 @@ import { ConfigurationDataService } from '../../../core/data/configuration-data.
 import { CookieService } from '../../../core/services/cookie.service';
 import { isNotEmpty } from '../../../shared/empty.util';
 import { KlaroService } from 'src/app/shared/cookies/klaro.service';
+import { ConfigurationProperty } from 'src/app/core/shared/configuration-property.model';
 
 @Component({
   selector: 'ds-base-feedback-form',
@@ -113,6 +114,17 @@ export class FeedbackFormComponent extends GoogleRecaptchaBaseComponent implemen
     @Optional() public klaroService: KlaroService,
   ) {
     super(googleRecaptchaService, cookieService, notificationsService, translate);
+
+    this.subscriptions.push(
+      this.configService.findByPropertyName('feedback.verification.enabled').pipe(
+        getFirstSucceededRemoteDataPayload(),
+        map((res: ConfigurationProperty) => res?.values[0].toLowerCase() === 'true'),
+      ).subscribe((res: boolean) => {
+        this.submissionVerification = res;
+        if (res) {
+          this.googleRecaptchaService.loadRecaptchaProperties().subscribe();
+        }
+      }));
   }
 
   /**
