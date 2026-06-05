@@ -6,7 +6,8 @@ import {
 import { TOKENITEM } from '../../core/auth/models/auth-token-info.model';
 import {
   CAPTCHA_COOKIE,
-  CAPTCHA_NAME,
+  CAPTCHA_FEEDBACK_NAME,
+  CAPTCHA_REGISTRATION_NAME,
 } from '../../core/google-recaptcha/google-recaptcha.service';
 import { LANG_COOKIE } from '../../core/locale/locale.service';
 import { NativeWindowRef } from '../../core/services/window.service';
@@ -212,8 +213,20 @@ export function getOrejimeConfiguration(_window: NativeWindowRef): any {
         onlyOnce: true,
       },
       {
-        name: CAPTCHA_NAME,
+        name: CAPTCHA_REGISTRATION_NAME,
         purposes: ['registration-password-recovery'],
+        required: false,
+        cookies: [
+          CAPTCHA_COOKIE,
+        ],
+        callback: (consent: boolean) => {
+          _window?.nativeWindow.refreshCaptchaScript?.call();
+        },
+        onlyOnce: true,
+      },
+      {
+        name: CAPTCHA_FEEDBACK_NAME,
+        purposes: ['feedback-form-submission'],
         required: false,
         cookies: [
           CAPTCHA_COOKIE,

@@ -29,7 +29,7 @@ import { AuthService } from '../../core/auth/auth.service';
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
 import { EPersonDataService } from '../../core/eperson/eperson-data.service';
 import { EPerson } from '../../core/eperson/models/eperson.model';
-import { CAPTCHA_NAME } from '../../core/google-recaptcha/google-recaptcha.service';
+import { CAPTCHA_FEEDBACK_NAME } from '../../core/google-recaptcha/google-recaptcha.service';
 import { CookieService } from '../../core/services/cookie.service';
 import {
   NativeWindowRef,
@@ -212,7 +212,7 @@ export class BrowserOrejimeService extends OrejimeService {
           appsToHideArray.push(this.GOOGLE_ANALYTICS_SERVICE_NAME);
         }
         if (hideRegistrationVerification && hideFeedbackVerification) {
-          appsToHideArray.push(CAPTCHA_NAME);
+          appsToHideArray.push(CAPTCHA_FEEDBACK_NAME);
         }
         if (hideMatomo) {
           appsToHideArray.push(MATOMO_OREJIME_KEY);
