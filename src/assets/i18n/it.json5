@@ -3357,6 +3357,10 @@
   // "cookies.consent.app.title.google-recaptcha": "Google reCaptcha",
   "cookies.consent.app.title.google-recaptcha": "Google reCaptcha",
 
+  // "cookies.consent.app.title.google-recaptcha-registration": "Google reCaptcha",
+  "cookies.consent.app.title.google-recaptcha-registration": "Google reCaptcha",
+
+
   // "cookies.consent.app.description.google-recaptcha": "We use google reCAPTCHA service during registration and password recovery",
   "cookies.consent.app.description.google-recaptcha": "Utilizziamo il servizio Google reCAPTCHA nelle fasi di registrazione e recupero password",
 
@@ -3376,6 +3380,9 @@
 
   // "cookies.consent.purpose.registration-password-recovery": "Registration and Password recovery",
   "cookies.consent.purpose.registration-password-recovery": "Registrazione e recupero password",
+
+  // "cookies.consent.purpose.feedback-form-submission": "Feedback form",
+  "cookies.consent.purpose.feedback-form-submission": "Form di segnalazione",
 
   // "cookies.consent.purpose.sharing": "Sharing",
   "cookies.consent.purpose.sharing": "Condivisione",
