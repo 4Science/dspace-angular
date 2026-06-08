@@ -90,7 +90,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
   /**
    * Whether to show the metrics badges
    */
-  @Input() showMetrics: boolean;
+  @Input() showMetrics = true;
 
   /**
    * Route to the item's page
