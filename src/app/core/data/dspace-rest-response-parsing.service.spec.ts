@@ -1,9 +1,9 @@
 import { getMockObjectCacheService } from '../../shared/mocks/object-cache.service.mock';
 import { ObjectCacheService } from '../cache/object-cache.service';
 import { RawRestResponse } from '../dspace-rest/raw-rest-response.model';
+import { DspaceRestResponseParsingService } from './dspace-rest-response-parsing.service';
 import { RestRequest } from './rest-request.model';
 import { RestRequestMethod } from './rest-request-method';
-import { DspaceRestResponseParsingService } from './dspace-rest-response-parsing.service';
 
 class TestService extends DspaceRestResponseParsingService {
   constructor(protected objectCache: ObjectCacheService) {
