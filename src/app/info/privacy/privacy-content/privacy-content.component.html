@@ -1,13 +1,12 @@
 <h2 class="mb-3">{{ 'info.privacy.head' | translate }}</h2>
 
 
-<ng-container *ngIf="(privacyPolicyText$ | async) !== null">
-  <ds-markdown-viewer
-    *ngIf="(privacyPolicyText$ | async)?.length; else defaultContent"
-    [value]="(privacyPolicyText$ | async)">
-  </ds-markdown-viewer>
-
-  <ng-template #defaultContent>
+@if ((privacyPolicyText$ | async) !== null) {
+  @if ((privacyPolicyText$ | async)?.length) {
+    <ds-markdown-viewer
+      [value]="(privacyPolicyText$ | async)">
+    </ds-markdown-viewer>
+  } @else {
     <div class="default-privacy-content">
       <h1>{{ 'info.privacy.head' | translate }}</h1>
       <p><em>Last updated May 4, 2023</em></p>
@@ -101,5 +100,5 @@
       <h2>Changes to our privacy policy</h2>
       <p>It is our policy to post any changes we make to our privacy policy on this page. The date the privacy policy was last revised is identified at the top of the page. You are responsible for periodically visiting our Website and this privacy policy to check for any changes.</p>
     </div>
-  </ng-template>
-</ng-container>
+  }
+}

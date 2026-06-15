@@ -1,7 +1,4 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -29,7 +26,7 @@ import { MarkdownViewerComponent } from '../../../shared/markdown-viewer/markdow
   templateUrl: './privacy-content.component.html',
   styleUrls: ['./privacy-content.component.scss'],
   standalone: true,
-  imports: [RouterLink, TranslateModule, AsyncPipe, MarkdownViewerComponent, NgIf],
+  imports: [RouterLink, TranslateModule, AsyncPipe, MarkdownViewerComponent],
 })
 /**
  * Component displaying the contents of the Privacy Statement
