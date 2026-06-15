@@ -14,6 +14,7 @@ import {
 } from '@ngx-translate/core';
 import {
   BehaviorSubject,
+  combineLatest,
   Subscription,
 } from 'rxjs';
 
@@ -54,8 +55,10 @@ export class PrivacyContentComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subs.push(
-      this.siteService.find().subscribe((site) => {
-        const langCode = this.localeService.getCurrentLanguageCode();
+      combineLatest([
+        this.siteService.find(),
+        this.localeService.getCurrentLanguageCode(),
+      ]).subscribe(([site, langCode]) => {
         const fallbackLangCode = 'en';
 
         const textArray = site?.metadataAsList.filter((metadata) =>
