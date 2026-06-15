@@ -6,7 +6,7 @@ import {
 import { TOKENITEM } from '../../core/auth/models/auth-token-info.model';
 import {
   CAPTCHA_COOKIE,
-  CAPTCHA_NAME,
+  CAPTCHA_FEEDBACK_NAME,
 } from '../../core/google-recaptcha/google-recaptcha.service';
 import { LANG_COOKIE } from '../../core/locale/locale.service';
 
@@ -209,7 +209,7 @@ export const klaroConfiguration: any = {
       onlyOnce: true,
     },
     {
-      name: CAPTCHA_NAME,
+      name: CAPTCHA_FEEDBACK_NAME,
       purposes: ['registration-password-recovery'],
       required: false,
       cookies: [

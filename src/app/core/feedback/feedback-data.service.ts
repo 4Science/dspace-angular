@@ -1,8 +1,23 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import {
+  map,
+  Observable,
+} from 'rxjs';
+import {
+  distinctUntilChanged,
+  take,
+  takeWhile,
+} from 'rxjs/operators';
 
+import {
+  hasValue,
+  isNotEmptyOperator,
+} from '../../shared/empty.util';
+import { NotificationOptions } from '../../shared/notifications/models/notification-options.model';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
+import { getClassForType } from '../cache/builders/build-decorators';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { RequestParam } from '../cache/models/request-param.model';
 import { ObjectCacheService } from '../cache/object-cache.service';
@@ -12,7 +27,10 @@ import {
 } from '../data/base/create-data';
 import { IdentifiableDataService } from '../data/base/identifiable-data.service';
 import { RemoteData } from '../data/remote-data';
+import { CreateRequest } from '../data/request.models';
 import { RequestService } from '../data/request.service';
+import { DSpaceSerializer } from '../dspace-rest/dspace.serializer';
+import { HttpOptions } from '../dspace-rest/dspace-rest.service';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import {
   getFirstSucceededRemoteData,
@@ -24,7 +42,9 @@ import { Feedback } from './models/feedback.model';
  * Service for checking and managing the feedback
  */
 @Injectable({ providedIn: 'root' })
-export class FeedbackDataService extends IdentifiableDataService<Feedback> implements CreateData<Feedback> {
+export class FeedbackDataService
+  extends IdentifiableDataService<Feedback>
+  implements CreateData<Feedback> {
   private createData: CreateDataImpl<Feedback>;
 
   constructor(
@@ -37,7 +57,15 @@ export class FeedbackDataService extends IdentifiableDataService<Feedback> imple
   ) {
     super('feedbacks', requestService, rdbService, objectCache, halService);
 
-    this.createData = new CreateDataImpl(this.linkPath, requestService, rdbService, objectCache, halService, notificationsService, this.responseMsToLive);
+    this.createData = new CreateDataImpl(
+      this.linkPath,
+      requestService,
+      rdbService,
+      objectCache,
+      halService,
+      notificationsService,
+      this.responseMsToLive,
+    );
   }
 
   /**
@@ -51,14 +79,71 @@ export class FeedbackDataService extends IdentifiableDataService<Feedback> imple
     );
   }
 
-
   /**
    * Create a new object on the server, and store the response in the object cache
    *
    * @param object    The object to create
    * @param params    Array with additional params to combine with query string
    */
-  public create(object: Feedback, ...params: RequestParam[]): Observable<RemoteData<Feedback>> {
+  public create(
+    object: Feedback,
+    ...params: RequestParam[]
+  ): Observable<RemoteData<Feedback>> {
     return this.createData.create(object, ...params);
+  }
+
+  createWithCaptcha(
+    object: Feedback,
+    captchaToken: string = null,
+    ...params: RequestParam[]
+  ): Observable<RemoteData<Feedback>> {
+    const requestId = this.requestService.generateRequestId();
+
+    const endpoint$ = this.getEndpoint().pipe(
+      isNotEmptyOperator(),
+      distinctUntilChanged(),
+      map((endpoint: string) => this.buildHrefWithParams(endpoint, params)),
+    );
+
+    const serializedObject = new DSpaceSerializer(
+      getClassForType(object.type),
+    ).serialize(object);
+
+    endpoint$.pipe(take(1)).subscribe((endpoint: string) => {
+      const options: HttpOptions = Object.create({});
+      let headers = new HttpHeaders();
+      if (captchaToken) {
+        headers = headers.set('x-recaptcha-token', captchaToken);
+      }
+      options.headers = headers;
+
+      const request = new CreateRequest(
+        requestId,
+        endpoint,
+        JSON.stringify(serializedObject),
+        options,
+      );
+
+      if (hasValue(this.responseMsToLive)) {
+        request.responseMsToLive = this.responseMsToLive;
+      }
+      this.requestService.send(request);
+    });
+
+    const result$ = this.rdbService.buildFromRequestUUID<Feedback>(requestId);
+
+    result$
+      .pipe(takeWhile((rd: RemoteData<Feedback>) => rd.isLoading, true))
+      .subscribe((rd: RemoteData<Feedback>) => {
+        if (rd.hasFailed) {
+          this.notificationsService.error(
+            'Server Error:',
+            rd.errorMessage,
+            new NotificationOptions(-1),
+          );
+        }
+      });
+
+    return result$;
   }
 }
