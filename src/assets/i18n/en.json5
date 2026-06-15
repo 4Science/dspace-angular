@@ -2119,6 +2119,8 @@
 
   "cookies.consent.app.title.google-recaptcha": "Google reCaptcha",
 
+  "cookies.consent.app.title.google-recaptcha-registration": "Google reCaptcha",
+
   "cookies.consent.app.description.google-recaptcha": "We use google reCAPTCHA service during registration and password recovery",
 
   "cookies.consent.app.title.matomo": "Matomo",
@@ -2130,6 +2132,8 @@
   "cookies.consent.purpose.statistical": "Statistical",
 
   "cookies.consent.purpose.registration-password-recovery": "Registration and Password recovery",
+
+  "cookies.consent.purpose.feedback-form-submission": "Feedback form",
 
   "cookies.consent.purpose.sharing": "Sharing",
 
@@ -3143,6 +3147,12 @@
   "info.feedback.page-label": "Page",
 
   "info.feedback.page_help": "The page related to your feedback",
+
+  "info.feedback.google-recaptcha.must-accept-cookies": "In order to send your feedback you must accept the <b>Feedback</b> (Google reCaptcha) cookies.",
+  "info.feedback.google-recaptcha.open-cookie-settings": "Open cookie settings",
+  "info.feedback.google-recaptcha.notification.title": "Google reCaptcha",
+  "info.feedback.google-recaptcha.notification.message.error": "An error occurred during reCaptcha verification",
+  "info.feedback.google-recaptcha.notification.message.expired": "Verification expired. Please verify again.",
 
   "info.coar-notify-support.title": "COAR Notify Support",
 
