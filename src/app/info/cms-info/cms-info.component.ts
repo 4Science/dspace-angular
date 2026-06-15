@@ -1,6 +1,5 @@
 import {
   AsyncPipe,
-  NgIf,
 } from '@angular/common';
 import {
   Component,
@@ -25,7 +24,6 @@ import { MarkdownViewerComponent } from '../../shared/markdown-viewer/markdown-v
   styleUrls: ['./cms-info.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     AsyncPipe,
     TranslateModule,
     MarkdownViewerComponent,
@@ -62,10 +60,11 @@ export class CmsInfoComponent implements OnInit {
     );
 
     const site$ = this.siteService.find().pipe(take(1));
+    const lang$ = this.locale.getCurrentLanguageCode().pipe(take(1));
 
-    combineLatest([data$, site$]).subscribe(([data, site]) => {
+    combineLatest([data$, site$, lang$]).subscribe(([data, site, lang]) => {
       this.headLabel$.next(`info.${data.qualifier}.head`);
-      const mdValue = site?.firstMetadataValue(`${data.schema}.cms.${data.qualifier}`, { language: this.locale.getCurrentLanguageCode() });
+      const mdValue = site?.firstMetadataValue(`${data.schema}.cms.${data.qualifier}`, { language: lang });
       if (hasValue(mdValue)) {
         this.cmsMetadataValue$.next(mdValue);
       } else {

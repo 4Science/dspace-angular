@@ -1,14 +1,14 @@
 <div class="container">
 
-  <h2 *ngIf="(headLabel$ | async) as headLabel">{{ headLabel | translate }}</h2>
+  @if (headLabel$ | async; as headLabel) {
+    <h2>{{ headLabel | translate }}</h2>
+  }
 
-  <ng-container *ngIf="metadataLoaded$ | async">
-    <ng-container *ngIf="(cmsMetadataValue$ | async) as value; else missingMetadata">
+  @if (metadataLoaded$ | async) {
+    @if (cmsMetadataValue$ | async; as value) {
       <ds-markdown-viewer [value]="value"></ds-markdown-viewer>
-    </ng-container>
-  </ng-container>
-
-  <ng-template #missingMetadata>
-    <div>{{ 'info.empty-cms-metadata-error' | translate }}</div>
-  </ng-template>
+    } @else {
+      <div>{{ 'info.empty-cms-metadata-error' | translate }}</div>
+    }
+  }
 </div>

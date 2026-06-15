@@ -20,6 +20,7 @@ import {
 } from './info-routing-paths';
 import { NotifyInfoComponent } from './notify-info/notify-info.component';
 import { ThemedPrivacyComponent } from './privacy/themed-privacy.component';
+import {CmsInfoComponent} from "./cms-info/cms-info.component";
 
 function cmsInfoRoute(qualifier: string, schema: string): Route {
   return {
