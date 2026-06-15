@@ -19,7 +19,7 @@
           <tr
             class="{{point.id}}-data">
             <th scope="row" data-test="statistics-label">
-              {{ point.label }}
+              {{ point.label ?? 'n/a' }}
             </th>
             @for (header of headers; track header) {
               <td
