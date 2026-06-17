@@ -245,6 +245,11 @@ export class SearchComponent implements OnDestroy, OnInit {
   @Input() renderOnServerSide: boolean;
 
   /**
+   * Whether to show the metrics badges
+   */
+  @Input() showMetrics: boolean;
+
+  /**
    * The current configuration used during the search
    */
   currentConfiguration$: BehaviorSubject<string> = new BehaviorSubject<string>('');
@@ -529,8 +534,20 @@ export class SearchComponent implements OnDestroy, OnInit {
     this.lastSearchOptions = searchOptions;
     const followLinks = [
       followLink<Item>('thumbnail', { isOptional: true }),
-      followLink<SubmissionObject>('item', { isOptional: true }, followLink<Item>('thumbnail', { isOptional: true })) as any,
+      followLink<SubmissionObject>('item', { isOptional: true }, followLink<Item>('thumbnail', { isOptional: true }), followLink<Item>('metrics', { isOptional: true })) as any,
     ];
+    if (this.showMetrics) {
+      followLinks.push(followLink<SubmissionObject>('item', { isOptional: true },
+        followLink<Item>('thumbnail', { isOptional: true }),
+        followLink<Item>('metrics', { isOptional: true }),
+      ) as any,
+      );
+    } else {
+      followLinks.push(followLink<SubmissionObject>('item', { isOptional: true },
+        followLink<Item>('thumbnail', { isOptional: true }),
+      ) as any,
+      );
+    }
     if (this.appConfig.item.showAccessStatuses) {
       followLinks.push(followLink<Item>('accessStatus', { isOptional: true }));
     }

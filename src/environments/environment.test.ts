@@ -261,6 +261,8 @@ export const environment: BuildConfig = {
     fiveYearLimit: 30,
     // The absolute lowest year to display in the dropdown (only used when no lowest date can be found for all items)
     defaultLowerLimit: 1900,
+    // Whether to show item netrics to BOTH browse and search result lists.
+    showMetrics: true,
     // Whether to add item thumbnail images to BOTH browse and search result lists.
     showThumbnails: true,
     // The number of entries in a paginated browse results list.
@@ -603,6 +605,48 @@ export const environment: BuildConfig = {
         },
       ],
     },
+    metricVisualizationConfig: [
+      {
+        type: 'altmetric',
+        icon: null,
+        class: '',
+      },
+      {
+        type: 'plumX',
+        icon: null,
+        class: '',
+      },
+      {
+        type: 'dimensions',
+        icon: 'fa fa-cubes',
+        class: '',
+      },
+      {
+        type: 'google-scholar',
+        icon: '/assets/images/google-scholar.svg',
+        class: 'alert alert-info',
+      },
+      {
+        type: 'embedded-view',
+        icon: 'fa fa-eye',
+        class: 'alert alert-success',
+      },
+      {
+        type: 'embedded-download',
+        icon: 'fa fa-cloud-download-alt',
+        class: 'alert alert-danger',
+      },
+      {
+        type: 'view',
+        icon: 'fa fa-eye',
+        class: 'alert alert-success',
+      },
+      {
+        type: 'download',
+        icon: 'fa fa-cloud-download-alt',
+        class: 'alert alert-danger',
+      },
+    ],
   },
 
   searchResult: {

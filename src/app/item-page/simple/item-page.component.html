@@ -13,6 +13,7 @@
             <ds-listable-object-component-loader [object]="item" [viewMode]="viewMode"></ds-listable-object-component-loader>
           }
           <ds-item-versions class="mt-2" [item]="item" [displayActions]="false"></ds-item-versions>
+          <ds-metrics-box [item]="item" [metricsBoxConfiguration]="{maxColumns: 3, metrics: ['embedded-view', 'embedded-download', 'google-scholar']}"></ds-metrics-box>
         </div>
       }
     </div>

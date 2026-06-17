@@ -49,6 +49,8 @@ export class SearchResultListElementComponent<T extends SearchResult<K>, K exten
    */
   ngOnInit(): void {
     this.additionalMetadataLimit = this.appConfig?.searchResult?.followAuthorityMetadataValuesLimit;
+    this.showMetrics = this.showMetrics ?? this.appConfig?.browseBy?.showMetrics;
+
     if (hasValue(this.object)) {
       this.dso = this.object.indexableObject;
       this.dsoTitle = this.dsoNameService.getHitHighlights(this.object, this.dso, true);

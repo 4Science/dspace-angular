@@ -47,6 +47,7 @@ import { ITEM_TYPE } from './shared/item-relationships/item-type.resource-type';
 import { RELATIONSHIP } from './shared/item-relationships/relationship.resource-type';
 import { RELATIONSHIP_TYPE } from './shared/item-relationships/relationship-type.resource-type';
 import { LICENSE } from './shared/license.resource-type';
+import { METRIC } from './shared/metric.resource-type';
 import { NOTIFYREQUEST } from './shared/notify-requests-status.resource-type';
 import { PROCESS } from './shared/process.resource-type';
 import { SCRIPT } from './shared/scripts/script.resource-type';
@@ -142,4 +143,5 @@ export const LAZY_DATA_SERVICES: LazyDataServicesMap = new Map([
   [AUDIT.value, () => import('./data/audit-data.service').then(m => m.AuditDataService)],
   [EditItem.type.value, () => import('./submission/edititem-data.service').then(m => m.EditItemDataService)],
   [METADATA_SECURITY_TYPE.value, () => import('./submission/metadatasecurityconfig-data.service').then(m => m.MetadataSecurityConfigurationService)],
+  [METRIC.value, () => import('./data/metrics-data.service').then(m => m.MetricsDataService)],
 ]);

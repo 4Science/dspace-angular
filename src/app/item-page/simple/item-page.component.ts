@@ -58,6 +58,7 @@ import { ItemVersionsComponent } from '../versions/item-versions.component';
 import { ItemVersionsNoticeComponent } from '../versions/notice/item-versions-notice.component';
 import { AccessByTokenNotificationComponent } from './access-by-token-notification/access-by-token-notification.component';
 import { CustomUrlConflictErrorComponent } from './custom-url-conflict-error/custom-url-conflict-error.component';
+import { MetricsBoxComponent } from './metrics/metrics-box.component';
 import { NotifyRequestsStatusComponent } from './notify-requests-status/notify-requests-status-component/notify-requests-status.component';
 import { QaEventNotificationComponent } from './qa-event-notification/qa-event-notification.component';
 
@@ -81,6 +82,7 @@ import { QaEventNotificationComponent } from './qa-event-notification/qa-event-n
     ItemVersionsComponent,
     ItemVersionsNoticeComponent,
     ListableObjectComponentLoaderComponent,
+    MetricsBoxComponent,
     NotifyRequestsStatusComponent,
     QaEventNotificationComponent,
     ThemedItemAlertsComponent,

@@ -54,6 +54,7 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
     'resultFound',
     'deselectObject',
     'selectObject',
+    'showMetrics',
   ];
 
   @Input() configurationList: SearchConfigurationOption[];
@@ -103,6 +104,8 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
   @Input() query: string;
 
   @Input() scope: string;
+
+  @Input() showMetrics: boolean;
 
   @Input() hideScopeInUrl: boolean;
 

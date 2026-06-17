@@ -1,5 +1,6 @@
 import { AdvancedAttachmentRenderingConfig } from './advanced-attachment-rendering.config';
 import { Config } from './config.interface';
+import { MetricVisualizationConfig } from './metric-visualization-config.interfaces';
 
 /**
  * Configuration for styling entity icons with Font Awesome icons and CSS classes.
@@ -73,4 +74,9 @@ export interface LayoutConfig extends Config {
    * Controls pagination and metadata display for bitstream attachments.
    */
   advancedAttachmentRendering: AdvancedAttachmentRenderingConfig;
+
+  /**
+   * Style configuration for metric components, allow to customize SCSS given classes and icons
+   */
+  metricVisualizationConfig: MetricVisualizationConfig[];
 }

@@ -1789,6 +1789,20 @@
 
   "cookies.consent.purpose.sharing": "Sharing",
 
+  "cookies.consent.app.title.plumX": "PlumX",
+
+  "cookies.consent.app.description.plumX": "PlumX Metrics provide insights into the ways people interact with individual pieces of research output (articles, conference proceedings, book chapters, and many more) in the online environment. (https://plumanalytics.com/)",
+
+  "cookies.consent.app.title.altmetric": "Altmetric",
+
+  "cookies.consent.app.description.altmetric": "Altmetric’s interface tracks online engagement to reveal how and where your research is being visualized. (https://www.altmetric.com)",
+
+  "cookies.consent.app.title.dimensions": "Dimensions",
+
+  "cookies.consent.app.description.dimensions": "Dimensions analyses references from publications and calculates a set of article-level indicators. (https://www.dimensions.ai)",
+
+  "cookies.consent.purpose.thirdPartyJs": "Third-party JavaScript",
+
   "curation-task.task.citationpage.label": "Generate Citation Page",
 
   "curation-task.task.checklinks.label": "Check Links in Metadata",
@@ -3018,6 +3032,46 @@
   "item.page.dcterms.spatial": "Geospatial point",
 
   "item.page.doi": "DOI",
+
+  "item.page.metric.acquisition-date": "Acquisition Date",
+
+  "item.page.metric.deltaPeriod1": "Last Week",
+
+  "item.page.metric.deltaPeriod2": "Last Month",
+
+  "item.page.metric.details": "Details",
+
+  "item.page.metric.label.altmetric": "Altmetrics©",
+
+  "item.page.metric.label.dimensions": "Dimensions",
+
+  "item.page.metric.label.check": "Check",
+
+  "item.page.metric.label.download": "Downloads",
+
+  "item.page.metric.label.view": "Views",
+
+  "item.page.metric.label.view-detail-btn": "View Details",
+
+  "item.page.metric.label.google-scholar": "Google Scholar",
+
+  "item.page.metric.label.scopusCitation": "Scopus© citations",
+
+  "item.page.metric.label.scopus-author-h-index": "Scopus© H-Index",
+
+  "item.page.metric.label.scopus-author-coauthor-count": "Scopus© Coauthor",
+
+  "item.page.metric.label.scopus-author-cited-count": "Scopus© Cited By",
+
+  "item.page.metric.label.scopus-author-citation-count": "Scopus© Citations",
+
+  "item.page.metric.label.scopus-author-document-count": "Scopus© Documents",
+
+  "item.page.metric.label.wosCitation": "Web of Science© citations",
+
+  "item.page.metric.label.wosPersonCitation": "Web of Science© citations",
+
+  "item.page.metric.label.plumX": "PlumX",
 
   "item.search.results.head": "Item Search Results",
 
@@ -6250,6 +6304,12 @@
 
   "thumbnail.person.placeholder": "No Profile Picture Available",
 
+  "third-party-metrics-cookies.message": "{{ metricType }} badge is blocked by your ",
+
+  "third-party-metrics-cookies.consent-settings": "consent settings",
+
+  "third-party-metrics-blocked": "Some of the metrics are blocked by your",
+
   "title": "DSpace",
 
   "vocabulary-treeview.header": "Hierarchical tree view",
@@ -7709,6 +7769,24 @@
   "metadata-link-view.popover.label.other.dc.description.abstract": "Description",
 
   "metadata-link-view.popover.label.more-info": "More info",
+
+  "metric-badges.scopusCitation": "Scopus© Citations",
+
+  "metric-badges.scopus-author-citation-count": "Scopus© Citations",
+
+  "metric-badges.scopus-author-coauthor-count": "<span class=\"fa fa-users\" title=\"Scopus© Coauthors\">&nbsp;</span>",
+
+  "metric-badges.scopus-author-document-count": "<span class=\"fa fa-book-open\" title=\"Scopus© Documents\">&nbsp;</span>",
+
+  "metric-badges.scopus-author-h-index": "Scopus© H-Index",
+
+  "metric-badges.scopus-author-cited-count": "Scopus© Cited By",
+
+  "metric-badges.wosCitation": "WOS© Citations",
+
+  "metric-badges.view": "<span class=\"fa fa-eye\" title=\"View\">&nbsp;</span>",
+
+  "metric-badges.download": "<span class=\"fa fa-download\" title=\"Downloads\">&nbsp;</span>",
 
   "item.page.extended-file-section": "Bitstreams",
 

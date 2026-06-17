@@ -30,7 +30,7 @@ import {
 })
 export class ThemedSearchResultsComponent extends ThemedComponent<SearchResultsComponent> {
 
-  protected inAndOutputNames: (keyof SearchResultsComponent & keyof this)[] = ['linkType', 'searchResults', 'searchConfig', 'showCsvExport', 'showThumbnails', 'sortConfig', 'viewMode', 'configuration', 'disableHeader', 'selectable', 'context', 'hidePaginationDetail', 'selectionConfig', 'contentChange', 'deselectObject', 'selectObject'];
+  protected inAndOutputNames: (keyof SearchResultsComponent & keyof this)[] = ['linkType', 'searchResults', 'searchConfig', 'showCsvExport', 'showThumbnails', 'showMetrics', 'sortConfig', 'viewMode', 'configuration', 'disableHeader', 'selectable', 'context', 'hidePaginationDetail', 'selectionConfig', 'contentChange', 'deselectObject', 'selectObject'];
 
   @Input() linkType: CollectionElementLinkType;
 
@@ -41,6 +41,8 @@ export class ThemedSearchResultsComponent extends ThemedComponent<SearchResultsC
   @Input() showCsvExport: boolean;
 
   @Input() showThumbnails: boolean;
+
+  @Input() showMetrics: boolean;
 
   @Input() sortConfig: SortOptions;
 
