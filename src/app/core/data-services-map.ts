@@ -57,7 +57,11 @@ import { SUBSCRIPTION } from './shared/subscription.resource-type';
 import { SYSTEMWIDEALERT } from './shared/system-wide-alert.resource-type';
 import { VERSION } from './shared/version.resource-type';
 import { VERSION_HISTORY } from './shared/version-history.resource-type';
+import { LOGIN_STATISTICS } from './statistics/models/login-statistics.resource-type';
+import { STATISTICS_CATEGORY } from './statistics/models/statistics-category.resource-type';
 import { USAGE_REPORT } from './statistics/models/usage-report.resource-type';
+import { WORKFLOW_OWNER_STATISTICS } from './statistics/models/workflow-owner-statistics.resource-type';
+import { WORKFLOW_STEP_STATISTICS } from './statistics/models/workflow-step-statistics.resource-type';
 import { CorrectionType } from './submission/models/correctiontype.model';
 import { EditItem } from './submission/models/edititem.model';
 import { METADATA_SECURITY_TYPE } from './submission/models/metadata-security-config.resource-type';
@@ -144,4 +148,8 @@ export const LAZY_DATA_SERVICES: LazyDataServicesMap = new Map([
   [EditItem.type.value, () => import('./submission/edititem-data.service').then(m => m.EditItemDataService)],
   [METADATA_SECURITY_TYPE.value, () => import('./submission/metadatasecurityconfig-data.service').then(m => m.MetadataSecurityConfigurationService)],
   [METRIC.value, () => import('./data/metrics-data.service').then(m => m.MetricsDataService)],
+  [STATISTICS_CATEGORY.value, () => import('./statistics/statistics-categories-data.service').then(m => m.StatisticsCategoriesDataService)],
+  [WORKFLOW_OWNER_STATISTICS.value, () => import('./statistics/workflow-owner-statistics-data.service').then(m => m.WorkflowOwnerStatisticsDataService)],
+  [WORKFLOW_STEP_STATISTICS.value, () => import('./statistics/workflow-step-statistics-data.service').then(m => m.WorkflowStepStatisticsDataService)],
+  [LOGIN_STATISTICS.value, () => import('./statistics/login-statistics.service').then(m => m.LoginStatisticsService)],
 ]);

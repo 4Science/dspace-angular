@@ -3862,6 +3862,14 @@
 
   "menu.section.statistics": "Statistics",
 
+  "menu.section.statistics.item": "Item Statistics",
+
+  "menu.section.statistics.workflow": "Workflow",
+
+  "menu.section.statistics.login": "Login",
+
+  "menu.section.statistics.site": "Site",
+
   "menu.section.statistics_task": "Statistics Task",
 
   "menu.section.toggle.access_control": "Toggle Access Control section",
@@ -5304,6 +5312,116 @@
 
   "sorting.ownerselection.DESC": "Owner Relevance Descending",
 
+  "statistics": "Statistics",
+
+  "statistics.workflow.breadcrumbs": "Workflow Statistics",
+
+  "statistics.workflow.page.header": "Workflow Statistics",
+
+  "statistics.workflow.page.current-table.header": "Current workflows",
+
+  "statistics.workflow.page.owner-table.header": "Actions performed by actor",
+
+  "statistics.workflow.page.owner-table.count": "Performed",
+
+  "statistics.workflow.page.owner-table.email": "Email",
+
+  "statistics.workflow.page.step-table.header": "Workflow steps performed",
+
+  "statistics.workflow.page.step-table.step": "Step",
+
+  "statistics.workflow.page.step-table.count": "Performed",
+
+  "statistics.workflow.page.step-table.submit": "Submit",
+
+  "statistics.workflow.page.step-table.reviewstep": "Review",
+
+  "statistics.workflow.page.step-table.editstep": "Edit",
+
+  "statistics.workflow.page.step-table.finaleditstep": "Final edit",
+
+  "statistics.workflow.page.step-table.item": "Archive",
+
+  "statistics.workflow.page.step-table.workspace": "Reject",
+
+  "statistics.workflow.page.current-table.reviewstep": "Review",
+
+  "statistics.workflow.page.current-table.editstep": "Edit",
+
+  "statistics.workflow.page.current-table.finaleditstep": "Final edit",
+
+  "statistics.workflow.page.current-table.step": "Step",
+
+  "statistics.workflow.page.current-table.count": "Count",
+
+  "statistics.workflow.page.max": "Max",
+
+  "statistics.workflow.page.collection": "Collection",
+
+  "statistics.workflow.page.endDate": "End date",
+
+  "statistics.workflow.page.startDate": "Start date",
+
+  "statistics.workflow.page.reset": "Reset filters",
+
+  "statistics.workflow.page.actions.title": "Actions",
+
+  "statistics.workflow.page.action-table.action": "Action",
+
+  "statistics.workflow.page.action-table.count": "Count",
+
+  "statistics.workflow.page.action-table.editstep.editaction": "Edit",
+
+  "statistics.workflow.page.action-table.finaleditstep.finaleditaction": "Final Edit",
+
+  "statistics.workflow.page.action-table.reviewstep.reviewaction": "Review",
+
+  "statistics.workflow.page.action-table.submit": "Submit",
+
+  "statistics.workflow.page.action-table.approve": "Approve",
+
+  "statistics.workflow.page.action-table.reject": "Reject",
+
+  "statistics.workflow.page.action-table.editaction": "Edit",
+
+  "statistics.workflow.page.action-table.finaleditaction": "Final Edit",
+
+  "statistics.workflow.page.action-table.reviewaction": "Review",
+
+  "statistics.workflow.page.action-table.claimaction": "Claim",
+
+  "statistics.workflow.page.no-data-found": "No data found",
+
+  "statistics.login.breadcrumbs": "Login Statistics",
+
+  "statistics.login.page.header": "Login Statistics",
+
+  "statistics.login.page.reset": "Reset filters",
+
+  "statistics.login.page.table.user": "User",
+
+  "statistics.login.page.table.email": "Email",
+
+  "statistics.login.page.table.count": "Login",
+
+  "statistics.login.page.max": "Max",
+
+  "statistics.login.page.endDate": "End date",
+
+  "statistics.login.page.startDate": "Start date",
+
+  "statistics.login.page.no-data-found": "No data found",
+
+  "statistics.login.title statistics.workflow.title": "Login Statistics",
+
+  "statistics.export.csv": "Export CSV",
+
+  "statistics.export.excel": "Export Excel",
+
+  "statistics.export.jpg": "Export as JPEG",
+
+  "statistics.export.png": "Export as PNG",
+
   "statistics.title": "Statistics",
 
   "statistics.header": "Statistics for {{ scope }}",
@@ -5314,9 +5432,25 @@
 
   "statistics.table.no-data": "No data available",
 
-  "statistics.table.title.TotalVisits": "Total visits",
+  "statistics.table.mainReports.title.TotalVisits": "Total visits",
+
+  "statistics.table.mainReports.title.TopItems": "Most viewed",
+
+  "statistics.table.mainReports.title.TotalVisitsPerMonth": "Total visits per month",
+
+  "statistics.table.mainReports.title.TotalDownloads": "File visits",
+
+  "statistics.table.mainReports.title.TotalVisitsAndDownloads": "Items and file visits",
+
+  "statistics.table.mainReports.title.TopCountries": "Top country views",
+
+  "statistics.table.mainReports.title.TopContinents": "Top region views",
 
   "statistics.table.title.TotalVisitsPerMonth": "Total visits per month",
+
+  "statistics.table.mainReports.title.TopCategories": "Categories",
+
+  "statistics.table.mainReports.title.TopCities": "Top city views",
 
   "statistics.table.title.TotalDownloads": "File Visits",
 
@@ -5326,7 +5460,69 @@
 
   "statistics.table.header.views": "Views",
 
+  "statistics.table.downloadReports.title.TotalVisits": "Most downloaded",
+
+  "statistics.table.downloadReports.title.TopItems": "Most downloaded",
+
+  "statistics.table.downloadReports.title.TotalVisitsPerMonth": "Total downloads per month",
+
+  "statistics.table.downloadReports.title.TotalDownloads": "Most downloaded",
+
+  "statistics.table.downloadReports.title.TotalDownloadsPerMonth": "Total downloads per month",
+
+  "statistics.table.downloadReports.title.TopCountries": "Top country downloads",
+
+  "statistics.table.downloadReports.title.TopContinents": "Top region downloads",
+
+  "statistics.table.downloadReports.title.TopCategories": "Categories",
+
+  "statistics.table.downloadReports.title.TopCities": "Top city downloads",
+
+  "statistics.table.mainReports.header.views": "Views",
+
+  "statistics.table.mainReports.header.bitstream": "File Visits",
+
+  "statistics.table.mainReports.header.continent": "Continent",
+
+  "statistics.table.mainReports.header.country": "Country",
+
+  "statistics.table.mainReports.header.city": "City",
+
+  "statistics.table.mainReports.header.item": "Item",
+
+  "statistics.table.mainReports.header.community": "Community",
+
+  "statistics.table.mainReports.header.collection": "Collection",
+
+  "statistics.table.downloadReports.header.views": "Downloads",
+
+  "statistics.table.downloadReports.header.continent": "Continent",
+
+  "statistics.table.downloadReports.header.country": "Country",
+
+  "statistics.table.downloadReports.header.city": "City",
+
+  "statistics.table.downloadReports.header.item": "Item",
+
+  "statistics.table.publicationsReports.title.TotalVisits": "Total visits",
+
+  "statistics.table.publicationsReports.title.TopItems": "Most viewed",
+
+  "statistics.table.publicationsReports.title.TopCities": "Top cities",
+
   "statistics.table.no-name": "(object name could not be loaded)",
+
+  "statistics.categories.title": "Statistics by category",
+
+  "statistics.categories.mainReports.tab": "Views reports",
+
+  "statistics.categories.downloadReports.tab": "Downloads reports",
+
+  "statistics.categories.itemReports.tab": "Item views reports",
+
+  "statistics-page.export-map-as-image": "Export map",
+
+  "statistics.reports.title": "Reports",
 
   "submission.edit.breadcrumbs": "Edit Submission",
 

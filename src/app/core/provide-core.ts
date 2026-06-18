@@ -75,6 +75,7 @@ import { RelationshipType } from './shared/item-relationships/relationship-type.
 import { ItemRequest } from './shared/item-request.model';
 import { License } from './shared/license.model';
 import { ListableNotificationObject } from './shared/listable-notification-object.model';
+import { Metric } from './shared/metric.model';
 import { NonHierarchicalBrowseDefinition } from './shared/non-hierarchical-browse-definition';
 import { Registration } from './shared/registration.model';
 import { Script } from './shared/scripts/script.model';
@@ -91,8 +92,12 @@ import { TemplateItem } from './shared/template-item.model';
 import { ValueListBrowseDefinition } from './shared/value-list-browse-definition.model';
 import { Version } from './shared/version.model';
 import { VersionHistory } from './shared/version-history.model';
+import { LoginStatistics } from './statistics/models/login-statistics.model';
+import { StatisticsCategory } from './statistics/models/statistics-category.model';
 import { StatisticsEndpoint } from './statistics/models/statistics-endpoint.model';
 import { UsageReport } from './statistics/models/usage-report.model';
+import { WorkflowOwnerStatistics } from './statistics/models/workflow-owner-statistics.model';
+import { WorkflowStepStatistics } from './statistics/models/workflow-step-statistics.model';
 import { CorrectionType } from './submission/models/correctiontype.model';
 import { SubmissionCcLicence } from './submission/models/submission-cc-license.model';
 import { SubmissionCcLicenceUrl } from './submission/models/submission-cc-license-url.model';
@@ -232,4 +237,9 @@ export const models =
     CorrectionType,
     SupervisionOrder,
     SubmissionCustomUrl,
+    Metric,
+    StatisticsCategory,
+    WorkflowStepStatistics,
+    WorkflowOwnerStatistics,
+    LoginStatistics,
   ];

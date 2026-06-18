@@ -47,21 +47,41 @@ export class UsageReportDataService extends IdentifiableDataService<UsageReport>
     );
   }
 
-  searchStatistics(uri: string, page: number, size: number): Observable<UsageReport[]> {
+  searchStatistics(uri: string, page: number, size: number, categoryId?: string, startDate?: string, endDate?: string, excludePoints = false): Observable<UsageReport[]> {
+    const params = [
+      new RequestParam('uri', uri),
+      new RequestParam('category', categoryId),
+    ];
+
+    if (startDate !== undefined) {
+      params.push(
+        new RequestParam('startDate', startDate),
+      );
+    }
+
+    if (endDate !== undefined) {
+      params.push(
+        new RequestParam('endDate', endDate),
+      );
+    }
+
+    if (excludePoints) {
+      params.push(new RequestParam('projection', 'usageReportPoints'));
+    }
+
     return this.searchBy('object', {
-      searchParams: [
-        new RequestParam('uri', uri),
-      ],
+      searchParams: params,
       currentPage: page,
       elementsPerPage: size,
     }, true, false).pipe(
-      getFirstSucceededRemoteData(),
       getRemoteDataPayload(),
       map((list) => list.page),
     );
   }
 
   public searchBy(searchMethod: string, options?: FindListOptions, useCachedVersionIfAvailable?: boolean, reRequestOnStale?: boolean, ...linksToFollow: FollowLinkConfig<UsageReport>[]): Observable<RemoteData<PaginatedList<UsageReport>>> {
-    return this.searchData.searchBy(searchMethod, options, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
+    return this.searchData.searchBy(searchMethod, options, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow).pipe(
+      getFirstSucceededRemoteData(),
+    );
   }
 }
