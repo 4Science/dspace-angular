@@ -7,15 +7,15 @@
  */
 
 import { TestBed } from '@angular/core/testing';
-import { APP_CONFIG } from '@dspace/config/app-config.interface';
-import { ConfigurationDataService } from '@dspace/core/data/configuration-data.service';
-import { AuthorizationDataService } from '@dspace/core/data/feature-authorization/authorization-data.service';
-import { ConfigurationProperty } from '@dspace/core/shared/configuration-property.model';
-import { AuthorizationDataServiceStub } from '@dspace/core/testing/authorization-service.stub';
-import { createSuccessfulRemoteDataObject$ } from '@dspace/core/utilities/remote-data.utils';
 import { of } from 'rxjs';
 
+import { APP_CONFIG } from '../../../../config/app-config.interface';
 import { environment } from '../../../../environments/environment';
+import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
+import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
+import { ConfigurationProperty } from '../../../core/shared/configuration-property.model';
+import { createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
+import { AuthorizationDataServiceStub } from '../../testing/authorization-service.stub';
 import { MenuItemType } from '../menu-item-type.model';
 import { PartialMenuSection } from '../menu-provider.model';
 import { AuditOverviewMenuProvider } from './audit-overview.menu';

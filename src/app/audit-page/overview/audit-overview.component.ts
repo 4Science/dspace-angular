@@ -3,9 +3,6 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-import { AuditDataService } from '@dspace/core/data/audit-data.service';
-import { PaginationComponentOptions } from '@dspace/core/pagination/pagination-component-options.model';
-import { followLink } from '@dspace/core/shared/follow-link-config.model';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   forkJoin,
@@ -20,10 +17,13 @@ import {
 
 import { Audit } from '../../core/audit/model/audit.model';
 import { SortDirection } from '../../core/cache/models/sort-options.model';
+import { AuditDataService } from '../../core/data/audit-data.service';
 import { FindListOptions } from '../../core/data/find-list-options.model';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { RemoteData } from '../../core/data/remote-data';
 import { PaginationService } from '../../core/pagination/pagination.service';
+import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
+import { followLink } from '../../shared/utils/follow-link-config.model';
 import { AuditTableComponent } from '../audit-table/audit-table.component';
 
 /**

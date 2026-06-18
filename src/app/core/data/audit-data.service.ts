@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { NotificationsService } from '@dspace/core/notification-system/notifications.service';
-import {
-  followLink,
-  FollowLinkConfig,
-} from '@dspace/core/shared/follow-link-config.model';
-import { hasValue } from '@dspace/shared/utils/empty.util';
 import {
   Observable,
   of,
 } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { hasValue } from '../../shared/empty.util';
+import { NotificationsService } from '../../shared/notifications/notifications.service';
+import {
+  followLink,
+  FollowLinkConfig,
+} from '../../shared/utils/follow-link-config.model';
 import { Audit } from '../audit/model/audit.model';
 import { DSONameService } from '../breadcrumbs/dso-name.service';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';

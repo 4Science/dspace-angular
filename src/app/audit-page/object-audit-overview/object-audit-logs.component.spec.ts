@@ -13,23 +13,23 @@ import {
   RouterLink,
 } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Audit } from '@dspace/core/audit/model/audit.model';
-import { AuditDataService } from '@dspace/core/data/audit-data.service';
-import { CollectionDataService } from '@dspace/core/data/collection-data.service';
-import { DSpaceObjectDataService } from '@dspace/core/data/dspace-object-data.service';
-import { APP_DATA_SERVICES_MAP } from '@dspace/core/data-services-map-type';
-import { PaginationService } from '@dspace/core/pagination/pagination.service';
-import { Item } from '@dspace/core/shared/item.model';
-import { MockActivatedRoute } from '@dspace/core/testing/active-router.mock';
-import { AuditMock } from '@dspace/core/testing/audit.mock';
-import { PaginationServiceStub } from '@dspace/core/testing/pagination-service.stub';
-import { RouterMock } from '@dspace/core/testing/router.mock';
-import { createPaginatedList } from '@dspace/core/testing/utils.test';
-import { createSuccessfulRemoteDataObject$ } from '@dspace/core/utilities/remote-data.utils';
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
+import { Audit } from '../../core/audit/model/audit.model';
+import { AuditDataService } from '../../core/data/audit-data.service';
+import { CollectionDataService } from '../../core/data/collection-data.service';
+import { DSpaceObjectDataService } from '../../core/data/dspace-object-data.service';
+//import { APP_DATA_SERVICES_MAP } from '../../core/data-services-map-type';
+import { PaginationService } from '../../core/pagination/pagination.service';
+import { Item } from '../../core/shared/item.model';
+import { MockActivatedRoute } from '../../shared/mocks/active-router.mock';
+import { RouterMock } from '../../shared/mocks/router.mock';
+import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
+import { AuditMock } from '../../shared/testing/audit.mock';
+import { PaginationServiceStub } from '../../shared/testing/pagination-service.stub';
+import { createPaginatedList } from '../../shared/testing/utils.test';
 import { AuditTableComponent } from '../audit-table/audit-table.component';
 import { ObjectAuditLogsComponent } from './object-audit-logs.component';
 
@@ -85,7 +85,7 @@ describe('ObjectAuditLogsComponent', () => {
         { provide: ActivatedRoute, useValue: activatedRoute },
         { provide: Router, useValue: new RouterMock() },
         { provide: CollectionDataService, useValue: collectionService },
-        { provide: APP_DATA_SERVICES_MAP, useValue: new Map() },
+        //{ provide: APP_DATA_SERVICES_MAP, useValue: new Map() },
         { provide: Location, useValue: locationStub },
         provideMockStore({}),
       ],

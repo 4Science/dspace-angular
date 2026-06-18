@@ -10,21 +10,21 @@ import {
   Input,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { DSpaceObjectDataService } from '@dspace/core/data/dspace-object-data.service';
-import { PaginationComponentOptions } from '@dspace/core/pagination/pagination-component-options.model';
-import { getDSORoute } from '@dspace/core/router/utils/dso-route.utils';
-import { getFirstSucceededRemoteDataPayload } from '@dspace/core/shared/operators';
-import { URLCombiner } from '@dspace/core/url-combiner/url-combiner';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { getDSORoute } from '../../app-routing-paths'
 import { Audit } from '../../core/audit/model/audit.model';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
+import { DSpaceObjectDataService } from '../../core/data/dspace-object-data.service';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
+import { getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
+import { URLCombiner } from '../../core/url-combiner/url-combiner';
 import { PaginationComponent } from '../../shared/pagination/pagination.component';
+import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { StringReplacePipe } from '../../shared/utils/string-replace.pipe';
 import { VarDirective } from '../../shared/utils/var.directive';
 

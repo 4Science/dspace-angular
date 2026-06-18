@@ -12,9 +12,6 @@ import {
   Router,
   RouterLink,
 } from '@angular/router';
-import { AuditDataService } from '@dspace/core/data/audit-data.service';
-import { PaginationComponentOptions } from '@dspace/core/pagination/pagination-component-options.model';
-import { getDSORoute } from '@dspace/core/router/utils/dso-route.utils';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   forkJoin,
@@ -28,9 +25,11 @@ import {
   tap,
 } from 'rxjs/operators';
 
+import { getDSORoute } from '../../app-routing-paths';
 import { Audit } from '../../core/audit/model/audit.model';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
 import { SortDirection } from '../../core/cache/models/sort-options.model';
+import { AuditDataService } from '../../core/data/audit-data.service';
 import { CollectionDataService } from '../../core/data/collection-data.service';
 import { DSpaceObjectDataService } from '../../core/data/dspace-object-data.service';
 import { FindListOptions } from '../../core/data/find-list-options.model';
@@ -42,6 +41,7 @@ import {
   getFirstCompletedRemoteData,
   getFirstSucceededRemoteDataPayload,
 } from '../../core/shared/operators';
+import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { AuditTableComponent } from '../audit-table/audit-table.component';
 /**
  * Component displaying a list of all audit about a object in a paginated table

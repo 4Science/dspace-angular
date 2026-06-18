@@ -6,17 +6,17 @@ import {
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Audit } from '@dspace/core/audit/model/audit.model';
-import { DSONameService } from '@dspace/core/breadcrumbs/dso-name.service';
-import { DSpaceObjectDataService } from '@dspace/core/data/dspace-object-data.service';
-import { PaginatedList } from '@dspace/core/data/paginated-list.model';
-import { DSpaceObject } from '@dspace/core/shared/dspace-object.model';
-import { AuditMock } from '@dspace/core/testing/audit.mock';
-import { DSONameServiceMock } from '@dspace/core/testing/dso-name.service.mock';
-import { createSuccessfulRemoteDataObject$ } from '@dspace/core/utilities/remote-data.utils';
 import { TranslateModule } from '@ngx-translate/core';
 import { PaginationComponent } from 'src/app/shared/pagination/pagination.component';
 
+import { Audit } from '../../core/audit/model/audit.model';
+import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
+import { DSpaceObjectDataService } from '../../core/data/dspace-object-data.service';
+import { PaginatedList } from '../../core/data/paginated-list.model';
+import { DSpaceObject } from '../../core/shared/dspace-object.model';
+import { DSONameServiceMock } from '../../shared/mocks/dso-name.service.mock';
+import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
+import { AuditMock } from '../../shared/testing/audit.mock';
 import { AuditTableComponent } from './audit-table.component';
 
 describe('AuditTableComponent', () => {
