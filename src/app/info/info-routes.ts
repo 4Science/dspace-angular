@@ -9,6 +9,7 @@ import { notifyInfoGuard } from '../core/coar-notify/notify-info/notify-info.gua
 import { feedbackGuard } from '../core/feedback/feedback.guard';
 import { hasValue } from '../shared/empty.util';
 import { AccessibilitySettingsComponent } from './accessibility-settings/accessibility-settings.component';
+import { CmsInfoComponent } from './cms-info/cms-info.component';
 import { ThemedEndUserAgreementComponent } from './end-user-agreement/themed-end-user-agreement.component';
 import { ThemedFeedbackComponent } from './feedback/themed-feedback.component';
 import {
@@ -20,7 +21,6 @@ import {
 } from './info-routing-paths';
 import { NotifyInfoComponent } from './notify-info/notify-info.component';
 import { ThemedPrivacyComponent } from './privacy/themed-privacy.component';
-import {CmsInfoComponent} from "./cms-info/cms-info.component";
 
 function cmsInfoRoute(qualifier: string, schema: string): Route {
   return {

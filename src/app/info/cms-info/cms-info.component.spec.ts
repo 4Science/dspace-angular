@@ -8,7 +8,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MockComponent } from 'ng-mocks';
 import {
   Observable,
-  of as observableOf,
   of,
 } from 'rxjs';
 import { AuthService } from 'src/app/core/auth/auth.service';
@@ -54,13 +53,13 @@ describe('CmsInfoComponent', () => {
     redirectUrl = 'redirect/url';
     token = new AuthTokenInfo('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9');
     authService = jasmine.createSpyObj('authService', {
-      isAuthenticated: observableOf(true),
+      isAuthenticated: of(true),
       getToken: token,
     });
     store = jasmine.createSpyObj('store', ['dispatch']);
     activatedRouteStub = {
-      data: observableOf({ schema: 'cris', qualifier: 'testQualifier' }),
-      queryParamMap: observableOf({}),
+      data: of({ schema: 'cris', qualifier: 'testQualifier' }),
+      queryParamMap: of({}),
     };
     siteServiceStub = {
       find(): Observable<Site> {

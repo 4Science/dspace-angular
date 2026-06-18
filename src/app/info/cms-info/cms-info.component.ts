@@ -1,6 +1,4 @@
-import {
-  AsyncPipe,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -22,11 +20,10 @@ import { MarkdownViewerComponent } from '../../shared/markdown-viewer/markdown-v
   selector: 'ds-cms-info',
   templateUrl: './cms-info.component.html',
   styleUrls: ['./cms-info.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
-    TranslateModule,
     MarkdownViewerComponent,
+    TranslateModule,
   ],
 })
 export class CmsInfoComponent implements OnInit {
