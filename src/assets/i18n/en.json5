@@ -2082,7 +2082,9 @@
 
   "cookies.consent.app.title.google-recaptcha-registration": "Google reCaptcha",
 
-  "cookies.consent.app.description.google-recaptcha": "We use google reCAPTCHA service during registration and password recovery",
+  "cookies.consent.app.description.google-recaptcha": "We use google reCAPTCHA service during the send feedback form",
+
+  "cookies.consent.app.description.google-recaptcha-registration": "We use google reCAPTCHA service during registration and password recovery",
 
   "cookies.consent.app.title.matomo": "Matomo",
 
