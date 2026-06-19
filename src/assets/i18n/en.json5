@@ -3862,6 +3862,8 @@
 
   "menu.section.statistics": "Statistics",
 
+  "menu.section.subscription": "Subscription",
+
   "menu.section.statistics.item": "Item Statistics",
 
   "menu.section.statistics.workflow": "Workflow",
@@ -4025,6 +4027,8 @@
   "nav.main.description": "Main navigation bar",
 
   "nav.mydspace": "MyDSpace",
+
+  "nav.processes": "My Processes",
 
   "nav.profile": "Profile",
 
@@ -6443,6 +6447,10 @@
   "subscriptions.modal.delete-info": "To remove this subscription, please visit the \"Subscriptions\" page under your user profile",
 
   "subscriptions.modal.new-subscription-form.type.content": "Content",
+
+  "subscriptions.modal.new-subscription-form.type.content+statistics": "Content and Statistics",
+
+  "subscriptions.modal.new-subscription-form.type.statistics": "Statistics",
 
   "subscriptions.modal.new-subscription-form.frequency.D": "Daily",
 
