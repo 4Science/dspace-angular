@@ -3,25 +3,15 @@ import {
   TestBed,
 } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import { MockComponent } from 'ng-mocks';
 import {
   Observable,
   of,
 } from 'rxjs';
-import { AuthService } from 'src/app/core/auth/auth.service';
-import { AuthTokenInfo } from 'src/app/core/auth/models/auth-token-info.model';
-import { ObjectCacheService } from 'src/app/core/cache/object-cache.service';
 import { SiteDataService } from 'src/app/core/data/site-data.service';
 import { LocaleService } from 'src/app/core/locale/locale.service';
-import { CookieService } from 'src/app/core/services/cookie.service';
-import {
-  NativeWindowRef,
-  NativeWindowService,
-} from 'src/app/core/services/window.service';
 import { Site } from 'src/app/core/shared/site.model';
-import { CookieServiceMock } from 'src/app/shared/mocks/cookie.service.mock';
 
 import { MarkdownViewerComponent } from '../../shared/markdown-viewer/markdown-viewer.component';
 import { CmsInfoComponent } from './cms-info.component';
@@ -29,10 +19,7 @@ import { CmsInfoComponent } from './cms-info.component';
 describe('CmsInfoComponent', () => {
   let component: CmsInfoComponent;
   let fixture: ComponentFixture<CmsInfoComponent>;
-  let authService: AuthService;
-  let token: AuthTokenInfo;
-  let store;
-  let redirectUrl: string;
+  let localeServiceSpy: jasmine.SpyObj<LocaleService>;
   let activatedRouteStub: any;
   let siteServiceStub: any;
 
@@ -50,13 +37,8 @@ describe('CmsInfoComponent', () => {
   });
 
   beforeEach(async () => {
-    redirectUrl = 'redirect/url';
-    token = new AuthTokenInfo('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9');
-    authService = jasmine.createSpyObj('authService', {
-      isAuthenticated: of(true),
-      getToken: token,
-    });
-    store = jasmine.createSpyObj('store', ['dispatch']);
+    localeServiceSpy = jasmine.createSpyObj('LocaleService', ['getCurrentLanguageCode']);
+    localeServiceSpy.getCurrentLanguageCode.and.returnValue(of('en'));
     activatedRouteStub = {
       data: of({ schema: 'cris', qualifier: 'testQualifier' }),
       queryParamMap: of({}),
@@ -73,13 +55,8 @@ describe('CmsInfoComponent', () => {
         MockComponent(MarkdownViewerComponent),
       ],
       providers: [
-        LocaleService,
-        ObjectCacheService,
         { provide: SiteDataService, useValue: siteServiceStub },
-        { provide: Store, useValue: store },
-        { provide: AuthService, useValue: authService },
-        { provide: CookieService, useValue: new CookieServiceMock },
-        { provide: NativeWindowService, useValue: new NativeWindowRef() },
+        { provide: LocaleService, useValue: localeServiceSpy },
         { provide: ActivatedRoute, useValue: activatedRouteStub },
       ],
     })
