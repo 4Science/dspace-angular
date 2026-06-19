@@ -14,15 +14,22 @@ import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
 import { AuthService } from '../../../core/auth/auth.service';
+import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
 import { FeedbackDataService } from '../../../core/feedback/feedback-data.service';
 import { Feedback } from '../../../core/feedback/models/feedback.model';
+import { GoogleRecaptchaService } from '../../../core/google-recaptcha/google-recaptcha.service';
+import { CookieService } from '../../../core/services/cookie.service';
 import { RouteService } from '../../../core/services/route.service';
 import { NativeWindowService } from '../../../core/services/window.service';
+import { AlertComponent } from '../../../shared/alert/alert.component';
 import { BtnDisabledDirective } from '../../../shared/btn-disabled.directive';
 import { ErrorComponent } from '../../../shared/error/error.component';
+import { GoogleRecaptchaComponent } from '../../../shared/google-recaptcha/google-recaptcha.component';
+import { CookieServiceMock } from '../../../shared/mocks/cookie.service.mock';
 import { NativeWindowMockFactory } from '../../../shared/mocks/mock-native-window-ref';
 import { RouterMock } from '../../../shared/mocks/router.mock';
 import { NotificationsService } from '../../../shared/notifications/notifications.service';
+import { createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
 import { AuthServiceStub } from '../../../shared/testing/auth-service.stub';
 import { EPersonMock } from '../../../shared/testing/eperson.mock';
 import { NotificationsServiceStub } from '../../../shared/testing/notifications-service.stub';
@@ -37,6 +44,7 @@ describe('FeedbackFormComponent', () => {
   const notificationService = new NotificationsServiceStub();
   const feedbackDataServiceStub = jasmine.createSpyObj('feedbackDataService', {
     create: of(new Feedback()),
+    createWithCaptcha: of(new Feedback()),
   });
   const authService: AuthServiceStub = Object.assign(new AuthServiceStub(), {
     getAuthenticatedUserFromStore: () => {
@@ -44,6 +52,11 @@ describe('FeedbackFormComponent', () => {
     },
   });
   const routerStub = new RouterMock();
+
+  const configurationDataService = jasmine.createSpyObj('configurationDataService', {
+    findByPropertyName: jasmine.createSpy('findByPropertyName'),
+  });
+  const confResponseDisabled$ = createSuccessfulRemoteDataObject$({ values: ['false'] });
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -56,12 +69,18 @@ describe('FeedbackFormComponent', () => {
         { provide: AuthService, useValue: authService },
         { provide: NativeWindowService, useFactory: NativeWindowMockFactory },
         { provide: Router, useValue: routerStub },
+        { provide: ConfigurationDataService, useValue: configurationDataService },
+        { provide: CookieService, useValue: new CookieServiceMock() },
+        { provide: GoogleRecaptchaService, useValue: {} },
       ],
       schemas: [NO_ERRORS_SCHEMA],
-    }).overrideComponent(FeedbackFormComponent, { remove: { imports: [ErrorComponent] } }).compileComponents();
+    }).overrideComponent(FeedbackFormComponent, {
+      remove: { imports: [ErrorComponent, GoogleRecaptchaComponent, AlertComponent] },
+    }).compileComponents();
   }));
 
   beforeEach(() => {
+    configurationDataService.findByPropertyName.and.returnValue(confResponseDisabled$);
     fixture = TestBed.createComponent(FeedbackFormComponent);
     component = fixture.componentInstance;
     de = fixture.debugElement;
@@ -97,10 +116,10 @@ describe('FeedbackFormComponent', () => {
       expect(de.query(By.css('button')).nativeElement.classList.contains('disabled')).toBeFalse();
     });
 
-    it('on submit should call createFeedback of feedbackDataServiceStub service', () => {
+    it('on submit should call createWithCaptcha of feedbackDataServiceStub service', () => {
       component.createFeedback();
       fixture.detectChanges();
-      expect(feedbackDataServiceStub.create).toHaveBeenCalled();
+      expect(feedbackDataServiceStub.createWithCaptcha).toHaveBeenCalled();
     });
   });
 

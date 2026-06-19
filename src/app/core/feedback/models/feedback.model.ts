@@ -30,6 +30,12 @@ export class Feedback extends DSpaceObject {
   @autoserialize
   public page: string;
 
+  /**
+   * Google reCAPTCHA token for spam protection
+   */
+  @autoserialize
+  public captcha: string;
+
   _links: {
     self: HALLink;
   };

@@ -131,7 +131,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
       this.orejimeService.watchConsentUpdates();
 
       this.hasLoadedThirdPartyMetrics$ = combineLatest([
-        this.orejimeService.consentsUpdates$.pipe(
+        this.orejimeService.consentsUpdates$?.pipe(
           filter(consents => isNotEmpty(consents)),
         ),
         this.dso.metrics?.pipe(
