@@ -51,7 +51,8 @@ import {
   RetrieveAuthMethodsErrorAction,
   RetrieveAuthMethodsSuccessAction,
   RetrieveTokenAction,
-  SetUserAsIdleAction
+  SetRedirectUrlAndNavigateAction,
+  SetUserAsIdleAction,
 } from './auth.actions';
 import { hasValue, isNotNull } from '../../shared/empty.util';
 import { Router } from '@angular/router';
@@ -122,6 +123,13 @@ export class AuthEffects {
       this.authService.navigateToRedirectUrl(action.payload);
     })
   ), { dispatch: false });
+
+  public redirectAndNavigate$: Observable<Action> = createEffect(() => this.actions$
+    .pipe(ofType(AuthActionTypes.SET_REDIRECT_URL_AND_NAVIGATE),
+      tap((action: SetRedirectUrlAndNavigateAction) => this.router.navigate([decodeURIComponent(action.payload.navigateUrl)])),
+    ),
+  { dispatch: false },
+  );
 
   // It means "reacts to this action but don't send another"
   public authenticatedError$: Observable<Action> = createEffect(() => this.actions$.pipe(
