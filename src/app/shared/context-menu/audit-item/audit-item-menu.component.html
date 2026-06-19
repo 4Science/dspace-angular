@@ -1,6 +1,6 @@
 @if ((isAuthorized$ | async)) {
   <button class="dropdown-item"
     [innerHTML]="'context-menu.actions.audit-item.btn' | translate"
-    [routerLink]="['/auditlogs/object/', contextMenuObject.id]">
+    [routerLink]="link">
   </button>
 }

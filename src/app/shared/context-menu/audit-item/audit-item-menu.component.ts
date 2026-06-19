@@ -12,10 +12,12 @@ import {
 } from 'rxjs';
 import { take } from 'rxjs/operators';
 
+import { getDSORoute } from '../../../app-routing-paths';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
+import { URLCombiner } from '../../../core/url-combiner/url-combiner';
 import { ContextMenuEntryComponent } from '../context-menu-entry.component';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 
@@ -55,5 +57,9 @@ export class AuditItemMenuComponent extends ContextMenuEntryComponent implements
     ).subscribe(([isAdmin, isCollectionAdmin, isCommunityAdmin]) => {
       this.isAuthorized$.next(isAdmin || isCommunityAdmin || isCollectionAdmin);
     });
+  }
+
+  get link() {
+    return new URLCombiner(getDSORoute(this.contextMenuObject), 'auditlogs').toString();
   }
 }

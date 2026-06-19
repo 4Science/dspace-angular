@@ -15,7 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { getDSORoute } from '../../app-routing-paths'
+import { getDSORoute } from '../../app-routing-paths';
 import { Audit } from '../../core/audit/model/audit.model';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
 import { DSpaceObjectDataService } from '../../core/data/dspace-object-data.service';
