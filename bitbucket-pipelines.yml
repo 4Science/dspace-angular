@@ -6,7 +6,7 @@ definitions:
     - step: &unittest-code-checks
         name: test-code-checks
         image:
-          name: cypress/browsers:node-18.20.3-chrome-125.0.6422.141-1-ff-126.0.1-edge-125.0.2535.85-1
+          name: cypress/browsers:node-22.21.0-chrome-141.0.7390.107-1-ff-144.0-edge-141.0.3537.92-1
           run-as-user: 1000
         size: 4x
         caches:
