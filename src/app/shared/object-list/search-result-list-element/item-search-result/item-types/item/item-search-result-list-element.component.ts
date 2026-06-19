@@ -118,7 +118,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
       this.klaroService.watchConsentUpdates();
 
       this.hasLoadedThirdPartyMetrics$ = combineLatest([
-        this.klaroService.consentsUpdates$.pipe(
+        this.klaroService.consentsUpdates$?.pipe(
           filter(consents => isNotEmpty(consents)),
         ),
         this.dso.metrics?.pipe(

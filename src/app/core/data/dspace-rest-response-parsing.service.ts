@@ -60,9 +60,9 @@ export function isRestPaginatedList(halObj: any): boolean {
  * @param url the url to split
  */
 const splitUrlInParts = (url: string): string[] => {
-  return url.split('?')
-    .map((part) => part.split('&'))
-    .reduce((combined, current) => [...combined, ...current]);
+  // Compare link structure only, ignoring query params and hash fragments.
+  const normalizedUrl = url.split('?')[0].split('#')[0];
+  return normalizedUrl.split('/');
 };
 
 @Injectable({ providedIn: 'root' })
