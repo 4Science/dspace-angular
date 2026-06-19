@@ -84,8 +84,8 @@ import {
   truncatableReducer,
   TruncatablesState,
 } from './shared/truncatable/truncatable.reducer';
-import { AuthorizationsState } from "./core/data/feature-authorization/authorization.interfaces";
-import { authorizationReducer } from "./core/data/feature-authorization/authorization.reducer";
+import { AuthorizationsState } from "./shared/authorizations/authorization.interfaces";
+import { authorizationReducer } from "./shared/authorizations/authorization.reducer";
 
 export interface AppState {
   router: RouterReducerState;

@@ -1,4 +1,4 @@
-import { FeatureID } from './feature-id';
+import { FeatureID } from "../../core/data/feature-authorization/feature-id";
 
 export interface AuthorizationFeaturesConfig {
   [key: string]: FeatureID[]

@@ -59,7 +59,7 @@ import { BuildConfig } from '../../config/build-config.interface';
 import { extendEnvironmentWithAppConfig } from '../../config/config.util';
 import { DefaultAppConfig } from '../../config/default-app-config';
 import { environment } from '../../environments/environment';
-import { AuthorizationService } from '../../app/core/data/feature-authorization/authorization.service';
+import { AuthorizationService } from "src/app/shared/authorizations/authorization.service";
 
 /**
  * Performs client-side initialization.

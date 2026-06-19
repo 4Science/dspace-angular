@@ -1,5 +1,4 @@
-import { DiscoveryConfigurationFeaturesConfig } from "src/app/core/data/feature-authorization/authorization.interfaces";
-import { FeatureID } from "src/app/core/data/feature-authorization/feature-id";
+import { FeatureID } from '../app/core/data/feature-authorization/feature-id';
 import { AccessibilitySettingsConfig } from '../app/accessibility/accessibility-settings.config';
 import { AdminNotifyMetricsRow } from '../app/admin/admin-notify-dashboard/admin-notify-metrics/admin-notify-metrics.model';
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
@@ -57,6 +56,7 @@ import { ServerConfig } from './server-config.interface';
 import { SubmissionConfig } from './submission-config.interface';
 import { ThemeConfig } from './theme.config';
 import { UIServerConfig } from './ui-server-config.interface';
+import { DiscoveryConfigurationFeaturesConfig } from "../app/shared/authorizations/authorization.interfaces";
 
 export class DefaultAppConfig implements AppConfig {
   production = false;
@@ -169,6 +169,8 @@ export class DefaultAppConfig implements AppConfig {
     FeatureID.EPersonForgotPassword,
     FeatureID.CanCorrectItem,
     FeatureID.CanSubmit,
+    FeatureID.CoarNotifyEnabled,
+    FeatureID.CanSeeQA,
   ];
 
   discoveryAuthorizationFeaturesConfig: DiscoveryConfigurationFeaturesConfig = {

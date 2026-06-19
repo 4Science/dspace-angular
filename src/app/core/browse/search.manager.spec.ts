@@ -130,6 +130,11 @@ describe('SearchManager', () => {
       of(createSuccessfulRemoteDataObject(createPaginatedList([]))),
   };
 
+  const mockAuthorizationService: any = {
+    getObjectsAuthorizations: (uuidList: string[], uniqueType: string, featuresId?: FeatureID[]) =>
+      of([])
+  };
+
   function initTestService() {
     return new SearchManager(mockItemService, mockBrowseService, mockSearchService, mockAuthorizationService, appConfig as AppConfig);
   }

@@ -63,7 +63,7 @@ import { ServerSubmissionService } from '../../app/submission/server-submission.
 import { SubmissionService } from '../../app/submission/submission.service';
 import { TranslateServerLoader } from '../../ngx-translate-loaders/translate-server.loader';
 import { ServerInitService } from './server-init.service';
-import { AuthorizationService } from "src/app/core/data/feature-authorization/authorization.service";
+import { AuthorizationService } from "../../app/shared/authorizations/authorization.service";
 
 export function createTranslateLoader(transferState: TransferState) {
   return new TranslateServerLoader(transferState, 'dist/server/assets/i18n/', '.json');

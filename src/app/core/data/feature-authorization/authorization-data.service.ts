@@ -42,8 +42,9 @@ import { RequestService } from '../request.service';
 import { SiteDataService } from '../site-data.service';
 import { AuthorizationSearchParams } from './authorization-search-params';
 import { getAuthorizationFeaturesIDs, getNormalizedUuid, getRequestIdFromParams, oneAuthorizationMatchesFeature } from './authorization-utils';
-import { AuthorizationService } from "./authorization.service";
 import { FeatureID } from './feature-id';
+import { AuthorizationService } from "../../../shared/authorizations/authorization.service";
+import { ObjectAuthorizationsState } from "../../../shared/authorizations/authorization.interfaces";
 
 /**
  * A service to retrieve {@link Authorization}s from the REST API
@@ -114,7 +115,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
           return dsoRequest$.pipe(
             take(1),
             // Get correct item and check that has not already pending authorizations
-            switchMap((object) => this.readOrFetchAuthorization(object, featureId)),
+            switchMap((object) => this.readOrFetchAuthorization(object, featureId, !objectUrl)),
           );
         } else {
           // we fallback on old method if site service had initialization issues or if some parameters more than the only feature ID are provided.
@@ -135,45 +136,58 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
     );
   }
 
+  private readOrFetchAuthorization(dso: DSpaceObject, featureId: FeatureID, isSite = false): Observable<boolean> {
+    const requestId = getRequestIdFromParams(dso.uniqueType, [getNormalizedUuid(dso)], [featureId]);
+    // if is the site init we wait for the authorization to be loaded otherwise services that run on resolver won't find a state.
+    const waitForEntry$: Observable<boolean> = isSite
+      ? this.hasEntryForHref$(dso.self).pipe(
+        filter((hasEntry) => hasEntry),
+        take(1),
+      )
+      : observableOf(true);
+
+    return waitForEntry$.pipe(
+      switchMap(() =>
+        this.authorizationService.getAuthorizationForObject(featureId, dso.self).pipe(
+          take(1),
+          switchMap((authorization) => {
+            if (authorization !== undefined) {
+              // Authorization is already cached → return it directly
+              return observableOf(authorization);
+            }
+            // Authorization is not cached → trigger fetch
+            this.authorizationService.initStateForObjects(
+              [getNormalizedUuid(dso)],
+              dso.uniqueType,
+              [featureId],
+              [dso.self],
+            );
+            // Wait for loading to complete, then read authorization again
+            return this.authorizationService.isRequestLoading(requestId).pipe(
+              distinctUntilChanged(),
+              filter(isLoading => !isLoading),
+              take(1), // Ensure we only continue after loading finishes
+              switchMap(() =>
+                this.authorizationService.getAuthorizationForObject(featureId, dso.self).pipe(
+                  filter(result => result !== undefined), // Ensure we only emit valid results
+                  take(1),
+                ),
+              ),
+            );
+          }),
+        ),
+      ),
+    );
+  }
+
   /**
-   * Get the authorization from the state, if not present we fetch them for the first time and wait for the state update
-   * @param dso
-   * @param featureId
+   * Emits `true` once the store contains an authorization entry keyed by the given href.
+   * Used to make sure site-level authorization state has been initialized before
+   * reading/fetching from it (avoids racing the initial site authorization request).
    * @private
    */
-  private readOrFetchAuthorization(dso: DSpaceObject, featureId: FeatureID): Observable<boolean> {
-    const requestId = getRequestIdFromParams(dso.uniqueType, [getNormalizedUuid(dso)], [featureId]);
-
-    return this.authorizationService.getAuthorizationForObject(featureId, dso.self).pipe(
-      take(1),
-      switchMap((authorization) => {
-        if (authorization !== undefined) {
-          // Authorization is already cached — return it directly
-          return observableOf(authorization);
-        }
-
-        // Authorization is not cached — trigger fetch
-        this.authorizationService.initStateForObjects(
-          [getNormalizedUuid(dso)],
-          dso.uniqueType,
-          [featureId],
-          [dso.self]
-        );
-
-        // Now wait for loading to complete, then fetch authorization again
-        return this.authorizationService.isRequestLoading(requestId).pipe(
-          distinctUntilChanged(),
-          filter(isLoading => !isLoading),
-          take(1), // Ensure we only continue after loading finishes
-          switchMap(() =>
-            this.authorizationService.getAuthorizationForObject(featureId, dso.self).pipe(
-              filter(result => result !== undefined), // Ensure we only emit valid results
-              take(1),
-            )
-          )
-        );
-      })
-    );
+  private hasEntryForHref$(href: string): Observable<boolean> {
+    return this.authorizationService.hasAuthorizationEntryForObject(href);
   }
 
 

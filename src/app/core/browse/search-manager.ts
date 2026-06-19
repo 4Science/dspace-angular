@@ -34,11 +34,11 @@ import { getFirstCompletedRemoteData } from '../shared/operators';
 import { SearchService } from '../shared/search/search.service';
 import { BrowseService } from './browse.service';
 import { BrowseEntrySearchOptions } from './browse-entry-search-options.model';
-import { AuthorizationService } from "../data/feature-authorization/authorization.service";
 import { AppConfig, APP_CONFIG } from "src/config/app-config.interface";
 import { getRequestIdFromParams } from "../data/feature-authorization/authorization-utils";
 import { FeatureID } from "../data/feature-authorization/feature-id";
 import { SearchOptions } from "src/app/shared/search/models/search-options.model";
+import { AuthorizationService } from "../../shared/authorizations/authorization.service";
 
 /**
  * The service aims to manage browse requests and subsequent extra fetch requests.

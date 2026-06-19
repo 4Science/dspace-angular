@@ -46,8 +46,8 @@ import { dsDynamicFormControlMapFn } from './shared/form/builder/ds-dynamic-form
 import { MenuService } from './shared/menu/menu.service';
 import { ThemeService } from './shared/theme-support/theme.service';
 import { Angulartics2DSpace } from './statistics/angulartics/dspace-provider';
+import { AuthorizationService } from "./shared/authorizations/authorization.service";
 
-import { AuthorizationService } from './core/data/feature-authorization/authorization.service';
 
 /**
  * Performs the initialization of the app.
