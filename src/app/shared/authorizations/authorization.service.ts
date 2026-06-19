@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { createFeatureSelector, createSelector, select, Store } from '@ngrx/store';
-import {
-  AuthorizationsState,
-  ObjectAuthorizationsState
-} from './authorization.interfaces';
-import { distinctUntilChanged, map, take } from 'rxjs/operators';
-import { AppState } from '../../../app.reducer';
-import { FeatureID } from './feature-id';
-import { hasValue } from '../../../shared/empty.util';
-import { GetAuthorizationsAction } from './authorization.actions';
-import { SiteDataService } from '../site-data.service';
-import { Site } from '../../shared/site.model';
+
+import { distinctUntilChanged, filter, find, map, switchMap, take } from 'rxjs/operators';
+import { AuthorizationsState, ObjectAuthorizationsState } from "src/app/shared/authorizations/authorization.interfaces";
+import { SiteDataService } from "../../core/data/site-data.service";
+import { AppState } from "../../app.reducer";
+import { FeatureID } from "../../core/data/feature-authorization/feature-id";
+import { GetAuthorizationsAction } from "./authorization.actions";
+import { Site } from "../../core/shared/site.model";
+import { hasValue } from "../empty.util";
 
 export const authorizationsSelector = createFeatureSelector<AuthorizationsState>('authorizationFeatures');
 
@@ -84,6 +82,18 @@ export class AuthorizationService {
           return objectUrl && state[objectUrl] ? state[objectUrl][featureId] : undefined;
         }
         return undefined;
+      }),
+      distinctUntilChanged(),
+    );
+  }
+
+  hasAuthorizationEntryForObject(objectUrl: string): Observable<boolean> {
+    return this.getAllAuthorizationsState().pipe(
+      map(state => {
+        if (hasValue(state)) {
+          return hasValue(state[objectUrl])
+        }
+        return false;
       }),
       distinctUntilChanged(),
     );

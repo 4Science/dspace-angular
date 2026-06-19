@@ -36,7 +36,7 @@ import {
 } from '../../config/app-config.interface';
 import { BuildConfig } from '../../config/build-config.interface';
 import { environment } from '../../environments/environment';
-import { AuthorizationService } from '../../app/core/data/feature-authorization/authorization.service';
+import { AuthorizationService } from "../../app/shared/authorizations/authorization.service";
 
 /**
  * Performs server-side initialization.

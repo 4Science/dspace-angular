@@ -1,12 +1,10 @@
 /* eslint-disable max-classes-per-file */
 
-import { type } from '../../../shared/ngrx/type';
 import { Action } from '@ngrx/store';
-import { FeatureID } from './feature-id';
-import {
-  AuthorizationActionPayload, AuthorizationsState,
-  ObjectAuthorizationsState
-} from './authorization.interfaces';
+import { AuthorizationActionPayload, AuthorizationsState, ObjectAuthorizationsState } from "src/app/shared/authorizations/authorization.interfaces";
+import { type } from "../ngrx/type";
+import { FeatureID } from "src/app/core/data/feature-authorization/feature-id";
+
 
 
 /**

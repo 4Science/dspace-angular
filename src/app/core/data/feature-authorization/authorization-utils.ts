@@ -23,8 +23,8 @@ import { getFirstCompletedRemoteData, getFirstSucceededRemoteDataPayload } from 
 import { SiteDataService } from '../site-data.service';
 import { AuthorizationSearchParams } from './authorization-search-params';
 import { FeatureID } from './feature-id';
-import { ObjectAuthorizationFeaturesMap, ObjectAuthorizationsState } from "./authorization.interfaces";
 import { DSpaceObject } from "../../shared/dspace-object.model";
+import { ObjectAuthorizationFeaturesMap, ObjectAuthorizationsState } from "src/app/shared/authorizations/authorization.interfaces";
 
 /**
  * Operator accepting {@link AuthorizationSearchParams} and adding the current {@link Site}'s selflink to the parameter's

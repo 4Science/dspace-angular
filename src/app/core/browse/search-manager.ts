@@ -34,7 +34,7 @@ import { getFirstCompletedRemoteData } from '../shared/operators';
 import { SearchService } from '../shared/search/search.service';
 import { BrowseService } from './browse.service';
 import { BrowseEntrySearchOptions } from './browse-entry-search-options.model';
-import { AuthorizationService } from '../data/feature-authorization/authorization.service';
+import { AuthorizationService } from "../../shared/authorizations/authorization.service";
 import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
 import { FeatureID } from "../data/feature-authorization/feature-id";
 import { getRequestIdFromParams } from "../data/feature-authorization/authorization-utils";

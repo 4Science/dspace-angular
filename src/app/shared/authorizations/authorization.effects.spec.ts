@@ -5,13 +5,14 @@ import { StoreModule } from '@ngrx/store';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of } from 'rxjs';
 import { AuthorizationEffects } from './authorization.effects';
-import { mockAuthSiteObject } from './authorizations.mock';
 import { authorizationReducer } from './authorization.reducer';
 import { AuthorizationActionTypes, GetAuthorizationsAction, GetAuthorizationsErrorAction, GetAuthorizationsSuccessAction } from './authorization.actions';
-import { environment } from '../../../../environments/environment';
-import { AuthorizationDataService } from './authorization-data.service';
-import { AuthorizationDataServiceStub } from '../../../shared/testing/authorization-service.stub';
-import { getRequestIdFromParams } from './authorization-utils';
+import { AuthorizationDataServiceStub } from "../testing/authorization-service.stub";
+import { environment } from "src/environments/environment";
+import { AuthorizationDataService } from "src/app/core/data/feature-authorization/authorization-data.service";
+import { mockAuthSiteObject } from "src/app/core/data/feature-authorization/authorizations.mock";
+import { getRequestIdFromParams } from "src/app/core/data/feature-authorization/authorization-utils";
+
 
 
 let authorizationEffects: AuthorizationEffects;

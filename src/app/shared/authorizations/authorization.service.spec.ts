@@ -1,15 +1,16 @@
 import { StoreModule } from '@ngrx/store';
 import { AuthorizationService } from './authorization.service';
 import { of } from 'rxjs';
-import { SiteDataService } from '../site-data.service';
-import { environment } from '../../../../environments/environment';
-import { mockAuthSiteObject } from './authorizations.mock';
+
 import { GetAuthorizationsAction } from './authorization.actions';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { authorizationReducer } from './authorization.reducer';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { FeatureID } from './feature-id';
+import { FeatureID } from "src/app/core/data/feature-authorization/feature-id";
+import { SiteDataService } from "src/app/core/data/site-data.service";
+import { mockAuthSiteObject } from "src/app/core/data/feature-authorization/authorizations.mock";
+import { environment } from "src/environments/environment";
 
 
 describe('AuthorizationService', () => {

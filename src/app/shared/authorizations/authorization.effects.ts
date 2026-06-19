@@ -4,9 +4,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   AuthorizationActionTypes, GetAuthorizationsAction, GetAuthorizationsErrorAction, GetAuthorizationsSuccessAction,
 } from './authorization.actions';
-import { AuthorizationDataService } from './authorization-data.service';
 import { of } from 'rxjs';
-import { getRequestIdFromParams } from './authorization-utils';
+import { getRequestIdFromParams } from "../../core/data/feature-authorization/authorization-utils";
+import { AuthorizationDataService } from "../../core/data/feature-authorization/authorization-data.service";
 
 
 @Injectable()

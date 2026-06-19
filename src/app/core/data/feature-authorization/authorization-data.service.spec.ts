@@ -21,6 +21,7 @@ import { FindListOptions } from '../find-list-options.model';
 import { SiteDataService } from '../site-data.service';
 import { AuthorizationDataService } from './authorization-data.service';
 import { FeatureID } from './feature-id';
+import { AuthorizationService } from "src/app/shared/authorizations/authorization.service";
 
 describe('AuthorizationDataService', () => {
   let service: AuthorizationDataService;

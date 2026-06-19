@@ -56,8 +56,8 @@ import { ServerConfig } from './server-config.interface';
 import { SubmissionConfig } from './submission-config.interface';
 import { ThemeConfig } from './theme.config';
 import { UIServerConfig } from './ui-server-config.interface';
-import { DiscoveryConfigurationFeaturesConfig } from "src/app/core/data/feature-authorization/authorization.interfaces";
 import { FeatureID } from "../app/core/data/feature-authorization/feature-id";
+import { DiscoveryConfigurationFeaturesConfig } from "../app/shared/authorizations/authorization.interfaces";
 
 export class DefaultAppConfig implements AppConfig {
   production = false;
@@ -170,6 +170,8 @@ export class DefaultAppConfig implements AppConfig {
     FeatureID.EPersonForgotPassword,
     FeatureID.CanCorrectItem,
     FeatureID.CanSubmit,
+    FeatureID.CoarNotifyEnabled,
+    FeatureID.CanSeeQA,
   ];
 
   discoveryAuthorizationFeaturesConfig: DiscoveryConfigurationFeaturesConfig = {

@@ -1,12 +1,7 @@
-import {
-  AuthorizationAction,
-  AuthorizationActionTypes,
-  GetAuthorizationsAction,
-  GetAuthorizationsErrorAction,
-  GetAuthorizationsSuccessAction,
-} from './authorization.actions';
+import { AuthorizationAction, AuthorizationActionTypes, GetAuthorizationsAction,
+  GetAuthorizationsErrorAction, GetAuthorizationsSuccessAction } from "./authorization.actions";
 import { AuthorizationsState } from './authorization.interfaces';
-import { getRequestIdFromParams } from './authorization-utils';
+import { getRequestIdFromParams } from "src/app/core/data/feature-authorization/authorization-utils";
 
 
 const initialState = Object.create({
