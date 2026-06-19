@@ -3,6 +3,8 @@ import {
   makeStateKey,
   Type,
 } from '@angular/core';
+import { DiscoveryConfigurationFeaturesConfig } from "src/app/core/data/feature-authorization/authorization.interfaces";
+import { FeatureID } from "src/app/core/data/feature-authorization/feature-id";
 
 import { AccessibilitySettingsConfig } from '../app/accessibility/accessibility-settings.config';
 import { AdminNotifyMetricsRow } from '../app/admin/admin-notify-dashboard/admin-notify-metrics/admin-notify-metrics.model';
@@ -111,6 +113,8 @@ interface AppConfig extends Config {
   matomo?: MatomoConfig;
   permanentRedirectPaths?: string[];
   luckySearchRedirects?: LuckySearchRedirectConfig;
+  siteAuthorizationFeaturesConfig: FeatureID[];
+  discoveryAuthorizationFeaturesConfig: DiscoveryConfigurationFeaturesConfig;
 }
 
 /**

@@ -93,7 +93,6 @@ export class WorkspaceitemActionsComponent extends MyDSpaceActionsComponent<Work
     protected translate: TranslateService,
     protected searchService: SearchService,
     protected requestService: RequestService,
-    private authService: AuthService,
     public authorizationService: AuthorizationDataService,
   ) {
     super(WorkspaceItem.type, injector, router, notificationsService, translate, searchService, requestService);
@@ -121,18 +120,7 @@ export class WorkspaceitemActionsComponent extends MyDSpaceActionsComponent<Work
 
 
   ngOnInit(): void {
-    const activeEPerson$ = this.authService.getAuthenticatedUserFromStore();
-
-    this.canEditItem$ = activeEPerson$.pipe(
-      switchMap((eperson) => {
-        return this.object?.item.pipe(
-          getFirstCompletedRemoteData(),
-          getRemoteDataPayload(),
-          switchMap((item: Item) => {
-            return this.authorizationService.isAuthorized(FeatureID.CanEditItem, item?._links?.self.href, eperson.uuid);
-          }),
-        ) as Observable<boolean>;
-      }));
+    this.canEditItem$ = this.authorizationService.isAuthorized(FeatureID.CanEditItem, this.object.self);
   }
 
   /**

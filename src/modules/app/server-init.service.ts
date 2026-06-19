@@ -35,6 +35,7 @@ import {
 } from '../../config/app-config.interface';
 import { BuildConfig } from '../../config/build-config.interface';
 import { environment } from '../../environments/environment';
+import { AuthorizationService } from '../../app/core/data/feature-authorization/authorization.service';
 
 /**
  * Performs server-side initialization.
@@ -53,6 +54,7 @@ export class ServerInitService extends InitService {
     protected breadcrumbsService: BreadcrumbsService,
     protected themeService: ThemeService,
     protected menuService: MenuService,
+    protected authorizationService: AuthorizationService
   ) {
     super(
       store,
@@ -65,6 +67,7 @@ export class ServerInitService extends InitService {
       breadcrumbsService,
       themeService,
       menuService,
+      authorizationService
     );
   }
 
@@ -82,6 +85,8 @@ export class ServerInitService extends InitService {
       this.themeService.listenForThemeChanges(false);
 
       await lastValueFrom(this.authenticationReady$());
+
+      this.authorizationService.initAnonymousStateForSite();
 
       return true;
     };

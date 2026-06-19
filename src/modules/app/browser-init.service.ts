@@ -59,6 +59,7 @@ import { BuildConfig } from '../../config/build-config.interface';
 import { extendEnvironmentWithAppConfig } from '../../config/config.util';
 import { DefaultAppConfig } from '../../config/default-app-config';
 import { environment } from '../../environments/environment';
+import { AuthorizationService } from '../../app/core/data/feature-authorization/authorization.service';
 
 /**
  * Performs client-side initialization.
@@ -88,7 +89,7 @@ export class BrowserInitService extends InitService {
     private requestService: RequestService,
     private halService: HALEndpointService,
     private matomoService: MatomoService,
-
+    protected authorizationService: AuthorizationService
   ) {
     super(
       store,
@@ -101,6 +102,7 @@ export class BrowserInitService extends InitService {
       breadcrumbsService,
       themeService,
       menuService,
+      authorizationService
     );
   }
 
@@ -133,6 +135,8 @@ export class BrowserInitService extends InitService {
       this.trackAuthTokenExpiration();
 
       this.initKlaro();
+
+      this.authorizationService.initStateForSite(this.appConfig.siteAuthorizationFeaturesConfig);
 
       await lastValueFrom(this.authenticationReady$());
 

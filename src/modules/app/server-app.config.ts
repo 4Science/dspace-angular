@@ -63,6 +63,7 @@ import { ServerSubmissionService } from '../../app/submission/server-submission.
 import { SubmissionService } from '../../app/submission/submission.service';
 import { TranslateServerLoader } from '../../ngx-translate-loaders/translate-server.loader';
 import { ServerInitService } from './server-init.service';
+import { AuthorizationService } from "src/app/core/data/feature-authorization/authorization.service";
 
 export function createTranslateLoader(transferState: TransferState) {
   return new TranslateServerLoader(transferState, 'dist/server/assets/i18n/', '.json');
@@ -156,5 +157,9 @@ export const serverAppConfig: ApplicationConfig = mergeApplicationConfig({
       provide: DatadogRumService,
       useClass: ServerDatadogRumService,
     },
+    {
+      provide: AuthorizationService,
+      useClass: AuthorizationService
+    }
   ],
 }, commonAppConfig);
