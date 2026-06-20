@@ -1,7 +1,7 @@
-import { Audit } from '@dspace/core/audit/model/audit.model';
-import { EPerson } from '@dspace/core/eperson/models/eperson.model';
-import { DSpaceObject } from '@dspace/core/shared/dspace-object.model';
-import { createSuccessfulRemoteDataObject$ } from '@dspace/core/utilities/remote-data.utils';
+import { Audit } from '../../core/audit/model/audit.model';
+import { EPerson } from '../../core/eperson/models/eperson.model';
+import { DSpaceObject } from '../../core/shared/dspace-object.model';
+import { createSuccessfulRemoteDataObject$ } from '../remote-data.utils';
 
 export const AuditEPersonMock: EPerson = Object.assign(new EPerson(), {
   handle: null,
