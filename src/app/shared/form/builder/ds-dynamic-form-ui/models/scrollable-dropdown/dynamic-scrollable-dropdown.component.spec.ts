@@ -99,7 +99,6 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
     TestBed.configureTestingModule({
       imports: [
         DynamicFormsCoreModule,
-        DynamicFormsNGBootstrapUIModule,
         FormsModule,
         InfiniteScrollDirective,
         ReactiveFormsModule,
@@ -282,7 +281,6 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
   template: ``,
   imports: [
     DynamicFormsCoreModule,
-    DynamicFormsNGBootstrapUIModule,
     FormsModule,
     InfiniteScrollModule,
     NgbModule,

@@ -8,6 +8,7 @@ import {
 import {
   AsyncPipe,
   isPlatformBrowser,
+  NgClass,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -22,10 +23,7 @@ import {
   PLATFORM_ID,
   SimpleChanges,
 } from '@angular/core';
-import {
-  NgbTooltip,
-  NgbTooltipModule,
-} from '@ng-bootstrap/ng-bootstrap';
+import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import {
   TranslateModule,
   TranslateService,
@@ -57,8 +55,9 @@ const TOOLTIP_TEXT_LIMIT = 21;
     CdkDrag,
     CdkDropList,
     CdkDropListGroup,
-    NgbTooltipModule,
+    NgbTooltip,
     NgTemplateOutlet,
+    NgClass,
     TranslateModule,
   ],
 })

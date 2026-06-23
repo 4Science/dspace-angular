@@ -1,5 +1,6 @@
 import {
   AsyncPipe,
+  isPlatformBrowser,
   NgClass,
   NgTemplateOutlet,
 } from '@angular/common';
@@ -13,18 +14,22 @@ import {
   DoCheck,
   EventEmitter,
   Inject,
+  inject,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
   Output,
+  PLATFORM_ID,
   QueryList,
+  Renderer2,
   SimpleChanges,
   Type,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
 import {
+  AbstractControl,
   FormsModule,
   ReactiveFormsModule,
   UntypedFormArray,
@@ -33,15 +38,17 @@ import {
 import {
   NgbModal,
   NgbModalRef,
-  NgbTooltipModule,
+  NgbTooltip,
 } from '@ng-bootstrap/ng-bootstrap';
 import {
   DYNAMIC_FORM_CONTROL_MAP_FN,
   DYNAMIC_FORM_CONTROL_TYPE_CHECKBOX,
+  DynamicFormArrayComponent,
   DynamicFormArrayGroupModel,
   DynamicFormArrayModel,
   DynamicFormComponentService,
   DynamicFormControl,
+  DynamicFormControlComponent,
   DynamicFormControlContainerComponent,
   DynamicFormControlEvent,
   DynamicFormControlEventType,
@@ -53,6 +60,10 @@ import {
   DynamicFormValidationService,
   DynamicTemplateDirective,
 } from '@ng-dynamic-forms/core';
+import {
+  Actions,
+  ofType,
+} from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import {
   TranslateModule,
@@ -101,6 +112,7 @@ import { SubmissionObject } from '../../../../core/submission/models/submission-
 import { SUBMISSION_LINKS_TO_FOLLOW } from '../../../../core/submission/resolver/submission-links-to-follow';
 import { SubmissionObjectDataService } from '../../../../core/submission/submission-object-data.service';
 import { paginatedRelationsToItems } from '../../../../item-page/simple/item-types/shared/item-relationships-utils';
+import { SubmissionObjectActionTypes } from '../../../../submission/objects/submission-objects.actions';
 import { SubmissionService } from '../../../../submission/submission.service';
 import {
   hasNoValue,
@@ -108,6 +120,7 @@ import {
   isNotEmpty,
   isNotUndefined,
 } from '../../../empty.util';
+import { LiveRegionService } from '../../../live-region/live-region.service';
 import { ItemSearchResult } from '../../../object-collection/shared/item-search-result.model';
 import { SelectableListState } from '../../../object-list/selectable-list/selectable-list.reducer';
 import { SelectableListService } from '../../../object-list/selectable-list/selectable-list.service';
@@ -126,6 +139,7 @@ import { ExistingRelationListElementComponent } from './existing-relation-list-e
 import { DYNAMIC_FORM_CONTROL_TYPE_CUSTOM_SWITCH } from './models/custom-switch/custom-switch.model';
 import { DynamicConcatModel } from './models/ds-dynamic-concat.model';
 import { DynamicLinkModel } from './models/ds-dynamic-link.model';
+import { DYNAMIC_FORM_CONTROL_TYPE_DSDATEPICKER } from './models/date-picker/date-picker.model';
 import { DsDynamicLookupRelationModalComponent } from './relation-lookup-modal/dynamic-lookup-relation-modal.component';
 
 @Component({
@@ -138,7 +152,7 @@ import { DsDynamicLookupRelationModalComponent } from './relation-lookup-modal/d
     ExistingMetadataListElementComponent,
     ExistingRelationListElementComponent,
     FormsModule,
-    NgbTooltipModule,
+    NgbTooltip,
     NgClass,
     NgTemplateOutlet,
     ReactiveFormsModule,
@@ -177,6 +191,8 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
    */
   private subs: Subscription[] = [];
 
+  private liveRegionErrorMessagesShownAlready = false;
+
   /* eslint-disable @angular-eslint/no-output-rename */
   @Output('dfBlur') blur: EventEmitter<DynamicFormControlEvent> = new EventEmitter<DynamicFormControlEvent>();
   @Output('dfChange') change: EventEmitter<DynamicFormControlEvent> = new EventEmitter<DynamicFormControlEvent>();
@@ -197,6 +213,8 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
   get componentType(): Type<DynamicFormControl> | null {
     return this.dynamicFormControlFn(this.model);
   }
+
+  private readonly liveRegionService = inject(LiveRegionService);
 
   enabledDropdownHints = environment.submission.dropdownHintEnabled;
 
@@ -219,6 +237,9 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
     protected metadataService: MetadataService,
     @Inject(APP_CONFIG) protected appConfig: AppConfig,
     @Inject(DYNAMIC_FORM_CONTROL_MAP_FN) protected dynamicFormControlFn: DynamicFormControlMapFn,
+    private actions$: Actions,
+    protected renderer: Renderer2,
+    @Inject(PLATFORM_ID) protected platformId: string,
   ) {
     super(ref, componentFactoryResolver, layoutService, validationService, dynamicFormComponentService, relationService);
     this.fetchThumbnail = this.appConfig.browseBy.showThumbnails;
@@ -230,6 +251,19 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
   ngOnInit(): void {
     this.isRelationship = hasValue(this.model.relationship);
     const isWrapperAroundRelationshipList = hasValue(this.model.relationshipConfig);
+
+    // Subscribe to specified submission actions to announce error messages
+    const errorAnnounceActionsSub = this.actions$.pipe(
+      ofType(
+        SubmissionObjectActionTypes.SAVE_SUBMISSION_FORM_SUCCESS,
+        SubmissionObjectActionTypes.SAVE_SUBMISSION_SECTION_FORM_SUCCESS,
+        SubmissionObjectActionTypes.SAVE_SUBMISSION_FORM_ERROR,
+        SubmissionObjectActionTypes.SAVE_FOR_LATER_SUBMISSION_FORM_ERROR,
+        SubmissionObjectActionTypes.SAVE_SUBMISSION_SECTION_FORM_ERROR,
+      ),
+    ).subscribe(() => this.announceErrorMessages());
+    this.subs.push(errorAnnounceActionsSub);
+
     if (this.isRelationship || isWrapperAroundRelationshipList) {
       const config = this.model.relationshipConfig || this.model.relationship;
       const relationshipOptions = Object.assign(new RelationshipOptions(), config);
@@ -314,6 +348,10 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
     return this.model.type === DYNAMIC_FORM_CONTROL_TYPE_CHECKBOX || this.model.type === DYNAMIC_FORM_CONTROL_TYPE_CUSTOM_SWITCH;
   }
 
+  get isDateField(): boolean {
+    return this.model.type === DYNAMIC_FORM_CONTROL_TYPE_DSDATEPICKER;
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes && !this.isRelationship && hasValue(this.group.get(this.model.id))) {
       super.ngOnChanges(changes);
@@ -335,6 +373,7 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
 
   ngAfterViewInit() {
     this.showErrorMessagesPreviousStage = this.showErrorMessages;
+    this.handleAriaLabelForLibraryComponents();
   }
 
   protected createFormControlComponent(): void {
@@ -361,6 +400,36 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
     if (this.showErrorMessages) {
       this.destroyFormControlComponent();
       this.createFormControlComponent();
+      this.announceErrorMessages();
+    }
+  }
+
+  /**
+   * Announce error messages to the user
+   */
+  announceErrorMessages() {
+    if (!this.liveRegionErrorMessagesShownAlready) {
+      this.liveRegionErrorMessagesShownAlready = true;
+      const numberOfInvalidInputs = this.getNumberOfInvalidInputs() ?? 1;
+      const timeoutMs = numberOfInvalidInputs * 3500;
+      this.errorMessages.forEach((errorMsg) => {
+        // set timer based on the number of the invalid inputs
+        this.liveRegionService.setMessageTimeOutMs(timeoutMs);
+        const message = this.translateService.instant(errorMsg);
+        this.liveRegionService.addMessage(message);
+      });
+      setTimeout(() => {
+        this.liveRegionErrorMessagesShownAlready = false;
+      }, timeoutMs);
+    }
+  }
+
+  /**
+   * Get the number of invalid inputs in the formGroup
+   */
+  private getNumberOfInvalidInputs(): number {
+    if (this.formGroup && this.formGroup.controls) {
+      return Object.values(this.formGroup.controls).filter((control: AbstractControl) => control.invalid).length;
     }
   }
 
@@ -544,6 +613,24 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
       return (groupHasSomeValue && !parent.isRequired) || (hasValue(parent.isRequired) && parent.isRequired);
     } else {
       return true;
+    }
+  }
+
+  private handleAriaLabelForLibraryComponents(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    if ((this.componentRef.instance instanceof DynamicFormControlComponent) &&
+      !(this.componentRef.instance instanceof DynamicFormArrayComponent) &&
+      this.componentRef.location.nativeElement) {
+      const inputEl: HTMLElement | null =
+        this.componentRef.location.nativeElement.querySelector('input,textarea,select,[role="textbox"]');
+
+
+      if (inputEl &&  this.model?.additional?.ariaLabel) {
+        this.renderer.setAttribute(inputEl, 'aria-label', this.model.additional.ariaLabel);
+      }
     }
   }
 }

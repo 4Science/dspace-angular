@@ -106,7 +106,6 @@ describe('DsDynamicTagComponent test suite', () => {
       imports: [
         TranslateModule.forRoot(),
         DynamicFormsCoreModule,
-        DynamicFormsNGBootstrapUIModule,
         FormsModule,
         NgbModule,
         ReactiveFormsModule,
@@ -322,7 +321,6 @@ describe('DsDynamicTagComponent test suite', () => {
   selector: 'ds-test-cmp',
   template: ``,
   imports: [DynamicFormsCoreModule,
-    DynamicFormsNGBootstrapUIModule,
     FormsModule,
     NgbModule,
     ReactiveFormsModule],

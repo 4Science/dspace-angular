@@ -11,7 +11,7 @@ import { UntypedFormGroup } from '@angular/forms';
 import {
   NgbModal,
   NgbModalRef,
-  NgbTooltipModule,
+  NgbTooltip,
 } from '@ng-bootstrap/ng-bootstrap';
 import {
   DynamicFormControlComponent,
@@ -60,6 +60,7 @@ import { FormBuilderService } from '../../../form-builder.service';
 import { FormFieldMetadataValueObject } from '../../../models/form-field-metadata-value.model';
 import { DynamicRelationGroupModel } from './dynamic-relation-group.model';
 import { DsDynamicRelationGroupModalComponent } from './modal/dynamic-relation-group-modal.components';
+import { FormComponent } from '../../../../form.component';
 
 /**
  * Component representing a group input field
@@ -72,7 +73,9 @@ import { DsDynamicRelationGroupModalComponent } from './modal/dynamic-relation-g
   imports: [
     BtnDisabledDirective,
     ChipsComponent,
-    NgbTooltipModule,
+    forwardRef(() => FormComponent),
+    NgbTooltip,
+    NgClass,
     ThemedLoadingComponent,
     TranslateModule,
   ],

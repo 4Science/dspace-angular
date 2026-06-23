@@ -181,7 +181,6 @@ describe('DsDynamicOneboxComponent test suite', () => {
     TestBed.configureTestingModule({
       imports: [
         DynamicFormsCoreModule,
-        DynamicFormsNGBootstrapUIModule,
         FormsModule,
         NgbModule,
         ReactiveFormsModule,
@@ -640,7 +639,6 @@ describe('DsDynamicOneboxComponent test suite', () => {
   imports: [
     CdkTreeModule,
     DynamicFormsCoreModule,
-    DynamicFormsNGBootstrapUIModule,
     FormsModule,
     NgbModule,
     ReactiveFormsModule,

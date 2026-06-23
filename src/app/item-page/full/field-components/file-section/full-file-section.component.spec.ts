@@ -17,6 +17,7 @@ import { environment } from 'src/environments/environment';
 
 import { BitstreamDataService } from '../../../../core/data/bitstream-data.service';
 import { AuthorizationDataService } from '../../../../core/data/feature-authorization/authorization-data.service';
+import { LocaleService } from '../../../../core/locale/locale.service';
 import { PaginationService } from '../../../../core/pagination/pagination.service';
 import { Bitstream } from '../../../../core/shared/bitstream.model';
 import { Item } from '../../../../core/shared/item.model';
@@ -39,6 +40,12 @@ import { FullFileSectionComponent } from './full-file-section.component';
 describe('FullFileSectionComponent', () => {
   let comp: FullFileSectionComponent;
   let fixture: ComponentFixture<FullFileSectionComponent>;
+  let localeService: any;
+  const languageList = ['en;q=1', 'de;q=0.8'];
+  const mockLocaleService = jasmine.createSpyObj('LocaleService', {
+    getCurrentLanguageCode: jasmine.createSpy('getCurrentLanguageCode'),
+    getLanguageCodeList: of(languageList),
+  });
 
   const mockBitstream: Bitstream = Object.assign(new Bitstream(),
     {
@@ -99,6 +106,7 @@ describe('FullFileSectionComponent', () => {
         { provide: NotificationsService, useValue: new NotificationsServiceStub() },
         { provide: SearchConfigurationService, useValue: jasmine.createSpyObj(['getCurrentConfiguration']) },
         { provide: PaginationService, useValue: paginationService },
+        { provide: LocaleService, useValue: mockLocaleService },
         { provide: APP_CONFIG, useValue: environment },
         { provide: AuthorizationDataService, useValue: authorizedDataService },
       ],
@@ -111,6 +119,8 @@ describe('FullFileSectionComponent', () => {
   }));
 
   beforeEach(waitForAsync(() => {
+    localeService = TestBed.inject(LocaleService);
+    localeService.getCurrentLanguageCode.and.returnValue(of('en'));
     fixture = TestBed.createComponent(FullFileSectionComponent);
     comp = fixture.componentInstance;
     comp.item = new Item();

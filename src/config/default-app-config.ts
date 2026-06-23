@@ -71,6 +71,9 @@ export class DefaultAppConfig implements AppConfig {
     port: 4000,
     // NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
     nameSpace: '/',
+    // Specify the public URL that this user interface responds to. This corresponds to the "dspace.ui.url" property in your backend's local.cfg.
+    // SSR is only enabled when the client's "Host" HTTP header matches this baseUrl. The baseUrl is also used for redirects and SEO links (in robots.txt).
+    baseUrl: 'http://localhost:4000',
 
     // The rateLimiter settings limit each IP to a 'max' of 500 requests per 'windowMs' (1 minute).
     rateLimiter: {
@@ -104,6 +107,10 @@ export class DefaultAppConfig implements AppConfig {
     },
     // Cache-Control HTTP Header
     control: 'max-age=604800', // revalidate browser
+    // These static files should not be cached (paths relative to dist/browser, including the leading slash)
+    noCacheFiles: [
+      '/index.html',  // see https://web.dev/articles/http-cache#unversioned-urls
+    ],
     autoSync: {
       defaultTime: 0,
       maxBufferSize: 100,
@@ -366,6 +373,7 @@ export class DefaultAppConfig implements AppConfig {
     { code: 'tr', label: 'Türkçe', active: false },
     { code: 'uk', label: 'Yкраї́нська', active: false },
     { code: 'vi', label: 'Tiếng Việt', active: false },
+    { code: 'zh-TW', label: '繁体中文', active: true },
   ];
 
   // Browse-By Pages

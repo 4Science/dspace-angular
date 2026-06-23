@@ -2,13 +2,13 @@
   [class.d-none]="model.hidden"
   [formGroup]="group"
   [ngClass]="[getClass('element', 'container'), getClass('grid', 'container')]">
-  @if (!isCheckbox && hasLabel) {
+  @if (!isCheckbox && hasLabel && !isDateField) {
     <label
       [id]="'label_' + model.id"
       [for]="id"
       class="form-label"
       [innerHTML]="(model.required && model.label) ? (model.label | translate) + ' *' : (model.label | translate)"
-    [ngClass]="[getClass('element', 'label'), getClass('grid', 'label')]"></label>
+      [ngClass]="[getClass('element', 'label'), getClass('grid', 'label')]"></label>
   }
   <div class="d-flex">
     <div class="flex-grow-1">
@@ -52,7 +52,12 @@
             <div [id]="id + '_errors'"
               [ngClass]="[getClass('element', 'errors'), getClass('grid', 'errors')]">
               @for (message of errorMessages; track message) {
-                <small class="invalid-feedback d-block">{{ message | translate: model.validators }}</small>
+            <small class="invalid-feedback d-block"
+               aria-required="true"
+               aria-invalid="true"
+               [attr.aria-describedby]="'label_' + model.id"
+               aria-live="assertive"
+          >{{ message | translate: model.validators }}</small>
               }
             </div>
           }

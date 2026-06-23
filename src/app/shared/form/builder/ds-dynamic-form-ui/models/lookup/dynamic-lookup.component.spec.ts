@@ -217,7 +217,6 @@ describe('Dynamic Lookup component', () => {
     TestBed.configureTestingModule({
       imports: [
         DynamicFormsCoreModule,
-        DynamicFormsNGBootstrapUIModule,
         FormsModule,
         InfiniteScrollModule,
         ReactiveFormsModule,
@@ -735,7 +734,6 @@ describe('Dynamic Lookup component', () => {
   template: ``,
   imports: [
     DynamicFormsCoreModule,
-    DynamicFormsNGBootstrapUIModule,
     FormsModule,
     InfiniteScrollModule,
     NgbModule,
