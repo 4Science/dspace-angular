@@ -5437,11 +5437,6 @@ domhandler@^5.0.2, domhandler@^5.0.3:
   dependencies:
     domelementtype "^2.3.0"
 
-domino-ext@^2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/domino-ext/-/domino-ext-2.1.4.tgz#e9ffc1d89a63dc9d0f56c180b7a9b9cc8179d24b"
-  integrity sha512-t8piRI9Qahd4V/NqnCcqdBWsQ4OYeOvcTuoHl38Pzk9OJJ/UiCYHA2jX2fACmBtDlSMiWa0uR524KuLEAMc/3Q==
-
 dompurify@^2.0.11:
   version "2.5.9"
   resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-2.5.9.tgz#80481ec22dfac67285cc274cb51a45c1e9fa9c42"
