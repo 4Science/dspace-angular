@@ -56,8 +56,8 @@ const TOOLTIP_TEXT_LIMIT = 21;
     CdkDropList,
     CdkDropListGroup,
     NgbTooltip,
-    NgTemplateOutlet,
     NgClass,
+    NgTemplateOutlet,
     TranslateModule,
   ],
 })

@@ -23,7 +23,8 @@ import {
 } from 'rxjs';
 import {
   filter,
-  map, startWith,
+  map,
+  startWith,
   switchMap,
   take,
 } from 'rxjs/operators';

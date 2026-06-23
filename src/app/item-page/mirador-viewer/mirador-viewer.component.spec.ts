@@ -10,13 +10,13 @@ import {
   TranslateModule,
 } from '@ngx-translate/core';
 import { of } from 'rxjs';
-import { SafeUrlPipe } from 'src/app/shared/utils/safe-url-pipe';
-import { VarDirective } from 'src/app/shared/utils/var.directive';
 import {
   skip,
   take,
   toArray,
 } from 'rxjs/operators';
+import { SafeUrlPipe } from 'src/app/shared/utils/safe-url-pipe';
+import { VarDirective } from 'src/app/shared/utils/var.directive';
 
 import { BitstreamDataService } from '../../core/data/bitstream-data.service';
 import { BundleDataService } from '../../core/data/bundle-data.service';
@@ -73,17 +73,17 @@ function setupTestBed(overrides?: {
   viewerService.isIiifEnabled.and.returnValue(of(overrides?.iiifEnabled ?? true));
 
   TestBed.configureTestingModule({
-      imports: [
-        TranslateModule.forRoot({
-          loader: {
-            provide: TranslateLoader,
-            useClass: TranslateLoaderMock,
-          },
-        }),
-        MiradorViewerComponent,
-        VarDirective,
-        SafeUrlPipe,
-      ],
+    imports: [
+      TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useClass: TranslateLoaderMock,
+        },
+      }),
+      MiradorViewerComponent,
+      VarDirective,
+      SafeUrlPipe,
+    ],
     providers: [
       { provide: BitstreamDataService, useValue: {} },
       { provide: BundleDataService, useValue: {} },
@@ -103,7 +103,7 @@ function createComponent(options?: {
   comp = fixture.componentInstance;
   comp.object = options?.object ?? getItem(noMetadata);
   comp.searchable = options?.searchable ?? false;
-      comp.iframeViewerUrl = of('testUrl');
+  comp.iframeViewerUrl = of('testUrl');
   fixture.detectChanges();
 }
 

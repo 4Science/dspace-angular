@@ -71,6 +71,7 @@ import { Item } from '../../../../core/shared/item.model';
 import { WorkspaceItem } from '../../../../core/submission/models/workspaceitem.model';
 import { SubmissionObjectDataService } from '../../../../core/submission/submission-object-data.service';
 import { VocabularyOptions } from '../../../../core/submission/vocabularies/models/vocabulary-options.model';
+import { EditMetadataSecurityComponent } from '../../../../item-page/edit-item-page/edit-metadata-security/edit-metadata-security.component';
 import {
   SaveForLaterSubmissionFormErrorAction,
   SaveSubmissionFormErrorAction,
@@ -78,11 +79,10 @@ import {
   SaveSubmissionSectionFormErrorAction,
   SaveSubmissionSectionFormSuccessAction,
 } from '../../../../submission/objects/submission-objects.actions';
-import { EditMetadataSecurityComponent } from '../../../../item-page/edit-item-page/edit-metadata-security/edit-metadata-security.component';
 import { SubmissionService } from '../../../../submission/submission.service';
-import { getMockFormBuilderService } from '../../../mocks/form-builder-service.mock';
 import { LiveRegionService } from '../../../live-region/live-region.service';
 import { getLiveRegionServiceStub } from '../../../live-region/live-region.service.stub';
+import { getMockFormBuilderService } from '../../../mocks/form-builder-service.mock';
 import { SelectableListService } from '../../../object-list/selectable-list/selectable-list.service';
 import { createSuccessfulRemoteDataObject } from '../../../remote-data.utils';
 import { FormBuilderService } from '../form-builder.service';
