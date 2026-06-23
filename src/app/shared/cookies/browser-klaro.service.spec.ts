@@ -11,6 +11,10 @@ import { RestResponse } from '../../core/cache/response.models';
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
 import { EPersonDataService } from '../../core/eperson/eperson-data.service';
 import { EPerson } from '../../core/eperson/models/eperson.model';
+import {
+  CAPTCHA_FEEDBACK_NAME,
+  CAPTCHA_REGISTRATION_NAME,
+} from '../../core/google-recaptcha/google-recaptcha.service';
 import { CookieService } from '../../core/services/cookie.service';
 import { NativeWindowService } from '../../core/services/window.service';
 import { ConfigurationProperty } from '../../core/shared/configuration-property.model';
@@ -26,10 +30,6 @@ import {
   COOKIE_MDFIELD,
 } from './browser-klaro.service';
 import { ANONYMOUS_STORAGE_NAME_KLARO } from './klaro-configuration';
-import {
-  CAPTCHA_FEEDBACK_NAME,
-  CAPTCHA_REGISTRATION_NAME,
-} from '../../core/google-recaptcha/google-recaptcha.service';
 
 describe('BrowserKlaroService', () => {
   const trackingIdProp = 'google.analytics.key';
