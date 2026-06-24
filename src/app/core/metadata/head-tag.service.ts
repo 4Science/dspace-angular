@@ -858,7 +858,7 @@ export class HeadTagService {
 
   private setGenericPageMetaTags() {
     const pageDocumentTitle = this._document.getElementsByTagName('title')[0].innerText;
-    const pageUrl = new URLCombiner(this.hardRedirectService.getCurrentOrigin(), this.router.url).toString();
+    const pageUrl = new URLCombiner(this.hardRedirectService.getBaseUrl(), this.router.url).toString();
     const genericPageOpenGraphType = 'website';
 
     this.setTitleTags(pageDocumentTitle);
@@ -874,6 +874,6 @@ export class HeadTagService {
   }
 
   private getUrlOrigin(): string {
-    return isPlatformBrowser(this.platformId) ? this.hardRedirectService.getCurrentOrigin() : this.origin;
+    return isPlatformBrowser(this.platformId) ? this.hardRedirectService.getBaseUrl() : this.origin;
   }
 }

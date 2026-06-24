@@ -49,6 +49,7 @@ import {
   isNotEmpty,
 } from '../../shared/empty.util';
 import { MatomoService } from '../../statistics/matomo.service';
+import { NativeWindowRef, NativeWindowService } from '../../core/services/window.service';
 
 @Component({
   selector: 'ds-bitstream-download-page',
@@ -67,9 +68,11 @@ export class BitstreamDownloadPageComponent implements OnInit {
   bitstreamRD$: Observable<RemoteData<Bitstream>>;
   fileName$: Observable<string>;
 
+  hasHistory = this._window.nativeWindow.history?.length > 1;
   configService = inject(ConfigurationDataService);
 
   constructor(
+    @Inject(NativeWindowService) private _window: NativeWindowRef,
     private route: ActivatedRoute,
     protected router: Router,
     private authorizationService: AuthorizationDataService,
@@ -88,6 +91,10 @@ export class BitstreamDownloadPageComponent implements OnInit {
 
   back(): void {
     this.location.back();
+  }
+
+  close(): void {
+    this._window.nativeWindow.self.close();
   }
 
   ngOnInit(): void {

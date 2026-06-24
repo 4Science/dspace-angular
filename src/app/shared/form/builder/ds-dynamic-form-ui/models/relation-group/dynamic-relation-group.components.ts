@@ -1,7 +1,7 @@
 import {
   ChangeDetectorRef,
   Component,
-  EventEmitter,
+  EventEmitter, forwardRef,
   Input,
   OnDestroy,
   OnInit,
@@ -61,6 +61,7 @@ import { FormBuilderService } from '../../../form-builder.service';
 import { FormFieldMetadataValueObject } from '../../../models/form-field-metadata-value.model';
 import { DynamicRelationGroupModel } from './dynamic-relation-group.model';
 import { DsDynamicRelationGroupModalComponent } from './modal/dynamic-relation-group-modal.components';
+import { NgClass } from '@angular/common';
 
 /**
  * Component representing a group input field
