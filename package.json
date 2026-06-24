@@ -81,14 +81,26 @@
       "@angular/forms": "^20.3.12",
       "@angular/localize": "^20.3.12"
     },
-    "@4science_ng-dynamic-forms/core": {
+    "@ng-dynamic-forms/core": {
       "@angular/common": "^20.3.12",
       "@angular/core": "^20.3.12",
       "@angular/forms": "^20.3.12"
     },
+    "@ng-dynamic-forms/ui-ng-bootstrap": {
+      "@angular/common": "^20.3.12",
+      "@angular/core": "^20.3.12",
+      "@angular/forms": "^20.3.12",
+      "@ng-bootstrap/ng-bootstrap": "^19.0.0",
+      "bootstrap": "^5.3"
+    },
     "@nicky-lenaers/ngx-scroll-to": {
       "@angular/common": "^20.3.12",
       "@angular/core": "^20.3.12"
+    },
+    "@4science_ng-dynamic-forms/core": {
+      "@angular/common": "^20.3.12",
+      "@angular/core": "^20.3.12",
+      "@angular/forms": "^20.3.12"
     }
   },
   "resolutions": {
@@ -116,9 +128,6 @@
     "@datadog/browser-rum": "^5.7.0",
     "@kolkov/ngx-gallery": "^2.0.1",
     "@ng-bootstrap/ng-bootstrap": "^15.1.2",
-    "@ng-dynamic-forms/core": "^16.0.0",
-    "@ng-dynamic-forms/ui-ng-bootstrap": "^16.0.0",
-    "@ng-util/markdown": "^12.1.2",
     "@ngrx/effects": "^20.1.0",
     "@ngrx/router-store": "^20.1.0",
     "@ngrx/store": "^20.1.0",
