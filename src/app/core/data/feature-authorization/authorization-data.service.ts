@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Store } from "@ngrx/store";
+import { Store } from '@ngrx/store';
 import {
   Observable,
   of as observableOf,
@@ -12,8 +12,10 @@ import {
   switchMap,
   take,
 } from 'rxjs/operators';
-import { AppState } from "src/app/app.reducer";
+import { AppState } from 'src/app/app.reducer';
 
+import { ObjectAuthorizationsState } from '../../../shared/authorizations/authorization.interfaces';
+import { AuthorizationService } from '../../../shared/authorizations/authorization.service';
 import {
   hasNoValue,
   hasValue,
@@ -27,7 +29,7 @@ import { RemoteDataBuildService } from '../../cache/builders/remote-data-build.s
 import { RequestParam } from '../../cache/models/request-param.model';
 import { ObjectCacheService } from '../../cache/object-cache.service';
 import { Authorization } from '../../shared/authorization.model';
-import { DSpaceObject } from "../../shared/dspace-object.model";
+import { DSpaceObject } from '../../shared/dspace-object.model';
 import { HALEndpointService } from '../../shared/hal-endpoint.service';
 import { getFirstCompletedRemoteData } from '../../shared/operators';
 import { BaseDataService } from '../base/base-data.service';
@@ -41,10 +43,13 @@ import { RemoteData } from '../remote-data';
 import { RequestService } from '../request.service';
 import { SiteDataService } from '../site-data.service';
 import { AuthorizationSearchParams } from './authorization-search-params';
-import { getAuthorizationFeaturesIDs, getNormalizedUuid, getRequestIdFromParams, oneAuthorizationMatchesFeature } from './authorization-utils';
+import {
+  getAuthorizationFeaturesIDs,
+  getNormalizedUuid,
+  getRequestIdFromParams,
+  oneAuthorizationMatchesFeature,
+} from './authorization-utils';
 import { FeatureID } from './feature-id';
-import { AuthorizationService } from "../../../shared/authorizations/authorization.service";
-import { ObjectAuthorizationsState } from "../../../shared/authorizations/authorization.interfaces";
 
 /**
  * A service to retrieve {@link Authorization}s from the REST API
@@ -129,10 +134,10 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
               }
             }),
             catchError(() => observableOf([])),
-            oneAuthorizationMatchesFeature(featureId)
+            oneAuthorizationMatchesFeature(featureId),
           );
         }
-      })
+      }),
     );
   }
 
@@ -206,7 +211,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    */
   getAuthorizationForObjects(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, hrefs?: string[], useCachedVersionIfAvailable: boolean = true, reRequestOnStale: boolean = true): Observable<ObjectAuthorizationsState> {
     return this.searchObjectsAuthorizations(uuidList,  type, featuresId, ePersonUuid, useCachedVersionIfAvailable, reRequestOnStale).pipe(
-      getAuthorizationFeaturesIDs(featuresId, hrefs)
+      getAuthorizationFeaturesIDs(featuresId, hrefs),
     );
   }
 
@@ -236,7 +241,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
           return [];
         }
       }),
-      catchError(() => observableOf([]))
+      catchError(() => observableOf([])),
     );
 
   }
@@ -306,7 +311,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
       this.createSearchOptionsForObjects(uuidList, type, options, ePersonUuid, featuresId),
       useCachedVersionIfAvailable,
       reRequestOnStale,
-      ...linksToFollow
+      ...linksToFollow,
     );
   }
 

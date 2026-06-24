@@ -21,6 +21,7 @@ import { LocaleService } from '../../app/core/locale/locale.service';
 import { HeadTagService } from '../../app/core/metadata/head-tag.service';
 import { CorrelationIdService } from '../../app/correlation-id/correlation-id.service';
 import { InitService } from '../../app/init.service';
+import { AuthorizationService } from '../../app/shared/authorizations/authorization.service';
 import {
   isEmpty,
   isNotEmpty,
@@ -35,7 +36,6 @@ import {
 } from '../../config/app-config.interface';
 import { BuildConfig } from '../../config/build-config.interface';
 import { environment } from '../../environments/environment';
-import { AuthorizationService } from "../../app/shared/authorizations/authorization.service";
 
 /**
  * Performs server-side initialization.
@@ -54,7 +54,7 @@ export class ServerInitService extends InitService {
     protected breadcrumbsService: BreadcrumbsService,
     protected themeService: ThemeService,
     protected menuService: MenuService,
-    protected authorizationService: AuthorizationService
+    protected authorizationService: AuthorizationService,
   ) {
     super(
       store,
@@ -67,7 +67,7 @@ export class ServerInitService extends InitService {
       breadcrumbsService,
       themeService,
       menuService,
-      authorizationService
+      authorizationService,
     );
   }
 

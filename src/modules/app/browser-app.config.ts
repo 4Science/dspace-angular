@@ -58,6 +58,7 @@ import { ClientMathService } from '../../app/core/shared/client-math.service';
 import { MathService } from '../../app/core/shared/math.service';
 import { BrowserXSRFService } from '../../app/core/xsrf/browser-xsrf.service';
 import { XSRFService } from '../../app/core/xsrf/xsrf.service';
+import { AuthorizationService } from '../../app/shared/authorizations/authorization.service';
 import { BrowserKlaroService } from '../../app/shared/cookies/browser-klaro.service';
 import { KlaroService } from '../../app/shared/cookies/klaro.service';
 import { BrowserDatadogRumService } from '../../app/shared/datadog-rum/browser-datadog-rum.service';
@@ -68,7 +69,6 @@ import { SubmissionService } from '../../app/submission/submission.service';
 import { REQUEST } from '../../express.tokens';
 import { TranslateBrowserLoader } from '../../ngx-translate-loaders/translate-browser.loader';
 import { BrowserInitService } from './browser-init.service';
-import { AuthorizationService } from "../../app/shared/authorizations/authorization.service";
 
 export const REQ_KEY = makeStateKey<string>('req');
 
@@ -171,7 +171,7 @@ export const browserAppConfig: ApplicationConfig = mergeApplicationConfig({
     },
     {
       provide: AuthorizationService,
-      useClass: AuthorizationService
+      useClass: AuthorizationService,
     },
     provideMatomo(
       {

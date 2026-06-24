@@ -2,10 +2,10 @@
 import { BuildConfig } from 'src/config/build-config.interface';
 import { IdentifierSubtypesIconPositionEnum } from 'src/config/identifier-subtypes-config.interface';
 
+import { FeatureID } from '../app/core/data/feature-authorization/feature-id';
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
 import { AdvancedAttachmentElementType } from '../config/advanced-attachment-rendering.config';
-import { FeatureID } from '../app/core/data/feature-authorization/feature-id';
 
 
 
@@ -139,12 +139,12 @@ export const environment: BuildConfig = {
   discoveryAuthorizationFeaturesConfig: {
     'workspace': {
       'Workspace': [
-        FeatureID.CanEditItem
-      ]
+        FeatureID.CanEditItem,
+      ],
     },
     default: {
 
-    }
+    },
   },
 
   // Form settings

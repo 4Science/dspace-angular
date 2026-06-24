@@ -1,4 +1,7 @@
-import { Inject, Injectable } from '@angular/core';
+import {
+  Inject,
+  Injectable,
+} from '@angular/core';
 import isArray from 'lodash/isArray';
 import {
   forkJoin,
@@ -10,9 +13,15 @@ import {
   map,
   switchMap,
 } from 'rxjs/operators';
+import { SearchOptions } from 'src/app/shared/search/models/search-options.model';
+import {
+  APP_CONFIG,
+  AppConfig,
+} from 'src/config/app-config.interface';
 
 import { FollowAuthorityMetadata } from '../../../config/search-follow-metadata.interface';
 import { environment } from '../../../environments/environment';
+import { AuthorizationService } from '../../shared/authorizations/authorization.service';
 import {
   hasValue,
   isNotEmpty,
@@ -20,6 +29,8 @@ import {
 import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { SearchObjects } from '../../shared/search/models/search-objects.model';
 import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
+import { getRequestIdFromParams } from '../data/feature-authorization/authorization-utils';
+import { FeatureID } from '../data/feature-authorization/feature-id';
 import { ItemDataService } from '../data/item-data.service';
 import { PaginatedList } from '../data/paginated-list.model';
 import { RemoteData } from '../data/remote-data';
@@ -34,11 +45,6 @@ import { getFirstCompletedRemoteData } from '../shared/operators';
 import { SearchService } from '../shared/search/search.service';
 import { BrowseService } from './browse.service';
 import { BrowseEntrySearchOptions } from './browse-entry-search-options.model';
-import { AppConfig, APP_CONFIG } from "src/config/app-config.interface";
-import { getRequestIdFromParams } from "../data/feature-authorization/authorization-utils";
-import { FeatureID } from "../data/feature-authorization/feature-id";
-import { SearchOptions } from "src/app/shared/search/models/search-options.model";
-import { AuthorizationService } from "../../shared/authorizations/authorization.service";
 
 /**
  * The service aims to manage browse requests and subsequent extra fetch requests.
@@ -51,7 +57,7 @@ export class SearchManager {
     protected browseService: BrowseService,
     protected searchService: SearchService,
     protected authorizationService: AuthorizationService,
-    @Inject(APP_CONFIG) protected appConfig: AppConfig
+    @Inject(APP_CONFIG) protected appConfig: AppConfig,
   ) {
   }
 

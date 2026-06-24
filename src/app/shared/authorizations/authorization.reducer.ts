@@ -1,14 +1,20 @@
-import { AuthorizationAction, AuthorizationActionTypes, GetAuthorizationsAction,
-  GetAuthorizationsErrorAction, GetAuthorizationsSuccessAction } from "./authorization.actions";
+import { getRequestIdFromParams } from 'src/app/core/data/feature-authorization/authorization-utils';
+
+import {
+  AuthorizationAction,
+  AuthorizationActionTypes,
+  GetAuthorizationsAction,
+  GetAuthorizationsErrorAction,
+  GetAuthorizationsSuccessAction,
+} from './authorization.actions';
 import { AuthorizationsState } from './authorization.interfaces';
-import { getRequestIdFromParams } from "src/app/core/data/feature-authorization/authorization-utils";
 
 
 const initialState = Object.create({
   authorizations: {},
   loading: true,
   hasError: false,
-  pendingRequests: []
+  pendingRequests: [],
 });
 
 export function authorizationReducer(storeState = initialState, action: AuthorizationAction): AuthorizationsState {
@@ -37,7 +43,7 @@ function setAuthorizationsError(storeState: AuthorizationsState, action: GetAuth
   return Object.assign({}, storeState, {
     hasError: true,
     loading: false,
-    pendingRequests: []
+    pendingRequests: [],
   });
 }
 
@@ -45,17 +51,17 @@ function setAuthorizationsLoading(storeState: AuthorizationsState, action: GetAu
   const requestId = getRequestIdFromParams(action.payload.type, action.payload.uuidList, action.payload.featureIDs);
   return Object.assign({}, storeState, {
     loading: true,
-    pendingRequests: [...new Set([...storeState.pendingRequests, requestId])]
+    pendingRequests: [...new Set([...storeState.pendingRequests, requestId])],
   });
 }
 
 
 function setAuthorizationsSuccess(storeState: AuthorizationsState, action: GetAuthorizationsSuccessAction): AuthorizationsState {
-  let newAuthorizationsState = Object.assign({}, storeState.authorizations ?? {});
+  const newAuthorizationsState = Object.assign({}, storeState.authorizations ?? {});
   const objectsEntries = Object.keys(action.payload.authorizations);
 
   objectsEntries.forEach(entry => {
-    newAuthorizationsState[entry] = {...newAuthorizationsState[entry], ...action.payload.authorizations[entry]};
+    newAuthorizationsState[entry] = { ...newAuthorizationsState[entry], ...action.payload.authorizations[entry] };
   });
   const pendingRequests = [...storeState.pendingRequests];
   const resolvedRequestIndex = pendingRequests.findIndex(value => value === action.payload.resolvedRequestId);
@@ -66,6 +72,6 @@ function setAuthorizationsSuccess(storeState: AuthorizationsState, action: GetAu
     authorizations: newAuthorizationsState,
     loading: false,
     pendingRequests,
-    resolvedRequestId: null
+    resolvedRequestId: null,
   });
 }

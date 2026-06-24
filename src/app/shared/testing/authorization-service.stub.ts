@@ -5,7 +5,7 @@ import {
 } from 'rxjs';
 
 import { FeatureID } from '../../core/data/feature-authorization/feature-id';
-import { ObjectAuthorizationsState } from "../authorizations/authorization.interfaces";
+import { ObjectAuthorizationsState } from '../authorizations/authorization.interfaces';
 
 
 export class AuthorizationDataServiceStub {

@@ -3,6 +3,7 @@ import {
   Observable,
   of as observableOf,
 } from 'rxjs';
+import { AuthorizationService } from 'src/app/shared/authorizations/authorization.service';
 
 import { hasValue } from '../../../shared/empty.util';
 import { getMockObjectCacheService } from '../../../shared/mocks/object-cache.service.mock';
@@ -21,7 +22,6 @@ import { FindListOptions } from '../find-list-options.model';
 import { SiteDataService } from '../site-data.service';
 import { AuthorizationDataService } from './authorization-data.service';
 import { FeatureID } from './feature-id';
-import { AuthorizationService } from "src/app/shared/authorizations/authorization.service";
 
 describe('AuthorizationDataService', () => {
   let service: AuthorizationDataService;
@@ -57,8 +57,9 @@ describe('AuthorizationDataService', () => {
       hasErrors: observableOf(false),
       getSiteAuthorization: observableOf([]),
       getAuthorizationForObject: observableOf(true),
+      hasAuthorizationEntryForObject: observableOf(true),
       isRequestLoading: observableOf(false),
-      initStateForObjects: jasmine.createSpy('initStateForObjects')
+      initStateForObjects: jasmine.createSpy('initStateForObjects'),
     });
     objectCache = getMockObjectCacheService();
     service = new AuthorizationDataService(requestService, undefined, objectCache, undefined, siteService, authorizationService, undefined);

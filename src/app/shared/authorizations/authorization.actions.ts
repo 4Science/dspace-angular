@@ -1,9 +1,14 @@
 /* eslint-disable max-classes-per-file */
 
 import { Action } from '@ngrx/store';
-import { AuthorizationActionPayload, AuthorizationsState, ObjectAuthorizationsState } from "src/app/shared/authorizations/authorization.interfaces";
-import { type } from "../ngrx/type";
-import { FeatureID } from "src/app/core/data/feature-authorization/feature-id";
+import { FeatureID } from 'src/app/core/data/feature-authorization/feature-id';
+import {
+  AuthorizationActionPayload,
+  AuthorizationsState,
+  ObjectAuthorizationsState,
+} from 'src/app/shared/authorizations/authorization.interfaces';
+
+import { type } from '../ngrx/type';
 
 
 
@@ -28,7 +33,7 @@ export class GetAuthorizationsAction extends AbstractAuthorizationAction {
     uuidList: string[],
     uniqueType: string,
     featureIDs: FeatureID[],
-    hrefs: string[]
+    hrefs: string[],
   ) {
     super();
     this.payload = {
@@ -46,13 +51,13 @@ export class GetAuthorizationsSuccessAction extends AbstractAuthorizationAction 
 
   constructor(
     map: ObjectAuthorizationsState,
-    requestId: string
+    requestId: string,
   ) {
     super();
     this.payload = {
       authorizations: map,
       hasError: false,
-      resolvedRequestId: requestId
+      resolvedRequestId: requestId,
     };
   }
 }

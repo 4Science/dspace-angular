@@ -1,15 +1,27 @@
 import { Injectable } from '@angular/core';
-import { combineLatest, Observable } from 'rxjs';
-import { createFeatureSelector, createSelector, select, Store } from '@ngrx/store';
+import {
+  createFeatureSelector,
+  createSelector,
+  select,
+  Store,
+} from '@ngrx/store';
+import { Observable } from 'rxjs';
+import {
+  distinctUntilChanged,
+  map,
+  take,
+} from 'rxjs/operators';
+import {
+  AuthorizationsState,
+  ObjectAuthorizationsState,
+} from 'src/app/shared/authorizations/authorization.interfaces';
 
-import { distinctUntilChanged, filter, find, map, switchMap, take } from 'rxjs/operators';
-import { AuthorizationsState, ObjectAuthorizationsState } from "src/app/shared/authorizations/authorization.interfaces";
-import { SiteDataService } from "../../core/data/site-data.service";
-import { AppState } from "../../app.reducer";
-import { FeatureID } from "../../core/data/feature-authorization/feature-id";
-import { GetAuthorizationsAction } from "./authorization.actions";
-import { Site } from "../../core/shared/site.model";
-import { hasValue } from "../empty.util";
+import { AppState } from '../../app.reducer';
+import { FeatureID } from '../../core/data/feature-authorization/feature-id';
+import { SiteDataService } from '../../core/data/site-data.service';
+import { Site } from '../../core/shared/site.model';
+import { hasValue } from '../empty.util';
+import { GetAuthorizationsAction } from './authorization.actions';
 
 export const authorizationsSelector = createFeatureSelector<AuthorizationsState>('authorizationFeatures');
 
@@ -25,7 +37,7 @@ export class AuthorizationService {
    */
   getAllAuthorizations = createSelector(
     authorizationsSelector,
-    (state: AuthorizationsState) =>  state.authorizations
+    (state: AuthorizationsState) =>  state.authorizations,
   );
 
 
@@ -34,14 +46,14 @@ export class AuthorizationService {
    */
   getErrorStatus = createSelector(
     authorizationsSelector,
-    (state: AuthorizationsState) =>  state.hasError
+    (state: AuthorizationsState) =>  state.hasError,
   );
 
 
 
   getPendingRequestsStatus = createSelector(
     authorizationsSelector,
-    (state: AuthorizationsState) =>  state.pendingRequests
+    (state: AuthorizationsState) =>  state.pendingRequests,
   );
 
   constructor(
@@ -56,20 +68,20 @@ export class AuthorizationService {
 
   initStateForSite(featureIDs: FeatureID[]) {
     this.siteService.find().pipe(
-      take(1)
+      take(1),
     ).subscribe((site: Site) => this.initStateForObjects([site.uuid], site.uniqueType, featureIDs, [site.self]));
   }
 
   initAnonymousStateForSite() {
     this.siteService.find().pipe(
-      take(1)
+      take(1),
     ).subscribe((site: Site) => this.initStateForObjects([site.uuid], site.uniqueType, [], [site.self]));
   }
 
 
   getAllAuthorizationsState(): Observable<ObjectAuthorizationsState> {
     return this.store.pipe(
-      select(this.getAllAuthorizations),
+      select(state => this.getAllAuthorizations(state)),
       distinctUntilChanged(),
     );
   }
@@ -91,7 +103,7 @@ export class AuthorizationService {
     return this.getAllAuthorizationsState().pipe(
       map(state => {
         if (hasValue(state)) {
-          return hasValue(state[objectUrl])
+          return hasValue(state[objectUrl]);
         }
         return false;
       }),
@@ -102,7 +114,7 @@ export class AuthorizationService {
 
   hasErrors(): Observable<boolean> {
     return this.store.pipe(
-      select(this.getErrorStatus),
+      select(state => this.getErrorStatus(state)),
       distinctUntilChanged(),
     );
   }
@@ -110,7 +122,7 @@ export class AuthorizationService {
 
   isRequestLoading(requestId: string): Observable<boolean> {
     return this.store.pipe(
-      select(this.getPendingRequestsStatus),
+      select(state => this.getPendingRequestsStatus(state)),
       distinctUntilChanged((a,b) => JSON.stringify(a) === JSON.stringify(b)),
       map(pendingRequests => pendingRequests.includes(requestId)),
       distinctUntilChanged(),
