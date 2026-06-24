@@ -1,16 +1,23 @@
+import { CommonModule } from '@angular/common';
+import {
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
-import { AuthorizationService } from './authorization.service';
+import {
+  MockStore,
+  provideMockStore,
+} from '@ngrx/store/testing';
 import { of } from 'rxjs';
+import { mockAuthSiteObject } from 'src/app/core/data/feature-authorization/authorizations.mock';
+import { FeatureID } from 'src/app/core/data/feature-authorization/feature-id';
+import { SiteDataService } from 'src/app/core/data/site-data.service';
+import { environment } from 'src/environments/environment';
 
 import { GetAuthorizationsAction } from './authorization.actions';
-import { fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { CommonModule } from '@angular/common';
 import { authorizationReducer } from './authorization.reducer';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { FeatureID } from "src/app/core/data/feature-authorization/feature-id";
-import { SiteDataService } from "src/app/core/data/site-data.service";
-import { mockAuthSiteObject } from "src/app/core/data/feature-authorization/authorizations.mock";
-import { environment } from "src/environments/environment";
+import { AuthorizationService } from './authorization.service';
 
 
 describe('AuthorizationService', () => {
@@ -20,7 +27,7 @@ describe('AuthorizationService', () => {
 
 
   const siteService = jasmine.createSpyObj('siteService', {
-    find: jasmine.createSpy('find')
+    find: jasmine.createSpy('find'),
   });
 
 
@@ -28,13 +35,13 @@ describe('AuthorizationService', () => {
     authorizationFeatures: {
       authorizations: {
         'f92d103c-e4ad-4dfb-b59f-f90c7425407e': {
-          [FeatureID.AdministratorOf]: true
-        }
+          [FeatureID.AdministratorOf]: true,
+        },
       },
       loading: false,
       hasError: false,
-      pendingRequests: []
-    }
+      pendingRequests: [],
+    },
   };
 
 
@@ -46,8 +53,8 @@ describe('AuthorizationService', () => {
         StoreModule.forRoot({ authorizationReducer }, {
           runtimeChecks: {
             strictStateImmutability: false,
-            strictActionImmutability: false
-          }
+            strictActionImmutability: false,
+          },
         }),
       ],
       declarations: [],

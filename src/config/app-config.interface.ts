@@ -9,6 +9,7 @@ import { HALDataService } from '../app/core/data/base/hal-data-service.interface
 import { GenericConstructor } from '../app/core/shared/generic-constructor';
 import { FieldRenderingType } from '../app/cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/field-rendering-type';
 import { MetadataBoxFieldRenderOptions } from '../app/cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/rendering-type.model';
+import { DiscoveryConfigurationFeaturesConfig } from '../app/shared/authorizations/authorization.interfaces';
 import { LiveRegionConfig } from '../app/shared/live-region/live-region.config';
 import { ActuatorsConfig } from './actuators.config';
 import { AddToAnyPluginConfig } from './add-to-any-plugin-config';
@@ -58,7 +59,6 @@ import { SuggestionConfig } from './suggestion-config.interfaces';
 import { ThemeConfig } from './theme.config';
 import { UIServerConfig } from './ui-server-config.interface';
 import { FeatureID } from '../app/core/data/feature-authorization/feature-id';
-import { DiscoveryConfigurationFeaturesConfig } from "../app/shared/authorizations/authorization.interfaces";
 
 
 interface AppConfig extends Config {

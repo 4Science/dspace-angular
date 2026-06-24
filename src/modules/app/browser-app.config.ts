@@ -73,7 +73,6 @@ import { TranslateBrowserLoader } from '../../ngx-translate-loaders/translate-br
 import { BrowserInitService } from './browser-init.service';
 import { AuthorizationService } from "../../app/shared/authorizations/authorization.service";
 
-
 export const REQ_KEY = makeStateKey<string>('req');
 
 export function createTranslateLoader(transferState: TransferState, http: HttpClient) {
@@ -172,7 +171,7 @@ export const browserAppConfig: ApplicationConfig = mergeApplicationConfig({
     },
     {
       provide: AuthorizationService,
-      useClass: AuthorizationService
+      useClass: AuthorizationService,
     },
     provideMatomo(
       {

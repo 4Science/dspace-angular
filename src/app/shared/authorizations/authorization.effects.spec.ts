@@ -1,17 +1,28 @@
 import { TestBed } from '@angular/core/testing';
-
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
-import { cold, hot } from 'jasmine-marbles';
-import { Observable, of } from 'rxjs';
+import {
+  cold,
+  hot,
+} from 'jasmine-marbles';
+import {
+  Observable,
+  of,
+} from 'rxjs';
+import { AuthorizationDataService } from 'src/app/core/data/feature-authorization/authorization-data.service';
+import { getRequestIdFromParams } from 'src/app/core/data/feature-authorization/authorization-utils';
+import { mockAuthSiteObject } from 'src/app/core/data/feature-authorization/authorizations.mock';
+import { environment } from 'src/environments/environment';
+
+import { AuthorizationDataServiceStub } from '../testing/authorization-service.stub';
+import {
+  AuthorizationActionTypes,
+  GetAuthorizationsAction,
+  GetAuthorizationsErrorAction,
+  GetAuthorizationsSuccessAction,
+} from './authorization.actions';
 import { AuthorizationEffects } from './authorization.effects';
 import { authorizationReducer } from './authorization.reducer';
-import { AuthorizationActionTypes, GetAuthorizationsAction, GetAuthorizationsErrorAction, GetAuthorizationsSuccessAction } from './authorization.actions';
-import { AuthorizationDataServiceStub } from "../testing/authorization-service.stub";
-import { environment } from "src/environments/environment";
-import { AuthorizationDataService } from "src/app/core/data/feature-authorization/authorization-data.service";
-import { mockAuthSiteObject } from "src/app/core/data/feature-authorization/authorizations.mock";
-import { getRequestIdFromParams } from "src/app/core/data/feature-authorization/authorization-utils";
 
 
 
@@ -36,8 +47,8 @@ describe('AuthorizationEffects success', () => {
         StoreModule.forRoot({ authorizationReducer }, {
           runtimeChecks: {
             strictStateImmutability: false,
-            strictActionImmutability: false
-          }
+            strictActionImmutability: false,
+          },
         }),
       ],
       providers: [
@@ -55,13 +66,13 @@ describe('AuthorizationEffects success', () => {
       actions = hot('--a-', {
         a: {
           type: AuthorizationActionTypes.GET_AUTHORIZATIONS,
-          payload: { uuidList: [mockAuthSiteObject.uuid], type: mockAuthSiteObject.uniqueType, featureIDs: featureIDs, hrefs: [mockAuthSiteObject.self] }
-        }
+          payload: { uuidList: [mockAuthSiteObject.uuid], type: mockAuthSiteObject.uniqueType, featureIDs: featureIDs, hrefs: [mockAuthSiteObject.self] },
+        },
       });
 
       const requestId = getRequestIdFromParams(mockAuthSiteObject.uniqueType, [mockAuthSiteObject.uuid], featureIDs);
 
-      const expected = cold('--b-', { b: new GetAuthorizationsSuccessAction({}, requestId)});
+      const expected = cold('--b-', { b: new GetAuthorizationsSuccessAction({}, requestId) });
 
       expect(authorizationEffects.getAuthorizations$).toBeObservable(expected);
       done();
@@ -83,8 +94,8 @@ describe('AuthorizationEffects error', () => {
         StoreModule.forRoot({ authorizationReducer }, {
           runtimeChecks: {
             strictStateImmutability: false,
-            strictActionImmutability: false
-          }
+            strictActionImmutability: false,
+          },
         }),
       ],
       providers: [

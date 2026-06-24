@@ -38,7 +38,12 @@ import { RemoteData } from '../remote-data';
 import { RequestService } from '../request.service';
 import { SiteDataService } from '../site-data.service';
 import { AuthorizationSearchParams } from './authorization-search-params';
-import { getAuthorizationFeaturesIDs, getNormalizedUuid, getRequestIdFromParams, oneAuthorizationMatchesFeature } from './authorization-utils';
+import {
+  getAuthorizationFeaturesIDs,
+  getNormalizedUuid,
+  getRequestIdFromParams,
+  oneAuthorizationMatchesFeature,
+} from './authorization-utils';
 import { FeatureID } from './feature-id';
 import { AppState } from "src/app/app.reducer";
 import { Store } from "@ngrx/store";
@@ -132,7 +137,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
             oneAuthorizationMatchesFeature(featureId)
           );
         }
-      })
+      }),
     );
   }
 
@@ -206,7 +211,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    */
   getAuthorizationForObjects(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, hrefs?: string[], useCachedVersionIfAvailable: boolean = true, reRequestOnStale: boolean = true): Observable<ObjectAuthorizationsState> {
     return this.searchObjectsAuthorizations(uuidList,  type, featuresId, ePersonUuid, useCachedVersionIfAvailable, reRequestOnStale).pipe(
-      getAuthorizationFeaturesIDs(featuresId, hrefs)
+      getAuthorizationFeaturesIDs(featuresId, hrefs),
     );
   }
 
@@ -306,7 +311,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
       this.createSearchOptionsForObjects(uuidList, type, options, ePersonUuid, featuresId),
       useCachedVersionIfAvailable,
       reRequestOnStale,
-      ...linksToFollow
+      ...linksToFollow,
     );
   }
 

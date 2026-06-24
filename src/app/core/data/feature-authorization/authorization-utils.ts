@@ -10,6 +10,10 @@ import {
   switchMap,
   take,
 } from 'rxjs/operators';
+import {
+  ObjectAuthorizationFeaturesMap,
+  ObjectAuthorizationsState,
+} from 'src/app/shared/authorizations/authorization.interfaces';
 
 import {
   hasNoValue,
@@ -19,12 +23,14 @@ import {
 import { AuthService } from '../../auth/auth.service';
 import { Authorization } from '../../shared/authorization.model';
 import { Feature } from '../../shared/feature.model';
-import { getFirstCompletedRemoteData, getFirstSucceededRemoteDataPayload } from '../../shared/operators';
+import {
+  getFirstCompletedRemoteData,
+  getFirstSucceededRemoteDataPayload,
+} from '../../shared/operators';
 import { SiteDataService } from '../site-data.service';
 import { AuthorizationSearchParams } from './authorization-search-params';
 import { FeatureID } from './feature-id';
 import { DSpaceObject } from "../../shared/dspace-object.model";
-import { ObjectAuthorizationFeaturesMap, ObjectAuthorizationsState } from "src/app/shared/authorizations/authorization.interfaces";
 
 /**
  * Operator accepting {@link AuthorizationSearchParams} and adding the current {@link Site}'s selflink to the parameter's
@@ -121,16 +127,16 @@ export const getAuthorizationFeaturesIDs = (featureIDs: FeatureID[], hrefs: stri
 
               objects.forEach(object => {
                 objectToFeaturesMap = Object.assign({}, objectToFeaturesMap, {
-                  [object.self]: getFeatureIdToBooleanMap(featureIDs, features)
+                  [object.self]: getFeatureIdToBooleanMap(featureIDs, features),
                 });
               });
               return objectToFeaturesMap;
-            })
+            }),
           );
         } else {
           hrefs.forEach(href => {
             objectToFeaturesMap = Object.assign({}, objectToFeaturesMap, {
-              [href]: getFeatureIdToBooleanMap(featureIDs, [])
+              [href]: getFeatureIdToBooleanMap(featureIDs, []),
             });
           });
           return of(objectToFeaturesMap);
@@ -144,9 +150,9 @@ export const getAuthorizationFeaturesIDs = (featureIDs: FeatureID[], hrefs: stri
  *
  */
 export const getFeatureIdToBooleanMap = (featureIDs: FeatureID[], features: Feature[]): ObjectAuthorizationFeaturesMap => {
-  let mapFeatureToBoolean = {};
+  const mapFeatureToBoolean = {};
   featureIDs.forEach(id => {
-    mapFeatureToBoolean[id] = hasValue(features.find(feature => feature.id === id));
+    mapFeatureToBoolean[id] = hasValue(features.find(feature => feature.id === id.toString()));
   });
   return  mapFeatureToBoolean;
 };

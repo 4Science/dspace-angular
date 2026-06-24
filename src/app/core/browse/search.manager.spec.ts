@@ -3,6 +3,7 @@ import { of } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 import { v4 as uuidv4 } from 'uuid';
 
+import { AppConfig } from '../../../config/app-config.interface';
 import { toRemoteData } from '../../browse-by/browse-by-metadata/browse-by-metadata.component.spec';
 import {
   createSuccessfulRemoteDataObject,
@@ -10,6 +11,7 @@ import {
 } from '../../shared/remote-data.utils';
 import { createPaginatedList } from '../../shared/testing/utils.test';
 import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
+import { FeatureID } from '../data/feature-authorization/feature-id';
 import { FindListOptions } from '../data/find-list-options.model';
 import { Item } from '../shared/item.model';
 import { ITEM } from '../shared/item.resource-type';
@@ -17,8 +19,6 @@ import { MetadataValue } from '../shared/metadata.models';
 import { AUTHORITY_REFERENCE } from '../shared/metadata.utils';
 import { BrowseEntrySearchOptions } from './browse-entry-search-options.model';
 import { SearchManager } from './search-manager';
-import { AppConfig } from '../../../config/app-config.interface';
-import { FeatureID } from '../data/feature-authorization/feature-id';
 
 describe('SearchManager', () => {
   let scheduler: TestScheduler;
@@ -104,13 +104,13 @@ describe('SearchManager', () => {
     followAuthorityMetadata:  [
       {
         type: 'Publication',
-        metadata: ['dc.contributor.author']
+        metadata: ['dc.contributor.author'],
       },
       {
         type: 'Product',
-        metadata: ['dc.contributor.author']
-      }
-    ]
+        metadata: ['dc.contributor.author'],
+      },
+    ],
   };
 
   const mockBrowseService: any = {
@@ -132,7 +132,7 @@ describe('SearchManager', () => {
 
   const mockAuthorizationService: any = {
     getObjectsAuthorizations: (uuidList: string[], uniqueType: string, featuresId?: FeatureID[]) =>
-      of([])
+      of([]),
   };
 
   function initTestService() {

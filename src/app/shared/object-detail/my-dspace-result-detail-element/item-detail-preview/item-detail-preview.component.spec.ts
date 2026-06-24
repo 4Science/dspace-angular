@@ -23,6 +23,7 @@ import { BitstreamDataService } from '../../../../core/data/bitstream-data.servi
 import { CommunityDataService } from '../../../../core/data/community-data.service';
 import { DefaultChangeAnalyzer } from '../../../../core/data/default-change-analyzer.service';
 import { DSOChangeAnalyzer } from '../../../../core/data/dso-change-analyzer.service';
+import { AuthorizationDataService } from '../../../../core/data/feature-authorization/authorization-data.service';
 import { FindListOptions } from '../../../../core/data/find-list-options.model';
 import { PaginatedList } from '../../../../core/data/paginated-list.model';
 import { RemoteData } from '../../../../core/data/remote-data';
@@ -40,6 +41,7 @@ import { ThemeService } from '../../../../shared/theme-support/theme.service';
 import { TranslateLoaderMock } from '../../../mocks/translate-loader.mock';
 import { NotificationsService } from '../../../notifications/notifications.service';
 import { createSuccessfulRemoteDataObject$ } from '../../../remote-data.utils';
+import { AuthorizationDataServiceStub } from '../../../testing/authorization-service.stub';
 import { HALEndpointServiceStub } from '../../../testing/hal-endpoint-service.stub';
 import { createPaginatedList } from '../../../testing/utils.test';
 import { FileSizePipe } from '../../../utils/file-size-pipe';
@@ -128,6 +130,7 @@ describe('ItemDetailPreviewComponent', () => {
         { provide: ThemeService, useValue: getMockThemeService() },
         { provide: AuthService, useValue: new AuthServiceMock() },
         { provide: SearchService, useValue: new SearchServiceStub() },
+        { provide: AuthorizationDataService, useClass: AuthorizationDataServiceStub },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(ItemDetailPreviewComponent, {

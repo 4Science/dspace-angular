@@ -46,8 +46,8 @@ import SpyObj = jasmine.SpyObj;
 import { getTestScheduler } from 'jasmine-marbles';
 
 import { HeadTagService } from './core/metadata/head-tag.service';
+import { AuthorizationService } from './shared/authorizations/authorization.service';
 import { HeadTagServiceMock } from './shared/mocks/head-tag-service.mock';
-import { AuthorizationService } from "./shared/authorizations/authorization.service";
 
 let spy: SpyObj<any>;
 

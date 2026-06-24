@@ -33,6 +33,8 @@ import {
   editItemRelationshipsReducer,
   EditItemRelationshipsState,
 } from './edit-item-relationships/edit-item-relationships.reducer';
+import { AuthorizationsState } from './shared/authorizations/authorization.interfaces';
+import { authorizationReducer } from './shared/authorizations/authorization.reducer';
 import {
   contextHelpReducer,
   ContextHelpState,
@@ -84,8 +86,6 @@ import {
   truncatableReducer,
   TruncatablesState,
 } from './shared/truncatable/truncatable.reducer';
-import { AuthorizationsState } from "./shared/authorizations/authorization.interfaces";
-import { authorizationReducer } from "./shared/authorizations/authorization.reducer";
 
 export interface AppState {
   router: RouterReducerState;
@@ -134,7 +134,7 @@ export const appReducers: ActionReducerMap<AppState> = {
   contextHelp: contextHelpReducer,
   statistics: StatisticsReducer,
   editItemRelationships: editItemRelationshipsReducer,
-  authorizationFeatures: authorizationReducer
+  authorizationFeatures: authorizationReducer,
 };
 
 export const routerStateSelector = (state: AppState) => state.router;
