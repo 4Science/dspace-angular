@@ -44,6 +44,7 @@ import { AuthorizationService } from "./authorization.service";
 import { AppState } from "src/app/app.reducer";
 import { Store } from "@ngrx/store";
 import { DSpaceObject } from "../../shared/dspace-object.model";
+import { ObjectAuthorizationsState } from "./authorization.interfaces";
 
 /**
  * A service to retrieve {@link Authorization}s from the REST API
@@ -222,7 +223,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
           return [];
         }
       }),
-      catchError(() => observableOf([]))
+      catchError(() => of([]))
     );
 
   }

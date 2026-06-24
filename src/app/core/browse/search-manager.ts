@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import isArray from 'lodash/isArray';
 import {
+  forkJoin,
   Observable,
   of,
 } from 'rxjs';
 import {
+  filter,
   map,
   switchMap,
 } from 'rxjs/operators';
@@ -34,6 +36,9 @@ import { BrowseService } from './browse.service';
 import { BrowseEntrySearchOptions } from './browse-entry-search-options.model';
 import { AuthorizationService } from '../data/feature-authorization/authorization.service';
 import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
+import { FeatureID } from "../data/feature-authorization/feature-id";
+import { getRequestIdFromParams } from "../data/feature-authorization/authorization-utils";
+import { SearchOptions } from "src/app/shared/search/models/search-options.model";
 
 /**
  * The service aims to manage browse requests and subsequent extra fetch requests.

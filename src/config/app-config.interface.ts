@@ -57,8 +57,8 @@ import { SubmissionConfig } from './submission-config.interface';
 import { SuggestionConfig } from './suggestion-config.interfaces';
 import { ThemeConfig } from './theme.config';
 import { UIServerConfig } from './ui-server-config.interface';
-import { FeatureID } from "src/app/core/data/feature-authorization/feature-id";
 import { DiscoveryConfigurationFeaturesConfig } from "src/app/core/data/feature-authorization/authorization.interfaces";
+import { FeatureID } from "../app/core/data/feature-authorization/feature-id";
 
 interface AppConfig extends Config {
   ui: UIServerConfig;
