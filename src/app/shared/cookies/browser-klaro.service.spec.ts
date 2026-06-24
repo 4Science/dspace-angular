@@ -11,10 +11,6 @@ import { RestResponse } from '../../core/cache/response.models';
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
 import { EPersonDataService } from '../../core/eperson/eperson-data.service';
 import { EPerson } from '../../core/eperson/models/eperson.model';
-import {
-  CAPTCHA_FEEDBACK_NAME,
-  CAPTCHA_REGISTRATION_NAME,
-} from '../../core/google-recaptcha/google-recaptcha.service';
 import { CookieService } from '../../core/services/cookie.service';
 import { NativeWindowService } from '../../core/services/window.service';
 import { ConfigurationProperty } from '../../core/shared/configuration-property.model';
@@ -28,7 +24,6 @@ import {
 import {
   BrowserKlaroService,
   COOKIE_MDFIELD,
-  LAZY_KLARO,
 } from './browser-klaro.service';
 import { ANONYMOUS_STORAGE_NAME_KLARO } from './klaro-configuration';
 
@@ -111,10 +106,6 @@ describe('BrowserKlaroService', () => {
           provide: ConfigurationDataService,
           useValue: configurationDataService,
         },
-        {
-          provide: LAZY_KLARO,
-          useValue: Promise.resolve({ setup: () => {/* noop */} }),
-        },
       ],
     });
     service = TestBed.inject(BrowserKlaroService);
@@ -136,12 +127,6 @@ describe('BrowserKlaroService', () => {
         purposes: [purpose],
       }, {
         name: googleAnalytics,
-        purposes: [purpose],
-      }, {
-        name: CAPTCHA_REGISTRATION_NAME,
-        purposes: [purpose],
-      }, {
-        name: CAPTCHA_FEEDBACK_NAME,
         purposes: [purpose],
       }],
 
@@ -480,147 +465,6 @@ describe('BrowserKlaroService', () => {
           );
       service.initialize();
       expect(service.klaroConfig.services).not.toContain(jasmine.objectContaining({ name: googleAnalytics }));
-    });
-    it('should show both recaptcha services when both verifications are enabled', () => {
-      configurationDataService.findByPropertyName = jasmine.createSpy('configurationDataService').and.returnValue(
-        createSuccessfulRemoteDataObject$({
-          ... new ConfigurationProperty(),
-          name: trackingIdTestValue,
-          values: ['true'],
-        }),
-      );
-      service.initialize();
-      expect(service.klaroConfig.services).toContain(jasmine.objectContaining({ name: CAPTCHA_REGISTRATION_NAME }));
-      expect(service.klaroConfig.services).toContain(jasmine.objectContaining({ name: CAPTCHA_FEEDBACK_NAME }));
-    });
-    it('should hide registration recaptcha service when registration verification is disabled', () => {
-      configurationDataService.findByPropertyName =
-        jasmine.createSpy('configurationDataService')
-          .withArgs(GOOGLE_ANALYTICS_KEY)
-          .and
-          .returnValue(
-            createSuccessfulRemoteDataObject$({
-              ... new ConfigurationProperty(),
-              name: trackingIdProp,
-              values: [googleAnalytics],
-            }),
-          )
-          .withArgs(REGISTRATION_VERIFICATION_ENABLED_KEY)
-          .and
-          .returnValue(
-            createSuccessfulRemoteDataObject$({
-              ... new ConfigurationProperty(),
-              name: trackingIdTestValue,
-              values: ['false'],
-            }),
-          )
-          .withArgs(FEEDBACK_VERIFICATION_ENABLED_KEY)
-          .and
-          .returnValue(
-            createSuccessfulRemoteDataObject$({
-              ... new ConfigurationProperty(),
-              name: trackingIdTestValue,
-              values: ['true'],
-            }),
-          )
-          .withArgs(MATOMO_ENABLED)
-          .and
-          .returnValue(
-            createSuccessfulRemoteDataObject$({
-              ... new ConfigurationProperty(),
-              name: matomoTrackingId,
-              values: ['true'],
-            }),
-          );
-      service.initialize();
-      expect(service.klaroConfig.services).not.toContain(jasmine.objectContaining({ name: CAPTCHA_REGISTRATION_NAME }));
-      expect(service.klaroConfig.services).toContain(jasmine.objectContaining({ name: CAPTCHA_FEEDBACK_NAME }));
-    });
-    it('should hide feedback recaptcha service when feedback verification is disabled', () => {
-      configurationDataService.findByPropertyName =
-        jasmine.createSpy('configurationDataService')
-          .withArgs(GOOGLE_ANALYTICS_KEY)
-          .and
-          .returnValue(
-            createSuccessfulRemoteDataObject$({
-              ... new ConfigurationProperty(),
-              name: trackingIdProp,
-              values: [googleAnalytics],
-            }),
-          )
-          .withArgs(REGISTRATION_VERIFICATION_ENABLED_KEY)
-          .and
-          .returnValue(
-            createSuccessfulRemoteDataObject$({
-              ... new ConfigurationProperty(),
-              name: trackingIdTestValue,
-              values: ['true'],
-            }),
-          )
-          .withArgs(FEEDBACK_VERIFICATION_ENABLED_KEY)
-          .and
-          .returnValue(
-            createSuccessfulRemoteDataObject$({
-              ... new ConfigurationProperty(),
-              name: trackingIdTestValue,
-              values: ['false'],
-            }),
-          )
-          .withArgs(MATOMO_ENABLED)
-          .and
-          .returnValue(
-            createSuccessfulRemoteDataObject$({
-              ... new ConfigurationProperty(),
-              name: matomoTrackingId,
-              values: ['true'],
-            }),
-          );
-      service.initialize();
-      expect(service.klaroConfig.services).toContain(jasmine.objectContaining({ name: CAPTCHA_REGISTRATION_NAME }));
-      expect(service.klaroConfig.services).not.toContain(jasmine.objectContaining({ name: CAPTCHA_FEEDBACK_NAME }));
-    });
-    it('should hide both recaptcha services when both verifications are disabled', () => {
-      configurationDataService.findByPropertyName =
-        jasmine.createSpy('configurationDataService')
-          .withArgs(GOOGLE_ANALYTICS_KEY)
-          .and
-          .returnValue(
-            createSuccessfulRemoteDataObject$({
-              ... new ConfigurationProperty(),
-              name: trackingIdProp,
-              values: [googleAnalytics],
-            }),
-          )
-          .withArgs(REGISTRATION_VERIFICATION_ENABLED_KEY)
-          .and
-          .returnValue(
-            createSuccessfulRemoteDataObject$({
-              ... new ConfigurationProperty(),
-              name: trackingIdTestValue,
-              values: ['false'],
-            }),
-          )
-          .withArgs(FEEDBACK_VERIFICATION_ENABLED_KEY)
-          .and
-          .returnValue(
-            createSuccessfulRemoteDataObject$({
-              ... new ConfigurationProperty(),
-              name: trackingIdTestValue,
-              values: ['false'],
-            }),
-          )
-          .withArgs(MATOMO_ENABLED)
-          .and
-          .returnValue(
-            createSuccessfulRemoteDataObject$({
-              ... new ConfigurationProperty(),
-              name: matomoTrackingId,
-              values: ['true'],
-            }),
-          );
-      service.initialize();
-      expect(service.klaroConfig.services).not.toContain(jasmine.objectContaining({ name: CAPTCHA_REGISTRATION_NAME }));
-      expect(service.klaroConfig.services).not.toContain(jasmine.objectContaining({ name: CAPTCHA_FEEDBACK_NAME }));
     });
   });
 });
