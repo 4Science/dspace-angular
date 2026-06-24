@@ -82,7 +82,7 @@ const updateDebounce = 300;
 /**
  * By using this injection token instead of importing directly we can keep Klaro out of the main bundle
  */
-const LAZY_KLARO = new InjectionToken<Promise<any>>(
+export const LAZY_KLARO = new InjectionToken<Promise<any>>(
   'Lazily loaded Klaro',
   {
     providedIn: 'root',

@@ -28,6 +28,7 @@ import {
 import {
   BrowserKlaroService,
   COOKIE_MDFIELD,
+  LAZY_KLARO,
 } from './browser-klaro.service';
 import { ANONYMOUS_STORAGE_NAME_KLARO } from './klaro-configuration';
 
@@ -109,6 +110,10 @@ describe('BrowserKlaroService', () => {
         {
           provide: ConfigurationDataService,
           useValue: configurationDataService,
+        },
+        {
+          provide: LAZY_KLARO,
+          useValue: Promise.resolve({ setup: () => {/* noop */} }),
         },
       ],
     });
