@@ -32,6 +32,8 @@ import { getFirstCompletedRemoteData } from '../shared/operators';
 import { SearchService } from '../shared/search/search.service';
 import { BrowseService } from './browse.service';
 import { BrowseEntrySearchOptions } from './browse-entry-search-options.model';
+import { AuthorizationService } from '../data/feature-authorization/authorization.service';
+import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
 
 /**
  * The service aims to manage browse requests and subsequent extra fetch requests.
@@ -43,6 +45,8 @@ export class SearchManager {
     protected itemService: ItemDataService,
     protected browseService: BrowseService,
     protected searchService: SearchService,
+    protected authorizationService: AuthorizationService,
+    @Inject(APP_CONFIG) protected appConfig: AppConfig
   ) {
   }
 
@@ -79,7 +83,7 @@ export class SearchManager {
     ...linksToFollow: FollowLinkConfig<T>[]): Observable<RemoteData<SearchObjects<T>>> {
     const optionsWithDefaultProjection = Object.assign(new PaginatedSearchOptions({}), searchOptions, { projection: searchOptions.projection ?? 'preventMetadataSecurity' });
     return this.searchService.search(optionsWithDefaultProjection, responseMsToLive, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow)
-      .pipe(this.completeSearchObjectsWithExtraData());
+      .pipe(this.completeSearchObjectsWithExtraData(optionsWithDefaultProjection));
   }
 
 
@@ -94,18 +98,109 @@ export class SearchManager {
     });
   }
 
-  protected completeSearchObjectsWithExtraData<T extends DSpaceObject>() {
+  protected completeSearchObjectsWithExtraData<T extends DSpaceObject>(searchOptions: SearchOptions) {
     return switchMap((searchObjectsRD: RemoteData<SearchObjects<T>>) => {
       if (searchObjectsRD.isSuccess) {
         const items: Item[] = searchObjectsRD.payload.page
           .map((searchResult) => isNotEmpty(searchResult?._embedded?.indexableObject) ? searchResult._embedded.indexableObject : searchResult.indexableObject) as any;
-        return this.fetchExtraData(items).pipe(map(() => {
-          return searchObjectsRD;
-        }));
+        return this.fetchExtraData(items).pipe(
+          switchMap(() => this.fetchConfiguredAuthorizations(searchObjectsRD, searchOptions.configuration ?? 'default')),
+          map(() => {
+            return searchObjectsRD;
+          }),
+        );
       }
       return of(searchObjectsRD);
     });
   }
+
+  /**
+   * Retrieve configured authorizations related to current discovery configuration
+   *
+   * @param searchObjects
+   * @param configuration
+   * @protected
+   */
+  protected fetchConfiguredAuthorizations<T extends DSpaceObject>(searchObjects: RemoteData<SearchObjects<T>>, configuration: string): Observable<any> {
+    const objects = searchObjects.payload.page.map((searchResult) => searchResult.indexableObject) as any;
+    const mappedObjects = this.getConfiguredAuthorizationsMap(objects, configuration);
+
+    if ([...mappedObjects.keys()].length === 0) {
+      return of(searchObjects);
+    }
+
+    const requestsIds = [];
+
+    const uiidListsMappedToAuthorizations = this.groupItemsUuidsByAuthorizations(objects, mappedObjects);
+    [...uiidListsMappedToAuthorizations.keys()].forEach((features) => {
+      const uuidList = uiidListsMappedToAuthorizations.get(features);
+      const type = objects.find(object => object.id === uuidList[0]).uniqueType;
+      const hrefs = objects.map(dso => dso.self);
+      this.authorizationService.initStateForObjects(uuidList, type, features, hrefs);
+      requestsIds.push(getRequestIdFromParams(type, uuidList, features));
+    });
+
+    return forkJoin(requestsIds.map(id => this.authorizationService.isRequestLoading(id))).pipe(
+      filter(loadingItems => loadingItems.every(loading => !loading)),
+      map(() => {
+        return searchObjects;
+      }),
+    );
+  }
+
+  /**
+   * Group items by authorization ID in a map
+   *
+   * @param objects
+   * @param mappedEntities
+   * @private
+   */
+  private groupItemsUuidsByAuthorizations<T extends DSpaceObject>(objects: T[], mappedEntities: Map<string, FeatureID[]>): Map<FeatureID[], string[]> {
+    const mappedUuidListsToFeatures = new Map();
+
+    objects.forEach(object => {
+      const objectType = object.uniqueType;
+      const features = mappedEntities.get(objectType);
+
+      if (hasValue(features) && hasValue(mappedUuidListsToFeatures.get(features))) {
+        mappedUuidListsToFeatures.set(features, [...mappedUuidListsToFeatures.get(features), object.id]);
+      } else if (hasValue(features)) {
+        mappedUuidListsToFeatures.set(features, [object.id]);
+      }
+    });
+
+    return mappedUuidListsToFeatures;
+  }
+
+  /**
+   * Map entity types oe unique type to required authorizations so that we can group the items by feature
+   *
+   * @param objects
+   * @param configuration
+   * @private
+   */
+  private getConfiguredAuthorizationsMap<T extends DSpaceObject>(objects: T[], configuration: string): Map<string, FeatureID[]> {
+    const configuredAuthorizationsForDiscovery =
+      this.appConfig.discoveryAuthorizationFeaturesConfig[configuration] ?? this.appConfig.discoveryAuthorizationFeaturesConfig.default;
+    const configuredAuthorizationsToType = new Map();
+
+    if (!hasValue(configuredAuthorizationsForDiscovery)) {
+      return configuredAuthorizationsToType;
+    }
+
+    const objectUniqueTypes =  [...new Set(objects.map(dso => dso?.uniqueType))];
+
+    objectUniqueTypes.forEach((entity) => {
+      const config = configuredAuthorizationsForDiscovery[entity];
+
+      if (hasValue(config)) {
+        configuredAuthorizationsToType.set(entity, config);
+      }
+    });
+
+    return configuredAuthorizationsToType;
+  }
+
 
   protected fetchExtraData<T extends DSpaceObject>(objects: T[]): Observable<any> {
 

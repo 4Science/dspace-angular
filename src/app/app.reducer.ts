@@ -84,6 +84,8 @@ import {
   truncatableReducer,
   TruncatablesState,
 } from './shared/truncatable/truncatable.reducer';
+import { authorizationReducer } from "./core/data/feature-authorization/authorization.reducer";
+import { AuthorizationsState } from "./core/data/feature-authorization/authorization.interfaces";
 
 export interface AppState {
   router: RouterReducerState;
@@ -107,6 +109,7 @@ export interface AppState {
   correlationId: string;
   contextHelp: ContextHelpState;
   editItemRelationships: EditItemRelationshipsState;
+  authorizationFeatures: AuthorizationsState;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -131,6 +134,7 @@ export const appReducers: ActionReducerMap<AppState> = {
   contextHelp: contextHelpReducer,
   statistics: StatisticsReducer,
   editItemRelationships: editItemRelationshipsReducer,
+  authorizationFeatures: authorizationReducer
 };
 
 export const routerStateSelector = (state: AppState) => state.router;

@@ -57,6 +57,8 @@ import { SubmissionConfig } from './submission-config.interface';
 import { SuggestionConfig } from './suggestion-config.interfaces';
 import { ThemeConfig } from './theme.config';
 import { UIServerConfig } from './ui-server-config.interface';
+import { FeatureID } from "src/app/core/data/feature-authorization/feature-id";
+import { DiscoveryConfigurationFeaturesConfig } from "src/app/core/data/feature-authorization/authorization.interfaces";
 
 interface AppConfig extends Config {
   ui: UIServerConfig;
@@ -112,6 +114,8 @@ interface AppConfig extends Config {
   datadogRum?: DatadogRumConfig;
   permanentRedirectPaths?: string[];
   luckySearchRedirects?: LuckySearchRedirectConfig;
+  siteAuthorizationFeaturesConfig: FeatureID[];
+  discoveryAuthorizationFeaturesConfig: DiscoveryConfigurationFeaturesConfig;
 }
 
 /**

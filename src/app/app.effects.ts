@@ -4,6 +4,7 @@ import { NotificationsEffects } from './shared/notifications/notifications.effec
 import { SidebarEffects } from './shared/sidebar/sidebar-effects.service';
 import { ThemeEffects } from './shared/theme-support/theme.effects';
 import { StoreEffects } from './store.effects';
+import { AuthorizationEffects } from './core/data/feature-authorization/authorization.effects';
 
 export const appEffects = [
   StoreEffects,
@@ -12,4 +13,5 @@ export const appEffects = [
   SidebarEffects,
   ThemeEffects,
   RelationshipEffects,
+  AuthorizationEffects
 ];

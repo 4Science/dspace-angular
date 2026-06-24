@@ -71,6 +71,8 @@ import { SubmissionService } from '../../app/submission/submission.service';
 import { REQUEST } from '../../express.tokens';
 import { TranslateBrowserLoader } from '../../ngx-translate-loaders/translate-browser.loader';
 import { BrowserInitService } from './browser-init.service';
+import { AuthorizationService } from '../../app/core/data/feature-authorization/authorization.service';
+
 
 export const REQ_KEY = makeStateKey<string>('req');
 
@@ -167,6 +169,10 @@ export const browserAppConfig: ApplicationConfig = mergeApplicationConfig({
     {
       provide: MathService,
       useClass: ClientMathService,
+    },
+    {
+      provide: AuthorizationService,
+      useClass: AuthorizationService
     },
     provideMatomo(
       {

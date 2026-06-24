@@ -1,3 +1,4 @@
+import { FeatureID } from "src/app/core/data/feature-authorization/feature-id";
 import { AccessibilitySettingsConfig } from '../app/accessibility/accessibility-settings.config';
 import { AdminNotifyMetricsRow } from '../app/admin/admin-notify-dashboard/admin-notify-metrics/admin-notify-metrics.model';
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
@@ -56,6 +57,7 @@ import { ServerConfig } from './server-config.interface';
 import { SubmissionConfig } from './submission-config.interface';
 import { ThemeConfig } from './theme.config';
 import { UIServerConfig } from './ui-server-config.interface';
+import { DiscoveryConfigurationFeaturesConfig } from "src/app/core/data/feature-authorization/authorization.interfaces";
 
 export class DefaultAppConfig implements AppConfig {
   production = false;
@@ -151,6 +153,31 @@ export class DefaultAppConfig implements AppConfig {
       timeLeftBeforeTokenRefresh: 2 * 60 * 1000, // 2 minutes
     },
     isPasswordLoginEnabledForAdminsOnly: false, // Enable the standard login form
+  };
+
+  siteAuthorizationFeaturesConfig: FeatureID[] = [
+    FeatureID.AdministratorOf,
+    FeatureID.IsCommunityAdmin,
+    FeatureID.IsCollectionAdmin,
+    FeatureID.EPersonRegistration,
+    FeatureID.CanManageGroups,
+    FeatureID.CanChangePassword,
+    FeatureID.CanViewUsageStatistics,
+    FeatureID.CanViewLoginStatistics,
+    FeatureID.CanViewWorkflowStatistics,
+    FeatureID.CanSendFeedback,
+    FeatureID.CanEditItem,
+    FeatureID.EPersonForgotPassword,
+    FeatureID.CanCorrectItem,
+    FeatureID.CanSubmit,
+  ];
+
+  discoveryAuthorizationFeaturesConfig: DiscoveryConfigurationFeaturesConfig = {
+    'workspace': {
+      'submission.workspaceitem': [
+        FeatureID.CanEditItem
+      ]
+    },
   };
 
   // Form settings

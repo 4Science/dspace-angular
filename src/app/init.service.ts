@@ -49,6 +49,7 @@ import { MenuService } from './shared/menu/menu.service';
 import { MenuProviderService } from './shared/menu/menu-provider.service';
 import { ThemeService } from './shared/theme-support/theme.service';
 import { Angulartics2DSpace } from './statistics/angulartics/dspace-provider';
+import { AuthorizationService } from './core/data/feature-authorization/authorization.service';
 
 /**
  * Performs the initialization of the app.
@@ -79,7 +80,7 @@ export abstract class InitService {
     protected themeService: ThemeService,
     protected menuService: MenuService,
     protected menuProviderService: MenuProviderService,
-
+    protected authorizationService: AuthorizationService
   ) {
   }
 
