@@ -51,6 +51,7 @@ import { createPaginatedList } from '../../shared/testing/utils.test';
 import { TruncatableComponent } from '../../shared/truncatable/truncatable.component';
 import { TruncatablePartComponent } from '../../shared/truncatable/truncatable-part/truncatable-part.component';
 import { FileSizePipe } from '../../shared/utils/file-size-pipe';
+import { LocaleService } from '../../core/locale/locale.service';
 import { LuckySearchService } from '../lucky-search.service';
 import { LuckySearchComponent } from './lucky-search.component';
 
@@ -133,6 +134,7 @@ describe('LuckySearchComponent', () => {
         { provide: PLATFORM_ID, useValue: 'browser' },
         { provide: NotificationsService, useValue: new NotificationsServiceStub() },
         { provide: APP_CONFIG, useValue: {} },
+        { provide: LocaleService, useValue: { getCurrentLanguageCode: () => of('en') } },
       ],
     }).overrideComponent(LuckySearchComponent, {
       remove: {

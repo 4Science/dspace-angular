@@ -33,6 +33,7 @@ import { createPaginatedList } from '../../../../../../../shared/testing/utils.t
 import { TruncatableComponent } from '../../../../../../../shared/truncatable/truncatable.component';
 import { TruncatablePartComponent } from '../../../../../../../shared/truncatable/truncatable-part/truncatable-part.component';
 import { FileSizePipe } from '../../../../../../../shared/utils/file-size-pipe';
+import { LocaleService } from '../../../../../../../core/locale/locale.service';
 import { FieldRenderingType } from '../field-rendering-type';
 import { AttachmentComponent } from './attachment.component';
 
@@ -171,6 +172,7 @@ describe('AttachmentComponent', () => {
         { provide: 'tabNameProvider', useValue: '' },
         { provide: BitstreamDataService, useValue: mockBitstreamDataService },
         { provide: AuthorizationDataService, useValue: mockAuthorizedService },
+        { provide: LocaleService, useValue: { getCurrentLanguageCode: () => of('en') } },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     };

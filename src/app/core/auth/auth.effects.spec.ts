@@ -198,6 +198,7 @@ describe('AuthEffects', () => {
         const expected = cold('--b-', { b: new AuthenticatedErrorAction(new Error('Message Error test')) });
 
         expect(authEffects.authenticated$).toBeObservable(expected);
+        done();
       });
     });
 

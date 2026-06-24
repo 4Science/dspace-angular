@@ -323,7 +323,7 @@ describe('EPersonFormComponent', () => {
       beforeEach(() => {
         component.formGroup.controls.firstName.setValue('test');
         component.formGroup.controls.lastName.setValue('test');
-        component.formGroup.controls.email.setValue('TEST@test.com');
+        component.formGroup.controls.email.setValue('test@test.com');
         fixture.detectChanges();
       });
 
@@ -340,7 +340,7 @@ describe('EPersonFormComponent', () => {
       });
       it('email should not be valid because the email pattern', () => {
         expect(component.formGroup.controls.email.valid).toBeFalse();
-        expect(component.formGroup.controls.email.errors.email).toBeTruthy();
+        expect(component.formGroup.controls.email.errors.pattern).toBeTruthy();
       });
     });
 
