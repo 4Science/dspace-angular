@@ -23,6 +23,7 @@ import { BitstreamDataService } from '../../../../../../../core/data/bitstream-d
 import { AuthorizationDataService } from '../../../../../../../core/data/feature-authorization/authorization-data.service';
 import { RemoteData } from '../../../../../../../core/data/remote-data';
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
+import { LocaleService } from '../../../../../../../core/locale/locale.service';
 import { Bitstream } from '../../../../../../../core/shared/bitstream.model';
 import { Item } from '../../../../../../../core/shared/item.model';
 import { ThemedFileDownloadLinkComponent } from '../../../../../../../shared/file-download-link/themed-file-download-link.component';
@@ -33,7 +34,6 @@ import { createPaginatedList } from '../../../../../../../shared/testing/utils.t
 import { TruncatableComponent } from '../../../../../../../shared/truncatable/truncatable.component';
 import { TruncatablePartComponent } from '../../../../../../../shared/truncatable/truncatable-part/truncatable-part.component';
 import { FileSizePipe } from '../../../../../../../shared/utils/file-size-pipe';
-import { LocaleService } from '../../../../../../../core/locale/locale.service';
 import { FieldRenderingType } from '../field-rendering-type';
 import { AttachmentComponent } from './attachment.component';
 

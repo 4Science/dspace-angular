@@ -6,7 +6,10 @@ import {
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NgbCollapseModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbCollapseModule,
+  NgbModal,
+} from '@ng-bootstrap/ng-bootstrap';
 import {
   TranslateModule,
   TranslateService,

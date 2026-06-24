@@ -9,11 +9,6 @@ import {
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { provideMockStore } from '@ngrx/store/testing';
-import {
-  TranslateLoader,
-  TranslateModule,
-} from '@ngx-translate/core';
 import {
   NgbNav,
   NgbNavContent,
@@ -21,6 +16,11 @@ import {
   NgbNavLink,
   NgbNavModule,
 } from '@ng-bootstrap/ng-bootstrap';
+import { provideMockStore } from '@ngrx/store/testing';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
 import { of } from 'rxjs';
 
 import { AuthService } from '../../core/auth/auth.service';

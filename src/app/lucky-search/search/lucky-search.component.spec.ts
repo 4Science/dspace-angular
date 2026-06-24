@@ -24,6 +24,7 @@ import {
   BitstreamDataService,
   MetadataFilter,
 } from '../../core/data/bitstream-data.service';
+import { LocaleService } from '../../core/locale/locale.service';
 import { HardRedirectService } from '../../core/services/hard-redirect.service';
 import { Bitstream } from '../../core/shared/bitstream.model';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
@@ -51,7 +52,6 @@ import { createPaginatedList } from '../../shared/testing/utils.test';
 import { TruncatableComponent } from '../../shared/truncatable/truncatable.component';
 import { TruncatablePartComponent } from '../../shared/truncatable/truncatable-part/truncatable-part.component';
 import { FileSizePipe } from '../../shared/utils/file-size-pipe';
-import { LocaleService } from '../../core/locale/locale.service';
 import { LuckySearchService } from '../lucky-search.service';
 import { LuckySearchComponent } from './lucky-search.component';
 
