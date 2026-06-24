@@ -59,7 +59,7 @@ describe('AuthorizationDataService', () => {
       getAuthorizationForObject: of(true),
       hasAuthorizationEntryForObject: of(true),
       isRequestLoading: of(false),
-      initStateForObjects: jasmine.createSpy('initStateForObjects')
+      initStateForObjects: jasmine.createSpy('initStateForObjects'),
     });
     objectCache = getMockObjectCacheService();
     service = new AuthorizationDataService(requestService, undefined, objectCache, undefined, siteService, authorizationService, undefined);

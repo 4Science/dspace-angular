@@ -99,7 +99,7 @@ describe('AuthorizationService', () => {
     tick(100);
 
     expect(siteService.find).toHaveBeenCalled();
-    expect(store.dispatch).toHaveBeenCalledWith(new GetAuthorizationsAction([mockAuthSiteObject.uuid], mockAuthSiteObject.uniqueType, environment.siteAuthorizationFeaturesConfig, [mockAuthSiteObject.self]));
+    expect(store.dispatch).toHaveBeenCalledWith(new GetAuthorizationsAction([mockAuthSiteObject.uuid], mockAuthSiteObject.uniqueType, environment.siteAuthorizationFeaturesConfig, [mockAuthSiteObject.self]) as any);
   }));
 
   it('should return a boolean for the authorization of a single object', (done) => {

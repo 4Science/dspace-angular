@@ -13,13 +13,13 @@ import { AuthService } from 'src/app/core/auth/auth.service';
 import { AuthorizationDataService } from 'src/app/core/data/feature-authorization/authorization-data.service';
 
 import { APP_DATA_SERVICES_MAP } from '../../../config/app-config.interface';
+import { FeatureID } from '../../core/data/feature-authorization/feature-id';
 import { ItemDataService } from '../../core/data/item-data.service';
 import { HardRedirectService } from '../../core/services/hard-redirect.service';
 import { Item } from '../../core/shared/item.model';
 import { getMockTranslateService } from '../../shared/mocks/translate.service.mock';
 import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
 import { itemPagePrivateGuard } from './item-page-private.guard';
-import { FeatureID } from "../../core/data/feature-authorization/feature-id";
 
 describe('itemPagePrivateGuard', () => {
   let authorizationService: AuthorizationDataService;

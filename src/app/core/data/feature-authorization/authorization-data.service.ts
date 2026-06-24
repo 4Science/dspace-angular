@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import {
   Observable,
   of,
@@ -11,7 +12,10 @@ import {
   switchMap,
   take,
 } from 'rxjs/operators';
+import { AppState } from 'src/app/app.reducer';
 
+import { ObjectAuthorizationsState } from '../../../shared/authorizations/authorization.interfaces';
+import { AuthorizationService } from '../../../shared/authorizations/authorization.service';
 import {
   hasNoValue,
   hasValue,
@@ -25,6 +29,7 @@ import { RemoteDataBuildService } from '../../cache/builders/remote-data-build.s
 import { RequestParam } from '../../cache/models/request-param.model';
 import { ObjectCacheService } from '../../cache/object-cache.service';
 import { Authorization } from '../../shared/authorization.model';
+import { DSpaceObject } from '../../shared/dspace-object.model';
 import { HALEndpointService } from '../../shared/hal-endpoint.service';
 import { getFirstCompletedRemoteData } from '../../shared/operators';
 import { BaseDataService } from '../base/base-data.service';
@@ -45,11 +50,6 @@ import {
   oneAuthorizationMatchesFeature,
 } from './authorization-utils';
 import { FeatureID } from './feature-id';
-import { AppState } from "src/app/app.reducer";
-import { Store } from "@ngrx/store";
-import { DSpaceObject } from "../../shared/dspace-object.model";
-import { AuthorizationService } from "../../../shared/authorizations/authorization.service";
-import { ObjectAuthorizationsState } from "../../../shared/authorizations/authorization.interfaces";
 
 /**
  * A service to retrieve {@link Authorization}s from the REST API
@@ -134,7 +134,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
               }
             }),
             catchError(() => of([])),
-            oneAuthorizationMatchesFeature(featureId)
+            oneAuthorizationMatchesFeature(featureId),
           );
         }
       }),
@@ -241,7 +241,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
           return [];
         }
       }),
-      catchError(() => of([]))
+      catchError(() => of([])),
     );
 
   }

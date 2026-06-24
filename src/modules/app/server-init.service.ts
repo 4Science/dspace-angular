@@ -56,7 +56,7 @@ export class ServerInitService extends InitService {
     protected themeService: ThemeService,
     protected menuService: MenuService,
     protected menuProviderService: MenuProviderService,
-    protected authorizationService: AuthorizationService
+    protected authorizationService: AuthorizationService,
   ) {
     super(
       store,
@@ -70,7 +70,7 @@ export class ServerInitService extends InitService {
       themeService,
       menuService,
       menuProviderService,
-      authorizationService
+      authorizationService,
     );
   }
 

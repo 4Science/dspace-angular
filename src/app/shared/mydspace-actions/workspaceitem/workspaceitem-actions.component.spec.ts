@@ -97,9 +97,9 @@ mockObject = Object.assign(new WorkspaceItem(), {
   uuid: '1234',
   _links: {
     self: {
-      href: 'selfHref'
-    }
-  }
+      href: 'selfHref',
+    },
+  },
 });
 
 const ePersonMock: EPerson = Object.assign(new EPerson(), {

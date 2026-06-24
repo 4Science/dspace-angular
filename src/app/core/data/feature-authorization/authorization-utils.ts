@@ -1,8 +1,8 @@
 import {
+  combineLatest,
   combineLatest as observableCombineLatest,
   Observable,
   of,
-  combineLatest,
 } from 'rxjs';
 import {
   distinctUntilChanged,
@@ -22,6 +22,7 @@ import {
 } from '../../../shared/empty.util';
 import { AuthService } from '../../auth/auth.service';
 import { Authorization } from '../../shared/authorization.model';
+import { DSpaceObject } from '../../shared/dspace-object.model';
 import { Feature } from '../../shared/feature.model';
 import {
   getFirstCompletedRemoteData,
@@ -30,7 +31,6 @@ import {
 import { SiteDataService } from '../site-data.service';
 import { AuthorizationSearchParams } from './authorization-search-params';
 import { FeatureID } from './feature-id';
-import { DSpaceObject } from "../../shared/dspace-object.model";
 
 /**
  * Operator accepting {@link AuthorizationSearchParams} and adding the current {@link Site}'s selflink to the parameter's

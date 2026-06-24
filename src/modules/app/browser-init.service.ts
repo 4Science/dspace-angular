@@ -26,6 +26,7 @@ import {
   find,
   map,
 } from 'rxjs/operators';
+import { AuthorizationService } from 'src/app/shared/authorizations/authorization.service';
 
 import { logStartupMessage } from '../../../startup-message';
 import { AppState } from '../../app/app.reducer';
@@ -60,7 +61,6 @@ import { BuildConfig } from '../../config/build-config.interface';
 import { extendEnvironmentWithAppConfig } from '../../config/config.util';
 import { DefaultAppConfig } from '../../config/default-app-config';
 import { environment } from '../../environments/environment';
-import { AuthorizationService } from "src/app/shared/authorizations/authorization.service";
 
 /**
  * Performs client-side initialization.
@@ -91,7 +91,7 @@ export class BrowserInitService extends InitService {
     private halService: HALEndpointService,
     private matomoService: MatomoService,
     protected menuProviderService: MenuProviderService,
-    protected authorizationService: AuthorizationService
+    protected authorizationService: AuthorizationService,
   ) {
     super(
       store,
@@ -105,7 +105,7 @@ export class BrowserInitService extends InitService {
       themeService,
       menuService,
       menuProviderService,
-      authorizationService
+      authorizationService,
     );
   }
 

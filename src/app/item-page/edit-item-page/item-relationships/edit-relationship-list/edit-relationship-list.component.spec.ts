@@ -26,6 +26,7 @@ import { REQUEST } from '../../../../../express.tokens';
 import { AuthRequestService } from '../../../../core/auth/auth-request.service';
 import { LinkService } from '../../../../core/cache/builders/link.service';
 import { ConfigurationDataService } from '../../../../core/data/configuration-data.service';
+import { AuthorizationDataService } from '../../../../core/data/feature-authorization/authorization-data.service';
 import { FieldChangeType } from '../../../../core/data/object-updates/field-change-type.model';
 import { ObjectUpdatesService } from '../../../../core/data/object-updates/object-updates.service';
 import { RelationshipDataService } from '../../../../core/data/relationship-data.service';
@@ -49,6 +50,7 @@ import { PaginationComponentOptions } from '../../../../shared/pagination/pagina
 import { createSuccessfulRemoteDataObject$ } from '../../../../shared/remote-data.utils';
 import { ActivatedRouteStub } from '../../../../shared/testing/active-router.stub';
 import { AuthRequestServiceStub } from '../../../../shared/testing/auth-request-service.stub';
+import { AuthorizationDataServiceStub } from '../../../../shared/testing/authorization-service.stub';
 import { EditItemRelationshipsServiceStub } from '../../../../shared/testing/edit-item-relationships.service.stub';
 import { HostWindowServiceStub } from '../../../../shared/testing/host-window-service.stub';
 import { PaginationServiceStub } from '../../../../shared/testing/pagination-service.stub';
@@ -275,6 +277,7 @@ describe('EditRelationshipListComponent', () => {
         { provide: XSRFService, useValue: {} },
         { provide: APP_CONFIG, useValue: environment },
         { provide: REQUEST, useValue: {} },
+        { provide: AuthorizationDataService, useClass: AuthorizationDataServiceStub },
         CookieService,
       ], schemas: [
         NO_ERRORS_SCHEMA,
