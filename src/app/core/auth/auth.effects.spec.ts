@@ -202,7 +202,7 @@ describe('AuthEffects', () => {
     });
 
     describe('when token is not valid but also not expired (~ cookie)', () => {
-      it('should return a AUTHENTICATED_ERROR action in response to a AUTHENTICATED action', () => {
+      it('should return a AUTHENTICATED_ERROR action in response to a AUTHENTICATED action', (done) => {
         spyOn((authEffects as any).authService, 'authenticatedUser').and.returnValue(observableThrow(new Error('Message Error test')));
 
         actions = hot('--a-', { a: new AuthenticatedAction(token, true) });
