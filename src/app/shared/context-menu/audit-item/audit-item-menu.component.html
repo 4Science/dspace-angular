@@ -1,4 +1,4 @@
-@if ((isAuthorized$ | async)) {
+@if (showMenuItem$ | async) {
   <button class="dropdown-item"
     [innerHTML]="'context-menu.actions.audit-item.btn' | translate"
     [routerLink]="link">
