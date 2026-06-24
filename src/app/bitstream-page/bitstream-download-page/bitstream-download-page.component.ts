@@ -40,6 +40,10 @@ import { SignpostingDataService } from '../../core/data/signposting-data.service
 import { SignpostingLink } from '../../core/data/signposting-links.model';
 import { HardRedirectService } from '../../core/services/hard-redirect.service';
 import { ServerResponseService } from '../../core/services/server-response.service';
+import {
+  NativeWindowRef,
+  NativeWindowService,
+} from '../../core/services/window.service';
 import { redirectOn4xx } from '../../core/shared/authorized.operators';
 import { Bitstream } from '../../core/shared/bitstream.model';
 import { FileService } from '../../core/shared/file.service';
@@ -49,7 +53,6 @@ import {
   isNotEmpty,
 } from '../../shared/empty.util';
 import { MatomoService } from '../../statistics/matomo.service';
-import { NativeWindowRef, NativeWindowService } from '../../core/services/window.service';
 
 @Component({
   selector: 'ds-bitstream-download-page',
