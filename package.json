@@ -70,6 +70,7 @@
   },
   "private": true,
   "overrides": {
+    "webpack": "^5.106.2",
     "@kolkov/ngx-gallery": {
       "@angular/animations": "^20.3.12",
       "@angular/common": "^20.3.12",
