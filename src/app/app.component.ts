@@ -10,6 +10,7 @@ import {
   Component,
   HostListener,
   Inject,
+  OnDestroy,
   OnInit,
   PLATFORM_ID,
 } from '@angular/core';
@@ -31,6 +32,7 @@ import { TranslateService } from '@ngx-translate/core';
 import {
   BehaviorSubject,
   Observable,
+  Subject,
 } from 'rxjs';
 import {
   delay,
@@ -38,6 +40,7 @@ import {
   map,
   switchMap,
   take,
+  takeUntil,
   withLatestFrom,
 } from 'rxjs/operators';
 
@@ -78,9 +81,14 @@ import { SocialService } from './social/social.service';
     SocialComponent,
   ],
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   notificationOptions;
   models;
+
+  /**
+   * Subject to signal component destruction and clean up subscriptions
+   */
+  private destroy$: Subject<void> = new Subject<void>();
 
   /**
    * Whether or not the authentication is currently blocking the UI
@@ -172,6 +180,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         take(1),
         map((currentUrl) => [currentUrl, event]),
       )),
+      takeUntil(this.destroy$),
     ).subscribe(([currentUrl, event]: [string, any]) => {
       if (event instanceof NavigationStart) {
         const nextUrl = event.url;
@@ -188,6 +197,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   @HostListener('window:resize', ['$event'])
   public onResize(event): void {
     this.dispatchWindowSize(event.target.innerWidth, event.target.innerHeight);
@@ -202,7 +216,10 @@ export class AppComponent implements OnInit, AfterViewInit {
   private trackIdleModal() {
     const isIdle$ = this.authService.isUserIdle();
     const isAuthenticated$ = this.authService.isAuthenticated();
-    isIdle$.pipe(withLatestFrom(isAuthenticated$))
+    isIdle$.pipe(
+      withLatestFrom(isAuthenticated$),
+      takeUntil(this.destroy$),
+    )
       .subscribe(([userIdle, authenticated]) => {
         if (userIdle && authenticated) {
           if (!this.idleModalOpen) {
