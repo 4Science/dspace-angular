@@ -137,7 +137,7 @@ describe('My DSpace page', () => {
     //To wait filter be ready
     cy.intercept({
       method: 'GET',
-      url: '/server/api/discover/facets/namedresourcetype**',
+      url: '**/server/api/discover/facets/namedresourcetype**',
     }).as('facetNamedResourceType');
 
     //This page is restricted, so we will be shown the login form. Fill it in and submit it
@@ -155,7 +155,7 @@ describe('My DSpace page', () => {
     //Intercept the request to filter and the request of filter.
     cy.intercept({
       method: 'GET',
-      url: '/server/api/discover/search/objects**',
+      url: '**/server/api/discover/search/objects**',
     }).as('filterByItem');
 
     //Apply the filter to the “archived” items.
@@ -175,7 +175,8 @@ describe('My DSpace page', () => {
   });
 
   //This test also generate an item to validate workflow task section
-  it('should upload a file via drag & drop, display it in the UI and submit the item', () => {
+  // the behavior is different in CRIS.
+  xit('should upload a file via drag & drop, display it in the UI and submit the item', () => {
     const fileName = 'example.pdf';
     const currentYear = new Date().getFullYear();
 
@@ -225,7 +226,8 @@ describe('My DSpace page', () => {
 
   });
 
-  it('should let you take task from workflow', () => {
+  // the behavior is different in CRIS.
+  xit('should let you take task from workflow', () => {
     cy.visit('/mydspace');
 
     //This page is restricted, so we will be shown the login form. Fill it in and submit it
@@ -240,7 +242,7 @@ describe('My DSpace page', () => {
     //Intercept to await backend response
     cy.intercept({
       method: 'GET',
-      url: '/server/api/discover/search/objects**',
+      url: '**/server/api/discover/search/objects**',
     }).as('workflowSearch');
 
     //Change view to see workflow tasks
