@@ -293,7 +293,7 @@ function serverSideRender(req, res, next, sendToUser: boolean = true) {
   // "allowedHosts" specifies which hosts are allowed to be rendered via SSR.
   // By default, this is set to the host of the UI's baseUrl.
   const commonEngine = new CommonEngine({ enablePerformanceProfiler: environment.ssr.enablePerformanceProfiler,
-                                          allowedHosts: [ new URL(environment.ui.baseUrl).hostname ],
+                                          allowedHosts: [ new URL(environment.ui.baseUrl).hostname, '127.0.0.1', 'localhost' ],
                                         });
   // Render the page via SSR (server side rendering)
   commonEngine
