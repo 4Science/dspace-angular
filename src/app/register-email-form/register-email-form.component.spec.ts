@@ -24,7 +24,10 @@ import {
 import { RestResponse } from '../core/cache/response.models';
 import { ConfigurationDataService } from '../core/data/configuration-data.service';
 import { EpersonRegistrationService } from '../core/data/eperson-registration.service';
-import { GoogleRecaptchaService } from '../core/google-recaptcha/google-recaptcha.service';
+import {
+  CAPTCHA_REGISTRATION_NAME,
+  GoogleRecaptchaService,
+} from '../core/google-recaptcha/google-recaptcha.service';
 import { CookieService } from '../core/services/cookie.service';
 import { ConfigurationProperty } from '../core/shared/configuration-property.model';
 import { AlertComponent } from '../shared/alert/alert.component';
@@ -209,5 +212,15 @@ describe('RegisterEmailFormComponent', () => {
       expect(notificationsService.error).toHaveBeenCalled();
       expect(router.navigate).not.toHaveBeenCalled();
     }));
+    it('isRecaptchaCookieAccepted should return true when registration recaptcha cookie is accepted', () => {
+      const cookieService = TestBed.inject(CookieService) as unknown as CookieServiceMock;
+      cookieService.set('klaro-anonymous', { [CAPTCHA_REGISTRATION_NAME]: true });
+      expect(comp.isRecaptchaCookieAccepted()).toBeTrue();
+    });
+    it('isRecaptchaCookieAccepted should return false when registration recaptcha cookie is not accepted', () => {
+      const cookieService = TestBed.inject(CookieService) as unknown as CookieServiceMock;
+      cookieService.set('klaro-anonymous', { [CAPTCHA_REGISTRATION_NAME]: false });
+      expect(comp.isRecaptchaCookieAccepted()).toBeFalse();
+    });
   });
 });

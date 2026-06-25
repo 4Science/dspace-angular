@@ -3362,7 +3362,11 @@
 
 
   // "cookies.consent.app.description.google-recaptcha": "We use google reCAPTCHA service during registration and password recovery",
-  "cookies.consent.app.description.google-recaptcha": "Utilizziamo il servizio Google reCAPTCHA nelle fasi di registrazione e recupero password",
+  "cookies.consent.app.description.google-recaptcha": "Utilizziamo il servizio Google reCAPTCHA nella fase di invio feedback",
+
+  // "cookies.consent.app.description.google-recaptcha-registration": "We use google reCAPTCHA service during registration and password recovery",
+  "cookies.consent.app.description.google-recaptcha-registration": "Utilizziamo il servizio Google reCAPTCHA nelle fasi di registrazione e recupero password",
+
 
 
   // "cookies.consent.app.title.matomo": "Matomo",

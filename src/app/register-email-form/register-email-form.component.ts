@@ -42,7 +42,7 @@ import { ConfigurationDataService } from '../core/data/configuration-data.servic
 import { EpersonRegistrationService } from '../core/data/eperson-registration.service';
 import { RemoteData } from '../core/data/remote-data';
 import {
-  CAPTCHA_FEEDBACK_NAME,
+  CAPTCHA_REGISTRATION_NAME,
   GoogleRecaptchaService,
 } from '../core/google-recaptcha/google-recaptcha.service';
 import { CookieService } from '../core/services/cookie.service';
@@ -247,7 +247,7 @@ export class RegisterEmailFormComponent implements OnDestroy, OnInit {
    */
   isRecaptchaCookieAccepted(): boolean {
     const klaroAnonymousCookie = this.cookieService.get('klaro-anonymous');
-    return isNotEmpty(klaroAnonymousCookie) ? klaroAnonymousCookie[CAPTCHA_FEEDBACK_NAME] : false;
+    return isNotEmpty(klaroAnonymousCookie) ? klaroAnonymousCookie[CAPTCHA_REGISTRATION_NAME] : false;
   }
 
   /**
