@@ -5,8 +5,7 @@ import {
   RouteActions,
   RouteActionTypes,
   SetParameterAction,
-  SetQueryParameterAction,
-  SetQueryParametersAction
+  SetQueryParameterAction
 } from './route.actions';
 import { isNotEmpty } from '../../shared/empty.util';
 
