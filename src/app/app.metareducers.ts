@@ -21,7 +21,7 @@ export function universalMetaReducer(reducer) {
         state = Object.assign({}, state, action.payload);
         if (state.core) {
           state.core = Object.assign({}, state.core, {
-            route: { queryParams: {}, params: {} }
+            route: { queryParams: {}, params: {} },
           });
         }
         break;

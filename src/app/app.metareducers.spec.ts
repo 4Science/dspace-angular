@@ -1,4 +1,3 @@
-import { AppState } from './app.reducer';
 import { universalMetaReducer } from './app.metareducers';
 import { StoreActionTypes } from './store.actions';
 
@@ -13,13 +12,14 @@ describe('universalMetaReducer', () => {
 
   describe('REHYDRATE', () => {
     it('should merge payload into state', () => {
-      const state = { core: { existing: true } };
+      const state = { otherProp: 'keep-me' };
       const payload = { core: { route: { queryParams: { f: ['x'] }, params: {} } } };
       const result = universalMetaReducer(mockReducer)(state, {
         type: StoreActionTypes.REHYDRATE,
         payload,
       });
-      expect(result.core.existing).toBe(true);
+      expect(result.otherProp).toBe('keep-me');
+      expect(result.core.route).toEqual({ queryParams: {}, params: {} });
     });
 
     it('should reset core.route to empty after rehydration', () => {
@@ -39,12 +39,12 @@ describe('universalMetaReducer', () => {
         type: StoreActionTypes.REHYDRATE,
         payload,
       });
-      expect(result).toEqual(payload);
+      expect(result.core.route).toEqual({ queryParams: {}, params: {} });
     });
 
     it('should preserve other core properties when resetting route', () => {
-      const state = { core: { route: {}, otherProp: 'keep-me' } };
-      const payload = { core: { route: { queryParams: { x: '1' }, params: {} } } };
+      const state = { core: { route: {} } };
+      const payload = { core: { route: { queryParams: { x: '1' }, params: {} }, otherProp: 'keep-me' } };
       const result = universalMetaReducer(mockReducer)(state, {
         type: StoreActionTypes.REHYDRATE,
         payload,

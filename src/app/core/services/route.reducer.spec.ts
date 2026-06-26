@@ -9,7 +9,10 @@ import {
   SetQueryParameterAction,
   SetQueryParametersAction,
 } from './route.actions';
-import { routeReducer, RouteState } from './route.reducer';
+import {
+  routeReducer,
+  RouteState,
+} from './route.reducer';
 
 describe('routeReducer', () => {
   const initialState: RouteState = {
