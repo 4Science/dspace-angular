@@ -24,7 +24,6 @@ import * as express from 'express';
 import * as ejs from 'ejs';
 import * as compression from 'compression';
 import * as expressStaticGzip from 'express-static-gzip';
-import * as domino from 'domino-ext';
 /* eslint-enable import/no-namespace */
 import axios from 'axios';
 import LRU from 'lru-cache';
@@ -85,20 +84,10 @@ let anonymousCache: LRU<string, any>;
 // extend environment with app config for server
 extendEnvironmentWithAppConfig(environment, appConfig);
 
-// Create a DOM window object based on the template
-const _window = domino.createWindow(indexHtml);
-
 // The REST server base URL
 const REST_BASE_URL = environment.rest.ssrBaseUrl || environment.rest.baseUrl;
 
 const IIIF_ALLOWED_ORIGINS = environment.rest.allowedOrigins || [];
-
-// Assign the DOM window and document objects to the global object
-(_window as any).screen = { deviceXDPI: 0, logicalXDPI: 0 };
-(global as any).window = _window;
-(global as any).document = _window.document;
-(global as any).navigator = _window.navigator;
-
 // The Express app is exported so that it can be used by serverless Functions.
 export function app() {
 
