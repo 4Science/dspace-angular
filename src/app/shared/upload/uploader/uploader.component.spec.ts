@@ -18,13 +18,15 @@ import { AuthService } from '../../../core/auth/auth.service';
 import { DragService } from '../../../core/drag.service';
 import { CookieService } from '../../../core/services/cookie.service';
 import { AuthServiceMock } from '../../mocks/auth.service.mock';
+import { LiveRegionService } from '../../live-region/live-region.service';
+import { getLiveRegionServiceStub } from '../../live-region/live-region.service.stub';
 import { CookieServiceMock } from '../../mocks/cookie.service.mock';
 import { HttpXsrfTokenExtractorMock } from '../../mocks/http-xsrf-token-extractor.mock';
 import { createTestComponent } from '../../testing/utils.test';
 import { UploaderComponent } from './uploader.component';
 import { UploaderOptions } from './uploader-options.model';
 
-describe('UploaderComponent test', () => {
+describe('Uploader component', () => {
 
   let testComp: TestComponent;
   let testFixture: ComponentFixture<TestComponent>;
@@ -46,6 +48,7 @@ describe('UploaderComponent test', () => {
         { provide: AuthService, useValue: new AuthServiceMock() },
         { provide: HttpXsrfTokenExtractor, useValue: new HttpXsrfTokenExtractorMock('mock-token') },
         { provide: CookieService, useValue: new CookieServiceMock() },
+        { provide: LiveRegionService, useValue: getLiveRegionServiceStub() },
         { provide: ScrollToService, useValue: {} },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -1,9 +1,7 @@
 <div>
-  <fieldset class="d-flex flex-wrap justify-content-start">
-    <legend *ngIf="model.legend"
-            [id]="'legend_' + model.id"
-            [ngClass]="[getClass('element', 'label'), getClass('grid', 'label')]">
-      {{model.placeholder}} <span *ngIf="model.required">*</span>
+  <fieldset class="d-flex justify-content-start flex-wrap gap-2">
+    <legend *ngIf="!model.repeatable && model.legend" [id]="'legend_' + model.id" [ngClass]="[getClass('element', 'label'), getClass('grid', 'label')]">
+      {{model.placeholder || model.label}} <span *ngIf="model.required">*</span>
     </legend>
     <ds-number-picker
       tabindex="0"

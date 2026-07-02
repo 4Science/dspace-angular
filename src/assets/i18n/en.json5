@@ -1354,6 +1354,10 @@
 
   "browse.title": "Browsing by {{ field }}{{ startsWith }} {{ value }}",
 
+  "browse.taxonomy.show_next_results": "Show next results",
+
+  "browse.taxonomy.show_previous_results": "Show previous results",
+
   "browse.title.page": "Browsing by {{ field }} {{ value }}",
 
 
@@ -2256,7 +2260,7 @@
 
   "dso-selector.no-results": "No {{ type }} found",
 
-  "dso-selector.placeholder": "Search for a {{ type }}",
+  "dso-selector.placeholder": "Search for {{ type }}",
 
   "dso-selector.export-item.item.head": "Export",
 
@@ -2839,6 +2843,12 @@
 
   "form.number-picker.increment": "Increment {{field}}",
 
+  "form.number-picker.label.Year": "Year",
+
+  "form.number-picker.label.Month": "Month",
+
+  "form.number-picker.label.Day": "Day",
+
   "form.repeatable.sort.tip": "Drop the item in the new position",
 
   "form.number-picker.decrement": "Decrement {{field}}",
@@ -2957,7 +2967,7 @@
 
   "info.accessibility-settings.disableNotificationTimeOut.label": "Automatically close notifications after time out",
 
-  "info.accessibility-settings.disableNotificationTimeOut.hint": "When this toggle is activated, notifications will close automatically after the time out passes. When deactivated, notifications will remain open untill manually closed.",
+  "info.accessibility-settings.disableNotificationTimeOut.hint": "When this toggle is activated, notifications will close automatically after the time out passes. When deactivated, notifications will remain open until manually closed.",
 
   "info.accessibility-settings.failed-notification": "Failed to save accessibility settings",
 
@@ -3598,11 +3608,15 @@
 
   "item.truncatable-part.show-less": "Collapse",
 
-  "item.qa-event-notification.check.notification-info": "There are {{num}} pending suggestions related to your account",
+  "item.qa-event-notification.check.notification-info.singular": "There is {{num}} pending suggestion related to your account",
+
+  "item.qa-event-notification.check.notification-info.plural": "There are {{num}} pending suggestions related to your account",
 
   "item.qa-event-notification-info.check.button": "View",
 
-  "mydspace.qa-event-notification.check.notification-info": "There are {{num}} pending suggestions related to your account",
+  "mydspace.qa-event-notification.check.notification-info.singular": "There is {{num}} pending suggestion related to your account",
+
+  "mydspace.qa-event-notification.check.notification-info.plural": "There are {{num}} pending suggestions related to your account",
 
   "mydspace.qa-event-notification-info.check.button": "View",
 
@@ -3677,6 +3691,10 @@
   "item.page.orcid.title": "ORCID",
 
   "item.page.orcid.tooltip": "Open ORCID setting page",
+
+  "item.page.orcid-ico": "ORCID icon",
+
+  "item.page.orcid-profile": "ORCID Profile",
 
   "item.page.metric.acquisition-date": "Acquisition Date",
 
@@ -5120,11 +5138,11 @@
 
   "process.overview.unknown.user": "Unknown",
 
-  "process.bulk.delete.error.head": "Error on deleteing process",
+  "process.bulk.delete.error.head": "Error on deleting process",
 
   "process.bulk.delete.error.body": "The process with ID {{processId}} could not be deleted. The remaining processes will continue being deleted. ",
 
-  "process.bulk.delete.success": "{{count}} process(es) have been succesfully deleted",
+  "process.bulk.delete.success": "{{count}} process(es) have been successfully deleted",
 
 
   "patent.page.titleprefix": "Patent",
@@ -5552,7 +5570,7 @@
 
   "resource-policies.form.eperson-group-list.deselect.btn": "Deselect",
 
-  "resource-policies.form.eperson-group-list.tab.eperson": "Search for a ePerson",
+  "resource-policies.form.eperson-group-list.tab.eperson": "Search for an ePerson",
 
   "resource-policies.form.eperson-group-list.tab.group": "Search for a group",
 
@@ -7449,6 +7467,8 @@
 
   "submission.sections.jisc.record.information.uri": "URI",
 
+  "submission.sections.sherpa.error.message": "There was an error retrieving sherpa information",
+
   "submission.sections.jisc.error.message": "There was an error retrieving Jisc Open policy finder information",
 
   "submission.submit.breadcrumbs": "New submission",
@@ -8953,7 +8973,7 @@
 
   "item.page.cc.license.title": "Creative Commons license",
 
-  "item.page.cc.license.disclaimer": "Except where otherwised noted, this item's license is described as",
+  "item.page.cc.license.disclaimer": "Except where otherwise noted, this item's license is described as",
 
   "browse.search-form.placeholder": "Search the repository",
 
@@ -8976,6 +8996,12 @@
   "dynamic-form-array.sortable-list.label": "Sortable list",
 
   "metadata-export-search.submit.error.limit-exceeded": "Only the first {{limit}} items will be exported",
+
+  "item.preview.organization.url": "URL",
+
+  "item.preview.organization.address.addressLocality": "City",
+
+  "item.preview.organization.alternateName": "Alternative name",
 
   "external-login.form.email": "Enter the email",
 
