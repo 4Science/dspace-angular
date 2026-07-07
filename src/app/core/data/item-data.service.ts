@@ -31,7 +31,6 @@ import {
 } from '../../shared/empty.util';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
-import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { BrowseService } from '../browse/browse.service';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { RequestParam } from '../cache/models/request-param.model';

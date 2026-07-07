@@ -210,7 +210,6 @@ describe('AuthEffects', () => {
         const expected = cold('--b-', { b: new CheckAuthenticationTokenCookieAction() });
 
         expect(authEffects.authenticated$).toBeObservable(expected);
-        done();
       });
     });
   });

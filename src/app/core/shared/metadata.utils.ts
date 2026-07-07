@@ -75,9 +75,10 @@ export class Metadata {
         return matches;
       }
     }
-    for (const mdKey of Metadata.resolveKeys(metadata, keyOrKeys)) {
-      if (metadata[mdKey]) {
-        for (const candidate of metadata[mdKey]) {
+    for (const mdMap of mdMaps) {
+      for (const mdKey of Metadata.resolveKeys(mdMap, keyOrKeys)) {
+        if (mdMap[mdKey]) {
+          for (const candidate of mdMap[mdKey]) {
           if (Metadata.valueMatches(candidate as MetadataValue, filter)) {
             if (escapeHTML) {
               matches.push(Object.assign(new MetadataValue(), candidate, {
@@ -86,6 +87,7 @@ export class Metadata {
             } else {
               matches.push(candidate as MetadataValue);
             }
+          }
           }
         }
       }

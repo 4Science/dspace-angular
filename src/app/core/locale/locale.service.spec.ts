@@ -171,9 +171,10 @@ describe('LocaleService test suite', () => {
       testScheduler.run(({ expectObservable }) => {
         expectObservable(service.getLanguageCodeList()).toBe('(a|)', { a: ['fr;q=0.5', 'en-US;q=1', 'en;q=0.9'] });
       });
-        });
-      });
     });
+
+  });
+
 
     describe('getLanguageCodeFromCookie', () => {
       it('should return language from cookie', () => {

@@ -183,7 +183,7 @@ describe('Metadata', () => {
 
   describe('hasValue method', () => {
     const testHasValue = (value, expected) =>
-      testMethod(Metadata.hasValue, 'boolean', value, null, expected);
+      testMethod(Metadata.hasValue, 'boolean', value, null, undefined, expected);
 
     describe('with undefined value', () => {
       testHasValue(undefined, false);

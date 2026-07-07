@@ -17,7 +17,7 @@ import {
   Observable,
   Subscription,
 } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, withLatestFrom } from 'rxjs/operators';
 
 import { Root } from '../../../core/data/root.model';
 import { RootDataService } from '../../../core/data/root-data.service';
@@ -69,8 +69,9 @@ export class EndUserAgreementContentComponent implements OnInit, OnDestroy {
     );
 
     this.subs.push(
-      this.siteService.find().subscribe((site) => {
-        const langCode = this.localeService.getCurrentLanguageCode();
+      this.siteService.find().pipe(
+        withLatestFrom(this.localeService.getCurrentLanguageCode()),
+      ).subscribe(([site, langCode]) => {
         const fallbackLangCode = 'en';
 
         const textArray = site?.metadataAsList.filter((metadata) =>

@@ -12,6 +12,7 @@ import {
   DynamicSelectModel,
 } from '@ng-dynamic-forms/core';
 import { provideMockActions } from '@ngrx/effects/testing';
+import { Store } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import {
