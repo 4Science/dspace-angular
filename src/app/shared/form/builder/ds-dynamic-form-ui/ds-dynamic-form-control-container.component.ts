@@ -116,6 +116,7 @@ import { EditMetadataSecurityComponent } from '../../../../item-page/edit-item-p
 import { paginatedRelationsToItems } from '../../../../item-page/simple/item-types/shared/item-relationships-utils';
 import { SubmissionObjectActionTypes } from '../../../../submission/objects/submission-objects.actions';
 import { SubmissionService } from '../../../../submission/submission.service';
+import { BtnDisabledDirective } from '../../../btn-disabled.directive';
 import {
   hasNoValue,
   hasValue,
@@ -143,7 +144,6 @@ import { DYNAMIC_FORM_CONTROL_TYPE_DSDATEPICKER } from './models/date-picker/dat
 import { DynamicConcatModel } from './models/ds-dynamic-concat.model';
 import { DynamicLinkModel } from './models/ds-dynamic-link.model';
 import { DsDynamicLookupRelationModalComponent } from './relation-lookup-modal/dynamic-lookup-relation-modal.component';
-import { BtnDisabledDirective } from '../../../btn-disabled.directive';
 
 @Component({
   selector: 'ds-dynamic-form-control-container',

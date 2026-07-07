@@ -79,18 +79,18 @@ export class Metadata {
       for (const mdKey of Metadata.resolveKeys(mdMap, keyOrKeys)) {
         if (mdMap[mdKey]) {
           for (const candidate of mdMap[mdKey]) {
-          if (Metadata.valueMatches(candidate as MetadataValue, filter)) {
-            if (escapeHTML) {
-              matches.push(Object.assign(new MetadataValue(), candidate, {
-                value: escape(candidate.value),
-              }));
-            } else {
-              matches.push(candidate as MetadataValue);
+            if (Metadata.valueMatches(candidate as MetadataValue, filter)) {
+              if (escapeHTML) {
+                matches.push(Object.assign(new MetadataValue(), candidate, {
+                  value: escape(candidate.value),
+                }));
+              } else {
+                matches.push(candidate as MetadataValue);
+              }
+              if (hasValue(limit) && matches.length >= limit) {
+                return matches;
+              }
             }
-            if (hasValue(limit) && matches.length >= limit) {
-              return matches;
-            }
-          }
           }
         }
       }

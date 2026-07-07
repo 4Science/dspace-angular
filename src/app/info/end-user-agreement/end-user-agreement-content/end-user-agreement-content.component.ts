@@ -17,7 +17,10 @@ import {
   Observable,
   Subscription,
 } from 'rxjs';
-import { map, withLatestFrom } from 'rxjs/operators';
+import {
+  map,
+  withLatestFrom,
+} from 'rxjs/operators';
 
 import { Root } from '../../../core/data/root.model';
 import { RootDataService } from '../../../core/data/root-data.service';

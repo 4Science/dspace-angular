@@ -33,8 +33,10 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { MockComponent } from 'ng-mocks';
-import { of as observableOf } from 'rxjs';
-import { Observable } from 'rxjs';
+import {
+  Observable,
+  of as observableOf,
+} from 'rxjs';
 import {
   APP_CONFIG,
   APP_DATA_SERVICES_MAP,
@@ -48,11 +50,11 @@ import { Vocabulary } from '../../../../../../core/submission/vocabularies/model
 import { VocabularyService } from '../../../../../../core/submission/vocabularies/vocabulary.service';
 import { XSRFService } from '../../../../../../core/xsrf/xsrf.service';
 import { SubmissionService } from '../../../../../../submission/submission.service';
+import { LiveRegionService } from '../../../../../live-region/live-region.service';
+import { getLiveRegionServiceStub } from '../../../../../live-region/live-region.service.stub';
 import { ThemedLoadingComponent } from '../../../../../loading/themed-loading.component';
 import { createSuccessfulRemoteDataObject$ } from '../../../../../remote-data.utils';
 import { SubmissionServiceStub } from '../../../../../testing/submission-service.stub';
-import { LiveRegionService } from '../../../../../live-region/live-region.service';
-import { getLiveRegionServiceStub } from '../../../../../live-region/live-region.service.stub';
 import { createTestComponent } from '../../../../../testing/utils.test';
 import { VocabularyServiceStub } from '../../../../../testing/vocabulary-service.stub';
 import { ChipsComponent } from '../../../../chips/chips.component';

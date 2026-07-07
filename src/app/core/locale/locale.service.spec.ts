@@ -8,9 +8,11 @@ import {
   TranslateModule,
   TranslateService,
 } from '@ngx-translate/core';
-import { of } from 'rxjs';
+import {
+  of as observableOf,
+  of,
+} from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
-import { of as observableOf } from 'rxjs';
 
 import { CookieServiceMock } from '../../shared/mocks/cookie.service.mock';
 import { TranslateLoaderMock } from '../../shared/mocks/translate-loader.mock';
@@ -97,83 +99,83 @@ describe('LocaleService test suite', () => {
     });
 
     describe('getCurrentLanguageCode', () => {
-    let testScheduler: TestScheduler;
+      let testScheduler: TestScheduler;
 
-    beforeEach(() => {
-      spyOn(translateService, 'getLangs').and.returnValue(langList);
-      testScheduler = new TestScheduler((actual, expected) => {
+      beforeEach(() => {
+        spyOn(translateService, 'getLangs').and.returnValue(langList);
+        testScheduler = new TestScheduler((actual, expected) => {
         // use jasmine to test equality
-        expect(actual).toEqual(expected);
+          expect(actual).toEqual(expected);
+        });
+        authService.isAuthenticated.and.returnValue(of(false));
+        authService.isAuthenticationLoaded.and.returnValue(of(false));
       });
-      authService.isAuthenticated.and.returnValue(of(false));
-      authService.isAuthenticationLoaded.and.returnValue(of(false));
-    });
 
-    it('should return the language saved on cookie if it\'s a valid & active language', () => {
+      it('should return the language saved on cookie if it\'s a valid & active language', () => {
         spyOnGet.and.returnValue('de');
-      testScheduler.run(({ expectObservable }) => {
-        expectObservable(service.getCurrentLanguageCode()).toBe('(a|)', { a: 'de' });
-      });
+        testScheduler.run(({ expectObservable }) => {
+          expectObservable(service.getCurrentLanguageCode()).toBe('(a|)', { a: 'de' });
+        });
       });
 
-    it('should return the default language if the cookie language is disabled', () => {
-      spyOnGet.and.returnValue('disabled');
-      testScheduler.run(({ expectObservable }) => {
-        expectObservable(service.getCurrentLanguageCode()).toBe('(a|)', { a: 'en' });
+      it('should return the default language if the cookie language is disabled', () => {
+        spyOnGet.and.returnValue('disabled');
+        testScheduler.run(({ expectObservable }) => {
+          expectObservable(service.getCurrentLanguageCode()).toBe('(a|)', { a: 'en' });
+        });
+      });
+
+      it('should return the default language if the cookie language does not exist', () => {
+        spyOnGet.and.returnValue('does-not-exist');
+        testScheduler.run(({ expectObservable }) => {
+          expectObservable(service.getCurrentLanguageCode()).toBe('(a|)', { a: 'en' });
+        });
+      });
+
+      it('should return language from browser setting', () => {
+        spyOn(service, 'getLanguageCodeList').and.returnValue(of(['xx', 'en']));
+        testScheduler.run(({ expectObservable }) => {
+          expectObservable(service.getCurrentLanguageCode()).toBe('(a|)', { a: 'xx' });
+        });
+      });
+
+      it('should match language from browser setting case insensitive', () => {
+        spyOn(service, 'getLanguageCodeList').and.returnValue(of(['DE', 'en']));
+        testScheduler.run(({ expectObservable }) => {
+          expectObservable(service.getCurrentLanguageCode()).toBe('(a|)', { a: 'DE' });
+        });
       });
     });
 
-    it('should return the default language if the cookie language does not exist', () => {
-      spyOnGet.and.returnValue('does-not-exist');
-      testScheduler.run(({ expectObservable }) => {
-        expectObservable(service.getCurrentLanguageCode()).toBe('(a|)', { a: 'en' });
-      });
-        });
+    describe('getLanguageCodeList', () => {
+      let testScheduler: TestScheduler;
 
-        it('should return language from browser setting', () => {
-      spyOn(service, 'getLanguageCodeList').and.returnValue(of(['xx', 'en']));
-      testScheduler.run(({ expectObservable }) => {
-        expectObservable(service.getCurrentLanguageCode()).toBe('(a|)', { a: 'xx' });
-      });
-        });
-
-    it('should match language from browser setting case insensitive', () => {
-      spyOn(service, 'getLanguageCodeList').and.returnValue(of(['DE', 'en']));
-      testScheduler.run(({ expectObservable }) => {
-        expectObservable(service.getCurrentLanguageCode()).toBe('(a|)', { a: 'DE' });
-      });
-    });
-  });
-
-  describe('getLanguageCodeList', () => {
-    let testScheduler: TestScheduler;
-
-    beforeEach(() => {
-      spyOn(translateService, 'getLangs').and.returnValue(langList);
-      testScheduler = new TestScheduler((actual, expected) => {
+      beforeEach(() => {
+        spyOn(translateService, 'getLangs').and.returnValue(langList);
+        testScheduler = new TestScheduler((actual, expected) => {
         // use jasmine to test equality
-        expect(actual).toEqual(expected);
+          expect(actual).toEqual(expected);
+        });
       });
-    });
 
-    it('should return default language list without user preferred language when no logged in user', () => {
-      authService.isAuthenticated.and.returnValue(of(false));
-      authService.isAuthenticationLoaded.and.returnValue(of(false));
-      testScheduler.run(({ expectObservable }) => {
-        expectObservable(service.getLanguageCodeList()).toBe('(a|)', { a: ['en-US;q=1', 'en;q=0.9'] });
+      it('should return default language list without user preferred language when no logged in user', () => {
+        authService.isAuthenticated.and.returnValue(of(false));
+        authService.isAuthenticationLoaded.and.returnValue(of(false));
+        testScheduler.run(({ expectObservable }) => {
+          expectObservable(service.getLanguageCodeList()).toBe('(a|)', { a: ['en-US;q=1', 'en;q=0.9'] });
+        });
       });
-    });
 
-    it('should return default language list with user preferred language when user is logged in', () => {
-      authService.isAuthenticated.and.returnValue(of(true));
-      authService.isAuthenticationLoaded.and.returnValue(of(true));
-      authService.getAuthenticatedUserFromStore.and.returnValue(of(EPersonMock2));
-      testScheduler.run(({ expectObservable }) => {
-        expectObservable(service.getLanguageCodeList()).toBe('(a|)', { a: ['fr;q=0.5', 'en-US;q=1', 'en;q=0.9'] });
+      it('should return default language list with user preferred language when user is logged in', () => {
+        authService.isAuthenticated.and.returnValue(of(true));
+        authService.isAuthenticationLoaded.and.returnValue(of(true));
+        authService.getAuthenticatedUserFromStore.and.returnValue(of(EPersonMock2));
+        testScheduler.run(({ expectObservable }) => {
+          expectObservable(service.getLanguageCodeList()).toBe('(a|)', { a: ['fr;q=0.5', 'en-US;q=1', 'en;q=0.9'] });
+        });
       });
-    });
 
-  });
+    });
 
 
     describe('getLanguageCodeFromCookie', () => {
@@ -204,13 +206,13 @@ describe('LocaleService test suite', () => {
       });
 
       it('should set the current language', () => {
-      spyOn(service, 'getCurrentLanguageCode').and.returnValue(of('es'));
+        spyOn(service, 'getCurrentLanguageCode').and.returnValue(of('es'));
         service.setCurrentLanguageCode();
         expect(translateService.use).toHaveBeenCalledWith('es');
       });
 
       it('should set the current language on the html tag', () => {
-      spyOn(service, 'getCurrentLanguageCode').and.returnValue(of('es'));
+        spyOn(service, 'getCurrentLanguageCode').and.returnValue(of('es'));
         service.setCurrentLanguageCode();
         expect((service as any).document.documentElement.lang).toEqual('es');
       });
