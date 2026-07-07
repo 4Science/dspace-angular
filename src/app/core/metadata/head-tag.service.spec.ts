@@ -172,7 +172,7 @@ describe('HeadTagService', () => {
         },
       });
       tick();
-      expect(meta.addTag).toHaveBeenCalledWith({
+      expect(meta.updateTag).toHaveBeenCalledWith({
         name: 'robots',
         content: 'noindex',
       });

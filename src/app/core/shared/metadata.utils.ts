@@ -87,6 +87,9 @@ export class Metadata {
             } else {
               matches.push(candidate as MetadataValue);
             }
+            if (hasValue(limit) && matches.length >= limit) {
+              return matches;
+            }
           }
           }
         }

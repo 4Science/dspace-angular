@@ -192,9 +192,9 @@ describe(`DSONameService`, () => {
     it(`should return 'person.familyName, person.givenName'`, () => {
       const result = (service as any).factories.Person(mockPersonWithTitle);
       expect(result).toBe('User Test');
-      expect(mockPersonWithTitle.firstMetadataValue).toHaveBeenCalledWith('person.familyName');
-      expect(mockPersonWithTitle.firstMetadataValue).toHaveBeenCalledWith('person.givenName');
-      expect(mockPersonWithTitle.firstMetadataValue).toHaveBeenCalledWith('dc.title');
+      expect(mockPersonWithTitle.firstMetadataValue).toHaveBeenCalledWith('person.familyName', undefined, undefined);
+      expect(mockPersonWithTitle.firstMetadataValue).toHaveBeenCalledWith('person.givenName', undefined, undefined);
+      expect(mockPersonWithTitle.firstMetadataValue).toHaveBeenCalledWith('dc.title', undefined, undefined);
     });
   });
 

@@ -5,6 +5,8 @@ import {
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
+import { of } from 'rxjs';
+
 import { LocaleService } from '../../../../core/locale/locale.service';
 import { SearchService } from '../../../../core/shared/search/search.service';
 import { Site } from '../../../../core/shared/site.model';
@@ -16,8 +18,8 @@ describe('TextSectionComponent', () => {
   let fixture: ComponentFixture<TextSectionComponent>;
 
   const localeServiceStub = {
-    getCurrentLanguageCode(): string {
-      return 'en';
+    getCurrentLanguageCode() {
+      return of('en');
     },
   };
 
