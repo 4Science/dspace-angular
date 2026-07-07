@@ -522,6 +522,10 @@ export const environment: BuildConfig = {
         baseUrl: 'https://doi.org/',
       },
       {
+        name: 'core',
+        baseUrl: 'https://core.ac.uk/works/',
+      },
+      {
         name: 'keepMyWhiteSpaces',
         baseUrl: 'https://keepmywhitespaces.com/',
         shouldKeepWhiteSpaces: true,
@@ -757,6 +761,12 @@ export const environment: BuildConfig = {
       icon: 'assets/images/ror.logo.icon.svg',
       iconPosition: IdentifierSubtypesIconPositionEnum.LEFT,
       link: 'https://ror.org',
+    },
+    {
+      name: 'core',
+      icon: 'assets/images/core.logo.icon.png',
+      iconPosition: IdentifierSubtypesIconPositionEnum.LEFT,
+      link: 'https://core.ac.uk',
     },
   ],
   // Configuration for the metadata link view popover
