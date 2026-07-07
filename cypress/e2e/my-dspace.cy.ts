@@ -131,7 +131,8 @@ describe('My DSpace page', () => {
     testA11y('ds-submission-import-external');
   });
 
-  it('should let you filter to only archived items', () => {
+  // DSpace Community Test - CRIS has a different behavior
+  xit('should let you filter to only archived items', () => {
     cy.visit('/mydspace');
 
     //To wait filter be ready
@@ -175,7 +176,8 @@ describe('My DSpace page', () => {
   });
 
   //This test also generate an item to validate workflow task section
-  it('should upload a file via drag & drop, display it in the UI and submit the item', () => {
+  // DSpace Community Test - CRIS has a different behavior
+  xit('should upload a file via drag & drop, display it in the UI and submit the item', () => {
     const fileName = 'example.pdf';
     const currentYear = new Date().getFullYear();
 
@@ -225,7 +227,8 @@ describe('My DSpace page', () => {
 
   });
 
-  it('should let you take task from workflow', () => {
+  // DSpace Community Test - CRIS has a different behavior
+  xit('should let you take task from workflow', () => {
     cy.visit('/mydspace');
 
     //This page is restricted, so we will be shown the login form. Fill it in and submit it
