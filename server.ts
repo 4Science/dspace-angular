@@ -25,6 +25,7 @@ import * as ejs from 'ejs';
 import * as compression from 'compression';
 import * as expressStaticGzip from 'express-static-gzip';
 /* eslint-enable import/no-namespace */
+import axios from 'axios';
 import LRU from 'lru-cache';
 import { isbot } from 'isbot';
 import { createCertificate } from 'pem';
