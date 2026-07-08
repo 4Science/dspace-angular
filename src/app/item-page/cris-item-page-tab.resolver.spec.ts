@@ -136,19 +136,50 @@ describe('CrisItemPageTabResolver', () => {
           });
         });
 
-        it('Should handle tab shortnames with "::" correctly', () => {
-          const tabRD = createSuccessfulRemoteDataObject(createPaginatedList([{
+        it('Should handle tab shortnames with "::" correctly', (done) => {
+          const tabPageList = createPaginatedList([{
             ...tabPublicationsTest,
             shortname: 'publication::details',
-          }]));
-          tabService.findByItem.and.returnValue(createSuccessfulRemoteDataObject$(tabRD) as any);
+          }]);
+          const tabRD = createSuccessfulRemoteDataObject(tabPageList);
+          tabService.findByItem.and.returnValue(createSuccessfulRemoteDataObject$(tabPageList) as any);
 
-          TestBed.runInInjectionContext(() => {
-            return crisItemPageTabResolver({ params: { id: uuid } } as any, { url: '/entities/publication/1234-65487-12354-1235/publication::details' } as any);
+          const obs = TestBed.runInInjectionContext(() => {
+            return crisItemPageTabResolver({ params: { id: uuid } } as any, { url: '/entities/publication/1234-65487-12354-1235/details' } as any);
+          }) as Observable<RemoteData<PaginatedList<CrisLayoutTab>>>;
+
+          obs.pipe(take(1)).subscribe((resolved) => {
+            expect(router.navigateByUrl).not.toHaveBeenCalled();
+            expect(hardRedirectService.redirect).not.toHaveBeenCalled();
+            expect(resolved).toEqual(tabRD);
+            done();
           });
+        });
 
-          expect(router.navigateByUrl).not.toHaveBeenCalled();
-          expect(hardRedirectService.redirect).not.toHaveBeenCalled();
+        it('should NOT redirect to 404 when query params are present in the URL', (done) => {
+          const obs = TestBed.runInInjectionContext(() => {
+            return crisItemPageTabResolver({ params: { id: uuid } } as any, { url: '/entities/publication/1234-65487-12354-1235?f.subject=value&f.date=2024' } as any);
+          }) as Observable<RemoteData<PaginatedList<CrisLayoutTab>>>;
+
+          obs.pipe(take(1)).subscribe((resolved) => {
+            expect(router.navigateByUrl).not.toHaveBeenCalled();
+            expect(hardRedirectService.redirect).not.toHaveBeenCalled();
+            expect(resolved).toEqual(tabsRD);
+            done();
+          });
+        });
+
+        it('should NOT redirect to 404 when query params are present with a valid tab', (done) => {
+          const obs = TestBed.runInInjectionContext(() => {
+            return crisItemPageTabResolver({ params: { id: uuid } } as any, { url: '/entities/publication/1234-65487-12354-1235/details?f.subject=value' } as any);
+          }) as Observable<RemoteData<PaginatedList<CrisLayoutTab>>>;
+
+          obs.pipe(take(1)).subscribe((resolved) => {
+            expect(router.navigateByUrl).not.toHaveBeenCalled();
+            expect(hardRedirectService.redirect).not.toHaveBeenCalled();
+            expect(resolved).toEqual(tabsRD);
+            done();
+          });
         });
       });
 

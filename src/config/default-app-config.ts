@@ -371,7 +371,7 @@ export class DefaultAppConfig implements AppConfig {
     // The absolute lowest year to display in the dropdown (only used when no lowest date can be found for all items)
     defaultLowerLimit: 1900,
     // Whether to add item badges to BOTH browse and search result lists.
-    showLabels: false,
+    showLabels: true,
     // Whether to add item thumbnail images to BOTH browse and search result lists.
     showThumbnails: true,
     // Whether to add item thumbnail images to BOTH browse and search result lists.
@@ -743,6 +743,10 @@ export class DefaultAppConfig implements AppConfig {
         baseUrl: 'https://doi.org/',
       },
       {
+        name: 'core',
+        baseUrl: 'https://core.ac.uk/works/',
+      },
+      {
         name: 'hdl',
         baseUrl: 'https://hdl.handle.net/',
       },
@@ -1012,6 +1016,12 @@ export class DefaultAppConfig implements AppConfig {
       icon: 'assets/images/ror.logo.icon.svg',
       iconPosition: IdentifierSubtypesIconPositionEnum.LEFT,
       link: 'https://ror.org',
+    },
+    {
+      name: 'core',
+      icon: 'assets/images/core.logo.icon.png',
+      iconPosition: IdentifierSubtypesIconPositionEnum.LEFT,
+      link: 'https://core.ac.uk',
     },
   ];
   datadogRum: DatadogRumConfig = {

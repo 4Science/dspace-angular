@@ -29,7 +29,10 @@ import { AuthService } from '../../core/auth/auth.service';
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
 import { EPersonDataService } from '../../core/eperson/eperson-data.service';
 import { EPerson } from '../../core/eperson/models/eperson.model';
-import { CAPTCHA_NAME } from '../../core/google-recaptcha/google-recaptcha.service';
+import {
+  CAPTCHA_FEEDBACK_NAME,
+  CAPTCHA_REGISTRATION_NAME,
+} from '../../core/google-recaptcha/google-recaptcha.service';
 import { CookieService } from '../../core/services/cookie.service';
 import {
   NativeWindowRef,
@@ -79,7 +82,7 @@ const updateDebounce = 300;
 /**
  * By using this injection token instead of importing directly we can keep Klaro out of the main bundle
  */
-const LAZY_KLARO = new InjectionToken<Promise<any>>(
+export const LAZY_KLARO = new InjectionToken<Promise<any>>(
   'Lazily loaded Klaro',
   {
     providedIn: 'root',
@@ -96,6 +99,7 @@ export class BrowserKlaroService extends KlaroService {
   private readonly GOOGLE_ANALYTICS_KEY = 'google.analytics.key';
 
   private readonly REGISTRATION_VERIFICATION_ENABLED_KEY = 'registration.verification.enabled';
+  private readonly FEEDBACK_VERIFICATION_ENABLED_KEY = 'feedback.verification.enabled';
 
   private readonly GOOGLE_ANALYTICS_SERVICE_NAME = 'google-analytics';
 
@@ -187,6 +191,13 @@ export class BrowserKlaroService extends KlaroService {
       ),
     );
 
+    const hideFeedbackVerification$ = this.configService.findByPropertyName(this.FEEDBACK_VERIFICATION_ENABLED_KEY).pipe(
+      getFirstCompletedRemoteData(),
+      map((remoteData) =>
+        !remoteData.hasSucceeded || !remoteData.payload || isEmpty(remoteData.payload.values) || remoteData.payload.values[0].toLowerCase() !== 'true',
+      ),
+    );
+
     const hideMatomo$ =
       this.configService.findByPropertyName(this.MATOMO_ENABLED).pipe(
         getFirstCompletedRemoteData(),
@@ -195,14 +206,17 @@ export class BrowserKlaroService extends KlaroService {
         ),
       );
 
-    const servicesToHide$: Observable<string[]> = observableCombineLatest([hideGoogleAnalytics$, hideRegistrationVerification$, hideMatomo$]).pipe(
-      map(([hideGoogleAnalytics, hideRegistrationVerification, hideMatomo]) => {
+    const servicesToHide$: Observable<string[]> = observableCombineLatest([hideGoogleAnalytics$, hideRegistrationVerification$, hideFeedbackVerification$, hideMatomo$]).pipe(
+      map(([hideGoogleAnalytics, hideRegistrationVerification, hideFeedbackVerification, hideMatomo]) => {
         const servicesToHideArray: string[] = [];
         if (hideGoogleAnalytics) {
           servicesToHideArray.push(this.GOOGLE_ANALYTICS_SERVICE_NAME);
         }
         if (hideRegistrationVerification) {
-          servicesToHideArray.push(CAPTCHA_NAME);
+          servicesToHideArray.push(CAPTCHA_REGISTRATION_NAME);
+        }
+        if (hideFeedbackVerification) {
+          servicesToHideArray.push(CAPTCHA_FEEDBACK_NAME);
         }
         if (hideMatomo) {
           servicesToHideArray.push(MATOMO_KLARO_KEY);
