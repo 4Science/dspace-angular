@@ -19,6 +19,11 @@ export function universalMetaReducer(reducer) {
     switch (action.type) {
       case StoreActionTypes.REHYDRATE:
         state = Object.assign({}, state, action.payload);
+        if (state.core) {
+          state.core = Object.assign({}, state.core, {
+            route: { queryParams: {}, params: {} },
+          });
+        }
         break;
       case StoreActionTypes.REPLAY:
       default:

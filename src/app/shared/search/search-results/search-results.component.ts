@@ -128,7 +128,7 @@ export class SearchResultsComponent {
   /**
    * Whether to show the metrics badges
    */
-  @Input() showMetrics: boolean;
+  @Input() showMetrics = true;
 
   /**
    * Whether to show the thumbnail preview

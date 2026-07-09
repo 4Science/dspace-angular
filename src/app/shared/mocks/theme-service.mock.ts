@@ -1,4 +1,7 @@
-import { of as observableOf } from 'rxjs';
+import {
+  BehaviorSubject,
+  of as observableOf,
+} from 'rxjs';
 
 import { ThemeConfig } from '../../../config/theme.config';
 import { isNotEmpty } from '../empty.util';
@@ -11,6 +14,8 @@ export function getMockThemeService(themeName = 'base', themes?: ThemeConfig[]):
     getThemeConfigFor: undefined,
     listenForRouteChanges: undefined,
   });
+
+  Object.defineProperty(spy, 'isThemeLoading$', { value: new BehaviorSubject(false) });
 
   if (isNotEmpty(themes)) {
     spy.getThemeConfigFor.and.callFake((name: string) => themes.find(theme => theme.name === name));
