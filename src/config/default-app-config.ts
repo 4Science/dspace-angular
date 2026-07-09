@@ -160,7 +160,6 @@ export class DefaultAppConfig implements AppConfig {
     FeatureID.IsCollectionAdmin,
     FeatureID.EPersonRegistration,
     FeatureID.CanManageGroups,
-    FeatureID.CanChangePassword,
     FeatureID.CanViewUsageStatistics,
     FeatureID.CanViewLoginStatistics,
     FeatureID.CanViewWorkflowStatistics,
