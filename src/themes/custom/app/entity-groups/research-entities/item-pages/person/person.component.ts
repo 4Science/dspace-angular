@@ -13,6 +13,7 @@ import { ThemedThumbnailComponent } from 'src/app/thumbnail/themed-thumbnail.com
 import { Context } from '../../../../../../../app/core/shared/context.model';
 import { ViewMode } from '../../../../../../../app/core/shared/view-mode.model';
 import { PersonComponent as BaseComponent } from '../../../../../../../app/entity-groups/research-entities/item-pages/person/person.component';
+import { ItemPageOrcidFieldComponent } from '../../../../../../../app/item-page/simple/field-components/specific-field/orcid/item-page-orcid-field.component';
 import { ContextMenuComponent } from '../../../../../../../app/shared/context-menu/context-menu.component';
 import { listableObjectComponent } from '../../../../../../../app/shared/object-collection/shared/listable-object/listable-object.decorator';
 
@@ -27,6 +28,7 @@ import { listableObjectComponent } from '../../../../../../../app/shared/object-
     AsyncPipe,
     ContextMenuComponent,
     GenericItemPageFieldComponent,
+    ItemPageOrcidFieldComponent,
     MetadataFieldWrapperComponent,
     RelatedItemsComponent,
     RouterLink,
