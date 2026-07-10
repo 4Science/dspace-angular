@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import isArray from 'lodash/isArray';
 import {
-  forkJoin,
+  combineLatest,
   Observable,
   of,
 } from 'rxjs';
@@ -12,6 +12,7 @@ import {
   filter,
   map,
   switchMap,
+  take,
 } from 'rxjs/operators';
 import { SearchOptions } from 'src/app/shared/search/models/search-options.model';
 import {
@@ -151,8 +152,9 @@ export class SearchManager {
       requestsIds.push(getRequestIdFromParams(type, uuidList, features));
     });
 
-    return forkJoin(requestsIds.map(id => this.authorizationService.isRequestLoading(id))).pipe(
+    return combineLatest(requestsIds.map(id => this.authorizationService.isRequestLoading(id))).pipe(
       filter(loadingItems => loadingItems.every(loading => !loading)),
+      take(1),
       map(() => {
         return searchObjects;
       }),
