@@ -11,7 +11,7 @@ import {
 } from '@angular/router';
 import {
   NgbModal,
-  NgbTooltipModule,
+  NgbTooltip,
 } from '@ng-bootstrap/ng-bootstrap';
 import {
   TranslateModule,
@@ -44,7 +44,7 @@ import { MyDSpaceActionsComponent } from '../mydspace-actions';
   templateUrl: './workspaceitem-actions.component.html',
   imports: [
     AsyncPipe,
-    NgbTooltipModule,
+    NgbTooltip,
     RouterLink,
     TranslateModule,
   ],

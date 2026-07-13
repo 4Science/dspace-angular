@@ -23,6 +23,7 @@ import { BitstreamDataService } from '../../../../../../../core/data/bitstream-d
 import { AuthorizationDataService } from '../../../../../../../core/data/feature-authorization/authorization-data.service';
 import { RemoteData } from '../../../../../../../core/data/remote-data';
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
+import { LocaleService } from '../../../../../../../core/locale/locale.service';
 import { Bitstream } from '../../../../../../../core/shared/bitstream.model';
 import { Item } from '../../../../../../../core/shared/item.model';
 import { ThemedFileDownloadLinkComponent } from '../../../../../../../shared/file-download-link/themed-file-download-link.component';
@@ -171,6 +172,7 @@ describe('AttachmentComponent', () => {
         { provide: 'tabNameProvider', useValue: '' },
         { provide: BitstreamDataService, useValue: mockBitstreamDataService },
         { provide: AuthorizationDataService, useValue: mockAuthorizedService },
+        { provide: LocaleService, useValue: { getCurrentLanguageCode: () => of('en') } },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     };

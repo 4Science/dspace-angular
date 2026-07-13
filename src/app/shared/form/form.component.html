@@ -19,8 +19,8 @@
             [class.isInlineGroupForm-delete]="isInlineGroupForm"
             [class]="arrayButtonsStyle" [ngClass]="{'justify-content-sm-end' : isInlineGroupForm }">
             <button type="button" class="btn btn-secondary" role="button"
-                    title="{{'form.remove' | translate}}"
-                    [attr.aria-label]="'form.remove' | translate"
+                    title="{{('form.remove' | translate) + ' ' + (context.label ?? context.name) + ' ' + index}}"
+                    [attr.aria-label]="('form.remove' | translate) + ' ' + (context.label ?? context.name) + ' ' + index"
                     [dsBtnDisabled]="isArrayGroupEmpty(group) || isItemReadOnly(context, index)"
                     (click)="removeItem($event, context, index)">
               <span><i class="fas fa-trash" aria-hidden="true"></i></span>
@@ -33,8 +33,8 @@
                [class.white-background]="isInlineGroupForm">
             <div class="btn-group" role="group" aria-label="remove button">
               <button type="button" role="button" class="ds-form-add-more btn btn-link"
-                title="{{'form.add' | translate}}"
-                attr.aria-label="{{'form.add' | translate}}"
+                    title="{{('form.add' | translate) + ' ' + (context.label ?? context.name)}}"
+                    [attr.aria-label]="('form.add' | translate ) + ' ' + (context.label ?? context.name)"
                 (click)="insertItem($event, group.context, group.context.groups.length)">
                 <span><i class="fas fa-plus"></i> {{'form.add' | translate}}</span>
               </button>
