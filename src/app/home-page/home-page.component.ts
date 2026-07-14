@@ -23,6 +23,7 @@ import {
   map,
   switchMap,
   take,
+  withLatestFrom,
 } from 'rxjs/operators';
 import {
   APP_CONFIG,
@@ -149,10 +150,13 @@ export class HomePageComponent implements OnInit, OnDestroy {
       map((section) => section.componentRows),
     );
 
-    this.siteService.find().pipe(take(1)).subscribe(
-      (site: Site) => {
+    this.siteService.find().pipe(
+      take(1),
+      withLatestFrom(this.locale.getCurrentLanguageCode()),
+    ).subscribe(
+      ([site, langCode]: [Site, string]) => {
         this.hasHomeHeaderMetadata = !isEmpty(site?.firstMetadataValue('cris.cms.home-header',
-          { language: this.locale.getCurrentLanguageCode() }));
+          { language: langCode }));
       },
     );
   }
