@@ -24,7 +24,7 @@ describe('PrivacyContentComponent', () => {
     localeServiceSpy = jasmine.createSpyObj('LocaleService', ['getCurrentLanguageCode']);
 
     siteServiceSpy.find.and.returnValue(of({ metadataAsList: [] } as any));
-    localeServiceSpy.getCurrentLanguageCode.and.returnValue('en');
+    localeServiceSpy.getCurrentLanguageCode.and.returnValue(of('en'));
 
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot(), PrivacyContentComponent],
@@ -55,7 +55,7 @@ describe('PrivacyContentComponent', () => {
     };
 
     siteServiceSpy.find.and.returnValue(of(mockSite as any));
-    localeServiceSpy.getCurrentLanguageCode.and.returnValue('it');
+    localeServiceSpy.getCurrentLanguageCode.and.returnValue(of('it'));
 
     component.ngOnInit();
 
@@ -74,7 +74,7 @@ describe('PrivacyContentComponent', () => {
     };
 
     siteServiceSpy.find.and.returnValue(of(mockSite as any));
-    localeServiceSpy.getCurrentLanguageCode.and.returnValue('it');
+    localeServiceSpy.getCurrentLanguageCode.and.returnValue(of('it'));
 
     component.ngOnInit();
 

@@ -25,6 +25,7 @@ import {
   DynamicFormLayoutService,
   DynamicFormValidationService,
 } from '@ng-dynamic-forms/core';
+import { ScannedActionsSubject } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { of as observableOf } from 'rxjs';
@@ -191,6 +192,7 @@ describe('DsDynamicRelationInlineGroupComponent test suite', () => {
         FormComponent,
         FormService,
         provideMockStore({ initialState }),
+        ScannedActionsSubject,
         { provide: SubmissionService, useValue: submissionServiceStub },
         { provide: SubmissionObjectDataService, useValue: {} },
         { provide: XSRFService, useValue: {} },

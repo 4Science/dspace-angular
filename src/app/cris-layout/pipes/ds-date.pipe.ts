@@ -30,7 +30,7 @@ export class DsDatePipe implements PipeTransform, OnDestroy {
   }
 
   transform(value: string, ...params: any[]): string {
-    const locale = this.localeService.getCurrentLanguageCode();
+    const locale = this.asyncPipe.transform(this.localeService.getCurrentLanguageCode());
     return isValidDate(value) ? localeDate(value, locale) : value;
   }
 
