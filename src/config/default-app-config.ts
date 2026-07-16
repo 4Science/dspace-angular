@@ -70,6 +70,9 @@ export class DefaultAppConfig implements AppConfig {
     port: 4000,
     // NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
     nameSpace: '/',
+    // Specify the public URL that this user interface responds to. This corresponds to the "dspace.ui.url" property in your backend's local.cfg.
+    // The baseUrl is used for redirects and SEO links (in robots.txt).
+    baseUrl: 'http://localhost:4000',
 
     // The rateLimiter settings limit each IP to a 'max' of 500 requests per 'windowMs' (1 minute).
     rateLimiter: {
@@ -103,6 +106,10 @@ export class DefaultAppConfig implements AppConfig {
     },
     // Cache-Control HTTP Header
     control: 'max-age=604800', // revalidate browser
+    // These static files should not be cached (paths relative to dist/browser, including the leading slash)
+    noCacheFiles: [
+      '/index.html',  // see https://web.dev/articles/http-cache#unversioned-urls
+    ],
     autoSync: {
       defaultTime: 0,
       maxBufferSize: 100,
@@ -743,6 +750,10 @@ export class DefaultAppConfig implements AppConfig {
         baseUrl: 'https://doi.org/',
       },
       {
+        name: 'core',
+        baseUrl: 'https://core.ac.uk/works/',
+      },
+      {
         name: 'hdl',
         baseUrl: 'https://hdl.handle.net/',
       },
@@ -1012,6 +1023,12 @@ export class DefaultAppConfig implements AppConfig {
       icon: 'assets/images/ror.logo.icon.svg',
       iconPosition: IdentifierSubtypesIconPositionEnum.LEFT,
       link: 'https://ror.org',
+    },
+    {
+      name: 'core',
+      icon: 'assets/images/core.logo.icon.png',
+      iconPosition: IdentifierSubtypesIconPositionEnum.LEFT,
+      link: 'https://core.ac.uk',
     },
   ];
   datadogRum: DatadogRumConfig = {
