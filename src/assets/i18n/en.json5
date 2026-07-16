@@ -17,7 +17,7 @@
 
   "500.link.home-page": "Take me to the home page",
 
-  "404.help": "We can't find the page you're looking for. The page may have been moved or deleted. You can use the button below to get back to the home page. ",
+  "404.help": "We can't find the page you're looking for. The page may have been moved or deleted. You can use the button below to get back to the home page.",
 
   "404.link.home-page": "Take me to the home page",
 
@@ -1385,6 +1385,10 @@
 
   "browse.title": "Browsing by {{ field }}{{ startsWith }} {{ value }}",
 
+  "browse.taxonomy.show_next_results": "Show next results",
+
+  "browse.taxonomy.show_previous_results": "Show previous results",
+
   "browse.title.page": "Browsing by {{ field }} {{ value }}",
 
   "bulk-import.abort-on-error": "Abort on first error",
@@ -2298,7 +2302,7 @@
 
   "dso-selector.no-results": "No {{ type }} found",
 
-  "dso-selector.placeholder": "Search for a {{ type }}",
+  "dso-selector.placeholder": "Search for {{ type }}",
 
   "dso-selector.export-item.item.head": "Export",
 
@@ -2887,6 +2891,12 @@
 
   "form.number-picker.increment": "Increment {{field}}",
 
+  "form.number-picker.label.Year": "Year",
+
+  "form.number-picker.label.Month": "Month",
+
+  "form.number-picker.label.Day": "Day",
+
   "form.repeatable.sort.tip": "Drop the item in the new position",
 
   "form.number-picker.decrement": "Decrement {{field}}",
@@ -2991,6 +3001,8 @@
 
   "health-page.section.solrSuggestion.title": "Solr: suggestion core",
 
+  "health-page.section.solrOcr.title": "Solr: ocr core",
+
   "health-page.section-info.app.title": "Application Backend",
 
   "health-page.section-info.java.title": "Java",
@@ -3067,7 +3079,7 @@
 
   "info.accessibility-settings.disableNotificationTimeOut.label": "Automatically close notifications after time out",
 
-  "info.accessibility-settings.disableNotificationTimeOut.hint": "When this toggle is activated, notifications will close automatically after the time out passes. When deactivated, notifications will remain open untill manually closed.",
+  "info.accessibility-settings.disableNotificationTimeOut.hint": "When this toggle is activated, notifications will close automatically after the time out passes. When deactivated, notifications will remain open until manually closed.",
 
   "info.accessibility-settings.failed-notification": "Failed to save accessibility settings",
 
@@ -3126,6 +3138,10 @@
   "info.privacy.head": "Privacy Statement",
 
   "info.privacy.title": "Privacy Statement",
+
+  "info.privacy-policy.breadcrumbs": "Privacy Policy",
+
+  "info.privacy-policy.head": "Privacy Policy",
 
   "info.feedback.breadcrumbs": "Feedback",
 
@@ -3213,7 +3229,7 @@
 
   "item.edit.bitstreams.bundle.name": "BUNDLE: {{ name }}",
 
-  "item.edit.bitstreams.bundle.table.aria-label": "Bitstreams in the  {{ bundle }} Bundle",
+  "item.edit.bitstreams.bundle.table.aria-label": "Bitstreams in the {{ bundle }} Bundle",
 
   "item.edit.bitstreams.bundle.tooltip": "You can move a bitstream to a different page by dropping it on the page number.",
 
@@ -3361,6 +3377,10 @@
 
   "item.edit.item-mapper.notifications.add.error.content": "Errors occurred for mapping of item to {{amount}} collections.",
 
+  "item.edit.item-mapper.notifications.add.error.forbidden.head": "Permission denied",
+
+  "item.edit.item-mapper.notifications.add.error.forbidden.content": "You do not have permission to map this item to a collection.",
+
   "item.edit.item-mapper.notifications.add.error.head": "Mapping errors",
 
   "item.edit.item-mapper.notifications.add.success.content": "Successfully mapped item to {{amount}} collections.",
@@ -3368,6 +3388,10 @@
   "item.edit.item-mapper.notifications.add.success.head": "Mapping completed",
 
   "item.edit.item-mapper.notifications.remove.error.content": "Errors occurred for the removal of the mapping to {{amount}} collections.",
+
+  "item.edit.item-mapper.notifications.remove.error.forbidden.head": "Permission denied",
+
+  "item.edit.item-mapper.notifications.remove.error.forbidden.content": "You do not have permission to remove this item from a collection.",
 
   "item.edit.item-mapper.notifications.remove.error.head": "Removal of mapping errors",
 
@@ -3577,7 +3601,7 @@
 
   "item.edit.tabs.metadata.head": "Metadata",
 
-  "item.edit.tabs.metadata.title": "Item Edit -  Metadata",
+  "item.edit.tabs.metadata.title": "Item Edit - Metadata",
 
   "item.edit.tabs.relationships.head": "Relationships",
 
@@ -3633,7 +3657,7 @@
 
   "item.edit.tabs.status.labels.lastModified": "Last Modified",
 
-  "item.edit.tabs.status.title": "Item Edit -  Status",
+  "item.edit.tabs.status.title": "Item Edit - Status",
 
   "item.edit.tabs.versionhistory.head": "Version History",
 
@@ -3643,7 +3667,7 @@
 
   "item.edit.tabs.view.head": "View Item",
 
-  "item.edit.tabs.view.title": "Item Edit -  View",
+  "item.edit.tabs.view.title": "Item Edit - View",
 
 
 
@@ -3730,11 +3754,15 @@
 
   "item.truncatable-part.show-less": "Collapse",
 
-  "item.qa-event-notification.check.notification-info": "There are {{num}} pending suggestions related to your account",
+  "item.qa-event-notification.check.notification-info.singular": "There is {{num}} pending suggestion related to your account",
+
+  "item.qa-event-notification.check.notification-info.plural": "There are {{num}} pending suggestions related to your account",
 
   "item.qa-event-notification-info.check.button": "View",
 
-  "mydspace.qa-event-notification.check.notification-info": "There are {{num}} pending suggestions related to your account",
+  "mydspace.qa-event-notification.check.notification-info.singular": "There is {{num}} pending suggestion related to your account",
+
+  "mydspace.qa-event-notification.check.notification-info.plural": "There are {{num}} pending suggestions related to your account",
 
   "mydspace.qa-event-notification-info.check.button": "View",
 
@@ -3854,6 +3882,10 @@
   "item.page.metric.label.wosPersonCitation": "Web of Science© citations",
 
   "item.page.metric.label.plumX": "PlumX",
+
+  "item.page.orcid-ico": "ORCID icon",
+
+  "item.page.orcid-profile": "ORCID Profile",
 
   "item.page.person.search.title": "Articles by this author",
 
@@ -5286,11 +5318,11 @@
 
   "process.overview.unknown.user": "Unknown",
 
-  "process.bulk.delete.error.head": "Error on deleteing process",
+  "process.bulk.delete.error.head": "Error on deleting process",
 
-  "process.bulk.delete.error.body": "The process with ID {{processId}} could not be deleted. The remaining processes will continue being deleted. ",
+  "process.bulk.delete.error.body": "The process with ID {{processId}} could not be deleted. The remaining processes will continue being deleted.",
 
-  "process.bulk.delete.success": "{{count}} process(es) have been succesfully deleted",
+  "process.bulk.delete.success": "{{count}} process(es) have been successfully deleted",
 
 
   "patent.page.titleprefix": "Patent",
@@ -5742,7 +5774,7 @@
 
   "resource-policies.form.eperson-group-list.deselect.btn": "Deselect",
 
-  "resource-policies.form.eperson-group-list.tab.eperson": "Search for a ePerson",
+  "resource-policies.form.eperson-group-list.tab.eperson": "Search for an ePerson",
 
   "resource-policies.form.eperson-group-list.tab.group": "Search for a group",
 
@@ -7705,6 +7737,8 @@
 
   "submission.sections.jisc.error.message": "There was an error retrieving Jisc Open policy finder information",
 
+  "submission.sections.sherpa.error.message": "There was an error retrieving sherpa information",
+
   "submission.submit.breadcrumbs": "New submission",
 
   "submission.submit.title": "New submission",
@@ -8407,6 +8441,8 @@
 
   "authority-confidence.search-label": "Search",
 
+  "metadata.link.view.popover-toggle": "Toggle popover",
+
   "statistics-page.export-map-as-image": "Export map",
 
   "curation-task.task.hocr.label": "Extract text (HOCR) from images",
@@ -8817,13 +8853,13 @@
 
   "error.validation.coarnotify.invalidfilter": "Invalid filter, try to select another service or none.",
 
-  "request-status-alert-box.accepted": "The requested {{ offerType }} for <a href='{{serviceUrl}}' target='_blank'> {{ serviceName }}  </a> has been taken in charge.",
+  "request-status-alert-box.accepted": "The requested {{ offerType }} for <a href='{{serviceUrl}}' target='_blank'>{{ serviceName }}</a> has been taken in charge.",
 
-  "request-status-alert-box.rejected": "The requested {{ offerType }} for <a href='{{serviceUrl}}' target='_blank'> {{ serviceName }}  </a> has been rejected.",
+  "request-status-alert-box.rejected": "The requested {{ offerType }} for <a href='{{serviceUrl}}' target='_blank'>{{ serviceName }}</a> has been rejected.",
 
   "request-status-alert-box.tentative_rejected": "The requested {{ offerType }} for <a href='{{serviceUrl}}' target='_blank'> {{ serviceName }}  </a> has been tentatively rejected. Revisions are required.",
 
-  "request-status-alert-box.requested": "The requested {{ offerType }} for <a href='{{serviceUrl}}' target='_blank'> {{ serviceName }}  </a> is pending.",
+  "request-status-alert-box.requested": "The requested {{ offerType }} for <a href='{{serviceUrl}}' target='_blank'>{{ serviceName }}</a> is pending.",
 
   "ldn-service-button-mark-inbound-deletion": "Mark supported pattern for deletion",
 
@@ -9213,7 +9249,7 @@
 
   "item.page.cc.license.title": "Creative Commons license",
 
-  "item.page.cc.license.disclaimer": "Except where otherwised noted, this item's license is described as",
+  "item.page.cc.license.disclaimer": "Except where otherwise noted, this item's license is described as",
 
   "browse.search-form.placeholder": "Search the repository",
 
@@ -9227,7 +9263,7 @@
 
   "live-region.ordering.instructions": "Press spacebar to reorder {{ itemName }}.",
 
-  "live-region.ordering.status": "{{ itemName }}, grabbed. Current position in list: {{ index }} of  {{ length }}. Press up and down arrow keys to change position, SpaceBar to drop, Escape to cancel.",
+  "live-region.ordering.status": "{{ itemName }}, grabbed. Current position in list: {{ index }} of {{ length }}. Press up and down arrow keys to change position, SpaceBar to drop, Escape to cancel.",
 
   "live-region.ordering.moved": "{{ itemName }}, moved to position {{ index }} of {{ length }}. Press up and down arrow keys to change position, SpaceBar to drop, Escape to cancel.",
 

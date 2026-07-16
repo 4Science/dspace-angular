@@ -305,7 +305,7 @@ export class EPersonFormComponent implements OnInit, OnDestroy {
       required: true,
       errorMessages: {
         emailTaken: 'error.validation.emailTaken',
-        pattern: 'error.validation.NotValidEmail',
+        email: 'error.validation.NotValidEmail',
       },
       hint: this.translateService.instant(`${this.messagePrefix}.emailHint`),
     });

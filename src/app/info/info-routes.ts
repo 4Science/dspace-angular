@@ -9,6 +9,7 @@ import { notifyInfoGuard } from '../core/coar-notify/notify-info/notify-info.gua
 import { feedbackGuard } from '../core/feedback/feedback.guard';
 import { hasValue } from '../shared/empty.util';
 import { AccessibilitySettingsComponent } from './accessibility-settings/accessibility-settings.component';
+import { CmsInfoComponent } from './cms-info/cms-info.component';
 import { ThemedEndUserAgreementComponent } from './end-user-agreement/themed-end-user-agreement.component';
 import { ThemedFeedbackComponent } from './feedback/themed-feedback.component';
 import {
@@ -21,6 +22,19 @@ import {
 import { NotifyInfoComponent } from './notify-info/notify-info.component';
 import { ThemedPrivacyComponent } from './privacy/themed-privacy.component';
 
+function cmsInfoRoute(qualifier: string, schema: string): Route {
+  return {
+    path: qualifier,
+    component: CmsInfoComponent,
+    resolve: { breadcrumb: i18nBreadcrumbResolver },
+    data: {
+      title: `info.${qualifier}.title`,
+      breadcrumbKey: `info.${qualifier}`,
+      schema: schema,
+      qualifier: qualifier,
+    },
+  };
+}
 
 export const ROUTES: Routes = [
   {
@@ -60,4 +74,5 @@ export const ROUTES: Routes = [
       breadcrumbKey: 'info.coar-notify-support',
     },
   } : undefined,
+  cmsInfoRoute(PRIVACY_PATH, 'cris'),
 ].filter((route: Route) => hasValue(route));

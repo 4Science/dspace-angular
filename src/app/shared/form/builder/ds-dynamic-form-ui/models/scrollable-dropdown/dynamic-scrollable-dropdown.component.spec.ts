@@ -27,7 +27,6 @@ import {
   DynamicFormsCoreModule,
   DynamicFormValidationService,
 } from '@ng-dynamic-forms/core';
-import { DynamicFormsNGBootstrapUIModule } from '@ng-dynamic-forms/ui-ng-bootstrap';
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import {
@@ -99,7 +98,6 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
     TestBed.configureTestingModule({
       imports: [
         DynamicFormsCoreModule,
-        DynamicFormsNGBootstrapUIModule,
         FormsModule,
         InfiniteScrollDirective,
         ReactiveFormsModule,
@@ -282,7 +280,6 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
   template: ``,
   imports: [
     DynamicFormsCoreModule,
-    DynamicFormsNGBootstrapUIModule,
     FormsModule,
     InfiniteScrollModule,
     NgbModule,

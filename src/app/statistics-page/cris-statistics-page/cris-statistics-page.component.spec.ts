@@ -9,6 +9,13 @@ import {
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import {
+  NgbNav,
+  NgbNavContent,
+  NgbNavItem,
+  NgbNavLink,
+  NgbNavModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import { provideMockStore } from '@ngrx/store/testing';
 import {
   TranslateLoader,
@@ -80,6 +87,10 @@ describe('CrisStatisticsPageComponent', () => {
           },
         }),
         CrisStatisticsPageComponent,
+        NgbNav,
+        NgbNavItem,
+        NgbNavLink,
+        NgbNavContent,
       ],
       providers: [
         provideMockStore({ initialState }),
@@ -91,7 +102,7 @@ describe('CrisStatisticsPageComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA],
     })
-      .overrideComponent(CrisStatisticsPageComponent, { remove: { imports: [ThemedLoadingComponent, StatisticsMapComponent, StatisticsChartComponent] } }).compileComponents();
+      .overrideComponent(CrisStatisticsPageComponent, { remove: { imports: [ThemedLoadingComponent, StatisticsMapComponent, StatisticsChartComponent, NgbNavModule] }, add: { imports: [NgbNav, NgbNavItem, NgbNavLink, NgbNavContent] } }).compileComponents();
   });
 
   beforeEach(() => {
@@ -143,8 +154,9 @@ describe('CrisStatisticsPageComponent', () => {
       component.selectedCategory = data[0];
     });
     fixture.detectChanges();
-    const renderedCategories = fixture.debugElement.queryAll(By.css('#categories-tabs li a'));
-    expect(renderedCategories[0].nativeElement.classList.contains('active')).toBe(true);
+    const renderedLinks = fixture.debugElement.queryAll(By.css('#categories-tabs li a'));
+    expect(renderedLinks.length).toBe(2);
+    expect(renderedLinks[0].nativeElement.classList.contains('active')).toBe(true);
   });
 
   it('should set selectedReportId to the first report id if no reportType query param is present', () => {
