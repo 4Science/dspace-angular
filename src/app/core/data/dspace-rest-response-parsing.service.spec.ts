@@ -53,6 +53,30 @@ describe('DspaceRestResponseParsingService', () => {
       expect(warnSpy).not.toHaveBeenCalled();
     });
 
+    it('does not replace self link when request URL contains a segment in SKIP_SELF_LINK_OVERRIDE', () => {
+      const request = {
+        uuid: 'request-id',
+        href: 'https://rest.test/server/api/submission/workspaceitems/search/item?uuid=f639b124-1234-1234-1234-abcdef123456',
+        method: RestRequestMethod.GET,
+      } as RestRequest;
+      const response: RawRestResponse = {
+        payload: {
+          _links: {
+            self: {
+              href: 'https://rest.test/server/api/submission/workspaceitems/123',
+            },
+          },
+        },
+        statusCode: 200,
+        statusText: 'OK',
+      };
+
+      const result = service.ensureSelfLinkForTest(request, response);
+
+      expect(result.payload._links.self.href).toBe('https://rest.test/server/api/submission/workspaceitems/123');
+      expect(warnSpy).not.toHaveBeenCalled();
+    });
+
     it('replaces self link when path differs', () => {
       const request = {
         uuid: 'request-id',
