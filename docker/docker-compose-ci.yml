@@ -33,7 +33,7 @@ services:
       # This allows us to generate statistics in e2e tests so that statistics pages can be tested thoroughly.
       solr__D__statistics__P__autoCommit: ${solr__D__statistics__P__autoCommit:-false}
       LOGGING_CONFIG: ${LOGGING_CONFIG:-/dspace/config/log4j2-container.xml}
-    image: "${DOCKER_REGISTRY:-docker.io}/${DOCKER_OWNER:-dspace}/dspace:${DSPACE_VER:-dspace-9_x-test}"
+    image: "${DOCKER_REGISTRY:-docker.io}/${DOCKER_OWNER:-4science}/dspace-cris:${DSPACE_VER:-dspace-cris-2025_02_x-test}"
     depends_on:
       - dspacedb
     networks:
@@ -97,7 +97,7 @@ services:
     user: root
     entrypoint:
       - /bin/bash
-      - "-c"
+      - '-c'
       - |
         init-var-solr
         precreate-core authority /opt/solr/server/solr/configsets/authority
@@ -118,6 +118,12 @@ services:
         cp -r /opt/solr/server/solr/configsets/audit/* audit
         chown -R solr:solr /var/solr
         runuser -u solr -- solr-foreground
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8983/solr/"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
 volumes:
   assetstore:
   pgdata:
