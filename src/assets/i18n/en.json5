@@ -2996,6 +2996,8 @@
 
   "health-page.section.solrSuggestion.title": "Solr: suggestion core",
 
+  "health-page.section.solrOcr.title": "Solr: ocr core",
+
   "health-page.section-info.app.title": "Application Backend",
 
   "health-page.section-info.java.title": "Java",
