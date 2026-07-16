@@ -37,7 +37,9 @@ export default defineConfig({
     DSPACE_TEST_SUBMIT_USER_UUID: '914955b1-cf2e-4884-8af7-a166aa24cf73',
     DSPACE_TEST_SUBMIT_USER_PASSWORD: 'admin',
     // Administrator users group
-    DSPACE_ADMINISTRATOR_GROUP: 'f8c90336-34c1-4ad6-ab63-ba4b9357f087'
+    DSPACE_ADMINISTRATOR_GROUP: 'f8c90336-34c1-4ad6-ab63-ba4b9357f087',
+    //Collection to send and test workflow item
+    DSPACE_TEST_SUBMIT_WORKFLOW_COLLECTION_NAME: 'Publications',
   },
   e2e: {
     // Setup our plugins for e2e tests

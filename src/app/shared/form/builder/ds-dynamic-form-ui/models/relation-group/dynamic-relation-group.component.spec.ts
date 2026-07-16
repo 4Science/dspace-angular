@@ -20,13 +20,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   NgbModal,
   NgbModule,
-  NgbTooltipModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { DYNAMIC_FORM_CONTROL_MAP_FN } from '@ng-dynamic-forms/core';
+import { provideMockActions } from '@ngrx/effects/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { MockComponent } from 'ng-mocks';
-import { of } from 'rxjs';
+import {
+  Observable,
+  of,
+} from 'rxjs';
 import {
   APP_CONFIG,
   APP_DATA_SERVICES_MAP,
@@ -40,6 +43,8 @@ import { Vocabulary } from '../../../../../../core/submission/vocabularies/model
 import { VocabularyService } from '../../../../../../core/submission/vocabularies/vocabulary.service';
 import { XSRFService } from '../../../../../../core/xsrf/xsrf.service';
 import { SubmissionService } from '../../../../../../submission/submission.service';
+import { LiveRegionService } from '../../../../../live-region/live-region.service';
+import { getLiveRegionServiceStub } from '../../../../../live-region/live-region.service.stub';
 import { ThemedLoadingComponent } from '../../../../../loading/themed-loading.component';
 import { createSuccessfulRemoteDataObject$ } from '../../../../../remote-data.utils';
 import { SubmissionServiceStub } from '../../../../../testing/submission-service.stub';
@@ -236,6 +241,7 @@ describe('DsDynamicRelationGroupComponent test suite', () => {
         MetadataSecurityConfigurationService,
         NgbModal,
         provideMockStore({ initialState }),
+        provideMockActions(() => new Observable<any>()),
         { provide: VocabularyService, useValue: vocabularyService },
         { provide: SubmissionService, useClass: SubmissionServiceStub },
         { provide: VocabularyService, useValue: vocabularyServiceStub },
@@ -245,6 +251,7 @@ describe('DsDynamicRelationGroupComponent test suite', () => {
         { provide: APP_CONFIG, useValue: environment },
         { provide: APP_DATA_SERVICES_MAP, useValue: {} },
         { provide: DYNAMIC_FORM_CONTROL_MAP_FN, useValue: dsDynamicFormControlMapFn },
+        { provide: LiveRegionService, useValue: getLiveRegionServiceStub() },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
@@ -252,6 +259,7 @@ describe('DsDynamicRelationGroupComponent test suite', () => {
         remove: {
           imports: [
             ThemedLoadingComponent,
+            FormComponent,
           ],
         },
       })
@@ -391,7 +399,6 @@ describe('DsDynamicRelationGroupComponent test suite', () => {
   selector: 'ds-test-cmp',
   template: ``,
   imports: [
-    NgbTooltipModule,
     TranslateModule,
   ],
 })
