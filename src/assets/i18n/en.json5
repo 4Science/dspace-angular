@@ -1039,15 +1039,31 @@
 
   "admin.batch-import.page.remove": "remove",
 
-
   "alert.close.aria": "Close",
 
   "alert.toggle.hide": "Show less",
 
   "alert.toggle.show": "Show more",
 
+  "audit.data.not-found": "No audits found.",
 
-  "audit.overview.title": "Audit Logs Overview",
+  "audit.data.self": "self",
+
+  "audit.detail.metadata.field": "Metadata field:",
+
+  "audit.detail.metadata.value": "Value:",
+
+  "audit.detail.metadata.authority": "Authority:",
+
+  "audit.detail.metadata.confidence": "Confidence:",
+
+  "audit.detail.metadata.place": "Place:",
+
+  "audit.detail.metadata.action": "Action:",
+
+  "audit.detail.metadata.checksum": "Checksum:",
+
+  "audit.overview.title": "All Audit Logs",
 
   "audit.overview.table.id": "Audit ID",
 
@@ -1063,32 +1079,21 @@
 
   "audit.overview.table.eperson": "EPerson",
 
-  "audit.overview.table.timestamp": "Time",
+  "audit.overview.table.other": "Object",
 
-  "audit.overview.breadcrumbs": "Audit Logs Overview",
+  "audit.overview.table.timestamp": "Time (UTC)",
 
-  "audit.object.overview.title": "Subject Audit Logs Overview",
+  "audit.overview.breadcrumbs": "Audit Logs",
+
+  "audit.object.back": "Back",
+
+  "audit.object.breadcrumbs": "Object Audit Logs",
+
+  "audit.object.overview.title": "Object Audit Logs",
+
+  "audit.object.logs.label": "Logs for object: ",
 
   "audit.object.overview.disabled.message": "Audit feature is currently disabled",
-
-  "audit.detail.title": "Audit Detail",
-
-  "audit.detail.id": "Audit Id",
-
-  "audit.detail.subjectUUID": "Subject ID",
-
-  "audit.detail.subjectType": "Subject Type",
-
-  "audit.detail.eventType": "Audit Type",
-
-  "audit.detail.eperson": "EPerson",
-
-  "audit.detail.timeStamp": "Time",
-
-  "audit.detail.back": "All Audit Logs",
-
-  "audit.detail.back.subject": "Subject Audit Logs",
-
 
   "auth.errors.invalid-user": "Invalid email address or password.",
 
@@ -4554,6 +4559,8 @@
   "menu.section.access_control_groups": "Groups",
 
   "menu.section.access_control_people": "People",
+
+  "menu.section.audit": "Audit Logs",
 
   "menu.section.reports": "Reports",
 

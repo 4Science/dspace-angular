@@ -11,6 +11,8 @@ import { MenuRoute } from './shared/menu/menu-route.model';
 import { AccessControlMenuProvider } from './shared/menu/providers/access-control.menu';
 import { AdminCommunityListMenuProvider } from './shared/menu/providers/admin-community-list.menu';
 import { AdminSearchMenuProvider } from './shared/menu/providers/admin-search.menu';
+import { AuditLogsMenuProvider } from './shared/menu/providers/audit-item.menu';
+import { AuditOverviewMenuProvider } from './shared/menu/providers/audit-overview.menu';
 import { CoarNotifyMenuProvider } from './shared/menu/providers/coar-notify.menu';
 import { SubscribeMenuProvider } from './shared/menu/providers/comcol-subscribe.menu';
 import { CommunityListMenuProvider } from './shared/menu/providers/community-list.menu';
@@ -78,6 +80,7 @@ export const MENUS = buildMenuStructure({
     HealthMenuProvider,
     SystemWideAlertMenuProvider,
     CoarNotifyMenuProvider,
+    AuditOverviewMenuProvider,
     UserAgreementMenuProvider,
     MetadataCmsMenuProvider,
   ],
@@ -96,6 +99,11 @@ export const MENUS = buildMenuStructure({
         MenuRoute.ITEM_PAGE,
       ),
       VersioningMenuProvider.onRoute(
+        MenuRoute.ITEM_PAGE,
+      ),
+      AuditLogsMenuProvider.onRoute(
+        MenuRoute.COMMUNITY_PAGE,
+        MenuRoute.COLLECTION_PAGE,
         MenuRoute.ITEM_PAGE,
       ),
       OrcidMenuProvider.onRoute(
