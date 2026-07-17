@@ -2390,6 +2390,8 @@
 
   "equipment.listelement.badge": "Equipment",
 
+  "equipment.page.titleprefix": "Equipment",
+
   "error.bitstream": "Error fetching bitstream",
 
   "error.browse-by": "Error fetching items",
