@@ -281,7 +281,14 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
   getReports$(categoryId) {
     return this.scope$.pipe(
       switchMap((scope) => {
-        return this.usageReportService.searchStatistics(scope._links.self.href, 0, 50, categoryId, this.parseDate(this.dateFrom), this.parseDate(this.dateTo), true);
+        // NOTE: do NOT request the points-stripping projection (excludePoints=true) here.
+        // searchStatistics and loadFullReport()'s findById resolve the SAME usagereports/{uuid}_{type}
+        // resource, so they share a single object-cache slot (keyed by self href, last-writer-wins).
+        // A points-less search representation can overwrite the full report loaded by findById
+        // (e.g. under SSR/TransferState or a re-emitted search), making the table intermittently
+        // render "No data available" even though the REST response contains points. Keeping the
+        // full representation here guarantees every cache write for a report includes its points.
+        return this.usageReportService.searchStatistics(scope._links.self.href, 0, 50, categoryId, this.parseDate(this.dateFrom), this.parseDate(this.dateTo));
       }),
     );
   }
