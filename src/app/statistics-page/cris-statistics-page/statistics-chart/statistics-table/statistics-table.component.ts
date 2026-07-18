@@ -79,7 +79,7 @@ export class StatisticsTableComponent extends StatisticsChartDataComponent imple
    * Insert table headers
    */
   ngOnInit() {
-    this.hasData = !!this.report && this.report.points.length > 0;
+    this.hasData = !!this.report && (this.report.points?.length ?? 0) > 0;
     if (this.hasData) {
       const point = this.report.points[0];
       this.headers.push(point.type);
