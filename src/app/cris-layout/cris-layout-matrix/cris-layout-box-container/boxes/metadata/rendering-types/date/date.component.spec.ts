@@ -9,6 +9,7 @@ import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
+import { of } from 'rxjs';
 
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { LocaleService } from '../../../../../../../core/locale/locale.service';
@@ -43,7 +44,7 @@ describe('DateComponent', () => {
   );
 
   const localeServiceMock = Object.assign({
-    getCurrentLanguageCode: () => 'en',
+    getCurrentLanguageCode: () => of('en'),
   });
 
   const mockField: LayoutField = {

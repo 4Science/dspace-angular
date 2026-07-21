@@ -16,6 +16,7 @@ import {
   BehaviorSubject,
   Subscription,
 } from 'rxjs';
+import { withLatestFrom } from 'rxjs/operators';
 
 import { SiteDataService } from '../../../core/data/site-data.service';
 import { LocaleService } from '../../../core/locale/locale.service';
@@ -54,8 +55,9 @@ export class PrivacyContentComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subs.push(
-      this.siteService.find().subscribe((site) => {
-        const langCode = this.localeService.getCurrentLanguageCode();
+      this.siteService.find().pipe(
+        withLatestFrom(this.localeService.getCurrentLanguageCode()),
+      ).subscribe(([site, langCode]) => {
         const fallbackLangCode = 'en';
 
         const textArray = site?.metadataAsList.filter((metadata) =>

@@ -8,6 +8,9 @@ ui:
   ssl: false
   host: localhost
   port: 4000
+  # Specify the public URL that this user interface responds to. This corresponds to the "dspace.ui.url" property in your backend's local.cfg.
+  # The baseUrl is used for redirects and SEO links (in robots.txt).
+  baseUrl: http://localhost:4000
   # NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
   nameSpace: /
   # The rateLimiter settings limit each IP to a 'max' of 500 requests per 'windowMs' (1 minute).
@@ -87,6 +90,9 @@ cache:
   # NOTE: When updates are made to compiled *.js files, it will automatically bypass this browser cache, because
   # all compiled *.js files include a unique hash in their name which updates when content is modified.
   control: max-age=604800 # revalidate browser
+  # These static files should not be cached (paths relative to dist/browser, including the leading slash)
+  noCacheFiles:
+    - '/index.html'
   autoSync:
     defaultTime: 0
     maxBufferSize: 100
@@ -452,6 +458,7 @@ themes:
   # - name: BASE_THEME_NAME
   #
   - name: dspace
+    prefetch: true
     headTags:
     - tagName: link
       attributes:

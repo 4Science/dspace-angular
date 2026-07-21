@@ -16,6 +16,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
 import uniqueId from 'lodash/uniqueId';
 import {
+  FileItem,
   FileUploader,
   FileUploadModule,
 } from 'ng2-file-upload';
@@ -36,6 +37,7 @@ import {
   isNotEmpty,
   isUndefined,
 } from '../../empty.util';
+import { LiveRegionService } from '../../live-region/live-region.service';
 import { UploaderOptions } from './uploader-options.model';
 import { UploaderProperties } from './uploader-properties.model';
 
@@ -110,10 +112,26 @@ export class UploaderComponent implements OnInit, AfterViewInit {
   public isOverBaseDropZone = observableOf(false);
   public isOverDocumentDropZone = observableOf(false);
 
+  /**
+   * Set of progress values that have been announced to screen readers
+   */
+  private announcedProgress: Set<number> = new Set();
+
+  /**
+   * The uuid of the last progress message announced to screen readers
+   * @private
+   */
+  private lastProgressMessageUuid: string;
+
   @HostListener('window:dragover', ['$event'])
   onDragOver(event: any) {
 
     if (this.enableDragOverDocument && this.dragService.isAllowedDragOverPage()) {
+      // Only show drop area when dragging files or event is manually triggered
+      const hasFiles = event.dataTransfer?.types ? Array.from(event.dataTransfer.types).includes('Files') : true;
+      if (!hasFiles) {
+        return;
+      }
       // Show drop area on the page
       event.preventDefault();
       if ((event.target as any).tagName !== 'HTML') {
@@ -129,6 +147,7 @@ export class UploaderComponent implements OnInit, AfterViewInit {
     private scrollToService: ScrollToService,
     private tokenExtractor: HttpXsrfTokenExtractor,
     private cookieService: CookieService,
+    private liveRegionService: LiveRegionService,
   ) {
   }
 
@@ -218,7 +237,28 @@ export class UploaderComponent implements OnInit, AfterViewInit {
       this.uploader.cancelAll();
     };
     this.uploader.onProgressAll = () => this.onProgress();
-    this.uploader.onProgressItem = () => this.onProgress();
+    // Live region service setup
+    this.liveRegionService.setMessageTimeOutMs(1500);
+    this.liveRegionService.clear();
+    this.uploader.onProgressItem = (fileItem: FileItem, progress: any) => {
+      this.announceProgress(progress);
+      this.onProgress();
+    };
+  }
+
+  /**
+   * Announce the progress of the upload to screen readers
+   * @param progress
+   */
+  private announceProgress(progress: any) {
+    if (!this.announcedProgress.has(progress)) {
+      this.announcedProgress.add(progress);
+      const message = progress + '%';
+      if (this.lastProgressMessageUuid) {
+        this.liveRegionService.clearMessageByUUID(this.lastProgressMessageUuid);
+      }
+      this.lastProgressMessageUuid = this.liveRegionService.addMessage(message);
+    }
   }
 
   /**

@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import {
   map,
   take,
+  withLatestFrom,
 } from 'rxjs/operators';
 
 import { SiteDataService } from '../../core/data/site-data.service';
@@ -61,10 +62,13 @@ export class HomeNewsComponent implements OnInit {
     this.site$ = this.route.data.pipe(
       map((data) => data.site as Site),
     );
-    this.siteService.find().pipe(take(1)).subscribe(
-      (site: Site) => {
+    this.siteService.find().pipe(
+      take(1),
+      withLatestFrom(this.locale.getCurrentLanguageCode()),
+    ).subscribe(
+      ([site, langCode]: [Site, string]) => {
         this.hasHomeNewsMetadata = !isEmpty(site?.firstMetadataValue('cris.cms.home-news',
-          { language: this.locale.getCurrentLanguageCode() }));
+          { language: langCode }));
       },
     );
   }
