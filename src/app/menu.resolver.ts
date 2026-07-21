@@ -70,7 +70,6 @@ export class MenuResolver implements Resolve<boolean> {
     protected menuService: MenuService,
     protected authorizationService: AuthorizationDataService,
     protected modalService: NgbModal,
-    protected scriptDataService: ScriptDataService,
     protected authService: AuthService,
     protected sectionDataService: SectionDataService,
     protected configService: ConfigurationDataService,
