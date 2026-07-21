@@ -9,7 +9,6 @@
 import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
-  combineLatest as observableCombineLatest,
   map,
   Observable,
   of,
@@ -17,10 +16,7 @@ import {
 
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
-import {
-  METADATA_EXPORT_SCRIPT_NAME,
-  ScriptDataService,
-} from '../../../core/data/processes/script-data.service';
+import { ScriptDataService } from '../../../core/data/processes/script-data.service';
 import { ExportBatchSelectorComponent } from '../../dso-selector/modal-wrappers/export-batch-selector/export-batch-selector.component';
 import { ExportMetadataCsvSelectorComponent } from '../../dso-selector/modal-wrappers/export-metadata-csv-selector/export-metadata-csv-selector.component';
 import { ExportMetadataXlsSelectorComponent } from '../../dso-selector/modal-wrappers/export-metadata-xls-selector/export-metadata-xls-selector.component';
@@ -56,14 +52,11 @@ export class ExportMenuProvider extends AbstractExpandableMenuProvider {
   }
 
   public getSubSections(): Observable<PartialMenuSection[]> {
-    return observableCombineLatest([
-      this.authorizationService.isAuthorized(FeatureID.IsComColAdmin),
-      this.scriptDataService.scriptWithNameExistsAndCanExecute(METADATA_EXPORT_SCRIPT_NAME),
-    ]).pipe(
-      map(([authorized, metadataExportScriptExists]: [boolean, boolean]) => {
+    return this.authorizationService.isAuthorized(FeatureID.CanExportMetadata).pipe(
+      map((authorized: boolean) => {
         return [
           {
-            visible: authorized && metadataExportScriptExists,
+            visible: authorized,
             model: {
               type: MenuItemType.ONCLICK,
               text: 'menu.section.export_metadata_csv',
@@ -73,7 +66,7 @@ export class ExportMenuProvider extends AbstractExpandableMenuProvider {
             },
           },
           {
-            visible: authorized && metadataExportScriptExists,
+            visible: authorized,
             model: {
               type: MenuItemType.ONCLICK,
               text: 'menu.section.export_metadata_xls',
@@ -83,7 +76,7 @@ export class ExportMenuProvider extends AbstractExpandableMenuProvider {
             },
           },
           {
-            visible: authorized && metadataExportScriptExists,
+            visible: authorized,
             model: {
               type: MenuItemType.ONCLICK,
               text: 'menu.section.export_batch',

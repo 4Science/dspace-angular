@@ -179,6 +179,8 @@ export class DefaultAppConfig implements AppConfig {
     FeatureID.CoarNotifyEnabled,
     FeatureID.CanSeeQA,
     FeatureID.IsComColAdmin,
+    FeatureID.CanExportMetadata,
+    FeatureID.CanImportMetadata,
   ];
 
   discoveryAuthorizationFeaturesConfig: DiscoveryConfigurationFeaturesConfig = {

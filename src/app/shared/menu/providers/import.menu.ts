@@ -9,7 +9,6 @@
 import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
-  combineLatest as observableCombineLatest,
   map,
   Observable,
   of,
@@ -17,10 +16,7 @@ import {
 
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
-import {
-  METADATA_IMPORT_SCRIPT_NAME,
-  ScriptDataService,
-} from '../../../core/data/processes/script-data.service';
+import { ScriptDataService } from '../../../core/data/processes/script-data.service';
 import { MenuItemType } from '../menu-item-type.model';
 import { PartialMenuSection } from '../menu-provider.model';
 import { AbstractExpandableMenuProvider } from './helper-providers/expandable-menu-provider';
@@ -52,14 +48,11 @@ export class ImportMenuProvider extends AbstractExpandableMenuProvider {
   }
 
   public getSubSections(): Observable<PartialMenuSection[]> {
-    return observableCombineLatest([
-      this.authorizationService.isAuthorized(FeatureID.IsComColAdmin),
-      this.scriptDataService.scriptWithNameExistsAndCanExecute(METADATA_IMPORT_SCRIPT_NAME),
-    ]).pipe(
-      map(([authorized, metadataImportScriptExists]) => {
+    return this.authorizationService.isAuthorized(FeatureID.CanImportMetadata).pipe(
+      map((authorized: boolean) => {
         return [
           {
-            visible: authorized && metadataImportScriptExists,
+            visible: authorized,
             model: {
               type: MenuItemType.LINK,
               text: 'menu.section.import_metadata',
@@ -67,7 +60,7 @@ export class ImportMenuProvider extends AbstractExpandableMenuProvider {
             },
           },
           {
-            visible: authorized && metadataImportScriptExists,
+            visible: authorized,
             model: {
               type: MenuItemType.LINK,
               text: 'menu.section.import_batch',
