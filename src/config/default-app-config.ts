@@ -177,6 +177,8 @@ export class DefaultAppConfig implements AppConfig {
     FeatureID.CanSubmit,
     FeatureID.CoarNotifyEnabled,
     FeatureID.CanSeeQA,
+    FeatureID.CanExportMetadata,
+    FeatureID.CanImportMetadata,
   ];
 
   discoveryAuthorizationFeaturesConfig: DiscoveryConfigurationFeaturesConfig = {
