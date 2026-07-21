@@ -31,11 +31,6 @@ import { ConfigurationDataService } from './core/data/configuration-data.service
 import { AuthorizationDataService } from './core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from './core/data/feature-authorization/feature-id';
 import { PaginatedList } from './core/data/paginated-list.model';
-import {
-  METADATA_EXPORT_SCRIPT_NAME,
-  METADATA_IMPORT_SCRIPT_NAME,
-  ScriptDataService,
-} from './core/data/processes/script-data.service';
 import { RemoteData } from './core/data/remote-data';
 import { Section } from './core/layout/models/section.model';
 import { SectionDataService } from './core/layout/section-data.service';
@@ -77,7 +72,6 @@ export class MenuResolverService  {
     protected menuService: MenuService,
     protected authorizationService: AuthorizationDataService,
     protected modalService: NgbModal,
-    protected scriptDataService: ScriptDataService,
     protected configurationDataService: ConfigurationDataService,
     protected authService: AuthService,
     protected sectionDataService: SectionDataService,
@@ -650,17 +644,8 @@ export class MenuResolverService  {
     ];
     menuList.forEach((menuSection) => this.menuService.addSection(MenuID.ADMIN, menuSection));
 
-    observableCombineLatest([
-      this.authorizationService.isAuthorized(FeatureID.AdministratorOf),
-      this.authorizationService.isAuthorized(FeatureID.IsCommunityAdmin),
-      this.authorizationService.isAuthorized(FeatureID.IsCollectionAdmin),
-    ]).pipe(
-      filter(([isAdmin, isCommunityAdmin, isCollectionAdmin]) =>
-        isAdmin || isCollectionAdmin || isCommunityAdmin,
-      ),
-      take(1),
-      switchMap(() => this.scriptDataService.scriptWithNameExistsAndCanExecute(METADATA_EXPORT_SCRIPT_NAME)),
-      filter((metadataExportScriptExists: boolean) => metadataExportScriptExists),
+    this.authorizationService.isAuthorized(FeatureID.CanExportMetadata).pipe(
+      filter((canExport) => canExport),
       take(1),
     ).subscribe(() => {
       // Hides the export menu for unauthorised people
@@ -783,17 +768,8 @@ export class MenuResolverService  {
     const menuList = [];
     menuList.forEach((menuSection) => this.menuService.addSection(MenuID.ADMIN, menuSection));
 
-    observableCombineLatest([
-      this.authorizationService.isAuthorized(FeatureID.AdministratorOf),
-      this.authorizationService.isAuthorized(FeatureID.IsCommunityAdmin),
-      this.authorizationService.isAuthorized(FeatureID.IsCollectionAdmin),
-    ]).pipe(
-      filter(([isAdmin, isCommunityAdmin, isCollectionAdmin]) =>
-        isAdmin || isCollectionAdmin || isCommunityAdmin,
-      ),
-      take(1),
-      switchMap(() => this.scriptDataService.scriptWithNameExistsAndCanExecute(METADATA_IMPORT_SCRIPT_NAME)),
-      filter((metadataImportScriptExists: boolean) => metadataImportScriptExists),
+    this.authorizationService.isAuthorized(FeatureID.CanImportMetadata).pipe(
+      filter((canImport) => canImport),
       take(1),
     ).subscribe(() => {
       // Hides the import menu for unauthorised people
