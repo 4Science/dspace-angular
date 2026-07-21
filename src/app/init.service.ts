@@ -44,11 +44,13 @@ import { LocaleService } from './core/locale/locale.service';
 import { HeadTagService } from './core/metadata/head-tag.service';
 import { CorrelationIdService } from './correlation-id/correlation-id.service';
 import { layoutBoxesMap } from './cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/metadata-box-rendering-map';
+import { AuthorizationService } from './shared/authorizations/authorization.service';
 import { dsDynamicFormControlMapFn } from './shared/form/builder/ds-dynamic-form-ui/ds-dynamic-form-control-map-fn';
 import { MenuService } from './shared/menu/menu.service';
 import { MenuProviderService } from './shared/menu/menu-provider.service';
 import { ThemeService } from './shared/theme-support/theme.service';
 import { Angulartics2DSpace } from './statistics/angulartics/dspace-provider';
+
 
 /**
  * Performs the initialization of the app.
@@ -79,7 +81,7 @@ export abstract class InitService {
     protected themeService: ThemeService,
     protected menuService: MenuService,
     protected menuProviderService: MenuProviderService,
-
+    protected authorizationService: AuthorizationService,
   ) {
   }
 

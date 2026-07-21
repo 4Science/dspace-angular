@@ -28,6 +28,7 @@ import { ObjectCacheService } from '../../../../../core/cache/object-cache.servi
 import { CommunityDataService } from '../../../../../core/data/community-data.service';
 import { DefaultChangeAnalyzer } from '../../../../../core/data/default-change-analyzer.service';
 import { DSOChangeAnalyzer } from '../../../../../core/data/dso-change-analyzer.service';
+import { AuthorizationDataService } from '../../../../../core/data/feature-authorization/authorization-data.service';
 import { ItemDataService } from '../../../../../core/data/item-data.service';
 import { buildPaginatedList } from '../../../../../core/data/paginated-list.model';
 import { RelationshipDataService } from '../../../../../core/data/relationship-data.service';
@@ -42,6 +43,7 @@ import { CollectionElementLinkType } from '../../../../../shared/object-collecti
 import { ItemSearchResult } from '../../../../../shared/object-collection/shared/item-search-result.model';
 import { SelectableListService } from '../../../../../shared/object-list/selectable-list/selectable-list.service';
 import { createSuccessfulRemoteDataObject$ } from '../../../../../shared/remote-data.utils';
+import { AuthorizationDataServiceStub } from '../../../../../shared/testing/authorization-service.stub';
 import { ThemeService } from '../../../../../shared/theme-support/theme.service';
 import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
 import { TruncatePipe } from '../../../../../shared/utils/truncate.pipe';
@@ -151,6 +153,7 @@ describe('PersonSearchResultListElementSubmissionComponent', () => {
         { provide: AuthService, useValue: {} },
         { provide: REQUEST, useValue: {} },
         { provide: ThemeService, useValue: getMockThemeService() },
+        { provide: AuthorizationDataService, useClass: AuthorizationDataServiceStub },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(PersonSearchResultListSubmissionElementComponent, {

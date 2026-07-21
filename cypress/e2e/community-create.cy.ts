@@ -4,8 +4,8 @@ beforeEach(() => {
 });
 
 it('should show loading component while saving', () => {
-  cy.intercept('**/sites/**canSubmit**').as('canSubmit');
-  cy.wait('@canSubmit');
+  cy.intercept('**/api/config/properties/submit.type-bind.field').as('typeBind');
+  cy.wait('@typeBind');
 
   const title = 'Test Community Title';
   cy.get('#title').type(title);

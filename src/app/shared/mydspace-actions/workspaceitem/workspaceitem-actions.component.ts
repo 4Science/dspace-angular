@@ -20,20 +20,14 @@ import {
 import {
   BehaviorSubject,
   Observable,
-  switchMap,
 } from 'rxjs';
 import { AuthorizationDataService } from 'src/app/core/data/feature-authorization/authorization-data.service';
 
-import { AuthService } from '../../../core/auth/auth.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { RemoteData } from '../../../core/data/remote-data';
 import { RequestService } from '../../../core/data/request.service';
-import { Item } from '../../../core/shared/item.model';
 import { NoContent } from '../../../core/shared/NoContent.model';
-import {
-  getFirstCompletedRemoteData,
-  getRemoteDataPayload,
-} from '../../../core/shared/operators';
+import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { SearchService } from '../../../core/shared/search/search.service';
 import { WorkspaceItem } from '../../../core/submission/models/workspaceitem.model';
 import { WorkspaceitemDataService } from '../../../core/submission/workspaceitem-data.service';
@@ -86,6 +80,7 @@ export class WorkspaceitemActionsComponent extends MyDSpaceActionsComponent<Work
    * @param {TranslateService} translate
    * @param {SearchService} searchService
    * @param {RequestService} requestService
+   * @param authorizationService
    */
   constructor(protected injector: Injector,
     protected router: Router,
@@ -94,7 +89,6 @@ export class WorkspaceitemActionsComponent extends MyDSpaceActionsComponent<Work
     protected translate: TranslateService,
     protected searchService: SearchService,
     protected requestService: RequestService,
-    private authService: AuthService,
     public authorizationService: AuthorizationDataService,
   ) {
     super(WorkspaceItem.type, injector, router, notificationsService, translate, searchService, requestService);
@@ -122,18 +116,7 @@ export class WorkspaceitemActionsComponent extends MyDSpaceActionsComponent<Work
 
 
   ngOnInit(): void {
-    const activeEPerson$ = this.authService.getAuthenticatedUserFromStore();
-
-    this.canEditItem$ = activeEPerson$.pipe(
-      switchMap((eperson) => {
-        return this.object?.item.pipe(
-          getFirstCompletedRemoteData(),
-          getRemoteDataPayload(),
-          switchMap((item: Item) => {
-            return this.authorizationService.isAuthorized(FeatureID.CanEditItem, item?._links?.self.href, eperson.uuid);
-          }),
-        ) as Observable<boolean>;
-      }));
+    this.canEditItem$ = this.authorizationService.isAuthorized(FeatureID.CanEditItem, this.object.self);
   }
 
   /**

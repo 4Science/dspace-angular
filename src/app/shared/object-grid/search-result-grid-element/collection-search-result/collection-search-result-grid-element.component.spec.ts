@@ -23,6 +23,7 @@ import { BitstreamFormatDataService } from '../../../../core/data/bitstream-form
 import { CommunityDataService } from '../../../../core/data/community-data.service';
 import { DefaultChangeAnalyzer } from '../../../../core/data/default-change-analyzer.service';
 import { DSOChangeAnalyzer } from '../../../../core/data/dso-change-analyzer.service';
+import { AuthorizationDataService } from '../../../../core/data/feature-authorization/authorization-data.service';
 import { Collection } from '../../../../core/shared/collection.model';
 import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service';
 import { UUIDService } from '../../../../core/shared/uuid.service';
@@ -32,6 +33,7 @@ import { NotificationsService } from '../../../notifications/notifications.servi
 import { CollectionSearchResult } from '../../../object-collection/shared/collection-search-result.model';
 import { ActivatedRouteStub } from '../../../testing/active-router.stub';
 import { AuthServiceStub } from '../../../testing/auth-service.stub';
+import { AuthorizationDataServiceStub } from '../../../testing/authorization-service.stub';
 import { TruncatableService } from '../../../truncatable/truncatable.service';
 import { TruncatePipe } from '../../../utils/truncate.pipe';
 import { CollectionSearchResultGridElementComponent } from './collection-search-result-grid-element.component';
@@ -99,6 +101,7 @@ describe('CollectionSearchResultGridElementComponent', () => {
         { provide: BitstreamFormatDataService, useValue: {} },
         { provide: XSRFService, useValue: {} },
         { provide: LinkService, useValue: linkService },
+        { provide: AuthorizationDataService, useClass: AuthorizationDataServiceStub },
         provideMockStore({}),
       ],
       schemas: [NO_ERRORS_SCHEMA],

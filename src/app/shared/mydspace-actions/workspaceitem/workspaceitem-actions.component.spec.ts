@@ -91,7 +91,16 @@ const item = Object.assign(new Item(), {
   },
 });
 const rd = createSuccessfulRemoteDataObject(item);
-mockObject = Object.assign(new WorkspaceItem(), { item: of(rd), id: '1234', uuid: '1234' });
+mockObject = Object.assign(new WorkspaceItem(), {
+  item: of(rd),
+  id: '1234',
+  uuid: '1234',
+  _links: {
+    self: {
+      href: 'selfHref',
+    },
+  },
+});
 
 const ePersonMock: EPerson = Object.assign(new EPerson(), {
   handle: null,

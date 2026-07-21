@@ -6,9 +6,11 @@ import {
 import { AccessibilitySettingsConfig } from '../app/accessibility/accessibility-settings.config';
 import { AdminNotifyMetricsRow } from '../app/admin/admin-notify-dashboard/admin-notify-metrics/admin-notify-metrics.model';
 import { HALDataService } from '../app/core/data/base/hal-data-service.interface';
+import { FeatureID } from '../app/core/data/feature-authorization/feature-id';
 import { GenericConstructor } from '../app/core/shared/generic-constructor';
 import { FieldRenderingType } from '../app/cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/field-rendering-type';
 import { MetadataBoxFieldRenderOptions } from '../app/cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/metadata/rendering-types/rendering-type.model';
+import { DiscoveryConfigurationFeaturesConfig } from '../app/shared/authorizations/authorization.interfaces';
 import { LiveRegionConfig } from '../app/shared/live-region/live-region.config';
 import { ActuatorsConfig } from './actuators.config';
 import { AddToAnyPluginConfig } from './add-to-any-plugin-config';
@@ -57,6 +59,7 @@ import { SubmissionConfig } from './submission-config.interface';
 import { SuggestionConfig } from './suggestion-config.interfaces';
 import { ThemeConfig } from './theme.config';
 import { UIServerConfig } from './ui-server-config.interface';
+
 
 interface AppConfig extends Config {
   ui: UIServerConfig;
@@ -112,6 +115,8 @@ interface AppConfig extends Config {
   datadogRum?: DatadogRumConfig;
   permanentRedirectPaths?: string[];
   luckySearchRedirects?: LuckySearchRedirectConfig;
+  siteAuthorizationFeaturesConfig: FeatureID[];
+  discoveryAuthorizationFeaturesConfig: DiscoveryConfigurationFeaturesConfig;
 }
 
 /**

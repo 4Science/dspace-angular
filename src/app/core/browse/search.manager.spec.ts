@@ -3,6 +3,7 @@ import { of } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 import { v4 as uuidv4 } from 'uuid';
 
+import { AppConfig } from '../../../config/app-config.interface';
 import { toRemoteData } from '../../browse-by/browse-by-metadata/browse-by-metadata.component.spec';
 import {
   createSuccessfulRemoteDataObject,
@@ -10,6 +11,7 @@ import {
 } from '../../shared/remote-data.utils';
 import { createPaginatedList } from '../../shared/testing/utils.test';
 import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
+import { FeatureID } from '../data/feature-authorization/feature-id';
 import { FindListOptions } from '../data/find-list-options.model';
 import { Item } from '../shared/item.model';
 import { ITEM } from '../shared/item.resource-type';
@@ -97,6 +99,20 @@ describe('SearchManager', () => {
     type: ITEM.value,
   });
 
+  const appConfig: Partial<AppConfig> = {
+    discoveryAuthorizationFeaturesConfig: {},
+    followAuthorityMetadata:  [
+      {
+        type: 'Publication',
+        metadata: ['dc.contributor.author'],
+      },
+      {
+        type: 'Product',
+        metadata: ['dc.contributor.author'],
+      },
+    ],
+  };
+
   const mockBrowseService: any = {
     getBrowseItemsFor: (options: BrowseEntrySearchOptions) =>
       toRemoteData([firstPublication, secondPublication, firstProject]),
@@ -114,8 +130,13 @@ describe('SearchManager', () => {
       of(createSuccessfulRemoteDataObject(createPaginatedList([]))),
   };
 
+  const mockAuthorizationService: any = {
+    getObjectsAuthorizations: (uuidList: string[], uniqueType: string, featuresId?: FeatureID[]) =>
+      of([]),
+  };
+
   function initTestService() {
-    return new SearchManager(mockItemService, mockBrowseService, mockSearchService);
+    return new SearchManager(mockItemService, mockBrowseService, mockSearchService, mockAuthorizationService, appConfig as AppConfig);
   }
 
   beforeEach(() => {

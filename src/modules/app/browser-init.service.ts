@@ -26,6 +26,7 @@ import {
   find,
   map,
 } from 'rxjs/operators';
+import { AuthorizationService } from 'src/app/shared/authorizations/authorization.service';
 
 import { logStartupMessage } from '../../../startup-message';
 import { AppState } from '../../app/app.reducer';
@@ -90,6 +91,7 @@ export class BrowserInitService extends InitService {
     private halService: HALEndpointService,
     private matomoService: MatomoService,
     protected menuProviderService: MenuProviderService,
+    protected authorizationService: AuthorizationService,
   ) {
     super(
       store,
@@ -103,6 +105,7 @@ export class BrowserInitService extends InitService {
       themeService,
       menuService,
       menuProviderService,
+      authorizationService,
     );
   }
 
@@ -135,6 +138,8 @@ export class BrowserInitService extends InitService {
       this.trackAuthTokenExpiration();
 
       this.initOrejime();
+      this.authorizationService.initStateForSite(this.appConfig.siteAuthorizationFeaturesConfig);
+
 
       await lastValueFrom(this.authenticationReady$());
       this.menuProviderService.initPersistentMenus(false);
