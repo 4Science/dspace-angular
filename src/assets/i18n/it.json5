@@ -3863,6 +3863,9 @@
   // "equipment.listelement.badge": "Equipment",
   "equipment.listelement.badge": "Attrezzature",
 
+  // "equipment.page.titleprefix": "Equipment",
+  "equipment.page.titleprefix": "Attrezzature",
+
   // "error.bitstream": "Error fetching bitstream",
   "error.bitstream": "Errore durante il recupero del bitstream",
 
