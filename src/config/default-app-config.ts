@@ -1,6 +1,8 @@
 import { AccessibilitySettingsConfig } from '../app/accessibility/accessibility-settings.config';
 import { AdminNotifyMetricsRow } from '../app/admin/admin-notify-dashboard/admin-notify-metrics/admin-notify-metrics.model';
+import { FeatureID } from '../app/core/data/feature-authorization/feature-id';
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
+import { DiscoveryConfigurationFeaturesConfig } from '../app/shared/authorizations/authorization.interfaces';
 import { LiveRegionConfig } from '../app/shared/live-region/live-region.config';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
 import { ActuatorsConfig } from './actuators.config';
@@ -157,6 +159,32 @@ export class DefaultAppConfig implements AppConfig {
       timeLeftBeforeTokenRefresh: 2 * 60 * 1000, // 2 minutes
     },
     isPasswordLoginEnabledForAdminsOnly: false, // Enable the standard login form
+  };
+
+  siteAuthorizationFeaturesConfig: FeatureID[] = [
+    FeatureID.AdministratorOf,
+    FeatureID.IsCommunityAdmin,
+    FeatureID.IsCollectionAdmin,
+    FeatureID.EPersonRegistration,
+    FeatureID.CanManageGroups,
+    FeatureID.CanViewUsageStatistics,
+    FeatureID.CanViewLoginStatistics,
+    FeatureID.CanViewWorkflowStatistics,
+    FeatureID.CanSendFeedback,
+    FeatureID.CanEditItem,
+    FeatureID.EPersonForgotPassword,
+    FeatureID.CanCorrectItem,
+    FeatureID.CanSubmit,
+    FeatureID.CoarNotifyEnabled,
+    FeatureID.CanSeeQA,
+  ];
+
+  discoveryAuthorizationFeaturesConfig: DiscoveryConfigurationFeaturesConfig = {
+    'workspace': {
+      'submission.workspaceitem': [
+        FeatureID.CanEditItem,
+      ],
+    },
   };
 
   // Form settings

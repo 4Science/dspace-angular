@@ -21,6 +21,7 @@ import { LocaleService } from '../../app/core/locale/locale.service';
 import { HeadTagService } from '../../app/core/metadata/head-tag.service';
 import { CorrelationIdService } from '../../app/correlation-id/correlation-id.service';
 import { InitService } from '../../app/init.service';
+import { AuthorizationService } from '../../app/shared/authorizations/authorization.service';
 import {
   isEmpty,
   isNotEmpty,
@@ -53,6 +54,7 @@ export class ServerInitService extends InitService {
     protected breadcrumbsService: BreadcrumbsService,
     protected themeService: ThemeService,
     protected menuService: MenuService,
+    protected authorizationService: AuthorizationService,
   ) {
     super(
       store,
@@ -65,6 +67,7 @@ export class ServerInitService extends InitService {
       breadcrumbsService,
       themeService,
       menuService,
+      authorizationService,
     );
   }
 
@@ -82,6 +85,8 @@ export class ServerInitService extends InitService {
       this.themeService.listenForThemeChanges(false);
 
       await lastValueFrom(this.authenticationReady$());
+
+      this.authorizationService.initAnonymousStateForSite();
 
       return true;
     };
