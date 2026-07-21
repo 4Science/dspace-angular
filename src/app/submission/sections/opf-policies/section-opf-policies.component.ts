@@ -1,0 +1,125 @@
+import { AlertType } from '../../../shared/alert/alert-type';
+import { Component, Inject } from '@angular/core';
+
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
+
+import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder/json-patch-operation-path-combiner';
+import { JsonPatchOperationsBuilder } from '../../../core/json-patch/builder/json-patch-operations-builder';
+import { WorkspaceitemSectionJiscOpfPoliciesObject } from '../../../core/submission/models/workspaceitem-section-opf-policies.model';
+import { renderSectionFor } from '../sections-decorator';
+import { SectionsType } from '../sections-type';
+import { SectionDataObject } from '../models/section-data.model';
+import { SectionsService } from '../sections.service';
+import { SectionModelComponent } from '../models/section.model';
+import { SubmissionService } from '../../submission.service';
+import { hasValue, isEmpty } from '../../../shared/empty.util';
+
+/**
+ * This component represents a section for the Jisc Open Policy Finder policy informations structure.
+ */
+@Component({
+  selector: 'ds-section-opf-policies',
+  templateUrl: './section-opf-policies.component.html',
+  styleUrls: ['./section-opf-policies.component.scss']
+})
+@renderSectionFor(SectionsType.OpfPolicies)
+export class SubmissionSectionJiscOpfPoliciesComponent extends SectionModelComponent {
+
+  /**
+   * The accesses section data
+   * @type {WorkspaceitemSectionAccessesObject}
+   */
+  public jiscOpfPoliciesData$: BehaviorSubject<WorkspaceitemSectionJiscOpfPoliciesObject> = new BehaviorSubject<WorkspaceitemSectionJiscOpfPoliciesObject>(null);
+
+  /**
+   * The [[JsonPatchOperationPathCombiner]] object
+   * @type {JsonPatchOperationPathCombiner}
+   */
+  protected pathCombiner: JsonPatchOperationPathCombiner;
+
+  /**
+   * Array to track all subscriptions and unsubscribe them onDestroy
+   * @type {Array}
+   */
+  protected subs: Subscription[] = [];
+
+  /**
+   * A boolean representing if div should start collapsed
+   */
+  public isCollapsed = false;
+
+
+  /**
+   * The AlertType enumeration
+   * @type {AlertType}
+   */
+  public AlertTypeEnum = AlertType;
+
+  /**
+   * Initialize instance variables
+   *
+   * @param {SectionsService} sectionService
+   * @param {SectionDataObject} injectedSectionData
+   * @param {JsonPatchOperationsBuilder} operationsBuilder
+   * @param {SubmissionService} submissionService
+   * @param {string} injectedSubmissionId
+   */
+  constructor(
+    protected sectionService: SectionsService,
+    protected operationsBuilder: JsonPatchOperationsBuilder,
+    private submissionService: SubmissionService,
+    @Inject('sectionDataProvider') public injectedSectionData: SectionDataObject,
+    @Inject('submissionIdProvider') public injectedSubmissionId: string) {
+    super(undefined, injectedSectionData, injectedSubmissionId);
+  }
+
+  /**
+   * Unsubscribe from all subscriptions
+   */
+  onSectionDestroy() {
+
+    this.subs
+      .filter((subscription) => hasValue(subscription))
+      .forEach((subscription) => subscription.unsubscribe());
+  }
+
+
+  /**
+   * Initialize all instance variables and retrieve collection default access conditions
+   */
+  protected onSectionInit(): void {
+    this.pathCombiner = new JsonPatchOperationPathCombiner('sections', this.sectionData.id);
+    this.subs.push(
+      this.sectionService.getSectionData(this.submissionId, this.sectionData.id, this.sectionData.sectionType)
+        .subscribe((opfPolicies: WorkspaceitemSectionJiscOpfPoliciesObject) => {
+          this.jiscOpfPoliciesData$.next(opfPolicies);
+        })
+    );
+  }
+
+  /**
+   * Get section status
+   *
+   * @return Observable<boolean>
+   *     the section status
+   */
+  protected getSectionStatus(): Observable<boolean> {
+    return of(true);
+  }
+
+  /**
+   * Check if section has no data
+   */
+  hasNoData(): boolean {
+    return isEmpty(this.jiscOpfPoliciesData$.value);
+  }
+
+  /**
+   * Refresh Jisc Open Policy Finder information
+   */
+  refresh() {
+    this.operationsBuilder.remove(this.pathCombiner.getPath('retrievalTime'));
+    this.submissionService.dispatchSaveSection(this.submissionId, this.sectionData.id);
+  }
+
+}

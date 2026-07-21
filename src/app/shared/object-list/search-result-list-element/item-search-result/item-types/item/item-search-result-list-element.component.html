@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row word-break">
   <div *ngIf="showThumbnails" class="col-3 col-xl-2 pr-sm-0">
     <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'" [attr.rel]="(linkType == linkTypes.ExternalLink) ? 'noopener noreferrer' : null"
        [routerLink]="[itemPageRoute]" class="dont-break-out">
@@ -23,9 +23,10 @@
         <ds-truncatable [id]="dso.id" *ngIf="object !== undefined && object !== null">
           <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'" [attr.rel]="(linkType == linkTypes.ExternalLink) ? 'noopener noreferrer' : null"
                  [routerLink]="[itemPageRoute]" class="lead item-list-title dont-break-out"
-                 [innerHTML]="dsoTitle"></a>
+                 [innerHTML]="dsoTitle | dsEscapeHtml"></a>
           <span *ngIf="linkType == linkTypes.None" class="lead item-list-title dont-break-out"
-                [innerHTML]="dsoTitle"></span>
+                [innerHTML]="dsoTitle | dsEscapeHtml"></span>
+          <ds-in-workflow-statistics  *ngIf="showWorkflowStatistics" [item]="dso"></ds-in-workflow-statistics>
           <span class="text-muted">
             <ds-truncatable-part [id]="dso.id" [minLines]="1">
               <ng-container *ngIf="dso.firstMetadataValue('dc.publisher') || dso.firstMetadataValue('dc.date.issued')">
@@ -34,10 +35,19 @@
                 <span *ngIf="dso.firstMetadataValue('dc.date.issued')" class="item-list-date"
                       [innerHTML]="firstMetadataValue('dc.date.issued')"></span>)
               </ng-container>
-              <span *ngIf="dso.allMetadataValues(authorMetadata).length > 0" class="item-list-authors">
-                <span *ngFor="let author of dso.allMetadata(authorMetadata); let i=index; let last=last;">
-                  <ds-metadata-link-view [item]="dso" [metadata]="author" [metadataName]="authorMetadata"></ds-metadata-link-view><span *ngIf="!last">; </span>
-                </span>
+              <span *ngIf="dso.allMetadataValues(authorMetadata, placeholderFilter).length > 0" class="item-list-authors">
+                <ng-container *ngVar="(isCollapsed() | async) as isCollapsed">
+                  <ng-container *ngIf="isCollapsed">
+                    <span *ngFor="let author of dso.limitedMetadata(authorMetadata, additionalMetadataLimit, placeholderFilter); let i=index; let last=last;">
+                      <ds-metadata-link-view [item]="dso" [metadata]="author" [metadataName]="authorMetadata"></ds-metadata-link-view><span *ngIf="!last">; </span>
+                    </span>
+                  </ng-container>
+                  <ng-container *ngIf="!isCollapsed">
+                     <span *ngFor="let author of dso.allMetadata(authorMetadata, placeholderFilter); let i=index; let last=last;">
+                      <ds-metadata-link-view [item]="dso" [metadata]="author" [metadataName]="authorMetadata"></ds-metadata-link-view><span *ngIf="!last">; </span>
+                    </span>
+                  </ng-container>
+                </ng-container>
               </span>
             </ds-truncatable-part>
           </span>

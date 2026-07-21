@@ -23,6 +23,8 @@ import { HomeConfig } from './homepage-config.interface';
 import { MarkdownConfig } from './markdown-config.interface';
 import { FilterVocabularyConfig } from './filter-vocabulary-config';
 import { DiscoverySortConfig } from './discovery-sort.config';
+import { LiveRegionConfig } from '../app/shared/live-region/live-region.config';
+import { SearchConfig } from './search-page-config.interface';
 import { CrisLayoutConfig, LayoutConfig, SuggestionConfig } from './layout-config.interfaces';
 import { MetadataSecurityConfig } from './metadata-security-config';
 import { CmsMetadata } from './cms-metadata';
@@ -37,6 +39,7 @@ import { MetaTagsConfig } from './meta-tags.config';
 import { MetadataLinkViewPopoverDataConfig } from './metadata-link-view-popoverdata-config.interface';
 import { IdentifierSubtypesConfig } from './identifier-subtypes-config.interface';
 import { DatadogRumConfig } from './datadog-rum-config.interfaces';
+import {LuckySearchRedirectConfig} from './lucky-search-redirect-config';
 
 interface AppConfig extends Config {
   ui: UIServerConfig;
@@ -63,6 +66,8 @@ interface AppConfig extends Config {
   markdown: MarkdownConfig;
   vocabularies: FilterVocabularyConfig[];
   comcolSelectionSort: DiscoverySortConfig;
+  liveRegion: LiveRegionConfig;
+  search: SearchConfig
   crisLayout: CrisLayoutConfig;
   layout: LayoutConfig;
   security: MetadataSecurityConfig;
@@ -70,6 +75,8 @@ interface AppConfig extends Config {
   suggestion: SuggestionConfig[];
   addToAnyPlugin: AddToAnyPluginConfig;
   followAuthorityMetadata: FollowAuthorityMetadata[];
+  followAuthorityMaxItemLimit: number;
+  followAuthorityMetadataValuesLimit: number;
   metricVisualizationConfig: MetricVisualizationConfig[];
   attachmentRendering: AttachmentRenderingConfig;
   advancedAttachmentRendering: AdvancedAttachmentRenderingConfig;
@@ -80,6 +87,9 @@ interface AppConfig extends Config {
   metadataLinkViewPopoverData: MetadataLinkViewPopoverDataConfig;
   identifierSubtypes: IdentifierSubtypesConfig[];
   datadogRum?: DatadogRumConfig;
+  permanentRedirectPaths?: string[];
+  luckySearchRedirects?: LuckySearchRedirectConfig;
+
 }
 
 /**

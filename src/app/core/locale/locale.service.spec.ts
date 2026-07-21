@@ -11,6 +11,7 @@ import { NativeWindowRef } from '../services/window.service';
 import { RouteService } from '../services/route.service';
 import { routeServiceStub } from '../../shared/testing/route-service.stub';
 import { of as observableOf } from 'rxjs';
+import { PLATFORM_ID } from '@angular/core';
 
 describe('LocaleService test suite', () => {
   let service: LocaleService;
@@ -24,6 +25,7 @@ describe('LocaleService test suite', () => {
   let routeService;
   let document;
   let spyOnGetLanguage;
+  const platformId = 'browser';
 
 
   const translateServiceStub: any = {
@@ -62,6 +64,7 @@ describe('LocaleService test suite', () => {
           { provide: RouteService, useValue: routeServiceStub },
           { provide: TranslateService, useValue: translateServiceStub },
           { provide: Document, useValue: document },
+          { provide: PLATFORM_ID, useValue: platformId },
         ]
       });
     }));
@@ -72,7 +75,7 @@ describe('LocaleService test suite', () => {
       routeService = TestBed.inject(RouteService);
       window = new NativeWindowRef();
       document = { documentElement: { lang: 'en' } };
-      service = new LocaleService(window, cookieService, translateService, authService, routeService, document);
+      service = new LocaleService(window, cookieService, translateService, authService, routeService, document, platformId);
       serviceAsAny = service;
       spyOnGet = spyOn(cookieService, 'get');
       spyOnSet = spyOn(cookieService, 'set');

@@ -31,6 +31,7 @@ import {
   RefreshTokenAction,
   ResetAuthenticationMessagesAction, SetAuthCookieStatus,
   SetRedirectUrlAction,
+  SetRedirectUrlAndNavigateAction,
   SetUserAsIdleAction,
   UnsetUserAsIdleAction
 } from './auth.actions';
@@ -518,15 +519,19 @@ export class AuthService {
   /**
    * Set redirect url
    */
-  setRedirectUrl(url: string) {
+   setRedirectUrl(redirectUrl: string, navigateUrl?: string) {
     // Add 1 hour to the current date
     const expireDate = Date.now() + (1000 * 60 * 60);
 
     // Set the cookie expire date
     const expires = new Date(expireDate);
-    const options: CookieAttributes = {expires: expires};
-    this.storage.set(REDIRECT_COOKIE, url, options);
-    this.store.dispatch(new SetRedirectUrlAction(isNotUndefined(url) ? url : ''));
+    const options: Cookies.CookieAttributes = { expires: expires };
+    this.storage.set(REDIRECT_COOKIE, redirectUrl, options);
+    if (hasValue(navigateUrl)) {
+      this.store.dispatch(new SetRedirectUrlAndNavigateAction(isNotUndefined(redirectUrl) ? redirectUrl : '', navigateUrl));
+    } else {
+      this.store.dispatch(new SetRedirectUrlAction(isNotUndefined(redirectUrl) ? redirectUrl : ''));
+    }
   }
 
   /**
