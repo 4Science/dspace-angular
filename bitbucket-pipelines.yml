@@ -3,8 +3,8 @@ options:
 
 definitions:
   caches:
-    cypress-2024-02-x: ~/.cache/Cypress
-    node-2024-02-x: ./node_modules
+    cypress-dsc-2024-02-x: ~/.cache/Cypress
+    node-dsc-2024-02-x: ./node_modules
 
   steps:
     - step: &preliminary-operation
@@ -66,7 +66,7 @@ definitions:
           run-as-user: 1000
         size: 4x
         caches:
-          - node-2024-02-x
+          - node-dsc-2024-02-x
         script:
           - yarn install --frozen-lockfile
           - yarn run build:prod:ci
@@ -82,7 +82,7 @@ definitions:
           run-as-user: 1000
         size: 4x
         caches:
-          - node-2024-02-x
+          - node-dsc-2024-02-x
         script:
           - yarn build:lint
           - npm run ng-high-memory -- lint --quiet
@@ -102,8 +102,8 @@ definitions:
         services:
           - docker
         caches:
-          - node-2024-02-x
-          - cypress-2024-02-x
+          - node-dsc-2024-02-x
+          - cypress-dsc-2024-02-x
         script:
           - wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | tee /etc/apt/trusted.gpg.d/google.asc >/dev/null
           - apt-get update && apt-get install -y curl
