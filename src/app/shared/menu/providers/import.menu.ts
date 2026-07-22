@@ -16,7 +16,6 @@ import {
 
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
-import { ScriptDataService } from '../../../core/data/processes/script-data.service';
 import { MenuItemType } from '../menu-item-type.model';
 import { PartialMenuSection } from '../menu-provider.model';
 import { AbstractExpandableMenuProvider } from './helper-providers/expandable-menu-provider';
@@ -28,7 +27,6 @@ import { AbstractExpandableMenuProvider } from './helper-providers/expandable-me
 export class ImportMenuProvider extends AbstractExpandableMenuProvider {
   constructor(
     protected authorizationService: AuthorizationDataService,
-    protected scriptDataService: ScriptDataService,
     protected modalService: NgbModal,
   ) {
     super();

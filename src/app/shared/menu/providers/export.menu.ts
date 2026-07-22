@@ -16,7 +16,6 @@ import {
 
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
-import { ScriptDataService } from '../../../core/data/processes/script-data.service';
 import { ExportBatchSelectorComponent } from '../../dso-selector/modal-wrappers/export-batch-selector/export-batch-selector.component';
 import { ExportMetadataCsvSelectorComponent } from '../../dso-selector/modal-wrappers/export-metadata-csv-selector/export-metadata-csv-selector.component';
 import { ExportMetadataXlsSelectorComponent } from '../../dso-selector/modal-wrappers/export-metadata-xls-selector/export-metadata-xls-selector.component';
@@ -31,7 +30,6 @@ import { AbstractExpandableMenuProvider } from './helper-providers/expandable-me
 export class ExportMenuProvider extends AbstractExpandableMenuProvider {
   constructor(
     protected authorizationService: AuthorizationDataService,
-    protected scriptDataService: ScriptDataService,
     protected modalService: NgbModal,
   ) {
     super();
