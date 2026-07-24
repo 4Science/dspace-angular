@@ -47,6 +47,13 @@ export abstract class GoogleRecaptchaBaseComponent {
    */
   disableUntilChecked = true;
 
+  /**
+   * The captcha cookie name to check for consent in the klaro-anonymous cookie.
+   * Subclasses can override this to use a different consent key
+   * (e.g. CAPTCHA_REGISTRATION_NAME for the registration form).
+   */
+  protected captchaCookieName: string = CAPTCHA_FEEDBACK_NAME;
+
   captchaVersion(): Observable<string> {
     return this.googleRecaptchaService.captchaVersion();
   }
@@ -74,13 +81,6 @@ export abstract class GoogleRecaptchaBaseComponent {
       startWith(true),
     );
   }
-
-  /**
-   * The captcha cookie name to check for consent in the klaro-anonymous cookie.
-   * Subclasses can override this to use a different consent key
-   * (e.g. CAPTCHA_REGISTRATION_NAME for the registration form).
-   */
-  protected captchaCookieName: string = CAPTCHA_FEEDBACK_NAME;
 
   /**
    * Return true if the user has accepted the required cookies for reCaptcha
