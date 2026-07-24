@@ -1,4 +1,7 @@
-import { AsyncPipe } from '@angular/common';
+import {
+  AsyncPipe,
+  NgIf,
+} from '@angular/common';
 import {
   Component,
   Inject,
@@ -31,6 +34,7 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   standalone: true,
   imports: [
     AsyncPipe,
+    NgIf,
     OrcidBadgeAndTooltipComponent,
     TranslateModule,
   ],

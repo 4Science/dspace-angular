@@ -5,7 +5,7 @@
    class="orcid-link">
   <img placement="top"
        [ngbTooltip]="orcidTooltipTemplate"
-       class="orcid-icon"
+       class="orcid-icon" [ngClass]="{'not-authenticated': !authenticatedTimestamp}"
        alt="ORCID {{ orcidTooltip }}"
        [src]="authenticatedTimestamp ? 'assets/images/orcid.logo.icon.svg': 'assets/images/orcid.logo.unauth.icon.svg'"
        data-test="orcidIcon"/>
