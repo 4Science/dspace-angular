@@ -120,7 +120,7 @@ describe('OrcidComponent', () => {
         expect(spanValueFound[0].nativeElement.textContent).toContain('0000-0001-8918-3592');
 
         const orcidLinkFound = fixture.debugElement.queryAll(By.css('a'));
-        expect(orcidLinkFound.length).toBe(1);
+        expect(orcidLinkFound.length).toBe(2);
         expect(orcidLinkFound[0].nativeElement.href).toBe('https://sandbox.orcid.org/0000-0001-8918-3592');
 
         const orcidIconFound = fixture.debugElement.queryAll(By.css('.orcid-icon'));
