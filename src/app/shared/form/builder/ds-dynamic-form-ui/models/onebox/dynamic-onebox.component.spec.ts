@@ -274,6 +274,19 @@ describe('DsDynamicOneboxComponent test suite', () => {
 
       });
 
+      it('should clear inputValue when input is emptied after a value was set', () => {
+        const inputDe = oneboxCompFixture.debugElement.query(By.css('input.form-control'));
+        const inputElement = inputDe.nativeElement;
+
+        inputElement.value = 'test value';
+        inputElement.dispatchEvent(new Event('input'));
+        expect(oneboxComponent.inputValue).toEqual(new FormFieldMetadataValueObject('test value'));
+
+        inputElement.value = '';
+        inputElement.dispatchEvent(new Event('input'));
+        expect(oneboxComponent.inputValue).toBeNull();
+      });
+
       it('should emit blur Event onBlur when popup is closed', () => {
         spyOn(oneboxComponent.blur, 'emit');
         spyOn(oneboxComponent.instance, 'isPopupOpen').and.returnValue(false);
