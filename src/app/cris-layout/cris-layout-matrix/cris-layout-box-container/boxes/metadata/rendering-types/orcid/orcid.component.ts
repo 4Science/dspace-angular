@@ -7,7 +7,6 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   TranslateModule,
   TranslateService,
@@ -21,6 +20,7 @@ import { ConfigurationProperty } from '../../../../../../../core/shared/configur
 import { Item } from '../../../../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
 import { getFirstSucceededRemoteDataPayload } from '../../../../../../../core/shared/operators';
+import { OrcidBadgeAndTooltipComponent } from '../../../../../../../shared/orcid-badge-and-tooltip/orcid-badge-and-tooltip.component';
 import { RenderingTypeValueModelComponent } from '../rendering-type-value.model';
 
 /**
@@ -33,9 +33,9 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
   styleUrls: ['./orcid.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
-    NgbTooltipModule,
     AsyncPipe,
+    NgIf,
+    OrcidBadgeAndTooltipComponent,
     TranslateModule,
   ],
 })
@@ -68,6 +68,13 @@ export class OrcidComponent extends RenderingTypeValueModelComponent implements 
 
   public hasOrcidBadge(): boolean {
     return this.item.hasMetadata('dspace.orcid.authenticated');
+  }
+
+  /**
+   * The metadata value holding the timestamp of when the ORCID was authenticated, if any.
+   */
+  public get orcidAuthenticatedTimestamp(): MetadataValue {
+    return this.item.firstMetadata('dspace.orcid.authenticated');
   }
 
 }
