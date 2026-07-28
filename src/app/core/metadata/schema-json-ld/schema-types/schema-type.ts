@@ -63,7 +63,6 @@ export abstract class SchemaType {
 
 
   getSchema(item: Item): Record<string, any> {
-    return SchemaType.removeEmpty(this.createSchema(item));
     const sanitizedRaw = this.sanitizeSchema(this.createSchema(item));
     return SchemaType.removeEmpty(sanitizedRaw);
   }
