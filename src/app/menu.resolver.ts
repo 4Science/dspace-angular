@@ -40,11 +40,8 @@ import {
 } from './shared/dso-selector/modal-wrappers/export-metadata-xls-selector/export-metadata-xls-selector.component';
 import { AuthorizationDataService } from './core/data/feature-authorization/authorization-data.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {
-  METADATA_EXPORT_SCRIPT_NAME,
-  METADATA_IMPORT_SCRIPT_NAME,
-  ScriptDataService
-} from './core/data/processes/script-data.service';
+
+
 import {
   ExportBatchSelectorComponent
 } from './shared/dso-selector/modal-wrappers/export-batch-selector/export-batch-selector.component';
@@ -73,7 +70,6 @@ export class MenuResolver implements Resolve<boolean> {
     protected menuService: MenuService,
     protected authorizationService: AuthorizationDataService,
     protected modalService: NgbModal,
-    protected scriptDataService: ScriptDataService,
     protected authService: AuthService,
     protected sectionDataService: SectionDataService,
     protected configService: ConfigurationDataService,
@@ -561,18 +557,9 @@ export class MenuResolver implements Resolve<boolean> {
     ];
     menuList.forEach((menuSection) => this.menuService.addSection(MenuID.ADMIN, menuSection));
 
-    observableCombineLatest([
-      this.authorizationService.isAuthorized(FeatureID.AdministratorOf),
-      this.authorizationService.isAuthorized(FeatureID.IsCommunityAdmin),
-      this.authorizationService.isAuthorized(FeatureID.IsCollectionAdmin),
-    ]).pipe(
-      filter(([isAdmin, isCommunityAdmin, isCollectionAdmin]) =>
-        isAdmin || isCollectionAdmin || isCommunityAdmin
-      ),
+    this.authorizationService.isAuthorized(FeatureID.CanExportMetadata).pipe(
+      filter((canExport) => canExport),
       take(1),
-      switchMap(() => this.scriptDataService.scriptWithNameExistsAndCanExecute(METADATA_EXPORT_SCRIPT_NAME)),
-      filter((metadataExportScriptExists: boolean) => metadataExportScriptExists),
-      take(1)
     ).subscribe(() => {
       // Hides the export menu for unauthorised people
       // If in the future more sub-menus are added,
@@ -694,18 +681,9 @@ export class MenuResolver implements Resolve<boolean> {
     const menuList = [];
     menuList.forEach((menuSection) => this.menuService.addSection(MenuID.ADMIN, menuSection));
 
-    observableCombineLatest([
-      this.authorizationService.isAuthorized(FeatureID.AdministratorOf),
-      this.authorizationService.isAuthorized(FeatureID.IsCommunityAdmin),
-      this.authorizationService.isAuthorized(FeatureID.IsCollectionAdmin),
-    ]).pipe(
-      filter(([isAdmin, isCommunityAdmin, isCollectionAdmin]) =>
-        isAdmin || isCollectionAdmin || isCommunityAdmin
-      ),
+    this.authorizationService.isAuthorized(FeatureID.CanImportMetadata).pipe(
+      filter((canImport) => canImport),
       take(1),
-      switchMap(() => this.scriptDataService.scriptWithNameExistsAndCanExecute(METADATA_IMPORT_SCRIPT_NAME)),
-      filter((metadataImportScriptExists: boolean) => metadataImportScriptExists),
-      take(1)
     ).subscribe(() => {
       // Hides the import menu for unauthorised people
       // If in the future more sub-menus are added,
