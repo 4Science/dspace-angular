@@ -17,7 +17,6 @@ import { AdminSidebarComponent } from './admin/admin-sidebar/admin-sidebar.compo
 import { ConfigurationDataService } from './core/data/configuration-data.service';
 import { AuthorizationDataService } from './core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from './core/data/feature-authorization/feature-id';
-import { ScriptDataService } from './core/data/processes/script-data.service';
 import { SectionDataService } from './core/layout/section-data.service';
 import { MenuService } from './shared/menu/menu.service';
 import { MenuID } from './shared/menu/menu-id.model';
@@ -76,7 +75,6 @@ describe('menuResolver', () => {
   let menuService;
   let sectionsService;
   let authorizationService;
-  let scriptService;
   let mockNgbModal;
   let configurationDataService;
 
@@ -91,9 +89,7 @@ describe('menuResolver', () => {
     authorizationService = jasmine.createSpyObj('authorizationService', {
       isAuthorized: observableOf(true),
     });
-    scriptService = jasmine.createSpyObj('scriptService', {
-      scriptWithNameExistsAndCanExecute: observableOf(true),
-    });
+
     mockNgbModal = {
       open: jasmine.createSpy('open').and.returnValue(
         { componentInstance: {}, closed: observableOf({}) } as NgbModalRef,
@@ -109,7 +105,6 @@ describe('menuResolver', () => {
         { provide: MenuService, useValue: menuService },
         { provide: SectionDataService, useValue: sectionsService },
         { provide: AuthorizationDataService, useValue: authorizationService },
-        { provide: ScriptDataService, useValue: scriptService },
         { provide: ConfigurationDataService, useValue: configurationDataService },
         { provide: NgbModal, useValue: mockNgbModal },
         { provide: AuthService, useValue: AuthServiceStub },
@@ -419,7 +414,7 @@ describe('menuResolver', () => {
     describe('for site admin', () => {
       beforeEach(() => {
         authorizationService.isAuthorized = createSpy('isAuthorized').and.callFake((featureID: FeatureID) => {
-          return observableOf(featureID === FeatureID.AdministratorOf);
+          return observableOf(featureID === FeatureID.AdministratorOf || featureID === FeatureID.CanExportMetadata || featureID === FeatureID.CanImportMetadata);
         });
       });
 
