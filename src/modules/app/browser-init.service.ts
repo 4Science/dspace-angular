@@ -138,10 +138,10 @@ export class BrowserInitService extends InitService {
       this.trackAuthTokenExpiration();
 
       this.initOrejime();
-      this.authorizationService.initStateForSite(this.appConfig.siteAuthorizationFeaturesConfig);
-
 
       await lastValueFrom(this.authenticationReady$());
+
+      this.authorizationService.initStateForSite(this.appConfig.siteAuthorizationFeaturesConfig);
       this.menuProviderService.initPersistentMenus(false);
 
       return true;
