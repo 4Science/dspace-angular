@@ -162,13 +162,25 @@ describe('AuthEffects', () => {
       });
     });
 
-    describe('when token is not valid', () => {
-      it('should return a AUTHENTICATED_ERROR action in response to a AUTHENTICATED action', (done) => {
+    describe('when token is expired', () => {
+      it('should return a AUTHENTICATED_ERROR action in response to a AUTHENTICATED action', () => {
         spyOn((authEffects as any).authService, 'authenticatedUser').and.returnValue(observableThrow(new Error('Message Error test')));
 
         actions = hot('--a-', { a: { type: AuthActionTypes.AUTHENTICATED, payload: token } });
 
         const expected = cold('--b-', { b: new AuthenticatedErrorAction(new Error('Message Error test')) });
+
+        expect(authEffects.authenticated$).toBeObservable(expected);
+      });
+    });
+
+    describe('when token is not valid but also not expired (~ cookie)', () => {
+      it('should return a AUTHENTICATED_ERROR action in response to a AUTHENTICATED action', (done) => {
+        spyOn((authEffects as any).authService, 'authenticatedUser').and.returnValue(observableThrow(new Error('Message Error test')));
+
+        actions = hot('--a-', { a: { type: AuthActionTypes.AUTHENTICATED, payload: token } });
+
+        const expected = cold('--b-', { b: new CheckAuthenticationTokenCookieAction() });
 
         expect(authEffects.authenticated$).toBeObservable(expected);
         done();
@@ -209,7 +221,7 @@ describe('AuthEffects', () => {
 
         actions = hot('--a-', { a: { type: AuthActionTypes.CHECK_AUTHENTICATION_TOKEN } });
 
-        const expected = cold('--b-', { b: new AuthenticatedAction(token) });
+        const expected = cold('--b-', { b: new AuthenticatedAction(token, true) });
 
         expect(authEffects.checkToken$).toBeObservable(expected);
         done();

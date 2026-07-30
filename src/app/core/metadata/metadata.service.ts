@@ -1,4 +1,4 @@
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
@@ -184,6 +184,8 @@ export class MetadataService {
     this.setTitleTags();
     this.setDescriptionTags();
 
+    this.setNoIndexTag();
+
     this.setOpenGraphImageTag();
     this.setOpenGraphUrlTag();
 
@@ -207,6 +209,7 @@ export class MetadataService {
     this.setCitationKeywordsTag();
 
     this.setCitationAbstractUrlTag();
+    this.setCitationDoiTag();
     this.setCitationPdfUrlTag();
     this.setCitationPublisherTag();
 
@@ -226,6 +229,15 @@ export class MetadataService {
 
     if (this.isTechReport()) {
       this.setCitationTechnicalReportNumberTag();
+    }
+  }
+
+  /**
+   * Add <meta name="robots" content="noindex">  to the <head> if non-discoverable item
+   */
+  protected setNoIndexTag(): void {
+    if (this.currentObject.value instanceof Item && this.currentObject.value.isDiscoverable === false) {
+      this.addMetaTag('robots', 'noindex');
     }
   }
 
@@ -422,9 +434,21 @@ export class MetadataService {
     if (this.currentObject.value instanceof Item) {
       let url = this.getMetaTagValue('dc.identifier.uri');
       if (hasNoValue(url)) {
-        url = new URLCombiner(this.hardRedirectService.getCurrentOrigin(), this.router.url).toString();
+        url = new URLCombiner(this.hardRedirectService.getBaseUrl(), this.router.url).toString();
       }
       this.addMetaTag('citation_abstract_html_url', url);
+    }
+  }
+
+  /**
+   * Add <meta name="citation_doi" ... >  to the <head>
+   */
+  private setCitationDoiTag(): void {
+    if (this.currentObject.value instanceof Item) {
+      let doi = this.getMetaTagValue('dc.identifier.doi');
+      if (hasValue(doi)) {
+        this.addMetaTag('citation_doi', doi);
+      }
     }
   }
 
@@ -554,7 +578,7 @@ export class MetadataService {
         // Use the found link to set the <meta> tag
         this.addMetaTag(
           tag,
-          new URLCombiner(this.hardRedirectService.getCurrentOrigin(), link).toString(),
+          new URLCombiner(this.hardRedirectService.getBaseUrl(), link).toString(),
           true,
         );
       });
@@ -796,7 +820,7 @@ export class MetadataService {
 
   private setGenericPageMetaTags() {
     const pageDocumentTitle = this._document.getElementsByTagName('title')[0].innerText;
-    const pageUrl = new URLCombiner(this.hardRedirectService.getCurrentOrigin(), this.router.url).toString();
+    const pageUrl = new URLCombiner(this.hardRedirectService.getBaseUrl(), this.router.url).toString();
     const genericPageOpenGraphType = 'website';
 
     this.setTitleTags(pageDocumentTitle);
@@ -812,6 +836,6 @@ export class MetadataService {
   }
 
   private getUrlOrigin(): string {
-    return isPlatformBrowser(this.platformId) ? this.hardRedirectService.getCurrentOrigin() : this.origin;
+    return isPlatformBrowser(this.platformId) ? this.hardRedirectService.getBaseUrl() : this.origin;
   }
 }

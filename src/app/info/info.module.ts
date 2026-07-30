@@ -14,6 +14,7 @@ import { ThemedFeedbackFormComponent } from './feedback/feedback-form/themed-fee
 import { ThemedFeedbackComponent } from './feedback/themed-feedback.component';
 import { FeedbackGuard } from '../core/feedback/feedback.guard';
 import { MarkdownViewerModule } from '../shared/markdown-viewer/markdown-viewer.module';
+import { AccessibilitySettingsComponent } from './accessibility-settings/accessibility-settings.component';
 
 
 const DECLARATIONS = [
@@ -26,7 +27,8 @@ const DECLARATIONS = [
   FeedbackComponent,
   FeedbackFormComponent,
   ThemedFeedbackFormComponent,
-  ThemedFeedbackComponent
+  ThemedFeedbackComponent,
+  AccessibilitySettingsComponent,
 ];
 
 @NgModule({

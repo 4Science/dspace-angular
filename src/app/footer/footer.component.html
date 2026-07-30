@@ -12,15 +12,15 @@
 
           <ul class="list-unstyled mb-0">
             <li>
-              <a href="https://github.com/4Science/DSpace/tree/dspace-cris-7">
+              <a role="link" tabindex="0" href="https://github.com/4Science/DSpace/tree/dspace-cris-7">
                 <i class="fab fa-github" aria-hidden="true"></i> Source Code</a>
             </li>
             <li>
-              <a href="https://wiki.lyrasis.org/display/DSPACECRIS/">
+              <a role="link" tabindex="0" href="https://wiki.lyrasis.org/display/DSPACECRIS/">
                 <i class="fa fa-book" aria-hidden="true"></i> Documentation</a>
             </li>
             <li>
-              <a href="https://dspace-org.slack.com/messages/dspace-cris/">
+              <a role="link" tabindex="0" href="https://dspace-org.slack.com/messages/dspace-cris/">
                 <i class="fab fa-slack" aria-hidden="true"></i> Slack Channel</a>
             </li>
           </ul>
@@ -41,8 +41,8 @@
         <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
           <h5 class="text-uppercase">Need professional help?</h5>
           <p>The original creators of DSpace-CRIS at
-            <a href="https://www.4science.it/en/">4Science</a> can take your project to the next level,
-            <a href="https://www.4science.it/en/contact-us/">get in touch!</a>
+            <a role="link" tabindex="0" href="https://www.4science.it/en/">4Science</a> can take your project to the next level,
+            <a role="link" tabindex="0" href="https://www.4science.it/en/contact-us/">get in touch!</a>
           </p>
         </div>
         <!--Grid column-->
@@ -57,28 +57,28 @@
     <div class="content-container">
       <p class="m-0">
         {{ 'footer.built-with' | translate }}
-        <a class="text-white" href="https://wiki.lyrasis.org/display/DSPACECRIS/">{{ 'footer.link.dspace-cris' | translate}}</a>
+        <a role="link" tabindex="0" class="text-white" href="https://wiki.lyrasis.org/display/DSPACECRIS/">{{ 'footer.link.dspace-cris' | translate}}</a>
         {{ 'footer.extension-by' | translate }}
-        <a class="text-white" href="https://www.4science.it/en/">
+        <a role="link" tabindex="0" class="text-white" href="https://www.4science.it/en/">
           <img src="assets/images/logo-4science-small.png" alt="{{ 'footer.link.4science' | translate}}" />
         </a>
       </p>
       <ul class="footer-info list-unstyled d-flex justify-content-center mb-0">
-        <li>
-          <button class="btn btn-link text-white" type="button" (click)="showCookieSettings()">
+        <li *ngIf="showCookieSettings">
+          <button class="btn btn-link text-white" type="button" (click)="openCookieSettings()">
             {{ 'footer.link.cookies' | translate}}
           </button>
         </li>
         <li *ngIf="showPrivacyPolicy">
-          <a class="btn text-white"
+          <a class="btn text-white" role="link" tabindex="0"
              routerLink="info/privacy">{{ 'footer.link.privacy-policy' | translate}}</a>
         </li>
         <li *ngIf="showEndUserAgreement">
-          <a class="btn text-white"
+          <a class="btn text-white" role="link" tabindex="0"
              routerLink="info/end-user-agreement">{{ 'footer.link.end-user-agreement' | translate}}</a>
         </li>
         <li *ngIf="showSendFeedback$ | async">
-          <a class="btn text-white"
+          <a class="btn text-white" role="link" tabindex="0"
              routerLink="info/feedback">{{ 'footer.link.feedback' | translate}}</a>
         </li>
       </ul>

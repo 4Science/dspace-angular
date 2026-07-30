@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional } from '@angular/core';
+import { Component, Optional, Inject, OnInit } from '@angular/core';
 import { hasValue, isEmpty } from '../shared/empty.util';
 import { KlaroService } from '../shared/cookies/klaro.service';
 import { environment } from '../../environments/environment';
@@ -10,6 +10,7 @@ import { Site } from '../core/shared/site.model';
 import { SiteDataService } from '../core/data/site-data.service';
 import { TextRowSection } from '../core/layout/models/section.model';
 import { LocaleService } from '../core/locale/locale.service';
+import { AppConfig, APP_CONFIG } from '../../config/app-config.interface';
 
 @Component({
   selector: 'ds-footer',
@@ -37,6 +38,7 @@ export class FooterComponent implements OnInit {
 
   showPrivacyPolicy = environment.info.enablePrivacyStatement;
   showEndUserAgreement = environment.info.enableEndUserAgreement;
+  showCookieSettings = environment.info.enableCookieConsentPopup;
   showSendFeedback$: Observable<boolean>;
 
   constructor(
@@ -64,7 +66,7 @@ export class FooterComponent implements OnInit {
     );
   }
 
-  showCookieSettings() {
+  openCookieSettings() {
     if (hasValue(this.cookies)) {
       this.cookies.showSettings();
     }

@@ -40,6 +40,7 @@ import { MetadataLinkViewPopoverDataConfig } from './metadata-link-view-popoverd
 import { IdentifierSubtypesConfig } from './identifier-subtypes-config.interface';
 import { DatadogRumConfig } from './datadog-rum-config.interfaces';
 import {LuckySearchRedirectConfig} from './lucky-search-redirect-config';
+import { AccessibilitySettingsConfig } from '../app/accessibility/accessibility-settings.config';
 
 interface AppConfig extends Config {
   ui: UIServerConfig;
@@ -68,6 +69,7 @@ interface AppConfig extends Config {
   comcolSelectionSort: DiscoverySortConfig;
   liveRegion: LiveRegionConfig;
   search: SearchConfig
+  accessibility: AccessibilitySettingsConfig;
   crisLayout: CrisLayoutConfig;
   layout: LayoutConfig;
   security: MetadataSecurityConfig;

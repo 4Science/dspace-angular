@@ -51,6 +51,9 @@ import {
 } from './core/data/feature-authorization/feature-authorization-guard/generic-administrator-guard';
 
 
+import { HomePageResolver } from './home-page/home-page.resolver';
+import { ViewTrackerResolverService } from './statistics/angulartics/dspace/view-tracker-resolver.service';
+import { notAuthenticatedGuard } from './core/auth/not-authenticated.guard';
 
 @NgModule({
   imports: [
@@ -77,7 +80,15 @@ import {
             path: 'home',
             loadChildren: () => import('./home-page/home-page.module')
               .then((m) => m.HomePageModule),
-            data: { showBreadcrumbs: false},
+            data: {
+              showBreadcrumbs: false,
+              dsoPath: 'site'
+            },
+            resolve: {
+              site: HomePageResolver,
+              tracking: ViewTrackerResolverService,
+            },
+
             canActivate: [EndUserAgreementCurrentUserGuard]
           },
           {
@@ -102,13 +113,14 @@ import {
             path: REGISTER_PATH,
             loadChildren: () => import('./register-page/register-page.module')
               .then((m) => m.RegisterPageModule),
-            canActivate: [SiteRegisterGuard]
+            canActivate: [notAuthenticatedGuard, SiteRegisterGuard]
           },
           {
             path: FORGOT_PASSWORD_PATH,
             loadChildren: () => import('./forgot-password/forgot-password.module')
               .then((m) => m.ForgotPasswordModule),
             canActivate: [
+              notAuthenticatedGuard,
               ForgotPasswordCheckGuard,
               EndUserAgreementCurrentUserGuard
             ]
@@ -188,7 +200,9 @@ import {
           },
           {
             path: 'login',
-            loadChildren: () => import('./login-page/login-page.module').then((m) => m.LoginPageModule),
+            loadChildren: () => import('./login-page/login-page.module')
+              .then((m) => m.LoginPageModule),
+            canActivate: [notAuthenticatedGuard],
             data: {
               isBackDoor: false,
             },
@@ -211,7 +225,8 @@ import {
           {
             path: 'logout',
             loadChildren: () => import('./logout-page/logout-page.module')
-              .then((m) => m.LogoutPageModule)
+              .then((m) => m.LogoutPageModule),
+            canActivate: [AuthenticatedGuard]
           },
           {
             path: 'submit',
@@ -338,6 +353,7 @@ import {
 })
   ],
   exports: [RouterModule],
+  providers: [HomePageResolver, ViewTrackerResolverService],
 })
 export class AppRoutingModule {
 

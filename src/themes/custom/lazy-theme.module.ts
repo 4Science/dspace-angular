@@ -173,6 +173,9 @@ import { RegisterEmailFormComponent } from './app/register-email-form/register-e
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { MarkdownViewerModule } from '../../app/shared/markdown-viewer/markdown-viewer.module';
 
+import { AdminSearchPageComponent } from './app/admin/admin-search-page/admin-search-page.component';
+import { AdminWorkflowPageComponent } from './app/admin/admin-workflow-page/admin-workflow-page.component';
+
 const DECLARATIONS = [
   FileSectionComponent,
   HomePageComponent,
@@ -259,6 +262,8 @@ const DECLARATIONS = [
   BrowseByComponent,
   RegisterEmailFormComponent,
   BrowseMostElementsComponent,
+  AdminSearchPageComponent,
+  AdminWorkflowPageComponent,
 ];
 
 @NgModule({
