@@ -118,12 +118,12 @@
 <div class="mb-3 d-flex gap-2" *ngIf="(showPreviousPage$ | async) || (showNextPage$ | async)">
   <button class="btn btn-outline-secondary"
           *ngIf="showPreviousPage$ | async"
-          (click)="loadPreviousPage(selectedItems)">
+          (click)="loadPreviousPage()">
     {{ 'browse.taxonomy.show_previous_results' | translate }}
   </button>
   <button class="btn btn-outline-secondary"
           *ngIf="showNextPage$ | async"
-          (click)="loadNextPage(selectedItems)">
+          (click)="loadNextPage()">
     {{ 'browse.taxonomy.show_next_results' | translate }}
   </button>
 </div>

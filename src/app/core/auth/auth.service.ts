@@ -235,7 +235,7 @@ export class AuthService {
     return this.store.pipe(
       select(getAuthenticatedUser),
       switchMap((user: EPerson) => {
-        if (hasValue(user.id)) {
+        if (hasValue(user?.id)) {
           return this.epersonService.findById(user.id).pipe(getFirstSucceededRemoteDataPayload());
         } else {
           return observableOf(null);

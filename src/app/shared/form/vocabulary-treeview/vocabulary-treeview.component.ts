@@ -329,10 +329,10 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges
    * Loads the next page of vocabulary search results.
    * Increments the current page in the service and re-triggers the query with the same search term and selection.
    */
-  loadNextPage(selectedItems: string[]) {
+  loadNextPage() {
     const svc = this.vocabularyTreeviewService;
     if (svc.currentPage < svc.totalPages) {
-      svc.searchByQueryAndPage(svc.queryInProgress, selectedItems, svc.currentPage + 1);
+      svc.searchByQueryAndPage(svc.queryInProgress, this.getSelectedEntryIds(), svc.currentPage + 1);
     }
   }
 
@@ -340,10 +340,10 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges
    * Loads the previous page of vocabulary search results.
    * Decrements the current page in the service and re-triggers the query with the same search term and selection.
    */
-  loadPreviousPage(selectedItems: string[]) {
+  loadPreviousPage() {
     const svc = this.vocabularyTreeviewService;
     if (svc.currentPage > 1) {
-      svc.searchByQueryAndPage(svc.queryInProgress, selectedItems, svc.currentPage - 1);
+      svc.searchByQueryAndPage(svc.queryInProgress, this.getSelectedEntryIds(), svc.currentPage - 1);
     }
   }
 

@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { hasValue, isEmpty } from 'src/app/shared/empty.util';
 import { AlertType } from '../../shared/alert/alert-type';
 import { KlaroService } from '../../shared/cookies/klaro.service';
+import { SwitchColor, SwitchOption } from '../../shared/switch/switch.component';
 
 /**
  * Component providing the form where users can update accessibility settings.
@@ -24,6 +25,11 @@ export class AccessibilitySettingsComponent implements OnInit, OnDestroy {
   protected readonly AlertType = AlertType;
 
   protected formValues: AccessibilitySettingsFormValues;
+
+  notificationTimeOutSwitchOptions: SwitchOption[] = [
+    { value: true, label: 'info.accessibility-settings.disableNotificationTimeOut.on', labelColor: SwitchColor.Success, backgroundColor: SwitchColor.Success },
+    { value: false, label: 'info.accessibility-settings.disableNotificationTimeOut.off' },
+  ];
 
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject(false);
   cookieIsAccepted: BehaviorSubject<boolean> = new BehaviorSubject(false);

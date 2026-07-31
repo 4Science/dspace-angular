@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="formValues">
   <h2>{{ 'info.accessibility-settings.title' | translate }}</h2>
 
   <form>
@@ -8,10 +8,11 @@
       </label>
 
       <div class="col-sm-4">
-        <ui-switch [id]="'disableNotificationTimeOutInput'"
-                   [(ngModel)]="formValues.notificationTimeOutEnabled"
-                   [ngModelOptions]="{ standalone: true }"
-        ></ui-switch>
+        <ds-switch [id]="'disableNotificationTimeOutInput'"
+                   [options]="notificationTimeOutSwitchOptions"
+                   [selectedValue]="formValues.notificationTimeOutEnabled"
+                   (selectedValueChange)="formValues.notificationTimeOutEnabled = $event">
+        </ds-switch>
       </div>
 
       <div *dsContextHelp="{
