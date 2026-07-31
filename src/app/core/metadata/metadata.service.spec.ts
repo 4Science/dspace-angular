@@ -155,7 +155,7 @@ describe('MetadataService', () => {
         },
       });
       tick();
-      expect(meta.addTag).toHaveBeenCalledWith({
+      expect(meta.updateTag).toHaveBeenCalledWith({
         name: 'robots',
         content: 'noindex',
       });
@@ -169,7 +169,7 @@ describe('MetadataService', () => {
         },
       });
       tick();
-      expect(meta.addTag).not.toHaveBeenCalledWith({
+      expect(meta.updateTag).not.toHaveBeenCalledWith({
         name: 'robots',
         content: 'noindex',
       });

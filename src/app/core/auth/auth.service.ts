@@ -233,10 +233,10 @@ export class AuthService {
    */
   public getAuthenticatedUserFromStoreIfAuthenticated(): Observable<EPerson> {
     return this.store.pipe(
-      select(getAuthenticatedUserId),
-      switchMap((id: string) => {
-        if (hasValue(id)) {
-          return this.epersonService.findById(id).pipe(getFirstSucceededRemoteDataPayload());
+      select(getAuthenticatedUser),
+      switchMap((user: EPerson) => {
+        if (hasValue(user.id)) {
+          return this.epersonService.findById(user.id).pipe(getFirstSucceededRemoteDataPayload());
         } else {
           return observableOf(null);
         }

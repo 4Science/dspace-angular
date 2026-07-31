@@ -175,10 +175,10 @@ describe('AuthEffects', () => {
     });
 
     describe('when token is not valid but also not expired (~ cookie)', () => {
-      it('should return a AUTHENTICATED_ERROR action in response to a AUTHENTICATED action', (done) => {
+      it('should return a CheckAuthenticationTokenCookieAction in response to a AUTHENTICATED action with checkAgain', (done) => {
         spyOn((authEffects as any).authService, 'authenticatedUser').and.returnValue(observableThrow(new Error('Message Error test')));
 
-        actions = hot('--a-', { a: { type: AuthActionTypes.AUTHENTICATED, payload: token } });
+        actions = hot('--a-', { a: { type: AuthActionTypes.AUTHENTICATED, payload: token, checkAgain: true } });
 
         const expected = cold('--b-', { b: new CheckAuthenticationTokenCookieAction() });
 

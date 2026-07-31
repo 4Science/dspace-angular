@@ -124,9 +124,9 @@ export class SubmissionRestService {
    * @return Observable<SubmitDataResponseDefinitionObject>
    *     server response
    */
-  public getDataById(linkName: string, id: string, useCachedVersionIfAvailable = false): Observable<SubmitDataResponseDefinitionObject> {
+  public getDataById(linkName: string, id: string, projections: string[] = [], useCachedVersionIfAvailable = false): Observable<SubmitDataResponseDefinitionObject> {
     return this.halService.getEndpoint(linkName).pipe(
-      map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, id)),
+      map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, id, null, projections)),
       filter((href: string) => isNotEmpty(href)),
       distinctUntilChanged(),
       mergeMap((endpointURL: string) => {

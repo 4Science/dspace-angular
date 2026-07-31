@@ -1,16 +1,15 @@
-import { Component, Optional, Inject, OnInit } from '@angular/core';
+import { Component, Optional, OnInit } from '@angular/core';
 import { hasValue, isEmpty } from '../shared/empty.util';
 import { KlaroService } from '../shared/cookies/klaro.service';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../core/data/feature-authorization/feature-id';
-import { take } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
 import { Site } from '../core/shared/site.model';
 import { SiteDataService } from '../core/data/site-data.service';
 import { TextRowSection } from '../core/layout/models/section.model';
 import { LocaleService } from '../core/locale/locale.service';
-import { AppConfig, APP_CONFIG } from '../../config/app-config.interface';
 
 @Component({
   selector: 'ds-footer',
@@ -58,12 +57,14 @@ export class FooterComponent implements OnInit {
       style: ''
     };
     this.site = this.siteService.find().pipe(take(1));
-    this.siteService.find().pipe(take(1)).subscribe(
-      (site: Site) => {
-        this.hasSiteFooterSections = !isEmpty(site?.firstMetadataValue('cris.cms.footer',
-          { language: this.locale.getCurrentLanguageCode() }));
-      }
-    );
+    this.locale.getCurrentLanguageCode().pipe(
+      switchMap(language => this.siteService.find().pipe(
+        take(1),
+      map((site: Site) => !isEmpty(site?.firstMetadataValue('cris.cms.footer', { language })))
+      ))
+    ).subscribe(hasMetadata => {
+      this.hasSiteFooterSections = hasMetadata;
+    });
   }
 
   openCookieSettings() {

@@ -3,8 +3,6 @@ import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, 
 
 import { Observable, Subscription, of } from 'rxjs';
 import { map, tap, switchMap } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
-import { TranslateService } from '@ngx-translate/core';
 
 import { VocabularyEntryDetail } from '../../../core/submission/vocabularies/models/vocabulary-entry-detail.model';
 import { hasValue, isEmpty, isNotEmpty } from '../../empty.util';
@@ -15,9 +13,8 @@ import { PageInfo } from '../../../core/shared/page-info.model';
 import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { VocabularyTreeFlattener } from './vocabulary-tree-flattener';
 import { VocabularyTreeFlatDataSource } from './vocabulary-tree-flat-data-source';
-import { CoreState } from '../../../core/core-state.model';
 import { VocabularyService } from '../../../core/submission/vocabularies/vocabulary.service';
-import { getFirstSucceededRemoteDataPayload, getFirstCompletedRemoteData } from '../../../core/shared/operators';
+import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { AlertType } from '../../alert/alert-type';
 import { FormFieldMetadataValueObject } from '../builder/models/form-field-metadata-value.model';
 import { Vocabulary } from '../../../core/submission/vocabularies/models/vocabulary.model';
@@ -250,7 +247,10 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges
           }
         }),
         tap(preloadLevel => this.preloadLevel = preloadLevel),
-        tap(() => this.vocabularyTreeviewService.initialize(this.vocabularyOptions, new PageInfo(), this.selectedItems, null)),
+        tap(() => {
+          const entryId: string = (this.selectedItems?.length > 0) ? this.getEntryId(this.selectedItems[0]) : null;
+          this.vocabularyTreeviewService.initialize(this.vocabularyOptions, new PageInfo(), this.getSelectedEntryIds(), entryId, this.loadAllNodes);
+        }),
         switchMap(() => this.vocabularyTreeviewService.getData()),
       ).subscribe((data) => {
         this.dataSource.data = data;

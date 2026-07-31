@@ -410,7 +410,6 @@ export const environment: BuildConfig = {
   accessibility: {
     cookieExpirationDuration: 7,
   },
-  },
 
   crisLayout: {
     urn: [

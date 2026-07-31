@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Injector, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import uniqueId from 'lodash/uniqueId';
 
 import { PaginatedList } from '../../core/data/paginated-list.model';
@@ -20,6 +20,7 @@ import { FindListOptions } from '../../core/data/find-list-options.model';
 import { getDataServiceFor } from '../../core/data/base/data-service.decorator';
 import { EPerson } from '../../core/eperson/models/eperson.model';
 import { Group } from '../../core/eperson/models/group.model';
+import { isNotEmpty } from '../empty.util';
 
 export interface SearchEvent {
   scope: string;
@@ -134,6 +135,18 @@ export class EpersonGroupListComponent implements OnInit, OnDestroy {
     this.entrySelectedId$.next(entry.id);
   }
 
+
+  /**
+   * Return a boolean representing if a table row is selected
+   *
+   * @return {boolean}
+   */
+  isSelected(entry: DSpaceObject): Observable<boolean> {
+    return this.entrySelectedId$.asObservable().pipe(
+      map((selectedId) => isNotEmpty(selectedId) && selectedId === entry.id)
+    );
+  }
+
   /**
    * Method called on search
    */
@@ -179,6 +192,6 @@ export class EpersonGroupListComponent implements OnInit, OnDestroy {
    */
   emitDeselect(entry: DSpaceObject) {
     this.deselect.emit(entry);
-    this.entrySelectedId.next(null);
+    this.entrySelectedId$.next(null);
   }
 }

@@ -13,7 +13,7 @@ import { VocabularyOptions } from '../../../core/submission/vocabularies/models/
 import { getFirstSucceededRemoteData, getFirstSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../../../core/shared/operators';
 import { PaginatedList } from '../../../core/data/paginated-list.model';
 import { VocabularyEntryDetail } from '../../../core/submission/vocabularies/models/vocabulary-entry-detail.model';
-import { RemoteData } from "src/app/core/data/remote-data";
+import { RemoteData } from 'src/app/core/data/remote-data';
 
 /**
  * A service that provides methods to deal with vocabulary tree

@@ -15,6 +15,7 @@ import { fakeAsync, flush } from '@angular/core/testing';
 import { createSuccessfulRemoteDataObject$, createFailedRemoteDataObject$ } from '../shared/remote-data.utils';
 import { KlaroServiceStub } from '../shared/cookies/klaro.service.stub';
 import { AppConfig } from '../../config/app-config.interface';
+import { KlaroService } from '../shared/cookies/klaro.service';
 
 
 describe('accessibilitySettingsService', () => {
@@ -45,7 +46,7 @@ describe('accessibilitySettingsService', () => {
       cookieService as unknown as CookieService,
       authService as unknown as AuthService,
       ePersonService,
-      klaroService,
+      klaroService as unknown as KlaroService,
       appConfig,
     );
   });

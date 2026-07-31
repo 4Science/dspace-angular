@@ -48,7 +48,7 @@ const testMethod = (fn, resultKind, mapOrMaps, keyOrKeys, hitHighlights, expecte
   const keys = keyOrKeys instanceof Array ? keyOrKeys : [keyOrKeys];
   describe('and key' + (keys.length === 1 ? (' ' + keys[0]) : ('s ' + JSON.stringify(keys)))
     + ' with ' + (isUndefined(filter) ? 'no filter' : 'filter ' + JSON.stringify(filter)), () => {
-    const result = fn(mapOrMaps, keys, hitHighlights, filter, limit);
+    const result = fn(mapOrMaps, keys, hitHighlights, filter, undefined, limit);
     let shouldReturn;
     if (resultKind === 'boolean') {
       shouldReturn = expected;
@@ -177,7 +177,7 @@ describe('Metadata', () => {
 
   describe('hasValue method', () => {
     const testHasValue = (value, expected) =>
-      testMethod(Metadata.hasValue, 'boolean', value, null, expected);
+      testMethod(Metadata.hasValue, 'boolean', value, null, null, expected);
 
     describe('with undefined value', () => {
       testHasValue(undefined, false);
@@ -299,8 +299,8 @@ describe('Metadata', () => {
   });
 
   describe('all method with limit', () => {
-    const testAllWithLimit = (mapOrMaps, keyOrKeys, expected, limit) =>
-      testMethod(Metadata.all, 'value', mapOrMaps, keyOrKeys, expected, undefined, undefined, limit);
+      const testAllWithLimit = (mapOrMaps, keyOrKeys, expected, limit) =>
+      testMethod(Metadata.all, 'value', mapOrMaps, keyOrKeys, undefined, expected, undefined, limit);
 
     describe('with multiMap and limit', () => {
       testAllWithLimit(multiMap, 'dc.title', [dcTitle1], 1);

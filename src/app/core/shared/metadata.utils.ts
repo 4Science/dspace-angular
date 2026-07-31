@@ -1,6 +1,6 @@
 import escape from 'lodash/escape';
 
-import { hasValue, isNotEmpty, isNotUndefined, isUndefined } from '../../shared/empty.util';
+import { hasValue, isEmpty, isNotEmpty, isNotUndefined, isUndefined } from '../../shared/empty.util';
 import {
   MetadataMapInterface,
   MetadataValue,

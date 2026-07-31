@@ -113,7 +113,7 @@ export class DSpaceObject extends ListableObject implements CacheableObject {
    * @returns {MetadataValue[]} the matching values or an empty array.
    */
   allMetadata(keyOrKeys: string | string[], valueFilter?: MetadataValueFilter, escapeHTML?: boolean): MetadataValue[] {
-    return Metadata.all(this.metadata, keyOrKeys, undefined, valueFilter, null, escapeHTML);
+    return Metadata.all(this.metadata, keyOrKeys, undefined, valueFilter, escapeHTML );
   }
 
   /**
@@ -125,7 +125,7 @@ export class DSpaceObject extends ListableObject implements CacheableObject {
    * @returns {MetadataValue[]} the matching values or an empty array.
    */
   limitedMetadata(keyOrKeys: string | string[], limit: number, valueFilter?: MetadataValueFilter, escapeHTML?: boolean): MetadataValue[] {
-    return Metadata.all(this.metadata, keyOrKeys, valueFilter, limit, escapeHTML);
+    return Metadata.all(this.metadata, keyOrKeys,undefined, valueFilter, escapeHTML, limit);
   }
 
   /**

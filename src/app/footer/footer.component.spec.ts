@@ -44,8 +44,8 @@ const siteService = jasmine.createSpyObj('siteService', {
   find: observableOf(site)
 });
 const localeServiceStub = {
-  getCurrentLanguageCode(): string {
-    return 'en';
+  getCurrentLanguageCode() {
+    return observableOf('en');
   }
 };
 describe('Footer component', () => {

@@ -120,7 +120,7 @@ import { ViewTrackerResolverService } from '../statistics/angulartics/dspace/vie
     CreateCollectionPageGuard,
     CollectionPageAdministratorGuard,
     CommunityBreadcrumbResolver,
-    EditCollectionResolver
+    EditCollectionResolver,
     ViewTrackerResolverService,
   ]
 })

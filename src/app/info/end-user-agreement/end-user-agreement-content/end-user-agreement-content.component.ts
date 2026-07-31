@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, Subscription } from 'rxjs';
 import { SiteDataService } from '../../../core/data/site-data.service';
 import { LocaleService } from '../../../core/locale/locale.service';
 import { MetadatumViewModel } from '../../../core/shared/metadata.models';
 import { isNotEmpty } from '../../../shared/empty.util';
 import { TranslateService } from '@ngx-translate/core';
+import { Site } from '../../../core/shared/site.model';
 
 @Component({
   selector: 'ds-end-user-agreement-content',
@@ -36,8 +37,10 @@ export class EndUserAgreementContentComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subs.push(
-      this.siteService.find().subscribe((site) => {
-        const langCode = this.localeService.getCurrentLanguageCode();
+      combineLatest([
+        this.localeService.getCurrentLanguageCode(),
+        this.siteService.find()
+      ]).subscribe(([langCode, site]: [string, Site]) => {
         const fallbackLangCode = 'en';
 
         const textArray = site?.metadataAsList.filter((metadata) =>

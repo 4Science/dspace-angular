@@ -50,7 +50,8 @@ export class DSONameService {
       }
     },
     OrgUnit: (dso: DSpaceObject, escapeHTML?: boolean): string => {
-      return dso.firstMetadataValue('organization.legalName', undefined, escapeHTML) || dso.firstMetadataValue('dc.title', undefined, escapeHTML) || this.translateService.instant('dso.name.untitled')    },
+      return dso.firstMetadataValue('organization.legalName', undefined, escapeHTML) || dso.firstMetadataValue('dc.title', undefined, escapeHTML) || this.translateService.instant('dso.name.untitled');
+},
     Default: (dso: DSpaceObject, escapeHTML?: boolean): string => {
       // If object doesn't have dc.title metadata use name property
       return dso.firstMetadataValue('dc.title', undefined, escapeHTML) || dso.name || this.translateService.instant('dso.name.untitled');

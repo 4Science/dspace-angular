@@ -23,24 +23,11 @@ describe('LocaleService test suite', () => {
   let window;
   let spyOnGet;
   let spyOnSet;
+  let spyOnGetLanguage;
   let authService;
   let routeService;
   let document;
-  let spyOnGetLanguage;
   const platformId = 'browser';
-
-
-  const translateServiceStub: any = {
-    getLangs: () => {
-      return langList;
-    },
-    getBrowserLang: () => {
-      return langList;
-    },
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    use: (param: string) => {
-    }
-  };
 
   authService = jasmine.createSpyObj('AuthService', {
     isAuthenticated: jasmine.createSpy('isAuthenticated'),
@@ -79,6 +66,7 @@ describe('LocaleService test suite', () => {
     serviceAsAny = service;
     spyOnGet = spyOn(cookieService, 'get');
     spyOnSet = spyOn(cookieService, 'set');
+    spyOnGetLanguage = spyOn(routeService, 'getQueryParameterValue').withArgs('lang');
   });
 
   describe('getCurrentLanguageCode', () => {
