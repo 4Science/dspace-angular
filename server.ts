@@ -760,16 +760,22 @@ function redirectManifest(req, res) {
   if (match) {
     handle = match[1];
     const baseUrl = `${environment.rest.baseUrl}/api/pid/find?id=${handle}`;
-    axios.get(baseUrl)
+    fetch(baseUrl)
       .then((response) => {
-        if (response.status === 200) {
-          const newUrl = `${environment.rest.baseUrl}/iiif/${response.data.id}/manifest`;
-          console.info('Manifest found, redirect to ', newUrl);
-          res.redirect(newUrl);
+        if (response.ok) {
+          return response.json().then((data) => {
+            const newUrl = `${environment.rest.baseUrl}/iiif/${data.id}/manifest`;
+            console.info('Manifest found, redirect to ', newUrl);
+            res.redirect(newUrl);
+          });
+        } else {
+          res.status(response.status).send({
+            error: `Request failed with status ${response.status}`
+          });
         }
       })
       .catch((error) => {
-        res.status(error.response.status).send({
+        res.status(error?.response?.status || 503).send({
           error: error.message
         });
       });
