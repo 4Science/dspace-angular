@@ -20,7 +20,7 @@ import { CrisItemPageTabResolver } from './cris-item-page-tab.resolver';
 import { OrcidPageComponent } from './orcid-page/orcid-page.component';
 import { OrcidPageGuard } from './orcid-page/orcid-page.guard';
 import { signpostingLinksResolver } from './simple/link-resolver/signposting-links.resolver';
-
+import { ViewTrackerResolverService } from '../statistics/angulartics/dspace/view-tracker-resolver.service';
 
 @NgModule({
   imports: [
@@ -51,12 +51,16 @@ import { signpostingLinksResolver } from './simple/link-resolver/signposting-lin
             component: ThemedItemPageComponent,
             pathMatch: 'full',
             resolve: {
-              tabs: CrisItemPageTabResolver
+              tabs: CrisItemPageTabResolver,
+              tracking: ViewTrackerResolverService,
             }
           },
           {
             path: 'full',
             component: ThemedFullItemPageComponent,
+            resolve: {
+              tracking: ViewTrackerResolverService,
+            },
           },
           {
             path: ITEM_EDIT_PATH,
@@ -115,7 +119,8 @@ import { signpostingLinksResolver } from './simple/link-resolver/signposting-lin
     ItemPageAdministratorGuard,
     VersionResolver,
     OrcidPageGuard,
-    CrisItemPageTabResolver
+    CrisItemPageTabResolver,
+    ViewTrackerResolverService,
   ]
 
 })

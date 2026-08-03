@@ -32,6 +32,8 @@ import { SubmissionVisibilityValue } from '../../core/config/models/config-submi
 import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
 import { MetadataSecurityConfigurationService } from '../../core/submission/metadatasecurityconfig-data.service';
 import { SubmissionScopeType } from '../../core/submission/submission-scope-type';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateLoaderMock } from '../../shared/mocks/translate-loader.mock';
 
 describe('SubmissionFormComponent Component', () => {
 
@@ -58,7 +60,14 @@ describe('SubmissionFormComponent Component', () => {
       findById: createSuccessfulRemoteDataObject$(submissionObject.metadataSecurityConfiguration),
     });
     TestBed.configureTestingModule({
-      imports: [],
+      imports: [
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock
+          }
+        }),
+      ],
       declarations: [
         SubmissionFormComponent,
         TestComponent
@@ -275,6 +284,7 @@ describe('SubmissionFormComponent Component', () => {
         spyOn(comp, 'isLoading').and.returnValue(observableOf(false));
 
         comp.uploadEnabled$ = observableOf(false);
+        comp.loading = observableOf(false);
       });
 
       it('should display submission legend when shouldShowLegend is true', () => {

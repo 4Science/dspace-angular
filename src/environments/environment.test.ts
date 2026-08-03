@@ -16,7 +16,25 @@ export const environment: BuildConfig = {
     inlineCriticalCss: false,
     transferState: true,
     replaceRestUrl: false,
-    paths: [ '/home', '/items/', '/entities/', '/collections/', '/communities/', '/bitstream/', '/bitstreams/', '/handle/', '/reload/', '/lucky-search' ],
+    excludePathPatterns: [
+      {
+        pattern: '^/communities/[a-f0-9-]{36}/browse(/.*)?$',
+        flag: 'i',
+      },
+      {
+        pattern: '^/collections/[a-f0-9-]{36}/browse(/.*)?$',
+        flag: 'i',
+      },
+      { pattern: '^/browse/' },
+      { pattern: '^/search' },
+      { pattern: '^/community-list$' },
+      { pattern: '^/statistics/?' },
+      { pattern: '^/admin/' },
+      { pattern: '^/processes/?' },
+      { pattern: '^/notifications/' },
+      { pattern: '^/access-control/' },
+      { pattern: '^/health$' },
+    ],
     enableSearchComponent: false,
     enableBrowseComponent: false,
   },
@@ -59,6 +77,10 @@ export const environment: BuildConfig = {
     },
     // msToLive: 1000, // 15 minutes
     control: 'max-age=60',
+    // These static files should not be cached (paths relative to dist/browser, including the leading slash)
+    noCacheFiles: [
+      '/index.html',  // see https://web.dev/articles/http-cache#unversioned-urls
+    ],
     autoSync: {
       defaultTime: 0,
       maxBufferSize: 100,
@@ -342,6 +364,7 @@ export const environment: BuildConfig = {
   info: {
     enableEndUserAgreement: true,
     enablePrivacyStatement: true,
+    enableCookieConsentPopup: true,
     //Configuration for third-party metrics in Klaro
     metricsConsents: [
       {
@@ -382,6 +405,10 @@ export const environment: BuildConfig = {
 
   search: {
     filterPlaceholdersCount: 5
+  },
+
+  accessibility: {
+    cookieExpirationDuration: 7,
   },
 
   crisLayout: {

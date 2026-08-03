@@ -366,6 +366,8 @@ import {StickyPopoverDirective} from './metadata-link-view/sticky-popover.direct
 import { SortPipe } from './utils/sort.pipe';
 import { BrowserOnlyDirective } from './utils/browser-only.directive';
 import {EscapeHtmlPipe} from './utils/escape-html.pipe';
+import { AuthorizedCommunitySelectorComponent } from './dso-selector/dso-selector/authorized-community-selector/authorized-community-selector.component';
+import { AuthorizedItemSelectorComponent } from './dso-selector/dso-selector/authorized-item-selector/authorized-item-selector.component';
 
 const MODULES = [
   CommonModule,
@@ -490,6 +492,8 @@ const COMPONENTS = [
   ExportBatchSelectorComponent,
   ConfirmationModalComponent,
   AuthorizedCollectionSelectorComponent,
+  AuthorizedCommunitySelectorComponent,
+  AuthorizedItemSelectorComponent,
   AdministeredCollectionSelectorComponent,
   SearchNavbarComponent,
   ItemPageTitleFieldComponent,

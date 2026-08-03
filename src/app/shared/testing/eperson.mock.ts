@@ -105,7 +105,7 @@ export const EPersonMockWithNoName: EPerson = Object.assign(new EPerson(), {
     self: {
       href: 'https://rest.api/dspace-spring-rest/api/eperson/epersons/testid',
     },
-    groups: { href: 'https://rest.api/dspace-spring-rest/api/eperson/epersons/testid/groups' }
+    groups: { href: 'https://rest.api/dspace-spring-rest/api/eperson/epersons/testid/groups' },
   },
   id: 'testid',
   uuid: 'testid',
@@ -114,20 +114,20 @@ export const EPersonMockWithNoName: EPerson = Object.assign(new EPerson(), {
     'dc.title': [
       {
         language: null,
-        value: 'User Test'
-      }
+        value: 'User Test',
+      },
     ],
     'eperson.lastname': [
       {
         language: null,
-        value: 'Test'
+        value: 'Test',
       },
     ],
     'eperson.language': [
       {
         language: null,
-        value: 'en'
+        value: 'en',
       },
-    ]
-  }
+    ],
+  },
 });

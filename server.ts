@@ -27,7 +27,6 @@ import * as compression from 'compression';
 import * as expressStaticGzip from 'express-static-gzip';
 import * as domino from 'domino';
 /* eslint-enable import/no-namespace */
-import axios from 'axios';
 import LRU from 'lru-cache';
 import { isbot } from 'isbot';
 import { createCertificate } from 'pem';
@@ -54,8 +53,10 @@ import { ServerAppModule } from './src/main.server';
 import { buildAppConfig } from './src/config/config.server';
 import { APP_CONFIG, AppConfig } from './src/config/app-config.interface';
 import { extendEnvironmentWithAppConfig } from './src/config/config.util';
+import { ServerHashedFileMapping } from './src/modules/dynamic-hash/hashed-file-mapping.server';
 import { logStartupMessage } from './startup-message';
 import { TOKENITEM } from './src/app/core/auth/models/auth-token-info.model';
+import { SsrExcludePatterns } from './src/config/universal-config.interface';
 
 
 /*
@@ -71,7 +72,11 @@ const indexHtml = join(DIST_FOLDER, 'index.html');
 
 const cookieParser = require('cookie-parser');
 
-const appConfig: AppConfig = buildAppConfig(join(DIST_FOLDER, 'assets/config.json'));
+const configJson = join(DIST_FOLDER, 'assets/config.json');
+const hashedFileMapping = new ServerHashedFileMapping(DIST_FOLDER, 'index.html');
+const appConfig: AppConfig = buildAppConfig(configJson, hashedFileMapping);
+appConfig.themes.forEach(themeConfig => hashedFileMapping.addThemeStyle(themeConfig.name, themeConfig.prefetch));
+hashedFileMapping.save();
 
 // cache of SSR pages for known bots, only enabled in production mode
 let botCache: LRU<string, any>;
@@ -180,7 +185,7 @@ export function app() {
   server.get('/robots.txt', (req, res) => {
     res.setHeader('content-type', 'text/plain');
     res.render('assets/robots.txt.ejs', {
-      'origin': req.protocol + '://' + req.headers.host
+      'origin': environment.ui.baseUrl,
     });
   });
 
@@ -294,7 +299,7 @@ export function app() {
  * The callback function to serve server side angular
  */
 function ngApp(req, res) {
-  if (environment.universal.preboot && req.method === 'GET' && (req.path === '/' || environment.universal.paths.some(pathPrefix => req.path.startsWith(pathPrefix)))) {
+  if (environment.universal.preboot && req.method === 'GET' && (req.path === '/' || !isExcludedFromSsr(req.path, environment.universal.excludePathPatterns))) {
     // Render the page to user via SSR (server side rendering)
     serverSideRender(req, res);
   } else {
@@ -360,13 +365,24 @@ function serverSideRender(req, res, sendToUser: boolean = true) {
   });
 }
 
-/**
- * Send back response to user to trigger direct client-side rendering (CSR)
- * @param req current request
- * @param res current response
- */
+// Read file once at startup
+const indexHtmlContent = readFileSync(indexHtml, 'utf8');
+
 function clientSideRender(req, res) {
-  res.sendFile(indexHtml);
+  const namespace = environment.ui.nameSpace || '/';
+  let html = indexHtmlContent;
+  // Replace base href dynamically
+  html = html.replace(
+    /<base href="[^"]*">/,
+    `<base href="${namespace.endsWith('/') ? namespace : namespace + '/'}">`
+  );
+
+  // Replace REST URL with UI URL
+  if (environment.universal.replaceRestUrl && REST_BASE_URL !== environment.rest.baseUrl) {
+    html = html.replace(new RegExp(REST_BASE_URL, 'g'), environment.rest.baseUrl);
+  }
+
+  res.set('Cache-Control', 'no-cache, no-store').send(html);
 }
 
 
@@ -377,7 +393,11 @@ function clientSideRender(req, res) {
  */
 function addCacheControl(req, res, next) {
   // instruct browser to revalidate
-  res.header('Cache-Control', environment.cache.control || 'max-age=604800');
+  if (environment.cache.noCacheFiles.includes(req.originalUrl)) {
+    res.header('Cache-Control', 'no-cache, no-store');
+  } else {
+    res.header('Cache-Control', environment.cache.control || 'max-age=604800');
+  }
   next();
 }
 
@@ -616,8 +636,8 @@ function createHttpsServer(keys) {
  * Create an HTTP server with the configured port and host.
  */
 function run() {
-  const port = environment.ui.port || 4000;
-  const host = environment.ui.host || '/';
+  const port = environment.ui.port;
+  const host = environment.ui.host;
 
   // Start up the Node server
   const server = app();
@@ -683,6 +703,21 @@ function start() {
   }
 }
 
+/**
+ * Check if SSR should be skipped for path
+ *
+ * @param path
+ * @param excludePathPattern
+ */
+function isExcludedFromSsr(path: string, excludePathPattern: SsrExcludePatterns[]): boolean {
+  const patterns = excludePathPattern.map(p =>
+    new RegExp(p.pattern, p.flag || '')
+  );
+  return patterns.some((regex) => {
+    return regex.test(path)
+  });
+}
+
 /*
  * The callback function to serve client health check requests
  */
@@ -698,13 +733,15 @@ function clientHealthCheck(req, res) {
  */
 function healthCheck(req, res) {
   const baseUrl = `${REST_BASE_URL}${environment.actuators.endpointPath}`;
-  axios.get(baseUrl)
+  fetch(baseUrl)
     .then((response) => {
-      res.status(response.status).send(response.data);
+      return response.json().then((data) => {
+        res.status(response.status).send(data);
+      });
     })
     .catch((error) => {
-      res.status(error.response.status).send({
-        error: error.message
+      res.status(error?.response?.status || 503).send({
+        error: error.message,
       });
     });
 }
@@ -723,16 +760,22 @@ function redirectManifest(req, res) {
   if (match) {
     handle = match[1];
     const baseUrl = `${environment.rest.baseUrl}/api/pid/find?id=${handle}`;
-    axios.get(baseUrl)
+    fetch(baseUrl)
       .then((response) => {
-        if (response.status === 200) {
-          const newUrl = `${environment.rest.baseUrl}/iiif/${response.data.id}/manifest`;
-          console.info('Manifest found, redirect to ', newUrl);
-          res.redirect(newUrl);
+        if (response.ok) {
+          return response.json().then((data) => {
+            const newUrl = `${environment.rest.baseUrl}/iiif/${data.id}/manifest`;
+            console.info('Manifest found, redirect to ', newUrl);
+            res.redirect(newUrl);
+          });
+        } else {
+          res.status(response.status).send({
+            error: `Request failed with status ${response.status}`
+          });
         }
       })
       .catch((error) => {
-        res.status(error.response.status).send({
+        res.status(error?.response?.status || 503).send({
           error: error.message
         });
       });

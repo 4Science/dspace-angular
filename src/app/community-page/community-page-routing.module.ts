@@ -15,6 +15,7 @@ import { LinkMenuItemModel } from '../shared/menu/menu-item/models/link.model';
 import { ThemedCommunityPageComponent } from './themed-community-page.component';
 import { MenuItemType } from '../shared/menu/menu-item-type.model';
 import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.resolver';
+import { ViewTrackerResolverService } from '../statistics/angulartics/dspace/view-tracker-resolver.service';
 
 @NgModule({
   imports: [
@@ -66,6 +67,9 @@ import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.reso
             path: '',
             component: ThemedCommunityPageComponent,
             pathMatch: 'full',
+            resolve: {
+              tracking: ViewTrackerResolverService,
+            },
           }
         ],
         data: {
@@ -93,6 +97,7 @@ import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.reso
     LinkService,
     CreateCommunityPageGuard,
     CommunityPageAdministratorGuard,
+    ViewTrackerResolverService,
   ]
 })
 export class CommunityPageRoutingModule {

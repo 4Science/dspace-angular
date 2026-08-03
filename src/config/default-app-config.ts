@@ -24,6 +24,7 @@ import { FilterVocabularyConfig } from './filter-vocabulary-config';
 import { DiscoverySortConfig } from './discovery-sort.config';
 import { LiveRegionConfig } from '../app/shared/live-region/live-region.config';
 import { SearchConfig } from './search-page-config.interface';
+import { AccessibilitySettingsConfig } from '../app/accessibility/accessibility-settings.config';
 import { AddToAnyPluginConfig } from './add-to-any-plugin-config';
 import { CmsMetadata } from './cms-metadata';
 import { CrisLayoutConfig, LayoutConfig, SuggestionConfig } from './layout-config.interfaces';
@@ -58,6 +59,9 @@ export class DefaultAppConfig implements AppConfig {
     port: 4000,
     // NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
     nameSpace: '/',
+    // Specify the public URL that this user interface responds to. This corresponds to the "dspace.ui.url" property in your backend's local.cfg.
+    // The baseUrl is used for redirects and SEO links (in robots.txt).
+    baseUrl: 'http://localhost:4000',
 
     // The rateLimiter settings limit each IP to a 'max' of 500 requests per 'windowMs' (1 minute).
     rateLimiter: {
@@ -91,6 +95,10 @@ export class DefaultAppConfig implements AppConfig {
     },
     // Cache-Control HTTP Header
     control: 'max-age=604800', // revalidate browser
+    // These static files should not be cached (paths relative to dist/browser, including the leading slash)
+    noCacheFiles: [
+      '/index.html',  // see https://web.dev/articles/http-cache#unversioned-urls
+    ],
     autoSync: {
       defaultTime: 0,
       maxBufferSize: 100,
@@ -537,6 +545,7 @@ export class DefaultAppConfig implements AppConfig {
   info: InfoConfig = {
     enableEndUserAgreement: true,
     enablePrivacyStatement: true,
+    enableCookieConsentPopup: true,
     //Configuration for third-party metrics in Klaro
     metricsConsents: [
       {
@@ -586,6 +595,11 @@ export class DefaultAppConfig implements AppConfig {
 
   search: SearchConfig = {
     filterPlaceholdersCount: 5
+  };
+
+  // Accessibility settings configuration, used by the AccessibilitySettingsService
+  accessibility: AccessibilitySettingsConfig = {
+    cookieExpirationDuration: 7,
   };
 
   crisLayout: CrisLayoutConfig = {

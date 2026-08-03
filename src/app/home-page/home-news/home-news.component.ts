@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SectionDataService } from '../../core/layout/section-data.service';
 import { SiteDataService } from '../../core/data/site-data.service';
 import { LocaleService } from '../../core/locale/locale.service';
-import { map, take } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
 import { isEmpty } from '../../shared/empty.util';
 
 @Component({
@@ -43,12 +43,14 @@ export class HomeNewsComponent implements OnInit {
     this.site$ = this.route.data.pipe(
       map((data) => data.site as Site),
     );
-    this.siteService.find().pipe(take(1)).subscribe(
-      (site: Site) => {
-        this.hasHomeNewsMetadata = !isEmpty(site?.firstMetadataValue('cris.cms.home-news',
-          {language: this.locale.getCurrentLanguageCode()}));
-      }
-    );
+    this.locale.getCurrentLanguageCode().pipe(
+      switchMap(language => this.siteService.find().pipe(
+        take(1),
+        map((site: Site) => !isEmpty(site?.firstMetadataValue('cris.cms.home-news', { language })))
+      ))
+    ).subscribe(hasMetadata => {
+      this.hasHomeNewsMetadata = hasMetadata;
+    });
   }
 
 }

@@ -8,6 +8,9 @@ ui:
   ssl: false
   host: localhost
   port: 4000
+  # Specify the public URL that this user interface responds to. This corresponds to the "dspace.ui.url" property in your backend's local.cfg.
+  # The baseUrl is used for redirects and SEO links (in robots.txt).
+  baseUrl: http://localhost:4000
   # NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
   nameSpace: /
   # The rateLimiter settings limit each IP to a 'max' of 500 requests per 'windowMs' (1 minute).
@@ -23,10 +26,24 @@ universal:
   # Determining which styles are critical is a relatively expensive operation; this option is
   # disabled (false) by default to boost server performance at the expense of loading smoothness.
   inlineCriticalCss: false
-  # Path prefixes to enable SSR for. By default these are limited to paths of primary DSpace objects.
-  # NOTE: The "/handle/" path ensures Handle redirects work via SSR.  The "/reload/" path ensures
-  # hard refreshes (e.g. after login) trigger SSR while fully reloading the page.
-  paths: [ '/home', '/items/', '/entities/', '/collections/', '/communities/', '/bitstream/', '/bitstreams/', '/handle/', '/reload/' ]
+  # Patterns to be run as regexes against the path of the page to check if SSR is allowed.
+  # If the path match any of the regexes it will be served directly in CSR.
+  # By default, excludes community and collection browse, global browse, global search, community list, statistics and various administrative tools.
+  excludePathPatterns:
+    - pattern: "^/communities/[a-f0-9-]{36}/browse(/.*)?$"
+      flag: "i"
+    - pattern: "^/collections/[a-f0-9-]{36}/browse(/.*)?$"
+      flag: "i"
+    - pattern: "^/browse/"
+    - pattern: "^/search$"
+    - pattern: "^/community-list$"
+    - pattern: "^/admin/"
+    - pattern: "^/processes/?"
+    - pattern: "^/notifications/"
+    - pattern: "^/statistics/?"
+    - pattern: "^/access-control/"
+    - pattern: "^/health$"
+
   # Whether to enable rendering of Search component on SSR.
   # If set to true the component will be included in the HTML returned from the server side rendering.
   # If set to false the component will not be included in the HTML returned from the server side rendering.
@@ -70,6 +87,9 @@ cache:
   # NOTE: When updates are made to compiled *.js files, it will automatically bypass this browser cache, because
   # all compiled *.js files include a unique hash in their name which updates when content is modified.
   control: max-age=604800 # revalidate browser
+  # These static files should not be cached (paths relative to dist/browser, including the leading slash)
+  noCacheFiles:
+    - '/index.html'
   autoSync:
     defaultTime: 0
     maxBufferSize: 100
@@ -401,6 +421,7 @@ themes:
   # - name: BASE_THEME_NAME
   #
   - name: dspace
+    prefetch: true
     headTags:
     - tagName: link
       attributes:
@@ -480,6 +501,11 @@ search:
   # Since we don't know how many filters will be loaded before we receive a response from the server we use this parameter for the skeletons count.
   # e.g. If we set 5 then 5 loading skeletons will be visualized before the actual filters are retrieved.
   defaultFiltersCount: 5
+
+# Configuration for storing accessibility settings, used by the AccessibilitySettingsService
+accessibility:
+  # The duration in days after which the accessibility settings cookie expires
+  cookieExpirationDuration: 7
 
 crisLayout:
   urn:
