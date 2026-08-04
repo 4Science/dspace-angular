@@ -97,7 +97,7 @@ export class VersionHistoryDataService extends IdentifiableDataService<VersionHi
 
     this.halService.getEndpoint(this.versionsEndpoint).pipe(
       take(1),
-      map((endpointUrl: string) => (summary?.length > 0) ? `${endpointUrl}?summary=${summary}` : `${endpointUrl}`),
+      map((endpointUrl: string) => (summary?.length > 0) ? `${endpointUrl}?summary=${encodeURIComponent(summary)}` : `${endpointUrl}`),
       find((href: string) => hasValue(href)),
     ).subscribe((href) => {
       const request = new PostRequest(requestId, href, itemHref, requestOptions);
@@ -176,7 +176,7 @@ export class VersionHistoryDataService extends IdentifiableDataService<VersionHi
     return this.versionDataService.findByHref(versionHref, false, true, followLink('versionhistory')).pipe(
       getFirstCompletedRemoteData(),
       switchMap((versionRD: RemoteData<Version>) => {
-        if (versionRD.hasSucceeded && !versionRD.hasNoContent) {
+        if (versionRD.hasSucceeded && !versionRD.hasNoContent && hasValue(versionRD.payload)) {
           return versionRD.payload.versionhistory.pipe(
             getFirstCompletedRemoteData(),
             map((versionHistoryRD: RemoteData<VersionHistory>) => {

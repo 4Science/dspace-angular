@@ -192,7 +192,13 @@ export class ItemExportFormatService extends IdentifiableDataService<ItemExportF
     if (searchOptions.filters && searchOptions.filters.length > 0) {
       const value = searchOptions.filters
         .filter((searchFilter) => searchFilter.key.includes('f.'))
-        .map((searchFilter) => searchFilter.key.replace('f.', '') + '=' + searchFilter.values[0])
+        .map((searchFilter) => {
+          const key = searchFilter.key.replace('f.', '');
+          return searchFilter.values.map((filterValue) => {
+            const baseValue = `${key}=${filterValue}`;
+            return searchFilter.operator ? `${baseValue},${searchFilter.operator}` : baseValue;
+          }).join('&');
+        })
         .join('&');
       return [...parameterValues, Object.assign(new ProcessParameter(), { name: '-sf', value })];
     }

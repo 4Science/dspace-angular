@@ -14,6 +14,29 @@ export const environment: BuildConfig = {
     async: true,
     time: false,
     inlineCriticalCss: false,
+    transferState: true,
+    replaceRestUrl: false,
+    excludePathPatterns: [
+      {
+        pattern: '^/communities/[a-f0-9-]{36}/browse(/.*)?$',
+        flag: 'i',
+      },
+      {
+        pattern: '^/collections/[a-f0-9-]{36}/browse(/.*)?$',
+        flag: 'i',
+      },
+      { pattern: '^/browse/' },
+      { pattern: '^/search' },
+      { pattern: '^/community-list$' },
+      { pattern: '^/statistics/?' },
+      { pattern: '^/admin/' },
+      { pattern: '^/processes/?' },
+      { pattern: '^/notifications/' },
+      { pattern: '^/access-control/' },
+      { pattern: '^/health$' },
+    ],
+    enableSearchComponent: false,
+    enableBrowseComponent: false,
   },
 
   // Angular Universal server settings.
@@ -54,6 +77,10 @@ export const environment: BuildConfig = {
     },
     // msToLive: 1000, // 15 minutes
     control: 'max-age=60',
+    // These static files should not be cached (paths relative to dist/browser, including the leading slash)
+    noCacheFiles: [
+      '/index.html',  // see https://web.dev/articles/http-cache#unversioned-urls
+    ],
     autoSync: {
       defaultTime: 0,
       maxBufferSize: 100,
@@ -92,6 +119,7 @@ export const environment: BuildConfig = {
       // This is independent from the idle warning.
       timeLeftBeforeTokenRefresh: 20000, // 20 sec
     },
+    isPasswordLoginEnabledForAdminsOnly: true,
   },
 
   // Form settings
@@ -276,6 +304,8 @@ export const environment: BuildConfig = {
       metadata: ['dc.contributor.author']
     }
   ],
+  followAuthorityMaxItemLimit: 100,
+  followAuthorityMetadataValuesLimit: 5,
   item: {
     edit: {
       undoTimeout: 10000 // 10 seconds
@@ -334,6 +364,7 @@ export const environment: BuildConfig = {
   info: {
     enableEndUserAgreement: true,
     enablePrivacyStatement: true,
+    enableCookieConsentPopup: true,
     //Configuration for third-party metrics in Klaro
     metricsConsents: [
       {
@@ -367,11 +398,29 @@ export const environment: BuildConfig = {
     }
   ],
 
+  liveRegion: {
+    messageTimeOutDurationMs: 30000,
+    isVisible: false,
+  },
+
+  search: {
+    filterPlaceholdersCount: 5
+  },
+
+  accessibility: {
+    cookieExpirationDuration: 7,
+  },
+
   crisLayout: {
     urn: [
       {
         name: 'doi',
         baseUrl: 'https://doi.org/'
+      },
+      {
+        name: 'keepMyWhiteSpaces',
+        baseUrl: 'https://keepmywhitespaces.com/',
+        shouldKeepWhiteSpaces: true
       },
       {
         name: 'hdl',

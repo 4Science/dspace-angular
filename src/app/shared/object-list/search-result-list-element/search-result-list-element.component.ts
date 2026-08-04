@@ -11,6 +11,7 @@ import { TruncatableService } from '../../truncatable/truncatable.service';
 import { Metadata } from '../../../core/shared/metadata.utils';
 import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
 import { APP_CONFIG, AppConfig } from '../../../../config/app-config.interface';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'ds-search-result-list-element',
@@ -22,6 +23,11 @@ export class SearchResultListElementComponent<T extends SearchResult<K>, K exten
    */
   dso: K;
   dsoTitle: string;
+
+  /**
+   * Limit of additional metadata values to show
+   */
+  additionalMetadataLimit = environment.followAuthorityMetadataValuesLimit;
 
   public constructor(protected truncatableService: TruncatableService,
                      public dsoNameService: DSONameService,
@@ -37,7 +43,7 @@ export class SearchResultListElementComponent<T extends SearchResult<K>, K exten
     this.showThumbnails = this.showThumbnails ?? this.appConfig.browseBy.showThumbnails;
     if (hasValue(this.object)) {
       this.dso = this.object.indexableObject;
-      this.dsoTitle = this.dsoNameService.getHitHighlights(this.object, this.dso);
+      this.dsoTitle = this.dsoNameService.getHitHighlights(this.object, this.dso, true);
     }
   }
 
@@ -45,12 +51,14 @@ export class SearchResultListElementComponent<T extends SearchResult<K>, K exten
    * Gets all matching metadata string values from hitHighlights or dso metadata.
    *
    * @param {string|string[]} keyOrKeys The metadata key(s) in scope. Wildcards are supported; see [[Metadata]].
+   * @param escapeHTML Whether the HTML is used inside a `[innerHTML]` attribute. Defaults to `true` because we
+   * always use `[innerHTML]` in the templates to render metadata due to the hit highlights.
    * @returns {string[]} the matching string values or an empty array.
    */
-  allMetadataValues(keyOrKeys: string | string[]): string[] {
-    let dsoMetadata: string[] = Metadata.allValues([this.dso.metadata], keyOrKeys);
-    let highlights: string[] = Metadata.allValues([this.object.hitHighlights], keyOrKeys);
-    let removedHighlights: string[] = highlights.map(str => str.replace(/<\/?em>/g, ''));
+  allMetadataValues(keyOrKeys: string | string[], escapeHTML = true): string[] {
+    const dsoMetadata: string[] = Metadata.allValues(this.dso.metadata, keyOrKeys, undefined, undefined, escapeHTML);
+    const highlights: string[] = Metadata.allValues({}, keyOrKeys, this.object.hitHighlights, undefined, escapeHTML);
+    const removedHighlights: string[] = highlights.map(str => str.replace(/<\/?em>/g, ''));
     for (let i = 0; i < removedHighlights.length; i++) {
         let index = dsoMetadata.indexOf(removedHighlights[i]);
         if (index !== -1) {
@@ -64,10 +72,12 @@ export class SearchResultListElementComponent<T extends SearchResult<K>, K exten
    * Gets the first matching metadata string value from hitHighlights or dso metadata, preferring hitHighlights.
    *
    * @param {string|string[]} keyOrKeys The metadata key(s) in scope. Wildcards are supported; see [[Metadata]].
+   * @param escapeHTML Whether the HTML is used inside a `[innerHTML]` attribute. Defaults to `true` because we
+   * always use `[innerHTML]` in the templates to render metadata due to the hit highlights.
    * @returns {string} the first matching string value, or `undefined`.
    */
-  firstMetadataValue(keyOrKeys: string | string[]): string {
-    return Metadata.firstValue([this.object.hitHighlights, this.dso.metadata], keyOrKeys);
+  firstMetadataValue(keyOrKeys: string | string[], escapeHTML = true): string {
+    return Metadata.firstValue(this.dso.metadata, keyOrKeys, this.object.hitHighlights, undefined, escapeHTML);
   }
 
   /**

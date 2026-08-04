@@ -338,6 +338,9 @@ import { BitstreamListItemComponent } from './object-list/bitstream-list-item/bi
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ThemedLangSwitchComponent } from './lang-switch/themed-lang-switch.component';
 import { ThemedUserMenuComponent } from './auth-nav-menu/user-menu/themed-user-menu.component';
+import { OrcidBadgeAndTooltipComponent } from './orcid-badge-and-tooltip/orcid-badge-and-tooltip.component';
+import { LiveRegionComponent } from './live-region/live-region.component';
+import { BtnDisabledDirective } from './btn-disabled.directive';
 import { ItemCorrectionComponent } from './object-collection/shared/mydspace-item-correction/item-correction.component';
 import { MetricsModule } from './metric/metrics.module';
 import {
@@ -352,6 +355,7 @@ import { ItemCollectionComponent } from './object-collection/shared/mydspace-ite
 import { ThemedItemListPreviewComponent } from './object-list/my-dspace-result-list-element/item-list-preview/themed-item-list-preview.component';
 import { ItemListPreviewComponent } from './object-list/my-dspace-result-list-element/item-list-preview/item-list-preview.component';
 import { MarkdownDirective } from './utils/markdown.directive';
+import { InWorkflowStatisticsComponent } from './object-collection/shared/in-workflow-statistics/in-workflow-statistics.component';
 import { DefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/default-browse-elements.component';
 import { ThemedDefaultBrowseElementsComponent } from './browse-most-elements/default-browse-elements/themed-default-browse-elements.component';
 import { MetadataLinkViewPopoverComponent } from './metadata-link-view/metadata-link-view-popover/metadata-link-view-popover.component';
@@ -360,6 +364,10 @@ import { MetadataLinkViewOrcidComponent } from './metadata-link-view/metadata-li
 import { SwitchComponent } from './switch/switch.component';
 import {StickyPopoverDirective} from './metadata-link-view/sticky-popover.directive';
 import { SortPipe } from './utils/sort.pipe';
+import { BrowserOnlyDirective } from './utils/browser-only.directive';
+import {EscapeHtmlPipe} from './utils/escape-html.pipe';
+import { AuthorizedCommunitySelectorComponent } from './dso-selector/dso-selector/authorized-community-selector/authorized-community-selector.component';
+import { AuthorizedItemSelectorComponent } from './dso-selector/dso-selector/authorized-item-selector/authorized-item-selector.component';
 
 const MODULES = [
   CommonModule,
@@ -408,6 +416,7 @@ const PIPES = [
   BrowserOnlyPipe,
   ShortNumberPipe,
   SortPipe,
+  EscapeHtmlPipe,
 ];
 
 const COMPONENTS = [
@@ -483,6 +492,8 @@ const COMPONENTS = [
   ExportBatchSelectorComponent,
   ConfirmationModalComponent,
   AuthorizedCollectionSelectorComponent,
+  AuthorizedCommunitySelectorComponent,
+  AuthorizedItemSelectorComponent,
   AdministeredCollectionSelectorComponent,
   SearchNavbarComponent,
   ItemPageTitleFieldComponent,
@@ -494,6 +505,7 @@ const COMPONENTS = [
   EpersonSearchBoxComponent,
   GroupSearchBoxComponent,
   ThemedItemPageTitleFieldComponent,
+  OrcidBadgeAndTooltipComponent,
   SearchChartsComponent,
   SearchChartBarComponent,
   SearchChartBarToLeftComponent,
@@ -519,6 +531,7 @@ const COMPONENTS = [
   SearchChartBarHorizontalComponent,
   ItemListPreviewComponent,
   ThemedItemListPreviewComponent,
+  InWorkflowStatisticsComponent,
   ItemCollectionComponent,
   DefaultBrowseElementsComponent,
   ThemedDefaultBrowseElementsComponent,
@@ -589,6 +602,7 @@ const ENTRY_COMPONENTS = [
   EpersonGroupListComponent,
   EpersonSearchBoxComponent,
   GroupSearchBoxComponent,
+  LiveRegionComponent,
   SearchChartBarComponent,
   SearchChartBarToLeftComponent,
   SearchChartBarToRightComponent,
@@ -626,16 +640,18 @@ const DIRECTIVES = [
   MetadataFieldValidator,
   HoverClassDirective,
   ContextHelpDirective,
+  BtnDisabledDirective,
   EntityIconDirective,
   MarkdownDirective,
   StickyPopoverDirective
 ];
 
 @NgModule({
-  imports: [
-    ...MODULES,
-    ...ROOT_MODULES,
-  ],
+    imports: [
+        ...MODULES,
+        ...ROOT_MODULES,
+        BrowserOnlyDirective,
+    ],
   declarations: [
     ...PIPES,
     ...COMPONENTS,

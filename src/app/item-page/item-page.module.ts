@@ -63,7 +63,6 @@ import {
 } from './full/field-components/file-section/themed-full-file-section.component';
 import { MarkdownViewerModule } from '../shared/markdown-viewer/markdown-viewer.module';
 
-
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
   PublicationComponent,
