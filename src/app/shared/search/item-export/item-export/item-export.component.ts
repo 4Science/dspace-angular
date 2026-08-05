@@ -332,7 +332,6 @@ export class ItemExportComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.router.navigateByUrl(this.currentUrl);
     this.selectableListService.removeSelection(this.listId);
   }
 }
