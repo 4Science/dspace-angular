@@ -134,7 +134,8 @@
     "@ngrx/store": "^20.1.0",
     "@ngx-translate/core": "^17.0.0",
     "@nicky-lenaers/ngx-scroll-to": "^14.0.0",
-    "@swimlane/ngx-charts": "^20.4.1",
+    "@popperjs/core": "^2.11.8",
+    "@swimlane/ngx-charts": "^23.1.0",
     "@terraformer/wkt": "^2.2.1",
     "altcha": "^2.3.0",
     "angulartics2": "^12.2.0",
@@ -192,8 +193,7 @@
     "rxjs": "^7.8.0",
     "uuid": "^14.0.0",
     "xhr2": "^0.2.1",
-    "zone.js": "~0.15.1",
-    "@popperjs/core": "^2.11.8"
+    "zone.js": "~0.15.1"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "~20.0.0",
