@@ -2417,8 +2417,49 @@
   // "community.search.breadcrumbs": "Search",
   "community.search.breadcrumbs": "Recherche",
 
-  // "community.search.results.head": "Search Results",
-  "community.search.results.head": "Résultats de recherche",
+  // "context-menu.actions.edit-item.btn.FULL": "Edit all the details",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item.btn.FULL": "Edit all the details",
+
+  // "context-menu.actions.edit-item.btn.OWNER": "Edit",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item.btn.OWNER": "Edit",
+
+  // "context-menu.actions.edit-item.btn.DIRECTOR": "Edit",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item.btn.DIRECTOR": "Edit",
+
+  // "context-menu.actions.edit-item.btn.INVESTIGATOR": "Edit",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item.btn.INVESTIGATOR": "Edit",
+
+  // "context-menu.actions.request-correction.btn": "Request a correction",
+  // TODO New key - Add a translation
+  "context-menu.actions.request-correction.btn": "Request a correction",
+
+  // "context-menu.actions.request-correction.confirm.cancel": "Cancel",
+  // TODO New key - Add a translation
+  "context-menu.actions.request-correction.confirm.cancel": "Cancel",
+
+  // "context-menu.actions.request-correction.confirm.submit": "Yes, I'm sure",
+  // TODO New key - Add a translation
+  "context-menu.actions.request-correction.confirm.submit": "Yes, I'm sure",
+
+  // "context-menu.actions.request-correction.error.403": "You are not authorized, impossible to proceed with the operation.",
+  // TODO New key - Add a translation
+  "context-menu.actions.request-correction.error.403": "You are not authorized, impossible to proceed with the operation.",
+
+  // "context-menu.actions.request-correction.error.422": "A correction request for this item is already in progress. Please contact the support if you need to perform urgent changes to this item.",
+  // TODO New key - Add a translation
+  "context-menu.actions.request-correction.error.422": "A correction request for this item is already in progress. Please contact the support if you need to perform urgent changes to this item.",
+
+  // "context-menu.actions.request-correction.error.generic": "There was an issue when requesting a correction for the item, please try again later.",
+  // TODO New key - Add a translation
+  "context-menu.actions.request-correction.error.generic": "There was an issue when requesting a correction for the item, please try again later.",
+
+  // "context-menu.actions.request-correction.info": "Are you sure you want to proceed with this operation?",
+  // TODO New key - Add a translation
+  "context-menu.actions.request-correction.info": "Are you sure you want to proceed with this operation?",
 
   // "community.sub-collection-list.head": "Collections in this community",
   "community.sub-collection-list.head": "Collections de cette communauté",
