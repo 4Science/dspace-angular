@@ -192,7 +192,8 @@
     "rxjs": "^7.8.0",
     "uuid": "^14.0.0",
     "xhr2": "^0.2.1",
-    "zone.js": "~0.15.1"
+    "zone.js": "~0.15.1",
+    "@popperjs/core": "^2.11.8"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "~20.0.0",
