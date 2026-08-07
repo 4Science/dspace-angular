@@ -13,6 +13,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { VarDirective } from '../../../utils/var.directive';
 import { APP_CONFIG } from '../../../../../config/app-config.interface';
 import { TruncatableService } from '../../../truncatable/truncatable.service';
+import {EscapeHtmlPipe} from '../../../utils/escape-html.pipe';
 
 let component: ItemListPreviewComponent;
 let fixture: ComponentFixture<ItemListPreviewComponent>;
@@ -97,7 +98,7 @@ describe('ItemListPreviewComponent', () => {
         }),
         NoopAnimationsModule
       ],
-      declarations: [ItemListPreviewComponent, TruncatePipe, VarDirective],
+      declarations: [ItemListPreviewComponent, TruncatePipe, VarDirective, EscapeHtmlPipe],
       providers: [
         { provide: 'objectElementProvider', useValue: { mockItemWithAuthorAndDate }},
         { provide: APP_CONFIG, useValue: environmentUseThumbs },
@@ -245,7 +246,7 @@ describe('ItemListPreviewComponent', () => {
         }),
         NoopAnimationsModule
       ],
-      declarations: [ItemListPreviewComponent, TruncatePipe],
+      declarations: [ItemListPreviewComponent, TruncatePipe, EscapeHtmlPipe],
       providers: [
         {provide: 'objectElementProvider', useValue: {mockItemWithAuthorAndDate}},
         {provide: APP_CONFIG, useValue: enviromentNoThumbs},

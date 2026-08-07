@@ -1,7 +1,7 @@
 import { testA11y } from 'cypress/support/utils';
 import { Options } from 'cypress-axe';
 
-xdescribe('Footer', () => {
+describe('Footer', () => {
     it('should pass accessibility tests', () => {
         cy.visit('/');
 

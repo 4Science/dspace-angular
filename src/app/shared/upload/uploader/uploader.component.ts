@@ -34,6 +34,7 @@ import { ON_BEHALF_OF_HEADER } from '../../../core/auth/auth.interceptor';
 
 export class UploaderComponent {
 
+
   /**
    * The message to show when drag files on the drop zone
    */

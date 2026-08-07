@@ -2,13 +2,15 @@ import { red, blue, green, bold } from 'colors';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { load } from 'js-yaml';
 import { join } from 'path';
+import { ServerHashedFileMapping } from '../modules/dynamic-hash/hashed-file-mapping.server';
 
 import { AppConfig } from './app-config.interface';
+import { BuildConfig } from './build-config.interface';
 import { Config } from './config.interface';
 import { DefaultAppConfig } from './default-app-config';
 import { ServerConfig } from './server-config.interface';
 import { mergeConfig } from './config.util';
-import { isNotEmpty } from '../app/shared/empty.util';
+import { isEmpty, isNotEmpty } from '../app/shared/empty.util';
 
 const CONFIG_PATH = join(process.cwd(), 'config');
 
@@ -149,15 +151,22 @@ const overrideWithEnvironment = (config: Config, key: string = '') => {
 };
 
 
-
+/**
+ * Construct the "baseUrl" property for a given config object (if it doesn't already exist),
+ * using the "host", "port", "nameSpace", and "ssl" properties of the config.
+ * @param config the config to build the baseUrl for
+ */
 const buildBaseUrl = (config: ServerConfig): void => {
-  config.baseUrl = [
-    config.ssl ? 'https://' : 'http://',
-    config.host,
-    config.port && config.port !== 80 && config.port !== 443 ? `:${config.port}` : '',
-    config.nameSpace && config.nameSpace.startsWith('/') ? config.nameSpace : `/${config.nameSpace}`
-  ].join('');
+  if (isEmpty(config.baseUrl)) {
+    config.baseUrl = [
+      config.ssl ? 'https://' : 'http://',
+      config.host,
+      config.port && config.port !== 80 && config.port !== 443 ? `:${config.port}` : '',
+      config.nameSpace && config.nameSpace.startsWith('/') ? config.nameSpace : `/${config.nameSpace}`,
+    ].join('');
+  }
 };
+
 
 /**
  * Build app config with the following chain of override.
@@ -169,7 +178,7 @@ const buildBaseUrl = (config: ServerConfig): void => {
  * @param destConfigPath optional path to save config file
  * @returns app config
  */
-export const buildAppConfig = (destConfigPath?: string): AppConfig => {
+export const buildAppConfig = (destConfigPath?: string, mapping?: ServerHashedFileMapping): AppConfig => {
   // start with default app config
   const appConfig: AppConfig = new DefaultAppConfig();
 
@@ -227,16 +236,31 @@ export const buildAppConfig = (destConfigPath?: string): AppConfig => {
   appConfig.rest.port = isNotEmpty(ENV('REST_PORT', true)) ? getNumberFromString(ENV('REST_PORT', true)) : appConfig.rest.port;
   appConfig.rest.nameSpace = isNotEmpty(ENV('REST_NAMESPACE', true)) ? ENV('REST_NAMESPACE', true) : appConfig.rest.nameSpace;
   appConfig.rest.ssl = isNotEmpty(ENV('REST_SSL', true)) ? getBooleanFromString(ENV('REST_SSL', true)) : appConfig.rest.ssl;
+  appConfig.rest.ssrBaseUrl = isNotEmpty(ENV('REST_SSRBASEURL', true)) ? ENV('REST_SSRBASEURL', true) : appConfig.rest.ssrBaseUrl;
 
   // apply build defined production
   appConfig.production = env === 'production';
 
-  // build base URLs
+  // Build base URLs if not already specified via configuration or environment variables.
   buildBaseUrl(appConfig.ui);
   buildBaseUrl(appConfig.rest);
 
   if (isNotEmpty(destConfigPath)) {
-    writeFileSync(destConfigPath, JSON.stringify(appConfig, null, 2));
+    const content = JSON.stringify(appConfig, null, 2);
+
+    writeFileSync(destConfigPath, content);
+    if (mapping !== undefined) {
+      mapping.add(destConfigPath, content);
+      if (!(appConfig as BuildConfig).universal?.preboot) {
+        // If we're serving for CSR we can retrieve the configuration before JS is loaded/executed
+        mapping.addHeadLink({
+          path: destConfigPath,
+          rel: 'preload',
+          as: 'fetch',
+          crossorigin: 'anonymous',
+        });
+      }
+    }
 
     console.log(`Angular ${bold('config.json')} file generated correctly at ${bold(destConfigPath)} \n`);
   }

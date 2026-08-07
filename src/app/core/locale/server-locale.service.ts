@@ -1,5 +1,5 @@
 import { LANG_ORIGIN, LocaleService } from './locale.service';
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { combineLatest, Observable, of as observableOf } from 'rxjs';
 import { map, mergeMap, take } from 'rxjs/operators';
 import { hasValue, isEmpty, isNotEmpty } from '../../shared/empty.util';
@@ -21,9 +21,10 @@ export class ServerLocaleService extends LocaleService {
     protected translate: TranslateService,
     protected authService: AuthService,
     protected routeService: RouteService,
-    @Inject(DOCUMENT) protected document: any
+    @Inject(DOCUMENT) protected document: any,
+    @Inject(PLATFORM_ID) protected platformId: string,
   ) {
-    super(_window, cookie, translate, authService, routeService, document);
+    super(_window, cookie, translate, authService, routeService, document, platformId);
   }
 
   /**
@@ -31,7 +32,7 @@ export class ServerLocaleService extends LocaleService {
    *
    * @returns {Observable<string[]>}
    */
-  getLanguageCodeList(): Observable<string[]> {
+  getLanguageCodeList(ignoreEPersonSettings = false): Observable<string[]> {
     const obs$ = combineLatest([
       this.authService.isAuthenticated(),
       this.authService.isAuthenticationLoaded()
@@ -41,7 +42,7 @@ export class ServerLocaleService extends LocaleService {
       take(1),
       mergeMap(([isAuthenticated, isLoaded]) => {
         let epersonLang$: Observable<string[]> = observableOf([]);
-        if (isAuthenticated && isLoaded) {
+        if (isAuthenticated && isLoaded && !ignoreEPersonSettings) {
           epersonLang$ = this.authService.getAuthenticatedUserFromStore().pipe(
             take(1),
             map((eperson) => {

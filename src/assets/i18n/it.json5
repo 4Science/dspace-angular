@@ -1,5 +1,4 @@
 {
-
   // "401.help": "You're not authorized to access this page. You can use the button below to get back to the home page.",
   "401.help": "Non sei autorizzato ad accedere a questa pagina. Puoi usare il pulsante qui sotto per tornare alla home page.",
 
@@ -64,6 +63,10 @@
 
   // "error-page.orcid.generic-error": "An error occurred during login via ORCID. Make sure you have shared your ORCID account email address with DSpace. If the error persists, contact the administrator",
   "error-page.orcid.generic-error": "Si è verificato un errore con il login via ORCID. Verifica di avere condiviso il tuo account ORCID con DSpace. Se l'errore persiste, contatta l'amministratore",
+
+  // "listelement.badge.access-status": "Access status:",
+  // TODO New key - Add a translation
+  "listelement.badge.access-status": "Access status:",
 
   // "access-status.embargo.listelement.badge": "Embargo",
   "access-status.embargo.listelement.badge": "Embargo",
@@ -528,6 +531,25 @@
   // "admin.access-control.bulk-access-browse.header": "Step 1: Select Objects",
   // TODO New key - Add a translation
   "admin.access-control.bulk-access-browse.header": "Step 1: Select Objects",
+  // "admin.access-control.bulk-access.breadcrumbs": "Bulk Access Management",
+  // TODO New key - Add a translation
+  "admin.access-control.bulk-access.breadcrumbs": "Bulk Access Management",
+
+  // "administrativeBulkAccess.search.results.head": "Search Results",
+  // TODO New key - Add a translation
+  "administrativeBulkAccess.search.results.head": "Search Results",
+
+  // "admin.access-control.bulk-access": "Bulk Access Management",
+  // TODO New key - Add a translation
+  "admin.access-control.bulk-access": "Bulk Access Management",
+
+  // "admin.access-control.bulk-access.title": "Bulk Access Management",
+  // TODO New key - Add a translation
+  "admin.access-control.bulk-access.title": "Bulk Access Management",
+
+  // "admin.access-control.bulk-access-browse.header": "Step 1: Select Objects",
+  // TODO New key - Add a translation
+  "admin.access-control.bulk-access-browse.header": "Step 1: Select Objects",
 
   // "admin.access-control.bulk-access-browse.search.header": "Search",
   // TODO New key - Add a translation
@@ -558,6 +580,22 @@
 
   // "admin.access-control.epeople.title": "EPeople",
   "admin.access-control.epeople.title": "Operatori",
+
+  // "admin.access-control.epeople.edit.breadcrumbs": "New EPerson",
+  // TODO New key - Add a translation
+  "admin.access-control.epeople.edit.breadcrumbs": "New EPerson",
+
+  // "admin.access-control.epeople.edit.title": "New EPerson",
+  // TODO New key - Add a translation
+  "admin.access-control.epeople.edit.title": "New EPerson",
+
+  // "admin.access-control.epeople.add.breadcrumbs": "Add EPerson",
+  // TODO New key - Add a translation
+  "admin.access-control.epeople.add.breadcrumbs": "Add EPerson",
+
+  // "admin.access-control.epeople.add.title": "Add EPerson",
+  // TODO New key - Add a translation
+  "admin.access-control.epeople.add.title": "Add EPerson",
 
   // "admin.access-control.epeople.edit.breadcrumbs": "New EPerson",
   // TODO New key - Add a translation
@@ -1134,6 +1172,10 @@
   // TODO New key - Add a translation
   "admin.batch-import.page.toggle.help": "It is possible to perform import either with file upload or via URL, use above toggle to set the input source",
 
+  // "admin.batch-import.page.toggle.help": "It is possible to perform import either with file upload or via URL, use above toggle to set the input source",
+  // TODO New key - Add a translation
+  "admin.batch-import.page.toggle.help": "It is possible to perform import either with file upload or via URL, use above toggle to set the input source",
+
   // "admin.metadata-import.page.dropMsg": "Drop a metadata CSV to import",
   "admin.metadata-import.page.dropMsg": "Rilascia un CSV di metadati da importare",
 
@@ -1165,6 +1207,18 @@
   // "admin.batch-import.page.error.addFile": "Select ZIP file first!",
   // TODO Source message changed - Revise the translation
   "admin.batch-import.page.error.addFile": "Seleziona prima il file ZIP",
+
+  // "admin.metadata-import.page.toggle.upload": "Upload",
+  // TODO New key - Add a translation
+  "admin.metadata-import.page.toggle.upload": "Upload",
+
+  // "admin.metadata-import.page.toggle.url": "URL",
+  // TODO New key - Add a translation
+  "admin.metadata-import.page.toggle.url": "URL",
+
+  // "admin.metadata-import.page.urlMsg": "Insert the batch ZIP url to import",
+  // TODO New key - Add a translation
+  "admin.metadata-import.page.urlMsg": "Insert the batch ZIP url to import",
 
   // "admin.metadata-import.page.toggle.upload": "Upload",
   // TODO New key - Add a translation
@@ -1584,6 +1638,14 @@
   // TODO New key - Add a translation
   "browse.comcol.by.nsi": "By Norwegian Science Index",
 
+  // "browse.comcol.by.srsc": "By Subject Category",
+  // TODO New key - Add a translation
+  "browse.comcol.by.srsc": "By Subject Category",
+
+  // "browse.comcol.by.nsi": "By Norwegian Science Index",
+  // TODO New key - Add a translation
+  "browse.comcol.by.nsi": "By Norwegian Science Index",
+
   // "browse.comcol.by.title": "By Title",
   "browse.comcol.by.title": "Per titolo",
 
@@ -1638,6 +1700,9 @@
   // "browse.metadata.title": "Title",
   "browse.metadata.title": "Titolo",
 
+  // "browse.metadata.title": "Title",
+  "browse.metadata.rsoTitle": "Titolo Pubblicazioni",
+
   // "browse.metadata.author.breadcrumbs": "Browse by Author",
   "browse.metadata.author.breadcrumbs": "Sfoglia per Autore",
 
@@ -1678,6 +1743,10 @@
   // TODO New key - Add a translation
   "browse.metadata.srsc.breadcrumbs": "Browse by Subject Category",
 
+  // "browse.metadata.rsoTitle.breadcrumbs": "Browse by Title",
+  // TODO New key - Add a translation
+  "browse.metadata.rsoTitle.breadcrumbs": "Sfoglia per Titolo",
+
   // "browse.metadata.srsc.tree.descrption": "Select a subject to add as search filter",
   // TODO New key - Add a translation
   "browse.metadata.srsc.tree.descrption": "Select a subject to add as search filter",
@@ -1693,6 +1762,14 @@
   // "browse.metadata.type.breadcrumbs": "Browse by Type",
   "browse.metadata.type.breadcrumbs": "Sfoglia per Tipo",
 
+  // "browse.metadata.srsc.breadcrumbs": "Browse by Subject Category",
+  // TODO New key - Add a translation
+  "browse.metadata.srsc.breadcrumbs": "Browse by Subject Category",
+
+  // "browse.metadata.nsi.breadcrumbs": "Browse by Norwegian Science Index",
+  // TODO New key - Add a translation
+  "browse.metadata.nsi.breadcrumbs": "Browse by Norwegian Science Index",
+
   // "browse.metadata.title.breadcrumbs": "Browse by Title",
   "browse.metadata.title.breadcrumbs": "Sfoglia per Titolo",
 
@@ -1704,6 +1781,10 @@
 
   // "pagination.next.button.disabled.tooltip": "No more pages of results",
   "pagination.next.button.disabled.tooltip": "Non ci sono ulteriori pagine",
+
+  // "pagination.page-number-bar": "Control bar for page navigation, relative to element with ID: ",
+  // TODO New key - Add a translation
+  "pagination.page-number-bar": "Control bar for page navigation, relative to element with ID: ",
 
   // "browse.startsWith": ", starting with {{ startsWith }}",
   "browse.startsWith": ", a partire da {{ startsWith }}",
@@ -1772,7 +1853,7 @@
   "browse.startsWith.type_date.label": "Oppure digita una data (anno-mese) e clicca sul pulsante Sfoglia",
 
   // "browse.startsWith.type_text": "Filter results by typing the first few letters",
-  "browse.startsWith.type_text": "Per filtrare i risultati inizia a digitare le prime lettere",
+  "browse.startsWith.type_text": "Filtra i risultati digitando le prime lettere e facendo clic su Sfoglia",
 
   // "browse.startsWith.input": "Filter",
   // TODO New key - Add a translation
@@ -1786,11 +1867,31 @@
   // TODO New key - Add a translation
   "browse.taxonomy.button": "Browse",
 
+  // "browse.startsWith.input": "Filter",
+  // TODO New key - Add a translation
+  "browse.startsWith.input": "Filter",
+
+  // "browse.taxonomy_srsc.title": "Browsing by Subject Category",
+  // TODO New key - Add a translation
+  "browse.taxonomy_srsc.title": "Browsing by Subject Category",
+
+  // "browse.taxonomy.button": "Browse",
+  // TODO New key - Add a translation
+  "browse.taxonomy.button": "Browse",
+
+  // "browse.taxonomy.show_next_results": "Show next results",
+  // TODO New key - Add a translation
+  "browse.taxonomy.show_next_results": "Show next results",
+
+  // "browse.taxonomy.show_previous_results": "Show previous results",
+  // TODO New key - Add a translation
+  "browse.taxonomy.show_previous_results": "Show previous results",
+
   // "browse.title": "Browsing {{ collection }} by {{ field }}{{ startsWith }} {{ value }}",
-  "browse.title": "Mostra il contenuto di {{ collection }} per {{ field }}{{ startsWith }} {{ value }}",
+  "browse.title": "Mostra il contenuto per {{ field }}{{ startsWith }} {{ value }}",
 
   // "browse.title.page": "Browsing {{ collection }} by {{ field }} {{ value }}",
-  "browse.title.page": "Mostra il contenuto di {{ collection }} per {{ field }} {{ value }}",
+  "browse.title.page": "Mostra il contenuto per {{ field }} {{ value }}",
 
 
   // "bulk-import.abort-on-error": "Abort on first error",
@@ -2197,14 +2298,10 @@
   // "collection.form.correctionSubmissionDefinition": "Submission definition for correction request",
   "collection.form.correctionSubmissionDefinition": "Definizione di submission per richiesta di correzioni",
 
-
-
   // "collection.listelement.badge": "Collection",
   "collection.listelement.badge": "Collezione",
 
-  // "collection.logo": "Collection logo",
-  // TODO New key - Add a translation
-  "collection.logo": "Collection logo",
+
 
   // "collection.page.browse.recent.head": "Recent Submissions",
   "collection.page.browse.recent.head": "Inserimenti recenti",
@@ -2610,8 +2707,8 @@
   // "context-menu.actions.audit-item.btn": "Audit",
   "context-menu.actions.audit-item.btn": "Revisione",
 
-  // "context-menu.actions.bulk-import.btn": "Import items into collection",
-  "context-menu.actions.bulk-import.btn": "Importa item nella collection",
+  // "context-menu.actions.bulk-import.btn": "Import into collection",
+  "context-menu.actions.bulk-import.btn": "Importa nella collection",
 
   // "context-menu.actions.claim.btn": "Claim this profile",
   "context-menu.actions.claim.btn": "Collega questo profilo",
@@ -2866,6 +2963,14 @@
   // "cookies.consent.content-modal.service": "service",
   "cookies.consent.content-modal.service": "servizio",
 
+  // "cookies.consent.app.title.accessibility": "Accessibility Settings",
+  // TODO New key - Add a translation
+  "cookies.consent.app.title.accessibility": "Accessibility Settings",
+
+  // "cookies.consent.app.description.accessibility": "Required for saving your accessibility settings locally",
+  // TODO New key - Add a translation
+  "cookies.consent.app.description.accessibility": "Required for saving your accessibility settings locally",
+
   // "cookies.consent.app.title.authentication": "Authentication",
   "cookies.consent.app.title.authentication": "Autenticazione",
 
@@ -3054,7 +3159,8 @@
   // "curation.form.submit.error.head": "Running the curation task failed",
   "curation.form.submit.error.head": "Esecuzione della curation task non riuscita",
 
-  // "curation.form.submit.error.content": "An error occured when trying to start the curation task.",
+  // "curation.form.submit.error.content": "An error occurred when trying to start the curation task.",
+  // TODO Source message changed - Revise the translation
   "curation.form.submit.error.content": "Si è verificato un errore durante il tentativo di avviare la curation task",
 
   // "curation.form.submit.error.invalid-handle": "Couldn't determine the handle for this object",
@@ -3087,6 +3193,10 @@
   // "dropdown.clear": "Clear selection",
   // TODO New key - Add a translation
   "dropdown.clear": "Clear selection",
+
+  // "dynamic-list.load-more": "Load more",
+  // TODO New key - Add a translation
+  "dynamic-list.load-more": "Load more",
 
   // "dropdown.clear.tooltip": "Clear the selected option",
   // TODO New key - Add a translation
@@ -3394,6 +3504,10 @@
 
   // "error.recent-submissions": "Error fetching recent submissions",
   "error.recent-submissions": "Errore durante il recupero delle submissions recenti",
+
+  // "error.profile-groups": "Error retrieving profile groups",
+  // TODO New key - Add a translation
+  "error.profile-groups": "Error retrieving profile groups",
 
   // "error.search-results": "Error fetching search results",
   "error.search-results": "Errore durante il recupero dei risultati della ricerca",
@@ -3757,6 +3871,9 @@
   // TODO Source message changed - Revise the translation
   "explore.index.type": "Tipologia",
 
+  // "explore.index.rsoTitle": "Title",
+  "explore.index.rsoTitle": "Titolo",
+
   // "explore.search-section.infrastructure.title": "Infrastructure",
   "explore.search-section.infrastructure.title": "Infrastruttura",
 
@@ -3831,6 +3948,10 @@
 
   // "footer.copyright": "copyright © 2002-{{ year }}",
   "footer.copyright": "copyright © 2002-{{ year }}",
+
+  // "footer.link.accessibility": "Accessibility settings",
+  // TODO New key - Add a translation
+  "footer.link.accessibility": "Accessibility settings",
 
   // "footer.extension-by": "- Extension maintained and optimized by",
   "footer.extension-by": "- Estensione mantenuta e ottimizzata da",
@@ -4137,6 +4258,17 @@
   "funding.page.titleprefix": "Funding:",
 
 
+  // "form.date-picker.placeholder.year": "Year",
+  // TODO New key - Add a translation
+  "form.date-picker.placeholder.year": "Year",
+
+  // "form.date-picker.placeholder.month": "Month",
+  // TODO New key - Add a translation
+  "form.date-picker.placeholder.month": "Month",
+
+  // "form.date-picker.placeholder.day": "Day",
+  // TODO New key - Add a translation
+  "form.date-picker.placeholder.day": "Day",
 
   // "grant-deny-request-copy.deny": "Don't send copy",
   "grant-deny-request-copy.deny": "Non inviare una copia",
@@ -4281,6 +4413,82 @@
   // "home.top-level-communities.help": "Search for a collection",
   "home.top-level-communities.help": "Cerca una collection",
 
+  // "info.accessibility-settings.breadcrumbs": "Accessibility settings",
+  // TODO New key - Add a translation
+  "info.accessibility-settings.breadcrumbs": "Accessibility settings",
+
+  // "info.accessibility-settings.cookie-warning": "Saving the accessibility settings is currently not possible. Either log in to save the settings in user data, or accept the 'Accessibility Settings' cookie using the 'Cookie Settings' menu at the bottom of the page. Once the cookie has been accepted, you can reload the page to remove this message.",
+  // TODO New key - Add a translation
+  "info.accessibility-settings.cookie-warning": "Saving the accessibility settings is currently not possible. Either log in to save the settings in user data, or accept the 'Accessibility Settings' cookie using the 'Cookie Settings' menu at the bottom of the page. Once the cookie has been accepted, you can reload the page to remove this message.",
+
+  // "info.accessibility-settings.disableNotificationTimeOut.label": "Automatically close notifications after time out",
+  // TODO New key - Add a translation
+  "info.accessibility-settings.disableNotificationTimeOut.label": "Automatically close notifications after time out",
+
+  // "info.accessibility-settings.disableNotificationTimeOut.hint": "When this toggle is activated, notifications will close automatically after the time out passes. When deactivated, notifications will remain open untill manually closed.",
+  // TODO New key - Add a translation
+  "info.accessibility-settings.disableNotificationTimeOut.hint": "When this toggle is activated, notifications will close automatically after the time out passes. When deactivated, notifications will remain open untill manually closed.",
+
+  // "info.accessibility-settings.failed-notification": "Failed to save accessibility settings",
+  // TODO New key - Add a translation
+  "info.accessibility-settings.failed-notification": "Failed to save accessibility settings",
+
+  // "info.accessibility-settings.invalid-form-notification": "Did not save. The form contains invalid values.",
+  // TODO New key - Add a translation
+  "info.accessibility-settings.invalid-form-notification": "Did not save. The form contains invalid values.",
+
+  // "info.accessibility-settings.liveRegionTimeOut.label": "ARIA Live region time out (in seconds)",
+  // TODO New key - Add a translation
+  "info.accessibility-settings.liveRegionTimeOut.label": "ARIA Live region time out (in seconds)",
+
+  // "info.accessibility-settings.liveRegionTimeOut.hint": "The duration after which a message in the ARIA live region disappears. ARIA live regions are not visible on the page, but provide announcements of notifications (or other actions) to screen readers.",
+  // TODO New key - Add a translation
+  "info.accessibility-settings.liveRegionTimeOut.hint": "The duration after which a message in the ARIA live region disappears. ARIA live regions are not visible on the page, but provide announcements of notifications (or other actions) to screen readers.",
+
+  // "info.accessibility-settings.liveRegionTimeOut.invalid": "Live region time out must be greater than 0",
+  // TODO New key - Add a translation
+  "info.accessibility-settings.liveRegionTimeOut.invalid": "Live region time out must be greater than 0",
+
+  // "info.accessibility-settings.notificationTimeOut.label": "Notification time out (in seconds)",
+  // TODO New key - Add a translation
+  "info.accessibility-settings.notificationTimeOut.label": "Notification time out (in seconds)",
+
+  // "info.accessibility-settings.notificationTimeOut.hint": "The duration after which a notification disappears.",
+  // TODO New key - Add a translation
+  "info.accessibility-settings.notificationTimeOut.hint": "The duration after which a notification disappears.",
+
+  // "info.accessibility-settings.notificationTimeOut.invalid": "Notification time out must be greater than 0",
+  // TODO New key - Add a translation
+  "info.accessibility-settings.notificationTimeOut.invalid": "Notification time out must be greater than 0",
+
+  // "info.accessibility-settings.save-notification.cookie": "Successfully saved settings locally.",
+  // TODO New key - Add a translation
+  "info.accessibility-settings.save-notification.cookie": "Successfully saved settings locally.",
+
+  // "info.accessibility-settings.save-notification.metadata": "Successfully saved settings on the user profile.",
+  // TODO New key - Add a translation
+  "info.accessibility-settings.save-notification.metadata": "Successfully saved settings on the user profile.",
+
+  // "info.accessibility-settings.reset-failed": "Failed to reset. Either log in or accept the 'Accessibility Settings' cookie.",
+  // TODO New key - Add a translation
+  "info.accessibility-settings.reset-failed": "Failed to reset. Either log in or accept the 'Accessibility Settings' cookie.",
+
+  // "info.accessibility-settings.reset-notification": "Successfully reset settings.",
+  // TODO New key - Add a translation
+  "info.accessibility-settings.reset-notification": "Successfully reset settings.",
+
+  // "info.accessibility-settings.reset": "Reset accessibility settings",
+  // TODO New key - Add a translation
+  "info.accessibility-settings.reset": "Reset accessibility settings",
+
+  // "info.accessibility-settings.submit": "Save accessibility settings",
+  // TODO New key - Add a translation
+  "info.accessibility-settings.submit": "Save accessibility settings",
+
+  // "info.accessibility-settings.title": "Accessibility settings",
+  // TODO New key - Add a translation
+  "info.accessibility-settings.title": "Accessibility settings",
+
   // "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
   "info.end-user-agreement.accept": "Ho letto e accetto l'Accordo con l'utente finale",
 
@@ -4381,6 +4589,10 @@
   // "item.edit.authorizations.title": "Edit item's Policies",
   "item.edit.authorizations.title": "Modificare le policies dell'item",
 
+  // "item.badge.status": "Item status:",
+  // TODO New key - Add a translation
+  "item.badge.status": "Item status:",
+
   // "item.badge.private": "Non-discoverable",
   "item.badge.private": "Privato",
 
@@ -4436,6 +4648,14 @@
   // "item.edit.bitstreams.bundle.name": "BUNDLE: {{ name }}",
   "item.edit.bitstreams.bundle.name": "BUNDLE: {{ name }}",
 
+  // "item.edit.bitstreams.bundle.table.aria-label": "Bitstreams in the  {{ bundle }} Bundle",
+  // TODO New key - Add a translation
+  "item.edit.bitstreams.bundle.table.aria-label": "Bitstreams in the  {{ bundle }} Bundle",
+
+  // "item.edit.bitstreams.bundle.tooltip": "You can move a bitstream to a different page by dropping it on the page number.",
+  // TODO New key - Add a translation
+  "item.edit.bitstreams.bundle.tooltip": "You can move a bitstream to a different page by dropping it on the page number.",
+
   // "item.edit.bitstreams.discard-button": "Discard",
   "item.edit.bitstreams.discard-button": "Annulla",
 
@@ -4454,8 +4674,32 @@
   // "item.edit.bitstreams.edit.buttons.undo": "Undo changes",
   "item.edit.bitstreams.edit.buttons.undo": "Annullare le modifiche",
 
+  // "item.edit.bitstreams.edit.live.cancel": "{{ bitstream }} was returned to position {{ toIndex }} and is no longer selected.",
+  // TODO New key - Add a translation
+  "item.edit.bitstreams.edit.live.cancel": "{{ bitstream }} was returned to position {{ toIndex }} and is no longer selected.",
+
+  // "item.edit.bitstreams.edit.live.clear": "{{ bitstream }} is no longer selected.",
+  // TODO New key - Add a translation
+  "item.edit.bitstreams.edit.live.clear": "{{ bitstream }} is no longer selected.",
+
+  // "item.edit.bitstreams.edit.live.loading": "Waiting for move to complete.",
+  // TODO New key - Add a translation
+  "item.edit.bitstreams.edit.live.loading": "Waiting for move to complete.",
+
+  // "item.edit.bitstreams.edit.live.select": "{{ bitstream }} is selected.",
+  // TODO New key - Add a translation
+  "item.edit.bitstreams.edit.live.select": "{{ bitstream }} is selected.",
+
+  // "item.edit.bitstreams.edit.live.move": "{{ bitstream }} is now in position {{ toIndex }}.",
+  // TODO New key - Add a translation
+  "item.edit.bitstreams.edit.live.move": "{{ bitstream }} is now in position {{ toIndex }}.",
+
   // "item.edit.bitstreams.empty": "This item doesn't contain any bitstreams. Click the upload button to create one.",
   "item.edit.bitstreams.empty": "Questo item non contiene bitstreams. Fai clic sul pulsante di caricamento per crearne uno.",
+
+  // "item.edit.bitstreams.info-alert": "Bitstreams can be reordered within their bundles by holding the drag handle and moving the mouse. Alternatively, bitstreams can be moved using the keyboard in the following way: Select the bitstream by pressing enter when the bitstream's drag handle is in focus. Move the bitstream up or down using the arrow keys. Press enter again to confirm the current position of the bitstream.",
+  // TODO New key - Add a translation
+  "item.edit.bitstreams.info-alert": "Bitstreams can be reordered within their bundles by holding the drag handle and moving the mouse. Alternatively, bitstreams can be moved using the keyboard in the following way: Select the bitstream by pressing enter when the bitstream's drag handle is in focus. Move the bitstream up or down using the arrow keys. Press enter again to confirm the current position of the bitstream.",
 
   // "item.edit.bitstreams.headers.actions": "Actions",
   "item.edit.bitstreams.headers.actions": "Azioni",
@@ -4510,6 +4754,10 @@
 
   // "item.edit.bitstreams.upload-button": "Upload",
   "item.edit.bitstreams.upload-button": "Carica",
+
+  // "item.edit.bitstreams.load-more.link": "Load more",
+  // TODO New key - Add a translation
+  "item.edit.bitstreams.load-more.link": "Load more",
 
   // "item.edit.delete.cancel": "Cancel",
   "item.edit.delete.cancel": "Annulla",
@@ -4796,6 +5044,10 @@
 
   // "item.edit.move.inheritpolicies.description": "Inherit the default policies of the destination collection",
   "item.edit.move.inheritpolicies.description": "Eredita le policy di default della collezione di destinazione",
+
+  // "item.edit.move.inheritpolicies.tooltip": "Warning: When enabled, the read access policy for the item and any files associated with the item will be replaced by the default read access policy of the collection. This cannot be undone.",
+  // TODO New key - Add a translation
+  "item.edit.move.inheritpolicies.tooltip": "Warning: When enabled, the read access policy for the item and any files associated with the item will be replaced by the default read access policy of the collection. This cannot be undone.",
 
   // "item.edit.move.inheritpolicies.tooltip": "Warning: When enabled, the read access policy for the item and any files associated with the item will be replaced by the default read access policy of the collection. This cannot be undone.",
   // TODO New key - Add a translation
@@ -5473,6 +5725,22 @@
   // TODO Source message changed - Revise the translation
   "item.preview.oaire.citation.volume": "Volume",
 
+  // "item.preview.dc.relation.hasversion": "Has version",
+  // TODO New key - Add a translation
+  "item.preview.dc.relation.hasversion": "Has version",
+
+  // "item.preview.dc.relation.ispartofseries": "Is part of series",
+  // TODO New key - Add a translation
+  "item.preview.dc.relation.ispartofseries": "Is part of series",
+
+  // "item.preview.dc.rights": "Rights",
+  // TODO New key - Add a translation
+  "item.preview.dc.rights": "Rights",
+
+  // "item.preview.dc.identifier.other": "Other Identifier",
+  // TODO Source message changed - Revise the translation
+  "item.preview.dc.identifier.other": "Altri identificativi:",
+
   // "item.preview.dc.relation.issn": "ISSN",
   // TODO Source message changed - Revise the translation
   "item.preview.dc.relation.issn": "ISSN",
@@ -5585,6 +5853,10 @@
   // "item.preview.organization.address.addressCountry": "Country",
   // TODO New key - Add a translation
   "item.preview.organization.address.addressCountry": "Country",
+
+  // "item.preview.organization.address.addressLocality": "City",
+  // TODO New key - Add a translation
+  "item.preview.organization.address.addressLocality": "City",
 
   // "item.preview.organization.foundingDate": "Founding Date",
   // TODO New key - Add a translation
@@ -5834,6 +6106,15 @@
 
   // "item-export.process.title": "Bulk export item",
   "item-export.process.title": "Bulk export dell'item",
+
+  // "item-deletion.process.title": "Deleting item",
+  "item-deletion.process.title": "Cancellazione dell'item",
+
+  // "community-deletion.process.title": "Deleting community",
+  "community-deletion.process.title": "Cancellazione della community",
+
+  // "collection-deletion.process.title": "Deleting collection",
+  "collection-deletion.process.title": "Cancellazione della collection",
 
   // "itemtemplate.edit.metadata.add-button": "Add",
   "itemtemplate.edit.metadata.add-button": "Aggiungi",
@@ -6658,6 +6939,10 @@
   // "mydspace.show.otherworkspace": "Other Workspace Submissions",
   "mydspace.show.otherworkspace": "Altri insierimenti in workspace",
 
+  // "mydspace.status": "My DSpace status:",
+  // TODO New key - Add a translation
+  "mydspace.status": "My DSpace status:",
+
   // "mydspace.status.mydspaceArchived": "Archived",
   // TODO New key - Add a translation
   "mydspace.status.mydspaceArchived": "Archived",
@@ -6749,7 +7034,7 @@
 
   // "nav.search.button": "Submit search",
   // TODO New key - Add a translation
-  "nav.search.button": "Submit search",
+  "nav.search.button": "Invia ricerca",
 
   // "nav.statistics.header": "Statistics",
   "nav.statistics.header": "Statistiche",
@@ -7444,10 +7729,22 @@
   "profile.card.access-token.delete": "Revoca il token",
 
   // "profile.card.access-token.no-token-generated": "You don't have personal access token. Generate a personal access token for quick access to the DSpace-CRIS API.",
-  "profile.card.access-token.no-token-generated": "Non si dispone di un token di accesso personale. Generare un token di accesso personale per accedere rapidamente all'API DSpace-CRIS.",
+  "profile.card.access-token.no-token-generated": "Non si dispone di un token di accesso personale.\nIl token di accesso personale permette di accedere alle funzionalità avanzate di DSpace ( API ) ed è legato al proprio utente.",
 
   // "profile.card.access-token.token-generated": "You have already generated a personal access token.",
-  "profile.card.access-token.token-generated": "Avete già generato un token di accesso personale.",
+  "profile.card.access-token.token-generated": "Avete già generato un token di accesso personale.\nIl token di accesso personale permette di accedere alle funzionalità avanzate di DSpace ( API ) ed è legato al proprio utente.",
+
+  // "profile.card.accessibility.content": "Accessibility settings can be configured on the accessibility settings page.",
+  // TODO New key - Add a translation
+  "profile.card.accessibility.content": "Accessibility settings can be configured on the accessibility settings page.",
+
+  // "profile.card.accessibility.header": "Accessibility",
+  // TODO New key - Add a translation
+  "profile.card.accessibility.header": "Accessibility",
+
+  // "profile.card.accessibility.link": "Go to Accessibility Settings Page",
+  // TODO New key - Add a translation
+  "profile.card.accessibility.link": "Go to Accessibility Settings Page",
 
   // "profile.card.identify": "Identify",
   "profile.card.identify": "Identificare",
@@ -7455,7 +7752,8 @@
   // "profile.card.security": "Security",
   "profile.card.security": "Sicurezza",
 
-  // "profile.form.submit": "Update Profile",
+  // "profile.form.submit": "Save",
+  // TODO Source message changed - Revise the translation
   "profile.form.submit": "Aggiorna profilo",
 
   // "profile.groups.head": "Authorization groups you belong to",
@@ -7726,8 +8024,9 @@
   // "register-page.registration.error.head": "Error when trying to register email",
   "register-page.registration.error.head": "Errore durante il tentativo di registrazione dell'e-mail",
 
-  // "register-page.registration.error.content": "An error occured when registering the following email address: {{ email }}",
-  "register-page.registration.error.content": "Si è verificato un errore durante la registrazione del seguente indirizzo e-mail: {{ email }}",
+  // "register-page.registration.error.content": "An error occurred when registering the following email address: {{ email }}",
+  // TODO New key - Add a translation
+  "register-page.registration.error.content": "An error occurred when registering the following email address: {{ email }}",
 
   // "register-page.registration.error.recaptcha": "Error when trying to authenticate with recaptcha",
   "register-page.registration.error.recaptcha": "Errore durante l'autenticazione con reCaptcha",
@@ -7823,7 +8122,7 @@
   "repository.title": "{{ repositoryName }}",
 
   // "repository.title.prefix": "{{ repositoryName }} Angular :: ",
-  "repository.title.prefix": "{{ repositoryName }} Angular :: ",
+  "repository.title.prefix": "{{ repositoryName }} :: ",
 
   // "resource-policies.add.button": "Add",
   "resource-policies.add.button": "Aggiungi",
@@ -8124,6 +8423,9 @@
   // "search.filters.applied.f.organization": "Organisation",
   "search.filters.applied.f.organization": "Struttura",
 
+  // "search.filters.applied.f.knowslanguage": "Language",
+  "search.filters.applied.f.knowslanguage": "Lingua",
+
   // "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
   "search.filters.applied.charts.defaultConfiguration.title": "Output di ricerca",
 
@@ -8215,6 +8517,14 @@
 
   // "search.filters.filter.creativeDatePublished.label": "Search date published",
   "search.filters.filter.creativeDatePublished.label": "Data di ricerca pubblicata",
+
+  // "search.filters.filter.creativeDatePublished.min.label": "Start",
+  // TODO New key - Add a translation
+  "search.filters.filter.creativeDatePublished.min.label": "Start",
+
+  // "search.filters.filter.creativeDatePublished.max.label": "End",
+  // TODO New key - Add a translation
+  "search.filters.filter.creativeDatePublished.max.label": "End",
 
   // "search.filters.filter.creativeWorkEditor.head": "Editor",
   "search.filters.filter.creativeWorkEditor.head": "Editor",
@@ -9022,6 +9332,12 @@
   // "form.other-information.dc.identifier.issn": "ISSN",
   // TODO New key - Add a translation
   "form.other-information.dc.identifier.issn": "ISSN",
+
+  // "form.other-information.dc_publisher": "Publisher",
+  "form.other-information.dc_publisher": "Publisher",
+
+  // "form.other-information.dc_relation_issn": "ISSN",
+  "form.other-information.dc_relation_issn": "ISSN",
 
   // "statistics.table.downloadReports.title.TotalVisits": "Most downloaded",
   "statistics.table.downloadReports.title.TotalVisits": "I più scaricati",
@@ -9844,6 +10160,10 @@
   // "submission.sections.describe.relationship-lookup.search-tab.tab-title.JournalIssue": "Local Journal Issues ({{ count }})",
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.JournalIssue": "Local Journal Issues ({{ count }})",
 
+  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.isJournalVolumeOfIssue": "Local Journal Volumes ({{ count }})",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.isJournalVolumeOfIssue": "Local Journal Volumes ({{ count }})",
+
   // "submission.sections.describe.relationship-lookup.search-tab.tab-title.isJournalVolumeOfPublication": "Local Journal Volumes ({{ count }})",
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.isJournalVolumeOfPublication": "Local Journal Volumes ({{ count }})",
 
@@ -9916,6 +10236,10 @@
   // "submission.sections.describe.relationship-lookup.title.JournalIssue": "Journal Issues",
   "submission.sections.describe.relationship-lookup.title.JournalIssue": "Fascicolo Periodico",
 
+  // "submission.sections.describe.relationship-lookup.title.isJournalVolumeOfIssue": "Journal Volumes",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.title.isJournalVolumeOfIssue": "Journal Volumes",
+
   // "submission.sections.describe.relationship-lookup.title.isJournalVolumeOfPublication": "Journal Volumes",
   "submission.sections.describe.relationship-lookup.title.isJournalVolumeOfPublication": "Volume Periodico",
 
@@ -9975,6 +10299,10 @@
 
   // "submission.sections.describe.relationship-lookup.selection-tab.title.isJournalOfPublication": "Selected Journals",
   "submission.sections.describe.relationship-lookup.selection-tab.title.isJournalOfPublication": "Riviste selezionate",
+
+  // "submission.sections.describe.relationship-lookup.selection-tab.title.isJournalVolumeOfIssue": "Selected Journal Volume",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.selection-tab.title.isJournalVolumeOfIssue": "Selected Journal Volume",
 
   // "submission.sections.describe.relationship-lookup.selection-tab.title.isJournalVolumeOfPublication": "Selected Journal Volume",
   "submission.sections.describe.relationship-lookup.selection-tab.title.isJournalVolumeOfPublication": "Volume del Periodico selezionato",
@@ -10142,6 +10470,9 @@
 
   // "submission.sections.general.sections_not_valid": "There are incomplete sections.",
   "submission.sections.general.sections_not_valid": "Ci sono sezioni incomplete.",
+
+  // "submission.sections.general.legend": "<h3><b>Mandatory Fields</b></h3><p>Fields marked with an asterisk (*) must be completed before the submission can be finalized.</p>",
+  "submission.sections.general.legend": "<h3><b>Campi Obbligatori</b></h3><p>I campi contrassegnati con un asterisco (*) devono essere compilati prima che la submission possa essere finalizzata.</p>",
 
   // "submission.sections.identifiers.info": "The following identifiers will be created for your item:",
   "submission.sections.identifiers.info": "Per questo item saranno generati i seguenti identificativi:",
@@ -10661,6 +10992,7 @@
   // "submission.workflow.tasks.pool.show-detail": "Show detail",
   "submission.workflow.tasks.pool.show-detail": "Mostra dettagli",
 
+
   // "submission.workspace.generic.view": "View",
   "submission.workspace.generic.view": "Elenco",
 
@@ -10711,6 +11043,10 @@
 
   // "subscriptions.tooltip": "Subscribe",
   "subscriptions.tooltip": "Sottoscrivi",
+
+  // "subscriptions.unsubscribe": "Unsubscribe",
+  // TODO New key - Add a translation
+  "subscriptions.unsubscribe": "Unsubscribe",
 
   // "subscriptions.modal.title": "Subscriptions",
   "subscriptions.modal.title": "Sottoscrizioni",
@@ -11580,6 +11916,14 @@
 
   // "person.orcid.registry.auth": "ORCID Authorizations",
   "person.orcid.registry.auth": "Autorizzazioni ORCID",
+
+  // "person.orcid-tooltip.authenticated": "{{orcid}}",
+  // TODO New key - Add a translation
+  "person.orcid-tooltip.authenticated": "{{orcid}}",
+
+  // "person.orcid-tooltip.not-authenticated": "{{orcid}} (unconfirmed)",
+  // TODO New key - Add a translation
+  "person.orcid-tooltip.not-authenticated": "{{orcid}} (unconfirmed)",
 
   // "home.recent-submissions.head": "Recent Submissions",
   "home.recent-submissions.head": "Immissioni recenti",
@@ -12789,6 +13133,139 @@
 
 
 
+
+
+  // "access-control-no-access-conditions-warning-message": "Currently, no access conditions are specified below. If executed, this will replace the current access conditions with the default access conditions inherited from the owning collection.",
+  // TODO New key - Add a translation
+  "access-control-no-access-conditions-warning-message": "Currently, no access conditions are specified below. If executed, this will replace the current access conditions with the default access conditions inherited from the owning collection.",
+
+  // "access-control-replace-all": "Replace access conditions",
+  // TODO New key - Add a translation
+  "access-control-replace-all": "Replace access conditions",
+
+  // "access-control-add-to-existing": "Add to existing ones",
+  // TODO New key - Add a translation
+  "access-control-add-to-existing": "Add to existing ones",
+
+  // "access-control-limit-to-specific": "Limit the changes to specific bitstreams",
+  // TODO New key - Add a translation
+  "access-control-limit-to-specific": "Limit the changes to specific bitstreams",
+
+  // "access-control-process-all-bitstreams": "Update all the bitstreams in the item",
+  // TODO New key - Add a translation
+  "access-control-process-all-bitstreams": "Update all the bitstreams in the item",
+
+  // "access-control-bitstreams-selected": "bitstreams selected",
+  // TODO New key - Add a translation
+  "access-control-bitstreams-selected": "bitstreams selected",
+
+  // "access-control-bitstreams-select": "Select bitstreams",
+  // TODO New key - Add a translation
+  "access-control-bitstreams-select": "Select bitstreams",
+
+  // "access-control-cancel": "Cancel",
+  // TODO New key - Add a translation
+  "access-control-cancel": "Cancel",
+
+  // "access-control-execute": "Execute",
+  // TODO New key - Add a translation
+  "access-control-execute": "Execute",
+
+  // "access-control-add-more": "Add more",
+  // TODO New key - Add a translation
+  "access-control-add-more": "Add more",
+
+  // "access-control-remove": "Remove access condition",
+  // TODO New key - Add a translation
+  "access-control-remove": "Remove access condition",
+
+  // "access-control-select-bitstreams-modal.title": "Select bitstreams",
+  // TODO New key - Add a translation
+  "access-control-select-bitstreams-modal.title": "Select bitstreams",
+
+  // "access-control-select-bitstreams-modal.no-items": "No items to show.",
+  // TODO New key - Add a translation
+  "access-control-select-bitstreams-modal.no-items": "No items to show.",
+
+  // "access-control-select-bitstreams-modal.close": "Close",
+  // TODO New key - Add a translation
+  "access-control-select-bitstreams-modal.close": "Close",
+
+  // "access-control-option-label": "Access condition type",
+  // TODO New key - Add a translation
+  "access-control-option-label": "Access condition type",
+
+  // "access-control-option-note": "Choose an access condition to apply to selected objects.",
+  // TODO New key - Add a translation
+  "access-control-option-note": "Choose an access condition to apply to selected objects.",
+
+  // "access-control-option-start-date": "Grant access from",
+  // TODO New key - Add a translation
+  "access-control-option-start-date": "Grant access from",
+
+  // "access-control-option-start-date-note": "Select the date from which the related access condition is applied",
+  // TODO New key - Add a translation
+  "access-control-option-start-date-note": "Select the date from which the related access condition is applied",
+
+  // "access-control-option-end-date": "Grant access until",
+  // TODO New key - Add a translation
+  "access-control-option-end-date": "Grant access until",
+
+  // "access-control-option-end-date-note": "Select the date until which the related access condition is applied",
+  // TODO New key - Add a translation
+  "access-control-option-end-date-note": "Select the date until which the related access condition is applied",
+
+  // "vocabulary-treeview.search.form.add": "Add",
+  // TODO New key - Add a translation
+  "vocabulary-treeview.search.form.add": "Add",
+
+  // "process.overview.unknown.user": "Unknown",
+  // TODO New key - Add a translation
+  "process.overview.unknown.user": "Unknown",
+
+  // "browse.search-form.placeholder": "Search the repository",
+  // TODO New key - Add a translation
+  "browse.search-form.placeholder": "Search the repository",
+
+  // "file-download-link.download": "Download ",
+  // TODO New key - Add a translation
+  "file-download-link.download": "Download ",
+
+  // "register-page.registration.aria.label": "Enter your e-mail address",
+  // TODO New key - Add a translation
+  "register-page.registration.aria.label": "Enter your e-mail address",
+
+  // "forgot-email.form.aria.label": "Enter your e-mail address",
+  // TODO New key - Add a translation
+  "forgot-email.form.aria.label": "Enter your e-mail address",
+
+  // "search-facet-option.update.announcement": "The page will be reloaded. Filter {{ filter }} is selected.",
+  // TODO New key - Add a translation
+  "search-facet-option.update.announcement": "The page will be reloaded. Filter {{ filter }} is selected.",
+
+  // "live-region.ordering.instructions": "Press spacebar to reorder {{ itemName }}.",
+  // TODO New key - Add a translation
+  "live-region.ordering.instructions": "Press spacebar to reorder {{ itemName }}.",
+
+  // "live-region.ordering.status": "{{ itemName }}, grabbed. Current position in list: {{ index }} of  {{ length }}. Press up and down arrow keys to change position, SpaceBar to drop, Escape to cancel.",
+  // TODO New key - Add a translation
+  "live-region.ordering.status": "{{ itemName }}, grabbed. Current position in list: {{ index }} of  {{ length }}. Press up and down arrow keys to change position, SpaceBar to drop, Escape to cancel.",
+
+  // "live-region.ordering.moved": "{{ itemName }}, moved to position {{ index }} of {{ length }}. Press up and down arrow keys to change position, SpaceBar to drop, Escape to cancel.",
+  // TODO New key - Add a translation
+  "live-region.ordering.moved": "{{ itemName }}, moved to position {{ index }} of {{ length }}. Press up and down arrow keys to change position, SpaceBar to drop, Escape to cancel.",
+
+  // "live-region.ordering.dropped": "{{ itemName }}, dropped at position {{ index }} of {{ length }}.",
+  // TODO New key - Add a translation
+  "live-region.ordering.dropped": "{{ itemName }}, dropped at position {{ index }} of {{ length }}.",
+
+  // "dynamic-form-array.sortable-list.label": "Sortable list",
+  // TODO New key - Add a translation
+  "dynamic-form-array.sortable-list.label": "Sortable list",
+
+  // "metadata-export-search.submit.error.limit-exceeded": "Only the first {{limit}} items will be exported",
+  // TODO New key - Add a translation
+  "metadata-export-search.submit.error.limit-exceeded": "Only the first {{limit}} items will be exported",
 
 
 }

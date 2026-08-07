@@ -49,7 +49,7 @@ import { RemoteData } from '../../../core/data/remote-data';
   ],
   templateUrl: './process-notification.component.html',
   styleUrls: ['./process-notification.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class ProcessNotificationComponent implements OnInit, OnDestroy {

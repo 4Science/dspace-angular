@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, NO_ERRORS_SCHEMA, SimpleChange } from '@angular/core';
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { of as observableOf } from 'rxjs';
 import { cold, getTestScheduler } from 'jasmine-marbles';
@@ -31,6 +32,8 @@ import { SubmissionVisibilityValue } from '../../core/config/models/config-submi
 import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
 import { MetadataSecurityConfigurationService } from '../../core/submission/metadatasecurityconfig-data.service';
 import { SubmissionScopeType } from '../../core/submission/submission-scope-type';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateLoaderMock } from '../../shared/mocks/translate-loader.mock';
 
 describe('SubmissionFormComponent Component', () => {
 
@@ -57,7 +60,14 @@ describe('SubmissionFormComponent Component', () => {
       findById: createSuccessfulRemoteDataObject$(submissionObject.metadataSecurityConfiguration),
     });
     TestBed.configureTestingModule({
-      imports: [],
+      imports: [
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock
+          }
+        }),
+      ],
       declarations: [
         SubmissionFormComponent,
         TestComponent
@@ -257,6 +267,45 @@ describe('SubmissionFormComponent Component', () => {
       expect(comp.collectionId).toEqual('45f2f3f1-ba1f-4f36-908a-3f1ea9a557eb');
       expect(submissionServiceStub.resetSubmissionObject).not.toHaveBeenCalled();
       done();
+    });
+
+    describe('submission legend', () => {
+      beforeEach(() => {
+        comp.collectionId = collectionId;
+        comp.submissionId = submissionId;
+        comp.submissionDefinition = submissionDefinition;
+        comp.selfUrl = selfUrl;
+        comp.sections = sectionsData;
+        comp.item = new Item();
+        comp.entityType = 'publication';
+        submissionServiceStub.getSubmissionObject.and.returnValue(observableOf(submissionState));
+        submissionServiceStub.getSubmissionSections.and.returnValue(observableOf(sectionsList));
+
+        spyOn(comp, 'isLoading').and.returnValue(observableOf(false));
+
+        comp.uploadEnabled$ = observableOf(false);
+        comp.loading = observableOf(false);
+      });
+
+      it('should display submission legend when shouldShowLegend is true', () => {
+        spyOnProperty(comp, 'shouldShowLegend', 'get').and.returnValue(true);
+
+        fixture.detectChanges();
+
+        const legendElement = fixture.debugElement.query(By.css('ds-submission-legend'));
+        expect(legendElement).toBeTruthy();
+        expect(legendElement.nativeElement.classList.contains('submission-form-header-legend')).toBe(true);
+      });
+
+      it('should not display submission legend when shouldShowLegend is false', () => {
+        spyOnProperty(comp, 'shouldShowLegend', 'get').and.returnValue(false);
+
+        fixture.detectChanges();
+
+        const legendElement = fixture.debugElement.query(By.css('ds-submission-legend'));
+        expect(legendElement).toBeNull();
+      });
+
     });
 
   });

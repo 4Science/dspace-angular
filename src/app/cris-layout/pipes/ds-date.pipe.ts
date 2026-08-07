@@ -4,13 +4,12 @@ import { isValidDate, localeDate } from '../../shared/date.util';
 import { LocaleService } from '../../core/locale/locale.service';
 
 @Pipe({
-  name: 'dsDate'
+  name: 'dsDate',
+  pure: false,
 })
 export class DsDatePipe implements PipeTransform, OnDestroy {
 
   private asyncPipe: AsyncPipe;
-
-  months: Map<number, string>;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -20,7 +19,7 @@ export class DsDatePipe implements PipeTransform, OnDestroy {
   }
 
   transform(value: string, ...params: any[]): string {
-    const locale = this.localeService.getCurrentLanguageCode();
+    const locale = this.asyncPipe.transform(this.localeService.getCurrentLanguageCode());
     return isValidDate(value) ? localeDate(value, locale) : value;
   }
 
