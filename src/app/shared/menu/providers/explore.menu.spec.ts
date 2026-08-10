@@ -11,7 +11,7 @@ import { TestBed } from '@angular/core/testing';
 import { APP_CONFIG } from '../../../../config/app-config.interface';
 import { environment } from '../../../../environments/environment';
 import { SectionDataService } from '../../../core/layout/section-data.service';
-import { createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
+import { createFailedRemoteDataObject$, createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
 import { createPaginatedList } from '../../testing/utils.test';
 import { ExploreMenuProvider } from './explore.menu';
 
@@ -35,5 +35,13 @@ describe('ExploreMenuProvider', () => {
 
   it('should be created', () => {
     expect(provider).toBeTruthy();
+  });
+
+  it('should return empty sections when the API returns an error', (done) => {
+    sectionDataServiceStub.findVisibleSections = () => createFailedRemoteDataObject$('Forbidden', 403);
+    provider.getSections().subscribe((sections) => {
+      expect(sections).toEqual([]);
+      done();
+    });
   });
 });
