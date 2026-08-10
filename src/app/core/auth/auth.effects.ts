@@ -338,7 +338,7 @@ export class AuthEffects {
       map(({ payload }: RefreshEpersonAndTokenRedirectAction) => payload),
       withLatestFrom(this.store.pipe(select(getAuthenticatedUser), filter(isNotNull))),
       switchMap(([{ token, redirectUrl }, { id }]) =>
-        this.authService.retrieveAuthenticatedUserById(id).pipe(
+        this.authService.retrieveAuthenticatedUserById(id, false).pipe(
           take(1),
           map(user => new RefreshEpersonAndTokenRedirectSuccessAction(user, token, redirectUrl)),
           catchError(() => of(new RefreshEpersonAndTokenRedirectErrorAction())),
