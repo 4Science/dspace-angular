@@ -16,13 +16,6 @@ import { ActivatedRouteStub } from 'src/app/shared/testing/active-router.stub';
 import { ThemeService } from 'src/app/shared/theme-support/theme.service';
 
 import { APP_CONFIG } from '../../../../../../config/app-config.interface';
-import { of as observableOf } from 'rxjs';
-import { ItemSearchResult } from '../../../../../shared/object-collection/shared/item-search-result.model';
-import { Item } from '../../../../../core/shared/item.model';
-import { JournalVolumeSearchResultListElementComponent } from './journal-volume-search-result-list-element.component';
-import { TruncatePipe } from '../../../../../shared/utils/truncate.pipe';
-import { EscapeHtmlPipe } from '../../../../../shared/utils/escape-html.pipe';
-import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
 import { DSONameService } from '../../../../../core/breadcrumbs/dso-name.service';
 import { Item } from '../../../../../core/shared/item.model';
 import { DSONameServiceMock } from '../../../../../shared/mocks/dso-name.service.mock';

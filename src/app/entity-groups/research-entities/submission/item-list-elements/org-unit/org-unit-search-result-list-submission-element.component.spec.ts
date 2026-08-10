@@ -43,7 +43,6 @@ import { SelectableListService } from '../../../../../shared/object-list/selecta
 import { createSuccessfulRemoteDataObject$ } from '../../../../../shared/remote-data.utils';
 import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
 import { TruncatePipe } from '../../../../../shared/utils/truncate.pipe';
-import { EscapeHtmlPipe } from '../../../../../shared/utils/escape-html.pipe';
 import { OrgUnitSearchResultListSubmissionElementComponent } from './org-unit-search-result-list-submission-element.component';
 
 let personListElementComponent: OrgUnitSearchResultListSubmissionElementComponent;

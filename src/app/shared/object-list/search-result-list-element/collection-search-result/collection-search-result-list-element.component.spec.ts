@@ -13,11 +13,6 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 import { APP_CONFIG } from '../../../../../config/app-config.interface';
-import { TruncatePipe } from '../../../utils/truncate.pipe';
-import { EscapeHtmlPipe } from '../../../utils/escape-html.pipe';
-import { Collection } from '../../../../core/shared/collection.model';
-import { TruncatableService } from '../../../truncatable/truncatable.service';
-import { CollectionSearchResult } from '../../../object-collection/shared/collection-search-result.model';
 import { DSONameService } from '../../../../core/breadcrumbs/dso-name.service';
 import { Collection } from '../../../../core/shared/collection.model';
 import { DSONameServiceMock } from '../../../mocks/dso-name.service.mock';

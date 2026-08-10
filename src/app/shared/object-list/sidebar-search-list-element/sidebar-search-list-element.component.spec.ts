@@ -4,9 +4,6 @@ import {
   TestBed,
   waitForAsync,
 } from '@angular/core/testing';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { VarDirective } from '../../utils/var.directive';
-import { EscapeHtmlPipe } from '../../utils/escape-html.pipe';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 
