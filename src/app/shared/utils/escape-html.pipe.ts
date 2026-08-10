@@ -9,7 +9,6 @@ import {
 
 @Pipe({
   name: 'dsEscapeHtml',
-  standalone: true,
 })
 export class EscapeHtmlPipe implements PipeTransform {
   /**
@@ -18,8 +17,7 @@ export class EscapeHtmlPipe implements PipeTransform {
    */
   private readonly allowedTags: string[] = ['em', 'strong'];
 
-  constructor(private sanitizer: DomSanitizer) {
-  }
+  constructor(private sanitizer: DomSanitizer) {}
 
   /**
    * Escape HTML special characters and convert newlines to <br>
