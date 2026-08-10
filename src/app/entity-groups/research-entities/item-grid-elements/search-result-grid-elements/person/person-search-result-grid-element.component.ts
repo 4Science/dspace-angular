@@ -12,13 +12,6 @@ import { TruncatableComponent } from '../../../../../shared/truncatable/truncata
 import { TruncatablePartComponent } from '../../../../../shared/truncatable/truncatable-part/truncatable-part.component';
 import { EscapeHtmlPipe } from '../../../../../shared/utils/escape-html.pipe';
 import { ThemedThumbnailComponent } from '../../../../../thumbnail/themed-thumbnail.component';
-import { ThemedBadgesComponent } from '../../../../../shared/object-collection/shared/badges/themed-badges.component';
-import { listableObjectComponent } from '../../../../../shared/object-collection/shared/listable-object/listable-object.decorator';
-import { ItemSearchResultGridElementComponent } from '../../../../../shared/object-grid/search-result-grid-element/item-search-result/item/item-search-result-grid-element.component';
-import { TruncatableComponent } from '../../../../../shared/truncatable/truncatable.component';
-import { TruncatablePartComponent } from '../../../../../shared/truncatable/truncatable-part/truncatable-part.component';
-import { EscapeHtmlPipe } from '../../../../../shared/utils/escape-html.pipe';
-import { ThemedThumbnailComponent } from '../../../../../thumbnail/themed-thumbnail.component';
 
 @listableObjectComponent('PersonSearchResult', ViewMode.GridElement)
 @Component({

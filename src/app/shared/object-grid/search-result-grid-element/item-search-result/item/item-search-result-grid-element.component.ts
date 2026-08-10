@@ -44,11 +44,6 @@ import { TruncatableService } from '../../../../truncatable/truncatable.service'
 import { TruncatablePartComponent } from '../../../../truncatable/truncatable-part/truncatable-part.component';
 import { EscapeHtmlPipe } from '../../../../utils/escape-html.pipe';
 import { SearchResultGridElementComponent } from '../../search-result-grid-element.component';
-import { TruncatableComponent } from '../../../../truncatable/truncatable.component';
-import { TruncatableService } from '../../../../truncatable/truncatable.service';
-import { TruncatablePartComponent } from '../../../../truncatable/truncatable-part/truncatable-part.component';
-import { EscapeHtmlPipe } from '../../../../utils/escape-html.pipe';
-import { SearchResultGridElementComponent } from '../../search-result-grid-element.component';
 
 @listableObjectComponent('PublicationSearchResult', ViewMode.GridElement)
 @listableObjectComponent(ItemSearchResult, ViewMode.GridElement)
