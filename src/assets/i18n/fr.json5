@@ -2073,6 +2073,243 @@
   // TODO Source message changed - Revise the translation
   "community.sub-community-list.head": "Sous-communautés au sein de cette communauté",
 
+  // "context-menu.actions": "Actions",
+  // TODO New key - Add a translation
+  "context-menu.actions": "Actions",
+
+  // "context-menu.actions.audit-item.btn": "Audit",
+  // TODO New key - Add a translation
+  "context-menu.actions.audit-item.btn": "Audit",
+
+  // "context-menu.actions.bulk-import.btn": "Import items into collection",
+  // TODO New key - Add a translation
+  "context-menu.actions.bulk-import.btn": "Import items into collection",
+
+  // "context-menu.actions.claim.btn": "Claim this profile",
+  // TODO New key - Add a translation
+  "context-menu.actions.claim.btn": "Claim this profile",
+
+  // "context-menu.actions.export-item.btn": "Export",
+  // TODO New key - Add a translation
+  "context-menu.actions.export-item.btn": "Export",
+
+  // "context-menu.actions.label": "Options",
+  // TODO New key - Add a translation
+  "context-menu.actions.label": "Options",
+
+  // "context-menu.actions.show-all-metadata": "Show all metadata (technical view)",
+  // TODO New key - Add a translation
+  "context-menu.actions.show-all-metadata": "Show all metadata (technical view)",
+
+  // "context-menu.actions.edit-item.btn.FULL": "Edit all the details",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item.btn.FULL": "Edit all the details",
+
+  // "context-menu.actions.edit-item.btn.OWNER": "Edit Profile",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item.btn.OWNER": "Edit Profile",
+
+  // "context-menu.actions.edit-item.btn.DIRECTOR": "Edit",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item.btn.DIRECTOR": "Edit",
+
+  // "context-menu.actions.edit-item.btn.INVESTIGATOR": "Edit",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item.btn.INVESTIGATOR": "Edit",
+
+  // "context-menu.actions.request-correction.btn": "Request a correction",
+  // TODO New key - Add a translation
+  "context-menu.actions.request-correction.btn": "Request a correction",
+
+  // "context-menu.actions.request-correction.confirm.cancel": "Cancel",
+  // TODO New key - Add a translation
+  "context-menu.actions.request-correction.confirm.cancel": "Cancel",
+
+  // "context-menu.actions.request-correction.confirm.submit": "Yes, I'm sure",
+  // TODO New key - Add a translation
+  "context-menu.actions.request-correction.confirm.submit": "Yes, I'm sure",
+
+  // "context-menu.actions.request-correction.error.403": "You are not authorized, impossible to proceed with the operation.",
+  // TODO New key - Add a translation
+  "context-menu.actions.request-correction.error.403": "You are not authorized, impossible to proceed with the operation.",
+
+  // "context-menu.actions.request-correction.error.422": "A correction request for this item is already in progress. Please contact the support if you need to perform urgent changes to this item.",
+  // TODO New key - Add a translation
+  "context-menu.actions.request-correction.error.422": "A correction request for this item is already in progress. Please contact the support if you need to perform urgent changes to this item.",
+
+  // "context-menu.actions.request-correction.error.generic": "There was an issue when requesting a correction for the item, please try again later.",
+  // TODO New key - Add a translation
+  "context-menu.actions.request-correction.error.generic": "There was an issue when requesting a correction for the item, please try again later.",
+
+  // "context-menu.actions.request-correction.info": "Are you sure you want to proceed with this operation?",
+  // TODO New key - Add a translation
+  "context-menu.actions.request-correction.info": "Are you sure you want to proceed with this operation?",
+
+  // "context-menu.actions.request-correction.title": "Request correction",
+  // TODO New key - Add a translation
+  "context-menu.actions.request-correction.title": "Request correction",
+
+  // "context-menu.actions.dso-page-edit.COMMUNITY.btn": "Administer",
+  // TODO New key - Add a translation
+  "context-menu.actions.dso-page-edit.COMMUNITY.btn": "Administer",
+
+  // "context-menu.actions.dso-page-edit.COLLECTION.btn": "Administer",
+  // TODO New key - Add a translation
+  "context-menu.actions.dso-page-edit.COLLECTION.btn": "Administer",
+
+  // "context-menu.actions.dso-page-edit.ITEM.btn": "Administer",
+  // TODO New key - Add a translation
+  "context-menu.actions.dso-page-edit.ITEM.btn": "Administer",
+
+  // "context-menu.actions.edit-item-relationships.btn.fundings": "Manage Fundings",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item-relationships.btn.fundings": "Manage Fundings",
+
+  // "context-menu.actions.edit-item-relationships.btn.researchoutputs": "Manage Research Outputs",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item-relationships.btn.researchoutputs": "Manage Research Outputs",
+
+  // "context-menu.actions.edit-item-relationships.btn.organizations": "Manage SubOrganizations",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item-relationships.btn.organizations": "Manage SubOrganizations",
+
+  // "context-menu.actions.edit-item-relationships.btn.rppublications": "Manage Researchers Publications",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item-relationships.btn.rppublications": "Manage Researchers Publications",
+
+  // "context-menu.actions.edit-item-relationships.btn.publications": "Manage Publications",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item-relationships.btn.publications": "Manage Publications",
+
+  // "context-menu.actions.edit-item-relationships.btn.rpprojects": "Manage Researchers Projects",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item-relationships.btn.rpprojects": "Manage Researchers Projects",
+
+  // "context-menu.actions.edit-item-relationships.btn.people": "Manage People",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item-relationships.btn.people": "Manage People",
+
+  // "context-menu.actions.edit-item-relationships.btn.projects": "Manage Projects",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item-relationships.btn.projects": "Manage Projects",
+
+  // "context-menu.actions.orcid-view": "Open ORCID setting page",
+  // TODO New key - Add a translation
+  "context-menu.actions.orcid-view": "Open ORCID setting page",
+
+  // "context-menu.actions.statistics.btn": "Statistics",
+  // TODO New key - Add a translation
+  "context-menu.actions.statistics.btn": "Statistics",
+
+  // "context-menu.actions.subscription.title": "Subscription",
+  // TODO New key - Add a translation
+  "context-menu.actions.subscription.title": "Subscription",
+
+  // "context-menu.actions.subscription.type": "Subscription Type",
+  // TODO New key - Add a translation
+  "context-menu.actions.subscription.type": "Subscription Type",
+
+  // "context-menu.actions.subscription.daily": "Daily",
+  // TODO New key - Add a translation
+  "context-menu.actions.subscription.daily": "Daily",
+
+  // "context-menu.actions.subscription.weekly": "Weekly",
+  // TODO New key - Add a translation
+  "context-menu.actions.subscription.weekly": "Weekly",
+
+  // "context-menu.actions.subscription.monthly": "Monthly",
+  // TODO New key - Add a translation
+  "context-menu.actions.subscription.monthly": "Monthly",
+
+  // "context-menu.actions.subscription.content": "Content",
+  // TODO New key - Add a translation
+  "context-menu.actions.subscription.content": "Content",
+
+  // "context-menu.actions.subscription.statistics": "Statistics",
+  // TODO New key - Add a translation
+  "context-menu.actions.subscription.statistics": "Statistics",
+
+  // "context-menu.actions.subscription.content+statistics": "Content & Statistics",
+  // TODO New key - Add a translation
+  "context-menu.actions.subscription.content+statistics": "Content & Statistics",
+
+  // "context-menu.actions.subscription.confirm.submit": "Save",
+  // TODO New key - Add a translation
+  "context-menu.actions.subscription.confirm.submit": "Save",
+
+  // "context-menu.actions.subscription.delete": "Delete",
+  // TODO New key - Add a translation
+  "context-menu.actions.subscription.delete": "Delete",
+
+  // "context-menu.actions.subscription.frequency.required": "Frequency is required.",
+  // TODO New key - Add a translation
+  "context-menu.actions.subscription.frequency.required": "Frequency is required.",
+
+  // "context-menu.actions.subscribe.btn": "Subscribe",
+  // TODO New key - Add a translation
+  "context-menu.actions.subscribe.btn": "Subscribe",
+
+  // "context-menu.actions.edit-subscriptions.btn": "Edit subscriptions",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-subscriptions.btn": "Edit subscriptions",
+
+  // "context-menu.actions.subscription.notification.here-text": "Subscription Summary",
+  // TODO New key - Add a translation
+  "context-menu.actions.subscription.notification.here-text": "Subscription Summary",
+
+  // "context-menu.actions.subscription.notification.content": "Subscription Updated Successfully, click {{here}} to see subscrition summary.",
+  // TODO New key - Add a translation
+  "context-menu.actions.subscription.notification.content": "Subscription Updated Successfully, click {{here}} to see subscrition summary.",
+
+  // "RELATION.Person.researchoutputs.search.results.head": "Research Outputs",
+  // TODO New key - Add a translation
+  "RELATION.Person.researchoutputs.search.results.head": "Research Outputs",
+
+  // "RELATION.Person.projects.search.results.head": "Projects",
+  // TODO New key - Add a translation
+  "RELATION.Person.projects.search.results.head": "Projects",
+
+  // "RELATION.OrgUnit.organizations.search.results.head": "Organizations",
+  // TODO New key - Add a translation
+  "RELATION.OrgUnit.organizations.search.results.head": "Organizations",
+
+  // "RELATION.OrgUnit.rppublications.search.results.head": "Researchers Publications",
+  // TODO New key - Add a translation
+  "RELATION.OrgUnit.rppublications.search.results.head": "Researchers Publications",
+
+  // "RELATION.OrgUnit.publications.search.results.head": "Publications",
+  // TODO New key - Add a translation
+  "RELATION.OrgUnit.publications.search.results.head": "Publications",
+
+  // "RELATION.OrgUnit.rpprojects.search.results.head": "Researchers Projects",
+  // TODO New key - Add a translation
+  "RELATION.OrgUnit.rpprojects.search.results.head": "Researchers Projects",
+
+  // "RELATION.OrgUnit.projects.search.results.head": "Projects",
+  // TODO New key - Add a translation
+  "RELATION.OrgUnit.projects.search.results.head": "Projects",
+
+  // "RELATION.Project.researchoutputs.search.results.head": "Publications",
+  // TODO New key - Add a translation
+  "RELATION.Project.researchoutputs.search.results.head": "Publications",
+
+  // "RELATION.OrgUnit.people.search.results.head": "People",
+  // TODO New key - Add a translation
+  "RELATION.OrgUnit.people.search.results.head": "People",
+
+  // "datafile.listelement.badge": "Data File",
+  // TODO New key - Add a translation
+  "datafile.listelement.badge": "Data File",
+
+  // "datapackage.listelement.badge": "Data Package",
+  // TODO New key - Add a translation
+  "datapackage.listelement.badge": "Data Package",
+
+
+  // "checksum-tooltip.info.MD5": "The <b>MD5 message-digest algorithm</b> can be used to verify the integrity of the file that you have uploaded. You can calculate its value locally via tools that are generally available in each operative system like <b>md5sum</b>",
+  // TODO New key - Add a translation
+  "checksum-tooltip.info.MD5": "The <b>MD5 message-digest algorithm</b> can be used to verify the integrity of the file that you have uploaded. You can calculate its value locally via tools that are generally available in each operative system like <b>md5sum</b>",
+
   // "cookies.consent.accept-all": "Accept all",
   "cookies.consent.accept-all": "Accepter tout",
 
