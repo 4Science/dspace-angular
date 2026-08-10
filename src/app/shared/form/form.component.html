@@ -43,7 +43,6 @@
         }
 
         <!--Array with non repeatable items - Only discard button-->
-        <!--Also shown for a single, non-mandatory instance so its value can be cleared without adding a second one-->
         @if (context.notRepeatable && context.showButtons && !isItemReadOnly(context, index) && (group.context.groups.length > 1 || (!context.required && !isArrayGroupEmpty(group)))) {
           <div
             class="col-2 d-flex flex-column justify-content-sm-start align-items-end"
