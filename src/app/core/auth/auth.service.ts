@@ -239,8 +239,8 @@ export class AuthService {
    * Returns the authenticated user by id
    * @returns {User}
    */
-  public retrieveAuthenticatedUserById(userId: string, useCachedVersionIfAvailable = true): Observable<EPerson> {
-    return this.epersonService.findById(userId, useCachedVersionIfAvailable).pipe(
+  public retrieveAuthenticatedUserById(userId: string): Observable<EPerson> {
+    return this.epersonService.findById(userId).pipe(
       getAllSucceededRemoteDataPayload(),
     );
   }
