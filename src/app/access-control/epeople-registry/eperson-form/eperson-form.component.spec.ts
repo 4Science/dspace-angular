@@ -340,7 +340,7 @@ describe('EPersonFormComponent', () => {
       });
       it('email should not be valid because the email pattern', () => {
         expect(component.formGroup.controls.email.valid).toBeFalse();
-        expect(component.formGroup.controls.email.errors.email).toBeTruthy();
+        expect(component.formGroup.controls.email.errors.pattern).toBeTruthy();
       });
     });
 
