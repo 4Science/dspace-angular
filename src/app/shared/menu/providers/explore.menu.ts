@@ -14,7 +14,7 @@ import { PaginatedList } from '../../../core/data/paginated-list.model';
 import { RemoteData } from '../../../core/data/remote-data';
 import { Section } from '../../../core/layout/models/section.model';
 import { SectionDataService } from '../../../core/layout/section-data.service';
-import { getFirstSucceededRemoteData } from '../../../core/shared/operators';
+import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { MenuItemType } from '../menu-item-type.model';
 import {
   AbstractMenuProvider,
@@ -37,8 +37,11 @@ export class ExploreMenuProvider extends AbstractMenuProvider {
    */
   getSections(): Observable<PartialMenuSection[]> {
     return this.sectionDataService.findVisibleSections().pipe(
-      getFirstSucceededRemoteData(),
+      getFirstCompletedRemoteData(),
       map((rd: RemoteData<PaginatedList<Section>>) => {
+        if (!rd.hasSucceeded) {
+          return [];
+        }
         return [
           ...rd.payload.page.map((browseDef) => {
             return {
