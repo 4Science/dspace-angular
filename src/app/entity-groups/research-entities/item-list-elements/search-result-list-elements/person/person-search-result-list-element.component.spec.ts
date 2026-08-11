@@ -35,6 +35,7 @@ import { ThemeService } from '../../../../../shared/theme-support/theme.service'
 import { TruncatableComponent } from '../../../../../shared/truncatable/truncatable.component';
 import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
 import { TruncatablePartComponent } from '../../../../../shared/truncatable/truncatable-part/truncatable-part.component';
+import { EscapeHtmlPipe } from '../../../../../shared/utils/escape-html.pipe';
 import { TruncatePipe } from '../../../../../shared/utils/truncate.pipe';
 import { ThemedThumbnailComponent } from '../../../../../thumbnail/themed-thumbnail.component';
 import { PersonSearchResultListElementComponent } from './person-search-result-list-element.component';
@@ -180,7 +181,7 @@ describe('PersonSearchResultListElementComponent', () => {
           provide: TranslateLoader,
           useClass: TranslateLoaderMock,
         },
-      }), TruncatePipe],
+      }), TruncatePipe, EscapeHtmlPipe],
       providers: [
         { provide: TruncatableService, useValue: mockTruncatableService },
         { provide: DSONameService, useClass: DSONameServiceMock },

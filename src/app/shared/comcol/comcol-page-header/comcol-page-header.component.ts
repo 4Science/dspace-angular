@@ -4,6 +4,7 @@ import {
   Input,
 } from '@angular/core';
 
+
 @Component({
   selector: 'ds-comcol-page-header',
   styleUrls: ['./comcol-page-header.component.scss'],

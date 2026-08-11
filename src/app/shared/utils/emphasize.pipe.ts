@@ -7,7 +7,7 @@ import {
   name: 'dsEmphasize',
 })
 /**
- * Pipe for emphasizing a part of a string by surrounding it with <em> tags
+ * Pipe for emphasizing a part of a string by surrounding it with <strong> tags
  */
 export class EmphasizePipe implements PipeTransform {
   /**
@@ -47,7 +47,7 @@ export class EmphasizePipe implements PipeTransform {
   transform(haystack, needle): any {
     const escaped = this.escapeRegExp(needle);
     const reg = new RegExp(escaped, 'gi');
-    return haystack.replace(reg, '<em>$&</em>');
+    return haystack.replace(reg, '<strong>$&</strong>');
   }
 
   /**
