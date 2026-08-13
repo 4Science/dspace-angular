@@ -300,7 +300,7 @@ export class EPersonFormComponent implements OnInit, OnDestroy {
       name: 'email',
       validators: {
         required: null,
-        pattern: '^\\s*[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}\\s*$',
+        pattern: '^\\s*[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}\\s*$',
       },
       required: true,
       errorMessages: {
