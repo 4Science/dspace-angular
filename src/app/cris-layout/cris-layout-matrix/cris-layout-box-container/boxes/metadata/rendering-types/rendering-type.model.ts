@@ -12,8 +12,7 @@ import { hasValue } from '../../../../../../shared/empty.util';
 
 
 export interface MetadataBoxFieldRenderOptions {
-  componentRef: GenericConstructor<Component>;
-  structured: boolean;
+  componentRef: GenericConstructor<Component> & { structured: boolean };
 }
 
 /**

@@ -28,6 +28,8 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
 })
 export class LinkAuthorityComponent extends RenderingTypeValueModelComponent implements OnInit {
 
+  static structured = false;
+
   /**
    * The link to render
    */
