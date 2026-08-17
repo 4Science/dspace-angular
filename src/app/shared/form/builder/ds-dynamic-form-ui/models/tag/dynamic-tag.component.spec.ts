@@ -262,6 +262,26 @@ describe('DsDynamicTagComponent test suite', () => {
       });
     });
 
+    describe('and init model value contains values separated by ;', () => {
+      beforeEach(() => {
+        tagFixture = TestBed.createComponent(DsDynamicTagComponent);
+        tagComp = tagFixture.componentInstance; // FormComponent test instance
+        tagComp.group = TAG_TEST_GROUP;
+        tagComp.model = new DynamicTagModel(TAG_TEST_MODEL_CONFIG);
+        tagComp.model.value = ['test001; test002 ;test003', 'test004'];
+        tagFixture.detectChanges();
+      });
+
+      afterEach(() => {
+        tagFixture.destroy();
+        tagComp = null;
+      });
+
+      it('should split the grouped value into separate chips', () => {
+        expect(tagComp.chips.getChipsItems()).toEqual(['test001', 'test002', 'test003', 'test004']);
+      });
+    });
+
   });
 
   describe('when vocabularyOptions are not set', () => {
