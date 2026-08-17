@@ -17,7 +17,7 @@ import {
   HEALTH_PAGE_PATH,
   INFO_MODULE_PATH,
   INTERNAL_SERVER_ERROR,
-  LEGACY_BITSTREAM_MODULE_PATH,
+  LEGACY_BITSTREAM_MODULE_PATH, PAGE_NOT_FOUND_PATH,
   PROFILE_MODULE_PATH,
   REGISTER_PATH,
   REQUEST_COPY_MODULE_PATH,
@@ -45,17 +45,21 @@ import { ThemedPageErrorComponent } from './page-error/themed-page-error.compone
 import { ForgotPasswordCheckGuard } from './core/rest-property/forgot-password-check-guard.guard';
 import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-routing-paths';
 import { RedirectService } from './redirect/redirect.service';
+import { environment } from '../environments/environment';
 import {
   GenericAdministratorGuard
 } from './core/data/feature-authorization/feature-authorization-guard/generic-administrator-guard';
 
 
+import { HomePageResolver } from './home-page/home-page.resolver';
+import { ViewTrackerResolverService } from './statistics/angulartics/dspace/view-tracker-resolver.service';
+import { notAuthenticatedGuard } from './core/auth/not-authenticated.guard';
 
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      { path: INTERNAL_SERVER_ERROR, component: ThemedPageInternalServerErrorComponent },
-      { path: ERROR_PAGE , component: ThemedPageErrorComponent },
+      { path: INTERNAL_SERVER_ERROR, component: ThemedPageInternalServerErrorComponent, data: { title: INTERNAL_SERVER_ERROR } },
+      { path: ERROR_PAGE , component: ThemedPageErrorComponent, data: { title: ERROR_PAGE}  },
       {
         path: '',
         canActivate: [AuthBlockingGuard],
@@ -67,13 +71,24 @@ import {
             path: 'reload/:rnd',
             component: ThemedPageNotFoundComponent,
             pathMatch: 'full',
-            canActivate: [ReloadGuard]
+            canActivate: [ReloadGuard],
+            data: {
+              title: PAGE_NOT_FOUND_PATH
+            }
           },
           {
             path: 'home',
             loadChildren: () => import('./home-page/home-page.module')
               .then((m) => m.HomePageModule),
-            data: { showBreadcrumbs: false},
+            data: {
+              showBreadcrumbs: false,
+              dsoPath: 'site'
+            },
+            resolve: {
+              site: HomePageResolver,
+              tracking: ViewTrackerResolverService,
+            },
+
             canActivate: [EndUserAgreementCurrentUserGuard]
           },
           {
@@ -98,13 +113,14 @@ import {
             path: REGISTER_PATH,
             loadChildren: () => import('./register-page/register-page.module')
               .then((m) => m.RegisterPageModule),
-            canActivate: [SiteRegisterGuard]
+            canActivate: [notAuthenticatedGuard, SiteRegisterGuard]
           },
           {
             path: FORGOT_PASSWORD_PATH,
             loadChildren: () => import('./forgot-password/forgot-password.module')
               .then((m) => m.ForgotPasswordModule),
             canActivate: [
+              notAuthenticatedGuard,
               ForgotPasswordCheckGuard,
               EndUserAgreementCurrentUserGuard
             ]
@@ -175,9 +191,21 @@ import {
             canActivate: [GenericAdministratorGuard, EndUserAgreementCurrentUserGuard]
           },
           {
+            path: 'admin-only-login',
+            loadChildren: () => import('./login-page/login-page.module').then((m) => m.LoginPageModule),
+            data: {
+              isBackDoor: true,
+            },
+            canMatch: [() => environment.auth.isPasswordLoginEnabledForAdminsOnly],
+          },
+          {
             path: 'login',
             loadChildren: () => import('./login-page/login-page.module')
-              .then((m) => m.LoginPageModule)
+              .then((m) => m.LoginPageModule),
+            canActivate: [notAuthenticatedGuard],
+            data: {
+              isBackDoor: false,
+            },
           },
           {
             path: 'external-login/:token',
@@ -197,7 +225,8 @@ import {
           {
             path: 'logout',
             loadChildren: () => import('./logout-page/logout-page.module')
-              .then((m) => m.LogoutPageModule)
+              .then((m) => m.LogoutPageModule),
+            canActivate: [AuthenticatedGuard]
           },
           {
             path: 'submit',
@@ -268,7 +297,10 @@ import {
           },
           {
             path: FORBIDDEN_PATH,
-            component: ThemedForbiddenComponent
+            component: ThemedForbiddenComponent,
+            data: {
+              title: FORBIDDEN_PATH
+            }
           },
           {
             path: STATISTICS_PAGE_PATH,
@@ -307,7 +339,7 @@ import {
             loadChildren: () => import('./invitation/invitation.module')
               .then((m) => m.InvitationModule)
           },
-          { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent, canActivate: [RedirectService] },
+          { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent, canActivate: [RedirectService], data: { title: PAGE_NOT_FOUND_PATH }  },
         ]
       }
     ], {
@@ -321,6 +353,7 @@ import {
 })
   ],
   exports: [RouterModule],
+  providers: [HomePageResolver, ViewTrackerResolverService],
 })
 export class AppRoutingModule {
 

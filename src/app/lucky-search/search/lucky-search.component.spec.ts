@@ -25,6 +25,7 @@ import {getBitstreamDownloadRoute} from '../../app-routing-paths';
 import {PLATFORM_ID} from '@angular/core';
 import {NotificationsService} from '../../shared/notifications/notifications.service';
 import {NotificationsServiceStub} from '../../shared/testing/notifications-service.stub';
+import {APP_CONFIG} from '../../../config/app-config.interface';
 
 describe('LuckySearchComponent', () => {
   let fixture: ComponentFixture<LuckySearchComponent>;
@@ -78,7 +79,7 @@ describe('LuckySearchComponent', () => {
     index: 'test',
     'value': 'test'
   };
-  const routerStub = new RouterMock();
+  let routerStub = new RouterMock();
 
   const bitstreamMetadata = {
     'dc.title': [{value: 'test.pdf'} as MetadataValue],
@@ -101,15 +102,14 @@ describe('LuckySearchComponent', () => {
         {provide: HardRedirectService, useValue: hardRedirectService},
         {provide: PLATFORM_ID, useValue: 'browser'},
         {provide: NotificationsService, useValue: new NotificationsServiceStub()},
+        {provide: APP_CONFIG, useValue: {}},
       ],
     })
       .compileComponents();
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(LuckySearchComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  afterEach(() => {
+    routerStub = new RouterMock();
   });
 
   describe('should search items', () => {
@@ -141,7 +141,7 @@ describe('LuckySearchComponent', () => {
           }
         })
       });
-      spyOn(routerStub, 'parseUrl').and.returnValue(urlTree);
+      routerStub.parseUrl.and.returnValue(urlTree);
       const data = createSuccessfulRemoteDataObject(createPaginatedList([
         firstSearchResult, secondSearchResult
       ]));
@@ -205,7 +205,7 @@ describe('LuckySearchComponent', () => {
       spyOn((component as any), 'loadBitstreamsAndRedirectIfNeeded').and.returnValue(observableOf([bitstream]));
       spyOn((component as any), 'hasBitstreamFilters').and.returnValue(true);
       spyOn(component, 'redirect');
-      spyOn(routerStub, 'parseUrl').and.returnValue(bitstreamSearchTree);
+      routerStub.parseUrl.and.returnValue(bitstreamSearchTree).and.callThrough();
 
       component.resultsRD$.next(data);
 
@@ -268,7 +268,7 @@ describe('LuckySearchComponent', () => {
       spyOn((component as any), 'loadBitstreamsAndRedirectIfNeeded').and.returnValue(observableOf([bitstream]));
       spyOn((component as any), 'hasBitstreamFilters').and.returnValue(true);
       spyOn(component, 'redirect');
-      spyOn(routerStub, 'parseUrl').and.returnValue(bitstreamSearchTree);
+      routerStub.parseUrl.and.returnValue(bitstreamSearchTree);
 
       component.resultsRD$.next(data);
 
@@ -284,27 +284,89 @@ describe('LuckySearchComponent', () => {
     });
   });
 
-  it('should not redirect when no bitstreams are found', () => {
-    const item = Object.assign(new Item(), {uuid: 'item-uuid-1', name: 'Test item 1'});
-    const data = createSuccessfulRemoteDataObject(createPaginatedList([
-      {indexableObject: item, hitHighlights: {}}
-    ])) as any;
-    component.resultsRD$.next(data);
-    component.bitstreamFilters$.next([{metadataName: 'dc.title', metadataValue: 'Non-existent bitstream'}]);
-    bitstreamDataService.findByItem.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([])));
-    spyOn(component, 'redirect');
-    fixture.detectChanges();
-    expect(component.redirect).not.toHaveBeenCalled();
+  describe('', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(LuckySearchComponent);
+      component = fixture.componentInstance;
+    });
+
+    it('should not redirect when no bitstreams are found', () => {
+      const item = Object.assign(new Item(), {uuid: 'item-uuid-1', name: 'Test item 1'});
+      const data = createSuccessfulRemoteDataObject(createPaginatedList([
+        {indexableObject: item, hitHighlights: {}}
+      ])) as any;
+      component.resultsRD$.next(data);
+      component.bitstreamFilters$.next([{metadataName: 'dc.title', metadataValue: 'Non-existent bitstream'}]);
+      bitstreamDataService.findByItem.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([])));
+      spyOn(component, 'redirect');
+      fixture.detectChanges();
+      expect(component.redirect).not.toHaveBeenCalled();
+    });
+
+    it('should update showEmptySearchSection$ when no results are found', () => {
+      fixture.detectChanges();
+      const emptyResults = createSuccessfulRemoteDataObject(createPaginatedList([]));
+
+      spyOn(component as any, 'getLuckySearchResults').and.returnValue(observableOf(emptyResults));
+      spyOn(component as any, 'processSearchResults').and.returnValue(observableOf(emptyResults));
+
+      component.getSearchResults();
+
+      expect(component.showEmptySearchSection$.getValue()).toBe(true);
+    });
+
   });
 
-  it('should update showEmptySearchSection$ when no results are found', () => {
-    const emptyResults = createSuccessfulRemoteDataObject(createPaginatedList([]));
+  describe('', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(LuckySearchComponent);
+      component = fixture.componentInstance;
+    });
 
-    spyOn(component as any, 'getLuckySearchResults').and.returnValue(observableOf(emptyResults));
-    spyOn(component as any, 'processSearchResults').and.returnValue(observableOf(emptyResults));
+    it('should return default code when no specific identifier is found', () => {
+      // @ts-ignore: Accessing private method for testing
+      component.appConfig = {
+        luckySearchRedirects: {
+          default: 301
+        }
+      } as any;
+      // @ts-ignore: Accessing private method for testing
+      component.currentFilter = {identifier: 'unknown'};
 
-    component.getSearchResults();
+      // @ts-ignore: Accessing private method for testing
+      const result = component.getRedirectCode();
 
-    expect(component.showEmptySearchSection$.getValue()).toBe(true);
+      expect(result).toBe(301);
+    });
+
+    it('should return 302 when default is not set and identifier is not found', () => {
+      // @ts-ignore: Accessing private method for testing
+      component.appConfig = {
+        luckySearchRedirects: {}
+      } as any;
+      // @ts-ignore: Accessing private method for testing
+      component.currentFilter = {identifier: 'unknown'};
+
+      // @ts-ignore: Accessing private method for testing
+      const result = component.getRedirectCode();
+      expect(result).toBe(302);
+    });
+
+    it('should return specific code for known identifier', () => {
+      // @ts-ignore: Accessing private method for testing
+      component.appConfig = {
+        luckySearchRedirects: {
+          default: 302,
+          'legacy-id': 301
+        }
+      };
+      // @ts-ignore: Accessing private method for testing
+      component.currentFilter = {identifier: 'legacy-id'};
+
+      // @ts-ignore: Accessing private method for testing
+      const result = component.getRedirectCode();
+      expect(result).toBe(301);
+    });
+
   });
 });

@@ -109,10 +109,23 @@ export class DSpaceObject extends ListableObject implements CacheableObject {
    *
    * @param {string|string[]} keyOrKeys The metadata key(s) in scope. Wildcards are supported; see [[Metadata]].
    * @param {MetadataValueFilter} valueFilter The value filter to use. If unspecified, no filtering will be done.
+   * @param escapeHTML Whether the HTML is used inside a `[innerHTML]` attribute
    * @returns {MetadataValue[]} the matching values or an empty array.
    */
-  allMetadata(keyOrKeys: string | string[], valueFilter?: MetadataValueFilter): MetadataValue[] {
-    return Metadata.all(this.metadata, keyOrKeys, valueFilter);
+  allMetadata(keyOrKeys: string | string[], valueFilter?: MetadataValueFilter, escapeHTML?: boolean): MetadataValue[] {
+    return Metadata.all(this.metadata, keyOrKeys, undefined, valueFilter, escapeHTML );
+  }
+
+  /**
+   * Gets all matching metadata in this DSpaceObject, up to a limit.
+   *
+   * @param {string|string[]} keyOrKeys The metadata key(s) in scope. Wildcards are supported; see [[Metadata]].
+   * @param {number} limit The maximum number of results to return.
+   * @param {MetadataValueFilter} valueFilter The value filter to use. If unspecified, no filtering will be done.
+   * @returns {MetadataValue[]} the matching values or an empty array.
+   */
+  limitedMetadata(keyOrKeys: string | string[], limit: number, valueFilter?: MetadataValueFilter, escapeHTML?: boolean): MetadataValue[] {
+    return Metadata.all(this.metadata, keyOrKeys,undefined, valueFilter, escapeHTML, limit);
   }
 
   /**
@@ -120,10 +133,11 @@ export class DSpaceObject extends ListableObject implements CacheableObject {
    *
    * @param {string|string[]} keyOrKeys The metadata key(s) in scope. Wildcards are supported; see [[Metadata]].
    * @param {MetadataValueFilter} valueFilter The value filter to use. If unspecified, no filtering will be done.
+   * @param escapeHTML Whether the HTML is used inside a `[innerHTML]` attribute
    * @returns {string[]} the matching string values or an empty array.
    */
-  allMetadataValues(keyOrKeys: string | string[], valueFilter?: MetadataValueFilter): string[] {
-    return Metadata.allValues(this.metadata, keyOrKeys, valueFilter);
+  allMetadataValues(keyOrKeys: string | string[], valueFilter?: MetadataValueFilter, escapeHTML?: boolean): string[] {
+    return Metadata.allValues(this.metadata, keyOrKeys, undefined, valueFilter, escapeHTML);
   }
 
   /**
@@ -131,10 +145,11 @@ export class DSpaceObject extends ListableObject implements CacheableObject {
    *
    * @param {string|string[]} keyOrKeys The metadata key(s) in scope. Wildcards are supported; see [[Metadata]].
    * @param {MetadataValueFilter} valueFilter The value filter to use. If unspecified, no filtering will be done.
+   * @param escapeHTML Whether the HTML is used inside a `[innerHTML]` attribute
    * @returns {MetadataValue} the first matching value, or `undefined`.
    */
-  firstMetadata(keyOrKeys: string | string[], valueFilter?: MetadataValueFilter): MetadataValue {
-    return Metadata.first(this.metadata, keyOrKeys, valueFilter);
+  firstMetadata(keyOrKeys: string | string[], valueFilter?: MetadataValueFilter, escapeHTML?: boolean): MetadataValue {
+    return Metadata.first(this.metadata, keyOrKeys, undefined, valueFilter, escapeHTML);
   }
 
   /**
@@ -142,10 +157,11 @@ export class DSpaceObject extends ListableObject implements CacheableObject {
    *
    * @param {string|string[]} keyOrKeys The metadata key(s) in scope. Wildcards are supported; see [[Metadata]].
    * @param {MetadataValueFilter} valueFilter The value filter to use. If unspecified, no filtering will be done.
+   * @param escapeHTML Whether the HTML is used inside a `[innerHTML]` attribute
    * @returns {string} the first matching string value, or `undefined`.
    */
-  firstMetadataValue(keyOrKeys: string | string[], valueFilter?: MetadataValueFilter): string {
-    return Metadata.firstValue(this.metadata, keyOrKeys, valueFilter);
+  firstMetadataValue(keyOrKeys: string | string[], valueFilter?: MetadataValueFilter, escapeHTML?: boolean): string {
+    return Metadata.firstValue(this.metadata, keyOrKeys, undefined, valueFilter, escapeHTML);
   }
 
   /**
@@ -156,12 +172,12 @@ export class DSpaceObject extends ListableObject implements CacheableObject {
    * @returns {boolean} whether a match is found.
    */
   hasMetadata(keyOrKeys: string | string[], valueFilter?: MetadataValueFilter): boolean {
-    return Metadata.has(this.metadata, keyOrKeys, valueFilter);
+    return Metadata.has(this.metadata, keyOrKeys, undefined, valueFilter);
   }
 
   /**
    * Find metadata on a specific field and order all of them using their "place" property.
-   * @param keyOrKeys
+   * @param keyOrKeys The metadata key(s) in scope. Wildcards are supported; see [[Metadata]].
    */
   findMetadataSortedByPlace(keyOrKeys: string | string[]): MetadataValue[] {
     return this.allMetadata(keyOrKeys).sort((a: MetadataValue, b: MetadataValue) => {

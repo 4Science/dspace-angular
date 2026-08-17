@@ -11,6 +11,7 @@ import { DsDatePipe } from '../../../../../../pipes/ds-date.pipe';
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
 import { FieldRenderingType } from '../metadata-box.decorator';
+import { of } from 'rxjs';
 import { LocaleService } from '../../../../../../../core/locale/locale.service';
 
 describe('DateComponent', () => {
@@ -37,7 +38,7 @@ describe('DateComponent', () => {
   );
 
   const localeServiceMock = Object.assign({
-    getCurrentLanguageCode: () => 'en',
+    getCurrentLanguageCode: () => of('en'),
   });
 
   const mockField: LayoutField = {

@@ -31,8 +31,8 @@ describe('EndUserAgreementContentComponent', () => {
   beforeEach(waitForAsync(() => {
 
     localeServiceStub = {
-      getCurrentLanguageCode(): string {
-        return 'es';
+      getCurrentLanguageCode() {
+        return of('es');
       }
     };
     siteServiceStub = {
