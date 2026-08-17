@@ -16,4 +16,6 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
 })
 export class DateComponent extends RenderingTypeValueModelComponent {
 
+  static structured = false;
+
 }

@@ -25,4 +25,6 @@ import { MetadataGroupComponent } from '../metadata-group.component';
 })
 export class TableComponent extends MetadataGroupComponent {
 
+  static structured = true;
+
 }

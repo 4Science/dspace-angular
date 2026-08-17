@@ -43,6 +43,8 @@ import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-
 })
 export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent implements OnInit {
 
+  static hasOwnContainer = false;
+
   /**
    * Filter used for set scope in discovery invocation
    */

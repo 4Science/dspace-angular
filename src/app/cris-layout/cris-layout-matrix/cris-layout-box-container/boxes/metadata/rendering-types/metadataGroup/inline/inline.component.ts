@@ -34,6 +34,8 @@ import { MetadataGroupComponent } from '../metadata-group.component';
 })
 export class InlineComponent extends MetadataGroupComponent implements OnInit {
 
+  static structured = true;
+
   constructor(
     @Inject('fieldProvider') public fieldProvider: LayoutField,
     @Inject('itemProvider') public itemProvider: Item,
