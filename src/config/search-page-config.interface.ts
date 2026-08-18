@@ -1,3 +1,4 @@
+import { ViewMode } from '../app/core/shared/view-mode.model';
 import { Config } from './config.interface';
 
 export interface SearchConfig extends Config {
@@ -9,4 +10,31 @@ export interface SearchConfig extends Config {
    */
   filterPlaceholdersCount?: number;
 
+  /**
+   * The preferred display view used to initially render the results for each search context.
+   * When a value is set, the related search context will initially show its results using the
+   * configured {@link ViewMode} (unless the user explicitly overrides it through the `view` query parameter).
+   */
+  preferredDisplayView?: PreferredDisplayViewConfig;
+
+}
+
+/**
+ * Configuration that defines the preferred display view ({@link ViewMode}) for the different search contexts.
+ */
+export interface PreferredDisplayViewConfig extends Config {
+  /**
+   * The preferred display view used by the main search page.
+   */
+  searchPage?: ViewMode;
+
+  /**
+   * The preferred display view used by the MyDSpace page.
+   */
+  mydspacePage?: ViewMode;
+
+  /**
+   * The preferred display view used by the CRIS layout relation boxes.
+   */
+  crisRelationBox?: ViewMode;
 }

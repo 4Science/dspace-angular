@@ -9,6 +9,7 @@
   [configurationList]="(configurationList$ | async)"
   [context]="context"
   [viewModeList]="viewModeList"
+  [initViewMode]="initViewMode"
   [showThumbnails]="false"
   [selectable]="(currentConfiguration$ | async) === workflowType"
   [selectionConfig]="{ repeatable: true, listId: listId }"

@@ -20,6 +20,7 @@ import { MyDSpaceConfigurationValueType } from './my-dspace-configuration-value-
 import { SelectableListService } from '../shared/object-list/selectable-list/selectable-list.service';
 import { PoolTaskSearchResult } from '../shared/object-collection/shared/pool-task-search-result.model';
 import { ClaimedTaskSearchResult } from '../shared/object-collection/shared/claimed-task-search-result.model';
+import { APP_CONFIG, AppConfig } from '../../config/app-config.interface';
 
 export const MYDSPACE_ROUTE = '/mydspace';
 export const SEARCH_CONFIG_SERVICE: InjectionToken<SearchConfigurationService> = new InjectionToken<SearchConfigurationService>('searchConfigurationService');
@@ -70,6 +71,11 @@ export class MyDSpacePageComponent implements OnInit {
    */
   viewModeList = [ViewMode.ListElement, ViewMode.DetailedListElement];
 
+  /**
+   * The initial view mode used to render the search results, based on the preferred display view configuration.
+   */
+  initViewMode: ViewMode;
+
   public readonly workflowType = MyDSpaceConfigurationValueType.Workflow;
 
   /**
@@ -82,9 +88,11 @@ export class MyDSpacePageComponent implements OnInit {
     private router: Router,
     protected requestService: RequestService,
     protected selectableListService: SelectableListService,
-    @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: MyDSpaceConfigurationService
+    @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: MyDSpaceConfigurationService,
+    @Inject(APP_CONFIG) protected appConfig: AppConfig,
   ) {
     this.service.setServiceOptions(MyDSpaceResponseParsingService, MyDSpaceRequest);
+    this.initViewMode = this.appConfig.search?.preferredDisplayView?.mydspacePage ?? ViewMode.ListElement;
   }
 
   /**

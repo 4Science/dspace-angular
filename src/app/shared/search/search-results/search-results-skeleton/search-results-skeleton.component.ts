@@ -101,7 +101,6 @@ export class SearchResultsSkeletonComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log(this.initViewMode);
     this.viewMode$ = this.searchService.getViewMode(this.initViewMode);
 
     this.loadingResults = Array.from({ length: this.numberOfResults }, (_, i) => i + 1);
