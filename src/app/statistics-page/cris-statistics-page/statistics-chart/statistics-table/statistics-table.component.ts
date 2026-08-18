@@ -12,7 +12,10 @@ import {
   OnInit,
   PLATFORM_ID,
 } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 
 import {
   NativeWindowRef,
@@ -75,8 +78,9 @@ export class StatisticsTableComponent extends StatisticsChartDataComponent imple
     @Inject(PLATFORM_ID) protected platformId: any,
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
     @Inject(DOCUMENT) protected document: any,
+    protected translateService: TranslateService,
   ) {
-    super(report, categoryType, platformId, _window, document);
+    super(report, categoryType, platformId, _window, document, translateService);
   }
 
   /**

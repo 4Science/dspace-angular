@@ -10,6 +10,7 @@ import {
   PLATFORM_ID,
   ViewChild,
 } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import {
   BehaviorSubject,
   Observable,
@@ -76,6 +77,7 @@ export abstract class StatisticsChartDataComponent implements OnInit {
     @Inject(PLATFORM_ID) protected platformId: any,
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
     @Inject(DOCUMENT) protected document: any,
+    protected translateService: TranslateService,
   ) {
 
     /* IMPORTANT
@@ -102,7 +104,7 @@ export abstract class StatisticsChartDataComponent implements OnInit {
   downloadPng() {
     this.isLoading.next(false);
     const node = this.chartRef.nativeElement;
-    this.exportService.exportAsImage(node, ExportImageType.png, this.report.reportType, this.isLoading);
+    this.exportService.exportAsImage(node, ExportImageType.png, this.getReportName(), this.isLoading);
   }
 
   /**
@@ -111,7 +113,7 @@ export abstract class StatisticsChartDataComponent implements OnInit {
   downloadJpeg() {
     this.isSecondLoading.next(false);
     const node = this.chartRef.nativeElement;
-    this.exportService.exportAsImage(node, ExportImageType.jpeg, this.report.reportType, this.isSecondLoading);
+    this.exportService.exportAsImage(node, ExportImageType.jpeg, this.getReportName(), this.isSecondLoading);
   }
 
   /**
@@ -119,7 +121,7 @@ export abstract class StatisticsChartDataComponent implements OnInit {
    */
   exportExcel() {
     this.isLoading.next(true);
-    this.exportService.exportAsFile('xlsx', 'dataTable', this.report.reportType, true).subscribe(() => {
+    this.exportService.exportAsFile('xlsx', 'dataTable', this.getReportName(), true).subscribe(() => {
       this.isLoading.next(false);
     });
   }
@@ -129,9 +131,13 @@ export abstract class StatisticsChartDataComponent implements OnInit {
    */
   exportCsv() {
     this.isSecondLoading.next(true);
-    this.exportService.exportAsFile('csv', 'dataTable', this.report.reportType, true).subscribe(() => {
+    this.exportService.exportAsFile('csv', 'dataTable', this.getReportName(), true).subscribe(() => {
       this.isSecondLoading.next(false);
     });
+  }
+
+  protected getReportName(): string {
+    return this.translateService.instant('statistics.table.' + this.categoryType + '.title.' + this.report.reportType);
   }
 
   /**
