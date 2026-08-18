@@ -1,4 +1,5 @@
 import { DsDatePipe } from './ds-date.pipe';
+import { of } from 'rxjs';
 
 describe('DsDatePipe', () => {
 
@@ -8,7 +9,7 @@ describe('DsDatePipe', () => {
   });
 
   const localeServiceInstance = Object.assign({
-    getCurrentLanguageCode: () => 'en',
+    getCurrentLanguageCode: () => of('en'),
   });
 
   const date = '2020-08-24';

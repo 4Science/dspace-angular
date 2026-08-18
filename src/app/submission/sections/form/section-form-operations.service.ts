@@ -241,7 +241,11 @@ export class SectionFormOperationsService {
       if ((event.model as DsDynamicInputModel).hasAuthority) {
         if (Array.isArray(value)) {
           value.forEach((authority, index) => {
-            authority = Object.assign(new VocabularyEntry(), authority, {language});
+            if (typeof authority === 'string') {
+              authority = Object.assign(new VocabularyEntry(), { value: authority, language });
+            } else {
+              authority = Object.assign(new VocabularyEntry(), authority, {language});
+            }
             value[index] = authority;
           });
           fieldValue = value;
@@ -426,7 +430,7 @@ export class SectionFormOperationsService {
             );
           }
         }
-      } else if (!value.hasValue()) {
+      } else if (isNotEmpty(value) && !value.hasValue()) {
         // New value is empty, so dispatch a remove operation
         if (this.getArrayIndexFromEvent(event) === 0) {
           this.operationsBuilder.remove(pathCombiner.getPath(segmentedPath));

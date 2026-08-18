@@ -24,6 +24,7 @@ import { FilterVocabularyConfig } from './filter-vocabulary-config';
 import { DiscoverySortConfig } from './discovery-sort.config';
 import { LiveRegionConfig } from '../app/shared/live-region/live-region.config';
 import { SearchConfig } from './search-page-config.interface';
+import { AccessibilitySettingsConfig } from '../app/accessibility/accessibility-settings.config';
 import { AddToAnyPluginConfig } from './add-to-any-plugin-config';
 import { CmsMetadata } from './cms-metadata';
 import { CrisLayoutConfig, LayoutConfig, SuggestionConfig } from './layout-config.interfaces';
@@ -42,6 +43,7 @@ import { MetaTagsConfig } from './meta-tags.config';
 import { MetadataLinkViewPopoverDataConfig } from './metadata-link-view-popoverdata-config.interface';
 import { IdentifierSubtypesConfig, IdentifierSubtypesIconPositionEnum } from './identifier-subtypes-config.interface';
 import { DatadogRumConfig } from './datadog-rum-config.interfaces';
+import {LuckySearchRedirectConfig} from './lucky-search-redirect-config';
 
 export class DefaultAppConfig implements AppConfig {
   production = false;
@@ -57,6 +59,9 @@ export class DefaultAppConfig implements AppConfig {
     port: 4000,
     // NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
     nameSpace: '/',
+    // Specify the public URL that this user interface responds to. This corresponds to the "dspace.ui.url" property in your backend's local.cfg.
+    // The baseUrl is used for redirects and SEO links (in robots.txt).
+    baseUrl: 'http://localhost:4000',
 
     // The rateLimiter settings limit each IP to a 'max' of 500 requests per 'windowMs' (1 minute).
     rateLimiter: {
@@ -90,6 +95,10 @@ export class DefaultAppConfig implements AppConfig {
     },
     // Cache-Control HTTP Header
     control: 'max-age=604800', // revalidate browser
+    // These static files should not be cached (paths relative to dist/browser, including the leading slash)
+    noCacheFiles: [
+      '/index.html',  // see https://web.dev/articles/http-cache#unversioned-urls
+    ],
     autoSync: {
       defaultTime: 0,
       maxBufferSize: 100,
@@ -135,7 +144,8 @@ export class DefaultAppConfig implements AppConfig {
       // If the rest token expires in less than this amount of time, it will be refreshed automatically.
       // This is independent from the idle warning.
       timeLeftBeforeTokenRefresh: 2 * 60 * 1000 // 2 minutes
-    }
+    },
+    isPasswordLoginEnabledForAdminsOnly: false, // Enable the standard login form
   };
 
   // Form settings
@@ -164,7 +174,7 @@ export class DefaultAppConfig implements AppConfig {
   submission: SubmissionConfig = {
     autosave: {
       // NOTE: which metadata trigger an autosave
-      metadata: ['dc.title', 'dc.identifier.doi', 'dc.identifier.pmid', 'dc.identifier.arxiv', 'dc.identifier.patentno', 'dc.identifier.scopus', 'dc.identifier.isi', 'dcterms.dateSubmitted', 'dc.identifier.applicationnumber', 'dc.type'],
+      metadata: ['dc.title', 'dc.identifier.doi', 'dc.identifier.pmid', 'dc.identifier.arxiv', 'dc.identifier.patentno', 'dc.identifier.scopus', 'dc.identifier.isi', 'dcterms.dateSubmitted', 'dc.identifier.applicationnumber', 'dc.type', 'dc.identifier.issn'],
       /**
        * NOTE: after how many time (milliseconds) submission is saved automatically
        * eg. timer: 5 * (1000 * 60); // 5 minutes
@@ -271,8 +281,8 @@ export class DefaultAppConfig implements AppConfig {
             path: 'assets/images/ror.logo.icon.svg'
           },
           {
-            source: 'sherpa',
-            path: 'assets/images/sherpa.logo.icon.svg'
+            source: 'opf',
+            path: 'assets/images/opf.logo.icon.svg'
           },
           {
             source: 'zdb',
@@ -298,6 +308,7 @@ export class DefaultAppConfig implements AppConfig {
     },
     // Minimum number of characters required before performing a lookup.
     minChars: 3,
+    showLegend: true
   };
 
   // Default Language in which the UI will be rendered if the user's browser language is not an active language
@@ -534,6 +545,7 @@ export class DefaultAppConfig implements AppConfig {
   info: InfoConfig = {
     enableEndUserAgreement: true,
     enablePrivacyStatement: true,
+    enableCookieConsentPopup: true,
     //Configuration for third-party metrics in Klaro
     metricsConsents: [
       {
@@ -583,6 +595,11 @@ export class DefaultAppConfig implements AppConfig {
 
   search: SearchConfig = {
     filterPlaceholdersCount: 5
+  };
+
+  // Accessibility settings configuration, used by the AccessibilitySettingsService
+  accessibility: AccessibilitySettingsConfig = {
+    cookieExpirationDuration: 7,
   };
 
   crisLayout: CrisLayoutConfig = {
@@ -882,5 +899,10 @@ export class DefaultAppConfig implements AppConfig {
     trackResources: true,
     trackLongTasks: true,
     defaultPrivacyLevel: 'mask-user-input',
+  };
+
+  luckySearchRedirects: LuckySearchRedirectConfig = {
+    'legacy-id': 301,
+    default: 302
   };
 }

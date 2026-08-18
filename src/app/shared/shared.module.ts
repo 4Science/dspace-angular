@@ -364,6 +364,10 @@ import { MetadataLinkViewOrcidComponent } from './metadata-link-view/metadata-li
 import { SwitchComponent } from './switch/switch.component';
 import {StickyPopoverDirective} from './metadata-link-view/sticky-popover.directive';
 import { SortPipe } from './utils/sort.pipe';
+import { BrowserOnlyDirective } from './utils/browser-only.directive';
+import {EscapeHtmlPipe} from './utils/escape-html.pipe';
+import { AuthorizedCommunitySelectorComponent } from './dso-selector/dso-selector/authorized-community-selector/authorized-community-selector.component';
+import { AuthorizedItemSelectorComponent } from './dso-selector/dso-selector/authorized-item-selector/authorized-item-selector.component';
 
 const MODULES = [
   CommonModule,
@@ -412,6 +416,7 @@ const PIPES = [
   BrowserOnlyPipe,
   ShortNumberPipe,
   SortPipe,
+  EscapeHtmlPipe,
 ];
 
 const COMPONENTS = [
@@ -487,6 +492,8 @@ const COMPONENTS = [
   ExportBatchSelectorComponent,
   ConfirmationModalComponent,
   AuthorizedCollectionSelectorComponent,
+  AuthorizedCommunitySelectorComponent,
+  AuthorizedItemSelectorComponent,
   AdministeredCollectionSelectorComponent,
   SearchNavbarComponent,
   ItemPageTitleFieldComponent,
@@ -640,10 +647,11 @@ const DIRECTIVES = [
 ];
 
 @NgModule({
-  imports: [
-    ...MODULES,
-    ...ROOT_MODULES,
-  ],
+    imports: [
+        ...MODULES,
+        ...ROOT_MODULES,
+        BrowserOnlyDirective,
+    ],
   declarations: [
     ...PIPES,
     ...COMPONENTS,

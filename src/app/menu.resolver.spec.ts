@@ -10,7 +10,6 @@ import { AdminSidebarComponent } from './admin/admin-sidebar/admin-sidebar.compo
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MenuService } from './shared/menu/menu.service';
 import { AuthorizationDataService } from './core/data/feature-authorization/authorization-data.service';
-import { ScriptDataService } from './core/data/processes/script-data.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MenuServiceStub } from './shared/testing/menu-service.stub';
 import { MenuID } from './shared/menu/menu-id.model';
@@ -70,7 +69,6 @@ describe('MenuResolver', () => {
   let menuService;
   let sectionsService;
   let authorizationService;
-  let scriptService;
   let configService;
 
   beforeEach(waitForAsync(() => {
@@ -84,9 +82,7 @@ describe('MenuResolver', () => {
     authorizationService = jasmine.createSpyObj('authorizationService', {
       isAuthorized: observableOf(true)
     });
-    scriptService = jasmine.createSpyObj('scriptService', {
-      scriptWithNameExistsAndCanExecute: observableOf(true)
-    });
+
     configService = jasmine.createSpyObj('ConfigurationDataService', {
       findByPropertyName: observableOf({})
     });
@@ -98,7 +94,6 @@ describe('MenuResolver', () => {
         { provide: MenuService, useValue: menuService },
         { provide: SectionDataService, useValue: sectionsService },
         { provide: AuthorizationDataService, useValue: authorizationService },
-        { provide: ScriptDataService, useValue: scriptService },
         { provide: AuthService, useValue: AuthServiceStub },
         { provide: ConfigurationDataService, useValue: configService },
         {
@@ -412,7 +407,7 @@ describe('MenuResolver', () => {
     describe('for site admin', () => {
       beforeEach(() => {
         authorizationService.isAuthorized = createSpy('isAuthorized').and.callFake((featureID: FeatureID) => {
-          return observableOf(featureID === FeatureID.AdministratorOf);
+          return observableOf(featureID === FeatureID.AdministratorOf || featureID === FeatureID.CanExportMetadata || featureID === FeatureID.CanImportMetadata);
         });
       });
 

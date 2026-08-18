@@ -4,14 +4,15 @@ import { TextSectionComponent } from './text-section.component';
 import { Site } from '../../../../core/shared/site.model';
 import { By } from '@angular/platform-browser';
 import { LocaleService } from '../../../../core/locale/locale.service';
+import { of } from 'rxjs';
 
 describe('TextSectionComponent', () => {
   let component: TextSectionComponent;
   let fixture: ComponentFixture<TextSectionComponent>;
 
   const localeServiceStub = {
-    getCurrentLanguageCode(): string {
-      return 'en';
+    getCurrentLanguageCode() {
+      return of('en');
     }
   };
 

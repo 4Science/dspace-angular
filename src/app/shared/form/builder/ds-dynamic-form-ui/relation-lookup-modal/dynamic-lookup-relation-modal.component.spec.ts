@@ -55,8 +55,8 @@ describe('DsDynamicLookupRelationModalComponent', () => {
       hierarchical: false
     }),
     Object.assign(new ExternalSource(), {
-      id: 'sherpaPublisher',
-      name: 'sherpaPublisher',
+      id: 'opfPublisher',
+      name: 'opfPublisher',
       hierarchical: false
     })
   ];
@@ -82,7 +82,7 @@ describe('DsDynamicLookupRelationModalComponent', () => {
       relationshipType: 'isAuthorOfPublication',
       nameVariants: true,
       searchConfiguration: 'personConfig',
-      externalSources: ['orcidV2', 'sherpaPublisher']
+      externalSources: ['orcidV2', 'opfPublisher']
     });
     nameVariant = 'Doe, J.';
     metadataField = 'dc.contributor.author';

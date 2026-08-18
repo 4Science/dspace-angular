@@ -2,10 +2,13 @@ import { REGEX_MATCH_NON_EMPTY_TEXT } from 'cypress/support/e2e';
 import { testA11y } from 'cypress/support/utils';
 import '../support/commands';
 
-xdescribe('Site Statistics Page', () => {
+describe('Site Statistics Page', () => {
     it('should load if you click on "Statistics" from homepage', () => {
         cy.visit('/');
-        cy.get('a[data-test="link-menu-item.menu.section.statistics"]').click();
+
+        cy.get('#expandable-navbar-section-statistics > [data-test="navbar-section-toggler"]').trigger('keyup', { key: 'Enter' });
+
+        cy.get('a[data-test="link-menu-item.menu.section.statistics.site"]').click();
         cy.location('pathname').should('eq', '/statistics');
     });
 
@@ -19,13 +22,23 @@ xdescribe('Site Statistics Page', () => {
         // <ds-site-statistics-page> tag must be visable
         cy.get('ds-site-statistics-page').should('be.visible');
 
-        // Verify / wait until "Total Visits" table's *last* label is non-empty
+        // Click on "Most viewed" tab
+        cy.get('ds-statistics-chart li.nav-item').eq(2).click();
+
+        // Verify / wait until "Most Viewed" table's *last* label is non-empty
         // (This table loads these labels asynchronously, so we want to wait for them before analyzing page)
-        cy.get('table[data-test="TotalVisits"] th[data-test="statistics-label"]').last().contains(REGEX_MATCH_NON_EMPTY_TEXT);
-        // Wait an extra 500ms, just so all entries in Total Visits have loaded.
+        cy.get('table[data-test="TopItems"] th[data-test="statistics-label"]').last().contains(REGEX_MATCH_NON_EMPTY_TEXT);
+        // Wait an extra 500ms, just so all entries in Most Viewed have loaded.
         cy.wait(500);
 
         // Analyze <ds-site-statistics-page> for accessibility issues
-        testA11y('ds-site-statistics-page');
+        testA11y({
+          include: [
+            'ds-site-statistics-page',
+          ],
+          exclude: [
+            ['ul.nav-tabs'] // Tabs at top have several issues which seem to be caused by ng-bootstrap
+          ],
+        });
     });
 });

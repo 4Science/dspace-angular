@@ -27,6 +27,7 @@ import { SubmissionVisibility } from '../utils/visibility.util';
 import { MetadataSecurityConfiguration } from '../../core/submission/models/metadata-security-configuration';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { MetadataSecurityConfigurationService } from '../../core/submission/metadatasecurityconfig-data.service';
+import { environment } from '../../../environments/environment';
 
 /**
  * This component represents the submission form.
@@ -299,6 +300,13 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
    */
   isLoading(): Observable<boolean> {
     return this.loading;
+  }
+
+  /**
+   * Check if submission legend should be shown
+   */
+  get shouldShowLegend(): boolean {
+    return environment.submission.showLegend;
   }
 
   /**
