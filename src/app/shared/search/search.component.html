@@ -47,6 +47,7 @@
       <div class="d-block d-md-none search-controls clearfix">
         @if (inPlaceSearch && showViewModes) {
           <ds-view-mode-switch [viewModeList]="viewModeList"
+                    [initViewMode]="initViewMode"
           [inPlaceSearch]="inPlaceSearch"></ds-view-mode-switch>
         }
         <button (click)="openSidebar()"
@@ -64,6 +65,7 @@
                          [linkType]="linkType"
                          [context]="(currentContext$ | async)"
                          [customData]="customData"
+                                      [initViewMode]="initViewMode"
                          [searchResultNotice]="searchResultNotice"
                          [searchResultNoticeType]="searchResultNoticeType"
                          [selectable]="selectable"
@@ -98,6 +100,7 @@
       [currentSortOption]="(currentSortOptions$ | async)"
       [inPlaceSearch]="inPlaceSearch"
       [viewModeList]="viewModeList"
+                       [initViewMode]="initViewMode"
       [showViewModes]="showViewModes"
       (changeConfiguration)="changeContext($event.context)"
     (changeViewMode)="changeViewMode()"></ds-search-sidebar>
@@ -115,6 +118,7 @@
       [currentSortOption]="(currentSortOptions$ | async)"
       [inPlaceSearch]="inPlaceSearch"
       [viewModeList]="viewModeList"
+                       [initViewMode]="initViewMode"
       [showViewModes]="showViewModes"
       (toggleSidebar)="closeSidebar()"
       (changeConfiguration)="changeContext($event.context)"

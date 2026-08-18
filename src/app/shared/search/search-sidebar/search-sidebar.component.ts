@@ -94,6 +94,11 @@ export class SearchSidebarComponent implements OnInit {
   @Input() viewModeList: ViewMode[];
 
   /**
+   * The initial view mode used to render the results, based on the preferred display view configuration.
+   */
+  @Input() initViewMode: ViewMode;
+
+  /**
    * Whether to show the view mode switch
    */
   @Input() showViewModes = true;

@@ -13,11 +13,14 @@ import {
 import { cold } from 'jasmine-marbles';
 import { of } from 'rxjs';
 
+import { APP_CONFIG } from '../../../../../../config/app-config.interface';
+import { environment } from '../../../../../../environments/environment.test';
 import { AuthService } from '../../../../../core/auth/auth.service';
 import { EPerson } from '../../../../../core/eperson/models/eperson.model';
 import { CrisLayoutBox } from '../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../../core/shared/metadata.models';
+import { ViewMode } from '../../../../../core/shared/view-mode.model';
 import { ThemedConfigurationSearchPageComponent } from '../../../../../search-page/themed-configuration-search-page.component';
 import { TranslateLoaderMock } from '../../../../../shared/mocks/translate-loader.mock';
 import {
@@ -91,6 +94,7 @@ describe('CrisLayoutRelationBoxComponent', () => {
         { provide: 'boxProvider', useValue: testBox },
         { provide: 'itemProvider', useValue: testItem },
         { provide: AuthService, useValue: authService },
+        { provide: APP_CONFIG, useValue: environment },
       ],
     })
       .overrideComponent(CrisLayoutRelationBoxComponent, { remove: { imports: [ThemedConfigurationSearchPageComponent] } }).compileComponents();
@@ -114,6 +118,10 @@ describe('CrisLayoutRelationBoxComponent', () => {
 
     it('should have set scope in searchFilter', () => {
       expect(component.searchFilter).toContain('scope=' + testItem.id);
+    });
+
+    it('should set the initial view mode from the crisRelationBox preferred display view configuration', () => {
+      expect(component.initViewMode).toBe(ViewMode.GridElement);
     });
 
     it('info message cannot be shown', fakeAsync(() => {

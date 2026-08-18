@@ -2,6 +2,7 @@ import { AccessibilitySettingsConfig } from '../app/accessibility/accessibility-
 import { AdminNotifyMetricsRow } from '../app/admin/admin-notify-dashboard/admin-notify-metrics/admin-notify-metrics.model';
 import { FeatureID } from '../app/core/data/feature-authorization/feature-id';
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
+import { ViewMode } from '../app/core/shared/view-mode.model';
 import { DiscoveryConfigurationFeaturesConfig } from '../app/shared/authorizations/authorization.interfaces';
 import { LiveRegionConfig } from '../app/shared/live-region/live-region.config';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
@@ -695,6 +696,11 @@ export class DefaultAppConfig implements AppConfig {
       filter: ['title', 'author', 'subject', 'entityType'],
     },
     filterPlaceholdersCount: 5,
+    preferredDisplayView: {
+      searchPage: ViewMode.ListElement,
+      mydspacePage: ViewMode.GridElement,
+      crisRelationBox: ViewMode.GridElement,
+    },
   };
 
   notifyMetrics: AdminNotifyMetricsRow[] = [

@@ -12,6 +12,7 @@
   @if (showViewModes) {
     <ds-view-mode-switch class="d-none d-md-block"
       [viewModeList]="viewModeList"
+      [initViewMode]="initViewMode"
     (changeViewMode)="changeViewMode.emit($event)"></ds-view-mode-switch>
   }
   <div class="sidebar-content">

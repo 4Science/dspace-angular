@@ -71,6 +71,7 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
     'trackStatistics',
     'useUniquePageId',
     'viewModeList',
+    'initViewMode',
   ];
 
   @Input() configurationList: SearchConfigurationOption[];
@@ -134,6 +135,8 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
   @Input() useUniquePageId: boolean;
 
   @Input() viewModeList: ViewMode[];
+
+  @Input() initViewMode: ViewMode;
 
   @Input() showScopeSelector: boolean;
 
