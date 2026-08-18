@@ -23,6 +23,8 @@ import {
 import { AuthService } from '../../core/auth/auth.service';
 import { AuthTokenInfo } from '../../core/auth/models/auth-token-info.model';
 import { EndUserAgreementService } from '../../core/end-user-agreement/end-user-agreement.service';
+import { EPersonDataService } from '../../core/eperson/eperson-data.service';
+import { EPerson } from '../../core/eperson/models/eperson.model';
 import { BtnDisabledDirective } from '../../shared/btn-disabled.directive';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { ActivatedRouteStub } from '../../shared/testing/active-router.stub';
@@ -36,6 +38,7 @@ describe('EndUserAgreementComponent', () => {
   let endUserAgreementService: EndUserAgreementService;
   let notificationsService: NotificationsService;
   let authService: AuthService;
+  let ePersonService: EPersonDataService;
   let store;
   let router: Router;
   let route: ActivatedRoute;
@@ -56,6 +59,10 @@ describe('EndUserAgreementComponent', () => {
     authService = jasmine.createSpyObj('authService', {
       isAuthenticated: observableOf(true),
       getToken: token,
+      getAuthenticatedUserFromStore: observableOf(Object.assign(new EPerson(), { id: 'user-id' })),
+    });
+    ePersonService = jasmine.createSpyObj('ePersonService', {
+      invalidateById: observableOf(true),
     });
     store = jasmine.createSpyObj('store', ['dispatch']);
     router = jasmine.createSpyObj('router', ['navigate', 'navigateByUrl']);
@@ -74,6 +81,7 @@ describe('EndUserAgreementComponent', () => {
         { provide: EndUserAgreementService, useValue: endUserAgreementService },
         { provide: NotificationsService, useValue: notificationsService },
         { provide: AuthService, useValue: authService },
+        { provide: EPersonDataService, useValue: ePersonService },
         { provide: Store, useValue: store },
         { provide: Router, useValue: router },
         { provide: ActivatedRoute, useValue: route },
@@ -133,6 +141,10 @@ describe('EndUserAgreementComponent', () => {
 
           it('should display a success notification', () => {
             expect(notificationsService.success).toHaveBeenCalled();
+          });
+
+          it('should invalidate the authenticated user\'s cached ePerson', () => {
+            expect(ePersonService.invalidateById).toHaveBeenCalledWith('user-id');
           });
 
           it('should refresh the token and navigate the user to the redirect url', () => {
