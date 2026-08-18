@@ -16,6 +16,10 @@ import {
   tap,
 } from 'rxjs/operators';
 
+import {
+  APP_CONFIG,
+  AppConfig,
+} from '../../config/app-config.interface';
 import { MyDSpaceResponseParsingService } from '../core/data/mydspace-response-parsing.service';
 import { MyDSpaceRequest } from '../core/data/request.models';
 import { RequestService } from '../core/data/request.service';
@@ -100,6 +104,11 @@ export class MyDSpacePageComponent implements OnInit {
    */
   viewModeList = [ViewMode.ListElement, ViewMode.DetailedListElement];
 
+  /**
+   * The initial view mode used to render the search results, based on the preferred display view configuration.
+   */
+  initViewMode: ViewMode;
+
   public readonly workflowType = MyDSpaceConfigurationValueType.Workflow;
 
   /**
@@ -113,8 +122,10 @@ export class MyDSpacePageComponent implements OnInit {
     protected service: SearchService,
     protected selectableListService: SelectableListService,
     @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: MyDSpaceConfigurationService,
+    @Inject(APP_CONFIG) protected appConfig: AppConfig,
   ) {
     this.service.setServiceOptions(MyDSpaceResponseParsingService, MyDSpaceRequest);
+    this.initViewMode = this.appConfig.search?.preferredDisplayView?.mydspacePage ?? ViewMode.ListElement;
   }
 
   /**

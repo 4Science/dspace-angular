@@ -40,6 +40,7 @@
             <div class="d-block d-md-none search-controls clearfix">
                 <ds-view-mode-switch *ngIf="inPlaceSearch && showViewModes"
                                      [viewModeList]="viewModeList"
+                                     [initViewMode]="initViewMode"
                                      [inPlaceSearch]="inPlaceSearch"></ds-view-mode-switch>
                 <button (click)="openSidebar()"
                         aria-controls="#search-body"
@@ -56,6 +57,7 @@
                                       [linkType]="linkType"
                                       [context]="(currentContext$ | async)"
                                       [customData]="customData"
+                                      [initViewMode]="initViewMode"
                                       [searchResultNotice]="searchResultNotice"
                                       [searchResultNoticeType]="searchResultNoticeType"
                                       [selectable]="selectable"
@@ -88,6 +90,7 @@
                        [currentSortOption]="(currentSortOptions$ | async)"
                        [inPlaceSearch]="inPlaceSearch"
                        [viewModeList]="viewModeList"
+                       [initViewMode]="initViewMode"
                        [showViewModes]="showViewModes"
                        (changeConfiguration)="changeContext($event.context)"
                        (changeViewMode)="changeViewMode()"></ds-search-sidebar>
@@ -103,6 +106,7 @@
                        [currentSortOption]="(currentSortOptions$ | async)"
                        [inPlaceSearch]="inPlaceSearch"
                        [viewModeList]="viewModeList"
+                       [initViewMode]="initViewMode"
                        [showViewModes]="showViewModes"
                        (toggleSidebar)="closeSidebar()"
                        (changeConfiguration)="changeContext($event.context)"

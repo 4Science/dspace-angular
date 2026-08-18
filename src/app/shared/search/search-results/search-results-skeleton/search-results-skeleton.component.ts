@@ -43,6 +43,13 @@ import { VarDirective } from '../../../utils/var.directive';
  * Component to show placeholders for search results while loading, to give a loading feedback to the user without layout shifting.
  */
 export class SearchResultsSkeletonComponent implements OnInit {
+
+  /**
+   * Represents the initial view mode.
+   * Determines how the content will be displayed when the component is first loaded.
+   */
+  @Input() initViewMode: ViewMode;
+
   /**
    * Whether the search result contains thumbnail
    */
@@ -111,6 +118,8 @@ export class SearchResultsSkeletonComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.viewMode$ = this.searchService.getViewMode(this.initViewMode);
+
     this.loadingResults = Array.from({ length: this.numberOfResults }, (_, i) => i + 1);
 
     if (!hasValue(this.showThumbnails)) {

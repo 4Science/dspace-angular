@@ -4,6 +4,7 @@ import { IdentifierSubtypesIconPositionEnum } from 'src/config/identifier-subtyp
 
 import { FeatureID } from '../app/core/data/feature-authorization/feature-id';
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
+import { ViewMode } from '../app/core/shared/view-mode.model';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
 import { AdvancedAttachmentElementType } from '../config/advanced-attachment-rendering.config';
 
@@ -461,6 +462,12 @@ export const environment: BuildConfig = {
     advancedFilters: {
       enabled: false,
       filter: ['title', 'author', 'subject', 'entityType'],
+    },
+    filterPlaceholdersCount: 5,
+    preferredDisplayView: {
+      searchPage: ViewMode.GridElement,
+      mydspacePage: ViewMode.DetailedListElement,
+      crisRelationBox: ViewMode.GridElement,
     },
   },
 

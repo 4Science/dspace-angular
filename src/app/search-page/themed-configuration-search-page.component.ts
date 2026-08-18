@@ -123,6 +123,11 @@ export class ThemedConfigurationSearchPageComponent extends ThemedComponent<Conf
   @Input() viewModeList: ViewMode[];
 
   /**
+   * The initial view mode used to render the results, based on the preferred display view configuration.
+   */
+  @Input() initViewMode: ViewMode;
+
+  /**
    * Defines whether or not to show the scope selector
    */
   @Input() showScopeSelector: boolean;
@@ -223,6 +228,7 @@ export class ThemedConfigurationSearchPageComponent extends ThemedComponent<Conf
     'showViewModes',
     'useUniquePageId',
     'viewModeList',
+    'initViewMode',
     'showScopeSelector',
     'trackStatistics',
     'query',

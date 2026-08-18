@@ -130,6 +130,12 @@ export class ObjectCollectionComponent implements OnInit {
   @Input() hidePaginationDetail = false;
 
   /**
+   * Represents the initial view mode.
+   * Determines how the content will be displayed when the component is first loaded.
+   */
+  @Input() initViewMode: ViewMode = ViewMode.ListElement;
+
+  /**
    * Whether to show the badge label or not
    */
   @Input() showLabel: boolean;
@@ -245,7 +251,7 @@ export class ObjectCollectionComponent implements OnInit {
     this.currentMode$ = this.route
       .queryParams
       .pipe(
-        map((params) => isEmpty(params?.view) ? ViewMode.ListElement : params.view),
+        map((params) => isEmpty(params?.view) ? this.initViewMode : params.view),
         distinctUntilChanged(),
       );
     if (isPlatformBrowser(this.platformId)) {

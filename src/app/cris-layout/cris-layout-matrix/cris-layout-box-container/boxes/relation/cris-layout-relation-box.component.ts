@@ -19,6 +19,10 @@ import {
   take,
 } from 'rxjs/operators';
 
+import {
+  APP_CONFIG,
+  AppConfig,
+} from '../../../../../../config/app-config.interface';
 import { AuthService } from '../../../../../core/auth/auth.service';
 import { EPerson } from '../../../../../core/eperson/models/eperson.model';
 import {
@@ -26,6 +30,7 @@ import {
   RelationBoxConfiguration,
 } from '../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../core/shared/item.model';
+import { ViewMode } from '../../../../../core/shared/view-mode.model';
 import { ThemedConfigurationSearchPageComponent } from '../../../../../search-page/themed-configuration-search-page.component';
 import { isNotEmpty } from '../../../../../shared/empty.util';
 import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-component.model';
@@ -66,13 +71,20 @@ export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent 
    */
   searchResultNotice: string;
 
+  /**
+   * The initial view mode used to render the results, based on the preferred display view configuration.
+   */
+  initViewMode: ViewMode;
+
   constructor(
     protected authService: AuthService,
     protected translateService: TranslateService,
     @Inject('boxProvider') public boxProvider: CrisLayoutBox,
     @Inject('itemProvider') public itemProvider: Item,
+    @Inject(APP_CONFIG) protected appConfig: AppConfig,
   ) {
     super(translateService, boxProvider, itemProvider);
+    this.initViewMode = this.appConfig.search?.preferredDisplayView?.crisRelationBox ?? ViewMode.ListElement;
   }
 
   ngOnInit(): void {
