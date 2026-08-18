@@ -333,5 +333,34 @@ describe('AuthorizationDataService', () => {
         });
       });
     });
+
+    describe('when the store-based authorization is not populated after loading (SSR fallback)', () => {
+      beforeEach(() => {
+        // The request finished loading but the NgRx authorization store was never populated for
+        // this feature. This happens during SSR: the store-based flow yields `undefined` even
+        // though the REST request succeeded. The service must then fall back to a direct REST
+        // authorization check instead of hanging or wrongly returning false.
+        authorizationService.getAuthorizationForObject = () => observableOf(undefined);
+        authorizationService.isRequestLoading = () => observableOf(false);
+      });
+
+      it('should fall back to a direct REST check and return true when the feature is granted', (done) => {
+        spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(validPayload)));
+        service.isAuthorized(featureID).subscribe((result) => {
+          expect(service.searchByObject).toHaveBeenCalled();
+          expect(result).toEqual(true);
+          done();
+        });
+      });
+
+      it('should fall back to a direct REST check and return false when the feature is not granted', (done) => {
+        spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(emptyPayload)));
+        service.isAuthorized(featureID).subscribe((result) => {
+          expect(service.searchByObject).toHaveBeenCalled();
+          expect(result).toEqual(false);
+          done();
+        });
+      });
+    });
   });
 });
