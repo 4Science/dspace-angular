@@ -103,7 +103,7 @@ describe('StatisticsChartLineComponent', () => {
 
   const expectedResult = [
     {
-      'name': 'TotalVisitsPerMonth',
+      'name': 'statistics.table.mainReports.title.TotalVisitsPerMonth',
       'series': [
         {
           'name': 'September 2020',

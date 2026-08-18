@@ -134,7 +134,7 @@
     "@ngrx/store": "^20.1.0",
     "@ngx-translate/core": "^17.0.0",
     "@nicky-lenaers/ngx-scroll-to": "^14.0.0",
-    "@swimlane/ngx-charts": "^20.4.1",
+    "@swimlane/ngx-charts": "^23.1.0",
     "@terraformer/wkt": "^2.2.1",
     "altcha": "^2.3.0",
     "angulartics2": "^12.2.0",
