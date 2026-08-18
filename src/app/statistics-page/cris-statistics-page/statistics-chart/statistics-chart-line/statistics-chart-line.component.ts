@@ -8,7 +8,10 @@ import {
   Inject,
   PLATFORM_ID,
 } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 import {
   Observable,
   of,
@@ -60,8 +63,9 @@ export class StatisticsChartLineComponent extends StatisticsChartDataComponent {
     @Inject(PLATFORM_ID) protected platformId: any,
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
     @Inject(DOCUMENT) protected document: any,
+    protected translateService: TranslateService,
   ) {
-    super(report, categoryType, platformId, _window, document);
+    super(report, categoryType, platformId, _window, document, translateService);
   }
 
   /**
@@ -87,7 +91,7 @@ export class StatisticsChartLineComponent extends StatisticsChartDataComponent {
     return of(
       [
         {
-          name: this.report.reportType,
+          name: this.getReportName(),
           series: series,
         },
       ],
