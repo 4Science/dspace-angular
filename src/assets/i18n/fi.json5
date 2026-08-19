@@ -594,7 +594,7 @@
   "admin.access-control.epeople.breadcrumbs": "Käyttäjät",
 
   // "admin.access-control.epeople.title": "EPeople",
-  "admin.access-control.epeople.title": "DSpace Angular :: Käyttäjät",
+  "admin.access-control.epeople.title": "DSpace :: Käyttäjät",
 
   // "admin.access-control.epeople.edit.breadcrumbs": "New EPerson",
   // TODO New key - Add a translation
@@ -9271,9 +9271,9 @@
   // TODO Source message changed - Revise the translation
   "repository.title": "Julkaisuarkisto",
 
-  // "repository.title.prefix": "{{ repositoryName }} Angular :: ",
+  // "repository.title.prefix": "{{ repositoryName }} :: ",
   // TODO New key - Add a translation
-  "repository.title.prefix": "{{ repositoryName }} Angular :: ",
+  "repository.title.prefix": "{{ repositoryName }} :: ",
 
   // "resource-policies.add.button": "Add",
   "resource-policies.add.button": "Lisää",

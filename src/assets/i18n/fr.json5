@@ -8918,7 +8918,7 @@
   // TODO New key - Add a translation
   "repository.title": "{{ repositoryName }}",
 
-  // "repository.title.prefix": "{{ repositoryName }} Angular :: ",
+  // "repository.title.prefix": "{{ repositoryName }} :: ",
   // TODO New key - Add a translation
   "repository.title.prefix": "{{ repositoryName }} :: ",
 
