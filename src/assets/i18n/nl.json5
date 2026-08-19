@@ -250,7 +250,7 @@
 
   // "admin.registries.bitstream-formats.title": "Bitstream Format Registry",
   // TODO Source message changed - Revise the translation
-  "admin.registries.bitstream-formats.title": "DSpace Angular :: Bitstream Formaat Register",
+  "admin.registries.bitstream-formats.title": "DSpace :: Bitstream Formaat Register",
 
   // "admin.registries.bitstream-formats.select": "Select",
   // TODO New key - Add a translation
@@ -311,7 +311,7 @@
 
   // "admin.registries.metadata.title": "Metadata Registry",
   // TODO Source message changed - Revise the translation
-  "admin.registries.metadata.title": "DSpace Angular :: Metadataregister",
+  "admin.registries.metadata.title": "DSpace :: Metadataregister",
 
   // "admin.registries.schema.breadcrumbs": "Metadata schema",
   // TODO New key - Add a translation
@@ -405,7 +405,7 @@
 
   // "admin.registries.schema.title": "Metadata Schema Registry",
   // TODO Source message changed - Revise the translation
-  "admin.registries.schema.title": "DSpace Angular :: Metadata Schema Register",
+  "admin.registries.schema.title": "DSpace :: Metadata Schema Register",
 
   // "admin.access-control.bulk-access.breadcrumbs": "Bulk Access Management",
   // TODO New key - Add a translation
@@ -4225,7 +4225,7 @@
 
   // "home.title": "Home",
   // TODO Source message changed - Revise the translation
-  "home.title": "DSpace Angular :: Home",
+  "home.title": "DSpace :: Home",
 
   // "home.top-level-communities.head": "Communities in DSpace",
   "home.top-level-communities.head": "Communities in DSpace",
@@ -6286,7 +6286,7 @@
 
   // "journal.search.title": "Journal Search",
   // TODO Source message changed - Revise the translation
-  "journal.search.title": "DSpace Angular :: Tijdschrift zoeken",
+  "journal.search.title": "DSpace :: Tijdschrift zoeken",
 
   // "journalissue.listelement.badge": "Journal Issue",
   "journalissue.listelement.badge": "Tijdschriftaflevering",
@@ -7415,7 +7415,7 @@
 
   // "person.search.title": "Person Search",
   // TODO Source message changed - Revise the translation
-  "person.search.title": "DSpace Angular :: Persoon zoeken",
+  "person.search.title": "DSpace :: Persoon zoeken",
 
   // "process.new.select-parameters": "Parameters",
   // TODO New key - Add a translation
@@ -7942,7 +7942,7 @@
 
   // "publication.search.title": "Publication Search",
   // TODO Source message changed - Revise the translation
-  "publication.search.title": "DSpace Angular :: Publicatie zoeken",
+  "publication.search.title": "DSpace :: Publicatie zoeken",
 
   // "media-viewer.next": "Next",
   // TODO New key - Add a translation
@@ -8624,7 +8624,7 @@
 
   // "search.title": "Search",
   // TODO Source message changed - Revise the translation
-  "search.title": "DSpace Angular :: Zoek",
+  "search.title": "DSpace :: Zoek",
 
   // "search.breadcrumbs": "Search",
   // TODO New key - Add a translation
