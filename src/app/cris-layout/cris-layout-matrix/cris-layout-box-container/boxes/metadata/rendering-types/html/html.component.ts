@@ -14,6 +14,8 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
 })
 export class HtmlComponent extends RenderingTypeValueModelComponent {
 
+  static structured = false;
+
   /**
    * If the metadata value does not contain HTML tags then replace newline character with <br>
    * @param text

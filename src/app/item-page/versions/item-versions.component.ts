@@ -93,6 +93,8 @@ interface VersionDTO {
  */
 export class ItemVersionsComponent implements OnDestroy, OnInit {
 
+  static hasOwnContainer = false;
+
   /**
    * The item to display a version history for
    */
