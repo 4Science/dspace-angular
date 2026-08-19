@@ -163,7 +163,7 @@ export class MetadataContainerComponent implements OnInit {
 
   initRenderOptions(renderingType: string | FieldRenderingType): void {
     this.metadataFieldRenderOptions = getMetadataBoxFieldRenderOptionsFn(this.layoutBoxesMap, renderingType);
-    this.isStructured = this.metadataFieldRenderOptions.structured;
+    this.isStructured = (this.metadataFieldRenderOptions.componentRef as any).structured;
     this.cd.detectChanges();
   }
 

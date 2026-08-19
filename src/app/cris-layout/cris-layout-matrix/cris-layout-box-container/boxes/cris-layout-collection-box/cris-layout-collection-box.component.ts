@@ -52,6 +52,8 @@ import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-
 })
 export class CrisLayoutCollectionBoxComponent extends CrisLayoutBoxModelComponent implements OnInit {
 
+  static hasOwnContainer = false;
+
   isInline = environment.crisLayout.collectionsBox.isInline;
 
   /**

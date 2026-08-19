@@ -36,6 +36,8 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
 })
 export class OrcidComponent extends RenderingTypeValueModelComponent implements OnInit {
 
+  static structured = false;
+
   orcidUrl$: Observable<string>;
 
   constructor(

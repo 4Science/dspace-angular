@@ -26,6 +26,8 @@ import { RenderingTypeStructuredModelComponent } from '../rendering-type-structu
 })
 export class TagComponent extends RenderingTypeStructuredModelComponent implements OnInit {
 
+  static structured = true;
+
   /**
   * This is the chips component which will be rendered in the template
   */
