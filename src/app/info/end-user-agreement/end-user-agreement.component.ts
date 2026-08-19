@@ -37,6 +37,7 @@ import {
 } from '../../core/auth/auth.actions';
 import { AuthService } from '../../core/auth/auth.service';
 import { EndUserAgreementService } from '../../core/end-user-agreement/end-user-agreement.service';
+import { EPersonDataService } from '../../core/eperson/eperson-data.service';
 import { BtnDisabledDirective } from '../../shared/btn-disabled.directive';
 import { isNotEmpty } from '../../shared/empty.util';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
@@ -70,6 +71,7 @@ export class EndUserAgreementComponent implements OnInit, OnDestroy {
               protected notificationsService: NotificationsService,
               protected translate: TranslateService,
               protected authService: AuthService,
+              protected ePersonService: EPersonDataService,
               protected store: Store<AppState>,
               protected router: Router,
               protected route: ActivatedRoute,
@@ -119,7 +121,12 @@ export class EndUserAgreementComponent implements OnInit, OnDestroy {
       switchMap((success) => {
         if (success) {
           this.notificationsService.success(this.translate.instant('info.end-user-agreement.accept.success'));
-          return this.route.queryParams.pipe(map((params) => params.redirect));
+          return this.authService.getAuthenticatedUserFromStore().pipe(
+            switchMap((user) => {
+              this.ePersonService.invalidateById(user.id);
+              return this.route.queryParams.pipe(map((params) => params.redirect));
+            }),
+          );
         } else {
           this.notificationsService.error(this.translate.instant('info.end-user-agreement.accept.error'));
           return observableOf(undefined);
