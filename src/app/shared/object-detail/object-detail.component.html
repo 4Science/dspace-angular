@@ -18,7 +18,7 @@
   @if (objects?.hasSucceeded) {
     <div class="row mt-2" @fadeIn>
       @for (object of objects?.payload?.page; track object) {
-        <div class="col"
+        <div class="col" [attr.data-test]="'detail-object' | dsBrowserOnly"
           >
           <ds-listable-object-component-loader [object]="object"
             [viewMode]="viewMode"
