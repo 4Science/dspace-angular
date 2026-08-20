@@ -1,4 +1,4 @@
-import { testA11y } from 'cypress/support/utils';
+import { SEARCH_RESULT_VIEW_MODE_SELECTOR, testA11y } from 'cypress/support/utils';
 
 describe('My DSpace page', () => {
   it('should display recent submissions and pass accessibility tests', () => {
@@ -9,8 +9,8 @@ describe('My DSpace page', () => {
 
     cy.get('ds-my-dspace-page').should('be.visible');
 
-    // At least one recent submission should be displayed
-    cy.get('[data-test="list-object"]').should('be.visible');
+    // At least one recent submission should be displayed (supports list or grid view)
+    cy.get(SEARCH_RESULT_VIEW_MODE_SELECTOR).should('be.visible');
 
     // Click each filter toggle to open *every* filter
     // (As we want to scan filter section for accessibility issues as well)
@@ -260,12 +260,12 @@ describe('My DSpace page', () => {
     //Validate URL
     cy.url().should('include', 'configuration=workflow');
 
-    //Wait to render the list and at leat one item
-    cy.get('[data-test="list-object"]').should('have.length.greaterThan', 0);
+    //Wait to render the list and at leat one item (supports list or grid view)
+    cy.get(SEARCH_RESULT_VIEW_MODE_SELECTOR).should('have.length.greaterThan', 0);
     cy.get('[data-test="claim-button"]').should('exist');
 
     //Check that we have at least one item in worflow search, the item have claim-button and can click in it.
-    cy.get('[data-test="list-object"]')
+    cy.get(SEARCH_RESULT_VIEW_MODE_SELECTOR)
       .then(($items) => {
         const itemWithClaim = [...$items].find(item =>
           item.querySelector('[data-test="claim-button"]'),
