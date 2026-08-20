@@ -26,7 +26,7 @@
               @if (item.allMetadata(authorMetadata).length === 0) {
                 <span>{{'mydspace.results.no-authors' | translate}}</span>
               }
-              <span class="d-flex w-100">
+              <span class="d-flex w-100 flex-row flex-wrap gapx-2">
                 @for (author of item.allMetadata(authorMetadata); track author; let i = $index; let last = $last) {
                   <span class="metadata-content">
                     <ds-metadata-link-view [item]="item" [metadataName]="authorMetadata"

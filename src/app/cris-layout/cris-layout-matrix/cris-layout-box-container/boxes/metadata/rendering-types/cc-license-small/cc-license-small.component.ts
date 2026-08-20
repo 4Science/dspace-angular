@@ -20,6 +20,8 @@ import { MetadataGroupComponent } from '../metadataGroup/metadata-group.componen
 })
 export class CcLicenseSmallComponent extends MetadataGroupComponent implements  OnInit  {
 
+  static structured = false;
+
   dcRights: any;
   dcRightsUri: any;
 

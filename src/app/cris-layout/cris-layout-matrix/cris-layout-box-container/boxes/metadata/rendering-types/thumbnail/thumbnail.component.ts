@@ -45,6 +45,8 @@ import { BitstreamRenderingModelComponent } from '../bitstream-rendering-model';
  */
 export class ThumbnailRenderingComponent extends BitstreamRenderingModelComponent implements OnInit {
 
+  static structured = true;
+
   /**
    * The bitstream to be rendered
    */

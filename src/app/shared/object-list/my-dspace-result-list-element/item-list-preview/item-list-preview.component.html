@@ -27,7 +27,7 @@
               }
               <span class="item-list-date" [innerHTML]="item.firstMetadataValue('dc.date.issued', undefined, true) || ('mydspace.results.no-date' | translate)"></span>)
               @if (item.hasMetadata(authorMetadata);) {
-                <span class="item-list-authors">
+                <span class="item-list-authors flex-row flex-wrap gapx-2">
                   @if (item.allMetadataValues(authorMetadata).length === 0) {
                     <span>{{'mydspace.results.no-authors' | translate}}</span>
                   }
