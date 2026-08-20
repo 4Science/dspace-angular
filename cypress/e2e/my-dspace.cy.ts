@@ -1,4 +1,4 @@
-import { testA11y } from 'cypress/support/utils';
+import { SEARCH_RESULT_VIEW_MODE_SELECTOR, testA11y } from 'cypress/support/utils';
 
 describe('My DSpace page', () => {
     it('should display recent submissions and pass accessibility tests', () => {
@@ -9,8 +9,8 @@ describe('My DSpace page', () => {
 
         cy.get('ds-my-dspace-page').should('be.visible');
 
-        // At least one recent submission should be displayed
-        cy.get('[data-test="list-object"]').should('be.visible');
+      // At least one recent submission should be displayed (supports list or grid view)
+      cy.get(SEARCH_RESULT_VIEW_MODE_SELECTOR).should('be.visible');
 
         // Click each filter toggle to open *every* filter
         // (As we want to scan filter section for accessibility issues as well)
