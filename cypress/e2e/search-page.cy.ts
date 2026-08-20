@@ -1,4 +1,7 @@
-import { SEARCH_RESULT_VIEW_MODE_SELECTOR, testA11y } from 'cypress/support/utils';
+import {
+  SEARCH_RESULT_VIEW_MODE_SELECTOR,
+  testA11y,
+} from 'cypress/support/utils';
 
 describe('Search Page', () => {
   // NOTE: these tests currently assume this query will return results!
