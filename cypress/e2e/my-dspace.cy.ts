@@ -1,4 +1,7 @@
-import { SEARCH_RESULT_VIEW_MODE_SELECTOR, testA11y } from 'cypress/support/utils';
+import {
+  SEARCH_RESULT_VIEW_MODE_SELECTOR,
+  testA11y,
+} from 'cypress/support/utils';
 
 describe('My DSpace page', () => {
   it('should display recent submissions and pass accessibility tests', () => {
