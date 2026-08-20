@@ -23,6 +23,8 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
 })
 export class LonghtmlComponent extends RenderingTypeValueModelComponent implements OnInit {
 
+  static structured = false;
+
   /**
    * Id for truncatable component
    */

@@ -49,6 +49,8 @@ import { BitstreamAttachmentComponent } from './bitstream-attachment/bitstream-a
  */
 export class AdvancedAttachmentComponent extends AttachmentComponent implements OnInit {
 
+  static structured = true;
+
   /**
    * Environment variables configuring the fields to be viewed
    */

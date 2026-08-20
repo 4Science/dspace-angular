@@ -54,6 +54,8 @@ import { BitstreamAttachmentRenderingModelComponent } from './bitstream-attachme
  */
 export class AttachmentComponent extends BitstreamAttachmentRenderingModelComponent implements OnInit {
 
+  static structured = true;
+
   /**
    * List of bitstreams to show
    */

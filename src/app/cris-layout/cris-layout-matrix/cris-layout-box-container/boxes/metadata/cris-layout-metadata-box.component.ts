@@ -34,6 +34,8 @@ import { RowComponent } from './row/row.component';
  */
 export class CrisLayoutMetadataBoxComponent extends CrisLayoutBoxModelComponent implements OnInit, OnDestroy {
 
+  static hasOwnContainer = false;
+
   /**
    * Contains the fields configuration for current box
    */

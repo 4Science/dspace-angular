@@ -39,6 +39,8 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
 })
 export class ValuepairComponent extends RenderingTypeValueModelComponent implements OnInit {
 
+  static structured = false;
+
   /**
    * list of values
    */

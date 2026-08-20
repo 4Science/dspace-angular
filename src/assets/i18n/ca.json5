@@ -8848,9 +8848,9 @@
   // TODO Source message changed - Revise the translation
   "repository.title": "Repositori DSpace",
 
-  // "repository.title.prefix": "{{ repositoryName }} Angular :: ",
+  // "repository.title.prefix": "{{ repositoryName }} :: ",
   // TODO New key - Add a translation
-  "repository.title.prefix": "{{ repositoryName }} Angular :: ",
+  "repository.title.prefix": "{{ repositoryName }} :: ",
 
   // "resource-policies.add.button": "Add",
   "resource-policies.add.button": "Afegir",

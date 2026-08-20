@@ -36,6 +36,8 @@ import {
 })
 export class IdentifierComponent extends RenderingTypeValueModelComponent implements OnInit {
 
+  static structured = false;
+
   /**
    * The identifier to render
    */
