@@ -9,7 +9,7 @@
   </span>
     <div class="card-body">
         <ds-badges *ngIf="showLabel" [object]="dso" [context]="context"></ds-badges>
-        <h4 class="card-title">{{ dsoNameService.getName(dso) }}</h4>
+        <h2 class="card-title">{{ dsoNameService.getName(dso) }}</h2>
         <p *ngIf="dso.shortDescription" class="card-text">{{dso.shortDescription}}</p>
         <div *ngIf="linkType !== linkTypes.None" class="text-center">
             <a [target]="(linkType === linkTypes.ExternalLink) ? '_blank' : '_self'" [attr.rel]="(linkType === linkTypes.ExternalLink) ? 'noopener noreferrer' : null" [routerLink]="['/communities/', dso.id]" class="lead btn btn-primary viewButton">{{ 'search.results.view-result' | translate}}</a>
