@@ -1,5 +1,11 @@
 .license-text {
+  display: block;
   max-height: 250px;
-  overflow-y: scroll;
+  overflow-y: auto;
   white-space: pre-wrap;
+
+  &:focus-visible {
+    outline: 2px solid var(--ds-primary, #2684FF);
+    outline-offset: 2px;
+  }
 }
