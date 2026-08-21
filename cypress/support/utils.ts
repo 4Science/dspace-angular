@@ -8,6 +8,15 @@ import { Options } from 'cypress-axe';
  */
 export const SEARCH_RESULT_VIEW_MODE_SELECTOR = '[data-test="list-object"], [data-test="grid-object"], [data-test="detail-object"]';
 
+/**
+ * Switches the search results to list view mode.
+ * Use this before interacting with action buttons (edit, delete) that are only available in list view.
+ */
+export const switchToListView = () => {
+  cy.get('ds-search-sidebar [data-test="list-view"]').click();
+  cy.get('[data-test="list-object"]').should('exist');
+};
+
 // Log violations to terminal/commandline in a table format.
 // Uses 'log' and 'table' tasks defined in ../plugins/index.ts
 // Borrowed from https://github.com/component-driven/cypress-axe#in-your-spec-file

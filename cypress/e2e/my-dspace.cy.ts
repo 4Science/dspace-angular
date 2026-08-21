@@ -1,5 +1,6 @@
 import {
   SEARCH_RESULT_VIEW_MODE_SELECTOR,
+  switchToListView,
   testA11y,
 } from 'cypress/support/utils';
 
@@ -88,6 +89,9 @@ describe('My DSpace page', () => {
 
       // Close any open notifications, to make sure they don't get in the way of next steps
       cy.get('[data-dismiss="alert"]').click({ multiple: true });
+
+      // Switch to list view so that edit/delete action buttons are visible
+      switchToListView();
 
       // This is the GET command that will actually run the search
       cy.intercept('GET', '**/server/api/discover/search/objects*').as('search-results');
