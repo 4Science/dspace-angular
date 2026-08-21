@@ -323,10 +323,12 @@ describe('BrowserOrejimeService', () => {
   describe('initialize google analytics configuration', () => {
     let GOOGLE_ANALYTICS_KEY;
     let REGISTRATION_VERIFICATION_ENABLED_KEY;
+    let FEEDBACK_VERIFICATION_ENABLED_KEY;
     let MATOMO_ENABLED;
     beforeEach(() => {
       GOOGLE_ANALYTICS_KEY = clone((service as any).GOOGLE_ANALYTICS_KEY);
       REGISTRATION_VERIFICATION_ENABLED_KEY = clone((service as any).REGISTRATION_VERIFICATION_ENABLED_KEY);
+      FEEDBACK_VERIFICATION_ENABLED_KEY = clone((service as any).FEEDBACK_VERIFICATION_ENABLED_KEY);
       MATOMO_ENABLED = clone((service as any).MATOMO_ENABLED);
       spyOn((service as any), 'getUserId$').and.returnValue(of(user.uuid));
       translateService.get.and.returnValue(of('loading...'));
@@ -377,6 +379,15 @@ describe('BrowserOrejimeService', () => {
               values: ['false'],
             }),
           )
+          .withArgs(FEEDBACK_VERIFICATION_ENABLED_KEY)
+          .and
+          .returnValue(
+            createSuccessfulRemoteDataObject$({
+              ... new ConfigurationProperty(),
+              name: trackingIdTestValue,
+              values: ['false'],
+            }),
+          )
           .withArgs(MATOMO_ENABLED)
           .and
           .returnValue(
@@ -405,6 +416,15 @@ describe('BrowserOrejimeService', () => {
               values: ['false'],
             }),
           )
+          .withArgs(FEEDBACK_VERIFICATION_ENABLED_KEY)
+          .and
+          .returnValue(
+            createSuccessfulRemoteDataObject$({
+              ... new ConfigurationProperty(),
+              name: trackingIdTestValue,
+              values: ['false'],
+            }),
+          )
           .withArgs(MATOMO_ENABLED)
           .and
           .returnValue(
@@ -424,6 +444,15 @@ describe('BrowserOrejimeService', () => {
             createSuccessfulRemoteDataObject$(null),
           )
           .withArgs(REGISTRATION_VERIFICATION_ENABLED_KEY)
+          .and
+          .returnValue(
+            createSuccessfulRemoteDataObject$({
+              ... new ConfigurationProperty(),
+              name: trackingIdTestValue,
+              values: ['false'],
+            }),
+          )
+          .withArgs(FEEDBACK_VERIFICATION_ENABLED_KEY)
           .and
           .returnValue(
             createSuccessfulRemoteDataObject$({

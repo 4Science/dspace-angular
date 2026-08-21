@@ -3,6 +3,7 @@ import {
   Observable,
   of,
 } from 'rxjs';
+import { AuthorizationService } from 'src/app/shared/authorizations/authorization.service';
 
 import { hasValue } from '../../../shared/empty.util';
 import { getMockObjectCacheService } from '../../../shared/mocks/object-cache.service.mock';
@@ -25,6 +26,7 @@ import { FeatureID } from './feature-id';
 describe('AuthorizationDataService', () => {
   let service: AuthorizationDataService;
   let siteService: SiteDataService;
+  let authorizationService: AuthorizationService;
   let objectCache;
 
   let site: Site;
@@ -37,6 +39,7 @@ describe('AuthorizationDataService', () => {
   function init() {
     site = Object.assign(new Site(), {
       id: 'test-site',
+      type: 'core.site',
       _links: {
         self: { href: 'test-site-href' },
       },
@@ -48,8 +51,18 @@ describe('AuthorizationDataService', () => {
     siteService = jasmine.createSpyObj('siteService', {
       find: of(site),
     });
+
+    authorizationService = jasmine.createSpyObj('authorizationService', {
+      isLoading: of(true),
+      hasErrors: of(false),
+      getSiteAuthorization: of([]),
+      getAuthorizationForObject: of(true),
+      hasAuthorizationEntryForObject: of(true),
+      isRequestLoading: of(false),
+      initStateForObjects: jasmine.createSpy('initStateForObjects'),
+    });
     objectCache = getMockObjectCacheService();
-    service = new AuthorizationDataService(requestService, undefined, objectCache, undefined, siteService);
+    service = new AuthorizationDataService(requestService, undefined, objectCache, undefined, siteService, authorizationService, undefined);
   }
 
   beforeEach(() => {
@@ -58,7 +71,7 @@ describe('AuthorizationDataService', () => {
   });
 
   describe('composition', () => {
-    const initService = () => new AuthorizationDataService(null, null, null, null, null);
+    const initService = () => new AuthorizationDataService(null, null, null, null, null,null, null);
     testSearchDataImplementation(initService);
   });
 
@@ -160,6 +173,51 @@ describe('AuthorizationDataService', () => {
     });
   });
 
+  describe('searchByObjects', () => {
+    const objectId = 'fake-object-id';
+    const objectId2 = 'fake-object-id-2';
+    const ePersonUuid = 'fake-eperson-uuid';
+
+    function createExpected(providedObjectsUuid: string[], providedType: string, providedEPersonUuid?: string, providedFeaturesId?: FeatureID[]): FindListOptions {
+      const searchParams = [];
+
+      searchParams.push(new RequestParam('type', providedType));
+
+      searchParams.push(...providedObjectsUuid.map(uuid => new RequestParam('uuid', uuid)));
+
+      if (hasValue(providedFeaturesId)) {
+        searchParams.push(...providedFeaturesId.map(id => new RequestParam('feature', id)));
+      }
+      if (hasValue(providedEPersonUuid)) {
+        searchParams.push(new RequestParam('eperson', providedEPersonUuid));
+      }
+      return Object.assign(new FindListOptions(), { searchParams });
+    }
+
+
+    describe('when one feature and one object id are provided', () => {
+      beforeEach(() => {
+        service.searchByObjects([objectId], 'core.item', [FeatureID.LoginOnBehalfOf]).subscribe();
+      });
+
+      it('should call searchBy with a list made by object\'s uuid and a list of the features IDs', () => {
+        expect(service.searchBy).toHaveBeenCalledWith('objects', createExpected([objectId], 'core.item', null, [FeatureID.LoginOnBehalfOf]), true, true);
+      });
+    });
+
+    describe('when multiple values are provided', () => {
+      beforeEach(() => {
+        service.searchByObjects([objectId, objectId2], 'core.item', [FeatureID.AdministratorOf, FeatureID.IsCollectionAdmin], ePersonUuid).subscribe();
+      });
+
+      it('should call searchBy with the object\'s url, user\'s uuid and the feature', () => {
+        expect(service.searchBy).toHaveBeenCalledWith('objects', createExpected([objectId, objectId2], 'core.item', ePersonUuid, [FeatureID.AdministratorOf, FeatureID.IsCollectionAdmin]), true, true);
+      });
+    });
+
+
+  });
+
   describe('isAuthorized', () => {
     const featureID = FeatureID.AdministratorOf;
     const validPayload = [
@@ -190,6 +248,7 @@ describe('AuthorizationDataService', () => {
 
     describe('when searchByObject returns a 401', () => {
       beforeEach(() => {
+        authorizationService.getAuthorizationForObject = () => of(false);
         spyOn(service, 'searchByObject').and.returnValue(createFailedRemoteDataObject$('Unauthorized', 401));
       });
 
@@ -204,6 +263,7 @@ describe('AuthorizationDataService', () => {
     describe('when searchByObject returns an empty list', () => {
       beforeEach(() => {
         spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(emptyPayload)));
+        authorizationService.getAuthorizationForObject = () => of(false);
       });
 
       it('should return false', (done) => {
@@ -216,10 +276,11 @@ describe('AuthorizationDataService', () => {
 
     describe('when searchByObject returns an invalid list', () => {
       beforeEach(() => {
+        authorizationService.getAuthorizationForObject = () => of(false);
         spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(invalidPayload)));
       });
 
-      it('should return true', (done) => {
+      it('should return false', (done) => {
         service.isAuthorized(featureID).subscribe((result) => {
           expect(result).toEqual(false);
           done();
@@ -230,11 +291,44 @@ describe('AuthorizationDataService', () => {
     describe('when searchByObject returns a valid list', () => {
       beforeEach(() => {
         spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(validPayload)));
+        authorizationService.getAuthorizationForObject = () => of(true);
       });
 
       it('should return true', (done) => {
         service.isAuthorized(featureID).subscribe((result) => {
           expect(result).toEqual(true);
+          done();
+        });
+      });
+    });
+
+
+    describe('it should read value from state if present', () => {
+      beforeEach(() => {
+        spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(validPayload)));
+        authorizationService.getAuthorizationForObject = () => of(true);
+      });
+
+      it('should return true for object', (done) => {
+        service.isAuthorized(featureID).subscribe((result) => {
+          expect(result).toEqual(true);
+          done();
+        });
+      });
+    });
+
+    describe('it should init value in state if is not present', () => {
+      beforeEach(() => {
+        spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(validPayload)));
+        authorizationService.getAuthorizationForObject = jasmine.createSpy('getAuthorizationForObject')
+          .and.returnValues(
+            of(undefined),
+            of(true),
+          );
+      });
+      it('should call init method', (done) => {
+        service.isAuthorized(featureID).subscribe((result) => {
+          expect(authorizationService.initStateForObjects).toHaveBeenCalled();
           done();
         });
       });

@@ -53,6 +53,7 @@ import { MathService } from '../../app/core/shared/math.service';
 import { ServerMathService } from '../../app/core/shared/server-math.service';
 import { ServerXSRFService } from '../../app/core/xsrf/server-xsrf.service';
 import { XSRFService } from '../../app/core/xsrf/xsrf.service';
+import { AuthorizationService } from '../../app/shared/authorizations/authorization.service';
 import { OrejimeService } from '../../app/shared/cookies/orejime.service';
 import { ServerOrejimeService } from '../../app/shared/cookies/server-orejime.service';
 import { DatadogRumService } from '../../app/shared/datadog-rum/datadog-rum.service';
@@ -161,6 +162,10 @@ export const serverAppConfig: ApplicationConfig = mergeApplicationConfig({
     {
       provide: DatadogRumService,
       useClass: ServerDatadogRumService,
+    },
+    {
+      provide: AuthorizationService,
+      useClass: AuthorizationService,
     },
   ],
 }, commonAppConfig);

@@ -734,6 +734,67 @@ describe('SubmissionObjectEffects test suite', () => {
       // expect(notificationsServiceStub.success).toHaveBeenCalled();
     });
 
+    it('should handle sections without errorsToShow property gracefully', () => {
+      const stateWithMissingErrorsToShow = {
+        826: {
+          ...submissionState['826'],
+          sections: {
+            ...submissionState['826'].sections,
+            'sectionWithoutErrors': {
+              sectionType: 'custom',
+              enabled: true,
+              data: {},
+            } as any,
+          },
+        },
+      };
+
+      store.nextState({
+        submission: {
+          objects: stateWithMissingErrorsToShow,
+        },
+      } as any);
+
+      const response = [Object.assign({}, mockSubmissionRestResponse[0], {
+        sections: mockSectionsData,
+      })];
+      actions = hot('--a-', {
+        a: {
+          type: SubmissionObjectActionTypes.SAVE_SUBMISSION_FORM_SUCCESS,
+          payload: {
+            submissionId: submissionId,
+            submissionObject: response,
+          },
+        },
+      });
+
+      const expected = cold('--(bcd)-', {
+        b: new UpdateSectionDataAction(
+          submissionId,
+          'traditionalpageone',
+          mockSectionsData.traditionalpageone as any,
+          [],
+          [],
+        ),
+        c: new UpdateSectionDataAction(
+          submissionId,
+          'license',
+          mockSectionsData.license as any,
+          [],
+          [],
+        ),
+        d: new UpdateSectionDataAction(
+          submissionId,
+          'upload',
+          mockSectionsData.upload as any,
+          [],
+          [],
+        ),
+      });
+
+      expect(submissionObjectEffects.saveSubmissionSuccess$).toBeObservable(expected);
+    });
+
   });
 
   describe('saveSubmissionSectionSuccess$', () => {

@@ -1,36 +1,30 @@
-import {
-  AsyncPipe,
-  DatePipe,
-} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   OnInit,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {
-  combineLatest,
+  forkJoin,
   Observable,
+  switchMap,
 } from 'rxjs';
 import {
+  filter,
   map,
   mergeMap,
 } from 'rxjs/operators';
 
-import {
-  AuditDataService,
-  AuditDetails,
-} from '../../core/audit/audit-data.service';
+import { Audit } from '../../core/audit/model/audit.model';
 import { SortDirection } from '../../core/cache/models/sort-options.model';
-import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
-import { FeatureID } from '../../core/data/feature-authorization/feature-id';
+import { AuditDataService } from '../../core/data/audit-data.service';
 import { FindListOptions } from '../../core/data/find-list-options.model';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { RemoteData } from '../../core/data/remote-data';
 import { PaginationService } from '../../core/pagination/pagination.service';
-import { getFirstCompletedRemoteData } from '../../core/shared/operators';
-import { PaginationComponent } from '../../shared/pagination/pagination.component';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
+import { followLink } from '../../shared/utils/follow-link-config.model';
+import { AuditTableComponent } from '../audit-table/audit-table.component';
 
 /**
  * Component displaying a list of all audit in a paginated table
@@ -40,9 +34,7 @@ import { PaginationComponentOptions } from '../../shared/pagination/pagination-c
   templateUrl: './audit-overview.component.html',
   imports: [
     AsyncPipe,
-    DatePipe,
-    PaginationComponent,
-    RouterLink,
+    AuditTableComponent,
     TranslateModule,
   ],
 })
@@ -51,12 +43,7 @@ export class AuditOverviewComponent implements OnInit {
   /**
    * List of all audits
    */
-  auditsRD$: Observable<RemoteData<PaginatedList<AuditDetails>>>;
-
-  /**
-   * Whether user is admin
-   */
-  isAdmin$: Observable<boolean>;
+  auditsRD$: Observable<RemoteData<PaginatedList<Audit>>>;
 
   /**
    * The current pagination configuration for the page used by the FindAll method
@@ -88,7 +75,6 @@ export class AuditOverviewComponent implements OnInit {
   dateFormat = 'yyyy-MM-dd HH:mm:ss';
 
   constructor(protected auditService: AuditDataService,
-              protected authorizationService: AuthorizationDataService,
               protected paginationService: PaginationService) {
   }
 
@@ -100,23 +86,38 @@ export class AuditOverviewComponent implements OnInit {
    * Send a request to fetch all audits for the current page
    */
   setAudits() {
-    const config$ = this.paginationService.getFindListOptions(this.pageId, this.config);
-    this.isAdmin$ = this.isCurrentUserAdmin();
-    this.auditsRD$ = combineLatest([this.isAdmin$, config$]).pipe(
-      mergeMap(([isAdmin, config]) => {
-        if (isAdmin) {
-          return this.auditService.findAll(config)
-            .pipe(
-              getFirstCompletedRemoteData(),
-              map(data => this.auditService.mapToAuditDetails(data)),
-            );
-        }
+    this.auditsRD$ = this.paginationService.getFindListOptions(this.pageId, this.config).pipe(
+      switchMap((config) => {
+        return this.auditService.findAll(config, false, true, followLink('eperson'));
+      }),
+      filter(data => data && data?.payload?.page?.length > 0),
+      map((audits) => {
+        audits.payload?.page.forEach((audit) => {
+          audit.hasDetails = this.auditService.auditHasDetails(audit);
+        });
+
+        return audits;
+      }),
+      mergeMap(auditsRD => {
+        const updatedAudits$ = auditsRD.payload.page.map(audit => {
+          return this.auditService.getEpersonName(audit).pipe(
+            map(name => Object.assign(new Audit(), audit, { epersonName: name })),
+          );
+        });
+
+        return forkJoin(updatedAudits$).pipe(
+          map(updatedAudits => Object.assign(new RemoteData(
+            auditsRD.timeCompleted,
+            auditsRD.msToLive,
+            auditsRD.lastUpdated,
+            auditsRD.state,
+            auditsRD.errorMessage,
+            Object.assign(new PaginatedList(), { ...auditsRD.payload, page: updatedAudits }),
+            auditsRD.statusCode,
+          ))),
+        );
       }),
     );
-  }
-
-  isCurrentUserAdmin(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf, undefined, undefined);
   }
 
 }

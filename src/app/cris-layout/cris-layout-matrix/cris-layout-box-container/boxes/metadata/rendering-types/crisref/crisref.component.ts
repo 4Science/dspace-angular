@@ -17,4 +17,6 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
 })
 export class CrisrefComponent extends RenderingTypeValueModelComponent {
 
+  static structured = false;
+
 }

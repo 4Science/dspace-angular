@@ -30,7 +30,6 @@ import {
   DynamicFormsCoreModule,
   DynamicFormValidationService,
 } from '@ng-dynamic-forms/core';
-import { DynamicFormsNGBootstrapUIModule } from '@ng-dynamic-forms/ui-ng-bootstrap';
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { getTestScheduler } from 'jasmine-marbles';
@@ -181,7 +180,6 @@ describe('DsDynamicOneboxComponent test suite', () => {
     TestBed.configureTestingModule({
       imports: [
         DynamicFormsCoreModule,
-        DynamicFormsNGBootstrapUIModule,
         FormsModule,
         NgbModule,
         ReactiveFormsModule,
@@ -293,6 +291,19 @@ describe('DsDynamicOneboxComponent test suite', () => {
 
         expect(oneboxComponent.model.value).not.toBeDefined();
 
+      });
+
+      it('should clear inputValue when input is emptied after a value was set', () => {
+        const inputDe = oneboxCompFixture.debugElement.query(By.css('input.form-control'));
+        const inputElement = inputDe.nativeElement;
+
+        inputElement.value = 'test value';
+        inputElement.dispatchEvent(new Event('input'));
+        expect(oneboxComponent.inputValue).toEqual(new FormFieldMetadataValueObject('test value'));
+
+        inputElement.value = '';
+        inputElement.dispatchEvent(new Event('input'));
+        expect(oneboxComponent.inputValue).toBeNull();
       });
 
       it('should emit blur Event onBlur when popup is closed', () => {
@@ -640,7 +651,6 @@ describe('DsDynamicOneboxComponent test suite', () => {
   imports: [
     CdkTreeModule,
     DynamicFormsCoreModule,
-    DynamicFormsNGBootstrapUIModule,
     FormsModule,
     NgbModule,
     ReactiveFormsModule,

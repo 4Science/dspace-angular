@@ -28,7 +28,7 @@ import {
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { MockComponent } from 'ng-mocks';
-import { NgxMaskModule } from 'ngx-mask';
+import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { of } from 'rxjs';
 
 import {
@@ -147,9 +147,9 @@ describe('SubmissionSectionUploadFileEditComponent test suite', () => {
         MockComponent(FormComponent),
         SubmissionSectionUploadFileEditComponent,
         TestComponent,
-        NgxMaskModule.forRoot(),
       ],
       providers: [
+        provideEnvironmentNgxMask(),
         { provide: FormService, useValue: getMockFormService() },
         { provide: SubmissionService, useClass: SubmissionServiceStub },
         { provide: SubmissionJsonPatchOperationsService, useValue: submissionJsonPatchOperationsServiceStub },

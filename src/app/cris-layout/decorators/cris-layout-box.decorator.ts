@@ -10,17 +10,16 @@ import { CrisLayoutRelationBoxComponent } from '../cris-layout-matrix/cris-layou
 import { LayoutBox } from '../enums/layout-box.enum';
 
 export interface CrisLayoutBoxRenderOptions {
-  componentRef: GenericConstructor<Component>;
-  hasOwnContainer: boolean;
+  componentRef: GenericConstructor<Component> & { hasOwnContainer: boolean };
 }
 
 const layoutBoxesMap = new Map<LayoutBox, CrisLayoutBoxRenderOptions>([
-  [ LayoutBox.COLLECTIONS, { componentRef: CrisLayoutCollectionBoxComponent, hasOwnContainer: false } as CrisLayoutBoxRenderOptions ],
-  [ LayoutBox.IIIFVIEWER, { componentRef: CrisLayoutIIIFViewerBoxComponent, hasOwnContainer: false } as CrisLayoutBoxRenderOptions ],
-  [ LayoutBox.METADATA, { componentRef: CrisLayoutMetadataBoxComponent, hasOwnContainer: false } as CrisLayoutBoxRenderOptions ],
-  [ LayoutBox.METRICS, { componentRef: CrisLayoutMetricsBoxComponent, hasOwnContainer: true } as CrisLayoutBoxRenderOptions ],
-  [ LayoutBox.RELATION, { componentRef: CrisLayoutRelationBoxComponent, hasOwnContainer: false } as CrisLayoutBoxRenderOptions ],
-  [ LayoutBox.VERSIONING, { componentRef: ItemVersionsComponent, hasOwnContainer: false } as CrisLayoutBoxRenderOptions ],
+  [ LayoutBox.COLLECTIONS, { componentRef: CrisLayoutCollectionBoxComponent } ],
+  [ LayoutBox.IIIFVIEWER, { componentRef: CrisLayoutIIIFViewerBoxComponent } ],
+  [ LayoutBox.METADATA, { componentRef: CrisLayoutMetadataBoxComponent } ],
+  [ LayoutBox.METRICS, { componentRef: CrisLayoutMetricsBoxComponent } ],
+  [ LayoutBox.RELATION, { componentRef: CrisLayoutRelationBoxComponent } ],
+  [ LayoutBox.VERSIONING, { componentRef: ItemVersionsComponent } ],
 ]);
 
 export function getCrisLayoutBox(boxType: LayoutBox): CrisLayoutBoxRenderOptions {

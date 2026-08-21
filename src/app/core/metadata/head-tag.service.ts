@@ -469,7 +469,7 @@ export class HeadTagService {
     if (this.currentObject.value instanceof Item) {
       let url = this.getMetaTagValue('dc.identifier.uri');
       if (hasNoValue(url)) {
-        url = new URLCombiner(this.hardRedirectService.getCurrentOrigin(), this.router.url).toString();
+        url = new URLCombiner(this.hardRedirectService.getBaseUrl(), this.router.url).toString();
       }
       this.addMetaTag('citation_abstract_html_url', url);
     }
@@ -613,7 +613,7 @@ export class HeadTagService {
         // Use the found link to set the <meta> tag
         this.addMetaTag(
           'citation_pdf_url',
-          new URLCombiner(this.hardRedirectService.getCurrentOrigin(), link).toString(),
+          new URLCombiner(this.hardRedirectService.getBaseUrl(), link).toString(),
           true,
         );
       });
@@ -858,7 +858,7 @@ export class HeadTagService {
 
   private setGenericPageMetaTags() {
     const pageDocumentTitle = this._document.getElementsByTagName('title')[0].innerText;
-    const pageUrl = new URLCombiner(this.hardRedirectService.getCurrentOrigin(), this.router.url).toString();
+    const pageUrl = new URLCombiner(this.hardRedirectService.getBaseUrl(), this.router.url).toString();
     const genericPageOpenGraphType = 'website';
 
     this.setTitleTags(pageDocumentTitle);
@@ -874,6 +874,6 @@ export class HeadTagService {
   }
 
   private getUrlOrigin(): string {
-    return isPlatformBrowser(this.platformId) ? this.hardRedirectService.getCurrentOrigin() : this.origin;
+    return isPlatformBrowser(this.platformId) ? this.hardRedirectService.getBaseUrl() : this.origin;
   }
 }

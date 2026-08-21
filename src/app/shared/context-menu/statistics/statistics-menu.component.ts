@@ -57,7 +57,7 @@ export class StatisticsMenuComponent extends ContextMenuEntryComponent implement
 
   ngOnInit() {
     this.notificationService.claimedProfile.subscribe(() => {
-      this.isAuthorized$ = this.authorizationService.isAuthorized(FeatureID.CanViewUsageStatistics, this.contextMenuObject.self, undefined, false);
+      this.isAuthorized$ = this.authorizationService.isAuthorized(FeatureID.CanViewUsageStatistics, this.contextMenuObject.self);
     });
   }
 

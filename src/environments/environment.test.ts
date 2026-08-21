@@ -2,9 +2,12 @@
 import { BuildConfig } from 'src/config/build-config.interface';
 import { IdentifierSubtypesIconPositionEnum } from 'src/config/identifier-subtypes-config.interface';
 
+import { FeatureID } from '../app/core/data/feature-authorization/feature-id';
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
 import { AdvancedAttachmentElementType } from '../config/advanced-attachment-rendering.config';
+
+
 
 export const environment: BuildConfig = {
   production: false,
@@ -77,6 +80,10 @@ export const environment: BuildConfig = {
     },
     // msToLive: 1000, // 15 minutes
     control: 'max-age=60',
+    // These static files should not be cached (paths relative to dist/browser, including the leading slash)
+    noCacheFiles: [
+      '/index.html',  // see https://web.dev/articles/http-cache#unversioned-urls
+    ],
     autoSync: {
       defaultTime: 0,
       maxBufferSize: 100,
@@ -116,6 +123,32 @@ export const environment: BuildConfig = {
       timeLeftBeforeTokenRefresh: 20000, // 20 sec
     },
     isPasswordLoginEnabledForAdminsOnly: true,
+  },
+
+  siteAuthorizationFeaturesConfig : [
+    FeatureID.AdministratorOf,
+    FeatureID.IsCommunityAdmin,
+    FeatureID.IsCollectionAdmin,
+    FeatureID.EPersonRegistration,
+    FeatureID.CanManageGroups,
+    FeatureID.CanChangePassword,
+    FeatureID.CanViewUsageStatistics,
+    FeatureID.CanViewLoginStatistics,
+    FeatureID.CanViewWorkflowStatistics,
+    FeatureID.CanSendFeedback,
+    FeatureID.CanEditItem,
+    FeatureID.EPersonForgotPassword,
+  ],
+
+  discoveryAuthorizationFeaturesConfig: {
+    'workspace': {
+      'Workspace': [
+        FeatureID.CanEditItem,
+      ],
+    },
+    default: {
+
+    },
   },
 
   // Form settings
@@ -542,6 +575,10 @@ export const environment: BuildConfig = {
         baseUrl: 'https://doi.org/',
       },
       {
+        name: 'core',
+        baseUrl: 'https://core.ac.uk/works/',
+      },
+      {
         name: 'keepMyWhiteSpaces',
         baseUrl: 'https://keepmywhitespaces.com/',
         shouldKeepWhiteSpaces: true,
@@ -777,6 +814,12 @@ export const environment: BuildConfig = {
       icon: 'assets/images/ror.logo.icon.svg',
       iconPosition: IdentifierSubtypesIconPositionEnum.LEFT,
       link: 'https://ror.org',
+    },
+    {
+      name: 'core',
+      icon: 'assets/images/core.logo.icon.png',
+      iconPosition: IdentifierSubtypesIconPositionEnum.LEFT,
+      link: 'https://core.ac.uk',
     },
   ],
   // Configuration for the metadata link view popover

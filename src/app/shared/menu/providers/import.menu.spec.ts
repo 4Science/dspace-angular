@@ -10,9 +10,7 @@ import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
-import { ScriptDataService } from '../../../core/data/processes/script-data.service';
 import { AuthorizationDataServiceStub } from '../../testing/authorization-service.stub';
-import { ScriptServiceStub } from '../../testing/script-service.stub';
 import { MenuItemType } from '../menu-item-type.model';
 import { PartialMenuSection } from '../menu-provider.model';
 import { ImportMenuProvider } from './import.menu';
@@ -58,7 +56,6 @@ describe('ImportMenuProvider', () => {
       providers: [
         ImportMenuProvider,
         { provide: AuthorizationDataService, useValue: authorizationServiceStub },
-        { provide: ScriptDataService, useClass: ScriptServiceStub },
       ],
     });
     provider = TestBed.inject(ImportMenuProvider);

@@ -12,6 +12,7 @@ import {
   NgbPopoverModule,
   NgbTooltipModule,
 } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 import {
   Observable,
   of,
@@ -56,6 +57,7 @@ import { StickyPopoverDirective } from './sticky-popover.directive';
     NgTemplateOutlet,
     RouterLink,
     StickyPopoverDirective,
+    TranslateModule,
     VarDirective,
   ],
 })
@@ -75,6 +77,11 @@ export class MetadataLinkViewComponent implements OnInit {
    * Item of the metadata value
    */
   @Input() item: DSpaceObject;
+
+  /**
+   * Where to place the popover
+   */
+  @Input() popoverPlacement: string;
   /**
    * The metadata name from where to take the value of the cris style
    */

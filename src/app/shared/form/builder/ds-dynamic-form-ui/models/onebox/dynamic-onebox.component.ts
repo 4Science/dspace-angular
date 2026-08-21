@@ -238,6 +238,8 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
           this.inputValue.securityLevel = (this.model.value as any).securityLevel;
         }
       }
+    } else if (isEmpty(event.target.value)) {
+      this.inputValue = null;
     }
   }
 

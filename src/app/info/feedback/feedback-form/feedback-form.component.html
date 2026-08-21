@@ -2,58 +2,95 @@
   <div class="col-12 col-sm-12 col-md-9">
     <h1>{{ 'info.feedback.head' | translate }}</h1>
     <p>{{ 'info.feedback.info' | translate }}</p>
-    <form [formGroup]="feedbackForm" (ngSubmit)="createFeedback()" class="col p-0">
-      <div class="row mt-3">
-        <div class="control-group col-sm-12">
+    <form class="primary" [formGroup]="feedbackForm">
+      <fieldset class="col p-0">
+        <div class="row">
+          <div class="control-group col-sm-12">
             <label class="control-label form-label" for="email">{{ 'info.feedback.email-label' | translate }}&nbsp;</label>
-          <input id="email" class="form-control" name="email" type="text" value="" formControlName="email" autofocus="autofocus" title="{{ 'info.feedback.email_help' | translate }}">
-          <small class="text-muted">{{ 'info.feedback.email_help' | translate }}</small>
-        </div>
-      </div>
-
-      @if (feedbackForm.controls.email.invalid && (feedbackForm.controls.email.dirty || feedbackForm.controls.email.touched)) {
-        <div class="row">
-          <div class="col-sm-12 alert">
-            @if (feedbackForm.controls.email.errors?.required) {
-              <ds-error message="{{'info.feedback.error.email.required' | translate}}"></ds-error>
-            }
-            @if (feedbackForm.controls.email.errors?.pattern) {
-              <ds-error message="{{'info.feedback.error.email.required' | translate}}"></ds-error>
-            }
+            <input id="email" class="form-control" name="email" type="text" value="" formControlName="email" autofocus="autofocus" title="{{ 'info.feedback.email_help' | translate }}">
+            <small class="text-muted">{{ 'info.feedback.email_help' | translate }}</small>
           </div>
         </div>
-      }
 
-      <div class="row mt-3">
-        <div class="control-group col-sm-12">
+        @if (feedbackForm.controls.email.invalid && (feedbackForm.controls.email.dirty || feedbackForm.controls.email.touched)) {
+          <div class="row">
+            <div class="col-sm-12 alert">
+              @if (feedbackForm.controls.email.errors?.required) {
+                <ds-error message="{{'info.feedback.error.email.required' | translate}}"></ds-error>
+              }
+              @if (feedbackForm.controls.email.errors?.pattern) {
+                <ds-error message="{{'info.feedback.error.email.required' | translate}}"></ds-error>
+              }
+            </div>
+          </div>
+        }
+
+        <div class="row mt-3">
+          <div class="control-group col-sm-12">
             <label class="control-label form-label" for="comments">{{ 'info.feedback.comments' | translate }}:&nbsp;</label>
-          <textarea id="comments" formControlName="message" class="form-control" name="message" cols="20" rows="5"> </textarea>
+            <textarea id="comments" formControlName="message" class="form-control" name="message" cols="20" rows="5"> </textarea>
+          </div>
         </div>
-      </div>
 
-      @if (feedbackForm.controls.message.invalid && (feedbackForm.controls.message.dirty || feedbackForm.controls.message.touched)) {
-        <div class="row">
-          <div class="col-sm-12 alert">
-            @if (feedbackForm.controls.message.errors?.required) {
-              <ds-error message="{{'info.feedback.error.message.required' | translate}}"></ds-error>
+        @if (feedbackForm.controls.message.invalid && (feedbackForm.controls.message.dirty || feedbackForm.controls.message.touched)) {
+          <div class="row">
+            <div class="col-sm-12 alert">
+              @if (feedbackForm.controls.message.errors?.required) {
+                <ds-error message="{{'info.feedback.error.message.required' | translate}}"></ds-error>
+              }
+            </div>
+          </div>
+        }
+
+        <div class="row mt-3">
+          <div class="control-group col-sm-12">
+            <label class="control-label form-labe" for="page">{{ 'info.feedback.page-label' | translate }}&nbsp;</label>
+            <input id="page" readonly class="form-control" name="page" type="text" value="" formControlName="page" autofocus="autofocus" title="{{ 'info.feedback.page_help' | translate }}">
+            <small class="text-muted">{{ 'info.feedback.page_help' | translate }}</small>
+          </div>
+        </div>
+
+        @if (!submissionVerification) {
+          <div class="row py-2">
+            <div class="control-group col-sm-12 text-end">
+              <button [dsBtnDisabled]="!feedbackForm.valid" class="btn btn-primary" name="submit" (click)="createFeedback()">{{ 'info.feedback.send' | translate }}</button>
+            </div>
+          </div>
+        }
+      </fieldset>
+
+      @let captchaCookieAccepted = isRecaptchaCookieAccepted();
+      @if (submissionVerification && !captchaCookieAccepted) {
+        <ds-alert [type]="AlertTypeEnum.Warning">
+          <p class="m-0" [innerHTML]="MESSAGE_PREFIX + '.google-recaptcha.must-accept-cookies' | translate"></p>
+          <p class="m-0"><a href="javascript:void(0);" (click)="openCookieSettings()">{{ MESSAGE_PREFIX + '.google-recaptcha.open-cookie-settings' | translate }}</a></p>
+        </ds-alert>
+      }
+      @if (captchaCookieAccepted && (googleRecaptchaService.captchaVersion() | async) === 'v2') {
+        <div class="my-3">
+          <ds-google-recaptcha [captchaMode]="(captchaMode() | async)"
+            (executeRecaptcha)="submitFeedback($event)" (checkboxChecked)="onCheckboxChecked($event)"
+          (showNotification)="showNotification($event)"></ds-google-recaptcha>
+        </div>
+      }
+
+      @if (submissionVerification) {
+        <div class="row py-2">
+          <div class="control-group col-sm-12 text-end">
+            @if (!((captchaVersion() | async) === 'v2' && (captchaMode() | async) === 'invisible')) {
+              <button class="btn btn-primary"
+                [dsBtnDisabled]="feedbackForm.invalid || submissionVerification && !captchaCookieAccepted || disableUntilChecked"
+                (click)="submitFeedback()">
+                {{ 'info.feedback.send' | translate }}
+              </button>
+            } @else {
+              <button class="btn btn-primary" [dsBtnDisabled]="feedbackForm.invalid" (click)="executeRecaptcha()">
+                {{ 'info.feedback.send' | translate }}
+              </button>
             }
           </div>
         </div>
       }
-
-      <div class="row mt-3">
-        <div class="control-group col-sm-12">
-            <label class="control-label form-labe" for="page">{{ 'info.feedback.page-label' | translate }}&nbsp;</label>
-          <input id="page" readonly class="form-control" name="page" type="text" value="" formControlName="page" autofocus="autofocus" title="{{ 'info.feedback.page_help' | translate }}">
-          <small class="text-muted">{{ 'info.feedback.page_help' | translate }}</small>
-        </div>
-      </div>
-
-      <div class="row mt-3">
-        <div class="control-group col-sm-12 text-end">
-          <button [dsBtnDisabled]="!feedbackForm.valid" class="btn btn-primary" name="submit" type="submit">{{ 'info.feedback.send' | translate }}</button>
-        </div>
-      </div>
     </form>
   </div>
 </div>

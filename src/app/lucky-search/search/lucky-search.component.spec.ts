@@ -24,6 +24,7 @@ import {
   BitstreamDataService,
   MetadataFilter,
 } from '../../core/data/bitstream-data.service';
+import { LocaleService } from '../../core/locale/locale.service';
 import { HardRedirectService } from '../../core/services/hard-redirect.service';
 import { Bitstream } from '../../core/shared/bitstream.model';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
@@ -133,6 +134,7 @@ describe('LuckySearchComponent', () => {
         { provide: PLATFORM_ID, useValue: 'browser' },
         { provide: NotificationsService, useValue: new NotificationsServiceStub() },
         { provide: APP_CONFIG, useValue: {} },
+        { provide: LocaleService, useValue: { getCurrentLanguageCode: () => of('en') } },
       ],
     }).overrideComponent(LuckySearchComponent, {
       remove: {

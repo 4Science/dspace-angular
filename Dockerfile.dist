@@ -13,9 +13,17 @@ ARG DOCKER_REGISTRY=docker.io
 
 FROM ${DOCKER_REGISTRY:-docker.io}/4science/dspace-cris-angular-dependencies:${DSPACE_VERSION:-dspace-cris-2025_02_x} AS build
 
+# Ensure Python and other build tools are available
+# These are needed to install some node modules, especially on linux/arm64
+RUN apk --no-cache add python3 make g++
+
 COPY . /app/
 
 WORKDIR /app
+# Copy over package files first, so this layer will only be rebuilt if those files change.
+COPY package.json package-lock.json ./
+# NOTE: "ci" = clean install from package files
+RUN npm ci
 
 # Build Angular app
 RUN --mount=type=cache,target=/root/.npm \
@@ -30,6 +38,13 @@ FROM docker.io/node:${NODE_VERSION-22}-alpine AS prod
 RUN --mount=type=cache,target=/root/.npm \
   npm install --global pm2 && npm cache clean --force
 
+# Copy pre-built code from build image
+COPY --chown=node:node --from=build /app/dist /app/dist
+# Copy configs and PM2 startup script from local machine
+COPY --chown=node:node config /app/config
+COPY --chown=node:node docker/dspace-ui.json /app/dspace-ui.json
+
+# Start up UI in PM2 in production mode
 WORKDIR /app
 
 # Only copy built files and config

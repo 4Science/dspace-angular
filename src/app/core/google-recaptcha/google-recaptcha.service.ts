@@ -31,7 +31,9 @@ import { ConfigurationProperty } from '../shared/configuration-property.model';
 import { getFirstCompletedRemoteData } from '../shared/operators';
 
 export const CAPTCHA_COOKIE = '_GRECAPTCHA';
-export const CAPTCHA_NAME = 'google-recaptcha';
+export const CAPTCHA_REGISTRATION_NAME = 'google-recaptcha-registration';
+
+export const CAPTCHA_FEEDBACK_NAME = 'google-recaptcha';
 
 /**
  * A GoogleRecaptchaService used to send action and get a token from REST
@@ -105,7 +107,8 @@ export class GoogleRecaptchaService {
       tap(([recaptchaVersionRD, recaptchaModeRD, recaptchaKeyRD]) => {
 
         if (
-          this.cookieService.get('orejime-anonymous') && this.cookieService.get('orejime-anonymous')[CAPTCHA_NAME] &&
+          this.cookieService.get('orejime-anonymous') &&
+          (this.cookieService.get('orejime-anonymous')[CAPTCHA_FEEDBACK_NAME] || this.cookieService.get('orejime-anonymous')[CAPTCHA_REGISTRATION_NAME]) &&
           recaptchaKeyRD.hasSucceeded && recaptchaVersionRD.hasSucceeded &&
           isNotEmpty(recaptchaVersionRD.payload?.values) && isNotEmpty(recaptchaKeyRD.payload?.values)
         ) {

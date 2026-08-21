@@ -584,6 +584,20 @@ ngb-tooltip-window {
   text-decoration: underline;
 }
 
+.drag-icon {
+  width: calc(2 * var(--bs-spacer));
+  height: calc(1.5 * var(--bs-spacer));
+  color: var(--bs-gray-600);
+  margin: var(--bs-btn-padding-y) 0;
+  line-height: var(--bs-btn-line-height);
+  display: inline-block;
+  -webkit-mask: url('/assets/images/grip-vertical.svg') no-repeat center;
+  mask: url('/assets/images/grip-vertical.svg') no-repeat center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  background-color: currentColor;
+}
+
 .text-gray-500 {
   color: var(--bs-gray-500) !important;
 }
@@ -616,5 +630,5 @@ ngb-tooltip-window {
 // This is a custom class with the same name as the Boostrap 3 one.
 // It will be removed with the first 2026 version.
 .font-weight-bold {
-  font-weight: 600 !important;
+  font-weight: 700 !important;
 }

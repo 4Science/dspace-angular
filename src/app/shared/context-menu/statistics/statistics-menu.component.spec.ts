@@ -54,7 +54,7 @@ describe('StatisticsMenuComponent', () => {
   });
 
   it('should check the authorization of the current user', () => {
-    expect(authorizationService.isAuthorized).toHaveBeenCalledWith(FeatureID.CanViewUsageStatistics, dso.self, undefined, false);
+    expect(authorizationService.isAuthorized).toHaveBeenCalledWith(FeatureID.CanViewUsageStatistics, dso.self);
   });
 
   describe('when the user is authorized', () => {

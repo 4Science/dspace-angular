@@ -34,10 +34,10 @@
           <tr class="{{point.id}}-data">
             <th scope="row" data-test="statistics-label">
               @if (point && point.type && entityTypesToConvertToLink.includes($any(point.type))) {
-                <a [href]="(point | dsCreateLink) | async">{{ point.label }} </a>
+                <a [href]="(point | dsCreateLink) | async">{{ point.label ?? 'n/a' }} </a>
               } @else {
                 <span>
-                  {{ point.label }}
+                  {{ point.label ?? 'n/a' }}
                 </span>
               }
             </th>

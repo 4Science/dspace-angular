@@ -33,10 +33,13 @@ import {
   Angulartics2RouterlessModule,
 } from 'angulartics2';
 import {
+  MATOMO_SCRIPT_FACTORY,
   provideMatomo,
   withRouteData,
   withRouter,
 } from 'ngx-matomo-client';
+import { customMatomoScriptFactory } from 'src/app/statistics/matomo.factory';
+import { MatomoService } from 'src/app/statistics/matomo.service';
 
 import { commonAppConfig } from '../../app/app.config';
 import { storeModuleConfig } from '../../app/app.reducer';
@@ -61,6 +64,7 @@ import { ClientMathService } from '../../app/core/shared/client-math.service';
 import { MathService } from '../../app/core/shared/math.service';
 import { BrowserXSRFService } from '../../app/core/xsrf/browser-xsrf.service';
 import { XSRFService } from '../../app/core/xsrf/xsrf.service';
+import { AuthorizationService } from '../../app/shared/authorizations/authorization.service';
 import { BrowserOrejimeService } from '../../app/shared/cookies/browser-orejime.service';
 import { OrejimeService } from '../../app/shared/cookies/orejime.service';
 import { BrowserDatadogRumService } from '../../app/shared/datadog-rum/browser-datadog-rum.service';
@@ -168,6 +172,10 @@ export const browserAppConfig: ApplicationConfig = mergeApplicationConfig({
       provide: MathService,
       useClass: ClientMathService,
     },
+    {
+      provide: AuthorizationService,
+      useClass: AuthorizationService,
+    },
     provideMatomo(
       {
         mode: 'deferred',
@@ -175,5 +183,10 @@ export const browserAppConfig: ApplicationConfig = mergeApplicationConfig({
       withRouter(),
       withRouteData(),
     ),
+    {
+      provide: MATOMO_SCRIPT_FACTORY,
+      useFactory: customMatomoScriptFactory,
+      deps: [MatomoService],
+    },
   ],
 }, commonAppConfig);

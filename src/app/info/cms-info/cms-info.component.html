@@ -1,0 +1,14 @@
+<div class="container">
+
+  @if (headLabel$ | async; as headLabel) {
+    <h2>{{ headLabel | translate }}</h2>
+  }
+
+  @if (metadataLoaded$ | async) {
+    @if (cmsMetadataValue$ | async; as value) {
+      <ds-markdown-viewer [value]="value"></ds-markdown-viewer>
+    } @else {
+      <div>{{ 'info.empty-cms-metadata-error' | translate }}</div>
+    }
+  }
+</div>

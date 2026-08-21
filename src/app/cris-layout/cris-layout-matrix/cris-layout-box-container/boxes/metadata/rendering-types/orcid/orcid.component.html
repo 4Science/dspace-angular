@@ -10,14 +10,11 @@
     }
 
 
-    @if (hasOrcidBadge()) {
-      <img
-        placement="top"
-        ngbTooltip="{{ 'orcid.badge.tooltip' | translate }}"
-        class="orcid-icon"
-        alt="orcid-logo"
-        src="assets/images/orcid.logo.icon.svg"/>
-    }
+    <ds-orcid-badge-and-tooltip
+      class="ms-1"
+      [orcid]="metadataValue"
+      [authenticatedTimestamp]="orcidAuthenticatedTimestamp">
+    </ds-orcid-badge-and-tooltip>
 
   </span>
 </div>

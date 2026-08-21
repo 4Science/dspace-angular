@@ -13,11 +13,14 @@ import { getTestScheduler } from 'jasmine-marbles';
 import { of } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 
+import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
+import { ConfigurationProperty } from '../../../core/shared/configuration-property.model';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { Item } from '../../../core/shared/item.model';
 import { TranslateLoaderMock } from '../../mocks/translate-loader.mock';
+import { createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
 import { AuditItemMenuComponent } from './audit-item-menu.component';
 
 describe('AuditItemMenuComponent', () => {
@@ -29,6 +32,15 @@ describe('AuditItemMenuComponent', () => {
 
   const authorizationDataServiceStub = jasmine.createSpyObj('authorizationDataService', {
     isAuthorized: jasmine.createSpy('isAuthorized'),
+  });
+
+  const configurationDataService = jasmine.createSpyObj('configurationDataService', {
+    findByPropertyName: createSuccessfulRemoteDataObject$(Object.assign(new ConfigurationProperty(), {
+      name: 'audit.enabled',
+      values: [
+        'true',
+      ],
+    })),
   });
 
   beforeEach(waitForAsync(() => {
@@ -54,6 +66,7 @@ describe('AuditItemMenuComponent', () => {
         { provide: 'contextMenuObjectProvider', useValue: dso },
         { provide: 'contextMenuObjectTypeProvider', useValue: DSpaceObjectType.ITEM },
         { provide: AuthorizationDataService, useValue: authorizationDataServiceStub },
+        { provide: ConfigurationDataService, useValue: configurationDataService },
       ],
     }).compileComponents();
   }));

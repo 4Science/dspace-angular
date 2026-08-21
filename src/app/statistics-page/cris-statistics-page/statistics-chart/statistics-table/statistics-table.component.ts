@@ -10,7 +10,10 @@ import {
   OnInit,
   PLATFORM_ID,
 } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 
 import {
   NativeWindowRef,
@@ -70,8 +73,9 @@ export class StatisticsTableComponent extends StatisticsChartDataComponent imple
     @Inject(PLATFORM_ID) protected platformId: any,
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
     @Inject(DOCUMENT) protected document: any,
+    protected translateService: TranslateService,
   ) {
-    super(report, categoryType, platformId, _window, document);
+    super(report, categoryType, platformId, _window, document, translateService);
   }
 
   /**
@@ -79,7 +83,7 @@ export class StatisticsTableComponent extends StatisticsChartDataComponent imple
    * Insert table headers
    */
   ngOnInit() {
-    this.hasData = !!this.report && this.report.points.length > 0;
+    this.hasData = !!this.report && (this.report.points?.length ?? 0) > 0;
     if (this.hasData) {
       const point = this.report.points[0];
       this.headers.push(point.type);

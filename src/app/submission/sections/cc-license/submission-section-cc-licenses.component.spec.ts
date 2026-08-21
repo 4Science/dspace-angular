@@ -243,7 +243,8 @@ describe('SubmissionSectionCcLicensesComponent', () => {
     });
 
     it('should have section status incomplete', () => {
-      expect(component.getSectionStatus()).toBeObservable(cold('(a|)', { a: false }));
+      component.required$.next(true);
+      expect(component.getSectionStatus()).toBeObservable(cold('(a)', { a: false }));
     });
 
     describe('when all options have a value selected', () => {
@@ -273,7 +274,13 @@ describe('SubmissionSectionCcLicensesComponent', () => {
       });
 
       it('should have section status incomplete', () => {
-        expect(component.getSectionStatus()).toBeObservable(cold('(a|)', { a: false }));
+        component.required$.next(true);
+        expect(component.getSectionStatus()).toBeObservable(cold('(a)', { a: false }));
+      });
+
+      it('should have section status complete if not required', () => {
+        component.required$.next(false);
+        expect(component.getSectionStatus()).toBeObservable(cold('(a)', { a: true }));
       });
 
       describe('when the cc license is accepted', () => {
@@ -284,7 +291,8 @@ describe('SubmissionSectionCcLicensesComponent', () => {
         });
 
         it('should have section status complete', () => {
-          expect(component.getSectionStatus()).toBeObservable(cold('(a|)', { a: true }));
+          component.required$.next(false);
+          expect(component.getSectionStatus()).toBeObservable(cold('(a)', { a: true })); // first true is because the section is not required
         });
       });
     });

@@ -415,7 +415,7 @@ describe('SubmissionService test suite', () => {
 
   const searchService = getMockSearchService();
 
-  const requestServce = getMockRequestService();
+  const requestService = getMockRequestService();
 
   beforeEach(waitForAsync(() => {
 
@@ -434,7 +434,7 @@ describe('SubmissionService test suite', () => {
         { provide: SubmissionRestService, useValue: restService },
         { provide: ActivatedRoute, useValue: new MockActivatedRoute() },
         { provide: SearchService, useValue: searchService },
-        { provide: RequestService, useValue: requestServce },
+        { provide: RequestService, useValue: requestService },
         { provide: SubmissionJsonPatchOperationsService, useValue: submissionJsonPatchOperationsService },
         { provide: NativeWindowService, useValue: new NativeWindowRef() },
         ScrollToService,
@@ -1024,6 +1024,7 @@ describe('SubmissionService test suite', () => {
     it('should redirect to Item page', () => {
       scheduler = getTestScheduler();
 
+      (requestService.setStaleByHrefSubstring as jasmine.Spy).calls.reset();
       const itemUuid = 'd62fc60f-e9a5-48e6-973a-90819acf23ae';
       let itemSubmissionId = itemUuid + ':FULL';
 
