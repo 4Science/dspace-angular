@@ -171,6 +171,9 @@ describe('My DSpace page', () => {
     //Wait for the response.
     cy.wait('@filterByItem');
 
+    // Switch to list view so that list-specific result elements are visible
+    switchToListView();
+
     //Check that we have at least one item and that they all have the archived badge.
     cy.get('ds-item-search-result-list-element-submission').should('exist');
     cy.get('ds-item-search-result-list-element-submission')
