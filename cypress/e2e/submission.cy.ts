@@ -1,4 +1,4 @@
-import { testA11y } from 'cypress/support/utils';
+import { switchToListView, testA11y } from 'cypress/support/utils';
 //import { TEST_SUBMIT_USER, TEST_SUBMIT_USER_PASSWORD, TEST_SUBMIT_COLLECTION_NAME, TEST_SUBMIT_COLLECTION_UUID, TEST_ADMIN_USER, TEST_ADMIN_PASSWORD } from 'cypress/support/e2e';
 import { Options } from 'cypress-axe';
 
@@ -95,6 +95,9 @@ describe('New Submission page', () => {
       cy.get('ds-notification div.alert-success').should('be.visible');
       // Now, dismiss any open alert boxes (may be multiple, as tests run quickly)
       cy.get('[data-bs-dismiss="alert"]').click({ multiple: true });
+
+      // Switch to list view so that edit/delete action buttons are visible
+      switchToListView();
 
       // This is the GET command that will actually run the search
       cy.intercept('GET', '**/server/api/discover/search/objects*').as('search-results');
