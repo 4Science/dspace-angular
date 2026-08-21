@@ -77,7 +77,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
   /**
    * Whether to show the metrics badges
    */
-  @Input() showMetrics: boolean;
+  @Input() showMetrics = true;
 
   /**
    * Route to the item's page
@@ -114,11 +114,11 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
    * Check if item has Third-party metrics blocked by consents
    */
   ngAfterViewInit() {
-    if (this.showMetrics && this.klaroService && this.klaroService.watchConsentUpdates instanceof Function) {
+    if (this.showMetrics && this.klaroService && this.klaroService.watchConsentUpdates instanceof Function && isNotEmpty(this.dso?.metrics)) {
       this.klaroService.watchConsentUpdates();
 
       this.hasLoadedThirdPartyMetrics$ = combineLatest([
-        this.klaroService.consentsUpdates$.pipe(
+        this.klaroService.consentsUpdates$?.pipe(
           filter(consents => isNotEmpty(consents)),
         ),
         this.dso.metrics?.pipe(

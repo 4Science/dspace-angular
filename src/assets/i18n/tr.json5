@@ -403,7 +403,7 @@
 
   // "admin.registries.bitstream-formats.title": "Bitstream Format Registry",
   // TODO Source message changed - Revise the translation
-  "admin.registries.bitstream-formats.title": "DSpace Angular :: Bitstream Biçimi Kayıt Defteri ",
+  "admin.registries.bitstream-formats.title": "DSpace :: Bitstream Biçimi Kayıt Defteri ",
 
   // "admin.registries.bitstream-formats.select": "Select",
   // TODO New key - Add a translation
@@ -466,7 +466,7 @@
 
   // "admin.registries.metadata.title": "Metadata Registry",
   // TODO Source message changed - Revise the translation
-  "admin.registries.metadata.title": "DSpace Angular :: Metadata Kayıt Defteri",
+  "admin.registries.metadata.title": "DSpace :: Metadata Kayıt Defteri",
 
   // "admin.registries.schema.breadcrumbs": "Metadata schema",
   "admin.registries.schema.breadcrumbs": "Metadata şeması",
@@ -559,7 +559,7 @@
 
   // "admin.registries.schema.title": "Metadata Schema Registry",
   // TODO Source message changed - Revise the translation
-  "admin.registries.schema.title": "DSpace Angular :: Metadata Şeması Kayıt Defteri",
+  "admin.registries.schema.title": "DSpace :: Metadata Şeması Kayıt Defteri",
 
   // "admin.access-control.bulk-access.breadcrumbs": "Bulk Access Management",
   // TODO New key - Add a translation
@@ -611,7 +611,7 @@
 
   // "admin.access-control.epeople.title": "EPeople",
   // TODO Source message changed - Revise the translation
-  "admin.access-control.epeople.title": "DSpace Angular :: E-kişiler",
+  "admin.access-control.epeople.title": "DSpace :: E-kişiler",
 
   // "admin.access-control.epeople.edit.breadcrumbs": "New EPerson",
   // TODO New key - Add a translation
@@ -801,7 +801,7 @@
 
   // "admin.access-control.groups.title": "Groups",
   // TODO Source message changed - Revise the translation
-  "admin.access-control.groups.title": "DSpace Angular :: Gruplar",
+  "admin.access-control.groups.title": "DSpace :: Gruplar",
 
   // "admin.access-control.groups.breadcrumbs": "Groups",
   // TODO New key - Add a translation
@@ -813,11 +813,11 @@
 
   // "admin.access-control.groups.title.singleGroup": "Edit Group",
   // TODO Source message changed - Revise the translation
-  "admin.access-control.groups.title.singleGroup": "DSpace Angular :: Grubu Düzenle",
+  "admin.access-control.groups.title.singleGroup": "DSpace :: Grubu Düzenle",
 
   // "admin.access-control.groups.title.addGroup": "New Group",
   // TODO Source message changed - Revise the translation
-  "admin.access-control.groups.title.addGroup": "DSpace Angular :: Yeni Grup",
+  "admin.access-control.groups.title.addGroup": "DSpace :: Yeni Grup",
 
   // "admin.access-control.groups.addGroup.breadcrumbs": "New Group",
   // TODO New key - Add a translation
@@ -2434,6 +2434,14 @@
   // TODO Source message changed - Revise the translation
   "browse.title": "{{ field }} {{ value }} ile {{ collection }}'a göz atma",
 
+  // "browse.taxonomy.show_next_results": "Show next results",
+  // TODO New key - Add a translation
+  "browse.taxonomy.show_next_results": "Show next results",
+
+  // "browse.taxonomy.show_previous_results": "Show previous results",
+  // TODO New key - Add a translation
+  "browse.taxonomy.show_previous_results": "Show previous results",
+
   // "browse.title.page": "Browsing by {{ field }} {{ value }}",
   // TODO New key - Add a translation
   "browse.title.page": "Browsing by {{ field }} {{ value }}",
@@ -4008,7 +4016,8 @@
   // TODO Source message changed - Revise the translation
   "dso-selector.no-results": "Bulunamadı {{ type }} ",
 
-  // "dso-selector.placeholder": "Search for a {{ type }}",
+  // "dso-selector.placeholder": "Search for {{ type }}",
+  // TODO Source message changed - Revise the translation
   "dso-selector.placeholder": " Ara {{ type }}",
 
   // "dso-selector.export-item.item.head": "Export",
@@ -5109,6 +5118,18 @@
   // TODO New key - Add a translation
   "form.number-picker.increment": "Increment {{field}}",
 
+  // "form.number-picker.label.Year": "Year",
+  // TODO New key - Add a translation
+  "form.number-picker.label.Year": "Year",
+
+  // "form.number-picker.label.Month": "Month",
+  // TODO New key - Add a translation
+  "form.number-picker.label.Month": "Month",
+
+  // "form.number-picker.label.Day": "Day",
+  // TODO New key - Add a translation
+  "form.number-picker.label.Day": "Day",
+
   // "form.repeatable.sort.tip": "Drop the item in the new position",
   // TODO New key - Add a translation
   "form.repeatable.sort.tip": "Drop the item in the new position",
@@ -5340,9 +5361,9 @@
   // TODO New key - Add a translation
   "info.accessibility-settings.disableNotificationTimeOut.label": "Automatically close notifications after time out",
 
-  // "info.accessibility-settings.disableNotificationTimeOut.hint": "When this toggle is activated, notifications will close automatically after the time out passes. When deactivated, notifications will remain open untill manually closed.",
+  // "info.accessibility-settings.disableNotificationTimeOut.hint": "When this toggle is activated, notifications will close automatically after the time out passes. When deactivated, notifications will remain open until manually closed.",
   // TODO New key - Add a translation
-  "info.accessibility-settings.disableNotificationTimeOut.hint": "When this toggle is activated, notifications will close automatically after the time out passes. When deactivated, notifications will remain open untill manually closed.",
+  "info.accessibility-settings.disableNotificationTimeOut.hint": "When this toggle is activated, notifications will close automatically after the time out passes. When deactivated, notifications will remain open until manually closed.",
 
   // "info.accessibility-settings.failed-notification": "Failed to save accessibility settings",
   // TODO New key - Add a translation
@@ -6404,7 +6425,7 @@
 
   // "item.search.title": "Item Search",
   // TODO Source message changed - Revise the translation
-  "item.search.title": "DSpace Angular :: Öge Arama",
+  "item.search.title": "DSpace :: Öge Arama",
 
   // "item.truncatable-part.show-more": "Show more",
   // TODO New key - Add a translation
@@ -6414,17 +6435,25 @@
   // TODO New key - Add a translation
   "item.truncatable-part.show-less": "Collapse",
 
-  // "item.qa-event-notification.check.notification-info": "There are {{num}} pending suggestions related to your account",
+  // "item.qa-event-notification.check.notification-info.singular": "There is {{num}} pending suggestion related to your account",
   // TODO New key - Add a translation
-  "item.qa-event-notification.check.notification-info": "There are {{num}} pending suggestions related to your account",
+  "item.qa-event-notification.check.notification-info.singular": "There is {{num}} pending suggestion related to your account",
+
+  // "item.qa-event-notification.check.notification-info.plural": "There are {{num}} pending suggestions related to your account",
+  // TODO New key - Add a translation
+  "item.qa-event-notification.check.notification-info.plural": "There are {{num}} pending suggestions related to your account",
 
   // "item.qa-event-notification-info.check.button": "View",
   // TODO New key - Add a translation
   "item.qa-event-notification-info.check.button": "View",
 
-  // "mydspace.qa-event-notification.check.notification-info": "There are {{num}} pending suggestions related to your account",
+  // "mydspace.qa-event-notification.check.notification-info.singular": "There is {{num}} pending suggestion related to your account",
   // TODO New key - Add a translation
-  "mydspace.qa-event-notification.check.notification-info": "There are {{num}} pending suggestions related to your account",
+  "mydspace.qa-event-notification.check.notification-info.singular": "There is {{num}} pending suggestion related to your account",
+
+  // "mydspace.qa-event-notification.check.notification-info.plural": "There are {{num}} pending suggestions related to your account",
+  // TODO New key - Add a translation
+  "mydspace.qa-event-notification.check.notification-info.plural": "There are {{num}} pending suggestions related to your account",
 
   // "mydspace.qa-event-notification-info.check.button": "View",
   // TODO New key - Add a translation
@@ -6558,6 +6587,14 @@
   // "item.page.orcid.tooltip": "Open ORCID setting page",
   // TODO New key - Add a translation
   "item.page.orcid.tooltip": "Open ORCID setting page",
+
+  // "item.page.orcid-ico": "ORCID icon",
+  // TODO New key - Add a translation
+  "item.page.orcid-ico": "ORCID icon",
+
+  // "item.page.orcid-profile": "ORCID Profile",
+  // TODO New key - Add a translation
+  "item.page.orcid-profile": "ORCID Profile",
 
   // "item.page.metric.acquisition-date": "Acquisition Date",
   // TODO New key - Add a translation
@@ -7526,7 +7563,7 @@
 
   // "journal.search.title": "Journal Search",
   // TODO Source message changed - Revise the translation
-  "journal.search.title": "DSpace Angular :: Süreli Yayın Arama",
+  "journal.search.title": "DSpace :: Süreli Yayın Arama",
 
   // "journalissue.listelement.badge": "Journal Issue",
   "journalissue.listelement.badge": "Süreli Yayın Sayısı",
@@ -8866,7 +8903,7 @@
 
   // "person.search.title": "Person Search",
   // TODO Source message changed - Revise the translation
-  "person.search.title": "DSpace Angular :: Kişi Arama",
+  "person.search.title": "DSpace :: Kişi Arama",
 
   // "process.new.select-parameters": "Parameters",
   "process.new.select-parameters": "Parametreler",
@@ -9164,17 +9201,17 @@
   // TODO New key - Add a translation
   "process.overview.unknown.user": "Unknown",
 
-  // "process.bulk.delete.error.head": "Error on deleteing process",
+  // "process.bulk.delete.error.head": "Error on deleting process",
   // TODO New key - Add a translation
-  "process.bulk.delete.error.head": "Error on deleteing process",
+  "process.bulk.delete.error.head": "Error on deleting process",
 
   // "process.bulk.delete.error.body": "The process with ID {{processId}} could not be deleted. The remaining processes will continue being deleted. ",
   // TODO New key - Add a translation
   "process.bulk.delete.error.body": "The process with ID {{processId}} could not be deleted. The remaining processes will continue being deleted. ",
 
-  // "process.bulk.delete.success": "{{count}} process(es) have been succesfully deleted",
+  // "process.bulk.delete.success": "{{count}} process(es) have been successfully deleted",
   // TODO New key - Add a translation
-  "process.bulk.delete.success": "{{count}} process(es) have been succesfully deleted",
+  "process.bulk.delete.success": "{{count}} process(es) have been successfully deleted",
 
 
   // "patent.page.titleprefix": "Patent",
@@ -9433,7 +9470,7 @@
 
   // "publication.search.title": "Publication Search",
   // TODO Source message changed - Revise the translation
-  "publication.search.title": "DSpace Angular :: Yayın Arama",
+  "publication.search.title": "DSpace :: Yayın Arama",
 
   // "media-viewer.next": "Next",
   // TODO New key - Add a translation
@@ -9820,9 +9857,9 @@
   // TODO New key - Add a translation
   "repository.title": "{{ repositoryName }}",
 
-  // "repository.title.prefix": "{{ repositoryName }} Angular :: ",
+  // "repository.title.prefix": "{{ repositoryName }} :: ",
   // TODO New key - Add a translation
-  "repository.title.prefix": "{{ repositoryName }} Angular :: ",
+  "repository.title.prefix": "{{ repositoryName }} :: ",
 
   // "resource-policies.add.button": "Add",
   "resource-policies.add.button": "Ekle",
@@ -9905,7 +9942,8 @@
   // TODO New key - Add a translation
   "resource-policies.form.eperson-group-list.deselect.btn": "Deselect",
 
-  // "resource-policies.form.eperson-group-list.tab.eperson": "Search for a ePerson",
+  // "resource-policies.form.eperson-group-list.tab.eperson": "Search for an ePerson",
+  // TODO Source message changed - Revise the translation
   "resource-policies.form.eperson-group-list.tab.eperson": "e-kişi arayın",
 
   // "resource-policies.form.eperson-group-list.tab.group": "Search for a group",
@@ -10040,7 +10078,7 @@
 
   // "search.title": "Search",
   // TODO Source message changed - Revise the translation
-  "search.title": "DSpace Angular :: Ara",
+  "search.title": "DSpace :: Ara",
 
   // "search.breadcrumbs": "Search",
   "search.breadcrumbs": "Ara",
@@ -13339,9 +13377,9 @@
   // TODO New key - Add a translation
   "submission.sections.sherpa.record.information.uri": "URI",
 
-  // "submission.sections.sherpa.error.message": "There was an error retrieving sherpa informations",
+  // "submission.sections.sherpa.error.message": "There was an error retrieving sherpa information",
   // TODO New key - Add a translation
-  "submission.sections.sherpa.error.message": "There was an error retrieving sherpa informations",
+  "submission.sections.sherpa.error.message": "There was an error retrieving sherpa information",
 
   // "submission.submit.breadcrumbs": "New submission",
   // TODO New key - Add a translation
@@ -16395,9 +16433,9 @@
   // TODO New key - Add a translation
   "item.page.cc.license.title": "Creative Commons license",
 
-  // "item.page.cc.license.disclaimer": "Except where otherwised noted, this item's license is described as",
+  // "item.page.cc.license.disclaimer": "Except where otherwise noted, this item's license is described as",
   // TODO New key - Add a translation
-  "item.page.cc.license.disclaimer": "Except where otherwised noted, this item's license is described as",
+  "item.page.cc.license.disclaimer": "Except where otherwise noted, this item's license is described as",
 
   // "browse.search-form.placeholder": "Search the repository",
   // TODO New key - Add a translation
@@ -16442,6 +16480,18 @@
   // "metadata-export-search.submit.error.limit-exceeded": "Only the first {{limit}} items will be exported",
   // TODO New key - Add a translation
   "metadata-export-search.submit.error.limit-exceeded": "Only the first {{limit}} items will be exported",
+
+  // "item.preview.organization.url": "URL",
+  // TODO New key - Add a translation
+  "item.preview.organization.url": "URL",
+
+  // "item.preview.organization.address.addressLocality": "City",
+  // TODO New key - Add a translation
+  "item.preview.organization.address.addressLocality": "City",
+
+  // "item.preview.organization.alternateName": "Alternative name",
+  // TODO New key - Add a translation
+  "item.preview.organization.alternateName": "Alternative name",
 
   // "external-login.form.email": "Enter the email",
   // TODO New key - Add a translation

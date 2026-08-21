@@ -33,6 +33,8 @@ enum TYPES {
 })
 export class LinkComponent extends RenderingTypeValueModelComponent implements OnInit {
 
+  static structured = false;
+
   /**
    * The link to render
    */

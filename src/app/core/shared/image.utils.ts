@@ -16,6 +16,9 @@ export const getDefaultImageUrlByEntityType = (entityType: string): Observable<s
 };
 
 const checkImageExists = (url: string): Observable<boolean> =>  {
+  if (typeof Image === 'undefined') {
+    return of(false);
+  }
   return new Observable<boolean>((observer) => {
     const img = new Image();
 

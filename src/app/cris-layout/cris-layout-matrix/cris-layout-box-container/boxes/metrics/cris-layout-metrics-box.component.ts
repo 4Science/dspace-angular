@@ -51,6 +51,8 @@ import { MetricRowComponent } from './metric-row/metric-row.component';
  */
 export class CrisLayoutMetricsBoxComponent extends CrisLayoutBoxModelComponent implements OnInit, OnDestroy {
 
+  static hasOwnContainer = true;
+
   /**
    * Contains the metrics configuration for current box
    */

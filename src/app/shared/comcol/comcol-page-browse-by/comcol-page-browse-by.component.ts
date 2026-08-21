@@ -146,7 +146,7 @@ export class ComcolPageBrowseByComponent implements OnDestroy, OnInit {
     ]).subscribe(([navOptions, url]: [ComColPageNavOption[], string]) => {
       for (const option of navOptions) {
         if (url?.split('?')[0] === comColRoute && option.id === this.appConfig[this.contentType].defaultBrowseTab) {
-          void this.router.navigate([option.routerLink], { queryParams: option.params });
+          void this.router.navigate([option.routerLink], { queryParams: option.params, replaceUrl: true  });
           break;
         } else if (option.routerLink === url?.split('?')[0]) {
           this.currentOptionId$.next(option.id);
@@ -161,7 +161,7 @@ export class ComcolPageBrowseByComponent implements OnDestroy, OnInit {
       ).subscribe((allOptions: ComColPageNavOption[]) => {
         for (const option of allOptions) {
           if (option.id === this.appConfig[this.contentType].defaultBrowseTab) {
-            this.currentOptionId$.next(option[0].id);
+            this.currentOptionId$.next(option.id);
             void this.router.navigate([option.routerLink], { queryParams: option.params });
             break;
           }

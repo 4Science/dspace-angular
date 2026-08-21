@@ -24,6 +24,7 @@ import { BitstreamFormatDataService } from '../../../../core/data/bitstream-form
 import { CommunityDataService } from '../../../../core/data/community-data.service';
 import { DefaultChangeAnalyzer } from '../../../../core/data/default-change-analyzer.service';
 import { DSOChangeAnalyzer } from '../../../../core/data/dso-change-analyzer.service';
+import { AuthorizationDataService } from '../../../../core/data/feature-authorization/authorization-data.service';
 import { Community } from '../../../../core/shared/community.model';
 import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service';
 import { UUIDService } from '../../../../core/shared/uuid.service';
@@ -35,6 +36,7 @@ import { ThemeService } from '../../../../shared/theme-support/theme.service';
 import { NotificationsService } from '../../../notifications/notifications.service';
 import { CommunitySearchResult } from '../../../object-collection/shared/community-search-result.model';
 import { ActivatedRouteStub } from '../../../testing/active-router.stub';
+import { AuthorizationDataServiceStub } from '../../../testing/authorization-service.stub';
 import { TruncatableService } from '../../../truncatable/truncatable.service';
 import { TruncatePipe } from '../../../utils/truncate.pipe';
 import { CommunitySearchResultGridElementComponent } from './community-search-result-grid-element.component';
@@ -103,6 +105,7 @@ describe('CommunitySearchResultGridElementComponent', () => {
         { provide: ThemeService, useValue: getMockThemeService() },
         { provide: AuthService, useValue: new AuthServiceMock() },
         { provide: XSRFService, useValue: {} },
+        { provide: AuthorizationDataService, useClass: AuthorizationDataServiceStub },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(CommunitySearchResultGridElementComponent, {

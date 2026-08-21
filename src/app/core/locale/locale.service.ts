@@ -5,6 +5,7 @@ import {
 import {
   Inject,
   Injectable,
+  OnDestroy,
   PLATFORM_ID,
 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
@@ -12,6 +13,7 @@ import {
   combineLatest,
   Observable,
   of as observableOf,
+  Subscription,
 } from 'rxjs';
 import {
   map,
@@ -22,6 +24,7 @@ import {
 import { LangConfig } from '../../../config/lang-config.interface';
 import { environment } from '../../../environments/environment';
 import {
+  hasValue,
   isEmpty,
   isNotEmpty,
 } from '../../shared/empty.util';
@@ -48,12 +51,14 @@ export enum LANG_ORIGIN {
  * Service to provide localization handler
  */
 @Injectable({ providedIn: 'root' })
-export class LocaleService {
+export class LocaleService implements OnDestroy {
 
   /**
    * Eperson language metadata
    */
   EPERSON_LANG_METADATA = 'eperson.language';
+
+  subs: Subscription[] = [];
 
   constructor(
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
@@ -84,20 +89,25 @@ export class LocaleService {
   /**
    * Get the language currently used
    *
-   * @returns {string} The language code
+   * @returns {Observable<string>} The language code
    */
-  getCurrentLanguageCode(): string {
+  getCurrentLanguageCode(): Observable<string> {
     // Attempt to get the language from a cookie
-    let lang = this.getLanguageCodeFromCookie();
+    const lang = this.getLanguageCodeFromCookie();
     if (isEmpty(lang) || environment.languages.find((langConfig: LangConfig) => langConfig.code === lang && langConfig.active) === undefined) {
       // Attempt to get the browser language from the user
-      if (this.translate.getLangs().includes(this.translate.getBrowserLang())) {
-        lang = this.translate.getBrowserLang();
-      } else {
-        lang = environment.defaultLanguage;
-      }
+      return this.getLanguageCodeList()
+        .pipe(
+          map(browserLangs => {
+            return browserLangs
+              .map(browserLang => browserLang.split(';')[0])
+              .find(browserLang =>
+                this.translate.getLangs().some(userLang => userLang.toLowerCase() === browserLang.toLowerCase()),
+              ) || environment.defaultLanguage;
+          }),
+        );
     }
-    return lang;
+    return observableOf(lang);
   }
 
   /**
@@ -105,18 +115,16 @@ export class LocaleService {
    *
    * @returns {Observable<string[]>}
    */
-  getLanguageCodeList(): Observable<string[]> {
+  getLanguageCodeList(ignoreEPersonSettings = false): Observable<string[]> {
     const obs$ = combineLatest([
       this.authService.isAuthenticated(),
       this.authService.isAuthenticationLoaded(),
     ]);
 
     return obs$.pipe(
-      take(1),
       mergeMap(([isAuthenticated, isLoaded]) => {
-        // TODO to enabled again when https://github.com/DSpace/dspace-angular/issues/739 will be resolved
-        const epersonLang$: Observable<string[]> = observableOf([]);
-        /*        if (isAuthenticated && isLoaded) {
+        let epersonLang$: Observable<string[]> = observableOf([]);
+        if (isAuthenticated && isLoaded && !ignoreEPersonSettings) {
           epersonLang$ = this.authService.getAuthenticatedUserFromStore().pipe(
             take(1),
             map((eperson) => {
@@ -129,20 +137,20 @@ export class LocaleService {
                   !isEmpty(this.translate.currentLang)));
               }
               return languages;
-            })
+            }),
           );
-        }*/
+        }
         return epersonLang$.pipe(
           map((epersonLang: string[]) => {
             const languages: string[] = [];
+            if (isNotEmpty(epersonLang)) {
+              languages.push(...epersonLang);
+            }
             if (this.translate.currentLang) {
               languages.push(...this.setQuality(
                 [this.translate.currentLang],
                 LANG_ORIGIN.UI,
                 false));
-            }
-            if (isNotEmpty(epersonLang)) {
-              languages.push(...epersonLang);
             }
             if (navigator.languages) {
               languages.push(...this.setQuality(
@@ -183,11 +191,16 @@ export class LocaleService {
    */
   setCurrentLanguageCode(lang?: string): void {
     if (isEmpty(lang)) {
-      lang = this.getCurrentLanguageCode();
+      this.subs.push(this.getCurrentLanguageCode().subscribe(curLang => {
+        lang = curLang;
+        this.translate.use(lang);
+        this.document.documentElement.lang = lang;
+      }));
+    } else {
+      this.saveLanguageCodeToCookie(lang);
+      this.translate.use(lang);
+      this.document.documentElement.lang = lang;
     }
-    this.translate.use(lang);
-    this.saveLanguageCodeToCookie(lang);
-    this.document.documentElement.lang = lang;
   }
 
   /**
@@ -231,6 +244,12 @@ export class LocaleService {
       this._window.nativeWindow.location.href = `reload/${new Date().getTime()}?redirect=` + encodeURIComponent(currentURL);
     });
 
+  }
+
+  ngOnDestroy(): void {
+    this.subs
+      .filter((sub) => hasValue(sub))
+      .forEach((sub) => sub.unsubscribe());
   }
 
 }

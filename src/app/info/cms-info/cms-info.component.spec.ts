@@ -1,6 +1,8 @@
 import {
   ComponentFixture,
+  fakeAsync,
   TestBed,
+  tick,
 } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -54,8 +56,10 @@ describe('CmsInfoComponent', () => {
     redirectUrl = 'redirect/url';
     token = new AuthTokenInfo('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9');
     authService = jasmine.createSpyObj('authService', {
-      isAuthenticated: observableOf(true),
+      isAuthenticated: observableOf(false),
+      isAuthenticationLoaded: observableOf(true),
       getToken: token,
+      getAuthenticatedUserFromStore: observableOf({}),
     });
     store = jasmine.createSpyObj('store', ['dispatch']);
     activatedRouteStub = {
@@ -95,20 +99,22 @@ describe('CmsInfoComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should set headLabel$ when data is successfully retrieved', () => {
+  it('should set headLabel$ when data is successfully retrieved', fakeAsync(() => {
     const headLabelSpy = spyOn(component.headLabel$, 'next');
 
     component.ngOnInit();
+    tick();
 
     expect(headLabelSpy).toHaveBeenCalledOnceWith('info.testQualifier.head');
-  });
+  }));
 
-  it('should log a warning to console if metadata content is missing', () => {
+  it('should log a warning to console if metadata content is missing', fakeAsync(() => {
     spyOn(console, 'warn');
     site.metadata['cris.cms.testQualifier'] = undefined;
 
     component.ngOnInit();
+    tick();
 
     expect(console.warn).toHaveBeenCalledWith('Metadata cris.cms.testQualifier has no content');
-  });
+  }));
 });

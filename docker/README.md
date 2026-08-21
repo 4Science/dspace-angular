@@ -20,7 +20,8 @@ the Docker compose scripts in this 'docker' folder.
 
 ### Dockerfile
 
-This Dockerfile is used to build a *development* DSpace-CRIS Angular UI image, published as '4science/dspace-cris-angular'
+This Dockerfile is used to build a *development* mode DSpace-CRIS Angular UI image, published as '4science/dspace-cris-angular'. Because it uses development mode, this image supports "live reloading" of the user interface
+when local source code is modified.
 
 ```
 docker build -t 4science/dspace-cris-angular:dspace-cris-2024_02_x .
@@ -35,7 +36,7 @@ docker push 4science/dspace-cris-angular:dspace-cris-2024_02_x
 
 ### Dockerfile.dist
 
-The `Dockerfile.dist` is used to generate a *production* build and runtime environment.
+The `Dockerfile.dist` is used to build a *production* mode DSpace Angular UI image, published as 'dspace/dspace-angular' with a `*-dist` tag. Because it uses production mode, this image supports Server Side Rendering (SSR).
 
 ```bash
 # build the latest image

@@ -1,9 +1,11 @@
 import {
+  AsyncPipe,
   NgSwitch,
   NgSwitchCase,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
+  ChangeDetectorRef,
   Component,
   Input,
 } from '@angular/core';
@@ -39,12 +41,17 @@ export class TextSectionComponent {
   @Input()
     site: Site;
 
+  private asyncPipe: AsyncPipe;
+
   constructor(
+    private cdr: ChangeDetectorRef,
     private locale: LocaleService,
   ) {
+    this.asyncPipe = new AsyncPipe(cdr);
   }
 
   metadataValue(content: string) {
-    return this.site?.firstMetadataValue(content, { language: this.locale.getCurrentLanguageCode() }) ?? '';
+    const langCode = this.asyncPipe.transform(this.locale.getCurrentLanguageCode());
+    return this.site?.firstMetadataValue(content, { language: langCode }) ?? '';
   }
 }

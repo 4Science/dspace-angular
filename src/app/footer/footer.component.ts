@@ -15,7 +15,10 @@ import {
   Observable,
   of as observableOf,
 } from 'rxjs';
-import { take } from 'rxjs/operators';
+import {
+  take,
+  withLatestFrom,
+} from 'rxjs/operators';
 
 import {
   APP_CONFIG,
@@ -91,10 +94,13 @@ export class FooterComponent implements OnInit {
       style: '',
     };
     this.site = this.siteService.find().pipe(take(1));
-    this.siteService.find().pipe(take(1)).subscribe(
-      (site: Site) => {
+    this.siteService.find().pipe(
+      take(1),
+      withLatestFrom(this.locale.getCurrentLanguageCode()),
+    ).subscribe(
+      ([site, langCode]: [Site, string]) => {
         this.hasSiteFooterSections = !isEmpty(site?.firstMetadataValue('cris.cms.footer',
-          { language: this.locale.getCurrentLanguageCode() }));
+          { language: langCode }));
       },
     );
   }

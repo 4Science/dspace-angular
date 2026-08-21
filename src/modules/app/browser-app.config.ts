@@ -58,6 +58,7 @@ import { ClientMathService } from '../../app/core/shared/client-math.service';
 import { MathService } from '../../app/core/shared/math.service';
 import { BrowserXSRFService } from '../../app/core/xsrf/browser-xsrf.service';
 import { XSRFService } from '../../app/core/xsrf/xsrf.service';
+import { AuthorizationService } from '../../app/shared/authorizations/authorization.service';
 import { BrowserKlaroService } from '../../app/shared/cookies/browser-klaro.service';
 import { KlaroService } from '../../app/shared/cookies/klaro.service';
 import { BrowserDatadogRumService } from '../../app/shared/datadog-rum/browser-datadog-rum.service';
@@ -167,6 +168,10 @@ export const browserAppConfig: ApplicationConfig = mergeApplicationConfig({
     {
       provide: MathService,
       useClass: ClientMathService,
+    },
+    {
+      provide: AuthorizationService,
+      useClass: AuthorizationService,
     },
     provideMatomo(
       {

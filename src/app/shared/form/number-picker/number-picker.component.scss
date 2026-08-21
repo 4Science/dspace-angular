@@ -19,8 +19,17 @@
   transform: rotate(135deg);
 }
 
-input {
-  //max-width: 80px !important;
+.btn-date {
+  //max-height: 1.1rem;
+  padding: 0;
+}
+
+.four-digits {
+  width: 90px;
+}
+
+.two-digits {
+  width: 80px;
 }
 
 .lp-button {

@@ -19,6 +19,7 @@
     "noImplicitAny": false,
     "strictNullChecks": false,
     "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
     "pretty": true,
     "allowSyntheticDefaultImports": true,
     "target": "ES2022",

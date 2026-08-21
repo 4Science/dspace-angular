@@ -63,9 +63,9 @@ export class CmsInfoComponent implements OnInit {
 
     const site$ = this.siteService.find().pipe(take(1));
 
-    combineLatest([data$, site$]).subscribe(([data, site]) => {
+    combineLatest([data$, site$, this.locale.getCurrentLanguageCode()]).subscribe(([data, site, langCode]) => {
       this.headLabel$.next(`info.${data.qualifier}.head`);
-      const mdValue = site?.firstMetadataValue(`${data.schema}.cms.${data.qualifier}`, { language: this.locale.getCurrentLanguageCode() });
+      const mdValue = site?.firstMetadataValue(`${data.schema}.cms.${data.qualifier}`, { language: langCode });
       if (hasValue(mdValue)) {
         this.cmsMetadataValue$.next(mdValue);
       } else {

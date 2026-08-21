@@ -18,4 +18,6 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
 })
 export class TextComponent extends RenderingTypeValueModelComponent {
 
+  static structured = false;
+
 }

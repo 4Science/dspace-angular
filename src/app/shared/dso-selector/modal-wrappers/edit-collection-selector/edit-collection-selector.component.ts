@@ -9,6 +9,7 @@ import {
 } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
+import { ActionType } from 'src/app/core/resource-policy/models/action-type.model';
 
 import { environment } from '../../../../../environments/environment';
 import { getCollectionEditRoute } from '../../../../collection-page/collection-page-routing-paths';
@@ -18,7 +19,7 @@ import {
 } from '../../../../core/cache/models/sort-options.model';
 import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
 import { DSpaceObjectType } from '../../../../core/shared/dspace-object-type.model';
-import { DSOSelectorComponent } from '../../dso-selector/dso-selector.component';
+import { AuthorizedCollectionSelectorComponent } from '../../dso-selector/authorized-collection-selector/authorized-collection-selector.component';
 import {
   DSOSelectorModalWrapperComponent,
   SelectorActionType,
@@ -31,14 +32,16 @@ import {
 
 @Component({
   selector: 'ds-base-edit-collection-selector',
-  templateUrl: '../dso-selector-modal-wrapper.component.html',
+  templateUrl: './edit-collection-selector.component.html',
   standalone: true,
-  imports: [NgIf, DSOSelectorComponent, TranslateModule],
+  imports: [NgIf, AuthorizedCollectionSelectorComponent, TranslateModule],
 })
 export class EditCollectionSelectorComponent extends DSOSelectorModalWrapperComponent implements OnInit {
   objectType = DSpaceObjectType.COLLECTION;
   selectorTypes = [DSpaceObjectType.COLLECTION];
   action = SelectorActionType.EDIT;
+  // for editing collections, admin permissions are required
+  rpActionType = ActionType.ADMIN;
   defaultSort = new SortOptions(environment.comcolSelectionSort.sortField, environment.comcolSelectionSort.sortDirection as SortDirection);
   configuration = 'editCollection';
 

@@ -233,9 +233,10 @@ describe('ItemSearchResultListElementComponent', () => {
         { provide: KlaroService, useValue: new KlaroServiceStub() },
         {
           provide: AuthorizationDataService,
-          useValue: jasmine.createSpyObj('AuthorizationDataService', [
-            'invalidateAuthorizationsRequestCache',
-          ]),
+          useValue: jasmine.createSpyObj('AuthorizationDataService', {
+            invalidateAuthorizationsRequestCache: undefined,
+            isAuthorized: observableOf(true),
+          }),
         },
       ],
       schemas: [NO_ERRORS_SCHEMA],

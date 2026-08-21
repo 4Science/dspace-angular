@@ -24,6 +24,8 @@ import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-
 })
 export class CrisLayoutIIIFViewerBoxComponent extends CrisLayoutBoxModelComponent implements OnInit {
 
+  static hasOwnContainer = false;
+
   isSearchable: boolean;
   query$: Observable<string>;
 

@@ -124,6 +124,13 @@ export class CrisLayoutBoxContainerComponent implements OnInit {
   }
 
   /**
+   * Whether the component provides its own container (read from the component's static property)
+   */
+  get hasOwnContainer(): boolean {
+    return (this.componentLoader?.componentRef as any)?.hasOwnContainer ?? false;
+  }
+
+  /**
    * get the translation for the i18n key
    * @param key the i18n key
    */

@@ -1,6 +1,8 @@
 import { AccessibilitySettingsConfig } from '../app/accessibility/accessibility-settings.config';
 import { AdminNotifyMetricsRow } from '../app/admin/admin-notify-dashboard/admin-notify-metrics/admin-notify-metrics.model';
+import { FeatureID } from '../app/core/data/feature-authorization/feature-id';
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
+import { DiscoveryConfigurationFeaturesConfig } from '../app/shared/authorizations/authorization.interfaces';
 import { LiveRegionConfig } from '../app/shared/live-region/live-region.config';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
 import { ActuatorsConfig } from './actuators.config';
@@ -70,6 +72,9 @@ export class DefaultAppConfig implements AppConfig {
     port: 4000,
     // NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
     nameSpace: '/',
+    // Specify the public URL that this user interface responds to. This corresponds to the "dspace.ui.url" property in your backend's local.cfg.
+    // The baseUrl is used for redirects and SEO links (in robots.txt).
+    baseUrl: 'http://localhost:4000',
 
     // The rateLimiter settings limit each IP to a 'max' of 500 requests per 'windowMs' (1 minute).
     rateLimiter: {
@@ -103,6 +108,10 @@ export class DefaultAppConfig implements AppConfig {
     },
     // Cache-Control HTTP Header
     control: 'max-age=604800', // revalidate browser
+    // These static files should not be cached (paths relative to dist/browser, including the leading slash)
+    noCacheFiles: [
+      '/index.html',  // see https://web.dev/articles/http-cache#unversioned-urls
+    ],
     autoSync: {
       defaultTime: 0,
       maxBufferSize: 100,
@@ -150,6 +159,34 @@ export class DefaultAppConfig implements AppConfig {
       timeLeftBeforeTokenRefresh: 2 * 60 * 1000, // 2 minutes
     },
     isPasswordLoginEnabledForAdminsOnly: false, // Enable the standard login form
+  };
+
+  siteAuthorizationFeaturesConfig: FeatureID[] = [
+    FeatureID.AdministratorOf,
+    FeatureID.IsCommunityAdmin,
+    FeatureID.IsCollectionAdmin,
+    FeatureID.EPersonRegistration,
+    FeatureID.CanManageGroups,
+    FeatureID.CanViewUsageStatistics,
+    FeatureID.CanViewLoginStatistics,
+    FeatureID.CanViewWorkflowStatistics,
+    FeatureID.CanSendFeedback,
+    FeatureID.CanEditItem,
+    FeatureID.EPersonForgotPassword,
+    FeatureID.CanCorrectItem,
+    FeatureID.CanSubmit,
+    FeatureID.CoarNotifyEnabled,
+    FeatureID.CanSeeQA,
+    FeatureID.CanExportMetadata,
+    FeatureID.CanImportMetadata,
+  ];
+
+  discoveryAuthorizationFeaturesConfig: DiscoveryConfigurationFeaturesConfig = {
+    'workspace': {
+      'submission.workspaceitem': [
+        FeatureID.CanEditItem,
+      ],
+    },
   };
 
   // Form settings
@@ -371,7 +408,7 @@ export class DefaultAppConfig implements AppConfig {
     // The absolute lowest year to display in the dropdown (only used when no lowest date can be found for all items)
     defaultLowerLimit: 1900,
     // Whether to add item badges to BOTH browse and search result lists.
-    showLabels: false,
+    showLabels: true,
     // Whether to add item thumbnail images to BOTH browse and search result lists.
     showThumbnails: true,
     // Whether to add item thumbnail images to BOTH browse and search result lists.
@@ -743,6 +780,10 @@ export class DefaultAppConfig implements AppConfig {
         baseUrl: 'https://doi.org/',
       },
       {
+        name: 'core',
+        baseUrl: 'https://core.ac.uk/works/',
+      },
+      {
         name: 'hdl',
         baseUrl: 'https://hdl.handle.net/',
       },
@@ -1012,6 +1053,12 @@ export class DefaultAppConfig implements AppConfig {
       icon: 'assets/images/ror.logo.icon.svg',
       iconPosition: IdentifierSubtypesIconPositionEnum.LEFT,
       link: 'https://ror.org',
+    },
+    {
+      name: 'core',
+      icon: 'assets/images/core.logo.icon.png',
+      iconPosition: IdentifierSubtypesIconPositionEnum.LEFT,
+      link: 'https://core.ac.uk',
     },
   ];
   datadogRum: DatadogRumConfig = {

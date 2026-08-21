@@ -27,6 +27,8 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
 })
 export class LinkAuthorityComponent extends RenderingTypeValueModelComponent implements OnInit {
 
+  static structured = false;
+
   /**
    * The link to render
    */
@@ -69,13 +71,16 @@ export class LinkAuthorityComponent extends RenderingTypeValueModelComponent imp
       return iconStyle;
     }
 
-    if (siteUrl.includes('linkedin')) {
+    const hostname = new URL(siteUrl)?.hostname?.replace(/^www\./, '') ||
+      siteUrl.toLowerCase();
+
+    if (/^(linkedin\.com|lnkd\.in)$/.test(hostname)) {
       iconStyle = 'fab fa-linkedin';
-    } else if (siteUrl.includes('twitter')) {
+    } else if (/^(twitter\.com|x\.com|t\.co)$/.test(hostname)) {
       iconStyle = 'fa-brands fa-x-twitter';
-    } else if (siteUrl.includes('instagram')) {
+    } else if (/^(instagram\.com|instagr\.am)$/.test(hostname)) {
       iconStyle = 'fab fa-instagram';
-    } else if (siteUrl.includes('facebook')) {
+    } else if (/^(facebook\.com|fb\.com)$/.test(hostname)) {
       iconStyle = 'fab fa-facebook';
     }
     return iconStyle;

@@ -20,6 +20,7 @@ import {
   APP_DATA_SERVICES_MAP,
 } from '../../../../../config/app-config.interface';
 import { BitstreamDataService } from '../../../../core/data/bitstream-data.service';
+import { AuthorizationDataService } from '../../../../core/data/feature-authorization/authorization-data.service';
 import { Bitstream } from '../../../../core/shared/bitstream.model';
 import { PageInfo } from '../../../../core/shared/page-info.model';
 import { XSRFService } from '../../../../core/xsrf/xsrf.service';
@@ -30,6 +31,7 @@ import { TranslateLoaderMock } from '../../../../shared/mocks/translate-loader.m
 import { NotificationsService } from '../../../../shared/notifications/notifications.service';
 import { createSuccessfulRemoteDataObject$ } from '../../../../shared/remote-data.utils';
 import { ActivatedRouteStub } from '../../../../shared/testing/active-router.stub';
+import { AuthorizationDataServiceStub } from '../../../../shared/testing/authorization-service.stub';
 import { NotificationsServiceStub } from '../../../../shared/testing/notifications-service.stub';
 import { createPaginatedList } from '../../../../shared/testing/utils.test';
 import { ThemeService } from '../../../../shared/theme-support/theme.service';
@@ -90,6 +92,7 @@ describe('FileSectionComponent', () => {
         { provide: APP_CONFIG, useValue: environment },
         { provide: ThemeService, useValue: getMockThemeService() },
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
+        { provide: AuthorizationDataService, useClass: AuthorizationDataServiceStub },
         provideMockStore(),
       ],
       schemas: [NO_ERRORS_SCHEMA],

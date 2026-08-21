@@ -44,8 +44,8 @@ const siteService = jasmine.createSpyObj('siteService', {
   find: of(site),
 });
 const localeServiceStub = {
-  getCurrentLanguageCode(): string {
-    return 'en';
+  getCurrentLanguageCode() {
+    return of('en');
   },
 };
 
