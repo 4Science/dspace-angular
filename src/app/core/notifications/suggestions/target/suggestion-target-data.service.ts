@@ -84,6 +84,8 @@ export class SuggestionTargetDataService extends IdentifiableDataService<Suggest
    *    The user Id for which to find targets.
    * @param options
    *    Find list options object.
+   * @param useCachedVersionIfAvailable
+   *    If this is true, the request will only be sent if there's no valid cached version. Defaults to true
    * @param linksToFollow
    *    List of {@link FollowLinkConfig} that indicate which {@link HALLink}s should be automatically resolved.
    * @return Observable<RemoteData<PaginatedList<SuggestionTarget>>>
@@ -92,12 +94,13 @@ export class SuggestionTargetDataService extends IdentifiableDataService<Suggest
   public getTargetsByUser(
     userId: string,
     options: FindListOptions = {},
+    useCachedVersionIfAvailable = false, 
     ...linksToFollow: FollowLinkConfig<SuggestionTarget>[]
   ): Observable<RemoteData<PaginatedList<SuggestionTarget>>> {
     options.searchParams = [new RequestParam('target', userId)];
-
-    return this.searchBy(this.searchFindByTargetMethod, options, true, true, ...linksToFollow);
+    return this.searchBy(this.searchFindByTargetMethod, options, useCachedVersionIfAvailable, true, ...linksToFollow);
   }
+
   /**
    * Return a Suggestion Target for a given id
    *
