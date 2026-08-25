@@ -3895,6 +3895,12 @@
 
   "item.preview.oaire.citation.startPage": "Start Page",
 
+  "item.preview.oaire.citation.title": "Published in",
+
+  "item.preview.oaire.version": "Version",
+
+  "item.preview.dc.identifier.openalex": "OpenAlex ID",
+
   "item.preview.oairecerif.acronym": "Acronym",
 
   "item.preview.oairecerif.affiliation.orgunit": "Affiliation",
