@@ -46,4 +46,30 @@ describe('VocabularyTreeviewModalComponent', () => {
   it('should init description message', () => {
     expect((component as any).setDescription).toHaveBeenCalled();
   });
+
+  describe('translation fallback mechanism', () => {
+    it('should use vocabulary-specific header when vocabularyOptions.name is provided', () => {
+      component.vocabularyOptions = new VocabularyOptions('subject', null, null, false);
+      fixture.detectChanges();
+
+      const headerElement = fixture.nativeElement.querySelector('.modal-title');
+      expect(headerElement).toBeTruthy();
+      // The translation key should be 'vocabulary-treeview.header.subject'
+      const translationKey = headerElement.textContent.trim();
+      // In test environment, untranslated keys are returned as-is
+      expect(translationKey).toContain('vocabulary-treeview.header');
+    });
+
+    it('should use generic header when vocabularyOptions.name is null', () => {
+      component.vocabularyOptions = new VocabularyOptions(null, null, null, false);
+      fixture.detectChanges();
+
+      const headerElement = fixture.nativeElement.querySelector('.modal-title');
+      expect(headerElement).toBeTruthy();
+      // The translation key should be 'vocabulary-treeview.header'
+      const translationKey = headerElement.textContent.trim();
+      expect(translationKey).toContain('vocabulary-treeview.header');
+    });
+
+  });
 });

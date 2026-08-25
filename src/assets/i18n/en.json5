@@ -8005,6 +8005,16 @@
 
   "vocabulary-treeview.tree.description.publication-coar-types": "Publication types",
 
+  "vocabulary-treeview.tree.description.research-institutes-centres": "Research institutes and centres",
+
+  "vocabulary-treeview.tree.description.subject-lc": "Subject classification - LC",
+
+  "vocabulary-treeview.tree.description.subject-jacs": "Subject classification - JACS",
+
+  "vocabulary-treeview.tree.description.vc-mode-collection": " Means by which the dataset was created or collected. For example, interview, questionaire, experiment, simulation, transcription etc.",
+
+
+
   "vocabulary-treeview.info": "Select a subject to add as search filter",
 
   "uploader.browse": "browse",
@@ -9396,6 +9406,15 @@
   "third-party-metrics-cookies.consent-settings": "consent settings",
 
   "third-party-metrics-blocked": "Some of the metrics are blocked by your",
+
+
+  "vocabulary-treeview.header.fondboxtree": "Fond Tree",
+
+  "vocabulary-treeview.header.journalfondboxtree": "Journal Fond Tree",
+
+  "vocabulary-treeview.header.aggregationboxtree": "Collection Tree",
+
+  "vocabulary-treeview.header.vc-mode-collection": "Data Collection Method",
 
   "form.other-information.alternative-names": "Alternative names",
 
