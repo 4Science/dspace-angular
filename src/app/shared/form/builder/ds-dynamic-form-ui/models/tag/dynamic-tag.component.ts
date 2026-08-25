@@ -56,6 +56,7 @@ import {
 import { ChipsComponent } from '../../../../chips/chips.component';
 import { Chips } from '../../../../chips/models/chips.model';
 import { FormBuilderService } from '../../../form-builder.service';
+import { FormFieldMetadataValueObject } from '../../../models/form-field-metadata-value.model';
 import { DsDynamicVocabularyComponent } from '../dynamic-vocabulary.component';
 import { DynamicTagModel } from './dynamic-tag.model';
 
@@ -157,8 +158,10 @@ export class DsDynamicTagComponent extends DsDynamicVocabularyComponent implemen
   ngOnInit() {
     this.hasAuthority = hasValue(this.model.vocabularyOptions) && hasValue(this.model.vocabularyOptions.name);
 
+    const initialValues: any[] = [].concat(...((this.model.value as any[]) || []).map((item: any) => this.splitMultiValueTag(item)));
+
     this.chips = new Chips(
-      this.model.value as any[],
+      initialValues,
       'display',
       null,
       environment.submission.icons.metadata);
@@ -258,6 +261,21 @@ export class DsDynamicTagComponent extends DsDynamicVocabularyComponent implemen
    */
   public setCurrentValue(value: any, init = false) {
     this.currentValue = value;
+  }
+
+  private splitMultiValueTag(item: any): any[] {
+    const isString = typeof item === 'string';
+    if (!isString && item?.hasAuthority?.()) {
+      return [item];
+    }
+
+    const raw = isString ? item : (item?.display ?? item?.value);
+    const parts = typeof raw === 'string' ? raw.split(/;/).map((part) => part.trim()).filter(Boolean) : [];
+    if (parts.length <= 1) {
+      return [item];
+    }
+
+    return isString ? parts : parts.map((value) => Object.assign(new FormFieldMetadataValueObject(), item, { value, display: value }));
   }
 
   private addTagsToChips() {
