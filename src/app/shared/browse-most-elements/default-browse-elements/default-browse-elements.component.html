@@ -11,7 +11,7 @@
               [showMetrics]="showMetrics"
               [showLabel]="showLabel"
               [showThumbnails]="showThumbnails"
-            [viewMode]="paginatedSearchOptions.view"></ds-listable-object-component-loader>
+              [viewMode]="paginatedSearchOptions.view"></ds-listable-object-component-loader>
           </li>
         }
       </ul>
@@ -21,8 +21,25 @@
         {{ 'remote.error' | translate }}
       </div>
     }
-  }
-  @if ((searchResults$ | async) === null || (searchResults$ | async) === undefined) {
-    <ds-loading></ds-loading>
+  } @else {
+    @for (item of skeletonItems; track item) {
+      <div class="skeleton-row row my-4">
+        @if (showThumbnails) {
+          <div class="col-3 col-md-2">
+            <div class="thumbnail-skeleton">
+              <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+          </div>
+        }
+        <div [class.col-9]="showThumbnails" [class.col-md-10]="showThumbnails" [class.col-12]="!showThumbnails">
+          <div class="badge-skeleton">
+            <ngx-skeleton-loader></ngx-skeleton-loader>
+          </div>
+          <div class="text-skeleton">
+            <ngx-skeleton-loader [count]="2"></ngx-skeleton-loader>
+          </div>
+        </div>
+      </div>
+    }
   }
 </div>
