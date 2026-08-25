@@ -8,6 +8,7 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContextMenuComponent } from './context-menu.component';
 import { RequestCorrectionMenuComponent } from './request-correction/request-correction-menu.component';
 import { EditItemMenuComponent } from './edit-item/edit-item-menu.component';
+import { AssociateItemMenuComponent } from './associate-item/associate-item-menu.component';
 import { ExportItemMenuComponent } from './export-item/export-item-menu.component';
 import { AuditItemMenuComponent } from './audit-item/audit-item-menu.component';
 import { DsoPageEditMenuComponent } from './dso-page-edit/dso-page-edit-menu.component';
@@ -30,6 +31,7 @@ const COMPONENTS = [
   AuditItemMenuComponent,
   ContextMenuComponent,
   EditItemMenuComponent,
+  AssociateItemMenuComponent,
   ExportItemMenuComponent,
   ExportCollectionMenuComponent,
   EditItemRelationshipsMenuComponent,
@@ -47,6 +49,7 @@ const ENTRY_COMPONENTS = [
   DsoPageEditMenuComponent,
   AuditItemMenuComponent,
   EditItemMenuComponent,
+  AssociateItemMenuComponent,
   ExportItemMenuComponent,
   ExportCollectionMenuComponent,
   EditItemRelationshipsMenuComponent,

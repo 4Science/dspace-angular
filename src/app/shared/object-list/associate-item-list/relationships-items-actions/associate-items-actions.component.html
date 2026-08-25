@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="space-children-mr" [ngClass]="(showThumbnails) ? 'offset-3 offset-xl-2 pl-3' : ''">
+    <button class="action-buttons btn btn-success mt-1 mb-3"
+            *ngIf="!(isAssociated | async) && !!object"
+            ngbTooltip="{{'manage.associateitem.associate.tooltip' | translate}}"
+            (click)="emitAction('associate')"
+            [disabled]="pendingChanges$ | async">
+      <span *ngIf="(isProcessingAssociation | async)"><i class='fas fa-circle-notch fa-spin'></i> {{'loading.default' | translate}}</span>
+      <span *ngIf="!(isProcessingAssociation | async)"> {{"manage.associateitem.associate" | translate}} <i class="fa fa-link"></i></span>
+    </button>
+    <button class="action-buttons btn btn-danger mt-1 mb-3"
+            *ngIf="(isAssociated | async) && !!object"
+            ngbTooltip="{{'manage.associateitem.disassociate.tooltip' | translate}}"
+            (click)="emitAction('disassociate')"
+            [disabled]="pendingChanges$ | async">
+      <span *ngIf="(isProcessingDisAssociation | async)"><i class='fas fa-circle-notch fa-spin'></i> {{'loading.default' | translate}}</span>
+      <span *ngIf="!(isProcessingDisAssociation | async)"> {{"manage.associateitem.disassociate" | translate}} <i class="fa fa-unlink"></i></span>
+    </button>
+  </div>
+</div>
