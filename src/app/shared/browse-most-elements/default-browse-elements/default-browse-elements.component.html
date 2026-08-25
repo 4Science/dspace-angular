@@ -1,20 +1,36 @@
 <div class="m-2">
-  <ng-container *ngIf="(searchResults$ | async) as searchResults">
-      <ul *ngIf="searchResults?.hasSucceeded" class="list-unstyled">
-          <li *ngFor="let object of searchResults?.payload?.page; let i = index; let last = last" class="mt-4 mb-4 d-flex" [class.border-bottom]="last !== true">
-              <ds-listable-object-component-loader [context]="context"
-                                                   [index]="i"
-                                                   [listID]="paginatedSearchOptions.configuration"
-                                                   [object]="object"
-                                                   [showMetrics]="showMetrics"
-                                                   [showLabel]="showLabel"
-                                                   [showThumbnails]="showThumbnails"
-                                                   [viewMode]="paginatedSearchOptions.view"></ds-listable-object-component-loader>
-          </li>
-      </ul>
-      <div *ngIf="searchResults?.hasFailed">
-          {{ 'remote.error' | translate }}
-      </div>
+  <ng-container *ngIf="(searchResults$ | async) as searchResults; else skeleton">
+    <ul *ngIf="searchResults?.hasSucceeded" class="list-unstyled">
+      <li *ngFor="let object of searchResults?.payload?.page; let i = index; let last = last" class="mt-4 mb-4 d-flex" [class.border-bottom]="last !== true">
+        <ds-listable-object-component-loader [context]="context"
+                                             [index]="i"
+                                             [listID]="paginatedSearchOptions.configuration"
+                                             [object]="object"
+                                             [showMetrics]="showMetrics"
+                                             [showLabel]="showLabel"
+                                             [showThumbnails]="showThumbnails"
+                                             [viewMode]="paginatedSearchOptions.view"></ds-listable-object-component-loader>
+      </li>
+    </ul>
+    <div *ngIf="searchResults?.hasFailed">
+      {{ 'remote.error' | translate }}
+    </div>
   </ng-container>
-  <ds-loading *ngIf="(searchResults$ | async) === null || (searchResults$ | async) === undefined"></ds-loading>
+  <ng-template #skeleton>
+    <div *ngFor="let item of skeletonItems" class="skeleton-row row my-4">
+      <div *ngIf="showThumbnails" class="col-3 col-md-2">
+        <div class="thumbnail-skeleton">
+          <ngx-skeleton-loader></ngx-skeleton-loader>
+        </div>
+      </div>
+      <div [class.col-9]="showThumbnails" [class.col-md-10]="showThumbnails" [class.col-12]="!showThumbnails">
+        <div class="badge-skeleton">
+          <ngx-skeleton-loader></ngx-skeleton-loader>
+        </div>
+        <div class="text-skeleton">
+          <ngx-skeleton-loader [count]="2"></ngx-skeleton-loader>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 </div>
