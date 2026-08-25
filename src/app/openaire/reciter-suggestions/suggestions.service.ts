@@ -155,6 +155,7 @@ export class SuggestionsService {
    */
   public deleteReviewedSuggestion(suggestionId: string): Observable<RemoteData<NoContent>> {
     return this.suggestionsDataService.deleteSuggestion(suggestionId).pipe(
+      getFirstCompletedRemoteData(),
       map((response: RemoteData<NoContent>) => {
         if (response.isSuccess) {
           return response;
@@ -222,10 +223,10 @@ export class SuggestionsService {
   }
 
   /**
-   * Perform the delete operation over a single suggestion.
+ * Perform the delete operation over a single suggestion.
    * @param suggestionId
    */
-  public notMine(suggestionId): Observable<RemoteData<NoContent>> {
+  public notMine(suggestionId: string): Observable<RemoteData<NoContent>> {
     return this.deleteReviewedSuggestion(suggestionId).pipe(
       catchError((error) => of(null))
     );
