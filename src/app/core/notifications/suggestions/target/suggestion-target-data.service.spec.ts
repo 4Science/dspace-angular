@@ -120,7 +120,7 @@ describe('SuggestionTargetDataService test', () => {
       scheduler.schedule(() => service.getTargetsByUser('testId', options).subscribe());
       scheduler.flush();
 
-      expect(requestService.send).toHaveBeenCalledWith(expected, true);
+      expect(requestService.send).toHaveBeenCalledWith(expected, false);
     });
   });
 
