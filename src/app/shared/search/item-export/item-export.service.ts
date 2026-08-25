@@ -102,4 +102,17 @@ export class ItemExportService {
     };
   }
 
+  /**
+   * Get the UUID from a searchOptions
+   * @param searchOptions
+   */
+  public getScopeUUID(searchOptions: SearchOptions): string {
+    if (searchOptions.fixedFilter) {
+      const fixedFilter = searchOptions.fixedFilter.split('=');
+      if (fixedFilter.length === 2 && fixedFilter[0] === 'scope') {
+        return fixedFilter[1];
+      }
+    }
+    return null;
+  }
 }
