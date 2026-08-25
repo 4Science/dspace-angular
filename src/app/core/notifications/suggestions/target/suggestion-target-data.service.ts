@@ -94,7 +94,7 @@ export class SuggestionTargetDataService extends IdentifiableDataService<Suggest
   public getTargetsByUser(
     userId: string,
     options: FindListOptions = {},
-    useCachedVersionIfAvailable = false, 
+    useCachedVersionIfAvailable = false,
     ...linksToFollow: FollowLinkConfig<SuggestionTarget>[]
   ): Observable<RemoteData<PaginatedList<SuggestionTarget>>> {
     options.searchParams = [new RequestParam('target', userId)];
