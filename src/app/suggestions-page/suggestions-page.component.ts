@@ -22,6 +22,7 @@ import {
   distinctUntilChanged,
   map,
   switchMap,
+  take,
   tap,
 } from 'rxjs/operators';
 
@@ -172,6 +173,8 @@ export class SuggestionsPageComponent implements OnInit {
    */
   updatePage(): Observable<RemoteData<PaginatedList<Suggestion>>> {
     this.processing$.next(true);
+    this.suggestionService.clearSuggestionRequests();
+
     const pageConfig$: Observable<FindListOptions> = this.paginationService.getFindListOptions(
       this.paginationOptions.id,
       this.defaultConfig,
@@ -197,8 +200,6 @@ export class SuggestionsPageComponent implements OnInit {
         } else {
           this.suggestionsRD$.next(null);
         }
-
-        this.suggestionService.clearSuggestionRequests();
       }),
     );
   }
@@ -207,10 +208,11 @@ export class SuggestionsPageComponent implements OnInit {
    * Used to delete a suggestion.
    * @suggestionId
    */
-  ignoreSuggestion(suggestionId) {
+  ignoreSuggestion(suggestionId: string) {
     this.suggestionService.ignoreSuggestion(suggestionId).pipe(
       tap(() => this.suggestionTargetsStateService.dispatchRefreshUserSuggestionsAction()),
       switchMap(() => this.updatePage()),
+      take(1),
     ).subscribe();
   }
 
