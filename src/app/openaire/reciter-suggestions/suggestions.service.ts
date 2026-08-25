@@ -16,6 +16,7 @@ import { EPerson } from '../../core/eperson/models/eperson.model';
 import { hasValue, isNotEmpty } from '../../shared/empty.util';
 import {
   getFinishedRemoteData,
+  getFirstCompletedRemoteData,
   getFirstSucceededRemoteDataPayload,
   getFirstSucceededRemoteListPayload
 } from '../../core/shared/operators';
