@@ -1,6 +1,5 @@
 import {
   NgClass,
-  NgForOf,
   NgIf,
 } from '@angular/common';
 import {
@@ -40,21 +39,25 @@ export interface SwitchOption {
   imports: [
     TranslateModule,
     NgClass,
-    NgForOf,
     NgIf,
   ],
 })
 export class SwitchComponent implements OnInit, OnChanges {
 
   /**
-   * the aria label
+   * The aria label for accessibility
    */
   @Input() ariaLabel: string;
 
   /**
-   * The options available for the switch
+   * The "on" / active option configuration
    */
-  @Input() options: SwitchOption[] = [];
+  @Input() onOption: SwitchOption;
+
+  /**
+   * The "off" / inactive option configuration
+   */
+  @Input() offOption: SwitchOption;
 
   /**
    * The currently selected value
@@ -71,29 +74,46 @@ export class SwitchComponent implements OnInit, OnChanges {
    */
   public backgroundClass: string;
 
+  /**
+   * Whether the switch is currently in the "on" state
+   */
+  get isOn(): boolean {
+    return this.selectedValue === this.onOption?.value;
+  }
+
+  /**
+   * The currently active option based on selectedValue
+   */
+  get activeOption(): SwitchOption | undefined {
+    if (this.selectedValue === this.onOption?.value) {
+      return this.onOption;
+    }
+    if (this.selectedValue === this.offOption?.value) {
+      return this.offOption;
+    }
+    return undefined;
+  }
+
   ngOnInit() {
     this.backgroundClass = this.getBackgroundColorClass();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // Recalculate BG class if options or current value are changed by parent component
     if ((hasValue(changes?.selectedValue?.currentValue) && !changes.selectedValue.isFirstChange())
-        || (hasValue(changes?.options?.currentValue) && !changes.options.isFirstChange())) {
+        || (hasValue(changes?.onOption?.currentValue) && !changes.onOption.isFirstChange())
+        || (hasValue(changes?.offOption?.currentValue) && !changes.offOption.isFirstChange())) {
       this.backgroundClass = this.getBackgroundColorClass();
     }
   }
 
   /**
-   * Update the selected value and emit the change event
-   * @param value The new value to select
+   * Toggle between on and off values
    */
-  onOptionClick(value: any) {
-
-    this.selectedValue = value;
+  onToggle() {
+    const newValue = this.isOn ? this.offOption.value : this.onOption.value;
+    this.selectedValue = newValue;
     this.selectedValueChange.emit(this.selectedValue);
-
     this.backgroundClass = this.getBackgroundColorClass();
-
   }
 
   /**
@@ -101,9 +121,9 @@ export class SwitchComponent implements OnInit, OnChanges {
    * Defaults to 'bg-default' if no specific color is set.
    */
   getBackgroundColorClass(): string {
-    const selectedOption = this.options.find(option => option.value === this.selectedValue);
-    if (selectedOption && selectedOption.backgroundColor) {
-      return `bg-${selectedOption.backgroundColor}`;
+    const active = this.activeOption;
+    if (active?.backgroundColor) {
+      return `bg-${active.backgroundColor}`;
     }
     return 'bg-default';
   }
