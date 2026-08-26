@@ -23,7 +23,8 @@
   </div>
 
   <ds-switch
-    [options]="switchOptions"
+    [onOption]="switchOnOption"
+    [offOption]="switchOffOption"
     [selectedValue]="isUpload ? 'upload' : 'url'"
     (selectedValueChange)="toggleUpload()">
   </ds-switch>

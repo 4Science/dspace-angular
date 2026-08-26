@@ -1,19 +1,23 @@
-<div class="btn-group">
+<div class="btn-group" (click)="onToggle()" role="switch" [attr.aria-checked]="isOn" [attr.aria-label]="ariaLabel">
   <div class="switch-container" [ngClass]="backgroundClass">
-    @for (option of options; track option) {
-      <div class="switch-opt"
-           (click)="onOptionClick(option.value)"
-           [class.bg-white]="selectedValue === option.value">
-        <i [class]="option.icon + ' ' + (selectedValue === option.value ? 'text-' + option.iconColor : '')"></i>
+    <div>
+      <div class="switch-opt" [class.bg-white]="isOn">
+        @if(onOption?.icon){
+          <i [class]="onOption.icon + ' ' + (isOn ? 'text-' + onOption.iconColor : '')"></i>
+        }
       </div>
-    }
+    </div>
+    <div>
+      <div class="switch-opt" [class.bg-white]="!isOn">
+        @if(offOption?.icon){
+          <i [class]="offOption.icon + ' ' + (!isOn ? 'text-' + offOption.iconColor : '')"></i>
+        }
+      </div>
   </div>
-  @for (option of options; track option) {
-    @if (selectedValue === option.value) {
-      <span [class]="selectedValue === option.value ? 'text-' + option.labelColor : ''"
-            class="visibility-label ms-2 fw-bold">
-        {{ option.label | translate }}
-      </span>
-    }
+  @if(activeOption?.label){
+    <span [class]="'text-' + (activeOption?.labelColor || '')"
+          class="visibility-label ml-2 font-weight-bold">
+      {{ activeOption.label | translate }}
+    </span>
   }
 </div>

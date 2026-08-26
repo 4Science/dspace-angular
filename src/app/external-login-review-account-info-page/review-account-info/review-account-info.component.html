@@ -43,7 +43,8 @@
           <td>
             @if ((data.receivedValue !== data.currentValue) && data.currentValue) {
               <ds-switch
-                [options]="switchOptions"
+                [onOption]="switchOnOption"
+                [offOption]="switchOffOption"
                 [selectedValue]="data.overrideValue"
                 (selectedValueChange)="onOverrideChange($event, data.identifier)">
               </ds-switch>

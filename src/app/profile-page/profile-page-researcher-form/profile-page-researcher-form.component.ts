@@ -87,12 +87,14 @@ export class ProfilePageResearcherFormComponent implements OnInit {
   researcherProfileItemId: string;
 
   /**
-   * The custom options for the 'ds-switch' component
+   * The "on" option for the 'ds-switch' component (public)
    */
-  switchOptions: SwitchOption[] = [
-    { value: 'public', icon: 'fa fa-globe', labelColor: SwitchColor.Success, label: 'researcher.profile.public.visibility', iconColor: SwitchColor.Success },
-    { value: 'private', icon: 'fa fa-lock', labelColor: SwitchColor.Danger, label: 'researcher.profile.private.visibility', iconColor: SwitchColor.Danger },
-  ];
+  switchOnOption: SwitchOption = { value: 'public', icon: 'fa fa-globe', labelColor: SwitchColor.Success, label: 'researcher.profile.public.visibility', iconColor: SwitchColor.Success };
+
+  /**
+   * The "off" option for the 'ds-switch' component (private)
+   */
+  switchOffOption: SwitchOption = { value: 'private', icon: 'fa fa-lock', labelColor: SwitchColor.Danger, label: 'researcher.profile.private.visibility', iconColor: SwitchColor.Danger };
 
   constructor(protected researcherProfileService: ResearcherProfileDataService,
               protected profileClaimService: ProfileClaimService,
