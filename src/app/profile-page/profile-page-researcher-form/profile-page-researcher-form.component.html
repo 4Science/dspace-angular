@@ -4,7 +4,8 @@
     <p class="align-items-center researcher-profile-switch" >
       <span class="mr-3">{{'researcher.profile.status' | translate}}</span>
       <ds-switch
-        [options]="switchOptions"
+        [onOption]="switchOnOption"
+        [offOption]="switchOffOption"
         [selectedValue]="researcherProfile.visible ? 'public' : 'private'"
         (selectedValueChange)="toggleProfileVisibility(researcherProfile)">
       </ds-switch>

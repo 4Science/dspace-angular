@@ -34,6 +34,17 @@ export class AccessibilitySettingsComponent implements OnInit, OnDestroy {
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject(false);
   cookieIsAccepted: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
+  /**
+   * The "on" option for the 'ds-switch' component
+   */
+  switchOnOption: SwitchOption = { value: true, labelColor: SwitchColor.Success, backgroundColor: SwitchColor.Success,
+    label: 'info.accessibility-settings.notificationTimeOutEnabled.label.enabled' };
+
+  /**
+   * The "off" option for the 'ds-switch' component
+   */
+  switchOffOption: SwitchOption = { value: false, label: 'info.accessibility-settings.notificationTimeOutEnabled.label.disabled' };
+
   private subscriptions: Subscription[] = [];
 
   constructor(
