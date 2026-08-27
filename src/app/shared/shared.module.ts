@@ -366,6 +366,7 @@ import {StickyPopoverDirective} from './metadata-link-view/sticky-popover.direct
 import { SortPipe } from './utils/sort.pipe';
 import { BrowserOnlyDirective } from './utils/browser-only.directive';
 import {EscapeHtmlPipe} from './utils/escape-html.pipe';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { AuthorizedCommunitySelectorComponent } from './dso-selector/dso-selector/authorized-community-selector/authorized-community-selector.component';
 import { AuthorizedItemSelectorComponent } from './dso-selector/dso-selector/authorized-item-selector/authorized-item-selector.component';
 
@@ -387,7 +388,8 @@ const MODULES = [
   MenuModule,
   NgxPaginationModule,
   MetricsModule,
-  NgbModule
+  NgbModule,
+  NgxSkeletonLoaderModule,
 ];
 
 const ROOT_MODULES = [
