@@ -26,12 +26,12 @@ export class SwitchComponent implements OnInit, OnChanges {
   /**
    * The "on" / active option configuration
    */
-  @Input() onOption: SwitchOption;
+  @Input() checkedOption: SwitchOption;
 
   /**
    * The "off" / inactive option configuration
    */
-  @Input() offOption: SwitchOption;
+  @Input() uncheckedOption: SwitchOption;
 
   /**
    * The currently selected value
@@ -53,18 +53,18 @@ export class SwitchComponent implements OnInit, OnChanges {
    * Whether the switch is currently in the "on" state
    */
   get isOn(): boolean {
-    return this.selectedValue === this.onOption?.value;
+    return this.selectedValue === this.checkedOption?.value;
   }
 
   /**
    * The currently active option based on selectedValue
    */
   get activeOption(): SwitchOption | undefined {
-    if (this.selectedValue === this.onOption?.value) {
-      return this.onOption;
+    if (this.selectedValue === this.checkedOption?.value) {
+      return this.checkedOption;
     }
-    if (this.selectedValue === this.offOption?.value) {
-      return this.offOption;
+    if (this.selectedValue === this.uncheckedOption?.value) {
+      return this.uncheckedOption;
     }
     return undefined;
   }
@@ -75,8 +75,8 @@ export class SwitchComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if ((hasValue(changes?.selectedValue?.currentValue) && !changes.selectedValue.isFirstChange())
-        || (hasValue(changes?.onOption?.currentValue) && !changes.onOption.isFirstChange())
-        || (hasValue(changes?.offOption?.currentValue) && !changes.offOption.isFirstChange())) {
+        || (hasValue(changes?.checkedOption?.currentValue) && !changes.checkedOption.isFirstChange())
+        || (hasValue(changes?.uncheckedOption?.currentValue) && !changes.uncheckedOption.isFirstChange())) {
       this.backgroundClass = this.getBackgroundColorClass();
     }
   }
@@ -85,7 +85,7 @@ export class SwitchComponent implements OnInit, OnChanges {
    * Toggle between on and off values
    */
   onToggle() {
-    const newValue = this.isOn ? this.offOption.value : this.onOption.value;
+    const newValue = this.isOn ? this.uncheckedOption.value : this.checkedOption.value;
     this.selectedValue = newValue;
     this.selectedValueChange.emit(this.selectedValue);
     this.backgroundClass = this.getBackgroundColorClass();

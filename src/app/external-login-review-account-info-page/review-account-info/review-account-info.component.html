@@ -42,8 +42,8 @@
         <td>
           <ds-switch
             *ngIf="(data.receivedValue !== data.currentValue) && data.currentValue"
-            [onOption]="switchOnOption"
-            [offOption]="switchOffOption"
+            [checkedOption]="switchOnOption"
+            [uncheckedOption]="switchOffOption"
             [selectedValue]="data.overrideValue"
             (selectedValueChange)="onOverrideChange($event, data.identifier)">
           </ds-switch>

@@ -34,8 +34,8 @@ describe('SwitchComponent', () => {
 
     fixture = TestBed.createComponent(SwitchComponent);
     component = fixture.componentInstance;
-    component.onOption = mockOnOption;
-    component.offOption = mockOffOption;
+    component.checkedOption = mockOnOption;
+    component.uncheckedOption = mockOffOption;
     component.selectedValue = mockOnOption.value;
     fixture.detectChanges();
   });

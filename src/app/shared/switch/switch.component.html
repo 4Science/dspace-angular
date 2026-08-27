@@ -2,12 +2,12 @@
   <div class="switch-container" [ngClass]="backgroundClass">
     <div>
       <div class="switch-opt" [class.bg-white]="isOn">
-        <i *ngIf="onOption?.icon" [class]="onOption.icon + ' ' + (isOn ? 'text-' + onOption.iconColor : '')"></i>
+        <i *ngIf="checkedOption?.icon" [class]="checkedOption.icon + ' ' + (isOn ? 'text-' + checkedOption.iconColor : '')"></i>
       </div>
     </div>
     <div>
       <div class="switch-opt" [class.bg-white]="!isOn">
-        <i *ngIf="offOption?.icon" [class]="offOption.icon + ' ' + (!isOn ? 'text-' + offOption.iconColor : '')"></i>
+        <i *ngIf="uncheckedOption?.icon" [class]="uncheckedOption.icon + ' ' + (!isOn ? 'text-' + uncheckedOption.iconColor : '')"></i>
       </div>
     </div>
   </div>
