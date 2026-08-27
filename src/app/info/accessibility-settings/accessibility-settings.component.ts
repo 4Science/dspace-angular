@@ -25,12 +25,7 @@ export class AccessibilitySettingsComponent implements OnInit, OnDestroy {
   protected readonly AlertType = AlertType;
 
   protected formValues: AccessibilitySettingsFormValues;
-
-  notificationTimeOutSwitchOptions: SwitchOption[] = [
-    { value: true, label: 'info.accessibility-settings.disableNotificationTimeOut.on', labelColor: SwitchColor.Success, backgroundColor: SwitchColor.Success },
-    { value: false, label: 'info.accessibility-settings.disableNotificationTimeOut.off' },
-  ];
-
+  
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject(false);
   cookieIsAccepted: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
