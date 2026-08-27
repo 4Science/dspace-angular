@@ -5,8 +5,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
-import { ThemedLoadingComponent } from '../../loading/themed-loading.component';
 import { ListableObjectComponentLoaderComponent } from '../../object-collection/shared/listable-object/listable-object-component-loader.component';
 import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.component';
 
@@ -17,7 +17,7 @@ import { AbstractBrowseElementsComponent } from '../abstract-browse-elements.com
   imports: [
     AsyncPipe,
     ListableObjectComponentLoaderComponent,
-    ThemedLoadingComponent,
+    NgxSkeletonLoaderModule,
     TranslateModule,
   ],
 })
@@ -26,9 +26,19 @@ export class DefaultBrowseElementsComponent extends AbstractBrowseElementsCompon
   protected followMetricsLink: boolean;
   protected followThumbnailLink: boolean;
 
+  /**
+   * Array used to render skeleton placeholder items.
+   * Length matches the configured page size.
+   */
+  skeletonItems: number[];
+
   ngOnInit() {
     this.followMetricsLink = this.showMetrics ?? this.appConfig.browseBy.showMetrics;
     this.followThumbnailLink = this.showThumbnails ?? this.appConfig.browseBy.showThumbnails;
+    this.skeletonItems = Array.from(
+      { length: this.paginatedSearchOptions?.pagination?.pageSize ?? 5 },
+      (_, i) => i,
+    );
     super.ngOnInit();
   }
 }
