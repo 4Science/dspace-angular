@@ -53,6 +53,11 @@ export class ViewModeSwitchComponent implements OnInit, OnDestroy {
   @Input() viewModeList: ViewMode[];
 
   /**
+   * The initial view mode used to render the results, based on the preferred display view configuration.
+   */
+  @Input() initViewMode: ViewMode = ViewMode.ListElement;
+
+  /**
    * The current view mode
    */
   currentMode: ViewMode = ViewMode.ListElement;
@@ -87,7 +92,7 @@ export class ViewModeSwitchComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.sub = this.searchService.getViewMode().pipe(
+    this.sub = this.searchService.getViewMode(this.initViewMode).pipe(
       filter((viewMode: ViewMode) => isNotEmpty(viewMode)),
     ).subscribe((viewMode: ViewMode) => {
       this.currentMode = viewMode;

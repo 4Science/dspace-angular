@@ -15,7 +15,7 @@
     @if (showLabel) {
       <ds-badges [object]="dso" [context]="context"></ds-badges>
     }
-    <h4 class="card-title">{{ dsoNameService.getName(dso) }}</h4>
+    <h2 class="card-title">{{ dsoNameService.getName(dso) }}</h2>
     @if (dso.shortDescription) {
       <p class="card-text">{{dso.shortDescription}}</p>
     }

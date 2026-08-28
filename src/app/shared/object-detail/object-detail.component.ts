@@ -25,6 +25,7 @@ import { ListableObject } from '../object-collection/shared/listable-object.mode
 import { ListableObjectComponentLoaderComponent } from '../object-collection/shared/listable-object/listable-object-component-loader.component';
 import { PaginationComponent } from '../pagination/pagination.component';
 import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
+import { BrowserOnlyPipe } from '../utils/browser-only.pipe';
 
 /**
  * This component renders a paginated set of results in the detail view.
@@ -37,6 +38,7 @@ import { PaginationComponentOptions } from '../pagination/pagination-component-o
   templateUrl: './object-detail.component.html',
   animations: [fadeIn],
   imports: [
+    BrowserOnlyPipe,
     ErrorComponent,
     ListableObjectComponentLoaderComponent,
     PaginationComponent,

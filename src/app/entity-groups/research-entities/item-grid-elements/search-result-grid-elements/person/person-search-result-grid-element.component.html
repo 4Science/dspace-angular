@@ -26,8 +26,8 @@
       @if (showLabel) {
         <ds-badges [object]="dso" [context]="context"></ds-badges>
       }
-      <ds-truncatable-part [id]="dso.id" [minLines]="3" type="h4">
-        <h4 class="card-title" [innerHTML]="dsoTitle | dsEscapeHtml"></h4>
+      <ds-truncatable-part [id]="dso.id" [minLines]="3" type="h2">
+        <h2 class="card-title" [innerHTML]="dsoTitle | dsEscapeHtml"></h2>
       </ds-truncatable-part>
       @if (dso.hasMetadata('person.email')) {
         <p class="item-email card-text text-muted">

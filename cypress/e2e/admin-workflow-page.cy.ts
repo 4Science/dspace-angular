@@ -1,4 +1,7 @@
-import { testA11y } from 'cypress/support/utils';
+import {
+  SEARCH_RESULT_VIEW_MODE_SELECTOR,
+  testA11y,
+} from 'cypress/support/utils';
 
 describe('Admin Workflow Page', () => {
   beforeEach(() => {
@@ -11,7 +14,7 @@ describe('Admin Workflow Page', () => {
     // Page must first be visible
     cy.get('ds-admin-workflow-page').should('be.visible');
     // At least one search result should be displayed
-    cy.get('[data-test="list-object"]').should('be.visible');
+    cy.get(SEARCH_RESULT_VIEW_MODE_SELECTOR).should('be.visible');
     // Click each filter toggle to open *every* filter
     // (As we want to scan filter section for accessibility issues as well)
     cy.get('[data-test="filter-toggle"]').click({ multiple: true });

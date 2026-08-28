@@ -28,8 +28,11 @@ import { MyDSpaceConfigurationValueType } from './my-dspace-configuration-value-
 import { MyDSpaceNewSubmissionComponent } from './my-dspace-new-submission/my-dspace-new-submission.component';
 import { MyDSpacePageComponent } from './my-dspace-page.component';
 import SpyObj = jasmine.SpyObj;
+import { APP_CONFIG } from '../../config/app-config.interface';
+import { environment } from '../../environments/environment.test';
 import { RequestService } from '../core/data/request.service';
 import { RequestEntry } from '../core/data/request-entry.model';
+import { ViewMode } from '../core/shared/view-mode.model';
 import { SuggestionsNotificationComponent } from '../notifications/suggestions/notification/suggestions-notification.component';
 import { getMockRequestService } from '../shared/mocks/request.service.mock';
 import { SelectableListService } from '../shared/object-list/selectable-list/selectable-list.service';
@@ -99,6 +102,7 @@ describe('MyDSpacePageComponent', () => {
         },
         { provide: RoleService, useValue: roleService },
         { provide: SelectableListService, useValue: selectableListService },
+        { provide: APP_CONFIG, useValue: environment },
         { provide: ThemeService, useValue: getMockThemeService() },
         {
           provide: RequestService,
@@ -161,4 +165,9 @@ describe('MyDSpacePageComponent', () => {
     expect(comp.configuration()).toBe(MyDSpaceConfigurationValueType.Workspace);
     expect(comp.context()).toBe(Context.Workspace);
   }));
+
+  it('should set the initial view mode from the mydspacePage preferred display view configuration', () => {
+    expect(comp.initViewMode).toBe(ViewMode.DetailedListElement);
+  });
+
 });

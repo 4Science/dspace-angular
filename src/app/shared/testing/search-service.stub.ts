@@ -27,7 +27,7 @@ export class SearchServiceStub {
     return of([]);
   }
 
-  getViewMode(): Observable<ViewMode> {
+  getViewMode(_defaultView?: ViewMode): Observable<ViewMode> {
     return this.viewMode;
   }
 

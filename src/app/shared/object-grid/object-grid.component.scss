@@ -5,6 +5,10 @@
     margin-top: var(--ds-wrapper-grid-spacing);
     margin-bottom: var(--ds-wrapper-grid-spacing);
 
+    h2.card-title {
+      font-size: 1.5rem;
+    }
+
     div.thumbnail > .thumbnail-content {
       height: var(--ds-card-thumbnail-height);
       width: 100%;

@@ -151,6 +151,11 @@ export class SearchResultsComponent {
   @Input() viewMode: ViewMode;
 
   /**
+   * The initial view mode used to render the results, based on the preferred display view configuration.
+   */
+  @Input() initViewMode: ViewMode;
+
+  /**
    * An optional configuration to filter the result on one type
    */
   @Input() configuration: string;

@@ -31,7 +31,7 @@ import {
 })
 export class ThemedSearchResultsComponent extends ThemedComponent<SearchResultsComponent> {
 
-  protected inAndOutputNames: (keyof SearchResultsComponent & keyof this)[] = ['linkType', 'searchResults', 'searchConfig', 'showCsvExport', 'showLabel', 'showMetrics', 'showThumbnails', 'sortConfig', 'viewMode', 'configuration', 'disableHeader', 'selectable', 'context', 'hidePaginationDetail', 'selectionConfig', 'contentChange', 'deselectObject', 'selectObject', 'customData', 'customEvent', 'searchResultNotice', 'searchResultNoticeType', 'showSearchResultNotice', 'showCorrection', 'showWorkflowStatistics'];
+  protected inAndOutputNames: (keyof SearchResultsComponent & keyof this)[] = ['linkType', 'searchResults', 'searchConfig', 'showCsvExport', 'showLabel', 'showMetrics', 'showThumbnails', 'sortConfig', 'viewMode', 'initViewMode', 'configuration', 'disableHeader', 'selectable', 'context', 'hidePaginationDetail', 'selectionConfig', 'contentChange', 'deselectObject', 'selectObject', 'customData', 'customEvent', 'searchResultNotice', 'searchResultNoticeType', 'showSearchResultNotice', 'showCorrection', 'showWorkflowStatistics'];
 
   @Input() linkType: CollectionElementLinkType;
 
@@ -60,6 +60,8 @@ export class ThemedSearchResultsComponent extends ThemedComponent<SearchResultsC
   @Input() sortConfig: SortOptions;
 
   @Input() viewMode: ViewMode;
+
+  @Input() initViewMode: ViewMode;
 
   @Input() configuration: string;
 
