@@ -7,10 +7,16 @@ import { TranslateLoaderMock } from '../mocks/translate-loader.mock';
 describe('SwitchComponent', () => {
   let component: SwitchComponent;
   let fixture: ComponentFixture<SwitchComponent>;
-  const mockOptions: SwitchOption[] = [
-    { value: 1, icon: 'icon-1', label: 'Option 1', backgroundColor: SwitchColor.Success, iconColor: SwitchColor.Primary, labelColor: SwitchColor.Primary  },
-    { value: 2, icon: 'icon-2', label: 'Option 2', backgroundColor: SwitchColor.Danger, iconColor: SwitchColor.Warning, labelColor: SwitchColor.Success  },
-  ];
+
+  const mockOnOption: SwitchOption = {
+    value: 1, icon: 'icon-1', label: 'Option 1',
+    backgroundColor: SwitchColor.Success, iconColor: SwitchColor.Primary, labelColor: SwitchColor.Primary,
+  };
+
+  const mockOffOption: SwitchOption = {
+    value: 2, icon: 'icon-2', label: 'Option 2',
+    backgroundColor: SwitchColor.Danger, iconColor: SwitchColor.Warning, labelColor: SwitchColor.Success,
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -28,6 +34,9 @@ describe('SwitchComponent', () => {
 
     fixture = TestBed.createComponent(SwitchComponent);
     component = fixture.componentInstance;
+    component.checkedOption = mockOnOption;
+    component.uncheckedOption = mockOffOption;
+    component.selectedValue = mockOnOption.value;
     fixture.detectChanges();
   });
 
@@ -35,50 +44,63 @@ describe('SwitchComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render all switch options', () => {
-    component.options = mockOptions;
-    fixture.detectChanges();
-
+  it('should render two switch options', () => {
     const optionElements = fixture.debugElement.queryAll(By.css('.switch-opt'));
-    expect(optionElements.length).toBe(mockOptions.length);
+    expect(optionElements.length).toBe(2);
   });
 
-  it('should select an option and emit selected value', () => {
-    component.options = mockOptions;
-    component.onOptionClick(mockOptions[0].value);
+  it('should toggle from on to off and emit selected value', () => {
+    spyOn(component.selectedValueChange, 'emit');
+
+    component.onToggle();
+    fixture.detectChanges();
+
+    expect(component.selectedValue).toBe(mockOffOption.value);
+    expect(component.selectedValueChange.emit).toHaveBeenCalledWith(mockOffOption.value);
+  });
+
+  it('should toggle from off to on and emit selected value', () => {
+    component.selectedValue = mockOffOption.value;
     fixture.detectChanges();
 
     spyOn(component.selectedValueChange, 'emit');
 
-    const secondOption = fixture.debugElement.queryAll(By.css('.switch-opt'))[1];
-    secondOption.triggerEventHandler('click');
+    component.onToggle();
     fixture.detectChanges();
 
-    expect(component.selectedValue).toBe(mockOptions[1].value);
-    expect(component.selectedValueChange.emit).toHaveBeenCalledWith(mockOptions[1].value);
+    expect(component.selectedValue).toBe(mockOnOption.value);
+    expect(component.selectedValueChange.emit).toHaveBeenCalledWith(mockOnOption.value);
   });
 
-  it('should apply the correct background color class', () => {
-    component.options = mockOptions;
-    component.onOptionClick(mockOptions[1].value);
+  it('should apply the correct background color class for on option', () => {
+    component.selectedValue = mockOnOption.value;
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    const containerElement = fixture.debugElement.query(By.css('.switch-container'));
+    expect(containerElement.classes['bg-success']).toBeTruthy();
+  });
+
+  it('should apply the correct background color class for off option', () => {
+    component.selectedValue = mockOffOption.value;
+    component.ngOnInit();
     fixture.detectChanges();
 
     const containerElement = fixture.debugElement.query(By.css('.switch-container'));
     expect(containerElement.classes['bg-danger']).toBeTruthy();
   });
 
-  it('should apply the correct icon color class for selected option', () => {
-    component.options = mockOptions;
-    component.onOptionClick(mockOptions[1].value);
+  it('should apply the correct icon color class for selected on option', () => {
+    component.selectedValue = mockOnOption.value;
     fixture.detectChanges();
 
-    const iconElement = fixture.debugElement.query(By.css('.switch-opt .icon-2'));
-    expect(iconElement.classes['text-warning']).toBeTruthy();
+    const iconElement = fixture.debugElement.query(By.css('.switch-opt .icon-1'));
+    expect(iconElement.classes['text-primary']).toBeTruthy();
   });
 
   it('should display the correct label with the selected color', () => {
-    component.options = mockOptions;
-    component.onOptionClick(mockOptions[1].value);
+    component.selectedValue = mockOffOption.value;
+    component.ngOnInit();
     fixture.detectChanges();
 
     const labelElement = fixture.debugElement.query(By.css('.visibility-label'));
@@ -86,13 +108,22 @@ describe('SwitchComponent', () => {
     expect(labelElement.classes['text-success']).toBeTruthy();
   });
 
-  it('should apply bg-white class to selected option', () => {
-    component.options = mockOptions;
-    component.onOptionClick(mockOptions[1].value);
+  it('should apply bg-white class to selected on option', () => {
+    component.selectedValue = mockOnOption.value;
     fixture.detectChanges();
 
-    const selectedOptionElement = fixture.debugElement.query(By.css('.switch-opt.bg-white'));
-    expect(selectedOptionElement).toBeTruthy();
+    const optionElements = fixture.debugElement.queryAll(By.css('.switch-opt'));
+    expect(optionElements[0].classes['bg-white']).toBeTruthy();
+    expect(optionElements[1].classes['bg-white']).toBeFalsy();
+  });
+
+  it('should apply bg-white class to selected off option', () => {
+    component.selectedValue = mockOffOption.value;
+    fixture.detectChanges();
+
+    const optionElements = fixture.debugElement.queryAll(By.css('.switch-opt'));
+    expect(optionElements[0].classes['bg-white']).toBeFalsy();
+    expect(optionElements[1].classes['bg-white']).toBeTruthy();
   });
 
 });

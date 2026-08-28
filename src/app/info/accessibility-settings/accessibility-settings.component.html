@@ -8,10 +8,12 @@
       </label>
 
       <div class="col-sm-4">
-        <ds-switch [id]="'disableNotificationTimeOutInput'"
-                   [options]="notificationTimeOutSwitchOptions"
-                   [selectedValue]="formValues.notificationTimeOutEnabled"
-                   (selectedValueChange)="formValues.notificationTimeOutEnabled = $event">
+        <ds-switch
+          [id]="'disableNotificationTimeOutInput'"
+          [checkedOption]="switchOnOption"
+          [uncheckedOption]="switchOffOption"
+          [(selectedValue)]="formValues.notificationTimeOutEnabled"
+          (selectedValueChange)="formValues.notificationTimeOutEnabled = $event">
         </ds-switch>
       </div>
 

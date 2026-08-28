@@ -5,7 +5,8 @@
             <div class="row mb-2">
                 <div class="col">
                   <ds-switch
-                    [options]="switchOptions"
+                    [checkedOption]="switchOnOption"
+                    [uncheckedOption]="switchOffOption"
                     [selectedValue]="formActive.value"
                     (selectedValueChange)="setActive($event)">
                   </ds-switch>

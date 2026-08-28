@@ -21,7 +21,8 @@
   </div>
 
   <ds-switch
-    [options]="switchOptions"
+    [checkedOption]="switchOnOption"
+    [uncheckedOption]="switchOffOption"
     [selectedValue]="isUpload ? 'upload' : 'url'"
     (selectedValueChange)="toggleUpload()">
   </ds-switch>

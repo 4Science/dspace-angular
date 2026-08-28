@@ -55,12 +55,14 @@ export class ReviewAccountInfoComponent implements OnInit, OnDestroy {
   subs: Subscription[] = [];
 
   /**
-   * The custom options for the 'ds-switch' component
+   * The "on" option for the 'ds-switch' component
    */
-  switchOptions: SwitchOption[] = [
-    { value: true, labelColor: SwitchColor.Success, backgroundColor: SwitchColor.Success ,label: 'on-label' },
-    { value: false, label: 'off-label' },
-  ];
+  switchOnOption: SwitchOption = { value: true, labelColor: SwitchColor.Success, backgroundColor: SwitchColor.Success, label: 'on-label' };
+
+  /**
+   * The "off" option for the 'ds-switch' component
+   */
+  switchOffOption: SwitchOption = { value: false, label: 'off-label' };
 
   constructor(
     @Inject(NativeWindowService) protected _window: NativeWindowRef,

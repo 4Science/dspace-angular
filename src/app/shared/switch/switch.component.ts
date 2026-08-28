@@ -24,9 +24,14 @@ export interface SwitchOption {
 })
 export class SwitchComponent implements OnInit, OnChanges {
   /**
-   * The options available for the switch
+   * The "on" / active option configuration
    */
-  @Input() options: SwitchOption[] = [];
+  @Input() checkedOption: SwitchOption;
+
+  /**
+   * The "off" / inactive option configuration
+   */
+  @Input() uncheckedOption: SwitchOption;
 
   /**
    * The currently selected value
@@ -44,29 +49,46 @@ export class SwitchComponent implements OnInit, OnChanges {
 
   public backgroundClass: string;
 
+  /**
+   * Whether the switch is currently in the "on" state
+   */
+  get isOn(): boolean {
+    return this.selectedValue === this.checkedOption?.value;
+  }
+
+  /**
+   * The currently active option based on selectedValue
+   */
+  get activeOption(): SwitchOption | undefined {
+    if (this.selectedValue === this.checkedOption?.value) {
+      return this.checkedOption;
+    }
+    if (this.selectedValue === this.uncheckedOption?.value) {
+      return this.uncheckedOption;
+    }
+    return undefined;
+  }
+
   ngOnInit() {
     this.backgroundClass = this.getBackgroundColorClass();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // Recalculate BG class if options or current value are changed by parent component
     if ((hasValue(changes?.selectedValue?.currentValue) && !changes.selectedValue.isFirstChange())
-        || (hasValue(changes?.options?.currentValue) && !changes.options.isFirstChange())) {
+        || (hasValue(changes?.checkedOption?.currentValue) && !changes.checkedOption.isFirstChange())
+        || (hasValue(changes?.uncheckedOption?.currentValue) && !changes.uncheckedOption.isFirstChange())) {
       this.backgroundClass = this.getBackgroundColorClass();
     }
   }
 
   /**
-   * Update the selected value and emit the change event
-   * @param value The new value to select
+   * Toggle between on and off values
    */
-  onOptionClick(value: any) {
-
-    this.selectedValue = value;
+  onToggle() {
+    const newValue = this.isOn ? this.uncheckedOption.value : this.checkedOption.value;
+    this.selectedValue = newValue;
     this.selectedValueChange.emit(this.selectedValue);
-
     this.backgroundClass = this.getBackgroundColorClass();
-
   }
 
   /**
@@ -74,9 +96,9 @@ export class SwitchComponent implements OnInit, OnChanges {
    * Defaults to 'bg-default' if no specific color is set.
    */
   getBackgroundColorClass(): string {
-    const selectedOption = this.options.find(option => option.value === this.selectedValue);
-    if (selectedOption && selectedOption.backgroundColor) {
-      return `bg-${selectedOption.backgroundColor}`;
+    const active = this.activeOption;
+    if (active?.backgroundColor) {
+      return `bg-${active.backgroundColor}`;
     }
     return 'bg-default';
   }
