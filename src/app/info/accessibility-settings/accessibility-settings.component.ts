@@ -62,13 +62,15 @@ export class AccessibilitySettingsComponent implements OnInit, OnDestroy {
   cookieIsAccepted: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   /**
-   * The custom options for the 'ds-switch' component
+   * The "on" option for the 'ds-switch' component
    */
-  switchOptions: SwitchOption[] = [
-    { value: true, labelColor: SwitchColor.Success, backgroundColor: SwitchColor.Success ,
-      label: 'info.accessibility-settings.notificationTimeOutEnabled.label.enabled' },
-    { value: false, label: 'info.accessibility-settings.notificationTimeOutEnabled.label.disabled' },
-  ];
+  switchOnOption: SwitchOption = { value: true, labelColor: SwitchColor.Success, backgroundColor: SwitchColor.Success,
+    label: 'info.accessibility-settings.notificationTimeOutEnabled.label.enabled' };
+
+  /**
+   * The "off" option for the 'ds-switch' component
+   */
+  switchOffOption: SwitchOption = { value: false, label: 'info.accessibility-settings.notificationTimeOutEnabled.label.disabled' };
 
   private subscriptions: Subscription[] = [];
 

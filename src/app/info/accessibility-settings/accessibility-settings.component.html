@@ -9,7 +9,8 @@
 
       <div class="col-sm-4">
         <ds-switch
-          [options]="switchOptions"
+          [onOption]="switchOnOption"
+          [offOption]="switchOffOption"
           [(selectedValue)]="formValues.notificationTimeOutEnabled">
         </ds-switch>
       </div>
