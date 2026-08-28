@@ -20,6 +20,12 @@ import { filter } from 'rxjs/operators';
 export class ViewModeSwitchComponent implements OnInit, OnDestroy {
 
   /**
+   * Represents the initial view mode.
+   * Determines how the content will be displayed when the component is first loaded.
+   */
+  @Input() initViewMode: ViewMode;
+
+  /**
    * True when the search component should show results on the current page
    */
   @Input() inPlaceSearch;
@@ -61,7 +67,7 @@ export class ViewModeSwitchComponent implements OnInit, OnDestroy {
       this.viewModeList = [ViewMode.ListElement, ViewMode.GridElement];
     }
 
-    this.sub = this.searchService.getViewMode().pipe(
+    this.sub = this.searchService.getViewMode(this.initViewMode).pipe(
       filter((viewMode: ViewMode) => isNotEmpty(viewMode))
     ).subscribe((viewMode: ViewMode) => {
       this.currentMode = viewMode;

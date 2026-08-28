@@ -1,4 +1,5 @@
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
+import { ViewMode } from '../app/core/shared/view-mode.model';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
 import { AppConfig } from './app-config.interface';
 import { AuthConfig } from './auth-config.interfaces';
@@ -594,7 +595,12 @@ export class DefaultAppConfig implements AppConfig {
   };
 
   search: SearchConfig = {
-    filterPlaceholdersCount: 5
+    filterPlaceholdersCount: 5,
+    preferredDisplayView: {
+      searchPage: ViewMode.ListElement,
+      mydspacePage: ViewMode.GridElement,
+      crisRelationBox: ViewMode.GridElement,
+    },
   };
 
   // Accessibility settings configuration, used by the AccessibilitySettingsService

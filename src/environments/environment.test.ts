@@ -1,6 +1,7 @@
 // This configuration is only used for unit tests, end-to-end tests use environment.production.ts
 import { BuildConfig } from 'src/config/build-config.interface';
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
+import { ViewMode } from '../app/core/shared/view-mode.model';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
 import { AdvancedAttachmentElementType } from '../config/advanced-attachment-rendering.config';
 import { IdentifierSubtypesIconPositionEnum } from 'src/config/identifier-subtypes-config.interface';
@@ -404,7 +405,12 @@ export const environment: BuildConfig = {
   },
 
   search: {
-    filterPlaceholdersCount: 5
+    filterPlaceholdersCount: 5,
+    preferredDisplayView: {
+      searchPage: ViewMode.GridElement,
+      mydspacePage: ViewMode.DetailedListElement,
+      crisRelationBox: ViewMode.GridElement,
+    },
   },
 
   accessibility: {

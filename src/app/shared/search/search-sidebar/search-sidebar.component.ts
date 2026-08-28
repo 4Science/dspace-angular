@@ -51,6 +51,12 @@ export class SearchSidebarComponent {
   @Input() filters: Observable<RemoteData<SearchFilterConfig[]>>;
 
   /**
+   * Represents the initial view mode.
+   * Determines how the content will be displayed when the component is first loaded.
+   */
+  @Input() initViewMode: ViewMode;
+
+  /**
    * The total amount of results
    */
   @Input() resultCount;

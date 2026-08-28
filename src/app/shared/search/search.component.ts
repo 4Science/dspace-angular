@@ -132,6 +132,12 @@ export class SearchComponent implements OnInit, OnDestroy {
   @Input() inPlaceSearch = true;
 
   /**
+   * Represents the initial view mode.
+   * Determines how the content will be displayed when the component is first loaded.
+   */
+  @Input() initViewMode: ViewMode = ViewMode.ListElement;
+
+  /**
    * The link type of the listed search results
    */
   @Input() linkType: CollectionElementLinkType;
