@@ -126,6 +126,14 @@ describe('SearchService', () => {
       });
     });
 
+    it('should return the given default view mode when no view query param is set', () => {
+      testScheduler.run(({ expectObservable }) => {
+        expectObservable(service.getViewMode(ViewMode.GridElement)).toBe('(a|)', {
+          a: ViewMode.GridElement,
+        });
+      });
+    });
+
     it('should return ViewMode.List when the viewMode is set to ViewMode.List in the ActivatedRoute', () => {
       testScheduler.run(({ expectObservable }) => {
         spyOn(routeService, 'getQueryParamMap').and.returnValue(observableOf(new Map([

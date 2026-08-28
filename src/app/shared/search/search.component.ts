@@ -286,6 +286,11 @@ export class SearchComponent implements OnDestroy, OnInit {
   @Input() viewModeList: ViewMode[];
 
   /**
+   * The initial view mode used to render the results, based on the preferred display view configuration.
+   */
+  @Input() initViewMode: ViewMode = ViewMode.ListElement;
+
+  /**
    * Contains a notice to show before result list if any
    */
   @Input() searchResultNotice: string = null;

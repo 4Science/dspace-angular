@@ -36,6 +36,7 @@ export class ThemedSearchSidebarComponent extends ThemedComponent<SearchSidebarC
   @Input() filters: Observable<RemoteData<SearchFilterConfig[]>>;
   @Input() resultCount: number;
   @Input() viewModeList: ViewMode[];
+  @Input() initViewMode: ViewMode;
   @Input() showViewModes: boolean;
   @Input() inPlaceSearch: boolean;
   @Input() searchOptions: PaginatedSearchOptions;
@@ -47,7 +48,7 @@ export class ThemedSearchSidebarComponent extends ThemedComponent<SearchSidebarC
 
   protected inAndOutputNames: (keyof SearchSidebarComponent & keyof this)[] = [
     'configuration', 'configurationList', 'currentScope', 'currentSortOption',
-    'resultCount', 'filters', 'viewModeList', 'showViewModes', 'inPlaceSearch',
+    'resultCount', 'filters', 'viewModeList', 'initViewMode', 'showViewModes', 'inPlaceSearch',
     'searchOptions', 'sortOptionsList', 'refreshFilters', 'toggleSidebar', 'changeConfiguration',
     'changeViewMode',
   ];
