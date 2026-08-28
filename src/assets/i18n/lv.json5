@@ -413,7 +413,7 @@
 
   // "admin.registries.bitstream-formats.title": "Bitstream Format Registry",
   // TODO Source message changed - Revise the translation
-  "admin.registries.bitstream-formats.title": "DSpace Angular :: Bitu straumes Formatu Reģistrs",
+  "admin.registries.bitstream-formats.title": "DSpace :: Bitu straumes Formatu Reģistrs",
 
   // "admin.registries.bitstream-formats.select": "Select",
   // TODO New key - Add a translation
@@ -477,7 +477,7 @@
 
   // "admin.registries.metadata.title": "Metadata Registry",
   // TODO Source message changed - Revise the translation
-  "admin.registries.metadata.title": "DSpace Angular :: Metadatu Registry",
+  "admin.registries.metadata.title": "DSpace :: Metadatu Registry",
 
   // "admin.registries.schema.breadcrumbs": "Metadata schema",
   // TODO New key - Add a translation
@@ -571,7 +571,7 @@
 
   // "admin.registries.schema.title": "Metadata Schema Registry",
   // TODO Source message changed - Revise the translation
-  "admin.registries.schema.title": "DSpace Angular :: Metadatu shēmas reģistrs",
+  "admin.registries.schema.title": "DSpace :: Metadatu shēmas reģistrs",
 
   // "admin.access-control.bulk-access.breadcrumbs": "Bulk Access Management",
   // TODO New key - Add a translation
@@ -627,7 +627,7 @@
 
   // "admin.access-control.epeople.title": "EPeople",
   // TODO Source message changed - Revise the translation
-  "admin.access-control.epeople.title": "DSpace Angular :: EPersonas",
+  "admin.access-control.epeople.title": "DSpace :: EPersonas",
 
   // "admin.access-control.epeople.edit.breadcrumbs": "New EPerson",
   // TODO New key - Add a translation
@@ -818,7 +818,7 @@
 
   // "admin.access-control.groups.title": "Groups",
   // TODO Source message changed - Revise the translation
-  "admin.access-control.groups.title": "DSpace Angular :: Grupas",
+  "admin.access-control.groups.title": "DSpace :: Grupas",
 
   // "admin.access-control.groups.breadcrumbs": "Groups",
   // TODO New key - Add a translation
@@ -5488,7 +5488,7 @@
 
   // "home.title": "Home",
   // TODO Source message changed - Revise the translation
-  "home.title": "DSpace Angular :: Sākums",
+  "home.title": "DSpace :: Sākums",
 
   // "home.top-level-communities.head": "Communities in DSpace Cris",
   // TODO Source message changed - Revise the translation
@@ -7758,7 +7758,7 @@
 
   // "journal.search.title": "Journal Search",
   // TODO Source message changed - Revise the translation
-  "journal.search.title": "DSpace Angular :: Žurnālu Meklēšana",
+  "journal.search.title": "DSpace :: Žurnālu Meklēšana",
 
   // "journalissue.listelement.badge": "Journal Issue",
   "journalissue.listelement.badge": "Žurnāla izdevums",
@@ -9110,7 +9110,7 @@
 
   // "person.search.title": "Person Search",
   // TODO Source message changed - Revise the translation
-  "person.search.title": "DSpace Angular :: Personas Meklēšana",
+  "person.search.title": "DSpace :: Personas Meklēšana",
 
   // "process.new.select-parameters": "Parameters",
   // TODO New key - Add a translation
@@ -9703,7 +9703,7 @@
 
   // "publication.search.title": "Publication Search",
   // TODO Source message changed - Revise the translation
-  "publication.search.title": "DSpace Angular :: Publikācijas meklēšana",
+  "publication.search.title": "DSpace :: Publikācijas meklēšana",
 
   // "media-viewer.next": "Next",
   // TODO New key - Add a translation
@@ -10124,9 +10124,9 @@
   // TODO New key - Add a translation
   "repository.title": "{{ repositoryName }}",
 
-  // "repository.title.prefix": "{{ repositoryName }} Angular :: ",
+  // "repository.title.prefix": "{{ repositoryName }} :: ",
   // TODO New key - Add a translation
-  "repository.title.prefix": "{{ repositoryName }} Angular :: ",
+  "repository.title.prefix": "{{ repositoryName }} :: ",
 
   // "resource-policies.add.button": "Add",
   // TODO New key - Add a translation
@@ -10392,7 +10392,7 @@
 
   // "search.title": "Search",
   // TODO Source message changed - Revise the translation
-  "search.title": "DSpace Angular :: Meklēt",
+  "search.title": "DSpace :: Meklēt",
 
   // "search.breadcrumbs": "Search",
   "search.breadcrumbs": "Meklēt",

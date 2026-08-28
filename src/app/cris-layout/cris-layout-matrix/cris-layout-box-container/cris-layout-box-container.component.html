@@ -1,6 +1,6 @@
 <ng-container *ngIf="componentLoader">
 
-  <ng-container *ngIf="box.container && !componentLoader.hasOwnContainer">
+  <ng-container *ngIf="box.container && !hasOwnContainer">
     <ngb-accordion #accordionRef [activeIds]="activeIds">
       <ngb-panel id="{{box.shortname}}">
         <ng-template ngbPanelTitle>
@@ -23,7 +23,7 @@
     </ngb-accordion>
   </ng-container>
 
-  <div class="mx-n3" *ngIf="!box.container || componentLoader.hasOwnContainer">
+  <div class="mx-n3" *ngIf="!box.container || hasOwnContainer">
     <ng-container *ngComponentOutlet="getComponentRef(); injector: objectInjector;"></ng-container>
   </div>
 </ng-container>

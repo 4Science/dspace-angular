@@ -201,8 +201,12 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
     );
     this.subs.push(this.group.get(this.model.id).valueChanges.pipe(
       filter((value) => this.currentValue !== value))
-      .subscribe((value) => {
-        this.setCurrentValue(this.model.value);
+      .subscribe(() => {
+        const raw = this.model.value as any;
+        const sameEntry = hasValue(raw?.authority) ? raw.authority === this.currentValue?.authority : raw?.value === this.currentValue?.value;
+        if (!sameEntry) {
+          this.setCurrentValue(raw);
+        }
       }));
   }
 

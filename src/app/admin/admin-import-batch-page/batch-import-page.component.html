@@ -21,7 +21,8 @@
   </div>
 
   <ds-switch
-    [options]="switchOptions"
+    [onOption]="switchOnOption"
+    [offOption]="switchOffOption"
     [selectedValue]="isUpload ? 'upload' : 'url'"
     (selectedValueChange)="toggleUpload()">
   </ds-switch>
@@ -47,8 +48,13 @@
     <button class="btn btn-secondary" id="backButton"
             (click)="this.onReturn();">{{'admin.metadata-import.page.button.return' | translate}}</button>
     <button class="btn btn-primary" id="proceedButton"
+            [dsBtnDisabled]="isProcessing"
             (click)="this.importMetadata();">
-            <i class="fas fa-arrow-right mr-1"></i>
+            @if (isProcessing) {
+              <i class="fas fa-spinner fa-spin me-1"></i>
+            } @else {
+              <i class="fas fa-arrow-right me-1"></i>
+            }
             {{'admin.metadata-import.page.button.proceed' | translate}}</button>
   </div>
 </div>

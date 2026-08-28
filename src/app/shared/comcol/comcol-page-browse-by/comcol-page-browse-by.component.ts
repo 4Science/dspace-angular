@@ -161,7 +161,7 @@ export class ComcolPageBrowseByComponent implements OnDestroy, OnInit {
       ).subscribe((allOptions: ComColPageNavOption[]) => {
         for (const option of allOptions) {
           if (option.id === this.appConfig[this.contentType].defaultBrowseTab) {
-            this.currentOptionId$.next(option[0].id);
+            this.currentOptionId$.next(option.id);
             void this.router.navigate([option.routerLink], { queryParams: option.params });
             break;
           }

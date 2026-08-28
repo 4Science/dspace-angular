@@ -15,4 +15,6 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
 })
 export class HeadingComponent extends RenderingTypeValueModelComponent {
 
+  static structured = false;
+
 }

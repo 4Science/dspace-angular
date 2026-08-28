@@ -18,6 +18,8 @@ import { RenderingTypeValueModelComponent } from '../rendering-type-value.model'
 })
 export class LongtextComponent extends RenderingTypeValueModelComponent {
 
+  static structured = false;
+
   /**
    * Id for truncable component
    */

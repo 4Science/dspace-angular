@@ -1,6 +1,3 @@
-options:
-  runs-on: self.hosted
-
 definitions:
   caches:
     cypress-dsc-2024-02-x: ~/.cache/Cypress
