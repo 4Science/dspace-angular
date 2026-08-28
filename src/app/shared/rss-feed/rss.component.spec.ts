@@ -71,6 +71,7 @@ describe('RssComponent', () => {
     });
     linkHeadService = jasmine.createSpyObj('linkHeadService', {
       addTag: '',
+      removeTag: '',
     });
     const mockCollectionRD: RemoteData<Collection> = createSuccessfulRemoteDataObject(mockCollection);
     const mockSearchOptions = of(new PaginatedSearchOptions({
@@ -147,4 +148,3 @@ describe('RssComponent', () => {
     expect(route).toBe('/opensearch/search?format=atom&scope=2cfcf65e-0a51-4bcb-8592-b8db7b064790&sort=dc.title&sort_direction=DESC&query=test&rpp=50');
   });
 });
-

@@ -116,6 +116,7 @@ describe('ProcessOverviewTableComponent', () => {
       },
       getProcessesByProcessStatus: createSuccessfulRemoteDataObject$(createPaginatedList(processes)).pipe(take(1)),
       getOwnProcessesByProcessStatus: createSuccessfulRemoteDataObject$(createPaginatedList(processes)).pipe(take(1)),
+      stopAutoRefreshing: undefined,
     });
     processService = jasmine.createSpyObj('processService', {
       searchBy: createSuccessfulRemoteDataObject$(createPaginatedList(processes)).pipe(take(1)),
