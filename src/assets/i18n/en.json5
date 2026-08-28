@@ -5372,6 +5372,8 @@
 
   "suggestion.source.orcidWorks": "ORCID Integration",
 
+  "suggestion.source.openalex": "OpenAlex",
+
   "suggestion.from.source": "from the ",
 
   "suggestion.count.missing": "You have no publication claims left",
@@ -6693,6 +6695,22 @@
 
   "submission.import-external.source.rorOrgUnits": "Research Organization Registry (ROR)",
 
+  "submission.import-external.source.openalexPublication": "OpenAlex Search by Title",
+
+  "submission.import-external.source.openalexPublicationByAuthorId": "OpenAlex Search by Author ID",
+
+  "submission.import-external.source.openalexPublicationByDOI": "OpenAlex Search by DOI",
+
+  "submission.import-external.source.openalexPerson": "OpenAlex Search by name",
+
+  "submission.import-external.source.openalexJournal": "OpenAlex Journals",
+
+  "submission.import-external.source.openalexInstitution": "OpenAlex Institutions",
+
+  "submission.import-external.source.openalexPublisher": "OpenAlex Publishers",
+
+  "submission.import-external.source.openalexFunder": "OpenAlex Funders",
+
   "submission.import-external.preview.title.Equipment": "Equipment Preview",
 
   "submission.import-external.preview.title.Event": "Event Preview",
@@ -7006,6 +7024,26 @@
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.isJournalOfVolume": "Journal of the Volume",
 
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.opfJournal": "Jisc Open policy finder of Journal",
+
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPerson": "OpenAlex ({{ count }})",
+
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexInstitution": "OpenAlex Search by Institution ({{ count }})",
+
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPublisher": "OpenAlex Search by Publisher ({{ count }})",
+
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexFunder": "OpenAlex Search by Funder ({{ count }})",
+
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.dataciteProject": "DataCite Search by Project ({{ count }})",
+
+  "submission.sections.describe.relationship-lookup.selection-tab.title.openalexPerson": "Search Results",
+
+  "submission.sections.describe.relationship-lookup.selection-tab.title.openalexInstitution": "Search Results",
+
+  "submission.sections.describe.relationship-lookup.selection-tab.title.openalexPublisher": "Search Results",
+
+  "submission.sections.describe.relationship-lookup.selection-tab.title.openalexFunder": "Search Results",
+
+  "submission.sections.describe.relationship-lookup.selection-tab.title.dataciteProject": "Search Results",
 
   "submission.sections.describe.relationship-lookup.selection-tab.title.isProjectOfPublication": "Project",
 
