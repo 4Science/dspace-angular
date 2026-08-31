@@ -336,7 +336,7 @@ export class MenuResolverService  {
           id: 'new_item',
           parentID: 'new',
           active: false,
-          visible: isSiteAdmin || isCommunityAdmin || isCollectionAdmin,
+          visible: canSubmit,
           model: {
             type: MenuItemType.ONCLICK,
             text: 'menu.section.new_item',

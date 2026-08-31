@@ -371,12 +371,12 @@ describe('menuResolver', () => {
         });
       });
 
-      it('should not show "New Item" section', () => {
+      it('should show "New Item" section', () => {
         expect(menuService.addSection).toHaveBeenCalledWith(MenuID.ADMIN, jasmine.objectContaining({
-          id: 'new_item', visible: false,
+          id: 'new_item', visible: true,
         }));
         expect(menuService.addSection).toHaveBeenCalledWith(MenuID.ADMIN, jasmine.objectContaining({
-          id: 'new', visible: false,
+          id: 'new', visible: true,
         }));
       });
 
