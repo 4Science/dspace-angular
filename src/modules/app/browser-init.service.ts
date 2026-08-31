@@ -136,9 +136,9 @@ export class BrowserInitService extends InitService {
 
       this.initKlaro();
 
-      this.authorizationService.initStateForSite(this.appConfig.siteAuthorizationFeaturesConfig);
-
       await lastValueFrom(this.authenticationReady$());
+
+      this.authorizationService.initStateForSite(this.appConfig.siteAuthorizationFeaturesConfig);
 
       return true;
     };
