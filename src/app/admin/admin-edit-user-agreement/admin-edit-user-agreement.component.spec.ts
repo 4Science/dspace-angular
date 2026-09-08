@@ -113,4 +113,54 @@ describe('AdminEditUserAgreementComponent', () => {
     expect(component.userAgreementTexts.get('de').text).toEqual('Dies ist der Text der Endbenutzervereinbarung für diesen Test');
   }));
 
+  describe('showMarkdownInfo', () => {
+
+    it('should be true when markdown.showInfoOnCMSMetadataEditPages is enabled in the app config', () => {
+      expect(component.showMarkdownInfo).toBeTrue();
+    });
+
+    it('should reflect the markdown.showInfoOnCMSMetadataEditPages value when it is disabled in the app config', () => {
+      TestBed.resetTestingModule();
+
+      const disabledAppConfig = {
+        markdown: {
+          showInfoOnCMSMetadataEditPages: false,
+        },
+      };
+
+      TestBed.configureTestingModule({
+        imports: [
+          CommonModule,
+          NgbModule,
+          FormsModule,
+          ReactiveFormsModule,
+          BrowserModule,
+          NoopAnimationsModule,
+          RouterTestingModule,
+          TranslateModule.forRoot({
+            loader: {
+              provide: TranslateLoader,
+              useClass: TranslateLoaderMock,
+            },
+          }),
+          AdminEditUserAgreementComponent,
+          AlertComponent,
+        ],
+        providers: [
+          AdminEditUserAgreementComponent,
+          { provide: NotificationsService, useValue: notificationService },
+          { provide: SiteDataService, useValue: siteService },
+          { provide: ScriptDataService, useValue: scriptDataService },
+          { provide: APP_CONFIG, useValue: disabledAppConfig },
+        ],
+      }).compileComponents();
+
+      const disabledFixture = TestBed.createComponent(AdminEditUserAgreementComponent);
+      const disabledComponent = disabledFixture.componentInstance;
+
+      expect(disabledComponent.showMarkdownInfo).toBeFalse();
+    });
+
+  });
+
 });
