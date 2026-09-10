@@ -15,7 +15,8 @@
              cdkDrag
              [cdkDragDisabled]="dragDisabled"
              [cdkDragPreviewClass]="'ds-submission-reorder-dragging'"
-             [class.grey-background]="model.isInlineGroupArray">
+             [class.grey-background]="model.isInlineGroupArray"
+             [class.inline-group-row-invalid]="isInlineGroupRowInvalid(groupModel)">
           <!-- Item content -->
           <div class="drag-handle" [class.drag-disable]="dragDisabled" tabindex="0" cdkDragHandle
                (focus)="addInstructionMessageToLiveRegion(sortableElement)"
