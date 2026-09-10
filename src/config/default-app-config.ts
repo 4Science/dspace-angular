@@ -698,7 +698,7 @@ export class DefaultAppConfig implements AppConfig {
     filterPlaceholdersCount: 5,
     preferredDisplayView: {
       searchPage: ViewMode.ListElement,
-      mydspacePage: ViewMode.GridElement,
+      mydspacePage: ViewMode.ListElement,
       crisRelationBox: ViewMode.GridElement,
     },
   };
