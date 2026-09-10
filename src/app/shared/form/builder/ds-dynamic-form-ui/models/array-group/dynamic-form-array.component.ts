@@ -13,7 +13,8 @@ import {
   DynamicTemplateDirective
 } from '@ng-dynamic-forms/core';
 import { Relationship } from '../../../../../../core/shared/item-relationships/relationship.model';
-import { hasValue } from '../../../../../empty.util';
+import { hasValue, isEmpty } from '../../../../../empty.util';
+import { PLACEHOLDER_PARENT_METADATA } from '../../ds-dynamic-form-constants';
 import { DynamicRowArrayModel } from '../ds-dynamic-row-array-model';
 import { LiveRegionService } from '../../../../../live-region/live-region.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -98,6 +99,46 @@ export class DsDynamicFormArrayComponent extends DynamicFormArrayComponent {
       groupModel.startingIndex = groupModel.index;
     }
     return this.control.get([groupModel.startingIndex]);
+  }
+
+  isInlineGroupRowInvalid(groupModel: any): boolean {
+    if (!this.model?.isInlineGroupArray || !hasValue(this.model?.mandatoryField)) {
+      return false;
+    }
+    const rowControl = this.getControlOfGroup(groupModel);
+    if (!hasValue(rowControl)) {
+      return false;
+    }
+    // The inline-group row is a (possibly nested) form group; look up the mandatory field value
+    // regardless of the exact nesting, trying both the dotted metadata name and its control id.
+    const keys = [this.model.mandatoryField, this.model.mandatoryField.replace(/\./g, '_')];
+    const value = this.findValueByKey(rowControl.value, keys);
+    if (value === undefined) {
+      return false;
+    }
+    const rawValue = (hasValue(value) && typeof value === 'object' && 'value' in value) ? (value as any).value : value;
+    return isEmpty(rawValue) || rawValue === PLACEHOLDER_PARENT_METADATA;
+  }
+
+  private findValueByKey(obj: any, keys: string[]): any {
+    if (!hasValue(obj) || typeof obj !== 'object') {
+      return undefined;
+    }
+    for (const key of keys) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        return obj[key];
+      }
+    }
+    for (const prop of Object.keys(obj)) {
+      const nested = obj[prop];
+      if (hasValue(nested) && typeof nested === 'object') {
+        const found = this.findValueByKey(nested, keys);
+        if (found !== undefined) {
+          return found;
+        }
+      }
+    }
+    return undefined;
   }
 
   /**
