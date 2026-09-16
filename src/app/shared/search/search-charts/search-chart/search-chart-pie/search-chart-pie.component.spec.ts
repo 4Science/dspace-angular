@@ -10,22 +10,22 @@ import {
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
-import { of } from 'rxjs';
-
 import { RemoteDataBuildService } from '@dspace/core/cache/builders/remote-data-build.service';
 import { buildPaginatedList } from '@dspace/core/data/paginated-list.model';
 import { PageInfo } from '@dspace/core/shared/page-info.model';
-import { SearchService } from '../../../search.service';
-import { SearchFilterService } from '../../../search-filters/search-filter.service';
-import { SEARCH_CONFIG_SERVICE } from '../../../../../my-dspace-page/my-dspace-configuration.service';
-import { createSuccessfulRemoteDataObject$ } from '@dspace/core/utilities/remote-data.utils';
-import { RouterStub } from '@dspace/core/testing/router.stub';
-import { SearchConfigurationServiceStub } from '@dspace/core/testing/search-configuration-service.stub';
-import { SearchServiceStub } from '@dspace/core/testing/search-service.stub';
 import { FacetValue } from '@dspace/core/shared/search/models/facet-value.model';
 import { FilterType } from '@dspace/core/shared/search/models/filter-type.model';
 import { SearchFilterConfig } from '@dspace/core/shared/search/models/search-filter-config.model';
+import { RouterStub } from '@dspace/core/testing/router.stub';
+import { SearchConfigurationServiceStub } from '@dspace/core/testing/search-configuration-service.stub';
+import { SearchServiceStub } from '@dspace/core/testing/search-service.stub';
+import { createSuccessfulRemoteDataObject$ } from '@dspace/core/utilities/remote-data.utils';
+import { TranslateModule } from '@ngx-translate/core';
+import { of } from 'rxjs';
+
+import { SEARCH_CONFIG_SERVICE } from '../../../../../my-dspace-page/my-dspace-configuration.service';
+import { SearchService } from '../../../search.service';
+import { SearchFilterService } from '../../../search-filters/search-filter.service';
 import { SearchChartPieComponent } from './search-chart-pie.component';
 
 xdescribe('SearchChartPieComponent', () => {

@@ -1,29 +1,29 @@
 import {
-  AfterViewInit,
   Component,
   Input,
-  OnChanges,
-  SimpleChanges,
-  ViewChild,
-  ViewContainerRef,
 } from '@angular/core';
 import { GenericConstructor } from '@dspace/core/shared/generic-constructor';
-import { FilterType } from '@dspace/core/shared/search/models/filter-type.model';
 import { SearchFilterConfig } from '@dspace/core/shared/search/models/search-filter-config.model';
+import { hasNoValue } from '@dspace/shared/utils/empty.util';
 import { BehaviorSubject } from 'rxjs';
 
-import { SearchFacetFilterComponent } from '../../../search-filters/search-filter/search-facet-filter/search-facet-filter.component';
+import { AbstractComponentLoaderComponent } from '../../../../abstract-component-loader/abstract-component-loader.component';
+import { DynamicComponentLoaderDirective } from '../../../../abstract-component-loader/dynamic-component-loader.directive';
 import { renderChartFilterType } from '../../chart-search-result-element-decorator';
 
 @Component({
   selector: 'ds-search-chart-wrapper',
-  templateUrl: './search-chart-wrapper.component.html',
+  templateUrl: '../../../../abstract-component-loader/abstract-component-loader.component.html',
+  imports: [
+    DynamicComponentLoaderDirective,
+  ],
 })
 
 /**
  * Wrapper component that renders a specific chart facet filter based on the filter config's type
  */
-export class SearchChartFilterWrapperComponent implements OnChanges, AfterViewInit {
+export class SearchChartFilterWrapperComponent extends AbstractComponentLoaderComponent<Component> {
+
   /**
    * Configuration for the filter of this wrapper component
    */
@@ -32,7 +32,7 @@ export class SearchChartFilterWrapperComponent implements OnChanges, AfterViewIn
   /**
    * True when the search component should show results on the current page
    */
-  @Input() inPlaceSearch;
+  @Input() inPlaceSearch: boolean;
 
   /**
    * Emits when the search filters values may be stale, and so they must be refreshed.
@@ -44,47 +44,26 @@ export class SearchChartFilterWrapperComponent implements OnChanges, AfterViewIn
    */
   @Input() scope: string;
 
-  /**
-   * The constructor of the search facet filter that should be rendered, based on the filter config's type
-   */
-  searchFilter: GenericConstructor<SearchFacetFilterComponent>;
+  protected inputNamesDependentForComponent: (keyof this & string)[] = [
+    'filterConfig',
+  ];
+
+  protected inputNames: (keyof this & string)[] = [
+    'filterConfig',
+    'inPlaceSearch',
+    'refreshFilters',
+    'scope',
+  ];
 
   /**
-   * Injector to inject a child component with the @Input parameters
+   * Find the correct chart component based on the filter config's type
    */
-  @ViewChild('containerCharts', { read: ViewContainerRef }) vcr!: ViewContainerRef;
-
-  ngAfterViewInit(): void {
-    this.createFilterComponent();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.filterConfig && changes.filterConfig.currentValue !== changes.filterConfig.previousValue) {
-      this.filterConfig = changes.filterConfig.currentValue;
-      this.createFilterComponent();
+  public getComponent(): Promise<GenericConstructor<Component>> {
+    const lazyComponent: Promise<GenericConstructor<Component>> = renderChartFilterType(this.filterConfig.filterType);
+    if (hasNoValue(lazyComponent)) {
+      return Promise.reject(new Error(`No chart component registered for filter type '${this.filterConfig.filterType}'`));
     }
+    return lazyComponent;
   }
 
-  /**
-   * Find the correct component based on the filter config's type
-   */
-  getSearchFilter() {
-    const type: FilterType = this.filterConfig.filterType;
-    return renderChartFilterType(type);
-  }
-
-  /**
-   * Initialize and add the filter config to the injector
-   */
-  private createFilterComponent() {
-    if (this.vcr) {
-      this.searchFilter = this.getSearchFilter();
-      this.vcr.clear();
-      const componentRef = this.vcr.createComponent(this.searchFilter);
-      componentRef.setInput('filterConfig', this.filterConfig);
-      componentRef.setInput('inPlaceSearch', this.inPlaceSearch);
-      componentRef.setInput('refreshFilters', this.refreshFilters);
-      componentRef.setInput('scope', this.scope);
-    }
-  }
 }

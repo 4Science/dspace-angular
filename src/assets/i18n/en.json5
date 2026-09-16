@@ -4984,11 +4984,29 @@
 
   "search.filters.applied.f.withdrawn": "Withdrawn",
 
+  "search.filters.applied.f.graphitemtype": "Item type",
+
+  "search.filters.applied.f.graphpubldate": "Public date",
+
+  "search.filters.applied.f.graphpubldateltr": "Public date LTR",
+
+  "search.filters.applied.f.graphpubldatetrl": "Public date RTL",
+
+  "search.filters.applied.charts.defaultConfiguration.title": "Search Output",
+
   "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Date Issued",
 
   "search.filters.applied.charts.chart.pie.more-value": "More",
 
   "search.filters.applied.charts.chart.pie.itemtype_filter.tab": "Item Type",
+
+  "search.filters.applied.charts.graphitemtype.tab": "Visualization by Type",
+
+  "search.filters.applied.charts.graphpubldate.tab": "Visualization by Date",
+
+  "search.filters.applied.charts.graphpubldateltr.tab": "Visualization Demo LTR",
+
+  "search.filters.applied.charts.graphpubldatetrl.tab": "Visualization Demo RTL",
 
   "search.filters.applied.charts.default.title": "Search Output",
 
@@ -5304,6 +5322,10 @@
   "search.sidebar.advanced-search.add": "Add",
 
   "search.sidebar.settings.title": "Settings",
+
+  "search.sidebar.show.hide": "Show/Hide",
+
+  "search.sidebar.show.hide.charts.tooltip": "Show/Hide charts",
 
   "search.view-switch.show-detail": "Show detail",
 

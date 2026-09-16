@@ -13,11 +13,14 @@ import { BarChartModule } from '@swimlane/ngx-charts';
 import { BtnDisabledDirective } from 'src/app/shared/btn-disabled.directive';
 
 import { fadeIn } from '../../../shared/animations/fade';
+import { renderChartTypeFor } from '../../charts.decorator';
 import { ChartData } from '../../models/chart-data';
 import { ChartSeries } from '../../models/chart-series';
 import { ChartType } from '../../models/chart-type';
 import { AbstractChartComponent } from '../abstract-chart/abstract-chart.component';
 
+@renderChartTypeFor(ChartType.BAR)
+@renderChartTypeFor(ChartType.BAR_HORIZONTAL)
 @Component({
   selector: 'ds-bar-chart',
   styleUrls: ['./bar-chart.component.scss'],

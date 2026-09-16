@@ -4,8 +4,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LineChartModule } from '@swimlane/ngx-charts';
 
 import { fadeIn } from '../../../shared/animations/fade';
+import { renderChartTypeFor } from '../../charts.decorator';
+import { ChartType } from '../../models/chart-type';
 import { AbstractChartComponent } from '../abstract-chart/abstract-chart.component';
 
+@renderChartTypeFor(ChartType.LINE)
 @Component({
   selector: 'ds-line-chart',
   styleUrls: ['./line-chart.component.scss'],

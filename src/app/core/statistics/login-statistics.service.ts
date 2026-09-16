@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { dataService } from '../cache/builders/build-decorators';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { RequestParam } from '../cache/models/request-param.model';
 import { ObjectCacheService } from '../cache/object-cache.service';
@@ -12,11 +13,13 @@ import { RequestService } from '../data/request.service';
 import { NotificationsService } from '../notification-system/notifications.service';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { LoginStatistics } from './models/login-statistics.model';
+import { LOGIN_STATISTICS } from './models/login-statistics.resource-type';
 
 /**
  * A service that provides methods to make REST requests with login statistics endpoint.
  */
 @Injectable({ providedIn: 'root' })
+@dataService(LOGIN_STATISTICS)
 export class LoginStatisticsService extends IdentifiableDataService<LoginStatistics> {
 
   private searchData: SearchDataImpl<LoginStatistics>;

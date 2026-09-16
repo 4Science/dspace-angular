@@ -46,6 +46,6 @@ xdescribe('SearchChartFilterWrapperComponent', () => {
   });
 
   it('should inject component properly', () => {
-    spyOn(component, 'getSearchFilter').and.callThrough();
+    spyOn(component, 'getComponent').and.callThrough();
   });
 });

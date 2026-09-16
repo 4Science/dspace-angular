@@ -17,8 +17,10 @@ import { SearchService } from '../../../search.service';
 import { SearchConfigurationService } from '../../../search-configuration.service';
 import { SearchFilterService } from '../../../search-filters/search-filter.service';
 import { facetLoad } from '../../../search-filters/search-filter/search-facet-filter/search-facet-filter.component';
+import { renderChartFilterFor } from '../../chart-search-result-element-decorator';
 import { SearchChartFilterComponent } from '../search-chart-filter/search-chart-filter.component';
 
+@renderChartFilterFor('chart.bar.left-to-right')
 @Component({
   selector: 'ds-search-chart-bar-to-right',
   styleUrls: ['./search-chart-bar-to-right.component.scss'],

@@ -137,4 +137,16 @@ export const DECORATORS: DecoratorConfig[] = [
       { name: 'theme', default: '*' },
     ],
   },
+  {
+    name: 'renderChartFilterFor',
+    params: [
+      { name: 'type' },
+    ],
+  },
+  {
+    name: 'renderChartTypeFor',
+    params: [
+      { name: 'chartType' },
+    ],
+  },
 ];
