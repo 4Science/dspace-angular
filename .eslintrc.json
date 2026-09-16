@@ -12,6 +12,7 @@
     "eslint-plugin-simple-import-sort",
     "eslint-plugin-import-newlines",
     "@stylistic",
+    "disable-autofix",
     "dspace-angular-ts",
     "dspace-angular-html"
   ],
@@ -379,6 +380,30 @@
           "double",
           {
             "avoidEscape": false
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "src/assets/i18n/**/*.json5"
+      ],
+      "parser": "jsonc-eslint-parser",
+      "extends": [
+        "plugin:jsonc/recommended-with-json"
+      ],
+      "rules": {
+        "jsonc/no-comments": "off",
+        "jsonc/no-dupe-keys": "error",
+        "jsonc/sort-keys": "off",
+        "disable-autofix/jsonc/sort-keys": [
+          "error",
+          {
+            "pathPattern": "^.*$",
+            "order": {
+              "type": "asc",
+              "caseSensitive": false
+            }
           }
         ]
       }

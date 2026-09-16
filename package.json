@@ -198,6 +198,7 @@
     "cypress-axe": "^1.7.0",
     "deep-freeze": "0.0.1",
     "eslint": "^9.39.4",
+    "eslint-plugin-disable-autofix": "5.0.1",
     "eslint-plugin-dspace-angular-html": "file:./lint/dist/src/rules/html",
     "eslint-plugin-dspace-angular-ts": "file:./lint/dist/src/rules/ts",
     "eslint-plugin-import": "^2.32.0",
