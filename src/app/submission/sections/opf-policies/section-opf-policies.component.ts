@@ -35,7 +35,7 @@ import { PublicationInformationComponent } from './publication-information/publi
 import { PublisherPolicyComponent } from './publisher-policy/publisher-policy.component';
 
 /**
- * This component represents a section for the Jisc Open Policy Finder policy informations structure.
+ * This component represents a section for the Jisc Open Policy Finder policy information structure.
  */
 @Component({
   selector: 'ds-section-opf-policies',
