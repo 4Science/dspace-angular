@@ -143,6 +143,21 @@ export class ThemedConfigurationSearchPageComponent extends ThemedComponent<Conf
    */
   @Input() hideScopeInUrl: boolean;
 
+  /**
+   * A boolean representing if show search charts
+   */
+  @Input() showCharts: boolean;
+
+  /**
+   * Defines whether to start as showing the charts collapsed
+   */
+  @Input() collapseCharts: boolean;
+
+  /**
+   * Defines whether to show the toggle button to Show/Hide chart
+   */
+  @Input() showChartsToggle: boolean;
+
   protected inAndOutputNames: (keyof ConfigurationSearchPageComponent & keyof this)[] = [
     'configurationList',
     'context',
@@ -168,6 +183,9 @@ export class ThemedConfigurationSearchPageComponent extends ThemedComponent<Conf
     'query',
     'scope',
     'hideScopeInUrl',
+    'showCharts',
+    'collapseCharts',
+    'showChartsToggle',
   ];
 
   protected getComponentName(): string {

@@ -26,6 +26,7 @@ import { SearchConfigurationOption } from './search-switch-configuration/search-
 export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
 
   protected inAndOutputNames: (keyof SearchComponent & keyof this)[] = [
+    'collapseCharts',
     'configurationList',
     'context',
     'configuration',
@@ -41,6 +42,8 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
     'selectable',
     'selectionConfig',
     'showCsvExport',
+    'showCharts',
+    'showChartsToggle',
     'showSidebar',
     'showThumbnails',
     'showViewModes',
@@ -69,6 +72,8 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
 
   @Input() useCachedVersionIfAvailable: boolean;
 
+  @Input() collapseCharts: boolean;
+
   @Input() inPlaceSearch: boolean;
 
   @Input() linkType: CollectionElementLinkType;
@@ -85,6 +90,8 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
 
   @Input() selectionConfig: SelectionConfig;
 
+  @Input() showCharts: boolean;
+
   @Input() showCsvExport: boolean;
 
   @Input() showSidebar: boolean;
@@ -98,6 +105,8 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
   @Input() viewModeList: ViewMode[];
 
   @Input() showScopeSelector: boolean;
+
+  @Input() showChartsToggle: boolean;
 
   @Input() trackStatistics: boolean;
 

@@ -4958,6 +4958,21 @@
 
   "search.filters.applied.f.withdrawn": "Withdrawn",
 
+  "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Date Issued",
+
+  "search.filters.applied.charts.chart.pie.more-value": "More",
+
+  "search.filters.applied.charts.chart.pie.itemtype_filter.tab": "Item Type",
+
+  "search.filters.applied.charts.default.title": "Search Output",
+
+  "search.filters.applied.charts.site.title": "Search Output",
+
+
+  "search.filters.applied.charts.no.data.found": "No data found",
+
+  "search.filters.applied.charts.show.hide": "Show/Hide",
+
   "search.filters.applied.operator.equals": "",
 
   "search.filters.applied.operator.notequals": " not equals",

@@ -79,6 +79,7 @@ import { PageWithSidebarComponent } from '../sidebar/page-with-sidebar.component
 import { SidebarService } from '../sidebar/sidebar.service';
 import { ViewModeSwitchComponent } from '../view-mode-switch/view-mode-switch.component';
 import { SearchService } from './search.service';
+import { SearchChartsComponent } from './search-charts/search-charts.component';
 import { SearchConfigurationService } from './search-configuration.service';
 import { SearchLabelsComponent } from './search-labels/search-labels.component';
 import { SelectionConfig } from './search-results/search-results.component';
@@ -96,6 +97,7 @@ import { SearchConfigurationOption } from './search-switch-configuration/search-
     AsyncPipe,
     NgTemplateOutlet,
     PageWithSidebarComponent,
+    SearchChartsComponent,
     SearchLabelsComponent,
     ThemedSearchFormComponent,
     ThemedSearchResultsComponent,
@@ -145,6 +147,16 @@ export class SearchComponent implements OnDestroy, OnInit {
   @Input() useCachedVersionIfAvailable = true;
 
   /**
+   * Defines whether to start as showing the charts collapsed
+   */
+  @Input() collapseCharts = false;
+
+  /**
+   * Defines whether to start as showing the filter sidebar collapsed
+   */
+  @Input() collapseFilters = false;
+
+  /**
    * True when the search component should show results on the current page
    */
   @Input() inPlaceSearch = true;
@@ -185,10 +197,19 @@ export class SearchComponent implements OnDestroy, OnInit {
   @Input() selectionConfig: SelectionConfig;
 
   /**
+   * A boolean representing if show search charts
+   */
+  @Input() showCharts = false;
+
+  /**
    * A boolean representing if show csv export button
    */
   @Input() showCsvExport = false;
 
+  /**
+   * Whether to show the metrics badges
+   */
+  @Input() showMetrics: boolean;
   /**
    * A boolean representing if show search sidebar button
    */
@@ -220,6 +241,11 @@ export class SearchComponent implements OnDestroy, OnInit {
   @Input() showScopeSelector = true;
 
   /**
+   * Defines whether to show the toggle button to Show/Hide chart
+   */
+  @Input() showChartsToggle = false;
+
+  /**
    * Whether or not to track search statistics by sending updates to the rest api
    */
   @Input() trackStatistics = false;
@@ -245,9 +271,9 @@ export class SearchComponent implements OnDestroy, OnInit {
   @Input() renderOnServerSide: boolean;
 
   /**
-   * Whether to show the metrics badges
+   * Chart regular expression
    */
-  @Input() showMetrics: boolean;
+  chartReg = new RegExp(/^chart./, 'i');
 
   /**
    * The current configuration used during the search
@@ -269,6 +295,11 @@ export class SearchComponent implements OnDestroy, OnInit {
    * The current sort options used
    */
   currentSortOptions$: BehaviorSubject<SortOptions> = new BehaviorSubject<SortOptions>(null);
+
+  /**
+   * An observable containing configuration about which chart filters are shown and how they are shown
+   */
+  chartFiltersRD$: BehaviorSubject<RemoteData<SearchFilterConfig[]>> = new BehaviorSubject<RemoteData<SearchFilterConfig[]>>(null);
 
   /**
    * An observable containing configuration about which filters are shown and how they are shown
@@ -517,10 +548,38 @@ export class SearchComponent implements OnDestroy, OnInit {
    * @private
    */
   private retrieveFilters(searchOptions: PaginatedSearchOptions) {
+    this.chartFiltersRD$.next(null);
     this.searchConfigService.getConfig(searchOptions.scope, searchOptions.configuration).pipe(
       getFirstCompletedRemoteData(),
     ).subscribe((filtersRD: RemoteData<SearchFilterConfig[]>) => {
-      this.filtersRD$.next(filtersRD);
+      const filtersPayload = filtersRD.payload.filter((entry: SearchFilterConfig) =>
+        !this.chartReg.test(entry.filterType),
+      );
+      const chartFiltersPayload = filtersRD.payload.filter((entry: SearchFilterConfig) =>
+        this.chartReg.test(entry.filterType),
+      );
+      const filters = new RemoteData(
+        filtersRD.timeCompleted,
+        filtersRD.msToLive,
+        filtersRD.lastUpdated,
+        filtersRD.state,
+        filtersRD.errorMessage,
+        filtersPayload,
+        filtersRD.statusCode,
+        filtersRD.errors,
+      );
+      this.filtersRD$.next(filters);
+      const chartFilters  = new RemoteData(
+        filtersRD.timeCompleted,
+        filtersRD.msToLive,
+        filtersRD.lastUpdated,
+        filtersRD.state,
+        filtersRD.errorMessage,
+        chartFiltersPayload,
+        filtersRD.statusCode,
+        filtersRD.errors,
+      );
+      this.chartFiltersRD$.next(chartFilters);
     });
   }
 

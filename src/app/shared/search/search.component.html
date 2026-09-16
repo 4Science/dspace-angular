@@ -8,6 +8,15 @@
   </div>
 }
 
+@if (showCharts) {
+  <ds-search-charts [configuration]="currentConfiguration$"
+                    [collapseChart]="collapseCharts"
+                    [filters]="chartFiltersRD$.asObservable()"
+                    [inPlaceSearch]="inPlaceSearch"
+                    [refreshFilters]="refreshFilters"
+                    [scope]="scope"
+                    [showChartsToggle]="showChartsToggle"></ds-search-charts>
+}
 @if (!showSidebar && (initialized$ | async)) {
   <div>
     <ng-template *ngTemplateOutlet="searchContent"></ng-template>
