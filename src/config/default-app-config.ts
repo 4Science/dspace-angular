@@ -689,7 +689,7 @@ export class DefaultAppConfig implements AppConfig {
     preferredDisplayView: {
       searchPage: ViewMode.ListElement,
       mydspacePage: ViewMode.ListElement,
-      crisRelationBox: ViewMode.GridElement,
+      crisRelationBox: ViewMode.ListElement,
     },
   };
 
