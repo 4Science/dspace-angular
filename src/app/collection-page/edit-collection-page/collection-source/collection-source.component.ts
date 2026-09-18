@@ -660,7 +660,7 @@ export class CollectionSourceComponent extends AbstractTrackableComponent implem
     return this.collectionService.patch(collection, operations).pipe(
       getFirstCompletedRemoteData(),
       map((response) => {
-        if (!response.isSuccess) {
+        if (!response.hasSucceeded) {
           throw new Error('The collection update fails');
         }
         return collection.uuid;
