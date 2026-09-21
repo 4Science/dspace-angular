@@ -10,8 +10,8 @@ import {
   TranslateModule,
 } from '@ngx-translate/core';
 
+import { OpfDataResponse } from '../../../../shared/mocks/section-opf-policies.service.mock';
 import { TranslateLoaderMock } from '../../../../shared/mocks/translate-loader.mock';
-import { OpfDataResponse } from '../../../../shared/testing/section-opf-policies.service.mock';
 import { ContentAccordionComponent } from './content-accordion.component';
 
 describe('ContentAccordionComponent', () => {

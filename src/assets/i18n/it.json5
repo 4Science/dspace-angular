@@ -10891,6 +10891,15 @@
   "submission.import-external.source.loading": "Caricamento ...",
 
   // "submission.import-external.source.opfJournal": "Jisc Open policy finder Journals",
+  "submission.import-external.source.opfJournal": "SHERPA Journals",
+
+  // "submission.import-external.source.opfJournalIssn": "Jisc Open policy finder Journals by ISSN",
+  "submission.import-external.source.opfJournalIssn": "SHERPA Journals by ISSN",
+
+  // "submission.import-external.source.opfPublisher": "Jisc Open policy finder Publishers",
+  "submission.import-external.source.opfPublisher": "SHERPA Publishers",
+
+  // "submission.import-external.source.openaire": "OpenAIRE Search by Authors",
   // TODO New key - Add a translation
   "submission.import-external.source.opfJournal": "Jisc Open policy finder Journals",
 
@@ -11429,6 +11438,10 @@
   // TODO New key - Add a translation
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.isOrgUnitOfProject": "OrgUnit of the Project",
 
+  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.opfJournal": "Jisc Open policy finder of Journal",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.opfJournal": "Jisc Open policy finder of Journal",
+
   // "submission.sections.describe.relationship-lookup.selection-tab.title.isProjectOfPublication": "Project",
   "submission.sections.describe.relationship-lookup.selection-tab.title.isProjectOfPublication": "Progetti",
 
@@ -11621,6 +11634,10 @@
   // "submission.sections.describe.relationship-lookup.selection-tab.title.ror": "Search Results",
   // TODO New key - Add a translation
   "submission.sections.describe.relationship-lookup.selection-tab.title.ror": "Search Results",
+
+  // "submission.sections.describe.relationship-lookup.selection-tab.title.opfJournal": "Search Results",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.selection-tab.title.opfJournal": "Search Results",
 
   // "submission.sections.describe.relationship-lookup.selection-tab.title": "Search Results",
   "submission.sections.describe.relationship-lookup.selection-tab.title": "Risultati della ricerca",
@@ -12158,9 +12175,8 @@
   // "submission.sections.jisc.record.information.uri": "URI",
   "submission.sections.jisc.record.information.uri": "URI",
 
-  // "submission.sections.sherpa.error.message": "There was an error retrieving sherpa information",
-  // TODO Source message changed - Revise the translation
-  "submission.sections.sherpa.error.message": "Si è verificato un errore nel recuperare le informazioni da Sherpa",
+  // "submission.sections.jisc.error.message": "There was an error retrieving Jisc Open policy finder information",
+  "submission.sections.jisc.error.message": "Si è verificato un errore nel recuperare le informazioni da Sherpa",
 
   // "submission.submit.breadcrumbs": "New submission",
   "submission.submit.breadcrumbs": "Nuova immissione",
