@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import {
   combineLatest,
   Observable,
-  of as observableOf,
+  of,
   throwError,
 } from 'rxjs';
 import {
@@ -147,7 +147,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
           return [];
         }
       }),
-      catchError(() => observableOf([])),
+      catchError(() => of([])),
       oneAuthorizationMatchesFeature(featureId),
     );
   }
@@ -163,7 +163,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
         take(1),
         map(([, hasErrors]) => hasErrors),
       )
-      : observableOf(false);
+      : of(false);
 
     return waitForEntry$.pipe(
       switchMap((hasErrors) => {
@@ -175,7 +175,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
           switchMap((authorization) => {
             if (authorization !== undefined) {
               // Authorization is already cached → return it directly
-              return observableOf(authorization);
+              return of(authorization);
             }
             // Authorization is not cached → trigger fetch
             this.authorizationService.initStateForObjects(
@@ -256,9 +256,9 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
           return throwError(() => new Error(`The authorizations "objects" endpoint failed with status ${authorizationRD.statusCode}`));
         }
         if (authorizationRD.statusCode !== 401 && hasValue(authorizationRD.payload) && isNotEmpty(authorizationRD.payload.page)) {
-          return observableOf(authorizationRD.payload.page);
+          return of(authorizationRD.payload.page);
         }
-        return observableOf([]);
+        return of([]);
       }),
     );
 
@@ -281,14 +281,14 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    *                                    {@link HALLink}s should be automatically resolved
    */
   searchByObject(featureId?: FeatureID, objectUrl?: string, ePersonUuid?: string, options: FindListOptions = {}, useCachedVersionIfAvailable = true, reRequestOnStale = true, ...linksToFollow: FollowLinkConfig<Authorization>[]): Observable<RemoteData<PaginatedList<Authorization>>> {
-    const objectUrl$ = observableOf(objectUrl).pipe(
+    const objectUrl$ = of(objectUrl).pipe(
       switchMap((url) => {
         if (hasNoValue(url)) {
           return this.siteService.find().pipe(
             map((site) => site?.self),
           );
         } else {
-          return observableOf(url);
+          return of(url);
         }
       }),
     );

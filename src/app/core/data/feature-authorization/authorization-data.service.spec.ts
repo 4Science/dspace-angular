@@ -1,7 +1,7 @@
 import {
   combineLatest as observableCombineLatest,
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 import { AuthorizationService } from 'src/app/shared/authorizations/authorization.service';
 
@@ -49,16 +49,16 @@ describe('AuthorizationDataService', () => {
       uuid: 'test-eperson',
     });
     siteService = jasmine.createSpyObj('siteService', {
-      find: observableOf(site),
+      find: of(site),
     });
 
     authorizationService = jasmine.createSpyObj('authorizationService', {
-      isLoading: observableOf(true),
-      hasErrors: observableOf(false),
-      getSiteAuthorization: observableOf([]),
-      getAuthorizationForObject: observableOf(true),
-      hasAuthorizationEntryForObject: observableOf(true),
-      isRequestLoading: observableOf(false),
+      isLoading: of(true),
+      hasErrors: of(false),
+      getSiteAuthorization: of([]),
+      getAuthorizationForObject: of(true),
+      hasAuthorizationEntryForObject: of(true),
+      isRequestLoading: of(false),
       initStateForObjects: jasmine.createSpy('initStateForObjects'),
     });
     objectCache = getMockObjectCacheService();
@@ -67,7 +67,7 @@ describe('AuthorizationDataService', () => {
 
   beforeEach(() => {
     init();
-    spyOn(service, 'searchBy').and.returnValue(observableOf(undefined));
+    spyOn(service, 'searchBy').and.returnValue(of(undefined));
   });
 
   describe('composition', () => {
@@ -139,7 +139,7 @@ describe('AuthorizationDataService', () => {
       let addDependencySpy;
 
       beforeEach(() => {
-        (service.searchBy as any).and.returnValue(observableOf('searchBy RD$'));
+        (service.searchBy as any).and.returnValue(of('searchBy RD$'));
         addDependencySpy = spyOn(service as any, 'addDependency');
       });
 
@@ -248,7 +248,7 @@ describe('AuthorizationDataService', () => {
 
     describe('when searchByObject returns a 401', () => {
       beforeEach(() => {
-        authorizationService.getAuthorizationForObject = () => observableOf(false);
+        authorizationService.getAuthorizationForObject = () => of(false);
         spyOn(service, 'searchByObject').and.returnValue(createFailedRemoteDataObject$('Unauthorized', 401));
       });
 
@@ -263,7 +263,7 @@ describe('AuthorizationDataService', () => {
     describe('when searchByObject returns an empty list', () => {
       beforeEach(() => {
         spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(emptyPayload)));
-        authorizationService.getAuthorizationForObject = () => observableOf(false);
+        authorizationService.getAuthorizationForObject = () => of(false);
       });
 
       it('should return false', (done) => {
@@ -276,7 +276,7 @@ describe('AuthorizationDataService', () => {
 
     describe('when searchByObject returns an invalid list', () => {
       beforeEach(() => {
-        authorizationService.getAuthorizationForObject = () => observableOf(false);
+        authorizationService.getAuthorizationForObject = () => of(false);
         spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(invalidPayload)));
       });
 
@@ -291,7 +291,7 @@ describe('AuthorizationDataService', () => {
     describe('when searchByObject returns a valid list', () => {
       beforeEach(() => {
         spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(validPayload)));
-        authorizationService.getAuthorizationForObject = () => observableOf(true);
+        authorizationService.getAuthorizationForObject = () => of(true);
       });
 
       it('should return true', (done) => {
@@ -306,7 +306,7 @@ describe('AuthorizationDataService', () => {
     describe('it should read value from state if present', () => {
       beforeEach(() => {
         spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(validPayload)));
-        authorizationService.getAuthorizationForObject = () => observableOf(true);
+        authorizationService.getAuthorizationForObject = () => of(true);
       });
 
       it('should return true for object', (done) => {
@@ -322,8 +322,8 @@ describe('AuthorizationDataService', () => {
         spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(validPayload)));
         authorizationService.getAuthorizationForObject = jasmine.createSpy('getAuthorizationForObject')
           .and.returnValues(
-            observableOf(undefined),
-            observableOf(true),
+            of(undefined),
+            of(true),
           );
       });
       it('should call init method', (done) => {
@@ -336,7 +336,7 @@ describe('AuthorizationDataService', () => {
 
     describe('when the authorization state has errors (SSR fallback)', () => {
       beforeEach(() => {
-        authorizationService.hasErrors = () => observableOf(true);
+        authorizationService.hasErrors = () => of(true);
       });
 
       it('should fall back to a direct REST check and return true when the feature is granted', (done) => {
