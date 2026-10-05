@@ -19,8 +19,8 @@
     @for (result of loadingResults; track result; let first = $first) {
       <div [class.my-4]="!first" class="row">
         @if(showThumbnails) {
-          <div class="col-3 col-md-2">
-            <div class="thumbnail-skeleton position-relative">
+          <div class="col-3 col-md-2 pe-sm-0">
+            <div class="thumbnail-skeleton">
               <ngx-skeleton-loader/>
             </div>
           </div>

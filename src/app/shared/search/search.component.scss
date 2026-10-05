@@ -6,6 +6,10 @@
 }
 
 :host {
+    display: block;
+    // Reserve space for the content, so the footer is rendered below the fold from the start
+    // instead of being visible while loading and then pushed down (main cause of layout shift).
+    min-height: var(--ds-search-min-height, 100vh);
     --bs-gutter-x: .75rem;
 }
 
