@@ -32,11 +32,22 @@ import {
   distinctUntilChanged,
   filter,
   map,
+  skip,
   switchMap,
 } from 'rxjs/operators';
 
 import { APP_CONFIG } from '../../../config/app-config.interface';
 import { BuildConfig } from '../../../config/build-config.interface';
+import {
+  ContextDisplayConfig,
+  ViewPaginationConfig,
+} from '../../../config/search-page-config.interface';
+import {
+  getGridViewFallback,
+  getPreferredPagination,
+  getPreferredViewMode,
+  ResolvedViewPagination,
+} from '../../../config/search-page-config.util';
 import { COLLECTION_MODULE_PATH } from '../../collection-page/collection-page-routing-paths';
 import { COMMUNITY_MODULE_PATH } from '../../community-page/community-page-routing-paths';
 import { SearchManager } from '../../core/browse/search-manager';
@@ -283,9 +294,14 @@ export class SearchComponent implements OnDestroy, OnInit {
   @Input() viewModeList: ViewMode[];
 
   /**
-   * The initial view mode used to render the results, based on the preferred display view configuration.
+   * The preferred search result view configuration for the current context. It defines the initial
+   * view mode ({@link ContextDisplayConfig.preferredView}) and the pagination (page size and page size
+   * options) for each view mode. When set, the initial view mode is derived from it and the applicable
+   * pagination is re-evaluated whenever the active view mode changes, so switching between the list and
+   * grid views applies the pagination configured for that view. The detailed view does not support
+   * pagination and is left untouched.
    */
-  @Input() initViewMode: ViewMode = ViewMode.ListElement;
+  @Input() searchResultViewConfig: ContextDisplayConfig;
 
   /**
    * Contains a notice to show before result list if any
@@ -435,6 +451,13 @@ export class SearchComponent implements OnDestroy, OnInit {
   subs: Subscription[] = [];
 
   /**
+   * The initial view mode used to render the results. It is derived from
+   * {@link searchResultViewConfig} in {@link ngOnInit} (falling back to the list view when no
+   * configuration is provided), and is passed down to the result/sidebar/view-mode-switch children.
+   */
+  initViewMode: ViewMode = ViewMode.ListElement;
+
+  /**
    * Emits an event with the current search result entries
    */
   @Output() resultFound: EventEmitter<SearchObjects<DSpaceObject>> = new EventEmitter<SearchObjects<DSpaceObject>>();
@@ -477,6 +500,13 @@ export class SearchComponent implements OnDestroy, OnInit {
    * If something changes, update the list of scopes for the dropdown
    */
   ngOnInit(): void {
+    // When a search result view configuration is provided, the initial view mode is derived from it,
+    // so the context components do not need to pass it separately. Callers that do not provide a
+    // configuration keep using the `initViewMode` input (defaulting to the list view).
+    if (hasValue(this.searchResultViewConfig)) {
+      this.initViewMode = getPreferredViewMode(this.searchResultViewConfig);
+    }
+
     if (!this.renderOnServerSide && !this.appConfig.ssr.enableSearchComponent && isPlatformServer(this.platformId)) {
       this.subs.push(this.getSearchOptions().pipe(distinctUntilChanged()).subscribe((options) => {
         this.searchOptions$.next(options);
@@ -500,7 +530,25 @@ export class SearchComponent implements OnDestroy, OnInit {
       this.paginationId = uniqueId(this.paginationId);
     }
 
-    this.searchConfigService.setPaginationId(this.paginationId);
+    // Global grid pagination used when the context does not define (a valid) grid pagination.
+    const gridFallback: ViewPaginationConfig = getGridViewFallback(this.appConfig.search);
+    const initialPagination: ResolvedViewPagination = getPreferredPagination(this.searchResultViewConfig, this.initViewMode, gridFallback);
+    this.searchConfigService.setPaginationId(this.paginationId, initialPagination);
+
+    // Re-apply the pagination configured for the active view mode whenever it changes, so switching
+    // between the list and grid views uses that view's page size and page size options.
+    this.subs.push(
+      this.searchConfigService.getCurrentViewMode(this.initViewMode).pipe(
+        distinctUntilChanged(),
+        // Skip the first emission: the initial pagination is already applied above through setPaginationId.
+        skip(1),
+      ).subscribe((viewMode: ViewMode) => {
+        const pagination: ResolvedViewPagination = getPreferredPagination(this.searchResultViewConfig, viewMode, gridFallback);
+        if (hasValue(pagination)) {
+          this.searchConfigService.updateDefaultPagination(pagination);
+        }
+      }),
+    );
 
     if (hasValue(this.configuration)) {
       this.routeService.setParameter('configuration', this.configuration);

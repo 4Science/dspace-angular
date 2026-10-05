@@ -7,8 +7,8 @@ import {
   APP_CONFIG,
   AppConfig,
 } from '../../config/app-config.interface';
+import { ContextDisplayConfig } from '../../config/search-page-config.interface';
 import { SearchConfigurationService } from '../core/shared/search/search-configuration.service';
-import { ViewMode } from '../core/shared/view-mode.model';
 import { SEARCH_CONFIG_SERVICE } from '../my-dspace-page/my-dspace-configuration.service';
 import { ThemedSearchComponent } from '../shared/search/themed-search.component';
 
@@ -32,11 +32,12 @@ import { ThemedSearchComponent } from '../shared/search/themed-search.component'
 export class SearchPageComponent {
 
   /**
-   * The initial view mode used to render the search results, based on the preferred display view configuration.
+   * The preferred search result view configuration for the search page. It defines the initial view
+   * mode and the pagination for each view mode, and is passed to the search component.
    */
-  initViewMode: ViewMode;
+  searchResultViewConfig: ContextDisplayConfig;
 
   constructor(@Inject(APP_CONFIG) protected appConfig: AppConfig) {
-    this.initViewMode = this.appConfig.search?.preferredDisplayView?.searchPage ?? ViewMode.ListElement;
+    this.searchResultViewConfig = this.appConfig.search?.preferredContextConfig?.searchPage;
   }
 }

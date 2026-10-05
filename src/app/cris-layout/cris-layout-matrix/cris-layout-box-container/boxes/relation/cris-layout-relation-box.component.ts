@@ -20,6 +20,7 @@ import {
   APP_CONFIG,
   AppConfig,
 } from '../../../../../../config/app-config.interface';
+import { ContextDisplayConfig } from '../../../../../../config/search-page-config.interface';
 import { AuthService } from '../../../../../core/auth/auth.service';
 import { EPerson } from '../../../../../core/eperson/models/eperson.model';
 import {
@@ -27,7 +28,6 @@ import {
   RelationBoxConfiguration,
 } from '../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../core/shared/item.model';
-import { ViewMode } from '../../../../../core/shared/view-mode.model';
 import { ThemedConfigurationSearchPageComponent } from '../../../../../search-page/themed-configuration-search-page.component';
 import { isNotEmpty } from '../../../../../shared/empty.util';
 import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-component.model';
@@ -69,9 +69,10 @@ export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent 
   searchResultNotice: string;
 
   /**
-   * The initial view mode used to render the results, based on the preferred display view configuration.
+   * The preferred search result view configuration for the relation box. It defines the initial view
+   * mode and the pagination for each view mode, and is passed to the search component.
    */
-  initViewMode: ViewMode;
+  searchResultViewConfig: ContextDisplayConfig;
 
   constructor(
     protected authService: AuthService,
@@ -81,7 +82,7 @@ export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent 
     @Inject(APP_CONFIG) protected appConfig: AppConfig,
   ) {
     super(translateService, boxProvider, itemProvider);
-    this.initViewMode = this.appConfig.search?.preferredDisplayView?.crisRelationBox ?? ViewMode.ListElement;
+    this.searchResultViewConfig = this.appConfig.search?.preferredContextConfig?.crisRelationBox;
   }
 
   ngOnInit(): void {

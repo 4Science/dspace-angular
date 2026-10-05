@@ -569,6 +569,52 @@ search:
   # Since we don't know how many filters will be loaded before we receive a response from the server we use this parameter for the skeletons count.
   # e.g. If we set 5 then 5 loading skeletons will be visualized before the actual filters are retrieved.
   defaultFiltersCount: 5
+  # Grid constraint (applies to every grid setting below): the grid view renders rows of up to
+  # 3 elements, so every grid page size MUST be a multiple of 3. Invalid grid settings are rejected
+  # and a warning is logged.
+  #
+  # Global grid pagination, used by every search context that does not define its own 'grid' block
+  # (or whose 'grid' block is rejected). A context 'grid' block that sets only one of the two fields
+  # takes the other one from here.
+  gridViewDefaultPageSize: 9
+  gridViewPageSizeOptions: [9, 18, 36, 60, 81, 99]
+  # Preferred display configuration used to initially render the results for each search context
+  # (searchPage, mydspacePage, crisRelationBox).
+  # For every context you can set:
+  #   view: the initial display view. One of 'list', 'grid' or 'detailed'.
+  #   list: the pagination used by the list view.
+  #   grid: (optional) the pagination used by the grid view. Overrides the global grid pagination.
+  # The detailed view is meant to display a single item and does not support pagination, so it has
+  # no pagination block.
+  # Each pagination block (list / grid) accepts:
+  #   pageSize:        the initial number of results per page. When it is not one of pageSizeOptions
+  #                    it is snapped to the nearest available option.
+  #   pageSizeOptions: the selectable page sizes offered to the user for that view. Overrides the
+  #                    application-wide default options for that view.
+  # The user can still override these values through the URL query parameters (e.g. 'view', 'rpp').
+  preferredContextConfig:
+    # Preferred configuration used by the main search page.
+    searchPage:
+      view: list
+      list:
+        pageSize: 10
+        pageSizeOptions: [5, 10, 20, 40, 60, 80, 100]
+      # Example of a context-specific grid override:
+      # grid:
+      #   pageSize: 12
+      #   pageSizeOptions: [12, 24, 48]
+    # Preferred configuration used by the MyDSpace page.
+    mydspacePage:
+      view: list
+      list:
+        pageSize: 10
+        pageSizeOptions: [5, 10, 20, 40, 60, 80, 100]
+    # Preferred configuration used by the CRIS layout relation boxes.
+    crisRelationBox:
+      view: list
+      list:
+        pageSize: 10
+        pageSizeOptions: [5, 10, 20, 40, 60, 80, 100]
 
 # Notify metrics
 # Configuration for Notify Admin Dashboard for metrics visualization

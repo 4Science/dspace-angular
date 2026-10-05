@@ -5,6 +5,7 @@ import {
   Output,
 } from '@angular/core';
 
+import { ContextDisplayConfig } from '../../../config/search-page-config.interface';
 import { Context } from '../../core/shared/context.model';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
 import { ViewMode } from '../../core/shared/view-mode.model';
@@ -71,7 +72,7 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
     'trackStatistics',
     'useUniquePageId',
     'viewModeList',
-    'initViewMode',
+    'searchResultViewConfig',
   ];
 
   @Input() configurationList: SearchConfigurationOption[];
@@ -136,7 +137,7 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
 
   @Input() viewModeList: ViewMode[];
 
-  @Input() initViewMode: ViewMode;
+  @Input() searchResultViewConfig: ContextDisplayConfig;
 
   @Input() showScopeSelector: boolean;
 
