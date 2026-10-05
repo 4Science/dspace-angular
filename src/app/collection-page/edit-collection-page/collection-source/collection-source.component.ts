@@ -33,7 +33,6 @@ import cloneDeep from 'lodash/cloneDeep';
 import {
   Observable,
   Subscription,
-  throwError,
 } from 'rxjs';
 import {
   first,
@@ -631,7 +630,7 @@ export class CollectionSourceComponent extends AbstractTrackableComponent implem
     });
   }
 
-  updateCollection(collection: Collection): Observable<string|Observable<never>> {
+  updateCollection(collection: Collection): Observable<string> {
 
     const operations: Operation[] = [];
     this.addOperation(operations, this.adminEmailModel, 'cris.harvesting.email', collection);
@@ -641,10 +640,12 @@ export class CollectionSourceComponent extends AbstractTrackableComponent implem
     this.addOperation(operations, this.recordValidationEnabledModel, 'cris.harvesting.recordValidationEnabled', collection);
     this.addOperation(operations, this.forceSynchronizationModel, 'cris.harvesting.forceSynchronization', collection);
 
-    operations.push({
-      op: 'remove',
-      path: '/metadata/cris.harvesting.ccAddress',
-    });
+    if (collection.hasMetadata('cris.harvesting.ccAddress')) {
+      operations.push({
+        op: 'remove',
+        path: '/metadata/cris.harvesting.ccAddress',
+      });
+    }
 
     if (this.ccAddressesModel.value) {
       this.ccAddressesModel.value.toString().split(',')
@@ -659,8 +660,8 @@ export class CollectionSourceComponent extends AbstractTrackableComponent implem
     return this.collectionService.patch(collection, operations).pipe(
       getFirstCompletedRemoteData(),
       map((response) => {
-        if (!response.isSuccess) {
-          return throwError('The collection update fails');
+        if (!response.hasSucceeded) {
+          throw new Error('The collection update fails');
         }
         return collection.uuid;
       }));

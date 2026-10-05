@@ -109,6 +109,7 @@ export class DsDynamicRelationInlineGroupComponent extends DynamicFormControlCom
       initialCount: isNotEmpty(this.model.value) ? (this.model.value as any[]).length : 1,
       isDraggable: true,
       isInlineGroupArray: true,
+      mandatoryField: this.model.mandatoryField,
       groupFactory: () => {
         const fieldValue = isEmpty(this.model.value) || (arrayCounter === 0) ? {} : this.model.value[arrayCounter - 1];
         const model: any = this.initArrayItemModel(formConfig, this.normalizeGroupFormValue(fieldValue));
