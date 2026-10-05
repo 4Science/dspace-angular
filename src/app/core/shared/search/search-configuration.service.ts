@@ -302,13 +302,21 @@ export class SearchConfigurationService implements OnDestroy {
     );
   }
 
-  setPaginationId(paginationId): void {
+  /**
+   * Change the pagination id used by this service and optionally override the default pagination.
+   *
+   * @param paginationId        The new pagination id.
+   * @param defaultPagination   Optional default pagination overrides (e.g. `pageSize` and
+   *                            `pageSizeOptions`) to apply as the defaults when the related route
+   *                            parameters are not present. When not provided the existing defaults
+   *                            are kept.
+   */
+  setPaginationId(paginationId, defaultPagination?: Partial<PaginationComponentOptions>): void {
     if (isNotEmpty(paginationId)) {
       const currentValue: PaginatedSearchOptions = this.paginatedSearchOptions.getValue();
+      const paginationUpdate: Partial<PaginationComponentOptions> = Object.assign({ id: paginationId }, defaultPagination);
       const updatedValue: PaginatedSearchOptions = Object.assign(new PaginatedSearchOptions({}), currentValue, {
-        pagination: Object.assign({}, currentValue.pagination, {
-          id: paginationId,
-        }),
+        pagination: Object.assign(new PaginationComponentOptions(), currentValue.pagination, paginationUpdate),
       });
       // unsubscribe from subscription related to old pagination id
       this.unsubscribeFromSearchOptions(this.paginationID);
@@ -317,6 +325,36 @@ export class SearchConfigurationService implements OnDestroy {
       this.paginationID = paginationId;
       this.paginatedSearchOptions.next(updatedValue);
       this.setSearchSubscription(this.paginationID, this.paginatedSearchOptions.value);
+    }
+  }
+
+  /**
+   * Update the default pagination used by this service, keeping the current pagination id.
+   *
+   * This is used to apply a different default page size and/or page size options when the active
+   * search view mode changes (e.g. switching between the list and grid views). It re-seeds the
+   * {@link paginatedSearchOptions} defaults so that the pagination component picks up the new page
+   * size options, and it rebuilds the related subscriptions so the current pagination is
+   * recalculated against the new defaults.
+   *
+   * @param defaultPagination   The default pagination overrides to apply (e.g. `pageSize` and
+   *                            `pageSizeOptions`).
+   */
+  updateDefaultPagination(defaultPagination: Partial<PaginationComponentOptions>): void {
+    if (hasValue(defaultPagination) && hasValue(this.paginatedSearchOptions)) {
+      const currentValue: PaginatedSearchOptions = this.paginatedSearchOptions.getValue();
+      const updatedValue: PaginatedSearchOptions = Object.assign(new PaginatedSearchOptions({}), currentValue, {
+        pagination: Object.assign(new PaginationComponentOptions(), currentValue.pagination, defaultPagination),
+      });
+      this.unsubscribeFromSearchOptions(this.paginationID);
+      this.paginatedSearchOptions.next(updatedValue);
+      this.setSearchSubscription(this.paginationID, this.paginatedSearchOptions.value);
+
+      // When a specific page size is requested, also write it to the route so it takes effect even
+      // when an `rpp` query parameter was already set (e.g. after switching the active view mode).
+      if (hasValue(defaultPagination.pageSize)) {
+        this.paginationService.updateRoute(this.paginationID, { page: 1, pageSize: defaultPagination.pageSize });
+      }
     }
   }
 

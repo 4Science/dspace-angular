@@ -5,6 +5,7 @@ import {
   Output,
 } from '@angular/core';
 
+import { ContextDisplayConfig } from '../../config/search-page-config.interface';
 import { Context } from '../core/shared/context.model';
 import { ViewMode } from '../core/shared/view-mode.model';
 import { CollectionElementLinkType } from '../shared/object-collection/collection-element-link.type';
@@ -123,9 +124,10 @@ export class ThemedConfigurationSearchPageComponent extends ThemedComponent<Conf
   @Input() viewModeList: ViewMode[];
 
   /**
-   * The initial view mode used to render the results, based on the preferred display view configuration.
+   * The preferred search result view configuration used to resolve the initial view mode and the
+   * pagination for each view mode.
    */
-  @Input() initViewMode: ViewMode;
+  @Input() searchResultViewConfig: ContextDisplayConfig;
 
   /**
    * Defines whether or not to show the scope selector
@@ -228,7 +230,7 @@ export class ThemedConfigurationSearchPageComponent extends ThemedComponent<Conf
     'showViewModes',
     'useUniquePageId',
     'viewModeList',
-    'initViewMode',
+    'searchResultViewConfig',
     'showScopeSelector',
     'trackStatistics',
     'query',

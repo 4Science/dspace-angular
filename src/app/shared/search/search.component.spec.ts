@@ -50,6 +50,7 @@ import {
   SearchConfig,
   SortConfig,
 } from '../../core/shared/search/search-filters/search-config.model';
+import { ViewMode } from '../../core/shared/view-mode.model';
 import { XSRFService } from '../../core/xsrf/xsrf.service';
 import { SEARCH_CONFIG_SERVICE } from '../../my-dspace-page/my-dspace-configuration.service';
 import { HostWindowService } from '../host-window.service';
@@ -218,8 +219,10 @@ export function configureSearchComponentTestingModule(compType, additionalDeclar
     getCurrentConfiguration: observableOf('default'),
     getCurrentScope: observableOf('test-id'),
     getCurrentSort: observableOf(sortOptionsList[0]),
+    getCurrentViewMode: observableOf(ViewMode.ListElement),
     updateFixedFilter: jasmine.createSpy('updateFixedFilter'),
     setPaginationId: jasmine.createSpy('setPaginationId'),
+    updateDefaultPagination: jasmine.createSpy('updateDefaultPagination'),
   });
 
   searchConfigurationServiceStub.setPaginationId.and.callFake((pageId) => {

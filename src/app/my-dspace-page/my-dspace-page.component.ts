@@ -20,6 +20,7 @@ import {
   APP_CONFIG,
   AppConfig,
 } from '../../config/app-config.interface';
+import { ContextDisplayConfig } from '../../config/search-page-config.interface';
 import { MyDSpaceResponseParsingService } from '../core/data/mydspace-response-parsing.service';
 import { MyDSpaceRequest } from '../core/data/request.models';
 import { RequestService } from '../core/data/request.service';
@@ -105,9 +106,10 @@ export class MyDSpacePageComponent implements OnInit {
   viewModeList = [ViewMode.ListElement, ViewMode.DetailedListElement];
 
   /**
-   * The initial view mode used to render the search results, based on the preferred display view configuration.
+   * The preferred search result view configuration for MyDSpace. It defines the initial view mode and
+   * the pagination for each view mode, and is passed to the search component.
    */
-  initViewMode: ViewMode;
+  searchResultViewConfig: ContextDisplayConfig;
 
   public readonly workflowType = MyDSpaceConfigurationValueType.Workflow;
 
@@ -125,7 +127,7 @@ export class MyDSpacePageComponent implements OnInit {
     @Inject(APP_CONFIG) protected appConfig: AppConfig,
   ) {
     this.service.setServiceOptions(MyDSpaceResponseParsingService, MyDSpaceRequest);
-    this.initViewMode = this.appConfig.search?.preferredDisplayView?.mydspacePage ?? ViewMode.ListElement;
+    this.searchResultViewConfig = this.appConfig.search?.preferredContextConfig?.mydspacePage;
   }
 
   /**

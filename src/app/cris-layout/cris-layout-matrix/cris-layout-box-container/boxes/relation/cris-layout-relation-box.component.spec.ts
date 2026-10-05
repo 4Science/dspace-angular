@@ -23,7 +23,6 @@ import { EPerson } from '../../../../../core/eperson/models/eperson.model';
 import { CrisLayoutBox } from '../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../../core/shared/metadata.models';
-import { ViewMode } from '../../../../../core/shared/view-mode.model';
 import { ThemedConfigurationSearchPageComponent } from '../../../../../search-page/themed-configuration-search-page.component';
 import { TranslateLoaderMock } from '../../../../../shared/mocks/translate-loader.mock';
 import {
@@ -123,8 +122,8 @@ describe('CrisLayoutRelationBoxComponent', () => {
       expect(component.searchFilter).toContain('scope=' + testItem.id);
     });
 
-    it('should set the initial view mode from the crisRelationBox preferred display view configuration', () => {
-      expect(component.initViewMode).toBe(ViewMode.GridElement);
+    it('should expose the crisRelationBox preferred search result view configuration', () => {
+      expect(component.searchResultViewConfig).toBe(environment.search.preferredContextConfig.crisRelationBox);
     });
 
     it('info message cannot be shown', fakeAsync(() => {

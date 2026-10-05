@@ -9,6 +9,7 @@ import {
   FilterConfig,
   SearchConfig,
 } from '../../core/shared/search/search-filters/search-config.model';
+import { ViewMode } from '../../core/shared/view-mode.model';
 import { PaginatedSearchOptions } from '../search/models/paginated-search-options.model';
 import { SearchOptions } from '../search/models/search-options.model';
 
@@ -64,6 +65,18 @@ export class SearchConfigurationServiceStub {
 
   selectNewAppliedFilterParams(_filterName: string, _value: string, _operator?: string): Observable<Params> {
     return observableOf({});
+  }
+
+  getCurrentViewMode(defaultViewMode: ViewMode): Observable<ViewMode> {
+    return observableOf(defaultViewMode);
+  }
+
+  setPaginationId(_paginationId: string, _defaultPagination?: unknown): void {
+    // no-op stub
+  }
+
+  updateDefaultPagination(_defaultPagination: unknown): void {
+    // no-op stub
   }
 
 }

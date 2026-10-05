@@ -9,7 +9,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { APP_CONFIG } from '../../config/app-config.interface';
 import { environment } from '../../environments/environment.test';
 import { SearchConfigurationService } from '../core/shared/search/search-configuration.service';
-import { ViewMode } from '../core/shared/view-mode.model';
 import { SEARCH_CONFIG_SERVICE } from '../my-dspace-page/my-dspace-configuration.service';
 import { ThemedSearchComponent } from '../shared/search/themed-search.component';
 import { SearchPageComponent } from './search-page.component';
@@ -59,7 +58,7 @@ describe('SearchPageComponent', () => {
     expect(comp).toBeTruthy();
   });
 
-  it('should set the initial view mode from the searchPage preferred display view configuration', () => {
-    expect(comp.initViewMode).toBe(ViewMode.GridElement);
+  it('should expose the searchPage preferred search result view configuration', () => {
+    expect(comp.searchResultViewConfig).toBe(environment.search.preferredContextConfig.searchPage);
   });
 });

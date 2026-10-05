@@ -464,10 +464,34 @@ export const environment: BuildConfig = {
       filter: ['title', 'author', 'subject', 'entityType'],
     },
     filterPlaceholdersCount: 5,
-    preferredDisplayView: {
-      searchPage: ViewMode.GridElement,
-      mydspacePage: ViewMode.DetailedListElement,
-      crisRelationBox: ViewMode.GridElement,
+    gridViewDefaultPageSize: 9,
+    gridViewPageSizeOptions: [9, 18, 36],
+    preferredContextConfig: {
+      searchPage: {
+        preferredView: ViewMode.GridElement,
+        listPaginationConfig: {
+          pageSize: 20,
+          pageSizeOptions: [10, 20, 40, 60],
+        },
+        gridPaginationConfig: {
+          pageSize: 12,
+          pageSizeOptions: [12, 24, 48],
+        },
+      },
+      mydspacePage: {
+        preferredView: ViewMode.DetailedListElement,
+        listPaginationConfig: {
+          pageSize: 40,
+          pageSizeOptions: [20, 40, 60],
+        },
+      },
+      crisRelationBox: {
+        preferredView: ViewMode.GridElement,
+        gridPaginationConfig: {
+          pageSize: 9,
+          pageSizeOptions: [9, 18, 36],
+        },
+      },
     },
   },
 
