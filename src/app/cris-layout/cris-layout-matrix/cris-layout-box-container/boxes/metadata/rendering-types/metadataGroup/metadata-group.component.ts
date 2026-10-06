@@ -10,6 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../../core/shared/item.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
+import { PLACEHOLDER_VALUE } from '../../../../../../../core/shared/metadata.utils';
 import { isNotEmpty } from '../../../../../../../shared/empty.util';
 import { RenderingTypeStructuredModelComponent } from '../rendering-type-structured.model';
 
@@ -84,6 +85,16 @@ export abstract class MetadataGroupComponent extends RenderingTypeStructuredMode
     });
 
     this.initialized.next(true);
+  }
+
+
+  hasEntryValue(entry: NestedMetadataGroupEntry): boolean {
+    const value = entry?.value?.value;
+    return isNotEmpty(value) && value !== PLACEHOLDER_VALUE;
+  }
+
+  getEntriesWithValue(index: number): NestedMetadataGroupEntry[] {
+    return (this.componentsToBeRenderedMap?.get(index) ?? []).filter((entry) => this.hasEntryValue(entry));
   }
 
   getMetadataValue(field: LayoutField, index: number): MetadataValue {

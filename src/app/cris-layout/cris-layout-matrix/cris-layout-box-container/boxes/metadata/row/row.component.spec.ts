@@ -64,4 +64,26 @@ describe('RowComponent', () => {
     expect(metadataFound.length).toBe(5);
   });
 
+  it('should not render a cell whose fields have no values', () => {
+    component.item = Object.assign(new TestItem(), {
+      metadata: {},
+      firstMetadataValue: (): string => undefined,
+    }) as any;
+    component.row = {
+      cells: [
+        { style: 'pb-2', fields: [{ fieldType: 'METADATA', metadata: 'dc.title' }] },
+        {
+          style: 'pb-2',
+          fields: [{
+            fieldType: 'METADATAGROUP',
+            metadata: 'dc.contributor.author',
+            metadataGroup: { elements: [{ fieldType: 'METADATA', metadata: 'oairecerif.author.affiliation' }] },
+          }],
+        },
+      ],
+    } as any;
+    fixture.detectChanges();
+    expect(fixture.debugElement.queryAll(By.css('.metadata-cell')).length).toBe(0);
+  });
+
 });
