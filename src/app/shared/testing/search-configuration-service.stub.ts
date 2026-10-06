@@ -68,7 +68,7 @@ export class SearchConfigurationServiceStub {
   }
 
   getCurrentViewMode(defaultViewMode: ViewMode): Observable<ViewMode> {
-    return observableOf(defaultViewMode);
+    return of(defaultViewMode);
   }
 
   setPaginationId(_paginationId: string, _defaultPagination?: unknown): void {
