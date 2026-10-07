@@ -1,4 +1,7 @@
-import { NgFor } from '@angular/common';
+import {
+  NgFor,
+  NgIf,
+} from '@angular/common';
 import {
   Component,
   Input,
@@ -7,10 +10,12 @@ import {
 import {
   CrisLayoutBox,
   LayoutField,
+  LayoutFieldType,
   MetadataBoxCell,
   MetadataBoxRow,
 } from '../../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../../core/shared/item.model';
+import { isNotEmpty } from '../../../../../../shared/empty.util';
 import { MetadataContainerComponent } from './metadata-container/metadata-container.component';
 
 /**
@@ -22,7 +27,7 @@ import { MetadataContainerComponent } from './metadata-container/metadata-contai
   templateUrl: './row.component.html',
   styleUrls: ['./row.component.scss'],
   standalone: true,
-  imports: [NgFor, MetadataContainerComponent],
+  imports: [NgFor, NgIf, MetadataContainerComponent],
 })
 export class RowComponent {
 
@@ -45,6 +50,21 @@ export class RowComponent {
 
   trackCellUpdate(index, cell: MetadataBoxCell) {
     return cell && cell.fields;
+  }
+
+  hasVisibleFields(cell: MetadataBoxCell): boolean {
+    return (cell?.fields ?? []).some((field: LayoutField) => this.isFieldVisible(field));
+  }
+
+  private isFieldVisible(field: LayoutField): boolean {
+    switch (field?.fieldType) {
+      case LayoutFieldType.METADATA.toString():
+        return isNotEmpty(this.item.firstMetadataValue(field.metadata));
+      case LayoutFieldType.METADATAGROUP.toString():
+        return (field.metadataGroup?.elements ?? []).some((el: LayoutField) => isNotEmpty(this.item.metadata?.[el.metadata]));
+      default:
+        return true;
+    }
   }
 
 }
