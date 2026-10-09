@@ -60,7 +60,7 @@
         type="button">
         <i>{{ 'dropdown.clear' | translate }}</i>
       </button>
-      @for (listEntry of optionsList; track listEntry; let i = $index) {
+      @for (listEntry of optionsList; track listEntry.uuid; let i = $index) {
         <button class="dropdown-item collection-item text-truncate"
           [class.active]="selectedIndex === (i + 1)"
           (keydown.enter)="onSelect(listEntry); sdRef.close()" (mousedown)="onSelect(listEntry); sdRef.close()"
