@@ -132,5 +132,56 @@ describe('ViewModeSwitchComponent', () => {
     }));
   });
 
+  describe('when disabled', () => {
+    let buttons: HTMLElement[];
+
+    beforeEach(fakeAsync(() => {
+      comp.viewModeList = [ViewMode.ListElement, ViewMode.GridElement];
+      comp.currentMode = ViewMode.ListElement;
+      searchService.setViewMode(ViewMode.ListElement);
+      comp.disabled = true;
+      tick();
+      fixture.detectChanges();
+      buttons = fixture.debugElement.queryAll(By.css('button')).map((de) => de.nativeElement);
+      spyOn(searchService, 'setViewMode').and.callThrough();
+    }));
+
+    it('should mark every button as disabled', () => {
+      expect(buttons.length).toBe(2);
+      buttons.forEach((button: HTMLElement) => {
+        expect(button.classList).toContain('disabled');
+        expect(button.getAttribute('aria-disabled')).toBe('true');
+      });
+    });
+
+    it('should not switch the view mode when switchViewTo is called', () => {
+      comp.switchViewTo(ViewMode.GridElement);
+      expect(comp.changeViewMode.emit).not.toHaveBeenCalled();
+      expect(searchService.setViewMode).not.toHaveBeenCalled();
+    });
+
+    it('should not switch the view mode when a button is clicked', fakeAsync(() => {
+      buttons[1].click();
+      tick();
+      fixture.detectChanges();
+      expect(comp.changeViewMode.emit).not.toHaveBeenCalled();
+      expect(searchService.setViewMode).not.toHaveBeenCalled();
+      expect(comp.currentMode).toBe(ViewMode.ListElement);
+    }));
+
+    it('should switch the view mode again once re-enabled', fakeAsync(() => {
+      comp.disabled = false;
+      fixture.detectChanges();
+      buttons.forEach((button: HTMLElement) => {
+        expect(button.classList).not.toContain('disabled');
+        expect(button.getAttribute('aria-disabled')).toBe('false');
+      });
+
+      comp.switchViewTo(ViewMode.GridElement);
+      tick();
+      expect(comp.changeViewMode.emit).toHaveBeenCalledWith(ViewMode.GridElement);
+      expect(searchService.setViewMode).toHaveBeenCalled();
+    }));
+  });
 
 });
