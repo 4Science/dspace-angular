@@ -12,6 +12,7 @@
         <ds-view-mode-switch *ngIf="showViewModes" class="d-none d-md-block"
                              [viewModeList]="viewModeList"
                              [initViewMode]="initViewMode"
+                             [disabled]="disableViewModes"
                              (changeViewMode)="changeViewMode.emit($event)"></ds-view-mode-switch>
         <div class="sidebar-content">
             <ds-search-switch-configuration *ngIf="configurationList"
@@ -34,7 +35,8 @@
             </ds-advanced-search>
             <ds-search-settings *ngIf="inPlaceSearch"
                                 [currentSortOption]="currentSortOption"
-                                [sortOptionsList]="sortOptionsList">
+                                [sortOptionsList]="sortOptionsList"
+                                [initViewMode]="initViewMode">
             </ds-search-settings>
         </div>
     </div>

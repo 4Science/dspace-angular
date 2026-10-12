@@ -33,8 +33,8 @@ import {
   distinctUntilChanged,
   filter,
   map,
-  skip,
   switchMap,
+  take,
 } from 'rxjs/operators';
 
 import { APP_CONFIG } from '../../../config/app-config.interface';
@@ -402,6 +402,12 @@ export class SearchComponent implements OnDestroy, OnInit {
   resultsRD$: BehaviorSubject<RemoteData<PaginatedList<SearchResult<DSpaceObject>>>> = new BehaviorSubject(null);
 
   /**
+   * TRUE while a search request is waiting for its response. Used to disable the view mode switch,
+   * so the view mode cannot change while the results are still being retrieved.
+   */
+  searchInProgress$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
    * The current paginated search options
    */
   searchOptions$: BehaviorSubject<PaginatedSearchOptions> = new BehaviorSubject<PaginatedSearchOptions>(null);
@@ -535,17 +541,21 @@ export class SearchComponent implements OnDestroy, OnInit {
 
     // Global grid pagination used when the context does not define (a valid) grid pagination.
     const gridFallback: ViewPaginationConfig = getGridViewFallback(this.appConfig.search);
-    const initialPagination: ResolvedViewPagination = getPreferredPagination(this.searchResultViewConfig, this.initViewMode, gridFallback);
+
+    let appliedViewMode: ViewMode = this.initViewMode;
+    this.searchConfigService.getCurrentViewMode(this.initViewMode).pipe(
+      take(1),
+    ).subscribe((viewMode: ViewMode) => appliedViewMode = viewMode);
+
+    const initialPagination: ResolvedViewPagination = getPreferredPagination(this.searchResultViewConfig, appliedViewMode, gridFallback);
     this.searchConfigService.setPaginationId(this.paginationId, initialPagination);
 
-    // Re-apply the pagination configured for the active view mode whenever it changes, so switching
-    // between the list and grid views uses that view's page size and page size options.
+    // Re-apply the pagination configured for the active view mode whenever it changes
     this.subs.push(
       this.searchConfigService.getCurrentViewMode(this.initViewMode).pipe(
-        distinctUntilChanged(),
-        // Skip the first emission: the initial pagination is already applied above through setPaginationId.
-        skip(1),
+        filter((viewMode: ViewMode) => viewMode !== appliedViewMode),
       ).subscribe((viewMode: ViewMode) => {
+        appliedViewMode = viewMode;
         const pagination: ResolvedViewPagination = getPreferredPagination(this.searchResultViewConfig, viewMode, gridFallback);
         if (hasValue(pagination)) {
           this.searchConfigService.updateDefaultPagination(pagination);
@@ -753,6 +763,7 @@ export class SearchComponent implements OnDestroy, OnInit {
    */
   private retrieveSearchResults(searchOptions: PaginatedSearchOptions) {
     this.resultsRD$.next(null);
+    this.searchInProgress$.next(true);
     this.lastSearchOptions = searchOptions;
     let followLinks = [];
     if (this.showThumbnails) {
@@ -815,6 +826,7 @@ export class SearchComponent implements OnDestroy, OnInit {
           }
         }
         this.resultsRD$.next(results);
+        this.searchInProgress$.next(false);
       });
   }
 

@@ -41,6 +41,7 @@
                 <ds-view-mode-switch *ngIf="inPlaceSearch && showViewModes"
                                      [viewModeList]="viewModeList"
                                      [initViewMode]="initViewMode"
+                                     [disabled]="(searchInProgress$ | async) === true"
                                      [inPlaceSearch]="inPlaceSearch"></ds-view-mode-switch>
                 <button (click)="openSidebar()"
                         aria-controls="#search-body"
@@ -92,6 +93,7 @@
                        [viewModeList]="viewModeList"
                        [initViewMode]="initViewMode"
                        [showViewModes]="showViewModes"
+                       [disableViewModes]="(searchInProgress$ | async) === true"
                        (changeConfiguration)="changeContext($event.context)"
                        (changeViewMode)="changeViewMode()"></ds-search-sidebar>
     <ds-search-sidebar id="search-sidebar-sm" *ngIf="(isXsOrSm$ | async)"
@@ -108,6 +110,7 @@
                        [viewModeList]="viewModeList"
                        [initViewMode]="initViewMode"
                        [showViewModes]="showViewModes"
+                       [disableViewModes]="(searchInProgress$ | async) === true"
                        (toggleSidebar)="closeSidebar()"
                        (changeConfiguration)="changeContext($event.context)"
                        (changeViewMode)="changeViewMode()">
