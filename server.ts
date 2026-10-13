@@ -255,6 +255,13 @@ export function app() {
   server.get('/json/iiif/**/manifest', redirectManifest);
 
   /**
+   * Resolve /handle/* requests at the Express level — skips Angular SSR entirely.
+   * Calls REST /api/pid/find and issues a single 301 to the final UI route.
+   * Must be registered BEFORE the catch-all ngApp route.
+   */
+  router.get('/handle/*', handleResolve);
+
+  /**
    * Default sending all incoming requests to ngApp() function, after first checking for a cached
    * copy of the page (see cacheCheck())
    */
@@ -263,6 +270,89 @@ export function app() {
   server.use(environment.ui.nameSpace, router);
 
   return server;
+}
+
+/**
+ * Compute the UI route for a DSO returned by the REST /api/pid/find endpoint.
+ * This mirrors the Angular-side getDSORoute + getItemPageRoute logic so that
+ * the Express layer can issue a single 301 without bootstrapping Angular.
+ *
+ * @param dso  The JSON body returned by /api/pid/find
+ * @returns    The UI path (e.g. /entities/publication/<uuid>) or null if unknown type
+ */
+function computeDSORoute(dso: any): string | null {
+  if (!dso || !dso.uuid) {
+    return null;
+  }
+
+  const type: string = (dso.type || '').toLowerCase();
+
+  switch (type) {
+    case 'community':
+      return `/communities/${dso.uuid}`;
+    case 'collection':
+      return `/collections/${dso.uuid}`;
+    case 'item': {
+      const entityType: string = dso.metadata?.['dspace.entity.type']?.[0]?.value;
+      let id: string = dso.uuid;
+
+      // Use the custom URL when available (cris.customurl)
+      const customUrl: string = dso.metadata?.['cris.customurl']?.[0]?.value;
+      if (customUrl) {
+        id = customUrl;
+      }
+
+      if (entityType) {
+        return `/entities/${encodeURIComponent(entityType.toLowerCase())}/${id}`;
+      }
+      return `/items/${id}`;
+    }
+    default:
+      return null;
+  }
+}
+
+/**
+ * Express handler that resolves /handle/:prefix/:suffix by calling the REST
+ * /api/pid/find endpoint directly, then issuing a single 301 redirect to the
+ * final UI route.
+ */
+function handleResolve(req, res, next) {
+  const handleSegments = req.params[0];
+  if (!handleSegments) {
+    return next();
+  }
+
+  const restUrl = `${REST_BASE_URL}/api/pid/find?id=hdl:${encodeURIComponent(handleSegments)}`;
+
+  axios.get(restUrl)
+    .then((response) => {
+      if (response.status === 200 && response.data) {
+        const route = computeDSORoute(response.data);
+        if (route) {
+          const nameSpace = (environment.ui.nameSpace || '').replace(/\/$/, '');
+          res.redirect(301, `${nameSpace}${route}`);
+        } else {
+          // Unknown DSO type — fall through to Angular for error handling
+          next();
+        }
+      } else {
+        next();
+      }
+    })
+    .catch((error) => {
+      if (error?.response?.status === 410) {
+        const nameSpace = (environment.ui.nameSpace || '').replace(/\/$/, '');
+        res.redirect(302, `${nameSpace}/handle/object-gone`);
+      } else if (error?.response?.status === 404) {
+        // Not found — fall through to Angular for 404 handling
+        next();
+      } else {
+        console.warn(`[handleResolve] REST call failed for handle "${handleSegments}":`, error?.message);
+        // Fall through to Angular SSR as a safety net
+        next();
+      }
+    });
 }
 
 /*
