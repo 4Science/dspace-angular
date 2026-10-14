@@ -24,7 +24,6 @@ import express from 'express';
 import * as ejs from 'ejs';
 import * as compression from 'compression';
 import expressStaticGzip from 'express-static-gzip';
-import axios from 'axios';
 import { LRUCache } from 'lru-cache';
 import { isbot } from 'isbot';
 import { createCertificate } from 'pem';
@@ -325,33 +324,37 @@ function handleResolve(req, res, next) {
 
   const restUrl = `${REST_BASE_URL}/api/pid/find?id=hdl:${encodeURIComponent(handleSegments)}`;
 
-  axios.get(restUrl)
+  fetch(restUrl)
     .then((response) => {
-      if (response.status === 200 && response.data) {
-        const route = computeDSORoute(response.data);
-        if (route) {
-          const nameSpace = (environment.ui.nameSpace || '').replace(/\/$/, '');
-          res.redirect(301, `${nameSpace}${route}`);
-        } else {
-          // Unknown DSO type — fall through to Angular for error handling
-          next();
-        }
+      if (response.status === 410) {
+        const nameSpace = (environment.ui.nameSpace || '').replace(/\/$/, '');
+        res.redirect(302, `${nameSpace}/handle/object-gone`);
+      } else if (response.status === 404) {
+        // Not found — fall through to Angular for 404 handling
+        next();
+      } else if (response.status === 200) {
+        return response.json().then((data) => {
+          if (data) {
+            const route = computeDSORoute(data);
+            if (route) {
+              const nameSpace = (environment.ui.nameSpace || '').replace(/\/$/, '');
+              res.redirect(301, `${nameSpace}${route}`);
+            } else {
+              // Unknown DSO type — fall through to Angular for error handling
+              next();
+            }
+          } else {
+            next();
+          }
+        });
       } else {
         next();
       }
     })
     .catch((error) => {
-      if (error?.response?.status === 410) {
-        const nameSpace = (environment.ui.nameSpace || '').replace(/\/$/, '');
-        res.redirect(302, `${nameSpace}/handle/object-gone`);
-      } else if (error?.response?.status === 404) {
-        // Not found — fall through to Angular for 404 handling
-        next();
-      } else {
-        console.warn(`[handleResolve] REST call failed for handle "${handleSegments}":`, error?.message);
-        // Fall through to Angular SSR as a safety net
-        next();
-      }
+      console.warn(`[handleResolve] REST call failed for handle "${handleSegments}":`, error?.message);
+      // Fall through to Angular SSR as a safety net
+      next();
     });
 }
 
@@ -847,16 +850,18 @@ function redirectManifest(req, res) {
   if (match) {
     handle = match[1];
     const baseUrl = `${environment.rest.baseUrl}/api/pid/find?id=${handle}`;
-    axios.get(baseUrl)
+    fetch(baseUrl)
       .then((response) => {
         if (response.status === 200) {
-          const newUrl = `${environment.rest.baseUrl}/iiif/${response.data.id}/manifest`;
-          console.info('Manifest found, redirect to ', newUrl);
-          res.redirect(newUrl);
+          return response.json().then((data) => {
+            const newUrl = `${environment.rest.baseUrl}/iiif/${data.id}/manifest`;
+            console.info('Manifest found, redirect to ', newUrl);
+            res.redirect(newUrl);
+          });
         }
       })
       .catch((error) => {
-        res.status(error.response.status).send({
+        res.status(error?.response?.status || 503).send({
           error: error.message
         });
       });
