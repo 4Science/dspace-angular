@@ -172,9 +172,9 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
     return waitForEntry$.pipe(
       switchMap((hasErrors) => {
         if (hasErrors) {
-          return this.searchByObjectAndMatchFeature(featureId, objectKey);
+          return this.searchByObjectAndMatchFeature(featureId, dso.self);
         }
-        return this.authorizationService.getAuthorizationForObject(featureId, dso.self).pipe(
+        return this.authorizationService.getAuthorizationForObject(featureId, objectKey).pipe(
           take(1),
           switchMap((authorization) => {
             if (authorization !== undefined) {

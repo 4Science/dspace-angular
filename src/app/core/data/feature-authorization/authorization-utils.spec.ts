@@ -1,4 +1,4 @@
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
@@ -55,7 +55,7 @@ describe('authorization-utils', () => {
       const authorizations = [
         grantedAuthorization('eperson_canEditItem_submission.workspaceitem_701', FeatureID.CanEditItem),
       ];
-      observableOf(authorizations).pipe(
+      of(authorizations).pipe(
         getAuthorizationFeaturesIDs([FeatureID.CanEditItem], ['701']),
         take(1),
       ).subscribe((state) => {
@@ -68,7 +68,7 @@ describe('authorization-utils', () => {
       const authorizations = [
         grantedAuthorization('eperson_canEditItem_submission.workspaceitem_701', FeatureID.CanEditItem),
       ];
-      observableOf(authorizations).pipe(
+      of(authorizations).pipe(
         getAuthorizationFeaturesIDs([FeatureID.CanEditItem], ['701', '698']),
         take(1),
       ).subscribe((state) => {
@@ -80,7 +80,7 @@ describe('authorization-utils', () => {
     });
 
     it('should seed all requested keys as not granted when the response is empty', (done) => {
-      observableOf([] as Authorization[]).pipe(
+      of([] as Authorization[]).pipe(
         getAuthorizationFeaturesIDs([FeatureID.CanEditItem], ['701', '698']),
         take(1),
       ).subscribe((state) => {
