@@ -18,6 +18,7 @@ import {
 import {
   hasNoValue,
   hasValue,
+  isEmpty,
   isNotEmpty,
 } from '../../../shared/empty.util';
 import { AuthService } from '../../auth/auth.service';
@@ -111,45 +112,38 @@ export const oneAuthorizationMatchesFeature = (featureID: FeatureID) =>
  * this observable will always emit false.
  * @returns a list to {@link Feature}s IDs.
  */
-export const getAuthorizationFeaturesIDs = (featureIDs: FeatureID[], hrefs: string[], singleObject = false) =>
+export const getAuthorizationFeaturesIDs = (featureIDs: FeatureID[], keys: string[]) =>
   (source: Observable<Authorization[]>): Observable<ObjectAuthorizationsState> =>
     source.pipe(
       switchMap((authorizations: Authorization[]) => {
         let objectToFeaturesMap = {};
         if (isNotEmpty(authorizations)) {
-          if (singleObject) {
-            const href = hrefs[0];
-            return combineLatest([
-              ...authorizations.map(auth => auth.feature.pipe(getFirstCompletedRemoteData(), take(1))),
-            ]).pipe(
-              map((data) => {
-                const features = data.map(rd => rd.payload).filter(dso => dso instanceof Feature) as Feature[];
-                return {
-                  [href]: getFeatureIdToBooleanMap(featureIDs, features),
-                };
-              }),
-            );
-          }
           return combineLatest([
-            ...authorizations.map(auth => auth.object.pipe(getFirstCompletedRemoteData(),take(1))),
-            ...authorizations.map(auth => auth.feature.pipe(getFirstCompletedRemoteData(),take(1))),
+            ...authorizations.map(auth => auth.feature.pipe(getFirstCompletedRemoteData(), take(1)).pipe(
+              map((rd) => ({ key: getAuthorizationObjectKey(auth.id), feature: rd.payload })),
+            )),
           ]).pipe(
             map((data) => {
-              const features = data.map(rd => rd.payload).filter(dso => dso instanceof Feature) as Feature[];
-              const objects = data.map(rd => rd.payload).filter(dso => !(dso instanceof Feature));
-
-              objects.forEach(object => {
+              const featuresByKey = new Map<string, Feature[]>();
+              data.forEach(({ key, feature }) => {
+                if (hasValue(key) && feature instanceof Feature) {
+                  const existing = featuresByKey.get(key) ?? [];
+                  featuresByKey.set(key, [...existing, feature]);
+                }
+              });
+              const allKeys = new Set<string>([...(keys ?? []), ...featuresByKey.keys()]);
+              allKeys.forEach((key) => {
                 objectToFeaturesMap = Object.assign({}, objectToFeaturesMap, {
-                  [object.self]: getFeatureIdToBooleanMap(featureIDs, features),
+                  [key]: getFeatureIdToBooleanMap(featureIDs, featuresByKey.get(key) ?? []),
                 });
               });
               return objectToFeaturesMap;
             }),
           );
         } else {
-          hrefs.forEach(href => {
+          keys.forEach(key => {
             objectToFeaturesMap = Object.assign({}, objectToFeaturesMap, {
-              [href]: getFeatureIdToBooleanMap(featureIDs, []),
+              [key]: getFeatureIdToBooleanMap(featureIDs, []),
             });
           });
           return of(objectToFeaturesMap);
@@ -181,6 +175,28 @@ export const getFeatureIdToBooleanMap = (featureIDs: FeatureID[], features: Feat
 export const getNormalizedUuid = (dso: DSpaceObject): string => {
   return dso.type.toString() === 'workspaceitem' || dso.type.toString() === 'workflowitem' ?
     dso.uuid.split('-')[1] : dso.uuid;
+};
+
+
+/**
+ * Derive the store key for an {@link Authorization} from its id.
+ *
+ * The part after the last `.` is the `itemType_id`; the key we use to index
+ * the authorization store is the trailing `id`. This matches {@link getNormalizedUuid}.
+ *
+ * @param authorizationId the {@link Authorization} id as returned by the REST API
+ * @returns the id used as the authorization store key, or `undefined` when it cannot be derived
+ */
+export const getAuthorizationObjectKey = (authorizationId: string): string => {
+  if (isEmpty(authorizationId)) {
+    return undefined;
+  }
+  const itemTypeId = authorizationId.includes('.')
+    ? authorizationId.substring(authorizationId.lastIndexOf('.') + 1)
+    : authorizationId;
+  return itemTypeId.includes('_')
+    ? itemTypeId.substring(itemTypeId.lastIndexOf('_') + 1)
+    : itemTypeId;
 };
 
 

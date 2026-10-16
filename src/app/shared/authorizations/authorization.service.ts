@@ -17,6 +17,7 @@ import {
 } from 'src/app/shared/authorizations/authorization.interfaces';
 
 import { AppState } from '../../app.reducer';
+import { getNormalizedUuid } from '../../core/data/feature-authorization/authorization-utils';
 import { FeatureID } from '../../core/data/feature-authorization/feature-id';
 import { SiteDataService } from '../../core/data/site-data.service';
 import { Site } from '../../core/shared/site.model';
@@ -62,20 +63,20 @@ export class AuthorizationService {
   ) {}
 
 
-  initStateForObjects(uuidList: string[], type: string, featureIDs: FeatureID[], hrefs: string[], singleObject = false) {
-    this.store.dispatch(new GetAuthorizationsAction(uuidList, type, featureIDs, hrefs, singleObject));
+  initStateForObjects(uuidList: string[], type: string, featureIDs: FeatureID[], keys: string[]) {
+    this.store.dispatch(new GetAuthorizationsAction(uuidList, type, featureIDs, keys));
   }
 
   initStateForSite(featureIDs: FeatureID[]) {
     this.siteService.find().pipe(
       take(1),
-    ).subscribe((site: Site) => this.initStateForObjects([site.uuid], site.uniqueType, featureIDs, [site.self], true));
+    ).subscribe((site: Site) => this.initStateForObjects([site.uuid], site.uniqueType, featureIDs, [getNormalizedUuid(site)]));
   }
 
   initAnonymousStateForSite() {
     this.siteService.find().pipe(
       take(1),
-    ).subscribe((site: Site) => this.initStateForObjects([site.uuid], site.uniqueType, [], [site.self], true));
+    ).subscribe((site: Site) => this.initStateForObjects([site.uuid], site.uniqueType, [], [getNormalizedUuid(site)]));
   }
 
 
@@ -87,11 +88,11 @@ export class AuthorizationService {
   }
 
 
-  getAuthorizationForObject(featureId: FeatureID, objectUrl: string): Observable<boolean> {
+  getAuthorizationForObject(featureId: FeatureID, objectKey: string): Observable<boolean> {
     return this.getAllAuthorizationsState().pipe(
       map(state => {
         if (hasValue(state)) {
-          return objectUrl && state[objectUrl] ? state[objectUrl][featureId] : undefined;
+          return objectKey && state[objectKey] ? state[objectKey][featureId] : undefined;
         }
         return undefined;
       }),
@@ -99,11 +100,11 @@ export class AuthorizationService {
     );
   }
 
-  hasAuthorizationEntryForObject(objectUrl: string): Observable<boolean> {
+  hasAuthorizationEntryForObject(objectKey: string): Observable<boolean> {
     return this.getAllAuthorizationsState().pipe(
       map(state => {
         if (hasValue(state)) {
-          return hasValue(state[objectUrl]);
+          return hasValue(state[objectKey]);
         }
         return false;
       }),

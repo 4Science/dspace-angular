@@ -30,7 +30,10 @@ import {
 import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { SearchObjects } from '../../shared/search/models/search-objects.model';
 import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
-import { getRequestIdFromParams } from '../data/feature-authorization/authorization-utils';
+import {
+  getNormalizedUuid,
+  getRequestIdFromParams,
+} from '../data/feature-authorization/authorization-utils';
 import { FeatureID } from '../data/feature-authorization/feature-id';
 import { ItemDataService } from '../data/item-data.service';
 import { PaginatedList } from '../data/paginated-list.model';
@@ -147,8 +150,8 @@ export class SearchManager {
     [...uiidListsMappedToAuthorizations.keys()].forEach((features) => {
       const uuidList = uiidListsMappedToAuthorizations.get(features);
       const type = objects.find(object => object.id === uuidList[0]).uniqueType;
-      const hrefs = objects.map(dso => dso.self);
-      this.authorizationService.initStateForObjects(uuidList, type, features, hrefs);
+      const keys = objects.map(dso => getNormalizedUuid(dso));
+      this.authorizationService.initStateForObjects(uuidList, type, features, keys);
       requestsIds.push(getRequestIdFromParams(type, uuidList, features));
     });
 

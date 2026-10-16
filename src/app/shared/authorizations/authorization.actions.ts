@@ -33,16 +33,14 @@ export class GetAuthorizationsAction extends AbstractAuthorizationAction {
     uuidList: string[],
     uniqueType: string,
     featureIDs: FeatureID[],
-    hrefs: string[],
-    singleObject = false,
+    keys: string[],
   ) {
     super();
     this.payload = {
       uuidList,
       type: uniqueType,
       featureIDs,
-      hrefs,
-      singleObject,
+      keys,
     };
   }
 }
