@@ -30,10 +30,7 @@ import {
 import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { SearchObjects } from '../../shared/search/models/search-objects.model';
 import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
-import {
-  getNormalizedUuid,
-  getRequestIdFromParams,
-} from '../data/feature-authorization/authorization-utils';
+import { getNormalizedUuid } from '../data/feature-authorization/authorization-utils';
 import { FeatureID } from '../data/feature-authorization/feature-id';
 import { ItemDataService } from '../data/item-data.service';
 import { PaginatedList } from '../data/paginated-list.model';
@@ -144,23 +141,24 @@ export class SearchManager {
       return of(searchObjects);
     }
 
-    const requestsIds = [];
+    const objectKeys: string[] = objects.map(dso => getNormalizedUuid(dso));
 
     const uiidListsMappedToAuthorizations = this.groupItemsUuidsByAuthorizations(objects, mappedObjects);
     [...uiidListsMappedToAuthorizations.keys()].forEach((features) => {
       const uuidList = uiidListsMappedToAuthorizations.get(features);
       const type = objects.find(object => object.id === uuidList[0]).uniqueType;
-      const keys = objects.map(dso => getNormalizedUuid(dso));
-      this.authorizationService.initStateForObjects(uuidList, type, features, keys);
-      requestsIds.push(getRequestIdFromParams(type, uuidList, features));
+      this.authorizationService.initStateForObjects(uuidList, type, features, objectKeys);
     });
+    const entriesReady$ = combineLatest(
+      objectKeys.map(key => this.authorizationService.hasAuthorizationEntryForObject(key)),
+    ).pipe(
+      map(entries => entries.every(present => present)),
+    );
 
-    return combineLatest(requestsIds.map(id => this.authorizationService.isRequestLoading(id))).pipe(
-      filter(loadingItems => loadingItems.every(loading => !loading)),
+    return combineLatest([entriesReady$, this.authorizationService.hasErrors()]).pipe(
+      filter(([entriesReady, hasErrors]) => entriesReady || hasErrors),
       take(1),
-      map(() => {
-        return searchObjects;
-      }),
+      map(() => searchObjects),
     );
   }
 
