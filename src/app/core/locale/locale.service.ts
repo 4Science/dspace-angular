@@ -193,6 +193,9 @@ export class LocaleService implements OnDestroy {
     if (isEmpty(lang)) {
       this.subs.push(this.getCurrentLanguageCode().subscribe(curLang => {
         lang = curLang;
+        if (!this._window?.nativeWindow?.Cypress) {
+          this.saveLanguageCodeToCookie(lang);
+        }
         this.translate.use(lang);
         this.document.documentElement.lang = lang;
       }));

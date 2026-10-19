@@ -209,6 +209,7 @@ describe('LocaleService test suite', () => {
         spyOn(service, 'getCurrentLanguageCode').and.returnValue(of('es'));
         service.setCurrentLanguageCode();
         expect(translateService.use).toHaveBeenCalledWith('es');
+        expect(service.saveLanguageCodeToCookie).toHaveBeenCalledWith('es');
       });
 
       it('should set the current language on the html tag', () => {

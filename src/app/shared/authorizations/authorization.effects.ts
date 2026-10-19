@@ -39,6 +39,8 @@ export class AuthorizationEffects {
           null,
           action.payload.hrefs,
           true,
+          true,
+          action.payload.singleObject,
         ).pipe(
           catchError(() => of(new GetAuthorizationsErrorAction())),
           map((authorizationsMap) => {

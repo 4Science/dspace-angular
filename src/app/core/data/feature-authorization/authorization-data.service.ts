@@ -183,6 +183,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
               dso.uniqueType,
               [featureId],
               [dso.self],
+              isSite,
             );
             // Wait for loading to complete, then read authorization again
             return this.authorizationService.isRequestLoading(requestId).pipe(
@@ -225,10 +226,13 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    *                                    requested after the response becomes stale
    * @param useCachedVersionIfAvailable
    * @param reRequestOnStale
+   * @param singleObject                When true, the request targets a single known object (e.g. the
+   *                                    repository's {@link Site}). In that case the embedded `object` link is
+   *                                    not resolved and the resulting map is keyed by the provided href directly.
    */
-  getAuthorizationForObjects(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, hrefs?: string[], useCachedVersionIfAvailable: boolean = true, reRequestOnStale: boolean = true): Observable<ObjectAuthorizationsState> {
-    return this.searchObjectsAuthorizations(uuidList,  type, featuresId, ePersonUuid, useCachedVersionIfAvailable, reRequestOnStale).pipe(
-      getAuthorizationFeaturesIDs(featuresId, hrefs),
+  getAuthorizationForObjects(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, hrefs?: string[], useCachedVersionIfAvailable: boolean = true, reRequestOnStale: boolean = true, singleObject: boolean = false): Observable<ObjectAuthorizationsState> {
+    return this.searchObjectsAuthorizations(uuidList,  type, featuresId, ePersonUuid, useCachedVersionIfAvailable, reRequestOnStale, singleObject).pipe(
+      getAuthorizationFeaturesIDs(featuresId, hrefs, singleObject),
     );
   }
 
@@ -243,11 +247,15 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    * @param reRequestOnStale
    * @private
    */
-  searchObjectsAuthorizations(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<Authorization[]> {
-    const followLinks = [
-      followLink<Authorization>('object'),
-      followLink<Authorization>('feature'),
-    ];
+  searchObjectsAuthorizations(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true, singleObject = false): Observable<Authorization[]> {
+    const followLinks = singleObject
+      ? [
+        followLink<Authorization>('feature'),
+      ]
+      : [
+        followLink<Authorization>('object'),
+        followLink<Authorization>('feature'),
+      ];
 
     return this.searchByObjects(uuidList, type, featuresId, ePersonUuid, {}, useCachedVersionIfAvailable, reRequestOnStale, ...followLinks).pipe(
       getFirstCompletedRemoteData(),
