@@ -3,6 +3,7 @@
 }
 
 @if (reports) {
+  @let selectedReport = selectedReport$ | async;
   <div class="container">
     <div class="row">
       <div class="col-md-12 mb-40">
@@ -18,13 +19,13 @@
             </li>
           }
         </ul>
-        @if (!selectedReport || !selectedFullReport) {
+        @if (!selectedReport || (selectedFullReport | async) === null || (selectedFullReport | async) === undefined) {
           <ds-loading></ds-loading>
         }
-        @if (selectedReport && selectedFullReport) {
+        @if (selectedReport && (selectedFullReport | async) !== null) {
           <ds-statistics-chart-wrapper [type]="selectedReport.viewMode"
                                        [categoryType]="categoryType"
-                                       [report]="selectedFullReport">
+                                       [report]="selectedFullReport | async">
           </ds-statistics-chart-wrapper>
         }
       </div>

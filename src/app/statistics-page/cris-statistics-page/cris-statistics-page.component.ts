@@ -59,6 +59,7 @@ import { SiteDataService } from '../../core/data/site-data.service';
 import { redirectOn4xx } from '../../core/shared/authorized.operators';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
 import {
+  getFirstCompletedRemoteData,
   getFirstSucceededRemoteData,
   getRemoteDataPayload,
 } from '../../core/shared/operators';
@@ -149,8 +150,7 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
   /**
    * The fully loaded report (with points) for the currently selected chart report.
    */
-  private selectedFullReportSubject = new BehaviorSubject<UsageReport | null>(null);
-  selectedFullReport$ = this.selectedFullReportSubject.asObservable();
+  protected selectedFullReport$ = new BehaviorSubject<UsageReport | null>(null);
 
   constructor(
     protected route: ActivatedRoute,
@@ -255,14 +255,13 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
    * @param reportType
    */
   getUserReports(category, reportType = this.route?.snapshot?.queryParams?.reportType) {
-    this.reports$ =
-      of(category)
-        .pipe(
-          switchMap(c => c == null ? [] : this.getReports$(c.id)),
-        );
+    this.selectedFullReport$.next(null);
+    this.reports$ = of(category).pipe(
+      switchMap(c => c == null ? [] : this.getReports$(c.id)),
+    );
     combineLatest([
       this.reports$, this.getReportId(), this.getCategoryId(),
-    ]).subscribe(([report, reportId, categoryId]) => {
+    ]).pipe(switchMap(([report, reportId, categoryId]) => {
       if (!reportId && !categoryId) {
         let reportToShowId = report[0].id;
         if (reportType) {
@@ -276,7 +275,11 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
       } else {
         this.setStatisticsState(reportId, categoryId);
       }
-      this.loadFullReport(this.selectedReportId || reportId || report[0]?.id);
+      const availableReportId = this.selectedReportId || reportId || report[0]?.id;
+      return combineLatest([this.loadFullReport(availableReportId), of(availableReportId)]);
+    }),
+    ).subscribe(([fullReport, reportId]: [UsageReport, string]) => {
+      this.setReportId(fullReport, reportId);
     });
   }
 
@@ -338,58 +341,52 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
    * @param reportId
    */
   changeReport(reportId: string) {
-    this.getCategoryId().subscribe((categoryId) => {
-      this.setStatisticsState(reportId, categoryId);
-      this.selectedReportId = reportId;
-      this.loadFullReport(reportId);
-    });
+    this.selectedFullReport$.next(null);
+    this.getCategoryId()
+      .pipe(switchMap((categoryId) => combineLatest([this.loadFullReport(reportId), of(categoryId)])))
+      .subscribe(([fullReport, categoryId]: [UsageReport, string]) => {
+        this.setStatisticsState(reportId, categoryId);
+        this.selectedReportId = reportId;
+        this.setReportId(fullReport, reportId);
+      });
   }
 
   /**
    * Load the full report (with points) for the given report id via findOne.
    * @param reportId the composite id (uuid_reportKey)
    */
-  loadFullReport(reportId: string) {
+  loadFullReport(reportId: string): Observable<UsageReport|null> {
     if (!reportId) {
       this.currentReportId = null;
-      this.selectedFullReportSubject.next(null);
-      return;
+      return of(null);
     }
     this.currentReportId = reportId;
     const cachedReport = this.fullReportCache.get(reportId);
     if (cachedReport) {
-      this.selectedFullReportSubject.next(cachedReport);
-      return;
+      return of(cachedReport);
     }
-    this.selectedFullReportSubject.next(null);
-    let request$ = this.inFlightRequests.get(reportId);
-    if (!request$) {
-      request$ = this.usageReportService.findById(reportId, false, true).pipe(
-        getFirstSucceededRemoteData(),
+
+    let fullReport$: Observable<UsageReport> = this.inFlightRequests.get(reportId);
+    if (!fullReport$) {
+      fullReport$ = this.usageReportService.findById(reportId, false, true).pipe(
+        getFirstCompletedRemoteData(),
         getRemoteDataPayload(),
-        take(1),
         shareReplay({ bufferSize: 1, refCount: true }),
         finalize(() => {
           this.inFlightRequests.delete(reportId);
         }),
       );
-      this.inFlightRequests.set(reportId, request$);
+      this.inFlightRequests.set(reportId, fullReport$);
     }
-    request$.subscribe((fullReport: UsageReport) => {
-      if (fullReport) {
-        this.fullReportCache.set(reportId, fullReport);
-      }
-      if (reportId === this.currentReportId) {
-        this.selectedFullReportSubject.next(fullReport);
-      }
-    });
+    return fullReport$;
+
   }
 
   private clearFullReportCache() {
     this.fullReportCache.clear();
     this.inFlightRequests.clear();
     this.currentReportId = null;
-    this.selectedFullReportSubject.next(null);
+    this.selectedFullReport$.next(null);
   }
 
   /**
@@ -412,6 +409,15 @@ export class CrisStatisticsPageComponent implements OnInit, OnDestroy {
       select(getCategoryId),
       take(1),
     );
+  }
+
+  private setReportId(report: UsageReport, reportId) {
+    if (report) {
+      this.fullReportCache.set(reportId, report);
+    }
+    if (reportId === this.currentReportId) {
+      this.selectedFullReport$.next(report);
+    }
   }
 
   /**

@@ -16,6 +16,7 @@ import { UsageReport } from '@dspace/core/statistics/models/usage-report.model';
 import { USAGE_REPORT } from '@dspace/core/statistics/models/usage-report.resource-type';
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
+import { BehaviorSubject } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
 import { ThemedLoadingComponent } from '../../../shared/loading/themed-loading.component';
@@ -218,14 +219,14 @@ describe('StatisticsChartComponent', () => {
     component.reports = reports;
     component.selectedReportId = '1911e8a4-6939-490c-b58b-a5d70f8d91fb_TotalVisits';
     component.ngOnInit();
-    expect(component.selectedReport.id).toBe('1911e8a4-6939-490c-b58b-a5d70f8d91fb_TotalVisits');
+    expect(component.selectedReport$.value.id).toBe('1911e8a4-6939-490c-b58b-a5d70f8d91fb_TotalVisits');
   });
 
   it('should set selectedReport to the first report if selectedReportId does not match any report', () => {
     component.reports = reports;
     component.selectedReportId = 'non_existing_id';
     component.ngOnInit();
-    expect(component.selectedReport.id).toBe('1911e8a4-6939-490c-b58b-a5d70f8d91fb_TotalVisits');
+    expect(component.selectedReport$.value.id).toBe('1911e8a4-6939-490c-b58b-a5d70f8d91fb_TotalVisits');
   });
 
   it('should emit changeReportEvent with the first report id if selectedReportId does not match any report', () => {
@@ -244,23 +245,23 @@ describe('StatisticsChartComponent', () => {
     expect(component.addQueryParams).toHaveBeenCalledWith('TotalVisits');
   });
 
-  it('should not set selectedReport if reports is undefined', () => {
+  it('should not set selectedReport if reports is null', () => {
     component.reports = undefined;
     component.ngOnInit();
-    expect(component.selectedReport).toBeUndefined();
+    expect(component.selectedReport$.value).toBeNull();
   });
 
   it('should not set selectedReport if reports is empty', () => {
     component.reports = [];
     component.ngOnInit();
-    expect(component.selectedReport).toBeUndefined();
+    expect(component.selectedReport$.value).toBeNull();
   });
 
   it('should update selectedReport and emit changeReportEvent on changeReport', () => {
     spyOn(component.changeReportEvent, 'emit');
     const newReport = reports[1];
     component.changeReport(newReport);
-    expect(component.selectedReport).toBe(newReport);
+    expect(component.selectedReport$.value).toBe(newReport);
     expect(component.changeReportEvent.emit).toHaveBeenCalledWith(newReport.id);
   });
 
@@ -269,6 +270,32 @@ describe('StatisticsChartComponent', () => {
     const newReport = reports[1];
     component.changeReport(newReport);
     expect(component.addQueryParams).toHaveBeenCalledWith(newReport.reportType);
+  });
+
+  it('should show ds-loading while selectedFullReport observable has not emitted a report yet', () => {
+    component.reports = reports;
+    component.selectedReportId = reports[0].id;
+    component.selectedFullReport = new BehaviorSubject<UsageReport>(null);
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    expect(de.query(By.css('ds-loading'))).toBeTruthy();
+    expect(de.query(By.css('ds-statistics-chart-wrapper'))).toBeNull();
+  });
+
+  it('should show ds-statistics-chart-wrapper once selectedFullReport observable emits a report', () => {
+    component.reports = reports;
+    component.selectedReportId = reports[0].id;
+    const selectedFullReportSubject = new BehaviorSubject<UsageReport>(null);
+    component.selectedFullReport = selectedFullReportSubject;
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    selectedFullReportSubject.next(reports[0]);
+    fixture.detectChanges();
+
+    expect(de.query(By.css('ds-loading'))).toBeNull();
+    expect(de.query(By.css('ds-statistics-chart-wrapper'))).toBeTruthy();
   });
 
 });
