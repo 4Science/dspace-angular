@@ -71,12 +71,13 @@
 
               <div>
                 <ds-statistics-chart *ngIf="!!selectedCategory"
-                (changeReportEvent)="changeReport($event)"
-                [categoryType]="categoryType"
-                [category]="selectedCategory"
-                [reports]="reports"
-                [selectedReportId]="selectedReportId"
-                [selectedFullReport]="selectedFullReport$ | async"></ds-statistics-chart>
+                  (changeReportEvent)="changeReport($event)"
+                  [categoryType]="categoryType"
+                  [category]="selectedCategory"
+                  [reports]="reports"
+                  [selectedReportId]="selectedReportId"
+                  [selectedFullReport]="selectedFullReport$">
+                </ds-statistics-chart>
               </div>
 
             </ng-container>
