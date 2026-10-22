@@ -15177,6 +15177,10 @@
   // TODO New key - Add a translation
   "form.other-information.selection.alternative-names": "Select alternative name",
 
+  // "form.other-information.dc_title": "Title",
+  // TODO New key - Add a translation
+  "form.other-information.dc_title": "Titolo",
+
   // "meta.tag.missing.description": "No description available",
   // TODO New key - Add a translation
   "meta.tag.missing.description": "No description available",
