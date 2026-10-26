@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import {
+  EMPTY,
   Observable,
   of,
 } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
+import { getResourceTypeValueFor } from '../../../core/cache/object-cache.reducer';
+import { CollectionDataService } from '../../../core/data/collection-data.service';
 import { ItemDataService } from '../../../core/data/item-data.service';
 import { Collection } from '../../../core/shared/collection.model';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { Item } from '../../../core/shared/item.model';
 import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
+import { ITEM_TEMPLATE } from '../../../core/shared/template-item.resource-type';
 import { Vocabulary } from '../../../core/submission/vocabularies/models/vocabulary.model';
 import { VocabularyService } from '../../../core/submission/vocabularies/vocabulary.service';
 import { isNotEmpty } from '../../../shared/empty.util';
@@ -26,6 +30,7 @@ export class DsoEditMetadataFieldService {
 
   constructor(
     protected itemService: ItemDataService,
+    protected collectionService: CollectionDataService,
     protected vocabularyService: VocabularyService,
   ) {
   }
@@ -38,13 +43,7 @@ export class DsoEditMetadataFieldService {
    */
   findDsoFieldVocabulary(dso: DSpaceObject, mdField: string): Observable<Vocabulary> {
     if (isNotEmpty(mdField)) {
-      const owningCollection$: Observable<Collection> = this.itemService.findByHref(dso._links.self.href, true, true, followLink('owningCollection')).pipe(
-        getFirstSucceededRemoteDataPayload(),
-        switchMap((item: Item) => item.owningCollection),
-        getFirstSucceededRemoteDataPayload(),
-      );
-
-      return owningCollection$.pipe(
+      return this.findRelatedCollection(dso).pipe(
         switchMap((c: Collection) => this.vocabularyService.getVocabularyByMetadataAndCollection(mdField, c.uuid).pipe(
           getFirstSucceededRemoteDataPayload(),
         )),
@@ -52,5 +51,22 @@ export class DsoEditMetadataFieldService {
     } else {
       return of(undefined);
     }
+  }
+
+  protected findRelatedCollection(dso: DSpaceObject): Observable<Collection> {
+    if (getResourceTypeValueFor(dso?.type) === ITEM_TEMPLATE.value) {
+      const href = (dso as Item)._links?.templateItemOf?.href;
+      if (isNotEmpty(href)) {
+        return this.collectionService.findByHref(href, true, true)
+                                     .pipe(getFirstSucceededRemoteDataPayload());
+      }
+      return EMPTY;
+    }
+
+    return this.itemService.findByHref(dso._links.self.href, true, true, followLink('owningCollection')).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      switchMap((item: Item) => item.owningCollection),
+      getFirstSucceededRemoteDataPayload(),
+    );
   }
 }
