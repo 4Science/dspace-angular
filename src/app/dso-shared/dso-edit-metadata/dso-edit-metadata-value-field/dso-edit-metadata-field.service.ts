@@ -57,8 +57,9 @@ export class DsoEditMetadataFieldService {
     if (getResourceTypeValueFor(dso?.type) === ITEM_TEMPLATE.value) {
       const href = (dso as Item)._links?.templateItemOf?.href;
       if (isNotEmpty(href)) {
-        return this.collectionService.findByHref(href, true, true)
-                                     .pipe(getFirstSucceededRemoteDataPayload());
+        return this.collectionService.findByHref(href, true, true).pipe(
+          getFirstSucceededRemoteDataPayload(),
+        );
       }
       return EMPTY;
     }
