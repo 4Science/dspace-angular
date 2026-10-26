@@ -2817,6 +2817,14 @@
 
   "form.group.set": "Set",
 
+  "form.group-collapse": "Collapse",
+
+  "form.group-collapse-help": "Click here to collapse",
+
+  "form.group-expand": "Expand",
+
+  "form.group-expand-help": "Click here to expand and add more elements",
+
   "form.last-name": "Last name",
 
   "form.loading": "Loading...",
@@ -4590,9 +4598,21 @@
 
   "menu.section.explore_orgunits": "Organizations",
 
+  "menu.section.browse_global": "All of DSpace",
+
+  "menu.section.browse_global_by_author": "By Author",
+
+  "menu.section.browse_global_by_dateissued": "By Issue Date",
+
+  "menu.section.browse_global_by_subject": "By Subject",
+
   "menu.section.browse_global_by_srsc": "By Subject Category",
 
   "menu.section.browse_global_by_nsi": "By Norwegian Science Index",
+
+  "menu.section.browse_global_by_title": "By Title",
+
+  "menu.section.browse_global_communities_and_collections": "Communities & Collections",
 
   "menu.section.browse_global_by_nsi": "By Norwegian Science Index",
 
@@ -5430,7 +5450,6 @@
   "profile.title": "Update Profile",
 
   "profile.card.researcher": "Researcher Profile",
-
 
   "project.listelement.badge": "Research Project",
 
@@ -6347,7 +6366,6 @@
   "search.sidebar.show.hide.charts.tooltip": "Show/Hide charts",
 
 
-
   "search.view-switch.show-detail": "Show detail",
 
   "search.view-switch.show-grid": "Show as grid",
@@ -6961,8 +6979,6 @@
 
   "submission.import-external.preview.error.import.body": "An error occurs during the external source entry import process.",
 
-
-
   "submission.sections.correction.bitstream.operation.add": "Bitstream added",
 
   "submission.sections.correction.bitstream.operation.modify": "Bitstream modified",
@@ -7525,6 +7541,8 @@
 
   "submission.sections.submit.progressbar.license": "Deposit license",
 
+  "submission.sections.submit.progressbar.opfpolicy": "Publisher open access policy information",
+
   "submission.sections.submit.progressbar.opfPolicies": "Jisc Open Policy Finder policies",
 
   "submission.sections.submit.progressbar.upload": "Upload files",
@@ -7739,7 +7757,7 @@
 
   "submission.sections.jisc.error.message": "There was an error retrieving Jisc Open policy finder information",
 
-  "submission.sections.sherpa.error.message": "There was an error retrieving sherpa information",
+  "submission.sections.jisc.error.message": "There was an error retrieving Jisc Open policy finder information",
 
   "submission.submit.breadcrumbs": "New submission",
 
