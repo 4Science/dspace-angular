@@ -6860,6 +6860,27 @@
   // "itemtemplate.edit.metadata.save-button": "Save",
   "itemtemplate.edit.metadata.save-button": "Salva",
 
+  // "itemtemplate.edit.metadata.authority.label": "Authority: ",
+  "itemtemplate.edit.metadata.authority.label": "Authority: ",
+
+  // "itemtemplate.edit.metadata.edit.authority.key": "Edit authority key",
+  "itemtemplate.edit.metadata.edit.authority.key": "Modifica la chiave di authority",
+
+  // "itemtemplate.edit.metadata.edit.buttons.open-authority-edition": "Unlock the authority key value for manual editing",
+  "itemtemplate.edit.metadata.edit.buttons.open-authority-edition": "Sblocca il valore della chiave di authority per la modifica manuale",
+
+  // "itemtemplate.edit.metadata.edit.buttons.close-authority-edition": "Lock the authority key value for manual editing",
+  "itemtemplate.edit.metadata.edit.buttons.close-authority-edition": "Blocca il valore della chiave di authority per la modifica manuale",
+
+  // "itemtemplate.edit.metadata.edit.buttons.enable-free-text-editing": "Enable free-text editing",
+  "itemtemplate.edit.metadata.edit.buttons.enable-free-text-editing": "Abilita la modifica a testo libero",
+
+  // "itemtemplate.edit.metadata.edit.buttons.disable-free-text-editing": "Disable free-text editing",
+  "itemtemplate.edit.metadata.edit.buttons.disable-free-text-editing": "Disabilita la modifica a testo libero",
+
+  // "itemtemplate.edit.metadata.edit.buttons.virtual": "This is a virtual metadata value, i.e. a value inherited from a related entity. It can’t be modified directly.",
+  "itemtemplate.edit.metadata.edit.buttons.virtual": "Si tratta di un valore virtuale di metadati, cioè un valore ereditato da un'entità correlata. Non può essere modificato direttamente.",
+
   // "journal.listelement.badge": "Journal",
   "journal.listelement.badge": "Periodico",
 
