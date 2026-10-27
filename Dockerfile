@@ -1,7 +1,7 @@
 # This image will be published as dspace/dspace-angular
 # See https://github.com/DSpace/dspace-angular/tree/main/docker for usage details
 
-ARG NODE_VERSION=22
+ARG NODE_VERSION=22.23.4
 ARG DSPACE_VERSION=dspace-cris-2024_02_x
 ARG DOCKER_REGISTRY=docker.io
 
