@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { RemoteDataBuildService } from '../../../../core/cache/builders/remote-data-build.service';
 import { ObjectCacheService } from '../../../../core/cache/object-cache.service';
+import { CollectionDataService } from '../../../../core/data/collection-data.service';
 import { ItemDataService } from '../../../../core/data/item-data.service';
 import { RequestService } from '../../../../core/data/request.service';
 import { MetadataField } from '../../../../core/metadata/metadata-field.model';
@@ -40,6 +41,7 @@ describe('DsoEditMetadataAuthorityFieldComponent', () => {
 
   let vocabularyService: any;
   let itemService: ItemDataService;
+  let collectionService: CollectionDataService;
   let registryService: RegistryService;
   let notificationsService: NotificationsService;
 
@@ -136,6 +138,9 @@ describe('DsoEditMetadataAuthorityFieldComponent', () => {
     itemService = jasmine.createSpyObj('itemService', {
       findByHref: createSuccessfulRemoteDataObject$(item),
     });
+    collectionService = jasmine.createSpyObj('collectionService', {
+      findByHref: createSuccessfulRemoteDataObject$(collection),
+    });
     vocabularyService = new VocabularyServiceStub();
     registryService = jasmine.createSpyObj('registryService', {
       queryMetadataFields: createSuccessfulRemoteDataObject$(createPaginatedList(metadataFields)),
@@ -176,6 +181,7 @@ describe('DsoEditMetadataAuthorityFieldComponent', () => {
       providers: [
         { provide: VocabularyService, useValue: vocabularyService },
         { provide: ItemDataService, useValue: itemService },
+        { provide: CollectionDataService, useValue: collectionService },
         { provide: RegistryService, useValue: registryService },
         { provide: NotificationsService, useValue: notificationsService },
         { provide: RemoteDataBuildService, useValue: getMockRemoteDataBuildService() },
