@@ -138,6 +138,31 @@ export const DECORATORS: DecoratorConfig[] = [
     ],
   },
   {
+    name: 'metadataBoxFieldRendering',
+    params: [
+      { name: 'renderingType' },
+      { name: 'structured', default: false },
+    ],
+  },
+  {
+    name: 'renderDynamicLayoutBoxFor',
+    params: [
+      { name: 'boxType' },
+    ],
+  },
+  {
+    name: 'dynamicLayoutPage',
+    params: [
+      { name: 'orientation' },
+    ],
+  },
+  {
+    name: 'attachmentTypeRendering',
+    params: [
+      { name: 'objectType' },
+    ],
+  },
+  {
     name: 'renderChartFilterFor',
     params: [
       { name: 'type' },
