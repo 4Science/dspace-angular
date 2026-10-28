@@ -11,8 +11,8 @@ import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
-import { metricRowsMock } from 'src/app/item-page/simple/metrics/metrics-box.component.spec';
 
+import { metricRowsMock } from '../../../dynamic-layout/dynamic-layout-matrix/dynamic-layout-box-container/boxes/metrics/dynamic-layout-metrics-box.component.spec';
 import { MetricLoaderComponent } from '../metric-loader/metric-loader.component';
 import { MetricRowComponent } from './metric-row.component';
 

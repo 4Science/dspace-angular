@@ -20,8 +20,8 @@ import {
   OrejimeService,
 } from '@dspace/core/cookies/orejime.service';
 import { OrejimeServiceStub } from '@dspace/core/cookies/orejime.service.stub';
-import { metric1Mock } from 'src/app/item-page/simple/metrics/metrics-box.component.spec';
 
+import { metric1Mock } from '../../../dynamic-layout/dynamic-layout-matrix/dynamic-layout-box-container/boxes/metrics/dynamic-layout-metrics-box.component.spec';
 import { BaseMetricComponent } from './base-metric.component';
 
 

@@ -9,8 +9,8 @@ import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
-import { metric1Mock } from 'src/app/item-page/simple/metrics/metrics-box.component.spec';
 
+import { metric1Mock } from '../../../dynamic-layout/dynamic-layout-matrix/dynamic-layout-box-container/boxes/metrics/dynamic-layout-metrics-box.component.spec';
 import { MetricDefaultComponent } from './metric-default.component';
 
 describe('MetricDspacecrisComponent', () => {

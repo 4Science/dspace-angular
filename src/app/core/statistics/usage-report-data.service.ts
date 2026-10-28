@@ -69,7 +69,7 @@ export class UsageReportDataService extends IdentifiableDataService<UsageReport>
     }
 
     if (excludePoints) {
-      params.push(new RequestParam('projection', 'usageReportPoints'));
+      params.push(new RequestParam('projection', 'excludeUsageReportPoints'));
     }
 
     return this.searchBy('object', {

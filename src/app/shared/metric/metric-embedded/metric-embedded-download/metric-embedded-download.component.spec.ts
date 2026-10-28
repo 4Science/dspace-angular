@@ -9,9 +9,9 @@ import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
-import { metricEmbeddedDownload } from 'src/app/item-page/simple/metrics/metrics-box.component.spec';
 
 import { environment } from '../../../../../environments/environment.test';
+import { metricEmbeddedDownload } from '../../../../dynamic-layout/dynamic-layout-matrix/dynamic-layout-box-container/boxes/metrics/dynamic-layout-metrics-box.component.spec';
 import { MetricEmbeddedDownloadComponent } from './metric-embedded-download.component';
 
 describe('MetricEmbeddedDownloadComponent', () => {

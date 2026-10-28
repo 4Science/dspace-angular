@@ -89,7 +89,7 @@ export interface RelationBoxConfiguration extends BoxConfiguration {
  */
 export interface MetricsBoxConfiguration extends BoxConfiguration {
   /** Maximum number of columns for metrics display (null for unlimited). */
-  maxColumns: null;
+  maxColumns: number | null;
   /** Array of metric type identifiers to display. */
   metrics: string[];
 }

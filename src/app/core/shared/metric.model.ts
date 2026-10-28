@@ -22,46 +22,46 @@ export class Metric implements CacheableObject {
    */
   @excludeFromEquals
   @autoserialize
-    type: ResourceType;
+  type: ResourceType;
 
   /**
    * The identifier of this Metric
    */
   @autoserialize
-    id: string;
+  id: string;
 
   @autoserialize
-    metricType: string;
+  metricType: string;
 
   @autoserialize
-    metricCount: number;
+  metricCount: number;
 
   @autoserialize
-    acquisitionDate: Date;
+  acquisitionDate: Date;
 
   @autoserialize
-    startDate: Date;
+  startDate: Date;
 
   @autoserialize
-    endDate: Date;
+  endDate: Date;
 
   @autoserialize
-    last: boolean;
+  last: boolean;
 
   @autoserialize
-    remark: string;
+  remark: string;
 
   @autoserialize
-    deltaPeriod1: number;
+  deltaPeriod1: number;
 
   @autoserialize
-    deltaPeriod2: number;
+  deltaPeriod2: number;
 
   @autoserialize
-    rank: number;
+  rank: number;
 
   @autoserialize
-    icon?: string;
+  icon?: string;
 
   /**
    * The {@link HALLink}s for this Metric

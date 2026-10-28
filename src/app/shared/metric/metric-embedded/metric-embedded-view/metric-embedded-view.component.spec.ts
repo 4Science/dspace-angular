@@ -8,9 +8,9 @@ import {
   TranslateLoader,
   TranslateModule,
 } from '@ngx-translate/core';
-import { metricEmbeddedView } from 'src/app/item-page/simple/metrics/metrics-box.component.spec';
 
 import { environment } from '../../../../../environments/environment.test';
+import { metricEmbeddedView } from '../../../../dynamic-layout/dynamic-layout-matrix/dynamic-layout-box-container/boxes/metrics/dynamic-layout-metrics-box.component.spec';
 import { MetricEmbeddedViewComponent } from './metric-embedded-view.component';
 
 describe('MetricEmbeddedViewComponent', () => {

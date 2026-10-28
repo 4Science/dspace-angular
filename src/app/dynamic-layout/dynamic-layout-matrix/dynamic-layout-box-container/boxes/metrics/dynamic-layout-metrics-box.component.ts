@@ -11,6 +11,10 @@ import {
   PLATFORM_ID,
 } from '@angular/core';
 import { ItemDataService } from '@dspace/core/data/item-data.service';
+import {
+  DynamicLayoutBox,
+  MetricsBoxConfiguration,
+} from '@dspace/core/layout/models/box.model';
 import { Item } from '@dspace/core/shared/item.model';
 import { Metric } from '@dspace/core/shared/metric.model';
 import { getFirstSucceededRemoteDataPayload } from '@dspace/core/shared/operators';
@@ -21,8 +25,11 @@ import {
   Subscription,
 } from 'rxjs';
 
-import { MetricRowComponent } from '../../../shared/metric/metric-row/metric-row.component';
-import { MetricsComponentsService } from '../../../shared/metric/services/metrics-components.service';
+import { MetricRowComponent } from '../../../../../shared/metric/metric-row/metric-row.component';
+import { MetricsComponentsService } from '../../../../../shared/metric/services/metrics-components.service';
+import { renderDynamicLayoutBoxFor } from '../../../../decorators/dynamic-layout-box.decorator';
+import { LayoutBox } from '../../../../enums/layout-box.enum';
+import { DynamicLayoutBoxDirective } from '../../../../models/dynamic-layout-box-component.directive';
 
 /**
  * List of metrics to be displayed
@@ -31,35 +38,20 @@ export interface LayoutMetricRow {
   metrics: Metric[];
 }
 
-/**
- * Configuration for item page visualization
- */
-export interface MetricsBoxConfiguration {
-  maxColumns: number | null;
-  metrics: string[];
-}
-
 
 /**
- * This component renders the metadata boxes of items
+ * This component renders the metrics boxes of items
  */
+@renderDynamicLayoutBoxFor(LayoutBox.METRICS)
 @Component({
-  selector: 'ds-metrics-box',
-  templateUrl: './metrics-box.component.html',
-  styleUrls: ['./metrics-box.component.scss'],
+  selector: 'ds-dynamic-layout-metrics-box',
+  templateUrl: './dynamic-layout-metrics-box.component.html',
   imports: [
     AsyncPipe,
     MetricRowComponent,
   ],
 })
-/**
- * For overwrite this component create a new one that extends CrisLayoutBoxObj and
- * add the CrisLayoutBoxModelComponent decorator indicating the type of box to overwrite
- */
-export class MetricsBoxComponent implements OnInit, OnDestroy {
-
-
-
+export class DynamicLayoutMetricsBoxComponent extends DynamicLayoutBoxDirective implements OnInit, OnDestroy {
   /**
    * Computed metric rows for the item and the current box
    */
@@ -75,8 +67,6 @@ export class MetricsBoxComponent implements OnInit, OnDestroy {
    */
   subs: Subscription[] = [];
 
-  @Input() item: Item;
-
   /**
    * Contains the metrics configuration for current box
    */
@@ -87,11 +77,15 @@ export class MetricsBoxComponent implements OnInit, OnDestroy {
     protected itemService: ItemDataService,
     protected translateService: TranslateService,
     @Inject(PLATFORM_ID) protected platformId: any,
+    @Inject('boxProvider') public boxProvider: DynamicLayoutBox,
+    @Inject('itemProvider') public itemProvider: Item,
   ) {
+    super(translateService, boxProvider, itemProvider);
   }
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
+      this.metricsBoxConfiguration = this.box.configuration as MetricsBoxConfiguration;
       this.subs.push(
         this.itemService.getMetrics(this.item.uuid).pipe(
           getFirstSucceededRemoteDataPayload(),

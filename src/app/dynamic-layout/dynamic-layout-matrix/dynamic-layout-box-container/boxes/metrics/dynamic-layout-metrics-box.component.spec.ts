@@ -11,8 +11,10 @@ import {
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ItemDataService } from '@dspace/core/data/item-data.service';
+import { MetricsBoxConfiguration } from '@dspace/core/layout/models/box.model';
 import { Item } from '@dspace/core/shared/item.model';
 import { Metric } from '@dspace/core/shared/metric.model';
+import { boxMetrics } from '@dspace/core/testing/box.mock';
 import { TranslateLoaderMock } from '@dspace/core/testing/translate-loader.mock';
 import { createPaginatedList } from '@dspace/core/testing/utils.test';
 import { createSuccessfulRemoteDataObject$ } from '@dspace/core/utilities/remote-data.utils';
@@ -21,12 +23,9 @@ import {
   TranslateModule,
 } from '@ngx-translate/core';
 
-import { MetricRowComponent } from '../../../shared/metric/metric-row/metric-row.component';
-import { MetricsComponentsService } from '../../../shared/metric/services/metrics-components.service';
-import {
-  MetricsBoxComponent,
-  MetricsBoxConfiguration,
-} from './metrics-box.component';
+import { MetricRowComponent } from '../../../../../shared/metric/metric-row/metric-row.component';
+import { MetricsComponentsService } from '../../../../../shared/metric/services/metrics-components.service';
+import { DynamicLayoutMetricsBoxComponent } from './dynamic-layout-metrics-box.component';
 
 const mockMetric1: Metric = Object.assign(new Metric(), {
   metricType: 'views',
@@ -53,6 +52,7 @@ const mockItem: Item = Object.assign(new Item(), {
 const mockMetricsBoxConfiguration: MetricsBoxConfiguration = {
   maxColumns: 2,
   metrics: ['views', 'downloads'],
+  type: 'metric',
 };
 
 export const metric1Mock = {
@@ -96,12 +96,12 @@ export const metricRowsMock = [{
 
 
 describe('MetricsBoxComponent', () => {
-  let comp: MetricsBoxComponent;
-  let fixture: ComponentFixture<MetricsBoxComponent>;
+  let comp: DynamicLayoutMetricsBoxComponent;
+  let fixture: ComponentFixture<DynamicLayoutMetricsBoxComponent>;
   let itemDataService: jasmine.SpyObj<ItemDataService>;
   let metricsComponentsService: jasmine.SpyObj<MetricsComponentsService>;
 
-  const setupTestBed = (platformId: string) => {
+  const setupTestBed = (platformId: string, configuration: MetricsBoxConfiguration = mockMetricsBoxConfiguration) => {
     itemDataService = jasmine.createSpyObj('ItemDataService', {
       getMetrics: createSuccessfulRemoteDataObject$(createPaginatedList(mockMetrics)),
     });
@@ -109,6 +109,8 @@ describe('MetricsBoxComponent', () => {
     metricsComponentsService = jasmine.createSpyObj('MetricsComponentsService', {
       getMatchingMetrics: mockMatchingMetricRows,
     });
+
+    const boxProvider = { ...boxMetrics, configuration };
 
     TestBed.configureTestingModule({
       imports: [
@@ -119,15 +121,17 @@ describe('MetricsBoxComponent', () => {
           },
         }),
         BrowserAnimationsModule,
-        MetricsBoxComponent,
+        DynamicLayoutMetricsBoxComponent,
       ],
       providers: [
         { provide: ItemDataService, useValue: itemDataService },
         { provide: MetricsComponentsService, useValue: metricsComponentsService },
         { provide: PLATFORM_ID, useValue: platformId },
+        { provide: 'boxProvider', useValue: boxProvider },
+        { provide: 'itemProvider', useValue: { metrics: [metric1Mock, metric2Mock] } },
       ],
       schemas: [NO_ERRORS_SCHEMA],
-    }).overrideComponent(MetricsBoxComponent, {
+    }).overrideComponent(DynamicLayoutMetricsBoxComponent, {
       add: { changeDetection: ChangeDetectionStrategy.Default },
       remove: { imports: [MetricRowComponent] },
     }).compileComponents();
@@ -139,7 +143,7 @@ describe('MetricsBoxComponent', () => {
     }));
 
     beforeEach(waitForAsync(() => {
-      fixture = TestBed.createComponent(MetricsBoxComponent);
+      fixture = TestBed.createComponent(DynamicLayoutMetricsBoxComponent);
       comp = fixture.componentInstance;
       comp.item = mockItem;
       comp.metricsBoxConfiguration = mockMetricsBoxConfiguration;
@@ -189,7 +193,7 @@ describe('MetricsBoxComponent', () => {
     }));
 
     beforeEach(waitForAsync(() => {
-      fixture = TestBed.createComponent(MetricsBoxComponent);
+      fixture = TestBed.createComponent(DynamicLayoutMetricsBoxComponent);
       comp = fixture.componentInstance;
       comp.item = mockItem;
       comp.metricsBoxConfiguration = mockMetricsBoxConfiguration;
@@ -222,14 +226,13 @@ describe('MetricsBoxComponent', () => {
 
   describe('when metricsBoxConfiguration has null maxColumns', () => {
     beforeEach(waitForAsync(() => {
-      setupTestBed('browser');
+      setupTestBed('browser', { maxColumns: null, metrics: ['views'] } as MetricsBoxConfiguration);
     }));
 
     beforeEach(waitForAsync(() => {
-      fixture = TestBed.createComponent(MetricsBoxComponent);
+      fixture = TestBed.createComponent(DynamicLayoutMetricsBoxComponent);
       comp = fixture.componentInstance;
       comp.item = mockItem;
-      comp.metricsBoxConfiguration = { maxColumns: null, metrics: ['views'] };
       fixture.detectChanges();
     }));
 

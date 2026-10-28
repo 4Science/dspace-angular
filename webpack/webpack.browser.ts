@@ -7,6 +7,7 @@ import { commonExports } from './webpack.common';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const CompressionPlugin = require('compression-webpack-plugin');
+
 const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = Object.assign({}, commonExports, {

@@ -9,8 +9,8 @@ import {
 import { DomSanitizer } from '@angular/platform-browser';
 import { OrejimeService } from '@dspace/core/cookies/orejime.service';
 import { OrejimeServiceStub } from '@dspace/core/cookies/orejime.service.stub';
-import { metricAltmetricMock } from 'src/app/item-page/simple/metrics/metrics-box.component.spec';
 
+import { metricAltmetricMock } from '../../../dynamic-layout/dynamic-layout-matrix/dynamic-layout-box-container/boxes/metrics/dynamic-layout-metrics-box.component.spec';
 import { BaseEmbeddedMetricComponent } from './base-embedded-metric.component';
 
 describe('BaseEmbeddedMetricComponent', () => {
