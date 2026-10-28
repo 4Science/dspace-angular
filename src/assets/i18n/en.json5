@@ -4205,6 +4205,20 @@
 
   "itemtemplate.edit.metadata.save-button": "Save",
 
+  "itemtemplate.edit.metadata.authority.label": "Authority: ",
+
+  "itemtemplate.edit.metadata.edit.authority.key": "Edit authority key",
+
+  "itemtemplate.edit.metadata.edit.buttons.open-authority-edition": "Unlock the authority key value for manual editing",
+
+  "itemtemplate.edit.metadata.edit.buttons.close-authority-edition": "Lock the authority key value for manual editing",
+
+  "itemtemplate.edit.metadata.edit.buttons.enable-free-text-editing": "Enable free-text editing",
+
+  "itemtemplate.edit.metadata.edit.buttons.disable-free-text-editing": "Disable free-text editing",
+
+  "itemtemplate.edit.metadata.edit.buttons.virtual": "This is a virtual metadata value, i.e. a value inherited from a related entity. It can’t be modified directly.",
+
   "journal.listelement.badge": "Journal",
 
   "journal.page.description": "Description",
