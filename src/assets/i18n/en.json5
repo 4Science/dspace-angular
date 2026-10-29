@@ -1237,6 +1237,10 @@
 
   "chips.remove": "Remove chip",
 
+  "chart.load-more": "Load more results",
+
+  "chart.no-data.title": "No Data Available",
+
   "claimed-approved-search-result-list-element.title": "Approved",
 
   "claimed-declined-search-result-list-element.title": "Rejected, sent back to submitter",

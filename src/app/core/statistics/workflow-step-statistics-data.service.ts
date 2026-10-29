@@ -21,7 +21,7 @@ import { WORKFLOW_STEP_STATISTICS } from './models/workflow-step-statistics.reso
 @dataService(WORKFLOW_STEP_STATISTICS)
 export class WorkflowStepStatisticsDataService extends IdentifiableDataService<WorkflowStepStatistics> {
 
-  protected linkPath = 'workflowSteps';
+  protected linkPath = 'workflowsteps';
 
   private searchData: SearchDataImpl<WorkflowStepStatistics>;
 
@@ -31,7 +31,7 @@ export class WorkflowStepStatisticsDataService extends IdentifiableDataService<W
     protected objectCache: ObjectCacheService,
     protected halService: HALEndpointService,
   ) {
-    super('workflowSteps', requestService, rdbService, objectCache, halService);
+    super('workflowsteps', requestService, rdbService, objectCache, halService);
 
     this.searchData = new SearchDataImpl(this.linkPath, requestService, rdbService, objectCache, halService, this.responseMsToLive);
   }
