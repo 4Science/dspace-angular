@@ -39,6 +39,10 @@ Disallow: /register
 
 Disallow: /server/opensearch
 
+# Prevent crawlers to follow server endpoints except bitstream download
+Allow: /server/api/core/bitstreams/*/content
+Disallow: /server
+
 ##############################
 # Section for misbehaving bots
 # The following directives to block specific robots were borrowed from Wikipedia's robots.txt
