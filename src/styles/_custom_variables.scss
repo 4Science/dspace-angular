@@ -198,6 +198,15 @@
   --ds-search-skeleton-text-height: 20px;
   --ds-search-skeleton-badge-height: 18px;
   --ds-search-skeleton-thumbnail-margin: 1em;
+  // Box reserved by the thumbnail loading skeleton. Defaults to the ratio reserved by
+  // ds-thumbnail while loading (A4, see .outer in thumbnail.component.scss); override it
+  // to match the thumbnails of your repository.
+  --ds-search-skeleton-thumbnail-aspect-ratio: 210 / 297;
+  // Space reserved for the content of the search pages. It keeps the footer below the fold
+  // from the first paint, so that it is not rendered inside the viewport and then pushed
+  // down once the results are rendered (which is the main source of layout shift there).
+  // Set it to 0 to opt out.
+  --ds-search-min-height: 100vh;
   --ds-search-skeleton-text-line-count: 2;
   --ds-search-skeleton-badge-width: 75px;
   --ds-search-skeleton-filter-badge-width: 200px;

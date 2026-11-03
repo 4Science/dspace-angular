@@ -66,7 +66,7 @@ describe('AuthorizationEffects success', () => {
       actions = hot('--a-', {
         a: {
           type: AuthorizationActionTypes.GET_AUTHORIZATIONS,
-          payload: { uuidList: [mockAuthSiteObject.uuid], type: mockAuthSiteObject.uniqueType, featureIDs: featureIDs, hrefs: [mockAuthSiteObject.self] },
+          payload: { uuidList: [mockAuthSiteObject.uuid], type: mockAuthSiteObject.uniqueType, featureIDs: featureIDs, keys: [mockAuthSiteObject.uuid] },
         },
       });
 
@@ -110,7 +110,7 @@ describe('AuthorizationEffects error', () => {
 
   describe('getAuthorizations$ when request fails', () => {
     it('should return a new GetAuthorizationsErrorAction', (done) => {
-      actions = of(new GetAuthorizationsAction([mockAuthSiteObject.uuid], mockAuthSiteObject.uniqueType, featureIDs, [mockAuthSiteObject.self] ));
+      actions = of(new GetAuthorizationsAction([mockAuthSiteObject.uuid], mockAuthSiteObject.uniqueType, featureIDs, [mockAuthSiteObject.uuid]));
 
       authorizationEffects.getAuthorizations$.subscribe(expected => {
         expect(expected).toEqual(new GetAuthorizationsErrorAction());

@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
+  combineLatest,
   Observable,
   of,
+  throwError,
 } from 'rxjs';
 import {
   catchError,
@@ -120,40 +122,59 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
           return dsoRequest$.pipe(
             take(1),
             // Get correct item and check that has not already pending authorizations
-            switchMap((object) => this.readOrFetchAuthorization(object, featureId, !objectUrl)),
+            switchMap((object) => this.readOrFetchAuthorization(object, featureId, !objectUrl, useCachedVersionIfAvailable, reRequestOnStale)),
           );
         } else {
           // we fallback on old method if site service had initialization issues or if some parameters more than the only feature ID are provided.
-          return this.searchByObject(featureId, objectUrl, ePersonUuid, {}, useCachedVersionIfAvailable, reRequestOnStale, followLink('feature')).pipe(
-            getFirstCompletedRemoteData(),
-            map((authorizationRD) => {
-              if (authorizationRD.statusCode !== 401 && hasValue(authorizationRD.payload) && isNotEmpty(authorizationRD.payload.page)) {
-                return authorizationRD.payload.page;
-              } else {
-                return [];
-              }
-            }),
-            catchError(() => of([])),
-            oneAuthorizationMatchesFeature(featureId),
-          );
+          return this.searchByObjectAndMatchFeature(featureId, objectUrl, ePersonUuid, useCachedVersionIfAvailable, reRequestOnStale);
         }
       }),
     );
   }
 
-  private readOrFetchAuthorization(dso: DSpaceObject, featureId: FeatureID, isSite = false): Observable<boolean> {
-    const requestId = getRequestIdFromParams(dso.uniqueType, [getNormalizedUuid(dso)], [featureId]);
-    // if is the site init we wait for the authorization to be loaded otherwise services that run on resolver won't find a state.
+  /**
+   * Perform a direct authorization check via the REST "object" search endpoint, bypassing the
+   * NgRx authorization store. This reads the {@link RemoteData} directly, so it returns a reliable
+   * result even in situations where the store-based flow does not get populated (e.g. during SSR).
+   */
+  private searchByObjectAndMatchFeature(featureId?: FeatureID, objectUrl?: string, ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<boolean> {
+    return this.searchByObject(featureId, objectUrl, ePersonUuid, {}, useCachedVersionIfAvailable, reRequestOnStale, followLink('feature')).pipe(
+      getFirstCompletedRemoteData(),
+      map((authorizationRD) => {
+        if (authorizationRD.statusCode !== 401 && hasValue(authorizationRD.payload) && isNotEmpty(authorizationRD.payload.page)) {
+          return authorizationRD.payload.page;
+        } else {
+          return [];
+        }
+      }),
+      catchError(() => of([])),
+      oneAuthorizationMatchesFeature(featureId),
+    );
+  }
+
+  private readOrFetchAuthorization(dso: DSpaceObject, featureId: FeatureID, isSite = false, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<boolean> {
+    const objectKey = getNormalizedUuid(dso);
+    const requestId = getRequestIdFromParams(dso.uniqueType, [objectKey], [featureId]);
     const waitForEntry$: Observable<boolean> = isSite
-      ? this.hasEntryForHref$(dso.self).pipe(
-        filter((hasEntry) => hasEntry),
+      ? combineLatest([
+        this.hasEntryForObjectKey$(objectKey).pipe(
+          filter((hasEntry) => hasEntry),
+          take(1),
+        ),
+        this.authorizationService.hasErrors(),
+      ]).pipe(
+        filter(([hasEntry, hasErrors]) => hasEntry || hasErrors),
         take(1),
+        map(([, hasErrors]) => hasErrors),
       )
-      : of(true);
+      : of(false);
 
     return waitForEntry$.pipe(
-      switchMap(() =>
-        this.authorizationService.getAuthorizationForObject(featureId, dso.self).pipe(
+      switchMap((hasErrors) => {
+        if (hasErrors) {
+          return this.searchByObjectAndMatchFeature(featureId, dso.self);
+        }
+        return this.authorizationService.getAuthorizationForObject(featureId, objectKey).pipe(
           take(1),
           switchMap((authorization) => {
             if (authorization !== undefined) {
@@ -162,10 +183,10 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
             }
             // Authorization is not cached → trigger fetch
             this.authorizationService.initStateForObjects(
-              [getNormalizedUuid(dso)],
+              [objectKey],
               dso.uniqueType,
               [featureId],
-              [dso.self],
+              [objectKey],
             );
             // Wait for loading to complete, then read authorization again
             return this.authorizationService.isRequestLoading(requestId).pipe(
@@ -173,26 +194,26 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
               filter(isLoading => !isLoading),
               take(1), // Ensure we only continue after loading finishes
               switchMap(() =>
-                this.authorizationService.getAuthorizationForObject(featureId, dso.self).pipe(
+                this.authorizationService.getAuthorizationForObject(featureId, objectKey).pipe(
                   filter(result => result !== undefined), // Ensure we only emit valid results
                   take(1),
                 ),
               ),
             );
           }),
-        ),
-      ),
+        );
+      }),
     );
   }
 
   /**
-   * Emits `true` once the store contains an authorization entry keyed by the given href.
+   * Emits `true` once the store contains an authorization entry keyed by the given object key.
    * Used to make sure site-level authorization state has been initialized before
    * reading/fetching from it (avoids racing the initial site authorization request).
    * @private
    */
-  private hasEntryForHref$(href: string): Observable<boolean> {
-    return this.authorizationService.hasAuthorizationEntryForObject(href);
+  private hasEntryForObjectKey$(objectKey: string): Observable<boolean> {
+    return this.authorizationService.hasAuthorizationEntryForObject(objectKey);
   }
 
 
@@ -203,15 +224,16 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    * @param ePersonUuid                 UUID of the {@link EPerson} to search {@link Authorization}s for.
    *                                    If not provided, the UUID of the currently authenticated {@link EPerson} will be used.
    * @param featuresId                  A list of the IDs of the {@link Feature} to check {@link Authorization} for
-   * @param hrefs
+   * @param keys                        Fallback store keys to use when the response contains no
+   *                                    authorizations.
+   * @param useCachedVersionIfAvailable If this is true, the request will only be sent if there's
    *                                    no valid cached version. Defaults to true
+   * @param reRequestOnStale            Whether or not the request should automatically be re-
    *                                    requested after the response becomes stale
-   * @param useCachedVersionIfAvailable
-   * @param reRequestOnStale
    */
-  getAuthorizationForObjects(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, hrefs?: string[], useCachedVersionIfAvailable: boolean = true, reRequestOnStale: boolean = true): Observable<ObjectAuthorizationsState> {
+  getAuthorizationForObjects(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, keys?: string[], useCachedVersionIfAvailable: boolean = true, reRequestOnStale: boolean = true): Observable<ObjectAuthorizationsState> {
     return this.searchObjectsAuthorizations(uuidList,  type, featuresId, ePersonUuid, useCachedVersionIfAvailable, reRequestOnStale).pipe(
-      getAuthorizationFeaturesIDs(featuresId, hrefs),
+      getAuthorizationFeaturesIDs(featuresId, keys),
     );
   }
 
@@ -227,21 +249,17 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    * @private
    */
   searchObjectsAuthorizations(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<Authorization[]> {
-    const followLinks = [
-      followLink<Authorization>('object'),
-      followLink<Authorization>('feature'),
-    ];
-
-    return this.searchByObjects(uuidList, type, featuresId, ePersonUuid, {}, useCachedVersionIfAvailable, reRequestOnStale, ...followLinks).pipe(
+    return this.searchByObjects(uuidList, type, featuresId, ePersonUuid, {}, useCachedVersionIfAvailable, reRequestOnStale, followLink<Authorization>('feature')).pipe(
       getFirstCompletedRemoteData(),
-      map((authorizationRD) => {
-        if (authorizationRD.statusCode !== 401 && hasValue(authorizationRD.payload) && isNotEmpty(authorizationRD.payload.page)) {
-          return authorizationRD.payload.page;
-        } else {
-          return [];
+      switchMap((authorizationRD) => {
+        if (authorizationRD.hasFailed && authorizationRD.statusCode !== 401) {
+          return throwError(() => new Error(`The authorizations "objects" endpoint failed with status ${authorizationRD.statusCode}`));
         }
+        if (authorizationRD.statusCode !== 401 && hasValue(authorizationRD.payload) && isNotEmpty(authorizationRD.payload.page)) {
+          return of(authorizationRD.payload.page);
+        }
+        return of([]);
       }),
-      catchError(() => of([])),
     );
 
   }

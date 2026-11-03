@@ -246,6 +246,55 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
         expect((scrollableDropdownComp as any).vocabularyService.getVocabularyEntriesByValue).toHaveBeenCalled();
         expect(scrollableDropdownComp.optionsList.length).toBe(1);
       }));
+
+      describe('openDropdown', () => {
+        let sdRef: any;
+
+        beforeEach(() => {
+          sdRef = jasmine.createSpyObj('NgbDropdown', ['open', 'close', 'isOpen']);
+        });
+
+        it('should replace (not concat) the options list so entries are not duplicated on repeated opens', fakeAsync(() => {
+          const initialLength = scrollableDropdownComp.optionsList.length;
+          expect(initialLength).toBeGreaterThan(0);
+
+          scrollableDropdownComp.openDropdown(sdRef);
+          tick();
+          expect(scrollableDropdownComp.optionsList.length).toBe(initialLength);
+
+          scrollableDropdownComp.openDropdown(sdRef);
+          tick();
+          expect(scrollableDropdownComp.optionsList.length).toBe(initialLength);
+
+          scrollableDropdownComp.openDropdown(sdRef);
+          tick();
+          expect(scrollableDropdownComp.optionsList.length).toBe(initialLength);
+        }));
+
+        it('should load options without concatenating results on open', () => {
+          const loadOptionsSpy = spyOn(scrollableDropdownComp, 'loadOptions');
+
+          scrollableDropdownComp.openDropdown(sdRef);
+
+          expect(loadOptionsSpy).toHaveBeenCalledWith(null, false, false);
+        });
+
+        it('should open the dropdown reference', () => {
+          scrollableDropdownComp.openDropdown(sdRef);
+
+          expect(sdRef.open).toHaveBeenCalled();
+        });
+
+        it('should not load options nor open when the model is readOnly', () => {
+          const loadOptionsSpy = spyOn(scrollableDropdownComp, 'loadOptions');
+          scrollableDropdownComp.model.readOnly = true;
+
+          scrollableDropdownComp.openDropdown(sdRef);
+
+          expect(loadOptionsSpy).not.toHaveBeenCalled();
+          expect(sdRef.open).not.toHaveBeenCalled();
+        });
+      });
     });
 
     describe('when init model value is not empty', () => {
