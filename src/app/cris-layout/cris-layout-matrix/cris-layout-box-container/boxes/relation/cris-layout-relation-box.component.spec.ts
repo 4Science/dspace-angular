@@ -14,6 +14,9 @@ import { AuthService } from '../../../../../core/auth/auth.service';
 import { cold } from 'jasmine-marbles';
 import { EPersonMock, EPersonMock2 } from '../../../../../shared/testing/eperson.mock';
 import { EPerson } from '../../../../../core/eperson/models/eperson.model';
+import { APP_CONFIG } from '../../../../../../config/app-config.interface';
+import { environment } from '../../../../../../environments/environment.test';
+import { ViewMode } from '../../../../../core/shared/view-mode.model';
 
 describe('CrisLayoutRelationBoxComponent', () => {
   let component: CrisLayoutRelationBoxComponent;
@@ -81,6 +84,7 @@ describe('CrisLayoutRelationBoxComponent', () => {
         { provide: 'boxProvider', useValue: testBox },
         { provide: 'itemProvider', useValue: testItem },
         { provide: AuthService, useValue: authService },
+        { provide: APP_CONFIG, useValue: environment },
       ]
     })
       .compileComponents();
@@ -104,6 +108,10 @@ describe('CrisLayoutRelationBoxComponent', () => {
 
     it('should have set scope in searchFilter', () => {
       expect(component.searchFilter).toContain('scope=' + testItem.id);
+    });
+
+    it('should set the initial view mode from the crisRelationBox preferred display view configuration', () => {
+      expect(component.initViewMode).toBe(ViewMode.GridElement);
     });
 
     it('info message cannot be shown', fakeAsync(() => {

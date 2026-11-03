@@ -43,6 +43,9 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
     'showSidebar',
     'showThumbnails',
     'showViewModes',
+    'showWorkflowStatistics',
+    'sideBarWidth',
+    'trackStatistics',
     'useUniquePageId',
     'viewModeList',
     'showScopeSelector',
@@ -61,7 +64,8 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
     'showSearchResultNotice',
     'renderOnServerSide',
     'showLabel',
-    'showMetrics'
+    'showMetrics',
+    'initViewMode',
   ];
 
   @Input() configurationList: SearchConfigurationOption[];
@@ -83,6 +87,8 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
   @Input() collapseFilters: boolean;
 
   @Input() inPlaceSearch: boolean;
+
+  @Input() initViewMode: ViewMode;
 
   @Input() linkType: CollectionElementLinkType;
 
@@ -117,6 +123,8 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
   @Input() showSidebar: boolean;
 
   @Input() showThumbnails: boolean;
+
+  @Input() showWorkflowStatistics: boolean;
 
   @Input() showViewModes: boolean;
 

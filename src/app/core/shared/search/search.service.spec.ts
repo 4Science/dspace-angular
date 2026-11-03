@@ -67,9 +67,15 @@ describe('SearchService', () => {
       searchService = TestBed.inject(SearchService);
     });
 
-    it('should return list view mode', () => {
+    it('should return default list view mode when no query params exist', () => {
       searchService.getViewMode().subscribe((viewMode) => {
         expect(viewMode).toBe(ViewMode.ListElement);
+      });
+    });
+
+    it('should return given list view mode when no query params exist', () => {
+      searchService.getViewMode(ViewMode.GridElement).subscribe((viewMode) => {
+        expect(viewMode).toBe(ViewMode.GridElement);
       });
     });
   });

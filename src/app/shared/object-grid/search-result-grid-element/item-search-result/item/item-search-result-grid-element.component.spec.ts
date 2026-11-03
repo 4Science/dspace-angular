@@ -34,16 +34,19 @@ import { ItemSearchResultGridElementComponent } from './item-search-result-grid-
 import { FindListOptions } from '../../../../../core/data/find-list-options.model';
 import { FollowLinkConfig } from '../../../../utils/follow-link-config.model';
 import { createPaginatedList } from '../../../../testing/utils.test';
+import { MetadataValue } from '../../../../../core/shared/metadata.models';
 
 const mockItemWithMetadata: ItemSearchResult = new ItemSearchResult();
 mockItemWithMetadata.hitHighlights = {};
 const dcTitle = 'This is just another <em>title</em>';
+mockItemWithMetadata.hitHighlights = {
+  'dc.title': [
+    Object.assign(new MetadataValue(), {
+      value: dcTitle,
+    }),
+  ],
+};
 mockItemWithMetadata.indexableObject = Object.assign(new Item(), {
-  hitHighlights: {
-    'dc.title': [{
-      value: dcTitle
-    }],
-  },
   bundles: createSuccessfulRemoteDataObject$(buildPaginatedList(new PageInfo(), [])),
   metadata: {
     'dc.title': [

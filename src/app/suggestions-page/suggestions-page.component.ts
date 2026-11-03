@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
+import { distinctUntilChanged, map, switchMap, take, tap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 
 import { SortDirection, SortOptions, } from '../core/cache/models/sort-options.model';
@@ -124,6 +124,8 @@ export class SuggestionsPageComponent implements OnInit {
    */
   updatePage(): Observable<RemoteData<PaginatedList<OpenaireSuggestion>>> {
     this.processing$.next(true);
+    this.suggestionService.clearSuggestionRequests();
+
     const pageConfig$: Observable<FindListOptions> = this.paginationService.getFindListOptions(
       this.paginationOptions.id,
       this.defaultConfig,
@@ -168,10 +170,11 @@ export class SuggestionsPageComponent implements OnInit {
    * Used to delete a suggestion.
    * @suggestionId
    */
-  notMine(suggestionId) {
+  notMine(suggestionId: string) {
     this.suggestionService.notMine(suggestionId).pipe(
       tap(() => this.suggestionTargetsStateService.dispatchRefreshUserSuggestionsAction()),
-      switchMap(() => this.updatePage())
+      switchMap(() => this.updatePage()),
+      take(1),
     ).subscribe();
   }
 

@@ -1,6 +1,7 @@
 // This configuration is only used for unit tests, end-to-end tests use environment.production.ts
 import { BuildConfig } from 'src/config/build-config.interface';
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
+import { ViewMode } from '../app/core/shared/view-mode.model';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
 import { AdvancedAttachmentElementType } from '../config/advanced-attachment-rendering.config';
 import { IdentifierSubtypesIconPositionEnum } from 'src/config/identifier-subtypes-config.interface';
@@ -14,6 +15,29 @@ export const environment: BuildConfig = {
     async: true,
     time: false,
     inlineCriticalCss: false,
+    transferState: true,
+    replaceRestUrl: false,
+    excludePathPatterns: [
+      {
+        pattern: '^/communities/[a-f0-9-]{36}/browse(/.*)?$',
+        flag: 'i',
+      },
+      {
+        pattern: '^/collections/[a-f0-9-]{36}/browse(/.*)?$',
+        flag: 'i',
+      },
+      { pattern: '^/browse/' },
+      { pattern: '^/search' },
+      { pattern: '^/community-list$' },
+      { pattern: '^/statistics/?' },
+      { pattern: '^/admin/' },
+      { pattern: '^/processes/?' },
+      { pattern: '^/notifications/' },
+      { pattern: '^/access-control/' },
+      { pattern: '^/health$' },
+    ],
+    enableSearchComponent: false,
+    enableBrowseComponent: false,
   },
 
   // Angular Universal server settings.
@@ -54,6 +78,10 @@ export const environment: BuildConfig = {
     },
     // msToLive: 1000, // 15 minutes
     control: 'max-age=60',
+    // These static files should not be cached (paths relative to dist/browser, including the leading slash)
+    noCacheFiles: [
+      '/index.html',  // see https://web.dev/articles/http-cache#unversioned-urls
+    ],
     autoSync: {
       defaultTime: 0,
       maxBufferSize: 100,
@@ -92,6 +120,7 @@ export const environment: BuildConfig = {
       // This is independent from the idle warning.
       timeLeftBeforeTokenRefresh: 20000, // 20 sec
     },
+    isPasswordLoginEnabledForAdminsOnly: true,
   },
 
   // Form settings
@@ -336,6 +365,7 @@ export const environment: BuildConfig = {
   info: {
     enableEndUserAgreement: true,
     enablePrivacyStatement: true,
+    enableCookieConsentPopup: true,
     //Configuration for third-party metrics in Klaro
     metricsConsents: [
       {
@@ -369,11 +399,34 @@ export const environment: BuildConfig = {
     }
   ],
 
+  liveRegion: {
+    messageTimeOutDurationMs: 30000,
+    isVisible: false,
+  },
+
+  search: {
+    filterPlaceholdersCount: 5,
+    preferredDisplayView: {
+      searchPage: ViewMode.GridElement,
+      mydspacePage: ViewMode.DetailedListElement,
+      crisRelationBox: ViewMode.GridElement,
+    },
+  },
+
+  accessibility: {
+    cookieExpirationDuration: 7,
+  },
+
   crisLayout: {
     urn: [
       {
         name: 'doi',
         baseUrl: 'https://doi.org/'
+      },
+      {
+        name: 'keepMyWhiteSpaces',
+        baseUrl: 'https://keepmywhitespaces.com/',
+        shouldKeepWhiteSpaces: true
       },
       {
         name: 'hdl',

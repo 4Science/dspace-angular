@@ -17,6 +17,7 @@ import { VocabularyOptions } from '../../../core/submission/vocabularies/models/
 import { PageInfo } from '../../../core/shared/page-info.model';
 import { VocabularyService } from '../../../core/submission/vocabularies/vocabulary.service';
 import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
+import { createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
 
 describe('VocabularyTreeviewComponent test suite', () => {
 
@@ -57,7 +58,8 @@ describe('VocabularyTreeviewComponent test suite', () => {
     findEntryDetailById: jasmine.createSpy('findEntryDetailById'),
     searchTopEntries: jasmine.createSpy('searchTopEntries'),
     getEntryDetailChildren: jasmine.createSpy('getEntryDetailChildren'),
-    clearSearchTopRequests: jasmine.createSpy('clearSearchTopRequests')
+    clearSearchTopRequests: jasmine.createSpy('clearSearchTopRequests'),
+    findVocabularyById: createSuccessfulRemoteDataObject$({ preloadLevel: 2 }),
   });
 
   beforeEach(waitForAsync(() => {
@@ -131,7 +133,7 @@ describe('VocabularyTreeviewComponent test suite', () => {
       comp.selectedItems = [currentValue];
       fixture.detectChanges();
       expect(comp.dataSource.data).toEqual([]);
-      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, new PageInfo(), ['entryID'], 'entryID');
+      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, new PageInfo(), ['entryID'], 'entryID', false);
     });
 
     it('should should init component properly with init value as VocabularyEntry', () => {
@@ -143,7 +145,7 @@ describe('VocabularyTreeviewComponent test suite', () => {
       comp.selectedItems = [currentValue];
       fixture.detectChanges();
       expect(comp.dataSource.data).toEqual([]);
-      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, new PageInfo(), ['entryID'], 'entryID');
+      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, new PageInfo(), ['entryID'], 'entryID', false);
     });
 
     it('should should init component properly with init value as VocabularyEntryDetail', () => {
@@ -153,7 +155,7 @@ describe('VocabularyTreeviewComponent test suite', () => {
       comp.selectedItems = [currentValue];
       fixture.detectChanges();
       expect(comp.dataSource.data).toEqual([]);
-      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, new PageInfo(), ['entryID'], 'entryID');
+      expect(vocabularyTreeviewServiceStub.initialize).toHaveBeenCalledWith(comp.vocabularyOptions, new PageInfo(), ['entryID'], 'entryID', false);
     });
 
     it('should call loadMore function', () => {
@@ -173,7 +175,7 @@ describe('VocabularyTreeviewComponent test suite', () => {
       const node = new TreeviewFlatNode(item);
       comp.loadChildren(node);
       fixture.detectChanges();
-      expect(vocabularyTreeviewServiceStub.loadMore).toHaveBeenCalledWith(node.item, [], true);
+      expect(vocabularyTreeviewServiceStub.loadMore).toHaveBeenCalledWith(node.item, [], true, false);
     });
 
     it('should emit proper FormFieldMetadataValueObject when VocabularyEntryDetail has authority', () => {

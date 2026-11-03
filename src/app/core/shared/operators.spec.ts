@@ -180,7 +180,7 @@ describe('Core Module - RxJS Operators', () => {
       testScheduler = new TestScheduler((actual, expected) => {
         expect(actual).toEqual(expected);
       });
-      router = jasmine.createSpyObj('router', ['navigateByUrl']);
+      router = jasmine.createSpyObj('router', ['navigateByUrl', 'getCurrentNavigation']);
       authService = jasmine.createSpyObj('authService', {
         isAuthenticated: observableOf(true),
         setRedirectUrl: {}
@@ -267,7 +267,6 @@ describe('Core Module - RxJS Operators', () => {
           expectObservable(source.pipe(redirectOn4xx(router, authService))).toBe(expected, values);
           flush();
           expect(authService.setRedirectUrl).toHaveBeenCalled();
-          expect(router.navigateByUrl).toHaveBeenCalledWith('login');
         });
       });
 
@@ -281,7 +280,6 @@ describe('Core Module - RxJS Operators', () => {
           expectObservable(source.pipe(redirectOn4xx(router, authService))).toBe(expected, values);
           flush();
           expect(authService.setRedirectUrl).toHaveBeenCalled();
-          expect(router.navigateByUrl).toHaveBeenCalledWith('login');
         });
       });
     });

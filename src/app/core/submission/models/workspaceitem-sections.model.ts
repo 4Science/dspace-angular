@@ -1,10 +1,10 @@
 import { WorkspaceitemSectionAccessesObject } from './workspaceitem-section-accesses.model';
 import { WorkspaceitemSectionFormObject } from './workspaceitem-section-form.model';
 import { WorkspaceitemSectionLicenseObject } from './workspaceitem-section-license.model';
+import { WorkspaceitemSectionJiscOpfPoliciesObject } from './workspaceitem-section-opf-policies.model';
 import { WorkspaceitemSectionUploadObject } from './workspaceitem-section-upload.model';
 import { WorkspaceitemSectionCcLicenseObject } from './workspaceitem-section-cc-license.model';
 import { WorkspaceitemSectionIdentifiersObject } from './workspaceitem-section-identifiers.model';
-import { WorkspaceitemSectionSherpaPoliciesObject } from './workspaceitem-section-sherpa-policies.model';
 import { WorkspaceitemSectionDetectDuplicateObject } from './workspaceitem-section-deduplication.model';
 import { WorkspaceitemSectionCorrectionObject } from './workspaceitem-section-correction.model';
 
@@ -25,7 +25,7 @@ export type WorkspaceitemSectionDataType
   | WorkspaceitemSectionLicenseObject
   | WorkspaceitemSectionCcLicenseObject
   | WorkspaceitemSectionAccessesObject
-  | WorkspaceitemSectionSherpaPoliciesObject
+  | WorkspaceitemSectionJiscOpfPoliciesObject
   | WorkspaceitemSectionIdentifiersObject
   | WorkspaceitemSectionDetectDuplicateObject
   | WorkspaceitemSectionCorrectionObject

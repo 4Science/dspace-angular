@@ -9,7 +9,7 @@
             </div>
         </ds-alert>
         <p class="text-center" *ngIf="!(isAdministrator$ | async)">
-          <a routerLink="/home" class="btn btn-primary">{{"410.link.home-page" | translate}}</a>
+          <a role="link" tabindex="0" routerLink="/home" class="btn btn-primary">{{"410.link.home-page" | translate}}</a>
         </p>
     </div>
 </div>

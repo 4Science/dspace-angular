@@ -50,12 +50,14 @@ export class BatchImportPageComponent {
   fileURL: string;
 
   /**
-   * The custom options for the 'ds-switch' component
+   * The "on" option for the 'ds-switch' component (upload)
    */
-  switchOptions: SwitchOption[] = [
-    { value: 'upload', icon: 'fa fa-upload', label: 'admin.metadata-import.page.toggle.upload', iconColor: SwitchColor.Primary },
-    { value: 'url', icon: 'fa fa-link', label: 'admin.metadata-import.page.toggle.url', iconColor: SwitchColor.Primary },
-  ];
+  switchOnOption: SwitchOption = { value: 'upload', icon: 'fa fa-upload', label: 'admin.metadata-import.page.toggle.upload', iconColor: SwitchColor.Primary };
+
+  /**
+   * The "off" option for the 'ds-switch' component (url)
+   */
+  switchOffOption: SwitchOption = { value: 'url', icon: 'fa fa-link', label: 'admin.metadata-import.page.toggle.url', iconColor: SwitchColor.Primary };
 
   public constructor(private location: Location,
                      protected translate: TranslateService,

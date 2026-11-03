@@ -78,12 +78,14 @@ export class SystemWideAlertFormComponent implements OnInit {
   previewDays: number;
 
   /**
-   * The custom options for the 'ds-switch' component
+   * The "on" option for the 'ds-switch' component
    */
-  switchOptions: SwitchOption[] = [
-    { value: true, labelColor: SwitchColor.Success, backgroundColor: SwitchColor.Success ,label: 'system-wide-alert.form.label.active' },
-    { value: false, label: 'system-wide-alert.form.label.inactive' },
-  ];
+  switchOnOption: SwitchOption = { value: true, labelColor: SwitchColor.Success, backgroundColor: SwitchColor.Success, label: 'system-wide-alert.form.label.active' };
+
+  /**
+   * The "off" option for the 'ds-switch' component
+   */
+  switchOffOption: SwitchOption = { value: false, label: 'system-wide-alert.form.label.inactive' };
 
   constructor(
     protected systemWideAlertDataService: SystemWideAlertDataService,

@@ -1,3 +1,5 @@
+import escape from 'lodash/escape';
+
 import { hasValue, isEmpty, isNotEmpty, isNotUndefined, isUndefined } from '../../shared/empty.util';
 import {
   MetadataMapInterface,
@@ -15,8 +17,6 @@ import { validate as uuidValidate } from 'uuid';
 export const AUTHORITY_GENERATE = 'will be generated::';
 export const AUTHORITY_REFERENCE = 'will be referenced::';
 export const PLACEHOLDER_VALUE = '#PLACEHOLDER_PARENT_METADATA_VALUE#';
-
-
 /**
  * Utility class for working with DSpace object metadata.
  *
@@ -31,25 +31,26 @@ export const PLACEHOLDER_VALUE = '#PLACEHOLDER_PARENT_METADATA_VALUE#';
  * followed by any other (non-dc) metadata values.
  */
 export class Metadata {
+
   /**
    * Gets all matching metadata in the map(s).
    *
-   * @param {MetadataMapInterface|MetadataMapInterface[]} mapOrMaps The source map(s). When multiple maps are given, they will be
-   * checked in order, and only values from the first with at least one match will be returned.
+   * @param metadata The metadata values.
    * @param {string|string[]} keyOrKeys The metadata key(s) in scope. Wildcards are supported; see above.
+   * @param hitHighlights The search hit highlights.
    * @param {MetadataValueFilter} filter The value filter to use. If unspecified, no filtering will be done.
+   * @param escapeHTML Whether the HTML is used inside a `[innerHTML]` attribute
    * @param {number} limit The maximum number of values to return. If unspecified, all matching values will be returned.
    * @returns {MetadataValue[]} the matching values or an empty array.
    */
-  public static all(mapOrMaps: MetadataMapInterface | MetadataMapInterface[], keyOrKeys: string | string[],
-                    filter?: MetadataValueFilter, limit?: number): MetadataValue[] {
-    const mdMaps: MetadataMapInterface[] = mapOrMaps instanceof Array ? mapOrMaps : [mapOrMaps];
+  public static all(metadata: MetadataMapInterface | MetadataMapInterface[], keyOrKeys: string | string[], hitHighlights?: MetadataMapInterface, filter?: MetadataValueFilter, escapeHTML?: boolean, limit?: number): MetadataValue[] {
     const matches: MetadataValue[] = [];
-    for (const mdMap of mdMaps) {
-      for (const mdKey of Metadata.resolveKeys(mdMap, keyOrKeys)) {
-        const candidates = mdMap[mdKey];
-        if (candidates) {
-          for (const candidate of candidates) {
+    const mdMaps: MetadataMapInterface[] = metadata instanceof Array ? metadata : [metadata];
+
+    if (isNotEmpty(hitHighlights)) {
+      for (const mdKey of Metadata.resolveKeys(hitHighlights, keyOrKeys)) {
+        if (hitHighlights[mdKey]) {
+          for (const candidate of hitHighlights[mdKey]) {
             if (Metadata.valueMatches(candidate as MetadataValue, filter)) {
               matches.push(candidate as MetadataValue);
               if (hasValue(limit) && matches.length >= limit) {
@@ -59,44 +60,78 @@ export class Metadata {
           }
         }
       }
-      if (!isEmpty(matches)) {
+      if (isNotEmpty(matches)) {
         return matches;
       }
     }
+    for (const mdMap of mdMaps) {
+      for (const mdKey of Metadata.resolveKeys(mdMap, keyOrKeys)) {
+        const candidates = mdMap[mdKey];
+        if (candidates) {
+          for (const candidate of candidates) {
+            if (Metadata.valueMatches(candidate as MetadataValue, filter)) {
+              if (escapeHTML) {
+                matches.push(Object.assign(new MetadataValue(), candidate, {
+                  value: escape(candidate.value),
+                }));
+              } else {
+                matches.push(candidate as MetadataValue);
+              }
+              if (hasValue(limit) && matches.length >= limit) {
+                return matches;
+              }
+            }
+          }
+        }
+      }
+    }
+
     return matches;
   }
 
   /**
    * Like [[Metadata.all]], but only returns string values.
    *
-   * @param {MetadataMapInterface|MetadataMapInterface[]} mapOrMaps The source map(s). When multiple maps are given, they will be
-   * checked in order, and only values from the first with at least one match will be returned.
+   * @param metadata The metadata values.
    * @param {string|string[]} keyOrKeys The metadata key(s) in scope. Wildcards are supported; see above.
+   * @param hitHighlights The search hit highlights.
    * @param {MetadataValueFilter} filter The value filter to use. If unspecified, no filtering will be done.
+   * @param escapeHTML Whether the HTML is used inside a `[innerHTML]` attribute
    * @returns {string[]} the matching string values or an empty array.
    */
-  public static allValues(mapOrMaps: MetadataMapInterface | MetadataMapInterface[], keyOrKeys: string | string[],
-                          filter?: MetadataValueFilter): string[] {
-    return Metadata.all(mapOrMaps, keyOrKeys, filter).map((mdValue) => mdValue.value);
+  public static allValues(metadata: MetadataMapInterface, keyOrKeys: string | string[], hitHighlights?: MetadataMapInterface, filter?: MetadataValueFilter, escapeHTML?: boolean): string[] {
+    return Metadata.all(metadata, keyOrKeys, hitHighlights, filter, escapeHTML).map((mdValue) => mdValue.value);
   }
 
   /**
    * Gets the first matching MetadataValue object in the map(s), or `undefined`.
    *
-   * @param {MetadataMapInterface|MetadataMapInterface[]} mapOrMaps The source map(s).
+   * @param metadata The metadata values.
    * @param {string|string[]} keyOrKeys The metadata key(s) in scope. Wildcards are supported; see above.
+   * @param hitHighlights The search hit highlights.
    * @param {MetadataValueFilter} filter The value filter to use. If unspecified, no filtering will be done.
+   * @param escapeHTML Whether the HTML is used inside a `[innerHTML]` attribute
    * @returns {MetadataValue} the first matching value, or `undefined`.
    */
-  public static first(mdMapOrMaps: MetadataMapInterface | MetadataMapInterface[], keyOrKeys: string | string[],
-                      filter?: MetadataValueFilter): MetadataValue {
-    const mdMaps: MetadataMapInterface[] = mdMapOrMaps instanceof Array ? mdMapOrMaps : [mdMapOrMaps];
-    for (const mdMap of mdMaps) {
-      for (const key of Metadata.resolveKeys(mdMap, keyOrKeys)) {
-        const values: MetadataValue[] = mdMap[key] as MetadataValue[];
+  public static first(metadata: MetadataMapInterface, keyOrKeys: string | string[], hitHighlights?: MetadataMapInterface, filter?: MetadataValueFilter, escapeHTML?: boolean): MetadataValue {
+    if (isNotEmpty(hitHighlights)) {
+      for (const key of Metadata.resolveKeys(hitHighlights, keyOrKeys)) {
+        const values: MetadataValue[] = hitHighlights[key] as MetadataValue[];
         if (values) {
           return values.find((value: MetadataValue) => Metadata.valueMatches(value, filter));
         }
+      }
+    }
+    for (const key of Metadata.resolveKeys(metadata, keyOrKeys)) {
+      const values: MetadataValue[] = metadata[key] as MetadataValue[];
+      if (values) {
+        const result: MetadataValue = values.find((value: MetadataValue) => Metadata.valueMatches(value, filter));
+        if (escapeHTML) {
+          return Object.assign(new MetadataValue(), result, {
+            value: escape(result.value),
+          });
+        }
+        return result;
       }
     }
   }
@@ -104,28 +139,29 @@ export class Metadata {
   /**
    * Like [[Metadata.first]], but only returns a string value, or `undefined`.
    *
-   * @param {MetadataMapInterface|MetadataMapInterface[]} mapOrMaps The source map(s).
+   * @param metadata The metadata values.
    * @param {string|string[]} keyOrKeys The metadata key(s) in scope. Wildcards are supported; see above.
+   * @param hitHighlights The search hit highlights.
    * @param {MetadataValueFilter} filter The value filter to use. If unspecified, no filtering will be done.
+   * @param escapeHTML Whether the HTML is used inside a `[innerHTML]` attribute
    * @returns {string} the first matching string value, or `undefined`.
    */
-  public static firstValue(mdMapOrMaps: MetadataMapInterface | MetadataMapInterface[], keyOrKeys: string | string[],
-                           filter?: MetadataValueFilter): string {
-    const value = Metadata.first(mdMapOrMaps, keyOrKeys, filter);
+  public static firstValue(metadata: MetadataMapInterface, keyOrKeys: string | string[], hitHighlights?: MetadataMapInterface, filter?: MetadataValueFilter, escapeHTML?: boolean): string {
+    const value = Metadata.first(metadata, keyOrKeys, hitHighlights, filter, escapeHTML);
     return isUndefined(value) ? undefined : value.value;
   }
 
   /**
    * Checks for a matching metadata value in the given map(s).
    *
-   * @param {MetadataMapInterface|MetadataMapInterface[]} mapOrMaps The source map(s).
+   * @param metadata The metadata values.
    * @param {string|string[]} keyOrKeys The metadata key(s) in scope. Wildcards are supported; see above.
+   * @param hitHighlights The search hit highlights.
    * @param {MetadataValueFilter} filter The value filter to use. If unspecified, no filtering will be done.
    * @returns {boolean} whether a match is found.
    */
-  public static has(mdMapOrMaps: MetadataMapInterface | MetadataMapInterface[], keyOrKeys: string | string[],
-                    filter?: MetadataValueFilter): boolean {
-    return isNotUndefined(Metadata.first(mdMapOrMaps, keyOrKeys, filter));
+  public static has(metadata: MetadataMapInterface, keyOrKeys: string | string[], hitHighlights?: MetadataMapInterface, filter?: MetadataValueFilter): boolean {
+    return isNotUndefined(Metadata.first(metadata, keyOrKeys, hitHighlights, filter));
   }
 
   /**
@@ -153,11 +189,11 @@ export class Metadata {
    * Returns true if this Metadatum's value is defined
    */
   public static hasValue(value: MetadataValue|string): boolean {
-    if (isEmpty(value) || value === PLACEHOLDER_VALUE) {
+    if (isEmpty(value)) {
       return false;
     }
     if (isObject(value) && value.hasOwnProperty('value')) {
-      return isNotEmpty(value.value) && value.value !== PLACEHOLDER_VALUE;
+      return isNotEmpty(value.value);
     }
     return true;
   }
@@ -170,9 +206,7 @@ export class Metadata {
    * @returns {boolean} whether the filter matches, or true if no filter is given.
    */
   public static valueMatches(mdValue: MetadataValue, filter: MetadataValueFilter) {
-    if (mdValue.value === PLACEHOLDER_VALUE) {
-      return false;
-    } else if (!filter) {
+    if (!filter) {
       return true;
     } else if (filter.language && filter.language !== mdValue.language) {
       return false;
@@ -181,15 +215,19 @@ export class Metadata {
     } else if (filter.value) {
       let fValue = filter.value;
       let mValue = mdValue.value;
+
       if (filter.ignoreCase) {
         fValue = filter.value.toLowerCase();
         mValue = mdValue.value.toLowerCase();
       }
+      let result;
+
       if (filter.substring) {
-        return mValue.includes(fValue);
+        result = mValue.includes(fValue);
       } else {
-        return mValue === fValue;
+        result = mValue === fValue;
       }
+      return filter.negate ? !result : result;
     }
     return true;
   }
@@ -205,7 +243,7 @@ export class Metadata {
     const outputKeys: string[] = [];
     for (const inputKey of inputKeys) {
       if (inputKey.includes('*')) {
-        const inputKeyRegex = new RegExp('^' + inputKey.replace(/\./g, '\\.').replace(/\*/g, '.*') + '$');
+        const inputKeyRegex = new RegExp('^' + inputKey.replace(/\\/g, '\\\\').replace(/\./g, '\\.').replace(/\*/g, '.*') + '$');
         for (const mapKey of Object.keys(mdMap)) {
           if (!outputKeys.includes(mapKey) && inputKeyRegex.test(mapKey)) {
             outputKeys.push(mapKey);

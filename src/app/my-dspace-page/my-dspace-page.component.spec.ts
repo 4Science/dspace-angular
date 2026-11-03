@@ -15,6 +15,12 @@ import { MyDSpaceConfigurationValueType } from './my-dspace-configuration-value-
 import { Context } from '../core/shared/context.model';
 import SpyObj = jasmine.SpyObj;
 import { SelectableListService } from '../shared/object-list/selectable-list/selectable-list.service';
+import { RequestService } from '../core/data/request.service';
+import { getMockRequestService } from '../shared/mocks/request.service.mock';
+import { RequestEntry } from '../core/data/request-entry.model';
+import { APP_CONFIG } from '../../config/app-config.interface';
+import { environment } from '../../environments/environment.test';
+import { ViewMode } from '../core/shared/view-mode.model';
 
 describe('MyDSpacePageComponent', () => {
   let comp: MyDSpacePageComponent;
@@ -42,6 +48,12 @@ describe('MyDSpacePageComponent', () => {
     }
   ];
 
+  const getRequestEntry$ = (successful: boolean) => {
+    return observableOf({
+      response: { isSuccessful: successful, payload: {} } as any
+    } as RequestEntry);
+  };
+
   const selectableListService = jasmine.createSpyObj('selectableListService', {
     selectSingle: jasmine.createSpy('selectSingle'),
     deselectSingle: jasmine.createSpy('deselectSingle'),
@@ -55,6 +67,7 @@ describe('MyDSpacePageComponent', () => {
         { provide: SearchService, useValue: searchServiceStub },
         { provide: MyDSpaceConfigurationService, useValue: myDSpaceConfigurationServiceStub },
         { provide: SelectableListService, useValue: selectableListService },
+        { provide: APP_CONFIG, useValue: environment },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(MyDSpacePageComponent, {
@@ -63,6 +76,10 @@ describe('MyDSpacePageComponent', () => {
           {
             provide: SEARCH_CONFIG_SERVICE,
             useValue: myDSpaceConfigurationServiceStub
+          },
+          {
+            provide: RequestService,
+            useValue: getMockRequestService(getRequestEntry$(true))
           }
         ]
       }
@@ -93,5 +110,9 @@ describe('MyDSpacePageComponent', () => {
     expect(comp.configuration).toBe(MyDSpaceConfigurationValueType.Workspace);
     expect(comp.context).toBe(Context.Workspace);
   }));
+
+  it('should set the initial view mode from the mydspacePage preferred display view configuration', () => {
+    expect(comp.initViewMode).toBe(ViewMode.DetailedListElement);
+  });
 
 });

@@ -4,7 +4,7 @@
   <div *ngSwitchCase="'text-raw'">{{ textRowSection.content }}</div>
   <div *ngSwitchCase="'text-metadata'" [class.text-section-home-news]="textRowSection.content === 'cris.cms.home-news'">
     <ds-markdown-viewer data-test="ds-markdown-viewer"
-                        [value]="metadataValue(textRowSection.content)"></ds-markdown-viewer>
+                        [value]="metadataValue$ | async"></ds-markdown-viewer>
   </div>
   <div *ngSwitchCase="'custom'">
     <ng-container *ngTemplateOutlet="custom"></ng-container>

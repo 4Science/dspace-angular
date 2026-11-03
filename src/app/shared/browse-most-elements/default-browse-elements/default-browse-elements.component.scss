@@ -1,0 +1,37 @@
+:host ::ng-deep {
+  .skeleton-row {
+    border-bottom: 1px solid var(--bs-border-color, #dee2e6);
+    padding-bottom: 1rem;
+  }
+
+  .thumbnail-skeleton {
+    max-width: var(--ds-thumbnail-max-width, 100%);
+    height: 100%;
+
+    ngx-skeleton-loader .skeleton-loader {
+      border-radius: 0;
+      height: 80px;
+      width: 100%;
+    }
+  }
+
+  .badge-skeleton {
+    ngx-skeleton-loader .skeleton-loader {
+      height: var(--ds-search-skeleton-text-height, 20px);
+      width: var(--ds-search-skeleton-badge-width, 75px);
+    }
+  }
+
+  .text-skeleton {
+    margin-top: 0.5rem;
+
+    ngx-skeleton-loader .skeleton-loader {
+      height: var(--ds-search-skeleton-text-height, 20px);
+    }
+  }
+
+  ngx-skeleton-loader .skeleton-loader {
+    background-color: var(--bs-light, #f8f9fa);
+    box-shadow: none;
+  }
+}

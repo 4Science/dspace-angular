@@ -4,6 +4,7 @@
   div.background-image-container {
     color: white;
     position: relative;
+    font-weight: 600;
 
     .background-image > img {
       background-color: var(--bs-info);
@@ -50,7 +51,8 @@
         color: inherit;
       }
 
-      opacity: 0.3;
+      color: rgba(255, 255, 255, 0.7);
+      background-color: rgba(0, 0, 0, 0.1);
       position: absolute;
       right: var(--bs-spacer);
       bottom: 0;
@@ -67,6 +69,11 @@
     @include hover {
       color: var(--ds-home-news-link-hover-color);
     }
+  }
+
+  .lead {
+    font-size: 1.25rem;
+    font-weight: 400;
   }
 }
 

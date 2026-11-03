@@ -56,6 +56,10 @@ export class AuthServiceStub {
     return observableOf(EPersonMock);
   }
 
+  getAuthenticatedUserFromStoreIfAuthenticated(): Observable<EPerson> {
+    return observableOf(EPersonMock);
+  }
+
   public buildAuthHeader(token?: AuthTokenInfo): string {
     return `Bearer ${token ? token.accessToken : ''}`;
   }

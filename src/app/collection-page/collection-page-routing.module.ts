@@ -23,6 +23,7 @@ import { ThemedCollectionPageComponent } from './themed-collection-page.componen
 import { MenuItemType } from '../shared/menu/menu-item-type.model';
 import { CommunityBreadcrumbResolver } from '../core/breadcrumbs/community-breadcrumb.resolver';
 import { EditCollectionResolver } from '../core/shared/resolvers/edit-collection.resolver';
+import { ViewTrackerResolverService } from '../statistics/angulartics/dspace/view-tracker-resolver.service';
 
 @NgModule({
   imports: [
@@ -87,6 +88,9 @@ import { EditCollectionResolver } from '../core/shared/resolvers/edit-collection
             path: '',
             component: ThemedCollectionPageComponent,
             pathMatch: 'full',
+            resolve: {
+              tracking: ViewTrackerResolverService,
+            },
           }
         ],
         data: {
@@ -116,7 +120,8 @@ import { EditCollectionResolver } from '../core/shared/resolvers/edit-collection
     CreateCollectionPageGuard,
     CollectionPageAdministratorGuard,
     CommunityBreadcrumbResolver,
-    EditCollectionResolver
+    EditCollectionResolver,
+    ViewTrackerResolverService,
   ]
 })
 export class CollectionPageRoutingModule {

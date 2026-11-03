@@ -1,7 +1,7 @@
 import { testA11y } from 'cypress/support/utils';
 import { Options } from 'cypress-axe';
 
-xdescribe('Breadcrumbs', () => {
+describe('Breadcrumbs', () => {
     it('should pass accessibility tests', () => {
         // Visit an Item, as those have more breadcrumbs
         cy.visit('/entities/publication/'.concat(Cypress.env('DSPACE_TEST_ENTITY_PUBLICATION')));

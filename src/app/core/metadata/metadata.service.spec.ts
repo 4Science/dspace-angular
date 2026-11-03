@@ -12,7 +12,7 @@ import {
   ItemMock,
   MockBitstream1,
   MockBitstream3,
-  MockBitstream2
+  MockBitstream2, NonDiscoverableItemMock
 } from '../../shared/mocks/item.mock';
 import { createSuccessfulRemoteDataObject, createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
 import { PaginatedList } from '../data/paginated-list.model';
@@ -83,7 +83,9 @@ describe('MetadataService', () => {
     meta = jasmine.createSpyObj('meta', {
       updateTag: {},
       addTag: {},
-      removeTag: {}
+      removeTag: {},
+      removeTagElement: {},
+      getTags: ['1', '2'],
     });
     title = jasmine.createSpyObj({
       setTitle: {}
@@ -99,7 +101,7 @@ describe('MetadataService', () => {
       }
     } as any as Router;
     hardRedirectService = jasmine.createSpyObj( {
-      getCurrentOrigin: 'https://request.org',
+      getBaseUrl: 'https://request.org',
     });
     authorizationService = jasmine.createSpyObj('authorizationService', {
       isAuthorized: observableOf(true)
@@ -143,6 +145,37 @@ describe('MetadataService', () => {
     );
   });
 
+  describe(`robots tag`, () => {
+    it(`should be set to noindex for non-discoverable items`, fakeAsync(() => {
+      (metadataService as any).processRouteChange({
+        data: {
+          value: {
+            dso: createSuccessfulRemoteDataObject(NonDiscoverableItemMock),
+          },
+        },
+      });
+      tick();
+      expect(meta.updateTag).toHaveBeenCalledWith({
+        name: 'robots',
+        content: 'noindex',
+      });
+    }));
+    it(`should not be set for discoverable items`, fakeAsync(() => {
+      (metadataService as any).processRouteChange({
+        data: {
+          value: {
+            dso: createSuccessfulRemoteDataObject(ItemMock),
+          },
+        },
+      });
+      tick();
+      expect(meta.updateTag).not.toHaveBeenCalledWith({
+        name: 'robots',
+        content: 'noindex',
+      });
+    }));
+  });
+
   it('items page should set meta tags', fakeAsync(() => {
     (metadataService as any).processRouteChange({
       data: {
@@ -156,7 +189,8 @@ describe('MetadataService', () => {
       name: 'citation_title',
       content: 'Test PowerPoint Document',
     });
-    expect(meta.updateTag).toHaveBeenCalledWith({ name: 'citation_author', content: 'Doe, Jane' });
+    expect(meta.addTag).toHaveBeenCalledWith({ name: 'citation_author', content: 'Doe, Jane' });
+    expect(meta.addTag).toHaveBeenCalledWith({ name: 'citation_author', content: 'Doe, John' });
     expect(meta.updateTag).toHaveBeenCalledWith({
       name: 'citation_publication_date',
       content: '1650-06-26',
@@ -167,6 +201,13 @@ describe('MetadataService', () => {
       name: 'citation_keywords',
       content: 'keyword1; keyword2; keyword3',
     });
+  }));
+
+  it('items page should remove multiple tags', fakeAsync(() => {
+    metadataService.clearMetaTags();
+    expect(meta.getTags).toHaveBeenCalledWith('name="title"');
+    expect(meta.getTags).toHaveBeenCalledWith('name="description"');
+    expect(meta.removeTagElement).toHaveBeenCalledTimes(4);
   }));
 
   it('items page should set meta tags as published Thesis', fakeAsync(() => {

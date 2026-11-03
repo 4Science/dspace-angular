@@ -1,6 +1,13 @@
 import { Result } from 'axe-core';
 import { Options } from 'cypress-axe';
 
+/**
+ * Selector that matches search result items regardless of the active view mode (list, grid, or detail).
+ * Use this instead of hardcoding a single data-test attribute so that tests remain
+ * independent of the `preferredDisplayView` configuration.
+ */
+export const SEARCH_RESULT_VIEW_MODE_SELECTOR = '[data-test="list-object"], [data-test="grid-object"], [data-test="detail-object"]';
+
 // Log violations to terminal/commandline in a table format.
 // Uses 'log' and 'table' tasks defined in ../plugins/index.ts
 // Borrowed from https://github.com/component-driven/cypress-axe#in-your-spec-file

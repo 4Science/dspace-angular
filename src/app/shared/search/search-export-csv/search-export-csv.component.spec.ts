@@ -2,11 +2,11 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { of as observableOf } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { SearchExportCsvComponent } from './search-export-csv.component';
 import { ScriptDataService } from '../../../core/data/processes/script-data.service';
 import { createFailedRemoteDataObject$, createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
-import { Script } from '../../../process-page/scripts/script.model';
 import { Process } from '../../../process-page/processes/process.model';
 import { NotificationsServiceStub } from '../../testing/notifications-service.stub';
 import { NotificationsService } from '../../notifications/notifications.service';
@@ -24,8 +24,8 @@ describe('SearchExportCsvComponent', () => {
   let authorizationDataService: AuthorizationDataService;
   let notificationsService;
   let router;
+  let configurationDataService: jasmine.SpyObj<ConfigurationDataService>;
 
-  const script = Object.assign(new Script(), {id: 'metadata-export-search', name: 'metadata-export-search'});
   const process = Object.assign(new Process(), {processId: 5, scriptName: 'metadata-export-search'});
 
   const searchConfig = new PaginatedSearchOptions({
@@ -39,9 +39,13 @@ describe('SearchExportCsvComponent', () => {
     ]
   });
 
+  configurationDataService = jasmine.createSpyObj('ConfigurationDataService', {
+    findByPropertyName: observableOf({ payload: { value: '500' } }),
+  });
+
   function initBeforeEachAsync() {
     scriptDataService = jasmine.createSpyObj('scriptDataService', {
-      findById: createSuccessfulRemoteDataObject$(script),
+      scriptWithNameExistsAndCanExecute: observableOf(true),
       invoke: createSuccessfulRemoteDataObject$(process)
     });
     authorizationDataService = jasmine.createSpyObj('authorizationService', {
@@ -59,6 +63,7 @@ describe('SearchExportCsvComponent', () => {
         {provide: AuthorizationDataService, useValue: authorizationDataService},
         {provide: NotificationsService, useValue: notificationsService},
         {provide: Router, useValue: router},
+        { provide: ConfigurationDataService, useValue: configurationDataService },
       ]
     }).compileComponents();
   }
@@ -110,14 +115,21 @@ describe('SearchExportCsvComponent', () => {
     describe('when the metadata-export-search script is not present', () => {
       beforeEach(waitForAsync(() => {
         initBeforeEachAsync();
-        (scriptDataService.findById as jasmine.Spy).and.returnValue(createFailedRemoteDataObject$('Not found', 404));
+        (scriptDataService.scriptWithNameExistsAndCanExecute as jasmine.Spy).and.returnValue(observableOf(false));
       }));
-      beforeEach(() => {
-        initBeforeEach();
-      });
+
       it('should should not add the button', () => {
+        initBeforeEach();
+
         const debugElement = fixture.debugElement.query(By.css('button.export-button'));
         expect(debugElement).toBeNull();
+      });
+
+      it('should not call scriptWithNameExistsAndCanExecute when unauthorized', () => {
+        (authorizationDataService.isAuthorized as jasmine.Spy).and.returnValue(observableOf(false));
+        initBeforeEach();
+
+        expect(scriptDataService.scriptWithNameExistsAndCanExecute).not.toHaveBeenCalled();
       });
     });
   });

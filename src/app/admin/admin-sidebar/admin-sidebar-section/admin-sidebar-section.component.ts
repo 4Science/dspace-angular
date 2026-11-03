@@ -42,7 +42,7 @@ export class AdminSidebarSectionComponent extends MenuSectionComponent implement
   }
 
   ngOnInit(): void {
-    this.isDisabled = this.itemModel?.disabled || isEmpty(this.itemModel?.link);
+    this.isDisabled = this.itemModel?.disabled || (isEmpty(this.itemModel?.link) && isEmpty(this.itemModel?.href));
     super.ngOnInit();
   }
 

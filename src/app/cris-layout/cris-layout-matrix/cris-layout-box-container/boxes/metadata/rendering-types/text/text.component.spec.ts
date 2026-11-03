@@ -10,6 +10,7 @@ import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate
 import { DsDatePipe } from '../../../../../../pipes/ds-date.pipe';
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
+import { EscapeHtmlPipe } from 'src/app/shared/utils/escape-html.pipe';
 
 describe('TextComponent', () => {
   let component: TextComponent;
@@ -61,7 +62,7 @@ describe('TextComponent', () => {
         { provide: 'renderingSubTypeProvider', useValue: '' },
         { provide: 'tabNameProvider', useValue: '' },
       ],
-      declarations: [TextComponent, DsDatePipe]
+      declarations: [TextComponent, DsDatePipe, EscapeHtmlPipe]
     })
       .compileComponents();
   }));

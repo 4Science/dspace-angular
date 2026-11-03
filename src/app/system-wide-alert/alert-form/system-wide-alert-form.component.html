@@ -5,7 +5,8 @@
             <div class="row mb-2">
                 <div class="col">
                   <ds-switch
-                    [options]="switchOptions"
+                    [checkedOption]="switchOnOption"
+                    [uncheckedOption]="switchOffOption"
                     [selectedValue]="formActive.value"
                     (selectedValueChange)="setActive($event)">
                   </ds-switch>
@@ -96,7 +97,7 @@
         <button (click)="back()" class="btn btn-outline-secondary">
           <i class="fas fa-times mr-1"></i> {{'system-wide-alert.form.cancel' | translate}}
         </button>
-        <button class="btn btn-primary" [disabled]="alertForm.invalid" (click)="save()">
+        <button class="btn btn-primary" [dsBtnDisabled]="alertForm.invalid" (click)="save()">
             <i class="fa fa-save mr-1"></i> {{ 'system-wide-alert.form.save' | translate}}
         </button>
     </div>

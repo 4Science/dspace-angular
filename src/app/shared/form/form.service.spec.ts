@@ -10,6 +10,7 @@ import { AppState } from '../../app.reducer';
 import { formReducer } from './form.reducer';
 import { getMockFormBuilderService } from '../mocks/form-builder-service.mock';
 import { DynamicConcatModel } from './builder/ds-dynamic-form-ui/models/ds-dynamic-concat.model';
+import { getMockTranslateService } from '../mocks/translate.service.mock';
 
 describe('FormService test suite', () => {
   const config = {
@@ -24,6 +25,7 @@ describe('FormService test suite', () => {
   let service: FormService;
   let builderService: FormBuilderService;
   let formGroup: UntypedFormGroup;
+  const translateService = getMockTranslateService();
 
   const formModel: DynamicFormControlModel[] = [
     new DynamicInputModel({ id: 'author', value: 'test' }),
@@ -129,10 +131,10 @@ describe('FormService test suite', () => {
         name_CONCAT_SECOND_INPUT: new FormControl(undefined)
       });
 
-      formGroup = new UntypedFormGroup({ author, title, date, description, addressLocation, name });
-      controls = { author, title, date, description , addressLocation, name };
-      service = new FormService(builderService, store);
-    })
+    formGroup = new UntypedFormGroup({ author, title, date, description, addressLocation, name });
+    controls = { author, title, date, description , addressLocation, name };
+    service = new FormService(builderService, store, translateService);
+  }),
   )
   ;
 
@@ -226,6 +228,17 @@ describe('FormService test suite', () => {
 
   });
 
+  it('should show correct error message if a different error is already present in the field and a new is added', () => {
+    let control = controls.description;
+    let model = formModel.find((mdl: DynamicFormControlModel) => mdl.id === 'description');
+
+    service.addErrorToField(control, model, 'error.test.message');
+    service.addErrorToField(control, model, 'error.test.newMessage');
+    service.removeErrorFromField(control, model, 'error.test.message');
+
+    expect(control.errors).toEqual({ newMessage: true });
+  });
+
   it('should remove error from field', () => {
     let control = controls.description;
     let model = formModel.find((mdl: DynamicFormControlModel) => mdl.id === 'description');
@@ -249,7 +262,7 @@ describe('FormService test suite', () => {
 
     service.removeErrorFromField(control, model, 'error.required');
 
-    expect(control.errors).toBeNull();
+    expect(control.errors).toEqual(null);
   });
 
   it('should remove errors from fields of concat group', () => {
@@ -258,8 +271,8 @@ describe('FormService test suite', () => {
     let control = controls.name;
     let model = formModel.find((mdl: DynamicFormControlModel) => mdl.id === 'name_CONCAT_GROUP');
     let errorKeys: string[];
-
-    service.addErrorToField(control, model, 'Test error message');
+    const messageKey = 'Test error message';
+    service.addErrorToField(control, model, messageKey);
     errorKeys = Object.keys(control.errors);
 
     service.removeErrorFromField(control, model, errorKeys[0]);
@@ -271,7 +284,7 @@ describe('FormService test suite', () => {
 
     // the group's inputs should no longer have an error
     Object.values(control.controls).forEach((subControl: AbstractControl) => {
-      expect(control.errors).toBeNull();
+      expect(control.errors).toEqual(null);
     });
   });
 

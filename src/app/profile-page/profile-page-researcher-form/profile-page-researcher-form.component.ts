@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 
 import { getFirstCompletedRemoteData, getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
@@ -58,12 +58,14 @@ export class ProfilePageResearcherFormComponent implements OnInit {
   researcherProfileItemId: string;
 
   /**
-   * The custom options for the 'ds-switch' component
+   * The "on" option for the 'ds-switch' component (public)
    */
-  switchOptions: SwitchOption[] = [
-    { value: 'public', icon: 'fa fa-globe', labelColor: SwitchColor.Success, label: 'researcher.profile.public.visibility', iconColor: SwitchColor.Success },
-    { value: 'private', icon: 'fa fa-lock', labelColor: SwitchColor.Danger, label: 'researcher.profile.private.visibility', iconColor: SwitchColor.Danger },
-  ];
+  switchOnOption: SwitchOption = { value: 'public', icon: 'fa fa-globe', labelColor: SwitchColor.Success, label: 'researcher.profile.public.visibility', iconColor: SwitchColor.Success };
+
+  /**
+   * The "off" option for the 'ds-switch' component (private)
+   */
+  switchOffOption: SwitchOption = { value: 'private', icon: 'fa fa-lock', labelColor: SwitchColor.Danger, label: 'researcher.profile.private.visibility', iconColor: SwitchColor.Danger };
 
   constructor(protected researcherProfileService: ResearcherProfileDataService,
               protected profileClaimService: ProfileClaimService,
@@ -164,24 +166,6 @@ export class ProfilePageResearcherFormComponent implements OnInit {
         this.notificationService.error(null, this.translationService.get('researcher.profile.change-visibility.fail'));
       }
     });
-  }
-
-  /**
-   * Return a boolean representing if a delete operation is pending.
-   *
-   * @return {Observable<boolean>}
-   */
-  isProcessingDelete(): Observable<boolean> {
-    return this.processingDelete$.asObservable();
-  }
-
-  /**
-   * Return a boolean representing if a create operation is pending.
-   *
-   * @return {Observable<boolean>}
-   */
-  isProcessingCreate(): Observable<boolean> {
-    return this.processingCreate$.asObservable();
   }
 
   /**

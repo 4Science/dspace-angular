@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { combineLatest as observableCombineLatest, Observable } from 'rxjs';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ScriptDataService } from '../../../core/data/processes/script-data.service';
 import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
-import { map } from 'rxjs/operators';
+import { map, switchMap, filter, startWith } from 'rxjs/operators';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { hasValue, isNotEmpty } from '../../empty.util';
@@ -13,6 +13,9 @@ import { NotificationsService } from '../../notifications/notifications.service'
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { PaginatedSearchOptions } from '../models/paginated-search-options.model';
+import { SearchFilter } from '../models/search-filter.model';
+import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
+import { ConfigurationProperty } from '../../../core/shared/configuration-property.model';
 
 @Component({
   selector: 'ds-search-export-csv',
@@ -22,12 +25,17 @@ import { PaginatedSearchOptions } from '../models/paginated-search-options.model
 /**
  * Display a button to export the current search results as csv
  */
-export class SearchExportCsvComponent implements OnInit {
+export class SearchExportCsvComponent implements OnInit, OnChanges {
 
   /**
    * The current configuration of the search
    */
   @Input() searchConfig: PaginatedSearchOptions;
+
+  /**
+   * The total number of items in the search results which can be exported
+   */
+  @Input() total: number;
 
   /**
    * Observable used to determine whether the button should be shown
@@ -39,24 +47,51 @@ export class SearchExportCsvComponent implements OnInit {
    */
   tooltipMsg = 'metadata-export-search.tooltip';
 
+  exportLimitExceededKey = 'metadata-export-search.submit.error.limit-exceeded';
+
+  exportLimitExceededMsg = '';
+
+  shouldShowWarning$: Observable<boolean>;
+
   constructor(private scriptDataService: ScriptDataService,
               private authorizationDataService: AuthorizationDataService,
               private notificationsService: NotificationsService,
               private translateService: TranslateService,
-              private router: Router
-  ) {
+              private router: Router,
+              private configurationService: ConfigurationDataService) {
   }
 
   ngOnInit(): void {
-    const scriptExists$ = this.scriptDataService.findById('metadata-export-search').pipe(
-      getFirstCompletedRemoteData(),
-      map((rd) => rd.isSuccess && hasValue(rd.payload))
+    this.shouldShowButton$ = this.authorizationDataService.isAuthorized(FeatureID.AdministratorOf).pipe(
+      filter((isAuthorized: boolean) => isAuthorized),
+      switchMap(() => this.scriptDataService.scriptWithNameExistsAndCanExecute('metadata-export-search')),
+      map((canExecute: boolean) => canExecute),
+      startWith(false),
     );
+    this.shouldShowWarning$ = this.itemExceeds();
+  }
 
-    const isAuthorized$ = this.authorizationDataService.isAuthorized(FeatureID.AdministratorOf);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.total) {
+      this.shouldShowWarning$ = this.itemExceeds();
+    }
+  }
 
-    this.shouldShowButton$ = observableCombineLatest([scriptExists$, isAuthorized$]).pipe(
-      map(([scriptExists, isAuthorized]: [boolean, boolean]) => scriptExists && isAuthorized)
+  /**
+   * Checks if the export limit has been exceeded and updates the tooltip accordingly
+   */
+  private itemExceeds(): Observable<boolean> {
+    return this.configurationService.findByPropertyName('bulkedit.export.max.items').pipe(
+      getFirstCompletedRemoteData(),
+      map((response: RemoteData<ConfigurationProperty>) => {
+        const limit = Number(response.payload?.values?.[0]) || 500;
+        if (limit < this.total) {
+          this.exportLimitExceededMsg = this.translateService.instant(this.exportLimitExceededKey, { limit: String(limit) });
+          return true;
+        } else {
+          return false;
+        }
+      }),
     );
   }
 
@@ -76,19 +111,19 @@ export class SearchExportCsvComponent implements OnInit {
         parameters.push({name: '-c', value: this.searchConfig.configuration});
       }
       if (isNotEmpty(this.searchConfig.filters)) {
-        this.searchConfig.filters.forEach((filter) => {
-          if (hasValue(filter.values)) {
-            filter.values.forEach((value) => {
+        this.searchConfig.filters.forEach((searchFilter: SearchFilter) => {
+          if (hasValue(searchFilter.values)) {
+            searchFilter.values.forEach((value: string) => {
               let operator;
               let filterValue;
-              if (hasValue(filter.operator)) {
-                operator = filter.operator;
+              if (hasValue(searchFilter.operator)) {
+                operator = searchFilter.operator;
                 filterValue = value;
               } else {
                 operator = value.substring(value.lastIndexOf(',') + 1);
                 filterValue = value.substring(0, value.lastIndexOf(','));
               }
-              const valueToAdd = `${filter.key.substring(2)},${operator}=${filterValue}`;
+              const valueToAdd = `${searchFilter.key.substring(2)},${operator}=${filterValue}`;
               parameters.push({name: '-f', value: valueToAdd});
             });
           }

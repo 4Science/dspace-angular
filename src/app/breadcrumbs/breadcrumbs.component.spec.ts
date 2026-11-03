@@ -10,6 +10,7 @@ import { TranslateLoaderMock } from '../shared/testing/translate-loader.mock';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of as observableOf } from 'rxjs';
 import { DebugElement } from '@angular/core';
+import {EscapeHtmlPipe} from '../shared/utils/escape-html.pipe';
 
 describe('BreadcrumbsComponent', () => {
   let component: BreadcrumbsComponent;
@@ -43,6 +44,7 @@ describe('BreadcrumbsComponent', () => {
       declarations: [
         BreadcrumbsComponent,
         VarDirective,
+        EscapeHtmlPipe
       ],
       imports: [
         RouterTestingModule.withRoutes([]),

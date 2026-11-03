@@ -1,7 +1,6 @@
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
-import { REQUEST, RESPONSE } from '@nguniversal/express-engine/tokens';
 
 import { Observable, of as observableOf } from 'rxjs';
 import { filter, map, startWith, switchMap, take } from 'rxjs/operators';
@@ -31,13 +30,18 @@ import {
   RefreshTokenAction,
   ResetAuthenticationMessagesAction, SetAuthCookieStatus,
   SetRedirectUrlAction,
+  SetRedirectUrlAndNavigateAction,
   SetUserAsIdleAction,
   UnsetUserAsIdleAction
 } from './auth.actions';
 import { NativeWindowRef, NativeWindowService } from '../services/window.service';
 import { RouteService } from '../services/route.service';
 import { EPersonDataService } from '../eperson/eperson-data.service';
-import { getAllSucceededRemoteDataPayload, getFirstCompletedRemoteData } from '../shared/operators';
+import {
+  getAllSucceededRemoteDataPayload,
+  getFirstCompletedRemoteData,
+  getFirstSucceededRemoteDataPayload
+} from '../shared/operators';
 import { AuthMethod } from './models/auth.method';
 import { HardRedirectService } from '../services/hard-redirect.service';
 import { RemoteData } from '../data/remote-data';
@@ -75,18 +79,17 @@ export class AuthService {
    */
   private tokenRefreshTimer;
 
-  constructor(@Inject(REQUEST) protected req: any,
-              @Inject(NativeWindowService) protected _window: NativeWindowRef,
-              @Optional() @Inject(RESPONSE) private response: any,
-              protected authRequestService: AuthRequestService,
-              protected epersonService: EPersonDataService,
-              protected router: Router,
-              protected routeService: RouteService,
-              protected storage: CookieService,
-              protected store: Store<AppState>,
-              protected hardRedirectService: HardRedirectService,
-              private notificationService: NotificationsService,
-              private translateService: TranslateService
+  constructor(
+    @Inject(NativeWindowService) protected _window: NativeWindowRef,
+    protected authRequestService: AuthRequestService,
+    protected epersonService: EPersonDataService,
+    protected router: Router,
+    protected routeService: RouteService,
+    protected storage: CookieService,
+    protected store: Store<AppState>,
+    protected hardRedirectService: HardRedirectService,
+    protected notificationService: NotificationsService,
+    protected translateService: TranslateService
   ) {
     this.store.pipe(
       // when this service is constructed the store is not fully initialized yet
@@ -221,6 +224,23 @@ export class AuthService {
       select(getAuthenticatedUser),
       map ((eperson) => Object.assign(new EPerson(), eperson)),
       take(1)
+    );
+  }
+
+  /**
+   * Returns an observable which emits the currently authenticated user from the store,
+   * or null if the user is not authenticated.
+   */
+  public getAuthenticatedUserFromStoreIfAuthenticated(): Observable<EPerson> {
+    return this.store.pipe(
+      select(getAuthenticatedUser),
+      switchMap((user: EPerson) => {
+        if (hasValue(user?.id)) {
+          return this.epersonService.findById(user.id).pipe(getFirstSucceededRemoteDataPayload());
+        } else {
+          return observableOf(null);
+        }
+      }),
     );
   }
 
@@ -468,10 +488,6 @@ export class AuthService {
     if (this._window.nativeWindow.location) {
       // Hard redirect to login page, so that all state is definitely lost
       this._window.nativeWindow.location.href = redirectUrl;
-    } else if (this.response) {
-      if (!this.response._headerSent) {
-        this.response.redirect(302, redirectUrl);
-      }
     } else {
       this.router.navigateByUrl(redirectUrl);
     }
@@ -518,15 +534,19 @@ export class AuthService {
   /**
    * Set redirect url
    */
-  setRedirectUrl(url: string) {
+   setRedirectUrl(redirectUrl: string, navigateUrl?: string) {
     // Add 1 hour to the current date
     const expireDate = Date.now() + (1000 * 60 * 60);
 
     // Set the cookie expire date
     const expires = new Date(expireDate);
-    const options: CookieAttributes = {expires: expires};
-    this.storage.set(REDIRECT_COOKIE, url, options);
-    this.store.dispatch(new SetRedirectUrlAction(isNotUndefined(url) ? url : ''));
+    const options: Cookies.CookieAttributes = { expires: expires };
+    this.storage.set(REDIRECT_COOKIE, redirectUrl, options);
+    if (hasValue(navigateUrl)) {
+      this.store.dispatch(new SetRedirectUrlAndNavigateAction(isNotUndefined(redirectUrl) ? redirectUrl : '', navigateUrl));
+    } else {
+      this.store.dispatch(new SetRedirectUrlAction(isNotUndefined(redirectUrl) ? redirectUrl : ''));
+    }
   }
 
   /**

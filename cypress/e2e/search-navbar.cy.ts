@@ -1,3 +1,5 @@
+import { SEARCH_RESULT_VIEW_MODE_SELECTOR } from 'cypress/support/utils';
+
 const page = {
     fillOutQueryInNavBar(query) {
         // Click the magnifying glass
@@ -29,7 +31,7 @@ describe('Search from Navigation Bar', () => {
         // Wait for search results to come back from the above GET command
         cy.wait('@search-results');
         // At least one search result should be displayed
-        cy.get('[data-test="list-object"]').should('be.visible');
+        cy.get(SEARCH_RESULT_VIEW_MODE_SELECTOR).should('be.visible');
     });
 
     it('should go to search page with correct query if submitted (from search)', () => {
@@ -44,7 +46,7 @@ describe('Search from Navigation Bar', () => {
         // Wait for search results to come back from the above GET command
         cy.wait('@search-results');
         // At least one search result should be displayed
-        cy.get('[data-test="list-object"]').should('be.visible');
+        cy.get(SEARCH_RESULT_VIEW_MODE_SELECTOR).should('be.visible');
     });
 
     it('should allow user to also submit query by clicking icon', () => {
@@ -59,6 +61,6 @@ describe('Search from Navigation Bar', () => {
         // Wait for search results to come back from the above GET command
         cy.wait('@search-results');
         // At least one search result should be displayed
-        cy.get('[data-test="list-object"]').should('be.visible');
+        cy.get(SEARCH_RESULT_VIEW_MODE_SELECTOR).should('be.visible');
     });
 });

@@ -12,6 +12,7 @@ import { DSONameServiceMock, UNDEFINED_NAME } from '../../../../../mocks/dso-nam
 import { VarDirective } from '../../../../../utils/var.directive';
 import { APP_CONFIG } from '../../../../../../../config/app-config.interface';
 import { TranslateModule } from '@ngx-translate/core';
+import { EscapeHtmlPipe } from '../../../../../utils/escape-html.pipe';
 
 let publicationListElementComponent: ItemSearchResultListElementComponent;
 let fixture: ComponentFixture<ItemSearchResultListElementComponent>;
@@ -194,7 +195,7 @@ describe('ItemSearchResultListElementComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot()],
-      declarations: [ItemSearchResultListElementComponent, TruncatePipe, VarDirective],
+      declarations: [ItemSearchResultListElementComponent, TruncatePipe, VarDirective, EscapeHtmlPipe],
       providers: [
         { provide: TruncatableService, useValue: truncatableServiceStub },
         { provide: DSONameService, useClass: DSONameServiceMock },
@@ -357,7 +358,7 @@ describe('ItemSearchResultListElementComponent', () => {
 
     it('should show highlighted title', () => {
       const titleField = fixture.debugElement.query(By.css('.item-list-title'));
-      expect(titleField.nativeNode.innerHTML).toEqual(dcTitle);
+      expect(titleField.nativeNode.innerHTML).toEqual('This is just another &lt;em&gt;title&lt;/em&gt;');
     });
   });
 
@@ -369,7 +370,7 @@ describe('ItemSearchResultListElementComponent', () => {
 
     it('should show highlighted title', () => {
       const titleField = fixture.debugElement.query(By.css('.item-list-title'));
-      expect(titleField.nativeNode.innerHTML).toEqual('<em>Michel</em>');
+      expect(titleField.nativeNode.innerHTML).toEqual('&lt;em&gt;Michel&lt;/em&gt;');
     });
   });
 
@@ -381,7 +382,7 @@ describe('ItemSearchResultListElementComponent', () => {
 
     it('should show highlighted title', () => {
       const titleField = fixture.debugElement.query(By.css('.item-list-title'));
-      expect(titleField.nativeNode.innerHTML).toEqual('<em>Science</em>');
+      expect(titleField.nativeNode.innerHTML).toEqual('&lt;em&gt;Science&lt;/em&gt;');
     });
   });
 
@@ -403,7 +404,7 @@ describe('ItemSearchResultListElementComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot()],
-      declarations: [ItemSearchResultListElementComponent, TruncatePipe],
+      declarations: [ItemSearchResultListElementComponent, TruncatePipe, EscapeHtmlPipe],
       providers: [
         {provide: TruncatableService, useValue: truncatableServiceStub},
         {provide: DSONameService, useClass: DSONameServiceMock},

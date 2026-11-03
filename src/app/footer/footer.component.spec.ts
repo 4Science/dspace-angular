@@ -19,6 +19,8 @@ import { of as observableOf } from 'rxjs';
 import { Site } from '../core/shared/site.model';
 import { SiteDataService } from '../core/data/site-data.service';
 import { LocaleService } from '../core/locale/locale.service';
+import { APP_CONFIG } from '../../config/app-config.interface';
+import { environment } from '../../environments/environment.test';
 
 let comp: FooterComponent;
 let fixture: ComponentFixture<FooterComponent>;
@@ -42,8 +44,8 @@ const siteService = jasmine.createSpyObj('siteService', {
   find: observableOf(site)
 });
 const localeServiceStub = {
-  getCurrentLanguageCode(): string {
-    return 'en';
+  getCurrentLanguageCode() {
+    return observableOf('en');
   }
 };
 describe('Footer component', () => {
@@ -61,6 +63,7 @@ describe('Footer component', () => {
       providers: [
         FooterComponent,
         { provide: AuthorizationDataService, useClass: AuthorizationDataServiceStub },
+        { provide: APP_CONFIG, useValue: environment },
         { provide: SiteDataService, useValue: siteService },
         { provide: LocaleService, useValue: localeServiceStub },
       ],

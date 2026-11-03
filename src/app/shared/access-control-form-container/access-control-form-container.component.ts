@@ -55,12 +55,14 @@ export class AccessControlFormContainerComponent<T extends DSpaceObject> impleme
   readonly AlertType = AlertType;
 
   /**
-   * The custom options for the 'ds-switch' component
+   * The "on" option for the 'ds-switch' component
    */
-  switchOptions: SwitchOption[] = [
-    { value: true, backgroundColor: SwitchColor.Success },
-    { value: false },
-  ];
+  switchOnOption: SwitchOption = { value: true, backgroundColor: SwitchColor.Success };
+
+  /**
+   * The "off" option for the 'ds-switch' component
+   */
+  switchOffOption: SwitchOption = { value: false };
 
   constructor(
     private bulkAccessConfigService: BulkAccessConfigDataService,
@@ -161,6 +163,10 @@ export class AccessControlFormContainerComponent<T extends DSpaceObject> impleme
 
   ngOnDestroy(): void {
     this.selectableListService.deselectAll(ITEM_ACCESS_CONTROL_SELECT_BITSTREAMS_LIST_ID);
+  }
+
+  isValid() {
+    return this.bitstreamAccessCmp.isValid() || this.itemAccessCmp.isValid();
   }
 
 }

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { map, take } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { Site } from '../core/shared/site.model';
 import { environment } from '../../environments/environment';
 import { SectionComponent, TextRowSection } from '../core/layout/models/section.model';
@@ -16,7 +16,7 @@ import { LocaleService } from '../core/locale/locale.service';
   styleUrls: ['./home-page.component.scss'],
   templateUrl: './home-page.component.html'
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements OnInit, OnDestroy {
 
   site$: BehaviorSubject<Site> = new BehaviorSubject<Site>(null);
   recentSubmissionspageSize: number;
@@ -37,6 +37,8 @@ export class HomePageComponent implements OnInit {
     style: ''
   };
 
+  subs: Subscription[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private sectionDataService: SectionDataService,
@@ -47,24 +49,29 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.data.pipe(
+    this.subs.push(this.route.data.pipe(
       map((data) => data.site as Site),
       take(1)
     ).subscribe((site: Site) => {
       this.site$.next(site);
-    });
+    }));
 
     this.sectionComponents = this.sectionDataService.findById('site').pipe(
       getFirstSucceededRemoteDataPayload(),
       map((section) => section.componentRows)
     );
 
-    this.siteService.find().pipe(take(1)).subscribe(
-      (site: Site) => {
-        this.hasHomeHeaderMetadata = !isEmpty(site?.firstMetadataValue('cris.cms.home-header',
-          { language: this.locale.getCurrentLanguageCode() }));
+    this.subs.push(combineLatest([
+      this.locale.getCurrentLanguageCode(),
+      this.siteService.find().pipe(take(1))
+    ]).subscribe(([language, site]: [string, Site]) => {
+        this.hasHomeHeaderMetadata = !isEmpty(site?.firstMetadataValue('cris.cms.home-header', { language }));
       }
-    );
+    ));
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(sub => sub.unsubscribe());
   }
 
   componentClass(sectionComponent: SectionComponent) {

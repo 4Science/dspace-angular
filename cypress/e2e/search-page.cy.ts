@@ -1,4 +1,4 @@
-import { testA11y } from 'cypress/support/utils';
+import { SEARCH_RESULT_VIEW_MODE_SELECTOR, testA11y } from 'cypress/support/utils';
 
 describe('Search Page', () => {
     // NOTE: these tests currently assume this query will return results!
@@ -20,8 +20,8 @@ describe('Search Page', () => {
         // <ds-search-page> tag must be loaded
         cy.get('ds-search-page').should('be.visible');
 
-        // At least one search result should be displayed
-        cy.get('[data-test="list-object"]').should('be.visible');
+    // At least one search result should be displayed
+        cy.get(SEARCH_RESULT_VIEW_MODE_SELECTOR).should('be.visible');
 
         // Click each filter toggle to open *every* filter
         // (As we want to scan filter section for accessibility issues as well)

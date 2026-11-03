@@ -19,15 +19,30 @@ import { REQUEST_COPY_MODULE_PATH } from '../app-routing-paths';
 import { CrisItemPageTabResolver } from './cris-item-page-tab.resolver';
 import { OrcidPageComponent } from './orcid-page/orcid-page.component';
 import { OrcidPageGuard } from './orcid-page/orcid-page.guard';
+import { signpostingLinksResolver } from './simple/link-resolver/signposting-links.resolver';
+import { ViewTrackerResolverService } from '../statistics/angulartics/dspace/view-tracker-resolver.service';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
       {
+        path: 'version',
+        children: [
+          {
+            path: ':id',
+            component: VersionPageComponent,
+            resolve: {
+              dso: VersionResolver,
+            },
+          }
+        ],
+      },
+      {
         path: ':id',
         resolve: {
           dso: ItemPageResolver,
           breadcrumb: ItemBreadcrumbResolver,
+          links: signpostingLinksResolver,
         },
         runGuardsAndResolvers: 'always',
         children: [
@@ -36,12 +51,16 @@ import { OrcidPageGuard } from './orcid-page/orcid-page.guard';
             component: ThemedItemPageComponent,
             pathMatch: 'full',
             resolve: {
-              tabs: CrisItemPageTabResolver
+              tabs: CrisItemPageTabResolver,
+              tracking: ViewTrackerResolverService,
             }
           },
           {
             path: 'full',
             component: ThemedFullItemPageComponent,
+            resolve: {
+              tracking: ViewTrackerResolverService,
+            },
           },
           {
             path: ITEM_EDIT_PATH,
@@ -89,18 +108,7 @@ import { OrcidPageGuard } from './orcid-page/orcid-page.guard';
           showSocialButtons: true
         },
       },
-      {
-        path: 'version',
-        children: [
-          {
-            path: ':id',
-            component: VersionPageComponent,
-            resolve: {
-              dso: VersionResolver,
-            },
-          }
-        ],
-      }
+
     ])
   ],
   providers: [
@@ -111,7 +119,8 @@ import { OrcidPageGuard } from './orcid-page/orcid-page.guard';
     ItemPageAdministratorGuard,
     VersionResolver,
     OrcidPageGuard,
-    CrisItemPageTabResolver
+    CrisItemPageTabResolver,
+    ViewTrackerResolverService,
   ]
 
 })

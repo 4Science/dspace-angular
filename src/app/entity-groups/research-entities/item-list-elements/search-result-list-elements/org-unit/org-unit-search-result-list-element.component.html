@@ -2,7 +2,7 @@
     <div *ngIf="showThumbnails" class="col-3 col-xl-2 pr-sm-0">
         <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'"
            [attr.rel]="(linkType == linkTypes.ExternalLink) ? 'noopener noreferrer' : null"
-           [routerLink]="[itemPageRoute]" class="dont-break-out">
+           [routerLink]="[itemPageRoute]" class="dont-break-out" role="link" tabindex="-1">
             <ds-thumbnail [thumbnail]="dso?.thumbnail | async"
                           [defaultImage]="'assets/images/orgunit-placeholder.svg'"
                           [alt]="'thumbnail.orgunit.alt'"
@@ -24,18 +24,21 @@
             <ds-truncatable [id]="dso.id">
                 <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'"
                   [attr.rel]="(linkType == linkTypes.ExternalLink) ? 'noopener noreferrer' : null"
-            [routerLink]="[itemPageRoute]" class="lead"
-                      [innerHTML]="dsoTitle || ('orgunit.listelement.no-title' | translate)"></a>
-          <span *ngIf="linkType == linkTypes.None"
-                class="lead"
-                [innerHTML]="dsoTitle || ('orgunit.listelement.no-title' | translate)"></span>
-          <div *ngIf="dso.allMetadata(['dc.description.*']).length > 0" class="text-muted">
-            <ds-truncatable-part [id]="dso.id" [minLines]="3">
-              <span class="item-list-org-unit-description" [innerHTML]="firstMetadataValue('dc.description.abstract')"></span>
-            </ds-truncatable-part>
-          </div>
-          <ds-additional-metadata [object]="dso"></ds-additional-metadata>
-                </ds-truncatable>
+                  [routerLink]="[itemPageRoute]" class="lead"
+                  role="link" tabindex="0"
+                  [innerHTML]="dsoTitle || ('orgunit.listelement.no-title' | translate)">
+                </a>
+                <span *ngIf="linkType == linkTypes.None"
+                      class="lead"
+                      [innerHTML]="dsoTitle || ('orgunit.listelement.no-title' | translate)">
+                </span>
+                <div *ngIf="dso.allMetadata(['dc.description.*']).length > 0" class="text-muted">
+                  <ds-truncatable-part [id]="dso.id" [minLines]="3">
+                    <span class="item-list-org-unit-description" [innerHTML]="firstMetadataValue('dc.description.abstract')"></span>
+                  </ds-truncatable-part>
+                </div>
+                <ds-additional-metadata [object]="dso"></ds-additional-metadata>
+            </ds-truncatable>
           <ds-metric-badges *ngIf="showMetrics" class="d-block clearfix" [item]="dso"></ds-metric-badges>
         </div>
         <div class="align-self-center" *ngIf="showMetrics">

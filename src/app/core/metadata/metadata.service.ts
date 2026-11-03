@@ -1,4 +1,4 @@
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
@@ -39,6 +39,7 @@ import { CoreState } from '../core-state.model';
 import { AuthorizationDataService } from '../data/feature-authorization/authorization-data.service';
 import { getDownloadableBitstream } from '../shared/bitstream.operators';
 import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
+import { FindListOptions } from '../data/find-list-options.model';
 import { SchemaJsonLDService } from './schema-json-ld/schema-json-ld.service';
 import { ITEM } from '../shared/item.resource-type';
 import { DOCUMENT, isPlatformBrowser, isPlatformServer } from '@angular/common';
@@ -183,6 +184,8 @@ export class MetadataService {
     this.setTitleTags();
     this.setDescriptionTags();
 
+    this.setNoIndexTag();
+
     this.setOpenGraphImageTag();
     this.setOpenGraphUrlTag();
 
@@ -206,6 +209,7 @@ export class MetadataService {
     this.setCitationKeywordsTag();
 
     this.setCitationAbstractUrlTag();
+    this.setCitationDoiTag();
     this.setCitationPdfUrlTag();
     this.setCitationPublisherTag();
 
@@ -225,6 +229,15 @@ export class MetadataService {
 
     if (this.isTechReport()) {
       this.setCitationTechnicalReportNumberTag();
+    }
+  }
+
+  /**
+   * Add <meta name="robots" content="noindex">  to the <head> if non-discoverable item
+   */
+  protected setNoIndexTag(): void {
+    if (this.currentObject.value instanceof Item && this.currentObject.value.isDiscoverable === false) {
+      this.addMetaTag('robots', 'noindex');
     }
   }
 
@@ -268,9 +281,7 @@ export class MetadataService {
    * Add <meta name="citation_author" ... >  to the <head>
    */
   private setCitationAuthorTags(): void {
-    // limit author to first 20 entries to avoid issue with item page rendering
-    const values: string[] = this.getMetaTagValues(['dc.author', 'dc.contributor.author', 'dc.creator'])
-      .slice(0, this.appConfig.item.metatagLimit);
+    const values: string[] = this.getMetaTagValues(['dc.author', 'dc.contributor.author', 'dc.creator']);
     this.addMetaTags('citation_author', values);
   }
 
@@ -423,9 +434,21 @@ export class MetadataService {
     if (this.currentObject.value instanceof Item) {
       let url = this.getMetaTagValue('dc.identifier.uri');
       if (hasNoValue(url)) {
-        url = new URLCombiner(this.hardRedirectService.getCurrentOrigin(), this.router.url).toString();
+        url = new URLCombiner(this.hardRedirectService.getBaseUrl(), this.router.url).toString();
       }
       this.addMetaTag('citation_abstract_html_url', url);
+    }
+  }
+
+  /**
+   * Add <meta name="citation_doi" ... >  to the <head>
+   */
+  private setCitationDoiTag(): void {
+    if (this.currentObject.value instanceof Item) {
+      let doi = this.getMetaTagValue('dc.identifier.doi');
+      if (hasValue(doi)) {
+        this.addMetaTag('citation_doi', doi);
+      }
     }
   }
 
@@ -503,6 +526,7 @@ export class MetadataService {
         'ORIGINAL',
         true,
         true,
+        new FindListOptions(),
         followLink('primaryBitstream'),
         followLink('bitstreams', {
           findListOptions: {
@@ -554,7 +578,7 @@ export class MetadataService {
         // Use the found link to set the <meta> tag
         this.addMetaTag(
           tag,
-          new URLCombiner(this.hardRedirectService.getCurrentOrigin(), link).toString(),
+          new URLCombiner(this.hardRedirectService.getBaseUrl(), link).toString(),
           true,
         );
       });
@@ -720,18 +744,19 @@ export class MetadataService {
     return this.currentObject.value.allMetadataValues(keys);
   }
 
-  protected addMetaTag(name: string, content: string, isProperty = false): void {
+  protected addMetaTag(name: string, content: string, isProperty = false, isMultiple = false): void {
     if (content) {
       const tag = isProperty ? { name, property: name, content } as MetaDefinition
         : { name, content } as MetaDefinition;
-      this.meta.updateTag(tag);
+      isMultiple ? this.meta.addTag(tag) : this.meta.updateTag(tag);
       this.storeTag(name);
     }
   }
 
   private addMetaTags(name: string, content: string[]): void {
-    for (const value of content) {
-      this.addMetaTag(name, value);
+    // limit meta tags with the same name to avoid issues with page rendering
+    for (const value of content.slice(0, this.appConfig.item.metatagLimit)) {
+      this.addMetaTag(name, value, false, true);
     }
   }
 
@@ -746,7 +771,9 @@ export class MetadataService {
       take(1)
     ).subscribe((tagsInUse: string[]) => {
       for (const name of tagsInUse) {
-        this.meta.updateTag({name, content: ''});
+        this.meta.getTags(`name="${name}"`).forEach((tag) => {
+          this.meta.removeTagElement(tag);
+        });
       }
       this.store.dispatch(new ClearMetaTagAction());
     });
@@ -793,7 +820,7 @@ export class MetadataService {
 
   private setGenericPageMetaTags() {
     const pageDocumentTitle = this._document.getElementsByTagName('title')[0].innerText;
-    const pageUrl = new URLCombiner(this.hardRedirectService.getCurrentOrigin(), this.router.url).toString();
+    const pageUrl = new URLCombiner(this.hardRedirectService.getBaseUrl(), this.router.url).toString();
     const genericPageOpenGraphType = 'website';
 
     this.setTitleTags(pageDocumentTitle);
@@ -809,6 +836,6 @@ export class MetadataService {
   }
 
   private getUrlOrigin(): string {
-    return isPlatformBrowser(this.platformId) ? this.hardRedirectService.getCurrentOrigin() : this.origin;
+    return isPlatformBrowser(this.platformId) ? this.hardRedirectService.getBaseUrl() : this.origin;
   }
 }

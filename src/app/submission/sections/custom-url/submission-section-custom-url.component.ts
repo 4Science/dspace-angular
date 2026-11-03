@@ -161,7 +161,8 @@ export class SubmissionSectionCustomUrlComponent extends SectionModelComponent {
       new DynamicInputModel({
         id: 'url',
         name: 'url',
-        value: sectionData.url
+        value: sectionData.url,
+        placeholder: 'submission.sections.custom-url.url.placeholder',
       })
     ];
     this.updateSectionData(sectionData);

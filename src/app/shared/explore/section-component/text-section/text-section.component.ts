@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { TextRowSection } from '../../../../core/layout/models/section.model';
 import { Site } from '../../../../core/shared/site.model';
 import { LocaleService } from '../../../../core/locale/locale.service';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'ds-text-section',
@@ -20,12 +21,14 @@ export class TextSectionComponent {
   @Input()
   site: Site;
 
+  metadataValue$: Observable<string>;
+
   constructor(
     private locale: LocaleService,
   ) {
+    this.metadataValue$ =  this.locale.getCurrentLanguageCode().pipe(
+      map(language => this.site?.firstMetadataValue(this.textRowSection.content, {language}) ?? '')
+    );
   }
 
-  metadataValue(content: string) {
-    return this.site?.firstMetadataValue(content, {language: this.locale.getCurrentLanguageCode()}) ?? '';
-  }
 }
