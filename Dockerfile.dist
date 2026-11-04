@@ -7,7 +7,7 @@
 # docker build -f Dockerfile.dist -t 4science/dspace-angular:dspace-cris-2025_02_x-dist .
 
 # Angular 20 + Node 22 optimized Dockerfile
-ARG NODE_VERSION=22
+ARG NODE_VERSION=22.23.4
 ARG DSPACE_VERSION=dspace-cris-2025_02_x
 ARG DOCKER_REGISTRY=docker.io
 
