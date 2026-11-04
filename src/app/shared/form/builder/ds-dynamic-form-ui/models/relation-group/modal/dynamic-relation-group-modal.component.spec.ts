@@ -39,6 +39,7 @@ import {
   VocabularyEntryDetail
 } from '../../../../../../../core/submission/vocabularies/models/vocabulary-entry-detail.model';
 import { DsDynamicRelationGroupModalComponent } from './dynamic-relation-group-modal.components';
+import { BtnDisabledDirective } from '../../../../../../btn-disabled.directive';
 
 export let FORM_GROUP_TEST_MODEL_CONFIG;
 
@@ -179,7 +180,8 @@ describe('DsDynamicRelationGroupModelComponent test suite', () => {
       ],
       declarations: [
         FormComponent,
-        DsDynamicRelationGroupModalComponent
+        DsDynamicRelationGroupModalComponent,
+        BtnDisabledDirective
       ], // declare the test component
       providers: [
         ChangeDetectorRef,
@@ -214,6 +216,67 @@ describe('DsDynamicRelationGroupModelComponent test suite', () => {
 
     it('should create DsDynamicRelationGroupModelComponent', () => {
       expect(testComponent).toBeDefined();
+    });
+  });
+
+  describe('save button disabled state ([dsBtnDisabled]="isMandatoryFieldEmpty() || !formRef.formGroup?.valid")', () => {
+    beforeEach(() => {
+      spyOn(vocabularyService, 'findVocabularyById').and.returnValue(createSuccessfulRemoteDataObject$(vocabulary));
+      componentFixture = TestBed.createComponent(DsDynamicRelationGroupModalComponent);
+      testComponent = componentFixture.componentInstance;
+      debugElement = componentFixture.debugElement;
+      testComponent.group = FORM_GROUP_TEST_GROUP;
+      testComponent.model = new DynamicRelationGroupModel(FORM_GROUP_TEST_MODEL_CONFIG);
+      (testComponent.model as any).securityConfigLevel = [];
+      (testComponent.model as any).securityLevel = 0;
+      componentFixture.detectChanges();
+    });
+
+    afterEach(() => {
+      componentFixture.destroy();
+      testComponent = null;
+    });
+
+    const getSaveButton = (): DebugElement => {
+      const buttons = debugElement.queryAll(By.css('.modal-footer button'));
+      return buttons[buttons.length - 1];
+    };
+
+    const setFormGroupValid = (valid: boolean): void => {
+      Object.defineProperty((testComponent as any).formRef.formGroup, 'valid', {
+        get: () => valid,
+        configurable: true,
+      });
+    };
+
+    it('should disable the save button when the mandatory field is empty', () => {
+      spyOn(testComponent, 'isMandatoryFieldEmpty').and.returnValue(true);
+      setFormGroupValid(true);
+      componentFixture.detectChanges();
+
+      const saveButton = getSaveButton();
+      expect(saveButton.nativeElement.getAttribute('aria-disabled')).toEqual('true');
+      expect(saveButton.nativeElement.classList).toContain('disabled');
+    });
+
+    it('should disable the save button when the form group is invalid', () => {
+      spyOn(testComponent, 'isMandatoryFieldEmpty').and.returnValue(false);
+      setFormGroupValid(false);
+      componentFixture.detectChanges();
+
+      const saveButton = getSaveButton();
+      expect(saveButton.nativeElement.getAttribute('aria-disabled')).toEqual('true');
+      expect(saveButton.nativeElement.classList).toContain('disabled');
+    });
+
+    it('should enable the save button when the mandatory field is filled and the form group is valid', () => {
+      spyOn(testComponent, 'isMandatoryFieldEmpty').and.returnValue(false);
+      setFormGroupValid(true);
+      componentFixture.detectChanges();
+
+      const saveButton = getSaveButton();
+      expect(saveButton.nativeElement.getAttribute('aria-disabled')).toEqual('false');
+      expect(saveButton.nativeElement.classList).not.toContain('disabled');
     });
   });
 
