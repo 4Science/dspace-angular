@@ -24,6 +24,7 @@ import {
   NgbModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import {
+  DYNAMIC_FORM_CONTROL_MAP_FN,
   DynamicFormLayoutService,
   DynamicFormValidationService,
 } from '@ng-dynamic-forms/core';
@@ -33,15 +34,22 @@ import {
 } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { APP_DATA_SERVICES_MAP } from '../../../../../../../../config/app-config.interface';
+import {
+  APP_CONFIG,
+  APP_DATA_SERVICES_MAP,
+} from '../../../../../../../../config/app-config.interface';
+import { environment } from '../../../../../../../../environments/environment.test';
 import { storeModuleConfig } from '../../../../../../../app.reducer';
 import { FormRowModel } from '../../../../../../../core/config/models/config-submission-form.model';
 import { SubmissionFormsModel } from '../../../../../../../core/config/models/config-submission-forms.model';
+import { SubmissionObjectDataService } from '../../../../../../../core/submission/submission-object-data.service';
 import { SubmissionScopeType } from '../../../../../../../core/submission/submission-scope-type';
 import { Vocabulary } from '../../../../../../../core/submission/vocabularies/models/vocabulary.model';
 import { VocabularyEntryDetail } from '../../../../../../../core/submission/vocabularies/models/vocabulary-entry-detail.model';
 import { VocabularyService } from '../../../../../../../core/submission/vocabularies/vocabulary.service';
 import { SubmissionService } from '../../../../../../../submission/submission.service';
+import { LiveRegionService } from '../../../../../../live-region/live-region.service';
+import { getLiveRegionServiceStub } from '../../../../../../live-region/live-region.service.stub';
 import { createSuccessfulRemoteDataObject$ } from '../../../../../../remote-data.utils';
 import { StoreMock } from '../../../../../../testing/store.mock';
 import { SubmissionServiceStub } from '../../../../../../testing/submission-service.stub';
@@ -52,6 +60,7 @@ import { FormService } from '../../../../../form.service';
 import { FormBuilderService } from '../../../../form-builder.service';
 import { FormFieldModel } from '../../../../models/form-field.model';
 import { FormFieldMetadataValueObject } from '../../../../models/form-field-metadata-value.model';
+import { dsDynamicFormControlMapFn } from '../../../ds-dynamic-form-control-map-fn';
 import { DsDynamicInputModel } from '../../ds-dynamic-input.model';
 import { DsDynamicRelationGroupComponent } from '../dynamic-relation-group.components';
 import {
@@ -158,6 +167,7 @@ function init() {
     repeatable: false,
     metadataFields: [],
     hasSelectableMetadata: false,
+    securityConfigLevel: [],
   } as DynamicRelationGroupModelConfig;
 
   FORM_GROUP_TEST_GROUP = new UntypedFormGroup({
@@ -212,6 +222,10 @@ describe('DsDynamicRelationGroupModelComponent test suite', () => {
         { provide: SubmissionService, useClass: SubmissionServiceStub },
         { provide: NgbActiveModal, useValue: modal },
         { provide: APP_DATA_SERVICES_MAP, useValue: {} },
+        { provide: APP_CONFIG, useValue: environment },
+        { provide: SubmissionObjectDataService, useValue: {} },
+        { provide: DYNAMIC_FORM_CONTROL_MAP_FN, useValue: dsDynamicFormControlMapFn },
+        { provide: LiveRegionService, useValue: getLiveRegionServiceStub() },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     });
@@ -233,6 +247,65 @@ describe('DsDynamicRelationGroupModelComponent test suite', () => {
 
     it('should create DsDynamicRelationGroupModelComponent', () => {
       expect(testComponent).toBeDefined();
+    });
+  });
+
+  describe('save button disabled state ([dsBtnDisabled]="isMandatoryFieldEmpty() || !formRef.formGroup?.valid")', () => {
+    beforeEach(() => {
+      spyOn(vocabularyService, 'findVocabularyById').and.returnValue(createSuccessfulRemoteDataObject$(vocabulary));
+      componentFixture = TestBed.createComponent(DsDynamicRelationGroupModalComponent);
+      testComponent = componentFixture.componentInstance;
+      debugElement = componentFixture.debugElement;
+      testComponent.group = FORM_GROUP_TEST_GROUP;
+      testComponent.model = new DynamicRelationGroupModel(FORM_GROUP_TEST_MODEL_CONFIG);
+      componentFixture.detectChanges();
+    });
+
+    afterEach(() => {
+      componentFixture.destroy();
+      testComponent = null;
+    });
+
+    const getSaveButton = (): DebugElement => {
+      const buttons = debugElement.queryAll(By.css('.modal-footer button'));
+      return buttons[buttons.length - 1];
+    };
+
+    const setFormGroupValid = (valid: boolean): void => {
+      Object.defineProperty((testComponent as any).formRef.formGroup, 'valid', {
+        get: () => valid,
+        configurable: true,
+      });
+    };
+
+    it('should disable the save button when the mandatory field is empty', () => {
+      spyOn(testComponent, 'isMandatoryFieldEmpty').and.returnValue(true);
+      setFormGroupValid(true);
+      componentFixture.detectChanges();
+
+      const saveButton = getSaveButton();
+      expect(saveButton.nativeElement.getAttribute('aria-disabled')).toEqual('true');
+      expect(saveButton.nativeElement.classList).toContain('disabled');
+    });
+
+    it('should disable the save button when the form group is invalid', () => {
+      spyOn(testComponent, 'isMandatoryFieldEmpty').and.returnValue(false);
+      setFormGroupValid(false);
+      componentFixture.detectChanges();
+
+      const saveButton = getSaveButton();
+      expect(saveButton.nativeElement.getAttribute('aria-disabled')).toEqual('true');
+      expect(saveButton.nativeElement.classList).toContain('disabled');
+    });
+
+    it('should enable the save button when the mandatory field is filled and the form group is valid', () => {
+      spyOn(testComponent, 'isMandatoryFieldEmpty').and.returnValue(false);
+      setFormGroupValid(true);
+      componentFixture.detectChanges();
+
+      const saveButton = getSaveButton();
+      expect(saveButton.nativeElement.getAttribute('aria-disabled')).toEqual('false');
+      expect(saveButton.nativeElement.classList).not.toContain('disabled');
     });
   });
 
