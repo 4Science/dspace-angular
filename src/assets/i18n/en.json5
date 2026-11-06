@@ -2869,6 +2869,8 @@
 
   "form.other-information.ror_orgunit_countryName": "ROR country",
 
+  "form.other-information.dc_title": "Title",
+
   "form.entry.source.local": "",
 
   "form.entry.source.orcid": "",
