@@ -23,7 +23,9 @@
 }
 
 .ds-edit-cell {
+  flex: 0 0 var(--ds-dso-edit-actions-width);
   min-width: var(--ds-dso-edit-actions-width);
+  max-width: var(--ds-dso-edit-actions-width);
 }
 
 .ds-value-row {
