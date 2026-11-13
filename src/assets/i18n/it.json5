@@ -6871,6 +6871,27 @@
   // "itemtemplate.edit.metadata.save-button": "Save",
   "itemtemplate.edit.metadata.save-button": "Salva",
 
+  // "itemtemplate.edit.metadata.authority.label": "Authority: ",
+  "itemtemplate.edit.metadata.authority.label": "Authority: ",
+
+  // "itemtemplate.edit.metadata.edit.authority.key": "Edit authority key",
+  "itemtemplate.edit.metadata.edit.authority.key": "Modifica la chiave di authority",
+
+  // "itemtemplate.edit.metadata.edit.buttons.open-authority-edition": "Unlock the authority key value for manual editing",
+  "itemtemplate.edit.metadata.edit.buttons.open-authority-edition": "Sblocca il valore della chiave di authority per la modifica manuale",
+
+  // "itemtemplate.edit.metadata.edit.buttons.close-authority-edition": "Lock the authority key value for manual editing",
+  "itemtemplate.edit.metadata.edit.buttons.close-authority-edition": "Blocca il valore della chiave di authority per la modifica manuale",
+
+  // "itemtemplate.edit.metadata.edit.buttons.enable-free-text-editing": "Enable free-text editing",
+  "itemtemplate.edit.metadata.edit.buttons.enable-free-text-editing": "Abilita la modifica a testo libero",
+
+  // "itemtemplate.edit.metadata.edit.buttons.disable-free-text-editing": "Disable free-text editing",
+  "itemtemplate.edit.metadata.edit.buttons.disable-free-text-editing": "Disabilita la modifica a testo libero",
+
+  // "itemtemplate.edit.metadata.edit.buttons.virtual": "This is a virtual metadata value, i.e. a value inherited from a related entity. It can’t be modified directly.",
+  "itemtemplate.edit.metadata.edit.buttons.virtual": "Si tratta di un valore virtuale di metadati, cioè un valore ereditato da un'entità correlata. Non può essere modificato direttamente.",
+
   // "journal.listelement.badge": "Journal",
   "journal.listelement.badge": "Periodico",
 
@@ -10905,6 +10926,10 @@
   // "submission.import-external.source.loading": "Loading ...",
   "submission.import-external.source.loading": "Caricamento ...",
 
+  // "submission.import-external.source.openaire": "OpenAIRE Search by Authors",
+  // TODO New key - Add a translation
+  "submission.import-external.source.openaire": "OpenAIRE Search by Authors",
+
   // "submission.import-external.source.opfJournal": "Jisc Open policy finder Journals",
   // TODO New key - Add a translation
   "submission.import-external.source.opfJournal": "Jisc Open policy finder Journals",
@@ -11419,6 +11444,13 @@
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.openaireFunding": "OpenAIRE Search by Funder ({{ count }})",
 
   // "submission.sections.describe.relationship-lookup.search-tab.tab-title.jiscJournalIssn": "Jisc Open policy finder Journals by ISSN ({{ count }})",
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.jiscJournalIssn": "Sherpa Journals by ISSN ({{ count }})",
+
+  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPerson": "OpenAlex ({{ count }})",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexPerson": "OpenAlex ({{ count }})",
+
+  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.openalexInstitution": "OpenAlex Search by Institution ({{ count }})",
   // TODO New key - Add a translation
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.jiscJournalIssn": "Jisc Open policy finder Journals by ISSN ({{ count }})",
 
@@ -11443,6 +11475,10 @@
   // "submission.sections.describe.relationship-lookup.search-tab.tab-title.isOrgUnitOfProject": "OrgUnit of the Project",
   // TODO New key - Add a translation
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.isOrgUnitOfProject": "OrgUnit of the Project",
+
+  // "submission.sections.describe.relationship-lookup.search-tab.tab-title.opfJournal": "Jisc Open policy finder of Journal",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.opfJournal": "Jisc Open policy finder of Journal",
 
   // "submission.sections.describe.relationship-lookup.selection-tab.title.isProjectOfPublication": "Project",
   "submission.sections.describe.relationship-lookup.selection-tab.title.isProjectOfPublication": "Progetti",
@@ -11846,6 +11882,9 @@
   // "submission.sections.submit.progressbar.jiscpolicy": "Jisc Open policy finder policies",
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.jiscpolicy": "Jisc Open policy finder policies",
+
+  // "submission.sections.submit.progressbar.opfpolicy": "Publisher open access policy information",
+  "submission.sections.submit.progressbar.opfpolicy": "Informazioni sulla policy di open access dell'editore",
 
   // "submission.sections.submit.progressbar.upload": "Upload files",
   "submission.sections.submit.progressbar.upload": "Carica file",
@@ -15169,6 +15208,10 @@
   // TODO New key - Add a translation
   "form.other-information.selection.alternative-names": "Select alternative name",
 
+  // "form.other-information.dc_title": "Title",
+  // TODO New key - Add a translation
+  "form.other-information.dc_title": "Titolo",
+
   // "meta.tag.missing.description": "No description available",
   // TODO New key - Add a translation
   "meta.tag.missing.description": "No description available",
@@ -15918,3 +15961,4 @@
 
 
 }
+
