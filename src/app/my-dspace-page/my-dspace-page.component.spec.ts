@@ -32,7 +32,6 @@ import { APP_CONFIG } from '../../config/app-config.interface';
 import { environment } from '../../environments/environment.test';
 import { RequestService } from '../core/data/request.service';
 import { RequestEntry } from '../core/data/request-entry.model';
-import { ViewMode } from '../core/shared/view-mode.model';
 import { SuggestionsNotificationComponent } from '../notifications/suggestions-notification/suggestions-notification.component';
 import { getMockRequestService } from '../shared/mocks/request.service.mock';
 import { SelectableListService } from '../shared/object-list/selectable-list/selectable-list.service';
@@ -161,8 +160,8 @@ describe('MyDSpacePageComponent', () => {
     expect(comp.context()).toBe(Context.Workspace);
   }));
 
-  it('should set the initial view mode from the mydspacePage preferred display view configuration', () => {
-    expect(comp.initViewMode).toBe(ViewMode.DetailedListElement);
+  it('should expose the mydspacePage preferred search result view configuration', () => {
+    expect(comp.searchResultViewConfig).toBe(environment.search.preferredContextConfig.mydspacePage);
   });
 
 });

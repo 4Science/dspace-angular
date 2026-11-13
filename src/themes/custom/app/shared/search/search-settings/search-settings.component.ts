@@ -6,6 +6,7 @@
  * https://www.atmire.com/software-license/
  */
 import {
+  AsyncPipe,
   NgFor,
   NgIf,
 } from '@angular/common';
@@ -33,7 +34,7 @@ import { SidebarDropdownComponent } from '../../../../../../app/shared/sidebar/s
     },
   ],
   standalone: true,
-  imports: [NgIf, SidebarDropdownComponent, NgFor, FormsModule, PageSizeSelectorComponent, TranslateModule],
+  imports: [NgIf, SidebarDropdownComponent, NgFor, AsyncPipe, FormsModule, PageSizeSelectorComponent, TranslateModule],
 })
 
 export class SearchSettingsComponent extends BaseComponent {}
