@@ -36,6 +36,7 @@ export class ThemedSearchSidebarComponent extends ThemedComponent<SearchSidebarC
   @Input() viewModeList: ViewMode[];
   @Input() initViewMode: ViewMode;
   @Input() showViewModes: boolean;
+  @Input() disableViewModes: boolean;
   @Input() inPlaceSearch: boolean;
   @Input() searchOptions: PaginatedSearchOptions;
   @Input() sortOptionsList: SortOptions[];
@@ -46,7 +47,7 @@ export class ThemedSearchSidebarComponent extends ThemedComponent<SearchSidebarC
 
   protected inAndOutputNames: (keyof SearchSidebarComponent & keyof this)[] = [
     'configuration', 'configurationList', 'currentScope', 'currentSortOption',
-    'resultCount', 'filters', 'viewModeList', 'initViewMode', 'showViewModes', 'inPlaceSearch',
+    'resultCount', 'filters', 'viewModeList', 'initViewMode', 'showViewModes', 'disableViewModes', 'inPlaceSearch',
     'searchOptions', 'sortOptionsList', 'refreshFilters', 'toggleSidebar', 'changeConfiguration',
     'changeViewMode',
   ];

@@ -48,6 +48,7 @@
         @if (inPlaceSearch && showViewModes) {
           <ds-view-mode-switch [viewModeList]="viewModeList"
                     [initViewMode]="initViewMode"
+                    [disabled]="(searchInProgress$ | async) === true"
           [inPlaceSearch]="inPlaceSearch"></ds-view-mode-switch>
         }
         <button (click)="openSidebar()"
@@ -102,6 +103,7 @@
       [viewModeList]="viewModeList"
                        [initViewMode]="initViewMode"
       [showViewModes]="showViewModes"
+      [disableViewModes]="(searchInProgress$ | async) === true"
       (changeConfiguration)="changeContext($event.context)"
     (changeViewMode)="changeViewMode()"></ds-search-sidebar>
   }
@@ -120,6 +122,7 @@
       [viewModeList]="viewModeList"
                        [initViewMode]="initViewMode"
       [showViewModes]="showViewModes"
+      [disableViewModes]="(searchInProgress$ | async) === true"
       (toggleSidebar)="closeSidebar()"
       (changeConfiguration)="changeContext($event.context)"
       (changeViewMode)="changeViewMode()">

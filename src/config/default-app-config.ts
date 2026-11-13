@@ -696,10 +696,34 @@ export class DefaultAppConfig implements AppConfig {
       filter: ['title', 'author', 'subject', 'entityType'],
     },
     filterPlaceholdersCount: 5,
-    preferredDisplayView: {
-      searchPage: ViewMode.ListElement,
-      mydspacePage: ViewMode.ListElement,
-      crisRelationBox: ViewMode.GridElement,
+    gridViewDefaultPageSize: 9,
+    gridViewPageSizeOptions: [9, 18, 36, 60, 81, 99],
+    preferredContextConfig: {
+      searchPage: {
+        preferredView: ViewMode.ListElement,
+        listPaginationConfig: {
+          pageSize: 10,
+          pageSizeOptions: [5, 10, 20, 40, 60, 80, 100],
+        },
+        gridPaginationConfig: {
+          pageSize: 6,
+          pageSizeOptions: [6, 12, 21],
+        },
+      },
+      mydspacePage: {
+        preferredView: ViewMode.ListElement,
+        listPaginationConfig: {
+          pageSize: 10,
+          pageSizeOptions: [5, 10, 20, 40, 60, 80, 100],
+        },
+      },
+      crisRelationBox: {
+        preferredView: ViewMode.ListElement,
+        listPaginationConfig: {
+          pageSize: 10,
+          pageSizeOptions: [5, 10, 20, 40, 60, 80, 100],
+        },
+      },
     },
   };
 

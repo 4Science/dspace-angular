@@ -16,5 +16,7 @@
       </ds-sidebar-dropdown>
     }
   </div>
-  <ds-page-size-selector></ds-page-size-selector>
+  @if (!paginationSizeDisallowList.includes(currentViewMode$ | async)) {
+    <ds-page-size-selector></ds-page-size-selector>
+  }
 </ng-container>
