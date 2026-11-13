@@ -62,20 +62,20 @@ export class AuthorizationService {
   ) {}
 
 
-  initStateForObjects(uuidList: string[], type: string, featureIDs: FeatureID[], hrefs: string[]) {
-    this.store.dispatch(new GetAuthorizationsAction(uuidList, type, featureIDs, hrefs));
+  initStateForObjects(uuidList: string[], type: string, featureIDs: FeatureID[], hrefs: string[], singleObject = false) {
+    this.store.dispatch(new GetAuthorizationsAction(uuidList, type, featureIDs, hrefs, singleObject));
   }
 
   initStateForSite(featureIDs: FeatureID[]) {
     this.siteService.find().pipe(
       take(1),
-    ).subscribe((site: Site) => this.initStateForObjects([site.uuid], site.uniqueType, featureIDs, [site.self]));
+    ).subscribe((site: Site) => this.initStateForObjects([site.uuid], site.uniqueType, featureIDs, [site.self], true));
   }
 
   initAnonymousStateForSite() {
     this.siteService.find().pipe(
       take(1),
-    ).subscribe((site: Site) => this.initStateForObjects([site.uuid], site.uniqueType, [], [site.self]));
+    ).subscribe((site: Site) => this.initStateForObjects([site.uuid], site.uniqueType, [], [site.self], true));
   }
 
 

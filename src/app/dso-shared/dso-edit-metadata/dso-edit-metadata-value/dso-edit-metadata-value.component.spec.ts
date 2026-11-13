@@ -24,6 +24,7 @@ import { createPaginatedList } from 'src/app/shared/testing/utils.test';
 import { VocabularyServiceStub } from 'src/app/shared/testing/vocabulary-service.stub';
 
 import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
+import { CollectionDataService } from '../../../core/data/collection-data.service';
 import { ItemDataService } from '../../../core/data/item-data.service';
 import { RelationshipDataService } from '../../../core/data/relationship-data.service';
 import { Collection } from '../../../core/shared/collection.model';
@@ -34,12 +35,15 @@ import {
   VIRTUAL_METADATA_PREFIX,
 } from '../../../core/shared/metadata.models';
 import { ItemMetadataRepresentation } from '../../../core/shared/metadata-representation/item/item-metadata-representation.model';
+import { TemplateItem } from '../../../core/shared/template-item.model';
+import { ITEM_TEMPLATE } from '../../../core/shared/template-item.resource-type';
 import { BtnDisabledDirective } from '../../../shared/btn-disabled.directive';
 import { DsDynamicOneboxComponent } from '../../../shared/form/builder/ds-dynamic-form-ui/models/onebox/dynamic-onebox.component';
 import { DsDynamicScrollableDropdownComponent } from '../../../shared/form/builder/ds-dynamic-form-ui/models/scrollable-dropdown/dynamic-scrollable-dropdown.component';
 import { mockSecurityConfig } from '../../../shared/mocks/submission.mock';
 import { ThemedTypeBadgeComponent } from '../../../shared/object-collection/shared/badges/type-badge/themed-type-badge.component';
 import { createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
+import { followLink } from '../../../shared/utils/follow-link-config.model';
 import { VarDirective } from '../../../shared/utils/var.directive';
 import {
   DsoEditMetadataChangeType,
@@ -61,6 +65,7 @@ describe('DsoEditMetadataValueComponent', () => {
   let dsoNameService: DSONameService;
   let vocabularyServiceStub: any;
   let itemService: ItemDataService;
+  let collectionService: CollectionDataService;
   let registryService: RegistryService;
   let notificationsService: NotificationsService;
 
@@ -79,6 +84,17 @@ describe('DsoEditMetadataValueComponent', () => {
     id: 'item',
     uuid: 'item',
     owningCollection: createSuccessfulRemoteDataObject$(collection),
+  });
+
+  const templateItem = Object.assign(new TemplateItem(), {
+    // The REST API deserializes the type as a plain string, not as a ResourceType
+    type: ITEM_TEMPLATE.value,
+    _links: {
+      self: { href: 'fake-itemtemplate-url/template' },
+      templateItemOf: { href: 'fake-itemtemplate-url/template/templateItemOf' },
+    },
+    id: 'template',
+    uuid: 'template',
   });
 
   const mockVocabularyScrollable: Partial<Vocabulary> = {
@@ -161,6 +177,9 @@ describe('DsoEditMetadataValueComponent', () => {
     itemService = jasmine.createSpyObj('itemService', {
       findByHref: createSuccessfulRemoteDataObject$(item),
     });
+    collectionService = jasmine.createSpyObj('collectionService', {
+      findByHref: createSuccessfulRemoteDataObject$(collection),
+    });
     vocabularyServiceStub = new VocabularyServiceStub();
     registryService = jasmine.createSpyObj('registryService', {
       queryMetadataFields: createSuccessfulRemoteDataObject$(createPaginatedList(metadataFields)),
@@ -197,6 +216,7 @@ describe('DsoEditMetadataValueComponent', () => {
         { provide: DSONameService, useValue: dsoNameService },
         { provide: VocabularyService, useValue: vocabularyServiceStub },
         { provide: ItemDataService, useValue: itemService },
+        { provide: CollectionDataService, useValue: collectionService },
         { provide: RegistryService, useValue: registryService },
         { provide: NotificationsService, useValue: notificationsService },
       ],
@@ -526,6 +546,84 @@ describe('DsoEditMetadataValueComponent', () => {
 
     });
 
+  });
+
+  describe('when resolving the Collection that provides the authority configuration', () => {
+    beforeEach(() => {
+      // ngOnInit already ran initAuthorityProperties() during the initial detectChanges()
+      (itemService.findByHref as jasmine.Spy).calls.reset();
+      (collectionService.findByHref as jasmine.Spy).calls.reset();
+      spyOn(vocabularyServiceStub, 'getVocabularyByMetadataAndCollection').and.returnValue(createSuccessfulRemoteDataObject$(mockVocabularyScrollable));
+    });
+
+    describe('and the DSpaceObject is a regular Item', () => {
+      beforeEach(() => {
+        component.dso = item;
+        component.mdField = 'metadata.scrollable';
+        component.initAuthorityProperties();
+      });
+
+      it('should resolve it through the owningCollection', () => {
+        expect(itemService.findByHref).toHaveBeenCalledWith(item._links.self.href, true, true, followLink('owningCollection'));
+        expect(collectionService.findByHref).not.toHaveBeenCalled();
+      });
+
+      it('should retrieve the vocabulary for that Collection', () => {
+        (component as any).vocabulary$.subscribe();
+
+        expect(vocabularyServiceStub.getVocabularyByMetadataAndCollection).toHaveBeenCalledWith('metadata.scrollable', collection.uuid);
+      });
+    });
+
+    describe('and the DSpaceObject is a template Item', () => {
+      beforeEach(() => {
+        component.dso = templateItem;
+        component.mdField = 'metadata.scrollable';
+        component.initAuthorityProperties();
+      });
+
+      it('should resolve it through the templateItemOf link', () => {
+        expect(collectionService.findByHref).toHaveBeenCalledWith(templateItem._links.templateItemOf.href, true, true);
+        expect(itemService.findByHref).not.toHaveBeenCalled();
+      });
+
+      it('should retrieve the vocabulary for that Collection', () => {
+        (component as any).vocabulary$.subscribe();
+
+        expect(vocabularyServiceStub.getVocabularyByMetadataAndCollection).toHaveBeenCalledWith('metadata.scrollable', collection.uuid);
+      });
+    });
+
+    describe('and the DSpaceObject is a template Item without a templateItemOf link', () => {
+      let emitted: boolean;
+      let completed: boolean;
+
+      beforeEach(() => {
+        component.dso = Object.assign(new TemplateItem(), {
+          type: ITEM_TEMPLATE.value,
+          _links: {
+            self: { href: 'fake-itemtemplate-url/template' },
+          },
+        });
+        component.mdField = 'metadata.scrollable';
+        component.initAuthorityProperties();
+
+        emitted = false;
+        completed = false;
+        (component as any).vocabulary$.subscribe({
+          next: () => emitted = true,
+          complete: () => completed = true,
+        });
+      });
+
+      it('should complete without emitting and without sending any request', () => {
+        expect(emitted).toBe(false);
+        expect(completed).toBe(true);
+        expect(collectionService.findByHref).not.toHaveBeenCalled();
+        expect(itemService.findByHref).not.toHaveBeenCalled();
+        expect(vocabularyServiceStub.getVocabularyByMetadataAndCollection).not.toHaveBeenCalled();
+      });
+    });
   });
 
   function assertButton(name: string, exists: boolean, disabled: boolean = false): void {

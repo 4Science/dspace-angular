@@ -1,6 +1,8 @@
-<div class="d-flex flex-column w-100 col metadata-cell" [class]="cell.style" *ngFor="let cell of row.cells">
-  <ds-metadata-container *ngFor="let field of cell.fields; trackBy: trackUpdate" class="w-100"
-                         [box]="box"
-                         [item]="item"
-                         [field]="field"></ds-metadata-container>
-</div>
+<ng-container *ngFor="let cell of row.cells">
+  <div *ngIf="hasVisibleFields(cell)" class="d-flex flex-column w-100 col metadata-cell" [class]="cell.style">
+    <ds-metadata-container *ngFor="let field of cell.fields; trackBy: trackUpdate" class="w-100"
+                           [box]="box"
+                           [item]="item"
+                           [field]="field"></ds-metadata-container>
+  </div>
+</ng-container>

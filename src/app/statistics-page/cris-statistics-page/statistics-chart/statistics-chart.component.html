@@ -3,31 +3,33 @@
 </ng-container>
 
 <ng-container *ngIf="reports">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 mb-40">
-        <h2>{{'statistics.reports.title' | translate}}</h2>
-        <ul class="nav nav-pills mb-2">
-          <li class="nav-item mr-3" *ngFor="let report of (reports | dsFilterMap : false)">
-            <a class="nav-link" [ngClass]="{'active' : !!selectedReport && selectedReport.id === report.id}"
-               href="#"
-               (click)="$event.preventDefault();$event.stopPropagation();changeReport(report)">
-              {{'statistics.table.' + categoryType + '.title.' + report.reportType | translate}}
-            </a>
-          </li>
-        </ul>
+  <ng-container *ngVar="(selectedReport$ | async) as selectedReport">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mb-40">
+          <h2>{{'statistics.reports.title' | translate}}</h2>
+          <ul class="nav nav-pills mb-2">
+            <li class="nav-item mr-3" *ngFor="let report of (reports | dsFilterMap : false)">
+              <a class="nav-link" [ngClass]="{'active' : !!selectedReport && selectedReport.id === report.id}"
+                 href="#"
+                 (click)="$event.preventDefault();$event.stopPropagation();changeReport(report)">
+                {{'statistics.table.' + categoryType + '.title.' + report.reportType | translate}}
+              </a>
+            </li>
+          </ul>
 
-        <ng-container *ngIf="!selectedReport || !selectedFullReport">
-          <ds-loading></ds-loading>
-        </ng-container>
+          <ng-container *ngIf="!selectedReport || (selectedFullReport | async) === null || (selectedFullReport | async) === undefined">
+            <ds-loading></ds-loading>
+          </ng-container>
 
-        <ng-container *ngIf="selectedReport && selectedFullReport">
-          <ds-statistics-chart-wrapper [type]="selectedReport.viewMode"
-                                       [categoryType]="categoryType"
-                                       [report]="selectedFullReport"></ds-statistics-chart-wrapper>
-        </ng-container>
+          <ng-container *ngIf="selectedReport && (selectedFullReport | async) !== null">
+            <ds-statistics-chart-wrapper [type]="selectedReport.viewMode"
+                                         [categoryType]="categoryType"
+                                         [report]="selectedFullReport | async"></ds-statistics-chart-wrapper>
+          </ng-container>
 
+        </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 </ng-container>

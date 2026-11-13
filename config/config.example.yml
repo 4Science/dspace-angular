@@ -33,9 +33,9 @@ ssr:
   # may NOT be indexable by search engine crawlers (like Google Scholar). For search engine crawlers to fully index your site,
   # this "excludePathPatterns" should NEVER exclude SSR from the homepage, community/collection pages or item/entity pages.
   excludePathPatterns:
-    - pattern: "^/communities/[a-f0-9-]{36}/browse(/.*)?$"
+    - pattern: "^/communities/[a-f0-9-]{36}/(browse|search)(/.*)?$"
       flag: "i"
-    - pattern: "^/collections/[a-f0-9-]{36}/browse(/.*)?$"
+    - pattern: "^/collections/[a-f0-9-]{36}/(browse|search)(/.*)?$"
       flag: "i"
     - pattern: "^/browse/"
     - pattern: "^/search$"

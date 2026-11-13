@@ -34,6 +34,7 @@ export class GetAuthorizationsAction extends AbstractAuthorizationAction {
     uniqueType: string,
     featureIDs: FeatureID[],
     hrefs: string[],
+    singleObject = false,
   ) {
     super();
     this.payload = {
@@ -41,6 +42,7 @@ export class GetAuthorizationsAction extends AbstractAuthorizationAction {
       type: uniqueType,
       featureIDs,
       hrefs,
+      singleObject,
     };
   }
 }

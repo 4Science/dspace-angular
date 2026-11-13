@@ -50,6 +50,8 @@ import { VocabularyService } from 'src/app/core/submission/vocabularies/vocabula
 import { NotificationsService } from 'src/app/shared/notifications/notifications.service';
 
 import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
+import { getResourceTypeValueFor } from '../../../core/cache/object-cache.reducer';
+import { CollectionDataService } from '../../../core/data/collection-data.service';
 import { ItemDataService } from '../../../core/data/item-data.service';
 import { RelationshipDataService } from '../../../core/data/relationship-data.service';
 import { MetadataService } from '../../../core/metadata/metadata.service';
@@ -69,6 +71,7 @@ import {
   getRemoteDataPayload,
   metadataFieldsToString,
 } from '../../../core/shared/operators';
+import { ITEM_TEMPLATE } from '../../../core/shared/template-item.resource-type';
 import { MetadataSecurityConfiguration } from '../../../core/submission/models/metadata-security-configuration';
 import { Vocabulary } from '../../../core/submission/vocabularies/models/vocabulary.model';
 import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
@@ -281,6 +284,7 @@ export class DsoEditMetadataValueComponent implements OnInit, OnChanges, OnDestr
     protected dsoNameService: DSONameService,
     protected vocabularyService: VocabularyService,
     protected itemService: ItemDataService,
+    protected collectionService: CollectionDataService,
     protected cdr: ChangeDetectorRef,
     protected registryService: RegistryService,
     protected notificationsService: NotificationsService,
@@ -342,16 +346,7 @@ export class DsoEditMetadataValueComponent implements OnInit, OnChanges, OnDestr
 
     if (isNotEmpty(this.mdField)) {
 
-      const owningCollection$: Observable<Collection> = this.itemService.findByHref(this.dso._links.self.href, true, true, followLink('owningCollection'))
-        .pipe(
-          getFirstSucceededRemoteData(),
-          getRemoteDataPayload(),
-          switchMap((item: Item) => item.owningCollection),
-          getFirstSucceededRemoteData(),
-          getRemoteDataPayload(),
-        );
-
-      this.vocabulary$ = owningCollection$.pipe(
+      this.vocabulary$ = this.findRelatedCollection(this.dso).pipe(
         switchMap((c: Collection) => this.vocabularyService
           .getVocabularyByMetadataAndCollection(this.mdField, c.uuid)
           .pipe(
@@ -380,6 +375,38 @@ export class DsoEditMetadataValueComponent implements OnInit, OnChanges, OnDestr
       map((result: Vocabulary) => isNotEmpty(result) && !result.hierarchical && !result.scrollable),
     );
 
+  }
+
+  /**
+   * Resolve the Collection that provides the authority configuration context for the given
+   * DSpaceObject.
+   *
+   * A regular Item is resolved through its owning Collection. A template Item has no owning
+   * Collection: it is linked to its Collection through `templateItemOf`.
+   *
+   * @param dso The DSpaceObject being edited
+   */
+  protected findRelatedCollection(dso: DSpaceObject): Observable<Collection> {
+    if (getResourceTypeValueFor(dso?.type) === ITEM_TEMPLATE.value) {
+      const href = (dso as Item)._links?.templateItemOf?.href;
+      if (isNotEmpty(href)) {
+        return this.collectionService.findByHref(href, true, true)
+          .pipe(
+            getFirstSucceededRemoteData(),
+            getRemoteDataPayload(),
+          );
+      }
+      return EMPTY;
+    }
+
+    return this.itemService.findByHref(dso._links.self.href, true, true, followLink('owningCollection'))
+      .pipe(
+        getFirstSucceededRemoteData(),
+        getRemoteDataPayload(),
+        switchMap((item: Item) => item.owningCollection),
+        getFirstSucceededRemoteData(),
+        getRemoteDataPayload(),
+      );
   }
 
   /**

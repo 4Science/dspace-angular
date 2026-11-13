@@ -12,7 +12,8 @@ export interface AuthorizationActionPayload {
   uuidList: string[],
   type?: string,
   featureIDs: FeatureID[],
-  hrefs: string[]
+  hrefs: string[],
+  singleObject?: boolean
 }
 
 export interface ObjectAuthorizationFeaturesMap {

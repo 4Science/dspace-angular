@@ -334,14 +334,9 @@ describe('AuthorizationDataService', () => {
       });
     });
 
-    describe('when the store-based authorization is not populated after loading (SSR fallback)', () => {
+    describe('when the authorization state has errors (SSR fallback)', () => {
       beforeEach(() => {
-        // The request finished loading but the NgRx authorization store was never populated for
-        // this feature. This happens during SSR: the store-based flow yields `undefined` even
-        // though the REST request succeeded. The service must then fall back to a direct REST
-        // authorization check instead of hanging or wrongly returning false.
-        authorizationService.getAuthorizationForObject = () => observableOf(undefined);
-        authorizationService.isRequestLoading = () => observableOf(false);
+        authorizationService.hasErrors = () => observableOf(true);
       });
 
       it('should fall back to a direct REST check and return true when the feature is granted', (done) => {
