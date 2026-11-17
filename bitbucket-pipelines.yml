@@ -59,7 +59,7 @@ definitions:
     - step: &angular-build
         name: angular-build
         image:
-          name: cypress/browsers:node-22.21.0-chrome-141.0.7390.107-1-ff-144.0-edge-141.0.3537.92-1
+          name: cypress/browsers:node-24.22.1-chrome-156.0.8078.73-1-ff-159.0-edge-156.0.4314.50-1
           run-as-user: 1000
         size: 4x
         caches:
@@ -75,7 +75,7 @@ definitions:
     - step: &unittest-code-checks
         name: test-code-checks
         image:
-          name: cypress/browsers:node-22.21.0-chrome-141.0.7390.107-1-ff-144.0-edge-141.0.3537.92-1
+          name: cypress/browsers:node-24.22.1-chrome-156.0.8078.73-1-ff-159.0-edge-156.0.4314.50-1
           run-as-user: 1000
         size: 4x
         caches:
@@ -93,7 +93,7 @@ definitions:
     - step: &run-e2e-tests
         name: Run E2E test
         image:
-          name: cypress/browsers:node-22.21.0-chrome-141.0.7390.107-1-ff-144.0-edge-141.0.3537.92-1
+          name: cypress/browsers:node-24.22.1-chrome-156.0.8078.73-1-ff-159.0-edge-156.0.4314.50-1
           run-as-user: 0
         size: 4x
         services:
