@@ -6265,8 +6265,11 @@
   // "process.new.parameter.file.upload-button": "Select file...",
   "process.new.parameter.file.upload-button": "Seleccionar archivo...",
 
-  // "process.new.parameter.file.required": "Please select a file",
-  "process.new.parameter.file.required": "Por favor seleccione un archivo",
+  // "process.new.parameter.file.required": "Please select a file.",
+  "process.new.parameter.file.required": "Por favor seleccione un archivo.",
+
+  // "process.new.parameter.file.reupload-required": "The file \"{{ fileName }}\" used by the original process can't be reused. Please select it again.",
+  "process.new.parameter.file.reupload-required": "El archivo \"{{ fileName }}\" usado por el proceso original no se puede reutilizar. Por favor, selecciónelo de nuevo.",
 
   // "process.new.parameter.integer.required": "Parameter value is required",
   // TODO New key - Add a translation

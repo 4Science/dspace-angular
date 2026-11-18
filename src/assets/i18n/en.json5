@@ -5216,7 +5216,9 @@
 
   "process.new.parameter.file.upload-button": "Select file...",
 
-  "process.new.parameter.file.required": "Please select a file",
+  "process.new.parameter.file.required": "Please select a file.",
+
+  "process.new.parameter.file.reupload-required": "The file \"{{ fileName }}\" used by the original process can't be reused. Please select it again.",
 
   "process.new.parameter.integer.required": "Parameter value is required",
 

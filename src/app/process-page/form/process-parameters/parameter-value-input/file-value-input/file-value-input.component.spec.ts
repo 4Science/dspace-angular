@@ -61,4 +61,27 @@ describe('FileValueInputComponent', () => {
     const validationError = fixture.debugElement.query(By.css('.validation-error'));
     expect(validationError).toBeTruthy();
   });
+
+  describe('when pre-filled with the file name of an existing process', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(FileValueInputComponent);
+      component = fixture.componentInstance;
+      component.initialValue = 'test.csv';
+      fixture.detectChanges();
+    });
+
+    it('should show the re-upload validation error without the field being touched', () => {
+      const validationError = fixture.debugElement.query(By.css('.validation-error'));
+      expect(validationError).toBeTruthy();
+      expect(validationError.nativeElement.textContent).toContain('process.new.parameter.file.reupload-required');
+    });
+
+    it('should hide the validation error once a file is selected', () => {
+      component.setFile([new File([''], 'new.csv')]);
+      fixture.detectChanges();
+
+      const validationError = fixture.debugElement.query(By.css('.validation-error'));
+      expect(validationError).toBeFalsy();
+    });
+  });
 });

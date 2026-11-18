@@ -16,7 +16,7 @@
       <ds-date-value-input [initialValue]="initialValue" (updateValue)="updateValue.emit($event)" [index]="index"></ds-date-value-input>
     }
     @case (parameterTypes.FILE) {
-      <ds-file-value-input (updateValue)="updateValue.emit($event)" [index]="index"></ds-file-value-input>
+      <ds-file-value-input [initialValue]="initialValue" (updateValue)="updateValue.emit($event)" [index]="index"></ds-file-value-input>
     }
     @case (parameterTypes.BOOLEAN) {
       <ds-boolean-value-input (updateValue)="updateValue.emit($event)" [index]="index"></ds-boolean-value-input>

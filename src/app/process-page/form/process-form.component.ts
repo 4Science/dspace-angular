@@ -32,6 +32,7 @@ import { Process } from '../processes/process.model';
 import { ProcessParameter } from '../processes/process-parameter.model';
 import { Script } from '../scripts/script.model';
 import { ScriptParameter } from '../scripts/script-parameter.model';
+import { ScriptParameterType } from '../scripts/script-parameter-type.model';
 import { ProcessParametersComponent } from './process-parameters/process-parameters.component';
 import { ScriptHelpComponent } from './script-help/script-help.component';
 import { ScriptsSelectComponent } from './scripts-select/scripts-select.component';
@@ -99,6 +100,8 @@ export class ProcessFormComponent implements OnInit {
    * @param form
    */
   submitForm(form: NgForm) {
+    // reset the files collected on a previous (failed) submission
+    this.files = [];
     if (isEmpty(this.parameters)) {
       this.parameters = [];
     }
@@ -176,6 +179,14 @@ export class ProcessFormComponent implements OnInit {
         this.missingParameters.push(rp.name);
       }
     }
+    // file parameters pre-filled from an existing process only hold the old file name: a new file is required
+    const fileParams: string[] = this.selectedScript.parameters
+      .filter((param) => param.type === ScriptParameterType.FILE)
+      .map((param) => param.name);
+    this.parameters
+      .filter((param) => fileParams.includes(param.name) && !(param.value instanceof File))
+      .filter((param) => !this.missingParameters.includes(param.name))
+      .forEach((param) => this.missingParameters.push(param.name));
     return this.missingParameters.length > 0;
   }
 
