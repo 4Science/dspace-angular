@@ -1,7 +1,7 @@
 <div *ngIf="metadataFieldRenderOptions" class="{{containerStyle}}">
   <div class="d-flex flex-column" [class.flex-lg-row]="!field.labelAsHeading">
   <span *ngIf="hasLabel"
-        class="{{labelStyle}}" [innerHTML]="getLabel()">
+        class="{{labelStyle}} text-break" [innerHTML]="getLabel()">
   </span>
 
     <div *ngIf="!isStructured" class="d-flex col flex-wrap" [class.flex-column]="!field.valuesInline">
