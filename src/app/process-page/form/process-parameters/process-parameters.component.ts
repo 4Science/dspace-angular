@@ -74,7 +74,8 @@ export class ProcessParametersComponent implements OnChanges {
    */
   initParameters() {
     if (hasValue(this.initialParams)) {
-      this.parameterValues = [...this.initialParams];
+      // copy each parameter: the originals belong to the cached Process and must not be mutated
+      this.parameterValues = this.initialParams.map((param: ProcessParameter) => Object.assign(new ProcessParameter(), param));
       this.addParameter();
     } else {
       this.parameterValues = [];
