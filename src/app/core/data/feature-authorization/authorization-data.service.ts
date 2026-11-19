@@ -1,23 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
 import {
   combineLatest,
+  EMPTY,
   Observable,
   of,
   throwError,
 } from 'rxjs';
 import {
   catchError,
-  distinctUntilChanged,
+  expand,
   filter,
   map,
+  reduce,
+  shareReplay,
   switchMap,
   take,
+  tap,
 } from 'rxjs/operators';
-import { AppState } from 'src/app/app.reducer';
 
 import { ObjectAuthorizationsState } from '../../../shared/authorizations/authorization.interfaces';
-import { AuthorizationService } from '../../../shared/authorizations/authorization.service';
 import {
   hasNoValue,
   hasValue,
@@ -27,11 +28,11 @@ import {
   followLink,
   FollowLinkConfig,
 } from '../../../shared/utils/follow-link-config.model';
+import { AuthService } from '../../auth/auth.service';
 import { RemoteDataBuildService } from '../../cache/builders/remote-data-build.service';
 import { RequestParam } from '../../cache/models/request-param.model';
 import { ObjectCacheService } from '../../cache/object-cache.service';
 import { Authorization } from '../../shared/authorization.model';
-import { DSpaceObject } from '../../shared/dspace-object.model';
 import { HALEndpointService } from '../../shared/hal-endpoint.service';
 import { getFirstCompletedRemoteData } from '../../shared/operators';
 import { BaseDataService } from '../base/base-data.service';
@@ -46,9 +47,8 @@ import { RequestService } from '../request.service';
 import { SiteDataService } from '../site-data.service';
 import { AuthorizationSearchParams } from './authorization-search-params';
 import {
-  getAuthorizationFeaturesIDs,
-  getNormalizedUuid,
-  getRequestIdFromParams,
+  authorizationFeatureIds,
+  getSucceededPageOrThrow,
   oneAuthorizationMatchesFeature,
 } from './authorization-utils';
 import { FeatureID } from './feature-id';
@@ -64,14 +64,26 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
 
   private searchData: SearchDataImpl<Authorization>;
 
+  /**
+   * The IDs of the features granted anonymously on an object, keyed by object URL and
+   * re-request setting. A page checks several features on the same object (e.g. two per
+   * bitstream on an item page); each entry lets all of those checks share one search and one
+   * resolution of the embedded features, instead of repeating that work for every feature.
+   */
+  private anonymousFeatureIds = new Map<string, { expiresAt: number, featureIds$: Observable<Set<string>> }>();
+
+  /**
+   * Grants retrieved with a batched "objects" search (see {@link getAuthorizationForObjects}), keyed by object URL
+   */
+  private batchedGrants = new Map<string, { expiresAt: number, grants: { [featureId: string]: boolean } }>();
+
   constructor(
     protected requestService: RequestService,
     protected rdbService: RemoteDataBuildService,
     protected objectCache: ObjectCacheService,
     protected halService: HALEndpointService,
     protected siteService: SiteDataService,
-    protected authorizationService: AuthorizationService,
-    protected store: Store<AppState>,
+    protected authService: AuthService,
   ) {
     super('authorizations', requestService, rdbService, objectCache, halService);
 
@@ -82,6 +94,8 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    * Set all authorization requests to stale
    */
   invalidateAuthorizationsRequestCache() {
+    this.anonymousFeatureIds.clear();
+    this.batchedGrants.clear();
     this.requestService.setStaleByHrefSubstring(this.linkPath);
   }
 
@@ -92,6 +106,14 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    * @param objectUrl
    */
   invalidateAuthorization(featureID?: FeatureID, objectUrl?: string) {
+    if (hasValue(objectUrl)) {
+      this.anonymousFeatureIds.forEach((_, key) => key.startsWith(`${objectUrl}|`) && this.anonymousFeatureIds.delete(key));
+      this.batchedGrants.delete(objectUrl);
+      this.requestService.setStaleByHrefSubstring(objectUrl);
+    } else {
+      this.anonymousFeatureIds.clear();
+      this.batchedGrants.clear();
+    }
     this.searchData.getSearchByHref(this.searchByObjectPath, this.createSearchOptions(objectUrl, {}, null, featureID))
       .pipe(
         take(1),
@@ -100,6 +122,7 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
 
   /**
    * Checks if an {@link EPerson} (or anonymous) has access to a specific object within a {@link Feature}
+   *
    * @param objectUrl                   URL to the object to search {@link Authorization}s for.
    *                                    If not provided, the repository's {@link Site} will be used.
    * @param ePersonUuid                 UUID of the {@link EPerson} to search {@link Authorization}s for.
@@ -111,33 +134,116 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
    *                                    requested after the response becomes stale
    */
   isAuthorized(featureId?: FeatureID, objectUrl?: string, ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<boolean> {
-    return this.authorizationService.hasErrors().pipe(
-      take(1),
-      switchMap(( hasErrors) => {
-        if (!hasErrors && !ePersonUuid) {
-          //If no object url is provided than it means is a site authorization.
-          //If a person uuid is provided we don't use the state service as it keeps track only of authorizations for the active user.
-          const dsoRequest$ = (objectUrl ? this.objectCache.getObjectByHref(objectUrl) : this.siteService.find()) as Observable<DSpaceObject>;
+    if (hasValue(featureId) && hasNoValue(ePersonUuid)) {
+      // An unresolved authentication state must never be mistaken for an anonymous visitor.
+      // Without an explicit EPerson the checks are for the current visitor, whether anonymous or
+      // authenticated, so they all share one unfiltered search per object.
+      return this.authService.isAuthenticationReady().pipe(
+        filter((ready: boolean) => ready),
+        take(1),
+        switchMap(() => this.checkAnonymousAuthorization(featureId, objectUrl, useCachedVersionIfAvailable, reRequestOnStale)),
+      );
+    }
+    return this.checkAuthorization(featureId, objectUrl, ePersonUuid, useCachedVersionIfAvailable, reRequestOnStale);
+  }
 
-          return dsoRequest$.pipe(
-            take(1),
-            // Get correct item and check that has not already pending authorizations
-            switchMap((object) => this.readOrFetchAuthorization(object, featureId, !objectUrl, useCachedVersionIfAvailable, reRequestOnStale)),
-          );
-        } else {
-          // we fallback on old method if site service had initialization issues or if some parameters more than the only feature ID are provided.
-          return this.searchByObjectAndMatchFeature(featureId, objectUrl, ePersonUuid, useCachedVersionIfAvailable, reRequestOnStale);
-        }
-      }),
+  /**
+   * Feature checks (of the current visitor) on the same object share one unfiltered REST search, and the
+   * feature IDs resolved from it (see {@link getAnonymousFeatureIds}).
+   * A failed batch (including a custom feature throwing on the backend) falls back to the
+   * original individual feature check.
+   */
+  private checkAnonymousAuthorization(featureId: FeatureID, objectUrl: string, useCachedVersionIfAvailable: boolean, reRequestOnStale: boolean): Observable<boolean> {
+    const objectUrl$ = hasValue(objectUrl) ? of(objectUrl) : this.siteService.find().pipe(map((site) => site.self));
+    return objectUrl$.pipe(
+      take(1),
+      // Retrieve the IDs of all features granted on the object, shared with other checks on it
+      switchMap((url: string) => this.getBatchedGrant(featureId, url, useCachedVersionIfAvailable) ??
+        this.getAnonymousFeatureIds(url, useCachedVersionIfAvailable, reRequestOnStale).pipe(
+          // The requested feature is granted if its ID is among them
+          map((featureIds: Set<string>) => featureIds.has(featureId.valueOf())),
+        )),
+      // Any failure along the way: ask the backend about this single feature instead
+      catchError(() => this.checkAuthorization(featureId, objectUrl, undefined, useCachedVersionIfAvailable, reRequestOnStale)),
     );
   }
 
   /**
-   * Perform a direct authorization check via the REST "object" search endpoint, bypassing the
-   * NgRx authorization store. This reads the {@link RemoteData} directly, so it returns a reliable
-   * result even in situations where the store-based flow does not get populated (e.g. during SSR).
+   * Retrieve the IDs of all features granted anonymously on an object.
+   * Concurrent and later calls for the same object reuse the same observable until it expires
+   * with the underlying response, so the search and the feature resolution happen only once.
+   * The request cache still handles the HTTP request itself (deduplication, SSR transfer state).
+   * A failed lookup is removed, so that the next check retries it rather than replaying the error.
    */
-  private searchByObjectAndMatchFeature(featureId?: FeatureID, objectUrl?: string, ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<boolean> {
+  private getAnonymousFeatureIds(url: string, useCachedVersionIfAvailable: boolean, reRequestOnStale: boolean): Observable<Set<string>> {
+    const key = `${url}|${reRequestOnStale}`;
+    const now = Date.now();
+    const cached = this.anonymousFeatureIds.get(key);
+    if (useCachedVersionIfAvailable && hasValue(cached) && cached.expiresAt > now) {
+      return cached.featureIds$;
+    }
+    const entry = {
+      // BaseDataService may leave responseMsToLive unset; RequestService then uses 15 minutes too
+      expiresAt: now + (this.responseMsToLive ?? 15 * 60 * 1000),
+      featureIds$: undefined as Observable<Set<string>>,
+    };
+    entry.featureIds$ = this.findAllAuthorizationsForObject(url, useCachedVersionIfAvailable, reRequestOnStale).pipe(
+      // Resolve the embedded feature of each authorization to its ID
+      authorizationFeatureIds,
+      // Forget a failed lookup, unless it has already been replaced
+      catchError((error: unknown) => {
+        if (this.anonymousFeatureIds.get(key) === entry) {
+          this.anonymousFeatureIds.delete(key);
+        }
+        return throwError(() => error);
+      }),
+      // Run the lookup once and replay its result to every check on this object
+      shareReplay({ bufferSize: 1, refCount: false }),
+    );
+    this.removeExpiredAnonymousFeatureIds(now);
+    this.anonymousFeatureIds.set(key, entry);
+    return entry.featureIds$;
+  }
+
+  /**
+   * Remove expired entries, so that browsing many objects does not grow the map indefinitely.
+   */
+  private removeExpiredAnonymousFeatureIds(now: number): void {
+    this.anonymousFeatureIds.forEach((entry, key) => {
+      if (entry.expiresAt <= now) {
+        this.anonymousFeatureIds.delete(key);
+      }
+    });
+  }
+
+  /**
+   * Retrieve all {@link Authorization}s granted on an object, following every page before
+   * completing, so that a feature is never considered absent because it is on a later page.
+   * Errors if any page fails.
+   */
+  private findAllAuthorizationsForObject(url: string, useCachedVersionIfAvailable: boolean, reRequestOnStale: boolean): Observable<Authorization[]> {
+    const firstPage$ = this.searchByObject(undefined, url, undefined, { elementsPerPage: 100 },
+      useCachedVersionIfAvailable, reRequestOnStale, followLink('feature'));
+    return firstPage$.pipe(
+      getSucceededPageOrThrow,
+      // Request the next page for as long as the current one links to it
+      expand((page: PaginatedList<Authorization>) => {
+        if (!page.next) {
+          return EMPTY;
+        }
+        const nextPage$ = this.findListByHref(page.next, {}, useCachedVersionIfAvailable, reRequestOnStale, followLink('feature'));
+        this.addDependency(nextPage$, of(url));
+        return nextPage$.pipe(getSucceededPageOrThrow);
+      }),
+      // Combine the authorizations of all pages into one list
+      reduce((authorizations: Authorization[], page: PaginatedList<Authorization>) => [...authorizations, ...page.page], []),
+    );
+  }
+
+  /**
+   * Perform the actual authorization lookup for a single feature against the REST API.
+   */
+  private checkAuthorization(featureId?: FeatureID, objectUrl?: string, ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<boolean> {
     return this.searchByObject(featureId, objectUrl, ePersonUuid, {}, useCachedVersionIfAvailable, reRequestOnStale, followLink('feature')).pipe(
       getFirstCompletedRemoteData(),
       map((authorizationRD) => {
@@ -152,116 +258,115 @@ export class AuthorizationDataService extends BaseDataService<Authorization> imp
     );
   }
 
-  private readOrFetchAuthorization(dso: DSpaceObject, featureId: FeatureID, isSite = false, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<boolean> {
-    const objectKey = getNormalizedUuid(dso);
-    const requestId = getRequestIdFromParams(dso.uniqueType, [objectKey], [featureId]);
-    const waitForEntry$: Observable<boolean> = isSite
-      ? combineLatest([
-        this.hasEntryForObjectKey$(objectKey).pipe(
-          filter((hasEntry) => hasEntry),
-          take(1),
-        ),
-        this.authorizationService.hasErrors(),
-      ]).pipe(
-        filter(([hasEntry, hasErrors]) => hasEntry || hasErrors),
-        take(1),
-        map(([, hasErrors]) => hasErrors),
-      )
-      : of(false);
-
-    return waitForEntry$.pipe(
-      switchMap((hasErrors) => {
-        if (hasErrors) {
-          return this.searchByObjectAndMatchFeature(featureId, dso.self);
-        }
-        return this.authorizationService.getAuthorizationForObject(featureId, objectKey).pipe(
-          take(1),
-          switchMap((authorization) => {
-            if (authorization !== undefined) {
-              // Authorization is already cached → return it directly
-              return of(authorization);
-            }
-            // Authorization is not cached → trigger fetch
-            this.authorizationService.initStateForObjects(
-              [objectKey],
-              dso.uniqueType,
-              [featureId],
-              [objectKey],
-            );
-            // Wait for loading to complete, then read authorization again
-            return this.authorizationService.isRequestLoading(requestId).pipe(
-              distinctUntilChanged(),
-              filter(isLoading => !isLoading),
-              take(1), // Ensure we only continue after loading finishes
-              switchMap(() =>
-                this.authorizationService.getAuthorizationForObject(featureId, objectKey).pipe(
-                  filter(result => result !== undefined), // Ensure we only emit valid results
-                  take(1),
-                ),
-              ),
-            );
-          }),
-        );
-      }),
-    );
-  }
-
   /**
-   * Emits `true` once the store contains an authorization entry keyed by the given object key.
-   * Used to make sure site-level authorization state has been initialized before
-   * reading/fetching from it (avoids racing the initial site authorization request).
-   * @private
+   * The grant of a feature on an object already retrieved by {@link getAuthorizationForObjects}, if any.
    */
-  private hasEntryForObjectKey$(objectKey: string): Observable<boolean> {
-    return this.authorizationService.hasAuthorizationEntryForObject(objectKey);
+  private getBatchedGrant(featureId: FeatureID, objectUrl: string, useCachedVersionIfAvailable: boolean): Observable<boolean> | undefined {
+    const batched = this.batchedGrants.get(objectUrl);
+    if (useCachedVersionIfAvailable && hasValue(batched) && batched.expiresAt > Date.now() && hasValue(batched.grants[featureId])) {
+      return of(batched.grants[featureId]);
+    }
+    return undefined;
   }
 
-
   /**
-   * Get a map of authorizations for {@link EPerson} (or anonymous)
+   * Get a map of authorizations for {@link EPerson} (or anonymous) using a single batched request.
+   * When no EPerson is provided, the result is kept so that following {@link isAuthorized} checks on the same
+   * objects and features do not need any further request.
+   *
    * @param uuidList                    Required list of objects' uuids to search {@link Authorization}s for.
    * @param type                        The required DSO UniqueType attribute.
+   * @param featuresId                  A list of the IDs of the {@link Feature} to check {@link Authorization} for
    * @param ePersonUuid                 UUID of the {@link EPerson} to search {@link Authorization}s for.
    *                                    If not provided, the UUID of the currently authenticated {@link EPerson} will be used.
-   * @param featuresId                  A list of the IDs of the {@link Feature} to check {@link Authorization} for
-   * @param keys                        Fallback store keys to use when the response contains no
-   *                                    authorizations.
+   * @param hrefs                       Self links of the requested objects, all of them are included in the result
    * @param useCachedVersionIfAvailable If this is true, the request will only be sent if there's
    *                                    no valid cached version. Defaults to true
    * @param reRequestOnStale            Whether or not the request should automatically be re-
    *                                    requested after the response becomes stale
    */
-  getAuthorizationForObjects(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, keys?: string[], useCachedVersionIfAvailable: boolean = true, reRequestOnStale: boolean = true): Observable<ObjectAuthorizationsState> {
-    return this.searchObjectsAuthorizations(uuidList,  type, featuresId, ePersonUuid, useCachedVersionIfAvailable, reRequestOnStale).pipe(
-      getAuthorizationFeaturesIDs(featuresId, keys),
+  getAuthorizationForObjects(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, hrefs?: string[], useCachedVersionIfAvailable: boolean = true, reRequestOnStale: boolean = true): Observable<ObjectAuthorizationsState> {
+    return this.searchObjectsAuthorizations(uuidList, type, featuresId, ePersonUuid, useCachedVersionIfAvailable, reRequestOnStale).pipe(
+      switchMap((authorizations) => this.toObjectAuthorizationsState(authorizations, featuresId ?? [], hrefs ?? [])),
+      tap((state) => {
+        if (!hasValue(ePersonUuid)) {
+          this.storeBatchedGrants(state);
+        }
+      }),
     );
   }
 
-
   /**
-   * Return a list of authorizations give a list of uuid and a list of features
-   * @param uuidList
-   * @param featuresId
-   * @param type
-   * @param ePersonUuid
-   * @param useCachedVersionIfAvailable
-   * @param reRequestOnStale
-   * @private
+   * Return all the authorizations (following the pagination) for a list of uuids and a list of features
    */
   searchObjectsAuthorizations(uuidList: string[], type: string, featuresId?: FeatureID[], ePersonUuid?: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<Authorization[]> {
-    return this.searchByObjects(uuidList, type, featuresId, ePersonUuid, {}, useCachedVersionIfAvailable, reRequestOnStale, followLink<Authorization>('feature')).pipe(
+    return this.findAllPages((page) => this.searchByObjects(
+      uuidList, type, featuresId, ePersonUuid, { elementsPerPage: 100, currentPage: page },
+      useCachedVersionIfAvailable, reRequestOnStale,
+      followLink<Authorization>('object'),
+      followLink<Authorization>('feature'),
+    ));
+  }
+
+  /**
+   * Retrieve all the pages of a paginated authorizations search.
+   * A 401 response is treated as "no authorizations", any other failure results in an error.
+   */
+  private findAllPages(search: (page: number) => Observable<RemoteData<PaginatedList<Authorization>>>, page = 1, collected: Authorization[] = []): Observable<Authorization[]> {
+    return search(page).pipe(
       getFirstCompletedRemoteData(),
-      switchMap((authorizationRD) => {
-        if (authorizationRD.hasFailed && authorizationRD.statusCode !== 401) {
-          return throwError(() => new Error(`The authorizations "objects" endpoint failed with status ${authorizationRD.statusCode}`));
+      switchMap((rd) => {
+        if (rd.hasFailed) {
+          return rd.statusCode === 401 ? of(collected) : throwError(() => new Error(`The authorizations search failed with status ${rd.statusCode}`));
         }
-        if (authorizationRD.statusCode !== 401 && hasValue(authorizationRD.payload) && isNotEmpty(authorizationRD.payload.page)) {
-          return of(authorizationRD.payload.page);
-        }
-        return of([]);
+        const all = [...collected, ...(rd.payload?.page ?? [])];
+        const totalPages = rd.payload?.pageInfo?.totalPages ?? 1;
+        return page < totalPages ? this.findAllPages(search, page + 1, all) : of(all);
       }),
     );
+  }
 
+  /**
+   * Map the authorizations to `{ [objectSelf]: { [featureId]: boolean } }`, every requested href and feature is included
+   */
+  private toObjectAuthorizationsState(authorizations: Authorization[], featureIDs: FeatureID[], hrefs: string[]): Observable<ObjectAuthorizationsState> {
+    const state: ObjectAuthorizationsState = {};
+    hrefs.forEach((href) => {
+      state[href] = {};
+      featureIDs.forEach((id) => state[href][id] = false);
+    });
+
+    const withLinks = authorizations.filter((authorization) => hasValue(authorization.object) && hasValue(authorization.feature));
+    if (withLinks.length === 0) {
+      return of(state);
+    }
+    return combineLatest(withLinks.map((authorization) => combineLatest([
+      authorization.object.pipe(getFirstCompletedRemoteData()),
+      authorization.feature.pipe(getFirstCompletedRemoteData()),
+    ]))).pipe(
+      take(1),
+      map((pairs) => {
+        pairs.forEach(([objectRD, featureRD]) => {
+          if (hasValue(objectRD.payload?.self) && hasValue(featureRD.payload?.id)) {
+            state[objectRD.payload.self] = Object.assign({}, state[objectRD.payload.self], { [featureRD.payload.id]: true });
+          }
+        });
+        return state;
+      }),
+    );
+  }
+
+  private storeBatchedGrants(state: ObjectAuthorizationsState) {
+    const now = Date.now();
+    this.batchedGrants.forEach((entry, key) => entry.expiresAt <= now && this.batchedGrants.delete(key));
+    Object.keys(state).forEach((href) => {
+      const existing = this.batchedGrants.get(href);
+      const current = hasValue(existing) && existing.expiresAt > now ? existing.grants : {};
+      this.batchedGrants.set(href, {
+        expiresAt: now + (this.responseMsToLive ?? 15 * 60 * 1000),
+        grants: Object.assign({}, current, state[href]),
+      });
+    });
   }
 
   /**
