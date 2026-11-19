@@ -11,7 +11,6 @@ import {
 import {
   hasNoValue,
   hasValue,
-  isEmpty,
   isNotEmpty,
 } from '../../../shared/empty.util';
 import { AuthService } from '../../auth/auth.service';
@@ -133,7 +132,7 @@ export const authorizationFeatureIds = (source: Observable<Authorization[]>): Ob
             return featureRD.payload;
           }),
         ));
-      return features$.length ? observableCombineLatest(features$) : observableOf([]);
+      return features$.length ? observableCombineLatest(features$) : of([]);
     }),
     map((features: Feature[]) => new Set(features.map((feature: Feature) => feature.id))),
   );

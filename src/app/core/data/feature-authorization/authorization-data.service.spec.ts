@@ -2,7 +2,7 @@ import {
   BehaviorSubject,
   combineLatest as observableCombineLatest,
   Observable,
-  of as observableOf,
+  of,
 } from 'rxjs';
 
 import { hasValue } from '../../../shared/empty.util';
@@ -49,12 +49,12 @@ describe('AuthorizationDataService', () => {
       uuid: 'test-eperson',
     });
     siteService = jasmine.createSpyObj('siteService', {
-      find: observableOf(site),
+      find: of(site),
     });
 
     authService = jasmine.createSpyObj('authService', {
-      isAuthenticated: observableOf(true),
-      isAuthenticationReady: observableOf(true),
+      isAuthenticated: of(true),
+      isAuthenticationReady: of(true),
     });
     objectCache = getMockObjectCacheService();
     service = new AuthorizationDataService(requestService, undefined, objectCache, undefined, siteService, authService);
@@ -62,7 +62,7 @@ describe('AuthorizationDataService', () => {
 
   beforeEach(() => {
     init();
-    spyOn(service, 'searchBy').and.returnValue(observableOf(undefined));
+    spyOn(service, 'searchBy').and.returnValue(of(undefined));
   });
 
   describe('composition', () => {
@@ -134,7 +134,7 @@ describe('AuthorizationDataService', () => {
       let addDependencySpy;
 
       beforeEach(() => {
-        (service.searchBy as any).and.returnValue(observableOf('searchBy RD$'));
+        (service.searchBy as any).and.returnValue(of('searchBy RD$'));
         addDependencySpy = spyOn(service as any, 'addDependency');
       });
 
@@ -227,7 +227,7 @@ describe('AuthorizationDataService', () => {
     const invalidPayload = [authorizationFor('invalid-feature'), authorizationFor('another-invalid-feature')];
 
     beforeEach(() => {
-      authService.isAuthenticated.and.returnValue(observableOf(false));
+      authService.isAuthenticated.and.returnValue(of(false));
     });
 
     describe('when searchByObject returns a 401', () => {
@@ -334,7 +334,7 @@ describe('AuthorizationDataService', () => {
 
     describe('authentication state', () => {
       it('should batch checks for authenticated visitors too', () => {
-        authService.isAuthenticated.and.returnValue(observableOf(true));
+        authService.isAuthenticated.and.returnValue(of(true));
         const search = spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(validPayload)));
         service.isAuthorized(featureID).subscribe((result) => expect(result).toBeTrue());
         expect(search.calls.mostRecent().args[0]).toBeUndefined();
@@ -346,7 +346,7 @@ describe('AuthorizationDataService', () => {
           const search = spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(validPayload)));
           const ready$ = new BehaviorSubject(false);
           authService.isAuthenticationReady.and.returnValue(ready$);
-          authService.isAuthenticated.and.returnValue(observableOf(authenticated));
+          authService.isAuthenticated.and.returnValue(of(authenticated));
           const result = jasmine.createSpy('result');
           service.isAuthorized(featureID, objectUrl).subscribe(result);
           expect(result).not.toHaveBeenCalled();
