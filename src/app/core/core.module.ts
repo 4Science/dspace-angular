@@ -159,6 +159,9 @@ import { Section } from './layout/models/section.model';
 import { EditItem } from './submission/models/edititem.model';
 import { EditItemDataService } from './submission/edititem-data.service';
 import { EditItemMode } from './submission/models/edititem-mode.model';
+import { AssociateItemMode } from './associateitem/models/associateitem-mode.model';
+import { AssociateItemModeDataService } from './associateitem/associateitemmode-data.service';
+import { AssociateItemService } from './associateitem/associateitem.service';
 import { AuditDataService } from './audit/audit-data.service';
 import { Audit } from './audit/model/audit.model';
 import { ItemExportFormat } from './itemexportformat/model/item-export-format.model';
@@ -177,6 +180,7 @@ import { StatisticsCategory } from './statistics/models/statistics-category.mode
 import { RootDataService } from './data/root-data.service';
 import { SearchConfig } from '../shared/search/search-filters/search-config.model';
 import { EditItemRelationsGuard } from '../edit-item-relationships/guards/edit-item-relationships.guard';
+import { AssociateItemGuard } from '../associate-item/guards/associate-item.guard';
 import { SequenceService } from './shared/sequence.service';
 import { CoreState } from './core-state.model';
 import { GroupDataService } from './eperson/group-data.service';
@@ -364,7 +368,10 @@ const PROVIDERS = [
   ItemExportFormatService,
   SectionDataService,
   EditItemDataService,
+  AssociateItemModeDataService,
+  AssociateItemService,
   EditItemRelationsGuard,
+  AssociateItemGuard,
   SequenceService,
   GroupDataService,
   FeedbackDataService,
@@ -463,6 +470,7 @@ export const models =
     Section,
     EditItem,
     EditItemMode,
+    AssociateItemMode,
     OpenaireBrokerTopicObject,
     OpenaireBrokerEventObject,
     OpenaireSuggestion,

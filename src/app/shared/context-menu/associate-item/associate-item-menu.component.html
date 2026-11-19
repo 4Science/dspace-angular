@@ -1,0 +1,7 @@
+<ng-container *ngIf="(isEditAvailable() | async)">
+  <button ngbDropdownItem
+          *ngFor="let associateMode of (getAssociateModes() | async)"
+          [routerLink]="['/associate-item', contextMenuObject.id, associateMode.modename]"
+          [innerHTML]="associateMode.modename ? ('context-menu.actions.associate-item.btn.' + associateMode.modename | translate:{default: associateMode.modename}) : ('context-menu.actions.associate-item.btn.action' | translate)">
+  </button>
+</ng-container>
