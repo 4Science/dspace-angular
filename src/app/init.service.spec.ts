@@ -49,7 +49,6 @@ import SpyObj = jasmine.SpyObj;
 import { getTestScheduler } from 'jasmine-marbles';
 
 import { HeadTagService } from './core/metadata/head-tag.service';
-import { AuthorizationService } from './shared/authorizations/authorization.service';
 import { HeadTagServiceMock } from './shared/mocks/head-tag-service.mock';
 
 let spy: SpyObj<any>;
@@ -144,7 +143,6 @@ describe('InitService', () => {
     let headTagService: HeadTagServiceMock;
     let breadcrumbsServiceSpy;
     let menuServiceSpy;
-    let authorizationServiceSpy;
 
     const BLOCKING = {
       t: {  core: { auth: { blocking: true } } },
@@ -171,9 +169,6 @@ describe('InitService', () => {
       headTagService = new HeadTagServiceMock();
       menuServiceSpy = jasmine.createSpyObj('menuServiceSpy', [
         'listenForRouteChanges',
-      ]);
-      authorizationServiceSpy = jasmine.createSpyObj('authorizationServiceSpy', [
-        'initStateForSite',
       ]);
 
 
@@ -202,7 +197,6 @@ describe('InitService', () => {
           { provide: ActivatedRoute, useValue: new MockActivatedRoute() },
           { provide: MenuService, useValue: menuServiceSpy },
           { provide: ThemeService, useValue: getMockThemeService() },
-          { provide: AuthorizationService, useValue: authorizationServiceSpy },
           provideMockStore({ initialState }),
           AppComponent,
           RouteService,

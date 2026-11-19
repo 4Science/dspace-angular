@@ -9,7 +9,7 @@ import {
   of,
 } from 'rxjs';
 import {
-  filter,
+  catchError,
   map,
   switchMap,
   take,
@@ -22,7 +22,6 @@ import {
 
 import { FollowAuthorityMetadata } from '../../../config/search-follow-metadata.interface';
 import { environment } from '../../../environments/environment';
-import { AuthorizationService } from '../../shared/authorizations/authorization.service';
 import {
   hasValue,
   isNotEmpty,
@@ -30,7 +29,7 @@ import {
 import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { SearchObjects } from '../../shared/search/models/search-objects.model';
 import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
-import { getRequestIdFromParams } from '../data/feature-authorization/authorization-utils';
+import { AuthorizationDataService } from '../data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../data/feature-authorization/feature-id';
 import { ItemDataService } from '../data/item-data.service';
 import { PaginatedList } from '../data/paginated-list.model';
@@ -57,7 +56,7 @@ export class SearchManager {
     protected itemService: ItemDataService,
     protected browseService: BrowseService,
     protected searchService: SearchService,
-    protected authorizationService: AuthorizationService,
+    protected authorizationService: AuthorizationDataService,
     @Inject(APP_CONFIG) protected appConfig: AppConfig,
   ) {
   }
@@ -141,23 +140,20 @@ export class SearchManager {
       return of(searchObjects);
     }
 
-    const requestsIds = [];
-
     const uiidListsMappedToAuthorizations = this.groupItemsUuidsByAuthorizations(objects, mappedObjects);
-    [...uiidListsMappedToAuthorizations.keys()].forEach((features) => {
+    const requests = [...uiidListsMappedToAuthorizations.keys()].map((features) => {
       const uuidList = uiidListsMappedToAuthorizations.get(features);
       const type = objects.find(object => object.id === uuidList[0]).uniqueType;
-      const hrefs = objects.map(dso => dso.self);
-      this.authorizationService.initStateForObjects(uuidList, type, features, hrefs);
-      requestsIds.push(getRequestIdFromParams(type, uuidList, features));
+      const hrefs = objects.filter(dso => uuidList.includes(dso.id)).map(dso => dso.self);
+      return this.authorizationService.getAuthorizationForObjects(uuidList, type, features, undefined, hrefs).pipe(
+        take(1),
+        catchError(() => of(null)),
+      );
     });
 
-    return combineLatest(requestsIds.map(id => this.authorizationService.isRequestLoading(id))).pipe(
-      filter(loadingItems => loadingItems.every(loading => !loading)),
+    return combineLatest(requests).pipe(
       take(1),
-      map(() => {
-        return searchObjects;
-      }),
+      map(() => searchObjects),
     );
   }
 

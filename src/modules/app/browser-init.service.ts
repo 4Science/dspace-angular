@@ -26,7 +26,6 @@ import {
   find,
   map,
 } from 'rxjs/operators';
-import { AuthorizationService } from 'src/app/shared/authorizations/authorization.service';
 
 import { logStartupMessage } from '../../../startup-message';
 import { AppState } from '../../app/app.reducer';
@@ -89,7 +88,6 @@ export class BrowserInitService extends InitService {
     private requestService: RequestService,
     private halService: HALEndpointService,
     private matomoService: MatomoService,
-    protected authorizationService: AuthorizationService,
   ) {
     super(
       store,
@@ -102,7 +100,6 @@ export class BrowserInitService extends InitService {
       breadcrumbsService,
       themeService,
       menuService,
-      authorizationService,
     );
   }
 
@@ -137,8 +134,6 @@ export class BrowserInitService extends InitService {
       this.initKlaro();
 
       await lastValueFrom(this.authenticationReady$());
-
-      this.authorizationService.initStateForSite(this.appConfig.siteAuthorizationFeaturesConfig);
 
       return true;
     };
