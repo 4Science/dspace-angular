@@ -273,6 +273,14 @@ export class PaginationComponent implements OnChanges, OnDestroy, OnInit {
     if (hasValue(changes.collectionSize)) {
       this.showingDetails$ = this.getShowingDetails(this.collectionSize);
     }
+    // Re-initialize when the pagination options change after the first init (e.g. the page size
+    // options were updated because the active view mode changed), so the page size dropdown and the
+    // current pagination observables reflect the new options.
+    if (hasValue(changes.paginationOptions) && !changes.paginationOptions.firstChange) {
+      this.checkConfig(this.paginationOptions);
+      this.initializeConfig();
+      this.cdRef.markForCheck();
+    }
   }
 
   /**

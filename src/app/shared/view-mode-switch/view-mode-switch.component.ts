@@ -19,6 +19,7 @@ import { filter } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { SearchService } from '../../core/shared/search/search.service';
 import { ViewMode } from '../../core/shared/view-mode.model';
+import { BtnDisabledDirective } from '../btn-disabled.directive';
 import {
   isEmpty,
   isNotEmpty,
@@ -35,6 +36,7 @@ import { currentPath } from '../utils/route.utils';
   templateUrl: './view-mode-switch.component.html',
   imports: [
     BrowserOnlyPipe,
+    BtnDisabledDirective,
     RouterLink,
     RouterLinkActive,
     TranslateModule,
@@ -56,6 +58,11 @@ export class ViewModeSwitchComponent implements OnInit, OnDestroy {
    * The initial view mode used to render the results, based on the preferred display view configuration.
    */
   @Input() initViewMode: ViewMode = ViewMode.ListElement;
+
+  /**
+   * Whether the view mode buttons are disabled (e.g. while the search results are being retrieved)
+   */
+  @Input() disabled = false;
 
   /**
    * The current view mode
@@ -104,6 +111,9 @@ export class ViewModeSwitchComponent implements OnInit, OnDestroy {
    * @param viewMode The new view mode
    */
   switchViewTo(viewMode: ViewMode) {
+    if (this.disabled) {
+      return;
+    }
     if (viewMode !== this.currentMode) {
       this.changeViewMode.emit(viewMode);
     }

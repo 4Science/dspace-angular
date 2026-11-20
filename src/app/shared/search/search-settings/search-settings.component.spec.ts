@@ -10,7 +10,11 @@ import {
   provideRouter,
 } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { of } from 'rxjs';
+import {
+  BehaviorSubject,
+  of,
+} from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import {
   SortDirection,
@@ -19,6 +23,7 @@ import {
 import { PaginationService } from '../../../core/pagination/pagination.service';
 import { SearchService } from '../../../core/shared/search/search.service';
 import { SearchFilterService } from '../../../core/shared/search/search-filter.service';
+import { ViewMode } from '../../../core/shared/view-mode.model';
 import { SEARCH_CONFIG_SERVICE } from '../../../my-dspace-page/my-dspace-configuration.service';
 import { PageSizeSelectorComponent } from '../../page-size-selector/page-size-selector.component';
 import { PaginationComponentOptions } from '../../pagination/pagination-component-options.model';
@@ -46,6 +51,9 @@ describe('SearchSettingsComponent', () => {
 
   let paginationService: PaginationServiceStub;
 
+  // Emulates the `view` query parameter (null when it is not in the URL)
+  let viewQueryParam$: BehaviorSubject<string>;
+
 
   beforeEach(waitForAsync(async () => {
     pagination = new PaginationComponentOptions();
@@ -64,6 +72,7 @@ describe('SearchSettingsComponent', () => {
     };
 
     paginationService = new PaginationServiceStub(pagination, sort);
+    viewQueryParam$ = new BehaviorSubject<string>(null);
 
     await TestBed.configureTestingModule({
       imports: [
@@ -93,6 +102,11 @@ describe('SearchSettingsComponent', () => {
           useValue: {
             paginatedSearchOptions: of(paginatedSearchOptions),
             getCurrentScope: of('test-id'),
+            // Same semantics as SearchConfigurationService.getCurrentViewMode: the `view` query
+            // parameter wins, the given default is only used when it is missing.
+            getCurrentViewMode: (defaultViewMode: ViewMode) => viewQueryParam$.pipe(
+              map((view: string) => view || defaultViewMode),
+            ),
           },
         },
       ],
@@ -136,5 +150,54 @@ describe('SearchSettingsComponent', () => {
     const childElementToBeSelected = orderSetting.query(By.css('option[value="score,DESC"]'));
     expect(childElementToBeSelected).not.toBeNull();
     expect(childElementToBeSelected.nativeElement.selected).toBeTrue();
+  });
+
+  describe('page size selector visibility', () => {
+    const isSelectorShown = (): boolean => fixture.debugElement.query(By.css('ds-page-size-selector')) !== null;
+
+    const init = (initViewMode: ViewMode): void => {
+      comp.initViewMode = initViewMode;
+      comp.ngOnInit();
+      fixture.detectChanges();
+    };
+
+    describe('when the URL has no view query parameter', () => {
+      it('should use the init view mode (visible view)', () => {
+        init(ViewMode.GridElement);
+        expect(isSelectorShown()).toBeTrue();
+      });
+
+      it('should use the init view mode (hidden view)', () => {
+        init(ViewMode.DetailedListElement);
+        expect(isSelectorShown()).toBeFalse();
+      });
+    });
+
+    describe('when the URL defines the view query parameter', () => {
+      it('should show the selector for view=grid even if the init view mode is hidden', () => {
+        viewQueryParam$.next(ViewMode.GridElement);
+        init(ViewMode.DetailedListElement);
+        expect(isSelectorShown()).toBeTrue();
+      });
+
+      it('should hide the selector for view=detailed even if the init view mode is visible', () => {
+        viewQueryParam$.next(ViewMode.DetailedListElement);
+        init(ViewMode.ListElement);
+        expect(isSelectorShown()).toBeFalse();
+      });
+
+      it('should follow the view query parameter when it changes', () => {
+        init(ViewMode.ListElement);
+        expect(isSelectorShown()).toBeTrue();
+
+        viewQueryParam$.next(ViewMode.DetailedListElement);
+        fixture.detectChanges();
+        expect(isSelectorShown()).toBeFalse();
+
+        viewQueryParam$.next(ViewMode.GridElement);
+        fixture.detectChanges();
+        expect(isSelectorShown()).toBeTrue();
+      });
+    });
   });
 });

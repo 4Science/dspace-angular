@@ -89,12 +89,14 @@ describe('BrowseByDateComponent', () => {
   const mockBrowseService = {
     getBrowseEntriesFor: (options: BrowseEntrySearchOptions) => toRemoteData([]),
     getBrowseItemsFor: (value: string, options: BrowseEntrySearchOptions) => toRemoteData([firstItem]),
-    getFirstItemFor: (definition: string, scope?: string, sortDirection?: SortDirection) => createSuccessfulRemoteDataObject$(firstItem),
+    getFirstItemFor: (definition: string, scope?: string, sortDirection?: SortDirection) => null,
+    getConfiguredSortDirection: () => of(SortDirection.DESC),
   };
 
   const mockBrowseManager = {
     getBrowseItemsFor: (value: string, options: BrowseEntrySearchOptions) => toRemoteData([firstItem]),
   };
+
 
   const mockDsoService = {
     findById: () => createSuccessfulRemoteDataObject$(mockCommunity),

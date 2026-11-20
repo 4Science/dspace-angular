@@ -4,13 +4,13 @@
   <ds-my-dspace-new-submission *dsShowOnlyForRole="[roleTypeEnum.Submitter]" (uploadEnd)="refreshData($event)"></ds-my-dspace-new-submission>
 </div>
 
-@if (configuration && context) {
+@if (configuration() && context()) {
   <ds-search [configuration]="configuration()"
              [configurationList]="(configurationList$ | async)"
              [context]="context()"
              [viewModeList]="viewModeList"
              [showThumbnails]="false"
-             [initViewMode]="initViewMode"
+             [searchResultViewConfig]="searchResultViewConfig"
              [selectable]="(currentConfiguration$ | async) === workflowType"
              [selectionConfig]="{ repeatable: true, listId: listId }"
              (deselectObject)="onDeselectObject($event)"

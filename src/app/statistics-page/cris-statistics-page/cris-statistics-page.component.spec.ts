@@ -226,71 +226,169 @@ describe('CrisStatisticsPageComponent', () => {
     expect(component.selectedReportId).toBeUndefined();
   });
 
-  it('should set selectedReportId to the first report id if no reportType query param is present', () => {
+  it('should emit null on selectedFullReport$ before loading the new report', () => {
     const category = { id: 'category1' };
-    const reports = [{ id: 'report1', reportType: 'type1' }, { id: 'report2', reportType: 'type2' }];
+    const reports = [{ id: 'report1', reportType: 'type1' }];
     spyOn(component, 'getReports$').and.returnValue(of(reports as UsageReport[]));
     spyOn(component, 'getReportId').and.returnValue(of(null));
     spyOn(component, 'getCategoryId').and.returnValue(of(null));
     spyOn(component, 'setStatisticsState');
+
+    const emitted: (UsageReport | null)[] = [];
+    (component as any).selectedFullReport$.subscribe((value) => emitted.push(value));
 
     component.getUserReports(category);
 
-    expect(component.setStatisticsState).toHaveBeenCalledWith('report1', 'category1');
-    expect(component.selectedReportId).toBe('report1');
+    // first emitted value is the initial null from the BehaviorSubject,
+    // second is the reset to null done at the start of getUserReports
+    expect(emitted[0]).toBeNull();
+    expect(emitted[1]).toBeNull();
   });
 
-  it('should set selectedReportId to the report id matching the reportType query param', () => {
-    const category = { id: 'category1' };
-    const reports = [{ id: 'report1', reportType: 'type1' }, { id: 'report2', reportType: 'type2' }];
-    spyOn(component, 'getReports$').and.returnValue(of(reports as UsageReport[]));
-    spyOn(component, 'getReportId').and.returnValue(of(null));
-    spyOn(component, 'getCategoryId').and.returnValue(of(null));
-    spyOn(component, 'setStatisticsState');
+  describe('loadFullReport', () => {
 
-    component.getUserReports(category, 'type2');
+    beforeEach(() => {
+      (component as any).fullReportCache.clear();
+      (component as any).inFlightRequests.clear();
+    });
 
-    expect(component.setStatisticsState).toHaveBeenCalledWith('report2', 'category1');
-    expect(component.selectedReportId).toBe('report2');
+    it('should return of(null) and reset currentReportId when reportId is falsy', (done: DoneFn) => {
+      (component as any).currentReportId = 'something';
+
+      component.loadFullReport(null).subscribe((result) => {
+        expect(result).toBeNull();
+        expect((component as any).currentReportId).toBeNull();
+        done();
+      });
+    });
+
+    it('should return the cached report without calling the service when present in cache', (done: DoneFn) => {
+      const reportId = '1911e8a4-6939-490c-b58b-a5d70f8d91fb_TotalVisits';
+      const cachedReport = { id: reportId } as UsageReport;
+      (component as any).fullReportCache.set(reportId, cachedReport);
+      spyOn(usageReportServiceStub, 'findById').and.callThrough();
+
+      component.loadFullReport(reportId).subscribe((result) => {
+        expect(result).toBe(cachedReport);
+        expect(usageReportServiceStub.findById).not.toHaveBeenCalled();
+        done();
+      });
+    });
+
+    it('should call usageReportService.findById when the report is not cached', (done: DoneFn) => {
+      const reportId = '1911e8a4-6939-490c-b58b-a5d70f8d91fb_TotalVisits';
+      spyOn(usageReportServiceStub, 'findById').and.callThrough();
+
+      component.loadFullReport(reportId).subscribe((result) => {
+        expect(usageReportServiceStub.findById).toHaveBeenCalledWith(reportId, false, true);
+        expect(result.id).toBe(reportId);
+        expect((component as any).currentReportId).toBe(reportId);
+        done();
+      });
+    });
+
+    it('should reuse the same observable for concurrent requests of the same reportId', () => {
+      const reportId = '1911e8a4-6939-490c-b58b-a5d70f8d91fb_TotalVisits';
+      spyOn(usageReportServiceStub, 'findById').and.callThrough();
+
+      const first$ = component.loadFullReport(reportId);
+      const second$ = component.loadFullReport(reportId);
+
+      expect(first$).toBe(second$);
+      expect(usageReportServiceStub.findById).toHaveBeenCalledTimes(1);
+    });
+
   });
 
-  it('should set selectedReportId to the first report id if reportType query param does not match any report', () => {
-    const category = { id: 'category1' };
-    const reports = [{ id: 'report1', reportType: 'type1' }, { id: 'report2', reportType: 'type2' }];
-    spyOn(component, 'getReports$').and.returnValue(of(reports as UsageReport[]));
-    spyOn(component, 'getReportId').and.returnValue(of(null));
-    spyOn(component, 'getCategoryId').and.returnValue(of(null));
-    spyOn(component, 'setStatisticsState');
+  describe('setReportId', () => {
 
-    component.getUserReports(category, 'non_existing_type');
+    beforeEach(() => {
+      (component as any).fullReportCache.clear();
+    });
 
-    expect(component.setStatisticsState).toHaveBeenCalledWith('report1', 'category1');
-    expect(component.selectedReportId).toBe('report1');
+    it('should cache the report and update selectedFullReport$ when reportId matches currentReportId', () => {
+      const reportId = 'report1';
+      const report = { id: reportId } as UsageReport;
+      (component as any).currentReportId = reportId;
+
+      (component as any).setReportId(report, reportId);
+
+      expect((component as any).fullReportCache.get(reportId)).toBe(report);
+      expect((component as any).selectedFullReport$.value).toBe(report);
+    });
+
+    it('should not update selectedFullReport$ when reportId does not match currentReportId (stale response)', () => {
+      const report = { id: 'oldReport' } as UsageReport;
+      (component as any).currentReportId = 'newerReport';
+      (component as any).selectedFullReport$.next(null);
+
+      (component as any).setReportId(report, 'oldReport');
+
+      expect((component as any).selectedFullReport$.value).toBeNull();
+      // it is still cached for later reuse even if stale
+      expect((component as any).fullReportCache.get('oldReport')).toBe(report);
+    });
+
+    it('should not cache a null/falsy report', () => {
+      (component as any).currentReportId = 'report1';
+
+      (component as any).setReportId(null, 'report1');
+
+      expect((component as any).fullReportCache.has('report1')).toBe(false);
+      expect((component as any).selectedFullReport$.value).toBeNull();
+    });
+
   });
 
-  it('should set selectedReportId and categoryId from state if they exist', () => {
-    const category = { id: 'category1' };
-    const reports = [{ id: 'report1', reportType: 'type1' }, { id: 'report2', reportType: 'type2' }];
-    spyOn(component, 'getReports$').and.returnValue(of(reports as UsageReport[]));
-    spyOn(component, 'getReportId').and.returnValue(of('report1'));
-    spyOn(component, 'getCategoryId').and.returnValue(of('category1'));
-    spyOn(component, 'setStatisticsState');
+  describe('changeReport', () => {
 
-    component.getUserReports(category);
+    it('should update statistics state, selectedReportId and selectedFullReport$', (done: DoneFn) => {
+      const reportId = '1911e8a4-6939-490c-b58b-a5d70f8d91fb_TotalVisits';
+      spyOn(component, 'getCategoryId').and.returnValue(of('category1'));
+      spyOn(component, 'setStatisticsState');
 
-    expect(component.setStatisticsState).toHaveBeenCalledWith('report1', 'category1');
+      component.changeReport(reportId);
+
+      (component as any).selectedFullReport$.subscribe((report: UsageReport) => {
+        if (report) {
+          expect(component.setStatisticsState).toHaveBeenCalledWith(reportId, 'category1');
+          expect(component.selectedReportId).toBe(reportId);
+          expect(report.id).toBe(reportId);
+          done();
+        }
+      });
+    });
+
+    it('should emit null on selectedFullReport$ before loading the new report', () => {
+      spyOn(component, 'getCategoryId').and.returnValue(of('category1'));
+      spyOn(component, 'setStatisticsState');
+
+      const emitted: (UsageReport | null)[] = [];
+      (component as any).selectedFullReport$.subscribe((value) => emitted.push(value));
+
+      component.changeReport('1911e8a4-6939-490c-b58b-a5d70f8d91fb_TotalVisits');
+
+      expect(emitted[0]).toBeNull();
+      expect(emitted[1]).toBeNull();
+    });
+
   });
 
-  it('should handle null category gracefully', () => {
-    spyOn(component, 'getReports$').and.returnValue(of([]));
-    spyOn(component, 'getReportId').and.returnValue(of(null));
-    spyOn(component, 'getCategoryId').and.returnValue(of(null));
-    spyOn(component, 'setStatisticsState');
+  describe('clearFullReportCache', () => {
 
-    component.getUserReports(null);
+    it('should clear caches, reset currentReportId and emit null on selectedFullReport$', () => {
+      (component as any).fullReportCache.set('r1', { id: 'r1' } as UsageReport);
+      (component as any).inFlightRequests.set('r1', of({ id: 'r1' } as UsageReport));
+      (component as any).currentReportId = 'r1';
 
-    expect(component.setStatisticsState).not.toHaveBeenCalled();
-    expect(component.selectedReportId).toBeUndefined();
+      (component as any).clearFullReportCache();
+
+      expect((component as any).fullReportCache.size).toBe(0);
+      expect((component as any).inFlightRequests.size).toBe(0);
+      expect((component as any).currentReportId).toBeNull();
+      expect((component as any).selectedFullReport$.value).toBeNull();
+    });
+
   });
 
 });

@@ -2,6 +2,6 @@
   margin-top: 2rem;
 }
 
-.inline-group-is-invalid ds-form:has(ds-dynamic-form-array) .grey-background {
+.inline-group-is-invalid ds-form:has(ds-dynamic-form-array) .grey-background.inline-group-row-invalid {
   border: 1px solid var(--bs-danger);
 }

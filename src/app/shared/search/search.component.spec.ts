@@ -22,12 +22,14 @@ import {
   BehaviorSubject,
   Observable,
   of,
+  Subject,
 } from 'rxjs';
 
 import {
   APP_CONFIG,
   APP_DATA_SERVICES_MAP,
 } from '../../../config/app-config.interface';
+import { ContextDisplayConfig } from '../../../config/search-page-config.interface';
 import { environment } from '../../../environments/environment.test';
 import { getCollectionPageRoute } from '../../collection-page/collection-page-routing-paths';
 import { getCommunityPageRoute } from '../../community-page/community-page-routing-paths';
@@ -49,11 +51,13 @@ import {
   SearchConfig,
   SortConfig,
 } from '../../core/shared/search/search-filters/search-config.model';
+import { ViewMode } from '../../core/shared/view-mode.model';
 import { XSRFService } from '../../core/xsrf/xsrf.service';
 import { SEARCH_CONFIG_SERVICE } from '../../my-dspace-page/my-dspace-configuration.service';
 import { HostWindowService } from '../host-window.service';
 import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
 import {
+  createFailedRemoteDataObject,
   createSuccessfulRemoteDataObject,
   createSuccessfulRemoteDataObject$,
 } from '../remote-data.utils';
@@ -217,8 +221,10 @@ export function configureSearchComponentTestingModule(compType, additionalDeclar
     getCurrentConfiguration: of('default'),
     getCurrentScope: of('test-id'),
     getCurrentSort: of(sortOptionsList[0]),
+    getCurrentViewMode: of(ViewMode.ListElement),
     updateFixedFilter: jasmine.createSpy('updateFixedFilter'),
     setPaginationId: jasmine.createSpy('setPaginationId'),
+    updateDefaultPagination: jasmine.createSpy('updateDefaultPagination'),
   });
 
   searchConfigurationServiceStub.setPaginationId.and.callFake((pageId) => {
@@ -384,6 +390,111 @@ describe('SearchComponent', () => {
     tick(100);
     expect(comp.showCorrection).toBe(true);
   }));
+
+  describe('searchInProgress$', () => {
+    let searchResponse$: Subject<RemoteData<SearchObjects<DSpaceObject>>>;
+
+    beforeEach(() => {
+      searchResponse$ = new Subject();
+      (searchManagerStub.search as jasmine.Spy).and.returnValue(searchResponse$);
+    });
+
+    afterEach(() => {
+      (searchManagerStub.search as jasmine.Spy).and.returnValue(mockResultsRD$);
+    });
+
+    it('should be false before any search is performed', () => {
+      expect(comp.searchInProgress$.value).toBeFalse();
+    });
+
+    it('should be true while the search response is pending', fakeAsync(() => {
+      fixture.detectChanges();
+      tick(100);
+      expect(comp.searchInProgress$.value).toBeTrue();
+    }));
+
+    it('should be false once the search succeeds', fakeAsync(() => {
+      fixture.detectChanges();
+      tick(100);
+      searchResponse$.next(mockResultsRD);
+      expect(comp.searchInProgress$.value).toBeFalse();
+      expect(comp.resultsRD$.value).toBe(mockResultsRD);
+    }));
+
+    it('should be false once the search fails', fakeAsync(() => {
+      fixture.detectChanges();
+      tick(100);
+      searchResponse$.next(createFailedRemoteDataObject('error', 500));
+      expect(comp.searchInProgress$.value).toBeFalse();
+    }));
+  });
+
+  describe('pagination for the active view mode', () => {
+    const searchResultViewConfig: ContextDisplayConfig = {
+      preferredView: ViewMode.ListElement,
+      listPaginationConfig: { pageSize: 10, pageSizeOptions: [10, 20] },
+      gridPaginationConfig: { pageSize: 12, pageSizeOptions: [12, 24] },
+    };
+    const listPagination = { pageSize: 10, pageSizeOptions: [10, 20] };
+    const gridPagination = { pageSize: 12, pageSizeOptions: [12, 24] };
+
+    let viewMode$: BehaviorSubject<ViewMode>;
+
+    beforeEach(() => {
+      viewMode$ = new BehaviorSubject<ViewMode>(ViewMode.ListElement);
+      searchConfigurationServiceStub.getCurrentViewMode.and.returnValue(viewMode$);
+      searchConfigurationServiceStub.setPaginationId.calls.reset();
+      searchConfigurationServiceStub.updateDefaultPagination.calls.reset();
+      comp.searchResultViewConfig = searchResultViewConfig;
+    });
+
+    afterEach(() => {
+      searchConfigurationServiceStub.getCurrentViewMode.and.returnValue(of(ViewMode.ListElement));
+    });
+
+    it('should apply the pagination of the init view mode when the URL has no view', fakeAsync(() => {
+      fixture.detectChanges();
+      tick(100);
+      expect(searchConfigurationServiceStub.setPaginationId).toHaveBeenCalledWith(paginationId, listPagination);
+      expect(searchConfigurationServiceStub.updateDefaultPagination).not.toHaveBeenCalled();
+    }));
+
+    it('should apply the pagination of the view in the URL instead of the init view mode', fakeAsync(() => {
+      viewMode$.next(ViewMode.GridElement);
+      fixture.detectChanges();
+      tick(100);
+      expect(searchConfigurationServiceStub.setPaginationId).toHaveBeenCalledWith(paginationId, gridPagination);
+      expect(searchConfigurationServiceStub.updateDefaultPagination).not.toHaveBeenCalled();
+    }));
+
+    it('should update the default pagination once when the view mode changes', fakeAsync(() => {
+      fixture.detectChanges();
+      tick(100);
+
+      viewMode$.next(ViewMode.GridElement);
+      tick(100);
+      expect(searchConfigurationServiceStub.updateDefaultPagination).toHaveBeenCalledOnceWith(gridPagination);
+
+      // Re-emitting the same view mode must not re-apply the pagination
+      viewMode$.next(ViewMode.GridElement);
+      tick(100);
+      expect(searchConfigurationServiceStub.updateDefaultPagination).toHaveBeenCalledTimes(1);
+
+      viewMode$.next(ViewMode.ListElement);
+      tick(100);
+      expect(searchConfigurationServiceStub.updateDefaultPagination).toHaveBeenCalledTimes(2);
+      expect(searchConfigurationServiceStub.updateDefaultPagination.calls.mostRecent().args).toEqual([listPagination]);
+    }));
+
+    it('should not update the default pagination when switching to the detailed view', fakeAsync(() => {
+      fixture.detectChanges();
+      tick(100);
+
+      viewMode$.next(ViewMode.DetailedListElement);
+      tick(100);
+      expect(searchConfigurationServiceStub.updateDefaultPagination).not.toHaveBeenCalled();
+    }));
+  });
 
   describe('when the open sidebar button is clicked in mobile view', () => {
 

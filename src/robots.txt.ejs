@@ -27,20 +27,25 @@ Disallow: /communities/*?spc.page
 
 # Optionally uncomment the following line ONLY if sitemaps are working
 # and you have verified that your site is being indexed correctly.
-Disallow: /browse/*
-#
+# Disallow: /browse/*
+
 # If you have configured DSpace (Solr-based) Statistics to be publicly
 # accessible, then you may not want this content to be indexed
-Disallow: /statistics
-#
+# Disallow: /statistics
+
 # You also may wish to disallow access to the following paths, in order
 # to stop web spiders from accessing user-based content
-Disallow: /feedback
-Disallow: /forgot
-Disallow: /login
-Disallow: /register
+# Disallow: /contact
+# Disallow: /feedback
+# Disallow: /forgot
+# Disallow: /login
+# Disallow: /register
 
 Disallow: /server/opensearch
+
+# Prevent crawlers to follow server endpoints except bitstream download
+Allow: /server/api/core/bitstreams/*/content
+Disallow: /server
 
 ##############################
 # Section for misbehaving bots

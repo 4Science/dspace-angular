@@ -104,6 +104,11 @@ export class SearchSidebarComponent implements OnInit {
   @Input() showViewModes = true;
 
   /**
+   * Whether the view mode switch is disabled (e.g. while the search results are being retrieved)
+   */
+  @Input() disableViewModes = false;
+
+  /**
    * True when the search component should show results on the current page
    */
   @Input() inPlaceSearch = true;

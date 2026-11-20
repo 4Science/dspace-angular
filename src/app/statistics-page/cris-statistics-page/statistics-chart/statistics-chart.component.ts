@@ -1,4 +1,5 @@
 import {
+  AsyncPipe,
   Location,
   NgClass,
 } from '@angular/common';
@@ -15,6 +16,10 @@ import {
   Router,
 } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import {
+  BehaviorSubject,
+  Observable,
+} from 'rxjs';
 
 import { StatisticsCategory } from '../../../core/statistics/models/statistics-category.model';
 import { UsageReport } from '../../../core/statistics/models/usage-report.model';
@@ -27,6 +32,7 @@ import { StatisticsChartWrapperComponent } from './statistics-chart-wrapper/stat
   styleUrls: ['./statistics-chart.component.scss'],
   templateUrl: './statistics-chart.component.html',
   imports: [
+    AsyncPipe,
     FilterMapPipe,
     NgClass,
     StatisticsChartWrapperComponent,
@@ -63,12 +69,12 @@ export class StatisticsChartComponent implements OnInit {
   /**
    * The fully loaded report (with points) for the currently selected report.
    */
-  @Input() selectedFullReport: UsageReport;
+  @Input() selectedFullReport: Observable<UsageReport>;
 
   /**
    * Emits all currently selected values for this chart
    */
-  selectedReport: UsageReport;
+  selectedReport$: BehaviorSubject<UsageReport> = new BehaviorSubject<UsageReport>(null);
 
   /**
    * emit the event when report is changed
@@ -88,12 +94,12 @@ export class StatisticsChartComponent implements OnInit {
     if (!!this.reports && this.reports.length > 0) {
       const report = this.reports.find((reportData) => { return reportData.id === this.selectedReportId;});
       if (report) {
-        this.selectedReport = report;
+        this.selectedReport$.next(report);
       } else {
-        this.selectedReport = this.reports[0];
+        this.selectedReport$.next(this.reports[0]);
         this.changeReportEvent.emit(this.reports[0].id);
       }
-      this.addQueryParams(this.selectedReport.reportType);
+      this.addQueryParams(this.selectedReport$.value.reportType);
     }
   }
 
@@ -102,7 +108,7 @@ export class StatisticsChartComponent implements OnInit {
    * @param report the that is being selected
    */
   changeReport(report) {
-    this.selectedReport = report;
+    this.selectedReport$.next(report);
     this.changeReportEvent.emit(report.id);
     this.addQueryParams(report.reportType);
   }

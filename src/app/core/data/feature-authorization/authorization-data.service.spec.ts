@@ -333,5 +333,29 @@ describe('AuthorizationDataService', () => {
         });
       });
     });
+
+    describe('when the authorization state has errors (SSR fallback)', () => {
+      beforeEach(() => {
+        authorizationService.hasErrors = () => of(true);
+      });
+
+      it('should fall back to a direct REST check and return true when the feature is granted', (done) => {
+        spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(validPayload)));
+        service.isAuthorized(featureID).subscribe((result) => {
+          expect(service.searchByObject).toHaveBeenCalled();
+          expect(result).toEqual(true);
+          done();
+        });
+      });
+
+      it('should fall back to a direct REST check and return false when the feature is not granted', (done) => {
+        spyOn(service, 'searchByObject').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(emptyPayload)));
+        service.isAuthorized(featureID).subscribe((result) => {
+          expect(service.searchByObject).toHaveBeenCalled();
+          expect(result).toEqual(false);
+          done();
+        });
+      });
+    });
   });
 });

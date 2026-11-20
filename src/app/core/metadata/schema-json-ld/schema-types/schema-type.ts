@@ -9,7 +9,6 @@ export abstract class SchemaType {
   constructor(protected sanitizer: DomSanitizer) {}
 
   protected abstract createSchema(item: Item): Record<string, any>;
-  protected abstract createSchema(item: Item): Record<string, any>;
 
   static getMetadataValue(item: Item, metadataName:  string): string|string[] {
     const values = item.allMetadataValues(metadataName);

@@ -15,6 +15,7 @@ import { APP_CONFIG } from '../../../../config/app-config.interface';
 import { environment } from '../../../../environments/environment.test';
 import { SearchConfigurationService } from '../../../core/shared/search/search-configuration.service';
 import { SearchConfigurationServiceStub } from '../../testing/search-configuration-service.stub';
+import { ViewModeSwitchComponent } from '../../view-mode-switch/view-mode-switch.component';
 import { AdvancedSearchComponent } from '../advanced-search/advanced-search.component';
 import { ThemedSearchFiltersComponent } from '../search-filters/themed-search-filters.component';
 import { ThemedSearchSettingsComponent } from '../search-settings/themed-search-settings.component';
@@ -47,6 +48,7 @@ describe('SearchSidebarComponent', () => {
           AdvancedSearchComponent,
           ThemedSearchFiltersComponent,
           ThemedSearchSettingsComponent,
+          ViewModeSwitchComponent,
         ],
       },
       add: {
@@ -76,5 +78,24 @@ describe('SearchSidebarComponent', () => {
       expect(comp.toggleSidebar.emit).toHaveBeenCalled();
     });
 
+  });
+
+  describe('view mode switch', () => {
+    const getViewModeSwitch = () => fixture.debugElement.query(By.css('ds-view-mode-switch'));
+
+    it('should be enabled by default', () => {
+      fixture.detectChanges();
+      expect(getViewModeSwitch().properties.disabled).toBeFalse();
+    });
+
+    it('should pass disableViewModes to the view mode switch', () => {
+      comp.disableViewModes = true;
+      fixture.detectChanges();
+      expect(getViewModeSwitch().properties.disabled).toBeTrue();
+
+      comp.disableViewModes = false;
+      fixture.detectChanges();
+      expect(getViewModeSwitch().properties.disabled).toBeFalse();
+    });
   });
 });

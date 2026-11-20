@@ -37,7 +37,8 @@ export class AuthorizationEffects {
           action.payload.type,
           action.payload.featureIDs,
           null,
-          action.payload.hrefs,
+          action.payload.keys,
+          true,
           true,
         ).pipe(
           catchError(() => of(new GetAuthorizationsErrorAction())),

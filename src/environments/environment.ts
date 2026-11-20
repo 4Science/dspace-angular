@@ -17,11 +17,11 @@ export const environment: Partial<BuildConfig> = {
     replaceRestUrl: false,
     excludePathPatterns: [
       {
-        pattern: '^/communities/[a-f0-9-]{36}/browse(/.*)?$',
+        pattern: '^/communities/[a-f0-9-]{36}/(browse|search)(/.*)?$',
         flag: 'i',
       },
       {
-        pattern: '^/collections/[a-f0-9-]{36}/browse(/.*)?$',
+        pattern: '^/collections/[a-f0-9-]{36}/(browse|search)(/.*)?$',
         flag: 'i',
       },
       { pattern: '^/browse/' },

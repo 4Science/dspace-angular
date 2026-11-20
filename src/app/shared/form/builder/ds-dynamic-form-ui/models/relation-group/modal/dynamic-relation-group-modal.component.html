@@ -42,7 +42,7 @@
         <button
           type="button"
           class="btn btn-primary me-2"
-          [dsBtnDisabled]="isMandatoryFieldEmpty()"
+          [dsBtnDisabled]="isMandatoryFieldEmpty() || !formRef.formGroup?.valid"
           (click)="save()">
           @if (item) {
             <span><i class="fas fa-save"></i> {{'form.group.set' | translate}}</span>

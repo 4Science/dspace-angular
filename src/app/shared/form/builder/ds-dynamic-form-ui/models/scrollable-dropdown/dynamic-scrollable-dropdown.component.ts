@@ -195,9 +195,9 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
   /**
    * Retrieve entries from vocabulary
    * @param searchText If present filter entries for the given text
-   * @param initModel  If true set the current value
+   * @param fromInit
    * @param concatResults  If true concat results to the current list
-   * @param isScrolling  If true scrolling is in progress
+   * @param scrollAfterLoad
    * @private
    */
   loadOptions(searchText = null, fromInit = false, concatResults = false, scrollAfterLoad = false) {
@@ -267,7 +267,7 @@ export class DsDynamicScrollableDropdownComponent extends DsDynamicVocabularyCom
       const pageSize = Math.min(this.pageInfo.totalElements, 200);
       this.updatePageInfo(pageSize, 1);
 
-      this.loadOptions(null, false, true);
+      this.loadOptions(null, false, false);
       this.setSelectedIndexToCurrentValue(true);
       sdRef.open();
     }

@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
@@ -21,6 +22,7 @@ import { SidebarDropdownComponent } from '../../../../../../app/shared/sidebar/s
     },
   ],
   imports: [
+    AsyncPipe,
     FormsModule,
     PageSizeSelectorComponent,
     SidebarDropdownComponent,

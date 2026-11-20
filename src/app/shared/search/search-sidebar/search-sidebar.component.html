@@ -13,6 +13,7 @@
     <ds-view-mode-switch class="d-none d-md-block"
       [viewModeList]="viewModeList"
       [initViewMode]="initViewMode"
+      [disabled]="disableViewModes"
     (changeViewMode)="changeViewMode.emit($event)"></ds-view-mode-switch>
   }
   <div class="sidebar-content">
@@ -41,7 +42,8 @@
     @if (inPlaceSearch) {
       <ds-search-settings
         [currentSortOption]="currentSortOption"
-        [sortOptionsList]="sortOptionsList">
+        [sortOptionsList]="sortOptionsList"
+        [initViewMode]="initViewMode">
       </ds-search-settings>
     }
   </div>

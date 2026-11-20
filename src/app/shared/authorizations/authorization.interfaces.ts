@@ -12,7 +12,7 @@ export interface AuthorizationActionPayload {
   uuidList: string[],
   type?: string,
   featureIDs: FeatureID[],
-  hrefs: string[]
+  keys: string[]
 }
 
 export interface ObjectAuthorizationFeaturesMap {

@@ -21,12 +21,13 @@
 
   .thumbnail-skeleton {
     max-width: var(--ds-thumbnail-max-width);
-    height: 100%;
 
     ngx-skeleton-loader .skeleton-loader {
-      margin-right: var(--ds-search-skeleton-thumbnail-margin);
+      display: block;
+      aspect-ratio: var(--ds-search-skeleton-thumbnail-aspect-ratio, 210 / 297);
+      height: auto;
+      margin-bottom: 0;
       border-radius: 0;
-      height: 100%;
     }
   }
 
