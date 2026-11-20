@@ -59,6 +59,7 @@ describe('CollectionSelectComponent', () => {
 
   const linkHeadService = jasmine.createSpyObj('linkHeadService', {
     addTag: '',
+    removeTag: '',
   });
 
   const groupDataService = jasmine.createSpyObj('groupsDataService', {

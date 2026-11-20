@@ -475,6 +475,7 @@ describe('DsDynamicFormControlContainerComponent test suite', () => {
     (component as any).componentRef = {
       instance: new DynamicNGBootstrapInputComponent(null, null),
       location: { nativeElement: document.createElement('div') },
+      destroy: jasmine.createSpy('destroy'),
     } as any;
     fixture.detectChanges();
 
@@ -493,6 +494,7 @@ describe('DsDynamicFormControlContainerComponent test suite', () => {
     (component as any).componentRef = {
       instance: new DynamicNGBootstrapInputComponent(null, null),
       location: { nativeElement: hostEl },
+      destroy: jasmine.createSpy('destroy'),
     } as any;
     (component as any).renderer = renderer;
     component.model = { additional: { ariaLabel: 'Accessible Label' } } as any;

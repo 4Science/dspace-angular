@@ -76,6 +76,7 @@ describe('BrowseByComponent', () => {
 
   const linkHeadService = jasmine.createSpyObj('linkHeadService', {
     addTag: '',
+    removeTag: '',
   });
 
   const configurationDataService = jasmine.createSpyObj('configurationDataService', {
