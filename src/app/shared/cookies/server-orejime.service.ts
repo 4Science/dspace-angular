@@ -17,8 +17,8 @@ import {
 @Injectable()
 export class ServerOrejimeService extends OrejimeService {
 
-  consentsUpdates$: BehaviorSubject<CookieConsents>;
-  initialized$: BehaviorSubject<boolean>;
+  consentsUpdates$: BehaviorSubject<CookieConsents> = new BehaviorSubject<CookieConsents>(null);
+  initialized$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
    * Initializes the service:
