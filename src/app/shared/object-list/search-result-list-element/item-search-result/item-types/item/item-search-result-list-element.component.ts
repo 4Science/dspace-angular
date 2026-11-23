@@ -19,7 +19,9 @@ import {
 } from 'date-fns';
 import {
   combineLatest,
+  EMPTY,
   Observable,
+  of,
 } from 'rxjs';
 import {
   filter,
@@ -133,13 +135,13 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
       this.hasLoadedThirdPartyMetrics$ = combineLatest([
         this.orejimeService.consentsUpdates$?.pipe(
           filter(consents => isNotEmpty(consents)),
-        ),
+        ) ?? EMPTY,
         this.dso.metrics?.pipe(
           getFirstSucceededRemoteListPayload(),
           map(metrics => {
             return metrics.filter(metric => this.thirdPartyMetrics.includes(metric.metricType));
           }),
-        ),
+        ) ?? of([]),
       ]).pipe(
         map(([consents, metrics = []]) => {
           return metrics.reduce((previous, current) => {
