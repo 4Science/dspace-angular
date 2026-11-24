@@ -102,7 +102,10 @@ const environmentUseThumbs = {
 const rdItem = createSuccessfulRemoteDataObject(item);
 const workflowitem = Object.assign(new WorkflowItem(), { item: observableOf(rdItem) });
 const rdWorkflowitem = createSuccessfulRemoteDataObject(workflowitem);
-mockResultObject.indexableObject = Object.assign(new PoolTask(), { workflowitem: observableOf(rdWorkflowitem) });
+mockResultObject.indexableObject = Object.assign(new PoolTask(), {
+  workflowitem: observableOf(rdWorkflowitem),
+  _links: { workflowitem: { href: 'workflowitem-href' } },
+});
 const linkService = getMockLinkService();
 const objectCacheServiceMock = jasmine.createSpyObj('ObjectCacheService', {
   remove: jasmine.createSpy('remove'),

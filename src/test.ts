@@ -14,7 +14,7 @@ import { MockStore } from '@ngrx/store/testing';
 getTestBed().initTestEnvironment(
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting(),
-  { teardown: { destroyAfterEach: false } },
+  { teardown: { destroyAfterEach: true } },
 );
 
 
