@@ -95,6 +95,7 @@ describe('CollectionSourceControlsComponent', () => {
     });
     processDataService = jasmine.createSpyObj('processDataService', {
       autoRefreshUntilCompletion: createSuccessfulRemoteDataObject$(process),
+      stopAutoRefreshing: undefined,
     });
     bitstreamService = jasmine.createSpyObj('bitstreamService', {
       findByHref: createSuccessfulRemoteDataObject$(bitstream),

@@ -150,7 +150,6 @@
             "sourceMap": {
               "scripts": false,
               "styles": false,
-              "hidden": false,
               "vendor": false
             },
             "assets": [

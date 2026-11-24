@@ -101,7 +101,10 @@ const item = Object.assign(new Item(), {
 const rdItem = createSuccessfulRemoteDataObject(item);
 const workflowitem = Object.assign(new WorkflowItem(), { item: of(rdItem) });
 const rdWorkflowitem = createSuccessfulRemoteDataObject(workflowitem);
-mockResultObject.indexableObject = Object.assign(new ClaimedTask(), { workflowitem: of(rdWorkflowitem) });
+mockResultObject.indexableObject = Object.assign(new ClaimedTask(), {
+  workflowitem: of(rdWorkflowitem),
+  _links: { workflowitem: { href: 'workflowitem-href' } },
+});
 const linkService = getMockLinkService();
 const objectCacheServiceMock = jasmine.createSpyObj('ObjectCacheService', {
   remove: jasmine.createSpy('remove'),

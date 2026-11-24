@@ -11,6 +11,7 @@ import {
   Router,
 } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { NouisliderComponent } from 'ng2-nouislider';
 import {
   BehaviorSubject,
   of,
@@ -120,6 +121,7 @@ describe('SearchRangeFilterComponent', () => {
     }).overrideComponent(SearchRangeFilterComponent, {
       remove: {
         imports: [
+          NouisliderComponent,
           SearchFacetRangeOptionComponent,
         ],
       },
