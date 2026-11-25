@@ -83,6 +83,7 @@ import {
   getRedirectUrl,
   isAuthenticated,
   isAuthenticatedLoaded,
+  isAuthenticationBlocking,
   isIdle,
   isTokenRefreshing,
 } from './selectors';
@@ -183,6 +184,15 @@ export class AuthService {
    */
   public isAuthenticationLoaded(): Observable<boolean> {
     return this.store.pipe(select(isAuthenticatedLoaded));
+  }
+
+  /**
+   * Whether authentication initialization has finished, including anonymous sessions.
+   * Uses the same readiness condition as application initialization; anonymous sessions
+   * can finish loading their authentication methods without setting the loaded flag.
+   */
+  public isAuthenticationReady(): Observable<boolean> {
+    return this.store.pipe(select(isAuthenticationBlocking), map((blocking) => blocking === false));
   }
 
   /**
