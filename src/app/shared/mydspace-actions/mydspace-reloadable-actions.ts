@@ -112,7 +112,7 @@ export abstract class MyDSpaceReloadableActionsComponent<T extends DSpaceObject,
       }
       this.notificationsService.success(null,
         this.translate.get('submission.workflow.tasks.generic.success'),
-        new NotificationOptions(5000, false));
+        new NotificationOptions(5000, true));
     } else {
       this.notificationsService.error(null,
         this.translate.get('submission.workflow.tasks.generic.error'),
