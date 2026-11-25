@@ -1,19 +1,12 @@
 import {
-  combineLatest,
   combineLatest as observableCombineLatest,
   Observable,
   of as observableOf,
 } from 'rxjs';
 import {
-  distinctUntilChanged,
   map,
   switchMap,
-  take,
 } from 'rxjs/operators';
-import {
-  ObjectAuthorizationFeaturesMap,
-  ObjectAuthorizationsState,
-} from 'src/app/shared/authorizations/authorization.interfaces';
 
 import {
   hasNoValue,
@@ -22,12 +15,13 @@ import {
 } from '../../../shared/empty.util';
 import { AuthService } from '../../auth/auth.service';
 import { Authorization } from '../../shared/authorization.model';
-import { DSpaceObject } from '../../shared/dspace-object.model';
 import { Feature } from '../../shared/feature.model';
 import {
   getFirstCompletedRemoteData,
   getFirstSucceededRemoteDataPayload,
 } from '../../shared/operators';
+import { PaginatedList } from '../paginated-list.model';
+import { RemoteData } from '../remote-data';
 import { SiteDataService } from '../site-data.service';
 import { AuthorizationSearchParams } from './authorization-search-params';
 import { FeatureID } from './feature-id';
@@ -105,88 +99,40 @@ export const oneAuthorizationMatchesFeature = (featureID: FeatureID) =>
       map((features: Feature[]) => features.filter((feature: Feature) => feature.id === featureID.valueOf()).length > 0),
     );
 
+/**
+ * Operator emitting the payload of the first completed page of {@link Authorization}s.
+ * Errors instead if the request failed, so that callers can fall back to another check.
+ */
+export const getSucceededPageOrThrow = (source: Observable<RemoteData<PaginatedList<Authorization>>>): Observable<PaginatedList<Authorization>> =>
+  source.pipe(
+    getFirstCompletedRemoteData(),
+    map((response: RemoteData<PaginatedList<Authorization>>) => {
+      if (!response.hasSucceeded || !Array.isArray(response.payload?.page)) {
+        throw new Error('Unable to retrieve object authorizations');
+      }
+      return response.payload;
+    }),
+  );
 
 /**
- * Note: This expects the {@link Authorization}s to contain a resolved link to their {@link Feature}. If they don't,
- * this observable will always emit false.
- * @returns a list to {@link Feature}s IDs.
+ * Operator resolving the {@link Feature} of each {@link Authorization} and emitting the set of their IDs.
+ * Errors if any feature cannot be retrieved, rather than waiting for one that never succeeds.
  */
-export const getAuthorizationFeaturesIDs = (featureIDs: FeatureID[], hrefs: string[], singleObject = false) =>
-  (source: Observable<Authorization[]>): Observable<ObjectAuthorizationsState> =>
-    source.pipe(
-      switchMap((authorizations: Authorization[]) => {
-        let objectToFeaturesMap = {};
-        if (isNotEmpty(authorizations)) {
-          if (singleObject) {
-            const href = hrefs[0];
-            return combineLatest([
-              ...authorizations.map(auth => auth.feature.pipe(getFirstCompletedRemoteData(), take(1))),
-            ]).pipe(
-              map((data) => {
-                const features = data.map(rd => rd.payload).filter(dso => dso instanceof Feature) as Feature[];
-                return {
-                  [href]: getFeatureIdToBooleanMap(featureIDs, features),
-                };
-              }),
-            );
-          }
-          return combineLatest([
-            ...authorizations.map(auth => auth.object.pipe(getFirstCompletedRemoteData(),take(1))),
-            ...authorizations.map(auth => auth.feature.pipe(getFirstCompletedRemoteData(),take(1))),
-          ]).pipe(
-            map((data) => {
-              const features = data.map(rd => rd.payload).filter(dso => dso instanceof Feature) as Feature[];
-              const objects = data.map(rd => rd.payload).filter(dso => !(dso instanceof Feature));
-
-              objects.forEach(object => {
-                objectToFeaturesMap = Object.assign({}, objectToFeaturesMap, {
-                  [object.self]: getFeatureIdToBooleanMap(featureIDs, features),
-                });
-              });
-              return objectToFeaturesMap;
-            }),
-          );
-        } else {
-          hrefs.forEach(href => {
-            objectToFeaturesMap = Object.assign({}, objectToFeaturesMap, {
-              [href]: getFeatureIdToBooleanMap(featureIDs, []),
-            });
-          });
-          return observableOf(objectToFeaturesMap);
-        }
-      }),
-      distinctUntilChanged(),
-    );
-
-
-/**
- *
- */
-export const getFeatureIdToBooleanMap = (featureIDs: FeatureID[], features: Feature[]): ObjectAuthorizationFeaturesMap => {
-  const mapFeatureToBoolean = {};
-  featureIDs.forEach(id => {
-    mapFeatureToBoolean[id] = hasValue(features.find(feature => feature.id === id.toString()));
-  });
-  return  mapFeatureToBoolean;
-};
-
-
-/**
- * Normalize Uuid of objects like workspace and workflow e.g. workflow-1234
- * uuid of workspace or workflow items are made as follows workspace_id or workflow_id
- * @private
- * @param dso
- */
-
-export const getNormalizedUuid = (dso: DSpaceObject): string => {
-  return dso.type.toString() === 'workspaceitem' || dso.type.toString() === 'workflowitem' ?
-    dso.uuid.split('-')[1] : dso.uuid;
-};
-
-
-/**
- * Method to create an identifier for auth request based on params
- */
-export const getRequestIdFromParams = (type: string, uuidList: string[], featureIDs: FeatureID[]): string => {
-  return  type?.concat(...uuidList)?.concat(...featureIDs);
-};
+export const authorizationFeatureIds = (source: Observable<Authorization[]>): Observable<Set<string>> =>
+  source.pipe(
+    switchMap((authorizations: Authorization[]) => {
+      const features$ = (authorizations || [])
+        .filter((authorization: Authorization) => hasValue(authorization.feature))
+        .map((authorization: Authorization) => authorization.feature.pipe(
+          getFirstCompletedRemoteData(),
+          map((featureRD: RemoteData<Feature>) => {
+            if (!featureRD.hasSucceeded || hasNoValue(featureRD.payload)) {
+              throw new Error('Unable to retrieve authorization feature');
+            }
+            return featureRD.payload;
+          }),
+        ));
+      return features$.length ? observableCombineLatest(features$) : observableOf([]);
+    }),
+    map((features: Feature[]) => new Set(features.map((feature: Feature) => feature.id))),
+  );
