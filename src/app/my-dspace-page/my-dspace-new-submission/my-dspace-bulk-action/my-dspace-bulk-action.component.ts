@@ -241,7 +241,7 @@ export class MyDSpaceBulkActionComponent  implements OnInit, OnDestroy{
     if (succeeded) {
       this.notificationsService.success(null,
         this.translate.get('submission.workflow.tasks.bulk.item.success', { itemNumber }),
-        new NotificationOptions(5000, false),
+        new NotificationOptions(5000, true),
       );
     } else {
       this.notificationsService.error(null,
